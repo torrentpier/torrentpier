@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Amministrare';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Categoria';
 $lang['HIDE_CAT'] = 'Nascondere categorie';
-$lang['HIDE_CAT_MESS'] = 'Parte delle categorie sono nascosti "opzioni" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Argomento';
 $lang['TOPICS'] = 'Argomenti';
 $lang['TOPICS_SHORT'] = 'Argomenti';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Hai inserito non è di login di Skype';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'È inserito un valido accesso a Twitter';
 
-$lang['FORUM_INDEX'] = '%s Indice Del Forum'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Indice Del Forum'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Post new topic';
 $lang['POST_NEW_RELEASE'] = 'Post nuova release';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'messaggi per pagina';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Argomento recensione';
 
-$lang['NO_POST_MODE'] = 'Nessun post selezionata la modalità di'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Nessun post selezionata la modalità di'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Post new topic';
 $lang['POST_A_REPLY'] = 'Nuovo Post reply';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Deselezionare tutti';
 $lang['CONFIRM_DELETE_PM'] = 'Sei sicuro di voler eliminare questo messaggio?';
 $lang['CONFIRM_DELETE_PMS'] = 'Sei sicuro di voler eliminare questi messaggi?';
 
-$lang['INBOX_SIZE'] = 'La tua casella di Posta is<br /><b>%d%%</b> completo'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'La tua casella di Posta is<br /><b>%d%%</b> completo'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Il Sentbox is<br /><b>%d%%</b> completo';
 $lang['SAVEBOX_SIZE'] = 'La tua Finestra is<br /><b>%d%%</b> completo';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Anni';
 $lang['NO_THEMES'] = 'Temi In database';
 $lang['TIMEZONE'] = 'Fuso orario';
 $lang['DATE_FORMAT_PROFILE'] = 'Formato della data';
-$lang['DATE_FORMAT_EXPLAIN'] = 'La sintassi utilizzata è identica a quella di PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funzione.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Firma';
 $lang['SIGNATURE_EXPLAIN'] = 'Questo è un blocco di testo che può essere aggiunto al post che si fanno. C\'è un %d limite di caratteri';
 $lang['SIGNATURE_DISABLE'] = 'Ha firmato per la violazione delle regole del forum';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Brevemente';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Non si dispone di autorizzazioni per la ricerca di qualsiasi forum su questo sito.';
 
 $lang['NO_SEARCH_MATCH'] = 'Senza argomenti o messaggi incontrato i tuoi criteri di ricerca';
-$lang['FOUND_SEARCH_MATCH'] = 'La ricerca ha trovato %d partita'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'La ricerca ha trovato %d partite'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'La ricerca ha trovato %d partita'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'La ricerca ha trovato %d partite'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Troppi risultati può essere trovato, si prega di cercare di essere più specifico';
 
 $lang['CLOSE_WINDOW'] = 'Chiudi La Finestra';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Testo in corsivo: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Sottolineare il testo: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Testo barrato: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Preventivo testo: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Inserisci immagine: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Inserisci l\'URL: [url]http://url[/url] o [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Codice display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Elenco';
 $lang['LIST_TITLE'] = 'Elenco: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistiche sul tracker';
 $lang['WHOIS_INFO'] = 'Informazioni sull\'indirizzo IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Visualizza sulla moderatori index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If non si hanno distribuzioni per lo stato di v, #, o T in questa sezione, comprese le sottosezioni, la distribuzione verrà automaticamente visualizzato questo status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary sullo stato di distribution</h4> <h6>Comment correttamente consente di specificare releasers errori. Quando nedooformlennyh stati releasers forma di risposta della correzione release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seme bonus </h4> <h6> Numero di distribuzioni sono consegnati dall\'utente e la dimensione di bonus per loro (i tempi di ricarica di un\'ora) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-numero di rilasci';
 $lang['SEED_BONUS_POINTS'] = 'bonus di un\'ora';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Allegato Numero Di Impostazioni';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Opzioni Di Attacco';
 
 $lang['UPLOAD_DIRECTORY'] = 'Directory Di Upload';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Inserire il percorso relativo dal tuo TorrentPier di installazione per gli Allegati directory di upload. Ad esempio, immettere \'file\', se il tuo TorrentPier Installazione si trova in http://www.yourdomain.com/torrentpier e l\'Allegato Directory di Upload è situato a http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Allegato Invio Icona';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Questa Immagine viene visualizzata accanto all\'Allegato Link nel post individuali. Lasciare questo campo vuoto se non si desidera un\'icona da visualizzare. Questa Impostazione verrà sovrascritto dalle Impostazioni di Estensione per la Gestione di Gruppi.';
 $lang['ATTACH_TOPIC_ICON'] = 'Allegato Argomento Icona';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'File Vuoto Ingresso';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Miniatura resettato per il fissaggio: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Allegato Sincronizzazione Finito.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync Argomenti';
 $lang['SYNC_POSTS'] = 'Sync Post';
 $lang['SYNC_THUMBNAILS'] = 'Sync Miniature';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'Rilascia';
 
 $lang['BACK'] = 'Indietro';
 $lang['ERROR_FORM'] = 'Campi non validi';
-$lang['RELEASE_WELCOME'] = 'Pleae compilare il releae forma';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Nuova release';
 $lang['NEXT'] = 'Continua';
 $lang['OTHER'] = 'Altri';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'Altri';
 $lang['TPL_EMPTY_FIELD'] = 'È necessario compilare il campo <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'È necessario selezionare <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Non un num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Deve essere http:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Deve essere http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'mettere in oggetto';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'richiede la compilazione di';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'nella stessa linea';
 $lang['TPL_HEADER_ONLY'] = 'solo in un titolo';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Non valido nome utente immesso per la Ricerca';
-$lang['SEARCH_INVALID_EMAIL'] = 'Non valido indirizzo e-mail inserito per la Ricerca';
-$lang['SEARCH_INVALID_IP'] = 'Non valido indirizzo IP immesso per la Ricerca';
-$lang['SEARCH_INVALID_GROUP'] = 'Non valido Gruppo è entrato per la Ricerca';
-$lang['SEARCH_INVALID_RANK'] = 'Voci di rango entrato per la Ricerca';
-$lang['SEARCH_INVALID_DATE'] = 'Inserimento della Data non valida per la Ricerca';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Non valido il Post Count è entrato per la Ricerca';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Non valido Userfield dati inseriti';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Non valido i dati inseriti per l\'Ultima visita di ricerca';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Non Valido Lingua Selezionata';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Non Valido Fuso Orario Selezionato';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Non Valido Il Forum Selezionato';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Visualizza tutti i membri del gruppo sel
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Visualizza tutti i vettori selezionati rango.';
 $lang['BANNED_USERS'] = 'Vietato Agli Utenti';
 $lang['DISABLED_USERS'] = 'Gli Utenti Disabili';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Gli amministratori di Tutti gli utenti con privilegi di Amministratore poteri; Moderatori - Tutti i moderatori del forum; Vietato agli Utenti - Tutti gli account che sono stati vietati su questo forum; gli Utenti Disabili - Tutti gli utenti con account disabilitati (manualmente disabili o mai verificato il loro indirizzo di posta elettronica); - Utenti con accesso portatori di PMs - Seleziona gli utenti che hanno i Messaggi Privati privilegi rimosso (Fatto tramite la Gestione degli Utenti)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Uguale';
 $lang['GREATER_THAN'] = 'Maggiore';
 $lang['LESS_THAN'] = 'A meno di';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'È possibile cercare per gli utenti in base alla Postcount valore. È possibile la ricerca di un valore specifico, maggiore o minore di un valore o di valore tra i due valori. Per effettuare la ricerca, selezionare "Equivale a", quindi inserire l\'inizio e la fine dei valori di gamma separati da un trattino (-), ad esempio 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Ricerca di utenti in base a vari campi del profilo. I caratteri jolly sono supportati utilizzando un asterisco (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'È possibile cercare per gli utenti in base alla loro ultima data di accesso utilizzando questa opzione di ricerca';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Questo consentirà di visualizzare gli
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Gli utenti che hanno selezionato un determinato fuso orario nel loro profilo';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Visualizzare gli utenti che hanno selezionato uno stile specifico.';
 $lang['MODERATORS_OF'] = 'I moderatori di';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Ricerca di utenti con Moderazione autorizzazioni per un forum specifico. Moderare le autorizzazioni sono recoginised da Utente o di Autorizzazioni da parte di un Gruppo con il Gruppo di destra, Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s ceduto %d risultato(s). Eseguire <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Vietato';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Opzioni';
 $lang['SITEMAP_CREATE'] = 'Creare / aggiornare la sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Informare i motori di ricerca su una nuova versione di sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Cosa fare dopo?';
-$lang['SITEMAP_GOOGLE_1'] = 'Registra il tuo sito in <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> utilizzando il tuo account Google.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> del sito è registrato.';
-$lang['SITEMAP_YANDEX_1'] = 'Registra il tuo sito in <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> utilizzando il Yandex conto.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> del sito è registrato.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Registra il tuo sito in <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> utilizzando il tuo account Microsoft.';
 $lang['SITEMAP_BING_2'] = 'Aggiungi sitemap del sito è registrato nelle sue impostazioni.';
 $lang['SITEMAP_ADD_TITLE'] = 'Pagine aggiuntive per la sitemap';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Feed globale per tutti i forum';
 $lang['HASH_INVALID'] = 'Hash %s non è valido';
 $lang['HASH_NOT_FOUND'] = 'Versione con hash %s non trovato';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Il testo di questa pagina è modificato in: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Questa linea può vedere solo gli amministratori.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Su questa pagina, è possibile specificare il testo di le regole di base della risorsa viene visualizzato dagli utenti.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Controllare che tu non sia un robot';
 $lang['CAPTCHA_WRONG'] = 'Non si poteva confermare che non sei un robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha non essere pienamente configured</h2><p>if non l\'hai già generato le chiavi, si può fare su <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After generare le chiavi, è necessario mettere a file library/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Nessun Oggetto',
-    'GROUP_ADDED' => 'Si sono stati aggiunti a questo gruppo',
-    'GROUP_APPROVED' => 'La tua richiesta è stata approvata',
-    'GROUP_REQUEST' => 'Una richiesta di unirsi al vostro gruppo è stato fatto',
-    'PRIVMSG_NOTIFY' => 'Nuovo Messaggio è arrivato',
-    'TOPIC_NOTIFY' => 'Argomento Rispondi Notifica %s',
-    'USER_ACTIVATE' => 'Riattivare il tuo account',
-    'USER_ACTIVATE_PASSWD' => 'Nuova password di attivazione',
-    'USER_WELCOME' => 'Benvenuti a %s Forum',
-    'USER_WELCOME_INACTIVE' => 'Benvenuti a %s Forum',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
