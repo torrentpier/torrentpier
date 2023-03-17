@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'შემდეგი აწარმოებს';
 $lang['CRON_RUN_COUNT'] = 'გადის';
 $lang['CRON_MANAGE'] = 'მართვა';
 $lang['CRON_OPTIONS'] = 'Cron ვარიანტი';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron ჩართულია';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron შეამოწმეთ ინტერვალი (sec)';
