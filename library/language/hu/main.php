@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Következő Futam';
 $lang['CRON_RUN_COUNT'] = 'Fut';
 $lang['CRON_MANAGE'] = 'Kezelése';
 $lang['CRON_OPTIONS'] = 'Cron lehetőségek';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron engedélyezve';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron check-intervallum (másodperc)';
