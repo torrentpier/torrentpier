@@ -35,8 +35,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 				<tr>
 					<td>{L_CRON_ENABLED}</td>
 					<td>
-						<label><input type="radio" name="cron_enabled" value="1" <!-- IF CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-						<label><input type="radio" name="cron_enabled" value="0" <!-- IF not CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+						<!-- IF CRON_ENABLED -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF -->
 					</td>
 					<td>{L_CRON_CHECK_INTERVAL}</td>
 					<td>
@@ -62,6 +61,11 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <br />
 
 <table class="forumline">
+<!-- IF not CRON_ENABLED -->
+<tr class="row3 med">
+  <td class="bold tCenter warnColor1" colspan="10">{L_CRON_DISABLED_WARNING}</td>
+</tr>
+<!-- ENDIF -->
 <tr>
 	<th colspan="10">{L_CRON_LIST}</th>
 </tr>

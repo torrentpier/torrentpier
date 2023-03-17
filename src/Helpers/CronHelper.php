@@ -16,6 +16,16 @@ namespace TorrentPier\Helpers;
 class CronHelper
 {
     /**
+     * Checking whether cron scripts execution is enabled
+     *
+     * @return bool
+     */
+    public static function isEnabled(): bool
+    {
+        return env('APP_CRON_ENABLED', true);
+    }
+
+    /**
      * Снятие блокировки крона (по времени)
      *
      * @return void

@@ -33,7 +33,7 @@ if (!IS_SUPER_ADMIN) {
     bb_die($lang['NOT_ADMIN']);
 }
 
-$sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
+$sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_check_interval'");
 
 foreach ($sql as $row) {
     $config_name = $row['config_name'];
@@ -48,7 +48,7 @@ foreach ($sql as $row) {
 }
 
 $template->assign_vars(array(
-    'CRON_ENABLED' => $new['cron_enabled'] ? true : false,
+    'CRON_ENABLED' => TorrentPier\Helpers\CronHelper::isEnabled(),
     'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
 

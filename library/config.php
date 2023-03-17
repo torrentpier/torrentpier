@@ -21,7 +21,7 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.3.1-rc1';
+$bb_cfg['tp_version'] = '2.3.1-rc2';
 $bb_cfg['tp_release_date'] = '10-03-2023';
 $bb_cfg['tp_release_codename'] = 'Bison';
 
@@ -33,7 +33,7 @@ $bb_cfg['db'] = [
         env('DB_HOST', 'localhost'),
         env('DB_DATABASE', 'torrentpier'),
         env('DB_USERNAME', 'root'),
-        env('DB_PASSWORD', 'pass'),
+        env('DB_PASSWORD'),
         'utf8',
         false
     ],
