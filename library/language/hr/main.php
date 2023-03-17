@@ -2389,6 +2389,7 @@ $lang['CRON_NEXT_RUN'] = 'Sljedeći Lansiranje';
 $lang['CRON_RUN_COUNT'] = 'Radi';
 $lang['CRON_MANAGE'] = 'Upravljanje';
 $lang['CRON_OPTIONS'] = 'Mogućnosti baba';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Baba inclusive';
 $lang['CRON_CHECK_INTERVAL'] = 'Baba interval (sek)';
