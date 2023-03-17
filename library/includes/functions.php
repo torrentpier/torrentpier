@@ -779,9 +779,9 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
     return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
 }
 
-function generate_user_info($row, $group_mod = null): array
+function generate_user_info($row, bool $group_mod = false): array
 {
-    global $lang, $images, $bb_cfg;
+    global $userdata, $lang, $images, $bb_cfg;
 
     $from = !empty($row['user_from']) ? $row['user_from'] : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
@@ -790,7 +790,7 @@ function generate_user_info($row, $group_mod = null): array
     $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
-    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || ($group_mod ?? IS_ADMIN)) {
+    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_AM || $group_mod || ($row['user_id'] == $userdata['user_id'])) {
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
