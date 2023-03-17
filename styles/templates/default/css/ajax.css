@@ -11,36 +11,28 @@ var.ajax-params {
 }
 
 #ajax-loading, #ajax-error {
+  display: none;
   position: fixed;
+  float: right;
   top: 0 !important;
   z-index: 2000;
-  padding: 4px;
+  padding: 6px;
+  color: white;
   font-size: 11px;
-  max-width: 400px;
-  max-height: 200px;
+  min-width: 80px;
+  min-height: 30px;
   white-space: nowrap;
-  display: none;
+  border-bottom-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -khtml-border-bottom-left-radius: 10px;
 }
 
 #ajax-loading {
-  display: none;
-  background: rgba(0, 0, 0, 0.5) url(../images/loading_1.gif) no-repeat center center;
-  float: right;
-  width: 85px;
-  height: 30px;
-  border-bottom-left-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -khtml-border-bottom-left-radius: 10px;
+  background: rgba(0, 0, 0, 0.5) url(../images/loading.gif) no-repeat center center;
 }
 
 #ajax-error {
-  background: #d32031 url(../images/loading_1.gif) no-repeat center center;
-  float: right;
-  min-width: 200px;
-  height: 30px;
-  border-bottom-left-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -khtml-border-bottom-left-radius: 10px;
+  background: #d32031;
 }
 
 .editable-container {
@@ -52,6 +44,6 @@ var.ajax-params {
 }
 
 .loading-1 {
-  background: transparent url(../images/loading_1.gif) no-repeat left center;
+  background: transparent url(../images/loading.gif) no-repeat left center;
   padding-left: 22px;
 }
