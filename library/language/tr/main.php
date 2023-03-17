@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'İdare';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Kategorileri gizle';
-$lang['HIDE_CAT_MESS'] = 'Kategoriler parçası gizli "seçenekleri Göster" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Konu';
 $lang['TOPICS'] = 'Konular';
 $lang['TOPICS_SHORT'] = 'Konular';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Geçersiz Skype oturumu girdiğiniz';
 $lang['TWITTER'] = 'Heyecan';
 $lang['TWITTER_ERROR'] = 'Geçersiz bir Twitter giriş girdiğiniz';
 
-$lang['FORUM_INDEX'] = '%s Forum Dizini'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forum Dizini'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Yeni Başlık';
 $lang['POST_NEW_RELEASE'] = 'Yeni sürüm sonrası';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'sayfa başına mesajlar';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Konu inceleme';
 
-$lang['NO_POST_MODE'] = 'Hayır post modu seçili'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Hayır post modu seçili'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Yeni Başlık';
 $lang['POST_A_REPLY'] = 'Cevap Yeni Mesaj';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Kaldır tüm';
 $lang['CONFIRM_DELETE_PM'] = 'Bu mesajı silmek istediğinizden emin misiniz?';
 $lang['CONFIRM_DELETE_PMS'] = 'Bu iletileri silmek istediğinizden emin misiniz?';
 
-$lang['INBOX_SIZE'] = 'Gelen kutunuza is<br /><b>%d%%</b> tam'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Gelen kutunuza is<br /><b>%d%%</b> tam'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Sentbox senin is<br /><b>%d%%</b> tam';
 $lang['SAVEBOX_SIZE'] = 'Savebox senin is<br /><b>%d%%</b> tam';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Yıl';
 $lang['NO_THEMES'] = 'Veritabanında Temalar';
 $lang['TIMEZONE'] = 'Zaman dilimi';
 $lang['DATE_FORMAT_PROFILE'] = 'Tarih biçimi';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Kullanılan sözdizimi <a href=\'http://www.php.net/date\' target=\'_other\'>date PHP()</a> işlevi aynıdır.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'İmza';
 $lang['SIGNATURE_EXPLAIN'] = 'Bu mesaj için eklenen metin bloğu. %d karakter sınırı vardır';
 $lang['SIGNATURE_DISABLE'] = 'Forum Kuralları ihlali için imzaladı';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Kısaca';
 $lang['NO_SEARCHABLE_FORUMS'] = 'İzinleri bu sitede herhangi bir forum aramak zorunda değilsiniz.';
 
 $lang['NO_SEARCH_MATCH'] = 'Herhangi bir konu veya mesaj arama kriterlerinize araya geldi';
-$lang['FOUND_SEARCH_MATCH'] = 'Arama %d eşleşme'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Arama %d sonuç bulundu'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Arama %d eşleşme'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Arama %d sonuç bulundu'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Çok fazla sonuç bulunabilir, daha özel olmaya çalış lütfen';
 
 $lang['CLOSE_WINDOW'] = 'Pencereyi Kapat';
@@ -1512,9 +1513,9 @@ $lang['ITALIC'] = 'İtalik metin: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = '(Ctrl+U)altı çizili metin: [u]text[/u]';
 $lang['STRIKEOUT'] = '(Ctrl+S)üstü çizili metin: [s]text[/s]';
 $lang['QUOTE_TITLE'] = '(Ctrl+Q)alıntı metin: [quote]text[/quote]';
-$lang['IMG_TITLE'] = 'Resim Ekle: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = '(Ctrl+W)Ekle URL: [url]http: url[/url]//[url=http://url]URL text[/url]';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kod ekran: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Liste';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Ctrl+l)';
@@ -2060,7 +2061,7 @@ $lang['TRACKER_STATS'] = 'İzleyici istatistikleri';
 $lang['WHOIS_INFO'] = 'IP adresi hakkında bilgi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Yöneticiler üzerinde index.php göster';
 $lang['PREMOD_HELP'] = 'V bu bölümde, * ya da T, kısımlar da dahil olmak üzere durumu dağılımları gerekmez <h4><span class="tor-icon tor-dup">&#8719;</span> Öncesi moderation</h4> <h6>İf, dağıtım otomatik olarak bu status</h6> almak';
-$lang['TOR_COMMENT'] = 'Distribution</h4> <h6>Comment durumunu <h4>Commentary başarıyla ihtiyacı fazla olan kas hatalar belirlemenizi sağlar. Nedooformlennyh durumları ne release</h6> düzeltme yanıtı bulunmamaktadır ihtiyacı fazla olan kas';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = 'Dağılımları <h4>Adding tohum bonus </h4> <h6> Numarası </h6> kullanıcı ve onlar için ikramiye boyutu (saatte şarj) dağıtıldı';
 $lang['SEED_BONUS_RELEASE'] = 'bültenleri N-Numarası';
 $lang['SEED_BONUS_POINTS'] = 'bir saat içinde ikramiye';
@@ -2088,7 +2089,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Eklenti Sayısı Ayarları';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Ek Seçenekler';
 
 $lang['UPLOAD_DIRECTORY'] = 'Upload Dizini';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'TorrentPier kurulumunuzu Ekleri yükleme dizini yolunu girin. Eğer TorrentPier Yükleme http://www.yourdomain.com/torrentpier yer almaktadır ve Eki Yükleme Dizini http://www.yourdomain.com/torrentpier/files yer ise, örneğin \'dosya\' girin.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Ek Simge Gönderme';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Bu Görüntü bireysel Kayıtlar Bağlantıları Eki yanında görüntülenir. Eğer bir simge görüntülenmesini istemiyorsanız bu alanı boş bırakın. Bu Ayar Uzantısı Grupları Yönetim Ayarları tarafından yazılır.';
 $lang['ATTACH_TOPIC_ICON'] = 'Ek Konu Simgesi';
@@ -2127,7 +2128,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Boş Dosya Girişi';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Küçük Ekin resetted: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Ek Senkronizasyon Tamamlandı.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync Konular';
 $lang['SYNC_POSTS'] = 'Sync Mesajlar';
 $lang['SYNC_THUMBNAILS'] = 'Sync Küçük Resim';
@@ -2578,7 +2579,7 @@ $lang['RELEASES'] = 'Bültenleri';
 
 $lang['BACK'] = 'Geri';
 $lang['ERROR_FORM'] = 'Geçersiz alanlar';
-$lang['RELEASE_WELCOME'] = 'Releae formunu doldurmak Pleae';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Yeni sürüm';
 $lang['NEXT'] = 'Devam';
 $lang['OTHER'] = 'Başka';
@@ -2586,8 +2587,8 @@ $lang['OTHER'] = 'Başka';
 $lang['TPL_EMPTY_FIELD'] = '<b>%s</b> alanını doldurmalısınız';
 $lang['TPL_EMPTY_SEL'] = '<b>%s</b> seçmeniz gerekir';
 $lang['TPL_NOT_NUM'] = 'Bir num <b>%s</b> - ';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - http:// URL Olmalıdır';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - http:// İMG_URL Olmalı';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'konu içine koy';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'gerektirir dolum';
@@ -2601,15 +2602,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'aynı çizgide';
 $lang['TPL_HEADER_ONLY'] = 'sadece bir başlık';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Geçersiz kullanıcı adı Arama girdi';
-$lang['SEARCH_INVALID_EMAIL'] = 'Geçersiz e-posta adresi Aramak için girilen';
-$lang['SEARCH_INVALID_IP'] = 'Geçersiz IP adresi Arama girdi';
-$lang['SEARCH_INVALID_GROUP'] = 'Geçersiz Grup Arama girdi';
-$lang['SEARCH_INVALID_RANK'] = 'Geçersiz rütbe Arama girdi';
-$lang['SEARCH_INVALID_DATE'] = 'Geçersiz Tarih Arama girdi';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Geçersiz Mesaj Sayısı Arama girdi';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Geçersiz Userfield veri girilen';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Geçersiz veri Son Ziyaret edilen arama için girilen';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Geçersiz Dil Seçildi';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Geçersiz Zaman Dilimi Seçili';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Geçersiz Forum Seçili';
@@ -2660,12 +2661,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Seçili grubun tüm üyeleri görüntül
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Seçilen rütbe tüm taşıyıcı görüntüleyin.';
 $lang['BANNED_USERS'] = 'Yasaklı Kullanıcılar';
 $lang['DISABLED_USERS'] = 'Engelli Kullanıcılar';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = '(Bitti)Kullanıcı Yönetimi üzerinden Özel Mesajlar ayrıcalıkları kaldırılmış olan (Elle Devre dışı ya da hiç doğrulanmış e-posta adresini) devre dışı hesaplar; engelli PMs Kullanıcılar Seçer kullanıcılar ile bu forumları yasaklandı Yöneticiler - Yönetici yetkileri ile Tüm kullanıcılar; Moderatörler - moderatörler; Yasaklı Kullanıcıların Tüm hesapları; Engelli Kullanıcılar Tüm kullanıcılar';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Eşdeğerdir';
 $lang['GREATER_THAN'] = 'Daha büyük';
 $lang['LESS_THAN'] = 'Daha az';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Postcount değerine göre kullanıcılar için arama yapabilirsiniz. Ya belirli bir değeri, bir değerin iki değer arasında daha fazla veya daha az göre arama yapabilirsiniz. Aralık arama yapmak için seçin "Eşittir" o zaman 10-15, örneğin, bir tire ( - ) ile ayrılmış aralığının başlangıç ve bitiş değerleri koy';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Çeşitli profil alanlara göre kullanıcıları arama. Joker karakterler (*) asteriks kullanarak desteklenir.';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Son giriş tarihlerine göre kullanıcılar için bu arama seçeneğini kullanarak arama yapabilirsiniz';
@@ -2673,7 +2674,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Bu belirli bir dil seçmiş kimin Prof
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Kullanıcılar profillerinde belirli bir zaman dilimi seçilmiş';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Belirli bir stili seçili olan ekran kullanıcıları.';
 $lang['MODERATORS_OF'] = 'Moderatör';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Belirli bir forum için izinleri Ilımlı olan kullanıcılar için arama. Ilımlı izinleri Kullanıcı İzinleri ile sağ Grup Permssions ile bir Grup içinde ya da recoginised.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s(ler) %d sonuçlar verdi. <a href="%s">another search</a> gerçekleştirin.';
 $lang['BANNED'] = 'Yasaklı';
@@ -2729,10 +2730,10 @@ $lang['SITEMAP_OPTIONS'] = 'Seçenekleri';
 $lang['SITEMAP_CREATE'] = 'Oluştur / site haritası güncelleme';
 $lang['SITEMAP_NOTIFY'] = 'Site yeni versiyonu hakkında arama motorlarına bildirmek';
 $lang['SITEMAP_WHAT_NEXT'] = 'Şimdi ne yapalım?';
-$lang['SITEMAP_GOOGLE_1'] = '<a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> Google hesabınızı kullanarak siteye kayıt.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = 'Sitenin <a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> kayıtlı.';
-$lang['SITEMAP_YANDEX_1'] = '<a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> de Üye hesabınızı kullanarak siteye kayıt.';
-$lang['SITEMAP_YANDEX_2'] = 'Sitenin <a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> kayıtlı.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = '<a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> Microsoft hesabınızı kullanarak siteye kayıt.';
 $lang['SITEMAP_BING_2'] = 'Kendi ayarları kayıtlı site haritası ekleyebilirsiniz.';
 $lang['SITEMAP_ADD_TITLE'] = 'Site için ek sayfalar';
@@ -2753,7 +2754,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Tüm forumlar için küresel besleme';
 $lang['HASH_INVALID'] = '%s karma geçersiz';
 $lang['HASH_NOT_FOUND'] = 'Karma %s değilim serbest bulundu';
 
-$lang['TERMS_EMPTY_TEXT'] = 'Bu sayfa [align=center]metin: [url=http://%s/admin/admin_terms.php]admin/admin_terms de düzenleniyor.php[/url]. Bu hat sadece yöneticiler görebilir.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu sayfada, kaynağın Temel Kurallar metni kullanıcılar için görüntülenir belirtebilirsiniz.';
 
 $lang['TR_STATS'] = array(
@@ -2810,16 +2811,16 @@ $lang['CAPTCHA'] = 'Bir robot olmadığını kontrol edin';
 $lang['CAPTCHA_WRONG'] = 'Bir robot olmadığını onaylamak değil mi';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha zaten anahtarları oluşturulur mi tam configured</h2><p>if olmak değil, <a href="https://www.google.com/recaptcha/admin">https://www yapabilirsin.google.com/tuttum/admin</a>.Anahtarları oluşturmak <br />After, dosya Kütüphanesi/config onları koymak gerekir.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Konu Yok',
-    'GROUP_ADDED' => 'Bu grup eklendi',
-    'GROUP_APPROVED' => 'Talebiniz onaylandı',
-    'GROUP_REQUEST' => 'Grubunuza katılmak için bir istek olmuştur yaptı',
-    'PRIVMSG_NOTIFY' => 'Yeni bir Özel Mesaj geldi',
-    'TOPIC_NOTIFY' => '%s Konusuna Yanıt Bildirimi',
-    'USER_ACTIVATE' => 'Hesabınızı yeniden etkinleştirmek',
-    'USER_ACTIVATE_PASSWD' => 'Yeni şifre aktivasyon',
-    'USER_WELCOME' => '%s Forumlarına Hoşgeldiniz',
-    'USER_WELCOME_INACTIVE' => '%s Forumlarına Hoşgeldiniz',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
