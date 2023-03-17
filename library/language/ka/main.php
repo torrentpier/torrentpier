@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'ადმინისტრირების';
 $lang['FORUM'] = 'ფორუმი';
 $lang['CATEGORY'] = 'კატეგორია';
 $lang['HIDE_CAT'] = 'დამალვა კატეგორიები';
-$lang['HIDE_CAT_MESS'] = 'ნაწილი კატეგორიები იმალება "ვარიანტი შოუ" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'თემა';
 $lang['TOPICS'] = 'თემები';
 $lang['TOPICS_SHORT'] = 'თემები';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'თქვენ შევიდა არასწორ
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'თქვენ შევიდა არასწორი Twitter შესვლა';
 
-$lang['FORUM_INDEX'] = '%s ფორუმი'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s ფორუმი'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Post ახალი თემა';
 $lang['POST_NEW_RELEASE'] = 'პოსტის ახალი რელიზი';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'posts per page';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'თემა მიმოხილვა';
 
-$lang['NO_POST_MODE'] = 'არა პოსტი რეჟიმი შერჩეული'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'არა პოსტი რეჟიმი შერჩეული'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Post ახალი თემა';
 $lang['POST_A_REPLY'] = 'პოსტის ახალი გასაუქმებლად';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Unmark ყველა';
 $lang['CONFIRM_DELETE_PM'] = 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ეს შეტყობინება?';
 $lang['CONFIRM_DELETE_PMS'] = 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ეს მესიჯები?';
 
-$lang['INBOX_SIZE'] = 'თქვენი Inbox is<br /><b>%d%%</b> სრული'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'თქვენი Inbox is<br /><b>%d%%</b> სრული'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'თქვენი Sentbox is<br /><b>%d%%</b> სრული';
 $lang['SAVEBOX_SIZE'] = 'თქვენი Savebox is<br /><b>%d%%</b> სრული';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'წლის';
 $lang['NO_THEMES'] = 'არ თემატიკის მონაცემთა ბაზა';
 $lang['TIMEZONE'] = 'დროის სარტყელი';
 $lang['DATE_FORMAT_PROFILE'] = 'თარიღი ფორმატში';
-$lang['DATE_FORMAT_EXPLAIN'] = 'სინტაქსი მეორადი იდენტურია PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> ფუნქცია.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'ხელმოწერა';
 $lang['SIGNATURE_EXPLAIN'] = 'ეს არის ბლოკი ტექსტი, რომელიც შეიძლება დაემატოს posts თქვენ გააკეთეთ. არსებობს %d ხასიათი ლიმიტი';
 $lang['SIGNATURE_DISABLE'] = 'ხელმოწერილი off დარღვევისათვის ფორუმის წესები';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'მოკლედ';
 $lang['NO_SEARCHABLE_FORUMS'] = 'თქვენ არ გაქვთ უფლება რომ მოძებნოთ ნებისმიერი ფორუმი ამ საიტზე.';
 
 $lang['NO_SEARCH_MATCH'] = 'თემები ან პოსტები შეხვდა თქვენს ძებნის კრიტერიუმი';
-$lang['FOUND_SEARCH_MATCH'] = 'ძიების %d მატჩი'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'ძიების %d მატჩები'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'ძიების %d მატჩი'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'ძიების %d მატჩები'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'ძალიან ბევრი შედეგები შეიძლება იყოს ნაპოვნი, სცადეთ უნდა იყოს უფრო კონკრეტული';
 
 $lang['CLOSE_WINDOW'] = 'ფანჯრის დახურვა';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'დახრილი ტექსტი: [i]text[/i] (Ctrl+I
 $lang['UNDERLINE'] = 'ხაზგასმული ტექსტი: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'გადახაზული ტექსტი: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Quote ტექსტი: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]http://url[/url] ან [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'კოდი ჩვენება: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'სია';
 $lang['LIST_TITLE'] = 'სია: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'სტატისტიკის tracker';
 $lang['WHOIS_INFO'] = 'ინფორმაცია IP მისამართი';
 $lang['SHOW_MOD_HOME_PAGE'] = 'შოუ მოდერატორებს " index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If თქვენ არ გაქვთ დისტრიბუციის სტატუსის v, # ან T ამ სექციაში, მათ შორის, ქვედა განყოფილებები, განაწილების ავტომატურად ამ status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary სტატუსის distribution</h4> <h6>Comment წარმატებით გაძლევთ საშუალებას ადმინისტრატორს შეცდომები. როდესაც nedooformlennyh სტატუსები ადმინისტრატორს ხელმისაწვდომი ფორმა პასუხი კორექცია release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding სათესლე ბონუს </h4> <h6> რაოდენობის დისტრიბუციის არიან დაურიგეს შესახებ და ზომა ბონუსები, მათ (დატენვის ჯერ საათში) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'რომ N-რაოდენობის ავრცელებს';
 $lang['SEED_BONUS_POINTS'] = 'ბონუსები საათში';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'დანართი ნომერი პ�
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'დანართი ვარიანტი';
 
 $lang['UPLOAD_DIRECTORY'] = 'ატვირთეთ დირექტორია';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'შეიყვანეთ ნათესავი გზა თქვენი TorrentPier ინსტალაცია Attachments ატვირთოთ დირექტორია. მაგალითად, enter \'ფაილი\', თუ თქვენი TorrentPier მონტაჟი მდებარეობს http://www.yourdomain.com/torrentpier და ატვირთეთ დანართი დირექტორია მდებარეობს http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'დანართი განთავსებას ხატი';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'ეს გამოსახულება არის ნაჩვენები შემდეგი დანართი ბმულები ინდივიდუალური განთავსების შესახებ. დატოვეთ ეს ველი ცარიელი, თუ თქვენ არ გსურთ ხატი უნდა იყოს ნაჩვენები. ეს პარამეტრი იქნება ინსტალერის მიერ პარამეტრების გაფართოება ჯგუფების მართვა.';
 $lang['ATTACH_TOPIC_ICON'] = 'დანართი თემა ხატი';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'ცარიელი ფაილი შესვ�
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail resetted დანართი: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'დანართი Syncronization დასრულდა.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync თემები';
 $lang['SYNC_POSTS'] = 'Sync პოსტები';
 $lang['SYNC_THUMBNAILS'] = 'Sync დაბრუნება';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'რელიზები';
 
 $lang['BACK'] = 'უკან';
 $lang['ERROR_FORM'] = 'არასწორი სფეროებში';
-$lang['RELEASE_WELCOME'] = 'Pleae შეავსოთ releae ფორმა';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'ახალი გამოშვების';
 $lang['NEXT'] = 'გაგრძელება';
 $lang['OTHER'] = 'სხვა';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'სხვა';
 $lang['TPL_EMPTY_FIELD'] = 'თქვენ უნდა შეავსოთ სფეროში <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'თქვენ უნდა შეარჩიოთ <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - არ არის num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - უნდა იყოს http:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - უნდა იყოს http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'ექსპლუატაციაში შევიდა სათაური';
 $lang['TPL_POSTER'] = 'ავტორი';
 $lang['TPL_REQ_FILLING'] = 'მოითხოვს, შევსება';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'სპოილერი';
 $lang['TPL_IN_LINE'] = 'იგივე ხაზი';
 $lang['TPL_HEADER_ONLY'] = 'მხოლოდ სათაური';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'არასწორი სახელი შევიდა ძებნა';
-$lang['SEARCH_INVALID_EMAIL'] = 'ელფოსტის დამატებითი მისამართი შევიდა ძებნა';
-$lang['SEARCH_INVALID_IP'] = 'არასწორი IP მისამართი შევიდა ძებნა';
-$lang['SEARCH_INVALID_GROUP'] = 'არასწორი ჯგუფი შევიდა ძებნა';
-$lang['SEARCH_INVALID_RANK'] = 'არასწორი წოდება შევიდა ძებნა';
-$lang['SEARCH_INVALID_DATE'] = 'არასწორი თარიღი შევიდა ძებნა';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'არასწორი პოსტი იმედი შევიდა ძებნა';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'არასწორი Userfield მონაცემები შევიდა';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'არასწორი მონაცემები შევიდა ბოლო ეწვია ძებნა';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'არასწორი ენის შერჩეული';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'არასწორი სარტყელი შერჩეული';
 $lang['SEARCH_INVALID_MODERATORS'] = 'არასწორი ფორუმი შერჩეული';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'იხილეთ ყველა წ�
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'იხილეთ ყველა კარიერა შერჩეული წოდება.';
 $lang['BANNED_USERS'] = 'აკრძალული მომხმარებლებს';
 $lang['DISABLED_USERS'] = 'შეზღუდული შესაძლებლობების მქონე მომხმარებლებს';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'ადმინისტრატორები - მომხმარებლებს ადმინისტრატორის უფლებამოსილება; მოდერატორებს - ყველა ფორუმის მოდერატორი; აკრძალული მომხმარებლებს, - ყველა ანგარიში რომ ყოფილიყო აკრძალული, ამ ფორუმებში; შრომისუუნარო წევრებს - ყველა ასაკი შეზღუდული შესაძლებლობების მქონე ანგარიშები (ან ხელით შეზღუდული შესაძლებლობების მქონე ან არასოდეს დავადგინე მათი ელექტრონული ფოსტის მისამართი); ასაკი შეზღუდული შესაძლებლობების მქონე PMs - ირჩევს მომხმარებლებს, რომლებსაც აქვთ პირადი შეტყობინებები priviliges ამოღებულია (კეთდება მეშვეობით მომხმარებლის მენეჯმენტი)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'შეადგენს';
 $lang['GREATER_THAN'] = 'უფრო მეტი, ვიდრე';
 $lang['LESS_THAN'] = 'ნაკლები';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'თქვენ შეგიძლიათ მოძებნოთ მომხმარებლებს საფუძველზე Postcount ღირებულება. თქვენ შეგიძლიათ მოძებნოთ კონკრეტული ღირებულება, უფრო მეტი, ან ნაკლები, ვიდრე ღირებულება ან ორ ღირებულებები. ამის სპექტრი ძებნა, აირჩიეთ "უდრის" შემდეგ დააყენა დაწყებული და დამთავრებული ღირებულებების სპექტრი გამოყოფილი ტირე (-), მაგალითად, 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'ძიება მომხმარებლებს საფუძველზე სხვადასხვა პროფილის სფეროებში. Wildcards მხარდაჭერა გამოყენებით ასტერიქსი (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'თქვენ შეგიძლიათ მოძებნოთ მომხმარებლებს მათი ბოლო შემოსვლის თარიღი გამოყენებით ამ ძებნის ფუნქცია';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'ეს იქნება მომხ
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'მომხმარებლებს, რომლებიც შერჩეული კონკრეტული დროის სარტყელი მათი ნახვა';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'ჩვენება მომხმარებლებს, რომლებიც შერჩეული კონკრეტული სტილი.';
 $lang['MODERATORS_OF'] = 'მოდერატორებს"';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'ძიება მომხმარებლებს ადმინისტრაცია უფლებები კონკრეტულ ფორუმზე. ადმინისტრაცია უფლებები, რომლებიც recoginised ან მომხმარებლის უფლებები ან როგორც ჯგუფის უფლება ჯგუფი Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s დაემორჩილა %d შედეგი(s). შეასრულოს <a href="%s">another search</a>.';
 $lang['BANNED'] = 'აკრძალული';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'პარამეტრები';
 $lang['SITEMAP_CREATE'] = 'შექმნა / განახლება საიტის რუკა';
 $lang['SITEMAP_NOTIFY'] = 'აცნობოს საძიებო შესახებ ახალი ვერსია საიტის რუკა';
 $lang['SITEMAP_WHAT_NEXT'] = 'რა უნდა გავაკეთოთ შემდეგ?';
-$lang['SITEMAP_GOOGLE_1'] = 'დაარეგისტრირეთ თქვენი საიტის <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> გამოყენებით თქვენი Google ანგარიში.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> " საიტზე თქვენ დარეგისტრირებული.';
-$lang['SITEMAP_YANDEX_1'] = 'დაარეგისტრირეთ თქვენი საიტის <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> გამოყენებით თქვენი Yandex ანგარიშზე.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> " საიტზე თქვენ დარეგისტრირებული.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'დაარეგისტრირეთ თქვენი საიტის <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> გამოყენებით თქვენი Microsoft-ის ანგარიში.';
 $lang['SITEMAP_BING_2'] = 'რჩეულებში საიტის რუკა საიტის თქვენ დარეგისტრირებული, მისი პარამეტრები.';
 $lang['SITEMAP_ADD_TITLE'] = 'დამატებითი გვერდები საიტის რუკა';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'გლობალური საკვები�
 $lang['HASH_INVALID'] = 'Hash %s არასწორია';
 $lang['HASH_NOT_FOUND'] = 'გამოშვების hash %s არ მოიძებნა';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]ტექსტი ამ გვერდზე არის რედაქტირებული: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. ეს ხაზი ხედავთ, მხოლოდ ადმინისტრატორს.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'ამ გვერდზე, თქვენ შეგიძლიათ მიუთითოთ ტექსტი ძირითადი წესები რესურსი არის ნაჩვენები მომხმარებლებს.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'შეამოწმეთ, რომ თქვენ ა�
 $lang['CAPTCHA_WRONG'] = 'თქვენ შეიძლება არ ადასტურებენ, რომ თქვენ არ ხართ რობოტი';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha არ მიმდინარეობს სრულად configured</h2><p>if თქვენ არ უკვე გამომუშავებული გასაღებები, თქვენ შეგიძლიათ ეს გააკეთოთ <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After თქვენ გენერირება გასაღებები, თქვენ უნდა დააყენოს მათ ფაილი ბიბლიოთეკა/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'არ საგანი',
-    'GROUP_ADDED' => 'თქვენ უკვე დასძინა, რომ ეს usergroup',
-    'GROUP_APPROVED' => 'თქვენი მოთხოვნით უკვე დამტკიცებული',
-    'GROUP_REQUEST' => 'თხოვნა შეუერთდეს თქვენი ჯგუფი უკვე გააკეთა',
-    'PRIVMSG_NOTIFY' => 'ახალი შეტყობინების გაგზავნა ჩამოვიდა',
-    'TOPIC_NOTIFY' => 'თემაზე პასუხი შეტყობინება %s',
-    'USER_ACTIVATE' => 'განაახლოს თქვენი ანგარიში',
-    'USER_ACTIVATE_PASSWD' => 'ახალი პაროლი გააქტიურება',
-    'USER_WELCOME' => 'მოგესალმებით %s ფორუმი',
-    'USER_WELCOME_INACTIVE' => 'მოგესალმებით %s ფორუმი',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
