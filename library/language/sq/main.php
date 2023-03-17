@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Drejtuar Ardhshëm';
 $lang['CRON_RUN_COUNT'] = 'Shkon';
 $lang['CRON_MANAGE'] = 'Menaxhuar';
 $lang['CRON_OPTIONS'] = 'Cron opsionet';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron të aktivizuara';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron kontrolloni intervalin (kshz)';
