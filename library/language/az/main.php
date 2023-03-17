@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'İdarəetmə';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kateqoriya';
 $lang['HIDE_CAT'] = 'Gizlətmək kateqoriya';
-$lang['HIDE_CAT_MESS'] = 'Bir hissəsi kateqoriya gizli "variantları" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Mövzu';
 $lang['TOPICS'] = 'Mövzular';
 $lang['TOPICS_SHORT'] = 'Mövzular';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Siz bir səhv Skype login';
 $lang['TWITTER'] = 'Tvitter';
 $lang['TWITTER_ERROR'] = 'Yazdığınız etibarsız istifadəçi adı və Twitter';
 
-$lang['FORUM_INDEX'] = 'İndeksi Forumun %s'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = 'İndeksi Forumun %s'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Post yeni mövzular';
 $lang['POST_NEW_RELEASE'] = 'Sonra Yeni buraxılması';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'mesajlaşma səhifə';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Mövzu baxış';
 
-$lang['NO_POST_MODE'] = 'Heç bir rejimi vəzifəsinə seçilmiş'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Heç bir rejimi vəzifəsinə seçilmiş'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Post yeni mövzular';
 $lang['POST_A_REPLY'] = 'Post yeni cavab';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Bütün aradan qaldırılması';
 $lang['CONFIRM_DELETE_PM'] = 'Siz əmin deyilsinizsə aradan qaldırılması, bu mesaj?';
 $lang['CONFIRM_DELETE_PMS'] = 'Siz əmin deyilsinizsə aradan qaldırılması üçün bu mesajlar?';
 
-$lang['INBOX_SIZE'] = 'Sizin e-poçt is<br /><b>%d%%</b> tam'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Sizin e-poçt is<br /><b>%d%%</b> tam'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Sizin göndərilən is<br /><b>%d%%</b> tam';
 $lang['SAVEBOX_SIZE'] = 'Öz xüsusiyyətlərini tam is<br /><b>%d%%</b>';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Yaş';
 $lang['NO_THEMES'] = 'Heç bir mövzu bazasında';
 $lang['TIMEZONE'] = 'Saat qurşağı';
 $lang['DATE_FORMAT_PROFILE'] = 'Tarix formatı';
-$lang['DATE_FORMAT_EXPLAIN'] = 'İstifadə sintaksis eynidir <a href=\'http://www.php.net/date\' target=\'_other\'>date PHP()funksiyası </a>.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'İmza';
 $lang['SIGNATURE_EXPLAIN'] = 'Bu, vahid bir mətn əlavə edə bilərsiniz Mesajları. Bir limit var %d xarakter';
 $lang['SIGNATURE_DISABLE'] = 'Qaydalarının pozulmasına görə, forumun';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Qısaca';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Yoxdur hüquqları üçün axtarış hər hansı bir forum, bu saytda.';
 
 $lang['NO_SEARCH_MATCH'] = 'Heç bir mövzu və ya ismarıc cavab verən şəraitə axtarış';
-$lang['FOUND_SEARCH_MATCH'] = 'Axtarış aşkar matç %d'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Axtarış %d aşkar təsadüflərin'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Axtarış aşkar matç %d'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Axtarış %d aşkar təsadüflərin'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Çox nəticə əldə oluna bilər, cəhd edin olmaq daha konkret';
 
 $lang['CLOSE_WINDOW'] = 'Pəncərəni Bağlamaq';
@@ -1511,9 +1512,9 @@ $lang['ITALIC'] = 'Курсивный mətn: [i]text[/i] (əsas birləşməsi Ct
 $lang['UNDERLINE'] = 'Qeyd mətni: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый mətn: [s]text[/s] (Ctrl+c)';
 $lang['QUOTE_TITLE'] = 'Sitat mətn: [quote]text[/quote] (əsas birləşməsi Ctrl+M)';
-$lang['IMG_TITLE'] = 'İnsert image: [img]http://image_url[/img] (əsas birləşməsi Ctrl+P)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'URL-ünvanı';
-$lang['URL_TITLE'] = 'Daxil URL: [url]http://url[/url] ya [URL=http://ünvanına]URL text[/url] (Ctrl+g)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Ekran kodu: [code]code[/code] (Ctrl+j)';
 $lang['LIST'] = 'Siyahısı';
 $lang['LIST_TITLE'] = 'Siyahısı: [list]text[/list] (əsas birləşməsi Ctrl+l)';
@@ -2059,7 +2060,7 @@ $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Haqqında məlumat IP-ünvanı';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Göstərmək модераторам index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> əvvəlcədən moderation</h4> <h6>İf yoxdur paylayıcı statusu, # və ya t bu bölmədə, o cümlədən подразделы, paylanması, avtomatik olur bu status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary vəziyyəti haqqında distribution</h4> <h6>Comment uğurla imkan verir, müəyyən səhvlər релизером. Zaman nedooformlennyh statusu релизером mövcud forma cavab düzəliş release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding bonus toxum </h4> <h6> Sayı yayılmasının verir, istifadəçi və boy bonuslar onlar üçün (bir dəfə doldurulması saat) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'bu N-relizlər sayı';
 $lang['SEED_BONUS_POINTS'] = 'bonus saat';
@@ -2087,7 +2088,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Parametrləri Sayı Qoyuluşu';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Variantları Əlavə';
 
 $lang['UPLOAD_DIRECTORY'] = 'Kataloq Download';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Yazın nisbi yol quraşdırılması site torrentpier üçün sərmayə qoyuluşuna kataloq upload. Məsələn, daxil edin \'fayllar\' əgər Quraşdırılması site torrentpier yerləşir http://www.yourdomain.com/torrentpier və Kataloq qoyuluşu upload edir http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'İcon Qoyuluşu Poçt';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Bu şəkil göstərilir yanında qoyuluşu bir ayrı-ayrı Постингах. Buraxın, bu sahədə boş, əgər Siz istəmirsinizsə ola göstərilir nişan. Bu seçim üzerine yazılacaq ayarları genişləndirilməsi qruplar idarə.';
 $lang['ATTACH_TOPIC_ICON'] = 'İcon Mövzu Əlavə';
@@ -2126,7 +2127,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Boş Fayl Yazmaq';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Eskiz обнулился əlavə etmək üçün: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Əlavə Sinxronizasiya Başa Çatıb.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Mövzular Sync';
 $lang['SYNC_POSTS'] = 'Mesaj Sync';
 $lang['SYNC_THUMBNAILS'] = 'Kiçik Sync';
@@ -2577,7 +2578,7 @@ $lang['RELEASES'] = 'Relizlər';
 
 $lang['BACK'] = 'Geri';
 $lang['ERROR_FORM'] = 'Dözülməz sahələri';
-$lang['RELEASE_WELCOME'] = 'Doldurun buraxılış forması';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Yeni nəşr';
 $lang['NEXT'] = 'Davam';
 $lang['OTHER'] = 'Digər';
@@ -2585,8 +2586,8 @@ $lang['OTHER'] = 'Digər';
 $lang['TPL_EMPTY_FIELD'] = 'Siz doldurun sahəsində <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Siz seçmək lazımdır <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - chis';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - olmalıdır http:// URL-ünvanı';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - olmalıdır http:// İMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'qoymaq mövzu';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'doldurulması tələb edir';
@@ -2600,15 +2601,15 @@ $lang['TPL_SPOILER'] = 'spoyler';
 $lang['TPL_IN_LINE'] = 'eyni xətti';
 $lang['TPL_HEADER_ONLY'] = 'yalnız adı';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Səhv giriş daxil axtar';
-$lang['SEARCH_INVALID_EMAIL'] = 'Müəyyən, düzgün e-poçt ünvanı üçün axtarış';
-$lang['SEARCH_INVALID_IP'] = 'Yanlış IP-ünvanı, daxil axtar';
-$lang['SEARCH_INVALID_GROUP'] = 'Yanlış bir Qrup daxil axtar';
-$lang['SEARCH_INVALID_RANK'] = 'Səhv dərəcə daxil axtar';
-$lang['SEARCH_INVALID_DATE'] = 'Təqdim düzgün Tarixi azn axtar';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Yanlış hesablanması, təyin edilir axtar';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Yanlış məlumatlar daxil Userfield';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Yazarkən yolverilməz məlumatların sorğular';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Səhv Dili, Seçilmiş';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Səhv Saat Qurşağı Seçilib';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Səhv Forum Seçdi';
@@ -2659,12 +2660,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Bax bütün üzvləri seçilmiş qruplar
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Bax bütün daşıyıcıları seçilmiş dərəcə.';
 $lang['BANNED_USERS'] = 'Qadağan İstifadəçilər';
 $lang['DISABLED_USERS'] = 'İstifadəçi İmkanları Məhdud';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Admins - bütün istifadəçilər ilə Admin səlahiyyət; Moderatoru - bütün модераторам forumun; qadağan istifadəçi - bütün hesabları idi ki, забанены forumlarda; əlilləri İstifadəçilər - bütün istifadəçilər ilə отключенными hesabları (və ya əl ilə əlil və ya heç vaxt yoxlanılır e-mail); istifadəçilər ilə məhdud fiziki imkanlı AZN - seçim istifadəçilər var ki, şəxsi mesaj otur işarə təmizlənmiş (etdik vasitəsilə İdarə edilməsi "istifadəçi")';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Bərabərdir';
 $lang['GREATER_THAN'] = 'Daha çox';
 $lang['LESS_THAN'] = 'Az';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Axtarış edə bilərsiniz istifadəçilər əsasında dəyərlər Postcount. Siz tapa bilərsiniz və ya xüsusi dəyər, daha çox və ya daha az, daha çox əhəmiyyət arasında, yaxud iki və mənaları. Yerinə yetirmək üçün axtarış seçin və "bərabər", sonra isə ifşa başlanğıc və son əhəmiyyət sıra ayrılır дефисом (-), məsələn, 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Axtarış istifadəçilər əsasında müxtəlif profilli sahələrdə. Dəstəklənir şablonları istifadə edərək, ulduz ilə (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Axtarış edə bilərsiniz istifadəçilər tarix üzrə son giriş istifadə edərək, bu seçimi axtar';
@@ -2672,7 +2673,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Bu, göstərilir ki, istifadəçilər 
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'İstifadəçilər seçən konkret Saat qurşağı profil';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Göstərilir istifadəçilər seçən müəyyən bir stil.';
 $lang['MODERATORS_OF'] = 'Moderatorlar';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Axtarış istifadəçilər sayəsində digər ölkə nümayəndələrinə çatdırıb icazə müəyyən forum. Модераторство icazə recoginised və ya istifadəçi icazə və ya qrup ilə hüququ qrupunun hüquqlarının olmaq.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s verdi nəticə %d(s). Təhlil <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Qadağan';
@@ -2727,10 +2728,10 @@ $lang['SITEMAP_OPTIONS'] = 'Variantlar';
 $lang['SITEMAP_CREATE'] = 'Yaradılması və / və saytın yenilənməsi';
 $lang['SITEMAP_NOTIFY'] = 'Məlumat axtarış sisteminin yeni versiyası haqqında sayt';
 $lang['SITEMAP_WHAT_NEXT'] = 'Nə etməli?';
-$lang['SITEMAP_GOOGLE_1'] = 'Qeydiyyatdan sizin sayta <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> köməyi ilə haqq-hesab Google.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> siz sayta qeydiyyatdan keçmişdir.';
-$lang['SITEMAP_YANDEX_1'] = 'Qeydiyyatdan sizin sayta <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> hesabı istifadə edərək, Yandex.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> siz sayta qeydiyyatdan keçmişdir.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Qeydiyyatdan sizin sayta <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> hesabı ilə Maykrosoft.';
 $lang['SITEMAP_BING_2'] = 'Əlavə fayl sitemap site, siz qeydiyyatdan ayarları.';
 $lang['SITEMAP_ADD_TITLE'] = 'Əlavə səhifə üçün site';
@@ -2751,7 +2752,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Bütün forumlar üçün qlobal yem';
 $lang['HASH_INVALID'] = 'Hash %s etibarsızdır';
 $lang['HASH_NOT_FOUND'] = 'Məsələ ilə hash %s tapılmadı';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]mətn bu səhifənin редактируется: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu xətt edə bilərsiniz yalnız admins.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu səhifədə verə bilərsiniz mətn əsas qaydaları resurs göstərilir istifadəçilər üçün.';
 
 $lang['TR_STATS'] = array(
@@ -2808,16 +2809,16 @@ $lang['CAPTCHA'] = 'Əmin olun ki, Siz robot deyil';
 $lang['CAPTCHA_WRONG'] = 'Ola bilər ki, təsdiq Siz robot deyil';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha olmadan tam configured</h2><p>if siz hələ сгенерировал düymələri, bunu edə bilərsiniz azn <a href="https://www.google.com/recaptcha/admin">https://ВСП.google.com/рекапчу/admin</a>.<br />After siz генерируете düymələri, lazımdır onları qoymaq fayl Library/onları.PHP.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Heç Mövzular',
-    'GROUP_ADDED' => 'Siz də oraya əlavə edildi və bu qrupa',
-    'GROUP_APPROVED' => 'Sizin sorğu təsdiq edilmişdir',
-    'GROUP_REQUEST' => 'Xahiş qoşulmaq qrupunda oldu',
-    'PRIVMSG_NOTIFY' => 'Bu yeni şəxsi mesaj və',
-    'TOPIC_NOTIFY' => 'Mövzu Bildiriş Cavab %s',
-    'USER_ACTIVATE' => 'Aktiv hesabı',
-    'USER_ACTIVATE_PASSWD' => 'Yeni parol aktivləşdirmək üçün',
-    'USER_WELCOME' => 'Xoş gəlmisiniz %s forumların',
-    'USER_WELCOME_INACTIVE' => 'Xoş gəlmisiniz %s forumların',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
