@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Статистика по трекеру';
 $lang['WHOIS_INFO'] = 'Информация о IP адресе';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Показывать модераторов на главной';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерация</h4> <h6>Если у релизера нет раздач со статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> или <span class="tor-icon tor-dup">T</span> в текущем разделе, включая подразделы, то раздача автоматически получает данный статус</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Комментарий к статусу раздачи</h4> <h6>Комментарий позволяет указать релизеру на допущенные ошибки. Если статус не финальный, релизеру доступна форма ответа на комментарий для исправления релиза</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Добавление сидбонуса</h4><h6>Кол-во раздаваемых раздач пользователем и размер начисления бонусов за них (начисления раз в час)</h6>';
 $lang['SEED_BONUS_RELEASE'] = 'до N-числа релизов';
 $lang['SEED_BONUS_POINTS'] = 'бонусов в час';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'След. запуск';
 $lang['CRON_RUN_COUNT'] = 'Запусков';
 $lang['CRON_MANAGE'] = 'Управление';
 $lang['CRON_OPTIONS'] = 'Настройки крона';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Предупреждение! Запуск скриптов cron отключен. Чтобы включить его, установите переменную APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Крон включен';
 $lang['CRON_CHECK_INTERVAL'] = 'Проверка (сек)';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Другой';
 $lang['TPL_EMPTY_FIELD'] = 'Вы должны заполнить поле <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Вы должны выбрать <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - должно быть число';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Должен быть https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Должен быть https://IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'поместить в заголовок';
 $lang['TPL_POSTER'] = 'постер';
 $lang['TPL_REQ_FILLING'] = 'требует заполнения';
@@ -2607,7 +2607,7 @@ $lang['SEARCH_INVALID_RANK'] = 'Введено неправильное зван
 $lang['SEARCH_INVALID_DATE'] = 'Введена неправильная дата для поиска';
 $lang['SEARCH_INVALID_POSTCOUNT'] = 'Введено неправильное количество сообщений для поиска';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Введены неправильные пользовательские данные для поиска';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Введена неверная дата для последнего посещенного поиска';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Выбран неправильный язык';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Выбран неправильный часовой пояс';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Выбран неправильный форум';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Просмотреть всех член
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Просмотреть всех носителей выбранного звания.';
 $lang['BANNED_USERS'] = 'Забаненные пользователи';
 $lang['DISABLED_USERS'] = 'Отключенные пользователи';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Администраторы — все пользователи с правами администратора; Модераторы - Все модераторы форума; Забаненные пользователи - Все аккаунты, которые были забанены на этих форумах; Отключенные пользователи — все пользователи с отключенными учетными записями (отключенные вручную или никогда не подтверждавшие свой адрес электронной почты); Пользователи с отключенными личными сообщениями — выбираются пользователи, у которых удалены привилегии личных сообщений (сделано через управление пользователями).';
 $lang['POSTCOUNT'] = 'Количество сообщений';
 $lang['EQUALS'] = 'Равно';
 $lang['GREATER_THAN'] = 'Больше чем';
 $lang['LESS_THAN'] = 'Меньше чем';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Вы можете искать пользователей по количеству сообщений. Вы можете искать по определенному значению, больше или меньше значения или между двумя значениями. Чтобы выполнить поиск по диапазону, выберите «Равно», затем укажите начальное и конечное значения диапазона, разделенные дефисом (-), например, 10-15.';
 $lang['USERFIELD'] = 'Поле профиля';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Поиск пользователей по различным полям профиля. В качестве маски разрешены звездочки (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Вы можете искать пользователей по дате их последнего входа на трекер, используя эту поисковую возможность.';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Поиск пользователей,
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Поиск пользователей, выбравших заданный часовой пояс в своем профиле';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Поиск пользователей, выбравших заданный стиль в своем профиле';
 $lang['MODERATORS_OF'] = 'Модераторы';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Поиск пользователей с правами модератора на определенный форум. Разрешения на модерирование признаются либо разрешениями пользователя, либо нахождением в группе с правильными разрешениями группы.';
 
 $lang['SEARCH_USERS_NEW'] = '%s дал %d результат(ов). <a href="%s">Новый поиск</a>.';
 $lang['BANNED'] = 'Забаненные';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Глобальная лента для всех ф�
 $lang['HASH_INVALID'] = 'Хэш %s некорректен';
 $lang['HASH_NOT_FOUND'] = 'Раздача с хэшем %s не найдена';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Текст этой страницы редактируется по адресу: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Эту строку могут видеть только администраторы.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На данной странице вы можете указать текст основных правил ресурса, выводящихся пользователям.';
 
 $lang['TR_STATS'] = array(
@@ -2808,12 +2808,12 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha настроена не полнос�
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'EMPTY' => 'Без темы',
+    'GROUP_ADDED' => 'Вы добавлены в группу пользователей',
+    'GROUP_APPROVED' => 'Ваш запрос на вступление в группу пользователей был удовлетворен',
+    'GROUP_REQUEST' => 'Запрос на вступление в вашу группу пользователей',
+    'PRIVMSG_NOTIFY' => 'Новое личное сообщение',
+    'TOPIC_NOTIFY' => 'Уведомление об ответе в ветке %s',
     'USER_ACTIVATE' => 'Повторная активация аккаунта',
     'USER_ACTIVATE_PASSWD' => 'Подтверждение нового пароля',
     'USER_WELCOME' => 'Добро пожаловать на сайт %s',
