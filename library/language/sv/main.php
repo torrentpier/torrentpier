@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Nästa Körning';
 $lang['CRON_RUN_COUNT'] = 'Går';
 $lang['CRON_MANAGE'] = 'Hantera';
 $lang['CRON_OPTIONS'] = 'Cron alternativ';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron aktiverad';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron in intervall (sek)';
