@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'คนต่อไป';
 $lang['CRON_RUN_COUNT'] = 'วิ่งหนี';
 $lang['CRON_MANAGE'] = 'จัดการ';
 $lang['CRON_OPTIONS'] = 'ตัวเลือกของ Cron';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'ตารางงานของกเปิดใช้งาน';
 $lang['CRON_CHECK_INTERVAL'] = 'ตารางงานของตรวจทุกช่วงเวลา(วินาที)';
