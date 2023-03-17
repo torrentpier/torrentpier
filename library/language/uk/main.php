@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Наступний запуск';
 $lang['CRON_RUN_COUNT'] = 'Запусків';
 $lang['CRON_MANAGE'] = 'Керування';
 $lang['CRON_OPTIONS'] = 'Налаштування завдань';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Завдання увімкнено';
 $lang['CRON_CHECK_INTERVAL'] = 'Перевірка (с)';
