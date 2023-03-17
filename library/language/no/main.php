@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Neste Løp';
 $lang['CRON_RUN_COUNT'] = 'Kjører';
 $lang['CRON_MANAGE'] = 'Administrere';
 $lang['CRON_OPTIONS'] = 'Cron-valg';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron er aktivert';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron sjekk intervall (sek)';
