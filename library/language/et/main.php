@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Järgmine Run';
 $lang['CRON_RUN_COUNT'] = 'Jookseb';
 $lang['CRON_MANAGE'] = 'Hallata';
 $lang['CRON_OPTIONS'] = 'Cron valikud';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron on lubatud';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron kontrollimise intervall (sek)';
