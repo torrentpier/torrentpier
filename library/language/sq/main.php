@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Administrating';
 $lang['FORUM'] = 'Forumi';
 $lang['CATEGORY'] = 'Kategoria';
 $lang['HIDE_CAT'] = 'Të fshehur kategori';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Disa kategori fshihen nga opsionet e personalizuara të ekranit';
+$lang['SHOW_ALL'] = 'Trego të gjitha';
 $lang['TOPIC'] = 'Tema';
 $lang['TOPICS'] = 'Temat';
 $lang['TOPICS_SHORT'] = 'Temat';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Italic tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Theksoj tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Citoj tekstin: [quote]text[/quote] (Ctrl+P)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Fut imazhin: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Fut URL-në: [url]https://url[/url] ose [url=https://url]tekst URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kodi shfaqin: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistika mbi tracker';
 $lang['WHOIS_INFO'] = 'Informacionin në lidhje me adresën IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Tregojnë për moderatorët e index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Para-moderation</h4> <h6>If ju nuk keni shpërndarjet për statusin e v, #, ose T në këtë seksion, duke përfshirë seksionet, shpërndarja do të automatikisht të marrë këtë status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Koment mbi statusin e një shpërndarjeje</h4> <h6>Komenti ju lejon të tregoni gabimet e bëra te lëshuesi. Nëse statuset janë të paplota, një formular i përgjigjes së lëshimit është i disponueshëm për menaxherin e lëshimit për të korrigjuar lëshimin</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding farë bonus </h4> <h6> Numri i shpërndarjet janë dorëzuar nga përdoruesit dhe madhësia e shpërblime për ata (të akuzuar herë për një orë) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'për të N-numri i liron';
 $lang['SEED_BONUS_POINTS'] = 'shpërblimet në një orë';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Bosh File Hyrje';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail resetted për Attachment: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Sinkronizimi i bashkëngjitjes përfundoi.';
 $lang['SYNC_TOPICS'] = 'Sync Tema';
 $lang['SYNC_POSTS'] = 'Sync Postimet';
 $lang['SYNC_THUMBNAILS'] = 'Sync Thumbnails';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Drejtuar Ardhshëm';
 $lang['CRON_RUN_COUNT'] = 'Shkon';
 $lang['CRON_MANAGE'] = 'Menaxhuar';
 $lang['CRON_OPTIONS'] = 'Cron opsionet';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Paralajmërim! Ekzekutimi i skripteve cron është i çaktivizuar. Për ta aktivizuar, vendosni ndryshoren APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron të aktivizuara';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron kontrolloni intervalin (kshz)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Njoftime';
 
 $lang['BACK'] = 'Prapa';
 $lang['ERROR_FORM'] = 'Fushat e pavlefshme';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Ju lutemi plotësoni formularin e lirimit';
 $lang['NEW_RELEASE'] = 'Lirimin e re';
 $lang['NEXT'] = 'Vazhdo';
 $lang['OTHER'] = 'Të tjera';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Të tjera';
 $lang['TPL_EMPTY_FIELD'] = 'Ju duhet të plotësoni fushën <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Ju duhet të zgjidhni <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Nuk num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Duhet të jetë https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Duhet të jetë https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'të vënë në temë';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'kërkon plotësimin';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'shkatërruesi';
 $lang['TPL_IN_LINE'] = 'në të njëjtën linjë';
 $lang['TPL_HEADER_ONLY'] = 'vetëm në një titull';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Është futur një emër përdoruesi i pavlefshëm për të kërkuar';
+$lang['SEARCH_INVALID_EMAIL'] = 'Është futur adresë e pavlefshme emaili për kërkim';
+$lang['SEARCH_INVALID_IP'] = 'Adresa IP e pavlefshme është futur për kërkim';
+$lang['SEARCH_INVALID_GROUP'] = 'U fut një grup i pavlefshëm për të kërkuar';
+$lang['SEARCH_INVALID_RANK'] = 'Renditja e pavlefshme është futur për kërkim';
+$lang['SEARCH_INVALID_DATE'] = 'Është futur një datë e pavlefshme për të kërkuar';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Numri i postimeve të pavlefshme u fut në kërkim';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Të pavlefshme Userfield të dhënave të hyrë';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Është futur një datë e pavlefshme për kërkimin e vizituar të fundit';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Të Pavlefshme Gjuhën E Zgjedhur';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Të Pavlefshme Brezin E Zgjedhur';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Të Pavlefshme Forum Të Zgjedhura';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Shiko të gjithë anëtarët e grupit t�
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Shiko të gjithë transportuesit e përzgjedhur të renditen.';
 $lang['BANNED_USERS'] = 'Ndalohet Përdoruesit';
 $lang['DISABLED_USERS'] = 'Përdoruesit Me Aftësi Të Kufizuara';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratorët - Të gjithë përdoruesit me kompetenca Administratori; Moderatorët - Të gjithë moderatorët e forumit; Përdoruesit e Ndaluar - Të gjitha llogaritë që janë ndaluar në këto forume; Përdoruesit me aftësi të kufizuara - Të gjithë përdoruesit me llogari të paaftë (qoftë të çaktivizuar manualisht ose kurrë të verifikuar adresën e tyre të emailit); Përdoruesit me PM me aftësi të kufizuara - Zgjedh përdoruesit të cilëve u janë hequr privilegjet e Mesazheve Private (Bërë nëpërmjet Menaxhimit të Përdoruesit)';
+$lang['POSTCOUNT'] = 'Numri i postimeve';
 $lang['EQUALS'] = 'Rezultati';
 $lang['GREATER_THAN'] = 'Më e madhe se';
 $lang['LESS_THAN'] = 'Më pak se';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Ju mund të kërkoni për përdorues bazuar në vlerën e numrit të postimeve. Mund të kërkoni ose sipas një vlere specifike, më të madhe ose më të vogël se një vlerë ose midis dy vlerave. Për të bërë kërkimin e diapazonit, zgjidhni "E barabartë" dhe më pas vendosni vlerat e fillimit dhe mbarimit të diapazonit të ndara me një vizë (-), p.sh. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Kërkimi për përdoruesit bazuar në të ndryshme profilin fushat. Wildcards janë të mbështetur duke përdorur një yll (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Ju mund të kërkoni për përdoruesit bazuar në e tyre të fundit të identifikoheni datë duke përdorur këtë opsionin e kërkimit';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Kjo do të afishojë përdoruesit të 
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Përdoruesit të cilët kanë zgjedhur të caktuar brezin në profilin e tyre';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Shfaq përdoruesit të cilët kanë zgjedhur një stil të veçantë.';
 $lang['MODERATORS_OF'] = 'Moderatorët e';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Kërkoni për përdorues me leje Moderimi në një forum të caktuar. Lejet e moderimit njihen ose nga lejet e përdoruesit ose duke qenë në një grup me lejet e duhura të grupit.';
 
 $lang['SEARCH_USERS_NEW'] = '%s dhënë %d rezultat(s). Kryer <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Ndalohet';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Ushqim global për të gjitha forumet';
 $lang['HASH_INVALID'] = 'Hash %s është i pavlefshëm';
 $lang['HASH_NOT_FOUND'] = 'Lirimin me të hash %s nuk u gjet';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksti i kësaj faqe është redaktuar në: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Kjo linjë mund të shohë vetëm administratorët.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Në këtë faqe, ju mund të specifikoni tekstin e rregullave bazë të burimeve të shfaqet për përdoruesit.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nuk janë plotësisht të configured<
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Asnjë subjekt',
+    'GROUP_ADDED' => 'Ju jeni shtuar në grupin e përdoruesve',
+    'GROUP_APPROVED' => 'Kërkesa juaj për t\'u bashkuar me grupin e përdoruesve është pranuar',
+    'GROUP_REQUEST' => 'Një kërkesë për t\'u bashkuar me grupin tuaj të përdoruesve',
+    'PRIVMSG_NOTIFY' => 'Mesazh i ri privat',
+    'TOPIC_NOTIFY' => 'Njoftimi i përgjigjes në temën %s',
+    'USER_ACTIVATE' => 'Riaktivizimi i llogarisë',
+    'USER_ACTIVATE_PASSWD' => 'Konfirmimi i një fjalëkalimi të ri',
+    'USER_WELCOME' => 'Mirë se vini në faqen %s',
+    'USER_WELCOME_INACTIVE' => 'Mirë se vini në faqen %s',
 ];
