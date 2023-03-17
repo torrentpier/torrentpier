@@ -2085,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Налаштування кількості �
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Налаштування вкладень';
 
 $lang['UPLOAD_DIRECTORY'] = 'Папка для завантаження';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Задайте відносний шлях від папки TorrentPier до папки вкладень. Наприклад, введіть \'files\' якщо Ваша папка із TorrentPier знаходиться за адресою https://www.yourdomain.com/torrentpier та папка із вкладеннями https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Іконка для вкладень';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Це зображення відображається біля посилань вкладення в персональних повідомленнях. Залиште це поле порожнім, якщо не хочете бачити іконку. Ця опція буде переписана налаштуваннями в меню \'Керування розширеннями груп\'.';
 $lang['ATTACH_TOPIC_ICON'] = 'Іконка для вкладень в темі';
@@ -2724,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Опції';
 $lang['SITEMAP_CREATE'] = 'Створити / оновити файл sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Повідомити пошукові системи про наявність нової версії файлу sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Що робити далі?';
-$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
+$lang['SITEMAP_GOOGLE_1'] = 'Зареєструйте Ваш сайт на <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> з використанням Вашого облікового запису Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Додати файл sitemap</a> зареєстрованого Вами сайту.';
-$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
+$lang['SITEMAP_YANDEX_1'] = 'Зареєструйте Ваш сайт на <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> з використанням Вашого облікового запису Yandex.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Додайти файл sitemap</a> зареєстрованого Вами сайту.';
 $lang['SITEMAP_BING_1'] = 'Зареєструйте Ваш сайт на <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> з використанням Вашого облікового запису Microsoft.';
 $lang['SITEMAP_BING_2'] = 'Додайте файл sitemap сайту, що Ви зареєстрували в налаштуваннях.';
 $lang['SITEMAP_ADD_TITLE'] = 'Додаткові сторінки для sitemap';
