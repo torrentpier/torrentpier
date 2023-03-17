@@ -467,12 +467,8 @@ class Torrent
 
         if ($bt_userdata = get_bt_userdata($user_id)) {
             $passkey_val = $bt_userdata['auth_key'];
-        }
 
-        if (!$passkey_val) {
-            if (!$passkey_val = self::generate_passkey($user_id)) {
-                bb_simple_die('Could not generate passkey');
-            } elseif ($bb_cfg['ocelot']['enabled']) {
+            if ($bb_cfg['ocelot']['enabled']) {
                 self::ocelot_update_tracker('add_user', ['id' => $user_id, 'passkey' => $passkey_val]);
             }
         }
