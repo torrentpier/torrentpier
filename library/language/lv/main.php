@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Administrēšana';
 $lang['FORUM'] = 'Forums';
 $lang['CATEGORY'] = 'Kategorijas';
 $lang['HIDE_CAT'] = 'Paslēpt kategorijas';
-$lang['HIDE_CAT_MESS'] = 'Daļa no kategorijām ir paslēptas, "options Show" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Tēmas';
 $lang['TOPICS'] = 'Tēmas';
 $lang['TOPICS_SHORT'] = 'Tēmas';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Jūs ienācāt nederīgu Skype login';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Jūs stājās spēkā neesošu, Twitter pieteikšanās';
 
-$lang['FORUM_INDEX'] = '%s Forumā Indekss'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forumā Indekss'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Publicēt jaunu tēmu';
 $lang['POST_NEW_RELEASE'] = 'Publicēt jaunu presei';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'amatu par lapu';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Tēmu pārskats';
 
-$lang['NO_POST_MODE'] = 'Nr. pēc režīms izvēlēts'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Nr. pēc režīms izvēlēts'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Publicēt jaunu tēmu';
 $lang['POST_A_REPLY'] = 'Publicēt jaunu atbildēt';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Rādīt visus';
 $lang['CONFIRM_DELETE_PM'] = 'Vai jūs esat pārliecināts, ka vēlaties izdzēst šo ziņojumu?';
 $lang['CONFIRM_DELETE_PMS'] = 'Vai jūs esat pārliecināts, ka vēlaties izdzēst šo ziņojumu?';
 
-$lang['INBOX_SIZE'] = 'Jūsu Iesūtni is<br /><b>%d%%</b> pilna'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Jūsu Iesūtni is<br /><b>%d%%</b> pilna'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Jūsu Sentbox is<br /><b>%d%%</b> pilna';
 $lang['SAVEBOX_SIZE'] = 'Jūsu Savebox is<br /><b>%d%%</b> pilna';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Gadi';
 $lang['NO_THEMES'] = 'Nē Tēmām datu bāze';
 $lang['TIMEZONE'] = 'Laika josla';
 $lang['DATE_FORMAT_PROFILE'] = 'Datuma formāts';
-$lang['DATE_FORMAT_EXPLAIN'] = 'To izmanto sintakse ir identiska PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funkciju.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Paraksts';
 $lang['SIGNATURE_EXPLAIN'] = 'Tas ir teksta bloku, kas var tikt pievienots amatu, jūs veicat. Tur ir %d rakstzīmju limitu';
 $lang['SIGNATURE_DISABLE'] = 'Parakstījis pārkāpjot foruma noteikumi';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Īsumā';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Jums nav atļaujas, lai meklētu jebkurā forumā par šo vietu.';
 
 $lang['NO_SEARCH_MATCH'] = 'Nē, tēmas vai ziņas, kas izpildītas jūsu meklēšanas kritērijiem';
-$lang['FOUND_SEARCH_MATCH'] = 'Meklēšanas atradu %d spēles'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Meklēšanas atradu %d spēles'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Meklēšanas atradu %d spēles'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Meklēšanas atradu %d spēles'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Pārāk daudz rezultātiem var atrast, lūdzu, mēģiniet, lai būtu precīzāk';
 
 $lang['CLOSE_WINDOW'] = 'Aizvērt Logu';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Italic teksts: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Uzsvērts teksts: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekstu: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Citēt tekstu: [quote]text[/quote] (Ctrl+J)';
-$lang['IMG_TITLE'] = 'Ielikt attēlu: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Ielikt URL: [url]http://url[/url] vai [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kods displejs: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Saraksts';
 $lang['LIST_TITLE'] = 'Saraksts: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistika par tracker';
 $lang['WHOIS_INFO'] = 'Informācija par IP adresi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Rādīt regulētāju index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Iepriekš moderation</h4> <h6>If jums nav peļņas sadali statusu, v, # vai T šajā sadaļā, tostarp apakšnodaļām, izplatīšanas, automātiski saņem šo status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary statusa distribution</h4> <h6>Comment veiksmīgi ļauj jums, lai precizētu releasers kļūdas. Kad nedooformlennyh statusi releasers pieejamo veidlapu atbildes korekcijas release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding sēklas bonusa </h4> <h6> Skaits sadalījumi tiek izsniegti lietotājs un izmēru prēmijas par viņiem (uzlādes reizes stundā) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-skaits, relīzes';
 $lang['SEED_BONUS_POINTS'] = 'prēmijas stundas laikā';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Pielikumu Skaits Uzstādījumi';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Pielikumu Iespējas';
 
 $lang['UPLOAD_DIRECTORY'] = 'Upload Direktoriju';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Ievadiet relatīvais ceļš no jūsu TorrentPier uzstādīšana uz Pielikumus augšupielādēt katalogs. Piemēram, ierakstiet "faili", ja jūsu TorrentPier Uzstādīšana atrodas http://www.yourdomain.com/torrentpier un Pielikumu Augšupielādēt Katalogs atrodas šeit http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Pielikumu Norīkošanu Ikonas';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Šis Attēls tiek parādīts blakus Pielikumu Saites atsevišķās Vietās. Atstājiet šo lauku tukšu, ja nevēlaties ikonas, lai varētu parādīt. Šis Iestatījums tiks pārrakstīti Uzstādījumus Pagarināšanu Grupas Vadība.';
 $lang['ATTACH_TOPIC_ICON'] = 'Pielikumu Tēmu Ikonas';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tukša Faila Ierakstu';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Sīktēlu resetted Arestu: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Pielikumu Jāveic Sinhronizēšana Pabeigta.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sinhronizācijas Tēmas';
 $lang['SYNC_POSTS'] = 'Sinhronizācijas Amatiem';
 $lang['SYNC_THUMBNAILS'] = 'Sinhronizācijas Sīktēli';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'Relīzes';
 
 $lang['BACK'] = 'Atpakaļ';
 $lang['ERROR_FORM'] = 'Nederīgs lauki';
-$lang['RELEASE_WELCOME'] = 'Pleae aizpildiet releae forma';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Jauno atbrīvošanu';
 $lang['NEXT'] = 'Turpināt';
 $lang['OTHER'] = 'Citi';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'Citi';
 $lang['TPL_EMPTY_FIELD'] = 'Jums ir aizpildiet jomā <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Jums ir jāizvēlas <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Nav num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> jābūt - http:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> jābūt - http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'ieliec tēmu';
 $lang['TPL_POSTER'] = 'plakāts';
 $lang['TPL_REQ_FILLING'] = 'ir nepieciešams novērst';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'spoilers';
 $lang['TPL_IN_LINE'] = 'vienā rindā';
 $lang['TPL_HEADER_ONLY'] = 'tikai nosaukumā';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Nederīgs lietotājvārds ievadīts Meklēšana';
-$lang['SEARCH_INVALID_EMAIL'] = 'Nederīgs e-pasta adrese ievadīts Meklēšana';
-$lang['SEARCH_INVALID_IP'] = 'Nederīga IP adrese ievadīts Meklēšana';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalīdu Grupa ieraksta Meklēšana';
-$lang['SEARCH_INVALID_RANK'] = 'Nederīgs rangs ievadīts Meklēšana';
-$lang['SEARCH_INVALID_DATE'] = 'Nederīgs Datumu ieraksta Meklēšana';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Nederīgs Post Count ievadīts Meklēšana';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Nederīgs Userfield ievadīto datu';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Nederīgus datus, kas ievadīti attiecībā uz Pēdējo Apmeklēto meklēšana';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Nederīga Valoda Izvēlēts';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Nederīgs Izvēlēto Laika Joslu';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Invalīdu Forumu, Izvēlēto';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Apskatīt visus locekļus izvēlētajai 
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Apskatīt visus pārvadātājiem izvēlētā rangs.';
 $lang['BANNED_USERS'] = 'Aizliegta Lietotāji';
 $lang['DISABLED_USERS'] = 'Ar Īpašām Vajadzībām';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratori - Visiem lietotājiem ar Administratora pilnvaras; Moderatori - Visiem foruma moderators; Aizliegts Lietotāji - Visus kontus, kas ir aizliegts par šo forumu; Invalīdiem - Visiem lietotājiem ar invaliditāti kontus (vai nu manuāli, invalīdiem vai nekad pārbaudīja savu e-pasta adresi); Lietotāji ar invaliditāti PMs - Izvēlas lietotāji, kuriem ir Privātās Ziņas tiesības noņemt (kas Veikta, izmantojot Lietotāja Vadība)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Rezultāts';
 $lang['GREATER_THAN'] = 'Lielāks par';
 $lang['LESS_THAN'] = 'Mazāk nekā';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Jūs varat meklēt lietotājiem, pamatojoties uz Postcount vērtību. Jūs varat meklēt ar kādu konkrētu vērtību, lielāks vai mazāks par vērtību, vai starp divām vērtībām. Darīt diapazonā meklēšanu, izvēlieties "Sakrīt" tad ielieciet sākuma un beigu vērtības diapazons ir atdalīts ar defisi (-), piem., 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Meklēt lietotājiem, pamatojoties uz dažādu profilu laukus. Aizstājējzīmju tiek atbalstīta, izmantojot zvaigznīti (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Jūs varat meklēt lietotājiem, pamatojoties uz savu pēdējais pieteikšanās datums, izmantojot šo meklēšanas iespēja';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Šī būs redzama lietotājiem, kuriem
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Lietotāji, kuri ir izvēlējušies konkrētu laika josla viņu profilu';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Reklāmas lietotājiem, kuri ir izvēlējušies konkrētu stilu.';
 $lang['MODERATORS_OF'] = 'Moderators';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Meklēt lietotājus ar Ražošanas atļaujas īpašs forums. Kontrolēt atļaujas ir recoginised pēc Lietotāja Atļaujas vai Grupā, ar tiesībām Grupas Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s, kas iegūti %d rezultātu(s). Veikt <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Aizliegta';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Iespējas';
 $lang['SITEMAP_CREATE'] = 'Izveidot / atjaunināt sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Paziņot meklētājprogrammas par jauno versiju no vietnes karte';
 $lang['SITEMAP_WHAT_NEXT'] = 'Ko darīt tālāk?';
-$lang['SITEMAP_GOOGLE_1'] = 'Reģistrējiet savu vietnē <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a>, izmantojot savu Google kontu.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> vietas, reģistrējies.';
-$lang['SITEMAP_YANDEX_1'] = 'Reģistrējiet savu vietnē <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a>, izmantojot savu Yandex kontu.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> vietas, reģistrējies.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Reģistrējiet savu vietnē <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a>, izmantojot savu Microsoft kontu.';
 $lang['SITEMAP_BING_2'] = 'Pievienot sitemap par vietnē jūs, kas reģistrēts tās uzstādījumi.';
 $lang['SITEMAP_ADD_TITLE'] = 'Papildu lapas sitemap';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globālā plūsma visiem forumiem';
 $lang['HASH_INVALID'] = 'Hash %s nav derīgs';
 $lang['HASH_NOT_FOUND'] = 'Atbrīvot ar hash %s nav atrasts';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]teksts šī lapa ir rediģēta: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Šo līniju var redzēt tikai administratori.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Šajā lapā jūs varat norādīt teksta pamatnoteikumu resurss ir parādīts lietotājiem.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Pārbaudiet, ka jums nav robots';
 $lang['CAPTCHA_WRONG'] = 'Jūs varētu apstiprināt, ka jums nav robots';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nav pilnībā configured</h2><p>if jums jau nav radīts taustiņus, jūs varat darīt to par <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After jums radīt atslēgas, jums ir nepieciešams, lai tos failu bibliotēka/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Priekšmets',
-    'GROUP_ADDED' => 'Jums ir pievienoti šo usergroup',
-    'GROUP_APPROVED' => 'Jūsu pieprasījums ir apstiprināts',
-    'GROUP_REQUEST' => 'Lūgums pievienoties jūsu grupai ir panākts',
-    'PRIVMSG_NOTIFY' => 'Jauna Privātā Ziņa ir ieradies',
-    'TOPIC_NOTIFY' => 'Tēmu Atbildi Paziņojumu %s',
-    'USER_ACTIVATE' => 'Jauna aktivizēt savu kontu',
-    'USER_ACTIVATE_PASSWD' => 'Jaunu paroli aktivizēšana',
-    'USER_WELCOME' => 'Laipni lūdzam %s Forumos',
-    'USER_WELCOME_INACTIVE' => 'Laipni lūdzam %s Forumos',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
