@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'әкімшілік';
 $lang['FORUM'] = 'Форум';
 $lang['CATEGORY'] = 'санат';
 $lang['HIDE_CAT'] = 'санаттарын жасыру';
-$lang['HIDE_CAT_MESS'] = 'Санаттар бөлігі &middot; <a href="index.php?sh=1">Show All</a> «опциялар көрсету» жасырын';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Тақырып';
 $lang['TOPICS'] = 'Тақырыптар';
 $lang['TOPICS_SHORT'] = 'Тақырыптар';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Сіз жарамсыз Skype логин кірді';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Сіз жарамсыз Twitter логин кірді';
 
-$lang['FORUM_INDEX'] = '%s Форумдар тізімі'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Форумдар тізімі'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Жаңа тақырып';
 $lang['POST_NEW_RELEASE'] = 'Жаңа босату кейін';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'бір бетке хабарламалар';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Тақырып шолу';
 
-$lang['NO_POST_MODE'] = 'Жоқ кейінгі режимі таңдалған'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Жоқ кейінгі режимі таңдалған'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Жаңа тақырып';
 $lang['POST_A_REPLY'] = 'Жаңа жауапты орналастыру';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Белгіні алу барлық';
 $lang['CONFIRM_DELETE_PM'] = 'Сіз бұл хабарды жойғыңыз келгені рас па?';
 $lang['CONFIRM_DELETE_PMS'] = 'Егер сіз осы хабарларды жойғыңыз келгені рас па?';
 
-$lang['INBOX_SIZE'] = 'Кіріс жәшігі толық is<br /><b>%d%%</b>'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Кіріс жәшігі толық is<br /><b>%d%%</b>'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Сіздің Sentbox толық is<br /><b>%d%%</b>';
 $lang['SAVEBOX_SIZE'] = 'Сіздің Savebox толық is<br /><b>%d%%</b>';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Жылдар';
 $lang['NO_THEMES'] = 'деректер базасында жоқ Тақырыптар';
 $lang['TIMEZONE'] = 'Timezone';
 $lang['DATE_FORMAT_PROFILE'] = 'Күн пішімі';
-$lang['DATE_FORMAT_EXPLAIN'] = 'пайдаланылатын синтаксисі PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date () </a> функциясы бірдей.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'қол';
 $lang['SIGNATURE_EXPLAIN'] = 'Бұл сіз жасауға посттарға қосылады мүмкін мәтін блок болып табылады. а %d сипаты шегі бар';
 $lang['SIGNATURE_DISABLE'] = 'Форум ережелерін бұзғаны үшін қол';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'қысқаша';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Сіз осы сайтта кез келген форум іздеу рұқсатыңыз жоқ.';
 
 $lang['NO_SEARCH_MATCH'] = 'Ешқандай тақырыптар немесе хабарламалар іздеу шарттарын кездесті';
-$lang['FOUND_SEARCH_MATCH'] = 'Іздеу %d матчты табылған'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Іздеу %d табылған'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Іздеу %d матчты табылған'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Іздеу %d табылған'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Тым көп нәтиже табылған болуы мүмкін, неғұрлым нақты болуы көріңіз';
 
 $lang['CLOSE_WINDOW'] = 'Терезені жабу';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Қиғаш мәтін: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Астын сызу мәтін: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Сызылған мәтін: [s]text[/s] (Ctrl + S)';
 $lang['QUOTE_TITLE'] = 'Дәйексөз мәтіні: [quote]text[/quote] (Ctrl + Q)';
-$lang['IMG_TITLE'] = 'Суретті кірістіру: [img]http: // image_url[/img] (Ctrl + R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'URL салыңыз: [url]http: // url[/url] немесе [URL = HTTP: // URL] URL text[/url] (Ctrl + W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Код дисплей: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'тізім';
 $lang['LIST_TITLE'] = 'Тізімі: [list]text[/list] (Ctrl + L)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'отслежывателе Статистика';
 $lang['WHOIS_INFO'] = 'IP мекен-жайы туралы ақпарат';
 $lang['SHOW_MOD_HOME_PAGE'] = 'index.php модератор көрсету';
 $lang['PREMOD_HELP'] = 'Сіз бөлімшелердің, соның ішінде осы бөлімде V, #, немесе Т мәртебесіне бөлу, қажеті жоқ <h6>If <h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4>, тарату автоматты осы status</h6> алады';
-$lang['TOR_COMMENT'] = 'distribution</h4> <h6>Comment мәртебесі туралы <h4>Commentary сәтті releasers қателіктерін көрсетуге мүмкіндік береді. nedooformlennyh түзету release</h6> әрекет releasers қолжетімді нысанын мәртебелерінің кезде';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '</h6> (Times сағат зарядтау) бөлу </h4> <h6> саны пайдаланушы және олар үшін сыйлықақылар мөлшеріне жүзеге табыс етілді тұқым бонус <h4>Adding';
 $lang['SEED_BONUS_RELEASE'] = 'релиздерін N-санына';
 $lang['SEED_BONUS_POINTS'] = 'сағаттан бонустар';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Тіркеме саны Параметрле�
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Тіркеме опциялары';
 
 $lang['UPLOAD_DIRECTORY'] = 'Directory кері қотару';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Тіркемелер сіздің TorrentPier орнатудан салыстырмалы жолды енгізіңіз каталогын жүктеуге. Егер TorrentPier Орнату http://www.yourdomain.com/torrentpier орналасқан және Тіркеме жүктеу Directory http://www.yourdomain.com/torrentpier/files орналасқан Мысалы, егер файлдар \'\' енгізіңіз.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Тіркеме орналастыру Белгіше';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Бұл сурет Келесі жеке почта Тіркеме Сілтемелер үшін көрсетіледі. Сіз көрсетілетін белгішені қаламасаңыз, бұл өрісті бос қалдырыңыз. Бұл параметр Extension Топтар басқару параметрлер арқылы қайта жазылады болады.';
 $lang['ATTACH_TOPIC_ICON'] = 'Тіркеме курсорды тақырып';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Бос файл жазбасы';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Нобай Толықтырудың үшін resetted: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Тіркеме желісінің математикалық моделін үндестіру аяқталды.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync Тақырыптар';
 $lang['SYNC_POSTS'] = 'Sync Хабарламалар';
 $lang['SYNC_THUMBNAILS'] = 'Sync пиктограммалары';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'релиздер';
 
 $lang['BACK'] = 'артқа';
 $lang['ERROR_FORM'] = 'Жарамсыз өрістер';
-$lang['RELEASE_WELCOME'] = 'Pleae releae нысанды толтырыңыз';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'жаңа релизі';
 $lang['NEXT'] = 'жалғастыру';
 $lang['OTHER'] = 'басқа';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'басқа';
 $lang['TPL_EMPTY_FIELD'] = 'Сіз өрісті толтыру керек <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Сіз <b>%s</b> таңдау керек';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Емес, NUM';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - HTTP болу керек: // URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - болу керек HTTP: // IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'пән енгізіледі';
 $lang['TPL_POSTER'] = 'афиша';
 $lang['TPL_REQ_FILLING'] = 'толтыру талап';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'спойлер';
 $lang['TPL_IN_LINE'] = 'сол жолда';
 $lang['TPL_HEADER_ONLY'] = 'тек атауында';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Пайдаланушы аты жарамсыз Іздеу кірді';
-$lang['SEARCH_INVALID_EMAIL'] = 'Жарамсыз электрондық пошта мекенжайы Іздеу кірді';
-$lang['SEARCH_INVALID_IP'] = 'Жарамсыз IP мекенжайы Іздеу кірді';
-$lang['SEARCH_INVALID_GROUP'] = 'Жарамсыз тобы Іздеу кірді';
-$lang['SEARCH_INVALID_RANK'] = 'Жарамсыз атағы Іздеу кірді';
-$lang['SEARCH_INVALID_DATE'] = 'Жарамсыз күні Іздеу кірді';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Жарамсыз Post Іздеу кірді COUNT';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Жарамсыз Userfield деректер енгізілген';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Жарамсыз деректерді Соңғы болған уақыты іздеу үшін енгізілген';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Жарамсыз Тіл Таңдалған';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Жарамсыз уақыт белдеуі таңдалды';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Жарамсыз Форум Таңдалған';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Таңдалған топтың барл
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Таңдалған дәрежедегі барлық тасымалдаушылар қарау.';
 $lang['BANNED_USERS'] = 'тыйым салынған пайдаланушылар';
 $lang['DISABLED_USERS'] = 'мүгедек Пайдаланушылар';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Әкімшілер - Әкімші өкілеттіктер Барлық пайдаланушылар; Модераторлар - Барлық Модераторлар форум; Тыйым Пайдаланушылар - осы форумдарда тыйым салынған Барлық тіркелгілер; Мүгедектер Пайдаланушылар - мүгедектер шоттары бар барлық пайдаланушылар (немесе қолмен өшірілген немесе ешқашан олардың электрондық пошта мекенжайын расталған); мүгедектер мүше елдердің үкімет басшыларымен Пайдаланушылар - (Пайдаланушы басқару арқылы Дайын) алынып Жеке хабарлама төлемақысы бар пайдаланушыларды таңдайды';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'тең';
 $lang['GREATER_THAN'] = 'одан артық';
 $lang['LESS_THAN'] = 'Одан азырақ';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Сіз Postcount құнына негізделген пайдаланушылар үшін іздеуге болады. Сіз болады іздеу мәннен үлкен немесе аз нақты құны, немесе екі мәннің арасындағы. мысалы 10-15, (-), ауқымы іздеу істеу таңдау үшін, содан кейін сызықша арқылы бөлінген басталуы мен ауқымын мәндерін аяқталатын салып «тең»';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'түрлі профиль өрістерге негізделген пайдаланушылар үшін іздеу. Үлгі қалқаларды, жұлдызшамен (*) пайдалана отырып, қолдау көрсетіледі.';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Сіз бұл іздеу опциясын пайдаланып, олардың соңғы кіру күні негізделген пайдаланушылар үшін іздеуге болады';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Бұл олардың профайлы
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'олардың профильде нақты сағаттық белдеу таңдаған пайдаланушылар';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'нақты стилі таңдаған Дисплей пайдаланушылар.';
 $lang['MODERATORS_OF'] = 'модераторлары';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'нақты форумға рұқсаттарды модераторлау бар пайдаланушылар үшін іздеу. Модераторлау рұқсаттары пайдаланушы рұқсаттарын немесе оң Group Permssions бар тобында болып табылатын, не recoginised отыр.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s %d нәтиже (лар) берді. <a href="%s">another search</a> орындаңыз.';
 $lang['BANNED'] = 'тыйым';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Опциялар';
 $lang['SITEMAP_CREATE'] = 'Жасау / Сайт картасы жаңарту';
 $lang['SITEMAP_NOTIFY'] = 'Сайт картасы жаңа нұсқасы туралы хабарлау іздеу жүйелері';
 $lang['SITEMAP_WHAT_NEXT'] = 'Әрі қарай не істеу керек?';
-$lang['SITEMAP_GOOGLE_1'] = 'Сіздің Google тіркелгісін пайдаланып <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> сіздің сайты тіркеңіз.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = 'Сіз тіркелген сайттың <a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a>.';
-$lang['SITEMAP_YANDEX_1'] = 'Егер Яндекс тіркелгісін пайдаланып <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> сіздің сайты тіркеңіз.';
-$lang['SITEMAP_YANDEX_2'] = 'Сіз тіркелген сайттың <a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a>.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Егер Microsoft тіркелгісін пайдаланып <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> сіздің сайты тіркеңіз.';
 $lang['SITEMAP_BING_2'] = 'Сіз оның параметрлері тіркелген сайттың Сайт картасы қосыңыз.';
 $lang['SITEMAP_ADD_TITLE'] = 'Сайт картасы Қосымша беттер';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Барлық форумдарға жаһандық 
 $lang['HASH_INVALID'] = 'Hash %s жарамсыз';
 $lang['HASH_NOT_FOUND'] = 'тор белгісі бар босатыңыз %s табылған жоқ';
 
-$lang['TERMS_EMPTY_TEXT'] = '[URL = HTTP: //%s/admin/admin_terms.php] Admin / admin_terms.php[/url] [= орталығы туралау] Бұл бетте мәтіні бойынша редакциялайды. Бұл жолы тек administrators.[/align] көре аласыз';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Бұл бетте, Сіз пайдаланушыларға көрсетіледі ресурс негізгі ережелерін мәтінді көрсетуге болады.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Егер сіз робот емес екенін тексе�
 $lang['CAPTCHA_WRONG'] = 'Сіз робот емес екенін растай алмады,';
 $lang['CAPTCHA_SETTINGS'] = 'Егер сіз әлдеқашан кілттер жоқ, толық configured</h2><p>If <h2>ReCaptcha, сіз <a href="https://www.google.com/recaptcha/admin">https оны істеуге болады жатқан жоқ: сіз кілттерді генерациялау //www.google.com/recaptcha/admin</a>.<br />After, сіз файл кітапхана / конфигурациялық оларды қою қажет .php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'жоқ тақырыбы',
-    'GROUP_ADDED' => 'Сіз бұл пайдаланушылар тобы қосылды',
-    'GROUP_APPROVED' => 'Сіздің сұрау бекітілді',
-    'GROUP_REQUEST' => 'Сіздің топқа қосылу үшін сұрау жасалған',
-    'PRIVMSG_NOTIFY' => 'Жаңа Жеке хабарлама келді',
-    'TOPIC_NOTIFY' => 'Тақырып Жауап хабарлама %s',
-    'USER_ACTIVATE' => 'тіркелгіңізді белсендіру',
-    'USER_ACTIVATE_PASSWD' => 'Жаңа құпия сөз белсендіру',
-    'USER_WELCOME' => '%s Форумдар қош келдіңіз',
-    'USER_WELCOME_INACTIVE' => '%s Форумдар қош келдіңіз',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
