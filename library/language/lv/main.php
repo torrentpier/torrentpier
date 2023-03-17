@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Nākamajā Reizē';
 $lang['CRON_RUN_COUNT'] = 'Iet';
 $lang['CRON_MANAGE'] = 'Pārvaldīt';
 $lang['CRON_OPTIONS'] = 'Cron iespējas';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron iespējots';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron pārbaužu intervāls (sek.)';
