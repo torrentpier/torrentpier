@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = '다음 실행';
 $lang['CRON_RUN_COUNT'] = '실행';
 $lang['CRON_MANAGE'] = '리';
 $lang['CRON_OPTIONS'] = 'Cron 옵션';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron 사용';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron 확인 간격(sec)';
