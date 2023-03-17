@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Адміністрування';
 $lang['FORUM'] = 'Форум';
 $lang['CATEGORY'] = 'Категорія';
 $lang['HIDE_CAT'] = 'Приховати категорії';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Деякі категорії приховано налаштованими параметрами відображення';
+$lang['SHOW_ALL'] = 'Покажи все';
 $lang['TOPIC'] = 'Тема';
 $lang['TOPICS'] = 'Теми';
 $lang['TOPICS_SHORT'] = 'Теми';
@@ -572,7 +572,7 @@ $lang['YEARS'] = 'Років';
 $lang['NO_THEMES'] = 'В базі немає колірних схем';
 $lang['TIMEZONE'] = 'Часовий пояс';
 $lang['DATE_FORMAT_PROFILE'] = 'Формат дати';
-$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'Використаний синтаксис ідентичний функції PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a>.';
 $lang['SIGNATURE'] = 'Підпис';
 $lang['SIGNATURE_EXPLAIN'] = 'Це блок тексту, який може бути доданий до повідомлень, які Ви розміщуєте. Його максимальна довжина: %d символів';
 $lang['SIGNATURE_DISABLE'] = 'Підпис відключено за порушення правил форуму';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Курсив: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Підкреслений текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Закреслений текст: [s]текст[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Вставити зображення: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Посилання';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Вставте URL: [url]https://url[/url] або [url=https://url]текст URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Код: [code]код[/code] (Ctrl+K)';
 $lang['LIST'] = 'Список';
 $lang['LIST_TITLE'] = 'Список: [list]текст[/list] (Ctrl+І)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Статистика на трекері';
 $lang['WHOIS_INFO'] = 'Інформація про IP адресу';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Показувати на головній для модераторів';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерація</h4> <h6>Якщо у релізера немає роздач із статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> або <span class="tor-icon tor-dup">T</span> в поточному розділі, включаючи підрозділи, то роздача автоматично отримує цей статус</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Коментар щодо статусу розповсюдження</h4> <h6>Коментар дозволяє вказати на помилки, допущені релізеру. Якщо статуси неповні, менеджеру випуску доступна форма відповіді на випуск, щоб виправити випуск</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Додавання сідбонусу</h4><h6>Кількість роздач, що підтримуються користувачем та розмір нарахування бонусів за них (нарахування раз на годину)</h6>';
 $lang['SEED_BONUS_RELEASE'] = 'до N-числа релізів';
 $lang['SEED_BONUS_POINTS'] = 'бонусів на годину';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Занесення порожнього файлу'
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Оновлена мініатюра для вкладення: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Синхронізацію вкладень завершено.';
 $lang['SYNC_TOPICS'] = 'Синхронізація тем';
 $lang['SYNC_POSTS'] = 'Синхронізація повідомлень';
 $lang['SYNC_THUMBNAILS'] = 'Синхронізація мініатюр';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Наступний запуск';
 $lang['CRON_RUN_COUNT'] = 'Запусків';
 $lang['CRON_MANAGE'] = 'Керування';
 $lang['CRON_OPTIONS'] = 'Налаштування завдань';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'УВАГА! Запуск скриптів cron вимкнено. Щоб увімкнути його, установіть змінну APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Завдання увімкнено';
 $lang['CRON_CHECK_INTERVAL'] = 'Перевірка (с)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Релізи';
 
 $lang['BACK'] = 'Назад';
 $lang['ERROR_FORM'] = 'Невірно заповнені поля';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Будь ласка, заповніть форму випуску';
 $lang['NEW_RELEASE'] = 'Новий реліз';
 $lang['NEXT'] = 'Продовжити';
 $lang['OTHER'] = 'Інший';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Інший';
 $lang['TPL_EMPTY_FIELD'] = 'Ви повинні заповнити поле <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Ви повинні обрати <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - не число';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> – Має бути https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Має бути https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'помістити в заголовок';
 $lang['TPL_POSTER'] = 'постер';
 $lang['TPL_REQ_FILLING'] = 'вимагає заповнення';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'спойлер';
 $lang['TPL_IN_LINE'] = 'в тому ж рядку';
 $lang['TPL_HEADER_ONLY'] = 'тільки в заголовку';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Для пошуку введено недійсне ім’я користувача';
+$lang['SEARCH_INVALID_EMAIL'] = 'Для пошуку введено недійсну електронну адресу';
+$lang['SEARCH_INVALID_IP'] = 'Для пошуку введено недійсну IP-адресу';
+$lang['SEARCH_INVALID_GROUP'] = 'Для пошуку введено недійсну групу';
+$lang['SEARCH_INVALID_RANK'] = 'Для пошуку введено недійсний рейтинг';
+$lang['SEARCH_INVALID_DATE'] = 'Для пошуку введено недійсну дату';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Для пошуку введено недійсну кількість публікацій';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Введені неправильні дані користувача';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Введено недійсну дату для останнього відвіданого пошуку';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Обрана неправильна мова';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Вибрано неправильний часовий пояс';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Вибрано неправильний форум';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Переглянути всіх член
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Переглянути всіх користувачів із обраним званням.';
 $lang['BANNED_USERS'] = 'Забанені користувачі';
 $lang['DISABLED_USERS'] = 'Вимкнені користувачі';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Адміністратори – усі користувачі з повноваженнями адміністратора; Модератори - всі модератори форуму; Забанені користувачі - усі облікові записи, які були забанені на цих форумах; Користувачі з обмеженими можливостями – усі користувачі з вимкненими обліковими записами (вимкнені вручну або не підтверджені адреси електронної пошти); Користувачі з вимкненими приватними повідомленнями - вибирає користувачів, які мають привілеї особистих повідомлень, видалені (Виконується за допомогою керування користувачами)';
+$lang['POSTCOUNT'] = 'Кількість публікацій';
 $lang['EQUALS'] = 'Дорівнює';
 $lang['GREATER_THAN'] = 'Більше ніж';
 $lang['LESS_THAN'] = 'Менше ніж';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Ви можете шукати користувачів на основі значення кількості публікацій. Ви можете шукати за певним значенням, більшим або меншим за значення або між двома значеннями. Щоб виконати пошук у діапазоні, виберіть «Дорівнює», а потім введіть початкове та кінцеве значення діапазону, розділивши їх тире (-), наприклад, 10-15';
 $lang['USERFIELD'] = 'Поле профілю';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Пошук користувачів, що базується на різних полях профілю. В якості маски можна використовувати зірочки (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Ви можете шукати користувачів за датою їх останнього входу на трекер, використовуючи цю пошукову можливість';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Пошук користувачів, �
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Пошук користувачів, які обрали заданий часовий пояс у своєму профілі';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Пошук користувачів, що обрали визначений стиль в своєму профілі';
 $lang['MODERATORS_OF'] = 'Модератори';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Пошук користувачів із правами модерування певного форуму. Дозволи на модерування розпізнаються або за дозволами користувача, або за належністю до групи з відповідними дозволами групи.';
 
 $lang['SEARCH_USERS_NEW'] = '%s дав %d результат(ів). <a href="%s">Новий пошук</a>.';
 $lang['BANNED'] = 'Забанено';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Глобальна стрічка для всіх �
 $lang['HASH_INVALID'] = 'Хеш %s некоректний';
 $lang['HASH_NOT_FOUND'] = 'Роздачу з хешем %s не знайдено';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Текст цієї сторінки редагується за адресою: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Цей рядок можуть бачити тільки адміністратори.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На цій сторінці Ви можете вказати текст основних правил ресурсу, які відображаються для користувачів.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha налаштована не повн�
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Без теми',
+    'GROUP_ADDED' => 'Вас додали до групи користувачів',
+    'GROUP_APPROVED' => 'Ваш запит на приєднання до групи користувачів задоволено',
+    'GROUP_REQUEST' => 'Запит на вступ до вашої групи користувачів',
+    'PRIVMSG_NOTIFY' => 'Нове приватне повідомлення',
+    'TOPIC_NOTIFY' => 'Повідомлення про відповідь у потоці %s',
+    'USER_ACTIVATE' => 'Повторна активація облікового запису',
+    'USER_ACTIVATE_PASSWD' => 'Підтвердження нового пароля',
+    'USER_WELCOME' => 'Ласкаво просимо на сайт %s',
+    'USER_WELCOME_INACTIVE' => 'Ласкаво просимо на сайт %s',
 ];
