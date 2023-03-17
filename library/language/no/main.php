@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Administrere';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Skjul kategorier';
-$lang['HIDE_CAT_MESS'] = 'En del av kategoriene er skjult "valg Show" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Emnet';
 $lang['TOPICS'] = 'Emner';
 $lang['TOPICS_SHORT'] = 'Emner';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Du har skrevet inn et ugyldig Skype-logg inn';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Du har skrevet inn et ugyldig Twitter-logg';
 
-$lang['FORUM_INDEX'] = '%s Forum Index'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forum Index'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Legge nytt emne';
 $lang['POST_NEW_RELEASE'] = 'Innlegget nye utgivelsen';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'innlegg per side';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Emnet anmeldelse';
 
-$lang['NO_POST_MODE'] = 'Ingen innlegg modus er valgt'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Ingen innlegg modus er valgt'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Legge nytt emne';
 $lang['POST_A_REPLY'] = 'Innlegget nye svar';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Opphev alle';
 $lang['CONFIRM_DELETE_PM'] = 'Er du sikker på at du vil slette denne meldingen?';
 $lang['CONFIRM_DELETE_PMS'] = 'Er du sikker på at du vil slette disse meldingene?';
 
-$lang['INBOX_SIZE'] = 'Innboksen full is<br /><b>%d%%</b>'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Innboksen full is<br /><b>%d%%</b>'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Din Sentbox is<br /><b>%d%%</b> full';
 $lang['SAVEBOX_SIZE'] = 'Din Savebox is<br /><b>%d%%</b> full';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'År';
 $lang['NO_THEMES'] = 'Ingen Temaer I databasen';
 $lang['TIMEZONE'] = 'Tidssone';
 $lang['DATE_FORMAT_PROFILE'] = 'Dato format';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Syntaksen som brukes er identisk med PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funksjon.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Signatur';
 $lang['SIGNATURE_EXPLAIN'] = 'Dette er en blokk med tekst som kan legges til innlegg du skriver. Det er en %d tegn';
 $lang['SIGNATURE_DISABLE'] = 'Logget av for brudd på forumregler';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Kort';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Du har ikke tilgang til å søke i forumet på denne siden.';
 
 $lang['NO_SEARCH_MATCH'] = 'Ingen emner eller innlegg møtt dine søkekriterier';
-$lang['FOUND_SEARCH_MATCH'] = 'Søk funnet %d match'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Søk funnet %d kamper'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Søk funnet %d match'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Søk funnet %d kamper'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'For mange resultater kan bli funnet, vennligst prøv å være mer spesifikk';
 
 $lang['CLOSE_WINDOW'] = 'Lukk Vindu';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Kursiv tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understreket tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Overstreke tekst: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Sitat tekst: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Sett inn bilde: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Sett inn URL: [url]http://url[/url] eller [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kode display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Listen';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistikk på tracker';
 $lang['WHOIS_INFO'] = 'Informasjon om IP-adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Vis på den moderatorer index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du ikke har utdelinger til status v, #, eller T i dette avsnittet, inkludert seksjoner, distribusjon vil automatisk motta denne status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary om status for distribution</h4> <h6>Comment vellykket kan du angi releasers feil. Når nedooformlennyh statuser releasers tilgjengelig form av responsen av de korreksjon release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding frø bonus </h4> <h6> Antall fordelinger er delt ut av brukeren og størrelsen på bonuser for dem (lading ganger i timen) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'til N-antall utgivelser';
 $lang['SEED_BONUS_POINTS'] = 'bonuser i en time';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Vedlegg Antall Innstillinger';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Vedlegg Valg';
 
 $lang['UPLOAD_DIRECTORY'] = 'Laste Opp Katalogen';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Angi den relative banen fra TorrentPier installasjon til Vedlegg last opp katalog. For eksempel, skriv inn \'filer\' hvis din TorrentPier Installasjonen er plassert på http://www.yourdomain.com/torrentpier og Vedlegget Laste opp Katalogen ligger på http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Vedlegg Innlegg Ikonet';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Dette Bildet vises ved siden av Vedlegg Lenker i individuelle Innlegg. Lar dette feltet stå tomt hvis du ikke vil på et ikon for å bli vist. Denne Innstillingen vil bli overskrevet av Innstillingene i Extension Grupper Management.';
 $lang['ATTACH_TOPIC_ICON'] = 'Vedlegg Emnet-Ikonet';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tom Fil Oppføring';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail resetted for Vedlegget: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Vedlegg Synkronisering Ferdig.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync Emner';
 $lang['SYNC_POSTS'] = 'Sync Innlegg';
 $lang['SYNC_THUMBNAILS'] = 'Sync Miniatyrbilder';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'Utgivelser';
 
 $lang['BACK'] = 'Tilbake';
 $lang['ERROR_FORM'] = 'Ugyldig felt';
-$lang['RELEASE_WELCOME'] = 'Pleae fylle i form releae';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Ny utgivelse';
 $lang['NEXT'] = 'Fortsett';
 $lang['OTHER'] = 'Andre';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'Andre';
 $lang['TPL_EMPTY_FIELD'] = 'Du må fylle ut feltet <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Du må velge <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ikke et tall';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Må være http:// - URL-er';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Må være http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'sette inn emnet';
 $lang['TPL_POSTER'] = 'plakaten';
 $lang['TPL_REQ_FILLING'] = 'krever fylling';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'i samme linje';
 $lang['TPL_HEADER_ONLY'] = 'bare i en tittel';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Ugyldig brukernavn inn for å Søke';
-$lang['SEARCH_INVALID_EMAIL'] = 'Ugyldig e-postadresse oppgitt til Søk';
-$lang['SEARCH_INVALID_IP'] = 'Ugyldig IP-adressen som ble oppgitt til å Søke';
-$lang['SEARCH_INVALID_GROUP'] = 'Ugyldig Gruppen inn for å Søke';
-$lang['SEARCH_INVALID_RANK'] = 'Ugyldig verdi angitt for å Søke';
-$lang['SEARCH_INVALID_DATE'] = 'Ugyldig Dato inn for å Søke';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Ugyldig Innlegget Telle inn for å Søke';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Ugyldig Userfield data inn';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Ugyldige data som er skrevet inn for Sist Besøkt søk';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Ugyldig Språk Som Er Valgt';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Ugyldig Tidssonen Valgt';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Ugyldig Forum Valgt';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Vis alle medlemmene i den valgte gruppen
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Vis alle bærere av den valgte verdi.';
 $lang['BANNED_USERS'] = 'Sperrede Brukere';
 $lang['DISABLED_USERS'] = 'Funksjonshemmede Brukere';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratorer - Alle brukere med administratortilgang; Moderatorer - Alle forum moderatorer; Utestengt Brukere - Alle kontoer som har blitt utestengt på disse fora; Funksjonshemmede Brukere Alle brukere med funksjonshemmede kontoer (enten deaktivert manuelt eller aldri verifisert e-postadresse); Brukere med funksjonshemmede PMs - Velger-brukere som har Private Meldinger priviliges fjernet (Gjøres via brukeradministrasjon)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Tilsvarer';
 $lang['GREATER_THAN'] = 'Større enn';
 $lang['LESS_THAN'] = 'Mindre enn';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Du kan søke etter brukere basert på Postcount verdi. Du kan enten søke etter en bestemt verdi som er større enn eller mindre enn en verdi eller mellom to verdier. For å gjøre utvalg søk, velg "er Lik" og deretter sette den begynner og slutter verdier av området er atskilt av en bindestrek (-), f.eks. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Søk etter brukere basert på ulike profil felt. Jokertegn støttes ved hjelp av en asteriks (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Du kan søke etter brukere basert på deres siste logg inn dato ved hjelp av dette alternativet søk';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Dette vil vise brukere som har valgt e
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Brukere som har valgt en bestemt tidssone i profilen sin';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Vise brukere som har valgt en bestemt stil.';
 $lang['MODERATORS_OF'] = 'Moderatorer av';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Søk etter brukere med Moderere tillatelser til et spesifikt forum. Modererende tillatelser er recoginised enten av Brukeren Tillatelser eller ved å være i en Gruppe med riktig Gruppe Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s gitt %d resultat(er). Utføre <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Utestengt';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Valg';
 $lang['SITEMAP_CREATE'] = 'Opprette / oppdatere sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Informere søkemotorene om nye versjonen av sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Hva du skal gjøre neste?';
-$lang['SITEMAP_GOOGLE_1'] = 'Registrer nettstedet ditt på <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> ved hjelp av Google-kontoen din.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> av nettstedet du registrerte.';
-$lang['SITEMAP_YANDEX_1'] = 'Registrer nettstedet ditt på <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> bruke din Yandex-konto.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> av nettstedet du registrerte.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Registrer nettstedet ditt på <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> med din Microsoft-konto.';
 $lang['SITEMAP_BING_2'] = 'Legg til sitemap av nettstedet du registrerte i sine innstillinger.';
 $lang['SITEMAP_ADD_TITLE'] = 'Flere sider for sidekart';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Global feed for alle fora';
 $lang['HASH_INVALID'] = 'Hash %s er ugyldig';
 $lang['HASH_NOT_FOUND'] = 'Utgivelse med hash %s ikke funnet';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]teksten på denne siden er redigert: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Denne linjen kan se er det bare administratorer.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På denne siden kan du angi teksten til de grunnleggende reglene i ressurs er vist til brukere.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Sjekk at du ikke er en robot';
 $lang['CAPTCHA_WRONG'] = 'Du kunne ikke bekrefte at du ikke er en robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ikke er fullt ut configured</h2><p>if du ikke allerede har generert tastene, kan du gjøre det på <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After du generere nøkler, må du sette dem på fil-bibliotek/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Ingen Emnet',
-    'GROUP_ADDED' => 'Du har blitt lagt til dette brukergruppe',
-    'GROUP_APPROVED' => 'Din forespørsel er godkjent',
-    'GROUP_REQUEST' => 'En forespørsel om å bli med i gruppen din har blitt gjort',
-    'PRIVMSG_NOTIFY' => 'Ny Privat Melding har kommet',
-    'TOPIC_NOTIFY' => 'Emnet Svar Varsling %s',
-    'USER_ACTIVATE' => 'Aktivere kontoen din på nytt',
-    'USER_ACTIVATE_PASSWD' => 'Nytt passord aktivering',
-    'USER_WELCOME' => 'Velkommen til %s Fora',
-    'USER_WELCOME_INACTIVE' => 'Velkommen til %s Fora',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
