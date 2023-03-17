@@ -320,10 +320,12 @@ Ajax.prototype = {
   request: {},  // request data
   params: {},  // action params, format: ajax.params[ElementID] = { param: "val" ... }
   form_token: '',
+  hide_loading: null,
 
-  exec: function (request) {
+  exec: function (request, hide_loading = false) {
     this.request[request.action] = request;
     request['form_token'] = this.form_token;
+    this.hide_loading = hide_loading;
     $.ajax({
       url: this.url,
       type: this.type,
@@ -451,12 +453,16 @@ Ajax.prototype = {
 $(document).ready(function () {
   // Setup ajax-loading box
   $("#ajax-loading").ajaxStart(function () {
-    $("#ajax-error").hide();
-    $(this).show();
-    ajax.setStatusBoxPosition($(this));
+    if (ajax.hide_loading === false) {
+      $("#ajax-error").hide();
+      $(this).show();
+      ajax.setStatusBoxPosition($(this));
+    }
   });
   $("#ajax-loading").ajaxStop(function () {
-    $(this).hide();
+    if (ajax.hide_loading === false) {
+      $(this).hide();
+    }
   });
 
   // Setup ajax-error box
