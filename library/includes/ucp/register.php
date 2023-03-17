@@ -609,7 +609,6 @@ if ($submit && !$errors) {
 
                 $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
                 $emailer->set_to([$email => $username]);
-                $emailer->set_subject($subject);
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE']);
 
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
