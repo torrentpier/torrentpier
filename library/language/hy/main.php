@@ -2389,6 +2389,7 @@ $lang['CRON_NEXT_RUN'] = 'Հաջորդ Մեկնարկը';
 $lang['CRON_RUN_COUNT'] = 'Աշխատում է';
 $lang['CRON_MANAGE'] = 'Կառավարել';
 $lang['CRON_OPTIONS'] = 'Տարբերակները хрон';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Хрон ներառված';
 $lang['CRON_CHECK_INTERVAL'] = 'Хрон ընդմիջումից ստուգման (վրկ)';
