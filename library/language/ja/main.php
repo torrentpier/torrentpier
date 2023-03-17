@@ -2390,6 +2390,7 @@ $lang['CRON_NEXT_RUN'] = 'ジが動的にバインディングを生成';
 $lang['CRON_RUN_COUNT'] = '走る';
 $lang['CRON_MANAGE'] = '管理';
 $lang['CRON_OPTIONS'] = 'Cronのオプション';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cronを有効に';
 $lang['CRON_CHECK_INTERVAL'] = 'Cronのチェック間隔（秒）';
