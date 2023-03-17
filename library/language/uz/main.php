@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'ma\'murlashtirish';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'kategoriya';
 $lang['HIDE_CAT'] = 'yashir kategoriyalar';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Ba\'zi toifalar moslashtirilgan displey opsiyalari orqali yashiringan';
+$lang['SHOW_ALL'] = 'Hammasini ko\'rsatish';
 $lang['TOPIC'] = 'mavzu';
 $lang['TOPICS'] = 'Mavzular';
 $lang['TOPICS_SHORT'] = 'Mavzular';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Kursiv matn: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Tagiga chizilgan matn: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Strikeout matni: [s]text[/s] (Ctrl + S)';
 $lang['QUOTE_TITLE'] = 'Iqtibos matni: [quote]text[/quote] (Ctrl + Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Rasmni kiritish: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'URL kiriting: [url]https://url[/url] yoki [url=https://url]URL matn[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kodi ko\'rsatish: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'ro\'yxat';
 $lang['LIST_TITLE'] = 'Ro\'yxati: [list]text[/list] (Ctrl + L)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'reyting www.uz Statistika';
 $lang['WHOIS_INFO'] = 'IP manzil haqida ma\'lumot';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Moderatorlar index.php ko\'rsatish';
 $lang['PREMOD_HELP'] = 'Agar pastki jumladan ushbu bo\'limdagi, V, #, yoki T holati uchun tarqatish yo\'q <h6>If <h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4>, tarqatish avtomatik ravishda bu status</h6> olasiz';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Tarqatish holatiga sharh</h4> <h6>Izoh relizchiga qilingan xatolarni ko\'rsatish imkonini beradi. Agar statuslar to\'liq bo\'lmasa, reliz boshqaruvchisiga</h6>chiqarishni to\'g\'rilash uchun relizga javob shakli mavjud';
 $lang['SEED_BONUS_ADD'] = 'dağıtımları <h4>Adding urug\'i bonus </h4> <h6> soni </h6> foydalanuvchi va (marta bir soat zaryad) ular uchun bonuslar hajmi tomonidan topshirildi';
 $lang['SEED_BONUS_RELEASE'] = 'relizlar N-raqamiga';
 $lang['SEED_BONUS_POINTS'] = 'Bir soat ichida bonuslar';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Bo\'sh Fayl kirishi';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail ilovada uchun resetted: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Biriktirma sinxronizatsiyasi tugallandi.';
 $lang['SYNC_TOPICS'] = 'Sinx Mavzular';
 $lang['SYNC_POSTS'] = 'Sinx Xabarlar';
 $lang['SYNC_THUMBNAILS'] = 'Sinx Thumbnails';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Keyingi Run';
 $lang['CRON_RUN_COUNT'] = 'ishlaydi';
 $lang['CRON_MANAGE'] = 'boshqarish';
 $lang['CRON_OPTIONS'] = 'cron imkoniyatlari';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Ogohlantirish! Cron skriptlarini ishga tushirish o\'chirilgan. Uni yoqish uchun APP_CRON_ENABLED o‘zgaruvchisini o‘rnating.';
 
 $lang['CRON_ENABLED'] = 'cron yoqilgan';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron tekshirish interval (sek)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'relizlar';
 
 $lang['BACK'] = 'orqaga';
 $lang['ERROR_FORM'] = 'noto\'g\'ri sohalar';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Iltimos, chiqarish shaklini to\'ldiring';
 $lang['NEW_RELEASE'] = 'Yangi relizlar';
 $lang['NEXT'] = 'Davom';
 $lang['OTHER'] = 'boshqa';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'boshqa';
 $lang['TPL_EMPTY_FIELD'] = 'Siz maydonini to\'ldirish kerak <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Siz <b>%s</b> tanlashingiz kerak';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - emas bir Sah';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - https:// URL boʻlishi kerak';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - https:// IMG_URL boʻlishi kerak';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'mavzu tushirildi';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'to\'ldirish talab';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'Shu qatorga';
 $lang['TPL_HEADER_ONLY'] = 'faqat sarlavhasida';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Qidirish uchun noto‘g‘ri foydalanuvchi nomi kiritildi';
+$lang['SEARCH_INVALID_EMAIL'] = 'Qidirish uchun yaroqsiz e-pochta manzili kiritildi';
+$lang['SEARCH_INVALID_IP'] = 'Qidirish uchun yaroqsiz IP-manzil kiritildi';
+$lang['SEARCH_INVALID_GROUP'] = 'Qidirish uchun yaroqsiz guruh kiritildi';
+$lang['SEARCH_INVALID_RANK'] = 'Qidiruv uchun yaroqsiz daraja kiritildi';
+$lang['SEARCH_INVALID_DATE'] = 'Qidirish uchun sana noto‘g‘ri kiritilgan';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Qidirish uchun noto‘g‘ri postlar kiritildi';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Noto\'g\'ri Userfield ma\'lumotlar kiritilgan';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Oxirgi tashrif buyurilgan qidiruv uchun sana noto‘g‘ri kiritilgan';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Noto\'g\'ri Til Tanlangan';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Noto\'g\'ri Vaqt vaqti Tanlangan';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Noto\'g\'ri Forum Tanlangan';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Tanlangan guruhning barcha a\'zolarini k
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Tanlangan unvonidan barcha tashuvchi ko\'rish.';
 $lang['BANNED_USERS'] = 'man foydalanuvchilar';
 $lang['DISABLED_USERS'] = 'nogironlar foydalanuvchilar';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratorlar - Administrator vakolatiga ega barcha foydalanuvchilar; Moderatorlar - barcha forum moderatorlari; Taqiqlangan foydalanuvchilar - ushbu forumlarda taqiqlangan barcha hisoblar; Nogiron foydalanuvchilar - o\'chirilgan hisoblari bo\'lgan barcha foydalanuvchilar (qo\'lda o\'chirilgan yoki elektron pochta manzilini hech qachon tasdiqlamagan); Nogiron PMli foydalanuvchilar - Shaxsiy xabarlar imtiyozlari olib tashlangan foydalanuvchilarni tanlaydi (Foydalanuvchilarni boshqarish orqali amalga oshiriladi)';
+$lang['POSTCOUNT'] = 'Xabarlar soni';
 $lang['EQUALS'] = 'teng';
 $lang['GREATER_THAN'] = 'kattaroqdir';
 $lang['LESS_THAN'] = 'Kamroq';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Siz foydalanuvchilarni postlar soni qiymatiga qarab qidirishingiz mumkin. Siz ma\'lum bir qiymat bo\'yicha, qiymatdan katta yoki kichik yoki ikkita qiymat orasida qidirishingiz mumkin. Diapazonni qidirish uchun "Teng" ni tanlang, so\'ngra diapazonning boshlang\'ich va yakuniy qiymatlarini chiziqcha (-) bilan ajrating, masalan, 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'turli profili sohalarda asoslangan foydalanuvchilar uchun qidirish. Belgilaridan yulduzcha (*) yordamida qo\'llab-quvvatlanadi.';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Siz ushbu qidiruv variantni foydalanib, ularning so\'nggi kirish sana asoslangan foydalanuvchilar uchun qo\'ng\'iroq qilishingiz mumkin';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Bu ularning Profil ma\'lum bir til tan
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Ularning profili ma\'lum bir vaqt zonasini tanladingiz foydalanuvchilar';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'muayyan uslub tanladingiz ko\'rsatish foydalanuvchilar.';
 $lang['MODERATORS_OF'] = 'ning Moderatorlar';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Muayyan forumga Moderatsiya ruxsatiga ega foydalanuvchilarni qidiring. Moderatsiya ruxsatlari foydalanuvchi ruxsatlari yoki to\'g\'ri guruh ruxsatlariga ega bo\'lgan guruhda bo\'lish orqali tan olinadi.';
 
 $lang['SEARCH_USERS_NEW'] = '%s %d natija (lar) berdi. <a href="%s">another search</a> amalga oshirish.';
 $lang['BANNED'] = 'man';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Barcha forumlar uchun global ovqatlanish';
 $lang['HASH_INVALID'] = 'Hash %s haqiqiy emas';
 $lang['HASH_NOT_FOUND'] = 'hash %s topilmadi bilan ozod';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Ushbu sahifa matni tahrirlangan: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu qator faqat ma\'murlarni ko\'rishi mumkin.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ushbu sahifada, siz resurs asosiy qoidalarini matn foydalanuvchilarga ko\'rsatish mumkin.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = 'Agar siz allaqachon kalitlari hosil yo\'q configure
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Mavzu yo\'q',
+    'GROUP_ADDED' => 'Siz foydalanuvchilar guruhiga qo\'shildingiz',
+    'GROUP_APPROVED' => 'Foydalanuvchilar guruhiga qo‘shilish so‘rovingiz qabul qilindi',
+    'GROUP_REQUEST' => 'Foydalanuvchi guruhingizga qo\'shilish so\'rovi',
+    'PRIVMSG_NOTIFY' => 'Yangi shaxsiy xabar',
+    'TOPIC_NOTIFY' => 'Mavzuda javob bildirishnomasi %s',
+    'USER_ACTIVATE' => 'Hisobni qayta faollashtirish',
+    'USER_ACTIVATE_PASSWD' => 'Yangi parol tasdiqlanmoqda',
+    'USER_WELCOME' => 'Saytga xush kelibsiz %s',
+    'USER_WELCOME_INACTIVE' => 'Saytga xush kelibsiz %s',
 ];
