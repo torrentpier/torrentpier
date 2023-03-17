@@ -43,6 +43,8 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
 
         if (!${$online_list} = CACHE('bb_cache')->get($online_list)) {
             require INC_DIR . '/online_userlist.php';
+
+            ${$online_list} = CACHE('bb_cache')->get($online_list);
         }
     }
 
