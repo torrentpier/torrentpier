@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Διαχείριση';
 $lang['FORUM'] = 'Φόρουμ';
 $lang['CATEGORY'] = 'Κατηγορία';
 $lang['HIDE_CAT'] = 'Απόκρυψη κατηγοριών';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Ορισμένες κατηγορίες κρύβονται από προσαρμοσμένες επιλογές εμφάνισης';
+$lang['SHOW_ALL'] = 'Προβολή όλων';
 $lang['TOPIC'] = 'Το θέμα';
 $lang['TOPICS'] = 'Θέματα';
 $lang['TOPICS_SHORT'] = 'Θέματα';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Πλάγια γραφή: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Υπογράμμιση κειμένου: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Κεραυνός κείμενο: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Παραθέτω το κείμενο: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Εισαγωγή εικόνας: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Εισαγωγή διεύθυνσης URL: [url]https://url[/url] ή [url=https://url]Κείμενο URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Κώδικα επίδειξης: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Λίστα';
 $lang['LIST_TITLE'] = 'Λίστα: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Τα στατιστικά στοιχεία του trac
 $lang['WHOIS_INFO'] = 'Πληροφορίες σχετικά με τη διεύθυνση IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Εμφάνιση στο συντονιστές της index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Προ-moderation</h4> <h6>If δεν έχετε διανομές με το καθεστώς των β, #, ή T σε αυτή την ενότητα, συμπεριλαμβανομένης και υποενότητες, η διανομή θα λάβετε αυτόματα αυτό status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Σχόλιο σχετικά με την κατάσταση μιας διανομής</h4> <h6>Το σχόλιο σάς επιτρέπει να επισημάνετε τα σφάλματα που έγιναν στον εκδότη. Εάν οι καταστάσεις είναι ελλιπείς, μια φόρμα απάντησης έκδοσης είναι διαθέσιμη στον διαχειριστή έκδοσης για τη διόρθωση της έκδοσης</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding σπόρων μπόνους </h4> <h6> Αριθμός των διανομών που δίδονται από το χρήστη και το μέγεθος των μπόνους για τους (φόρτιση φορές την ώρα) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-αριθμός κυκλοφορίες';
 $lang['SEED_BONUS_POINTS'] = 'μπόνους σε μια ώρα';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Κενό Αρχείο Εισόδου';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Μικρογραφία είναι για Σύνδεση: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Ο συγχρονισμός συνημμένου ολοκληρώθηκε.';
 $lang['SYNC_TOPICS'] = 'Θέματα Συγχρονισμού';
 $lang['SYNC_POSTS'] = 'Συγχρονίσετε Θέσεις';
 $lang['SYNC_THUMBNAILS'] = 'Sync Μικρογραφίες';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Την Επόμενη Εκτέλεση';
 $lang['CRON_RUN_COUNT'] = 'Τρέχει';
 $lang['CRON_MANAGE'] = 'Διαχείριση';
 $lang['CRON_OPTIONS'] = 'Cron επιλογές';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Προειδοποίηση! Η εκτέλεση σεναρίων cron είναι απενεργοποιημένη. Για να το ενεργοποιήσετε, ορίστε τη μεταβλητή APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron ενεργοποιημένη';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron check interval (sec)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Κυκλοφορίες';
 
 $lang['BACK'] = 'Πίσω';
 $lang['ERROR_FORM'] = 'Τα μη έγκυρα πεδία';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Συμπληρώστε τη φόρμα απελευθέρωσης';
 $lang['NEW_RELEASE'] = 'Νέα έκδοση';
 $lang['NEXT'] = 'Συνεχίστε';
 $lang['OTHER'] = 'Άλλα';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Άλλα';
 $lang['TPL_EMPTY_FIELD'] = 'Θα πρέπει να συμπληρώσετε το πεδίο <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Θα πρέπει να επιλέξετε <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Πρέπει να είναι https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Πρέπει να είναι https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'βάλτε στο θέμα';
 $lang['TPL_POSTER'] = 'αφίσα';
 $lang['TPL_REQ_FILLING'] = 'απαιτεί τη συμπλήρωση';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'στην ίδια γραμμή';
 $lang['TPL_HEADER_ONLY'] = 'μόνο σε έναν τίτλο';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Εισήχθη μη έγκυρο όνομα χρήστη για αναζήτηση';
+$lang['SEARCH_INVALID_EMAIL'] = 'Εισάχθηκε μη έγκυρη διεύθυνση email για αναζήτηση';
+$lang['SEARCH_INVALID_IP'] = 'Εισάχθηκε μη έγκυρη διεύθυνση IP για αναζήτηση';
+$lang['SEARCH_INVALID_GROUP'] = 'Εισήχθη μη έγκυρη ομάδα για αναζήτηση';
+$lang['SEARCH_INVALID_RANK'] = 'Εισήχθη μη έγκυρη κατάταξη για αναζήτηση';
+$lang['SEARCH_INVALID_DATE'] = 'Μη έγκυρη ημερομηνία εισαγωγής για αναζήτηση';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Εισήχθη μη έγκυρος αριθμός αναρτήσεων για αναζήτηση';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Μη έγκυρη Userfield δεδομένα που έχουν εισαχθεί';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Εισαγάγετε μη έγκυρη ημερομηνία για την αναζήτηση της τελευταίας επίσκεψης';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Μη Έγκυρη Γλώσσα Που Έχετε Επιλέξει';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Μη Έγκυρη Ζώνη Ώρας Επιλεγμένο';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Άκυρο Το Φόρουμ Που Επιλέγεται';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Δείτε όλα τα μέλη της �
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Δείτε όλους τους αερομεταφορείς της επιλεγμένης αξίας.';
 $lang['BANNED_USERS'] = 'Αποκλεισμένοι Χρήστες';
 $lang['DISABLED_USERS'] = 'Οι Χρήστες Με Ειδικές Ανάγκες';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Διαχειριστές - Όλοι οι χρήστες με εξουσίες διαχειριστή. Συντονιστές - Όλοι οι συντονιστές του φόρουμ. Απαγορευμένοι χρήστες - Όλοι οι λογαριασμοί που έχουν αποκλειστεί σε αυτά τα φόρουμ. Απενεργοποιημένοι χρήστες - Όλοι οι χρήστες με απενεργοποιημένους λογαριασμούς (είτε έχουν απενεργοποιηθεί με μη αυτόματο τρόπο είτε δεν επαληθεύτηκε ποτέ η διεύθυνση email τους). Χρήστες με απενεργοποιημένα PM - Επιλέγει χρήστες που έχουν αφαιρέσει τα προνόμια των Ιδιωτικών Μηνυμάτων (Έγινε μέσω της Διαχείρισης χρηστών)';
+$lang['POSTCOUNT'] = 'Καταμέτρηση αναρτήσεων';
 $lang['EQUALS'] = 'Ισούται με';
 $lang['GREATER_THAN'] = 'Μεγαλύτερη από';
 $lang['LESS_THAN'] = 'Λιγότερο από';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Μπορείτε να αναζητήσετε χρήστες με βάση την τιμή του πλήθους αναρτήσεων. Μπορείτε είτε να κάνετε αναζήτηση με βάση μια συγκεκριμένη τιμή, μεγαλύτερη ή μικρότερη από μια τιμή είτε μεταξύ δύο τιμών. Για να κάνετε την αναζήτηση εύρους, επιλέξτε "Equals" και στη συνέχεια βάλτε τις τιμές αρχής και τέλους του εύρους χωρισμένες με μια παύλα (-), π.χ. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Αναζήτηση για χρήστες με βάση διάφορα πεδία προφίλ. Μπαλαντέρ υποστηρίζονται χρησιμοποιώντας τον αστερίσκο (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Μπορείτε να αναζητήσετε χρήστες με βάση την τελευταία ημερομηνία σύνδεσης χρησιμοποιώντας αυτή την επιλογή αναζήτησης';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Αυτό θα εμφανίσει το�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Οι χρήστες που έχουν επιλέξει μια συγκεκριμένη ζώνη ώρας στο προφίλ τους';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Επίδειξη χρήστες που έχουν επιλέξει ένα συγκεκριμένο στυλ.';
 $lang['MODERATORS_OF'] = 'Συντονιστές της';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Αναζητήστε χρήστες με δικαιώματα εποπτείας σε ένα συγκεκριμένο φόρουμ. Οι άδειες εποπτείας αναγνωρίζονται είτε από τα δικαιώματα χρήστη είτε από την ύπαρξη σε μια ομάδα με τα σωστά δικαιώματα ομάδας.';
 
 $lang['SEARCH_USERS_NEW'] = '%s απέδωσε %d αποτέλεσμα(s). Εκτελέστε <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Απαγορεύεται';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Παγκόσμια ροή δεδομένων για
 $lang['HASH_INVALID'] = 'Hash %s δεν είναι έγκυρη';
 $lang['HASH_NOT_FOUND'] = 'Απελευθέρωση με hash %s δεν βρέθηκε';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Το κείμενο αυτής της σελίδας υποβάλλεται σε επεξεργασία στη διεύθυνση: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Αυτή η γραμμή μπορεί να δει μόνο διαχειριστές.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Σε αυτή τη σελίδα, μπορείτε να καθορίσετε το κείμενο των βασικών κανόνων του πόρου εμφανίζεται στους χρήστες.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha δεν είναι πλήρως config
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Χωρίς θέμα',
+    'GROUP_ADDED' => 'Έχετε προστεθεί στην ομάδα χρηστών',
+    'GROUP_APPROVED' => 'Το αίτημά σας για συμμετοχή στην ομάδα χρηστών έγινε δεκτό',
+    'GROUP_REQUEST' => 'Ένα αίτημα για συμμετοχή στην ομάδα χρηστών σας',
+    'PRIVMSG_NOTIFY' => 'Νέο προσωπικό μήνυμα',
+    'TOPIC_NOTIFY' => 'Ειδοποίηση απάντησης στο νήμα %s',
+    'USER_ACTIVATE' => 'Επανενεργοποίηση λογαριασμού',
+    'USER_ACTIVATE_PASSWD' => 'Επιβεβαίωση νέου κωδικού πρόσβασης',
+    'USER_WELCOME' => 'Καλώς ορίσατε στον ιστότοπο %s',
+    'USER_WELCOME_INACTIVE' => 'Καλώς ορίσατε στον ιστότοπο %s',
 ];
