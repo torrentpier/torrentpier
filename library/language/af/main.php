@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Volgende Begin';
 $lang['CRON_RUN_COUNT'] = 'lopies';
 $lang['CRON_MANAGE'] = 'bestuur';
 $lang['CRON_OPTIONS'] = 'Cron opsies';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron aangeskakel';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron tjek interval (sekonde)';
