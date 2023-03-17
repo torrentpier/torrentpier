@@ -1114,7 +1114,7 @@ CREATE TABLE IF NOT EXISTS `bb_search_results`
                       CHARACTER SET utf8
                         COLLATE utf8_bin NOT NULL DEFAULT '',
   `search_type`     TINYINT(4)           NOT NULL DEFAULT '0',
-  `search_id`       VARCHAR(12)
+  `search_id`       VARCHAR(255)
                       CHARACTER SET utf8
                         COLLATE utf8_bin NOT NULL DEFAULT '',
   `search_time`     INT(11)              NOT NULL DEFAULT '0',
@@ -1353,7 +1353,7 @@ CREATE TABLE IF NOT EXISTS `bb_users`
   `user_interests`      VARCHAR(255)          NOT NULL DEFAULT '',
   `user_actkey`         VARCHAR(32)           NOT NULL DEFAULT '',
   `user_newpasswd`      VARCHAR(32)           NOT NULL DEFAULT '',
-  `autologin_id`        VARCHAR(12)
+  `autologin_id`        VARCHAR(255)
                           CHARACTER SET utf8
                             COLLATE utf8_bin  NOT NULL DEFAULT '',
   `user_newest_pm_id`   MEDIUMINT(8)          NOT NULL DEFAULT '0',
