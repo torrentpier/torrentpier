@@ -145,7 +145,30 @@ if ($bb_cfg['bugsnag']['enabled']) {
     if (DBG_USER) {
         /** @var Whoops\Run $whoops */
         $whoops = new \Whoops\Run;
+
+        /**
+         * Show errors on page
+         */
         $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+
+        /**
+         * Show log in browser console
+         */
+        $loggingInConsole = new \Whoops\Handler\PlainTextHandler();
+        $loggingInConsole->loggerOnly(true);
+        $loggingInConsole->setLogger((new \Monolog\Logger(getenv('APP_NAME', 'TorrentPier'), [(new \Monolog\Handler\BrowserConsoleHandler())->setFormatter((new \Monolog\Formatter\LineFormatter(null, null, true)))])));
+        $whoops->pushHandler($loggingInConsole);
+
+        /**
+         * Log errors in file
+         */
+        if (ini_get('log_errors') == 1) {
+            $loggingInFile = new \Whoops\Handler\PlainTextHandler();
+            $loggingInFile->loggerOnly(true);
+            $loggingInFile->setLogger((new \Monolog\Logger(getenv('APP_NAME', 'TorrentPier'), [(new \Monolog\Handler\StreamHandler(bb_log('', WHOOPS_LOG_FILE, true)))->setFormatter((new \Monolog\Formatter\LineFormatter(null, null, true)))])));
+            $whoops->pushHandler($loggingInFile);
+        }
+
         $whoops->register();
     }
 }
@@ -228,13 +251,19 @@ function utime()
     return array_sum(explode(' ', microtime()));
 }
 
-function bb_log($msg, $file_name)
+function bb_log($msg, $file_name, $return_path = false)
 {
     if (is_array($msg)) {
         $msg = implode(LOG_LF, $msg);
     }
     $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
-    return file_write($msg, LOG_DIR . '/' . $file_name);
+
+    $path = (LOG_DIR . '/' . $file_name);
+    if ($return_path) {
+        return $path;
+    }
+
+    return file_write($msg, $path);
 }
 
 function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replace_content = false)
