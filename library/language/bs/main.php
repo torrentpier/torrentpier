@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Sledeći Trči';
 $lang['CRON_RUN_COUNT'] = 'Trči';
 $lang['CRON_MANAGE'] = 'Snaći';
 $lang['CRON_OPTIONS'] = 'Cron opcije';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron omogućila';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron provjeriti interval (trenutak)';
