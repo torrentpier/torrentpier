@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'إدارة';
 $lang['FORUM'] = 'المنتدى';
 $lang['CATEGORY'] = 'الفئة';
 $lang['HIDE_CAT'] = 'إخفاء الفئات';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'يتم إخفاء بعض الفئات عن طريق خيارات العرض المخصصة';
+$lang['SHOW_ALL'] = 'عرض الكل';
 $lang['TOPIC'] = 'الموضوع';
 $lang['TOPICS'] = 'المواضيع';
 $lang['TOPICS_SHORT'] = 'المواضيع';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'نص مائل: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'يؤكد النص: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'قذفة النص: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'اقتبس النص: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'إدراج صورة: [img]https: // image_url[/img] (Ctrl + R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'أدخل عنوان URL: [url]https: // url[/url] أو [url = https: // url] نص عنوان URL[/url] (Ctrl + W)';
 $lang['CODE_TITLE'] = 'رمز العرض: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'قائمة';
 $lang['LIST_TITLE'] = 'قائمة: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'إحصاءات عن تعقب';
 $lang['WHOIS_INFO'] = 'معلومات عن عنوان IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'تظهر على المشرفين على index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> قبل moderation</h4> <h6>If ليس لديك التوزيعات حالة الخامس ، # أو تي في هذا القسم ، بما في ذلك الأقسام الفرعية توزيع سوف تحصل تلقائيا على هذا status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>تعليق على حالة التوزيع</h4> <h6>يتيح لك التعليق الإشارة إلى الأخطاء التي تم ارتكابها للمُحرر. إذا كانت الحالات غير مكتملة ، يتوفر نموذج استجابة التحرير لمدير الإصدار لتصحيح الإصدار</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding البذور مكافأة </h4> <h6> عدد من التوزيعات يتم تسليم من قبل المستخدم وحجم المكافآت لهم (شحن مرات ساعة) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-عدد الإصدارات';
 $lang['SEED_BONUS_POINTS'] = 'المكافآت في ساعة';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'الملف فارغ دخول';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'الصور المصغرة resetted عن التعلق: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'تم الانتهاء من مزامنة المرفقات.';
 $lang['SYNC_TOPICS'] = 'ومزامنة المواضيع';
 $lang['SYNC_POSTS'] = 'مزامنة المشاركات';
 $lang['SYNC_THUMBNAILS'] = 'مزامنة الصور المصغرة';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'تشغيل المقبل';
 $lang['CRON_RUN_COUNT'] = 'يعمل';
 $lang['CRON_MANAGE'] = 'إدارة';
 $lang['CRON_OPTIONS'] = 'كرون الخيارات';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'تحذير! تم تعطيل تشغيل البرامج النصية لـ cron. لتمكينه ، اضبط متغير APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'كرون تمكين';
 $lang['CRON_CHECK_INTERVAL'] = 'كرون تحقق الفاصل (sec)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'النشرات';
 
 $lang['BACK'] = 'مرة أخرى';
 $lang['ERROR_FORM'] = 'الحقول غير صالح';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'يرجى ملء نموذج الإفراج';
 $lang['NEW_RELEASE'] = 'الإصدار الجديد';
 $lang['NEXT'] = 'تواصل';
 $lang['OTHER'] = 'أخرى';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'أخرى';
 $lang['TPL_EMPTY_FIELD'] = 'يجب ملء الحقل <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'يجب تحديد <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - لا الأسطوانات';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - يجب أن يكون https: // URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - يجب أن يكون https: // IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'وضعت في هذا الموضوع';
 $lang['TPL_POSTER'] = 'ملصق';
 $lang['TPL_REQ_FILLING'] = 'يتطلب ملء';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'المفسد';
 $lang['TPL_IN_LINE'] = 'في نفس الخط';
 $lang['TPL_HEADER_ONLY'] = 'فقط في العنوان';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'تم إدخال اسم مستخدم غير صالح للبحث';
+$lang['SEARCH_INVALID_EMAIL'] = 'أدخل عنوان بريد إلكتروني غير صالح للبحث';
+$lang['SEARCH_INVALID_IP'] = 'تم إدخال عنوان IP غير صالح للبحث';
+$lang['SEARCH_INVALID_GROUP'] = 'تم إدخال مجموعة غير صالحة للبحث';
+$lang['SEARCH_INVALID_RANK'] = 'تم إدخال رتبة غير صالحة للبحث';
+$lang['SEARCH_INVALID_DATE'] = 'تم إدخال تاريخ غير صحيح للبحث';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'تم إدخال عدد غير صالح للبحث';
 $lang['SEARCH_INVALID_USERFIELD'] = 'صالح Userfield البيانات المدخلة';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'تم إدخال تاريخ غير صالح لآخر بحث تمت زيارته';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'صالح اللغة المختارة';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'صالح التوقيت المحدد';
 $lang['SEARCH_INVALID_MODERATORS'] = 'صالح المنتدى مختارة';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'عرض كافة أعضاء المجمو�
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'عرض جميع شركات مختارة رتبة.';
 $lang['BANNED_USERS'] = 'حظر المستخدمين';
 $lang['DISABLED_USERS'] = 'للمستخدمين تعطيل';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'المسؤولون - جميع المستخدمين الذين يتمتعون بصلاحيات المسؤول ؛ المشرفون - جميع المشرفين على المنتدى. المستخدمون المحظورون - جميع الحسابات التي تم حظرها في هذه المنتديات ؛ المستخدمون المعاقون - جميع المستخدمين الذين لديهم حسابات معطلة (إما معطلون يدويًا أو لم يتحققوا من عنوان بريدهم الإلكتروني مطلقًا) ؛ المستخدمون مع تعطيل PMs - يحدد المستخدمين الذين تمت إزالة امتيازات الرسائل الخاصة (تم عبر إدارة المستخدم)';
+$lang['POSTCOUNT'] = 'عدد الوظائف';
 $lang['EQUALS'] = 'يساوي';
 $lang['GREATER_THAN'] = 'أكبر من';
 $lang['LESS_THAN'] = 'أقل من';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'يمكنك البحث عن المستخدمين بناءً على قيمة عدد المنشورات. يمكنك إما البحث عن طريق قيمة معينة ، أكبر من أو أقل من قيمة أو بين قيمتين. لإجراء بحث عن النطاق ، حدد "يساوي" ثم ضع قيم البداية والنهاية للنطاق مفصولة بشرطة (-) ، على سبيل المثال 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'البحث للمستخدمين استنادا إلى مختلف حقول الملف الشخصي. البدل معتمدة باستخدام علامة (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'يمكنك البحث عن المستخدمين استنادا إلى آخر تاريخ الدخول باستخدام هذا خيار البحث';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'وهذا عرض المستخدمين �
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'المستخدمين الذين لديهم اختيار محدد التوقيت في ملفهم الشخصي';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'عرض المستخدمين الذين لديهم اختيار نمط معين.';
 $lang['MODERATORS_OF'] = 'المشرفين';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'ابحث عن مستخدمين لديهم أذونات إشراف لمنتدى معين. يتم التعرف على أذونات الإشراف إما عن طريق أذونات المستخدم أو من خلال التواجد في مجموعة لها أذونات المجموعة الصحيحة.';
 
 $lang['SEARCH_USERS_NEW'] = '%s أسفرت %d النتيجة(ق). أداء <a href="%s">another search</a>.';
 $lang['BANNED'] = 'حظرت';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'تغذية عالمية لجميع المنتديا
 $lang['HASH_INVALID'] = 'تجزئة %s غير صالح';
 $lang['HASH_NOT_FOUND'] = 'الإفراج مع تجزئة %s لم يتم العثور على';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align = center] يتم تحرير نص هذه الصفحة على: [url = https: //%s/admin/admin_terms.php]admin/admin_terms.php[/url]. يمكن لهذا الخط رؤية المسؤولين فقط.[/align]';
 $lang['TERMS_EXPLAIN'] = 'في هذه الصفحة يمكنك تحديد النص من القواعد الأساسية من الموارد التي يتم عرضها للمستخدمين.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha لم يتم بشكل كامل configu
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'لا يوجد عنوان',
+    'GROUP_ADDED' => 'لقد تمت إضافتك إلى مجموعة المستخدمين',
+    'GROUP_APPROVED' => 'تم منح طلبك للانضمام إلى مجموعة المستخدمين',
+    'GROUP_REQUEST' => 'طلب الانضمام إلى مجموعة المستخدمين الخاصة بك',
+    'PRIVMSG_NOTIFY' => 'رسالة خاصة جديدة',
+    'TOPIC_NOTIFY' => 'إخطار الرد في الموضوع %s',
+    'USER_ACTIVATE' => 'إعادة تنشيط الحساب',
+    'USER_ACTIVATE_PASSWD' => 'تأكيد كلمة المرور الجديدة',
+    'USER_WELCOME' => 'مرحبا بكم في الموقع %s',
+    'USER_WELCOME_INACTIVE' => 'مرحبا بكم في الموقع %s',
 ];
