@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Next Иҷроиши';
 $lang['CRON_RUN_COUNT'] = 'медавад';
 $lang['CRON_MANAGE'] = 'идора кардан';
 $lang['CRON_OPTIONS'] = 'имконоти Cron';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron фаъол';
 $lang['CRON_CHECK_INTERVAL'] = 'Фосилаи Тафтиши Cron (сония)';
