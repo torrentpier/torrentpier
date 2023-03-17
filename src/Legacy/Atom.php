@@ -26,6 +26,7 @@ class Atom
     public static function update_forum_feed($forum_id, $forum_data)
     {
         global $bb_cfg, $lang;
+        $sql = null;
         $file_path = $bb_cfg['atom']['path'] . '/f/' . $forum_id . '.atom';
         $select_tor_sql = $join_tor_sql = '';
         if ($forum_id == 0) {
@@ -70,7 +71,7 @@ class Atom
 		";
         }
         $topics_tmp = DB()->fetch_rowset($sql);
-        $topics = array();
+        $topics = [];
         foreach ($topics_tmp as $topic) {
             if (isset($topic['topic_status'])) {
                 if ($topic['topic_status'] == TOPIC_MOVED) {
@@ -124,7 +125,7 @@ class Atom
 		LIMIT 50
 	";
         $topics_tmp = DB()->fetch_rowset($sql);
-        $topics = array();
+        $topics = [];
         foreach ($topics_tmp as $topic) {
             if (isset($topic['topic_status'])) {
                 if ($topic['topic_status'] == TOPIC_MOVED) {
@@ -163,6 +164,8 @@ class Atom
     private static function create_atom($file_path, $mode, $id, $title, $topics)
     {
         global $lang;
+        $date = null;
+        $time = null;
         $dir = \dirname($file_path);
         if (!file_exists($dir)) {
             if (!bb_mkdir($dir)) {
@@ -192,8 +195,8 @@ class Atom
                 $tor_size = str_replace('&nbsp;', ' ', ' [' . humn_size($topic['tor_size']) . ']');
             }
             $topic_title = $topic['topic_title'];
-            $orig_word = array();
-            $replacement_word = array();
+            $orig_word = [];
+            $replacement_word = [];
             obtain_word_list($orig_word, $replacement_word);
             if (\count($orig_word)) {
                 $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);

@@ -109,12 +109,12 @@ class Group
      */
     public static function add_user_into_group($group_id, $user_id, $user_pending = 0, $user_time = TIMENOW)
     {
-        $args = DB()->build_array('INSERT', array(
+        $args = DB()->build_array('INSERT', [
             'group_id' => (int)$group_id,
             'user_id' => (int)$user_id,
             'user_pending' => (int)$user_pending,
             'user_time' => (int)$user_time,
-        ));
+        ]);
         DB()->query("REPLACE INTO " . BB_USER_GROUP . $args);
 
         if (!$user_pending) {
@@ -223,14 +223,14 @@ class Group
             return;
         }
 
-        $values = array();
+        $values = [];
 
         foreach ($auth_ary as $forum_id => $permission) {
-            $values[] = array(
+            $values[] = [
                 'group_id' => (int)$group_id,
                 'forum_id' => (int)$forum_id,
                 'forum_perm' => (int)$permission,
-            );
+            ];
         }
         $values = DB()->build_array('MULTI_INSERT', $values);
 

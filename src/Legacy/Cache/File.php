@@ -29,6 +29,7 @@ class File extends Common
 
     public function get($name, $get_miss_key_callback = '', $ttl = 0)
     {
+        $filecache = [];
         $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 
         $this->cur_query = "cache->get('$name')";
@@ -55,10 +56,7 @@ class File extends Common
 
         $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
         $expire = TIMENOW + $ttl;
-        $cache_data = array(
-            'expire' => $expire,
-            'value' => $value,
-        );
+        $cache_data = ['expire' => $expire, 'value' => $value];
 
         $filecache = "<?php\n";
         $filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
@@ -107,6 +105,7 @@ class File extends Common
 
     public function gc($expire_time = TIMENOW)
     {
+        $filecache = [];
         $clear = false;
 
         if (is_dir($this->dir)) {

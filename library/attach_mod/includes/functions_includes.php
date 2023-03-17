@@ -29,6 +29,7 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
 function attachment_quota_settings($admin_mode, $submit = false, $mode)
 {
     global $template, $lang, $attach_config;
+    $this_userdata = [];
 
     if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
         $upload_dir = $attach_config['upload_dir'];

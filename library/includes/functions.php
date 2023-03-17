@@ -419,6 +419,7 @@ function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
+    $select_name = null;
     $select_ary = array();
 
     switch ($select) {
@@ -914,6 +915,7 @@ function bb_update_config($params, $table = BB_CONFIG)
 
 function get_db_stat($mode)
 {
+    $sql = null;
     switch ($mode) {
         case 'usercount':
             $sql = "SELECT COUNT(user_id) AS total FROM " . BB_USERS;
@@ -1473,7 +1475,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     // get the good list
     $list_name = 'forum_display_' . $list;
-    $listrow = $$list_name;
+    $listrow = ${$list_name};
 
     // init the result
     $res = '';

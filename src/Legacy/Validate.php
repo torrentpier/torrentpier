@@ -69,7 +69,7 @@ class Validate
                 }
             }
             // Запрещено
-            $banned_names = array();
+            $banned_names = [];
 
             foreach (DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
                 $banned_names[] = str_replace('\*', '.*?', preg_quote($row['disallow_username'], '#u'));
@@ -119,7 +119,7 @@ class Validate
         }
 
         if ($check_ban_and_taken) {
-            $banned_emails = array();
+            $banned_emails = [];
 
             foreach (DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
                 $banned_emails[] = str_replace('\*', '.*?', preg_quote($row['ban_email'], '#'));

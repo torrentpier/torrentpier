@@ -313,7 +313,7 @@ class Template
             $str = &$this->_tpldata;
             for ($i = 0; $i < $blockcount; $i++) {
                 $str = &$str[$blocks[$i] . '.'];
-                $str = &$str[\count($str) - 1];
+                $str = &$str[(is_array($str) || $str instanceof \Countable ? \count($str) : 0) - 1];
             }
             // Now we add the block that we're actually assigning to.
             // We're adding a new iteration to this block with the given
@@ -446,6 +446,7 @@ class Template
 
     public function compile_code($filename, $code)
     {
+        $pos3 = null;
         //	$filename - file to load code from. used if $code is empty
         //	$code - tpl code
 
@@ -455,8 +456,8 @@ class Template
         }
 
         // Replace <!-- (END)PHP --> tags
-        $search = array('<!-- PHP -->', '<!-- ENDPHP -->');
-        $replace = array('<' . '?php ', ' ?' . '>');
+        $search = ['<!-- PHP -->', '<!-- ENDPHP -->'];
+        $replace = ['<' . '?php ', ' ?' . '>'];
         $code = str_replace($search, $replace, $code);
 
         // Break it up into lines and put " -->" back.
@@ -467,19 +468,19 @@ class Template
         }
 
         $block_nesting_level = 0;
-        $block_names = array();
+        $block_names = [];
         $block_names[0] = '.';
-        $block_items = array();
+        $block_items = [];
         $count_if = 0;
 
         // prepare array for compiled code
-        $compiled = array();
+        $compiled = [];
 
         // array of switches
-        $sw = array();
+        $sw = [];
 
         // replace all short php tags
-        $new_code = array();
+        $new_code = [];
         $line_count = \count($code_lines);
         for ($i = 0; $i < $line_count; $i++) {
             $line = $code_lines[$i];
@@ -742,11 +743,11 @@ class Template
         }
         // change template varrefs into PHP varrefs
         // This one will handle varrefs WITH namespaces
-        $varrefs = array();
+        $varrefs = [];
         preg_match_all('#\{(([a-z0-9\-_]+?\.)+)([a-z0-9\-_]+?)\}#is', $code, $varrefs);
-        $varcount = \count($varrefs[1]);
-        $search = array();
-        $replace = array();
+        $varcount = is_array($varrefs[1]) || $varrefs[1] instanceof \Countable ? \count($varrefs[1]) : 0;
+        $search = [];
+        $replace = [];
         for ($i = 0; $i < $varcount; $i++) {
             $namespace = $varrefs[1][$i];
             $varname = $varrefs[3][$i];
@@ -782,8 +783,8 @@ class Template
 										 [^\s(),]+)/x', $tag_args, $match);
 
         $tokens = $match[0];
-        $tokens_cnt = \count($tokens);
-        $is_arg_stack = array();
+        $tokens_cnt = is_array($tokens) || $tokens instanceof \Countable ? \count($tokens) : 0;
+        $is_arg_stack = [];
 
         for ($i = 0; $i < $tokens_cnt; $i++) {
             $token = &$tokens[$i];
@@ -842,7 +843,7 @@ class Template
 
                     $new_tokens = $this->_parse_is_expr($is_arg, \array_slice($tokens, $i + 1));
 
-                    array_splice($tokens, $is_arg_start, \count($tokens), $new_tokens);
+                    array_splice($tokens, $is_arg_start, is_array($tokens) || $tokens instanceof \Countable ? \count($tokens) : 0, $new_tokens);
 
                     $i = $is_arg_start;
                     break;
@@ -892,6 +893,7 @@ class Template
      */
     public function _parse_is_expr($is_arg, $tokens)
     {
+        $expr = null;
         $expr_end = 0;
         $negate_expr = false;
 

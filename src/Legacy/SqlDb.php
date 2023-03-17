@@ -206,6 +206,7 @@ class SqlDb
      */
     public function sql_fetchfield($field, $rownum = -1, $query_id = 0)
     {
+        $result = null;
         if (!$query_id) {
             $query_id = $this->query_result;
         }
@@ -734,7 +735,7 @@ class SqlDb
 
         if ($this->link and $ext = mysqli_info($this->link)) {
             $info[] = (string)$ext;
-        } elseif (!$num && ($aff = $this->affected_rows($this->result) and $aff != -1)) {
+        } elseif (!$num && ($aff = $this->affected_rows() and $aff != -1)) {
             $info[] = "$aff rows";
         }
 

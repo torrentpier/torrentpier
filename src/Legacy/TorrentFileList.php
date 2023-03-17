@@ -86,7 +86,7 @@ class TorrentFileList
                         $subdir = $f['path'][$i];
 
                         if (!isset($cur_files_ary[$subdir])) {
-                            $cur_files_ary[$subdir] = array();
+                            $cur_files_ary[$subdir] = [];
                         }
                         $cur_files_ary =& $cur_files_ary[$subdir];
 
