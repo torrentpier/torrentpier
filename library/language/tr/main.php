@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'İdare';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Kategorileri gizle';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Bazı kategoriler, özelleştirilmiş görüntüleme seçenekleriyle gizlenir';
+$lang['SHOW_ALL'] = 'Hepsini Göster ↓';
 $lang['TOPIC'] = 'Konu';
 $lang['TOPICS'] = 'Konular';
 $lang['TOPICS_SHORT'] = 'Konular';
@@ -1513,9 +1513,9 @@ $lang['ITALIC'] = 'İtalik metin: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = '(Ctrl+U)altı çizili metin: [u]text[/u]';
 $lang['STRIKEOUT'] = '(Ctrl+S)üstü çizili metin: [s]text[/s]';
 $lang['QUOTE_TITLE'] = '(Ctrl+Q)alıntı metin: [quote]text[/quote]';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Resim ekle: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'URL ekle: [url]https://url[/url] veya [url=https://url]URL metni[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kod ekran: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Liste';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Ctrl+l)';
@@ -2061,7 +2061,7 @@ $lang['TRACKER_STATS'] = 'İzleyici istatistikleri';
 $lang['WHOIS_INFO'] = 'IP adresi hakkında bilgi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Yöneticiler üzerinde index.php göster';
 $lang['PREMOD_HELP'] = 'V bu bölümde, * ya da T, kısımlar da dahil olmak üzere durumu dağılımları gerekmez <h4><span class="tor-icon tor-dup">&#8719;</span> Öncesi moderation</h4> <h6>İf, dağıtım otomatik olarak bu status</h6> almak';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Bir dağıtımın durumu hakkında yorum yapın</h4> <h6>Yorum, yayınlayıcıya yapılan hataları belirtmenizi sağlar. Durumlar eksikse sürüm</h6>düzeltmek için sürüm yöneticisine bir yayın yanıt formu sunulur.';
 $lang['SEED_BONUS_ADD'] = 'Dağılımları <h4>Adding tohum bonus </h4> <h6> Numarası </h6> kullanıcı ve onlar için ikramiye boyutu (saatte şarj) dağıtıldı';
 $lang['SEED_BONUS_RELEASE'] = 'bültenleri N-Numarası';
 $lang['SEED_BONUS_POINTS'] = 'bir saat içinde ikramiye';
@@ -2128,7 +2128,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Boş Dosya Girişi';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Küçük Ekin resetted: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Ek Senkronizasyonu Tamamlandı.';
 $lang['SYNC_TOPICS'] = 'Sync Konular';
 $lang['SYNC_POSTS'] = 'Sync Mesajlar';
 $lang['SYNC_THUMBNAILS'] = 'Sync Küçük Resim';
@@ -2390,7 +2390,7 @@ $lang['CRON_NEXT_RUN'] = 'Sonraki Çalışma';
 $lang['CRON_RUN_COUNT'] = 'Çalışır';
 $lang['CRON_MANAGE'] = 'Yönetmek';
 $lang['CRON_OPTIONS'] = 'Cron seçenekleri';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Uyarı! Cron betiklerinin çalıştırılması devre dışı bırakıldı. Etkinleştirmek için APP_CRON_ENABLED değişkenini ayarlayın.';
 
 $lang['CRON_ENABLED'] = 'Cron etkin';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron aralığı (sn)kontrol edin';
@@ -2580,7 +2580,7 @@ $lang['RELEASES'] = 'Bültenleri';
 
 $lang['BACK'] = 'Geri';
 $lang['ERROR_FORM'] = 'Geçersiz alanlar';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Lütfen izin formunu doldurun';
 $lang['NEW_RELEASE'] = 'Yeni sürüm';
 $lang['NEXT'] = 'Devam';
 $lang['OTHER'] = 'Başka';
@@ -2588,8 +2588,8 @@ $lang['OTHER'] = 'Başka';
 $lang['TPL_EMPTY_FIELD'] = '<b>%s</b> alanını doldurmalısınız';
 $lang['TPL_EMPTY_SEL'] = '<b>%s</b> seçmeniz gerekir';
 $lang['TPL_NOT_NUM'] = 'Bir num <b>%s</b> - ';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - https:// URL olmalıdır';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - https:// IMG_URL olmalıdır';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'konu içine koy';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'gerektirir dolum';
@@ -2603,15 +2603,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'aynı çizgide';
 $lang['TPL_HEADER_ONLY'] = 'sadece bir başlık';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Arama yapmak için geçersiz kullanıcı adı girildi';
+$lang['SEARCH_INVALID_EMAIL'] = 'Aramak için geçersiz e-posta adresi girildi';
+$lang['SEARCH_INVALID_IP'] = 'Aramak için geçersiz IP adresi girildi';
+$lang['SEARCH_INVALID_GROUP'] = 'Aramak için geçersiz grup girildi';
+$lang['SEARCH_INVALID_RANK'] = 'Aramak için geçersiz sıra girildi';
+$lang['SEARCH_INVALID_DATE'] = 'Aramak için geçersiz tarih girildi';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Aramak için geçersiz gönderi sayısı girildi';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Geçersiz Userfield veri girilen';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Son ziyaret edilen arama için geçersiz tarih girildi';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Geçersiz Dil Seçildi';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Geçersiz Zaman Dilimi Seçili';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Geçersiz Forum Seçili';
@@ -2662,12 +2662,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Seçili grubun tüm üyeleri görüntül
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Seçilen rütbe tüm taşıyıcı görüntüleyin.';
 $lang['BANNED_USERS'] = 'Yasaklı Kullanıcılar';
 $lang['DISABLED_USERS'] = 'Engelli Kullanıcılar';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Yöneticiler - Yönetici yetkilerine sahip tüm kullanıcılar; Moderatörler - Tüm forum moderatörleri; Yasaklanan Kullanıcılar - Bu forumlarda yasaklanan tüm hesaplar; Devre Dışı Bırakılmış Kullanıcılar - Hesapları devre dışı bırakılmış tüm kullanıcılar (manuel olarak devre dışı bırakılmış veya e-posta adreslerini hiç doğrulamamış); Özel Mesajları devre dışı bırakılmış kullanıcılar - Özel Mesaj ayrıcalıkları kaldırılmış olan kullanıcıları seçer (Kullanıcı Yönetimi aracılığıyla yapılır)';
+$lang['POSTCOUNT'] = 'gönderi sayısı';
 $lang['EQUALS'] = 'Eşdeğerdir';
 $lang['GREATER_THAN'] = 'Daha büyük';
 $lang['LESS_THAN'] = 'Daha az';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Gönderi sayısı değerine göre kullanıcıları arayabilirsiniz. Belirli bir değere göre (bir değerden büyük veya küçük) veya iki değer arasında arama yapabilirsiniz. Aralık araması yapmak için, "Eşittir"i seçin, ardından aralığın başlangıç ve bitiş değerlerini tire (-) ile ayırın, örneğin 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Çeşitli profil alanlara göre kullanıcıları arama. Joker karakterler (*) asteriks kullanarak desteklenir.';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Son giriş tarihlerine göre kullanıcılar için bu arama seçeneğini kullanarak arama yapabilirsiniz';
@@ -2675,7 +2675,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Bu belirli bir dil seçmiş kimin Prof
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Kullanıcılar profillerinde belirli bir zaman dilimi seçilmiş';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Belirli bir stili seçili olan ekran kullanıcıları.';
 $lang['MODERATORS_OF'] = 'Moderatör';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Belirli bir forumda Denetleme izinlerine sahip kullanıcıları arayın. Denetleme izinleri, Kullanıcı İzinleriyle veya doğru Grup İzinlerine sahip bir Grupta bulunarak tanınır.';
 
 $lang['SEARCH_USERS_NEW'] = '%s(ler) %d sonuçlar verdi. <a href="%s">another search</a> gerçekleştirin.';
 $lang['BANNED'] = 'Yasaklı';
@@ -2755,7 +2755,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Tüm forumlar için küresel besleme';
 $lang['HASH_INVALID'] = '%s karma geçersiz';
 $lang['HASH_NOT_FOUND'] = 'Karma %s değilim serbest bulundu';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Bu sayfanın metni şurada düzenlenir: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu satır sadece yöneticileri görebilir.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu sayfada, kaynağın Temel Kurallar metni kullanıcılar için görüntülenir belirtebilirsiniz.';
 
 $lang['TR_STATS'] = array(
@@ -2814,14 +2814,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha zaten anahtarları oluşturulur mi ta
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Konu yok',
+    'GROUP_ADDED' => 'Kullanıcı grubuna eklendiniz',
+    'GROUP_APPROVED' => 'Kullanıcı grubuna katılma isteğiniz kabul edildi',
+    'GROUP_REQUEST' => 'Kullanıcı grubunuza katılma isteği',
+    'PRIVMSG_NOTIFY' => 'yeni özel mesaj',
+    'TOPIC_NOTIFY' => 'Konu %syanıt bildirimi',
+    'USER_ACTIVATE' => 'Hesap yeniden etkinleştirme',
+    'USER_ACTIVATE_PASSWD' => 'Yeni bir parolanın onaylanması',
+    'USER_WELCOME' => 'siteye hoşgeldiniz %s',
+    'USER_WELCOME_INACTIVE' => 'siteye hoşgeldiniz %s',
 ];
