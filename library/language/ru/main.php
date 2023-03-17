@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Администрирование';
 $lang['FORUM'] = 'Форум';
 $lang['CATEGORY'] = 'Категория';
 $lang['HIDE_CAT'] = 'Скрыть категории';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Некоторые категории скрыты настраиваемыми параметрами отображения';
+$lang['SHOW_ALL'] = 'Показать все';
 $lang['TOPIC'] = 'Тема';
 $lang['TOPICS'] = 'Темы';
 $lang['TOPICS_SHORT'] = 'Тем';
@@ -572,7 +572,7 @@ $lang['YEARS'] = 'Лет';
 $lang['NO_THEMES'] = 'В базе нет цветовых схем';
 $lang['TIMEZONE'] = 'Часовой пояс';
 $lang['DATE_FORMAT_PROFILE'] = 'Формат даты';
-$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'Используемый синтаксис идентичен функции PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a>.';
 $lang['SIGNATURE'] = 'Подпись';
 $lang['SIGNATURE_EXPLAIN'] = 'Это текст, который можно добавлять к размещаемым вами сообщениям. Длина его ограничена %d символами.';
 $lang['SIGNATURE_DISABLE'] = 'Подпись отключена за нарушение правил форума';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Наклонный текст: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Вставить изображение: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Ссылка';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Вставьте URL: [url]https://url[/url] или [url=https://url]URL текст[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Код: [code]код[/code] (Ctrl+K)';
 $lang['LIST'] = 'Список';
 $lang['LIST_TITLE'] = 'Список: [list]текст[/list] (Ctrl+L)';
@@ -2085,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Настройка количества пр�
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Настройка приложений';
 
 $lang['UPLOAD_DIRECTORY'] = 'Папка для закачанных приложений';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Задайте относительный путь от папки форума к папке приложений. Например, задайте \'files\', если путь к форуму https://www.yourdomain.com/torrentpier и папка приложений находится в https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Иконка для приложений';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Эта картинка появляется возле ссылок к приложениям в персональных сообщениях. Оставьте это поле пустым, если не хотите видеть иконку. Эта конфигурация будет переписана настройками в Контроле Групп Расширений.';
 $lang['ATTACH_TOPIC_ICON'] = 'Иконка для тем с приложениями';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Занесение пустого файла';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Обновлена миниатюра для приложения: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Синхронизация вложений завершена.';
 $lang['SYNC_TOPICS'] = 'Синхронизация тем';
 $lang['SYNC_POSTS'] = 'Синхронизация сообщений';
 $lang['SYNC_THUMBNAILS'] = 'Синхронизация миниатюр';
@@ -2575,7 +2575,7 @@ $lang['RELEASES'] = 'Релизы';
 
 $lang['BACK'] = 'Назад';
 $lang['ERROR_FORM'] = 'Неверно заполнены поля';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Заполните форму для релиза';
 $lang['NEW_RELEASE'] = 'Новый релиз';
 $lang['NEXT'] = 'Продолжить';
 $lang['OTHER'] = 'Другой';
@@ -2598,13 +2598,13 @@ $lang['TPL_SPOILER'] = 'спойлер';
 $lang['TPL_IN_LINE'] = 'на той же строке';
 $lang['TPL_HEADER_ONLY'] = 'только в заголовке';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Введено неправильное имя для поиска';
+$lang['SEARCH_INVALID_EMAIL'] = 'Введен неправильный адрес email для поиска';
+$lang['SEARCH_INVALID_IP'] = 'Введен неправильный IP-адрес для поиска';
+$lang['SEARCH_INVALID_GROUP'] = 'Введена неправильная группа для поиска';
+$lang['SEARCH_INVALID_RANK'] = 'Введено неправильное звание для поиска';
+$lang['SEARCH_INVALID_DATE'] = 'Введена неправильная дата для поиска';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Введено неправильное количество сообщений для поиска';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Введены неправильные пользовательские данные для поиска';
 $lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Выбран неправильный язык';
@@ -2658,7 +2658,7 @@ $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Просмотреть всех носи�
 $lang['BANNED_USERS'] = 'Забаненные пользователи';
 $lang['DISABLED_USERS'] = 'Отключенные пользователи';
 $lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['POSTCOUNT'] = 'Количество сообщений';
 $lang['EQUALS'] = 'Равно';
 $lang['GREATER_THAN'] = 'Больше чем';
 $lang['LESS_THAN'] = 'Меньше чем';
@@ -2724,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Опции';
 $lang['SITEMAP_CREATE'] = 'Создать / обновить файл sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Уведомить поисковые системы о наличии новой версии файла sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Что сделать дальше?';
-$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
+$lang['SITEMAP_GOOGLE_1'] = 'Зарегистрируйте ваш сайт в <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> с использованием вашей учетной записи Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Добавьте файл sitemap</a> зарегистрированного вами сайта.';
-$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
+$lang['SITEMAP_YANDEX_1'] = 'Зарегистрируйте ваш сайт в <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> с использованием вашей учетной записи Yandex.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Добавьте файл sitemap</a> зарегистрированного вами сайта.';
 $lang['SITEMAP_BING_1'] = 'Зарегистрируйте ваш сайт в <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> с использованием вашей учетной записи Microsoft.';
 $lang['SITEMAP_BING_2'] = 'Добавьте файл sitemap зарегистрированного вами сайта в его настройках.';
 $lang['SITEMAP_ADD_TITLE'] = 'Дополнительные страницы для sitemap';
@@ -2813,8 +2813,8 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_REQUEST' => 'A request to join your user group',
     'PRIVMSG_NOTIFY' => 'New private message',
     'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'USER_ACTIVATE' => 'Повторная активация аккаунта',
+    'USER_ACTIVATE_PASSWD' => 'Подтверждение нового пароля',
+    'USER_WELCOME' => 'Добро пожаловать на сайт %s',
+    'USER_WELCOME_INACTIVE' => 'Добро пожаловать на сайт %s',
 ];
