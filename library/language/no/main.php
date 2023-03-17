@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Administrere';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Skjul kategorier';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Noen kategorier er skjult av tilpassede visningsalternativer';
+$lang['SHOW_ALL'] = 'Vis alt';
 $lang['TOPIC'] = 'Emnet';
 $lang['TOPICS'] = 'Emner';
 $lang['TOPICS_SHORT'] = 'Emner';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Kursiv tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understreket tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Overstreke tekst: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Sitat tekst: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Sett inn bilde: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Sett inn URL: [url]https://url[/url] eller [url=https://url]URL tekst[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kode display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Listen';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistikk på tracker';
 $lang['WHOIS_INFO'] = 'Informasjon om IP-adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Vis på den moderatorer index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du ikke har utdelinger til status v, #, eller T i dette avsnittet, inkludert seksjoner, distribusjon vil automatisk motta denne status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Kommenter status for en distribusjon</h4> <h6>Kommentaren lar deg påpeke feilene som er gjort til utgiveren. Hvis statusene er ufullstendige, er et utgivelsessvarsskjema tilgjengelig for utgivelsesansvarlig for å korrigere utgivelsen</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding frø bonus </h4> <h6> Antall fordelinger er delt ut av brukeren og størrelsen på bonuser for dem (lading ganger i timen) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'til N-antall utgivelser';
 $lang['SEED_BONUS_POINTS'] = 'bonuser i en time';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tom Fil Oppføring';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail resetted for Vedlegget: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Synkronisering av vedlegg er fullført.';
 $lang['SYNC_TOPICS'] = 'Sync Emner';
 $lang['SYNC_POSTS'] = 'Sync Innlegg';
 $lang['SYNC_THUMBNAILS'] = 'Sync Miniatyrbilder';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Neste Løp';
 $lang['CRON_RUN_COUNT'] = 'Kjører';
 $lang['CRON_MANAGE'] = 'Administrere';
 $lang['CRON_OPTIONS'] = 'Cron-valg';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Advarsel! Å kjøre cron-skript er deaktivert. For å aktivere det, sett APP_CRON_ENABLED-variabelen.';
 
 $lang['CRON_ENABLED'] = 'Cron er aktivert';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron sjekk intervall (sek)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Utgivelser';
 
 $lang['BACK'] = 'Tilbake';
 $lang['ERROR_FORM'] = 'Ugyldig felt';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Vennligst fyll ut utgivelsesskjemaet';
 $lang['NEW_RELEASE'] = 'Ny utgivelse';
 $lang['NEXT'] = 'Fortsett';
 $lang['OTHER'] = 'Andre';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Andre';
 $lang['TPL_EMPTY_FIELD'] = 'Du må fylle ut feltet <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Du må velge <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ikke et tall';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Må være https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Må være https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'sette inn emnet';
 $lang['TPL_POSTER'] = 'plakaten';
 $lang['TPL_REQ_FILLING'] = 'krever fylling';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'i samme linje';
 $lang['TPL_HEADER_ONLY'] = 'bare i en tittel';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Ugyldig brukernavn angitt for søk';
+$lang['SEARCH_INVALID_EMAIL'] = 'Ugyldig e-postadresse angitt for søk';
+$lang['SEARCH_INVALID_IP'] = 'Ugyldig IP-adresse angitt for å søke';
+$lang['SEARCH_INVALID_GROUP'] = 'Ugyldig gruppe angitt for å søke';
+$lang['SEARCH_INVALID_RANK'] = 'Ugyldig rangering angitt for søk';
+$lang['SEARCH_INVALID_DATE'] = 'Ugyldig dato angitt for søk';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Ugyldig antall innlegg angitt for søk';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Ugyldig Userfield data inn';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Ugyldig dato angitt for sist besøkte søk';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Ugyldig Språk Som Er Valgt';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Ugyldig Tidssonen Valgt';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Ugyldig Forum Valgt';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Vis alle medlemmene i den valgte gruppen
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Vis alle bærere av den valgte verdi.';
 $lang['BANNED_USERS'] = 'Sperrede Brukere';
 $lang['DISABLED_USERS'] = 'Funksjonshemmede Brukere';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratorer - Alle brukere med administratorrettigheter; Moderatorer - Alle forummoderatorer; Utestengte brukere - Alle kontoer som har blitt utestengt på disse forumene; Deaktiverte brukere - Alle brukere med deaktiverte kontoer (enten manuelt deaktivert eller aldri bekreftet e-postadressen sin); Brukere med deaktiverte PM-er - Velger brukere som har fjernet privilegiene for private meldinger (Utført via brukeradministrasjon)';
+$lang['POSTCOUNT'] = 'Antall innlegg';
 $lang['EQUALS'] = 'Tilsvarer';
 $lang['GREATER_THAN'] = 'Større enn';
 $lang['LESS_THAN'] = 'Mindre enn';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Du kan søke etter brukere basert på antall innlegg. Du kan enten søke etter en bestemt verdi, større enn eller mindre enn en verdi eller mellom to verdier. For å gjøre rekkeviddesøket, velg "Tilsvarer" og sett deretter begynnelses- og sluttverdiene for området atskilt med en bindestrek (-), f.eks. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Søk etter brukere basert på ulike profil felt. Jokertegn støttes ved hjelp av en asteriks (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Du kan søke etter brukere basert på deres siste logg inn dato ved hjelp av dette alternativet søk';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Dette vil vise brukere som har valgt e
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Brukere som har valgt en bestemt tidssone i profilen sin';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Vise brukere som har valgt en bestemt stil.';
 $lang['MODERATORS_OF'] = 'Moderatorer av';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Søk etter brukere med modereringstillatelser til et spesifikt forum. Modereringstillatelser gjenkjennes enten av brukertillatelser eller ved å være i en gruppe med de riktige gruppetillatelsene.';
 
 $lang['SEARCH_USERS_NEW'] = '%s gitt %d resultat(er). Utføre <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Utestengt';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Global feed for alle fora';
 $lang['HASH_INVALID'] = 'Hash %s er ugyldig';
 $lang['HASH_NOT_FOUND'] = 'Utgivelse med hash %s ikke funnet';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksten på denne siden er redigert på: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Denne linjen kan kun se administratorer.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På denne siden kan du angi teksten til de grunnleggende reglene i ressurs er vist til brukere.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ikke er fullt ut configured</h2><p>if
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Intet emne',
+    'GROUP_ADDED' => 'Du er lagt til i brukergruppen',
+    'GROUP_APPROVED' => 'Din forespørsel om å bli med i brukergruppen er innvilget',
+    'GROUP_REQUEST' => 'En forespørsel om å bli med i brukergruppen din',
+    'PRIVMSG_NOTIFY' => 'Ny privat melding',
+    'TOPIC_NOTIFY' => 'Melding om svar i tråden %s',
+    'USER_ACTIVATE' => 'Reaktivering av konto',
+    'USER_ACTIVATE_PASSWD' => 'Bekrefter et nytt passord',
+    'USER_WELCOME' => 'Velkommen til siden %s',
+    'USER_WELCOME_INACTIVE' => 'Velkommen til siden %s',
 ];
