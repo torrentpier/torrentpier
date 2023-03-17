@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Pengadministrasian';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Menyembunyikan kategori';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Beberapa kategori disembunyikan oleh opsi tampilan yang disesuaikan';
+$lang['SHOW_ALL'] = 'Tunjukkan semua';
 $lang['TOPIC'] = 'Topik';
 $lang['TOPICS'] = 'Topik';
 $lang['TOPICS_SHORT'] = 'Topik';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Menggarisbawahi teks: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Teks coret: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Kutipan teks: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Sisipkan gambar: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Sisipkan URL: [url]https://url[/url] atau [url=https://url]Teks URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kode display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Daftar';
 $lang['LIST_TITLE'] = 'Daftar: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistik tracker';
 $lang['WHOIS_INFO'] = 'Informasi tentang alamat IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Menunjukkan pada moderator index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pra-moderation</h4> <h6>If anda tidak memiliki distribusi status v, #, atau T pada bagian ini, termasuk subbagian, distribusi otomatis akan menerima ini status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Mengomentari status distribusi</h4> <h6>Komentar memungkinkan Anda menunjukkan kesalahan yang dibuat pada penerbit. Jika status tidak lengkap, formulir respons rilis tersedia untuk manajer rilis untuk memperbaiki rilis</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding benih bonus </h4> <h6> Jumlah distro yang diberikan oleh pengguna dan ukuran bonus untuk mereka (pengisian kali dalam satu jam) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'untuk N-jumlah rilis';
 $lang['SEED_BONUS_POINTS'] = 'bonus dalam satu jam';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'File Kosong Entri';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail menunjukkan total hit: untuk Lampiran: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Sinkronisasi Lampiran Selesai.';
 $lang['SYNC_TOPICS'] = 'Sync Topik';
 $lang['SYNC_POSTS'] = 'Sync Posting';
 $lang['SYNC_THUMBNAILS'] = 'Sync Thumbnail';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Berikutnya Jalankan';
 $lang['CRON_RUN_COUNT'] = 'Berjalan';
 $lang['CRON_MANAGE'] = 'Mengelola';
 $lang['CRON_OPTIONS'] = 'Cron pilihan';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Peringatan! Menjalankan skrip cron dinonaktifkan. Untuk mengaktifkannya, atur variabel APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron memungkinkan';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron check interval (sec)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Rilis';
 
 $lang['BACK'] = 'Kembali';
 $lang['ERROR_FORM'] = 'Tidak valid bidang';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Silakan isi formulir rilis';
 $lang['NEW_RELEASE'] = 'Baru rilis';
 $lang['NEXT'] = 'Terus';
 $lang['OTHER'] = 'Lainnya';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Lainnya';
 $lang['TPL_EMPTY_FIELD'] = 'Anda harus mengisi field <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Anda harus memilih <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Harus https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Harus https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'dimasukkan ke subjek';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'membutuhkan mengisi';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'di baris yang sama';
 $lang['TPL_HEADER_ONLY'] = 'hanya di judul';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Nama pengguna tidak valid dimasukkan untuk mencari';
+$lang['SEARCH_INVALID_EMAIL'] = 'Alamat email yang dimasukkan tidak valid untuk menelusuri';
+$lang['SEARCH_INVALID_IP'] = 'Alamat IP tidak valid dimasukkan untuk mencari';
+$lang['SEARCH_INVALID_GROUP'] = 'Grup yang tidak valid dimasukkan untuk menelusuri';
+$lang['SEARCH_INVALID_RANK'] = 'Peringkat tidak valid dimasukkan untuk mencari';
+$lang['SEARCH_INVALID_DATE'] = 'Tanggal yang dimasukkan untuk menelusuri tidak valid';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Jumlah posting yang tidak valid dimasukkan untuk mencari';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Tidak valid Userfield data yang dimasukkan';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Tanggal yang dimasukkan untuk pencarian yang terakhir dikunjungi tidak valid';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Bahasa Yang Dipilih Tidak Valid';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Tidak Valid Zona Waktu Yang Dipilih';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Forum Valid Dipilih';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Melihat semua anggota kelompok yang dipi
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Lihat semua operator yang dipilih peringkat.';
 $lang['BANNED_USERS'] = 'Pengguna Dilarang';
 $lang['DISABLED_USERS'] = 'Pengguna Cacat';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrator - Semua pengguna dengan kekuatan Administrator; Moderator - Semua moderator forum; Pengguna yang Dilarang - Semua akun yang telah dilarang di forum ini; Pengguna yang Dinonaktifkan - Semua pengguna dengan akun yang dinonaktifkan (baik yang dinonaktifkan secara manual atau tidak pernah memverifikasi alamat email mereka); Pengguna dengan PM yang dinonaktifkan - Memilih pengguna yang hak istimewa Pesan Pribadinya dihapus (Selesai melalui Manajemen Pengguna)';
+$lang['POSTCOUNT'] = 'Jumlah posting';
 $lang['EQUALS'] = 'Sama';
 $lang['GREATER_THAN'] = 'Lebih besar dari';
 $lang['LESS_THAN'] = 'Kurang dari';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Anda dapat mencari pengguna berdasarkan nilai jumlah posting. Anda dapat mencari berdasarkan nilai tertentu, lebih besar atau lebih kecil dari nilai, atau di antara dua nilai. Untuk melakukan pencarian rentang, pilih "Sama Dengan" lalu masukkan nilai awal dan akhir rentang yang dipisahkan oleh tanda hubung (-), misalnya 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Pencarian untuk pengguna berdasarkan berbagai bidang profil. Wildcard yang didukung menggunakan asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Anda dapat mencari pengguna berdasarkan tanggal login terakhir menggunakan opsi pencarian ini';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Ini akan menampilkan pengguna yang tel
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Pengguna yang telah memilih zona waktu tertentu dalam profil mereka';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Tampilan pengguna yang telah memilih gaya tertentu.';
 $lang['MODERATORS_OF'] = 'Moderator';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Cari pengguna dengan izin Moderasi ke forum tertentu. Izin moderasi diakui baik oleh Izin Pengguna atau dengan berada di Grup dengan Izin Grup yang tepat.';
 
 $lang['SEARCH_USERS_NEW'] = '%s menghasilkan %d hasil(s). Melakukan <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Dilarang';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Umpan global untuk semua forum';
 $lang['HASH_INVALID'] = 'Hash %s adalah tidak valid';
 $lang['HASH_NOT_FOUND'] = 'Rilis dengan hash %s tidak ditemukan';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teks halaman ini diedit di: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Baris ini hanya dapat melihat administrator.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pada halaman ini, anda dapat menentukan teks aturan dasar dari sumber daya ditampilkan kepada pengguna.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha tidak sepenuhnya configured</h2><p>if
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Tidak ada subjek',
+    'GROUP_ADDED' => 'Anda telah ditambahkan ke grup pengguna',
+    'GROUP_APPROVED' => 'Permintaan Anda untuk bergabung dengan grup pengguna telah dikabulkan',
+    'GROUP_REQUEST' => 'Permintaan untuk bergabung dengan grup pengguna Anda',
+    'PRIVMSG_NOTIFY' => 'Pesan pribadi baru',
+    'TOPIC_NOTIFY' => 'Pemberitahuan tanggapan di utas %s',
+    'USER_ACTIVATE' => 'Pengaktifan kembali akun',
+    'USER_ACTIVATE_PASSWD' => 'Mengonfirmasi kata sandi baru',
+    'USER_WELCOME' => 'Selamat datang di situs %s',
+    'USER_WELCOME_INACTIVE' => 'Selamat datang di situs %s',
 ];
