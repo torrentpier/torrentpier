@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Hallinnoinnissa';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Luokka';
 $lang['HIDE_CAT'] = 'Piilota luokat';
-$lang['HIDE_CAT_MESS'] = 'Osa luokista on piilotettu "valinnat Näytä" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Aihe';
 $lang['TOPICS'] = 'Aiheet';
 $lang['TOPICS_SHORT'] = 'Aiheet';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Olet antanut epäkelvon Skype-kirjautuminen';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Olet antanut epäkelvon Twitter kirjautuminen';
 
-$lang['FORUM_INDEX'] = '%s Forum-Index'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forum-Index'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Lähetä uusi aihe';
 $lang['POST_NEW_RELEASE'] = 'Post uusi julkaisu';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'viestejä per sivu';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Aihe arvostelu';
 
-$lang['NO_POST_MODE'] = 'Ei post-tila valittuna'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Ei post-tila valittuna'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Lähetä uusi aihe';
 $lang['POST_A_REPLY'] = 'Post new reply';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Poista kaikki';
 $lang['CONFIRM_DELETE_PM'] = 'Oletko varma, että haluat poistaa tämän viestin?';
 $lang['CONFIRM_DELETE_PMS'] = 'Oletko varma, että haluat poistaa nämä viestit?';
 
-$lang['INBOX_SIZE'] = 'Saapuneet is<br /><b>%d%%</b> täynnä'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Saapuneet is<br /><b>%d%%</b> täynnä'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Oman Lähetetyt is<br /><b>%d%%</b> täynnä';
 $lang['SAVEBOX_SIZE'] = 'Sinun Savebox is<br /><b>%d%%</b> täynnä';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Vuotta';
 $lang['NO_THEMES'] = 'Teemoja ei tietokannassa';
 $lang['TIMEZONE'] = 'Aikavyöhyke';
 $lang['DATE_FORMAT_PROFILE'] = 'Päivämäärän muoto';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Syntaksi käyttää on identtinen PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> toiminto.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Allekirjoitus';
 $lang['SIGNATURE_EXPLAIN'] = 'Tämä on lohko tekstiä, joka voidaan lisätä virkoja. On %d merkin raja';
 $lang['SIGNATURE_DISABLE'] = 'Allekirjoitettu pois rikkoo foorumin sääntöjä';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Lyhyesti';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Sinulla ei ole oikeuksia etsiä tahansa foorumilla tällä sivustolla.';
 
 $lang['NO_SEARCH_MATCH'] = 'Ei aiheita tai virkaa tavannut hakuehdot';
-$lang['FOUND_SEARCH_MATCH'] = 'Haku löysi %d ottelu'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Haku löysi %d ottelut'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Haku löysi %d ottelu'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Haku löysi %d ottelut'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Liian monet tulokset voivat olla löytynyt, yritä olla tarkempi';
 
 $lang['CLOSE_WINDOW'] = 'Sulje Ikkuna';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Kursivoitu teksti: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Alleviivaa teksti: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Yliviivattu teksti: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Lainaus tekstistä: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Lisää kuva: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Lisää URL: [url]http://url[/url] tai [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Koodi näyttö: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Tilastot tracker';
 $lang['WHOIS_INFO'] = 'Tietoa IP-osoite';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Näytä, että moderaattorit index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If sinulla ei ole jakaumat tilan v, #, tai T tässä osassa, mukaan lukien kohdissa, jakelu saavat automaattisesti tämän status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary tilan distribution</h4> <h6>Comment onnistuneesti, voit määrittää releasers virheitä. Kun nedooformlennyh tilat releasers saatavilla muodossa vastaus korjauksen release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding siemen bonus </h4> <h6> Määrä jakaumat ovat jakoi käyttäjän ja koko bonukset niitä (latauksen kertaa tunnissa) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-määrä tiedotteet';
 $lang['SEED_BONUS_POINTS'] = 'bonukset tunnissa';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Liite Numero Asetukset';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Kiinnitys Vaihtoehtoja';
 
 $lang['UPLOAD_DIRECTORY'] = 'Upload Hakemistoon';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Kirjoita suhteellinen polku teidän TorrentPier asennus Liitetiedostoja ladata hakemistoon. Esimerkiksi, kirjoita "files", jos TorrentPier Asennus sijaitsee http://www.yourdomain.com/torrentpier ja Kiinnitys Upload Hakemistoon sijaitsee http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Liitetiedoston Lähettämistä Kuvaketta';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Tämän Kuvan vieressä näkyy Liitetiedostona Linkkejä yksittäisiä Viestejä. Jätä tämä kenttä tyhjäksi, jos et halua kuvaketta näytetään. Tämä Asetus korvataan Asetukset Laajennus Ryhmien Hallinta.';
 $lang['ATTACH_TOPIC_ICON'] = 'Kiinnitys Aihe Kuvake';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tyhjä Tiedosto Merkintä';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Pientä resetted Kiinnitys: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Kiinnitys Synkronointi Valmis.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync-Aiheet';
 $lang['SYNC_POSTS'] = 'Synkronoi Viestit';
 $lang['SYNC_THUMBNAILS'] = 'Sync Pikkukuvat';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'Tiedotteet';
 
 $lang['BACK'] = 'Takaisin';
 $lang['ERROR_FORM'] = 'Virheellinen kentät';
-$lang['RELEASE_WELCOME'] = 'Pleae täytä releae muodossa';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Uusi julkaisu';
 $lang['NEXT'] = 'Edelleen';
 $lang['OTHER'] = 'Muut';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'Muut';
 $lang['TPL_EMPTY_FIELD'] = 'Sinun täytyy täyttää kentän <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Sinun täytyy valita <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ei num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Täytyy olla http:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Täytyy olla http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'otetaan aihe';
 $lang['TPL_POSTER'] = 'juliste';
 $lang['TPL_REQ_FILLING'] = 'vaatii täyttö';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'spoileri';
 $lang['TPL_IN_LINE'] = 'samalla linjalla';
 $lang['TPL_HEADER_ONLY'] = 'vain otsikko';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Virheellinen käyttäjätunnus tuli Etsiä';
-$lang['SEARCH_INVALID_EMAIL'] = 'Virheellinen sähköpostiosoite tuli Etsiä';
-$lang['SEARCH_INVALID_IP'] = 'Virheellinen IP-osoite tuli Etsiä';
-$lang['SEARCH_INVALID_GROUP'] = 'Virheellinen Ryhmä tuli Etsiä';
-$lang['SEARCH_INVALID_RANK'] = 'Virheellinen sijoitus tuli Etsiä';
-$lang['SEARCH_INVALID_DATE'] = 'Virheellinen Päivämäärä tuli Etsiä';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Virheellinen Post Count tuli Etsiä';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Virheellinen Userfield syötetyt tiedot';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Virheellinen tieto syötetty Viime Vieraili haku';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Virheellinen Valittu Kieli';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Virheellinen Aikavyöhyke Valittu';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Virheellinen Forum Valittu';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Näytä kaikki jäsenet on valittu ryhm�
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Näytä kaikki kantajia valittujen listalla.';
 $lang['BANNED_USERS'] = 'Kiellettyjen Käyttäjien';
 $lang['DISABLED_USERS'] = 'Vammaisten Käyttäjien';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Ylläpitäjät - Kaikki käyttäjät, joilla on Järjestelmänvalvojan valtuuksia; Moderaattorit - Kaikki foorumin moderaattorit; Kielletty Käyttäjät - Kaikki tilit, jotka ovat olleet kielletty näillä foorumeilla; Vammaiset Käyttäjät - Kaikki käyttäjät, joilla käytöstä poistetut tilit (joko manuaalisesti pois käytöstä tai ei koskaan todentaa heidän sähköpostiosoitteensa); Käyttäjät, joilla on käytössä PMs - Valitsee käyttäjät, jotka ovat Yksityisiä Viestejä priviliges poistettu (Tehdään kautta Käyttäjien Hallinta)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Vastaa';
 $lang['GREATER_THAN'] = 'Suurempi kuin';
 $lang['LESS_THAN'] = 'Alle';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Voit etsiä käyttäjiä perustuu Postcount-arvo. Voit joko etsiä tiettyä arvoa suurempi tai pienempi kuin arvo tai kahden arvon välillä. Tehdä erilaisia haku, valitse "Vastaa" ja sitten laittaa alussa ja päättyy arvojen välillä, joita erottaa viiva (-), esim. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Hae käyttäjille perustuu eri profiilin kentät. Jäkerimerkit tuetaan käyttämällä an asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Voit etsiä käyttäjiä jotka perustuvat niiden viimeksi kirjautuminen päivämäärä käyttämällä tämä haku vaihtoehto';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Tämä näyttää käyttäjät, joille
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Käyttäjät, jotka ovat valinneet tietyn aikavyöhykkeen niiden profiilia';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Näyttää käyttäjät, jotka on valittu tietyn tyylin.';
 $lang['MODERATORS_OF'] = 'Valvojat';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Etsi käyttäjille Hillitsevä käyttöoikeudet tiettyyn foorumi. Hillitsevä oikeudet ovat recoginised joko Käyttäjän Käyttöoikeudet tai olemalla Ryhmä oikea Ryhmä Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s tuotti %d tulos(s). Suorittaa <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Kielletty';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Vaihtoehtoja';
 $lang['SITEMAP_CREATE'] = 'Luo / päivittää sivukartta';
 $lang['SITEMAP_NOTIFY'] = 'Ilmoittaa hakukoneille noin uusi versio sivukartta';
 $lang['SITEMAP_WHAT_NEXT'] = 'Mitä tehdä seuraavaksi?';
-$lang['SITEMAP_GOOGLE_1'] = 'Rekisteröidy sivuston milloin <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> Google-tilisi avulla.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> sivuston olet rekisteröitynyt.';
-$lang['SITEMAP_YANDEX_1'] = 'Rekisteröidy sivuston milloin <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> käyttämällä Yandex-tilin.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> sivuston olet rekisteröitynyt.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Rekisteröidy sivuston milloin <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> käyttämällä Microsoft-tilisi.';
 $lang['SITEMAP_BING_2'] = 'Lisää sivukartta sivuston olet rekisteröitynyt sen asetukset.';
 $lang['SITEMAP_ADD_TITLE'] = 'Lisää sivuja sivukartta';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Maailmanlaajuinen rehu kaikille foorumeille';
 $lang['HASH_INVALID'] = 'Hash %s on virheellinen';
 $lang['HASH_NOT_FOUND'] = 'Julkaisu hash %s ei löytynyt';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]teksti tämä sivu on muokattu osoitteessa: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Tämä linja voi nähdä vain ylläpitäjät.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Tällä sivulla, voit määrittää tekstin perussäännöt resurssi näkyy käyttäjille.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Tarkista, että et ole robotti';
 $lang['CAPTCHA_WRONG'] = 'Et voi vahvistaa, että et ole robotti';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täysin configured</h2><p>if et ole jo luonut avaimet, voit tehdä sen <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After voit luoda avaimet, sinun täytyy laittaa ne samaan tiedostoon library/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Ei Aihetta',
-    'GROUP_ADDED' => 'Sinut on lisätty tähän käyttäjäryhmään',
-    'GROUP_APPROVED' => 'Pyyntösi on hyväksytty',
-    'GROUP_REQUEST' => 'Pyynnön liittyä ryhmään on tehty',
-    'PRIVMSG_NOTIFY' => 'Uusi Yksityinen Viesti on saapunut',
-    'TOPIC_NOTIFY' => 'Aihe Vastaa Ilmoituksen %s',
-    'USER_ACTIVATE' => 'Aktivoida tilisi',
-    'USER_ACTIVATE_PASSWD' => 'Uusi salasana aktivointi',
-    'USER_WELCOME' => 'Tervetuloa %s Foorumeilla',
-    'USER_WELCOME_INACTIVE' => 'Tervetuloa %s Foorumeilla',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
