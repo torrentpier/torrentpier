@@ -24,13 +24,12 @@ if (!IS_ADMIN && $user_id != $user->id) {
     $this->ajax_die($lang['NOT_ADMIN']);
 }
 
-$new_ext_id = null;
+$new_ext_id = 0;
 $response = '';
 
 switch ($mode) {
     case 'delete':
         delete_avatar($user_id, $u_data['avatar_ext_id']);
-        $new_ext_id = 0;
         $response = get_avatar($user_id, $new_ext_id);
         break;
     default:
