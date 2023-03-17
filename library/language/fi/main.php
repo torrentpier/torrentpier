@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Seuraava Ajaa';
 $lang['CRON_RUN_COUNT'] = 'Toimii';
 $lang['CRON_MANAGE'] = 'Hallita';
 $lang['CRON_OPTIONS'] = 'Cron vaihtoehtoja';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron käytössä';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron-tarkista väli (sec)';
