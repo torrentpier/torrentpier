@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'administrasie';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'kategorie';
 $lang['HIDE_CAT'] = 'Versteek kategorieë';
-$lang['HIDE_CAT_MESS'] = 'Deel van kategorieë is versteek "opsies Wys" &middot; <a href="index.php?sh=1">Skou All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'onderwerp';
 $lang['TOPICS'] = 'onderwerpe';
 $lang['TOPICS_SHORT'] = 'onderwerpe';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Jy het \'n ongeldige Skype-aanmelding ingevoer';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Jy het \'n ongeldige Twitter-inskrywing ingevoer';
 
-$lang['FORUM_INDEX'] = '%s Forum Indeks'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forum Indeks'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Plaas nuwe onderwerp';
 $lang['POST_NEW_RELEASE'] = 'Plaas nuwe uitgawe';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'Plasings per bladsy';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Onderwerp beoordeling';
 
-$lang['NO_POST_MODE'] = 'Geen posmodus gekies nie'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Geen posmodus gekies nie'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Plaas nuwe onderwerp';
 $lang['POST_A_REPLY'] = 'Plaas nuwe antwoord';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Verwyder almal';
 $lang['CONFIRM_DELETE_PM'] = 'Is jy seker jy wil hierdie boodskap uitvee?';
 $lang['CONFIRM_DELETE_PMS'] = 'Is jy seker jy wil hierdie boodskappe uitvee?';
 
-$lang['INBOX_SIZE'] = 'Jou inkassie is<br /><b>%d%%</b> vol'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Jou inkassie is<br /><b>%d%%</b> vol'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Jou Sentbox is<br /><b>%d%%</b> vol';
 $lang['SAVEBOX_SIZE'] = 'Jou stoorkas is<br /><b>%d%%</b> vol';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'jaar';
 $lang['NO_THEMES'] = 'Geen temas in die databasis';
 $lang['TIMEZONE'] = 'Tydsone';
 $lang['DATE_FORMAT_PROFILE'] = 'Datum formaat';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Die sintaks wat gebruik word, is identies aan die PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date () </a> funksie.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Handtekening';
 $lang['SIGNATURE_EXPLAIN'] = 'Dit is \'n blok teks wat bygevoeg kan word aan plasings wat jy maak. Daar is \'n maksimum van %d karakters';
 $lang['SIGNATURE_DISABLE'] = 'Afgeteken vir oortreding van forumreëls';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'kortliks';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Jy het nie toestemming om enige forum op hierdie werf te soek nie.';
 
 $lang['NO_SEARCH_MATCH'] = 'Geen onderwerpe of plasings met jou soekkriteria nie';
-$lang['FOUND_SEARCH_MATCH'] = 'Soek gevind %d wedstryd'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Soektog het %d vuurhoutjies gevind'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Soek gevind %d wedstryd'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Soektog het %d vuurhoutjies gevind'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Te veel resultate kan gevind word, probeer asseblief meer spesifiek te wees';
 
 $lang['CLOSE_WINDOW'] = 'Maak toe die venster';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Kursiewe teks: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Onderstreep teks: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Strikeout-teks: [s]text[/s] (Ctrl + S)';
 $lang['QUOTE_TITLE'] = 'Aanhalingstekst: [quote]text[/quote] (Ctrl + Q)';
-$lang['IMG_TITLE'] = 'Voeg prent in: [img]http: // image_url[/img] (Ctrl + R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Voeg URL in: [url]http: // url[/url] of [url = http: // url] URL teks[/url] (Ctrl + W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kode vertoon: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'lys';
 $lang['LIST_TITLE'] = 'Lys: [list]text[/list] (Ctrl + l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistiek op die spoorsnyer';
 $lang['WHOIS_INFO'] = 'Inligting oor IP-adres';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Wys op moderators die index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Voormoderering</h4> <h6>Indien u nie verspreidings het na die status van v, # of T in hierdie afdeling, insluitend onderafdelings nie, sal die verspreiding hierdie status outomaties</h6> ontvang';
-$lang['TOR_COMMENT'] = '<h4>Kommentêre oor die status van verspreiding</h4> <h6>Comment stel jou suksesvol in staat om vrystellings van vrystellings te spesifiseer. Wanneer nedooformlennyh statusverskaffers beskikbaar stel vorm van die reaksie van die regstelling vrystelling</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding saad bonus </h4> <h6> Aantal verdelings word uitgedeel deur die gebruiker en die grootte van bonusse vir hulle (laai tye per uur) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'Na N-nommer van vrystellings';
 $lang['SEED_BONUS_POINTS'] = 'Bonusse in \'n uur';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Aanhegselnommer-instellings';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Aanhegsel opsies';
 
 $lang['UPLOAD_DIRECTORY'] = 'Laai gids op';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Voer die relatiewe pad van jou TorrentPier-installasie in die Bylae-oplaai-gids in. Voer byvoorbeeld \'lêers\' in as jou TorrentPier-installasie op http://www.yourdomain.com/torrentpier geleë is en die aanhangseloplaai-gids is by http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Aanhegselplasing-ikoon';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Hierdie prent word langs Bylae-skakels in individuele plasings vertoon. Laat hierdie veld leeg as jy nie wil hê dat \'n ikoon vertoon word nie. Hierdie instelling sal oorskryf word deur die instellings in uitbreidingsgroepbestuur.';
 $lang['ATTACH_TOPIC_ICON'] = 'Aanhegsel Onderwerp-ikoon';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Leë lêerinskrywing';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail gereset vir Aanhegsel: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Syncronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sinkroniseer-onderwerpe';
 $lang['SYNC_POSTS'] = 'Sync Posts';
 $lang['SYNC_THUMBNAILS'] = 'Sinkroniseer Thumbnails';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'vrystellings';
 
 $lang['BACK'] = 'terug';
 $lang['ERROR_FORM'] = 'Ongeldige velde';
-$lang['RELEASE_WELCOME'] = 'Moet die releae vorm invul';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Nuwe weergawe';
 $lang['NEXT'] = 'Aanhou';
 $lang['OTHER'] = 'ander';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'ander';
 $lang['TPL_EMPTY_FIELD'] = 'Jy moet die veld <b>%s</b> invul';
 $lang['TPL_EMPTY_SEL'] = 'Jy moet kies <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Nie \'n nommer nie';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Moet http: // URL wees';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Moet http: // IMG_URL wees';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'Sit in die vak';
 $lang['TPL_POSTER'] = 'plakkaat';
 $lang['TPL_REQ_FILLING'] = 'Vereis vulling';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'verwoester';
 $lang['TPL_IN_LINE'] = 'In dieselfde lyn';
 $lang['TPL_HEADER_ONLY'] = 'Net in \'n titel';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Ongeldige gebruikersnaam ingevoer by Soek';
-$lang['SEARCH_INVALID_EMAIL'] = 'Ongeldige e-posadres wat by Soek ingevoer is';
-$lang['SEARCH_INVALID_IP'] = 'Ongeldige IP-adres ingevoer vir Soek';
-$lang['SEARCH_INVALID_GROUP'] = 'Ongeldige groep is ingeteken by Soek';
-$lang['SEARCH_INVALID_RANK'] = 'Ongeldige rang ingevoer by Soek';
-$lang['SEARCH_INVALID_DATE'] = 'Ongeldige Datum ingevoer by Soek';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Ongeldige postelling is ingevoer by Soek';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Ongeldige gebruikersveld data ingevoer';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Ongeldige data wat ingevoer is vir Laaste besoek';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Ongeldige taal geselekteer';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Ongeldige tydsone geselekteer';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Ongeldige forum gekies';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Bekyk alle lede van die gekose groep.';
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Bekyk alle draers van die geselekteerde rang.';
 $lang['BANNED_USERS'] = 'Verbode gebruikers';
 $lang['DISABLED_USERS'] = 'Gestremde gebruikers';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrateurs - Alle gebruikers met Administrateur bevoegdhede; Moderators - Alle forum moderators; Banned Users - Alle rekeninge wat op hierdie forums verban is; Gestremde gebruikers - Alle gebruikers met gedeaktiveerde rekeninge (óf handmatig gedeaktiveer of nooit hul e-pos adres geverifieer nie); Gebruikers met gestremde PM\'e - Selekteer gebruikers wie Privaatboodskappe Privaatboodskappe verwyder het (Gedoen via Gebruikersbestuur)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Gelykes';
 $lang['GREATER_THAN'] = 'Groter as';
 $lang['LESS_THAN'] = 'Minder as';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'U kan soek vir gebruikers wat gebaseer is op die postcount waarde. U kan ook soek met \'n spesifieke waarde, groter as of minder as \'n waarde of tussen twee waardes. Om die reekssoektog te doen, kies \'Gelyk\' en stel dan die begin- en eindwaardes van die reeks geskei deur \'n streep (-), bv. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Soek vir gebruikers gebaseer op verskillende profiel velde. Wildcards word ondersteun deur \'n asterix (*) te gebruik.';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'U kan op soek na gebruikers op grond van hul laaste inskrywing datum soek deur hierdie soektog te gebruik';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Dit sal gebruikers vertoon wat \'n spe
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Gebruikers wat \'n spesifieke tydsone in hul profiel gekies het';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Wys gebruikers wat \'n spesifieke styl gekies het.';
 $lang['MODERATORS_OF'] = 'Moderators van';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Soek vir gebruikers met moderering regte aan \'n spesifieke forum. Moderator-toestemmings word ook erken deur gebruikertoestemmings of deur in \'n groep met die regte groeppermsies te wees.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s het %d resultaat (s) opgelewer. Voer <a href="%s">aangesoek</a> uit.';
 $lang['BANNED'] = 'Verban';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'opsies';
 $lang['SITEMAP_CREATE'] = 'Skep / werk die sitemap op';
 $lang['SITEMAP_NOTIFY'] = 'Stel soekenjins in kennis van nuwe weergawe van sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Wat om volgende te doen?';
-$lang['SITEMAP_GOOGLE_1'] = 'Registreer jou werf by <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> met jou Google-rekening.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> van die webwerf wat jy geregistreer het.';
-$lang['SITEMAP_YANDEX_1'] = 'Registreer jou werf by <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> met jou Yandex-rekening.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> van die webwerf wat jy geregistreer het.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Registreer jou webwerf by <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> met jou Microsoft-rekening.';
 $lang['SITEMAP_BING_2'] = 'Voeg sitemap van die webwerf wat jy in sy instellings geregistreer het, by.';
 $lang['SITEMAP_ADD_TITLE'] = 'Bykomende bladsye vir sitemap';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globale voer vir alle forums';
 $lang['HASH_INVALID'] = 'Hash %s is ongeldig';
 $lang['HASH_NOT_FOUND'] = 'Vrylating met hash %s nie gevind nie';
 
-$lang['TERMS_EMPTY_TEXT'] = '[Align = center] Die teks van hierdie bladsy is geredigeer op: [url = http: //%s/admin/admin_terms.php] admin / admin_terms.php[/url]. Hierdie reël kan net administrateurs.[/align] sien';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Op hierdie bladsy kan u die teks van die basiese reëls van die bron spesifiseer vir gebruikers.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Maak seker dat jy nie \'n robot is nie';
 $lang['CAPTCHA_WRONG'] = 'Jy kon nie bevestig dat jy nie \'n robot is nie';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie ten volle gekonfigureer nie</h2><p>Indien u die sleutels nie reeds opgewek het nie, kan u dit op <a href="https://www.google.com/recaptcha/admin">https: //www.google.com/recaptcha/admin</a>.<br />After u die sleutels genereer, moet u dit by die lêerbiblioteek / config .php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Geen onderwerp',
-    'GROUP_ADDED' => 'Jy is by hierdie gebruikersgroep gevoeg',
-    'GROUP_APPROVED' => 'Jou versoek is goedgekeur',
-    'GROUP_REQUEST' => '\'N Versoek om by u groep aan te sluit is gemaak',
-    'PRIVMSG_NOTIFY' => 'Nuwe Privaat Boodskap het aangebreek',
-    'TOPIC_NOTIFY' => 'Onderwerp Antwoord Kennisgewing %s',
-    'USER_ACTIVATE' => 'Heraktiveer jou rekening',
-    'USER_ACTIVATE_PASSWD' => 'Nuwe wagwoordaktivering',
-    'USER_WELCOME' => 'Welkom by %s Forums',
-    'USER_WELCOME_INACTIVE' => 'Welkom by %s Forums',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
