@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Keyingi Run';
 $lang['CRON_RUN_COUNT'] = 'ishlaydi';
 $lang['CRON_MANAGE'] = 'boshqarish';
 $lang['CRON_OPTIONS'] = 'cron imkoniyatlari';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'cron yoqilgan';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron tekshirish interval (sek)';
