@@ -12,8 +12,8 @@ $lang['ADMIN'] = '관리';
 $lang['FORUM'] = '포럼';
 $lang['CATEGORY'] = '카테고리';
 $lang['HIDE_CAT'] = '카테고리 숨기기';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = '일부 범주는 사용자 지정 표시 옵션에 의해 숨겨집니다.';
+$lang['SHOW_ALL'] = '모두 보이기';
 $lang['TOPIC'] = '주제';
 $lang['TOPICS'] = '주제';
 $lang['TOPICS_SHORT'] = '주제';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = '이탤릭체 텍스트:[i]text[/i](Ctrl+)';
 $lang['UNDERLINE'] = '밑줄 텍스트:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '삼진 텍스트:[s]text[/s](Ctrl+S)';
 $lang['QUOTE_TITLE'] = '견적 텍스트:[quote]text[/quote](Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = '이미지 삽입: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'URL 삽입: [url]https://url[/url] 또는 [url=https://url]URL 텍스트[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = '코드 표시:[code]code[/code](Ctrl+K)';
 $lang['LIST'] = '목록';
 $lang['LIST_TITLE'] = '목록:[list]text[/list](Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = '에 대한 통계 추적기';
 $lang['WHOIS_INFO'] = 'IP 주소에 대한 정보';
 $lang['SHOW_MOD_HOME_PAGE'] = '에 운영자 이 index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>Pre-moderation</h4> <h6>If 없는 배포판의 상태 v,#또는 T 에서,이 섹션을 포함 하위 섹션을 배포 자동으로 받 이 status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>배포 상태에 대한 설명</h4> <h6>설명을 통해 릴리스에 발생한 오류를 지적할 수 있습니다. 상태가 불완전한 경우 릴리스</h6>을 수정하기 위해 릴리스 관리자가 릴리스 응답 양식을 사용할 수 있습니다.';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding 씨 보너스 </h4> <h6> 번호의 배포판은 사용자에 의해 크기의 보너스를 위한(충전 시간은 한 시간)</h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-수 릴리스';
 $lang['SEED_BONUS_POINTS'] = '보너스 시간';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = '빈 파일에 항목';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = '축소판 resetted 위해 첨부파일:%s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = '첨부 파일 동기화가 완료되었습니다.';
 $lang['SYNC_TOPICS'] = '동기화를 주제';
 $lang['SYNC_POSTS'] = '동기 게시물';
 $lang['SYNC_THUMBNAILS'] = '미리보기';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = '다음 실행';
 $lang['CRON_RUN_COUNT'] = '실행';
 $lang['CRON_MANAGE'] = '리';
 $lang['CRON_OPTIONS'] = 'Cron 옵션';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = '경고! cron 스크립트 실행이 비활성화됩니다. 활성화하려면 APP_CRON_ENABLED 변수를 설정합니다.';
 
 $lang['CRON_ENABLED'] = 'Cron 사용';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron 확인 간격(sec)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = '릴리스';
 
 $lang['BACK'] = '시';
 $lang['ERROR_FORM'] = '잘못된 필드';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = '릴리스 양식을 작성하십시오';
 $lang['NEW_RELEASE'] = '새로운 릴리스';
 $lang['NEXT'] = '계속';
 $lang['OTHER'] = '기타';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = '기타';
 $lang['TPL_EMPTY_FIELD'] = '을 작성해야 할 필드 <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = '선택해야 합니다 <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b>-num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - https:// URL이어야 함';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - https://IMG_URL이어야 합니다.';
 $lang['TPL_PUT_INTO_SUBJECT'] = '에 넣어 주제';
 $lang['TPL_POSTER'] = '포스터';
 $lang['TPL_REQ_FILLING'] = '필요한 충전';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = '스포일러';
 $lang['TPL_IN_LINE'] = '에서 같은 줄을';
 $lang['TPL_HEADER_ONLY'] = '에서만 제목';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = '검색에 잘못된 사용자 이름을 입력했습니다.';
+$lang['SEARCH_INVALID_EMAIL'] = '검색에 잘못된 이메일 주소를 입력했습니다.';
+$lang['SEARCH_INVALID_IP'] = '검색에 잘못된 IP 주소를 입력했습니다.';
+$lang['SEARCH_INVALID_GROUP'] = '검색에 잘못된 그룹이 입력되었습니다.';
+$lang['SEARCH_INVALID_RANK'] = '검색에 잘못된 순위를 입력했습니다.';
+$lang['SEARCH_INVALID_DATE'] = '검색에 잘못된 날짜를 입력했습니다.';
+$lang['SEARCH_INVALID_POSTCOUNT'] = '검색에 잘못된 게시물 수가 입력되었습니다.';
 $lang['SEARCH_INVALID_USERFIELD'] = '잘못된 Userfield 데이터 입력';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = '마지막으로 방문한 검색에 잘못된 날짜를 입력했습니다.';
 $lang['SEARCH_INVALID_LANGUAGE'] = '잘못된 선택한 언어';
 $lang['SEARCH_INVALID_TIMEZONE'] = '잘못된 표준 시간대 선택';
 $lang['SEARCH_INVALID_MODERATORS'] = '잘못된 포럼 선택';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = '모두 보기를 선택한 그룹의 구
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = '모두 보기업의 순위를 선택합니다.';
 $lang['BANNED_USERS'] = '금지 사용자';
 $lang['DISABLED_USERS'] = '장애인 사용자';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = '관리자 - 관리자 권한이 있는 모든 사용자 중재자 - 모든 포럼 중재자; 차단된 사용자 - 이 포럼에서 차단된 모든 계정; 비활성화된 사용자 - 비활성화된 계정이 있는 모든 사용자(수동으로 비활성화되었거나 이메일 주소를 확인하지 않은 사용자) PM이 비활성화된 사용자 - 비공개 메시지 권한이 제거된 사용자를 선택합니다(사용자 관리를 통해 완료).';
+$lang['POSTCOUNT'] = '게시물 수';
 $lang['EQUALS'] = 'Equals';
 $lang['GREATER_THAN'] = '보다 크';
 $lang['LESS_THAN'] = '보';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = '게시물 수 값을 기준으로 사용자를 검색할 수 있습니다. 값보다 크거나 작은 특정 값 또는 두 값 사이에서 검색할 수 있습니다. 범위 검색을 수행하려면 "같음"을 선택한 다음 대시(-)로 구분된 범위의 시작 값과 끝 값을 입력합니다(예: 10-15).';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = '검색에 대한 사용자에 따라 다양한 프로필드입니다. 와일드카드를 사용하여 지원 아스테릭스(*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = '검색할 수 있습에 따라 사용자를 위해 그들의 마지막 로그인 날짜를 사용하여 이 검색 옵션';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = '이를 사용자에게 표시합니다
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = '사용자가 선택한 특정 시간대에 자신의 프로필';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = '표시 사용자가 선택된 특정한 스타일이다.';
 $lang['MODERATORS_OF'] = '의 중재자';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = '특정 포럼에 대한 중재 권한이 있는 사용자를 검색합니다. 중재 권한은 사용자 권한 또는 올바른 그룹 권한이 있는 그룹에 속해 있음으로 인식됩니다.';
 
 $lang['SEARCH_USERS_NEW'] = '%s 굴복 %d 결과(s). 을 수행 <a href="%s">another search</a> 니다.';
 $lang['BANNED'] = '금지';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = '모든 포럼의 글로벌 피드';
 $lang['HASH_INVALID'] = '해시가 잘못되었 %s';
 $lang['HASH_NOT_FOUND'] = '릴리스와 해시 %s 발견되지 않았';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]이 페이지의 텍스트는 [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]에서 편집됩니다. 이 회선은 관리자만 볼 수 있습니다.[/align]';
 $lang['TERMS_EXPLAIN'] = '이 페이지에서 텍스트를 지정할 수 있습의 기본적인 규칙은 자원의 사용자에게 표시합니다.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha 되지 않는 완전히 configured</h
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => '주제 없음',
+    'GROUP_ADDED' => '사용자 그룹에 추가되었습니다.',
+    'GROUP_APPROVED' => '사용자 그룹 가입 요청이 승인되었습니다.',
+    'GROUP_REQUEST' => '사용자 그룹 가입 요청',
+    'PRIVMSG_NOTIFY' => '새 비공개 메시지',
+    'TOPIC_NOTIFY' => '스레드 %s의 응답 알림',
+    'USER_ACTIVATE' => '계정 재활성화',
+    'USER_ACTIVATE_PASSWD' => '새 비밀번호 확인',
+    'USER_WELCOME' => '사이트에 오신 것을 환영합니다 %s',
+    'USER_WELCOME_INACTIVE' => '사이트에 오신 것을 환영합니다 %s',
 ];
