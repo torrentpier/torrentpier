@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'келесі Run';
 $lang['CRON_RUN_COUNT'] = 'Жүгірулер';
 $lang['CRON_MANAGE'] = 'басқару';
 $lang['CRON_OPTIONS'] = 'Жаспарлаубаптаулары';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron қосылған';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron тексеру аралығы (сек)';
