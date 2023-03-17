@@ -2389,6 +2389,7 @@ $lang['CRON_NEXT_RUN'] = 'Növbəti Başlanması';
 $lang['CRON_RUN_COUNT'] = 'İşləyir';
 $lang['CRON_MANAGE'] = 'İdarə';
 $lang['CRON_OPTIONS'] = 'Variantları хрон';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Хрон daxil';
 $lang['CRON_CHECK_INTERVAL'] = 'Хрон interval yoxlama (s)';
