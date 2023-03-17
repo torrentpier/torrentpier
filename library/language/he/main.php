@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'מנהל';
 $lang['FORUM'] = 'פורום';
 $lang['CATEGORY'] = 'קטגוריה';
 $lang['HIDE_CAT'] = 'להסתיר קטגוריות';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'קטגוריות מסוימות מוסתרות על ידי אפשרויות תצוגה מותאמות אישית';
+$lang['SHOW_ALL'] = 'הצג הכול';
 $lang['TOPIC'] = 'נושא';
 $lang['TOPICS'] = 'נושאים';
 $lang['TOPICS_SHORT'] = 'נושאים';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'טקסט נטוי: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'קו תחתון טקסט: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'טקסט חוצה: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'ציטוט טקסט: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'הוסף תמונה: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'כתובת';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'הוסף כתובת אתר: [url]https://url[/url] או [url=https://url]כתובת URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'קוד תצוגה: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'רשימת';
 $lang['LIST_TITLE'] = 'הרשימה: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'נתונים סטטיסטיים על הגשש';
 $lang['WHOIS_INFO'] = 'מידע על כתובת ה-IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'להראות על מנהלים. index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> מראש moderation</h4> <h6>If אתה לא צריך הפצות למעמד של v, #, או T בסעיף זה, לרבות סעיפים קטנים, החלוקה תהיה באופן אוטומטי לקבל את זה status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>הערה על מצב הפצה</h4> <h6>ההערה מאפשרת לך להצביע על השגיאות שנעשו למשחרר. אם הסטטוסים אינם שלמים, טופס תגובת שחרור זמין למנהל השחרור כדי לתקן את הגרסה</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding זרע בונוס </h4> <h6> מספר הפצות הם חילקו על ידי המשתמש, בגודל של בונוסים עבור אותם (זמני טעינה שעה) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-מספר מהדורות';
 $lang['SEED_BONUS_POINTS'] = 'בונוסים שעה';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'רשומת קובץ ריק';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'ממוזערת resetted עבור קובץ מצורף: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'סנכרון קבצים מצורפים הסתיים.';
 $lang['SYNC_TOPICS'] = 'סנכרון נושאים';
 $lang['SYNC_POSTS'] = 'סנכרון הודעות';
 $lang['SYNC_THUMBNAILS'] = 'סנכרון תמונות ממוזערות';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'הריצה הבאה';
 $lang['CRON_RUN_COUNT'] = 'מנהל';
 $lang['CRON_MANAGE'] = 'ניהול';
 $lang['CRON_OPTIONS'] = 'אפשרויות תזמון';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'אַזהָרָה! הפעלת סקריפטים של cron מושבתת. כדי להפעיל אותו, הגדר את המשתנה APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron זמין';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron לבדוק את מרווח הזמן (שניות)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'משחרר';
 
 $lang['BACK'] = 'חזרה';
 $lang['ERROR_FORM'] = 'חוקי שדות';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'נא למלא את טופס השחרור';
 $lang['NEW_RELEASE'] = 'פרסום חדש';
 $lang['NEXT'] = 'המשך';
 $lang['OTHER'] = 'אחרים';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'אחרים';
 $lang['TPL_EMPTY_FIELD'] = 'אתה חייב למלא את שדה <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'עליך לבחור <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - לא num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - חייב להיות https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - חייב להיות https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'להכניס את הנושא';
 $lang['TPL_POSTER'] = 'פוסטר';
 $lang['TPL_REQ_FILLING'] = 'דורש מילוי';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'ספוילר';
 $lang['TPL_IN_LINE'] = 'באותו קו';
 $lang['TPL_HEADER_ONLY'] = 'רק כותרת';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'שם משתמש לא חוקי הוזן לחיפוש';
+$lang['SEARCH_INVALID_EMAIL'] = 'כתובת אימייל לא חוקית הוזנה לחיפוש';
+$lang['SEARCH_INVALID_IP'] = 'הוזנה כתובת IP לא חוקית לחיפוש';
+$lang['SEARCH_INVALID_GROUP'] = 'הוזנה קבוצה לא חוקית לחיפוש';
+$lang['SEARCH_INVALID_RANK'] = 'דירוג לא חוקי הוזן לחיפוש';
+$lang['SEARCH_INVALID_DATE'] = 'הוזן תאריך לא חוקי לחיפוש';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'הוזנה ספירת פוסטים לא חוקית לחיפוש';
 $lang['SEARCH_INVALID_USERFIELD'] = 'חוקי Userfield הנתונים שהוזנו';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'הוזן תאריך לא חוקי לחיפוש אחרון שביקרתם בו';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'חוקי בשפה שנבחרה';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'חוקי אזור הזמן שנבחר';
 $lang['SEARCH_INVALID_MODERATORS'] = 'חוקי פורום נבחרים';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'הצג את כל חברי הקבוצה �
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'הצג את כל נושאות המטוסים של הנבחרת דרגה.';
 $lang['BANNED_USERS'] = 'משתמשים מוגבלים';
 $lang['DISABLED_USERS'] = 'נכים המשתמשים';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'מנהלי מערכת - כל המשתמשים בעלי סמכויות מנהל; מנחים - כל מנהלי הפורום; משתמשים אסורים - כל החשבונות שנאסרו בפורומים אלו; משתמשים מושבתים - כל המשתמשים עם חשבונות מושבתים (או שהשבתו ידנית או שמעולם לא אימתו את כתובת האימייל שלהם); משתמשים עם PM מושבתים - בוחר משתמשים שהוסרו להם הרשאות ההודעות הפרטיות (בוצע באמצעות ניהול משתמשים)';
+$lang['POSTCOUNT'] = 'ספירת פוסטים';
 $lang['EQUALS'] = 'שווה';
 $lang['GREATER_THAN'] = 'גדול יותר';
 $lang['LESS_THAN'] = 'פחות';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'אתה יכול לחפש משתמשים על סמך ערך ספירת הפוסטים. אתה יכול לחפש לפי ערך ספציפי, גדול או קטן מערך או בין שני ערכים. כדי לבצע את חיפוש הטווח, בחר "שווה" ואז שים את ערכי ההתחלה והסיום של הטווח מופרדים במקף (-), למשל 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'חיפוש עבור משתמשים בהתבסס על הפרופיל שונים שדות. תווים כלליים נתמכים באמצעות אסטריקס (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'אתה יכול לחפש משתמשים לפי תאריך הכניסה האחרונה באמצעות אפשרות חיפוש';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'זה יציג למשתמשים את מ
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'משתמשים אשר נבחרו ספציפית אזור הזמן בפרופיל שלהם';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'תצוגה משתמשים שבחרו סגנון מסוים.';
 $lang['MODERATORS_OF'] = 'מנהלים של';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'חפש משתמשים עם הרשאות ניהול לפורום ספציפי. הרשאות ניהול מזוהות על-ידי הרשאות משתמש או על-ידי הימצאות בקבוצה עם הרשאות הקבוצה הנכונות.';
 
 $lang['SEARCH_USERS_NEW'] = '%s הניב %d התוצאה(s). לבצע <a href="%s">another search</a>.';
 $lang['BANNED'] = 'אסר';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'גלובל להאכיל עבור כל הפורומ�
 $lang['HASH_INVALID'] = 'חשיש %s אינו חוקי';
 $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]הטקסט של דף זה נערך בכתובת: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. שורה זו יכולה לראות רק מנהלי מערכת.[/align]';
 $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקסט של הכללים הבסיסיים של משאב זה מוצג בפני המשתמשים.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha לא להיות לגמרי configured
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'ללא נושא',
+    'GROUP_ADDED' => 'נוספת לקבוצת המשתמשים',
+    'GROUP_APPROVED' => 'בקשתך להצטרף לקבוצת המשתמשים התקבלה',
+    'GROUP_REQUEST' => 'בקשה להצטרף לקבוצת המשתמשים שלך',
+    'PRIVMSG_NOTIFY' => 'הודעה פרטית חדשה',
+    'TOPIC_NOTIFY' => 'הודעה על תגובה בשרשור %s',
+    'USER_ACTIVATE' => 'הפעלה מחדש של החשבון',
+    'USER_ACTIVATE_PASSWD' => 'אישור סיסמה חדשה',
+    'USER_WELCOME' => 'ברוכים הבאים לאתר %s',
+    'USER_WELCOME_INACTIVE' => 'ברוכים הבאים לאתר %s',
 ];
