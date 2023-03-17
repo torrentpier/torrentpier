@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'הריצה הבאה';
 $lang['CRON_RUN_COUNT'] = 'מנהל';
 $lang['CRON_MANAGE'] = 'ניהול';
 $lang['CRON_OPTIONS'] = 'אפשרויות תזמון';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron זמין';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron לבדוק את מרווח הזמן (שניות)';
