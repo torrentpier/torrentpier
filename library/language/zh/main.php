@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = '下运行';
 $lang['CRON_RUN_COUNT'] = '运行';
 $lang['CRON_MANAGE'] = '管理';
 $lang['CRON_OPTIONS'] = 'Cron的选择';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron启用';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron检查间隔的时间(秒)';
