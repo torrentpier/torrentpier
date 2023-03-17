@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Amministrare';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Categoria';
 $lang['HIDE_CAT'] = 'Nascondere categorie';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Alcune categorie sono nascoste da opzioni di visualizzazione personalizzate';
+$lang['SHOW_ALL'] = 'Mostra tutto';
 $lang['TOPIC'] = 'Argomento';
 $lang['TOPICS'] = 'Argomenti';
 $lang['TOPICS_SHORT'] = 'Argomenti';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Testo in corsivo: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Sottolineare il testo: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Testo barrato: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Preventivo testo: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Inserisci immagine: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Inserisci URL: [url]https://url[/url] o [url=https://url]Testo URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Codice display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Elenco';
 $lang['LIST_TITLE'] = 'Elenco: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistiche sul tracker';
 $lang['WHOIS_INFO'] = 'Informazioni sull\'indirizzo IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Visualizza sulla moderatori index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If non si hanno distribuzioni per lo stato di v, #, o T in questa sezione, comprese le sottosezioni, la distribuzione verrà automaticamente visualizzato questo status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Commento sullo stato di una distribuzione</h4> <h6>Il commento permette di segnalare gli errori commessi al releaser. Se gli stati sono incompleti, un modulo di risposta al rilascio è disponibile per il responsabile del rilascio per correggere il rilascio</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seme bonus </h4> <h6> Numero di distribuzioni sono consegnati dall\'utente e la dimensione di bonus per loro (i tempi di ricarica di un\'ora) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-numero di rilasci';
 $lang['SEED_BONUS_POINTS'] = 'bonus di un\'ora';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'File Vuoto Ingresso';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Miniatura resettato per il fissaggio: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Sincronizzazione degli allegati terminata.';
 $lang['SYNC_TOPICS'] = 'Sync Argomenti';
 $lang['SYNC_POSTS'] = 'Sync Post';
 $lang['SYNC_THUMBNAILS'] = 'Sync Miniature';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Prossima Corsa';
 $lang['CRON_RUN_COUNT'] = 'Corre';
 $lang['CRON_MANAGE'] = 'Gestire';
 $lang['CRON_OPTIONS'] = 'Cron opzioni';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Avvertimento! L\'esecuzione di script cron è disabilitata. Per abilitarlo, imposta la variabile APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron abilitato';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron intervallo di controllo (sec)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Rilascia';
 
 $lang['BACK'] = 'Indietro';
 $lang['ERROR_FORM'] = 'Campi non validi';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Si prega di compilare il modulo di rilascio';
 $lang['NEW_RELEASE'] = 'Nuova release';
 $lang['NEXT'] = 'Continua';
 $lang['OTHER'] = 'Altri';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Altri';
 $lang['TPL_EMPTY_FIELD'] = 'È necessario compilare il campo <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'È necessario selezionare <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Non un num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Deve essere l\'URL https://';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Deve essere https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'mettere in oggetto';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'richiede la compilazione di';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'nella stessa linea';
 $lang['TPL_HEADER_ONLY'] = 'solo in un titolo';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Nome utente non valido inserito per la ricerca';
+$lang['SEARCH_INVALID_EMAIL'] = 'Indirizzo email non valido inserito per la ricerca';
+$lang['SEARCH_INVALID_IP'] = 'Indirizzo IP non valido inserito per la ricerca';
+$lang['SEARCH_INVALID_GROUP'] = 'Gruppo non valido inserito per la ricerca';
+$lang['SEARCH_INVALID_RANK'] = 'Posizione non valida inserita per la ricerca';
+$lang['SEARCH_INVALID_DATE'] = 'Data inserita per la ricerca non valida';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Numero di post inserito nella ricerca non valido';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Non valido Userfield dati inseriti';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Data inserita per l\'ultima ricerca visitata non valida';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Non Valido Lingua Selezionata';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Non Valido Fuso Orario Selezionato';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Non Valido Il Forum Selezionato';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Visualizza tutti i membri del gruppo sel
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Visualizza tutti i vettori selezionati rango.';
 $lang['BANNED_USERS'] = 'Vietato Agli Utenti';
 $lang['DISABLED_USERS'] = 'Gli Utenti Disabili';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Amministratori - Tutti gli utenti con poteri di amministratore; Moderatori - Tutti i moderatori del forum; Utenti bannati - Tutti gli account che sono stati bannati su questi forum; Utenti Disabili - Tutti gli utenti con account disabilitati (disabilitati manualmente o mai verificati il loro indirizzo email); Utenti con PM disabilitati: seleziona gli utenti a cui sono stati rimossi i privilegi per i messaggi privati (fatto tramite Gestione utenti)';
+$lang['POSTCOUNT'] = 'Conteggio messaggi';
 $lang['EQUALS'] = 'Uguale';
 $lang['GREATER_THAN'] = 'Maggiore';
 $lang['LESS_THAN'] = 'A meno di';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Puoi cercare gli utenti in base al valore del conteggio dei post. Puoi cercare per un valore specifico, maggiore o minore di un valore o tra due valori. Per eseguire la ricerca per intervallo, seleziona "Uguale a", quindi inserisci i valori iniziale e finale dell\'intervallo separati da un trattino (-), ad esempio 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Ricerca di utenti in base a vari campi del profilo. I caratteri jolly sono supportati utilizzando un asterisco (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'È possibile cercare per gli utenti in base alla loro ultima data di accesso utilizzando questa opzione di ricerca';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Questo consentirà di visualizzare gli
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Gli utenti che hanno selezionato un determinato fuso orario nel loro profilo';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Visualizzare gli utenti che hanno selezionato uno stile specifico.';
 $lang['MODERATORS_OF'] = 'I moderatori di';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Cerca utenti con autorizzazioni di moderazione per un forum specifico. Le autorizzazioni di moderazione sono riconosciute dalle autorizzazioni utente o dall\'appartenenza a un gruppo con le autorizzazioni di gruppo corrette.';
 
 $lang['SEARCH_USERS_NEW'] = '%s ceduto %d risultato(s). Eseguire <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Vietato';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Feed globale per tutti i forum';
 $lang['HASH_INVALID'] = 'Hash %s non è valido';
 $lang['HASH_NOT_FOUND'] = 'Versione con hash %s non trovato';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Il testo di questa pagina è modificato in: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Questa linea può vedere solo gli amministratori.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Su questa pagina, è possibile specificare il testo di le regole di base della risorsa viene visualizzato dagli utenti.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha non essere pienamente configured</h2>
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Nessun soggetto',
+    'GROUP_ADDED' => 'Sei stato aggiunto al gruppo utenti',
+    'GROUP_APPROVED' => 'La tua richiesta di adesione al gruppo utenti è stata accolta',
+    'GROUP_REQUEST' => 'Una richiesta per unirti al tuo gruppo di utenti',
+    'PRIVMSG_NOTIFY' => 'Nuovo messaggio privato',
+    'TOPIC_NOTIFY' => 'Notifica di risposta nel thread %s',
+    'USER_ACTIVATE' => 'Riattivazione dell\'account',
+    'USER_ACTIVATE_PASSWD' => 'Conferma di una nuova password',
+    'USER_WELCOME' => 'Benvenuto nel sito %s',
+    'USER_WELCOME_INACTIVE' => 'Benvenuto nel sito %s',
 ];
