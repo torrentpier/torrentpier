@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'अगला भागो';
 $lang['CRON_RUN_COUNT'] = 'रन';
 $lang['CRON_MANAGE'] = 'प्रबंधित';
 $lang['CRON_OPTIONS'] = 'क्रॉन विकल्प';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'क्रोन सक्षम किया गया';
 $lang['CRON_CHECK_INTERVAL'] = 'क्रोन चेक अंतराल (सेकंड)';
