@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Administration';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Skjul kategorier';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Nogle kategorier er skjult af tilpassede visningsmuligheder';
+$lang['SHOW_ALL'] = 'Vis alt';
 $lang['TOPIC'] = 'Emne';
 $lang['TOPICS'] = 'Emner';
 $lang['TOPICS_SHORT'] = 'Emner';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Kursiv tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understreget tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Overstrege tekst: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Citat af tekst: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Indsæt billede: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Indsæt URL: [url]https://url[/url] eller [url=https://url]URL-tekst[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kode display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Listen';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistik på tracker';
 $lang['WHOIS_INFO'] = 'Oplysninger om IP-adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Vis på moderatorer den index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du ikke har udlodning til status af v, #, eller T i dette afsnit, herunder de afsnit, distribution vil automatisk modtage dette status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Kommentar til status for en distribution</h4> <h6>Kommentaren giver dig mulighed for at påpege de fejl, der er lavet til udgiveren. Hvis statusserne er ufuldstændige, er en frigivelsessvarformular tilgængelig for udgivelsesadministratoren for at rette udgivelsen</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding frø bonus </h4> <h6> Antallet af distributioner, som er udleveret af brugeren, og størrelsen af bonusser til dem (opladning gange i timen) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-antal udgivelser';
 $lang['SEED_BONUS_POINTS'] = 'bonusser i en time';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tom Fil Indlæg';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Miniature resetted for Vedhæftede fil: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Synkronisering af vedhæftede filer er afsluttet.';
 $lang['SYNC_TOPICS'] = 'Sync Emner';
 $lang['SYNC_POSTS'] = 'Sync Indlæg';
 $lang['SYNC_THUMBNAILS'] = 'Sync Thumbnails';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Næste Løb';
 $lang['CRON_RUN_COUNT'] = 'Kører';
 $lang['CRON_MANAGE'] = 'Styre';
 $lang['CRON_OPTIONS'] = 'Cron muligheder';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Advarsel! Kørsel af cron-scripts er deaktiveret. For at aktivere den skal du indstille variablen APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron aktiveret';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron ind interval (sek)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Udgivelser';
 
 $lang['BACK'] = 'Tilbage';
 $lang['ERROR_FORM'] = 'Ugyldig felter';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Udfyld venligst frigivelsesformularen';
 $lang['NEW_RELEASE'] = 'Ny udgivelse';
 $lang['NEXT'] = 'Fortsæt';
 $lang['OTHER'] = 'Andre';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Andre';
 $lang['TPL_EMPTY_FIELD'] = 'Du skal udfylde felt <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Du skal vælge <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ikke en num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Skal være https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Skal være https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'sætte mig ind i emnet';
 $lang['TPL_POSTER'] = 'plakat';
 $lang['TPL_REQ_FILLING'] = 'kræver påfyldning';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'i samme linje';
 $lang['TPL_HEADER_ONLY'] = 'kun i en titel';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Ugyldigt brugernavn indtastet for at søge';
+$lang['SEARCH_INVALID_EMAIL'] = 'Ugyldig e-mailadresse indtastet for at søge';
+$lang['SEARCH_INVALID_IP'] = 'Ugyldig IP-adresse indtastet for at søge';
+$lang['SEARCH_INVALID_GROUP'] = 'Ugyldig gruppe indtastet for at søge';
+$lang['SEARCH_INVALID_RANK'] = 'Ugyldig rangering indtastet for at søge';
+$lang['SEARCH_INVALID_DATE'] = 'Ugyldig dato indtastet for søgning';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Ugyldigt antal indlæg er indtastet for at søge';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Ugyldig Userfield indtastede data';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Ugyldig dato indtastet for sidst besøgte søgning';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Ugyldigt Sprog, Der Er Valgt';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Ugyldig Valgte Tidszone';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Ugyldig Forum Valgt';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Se alle medlemmer af den valgte gruppe.'
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Se alle bærere af den valgte værdi.';
 $lang['BANNED_USERS'] = 'Blokerede Brugere';
 $lang['DISABLED_USERS'] = 'Handicappede Brugere';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratorer - Alle brugere med administratorbeføjelser; Moderatorer - Alle forummoderatorer; Udelukkede brugere - Alle konti, der er blevet forbudt på disse fora; Deaktiverede brugere - Alle brugere med deaktiverede konti (enten manuelt deaktiveret eller aldrig bekræftet deres e-mailadresse); Brugere med deaktiverede PM\'er - Vælger brugere, der har fjernet rettighederne Private Messages (Udført via brugeradministration)';
+$lang['POSTCOUNT'] = 'Postantal';
 $lang['EQUALS'] = 'Lig';
 $lang['GREATER_THAN'] = 'Større end';
 $lang['LESS_THAN'] = 'Mindre end';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Du kan søge efter brugere baseret på postantalværdien. Du kan enten søge efter en bestemt værdi, større end eller mindre end en værdi eller mellem to værdier. For at udføre rækkeviddesøgningen skal du vælge "Er lig med" og derefter indsætte begyndelses- og slutværdierne for området adskilt af en bindestreg (-), f.eks. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Søg efter brugere, der er baseret på forskellige felter. Wildcards understøttes ved brug af en asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Du kan søge efter brugere, baseret på deres sidste login-tidspunkt ved hjælp af denne søgefunktion';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Dette vil vise brugere, som har valgt 
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Brugere, der har valgt en bestemt tidszone i deres profil';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Vise brugere der har valgt en bestemt stil.';
 $lang['MODERATORS_OF'] = 'Redaktører af';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Søg efter brugere med modereringstilladelser til et specifikt forum. Modereringstilladelser genkendes enten af brugertilladelser eller ved at være i en gruppe med de rigtige gruppetilladelser.';
 
 $lang['SEARCH_USERS_NEW'] = '%s givet %d resultat(er). Udføre <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Forbudt';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globalt feed til alle fora';
 $lang['HASH_INVALID'] = 'Hash %s er ugyldig';
 $lang['HASH_NOT_FOUND'] = 'Udgivelse med hash %s ikke fundet';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksten på denne side er redigeret på: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Denne linje kan kun se administratorer.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På denne side, kan du angive den tekst, der i de grundlæggende regler af den ressource, der vises til brugerne.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ikke er fuldt configured</h2><p>if du
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Intet emne',
+    'GROUP_ADDED' => 'Du er blevet tilføjet til brugergruppen',
+    'GROUP_APPROVED' => 'Din anmodning om at deltage i brugergruppen er blevet imødekommet',
+    'GROUP_REQUEST' => 'En anmodning om at blive medlem af din brugergruppe',
+    'PRIVMSG_NOTIFY' => 'Ny privat besked',
+    'TOPIC_NOTIFY' => 'Meddelelse om svar i tråden %s',
+    'USER_ACTIVATE' => 'Kontogenaktivering',
+    'USER_ACTIVATE_PASSWD' => 'Bekræftelse af en ny adgangskode',
+    'USER_WELCOME' => 'Velkommen til siden %s',
+    'USER_WELCOME_INACTIVE' => 'Velkommen til siden %s',
 ];
