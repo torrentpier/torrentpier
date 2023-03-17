@@ -48,7 +48,7 @@
 <div id="forums_wrap">
 
 <!-- IF H_C_AL_MESS -->
-<div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{L_HIDE_CAT_MESS}</div>
+<div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{L_HIDE_CAT_MESS} &middot; <a href="index.php?sh=1">{L_SHOW_ALL}</a></div>
 <div class="spacer_2"></div>
 <!-- ENDIF -->
 
