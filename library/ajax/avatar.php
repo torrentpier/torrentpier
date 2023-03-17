@@ -24,11 +24,14 @@ if (!IS_ADMIN && $user_id != $user->id) {
     $this->ajax_die($lang['NOT_ADMIN']);
 }
 
+$new_ext_id = null;
+$response = '';
+
 switch ($mode) {
     case 'delete':
         delete_avatar($user_id, $u_data['avatar_ext_id']);
         $new_ext_id = 0;
-        $response = '<img src="' . $bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar'] . '" alt="' . $user_id . '" />';
+        $response = get_avatar($user_id, $new_ext_id);
         break;
     default:
         $this->ajax_die('Invalid mode');
