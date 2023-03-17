@@ -157,21 +157,21 @@ if ($result = DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
 
-        generate_user_info($row, $bb_cfg['default_dateformat'], $avatar, $from, $posts, $joined, $pm, $email, $www);
+        $user_info = generate_user_info($row);
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
         $template->assign_block_vars('memberrow', array(
             'ROW_NUMBER' => $i + ($start + 1),
             'ROW_CLASS' => $row_class,
             'USER' => profile_url($row),
-            'AVATAR' => $avatar,
-            'FROM' => $from,
+            'AVATAR' => $user_info['avatar'],
+            'FROM' => $user_info['from'],
             'JOINED_RAW' => $row['user_regdate'],
-            'JOINED' => $joined,
-            'POSTS' => $posts,
-            'PM' => $pm,
-            'EMAIL' => $email,
-            'WWW' => $www,
+            'JOINED' => $user_info['joined'],
+            'POSTS' => $user_info['posts'],
+            'PM' => $user_info['pm'],
+            'EMAIL' => $user_info['email'],
+            'WWW' => $user_info['www'],
             'U_VIEWPROFILE' => PROFILE_URL . $user_id,
         ));
     }

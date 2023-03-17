@@ -347,7 +347,7 @@ if (!$group_id) {
     $username = $group_moderator['username'];
     $user_id = $group_moderator['user_id'];
 
-    generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $avatar, $from, $posts, $joined, $pm, $email, $www, $user_time, $is_moderator);
+    $moderator_info = generate_user_info($group_moderator, $is_moderator);
 
     $group_type = '';
     if ($group_info['group_type'] == GROUP_OPEN) {
@@ -370,13 +370,13 @@ if (!$group_id) {
         'GROUP_DETAILS' => $group_details,
         'GROUP_TIME' => (!empty($group_info['group_time'])) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($group_info['group_time']), delta_time($group_info['group_time'])) : $lang['NONE'],
         'MOD_USER' => profile_url($group_moderator),
-        'MOD_AVATAR' => $avatar,
-        'MOD_FROM' => $from,
-        'MOD_JOINED' => $joined,
-        'MOD_POSTS' => $posts,
-        'MOD_PM' => $pm,
-        'MOD_EMAIL' => $email,
-        'MOD_WWW' => $www,
+        'MOD_AVATAR' => $moderator_info['avatar'],
+        'MOD_FROM' => $moderator_info['from'],
+        'MOD_JOINED' => $moderator_info['joined'],
+        'MOD_POSTS' => $moderator_info['posts'],
+        'MOD_PM' => $moderator_info['pm'],
+        'MOD_EMAIL' => $moderator_info['email'],
+        'MOD_WWW' => $moderator_info['www'],
         'MOD_TIME' => (!empty($group_info['mod_time'])) ? bb_date($group_info['mod_time']) : $lang['NONE'],
         'U_SEARCH_USER' => "search.php?mode=searchuser",
         'U_SEARCH_RELEASES' => "tracker.php?srg=$group_id",
@@ -496,7 +496,7 @@ if (!$group_id) {
             foreach ($group_members as $i => $member) {
                 $user_id = $member['user_id'];
 
-                generate_user_info($member, $bb_cfg['default_dateformat'], $avatar, $from, $posts, $joined, $pm, $email, $www, $user_time, $is_moderator);
+                $member_info = generate_user_info($member, $is_moderator);
 
                 if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator) {
                     $row_class = !($i % 2) ? 'row1' : 'row2';
@@ -505,15 +505,15 @@ if (!$group_id) {
                         'ROW_NUMBER' => $i + ($start + 1),
                         'ROW_CLASS' => $row_class,
                         'USER' => profile_url($member),
-                        'AVATAR_IMG' => $avatar,
-                        'FROM' => $from,
-                        'JOINED' => $joined,
-                        'POSTS' => $posts,
+                        'AVATAR_IMG' => $member_info['avatar'],
+                        'FROM' => $member_info['from'],
+                        'JOINED' => $member_info['joined'],
+                        'POSTS' => $member_info['posts'],
                         'USER_ID' => $user_id,
-                        'PM' => $pm,
-                        'EMAIL' => $email,
-                        'WWW' => $www,
-                        'TIME' => $user_time,
+                        'PM' => $member_info['pm'],
+                        'EMAIL' => $member_info['email'],
+                        'WWW' => $member_info['www'],
+                        'TIME' => $member_info['user_time'],
                     ));
 
                     if ($is_moderator) {
@@ -550,7 +550,7 @@ if (!$group_id) {
                 foreach ($modgroup_pending_list as $i => $member) {
                     $user_id = $member['user_id'];
 
-                    generate_user_info($member, $bb_cfg['default_dateformat'], $avatar, $from, $posts, $joined, $pm, $email, $www, $user_time, $is_moderator);
+                    $member_info = generate_user_info($member, $is_moderator);
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 
@@ -558,14 +558,14 @@ if (!$group_id) {
 
                     $template->assign_block_vars('pending', array(
                         'ROW_CLASS' => $row_class,
-                        'AVATAR_IMG' => $avatar,
+                        'AVATAR_IMG' => $member_info['avatar'],
                         'USER' => profile_url($member),
-                        'FROM' => $from,
-                        'JOINED' => $joined,
-                        'POSTS' => $posts,
+                        'FROM' => $member_info['from'],
+                        'JOINED' => $member_info['joined'],
+                        'POSTS' => $member_info['posts'],
                         'USER_ID' => $user_id,
-                        'PM' => $pm,
-                        'EMAIL' => $email,
+                        'PM' => $member_info['pm'],
+                        'EMAIL' => $member_info['email'],
                     ));
                 }
 
