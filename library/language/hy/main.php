@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Կառավարման';
 $lang['FORUM'] = 'Համաժողովը';
 $lang['CATEGORY'] = 'Կատեգորիա';
 $lang['HIDE_CAT'] = 'Թաքցնել աստիճան';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Որոշ կատեգորիաներ թաքնված են անհատականացված ցուցադրման ընտրանքներով';
+$lang['SHOW_ALL'] = 'Ցույց տալ ամբողջը';
 $lang['TOPIC'] = 'Թեմա';
 $lang['TOPICS'] = 'Թեմաներ';
 $lang['TOPICS_SHORT'] = 'Թեմաներ';
@@ -1512,9 +1512,9 @@ $lang['ITALIC'] = 'Курсивный տեքստը: [i]text[/i] (դյուրան�
 $lang['UNDERLINE'] = 'Ընդգծելով տեքստը: [u]text[/u] (բանալիների Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый տեքստը: [s]text[/s] (Ctrl+c)';
 $lang['QUOTE_TITLE'] = 'Մեջբերում եմ տեքստը: [quote]text[/quote] (դյուրանցման Ctrl+M)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Տեղադրեք պատկեր՝ [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'URL-հասցե';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Տեղադրեք URL՝ [url]https://url[/url] կամ [url=https://url]URL տեքստ[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Էկրան կոդ: [code]code[/code] (Ctrl+)';
 $lang['LIST'] = 'Ցուցակ';
 $lang['LIST_TITLE'] = 'Ցուցակը: [list]text[/list] (դյուրանցման Ctrl+l)';
@@ -2060,7 +2060,7 @@ $lang['TRACKER_STATS'] = 'Վիճակագրությունը խուզարկու';
 $lang['WHOIS_INFO'] = 'Տեղեկություններ IP-հասցեն';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Ցույց տալ модераторам index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> նախապես moderation</h4> <h6>If չունեն բաշխման կարգավիճակի, # կամ t այս բաժնում, ներառյալ ենթաբաժիններ, որ բաժանում է ավտոմատ կերպով ստանում է տվյալ status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Մեկնաբանություն բաշխման կարգավիճակի վերաբերյալ</h4> <h6>Մեկնաբանությունը թույլ է տալիս մատնանշել թողարկողին թույլ տրված սխալները: Եթե կարգավիճակները թերի են, թողարկման պատասխանի ձևը հասանելի է թողարկման մենեջերին՝</h6>թողարկումը շտկելու համար';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding բոնուս սերմեր </h4> <h6> Միավորների քան բաշխման տալիս օգտվողին եւ բոնուսների չափը նրանց համար (անգամ լիցքավորման ժամ) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'է N-հաղորդագրությունների քանակը';
 $lang['SEED_BONUS_POINTS'] = 'բոնուսների ժամում';
@@ -2127,7 +2127,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Դատարկ Ֆայլի Գրառումները';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Ուրվագիծը обнулился համար լեռ: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Հավելվածի համաժամացումն ավարտված է:';
 $lang['SYNC_TOPICS'] = 'Թեմաներ Համաժամացման';
 $lang['SYNC_POSTS'] = 'Հաղորդագրություններ Համաժամացման';
 $lang['SYNC_THUMBNAILS'] = 'Էսքիզներ Համաժամացման';
@@ -2389,7 +2389,7 @@ $lang['CRON_NEXT_RUN'] = 'Հաջորդ Մեկնարկը';
 $lang['CRON_RUN_COUNT'] = 'Աշխատում է';
 $lang['CRON_MANAGE'] = 'Կառավարել';
 $lang['CRON_OPTIONS'] = 'Տարբերակները хрон';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Զգուշացում. Cron սկրիպտների գործարկումն անջատված է: Այն միացնելու համար սահմանեք APP_CRON_ENABLED փոփոխականը:';
 
 $lang['CRON_ENABLED'] = 'Хрон ներառված';
 $lang['CRON_CHECK_INTERVAL'] = 'Хрон ընդմիջումից ստուգման (վրկ)';
@@ -2579,7 +2579,7 @@ $lang['RELEASES'] = 'Հաղորդագրություններ';
 
 $lang['BACK'] = 'Ետ';
 $lang['ERROR_FORM'] = 'Անթույլատրելի դաշտի';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Խնդրում ենք լրացնել թողարկման ձևը';
 $lang['NEW_RELEASE'] = 'Նոր թողարկում';
 $lang['NEXT'] = 'Շարունակել';
 $lang['OTHER'] = 'Այլ';
@@ -2587,8 +2587,8 @@ $lang['OTHER'] = 'Այլ';
 $lang['TPL_EMPTY_FIELD'] = 'Դուք պետք է լրացնել դաշտ <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Դուք պետք է ընտրել <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> չի ադրբ';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Պետք է լինի https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Պետք է լինի https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'տեղադրել թեմային';
 $lang['TPL_POSTER'] = 'պաստառը';
 $lang['TPL_REQ_FILLING'] = 'պահանջում լրացման';
@@ -2602,15 +2602,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'նույն տողում';
 $lang['TPL_HEADER_ONLY'] = 'միայն վերնագրում';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Անվավեր օգտանուն է մուտքագրվել որոնման համար';
+$lang['SEARCH_INVALID_EMAIL'] = 'Անվավեր էլ․ հասցե է մուտքագրվել որոնման համար';
+$lang['SEARCH_INVALID_IP'] = 'Անվավեր IP հասցե է մուտքագրվել որոնման համար';
+$lang['SEARCH_INVALID_GROUP'] = 'Անվավեր խումբ է մուտքագրվել որոնման համար';
+$lang['SEARCH_INVALID_RANK'] = 'Անվավեր վարկանիշ է մուտքագրվել որոնման համար';
+$lang['SEARCH_INVALID_DATE'] = 'Անվավեր ամսաթիվ է մուտքագրվել որոնման համար';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Անվավեր գրառումների քանակ է մուտքագրվել որոնման համար';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Սխալ տվյալներ Userfield մտել';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Անվավեր ամսաթիվ է մուտքագրվել վերջին այցելած որոնման համար';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Սխալ Լեզուն, Ընտրված';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Սխալ Ժամային Գոտին Ընտրվել';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Սխալ Համաժողովը Ընտրել';
@@ -2661,12 +2661,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Դիտել բոլոր անդամները
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Դիտել բոլոր կրողները ընտրված կոչում.';
 $lang['BANNED_USERS'] = 'Արգելել Օգտվողներին';
 $lang['DISABLED_USERS'] = 'Օգտագործողների Սահմանափակ Հնարավորություններով';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Ադմինիստրատորներ - Ադմինիստրատորի լիազորություններ ունեցող բոլոր օգտվողները; Մոդերատորներ - ֆորումի բոլոր մոդերատորները; Արգելված օգտվողներ - Բոլոր հաշիվները, որոնք արգելվել են այս ֆորումներում; Հաշմանդամ օգտվողներ - հաշմանդամ հաշիվներ ունեցող բոլոր օգտվողները (կամ ձեռքով անջատված են, կամ երբեք չեն ստուգել իրենց էլ.փոստի հասցեն); Հաշմանդամ PM-ներով օգտվողներ - Ընտրում է այն օգտվողներին, ում Անձնական հաղորդագրությունների արտոնությունները հանվել են (Կատարված է Օգտագործողի կառավարման միջոցով)';
+$lang['POSTCOUNT'] = 'Գրառումների քանակը';
 $lang['EQUALS'] = 'Հավասար է';
 $lang['GREATER_THAN'] = 'Ավելին';
 $lang['LESS_THAN'] = 'Նվազագույն';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Դուք կարող եք որոնել օգտատերերի՝ հիմնվելով գրառումների քանակի արժեքի վրա: Դուք կարող եք կամ որոնել որոշակի արժեքով, արժեքից մեծ կամ փոքր կամ երկու արժեքների միջև: Շրջանակի որոնումն անելու համար ընտրեք «Հավասարներ», այնուհետև դրեք միջակայքի սկզբի և վերջի արժեքները՝ բաժանված գծիկով (-), օրինակ՝ 10-15:';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Որոնել օգտատերերի հիման վրա տարբեր մասնագիտական ոլորտներում: Աջակցում նախշերով, օգտագործելով աստղանիշով (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Դուք կարող եք որոնել օգտատերերի ամսաթվի վերջին մուտք, օգտագործելով այս տարբերակը որոնում';
@@ -2674,7 +2674,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Դա ցույց է օգտագործո�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Օգտվողները, որոնք ընտրել են որոշակի Ժամային գոտին ձեր պրոֆիլում';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Ցուցադրվում օգտվողները, ովքեր ընտրել են որոշակի ոճը.';
 $lang['MODERATORS_OF'] = 'Մոդերատորներ';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Որոնեք օգտատերերի, ովքեր ունեն Մոդերացիայի թույլտվություններ որոշակի ֆորումում: Մոդերատորի թույլտվությունները ճանաչվում են կա՛մ Օգտատիրոջ թույլտվություններով, կա՛մ Խմբում լինելով ճիշտ Խմբային թույլտվություններով:';
 
 $lang['SEARCH_USERS_NEW'] = '%s տվեց արդյունքը, %d(ներ). Վերլուծել <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Արգելել են';
@@ -2753,7 +2753,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Համաշխարհային ֆորում բոլոր 
 $lang['HASH_INVALID'] = 'Հաշ-%s է անվավեր';
 $lang['HASH_NOT_FOUND'] = 'Թողարկումը հետ հաշ-%s չի գտնվել';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Այս էջի տեքստը խմբագրված է՝ [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]: Այս տողում կարող են տեսնել միայն ադմինիստրատորները:[/align]';
 $lang['TERMS_EXPLAIN'] = 'Այս էջում դուք կարող եք հարցնել տեքստը, հիմնական կանոնները ռեսուրսի ցուցադրվում է օգտվողների համար:';
 
 $lang['TR_STATS'] = array(
@@ -2812,14 +2812,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha լինելով configured</h2><p>if �
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Ոչ մի առարկա',
+    'GROUP_ADDED' => 'Դուք ավելացվել եք օգտվողների խմբին',
+    'GROUP_APPROVED' => 'Օգտատերերի խմբին միանալու Ձեր խնդրանքը բավարարվել է',
+    'GROUP_REQUEST' => 'Ձեր օգտատերերի խմբին միանալու հարցում',
+    'PRIVMSG_NOTIFY' => 'Նոր անձնական հաղորդագրություն',
+    'TOPIC_NOTIFY' => 'Պատասխանի ծանուցում %sթեմայում',
+    'USER_ACTIVATE' => 'Հաշվի վերաակտիվացում',
+    'USER_ACTIVATE_PASSWD' => 'Նոր գաղտնաբառի հաստատում',
+    'USER_WELCOME' => 'Բարի գալուստ կայք %s',
+    'USER_WELCOME_INACTIVE' => 'Բարի գալուստ կայք %s',
 ];
