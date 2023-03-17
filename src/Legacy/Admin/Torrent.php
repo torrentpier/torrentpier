@@ -36,7 +36,7 @@ class Torrent
 
         if (isset($_POST[$field_name])) {
             // Get new status
-            $in_sql = array();
+            $in_sql = [];
 
             foreach ($_POST[$field_name] as $i => $val) {
                 $in_sql[] = (int)$val;
@@ -66,7 +66,7 @@ class Torrent
         global $template;
 
         foreach ($default_cfg as $config_name => $config_value) {
-            $template->assign_vars(array(strtoupper($config_name) => htmlspecialchars($cfg[$config_name])));
+            $template->assign_vars([strtoupper($config_name) => htmlspecialchars($cfg[$config_name])]);
         }
     }
 
@@ -82,15 +82,15 @@ class Torrent
 
         foreach ($default_cfg as $config_name => $config_value) {
             // YES/NO 'checked="checked"'
-            $template->assign_vars(array(
+            $template->assign_vars([
                 strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? HTML_CHECKED : '',
                 strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? HTML_CHECKED : '',
-            ));
+            ]);
             // YES/NO lang vars
-            $template->assign_vars(array(
+            $template->assign_vars([
                 'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? "<u>$lang[YES]</u>" : $lang['YES'],
                 'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? "<u>$lang[NO]</u>" : $lang['NO'],
-            ));
+            ]);
         }
     }
 
@@ -104,11 +104,11 @@ class Torrent
         global $template, $lang;
 
         foreach ($default_cfg as $config_name => $config_value) {
-            $template->assign_vars(array(
+            $template->assign_vars([
                 'L_' . strtoupper($config_name) => $lang[$config_name] ?? '',
                 'L_' . strtoupper($config_name) . '_EXPL' => $lang[$config_name . '_expl'] ?? '',
                 'L_' . strtoupper($config_name) . '_HEAD' => $lang[$config_name . '_head'] ?? '',
-            ));
+            ]);
         }
     }
 
@@ -134,7 +134,7 @@ class Torrent
                     return;
                 }
 
-                bb_update_config(array($config_name => $config_value), $table_name);
+                bb_update_config([$config_name => $config_value], $table_name);
             }
         }
     }

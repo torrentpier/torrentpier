@@ -419,6 +419,7 @@ function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
+    $select_name = null;
     $select_ary = array();
 
     switch ($select) {
@@ -817,8 +818,18 @@ function get_bt_userdata($user_id)
 			GROUP BY bt.user_id
 			LIMIT 1
 		");
+
+        if (empty($btu)) {
+            if (!\TorrentPier\Legacy\Torrent::generate_passkey($user_id, true)) {
+                bb_simple_die('Could not generate passkey');
+            }
+
+            $btu = get_bt_userdata($user_id);
+        }
+
         CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
     }
+
     return $btu;
 }
 
@@ -834,10 +845,7 @@ function show_bt_userdata($user_id)
 {
     global $lang, $template;
 
-    if (!$btu = get_bt_userdata($user_id)) {
-        \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);
-        $btu = get_bt_userdata($user_id);
-    }
+    $btu = get_bt_userdata($user_id);
 
     $template->assign_vars(array(
         'SHOW_BT_USERDATA' => true,
@@ -914,6 +922,7 @@ function bb_update_config($params, $table = BB_CONFIG)
 
 function get_db_stat($mode)
 {
+    $sql = null;
     switch ($mode) {
         case 'usercount':
             $sql = "SELECT COUNT(user_id) AS total FROM " . BB_USERS;
@@ -1473,7 +1482,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     // get the good list
     $list_name = 'forum_display_' . $list;
-    $listrow = $$list_name;
+    $listrow = ${$list_name};
 
     // init the result
     $res = '';

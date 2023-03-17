@@ -51,11 +51,11 @@ $row = DB()->fetch_row("
 		LIMIT 1
 ");
 
-$output['files'][$info_hash] = array(
+$output['files'][$info_hash] = [
     'complete' => (int)$row['seeders'],
     'downloaded' => (int)$row['complete_count'],
     'incomplete' => (int)$row['leechers'],
-);
+];
 
 echo \Rych\Bencode\Bencode::encode($output);
 

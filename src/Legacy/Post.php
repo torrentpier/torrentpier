@@ -194,10 +194,7 @@ class Post
             add_search_words($post_id, stripslashes($s_post_message), stripslashes($s_post_subject));
         }
 
-        update_post_html(array(
-            'post_id' => $post_id,
-            'post_text' => $post_message,
-        ));
+        update_post_html(['post_id' => $post_id, 'post_text' => $post_message]);
 
         //Обновление кеша новостей на главной
         if ($bb_cfg['show_latest_news']) {
@@ -345,7 +342,7 @@ class Post
 
         if ($mode != 'delete') {
             if ($mode == 'reply') {
-                $update_watched_sql = $user_id_sql = array();
+                $update_watched_sql = $user_id_sql = [];
 
                 $sql = DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
 
@@ -365,7 +362,7 @@ class Post
 			");
 
                 if ($watch_list) {
-                    $orig_word = $replacement_word = array();
+                    $orig_word = $replacement_word = [];
                     obtain_word_list($orig_word, $replacement_word);
 
                     if (\count($orig_word)) {
@@ -384,13 +381,13 @@ class Post
                         $emailer->set_subject(sprintf($lang['EMAILER_SUBJECT']['TOPIC_NOTIFY'], $topic_title));
 
                         $emailer->set_template('topic_notify', $row['user_lang']);
-                        $emailer->assign_vars(array(
+                        $emailer->assign_vars([
                             'TOPIC_TITLE' => html_entity_decode($topic_title),
                             'SITENAME' => $bb_cfg['sitename'],
                             'USERNAME' => $row['username'],
                             'U_TOPIC' => $u_topic,
                             'U_STOP_WATCHING_TOPIC' => $unwatch_topic,
-                        ));
+                        ]);
 
                         $emailer->send();
 
@@ -455,7 +452,7 @@ class Post
 			FROM " . BB_FORUMS . "
 			WHERE forum_id IN($forum_id, $old_forum_id)";
 
-            $forum_names = array();
+            $forum_names = [];
             foreach (DB()->fetch_rowset($sql) as $row) {
                 $forum_names[$row['forum_id']] = htmlCHR($row['forum_name']);
             }
@@ -531,17 +528,17 @@ class Post
 
         // Topic posts block
         foreach ($review_posts as $i => $post) {
-            $template->assign_block_vars('review', array(
+            $template->assign_block_vars('review', [
                 'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                 'POSTER' => profile_url($post),
                 'POSTER_NAME_JS' => addslashes($post['username']),
                 'POST_DATE' => bb_date($post['post_time'], $bb_cfg['post_date_format']),
                 'MESSAGE' => get_parsed_post($post),
-            ));
+            ]);
         }
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_TOPIC_REVIEW' => (bool)$review_posts,
-        ));
+        ]);
     }
 }

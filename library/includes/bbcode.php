@@ -290,7 +290,7 @@ function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $s
     if ($fast_and_dirty) {
         // any old thing in square brackets
         $find[] = '#\[.*/?\]#siU';
-        $replace = '';
+        $replace = [];
 
         $message = preg_replace($find, $replace, $message);
     } // the preferable way to remove bbcode

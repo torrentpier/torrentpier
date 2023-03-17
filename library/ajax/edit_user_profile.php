@@ -135,10 +135,7 @@ switch ($field) {
         $value = sprintf('%.0f', $value);
         $this->response['new_value'] = humn_size($value, null, null, ' ');
 
-        if (!$btu = get_bt_userdata($user_id)) {
-            \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);
-            $btu = get_bt_userdata($user_id);
-        }
+        $btu = get_bt_userdata($user_id);
         $btu[$field] = $value;
         $this->response['update_ids']['u_ratio'] = (string)get_bt_ratio($btu);
         break;

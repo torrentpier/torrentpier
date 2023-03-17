@@ -45,33 +45,21 @@ if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key]) || strlen($_G
 
 // Input var names
 // String
-$input_vars_str = array(
-    'info_hash',
-    'peer_id',
-    'event',
-    $passkey_key,
-);
+$input_vars_str = ['info_hash', 'peer_id', 'event', $passkey_key];
 // Numeric
-$input_vars_num = array(
-    'port',
-    'uploaded',
-    'downloaded',
-    'left',
-    'numwant',
-    'compact',
-);
+$input_vars_num = ['port', 'uploaded', 'downloaded', 'left', 'numwant', 'compact'];
 
 // Init received data
 // String
 foreach ($input_vars_str as $var_name) {
-    $$var_name = isset($_GET[$var_name]) ? (string)$_GET[$var_name] : null;
+    ${$var_name} = isset($_GET[$var_name]) ? (string)$_GET[$var_name] : null;
 }
 // Numeric
 foreach ($input_vars_num as $var_name) {
-    $$var_name = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
+    ${$var_name} = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
 }
 // Passkey
-$passkey = $$passkey_key ?? null;
+$passkey = ${$passkey_key} ?? null;
 
 // Verify request
 // Required params (info_hash, peer_id, port, uploaded, downloaded, left, passkey)
@@ -351,7 +339,7 @@ if ($stopped) {
 }
 
 // Store peer info in cache
-$lp_info = array(
+$lp_info = [
     'downloaded' => (float)$downloaded,
     'releaser' => (int)$releaser,
     'seeder' => (int)$seeder,
@@ -360,7 +348,7 @@ $lp_info = array(
     'uploaded' => (float)$uploaded,
     'user_id' => (int)$user_id,
     'tor_type' => (int)$tor_type,
-);
+];
 
 $lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
 
@@ -387,13 +375,10 @@ if (!$output) {
             $peers .= pack('Nn', ip2long(decode_ip($peer['ip'])), $peer['port']);
         }
     } else {
-        $peers = array();
+        $peers = [];
 
         foreach ($rowset as $peer) {
-            $peers[] = array(
-                'ip' => decode_ip($peer['ip']),
-                'port' => (int)$peer['port'],
-            );
+            $peers[] = ['ip' => decode_ip($peer['ip']), 'port' => (int)$peer['port']];
         }
     }
 
@@ -412,13 +397,13 @@ if (!$output) {
         $leechers = $row['leechers'];
     }
 
-    $output = array(
+    $output = [
         'interval' => (int)$announce_interval,
         'min interval' => (int)$announce_interval,
         'peers' => $peers,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
-    );
+    ];
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
 }

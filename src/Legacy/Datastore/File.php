@@ -67,6 +67,7 @@ class File extends Common
 
     public function _fetch_from_store()
     {
+        $item = null;
         if (!$items = $this->queued_items) {
             $src = $this->_debug_find_caller('enqueue');
             trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);

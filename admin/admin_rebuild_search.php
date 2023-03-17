@@ -489,6 +489,7 @@ function get_rebuild_session_details($id, $details = 'all')
 function get_processed_posts($mode = 'session')
 {
     global $last_session_data;
+    $row = [];
 
     if ($mode == 'total') {
         $sql = 'SELECT SUM(session_posts) as posts FROM ' . BB_SEARCH_REBUILD;
@@ -542,6 +543,7 @@ function clear_search_tables($mode = '')
 // We limit the result to 200, in order to avoid white (255).
 function create_percent_color($percent)
 {
+    $percent_color = null;
     $percent_ary = array(
         'r' => array(86, 100),
         'g' => array(0, 50),
