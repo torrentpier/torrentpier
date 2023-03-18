@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Menulis';
 $lang['RECIPIENTS'] = 'Penerima';
 $lang['ALL_USERS'] = 'Semua Pengguna';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Jenis surel';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Pesan anda telah dikirim';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik %sHere%s untuk kembali ke bentuk Email Massal';
 
