@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Komponer';
 $lang['RECIPIENTS'] = 'Modtagere';
 $lang['ALL_USERS'] = 'Alle Brugere';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Email type';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Din besked er blevet sendt';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik på %sHere%s for at vende tilbage til Masse-E-form';
 
