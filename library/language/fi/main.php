@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Säveltää';
 $lang['RECIPIENTS'] = 'Vastaanottajat';
 $lang['ALL_USERS'] = 'Kaikki Käyttäjät';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Sähköpostin tyyppi';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Viestisi on lähetetty';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klikkaa %sHere%s palata Massa Sähköposti muodossa';
 
