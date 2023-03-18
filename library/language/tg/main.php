@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Эҷоди';
 $lang['RECIPIENTS'] = 'гирандагони';
 $lang['ALL_USERS'] = 'Ҳамаи Истифодабарандагон';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Навъи почтаи электронӣ';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Паёми шумо нозил шудааст,';
 $lang['CLICK_RETURN_MASSEMAIL'] = '%sHere%s ангушт занед барои баргаштан ба шакли Email ВАО';
 
