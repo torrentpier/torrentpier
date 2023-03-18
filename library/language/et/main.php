@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Võtte';
 $lang['RECIPIENTS'] = 'Saajad';
 $lang['ALL_USERS'] = 'Kõik Kasutajad';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Meili tüüp';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Teie sõnum on saadetud';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klõpsake %sHere%s naasta Mass e-Posti vorm';
 
