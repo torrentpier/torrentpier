@@ -143,4 +143,37 @@ class Validate
 
         return false;
     }
+
+    /**
+     * Validate user entered password
+     *
+     * @param string $password
+     * @param string $password_confirm
+     *
+     * @return bool|string
+     */
+    public static function password(string $password, string $password_confirm)
+    {
+        global $lang;
+
+        // Check for empty
+        if (empty($pass) || empty($pass_confirm)) {
+            return $lang['CHOOSE_PASS'];
+        }
+
+        // Check password confirm
+        if ($password_confirm != $password) {
+            return $lang['CHOOSE_PASS_ERR'];
+        }
+
+        // Length
+        if (mb_strlen($password, 'UTF-8') > PASSWORD_MAX_LENGTH) {
+            return sprintf($lang['CHOOSE_PASS_ERR_MAX'], PASSWORD_MAX_LENGTH);
+        }
+        if (mb_strlen($password, 'UTF-8') < PASSWORD_MIN_LENGTH) {
+            return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
+        }
+
+        return false;
+    }
 }

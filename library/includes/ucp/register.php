@@ -204,13 +204,10 @@ foreach ($profile_fields as $field => $can_edit) {
 
                 // пароль для гостя и при смене пароля юзером
                 if (!empty($new_pass)) {
-                    if (mb_strlen($new_pass, 'UTF-8') > 20) {
-                        $errors[] = sprintf($lang['CHOOSE_PASS_ERR_MAX'], 20);
-                    } elseif (mb_strlen($new_pass, 'UTF-8') < 4) {
-                        $errors[] = sprintf($lang['CHOOSE_PASS_ERR_MIN'], 4);
-                    } elseif ($new_pass != $cfm_pass) {
-                        $errors[] = $lang['CHOOSE_PASS_ERR'];
+                    if ($err = \TorrentPier\Legacy\Validate::password($new_pass, $cfm_pass)) {
+                        $errors[] = $err;
                     }
+
                     $db_data['user_password'] = md5(md5($new_pass));
                 }
 
