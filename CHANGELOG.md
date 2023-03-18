@@ -1,5 +1,30 @@
 # Change Log
 
+## [v2.3.1](https://github.com/torrentpier/torrentpier/tree/v2.3.1) (2023-03-18)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.1-rc1...v2.3.1)
+
+**Merged pull requests:**
+
+- Make activate key length configurable [\#590](https://github.com/torrentpier/torrentpier/pull/590) ([belomaxorka](https://github.com/belomaxorka))
+- Minor adjustments [\#593](https://github.com/torrentpier/torrentpier/pull/593), [\#607](https://github.com/torrentpier/torrentpier/pull/607), [\#610](https://github.com/torrentpier/torrentpier/pull/610) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed typo in src/Cache/File.php [\#596](https://github.com/torrentpier/torrentpier/pull/596) ([belomaxorka](https://github.com/belomaxorka))
+- Use APP_NAME instead lang variables [\#604](https://github.com/torrentpier/torrentpier/pull/604) ([belomaxorka](https://github.com/belomaxorka))
+- New Crowdin updates [\#577](https://github.com/torrentpier/torrentpier/pull/577), [\#605](https://github.com/torrentpier/torrentpier/pull/605), [\#616](https://github.com/torrentpier/torrentpier/pull/616) ([Exileum](https://github.com/Exileum))
+- Use translations instead of untranslatable strings [\#606](https://github.com/torrentpier/torrentpier/pull/606) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed undefined $subject in register.php [\#608](https://github.com/torrentpier/torrentpier/pull/608) ([belomaxorka](https://github.com/belomaxorka))
+- Removed length limits for search_id & autologin_id [\#609](https://github.com/torrentpier/torrentpier/pull/609) ([belomaxorka](https://github.com/belomaxorka))
+- Small refactoring for avatar.php [AJAX] [\#611](https://github.com/torrentpier/torrentpier/pull/611), [\#612](https://github.com/torrentpier/torrentpier/pull/612) ([belomaxorka](https://github.com/belomaxorka))
+- Added PM counter in title [\#613](https://github.com/torrentpier/torrentpier/pull/613) ([belomaxorka](https://github.com/belomaxorka))
+- Redesigned AJAX system styles [\#614](https://github.com/torrentpier/torrentpier/pull/614) ([belomaxorka](https://github.com/belomaxorka), [Exileum](https://github.com/Exileum))
+- Minor edits to the localization [\#615](https://github.com/torrentpier/torrentpier/pull/615) ([Exileum](https://github.com/Exileum))
+- New cron initialization and minor edits [\#619](https://github.com/torrentpier/torrentpier/pull/619) ([Exileum](https://github.com/Exileum))
+- Fixed broken avatar ajax action for users [\#618](https://github.com/torrentpier/torrentpier/pull/618) ([belomaxorka](https://github.com/belomaxorka))
+- Added ability to hide ajax loading alert [\#617](https://github.com/torrentpier/torrentpier/pull/617) ([belomaxorka](https://github.com/belomaxorka))
+- Added passkey check in get_bt_userdata [\#621](https://github.com/torrentpier/torrentpier/pull/621) ([belomaxorka](https://github.com/belomaxorka))
+- Miscellaneous static analysis improvements for php 7.1 [\#620](https://github.com/torrentpier/torrentpier/pull/620) ([Exileum](https://github.com/Exileum))
+- Fixed getting online info from cache [\#622](https://github.com/torrentpier/torrentpier/pull/622) ([belomaxorka](https://github.com/belomaxorka), [Exileum](https://github.com/Exileum))
+- Globally improved log system [\#623](https://github.com/torrentpier/torrentpier/pull/623) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.3.1-rc1](https://github.com/torrentpier/torrentpier/tree/v2.3.1-rc1) (2023-03-10)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.4-beta2...v2.3.1-rc1)
 
