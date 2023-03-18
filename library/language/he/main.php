@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'להלחין';
 $lang['RECIPIENTS'] = 'נמענים';
 $lang['ALL_USERS'] = 'כל המשתמשים';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'סוג אימייל';
+
 $lang['EMAIL_SUCCESSFULL'] = 'ההודעה שלך נשלחה';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'לחץ על %sHere%s לחזור מסה טופס דואר אלקטרוני';
 
