@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'लिखना';
 $lang['RECIPIENTS'] = 'प्राप्तकर्ता';
 $lang['ALL_USERS'] = 'सभी उपयोगकर्ताओं';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'ईमेल प्रकार';
+
 $lang['EMAIL_SUCCESSFULL'] = 'आपका सन्देश भेज दिया गया है';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'मास ईमेल फ़ॉर्म पर वापस जाने के लिए %s हीरे %s पर क्लिक करें';
 
