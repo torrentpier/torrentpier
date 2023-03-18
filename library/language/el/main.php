@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Συνθέστε';
 $lang['RECIPIENTS'] = 'Αποδέκτες';
 $lang['ALL_USERS'] = 'Όλοι Οι Χρήστες';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Τύπος email';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Το μήνυμά σας έχει σταλεί';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Κάντε κλικ %sHere%s για να επιστρέψετε στην Μάζα μορφή e-Mail';
 
