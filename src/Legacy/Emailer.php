@@ -23,16 +23,6 @@ use Swift_SmtpTransport;
  */
 class Emailer
 {
-    /**
-     * Обычное текстовое сообщение
-     */
-    public const FORMAT_TEXT = 'text/plain';
-
-    /**
-     * HTML-сообщение
-     */
-    public const FORMAT_HTML = 'text/html';
-
     /** @var string текст сообщения */
     private $message;
 
@@ -160,7 +150,7 @@ class Emailer
      * @param string $email_format
      * @return bool
      */
-    public function send($email_format = self::FORMAT_TEXT)
+    public function send(string $email_format = 'text/plain')
     {
         global $bb_cfg, $lang, $userdata;
 
