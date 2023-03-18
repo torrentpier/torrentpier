@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'შედგენა';
 $lang['RECIPIENTS'] = 'მიმღები';
 $lang['ALL_USERS'] = 'ყველა მომხმარებელი';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'ელფოსტის ტიპი';
+
 $lang['EMAIL_SUCCESSFULL'] = 'თქვენი წერილი წარმატებით გაიგზავნა';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'დააჭირეთ %sHere%s დაბრუნებას მასობრივი ფოსტის ფორმა';
 
