@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Kurti';
 $lang['RECIPIENTS'] = 'Gavėjai';
 $lang['ALL_USERS'] = 'Visi Vartotojai';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'El. pašto tipas';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Jūsų pranešimas buvo išsiųstas';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Spustelėkite %sHere%s grįžti į Masę el. Pašto formą';
 
