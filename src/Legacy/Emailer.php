@@ -160,7 +160,7 @@ class Emailer
      * @param string $email_format
      * @return bool
      */
-    public function send($email_format = self::FORMAT_TEXT)
+    public function send(string $email_format = self::FORMAT_TEXT)
     {
         global $bb_cfg, $lang, $userdata;
 

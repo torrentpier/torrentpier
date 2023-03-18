@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Compose';
 $lang['RECIPIENTS'] = 'Recipients';
 $lang['ALL_USERS'] = 'All Users';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Email type';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Your message has been sent';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Click %sHere%s to return to the Mass Email form';
 

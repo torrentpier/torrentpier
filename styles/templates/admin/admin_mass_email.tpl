@@ -1,4 +1,4 @@
-<h1>{L_EMAIL}</h1>
+<h1>{L_MASS_EMAIL}</h1>
 
 <p>{L_MASS_EMAIL_EXPLAIN}</p>
 <br />
@@ -12,6 +12,15 @@
 <tr>
 	<td class="row1" align="right"><b>{L_RECIPIENTS}</b></td>
 	<td class="row2">{S_GROUP_SELECT}</td>
+</tr>
+<tr>
+  <td class="row1" align="right"><b>{L_MASS_EMAIL_MESSAGE_TYPE}</b></td>
+  <td class="row2">
+    <select name="message_type">
+      <option value="text/plain" selected="selected">text/plain</option>
+      <option value="text/html">text/html</option>
+    </select>
+  </td>
 </tr>
 <tr>
 	<td class="row1" align="right"><b>{L_SUBJECT}</b></td>

@@ -23,6 +23,7 @@ set_time_limit(1200);
 $subject = (string)trim(request_var('subject', ''));
 $message = (string)request_var('message', '');
 $group_id = (int)request_var(POST_GROUPS_URL, 0);
+$message_type = (string)request_var('message_type', '');
 
 $errors = $user_id_sql = [];
 
@@ -78,7 +79,7 @@ if (isset($_POST['submit'])) {
                 'MESSAGE' => html_entity_decode($message),
             ));
 
-            $emailer->send();
+            $emailer->send($message_type);
         }
     }
 }
