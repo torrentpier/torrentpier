@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'yaratmoq';
 $lang['RECIPIENTS'] = 'Qabul qiluvchilarni';
 $lang['ALL_USERS'] = 'barcha foydalanuvchilar';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Elektron pochta turi';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Xabaringiz jo\'natildi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Mass Email shaklida qaytish uchun %sHere%s bosing';
 
