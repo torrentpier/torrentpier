@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Levélírás';
 $lang['RECIPIENTS'] = 'A címzettek';
 $lang['ALL_USERS'] = 'Minden Felhasználó';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-mail típus';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Az üzenetet elküldtük';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Kattintson %sHere%s, hogy visszatérjen a Tömeges e-Mail formájában';
 
