@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = '작성';
 $lang['RECIPIENTS'] = '받는 사람';
 $lang['ALL_USERS'] = '모든 사용자';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = '이메일 유형';
+
 $lang['EMAIL_SUCCESSFULL'] = '귀하의 메시지가 전송되었습니다';
 $lang['CLICK_RETURN_MASSEMAIL'] = '클릭 %sHere%s 를 반환하는 대량 전자 메일 양식';
 
