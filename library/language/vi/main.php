@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Soạn';
 $lang['RECIPIENTS'] = 'Người nhận';
 $lang['ALL_USERS'] = 'Tất Cả Người Sử Dụng';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'loại email';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Tin nhắn của bạn đã được gửi đi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Nhấn vào %sHere%s trở về Khối lượng hình thức Email';
 
