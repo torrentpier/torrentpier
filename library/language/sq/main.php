@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Harto';
 $lang['RECIPIENTS'] = 'Marrësit';
 $lang['ALL_USERS'] = 'Të Gjithë Përdoruesit';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Lloji i emailit';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesazhi juaj ka qenë i dërguar';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Kliko %sHere%s të kthehen në Masë Email formë';
 
