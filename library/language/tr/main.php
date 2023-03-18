@@ -1970,6 +1970,8 @@ $lang['COMPOSE'] = 'Oluştur';
 $lang['RECIPIENTS'] = 'Alıcılar';
 $lang['ALL_USERS'] = 'Tüm Kullanıcılar';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-posta türü';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesajınız gönderildi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Toplu e-Posta formuna dönmek için %sHere%s tıklayın';
 
