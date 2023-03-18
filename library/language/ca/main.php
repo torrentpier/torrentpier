@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Redacció';
 $lang['RECIPIENTS'] = 'Destinataris';
 $lang['ALL_USERS'] = 'Tots Els Usuaris';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Tipus de correu electrònic';
+
 $lang['EMAIL_SUCCESSFULL'] = 'El vostre missatge ha estat enviat';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Feu clic %sHere%s per tornar a la Massa formulari de Correu electrònic';
 
