@@ -1970,6 +1970,8 @@ $lang['COMPOSE'] = '構成';
 $lang['RECIPIENTS'] = '受賞者';
 $lang['ALL_USERS'] = 'すべてのユーザー';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'メールの種類';
+
 $lang['EMAIL_SUCCESSFULL'] = 'お問い合わせ内容を送信';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'をクリックし%sHere%sに戻るには大量のメールフォーム';
 
