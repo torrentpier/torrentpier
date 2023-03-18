@@ -1969,6 +1969,8 @@ $lang['COMPOSE'] = 'Bəstələmək';
 $lang['RECIPIENTS'] = 'Alıcı';
 $lang['ALL_USERS'] = 'Bütün İstifadəçilər Üçün';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-poçt növü';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesaj göndərildi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Basın %sHere%s qayıtmaq üçün kütləvi şəkildə e-poçt';
 
