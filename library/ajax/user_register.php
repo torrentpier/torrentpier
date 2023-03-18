@@ -40,21 +40,12 @@ switch ($mode) {
     case 'check_pass':
         $pass = (string)$this->request['pass'];
         $pass_confirm = (string)$this->request['pass_confirm'];
-        if (empty($pass) || empty($pass_confirm)) {
-            $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $lang['CHOOSE_PASS'] . '</span>';
+
+        if ($err = \TorrentPier\Legacy\Validate::password($pass, $pass_confirm)) {
+            $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         } else {
-            if ($pass != $pass_confirm) {
-                $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $lang['CHOOSE_PASS_ERR'] . '</span>';
-            } else {
-                if (mb_strlen($pass, 'UTF-8') > 20) {
-                    $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . sprintf($lang['CHOOSE_PASS_ERR_MAX'], 20) . '</span>';
-                } elseif (mb_strlen($pass, 'UTF-8') < 5) {
-                    $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . sprintf($lang['CHOOSE_PASS_ERR_MIN'], 5) . '</span>';
-                } else {
-                    $text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
-                    $html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
-                }
-            }
+            $text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
+            $html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
         }
         break;
 }
