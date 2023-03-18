@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Skládat';
 $lang['RECIPIENTS'] = 'Příjemci';
 $lang['ALL_USERS'] = 'Všechny Uživatele';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Typ e-mailu';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Vaše zpráva byla odeslána';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klikněte %sHere%s vrátit se k Hromadné E-mailový formulář';
 
