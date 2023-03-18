@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Rakstiet';
 $lang['RECIPIENTS'] = 'Saņēmēji';
 $lang['ALL_USERS'] = 'Visi Lietotāji';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-pasta veids';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Jūsu ziņojums ir nosūtīts';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Noklikšķiniet uz %sHere%s, lai atgrieztos Masa e-Pasta forma';
 
