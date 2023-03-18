@@ -1969,6 +1969,8 @@ $lang['COMPOSE'] = 'Ստեղծագործել';
 $lang['RECIPIENTS'] = 'Ստացողները';
 $lang['ALL_USERS'] = 'Բոլոր Օգտվողներին';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Էլփոստի տեսակը';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Ձեր հաղորդագրությունը ուղարկվել է';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Սեղմեք %sHere%s վերադառնալ զանգվածային ձեւով ՝ էլեկտրոնային փոստով';
 
