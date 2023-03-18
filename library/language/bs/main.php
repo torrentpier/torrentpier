@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Komponujem';
 $lang['RECIPIENTS'] = 'Primatelja';
 $lang['ALL_USERS'] = 'Sve Korisnici';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Vrsta e-pošte';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Tvoja poruka je poslata';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik %sHere%s da se vratim u Masovni e-Mail obliku';
 
