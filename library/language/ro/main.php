@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Compune';
 $lang['RECIPIENTS'] = 'Beneficiarii';
 $lang['ALL_USERS'] = 'Toți Utilizatorii';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Tip e-mail';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesajul tau a fost trimis';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Faceți clic pe %sHere%s pentru a reveni la Masa formularul de e-Mail';
 
