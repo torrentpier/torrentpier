@@ -1968,6 +1968,8 @@ $lang['COMPOSE'] = 'Композира';
 $lang['RECIPIENTS'] = 'Получателите';
 $lang['ALL_USERS'] = 'За Всички Потребители';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Тип имейл';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Вашето съобщение е изпратено';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Кликнете %sHere%s, за да се върнете към масова форма по електронна поща';
 
