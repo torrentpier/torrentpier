@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'يؤلف';
 $lang['RECIPIENTS'] = 'المستفيدين';
 $lang['ALL_USERS'] = 'جميع المستخدمين';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'نوع البريد الإلكتروني';
+
 $lang['EMAIL_SUCCESSFULL'] = 'تم إرسال رسالتك';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'انقر فوق %sHere%s العودة إلى كتلة نموذج البريد الإلكتروني';
 
