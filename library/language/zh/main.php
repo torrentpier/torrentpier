@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = '撰写';
 $lang['RECIPIENTS'] = '收件人';
 $lang['ALL_USERS'] = '所有用户';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = '電子郵件類型';
+
 $lang['EMAIL_SUCCESSFULL'] = '您的信息已经发送';
 $lang['CLICK_RETURN_MASSEMAIL'] = '点击%sHere%s返回到大规模电子邮件的形式';
 
