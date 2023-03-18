@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'жазу';
 $lang['RECIPIENTS'] = 'алушылар';
 $lang['ALL_USERS'] = 'барлық пайдаланушылар';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Электрондық пошта түрі';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Сіздің хатыңыз жіберілді';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Бұқаралық Email түрінде оралу үшін %sHere%s басыңыз';
 
