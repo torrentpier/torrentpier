@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Komponeer';
 $lang['RECIPIENTS'] = 'ontvangers';
 $lang['ALL_USERS'] = 'Alle gebruikers';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-pos tipe';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Jou boodskap is gestuur';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik %sHere%s om terug te keer na die Mass E-pos vorm';
 
