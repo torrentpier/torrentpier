@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Můžete potvrdit, že nejste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha není plně configured</h2><p>if jste již vygenerované klíče, můžete to udělat na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After generování klíče, musíte dát je v souboru knihovny/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Žádný předmět',
     'GROUP_ADDED' => 'Byli jste přidáni do uživatelské skupiny',
