@@ -545,9 +545,10 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 /**
  * Adds commas between every group of thousands
  */
-function commify($number)
+function commify(?float $num, int $decimals = 0, ?string $decimal_separator = ".", ?string $thousands_separator = ",")
 {
-    return number_format($number);
+    // provide $num default to prevent deprecation errors in PHP >=8.1
+    return number_format($num ?? 0.0, $decimals, $decimal_separator, $thousands_separator);
 }
 
 /**
@@ -762,7 +763,7 @@ function str_short($text, $max_length, $space = ' ')
     if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
         $text = mb_substr($text, 0, $max_length, 'UTF-8');
 
-        if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string) $space)) {
+        if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string)$space)) {
             if ($last_space_pos > round($max_length * 3 / 4)) {
                 $last_space_pos--;
                 $text = mb_substr($text, 0, $last_space_pos, 'UTF-8');
