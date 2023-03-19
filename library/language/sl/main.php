@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Si ni mogel potrditi, da niste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bi v celoti configured</h2><p>if še niste ustvarjeni tipk, lahko to storite na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After ustvarite tipke, boste morali, da jih na datoteke knjižnica/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Brez zadeve',
     'GROUP_ADDED' => 'Dodani ste v skupino uporabnikov',
