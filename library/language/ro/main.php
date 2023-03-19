@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Tu nu a putut confirma că nu sunt un robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha a nu fi pe deplin configured</h2><p>if nu te-ai generat deja cheile, o poti face pe <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After genera cheile, trebuie să le pună la fișierul bibliotecă/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Fără subiect',
     'GROUP_ADDED' => 'Ai fost adăugat la grupul de utilizatori',
