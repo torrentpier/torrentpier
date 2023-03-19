@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Jy kon nie bevestig dat jy nie \'n robot is nie';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie ten volle gekonfigureer nie</h2><p>Indien u die sleutels nie reeds opgewek het nie, kan u dit op <a href="https://www.google.com/recaptcha/admin">https: //www.google.com/recaptcha/admin</a>.<br />After u die sleutels genereer, moet u dit by die lêerbiblioteek / config .php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Geen onderwerp',
     'GROUP_ADDED' => 'Jy is by die gebruikersgroep gevoeg',
