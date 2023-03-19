@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Siz bir robot emas, deb tasdiqlash mumkin emas';
 $lang['CAPTCHA_SETTINGS'] = 'Agar siz allaqachon kalitlari hosil yo\'q configured</h2><p>If <h2>ReCaptcha siz <a href="https://www.google.com/recaptcha/admin">https uni, albatta, mumkin, to\'liq bo\'lmasligi: Agar kalitlari ishlab //www.google.com/recaptcha/admin</a>.<br />After, siz fayl kutubxona / config da, ularni qo\'yish kerak .php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Mavzu yo\'q',
     'GROUP_ADDED' => 'Siz foydalanuvchilar guruhiga qo\'shildingiz',
