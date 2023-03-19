@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'أنت لا تستطيع أن تؤكد أنك لست �
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha لم يتم بشكل كامل configured</h2><p>if لم تكن قد ولدت المفاتيح ، يمكنك أن تفعل ذلك على <a href="https://www.google.com/recaptcha/admin">https://www.google.com/اختبار recaptcha/admin</a>.<br />After توليد مفاتيح تحتاج إلى وضعها في ملف المكتبة/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'لا يوجد عنوان',
     'GROUP_ADDED' => 'لقد تمت إضافتك إلى مجموعة المستخدمين',
