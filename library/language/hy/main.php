@@ -2813,6 +2813,7 @@ $lang['CAPTCHA_WRONG'] = 'Դուք չեք կարող հաստատել, որ Դո
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha լինելով configured</h2><p>if դուք չեք сгенерировал բանալիները, դուք կարող եք անել դա <a href="https://www.google.com/recaptcha/admin">https://ԳՀՀ.google-ի.սեն/рекапчу/admin</a>.<br />After դուք генерируете ստեղները, դուք պետք է տեղադրել իրենց ֆայլը Library/конфиг.PHP-ում.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Ոչ մի առարկա',
     'GROUP_ADDED' => 'Դուք ավելացվել եք օգտվողների խմբին',
