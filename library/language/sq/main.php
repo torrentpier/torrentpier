@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Ju nuk mund të konfirmoni se ju nuk jeni një robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nuk janë plotësisht të configured</h2><p>if ju nuk e keni tashmë të krijuara çelësat, ju mund të bëni atë në <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After ju të gjenerojë butonat, ju keni nevojë për të vënë ato në dosjen library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Asnjë subjekt',
     'GROUP_ADDED' => 'Ju jeni shtuar në grupin e përdoruesve',
