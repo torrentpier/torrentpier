@@ -2812,6 +2812,7 @@ $lang['CAPTCHA_WRONG'] = 'Вие не може да потвърди, че не 
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha тъй като не е напълно configured</h2><p>if все още не сте сгенерировал ключове, вие можете да направите това на <a href="https://www.google.com/recaptcha/admin">https://ОСП.google.com/рекапчу/admin</a>.<br />After вие генерируете ключовете, трябва да ги сложите във файл Library/конфигур.в PHP.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Без тема',
     'GROUP_ADDED' => 'Вие сте добавени към потребителската група',
