@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'คุณไม่สามารถยืนยัน
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha การไม่เต็ม configured</h2><p>if คุณยังไม่ได้อยู่แล้วที่ถูกสร้างกุญแจคุณสามารถทำมัน <a href="https://www.google.com/recaptcha/admin">https://qshortcut นเรียกว่า"กูเกิ้ล"com/recaptcha/admin</a> น<br />After คุณสร้างกุญแจคุณต้องการให้พวกเขาที่โรงแฟ้มสมุด/config นphp น</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'ไม่มีหัวเรื่อง',
     'GROUP_ADDED' => 'คุณถูกเพิ่มเข้าในกลุ่มผู้ใช้แล้ว',
