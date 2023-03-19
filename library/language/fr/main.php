@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Vous ne peut pas confirmer que vous n\'êtes pas un ro
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne pas être totalement configured</h2><p>if vous ne l\'avez pas déjà généré les clés, vous pouvez le faire sur <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After vous générer les clés, vous devez les placer dans le dossier bibliothèque/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Pas de sujet',
     'GROUP_ADDED' => 'Vous avez été ajouté au groupe d\'utilisateurs',
