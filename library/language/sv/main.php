@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Du kan inte bekräfta att du inte är en robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha inte helt configured</h2><p>if du inte redan genererade nycklar, kan du göra det på <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After du generera nycklar du behöver för att sätta dem på arkiv-bibliotek/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Inget ämne',
     'GROUP_ADDED' => 'Du har lagts till i användargruppen',
