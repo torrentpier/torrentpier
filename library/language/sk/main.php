@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Ste nemohli potvrdiť, že nie ste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie je plne configured</h2><p>if ešte nemáte vytvorený tlačidlá, môžete to urobiť na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After si vygenerovať tlačidiel, musíte ich vložiť na súbor knižnice/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Bez predmetu',
     'GROUP_ADDED' => 'Boli ste pridaný do skupiny používateľov',
