@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Δεν θα μπορούσε να επιβεβαιώσ
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha δεν είναι πλήρως configured</h2><p>if δεν έχετε δημιουργήσει ήδη τα κλειδιά, μπορείτε να το κάνετε στο <a href="https://www.google.com/recaptcha/admin">https://www.η google.com/recaptcha/admin</a>.<br />After μπορείτε να δημιουργήσετε τα κλειδιά, θα πρέπει να τους βάλει στο αρχείο βιβλιοθήκη/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Χωρίς θέμα',
     'GROUP_ADDED' => 'Έχετε προστεθεί στην ομάδα χρηστών',
