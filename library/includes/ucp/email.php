@@ -53,11 +53,10 @@ if ($row = DB()->fetch_row($sql)) {
         }
 
         if (!$errors) {
-            /** @var TorrentPier\Legacy\Emailer() $emailer */
-            $emailer = new TorrentPier\Legacy\Emailer();
+            // Sending email
+            $emailer = new TorrentPier\Emailer();
 
-            $emailer->set_from([$userdata['user_email'] => $userdata['username']]);
-            $emailer->set_to([$user_email => $username]);
+            $emailer->set_to($user_email, $username);
             $emailer->set_subject($subject);
 
             $emailer->set_template('profile_send_email', $user_lang);

@@ -18,16 +18,6 @@
       "role": "Developer"
     },
     {
-      "name": "Diolektor",
-      "homepage": "https://github.com/VasyOk",
-      "role": "Developer"
-    },
-    {
-      "name": "PheRum",
-      "homepage": "https://github.com/PheRum",
-      "role": "Developer"
-    },
-    {
       "name": "belomaxorka",
       "email": "roman25052006.kelesh@gmail.com",
       "homepage": "https://github.com/belomaxorka",
@@ -37,28 +27,27 @@
   "support": {
     "email": "support@torrentpier.com",
     "issues": "https://github.com/torrentpier/torrentpier/issues",
-    "forum": "https://torrentpier.com",
-    "docs": "https://docs.torrentpier.com/"
+    "forum": "https://torrentpier.com"
   },
   "require": {
-    "php": "^7.1.3",
+    "php": "^7.4",
     "bugsnag/bugsnag": "v3.29.0",
-    "egulias/email-validator": "2.*",
-    "filp/whoops": "2.15.1",
+    "egulias/email-validator": "^3.2",
+    "filp/whoops": "^2.15",
     "gigablah/sphinxphp": "2.0.8",
-    "google/recaptcha": "1.2.4",
-    "guzzlehttp/guzzle": "6.*",
-    "guzzlehttp/psr7": "1.*",
+    "google/recaptcha": "^1.2",
+    "guzzlehttp/guzzle": "^7.5",
+    "guzzlehttp/psr7": "^2.4",
     "longman/ip-tools": "1.2.1",
-    "monolog/monolog": "1.*",
+    "monolog/monolog": "^2.9",
     "rych/bencode": "v1.0.0",
     "samdark/sitemap": "2.4.0",
-    "swiftmailer/swiftmailer": "v6.3.0",
-    "symfony/dotenv": "4.*",
-    "symfony/polyfill": "v1.27.0"
+    "symfony/mailer": "^5.4",
+    "symfony/polyfill": "v1.27.0",
+    "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {
-    "symfony/var-dumper": "4.*"
+    "symfony/var-dumper": "^5.4"
   },
   "autoload": {
     "psr-4": {

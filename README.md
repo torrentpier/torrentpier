@@ -31,7 +31,7 @@ and go from there. The documentation will be translated into english in the near
 
 * Apache / nginx
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
-* PHP: 7.1 / 7.2 / 7.3 / 7.4
+* PHP: 7.4 / 8.0 / 8.1 / 8.2
 * PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
 
 ## Installation
