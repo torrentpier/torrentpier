@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Et voi vahvistaa, että et ole robotti';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täysin configured</h2><p>if et ole jo luonut avaimet, voit tehdä sen <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After voit luoda avaimet, sinun täytyy laittaa ne samaan tiedostoon library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Ei aihetta',
     'GROUP_ADDED' => 'Sinut on lisätty käyttäjäryhmään',
