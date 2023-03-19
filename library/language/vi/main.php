@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Bạn không thể xác nhận rằng anh không phả
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha không được đầy đủ configured</h2><p>if bạn đã không tạo ra chìa khóa, bạn có thể làm nó trên <a href="https://www.google.com/recaptcha/admin">https://.google.com/recaptcha/admin</a>.<br />After bạn tạo ra chìa khóa, bạn cần phải đưa họ tại các tập tin thư viện/cấu hình.# .</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Không chủ đề',
     'GROUP_ADDED' => 'Bạn đã được thêm vào nhóm người dùng',
