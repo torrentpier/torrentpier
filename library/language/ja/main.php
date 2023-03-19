@@ -2813,6 +2813,7 @@ $lang['CAPTCHA_WRONG'] = 'できないことを確認等の無断転載は固く
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha十分ではconfigured</h2><p>ifていなかったとしたら既に生成したキーの取得ができないことがあり上<a href="https://www.google.com/recaptcha/admin">https://wwwします。googleです。com/recaptcha/admin</a>ます。<br />Afterを生成するキーが必要ということは、ファイルライブラリ/config.クリアしました。</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => '件名なし',
     'GROUP_ADDED' => 'ユーザーグループに追加されました',
