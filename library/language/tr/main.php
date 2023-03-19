@@ -2815,6 +2815,7 @@ $lang['CAPTCHA_WRONG'] = 'Bir robot olmadığını onaylamak değil mi';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha zaten anahtarları oluşturulur mi tam configured</h2><p>if olmak değil, <a href="https://www.google.com/recaptcha/admin">https://www yapabilirsin.google.com/tuttum/admin</a>.Anahtarları oluşturmak <br />After, dosya Kütüphanesi/config onları koymak gerekir.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Konu yok',
     'GROUP_ADDED' => 'Kullanıcı grubuna eklendiniz',
