@@ -184,7 +184,7 @@ if (IS_ADMIN) {
         'dis_post' => bf($profiledata['user_opt'], 'user_opt', 'dis_post'),
         'dis_post_edit' => bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit'),
         'dis_topic' => bf($profiledata['user_opt'], 'user_opt', 'dis_topic'),
-    ));
+    ), JSON_THROW_ON_ERROR);
 
     $template->assign_vars(array(
         'EDITABLE_TPLS' => true,

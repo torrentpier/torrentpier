@@ -647,7 +647,7 @@ class User
         if (IS_GUEST) {
             $this->opt_js = array_merge($this->opt_js, $this->opt_js_guest);
         } elseif (!empty($_COOKIE['opt_js'])) {
-            $opt_js = json_decode($_COOKIE['opt_js'], true);
+            $opt_js = json_decode($_COOKIE['opt_js'], true, 512, JSON_THROW_ON_ERROR);
 
             if (\is_array($opt_js)) {
                 $this->opt_js = array_merge($this->opt_js, $opt_js);

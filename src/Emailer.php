@@ -24,14 +24,12 @@ class Emailer
     /** @var string message subject */
     private $subject;
 
-    /** @var string recipient address */
-    private $to;
+    private ?\Symfony\Component\Mime\Address $to = null;
 
-    /** @var string reply address */
-    private $reply;
+    private ?\Symfony\Component\Mime\Address $reply = null;
 
     /** @var array message template with the language */
-    private $tpl_msg = [];
+    private array $tpl_msg = [];
 
     /** @var array variables to be substituted in message templates */
     private $vars = [];
