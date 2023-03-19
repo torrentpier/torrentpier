@@ -2813,6 +2813,7 @@ $lang['CAPTCHA_WRONG'] = 'Vi ne bi mogli potvrditi da niste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bude potpuno configured</h2><p>if se još nije ostvario tragove, možete to učiniti na <a href="https://www.google.com/recaptcha/admin">https://VSP.google.com/рекапчу/admin</a>.<br />After ste generira ključeve, morate ih staviti u datoteku Library/konfigur.u PHP-u.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Bez predmeta',
     'GROUP_ADDED' => 'Dodani ste u korisničku grupu',
