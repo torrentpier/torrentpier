@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Jūs negalėjo patvirtinti, kad jūs esate ne robotas'
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne visiškai configured</h2><p>if jūs neturite jau sukurtas klavišus, galite tai padaryti dėl <a href="https://www.google.com/recaptcha/admin">https://www."google".com/recaptcha/admin</a>.<br />After galite generuoti klavišus, jums reikia įdėti juos į failą, biblioteka/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Nėra temos',
     'GROUP_ADDED' => 'Jūs buvote įtraukti į vartotojų grupę',
