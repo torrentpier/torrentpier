@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Jūs varētu apstiprināt, ka jums nav robots';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nav pilnībā configured</h2><p>if jums jau nav radīts taustiņus, jūs varat darīt to par <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After jums radīt atslēgas, jums ir nepieciešams, lai tos failu bibliotēka/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Nav priekšmeta',
     'GROUP_ADDED' => 'Jūs esat pievienots lietotāju grupai',
