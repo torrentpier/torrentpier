@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Anda tidak bisa mengkonfirmasi bahwa anda bukan robot'
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha tidak sepenuhnya configured</h2><p>if anda belum dihasilkan tombol, anda dapat melakukannya pada <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After anda menghasilkan kunci, anda perlu untuk menempatkan mereka di file library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Tidak ada subjek',
     'GROUP_ADDED' => 'Anda telah ditambahkan ke grup pengguna',
