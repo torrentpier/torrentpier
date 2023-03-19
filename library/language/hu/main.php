@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Azt nem tudta megerősíteni, hogy nem egy robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nem teljesen configured</h2><p>if még nem generált a kulcsokat, meg tudod csinálni <a href="https://www.google.com/recaptcha/admin">https://www.a google.com/recaptcha/admin</a>.<br />After generál a kulcsokat, meg kell tenni őket a fájl könyvtár/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Nincs tárgy',
     'GROUP_ADDED' => 'Önt hozzáadták a felhasználói csoporthoz',
