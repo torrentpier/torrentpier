@@ -2813,6 +2813,7 @@ $lang['CAPTCHA_WRONG'] = 'Ola bilər ki, təsdiq Siz robot deyil';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha olmadan tam configured</h2><p>if siz hələ сгенерировал düymələri, bunu edə bilərsiniz azn <a href="https://www.google.com/recaptcha/admin">https://ВСП.google.com/рекапчу/admin</a>.<br />After siz генерируете düymələri, lazımdır onları qoymaq fayl Library/onları.PHP.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Mövzu yoxdur',
     'GROUP_ADDED' => 'Siz istifadəçi qrupuna əlavə olundunuz',
