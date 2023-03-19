@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'თქვენ შეიძლება არ ად
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha არ მიმდინარეობს სრულად configured</h2><p>if თქვენ არ უკვე გამომუშავებული გასაღებები, თქვენ შეგიძლიათ ეს გააკეთოთ <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After თქვენ გენერირება გასაღებები, თქვენ უნდა დააყენოს მათ ფაილი ბიბლიოთეკა/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'არავითარი საგანი',
     'GROUP_ADDED' => 'თქვენ დამატებული ხართ მომხმარებელთა ჯგუფში',
