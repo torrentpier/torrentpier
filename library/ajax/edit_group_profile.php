@@ -34,11 +34,8 @@ switch ($mode) {
         $this->response['new_value'] = $value;
         break;
 
-    case 'group_type':
-        $this->response['new_value'] = $value;
-        break;
-
     case 'release_group':
+    case 'group_type':
         $this->response['new_value'] = $value;
         break;
 
@@ -46,7 +43,7 @@ switch ($mode) {
         delete_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']);
         $value = 0;
         $mode = 'avatar_ext_id';
-        $this->response['act'] = $value;
+        $this->response['remove_avatar'] = get_avatar(GROUP_AVATAR_MASK . $group_id, $value);
         break;
 
     default:
