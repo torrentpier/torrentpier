@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = '你不能确认你不是一个机器人';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha没有得到充分configured</h2><p>if你有没有已经产生的钥匙，你可以做<a href="https://www.google.com/recaptcha/admin">https://www.谷歌。com/验证码/admin</a>的。<br />After你产生的钥匙，你需要把它们放在该文件的图书馆/config。php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => '無主題',
     'GROUP_ADDED' => '您已被添加到用戶組',
