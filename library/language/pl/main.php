@@ -2813,6 +2813,7 @@ $lang['CAPTCHA_WRONG'] = 'Czy mógłbyś potwierdzić, że nie Jesteś robotem';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie będąc w pełni configured</h2><p>if jeszcze nie wygenerowało klucze, możesz zrobić to na <a href="https://www.google.com/recaptcha/admin">https://GSP.google.com/рекапчу/admin</a>.<br />After można wygeneruje klucze, musisz umieścić je w pliku Library/konfig.w PHP.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Brak tematu',
     'GROUP_ADDED' => 'Zostałeś dodany do grupy użytkowników',
