@@ -14,8 +14,8 @@ if (!defined('BB_ROOT')) {
 /**
  * Check PHP version
  */
-if (PHP_VERSION_ID < 70103) {
-    die('TorrentPier requires PHP version 7.1.3+. Your PHP version ' . PHP_VERSION);
+if (PHP_VERSION_ID < 70400) {
+    die('TorrentPier requires PHP version 7.4+. Your PHP version ' . PHP_VERSION);
 }
 
 /**
@@ -88,10 +88,16 @@ define('COOKIE_MAX_TRACKS', 90);
  * @param bool $httponly
  * @return bool
  */
-function bb_setcookie($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false)
+function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false)
 {
     global $bb_cfg;
-    return setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly);
+    return setcookie($name, $val, [
+        'expires' => $lifetime,
+        'path' => $bb_cfg['script_path'],
+        'domain' => $bb_cfg['cookie_domain'],
+        'secure' => $bb_cfg['cookie_secure'],
+        'httponly' => $httponly,
+    ]);
 }
 
 /**

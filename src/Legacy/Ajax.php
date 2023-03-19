@@ -195,7 +195,7 @@ class Ajax
             }
         }
 
-        $response_js = json_encode($this->response);
+        $response_js = json_encode($this->response, JSON_THROW_ON_ERROR);
 
         if (GZIP_OUTPUT_ALLOWED && !\defined('NO_GZIP')) {
             if (UA_GZIP_SUPPORTED && \strlen($response_js) > 2000) {

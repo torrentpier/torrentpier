@@ -313,7 +313,7 @@ class Template
             $str = &$this->_tpldata;
             for ($i = 0; $i < $blockcount; $i++) {
                 $str = &$str[$blocks[$i] . '.'];
-                $str = &$str[(is_array($str) || $str instanceof \Countable ? \count($str) : 0) - 1];
+                $str = &$str[(is_countable($str) ? \count($str) : 0) - 1];
             }
             // Now we add the block that we're actually assigning to.
             // We're adding a new iteration to this block with the given
@@ -745,7 +745,7 @@ class Template
         // This one will handle varrefs WITH namespaces
         $varrefs = [];
         preg_match_all('#\{(([a-z0-9\-_]+?\.)+)([a-z0-9\-_]+?)\}#is', $code, $varrefs);
-        $varcount = is_array($varrefs[1]) || $varrefs[1] instanceof \Countable ? \count($varrefs[1]) : 0;
+        $varcount = is_countable($varrefs[1]) ? \count($varrefs[1]) : 0;
         $search = [];
         $replace = [];
         for ($i = 0; $i < $varcount; $i++) {
@@ -783,7 +783,7 @@ class Template
 										 [^\s(),]+)/x', $tag_args, $match);
 
         $tokens = $match[0];
-        $tokens_cnt = is_array($tokens) || $tokens instanceof \Countable ? \count($tokens) : 0;
+        $tokens_cnt = is_countable($tokens) ? \count($tokens) : 0;
         $is_arg_stack = [];
 
         for ($i = 0; $i < $tokens_cnt; $i++) {
@@ -843,7 +843,7 @@ class Template
 
                     $new_tokens = $this->_parse_is_expr($is_arg, \array_slice($tokens, $i + 1));
 
-                    array_splice($tokens, $is_arg_start, is_array($tokens) || $tokens instanceof \Countable ? \count($tokens) : 0, $new_tokens);
+                    array_splice($tokens, $is_arg_start, is_countable($tokens) ? \count($tokens) : 0, $new_tokens);
 
                     $i = $is_arg_start;
                     break;
@@ -985,13 +985,13 @@ class Template
 
         // adding language variable (eg: "english" or "german")
         // can be used to make truly multi-lingual templates
-        $this->vars['LANG'] = $this->vars['LANG'] ?? $bb_cfg['default_lang'];
+        $this->vars['LANG'] ??= $bb_cfg['default_lang'];
         // adding current template
         $tpl = $this->root . '/';
         if (0 === strpos($tpl, './')) {
             $tpl = substr($tpl, 2, \strlen($tpl));
         }
-        $this->vars['TEMPLATE'] = $this->vars['TEMPLATE'] ?? $tpl;
-        $this->vars['TEMPLATE_NAME'] = $this->vars['TEMPLATE_NAME'] ?? $this->tpl;
+        $this->vars['TEMPLATE'] ??= $tpl;
+        $this->vars['TEMPLATE_NAME'] ??= $this->tpl;
     }
 }

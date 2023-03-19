@@ -7,6 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use TorrentPier\Env;
+
 if (isset($_REQUEST['GLOBALS'])) {
     die();
 }
@@ -51,46 +53,20 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * Gets the value of an environment variable. Supports boolean, empty and null.
+ * Gets the value of an environment variable.
  *
- * @param string $key
- * @param mixed $default
+ * @param  string  $key
+ * @param  mixed  $default
  * @return mixed
  */
 function env($key, $default = null)
 {
-    $value = getenv($key);
-    if (!$value) return value($default);
-    switch (strtolower($value)) {
-        case 'true':
-        case '(true)':
-            return true;
-        case 'false':
-        case '(false)':
-            return false;
-        case '(null)':
-            return null;
-        case '(empty)':
-            return '';
-    }
-    return $value;
-}
-
-/**
- * Return the default value of the given value.
- *
- * @param mixed $value
- * @return mixed
- */
-function value($value)
-{
-    return $value instanceof Closure ? $value() : $value;
+    return Env::get($key, $default);
 }
 
 // Get initial config
-if (!getenv('APP_DEBUG') && file_exists(__DIR__ . '/.env')) {
-    (new Symfony\Component\Dotenv\Dotenv())->load(__DIR__ . '/.env');
-}
+$dotenv = Dotenv\Dotenv::createMutable(__DIR__);
+$dotenv->safeLoad();
 require_once __DIR__ . '/library/config.php';
 
 // Local config

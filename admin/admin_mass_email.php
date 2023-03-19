@@ -20,9 +20,10 @@ if (!$bb_cfg['emailer']['enabled']) {
 
 set_time_limit(1200);
 
-$subject = (string)trim(request_var('subject', ''));
+$subject = trim(request_var('subject', ''));
 $message = (string)request_var('message', '');
 $group_id = (int)request_var(POST_GROUPS_URL, 0);
+$reply_to = (string)request_var('reply_to', $bb_cfg['board_email']);
 $message_type = (string)request_var('message_type', '');
 
 $errors = $user_id_sql = [];
@@ -66,12 +67,12 @@ if (isset($_POST['submit'])) {
         }
 
         foreach ($user_list as $i => $row) {
-            /** @var TorrentPier\Legacy\Emailer() $emailer */
-            $emailer = new TorrentPier\Legacy\Emailer();
+            // Sending email
+            $emailer = new TorrentPier\Emailer();
 
-            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-            $emailer->set_to([$row['user_email'] => $row['username']]);
+            $emailer->set_to($row['user_email'], $row['username']);
             $emailer->set_subject($subject);
+            $emailer->set_reply($reply_to);
 
             $emailer->set_template('admin_send_email');
             $emailer->assign_vars(array(
@@ -101,6 +102,7 @@ foreach (DB()->fetch_rowset($sql) as $row) {
 $template->assign_vars(array(
     'MESSAGE' => $message,
     'SUBJECT' => $subject,
+    'REPLY_TO' => $reply_to,
 
     'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
 

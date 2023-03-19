@@ -14,7 +14,7 @@ if (!defined('IN_AJAX')) {
 global $bf, $lang;
 
 $user_id = (int)$this->request['user_id'];
-$new_opt = json_decode($this->request['user_opt'], true);
+$new_opt = json_decode($this->request['user_opt'], true, 512, JSON_THROW_ON_ERROR);
 
 if (!$user_id or !$u_data = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
