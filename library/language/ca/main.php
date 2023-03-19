@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'No es podia confirmar que no ets un robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha no ser totalment configured</h2><p>if no ho heu fet ja generar les claus, podeu fer-ho en <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After a generar les claus, que cal posar-los a l\'arxiu de la biblioteca/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Cap tema',
     'GROUP_ADDED' => 'Heu estat afegit al grup d\'usuaris',
