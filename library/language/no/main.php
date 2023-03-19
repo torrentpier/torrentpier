@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Du kunne ikke bekrefte at du ikke er en robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ikke er fullt ut configured</h2><p>if du ikke allerede har generert tastene, kan du gjøre det på <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After du generere nøkler, må du sette dem på fil-bibliotek/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Intet emne',
     'GROUP_ADDED' => 'Du er lagt til i brukergruppen',
