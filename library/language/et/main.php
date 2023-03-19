@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Sa ei suutnud kinnitada, et sa ei ole robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täielikult configured</h2><p>if te pole juba genereeritud võtmete abil saate teha seda <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After te luua võtmed, teil on vaja panna neid faili library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Teemat pole',
     'GROUP_ADDED' => 'Olete lisatud kasutajagruppi',
