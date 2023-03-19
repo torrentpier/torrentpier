@@ -2809,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = '을 확인할 수없는 당신이하지 않는 로봇'
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha 되지 않는 완전히 configured</h2><p>if 하지 않은 이미 생성된 열쇠를 당신에 그것을 할 수 있습니다 <a href="https://www.google.com/recaptcha/admin">https://www.google 니다.com/recaptcha/admin</a> 니다.<br />After 를 생성하는 키를,당신은 그들을 넣어서 파일의 라이브러리/config 니다.php 니다.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => '주제 없음',
     'GROUP_ADDED' => '사용자 그룹에 추가되었습니다.',
