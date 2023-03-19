@@ -23,7 +23,7 @@
       </td>
     </tr>
     <tr>
-      <td class="row1" align="right"><b>Reply to</b></td>
+      <td class="row1" align="right"><b>{L_REPLY_TO}</b></td>
       <td class="row2">
         <input type="text" name="reply_to" size="45" maxlength="100" style="width:98%" value="{REPLY_TO}"/>
       </td>
