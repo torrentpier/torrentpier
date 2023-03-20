@@ -10,10 +10,9 @@
 namespace TorrentPier;
 
 use Closure;
-
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
-
+use Dotenv\Repository\RepositoryInterface;
 use PhpOption\Option;
 
 /**
@@ -32,9 +31,9 @@ class Env
     /**
      * The environment repository instance.
      *
-     * @var \Dotenv\Repository\RepositoryInterface|null
+     * @var RepositoryInterface|null
      */
-    protected static $repository;
+    protected static ?RepositoryInterface $repository;
 
     /**
      * Enable the putenv adapter.
@@ -61,9 +60,9 @@ class Env
     /**
      * Get the environment repository instance.
      *
-     * @return \Dotenv\Repository\RepositoryInterface
+     * @return RepositoryInterface
      */
-    public static function getRepository(): ?\Dotenv\Repository\RepositoryInterface
+    public static function getRepository(): ?RepositoryInterface
     {
         if (static::$repository === null) {
             $builder = RepositoryBuilder::createWithDefaultAdapters();
@@ -81,11 +80,11 @@ class Env
     /**
      * Gets the value of an environment variable.
      *
-     * @param string|null $key
-     * @param mixed|null $default
+     * @param string $key
+     * @param mixed $default
      * @return mixed
      */
-    public static function get(?string $key, mixed $default = null): mixed
+    public static function get(string $key, $default = null)
     {
         return Option::fromValue(static::getRepository()->get($key))
             ->map(function ($value) {
@@ -110,6 +109,6 @@ class Env
 
                 return $value;
             })
-            ->getOrCall(fn () => $default instanceof Closure ? $default() : $default);
+            ->getOrCall(fn() => $default instanceof Closure ? $default() : $default);
     }
 }
