@@ -93,12 +93,11 @@ class IPHelper
     }
 
     /**
-     * Anonymizes an IP/IPv6.
-     *
+     * Anonymize an IP/IPv6.
      * Removes the last byte for v4 and the last 8 bytes for v6 IPs
      *
-     * -------------------------------------------------------------
-     * From Symfony
+     * @param string $ip
+     * @return string
      */
     public static function anonymizeIP(string $ip): string
     {
