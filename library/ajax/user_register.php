@@ -20,9 +20,7 @@ switch ($mode) {
     case 'check_name':
         $username = clean_username($this->request['username']);
 
-        if (empty($username)) {
-            $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $lang['CHOOSE_A_NAME'] . '</span>';
-        } elseif ($err = \TorrentPier\Legacy\Validate::username($username)) {
+        if ($err = \TorrentPier\Validate::username($username)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;
@@ -30,9 +28,7 @@ switch ($mode) {
     case 'check_email':
         $email = (string)$this->request['email'];
 
-        if (empty($email)) {
-            $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $lang['CHOOSE_E_MAIL'] . '</span>';
-        } elseif ($err = \TorrentPier\Legacy\Validate::email($email)) {
+        if ($err = \TorrentPier\Validate::email($email)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;
@@ -41,7 +37,7 @@ switch ($mode) {
         $pass = (string)$this->request['pass'];
         $pass_confirm = (string)$this->request['pass_confirm'];
 
-        if ($err = \TorrentPier\Legacy\Validate::password($pass, $pass_confirm)) {
+        if ($err = \TorrentPier\Validate::password($pass, $pass_confirm)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         } else {
             $text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
