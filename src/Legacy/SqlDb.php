@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy;
 
 use mysqli_result;
+use TorrentPier\Legacy\Common\Http;
 
 /**
  * Class SqlDb
@@ -104,7 +105,7 @@ class SqlDb
 
         if (mysqli_connect_error()) {
             $server = DBG_USER ? $this->cfg['dbhost'] : '';
-            header('HTTP/1.0 503 Service Unavailable');
+            Http::statusCode(503);
             bb_log(' ', "db_err/connect_failed_{$this->cfg['dbhost']}");
             die("Could not connect to mysql server $server");
         }
