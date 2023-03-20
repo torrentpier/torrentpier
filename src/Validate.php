@@ -36,6 +36,11 @@ class Validate
 
         static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
+        // Check for empty
+        if (empty($username)) {
+            return $lang['CHOOSE_A_NAME'];
+        }
+
         $username = str_compact($username);
         $username = clean_username($username);
 
@@ -96,8 +101,13 @@ class Validate
     {
         global $lang, $userdata, $bb_cfg;
 
+        // Check for empty
+        if (empty($email)) {
+            return $lang['CHOOSE_E_MAIL'];
+        }
+
         // Basic email validate
-        if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $lang['EMAIL_INVALID'];
         }
 
