@@ -12,13 +12,6 @@ if (!defined('BB_ROOT')) {
 }
 
 /**
- * Check PHP version
- */
-if (PHP_VERSION_ID < 70400) {
-    die('TorrentPier requires PHP version 7.4+. Your PHP version ' . PHP_VERSION);
-}
-
-/**
  * Define some basic configuration arrays
  */
 $userdata = $theme = $images = $lang = $bf = $attach_config = [];

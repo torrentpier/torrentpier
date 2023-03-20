@@ -74,7 +74,7 @@ class Ajax
         // Action params
         $action_params = null;
 
-        if (!is_ajax()) {
+        if (!\TorrentPier\Helpers\IsHelper::isAJAX()) {
             $this->ajax_die('Not AJAX request', E_AJAX_NOT_REQUEST);
         }
 
