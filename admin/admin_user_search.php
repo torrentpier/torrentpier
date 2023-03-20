@@ -299,8 +299,8 @@ if (!isset($_REQUEST['dosearch'])) {
             unset($users);
             $users = [];
 
-            if (Longman\IPTools\Ip::isValid($ip_address)) {
-                $ip = encode_ip($ip_address);
+            if (\TorrentPier\Helpers\IPHelper::isValid($ip_address)) {
+                $ip = \TorrentPier\Helpers\IPHelper::encodeIP($ip_address);
                 $users[] = $ip;
             } else {
                 bb_die($lang['SEARCH_INVALID_IP']);

@@ -585,12 +585,12 @@ function bt_show_ip($ip, $port = '')
     global $bb_cfg;
 
     if (IS_AM) {
-        $ip = decode_ip($ip);
+        $ip = \TorrentPier\Helpers\IPHelper::decodeIP($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
     }
 
-    return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
+    return ($bb_cfg['bt_show_ip_only_moder']) ? false : \TorrentPier\Helpers\IPHelper::anonymizeIP($ip);
 }
 
 function bt_show_port($port)
@@ -602,12 +602,6 @@ function bt_show_port($port)
     }
 
     return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
-}
-
-function decode_ip_xx($ip)
-{
-    $h = explode('.', chunk_split($ip, 2, '.'));
-    return hexdec($h[0]) . '.' . hexdec($h[1]) . '.' . hexdec($h[2]) . '.xx';
 }
 
 function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
@@ -762,7 +756,7 @@ function str_short($text, $max_length, $space = ' ')
     if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
         $text = mb_substr($text, 0, $max_length, 'UTF-8');
 
-        if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string) $space)) {
+        if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string)$space)) {
             if ($last_space_pos > round($max_length * 3 / 4)) {
                 $last_space_pos--;
                 $text = mb_substr($text, 0, $last_space_pos, 'UTF-8');
