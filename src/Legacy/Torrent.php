@@ -334,7 +334,7 @@ class Torrent
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
             if (!$ann || !\in_array($ann, $announce_urls)) {
-                $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
+                $msg = sprintf($lang['INVALID_ANN_URL'], htmlCHR($ann), $announce_urls['main_url']);
                 return self::torrent_error_exit($msg);
             }
         }

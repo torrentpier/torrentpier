@@ -190,8 +190,8 @@ function display_attachments($post_id)
 
         $filesize = humn_size($attachments['_' . $post_id][$i]['filesize']);
 
-        $display_name = htmlspecialchars($attachments['_' . $post_id][$i]['real_filename']);
-        $comment = htmlspecialchars($attachments['_' . $post_id][$i]['comment']);
+        $display_name = htmlCHR($attachments['_' . $post_id][$i]['real_filename']);
+        $comment = htmlCHR($attachments['_' . $post_id][$i]['comment']);
         $comment = str_replace("\n", '<br />', $comment);
 
         $denied = false;

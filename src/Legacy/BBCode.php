@@ -266,7 +266,7 @@ class BBCode
         $tilte = substr($m[3], 0, 250);
         $tilte = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $tilte);
         // еще раз htmlspecialchars, т.к. при извлечении из title происходит обратное преобразование
-        $tilte = htmlspecialchars($tilte, ENT_QUOTES);
+        $tilte = htmlCHR($tilte);
         return $m[1] . $tilte . $m[4];
     }
 

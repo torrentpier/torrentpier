@@ -66,7 +66,7 @@ class Torrent
         global $template;
 
         foreach ($default_cfg as $config_name => $config_value) {
-            $template->assign_vars([strtoupper($config_name) => htmlspecialchars($cfg[$config_name])]);
+            $template->assign_vars([strtoupper($config_name) => htmlCHR($cfg[$config_name])]);
         }
     }
 

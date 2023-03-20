@@ -654,7 +654,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
     $result = $var;
 
     if ($type == 'string') {
-        $result = trim(htmlspecialchars(str_replace(array("\r\n", "\r"), array("\n", "\n"), $result)));
+        $result = trim(htmlCHR(str_replace(array("\r\n", "\r"), array("\n", "\n"), $result)));
 
         if (!empty($result)) {
             // Make sure multibyte characters are wellformed
@@ -965,7 +965,7 @@ function get_db_stat($mode)
 
 function clean_username($username)
 {
-    $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
+    $username = mb_substr(htmlCHR(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
     $username = bb_rtrim($username, "\\");
     $username = str_replace("'", "\'", $username);
 

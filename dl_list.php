@@ -36,7 +36,7 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status') {
 }
 
 // Define redirect URL
-$full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialchars($_POST['full_url'])) : '';
+$full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlCHR($_POST['full_url'])) : '';
 
 if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
     $redirect_type = "search.php";

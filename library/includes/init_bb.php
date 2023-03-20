@@ -349,6 +349,20 @@ function bb_exit($output = '')
 }
 
 /**
+ * htmlspecialchars implementation
+ *
+ * @param string|null $txt
+ * @param bool $double_encode
+ * @param int $quote_style
+ * @param string|null $charset
+ * @return string
+ */
+function htmlCHR(?string $txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
+{
+    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
+}
+
+/**
  * @param $var
  * @param string $title
  * @param bool $print
@@ -356,23 +370,11 @@ function bb_exit($output = '')
  */
 function prn_r($var, $title = '', $print = true)
 {
-    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
+    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlCHR(print_r($var, true)) . '</pre>';
     if ($print) {
         echo $r;
     }
     return $r;
-}
-
-/**
- * @param $txt
- * @param bool $double_encode
- * @param int $quote_style
- * @param string $charset
- * @return string
- */
-function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
-{
-    return (string)htmlspecialchars($txt, $quote_style, $charset, $double_encode);
 }
 
 /**

@@ -679,9 +679,9 @@ class Attach
         if ($this->add_attachment_body) {
             $template->assign_vars([
                 'TPL_ADD_ATTACHMENT' => true,
-                'FILE_COMMENT' => htmlspecialchars($this->file_comment),
+                'FILE_COMMENT' => htmlCHR($this->file_comment),
                 'FILESIZE' => $attach_config['max_filesize'],
-                'FILENAME' => htmlspecialchars($this->filename),
+                'FILENAME' => htmlCHR($this->filename),
                 'S_FORM_ENCTYPE' => 'enctype="multipart/form-data"',
             ]);
         }
@@ -699,9 +699,9 @@ class Attach
                 }
 
                 $template->assign_block_vars('attach_row', [
-                    'FILE_NAME' => @htmlspecialchars($this->attachment_filename_list[$i]),
+                    'FILE_NAME' => @htmlCHR($this->attachment_filename_list[$i]),
                     'ATTACH_FILENAME' => @$this->attachment_list[$i],
-                    'FILE_COMMENT' => @htmlspecialchars($this->attachment_comment_list[$i]),
+                    'FILE_COMMENT' => @htmlCHR($this->attachment_comment_list[$i]),
                     'ATTACH_ID' => @$this->attachment_id_list[$i],
                     'U_VIEW_ATTACHMENT' => $download_link,
                 ]);
@@ -767,7 +767,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= sprintf($lang['INVALID_FILENAME'], htmlspecialchars($this->filename));
+                $error_msg .= sprintf($lang['INVALID_FILENAME'], htmlCHR($this->filename));
             }
 
             // check php upload-size
@@ -793,7 +793,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION'], htmlspecialchars($this->extension));
+                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION'], htmlCHR($this->extension));
             }
 
             // Check Forum Permissions
@@ -802,7 +802,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION_WITHIN_FORUM'], htmlspecialchars($this->extension));
+                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION_WITHIN_FORUM'], htmlCHR($this->extension));
             }
 
             //bt

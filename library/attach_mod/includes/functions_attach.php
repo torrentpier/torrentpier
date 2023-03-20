@@ -226,7 +226,7 @@ function physical_filename_already_stored($filename)
 		LIMIT 1";
 
     if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not get attachment information for filename: ' . htmlspecialchars($filename));
+        bb_die('Could not get attachment information for filename: ' . htmlCHR($filename));
     }
     $num_rows = DB()->num_rows($result);
     DB()->sql_freeresult($result);

@@ -19,7 +19,7 @@ if (!$bb_cfg['use_word_censor']) {
 }
 
 $mode = request_var('mode', '');
-$mode = htmlspecialchars($mode);
+$mode = htmlCHR($mode);
 
 if (isset($_POST['add'])) {
     $mode = 'add';

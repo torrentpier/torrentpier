@@ -442,8 +442,8 @@ if ($view === 'attachments') {
                 'ROW_NUMBER' => $i + ($_GET['start'] + 1),
                 'ROW_CLASS' => $row_class,
 
-                'FILENAME' => htmlspecialchars($attachments[$i]['real_filename']),
-                'COMMENT' => htmlspecialchars($attachments[$i]['comment']),
+                'FILENAME' => htmlCHR($attachments[$i]['real_filename']),
+                'COMMENT' => htmlCHR($attachments[$i]['comment']),
                 'EXTENSION' => $attachments[$i]['extension'],
                 'SIZE' => round($attachments[$i]['filesize'] / 1024, 2),
                 'DOWNLOAD_COUNT' => $attachments[$i]['download_count'],

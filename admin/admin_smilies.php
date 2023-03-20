@@ -17,7 +17,7 @@ require __DIR__ . '/pagestart.php';
 // Check to see what mode we should operate in
 if (isset($_POST['mode']) || isset($_GET['mode'])) {
     $mode = $_POST['mode'] ?? $_GET['mode'];
-    $mode = htmlspecialchars($mode);
+    $mode = htmlCHR($mode);
 } else {
     $mode = '';
 }
