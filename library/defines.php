@@ -11,6 +11,24 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+// System
+define('CHECK_REQIREMENTS', [
+    'status' => true,
+    'php_min_version' => '7.4.0',
+    'ext_list' => [
+        'json',
+        'gd',
+        'zlib',
+        'curl',
+        'tidy',
+        'mysqli',
+        'bcmath',
+        'intl',
+        'xml',
+        'xmlwriter',
+    ],
+]);
+
 // Root path
 $rootPath = __DIR__;
 if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
