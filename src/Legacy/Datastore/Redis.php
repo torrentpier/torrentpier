@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use TorrentPier\Dev;
+
 /**
  * Class Redis
  * @package TorrentPier\Legacy\Datastore
@@ -29,7 +31,7 @@ class Redis extends Common
 
         $this->cfg = $cfg;
         $this->redis = new \Redis();
-        $this->dbg_enabled = sql_dbg_enabled();
+        $this->dbg_enabled = Dev::sql_dbg_enabled();
         $this->prefix = $prefix;
     }
 

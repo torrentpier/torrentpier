@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use TorrentPier\Dev;
+
 /**
  * Class Common
  * @package TorrentPier\Legacy\Cache
@@ -67,7 +69,7 @@ class Common
         if ($mode == 'start') {
             $this->sql_starttime = utime();
 
-            $dbg['sql'] = isset($cur_query) ? short_query($cur_query) : short_query($this->cur_query);
+            $dbg['sql'] = Dev::short_query($cur_query ?? $this->cur_query);
             $dbg['src'] = $this->debug_find_source();
             $dbg['file'] = $this->debug_find_source('file');
             $dbg['line'] = $this->debug_find_source('line');

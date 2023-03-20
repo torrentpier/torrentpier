@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy\Cache;
 
 use SQLite3;
+use TorrentPier\Dev;
 
 /**
  * Class SqliteCommon
@@ -37,7 +38,7 @@ class SqliteCommon extends Common
     public function __construct($cfg)
     {
         $this->cfg = array_merge($this->cfg, $cfg);
-        $this->dbg_enabled = sql_dbg_enabled();
+        $this->dbg_enabled = Dev::sql_dbg_enabled();
     }
 
     public function connect()

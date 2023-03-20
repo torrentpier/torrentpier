@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\Dev;
+
 /**
  * Class Ajax
  * @package TorrentPier\Legacy

@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use TorrentPier\Dev;
+
 /**
  * Class File
  * @package TorrentPier\Legacy\Cache
@@ -24,7 +26,7 @@ class File extends Common
     {
         $this->dir = $dir;
         $this->prefix = $prefix;
-        $this->dbg_enabled = sql_dbg_enabled();
+        $this->dbg_enabled = Dev::sql_dbg_enabled();
     }
 
     public function get($name, $get_miss_key_callback = '', $ttl = 0)

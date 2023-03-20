@@ -7,11 +7,13 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
+
+use Exception;
 
 /**
  * Class Dev
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Dev
 {
@@ -19,8 +21,9 @@ class Dev
      * Get SQL debug log
      *
      * @return string
+     * @throws Exception
      */
-    public static function get_sql_log()
+    public static function get_sql_log(): string
     {
         global $DBS, $CACHES, $datastore;
 
@@ -48,20 +51,52 @@ class Dev
     }
 
     /**
+     * Sql debug status
+     *
+     * @return bool
+     */
+    public static function sql_dbg_enabled(): bool
+    {
+        return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
+    }
+
+    /**
+     * Short query
+     *
+     * @param string $sql
+     * @param bool $esc_html
+     * @return string
+     */
+    public static function short_query(string $sql, bool $esc_html = false): string
+    {
+        $max_len = 100;
+        $sql = str_compact($sql);
+
+        if (!empty($_COOKIE['sql_log_full'])) {
+            if (mb_strlen($sql, 'UTF-8') > $max_len) {
+                $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
+            }
+        }
+
+        return $esc_html ? htmlCHR($sql, true) : $sql;
+    }
+
+    /**
      * Get SQL query html log
      *
      * @param object $db_obj
      * @param string $log_name
      *
      * @return string
+     * @throws Exception
      */
-    private static function get_sql_log_html($db_obj, $log_name)
+    private static function get_sql_log_html(object $db_obj, string $log_name): string
     {
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
             $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
-            $sql = short_query($dbg['sql'], true);
+            $sql = self::short_query($dbg['sql'], true);
             $time = sprintf('%.4f', $dbg['time']);
             $perc = @sprintf('[%2d]', $dbg['time'] * 100 / $db_obj->sql_timetotal);
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];

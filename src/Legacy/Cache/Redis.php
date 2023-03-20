@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use TorrentPier\Dev;
+
 /**
  * Class Redis
  * @package TorrentPier\Legacy\Cache
@@ -31,7 +33,7 @@ class Redis extends Common
         $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->redis = new \Redis();
-        $this->dbg_enabled = sql_dbg_enabled();
+        $this->dbg_enabled = Dev::sql_dbg_enabled();
     }
 
     public function connect()

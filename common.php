@@ -217,25 +217,6 @@ if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
     CACHE('bb_cache')->set('system_req', true);
 }
 
-function sql_dbg_enabled()
-{
-    return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
-}
-
-function short_query($sql, $esc_html = false)
-{
-    $max_len = 100;
-    $sql = str_compact($sql);
-
-    if (!empty($_COOKIE['sql_log_full'])) {
-        if (mb_strlen($sql, 'UTF-8') > $max_len) {
-            $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
-        }
-    }
-
-    return $esc_html ? htmlCHR($sql, true) : $sql;
-}
-
 // Functions
 function utime()
 {

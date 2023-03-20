@@ -11,6 +11,7 @@ namespace TorrentPier\Legacy;
 
 use mysqli_result;
 use TorrentPier\Common\Http;
+use TorrentPier\Dev;
 
 /**
  * Class SqlDb
@@ -58,7 +59,7 @@ class SqlDb
         global $DBS;
 
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
-        $this->dbg_enabled = (sql_dbg_enabled() || !empty($_COOKIE['explain']));
+        $this->dbg_enabled = (Dev::sql_dbg_enabled() || !empty($_COOKIE['explain']));
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
@@ -896,7 +897,7 @@ class SqlDb
         $msg[] = sprintf('%-4s', round(sys('la'), 1));
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
-        $msg[] = short_query($this->cur_query);
+        $msg[] = Dev::short_query($this->cur_query);
         $msg = implode(LOG_SEPR, $msg);
         $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
@@ -1001,7 +1002,7 @@ class SqlDb
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
-				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . short_query($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
+				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . Dev::short_query($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
 				<br />';
                 break;
 
