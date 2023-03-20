@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
@@ -18,7 +18,7 @@ use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
 
 /**
  * Class Validate
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Validate
 {
@@ -30,7 +30,7 @@ class Validate
      *
      * @return bool|string
      */
-    public static function username($username, $check_ban_and_taken = true)
+    public static function username(string $username, bool $check_ban_and_taken = true)
     {
         global $user, $lang;
 
@@ -61,17 +61,16 @@ class Validate
             }
         }
         if ($check_ban_and_taken) {
-            // Занято
+            // Check taken
             $username_sql = DB()->escape($username);
-
             if ($row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
                 if ((!IS_GUEST && $row['username'] != $user->name) || IS_GUEST) {
                     return $lang['USERNAME_TAKEN'];
                 }
             }
-            // Запрещено
-            $banned_names = [];
 
+            // Check banned
+            $banned_names = [];
             foreach (DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
                 $banned_names[] = str_replace('\*', '.*?', preg_quote($row['disallow_username'], '#u'));
             }
@@ -93,13 +92,16 @@ class Validate
      *
      * @return bool|string
      */
-    public static function email($email, $check_ban_and_taken = true)
+    public static function email(string $email, bool $check_ban_and_taken = true)
     {
         global $lang, $userdata, $bb_cfg;
 
+        // Basic email validate
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $lang['EMAIL_INVALID'];
         }
+
+        // Check max length
         if (\strlen($email) > USEREMAIL_MAX_LENGTH) {
             return $lang['EMAIL_TOO_LONG'];
         }
@@ -121,8 +123,8 @@ class Validate
         }
 
         if ($check_ban_and_taken) {
+            // Check banned
             $banned_emails = [];
-
             foreach (DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
                 $banned_emails[] = str_replace('\*', '.*?', preg_quote($row['ban_email'], '#'));
             }
@@ -132,8 +134,8 @@ class Validate
                 }
             }
 
+            // Check taken
             $email_sql = DB()->escape($email);
-
             if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
                 if ($row['user_email'] == $userdata['user_email']) {
                     return false;

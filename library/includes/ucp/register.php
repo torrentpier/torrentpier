@@ -180,7 +180,7 @@ foreach ($profile_fields as $field => $can_edit) {
             $username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
 
             if ($submit) {
-                $err = \TorrentPier\Legacy\Validate::username($username);
+                $err = \TorrentPier\Validate::username($username);
                 if (!$errors and $err && $mode == 'register') {
                     $errors[] = $err;
                 }
@@ -204,7 +204,7 @@ foreach ($profile_fields as $field => $can_edit) {
 
                 // пароль для гостя и при смене пароля юзером
                 if (!empty($new_pass)) {
-                    if ($err = \TorrentPier\Legacy\Validate::password($new_pass, $cfm_pass)) {
+                    if ($err = \TorrentPier\Validate::password($new_pass, $cfm_pass)) {
                         $errors[] = $err;
                     }
 
@@ -236,7 +236,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (empty($email)) {
                         $errors[] = $lang['CHOOSE_E_MAIL'];
                     }
-                    if (!$errors and $err = \TorrentPier\Legacy\Validate::email($email)) {
+                    if (!$errors and $err = \TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
@@ -246,7 +246,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (!$cur_pass_valid) {
                         $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
                     }
-                    if (!$errors and $err = \TorrentPier\Legacy\Validate::email($email)) {
+                    if (!$errors and $err = \TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     if ($bb_cfg['reg_email_activation']) {

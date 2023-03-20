@@ -26,7 +26,7 @@ $value = $this->request['value'] = (string)(isset($this->request['value'])) ? $t
 switch ($field) {
     case 'username':
         $value = clean_username($value);
-        if ($err = \TorrentPier\Legacy\Validate::username($value)) {
+        if ($err = \TorrentPier\Validate::username($value)) {
             $this->ajax_die(strip_tags($err));
         }
         $this->response['new_value'] = $this->request['value'];
@@ -34,7 +34,7 @@ switch ($field) {
 
     case 'user_email':
         $value = htmlCHR($value);
-        if ($err = \TorrentPier\Legacy\Validate::email($value)) {
+        if ($err = \TorrentPier\Validate::email($value)) {
             $this->ajax_die($err);
         }
         $this->response['new_value'] = $this->request['value'];

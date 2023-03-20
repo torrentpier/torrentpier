@@ -11,6 +11,7 @@ namespace TorrentPier\Legacy;
 
 use TorrentPier\Emailer;
 use TorrentPier\Legacy\Admin\Common;
+use TorrentPier\Validate;
 
 /**
  * Class Post
