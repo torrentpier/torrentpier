@@ -2,17 +2,12 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.site)
- * @link      https://github.com/TorrentPeer/TorrentPier for the canonical source repository
- * @license   https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE MIT License
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Helpers;
-
-use const FILTER_NULL_ON_FAILURE;
-use const FILTER_VALIDATE_BOOLEAN;
-use const FILTER_VALIDATE_FLOAT;
-use const FILTER_VALIDATE_INT;
 
 /**
  * Class IsHelper
@@ -63,39 +58,6 @@ class IsHelper
     }
 
     /**
-     * Return true if $value is int
-     *
-     * @param int $value
-     * @return bool
-     */
-    public static function isInt(int $value): bool
-    {
-        return filter_var($value, FILTER_VALIDATE_INT);
-    }
-
-    /**
-     * Return true if $value is boolean
-     *
-     * @param bool $value
-     * @return bool
-     */
-    public static function isBool(bool $value): bool
-    {
-        return is_bool(filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE));
-    }
-
-    /**
-     * Return true if $value is floating
-     *
-     * @param float $value
-     * @return bool
-     */
-    public static function isFloat(float $value): bool
-    {
-        return filter_var($value, FILTER_VALIDATE_FLOAT);
-    }
-
-    /**
      * Return true if $value contains numbers
      *
      * @param string $value
@@ -110,12 +72,12 @@ class IsHelper
      * Return true if $value contains letters (Uppercase included)
      *
      * @param string $value
-     * @param bool $req_uppercase
+     * @param bool $uppercase
      * @return bool
      */
-    public static function isContainsLetters(string $value, bool $req_uppercase = false): bool
+    public static function isContainsLetters(string $value, bool $uppercase = false): bool
     {
-        return $req_uppercase ? preg_match('@[A-Z]@', $value) : preg_match('@[a-z]@', $value);
+        return $uppercase ? preg_match('@[A-Z]@', $value) : preg_match('@[a-z]@', $value);
     }
 
     /**
