@@ -363,21 +363,6 @@ function htmlCHR(?string $txt, bool $double_encode = false, int $quote_style = E
 }
 
 /**
- * @param $var
- * @param string $title
- * @param bool $print
- * @return string
- */
-function prn_r($var, $title = '', $print = true)
-{
-    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlCHR(print_r($var, true)) . '</pre>';
-    if ($print) {
-        echo $r;
-    }
-    return $r;
-}
-
-/**
  * @param $txt
  * @param int $quote_style
  * @param string $charset
