@@ -161,7 +161,7 @@ class Validate
         global $lang;
 
         // Check for empty
-        if (empty($pass) || empty($pass_confirm)) {
+        if (empty($password) || empty($password_confirm)) {
             return $lang['CHOOSE_PASS'];
         }
 
