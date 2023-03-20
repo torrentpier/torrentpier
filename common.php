@@ -55,6 +55,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 /**
  * Progressive error reporting
  */
+define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
 \TorrentPier\Dev::debug_init();
 
 /**
@@ -84,9 +85,6 @@ $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' 
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
-
-// Debug options
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
 
 // Board / tracker shared constants and functions
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
