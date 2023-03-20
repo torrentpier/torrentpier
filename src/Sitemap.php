@@ -7,14 +7,16 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
+
+use InvalidArgumentException;
 
 use samdark\sitemap\Sitemap as STM;
 use samdark\sitemap\Index as IDX;
 
 /**
  * Class Sitemap
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Sitemap
 {
@@ -23,7 +25,7 @@ class Sitemap
      *
      * @return array
      */
-    private function getForumUrls()
+    private function getForumUrls(): array
     {
         global $datastore;
 
@@ -53,7 +55,7 @@ class Sitemap
      *
      * @return array
      */
-    private function getTopicUrls()
+    private function getTopicUrls(): array
     {
         global $datastore;
 
@@ -84,7 +86,7 @@ class Sitemap
      *
      * @return array
      */
-    private function getStaticUrls()
+    private function getStaticUrls(): array
     {
         global $bb_cfg;
 
@@ -111,9 +113,9 @@ class Sitemap
      *
      * @return array
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    private function buildDynamicSitemap()
+    private function buildDynamicSitemap(): array
     {
         $sitemap = new STM(SITEMAP_DIR . '/sitemap_dynamic.xml');
 
@@ -135,9 +137,9 @@ class Sitemap
      *
      * @return array
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    private function buildStaticSitemap()
+    private function buildStaticSitemap(): array
     {
         $staticSitemap = new STM(SITEMAP_DIR . '/sitemap_static.xml');
 
@@ -155,9 +157,9 @@ class Sitemap
      *
      * @return bool
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function createSitemap()
+    public function createSitemap(): bool
     {
         $index = new IDX(SITEMAP_DIR . '/sitemap.xml');
 
@@ -186,7 +188,7 @@ class Sitemap
      *
      * @return string
      */
-    public function sendSitemap($url, $map)
+    public function sendSitemap($url, $map): string
     {
         $file = $url . urlencode($map);
 
