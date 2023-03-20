@@ -233,16 +233,12 @@ foreach ($profile_fields as $field => $can_edit) {
             $email = !empty($_POST['user_email']) ? (string)$_POST['user_email'] : $pr_data['user_email'];
             if ($submit) {
                 if ($mode == 'register') {
-                    if (empty($email)) {
-                        $errors[] = $lang['CHOOSE_E_MAIL'];
-                    }
                     if (!$errors and $err = \TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
                 } elseif ($email != $pr_data['user_email']) {
                     // если смена мейла юзером
-
                     if (!$cur_pass_valid) {
                         $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
                     }
