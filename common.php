@@ -55,8 +55,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 /**
  * Gets the value of an environment variable.
  *
- * @param  string  $key
- * @param  mixed  $default
+ * @param string $key
+ * @param mixed $default
  * @return mixed
  */
 function env($key, $default = null)
@@ -304,37 +304,6 @@ function clean_filename($fname)
     return str_replace($s, '_', str_compact($fname));
 }
 
-/**
- * Декодирование оригинального IP
- * @param $ip
- * @return string
- */
-function encode_ip($ip)
-{
-    return Longman\IPTools\Ip::ip2long($ip);
-}
-
-/**
- * Восстановление декодированного IP
- * @param $ip
- * @return string
- */
-function decode_ip($ip)
-{
-    return Longman\IPTools\Ip::long2ip($ip);
-}
-
-/**
- * Проверка IP на валидность
- *
- * @param $ip
- * @return bool
- */
-function verify_ip($ip)
-{
-    return Longman\IPTools\Ip::isValid($ip);
-}
-
 function bb_crc32($str)
 {
     return (float)sprintf('%u', crc32($str));
@@ -469,7 +438,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 if (!defined('IN_TRACKER')) {
     require INC_DIR . '/init_bb.php';
 } else {
-    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::encodeIP($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
     function dummy_exit($interval = 1800)
     {

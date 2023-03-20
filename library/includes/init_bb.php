@@ -28,7 +28,7 @@ $user = null;
 
 // Obtain and encode user IP
 $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-$user_ip = encode_ip($client_ip);
+$user_ip = \TorrentPier\Helpers\IPHelper::encodeIP($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 

@@ -150,7 +150,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                     if ($onlinerow_reg[$i]['user_id'] == $userdata['user_id'] || !bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'user_viewonline')) {
                         $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
                         $row_class = 'row1';
-                        $reg_ip = decode_ip($onlinerow_reg[$i]['session_ip']);
+                        $reg_ip = \TorrentPier\Helpers\IPHelper::decodeIP($onlinerow_reg[$i]['session_ip']);
 
                         $template->assign_block_vars('reg_user_row', array(
                             'ROW_CLASS' => $row_class,
@@ -173,7 +173,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
                 $guest_users++;
                 $row_class = 'row2';
-                $guest_ip = decode_ip($onlinerow_guest[$i]['session_ip']);
+                $guest_ip = \TorrentPier\Helpers\IPHelper::decodeIP($onlinerow_guest[$i]['session_ip']);
 
                 $template->assign_block_vars('guest_user_row', array(
                     'ROW_CLASS' => $row_class,
