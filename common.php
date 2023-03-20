@@ -53,6 +53,12 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
+ * Progressive error reporting
+ */
+define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
+\TorrentPier\Dev::debug_init();
+
+/**
  * Gets the value of an environment variable.
  *
  * @param string $key
@@ -80,9 +86,6 @@ define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
 
-// Debug options
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
-
 // Board / tracker shared constants and functions
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
@@ -107,47 +110,6 @@ define('TOR_TYPE_SILVER', 2);
 
 define('GUEST_UID', -1);
 define('BOT_UID', -746);
-
-/**
- * Progressive error reporting
- */
-if ($bb_cfg['bugsnag']['enabled']) {
-    if (env('APP_ENV', 'production') !== 'local') {
-        /** @var Bugsnag\Handler $bugsnag */
-        $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
-        Bugsnag\Handler::register($bugsnag);
-    }
-} else {
-    if (DBG_USER) {
-        /** @var Whoops\Run $whoops */
-        $whoops = new \Whoops\Run;
-
-        /**
-         * Show errors on page
-         */
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-
-        /**
-         * Show log in browser console
-         */
-        $loggingInConsole = new \Whoops\Handler\PlainTextHandler();
-        $loggingInConsole->loggerOnly(true);
-        $loggingInConsole->setLogger((new \Monolog\Logger(getenv('APP_NAME', 'TorrentPier'), [(new \Monolog\Handler\BrowserConsoleHandler())->setFormatter((new \Monolog\Formatter\LineFormatter(null, null, true)))])));
-        $whoops->pushHandler($loggingInConsole);
-
-        /**
-         * Log errors in file
-         */
-        if (ini_get('log_errors') == 1) {
-            $loggingInFile = new \Whoops\Handler\PlainTextHandler();
-            $loggingInFile->loggerOnly(true);
-            $loggingInFile->setLogger((new \Monolog\Logger(getenv('APP_NAME', 'TorrentPier'), [(new \Monolog\Handler\StreamHandler(bb_log('', WHOOPS_LOG_FILE, true)))->setFormatter((new \Monolog\Formatter\LineFormatter(null, null, true)))])));
-            $whoops->pushHandler($loggingInFile);
-        }
-
-        $whoops->register();
-    }
-}
 
 /**
  * Database
@@ -215,25 +177,6 @@ if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
     }
 
     CACHE('bb_cache')->set('system_req', true);
-}
-
-function sql_dbg_enabled()
-{
-    return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
-}
-
-function short_query($sql, $esc_html = false)
-{
-    $max_len = 100;
-    $sql = str_compact($sql);
-
-    if (!empty($_COOKIE['sql_log_full'])) {
-        if (mb_strlen($sql, 'UTF-8') > $max_len) {
-            $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
-        }
-    }
-
-    return $esc_html ? htmlCHR($sql, true) : $sql;
 }
 
 // Functions

@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use TorrentPier\Dev;
+
 /**
  * Class Memcache
  * @package TorrentPier\Legacy\Datastore
@@ -30,7 +32,7 @@ class Memcache extends Common
         $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->memcache = new \Memcache();
-        $this->dbg_enabled = sql_dbg_enabled();
+        $this->dbg_enabled = Dev::sql_dbg_enabled();
     }
 
     public function connect()

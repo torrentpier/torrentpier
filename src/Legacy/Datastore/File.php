@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use TorrentPier\Dev;
+
 /**
  * Class File
  * @package TorrentPier\Legacy\Datastore
@@ -23,7 +25,7 @@ class File extends Common
     {
         $this->prefix = $prefix;
         $this->dir = $dir;
-        $this->dbg_enabled = sql_dbg_enabled();
+        $this->dbg_enabled = Dev::sql_dbg_enabled();
     }
 
     public function store($title, $var)
