@@ -9,6 +9,18 @@
 
 namespace TorrentPier;
 
+use Bugsnag\Client;
+use Bugsnag\Handler;
+
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\BrowserConsoleHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
+use Whoops\Handler\PlainTextHandler;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
+
 use Exception;
 
 /**
@@ -17,6 +29,52 @@ use Exception;
  */
 class Dev
 {
+    /**
+     * Base debug functionality init
+     *
+     * @return void
+     */
+    public static function debug_init(): void
+    {
+        global $bb_cfg;
+
+        if ($bb_cfg['bugsnag']['enabled']) {
+            if (env('APP_ENV', 'production') !== 'local') {
+                $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+                Handler::register($bugsnag);
+            }
+        } else {
+            if (DBG_USER) {
+                $whoops = new Run;
+
+                /**
+                 * Show errors on page
+                 */
+                $whoops->pushHandler(new PrettyPageHandler);
+
+                /**
+                 * Show log in browser console
+                 */
+                $loggingInConsole = new PlainTextHandler();
+                $loggingInConsole->loggerOnly(true);
+                $loggingInConsole->setLogger((new Logger(getenv('APP_NAME', 'TorrentPier'), [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
+                $whoops->pushHandler($loggingInConsole);
+
+                /**
+                 * Log errors in file
+                 */
+                if (ini_get('log_errors') == 1) {
+                    $loggingInFile = new PlainTextHandler();
+                    $loggingInFile->loggerOnly(true);
+                    $loggingInFile->setLogger((new Logger(getenv('APP_NAME', 'TorrentPier'), [(new StreamHandler(bb_log('', WHOOPS_LOG_FILE, true)))->setFormatter((new LineFormatter(null, null, true)))])));
+                    $whoops->pushHandler($loggingInFile);
+                }
+
+                $whoops->register();
+            }
+        }
+    }
+
     /**
      * Get SQL debug log
      *

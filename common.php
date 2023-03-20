@@ -53,6 +53,11 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
+ * Progressive error reporting
+ */
+\TorrentPier\Dev::debug_init();
+
+/**
  * Gets the value of an environment variable.
  *
  * @param string $key
@@ -107,47 +112,6 @@ define('TOR_TYPE_SILVER', 2);
 
 define('GUEST_UID', -1);
 define('BOT_UID', -746);
-
-/**
- * Progressive error reporting
- */
-if ($bb_cfg['bugsnag']['enabled']) {
-    if (env('APP_ENV', 'production') !== 'local') {
-        /** @var Bugsnag\Handler $bugsnag */
-        $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
-        Bugsnag\Handler::register($bugsnag);
-    }
-} else {
-    if (DBG_USER) {
-        /** @var Whoops\Run $whoops */
-        $whoops = new \Whoops\Run;
-
-        /**
-         * Show errors on page
-         */
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-
-        /**
-         * Show log in browser console
-         */
-        $loggingInConsole = new \Whoops\Handler\PlainTextHandler();
-        $loggingInConsole->loggerOnly(true);
-        $loggingInConsole->setLogger((new \Monolog\Logger(getenv('APP_NAME', 'TorrentPier'), [(new \Monolog\Handler\BrowserConsoleHandler())->setFormatter((new \Monolog\Formatter\LineFormatter(null, null, true)))])));
-        $whoops->pushHandler($loggingInConsole);
-
-        /**
-         * Log errors in file
-         */
-        if (ini_get('log_errors') == 1) {
-            $loggingInFile = new \Whoops\Handler\PlainTextHandler();
-            $loggingInFile->loggerOnly(true);
-            $loggingInFile->setLogger((new \Monolog\Logger(getenv('APP_NAME', 'TorrentPier'), [(new \Monolog\Handler\StreamHandler(bb_log('', WHOOPS_LOG_FILE, true)))->setFormatter((new \Monolog\Formatter\LineFormatter(null, null, true)))])));
-            $whoops->pushHandler($loggingInFile);
-        }
-
-        $whoops->register();
-    }
-}
 
 /**
  * Database
