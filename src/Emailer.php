@@ -16,6 +16,10 @@ use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
+/**
+ * Class Emailer
+ * @package TorrentPier
+ */
 class Emailer
 {
     /** @var string message text */
