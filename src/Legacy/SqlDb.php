@@ -10,7 +10,7 @@
 namespace TorrentPier\Legacy;
 
 use mysqli_result;
-use TorrentPier\Legacy\Common\Http;
+use TorrentPier\Common\Http;
 
 /**
  * Class SqlDb
