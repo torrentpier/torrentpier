@@ -12,7 +12,7 @@ define('IN_AJAX', true);
 
 require __DIR__ . '/common.php';
 
-$ajax = new TorrentPier\Legacy\Ajax();
+$ajax = new TorrentPier\Ajax();
 $ajax->init();
 
 // Init userdata
