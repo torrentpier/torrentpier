@@ -7,20 +7,21 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
 
-use TorrentPier\Dev;
+use Exception;
+use TorrentPier\Helpers\IsHelper;
 
 /**
  * Class Ajax
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Ajax
 {
-    public $request = [];
-    public $response = [];
+    public array $request = [];
+    public array $response = [];
 
-    public $valid_actions = [
+    public array $valid_actions = [
         // ACTION NAME => [AJAX_AUTH, IN_ADMIN_CP (optional)]
         'edit_user_profile' => ['admin'],
         'change_user_rank' => ['admin'],
@@ -47,7 +48,7 @@ class Ajax
         'index_data' => ['guest'],
     ];
 
-    public $action;
+    public string $action;
 
     /**
      * Constructor
@@ -60,6 +61,7 @@ class Ajax
 
     /**
      * Perform action
+     * @throws Exception
      */
     public function exec()
     {
@@ -76,11 +78,11 @@ class Ajax
         // Action params
         $action_params = null;
 
-        if (!\TorrentPier\Helpers\IsHelper::isAJAX()) {
+        if (!IsHelper::isAJAX()) {
             $this->ajax_die('Not AJAX request', E_AJAX_NOT_REQUEST);
         }
 
-        if (!$action || !\is_string($action)) {
+        if (!$action) {
             $this->ajax_die('no action specified');
         } elseif (!$action_params =& $this->valid_actions[$action]) {
             $this->ajax_die('invalid action: ' . $action);
@@ -148,10 +150,11 @@ class Ajax
     /**
      * Exit on error
      *
-     * @param $error_msg
+     * @param string $error_msg
      * @param int $error_code
+     * @throws Exception
      */
-    public function ajax_die($error_msg, $error_code = E_AJAX_GENERAL_ERROR)
+    public function ajax_die(string $error_msg, int $error_code = E_AJAX_GENERAL_ERROR)
     {
         $this->response['error_code'] = $error_code;
         $this->response['error_msg'] = $error_msg;
@@ -170,6 +173,7 @@ class Ajax
 
     /**
      * Send data
+     * @throws Exception
      */
     public function send()
     {
@@ -188,8 +192,9 @@ class Ajax
      *
      * @param $contents
      * @return string
+     * @throws \JsonException
      */
-    public function ob_handler($contents)
+    public function ob_handler($contents): string
     {
         if (DBG_USER) {
             if ($contents) {
@@ -211,6 +216,7 @@ class Ajax
 
     /**
      * Admin session
+     * @throws Exception
      */
     public function check_admin_session()
     {
@@ -233,6 +239,7 @@ class Ajax
 
     /**
      * Prompt for password
+     * @throws Exception
      */
     public function prompt_for_password()
     {
@@ -244,8 +251,9 @@ class Ajax
      * Prompt for confirmation
      *
      * @param string $confirm_msg
+     * @throws Exception
      */
-    public function prompt_for_confirm($confirm_msg)
+    public function prompt_for_confirm(string $confirm_msg)
     {
         if (empty($confirm_msg)) {
             $this->ajax_die('false');
@@ -259,7 +267,8 @@ class Ajax
     /**
      * Verify mod rights
      *
-     * @param int $forum_id
+     * @param int|string $forum_id
+     * @throws Exception
      */
     public function verify_mod_rights($forum_id)
     {
