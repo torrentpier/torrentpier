@@ -81,7 +81,7 @@ define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $b
 unset($server_protocol, $server_port);
 
 // Debug options
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
+define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 
 // Board / tracker shared constants and functions
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
@@ -428,7 +428,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
     }
 
     if (!empty($_POST) && $add_post) {
-        $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
+        $str[] = 'Post: ' . str_compact(urldecode(http_build_query($_POST)));
     }
     $str = implode("\t", $str) . "\n";
     bb_log($str, $file);

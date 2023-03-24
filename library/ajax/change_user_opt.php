@@ -16,7 +16,7 @@ global $bf, $lang;
 $user_id = (int)$this->request['user_id'];
 $new_opt = json_decode($this->request['user_opt'], true, 512, JSON_THROW_ON_ERROR);
 
-if (!$user_id or !$u_data = get_userdata($user_id)) {
+if (!$user_id || !($u_data = get_userdata($user_id))) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
@@ -30,7 +30,7 @@ foreach ($bf['user_opt'] as $opt_name => $opt_bit) {
     }
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id");
+DB()->query("UPDATE " . BB_USERS . " SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
 
 // Удаляем данные из кеша
 \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);

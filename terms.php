@@ -8,7 +8,6 @@
  */
 
 define('BB_SCRIPT', 'terms');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 

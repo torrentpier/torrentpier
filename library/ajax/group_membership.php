@@ -13,7 +13,7 @@ if (!defined('IN_AJAX')) {
 
 global $lang, $user;
 
-if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
+if (!($user_id = (int)$this->request['user_id']) || !($profiledata = get_userdata($user_id))) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 

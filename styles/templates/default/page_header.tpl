@@ -333,7 +333,6 @@ $(document).ready(function() {
 		<a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a>
 		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
 		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
-		<a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a>
 	</div>
 </div>
 <!-- ELSE -->

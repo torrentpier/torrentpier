@@ -391,7 +391,6 @@ $bb_cfg['board_email_form'] = false; // can users send email to each other via b
 $bb_cfg['board_email_sig'] = ''; // this text will be attached to all emails the board sends
 $bb_cfg['board_email_sitename'] = $domain_name; // sitename used in all emails header
 
-$bb_cfg['topic_notify_enabled'] = true;
 $bb_cfg['pm_notify_enabled'] = true;
 $bb_cfg['group_send_email'] = true;
 $bb_cfg['email_change_disabled'] = false; // disable changing email by user
@@ -627,7 +626,6 @@ $bb_cfg['tracker'] = [
     'limit_seed_ips' => 0,
     'limit_leech_ips' => 0,
     'tor_topic_up' => true,
-    'gold_silver_enabled' => true,
     'retracker' => true,
     'retracker_host' => 'http://retracker.local/announce',
     'freeleech' => false,

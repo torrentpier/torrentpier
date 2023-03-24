@@ -208,7 +208,6 @@ $template->assign_vars(array(
     'SELECTED' => HTML_SELECTED,
 
     'U_SEARCH_SELF_BY_LAST' => "search.php?uid={$userdata['user_id']}&amp;o=5",
-    'U_WATCHED_TOPICS' => "profile.php?mode=watch",
 ));
 
 if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])) {

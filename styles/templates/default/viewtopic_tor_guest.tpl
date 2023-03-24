@@ -1,4 +1,3 @@
-<!-- IF postrow.IS_FIRST_POST -->
 <div>
 	<fieldset class="attach">
 		<legend>{L_DOWNLOAD}</legend>
@@ -10,4 +9,3 @@
 		</p>
 	</fieldset>
 </div>
-<!-- ENDIF -->

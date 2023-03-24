@@ -9,7 +9,6 @@
 
 define('BB_SCRIPT', 'pm');
 define('IN_PM', true);
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 

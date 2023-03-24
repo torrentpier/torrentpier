@@ -16,7 +16,7 @@ global $bb_cfg, $lang, $user;
 $mode = (string)$this->request['mode'];
 $user_id = (int)$this->request['user_id'];
 
-if (!$user_id or !$u_data = get_userdata($user_id)) {
+if (!$user_id || !($u_data = get_userdata($user_id))) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
@@ -36,7 +36,7 @@ switch ($mode) {
         $this->ajax_die('Invalid mode');
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = $new_ext_id WHERE user_id = $user_id");
+DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = $new_ext_id WHERE user_id = $user_id LIMIT 1");
 
 \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
 

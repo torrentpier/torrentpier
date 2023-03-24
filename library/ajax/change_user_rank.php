@@ -16,7 +16,7 @@ global $datastore, $lang;
 $ranks = $datastore->get('ranks');
 $rank_id = (int)$this->request['rank_id'];
 
-if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
+if (!($user_id = (int)$this->request['user_id']) || !($profiledata = get_userdata($user_id))) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
@@ -24,7 +24,7 @@ if ($rank_id != 0 && !isset($ranks[$rank_id])) {
     $this->ajax_die("invalid rank_id: $rank_id");
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id");
+DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
 
 \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
 

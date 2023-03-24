@@ -8,7 +8,6 @@
  */
 
 define('BB_SCRIPT', 'index');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 
 $page_cfg['load_tpl_vars'] = array(

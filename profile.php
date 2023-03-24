@@ -9,7 +9,6 @@
 
 define('IN_PROFILE', true);
 define('BB_SCRIPT', 'profile');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 
 // Start session management
@@ -48,13 +47,6 @@ switch ($mode) {
             login_redirect();
         }
         require UCP_DIR . '/bonus.php';
-        break;
-
-    case 'watch':
-        if (IS_GUEST) {
-            login_redirect();
-        }
-        require UCP_DIR . '/topic_watch.php';
         break;
 
     default:

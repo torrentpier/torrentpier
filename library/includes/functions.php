@@ -171,7 +171,7 @@ $bf['user_opt'] = array(
     'dis_avatar' => 2,  // Запрет на аватар
     'dis_pm' => 3,  // Запрет на отправку ЛС
     'user_viewonline' => 4,  // Скрывать пребывание пользователя
-    'user_notify' => 5,  // Сообщать об ответах в отслеживаемых темах
+    'user_notify' => 5,  // Сообщать об ответах в отслеживаемых темах (не используется)
     'user_notify_pm' => 6,  // Сообщать о новых ЛС
     'dis_passkey' => 7,  // Запрет на добавление passkey, он же запрет на скачивание торрентов
     'user_porn_forums' => 8,  // Скрывать контент 18+
@@ -239,7 +239,7 @@ function setbit(&$int, $bit_num, $on)
     All results are returned as associative arrays, even when a single auth type is
     specified.
 
-    If available you can send an array (either one or two dimensional) containing the
+    If available you can send an array (either one or two-dimensional) containing the
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
@@ -2013,11 +2013,6 @@ function gender_image($gender)
 function is_gold($type)
 {
     global $lang, $bb_cfg;
-
-    if (!$bb_cfg['tracker']['gold_silver_enabled']) {
-        $is_gold = '';
-        return $is_gold;
-    }
 
     switch ($type) {
         case TOR_TYPE_GOLD:
