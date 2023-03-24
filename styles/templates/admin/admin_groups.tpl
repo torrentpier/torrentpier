@@ -3,7 +3,7 @@
 
 <h1>{L_GROUP_ADMINISTRATION}</h1>
 
-<form action="{S_GROUP_ACTION}" method="post" name="post">
+<form action="{S_GROUP_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">
@@ -50,14 +50,6 @@
 <tr>
 	<td>{L_GROUP_DELETE}:</td>
 	<td><input type="checkbox" name="group_delete" value="1"> {L_GROUP_DELETE_CHECK}</td>
-</tr>
-<tr>
-	<td>{L_UPLOAD_QUOTA}</td>
-	<td>{S_SELECT_UPLOAD_QUOTA}</td>
-</tr>
-<tr>
-	<td>{L_PM_QUOTA}</td>
-	<td>{S_SELECT_PM_QUOTA}</td>
 </tr>
 <!-- END group_edit -->
 <tr>

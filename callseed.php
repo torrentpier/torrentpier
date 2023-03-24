@@ -8,11 +8,9 @@
  */
 
 define('BB_SCRIPT', 'callseed');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 
-// Init userdata
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 $topic_id = (int)request_var('t', 0);
 $t_data = topic_info($topic_id);
@@ -49,7 +47,7 @@ $user_list = DB()->fetch_rowset("
 ");
 
 $subject = sprintf($lang['CALLSEED_SUBJECT'], $t_data['topic_title']);
-$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DL_URL . $t_data['attach_id']));
+$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DL_URL . $topic_id));
 
 if ($user_list) {
     foreach ($user_list as $row) {
@@ -65,7 +63,7 @@ if ($user_list) {
     send_pm($t_data['poster_id'], $subject, $message, BOT_UID);
 }
 
-DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
+DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id LIMIT 1");
 
 meta_refresh(TOPIC_URL . $topic_id);
 bb_die($lang['CALLSEED_MSG_OK']);

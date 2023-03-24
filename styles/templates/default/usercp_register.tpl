@@ -211,13 +211,6 @@ ajax.callback.posts = function(data){
 		<label><input type="radio" name="user_viewonline" value="0" <!-- IF not USER_VIEWONLINE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-<tr>
-	<td class="prof-title">{L_ALWAYS_NOTIFY}:<br /><h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
-	<td>
-		<label><input type="radio" name="user_notify" value="1" <!-- IF USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
 <!-- IF $bb_cfg['pm_notify_enabled'] -->
 <tr>
 	<td class="prof-title">{L_NOTIFY_ON_PRIVMSG}:</td>

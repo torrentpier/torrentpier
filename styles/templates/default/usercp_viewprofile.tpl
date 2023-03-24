@@ -243,19 +243,18 @@ ajax.callback.gen_passkey = function(data){
 		<tr>
 			<th>{L_ICQ}:</th>
 			<td class="tLeft med" id="user_icq">
-				<span class="editable">{ICQ}
-					<a href="http://www.icq.com/people/{ICQ}"><img align="middle" src="http://web.icq.com/whitepages/online?icq={ICQ}&img=5"></a>
+				<span class="editable">
+					{ICQ}
 				</span>
 			</td>
 		</tr>
 		<!-- ENDIF -->
 		<!-- IF SKYPE -->
-		<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
 		<tr>
 			<th>{L_SKYPE}:</th>
 			<td class="tLeft med" id="user_skype">
-				<span class="editable">{SKYPE}
-					<a href="skype:{SKYPE}"><img align="middle" src="http://mystatus.skype.com/smallicon/{SKYPE}" width="16" height="16"></a>
+				<span class="editable">
+					{SKYPE}
 				</span>
 			</td>
 		</tr>
@@ -370,7 +369,6 @@ ajax.callback.gen_passkey = function(data){
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a href="{U_SEARCH_RELEASES}" class="med">{L_SEARCH_RELEASES}</a> ]
-						<!-- IF PROFILE_USER -->[ <a href="{U_WATCHED_TOPICS}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF -->
 						[ <a title="{L_ATOM_SUBSCRIBE}" href="#" onclick="return post2url('feed.php', {mode: 'get_feed_url', type: 'u', id: {PROFILE_USER_ID}})">{FEED_IMG}</a> ]
 					</p>
 				</td>

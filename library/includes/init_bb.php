@@ -137,9 +137,6 @@ define('TOPIC_UNLOCKED', 0);
 define('TOPIC_LOCKED', 1);
 define('TOPIC_MOVED', 2);
 
-define('TOPIC_WATCH_NOTIFIED', 1);
-define('TOPIC_WATCH_UNNOTIFIED', 0);
-
 // Topic types
 define('POST_NORMAL', 0);
 define('POST_STICKY', 1);
@@ -253,8 +250,6 @@ define('BB_POSTS_TEXT', 'bb_posts_text');
 define('BB_POSTS_HTML', 'bb_posts_html');
 define('BB_PRIVMSGS', 'bb_privmsgs');
 define('BB_PRIVMSGS_TEXT', 'bb_privmsgs_text');
-define('BB_QUOTA_LIMITS', 'bb_quota_limits');
-define('BB_QUOTA', 'bb_attach_quota');
 define('BB_RANKS', 'bb_ranks');
 define('BB_SEARCH_REBUILD', 'bb_search_rebuild');
 define('BB_SEARCH', 'bb_search_results');
@@ -262,7 +257,6 @@ define('BB_SESSIONS', 'bb_sessions');
 define('BB_SMILIES', 'bb_smilies');
 define('BB_TOPIC_TPL', 'bb_topic_tpl');
 define('BB_TOPICS', 'bb_topics');
-define('BB_TOPICS_WATCH', 'bb_topics_watch');
 define('BB_USER_GROUP', 'bb_user_group');
 define('BB_USERS', 'bb_users');
 define('BB_WORDS', 'bb_words');
@@ -345,21 +339,6 @@ function bb_exit($output = '')
         echo $output;
     }
     exit;
-}
-
-/**
- * @param $var
- * @param string $title
- * @param bool $print
- * @return string
- */
-function prn_r($var, $title = '', $print = true)
-{
-    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
-    if ($print) {
-        echo $r;
-    }
-    return $r;
 }
 
 /**

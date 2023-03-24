@@ -8,7 +8,6 @@
  */
 
 define('BB_SCRIPT', 'modcp');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
@@ -347,7 +346,7 @@ switch ($mode) {
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
-        $new_dl_type = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+        $new_dl_type = $set_download ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
         DB()->query("
 			UPDATE " . BB_TOPICS . " SET
@@ -454,16 +453,6 @@ switch ($mode) {
                 }
 
                 $new_topic_id = DB()->sql_nextid();
-
-                // Update topic watch table, switch users whose posts
-                // have moved, over to watching the new topic
-                $sql = "UPDATE " . BB_TOPICS_WATCH . "
-					SET topic_id = $new_topic_id
-					WHERE topic_id = $topic_id
-						AND user_id IN ($user_id_sql)";
-                if (!DB()->sql_query($sql)) {
-                    bb_die('Could not update topics watch table');
-                }
 
                 $sql_where = (!empty($_POST['split_type_beyond'])) ? " post_time >= $post_time AND topic_id = $topic_id" : "post_id IN ($post_id_sql)";
 
@@ -596,7 +585,7 @@ switch ($mode) {
         $template->assign_vars(array(
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
-            'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
+            'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip_this_post,
         ));
 
         //
@@ -627,7 +616,7 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $row['poster_ip'] . "&amp;sid=" . $userdata['session_id'],
+                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $row['poster_ip'],
                 ));
 
                 $i++;
