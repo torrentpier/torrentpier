@@ -278,11 +278,6 @@ $lang['MOVE_TOPIC'] = 'Move the topic';
 $lang['DELETE_TOPIC'] = 'Delete the topic';
 $lang['SPLIT_TOPIC'] = 'Split the topic';
 
-$lang['STOP_WATCHING_TOPIC'] = 'Stop following the topic';
-$lang['START_WATCHING_TOPIC'] = 'Follow the topic for replies';
-$lang['NO_LONGER_WATCHING'] = 'You are no longer following this topic';
-$lang['YOU_ARE_WATCHING'] = 'You are following this topic now';
-
 $lang['TOTAL_VOTES'] = 'Total Votes';
 $lang['SEARCH_IN_TOPIC'] = 'search in topic...';
 $lang['HIDE_IN_TOPIC'] = 'Hide';
@@ -541,8 +536,6 @@ $lang['NO_SEND_ACCOUNT'] = 'Sorry, but your password cannot be retrieved. Please
 
 $lang['ALWAYS_ADD_SIG'] = 'Always attach my signature';
 $lang['HIDE_PORN_FORUMS'] = 'Hide content 18+';
-$lang['ALWAYS_NOTIFY'] = 'Always notify me of replies';
-$lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topic you have posted in. This can be changed whenever you post.';
 
 $lang['BOARD_LANG'] = 'Board language';
 $lang['GENDER'] = 'Gender';
@@ -815,14 +808,9 @@ $lang['SEARCH_TERMS'] = 'Search terms';
 // Auth related entries
 // Note the %s will be replaced with one of the following 'user' arrays
 $lang['SORRY_AUTH_VIEW'] = 'Sorry, but only %s can view this forum.';
-$lang['SORRY_AUTH_READ'] = 'Sorry, but only %s can read topics in this forum.';
-$lang['SORRY_AUTH_POST'] = 'Sorry, but only %s can post topics in this forum.';
 $lang['SORRY_AUTH_REPLY'] = 'Sorry, but only %s can reply to posts in this forum.';
 $lang['SORRY_AUTH_EDIT'] = 'Sorry, but only %s can edit posts in this forum.';
 $lang['SORRY_AUTH_DELETE'] = 'Sorry, but only %s can delete posts in this forum.';
-$lang['SORRY_AUTH_VOTE'] = 'Sorry, but only %s can vote in polls in this forum.';
-$lang['SORRY_AUTH_STICKY'] = 'Sorry, but only %s can post sticky messages in this forum.';
-$lang['SORRY_AUTH_ANNOUNCE'] = 'Sorry, but only %s can post announcements in this forum.';
 
 // These replace the %s in the above strings
 $lang['AUTH_ANONYMOUS_USERS'] = '<b>anonymous users</b>';
@@ -1020,23 +1008,6 @@ $lang['ATTACH_QUOTA_RECEIVER_PM_REACHED'] = 'Sorry, but the maximum filesize for
 // Errors -> Download
 $lang['NO_ATTACHMENT_SELECTED'] = 'You haven\'t selected an attachment to download or view.';
 $lang['ERROR_NO_ATTACHMENT'] = 'The selected Attachment does not exist anymore';
-
-// Delete Attachments
-$lang['CONFIRM_DELETE_ATTACHMENTS'] = 'Are you sure you want to delete the selected Attachments?';
-$lang['DELETED_ATTACHMENTS'] = 'The selected Attachments have been deleted.';
-$lang['ERROR_DELETED_ATTACHMENTS'] = 'Could not delete Attachments.';
-$lang['CONFIRM_DELETE_PM_ATTACHMENTS'] = 'Are you sure you want to delete all Attachments posted in this PM?';
-
-// General Error Messages
-$lang['ATTACHMENT_FEATURE_DISABLED'] = 'The Attachment Feature is disabled.';
-
-$lang['DIRECTORY_DOES_NOT_EXIST'] = 'The Directory \'%s\' does not exist or Could not be found.'; // replace %s with directory
-$lang['DIRECTORY_IS_NOT_A_DIR'] = 'Please check if \'%s\' is a directory.'; // replace %s with directory
-$lang['DIRECTORY_NOT_WRITEABLE'] = 'Directory \'%s\' is not writeable. You\'ll have to create the upload path and chmod it to 777 (or change the owner to you httpd-servers owner) to upload files.<br />If you have only plain FTP-access change the \'Attribute\' of the directory to rwxrwxrwx.'; // replace %s with directory
-
-// Quota Variables
-$lang['UPLOAD_QUOTA'] = 'Upload Quota';
-$lang['PM_QUOTA'] = 'PM Quota';
 
 // Common Variables
 $lang['BYTES'] = 'Bytes';
@@ -1328,7 +1299,6 @@ $lang['QUICK_REPLY'] = 'Quick Reply';
 $lang['INS_NAME_TIP'] = 'Insert name or selected text.';
 $lang['QUOTE_SELECTED'] = 'Quote selected';
 $lang['QR_ATTACHSIG'] = 'Attach signature';
-$lang['QR_NOTIFY'] = 'Notify on reply';
 $lang['QR_DISABLE'] = 'Disable';
 $lang['QR_USERNAME'] = 'Name';
 $lang['NO_TEXT_SEL'] = 'Select a text anywhere on a page and try again';
@@ -1556,10 +1526,6 @@ $lang['DEL_LIST_MY_MESSAGE'] = 'Delete the selected topic from the list';
 $lang['DEL_LIST_MY_MESSAGE_INFO'] = 'After removal of up to update the <b>entire list</b> it can be shown already deleted threads';
 $lang['DEL_LIST_INFO'] = 'To delete an order from the list, click on the icon to the left of the names of any section';
 
-// Watched topics
-$lang['WATCHED_TOPICS'] = 'Watched topics';
-$lang['NO_WATCHED_TOPICS'] = 'You are not watching any topics';
-
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Back to home page';
 $lang['FORUM_RETURN'] = 'Back to forum';
@@ -1783,7 +1749,6 @@ $lang['FLOOD_INTERVAL'] = 'Flood Interval';
 $lang['FLOOD_INTERVAL_EXPLAIN'] = 'Number of seconds a user must wait between posts';
 $lang['TOPICS_PER_PAGE'] = 'Topics Per Page';
 $lang['POSTS_PER_PAGE'] = 'Posts Per Page';
-$lang['HOT_THRESHOLD'] = 'Posts for Popular Threshold';
 $lang['DEFAULT_LANGUAGE'] = 'Default Language';
 $lang['DATE_FORMAT'] = 'Date Format';
 $lang['SYSTEM_TIMEZONE'] = 'System Timezone';
@@ -2068,195 +2033,6 @@ $lang['SEED_BONUS_USER_REGDATA'] = '<h4>Minimum length of user tracker, after wh
 $lang['SEED_BONUS_WARNING'] = 'ATTENTION! Seed Bonuses should be in ascending order';
 $lang['SEED_BONUS_EXCHANGE'] = 'Configuring Exchange Sid Bonuses';
 $lang['SEED_BONUS_ROPORTION'] = 'Proportion addition for an exchange of bonuses on GB';
-
-// Modules, this replaces the keys used
-$lang['CONTROL_PANEL'] = 'Control Panel';
-$lang['SHADOW_ATTACHMENTS'] = 'Shadow Attachments';
-$lang['FORBIDDEN_EXTENSIONS'] = 'Forbidden Extensions';
-$lang['EXTENSION_CONTROL'] = 'Extension Control';
-$lang['EXTENSION_GROUP_MANAGE'] = 'Extension Groups Control';
-$lang['SPECIAL_CATEGORIES'] = 'Special Categories';
-$lang['SYNC_ATTACHMENTS'] = 'Synchronize Attachments';
-$lang['QUOTA_LIMITS'] = 'Quota Limits';
-
-// Attachments -> Management
-$lang['ATTACH_SETTINGS'] = 'Attachment Settings';
-$lang['MANAGE_ATTACHMENTS_EXPLAIN'] = 'Here you can configure the Main Settings for the Attachment Mod. If you press the Test Settings Button, the Attachment Mod does a few System Tests to be sure that the Mod will work properly. If you have problems with uploading Files, please run this Test, to get a detailed error-message.';
-$lang['ATTACH_FILESIZE_SETTINGS'] = 'Attachment Filesize Settings';
-$lang['ATTACH_NUMBER_SETTINGS'] = 'Attachment Number Settings';
-$lang['ATTACH_OPTIONS_SETTINGS'] = 'Attachment Options';
-
-$lang['UPLOAD_DIRECTORY'] = 'Upload Directory';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
-$lang['ATTACH_IMG_PATH'] = 'Attachment Posting Icon';
-$lang['ATTACH_IMG_PATH_EXPLAIN'] = 'This Image is displayed next to Attachment Links in individual Postings. Leave this field empty if you don\'t want an icon to be displayed. This Setting will be overwritten by the Settings in Extension Groups Management.';
-$lang['ATTACH_TOPIC_ICON'] = 'Attachment Topic Icon';
-$lang['ATTACH_TOPIC_ICON_EXPLAIN'] = 'This Image is displayed before topics with Attachments. Leave this field empty if you don\'t want an icon to be displayed.';
-$lang['ATTACH_DISPLAY_ORDER'] = 'Attachment Display Order';
-$lang['ATTACH_DISPLAY_ORDER_EXPLAIN'] = 'Here you can choose whether to display the Attachments in Posts/PMs in Descending Filetime Order (Newest Attachment First) or Ascending Filetime Order (Oldest Attachment First).';
-$lang['SHOW_APCP'] = 'Use the new control panel applications';
-$lang['SHOW_APCP_EXPLAIN'] = 'Choose whether you want to use a separate control panel applications (yes), or the old method with two boxes for applications and editing applications (none) in the message box. It is difficult to explain how it looks, so try for yourself.';
-
-$lang['MAX_FILESIZE_ATTACH'] = 'Filesize';
-$lang['MAX_FILESIZE_ATTACH_EXPLAIN'] = 'Maximum filesize for Attachments. A value of 0 means \'unlimited\'. This Setting is restricted by your Server Configuration. For example, if your php Configuration only allows a maximum of 2 MB uploads, this cannot be overwritten by the Mod.';
-$lang['ATTACH_QUOTA'] = 'Attachment Quota';
-$lang['ATTACH_QUOTA_EXPLAIN'] = 'Maximum Disk Space ALL Attachments can hold on your Webspace. A value of 0 means \'unlimited\'.';
-$lang['MAX_FILESIZE_PM'] = 'Maximum Filesize in Private Messages Folder';
-$lang['MAX_FILESIZE_PM_EXPLAIN'] = 'Maximum Disk Space Attachments can use up in each User\'s Private Message box. A value of 0 means \'unlimited\'.';
-$lang['DEFAULT_QUOTA_LIMIT'] = 'Default Quota Limit';
-$lang['DEFAULT_QUOTA_LIMIT_EXPLAIN'] = 'Here you are able to select the Default Quota Limit automatically assigned to newly registered Users and Users without an defined Quota Limit. The Option \'No Quota Limit\' is for not using any Attachment Quotas, instead using the default Settings you have defined within this Management Panel.';
-
-$lang['MAX_ATTACHMENTS'] = 'Maximum Number of Attachments';
-$lang['MAX_ATTACHMENTS_EXPLAIN'] = 'The maximum number of attachments allowed in one post.';
-$lang['MAX_ATTACHMENTS_PM'] = 'Maximum number of Attachments in one Private Message';
-$lang['MAX_ATTACHMENTS_PM_EXPLAIN'] = 'Define the maximum number of attachments the user is allowed to include in a private message.';
-
-$lang['DISABLE_MOD'] = 'Disable Attachment Mod';
-$lang['DISABLE_MOD_EXPLAIN'] = 'This option is mainly for testing new templates or themes, it disables all Attachment Functions except the Admin Panel.';
-$lang['PM_ATTACHMENTS'] = 'Allow Attachments in Private Messages';
-$lang['PM_ATTACHMENTS_EXPLAIN'] = 'Allow/Disallow attaching files to Private Messages.';
-$lang['ATTACHMENT_TOPIC_REVIEW'] = 'Show applications in the review of communications topics when writing an answer?';
-$lang['ATTACHMENT_TOPIC_REVIEW_EXPLAIN'] = 'If you put a "yes", all applications will be displayed in the review of communications topics.';
-
-// Attachments -> Shadow Attachments
-$lang['SHADOW_ATTACHMENTS_EXPLAIN'] = 'Here you can delete attachment data from postings when the files are missing from your filesystem, and delete files that are no longer attached to any postings. You can download or view a file if you click on it; if no link is present, the file does not exist.';
-$lang['SHADOW_ATTACHMENTS_FILE_EXPLAIN'] = 'Delete all attachments files that exist on your filesystem and are not assigned to an existing post.';
-$lang['SHADOW_ATTACHMENTS_ROW_EXPLAIN'] = 'Delete all posting attachment data for files that don\'t exist on your filesystem.';
-$lang['EMPTY_FILE_ENTRY'] = 'Empty File Entry';
-
-// Attachments -> Sync
-$lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail resetted for Attachment: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
-$lang['SYNC_TOPICS'] = 'Sync Topics';
-$lang['SYNC_POSTS'] = 'Sync Posts';
-$lang['SYNC_THUMBNAILS'] = 'Sync Thumbnails';
-
-// Extensions -> Extension Control
-$lang['MANAGE_EXTENSIONS'] = 'Manage Extensions';
-$lang['MANAGE_EXTENSIONS_EXPLAIN'] = 'Here you can manage your File Extensions. If you want to allow/disallow a Extension to be uploaded, please use the Extension Groups Management.';
-$lang['EXPLANATION'] = 'Explanation';
-$lang['EXTENSION_GROUP'] = 'Extension Group';
-$lang['INVALID_EXTENSION'] = 'Invalid Extension';
-$lang['EXTENSION_EXIST'] = 'The Extension %s already exist'; // replace %s with the Extension
-$lang['UNABLE_ADD_FORBIDDEN_EXTENSION'] = 'The Extension %s is forbidden, you are not able to add it to the allowed Extensions'; // replace %s with Extension
-
-// Extensions -> Extension Groups Management
-$lang['MANAGE_EXTENSION_GROUPS'] = 'Manage Extension Groups';
-$lang['MANAGE_EXTENSION_GROUPS_EXPLAIN'] = 'Here you can add, delete and modify your Extension Groups, you can disable Extension Groups, assign a special Category to them, change the download mechanism and you can define a Upload Icon which will be displayed in front of an Attachment belonging to the Group.';
-$lang['SPECIAL_CATEGORY'] = 'Special Category';
-$lang['CATEGORY_IMAGES'] = 'Images';
-$lang['ALLOWED'] = 'Allowed';
-$lang['ALLOWED_FORUMS'] = 'Allowed Forums';
-$lang['EXT_GROUP_PERMISSIONS'] = 'Group Permissions';
-$lang['DOWNLOAD_MODE'] = 'Download Mode';
-$lang['UPLOAD_ICON'] = 'Upload Icon';
-$lang['MAX_GROUPS_FILESIZE'] = 'Maximum Filesize';
-$lang['EXTENSION_GROUP_EXIST'] = 'The Extension Group %s already exist'; // replace %s with the group name
-
-// Extensions -> Special Categories
-$lang['MANAGE_CATEGORIES'] = 'Manage Special Categories';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categorys assigned to an Extension Group.';
-$lang['SETTINGS_CAT_IMAGES'] = 'Settings for Special Category: Images';
-$lang['SETTINGS_CAT_FLASH'] = 'Settings for Special Category: Flash Files';
-$lang['DISPLAY_INLINED'] = 'Display Images Inlined';
-$lang['DISPLAY_INLINED_EXPLAIN'] = 'Choose whether to display images directly within the post (yes) or to display images as a link ?';
-$lang['MAX_IMAGE_SIZE'] = 'Maximum Image Dimensions';
-$lang['MAX_IMAGE_SIZE_EXPLAIN'] = 'Here you can define the maximum allowed Image Dimension to be attached (Width x Height in pixels).<br />If it is set to 0x0, this feature is disabled. With some Images this Feature will not work due to limitations in PHP.';
-$lang['IMAGE_LINK_SIZE'] = 'Image Link Dimensions';
-$lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'If this defined Dimension of an Image is reached, the Image will be displayed as a Link, rather than displaying it inlined,<br />if Inline View is enabled (Width x Height in pixels).<br />If it is set to 0x0, this feature is disabled. With some Images this Feature will not work due to limitations in PHP.';
-$lang['ASSIGNED_GROUP'] = 'Assigned Group';
-
-$lang['IMAGE_CREATE_THUMBNAIL'] = 'Create Thumbnail';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Always create a Thumbnail. This feature overrides nearly all Settings within this Special Category, except of the Maximum Image Dimensions. With this Feature a Thumbnail will be displayed within the post, the User can click it to open the real Image.<br />Please Note that this feature requires Imagick to be installed, if it\'s not installed or if Safe-Mode is enabled the GD-Extension of PHP will be used. If the Image-Type is not supported by PHP, this Feature will be not used.';
-$lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Thumbnail Filesize';
-$lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'If a Image is smaller than this defined Filesize, no Thumbnail will be created, because it\'s small enough.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Complete Path)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Enter the Path to the convert program of imagick, normally /usr/bin/convert (on windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Search Imagick';
-
-$lang['USE_GD2'] = 'Make use of GD2 Extension';
-$lang['USE_GD2_EXPLAIN'] = 'PHP is able to be compiled with the GD1 or GD2 Extension for image manipulating. To correctly create Thumbnails without imagemagick the Attachment Mod uses two different methods, based on your selection here. If your thumbnails are in a bad quality or screwed up, try to change this setting.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Version %s'; // %s is the version number
-
-// Extensions -> Forbidden Extensions
-$lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Manage Forbidden Extensions';
-$lang['MANAGE_FORBIDDEN_EXTENSIONS_EXPLAIN'] = 'Here you can add or delete the forbidden extensions. The Extensions php, php3 and php4 are forbidden by default for security reasons, you can not delete them.';
-$lang['FORBIDDEN_EXTENSION_EXIST'] = 'The forbidden Extension %s already exist'; // replace %s with the extension
-$lang['EXTENSION_EXIST_FORBIDDEN'] = 'The Extension %s is defined in your allowed Extensions, please delete it their before you add it here.'; // replace %s with the extension
-
-// Extensions -> Extension Groups Control -> Group Permissions
-$lang['GROUP_PERMISSIONS_TITLE_ADMIN'] = 'Extension Group Permissions -> \'%s\''; // Replace %s with the Groups Name
-$lang['GROUP_PERMISSIONS_EXPLAIN'] = 'Here you are able to restrict the selected Extension Group to Forums of your choice (defined in the Allowed Forums Box). The Default is to allow Extension Groups to all Forums the User is able to Attach Files into (the normal way the Attachment Mod did it since the beginning). Just add those Forums you want the Extension Group (the Extensions within this Group) to be allowed there, the default ALL FORUMS will disappear when you add Forums to the List. You are able to re-add ALL FORUMS at any given Time. If you add a Forum to your Board and the Permission is set to ALL FORUMS nothing will change. But if you have changed and restricted the access to certain Forums, you have to check back here to add your newly created Forum. It is easy to do this automatically, but this will force you to edit a bunch of Files, therefore i have chosen the way it is now. Please keep in mind, that all of your Forums will be listed here.';
-$lang['NOTE_ADMIN_EMPTY_GROUP_PERMISSIONS'] = 'NOTE:<br />Within the below listed Forums your Users are normally allowed to attach files, but since no Extension Group is allowed to be attached there, your Users are unable to attach anything. If they try, they will receive Error Messages. Maybe you want to set the Permission \'Post Files\' to ADMIN at these Forums.<br /><br />';
-$lang['ADD_FORUMS'] = 'Add Forums';
-$lang['ADD_SELECTED'] = 'Add Selected';
-$lang['PERM_ALL_FORUMS'] = 'ALL FORUMS';
-
-// Attachments -> Quota Limits
-$lang['MANAGE_QUOTAS'] = 'Manage Attachment Quota Limits';
-$lang['MANAGE_QUOTAS_EXPLAIN'] = 'Here you are able to add/delete/change Quota Limits. You are able to assign these Quota Limits to Users and Groups later. To assign a Quota Limit to a User, you have to go to Users->Management, select the User and you will see the Options at the bottom. To assign a Quota Limit to a Group, go to Groups->Management, select the Group to edit it, and you will see the Configuration Settings. If you want to see, which Users and Groups are assigned to a specific Quota Limit, click on \'View\' at the left of the Quota Description.';
-$lang['ASSIGNED_USERS'] = 'Assigned Users';
-$lang['ASSIGNED_GROUPS'] = 'Assigned Groups';
-$lang['QUOTA_LIMIT_EXIST'] = 'The Quota Limit %s exist already.'; // Replace %s with the Quota Description
-
-// Attachments -> Control Panel
-$lang['CONTROL_PANEL_TITLE'] = 'File Attachment Control Panel';
-$lang['CONTROL_PANEL_EXPLAIN'] = 'Here you can view and manage all attachments based on Users, Attachments, Views etc...';
-$lang['FILECOMMENT'] = 'File Comment';
-
-// Control Panel -> Search
-$lang['SEARCH_WILDCARD_EXPLAIN'] = 'Use * as a wildcard for partial matches';
-$lang['SIZE_SMALLER_THAN'] = 'Attachment size smaller than (bytes)';
-$lang['SIZE_GREATER_THAN'] = 'Attachment size greater than (bytes)';
-$lang['COUNT_SMALLER_THAN'] = 'Download count is smaller than';
-$lang['COUNT_GREATER_THAN'] = 'Download count is greater than';
-$lang['MORE_DAYS_OLD'] = 'More than this many days old';
-$lang['NO_ATTACH_SEARCH_MATCH'] = 'No Attachments met your search criteria';
-
-// Control Panel -> Statistics
-$lang['NUMBER_OF_ATTACHMENTS'] = 'Number of Attachments';
-$lang['TOTAL_FILESIZE'] = 'Total Filesize';
-$lang['NUMBER_POSTS_ATTACH'] = 'Number of Posts with Attachments';
-$lang['NUMBER_TOPICS_ATTACH'] = 'Number of Topics with Attachments';
-$lang['NUMBER_USERS_ATTACH'] = 'Independent Users Posted Attachments';
-$lang['NUMBER_PMS_ATTACH'] = 'Total Number of Attachments in Private Messages';
-$lang['ATTACHMENTS_PER_DAY'] = 'Attachments per day';
-
-// Control Panel -> Attachments
-$lang['STATISTICS_FOR_USER'] = 'Attachment Statistics for %s'; // replace %s with username
-$lang['DOWNLOADS'] = 'Downloads';
-$lang['POST_TIME'] = 'Post Time';
-$lang['POSTED_IN_TOPIC'] = 'Posted in Topic';
-$lang['SUBMIT_CHANGES'] = 'Submit Changes';
-
-// Sort Types
-$lang['SORT_ATTACHMENTS'] = 'Attachments';
-$lang['SORT_SIZE'] = 'Size';
-$lang['SORT_FILENAME'] = 'Filename';
-$lang['SORT_COMMENT'] = 'Comment';
-$lang['SORT_EXTENSION'] = 'Extension';
-$lang['SORT_DOWNLOADS'] = 'Downloads';
-$lang['SORT_POSTTIME'] = 'Post Time';
-
-// View Types
-$lang['VIEW_STATISTIC'] = 'Statistics';
-$lang['VIEW_SEARCH'] = 'Search';
-$lang['VIEW_USERNAME'] = 'Username';
-$lang['VIEW_ATTACHMENTS'] = 'Attachments';
-
-// Successfully updated
-$lang['ATTACH_CONFIG_UPDATED'] = 'Attachment Configuration updated successfully';
-$lang['CLICK_RETURN_ATTACH_CONFIG'] = 'Click %sHere%s to return to Attachment Configuration';
-$lang['TEST_SETTINGS_SUCCESSFUL'] = 'Settings Test has been finished, configuration seems to be fine.';
-
-// Some basic definitions
-$lang['ATTACHMENTS'] = 'Attachments';
-$lang['EXTENSIONS'] = 'Extensions';
-$lang['EXTENSION'] = 'Extension';
-
-$lang['RETURN_CONFIG'] = '%sReturn to Configuration%s';
-$lang['CONFIG_UPD'] = 'Configuration Updated Successfully';
-$lang['SET_DEFAULTS'] = 'Restore defaults';
 
 // Tracker config
 $lang['TRACKER_CFG_TITLE'] = 'Tracker';
@@ -2816,7 +2592,6 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Your request to join the user group has been granted',
     'GROUP_REQUEST' => 'A request to join your user group',
     'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
     'USER_ACTIVATE' => 'Account reactivation',
     'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
     'USER_WELCOME' => 'Welcome to the site %s',

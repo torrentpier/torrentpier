@@ -102,7 +102,7 @@ function tte_submit (mode)
 
 ajax.edit_topic_title = function(topic_id, topic_title) {
 	ajax.exec({
-	    action      : 'mod_action',
+		action      : 'mod_action',
 		mode        : 'edit_topic_title',
 		topic_id    : topic_id,
 		topic_title : topic_title
@@ -519,7 +519,7 @@ td.topic_id { cursor: pointer; }
 	<td colspan="6" class="catBottom med pad_4">
 	<!-- IF LOGGED_IN -->
 	<form method="post" action="{S_POST_DAYS_ACTION}">
-		{L_DISPLAY_TOPICS}: {S_SELECT_TOPIC_DAYS} {S_DISPLAY_ORDER}
+		{S_DISPLAY_ORDER}
 		<input type="submit" value="{L_GO}" />
 	</form>
 	<!-- ELSE -->
@@ -620,7 +620,7 @@ td.topic_id { cursor: pointer; }
 <div class="bottom_info">
 
 <!-- IF PAGINATION -->
-<div class="nav">
+<div class="nav" id="pagination">
 	<p style="float: left">{PAGE_NUMBER}</p>
 	<p style="float: right">{PAGINATION}</p>
 	<div class="clear"></div>

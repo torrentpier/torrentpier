@@ -78,10 +78,6 @@
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_HOT_THRESHOLD}</h4></td>
-	<td><input class="post" type="text" name="hot_threshold" size="5" maxlength="4" value="{HOT_TOPIC}" /></td>
-</tr>
-<tr>
 	<td><h4>{L_DEFAULT_LANGUAGE}</h4></td>
 	<td>{LANG_SELECT}</td>
 </tr>

@@ -131,7 +131,6 @@ switch ($mode) {
             'FLOOD_INTERVAL' => $new['flood_interval'],
             'TOPICS_PER_PAGE' => $new['topics_per_page'],
             'POSTS_PER_PAGE' => $new['posts_per_page'],
-            'HOT_TOPIC' => $new['hot_threshold'],
             'DEFAULT_DATEFORMAT' => $new['default_dateformat'],
             'LANG_SELECT' => \TorrentPier\Legacy\Select::language($new['default_lang'], 'default_lang'),
             'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($new['board_timezone'], 'board_timezone'),

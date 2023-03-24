@@ -1,68 +1,5 @@
-<!-- BEGIN attach -->
+
 <div class="clear"></div>
-<div class="spacer_8"></div>
-
-<!-- BEGIN denyrow -->
-<fieldset class="attach">
-<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
-	<p class="attach_link denied">{postrow.attach.denyrow.L_DENIED}</p>
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END denyrow -->
-
-<!-- BEGIN cat_images -->
-<fieldset class="attach">
-<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE})</legend>
-	<p class="tCenter pad_6">
-		<img src="{postrow.attach.cat_images.IMG_SRC}" id="attachImg" class="postImg" alt="img" border="0" />
-	</p>
-	<!-- IF postrow.attach.cat_images.COMMENT -->
-	<p class="tCenter med lh_110">
-		{postrow.attach.cat_images.COMMENT}
-	</p>
-	<!-- ENDIF -->
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END cat_images -->
-
-<!-- BEGIN cat_thumb_images -->
-<fieldset class="attach">
-<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT_THUMBNAIL}</legend>
-	<p class="attach_link">
-		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><img src="{postrow.attach.cat_thumb_images.IMG_THUMB_SRC}" alt="{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}" border="0" /></a>
-	</p>
-	<p class="attach_link">
-		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><b>{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE})</span>
-	</p>
-	<!-- IF postrow.attach.cat_thumb_images.COMMENT -->
-	<p class="attach_comment med">
-		{postrow.attach.cat_thumb_images.COMMENT}
-	</p>
-	<!-- ENDIF -->
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END cat_thumb_images -->
-
-<!-- BEGIN attachrow -->
-<fieldset class="attach">
-<legend>{postrow.attach.attachrow.S_UPLOAD_IMAGE} {L_ATTACHMENT}</legend>
-	<p class="attach_link">
-		<a href="{postrow.attach.attachrow.U_DOWNLOAD_LINK}" {postrow.attach.attachrow.TARGET_BLANK}><b>{postrow.attach.attachrow.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.attachrow.FILESIZE}, {L_DOWNLOADED}: {postrow.attach.attachrow.DOWNLOAD_COUNT})</span>
-	</p>
-	<!-- IF postrow.attach.attachrow.COMMENT -->
-	<p class="attach_comment med">
-		{postrow.attach.attachrow.COMMENT}
-	</p>
-	<!-- ENDIF -->
-</fieldset>
-
-<div class="spacer_12"></div>
-<!-- END attachrow -->
 
 <!-- BEGIN tor_not_reged -->
 <table class="attach bordered med">
@@ -116,7 +53,7 @@
 				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
 			</select>
 
-			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_SUBMIT}" class="liteoption" /></a>
+			&nbsp; <a href="#" onclick="change_torrents($('#tor-{TOPIC_ID} select').val()); return false;"><input type="submit" value="{L_SUBMIT}" class="liteoption" /></a>
 		<!-- ENDIF -->
 		&nbsp;</td>
 	</tr>
@@ -125,32 +62,34 @@
 <div class="spacer_12"></div>
 <!-- END tor_not_reged -->
 
-<!-- BEGIN tor_reged -->
-
-<!-- IF TOR_BLOCKED -->
+<!-- IF SHOW_TOR_BLOCKED -->
+	<div class="spacer_12"></div>
 <table id="tor_blocked" class="error">
 	<tr><td><p class="error_msg">{TOR_BLOCKED_MSG}</p></td></tr>
 </table>
-
 <div class="spacer_12"></div>
-<!-- ELSE -->
+	<!-- ENDIF -->
+
 <!-- IF SHOW_RATIO_WARN -->
-<table id="tor_blocked" class="error">
-	<tr><td><p class="error_msg">{RATIO_WARN_MSG}</p></td></tr>
-</table>
-
-<div class="spacer_12"></div>
+	<div class="spacer_12"></div>
+  <table id="tor_blocked" class="error">
+	  <tr><td><p class="error_msg">{RATIO_WARN_MSG}</p></td></tr>
+  </table>
 <!-- ENDIF -->
 
+<div class="spacer_12"></div>
+
+<!-- IF SHOW_TOR_REGGED -->
+<div id="tor-reged">
 <table class="attach bordered med">
 	<tr class="row3">
-		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF postrow.attach.tor_reged.TOR_FROZEN == 0 --><!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --><!-- ENDIF --></th>
+		<th colspan="3" class="{DL_LINK_CLASS}">{DOWNLOAD_NAME}<!-- IF TOR_FROZEN == 0 --><!-- IF MAGNET_LINKS -->&nbsp;{MAGNET}<!-- ENDIF --><!-- ENDIF --></th>
 	</tr>
-	<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $bb_cfg['tracker']['gold_silver_enabled'] -->
+	<!-- IF TOR_SILVER_GOLD == 2 -->
 	<tr class="row4">
 		<th colspan="3" class="row7"><img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
 	</tr>
-	<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $bb_cfg['tracker']['gold_silver_enabled'] -->
+	<!-- ELSEIF TOR_SILVER_GOLD == 1 -->
 	<tr class="row4">
 		<th colspan="3" class="row7"><img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
 	</tr>
@@ -158,33 +97,36 @@
 	<tr class="row1">
 		<td width="15%">{L_TORRENT}:</td>
 		<td width="70%">
-			{postrow.attach.tor_reged.TRACKER_LINK}
-			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
-			&#0183; {postrow.attach.tor_reged.HASH}
+			{TRACKER_LINK}
+			[ <span title="{REGED_DELTA}">{REGED_TIME}</span> ]
+			&#0183; {HASH}
 		</td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
-			<!-- IF postrow.attach.tor_reged.TOR_FROZEN -->
-			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p>{L_DOWNLOAD}</p>
+			<!-- IF TOR_FROZEN and not AUTH_MOD -->
+			<p>{S_UPLOAD_IMAGE}</p><p>{L_DOWNLOAD}</p>
 			<!-- ELSE -->
-			<a href="{postrow.attach.tor_reged.U_DOWNLOAD_LINK}" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">
-			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
+			<a href="{U_DOWNLOAD_LINK}" class="{DL_LINK_CLASS}">
+			<p>{S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
 			<!-- ENDIF -->
-			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
+			<p class="small">{FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
 		</td>
 	</tr>
 	<tr class="row1">
 		<td>{L_TOR_STATUS}:</td>
 		<td>
-			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}-status">{postrow.attach.tor_reged.TOR_STATUS_ICON} <b>{postrow.attach.tor_reged.TOR_STATUS_TEXT}</b>
-			<!-- IF postrow.attach.tor_reged.TOR_STATUS_BY -->{postrow.attach.tor_reged.TOR_STATUS_BY}<!-- ENDIF -->
+			<span id="tor-{TOPIC_ID}-status">{TOR_STATUS_ICON} <b>{TOR_STATUS_TEXT}</b>
+			<!-- IF TOR_STATUS_TIME -->
+          {TOR_STATUS_BY}
+        			&nbsp;&middot;&nbsp; <a href="{PROFILE_URL}{TOR_STATUS_UID}" class="med"><i>{TOR_STATUS_USERNAME}</i></a>&nbsp; &middot;&nbsp; <i>{TOR_STATUS_TIME}</i> назад
+        <!-- ENDIF -->
 			</span>
-			<!-- IF postrow.attach.tor_reged.TOR_STATUS_REPLY || AUTH_MOD -->
+			<!-- IF TOR_STATUS_REPLY || AUTH_MOD -->
 			<script type="text/javascript">
 				ajax.change_tor_status = function(mode) {
 					ajax.exec({
 						action    : 'change_tor_status',
-						attach_id : {postrow.attach.tor_reged.ATTACH_ID},
+						topic_id : {TOPIC_ID},
 						mode      : mode,
 						status    : $('#sel_status').val(),
 						comment   : $('#comment').val(),
@@ -193,7 +135,7 @@
 				ajax.callback.change_tor_status = function(data) {
 				<!-- IF AUTH_MOD -->
 					$('#tor-'+ data.attach_id +'-status').html(data.status);
-				<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
+				<!-- ELSEIF TOR_STATUS_REPLY -->
 					$('#tor_comment').html('{L_TOR_AUTH_SENT_COMMENT}');
 				<!-- ENDIF -->
 					$('#comment').attr('value', '');
@@ -206,9 +148,9 @@
 			<!-- ENDIF -->
 
 			<!-- IF AUTH_MOD -->
-			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
+			<span id="tor-{TOPIC_ID}">{TOR_STATUS_SELECT}</span>
 			<a href="#" onclick="ajax.change_tor_status('status'); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
-			<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
+			<!-- ELSEIF TOR_STATUS_REPLY -->
 			<a href="#" onclick="ajax.change_tor_status('status_reply'); return false;"><input type="submit" value="{L_TOR_AUTH_FIXED}" class="liteoption" /></a>
 			<!-- ENDIF -->
 			</span>
@@ -217,11 +159,11 @@
 	</tr>
 	<tr class="row1">
 		<td>{L_COMPLETED}:</td>
-		<td><span title="{L_DOWNLOADED}: {postrow.attach.tor_reged.DOWNLOAD_COUNT}">{postrow.attach.tor_reged.COMPLETED}</span></td>
+		<td>{TOR_COMPLETED}</td>
 	</tr>
 	<tr class="row1">
 		<td>{L_SIZE}:</td>
-		<td>{postrow.attach.tor_reged.TORRENT_SIZE}</td>
+		<td>{TOR_SIZE}</td>
 	</tr>
 	<tr class="row3 tCenter">
 		<td colspan="3">
@@ -237,21 +179,20 @@
 		{
 			ajax.exec({
 				action    : 'change_torrent',
-				attach_id : {postrow.attach.tor_reged.ATTACH_ID},
-				type      : $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}').val(),
+				topic_id : {TOPIC_ID},
+				type      : $('#tor-select-{TOPIC_ID}').val(),
 			});
 		}
 		</script>
-			<select name="tor_action" id="tor-select-{postrow.attach.tor_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', true)">
+			<select name="tor_action" id="tor-select-{TOPIC_ID}" onchange="$('#tor-confirm-{TOPIC_ID}').attr('checked', false); $('#tor-submit-{TOPIC_ID}').attr('disabled', true)">
 				<option value="" selected="selected" class="select-action">&raquo; {L_SELECT_ACTION}</option>
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
 				<!-- IF AUTH_MOD -->
-				<!-- IF $bb_cfg['tracker']['gold_silver_enabled'] -->
-				<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->
+				<!-- IF TOR_SILVER_GOLD == 1 -->
 				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
 				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
-				<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->
+				<!-- ELSEIF TOR_SILVER_GOLD == 2 -->
 				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
 				<option value="set_gold">{L_SET_GOLD_TORRENT}</option>
 				<!-- ELSE -->
@@ -259,9 +200,8 @@
 				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
 				<!-- ENDIF -->
 				<!-- ENDIF -->
-				<!-- ENDIF -->
 			</select>
-			<a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
+			<a href="#" onclick="change_torrents($('#tor-{TOPIC_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
 		<!-- ELSEIF TOR_HELP_LINKS -->
 		{TOR_HELP_LINKS}
 		<!-- ELSE -->
@@ -294,7 +234,7 @@ $('#tor-filelist-btn').click(function(){
 	}
 	$('#tor-fl-wrap').show();
 
-	ajax.exec({action: 'view_torrent', attach_id: {postrow.attach.tor_reged.ATTACH_ID} });
+	ajax.exec({action: 'view_torrent', attach_id: {TOPIC_ID} });
 	ajax.callback.view_torrent = function(data) {
 		$('#tor-filelist').html(data.html);
 		$('#tor-filelist > ul.tree-root').treeview({
@@ -358,7 +298,5 @@ $('#tor-filelist-btn').click(function(){
 </div>
 
 <div class="spacer_12"></div>
-<!-- ENDIF -->
-<!-- END tor_reged -->
-
-<!-- END attach -->
+</div><!--/tor-reged-->
+<!-- ENDIF / SHOW_TOR_REGGED -->

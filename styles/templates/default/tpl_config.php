@@ -52,8 +52,6 @@ $images['forum_locked'] = $_main . 'folder_locked_big.gif';
 // topic_icons
 $images['folder'] = $_main . 'folder.gif';
 $images['folder_new'] = $_main . 'folder_new.gif';
-$images['folder_hot'] = $_main . 'folder_hot.gif';
-$images['folder_hot_new'] = $_main . 'folder_new_hot.gif';
 $images['folder_locked'] = $_main . 'folder_lock.gif';
 $images['folder_locked_new'] = $_main . 'folder_lock_new.gif';
 $images['folder_sticky'] = $_main . 'folder_sticky.gif';
@@ -62,8 +60,6 @@ $images['folder_announce'] = $_main . 'folder_announce.gif';
 $images['folder_announce_new'] = $_main . 'folder_announce_new.gif';
 $images['folder_dl'] = $_main . 'folder_dl.gif';
 $images['folder_dl_new'] = $_main . 'folder_dl_new.gif';
-$images['folder_dl_hot'] = $_main . 'folder_dl_hot.gif';
-$images['folder_dl_hot_new'] = $_main . 'folder_dl_hot_new.gif';
 
 // attach_icons
 $images['icon_clip'] = $_img . 'icon_clip.gif';

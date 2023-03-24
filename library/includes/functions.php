@@ -1552,14 +1552,13 @@ function get_topic_icon($topic, $is_unread = null)
 {
     global $bb_cfg, $images;
 
-    $t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
     $is_unread ??= is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']);
 
     if ($topic['topic_status'] == TOPIC_MOVED) {
         $folder_image = $images['folder'];
     } else {
-        $folder = ($t_hot) ? $images['folder_hot'] : $images['folder'];
-        $folder_new = ($t_hot) ? $images['folder_hot_new'] : $images['folder_new'];
+        $folder = $images['folder'];
+        $folder_new = $images['folder_new'];
 
         if ($topic['topic_type'] == POST_ANNOUNCE) {
             $folder = $images['folder_announce'];
@@ -1571,8 +1570,8 @@ function get_topic_icon($topic, $is_unread = null)
             $folder = $images['folder_locked'];
             $folder_new = $images['folder_locked_new'];
         } elseif ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
-            $folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
+            $folder = $images['folder_dl'];
+            $folder_new = $images['folder_dl_new'];
         }
 
         $folder_image = ($is_unread) ? $folder_new : $folder;
