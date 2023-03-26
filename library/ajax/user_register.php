@@ -44,6 +44,9 @@ switch ($mode) {
             $html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
         }
         break;
+
+    default:
+        $this->ajax_die('Invalid mode');
 }
 
 $this->response['html'] = $html;

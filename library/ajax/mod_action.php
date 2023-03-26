@@ -133,4 +133,7 @@ switch ($mode) {
 			</table><br />
 		';
         break;
+
+    default:
+        $this->ajax_die('Invalid mode');
 }

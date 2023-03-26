@@ -132,6 +132,9 @@ switch ($mode) {
 			<td>' . $user_ratio . '</td>
 		';
         break;
+
+    default:
+        $this->ajax_die('Invalid mode');
 }
 
 $this->response['html'] = $html;

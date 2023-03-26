@@ -110,6 +110,9 @@ switch ($mode) {
         $this->response['unlock_cron_html'] = '<span class="seed bold">' . $lang['ADMIN_UNLOCKED'] . '</span>';
 
         break;
+
+    default:
+        $this->ajax_die('Invalid mode');
 }
 
 $this->response['mode'] = $mode;
