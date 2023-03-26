@@ -36,6 +36,10 @@ class Sqlite extends Common
 
     public function __construct($cfg, $prefix = null)
     {
+        if (!$this->is_installed()) {
+            die('Error: SQLite3 extension not installed');
+        }
+
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->db = new SqliteCommon($this->cfg);
         $this->prefix = $prefix;
@@ -109,5 +113,10 @@ class Sqlite extends Common
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
         return $result ? $this->db->changes() : 0;
+    }
+
+    public function is_installed()
+    {
+        return class_exists('SQLite3');
     }
 }

@@ -35,6 +35,10 @@ class Sqlite extends Common
 
     public function __construct($cfg, $prefix = null)
     {
+        if (!$this->is_installed()) {
+            die('Error: SQLite3 extension not installed');
+        }
+
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->db = new SqliteCommon($this->cfg);
         $this->prefix = $prefix;
@@ -76,5 +80,10 @@ class Sqlite extends Common
             $this->data[substr($row['ds_title'], $prefix_len)] = unserialize($row['ds_data']);
         }
         $this->db->debug('stop');
+    }
+
+    public function is_installed()
+    {
+        return class_exists('SQLite3');
     }
 }
