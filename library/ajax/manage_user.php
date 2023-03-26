@@ -104,6 +104,9 @@ switch ($mode) {
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
 
         break;
+
+    default:
+        $this->ajax_die('Invalid mode');
 }
 
 $this->response['mode'] = $mode;
