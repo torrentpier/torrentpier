@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Yangi shaxsiy xabar yuboring';
 $lang['SEND_A_REPLY'] = 'bir maxsus xat javob';
 $lang['EDIT_MESSAGE'] = 'shaxsiy xabar tahrirlash';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Yangi Xususiy Xabar qabul qilindi!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Agar foydalanuvchi nomi topish';
 $lang['SELECT_USERNAME'] = 'Agar foydalanuvchi nomi tanlang';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'shaxsiy';
 $lang['REGISTERED'] = 'ro\'yxatga olingan';
 $lang['ADMINISTRATORS'] = 'Administratorlar';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'bARCHA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'XUSUSIY';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Extension Group %s allaqachon mavjud'; // repl
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Maxsus Kategoriyalar boshqarish';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Bu yerda siz Maxsus Kategoriyalar moslashingiz mumkin. Siz Maxsus parametrlarini va Extension guruhi tayinlangan maxsus kategoriyalari shartlari o\'rnatishingiz mumkin.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Maxsus Turkum uchun Sozlamalar: Tasvirlar';
 $lang['SETTINGS_CAT_FLASH'] = 'Maxsus Turkum uchun Sozlamalar: Flash Fayllar';
 $lang['DISPLAY_INLINED'] = 'Displey Tasvirlar inlined';
