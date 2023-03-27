@@ -179,7 +179,7 @@ if ($mode == 'read') {
             bb_die('Could not update private message read status for user');
         }
         if (DB()->affected_rows()) {
-            \TorrentPier\Legacy\Sessions::cache_rm_userdata($userdata);
+            \TorrentPier\Sessions::cache_rm_userdata($userdata);
         }
 
         $sql = "UPDATE " . BB_PRIVMSGS . "
@@ -895,7 +895,7 @@ if ($mode == 'read') {
                 bb_die('Could not update private message new / read status for user');
             }
 
-            \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($to_userdata['user_id']);
+            \TorrentPier\Sessions::cache_rm_user_sessions($to_userdata['user_id']);
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
                 // Sending email
@@ -1146,7 +1146,7 @@ if ($mode == 'read') {
     //
     // Update unread status
     //
-    \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, array(
+    \TorrentPier\Sessions::db_update_userdata($userdata, array(
         'user_unread_privmsg' => 'user_unread_privmsg + user_new_privmsg',
         'user_new_privmsg' => 0,
         'user_last_privmsg' => $userdata['session_start'],

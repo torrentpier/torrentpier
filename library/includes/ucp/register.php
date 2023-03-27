@@ -628,7 +628,7 @@ if ($submit && !$errors) {
                 }
             }
 
-            \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($pr_data['user_id']);
+            \TorrentPier\Sessions::cache_rm_user_sessions($pr_data['user_id']);
 
             if ($adm_edit) {
                 bb_die($lang['PROFILE_USER'] . ' <b>' . profile_url($pr_data) . '</b> ' . $lang['GOOD_UPDATE']);

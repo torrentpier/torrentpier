@@ -27,7 +27,7 @@ switch ($mode) {
         }
 
         if ($user_id != BOT_UID) {
-            \TorrentPier\Legacy\Sessions::delete_user_sessions($user_id);
+            \TorrentPier\Sessions::delete_user_sessions($user_id);
             \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
             $this->response['info'] = $lang['USER_DELETED'];
@@ -99,7 +99,7 @@ switch ($mode) {
         }
 
         DB()->query("UPDATE " . BB_USERS . " SET user_active = '0' WHERE user_id = " . $user_id);
-        \TorrentPier\Legacy\Sessions::delete_user_sessions($user_id);
+        \TorrentPier\Sessions::delete_user_sessions($user_id);
 
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
 

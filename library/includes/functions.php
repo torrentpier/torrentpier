@@ -1368,7 +1368,7 @@ function bb_die($msg_text)
 
     // If empty session
     if (empty($userdata)) {
-        $userdata = \TorrentPier\Legacy\Sessions::session_pagestart();
+        $userdata = \TorrentPier\Sessions::session_pagestart();
     }
 
     // If the header hasn't been output then do it

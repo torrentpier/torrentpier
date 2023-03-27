@@ -7,11 +7,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
 
 /**
  * Class Sessions
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Sessions
 {
@@ -20,19 +20,19 @@ class Sessions
      *
      * @return bool
      */
-    private static function ignore_cached_userdata()
+    private static function ignore_cached_userdata(): bool
     {
-        return \defined('IN_PM') ? true : false;
+        return defined('IN_PM');
     }
 
     /**
      * Get userdata from cache
      *
-     * @param int $id
+     * @param string $id
      *
      * @return bool|array
      */
-    public static function cache_get_userdata($id)
+    public static function cache_get_userdata(string $id)
     {
         if (self::ignore_cached_userdata()) {
             return false;
@@ -49,7 +49,7 @@ class Sessions
      *
      * @return bool
      */
-    public static function cache_set_userdata($userdata, $force = false)
+    public static function cache_set_userdata(array $userdata, bool $force = false): bool
     {
         global $bb_cfg;
 
@@ -68,7 +68,7 @@ class Sessions
      *
      * @return bool
      */
-    public static function cache_rm_userdata($userdata)
+    public static function cache_rm_userdata(array $userdata): bool
     {
         if (!$userdata) {
             return false;
@@ -81,11 +81,11 @@ class Sessions
     /**
      * Delete user sessions from cache
      *
-     * @param array|string $user_id
+     * @param string|int $user_id
      */
     public static function cache_rm_user_sessions($user_id)
     {
-        $user_id = get_id_csv($user_id);
+        $user_id = get_id_csv(explode(',', (string)$user_id));
 
         $rowset = DB()->fetch_rowset("SELECT session_id FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
 
@@ -101,7 +101,7 @@ class Sessions
      *
      * @return bool
      */
-    public static function cache_update_userdata($userdata)
+    public static function cache_update_userdata(array $userdata): bool
     {
         return self::cache_set_userdata($userdata, true);
     }
@@ -115,7 +115,7 @@ class Sessions
      *
      * @return bool
      */
-    public static function db_update_userdata($userdata, $sql_ary, $data_already_escaped = true)
+    public static function db_update_userdata(array $userdata, array $sql_ary, bool $data_already_escaped = true): bool
     {
         if (!$userdata) {
             return false;
@@ -134,13 +134,13 @@ class Sessions
     /**
      * Delete user sessions from cache and database
      *
-     * @param array|string $user_id
+     * @param string|int $user_id
      */
     public static function delete_user_sessions($user_id)
     {
         self::cache_rm_user_sessions($user_id);
 
-        $user_id = get_id_csv($user_id);
+        $user_id = get_id_csv(explode(',', (string)$user_id));
         DB()->query("DELETE FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
     }
 
@@ -152,9 +152,8 @@ class Sessions
      *
      * @return array
      * @deprecated
-     *
      */
-    public static function session_pagestart($user_ip = USER_IP, $page_id = 0, $req_login = false)
+    public static function session_pagestart($user_ip = USER_IP, $page_id = 0, bool $req_login = false): array
     {
         global $user;
 

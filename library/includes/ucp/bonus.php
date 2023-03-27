@@ -46,7 +46,7 @@ if (isset($_POST['bonus_id'])) {
 			AND u.user_id   = bu.user_id
 	");
 
-    \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
+    \TorrentPier\Sessions::cache_rm_user_sessions($user_id);
     meta_refresh(BONUS_URL, 5);
 
     $message = sprintf($lang['BONUS_SUCCES'], humn_size($upload_row[$id] * 1024 * 1024 * 1024));
