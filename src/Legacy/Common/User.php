@@ -10,7 +10,7 @@
 namespace TorrentPier\Legacy\Common;
 
 use TorrentPier\Legacy\DateDelta;
-use TorrentPier\Legacy\Sessions;
+use TorrentPier\Sessions;
 
 /**
  * Class User

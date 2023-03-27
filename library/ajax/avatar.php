@@ -38,6 +38,6 @@ switch ($mode) {
 
 DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = $new_ext_id WHERE user_id = $user_id");
 
-\TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
+\TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 
 $this->response['avatar_html'] = $response;

@@ -97,7 +97,7 @@ switch ($mode) {
                 }
 
                 send_pm($tor['poster_id'], $subject, $message, $userdata['user_id']);
-                \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($tor['poster_id']);
+                \TorrentPier\Sessions::cache_rm_user_sessions($tor['poster_id']);
             }
         }
         break;
@@ -115,7 +115,7 @@ switch ($mode) {
         }
 
         send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
-        \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
+        \TorrentPier\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
         break;
 }
 

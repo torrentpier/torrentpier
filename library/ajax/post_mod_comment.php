@@ -43,7 +43,7 @@ if ($mc_type && $post['poster_id'] != $userdata['user_id']) {
     $message = sprintf($lang['MC_COMMENT_PM_MSG'], get_username($post['poster_id']), make_url(POST_URL . "$post_id#$post_id"), $lang['MC_COMMENT'][$mc_type]['type'], $mc_text);
 
     send_pm($post['poster_id'], $subject, $message);
-    \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($post['poster_id']);
+    \TorrentPier\Sessions::cache_rm_user_sessions($post['poster_id']);
 }
 
 switch ($mc_type) {

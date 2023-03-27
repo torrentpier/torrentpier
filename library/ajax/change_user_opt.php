@@ -33,6 +33,6 @@ foreach ($bf['user_opt'] as $opt_name => $opt_bit) {
 DB()->query("UPDATE " . BB_USERS . " SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id");
 
 // Удаляем данные из кеша
-\TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
+\TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 
 $this->response['resp_html'] = $lang['SAVED'];
