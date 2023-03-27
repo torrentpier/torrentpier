@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Trimite un nou mesaj privat';
 $lang['SEND_A_REPLY'] = 'Răspunsul la un mesaj privat';
 $lang['EDIT_MESSAGE'] = 'Editare mesaj privat';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Mesaj Privat nou a fost primit!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Găsiți un nume de utilizator';
 $lang['SELECT_USERNAME'] = 'Selectați un nume de Utilizator';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privat';
 $lang['REGISTERED'] = 'Înregistrați';
 $lang['ADMINISTRATORS'] = 'Administratorii';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TOATE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAT';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Extinderea Grupului %s există deja'; // repla
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Gestiona Categorii Speciale';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Aici puteți configura Categoriile Speciale. Puteți configura Parametrii Speciale și Condiții Speciale Categorys atribuit o Extensie de Grup.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Setări pentru Categorii Speciale: Imagini';
 $lang['SETTINGS_CAT_FLASH'] = 'Setări pentru Categorii Speciale: Fișiere Flash';
 $lang['DISPLAY_INLINED'] = 'Afișa Imagini Inline';
