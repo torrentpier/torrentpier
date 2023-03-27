@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Ирсоли паём хусусӣ нав';
 $lang['SEND_A_REPLY'] = 'Ҷавоб додан ба паём хусусӣ';
 $lang['EDIT_MESSAGE'] = 'Таҳрир паёми хусусӣ';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Паёми нави хусусӣ кардааст, recieved шуд!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Пайдо кардани номи корбарӣ';
 $lang['SELECT_USERNAME'] = 'Интихоб Логин';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'хусусӣ';
 $lang['REGISTERED'] = 'Сабтшуда';
 $lang['ADMINISTRATORS'] = 'Администраторҳо';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALL';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ХУСУСӢ';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Дар Тамдиди Гурӯҳи %s алла
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Идоракунии Categories махсус';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Дар ин ҷо шумо метавонед категорияҳо махсус танзим карда метавонед. Шумо метавонед насб параметрҳои махсус Шароит барои Categorys махсус ба зиммаи як гурӯҳи Дароз.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Танзимот барои Гурӯҳ Special: Тасвирҳо';
 $lang['SETTINGS_CAT_FLASH'] = 'Танзимот барои Гурӯҳ Special: Files Flash';
 $lang['DISPLAY_INLINED'] = 'Display Тасвирҳо Inlined';
