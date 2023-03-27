@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Адправіць новае прыватнае 
 $lang['SEND_A_REPLY'] = 'Адказ на асабістае паведамленне';
 $lang['EDIT_MESSAGE'] = 'Рэдагаваць асабістае паведамленне';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Новае Прыватнае паведамленне атрымаў!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Знайсці імя карыстальніка';
 $lang['SELECT_USERNAME'] = 'Выберыце Імя карыстальніка';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Прыватная';
 $lang['REGISTERED'] = 'Зарэгістраваны';
 $lang['ADMINISTRATORS'] = 'Адміністратары';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Усе';
 $lang['FORUM_REG'] = 'Рэг';
 $lang['FORUM_PRIVATE'] = 'Прыватная';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Група пашырэнне %s ўжо існ
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Кіраванне Спецыяльных Катэгорый';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Тут вы можаце наладжваць спецыяльныя катэгорыі. Вы можаце ўсталяваць спецыяльныя параметры, а таксама ўмовы спецыяльнага Categorys, прысвоеных групе пашырэнняў.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Налады для спецыяльнай катэгорыі: карцінкі';
 $lang['SETTINGS_CAT_FLASH'] = 'Налады для спецыяльнай катэгорыі: флэш-файлаў';
 $lang['DISPLAY_INLINED'] = 'Дысплей Выявы Клікабельны';
