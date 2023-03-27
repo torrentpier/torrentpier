@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Küldj egy új privát üzenet';
 $lang['SEND_A_REPLY'] = 'Válasz privát üzenet';
 $lang['EDIT_MESSAGE'] = 'Szerkesztés privát üzenet';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Új Privát Üzenet volt megadva!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Találni egy felhasználónevet';
 $lang['SELECT_USERNAME'] = 'Válasszon egy Felhasználónevet';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privát';
 $lang['REGISTERED'] = 'Regisztrált';
 $lang['ADMINISTRATORS'] = 'A rendszergazdák';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ÖSSZES';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVÁT';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'A Kiterjesztés Csoport %s már létezik'; // 
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Kezelése Speciális Kategóriák';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Itt konfigurálhatja a Különleges Kategóriában. Beállíthatja a Speciális Paramétereket, amelyek a Különleges Categorys rendelt Kiterjesztése Csoport.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'A beállításokat Különleges Kategória: Képek';
 $lang['SETTINGS_CAT_FLASH'] = 'A beállításokat Különleges Kategória: Flash-Fájlok';
 $lang['DISPLAY_INLINED'] = 'Képek Megjelenítése Inlined';
