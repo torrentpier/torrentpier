@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'إرسال رسالة خاصة جديدة';
 $lang['SEND_A_REPLY'] = 'رد على رسالة خاصة';
 $lang['EDIT_MESSAGE'] = 'تحرير رسالة خاصة';
 
-$lang['NOTIFICATION_SUBJECT'] = 'رسالة خاصة جديدة قد تلقوا!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'العثور على اسم المستخدم';
 $lang['SELECT_USERNAME'] = 'حدد اسم المستخدم';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'خاصة';
 $lang['REGISTERED'] = 'مسجلة';
 $lang['ADMINISTRATORS'] = 'المسؤولين';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'كل';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'خاصة';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'تمديد مجموعة %s موجودة بال
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'إدارة الفئات الخاصة';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'هنا يمكنك تكوين الفئات الخاصة. يمكنك إعداد معلمات خاصة وشروط خاصة Categorys تعيين ملحق المجموعة.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'إعدادات خاصة فئة: صور';
 $lang['SETTINGS_CAT_FLASH'] = 'إعدادات خاصة الفئة: ملفات فلاش';
 $lang['DISPLAY_INLINED'] = 'عرض الصور المضمنة';
