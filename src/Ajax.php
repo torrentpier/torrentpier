@@ -21,7 +21,7 @@ class Ajax
     public array $request = [];
     public array $response = [];
 
-    public array $valid_actions = [
+    private array $valid_actions = [
         // ACTION NAME => [AJAX_AUTH, IN_ADMIN_CP (optional)]
         'edit_user_profile' => ['admin'],
         'change_user_rank' => ['admin'],

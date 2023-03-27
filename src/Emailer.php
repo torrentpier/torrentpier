@@ -23,10 +23,10 @@ use Symfony\Component\Mime\Email;
 class Emailer
 {
     /** @var string message text */
-    private $message;
+    private string $message;
 
     /** @var string message subject */
-    private $subject;
+    private string $subject;
 
     private ?\Symfony\Component\Mime\Address $to = null;
 
@@ -36,7 +36,7 @@ class Emailer
     private array $tpl_msg = [];
 
     /** @var array variables to be substituted in message templates */
-    private $vars = [];
+    private array $vars = [];
 
     /**
      * Setting the message subject
