@@ -352,7 +352,7 @@ $bb_cfg['show_sidebar2_on_every_page'] = false;
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, [getenv('SERVER_ADDR'), 'localhost'], true) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = $domain_ssl ? true : (!empty($_SERVER['HTTPS']) ? true : false);
+$bb_cfg['cookie_secure'] = $domain_ssl ? true : \TorrentPier\Helpers\IsHelper::isHTTPS();
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 
 // Sessions
