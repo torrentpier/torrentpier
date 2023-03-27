@@ -677,7 +677,7 @@ switch ($mode) {
         $pin = ($mode == 'post_pin');
         $new_topic_status = ($pin) ? 1 : 0;
 
-        if (count($topic_csv)) {
+        if (count((array)$topic_csv)) {
             $sql = "
 				SELECT topic_id, topic_title
 				FROM " . BB_TOPICS . "
