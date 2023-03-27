@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'שלח הודעה פרטית חדשה.';
 $lang['SEND_A_REPLY'] = 'תגובה ל הודעה פרטית';
 $lang['EDIT_MESSAGE'] = 'עריכת הודעה פרטית';
 
-$lang['NOTIFICATION_SUBJECT'] = 'חדשה הודעה פרטית כבר קיבלה!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'למצוא את שם המשתמש';
 $lang['SELECT_USERNAME'] = 'בחר שם משתמש';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'פרטי';
 $lang['REGISTERED'] = 'רשום';
 $lang['ADMINISTRATORS'] = 'מנהלי מערכת';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'כל';
 $lang['FORUM_REG'] = 'רג';
 $lang['FORUM_PRIVATE'] = 'פרטי';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'הסיומת קבוצה %s כבר קיים'; /
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'ניהול קטגוריות מיוחדות';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'כאן אתה יכול להגדיר את קטגוריות מיוחדות. אתה יכול להגדיר מיוחד פרמטרים ותנאים מיוחדים Categorys שהוקצו הרחבה הקבוצה.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'הגדרות מיוחדות קטגוריה: תמונות';
 $lang['SETTINGS_CAT_FLASH'] = 'הגדרות עבור קטגוריה מיוחדת: קבצי פלאש';
 $lang['DISPLAY_INLINED'] = 'תצוגת תמונות Inlined';
