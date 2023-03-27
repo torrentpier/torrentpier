@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = '发送一个新的私人消息';
 $lang['SEND_A_REPLY'] = '答复私人消息';
 $lang['EDIT_MESSAGE'] = '编辑私人消息';
 
-$lang['NOTIFICATION_SUBJECT'] = '新的私人消息已经收到的！';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = '找到一个用户名';
 $lang['SELECT_USERNAME'] = '选择一个用户名';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = '私';
 $lang['REGISTERED'] = '注册';
 $lang['ADMINISTRATORS'] = '管理员';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = '所有';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = '私';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = '扩展组%s已经存在'; // replace %s with t
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = '管理特殊类别';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = '在这里你可以配置特别的类别。 你可以设立特殊的参数和条件，特别Categorys分配给一个扩展组。';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = '设置对于特殊类别：图像';
 $lang['SETTINGS_CAT_FLASH'] = '设置对于特殊类别：闪文件';
 $lang['DISPLAY_INLINED'] = '显示器的图像内联';
