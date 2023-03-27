@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Envia uma nova mensagem particular';
 $lang['SEND_A_REPLY'] = 'Responder a uma mensagem privada';
 $lang['EDIT_MESSAGE'] = 'Editar mensagem privada';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nova Mensagem foi recebida!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Encontrar um nome de usuário';
 $lang['SELECT_USERNAME'] = 'Escolha um nome de usuário';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privada';
 $lang['REGISTERED'] = 'Registrado';
 $lang['ADMINISTRATORS'] = 'Administradores';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TODOS';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVADA';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'O Grupo de Extensão %s já existe'; // replac
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Gerenciar Categorias Especiais';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Aqui você pode configurar a Categorias Especiais. Você pode configurar Parâmetros Especiais e Condições Especiais de Categorys atribuído a um Grupo de Extensão.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Definições para Categoria Especial: Imagens';
 $lang['SETTINGS_CAT_FLASH'] = 'Configurações Especiais Categoria: Arquivos Flash';
 $lang['DISPLAY_INLINED'] = 'Exibir Imagens Lineares';
