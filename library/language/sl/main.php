@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Pošlji novo zasebno sporočilo';
 $lang['SEND_A_REPLY'] = 'Odgovor na zasebno sporočilo';
 $lang['EDIT_MESSAGE'] = 'Urejanje zasebno sporočilo';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Novo Zasebno Sporočilo že prejela!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Našli uporabniško ime';
 $lang['SELECT_USERNAME'] = 'Izberite uporabniško Ime';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Zasebni';
 $lang['REGISTERED'] = 'Registrirani';
 $lang['ADMINISTRATORS'] = 'Administratorji';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'VSE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ZASEBNI';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Razširitev Skupine %s, ki že obstajajo,'; //
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Upravljanje Posebne Kategorije';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Tukaj lahko nastavite Posebne Kategorije. Nastavite lahko Posebnimi Parametri in Pogoji za Posebne Categorys namenski Podaljšek Skupine.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Nastavitve za Posebno zvrst: Slike';
 $lang['SETTINGS_CAT_FLASH'] = 'Nastavitve za Posebne Kategorije: Flash Datoteke';
 $lang['DISPLAY_INLINED'] = 'Prikaz Slik Inlined';
