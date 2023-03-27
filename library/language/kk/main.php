@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Жаңа Жеке хабар жіберу';
 $lang['SEND_A_REPLY'] = 'Жеке хабарламаға жауап беру';
 $lang['EDIT_MESSAGE'] = 'Жеке хабар өңдеу';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Жаңа Жеке хабарлама алды болды!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'атын табу';
 $lang['SELECT_USERNAME'] = 'Пайдаланушы аты таңдаңыз';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Жеке';
 $lang['REGISTERED'] = 'тіркелген';
 $lang['ADMINISTRATORS'] = 'Әкімшілер';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'БАРЛЫҚ';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ЖЕКЕ';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Кеңейтім Group %s қазірдің ө�
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Арнайы Санаттар басқару';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Мұнда Сіз ерекше категориялары теңшеуге болады. Сіз Extension тобына тағайындалған арнайы Categorys үшін арнайы параметрлері мен шарттарын орнатуға болады.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Арнайы Санат параметрлері: Суреттер';
 $lang['SETTINGS_CAT_FLASH'] = 'Flash Файлдар: Арнайы Санат параметрлері';
 $lang['DISPLAY_INLINED'] = 'Дисплей Суреттер Кірістірілген';
