@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Stuur \'n nuwe privaat boodskap';
 $lang['SEND_A_REPLY'] = 'Antwoord op \'n privaat boodskap';
 $lang['EDIT_MESSAGE'] = 'Wysig privaat boodskap';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nuwe Privaat Boodskap is ontvang!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Vind \'n gebruikersnaam';
 $lang['SELECT_USERNAME'] = 'Kies \'n gebruikersnaam';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privaat';
 $lang['REGISTERED'] = 'geregistreer';
 $lang['ADMINISTRATORS'] = 'administrateurs';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALMAL';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAAT';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Die uitbreidingsgroep %s bestaan ​​reeds';
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Bestuur spesiale kategorieë';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Hier kan u die spesiale kategorieë instel. U kan spesiale parameters en voorwaardes opstel vir die spesiale kategorieë wat aan \'n uitbreidingsgroep toegeken word.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Stellings vir spesiale kategorie: prente';
 $lang['SETTINGS_CAT_FLASH'] = 'Stellings vir spesiale kategorie: Flash-lêers';
 $lang['DISPLAY_INLINED'] = 'Vertoon prente geïllustreer';
