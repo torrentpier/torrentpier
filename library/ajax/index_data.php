@@ -29,7 +29,7 @@ switch ($mode) {
             foreach ($stats['birthday_week_list'] as $week) {
                 $users[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
             }
-            $html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(", ", $users));
+            $html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(', ', $users));
         } else {
             $html = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
         }
@@ -47,7 +47,7 @@ switch ($mode) {
             foreach ($stats['birthday_today_list'] as $today) {
                 $users[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
             }
-            $html = $lang['BIRTHDAY_TODAY'] . implode(", ", $users);
+            $html = $lang['BIRTHDAY_TODAY'] . implode(', ', $users);
         } else {
             $html = $lang['NOBIRTHDAY_TODAY'];
         }
