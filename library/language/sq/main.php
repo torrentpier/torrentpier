@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Dërgoni një i ri privat mesazh';
 $lang['SEND_A_REPLY'] = 'Përgjigjja një mesazh privat';
 $lang['EDIT_MESSAGE'] = 'Edit mesazh privat';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Reja Private Mesazhi është pranuar!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Gjeni emrin e përdoruesit';
 $lang['SELECT_USERNAME'] = 'Zgjidhni një Username';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Private';
 $lang['REGISTERED'] = 'Regjistruar';
 $lang['ADMINISTRATORS'] = 'Administratorët';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Të GJITHA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Zgjerimi i Grupit të %s tashmë ekzistojnë';
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Menaxhuar Kategori Të Veçanta';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Këtu ju mund të konfiguroni Kategori të Veçanta. Ju mund të vendosni të Veçantë Parametrat dhe Kushtet Speciale Categorys të caktuar për një Zgjatje të Grupit.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Cilësimet për Kategori të Veçantë: Imazhe';
 $lang['SETTINGS_CAT_FLASH'] = 'Cilësimet për Kategori të Veçantë: Flash Fotografi';
 $lang['DISPLAY_INLINED'] = 'Imazhet E Ekranit Inlined';
