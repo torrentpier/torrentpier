@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'ส่งคนใหม่ส่วนตัว�
 $lang['SEND_A_REPLY'] = 'ส่งการตอบกลับไปยังส่วนตัวข้อความ';
 $lang['EDIT_MESSAGE'] = 'แก้ไขข้อความส่วนตัว';
 
-$lang['NOTIFICATION_SUBJECT'] = 'คนใหม่ส่วนตัวข้อความถูก recieved!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'หาชื่อผู้ใช้';
 $lang['SELECT_USERNAME'] = 'เลือกชื่อผู้ใช้';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'ส่วนตัว';
 $lang['REGISTERED'] = 'จดทะเบียน';
 $lang['ADMINISTRATORS'] = 'Administrators';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ทั้';
 $lang['FORUM_REG'] = 'ข้อบังคั';
 $lang['FORUM_PRIVATE'] = 'ส่วนตัว';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'ส่วนขยายแฟ้มกลุ�
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'จัดการการพิเศษหมวดหมู่';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'คุณสามารถปรับแต่งพิเศษหมวดหมู่ได้ คุณสามารถตั้งค่าพารามิเตอร์พิเศษและต้องมีเงื่อนไขสำหรับคนพิเศษ Categorys ได้รับมอบหมายให้ไปขอเลื่อนส่งกลุ่ม';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'ตั้งค่าสำหรับคนพิเศษหมวดหมู่:รูปภาพ';
 $lang['SETTINGS_CAT_FLASH'] = 'ตั้งค่าสำหรับคนพิเศษหมวดหมู่:แฟ้มแฟลช';
 $lang['DISPLAY_INLINED'] = 'แสดงรูปภาพ Inlined';
