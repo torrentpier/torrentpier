@@ -30,7 +30,7 @@ class CronHelper
      *
      * @return void
      */
-    public static function releaseDeadlock()
+    public static function releaseDeadlock(): void
     {
         if (file_exists(CRON_RUNNING)) {
             if (TIMENOW - filemtime(CRON_RUNNING) > 2400) {
@@ -45,7 +45,7 @@ class CronHelper
      *
      * @return void
      */
-    public static function releaseLockFile()
+    public static function releaseLockFile(): void
     {
         if (file_exists(CRON_RUNNING)) {
             rename(CRON_RUNNING, CRON_ALLOWED);
@@ -56,11 +56,11 @@ class CronHelper
     /**
      * Создание файла блокировки
      *
-     * @param $lock_file
+     * @param string $lock_file
      *
      * @return void
      */
-    public static function touchLockFile($lock_file)
+    public static function touchLockFile(string $lock_file): void
     {
         file_write('', $lock_file, 0, true, true);
     }
@@ -70,7 +70,7 @@ class CronHelper
      *
      * @return void
      */
-    public static function enableBoard()
+    public static function enableBoard(): void
     {
         if (file_exists(BB_DISABLED)) {
             rename(BB_DISABLED, BB_ENABLED);
@@ -82,7 +82,7 @@ class CronHelper
      *
      * @return void
      */
-    public static function disableBoard()
+    public static function disableBoard(): void
     {
         if (file_exists(BB_ENABLED)) {
             rename(BB_ENABLED, BB_DISABLED);
@@ -94,7 +94,7 @@ class CronHelper
      *
      * @return bool
      */
-    public static function hasFileLock()
+    public static function hasFileLock(): bool
     {
         $lock_obtained = false;
 
@@ -113,21 +113,26 @@ class CronHelper
     /**
      * Отслеживание запуска задач
      *
-     * @param $mode
+     * @param string $mode
      */
-    public static function trackRunning($mode)
+    public static function trackRunning(string $mode)
     {
-        if (!\defined('START_MARK')) {
-            \define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
+        if (!defined('START_MARK')) {
+            define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
         }
 
-        if ($mode === 'start') {
-            self::touchLockFile(CRON_RUNNING);
-            file_write('', START_MARK);
-        } elseif ($mode === 'end') {
-            if (file_exists(START_MARK)) {
-                unlink(START_MARK);
-            }
+        switch ($mode) {
+            case 'start':
+                self::touchLockFile(CRON_RUNNING);
+                file_write('', START_MARK);
+                break;
+            case 'end':
+                if (file_exists(START_MARK)) {
+                    unlink(START_MARK);
+                }
+                break;
+            default:
+                bb_simple_die('Invalid mode');
         }
     }
 }
