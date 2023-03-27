@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = '送付の新プライベートメッセージ';
 $lang['SEND_A_REPLY'] = '返信メッセージ';
 $lang['EDIT_MESSAGE'] = '編集プライベートメッセージ';
 
-$lang['NOTIFICATION_SUBJECT'] = '新しいプライベートメッセージが受け取る！';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'くのユーザー名';
 $lang['SELECT_USERNAME'] = '選択ユーザーネーム';
@@ -1690,7 +1690,7 @@ $lang['PRIVATE'] = '民間';
 $lang['REGISTERED'] = '登録';
 $lang['ADMINISTRATORS'] = '管理者';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'すべての';
 $lang['FORUM_REG'] = '日';
 $lang['FORUM_PRIVATE'] = '民間';
@@ -2159,7 +2159,7 @@ $lang['EXTENSION_GROUP_EXIST'] = '拡張子のグループ%sに存在する'; //
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = '管理特別なカテゴリ';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'この設定をすることができる特別なカテゴリです。 の設定ができます特別なパラメータの件本件は、特別Categorysに割り当てられた拡張子グループです。';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = '設定のための特別なカテゴリ：画像';
 $lang['SETTINGS_CAT_FLASH'] = '設定のための特別なカテゴリ：Flashファイル';
 $lang['DISPLAY_INLINED'] = '画像表示Inlined';
