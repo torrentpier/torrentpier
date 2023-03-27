@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Kirim pesan pribadi baru';
 $lang['SEND_A_REPLY'] = 'Balasan untuk pesan pribadi';
 $lang['EDIT_MESSAGE'] = 'Mengedit pesan pribadi';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Baru Pesan Pribadi telah menerima!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Menemukan username';
 $lang['SELECT_USERNAME'] = 'Pilih Username';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Pribadi';
 $lang['REGISTERED'] = 'Terdaftar';
 $lang['ADMINISTRATORS'] = 'Administrator';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'SEMUA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIBADI';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Ekstensi Kelompok %s sudah ada'; // replace %s
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Mengelola Kategori Khusus';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Di sini anda dapat mengkonfigurasi Kategori Khusus. Anda dapat mengatur Parameter Khusus dan Ketentuan Khusus Categorys ditugaskan untuk Perpanjangan Kelompok.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Pengaturan untuk Kategori Khusus: Gambar';
 $lang['SETTINGS_CAT_FLASH'] = 'Pengaturan untuk Kategori Khusus: File Flash';
 $lang['DISPLAY_INLINED'] = 'Tampilan Gambar Inline';
