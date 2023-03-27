@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Siųsti naują asmeninį pranešimą';
 $lang['SEND_A_REPLY'] = 'Atsakymą į privačią žinutę';
 $lang['EDIT_MESSAGE'] = 'Redaguoti asmeninę žinutę';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Naujas asmeninis Pranešimas buvo gavau!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Ieškoti vartotojo vardas';
 $lang['SELECT_USERNAME'] = 'Pasirinkite vartotojo Vardą';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privatus';
 $lang['REGISTERED'] = 'Registruotas';
 $lang['ADMINISTRATORS'] = 'Administratoriai';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'VISI';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATUS';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Pratęsimo Grupės %s jau egzistuoja'; // repl
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Tvarkyti Ypatingų Kategorijų';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Čia galite konfigūruoti Specialių Kategorijų. Jūs galite įsteigti Specialius Parametrus ir Sąlygas Specialiųjų Categorys priskirtas Pratęsti Grupės.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Parametrai Specialios Kategorijos: Nuotraukos';
 $lang['SETTINGS_CAT_FLASH'] = 'Parametrai Specialios Kategorijos: Flash Failų';
 $lang['DISPLAY_INLINED'] = 'Vaizdų Inlined';
