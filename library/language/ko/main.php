@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = '보내는 새로운 비공개 메시지';
 $lang['SEND_A_REPLY'] = '답글을 비공개 메시지';
 $lang['EDIT_MESSAGE'] = '편집하는 개인 메시지';
 
-$lang['NOTIFICATION_SUBJECT'] = '새로운 개인적인 메시지를 받았다되었습니다!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = '을 찾아 사용자 이름';
 $lang['SELECT_USERNAME'] = '사용자 이름을 선택하';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Private';
 $lang['REGISTERED'] = '등록';
 $lang['ADMINISTRATORS'] = '관리자';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = '모든';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = '의 확장자 그룹 이미 존재하 %s'; // 
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = '를 관리하는 특별한 범주';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = '여기에 구성할 수 있는 특별한 범주가 있습니다. 당신은 설정할 수 있습니다 매개 변수와 특별한 조건에 특별한 Categorys 할당을 연장 그룹입니다.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = '설정를 위해 특별한 범주:이미지';
 $lang['SETTINGS_CAT_FLASH'] = '설정를 위해 특별한 카테고리:플래시 파일';
 $lang['DISPLAY_INLINED'] = '인라인 이미지를 표시';
