@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Saada uus privaatsõnum';
 $lang['SEND_A_REPLY'] = 'Vastuse privaatsõnum';
 $lang['EDIT_MESSAGE'] = 'Edit privaatsõnum';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Uus Privaatsõnum on saanud!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Leida kasutajanimi';
 $lang['SELECT_USERNAME'] = 'Valige Kasutajanimi';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privaatseid';
 $lang['REGISTERED'] = 'Registreeritud';
 $lang['ADMINISTRATORS'] = 'Administraatoritel';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'KÕIK';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAATSEID';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Laiendamine Rühma %s juba olemas'; // replace
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Hallata Eri Kategooriad';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Siin saab seadistada Spetsiaalsed Kategooriad. Saate seadistada Spetsiaalsed Parameetrid ja Tingimused Erilist Categorys määratud Laiendamise Nimel.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Seaded Erilist Kategooria: Pildid';
 $lang['SETTINGS_CAT_FLASH'] = 'Seaded Erilist Kategooria: Flash-Faile';
 $lang['DISPLAY_INLINED'] = 'Piltide Kuvamine Inline';
