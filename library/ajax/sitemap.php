@@ -32,7 +32,7 @@ switch ($mode) {
             $map->createSitemap();
         }
 
-        $map_link = make_url('sitemap/sitemap.xml');
+        $map_link = make_url(hide_bb_path(SITEMAP_DIR . '/sitemap.xml'));
 
         foreach ($bb_cfg['sitemap_sending'] as $source_name => $source_link) {
             if ($map->sendSitemap($source_link, $map_link)) {

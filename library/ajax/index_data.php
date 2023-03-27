@@ -23,11 +23,13 @@ switch ($mode) {
             'stats',
         ));
 
+        $users = [];
+
         if ($stats['birthday_week_list']) {
             foreach ($stats['birthday_week_list'] as $week) {
-                $html[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
+                $users[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
             }
-            $html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(', ', $html));
+            $html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(", ", $users));
         } else {
             $html = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
         }
@@ -39,11 +41,13 @@ switch ($mode) {
             'stats',
         ));
 
+        $users = [];
+
         if ($stats['birthday_today_list']) {
             foreach ($stats['birthday_today_list'] as $today) {
-                $html[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
+                $users[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
             }
-            $html = $lang['BIRTHDAY_TODAY'] . implode(', ', $html);
+            $html = $lang['BIRTHDAY_TODAY'] . implode(", ", $users);
         } else {
             $html = $lang['NOBIRTHDAY_TODAY'];
         }
