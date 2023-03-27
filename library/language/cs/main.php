@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Odeslání nové soukromé zprávy';
 $lang['SEND_A_REPLY'] = 'Odpověď na soukromou zprávu';
 $lang['EDIT_MESSAGE'] = 'Edit soukromou zprávu';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nová Soukromá Zpráva byla doručena!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Najít uživatelské jméno';
 $lang['SELECT_USERNAME'] = 'Vyberte uživatelské Jméno';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Soukromé';
 $lang['REGISTERED'] = 'Registrován';
 $lang['ADMINISTRATORS'] = 'Správci';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'VŠECHNY';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'SOUKROMÉ';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Rozšíření Skupiny %s již existují'; // r
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Správa Zvláštní Kategorie';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Zde si můžete nastavit Zvláštní Kategorie. Můžete nastavit Speciální Parametry a Podmínky pro Speciální Categorys přiřazeny k Rozšíření Skupiny.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Nastavení pro Speciální Kategorie: Obrázky';
 $lang['SETTINGS_CAT_FLASH'] = 'Nastavení pro Speciální Kategorie: Flash Soubory';
 $lang['DISPLAY_INLINED'] = 'Zobrazit Obrázky Vloženy';
