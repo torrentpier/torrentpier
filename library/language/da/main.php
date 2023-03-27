@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Send en privat besked';
 $lang['SEND_A_REPLY'] = 'Besvare en privat besked';
 $lang['EDIT_MESSAGE'] = 'Rediger privat besked';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Ny Privat Besked, du har modtaget!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'At finde et brugernavn';
 $lang['SELECT_USERNAME'] = 'Vælg et Brugernavn';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Private';
 $lang['REGISTERED'] = 'Registreret';
 $lang['ADMINISTRATORS'] = 'Administratorer';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALLE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Udvidelse Gruppe %s, findes allerede'; // repl
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Håndtere Specielle Kategorier';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Her kan du konfigurere de Særlige Kategorier. Du kan oprette Særlige Parametre og Vilkår for Særlige Kategorier, der er tildelt til en Udvidelse Gruppe.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Indstillinger for Særlige Kategori: Billeder';
 $lang['SETTINGS_CAT_FLASH'] = 'Indstillinger for Særlige Kategori: Flash Filer';
 $lang['DISPLAY_INLINED'] = 'Vise Billeder Inlined';
