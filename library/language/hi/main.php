@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'एक नया निजी संदेश भ
 $lang['SEND_A_REPLY'] = 'एक निजी संदेश का जवाब दें';
 $lang['EDIT_MESSAGE'] = 'निजी संदेश संपादित करें';
 
-$lang['NOTIFICATION_SUBJECT'] = 'नया निजी संदेश प्राप्त हुआ है!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'एक उपयोगकर्ता नाम खोजें';
 $lang['SELECT_USERNAME'] = 'एक उपयोगकर्ता नाम चुनें';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'निजी';
 $lang['REGISTERED'] = 'दर्ज कराई';
 $lang['ADMINISTRATORS'] = 'व्यवस्थापकों';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'सब';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'निजी';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'विस्तार समूह %s पह�
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'विशेष श्रेणियाँ प्रबंधित करें';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'यहां आप विशेष श्रेणियाँ कॉन्फ़िगर कर सकते हैं। आप एक एक्सटेंशन समूह को निर्दिष्ट विशेष श्रेणी के लिए विशेष पैरामीटर और स्थितियां सेट कर सकते हैं।';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'विशेष श्रेणी के लिए सेटिंग्स: छवियाँ';
 $lang['SETTINGS_CAT_FLASH'] = 'विशेष श्रेणी के लिए सेटिंग्स: फ्लैश फ़ाइलें';
 $lang['DISPLAY_INLINED'] = 'प्रदर्शित चित्र इनलाइन';
