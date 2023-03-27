@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Lähetä uusi yksityinen viesti';
 $lang['SEND_A_REPLY'] = 'Vastaus yksityiseen viestiin';
 $lang['EDIT_MESSAGE'] = 'Edit yksityinen viesti';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Uusi Yksityinen Viesti on otettu vastaan!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Etsi käyttäjätunnus';
 $lang['SELECT_USERNAME'] = 'Valitse Käyttäjätunnus';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Yksityinen';
 $lang['REGISTERED'] = 'Rekisteröity';
 $lang['ADMINISTRATORS'] = 'Ylläpitäjät';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'KAIKKI';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'YKSITYINEN';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Laajennus Ryhmä %s jo olemassa'; // replace %
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Hallitse Erityistä Luokat';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Täällä voit määrittää Erityisiä Luokkia. Voit määrittää Erityiset Parametrit ja Edellytykset Erityinen Luokat määritetty Laajennus Ryhmä.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Asetukset Special Luokka: Kuvat';
 $lang['SETTINGS_CAT_FLASH'] = 'Asetukset Special Category: Flash-Tiedostoja';
 $lang['DISPLAY_INLINED'] = 'Näyttää Kuvien Sisältöön';
