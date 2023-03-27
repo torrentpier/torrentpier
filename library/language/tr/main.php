@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Yeni özel mesaj gönder';
 $lang['SEND_A_REPLY'] = 'Cevap özel mesaj için';
 $lang['EDIT_MESSAGE'] = 'Edit özel mesaj';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Yeni Özel Mesaj alındı!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Bir kullanıcı adı bul';
 $lang['SELECT_USERNAME'] = 'Bir Kullanıcı adı seçin';
@@ -1690,7 +1690,7 @@ $lang['PRIVATE'] = 'Özel';
 $lang['REGISTERED'] = 'Kayıtlı';
 $lang['ADMINISTRATORS'] = 'Yöneticiler';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TÜM';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ÖZEL';
@@ -2159,7 +2159,7 @@ $lang['EXTENSION_GROUP_EXIST'] = '%s Uzantısı Grup zaten var'; // replace %s w
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Özel Kategorileri Yönet';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Burada Özel Kategori yapılandırabilirsiniz. Uzantısı bir Grup için atanmış Özel Categorys için Özel Parametreler ve Koşullar ayarlayabilirsiniz.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Özel Kategori için ayarlar: Görüntüler';
 $lang['SETTINGS_CAT_FLASH'] = 'Özel Kategori ayarları: Flash Dosyaları';
 $lang['DISPLAY_INLINED'] = 'Ekran Görüntüleri İnlined';
