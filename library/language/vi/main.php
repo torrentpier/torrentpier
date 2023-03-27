@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Gửi một tin nhắn mới';
 $lang['SEND_A_REPLY'] = 'Trả lời tin nhắn';
 $lang['EDIT_MESSAGE'] = 'Chỉnh sửa tin nhắn';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Tin Nhắn mới đã được nhận được!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Tìm một tên';
 $lang['SELECT_USERNAME'] = 'Chọn một Tên';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Riêng tư';
 $lang['REGISTERED'] = 'Đăng ký';
 $lang['ADMINISTRATORS'] = 'Quản trị';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Tất CẢ';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'RIÊNG tư';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Mở Rộng, %s đã tồn tại'; // replace 
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Quản Lý Loại Đặc Biệt';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Ở đây anh có thể đặt các Loại Đặc biệt. Bạn có thể thiết lập Số Đặc biệt và điều Kiện cho sự Đặc biệt. được giao cho một phần mở Rộng.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Cài đặt cho Loại Đặc biệt: Hình ảnh';
 $lang['SETTINGS_CAT_FLASH'] = 'Cài đặt cho Loại Đặc biệt: Flash các Tập tin';
 $lang['DISPLAY_INLINED'] = 'Màn Hình Ảnh Inlined';
