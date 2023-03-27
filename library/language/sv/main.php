@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Skicka ett privat meddelande';
 $lang['SEND_A_REPLY'] = 'Svara på ett privat meddelande';
 $lang['EDIT_MESSAGE'] = 'Redigera privat meddelande';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nytt Privat Meddelande har fått!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Hitta ett användarnamn';
 $lang['SELECT_USERNAME'] = 'Välj ett Användarnamn';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privat';
 $lang['REGISTERED'] = 'Registrerade';
 $lang['ADMINISTRATORS'] = 'Administratörer';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALLA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAT';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Förlängning Grupp %s redan finns'; // replac
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Hantera Speciella Kategorier';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Här kan du konfigurera Särskilda Kategorier. Du kan ställa in Särskilda Parametrar och Villkor för Särskilda Kategorier som är tilldelade till en Förlängning Grupp.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Inställningar för Speciella Kategori: Bilder';
 $lang['SETTINGS_CAT_FLASH'] = 'Inställningar för Speciella Kategori: Flash-Filer';
 $lang['DISPLAY_INLINED'] = 'Visa Bilder Inlined';
