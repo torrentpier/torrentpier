@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Στείλτε ένα προσωπικό μήνυ
 $lang['SEND_A_REPLY'] = 'Απαντήσετε σε ένα προσωπικό μήνυμα';
 $lang['EDIT_MESSAGE'] = 'Edit προσωπικό μήνυμα';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Το νέο προσωπικό Μήνυμα που έχει λάβει!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Βρείτε ένα όνομα χρήστη';
 $lang['SELECT_USERNAME'] = 'Επιλέξτε ένα όνομα Χρήστη';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Ιδιωτικό';
 $lang['REGISTERED'] = 'Εγγεγραμμένοι';
 $lang['ADMINISTRATORS'] = 'Οι διαχειριστές';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ΌΛΑ';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ΙΔΙΩΤΙΚΌ';
@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Η Επέκταση του Ομίλου %s υ�
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Διαχείριση Ειδικών Κατηγοριών';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Εδώ μπορείτε να ρυθμίσετε τις Ειδικές Κατηγορίες. Μπορείτε να ορίσετε Ειδικές Παραμέτρους και τις Συνθήκες για τις Ειδικές κατηγορίες ξενοδοχείων ανατεθεί σε μια Επέκταση του Ομίλου.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Ρυθμίσεις για την Ειδική Κατηγορία: Εικόνες';
 $lang['SETTINGS_CAT_FLASH'] = 'Ρυθμίσεις για την Ειδική Κατηγορία: τα Αρχεία Flash';
 $lang['DISPLAY_INLINED'] = 'Επίδειξη Εικόνες Inlined';
