@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Laster...';
 $lang['JUMPBOX_TITLE'] = 'Velg forum';
 $lang['DISPLAYING_OPTIONS'] = 'Vise valg';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Registrerte Brukere:';
 $lang['BROWSING_FORUM'] = 'Brukere som leser i dette forumet:';
