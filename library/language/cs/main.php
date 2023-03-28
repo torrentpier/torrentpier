@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Načítání...';
 $lang['JUMPBOX_TITLE'] = 'Vyberte fórum';
 $lang['DISPLAYING_OPTIONS'] = 'Zobrazení možnosti';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Registrovaní Uživatelé:';
 $lang['BROWSING_FORUM'] = 'Uživatelé procházející toto fórum:';
