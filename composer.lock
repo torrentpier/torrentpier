@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0a31557a48a379fcaf7e44571398d48",
+    "content-hash": "476e68bd0e844794d1f21d771e06ebad",
     "packages": [
         {
             "name": "bugsnag/bugsnag",
@@ -905,66 +905,6 @@
             "time": "2023-03-09T13:19:02+00:00"
         },
         {
-            "name": "longman/ip-tools",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/akalongman/php-ip-tools.git",
-                "reference": "6c050dfbf91811d14b9b3aa31fb7116eac0f0a18"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/akalongman/php-ip-tools/zipball/6c050dfbf91811d14b9b3aa31fb7116eac0f0a18",
-                "reference": "6c050dfbf91811d14b9b3aa31fb7116eac0f0a18",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "~2.1",
-                "phpunit/phpunit": "~4.1",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Longman\\IPTools\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Avtandil Kikabidze aka LONGMAN",
-                    "email": "akalongman@gmail.com",
-                    "homepage": "https://longman.me",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP IP Tools for manipulation with IPv4 and IPv6",
-            "homepage": "https://github.com/akalongman/php-ip-tools",
-            "keywords": [
-                "IP",
-                "Match",
-                "compare",
-                "ipv4",
-                "ipv6",
-                "mask",
-                "subnet",
-                "tools",
-                "utilities"
-            ],
-            "support": {
-                "issues": "https://github.com/akalongman/php-ip-tools/issues",
-                "source": "https://github.com/akalongman/php-ip-tools"
-            },
-            "time": "2016-10-23T20:08:46+00:00"
-        },
-        {
             "name": "monolog/monolog",
             "version": "2.9.1",
             "source": {
@@ -1547,6 +1487,61 @@
                 "source": "https://github.com/rchouinard/bencode/tree/master"
             },
             "time": "2014-01-13T00:34:03+00:00"
+        },
+        {
+            "name": "s1lentium/iptools",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/S1lentium/IPTools.git",
+                "reference": "f6f8ab6132ca7443bd7cced1681f5066d725fd5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/S1lentium/IPTools/zipball/f6f8ab6132ca7443bd7cced1681f5066d725fd5f",
+                "reference": "f6f8ab6132ca7443bd7cced1681f5066d725fd5f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "IPTools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Safarov Alisher",
+                    "email": "alisher.safarov@outlook.com",
+                    "homepage": "https://github.com/S1lentium"
+                }
+            ],
+            "description": "PHP Library for manipulating network addresses (IPv4 and IPv6)",
+            "keywords": [
+                "IP",
+                "IP-Tools",
+                "cidr",
+                "ipv4",
+                "ipv6",
+                "network",
+                "subnet"
+            ],
+            "support": {
+                "issues": "https://github.com/S1lentium/IPTools/issues",
+                "source": "https://github.com/S1lentium/IPTools/tree/master"
+            },
+            "time": "2018-09-19T06:15:53+00:00"
         },
         {
             "name": "samdark/sitemap",

@@ -9,7 +9,7 @@
 
 namespace TorrentPier\Helpers;
 
-use Longman\IPTools\Ip;
+use IPTools\IP;
 
 use function strlen;
 
@@ -22,74 +22,36 @@ class IPHelper
     /**
      * Decode original IP
      *
-     * @param $ip
+     * @param string $ip
      *
      * @return string
      */
-    public static function encodeIP($ip): string
+    public static function encodeIP(string $ip): string
     {
-        return Ip::ip2long($ip);
+        return IP::parse($ip)->toLong();
     }
 
     /**
      * Recovery of decoded IP
      *
-     * @param $ip
+     * @param string|int $ip
      *
      * @return string
      */
     public static function decodeIP($ip): string
     {
-        return Ip::long2ip($ip);
+        return (string)IP::parseLong((int)$ip);
     }
 
     /**
-     * Checking IP for validity
+     * Get IP version
      *
-     * @param $ip
-     *
-     * @return bool
+     * @param string $ip
+     * @return string
      */
-    public static function isValid($ip): bool
+    public static function getVersion(string $ip): string
     {
-        return Ip::isValid($ip);
-    }
-
-    /**
-     * Checking if it is a local IP
-     *
-     * @param $ip
-     *
-     * @return bool
-     */
-    public static function isLocal($ip): bool
-    {
-        return IP::isLocal($ip);
-    }
-
-    /**
-     * Checking if it is a remote IP
-     *
-     * @param $ip
-     *
-     * @return bool
-     */
-    public static function isRemote($ip): bool
-    {
-        return IP::isRemote($ip);
-    }
-
-    /**
-     * Compare IP
-     *
-     * @param $ip
-     * @param $range
-     *
-     * @return bool
-     */
-    public static function compareIP($ip, $range): bool
-    {
-        return Ip::compare($ip, $range);
+        return IP::parse($ip)->getVersion();
     }
 
     /**
