@@ -118,6 +118,8 @@ $lang['LOADING'] = 'लोड हो रहा है...';
 $lang['JUMPBOX_TITLE'] = 'फ़ोरम चुनें';
 $lang['DISPLAYING_OPTIONS'] = 'प्रदर्शित विकल्प';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'पंजीकृत उपभोक्ता:';
 $lang['BROWSING_FORUM'] = 'उपयोगकर्ता इस मंच ब्राउज़िंग:';
