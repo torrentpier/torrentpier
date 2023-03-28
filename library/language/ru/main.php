@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Загружается…';
 $lang['JUMPBOX_TITLE'] = 'Выберите форум для перехода';
 $lang['DISPLAYING_OPTIONS'] = 'Опции показа';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Зарегистрированные пользователи:';
 $lang['BROWSING_FORUM'] = 'Сейчас этот форум просматривают:';
