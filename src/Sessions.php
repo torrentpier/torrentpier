@@ -44,12 +44,12 @@ class Sessions
     /**
      * Set userdata to cache
      *
-     * @param array $userdata
+     * @param array|null $userdata
      * @param bool $force
      *
      * @return bool
      */
-    public static function cache_set_userdata(array $userdata, bool $force = false): bool
+    public static function cache_set_userdata(?array $userdata, bool $force = false): bool
     {
         global $bb_cfg;
 
@@ -97,11 +97,11 @@ class Sessions
     /**
      * Update userdata in cache
      *
-     * @param array $userdata
+     * @param array|null $userdata
      *
      * @return bool
      */
-    public static function cache_update_userdata(array $userdata): bool
+    public static function cache_update_userdata(?array $userdata): bool
     {
         return self::cache_set_userdata($userdata, true);
     }
