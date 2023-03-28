@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Betöltés...';
 $lang['JUMPBOX_TITLE'] = 'Válassza fórum';
 $lang['DISPLAYING_OPTIONS'] = 'Opciók megjelenítése';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Regisztrált Felhasználók:';
 $lang['BROWSING_FORUM'] = 'Jelenlévő fórumozók:';
