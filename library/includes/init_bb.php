@@ -379,10 +379,12 @@ function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
 }
 
 /**
+ * Makes URL from path
+ *
  * @param string $path
  * @return string
  */
-function make_url($path = '')
+function make_url(string $path = ''): string
 {
     return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
 }
@@ -390,7 +392,7 @@ function make_url($path = '')
 /**
  * Functions
  */
-require INC_DIR . '/functions.php';
+require_once INC_DIR . '/functions.php';
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
