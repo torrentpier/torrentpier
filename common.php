@@ -7,8 +7,6 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-use TorrentPier\Env;
-
 if (isset($_REQUEST['GLOBALS'])) {
     die();
 }
@@ -61,7 +59,7 @@ require_once __DIR__ . '/vendor/autoload.php';
  */
 function env(string $key, $default = null)
 {
-    return Env::get($key, $default);
+    return \TorrentPier\Env::get($key, $default);
 }
 
 // Get initial config
@@ -317,7 +315,13 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
     }
 }
 
-function hide_bb_path($path)
+/**
+ * Hide BB_PATH
+ *
+ * @param string $path
+ * @return string
+ */
+function hide_bb_path(string $path): string
 {
     return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
@@ -337,11 +341,6 @@ function sys($param)
         default:
             trigger_error("invalid param: $param", E_USER_ERROR);
     }
-}
-
-function ver_compare($version1, $operator, $version2)
-{
-    return version_compare($version1, $version2, $operator);
 }
 
 function dbg_log($str, $file)
@@ -394,7 +393,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 
 // Board or tracker init
 if (!defined('IN_TRACKER')) {
-    require INC_DIR . '/init_bb.php';
+    require_once INC_DIR . '/init_bb.php';
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::encodeIP($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
