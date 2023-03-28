@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Ընտրեք համաժողովը';
 $lang['DISPLAYING_OPTIONS'] = 'Ցուցադրել պարամետրերի';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Գրանցված Օգտվողները:';
 $lang['BROWSING_FORUM'] = 'Օգտագործողները, ովքեր դիտել այս համաժողովը:';
