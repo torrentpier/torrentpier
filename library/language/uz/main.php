@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Loading ...';
 $lang['JUMPBOX_TITLE'] = 'tanlang forum';
 $lang['DISPLAYING_OPTIONS'] = 'variantlarni ko\'rish';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Ro\'yxatdan o\'tgan foydalanuvchilar:';
 $lang['BROWSING_FORUM'] = 'Bu forumni ko\'rayotgan foydalanuvchilar:';
