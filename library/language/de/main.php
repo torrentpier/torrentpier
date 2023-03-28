@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Wird geladen...';
 $lang['JUMPBOX_TITLE'] = 'Wählen Sie forum';
 $lang['DISPLAYING_OPTIONS'] = 'Anzeigeoptionen';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Registrierte Benutzer:';
 $lang['BROWSING_FORUM'] = 'Mitglieder in diesem forum:';
