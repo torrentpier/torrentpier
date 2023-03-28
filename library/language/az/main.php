@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Yükləmə...';
 $lang['JUMPBOX_TITLE'] = 'Seçin forum';
 $lang['DISPLAYING_OPTIONS'] = 'Ekran parametrləri';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Qeydiyyata Alınmış İstifadəçilər:';
 $lang['BROWSING_FORUM'] = 'İstifadəçilər просматривающие bu forum:';
