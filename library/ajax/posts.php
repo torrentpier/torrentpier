@@ -234,7 +234,7 @@ switch ($this->request['type']) {
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
         if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
-                if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval']) {
+                if ((TIMENOW - $row['last_post_time']) < $bb_cfg['flood_interval']) {
                     $this->ajax_die($lang['FLOOD_ERROR']);
                 }
             }
