@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Loading ...';
 $lang['JUMPBOX_TITLE'] = 'Интихоб кунед форум';
 $lang['DISPLAYING_OPTIONS'] = 'намоиши имконоти';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Истифодабарандагон дар Сабтшуда:';
 $lang['BROWSING_FORUM'] = 'Садо форум:';
