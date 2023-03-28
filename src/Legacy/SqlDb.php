@@ -957,6 +957,8 @@ class SqlDb
      */
     public function explain($mode, $html_table = '', $row = '')
     {
+        global $lang;
+
         $query = str_compact($this->cur_query);
         // remove comments
         $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
@@ -998,7 +1000,7 @@ class SqlDb
 				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
 				<tr>
 					<th style="height: 22px; cursor: pointer;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.4f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
-					<th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard">' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
+					<th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px; cursor: pointer;" align="right" title="' . $lang['COPY_TO_CLIPBOARD'] . '">' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>

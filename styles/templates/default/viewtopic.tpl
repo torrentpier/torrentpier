@@ -140,7 +140,6 @@ ajax.callback.post_mod_comment = function(data) {
 };
 </script>
 <a style="cursor: help; color: #800000;" title="{L_EDIT_TOPIC_TITLE}" onclick="edit_topic_title('edit'); return false" href="#">&para;</a>
-<a style="color: #800000;" data-clipboard-text="{FULL_URL}{U_VIEW_TOPIC}" class="copyElement clickable" title="Copy to clipboard">&#8594;</a>
 
 <div id="tt-edit-tpl" style="display: none;">
 	<div class="tt-edit" style="padding: 4px;">

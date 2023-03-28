@@ -150,6 +150,8 @@ class Dev
      */
     private static function get_sql_log_html(object $db_obj, string $log_name): string
     {
+        global $lang;
+
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
@@ -162,7 +164,7 @@ class Dev
             $log .= ''
                 . '<div onmouseout="$(this).removeClass(\'sqlHover\');" onmouseover="$(this).addClass(\'sqlHover\');" onclick="$(this).toggleClass(\'sqlHighlight\');" class="sqlLogRow" title="' . $info . '">'
                 . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
-                . '<span class="copyElement" data-clipboard-target="#' . $id . '" title="Copy to clipboard" style="color: gray; letter-spacing: -1px;">' . $perc . '</span>'
+                . '<span class="copyElement" data-clipboard-target="#' . $id . '" title="' . $lang['COPY_TO_CLIPBOARD'] . '" style="color: gray; letter-spacing: -1px;">' . $perc . '</span>'
                 . ' '
                 . '<span style="letter-spacing: 0;" id="' . $id . '">' . $sql . '</span>'
                 . '<span style="color: gray"> # ' . $info . ' </span>'
