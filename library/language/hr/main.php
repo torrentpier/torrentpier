@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Učitavanje...';
 $lang['JUMPBOX_TITLE'] = 'Odaberite forum';
 $lang['DISPLAYING_OPTIONS'] = 'Prikaz parametara';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Registrirani Korisnici:';
 $lang['BROWSING_FORUM'] = 'Korisnici koji su pregledali ovaj forum:';
