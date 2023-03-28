@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Laai ...';
 $lang['JUMPBOX_TITLE'] = 'Kies forum';
 $lang['DISPLAYING_OPTIONS'] = 'Wys opsies';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Geregistreerde gebruikers:';
 $lang['BROWSING_FORUM'] = 'Gebruikers op hierdie forum:';
