@@ -118,6 +118,8 @@ $lang['LOADING'] = 'Loading ...';
 $lang['JUMPBOX_TITLE'] = 'форум таңдаңыз';
 $lang['DISPLAYING_OPTIONS'] = 'опцияларын көрсету';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Тіркелген қолданушылар:';
 $lang['BROWSING_FORUM'] = 'Қазір бұл форум қарап:';
