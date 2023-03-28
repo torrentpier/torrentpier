@@ -118,6 +118,8 @@ $lang['LOADING'] = '読み込み中...';
 $lang['JUMPBOX_TITLE'] = '選択フォーラム';
 $lang['DISPLAYING_OPTIONS'] = '表示オプション';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = '登録利用者:';
 $lang['BROWSING_FORUM'] = '閲覧ユーザーのこのフォーラム:';
