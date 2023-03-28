@@ -118,6 +118,8 @@ $lang['LOADING'] = 'กำลังโหลด...';
 $lang['JUMPBOX_TITLE'] = 'เลือกชุ';
 $lang['DISPLAYING_OPTIONS'] = 'แสดงตัวเลือก';
 
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'จดทะเบียนผู้ใช้:';
 $lang['BROWSING_FORUM'] = 'ใช้การเรียกดูนี่ชุ:';
