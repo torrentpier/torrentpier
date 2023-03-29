@@ -40,7 +40,7 @@
     "guzzlehttp/psr7": "^2.4",
     "monolog/monolog": "^2.9",
     "rych/bencode": "v1.0.0",
-    "s1lentium/iptools": "1.*",
+    "s1lentium/iptools": "v1.1.1",
     "samdark/sitemap": "2.4.0",
     "symfony/mailer": "^5.4",
     "symfony/polyfill": "v1.27.0",

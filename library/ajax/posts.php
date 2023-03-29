@@ -41,7 +41,7 @@ if (isset($this->request['post_id'])) {
 				AND f.forum_id = t.forum_id
 			LIMIT 1");
     if (!$post) {
-        $this->ajax_die('not post');
+        $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
     }
 
     $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
