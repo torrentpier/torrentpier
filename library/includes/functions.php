@@ -1196,7 +1196,7 @@ function birthday_age($date)
 {
     global $bb_cfg;
     if (!$date) {
-        return;
+        return '';
     }
 
     $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
