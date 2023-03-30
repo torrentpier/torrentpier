@@ -141,7 +141,7 @@ class Emailer
         /** Prepare message */
         if ($bb_cfg['emailer']['smtp']['enabled']) {
             if (!empty($bb_cfg['emailer']['smtp']['host'])) {
-                if (empty($bb_cfg['emailer']['ssl_type'])) {
+                if (empty($bb_cfg['emailer']['smtp']['ssl_type'])) {
                     /** @var EsmtpTransport $transport external SMTP without SSL */
                     $transport = (new EsmtpTransport(
                         $bb_cfg['emailer']['smtp']['host'],
@@ -154,7 +154,7 @@ class Emailer
                     $transport = (new EsmtpTransport(
                         $bb_cfg['emailer']['smtp']['host'],
                         $bb_cfg['emailer']['smtp']['port'],
-                        $bb_cfg['emailer']['ssl_type']
+                        $bb_cfg['emailer']['smtp']['ssl_type']
                     ))
                         ->setUsername($bb_cfg['emailer']['smtp']['username'])
                         ->setPassword($bb_cfg['emailer']['smtp']['password']);

@@ -381,8 +381,8 @@ $bb_cfg['emailer'] = [
         'port' => 25, // SMTP server port
         'username' => '', // SMTP username (if server requires it)
         'password' => '', // SMTP password (if server requires it)
+        'ssl_type' => '', // SMTP ssl type (ssl or tls)
     ],
-    'ssl_type' => '', // SMTP ssl type (ssl or tls)
 ];
 $bb_cfg['extended_email_validation'] = true; // DNS & RFC checks for entered email addresses
 
