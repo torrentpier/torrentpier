@@ -8,6 +8,7 @@
 <p align="center">
   <a href="https://github.com/torrentpier/torrentpier/blob/master/LICENSE"><img src="https://img.shields.io/github/license/torrentpier/torrentpier" alt="License"></a>
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/stars/torrentpier/torrentpier" alt="Stars Packagist"></a>
+  <a href="https://github.com/torrentpier/torrentpier/actions"><img src="https://img.shields.io/github/actions/workflow/status/torrentpier/torrentpier/phpmd.yml" alt="Build status"></a>
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/dt/torrentpier/torrentpier" alt="Downloads"></a>
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/v/torrentpier/torrentpier" alt="Version"></a>
   <a href="https://github.com/torrentpier/torrentpier/releases"><img src="https://img.shields.io/github/release-date/torrentpier/torrentpier" alt="Last release"></a>
@@ -29,7 +30,7 @@ and go from there. The documentation will be translated into english in the near
 
 ## Supported versions
 
-Current major version with full support is v2.4
+Current major version with full support is v2.4.
 
 |                                 Version                                  |   Released    |  EOL   | Only critical bug fixes | Full |
 |:------------------------------------------------------------------------:|:-------------:|:------:|:-----------------------:|:----:|
@@ -100,11 +101,24 @@ on his repository or in [this thread](https://torrentpier.com/threads/26078/) on
 
 Documentation for TorrentPier can be found on the [TorrentPier docs website](https://docs.torrentpier.com).
 
-## Contributing
+## Contributing / Contributors
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for 
 submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
 these requirements. Just send it.
+
+<a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
+## Sponsoring
+
+Support this project by becoming a sponsor or a backer. 
+
+[![OpenCollective sponsors](https://opencollective.com/torrentpier/sponsors/badge.svg)](https://opencollective.com/torrentpier)
+[![OpenCollective backers](https://opencollective.com/torrentpier/backers/badge.svg)](https://opencollective.com/torrentpier)
 
 ## Versioning
 
