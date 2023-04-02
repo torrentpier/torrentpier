@@ -143,7 +143,7 @@ if ($tor_reged && $tor_info) {
 
     // Magnet link
     $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$bt_user_id . " LIMIT 1");
-    $tor_magnet = create_magnet($tor_info['info_hash'], $passkey['auth_key']);
+    $tor_magnet = create_magnet($tor_info['info_hash'], ($passkey['auth_key'] ?? ''));
 
     // ratio limits
     $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
