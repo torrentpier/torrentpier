@@ -1861,16 +1861,17 @@ function pad_with_space($str)
  *
  * @return string
  */
-function create_magnet($infohash, $auth_key)
+function create_magnet($infohash, $auth_key): string
 {
     global $bb_cfg, $images, $lang, $userdata;
 
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
-        $passkey = '';
+        $passkey = false;
     } elseif (empty($auth_key)) {
         if (!$passkey = \TorrentPier\Legacy\Torrent::generate_passkey($userdata['user_id'], true)) {
             bb_die($lang['PASSKEY_ERR_EMPTY']);
         }
+        $auth_key = $passkey;
     } else {
         $passkey = $auth_key;
     }
