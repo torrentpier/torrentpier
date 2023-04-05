@@ -87,8 +87,8 @@ $template->assign_vars(array(
     'EMAIL' => $email,
     'WWW' => $profiledata['user_website'],
     'ICQ' => $profiledata['user_icq'],
-    'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
-    'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
+    'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
+    'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
 
     'USER_ACTIVE' => $profiledata['user_active'],
     'LOCATION' => $profiledata['user_from'],
