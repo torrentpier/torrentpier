@@ -1109,7 +1109,7 @@ CREATE TABLE IF NOT EXISTS `bb_search_rebuild`
 DROP TABLE IF EXISTS `bb_search_results`;
 CREATE TABLE IF NOT EXISTS `bb_search_results`
 (
-  `session_id`      CHAR(20)
+  `session_id`      CHAR(255)
                       CHARACTER SET utf8
                         COLLATE utf8_bin NOT NULL DEFAULT '',
   `search_type`     TINYINT(4)           NOT NULL DEFAULT '0',
@@ -1134,7 +1134,7 @@ CREATE TABLE IF NOT EXISTS `bb_search_results`
 DROP TABLE IF EXISTS `bb_sessions`;
 CREATE TABLE IF NOT EXISTS `bb_sessions`
 (
-  `session_id`        CHAR(20)
+  `session_id`        CHAR(255)
                         CHARACTER SET utf8
                           COLLATE utf8_bin NOT NULL DEFAULT '',
   `session_user_id`   MEDIUMINT(8)         NOT NULL DEFAULT '0',
@@ -1320,8 +1320,8 @@ CREATE TABLE IF NOT EXISTS `bb_users`
 (
   `user_id`             MEDIUMINT(8)          NOT NULL AUTO_INCREMENT,
   `user_active`         TINYINT(1)            NOT NULL DEFAULT '1',
-  `username`            VARCHAR(25)           NOT NULL DEFAULT '',
-  `user_password`       VARCHAR(32)
+  `username`            VARCHAR(255)          NOT NULL DEFAULT '',
+  `user_password`       VARCHAR(255)
                           CHARACTER SET utf8
                             COLLATE utf8_bin  NOT NULL DEFAULT '',
   `user_session_time`   INT(11)               NOT NULL DEFAULT '0',
@@ -1350,8 +1350,8 @@ CREATE TABLE IF NOT EXISTS `bb_users`
   `user_sig`            TEXT                  NOT NULL DEFAULT '',
   `user_occ`            VARCHAR(100)          NOT NULL DEFAULT '',
   `user_interests`      VARCHAR(255)          NOT NULL DEFAULT '',
-  `user_actkey`         VARCHAR(32)           NOT NULL DEFAULT '',
-  `user_newpasswd`      VARCHAR(32)           NOT NULL DEFAULT '',
+  `user_actkey`         VARCHAR(255)          NOT NULL DEFAULT '',
+  `user_newpasswd`      VARCHAR(255)          NOT NULL DEFAULT '',
   `autologin_id`        VARCHAR(255)
                           CHARACTER SET utf8
                             COLLATE utf8_bin  NOT NULL DEFAULT '',
