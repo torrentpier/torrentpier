@@ -143,25 +143,21 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
         // Reg users
         if (count($onlinerow_reg)) {
-            $reg_userid_ary = array();
+            $users_count = 0;
 
             for ($i = 0, $iMax = count($onlinerow_reg); $i < $iMax; $i++) {
-                if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary)) {
-                    if ($onlinerow_reg[$i]['user_id'] == $userdata['user_id'] || !bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'user_viewonline')) {
-                        $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
-                        $row_class = 'row1';
-                        $reg_ip = \TorrentPier\Helpers\IPHelper::decodeIP($onlinerow_reg[$i]['session_ip']);
+                $users_count++;
+                $row_class = 'row1';
+                $reg_ip = \TorrentPier\Helpers\IPHelper::decodeIP($onlinerow_reg[$i]['session_ip']);
 
-                        $template->assign_block_vars('reg_user_row', array(
-                            'ROW_CLASS' => $row_class,
-                            'USER' => profile_url($onlinerow_reg[$i]),
-                            'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
-                            'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
-                            'IP_ADDRESS' => $reg_ip,
-                            'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
-                        ));
-                    }
-                }
+                $template->assign_block_vars('reg_user_row', array(
+                    'ROW_CLASS' => $row_class,
+                    'USER' => profile_url($onlinerow_reg[$i]),
+                    'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
+                    'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
+                    'IP_ADDRESS' => $reg_ip,
+                    'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
+                ));
             }
         }
 
@@ -170,7 +166,6 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             $guest_users = 0;
 
             for ($i = 0, $iMax = count($onlinerow_guest); $i < $iMax; $i++) {
-                $guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
                 $guest_users++;
                 $row_class = 'row2';
                 $guest_ip = \TorrentPier\Helpers\IPHelper::decodeIP($onlinerow_guest[$i]['session_ip']);
