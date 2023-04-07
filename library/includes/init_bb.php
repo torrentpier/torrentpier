@@ -145,7 +145,6 @@ define('SEARCH_TYPE_TRACKER', 1);
 // Ajax error codes
 define('E_AJAX_GENERAL_ERROR', 1000);
 define('E_AJAX_NEED_LOGIN', 1001);
-define('E_AJAX_NOT_REQUEST', 1002);
 
 // Private messaging
 define('PRIVMSGS_READ_MAIL', 0);

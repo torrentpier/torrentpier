@@ -75,13 +75,10 @@ class Ajax
         // Check that requested action is valid
         $action = $this->action;
 
-        // Action params
+        // Actions params array
         $action_params = null;
 
-        if (!IsHelper::isAJAX()) {
-            $this->ajax_die('Not AJAX request', E_AJAX_NOT_REQUEST);
-        }
-
+        // Actions check
         if (!$action) {
             $this->ajax_die('no action specified');
         } elseif (!$action_params =& $this->valid_actions[$action]) {
