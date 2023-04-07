@@ -32,16 +32,6 @@ class IsHelper
     }
 
     /**
-     * Return true if ajax request
-     *
-     * @return bool
-     */
-    public static function isAJAX(): bool
-    {
-        return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
-    }
-
-    /**
      * Return true if server have SSL
      *
      * @return bool
