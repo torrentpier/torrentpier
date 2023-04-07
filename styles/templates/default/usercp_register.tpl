@@ -80,7 +80,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 	<td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <br /><h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
 	<td>
 		<input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value="" />&nbsp;
-		<span id="autocomplete" title="{L_AUTOCOMPLETE}">&#9668;</span> &nbsp;<i class="med">{L_PASSWORD_LONG}</i>
+		<span id="autocomplete" title="{L_AUTOCOMPLETE}">&#9668;</span> &nbsp;<i class="med">{PASSWORD_LONG}</i>
 	</td>
 </tr>
 <tr>
