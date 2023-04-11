@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profil anda telah diperbarui. Namun, anda t
 
 $lang['PASSWORD_MISMATCH'] = 'Kata sandi yang anda masukkan tidak cocok.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Saat ini sandi yang anda masukkan tidak sesuai dengan yang tersimpan di database.';
-$lang['PASSWORD_LONG'] = 'Kata sandi anda tidak boleh lebih dari 32 karakter.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Anda telah membuat terlalu banyak pendaftaran usaha. Silakan coba lagi nanti.';
 $lang['USERNAME_TAKEN'] = 'Maaf, tapi ini username sudah diambil.';
 $lang['USERNAME_INVALID'] = 'Maaf, tapi ini nama pengguna memiliki karakter yang tidak valid';
