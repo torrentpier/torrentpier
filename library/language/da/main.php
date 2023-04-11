@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Din profil er blevet opdateret. Du har dog 
 
 $lang['PASSWORD_MISMATCH'] = 'Adgangskoderne du indtastede passer ikke.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Den nuværende adgangskode, du leverede ikke svarer til dem, der er lagret i databasen.';
-$lang['PASSWORD_LONG'] = 'Din adgangskode må ikke være mere end 32 tegn.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Du har lavet alt for mange forsøg på registrering. Prøv venligst igen senere.';
 $lang['USERNAME_TAKEN'] = 'Undskyld, men dette brugernavn er allerede blevet taget.';
 $lang['USERNAME_INVALID'] = 'Undskyld, men det indeholder et ugyldigt tegn';
