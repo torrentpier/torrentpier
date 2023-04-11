@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'プロフィールを更新しました。 
 
 $lang['PASSWORD_MISMATCH'] = 'のパスワードの入力が一致しなかったためです。';
 $lang['CURRENT_PASSWORD_MISMATCH'] = '現在のパスワードのご提供と一致しないことをデータベースに格納されます。';
-$lang['PASSWORD_LONG'] = 'パスワードが必要以上32文字以内です。';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'いても多くの登録を試みます。 後ほど再度お試しください。.';
 $lang['USERNAME_TAKEN'] = '申し訳ございません、あなたのこのユーザ名はすでにする体制を整えています。';
 $lang['USERNAME_INVALID'] = '申し訳ございません、あなたのこのユーザ名が無効な文字';
