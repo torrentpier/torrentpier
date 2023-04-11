@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Om din profil har uppdaterats. Men du har �
 
 $lang['PASSWORD_MISMATCH'] = 'Lösenorden du angav matchar inte.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Den nuvarande lösenord du angav matchar inte att lagras i databasen.';
-$lang['PASSWORD_LONG'] = 'Ditt lösenord måste vara mer än 32 tecken.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Du har gjort alltför många registrering försök. Vänligen försök igen senare.';
 $lang['USERNAME_TAKEN'] = 'Ledsen, men detta användarnamn har redan vidtagits.';
 $lang['USERNAME_INVALID'] = 'Ledsen, men detta användarnamn innehåller ett ogiltigt tecken';
