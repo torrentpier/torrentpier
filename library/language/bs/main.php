@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Tvoj profil je vec popunjen. Međutim, prom
 
 $lang['PASSWORD_MISMATCH'] = 'Lozinke si ušao nije odgovarao.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Trenutne lozinke ti obezbedio ne odgovara da pohranjene u bazi podataka.';
-$lang['PASSWORD_LONG'] = 'Svoju šifru mora biti više od 32 likovi.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Napravio si previše registracija pokušava. Molim vas pokušajte kasnije.';
 $lang['USERNAME_TAKEN'] = 'Žao mi je, ali ovo korisničko ime je već zauzeto.';
 $lang['USERNAME_INVALID'] = 'Žao mi je, ali ovo korisničko ime sadrži invalid karakter';
