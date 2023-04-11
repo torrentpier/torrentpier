@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Teie profiili on uuendatud. Siiski, sul on 
 
 $lang['PASSWORD_MISMATCH'] = 'Paroolid sisestatud ei sobi.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Praeguse parooli esitatud ei sobi, et andmebaasi salvestatud.';
-$lang['PASSWORD_LONG'] = 'Teie salasõna peab olema mitte rohkem kui 32 tähemärki.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Te olete teinud liiga palju registreerimise katsed. Palun proovige hiljem uuesti.';
 $lang['USERNAME_TAKEN'] = 'Vabandust, aga see kasutajanimi on juba võetud.';
 $lang['USERNAME_INVALID'] = 'Vabandust, aga see kasutajanimi sisaldab kehtetu iseloom';
