@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'التشكيل الجانبي الخاص ب
 
 $lang['PASSWORD_MISMATCH'] = 'كلمات المرور التي أدخلتها لا تتطابق.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'كلمة المرور الحالية التي أدخلتها لا تتطابق مع تلك المخزنة في قاعدة البيانات.';
-$lang['PASSWORD_LONG'] = 'كلمة السر الخاصة بك يجب أن يكون هناك أكثر من 32 حرفا.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'كنت قد قدمت الكثير من تسجيل محاولات. يرجى المحاولة مرة أخرى في وقت لاحق.';
 $lang['USERNAME_TAKEN'] = 'آسف ولكن هذا المستخدم قد اتخذت بالفعل.';
 $lang['USERNAME_INVALID'] = 'آسف لكن هذا اسم المستخدم يحتوي على حرف غير صالح';
