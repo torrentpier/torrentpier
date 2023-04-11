@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Jou profiel is opgedateer. U het egter bela
 
 $lang['PASSWORD_MISMATCH'] = 'Die wagwoorde wat u ingevoer het, stem nie ooreen nie.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Die huidige wagwoord wat u verskaf het, stem nie ooreen met die wat in die databasis gestoor is nie.';
-$lang['PASSWORD_LONG'] = 'U wagwoord moet nie meer as 32 karakters wees nie.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Jy het te veel registrasiepogings gemaak. Probeer asseblief weer later.';
 $lang['USERNAME_TAKEN'] = 'Jammer, maar hierdie gebruikersnaam is reeds geneem.';
 $lang['USERNAME_INVALID'] = 'Jammer, maar hierdie gebruikersnaam bevat \'n ongeldige karakter';
