@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Váš profil byl aktualizován. Nicméně, 
 
 $lang['PASSWORD_MISMATCH'] = 'Hesla, která jste zadali, se neshodují.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Aktuální heslo, které jste zadali neodpovídá uložené v databázi.';
-$lang['PASSWORD_LONG'] = 'Vaše heslo musí být delší než 32 znaků.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Provedli jste příliš mnoho registrační pokusy. Zkuste to prosím znovu později.';
 $lang['USERNAME_TAKEN'] = 'Omlouvám se, ale toto uživatelské jméno již bylo přijato.';
 $lang['USERNAME_INVALID'] = 'Omlouvám se, ale toto uživatelské jméno obsahuje neplatný znak';
