@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Twój profil został zaktualizowany. Jednak
 
 $lang['PASSWORD_MISMATCH'] = 'Wprowadzone hasła nie są takie same.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Bieżące hasło podałeś nie pokrywa się z zapisanymi w bazie danych.';
-$lang['PASSWORD_LONG'] = 'Twoje hasło musi być nie więcej niż 32 znaków.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Podjęto zbyt wiele prób rejestracji. Proszę, spróbuj ponownie później.';
 $lang['USERNAME_TAKEN'] = 'Przepraszam, ale ta nazwa użytkownika jest już zajęta.';
 $lang['USERNAME_INVALID'] = 'Przepraszam, ale to jest nazwa użytkownika zawiera niedozwolone znaki';
