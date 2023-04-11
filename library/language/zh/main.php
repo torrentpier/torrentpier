@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = '你的档案已经更新。 但是，你已
 
 $lang['PASSWORD_MISMATCH'] = '密码输入并不匹配。';
 $lang['CURRENT_PASSWORD_MISMATCH'] = '目前的密码提供给不匹配，储存在该数据库。';
-$lang['PASSWORD_LONG'] = '你的密码必须不超过32个字符。';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = '你已经做了太多注册的企图。 请稍后再试一次。';
 $lang['USERNAME_TAKEN'] = '对不起，但这个名已经采取。';
 $lang['USERNAME_INVALID'] = '对不起，但这名包含无效的角色';
