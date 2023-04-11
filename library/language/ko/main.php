@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = '프로필 업데이트되었습니다. 그�
 
 $lang['PASSWORD_MISMATCH'] = '입력하신 비밀번호가 일치하지 않았습니다.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = '현재 암호를 제공이 일치하지 않는 데이터베이스에 저장됩니다.';
-$lang['PASSWORD_LONG'] = '비밀번호해야 합 32 개보다 많은 자입니다.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = '당신은 너무 많은 등록 시도합니다. 나중에 다시 시도하십시오.';
 $lang['USERNAME_TAKEN'] = '미안하지만 이용자 이름으로 이미 가지고 갔습니다.';
 $lang['USERNAME_INVALID'] = '미안하지만 이 사용자 이름 잘못된 문자가 들어 있습니다';
