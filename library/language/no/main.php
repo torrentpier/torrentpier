@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profilen har blitt oppdatert. Du har imidle
 
 $lang['PASSWORD_MISMATCH'] = 'Passordet du har skrevet samsvarer ikke.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Det gjeldende passordet du oppga ikke samsvarer med det som er lagret i databasen.';
-$lang['PASSWORD_LONG'] = 'Passordet ditt må ikke være mer enn 32 tegn.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Du har laget så mange registrering forsøk. Vennligst prøv igjen senere.';
 $lang['USERNAME_TAKEN'] = 'Beklager, men dette brukernavnet allerede er tatt.';
 $lang['USERNAME_INVALID'] = 'Beklager, men dette brukernavnet ditt inneholder et ugyldig tegn';
