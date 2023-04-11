@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Ваш профіль быў абноўле
 
 $lang['PASSWORD_MISMATCH'] = 'Уведзеныя паролі не супадаюць.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Бягучы пароль вы паказалі не супадае з якія захоўваюцца ў базе дадзеных.';
-$lang['PASSWORD_LONG'] = 'Ваш пароль павінен быць не больш за 32 знакаў.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Вы зрабілі надта шмат спробаў рэгістрацыі. Калі ласка, паспрабуйце зноў пазней.';
 $lang['USERNAME_TAKEN'] = 'Прабачце, але гэта імя карыстальніка ўжо занята.';
 $lang['USERNAME_INVALID'] = 'Прабачце, але гэта імя карыстальніка ўтрымоўвае недапушчальны знак';
