@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Sizning profili yangilandi. Ammo, shunday s
 
 $lang['PASSWORD_MISMATCH'] = 'Siz kiritgan parol to\'g\'ri kelmadi.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Agar taqdim etilgan joriy parol ma\'lumotlar bazasida saqlanadi, deb mos kelmaydi.';
-$lang['PASSWORD_LONG'] = 'Parolni 32 belgidan ko\'p bo\'lmagan bo\'lishi kerak.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Siz juda ko\'p Ro\'yxatdan urinish qildik. Iltimos keyinroq qaytadan urinib ko\'ring.';
 $lang['USERNAME_TAKEN'] = 'Kechirasiz, lekin bu foydalanuvchi nomi allaqachon qabul qilingan.';
 $lang['USERNAME_INVALID'] = 'Kechirasiz, lekin bu foydalanuvchi nomi yaroqsiz belgi mavjud';
