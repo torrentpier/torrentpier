@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Ваш профиль был изменен
 
 $lang['PASSWORD_MISMATCH'] = 'Введенные пароли не совпадают';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Введенный вами пароль не совпадает с паролем из базы';
-$lang['PASSWORD_LONG'] = 'Ваш пароль должен быть не длиннее 20 символов';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Вы исчерпали предельное количество попыток регистрации для данной сессии. Пожалуйста, повторите попытку позднее.';
 $lang['USERNAME_TAKEN'] = 'Извините, пользователь с таким именем уже существует';
 $lang['USERNAME_INVALID'] = 'Извините, это имя содержит неподходящие символы';
