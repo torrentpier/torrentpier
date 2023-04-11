@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Το προφίλ σας έχει ενημ�
 
 $lang['PASSWORD_MISMATCH'] = 'Οι κωδικοί πρόσβασης που πληκτρολογήσατε δεν ταιριάζουν.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Τον τρέχοντα κωδικό πρόσβασης που πληκτρολογήσατε δεν ταιριάζει με αυτό που είναι αποθηκευμένα στη βάση δεδομένων.';
-$lang['PASSWORD_LONG'] = 'Ο κωδικός σας πρέπει να είναι όχι περισσότερο από 32 χαρακτήρες.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Έχετε κάνει πάρα πολλές εγγραφή προσπάθειες. Παρακαλώ προσπαθήστε ξανά αργότερα.';
 $lang['USERNAME_TAKEN'] = 'Συγγνώμη, αλλά αυτό το όνομα έχει ήδη ληφθεί.';
 $lang['USERNAME_INVALID'] = 'Συγγνώμη, αλλά αυτό το όνομα χρήστη περιέχει έναν μη έγκυρο χαρακτήρα';
