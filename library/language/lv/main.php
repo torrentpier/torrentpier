@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Jūsu profils ir atjaunināta. Tomēr, jums
 
 $lang['PASSWORD_MISMATCH'] = 'Paroles esat ievadījis nesakrita.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Pašreizējo paroli, ko sniedzat, neatbilst tam, kas glabājas datu bāzē.';
-$lang['PASSWORD_LONG'] = 'Parolei jābūt ne vairāk kā 32 citām zīmēm.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Jums ir pārāk daudz reģistrācijas mēģinājumiem. Lūdzu, mēģiniet vēlreiz vēlāk.';
 $lang['USERNAME_TAKEN'] = 'Atvainojiet, bet šis lietotājvārds jau ir veikti.';
 $lang['USERNAME_INVALID'] = 'Atvainojiet, bet šis lietotājvārds ir nederīga rakstzīme';
