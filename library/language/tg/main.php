@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'профили худро навсозӣ ш
 
 $lang['PASSWORD_MISMATCH'] = 'Дар нишонаҳо ки шумо ворид кард мувофиқ нест.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Гузарвожа ҷорӣ ба шумо таъмин мекунад мувофиқ нест, ки ба нигоҳ дошта, дар пойгоҳи дода.';
-$lang['PASSWORD_LONG'] = 'Гузарвожаи шумо бояд на зиёда аз 32 аломат бошад.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Шумо низ кӯшиши сабти дод. Лутфан, баъд бори дигар кӯшиш кунед.';
 $lang['USERNAME_TAKEN'] = 'Бубахшед, аммо ин номи корбарӣ ва аллакай гирифта шудааст.';
 $lang['USERNAME_INVALID'] = 'Бубахшед, аммо ин корбарӣ дорои хусусияти беэътибор';
