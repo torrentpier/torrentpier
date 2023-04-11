@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profiilisi on päivitetty. Kuitenkin, sinun
 
 $lang['PASSWORD_MISMATCH'] = 'Salasanat eivät täsmää.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Nykyinen salasanasi, jotka annoit ei ole ottelu, joka tallennetaan tietokantaan.';
-$lang['PASSWORD_LONG'] = 'Salasana saa olla enintään 32 merkkiä.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Olet tehnyt liian monta rekisteröinti yritykset. Yritä myöhemmin uudelleen.';
 $lang['USERNAME_TAKEN'] = 'Anteeksi, mutta tämä käyttäjätunnus on jo toteutettu.';
 $lang['USERNAME_INVALID'] = 'Anteeksi, mutta tämä käyttäjätunnus on virheellinen merkki';
