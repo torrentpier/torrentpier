@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Ձեր պրոֆիլը թարմացվել է
 
 $lang['PASSWORD_MISMATCH'] = 'Ձեր մուտքագրած գաղտնաբառերը չեն համընկնում ։ ';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Ընթացիկ գաղտնաբառը, դուք ներկայացնում, չի համընկնում պահվող տվյալների բազայի.';
-$lang['PASSWORD_LONG'] = 'Ձեր գաղտնաբառը պետք է լինի ոչ ավելի, քան 32 նիշ.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Դուք ձեռնարկել, շատ փորձերի գրանցման ։ Խնդրում ենք կրկին փորձել ավելի ուշ.';
 $lang['USERNAME_TAKEN'] = 'Կներեք, բայց այս անունը արդեն զբաղված է ։ ';
 $lang['USERNAME_INVALID'] = 'Կներեք, բայց այս օգտագործողի անունը պարունակում է անթույլատրելի խորհրդանիշ';
