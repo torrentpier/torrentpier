@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profilul a fost actualizat. Cu toate aceste
 
 $lang['PASSWORD_MISMATCH'] = 'Parolele introduse nu se potrivesc.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Actuala parola pe care ați furnizat nu se potrivește cu cea stocată în baza de date.';
-$lang['PASSWORD_LONG'] = 'Parola trebuie să fie nu mai mult de 32 de caractere.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Ai făcut prea multe încercări de înregistrare. Vă rugăm să încercați din nou mai târziu.';
 $lang['USERNAME_TAKEN'] = 'Îmi pare rău, dar acest utilizator a fost deja luată.';
 $lang['USERNAME_INVALID'] = 'Îmi pare rău, dar acest nume de utilizator conține un caracter invalid';
