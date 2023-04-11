@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'El seu perfil ha estat actualitzat. No obst
 
 $lang['PASSWORD_MISMATCH'] = 'La contrasenya que heu introduït no coincideixen.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'La contrasenya actual que subministra no coincideix amb la que s\'emmagatzema a la base de dades.';
-$lang['PASSWORD_LONG'] = 'La contrasenya ha de ser de no més de 32 caràcters.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Vostè ha fet massa registre intents. Si us plau, provi-ho més tard.';
 $lang['USERNAME_TAKEN'] = 'Ho sento, però aquest nom d\'usuari ja ha estat presa.';
 $lang['USERNAME_INVALID'] = 'Ho sento, però aquest nom d\'usuari conté un caràcter no vàlid';
