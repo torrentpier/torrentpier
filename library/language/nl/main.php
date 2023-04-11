@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Je profiel is bijgewerkt. Echter, u hebt ge
 
 $lang['PASSWORD_MISMATCH'] = 'De wachtwoorden die u hebt ingevoerd niet overeen.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'De huidige wachtwoord dat u hebt opgegeven, komt niet overeen met die in de database opgeslagen.';
-$lang['PASSWORD_LONG'] = 'Uw wachtwoord mag niet meer dan 32 tekens.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Je hebt te veel registratie-pogingen. Probeer het later opnieuw.';
 $lang['USERNAME_TAKEN'] = 'Sorry, maar deze gebruikersnaam is al in gebruik.';
 $lang['USERNAME_INVALID'] = 'Sorry, maar deze gebruikersnaam bevat een ongeldig teken';
