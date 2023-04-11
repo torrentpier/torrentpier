@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profiliniz güncellendi. Ancak, hayati ayr�
 
 $lang['PASSWORD_MISMATCH'] = 'Girdiğiniz parolalar uyuşmuyor.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Sağladığınız geçerli parola veritabanında saklanan eşleşmiyor.';
-$lang['PASSWORD_LONG'] = 'Şifreniz en fazla 32 karakter olmalıdır.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Çok fazla kayıt girişimleri yaptık. Lütfen daha sonra tekrar deneyin.';
 $lang['USERNAME_TAKEN'] = 'Üzgünüm, ama bu kullanıcı adı zaten alınmış.';
 $lang['USERNAME_INVALID'] = 'Üzgünüm, ama bu kullanıcı adı geçersiz bir karakter içeriyor.';
