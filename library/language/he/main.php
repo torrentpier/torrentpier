@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'הפרופיל שלך עודכנה. עם ז
 
 $lang['PASSWORD_MISMATCH'] = 'את הסיסמאות שהזנת אינו תואם.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'את הסיסמה הנוכחית אתה המסופק אינו תואם את זה מאוחסן במסד הנתונים.';
-$lang['PASSWORD_LONG'] = 'הסיסמה חייבת להיות לא יותר מ-32 תווים.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'עשית יותר מדי רישום ניסיונות. אנא נסה שוב מאוחר יותר.';
 $lang['USERNAME_TAKEN'] = 'מצטער, אבל זה שם משתמש כבר תפוס.';
 $lang['USERNAME_INVALID'] = 'מצטער, אבל זה שם המשתמש מכיל תו לא חוקי';
