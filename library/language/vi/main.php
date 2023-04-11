@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Hồ sơ của bạn đã được cập nh
 
 $lang['PASSWORD_MISMATCH'] = 'Các bạn nhập vào mật khẩu không phù hợp.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Mật khẩu hiện tại, bạn được không trận đấu đó được lưu trữ trong cơ sở dữ liệu.';
-$lang['PASSWORD_LONG'] = 'Mật khẩu phải có không nhiều hơn 32 nhân vật.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Bạn có làm quá nhiều đăng ký cố gắng. Xin vui lòng thử lại sau.';
 $lang['USERNAME_TAKEN'] = 'Xin lỗi, nhưng tên này đã được thực hiện.';
 $lang['USERNAME_INVALID'] = 'Xin lỗi, nhưng tên này có chứa một phế nhân vật';
