@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Vaš profil je bil posodobljen. Vendar pa s
 
 $lang['PASSWORD_MISMATCH'] = 'Gesla, ki ste ga vnesli, ni tekmo.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Trenutno geslo, ki ste jih navedli, ne ujemajo, ki so shranjeni v zbirki podatkov.';
-$lang['PASSWORD_LONG'] = 'Geslo mora biti več kot 32 znakov.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Ste naredili preveč registracijo poskusov. Prosimo, poskusite znova pozneje.';
 $lang['USERNAME_TAKEN'] = 'Žal mi je, ampak to uporabniško ime je že bilo.';
 $lang['USERNAME_INVALID'] = 'Žal mi je, ampak to ime vsebuje neveljaven znak';
