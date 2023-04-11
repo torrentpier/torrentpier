@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Jūsų profilis buvo atnaujintas. Tačiau, 
 
 $lang['PASSWORD_MISMATCH'] = 'Slaptažodžius įvedėte neatitiko.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Dabartinis slaptažodis, kurį jūs nesutampa, kurie saugomi duomenų bazėje.';
-$lang['PASSWORD_LONG'] = 'Slaptažodis turi būti ne daugiau kaip 32 simbolių.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Jūs turite padaryti per daug registracija bandymai. Prašome pabandyti vėliau.';
 $lang['USERNAME_TAKEN'] = 'Atsiprašome, bet šis vardas jau buvo imtasi.';
 $lang['USERNAME_INVALID'] = 'Atsiprašome, tačiau šis vardas yra neteisingas charakterį';
