@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profil yeniləndi. Bununla belə, siz dəyi
 
 $lang['PASSWORD_MISMATCH'] = 'Daxil parol uyğun gəlmir.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Cari parol siz dediyiniz ilə üst-üstə düşmür saxlanılan verilənlər bazası.';
-$lang['PASSWORD_LONG'] = 'Parol olmamalıdır daha 32 simvol.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Siz atmışıq çox cəhdləri qeydiyyatı. Lütfən, yenidən cəhd edin sonra.';
 $lang['USERNAME_TAKEN'] = 'Bağışlayın, amma bu istifadəçi adı artıq məşğuldur.';
 $lang['USERNAME_INVALID'] = 'Bağışlayın, amma bu istifadəçi adı ehtiva yolverilməz simvolu';
