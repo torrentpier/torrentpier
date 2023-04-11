@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Il tuo profilo è stato aggiornato. Tuttavi
 
 $lang['PASSWORD_MISMATCH'] = 'Le password che hai inserito non corrispondono.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'L\'attuale password che hai fornito non corrisponde a quella memorizzata nel database.';
-$lang['PASSWORD_LONG'] = 'La password deve essere di non più di 32 caratteri.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Hai fatto troppi tentativi di registrazione. Si prega di riprovare più tardi.';
 $lang['USERNAME_TAKEN'] = 'Mi dispiace, ma questo nome utente è già stato preso.';
 $lang['USERNAME_INVALID'] = 'Mi dispiace, ma questo nome utente contiene un carattere non valido';
