@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Vaš profil je obnovljeno. Međutim, jeste 
 
 $lang['PASSWORD_MISMATCH'] = 'Upisane lozinke se ne podudaraju.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Trenutnu lozinku koji ste unijeli ne podudaraju s podacima koji su pohranjeni u bazi podataka.';
-$lang['PASSWORD_LONG'] = 'Vaša lozinka ne smije biti više od 32 znaka.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Vi ste uzeli previše pokušaja registracije. Molimo vas, pokušajte ponovno kasnije.';
 $lang['USERNAME_TAKEN'] = 'Žao nam je, ali ovo korisničko ime je već zauzeto.';
 $lang['USERNAME_INVALID'] = 'Žao nam je, ali ovo ime sadrži nevažeći znak';
