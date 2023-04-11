@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'A profil frissült. Azonban megváltoztak a
 
 $lang['PASSWORD_MISMATCH'] = 'A megadott jelszavak nem egyeznek.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'A jelenlegi jelszót, tartozék nem felel meg, hogy az adatbázisban tárolt.';
-$lang['PASSWORD_LONG'] = 'A jelszót nem lehet több, mint 32 karakter lehet.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Túl sok a regisztráció kísérletek. Kérjük, próbálja meg újra később.';
 $lang['USERNAME_TAKEN'] = 'Sajnálom, de ez a felhasználónév már foglalt.';
 $lang['USERNAME_INVALID'] = 'Sajnálom, de ez a felhasználónév egy érvénytelen karaktert tartalmaz';
