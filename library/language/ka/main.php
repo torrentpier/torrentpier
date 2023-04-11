@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'თქვენი პროფაილი
 
 $lang['PASSWORD_MISMATCH'] = 'პაროლები თქვენ შემოხვედით არ ემთხვევა.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'მიმდინარე პაროლი, თქვენ მიეწოდება არ ემთხვევა, რომელიც ინახება მონაცემთა ბაზაში.';
-$lang['PASSWORD_LONG'] = 'პაროლი უნდა იყოს არა უმეტეს 32 პერსონაჟი.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'თქვენ არ გააკეთა ძალიან ბევრი გარეშე მცდელობა. გთხოვთ მოგვიანებით ცადოთ.';
 $lang['USERNAME_TAKEN'] = 'უკაცრავად, მაგრამ ეს სახელი უკვე მიღებული.';
 $lang['USERNAME_INVALID'] = 'უკაცრავად, მაგრამ ეს სახელი შეიცავს არასწორი ხასიათი';
