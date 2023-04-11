@@ -615,7 +615,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profilin tuaj është përditësuar. Megjit
 
 $lang['PASSWORD_MISMATCH'] = 'Fjalëkalimet e keni futur nuk përputhen.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Aktuale fjalëkalimin që ju furnizuar nuk përputhet që ruhen në bazën e të dhënave.';
-$lang['PASSWORD_LONG'] = 'Fjalëkalimin tuaj duhet të jetë jo më shumë se 32 karaktere.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Ju kanë bërë shumë të regjistrimit të përpiqet. Ju lutemi të provoni përsëri më vonë.';
 $lang['USERNAME_TAKEN'] = 'Na vjen keq, por kjo emrin e ka tashmë janë ndërmarrë.';
 $lang['USERNAME_INVALID'] = 'Na vjen keq, por kjo username përmban një karakter të pavlefshme';
