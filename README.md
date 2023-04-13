@@ -16,7 +16,9 @@
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
 </p>
 
-## 🙂 About TorrentPier
+<h3 align="center">🚧 WIP: TorrentPier Cattle (2.4) 🚧</h3>
+
+## 🐂 About TorrentPier
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load 
 architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition, we have very helpful 
