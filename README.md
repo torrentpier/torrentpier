@@ -16,20 +16,20 @@
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
 </p>
 
-## About TorrentPier
+## 🙂 About TorrentPier
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load 
 architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition, we have very helpful 
 [official support forum](https://torrentpier.com), where among other things it is possible to test the live 
 demo, get any support and download modifications for engine.
 
-## Current status
+## 🌈 Current status
 
 TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite existing to 
 modern standards. If you want to go deep on the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) 
 and go from there. The documentation will be translated into english in the near future, currently russian is the main language of it.
 
-## Supported versions
+## 📊 Supported versions
 
 Current major version with full support is v2.4.
 
@@ -41,14 +41,14 @@ Current major version with full support is v2.4.
 | [v2.2.*](https://github.com/torrentpier/torrentpier/releases/tag/v2.2.3) |  2017/08/08   | YES 💀 |                         |      |
 | [v2.1.*](https://github.com/torrentpier/torrentpier/releases/tag/v2.1.5) |  2014/12/06   | YES 💀 |                         |      |
 
-## Requirements
+## ⚒ Requirements
 
 * Apache / nginx
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
 * PHP: 7.4 / 8.0 / 8.1 / 8.2
 * PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
 
-## Installation
+## ⚙ Installation
 
 For installation, you need to follow a few simple steps:
 
@@ -66,7 +66,7 @@ For installation, you need to follow a few simple steps:
    4. **opensearch_desc_bt.xml** (change the description and address on your own)
 9. Log in to the forum with admin/admin login/password and finish setting up via admin panel
 
-## Access rights on folders and files
+## 🔑 Access rights on folders and files
 
 You must provide write permissions to the specified folders:
 * `data/avatars`
@@ -81,28 +81,28 @@ You must provide write permissions to the specified folders:
 The specific settings depend on the server you are using, but in general case we recommend chmod 0755 for folders, 
 and chmod 0644 for files in them. If you are not sure, leave it as is.
 
-## The recommended way to run cron.php
+## ➡ The recommended way to run cron.php
 
 For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more 
 information about that you can read [this thread](https://torrentpier.com/threads/52/) on our support forum.
 
-## Local configuration copy
+## ➡ Local configuration copy
 
 You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
 file **.env**. Both files are created by copying the appropriate .example templates without extension. Local configuration files 
 should not be available for reading to anyone by setting up access rights for your web server.
 
-## Ocelot installation
+## ➡ Ocelot installation
 
 We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
 the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot). You can read assembly instructions
 on his repository or in [this thread](https://torrentpier.com/threads/26078/) on our support forum.
 
-## Official documentation
+## 📝 Official documentation
 
 Documentation for TorrentPier can be found on the [TorrentPier docs website](https://docs.torrentpier.com).
 
-## Contributing / Contributors
+## 💚 Contributing / Contributors
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for 
 submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
@@ -114,17 +114,17 @@ these requirements. Just send it.
 
 Made with [contrib.rocks](https://contrib.rocks).
 
-## Sponsoring
+## 💞 Sponsoring
 
 Support this project by becoming a sponsor or a backer. 
 
 [![OpenCollective sponsors](https://opencollective.com/torrentpier/sponsors/badge.svg)](https://opencollective.com/torrentpier)
 [![OpenCollective backers](https://opencollective.com/torrentpier/backers/badge.svg)](https://opencollective.com/torrentpier)
 
-## Versioning
+## 📦 Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags). 
 
-## License
+## 📖 License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/torrentpier/torrentpier/blob/master/LICENSE) file for details.
