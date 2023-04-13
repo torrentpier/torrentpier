@@ -16,7 +16,7 @@
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
 </p>
 
-<h3 align="center">🚧 WIP: TorrentPier Cattle (2.4) 🚧</h3>
+<p align="center">🚧 WIP: TorrentPier Cattle (2.4) 🚧</p>
 
 ## 🐂 About TorrentPier
 
@@ -43,14 +43,14 @@ Current major version with full support is v2.4.
 | [v2.2.*](https://github.com/torrentpier/torrentpier/releases/tag/v2.2.3) |  2017/08/08   | YES 💀 |                         |      |
 | [v2.1.*](https://github.com/torrentpier/torrentpier/releases/tag/v2.1.5) |  2014/12/06   | YES 💀 |                         |      |
 
-## ⚒ Requirements
+## 🔧 Requirements
 
 * Apache / nginx
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
 * PHP: 7.4 / 8.0 / 8.1 / 8.2
 * PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
 
-## ⚙ Installation
+## 💾 Installation
 
 For installation, you need to follow a few simple steps:
 
