@@ -83,22 +83,16 @@ You must provide write permissions to the specified folders:
 The specific settings depend on the server you are using, but in general case we recommend chmod 0755 for folders, 
 and chmod 0644 for files in them. If you are not sure, leave it as is.
 
-## ➡ The recommended way to run cron.php
+## 📌 Our recommendations
 
-For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more 
-information about that you can read [this thread](https://torrentpier.com/threads/52/) on our support forum.
-
-## ➡ Local configuration copy
-
-You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
-file **.env**. Both files are created by copying the appropriate .example templates without extension. Local configuration files 
-should not be available for reading to anyone by setting up access rights for your web server.
-
-## ➡ Ocelot installation
-
-We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
-the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot). You can read assembly instructions
-on his repository or in [this thread](https://torrentpier.com/threads/26078/) on our support forum.
+* ⛓ *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more
+  information about that you can read [this thread](https://torrentpier.com/threads/52/) on our support forum.
+* ⛓ *Local configuration copy.* - You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
+  file **.env**. Both files are created by copying the appropriate .example templates without extension. Local configuration files
+  should not be available for reading to anyone by setting up access rights for your web server.
+* ⛓ *Ocelot installation.* - We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
+  the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot). You can read assembly instructions
+  on his repository or in [this thread](https://torrentpier.com/threads/26078/) on our support forum.
 
 ## 📝 Official documentation
 
