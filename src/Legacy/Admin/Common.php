@@ -153,7 +153,7 @@ class Common
 
                 $all_users = ($id === 'all');
 
-                if (!$all_users AND !$user_csv = get_id_csv($id)) {
+                if (!$all_users and !$user_csv = get_id_csv($id)) {
                     break;
                 }
 
@@ -218,7 +218,7 @@ class Common
         $topic_csv = [];
         $prune = ($mode_or_topic_id === 'prune');
 
-        if (!$prune AND !$topic_csv = get_id_csv($mode_or_topic_id)) {
+        if (!$prune and !$topic_csv = get_id_csv($mode_or_topic_id)) {
             return false;
         }
 
@@ -427,7 +427,7 @@ class Common
             }
         }
 
-        if (!$topics OR !$topic_csv = get_id_csv(array_keys($topics))) {
+        if (!$topics or !$topic_csv = get_id_csv(array_keys($topics))) {
             return false;
         }
 
