@@ -31,8 +31,7 @@ class Torrent
             return;
         }
 
-        if (IS_MOD)
-        {
+        if (IS_MOD) {
             $is_auth = auth(AUTH_MOD, $forum_id, $userdata);
             if ($is_auth['auth_mod']) {
                 return;
