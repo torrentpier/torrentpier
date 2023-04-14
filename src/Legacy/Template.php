@@ -109,6 +109,11 @@ class Template
         $this->tpl = basename($root);
         $this->lang =& $lang;
         $this->use_cache = $bb_cfg['xs_use_cache'];
+
+        // Check template exists
+        if (!file_exists($this->root) || !is_dir($this->root)) {
+            die("Theme ({$this->tpl}) directory not found");
+        }
     }
 
     /**
