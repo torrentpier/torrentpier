@@ -58,8 +58,7 @@
 
 <form action="{S_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {S_FORM_ENCTYPE}>
 {S_HIDDEN_FORM_FIELDS}
-{ADD_ATTACH_HIDDEN_FIELDS}
-{POSTED_ATTACHMENTS_HIDDEN_FIELDS}
+<!-- IF TOR_REQUIRED --><input type="hidden" name="tor_required" value="1" /><!-- ENDIF -->
 
 <table class="bordered">
 <col class="row1">
@@ -136,7 +135,6 @@
 	</div>
 	</td>
 </tr>
-<!-- IF ATTACHBOX -->
 <!-- IF POSTER_RGROUPS -->
 <tr>
 	<td class="vTop pad_4" valign="top"><b>{L_POST_RELEASE_FROM_GROUP}</b></td>
@@ -149,17 +147,74 @@
 	</td>
 </tr>
 <!-- ENDIF / POSTER_RGROUPS -->
-<!-- ENDIF / ATTACHBOX -->
 <!-- ENDIF / LOGGED_IN -->
 <!-- BEGIN switch_type_toggle -->
 <tr>
 	<td colspan="2" class="row2 tCenter pad_6">{S_TYPE_TOGGLE}</td>
 </tr>
 <!-- END switch_type_toggle -->
-<!-- IF ATTACHBOX --><!-- INCLUDE posting_attach.tpl --><!-- ENDIF -->
+
 </table>
 
 </form>
+
+<!-- IF SHOW_ATTACH -->
+<div style="display: none;">
+
+  <div id="file-up-input">
+    <input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['attach']['max_size']}" />
+    <input type="file" name="attach" size="50" id="file-up-btn" />
+    &nbsp;
+    <a href="#" class="med" onclick="show_load_file_link(); return false;">удалить</a>
+  </div>
+
+  <div id="file-up-new">
+    <a id="file-up-a" href="#" class="med bold" onclick="show_file_up_input(); return false;">загрузить файл</a>&nbsp;
+  </div>
+
+  <div id="file-up-del">
+    <a href="#" class="med bold" onclick="if (window.confirm(this.innerHTML+'?')){ ajax.del_attach() } return false;">удалить прикреплённый файл</a>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    <!-- IF FILE_ATTACHED -->
+    $('#file-up-box').html( $('#file-up-del').html() );
+    <!-- ELSE -->
+    show_load_file_link();
+    <!-- ENDIF -->
+    $('#file-up').show();
+    $('#post-preview-btn').click(function(){
+      if ( $('#file-up-btn').val() ) {
+        return window.confirm('Вы можете прикрепить файл только вместе с отправкой сообщения.\n\nОтменить загрузку файла?\n ');
+      }
+    });
+  });
+
+  function show_load_file_link ()
+  {
+    $('#file-up-box').html( $('#file-up-new').html() );
+    $('#file-up-desc').show();
+  }
+  function show_file_up_input ()
+  {
+    $('#file-up-box').html( $('#file-up-input').html() );
+    $('#file-up-desc').html('выберите нужный файл, он будет загружен автоматически при отправке сообщения');
+  }
+
+  ajax.del_attach = function() {
+    ajax.exec({
+      action   : 'del_attach',
+      topic_id : '{POSTING_TOPIC_ID}'
+    });
+  };
+  ajax.callback.del_attach = function(data){
+    show_load_file_link();
+  }
+</script>
+<!-- ENDIF / SHOW_ATTACH -->
 
 <!-- IF TPL_TOPIC_REVIEW -->
 <!--========================================================================-->

@@ -136,11 +136,11 @@ class Post
         }
 
         if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
-            $topic_dl_type = (isset($_POST['topic_dl_type']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+            $topic_dl_type = (isset($_POST['tracker_status']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
             $sql_insert = "
 			INSERT INTO
-				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type)
+				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, tracker_status)
 			VALUES
 				('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type)
 		";
@@ -151,7 +151,7 @@ class Post
 			SET
 				topic_title = '$post_subject',
 				topic_type = $topic_type,
-				topic_dl_type = $topic_dl_type
+				tracker_status = $topic_dl_type
 			WHERE
 				topic_id = $topic_id
 		";
@@ -172,7 +172,7 @@ class Post
         if ($update_post_time && $mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
             $edited_sql .= ", post_time = $current_time ";
             //lpt
-            DB()->sql_query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id");
+            DB()->sql_query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id LIMIT 1");
         }
 
         $sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
@@ -321,101 +321,6 @@ class Post
         Common::post_delete($post_id);
 
         set_die_append_msg($forum_id, $topic_id);
-    }
-
-    /**
-     * Handle user notification on new post
-     *
-     * @param string $mode
-     * @param array $post_data
-     * @param string $topic_title
-     * @param int $forum_id
-     * @param int $topic_id
-     * @param bool $notify_user
-     */
-    public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
-    {
-        global $bb_cfg, $lang, $userdata;
-
-        if (!$bb_cfg['topic_notify_enabled']) {
-            return;
-        }
-
-        if ($mode != 'delete') {
-            if ($mode == 'reply') {
-                $update_watched_sql = $user_id_sql = [];
-
-                $sql = DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
-
-                foreach ($sql as $row) {
-                    $user_id_sql[] = ',' . $row['ban_userid'];
-                }
-                $user_id_sql = implode('', $user_id_sql);
-
-                $watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
-				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
-				WHERE tw.topic_id = $topic_id
-					AND tw.user_id NOT IN (" . $userdata['user_id'] . ", " . EXCLUDED_USERS . $user_id_sql . ")
-					AND tw.notify_status = " . TOPIC_WATCH_NOTIFIED . "
-					AND u.user_id = tw.user_id
-					AND u.user_active = 1
-				ORDER BY u.user_id
-			");
-
-                if ($watch_list) {
-                    $orig_word = $replacement_word = [];
-                    obtain_word_list($orig_word, $replacement_word);
-
-                    if (\count($orig_word)) {
-                        $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-                    }
-
-                    $u_topic = make_url(TOPIC_URL . $topic_id . '&view=newest#newest');
-                    $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");
-
-                    foreach ($watch_list as $row) {
-                        // Sending email
-                        $emailer = new Emailer();
-
-                        $emailer->set_to($row['user_email'], $row['username']);
-                        $emailer->set_subject(sprintf($lang['EMAILER_SUBJECT']['TOPIC_NOTIFY'], $topic_title));
-
-                        $emailer->set_template('topic_notify', $row['user_lang']);
-                        $emailer->assign_vars([
-                            'TOPIC_TITLE' => html_entity_decode($topic_title),
-                            'SITENAME' => $bb_cfg['sitename'],
-                            'USERNAME' => $row['username'],
-                            'U_TOPIC' => $u_topic,
-                            'U_STOP_WATCHING_TOPIC' => $unwatch_topic,
-                        ]);
-
-                        $emailer->send();
-
-                        $update_watched_sql[] = $row['user_id'];
-                    }
-                    $update_watched_sql = implode(',', $update_watched_sql);
-                }
-
-                if ($update_watched_sql) {
-                    DB()->query("UPDATE " . BB_TOPICS_WATCH . "
-					SET notify_status = " . TOPIC_WATCH_UNNOTIFIED . "
-					WHERE topic_id = $topic_id
-						AND user_id IN ($update_watched_sql)
-				");
-                }
-            }
-
-            $topic_watch = DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}", 'topic_id');
-
-            if (!$notify_user && !empty($topic_watch)) {
-                DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
-            } elseif ($notify_user && empty($topic_watch)) {
-                DB()->query("
-				INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-				VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
-			");
-            }
-        }
     }
 
     /**

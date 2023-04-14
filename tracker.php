@@ -8,7 +8,6 @@
  */
 
 define('BB_SCRIPT', 'tracker');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 
 // Page config
@@ -639,7 +638,7 @@ if ($allowed_forums) {
         // SELECT
         $select = "
 			SELECT
-				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
+				tor.topic_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
 		";
         $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
@@ -696,7 +695,6 @@ if ($allowed_forums) {
             $seeds = $tor['seeders'];
             $leechs = $tor['leechers'];
             $s_last = $tor['seeder_last_seen'];
-            $att_id = $tor['attach_id'];
             $size = $tor['size'];
             $tor_magnet = create_magnet($tor['info_hash'], $passkey['auth_key']);
             $compl = $tor['complete_count'];
@@ -719,7 +717,6 @@ if ($allowed_forums) {
                 'TOPIC_ID' => $tor['topic_id'],
                 'TOPIC_TITLE' => wbr($tor['topic_title']),
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . delta_time($tor['topic_time']),
-                'POST_ID' => $tor['post_id'],
                 'POSTER_ID' => $poster_id,
                 'USERNAME' => ($hide_author) ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 
@@ -729,7 +726,6 @@ if ($allowed_forums) {
                 'IS_NEW' => (!IS_GUEST && $tor['reg_time'] > $lastvisit),
                 'USER_AUTHOR' => (!IS_GUEST && $poster_id == $user_id),
 
-                'ATTACH_ID' => $att_id,
                 'MAGNET' => $tor_magnet,
                 'TOR_TYPE' => is_gold($tor['tor_type']),
 
@@ -742,7 +738,7 @@ if ($allowed_forums) {
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
                 'SEEDS' => $seeds ?: 0,
-                'SEEDS_TITLE' => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
+                'SEEDS_TITLE' => $seeds ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
                 'LEECHS' => $leechs ?: 0,
                 'COMPLETED' => $compl ?: 0,
                 'REPLIES' => $tor['topic_replies'],

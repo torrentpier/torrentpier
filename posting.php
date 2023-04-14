@@ -8,10 +8,8 @@
  */
 
 define('BB_SCRIPT', 'posting');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require ATTACH_DIR . '/attachment_mod.php';
 
 $page_cfg['load_tpl_vars'] = array('post_icons');
 
@@ -196,8 +194,9 @@ if ($post_info = DB()->fetch_row($sql)) {
     bb_die($lang['NO_SUCH_POST']);
 }
 
-// The user is not authed, if they're not logged in then redirect
-// them, else show them an error message
+$bb_cfg['attach']['allowed_ext'] = ($post_info['allow_reg_tracker']) ? $bb_cfg['tor_forums_allowed_ext'] : $bb_cfg['gen_forums_allowed_ext'];
+$attach_allowed_ext = $post_info['allow_reg_tracker'] ? $bb_cfg['tor_forums_allowed_ext'] : $bb_cfg['gen_forums_allowed_ext'];
+
 if (!$is_auth[$is_auth_type]) {
     if (!IS_GUEST) {
         bb_die(sprintf($lang['SORRY_' . strtoupper($is_auth_type)], $is_auth[$is_auth_type . '_type']));
@@ -245,26 +244,13 @@ if ($mode == 'new_rel') {
     exit;
 }
 
-// Notify
-if ($submit || $refresh) {
-    $notify_user = (int)!empty($_POST['notify']);
-} else {
-    $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
-
-    if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
-        $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
-    }
-}
-
 $update_post_time = !empty($_POST['update_post_time']);
-
-execute_posting_attachment_handling();
 
 // если за время пока вы писали ответ, в топике появились новые сообщения, перед тем как ваше сообщение будет отправлено, выводится предупреждение с обзором этих сообщений
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
-    if ($topic_last_read = max((int)(@$tracking_topics[$topic_id]), (int)(@$tracking_forums[$forum_id]))) {
+    if ($topic_last_read = max((int)$tracking_topics[$topic_id], (int)$tracking_forums[$forum_id])) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
 			WHERE p.topic_id = " . (int)$topic_id . "
@@ -353,15 +339,13 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
             \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
-        $attachment_mod['posting']->insert_attachment($post_id);
-
-        if (!$error_msg) {
-            \TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
-        }
 
         if ($mode == 'newtopic' || $mode == 'reply') {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
         }
+
+        // новая тема или редактирование 1-го сообщения и нет уже прикрепленного файла
+        $can_attach_file = (($mode == 'newtopic' || ($post_data['first_post'] && $mode == 'editpost')) && empty($post_info['attach_ext_id']));
 
         if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
             if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
@@ -529,7 +513,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
 //bt
 $topic_dl_type = $post_info['topic_dl_type'] ?? 0;
 
-if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod'])) {
+/**if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod'])) {
     $sql = "
 		SELECT tor.attach_id
 		FROM " . BB_POSTS . " p
@@ -557,7 +541,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
         $topic_type_toggle .= '<nobr><input type="checkbox" name="' . $dl_type_name . '" id="topic_dl_type_id" ' . $dl_ds . $dl_ch . ' /><label for="topic_dl_type_id"> ' . $lang['POST_DOWNLOAD'] . '</label></nobr>';
         $topic_type_toggle .= $dl_hid;
     }
-}
+}**/
 //bt end
 
 // Get poster release group data
@@ -603,7 +587,6 @@ $template->set_filenames(array(
     'body' => 'posting.tpl',
 ));
 
-// Output the data to the template
 $template->assign_vars(array(
     'FORUM_NAME' => htmlCHR($forum_name),
     'PAGE_TITLE' => $page_title,
@@ -620,9 +603,8 @@ $template->assign_vars(array(
     'POSTER_RGROUPS' => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
     'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
 
-    'U_VIEWTOPIC' => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
+    'U_VIEWTOPIC' => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=" . $topic_id : '',
 
-    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked="checked"' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,

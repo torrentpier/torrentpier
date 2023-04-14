@@ -13,20 +13,17 @@ if (!defined('IN_AJAX')) {
 
 global $lang;
 
-if (!isset($this->request['attach_id'])) {
+if (!isset($this->request['t'])) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }
-$attach_id = (int)$this->request['attach_id'];
+$topic_id = (int)$this->request['t'];
 
-$torrent = DB()->fetch_row("SELECT attach_id, physical_filename FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id = $attach_id LIMIT 1");
-if (!$torrent) {
-    $this->ajax_die($lang['ERROR_BUILD']);
-}
+// Получение торрент-файла
+$file_path = get_attach_path($topic_id, 8);
 
-$filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
-if (file_exists($filename) && !$file_contents = file_get_contents($filename)) {
+if (file_exists($file_path) && !$file_contents = file_get_contents($file_path)) {
     if (IS_AM) {
-        $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
+        $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($file_path));
     } else {
         $this->ajax_die($lang['ERROR_NO_ATTACHMENT']);
     }

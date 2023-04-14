@@ -16,79 +16,39 @@ namespace TorrentPier\Legacy;
 class Torrent
 {
     /**
-     * Get torrent info by attach id
-     *
-     * @param int $attach_id
-     *
-     * @return array
-     */
-    private static function get_torrent_info($attach_id)
-    {
-        global $lang;
-
-        $attach_id = (int)$attach_id;
-
-        $sql = "
-		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status,
-			t.topic_first_post_id,
-			p.poster_id, p.topic_id, p.forum_id,
-			f.allow_reg_tracker
-		FROM
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d,
-			" . BB_POSTS . " p,
-			" . BB_TOPICS . " t,
-			" . BB_FORUMS . " f
-		WHERE
-			    a.attach_id = $attach_id
-			AND d.attach_id = $attach_id
-			AND p.post_id = a.post_id
-			AND t.topic_id = p.topic_id
-			AND f.forum_id = p.forum_id
-		LIMIT 1
-	";
-
-        if (!$torrent = DB()->fetch_row($sql)) {
-            bb_die($lang['INVALID_ATTACH_ID']);
-        }
-
-        return $torrent;
-    }
-
-    /**
      * Check that user has access to torrent download
      *
      * @param int $forum_id
      * @param int $poster_id
      *
-     * @return bool|string
+     * @return void
      */
-    private static function torrent_auth_check($forum_id, $poster_id)
+    private static function torrent_auth_check(int $forum_id, int $poster_id): void
     {
-        global $userdata, $lang, $attach_config;
+        global $userdata, $lang;
 
-        if (IS_ADMIN) {
-            return true;
+        if (IS_ADMIN || $userdata['user_id'] == $poster_id) {
+            return;
         }
 
-        $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
-
-        if ($poster_id != $userdata['user_id'] && !$is_auth['auth_mod']) {
-            bb_die($lang['NOT_MODERATOR']);
-        } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments'] || $attach_config['disable_mod']) {
-            bb_die(sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']));
+        if (IS_MOD)
+        {
+            $is_auth = auth(AUTH_MOD, $forum_id, $userdata);
+            if ($is_auth['auth_mod']) {
+                return;
+            }
         }
-        return $is_auth;
+
+        bb_die($lang['NOT_AUTHORISED']);
     }
 
     /**
      * Unregister torrent from tracker
      *
-     * @param int $attach_id
+     * @param int $topic_id
      * @param string $mode
      */
-    public static function tracker_unregister($attach_id, $mode = '')
+    public static function tracker_unregister($topic_id, $mode = '')
     {
         global $lang, $bb_cfg;
 
@@ -148,18 +108,11 @@ class Torrent
         }
 
         // Delete torrent
-        $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
-
+        $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id";
         if (!DB()->sql_query($sql)) {
             bb_die('Could not delete torrent from torrents table');
         }
 
-        // Update tracker_status
-        $sql = "UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id";
-
-        if (!DB()->sql_query($sql)) {
-            bb_die('Could not update torrent status #1');
-        }
 
         if ($mode == 'request') {
             set_die_append_msg($forum_id, $topic_id);
@@ -264,22 +217,21 @@ class Torrent
     /**
      * Register torrent on tracker
      *
-     * @param int $attach_id
+     * @param int $topic_id
      * @param string $mode
      * @param int $tor_status
      * @param int $reg_time
      *
      * @return bool
      */
-    public static function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
+    public static function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
     {
         global $bb_cfg, $lang, $reg_mode;
 
         $announce_urls = [];
-        $attach_id = (int)$attach_id;
         $reg_mode = $mode;
 
-        if (!$torrent = self::get_torrent_info($attach_id)) {
+        if (!$torrent = self::get_torrent_info($topic_id)) {
             bb_die($lang['TOR_NOT_FOUND']);
         }
 
@@ -374,8 +326,8 @@ class Torrent
 
         $size = sprintf('%.0f', (float)$totallen);
 
-        $columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status';
-        $values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
+        $columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,    size,  reg_time,  tor_status';
+        $values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, '$size', $reg_time, $tor_status";
 
         $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 
@@ -388,13 +340,6 @@ class Torrent
                 return self::torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
             }
             bb_die('Could not register torrent on tracker');
-        }
-
-        // update tracker status for this attachment
-        $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . " SET tracker_status = 1 WHERE attach_id = $attach_id";
-
-        if (!DB()->sql_query($sql)) {
-            bb_die('Could not update torrent status #2');
         }
 
         // set DL-Type for topic
@@ -412,8 +357,7 @@ class Torrent
 
         if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
             set_die_append_msg($forum_id, $topic_id);
-            $mess = sprintf($lang['BT_REGISTERED'], DL_URL . $attach_id);
-            bb_die($mess);
+            bb_die(sprintf($lang['BT_REGISTERED'], DL_URL . $topic_id));
         }
 
         return true;
@@ -422,42 +366,21 @@ class Torrent
     /**
      * Set passkey and send torrent to the browser
      *
-     * @param string $filename
+     * @param array $t_data
      */
-    public static function send_torrent_with_passkey($filename)
+    public static function send_torrent_with_passkey($t_data)
     {
-        global $attachment, $auth_pages, $userdata, $bb_cfg, $lang;
-
-        if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
-            return;
-        }
+        global $userdata, $bb_cfg, $lang;
 
         $post_id = $poster_id = $passkey_val = '';
+        $topic_id = $t_data['topic_id'];
+        $poster_id = $t_data['topic_poster'];
         $user_id = $userdata['user_id'];
-        $attach_id = $attachment['attach_id'];
 
-        if (!$passkey_key = $bb_cfg['passkey_key']) {
-            bb_die('Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
-        }
+        // Запрет на скачивание закрытого или незарегистрированного торрента
+        $row = DB()->fetch_row("SELECT tor_status FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1");
 
-        // Get $post_id & $poster_id
-        foreach ($auth_pages as $rid => $row) {
-            if ($row['attach_id'] == $attach_id) {
-                $post_id = $row['post_id'];
-                $poster_id = $row['user_id_1'];
-                break;
-            }
-        }
-
-        // Get $topic_id
-        $topic_id_sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$post_id;
-        if (!($topic_id_result = DB()->sql_query($topic_id_sql))) {
-            bb_die('Could not query post information');
-        }
-        $topic_id_row = DB()->sql_fetchrow($topic_id_result);
-        $topic_id = $topic_id_row['topic_id'];
-
-        if (!$attachment['tracker_status']) {
+        if (!isset($row['tor_status'])) {
             bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
         }
 
@@ -473,7 +396,7 @@ class Torrent
             }
         }
 
-        // Ratio limits
+        // Ratio limit for torrents dl
         $min_ratio = $bb_cfg['bt_min_ratio_allow_dl_tor'];
 
         if ($min_ratio && $user_id != $poster_id && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
@@ -495,6 +418,10 @@ class Torrent
         // Announce URL
         $ann_url = $bb_cfg['bt_announce_url'];
 
+        $filename = get_attach_path($topic_id, 8);
+        if (!file_exists($filename)) {
+            bb_simple_die($lang['NOT_FOUND']);
+        }
         $file_contents = file_get_contents($filename);
         if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
             bb_die('This is not a bencoded file');
@@ -598,7 +525,7 @@ class Torrent
             }
 
             // Update
-            DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
+            DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
             if (DB()->affected_rows() == 1) {
                 // Ocelot
                 if ($bb_cfg['ocelot']['enabled']) {

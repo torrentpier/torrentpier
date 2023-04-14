@@ -34,7 +34,7 @@
 </tr>
 <tr>
 	<td colspan="2" class="row1 tCenter">
-		<p>{L_PRUNE_TOPICS_NOT_POSTED} <input class="post" type="text" name="prunedays" size="4" /> {L_DAYS}</p>
+		<p>{L_PRUNE_TOPICS_NOT_POSTED} <input class="post" type="text" name="prunedays" size="4" /> {L_DAYS}<sup>1</sup></p>
 		<p class="med"><label><input class="post" type="checkbox" name="prune_all_topic_types" value="1" />{L_DELETE_ALL_TOPICS}</label></p>
 	</td>
 </tr>
@@ -46,3 +46,11 @@
 </table>
 
 </form>
+
+<br />
+
+<div class="med">
+	<p><sup>1</sup> Если вы не введёте число, то будут удалены <b>все темы</b>.</p>
+</div>
+
+<br />

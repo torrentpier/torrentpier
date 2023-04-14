@@ -8,7 +8,6 @@
  */
 
 define('BB_SCRIPT', 'forum');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 
 $page_cfg['include_bbcode_js'] = true;
@@ -47,17 +46,19 @@ if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
-if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
+if (!$forum_id || !($forum_data = $forums['forum'][$forum_id])) {
     bb_die($lang['FORUM_NOT_EXIST']);
 }
 
 // Only new
 $only_new = $user->opt_js['only_new'];
-$only_new_sql = '';
+$only_new_sql = $only_new_hint = '';
 if ($only_new == ONLY_NEW_POSTS) {
     $only_new_sql = "AND t.topic_last_post_time > $lastvisit";
+    $only_new_hint = 'показаны только новые сообщения';
 } elseif ($only_new == ONLY_NEW_TOPICS) {
     $only_new_sql = "AND t.topic_time > $lastvisit";
+    $only_new_hint = 'показаны только новые темы';
 }
 
 // Auth
@@ -75,11 +76,10 @@ if (!$is_auth['auth_view']) {
     bb_die($message);
 }
 
+set_die_append_msg($forum_id);
+
 // Redirect to login page if not admin session
 $mod_redirect_url = '';
-
-// Filter by torrent status
-$tor_status = -1;  //  all by default
 
 if ($is_auth['auth_mod']) {
     $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
@@ -89,20 +89,6 @@ if ($is_auth['auth_mod']) {
     if ($moderation && !$userdata['session_admin']) {
         redirect($mod_redirect_url);
     }
-    if (isset($_REQUEST['tst']) && $_REQUEST['tst'] != -1) {
-        $tor_status = (int)$_REQUEST['tst'];
-        // reset other req values
-        unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
-        $show_type_separator = false;
-    }
-    $select_tst = array_merge(array($lang['TOR_STATUS_SELECT_ALL'] => -1), array_flip($lang['TOR_STATUS_NAME']));
-    $template->assign_vars(array(
-        'SELECT_TST' => build_select('tst', $select_tst, $tor_status),
-    ));
-    $select_st = array_merge(array($lang['TOR_STATUS_SELECT_ACTION'] => -1), array_flip($lang['TOR_STATUS_NAME']));
-    $template->assign_vars(array(
-        'SELECT_ST' => build_select('st', $select_st, -1),
-    ));
 }
 
 // Topics read tracks
@@ -111,8 +97,6 @@ $tracking_forums = get_tracks('forum');
 
 if ($mark_read && !IS_GUEST) {
     set_tracks(COOKIE_FORUM, $tracking_forums, $forum_id);
-
-    set_die_append_msg($forum_id);
     bb_die($lang['TOPICS_MARKED_READ']);
 }
 
@@ -144,6 +128,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		WHERE f.forum_parent = $forum_id
 			$only_new_sql
 			$ignore_forum_sql
+        GROUP BY f.forum_id
 		ORDER BY f.forum_order
 	";
 
@@ -181,7 +166,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 
         $template->assign_block_vars('f', array(
             'FORUM_FOLDER_IMG' => $folder_image,
-
+            'FORUM_ID'    => $sf_forum_id,
             'FORUM_NAME' => $fname_html,
             'FORUM_DESC' => $forums['f'][$sf_forum_id]['forum_desc'],
             'U_VIEWFORUM' => FORUM_URL . $sf_forum_id,
@@ -215,7 +200,7 @@ $topics_per_page = $bb_cfg['topics_per_page'];
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-    if ($req_tpp = abs((int)(@$_REQUEST['tpp'])) and in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
+    if (($req_tpp = abs((int)(@$_REQUEST['tpp']))) && in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
         $topics_per_page = $req_tpp;
     }
 
@@ -225,36 +210,28 @@ if ($is_auth['auth_mod']) {
     }
 }
 
-// Generate a 'Show topics in previous x days' select box.
-$topic_days = 0; // all the time
+// Filter by torrent status
+$tor_status = -1;  //  all by default
+
+if ($is_auth['auth_mod']) {
+    if (isset($_REQUEST['tst']) && $_REQUEST['tst'] != -1) {
+        $tor_status = (int)$_REQUEST['tst'];
+        // reset other req values
+        unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
+        $show_type_separator = false;
+    }
+    $select_tst = array_merge(array($lang['TOR_STATUS_SELECT_ALL'] => -1), array_flip($lang['TOR_STATUS_NAME']));
+    $template->assign_vars(array(
+        'SELECT_TST' => build_select('tst', $select_tst, $tor_status),
+    ));
+    $select_st = array_merge(array($lang['TOR_STATUS_SELECT_ACTION'] => -1), array_flip($lang['TOR_STATUS_NAME']));
+    $template->assign_vars(array(
+        'SELECT_ST' => build_select('st', $select_st, -1),
+    ));
+}
+
 $forum_topics = $forum_data['forum_topics'];
 
-$sel_previous_days = array(
-    0 => $lang['ALL_POSTS'],
-    1 => $lang['1_DAY'],
-    7 => $lang['7_DAYS'],
-    14 => $lang['2_WEEKS'],
-    30 => $lang['1_MONTH'],
-    90 => $lang['3_MONTHS'],
-    180 => $lang['6_MONTHS'],
-    364 => $lang['1_YEAR'],
-);
-
-if (!empty($_REQUEST['topicdays'])) {
-    if ($req_topic_days = abs((int)$_REQUEST['topicdays']) and isset($sel_previous_days[$req_topic_days])) {
-        $sql = "
-			SELECT COUNT(*) AS forum_topics
-			FROM " . BB_TOPICS . "
-			WHERE forum_id = $forum_id
-				AND topic_last_post_time > " . (TIMENOW - 86400 * $req_topic_days) . "
-		";
-
-        if ($row = DB()->fetch_row($sql)) {
-            $topic_days = $req_topic_days;
-            $forum_topics = $row['forum_topics'];
-        }
-    }
-}
 // Correct $start value
 if ($start > $forum_topics) {
     redirect(FORUM_URL . $forum_id);
@@ -273,8 +250,6 @@ $order_method = get_forum_display_sort_option($order_value, 'field', 'order');
 
 $order_sql = "ORDER BY t.topic_type DESC, $sort_method $order_method";
 
-$limit_topics_time_sql = ($topic_days) ? "AND t.topic_last_post_time > " . (TIMENOW - 86400 * $topic_days) : '';
-
 $select_tor_sql = $join_tor_sql = '';
 $join_dl = ($bb_cfg['show_dl_status_in_forum'] && !IS_GUEST);
 
@@ -285,7 +260,7 @@ if ($forum_data['allow_reg_tracker']) {
     }
 
     $select_tor_sql = ',
-		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
+		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 		sn.seeders, sn.leechers
 	';
     $select_tor_sql .= ($join_dl) ? ', dl.user_status AS dl_status' : '';
@@ -322,7 +297,6 @@ $sql = "
 	WHERE t.forum_id = $forum_id
 		$only_new_sql
 		$title_match_sql
-		$limit_topics_time_sql
 	$order_sql
 	LIMIT $start, $topics_per_page
 ";
@@ -369,22 +343,9 @@ if ($forum_data['allow_reg_tracker']) {
 // Post URL generation for templating vars
 $template->assign_vars(array(
     'U_POST_NEW_TOPIC' => $post_new_topic_url,
-    'S_SELECT_TOPIC_DAYS' => build_select('topicdays', array_flip($sel_previous_days), $topic_days),
     'S_POST_DAYS_ACTION' => FORUM_URL . "$forum_id&amp;start=$start",
     'S_DISPLAY_ORDER' => $s_display_order,
 ));
-
-// User authorisation levels output
-$u_auth = array();
-$u_auth[] = ($is_auth['auth_post']) ? $lang['RULES_POST_CAN'] : $lang['RULES_POST_CANNOT'];
-$u_auth[] = ($is_auth['auth_reply']) ? $lang['RULES_REPLY_CAN'] : $lang['RULES_REPLY_CANNOT'];
-$u_auth[] = ($is_auth['auth_edit']) ? $lang['RULES_EDIT_CAN'] : $lang['RULES_EDIT_CANNOT'];
-$u_auth[] = ($is_auth['auth_delete']) ? $lang['RULES_DELETE_CAN'] : $lang['RULES_DELETE_CANNOT'];
-$u_auth[] = ($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOTE_CANNOT'];
-$u_auth[] = ($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'];
-$u_auth[] = ($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT'];
-$u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
-$u_auth = implode("<br />\n", $u_auth);
 
 $template->assign_vars(array(
     'SHOW_JUMPBOX' => true,
@@ -409,7 +370,6 @@ $template->assign_vars(array(
     'TITLE_MATCH' => htmlCHR($title_match),
     'SELECT_TPP' => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
     'T_POST_NEW_TOPIC' => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $post_new_topic,
-    'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
     'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&f=$forum_id",
@@ -421,7 +381,6 @@ foreach ($topic_rowset as $topic) {
     $topic_id = $topic['topic_id'];
     $moved = ($topic['topic_status'] == TOPIC_MOVED);
     $replies = $topic['topic_replies'];
-    $t_hot = ($replies >= $bb_cfg['hot_threshold']);
     $t_type = $topic['topic_type'];
     $separator = '';
     $is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
@@ -442,12 +401,12 @@ foreach ($topic_rowset as $topic) {
     $template->assign_block_vars('t', array(
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
-        'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
+        'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
         'TOPIC_TITLE' => wbr($topic['topic_title']),
         'TOPICS_SEPARATOR' => $separator,
         'IS_UNREAD' => $is_unread,
         'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-        'PAGINATION' => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
+        'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
         'REPLIES' => $replies,
         'VIEWS' => $topic['topic_views'],
         'TOR_STALED' => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
@@ -457,10 +416,10 @@ foreach ($topic_rowset as $topic) {
         'TOR_STATUS_ICON' => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
         'TOR_STATUS_TEXT' => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
 
-        'ATTACH' => $topic['topic_attachment'] ?? false,
+        'ATTACH' => $topic['attach_ext_id'],
         'STATUS' => $topic['topic_status'],
         'TYPE' => $topic['topic_type'],
-        'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),
+        'DL' => isset($topic['tracker_status']) && !$forum_data['allow_reg_tracker'],
         'POLL' => $topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
@@ -478,7 +437,6 @@ foreach ($topic_rowset as $topic) {
             'LEECHERS' => (int)$topic['leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size']),
             'COMPL_CNT' => (int)$topic['complete_count'],
-            'ATTACH_ID' => $topic['attach_id'],
             'MAGNET' => $tor_magnet,
         ));
     }
@@ -491,7 +449,6 @@ $pg_url .= ($sort_value) ? "&sort=$sort_value" : '';
 $pg_url .= ($order_value) ? "&order=$order_value" : '';
 $template->assign_var('MOD_URL', $pg_url);
 $pg_url = FORUM_URL . $forum_id;
-$pg_url .= ($topic_days) ? "&amp;topicdays=$topic_days" : '';
 $pg_url .= ($sort_value) ? "&amp;sort=$sort_value" : '';
 $pg_url .= ($order_value) ? "&amp;order=$order_value" : '';
 $pg_url .= ($moderation) ? "&amp;mod=1" : '';
@@ -503,7 +460,7 @@ if ($found_topics) {
     if ($only_new) {
         $no_topics_msg = $lang['NO_NEW_POSTS'];
     } else {
-        $no_topics_msg = ($topic_days || $title_match) ? $lang['NO_SEARCH_MATCH'] : $lang['NO_TOPICS_POST_ONE'];
+        $no_topics_msg = $title_match ? $lang['NO_SEARCH_MATCH'] : $lang['NO_TOPICS_POST_ONE'];
     }
     $template->assign_vars(array(
         'NO_TOPICS' => $no_topics_msg,

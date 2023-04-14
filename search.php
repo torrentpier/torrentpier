@@ -8,7 +8,6 @@
  */
 
 define('BB_SCRIPT', 'search');
-define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 
 require INC_DIR . '/bbcode.php';
@@ -30,7 +29,7 @@ if (isset($_POST['del_my_post'])) {
 		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
 	');
 
-    if (empty($_POST['topic_id_list']) or !$topic_csv = get_id_csv($_POST['topic_id_list'])) {
+    if (empty($_POST['topic_id_list']) || !($topic_csv = get_id_csv($_POST['topic_id_list']))) {
         bb_die($lang['NONE_SELECTED']);
     }
 
@@ -794,16 +793,16 @@ else {
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
+            'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
             'TOPIC_TITLE' => wbr($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-            'PAGINATION' => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
+            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
             'REPLIES' => $topic['topic_replies'],
-            'ATTACH' => $topic['topic_attachment'],
+            'ATTACH' => $topic['attach_ext_id'],
             'STATUS' => $topic['topic_status'],
             'TYPE' => $topic['topic_type'],
-            'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),
+            'DL' => $topic['tracker_status'] ?? null,
             'POLL' => $topic['topic_vote'],
             'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 

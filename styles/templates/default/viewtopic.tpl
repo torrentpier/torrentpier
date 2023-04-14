@@ -170,7 +170,7 @@ ajax.callback.post_mod_comment = function(data) {
 </tr>
 </table>
 
-<!-- IF SHOW_DL_LIST || SHOW_TOR_ACT --><!-- INCLUDE viewtopic_torrent.tpl --><!-- ENDIF -->
+<!-- IF SHOW_TOR_STATS --><!-- INCLUDE viewtopic_tor_stats.tpl --><!-- ENDIF -->
 
 <!-- IF TOPIC_HAS_POLL or CAN_MANAGE_POLL -->
 <form id="poll-form" method="post" action="poll.php" style="display: none;">
@@ -199,6 +199,7 @@ function poll_manage (mode, confirm_msg)
 	$('#poll-submit-btn').click();
 	return false;
 }
+
 function build_poll_add_form (src_el)
 {
 	$('#poll').empty().append( $('#poll-edit-tpl').contents() ).show();
@@ -230,6 +231,7 @@ function build_poll_add_form (src_el)
 </div>
 <!-- ENDIF -->
 
+<!-- IF LOGGED_IN -->
 <table class="w100 border bw_TRL" cellpadding="0" cellspacing="0">
 <tr>
 	<td class="cat pad_2">
@@ -273,6 +275,7 @@ function build_poll_add_form (src_el)
 	</td>
 </tr>
 </table>
+<!-- ENDIF -->
 
 <!-- IF LOGGED_IN -->
 <div class="menu-sub" id="topic-options">
@@ -322,6 +325,8 @@ function build_poll_add_form (src_el)
 						onclick="user.set('sp_op', this.checked ? 1 : 0);"
 					/>{L_SHOW_OPENED}
 				</label>
+		</p>
+		<p>
 				<label>
 				<input type="checkbox" <!-- IF SHOW_IMG_AFTER_LOAD -->{CHECKED}<!-- ENDIF -->
 					onclick="user.set('i_aft_l', this.checked ? 1 : 0);"
@@ -369,7 +374,6 @@ function build_poll_add_form (src_el)
 		<!-- IF postrow.POSTER_JOINED --><p class="joined" title="{postrow.POSTER_JOINED_DATE}"><em>{L_LONGEVITY}:</em> {postrow.POSTER_JOINED}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_POSTS --><p class="posts"><em>{L_POSTS}:</em> {postrow.POSTER_POSTS}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_FROM --><p class="from"><em>{L_LOCATION}:</em> {postrow.POSTER_FROM}</p><!-- ENDIF -->
-
 		<!-- IF postrow.POSTER_BIRTHDAY --><p class="birthday">{postrow.POSTER_BIRTHDAY}</p><!-- ENDIF -->
 	<!-- ENDIF -->
 
@@ -378,6 +382,7 @@ function build_poll_add_form (src_el)
 	</td>
 	<td class="message td2" rowspan="2">
 
+		<!-- IF LOGGED_IN -->
 		<div class="post_head">
 			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
 				<!-- IF postrow.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
@@ -402,6 +407,7 @@ function build_poll_add_form (src_el)
 			</p>
 			<div class="clear"></div>
 		</div>
+    <!-- ENDIF -->
 
 		<div class="post_body">
 			<div class="post_wrap">
@@ -423,10 +429,48 @@ function build_poll_add_form (src_el)
 						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
 					</div>
 				</div>
-				{postrow.ATTACHMENTS}
+
+				<!-- IF postrow.IS_FIRST_POST -->
+					<!-- IF SHOW_GUEST_DL_STUB -->
+
+							<!-- INCLUDE viewtopic_tor_guest.tpl -->
+
+					<!-- ELSEIF SHOW_TOR_NOT_REGGED -->
+
+						<div class="clear"></div>
+						<div class="spacer_8"></div>
+						<fieldset class="attach">
+							<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
+							<p class="attach_link"><b>Торрент не зарегистрирован на трекере</b> <!-- IF TRACKER_REG_LINK -->&nbsp;[ {TRACKER_REG_LINK} ]<!-- ENDIF --></p>
+						</fieldset>
+						<div class="spacer_12"></div>
+
+					<!-- ELSEIF SHOW_TOR_REGGED -->
+
+						<!-- INCLUDE viewtopic_tor_attach.tpl -->
+
+					<!-- ELSEIF SHOW_ATTACH_DL_LINK -->
+
+						<div class="clear"></div>
+						<div class="spacer_8"></div>
+						<fieldset class="attach">
+							<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
+							<p class="attach_link"><a href="{$bb_cfg['dl_url']}{TOPIC_ID}" class="dl-stub"><b>Скачать прикреплённый файл</b></a> &nbsp;<span class="med">({ATTACH_FILESIZE})</span></p>
+						</fieldset>
+
+					<!-- ELSEIF IS_GUEST -->
+
+						<div class="clear"></div>
+						<div class="spacer_6"></div>
+
+					<!-- ENDIF -->
+				<!-- ENDIF / IS_FIRST_POST -->
+
 			</div><!--/post_wrap-->
+			<!-- IF not postrow.IS_FIRST_POST -->
 			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
 			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
+			<!-- ENDIF -->
 		</div><!--/post_body-->
 
 		<!-- IF AUTH_MOD -->
@@ -570,29 +614,12 @@ function build_poll_add_form (src_el)
 
 	</td>
 </tr>
-<tr id="post_opt" class="row2">
-	<td class="td2 med tCenter pad_4">
-		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked="checked"<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled="disabled"<!-- ENDIF --> />
-		{L_QR_NOTIFY}&nbsp;</label>
-	</td>
-</tr>
 </table><!--/topic_quick_reply-->
 
 </form>
 <!-- ENDIF / QUICK_REPLY -->
 
-<table class="topic" cellpadding="0" cellspacing="0">
-<tr>
-	<td class="catBottom med">
-	<form method="post" action="{S_POST_DAYS_ACTION}">
-		{L_DISPLAY_POSTS}: {S_SELECT_POST_DAYS}&nbsp;
-		{S_SELECT_POST_ORDER}&nbsp;
-		<input type="submit" value="{L_GO}" class="lite" name="submit" />
-	</form>
-	</td>
-</tr>
-</table>
-
+<!-- IF LOGGED_IN -->
 <table cellpadding="0" class="w100" style="padding-top: 2px;">
 <tr>
 	<td valign="top">
@@ -606,8 +633,9 @@ function build_poll_add_form (src_el)
 	</td>
 </tr>
 </table>
+<!-- ENDIF -->
 
-<!--bottom_info-->
+<!-- IF LOGGED_IN -->
 <div class="bottom_info">
 
 	<div class="jumpbox"></div>
@@ -622,25 +650,18 @@ function build_poll_add_form (src_el)
 
 <table width="100%">
 <tr>
-	<td width="40%" valign="top" nowrap="nowrap"><span class="small">{S_WATCH_TOPIC}</span><br />
+	<td valign="top" nowrap="nowrap">
 	<div class="small">
 <!-- IF S_TOPIC_ADMIN -->
 		<br clear="all" />
-		<div style="float: left;">{S_TOPIC_ADMIN}</div>
+			<div style="float: left;">{L_MANAGE}: {S_TOPIC_ADMIN}</div>
 <!-- ENDIF -->
 <!-- IF IS_ADMIN -->
-		<div class="med" style="float: right;">
-		Admin:&nbsp;
-		<a href="{U_LOGS}">{L_LOGS}</a>&nbsp;
-		</div>
-<!-- ENDIF -->
-<!-- IF S_DL_DELETE -->
 		<br clear="all" />
-		<div style="float: left;">{S_DL_DELETE}</div>
+			<div style="float: left;"><a href="{U_LOGS}">{L_LOGS}</a></div>
 <!-- ENDIF -->
-		<br clear="all" />
-		<div style="float: left;">{S_AUTH_LIST}</div>
 	</div>
 	</td>
 </tr>
 </table>
+<!-- ENDIF / LOGGED_IN -->

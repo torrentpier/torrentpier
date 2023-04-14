@@ -49,3 +49,25 @@ UPDATE `bb_smilies` SET `code` = ':cd:', `smile_url` = 'cd.gif', `emoticon` = 'c
 ALTER TABLE `bb_search_results` CHANGE `search_id` `search_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
 ALTER TABLE `bb_users` CHANGE `autologin_id` `autologin_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
 DELETE FROM `bb_config` WHERE `config_name` = 'cron_enabled';
+
+// next
+DELETE FROM `bb_config` WHERE `config_name` = 'hot_threshold';
+DROP TABLE IF EXISTS `bb_attachments`;
+DROP TABLE IF EXISTS `bb_attachments_config`;
+DROP TABLE IF EXISTS `bb_attachments_desc`;
+DROP TABLE IF EXISTS `bb_attach_quota`;
+DROP TABLE IF EXISTS `bb_extensions`;
+DROP TABLE IF EXISTS `bb_extension_groups`;
+DROP TABLE IF EXISTS `bb_quota_limits`;
+DROP TABLE IF EXISTS `bb_topics_watch`;
+ALTER TABLE `bb_bt_torrents` DROP INDEX `post_id`;
+ALTER TABLE `bb_bt_torrents` DROP INDEX `attach_id`;
+ALTER TABLE `bb_bt_torrents` DROP COLUMN `post_id`;
+ALTER TABLE `bb_bt_torrents` DROP COLUMN `attach_id`;
+ALTER TABLE `bb_bt_tor_dl_stat` DROP COLUMN `attach_id`;
+DELETE FROM `bb_cron` WHERE `cron_script` = 'attach_maintenance.php';
+ALTER TABLE `bb_posts` DROP COLUMN `post_attachment`;
+ALTER TABLE `bb_topics` DROP COLUMN `topic_attachment`;
+ALTER TABLE `bb_topics` ADD COLUMN `attach_ext_id` TINYINT(4) NOT NULL DEFAULT '0' AFTER `topic_dl_type`;
+ALTER TABLE `bb_topics` ADD COLUMN `attach_dl_cnt` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0' AFTER `attach_ext_id`;
+ALTER TABLE `bb_topics` ADD COLUMN `filesize` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0' AFTER `attach_dl_cnt`;
