@@ -573,6 +573,8 @@ switch ($mode) {
     case 'ip':
         $anon = GUEST_UID;
 
+        $rdns_ip_num = (isset($_GET['rdns'])) ? $_GET['rdns'] : '';
+
         if (!$post_id) {
             bb_die($lang['NO_SUCH_POST']);
         }
@@ -590,6 +592,8 @@ switch ($mode) {
         if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::decodeIP($post_row['poster_ip'])) {
             $ip_this_post = $lang['NOT_AVAILABLE'];
         }
+
+        $ip_this_post = ($rdns_ip_num == $ip_this_post) ? gethostbyaddr($ip_this_post) : $ip_this_post;
 
         $poster_id = $post_row['poster_id'];
 
@@ -622,12 +626,13 @@ switch ($mode) {
                 if (!$ip = \TorrentPier\Helpers\IPHelper::decodeIP($row['poster_ip'])) {
                     $ip = $lang['NOT_AVAILABLE'];
                 }
+                $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
 
                 $template->assign_block_vars('iprow', array(
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $row['poster_ip'] . "&amp;sid=" . $userdata['session_id'],
+                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'],
                 ));
 
                 $i++;
