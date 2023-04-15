@@ -160,7 +160,7 @@
 <!-- ENDIF -->
 
 <div id="board_stats">
-	<h3 class="cat_title">{L_WHOSONLINE}</h3>
+	<h3 class="cat_title">{L_STATISTICS}</h3>
 	<div id="board_stats_wrap">
 
 	<table class="forums">
