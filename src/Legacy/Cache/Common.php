@@ -66,19 +66,24 @@ class Common
         $id =& $this->dbg_id;
         $dbg =& $this->dbg[$id];
 
-        if ($mode == 'start') {
-            $this->sql_starttime = utime();
-
-            $dbg['sql'] = Dev::short_query($cur_query ?? $this->cur_query);
-            $dbg['src'] = $this->debug_find_source();
-            $dbg['file'] = $this->debug_find_source('file');
-            $dbg['line'] = $this->debug_find_source('line');
-            $dbg['time'] = '';
-        } elseif ($mode == 'stop') {
-            $this->cur_query_time = utime() - $this->sql_starttime;
-            $this->sql_timetotal += $this->cur_query_time;
-            $dbg['time'] = $this->cur_query_time;
-            $id++;
+        switch ($mode) {
+            case 'start':
+                $this->sql_starttime = utime();
+                $dbg['sql'] = Dev::short_query($cur_query ?? $this->cur_query);
+                $dbg['src'] = $this->debug_find_source();
+                $dbg['file'] = $this->debug_find_source('file');
+                $dbg['line'] = $this->debug_find_source('line');
+                $dbg['time'] = '';
+                break;
+            case 'stop':
+                $this->cur_query_time = utime() - $this->sql_starttime;
+                $this->sql_timetotal += $this->cur_query_time;
+                $dbg['time'] = $this->cur_query_time;
+                $id++;
+                break;
+            default:
+                bb_simple_die('[Cache] Incorrect debug mode');
+                break;
         }
     }
 
