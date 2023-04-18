@@ -74,7 +74,7 @@ foreach ($rowset as $cnt => $row) {
 
 function commify_callback($matches)
 {
-    return commify($matches[0]);
+    return number_format($matches[0]);
 }
 
 function commify_ob($contents)
