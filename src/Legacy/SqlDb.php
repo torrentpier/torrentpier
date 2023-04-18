@@ -104,13 +104,6 @@ class SqlDb
         $this->link = mysqli_connect($p . $this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname']);
         $this->selected_db = $this->cfg['dbname'];
 
-        if (mysqli_connect_error()) {
-            $server = DBG_USER ? $this->cfg['dbhost'] : '';
-            Http::statusCode(503);
-            bb_log(' ', "db_err/connect_failed_{$this->cfg['dbhost']}");
-            die("Could not connect to mysql server $server");
-        }
-
         register_shutdown_function([&$this, 'close']);
 
         $this->debug('stop');
