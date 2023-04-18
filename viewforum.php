@@ -185,8 +185,8 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             'FORUM_NAME' => $fname_html,
             'FORUM_DESC' => $forums['f'][$sf_forum_id]['forum_desc'],
             'U_VIEWFORUM' => FORUM_URL . $sf_forum_id,
-            'TOPICS' => commify($sf_data['forum_topics']),
-            'POSTS' => commify($sf_data['forum_posts']),
+            'TOPICS' => number_format($sf_data['forum_topics']),
+            'POSTS' => number_format($sf_data['forum_posts']),
             'LAST_POST' => $last_post,
         ));
 

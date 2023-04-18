@@ -343,54 +343,6 @@ function sys($param)
     }
 }
 
-function dbg_log($str, $file)
-{
-    $dir = LOG_DIR . (defined('IN_TRACKER') ? '/dbg_tr/' : '/dbg_bb/') . date('m-d_H') . '/';
-    return file_write($str, $dir . $file, false, false);
-}
-
-function log_get($file = '', $prepend_str = false)
-{
-    log_request($file, $prepend_str, false);
-}
-
-function log_post($file = '', $prepend_str = false)
-{
-    log_request($file, $prepend_str, true);
-}
-
-function log_request($file = '', $prepend_str = false, $add_post = true)
-{
-    global $user;
-
-    $file = $file ?: 'req/' . date('m-d');
-    $str = array();
-    $str[] = date('m-d H:i:s');
-    if ($prepend_str !== false) {
-        $str[] = $prepend_str;
-    }
-    if (!empty($user->data)) {
-        $str[] = $user->id . "\t" . html_entity_decode($user->name);
-    }
-    $str[] = sprintf('%-15s', $_SERVER['REMOTE_ADDR']);
-
-    if (isset($_SERVER['REQUEST_URI'])) {
-        $str[] = $_SERVER['REQUEST_URI'];
-    }
-    if (isset($_SERVER['HTTP_USER_AGENT'])) {
-        $str[] = $_SERVER['HTTP_USER_AGENT'];
-    }
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        $str[] = $_SERVER['HTTP_REFERER'];
-    }
-
-    if (!empty($_POST) && $add_post) {
-        $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
-    }
-    $str = implode("\t", $str) . "\n";
-    bb_log($str, $file);
-}
-
 // Board or tracker init
 if (!defined('IN_TRACKER')) {
     require_once INC_DIR . '/init_bb.php';

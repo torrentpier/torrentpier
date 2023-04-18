@@ -543,14 +543,6 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 }
 
 /**
- * Adds commas between every group of thousands
- */
-function commify($number)
-{
-    return number_format($number);
-}
-
-/**
  * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
@@ -2140,7 +2132,7 @@ function user_birthday_icon($user_birthday, $user_id): string
 
     $current_date = bb_date(TIMENOW, 'md', false);
     $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
-        ? date('md', strtotime($user_birthday)) : false;
+        ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
     return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
 }
