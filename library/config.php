@@ -21,9 +21,9 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.3.1';
-$bb_cfg['tp_release_date'] = '18-03-2023';
-$bb_cfg['tp_release_codename'] = 'Bison';
+$bb_cfg['tp_version'] = '2.4.0-dev';
+$bb_cfg['tp_release_date'] = '18-04-2023';
+$bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Database
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;

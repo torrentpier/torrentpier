@@ -210,13 +210,13 @@ function hl (id, on)
 		<td class="small tCenter" title="{L_POSTS_SHORT}"><em class="med" style="color: grey">{L_POSTS_SHORT}:</em> {c.f.NUM_POSTS}</td>
 		<td class="med nowrap tCenter">
 			&nbsp;
-			<a class="med" href="{c.f.U_FORUM_EDIT}">edit</a>
+			<a class="med" href="{c.f.U_FORUM_EDIT}">{L_EDIT}</a>
 			&nbsp;&middot;&nbsp;
-			<a class="med" href="{c.f.U_FORUM_PERM}">perm</a>
+			<a class="med" href="{c.f.U_FORUM_PERM}">{L_PERMISSIONS}</a>
 			&nbsp;&middot;&nbsp;
-			<a class="med" href="{c.f.U_FORUM_RESYNC}">sync</a>
+			<a class="med" href="{c.f.U_FORUM_RESYNC}">{L_SYNC}</a>
 			&nbsp;&middot;&nbsp;
-			<a class="med" href="{c.f.U_FORUM_DELETE}">x</a>
+			<a class="med" href="{c.f.U_FORUM_DELETE}">{L_DELETE}</a>
 			&nbsp;
 		</td>
 		<td class="small" align="center" nowrap="nowrap"><b>{c.f.PRUNE_DAYS}</b></td>
