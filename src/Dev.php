@@ -34,7 +34,7 @@ class Dev
      *
      * @return void
      */
-    public static function debug_init(): void
+    public static function initDebug(): void
     {
         global $bb_cfg;
 
@@ -88,7 +88,7 @@ class Dev
         $log = '';
 
         foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj) ? self::get_sql_log_html($db_obj, "$srv_name [MySQL]") : '';
+            $log .= !empty($db_obj) ? self::get_sql_log_html($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {

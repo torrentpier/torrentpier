@@ -76,7 +76,7 @@ if (file_exists(__DIR__ . '/library/config.local.php')) {
  * Progressive error reporting
  */
 define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
-\TorrentPier\Dev::debug_init();
+\TorrentPier\Dev::initDebug();
 
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
