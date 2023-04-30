@@ -98,41 +98,31 @@ class Ajax
 
         // Auth check
         switch ($action_params[0]) {
-            // GUEST
-            case 'guest':
+            case 'guest': // GUEST
                 break;
-
-                // USER
-            case 'user':
+            case 'user': // USER
                 if (IS_GUEST) {
                     $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
                 }
                 break;
-
-                // MOD
-            case 'mod':
+            case 'mod': // MOD
                 if (!IS_AM) {
                     $this->ajax_die($lang['ONLY_FOR_MOD']);
                 }
                 $this->check_admin_session();
                 break;
-
-                // ADMIN
-            case 'admin':
+            case 'admin': // ADMIN
                 if (!IS_ADMIN) {
                     $this->ajax_die($lang['ONLY_FOR_ADMIN']);
                 }
                 $this->check_admin_session();
                 break;
-
-                // SUPER_ADMIN
-            case 'super_admin':
+            case 'super_admin': // SUPER_ADMIN
                 if (!IS_SUPER_ADMIN) {
                     $this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
                 }
                 $this->check_admin_session();
                 break;
-
             default:
                 trigger_error("invalid auth type for $action", E_USER_ERROR);
         }

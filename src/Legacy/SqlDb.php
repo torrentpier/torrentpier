@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy;
 
 use mysqli_result;
-use TorrentPier\Common\Http;
 use TorrentPier\Dev;
 
 /**
@@ -26,6 +25,7 @@ class SqlDb
     public $db_server = '';
     public $selected_db;
     public $inited = false;
+    public string $engine = 'MySQL';
 
     public $locked = false;
     public $locks = [];
@@ -993,7 +993,7 @@ class SqlDb
 				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
 				<tr>
 					<th style="height: 22px; cursor: pointer;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.4f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
-					<th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px; cursor: pointer;" align="right" title="' . $lang['COPY_TO_CLIPBOARD'] . '">' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
+					<th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px; cursor: pointer;" align="right" title="' . $lang['COPY_TO_CLIPBOARD'] . '">' . "[$this->engine] $this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
