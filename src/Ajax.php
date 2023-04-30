@@ -10,7 +10,6 @@
 namespace TorrentPier;
 
 use Exception;
-use TorrentPier\Helpers\IsHelper;
 
 /**
  * Class Ajax
