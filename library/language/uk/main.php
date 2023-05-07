@@ -118,7 +118,7 @@ $lang['LOADING'] = 'Завантаження...';
 $lang['JUMPBOX_TITLE'] = 'Обрати форум';
 $lang['DISPLAYING_OPTIONS'] = 'Параметри відображення';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['COPY_TO_CLIPBOARD'] = 'Копіювати до буферу обміну';
 
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Зареєстровані користувачі:';
@@ -475,7 +475,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Надіслати нове приватне по
 $lang['SEND_A_REPLY'] = 'Відповісти на приватне повідомлення';
 $lang['EDIT_MESSAGE'] = 'Редагувати приватне повідомлення';
 
-$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
+$lang['NOTIFICATION_SUBJECT'] = 'Ви отримали нове приватне повідомлення!';
 
 $lang['FIND_USERNAME'] = 'Знайти користувача';
 $lang['SELECT_USERNAME'] = 'Оберіть користувача';
@@ -2811,7 +2811,7 @@ $lang['CAPTCHA_WRONG'] = 'Ви не змогли підтвердити, що В
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha налаштована не повністю</h2><p>Якщо Ви ще не згенерували ключі, можете це зробити на сторінці <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />Після того, як Ви згенеруєте ключі, потрібно прописати їх у файл library/config.php.</p>';
 
 // Sending email
-$lang['REPLY_TO'] = 'Reply to';
+$lang['REPLY_TO'] = 'Відповісти';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Без теми',
     'GROUP_ADDED' => 'Вас додали до групи користувачів',
