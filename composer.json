@@ -31,7 +31,7 @@
   },
   "require": {
     "php": "^7.4 || ^8.0",
-    "bugsnag/bugsnag": "v3.29.0",
+    "bugsnag/bugsnag": "v3.29.1",
     "egulias/email-validator": "^3.2",
     "filp/whoops": "^2.15",
     "gigablah/sphinxphp": "2.0.8",
