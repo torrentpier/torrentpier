@@ -118,8 +118,6 @@ $lang['LOADING'] = '载入中...';
 $lang['JUMPBOX_TITLE'] = '论坛选择';
 $lang['DISPLAYING_OPTIONS'] = '显示选项';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = '注册的用户︰';
 $lang['BROWSING_FORUM'] = '正在浏览论坛的用户：';
