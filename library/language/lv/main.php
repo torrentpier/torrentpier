@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Notiek ielāde...';
 $lang['JUMPBOX_TITLE'] = 'Izvēlieties forumā';
 $lang['DISPLAYING_OPTIONS'] = 'Parādot iespējas';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Reģistrētiem Lietotājiem:';
 $lang['BROWSING_FORUM'] = 'Lietotāji, kuri atrodas šajā forumā:';
