@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = '선택한 포럼';
 $lang['DISPLAYING_OPTIONS'] = '옵션이 표시';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = '등록된 사용:';
 $lang['BROWSING_FORUM'] = '사용자는 브라우징이 포럼:';
