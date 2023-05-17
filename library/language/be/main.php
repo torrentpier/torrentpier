@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Загрузка...';
 $lang['JUMPBOX_TITLE'] = 'Абярыце форум';
 $lang['DISPLAYING_OPTIONS'] = 'Адлюстраванне параметраў';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Зарэгістраваныя Карыстальнікі:';
 $lang['BROWSING_FORUM'] = 'Карыстальнікі, якія праглядаюць гэты форум:';
