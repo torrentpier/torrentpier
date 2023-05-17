@@ -118,8 +118,6 @@ $lang['LOADING'] = 'טעינה...';
 $lang['JUMPBOX_TITLE'] = 'בחר פורום';
 $lang['DISPLAYING_OPTIONS'] = 'הצגת אפשרויות';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'משתמשים רשומים:';
 $lang['BROWSING_FORUM'] = 'משתמשים הגולשים בפורום זה:';
