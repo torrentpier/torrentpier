@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Φόρτωση...';
 $lang['JUMPBOX_TITLE'] = 'Επιλέξτε φόρουμ';
 $lang['DISPLAYING_OPTIONS'] = 'Εμφανίζει επιλογές';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Οι Εγγεγραμμένοι Χρήστες:';
 $lang['BROWSING_FORUM'] = 'Οι χρήστες περιήγηση σε αυτό το φόρουμ:';
