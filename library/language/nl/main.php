@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Bezig met laden...';
 $lang['JUMPBOX_TITLE'] = 'Selecteer forum';
 $lang['DISPLAYING_OPTIONS'] = 'Weergave opties';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Geregistreerde Gebruikers:';
 $lang['BROWSING_FORUM'] = 'Gebruikers op dit forum:';
