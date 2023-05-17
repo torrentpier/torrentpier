@@ -118,8 +118,6 @@ $lang['LOADING'] = 'تحميل...';
 $lang['JUMPBOX_TITLE'] = 'حدد المنتدى';
 $lang['DISPLAYING_OPTIONS'] = 'عرض الخيارات';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'المستخدمين المسجلين:';
 $lang['BROWSING_FORUM'] = 'المستخدمون المتصفحون لهذا المنتدى:';
