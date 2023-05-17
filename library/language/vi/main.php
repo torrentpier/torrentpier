@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Nạp...';
 $lang['JUMPBOX_TITLE'] = 'Chọn diễn đàn';
 $lang['DISPLAYING_OPTIONS'] = 'Hiển thị các lựa chọn';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Người Đã Đăng Ký:';
 $lang['BROWSING_FORUM'] = 'Người sử dụng, duyệt diễn đàn này:';
