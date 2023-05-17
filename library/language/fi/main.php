@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Valitse foorumi';
 $lang['DISPLAYING_OPTIONS'] = 'Näyttää vaihtoehtoja';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Rekisteröityneet Käyttäjät:';
 $lang['BROWSING_FORUM'] = 'Käyttäjiä lukemassa tätä aluetta:';
