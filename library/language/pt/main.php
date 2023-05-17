@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Envia uma nova mensagem particular';
 $lang['SEND_A_REPLY'] = 'Responder a uma mensagem privada';
 $lang['EDIT_MESSAGE'] = 'Editar mensagem privada';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nova Mensagem foi recebida!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Encontrar um nome de usuário';
 $lang['SELECT_USERNAME'] = 'Escolha um nome de usuário';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Seu perfil foi atualizado. No entanto, voc�
 
 $lang['PASSWORD_MISMATCH'] = 'As senhas que você inseriu não coincidem.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'A actual palavra-passe que forneceu não coincide com o que está armazenado no banco de dados.';
-$lang['PASSWORD_LONG'] = 'A sua palavra-passe devem ter mais de 32 caracteres.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Você tem feito muitas as tentativas de registro. Por favor, tente novamente mais tarde.';
 $lang['USERNAME_TAKEN'] = 'Desculpe, mas este nome de usuário já está sendo usado.';
 $lang['USERNAME_INVALID'] = 'Desculpe, mas este nome de usuário contém um caractere inválido';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privada';
 $lang['REGISTERED'] = 'Registrado';
 $lang['ADMINISTRATORS'] = 'Administradores';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TODOS';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVADA';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Compor';
 $lang['RECIPIENTS'] = 'Destinatários';
 $lang['ALL_USERS'] = 'Todos Os Utilizadores';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Tipo de e-mail';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Sua mensagem foi enviada';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Clique %sHere%s para voltar ao formulário de e-Mail em Massa';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'O Grupo de Extensão %s já existe'; // replac
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Gerenciar Categorias Especiais';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Aqui você pode configurar a Categorias Especiais. Você pode configurar Parâmetros Especiais e Condições Especiais de Categorys atribuído a um Grupo de Extensão.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Definições para Categoria Especial: Imagens';
 $lang['SETTINGS_CAT_FLASH'] = 'Configurações Especiais Categoria: Arquivos Flash';
 $lang['DISPLAY_INLINED'] = 'Exibir Imagens Lineares';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Você não podia confirmar que você não é um robô'
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha não sendo totalmente configured</h2><p>if você ainda não tenha gerado as chaves, você pode fazê-lo em <a href="https://www.google.com/recaptcha/admin">https://www.o google.com/recaptcha/admin</a>.<br />After você gerar as chaves, você precisa colocá-los no arquivo de biblioteca/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'sem assunto',
     'GROUP_ADDED' => 'Você foi adicionado ao grupo de usuários',

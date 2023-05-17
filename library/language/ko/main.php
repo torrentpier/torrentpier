@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = '보내는 새로운 비공개 메시지';
 $lang['SEND_A_REPLY'] = '답글을 비공개 메시지';
 $lang['EDIT_MESSAGE'] = '편집하는 개인 메시지';
 
-$lang['NOTIFICATION_SUBJECT'] = '새로운 개인적인 메시지를 받았다되었습니다!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = '을 찾아 사용자 이름';
 $lang['SELECT_USERNAME'] = '사용자 이름을 선택하';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = '프로필 업데이트되었습니다. 그�
 
 $lang['PASSWORD_MISMATCH'] = '입력하신 비밀번호가 일치하지 않았습니다.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = '현재 암호를 제공이 일치하지 않는 데이터베이스에 저장됩니다.';
-$lang['PASSWORD_LONG'] = '비밀번호해야 합 32 개보다 많은 자입니다.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = '당신은 너무 많은 등록 시도합니다. 나중에 다시 시도하십시오.';
 $lang['USERNAME_TAKEN'] = '미안하지만 이용자 이름으로 이미 가지고 갔습니다.';
 $lang['USERNAME_INVALID'] = '미안하지만 이 사용자 이름 잘못된 문자가 들어 있습니다';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Private';
 $lang['REGISTERED'] = '등록';
 $lang['ADMINISTRATORS'] = '관리자';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = '모든';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = '작성';
 $lang['RECIPIENTS'] = '받는 사람';
 $lang['ALL_USERS'] = '모든 사용자';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = '이메일 유형';
+
 $lang['EMAIL_SUCCESSFULL'] = '귀하의 메시지가 전송되었습니다';
 $lang['CLICK_RETURN_MASSEMAIL'] = '클릭 %sHere%s 를 반환하는 대량 전자 메일 양식';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = '의 확장자 그룹 이미 존재하 %s'; // 
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = '를 관리하는 특별한 범주';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = '여기에 구성할 수 있는 특별한 범주가 있습니다. 당신은 설정할 수 있습니다 매개 변수와 특별한 조건에 특별한 Categorys 할당을 연장 그룹입니다.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = '설정를 위해 특별한 범주:이미지';
 $lang['SETTINGS_CAT_FLASH'] = '설정를 위해 특별한 카테고리:플래시 파일';
 $lang['DISPLAY_INLINED'] = '인라인 이미지를 표시';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = '을 확인할 수없는 당신이하지 않는 로봇'
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha 되지 않는 완전히 configured</h2><p>if 하지 않은 이미 생성된 열쇠를 당신에 그것을 할 수 있습니다 <a href="https://www.google.com/recaptcha/admin">https://www.google 니다.com/recaptcha/admin</a> 니다.<br />After 를 생성하는 키를,당신은 그들을 넣어서 파일의 라이브러리/config 니다.php 니다.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => '주제 없음',
     'GROUP_ADDED' => '사용자 그룹에 추가되었습니다.',

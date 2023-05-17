@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Pošlji novo zasebno sporočilo';
 $lang['SEND_A_REPLY'] = 'Odgovor na zasebno sporočilo';
 $lang['EDIT_MESSAGE'] = 'Urejanje zasebno sporočilo';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Novo Zasebno Sporočilo že prejela!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Našli uporabniško ime';
 $lang['SELECT_USERNAME'] = 'Izberite uporabniško Ime';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Vaš profil je bil posodobljen. Vendar pa s
 
 $lang['PASSWORD_MISMATCH'] = 'Gesla, ki ste ga vnesli, ni tekmo.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Trenutno geslo, ki ste jih navedli, ne ujemajo, ki so shranjeni v zbirki podatkov.';
-$lang['PASSWORD_LONG'] = 'Geslo mora biti več kot 32 znakov.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Ste naredili preveč registracijo poskusov. Prosimo, poskusite znova pozneje.';
 $lang['USERNAME_TAKEN'] = 'Žal mi je, ampak to uporabniško ime je že bilo.';
 $lang['USERNAME_INVALID'] = 'Žal mi je, ampak to ime vsebuje neveljaven znak';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Zasebni';
 $lang['REGISTERED'] = 'Registrirani';
 $lang['ADMINISTRATORS'] = 'Administratorji';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'VSE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ZASEBNI';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Sestavite';
 $lang['RECIPIENTS'] = 'Prejemniki';
 $lang['ALL_USERS'] = 'Vse Uporabnike';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Vrsta e-pošte';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Vaše sporočilo je bilo poslano';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Kliknite %sHere%s, da se vrnete na Množično E-poštni obrazec';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Razširitev Skupine %s, ki že obstajajo,'; //
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Upravljanje Posebne Kategorije';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Tukaj lahko nastavite Posebne Kategorije. Nastavite lahko Posebnimi Parametri in Pogoji za Posebne Categorys namenski Podaljšek Skupine.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Nastavitve za Posebno zvrst: Slike';
 $lang['SETTINGS_CAT_FLASH'] = 'Nastavitve za Posebne Kategorije: Flash Datoteke';
 $lang['DISPLAY_INLINED'] = 'Prikaz Slik Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Si ni mogel potrditi, da niste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bi v celoti configured</h2><p>if še niste ustvarjeni tipk, lahko to storite na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After ustvarite tipke, boste morali, da jih na datoteke knjižnica/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Brez zadeve',
     'GROUP_ADDED' => 'Dodani ste v skupino uporabnikov',

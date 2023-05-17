@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Yeni özel mesaj gönder';
 $lang['SEND_A_REPLY'] = 'Cevap özel mesaj için';
 $lang['EDIT_MESSAGE'] = 'Edit özel mesaj';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Yeni Özel Mesaj alındı!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Bir kullanıcı adı bul';
 $lang['SELECT_USERNAME'] = 'Bir Kullanıcı adı seçin';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profiliniz güncellendi. Ancak, hayati ayr�
 
 $lang['PASSWORD_MISMATCH'] = 'Girdiğiniz parolalar uyuşmuyor.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Sağladığınız geçerli parola veritabanında saklanan eşleşmiyor.';
-$lang['PASSWORD_LONG'] = 'Şifreniz en fazla 32 karakter olmalıdır.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Çok fazla kayıt girişimleri yaptık. Lütfen daha sonra tekrar deneyin.';
 $lang['USERNAME_TAKEN'] = 'Üzgünüm, ama bu kullanıcı adı zaten alınmış.';
 $lang['USERNAME_INVALID'] = 'Üzgünüm, ama bu kullanıcı adı geçersiz bir karakter içeriyor.';
@@ -1690,7 +1690,7 @@ $lang['PRIVATE'] = 'Özel';
 $lang['REGISTERED'] = 'Kayıtlı';
 $lang['ADMINISTRATORS'] = 'Yöneticiler';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TÜM';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ÖZEL';
@@ -1970,6 +1970,8 @@ $lang['COMPOSE'] = 'Oluştur';
 $lang['RECIPIENTS'] = 'Alıcılar';
 $lang['ALL_USERS'] = 'Tüm Kullanıcılar';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-posta türü';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesajınız gönderildi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Toplu e-Posta formuna dönmek için %sHere%s tıklayın';
 
@@ -2157,7 +2159,7 @@ $lang['EXTENSION_GROUP_EXIST'] = '%s Uzantısı Grup zaten var'; // replace %s w
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Özel Kategorileri Yönet';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Burada Özel Kategori yapılandırabilirsiniz. Uzantısı bir Grup için atanmış Özel Categorys için Özel Parametreler ve Koşullar ayarlayabilirsiniz.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Özel Kategori için ayarlar: Görüntüler';
 $lang['SETTINGS_CAT_FLASH'] = 'Özel Kategori ayarları: Flash Dosyaları';
 $lang['DISPLAY_INLINED'] = 'Ekran Görüntüleri İnlined';
@@ -2813,6 +2815,7 @@ $lang['CAPTCHA_WRONG'] = 'Bir robot olmadığını onaylamak değil mi';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha zaten anahtarları oluşturulur mi tam configured</h2><p>if olmak değil, <a href="https://www.google.com/recaptcha/admin">https://www yapabilirsin.google.com/tuttum/admin</a>.Anahtarları oluşturmak <br />After, dosya Kütüphanesi/config onları koymak gerekir.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Konu yok',
     'GROUP_ADDED' => 'Kullanıcı grubuna eklendiniz',

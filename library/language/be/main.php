@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Адправіць новае прыватнае 
 $lang['SEND_A_REPLY'] = 'Адказ на асабістае паведамленне';
 $lang['EDIT_MESSAGE'] = 'Рэдагаваць асабістае паведамленне';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Новае Прыватнае паведамленне атрымаў!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Знайсці імя карыстальніка';
 $lang['SELECT_USERNAME'] = 'Выберыце Імя карыстальніка';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Ваш профіль быў абноўле
 
 $lang['PASSWORD_MISMATCH'] = 'Уведзеныя паролі не супадаюць.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Бягучы пароль вы паказалі не супадае з якія захоўваюцца ў базе дадзеных.';
-$lang['PASSWORD_LONG'] = 'Ваш пароль павінен быць не больш за 32 знакаў.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Вы зрабілі надта шмат спробаў рэгістрацыі. Калі ласка, паспрабуйце зноў пазней.';
 $lang['USERNAME_TAKEN'] = 'Прабачце, але гэта імя карыстальніка ўжо занята.';
 $lang['USERNAME_INVALID'] = 'Прабачце, але гэта імя карыстальніка ўтрымоўвае недапушчальны знак';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Прыватная';
 $lang['REGISTERED'] = 'Зарэгістраваны';
 $lang['ADMINISTRATORS'] = 'Адміністратары';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Усе';
 $lang['FORUM_REG'] = 'Рэг';
 $lang['FORUM_PRIVATE'] = 'Прыватная';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Складаць';
 $lang['RECIPIENTS'] = 'Атрымальнікі';
 $lang['ALL_USERS'] = 'Усім Карыстальнікам';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Тып электроннай пошты';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Ваша паведамленне было адпраўлена';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Націсніце %sHere%s, каб вярнуцца да масавай форме па электроннай пошце';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Група пашырэнне %s ўжо існ
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Кіраванне Спецыяльных Катэгорый';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Тут вы можаце наладжваць спецыяльныя катэгорыі. Вы можаце ўсталяваць спецыяльныя параметры, а таксама ўмовы спецыяльнага Categorys, прысвоеных групе пашырэнняў.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Налады для спецыяльнай катэгорыі: карцінкі';
 $lang['SETTINGS_CAT_FLASH'] = 'Налады для спецыяльнай катэгорыі: флэш-файлаў';
 $lang['DISPLAY_INLINED'] = 'Дысплей Выявы Клікабельны';
@@ -2808,6 +2810,7 @@ $lang['CAPTCHA_WRONG'] = 'Вы не маглі б пацвердзіць, што
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha не будучы цалкам configured</h2><p>if вы яшчэ не згенераваў ключы, вы можаце зрабіць гэта на <a href="https://www.google.com/recaptcha/admin">https://ВСП.гугл.ком/рекапчу/admin</a>.<br />After вы генерируете ключы, вам трэба пакласці іх у файл Library/конфіг.у PHP.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Тэмы няма',
     'GROUP_ADDED' => 'Вы былі дададзены ў групу карыстальнікаў',

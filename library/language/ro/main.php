@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Trimite un nou mesaj privat';
 $lang['SEND_A_REPLY'] = 'Răspunsul la un mesaj privat';
 $lang['EDIT_MESSAGE'] = 'Editare mesaj privat';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Mesaj Privat nou a fost primit!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Găsiți un nume de utilizator';
 $lang['SELECT_USERNAME'] = 'Selectați un nume de Utilizator';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profilul a fost actualizat. Cu toate aceste
 
 $lang['PASSWORD_MISMATCH'] = 'Parolele introduse nu se potrivesc.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Actuala parola pe care ați furnizat nu se potrivește cu cea stocată în baza de date.';
-$lang['PASSWORD_LONG'] = 'Parola trebuie să fie nu mai mult de 32 de caractere.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Ai făcut prea multe încercări de înregistrare. Vă rugăm să încercați din nou mai târziu.';
 $lang['USERNAME_TAKEN'] = 'Îmi pare rău, dar acest utilizator a fost deja luată.';
 $lang['USERNAME_INVALID'] = 'Îmi pare rău, dar acest nume de utilizator conține un caracter invalid';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privat';
 $lang['REGISTERED'] = 'Înregistrați';
 $lang['ADMINISTRATORS'] = 'Administratorii';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TOATE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAT';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Compune';
 $lang['RECIPIENTS'] = 'Beneficiarii';
 $lang['ALL_USERS'] = 'Toți Utilizatorii';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Tip e-mail';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesajul tau a fost trimis';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Faceți clic pe %sHere%s pentru a reveni la Masa formularul de e-Mail';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Extinderea Grupului %s există deja'; // repla
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Gestiona Categorii Speciale';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Aici puteți configura Categoriile Speciale. Puteți configura Parametrii Speciale și Condiții Speciale Categorys atribuit o Extensie de Grup.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Setări pentru Categorii Speciale: Imagini';
 $lang['SETTINGS_CAT_FLASH'] = 'Setări pentru Categorii Speciale: Fișiere Flash';
 $lang['DISPLAY_INLINED'] = 'Afișa Imagini Inline';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Tu nu a putut confirma că nu sunt un robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha a nu fi pe deplin configured</h2><p>if nu te-ai generat deja cheile, o poti face pe <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After genera cheile, trebuie să le pună la fișierul bibliotecă/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Fără subiect',
     'GROUP_ADDED' => 'Ai fost adăugat la grupul de utilizatori',

@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Ирсоли паём хусусӣ нав';
 $lang['SEND_A_REPLY'] = 'Ҷавоб додан ба паём хусусӣ';
 $lang['EDIT_MESSAGE'] = 'Таҳрир паёми хусусӣ';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Паёми нави хусусӣ кардааст, recieved шуд!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Пайдо кардани номи корбарӣ';
 $lang['SELECT_USERNAME'] = 'Интихоб Логин';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'профили худро навсозӣ ш
 
 $lang['PASSWORD_MISMATCH'] = 'Дар нишонаҳо ки шумо ворид кард мувофиқ нест.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Гузарвожа ҷорӣ ба шумо таъмин мекунад мувофиқ нест, ки ба нигоҳ дошта, дар пойгоҳи дода.';
-$lang['PASSWORD_LONG'] = 'Гузарвожаи шумо бояд на зиёда аз 32 аломат бошад.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Шумо низ кӯшиши сабти дод. Лутфан, баъд бори дигар кӯшиш кунед.';
 $lang['USERNAME_TAKEN'] = 'Бубахшед, аммо ин номи корбарӣ ва аллакай гирифта шудааст.';
 $lang['USERNAME_INVALID'] = 'Бубахшед, аммо ин корбарӣ дорои хусусияти беэътибор';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'хусусӣ';
 $lang['REGISTERED'] = 'Сабтшуда';
 $lang['ADMINISTRATORS'] = 'Администраторҳо';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALL';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ХУСУСӢ';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Эҷоди';
 $lang['RECIPIENTS'] = 'гирандагони';
 $lang['ALL_USERS'] = 'Ҳамаи Истифодабарандагон';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Навъи почтаи электронӣ';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Паёми шумо нозил шудааст,';
 $lang['CLICK_RETURN_MASSEMAIL'] = '%sHere%s ангушт занед барои баргаштан ба шакли Email ВАО';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Дар Тамдиди Гурӯҳи %s алла
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Идоракунии Categories махсус';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Дар ин ҷо шумо метавонед категорияҳо махсус танзим карда метавонед. Шумо метавонед насб параметрҳои махсус Шароит барои Categorys махсус ба зиммаи як гурӯҳи Дароз.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Танзимот барои Гурӯҳ Special: Тасвирҳо';
 $lang['SETTINGS_CAT_FLASH'] = 'Танзимот барои Гурӯҳ Special: Files Flash';
 $lang['DISPLAY_INLINED'] = 'Display Тасвирҳо Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Шумо карда наметавонистанд т�
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha будан нест, пурра configured</h2><p>If шумо аллакай тавлидшуда калидҳои нашуда бошад, шумо метавонед онро дар <a href="https://www.google.com/recaptcha/admin">https кор: //www.google.com/recaptcha/admin</a>.<br />After шумо тавлид калидҳои, ба шумо лозим аст, ки онҳоро дар китобхонаи файл / Танзимоти .php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Мавзӯъ нест',
     'GROUP_ADDED' => 'Шумо ба гурӯҳи корбарон илова кардаед',

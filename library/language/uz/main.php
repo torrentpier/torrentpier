@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Yangi shaxsiy xabar yuboring';
 $lang['SEND_A_REPLY'] = 'bir maxsus xat javob';
 $lang['EDIT_MESSAGE'] = 'shaxsiy xabar tahrirlash';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Yangi Xususiy Xabar qabul qilindi!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Agar foydalanuvchi nomi topish';
 $lang['SELECT_USERNAME'] = 'Agar foydalanuvchi nomi tanlang';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Sizning profili yangilandi. Ammo, shunday s
 
 $lang['PASSWORD_MISMATCH'] = 'Siz kiritgan parol to\'g\'ri kelmadi.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Agar taqdim etilgan joriy parol ma\'lumotlar bazasida saqlanadi, deb mos kelmaydi.';
-$lang['PASSWORD_LONG'] = 'Parolni 32 belgidan ko\'p bo\'lmagan bo\'lishi kerak.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Siz juda ko\'p Ro\'yxatdan urinish qildik. Iltimos keyinroq qaytadan urinib ko\'ring.';
 $lang['USERNAME_TAKEN'] = 'Kechirasiz, lekin bu foydalanuvchi nomi allaqachon qabul qilingan.';
 $lang['USERNAME_INVALID'] = 'Kechirasiz, lekin bu foydalanuvchi nomi yaroqsiz belgi mavjud';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'shaxsiy';
 $lang['REGISTERED'] = 'ro\'yxatga olingan';
 $lang['ADMINISTRATORS'] = 'Administratorlar';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'bARCHA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'XUSUSIY';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'yaratmoq';
 $lang['RECIPIENTS'] = 'Qabul qiluvchilarni';
 $lang['ALL_USERS'] = 'barcha foydalanuvchilar';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Elektron pochta turi';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Xabaringiz jo\'natildi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Mass Email shaklida qaytish uchun %sHere%s bosing';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Extension Group %s allaqachon mavjud'; // repl
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Maxsus Kategoriyalar boshqarish';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Bu yerda siz Maxsus Kategoriyalar moslashingiz mumkin. Siz Maxsus parametrlarini va Extension guruhi tayinlangan maxsus kategoriyalari shartlari o\'rnatishingiz mumkin.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Maxsus Turkum uchun Sozlamalar: Tasvirlar';
 $lang['SETTINGS_CAT_FLASH'] = 'Maxsus Turkum uchun Sozlamalar: Flash Fayllar';
 $lang['DISPLAY_INLINED'] = 'Displey Tasvirlar inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Siz bir robot emas, deb tasdiqlash mumkin emas';
 $lang['CAPTCHA_SETTINGS'] = 'Agar siz allaqachon kalitlari hosil yo\'q configured</h2><p>If <h2>ReCaptcha siz <a href="https://www.google.com/recaptcha/admin">https uni, albatta, mumkin, to\'liq bo\'lmasligi: Agar kalitlari ishlab //www.google.com/recaptcha/admin</a>.<br />After, siz fayl kutubxona / config da, ularni qo\'yish kerak .php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Mavzu yo\'q',
     'GROUP_ADDED' => 'Siz foydalanuvchilar guruhiga qo\'shildingiz',

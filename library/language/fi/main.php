@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Lähetä uusi yksityinen viesti';
 $lang['SEND_A_REPLY'] = 'Vastaus yksityiseen viestiin';
 $lang['EDIT_MESSAGE'] = 'Edit yksityinen viesti';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Uusi Yksityinen Viesti on otettu vastaan!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Etsi käyttäjätunnus';
 $lang['SELECT_USERNAME'] = 'Valitse Käyttäjätunnus';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profiilisi on päivitetty. Kuitenkin, sinun
 
 $lang['PASSWORD_MISMATCH'] = 'Salasanat eivät täsmää.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Nykyinen salasanasi, jotka annoit ei ole ottelu, joka tallennetaan tietokantaan.';
-$lang['PASSWORD_LONG'] = 'Salasana saa olla enintään 32 merkkiä.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Olet tehnyt liian monta rekisteröinti yritykset. Yritä myöhemmin uudelleen.';
 $lang['USERNAME_TAKEN'] = 'Anteeksi, mutta tämä käyttäjätunnus on jo toteutettu.';
 $lang['USERNAME_INVALID'] = 'Anteeksi, mutta tämä käyttäjätunnus on virheellinen merkki';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Yksityinen';
 $lang['REGISTERED'] = 'Rekisteröity';
 $lang['ADMINISTRATORS'] = 'Ylläpitäjät';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'KAIKKI';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'YKSITYINEN';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Säveltää';
 $lang['RECIPIENTS'] = 'Vastaanottajat';
 $lang['ALL_USERS'] = 'Kaikki Käyttäjät';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Sähköpostin tyyppi';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Viestisi on lähetetty';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klikkaa %sHere%s palata Massa Sähköposti muodossa';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Laajennus Ryhmä %s jo olemassa'; // replace %
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Hallitse Erityistä Luokat';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Täällä voit määrittää Erityisiä Luokkia. Voit määrittää Erityiset Parametrit ja Edellytykset Erityinen Luokat määritetty Laajennus Ryhmä.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Asetukset Special Luokka: Kuvat';
 $lang['SETTINGS_CAT_FLASH'] = 'Asetukset Special Category: Flash-Tiedostoja';
 $lang['DISPLAY_INLINED'] = 'Näyttää Kuvien Sisältöön';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Et voi vahvistaa, että et ole robotti';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täysin configured</h2><p>if et ole jo luonut avaimet, voit tehdä sen <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After voit luoda avaimet, sinun täytyy laittaa ne samaan tiedostoon library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Ei aihetta',
     'GROUP_ADDED' => 'Sinut on lisätty käyttäjäryhmään',

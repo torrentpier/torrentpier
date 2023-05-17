@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Nosūtīt jaunu privāto ziņu';
 $lang['SEND_A_REPLY'] = 'Atbildi uz privāto ziņu';
 $lang['EDIT_MESSAGE'] = 'Edit privātu ziņu';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Jauna Privātā Ziņa ir ticis saņemts!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Atrast lietotājvārdu';
 $lang['SELECT_USERNAME'] = 'Izvēlieties Lietotājvārdu';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Jūsu profils ir atjaunināta. Tomēr, jums
 
 $lang['PASSWORD_MISMATCH'] = 'Paroles esat ievadījis nesakrita.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Pašreizējo paroli, ko sniedzat, neatbilst tam, kas glabājas datu bāzē.';
-$lang['PASSWORD_LONG'] = 'Parolei jābūt ne vairāk kā 32 citām zīmēm.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Jums ir pārāk daudz reģistrācijas mēģinājumiem. Lūdzu, mēģiniet vēlreiz vēlāk.';
 $lang['USERNAME_TAKEN'] = 'Atvainojiet, bet šis lietotājvārds jau ir veikti.';
 $lang['USERNAME_INVALID'] = 'Atvainojiet, bet šis lietotājvārds ir nederīga rakstzīme';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privāti';
 $lang['REGISTERED'] = 'Reģistrēts';
 $lang['ADMINISTRATORS'] = 'Administratori';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'VISAS';
 $lang['FORUM_REG'] = 'REĢ.';
 $lang['FORUM_PRIVATE'] = 'PRIVĀTI';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Rakstiet';
 $lang['RECIPIENTS'] = 'Saņēmēji';
 $lang['ALL_USERS'] = 'Visi Lietotāji';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-pasta veids';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Jūsu ziņojums ir nosūtīts';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Noklikšķiniet uz %sHere%s, lai atgrieztos Masa e-Pasta forma';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Pagarinājuma Grupas %s jau pastāv'; // repla
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Pārvaldīt Īpašu Kategoriju';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Šeit jūs varat konfigurēt, Īpašo Kategoriju. Jūs varat izveidot Īpašu Parametriem un Nosacījumiem Speciālās Categorys piešķirts Pagarinājums Grupas.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Uzstādījumi Īpašas Kategorijas: Attēli';
 $lang['SETTINGS_CAT_FLASH'] = 'Uzstādījumi Īpašas Kategorijas: Flash Failus';
 $lang['DISPLAY_INLINED'] = 'Parādīt Attēlus, Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Jūs varētu apstiprināt, ka jums nav robots';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nav pilnībā configured</h2><p>if jums jau nav radīts taustiņus, jūs varat darīt to par <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After jums radīt atslēgas, jums ir nepieciešams, lai tos failu bibliotēka/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Nav priekšmeta',
     'GROUP_ADDED' => 'Jūs esat pievienots lietotāju grupai',

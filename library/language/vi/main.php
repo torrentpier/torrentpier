@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Gửi một tin nhắn mới';
 $lang['SEND_A_REPLY'] = 'Trả lời tin nhắn';
 $lang['EDIT_MESSAGE'] = 'Chỉnh sửa tin nhắn';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Tin Nhắn mới đã được nhận được!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Tìm một tên';
 $lang['SELECT_USERNAME'] = 'Chọn một Tên';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Hồ sơ của bạn đã được cập nh
 
 $lang['PASSWORD_MISMATCH'] = 'Các bạn nhập vào mật khẩu không phù hợp.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Mật khẩu hiện tại, bạn được không trận đấu đó được lưu trữ trong cơ sở dữ liệu.';
-$lang['PASSWORD_LONG'] = 'Mật khẩu phải có không nhiều hơn 32 nhân vật.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Bạn có làm quá nhiều đăng ký cố gắng. Xin vui lòng thử lại sau.';
 $lang['USERNAME_TAKEN'] = 'Xin lỗi, nhưng tên này đã được thực hiện.';
 $lang['USERNAME_INVALID'] = 'Xin lỗi, nhưng tên này có chứa một phế nhân vật';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Riêng tư';
 $lang['REGISTERED'] = 'Đăng ký';
 $lang['ADMINISTRATORS'] = 'Quản trị';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Tất CẢ';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'RIÊNG tư';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Soạn';
 $lang['RECIPIENTS'] = 'Người nhận';
 $lang['ALL_USERS'] = 'Tất Cả Người Sử Dụng';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'loại email';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Tin nhắn của bạn đã được gửi đi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Nhấn vào %sHere%s trở về Khối lượng hình thức Email';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Mở Rộng, %s đã tồn tại'; // replace 
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Quản Lý Loại Đặc Biệt';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Ở đây anh có thể đặt các Loại Đặc biệt. Bạn có thể thiết lập Số Đặc biệt và điều Kiện cho sự Đặc biệt. được giao cho một phần mở Rộng.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Cài đặt cho Loại Đặc biệt: Hình ảnh';
 $lang['SETTINGS_CAT_FLASH'] = 'Cài đặt cho Loại Đặc biệt: Flash các Tập tin';
 $lang['DISPLAY_INLINED'] = 'Màn Hình Ảnh Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Bạn không thể xác nhận rằng anh không phả
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha không được đầy đủ configured</h2><p>if bạn đã không tạo ra chìa khóa, bạn có thể làm nó trên <a href="https://www.google.com/recaptcha/admin">https://.google.com/recaptcha/admin</a>.<br />After bạn tạo ra chìa khóa, bạn cần phải đưa họ tại các tập tin thư viện/cấu hình.# .</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Không chủ đề',
     'GROUP_ADDED' => 'Bạn đã được thêm vào nhóm người dùng',

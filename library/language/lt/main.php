@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Siųsti naują asmeninį pranešimą';
 $lang['SEND_A_REPLY'] = 'Atsakymą į privačią žinutę';
 $lang['EDIT_MESSAGE'] = 'Redaguoti asmeninę žinutę';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Naujas asmeninis Pranešimas buvo gavau!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Ieškoti vartotojo vardas';
 $lang['SELECT_USERNAME'] = 'Pasirinkite vartotojo Vardą';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Jūsų profilis buvo atnaujintas. Tačiau, 
 
 $lang['PASSWORD_MISMATCH'] = 'Slaptažodžius įvedėte neatitiko.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Dabartinis slaptažodis, kurį jūs nesutampa, kurie saugomi duomenų bazėje.';
-$lang['PASSWORD_LONG'] = 'Slaptažodis turi būti ne daugiau kaip 32 simbolių.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Jūs turite padaryti per daug registracija bandymai. Prašome pabandyti vėliau.';
 $lang['USERNAME_TAKEN'] = 'Atsiprašome, bet šis vardas jau buvo imtasi.';
 $lang['USERNAME_INVALID'] = 'Atsiprašome, tačiau šis vardas yra neteisingas charakterį';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privatus';
 $lang['REGISTERED'] = 'Registruotas';
 $lang['ADMINISTRATORS'] = 'Administratoriai';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'VISI';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATUS';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Kurti';
 $lang['RECIPIENTS'] = 'Gavėjai';
 $lang['ALL_USERS'] = 'Visi Vartotojai';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'El. pašto tipas';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Jūsų pranešimas buvo išsiųstas';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Spustelėkite %sHere%s grįžti į Masę el. Pašto formą';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Pratęsimo Grupės %s jau egzistuoja'; // repl
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Tvarkyti Ypatingų Kategorijų';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Čia galite konfigūruoti Specialių Kategorijų. Jūs galite įsteigti Specialius Parametrus ir Sąlygas Specialiųjų Categorys priskirtas Pratęsti Grupės.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Parametrai Specialios Kategorijos: Nuotraukos';
 $lang['SETTINGS_CAT_FLASH'] = 'Parametrai Specialios Kategorijos: Flash Failų';
 $lang['DISPLAY_INLINED'] = 'Vaizdų Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Jūs negalėjo patvirtinti, kad jūs esate ne robotas'
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne visiškai configured</h2><p>if jūs neturite jau sukurtas klavišus, galite tai padaryti dėl <a href="https://www.google.com/recaptcha/admin">https://www."google".com/recaptcha/admin</a>.<br />After galite generuoti klavišus, jums reikia įdėti juos į failą, biblioteka/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Nėra temos',
     'GROUP_ADDED' => 'Jūs buvote įtraukti į vartotojų grupę',

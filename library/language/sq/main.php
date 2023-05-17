@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Dërgoni një i ri privat mesazh';
 $lang['SEND_A_REPLY'] = 'Përgjigjja një mesazh privat';
 $lang['EDIT_MESSAGE'] = 'Edit mesazh privat';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Reja Private Mesazhi është pranuar!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Gjeni emrin e përdoruesit';
 $lang['SELECT_USERNAME'] = 'Zgjidhni një Username';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profilin tuaj është përditësuar. Megjit
 
 $lang['PASSWORD_MISMATCH'] = 'Fjalëkalimet e keni futur nuk përputhen.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Aktuale fjalëkalimin që ju furnizuar nuk përputhet që ruhen në bazën e të dhënave.';
-$lang['PASSWORD_LONG'] = 'Fjalëkalimin tuaj duhet të jetë jo më shumë se 32 karaktere.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Ju kanë bërë shumë të regjistrimit të përpiqet. Ju lutemi të provoni përsëri më vonë.';
 $lang['USERNAME_TAKEN'] = 'Na vjen keq, por kjo emrin e ka tashmë janë ndërmarrë.';
 $lang['USERNAME_INVALID'] = 'Na vjen keq, por kjo username përmban një karakter të pavlefshme';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Private';
 $lang['REGISTERED'] = 'Regjistruar';
 $lang['ADMINISTRATORS'] = 'Administratorët';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Të GJITHA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Harto';
 $lang['RECIPIENTS'] = 'Marrësit';
 $lang['ALL_USERS'] = 'Të Gjithë Përdoruesit';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Lloji i emailit';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesazhi juaj ka qenë i dërguar';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Kliko %sHere%s të kthehen në Masë Email formë';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Zgjerimi i Grupit të %s tashmë ekzistojnë';
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Menaxhuar Kategori Të Veçanta';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Këtu ju mund të konfiguroni Kategori të Veçanta. Ju mund të vendosni të Veçantë Parametrat dhe Kushtet Speciale Categorys të caktuar për një Zgjatje të Grupit.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Cilësimet për Kategori të Veçantë: Imazhe';
 $lang['SETTINGS_CAT_FLASH'] = 'Cilësimet për Kategori të Veçantë: Flash Fotografi';
 $lang['DISPLAY_INLINED'] = 'Imazhet E Ekranit Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Ju nuk mund të konfirmoni se ju nuk jeni një robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nuk janë plotësisht të configured</h2><p>if ju nuk e keni tashmë të krijuara çelësat, ju mund të bëni atë në <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After ju të gjenerojë butonat, ju keni nevojë për të vënë ato në dosjen library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Asnjë subjekt',
     'GROUP_ADDED' => 'Ju jeni shtuar në grupin e përdoruesve',

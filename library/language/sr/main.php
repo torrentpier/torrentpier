@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Пошаљите нову приватну пор
 $lang['SEND_A_REPLY'] = 'Одговор на приватну поруку';
 $lang['EDIT_MESSAGE'] = 'Едит приватну поруку';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Нову Приватну поруку добио!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Наћи корисничко име';
 $lang['SELECT_USERNAME'] = 'Изаберите корисничко Име';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Ваш профил је ажуриран. 
 
 $lang['PASSWORD_MISMATCH'] = 'Лозинке које сте унели се не поклапају.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Тренутна лозинка коју сте унели се не поклапа са ускладиштен у бази података.';
-$lang['PASSWORD_LONG'] = 'Ваша лозинка би требало да буде не више од 32 знака.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Ви сте пошли превише покушаја регистрације. Молимо вас, покушајте поново касније.';
 $lang['USERNAME_TAKEN'] = 'Жао ми је, али ово корисничко име је већ заузето.';
 $lang['USERNAME_INVALID'] = 'Жао ми је, али то корисничко име садржи неважећи знак';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Приватна';
 $lang['REGISTERED'] = 'Регистрован';
 $lang['ADMINISTRATORS'] = 'Администратори';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Све';
 $lang['FORUM_REG'] = 'Рег';
 $lang['FORUM_PRIVATE'] = 'Приватна';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Да компонује';
 $lang['RECIPIENTS'] = 'Примаоци';
 $lang['ALL_USERS'] = 'Свим Корисницима';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Врста е-поште';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Ваша порука је послата';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Кликните %sHere%s да се врати до масовне облику путем е-маила';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Група проширење %s већ пос
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Управљање Посебним Категоријама';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Овде можете подесити посебне категорије. Можете подесити посебне параметри, као и услови посебан Цатегорис додељених групи додатака.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Подешавања за посебне категорије: слике';
 $lang['SETTINGS_CAT_FLASH'] = 'Подешавања за посебне категорије: фласх датотеке';
 $lang['DISPLAY_INLINED'] = 'Приказ Слике Кликне';
@@ -2808,6 +2810,7 @@ $lang['CAPTCHA_WRONG'] = 'Нисте могли да потврдите да н�
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha не буду у потпуности configured</h2><p>if још увек није генерисао кључеве, можете то урадити на <a href="https://www.google.com/recaptcha/admin">https://ВСП.гоогле.цом/рекапчу/admin</a>.<br />After сте генерируете тастери, потребно је да их стави у датотеку Либрари/цонфиг.у ПХП-у.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Нема предмета',
     'GROUP_ADDED' => 'Додати сте у корисничку групу',

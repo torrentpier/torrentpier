@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Ուղարկել նոր անհատ հաղորդա
 $lang['SEND_A_REPLY'] = 'Ի պատասխան անձնական հաղորդագրություն';
 $lang['EDIT_MESSAGE'] = 'Խմբագրել անձնական հաղորդագրություն';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Նոր Անհատ հաղորդագրություն է ստացել!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Գտնել անունը';
 $lang['SELECT_USERNAME'] = 'Ընտրեք Անուն';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Ձեր պրոֆիլը թարմացվել է
 
 $lang['PASSWORD_MISMATCH'] = 'Ձեր մուտքագրած գաղտնաբառերը չեն համընկնում ։ ';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Ընթացիկ գաղտնաբառը, դուք ներկայացնում, չի համընկնում պահվող տվյալների բազայի.';
-$lang['PASSWORD_LONG'] = 'Ձեր գաղտնաբառը պետք է լինի ոչ ավելի, քան 32 նիշ.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Դուք ձեռնարկել, շատ փորձերի գրանցման ։ Խնդրում ենք կրկին փորձել ավելի ուշ.';
 $lang['USERNAME_TAKEN'] = 'Կներեք, բայց այս անունը արդեն զբաղված է ։ ';
 $lang['USERNAME_INVALID'] = 'Կներեք, բայց այս օգտագործողի անունը պարունակում է անթույլատրելի խորհրդանիշ';
@@ -1689,7 +1689,7 @@ $lang['PRIVATE'] = 'Մասնավոր';
 $lang['REGISTERED'] = 'Գրանցված է';
 $lang['ADMINISTRATORS'] = 'Ադմինիստրատորները';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Բոլոր';
 $lang['FORUM_REG'] = 'Տարածաշր';
 $lang['FORUM_PRIVATE'] = 'Մասնավոր';
@@ -1969,6 +1969,8 @@ $lang['COMPOSE'] = 'Ստեղծագործել';
 $lang['RECIPIENTS'] = 'Ստացողները';
 $lang['ALL_USERS'] = 'Բոլոր Օգտվողներին';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Էլփոստի տեսակը';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Ձեր հաղորդագրությունը ուղարկվել է';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Սեղմեք %sHere%s վերադառնալ զանգվածային ձեւով ՝ էլեկտրոնային փոստով';
 
@@ -2156,7 +2158,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Խումբը ընդլայնումը %s արդ�
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Վարչությունը Հատուկ Կատեգորիաների';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Այստեղ դուք կարող եք հարմարեցնել հատուկ կատեգորիայում. Դուք կարող եք տեղադրել հատուկ տարբերակները, ինչպես նաեւ պայմաններ հատուկ Categorys շնորհված խմբում ընդարձակման համար.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Կառավարում համար հատուկ կատեգորիաներ: նկարներ';
 $lang['SETTINGS_CAT_FLASH'] = 'Կառավարում համար հատուկ կատեգորիաներ: ֆլեշ ֆայլեր';
 $lang['DISPLAY_INLINED'] = 'Ցուցադրել Պատկերները Кликабельны';
@@ -2811,6 +2813,7 @@ $lang['CAPTCHA_WRONG'] = 'Դուք չեք կարող հաստատել, որ Դո
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha լինելով configured</h2><p>if դուք չեք сгенерировал բանալիները, դուք կարող եք անել դա <a href="https://www.google.com/recaptcha/admin">https://ԳՀՀ.google-ի.սեն/рекапчу/admin</a>.<br />After դուք генерируете ստեղները, դուք պետք է տեղադրել իրենց ֆայլը Library/конфиг.PHP-ում.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Ոչ մի առարկա',
     'GROUP_ADDED' => 'Դուք ավելացվել եք օգտվողների խմբին',

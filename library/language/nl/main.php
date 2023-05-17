@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Stuur een privé-bericht';
 $lang['SEND_A_REPLY'] = 'Antwoord op een privé-bericht';
 $lang['EDIT_MESSAGE'] = 'Bewerken prive bericht';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nieuw Privé-Bericht is ontvangen!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Het vinden van een gebruikersnaam';
 $lang['SELECT_USERNAME'] = 'Kies een Gebruikersnaam';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Je profiel is bijgewerkt. Echter, u hebt ge
 
 $lang['PASSWORD_MISMATCH'] = 'De wachtwoorden die u hebt ingevoerd niet overeen.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'De huidige wachtwoord dat u hebt opgegeven, komt niet overeen met die in de database opgeslagen.';
-$lang['PASSWORD_LONG'] = 'Uw wachtwoord mag niet meer dan 32 tekens.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Je hebt te veel registratie-pogingen. Probeer het later opnieuw.';
 $lang['USERNAME_TAKEN'] = 'Sorry, maar deze gebruikersnaam is al in gebruik.';
 $lang['USERNAME_INVALID'] = 'Sorry, maar deze gebruikersnaam bevat een ongeldig teken';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privé';
 $lang['REGISTERED'] = 'Geregistreerd';
 $lang['ADMINISTRATORS'] = 'Beheerders';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALLE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVÉ';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Samenstellen';
 $lang['RECIPIENTS'] = 'Ontvangers';
 $lang['ALL_USERS'] = 'Alle Gebruikers';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-mail type';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Uw bericht is verzonden';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik op %sHere%s om terug te keren naar de Massa e-Mail formulier';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'De Uitbreiding van de Groep %s al bestaan'; //
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Het Beheren Van Speciale Categorieën';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Hier kunt u de Speciale Categorieën. U kunt het opzetten van Speciale Parameters en de Voorwaarden voor de Speciale Categorieën toegewezen aan een Uitbreiding van de Groep.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Instellingen voor Speciale Categorie: Beelden';
 $lang['SETTINGS_CAT_FLASH'] = 'Instellingen voor Speciale Categorie: Flash-Bestanden';
 $lang['DISPLAY_INLINED'] = 'Afbeeldingen Weergeven Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Je kon niet bevestigen dat u geen robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha niet volledig configured</h2><p>if u nog niet al zijn gegenereerd, de toetsen, je kunt het doen op <a href="https://www.google.com/recaptcha/admin">https://www.van google.com/recaptcha/admin</a>.<br />After u het genereren van de sleutels moet je ze in de file library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Geen onderwerp',
     'GROUP_ADDED' => 'U bent toegevoegd aan de gebruikersgroep',

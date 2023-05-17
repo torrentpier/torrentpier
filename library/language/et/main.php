@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Saada uus privaatsõnum';
 $lang['SEND_A_REPLY'] = 'Vastuse privaatsõnum';
 $lang['EDIT_MESSAGE'] = 'Edit privaatsõnum';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Uus Privaatsõnum on saanud!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Leida kasutajanimi';
 $lang['SELECT_USERNAME'] = 'Valige Kasutajanimi';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Teie profiili on uuendatud. Siiski, sul on 
 
 $lang['PASSWORD_MISMATCH'] = 'Paroolid sisestatud ei sobi.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Praeguse parooli esitatud ei sobi, et andmebaasi salvestatud.';
-$lang['PASSWORD_LONG'] = 'Teie salasõna peab olema mitte rohkem kui 32 tähemärki.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Te olete teinud liiga palju registreerimise katsed. Palun proovige hiljem uuesti.';
 $lang['USERNAME_TAKEN'] = 'Vabandust, aga see kasutajanimi on juba võetud.';
 $lang['USERNAME_INVALID'] = 'Vabandust, aga see kasutajanimi sisaldab kehtetu iseloom';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privaatseid';
 $lang['REGISTERED'] = 'Registreeritud';
 $lang['ADMINISTRATORS'] = 'Administraatoritel';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'KÕIK';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAATSEID';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Võtte';
 $lang['RECIPIENTS'] = 'Saajad';
 $lang['ALL_USERS'] = 'Kõik Kasutajad';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Meili tüüp';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Teie sõnum on saadetud';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klõpsake %sHere%s naasta Mass e-Posti vorm';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Laiendamine Rühma %s juba olemas'; // replace
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Hallata Eri Kategooriad';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Siin saab seadistada Spetsiaalsed Kategooriad. Saate seadistada Spetsiaalsed Parameetrid ja Tingimused Erilist Categorys määratud Laiendamise Nimel.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Seaded Erilist Kategooria: Pildid';
 $lang['SETTINGS_CAT_FLASH'] = 'Seaded Erilist Kategooria: Flash-Faile';
 $lang['DISPLAY_INLINED'] = 'Piltide Kuvamine Inline';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Sa ei suutnud kinnitada, et sa ei ole robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täielikult configured</h2><p>if te pole juba genereeritud võtmete abil saate teha seda <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After te luua võtmed, teil on vaja panna neid faili library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Teemat pole',
     'GROUP_ADDED' => 'Olete lisatud kasutajagruppi',

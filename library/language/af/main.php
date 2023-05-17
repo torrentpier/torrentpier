@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Stuur \'n nuwe privaat boodskap';
 $lang['SEND_A_REPLY'] = 'Antwoord op \'n privaat boodskap';
 $lang['EDIT_MESSAGE'] = 'Wysig privaat boodskap';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nuwe Privaat Boodskap is ontvang!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Vind \'n gebruikersnaam';
 $lang['SELECT_USERNAME'] = 'Kies \'n gebruikersnaam';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Jou profiel is opgedateer. U het egter bela
 
 $lang['PASSWORD_MISMATCH'] = 'Die wagwoorde wat u ingevoer het, stem nie ooreen nie.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Die huidige wagwoord wat u verskaf het, stem nie ooreen met die wat in die databasis gestoor is nie.';
-$lang['PASSWORD_LONG'] = 'U wagwoord moet nie meer as 32 karakters wees nie.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Jy het te veel registrasiepogings gemaak. Probeer asseblief weer later.';
 $lang['USERNAME_TAKEN'] = 'Jammer, maar hierdie gebruikersnaam is reeds geneem.';
 $lang['USERNAME_INVALID'] = 'Jammer, maar hierdie gebruikersnaam bevat \'n ongeldige karakter';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privaat';
 $lang['REGISTERED'] = 'geregistreer';
 $lang['ADMINISTRATORS'] = 'administrateurs';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALMAL';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAAT';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Komponeer';
 $lang['RECIPIENTS'] = 'ontvangers';
 $lang['ALL_USERS'] = 'Alle gebruikers';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-pos tipe';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Jou boodskap is gestuur';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik %sHere%s om terug te keer na die Mass E-pos vorm';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Die uitbreidingsgroep %s bestaan ​​reeds';
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Bestuur spesiale kategorieë';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Hier kan u die spesiale kategorieë instel. U kan spesiale parameters en voorwaardes opstel vir die spesiale kategorieë wat aan \'n uitbreidingsgroep toegeken word.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Stellings vir spesiale kategorie: prente';
 $lang['SETTINGS_CAT_FLASH'] = 'Stellings vir spesiale kategorie: Flash-lêers';
 $lang['DISPLAY_INLINED'] = 'Vertoon prente geïllustreer';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Jy kon nie bevestig dat jy nie \'n robot is nie';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie ten volle gekonfigureer nie</h2><p>Indien u die sleutels nie reeds opgewek het nie, kan u dit op <a href="https://www.google.com/recaptcha/admin">https: //www.google.com/recaptcha/admin</a>.<br />After u die sleutels genereer, moet u dit by die lêerbiblioteek / config .php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Geen onderwerp',
     'GROUP_ADDED' => 'Jy is by die gebruikersgroep gevoeg',

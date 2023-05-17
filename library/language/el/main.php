@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Στείλτε ένα προσωπικό μήνυ
 $lang['SEND_A_REPLY'] = 'Απαντήσετε σε ένα προσωπικό μήνυμα';
 $lang['EDIT_MESSAGE'] = 'Edit προσωπικό μήνυμα';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Το νέο προσωπικό Μήνυμα που έχει λάβει!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Βρείτε ένα όνομα χρήστη';
 $lang['SELECT_USERNAME'] = 'Επιλέξτε ένα όνομα Χρήστη';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Το προφίλ σας έχει ενημ�
 
 $lang['PASSWORD_MISMATCH'] = 'Οι κωδικοί πρόσβασης που πληκτρολογήσατε δεν ταιριάζουν.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Τον τρέχοντα κωδικό πρόσβασης που πληκτρολογήσατε δεν ταιριάζει με αυτό που είναι αποθηκευμένα στη βάση δεδομένων.';
-$lang['PASSWORD_LONG'] = 'Ο κωδικός σας πρέπει να είναι όχι περισσότερο από 32 χαρακτήρες.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Έχετε κάνει πάρα πολλές εγγραφή προσπάθειες. Παρακαλώ προσπαθήστε ξανά αργότερα.';
 $lang['USERNAME_TAKEN'] = 'Συγγνώμη, αλλά αυτό το όνομα έχει ήδη ληφθεί.';
 $lang['USERNAME_INVALID'] = 'Συγγνώμη, αλλά αυτό το όνομα χρήστη περιέχει έναν μη έγκυρο χαρακτήρα';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Ιδιωτικό';
 $lang['REGISTERED'] = 'Εγγεγραμμένοι';
 $lang['ADMINISTRATORS'] = 'Οι διαχειριστές';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ΌΛΑ';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ΙΔΙΩΤΙΚΌ';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Συνθέστε';
 $lang['RECIPIENTS'] = 'Αποδέκτες';
 $lang['ALL_USERS'] = 'Όλοι Οι Χρήστες';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Τύπος email';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Το μήνυμά σας έχει σταλεί';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Κάντε κλικ %sHere%s για να επιστρέψετε στην Μάζα μορφή e-Mail';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Η Επέκταση του Ομίλου %s υ�
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Διαχείριση Ειδικών Κατηγοριών';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Εδώ μπορείτε να ρυθμίσετε τις Ειδικές Κατηγορίες. Μπορείτε να ορίσετε Ειδικές Παραμέτρους και τις Συνθήκες για τις Ειδικές κατηγορίες ξενοδοχείων ανατεθεί σε μια Επέκταση του Ομίλου.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Ρυθμίσεις για την Ειδική Κατηγορία: Εικόνες';
 $lang['SETTINGS_CAT_FLASH'] = 'Ρυθμίσεις για την Ειδική Κατηγορία: τα Αρχεία Flash';
 $lang['DISPLAY_INLINED'] = 'Επίδειξη Εικόνες Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Δεν θα μπορούσε να επιβεβαιώσ
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha δεν είναι πλήρως configured</h2><p>if δεν έχετε δημιουργήσει ήδη τα κλειδιά, μπορείτε να το κάνετε στο <a href="https://www.google.com/recaptcha/admin">https://www.η google.com/recaptcha/admin</a>.<br />After μπορείτε να δημιουργήσετε τα κλειδιά, θα πρέπει να τους βάλει στο αρχείο βιβλιοθήκη/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Χωρίς θέμα',
     'GROUP_ADDED' => 'Έχετε προστεθεί στην ομάδα χρηστών',

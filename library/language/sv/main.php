@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Skicka ett privat meddelande';
 $lang['SEND_A_REPLY'] = 'Svara på ett privat meddelande';
 $lang['EDIT_MESSAGE'] = 'Redigera privat meddelande';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nytt Privat Meddelande har fått!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Hitta ett användarnamn';
 $lang['SELECT_USERNAME'] = 'Välj ett Användarnamn';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Om din profil har uppdaterats. Men du har �
 
 $lang['PASSWORD_MISMATCH'] = 'Lösenorden du angav matchar inte.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Den nuvarande lösenord du angav matchar inte att lagras i databasen.';
-$lang['PASSWORD_LONG'] = 'Ditt lösenord måste vara mer än 32 tecken.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Du har gjort alltför många registrering försök. Vänligen försök igen senare.';
 $lang['USERNAME_TAKEN'] = 'Ledsen, men detta användarnamn har redan vidtagits.';
 $lang['USERNAME_INVALID'] = 'Ledsen, men detta användarnamn innehåller ett ogiltigt tecken';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privat';
 $lang['REGISTERED'] = 'Registrerade';
 $lang['ADMINISTRATORS'] = 'Administratörer';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALLA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAT';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Komponera';
 $lang['RECIPIENTS'] = 'Mottagare';
 $lang['ALL_USERS'] = 'Alla Användare';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Typ av e-post';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Ditt meddelande har skickats';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klicka %sHere%s för att återgå till Massa E-form';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Förlängning Grupp %s redan finns'; // replac
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Hantera Speciella Kategorier';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Här kan du konfigurera Särskilda Kategorier. Du kan ställa in Särskilda Parametrar och Villkor för Särskilda Kategorier som är tilldelade till en Förlängning Grupp.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Inställningar för Speciella Kategori: Bilder';
 $lang['SETTINGS_CAT_FLASH'] = 'Inställningar för Speciella Kategori: Flash-Filer';
 $lang['DISPLAY_INLINED'] = 'Visa Bilder Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Du kan inte bekräfta att du inte är en robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha inte helt configured</h2><p>if du inte redan genererade nycklar, kan du göra det på <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After du generera nycklar du behöver för att sätta dem på arkiv-bibliotek/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Inget ämne',
     'GROUP_ADDED' => 'Du har lagts till i användargruppen',

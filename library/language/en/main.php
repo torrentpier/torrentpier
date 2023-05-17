@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Send a new private message';
 $lang['SEND_A_REPLY'] = 'Reply to a private message';
 $lang['EDIT_MESSAGE'] = 'Edit private message';
 
-$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been recieved!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Find a username';
 $lang['SELECT_USERNAME'] = 'Select a Username';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Your profile has been updated. However, you
 
 $lang['PASSWORD_MISMATCH'] = 'The passwords you entered did not match.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'The current password you supplied does not match that stored in the database.';
-$lang['PASSWORD_LONG'] = 'Your password must be no more than 32 characters.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'You have made too many registration attempts. Please try again later.';
 $lang['USERNAME_TAKEN'] = 'Sorry, but this username has already been taken.';
 $lang['USERNAME_INVALID'] = 'Sorry, but this username contains an invalid character';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Private';
 $lang['REGISTERED'] = 'Registered';
 $lang['ADMINISTRATORS'] = 'Administrators';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALL';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Compose';
 $lang['RECIPIENTS'] = 'Recipients';
 $lang['ALL_USERS'] = 'All Users';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Email type';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Your message has been sent';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Click %sHere%s to return to the Mass Email form';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'The Extension Group %s already exist'; // repl
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Manage Special Categories';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categorys assigned to an Extension Group.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Settings for Special Category: Images';
 $lang['SETTINGS_CAT_FLASH'] = 'Settings for Special Category: Flash Files';
 $lang['DISPLAY_INLINED'] = 'Display Images Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'You could not confirm that you are not a robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha not being fully configured</h2><p>If you haven\'t already generated the keys, you can do it on <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After you generate the keys, you need to put them at the file library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'No subject',
     'GROUP_ADDED' => 'You have been added to the user group',

@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Poslati novu poruku privatni';
 $lang['SEND_A_REPLY'] = 'Odgovor na privatni poruku';
 $lang['EDIT_MESSAGE'] = 'Uredi privatni poruku';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Novi Privatni Poruka je vidjela!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Naći korisničko ime';
 $lang['SELECT_USERNAME'] = 'Izaberite korisničko ime';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Tvoj profil je vec popunjen. Međutim, prom
 
 $lang['PASSWORD_MISMATCH'] = 'Lozinke si ušao nije odgovarao.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Trenutne lozinke ti obezbedio ne odgovara da pohranjene u bazi podataka.';
-$lang['PASSWORD_LONG'] = 'Svoju šifru mora biti više od 32 likovi.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Napravio si previše registracija pokušava. Molim vas pokušajte kasnije.';
 $lang['USERNAME_TAKEN'] = 'Žao mi je, ali ovo korisničko ime je već zauzeto.';
 $lang['USERNAME_INVALID'] = 'Žao mi je, ali ovo korisničko ime sadrži invalid karakter';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privatni';
 $lang['REGISTERED'] = 'Registriran';
 $lang['ADMINISTRATORS'] = 'Administratori';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'SVE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATNI';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Komponujem';
 $lang['RECIPIENTS'] = 'Primatelja';
 $lang['ALL_USERS'] = 'Sve Korisnici';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Vrsta e-pošte';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Tvoja poruka je poslata';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik %sHere%s da se vratim u Masovni e-Mail obliku';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Produžni Grupa %s već postoje'; // replace %
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Snaći Poseban Kategorije';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Ovdje možeš podesite Specijalni Kategorije. Možete postaviti Posebnu Parametre i Uslove za Specijalne Categorys dodijeljen Produženje Grupe.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Postavke za Posebne Kategorija: Slike';
 $lang['SETTINGS_CAT_FLASH'] = 'Postavke za Posebne Kategorija: Flash Datoteke';
 $lang['DISPLAY_INLINED'] = 'Prikaži Slike Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Ti nije mogao potvrditi da vi niste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bude u potpunosti configured</h2><p>if već nisi napravio ključeve, možeš ti to na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After si stvaraju ključeve, moraš ih staviti u dosije biblioteci/putanju.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Bez predmeta',
     'GROUP_ADDED' => 'Dodani ste u korisničku grupu',

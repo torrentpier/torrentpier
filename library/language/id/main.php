@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Kirim pesan pribadi baru';
 $lang['SEND_A_REPLY'] = 'Balasan untuk pesan pribadi';
 $lang['EDIT_MESSAGE'] = 'Mengedit pesan pribadi';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Baru Pesan Pribadi telah menerima!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Menemukan username';
 $lang['SELECT_USERNAME'] = 'Pilih Username';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profil anda telah diperbarui. Namun, anda t
 
 $lang['PASSWORD_MISMATCH'] = 'Kata sandi yang anda masukkan tidak cocok.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Saat ini sandi yang anda masukkan tidak sesuai dengan yang tersimpan di database.';
-$lang['PASSWORD_LONG'] = 'Kata sandi anda tidak boleh lebih dari 32 karakter.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Anda telah membuat terlalu banyak pendaftaran usaha. Silakan coba lagi nanti.';
 $lang['USERNAME_TAKEN'] = 'Maaf, tapi ini username sudah diambil.';
 $lang['USERNAME_INVALID'] = 'Maaf, tapi ini nama pengguna memiliki karakter yang tidak valid';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Pribadi';
 $lang['REGISTERED'] = 'Terdaftar';
 $lang['ADMINISTRATORS'] = 'Administrator';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'SEMUA';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIBADI';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Menulis';
 $lang['RECIPIENTS'] = 'Penerima';
 $lang['ALL_USERS'] = 'Semua Pengguna';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Jenis surel';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Pesan anda telah dikirim';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik %sHere%s untuk kembali ke bentuk Email Massal';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Ekstensi Kelompok %s sudah ada'; // replace %s
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Mengelola Kategori Khusus';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Di sini anda dapat mengkonfigurasi Kategori Khusus. Anda dapat mengatur Parameter Khusus dan Ketentuan Khusus Categorys ditugaskan untuk Perpanjangan Kelompok.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Pengaturan untuk Kategori Khusus: Gambar';
 $lang['SETTINGS_CAT_FLASH'] = 'Pengaturan untuk Kategori Khusus: File Flash';
 $lang['DISPLAY_INLINED'] = 'Tampilan Gambar Inline';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Anda tidak bisa mengkonfirmasi bahwa anda bukan robot'
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha tidak sepenuhnya configured</h2><p>if anda belum dihasilkan tombol, anda dapat melakukannya pada <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After anda menghasilkan kunci, anda perlu untuk menempatkan mereka di file library/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Tidak ada subjek',
     'GROUP_ADDED' => 'Anda telah ditambahkan ke grup pengguna',

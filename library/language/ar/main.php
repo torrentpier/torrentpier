@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'إرسال رسالة خاصة جديدة';
 $lang['SEND_A_REPLY'] = 'رد على رسالة خاصة';
 $lang['EDIT_MESSAGE'] = 'تحرير رسالة خاصة';
 
-$lang['NOTIFICATION_SUBJECT'] = 'رسالة خاصة جديدة قد تلقوا!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'العثور على اسم المستخدم';
 $lang['SELECT_USERNAME'] = 'حدد اسم المستخدم';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'التشكيل الجانبي الخاص ب
 
 $lang['PASSWORD_MISMATCH'] = 'كلمات المرور التي أدخلتها لا تتطابق.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'كلمة المرور الحالية التي أدخلتها لا تتطابق مع تلك المخزنة في قاعدة البيانات.';
-$lang['PASSWORD_LONG'] = 'كلمة السر الخاصة بك يجب أن يكون هناك أكثر من 32 حرفا.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'كنت قد قدمت الكثير من تسجيل محاولات. يرجى المحاولة مرة أخرى في وقت لاحق.';
 $lang['USERNAME_TAKEN'] = 'آسف ولكن هذا المستخدم قد اتخذت بالفعل.';
 $lang['USERNAME_INVALID'] = 'آسف لكن هذا اسم المستخدم يحتوي على حرف غير صالح';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'خاصة';
 $lang['REGISTERED'] = 'مسجلة';
 $lang['ADMINISTRATORS'] = 'المسؤولين';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'كل';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'خاصة';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'يؤلف';
 $lang['RECIPIENTS'] = 'المستفيدين';
 $lang['ALL_USERS'] = 'جميع المستخدمين';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'نوع البريد الإلكتروني';
+
 $lang['EMAIL_SUCCESSFULL'] = 'تم إرسال رسالتك';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'انقر فوق %sHere%s العودة إلى كتلة نموذج البريد الإلكتروني';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'تمديد مجموعة %s موجودة بال
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'إدارة الفئات الخاصة';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'هنا يمكنك تكوين الفئات الخاصة. يمكنك إعداد معلمات خاصة وشروط خاصة Categorys تعيين ملحق المجموعة.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'إعدادات خاصة فئة: صور';
 $lang['SETTINGS_CAT_FLASH'] = 'إعدادات خاصة الفئة: ملفات فلاش';
 $lang['DISPLAY_INLINED'] = 'عرض الصور المضمنة';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'أنت لا تستطيع أن تؤكد أنك لست �
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha لم يتم بشكل كامل configured</h2><p>if لم تكن قد ولدت المفاتيح ، يمكنك أن تفعل ذلك على <a href="https://www.google.com/recaptcha/admin">https://www.google.com/اختبار recaptcha/admin</a>.<br />After توليد مفاتيح تحتاج إلى وضعها في ملف المكتبة/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'لا يوجد عنوان',
     'GROUP_ADDED' => 'لقد تمت إضافتك إلى مجموعة المستخدمين',

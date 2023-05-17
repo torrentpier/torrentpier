@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Жаңа Жеке хабар жіберу';
 $lang['SEND_A_REPLY'] = 'Жеке хабарламаға жауап беру';
 $lang['EDIT_MESSAGE'] = 'Жеке хабар өңдеу';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Жаңа Жеке хабарлама алды болды!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'атын табу';
 $lang['SELECT_USERNAME'] = 'Пайдаланушы аты таңдаңыз';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Сіздің профиль жаңарты�
 
 $lang['PASSWORD_MISMATCH'] = 'Енгізген құпия сөздеріңіз бір біріне сәйкес келмеді.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Сіз ток пароль деректер базасында сақталады, бұл сәйкес келмейді.';
-$lang['PASSWORD_LONG'] = 'Құпия сөзіңіз көп емес 32 таңбадан аспауы керек.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Сіз тым көп тіркеу әрекет жасады. Тағы жасауды сәл кейінірек көріңізді өтінеміз.';
 $lang['USERNAME_TAKEN'] = 'Кешіріңіз, бірақ бұл пайдаланушы аты қазірдің өзінде алынды.';
 $lang['USERNAME_INVALID'] = 'Кешіріңіз, бірақ бұл пайдаланушы аты жарамсыз таңбаны қамтиды';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Жеке';
 $lang['REGISTERED'] = 'тіркелген';
 $lang['ADMINISTRATORS'] = 'Әкімшілер';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'БАРЛЫҚ';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'ЖЕКЕ';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'жазу';
 $lang['RECIPIENTS'] = 'алушылар';
 $lang['ALL_USERS'] = 'барлық пайдаланушылар';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Электрондық пошта түрі';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Сіздің хатыңыз жіберілді';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Бұқаралық Email түрінде оралу үшін %sHere%s басыңыз';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Кеңейтім Group %s қазірдің ө�
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Арнайы Санаттар басқару';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Мұнда Сіз ерекше категориялары теңшеуге болады. Сіз Extension тобына тағайындалған арнайы Categorys үшін арнайы параметрлері мен шарттарын орнатуға болады.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Арнайы Санат параметрлері: Суреттер';
 $lang['SETTINGS_CAT_FLASH'] = 'Flash Файлдар: Арнайы Санат параметрлері';
 $lang['DISPLAY_INLINED'] = 'Дисплей Суреттер Кірістірілген';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Сіз робот емес екенін растай �
 $lang['CAPTCHA_SETTINGS'] = 'Егер сіз әлдеқашан кілттер жоқ, толық configured</h2><p>If <h2>ReCaptcha, сіз <a href="https://www.google.com/recaptcha/admin">https оны істеуге болады жатқан жоқ: сіз кілттерді генерациялау //www.google.com/recaptcha/admin</a>.<br />After, сіз файл кітапхана / конфигурациялық оларды қою қажет .php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Тақырып жоқ',
     'GROUP_ADDED' => 'Сіз пайдаланушылар тобына қосылдыңыз',

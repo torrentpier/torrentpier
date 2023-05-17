@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = '发送一个新的私人消息';
 $lang['SEND_A_REPLY'] = '答复私人消息';
 $lang['EDIT_MESSAGE'] = '编辑私人消息';
 
-$lang['NOTIFICATION_SUBJECT'] = '新的私人消息已经收到的！';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = '找到一个用户名';
 $lang['SELECT_USERNAME'] = '选择一个用户名';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = '你的档案已经更新。 但是，你已
 
 $lang['PASSWORD_MISMATCH'] = '密码输入并不匹配。';
 $lang['CURRENT_PASSWORD_MISMATCH'] = '目前的密码提供给不匹配，储存在该数据库。';
-$lang['PASSWORD_LONG'] = '你的密码必须不超过32个字符。';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = '你已经做了太多注册的企图。 请稍后再试一次。';
 $lang['USERNAME_TAKEN'] = '对不起，但这个名已经采取。';
 $lang['USERNAME_INVALID'] = '对不起，但这名包含无效的角色';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = '私';
 $lang['REGISTERED'] = '注册';
 $lang['ADMINISTRATORS'] = '管理员';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = '所有';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = '私';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = '撰写';
 $lang['RECIPIENTS'] = '收件人';
 $lang['ALL_USERS'] = '所有用户';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = '電子郵件類型';
+
 $lang['EMAIL_SUCCESSFULL'] = '您的信息已经发送';
 $lang['CLICK_RETURN_MASSEMAIL'] = '点击%sHere%s返回到大规模电子邮件的形式';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = '扩展组%s已经存在'; // replace %s with t
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = '管理特殊类别';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = '在这里你可以配置特别的类别。 你可以设立特殊的参数和条件，特别Categorys分配给一个扩展组。';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = '设置对于特殊类别：图像';
 $lang['SETTINGS_CAT_FLASH'] = '设置对于特殊类别：闪文件';
 $lang['DISPLAY_INLINED'] = '显示器的图像内联';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = '你不能确认你不是一个机器人';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha没有得到充分configured</h2><p>if你有没有已经产生的钥匙，你可以做<a href="https://www.google.com/recaptcha/admin">https://www.谷歌。com/验证码/admin</a>的。<br />After你产生的钥匙，你需要把它们放在该文件的图书馆/config。php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => '無主題',
     'GROUP_ADDED' => '您已被添加到用戶組',

@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Envoyer un nouveau message privé';
 $lang['SEND_A_REPLY'] = 'Répondre à un message privé';
 $lang['EDIT_MESSAGE'] = 'Modifier message privé';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nouveau Message a été reçu!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Trouver un nom d\'utilisateur';
 $lang['SELECT_USERNAME'] = 'Sélectionnez un nom d\'utilisateur';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Votre profil a été mis à jour. Cependant
 
 $lang['PASSWORD_MISMATCH'] = 'Les mots de passe saisis ne correspondent pas.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Le mot de passe que vous avez fourni ne correspond pas à celui stocké dans la base de données.';
-$lang['PASSWORD_LONG'] = 'Votre mot de passe ne doit pas dépasser 32 caractères.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Vous avez fait trop de tentatives d\'enregistrement. S\'il vous plaît essayer à nouveau plus tard.';
 $lang['USERNAME_TAKEN'] = 'Désolé, mais ce nom d\'utilisateur est déjà pris.';
 $lang['USERNAME_INVALID'] = 'Désolé, mais ce nom d\'utilisateur contient un caractère non valide';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privé';
 $lang['REGISTERED'] = 'Enregistré';
 $lang['ADMINISTRATORS'] = 'Les administrateurs';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TOUS';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVÉ';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Composer';
 $lang['RECIPIENTS'] = 'Destinataires';
 $lang['ALL_USERS'] = 'Tous Les Utilisateurs';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Type d\'email';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Votre message a été envoyé';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Cliquez sur %sHere%s de retour à la Masse d\'e-Mail';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'L\'Extension du Groupe %s existent déjà'; //
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Gérer Les Catégories Spéciales';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Ici, vous pouvez configurer les Catégories Spéciales. Vous pouvez configurer les Paramètres Spéciaux et des Conditions de Spécial Categorys affecté à un Groupe de postes.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Paramètres de Catégorie Spéciale: les Images';
 $lang['SETTINGS_CAT_FLASH'] = 'Paramètres de Catégorie Spéciale: les Fichiers Flash';
 $lang['DISPLAY_INLINED'] = 'Afficher Des Images Inline';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Vous ne peut pas confirmer que vous n\'êtes pas un ro
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne pas être totalement configured</h2><p>if vous ne l\'avez pas déjà généré les clés, vous pouvez le faire sur <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After vous générer les clés, vous devez les placer dans le dossier bibliothèque/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Pas de sujet',
     'GROUP_ADDED' => 'Vous avez été ajouté au groupe d\'utilisateurs',

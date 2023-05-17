@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Yeni şəxsi mesaj göndərmək';
 $lang['SEND_A_REPLY'] = 'Cavab şəxsi mesaj';
 $lang['EDIT_MESSAGE'] = 'Redaktə şəxsi mesaj';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Yeni Şəxsi mesaj var!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Tapa istifadəçi adı';
 $lang['SELECT_USERNAME'] = 'İstifadəçi Adı seçin';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Profil yeniləndi. Bununla belə, siz dəyi
 
 $lang['PASSWORD_MISMATCH'] = 'Daxil parol uyğun gəlmir.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Cari parol siz dediyiniz ilə üst-üstə düşmür saxlanılan verilənlər bazası.';
-$lang['PASSWORD_LONG'] = 'Parol olmamalıdır daha 32 simvol.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Siz atmışıq çox cəhdləri qeydiyyatı. Lütfən, yenidən cəhd edin sonra.';
 $lang['USERNAME_TAKEN'] = 'Bağışlayın, amma bu istifadəçi adı artıq məşğuldur.';
 $lang['USERNAME_INVALID'] = 'Bağışlayın, amma bu istifadəçi adı ehtiva yolverilməz simvolu';
@@ -1689,7 +1689,7 @@ $lang['PRIVATE'] = 'Özəl';
 $lang['REGISTERED'] = 'Qeydə';
 $lang['ADMINISTRATORS'] = 'Admins';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'Bütün';
 $lang['FORUM_REG'] = 'Reg';
 $lang['FORUM_PRIVATE'] = 'Özəl';
@@ -1969,6 +1969,8 @@ $lang['COMPOSE'] = 'Bəstələmək';
 $lang['RECIPIENTS'] = 'Alıcı';
 $lang['ALL_USERS'] = 'Bütün İstifadəçilər Üçün';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-poçt növü';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Mesaj göndərildi';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Basın %sHere%s qayıtmaq üçün kütləvi şəkildə e-poçt';
 
@@ -2156,7 +2158,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Qrupu genişləndirilməsi %s artıq mövcuddu
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'İdarəetmə Xüsusi Kateqoriyalar';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Burada siz tənzimləmək üçün xüsusi bir kateqoriya. Siz yüklemek üçün xüsusi parametrləri, eləcə də xüsusi şərait Categorys, həvalə qrup uzantıları.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Parametrlər üçün xüsusi kateqoriya: şəkillər';
 $lang['SETTINGS_CAT_FLASH'] = 'Parametrlər üçün xüsusi kateqoriya: flash faylları';
 $lang['DISPLAY_INLINED'] = 'Ekran Şəkil Кликабельны';
@@ -2811,6 +2813,7 @@ $lang['CAPTCHA_WRONG'] = 'Ola bilər ki, təsdiq Siz robot deyil';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha olmadan tam configured</h2><p>if siz hələ сгенерировал düymələri, bunu edə bilərsiniz azn <a href="https://www.google.com/recaptcha/admin">https://ВСП.google.com/рекапчу/admin</a>.<br />After siz генерируете düymələri, lazımdır onları qoymaq fayl Library/onları.PHP.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Mövzu yoxdur',
     'GROUP_ADDED' => 'Siz istifadəçi qrupuna əlavə olundunuz',

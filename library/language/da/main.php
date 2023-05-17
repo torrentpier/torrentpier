@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Send en privat besked';
 $lang['SEND_A_REPLY'] = 'Besvare en privat besked';
 $lang['EDIT_MESSAGE'] = 'Rediger privat besked';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Ny Privat Besked, du har modtaget!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'At finde et brugernavn';
 $lang['SELECT_USERNAME'] = 'Vælg et Brugernavn';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Din profil er blevet opdateret. Du har dog 
 
 $lang['PASSWORD_MISMATCH'] = 'Adgangskoderne du indtastede passer ikke.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Den nuværende adgangskode, du leverede ikke svarer til dem, der er lagret i databasen.';
-$lang['PASSWORD_LONG'] = 'Din adgangskode må ikke være mere end 32 tegn.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Du har lavet alt for mange forsøg på registrering. Prøv venligst igen senere.';
 $lang['USERNAME_TAKEN'] = 'Undskyld, men dette brugernavn er allerede blevet taget.';
 $lang['USERNAME_INVALID'] = 'Undskyld, men det indeholder et ugyldigt tegn';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Private';
 $lang['REGISTERED'] = 'Registreret';
 $lang['ADMINISTRATORS'] = 'Administratorer';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ALLE';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Komponer';
 $lang['RECIPIENTS'] = 'Modtagere';
 $lang['ALL_USERS'] = 'Alle Brugere';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Email type';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Din besked er blevet sendt';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klik på %sHere%s for at vende tilbage til Masse-E-form';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Udvidelse Gruppe %s, findes allerede'; // repl
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Håndtere Specielle Kategorier';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Her kan du konfigurere de Særlige Kategorier. Du kan oprette Særlige Parametre og Vilkår for Særlige Kategorier, der er tildelt til en Udvidelse Gruppe.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Indstillinger for Særlige Kategori: Billeder';
 $lang['SETTINGS_CAT_FLASH'] = 'Indstillinger for Særlige Kategori: Flash Filer';
 $lang['DISPLAY_INLINED'] = 'Vise Billeder Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Du kunne ikke bekræfte at du ikke er en robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ikke er fuldt configured</h2><p>if du ikke allerede har genereret de taster, du kan gøre det på <a href="https://www.google.com/recaptcha/admin">https://www.google.com/reference/admin</a>.<br />After du kan generere de taster, du har brug for at sætte dem på fil-bibliotek/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Intet emne',
     'GROUP_ADDED' => 'Du er blevet tilføjet til brugergruppen',

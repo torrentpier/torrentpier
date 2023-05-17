@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'שלח הודעה פרטית חדשה.';
 $lang['SEND_A_REPLY'] = 'תגובה ל הודעה פרטית';
 $lang['EDIT_MESSAGE'] = 'עריכת הודעה פרטית';
 
-$lang['NOTIFICATION_SUBJECT'] = 'חדשה הודעה פרטית כבר קיבלה!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'למצוא את שם המשתמש';
 $lang['SELECT_USERNAME'] = 'בחר שם משתמש';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'הפרופיל שלך עודכנה. עם ז
 
 $lang['PASSWORD_MISMATCH'] = 'את הסיסמאות שהזנת אינו תואם.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'את הסיסמה הנוכחית אתה המסופק אינו תואם את זה מאוחסן במסד הנתונים.';
-$lang['PASSWORD_LONG'] = 'הסיסמה חייבת להיות לא יותר מ-32 תווים.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'עשית יותר מדי רישום ניסיונות. אנא נסה שוב מאוחר יותר.';
 $lang['USERNAME_TAKEN'] = 'מצטער, אבל זה שם משתמש כבר תפוס.';
 $lang['USERNAME_INVALID'] = 'מצטער, אבל זה שם המשתמש מכיל תו לא חוקי';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'פרטי';
 $lang['REGISTERED'] = 'רשום';
 $lang['ADMINISTRATORS'] = 'מנהלי מערכת';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'כל';
 $lang['FORUM_REG'] = 'רג';
 $lang['FORUM_PRIVATE'] = 'פרטי';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'להלחין';
 $lang['RECIPIENTS'] = 'נמענים';
 $lang['ALL_USERS'] = 'כל המשתמשים';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'סוג אימייל';
+
 $lang['EMAIL_SUCCESSFULL'] = 'ההודעה שלך נשלחה';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'לחץ על %sHere%s לחזור מסה טופס דואר אלקטרוני';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'הסיומת קבוצה %s כבר קיים'; /
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'ניהול קטגוריות מיוחדות';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'כאן אתה יכול להגדיר את קטגוריות מיוחדות. אתה יכול להגדיר מיוחד פרמטרים ותנאים מיוחדים Categorys שהוקצו הרחבה הקבוצה.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'הגדרות מיוחדות קטגוריה: תמונות';
 $lang['SETTINGS_CAT_FLASH'] = 'הגדרות עבור קטגוריה מיוחדת: קבצי פלאש';
 $lang['DISPLAY_INLINED'] = 'תצוגת תמונות Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'אתה יכול לאשר שאתה לא רובוט';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha לא להיות לגמרי configured</h2><p>if לא כבר יצר את המפתחות, אתה יכול לעשות את זה על <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After לך ליצור את המפתחות, אתה צריך לשים אותם על הקובץ בספריה/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'ללא נושא',
     'GROUP_ADDED' => 'נוספת לקבוצת המשתמשים',

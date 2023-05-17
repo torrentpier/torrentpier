@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Odeslání nové soukromé zprávy';
 $lang['SEND_A_REPLY'] = 'Odpověď na soukromou zprávu';
 $lang['EDIT_MESSAGE'] = 'Edit soukromou zprávu';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nová Soukromá Zpráva byla doručena!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Najít uživatelské jméno';
 $lang['SELECT_USERNAME'] = 'Vyberte uživatelské Jméno';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Váš profil byl aktualizován. Nicméně, 
 
 $lang['PASSWORD_MISMATCH'] = 'Hesla, která jste zadali, se neshodují.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'Aktuální heslo, které jste zadali neodpovídá uložené v databázi.';
-$lang['PASSWORD_LONG'] = 'Vaše heslo musí být delší než 32 znaků.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Provedli jste příliš mnoho registrační pokusy. Zkuste to prosím znovu později.';
 $lang['USERNAME_TAKEN'] = 'Omlouvám se, ale toto uživatelské jméno již bylo přijato.';
 $lang['USERNAME_INVALID'] = 'Omlouvám se, ale toto uživatelské jméno obsahuje neplatný znak';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Soukromé';
 $lang['REGISTERED'] = 'Registrován';
 $lang['ADMINISTRATORS'] = 'Správci';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'VŠECHNY';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'SOUKROMÉ';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Skládat';
 $lang['RECIPIENTS'] = 'Příjemci';
 $lang['ALL_USERS'] = 'Všechny Uživatele';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Typ e-mailu';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Vaše zpráva byla odeslána';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Klikněte %sHere%s vrátit se k Hromadné E-mailový formulář';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Rozšíření Skupiny %s již existují'; // r
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Správa Zvláštní Kategorie';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Zde si můžete nastavit Zvláštní Kategorie. Můžete nastavit Speciální Parametry a Podmínky pro Speciální Categorys přiřazeny k Rozšíření Skupiny.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Nastavení pro Speciální Kategorie: Obrázky';
 $lang['SETTINGS_CAT_FLASH'] = 'Nastavení pro Speciální Kategorie: Flash Soubory';
 $lang['DISPLAY_INLINED'] = 'Zobrazit Obrázky Vloženy';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Můžete potvrdit, že nejste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha není plně configured</h2><p>if jste již vygenerované klíče, můžete to udělat na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After generování klíče, musíte dát je v souboru knihovny/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Žádný předmět',
     'GROUP_ADDED' => 'Byli jste přidáni do uživatelské skupiny',

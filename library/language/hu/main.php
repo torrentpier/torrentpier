@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Küldj egy új privát üzenet';
 $lang['SEND_A_REPLY'] = 'Válasz privát üzenet';
 $lang['EDIT_MESSAGE'] = 'Szerkesztés privát üzenet';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Új Privát Üzenet volt megadva!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Találni egy felhasználónevet';
 $lang['SELECT_USERNAME'] = 'Válasszon egy Felhasználónevet';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'A profil frissült. Azonban megváltoztak a
 
 $lang['PASSWORD_MISMATCH'] = 'A megadott jelszavak nem egyeznek.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'A jelenlegi jelszót, tartozék nem felel meg, hogy az adatbázisban tárolt.';
-$lang['PASSWORD_LONG'] = 'A jelszót nem lehet több, mint 32 karakter lehet.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Túl sok a regisztráció kísérletek. Kérjük, próbálja meg újra később.';
 $lang['USERNAME_TAKEN'] = 'Sajnálom, de ez a felhasználónév már foglalt.';
 $lang['USERNAME_INVALID'] = 'Sajnálom, de ez a felhasználónév egy érvénytelen karaktert tartalmaz';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privát';
 $lang['REGISTERED'] = 'Regisztrált';
 $lang['ADMINISTRATORS'] = 'A rendszergazdák';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'ÖSSZES';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVÁT';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Levélírás';
 $lang['RECIPIENTS'] = 'A címzettek';
 $lang['ALL_USERS'] = 'Minden Felhasználó';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'E-mail típus';
+
 $lang['EMAIL_SUCCESSFULL'] = 'Az üzenetet elküldtük';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Kattintson %sHere%s, hogy visszatérjen a Tömeges e-Mail formájában';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'A Kiterjesztés Csoport %s már létezik'; // 
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Kezelése Speciális Kategóriák';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Itt konfigurálhatja a Különleges Kategóriában. Beállíthatja a Speciális Paramétereket, amelyek a Különleges Categorys rendelt Kiterjesztése Csoport.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'A beállításokat Különleges Kategória: Képek';
 $lang['SETTINGS_CAT_FLASH'] = 'A beállításokat Különleges Kategória: Flash-Fájlok';
 $lang['DISPLAY_INLINED'] = 'Képek Megjelenítése Inlined';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'Azt nem tudta megerősíteni, hogy nem egy robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nem teljesen configured</h2><p>if még nem generált a kulcsokat, meg tudod csinálni <a href="https://www.google.com/recaptcha/admin">https://www.a google.com/recaptcha/admin</a>.<br />After generál a kulcsokat, meg kell tenni őket a fájl könyvtár/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Nincs tárgy',
     'GROUP_ADDED' => 'Önt hozzáadták a felhasználói csoporthoz',

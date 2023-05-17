@@ -473,7 +473,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Enviar un nou missatge privat';
 $lang['SEND_A_REPLY'] = 'Resposta a un missatge privat';
 $lang['EDIT_MESSAGE'] = 'Edita missatge privat';
 
-$lang['NOTIFICATION_SUBJECT'] = 'Nou Missatge Privat ha estat rebut!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been received!';
 
 $lang['FIND_USERNAME'] = 'Trobar un nom d\'usuari';
 $lang['SELECT_USERNAME'] = 'Seleccioneu un nom d\'Usuari';
@@ -613,7 +613,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'El seu perfil ha estat actualitzat. No obst
 
 $lang['PASSWORD_MISMATCH'] = 'La contrasenya que heu introduït no coincideixen.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'La contrasenya actual que subministra no coincideix amb la que s\'emmagatzema a la base de dades.';
-$lang['PASSWORD_LONG'] = 'La contrasenya ha de ser de no més de 32 caràcters.';
+$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'Vostè ha fet massa registre intents. Si us plau, provi-ho més tard.';
 $lang['USERNAME_TAKEN'] = 'Ho sento, però aquest nom d\'usuari ja ha estat presa.';
 $lang['USERNAME_INVALID'] = 'Ho sento, però aquest nom d\'usuari conté un caràcter no vàlid';
@@ -1686,7 +1686,7 @@ $lang['PRIVATE'] = 'Privat';
 $lang['REGISTERED'] = 'Registrat';
 $lang['ADMINISTRATORS'] = 'Els administradors';
 
-// These are displayed in the drop down boxes for advanced mode forum auth, try and keep them short!
+// These are displayed in the drop-down boxes for advanced mode forum auth, try and keep them short!
 $lang['FORUM_ALL'] = 'TOT';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVAT';
@@ -1966,6 +1966,8 @@ $lang['COMPOSE'] = 'Redacció';
 $lang['RECIPIENTS'] = 'Destinataris';
 $lang['ALL_USERS'] = 'Tots Els Usuaris';
 
+$lang['MASS_EMAIL_MESSAGE_TYPE'] = 'Tipus de correu electrònic';
+
 $lang['EMAIL_SUCCESSFULL'] = 'El vostre missatge ha estat enviat';
 $lang['CLICK_RETURN_MASSEMAIL'] = 'Feu clic %sHere%s per tornar a la Massa formulari de Correu electrònic';
 
@@ -2153,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'L\'Extensió Grup %s ja existeixen'; // replac
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Gestionar Categories Especials';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Aquí podeu configurar l\'Especial Categories. Podeu configurar Especial Paràmetres i Condicions per a l\'Especial Categorys assignat a una Extensió del Grup.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Paràmetres per a la Categoria Especial: les Imatges';
 $lang['SETTINGS_CAT_FLASH'] = 'Paràmetres per a la Categoria Especial: els Arxius Flash';
 $lang['DISPLAY_INLINED'] = 'Mostrar Les Imatges Inclinada';
@@ -2807,6 +2809,7 @@ $lang['CAPTCHA_WRONG'] = 'No es podia confirmar que no ets un robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha no ser totalment configured</h2><p>if no ho heu fet ja generar les claus, podeu fer-ho en <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After a generar les claus, que cal posar-los a l\'arxiu de la biblioteca/config.php.</p>';
 
 // Sending email
+$lang['REPLY_TO'] = 'Reply to';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Cap tema',
     'GROUP_ADDED' => 'Heu estat afegit al grup d\'usuaris',
