@@ -118,8 +118,6 @@ $lang['LOADING'] = 'E ngarkimit...';
 $lang['JUMPBOX_TITLE'] = 'Zgjidhni forumi';
 $lang['DISPLAYING_OPTIONS'] = 'Të shfaqur opsionet';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Përdoruesit E Regjistruar:';
 $lang['BROWSING_FORUM'] = 'Përdoruesit që po shfletojnë këtë forum:';
