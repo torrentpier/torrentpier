@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Selectați forum';
 $lang['DISPLAYING_OPTIONS'] = 'Afișarea opțiunilor';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Utilizatori Înregistrați:';
 $lang['BROWSING_FORUM'] = 'Utilizatorii ce navighează pe acest forum:';
