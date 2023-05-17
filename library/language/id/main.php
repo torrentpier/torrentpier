@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Pilih forum';
 $lang['DISPLAYING_OPTIONS'] = 'Menampilkan pilihan';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Pengguna Terdaftar:';
 $lang['BROWSING_FORUM'] = 'Pengguna menelusuri forum ini:';
