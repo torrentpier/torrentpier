@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Kraunasi...';
 $lang['JUMPBOX_TITLE'] = 'Pasirinkite forumas';
 $lang['DISPLAYING_OPTIONS'] = 'Rodyti funkcijos';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'Registruotų Vartotojų:';
 $lang['BROWSING_FORUM'] = 'Vartotojai naršantys šį forumą:';
