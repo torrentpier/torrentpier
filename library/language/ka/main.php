@@ -118,8 +118,6 @@ $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'აირჩიეთ ფორუმი';
 $lang['DISPLAYING_OPTIONS'] = 'ნაჩვენებია ვარიანტი';
 
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-
 // Global Header strings
 $lang['REGISTERED_USERS'] = 'დარეგისტრირებული მომხმარებელი:';
 $lang['BROWSING_FORUM'] = 'ფორუმს ათვალიერებს:';
