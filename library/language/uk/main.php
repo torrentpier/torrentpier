@@ -2155,7 +2155,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Група розширень %s вже існ
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Керування спеціальними категоріями';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Тут Ви можете налаштовувати спеціальні категорії. Ви можете задати спеціальні параметри для спеціальних категорій прикріплених до груп розширень.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Налаштування для спеціальної категорії: Зображення';
 $lang['SETTINGS_CAT_FLASH'] = 'Налаштування для спеціальної категорії: flash файли';
 $lang['DISPLAY_INLINED'] = 'Показувати зображення в повідомленнях';
