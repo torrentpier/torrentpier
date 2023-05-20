@@ -21,15 +21,15 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.4.0-dev';
-$bb_cfg['tp_release_date'] = '18-04-2023';
+$bb_cfg['tp_version'] = '2.4.0-alpha1';
+$bb_cfg['tp_release_date'] = '20-05-2023';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Database
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
-// порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
 $bb_cfg['db'] = [
     'db' => [
+        // Don't change the settings here!!! Go to .env file
         env('DB_HOST', 'localhost'),
         env('DB_DATABASE', 'torrentpier'),
         env('DB_USERNAME', 'root'),
