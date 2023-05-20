@@ -64,10 +64,9 @@ if ($show_dbg_info) {
     $stat .= ' &nbsp;]';
     $stat .= '
 		<label><input type="checkbox" onclick="setCookie(\'sql_log\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log']) ? HTML_CHECKED : '') . ' />show log </label>
-		<label title="cut long queries"><input type="checkbox" onclick="setCookie(\'sql_log_full\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log_full']) ? HTML_CHECKED : '') . ' />cut </label>
 		<label><input type="checkbox" onclick="setCookie(\'explain\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['explain']) ? HTML_CHECKED : '') . ' />explain </label>
 	';
-    $stat .= !empty($_COOKIE['sql_log']) ? '[ <a href="#" class="med" onclick="$p(\'sqlLog\').className=\'sqlLog sqlLogWrapped\'; return false;">wrap</a> &middot; <a href="#sqlLog" class="med" onclick="$(\'#sqlLog\').css({ height: $(window).height()-50 }); return false;">max</a> ]' : '';
+    $stat .= !empty($_COOKIE['sql_log']) ? '[ <a href="#" class="med" onclick="$p(\'sqlLog\').className=\'sqlLog sqlLogWrapped\'; return false;">wrap</a> &middot; <a href="#sqlLog" class="med" onclick="$(\'#sqlLog\').css({ height: $(window).height()-50 }); return false;">max</a> &middot; <label title="cut long queries"><input type="checkbox" onclick="setCookie(\'sql_log_full\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log_full']) ? HTML_CHECKED : '') . ' />cut</label> ]' : '';
 
     echo '<div style="margin: 6px; font-size:10px; color: #444444; letter-spacing: -1px; text-align: center;">' . $stat . '</div>';
 }
