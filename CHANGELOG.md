@@ -10,7 +10,7 @@
 - Show default avatar after delete, instead of hide [\#628](https://github.com/torrentpier/torrentpier/pull/628) ([belomaxorka](https://github.com/belomaxorka))
 - Switching to Symfony Mailer [\#629](https://github.com/torrentpier/torrentpier/pull/629) ([Exileum](https://github.com/Exileum))
 - Added missing comments into Env class [\#633](https://github.com/torrentpier/torrentpier/pull/633) ([belomaxorka](https://github.com/belomaxorka))
-- Apply fixes from StyleCI [\#634](https://github.com/torrentpier/torrentpier/pull/634), [\#635](https://github.com/torrentpier/torrentpier/pull/635) ([belomaxorka](https://github.com/belomaxorka))
+- Apply fixes from StyleCI [\#634](https://github.com/torrentpier/torrentpier/pull/634), [\#635](https://github.com/torrentpier/torrentpier/pull/635) ([Exileum](https://github.com/Exileum))
 - Added missing comments Emailer [\#637](https://github.com/torrentpier/torrentpier/pull/637) ([belomaxorka](https://github.com/belomaxorka))
 - Various fixes after composer deps update [\#638](https://github.com/torrentpier/torrentpier/pull/638) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed undefined value() functions [\#640](https://github.com/torrentpier/torrentpier/pull/640) ([belomaxorka](https://github.com/belomaxorka))
