@@ -1979,12 +1979,14 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = 100, $wid
     return $user_avatar;
 }
 
-function gender_image($gender)
+function gender_image($gender): string
 {
     global $bb_cfg, $lang, $images;
 
+    $gender = (int)$gender;
+    $user_gender = '';
+
     if (!$bb_cfg['gender']) {
-        $user_gender = '';
         return $user_gender;
     }
 
@@ -2003,12 +2005,14 @@ function gender_image($gender)
     return $user_gender;
 }
 
-function is_gold($type)
+function is_gold($type): string
 {
     global $lang, $bb_cfg;
 
+    $type = (int)$type;
+    $is_gold = '';
+
     if (!$bb_cfg['tracker']['gold_silver_enabled']) {
-        $is_gold = '';
         return $is_gold;
     }
 
@@ -2020,7 +2024,6 @@ function is_gold($type)
             $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
             break;
         default:
-            $is_gold = '';
             break;
     }
 
