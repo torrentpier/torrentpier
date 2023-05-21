@@ -1485,6 +1485,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = '問合せ';
 $lang['LIMIT'] = '限度額：';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = '無料ダウンロードと最高速度です！';
