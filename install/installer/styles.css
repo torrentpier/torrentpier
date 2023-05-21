@@ -6,6 +6,20 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+#installer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.step-content {
+  flex-grow: 1;
+}
+
+.step-footer {
+  flex-shrink: 0;
+}
+
 .step-content > .step-tab-panel {
   display: none;
 }

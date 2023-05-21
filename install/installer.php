@@ -58,6 +58,33 @@ if (isset($submit)) {
 <body>
 <!-- Contents -->
 <div class="container-fluid" id="installer">
+    <div class="step-steps text-center p-3 border-bottom bg-white">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button data-step-target="step1" type="button" class="btn btn-primary">🥰</button>
+            <button data-step-target="step2" type="button" class="btn btn-secondary">License</button>
+            <button data-step-target="step3" type="button" class="btn btn-danger">Database</button>
+            <button data-step-target="step4" type="button" class="btn btn-success">Finish</button>
+        </div>
+    </div>
+    <div class="step-content">
+        <div class="step-tab-panel m-3 text-center" data-step="step1">
+            <h1>Welcome to the TorrentPier Install Wizard 🔱</h1>
+        </div>
+        <div class="step-tab-panel m-3" data-step="step2">
+            ...
+        </div>
+        <div class="step-tab-panel m-3" data-step="step3">
+            ...
+        </div>
+        <div class="step-tab-panel m-3" data-step="step4">
+            ...
+        </div>
+    </div>
+    <div class="step-footer text-center p-3 border-top bg-white">
+        <button data-step-action="prev" type="button" class="btn btn-secondary">Previous</button>
+        <button data-step-action="next" type="button" class="btn btn-primary">Next</button>
+        <button data-step-action="finish" type="button" class="btn btn-success">Finish</button>
+    </div>
 </div>
 <!-- Scripts -->
 <script src="<?php echo make_url(hide_bb_path(INSTALL_DIR . 'installer/script.js')); ?>"></script>
