@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'बंद';
 $lang['MEMORY'] = 'मेम:';
 $lang['QUERIES'] = 'प्रश्नों';
 $lang['LIMIT'] = 'सीमा:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'मुफ्त डाउनलोड करें और अधिकतम गति पर!';
