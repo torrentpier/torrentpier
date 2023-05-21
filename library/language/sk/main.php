@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'mimo';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'dopyty';
 $lang['LIMIT'] = 'Obmedzenie:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Stiahnite si zadarmo a na maximálnu rýchlosť!';
