@@ -1483,6 +1483,9 @@ $lang['OFF'] = 'от';
 $lang['MEMORY'] = 'Мадам: ';
 $lang['QUERIES'] = 'запитвания';
 $lang['LIMIT'] = 'Ограничения:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Безплатно и на максимална скорост!';
