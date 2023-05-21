@@ -1481,6 +1481,9 @@ $lang['OFF'] = '关闭';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = '查询';
 $lang['LIMIT'] = '限制：';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = '免费下载，并在最大速度！';
