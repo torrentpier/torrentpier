@@ -11,6 +11,11 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+// Root path
+$rootPath = __DIR__;
+if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
+define('BB_PATH', dirname($rootPath));
+
 // System
 define('CHECK_REQIREMENTS', [
     'status' => true,
@@ -28,11 +33,6 @@ define('CHECK_REQIREMENTS', [
         'xmlwriter',
     ],
 ]);
-
-// Root path
-$rootPath = __DIR__;
-if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
-define('BB_PATH', dirname($rootPath));
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('ADMIN_DIR', BB_PATH . '/admin');
