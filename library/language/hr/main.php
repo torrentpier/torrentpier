@@ -1484,6 +1484,9 @@ $lang['OFF'] = 'od';
 $lang['MEMORY'] = 'Madam: ';
 $lang['QUERIES'] = 'upite';
 $lang['LIMIT'] = 'Ograničenja:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Besplatno preuzimanje i na maksimalnu brzinu!';
