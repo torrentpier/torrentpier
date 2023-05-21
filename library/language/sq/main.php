@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem-it: ';
 $lang['QUERIES'] = 'pyetje';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Shkarko pa pagesë dhe me shpejtësi maksimale!';
