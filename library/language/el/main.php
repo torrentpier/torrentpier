@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'από';
 $lang['MEMORY'] = 'Μεμ: ';
 $lang['QUERIES'] = 'ερωτήματα';
 $lang['LIMIT'] = 'Όριο:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Κατεβάστε το δωρεάν και με τη μέγιστη ταχύτητα!';
