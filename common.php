@@ -45,10 +45,10 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
 require_once __DIR__ . '/library/defines.php';
 
 // Composer
-if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+if (!file_exists(BB_PATH . '/vendor/autoload.php')) {
     die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
-require_once __DIR__ . '/vendor/autoload.php';
+require_once BB_PATH . '/vendor/autoload.php';
 
 /**
  * Gets the value of an environment variable.
@@ -63,13 +63,13 @@ function env(string $key, $default = null)
 }
 
 // Get initial config
-$dotenv = Dotenv\Dotenv::createMutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
 $dotenv->safeLoad();
-require_once __DIR__ . '/library/config.php';
+require_once BB_PATH . '/library/config.php';
 
 // Local config
-if (file_exists(__DIR__ . '/library/config.local.php')) {
-    require_once __DIR__ . '/library/config.local.php';
+if (file_exists(BB_PATH . '/library/config.local.php')) {
+    require_once BB_PATH . '/library/config.local.php';
 }
 
 /**

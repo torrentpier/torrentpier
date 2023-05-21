@@ -389,9 +389,15 @@ function make_url(string $path = ''): string
 }
 
 /**
- * Functions
+ * Initialization process
  */
 require_once INC_DIR . '/functions.php';
+
+// Redirect to installer
+if (is_dir(BB_PATH . '/install')) {
+    require_once BB_PATH . '/install/installer.php';
+    exit();
+}
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 

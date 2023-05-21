@@ -38,6 +38,7 @@
     "google/recaptcha": "^1.2",
     "guzzlehttp/guzzle": "^7.5",
     "guzzlehttp/psr7": "^2.4",
+    "k-adam/env-editor": "^1.0",
     "longman/ip-tools": "1.2.1",
     "monolog/monolog": "^2.9",
     "rych/bencode": "v1.0.0",
