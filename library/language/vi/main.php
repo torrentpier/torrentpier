@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'tắt';
 $lang['MEMORY'] = 'Nhớ: ';
 $lang['QUERIES'] = 'thắc mắc';
 $lang['LIMIT'] = 'Giới hạn:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Tải về miễn phí và với tốc độ tối đa!';
