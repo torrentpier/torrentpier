@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'חופש';
 $lang['MEMORY'] = 'זיכרון: ';
 $lang['QUERIES'] = 'שאילתות';
 $lang['LIMIT'] = 'גבול:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'להורדה בחינם, במהירות המרבית!';
