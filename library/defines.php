@@ -11,11 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-// Root path
-$rootPath = __DIR__;
-if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
-define('BB_PATH', dirname($rootPath));
-
 // System
 define('CHECK_REQIREMENTS', [
     'status' => true,
