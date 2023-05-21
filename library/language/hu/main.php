@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'le';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'lekérdezések';
 $lang['LIMIT'] = 'Korlát:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Töltse le ingyenes maximális sebességgel!';
