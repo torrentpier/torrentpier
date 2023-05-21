@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'قبالة';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'الاستفسارات';
 $lang['LIMIT'] = 'الحد:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'تحميل مجانا و في أقصى سرعة!';
