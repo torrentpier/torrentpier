@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem:';
 $lang['QUERIES'] = 'so\'rovlarni';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'bepul va maksimal tezlikda yuklab oling!';
