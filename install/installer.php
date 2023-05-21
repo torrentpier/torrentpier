@@ -40,7 +40,7 @@ if (isset($submit)) {
     <!-- Meta info -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TorrentPier Installer (<?php echo $bb_cfg['tp_version']; ?>)</title>
+    <title>TorrentPier Installer - (<?php echo $bb_cfg['tp_version']; ?>)</title>
     <link rel="icon" href="<?php echo make_url(hide_bb_path(BB_PATH . '/favicon.png')); ?>">
     <!-- jQuery -->
     <script src="<?php echo make_url(hide_bb_path(INSTALL_DIR . 'installer/jquery/jquery-3.7.0.min.js')); ?>"></script>
@@ -57,6 +57,8 @@ if (isset($submit)) {
 </head>
 <body>
 <!-- Contents -->
+<div class="container-fluid" id="installer">
+</div>
 <!-- Scripts -->
 <script src="<?php echo make_url(hide_bb_path(INSTALL_DIR . 'installer/script.js')); ?>"></script>
 </body>
