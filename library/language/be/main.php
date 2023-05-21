@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'ад';
 $lang['MEMORY'] = 'Мадам: ';
 $lang['QUERIES'] = 'запыты';
 $lang['LIMIT'] = 'Абмежаванні:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Спампаваць бясплатна і на максімальнай хуткасці!';
