@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'af';
 $lang['MEMORY'] = 'Mem:';
 $lang['QUERIES'] = 'navrae';
 $lang['LIMIT'] = 'perk:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Laai gratis en teen maksimum spoed!';
