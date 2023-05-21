@@ -1481,6 +1481,9 @@ $lang['OFF'] = '륙';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = '쿼리';
 $lang['LIMIT'] = '제한:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = '무료로 다운로드에서 최대 속도!';
