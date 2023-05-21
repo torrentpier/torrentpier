@@ -1481,6 +1481,9 @@ $lang['OFF'] = 'ажыратылған';
 $lang['MEMORY'] = 'MEM:';
 $lang['QUERIES'] = 'сұраулар';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'тегін жүктеп және максималды жылдамдығы!';
