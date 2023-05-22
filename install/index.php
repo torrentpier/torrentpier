@@ -9,7 +9,7 @@
 
 // Check installed
 if (!defined('BB_PATH') || is_file(BB_PATH . '/.env')) {
-    redirect(make_url()); // Redirect to homepage
+    exit('TorrentPier is already installed!');
 }
 
 // Remove time limit

@@ -394,8 +394,8 @@ function make_url(string $path = ''): string
 require_once INC_DIR . '/functions.php';
 
 // Redirect to installer
-if (is_dir(BB_PATH . '/install')) {
-    require_once BB_PATH . '/install/installer.php';
+if (is_dir(BB_PATH . '/install') && !is_file(BB_PATH . '/.env')) {
+    require_once BB_PATH . '/install/index.php';
     exit();
 }
 
