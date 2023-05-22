@@ -7,8 +7,4 @@
  */
 
 // Init steps plugin
-$('#installer').steps({
-  onFinish: function () {
-    location.reload();
-  }
-});
+$('#installer').steps();

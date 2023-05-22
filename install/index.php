@@ -84,7 +84,9 @@ if (isset($submit)) {
     <div class="step-footer text-center p-3 border-top bg-white">
         <button data-step-action="prev" type="button" class="btn btn-secondary">Previous</button>
         <button data-step-action="next" type="button" class="btn btn-primary">Next</button>
-        <button data-step-action="finish" type="button" class="btn btn-success">Finish</button>
+        <button onclick="window.location.replace('<?php echo FULL_URL; ?>');" data-step-action="finish" type="button"
+                class="btn btn-success">Finish
+        </button>
     </div>
 </div>
 <!-- Scripts -->
