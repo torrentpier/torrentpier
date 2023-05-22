@@ -20,10 +20,6 @@
   flex-shrink: 0;
 }
 
-.license-details {
-  text-align: left !important;
-}
-
 .step-content > .step-tab-panel {
   display: none;
 }
