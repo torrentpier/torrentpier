@@ -60,23 +60,24 @@ if (isset($submit)) {
 <div class="container-fluid" id="installer">
     <div class="step-steps text-center p-3 border-bottom bg-white">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button data-step-target="step1" type="button" class="btn btn-primary">🥰</button>
+            <button data-step-target="step1" type="button" class="btn btn-primary">🐂</button>
             <button data-step-target="step2" type="button" class="btn btn-secondary">License</button>
             <button data-step-target="step3" type="button" class="btn btn-danger">Database</button>
             <button data-step-target="step4" type="button" class="btn btn-success">Finish</button>
         </div>
     </div>
-    <div class="step-content">
-        <div class="step-tab-panel m-3 text-center" data-step="step1">
-            <h1>Welcome to the TorrentPier Install Wizard 🔱</h1>
+    <div class="step-content text-center">
+        <div class="step-tab-panel m-3 p-3 bg-light rounded-2" data-step="step1">
+            <img src="<?php echo make_url(hide_bb_path(BB_PATH . 'favicon.png')); ?>" alt="Logo" class="img-fluid mb-3">
+            <h3>✨ Welcome to the TorrentPier Install Wizard ✨</h3>
         </div>
-        <div class="step-tab-panel m-3" data-step="step2">
+        <div class="step-tab-panel m-3 p-3 bg-light rounded-2" data-step="step2">
             ...
         </div>
-        <div class="step-tab-panel m-3" data-step="step3">
+        <div class="step-tab-panel m-3 p-3 bg-light rounded-2" data-step="step3">
             ...
         </div>
-        <div class="step-tab-panel m-3" data-step="step4">
+        <div class="step-tab-panel m-3 p-3 bg-light rounded-2" data-step="step4">
             ...
         </div>
     </div>
