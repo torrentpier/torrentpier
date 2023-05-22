@@ -7,17 +7,19 @@
  */
 
 #installer {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
+}
+
+.step-footer,
+.step-steps {
+  align-self: center;
 }
 
 .step-content {
-  flex-grow: 1;
-}
-
-.step-footer {
-  flex-shrink: 0;
+  justify-self: center;
+  align-self: center;
 }
 
 .step-content > .step-tab-panel {

@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
 <body>
 <!-- Contents -->
 <div class="container-fluid" id="installer">
-    <div class="step-steps text-center p-3 border-bottom bg-white">
+    <div class="sticky-top step-steps text-center p-3 border-bottom bg-white">
         <div class="btn-group" role="group" aria-label="Wizard controls">
             <button data-step-target="step1" type="button" class="btn btn-primary">Welcome! 🐂</button>
             <button data-step-target="step2" type="button" class="btn btn-secondary">License details 📜</button>
@@ -68,12 +68,11 @@ if (isset($_POST['submit'])) {
             <button data-step-target="step6" type="button" class="btn btn-success">Finish! 💥</button>
         </div>
     </div>
-    <div class="step-content">
-        <div class="step-tab-panel m-3 p-3 rounded-2" data-step="step1">
-            <img src="<?php echo make_url(hide_bb_path(BB_PATH . 'favicon.png')); ?>" alt="Logo" class="img-fluid mb-3">
-            <h3>Welcome to the TorrentPier Installation Wizard! ✨</h3>
+    <div class="step-content m-4">
+        <div class="step-tab-panel rounded-2" data-step="step1">
+            <h3>Welcome to the <span class="text-danger">TorrentPier</span> Installation Wizard! ✨</h3>
         </div>
-        <div class="step-tab-panel m-3 p-3 rounded-2" data-step="step2">
+        <div class="step-tab-panel rounded-2" data-step="step2">
             <h3>License details 📜</h3>
             <?php
             if (is_file(BB_PATH . '/LICENSE')) {
@@ -83,21 +82,21 @@ if (isset($_POST['submit'])) {
             }
             ?>
         </div>
-        <div class="step-tab-panel m-3 p-3 rounded-2" data-step="step3">
+        <div class="step-tab-panel rounded-2" data-step="step3">
             <h3>Requirements 🔧</h3>
         </div>
-        <div class="step-tab-panel m-3 p-3 rounded-2" data-step="step4">
+        <div class="step-tab-panel rounded-2" data-step="step4">
             <h3>Database details 🗃</h3>
         </div>
-        <div class="step-tab-panel m-3 p-3 rounded-2" data-step="step5">
+        <div class="step-tab-panel rounded-2" data-step="step5">
             <h3>Admin details 🧸</h3>
         </div>
-        <div class="step-tab-panel m-3 p-3 rounded-2" data-step="step6">
+        <div class="step-tab-panel rounded-2" data-step="step6">
             <h3>TorrentPier successfully installed! ✅</h3>
             <h6>Now click to the <span class="text-success">Finish</span> button for redirect to homepage.</h6>
         </div>
     </div>
-    <div class="step-footer text-center p-3 border-top bg-white">
+    <div class="sticky-bottom step-footer text-center p-3 border-top bg-white">
         <button data-step-action="prev" type="button" class="btn btn-secondary">Previous</button>
         <button data-step-action="next" type="button" class="btn btn-primary">Next</button>
         <button onclick="window.location.replace('<?php echo FULL_URL; ?>');" data-step-action="finish" type="button"
