@@ -193,19 +193,27 @@ class Validate
         // Symbols check
         if ($bb_cfg['password_symbols']) {
             // Numbers
-            if ($bb_cfg['password_symbols']['nums'] && !IsHelper::isContainsNums($password)) {
-                return $lang['CHOOSE_PASS_ERR_NUM'];
+            if ($bb_cfg['password_symbols']['nums']) {
+                if (!IsHelper::isContainsNums($password)) {
+                    return $lang['CHOOSE_PASS_ERR_NUM'];
+                }
             }
             // Letters
-            if ($bb_cfg['password_symbols']['letters']['lowercase'] && !IsHelper::isContainsLetters($password)) {
-                return $lang['CHOOSE_PASS_ERR_LETTER'];
+            if ($bb_cfg['password_symbols']['letters']['lowercase']) {
+                if (!IsHelper::isContainsLetters($password)) {
+                    return $lang['CHOOSE_PASS_ERR_LETTER'];
+                }
             }
-            if ($bb_cfg['password_symbols']['letters']['uppercase'] && !IsHelper::isContainsLetters($password, true)) {
-                return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
+            if ($bb_cfg['password_symbols']['letters']['uppercase']) {
+                if (!IsHelper::isContainsLetters($password, true)) {
+                    return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
+                }
             }
             // Spec symbols
-            if ($bb_cfg['password_symbols']['spec_symbols'] && !IsHelper::isContainsSpecSymbols($password)) {
-                return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
+            if ($bb_cfg['password_symbols']['spec_symbols']) {
+                if (!IsHelper::isContainsSpecSymbols($password)) {
+                    return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
+                }
             }
         }
 
