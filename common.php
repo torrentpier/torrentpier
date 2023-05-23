@@ -79,6 +79,9 @@ if (file_exists(BB_PATH . '/library/config.local.php')) {
 define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
 \TorrentPier\Dev::initDebug();
 
+/**
+ * Server variables initialize
+ */
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
