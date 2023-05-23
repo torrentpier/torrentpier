@@ -76,7 +76,7 @@ if (file_exists(BB_PATH . '/library/config.local.php')) {
 /**
  * Progressive error reporting
  */
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
+define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 \TorrentPier\Dev::initDebug();
 
 /**

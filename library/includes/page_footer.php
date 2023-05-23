@@ -25,7 +25,7 @@ if (!empty($template)) {
     $template->pparse('page_footer');
 }
 
-$show_dbg_info = (DBG_USER && IS_ADMIN && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
+$show_dbg_info = (DBG_USER && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
 
 if (!$bb_cfg['gzip_compress']) {
     flush();
@@ -74,7 +74,7 @@ echo '
 	</div><!--/body_container-->
 ';
 
-if (DBG_USER && SQL_DEBUG && !(isset($_GET['pane']) && $_GET['pane'] == 'left')) {
+if ($show_dbg_info && SQL_DEBUG) {
     require INC_DIR . '/page_footer_dev.php';
 }
 
