@@ -31,6 +31,7 @@ $bb_cfg['db'] = [
     'db' => [
         // Don't change the settings here!!! Go to .env file
         env('DB_HOST', 'localhost'),
+        env('DB_PORT', 3306),
         env('DB_DATABASE', 'torrentpier'),
         env('DB_USERNAME', 'root'),
         env('DB_PASSWORD'),
