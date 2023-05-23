@@ -950,8 +950,6 @@ class SqlDb
      */
     public function explain($mode, $html_table = '', $row = '')
     {
-        global $lang;
-
         $query = str_compact($this->cur_query);
         // remove comments
         $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
