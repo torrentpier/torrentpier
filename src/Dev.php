@@ -150,8 +150,6 @@ class Dev
      */
     private static function get_sql_log_html(object $db_obj, string $log_name): string
     {
-        global $lang;
-
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
