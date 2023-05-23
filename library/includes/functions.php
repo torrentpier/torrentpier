@@ -577,7 +577,7 @@ function bt_show_ip($ip, $port = '')
     global $bb_cfg;
 
     if (IS_AM) {
-        $ip = \TorrentPier\Helpers\IPHelper::decodeIP($ip);
+        $ip = \TorrentPier\Helpers\IPHelper::long2ip($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
     }

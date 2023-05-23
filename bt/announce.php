@@ -108,7 +108,7 @@ if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
     msg_die("Invalid IP: $ip");
 }
 // Convert IP to HEX format
-$ip_sql = \TorrentPier\Helpers\IPHelper::encodeIP($ip);
+$ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
 // Peer unique id
 $peer_hash = md5(
@@ -372,13 +372,13 @@ if (!$output) {
         $peers = '';
 
         foreach ($rowset as $peer) {
-            $peers .= pack('Nn', \TorrentPier\Helpers\IPHelper::encodeIP(\TorrentPier\Helpers\IPHelper::decodeIP($peer['ip'])), $peer['port']);
+            $peers .= pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long(\TorrentPier\Helpers\IPHelper::long2ip($peer['ip'])), $peer['port']);
         }
     } else {
         $peers = [];
 
         foreach ($rowset as $peer) {
-            $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::decodeIP($peer['ip']), 'port' => (int)$peer['port']];
+            $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip($peer['ip']), 'port' => (int)$peer['port']];
         }
     }
 
