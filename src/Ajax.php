@@ -165,7 +165,7 @@ class Ajax
     {
         $this->response['action'] = $this->action;
 
-        if (DBG_USER && SQL_DEBUG && !empty($_COOKIE['sql_log'])) {
+        if (Dev::sql_dbg_enabled()) {
             $this->response['sql_log'] = Dev::get_sql_log();
         }
 
