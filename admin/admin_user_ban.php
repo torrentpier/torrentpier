@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
         foreach ($ip_list_temp as $ip) {
             if (\TorrentPier\Helpers\IPHelper::isValid($ip)) {
-                $ip_list[] = \TorrentPier\Helpers\IPHelper::encodeIP($ip);
+                $ip_list[] = \TorrentPier\Helpers\IPHelper::ip2long($ip);
             }
         }
     }
@@ -215,7 +215,7 @@ if (isset($_POST['submit'])) {
         $ban_id = $banlist[$i]['ban_id'];
 
         if (!empty($banlist[$i]['ban_ip'])) {
-            $ban_ip = str_replace('255', '*', \TorrentPier\Helpers\IPHelper::decodeIP($banlist[$i]['ban_ip']));
+            $ban_ip = str_replace('255', '*', \TorrentPier\Helpers\IPHelper::long2ip($banlist[$i]['ban_ip']));
             $select_iplist .= '<option value="' . $ban_id . '">' . $ban_ip . '</option>';
             $ipban_count++;
         } elseif (!empty($banlist[$i]['ban_email'])) {

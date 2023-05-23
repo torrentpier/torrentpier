@@ -300,7 +300,7 @@ if (!isset($_REQUEST['dosearch'])) {
             $users = [];
 
             if (\TorrentPier\Helpers\IPHelper::isValid($ip_address)) {
-                $ip = \TorrentPier\Helpers\IPHelper::encodeIP($ip_address);
+                $ip = \TorrentPier\Helpers\IPHelper::ip2long($ip_address);
                 $users[] = $ip;
             } else {
                 bb_die($lang['SEARCH_INVALID_IP']);

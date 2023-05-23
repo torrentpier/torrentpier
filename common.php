@@ -351,7 +351,7 @@ function sys($param)
 if (!defined('IN_TRACKER')) {
     require_once INC_DIR . '/init_bb.php';
 } else {
-    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::encodeIP($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
     function dummy_exit($interval = 1800)
     {

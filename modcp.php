@@ -589,7 +589,7 @@ switch ($mode) {
             bb_die($lang['NO_SUCH_POST']);
         }
 
-        if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::decodeIP($post_row['poster_ip'])) {
+        if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::long2ip($post_row['poster_ip'])) {
             $ip_this_post = $lang['NOT_AVAILABLE'];
         }
 
@@ -623,7 +623,7 @@ switch ($mode) {
                     continue;
                 }
 
-                if (!$ip = \TorrentPier\Helpers\IPHelper::decodeIP($row['poster_ip'])) {
+                if (!$ip = \TorrentPier\Helpers\IPHelper::long2ip($row['poster_ip'])) {
                     $ip = $lang['NOT_AVAILABLE'];
                 }
                 $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
