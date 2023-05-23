@@ -19,7 +19,7 @@ use TorrentPier\Dev;
 class SqlDb
 {
     public $cfg = [];
-    public $cfg_keys = ['dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
+    public $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
     private $link;
     public $result;
     public $db_server = '';
@@ -97,11 +97,11 @@ class SqlDb
      */
     public function connect()
     {
-        $this->cur_query = $this->dbg_enabled ? "connect to: {$this->cfg['dbhost']}" : 'connect';
+        $this->cur_query = $this->dbg_enabled ? "connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}" : 'connect';
         $this->debug('start');
 
         $p = ((bool)$this->cfg['persist']) ? 'p:' : '';
-        $this->link = mysqli_connect($p . $this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname']);
+        $this->link = mysqli_connect($p . $this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname'], $this->cfg['dbport']);
         $this->selected_db = $this->cfg['dbname'];
 
         register_shutdown_function([&$this, 'close']);
