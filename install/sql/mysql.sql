@@ -673,6 +673,11 @@ CREATE TABLE IF NOT EXISTS `bb_disallow`
 -- ----------------------------
 -- Records of bb_disallow
 -- ----------------------------
+INSERT INTO `bb_disallow` (`disallow_id`, `disallow_username`)
+VALUES ('1', 'torrentpier*'),
+       ('2', 'tracker*'),
+       ('3', 'forum*'),
+       ('4', 'torrent*');
 
 -- ----------------------------
 -- Table structure for `bb_extensions`
@@ -1263,7 +1268,8 @@ CREATE TABLE IF NOT EXISTS `bb_topics`
 -- Records of bb_topics
 -- ----------------------------
 INSERT INTO `bb_topics`
-VALUES ('1', '1', 'Добро пожаловать в TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1', '0',
+VALUES ('1', '1', 'Добро пожаловать в TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1',
+        '0',
         '0',
         '0', UNIX_TIMESTAMP(), '0');
 
