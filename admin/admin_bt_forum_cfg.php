@@ -8,7 +8,7 @@
  */
 
 if (!empty($setmodules)) {
-    $module[env('APP_NAME', 'TorrentPier')]['FORUM_CONFIG'] = basename(__FILE__);
+    $module['TorrentPier']['FORUM_CONFIG'] = basename(__FILE__);
     return;
 }
 require __DIR__ . '/pagestart.php';

@@ -57,7 +57,7 @@ class Dev
                  */
                 $loggingInConsole = new PlainTextHandler();
                 $loggingInConsole->loggerOnly(true);
-                $loggingInConsole->setLogger((new Logger(env('APP_NAME', 'TorrentPier'), [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
+                $loggingInConsole->setLogger((new Logger('TorrentPier', [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
                 $whoops->pushHandler($loggingInConsole);
 
                 /**
@@ -66,7 +66,7 @@ class Dev
                 if (ini_get('log_errors') == 1) {
                     $loggingInFile = new PlainTextHandler();
                     $loggingInFile->loggerOnly(true);
-                    $loggingInFile->setLogger((new Logger(env('APP_NAME', 'TorrentPier'), [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
+                    $loggingInFile->setLogger((new Logger('TorrentPier', [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
                     $whoops->pushHandler($loggingInFile);
                 }
 
