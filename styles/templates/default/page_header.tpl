@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="{$bb_cfg['default_lang']}">
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <title><!-- IF HAVE_NEW_PM -->({HAVE_NEW_PM}) <!-- ENDIF --><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
-<meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta property="og:site_name" content="{SITENAME}">
 <meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
+<meta property="twitter:image" content="{SITE_URL}styles/images/logo/logo.png">
+<meta property="og:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
+<meta property="twitter:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
