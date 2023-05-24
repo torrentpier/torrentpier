@@ -17,13 +17,13 @@ ajax.callback.posts = function(data) {
 	<option style="font-family: sans-serif" value="sans-serif">&nbsp;Sans Serif</option>
 	<option style="font-family: cursive" value="cursive">&nbsp;Cursive</option>
 	<option style="font-family: Arial" value="Arial">&nbsp;Arial</option>
-  <option style="font-family: Arial Black" value="Arial Black">&nbsp;Arial Black</option>
-  <option style="font-family: Times New Roman" value="Times New Roman">&nbsp;Times New Roman</option>
+    <option style="font-family: Arial Black" value="Arial Black">&nbsp;Arial Black</option>
+    <option style="font-family: Times New Roman" value="Times New Roman">&nbsp;Times New Roman</option>
 	<option style="font-family: Tahoma" value="Tahoma">&nbsp;Tahoma</option>
-  <option style="font-family: Courier" value="Courier">&nbsp;Courier</option>
-  <option style="font-family: Bookman Old Style" value="Bookman Old Style">&nbsp;Bookman</option>
-  <option style="font-family: Trebuchet MS" value="Trebuchet MS">&nbsp;Trebuchet</option>
-  <option style="font-family: Garamond" value="Garamond">&nbsp;Garamond</option>
+    <option style="font-family: Courier" value="Courier">&nbsp;Courier</option>
+    <option style="font-family: Bookman Old Style" value="Bookman Old Style">&nbsp;Bookman</option>
+    <option style="font-family: Trebuchet MS" value="Trebuchet MS">&nbsp;Trebuchet</option>
+    <option style="font-family: Garamond" value="Garamond">&nbsp;Garamond</option>
 	<option style="font-family: Georgia" value="Georgia">&nbsp;Georgia</option>
 	<option style="font-family: Fixedsys" value="Fixedsys">&nbsp;Fixedsys</option>
 </select>
@@ -57,8 +57,8 @@ ajax.callback.posts = function(data) {
 	<option value="20">&nbsp;size=20</option>
 	<option value="22">&nbsp;size=22</option>
 	<option value="24" class="em">{L_FONT_HUGE}</option>
-  <option value="26">&nbsp;size=26</option>
-  <option value="28">&nbsp;size=28</option>
+    <option value="26">&nbsp;size=26</option>
+    <option value="28">&nbsp;size=28</option>
 </select>
 &nbsp;
 <select name="codeAlign" class="text_size">
