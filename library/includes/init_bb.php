@@ -358,12 +358,12 @@ function prn_r($var, $title = '', $print = true)
  * @param $txt
  * @param bool $double_encode
  * @param int $quote_style
- * @param string $charset
+ * @param ?string $charset
  * @return string
  */
-function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
 {
-    return (string)htmlspecialchars($txt, $quote_style, $charset, $double_encode);
+    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
 }
 
 /**
