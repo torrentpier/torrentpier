@@ -1,17 +1,17 @@
 <script type="text/javascript">
-function manage_group(mode, value) {
-	ajax.exec({
-		action   : 'manage_group',
-		mode     : mode,
-		group_id : {GROUP_ID},
-		value    : value
-	});
-	ajax.callback.manage_group = function(data) {
-    if(data.remove_avatar) {
-      $('div#avatar').html(data.remove_avatar);
+    function manage_group(mode, value) {
+        ajax.exec({
+            action: 'manage_group',
+            mode: mode,
+            group_id: {GROUP_ID},
+            value: value
+        });
+        ajax.callback.manage_group = function (data) {
+            if (data.remove_avatar) {
+                $('div#avatar').html(data.remove_avatar);
+            }
+        }
     }
-	}
-}
 </script>
 
 <h1 class="pagetitle">{PAGE_TITLE}<!-- IF GROUP_NAME --> :: {GROUP_NAME}<!-- ENDIF --></h1>
