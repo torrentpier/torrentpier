@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'حقل كلمة السر يجب أن لا تكون فا�
 $lang['CHOOSE_PASS_ERR'] = 'دخلت لا تتطابق كلمات المرور';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'يجب أن تكون كلمة المرور على الأقل %d الشخصيات';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'يجب أن تكون كلمة المرور لم يعد من الشخصيات $d';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'تتطابق كلمات المرور';
 $lang['CHOOSE_PASS_REG_OK'] = 'تتطابق كلمات المرور, يمكنك المضي قدما في التسجيل';
 $lang['CHOOSE_PASS_FAILED'] = 'لتغيير كلمة المرور بشكل صحيح يجب تحديد كلمة المرور الحالية';
