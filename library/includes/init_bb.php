@@ -74,6 +74,8 @@ define('COOKIE_PERSIST', TIMENOW + 31536000);
 define('COOKIE_MAX_TRACKS', 90);
 
 /**
+ * Set cookie
+ *
  * @param $name
  * @param $val
  * @param int $lifetime
@@ -83,12 +85,14 @@ define('COOKIE_MAX_TRACKS', 90);
 function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false)
 {
     global $bb_cfg;
+
     return setcookie($name, $val, [
         'expires' => $lifetime,
         'path' => $bb_cfg['script_path'],
         'domain' => $bb_cfg['cookie_domain'],
         'secure' => $bb_cfg['cookie_secure'],
         'httponly' => $httponly,
+        'samesite' => $bb_cfg['cookie_same_site'],
     ]);
 }
 
