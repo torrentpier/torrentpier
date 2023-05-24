@@ -11,7 +11,12 @@
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
-<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/oldbrowserdetector.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/clipboard.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/printThis.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->

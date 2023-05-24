@@ -16,6 +16,7 @@
 
 <h1 class="pagetitle">{PAGE_TITLE}<!-- IF GROUP_NAME --> :: {GROUP_NAME}<!-- ENDIF --></h1>
 <p class="nav"><a href="{U_GROUP_URL}">{L_GROUP_RETURN}</a></p>
+
 <table class="forumline pad_4">
 	<col class="row1" width="20%">
 	<col class="row2" width="100%">
