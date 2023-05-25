@@ -174,6 +174,10 @@
 				<p>{TOTAL_GENDER}</p>
 				<p>{NEWEST_USER}</p>
 
+                <!-- IF $bb_cfg['show_board_start_date'] -->
+                <p style="margin-top: 4px;">{BOARD_START}</p>
+                <!-- ENDIF -->
+
 				<!-- IF $bb_cfg['tor_stats'] -->
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
 				<p>{TORRENTS_STAT}</p>
