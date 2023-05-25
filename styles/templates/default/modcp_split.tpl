@@ -13,7 +13,7 @@ function toggle_cbox (cb_id, tr_id)
 	return false;
 }
 </script>
-<style type="text/css"> .sel { background-color:#FFEFD5; } </style>
+<style> .sel { background-color:#FFEFD5; } </style>
 
 <form method="post" action="{S_SPLIT_ACTION}">
 

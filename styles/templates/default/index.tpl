@@ -198,7 +198,7 @@
 				<p>{RECORD_USERS}</p>
 
 				<!-- IF SHOW_ONLINE_LIST -->
-					<style type="text/css"><!-- IF IS_ADMIN -->.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }<!-- ELSE -->.ou_stat { display: none; }<!-- ENDIF --></style>
+					<style><!-- IF IS_ADMIN -->.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }<!-- ELSE -->.ou_stat { display: none; }<!-- ENDIF --></style>
 					<a name="online"></a>
 					<div id="online_userlist" style="margin-top: 4px;">{LOGGED_IN_USER_LIST}</div>
 

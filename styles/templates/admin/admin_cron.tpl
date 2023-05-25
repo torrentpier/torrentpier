@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 </script>
 
-<style type="text/css">
+<style>
 #cron_true, #cron_false { width: 95%; }
 #cron_true td { background: #d9facb; padding: 8px 8px; color: #286e0f; }
 #cron_false td { background: #eaeadf; padding: 8px 8px; color: #286e0f; }

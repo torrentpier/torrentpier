@@ -318,7 +318,7 @@ $('#tor-filelist-btn').click(function(){
 });
 </script>
 
-<style type="text/css">
+<style>
 #tor-fl-wrap {
 	margin: 12px auto 0; width: 95%;
 }

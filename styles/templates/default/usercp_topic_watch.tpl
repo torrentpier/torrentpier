@@ -48,7 +48,7 @@ function show_edit_options ()
 }
 </script>
 
-<style type="text/css">
+<style>
 td.topic_id { cursor: pointer; }
 </style>
 
