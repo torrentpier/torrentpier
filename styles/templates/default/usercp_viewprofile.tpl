@@ -174,7 +174,7 @@ ajax.callback.gen_passkey = function(data){
 </script>
 <!-- ENDIF / SHOW_PASSKEY -->
 
-<style type="text/css">
+<style>
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
 #traf-stats-tbl th { padding: 2px <!-- IF $bb_cfg['seed_bonus_enabled'] -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
@@ -510,7 +510,7 @@ ajax.callback.gen_passkey = function(data){
 <a name="torrent"></a>
 <div class="spacer_8"></div>
 <!-- IF USER_DLS -->
-<style type="text/css">
+<style>
 #dls-tbl u { display: none; }
 .dls-type, .dls-f { padding: 4px; text-align: center; }
 .dls-cnt { font-size: 16px; font-weight: normal; }

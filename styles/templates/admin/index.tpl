@@ -20,7 +20,7 @@
 <!-- IF TPL_ADMIN_NAVIGATE -->
 <!--========================================================================-->
 
-<style type="text/css">
+<style>
   body {
     background: #E5E5E5;
     min-width: 10px;

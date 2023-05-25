@@ -1,7 +1,7 @@
 <!-- IF TPL_AUTH_UG_MAIN -->
 <!--========================================================================-->
 
-<style type="text/css">
+<style>
 #page_content {
 	padding: 0;
 }

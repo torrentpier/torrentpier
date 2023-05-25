@@ -1,4 +1,4 @@
-<style type="text/css">
+<style>
   .log_msg {
     max-height: 100px;
     overflow: auto;

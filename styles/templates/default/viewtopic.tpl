@@ -1,5 +1,5 @@
 <!-- IF LOGGED_IN -->
-<style type="text/css">
+<style>
 <!-- IF HIDE_AVATAR -->.avatar { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_RANK_IMG -->.rank_img { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_POST_IMG -->img.postImg, div.postImg-wrap { display: none; }<!-- ENDIF -->

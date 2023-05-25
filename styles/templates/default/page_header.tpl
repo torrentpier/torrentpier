@@ -124,16 +124,16 @@ function post2url (url, params) {
 }
 </script>
 
-<!--[if gte IE 7]><style type="text/css">
+<!--[if gte IE 7]><style>
 input[type="checkbox"] { margin-bottom: -1px; }
 </style><![endif]-->
 
-<!--[if IE]><style type="text/css">
+<!--[if IE]><style>
 .post-hr { margin: 2px auto; }
 .fieldsets div > p { margin-bottom: 0; }
 </style><![endif]-->
 
-<style type="text/css">
+<style>
 	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title, .q-post { display: none; }
 </style>
 </head>
@@ -224,7 +224,7 @@ function go_to_page ()
 <!-- IF SIMPLE_HEADER -->
 <!--==================-->
 
-<style type="text/css">body { background: #E3E3E3; min-width: 10px; }</style>
+<style>body { background: #E3E3E3; min-width: 10px; }</style>
 
 <!--=================-->
 <!-- ELSEIF IN_ADMIN -->

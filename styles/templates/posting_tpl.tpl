@@ -1,4 +1,4 @@
-<style type="text/css">
+<style>
 td.rel-inputs { padding-left: 6px; }
 .rel-el      { margin: 2px 6px 2px 0; }
 .rel-title   { font-weight: bold; }

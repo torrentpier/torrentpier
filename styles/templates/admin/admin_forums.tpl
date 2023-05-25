@@ -165,7 +165,7 @@ function toggle_cat_list (val)
 <!-- IF TPL_FORUMS_LIST -->
 <!--========================================================================-->
 
-<style type="text/css">
+<style>
 table.forumline + table.forumline { border-top-width: 0; }
 </style>
 

@@ -1,4 +1,4 @@
-<style type="text/css">
+<style>
 .prof-tbl * { -moz-box-sizing: border-box; box-sizing: border-box; }
 input[name="username"], input[name="user_email"], input[name="cur_pass"], input[name="new_pass"] {
 	width: 255px;
