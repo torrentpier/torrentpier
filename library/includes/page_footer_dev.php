@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 ?>
 
-<style type="text/css">
+<style>
     .sqlLog {
         clear: both;
         font-family: Courier, monospace;
