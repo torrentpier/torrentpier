@@ -139,6 +139,7 @@ $template->assign_vars(array(
     'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
     'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)$bb_cfg['board_timezone'])])),
     'BOARD_TIMEZONE' => $bb_cfg['board_timezone'],
+    'BOARD_START' => $bb_cfg['show_board_start_date'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : '',
 
     'PM_INFO' => $pm_info,
     'PRIVMSG_IMG' => $icon_pm,

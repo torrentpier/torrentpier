@@ -518,6 +518,8 @@ $bb_cfg['allow_change'] = [
     'dateformat' => true,
 ];
 
+$bb_cfg['show_board_start_date'] = true;
+
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
 $bb_cfg['first_logon_redirect_url'] = 'index.php';
