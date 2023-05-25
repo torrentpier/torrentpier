@@ -26,7 +26,7 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
 /**
  * Called from admin_users.php and admin_groups.php in order to process Quota Settings (admin/admin_users.php:admin/admin_groups.php)
  */
-function attachment_quota_settings($admin_mode, $submit = false, $mode)
+function attachment_quota_settings($admin_mode, $mode, $submit = false)
 {
     global $template, $lang, $attach_config;
     $this_userdata = [];
