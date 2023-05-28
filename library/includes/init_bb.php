@@ -360,6 +360,8 @@ function prn_r($var, $title = '', $print = true)
 }
 
 /**
+ * Convert special characters to HTML entities
+ *
  * @param $txt
  * @param bool $double_encode
  * @param int $quote_style
@@ -369,6 +371,20 @@ function prn_r($var, $title = '', $print = true)
 function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
 {
     return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
+}
+
+/**
+ * Adds commas between every group of thousands
+ *
+ * @param float|null $num
+ * @param int $decimals
+ * @param string|null $decimal_separator
+ * @param string|null $thousands_separator
+ * @return string
+ */
+function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.', ?string $thousands_separator = ','): string
+{
+    return number_format($num ?? 0.0, $decimals, $decimal_separator, $thousands_separator);
 }
 
 /**
