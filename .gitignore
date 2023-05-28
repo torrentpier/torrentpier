@@ -20,6 +20,8 @@ vendor
 *.rar
 *.tar
 *.gz
+*.zip
+*.7z
 *.torrent
 
 ### Windows ###
