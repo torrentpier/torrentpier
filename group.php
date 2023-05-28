@@ -380,7 +380,7 @@ if (!$group_id) {
         'U_GROUP_RELEASES' => "group.php?view=releases&amp;" . POST_GROUPS_URL . "=$group_id",
         'U_GROUP_MEMBERS' => "group.php?view=members&amp;" . POST_GROUPS_URL . "=$group_id",
         'U_GROUP_CONFIG' => "group_edit.php?g=$group_id",
-        'RELEASE_GROUP' => ($group_info['release_group']) ? true : false,
+        'RELEASE_GROUP' => (bool)$group_info['release_group'],
         'GROUP_TYPE' => $group_type,
 
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,

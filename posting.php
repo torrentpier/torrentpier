@@ -170,7 +170,7 @@ if ($post_info = DB()->fetch_row($sql)) {
         $post_data['poster_id'] = $post_info['poster_id'];
 
         $selected_rg = $post_info['poster_rg_id'];
-        $switch_rg_sig = ($post_info['attach_rg_sig']) ? true : false;
+        $switch_rg_sig = (bool)$post_info['attach_rg_sig'];
 
         // Can this user edit/delete the post?
         if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {

@@ -79,7 +79,7 @@ function get_supported_image_types($type)
         }
 
         return array(
-            'gd' => ($new_type) ? true : false,
+            'gd' => (bool)$new_type,
             'format' => $new_type,
             'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
         );

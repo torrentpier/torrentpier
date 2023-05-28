@@ -33,10 +33,10 @@ $size = request_var('size', '');
 $quota_size = request_var('quota_size', '');
 $pm_size = request_var('pm_size', '');
 
-$submit = isset($_POST['submit']) ? true : false;
-$check_upload = isset($_POST['settings']) ? true : false;
-$check_image_cat = isset($_POST['cat_settings']) ? true : false;
-$search_imagick = isset($_POST['search_imagick']) ? true : false;
+$submit = isset($_POST['submit']);
+$check_upload = isset($_POST['settings']);
+$check_image_cat = isset($_POST['cat_settings']);
+$search_imagick = isset($_POST['search_imagick']);
 
 // Re-evaluate the Attachment Configuration
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
@@ -423,7 +423,7 @@ if ($submit && $mode == 'quota') {
     $quota_desc = get_var('quota_description', '');
     $filesize = get_var('add_max_filesize', 0);
     $size_select = get_var('add_size_select', '');
-    $add = isset($_POST['add_quota_check']) ? true : false;
+    $add = isset($_POST['add_quota_check']);
 
     if ($quota_desc != '' && $add) {
         // check Quota Description
