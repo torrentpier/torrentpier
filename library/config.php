@@ -11,6 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+// Server settings
 $domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
 $domain_name = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name;
 $domain_ssl = false;
@@ -415,7 +416,7 @@ $bb_cfg['adv_email'] = "adv@$domain_name";
 // Bugsnag error reporting
 $bb_cfg['bugsnag'] = [
     'enabled' => false,
-    'api_key' => 'ee1adc9739cfceb01ce4a450ae1e52bf',
+    'api_key' => '',
 ];
 
 // Special users
@@ -502,7 +503,7 @@ $bb_cfg['user_not_active_days_keep'] = 180; // inactive users but only with no p
 $bb_cfg['group_members_per_page'] = 50;
 
 // Tidy
-$bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions(), true)) ? false : true;
+$bb_cfg['tidy_post'] = in_array('tidy', get_loaded_extensions(), true);
 
 // Misc
 $bb_cfg['mem_on_start'] = memory_get_usage();
@@ -726,6 +727,7 @@ $bb_cfg['topic_left_column_witdh'] = 150;
 $bb_cfg['post_img_width_decr'] = 52;
 $bb_cfg['attach_img_width_decr'] = 130;
 
+// Get default lang
 if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'])) {
     $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/';
 } else {
