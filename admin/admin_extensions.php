@@ -43,9 +43,9 @@ $mode = get_var('mode', '');
 $e_mode = get_var('e_mode', '');
 
 $error = false;
-$add_forum = isset($_POST['add_forum']) ? true : false;
-$delete_forum = isset($_POST['del_forum']) ? true : false;
-$submit = isset($_POST['submit']) ? true : false;
+$add_forum = isset($_POST['add_forum']);
+$delete_forum = isset($_POST['del_forum']);
+$submit = isset($_POST['submit']);
 
 // Get Attachment Config
 $attach_config = array();
@@ -120,7 +120,7 @@ if ($submit && $mode == 'extensions') {
     $extension = get_var('add_extension', '');
     $extension_explain = get_var('add_extension_explain', '');
     $extension_group = get_var('add_group_select', 0);
-    $add = isset($_POST['add_extension_check']) ? true : false;
+    $add = isset($_POST['add_extension_check']);
 
     if ($extension != '' && $add) {
         $template->assign_vars(array(
@@ -301,7 +301,7 @@ if ($submit && $mode == 'groups') {
     $size_select = get_var('add_size_select', '');
 
     $is_allowed = isset($_POST['add_allowed']) ? 1 : 0;
-    $add = isset($_POST['add_extension_group_check']) ? true : false;
+    $add = isset($_POST['add_extension_group_check']);
 
     if ($extension_group != '' && $add) {
         // check Extension Group

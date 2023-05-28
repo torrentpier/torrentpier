@@ -46,7 +46,7 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
 
     if ($admin_mode == 'user') {
         // We overwrite submit here... to be sure
-        $submit = (isset($_POST['submit'])) ? true : false;
+        $submit = isset($_POST['submit']);
 
         if (!$submit && $mode != 'save') {
             $user_id = get_var(POST_USERS_URL, 0);

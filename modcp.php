@@ -555,7 +555,7 @@ switch ($mode) {
                         'POSTER_NAME' => wbr($poster),
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
-                        'CHECKBOX' => (defined('BEGIN_CHECKBOX')) ? true : false,
+                        'CHECKBOX' => defined('BEGIN_CHECKBOX'),
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
                         'CB_ID' => 'cb_' . $i,

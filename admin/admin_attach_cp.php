@@ -302,7 +302,7 @@ if ($view === 'username') {
 
 // Attachments
 if ($view === 'attachments') {
-    $user_based = $uid ? true : false;
+    $user_based = (bool)$uid;
     $search_based = (isset($_POST['search']) && $_POST['search']);
 
     $hidden_fields = '';

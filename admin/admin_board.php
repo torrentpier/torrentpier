@@ -124,8 +124,8 @@ switch ($mode) {
 
             'SITENAME' => htmlCHR($new['sitename']),
             'CONFIG_SITE_DESCRIPTION' => htmlCHR($new['site_desc']),
-            'DISABLE_BOARD' => $new['board_disable'] ? true : false,
-            'ALLOW_AUTOLOGIN' => $new['allow_autologin'] ? true : false,
+            'DISABLE_BOARD' => (bool)$new['board_disable'],
+            'ALLOW_AUTOLOGIN' => (bool)$new['allow_autologin'],
             'AUTOLOGIN_TIME' => (int)$new['max_autologin_time'],
             'MAX_POLL_OPTIONS' => $new['max_poll_options'],
             'FLOOD_INTERVAL' => $new['flood_interval'],
@@ -137,12 +137,12 @@ switch ($mode) {
             'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],
-            'PRUNE_ENABLE' => $new['prune_enable'] ? true : false,
-            'ALLOW_BBCODE' => $new['allow_bbcode'] ? true : false,
-            'ALLOW_SMILIES' => $new['allow_smilies'] ? true : false,
-            'ALLOW_SIG' => $new['allow_sig'] ? true : false,
+            'PRUNE_ENABLE' => (bool)$new['prune_enable'],
+            'ALLOW_BBCODE' => (bool)$new['allow_bbcode'],
+            'ALLOW_SMILIES' => (bool)$new['allow_smilies'],
+            'ALLOW_SIG' => (bool)$new['allow_sig'],
             'SIG_SIZE' => $new['max_sig_chars'],
-            'ALLOW_NAMECHANGE' => $new['allow_namechange'] ? true : false,
+            'ALLOW_NAMECHANGE' => (bool)$new['allow_namechange'],
             'SMILIES_PATH' => $new['smilies_path'],
         ));
         break;

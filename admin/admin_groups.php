@@ -65,7 +65,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         'S_GROUP_OPEN_CHECKED' => ($group_info['group_type'] == GROUP_OPEN) ? HTML_CHECKED : '',
         'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? HTML_CHECKED : '',
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? HTML_CHECKED : '',
-        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
+        'RELEASE_GROUP' => (bool)$group_info['release_group'],
         'S_GROUP_ACTION' => 'admin_groups.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));

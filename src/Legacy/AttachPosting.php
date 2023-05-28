@@ -71,8 +71,8 @@ class AttachPosting extends Attach
         global $mode, $confirm, $is_auth, $post_id, $delete, $refresh;
 
         if (!$refresh) {
-            $add_attachment_box = (!empty($_POST['add_attachment_box'])) ? true : false;
-            $posted_attachments_box = (!empty($_POST['posted_attachments_box'])) ? true : false;
+            $add_attachment_box = !empty($_POST['add_attachment_box']);
+            $posted_attachments_box = !empty($_POST['posted_attachments_box']);
 
             $refresh = $add_attachment_box || $posted_attachments_box;
         }
