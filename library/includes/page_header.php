@@ -198,7 +198,6 @@ $template->assign_vars(array(
 
     // Misc
     'BOT_UID' => BOT_UID,
-    'COOKIE_MARK' => COOKIE_MARK,
     'SID' => $userdata['session_id'],
     'SID_HIDDEN' => '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />',
 
