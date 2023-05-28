@@ -1118,7 +1118,6 @@ function setup_style()
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     $template->assign_vars(array(
-        'BB_ROOT' => BB_ROOT,
         'SPACER' => make_url('styles/images/spacer.gif'),
         'STYLESHEET' => make_url($css_dir . $stylesheet),
         'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
@@ -1126,7 +1125,7 @@ function setup_style()
         'SITE_URL' => make_url('/'),
     ));
 
-    require TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
+    require_once TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
     return array('template_name' => $tpl_dir_name);
 }

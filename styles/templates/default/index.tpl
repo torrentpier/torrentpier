@@ -48,7 +48,7 @@
 <div id="forums_wrap">
 
 <!-- IF H_C_AL_MESS -->
-<div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{L_HIDE_CAT_MESS} &middot; <a href="index.php?sh=1">{L_SHOW_ALL}</a></div>
+<div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{L_HIDE_CAT_MESS} &middot; <a href="{U_INDEX}?sh=1">{L_SHOW_ALL}</a></div>
 <div class="spacer_2"></div>
 <!-- ENDIF -->
 
@@ -155,7 +155,7 @@
 <!-- IF LOGGED_IN and SHOW_FORUMS -->
 <div id="mark_all_forums_read">
 	<a href="{U_SEARCH_NEW}" class="med">{L_SEARCH_NEW}</a> &#0183;
-	<a href="{U_INDEX}" class="med" onclick="setCookie('{COOKIE_MARK}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
+	<a href="{U_INDEX}" class="med" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
 </div>
 <!-- ENDIF -->
 
