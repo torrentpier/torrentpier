@@ -1,5 +1,33 @@
 # Change Log
 
+## [v2.4.0-alpha2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-alpha2) (2023-05-28)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-alpha1...v2.4.0-alpha2)
+
+**Merged pull requests:**
+
+- Show cut button in debug panel only if sql_log [\#696](https://github.com/torrentpier/torrentpier/pull/696) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed input types in some cases [\#697](https://github.com/torrentpier/torrentpier/pull/697) ([belomaxorka](https://github.com/belomaxorka))
+- Refactored is_gold & gender_image functions [\#698](https://github.com/torrentpier/torrentpier/pull/698) ([belomaxorka](https://github.com/belomaxorka))
+- Added translations for debug panel [\#699](https://github.com/torrentpier/torrentpier/pull/699) ([belomaxorka](https://github.com/belomaxorka))
+- Use native __DIR__ for BB_PATH [\#702](https://github.com/torrentpier/torrentpier/pull/702) ([belomaxorka](https://github.com/belomaxorka))
+- Removed APP_NAME variable [\#708](https://github.com/torrentpier/torrentpier/pull/708) ([belomaxorka](https://github.com/belomaxorka))
+- Removed unused globals [\#709](https://github.com/torrentpier/torrentpier/pull/709) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed issue with DB_PORT not applying [\#710](https://github.com/torrentpier/torrentpier/pull/710) ([belomaxorka](https://github.com/belomaxorka))
+- Simplified IPHelper [\#712](https://github.com/torrentpier/torrentpier/pull/712) ([belomaxorka](https://github.com/belomaxorka))
+- Changed syntax for constants definition [\#714](https://github.com/torrentpier/torrentpier/pull/714) ([belomaxorka](https://github.com/belomaxorka))
+- Improvements for SEO [\#718](https://github.com/torrentpier/torrentpier/pull/718) ([belomaxorka](https://github.com/belomaxorka))
+- Added password required symbols check [\#713](https://github.com/torrentpier/torrentpier/pull/713) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed: htmlspecialchars(): Passing null to parameter [\#719](https://github.com/torrentpier/torrentpier/pull/719) ([belomaxorka](https://github.com/belomaxorka))
+- Added 'samesite' option for setcookie() [\#720](https://github.com/torrentpier/torrentpier/pull/720) ([belomaxorka](https://github.com/belomaxorka))
+- Removed deprecated type="text/css" [\#721](https://github.com/torrentpier/torrentpier/pull/721) ([belomaxorka](https://github.com/belomaxorka))
+- Added some new meta tags [\#722](https://github.com/torrentpier/torrentpier/pull/722) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed: Required parameter $mode follows optional parameter $submit [\#724](https://github.com/torrentpier/torrentpier/pull/724) ([belomaxorka](https://github.com/belomaxorka))
+- Added show board start date on index page [\#725](https://github.com/torrentpier/torrentpier/pull/725) ([belomaxorka](https://github.com/belomaxorka))
+- Use define instead of tpl variable [\#726](https://github.com/torrentpier/torrentpier/pull/726) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#704](https://github.com/torrentpier/torrentpier/pull/704), [\#705](https://github.com/torrentpier/torrentpier/pull/705) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements in admin templates [\#706](https://github.com/torrentpier/torrentpier/pull/706) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#707](https://github.com/torrentpier/torrentpier/pull/707), [\#711](https://github.com/torrentpier/torrentpier/pull/711), [\#715](https://github.com/torrentpier/torrentpier/pull/715), [\#716](https://github.com/torrentpier/torrentpier/pull/716), [\#717](https://github.com/torrentpier/torrentpier/pull/717), [\#723](https://github.com/torrentpier/torrentpier/pull/723) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0-alpha1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-alpha1) (2023-05-20)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.1...v2.4.0-alpha1)
 
