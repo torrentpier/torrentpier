@@ -387,7 +387,6 @@ $u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
 $u_auth = implode("<br />\n", $u_auth);
 
 $template->assign_vars(array(
-    'SHOW_JUMPBOX' => true,
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
