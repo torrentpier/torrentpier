@@ -193,9 +193,6 @@ $template->assign_vars(array(
 
     'AJAX_HTML_DIR' => AJAX_HTML_DIR,
 
-    'ONLY_NEW_POSTS' => ONLY_NEW_POSTS,
-    'ONLY_NEW_TOPICS' => ONLY_NEW_TOPICS,
-
     // Misc
     'BOT_UID' => BOT_UID,
     'SID' => $userdata['session_id'],

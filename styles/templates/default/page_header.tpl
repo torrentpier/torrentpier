@@ -390,14 +390,14 @@ $(document).ready(function() {
 				<label>
 					<input id="only_new_posts" type="checkbox" <!-- IF ONLY_NEW_POSTS_ON -->{CHECKED}<!-- ENDIF -->
 						onclick="
-							user.set('only_new', ( this.checked ? {ONLY_NEW_POSTS} : 0 ), 365, true);
+							user.set('only_new', ( this.checked ? {#ONLY_NEW_POSTS#} : 0 ), 365, true);
 							$('#only_new_topics').attr('checked', false);
 						" />{L_ONLY_NEW_POSTS}
 				</label>
 				<label>
 					<input id="only_new_topics" type="checkbox" <!-- IF ONLY_NEW_TOPICS_ON -->{CHECKED}<!-- ENDIF -->
 						onclick="
-							user.set('only_new', ( this.checked ? {ONLY_NEW_TOPICS} : 0 ), 365, true);
+							user.set('only_new', ( this.checked ? {#ONLY_NEW_TOPICS#} : 0 ), 365, true);
 							$('#only_new_posts').attr('checked', false);
 						" />{L_ONLY_NEW_TOPICS}
 				</label>
