@@ -211,20 +211,18 @@ function bb_log($msg, $file_name, $return_path = false)
 function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replace_content = false)
 {
     $bytes_written = false;
+    clearstatcache();
 
-    if ($max_size && file_exists($file) && filesize($file) >= $max_size) {
-        $old_name = $file;
-        $ext = '';
-        if (preg_match('#^(.+)(\.[^\\\/]+)$#', $file, $matches)) {
-            [$old_name, $ext] = $matches;
-        }
-        $new_name = $old_name . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . $ext;
+    if (($max_size && file_exists($file) && is_file($file)) && filesize($file) >= $max_size) {
+        $file_parts = pathinfo($file);
+        $new_name = ($file_parts['filename'] . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . '.' . $file_parts['extension']);
         clearstatcache();
-        if (!file_exists($new_name)) {
+        if (!file_exists($new_name) && !is_file($new_name)) {
             rename($file, $new_name);
         }
     }
-    if (!file_exists($file) && $dir_created = bb_mkdir(dirname($file))) {
+    clearstatcache();
+    if (!file_exists($file) && !is_file($file) && bb_mkdir(dirname($file))) {
         $fp = fopen($file, 'ab+');
     }
     if (isset($fp)) {
