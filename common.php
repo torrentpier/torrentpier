@@ -250,16 +250,16 @@ function bb_mkdir($path, $mode = 0777)
     return $dir;
 }
 
-function mkdir_rec($path, $mode)
+function mkdir_rec($path, $mode): bool
 {
     if (is_dir($path)) {
-        return ($path !== '.' && $path !== '..') ? is_writable($path) : false;
+        return ($path !== '.' && $path !== '..') && is_writable($path);
     }
 
-    return mkdir_rec(dirname($path), $mode) ? mkdir($path, $mode) : false;
+    return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
 }
 
-function verify_id($id, $length)
+function verify_id($id, $length): bool
 {
     return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
 }

@@ -109,7 +109,7 @@ function get_last_read($topic_id = 0, $forum_id = 0)
     return max($t, $f, $user->data['user_lastvisit']);
 }
 
-function is_unread($ref, $topic_id = 0, $forum_id = 0)
+function is_unread($ref, $topic_id = 0, $forum_id = 0): bool
 {
     return (!IS_GUEST && $ref > get_last_read($topic_id, $forum_id));
 }
@@ -951,32 +951,10 @@ function get_db_stat($mode)
 function clean_username($username)
 {
     $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
-    $username = bb_rtrim($username, "\\");
+    $username = rtrim($username, "\\");
     $username = str_replace("'", "\'", $username);
 
     return $username;
-}
-
-function bb_ltrim($str, $charlist = false)
-{
-    if ($charlist === false) {
-        return ltrim($str);
-    }
-
-    $str = ltrim($str, $charlist);
-
-    return $str;
-}
-
-function bb_rtrim($str, $charlist = false)
-{
-    if ($charlist === false) {
-        return rtrim($str);
-    }
-
-    $str = rtrim($str, $charlist);
-
-    return $str;
 }
 
 // Get Userdata, $u can be username or user_id. If $force_name is true, the username will be forced.
