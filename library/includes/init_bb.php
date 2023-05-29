@@ -334,17 +334,6 @@ function send_no_cache_headers()
 }
 
 /**
- * @param string $output
- */
-function bb_exit($output = '')
-{
-    if ($output) {
-        echo $output;
-    }
-    exit;
-}
-
-/**
  * Convert special characters to HTML entities
  *
  * @param $txt

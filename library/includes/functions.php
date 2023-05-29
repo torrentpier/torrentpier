@@ -1692,7 +1692,7 @@ function caching_output($enabled, $mode, $cache_var_name, $ttl = 300)
 
     if ($mode == 'send') {
         if ($cached_contents = CACHE('bb_cache')->get($cache_var_name)) {
-            bb_exit($cached_contents);
+            exit($cached_contents);
         }
     } elseif ($mode == 'store') {
         if ($output = ob_get_contents()) {
