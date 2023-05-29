@@ -43,7 +43,7 @@ if ($show_dbg_info) {
         $sql_t = $DBS->sql_timetotal;
         $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
         $num_q = $DBS->num_queries;
-        $stat .= " &nbsp;|&nbsp; MySQL: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
+        $stat .= " &nbsp;|&nbsp; {$DBS->get_db_obj()->engine}: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
     }
 
     $stat .= " &nbsp;|&nbsp; $gzip_text";
