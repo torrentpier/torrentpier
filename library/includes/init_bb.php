@@ -345,21 +345,6 @@ function bb_exit($output = '')
 }
 
 /**
- * @param $var
- * @param string $title
- * @param bool $print
- * @return string
- */
-function prn_r($var, $title = '', $print = true)
-{
-    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
-    if ($print) {
-        echo $r;
-    }
-    return $r;
-}
-
-/**
  * Convert special characters to HTML entities
  *
  * @param $txt
