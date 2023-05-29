@@ -63,9 +63,15 @@ function env(string $key, $default = null)
     return \TorrentPier\Env::get($key, $default);
 }
 
-// Get initial config
-$dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
-$dotenv->safeLoad();
+// Load ENV
+try {
+    $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
+    $dotenv->load();
+} catch (\Dotenv\Exception\InvalidPathException $pathException) {
+    die('Please rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it');
+}
+
+// Load config
 require_once BB_PATH . '/library/config.php';
 
 // Local config
