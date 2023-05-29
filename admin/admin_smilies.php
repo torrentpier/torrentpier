@@ -30,7 +30,7 @@ $smiley_paks = [];
 $dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
 
 while ($file = @readdir($dir)) {
-    if (!is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
+    if (!is_dir(realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
         $img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
 
         if ($img_size[0] && $img_size[1]) {

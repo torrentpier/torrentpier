@@ -1295,7 +1295,7 @@ function obtain_word_list(&$orig_word, &$replacement_word)
     global $bb_cfg;
 
     if (!$bb_cfg['use_word_censor']) {
-        return;
+        return false;
     }
 
     if (!$sql = CACHE('bb_cache')->get('censored')) {
@@ -1379,11 +1379,6 @@ function bb_simple_die($txt)
 
     header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
     die($txt);
-}
-
-function bb_realpath($path)
-{
-    return realpath($path);
 }
 
 function login_redirect($url = '')
