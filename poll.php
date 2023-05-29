@@ -60,7 +60,7 @@ switch ($mode) {
         if ($t_data['topic_status'] == TOPIC_LOCKED) {
             bb_die($lang['TOPIC_LOCKED_SHORT']);
         }
-        if (!poll_is_active($t_data)) {
+        if (!\TorrentPier\Legacy\Poll::poll_is_active($t_data)) {
             bb_die($lang['NEW_POLL_ENDED']);
         }
         if (!$vote_id) {
@@ -128,7 +128,7 @@ switch ($mode) {
         bb_die($lang['NEW_POLL_ADDED']);
         break;
 
-    // редакторование
+    // редактирование
     case 'poll_edit':
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
