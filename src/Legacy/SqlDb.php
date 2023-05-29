@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy;
 
 use mysqli_result;
+
 use TorrentPier\Dev;
 
 /**
