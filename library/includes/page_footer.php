@@ -89,4 +89,4 @@ if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT')) {
     }
 }
 
-bb_exit();
+exit();

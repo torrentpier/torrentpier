@@ -552,7 +552,7 @@ class Torrent
         header("Content-Type: application/x-bittorrent; name=\"$dl_fname\"");
         header("Content-Disposition: attachment; filename=\"$dl_fname\"");
 
-        bb_exit($output);
+        exit($output);
     }
 
     /**
