@@ -33,13 +33,10 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 		<!-- IF TPL_CRON_LIST -->
 			<table id="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->" class="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->">
 				<tr>
-					<td>{L_CRON_ENABLED}</td>
-					<td>
-						<!-- IF CRON_ENABLED -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF -->
-					</td>
-					<td>{L_CRON_CHECK_INTERVAL}</td>
+					<td>{L_CRON_ENABLED}: <!-- IF CRON_ENABLED -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF --></td>
 					<td>
 						<input class="post" type="text" size="10" maxlength="255" name="cron_check_interval" value="{CRON_CHECK_INTERVAL}" />
+                        {L_CRON_CHECK_INTERVAL}
 					</td>
 					<td>
 						<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
