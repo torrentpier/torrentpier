@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = '没有头';
 $lang['TRACKER_STATS'] = '统计数据的跟踪器';
 $lang['WHOIS_INFO'] = '信息有关的IP地址';
 $lang['SHOW_MOD_HOME_PAGE'] = '显示在主持人的index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>预moderation</h4> <h6>If你没有分布状态的v,#,或在本部分，包括小节，分布将自动收到这status</h6>';
 $lang['TOR_COMMENT'] = '<h4>對分發狀態的評論</h4> <h6>評論允許您向發布者指出錯誤。如果狀態不完整，發布經理可以使用發布響應表來更正發布</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding种奖金</h4> <h6>数的分配交给了由用户和大小的奖金(费时间一个小时)</h6>';
