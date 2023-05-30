@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Nuk ka avatar';
 $lang['TRACKER_STATS'] = 'Statistika mbi tracker';
 $lang['WHOIS_INFO'] = 'Informacionin në lidhje me adresën IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Tregojnë për moderatorët e index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Para-moderation</h4> <h6>If ju nuk keni shpërndarjet për statusin e v, #, ose T në këtë seksion, duke përfshirë seksionet, shpërndarja do të automatikisht të marrë këtë status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Koment mbi statusin e një shpërndarjeje</h4> <h6>Komenti ju lejon të tregoni gabimet e bëra te lëshuesi. Nëse statuset janë të paplota, një formular i përgjigjes së lëshimit është i disponueshëm për menaxherin e lëshimit për të korrigjuar lëshimin</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding farë bonus </h4> <h6> Numri i shpërndarjet janë dorëzuar nga përdoruesit dhe madhësia e shpërblime për ata (të akuzuar herë për një orë) </h6>';
