@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Geen avatar';
 $lang['TRACKER_STATS'] = 'De statistieken worden op de tracker -';
 $lang['WHOIS_INFO'] = 'Informatie over het IP-adres';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Toon moderators op de index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If u niet over de uitkeringen aan de status van v, #, of T in deze sectie, met inbegrip van de onderafdelingen, de distributie, krijgt automatisch deze status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Commentaar op de status van een distributie</h4> <h6>Met het commentaar kunt u de releaser wijzen op gemaakte fouten. Als de statussen onvolledig zijn, is er een vrijgave-antwoordformulier beschikbaar voor de vrijgavebeheerder om vrijgave</h6>te corrigeren';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding zaad bonus </h4> <h6> Aantal uitkeringen worden uitgedeeld door de gebruiker en de omvang van de bonussen voor hen (laden keer een uur) </h6>';
