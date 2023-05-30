@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Informacijos apie IP adresą';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Rodyti moderatoriai, kad index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> iš Anksto moderation</h4> <h6>If jūs neturite paskirstymo statusą, v, #, ar T, šiame skirsnyje, įskaitant poskirsniuose, paskirstymo automatiškai gauti šį status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentaras apie platinimo būseną</h4> <h6>Komentaras leidžia nurodyti leidėjui padarytas klaidas. Jei būsenos neužbaigtos, leidimo tvarkyklei pateikiama atsakymo forma, kad ištaisytų</h6>leidimą';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding sėklos bonus </h4> <h6> Skaičiaus pasiskirstymas yra išdalinta vartotojo ir dydžio premijas už juos (įkrovimo laikas valandą) </h6>';
