@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Geen avatar nie';
 $lang['TRACKER_STATS'] = 'Statistiek op die spoorsnyer';
 $lang['WHOIS_INFO'] = 'Inligting oor IP-adres';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Wys op moderators die index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Voormoderering</h4> <h6>Indien u nie verspreidings het na die status van v, # of T in hierdie afdeling, insluitend onderafdelings nie, sal die verspreiding hierdie status outomaties</h6> ontvang';
 $lang['TOR_COMMENT'] = '<h4>Lewer kommentaar op die status van \'n verspreiding</h4> <h6>Die opmerking laat jou toe om die foute wat aan die vrysteller gemaak is, uit te wys. As die statusse onvolledig is, is \'n vrystelling-antwoordvorm beskikbaar vir die vrystellingbestuurder om die vrystelling</h6>reg te stel';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding saad bonus </h4> <h6> Aantal verdelings word uitgedeel deur die gebruiker en die grootte van bonusse vir hulle (laai tye per uur) </h6>';
