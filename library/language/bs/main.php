@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Ne avatar';
 $lang['TRACKER_STATS'] = 'Statistiku o tragač';
 $lang['WHOIS_INFO'] = 'Informacije o IP adrese';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Pokaži na predavači na index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Prije moderation</h4> <h6>If nemaš distribucije da status v, #, ili T u ovom dijelu, uključujući podsekcijama, distribucije će automatski dobiti ovo status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentar o statusu distribucije</h4> <h6>Komentar vam omogućava da ukažete na greške koje su napravljene izdavaču. Ako su statusi nepotpuni, obrazac za odgovor na izdanje dostupan je upravitelju izdanja da ispravi izdanje</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seme bonus </h4> <h6> Broj jedan su predali od korisnika i veličine bonus za njih (naplaćivati puta sat vremena) </h6>';
