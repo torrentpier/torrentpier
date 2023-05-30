@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Kein avatar';
 $lang['TRACKER_STATS'] = 'Statistiken über die tracker';
 $lang['WHOIS_INFO'] = 'Informationen über IP-Adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Zeigen Sie auf die Moderatoren index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If Sie nicht haben-Distributionen, um den status des v #, T in diesem Abschnitt, einschließlich der Unterbereiche, die Verteilung, erhalten automatisch diese status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentar zum Status einer Verteilung</h4> <h6>Mit dem Kommentar können Sie den Freigeber auf die gemachten Fehler hinweisen. Wenn die Status unvollständig sind, steht dem Freigabemanager ein Freigabeantwortformular zur Verfügung, um die Freigabe zu korrigieren</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Anzahl der Verteilungen, die übergeben werden durch den Benutzer und die Größe der Boni, die für Sie (laden mal eine Stunde) </h6>';
