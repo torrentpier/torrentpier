@@ -204,6 +204,13 @@
 	</td>
 </tr>
 <tr>
+    <td><h4>{L_SHOW_BOARD_STARTED_INDEX}</h4></td>
+    <td>
+        <label><input type="radio" name="show_board_start_index" value="1" <!-- IF SHOW_BOARD_START_INDEX -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+        <label><input type="radio" name="show_board_start_index" value="0" <!-- IF not SHOW_BOARD_START_INDEX -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+    </td>
+</tr>
+<tr>
 	<td>{L_PREMOD_HELP}</td>
 	<td>
 		<label><input type="radio" name="premod" value="1" <!-- IF PREMOD -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;

@@ -73,6 +73,7 @@ switch ($mode) {
             'NETWORK_NEWS_FORUM_ID' => $new['network_news_forum_id'],
             'WHOIS_INFO' => $new['whois_info'],
             'SHOW_MOD_INDEX' => $new['show_mod_index'],
+            'SHOW_BOARD_START_INDEX' => $new['show_board_start_index'],
             'BIRTHDAY_ENABLED' => $new['birthday_enabled'],
             'BIRTHDAY_MAX_AGE' => $new['birthday_max_age'],
             'BIRTHDAY_MIN_AGE' => $new['birthday_min_age'],
