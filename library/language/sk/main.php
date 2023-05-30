@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Žiadny avatar';
 $lang['TRACKER_STATS'] = 'Štatistické údaje o tracker';
 $lang['WHOIS_INFO'] = 'Informácie o IP adresu';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Zobraziť na moderátorov index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Vopred moderation</h4> <h6>If nemáte rozdelenia stav v, # alebo T v tejto časti, vrátane podkapitolách, distribúcia, automaticky získajú toto status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentár k stavu distribúcie</h4> <h6>Komentár vám umožňuje upozorniť vydavateľa na chyby, ktorých sa dopustil. Ak sú stavy neúplné, manažér vydania má k dispozícii formulár odpovede na vydanie na opravu vydania</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding osiva bonus </h4> <h6> Počet rozvodov sú rozdávané používateľ a veľkosť bonusy pre nich (čas nabíjania hodinu) </h6>';
