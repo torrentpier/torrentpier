@@ -2068,6 +2068,7 @@ $lang['NOAVATAR'] = 'Brak avatara';
 $lang['TRACKER_STATS'] = 'Statystyki na tracker';
 $lang['WHOIS_INFO'] = 'Informacje na temat adresu IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Pokaż moderatorów index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> wstępnie moderation</h4> <h6>If nie mają rozkładu statusu, # lub t w tym temacie, w tym podklucze, rozdanie automatycznie dostaje ten status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentarz do statusu dystrybucji</h4> <h6>Komentarz pozwala wskazać wydawcy błędy popełnione. Jeśli statusy są niekompletne, menedżer wersji ma do dyspozycji formularz odpowiedzi na wydanie, aby poprawić wydanie</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding bonus nasiona </h4> <h6> Ilość dystrybucji podaje użytkownik i rozmiar bonusów dla nich (razem ładowanie godzinę) </h6>';
