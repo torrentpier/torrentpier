@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Les estadístiques sobre el tracker';
 $lang['WHOIS_INFO'] = 'Informació sobre l\'adreça IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Mostra sobre els moderadors index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If que no tenen distribucions a l\'estat de v, # o T en aquesta secció, incloent subseccions, la distribució rebrà automàticament aquest status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Comentari sobre l\'estat d\'una distribució</h4> <h6>El comentari permet assenyalar els errors comesos al llançador. Si els estats són incomplets, el gestor de llançaments disposarà d\'un formulari de resposta de llançament per corregir la versió</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding llavor de bonificació </h4> <h6> Nombre de distribucions són lliurats per l\'usuari i la mida de bonificacions per a ells (càrrega vegades una hora) </h6>';
