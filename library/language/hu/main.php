@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Nincs avatar';
 $lang['TRACKER_STATS'] = 'A statisztikák a tracker';
 $lang['WHOIS_INFO'] = 'Információ IP cím';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Mutasd meg a moderátorok a index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Előre moderation</h4> <h6>If nem disztribúciók, hogy a status v, #, vagy T ebben a részben, beleértve alfejezetek, az engedély automatikusan megkapja ezt a status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Megjegyzés egy disztribúció állapotához</h4> <h6>A megjegyzés lehetővé teszi, hogy rámutasson a kiadónak az elkövetett hibákra. Ha az állapotok hiányosak, a kiadáskezelő rendelkezésére áll egy kiadási válaszűrlap a</h6>kiadás javításához';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding mag bónusz </h4> <h6> Száma disztribúciók vannak adta ki a felhasználó által a méret bónuszokat őket (töltési idő egy óra) </h6>';
