@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Ei avatar';
 $lang['TRACKER_STATS'] = 'Tilastot tracker';
 $lang['WHOIS_INFO'] = 'Tietoa IP-osoite';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Näytä, että moderaattorit index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If sinulla ei ole jakaumat tilan v, #, tai T tässä osassa, mukaan lukien kohdissa, jakelu saavat automaattisesti tämän status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentti jakelun tilasta</h4> <h6>Kommentin avulla voit huomauttaa tehdyistä virheistä irtisanojalle. Jos tilat ovat epätäydellisiä, julkaisupäällikkö voi korjata julkaisun</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding siemen bonus </h4> <h6> Määrä jakaumat ovat jakoi käyttäjän ja koko bonukset niitä (latauksen kertaa tunnissa) </h6>';
