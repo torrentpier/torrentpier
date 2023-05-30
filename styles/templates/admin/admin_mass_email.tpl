@@ -40,8 +40,9 @@
             </td>
         </tr>
         <tr>
-            <td class="catBottom" colspan="2"><input type="submit" value="{L_SEND_EMAIL}" name="submit"
-                                                     class="mainoption"/>
+            <td class="catBottom" colspan="2">
+                <input type="reset" value="{L_CANCEL}" class="liteoption"/>
+                <input type="submit" value="{L_SEND_EMAIL}" name="submit" class="mainoption"/>
             </td>
         </tr>
     </table>
