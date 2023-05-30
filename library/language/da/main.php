@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Ingen avatar';
 $lang['TRACKER_STATS'] = 'Statistik på tracker';
 $lang['WHOIS_INFO'] = 'Oplysninger om IP-adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Vis på moderatorer den index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du ikke har udlodning til status af v, #, eller T i dette afsnit, herunder de afsnit, distribution vil automatisk modtage dette status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentar til status for en distribution</h4> <h6>Kommentaren giver dig mulighed for at påpege de fejl, der er lavet til udgiveren. Hvis statusserne er ufuldstændige, er en frigivelsessvarformular tilgængelig for udgivelsesadministratoren for at rette udgivelsen</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding frø bonus </h4> <h6> Antallet af distributioner, som er udleveret af brugeren, og størrelsen af bonusser til dem (opladning gange i timen) </h6>';
