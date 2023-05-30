@@ -2069,6 +2069,7 @@ $lang['NOAVATAR'] = 'ないアバター';
 $lang['TRACKER_STATS'] = '統計のトラッカー';
 $lang['WHOIS_INFO'] = 'に関する情報IPアドレス';
 $lang['SHOW_MOD_HOME_PAGE'] = 'ショーのモデレーターのindex.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>前moderation</h4> <h6>Ifできない分布の状況v#,またはTをとことん追究しながら、同時に処分布を自動的に受け取るこstatus</h6>';
 $lang['TOR_COMMENT'] = '<h4>ディストリビューションのステータスに関するコメント</h4> <h6>コメントにより、リリーサーに対して行われたエラーを指摘できます。ステータスが不完全な場合、リリース マネージャはリリース</h6>を修正するためにリリース応答フォームを使用できます。';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding種ボーナス</h4> <h6>数の分布には、ユーザのサイズの賞与（充電倍時)</h6>';
