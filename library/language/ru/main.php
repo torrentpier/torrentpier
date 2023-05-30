@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Нет аватара';
 $lang['TRACKER_STATS'] = 'Статистика по трекеру';
 $lang['WHOIS_INFO'] = 'Информация о IP адресе';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Показывать модераторов на главной';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерация</h4> <h6>Если у релизера нет раздач со статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> или <span class="tor-icon tor-dup">T</span> в текущем разделе, включая подразделы, то раздача автоматически получает данный статус</h6>';
 $lang['TOR_COMMENT'] = '<h4>Комментарий к статусу раздачи</h4> <h6>Комментарий позволяет указать релизеру на допущенные ошибки. Если статус не финальный, релизеру доступна форма ответа на комментарий для исправления релиза</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Добавление сидбонуса</h4><h6>Кол-во раздаваемых раздач пользователем и размер начисления бонусов за них (начисления раз в час)</h6>';
