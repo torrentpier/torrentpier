@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Nav avatar';
 $lang['TRACKER_STATS'] = 'Statistika par tracker';
 $lang['WHOIS_INFO'] = 'Informācija par IP adresi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Rādīt regulētāju index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Iepriekš moderation</h4> <h6>If jums nav peļņas sadali statusu, v, # vai T šajā sadaļā, tostarp apakšnodaļām, izplatīšanas, automātiski saņem šo status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentārs par izplatīšanas statusu</h4> <h6>Komentārs ļauj norādīt izdevējam uz pieļautajām kļūdām. Ja statusi ir nepilnīgi, laidiena pārvaldniekam ir pieejama atbildes veidlapa, lai izlabotu</h6>laidienu';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding sēklas bonusa </h4> <h6> Skaits sadalījumi tiek izsniegti lietotājs un izmēru prēmijas par viņiem (uzlādes reizes stundā) </h6>';
