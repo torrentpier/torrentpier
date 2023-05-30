@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'reyting www.uz Statistika';
 $lang['WHOIS_INFO'] = 'IP manzil haqida ma\'lumot';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Moderatorlar index.php ko\'rsatish';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = 'Agar pastki jumladan ushbu bo\'limdagi, V, #, yoki T holati uchun tarqatish yo\'q <h6>If <h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4>, tarqatish avtomatik ravishda bu status</h6> olasiz';
 $lang['TOR_COMMENT'] = '<h4>Tarqatish holatiga sharh</h4> <h6>Izoh relizchiga qilingan xatolarni ko\'rsatish imkonini beradi. Agar statuslar to\'liq bo\'lmasa, reliz boshqaruvchisiga</h6>chiqarishni to\'g\'rilash uchun relizga javob shakli mavjud';
 $lang['SEED_BONUS_ADD'] = 'dağıtımları <h4>Adding urug\'i bonus </h4> <h6> soni </h6> foydalanuvchi va (marta bir soat zaryad) ular uchun bonuslar hajmi tomonidan topshirildi';
