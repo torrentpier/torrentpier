@@ -27,6 +27,12 @@ if (empty($_SERVER['HTTP_REFERER'])) {
 if (empty($_SERVER['SERVER_NAME'])) {
     $_SERVER['SERVER_NAME'] = '';
 }
+if (empty($_SERVER['SERVER_PROTOCOL'])) {
+    $_SERVER['SERVER_PROTOCOL'] = getenv('SERVER_PROTOCOL') ?? 'HTTP/1.1';
+}
+if (empty($_SERVER['SERVER_ADDR'])) {
+    $_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR');
+}
 
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
