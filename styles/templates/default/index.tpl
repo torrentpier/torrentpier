@@ -174,7 +174,7 @@
 				<p>{TOTAL_GENDER}</p>
 				<p>{NEWEST_USER}</p>
 
-                <!-- IF $bb_cfg['show_board_start_date'] -->
+                <!-- IF BOARD_START -->
                 <p style="margin-top: 4px;">{BOARD_START}</p>
                 <!-- ENDIF -->
 

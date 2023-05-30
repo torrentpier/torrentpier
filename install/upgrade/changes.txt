@@ -57,3 +57,6 @@ ALTER TABLE `bb_users` CHANGE `username` `username` VARCHAR(255) NOT NULL DEFAUL
 ALTER TABLE `bb_users` CHANGE `user_password` `user_password` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
 ALTER TABLE `bb_users` CHANGE `user_actkey` `user_actkey` VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE `bb_users` CHANGE `user_newpasswd` `user_newpasswd` VARCHAR(255) NOT NULL DEFAULT '';
+
+// 2.4.0-alpha3
+INSERT INTO bb_config VALUES ('show_board_start_index', '1');

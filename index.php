@@ -303,7 +303,7 @@ $template->assign_vars(array(
     'U_ATOM_FEED' => file_exists($bb_cfg['atom']['path'] . '/f/0.atom') ? make_url($bb_cfg['atom']['url'] . '/f/0.atom') : false,
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
-    'BOARD_START' => $bb_cfg['show_board_start_date'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : '',
+    'BOARD_START' => $bb_cfg['show_board_start_index'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : false,
 ));
 
 // Set tpl vars for bt_userdata

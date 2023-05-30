@@ -577,7 +577,8 @@ VALUES ('allow_autologin', '1'),
        ('show_mod_index', '0'),
        ('premod', '0'),
        ('tor_comment', '1'),
-       ('terms', '');
+       ('terms', ''),
+       ('show_board_start_index', '1');
 
 -- ----------------------------
 -- Table structure for `bb_cron`
