@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Nr avatari';
 $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Teave IP aadress';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Näita, et moderaatorid index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If sul ei ole väljamaksed staatuse v, #, või T käesolevas jaos, sealhulgas punktide jagamine automaatselt selle saada status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentaar distributsiooni oleku kohta</h4> <h6>Kommentaar võimaldab väljastajale välja tuua tehtud vead. Kui olekud on puudulikud, on väljalaskehalduril saadaval väljalase vastuse vorm, et versiooni</h6>parandada';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seemne boonus </h4> <h6> Arv väljamakseid on tehtud läbi kasutaja ja suuruse kohta, preemiad neile (laadimine korda tunnis) </h6>';
