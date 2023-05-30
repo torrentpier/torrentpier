@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'ไม่มีรูปแทนตัว';
 $lang['TRACKER_STATS'] = 'สถิติบนแทร็กเกอร์';
 $lang['WHOIS_INFO'] = 'ข้อมูลเกี่ยวกับที่อยู่ IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'แสดงบน moderators ง index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> ก่อน moderation</h4><h6>If คุณยังไม่มี distributions ให้สถานะของวีน#หรือท.อยู่ในส่วนรวมถึงหัวข้อย่อยต่างๆที่จะแจกจ่ายโดยอัตโนมัติได้รับนี้ status</h6>';
 $lang['TOR_COMMENT'] = '<h4>ความคิดเห็นเกี่ยวกับสถานะของการแจกจ่าย</h4> <h6>ความคิดเห็นช่วยให้คุณชี้ให้เห็นข้อผิดพลาดที่เกิดขึ้นกับผู้เผยแพร่ หากสถานะไม่สมบูรณ์ จะมีแบบฟอร์มตอบรับการเผยแพร่สำหรับผู้จัดการการเผยแพร่เพื่อแก้ไขการเผยแพร่</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding เมล็ดพันธ์โบนัส </h4><h6> จำนวนของ distributions คือส่งออกมาโดยผู้ใช้และขนาดของ bonuses สำหรับพวกเขา(ชาร์จหัวครั้งชั่วโมงหนึ่ง)</h6>';
