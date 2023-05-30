@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Pas d\'avatar';
 $lang['TRACKER_STATS'] = 'Les statistiques sur le tracker';
 $lang['WHOIS_INFO'] = 'Informations sur l\'adresse IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Spectacle sur les modérateurs index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pré-moderation</h4> <h6>If vous n\'avez pas de distribution à l\'état de v, #, ou T dans cette section, y compris les paragraphes, la distribution sera automatiquement cette status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Commentaire sur le statut d\'une distribution</h4> <h6>Le commentaire permet de signaler les erreurs commises au releaser. Si les statuts sont incomplets, un formulaire de réponse de release est à disposition du responsable de release pour corriger la release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding semences bonus </h4> <h6> Nombre de distributions sont remis par l\'utilisateur et la taille de bonus pour eux (temps de charge d\'une heure) </h6>';
