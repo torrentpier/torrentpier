@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Không avatar';
 $lang['TRACKER_STATS'] = 'Số liệu thống kê trên theo dõi';
 $lang['WHOIS_INFO'] = 'Thông tin về địa chỉ IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Hiển thị trên các điều hành viên index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If bạn không có phân phối cho tình trạng của v, #, hoặc T trong phần này, bao gồm cả các phần phụ, sự phân bố sẽ tự động nhận được điều này status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Nhận xét về trạng thái của bản phân phối</h4> <h6>Nhận xét cho phép bạn chỉ ra các lỗi đối với người phát hành. Nếu các trạng thái không đầy đủ, người quản lý phát hành sẽ có biểu mẫu phản hồi phát hành để sửa bản phát hành</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding giống thưởng </h4> <h6> Số lượng của phân phối được đưa ra bởi người sử dụng và kích thước của tiền thưởng cho họ (sạc lần trong một giờ) </h6>';
