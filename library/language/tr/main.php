@@ -2069,6 +2069,7 @@ $lang['NOAVATAR'] = 'Hayır avatar';
 $lang['TRACKER_STATS'] = 'İzleyici istatistikleri';
 $lang['WHOIS_INFO'] = 'IP adresi hakkında bilgi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Yöneticiler üzerinde index.php göster';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = 'V bu bölümde, * ya da T, kısımlar da dahil olmak üzere durumu dağılımları gerekmez <h4><span class="tor-icon tor-dup">&#8719;</span> Öncesi moderation</h4> <h6>İf, dağıtım otomatik olarak bu status</h6> almak';
 $lang['TOR_COMMENT'] = '<h4>Bir dağıtımın durumu hakkında yorum yapın</h4> <h6>Yorum, yayınlayıcıya yapılan hataları belirtmenizi sağlar. Durumlar eksikse sürüm</h6>düzeltmek için sürüm yöneticisine bir yayın yanıt formu sunulur.';
 $lang['SEED_BONUS_ADD'] = 'Dağılımları <h4>Adding tohum bonus </h4> <h6> Numarası </h6> kullanıcı ve onlar için ikramiye boyutu (saatte şarj) dağıtıldı';
