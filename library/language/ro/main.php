@@ -2065,6 +2065,7 @@ $lang['NOAVATAR'] = 'Nu avatar';
 $lang['TRACKER_STATS'] = 'Statisticile pe tracker';
 $lang['WHOIS_INFO'] = 'Informații despre adresa IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Spectacol pe la moderatori index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If nu au distribuții la statutul de v, #, sau T în această secțiune, inclusiv subcapitole, distribuția va primi automat acest status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Comentariu despre starea unei distribuții</h4> <h6>Comentariul vă permite să subliniați erorile făcute la eliberator. Dacă stările sunt incomplete, un formular de răspuns la eliberare este disponibil pentru managerul de ediție pentru a corecta ediția</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding semințe bonus </h4> <h6> Număr de distribuții sunt înmânate de către utilizator și dimensiunea de bonusuri pentru ei (de încărcare de ori pe oră) </h6>';
