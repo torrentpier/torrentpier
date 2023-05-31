@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Kích hoạt';
 $lang['DISABLED'] = 'Vô hiệu hóa';
 $lang['ERROR'] = 'Lỗi';
 $lang['SELECT_ACTION'] = 'Chọn hành động';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
 $lang['PREVIOUS_PAGE'] = 'Trước đó';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Nhấn vào %sHere%s để trở về điều Hà
 $lang['CLICK_RETURN_GROUP'] = 'Nhấn vào %sHere%s để trở về nhóm thông tin';
 
 $lang['ADMIN_PANEL'] = 'Đi đến Bảng điều khiển Quản trị';
-$lang['ALL_CACHE'] = 'Tất cả nhớ tạm';
 $lang['ALL_CACHE_CLEARED'] = 'Nhớ tạm đã được xóa';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mẫu nhớ tạm đã được xóa';
-$lang['DATASTORE'] = 'Kho dữ liệu';
 $lang['DATASTORE_CLEARED'] = 'Kho dữ liệu đã bị xóa';
 $lang['BOARD_DISABLE'] = 'Xin lỗi, diễn đàn này là vô hiệu hóa. Hãy cố gắng trở lại sau';
 $lang['BOARD_DISABLE_CRON'] = 'Diễn đàn đang tắt để bảo trì. Hãy cố gắng trở lại sau';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Bao gồm nén';
 $lang['NOT_AVAILABLE'] = 'Không có';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Kho dữ liệu';
 $lang['CLEAR_CACHE'] = 'Rõ Ràng Nhớ Tạm';
-$lang['TEMPLATES'] = 'Mẫu';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Dùng cấp';
