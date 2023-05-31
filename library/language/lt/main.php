@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Įjungtas';
 $lang['DISABLED'] = 'Neįgaliesiems';
 $lang['ERROR'] = 'Klaida';
 $lang['SELECT_ACTION'] = 'Pasirinkite veiksmą';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Kitas';
 $lang['PREVIOUS_PAGE'] = 'Ankstesnis';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Spustelėkite %sHere%s grįžti į Moderatorius V
 $lang['CLICK_RETURN_GROUP'] = 'Spustelėkite %sHere%s grįžti į grupės informacija';
 
 $lang['ADMIN_PANEL'] = 'Eikite į Administracijos Panelė';
-$lang['ALL_CACHE'] = 'Visi talpyklos';
 $lang['ALL_CACHE_CLEARED'] = 'Talpykla buvo išvalytas';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Šablonas buvo išvalyti talpyklą';
-$lang['DATASTORE'] = 'Duomenų laikmenos';
 $lang['DATASTORE_CLEARED'] = 'Duomenų laikmenos, buvo išvalytas';
 $lang['BOARD_DISABLE'] = 'Atsiprašau, šis forumas yra neįgalūs. Pabandykite sugrįžti vėliau';
 $lang['BOARD_DISABLE_CRON'] = 'Forumas neveikia dėl priežiūros darbų. Pabandykite sugrįžti vėliau';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip suspaudimo';
 $lang['NOT_AVAILABLE'] = 'Nėra';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Duomenų laikmenos';
 $lang['CLEAR_CACHE'] = 'Išvalyti Talpyklą';
-$lang['TEMPLATES'] = 'Šablonai';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Vartotojo lygis';
