@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Ներառված է';
 $lang['DISABLED'] = 'Անջատված';
 $lang['ERROR'] = 'Սխալ է';
 $lang['SELECT_ACTION'] = 'Ընտրեք գործողությունը';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Ավելին';
 $lang['PREVIOUS_PAGE'] = 'Նախորդ';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Սեղմեք %sHere%s է վերադառնալ կ�
 $lang['CLICK_RETURN_GROUP'] = 'Սեղմեք %sHere%s վերադառնալ խմբում';
 
 $lang['ADMIN_PANEL'] = 'Այցելեք Վահանակի վարչարարության';
-$lang['ALL_CACHE'] = 'Ամբողջ cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache էր մաքրել';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache կաղապար էր մաքրել';
-$lang['DATASTORE'] = 'Տվյալների շտեմարան';
 $lang['DATASTORE_CLEARED'] = 'Շտեմարան էր մաքրվել է';
 $lang['BOARD_DISABLE'] = 'Ցավոք, այս ֆորումին անջատված է. Փորձենք վերադառնալ ավելի ուշ';
 $lang['BOARD_DISABLE_CRON'] = 'Համաժողովը փակվել է տեխնիկական սպասարկում: Փորձենք վերադառնալ ավելի ուշ';
@@ -1649,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'GZIP սեղմում';
 $lang['NOT_AVAILABLE'] = 'Հասանելի չէ';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Տվյալների շտեմարան';
 $lang['CLEAR_CACHE'] = 'Մաքրել Cache';
-$lang['TEMPLATES'] = 'Կաղապարներ';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Հարթաչափեր';
