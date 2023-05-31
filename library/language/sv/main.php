@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktiverad';
 $lang['DISABLED'] = 'Funktionshindrade';
 $lang['ERROR'] = 'Fel';
 $lang['SELECT_ACTION'] = 'Välj åtgärder';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Nästa';
 $lang['PREVIOUS_PAGE'] = 'Föregående';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klicka %sHere%s för att återgå till Moderator 
 $lang['CLICK_RETURN_GROUP'] = 'Klicka %sHere%s för att återgå till gruppen information';
 
 $lang['ADMIN_PANEL'] = 'Gå till Administration Panel';
-$lang['ALL_CACHE'] = 'Alla cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache-minnet har raderats';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mall cache har rensats';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore har rensats';
 $lang['BOARD_DISABLE'] = 'Ledsen, men detta forum är inaktiverad. Försök att komma tillbaka senare';
 $lang['BOARD_DISABLE_CRON'] = 'Forumet är nere för underhåll. Försök att komma tillbaka senare';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip-komprimering';
 $lang['NOT_AVAILABLE'] = 'Inte tillgänglig';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Rensa Cache';
-$lang['TEMPLATES'] = 'Mallar';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Användarnivåer';
