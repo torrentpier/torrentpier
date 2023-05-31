@@ -117,7 +117,7 @@
     <td><b>{L_UPDATE}:</b></td>
     <td>
       <a href="#" id="update_user_level" onclick="ajax.manage_admin('update_user_level'); return false;">{L_USER_LEVELS}</a>
-      <!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->,&nbsp;
+      <!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->&middot;
       <a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); return false;">{L_INDEXER}</a>
       <!-- ENDIF -->
     </td>
@@ -125,14 +125,14 @@
   <tr>
     <td><b>{L_SYNCHRONIZE}:</b></td>
     <td>
-      <a href="#" id="sync_topics" onclick="ajax.manage_admin('sync_topics'); return false;">{L_TOPICS}</a>,&nbsp;
+      <a href="#" id="sync_topics" onclick="ajax.manage_admin('sync_topics'); return false;">{L_TOPICS}</a>&nbsp;&middot;
       <a href="#" id="sync_user_posts" onclick="ajax.manage_admin('sync_user_posts'); return false;">{L_USER_POSTS_COUNT}</a>
     </td>
   </tr>
   <tr>
     <td><b>{L_STATISTICS}:</b></td>
     <td>
-      <a href="stats/tr_stats.php" target="_blank">tr_stats.php</a>,&nbsp;
+      <a href="stats/tr_stats.php" target="_blank">tr_stats.php</a>&nbsp;&middot;
       <a href="stats/tracker.php" target="_blank">tracker.php</a>
     </td>
   </tr>
