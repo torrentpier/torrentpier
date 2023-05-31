@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Habilitado';
 $lang['DISABLED'] = 'Discapacitados';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Seleccione la acción';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Siguiente';
 $lang['PREVIOUS_PAGE'] = 'Anterior';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Haga clic en %sHere%s para volver a Moderador del
 $lang['CLICK_RETURN_GROUP'] = 'Haga clic en %sHere%s para volver a la información del grupo';
 
 $lang['ADMIN_PANEL'] = 'Ir a Panel de Administración';
-$lang['ALL_CACHE'] = 'Todos caché';
 $lang['ALL_CACHE_CLEARED'] = 'Caché ha sido borrado';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Plantilla de caché ha sido borrado';
-$lang['DATASTORE'] = 'Almacén de datos';
 $lang['DATASTORE_CLEARED'] = 'Almacén de datos ha sido desactivada';
 $lang['BOARD_DISABLE'] = 'Lo siento, este foro está deshabilitado. Intente volver más tarde';
 $lang['BOARD_DISABLE_CRON'] = 'Foro desactivado por tareas de mantenimiento. Intente volver más tarde';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'La compresión Gzip';
 $lang['NOT_AVAILABLE'] = 'No disponible';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Almacén de datos';
 $lang['CLEAR_CACHE'] = 'Borrar Caché';
-$lang['TEMPLATES'] = 'Plantillas';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Niveles de usuario';
