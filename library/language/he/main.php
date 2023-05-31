@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'זמין';
 $lang['DISABLED'] = 'נכים';
 $lang['ERROR'] = 'שגיאה';
 $lang['SELECT_ACTION'] = 'בחר פעולה';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'הבא';
 $lang['PREVIOUS_PAGE'] = 'הקודם';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'לחץ על %sHere%s לחזור מנחה הבקר
 $lang['CLICK_RETURN_GROUP'] = 'לחץ על %sHere%s לחזור קבוצת מידע';
 
 $lang['ADMIN_PANEL'] = 'ללכת פנל ניהול';
-$lang['ALL_CACHE'] = 'כל המטמון';
 $lang['ALL_CACHE_CLEARED'] = 'המטמון נוקה';
 $lang['ALL_TEMPLATE_CLEARED'] = 'תבנית המטמון נוקה';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore נוקה';
 $lang['BOARD_DISABLE'] = 'מצטער, פורום זה אינו זמין. תנסה לחזור מאוחר יותר';
 $lang['BOARD_DISABLE_CRON'] = 'פורום מושבת לצורך תחזוקה. תנסה לחזור מאוחר יותר';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'דחיסת Gzip';
 $lang['NOT_AVAILABLE'] = 'לא זמין';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'נקה מטמון';
-$lang['TEMPLATES'] = 'תבניות';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'רמות המשתמש';
