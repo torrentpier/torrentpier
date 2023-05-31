@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Povolené';
 $lang['DISABLED'] = 'Zakázané';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akcie';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Ďalej';
 $lang['PREVIOUS_PAGE'] = 'Predchádzajúce';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrát
 $lang['CLICK_RETURN_GROUP'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť do skupiny informácií';
 
 $lang['ADMIN_PANEL'] = 'Prejdite na Panel Správy';
-$lang['ALL_CACHE'] = 'Všetky pamäť';
 $lang['ALL_CACHE_CLEARED'] = 'Cache bol vymazaný';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Šablóny cache bol vymazaný';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore bol vymazaný';
 $lang['BOARD_DISABLE'] = 'Ľutujeme, toto fórum je zakázané. Skúste prísť neskôr.';
 $lang['BOARD_DISABLE_CRON'] = 'Fórum vypnutý z dôvodu údržby. Skúste prísť neskôr.';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip kompresia';
 $lang['NOT_AVAILABLE'] = 'Nie je k dispozícii';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Vymazať Vyrovnávaciu Pamäť';
-$lang['TEMPLATES'] = 'Šablóny';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Užívateľské úrovne';
