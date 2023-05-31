@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Włączony';
 $lang['DISABLED'] = 'Wyłączony';
 $lang['ERROR'] = 'Błąd';
 $lang['SELECT_ACTION'] = 'Wybierz akcję';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Dalej';
 $lang['PREVIOUS_PAGE'] = 'Poprzednie';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknij przycisk %sHere%s aby powrócić do panel
 $lang['CLICK_RETURN_GROUP'] = 'Kliknij %sHere%s, aby powrócić do grupy';
 
 $lang['ADMIN_PANEL'] = 'Wejdź w Panel administracyjny';
-$lang['ALL_CACHE'] = 'Cały cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache został wyczyszczony';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache szablon został wyczyszczony';
-$lang['DATASTORE'] = 'Magazyn danych';
 $lang['DATASTORE_CLEARED'] = 'Repozytorium zostało oczyszczone';
 $lang['BOARD_DISABLE'] = 'Niestety, na tym forum jest wyłączona. Spróbuję wrócić później';
 $lang['BOARD_DISABLE_CRON'] = 'Forum nieczynny. Spróbuję wrócić później';
@@ -1649,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'Kompresja GZIP';
 $lang['NOT_AVAILABLE'] = 'Nie jest dostępny';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Magazyn danych';
 $lang['CLEAR_CACHE'] = 'Wyczyść Pamięć Podręczną';
-$lang['TEMPLATES'] = 'Szablony';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Poziomy użytkowników';
