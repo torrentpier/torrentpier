@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Habilitat';
 $lang['DISABLED'] = 'Discapacitats';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Seleccioneu acció';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Següent';
 $lang['PREVIOUS_PAGE'] = 'Anteriors';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Feu clic %sHere%s per tornar a Moderador Tauler d
 $lang['CLICK_RETURN_GROUP'] = 'Feu clic %sHere%s per tornar a grup d\'informació';
 
 $lang['ADMIN_PANEL'] = 'Anar al Panell d\'Administració';
-$lang['ALL_CACHE'] = 'Tota la memòria cau';
 $lang['ALL_CACHE_CLEARED'] = 'S\'han esborrat de la memòria cau';
 $lang['ALL_TEMPLATE_CLEARED'] = 'La plantilla de la memòria cau ha estat aclarit';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ha estat aclarit';
 $lang['BOARD_DISABLE'] = 'Ho sentim, aquest fòrum ha deshabilitat. Proveu de tornar més tard';
 $lang['BOARD_DISABLE_CRON'] = 'Fòrum tancat per manteniment. Proveu de tornar més tard';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'La compressió Gzip';
 $lang['NOT_AVAILABLE'] = 'No disponible';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Esborra La Memòria Cau';
-$lang['TEMPLATES'] = 'Plantilles';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Nivells d\'usuari';
