@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'เปิดใช้งาน';
 $lang['DISABLED'] = 'ปิดการใช้งาน';
 $lang['ERROR'] = 'เกิดข้อผิดพลาด';
 $lang['SELECT_ACTION'] = 'เลือกการกระทำ';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'ต่อไป';
 $lang['PREVIOUS_PAGE'] = 'ก่อนหน้านี้';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'คลิก %sHere%s ต้องกลับไ
 $lang['CLICK_RETURN_GROUP'] = 'คลิก %sHere%s ต้องกลับไปยังกลุ่มข้อมูล';
 
 $lang['ADMIN_PANEL'] = 'ไปที่ผู้ดูแลระบบพาเนล';
-$lang['ALL_CACHE'] = 'เอาแคช';
 $lang['ALL_CACHE_CLEARED'] = 'แคชของถูกเคลียร์';
 $lang['ALL_TEMPLATE_CLEARED'] = 'ต้นแบบแคชผ่านเคลียร์';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ถูกเคลียร์';
 $lang['BOARD_DISABLE'] = 'ขอโทษนะนี่คืออภิปรากปิดการใช้งาน พยายามที่จะกลับมาทีหลัง';
 $lang['BOARD_DISABLE_CRON'] = 'อภิปรายคือเพื่อต้องดูแลรักษาเรือเนี่ย พยายามที่จะกลับมาทีหลัง';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'การบีบข้อมูล Gzip';
 $lang['NOT_AVAILABLE'] = 'ไม่ว่า';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'ล้างแคช';
-$lang['TEMPLATES'] = 'ต้นแบบ';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'ผู้ใช้ระดับ';
