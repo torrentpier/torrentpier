@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Etkin';
 $lang['DISABLED'] = 'Devre dışı';
 $lang['ERROR'] = 'Hata';
 $lang['SELECT_ACTION'] = 'Seçin eylem';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
 $lang['PREVIOUS_PAGE'] = 'Önceki';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '%sHere%s Kontrol Paneli Moderatör dönmek için 
 $lang['CLICK_RETURN_GROUP'] = '%sHere%s bilgi grup geri dönmek için tıklayın';
 
 $lang['ADMIN_PANEL'] = 'Yönetim Paneline git';
-$lang['ALL_CACHE'] = 'Tüm önbellek';
 $lang['ALL_CACHE_CLEARED'] = 'Önbellek temizlendi';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Şablon önbelleği temizlendi';
-$lang['DATASTORE'] = 'Veri deposuna';
 $lang['DATASTORE_CLEARED'] = 'Veri deposu temizlendi';
 $lang['BOARD_DISABLE'] = 'Üzgünüm, bu forumu devre dışı bırakılır. Sonra geri gelmeye çalışın';
 $lang['BOARD_DISABLE_CRON'] = 'Forum bakım için aşağı. Sonra geri gelmeye çalışın';
@@ -1650,8 +1649,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip sıkıştırma';
 $lang['NOT_AVAILABLE'] = 'Mevcut değil';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Veri deposuna';
 $lang['CLEAR_CACHE'] = 'Önbelleği Temizle';
-$lang['TEMPLATES'] = 'Şablonları';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Kullanıcı seviyeleri';
