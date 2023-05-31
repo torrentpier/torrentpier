@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Të aktivizuara';
 $lang['DISABLED'] = 'Me aftësi të kufizuara';
 $lang['ERROR'] = 'Gabim';
 $lang['SELECT_ACTION'] = 'Zgjidhni veprim';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Tjetër';
 $lang['PREVIOUS_PAGE'] = 'E mëparshme';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliko %sHere%s të kthehen për të Moderator i P
 $lang['CLICK_RETURN_GROUP'] = 'Kliko %sHere%s të kthimit të grupit të informacionit';
 
 $lang['ADMIN_PANEL'] = 'Të shkuar për Administrimin e Panelit';
-$lang['ALL_CACHE'] = 'Të gjithë kujtesën e fshehtë';
 $lang['ALL_CACHE_CLEARED'] = 'Cache ka qenë pastruar';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache ka qenë pastruar';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ka qenë pastruar';
 $lang['BOARD_DISABLE'] = 'Na vjen keq, ky forum është me aftësi të kufizuara. Përpiqen për të ardhur sërish më vonë';
 $lang['BOARD_DISABLE_CRON'] = 'Forumi është poshtë për mirëmbajtje. Përpiqen për të ardhur sërish më vonë';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Jo në dispozicion';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Qartë Cache';
-$lang['TEMPLATES'] = 'Templates';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Nivelet e përdoruesit';
