@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Увімкнено';
 $lang['DISABLED'] = 'Вимкнено';
 $lang['ERROR'] = 'Помилка';
 $lang['SELECT_ACTION'] = 'Виберіть дію';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
 $lang['PREVIOUS_PAGE'] = 'Попер.';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Натисніть %sТут%s, щоб повер�
 $lang['CLICK_RETURN_GROUP'] = 'Натисніть %sТут%s, щоб повернутися до інформації про групи';
 
 $lang['ADMIN_PANEL'] = 'Перейти до панелі адміністрування';
-$lang['ALL_CACHE'] = 'Увесь кеш';
 $lang['ALL_CACHE_CLEARED'] = 'Кеш очищено';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Кеш шаблону очищено';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore очищено';
 $lang['BOARD_DISABLE'] = 'Вибачте, цей форум відключений. Спробуйте повернутися пізніше';
 $lang['BOARD_DISABLE_CRON'] = 'Форум відключений на технічне обслуговування. Спробуйте повернутися пізніше';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Стискання Gzip';
 $lang['NOT_AVAILABLE'] = 'Недоступне';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Очистити кеш';
-$lang['TEMPLATES'] = 'Шаблони';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Рівні користувачів';
