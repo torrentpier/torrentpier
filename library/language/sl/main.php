@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Omogočeno';
 $lang['DISABLED'] = 'Onemogočeni';
 $lang['ERROR'] = 'Napaka';
 $lang['SELECT_ACTION'] = 'Izberite dejanje';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Naprej';
 $lang['PREVIOUS_PAGE'] = 'Prejšnji';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknite %sHere%s, da se vrnete Moderator Nadzorn
 $lang['CLICK_RETURN_GROUP'] = 'Kliknite %sHere%s za vrnitev v skupino informacije';
 
 $lang['ADMIN_PANEL'] = 'Pojdi na Upravi Plošče';
-$lang['ALL_CACHE'] = 'Vse predpomnilnika';
 $lang['ALL_CACHE_CLEARED'] = 'Predpomnilnik je bil izpraznjen';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Predlogo začasni je bil izpraznjen';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore je bil izpraznjen';
 $lang['BOARD_DISABLE'] = 'Žal, ta forum je onemogočen. Poskusite kasneje prišel nazaj';
 $lang['BOARD_DISABLE_CRON'] = 'Forum je določeni za vzdrževanje. Poskusite kasneje prišel nazaj';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip stiskanje';
 $lang['NOT_AVAILABLE'] = 'Ni na voljo';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Počisti Zač. Pomniln';
-$lang['TEMPLATES'] = 'Predloge';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Uporabniški nivoji';
