@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Activat';
 $lang['DISABLED'] = 'Dezactivate';
 $lang['ERROR'] = 'Eroare';
 $lang['SELECT_ACTION'] = 'Selectați acțiune';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Următoarea';
 $lang['PREVIOUS_PAGE'] = 'Anterior';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Faceți clic pe %sHere%s pentru a reveni la Moder
 $lang['CLICK_RETURN_GROUP'] = 'Faceți clic pe %sHere%s pentru a reveni la informațiile de grup';
 
 $lang['ADMIN_PANEL'] = 'Du-te la Panoul de Administrare';
-$lang['ALL_CACHE'] = 'Toate cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache-ul a fost eliminat';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Șablon cache a fost eliminat';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore a fost eliminat';
 $lang['BOARD_DISABLE'] = 'Ne pare rău, acest forum este dezactivat. Încercați să reveniți mai târziu';
 $lang['BOARD_DISABLE_CRON'] = 'Forumul este oprit pentru întreținere. Încercați să reveniți mai târziu';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Nu este disponibil';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Template-uri';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Niveluri de utilizatori';
