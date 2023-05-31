@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'enabled';
 $lang['DISABLED'] = 'gestremde';
 $lang['ERROR'] = 'fout';
 $lang['SELECT_ACTION'] = 'Kies aksie';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'volgende';
 $lang['PREVIOUS_PAGE'] = 'vorige';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik %sHere%s om terug te gaan na Moderator Kontr
 $lang['CLICK_RETURN_GROUP'] = 'Klik %sHere%s om terug te keer na groepinligting';
 
 $lang['ADMIN_PANEL'] = 'Gaan na die administrasiepaneel';
-$lang['ALL_CACHE'] = 'Alle kas';
 $lang['ALL_CACHE_CLEARED'] = 'Cache is skoongemaak';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Sjabloon kas is skoongemaak';
-$lang['DATASTORE'] = 'datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore is skoongemaak';
 $lang['BOARD_DISABLE'] = 'Jammer, hierdie forum is gedeaktiveer. Probeer om later terug te kom';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is af vir onderhoud. Probeer om later terug te kom';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip kompressie';
 $lang['NOT_AVAILABLE'] = 'Nie beskikbaar nie';
 
 // Clear Cache
+$lang['DATASTORE'] = 'datastore';
 $lang['CLEAR_CACHE'] = 'Vee kas uit';
-$lang['TEMPLATES'] = 'templates';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Gebruikersvlakke';
