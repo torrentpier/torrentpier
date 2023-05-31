@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktiv';
 $lang['DISABLED'] = 'Qaralar';
 $lang['ERROR'] = 'Səhv';
 $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Daha sonra';
 $lang['PREVIOUS_PAGE'] = 'Əvvəlki';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Düyməsini basın %sHere%s qayıtmaq üçün con
 $lang['CLICK_RETURN_GROUP'] = 'Basın %sHere%s qayıtmaq üçün qrup';
 
 $lang['ADMIN_PANEL'] = 'Gedin idarəetmə Paneli';
-$lang['ALL_CACHE'] = 'Bütün cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache idi təmizlənə';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache şablon idi təmizlənə';
-$lang['DATASTORE'] = 'Saxlama məlumat';
 $lang['DATASTORE_CLEARED'] = 'Anbar idi təmizlənib';
 $lang['BOARD_DISABLE'] = 'Təəssüflər olsun ki, bu forumda aradan. Попробую sonra geri qayıtmaq';
 $lang['BOARD_DISABLE_CRON'] = 'Forum texniki xidmət üçün bağlanıb. Попробую sonra geri qayıtmaq';
@@ -1649,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'GZİP sıxılma';
 $lang['NOT_AVAILABLE'] = 'Mövcud deyil';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Saxlama məlumat';
 $lang['CLEAR_CACHE'] = 'Keşi Sil';
-$lang['TEMPLATES'] = 'Şablonlar';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Səviyyəsi istifadəçilər';
