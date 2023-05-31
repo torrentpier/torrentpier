@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktiveret';
 $lang['DISABLED'] = 'Handicappede';
 $lang['ERROR'] = 'Fejl';
 $lang['SELECT_ACTION'] = 'Vælg handling';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Næste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik på %sHere%s for at vende tilbage til Modera
 $lang['CLICK_RETURN_GROUP'] = 'Klik på %sHere%s for at vende tilbage til gruppen oplysninger';
 
 $lang['ADMIN_PANEL'] = 'Gå til Administration Panel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache er blevet ryddet';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Skabelon cache er blevet ryddet';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datalager har været ryddet';
 $lang['BOARD_DISABLE'] = 'Beklager, men dette forum er deaktiveret. Prøv at komme tilbage senere';
 $lang['BOARD_DISABLE_CRON'] = 'Forum er nede for vedligeholdelse. Prøv at komme tilbage senere';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip-komprimering';
 $lang['NOT_AVAILABLE'] = 'Ikke tilgængelig';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Ryd Cache';
-$lang['TEMPLATES'] = 'Skabeloner';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Bruger niveauer';
