@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Käytössä';
 $lang['DISABLED'] = 'Käytöstä';
 $lang['ERROR'] = 'Virhe';
 $lang['SELECT_ACTION'] = 'Valitse toiminta';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Seuraava';
 $lang['PREVIOUS_PAGE'] = 'Edellinen';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klikkaa %sHere%s palata Moderaattori Ohjauspaneel
 $lang['CLICK_RETURN_GROUP'] = 'Klikkaa %sHere%s palata ryhmän tiedot';
 
 $lang['ADMIN_PANEL'] = 'Mene hallintapaneeliin';
-$lang['ALL_CACHE'] = 'Kaikki välimuistin';
 $lang['ALL_CACHE_CLEARED'] = 'Välimuisti on tyhjennetty';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Malli välimuisti on tyhjennetty';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore on selvitetty';
 $lang['BOARD_DISABLE'] = 'Anteeksi, tämä foorumi on poistettu käytöstä. Yritä tulla takaisin myöhemmin';
 $lang['BOARD_DISABLE_CRON'] = 'Foorumi on suljettu huollon. Yritä tulla takaisin myöhemmin';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Ei saatavilla';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Tyhjennä Välimuisti';
-$lang['TEMPLATES'] = 'Malleja';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Käyttäjän tasolla';
