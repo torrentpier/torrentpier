@@ -59,6 +59,7 @@ $lang['ENABLED'] = '사용 가능';
 $lang['DISABLED'] = '장애인';
 $lang['ERROR'] = '류';
 $lang['SELECT_ACTION'] = '선택 작업';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = '다음';
 $lang['PREVIOUS_PAGE'] = '이전';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '클릭 %sHere%s 를 반환하는 중재자는 제
 $lang['CLICK_RETURN_GROUP'] = '클릭 %sHere%s 를 반환하는 그룹의 정보';
 
 $lang['ADMIN_PANEL'] = '가을 패널 관리';
-$lang['ALL_CACHE'] = '모든 캐시';
 $lang['ALL_CACHE_CLEARED'] = '캐시 삭제';
 $lang['ALL_TEMPLATE_CLEARED'] = '템플릿 캐시 삭제';
-$lang['DATASTORE'] = '데이터 저장소';
 $lang['DATASTORE_CLEARED'] = '데이터 저장소를 삭제 되었습니다';
 $lang['BOARD_DISABLE'] = '안,이 포럼을 사용할 수 없습니다. 려고 나중에 다시 올';
 $lang['BOARD_DISABLE_CRON'] = '포럼은 아래를 위해 유지 관리합니다. 려고 나중에 다시 올';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip 으로 압축';
 $lang['NOT_AVAILABLE'] = '사용할 수 없';
 
 // Clear Cache
+$lang['DATASTORE'] = '데이터 저장소';
 $lang['CLEAR_CACHE'] = '캐';
-$lang['TEMPLATES'] = '템플릿';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = '사용자 레벨';
