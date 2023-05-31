@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Uključen';
 $lang['DISABLED'] = 'Isključen';
 $lang['ERROR'] = 'Greška';
 $lang['SELECT_ACTION'] = 'Odaberite akciju';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Dalje';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknite %sHere%s da biste se vratili na upravlja
 $lang['CLICK_RETURN_GROUP'] = 'Kliknite %sHere%s da se vrate u grupi';
 
 $lang['ADMIN_PANEL'] = 'Idite u Control administracije';
-$lang['ALL_CACHE'] = 'Cijeli cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache je očišćen';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache je predložak bio očišćen';
-$lang['DATASTORE'] = 'Skladištenje podataka';
 $lang['DATASTORE_CLEARED'] = 'Trezor je bio očišćen';
 $lang['BOARD_DISABLE'] = 'Nažalost, na ovom forumu je onemogućen. Ja ću pokušati da se vratim kasnije';
 $lang['BOARD_DISABLE_CRON'] = 'Forum je zatvoren za održavanje. Ja ću pokušati da se vratim kasnije';
@@ -1649,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'Kompresije GZIP';
 $lang['NOT_AVAILABLE'] = 'Nije dostupan';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Skladištenje podataka';
 $lang['CLEAR_CACHE'] = 'Očistiti Cache';
-$lang['TEMPLATES'] = 'Predlošci';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Razine korisnika';
