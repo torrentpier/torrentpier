@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Iespējota';
 $lang['DISABLED'] = 'Invalīdiem';
 $lang['ERROR'] = 'Kļūda';
 $lang['SELECT_ACTION'] = 'Izvēlieties darbība';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Nākamā';
 $lang['PREVIOUS_PAGE'] = 'Iepriekšējā';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Noklikšķiniet uz %sHere%s, lai atgrieztos Moder
 $lang['CLICK_RETURN_GROUP'] = 'Noklikšķiniet uz %sHere%s, lai atgrieztos grupas informācijas';
 
 $lang['ADMIN_PANEL'] = 'Iet uz Administrācijas Panelis';
-$lang['ALL_CACHE'] = 'Visi kešatmiņu';
 $lang['ALL_CACHE_CLEARED'] = 'Kešatmiņu ir noskaidroti';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Veidni kešatmiņu ir noskaidroti';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ir noskaidroti';
 $lang['BOARD_DISABLE'] = 'Atvainojiet, šajā forumā ir atspējota. Mēģiniet vēlāk atgriezties';
 $lang['BOARD_DISABLE_CRON'] = 'Forums ir paredzēti uzturēšanas. Mēģiniet vēlāk atgriezties';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip saspiešanas';
 $lang['NOT_AVAILABLE'] = 'Nav pieejama';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Iztīrīt Kešatmiņu';
-$lang['TEMPLATES'] = 'Veidnes';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Lietotāja līmenis';
