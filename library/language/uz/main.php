@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'yoqilgan';
 $lang['DISABLED'] = 'nogironlar';
 $lang['ERROR'] = 'xato';
 $lang['SELECT_ACTION'] = 'tanlang harakat';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Keyingi';
 $lang['PREVIOUS_PAGE'] = 'avvalgi';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Moderator Boshqarish paneliga qaytish uchun %sHer
 $lang['CLICK_RETURN_GROUP'] = 'guruh axborot qaytish uchun %sHere%s bosing';
 
 $lang['ADMIN_PANEL'] = 'Boshqaruv paneliga o\'tish';
-$lang['ALL_CACHE'] = 'barcha kesh';
 $lang['ALL_CACHE_CLEARED'] = 'Kesh tozalandi';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Andoza kesh tozalandi';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore tozalandi';
 $lang['BOARD_DISABLE'] = 'Kechirasiz, bu forum o\'chirilgan. keyinchalik qaytib kelishga harakat';
 $lang['BOARD_DISABLE_CRON'] = 'Forum parvarishlash ostidadir. keyinchalik qaytib kelishga harakat';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'gzip siqish';
 $lang['NOT_AVAILABLE'] = 'Mavjud emas';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Keshni tozalash';
-$lang['TEMPLATES'] = 'andozalar';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Foydalanuvchi darajalari';
