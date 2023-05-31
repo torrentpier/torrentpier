@@ -59,6 +59,7 @@ $lang['ENABLED'] = '有効な';
 $lang['DISABLED'] = '障害者';
 $lang['ERROR'] = 'エラー';
 $lang['SELECT_ACTION'] = '選択行動';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = '次へ';
 $lang['PREVIOUS_PAGE'] = '前';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'をクリックし%sHere%s帰モデレーター�
 $lang['CLICK_RETURN_GROUP'] = 'をクリックし%sHere%s戻グループ情報';
 
 $lang['ADMIN_PANEL'] = 'く管理パネル';
-$lang['ALL_CACHE'] = 'すべてのキャッシュ';
 $lang['ALL_CACHE_CLEARED'] = 'キャッシュはクリアされてい';
 $lang['ALL_TEMPLATE_CLEARED'] = 'テンプレートキャッシュはクリアされてい';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastoreてクリア';
 $lang['BOARD_DISABLE'] = 'このフォーラムが無効になっています。 てみても、後';
 $lang['BOARD_DISABLE_CRON'] = 'フォースを実現します。 てみても、後';
@@ -1650,8 +1649,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip圧縮';
 $lang['NOT_AVAILABLE'] = '不可';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = '透明キャッシュ';
-$lang['TEMPLATES'] = 'テンプレート';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'ユーザーレベル';
