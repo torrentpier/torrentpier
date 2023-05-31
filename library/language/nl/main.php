@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Ingeschakeld';
 $lang['DISABLED'] = 'Uitgeschakeld';
 $lang['ERROR'] = 'Fout';
 $lang['SELECT_ACTION'] = 'Selecteer actie';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Volgende';
 $lang['PREVIOUS_PAGE'] = 'Vorige';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik op %sHere%s om terug te keren naar Moderator
 $lang['CLICK_RETURN_GROUP'] = 'Klik op %sHere%s om terug te keren naar groep informatie';
 
 $lang['ADMIN_PANEL'] = 'Ga naar het Administratie Paneel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'De Cache is uitgeschakeld';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache gewist';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore is gewist';
 $lang['BOARD_DISABLE'] = 'Sorry, dit forum is uitgeschakeld. Probeer om later terug te komen';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is uitgeschakeld voor onderhoud. Probeer om later terug te komen';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compressie';
 $lang['NOT_AVAILABLE'] = 'Niet beschikbaar';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache Wissen';
-$lang['TEMPLATES'] = 'Sjablonen';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Gebruiker niveau';
