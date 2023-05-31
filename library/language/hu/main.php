@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Engedélyezett';
 $lang['DISABLED'] = 'Fogyatékkal élő';
 $lang['ERROR'] = 'Hiba';
 $lang['SELECT_ACTION'] = 'Válassza ki a műveletet';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Következő';
 $lang['PREVIOUS_PAGE'] = 'Előző';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kattintson %sHere%s vissza Moderátor Vezérlőpu
 $lang['CLICK_RETURN_GROUP'] = 'Kattintson %sHere%s vissza csoport információk';
 
 $lang['ADMIN_PANEL'] = 'Menj Adminisztrációs Panel';
-$lang['ALL_CACHE'] = 'Az összes cache';
 $lang['ALL_CACHE_CLEARED'] = 'Gyorsítótár tartalmának törlése';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Sablon gyorsítótár tartalmának törlése';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore tisztázódott';
 $lang['BOARD_DISABLE'] = 'Sajnálom, ez a fórum le van tiltva. Próbálja meg, hogy jöjjön vissza később';
 $lang['BOARD_DISABLE_CRON'] = 'Fórum karbantartás miatt. Próbálja meg, hogy jöjjön vissza később';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip tömörítés';
 $lang['NOT_AVAILABLE'] = 'Nem elérhető';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache Ürítése';
-$lang['TEMPLATES'] = 'Sablonok';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Felhasználói szinten';
