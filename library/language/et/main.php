@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Lubatud';
 $lang['DISABLED'] = 'Puuetega';
 $lang['ERROR'] = 'Viga';
 $lang['SELECT_ACTION'] = 'Vali tegevus';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Järgmine';
 $lang['PREVIOUS_PAGE'] = 'Eelmine';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klõpsake %sHere%s naasta Moderaator juhtpaneel';
 $lang['CLICK_RETURN_GROUP'] = 'Klõpsake %sHere%s tagasi grupi info';
 
 $lang['ADMIN_PANEL'] = 'Mine Administratsiooni Paneeli';
-$lang['ALL_CACHE'] = 'Kõik vahemälu';
 $lang['ALL_CACHE_CLEARED'] = 'Vahemälu on kustutatud';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mall vahemälu on kustutatud';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore on kustutatud';
 $lang['BOARD_DISABLE'] = 'Vabandame, selles foorumis on keelatud. Proovige hiljem tagasi tulla';
 $lang['BOARD_DISABLE_CRON'] = 'Foorum on maas hoolduseks. Proovige hiljem tagasi tulla';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Ei ole kättesaadav';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Kustuta Vahemälu';
-$lang['TEMPLATES'] = 'Malle';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Kasutaja tasemed';
