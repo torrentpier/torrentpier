@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Iespējota';
 $lang['DISABLED'] = 'Invalīdiem';
 $lang['ERROR'] = 'Kļūda';
 $lang['SELECT_ACTION'] = 'Izvēlieties darbība';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Nākamā';
 $lang['PREVIOUS_PAGE'] = 'Iepriekšējā';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Noklikšķiniet uz %sHere%s, lai atgrieztos Moder
 $lang['CLICK_RETURN_GROUP'] = 'Noklikšķiniet uz %sHere%s, lai atgrieztos grupas informācijas';
 
 $lang['ADMIN_PANEL'] = 'Iet uz Administrācijas Panelis';
-$lang['ALL_CACHE'] = 'Visi kešatmiņu';
 $lang['ALL_CACHE_CLEARED'] = 'Kešatmiņu ir noskaidroti';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Veidni kešatmiņu ir noskaidroti';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ir noskaidroti';
 $lang['BOARD_DISABLE'] = 'Atvainojiet, šajā forumā ir atspējota. Mēģiniet vēlāk atgriezties';
 $lang['BOARD_DISABLE_CRON'] = 'Forums ir paredzēti uzturēšanas. Mēģiniet vēlāk atgriezties';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Laukā parole nedrīkst būt tukša!';
 $lang['CHOOSE_PASS_ERR'] = 'Ievadītās paroles nesakrīt';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Parolei jābūt vismaz %d rakstzīmes';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Jūsu parole nedrīkst būt ilgāks par $d rakstzīmes';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Paroles spēles';
 $lang['CHOOSE_PASS_REG_OK'] = 'Paroles spēlē, jūs varat doties ar reģistrācijas';
 $lang['CHOOSE_PASS_FAILED'] = 'Lai mainītu paroli, jums ir pareizi norādīt pašreizējo paroli';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'jautājumi';
 $lang['LIMIT'] = 'Daudzums:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Lejupielādēt bezmaksas un pie maksimālā ātruma!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Bold teksts: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic teksts: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Uzsvērts teksts: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekstu: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citēt tekstu: [quote]text[/quote] (Ctrl+J)';
 $lang['IMG_TITLE'] = 'Ievietot attēlu: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip saspiešanas';
 $lang['NOT_AVAILABLE'] = 'Nav pieejama';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Iztīrīt Kešatmiņu';
-$lang['TEMPLATES'] = 'Veidnes';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Lietotāja līmenis';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Nav avatar';
 $lang['TRACKER_STATS'] = 'Statistika par tracker';
 $lang['WHOIS_INFO'] = 'Informācija par IP adresi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Rādīt regulētāju index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Iepriekš moderation</h4> <h6>If jums nav peļņas sadali statusu, v, # vai T šajā sadaļā, tostarp apakšnodaļām, izplatīšanas, automātiski saņem šo status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentārs par izplatīšanas statusu</h4> <h6>Komentārs ļauj norādīt izdevējam uz pieļautajām kļūdām. Ja statusi ir nepilnīgi, laidiena pārvaldniekam ir pieejama atbildes veidlapa, lai izlabotu</h6>laidienu';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding sēklas bonusa </h4> <h6> Skaits sadalījumi tiek izsniegti lietotājs un izmēru prēmijas par viņiem (uzlādes reizes stundā) </h6>';

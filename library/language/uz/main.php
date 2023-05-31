@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'yoqilgan';
 $lang['DISABLED'] = 'nogironlar';
 $lang['ERROR'] = 'xato';
 $lang['SELECT_ACTION'] = 'tanlang harakat';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Keyingi';
 $lang['PREVIOUS_PAGE'] = 'avvalgi';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Moderator Boshqarish paneliga qaytish uchun %sHer
 $lang['CLICK_RETURN_GROUP'] = 'guruh axborot qaytish uchun %sHere%s bosing';
 
 $lang['ADMIN_PANEL'] = 'Boshqaruv paneliga o\'tish';
-$lang['ALL_CACHE'] = 'barcha kesh';
 $lang['ALL_CACHE_CLEARED'] = 'Kesh tozalandi';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Andoza kesh tozalandi';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore tozalandi';
 $lang['BOARD_DISABLE'] = 'Kechirasiz, bu forum o\'chirilgan. keyinchalik qaytib kelishga harakat';
 $lang['BOARD_DISABLE_CRON'] = 'Forum parvarishlash ostidadir. keyinchalik qaytib kelishga harakat';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'parol uchun maydon bo\'sh bo\'lmasligi kerak!';
 $lang['CHOOSE_PASS_ERR'] = 'Kiritilgan parollar emas';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Parol kamida %d belgilar bo\'lishi kerak';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Parolni endi $d belgidan ortiq bo\'lishi kerak';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'parollar o\'yin';
 $lang['CHOOSE_PASS_REG_OK'] = 'Parollar siz ro\'yxatdan bilan davom mumkin, mos';
 $lang['CHOOSE_PASS_FAILED'] = 'Parolni o\'zgartirish uchun, to\'g\'ri joriy parolni belgilash kerak';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem:';
 $lang['QUERIES'] = 'so\'rovlarni';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'bepul va maksimal tezlikda yuklab oling!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Bold matni: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Kursiv matn: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Tagiga chizilgan matn: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Strikeout matni: [s]text[/s] (Ctrl + S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Iqtibos matni: [quote]text[/quote] (Ctrl + Q)';
 $lang['IMG_TITLE'] = 'Rasmni kiritish: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'gzip siqish';
 $lang['NOT_AVAILABLE'] = 'Mavjud emas';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Keshni tozalash';
-$lang['TEMPLATES'] = 'andozalar';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Foydalanuvchi darajalari';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'reyting www.uz Statistika';
 $lang['WHOIS_INFO'] = 'IP manzil haqida ma\'lumot';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Moderatorlar index.php ko\'rsatish';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = 'Agar pastki jumladan ushbu bo\'limdagi, V, #, yoki T holati uchun tarqatish yo\'q <h6>If <h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4>, tarqatish avtomatik ravishda bu status</h6> olasiz';
 $lang['TOR_COMMENT'] = '<h4>Tarqatish holatiga sharh</h4> <h6>Izoh relizchiga qilingan xatolarni ko\'rsatish imkonini beradi. Agar statuslar to\'liq bo\'lmasa, reliz boshqaruvchisiga</h6>chiqarishni to\'g\'rilash uchun relizga javob shakli mavjud';
 $lang['SEED_BONUS_ADD'] = 'dağıtımları <h4>Adding urug\'i bonus </h4> <h6> soni </h6> foydalanuvchi va (marta bir soat zaryad) ular uchun bonuslar hajmi tomonidan topshirildi';

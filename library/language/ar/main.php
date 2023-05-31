@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'تمكين';
 $lang['DISABLED'] = 'تعطيل';
 $lang['ERROR'] = 'خطأ';
 $lang['SELECT_ACTION'] = 'اختر العمل';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'القادم';
 $lang['PREVIOUS_PAGE'] = 'السابقة';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'انقر فوق %sHere%s العودة إلى مش
 $lang['CLICK_RETURN_GROUP'] = 'انقر فوق %sHere%s العودة إلى مجموعة المعلومات';
 
 $lang['ADMIN_PANEL'] = 'انتقل إلى لوحة الإدارة';
-$lang['ALL_CACHE'] = 'كل ذاكرة التخزين المؤقت';
 $lang['ALL_CACHE_CLEARED'] = 'تم مسح ذاكرة التخزين المؤقت';
 $lang['ALL_TEMPLATE_CLEARED'] = 'القالب تم مسح ذاكرة التخزين المؤقت';
-$lang['DATASTORE'] = 'مخزن البيانات';
 $lang['DATASTORE_CLEARED'] = 'مخزن البيانات تم مسح';
 $lang['BOARD_DISABLE'] = 'آسف هذا المنتدى معطل. محاولة العودة في وقت لاحق';
 $lang['BOARD_DISABLE_CRON'] = 'المنتدى للصيانة. محاولة العودة في وقت لاحق';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'حقل كلمة السر يجب أن لا تكون فا�
 $lang['CHOOSE_PASS_ERR'] = 'دخلت لا تتطابق كلمات المرور';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'يجب أن تكون كلمة المرور على الأقل %d الشخصيات';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'يجب أن تكون كلمة المرور لم يعد من الشخصيات $d';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'تتطابق كلمات المرور';
 $lang['CHOOSE_PASS_REG_OK'] = 'تتطابق كلمات المرور, يمكنك المضي قدما في التسجيل';
 $lang['CHOOSE_PASS_FAILED'] = 'لتغيير كلمة المرور بشكل صحيح يجب تحديد كلمة المرور الحالية';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'قبالة';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'الاستفسارات';
 $lang['LIMIT'] = 'الحد:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'تحميل مجانا و في أقصى سرعة!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'نص عريض: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'نص مائل: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'يؤكد النص: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'قذفة النص: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'اقتبس النص: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'إدراج صورة: [img]https: // image_url[/img] (Ctrl + R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'ضغط Gzip';
 $lang['NOT_AVAILABLE'] = 'لا تتوفر';
 
 // Clear Cache
+$lang['DATASTORE'] = 'مخزن البيانات';
 $lang['CLEAR_CACHE'] = 'مسح ذاكرة التخزين المؤقت';
-$lang['TEMPLATES'] = 'قوالب';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'مستويات المستخدم';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'لا الصورة الرمزية';
 $lang['TRACKER_STATS'] = 'إحصاءات عن تعقب';
 $lang['WHOIS_INFO'] = 'معلومات عن عنوان IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'تظهر على المشرفين على index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> قبل moderation</h4> <h6>If ليس لديك التوزيعات حالة الخامس ، # أو تي في هذا القسم ، بما في ذلك الأقسام الفرعية توزيع سوف تحصل تلقائيا على هذا status</h6>';
 $lang['TOR_COMMENT'] = '<h4>تعليق على حالة التوزيع</h4> <h6>يتيح لك التعليق الإشارة إلى الأخطاء التي تم ارتكابها للمُحرر. إذا كانت الحالات غير مكتملة ، يتوفر نموذج استجابة التحرير لمدير الإصدار لتصحيح الإصدار</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding البذور مكافأة </h4> <h6> عدد من التوزيعات يتم تسليم من قبل المستخدم وحجم المكافآت لهم (شحن مرات ساعة) </h6>';

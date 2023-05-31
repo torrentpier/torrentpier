@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Uključen';
 $lang['DISABLED'] = 'Isključen';
 $lang['ERROR'] = 'Greška';
 $lang['SELECT_ACTION'] = 'Odaberite akciju';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Dalje';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknite %sHere%s da biste se vratili na upravlja
 $lang['CLICK_RETURN_GROUP'] = 'Kliknite %sHere%s da se vrate u grupi';
 
 $lang['ADMIN_PANEL'] = 'Idite u Control administracije';
-$lang['ALL_CACHE'] = 'Cijeli cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache je očišćen';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache je predložak bio očišćen';
-$lang['DATASTORE'] = 'Skladištenje podataka';
 $lang['DATASTORE_CLEARED'] = 'Trezor je bio očišćen';
 $lang['BOARD_DISABLE'] = 'Nažalost, na ovom forumu je onemogućen. Ja ću pokušati da se vratim kasnije';
 $lang['BOARD_DISABLE_CRON'] = 'Forum je zatvoren za održavanje. Ja ću pokušati da se vratim kasnije';
@@ -1464,6 +1463,10 @@ $lang['CHOOSE_PASS'] = 'Polje za lozinku ne smije biti prazan!';
 $lang['CHOOSE_PASS_ERR'] = 'Upisane lozinke se ne podudaraju';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Vaša lozinka mora biti najmanje %d likova';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Vaša lozinka mora biti duži od $d likova';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Lozinke podudaraju';
 $lang['CHOOSE_PASS_REG_OK'] = 'Lozinke odgovara, možete nastaviti s registracijom';
 $lang['CHOOSE_PASS_FAILED'] = 'Da biste promijenili lozinku, potrebno je pravilno odrediti trenutnu lozinku';
@@ -1484,6 +1487,9 @@ $lang['OFF'] = 'od';
 $lang['MEMORY'] = 'Madam: ';
 $lang['QUERIES'] = 'upite';
 $lang['LIMIT'] = 'Ograničenja:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Besplatno preuzimanje i na maksimalnu brzinu!';
@@ -1511,6 +1517,8 @@ $lang['BOLD'] = 'Podebljani tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Курсивный tekst: [i]text[/i] (Ctrl+i)';
 $lang['UNDERLINE'] = 'Podvlačenje teksta: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Prekriženo tekst: [s]text[/s] (Ctrl+s)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citiram tekst: [quote]text[/quote] (Ctrl+M)';
 $lang['IMG_TITLE'] = 'Umetni sliku: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'URL adresa';
@@ -1640,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'Kompresije GZIP';
 $lang['NOT_AVAILABLE'] = 'Nije dostupan';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Skladištenje podataka';
 $lang['CLEAR_CACHE'] = 'Očistiti Cache';
-$lang['TEMPLATES'] = 'Predlošci';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Razine korisnika';
@@ -2061,6 +2070,7 @@ $lang['NOAVATAR'] = 'Nema avatar';
 $lang['TRACKER_STATS'] = 'Statistika na adresi';
 $lang['WHOIS_INFO'] = 'Informacije o IP adresi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Prikaži moderatora index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> pre moderation</h4> <h6>If nemaju distribucije status u, # ili t, u ovom poglavlju, uključujući rubrike, onda ruka automatski dobiva ovom status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentar statusa distribucije</h4> <h6>Komentar vam omogućuje da ukažete na pogreške učinjene izdavaču. Ako su statusi nepotpuni, obrazac za odgovor na izdanje dostupan je upravitelju izdanja za ispravljanje izdanja</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding bonus sjeme </h4> <h6> Broj distribucija izdaje korisnik i veličina bonusa za njih (put punjenje sat) </h6>';

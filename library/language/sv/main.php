@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktiverad';
 $lang['DISABLED'] = 'Funktionshindrade';
 $lang['ERROR'] = 'Fel';
 $lang['SELECT_ACTION'] = 'Välj åtgärder';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Nästa';
 $lang['PREVIOUS_PAGE'] = 'Föregående';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klicka %sHere%s för att återgå till Moderator 
 $lang['CLICK_RETURN_GROUP'] = 'Klicka %sHere%s för att återgå till gruppen information';
 
 $lang['ADMIN_PANEL'] = 'Gå till Administration Panel';
-$lang['ALL_CACHE'] = 'Alla cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache-minnet har raderats';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mall cache har rensats';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore har rensats';
 $lang['BOARD_DISABLE'] = 'Ledsen, men detta forum är inaktiverad. Försök att komma tillbaka senare';
 $lang['BOARD_DISABLE_CRON'] = 'Forumet är nere för underhåll. Försök att komma tillbaka senare';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Fältet för lösenord får inte vara tomt!';
 $lang['CHOOSE_PASS_ERR'] = 'In lösenorden matchar inte';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Ditt lösenord måste vara minst %d tecken';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ditt angivna lösenord får inte vara längre än $d tecken';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Lösenord match';
 $lang['CHOOSE_PASS_REG_OK'] = 'Lösenord match, kan du gå vidare med registrering';
 $lang['CHOOSE_PASS_FAILED'] = 'För att byta lösenord måste du ange korrekt lösenord';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'mindre';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'frågor';
 $lang['LIMIT'] = 'Gräns:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Ladda ner gratis på högsta hastighet!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Fet text: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursiv text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understruken text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Genomstruken text: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citera text: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Infoga bild: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip-komprimering';
 $lang['NOT_AVAILABLE'] = 'Inte tillgänglig';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Rensa Cache';
-$lang['TEMPLATES'] = 'Mallar';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Användarnivåer';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Ingen avatar';
 $lang['TRACKER_STATS'] = 'Statistik om tracker';
 $lang['WHOIS_INFO'] = 'Information om IP-adress';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Visa på den moderatorer index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du inte har utdelning till status av v, #, eller T i detta avsnitt, inklusive avsnitt, fördelningen kommer automatiskt att få detta status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentera status för en distribution</h4> <h6>Kommentaren låter dig peka ut de fel som gjorts för utgivaren. Om statusarna är ofullständiga finns ett formulär för releasesvar tillgängligt för releasehanteraren för att korrigera releasen</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding utsäde bonus </h4> <h6> Antal olika distributioner som delas ut av användaren och storleken på bonusar för dem (laddning gånger i timmen) </h6>';

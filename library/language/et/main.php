@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Lubatud';
 $lang['DISABLED'] = 'Puuetega';
 $lang['ERROR'] = 'Viga';
 $lang['SELECT_ACTION'] = 'Vali tegevus';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Järgmine';
 $lang['PREVIOUS_PAGE'] = 'Eelmine';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klõpsake %sHere%s naasta Moderaator juhtpaneel';
 $lang['CLICK_RETURN_GROUP'] = 'Klõpsake %sHere%s tagasi grupi info';
 
 $lang['ADMIN_PANEL'] = 'Mine Administratsiooni Paneeli';
-$lang['ALL_CACHE'] = 'Kõik vahemälu';
 $lang['ALL_CACHE_CLEARED'] = 'Vahemälu on kustutatud';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mall vahemälu on kustutatud';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore on kustutatud';
 $lang['BOARD_DISABLE'] = 'Vabandame, selles foorumis on keelatud. Proovige hiljem tagasi tulla';
 $lang['BOARD_DISABLE_CRON'] = 'Foorum on maas hoolduseks. Proovige hiljem tagasi tulla';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Väli parool ei tohi olla tühi!!!';
 $lang['CHOOSE_PASS_ERR'] = 'Sisestatud paroolid ei kattu';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Teie salasõna peab olema vähemalt %d tähemärki';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Teie parooli ei tohi olla pikem kui $d tähemärki';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Paroolid vaste';
 $lang['CHOOSE_PASS_REG_OK'] = 'Paroolid mängu, saate jätkata registreerimine';
 $lang['CHOOSE_PASS_FAILED'] = 'Parooli muuta, pead õigesti määrata parool';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'maha';
 $lang['MEMORY'] = 'Mälu: ';
 $lang['QUERIES'] = 'päringud';
 $lang['LIMIT'] = 'Limiit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Laadi alla tasuta ja maksimumkiirusel!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Rasvane tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kaldkirjas tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Allajoonitud tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Tsiteerin teksti: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Sisesta pilt: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Ei ole kättesaadav';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Kustuta Vahemälu';
-$lang['TEMPLATES'] = 'Malle';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Kasutaja tasemed';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Nr avatari';
 $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Teave IP aadress';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Näita, et moderaatorid index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If sul ei ole väljamaksed staatuse v, #, või T käesolevas jaos, sealhulgas punktide jagamine automaatselt selle saada status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentaar distributsiooni oleku kohta</h4> <h6>Kommentaar võimaldab väljastajale välja tuua tehtud vead. Kui olekud on puudulikud, on väljalaskehalduril saadaval väljalase vastuse vorm, et versiooni</h6>parandada';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seemne boonus </h4> <h6> Arv väljamakseid on tehtud läbi kasutaja ja suuruse kohta, preemiad neile (laadimine korda tunnis) </h6>';

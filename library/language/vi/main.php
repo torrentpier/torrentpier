@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Kích hoạt';
 $lang['DISABLED'] = 'Vô hiệu hóa';
 $lang['ERROR'] = 'Lỗi';
 $lang['SELECT_ACTION'] = 'Chọn hành động';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
 $lang['PREVIOUS_PAGE'] = 'Trước đó';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Nhấn vào %sHere%s để trở về điều Hà
 $lang['CLICK_RETURN_GROUP'] = 'Nhấn vào %sHere%s để trở về nhóm thông tin';
 
 $lang['ADMIN_PANEL'] = 'Đi đến Bảng điều khiển Quản trị';
-$lang['ALL_CACHE'] = 'Tất cả nhớ tạm';
 $lang['ALL_CACHE_CLEARED'] = 'Nhớ tạm đã được xóa';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mẫu nhớ tạm đã được xóa';
-$lang['DATASTORE'] = 'Kho dữ liệu';
 $lang['DATASTORE_CLEARED'] = 'Kho dữ liệu đã bị xóa';
 $lang['BOARD_DISABLE'] = 'Xin lỗi, diễn đàn này là vô hiệu hóa. Hãy cố gắng trở lại sau';
 $lang['BOARD_DISABLE_CRON'] = 'Diễn đàn đang tắt để bảo trì. Hãy cố gắng trở lại sau';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Trường cho mật khẩu không phải là trống r�
 $lang['CHOOSE_PASS_ERR'] = 'Nhập vào mật khẩu không phù hợp với';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Mật khẩu phải có ít nhất %d nhân vật';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Mật khẩu phải có không còn hơn $d nhân vật';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Mật khẩu trận đấu';
 $lang['CHOOSE_PASS_REG_OK'] = 'Mật khẩu phù hợp, anh có thể tiến hành việc đăng ký';
 $lang['CHOOSE_PASS_FAILED'] = 'Để thay đổi mật khẩu, bạn phải chính xác định hiện nay, mật khẩu';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'tắt';
 $lang['MEMORY'] = 'Nhớ: ';
 $lang['QUERIES'] = 'thắc mắc';
 $lang['LIMIT'] = 'Giới hạn:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Tải về miễn phí và với tốc độ tối đa!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Văn bản đậm: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Nghiêng văn bản: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Nhấn mạnh chữ: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Gạch văn bản: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Báo văn bản: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Chèn hình ảnh: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Bao gồm nén';
 $lang['NOT_AVAILABLE'] = 'Không có';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Kho dữ liệu';
 $lang['CLEAR_CACHE'] = 'Rõ Ràng Nhớ Tạm';
-$lang['TEMPLATES'] = 'Mẫu';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Dùng cấp';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Không avatar';
 $lang['TRACKER_STATS'] = 'Số liệu thống kê trên theo dõi';
 $lang['WHOIS_INFO'] = 'Thông tin về địa chỉ IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Hiển thị trên các điều hành viên index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If bạn không có phân phối cho tình trạng của v, #, hoặc T trong phần này, bao gồm cả các phần phụ, sự phân bố sẽ tự động nhận được điều này status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Nhận xét về trạng thái của bản phân phối</h4> <h6>Nhận xét cho phép bạn chỉ ra các lỗi đối với người phát hành. Nếu các trạng thái không đầy đủ, người quản lý phát hành sẽ có biểu mẫu phản hồi phát hành để sửa bản phát hành</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding giống thưởng </h4> <h6> Số lượng của phân phối được đưa ra bởi người sử dụng và kích thước của tiền thưởng cho họ (sạc lần trong một giờ) </h6>';

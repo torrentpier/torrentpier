@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Ներառված է';
 $lang['DISABLED'] = 'Անջատված';
 $lang['ERROR'] = 'Սխալ է';
 $lang['SELECT_ACTION'] = 'Ընտրեք գործողությունը';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Ավելին';
 $lang['PREVIOUS_PAGE'] = 'Նախորդ';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Սեղմեք %sHere%s է վերադառնալ կ�
 $lang['CLICK_RETURN_GROUP'] = 'Սեղմեք %sHere%s վերադառնալ խմբում';
 
 $lang['ADMIN_PANEL'] = 'Այցելեք Վահանակի վարչարարության';
-$lang['ALL_CACHE'] = 'Ամբողջ cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache էր մաքրել';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache կաղապար էր մաքրել';
-$lang['DATASTORE'] = 'Տվյալների շտեմարան';
 $lang['DATASTORE_CLEARED'] = 'Շտեմարան էր մաքրվել է';
 $lang['BOARD_DISABLE'] = 'Ցավոք, այս ֆորումին անջատված է. Փորձենք վերադառնալ ավելի ուշ';
 $lang['BOARD_DISABLE_CRON'] = 'Համաժողովը փակվել է տեխնիկական սպասարկում: Փորձենք վերադառնալ ավելի ուշ';
@@ -1464,6 +1463,10 @@ $lang['CHOOSE_PASS'] = 'Դաշտ գաղտնաբառը չպետք է լինի դ�
 $lang['CHOOSE_PASS_ERR'] = 'Ձեր մուտքագրած գաղտնաբառերը չեն համընկնում';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Ձեր գաղտնաբառը պետք է լինի ոչ պակաս, քան %d նիշ';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ձեր գաղտնաբառը պետք է լինի ոչ ավելի, քան $d նիշ';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Գաղտնաբառերը համընկնում են';
 $lang['CHOOSE_PASS_REG_OK'] = 'Գաղտնաբառերը համընկնում են, դուք կարող եք անցնել գրանցման';
 $lang['CHOOSE_PASS_FAILED'] = 'Փոխել գաղտնաբառը, անհրաժեշտ է ճիշտ նշել գաղտնաբառը';
@@ -1484,6 +1487,9 @@ $lang['OFF'] = 'է';
 $lang['MEMORY'] = 'Մադամ: ';
 $lang['QUERIES'] = 'հարցումներ';
 $lang['LIMIT'] = 'Սահմանափակումները:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Անվճար բեռնել եւ առավելագույն արագությամբ!';
@@ -1511,6 +1517,8 @@ $lang['BOLD'] = 'Համարձակ տեքստը: [b]text[/b] (դյուրանցմ�
 $lang['ITALIC'] = 'Курсивный տեքստը: [i]text[/i] (դյուրանցման Ctrl+i)';
 $lang['UNDERLINE'] = 'Ընդգծելով տեքստը: [u]text[/u] (բանալիների Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый տեքստը: [s]text[/s] (Ctrl+c)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Մեջբերում եմ տեքստը: [quote]text[/quote] (դյուրանցման Ctrl+M)';
 $lang['IMG_TITLE'] = 'Տեղադրեք պատկեր՝ [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'URL-հասցե';
@@ -1640,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'GZIP սեղմում';
 $lang['NOT_AVAILABLE'] = 'Հասանելի չէ';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Տվյալների շտեմարան';
 $lang['CLEAR_CACHE'] = 'Մաքրել Cache';
-$lang['TEMPLATES'] = 'Կաղապարներ';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Հարթաչափեր';
@@ -2061,6 +2070,7 @@ $lang['NOAVATAR'] = 'Ոչ avatar';
 $lang['TRACKER_STATS'] = 'Վիճակագրությունը խուզարկու';
 $lang['WHOIS_INFO'] = 'Տեղեկություններ IP-հասցեն';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Ցույց տալ модераторам index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> նախապես moderation</h4> <h6>If չունեն բաշխման կարգավիճակի, # կամ t այս բաժնում, ներառյալ ենթաբաժիններ, որ բաժանում է ավտոմատ կերպով ստանում է տվյալ status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Մեկնաբանություն բաշխման կարգավիճակի վերաբերյալ</h4> <h6>Մեկնաբանությունը թույլ է տալիս մատնանշել թողարկողին թույլ տրված սխալները: Եթե կարգավիճակները թերի են, թողարկման պատասխանի ձևը հասանելի է թողարկման մենեջերին՝</h6>թողարկումը շտկելու համար';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding բոնուս սերմեր </h4> <h6> Միավորների քան բաշխման տալիս օգտվողին եւ բոնուսների չափը նրանց համար (անգամ լիցքավորման ժամ) </h6>';

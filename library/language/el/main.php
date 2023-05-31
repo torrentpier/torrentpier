@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Ενεργοποιημένη';
 $lang['DISABLED'] = 'Με αναπηρία';
 $lang['ERROR'] = 'Σφάλμα';
 $lang['SELECT_ACTION'] = 'Επιλέξτε δράση';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Την επόμενη';
 $lang['PREVIOUS_PAGE'] = 'Προηγούμενο';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Κάντε κλικ %sHere%s για να επισ
 $lang['CLICK_RETURN_GROUP'] = 'Κάντε κλικ %sHere%s να επιστρέψει στην ομάδα πληροφορίες';
 
 $lang['ADMIN_PANEL'] = 'Πηγαίνετε στο Πίνακα Διαχείρισης';
-$lang['ALL_CACHE'] = 'Όλα τα cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache έχει εκκαθαριστεί';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Πρότυπο cache έχει εκκαθαριστεί';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore έχει εκκαθαριστεί';
 $lang['BOARD_DISABLE'] = 'Συγγνώμη, αυτό το φόρουμ είναι απενεργοποιημένη. Προσπαθήστε να επανέλθω αργότερα';
 $lang['BOARD_DISABLE_CRON'] = 'Το φόρουμ είναι κάτω για συντήρηση. Προσπαθήστε να επανέλθω αργότερα';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Το πεδίο για τον κωδικό πρόσβα�
 $lang['CHOOSE_PASS_ERR'] = 'Καταχωρούνται οι κωδικοί πρόσβασης δεν ταιριάζουν';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Ο κωδικός σας πρέπει να είναι τουλάχιστον %d χαρακτήρες';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ο κωδικός σας πρέπει να είναι όχι περισσότερο από $d χαρακτήρες';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Κωδικοί πρόσβασης ταιριάζουν';
 $lang['CHOOSE_PASS_REG_OK'] = 'Κωδικοί πρόσβασης ταιριάζουν, μπορείτε να προχωρήσετε με την εγγραφή';
 $lang['CHOOSE_PASS_FAILED'] = 'Για να αλλάξετε τον κωδικό πρόσβασης, θα πρέπει να καθορίσετε σωστά τον τρέχοντα κωδικό πρόσβασης';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'από';
 $lang['MEMORY'] = 'Μεμ: ';
 $lang['QUERIES'] = 'ερωτήματα';
 $lang['LIMIT'] = 'Όριο:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Κατεβάστε το δωρεάν και με τη μέγιστη ταχύτητα!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Κείμενο με έντονη γραφή: [b]text[/b] (Ctrl+
 $lang['ITALIC'] = 'Πλάγια γραφή: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Υπογράμμιση κειμένου: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Κεραυνός κείμενο: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Παραθέτω το κείμενο: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Εισαγωγή εικόνας: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Συμπίεση Gzip';
 $lang['NOT_AVAILABLE'] = 'Δεν είναι διαθέσιμη';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Πρότυπα';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Επίπεδα χρηστών';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Δεν avatar';
 $lang['TRACKER_STATS'] = 'Τα στατιστικά στοιχεία του tracker';
 $lang['WHOIS_INFO'] = 'Πληροφορίες σχετικά με τη διεύθυνση IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Εμφάνιση στο συντονιστές της index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Προ-moderation</h4> <h6>If δεν έχετε διανομές με το καθεστώς των β, #, ή T σε αυτή την ενότητα, συμπεριλαμβανομένης και υποενότητες, η διανομή θα λάβετε αυτόματα αυτό status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Σχόλιο σχετικά με την κατάσταση μιας διανομής</h4> <h6>Το σχόλιο σάς επιτρέπει να επισημάνετε τα σφάλματα που έγιναν στον εκδότη. Εάν οι καταστάσεις είναι ελλιπείς, μια φόρμα απάντησης έκδοσης είναι διαθέσιμη στον διαχειριστή έκδοσης για τη διόρθωση της έκδοσης</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding σπόρων μπόνους </h4> <h6> Αριθμός των διανομών που δίδονται από το χρήστη και το μέγεθος των μπόνους για τους (φόρτιση φορές την ώρα) </h6>';

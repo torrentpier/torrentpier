@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Даргирифта';
 $lang['DISABLED'] = 'маъюб';
 $lang['ERROR'] = 'хатогӣ';
 $lang['SELECT_ACTION'] = 'Интихоб кунед амал';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Баъдӣ';
 $lang['PREVIOUS_PAGE'] = 'гузашта';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '%sHere%s ангушт занед барои ба�
 $lang['CLICK_RETURN_GROUP'] = '%sHere%s ангушт занед барои баргаштан ба маълумоти гурӯҳи';
 
 $lang['ADMIN_PANEL'] = 'Бирав ба ба панели идоракунӣ Маъмурияти';
-$lang['ALL_CACHE'] = 'Ҳамаи кэш';
 $lang['ALL_CACHE_CLEARED'] = 'Кеш кардааст, тоза карда шудааст,';
 $lang['ALL_TEMPLATE_CLEARED'] = 'кеш Шаблон кардааст, тоза карда шудааст,';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore кардааст, тоза карда шудааст,';
 $lang['BOARD_DISABLE'] = 'Мутаасифона, ин ҳамоиши хомӯш карда шудааст. Кӯшиш кунед, ки баргашта дертар';
 $lang['BOARD_DISABLE_CRON'] = 'Форуми барои нигоҳдории поён аст. Кӯшиш кунед, ки баргашта дертар';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Соњаи пароли бояд на холӣ!';
 $lang['CHOOSE_PASS_ERR'] = 'нишонаҳо дохил Оё мувофиқат намекунанд';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Гузарвожаи шумо бояд дар на камтар %d аломат бошад';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Гузарвожаи шумо бояд аз дигар $d аломат нест мешавад';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'бозии Паролҳо';
 $lang['CHOOSE_PASS_REG_OK'] = 'Нишонаҳо мувофиқ, шумо метавонед бо бақайдгирии идома';
 $lang['CHOOSE_PASS_FAILED'] = 'Барои тағйир додани рамз, шумо дуруст бояд гузарвожаи ҷорӣ муайян';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'хомӯш кардан';
 $lang['MEMORY'] = 'Интх:';
 $lang['QUERIES'] = 'дархостҳо';
 $lang['LIMIT'] = 'Ҳадди:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Download озод ва дар ҳадди суръати!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Матни Bold: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Матни Italic: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Таъкид матн: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Матни Strikeout: [s]text[/s] (Ctrl + S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Матни Quote: [quote]text[/quote] (Ctrl + Q)';
 $lang['IMG_TITLE'] = 'Ворид кардани тасвир: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'фишурдасозии Gzip';
 $lang['NOT_AVAILABLE'] = 'Дастрас нест';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'кеш Clear';
-$lang['TEMPLATES'] = 'Шаблонҳои';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'сатњи корбар';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Не аватаре';
 $lang['TRACKER_STATS'] = 'Омор оид ба Назоратчии';
 $lang['WHOIS_INFO'] = 'Маълумот дар бораи адреси IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Нишон оид ба модератори ба index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Пеш moderation</h4> <h6>If шумо таќсимоти ба мақоми V, #, ё T дар ин бахш, аз ҷумла зербахшҳои надорад, тақсимоти таври худкор ба ин status</h6> қабул';
 $lang['TOR_COMMENT'] = '<h4>Шарҳ дар бораи ҳолати тақсимот</h4> <h6>Шарҳ ба шумо имкон медиҳад, ки хатогиҳоеро, ки ба нашркунанда дода шудаанд, нишон диҳед. Агар вазъҳо нопурра бошанд, варақаи ҷавоби релиз барои ислоҳи релиз дастрас аст</h6>';
 $lang['SEED_BONUS_ADD'] = 'насли <h4>Adding бонус </h4> <h6> Шумораи таќсимоти аз тарафи истифодабаранда ва андозаи мукофотпулӣ барои онҳо (дар экрани маротиба дар як соат), супорида </h6>';

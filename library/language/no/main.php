@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktivert';
 $lang['DISABLED'] = 'Funksjonshemmede';
 $lang['ERROR'] = 'Feil';
 $lang['SELECT_ACTION'] = 'Velg handling';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Neste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klikk %sHere%s for å gå tilbake til Moderator K
 $lang['CLICK_RETURN_GROUP'] = 'Klikk %sHere%s for å gå tilbake til informasjon om gruppen';
 
 $lang['ADMIN_PANEL'] = 'Gå til Administrasjon Panel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache har blitt fjernet';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mal cache har blitt fjernet';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datalager har blitt fjernet';
 $lang['BOARD_DISABLE'] = 'Beklager, men dette forumet er deaktivert. Prøv å komme tilbake senere';
 $lang['BOARD_DISABLE_CRON'] = 'Forumet er nede for vedlikehold. Prøv å komme tilbake senere';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Feltet for passord må ikke være tomt!';
 $lang['CHOOSE_PASS_ERR'] = 'Angitt passord ikke stemmer overens';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Passordet må være minst %d tegn';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Passordet må være lengre enn $d tegn';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Passord match';
 $lang['CHOOSE_PASS_REG_OK'] = 'Passord samsvarer, kan du fortsette med registrering';
 $lang['CHOOSE_PASS_FAILED'] = 'Hvis du vil endre passordet, må du angir riktig nåværende passord';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'av';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'søk';
 $lang['LIMIT'] = 'Grensen:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Last ned gratis og ved maksimal hastighet!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Fet tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursiv tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understreket tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Overstreke tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Sitat tekst: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Sett inn bilde: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip komprimering';
 $lang['NOT_AVAILABLE'] = 'Ikke tilgjengelig';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Slett Cache';
-$lang['TEMPLATES'] = 'Maler';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Bruker nivåer';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Ingen avatar';
 $lang['TRACKER_STATS'] = 'Statistikk på tracker';
 $lang['WHOIS_INFO'] = 'Informasjon om IP-adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Vis på den moderatorer index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du ikke har utdelinger til status v, #, eller T i dette avsnittet, inkludert seksjoner, distribusjon vil automatisk motta denne status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommenter status for en distribusjon</h4> <h6>Kommentaren lar deg påpeke feilene som er gjort til utgiveren. Hvis statusene er ufullstendige, er et utgivelsessvarsskjema tilgjengelig for utgivelsesansvarlig for å korrigere utgivelsen</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding frø bonus </h4> <h6> Antall fordelinger er delt ut av brukeren og størrelsen på bonuser for dem (lading ganger i timen) </h6>';

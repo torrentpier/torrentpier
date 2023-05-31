@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Укључен';
 $lang['DISABLED'] = 'Искључен';
 $lang['ERROR'] = 'Грешка';
 $lang['SELECT_ACTION'] = 'Изаберите акцију';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Даље';
 $lang['PREVIOUS_PAGE'] = 'Претходних';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Кликните на дугме %sHere%s да с
 $lang['CLICK_RETURN_GROUP'] = 'Кликните %sHere%s да се врати у групи';
 
 $lang['ADMIN_PANEL'] = 'Идите у управе Панел';
-$lang['ALL_CACHE'] = 'Цео кеш';
 $lang['ALL_CACHE_CLEARED'] = 'Кеш је био ослобођен';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Кеш образац је био ослобођен';
-$lang['DATASTORE'] = 'Складиште података';
 $lang['DATASTORE_CLEARED'] = 'Спремиште је био очишћен';
 $lang['BOARD_DISABLE'] = 'Нажалост, на овом форуму је онемогућена. Ја ћу покушати да се вратите касније';
 $lang['BOARD_DISABLE_CRON'] = 'Форум је затворен за одржавање. Ја ћу покушати да се вратите касније';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Поље за лозинку не би требало д
 $lang['CHOOSE_PASS_ERR'] = 'Лозинке које сте унели се не поклапају';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Ваша лозинка би требало да буде не мање од %d ликова';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ваша лозинка би требало да буде дужи од $d ликова';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Лозинке поклапају';
 $lang['CHOOSE_PASS_REG_OK'] = 'Лозинке поклапају, можете да наставите до регистрације';
 $lang['CHOOSE_PASS_FAILED'] = 'Да бисте променили лозинку, потребно је да правилно одредити тренутну лозинку';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'од';
 $lang['MEMORY'] = 'Мадам: ';
 $lang['QUERIES'] = 'захтеви';
 $lang['LIMIT'] = 'Ограничења:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Преузмите бесплатно и на максималну брзину!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Болд текст: [b]text[/b] (комбинација тас
 $lang['ITALIC'] = 'Курсивный текст: [i]text[/i] (комбинација тастера Ctrl+ја)';
 $lang['UNDERLINE'] = 'Подвлачења текста: [u]text[/u] (тастера Цтрл+у)';
 $lang['STRIKEOUT'] = 'Прецртано текст: [s]text[/s] (Цтрл+ц)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитирам текст: [quote]text[/quote] (комбинација тастера Ctrl+М)';
 $lang['IMG_TITLE'] = 'Уметни слику: [img]хттпс://имаге_урл[/img] (Цтрл+Р)';
 $lang['URL'] = 'УРЛ адреса';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'ГЗИП компресију';
 $lang['NOT_AVAILABLE'] = 'Није доступан';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Складиште података';
 $lang['CLEAR_CACHE'] = 'Да Обришете Кеш';
-$lang['TEMPLATES'] = 'Шаблони';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Нивои корисника';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Нема аватар';
 $lang['TRACKER_STATS'] = 'Статистика на хттп трацкер';
 $lang['WHOIS_INFO'] = 'Информација о ИП адреси';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Показати модератори index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> унапред moderation</h4> <h6>If немају дистрибуцију статуса, # или t у овом одељку, укључујући одељке, онда договор аутоматски добија овом status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Коментар о статусу дистрибуције</h4> <h6>Коментар вам омогућава да укажете на грешке које су направљене издавачу. Ако су статуси непотпуни, образац за одговор на издање доступан је менаџеру издања да исправи издање</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding бонус семе </h4> <h6> Број дистрибуција издаје корисник и величина бонуса за њих (пут пуњење сат) </h6>';

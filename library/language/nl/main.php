@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Ingeschakeld';
 $lang['DISABLED'] = 'Uitgeschakeld';
 $lang['ERROR'] = 'Fout';
 $lang['SELECT_ACTION'] = 'Selecteer actie';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Volgende';
 $lang['PREVIOUS_PAGE'] = 'Vorige';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik op %sHere%s om terug te keren naar Moderator
 $lang['CLICK_RETURN_GROUP'] = 'Klik op %sHere%s om terug te keren naar groep informatie';
 
 $lang['ADMIN_PANEL'] = 'Ga naar het Administratie Paneel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'De Cache is uitgeschakeld';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache gewist';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore is gewist';
 $lang['BOARD_DISABLE'] = 'Sorry, dit forum is uitgeschakeld. Probeer om later terug te komen';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is uitgeschakeld voor onderhoud. Probeer om later terug te komen';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Veld voor het wachtwoord mag niet leeg zijn!';
 $lang['CHOOSE_PASS_ERR'] = 'De ingevoerde wachtwoorden komen niet overeen';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Uw wachtwoord moet minimaal %d tekens';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Uw wachtwoord mag niet langer zijn dan $d tekens';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Wachtwoorden overeenkomen,';
 $lang['CHOOSE_PASS_REG_OK'] = 'Wachtwoorden overeenkomen, kunt u verder gaan met de registratie';
 $lang['CHOOSE_PASS_FAILED'] = 'Om het wachtwoord te wijzigen, moet u het correct opgeven van de huidige wachtwoord in';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'uit';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'query \' s';
 $lang['LIMIT'] = 'Limiet:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Download gratis en op maximale snelheid!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Vetgedrukte tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Cursieve tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Tekst onderstrepen: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Quote tekst: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Afbeelding invoegen: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compressie';
 $lang['NOT_AVAILABLE'] = 'Niet beschikbaar';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache Wissen';
-$lang['TEMPLATES'] = 'Sjablonen';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Gebruiker niveau';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Geen avatar';
 $lang['TRACKER_STATS'] = 'De statistieken worden op de tracker -';
 $lang['WHOIS_INFO'] = 'Informatie over het IP-adres';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Toon moderators op de index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If u niet over de uitkeringen aan de status van v, #, of T in deze sectie, met inbegrip van de onderafdelingen, de distributie, krijgt automatisch deze status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Commentaar op de status van een distributie</h4> <h6>Met het commentaar kunt u de releaser wijzen op gemaakte fouten. Als de statussen onvolledig zijn, is er een vrijgave-antwoordformulier beschikbaar voor de vrijgavebeheerder om vrijgave</h6>te corrigeren';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding zaad bonus </h4> <h6> Aantal uitkeringen worden uitgedeeld door de gebruiker en de omvang van de bonussen voor hen (laden keer een uur) </h6>';

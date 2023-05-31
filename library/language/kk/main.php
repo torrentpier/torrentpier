@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Қосылған';
 $lang['DISABLED'] = 'мүгедек';
 $lang['ERROR'] = 'қателік';
 $lang['SELECT_ACTION'] = 'әрекетті таңдаңыз';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Келесі';
 $lang['PREVIOUS_PAGE'] = 'алдыңғы';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Модератор басқару тақтасы�
 $lang['CLICK_RETURN_GROUP'] = 'топтық ақпарат оралу үшін %sHere%s басыңыз';
 
 $lang['ADMIN_PANEL'] = 'Әкімшілік панелі өтіңіз';
-$lang['ALL_CACHE'] = 'барлық кэш';
 $lang['ALL_CACHE_CLEARED'] = 'Кэш тазаланды';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Үлгі кэш тазаланды';
-$lang['DATASTORE'] = 'дерекқор';
 $lang['DATASTORE_CLEARED'] = 'Дерекқор тазаланды';
 $lang['BOARD_DISABLE'] = 'Кешіріңіз, бұл форум ажыратылған. кейінірек келіп көріңіз';
 $lang['BOARD_DISABLE_CRON'] = 'Форум қызмет көрсету үшін төмен болып табылады. кейінірек келіп көріңіз';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'құпия сөз өрісі бос болмауы ти�
 $lang['CHOOSE_PASS_ERR'] = 'Енгізген құпия сөздеріңіз бір біріне сәйкес емес';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Құпия сөзіңіз кемінде %d таңба болуы керек';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Пароліңіз бұдан былай $d таңбадан артық болуы тиіс';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Парольдерсәйкескеледі';
 $lang['CHOOSE_PASS_REG_OK'] = 'Құпия сөздер сәйкес, сіз тіркеу жалғастыру мүмкін';
 $lang['CHOOSE_PASS_FAILED'] = 'Құпия сөзді өзгерту үшін, сіз дұрыс ағымдағы құпия сөзді көрсетуіңіз керек';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'ажыратылған';
 $lang['MEMORY'] = 'MEM:';
 $lang['QUERIES'] = 'сұраулар';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'тегін жүктеп және максималды жылдамдығы!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Қалың мәтін: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Қиғаш мәтін: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Астын сызу мәтін: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Сызылған мәтін: [s]text[/s] (Ctrl + S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Дәйексөз мәтіні: [quote]text[/quote] (Ctrl + Q)';
 $lang['IMG_TITLE'] = 'Суретті енгізу: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip қысу';
 $lang['NOT_AVAILABLE'] = 'Жоқ';
 
 // Clear Cache
+$lang['DATASTORE'] = 'дерекқор';
 $lang['CLEAR_CACHE'] = 'Кэшті тазалау';
-$lang['TEMPLATES'] = 'үлгілер';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'пайдаланушы деңгейлері';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'жоқ Аватар';
 $lang['TRACKER_STATS'] = 'отслежывателе Статистика';
 $lang['WHOIS_INFO'] = 'IP мекен-жайы туралы ақпарат';
 $lang['SHOW_MOD_HOME_PAGE'] = 'index.php модератор көрсету';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = 'Сіз бөлімшелердің, соның ішінде осы бөлімде V, #, немесе Т мәртебесіне бөлу, қажеті жоқ <h6>If <h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4>, тарату автоматты осы status</h6> алады';
 $lang['TOR_COMMENT'] = '<h4>Тарату күйі туралы түсініктеме</h4> <h6>Түсініктеме шығарушыға жіберілген қателерді көрсетуге мүмкіндік береді. Күйлер толық болмаса,</h6>шығарылымды түзету үшін шығарылым менеджеріне шығарылымға жауап пішіні қолжетімді болады';
 $lang['SEED_BONUS_ADD'] = '</h6> (Times сағат зарядтау) бөлу </h4> <h6> саны пайдаланушы және олар үшін сыйлықақылар мөлшеріне жүзеге табыс етілді тұқым бонус <h4>Adding';

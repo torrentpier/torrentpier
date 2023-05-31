@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Povolené';
 $lang['DISABLED'] = 'Zakázané';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akcie';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Ďalej';
 $lang['PREVIOUS_PAGE'] = 'Predchádzajúce';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrát
 $lang['CLICK_RETURN_GROUP'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť do skupiny informácií';
 
 $lang['ADMIN_PANEL'] = 'Prejdite na Panel Správy';
-$lang['ALL_CACHE'] = 'Všetky pamäť';
 $lang['ALL_CACHE_CLEARED'] = 'Cache bol vymazaný';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Šablóny cache bol vymazaný';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore bol vymazaný';
 $lang['BOARD_DISABLE'] = 'Ľutujeme, toto fórum je zakázané. Skúste prísť neskôr.';
 $lang['BOARD_DISABLE_CRON'] = 'Fórum vypnutý z dôvodu údržby. Skúste prísť neskôr.';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Pole pre heslo nesmie byť prázdne!';
 $lang['CHOOSE_PASS_ERR'] = 'Zadané heslá sa nezhodujú.';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Vaše heslo musí byť minimálne %d znaky';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Vaše heslo musí byť dlhšie ako $d znaky';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Heslá zápas';
 $lang['CHOOSE_PASS_REG_OK'] = 'Heslá zápas, môžete pristúpiť k registrácii';
 $lang['CHOOSE_PASS_FAILED'] = 'Pre zmenu hesla je nutné správne zadať aktuálne heslo';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'mimo';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'dopyty';
 $lang['LIMIT'] = 'Obmedzenie:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Stiahnite si zadarmo a na maximálnu rýchlosť!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Tučným písmom (Bold): [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kurzíva text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Podčiarknutie textu: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Preškrtnuté text: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citát text: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Vložiť obrázok: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Adresa Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip kompresia';
 $lang['NOT_AVAILABLE'] = 'Nie je k dispozícii';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Vymazať Vyrovnávaciu Pamäť';
-$lang['TEMPLATES'] = 'Šablóny';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Užívateľské úrovne';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Žiadny avatar';
 $lang['TRACKER_STATS'] = 'Štatistické údaje o tracker';
 $lang['WHOIS_INFO'] = 'Informácie o IP adresu';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Zobraziť na moderátorov index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Vopred moderation</h4> <h6>If nemáte rozdelenia stav v, # alebo T v tejto časti, vrátane podkapitolách, distribúcia, automaticky získajú toto status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentár k stavu distribúcie</h4> <h6>Komentár vám umožňuje upozorniť vydavateľa na chyby, ktorých sa dopustil. Ak sú stavy neúplné, manažér vydania má k dispozícii formulár odpovede na vydanie na opravu vydania</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding osiva bonus </h4> <h6> Počet rozvodov sú rozdávané používateľ a veľkosť bonusy pre nich (čas nabíjania hodinu) </h6>';

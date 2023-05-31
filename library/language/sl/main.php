@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Omogočeno';
 $lang['DISABLED'] = 'Onemogočeni';
 $lang['ERROR'] = 'Napaka';
 $lang['SELECT_ACTION'] = 'Izberite dejanje';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Naprej';
 $lang['PREVIOUS_PAGE'] = 'Prejšnji';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknite %sHere%s, da se vrnete Moderator Nadzorn
 $lang['CLICK_RETURN_GROUP'] = 'Kliknite %sHere%s za vrnitev v skupino informacije';
 
 $lang['ADMIN_PANEL'] = 'Pojdi na Upravi Plošče';
-$lang['ALL_CACHE'] = 'Vse predpomnilnika';
 $lang['ALL_CACHE_CLEARED'] = 'Predpomnilnik je bil izpraznjen';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Predlogo začasni je bil izpraznjen';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore je bil izpraznjen';
 $lang['BOARD_DISABLE'] = 'Žal, ta forum je onemogočen. Poskusite kasneje prišel nazaj';
 $lang['BOARD_DISABLE_CRON'] = 'Forum je določeni za vzdrževanje. Poskusite kasneje prišel nazaj';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Polje za geslo ne sme biti prazno!';
 $lang['CHOOSE_PASS_ERR'] = 'Vnesena gesla se ne ujemata';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Geslo mora biti vsaj %d znakov';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Geslo mora biti daljše od $d znakov';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Gesla tekmo';
 $lang['CHOOSE_PASS_REG_OK'] = 'Gesla tekmo, lahko nadaljujete z registracijo';
 $lang['CHOOSE_PASS_FAILED'] = 'Če želite spremeniti geslo, morate pravilno določiti trenutno geslo';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Tel: ';
 $lang['QUERIES'] = 'poizvedbe';
 $lang['LIMIT'] = 'Omejitev:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Prenesite brezplačne in pri maksimalni hitrosti!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Krepko besedilo: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Ležeče besedilo: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Podčrtano besedilo: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Prečrtano besedilo: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citiram besedilo: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Vstavi sliko: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip stiskanje';
 $lang['NOT_AVAILABLE'] = 'Ni na voljo';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Počisti Zač. Pomniln';
-$lang['TEMPLATES'] = 'Predloge';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Uporabniški nivoji';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Brez avatarja';
 $lang['TRACKER_STATS'] = 'Statistični podatki o tracker';
 $lang['WHOIS_INFO'] = 'Informacije o IP naslov';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Prikaži na moderatorji na index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If nimate distribucije stanja v, #, ali T v tem razdelku, vključno s podpodročji, distribucijo, bodo samodejno prejela to status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentar statusa distribucije</h4> <h6>Komentar vam omogoča, da opozorite na napake izdajatelja. Če so statusi nepopolni, je upravitelju izdaje na voljo odgovor na izdajo, da popravi izdajo</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding semena bonus </h4> <h6> Število distribucij so razdelili uporabnik in velikost nagrade za njih (polnjenje krat na uro) </h6>';

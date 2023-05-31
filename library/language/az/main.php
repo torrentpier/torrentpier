@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktiv';
 $lang['DISABLED'] = 'Qaralar';
 $lang['ERROR'] = 'Səhv';
 $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Daha sonra';
 $lang['PREVIOUS_PAGE'] = 'Əvvəlki';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Düyməsini basın %sHere%s qayıtmaq üçün con
 $lang['CLICK_RETURN_GROUP'] = 'Basın %sHere%s qayıtmaq üçün qrup';
 
 $lang['ADMIN_PANEL'] = 'Gedin idarəetmə Paneli';
-$lang['ALL_CACHE'] = 'Bütün cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache idi təmizlənə';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache şablon idi təmizlənə';
-$lang['DATASTORE'] = 'Saxlama məlumat';
 $lang['DATASTORE_CLEARED'] = 'Anbar idi təmizlənib';
 $lang['BOARD_DISABLE'] = 'Təəssüflər olsun ki, bu forumda aradan. Попробую sonra geri qayıtmaq';
 $lang['BOARD_DISABLE_CRON'] = 'Forum texniki xidmət üçün bağlanıb. Попробую sonra geri qayıtmaq';
@@ -1464,6 +1463,10 @@ $lang['CHOOSE_PASS'] = 'Sahə üçün parol olmamalıdır boş!';
 $lang['CHOOSE_PASS_ERR'] = 'Daxil parol uyğun gəlmir';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Parol az olmamalıdır %d simvol';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Parol olmamalıdır uzun $d simvol';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Parol üst-üstə düşür';
 $lang['CHOOSE_PASS_REG_OK'] = 'Parol üst-üstə düşür, siz başlaya bilərsiniz qeydiyyat';
 $lang['CHOOSE_PASS_FAILED'] = 'Parolu dəyişdirmək üçün, düzgün yazmaq lazımdır cari parol';
@@ -1484,6 +1487,9 @@ $lang['OFF'] = 'təcrübəsi';
 $lang['MEMORY'] = 'Madam: ';
 $lang['QUERIES'] = 'sorğu';
 $lang['LIMIT'] = 'Məhdudiyyətlər:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Pulsuz download və maksimum sürət!';
@@ -1511,6 +1517,8 @@ $lang['BOLD'] = 'Qalın mətn: [b]text[/b] (əsas birləşməsi Ctrl+B)';
 $lang['ITALIC'] = 'Курсивный mətn: [i]text[/i] (əsas birləşməsi Ctrl+ı)';
 $lang['UNDERLINE'] = 'Qeyd mətni: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый mətn: [s]text[/s] (Ctrl+c)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Sitat mətn: [quote]text[/quote] (əsas birləşməsi Ctrl+M)';
 $lang['IMG_TITLE'] = 'Şəkil daxil edin: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'URL-ünvanı';
@@ -1640,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'GZİP sıxılma';
 $lang['NOT_AVAILABLE'] = 'Mövcud deyil';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Saxlama məlumat';
 $lang['CLEAR_CACHE'] = 'Keşi Sil';
-$lang['TEMPLATES'] = 'Şablonlar';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Səviyyəsi istifadəçilər';
@@ -2061,6 +2070,7 @@ $lang['NOAVATAR'] = 'Yoxdur avatar';
 $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Haqqında məlumat IP-ünvanı';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Göstərmək модераторам index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> əvvəlcədən moderation</h4> <h6>İf yoxdur paylayıcı statusu, # və ya t bu bölmədə, o cümlədən подразделы, paylanması, avtomatik olur bu status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Dağıtım statusu ilə bağlı şərh</h4> <h6>Şərh sizə buraxıcıya edilən səhvləri qeyd etməyə imkan verir. Əgər statuslar natamamdırsa, buraxılış menecerinə buraxılış</h6>düzəltmək üçün buraxılış cavab forması mövcuddur';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding bonus toxum </h4> <h6> Sayı yayılmasının verir, istifadəçi və boy bonuslar onlar üçün (bir dəfə doldurulması saat) </h6>';

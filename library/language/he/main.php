@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'זמין';
 $lang['DISABLED'] = 'נכים';
 $lang['ERROR'] = 'שגיאה';
 $lang['SELECT_ACTION'] = 'בחר פעולה';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'הבא';
 $lang['PREVIOUS_PAGE'] = 'הקודם';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'לחץ על %sHere%s לחזור מנחה הבקר
 $lang['CLICK_RETURN_GROUP'] = 'לחץ על %sHere%s לחזור קבוצת מידע';
 
 $lang['ADMIN_PANEL'] = 'ללכת פנל ניהול';
-$lang['ALL_CACHE'] = 'כל המטמון';
 $lang['ALL_CACHE_CLEARED'] = 'המטמון נוקה';
 $lang['ALL_TEMPLATE_CLEARED'] = 'תבנית המטמון נוקה';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore נוקה';
 $lang['BOARD_DISABLE'] = 'מצטער, פורום זה אינו זמין. תנסה לחזור מאוחר יותר';
 $lang['BOARD_DISABLE_CRON'] = 'פורום מושבת לצורך תחזוקה. תנסה לחזור מאוחר יותר';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'שדה הסיסמה לא חייב להיות ריק!';
 $lang['CHOOSE_PASS_ERR'] = 'נכנס הסיסמאות לא תואמות';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'הסיסמה חייבת להיות לפחות %d תווים';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'הסיסמה חייבת להיות לא יותר מ $d תווים';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'סיסמאות התאמה';
 $lang['CHOOSE_PASS_REG_OK'] = 'סיסמאות התאמה, אתה יכול להמשיך עם רישום';
 $lang['CHOOSE_PASS_FAILED'] = 'כדי לשנות את הסיסמה, אתה חייב בצורה נכונה לציין את הסיסמה הנוכחית';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'חופש';
 $lang['MEMORY'] = 'זיכרון: ';
 $lang['QUERIES'] = 'שאילתות';
 $lang['LIMIT'] = 'גבול:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'להורדה בחינם, במהירות המרבית!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'טקסט מודגש: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'טקסט נטוי: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'קו תחתון טקסט: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'טקסט חוצה: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'ציטוט טקסט: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'הוסף תמונה: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'כתובת';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'דחיסת Gzip';
 $lang['NOT_AVAILABLE'] = 'לא זמין';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'נקה מטמון';
-$lang['TEMPLATES'] = 'תבניות';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'רמות המשתמש';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'אין דמות';
 $lang['TRACKER_STATS'] = 'נתונים סטטיסטיים על הגשש';
 $lang['WHOIS_INFO'] = 'מידע על כתובת ה-IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'להראות על מנהלים. index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> מראש moderation</h4> <h6>If אתה לא צריך הפצות למעמד של v, #, או T בסעיף זה, לרבות סעיפים קטנים, החלוקה תהיה באופן אוטומטי לקבל את זה status</h6>';
 $lang['TOR_COMMENT'] = '<h4>הערה על מצב הפצה</h4> <h6>ההערה מאפשרת לך להצביע על השגיאות שנעשו למשחרר. אם הסטטוסים אינם שלמים, טופס תגובת שחרור זמין למנהל השחרור כדי לתקן את הגרסה</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding זרע בונוס </h4> <h6> מספר הפצות הם חילקו על ידי המשתמש, בגודל של בונוסים עבור אותם (זמני טעינה שעה) </h6>';

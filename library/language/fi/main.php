@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Käytössä';
 $lang['DISABLED'] = 'Käytöstä';
 $lang['ERROR'] = 'Virhe';
 $lang['SELECT_ACTION'] = 'Valitse toiminta';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Seuraava';
 $lang['PREVIOUS_PAGE'] = 'Edellinen';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klikkaa %sHere%s palata Moderaattori Ohjauspaneel
 $lang['CLICK_RETURN_GROUP'] = 'Klikkaa %sHere%s palata ryhmän tiedot';
 
 $lang['ADMIN_PANEL'] = 'Mene hallintapaneeliin';
-$lang['ALL_CACHE'] = 'Kaikki välimuistin';
 $lang['ALL_CACHE_CLEARED'] = 'Välimuisti on tyhjennetty';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Malli välimuisti on tyhjennetty';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore on selvitetty';
 $lang['BOARD_DISABLE'] = 'Anteeksi, tämä foorumi on poistettu käytöstä. Yritä tulla takaisin myöhemmin';
 $lang['BOARD_DISABLE_CRON'] = 'Foorumi on suljettu huollon. Yritä tulla takaisin myöhemmin';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Kenttään salasana ei saa olla tyhjä!';
 $lang['CHOOSE_PASS_ERR'] = 'Syötetyt salasanat eivät täsmää';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Salasanan on oltava vähintään %d merkkiä';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Salasana ei saa olla enää kuin $d merkkiä';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Salasanat täsmäävät';
 $lang['CHOOSE_PASS_REG_OK'] = 'Salasanat täsmäävät, voit jatkaa rekisteröintiä';
 $lang['CHOOSE_PASS_FAILED'] = 'Voit vaihtaa salasanan, sinun on oikein määrittää nykyinen salasana';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'pois';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'kyselyt';
 $lang['LIMIT'] = 'Raja:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Lataa ilmainen ja suurimmalla nopeudella!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Rohkea teksti: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursivoitu teksti: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Alleviivaa teksti: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Yliviivattu teksti: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Lainaus tekstistä: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Lisää kuva: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Ei saatavilla';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Tyhjennä Välimuisti';
-$lang['TEMPLATES'] = 'Malleja';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Käyttäjän tasolla';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Ei avatar';
 $lang['TRACKER_STATS'] = 'Tilastot tracker';
 $lang['WHOIS_INFO'] = 'Tietoa IP-osoite';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Näytä, että moderaattorit index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If sinulla ei ole jakaumat tilan v, #, tai T tässä osassa, mukaan lukien kohdissa, jakelu saavat automaattisesti tämän status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentti jakelun tilasta</h4> <h6>Kommentin avulla voit huomauttaa tehdyistä virheistä irtisanojalle. Jos tilat ovat epätäydellisiä, julkaisupäällikkö voi korjata julkaisun</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding siemen bonus </h4> <h6> Määrä jakaumat ovat jakoi käyttäjän ja koko bonukset niitä (latauksen kertaa tunnissa) </h6>';

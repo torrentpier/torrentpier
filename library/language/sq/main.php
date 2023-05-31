@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Të aktivizuara';
 $lang['DISABLED'] = 'Me aftësi të kufizuara';
 $lang['ERROR'] = 'Gabim';
 $lang['SELECT_ACTION'] = 'Zgjidhni veprim';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Tjetër';
 $lang['PREVIOUS_PAGE'] = 'E mëparshme';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliko %sHere%s të kthehen për të Moderator i P
 $lang['CLICK_RETURN_GROUP'] = 'Kliko %sHere%s të kthimit të grupit të informacionit';
 
 $lang['ADMIN_PANEL'] = 'Të shkuar për Administrimin e Panelit';
-$lang['ALL_CACHE'] = 'Të gjithë kujtesën e fshehtë';
 $lang['ALL_CACHE_CLEARED'] = 'Cache ka qenë pastruar';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache ka qenë pastruar';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ka qenë pastruar';
 $lang['BOARD_DISABLE'] = 'Na vjen keq, ky forum është me aftësi të kufizuara. Përpiqen për të ardhur sërish më vonë';
 $lang['BOARD_DISABLE_CRON'] = 'Forumi është poshtë për mirëmbajtje. Përpiqen për të ardhur sërish më vonë';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Fusha fjalëkalimi nuk duhet të jetë bosh!';
 $lang['CHOOSE_PASS_ERR'] = 'Hyrë në fjalëkalimet nuk përputhen';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Fjalëkalimin tuaj duhet të jetë të paktën %d karaktere';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Fjalëkalimin tuaj duhet të jetë jo më shumë se $d karaktere';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Fjalëkalimet ndeshje';
 $lang['CHOOSE_PASS_REG_OK'] = 'Fjalëkalimet ndeshje, ju mund të vazhdoni me regjistrimin';
 $lang['CHOOSE_PASS_FAILED'] = 'Për të ndryshuar fjalëkalimin, ju duhet të saktë të specifikoni fjalëkalimin aktual';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem-it: ';
 $lang['QUERIES'] = 'pyetje';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Shkarko pa pagesë dhe me shpejtësi maksimale!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Tekst Bold: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Theksoj tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citoj tekstin: [quote]text[/quote] (Ctrl+P)';
 $lang['IMG_TITLE'] = 'Fut imazhin: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Jo në dispozicion';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Qartë Cache';
-$lang['TEMPLATES'] = 'Templates';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Nivelet e përdoruesit';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Nuk ka avatar';
 $lang['TRACKER_STATS'] = 'Statistika mbi tracker';
 $lang['WHOIS_INFO'] = 'Informacionin në lidhje me adresën IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Tregojnë për moderatorët e index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Para-moderation</h4> <h6>If ju nuk keni shpërndarjet për statusin e v, #, ose T në këtë seksion, duke përfshirë seksionet, shpërndarja do të automatikisht të marrë këtë status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Koment mbi statusin e një shpërndarjeje</h4> <h6>Komenti ju lejon të tregoni gabimet e bëra te lëshuesi. Nëse statuset janë të paplota, një formular i përgjigjes së lëshimit është i disponueshëm për menaxherin e lëshimit për të korrigjuar lëshimin</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding farë bonus </h4> <h6> Numri i shpërndarjet janë dorëzuar nga përdoruesit dhe madhësia e shpërblime për ata (të akuzuar herë për një orë) </h6>';

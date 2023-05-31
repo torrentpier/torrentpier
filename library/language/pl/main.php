@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Włączony';
 $lang['DISABLED'] = 'Wyłączony';
 $lang['ERROR'] = 'Błąd';
 $lang['SELECT_ACTION'] = 'Wybierz akcję';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Dalej';
 $lang['PREVIOUS_PAGE'] = 'Poprzednie';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliknij przycisk %sHere%s aby powrócić do panel
 $lang['CLICK_RETURN_GROUP'] = 'Kliknij %sHere%s, aby powrócić do grupy';
 
 $lang['ADMIN_PANEL'] = 'Wejdź w Panel administracyjny';
-$lang['ALL_CACHE'] = 'Cały cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache został wyczyszczony';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache szablon został wyczyszczony';
-$lang['DATASTORE'] = 'Magazyn danych';
 $lang['DATASTORE_CLEARED'] = 'Repozytorium zostało oczyszczone';
 $lang['BOARD_DISABLE'] = 'Niestety, na tym forum jest wyłączona. Spróbuję wrócić później';
 $lang['BOARD_DISABLE_CRON'] = 'Forum nieczynny. Spróbuję wrócić później';
@@ -1464,6 +1463,10 @@ $lang['CHOOSE_PASS'] = 'Pole hasło nie może być puste!';
 $lang['CHOOSE_PASS_ERR'] = 'Wprowadzone hasła nie są takie same';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Twoje hasło musi mieć co najmniej %d postaci';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Twoje hasło musi być nie dłuższy niż $d postaci';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Hasła';
 $lang['CHOOSE_PASS_REG_OK'] = 'Hasła, możesz przystąpić do rejestracji';
 $lang['CHOOSE_PASS_FAILED'] = 'Aby zmienić hasło, należy poprawnie podać aktualne hasło';
@@ -1484,6 +1487,9 @@ $lang['OFF'] = 'od';
 $lang['MEMORY'] = 'Pani: ';
 $lang['QUERIES'] = 'zapytania';
 $lang['LIMIT'] = 'Ograniczenia:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Pobierz za darmo i na maksymalnej prędkości!';
@@ -1511,6 +1517,8 @@ $lang['BOLD'] = 'Pogrubiony tekst: [b]text[/b] (kombinacja klawiszy Ctrl+B)';
 $lang['ITALIC'] = 'Kursywa tekst: [i]text[/i] (kombinacja klawiszy Ctrl+i)';
 $lang['UNDERLINE'] = 'Podkreślenie tekstu: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Przekreślony tekst: [s]text[/s] (Ctrl+z)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Cytuję tekst: [quote]text[/quote] (kombinacja klawiszy Ctrl+M)';
 $lang['IMG_TITLE'] = 'Wstaw obraz: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Adres URL';
@@ -1640,8 +1648,9 @@ $lang['GZIP_COMPRESSION'] = 'Kompresja GZIP';
 $lang['NOT_AVAILABLE'] = 'Nie jest dostępny';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Magazyn danych';
 $lang['CLEAR_CACHE'] = 'Wyczyść Pamięć Podręczną';
-$lang['TEMPLATES'] = 'Szablony';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Poziomy użytkowników';
@@ -2061,6 +2070,7 @@ $lang['NOAVATAR'] = 'Brak avatara';
 $lang['TRACKER_STATS'] = 'Statystyki na tracker';
 $lang['WHOIS_INFO'] = 'Informacje na temat adresu IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Pokaż moderatorów index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> wstępnie moderation</h4> <h6>If nie mają rozkładu statusu, # lub t w tym temacie, w tym podklucze, rozdanie automatycznie dostaje ten status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentarz do statusu dystrybucji</h4> <h6>Komentarz pozwala wskazać wydawcy błędy popełnione. Jeśli statusy są niekompletne, menedżer wersji ma do dyspozycji formularz odpowiedzi na wydanie, aby poprawić wydanie</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding bonus nasiona </h4> <h6> Ilość dystrybucji podaje użytkownik i rozmiar bonusów dla nich (razem ładowanie godzinę) </h6>';

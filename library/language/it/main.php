@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Abilitato';
 $lang['DISABLED'] = 'Disabilitato';
 $lang['ERROR'] = 'Errore';
 $lang['SELECT_ACTION'] = 'Selezionare l\'azione';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Accanto';
 $lang['PREVIOUS_PAGE'] = 'Precedente';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Fare clic su %sHere%s per tornare al Pannello di 
 $lang['CLICK_RETURN_GROUP'] = 'Fare clic su %sHere%s per tornare al gruppo di informazioni';
 
 $lang['ADMIN_PANEL'] = 'Vai al Pannello di Amministrazione';
-$lang['ALL_CACHE'] = 'Tutta la cache';
 $lang['ALL_CACHE_CLEARED'] = 'La Cache è stato cancellato';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache dei Template è stato cancellato';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore è stato cancellato';
 $lang['BOARD_DISABLE'] = 'Ci spiace, ma questo forum è disabilitata. Tenta di tornare più tardi';
 $lang['BOARD_DISABLE_CRON'] = 'Il Forum è down per manutenzione. Tenta di tornare più tardi';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Campo per la password non deve essere vuoto!!!';
 $lang['CHOOSE_PASS_ERR'] = 'Le password inserite non corrispondono';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'La password deve essere di almeno %d caratteri';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'La password deve essere di non più di $d caratteri';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Password corrispondono';
 $lang['CHOOSE_PASS_REG_OK'] = 'Password corrispondono, si può procedere con la registrazione';
 $lang['CHOOSE_PASS_FAILED'] = 'Per modificare la password, è necessario specificare correttamente la password corrente';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'query';
 $lang['LIMIT'] = 'Limite:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Free Download alla massima velocità!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Il testo in grassetto: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Testo in corsivo: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Sottolineare il testo: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Testo barrato: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Preventivo testo: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Inserisci immagine: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'La compressione Gzip';
 $lang['NOT_AVAILABLE'] = 'Non disponibile';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cancella Cache';
-$lang['TEMPLATES'] = 'Modelli';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Livelli di utente';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Statistiche sul tracker';
 $lang['WHOIS_INFO'] = 'Informazioni sull\'indirizzo IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Visualizza sulla moderatori index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If non si hanno distribuzioni per lo stato di v, #, o T in questa sezione, comprese le sottosezioni, la distribuzione verrà automaticamente visualizzato questo status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Commento sullo stato di una distribuzione</h4> <h6>Il commento permette di segnalare gli errori commessi al releaser. Se gli stati sono incompleti, un modulo di risposta al rilascio è disponibile per il responsabile del rilascio per correggere il rilascio</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seme bonus </h4> <h6> Numero di distribuzioni sono consegnati dall\'utente e la dimensione di bonus per loro (i tempi di ricarica di un\'ora) </h6>';

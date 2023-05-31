@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Povoleno';
 $lang['DISABLED'] = 'Zdravotně postižené';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akce';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Další';
 $lang['PREVIOUS_PAGE'] = 'Předchozí';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klikněte %sHere%s vrátit se Moderátor Ovládac
 $lang['CLICK_RETURN_GROUP'] = 'Klikněte %sHere%s pro návrat do skupiny informace';
 
 $lang['ADMIN_PANEL'] = 'Jít do administračního Panelu';
-$lang['ALL_CACHE'] = 'Všechny cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache byla vymazána';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache byla vymazána';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore byl vymazán';
 $lang['BOARD_DISABLE'] = 'Omlouvám se, toto fórum je zakázáno. Zkuste se vrátit později';
 $lang['BOARD_DISABLE_CRON'] = 'Fórum je vypnutý. Zkuste se vrátit později';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Pole pro heslo nesmí být prázdné!';
 $lang['CHOOSE_PASS_ERR'] = 'Zadaná hesla se neshodují';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Vaše heslo musí být alespoň %d znaky';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Vaše heslo musí být delší než $d znaky';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Hesla se shodují';
 $lang['CHOOSE_PASS_REG_OK'] = 'Hesla se shodují, můžete pokračovat s registrací';
 $lang['CHOOSE_PASS_FAILED'] = 'Chcete-li změnit heslo, musíte správně zadat aktuální heslo';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'z';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'dotazy';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Stáhnout zdarma a při maximální rychlosti!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Tučný text: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Podtržení textu: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Přeškrtnutí textu: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Cituji text: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Vložit obrázek: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip komprese';
 $lang['NOT_AVAILABLE'] = 'Není k dispozici';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Vymazat Mezipaměť';
-$lang['TEMPLATES'] = 'Šablony';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Uživatelské úrovně';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Žádný avatar';
 $lang['TRACKER_STATS'] = 'Statistiky tracker';
 $lang['WHOIS_INFO'] = 'Informace o IP adrese';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Ukázat na moderátorů index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If nemáte rozdělení na stav v, #, nebo T v této sekci včetně podsekcí, distribuce automaticky obdrží tento status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentář ke stavu distribuce</h4> <h6>Komentář umožňuje upozornit vydavatele na chyby, kterých se dopustil. Pokud jsou stavy neúplné, má správce vydání k dispozici formulář pro odpověď na vydání, který opraví vydání</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Počet distribucí jsou předány uživatelem a velikost bonusů pro ně (doba nabíjení, hodiny) </h6>';

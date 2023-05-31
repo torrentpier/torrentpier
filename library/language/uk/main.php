@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Увімкнено';
 $lang['DISABLED'] = 'Вимкнено';
 $lang['ERROR'] = 'Помилка';
 $lang['SELECT_ACTION'] = 'Виберіть дію';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
 $lang['PREVIOUS_PAGE'] = 'Попер.';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Натисніть %sТут%s, щоб повер�
 $lang['CLICK_RETURN_GROUP'] = 'Натисніть %sТут%s, щоб повернутися до інформації про групи';
 
 $lang['ADMIN_PANEL'] = 'Перейти до панелі адміністрування';
-$lang['ALL_CACHE'] = 'Увесь кеш';
 $lang['ALL_CACHE_CLEARED'] = 'Кеш очищено';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Кеш шаблону очищено';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore очищено';
 $lang['BOARD_DISABLE'] = 'Вибачте, цей форум відключений. Спробуйте повернутися пізніше';
 $lang['BOARD_DISABLE_CRON'] = 'Форум відключений на технічне обслуговування. Спробуйте повернутися пізніше';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Поле для пароля не має бути пор
 $lang['CHOOSE_PASS_ERR'] = 'Введені паролі не співпадають';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Пароль повинен бути не коротше %d символів';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ваш пароль повинен бути не довший ніж $d символи';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Паролі збігаються';
 $lang['CHOOSE_PASS_REG_OK'] = 'Паролі збігаються, можете продовжити реєстрацію';
 $lang['CHOOSE_PASS_FAILED'] = 'Для зміни пароля, ви повинні правильно вказати поточний пароль';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'вимк';
 $lang['MEMORY'] = 'Пам\'ять: ';
 $lang['QUERIES'] = 'запити';
 $lang['LIMIT'] = 'Ліміт:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Завантажити безкоштовно і на максимальній швидкості!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Жирний текст: [b]текст[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Курсив: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Підкреслений текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Закреслений текст: [s]текст[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Вставити зображення: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Посилання';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Стискання Gzip';
 $lang['NOT_AVAILABLE'] = 'Недоступне';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Очистити кеш';
-$lang['TEMPLATES'] = 'Шаблони';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Рівні користувачів';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Немає аватара';
 $lang['TRACKER_STATS'] = 'Статистика на трекері';
 $lang['WHOIS_INFO'] = 'Інформація про IP адресу';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Показувати на головній для модераторів';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерація</h4> <h6>Якщо у релізера немає роздач із статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> або <span class="tor-icon tor-dup">T</span> в поточному розділі, включаючи підрозділи, то роздача автоматично отримує цей статус</h6>';
 $lang['TOR_COMMENT'] = '<h4>Коментар щодо статусу розповсюдження</h4> <h6>Коментар дозволяє вказати на помилки, допущені релізеру. Якщо статуси неповні, менеджеру випуску доступна форма відповіді на випуск, щоб виправити випуск</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Додавання сідбонусу</h4><h6>Кількість роздач, що підтримуються користувачем та розмір нарахування бонусів за них (нарахування раз на годину)</h6>';

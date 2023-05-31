@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Engedélyezett';
 $lang['DISABLED'] = 'Fogyatékkal élő';
 $lang['ERROR'] = 'Hiba';
 $lang['SELECT_ACTION'] = 'Válassza ki a műveletet';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Következő';
 $lang['PREVIOUS_PAGE'] = 'Előző';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kattintson %sHere%s vissza Moderátor Vezérlőpu
 $lang['CLICK_RETURN_GROUP'] = 'Kattintson %sHere%s vissza csoport információk';
 
 $lang['ADMIN_PANEL'] = 'Menj Adminisztrációs Panel';
-$lang['ALL_CACHE'] = 'Az összes cache';
 $lang['ALL_CACHE_CLEARED'] = 'Gyorsítótár tartalmának törlése';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Sablon gyorsítótár tartalmának törlése';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore tisztázódott';
 $lang['BOARD_DISABLE'] = 'Sajnálom, ez a fórum le van tiltva. Próbálja meg, hogy jöjjön vissza később';
 $lang['BOARD_DISABLE_CRON'] = 'Fórum karbantartás miatt. Próbálja meg, hogy jöjjön vissza később';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Mező a jelszó nem lehet üres!';
 $lang['CHOOSE_PASS_ERR'] = 'A beírt jelszavak nem egyeznek.';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'A jelszó legalább %d karakterek';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'A jelszót nem lehet hosszabb, mint $d karakterek';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Jelszavak mérkőzés';
 $lang['CHOOSE_PASS_REG_OK'] = 'Jelszó egyezik, akkor folytassa a regisztráció';
 $lang['CHOOSE_PASS_FAILED'] = 'A jelszó módosításához meg kell helyesen adja meg a jelenlegi jelszavát';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'le';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'lekérdezések';
 $lang['LIMIT'] = 'Korlát:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Töltse le ingyenes maximális sebességgel!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Félkövér szöveg: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Dőlt szöveg: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Aláhúzott szöveg: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout szöveg: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Idézet szövege: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Kép beszúrása: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip tömörítés';
 $lang['NOT_AVAILABLE'] = 'Nem elérhető';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache Ürítése';
-$lang['TEMPLATES'] = 'Sablonok';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Felhasználói szinten';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Nincs avatar';
 $lang['TRACKER_STATS'] = 'A statisztikák a tracker';
 $lang['WHOIS_INFO'] = 'Információ IP cím';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Mutasd meg a moderátorok a index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Előre moderation</h4> <h6>If nem disztribúciók, hogy a status v, #, vagy T ebben a részben, beleértve alfejezetek, az engedély automatikusan megkapja ezt a status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Megjegyzés egy disztribúció állapotához</h4> <h6>A megjegyzés lehetővé teszi, hogy rámutasson a kiadónak az elkövetett hibákra. Ha az állapotok hiányosak, a kiadáskezelő rendelkezésére áll egy kiadási válaszűrlap a</h6>kiadás javításához';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding mag bónusz </h4> <h6> Száma disztribúciók vannak adta ki a felhasználó által a méret bónuszokat őket (töltési idő egy óra) </h6>';

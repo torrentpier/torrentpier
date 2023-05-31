@@ -59,6 +59,7 @@ $lang['ENABLED'] = '已激活';
 $lang['DISABLED'] = '未启用';
 $lang['ERROR'] = '错误';
 $lang['SELECT_ACTION'] = '选择操作';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = '继续';
 $lang['PREVIOUS_PAGE'] = '后退';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '单击 %sHere%s 返回到版主控制面板';
 $lang['CLICK_RETURN_GROUP'] = '单击 %sHere%s 返回小组信息';
 
 $lang['ADMIN_PANEL'] = '转到管理面板';
-$lang['ALL_CACHE'] = '所有缓存';
 $lang['ALL_CACHE_CLEARED'] = '缓存已被清除';
 $lang['ALL_TEMPLATE_CLEARED'] = '模板缓存已被清除';
-$lang['DATASTORE'] = '数据存储';
 $lang['DATASTORE_CLEARED'] = '数据存储已被清除';
 $lang['BOARD_DISABLE'] = '对不起，本论坛被禁用。请试着以后再来。';
 $lang['BOARD_DISABLE_CRON'] = '论坛正在维护。请试着以后再来。';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = '领域的密码不是空的！';
 $lang['CHOOSE_PASS_ERR'] = '输入密码不匹配';
 $lang['CHOOSE_PASS_ERR_MIN'] = '你的密码必须至少%d字';
 $lang['CHOOSE_PASS_ERR_MAX'] = '密码不能超过 $d 个字符';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = '密码比赛';
 $lang['CHOOSE_PASS_REG_OK'] = '密码相匹配，你可以继续进行注册';
 $lang['CHOOSE_PASS_FAILED'] = '要改变密码，你必须正确地指定的电流密码';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = '关闭';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = '查询';
 $lang['LIMIT'] = '限制：';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = '免费下载，并在最大速度！';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = '粗体文字：[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = '斜体文字：[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下划线的案文：[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '删除线文本：[s]text[/s](Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '引文：[quote]text[/quote](Ctrl+Q)';
 $lang['IMG_TITLE'] = '插入圖片： [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = '不提供';
 
 // Clear Cache
+$lang['DATASTORE'] = '数据存储';
 $lang['CLEAR_CACHE'] = '清除缓存';
-$lang['TEMPLATES'] = '模板';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = '用户一级';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = '没有头';
 $lang['TRACKER_STATS'] = '统计数据的跟踪器';
 $lang['WHOIS_INFO'] = '信息有关的IP地址';
 $lang['SHOW_MOD_HOME_PAGE'] = '显示在主持人的index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>预moderation</h4> <h6>If你没有分布状态的v,#,或在本部分，包括小节，分布将自动收到这status</h6>';
 $lang['TOR_COMMENT'] = '<h4>對分發狀態的評論</h4> <h6>評論允許您向發布者指出錯誤。如果狀態不完整，發布經理可以使用發布響應表來更正發布</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding种奖金</h4> <h6>数的分配交给了由用户和大小的奖金(费时间一个小时)</h6>';

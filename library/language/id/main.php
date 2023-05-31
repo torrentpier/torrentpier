@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Diaktifkan';
 $lang['DISABLED'] = 'Keluarga';
 $lang['ERROR'] = 'Kesalahan';
 $lang['SELECT_ACTION'] = 'Pilih action';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Berikutnya';
 $lang['PREVIOUS_PAGE'] = 'Sebelumnya';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik %sHere%s untuk kembali ke Moderator Panel Ko
 $lang['CLICK_RETURN_GROUP'] = 'Klik %sHere%s untuk kembali ke kelompok informasi';
 
 $lang['ADMIN_PANEL'] = 'Pergi ke Panel Administrasi';
-$lang['ALL_CACHE'] = 'Semua cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache yang telah dibersihkan';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache yang telah dibersihkan';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore yang telah dibersihkan';
 $lang['BOARD_DISABLE'] = 'Maaf, forum ini dinonaktifkan. Cobalah untuk datang kembali nanti';
 $lang['BOARD_DISABLE_CRON'] = 'Forum sedang dalam pemeliharaan. Cobalah untuk datang kembali nanti';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Field untuk password tidak boleh kosong!';
 $lang['CHOOSE_PASS_ERR'] = 'Masukkan kata sandi tidak cocok';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Kata sandi anda harus setidaknya %d karakter';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Kata sandi anda harus tidak lebih dari $d karakter';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Password yang sesuai';
 $lang['CHOOSE_PASS_REG_OK'] = 'Password yang sesuai, anda dapat melanjutkan dengan pendaftaran';
 $lang['CHOOSE_PASS_FAILED'] = 'Untuk mengubah password, anda harus benar menentukan kata sandi saat ini';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'query';
 $lang['LIMIT'] = 'Batas:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Download gratis dan dengan kecepatan maksimum!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Teks tebal: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Menggarisbawahi teks: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Teks coret: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Kutipan teks: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Sisipkan gambar: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Tidak tersedia';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Template';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Tingkat pengguna';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Tidak ada avatar';
 $lang['TRACKER_STATS'] = 'Statistik tracker';
 $lang['WHOIS_INFO'] = 'Informasi tentang alamat IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Menunjukkan pada moderator index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pra-moderation</h4> <h6>If anda tidak memiliki distribusi status v, #, atau T pada bagian ini, termasuk subbagian, distribusi otomatis akan menerima ini status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Mengomentari status distribusi</h4> <h6>Komentar memungkinkan Anda menunjukkan kesalahan yang dibuat pada penerbit. Jika status tidak lengkap, formulir respons rilis tersedia untuk manajer rilis untuk memperbaiki rilis</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding benih bonus </h4> <h6> Jumlah distro yang diberikan oleh pengguna dan ukuran bonus untuk mereka (pengisian kali dalam satu jam) </h6>';

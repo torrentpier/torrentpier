@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Etkin';
 $lang['DISABLED'] = 'Devre dışı';
 $lang['ERROR'] = 'Hata';
 $lang['SELECT_ACTION'] = 'Seçin eylem';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
 $lang['PREVIOUS_PAGE'] = 'Önceki';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '%sHere%s Kontrol Paneli Moderatör dönmek için 
 $lang['CLICK_RETURN_GROUP'] = '%sHere%s bilgi grup geri dönmek için tıklayın';
 
 $lang['ADMIN_PANEL'] = 'Yönetim Paneline git';
-$lang['ALL_CACHE'] = 'Tüm önbellek';
 $lang['ALL_CACHE_CLEARED'] = 'Önbellek temizlendi';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Şablon önbelleği temizlendi';
-$lang['DATASTORE'] = 'Veri deposuna';
 $lang['DATASTORE_CLEARED'] = 'Veri deposu temizlendi';
 $lang['BOARD_DISABLE'] = 'Üzgünüm, bu forumu devre dışı bırakılır. Sonra geri gelmeye çalışın';
 $lang['BOARD_DISABLE_CRON'] = 'Forum bakım için aşağı. Sonra geri gelmeye çalışın';
@@ -1465,6 +1464,10 @@ $lang['CHOOSE_PASS'] = 'Parola alanı boş olamaz!';
 $lang['CHOOSE_PASS_ERR'] = 'Girilen şifreler eşleşmiyor';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Şifrenizi %d en azından karakter olmalıdır';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Şifrenizi $d artık karakter olması gerekir';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Parolalar eşleşmiyor';
 $lang['CHOOSE_PASS_REG_OK'] = 'Şifreler aynı, kayıt devam edebilirsiniz';
 $lang['CHOOSE_PASS_FAILED'] = 'Şifreyi değiştirmek için doğru, geçerli parola belirtmeniz gerekir';
@@ -1485,6 +1488,9 @@ $lang['OFF'] = 'kapalı';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'sorguları';
 $lang['LIMIT'] = 'Sınırı:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Özgür ve maksimum hızda.';
@@ -1512,6 +1518,8 @@ $lang['BOLD'] = '(Ctrl+B)kalın metin: [b]text[/b]';
 $lang['ITALIC'] = 'İtalik metin: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = '(Ctrl+U)altı çizili metin: [u]text[/u]';
 $lang['STRIKEOUT'] = '(Ctrl+S)üstü çizili metin: [s]text[/s]';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '(Ctrl+Q)alıntı metin: [quote]text[/quote]';
 $lang['IMG_TITLE'] = 'Resim ekle: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1641,8 +1649,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip sıkıştırma';
 $lang['NOT_AVAILABLE'] = 'Mevcut değil';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Veri deposuna';
 $lang['CLEAR_CACHE'] = 'Önbelleği Temizle';
-$lang['TEMPLATES'] = 'Şablonları';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Kullanıcı seviyeleri';
@@ -2062,6 +2071,7 @@ $lang['NOAVATAR'] = 'Hayır avatar';
 $lang['TRACKER_STATS'] = 'İzleyici istatistikleri';
 $lang['WHOIS_INFO'] = 'IP adresi hakkında bilgi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Yöneticiler üzerinde index.php göster';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = 'V bu bölümde, * ya da T, kısımlar da dahil olmak üzere durumu dağılımları gerekmez <h4><span class="tor-icon tor-dup">&#8719;</span> Öncesi moderation</h4> <h6>İf, dağıtım otomatik olarak bu status</h6> almak';
 $lang['TOR_COMMENT'] = '<h4>Bir dağıtımın durumu hakkında yorum yapın</h4> <h6>Yorum, yayınlayıcıya yapılan hataları belirtmenizi sağlar. Durumlar eksikse sürüm</h6>düzeltmek için sürüm yöneticisine bir yayın yanıt formu sunulur.';
 $lang['SEED_BONUS_ADD'] = 'Dağılımları <h4>Adding tohum bonus </h4> <h6> Numarası </h6> kullanıcı ve onlar için ikramiye boyutu (saatte şarj) dağıtıldı';

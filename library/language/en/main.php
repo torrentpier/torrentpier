@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Enabled';
 $lang['DISABLED'] = 'Disabled';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Select action';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Next';
 $lang['PREVIOUS_PAGE'] = 'Previous';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Click %sHere%s to return to Moderator Control Pan
 $lang['CLICK_RETURN_GROUP'] = 'Click %sHere%s to return to group information';
 
 $lang['ADMIN_PANEL'] = 'Go to Administration Panel';
-$lang['ALL_CACHE'] = 'All cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
 $lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is down for maintenance. Try to come back later';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Field for the password must not be empty!';
 $lang['CHOOSE_PASS_ERR'] = 'Entered passwords do not match';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Your password must be at least %d characters';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Your password must be no longer than $d characters';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Passwords match';
 $lang['CHOOSE_PASS_REG_OK'] = 'Passwords match, you can proceed with the registration';
 $lang['CHOOSE_PASS_FAILED'] = 'To change the password, you must correctly specify the current password';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'queries';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Download free and at maximum speed!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Bold text: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Underline text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout text: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Quote text: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Not available';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Templates';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'User levels';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Statistics on the tracker';
 $lang['WHOIS_INFO'] = 'Information about IP address';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Show on moderators the index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If you do not have distributions to the status of v, #, or T in this section, including subsections, the distribution will automatically receive this status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Number of distributions are handed out by the user and the size of bonuses for them (charging times an hour) </h6>';

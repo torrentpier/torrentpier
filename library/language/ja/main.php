@@ -59,6 +59,7 @@ $lang['ENABLED'] = '有効な';
 $lang['DISABLED'] = '障害者';
 $lang['ERROR'] = 'エラー';
 $lang['SELECT_ACTION'] = '選択行動';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = '次へ';
 $lang['PREVIOUS_PAGE'] = '前';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'をクリックし%sHere%s帰モデレーター�
 $lang['CLICK_RETURN_GROUP'] = 'をクリックし%sHere%s戻グループ情報';
 
 $lang['ADMIN_PANEL'] = 'く管理パネル';
-$lang['ALL_CACHE'] = 'すべてのキャッシュ';
 $lang['ALL_CACHE_CLEARED'] = 'キャッシュはクリアされてい';
 $lang['ALL_TEMPLATE_CLEARED'] = 'テンプレートキャッシュはクリアされてい';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastoreてクリア';
 $lang['BOARD_DISABLE'] = 'このフォーラムが無効になっています。 てみても、後';
 $lang['BOARD_DISABLE_CRON'] = 'フォースを実現します。 てみても、後';
@@ -1465,6 +1464,10 @@ $lang['CHOOSE_PASS'] = '分野のパスワードは空です！';
 $lang['CHOOSE_PASS_ERR'] = '入力したパスワードが一致しない';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'パスワードが必要で、少なくとも%d文字';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'パスワードは $d 文字以内にする必要があります';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'パスワードに一致';
 $lang['CHOOSE_PASS_REG_OK'] = 'パスワード試合ができ、登録';
 $lang['CHOOSE_PASS_FAILED'] = 'パスワードを変更し、正しく認識しなければならな現在のパスワード';
@@ -1485,6 +1488,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = '問合せ';
 $lang['LIMIT'] = '限度額：';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = '無料ダウンロードと最高速度です！';
@@ -1512,6 +1518,8 @@ $lang['BOLD'] = '大胆な文:[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = 'テキストを斜体:[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下線文:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout文:[s]text[/s](Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '引用文:[quote]text[/quote](Ctrl+Q)';
 $lang['IMG_TITLE'] = '画像を挿入: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1641,8 +1649,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip圧縮';
 $lang['NOT_AVAILABLE'] = '不可';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = '透明キャッシュ';
-$lang['TEMPLATES'] = 'テンプレート';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'ユーザーレベル';
@@ -2062,6 +2071,7 @@ $lang['NOAVATAR'] = 'ないアバター';
 $lang['TRACKER_STATS'] = '統計のトラッカー';
 $lang['WHOIS_INFO'] = 'に関する情報IPアドレス';
 $lang['SHOW_MOD_HOME_PAGE'] = 'ショーのモデレーターのindex.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>前moderation</h4> <h6>Ifできない分布の状況v#,またはTをとことん追究しながら、同時に処分布を自動的に受け取るこstatus</h6>';
 $lang['TOR_COMMENT'] = '<h4>ディストリビューションのステータスに関するコメント</h4> <h6>コメントにより、リリーサーに対して行われたエラーを指摘できます。ステータスが不完全な場合、リリース マネージャはリリース</h6>を修正するためにリリース応答フォームを使用できます。';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding種ボーナス</h4> <h6>数の分布には、ユーザのサイズの賞与（充電倍時)</h6>';

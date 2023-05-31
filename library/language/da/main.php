@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktiveret';
 $lang['DISABLED'] = 'Handicappede';
 $lang['ERROR'] = 'Fejl';
 $lang['SELECT_ACTION'] = 'Vælg handling';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Næste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik på %sHere%s for at vende tilbage til Modera
 $lang['CLICK_RETURN_GROUP'] = 'Klik på %sHere%s for at vende tilbage til gruppen oplysninger';
 
 $lang['ADMIN_PANEL'] = 'Gå til Administration Panel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache er blevet ryddet';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Skabelon cache er blevet ryddet';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datalager har været ryddet';
 $lang['BOARD_DISABLE'] = 'Beklager, men dette forum er deaktiveret. Prøv at komme tilbage senere';
 $lang['BOARD_DISABLE_CRON'] = 'Forum er nede for vedligeholdelse. Prøv at komme tilbage senere';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Feltet til adgangskoden må ikke være tom!';
 $lang['CHOOSE_PASS_ERR'] = 'Indtastede passwords matcher ikke';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Din adgangskode skal være på mindst %d tegn';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Din adgangskode må ikke være længere end $d tegn';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Adgangskoder matcher';
 $lang['CHOOSE_PASS_REG_OK'] = 'Adgangskoder matcher, du kan gå videre med tilmelding';
 $lang['CHOOSE_PASS_FAILED'] = 'For at ændre den adgangskode, skal du angive den aktuelle adgangskode';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'forespørgsler';
 $lang['LIMIT'] = 'Grænse:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Hent gratis og ved maksimal hastighed!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Fed tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursiv tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understreget tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Overstrege tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citat af tekst: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Indsæt billede: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip-komprimering';
 $lang['NOT_AVAILABLE'] = 'Ikke tilgængelig';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Ryd Cache';
-$lang['TEMPLATES'] = 'Skabeloner';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Bruger niveauer';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Ingen avatar';
 $lang['TRACKER_STATS'] = 'Statistik på tracker';
 $lang['WHOIS_INFO'] = 'Oplysninger om IP-adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Vis på moderatorer den index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du ikke har udlodning til status af v, #, eller T i dette afsnit, herunder de afsnit, distribution vil automatisk modtage dette status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentar til status for en distribution</h4> <h6>Kommentaren giver dig mulighed for at påpege de fejl, der er lavet til udgiveren. Hvis statusserne er ufuldstændige, er en frigivelsessvarformular tilgængelig for udgivelsesadministratoren for at rette udgivelsen</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding frø bonus </h4> <h6> Antallet af distributioner, som er udleveret af brugeren, og størrelsen af bonusser til dem (opladning gange i timen) </h6>';

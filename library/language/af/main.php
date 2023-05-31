@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'enabled';
 $lang['DISABLED'] = 'gestremde';
 $lang['ERROR'] = 'fout';
 $lang['SELECT_ACTION'] = 'Kies aksie';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'volgende';
 $lang['PREVIOUS_PAGE'] = 'vorige';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik %sHere%s om terug te gaan na Moderator Kontr
 $lang['CLICK_RETURN_GROUP'] = 'Klik %sHere%s om terug te keer na groepinligting';
 
 $lang['ADMIN_PANEL'] = 'Gaan na die administrasiepaneel';
-$lang['ALL_CACHE'] = 'Alle kas';
 $lang['ALL_CACHE_CLEARED'] = 'Cache is skoongemaak';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Sjabloon kas is skoongemaak';
-$lang['DATASTORE'] = 'datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore is skoongemaak';
 $lang['BOARD_DISABLE'] = 'Jammer, hierdie forum is gedeaktiveer. Probeer om later terug te kom';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is af vir onderhoud. Probeer om later terug te kom';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Veld vir die wagwoord moet nie leeg wees nie!';
 $lang['CHOOSE_PASS_ERR'] = 'Ingevoerde wagwoorde stem nie ooreen nie';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Jou wagwoord moet ten minste %d karakters wees';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Jou wagwoord moet nie meer as $d karakters wees nie';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Wagwoorde pas';
 $lang['CHOOSE_PASS_REG_OK'] = 'Wagwoorde ooreenstem, jy kan voortgaan met die registrasie';
 $lang['CHOOSE_PASS_FAILED'] = 'Om die wagwoord te verander, moet u die huidige wagwoord korrek spesifiseer';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'af';
 $lang['MEMORY'] = 'Mem:';
 $lang['QUERIES'] = 'navrae';
 $lang['LIMIT'] = 'perk:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Laai gratis en teen maksimum spoed!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Vet teks: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Kursiewe teks: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Onderstreep teks: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Strikeout-teks: [s]text[/s] (Ctrl + S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Aanhalingstekst: [quote]text[/quote] (Ctrl + Q)';
 $lang['IMG_TITLE'] = 'Voeg prent in: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip kompressie';
 $lang['NOT_AVAILABLE'] = 'Nie beskikbaar nie';
 
 // Clear Cache
+$lang['DATASTORE'] = 'datastore';
 $lang['CLEAR_CACHE'] = 'Vee kas uit';
-$lang['TEMPLATES'] = 'templates';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Gebruikersvlakke';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Geen avatar nie';
 $lang['TRACKER_STATS'] = 'Statistiek op die spoorsnyer';
 $lang['WHOIS_INFO'] = 'Inligting oor IP-adres';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Wys op moderators die index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Voormoderering</h4> <h6>Indien u nie verspreidings het na die status van v, # of T in hierdie afdeling, insluitend onderafdelings nie, sal die verspreiding hierdie status outomaties</h6> ontvang';
 $lang['TOR_COMMENT'] = '<h4>Lewer kommentaar op die status van \'n verspreiding</h4> <h6>Die opmerking laat jou toe om die foute wat aan die vrysteller gemaak is, uit te wys. As die statusse onvolledig is, is \'n vrystelling-antwoordvorm beskikbaar vir die vrystellingbestuurder om die vrystelling</h6>reg te stel';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding saad bonus </h4> <h6> Aantal verdelings word uitgedeel deur die gebruiker en die grootte van bonusse vir hulle (laai tye per uur) </h6>';

@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Activat';
 $lang['DISABLED'] = 'Dezactivate';
 $lang['ERROR'] = 'Eroare';
 $lang['SELECT_ACTION'] = 'Selectați acțiune';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Următoarea';
 $lang['PREVIOUS_PAGE'] = 'Anterior';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Faceți clic pe %sHere%s pentru a reveni la Moder
 $lang['CLICK_RETURN_GROUP'] = 'Faceți clic pe %sHere%s pentru a reveni la informațiile de grup';
 
 $lang['ADMIN_PANEL'] = 'Du-te la Panoul de Administrare';
-$lang['ALL_CACHE'] = 'Toate cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache-ul a fost eliminat';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Șablon cache a fost eliminat';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore a fost eliminat';
 $lang['BOARD_DISABLE'] = 'Ne pare rău, acest forum este dezactivat. Încercați să reveniți mai târziu';
 $lang['BOARD_DISABLE_CRON'] = 'Forumul este oprit pentru întreținere. Încercați să reveniți mai târziu';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Câmpul pentru parolă nu trebuie să fie gol!';
 $lang['CHOOSE_PASS_ERR'] = 'Parolele introduse nu se potrivesc';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Parola trebuie să fie de cel puțin %d caractere';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Parola trebuie să fie nu mai mult de $d caractere';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Parolele se potrivesc';
 $lang['CHOOSE_PASS_REG_OK'] = 'Parolele se potrivesc, puteți continua cu înregistrarea';
 $lang['CHOOSE_PASS_FAILED'] = 'Pentru a schimba parola, trebuie să specificați în mod corect parola curentă';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'interogări';
 $lang['LIMIT'] = 'Limita:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Descărcați gratuit și la viteza maximă!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Bold text: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Subliniere text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Ratari text: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Text citat: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Inserați imaginea: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Nu este disponibil';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Template-uri';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Niveluri de utilizatori';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Nu avatar';
 $lang['TRACKER_STATS'] = 'Statisticile pe tracker';
 $lang['WHOIS_INFO'] = 'Informații despre adresa IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Spectacol pe la moderatori index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If nu au distribuții la statutul de v, #, sau T în această secțiune, inclusiv subcapitole, distribuția va primi automat acest status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Comentariu despre starea unei distribuții</h4> <h6>Comentariul vă permite să subliniați erorile făcute la eliberator. Dacă stările sunt incomplete, un formular de răspuns la eliberare este disponibil pentru managerul de ediție pentru a corecta ediția</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding semințe bonus </h4> <h6> Număr de distribuții sunt înmânate de către utilizator și dimensiunea de bonusuri pentru ei (de încărcare de ori pe oră) </h6>';

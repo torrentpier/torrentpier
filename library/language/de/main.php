@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktiviert';
 $lang['DISABLED'] = 'Deaktiviert';
 $lang['ERROR'] = 'Fehler';
 $lang['SELECT_ACTION'] = 'Wählen Sie "Aktion"';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Nächste';
 $lang['PREVIOUS_PAGE'] = 'Vorherige';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klicken Sie auf %sHere%s zurück zum Moderator Co
 $lang['CLICK_RETURN_GROUP'] = 'Klicken Sie auf %sHere%s zurück zum gruppieren von Informationen';
 
 $lang['ADMIN_PANEL'] = 'Gehen Sie zu " Administration Panel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache wurde gelöscht';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template-cache gelöscht wurde';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datenspeicher wurde gelöscht';
 $lang['BOARD_DISABLE'] = 'Sorry, dieses forum ist deaktiviert. Versuchen Sie, um später wieder';
 $lang['BOARD_DISABLE_CRON'] = 'Forum ist down für Wartung. Versuchen Sie, um später wieder';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Feld für das Passwort dürfen nicht leer sein!!!';
 $lang['CHOOSE_PASS_ERR'] = 'Eingegebenen Passwörter nicht übereinstimmen';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Ihr Passwort muss mindestens %d Zeichen';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ihr Passwort darf nicht länger als $d Zeichen';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Die Kennwörter übereinstimmen';
 $lang['CHOOSE_PASS_REG_OK'] = 'Die Kennwörter übereinstimmen, können Sie mit der Registrierung fortfahren';
 $lang['CHOOSE_PASS_FAILED'] = 'Um das Kennwort zu ändern, Sie müssen richtig geben Sie das aktuelle Passwort';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'Abfragen';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Kostenlos herunterladen und mit maximaler Geschwindigkeit!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Fettdruck: [b]text[/b] (Strg+B)';
 $lang['ITALIC'] = 'Kursiver text: [i]text[/i] (Strg+I)';
 $lang['UNDERLINE'] = 'Text unterstreichen: [u]text[/u] (Strg+U)';
 $lang['STRIKEOUT'] = 'Strikeout-text: [s]text[/s] (Strg+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Zitat text: [quote]text[/quote] (Strg+Q)';
 $lang['IMG_TITLE'] = 'Bild einfügen: [img]https://image_url[/img] (Strg+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip-Komprimierung';
 $lang['NOT_AVAILABLE'] = 'Nicht verfügbar';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache Löschen';
-$lang['TEMPLATES'] = 'Vorlagen';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Benutzerebenen';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Kein avatar';
 $lang['TRACKER_STATS'] = 'Statistiken über die tracker';
 $lang['WHOIS_INFO'] = 'Informationen über IP-Adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Zeigen Sie auf die Moderatoren index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If Sie nicht haben-Distributionen, um den status des v #, T in diesem Abschnitt, einschließlich der Unterbereiche, die Verteilung, erhalten automatisch diese status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentar zum Status einer Verteilung</h4> <h6>Mit dem Kommentar können Sie den Freigeber auf die gemachten Fehler hinweisen. Wenn die Status unvollständig sind, steht dem Freigabemanager ein Freigabeantwortformular zur Verfügung, um die Freigabe zu korrigieren</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Anzahl der Verteilungen, die übergeben werden durch den Benutzer und die Größe der Boni, die für Sie (laden mal eine Stunde) </h6>';

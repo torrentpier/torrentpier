@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Включено';
 $lang['DISABLED'] = 'Выключено';
 $lang['ERROR'] = 'Ошибка';
 $lang['SELECT_ACTION'] = 'Выберите действие';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'След.';
 $lang['PREVIOUS_PAGE'] = 'Пред.';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '%sВернуться к панели модера
 $lang['CLICK_RETURN_GROUP'] = '%sВернуться к информации о группах%s';
 
 $lang['ADMIN_PANEL'] = 'Администраторский раздел';
-$lang['ALL_CACHE'] = 'Весь кеш';
 $lang['ALL_CACHE_CLEARED'] = 'Кеш очищен';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Кеш шаблона очищен';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore очищен';
 $lang['BOARD_DISABLE'] = 'Извините, этот форум отключен. Попробуйте зайти позднее';
 $lang['BOARD_DISABLE_CRON'] = 'Форум отключен на техническое обслуживание. Попробуйте зайти позднее';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Поля для ввода пароля не должн�
 $lang['CHOOSE_PASS_ERR'] = 'Введенные пароли не совпадают';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Пароль должен быть не короче %d символов';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Пароль должен быть не длиннее %d символов';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Пароли совпадают';
 $lang['CHOOSE_PASS_REG_OK'] = 'Пароли совпадают, можете продолжить регистрацию';
 $lang['CHOOSE_PASS_FAILED'] = 'Для изменения пароля вы должны правильно указать текущий пароль';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'выкл';
 $lang['MEMORY'] = 'Память: ';
 $lang['QUERIES'] = 'запр.';
 $lang['LIMIT'] = 'Лимит:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Скачать бесплатно и на максимальной скорости!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Жирный текст: [b]текст[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Наклонный текст: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Вставить изображение: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Ссылка';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'сжатие Gzip';
 $lang['NOT_AVAILABLE'] = 'Недоступно';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Очистить кеш';
-$lang['TEMPLATES'] = 'Шаблона';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Уровни и права пользователей';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'Нет аватара';
 $lang['TRACKER_STATS'] = 'Статистика по трекеру';
 $lang['WHOIS_INFO'] = 'Информация о IP адресе';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Показывать модераторов на главной';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерация</h4> <h6>Если у релизера нет раздач со статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> или <span class="tor-icon tor-dup">T</span> в текущем разделе, включая подразделы, то раздача автоматически получает данный статус</h6>';
 $lang['TOR_COMMENT'] = '<h4>Комментарий к статусу раздачи</h4> <h6>Комментарий позволяет указать релизеру на допущенные ошибки. Если статус не финальный, релизеру доступна форма ответа на комментарий для исправления релиза</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Добавление сидбонуса</h4><h6>Кол-во раздаваемых раздач пользователем и размер начисления бонусов за них (начисления раз в час)</h6>';

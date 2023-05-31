@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Įjungtas';
 $lang['DISABLED'] = 'Neįgaliesiems';
 $lang['ERROR'] = 'Klaida';
 $lang['SELECT_ACTION'] = 'Pasirinkite veiksmą';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Kitas';
 $lang['PREVIOUS_PAGE'] = 'Ankstesnis';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Spustelėkite %sHere%s grįžti į Moderatorius V
 $lang['CLICK_RETURN_GROUP'] = 'Spustelėkite %sHere%s grįžti į grupės informacija';
 
 $lang['ADMIN_PANEL'] = 'Eikite į Administracijos Panelė';
-$lang['ALL_CACHE'] = 'Visi talpyklos';
 $lang['ALL_CACHE_CLEARED'] = 'Talpykla buvo išvalytas';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Šablonas buvo išvalyti talpyklą';
-$lang['DATASTORE'] = 'Duomenų laikmenos';
 $lang['DATASTORE_CLEARED'] = 'Duomenų laikmenos, buvo išvalytas';
 $lang['BOARD_DISABLE'] = 'Atsiprašau, šis forumas yra neįgalūs. Pabandykite sugrįžti vėliau';
 $lang['BOARD_DISABLE_CRON'] = 'Forumas neveikia dėl priežiūros darbų. Pabandykite sugrįžti vėliau';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Lauko slaptažodis negali būti tuščias!';
 $lang['CHOOSE_PASS_ERR'] = 'Įvesti slaptažodžiai nesutampa';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Slaptažodis turi būti bent %d simbolių';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Slaptažodis turi būti ne ilgiau, nei $d simbolių';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Slaptažodžius rungtynės';
 $lang['CHOOSE_PASS_REG_OK'] = 'Slaptažodžius rungtynės, galite tęsti registracijos';
 $lang['CHOOSE_PASS_FAILED'] = 'Norėdami pakeisti slaptažodį, turite teisingai nurodyti dabartinį slaptažodį';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'užklausų';
 $lang['LIMIT'] = 'Ribos:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Atsisiųsti nemokamai ir esant didžiausiam greičiui!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Bold tekstas: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Pasvirasis tekstas: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Pabrėžiama tekstas: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekstas: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citata tekstas: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Įterpti vaizdą: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip suspaudimo';
 $lang['NOT_AVAILABLE'] = 'Nėra';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Duomenų laikmenos';
 $lang['CLEAR_CACHE'] = 'Išvalyti Talpyklą';
-$lang['TEMPLATES'] = 'Šablonai';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Vartotojo lygis';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Informacijos apie IP adresą';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Rodyti moderatoriai, kad index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> iš Anksto moderation</h4> <h6>If jūs neturite paskirstymo statusą, v, #, ar T, šiame skirsnyje, įskaitant poskirsniuose, paskirstymo automatiškai gauti šį status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Komentaras apie platinimo būseną</h4> <h6>Komentaras leidžia nurodyti leidėjui padarytas klaidas. Jei būsenos neužbaigtos, leidimo tvarkyklei pateikiama atsakymo forma, kad ištaisytų</h6>leidimą';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding sėklos bonus </h4> <h6> Skaičiaus pasiskirstymas yra išdalinta vartotojo ir dydžio premijas už juos (įkrovimo laikas valandą) </h6>';

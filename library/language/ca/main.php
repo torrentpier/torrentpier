@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Habilitat';
 $lang['DISABLED'] = 'Discapacitats';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Seleccioneu acció';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Següent';
 $lang['PREVIOUS_PAGE'] = 'Anteriors';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Feu clic %sHere%s per tornar a Moderador Tauler d
 $lang['CLICK_RETURN_GROUP'] = 'Feu clic %sHere%s per tornar a grup d\'informació';
 
 $lang['ADMIN_PANEL'] = 'Anar al Panell d\'Administració';
-$lang['ALL_CACHE'] = 'Tota la memòria cau';
 $lang['ALL_CACHE_CLEARED'] = 'S\'han esborrat de la memòria cau';
 $lang['ALL_TEMPLATE_CLEARED'] = 'La plantilla de la memòria cau ha estat aclarit';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ha estat aclarit';
 $lang['BOARD_DISABLE'] = 'Ho sentim, aquest fòrum ha deshabilitat. Proveu de tornar més tard';
 $lang['BOARD_DISABLE_CRON'] = 'Fòrum tancat per manteniment. Proveu de tornar més tard';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = 'Camp de la contrasenya ha de ser no buit!';
 $lang['CHOOSE_PASS_ERR'] = 'Introduir les contrasenyes no coincideixen';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'La seva contrasenya ha de ser com a mínim %d personatges';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'La contrasenya ha de ser de no més de $d personatges';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Les contrasenyes partit';
 $lang['CHOOSE_PASS_REG_OK'] = 'Les contrasenyes partit, es pot procedir amb la inscripció';
 $lang['CHOOSE_PASS_FAILED'] = 'Per canviar la contrasenya, cal especificar correctament la contrasenya actual';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = 'fora';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'les consultes';
 $lang['LIMIT'] = 'Límit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Descarregar lliure i a la màxima velocitat!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = 'Text en negreta: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'El text en cursiva: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Underline text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Ratllat text: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Cita de text: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Insereix imatge: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'La compressió Gzip';
 $lang['NOT_AVAILABLE'] = 'No disponible';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Esborra La Memòria Cau';
-$lang['TEMPLATES'] = 'Plantilles';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Nivells d\'usuari';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Les estadístiques sobre el tracker';
 $lang['WHOIS_INFO'] = 'Informació sobre l\'adreça IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Mostra sobre els moderadors index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If que no tenen distribucions a l\'estat de v, # o T en aquesta secció, incloent subseccions, la distribució rebrà automàticament aquest status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Comentari sobre l\'estat d\'una distribució</h4> <h6>El comentari permet assenyalar els errors comesos al llançador. Si els estats són incomplets, el gestor de llançaments disposarà d\'un formulari de resposta de llançament per corregir la versió</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding llavor de bonificació </h4> <h6> Nombre de distribucions són lliurats per l\'usuari i la mida de bonificacions per a ells (càrrega vegades una hora) </h6>';

@@ -59,6 +59,7 @@ $lang['ENABLED'] = '사용 가능';
 $lang['DISABLED'] = '장애인';
 $lang['ERROR'] = '류';
 $lang['SELECT_ACTION'] = '선택 작업';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = '다음';
 $lang['PREVIOUS_PAGE'] = '이전';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '클릭 %sHere%s 를 반환하는 중재자는 제
 $lang['CLICK_RETURN_GROUP'] = '클릭 %sHere%s 를 반환하는 그룹의 정보';
 
 $lang['ADMIN_PANEL'] = '가을 패널 관리';
-$lang['ALL_CACHE'] = '모든 캐시';
 $lang['ALL_CACHE_CLEARED'] = '캐시 삭제';
 $lang['ALL_TEMPLATE_CLEARED'] = '템플릿 캐시 삭제';
-$lang['DATASTORE'] = '데이터 저장소';
 $lang['DATASTORE_CLEARED'] = '데이터 저장소를 삭제 되었습니다';
 $lang['BOARD_DISABLE'] = '안,이 포럼을 사용할 수 없습니다. 려고 나중에 다시 올';
 $lang['BOARD_DISABLE_CRON'] = '포럼은 아래를 위해 유지 관리합니다. 려고 나중에 다시 올';
@@ -1461,6 +1460,10 @@ $lang['CHOOSE_PASS'] = '필드에 비밀번호 비어 있을 수 없습니다!';
 $lang['CHOOSE_PASS_ERR'] = '입력한 비밀번호가 일치하지 않습니다.';
 $lang['CHOOSE_PASS_ERR_MIN'] = '비밀번호해야합니다 적어도 %d 자';
 $lang['CHOOSE_PASS_ERR_MAX'] = '비밀번호 더 이상 없어야합니다 $d 자';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = '비밀번호가 일치하는';
 $lang['CHOOSE_PASS_REG_OK'] = '비밀번호가 일치하는 계속 진행할 수 있습으로 등록';
 $lang['CHOOSE_PASS_FAILED'] = '비밀번호를 변경하려면 당신이 올바르게 지정해야 합니다 현재 비밀번호';
@@ -1481,6 +1484,9 @@ $lang['OFF'] = '륙';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = '쿼리';
 $lang['LIMIT'] = '제한:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = '무료로 다운로드에서 최대 속도!';
@@ -1508,6 +1514,8 @@ $lang['BOLD'] = '굵은 텍스트:[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = '이탤릭체 텍스트:[i]text[/i](Ctrl+)';
 $lang['UNDERLINE'] = '밑줄 텍스트:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '삼진 텍스트:[s]text[/s](Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '견적 텍스트:[quote]text[/quote](Ctrl+Q)';
 $lang['IMG_TITLE'] = '이미지 삽입: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1637,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip 으로 압축';
 $lang['NOT_AVAILABLE'] = '사용할 수 없';
 
 // Clear Cache
+$lang['DATASTORE'] = '데이터 저장소';
 $lang['CLEAR_CACHE'] = '캐';
-$lang['TEMPLATES'] = '템플릿';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = '사용자 레벨';
@@ -2058,6 +2067,7 @@ $lang['NOAVATAR'] = '아바타';
 $lang['TRACKER_STATS'] = '에 대한 통계 추적기';
 $lang['WHOIS_INFO'] = 'IP 주소에 대한 정보';
 $lang['SHOW_MOD_HOME_PAGE'] = '에 운영자 이 index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>Pre-moderation</h4> <h6>If 없는 배포판의 상태 v,#또는 T 에서,이 섹션을 포함 하위 섹션을 배포 자동으로 받 이 status</h6>';
 $lang['TOR_COMMENT'] = '<h4>배포 상태에 대한 설명</h4> <h6>설명을 통해 릴리스에 발생한 오류를 지적할 수 있습니다. 상태가 불완전한 경우 릴리스</h6>을 수정하기 위해 릴리스 관리자가 릴리스 응답 양식을 사용할 수 있습니다.';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding 씨 보너스 </h4> <h6> 번호의 배포판은 사용자에 의해 크기의 보너스를 위한(충전 시간은 한 시간)</h6>';
