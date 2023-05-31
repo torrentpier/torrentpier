@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'تمكين';
 $lang['DISABLED'] = 'تعطيل';
 $lang['ERROR'] = 'خطأ';
 $lang['SELECT_ACTION'] = 'اختر العمل';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'القادم';
 $lang['PREVIOUS_PAGE'] = 'السابقة';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'انقر فوق %sHere%s العودة إلى مش
 $lang['CLICK_RETURN_GROUP'] = 'انقر فوق %sHere%s العودة إلى مجموعة المعلومات';
 
 $lang['ADMIN_PANEL'] = 'انتقل إلى لوحة الإدارة';
-$lang['ALL_CACHE'] = 'كل ذاكرة التخزين المؤقت';
 $lang['ALL_CACHE_CLEARED'] = 'تم مسح ذاكرة التخزين المؤقت';
 $lang['ALL_TEMPLATE_CLEARED'] = 'القالب تم مسح ذاكرة التخزين المؤقت';
-$lang['DATASTORE'] = 'مخزن البيانات';
 $lang['DATASTORE_CLEARED'] = 'مخزن البيانات تم مسح';
 $lang['BOARD_DISABLE'] = 'آسف هذا المنتدى معطل. محاولة العودة في وقت لاحق';
 $lang['BOARD_DISABLE_CRON'] = 'المنتدى للصيانة. محاولة العودة في وقت لاحق';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'ضغط Gzip';
 $lang['NOT_AVAILABLE'] = 'لا تتوفر';
 
 // Clear Cache
+$lang['DATASTORE'] = 'مخزن البيانات';
 $lang['CLEAR_CACHE'] = 'مسح ذاكرة التخزين المؤقت';
-$lang['TEMPLATES'] = 'قوالب';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'مستويات المستخدم';
