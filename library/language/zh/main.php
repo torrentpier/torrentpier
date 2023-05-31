@@ -59,6 +59,7 @@ $lang['ENABLED'] = '已激活';
 $lang['DISABLED'] = '未启用';
 $lang['ERROR'] = '错误';
 $lang['SELECT_ACTION'] = '选择操作';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = '继续';
 $lang['PREVIOUS_PAGE'] = '后退';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = '单击 %sHere%s 返回到版主控制面板';
 $lang['CLICK_RETURN_GROUP'] = '单击 %sHere%s 返回小组信息';
 
 $lang['ADMIN_PANEL'] = '转到管理面板';
-$lang['ALL_CACHE'] = '所有缓存';
 $lang['ALL_CACHE_CLEARED'] = '缓存已被清除';
 $lang['ALL_TEMPLATE_CLEARED'] = '模板缓存已被清除';
-$lang['DATASTORE'] = '数据存储';
 $lang['DATASTORE_CLEARED'] = '数据存储已被清除';
 $lang['BOARD_DISABLE'] = '对不起，本论坛被禁用。请试着以后再来。';
 $lang['BOARD_DISABLE_CRON'] = '论坛正在维护。请试着以后再来。';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = '不提供';
 
 // Clear Cache
+$lang['DATASTORE'] = '数据存储';
 $lang['CLEAR_CACHE'] = '清除缓存';
-$lang['TEMPLATES'] = '模板';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = '用户一级';
