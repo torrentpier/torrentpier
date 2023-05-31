@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Activé';
 $lang['DISABLED'] = 'Désactivé';
 $lang['ERROR'] = 'Erreur';
 $lang['SELECT_ACTION'] = 'Sélectionnez l\'action';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Prochaine';
 $lang['PREVIOUS_PAGE'] = 'Précédente';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Cliquez sur %sHere%s pour retourner au Panneau de
 $lang['CLICK_RETURN_GROUP'] = 'Cliquez sur %sHere%s pour revenir à des informations de groupe';
 
 $lang['ADMIN_PANEL'] = 'Aller au Panneau d\'Administration';
-$lang['ALL_CACHE'] = 'Tous les cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache a été effacé';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Cache de Template a été effacé';
-$lang['DATASTORE'] = 'La banque de données';
 $lang['DATASTORE_CLEARED'] = 'La banque de données a été effacé';
 $lang['BOARD_DISABLE'] = 'Désolé, ce forum est désactivé. Essayez de revenir plus tard';
 $lang['BOARD_DISABLE_CRON'] = 'Le Forum est en maintenance. Essayez de revenir plus tard';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'La compression Gzip';
 $lang['NOT_AVAILABLE'] = 'Pas disponible';
 
 // Clear Cache
+$lang['DATASTORE'] = 'La banque de données';
 $lang['CLEAR_CACHE'] = 'Vider Le Cache';
-$lang['TEMPLATES'] = 'Modèles';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Niveaux des utilisateurs';
