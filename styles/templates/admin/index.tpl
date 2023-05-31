@@ -106,11 +106,11 @@
 
 <table>
   <tr>
-    <td><b>{L_CLEAR_CACHE}:</b></td>
+    <td><b>{L_CLEAR}:</b></td>
     <td>
-      <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
-      <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_ALL_CACHE}</a>,&nbsp;
-      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_TEMPLATES}</a>
+      <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>&nbsp;&middot;
+      <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_CLEAR_CACHE}</a>&nbsp;&middot;
+      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>
     </td>
   </tr>
   <tr>
