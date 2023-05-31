@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Povoleno';
 $lang['DISABLED'] = 'Zdravotně postižené';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akce';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Další';
 $lang['PREVIOUS_PAGE'] = 'Předchozí';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klikněte %sHere%s vrátit se Moderátor Ovládac
 $lang['CLICK_RETURN_GROUP'] = 'Klikněte %sHere%s pro návrat do skupiny informace';
 
 $lang['ADMIN_PANEL'] = 'Jít do administračního Panelu';
-$lang['ALL_CACHE'] = 'Všechny cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache byla vymazána';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache byla vymazána';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore byl vymazán';
 $lang['BOARD_DISABLE'] = 'Omlouvám se, toto fórum je zakázáno. Zkuste se vrátit později';
 $lang['BOARD_DISABLE_CRON'] = 'Fórum je vypnutý. Zkuste se vrátit později';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip komprese';
 $lang['NOT_AVAILABLE'] = 'Není k dispozici';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Vymazat Mezipaměť';
-$lang['TEMPLATES'] = 'Šablony';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Uživatelské úrovně';
