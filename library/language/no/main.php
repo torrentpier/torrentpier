@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Aktivert';
 $lang['DISABLED'] = 'Funksjonshemmede';
 $lang['ERROR'] = 'Feil';
 $lang['SELECT_ACTION'] = 'Velg handling';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Neste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klikk %sHere%s for å gå tilbake til Moderator K
 $lang['CLICK_RETURN_GROUP'] = 'Klikk %sHere%s for å gå tilbake til informasjon om gruppen';
 
 $lang['ADMIN_PANEL'] = 'Gå til Administrasjon Panel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache har blitt fjernet';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mal cache har blitt fjernet';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datalager har blitt fjernet';
 $lang['BOARD_DISABLE'] = 'Beklager, men dette forumet er deaktivert. Prøv å komme tilbake senere';
 $lang['BOARD_DISABLE_CRON'] = 'Forumet er nede for vedlikehold. Prøv å komme tilbake senere';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip komprimering';
 $lang['NOT_AVAILABLE'] = 'Ikke tilgjengelig';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Slett Cache';
-$lang['TEMPLATES'] = 'Maler';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Bruker nivåer';
