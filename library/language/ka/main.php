@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'ჩართულია';
 $lang['DISABLED'] = 'შეზღუდული შესაძლებლობების მქონე';
 $lang['ERROR'] = 'შეცდომა';
 $lang['SELECT_ACTION'] = 'აირჩიეთ აქცია';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'შემდეგი';
 $lang['PREVIOUS_PAGE'] = 'წინა';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'დააჭირეთ %sHere%s დაბრუ
 $lang['CLICK_RETURN_GROUP'] = 'დააჭირეთ %sHere%s დაბრუნებას ჯგუფი ინფორმაცია';
 
 $lang['ADMIN_PANEL'] = 'წასვლა ადმინისტრირების პანელი';
-$lang['ALL_CACHE'] = 'ყველა cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache უკვე გაწმინდეს';
 $lang['ALL_TEMPLATE_CLEARED'] = 'თარგი cache უკვე გაწმინდეს';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore უკვე გაწმინდეს';
 $lang['BOARD_DISABLE'] = 'უკაცრავად, ეს ფორუმი არის ინვალიდი. ცდილობენ დაბრუნდება შემდეგ';
 $lang['BOARD_DISABLE_CRON'] = 'ფორუმზე არის ქვემოთ შენარჩუნება. ცდილობენ დაბრუნდება შემდეგ';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip კომპრესია';
 $lang['NOT_AVAILABLE'] = 'არ არის მარაგში';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'თარგები';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'მომხმარებლის დონეზე';
