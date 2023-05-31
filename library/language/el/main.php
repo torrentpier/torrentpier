@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Ενεργοποιημένη';
 $lang['DISABLED'] = 'Με αναπηρία';
 $lang['ERROR'] = 'Σφάλμα';
 $lang['SELECT_ACTION'] = 'Επιλέξτε δράση';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Την επόμενη';
 $lang['PREVIOUS_PAGE'] = 'Προηγούμενο';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Κάντε κλικ %sHere%s για να επισ
 $lang['CLICK_RETURN_GROUP'] = 'Κάντε κλικ %sHere%s να επιστρέψει στην ομάδα πληροφορίες';
 
 $lang['ADMIN_PANEL'] = 'Πηγαίνετε στο Πίνακα Διαχείρισης';
-$lang['ALL_CACHE'] = 'Όλα τα cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache έχει εκκαθαριστεί';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Πρότυπο cache έχει εκκαθαριστεί';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore έχει εκκαθαριστεί';
 $lang['BOARD_DISABLE'] = 'Συγγνώμη, αυτό το φόρουμ είναι απενεργοποιημένη. Προσπαθήστε να επανέλθω αργότερα';
 $lang['BOARD_DISABLE_CRON'] = 'Το φόρουμ είναι κάτω για συντήρηση. Προσπαθήστε να επανέλθω αργότερα';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Συμπίεση Gzip';
 $lang['NOT_AVAILABLE'] = 'Δεν είναι διαθέσιμη';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Πρότυπα';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Επίπεδα χρηστών';
