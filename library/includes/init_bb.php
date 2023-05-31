@@ -446,7 +446,7 @@ if (
  * Exit if board is disabled via trigger
  */
 if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
-    \TorrentPier\Common\Http::statusCode(503);
+    header('HTTP/1.0 503 Service Unavailable');
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();
