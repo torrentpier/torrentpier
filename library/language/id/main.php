@@ -59,6 +59,7 @@ $lang['ENABLED'] = 'Diaktifkan';
 $lang['DISABLED'] = 'Keluarga';
 $lang['ERROR'] = 'Kesalahan';
 $lang['SELECT_ACTION'] = 'Pilih action';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Berikutnya';
 $lang['PREVIOUS_PAGE'] = 'Sebelumnya';
@@ -99,10 +100,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik %sHere%s untuk kembali ke Moderator Panel Ko
 $lang['CLICK_RETURN_GROUP'] = 'Klik %sHere%s untuk kembali ke kelompok informasi';
 
 $lang['ADMIN_PANEL'] = 'Pergi ke Panel Administrasi';
-$lang['ALL_CACHE'] = 'Semua cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache yang telah dibersihkan';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache yang telah dibersihkan';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore yang telah dibersihkan';
 $lang['BOARD_DISABLE'] = 'Maaf, forum ini dinonaktifkan. Cobalah untuk datang kembali nanti';
 $lang['BOARD_DISABLE_CRON'] = 'Forum sedang dalam pemeliharaan. Cobalah untuk datang kembali nanti';
@@ -1646,8 +1645,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Tidak tersedia';
 
 // Clear Cache
+$lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Template';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Tingkat pengguna';
