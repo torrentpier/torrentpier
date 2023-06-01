@@ -72,7 +72,9 @@
                 <!-- IF GROUP_DESCRIPTION -->
                 <div class="post_wrap">{GROUP_DESCRIPTION}</div>
                 <!-- ELSE -->
+                <!-- BEGIN switch_mod_option -->
                 <a href="{U_GROUP_CONFIG}#group_description">{L_EDIT}</a>
+                <!-- END switch_mod_option -->
                 <!-- ENDIF / GROUP_DESCRIPTION -->
             </td>
         </tr>
