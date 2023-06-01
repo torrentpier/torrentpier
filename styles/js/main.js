@@ -8,15 +8,15 @@
 
 // prototype $
 function $p() {
-  var elements = [];
-  for (var i = 0; i < arguments.length; i++) {
-    var element = arguments[i];
-    if (typeof element === 'string')
-      element = document.getElementById(element);
-    if (arguments.length === 1)
-      return element;
+  let elements = [];
+
+  for (let i = 0; i < arguments.length; i++) {
+    let element = arguments[i];
+    if (typeof element === 'string') element = document.getElementById(element);
+    if (arguments.length === 1) return element;
     elements.push(element);
   }
+
   return elements;
 }
 
@@ -24,16 +24,14 @@ function addEvent(obj, type, fn) {
   if (obj.addEventListener) {
     obj.addEventListener(type, fn, false);
     EventCache.add(obj, type, fn);
-  }
-  else if (obj.attachEvent) {
+  } else if (obj.attachEvent) {
     obj["e" + type + fn] = fn;
     obj[type + fn] = function () {
       obj["e" + type + fn](window.event);
     };
     obj.attachEvent("on" + type, obj[type + fn]);
     EventCache.add(obj, type, fn);
-  }
-  else {
+  } else {
     obj["on" + type] = obj["e" + type + fn];
   }
 }
@@ -41,11 +39,9 @@ function addEvent(obj, type, fn) {
 var EventCache = function () {
   var listEvents = [];
   return {
-    listEvents: listEvents,
-    add: function (node, sEventName, fHandler) {
+    listEvents: listEvents, add: function (node, sEventName, fHandler) {
       listEvents.push(arguments);
-    },
-    flush: function () {
+    }, flush: function () {
       var i, item;
       for (i = listEvents.length - 1; i >= 0; i = i - 1) {
         item = listEvents[i];
@@ -69,7 +65,7 @@ if (document.all) {
 
 function imgFit(img, maxW) {
   img.title = 'Размеры изображения: ' + img.width + ' x ' + img.height;
-  if (typeof(img.naturalHeight) === 'undefined') {
+  if (typeof (img.naturalHeight) === 'undefined') {
     img.naturalHeight = img.height;
     img.naturalWidth = img.width;
   }
@@ -79,20 +75,18 @@ function imgFit(img, maxW) {
     img.title = 'Нажмите на изображение, чтобы посмотреть его в полный размер';
     img.style.cursor = 'move';
     return false;
-  }
-  else if (img.width === maxW && img.width < img.naturalWidth) {
+  } else if (img.width === maxW && img.width < img.naturalWidth) {
     img.height = img.naturalHeight;
     img.width = img.naturalWidth;
     img.title = 'Размеры изображения: ' + img.naturalWidth + ' x ' + img.naturalHeight;
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
 
 function toggle_block(id) {
-  var el = document.getElementById(id);
+  let el = document.getElementById(id);
   el.style.display = (el.style.display === 'none') ? '' : 'none';
 }
 
@@ -106,8 +100,8 @@ function rand(min, max) {
 
 // Cookie functions
 /**
- * name       Name of the cookie
- * value      Value of the cookie
+ * [name]     Name of the cookie
+ * [value]    Value of the cookie
  * [days]     Number of days to remain active (default: end of current session)
  * [path]     Path where the cookie is valid (default: path of calling document)
  * [domain]   Domain where the cookie is valid
@@ -125,12 +119,7 @@ function setCookie(name, value, days, path, domain, secure) {
     var expires = '';
   }
 
-  document.cookie =
-    name + '=' + encodeURI(value)
-    + ((expires) ? '; expires=' + expires : '')
-    + ((path) ? '; path=' + path : ((cookiePath) ? '; path=' + cookiePath : ''))
-    + ((domain) ? '; domain=' + domain : ((cookieDomain) ? '; domain=' + cookieDomain : ''))
-    + ((secure) ? '; secure' : ((cookieSecure) ? '; secure' : ''));
+  document.cookie = name + '=' + encodeURI(value) + ((expires) ? '; expires=' + expires : '') + ((path) ? '; path=' + path : ((cookiePath) ? '; path=' + cookiePath : '')) + ((domain) ? '; domain=' + domain : ((cookieDomain) ? '; domain=' + cookieDomain : '')) + ((secure) ? '; secure' : ((cookieSecure) ? '; secure' : ''));
 }
 
 /**
@@ -143,7 +132,7 @@ function getCookie(name) {
 }
 
 /**
- * name      name of the cookie
+ * [name]    name of the cookie
  * [path]    path of the cookie (must be same as path used to create cookie)
  * [domain]  domain of the cookie (must be same as domain used to create cookie)
  */
@@ -153,9 +142,7 @@ function deleteCookie(name, path, domain) {
 
 // Menus
 var Menu = {
-  hideSpeed: 'fast',
-  offsetCorrection_X: -4,
-  offsetCorrection_Y: 2,
+  hideSpeed: 'fast', offsetCorrection_X: -4, offsetCorrection_Y: 2,
 
   activeMenuId: null,  //  currently opened menu (from previous click)
   clickedMenuId: null,  //  menu to show up
@@ -265,23 +252,18 @@ $(document).ready(function () {
   // Menus
   $('body').append($('div.menu-sub'));
   $('a.menu-root')
-    .click(
-      function (e) {
-        e.preventDefault();
-        Menu.clicked($(this));
-        return false;
-      })
-    .hover(
-      function () {
-        Menu.hovered($(this));
-        return false;
-      },
-      function () {
-        Menu.unhovered($(this));
-        return false;
-      }
-    )
-  ;
+    .click(function (e) {
+      e.preventDefault();
+      Menu.clicked($(this));
+      return false;
+    })
+    .hover(function () {
+      Menu.hovered($(this));
+      return false;
+    }, function () {
+      Menu.unhovered($(this));
+      return false;
+    });
   $('div.menu-sub')
     .mousedown(function (e) {
       e.stopPropagation();
@@ -289,8 +271,7 @@ $(document).ready(function () {
     .find('a')
     .click(function (e) {
       Menu.hide(e);
-    })
-  ;
+    });
   // Input hints
   $('input')
     .filter('.hint').one('focus', function () {
@@ -299,8 +280,7 @@ $(document).ready(function () {
     .end()
     .filter('.error').one('focus', function () {
     $(this).removeClass('error');
-  })
-  ;
+  });
 });
 
 //
@@ -319,20 +299,14 @@ Ajax.prototype = {
   state: {},  // current action state
   request: {},  // request data
   params: {},  // action params, format: ajax.params[ElementID] = { param: "val" ... }
-  form_token: '',
-  hide_loading: null,
+  form_token: '', hide_loading: null,
 
   exec: function (request, hide_loading = false) {
     this.request[request.action] = request;
     request['form_token'] = this.form_token;
     this.hide_loading = hide_loading;
     $.ajax({
-      url: this.url,
-      type: this.type,
-      dataType: this.dataType,
-      data: request,
-      success: ajax.success,
-      error: ajax.error
+      url: this.url, type: this.type, dataType: this.dataType, data: request, success: ajax.success, error: ajax.error
     });
   },
 
@@ -357,27 +331,22 @@ Ajax.prototype = {
         var req = ajax.request[action];
         req.user_password = user_password;
         ajax.exec(req);
-      }
-      else {
+      } else {
         ajax.clearActionState(action);
         ajax.showErrorMsg('Введен неверный пароль');
       }
-    }
-    else if (response.prompt_confirm) {
+    } else if (response.prompt_confirm) {
       if (window.confirm(response.confirm_msg)) {
         var req = ajax.request[action];
         req.confirmed = 1;
         ajax.exec(req);
-      }
-      else {
+      } else {
         ajax.clearActionState(action);
       }
-    }
-    else if (response.error_code) {
+    } else if (response.error_code) {
       ajax.showErrorMsg(response.error_msg);
       $('.loading-1').removeClass('loading-1').html('error');
-    }
-    else {
+    } else {
       ajax.callback[action](response);
       ajax.clearActionState(action);
     }
@@ -473,9 +442,7 @@ $(document).ready(function () {
       status = '';
       text = 'неверный формат данных';
     }
-    $(this).html(
-      "Ошибка в: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>"
-    ).show();
+    $(this).html("Ошибка в: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
     ajax.setStatusBoxPosition($(this));
   });
 
@@ -512,8 +479,7 @@ var autocomplete = function (noCenter) {
 
   if (!noCenter) {
     $("div#autocomplete_popup").css({
-      left: _popup_left + "px",
-      top: _popup_top + "px"
+      left: _popup_left + "px", top: _popup_top + "px"
     }).show(1000);
   } else {
     $("div#autocomplete_popup").show(1000);
