@@ -16,8 +16,6 @@
 
 	<!-- IF ADMIN_LOGIN -->
 	<h4 class="tCenter mrg_16">{L_ADMIN_REAUTHENTICATE}</h4>
-	<!-- ELSE -->
-	<h4 class="tCenter mrg_16">{L_ENTER_PASSWORD}</h4>
 	<!-- ENDIF -->
 
 	<div class="mrg_16">
@@ -43,7 +41,7 @@
 		<td colspan="2" class="tCenter pad_6"><input type="submit" name="login" class="bold long" value="{L_LOGIN}" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><a href="{U_SEND_PASSWORD}" class="small">{L_FORGOTTEN_PASSWORD}</a></td>
+		<td colspan="2" align="center"><a href="{U_SEND_PASSWORD}" class="small">{L_FORGOTTEN_PASSWORD}</a>&nbsp;&middot;&nbsp;<a href="{U_REGISTER}" class="small">{L_REGISTER}</a></td>
 	</tr>
 	</table>
 	</div>
