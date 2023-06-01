@@ -65,20 +65,24 @@ if (document.all) {
 
 function imgFit(img, maxW) {
   img.title = 'Размеры изображения: ' + img.width + ' x ' + img.height;
+
   if (typeof (img.naturalHeight) === 'undefined') {
     img.naturalHeight = img.height;
     img.naturalWidth = img.width;
   }
+
   if (img.width > maxW) {
     img.height = Math.round((maxW / img.width) * img.height);
     img.width = maxW;
     img.title = 'Нажмите на изображение, чтобы посмотреть его в полный размер';
     img.style.cursor = 'move';
+
     return false;
   } else if (img.width === maxW && img.width < img.naturalWidth) {
     img.height = img.naturalHeight;
     img.width = img.naturalWidth;
     img.title = 'Размеры изображения: ' + img.naturalWidth + ' x ' + img.naturalHeight;
+
     return false;
   } else {
     return true;
@@ -110,13 +114,16 @@ function rand(min, max) {
  *            secure transmission
  */
 function setCookie(name, value, days, path, domain, secure) {
+  let expires;
+
   if (days !== 'SESSION') {
-    var date = new Date();
+    let date = new Date();
+
     days = days || 365;
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    var expires = date.toGMTString();
+    expires = date.toGMTString();
   } else {
-    var expires = '';
+    expires = '';
   }
 
   document.cookie = name + '=' + encodeURI(value) + ((expires) ? '; expires=' + expires : '') + ((path) ? '; path=' + path : ((cookiePath) ? '; path=' + cookiePath : '')) + ((domain) ? '; domain=' + domain : ((cookieDomain) ? '; domain=' + cookieDomain : '')) + ((secure) ? '; secure' : ((cookieSecure) ? '; secure' : ''));
@@ -127,7 +134,7 @@ function setCookie(name, value, days, path, domain, secure) {
  *   or null if cookie does not exist.
  */
 function getCookie(name) {
-  var c, RE = new RegExp('(^|;)\\s*' + name + '\\s*=\\s*([^\\s;]+)', 'g');
+  let c, RE = new RegExp('(^|;)\\s*' + name + '\\s*=\\s*([^\\s;]+)', 'g');
   return (c = RE.exec(document.cookie)) ? c[2] : null;
 }
 
@@ -175,17 +182,21 @@ var Menu = {
 
   setLocation: function () {
     var CSS = this.$root.offset();
+
     CSS.top += this.$root.height() + this.offsetCorrection_Y;
     var curTop = parseInt(CSS.top);
     var tCorner = $(document).scrollTop() + $(window).height() - 20;
     var maxVisibleTop = Math.min(curTop, Math.max(0, tCorner - this.$menu.height()));
+
     if (curTop !== maxVisibleTop) {
       CSS.top = maxVisibleTop;
     }
     CSS.left += this.offsetCorrection_X;
+
     var curLeft = parseInt(CSS.left);
     var rCorner = $(document).scrollLeft() + $(window).width() - 6;
     var maxVisibleLeft = Math.min(curLeft, Math.max(0, rCorner - this.$menu.width()));
+
     if (curLeft !== maxVisibleLeft) {
       CSS.left = maxVisibleLeft;
     }
@@ -197,12 +208,15 @@ var Menu = {
     var curLeft = parseInt($menu.css('left'));
     var rCorner = $(document).scrollLeft() + $(window).width() - 6;
     var maxVisibleLeft = Math.min(curLeft, Math.max(0, rCorner - $menu.width()));
+
     if (curLeft !== maxVisibleLeft) {
       $menu.css('left', maxVisibleLeft);
     }
+
     var curTop = parseInt($menu.css('top'));
     var tCorner = $(document).scrollTop() + $(window).height() - 20;
     var maxVisibleTop = Math.min(curTop, Math.max(0, tCorner - $menu.height()));
+
     if (curTop !== maxVisibleTop) {
       $menu.css('top', maxVisibleTop);
     }
@@ -463,9 +477,7 @@ $(document).ready(function () {
  **/
 var array_for_rand_pass = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var array_rand = function (array) {
-  var array_length = array.length;
-  var result = Math.random() * array_length;
-  return Math.floor(result);
+  return Math.floor(Math.random() * array.length);
 };
 
 var autocomplete = function (noCenter) {
@@ -474,8 +486,8 @@ var autocomplete = function (noCenter) {
     string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
   }
 
-  var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
-  var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
+  let _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
+  let _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
 
   if (!noCenter) {
     $("div#autocomplete_popup").css({
@@ -496,8 +508,8 @@ $(document).ready(function () {
   });
 
   // перемещение окна
-  var _X, _Y;
-  var _bMoveble = false;
+  let _X, _Y;
+  let _bMoveble = false;
 
   $("div#autocomplete_popup div.title").mousedown(function (event) {
     _bMoveble = true;
@@ -506,9 +518,9 @@ $(document).ready(function () {
   });
 
   $("div#autocomplete_popup div.title").mousemove(function (event) {
-    var jFrame = $("div#autocomplete_popup");
-    var jFLeft = parseInt(jFrame.css("left"));
-    var jFTop = parseInt(jFrame.css("top"));
+    let jFrame = $("div#autocomplete_popup");
+    let jFLeft = parseInt(jFrame.css("left"));
+    let jFTop = parseInt(jFrame.css("top"));
 
     if (_bMoveble) {
       if (event.clientX < _X) {
