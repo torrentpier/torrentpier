@@ -101,6 +101,7 @@ function swap_values()
 <tr>
 	<td class="catBottom" colspan="2">
 		<input type="hidden" name="sid" value="{SESSION_ID}" />
+        <input type="reset" value="{L_CANCEL}" class="liteoption"/>
 		<input class="mainoption" type="submit" name="submit" value="{L_REBUILD_SEARCH}" />
 	</td>
 </tr>
@@ -135,7 +136,7 @@ function updateButton()
 		{
 			document.form_rebuild_progress.submit_button.value = label_next + " (" + ticker + ")";
 
-			ticker--;;
+			ticker--;
 			refresh = setTimeout("updateButton()", 1000);
 		}
 	}
