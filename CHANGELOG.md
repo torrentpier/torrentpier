@@ -1,5 +1,33 @@
 # Change Log
 
+## [v2.4.0-alpha3](https://github.com/torrentpier/torrentpier/tree/v2.4.0-alpha3) (2023-06-02)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-alpha2...v2.4.0-alpha3)
+
+**Merged pull requests:**
+
+- Maked jumpbox optional [\#727](https://github.com/torrentpier/torrentpier/pull/727) ([belomaxorka](https://github.com/belomaxorka))
+- Code Inspection: Ternary expression can be replaced with condition [\#728](https://github.com/torrentpier/torrentpier/pull/728) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed: [Deprecated] number_format(): Passing null to parameter [\#729](https://github.com/torrentpier/torrentpier/pull/729) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced prn_r() function with dump() [\#730](https://github.com/torrentpier/torrentpier/pull/730) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced bb_exit() with native [\#731](https://github.com/torrentpier/torrentpier/pull/731) ([belomaxorka](https://github.com/belomaxorka))
+- Added exception if .env not found [\#734](https://github.com/torrentpier/torrentpier/pull/734) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken file_write() function [\#737](https://github.com/torrentpier/torrentpier/pull/737) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken $replace_content [\#738](https://github.com/torrentpier/torrentpier/pull/738) ([belomaxorka](https://github.com/belomaxorka))
+- Moved poll functions to Poll class [\#739](https://github.com/torrentpier/torrentpier/pull/739) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced bb_realpath() with native [\#740](https://github.com/torrentpier/torrentpier/pull/740) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed methods types in Admin/Cron.php [\#743](https://github.com/torrentpier/torrentpier/pull/743) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed empty $_SERVER['SERVER_PROTOCOL'] in cron [\#744](https://github.com/torrentpier/torrentpier/pull/744) ([belomaxorka](https://github.com/belomaxorka))
+- Moved $bb_cfg['show_board_start_date'] to admin panel [\#745](https://github.com/torrentpier/torrentpier/pull/745) ([belomaxorka](https://github.com/belomaxorka))
+- Added sup & sub tags in BBCode [\#746](https://github.com/torrentpier/torrentpier/pull/746) ([belomaxorka](https://github.com/belomaxorka))
+- Unified checkForm() JS [\#747](https://github.com/torrentpier/torrentpier/pull/747) ([belomaxorka](https://github.com/belomaxorka))
+- [TEMP] Removed Http class [\#748](https://github.com/torrentpier/torrentpier/pull/748) ([belomaxorka](https://github.com/belomaxorka))
+- Added reset button in posting editor [\#749](https://github.com/torrentpier/torrentpier/pull/749) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed: Automatic conversion of false to array is deprecated [\#750](https://github.com/torrentpier/torrentpier/pull/750) ([belomaxorka](https://github.com/belomaxorka))
+- Reformated JS [\#753](https://github.com/torrentpier/torrentpier/pull/753), [\#754](https://github.com/torrentpier/torrentpier/pull/754) ([belomaxorka](https://github.com/belomaxorka))
+- New Crowdin updates [\#700](https://github.com/torrentpier/torrentpier/pull/700) ([Exileum](https://github.com/Exileum))
+- Minor improvements [\#732](https://github.com/torrentpier/torrentpier/pull/732), [\#735](https://github.com/torrentpier/torrentpier/pull/735), [\#741](https://github.com/torrentpier/torrentpier/pull/741), [\#742](https://github.com/torrentpier/torrentpier/pull/742), [\#751](https://github.com/torrentpier/torrentpier/pull/751), [\#752](https://github.com/torrentpier/torrentpier/pull/752), [\#755](https://github.com/torrentpier/torrentpier/pull/755), [\#756](https://github.com/torrentpier/torrentpier/pull/756), [\#757](https://github.com/torrentpier/torrentpier/pull/757), [\#761](https://github.com/torrentpier/torrentpier/pull/761) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#733](https://github.com/torrentpier/torrentpier/pull/733), [\#758](https://github.com/torrentpier/torrentpier/pull/758) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0-alpha2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-alpha2) (2023-05-28)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-alpha1...v2.4.0-alpha2)
 

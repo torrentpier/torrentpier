@@ -22,8 +22,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.4.0-alpha2';
-$bb_cfg['tp_release_date'] = '28-05-2023';
+$bb_cfg['tp_version'] = '2.4.0-alpha3';
+$bb_cfg['tp_release_date'] = '02-06-2023';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Database
