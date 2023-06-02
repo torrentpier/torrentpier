@@ -17,7 +17,6 @@ $page_cfg['load_tpl_vars'] = array(
 
 $show_last_topic = true;
 $last_topic_max_len = 28;
-$show_online_users = true;
 $show_subforums = true;
 
 $datastore->enqueue(array(
@@ -402,9 +401,6 @@ if (IS_AM) {
         rename(CRON_RUNNING, CRON_ALLOWED);
     }
 }
-
-// Display page
-define('SHOW_ONLINE', $show_online_users);
 
 if (isset($_GET['map'])) {
     $template->assign_vars(array('PAGE_TITLE' => $lang['FORUM_MAP']));
