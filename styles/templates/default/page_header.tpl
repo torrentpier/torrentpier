@@ -24,7 +24,7 @@
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/oldbrowserdetector.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/clipboard.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/printThis.min.js"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/legacy.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/legacy.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
