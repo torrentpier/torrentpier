@@ -289,10 +289,6 @@ td.topic_id { cursor: pointer; }
 					$('#moderators').append(data.html);
 				};
 			</script>
-
-			<!-- IF SHOW_ONLINE_LIST -->
-			<p class="small">{LOGGED_IN_USER_LIST}</p>
-			<!-- ENDIF -->
 		</td>
 		<td class="tRight vBottom nowrap small"><b>{PAGINATION}</b></td>
 	</tr>

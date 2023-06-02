@@ -44,7 +44,6 @@ if ($bb_cfg['show_online_userlist_index']) {
         ${$online_list} = CACHE('bb_cache')->get($online_list);
     }
 
-    $template->assign_var('SHOW_ONLINE_LIST');
     $template->assign_vars(array(
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],

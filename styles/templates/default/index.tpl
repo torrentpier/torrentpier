@@ -201,7 +201,7 @@
 				<p>{TOTAL_USERS_ONLINE}<!-- IF IS_ADMIN --> &nbsp;{USERS_ONLINE_COUNTS}<!-- ENDIF --></p>
 				<p>{RECORD_USERS}</p>
 
-				<!-- IF SHOW_ONLINE_LIST -->
+				<!-- IF $bb_cfg['show_online_userlist_index'] -->
 					<style><!-- IF IS_ADMIN -->.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }<!-- ELSE -->.ou_stat { display: none; }<!-- ENDIF --></style>
 					<a name="online"></a>
 					<div id="online_userlist" style="margin-top: 4px;">{LOGGED_IN_USER_LIST}</div>
