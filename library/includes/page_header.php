@@ -28,7 +28,7 @@ if ($logged_in) {
 }
 
 // Online userlist
-if ($bb_cfg['show_online_userlist_index']) {
+if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     $online_full = !empty($_REQUEST['online_full']);
     $online_list = $online_full ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
 
@@ -38,13 +38,16 @@ if ($bb_cfg['show_online_userlist_index']) {
         'cnt' => '',
     );
 
-    if (!${$online_list} = CACHE('bb_cache')->get($online_list)) {
-        require INC_DIR . '/online_userlist.php';
+    if (defined('IS_GUEST') && !(IS_GUEST || IS_USER)) {
+        $template->assign_var('SHOW_ONLINE_LIST');
 
-        ${$online_list} = CACHE('bb_cache')->get($online_list);
+        if (!${$online_list} = CACHE('bb_cache')->get($online_list)) {
+            require INC_DIR . '/online_userlist.php';
+
+            ${$online_list} = CACHE('bb_cache')->get($online_list);
+        }
     }
 
-    $template->assign_var('SHOW_ONLINE_LIST');
     $template->assign_vars(array(
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],

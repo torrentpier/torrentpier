@@ -520,7 +520,6 @@ $bb_cfg['allow_change'] = [
 ];
 
 $bb_cfg['show_jumpbox'] = true;
-$bb_cfg['show_online_userlist_index'] = true;
 
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
