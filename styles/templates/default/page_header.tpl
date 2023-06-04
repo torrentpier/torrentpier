@@ -78,11 +78,16 @@ $(document).ready(function(){
 		</span> \
 		<input id="jumpbox-submit" type="button" class="lite" value="{L_GO}" /> \
 	');
-	$('#jumpbox-container').one('click', function(){
-		$('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
-		//$(this).load(jumpbox_src);
-		$('#jumpbox-submit').click(function(){ window.location.href='{FORUM_URL}'+$('#jumpbox').val(); });
-	});
+    $('#jumpbox-container').one('click', function () {
+        $('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
+        $(this).html('123');
+        $('#jumpbox-submit').click(function () {
+            window.location.href = '{FORUM_URL}' + $('#jumpbox').val();
+        });
+        $('select#f[name=f]').on('change', function () {
+            window.location.href = '{FORUM_URL}' + $(this).val();
+        });
+    });
 });
 <!-- ENDIF -->
 
