@@ -80,13 +80,13 @@ $(document).ready(function(){
 	');
     $('#jumpbox-container').one('click', function () {
         $('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
-        $(this).html('123');
-        $('#jumpbox-submit').click(function () {
-            window.location.href = '{FORUM_URL}' + $('select#f[name=f]').val();
-        });
-        $('select#f[name=f]').on('change', function () {
-            window.location.href = '{FORUM_URL}' + $(this).val();
-        });
+        $(this).html('Test');
+    });
+    $('#jumpbox-submit').click(function () {
+        window.location.href = '{FORUM_URL}' + $('select#f[name=f]').val();
+    });
+    $('select#f[name=f]').on('change', function () {
+        window.location.href = '{FORUM_URL}' + $(this).val();
     });
 });
 <!-- ENDIF -->
