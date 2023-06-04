@@ -39,7 +39,6 @@ class Common
      */
     public $known_items = [
         'cat_forums' => 'build_cat_forums.php',
-        'jumpbox' => 'build_cat_forums.php',
         'viewtopic_forum_select' => 'build_cat_forums.php',
         'latest_news' => 'build_cat_forums.php',
         'network_news' => 'build_cat_forums.php',
