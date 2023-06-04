@@ -72,7 +72,7 @@ var user = {
 $(document).ready(function(){
 	$("div.jumpbox").html('\
 		<span id="jumpbox-container"> \
-		<select id="jumpbox"> \
+		<select> \
 			<option id="jumpbox-title" value="-1">&nbsp;&raquo;&raquo; {L_JUMPBOX_TITLE} &nbsp;</option> \
 		</select> \
 		</span> \
@@ -82,7 +82,7 @@ $(document).ready(function(){
         $('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
         $(this).html('123');
         $('#jumpbox-submit').click(function () {
-            window.location.href = '{FORUM_URL}' + $('#jumpbox').val();
+            window.location.href = '{FORUM_URL}' + $('select#f[name=f]').val();
         });
         $('select#f[name=f]').on('change', function () {
             window.location.href = '{FORUM_URL}' + $(this).val();
