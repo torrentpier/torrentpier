@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Parse and show the overall page header
 
-global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images, $datastore;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
@@ -108,6 +108,18 @@ $template->assign_vars(array(
     'HAVE_UNREAD_PM' => $have_unread_pm,
 ));
 
+// Jumpbox init
+if ($bb_cfg['show_jumpbox']) {
+    if (!$jumpbox = $datastore->get('jumpbox')) {
+        $datastore->update('jumpbox');
+        $jumpbox = $datastore->get('jumpbox');
+    }
+
+    $template->assign_vars(array(
+        'JUMPBOX' => IS_GUEST ? $jumpbox['guest'] : $jumpbox['user'],
+    ));
+}
+
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars(array(
     'SIMPLE_HEADER' => !empty($gen_simple_header),
@@ -190,8 +202,6 @@ $template->assign_vars(array(
     'POSTING_URL' => $bb_cfg['posting_url'],
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
-
-    'AJAX_HTML_DIR' => AJAX_HTML_DIR,
 
     // Misc
     'BOT_UID' => BOT_UID,

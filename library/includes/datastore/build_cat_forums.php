@@ -113,9 +113,6 @@ if ($bb_cfg['show_jumpbox']) {
     );
 
     $this->store('jumpbox', $data);
-
-    file_write($data['guest'], AJAX_HTML_DIR . '/jumpbox_guest.html', false, true, true);
-    file_write($data['user'], AJAX_HTML_DIR . '/jumpbox_user.html', false, true, true);
 }
 
 //
