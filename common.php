@@ -269,16 +269,6 @@ function clean_filename($fname)
     return str_replace($s, '_', str_compact($fname));
 }
 
-function bb_crc32($str)
-{
-    return (float)sprintf('%u', crc32($str));
-}
-
-function hexhex($value)
-{
-    return dechex(hexdec($value));
-}
-
 /**
  * @param string $str
  * @return string

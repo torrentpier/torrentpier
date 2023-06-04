@@ -370,56 +370,56 @@ class User
      *
      * @return array
      */
-    public function login($args, $mod_admin_login = false)
+    public function login($args, bool $mod_admin_login = false): array
     {
         $username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
         $password = !empty($args['login_password']) ? $args['login_password'] : '';
 
         if ($username && $password) {
             $username_sql = str_replace("\\'", "''", $username);
-            $password_sql = md5(md5($password));
 
             $sql = "
 				SELECT *
 				FROM " . BB_USERS . "
 				WHERE username = '$username_sql'
-				  AND user_password = '$password_sql'
 				  AND user_active = 1
 				  AND user_id != " . GUEST_UID . "
 				LIMIT 1
 			";
 
             if ($userdata = DB()->fetch_row($sql)) {
-                if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == GUEST_UID || md5(md5($password)) !== $userdata['user_password'] || !$userdata['user_active']) {
+                if (!$userdata['username'] || !$userdata['user_password'] || ($userdata['user_id'] == GUEST_UID) || !$userdata['user_active']) {
                     trigger_error('invalid userdata', E_USER_ERROR);
                 }
 
                 // Start mod/admin session
-                if ($mod_admin_login) {
-                    DB()->query("
+                if ($this->checkPassword($password, $userdata['user_password'])) {
+                    if ($mod_admin_login) {
+                        DB()->query("
 						UPDATE " . BB_SESSIONS . " SET
 							session_admin = " . $this->data['user_level'] . "
 						WHERE session_user_id = " . $this->data['user_id'] . "
 							AND session_id = '" . $this->data['session_id'] . "'
 					");
-                    $this->data['session_admin'] = $this->data['user_level'];
-                    Sessions::cache_update_userdata($this->data);
+                        $this->data['session_admin'] = $this->data['user_level'];
+                        Sessions::cache_update_userdata($this->data);
 
-                    return $this->data;
-                }
+                        return $this->data;
+                    }
 
-                if ($new_session_userdata = $this->session_create($userdata, false)) {
-                    // Removing guest sessions from this IP
-                    DB()->query("
+                    if ($new_session_userdata = $this->session_create($userdata, false)) {
+                        // Removing guest sessions from this IP
+                        DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
 						WHERE session_ip = '" . USER_IP . "'
 							AND session_user_id = " . GUEST_UID . "
 					");
 
-                    return $new_session_userdata;
-                }
+                        return $new_session_userdata;
+                    }
 
-                trigger_error("Could not start session : login", E_USER_ERROR);
+                    trigger_error("Could not start session : login", E_USER_ERROR);
+                }
             }
         }
 
@@ -755,5 +755,23 @@ class User
             case  'flip':
                 return array_flip(explode(',', $excluded));
         }
+    }
+
+    public function checkPassword(string $enteredPassword, string $dbHash): bool
+    {
+        if (substr($dbHash, 0, 1) == "$") {
+            return password_verify($enteredPassword, $dbHash);
+        } else {
+            if (md5(md5($enteredPassword)) === $dbHash) {
+                // Update old md5 password
+                $newPassword = password_hash($enteredPassword, PASSWORD_BCRYPT);
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '$newPassword' WHERE user_password = '$dbHash' LIMIT 1");
+
+                // Accept login
+                return true;
+            }
+        }
+
+        return false;
     }
 }
