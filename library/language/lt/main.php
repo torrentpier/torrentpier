@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nėra';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Duomenų laikmenos';
-$lang['CLEAR_CACHE'] = 'Išvalyti Talpyklą';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
