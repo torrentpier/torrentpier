@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Տեսակը торрента հաջողությամ
 $lang['DEL_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել հեղեղ?';
 $lang['DEL_MOVE_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել և տեղափոխել թեման?';
 $lang['UNEXECUTED_RELEASE'] = 'Դուք ունեք бесформенные հաղորդագրություն է տարածել, նախքան ստեղծել նոր Fix неоформленном!';
-$lang['STATUS_DOES_EXIST'] = 'Նման կարգավիճակ չունի: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Կարգավիճակի փոփոխությունը բաժանելու - %s';
@@ -2836,3 +2835,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Բարի գալուստ կայք %s',
     'USER_WELCOME_INACTIVE' => 'Բարի գալուստ կայք %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
