@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'उपलब्ध नहीं है';
 
 // Clear Cache
 $lang['DATASTORE'] = 'डेटा भंडार';
-$lang['CLEAR_CACHE'] = 'कैश को साफ़ करें';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
