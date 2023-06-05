@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Không có';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Kho dữ liệu';
-$lang['CLEAR_CACHE'] = 'Rõ Ràng Nhớ Tạm';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
