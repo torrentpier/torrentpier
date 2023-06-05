@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tipas torrent pakeistas sėkmingai';
 $lang['DEL_TORRENT'] = 'Ar jūs tikrai norite ištrinti torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ar jūs tikrai norite ištrinti ir perkelti tema?';
 $lang['UNEXECUTED_RELEASE'] = 'Ar turite beformė spaudai prieš kurdami naują išspręsti savo nesuformuluota!';
-$lang['STATUS_DOES_EXIST'] = 'Tokio statuso nėra: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Statuso keitimo platinimo - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Sveiki atvykę į svetainę %s',
     'USER_WELCOME_INACTIVE' => 'Sveiki atvykę į svetainę %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
