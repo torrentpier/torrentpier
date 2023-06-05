@@ -226,16 +226,17 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
     }
     clearstatcache();
     if (bb_mkdir(dirname($file))) {
-        $fp = fopen($file, 'ab+');
-        if ($lock) {
-            flock($fp, LOCK_EX);
+        if ($fp = fopen($file, 'ab+')) {
+            if ($lock) {
+                flock($fp, LOCK_EX);
+            }
+            if ($replace_content) {
+                ftruncate($fp, 0);
+                fseek($fp, 0, SEEK_SET);
+            }
+            $bytes_written = fwrite($fp, $str);
+            fclose($fp);
         }
-        if ($replace_content) {
-            ftruncate($fp, 0);
-            fseek($fp, 0, SEEK_SET);
-        }
-        $bytes_written = fwrite($fp, $str);
-        fclose($fp);
     }
 
     return $bytes_written;
@@ -267,16 +268,6 @@ function clean_filename($fname)
 {
     static $s = array('\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ');
     return str_replace($s, '_', str_compact($fname));
-}
-
-function bb_crc32($str)
-{
-    return (float)sprintf('%u', crc32($str));
-}
-
-function hexhex($value)
-{
-    return dechex(hexdec($value));
 }
 
 /**
