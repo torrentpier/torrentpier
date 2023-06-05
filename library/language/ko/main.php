@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = '사용할 수 없';
 
 // Clear Cache
 $lang['DATASTORE'] = '데이터 저장소';
-$lang['CLEAR_CACHE'] = '캐';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
