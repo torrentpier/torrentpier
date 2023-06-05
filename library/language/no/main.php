@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Skriv inn torrent vellykket endret';
 $lang['DEL_TORRENT'] = 'Er du sikker på at du vil slette torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Er du sikker på at du vil slette og flytte emnet?';
 $lang['UNEXECUTED_RELEASE'] = 'Har du en formløse slipp før du oppretter en ny fikse hans uformet!';
-$lang['STATUS_DOES_EXIST'] = 'En slik status ikke eksisterer: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Endre status for distribusjon - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Velkommen til siden %s',
     'USER_WELCOME_INACTIVE' => 'Velkommen til siden %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
