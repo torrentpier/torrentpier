@@ -156,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
   `ban_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `ban_ip`     VARCHAR(42)           NOT NULL DEFAULT '0',
   `ban_email`  VARCHAR(255)          NOT NULL DEFAULT '',
+  `ban_agent`  TEXT                  NOT NULL DEFAULT '',
   PRIMARY KEY (`ban_id`),
   KEY `ban_ip_user_id` (`ban_ip`, `ban_userid`)
 )

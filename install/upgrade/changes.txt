@@ -63,3 +63,4 @@ INSERT INTO bb_config VALUES ('show_board_start_index', '1');
 
 // 2.4.0-beta1
 ALTER TABLE `bb_sessions` ADD `session_agent` TEXT NOT NULL DEFAULT '';
+ALTER TABLE `bb_banlist` ADD `ban_agent` TEXT NOT NULL DEFAULT '';

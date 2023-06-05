@@ -246,6 +246,7 @@ class User
         if ($is_user) {
             $where_sql = 'ban_ip = ' . USER_IP;
             $where_sql .= $login ? " OR ban_userid = $user_id" : '';
+            $where_sql .= " OR ban_agent = '" . USER_AGENT . "'";
 
             if (DB()->fetch_row("SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
                 bb_simple_die($lang['YOU_BEEN_BANNED']);
