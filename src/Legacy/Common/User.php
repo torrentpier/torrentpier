@@ -388,7 +388,7 @@ class User
 			";
 
             if ($userdata = DB()->fetch_row($sql)) {
-                if (!$userdata['username'] || !$userdata['user_password'] || ($userdata['user_id'] == GUEST_UID) || !$userdata['user_password_method'] || !$userdata['user_active']) {
+                if (!$userdata['username'] || !$userdata['user_password'] || ($userdata['user_id'] == GUEST_UID) || !$userdata['user_active']) {
                     trigger_error('invalid userdata', E_USER_ERROR);
                 }
 
