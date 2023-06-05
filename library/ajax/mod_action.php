@@ -22,7 +22,7 @@ switch ($mode) {
 
         // Валидность статуса
         if (!isset($lang['TOR_STATUS_NAME'][$status])) {
-            $this->ajax_die($lang['STATUS_DOES_EXIST'] . $new_status);
+            $this->ajax_die($lang['TOR_STATUS_FAILED']);
         }
 
         $topic_ids = DB()->fetch_rowset("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($topics)", 'attach_id');
@@ -94,17 +94,19 @@ switch ($mode) {
         $link_reg_ip = $link_last_ip = '';
 
         if (!empty($reg_ip)) {
-            $link_reg_ip .= $lang['OTHER_IP'] . ' ';
+            $link_reg_ip .= $lang['OTHER_IP'] . '&nbsp';
             foreach ($reg_ip as $row) {
-                $link_reg_ip .= profile_url($row) . ' ';
+                $link_reg_ip .= profile_url($row) . ', ';
             }
+            $link_reg_ip = rtrim($link_reg_ip, ', ');
         }
 
         if (!empty($last_ip)) {
-            $link_last_ip .= $lang['OTHER_IP'] . ' ';
+            $link_last_ip .= $lang['OTHER_IP'] . '&nbsp';
             foreach ($last_ip as $row) {
-                $link_last_ip .= profile_url($row) . ' ';
+                $link_last_ip .= profile_url($row) . ', ';
             }
+            $link_last_ip = rtrim($link_last_ip, ', ');
         }
 
         if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) {
