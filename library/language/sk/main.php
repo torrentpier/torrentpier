@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nie je k dispozícii';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Vymazať Vyrovnávaciu Pamäť';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
