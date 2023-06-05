@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Πληκτρολογήστε το torrent με επ�
 $lang['DEL_TORRENT'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε το torrent;';
 $lang['DEL_MOVE_TORRENT'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε και να μετακινήσετε το θέμα;';
 $lang['UNEXECUTED_RELEASE'] = 'Έχετε μια άμορφη απελευθέρωση πριν από τη δημιουργία ένα νέο φτιάξει το αδιαμόρφωτο!';
-$lang['STATUS_DOES_EXIST'] = 'Μια τέτοια κατάσταση δεν υπάρχει. ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Η αλλαγή του καθεστώτος διανομής - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Καλώς ορίσατε στον ιστότοπο %s',
     'USER_WELCOME_INACTIVE' => 'Καλώς ορίσατε στον ιστότοπο %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
