@@ -1649,7 +1649,7 @@ $lang['NOT_AVAILABLE'] = 'Mevcut değil';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Veri deposuna';
-$lang['CLEAR_CACHE'] = 'Önbelleği Temizle';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
