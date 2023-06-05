@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Kirjoita torrent onnistuneesti muuttunut';
 $lang['DEL_TORRENT'] = 'Oletko varma, että haluat poistaa torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Oletko varma, että haluat poistaa ja siirtää aihe?';
 $lang['UNEXECUTED_RELEASE'] = 'Onko sinulla muodoton vapauttaa ennen kuin luot uuden korjata hänen muovaamattomien!';
-$lang['STATUS_DOES_EXIST'] = 'Tällainen asema ei ole olemassa: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Tilan muuttaminen jakelu - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Tervetuloa sivustolle %s',
     'USER_WELCOME_INACTIVE' => 'Tervetuloa sivustolle %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
