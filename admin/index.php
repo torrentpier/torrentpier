@@ -125,7 +125,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         ));
 
         // Get users online information.
-        $sql = 'SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
+        $sql = 'SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_agent, s.session_start
 			FROM ' . BB_USERS . ' u, ' . BB_SESSIONS . ' s
 			WHERE s.session_logged_in = 1
 				AND u.user_id = s.session_user_id
@@ -138,7 +138,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $onlinerow_reg = DB()->sql_fetchrowset($result);
 
         // Get guests online information.
-        $sql = 'SELECT session_logged_in, session_time, session_ip, session_start
+        $sql = 'SELECT session_logged_in, session_time, session_ip, session_agent, session_start
 			FROM ' . BB_SESSIONS . '
 			WHERE session_logged_in = 0
 				AND session_time >= ' . (TIMENOW - 300) . '
@@ -164,6 +164,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                     'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
                     'IP_ADDRESS' => $reg_ip,
                     'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
+                    'USER_DEVICE' => get_user_device($onlinerow_reg[$i]['session_agent']),
                 ));
             }
         }
@@ -183,6 +184,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                     'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i', false),
                     'IP_ADDRESS' => $guest_ip,
                     'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
+                    'USER_DEVICE' => get_user_device($onlinerow_guest[$i]['session_agent']),
                 ));
             }
         }
