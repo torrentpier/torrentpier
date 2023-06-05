@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'لا تتوفر';
 
 // Clear Cache
 $lang['DATASTORE'] = 'مخزن البيانات';
-$lang['CLEAR_CACHE'] = 'مسح ذاكرة التخزين المؤقت';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
