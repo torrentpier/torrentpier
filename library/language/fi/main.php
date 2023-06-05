@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Ei saatavilla';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Tyhjennä Välimuisti';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
