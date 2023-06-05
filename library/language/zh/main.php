@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = '不提供';
 
 // Clear Cache
 $lang['DATASTORE'] = '数据存储';
-$lang['CLEAR_CACHE'] = '清除缓存';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
