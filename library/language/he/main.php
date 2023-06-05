@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'הקלד את סיקור בהצלחה שינה';
 $lang['DEL_TORRENT'] = 'אתה בטוח שאתה רוצה למחוק את הטורנט?';
 $lang['DEL_MOVE_TORRENT'] = 'אתה בטוח שאתה רוצה למחוק ולהעביר את הנושא?';
 $lang['UNEXECUTED_RELEASE'] = 'יש לך צורה שחרור לפני יצירת תיקון חדש שלו מפותח!';
-$lang['STATUS_DOES_EXIST'] = 'מעמד כזה אינו קיים: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'משנים את הסטטוס של הפצה - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'ברוכים הבאים לאתר %s',
     'USER_WELCOME_INACTIVE' => 'ברוכים הבאים לאתר %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
