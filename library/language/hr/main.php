@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip bujica je uspješno promijenjen';
 $lang['DEL_TORRENT'] = 'Jeste li sigurni da želite ukloniti torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeste li sigurni da želite ukloniti i premjesti temu?';
 $lang['UNEXECUTED_RELEASE'] = 'Imate bezobličan izdanju, prije nego što stvorite novi Fix неоформленном!';
-$lang['STATUS_DOES_EXIST'] = 'Takav status ne postoji: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Promjena statusa iz ruke - %s';
@@ -2836,3 +2835,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Dobrodošli na stranicu %s',
     'USER_WELCOME_INACTIVE' => 'Dobrodošli na stranicu %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
