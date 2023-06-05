@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Ikke tilgængelig';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Ryd Cache';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
