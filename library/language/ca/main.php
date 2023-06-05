@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Escriviu el torrent canviat correctament';
 $lang['DEL_TORRENT'] = 'Esteu segur que voleu suprimir el torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Esteu segur que voleu suprimir i a moure el tema?';
 $lang['UNEXECUTED_RELEASE'] = 'Teniu un informe de llançament abans de crear un nou arreglar la seva unformed!';
-$lang['STATUS_DOES_EXIST'] = 'Aquest estatus no existeix: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Canviar l\'estat de la distribució - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Benvingut al lloc %s',
     'USER_WELCOME_INACTIVE' => 'Benvingut al lloc %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
