@@ -392,6 +392,11 @@ class User
                     trigger_error('invalid userdata', E_USER_ERROR);
                 }
 
+                // Check password
+                if (!$this->checkPassword($password, $userdata)) {
+                    return [];
+                }
+
                 // Start mod/admin session
                 if ($mod_admin_login) {
                     DB()->query("
@@ -753,5 +758,30 @@ class User
             case  'flip':
                 return array_flip(explode(',', $excluded));
         }
+    }
+
+    /**
+     * Check entered password
+     *
+     * @param string $enteredPassword
+     * @param array $userdata
+     * @return bool
+     */
+    private function checkPassword(string $enteredPassword, array $userdata): bool
+    {
+        global $bb_cfg;
+
+        if (password_verify($enteredPassword, $userdata['user_password'])) {
+            return true;
+        } else {
+            if (md5(md5($enteredPassword)) === $userdata['user_password']) {
+                // Update old md5 password
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . password_hash($enteredPassword, $bb_cfg['password_hash_algo']) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

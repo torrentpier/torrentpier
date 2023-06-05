@@ -60,6 +60,3 @@ ALTER TABLE `bb_users` CHANGE `user_newpasswd` `user_newpasswd` VARCHAR(255) NOT
 
 // 2.4.0-alpha3
 INSERT INTO bb_config VALUES ('show_board_start_index', '1');
-
-// 2.4.0-beta1
-ALTER TABLE `bb_users` ADD `user_password_method` ENUM ('md5', 'password_hash') DEFAULT NULL;
