@@ -767,7 +767,7 @@ class User
      * @param array $userdata
      * @return bool
      */
-    private function checkPassword(string $enteredPassword, array $userdata): bool
+    public function checkPassword(string $enteredPassword, array $userdata): bool
     {
         global $bb_cfg;
 

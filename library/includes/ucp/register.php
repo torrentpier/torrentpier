@@ -217,7 +217,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 } else {
                     if (!empty($cur_pass)) {
-                        $cur_pass_valid = password_verify($cur_pass, $pr_data['user_password']);
+                        $cur_pass_valid = $user->checkPassword($cur_pass, $pr_data);
                     }
                     if (!empty($new_pass) && !$cur_pass_valid) {
                         $errors[] = $lang['CHOOSE_PASS_FAILED'];
