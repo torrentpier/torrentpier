@@ -1648,7 +1648,7 @@ $lang['NOT_AVAILABLE'] = 'Mövcud deyil';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Saxlama məlumat';
-$lang['CLEAR_CACHE'] = 'Keşi Sil';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
