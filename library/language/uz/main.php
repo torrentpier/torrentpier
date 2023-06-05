@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'muvaffaqiyatli o\'zgartirildi torrent kiriting';
 $lang['DEL_TORRENT'] = 'Agar torrent o\'chirishni istaysizmi?';
 $lang['DEL_MOVE_TORRENT'] = 'Agar o\'chirish va mavzuni ko\'chirish istasangiz ishonchingiz komilmi?';
 $lang['UNEXECUTED_RELEASE'] = 'Agar yangi tahrir uning shaklsiz yaratish oldin shaklsiz ozod bormi!';
-$lang['STATUS_DOES_EXIST'] = 'Bunday vaziyat mavjud emas:';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'tarqatish maqomini o\'zgartirish - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Saytga xush kelibsiz %s',
     'USER_WELCOME_INACTIVE' => 'Saytga xush kelibsiz %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
