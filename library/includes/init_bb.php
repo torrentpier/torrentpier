@@ -107,9 +107,8 @@ if (DBG_USER) {
     unset($_COOKIE['explain']);
 }
 
-define('DELETED', -1);
-
 // User Levels
+define('DELETED', -1);
 define('USER', 0);
 define('ADMIN', 1);
 define('MOD', 2);
