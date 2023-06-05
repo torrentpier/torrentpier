@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tür torrent başarıyla değiştirildi';
 $lang['DEL_TORRENT'] = 'Torrent silmek istediğinizden emin misiniz?';
 $lang['DEL_MOVE_TORRENT'] = 'Silmek ve konuyu taşımak istediğinizden emin misiniz?';
 $lang['UNEXECUTED_RELEASE'] = 'Şekilsiz bir sürüm var yeni bir düzeltme oluşmamış onun oluşturmadan önce!';
-$lang['STATUS_DOES_EXIST'] = 'Böyle bir durum yok: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Dağıtım statüsünün değiştirilmesi - %s';
@@ -2838,3 +2837,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'siteye hoşgeldiniz %s',
     'USER_WELCOME_INACTIVE' => 'siteye hoşgeldiniz %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
