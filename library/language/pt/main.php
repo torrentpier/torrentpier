@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Digite o torrent alterada com êxito';
 $lang['DEL_TORRENT'] = 'Tem certeza de que deseja excluir o torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Tem certeza de que deseja excluir e mover o tópico?';
 $lang['UNEXECUTED_RELEASE'] = 'Você tem um disforme de lançamento antes de criar uma nova correção de sua nebulosas!';
-$lang['STATUS_DOES_EXIST'] = 'Tal status não existe: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'A alteração do status de distribuição - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Bem vindo ao site %s',
     'USER_WELCOME_INACTIVE' => 'Bem vindo ao site %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
