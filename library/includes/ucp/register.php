@@ -208,7 +208,7 @@ foreach ($profile_fields as $field => $can_edit) {
                         $errors[] = $err;
                     }
 
-                    $db_data['user_password'] = password_hash($new_pass, $bb_cfg['password_hash_algo']);
+                    $db_data['user_password'] = $user->password_hash($new_pass);
                 }
 
                 if ($mode == 'register') {

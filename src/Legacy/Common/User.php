@@ -772,16 +772,34 @@ class User
         global $bb_cfg;
 
         if (password_verify($enteredPassword, $userdata['user_password'])) {
+            if (password_needs_rehash($userdata['user_password'], $bb_cfg['password_hash_options']['algo'], $bb_cfg['password_hash_options']['options'])) {
+                // Update password_hash
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+            }
+
             return true;
         } else {
             if (md5(md5($enteredPassword)) === $userdata['user_password']) {
                 // Update old md5 password
-                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . password_hash($enteredPassword, $bb_cfg['password_hash_algo']) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
 
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * Create password_hash
+     *
+     * @param string $enteredPassword
+     * @return false|string|null
+     */
+    public function password_hash(string $enteredPassword)
+    {
+        global $bb_cfg;
+
+        return password_hash($enteredPassword, $bb_cfg['password_hash_options']['algo'], $bb_cfg['password_hash_options']['options']);
     }
 }
