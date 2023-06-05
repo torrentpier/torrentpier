@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Írja be a torrent sikeresen megváltozott';
 $lang['DEL_TORRENT'] = 'Biztos, hogy törölni akarja a torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Biztos, hogy törölni szeretné, majd mozgassa a téma?';
 $lang['UNEXECUTED_RELEASE'] = 'Van egy alaktalan kiadás előtt létrehozni egy új javítás a formátlan!';
-$lang['STATUS_DOES_EXIST'] = 'Ilyen állapot nem létezik: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'A változó állapota engedély - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Üdvözöljük az oldalon %s',
     'USER_WELCOME_INACTIVE' => 'Üdvözöljük az oldalon %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
