@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Typ torrent úspešne zmenený';
 $lang['DEL_TORRENT'] = 'Ste si istý, že chcete vymazať torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ste si istý, že chcete zrušiť a presunúť tému?';
 $lang['UNEXECUTED_RELEASE'] = 'Máte beztvaré uvoľnenie pred vytvorením nové opraviť jeho nedokončený!';
-$lang['STATUS_DOES_EXIST'] = 'Takýto stav neexistuje: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Zmena stavu distribúcie - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Vitajte na stránke %s',
     'USER_WELCOME_INACTIVE' => 'Vitajte na stránke %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
