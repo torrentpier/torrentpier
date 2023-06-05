@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'No disponible';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Almacén de datos';
-$lang['CLEAR_CACHE'] = 'Borrar Caché';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
