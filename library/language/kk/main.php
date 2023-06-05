@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Жоқ';
 
 // Clear Cache
 $lang['DATASTORE'] = 'дерекқор';
-$lang['CLEAR_CACHE'] = 'Кэшті тазалау';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
