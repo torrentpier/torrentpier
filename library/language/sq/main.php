@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Lloji përrua me sukses ndryshuar';
 $lang['DEL_TORRENT'] = 'A jeni të sigurt që ju doni të fshini përrua?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeni i sigurt që dëshironi të fshini dhe për të shkuar temë?';
 $lang['UNEXECUTED_RELEASE'] = 'A keni një shapeless lirimin e para duke krijuar një re të rregulluar tij paformuar!';
-$lang['STATUS_DOES_EXIST'] = 'Një status të tillë nuk ekziston: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ndryshimin e statusit të shpërndarjes - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Mirë se vini në faqen %s',
     'USER_WELCOME_INACTIVE' => 'Mirë se vini në faqen %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
