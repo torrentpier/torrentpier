@@ -365,12 +365,12 @@ class User
     /**
      * Login
      *
-     * @param $args
+     * @param array $args
      * @param bool $mod_admin_login
      *
      * @return array
      */
-    public function login($args, bool $mod_admin_login = false): array
+    public function login(array $args, bool $mod_admin_login = false): array
     {
         $username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
         $password = !empty($args['login_password']) ? $args['login_password'] : '';
