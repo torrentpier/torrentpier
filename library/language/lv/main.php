@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nav pieejama';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Iztīrīt Kešatmiņu';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
