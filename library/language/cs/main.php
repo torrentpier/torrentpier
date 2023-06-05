@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Není k dispozici';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Vymazat Mezipaměť';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
