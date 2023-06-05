@@ -16,6 +16,12 @@ global $userdata, $lang, $bb_cfg;
 $mode = (string)$this->request['mode'];
 
 switch ($mode) {
+    case 'clear_logs':
+        remove_files_by_extension(LOG_DIR, ['log']);
+
+        $this->response['logs_html'] = '<span class="seed bold">' . $lang['ALL_LOGS_FILE_CLEARED'] . '</span>';
+        break;
+
     case 'clear_cache':
         foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
             if (!in_array('db_sqlite', $cache_val)) {
