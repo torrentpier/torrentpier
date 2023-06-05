@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tapez le torrent modifié avec succès';
 $lang['DEL_TORRENT'] = 'Êtes-vous sûr de vouloir supprimer le torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Êtes-vous sûr que vous voulez supprimer et de déplacer le sujet?';
 $lang['UNEXECUTED_RELEASE'] = 'Avez-vous un informe libération avant de créer un nouveau correctif son informes!';
-$lang['STATUS_DOES_EXIST'] = 'Ce statut n\'existe pas: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'La modification de l\'état de la distribution - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Bienvenue sur le site %s',
     'USER_WELCOME_INACTIVE' => 'Bienvenue sur le site %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
