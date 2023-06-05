@@ -383,6 +383,7 @@ $bb_cfg['password_symbols'] = [
         'lowercase' => true // Строчные буквы
     ]
 ];
+$bb_cfg['password_hash_algo'] = PASSWORD_BCRYPT;
 
 // Email
 $bb_cfg['emailer'] = [
