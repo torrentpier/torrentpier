@@ -101,6 +101,7 @@ $lang['CLICK_RETURN_GROUP'] = 'Click %sHere%s to return to group information';
 
 $lang['ADMIN_PANEL'] = 'Go to Administration Panel';
 $lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
+$lang['ALL_LOGS_FILE_CLEARED'] = 'Log files has been removed';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
 $lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
@@ -1645,7 +1646,8 @@ $lang['NOT_AVAILABLE'] = 'Not available';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_LOGS'] = 'Log files';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
