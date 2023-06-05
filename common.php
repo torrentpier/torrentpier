@@ -276,7 +276,7 @@ function clean_filename($fname)
  */
 function str_compact($str)
 {
-    return preg_replace('#\s+#u', ' ', trim($str));
+    return preg_replace('#\s+#u', ' ', trim($str ?? ''));
 }
 
 /**
