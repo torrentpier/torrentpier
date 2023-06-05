@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = '입력 토런트를 성공적으로 변경된';
 $lang['DEL_TORRENT'] = '당신은 당신을 삭제하려면 토렌트니까?';
 $lang['DEL_MOVE_TORRENT'] = '당신은 당신을 삭제 이동합니다.';
 $lang['UNEXECUTED_RELEASE'] = '당신이 볼는 출시하기 전에 새로 만드는 수정의 형상이 없는!';
-$lang['STATUS_DOES_EXIST'] = '이러한 상태가 존재하지 않: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '의 상태를 변경 분포-%s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => '사이트에 오신 것을 환영합니다 %s',
     'USER_WELCOME_INACTIVE' => '사이트에 오신 것을 환영합니다 %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
