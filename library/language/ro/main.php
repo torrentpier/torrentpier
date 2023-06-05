@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip torrent schimbat cu succes';
 $lang['DEL_TORRENT'] = 'Ești sigur că doriți să ștergeți de pe torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ești sigur că doriți să ștergeți și pentru a muta acest subiect?';
 $lang['UNEXECUTED_RELEASE'] = 'Ai o informă de presă înainte de a crea un nou remediu lui neformate!';
-$lang['STATUS_DOES_EXIST'] = 'O astfel de stare nu există: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Schimbarea statutului de distribuție - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Bun venit pe site-ul %s',
     'USER_WELCOME_INACTIVE' => 'Bun venit pe site-ul %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
