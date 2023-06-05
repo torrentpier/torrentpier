@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Ievadiet torrent veiksmīgi mainīta';
 $lang['DEL_TORRENT'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst un pārvietot tēmu?';
 $lang['UNEXECUTED_RELEASE'] = 'Vai jums ir bezveidīgs atbrīvot pirms veidot jaunu noteikt savu neizveidotā!';
-$lang['STATUS_DOES_EXIST'] = 'Šāda statusa nav: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Statusa maiņai izplatīšana - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Laipni lūdzam vietnē %s',
     'USER_WELCOME_INACTIVE' => 'Laipni lūdzam vietnē %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
