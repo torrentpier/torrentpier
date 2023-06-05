@@ -383,6 +383,11 @@ $bb_cfg['password_symbols'] = [
         'lowercase' => true // Строчные буквы
     ]
 ];
+$bb_cfg['password_hash_options'] = [
+    // https://www.php.net/manual/ru/password.constants.php
+    'algo' => PASSWORD_BCRYPT,
+    'options' => []
+];
 
 // Email
 $bb_cfg['emailer'] = [

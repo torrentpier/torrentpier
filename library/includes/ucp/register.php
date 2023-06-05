@@ -208,7 +208,7 @@ foreach ($profile_fields as $field => $can_edit) {
                         $errors[] = $err;
                     }
 
-                    $db_data['user_password'] = md5(md5($new_pass));
+                    $db_data['user_password'] = $user->password_hash($new_pass);
                 }
 
                 if ($mode == 'register') {
@@ -217,7 +217,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 } else {
                     if (!empty($cur_pass)) {
-                        $cur_pass_valid = ($pr_data['user_password'] === md5(md5($cur_pass)));
+                        $cur_pass_valid = $user->checkPassword($cur_pass, $pr_data);
                     }
                     if (!empty($new_pass) && !$cur_pass_valid) {
                         $errors[] = $lang['CHOOSE_PASS_FAILED'];
