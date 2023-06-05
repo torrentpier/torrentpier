@@ -1648,7 +1648,7 @@ $lang['NOT_AVAILABLE'] = 'Հասանելի չէ';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Տվյալների շտեմարան';
-$lang['CLEAR_CACHE'] = 'Մաքրել Cache';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
