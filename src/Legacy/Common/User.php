@@ -254,6 +254,7 @@ class User
                 'session_start' => (int)TIMENOW,
                 'session_time' => (int)TIMENOW,
                 'session_ip' => (string)USER_IP,
+                'session_agent' => (string)USER_AGENT,
                 'session_logged_in' => (int)$login,
                 'session_admin' => (int)$mod_admin_session,
             ]);
@@ -304,6 +305,7 @@ class User
         }
         $this->data['session_id'] = $session_id;
         $this->data['session_ip'] = USER_IP;
+        $this->data['session_agent'] = USER_AGENT;
         $this->data['session_user_id'] = $user_id;
         $this->data['session_logged_in'] = $login;
         $this->data['session_start'] = TIMENOW;
