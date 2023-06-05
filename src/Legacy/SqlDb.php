@@ -1012,7 +1012,7 @@ class SqlDb
                 $this->explain_hold .= '<tr>';
                 foreach (array_values($row) as $i => $val) {
                     $class = !($i % 2) ? 'row1' : 'row2';
-                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->selected_db}.", ',', ';'], ['', ', ', ';<br />'], $val) . '</td>';
+                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->selected_db}.", ',', ';'], ['', ', ', ';<br />'], $val ?? '') . '</td>';
                 }
                 $this->explain_hold .= '</tr>';
 
