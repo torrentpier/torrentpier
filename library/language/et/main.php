@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tüüp torrent edukalt muutunud';
 $lang['DEL_TORRENT'] = 'Olete kindel, et soovite kustutada torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Olete kindel, et soovite kustutada ja liigutada teema?';
 $lang['UNEXECUTED_RELEASE'] = 'Kas teil on vormitu vabastada enne luua uusi määrata oma konarliku!';
-$lang['STATUS_DOES_EXIST'] = 'Selline seisund ei ole olemas: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Oleku muutmine jaotus - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Tere tulemast saidile %s',
     'USER_WELCOME_INACTIVE' => 'Tere tulemast saidile %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
