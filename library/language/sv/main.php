@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Typ torrent ändrats';
 $lang['DEL_TORRENT'] = 'Är du säker på att du vill ta bort torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Är du säker på att du vill ta bort och flytta ämnet?';
 $lang['UNEXECUTED_RELEASE'] = 'Har du en oformlig release innan du skapar en ny fix hans oformliga!';
-$lang['STATUS_DOES_EXIST'] = 'Detta tillstånd inte existerar: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ändra status för distribution - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Välkommen till sajten %s',
     'USER_WELCOME_INACTIVE' => 'Välkommen till sajten %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
