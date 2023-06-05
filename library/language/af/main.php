@@ -1645,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nie beskikbaar nie';
 
 // Clear Cache
 $lang['DATASTORE'] = 'datastore';
-$lang['CLEAR_CACHE'] = 'Vee kas uit';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
