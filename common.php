@@ -211,22 +211,6 @@ function bb_log($msg, $file_name, $return_path = false)
     return file_write($msg, $path);
 }
 
-/**
- * Remove files recursively by extension
- *
- * @param string $path
- * @param array $findExtension
- * @return void
- */
-function remove_files_by_extension(string $path, array $findExtension)
-{
-    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $file) {
-        if (in_array(pathinfo($file, PATHINFO_EXTENSION), $findExtension) && is_file($file)) {
-            unlink($file);
-        }
-    }
-}
-
 function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replace_content = false)
 {
     $bytes_written = false;

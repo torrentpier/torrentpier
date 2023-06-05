@@ -65,24 +65,23 @@
 <!-- IF TPL_ADMIN_MAIN -->
 <!--========================================================================-->
 <script type="text/javascript">
-    ajax.manage_admin = function (mode) {
-        ajax.exec({
-            action: 'manage_admin',
-            mode: mode,
-            user_id: ''
-        });
-    };
-    ajax.callback.manage_admin = function (data) {
-        $('#cache').html(data.cache_html);
-        $('#datastore').html(data.datastore_html);
-        $('#logs').html(data.logs_html);
-        $('#indexer').html(data.indexer_html);
-        $('#template_cache').html(data.template_cache_html);
-        $('#update_user_level').html(data.update_user_level_html);
-        $('#sync_topics').html(data.sync_topics_html);
-        $('#sync_user_posts').html(data.sync_user_posts_html);
-        $('#unlock_cron').html(data.unlock_cron_html);
-    }
+  ajax.manage_admin = function (mode) {
+    ajax.exec({
+      action: 'manage_admin',
+      mode: mode,
+      user_id: ''
+    });
+  };
+  ajax.callback.manage_admin = function (data) {
+    $('#cache').html(data.cache_html);
+    $('#datastore').html(data.datastore_html);
+    $('#indexer').html(data.indexer_html);
+    $('#template_cache').html(data.template_cache_html);
+    $('#update_user_level').html(data.update_user_level_html);
+    $('#sync_topics').html(data.sync_topics_html);
+    $('#sync_user_posts').html(data.sync_user_posts_html);
+    $('#unlock_cron').html(data.unlock_cron_html);
+  }
 </script>
 
 <br/>
@@ -107,14 +106,12 @@
 
 <table>
   <tr>
-      <td><b>{L_CLEAR}:</b></td>
-      <td>
-          <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>&nbsp;&middot;
-          <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_CLEAR_CACHE}</a>&nbsp;&middot;
-          <a href="#" id="template_cache"
-             onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>&nbsp;&middot;
-          <a href="#" id="logs" onclick="ajax.manage_admin('clear_logs'); return false;">{L_CLEAR_LOGS}</a>
-      </td>
+    <td><b>{L_CLEAR}:</b></td>
+    <td>
+      <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>&nbsp;&middot;
+      <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_CLEAR_CACHE}</a>&nbsp;&middot;
+      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>
+    </td>
   </tr>
   <tr>
     <td><b>{L_UPDATE}:</b></td>
