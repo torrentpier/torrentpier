@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'نوع سيل بنجاح تغيرت';
 $lang['DEL_TORRENT'] = 'هل أنت متأكد من أنك تريد حذف سيل ؟ ';
 $lang['DEL_MOVE_TORRENT'] = 'هل أنت متأكد من أنك تريد حذف و نقل الموضوع ؟ ';
 $lang['UNEXECUTED_RELEASE'] = 'هل لديك بشع الإفراج قبل خلق جديد تصلح له غير متشكلة!';
-$lang['STATUS_DOES_EXIST'] = 'هذا الوضع غير موجود: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'تغيير مركز التوزيع - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'مرحبا بكم في الموقع %s',
     'USER_WELCOME_INACTIVE' => 'مرحبا بكم في الموقع %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
