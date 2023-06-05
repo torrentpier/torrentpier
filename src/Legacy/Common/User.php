@@ -23,7 +23,7 @@ class User
      *
      * @var array
      */
-    public array $cfg = [
+    public $cfg = [
         'req_login' => false,    // requires user to be logged in
         'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
     ];
@@ -33,7 +33,7 @@ class User
      *
      * @var array
      */
-    public array $opt_js = [
+    public $opt_js = [
         'only_new' => 0,     // show ony new posts or topics
         'h_av' => 0,     // hide avatar
         'h_rnk_i' => 0,     // hide rank images
@@ -53,7 +53,7 @@ class User
      *
      * @var array
      */
-    public array $opt_js_guest = [
+    public $opt_js_guest = [
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
         'h_smile' => 1,     // hide smilies
@@ -65,7 +65,7 @@ class User
      *
      * @var array
      */
-    public array $sessiondata = [
+    public $sessiondata = [
         'uk' => null,
         'uid' => null,
         'sid' => '',
@@ -76,59 +76,22 @@ class User
      *
      * @var array
      */
-    public array $data = [];
+    public $data = [];
+
 
     /**
-     * User ID
+     * Shortcuts
      *
-     * @var string
+     * @var mixed
      */
-    public string $id;
-
-    /**
-     * User active (1|0)
-     */
+    public $id;
     public $active;
-
-    /**
-     * Username
-     *
-     * @var string
-     */
-    public string $name;
-
-    /**
-     * User options
-     *
-     * @var string
-     */
-    public string $opt;
-
-    /**
-     * User IP
-     *
-     * @var string
-     */
-    public string $ip;
-
-    /**
-     * User level
-     */
+    public $name;
+    public $opt;
+    public $ip;
     public $level;
-
-    /**
-     * User registration date
-     *
-     * @var string
-     */
-    public string $regdate;
-
-    /**
-     * User last visit date
-     *
-     * @var string
-     */
-    public string $lastvisit;
+    public $regdate;
+    public $lastvisit;
 
     /**
      * User constructor
