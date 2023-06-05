@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Növü torrent uğurla dəyişdi';
 $lang['DEL_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması və hərəkət mövzu?';
 $lang['UNEXECUTED_RELEASE'] = 'Var бесформенные azad yaradılması əvvəl yeni Fix неоформленном!';
-$lang['STATUS_DOES_EXIST'] = 'Belə statusu yoxdur: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Status paylanması - %s';
@@ -2836,3 +2835,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Sayta xoş gəlmisiniz %s',
     'USER_WELCOME_INACTIVE' => 'Sayta xoş gəlmisiniz %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
