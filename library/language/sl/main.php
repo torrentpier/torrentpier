@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Vnesite torrent uspešno spremenjena';
 $lang['DEL_TORRENT'] = 'Ali ste prepričani, da želite izbrisati torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ali ste prepričani, da želite izbrisati, in premakni temo?';
 $lang['UNEXECUTED_RELEASE'] = 'Imate brezoblično sprostitev, preden ustvarite novo določi njegovo blato!';
-$lang['STATUS_DOES_EXIST'] = 'Takšno stanje ne obstaja: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Spreminjanje stanja distribucije - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Dobrodošli na spletnem mestu %s',
     'USER_WELCOME_INACTIVE' => 'Dobrodošli na spletnem mestu %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
