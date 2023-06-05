@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Type the torrent successfully changed';
 $lang['DEL_TORRENT'] = 'Are you sure you want to delete the torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you want to delete and move the topic?';
 $lang['UNEXECUTED_RELEASE'] = 'Do you have a shapeless release before creating a new fix his unformed!';
-$lang['STATUS_DOES_EXIST'] = 'Such status does not exist: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Changing the status of distribution - %s';
@@ -2832,3 +2831,9 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Welcome to the site %s',
     'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
+
+// Devices
+$lang['DEVICE'] = 'Device';
+$lang['DEVICE_MOBILE'] = 'Phone';
+$lang['DEVICE_TABLET'] = 'Tablet';
+$lang['DEVICE_PC'] = 'PC';
