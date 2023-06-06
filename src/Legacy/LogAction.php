@@ -39,10 +39,10 @@ class LogAction
     }
 
     /**
-     * @param $type_name
+     * @param string $type_name
      * @param array $args
      */
-    public function mod($type_name, array $args = [])
+    public function mod(string $type_name, array $args = [])
     {
         global $userdata;
 
@@ -88,10 +88,10 @@ class LogAction
     }
 
     /**
-     * @param $type_name
+     * @param string $type_name
      * @param array $args
      */
-    public function admin($type_name, array $args = [])
+    public function admin(string $type_name, array $args = [])
     {
         $this->mod($type_name, $args);
     }

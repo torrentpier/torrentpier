@@ -28,9 +28,9 @@ class Dbs
     /**
      * Dbs constructor
      *
-     * @param $cfg
+     * @param array $cfg
      */
-    public function __construct($cfg)
+    public function __construct(array $cfg)
     {
         $this->cfg = $cfg['db'];
         $this->alias = $cfg['db_alias'];
@@ -47,7 +47,7 @@ class Dbs
      *
      * @return mixed
      */
-    public function get_db_obj($srv_name_or_alias = 'db')
+    public function get_db_obj(string $srv_name_or_alias = 'db')
     {
         $srv_name = $this->get_srv_name($srv_name_or_alias);
 
@@ -61,11 +61,11 @@ class Dbs
     /**
      * Определение имени сервера
      *
-     * @param $name
+     * @param string $name
      *
      * @return mixed|string
      */
-    public function get_srv_name($name)
+    public function get_srv_name(string $name)
     {
         $srv_name = 'db';
 
