@@ -991,6 +991,10 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
         }
     }
 
+    if (is_null($u_data)) {
+        return false;
+    }
+
     if ($u_data['user_id'] == GUEST_UID) {
         CACHE('bb_cache')->set('guest_userdata', $u_data);
     }
