@@ -128,12 +128,15 @@
 <!--========================================================================-->
 
 <script type="text/javascript">
-function refresh_username(selected_username)
-{
-	opener.document.forms['post'].{INPUT_NAME}.value = selected_username;
-	opener.focus();
-	window.close();
-}
+    function refresh_username(selected_username) {
+        if (selected_username === '') {
+            return;
+        }
+
+        opener.document.forms['post'].{INPUT_NAME}.value = selected_username;
+        opener.focus();
+        window.close();
+    }
 </script>
 
 <form method="post" name="search" action="{SEARCH_ACTION}">
