@@ -23,7 +23,7 @@ class User
      *
      * @var array
      */
-    public array $cfg = [
+    public $cfg = [
         'req_login' => false,    // requires user to be logged in
         'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
     ];
@@ -33,7 +33,7 @@ class User
      *
      * @var array
      */
-    public array $opt_js = [
+    public $opt_js = [
         'only_new' => 0,     // show ony new posts or topics
         'h_av' => 0,     // hide avatar
         'h_rnk_i' => 0,     // hide rank images
@@ -53,7 +53,7 @@ class User
      *
      * @var array
      */
-    public array $opt_js_guest = [
+    public $opt_js_guest = [
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
         'h_smile' => 1,     // hide smilies
@@ -65,7 +65,7 @@ class User
      *
      * @var array
      */
-    public array $sessiondata = [
+    public $sessiondata = [
         'uk' => null,
         'uid' => null,
         'sid' => '',
@@ -76,59 +76,14 @@ class User
      *
      * @var array
      */
-    public array $data = [];
+    public $data = [];
 
     /**
-     * User ID
+     * Shortcuts
      *
-     * @var string
+     * @var
      */
-    public string $id;
-
-    /**
-     * User active (1|0)
-     */
-    public $active;
-
-    /**
-     * Username
-     *
-     * @var string
-     */
-    public string $name;
-
-    /**
-     * User options
-     *
-     * @var string
-     */
-    public string $opt;
-
-    /**
-     * User IP
-     *
-     * @var string
-     */
-    public string $ip;
-
-    /**
-     * User level
-     */
-    public $level;
-
-    /**
-     * User registration date
-     *
-     * @var string
-     */
-    public string $regdate;
-
-    /**
-     * User last visit date
-     *
-     * @var string
-     */
-    public string $lastvisit;
+    public $id;
 
     /**
      * User constructor
@@ -262,12 +217,12 @@ class User
     /**
      * Create new session for the given user
      *
-     * @param array $userdata
+     * @param $userdata
      * @param bool $auto_created
      *
      * @return array
      */
-    public function session_create(array $userdata, $auto_created = false)
+    public function session_create($userdata, $auto_created = false)
     {
         global $bb_cfg, $lang;
 
@@ -537,13 +492,13 @@ class User
     /**
      * Verify autologin_id
      *
-     * @param array $userdata
+     * @param $userdata
      * @param bool $expire_check
      * @param bool $create_new
      *
      * @return bool|string
      */
-    public function verify_autologin_id(array $userdata, bool $expire_check = false, bool $create_new = true)
+    public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
     {
         global $bb_cfg;
 
@@ -567,12 +522,12 @@ class User
     /**
      * Create autologin_id
      *
-     * @param array $userdata
+     * @param $userdata
      * @param bool $create_new
      *
      * @return bool|string
      */
-    public function create_autologin_id(array $userdata, bool $create_new = true)
+    public function create_autologin_id($userdata, $create_new = true)
     {
         $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
