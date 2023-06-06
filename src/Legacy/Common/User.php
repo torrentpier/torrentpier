@@ -242,7 +242,7 @@ class User
         $user_id = (int)$this->data['user_id'];
         $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
 
-        // Initial ban check against user_id or IP address
+        // Initial ban check against user_id, User-Agent or IP address
         if ($is_user) {
             $where_sql = 'ban_ip = ' . USER_IP;
             $where_sql .= $login ? " OR ban_userid = $user_id" : '';
@@ -338,7 +338,7 @@ class User
      * @param bool $update_lastvisit
      * @param bool $set_cookie
      */
-    public function session_end($update_lastvisit = false, $set_cookie = true)
+    public function session_end(bool $update_lastvisit = false, bool $set_cookie = true)
     {
         DB()->query("
 			DELETE FROM " . BB_SESSIONS . "
