@@ -25,7 +25,7 @@ class SqlDb
     public $result;
     public $db_server = '';
     public $selected_db;
-    public bool $inited = false;
+    public $inited = false;
     public string $engine = 'MySQL';
 
     public $locked = false;
@@ -649,12 +649,12 @@ class SqlDb
     /**
      * Obtain user level lock
      *
-     * @param string $name
+     * @param $name
      * @param int $timeout
      *
      * @return mixed
      */
-    public function get_lock(string $name, $timeout = 0)
+    public function get_lock($name, $timeout = 0)
     {
         $lock_name = $this->get_lock_name($name);
         $timeout = (int)$timeout;
@@ -670,11 +670,11 @@ class SqlDb
     /**
      * Obtain user level lock status
      *
-     * @param string $name
+     * @param $name
      *
      * @return mixed
      */
-    public function release_lock(string $name)
+    public function release_lock($name)
     {
         $lock_name = $this->get_lock_name($name);
         $row = $this->fetch_row("SELECT RELEASE_LOCK('$lock_name') AS lock_result");
@@ -689,11 +689,11 @@ class SqlDb
     /**
      * Release user level lock
      *
-     * @param string $name
+     * @param $name
      *
      * @return mixed
      */
-    public function is_free_lock(string $name)
+    public function is_free_lock($name)
     {
         $lock_name = $this->get_lock_name($name);
         $row = $this->fetch_row("SELECT IS_FREE_LOCK('$lock_name') AS lock_result");
@@ -703,11 +703,11 @@ class SqlDb
     /**
      * Make per db unique lock name
      *
-     * @param string $name
+     * @param $name
      *
      * @return string
      */
-    public function get_lock_name(string $name): string
+    public function get_lock_name($name)
     {
         if (!$this->selected_db) {
             $this->init();
@@ -833,7 +833,7 @@ class SqlDb
      *
      * @param string $msg
      */
-    public function trigger_error(string $msg = 'DB Error')
+    public function trigger_error($msg = 'DB Error')
     {
         if (error_reporting()) {
             $msg .= ' [' . $this->debug_find_source() . ']';
@@ -848,7 +848,7 @@ class SqlDb
      *
      * @return string
      */
-    public function debug_find_source(string $mode = ''): string
+    public function debug_find_source($mode = '')
     {
         foreach (debug_backtrace() as $trace) {
             if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
@@ -867,11 +867,10 @@ class SqlDb
 
     /**
      * Prepare for logging
-     *
      * @param int $queries_count
      * @param string $log_file
      */
-    public function log_next_query($queries_count = 1, string $log_file = 'sql_queries')
+    public function log_next_query($queries_count = 1, $log_file = 'sql_queries')
     {
         $this->DBS['log_file'] = $log_file;
         $this->DBS['log_counter'] = $queries_count;
@@ -882,7 +881,7 @@ class SqlDb
      *
      * @param string $log_file
      */
-    public function log_query(string $log_file = 'sql_queries')
+    public function log_query($log_file = 'sql_queries')
     {
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.4f', $this->cur_query_time);
         $msg = [];
@@ -905,12 +904,11 @@ class SqlDb
      *
      * @param string $log_file
      */
-    public function log_slow_query(string $log_file = 'sql_slow_bb')
+    public function log_slow_query($log_file = 'sql_slow_bb')
     {
         if (!\defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query')) {
             return;
         }
-
         $this->log_query($log_file);
     }
 
@@ -1024,10 +1022,6 @@ class SqlDb
 
             case 'display':
                 echo '<a name="explain"></a><div class="med">' . $this->explain_out . '</div>';
-                break;
-
-            default:
-                bb_simple_die("Unknown mode: $mode");
                 break;
         }
     }

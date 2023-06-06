@@ -78,20 +78,12 @@ class User
      */
     public $data = [];
 
-
     /**
      * Shortcuts
      *
-     * @var mixed
+     * @var
      */
     public $id;
-    public $active;
-    public $name;
-    public $opt;
-    public $ip;
-    public $level;
-    public $regdate;
-    public $lastvisit;
 
     /**
      * User constructor
@@ -225,12 +217,12 @@ class User
     /**
      * Create new session for the given user
      *
-     * @param array $userdata
+     * @param $userdata
      * @param bool $auto_created
      *
      * @return array
      */
-    public function session_create(array $userdata, $auto_created = false)
+    public function session_create($userdata, $auto_created = false)
     {
         global $bb_cfg, $lang;
 
@@ -501,13 +493,13 @@ class User
     /**
      * Verify autologin_id
      *
-     * @param array $userdata
+     * @param $userdata
      * @param bool $expire_check
      * @param bool $create_new
      *
      * @return bool|string
      */
-    public function verify_autologin_id(array $userdata, bool $expire_check = false, bool $create_new = true)
+    public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
     {
         global $bb_cfg;
 
@@ -531,12 +523,12 @@ class User
     /**
      * Create autologin_id
      *
-     * @param array $userdata
+     * @param $userdata
      * @param bool $create_new
      *
      * @return bool|string
      */
-    public function create_autologin_id(array $userdata, bool $create_new = true)
+    public function create_autologin_id($userdata, $create_new = true)
     {
         $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
