@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip potoka uspješno promijenio';
 $lang['DEL_TORRENT'] = 'Jesi li sigurna da želiš da izbrišete potoka?';
 $lang['DEL_MOVE_TORRENT'] = 'Jesi li sigurna da želiš da izbrišete i potez temu?';
 $lang['UNEXECUTED_RELEASE'] = 'Imaš bezobličan. oslobodi pre nego što stvarajući novu popraviti svoje unformed!';
-$lang['STATUS_DOES_EXIST'] = 'Tako status ne postoji: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Mijenja položaj distribucije - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nisu dostupni';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Jasno Keš';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tipas torrent pakeistas sėkmingai';
 $lang['DEL_TORRENT'] = 'Ar jūs tikrai norite ištrinti torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ar jūs tikrai norite ištrinti ir perkelti tema?';
 $lang['UNEXECUTED_RELEASE'] = 'Ar turite beformė spaudai prieš kurdami naują išspręsti savo nesuformuluota!';
-$lang['STATUS_DOES_EXIST'] = 'Tokio statuso nėra: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Statuso keitimo platinimo - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nėra';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Duomenų laikmenos';
-$lang['CLEAR_CACHE'] = 'Išvalyti Talpyklą';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

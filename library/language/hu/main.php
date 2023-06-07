@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Írja be a torrent sikeresen megváltozott';
 $lang['DEL_TORRENT'] = 'Biztos, hogy törölni akarja a torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Biztos, hogy törölni szeretné, majd mozgassa a téma?';
 $lang['UNEXECUTED_RELEASE'] = 'Van egy alaktalan kiadás előtt létrehozni egy új javítás a formátlan!';
-$lang['STATUS_DOES_EXIST'] = 'Ilyen állapot nem létezik: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'A változó állapota engedély - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nem elérhető';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Cache Ürítése';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

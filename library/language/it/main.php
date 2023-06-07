@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Digitare il torrent cambiato con successo';
 $lang['DEL_TORRENT'] = 'Sei sicuro di voler cancellare il torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Sei sicuro di voler eliminare e spostare l\'argomento?';
 $lang['UNEXECUTED_RELEASE'] = 'Hai un informe di rilascio prima di creare un nuovo fix sua informe!';
-$lang['STATUS_DOES_EXIST'] = 'Tale stato non esiste: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Cambiare lo stato di distribuzione - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Non disponibile';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Cancella Cache';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

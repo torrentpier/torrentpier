@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Намуди ҷӯйе бо муваффақият т
 $lang['DEL_TORRENT'] = 'Оё мутмаинед, ки мехоҳед тоза ҷӯйе?';
 $lang['DEL_MOVE_TORRENT'] = 'Оё мутмаинед, ки мехоҳед тоза ва ҳаракат ба ин мавзӯъ?';
 $lang['UNEXECUTED_RELEASE'] = 'Оё шумо озод бешакл пеш аз таъсиси як ислоҳи нав нотамом Ӯ!';
-$lang['STATUS_DOES_EXIST'] = 'Чунин ҳолати вуҷуд надорад:';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Таѓйир додани вазъи тақсимоти - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Дастрас нест';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'кеш Clear';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

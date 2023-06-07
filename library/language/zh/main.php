@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = '类型的种子成功地改变了';
 $lang['DEL_TORRENT'] = '你确定要删除的洪流？';
 $lang['DEL_MOVE_TORRENT'] = '你确定要删除和移动电话题？';
 $lang['UNEXECUTED_RELEASE'] = '你有一个无形的释放之前建立一个新的解决他的未成形的！';
-$lang['STATUS_DOES_EXIST'] = '这种状况不存在： ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '改变现状的分配%s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = '不提供';
 
 // Clear Cache
 $lang['DATASTORE'] = '数据存储';
-$lang['CLEAR_CACHE'] = '清除缓存';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

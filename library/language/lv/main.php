@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Ievadiet torrent veiksmīgi mainīta';
 $lang['DEL_TORRENT'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst un pārvietot tēmu?';
 $lang['UNEXECUTED_RELEASE'] = 'Vai jums ir bezveidīgs atbrīvot pirms veidot jaunu noteikt savu neizveidotā!';
-$lang['STATUS_DOES_EXIST'] = 'Šāda statusa nav: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Statusa maiņai izplatīšana - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nav pieejama';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Iztīrīt Kešatmiņu';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

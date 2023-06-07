@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tik die torrent suksesvol verander';
 $lang['DEL_TORRENT'] = 'Is jy seker jy wil die torrent uitvee?';
 $lang['DEL_MOVE_TORRENT'] = 'Is jy seker jy wil die onderwerp uitvee en skuif?';
 $lang['UNEXECUTED_RELEASE'] = 'Het jy \'n vormlose vrylating voordat jy \'n nuwe oplossing sy ongevormde!';
-$lang['STATUS_DOES_EXIST'] = 'Sodanige status bestaan ​​nie:';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Die status van verspreiding verander - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nie beskikbaar nie';
 
 // Clear Cache
 $lang['DATASTORE'] = 'datastore';
-$lang['CLEAR_CACHE'] = 'Vee kas uit';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

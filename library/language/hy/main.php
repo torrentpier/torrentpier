@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Տեսակը торрента հաջողությամ
 $lang['DEL_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել հեղեղ?';
 $lang['DEL_MOVE_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել և տեղափոխել թեման?';
 $lang['UNEXECUTED_RELEASE'] = 'Դուք ունեք бесформенные հաղորդագրություն է տարածել, նախքան ստեղծել նոր Fix неоформленном!';
-$lang['STATUS_DOES_EXIST'] = 'Նման կարգավիճակ չունի: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Կարգավիճակի փոփոխությունը բաժանելու - %s';
@@ -1649,7 +1648,7 @@ $lang['NOT_AVAILABLE'] = 'Հասանելի չէ';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Տվյալների շտեմարան';
-$lang['CLEAR_CACHE'] = 'Մաքրել Cache';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

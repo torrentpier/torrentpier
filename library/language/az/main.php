@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Növü torrent uğurla dəyişdi';
 $lang['DEL_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması və hərəkət mövzu?';
 $lang['UNEXECUTED_RELEASE'] = 'Var бесформенные azad yaradılması əvvəl yeni Fix неоформленном!';
-$lang['STATUS_DOES_EXIST'] = 'Belə statusu yoxdur: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Status paylanması - %s';
@@ -1649,7 +1648,7 @@ $lang['NOT_AVAILABLE'] = 'Mövcud deyil';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Saxlama məlumat';
-$lang['CLEAR_CACHE'] = 'Keşi Sil';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

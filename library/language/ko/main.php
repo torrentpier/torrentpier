@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = '입력 토런트를 성공적으로 변경된';
 $lang['DEL_TORRENT'] = '당신은 당신을 삭제하려면 토렌트니까?';
 $lang['DEL_MOVE_TORRENT'] = '당신은 당신을 삭제 이동합니다.';
 $lang['UNEXECUTED_RELEASE'] = '당신이 볼는 출시하기 전에 새로 만드는 수정의 형상이 없는!';
-$lang['STATUS_DOES_EXIST'] = '이러한 상태가 존재하지 않: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '의 상태를 변경 분포-%s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = '사용할 수 없';
 
 // Clear Cache
 $lang['DATASTORE'] = '데이터 저장소';
-$lang['CLEAR_CACHE'] = '캐';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Lloji përrua me sukses ndryshuar';
 $lang['DEL_TORRENT'] = 'A jeni të sigurt që ju doni të fshini përrua?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeni i sigurt që dëshironi të fshini dhe për të shkuar temë?';
 $lang['UNEXECUTED_RELEASE'] = 'A keni një shapeless lirimin e para duke krijuar një re të rregulluar tij paformuar!';
-$lang['STATUS_DOES_EXIST'] = 'Një status të tillë nuk ekziston: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ndryshimin e statusit të shpërndarjes - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Jo në dispozicion';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Qartë Cache';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

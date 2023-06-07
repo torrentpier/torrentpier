@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Kirjoita torrent onnistuneesti muuttunut';
 $lang['DEL_TORRENT'] = 'Oletko varma, että haluat poistaa torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Oletko varma, että haluat poistaa ja siirtää aihe?';
 $lang['UNEXECUTED_RELEASE'] = 'Onko sinulla muodoton vapauttaa ennen kuin luot uuden korjata hänen muovaamattomien!';
-$lang['STATUS_DOES_EXIST'] = 'Tällainen asema ei ole olemassa: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Tilan muuttaminen jakelu - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Ei saatavilla';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Tyhjennä Välimuisti';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

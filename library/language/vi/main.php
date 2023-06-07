@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Loại torrent thay đổi thành công';
 $lang['DEL_TORRENT'] = 'Bạn có chắc chắn muốn xóa torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Bạn có chắc chắn muốn xóa và di chuyển chủ đề?';
 $lang['UNEXECUTED_RELEASE'] = 'Bạn đã có một hình thù hành trước khi tạo ra một mới sửa chữa mình vẫn!';
-$lang['STATUS_DOES_EXIST'] = 'Tình trạng như vậy, không tồn tại: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Thay đổi tình trạng của phân phối - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Không có';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Kho dữ liệu';
-$lang['CLEAR_CACHE'] = 'Rõ Ràng Nhớ Tạm';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

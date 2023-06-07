@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tür torrent başarıyla değiştirildi';
 $lang['DEL_TORRENT'] = 'Torrent silmek istediğinizden emin misiniz?';
 $lang['DEL_MOVE_TORRENT'] = 'Silmek ve konuyu taşımak istediğinizden emin misiniz?';
 $lang['UNEXECUTED_RELEASE'] = 'Şekilsiz bir sürüm var yeni bir düzeltme oluşmamış onun oluşturmadan önce!';
-$lang['STATUS_DOES_EXIST'] = 'Böyle bir durum yok: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Dağıtım statüsünün değiştirilmesi - %s';
@@ -1650,7 +1649,7 @@ $lang['NOT_AVAILABLE'] = 'Mevcut değil';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Veri deposuna';
-$lang['CLEAR_CACHE'] = 'Önbelleği Temizle';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

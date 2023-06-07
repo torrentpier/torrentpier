@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tüüp torrent edukalt muutunud';
 $lang['DEL_TORRENT'] = 'Olete kindel, et soovite kustutada torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Olete kindel, et soovite kustutada ja liigutada teema?';
 $lang['UNEXECUTED_RELEASE'] = 'Kas teil on vormitu vabastada enne luua uusi määrata oma konarliku!';
-$lang['STATUS_DOES_EXIST'] = 'Selline seisund ei ole olemas: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Oleku muutmine jaotus - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Ei ole kättesaadav';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Kustuta Vahemälu';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

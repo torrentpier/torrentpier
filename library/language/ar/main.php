@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'نوع سيل بنجاح تغيرت';
 $lang['DEL_TORRENT'] = 'هل أنت متأكد من أنك تريد حذف سيل ؟ ';
 $lang['DEL_MOVE_TORRENT'] = 'هل أنت متأكد من أنك تريد حذف و نقل الموضوع ؟ ';
 $lang['UNEXECUTED_RELEASE'] = 'هل لديك بشع الإفراج قبل خلق جديد تصلح له غير متشكلة!';
-$lang['STATUS_DOES_EXIST'] = 'هذا الوضع غير موجود: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'تغيير مركز التوزيع - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'لا تتوفر';
 
 // Clear Cache
 $lang['DATASTORE'] = 'مخزن البيانات';
-$lang['CLEAR_CACHE'] = 'مسح ذاكرة التخزين المؤقت';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

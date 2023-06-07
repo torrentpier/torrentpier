@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Тип бујице успешно промењен'
 $lang['DEL_TORRENT'] = 'Да ли сте сигурни да желите да уклоните торент?';
 $lang['DEL_MOVE_TORRENT'] = 'Да ли сте сигурни да желите да уклоните и преместите тему?';
 $lang['UNEXECUTED_RELEASE'] = 'Имате бесформенные издање, пре него што креирате нови Фик неоформленном!';
-$lang['STATUS_DOES_EXIST'] = 'Такав статус не постоји: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Промена статуса карте - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Није доступан';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Складиште података';
-$lang['CLEAR_CACHE'] = 'Да Обришете Кеш';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

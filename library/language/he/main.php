@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'הקלד את סיקור בהצלחה שינה';
 $lang['DEL_TORRENT'] = 'אתה בטוח שאתה רוצה למחוק את הטורנט?';
 $lang['DEL_MOVE_TORRENT'] = 'אתה בטוח שאתה רוצה למחוק ולהעביר את הנושא?';
 $lang['UNEXECUTED_RELEASE'] = 'יש לך צורה שחרור לפני יצירת תיקון חדש שלו מפותח!';
-$lang['STATUS_DOES_EXIST'] = 'מעמד כזה אינו קיים: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'משנים את הסטטוס של הפצה - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'לא זמין';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'נקה מטמון';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Vnesite torrent uspešno spremenjena';
 $lang['DEL_TORRENT'] = 'Ali ste prepričani, da želite izbrisati torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ali ste prepričani, da želite izbrisati, in premakni temo?';
 $lang['UNEXECUTED_RELEASE'] = 'Imate brezoblično sprostitev, preden ustvarite novo določi njegovo blato!';
-$lang['STATUS_DOES_EXIST'] = 'Takšno stanje ne obstaja: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Spreminjanje stanja distribucije - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Ni na voljo';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Počisti Zač. Pomniln';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

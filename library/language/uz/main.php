@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'muvaffaqiyatli o\'zgartirildi torrent kiriting';
 $lang['DEL_TORRENT'] = 'Agar torrent o\'chirishni istaysizmi?';
 $lang['DEL_MOVE_TORRENT'] = 'Agar o\'chirish va mavzuni ko\'chirish istasangiz ishonchingiz komilmi?';
 $lang['UNEXECUTED_RELEASE'] = 'Agar yangi tahrir uning shaklsiz yaratish oldin shaklsiz ozod bormi!';
-$lang['STATUS_DOES_EXIST'] = 'Bunday vaziyat mavjud emas:';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'tarqatish maqomini o\'zgartirish - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Mavjud emas';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Keshni tozalash';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

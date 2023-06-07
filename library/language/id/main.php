@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Jenis torrent berhasil diubah';
 $lang['DEL_TORRENT'] = 'Apakah anda yakin anda ingin menghapus torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Apakah anda yakin anda ingin menghapus dan memindahkan topik?';
 $lang['UNEXECUTED_RELEASE'] = 'Apakah anda memiliki berbentuk rilis sebelum membuat yang baru fix nya belum terbentuk!';
-$lang['STATUS_DOES_EXIST'] = 'Status tersebut tidak ada: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Mengubah status distribusi - %s';

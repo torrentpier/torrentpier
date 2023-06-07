@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'ტიპი torrent წარმატებით 
 $lang['DEL_TORRENT'] = 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ და გადაადგილება თემა?';
 $lang['UNEXECUTED_RELEASE'] = 'გაქვთ უფორმო გამოშვების ადრე შექმნა ახალი დაფიქსირება მისი unformed!';
-$lang['STATUS_DOES_EXIST'] = 'ასეთი სტატუსი არ არსებობს: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'იცვლება სტატუსის სადისტრიბუციო - %s';

@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'タイプは、激流の変更に成功';
 $lang['DEL_TORRENT'] = 'Are you sure you want to deleteの激流すか？';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you wantへの削除に移動する！';
 $lang['UNEXECUTED_RELEASE'] = 'い型レスリリース前を修正彼unformedす！';
-$lang['STATUS_DOES_EXIST'] = 'そのような状況が存在しない: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '変化する状況の分布-%s';
@@ -1650,7 +1649,7 @@ $lang['NOT_AVAILABLE'] = '不可';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = '透明キャッシュ';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

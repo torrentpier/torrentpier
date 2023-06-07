@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Typ torrent úspešne zmenený';
 $lang['DEL_TORRENT'] = 'Ste si istý, že chcete vymazať torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ste si istý, že chcete zrušiť a presunúť tému?';
 $lang['UNEXECUTED_RELEASE'] = 'Máte beztvaré uvoľnenie pred vytvorením nové opraviť jeho nedokončený!';
-$lang['STATUS_DOES_EXIST'] = 'Takýto stav neexistuje: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Zmena stavu distribúcie - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Nie je k dispozícii';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Vymazať Vyrovnávaciu Pamäť';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

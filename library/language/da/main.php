@@ -1117,7 +1117,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Type torrent ændret';
 $lang['DEL_TORRENT'] = 'Er du sikker på du vil slette torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Er du sikker på du ønsker at slette og flytte emnet?';
 $lang['UNEXECUTED_RELEASE'] = 'Har du en uformelig udgivelse, før du opretter en ny fastsætte sin formløse!';
-$lang['STATUS_DOES_EXIST'] = 'En sådan tilstand eksisterer ikke: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ændre status for distribution - %s';
@@ -1646,7 +1645,7 @@ $lang['NOT_AVAILABLE'] = 'Ikke tilgængelig';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Ryd Cache';
+$lang['CLEAR_CACHE'] = 'Clear Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
