@@ -35,7 +35,7 @@ if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
 if (!defined('BB_SCRIPT')) {
-    define('BB_SCRIPT', 'undefined');
+    define('BB_SCRIPT', null);
 }
 
 header('X-Frame-Options: SAMEORIGIN');
@@ -180,7 +180,7 @@ if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
     $data = [];
     foreach (CHECK_REQIREMENTS['ext_list'] as $ext) {
         if (!extension_loaded($ext)) {
-            $data[] = $ext;
+            $data[] = '<code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">' . $ext . '</code>';
         }
     }
     if (!empty($data)) {
