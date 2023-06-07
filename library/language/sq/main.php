@@ -2831,9 +2831,3 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Mirë se vini në faqen %s',
     'USER_WELCOME_INACTIVE' => 'Mirë se vini në faqen %s',
 ];
-
-// Devices
-$lang['DEVICE'] = 'Device';
-$lang['DEVICE_MOBILE'] = 'Phone';
-$lang['DEVICE_TABLET'] = 'Tablet';
-$lang['DEVICE_PC'] = 'PC';
