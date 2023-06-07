@@ -2831,9 +2831,3 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'კეთილი იყოს თქვენი მობრძანება საიტზე %s',
     'USER_WELCOME_INACTIVE' => 'კეთილი იყოს თქვენი მობრძანება საიტზე %s',
 ];
-
-// Devices
-$lang['DEVICE'] = 'Device';
-$lang['DEVICE_MOBILE'] = 'Phone';
-$lang['DEVICE_TABLET'] = 'Tablet';
-$lang['DEVICE_PC'] = 'PC';
