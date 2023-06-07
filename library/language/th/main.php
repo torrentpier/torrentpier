@@ -2831,9 +2831,3 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'ยินดีต้อนรับสู่เว็บไซต์ %s',
     'USER_WELCOME_INACTIVE' => 'ยินดีต้อนรับสู่เว็บไซต์ %s',
 ];
-
-// Devices
-$lang['DEVICE'] = 'Device';
-$lang['DEVICE_MOBILE'] = 'Phone';
-$lang['DEVICE_TABLET'] = 'Tablet';
-$lang['DEVICE_PC'] = 'PC';
