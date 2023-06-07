@@ -28,7 +28,7 @@
 		<legend>{L_SEARCH_AUTHOR}</legend>
 		<div>
 			<p class="input">
-				<input style="width: 50%" id="author" type="text" class="post" name="{POSTER_NAME_KEY}" />&nbsp;
+				<input placeholder="{L_SEARCH_S}" style="width: 50%" id="author" type="text" class="post" name="{POSTER_NAME_KEY}" />&nbsp;
 				<input style="width: 40%" type="button" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US); return false;" />
 			</p>
 			<p class="chbox med">
@@ -148,7 +148,7 @@
 <tr>
 	<td class="row1 pad_12">
 		<p>
-			<input type="text" name="search_username" value="{USERNAME}" class="post" />&nbsp;
+			<input placeholder="{L_SEARCH_S}" type="text" name="search_username" value="{USERNAME}" class="post" />&nbsp;
 			<input type="submit" name="search" value="{L_SEARCH}" class="liteoption" />
 		</p>
 		<p class="small">{L_SEARCH_AUTHOR_EXPL}</p>
