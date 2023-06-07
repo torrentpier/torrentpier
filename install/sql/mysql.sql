@@ -1147,7 +1147,6 @@ CREATE TABLE IF NOT EXISTS `bb_sessions`
   `session_start`     INT(11)              NOT NULL DEFAULT '0',
   `session_time`      INT(11)              NOT NULL DEFAULT '0',
   `session_ip`        VARCHAR(42)          NOT NULL DEFAULT '0',
-  `session_agent`     TEXT                 NOT NULL DEFAULT '',
   `session_logged_in` TINYINT(1)           NOT NULL DEFAULT '0',
   `session_admin`     TINYINT(2)           NOT NULL DEFAULT '0',
   PRIMARY KEY (`session_id`)

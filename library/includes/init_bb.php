@@ -24,9 +24,6 @@ $user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
-// Obtain user agent
-define('USER_AGENT', $_SERVER['HTTP_USER_AGENT'] ?? '');
-
 /**
  * @param $contents
  * @return string
@@ -300,6 +297,8 @@ define('POSTING_URL', $bb_cfg['posting_url']);
 define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;u=');
 define('BONUS_URL', 'profile.php?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?t=');
+
+define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
 define('HTML_SELECT_MAX_LENGTH', 60);
 define('HTML_WBR_LENGTH', 12);
