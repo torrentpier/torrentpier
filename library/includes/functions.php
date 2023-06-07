@@ -1002,6 +1002,24 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
     return $u_data;
 }
 
+function make_jumpbox($selected = 0)
+{
+    global $datastore, $template, $bb_cfg;
+
+    if (!$bb_cfg['show_jumpbox']) {
+        return;
+    }
+
+    if (!$jumpbox = $datastore->get('jumpbox')) {
+        $datastore->update('jumpbox');
+        $jumpbox = $datastore->get('jumpbox');
+    }
+
+    $template->assign_vars(array(
+        'JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user'],
+    ));
+}
+
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
 function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '', $all_forums_option = null)
 {

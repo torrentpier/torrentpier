@@ -108,17 +108,6 @@ $template->assign_vars(array(
     'HAVE_UNREAD_PM' => $have_unread_pm,
 ));
 
-// Jumpbox init
-if ($bb_cfg['show_jumpbox']) {
-    $data = array(
-        'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
-        'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
-    );
-
-    file_write($data['guest'], AJAX_HTML_DIR . '/jumpbox_guest.html', false, true, true);
-    file_write($data['user'], AJAX_HTML_DIR . '/jumpbox_user.html', false, true, true);
-}
-
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars(array(
     'SIMPLE_HEADER' => !empty($gen_simple_header),
@@ -202,7 +191,7 @@ $template->assign_vars(array(
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
 
-    'AJAX_HTML_DIR' => hide_bb_path(AJAX_HTML_DIR),
+    'AJAX_HTML_DIR' => AJAX_HTML_DIR,
 
     // Misc
     'BOT_UID' => BOT_UID,
