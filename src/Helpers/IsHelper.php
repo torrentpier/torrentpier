@@ -23,12 +23,7 @@ class IsHelper
      */
     public static function isPHP(string $version): bool
     {
-        static $_is_php;
-        $version = (string)$version;
-        if (!isset($_is_php[$version])) {
-            $_is_php[$version] = version_compare(PHP_VERSION, $version, '>=');
-        }
-        return $_is_php[$version];
+        return version_compare(PHP_VERSION, $version, '>=');
     }
 
     /**

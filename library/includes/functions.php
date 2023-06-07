@@ -991,6 +991,10 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
         }
     }
 
+    if (is_null($u_data)) {
+        return false;
+    }
+
     if ($u_data['user_id'] == GUEST_UID) {
         CACHE('bb_cache')->set('guest_userdata', $u_data);
     }
@@ -2057,26 +2061,4 @@ function user_birthday_icon($user_birthday, $user_id): string
         ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
     return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
-}
-
-/**
- * Get user device type (PC, Tablet, Phone) by USER_AGENT
- *
- * @param string $user_agent
- * @return string
- */
-function get_user_device($user_agent = USER_AGENT): string
-{
-    global $lang;
-
-    $detect = new \Detection\MobileDetect();
-    $detect->setUserAgent($user_agent);
-
-    if ($detect->isMobile()) {
-        return $lang['DEVICE_MOBILE'];
-    } else if ($detect->isTablet()) {
-        return $lang['DEVICE_TABLET'];
-    } else {
-        return $lang['DEVICE_PC'];
-    }
 }

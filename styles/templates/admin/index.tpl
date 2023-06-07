@@ -196,33 +196,29 @@
 
 <!-- IF SHOW_USERS_ONLINE -->
 <table class="forumline">
-    <tr>
-        <th>{L_USERNAME}</th>
-        <th>{L_LOGIN} / {L_LAST_UPDATED}</th>
-        <th>{L_IP_ADDRESS}</th>
-        <th>{L_DEVICE}</th>
-    </tr>
-    <!-- BEGIN reg_user_row -->
-    <tr class="{reg_user_row.ROW_CLASS}">
-        <td class="bold" nowrap="nowrap">{reg_user_row.USER}</td>
-        <td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
-        <td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen"
-                               target="_blank">{reg_user_row.IP_ADDRESS}</a>
-        </td>
-        <td class="tCenter">{reg_user_row.USER_DEVICE}</td>
-    </tr>
-    <!-- END reg_user_row -->
-    <tr>
-        <td colspan="4" class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
-    </tr>
-    <!-- BEGIN guest_user_row -->
-    <tr class="{guest_user_row.ROW_CLASS}">
-        <td nowrap="nowrap">{L_GUEST}</td>
-        <td align="center">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</td>
-        <td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" target="_blank">{guest_user_row.IP_ADDRESS}</a></td>
-        <td class="tCenter">{guest_user_row.USER_DEVICE}</td>
-    </tr>
-    <!-- END guest_user_row -->
+  <tr>
+    <th>{L_USERNAME}</th>
+    <th>{L_LOGIN} / {L_LAST_UPDATED}</th>
+    <th>{L_IP_ADDRESS}</th>
+  </tr>
+  <!-- BEGIN reg_user_row -->
+  <tr class="{reg_user_row.ROW_CLASS}">
+    <td class="bold" nowrap="nowrap">{reg_user_row.USER}</td>
+    <td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
+    <td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a>
+    </td>
+  </tr>
+  <!-- END reg_user_row -->
+  <tr>
+    <td colspan="3" class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+  </tr>
+  <!-- BEGIN guest_user_row -->
+  <tr class="{guest_user_row.ROW_CLASS}">
+    <td nowrap="nowrap">{L_GUEST}</td>
+    <td align="center">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</td>
+    <td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" target="_blank">{guest_user_row.IP_ADDRESS}</a></td>
+  </tr>
+  <!-- END guest_user_row -->
 </table>
 <!-- ELSE -->
 <a href="{USERS_ONLINE_HREF}#online">{L_SHOW_ONLINE_USERLIST}</a>

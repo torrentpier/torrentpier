@@ -934,7 +934,7 @@ function username_search($search_match)
             $username_list .= '<option value="' . $username . '">' . $username . '</option>';
         }
         if (!$username_list) {
-            $username_list = '<option>' . $lang['NO_MATCH'] . '</option>';
+            $username_list = '<option value="">' . $lang['NO_MATCH'] . '</option>';
         }
     }
 
