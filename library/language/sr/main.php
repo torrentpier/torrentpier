@@ -2832,9 +2832,3 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Добродошли на сајт %s',
     'USER_WELCOME_INACTIVE' => 'Добродошли на сајт %s',
 ];
-
-// Devices
-$lang['DEVICE'] = 'Device';
-$lang['DEVICE_MOBILE'] = 'Phone';
-$lang['DEVICE_TABLET'] = 'Tablet';
-$lang['DEVICE_PC'] = 'PC';
