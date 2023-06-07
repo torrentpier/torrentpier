@@ -10,9 +10,11 @@
 namespace TorrentPier;
 
 use Closure;
+
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Dotenv\Repository\RepositoryInterface;
+
 use PhpOption\Option;
 
 /**

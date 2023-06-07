@@ -19,10 +19,16 @@ class TorrentFileList
     public $files_ary = [
         '/' => []
     ];
+
     public $multiple = false;
     public $root_dir = '';
     public $files_html = '';
 
+    /**
+     * Constructor
+     *
+     * @param $decoded_file_contents
+     */
     public function __construct($decoded_file_contents)
     {
         $this->tor_decoded = $decoded_file_contents;
@@ -53,6 +59,8 @@ class TorrentFileList
 
     /**
      * Формирование списка файлов
+     *
+     * @return void
      */
     private function build_filelist_array()
     {
@@ -120,7 +128,7 @@ class TorrentFileList
      * @param $length
      * @return string
      */
-    private function build_file_item($name, $length)
+    private function build_file_item($name, $length): string
     {
         global $bb_cfg, $images, $lang;
 

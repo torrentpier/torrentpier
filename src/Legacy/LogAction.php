@@ -29,6 +29,11 @@ class LogAction
     public $log_type_select = [];
     public $log_disabled = false;
 
+    /**
+     * Init
+     *
+     * @return void
+     */
     public function init()
     {
         global $lang, $bb_cfg;
@@ -39,6 +44,8 @@ class LogAction
     }
 
     /**
+     * Moderator
+     *
      * @param string $type_name
      * @param array $args
      */
@@ -88,6 +95,8 @@ class LogAction
     }
 
     /**
+     * Admin
+     *
      * @param string $type_name
      * @param array $args
      */

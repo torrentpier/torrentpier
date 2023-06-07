@@ -229,7 +229,7 @@ class User
      *
      * @return array
      */
-    public function session_create($userdata, $auto_created = false)
+    public function session_create($userdata, bool $auto_created = false): array
     {
         global $bb_cfg, $lang;
 
@@ -334,7 +334,7 @@ class User
      * @param bool $update_lastvisit
      * @param bool $set_cookie
      */
-    public function session_end($update_lastvisit = false, $set_cookie = true)
+    public function session_end(bool $update_lastvisit = false, bool $set_cookie = true)
     {
         DB()->query("
 			DELETE FROM " . BB_SESSIONS . "
