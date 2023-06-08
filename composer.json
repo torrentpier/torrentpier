@@ -32,6 +32,7 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "arokettu/bencode": "^1.8",
+    "arokettu/torrent-file": "^2.5",
     "bugsnag/bugsnag": "v3.29.1",
     "egulias/email-validator": "^3.2",
     "filp/whoops": "^2.15",
@@ -41,6 +42,7 @@
     "guzzlehttp/psr7": "^2.4",
     "longman/ip-tools": "1.2.1",
     "monolog/monolog": "^2.9",
+    "psr/http-message": "1.*",
     "samdark/sitemap": "2.4.0",
     "symfony/mailer": "^5.4",
     "symfony/polyfill": "v1.27.0",
