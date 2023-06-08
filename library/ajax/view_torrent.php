@@ -32,7 +32,7 @@ if (file_exists($filename) && !$file_contents = file_get_contents($filename)) {
     }
 }
 
-if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
+if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
     return $lang['TORFILE_INVALID'];
 }
 

@@ -4,8 +4,142 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37120ee700fdd2297989239da1026e46",
+    "content-hash": "cbc309d56fdcd2fb85185ac081a1c053",
     "packages": [
+        {
+            "name": "arokettu/bencode",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arokettu/bencode.git",
+                "reference": "bc268a2ff135321f34d8cbd50fc65240c9979dc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arokettu/bencode/zipball/bc268a2ff135321f34d8cbd50fc65240c9979dc4",
+                "reference": "bc268a2ff135321f34d8cbd50fc65240c9979dc4",
+                "shasum": ""
+            },
+            "require": {
+                "arokettu/is-resource": "^1.0",
+                "php": "^7.0 | ^8.0"
+            },
+            "provide": {
+                "sandfoxme/bencode": "self.version"
+            },
+            "require-dev": {
+                "brick/math": "*",
+                "ext-gmp": "*",
+                "ext-json": "*",
+                "mikey179/vfsstream": "^1.6",
+                "pear/math_biginteger": "^1.0",
+                "phpunit/phpunit": ">=6.0.0 <10",
+                "psy/psysh": "*",
+                "sandfox.dev/code-standard": "^10@dev",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "suggest": {
+                "brick/math": "In case you need integers larger than your architecture supports",
+                "ext-gmp": "In case you need integers larger than your architecture supports",
+                "pear/math_biginteger": "In case you need integers larger than your architecture supports",
+                "php-64bit": "Running 64 bit is recommended to prevent integer overflow"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "autoload.php"
+                ],
+                "psr-4": {
+                    "SandFox\\Bencode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Smirnov",
+                    "email": "sandfox@sandfox.me",
+                    "homepage": "https://sandfox.me",
+                    "role": "developer"
+                }
+            ],
+            "description": "BitTorrent's Bencode encoder/decoder",
+            "homepage": "https://sandfox.dev/php/bencode.html",
+            "keywords": [
+                "bencode",
+                "bittorrent",
+                "serialize",
+                "torrent"
+            ],
+            "support": {
+                "docs": "https://bencode.readthedocs.io/",
+                "issues": "https://gitlab.com/sandfox/bencode/-/issues",
+                "source": "https://gitlab.com/sandfox/bencode"
+            },
+            "time": "2022-12-14T19:14:48+00:00"
+        },
+        {
+            "name": "arokettu/is-resource",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arokettu/is-resource.git",
+                "reference": "a89a239983de35d4916bbbe9acfef053010e3f3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arokettu/is-resource/zipball/a89a239983de35d4916bbbe9acfef053010e3f3a",
+                "reference": "a89a239983de35d4916bbbe9acfef053010e3f3a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 5.3 < 8.3"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "classmap": [
+                    "gen/ResourceMap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Smirnov",
+                    "email": "sandfox@sandfox.me",
+                    "homepage": "https://sandfox.me/",
+                    "role": "developer"
+                }
+            ],
+            "description": "Future compatible is_resource() and get_resource_type() that can understand opaque objects",
+            "homepage": "https://sandfox.dev/php/is-resource.html",
+            "keywords": [
+                "compatibility",
+                "curl",
+                "gd",
+                "get_resource_type",
+                "hash",
+                "is_resource",
+                "pgsql",
+                "php80",
+                "php81",
+                "resources",
+                "sockets"
+            ],
+            "support": {
+                "docs": "https://is-resource.readthedocs.io/",
+                "issues": "https://gitlab.com/sandfox/is-resource/-/issues",
+                "source": "https://gitlab.com/sandfox/is-resource"
+            },
+            "time": "2022-09-01T22:54:06+00:00"
+        },
         {
             "name": "bugsnag/bugsnag",
             "version": "v3.29.1",
@@ -71,16 +205,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.3.5",
+            "version": "1.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "74780ccf8c19d6acb8d65c5f39cd72110e132bbd"
+                "reference": "90d087e988ff194065333d16bc5cf649872d9cdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/74780ccf8c19d6acb8d65c5f39cd72110e132bbd",
-                "reference": "74780ccf8c19d6acb8d65c5f39cd72110e132bbd",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/90d087e988ff194065333d16bc5cf649872d9cdb",
+                "reference": "90d087e988ff194065333d16bc5cf649872d9cdb",
                 "shasum": ""
             },
             "require": {
@@ -127,7 +261,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.3.5"
+                "source": "https://github.com/composer/ca-bundle/tree/1.3.6"
             },
             "funding": [
                 {
@@ -143,7 +277,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-11T08:27:00+00:00"
+            "time": "2023-06-06T12:02:59+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1490,61 +1624,6 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
-        },
-        {
-            "name": "rych/bencode",
-            "version": "v1.0.0",
-            "target-dir": "Rych/Bencode",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rchouinard/bencode.git",
-                "reference": "d1b5c88f3fd7ff1f4167756f0ed63f970a32431c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rchouinard/bencode/zipball/d1b5c88f3fd7ff1f4167756f0ed63f970a32431c",
-                "reference": "d1b5c88f3fd7ff1f4167756f0ed63f970a32431c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Rych\\Bencode": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ryan Chouinard",
-                    "email": "rchouinard@gmail.com",
-                    "homepage": "http://ryanchouinard.com"
-                }
-            ],
-            "description": "Bencode serializer for PHP 5.3+",
-            "homepage": "https://github.com/rchouinard/bencode",
-            "keywords": [
-                "bencode",
-                "serialize"
-            ],
-            "support": {
-                "issues": "https://github.com/rchouinard/bencode/issues",
-                "source": "https://github.com/rchouinard/bencode/tree/master"
-            },
-            "time": "2014-01-13T00:34:03+00:00"
         },
         {
             "name": "samdark/sitemap",
