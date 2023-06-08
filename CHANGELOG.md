@@ -1,5 +1,24 @@
 # Change Log
 
+## [v2.4.0-alpha4](https://github.com/torrentpier/torrentpier/tree/v2.4.0-alpha4) (2023-06-08)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-alpha3...v2.4.0-alpha4)
+
+**Merged pull requests:**
+
+- Maked max post length configurable [\#793](https://github.com/torrentpier/torrentpier/pull/793) ([belomaxorka](https://github.com/belomaxorka))
+- Used new Bencoder library 🔩 [\#791](https://github.com/torrentpier/torrentpier/pull/791) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Added some placeholders for input fields [\#789](https://github.com/torrentpier/torrentpier/pull/789) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed empty user search box [\#785](https://github.com/torrentpier/torrentpier/pull/785) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed null $u_data if user not found [\#783](https://github.com/torrentpier/torrentpier/pull/783) ([belomaxorka](https://github.com/belomaxorka))
+- Added missing properties in User class [\#782](https://github.com/torrentpier/torrentpier/pull/782) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed some deprecations [\#777](https://github.com/torrentpier/torrentpier/pull/777) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed: preg_match(): Passing null to parameter #2 [\#776](https://github.com/torrentpier/torrentpier/pull/776) ([belomaxorka](https://github.com/belomaxorka))
+- Reformated JS [\#770](https://github.com/torrentpier/torrentpier/pull/770), [\#794](https://github.com/torrentpier/torrentpier/pull/794) ([belomaxorka](https://github.com/belomaxorka))
+- Implemented password_hash API 🥳 [\#768](https://github.com/torrentpier/torrentpier/pull/768) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#763](https://github.com/torrentpier/torrentpier/pull/763) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#769](https://github.com/torrentpier/torrentpier/pull/769), [\#773](https://github.com/torrentpier/torrentpier/pull/773), [\#784](https://github.com/torrentpier/torrentpier/pull/784), [\#787](https://github.com/torrentpier/torrentpier/pull/787), [\#788](https://github.com/torrentpier/torrentpier/pull/788), [\#795](https://github.com/torrentpier/torrentpier/pull/795) ([belomaxorka](https://github.com/belomaxorka))
+- New Crowdin updates [\#786](https://github.com/torrentpier/torrentpier/pull/786) ([Exileum](https://github.com/Exileum))
+
 ## [v2.4.0-alpha3](https://github.com/torrentpier/torrentpier/tree/v2.4.0-alpha3) (2023-06-02)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-alpha2...v2.4.0-alpha3)
 
