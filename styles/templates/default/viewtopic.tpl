@@ -535,31 +535,16 @@ function build_poll_add_form (src_el)
 <!-- IF HIDE_POST_IMG --><script type="text/javascript">$('img.postImg').remove();</script><!-- ENDIF -->
 <!-- IF HIDE_SMILE --><script type="text/javascript">$('img.smile').remove();</script><!-- ENDIF -->
 
-<!-- IF PAGINATION and PAGE_NUMBER -->
 <table id="pagination" class="topic" cellpadding="0" cellspacing="0">
-    <tr>
-        <td class="nav pad_6 {PG_ROW_CLASS}">
-            <p style="float: left">{PAGE_NUMBER}</p>
-            <p style="float: right">{PAGINATION}</p>
-        </td>
-    </tr>
+<tr>
+	<td class="nav pad_6 {PG_ROW_CLASS}">
+		<p style="float: left">{PAGE_NUMBER}</p>
+		<p style="float: right">{PAGINATION}</p>
+	</td>
+</tr>
 </table><!--/pagination-->
-<!-- ENDIF -->
-
-<table class="topic" cellpadding="0" cellspacing="0">
-    <tr>
-        <td class="catBottom med">
-            <form method="post" action="{S_POST_DAYS_ACTION}">
-                {L_DISPLAY_POSTS}: {S_SELECT_POST_DAYS}&nbsp;
-                {S_SELECT_POST_ORDER}&nbsp;
-                <input type="submit" value="{L_GO}" class="lite" name="submit" />
-            </form>
-        </td>
-    </tr>
-</table>
 
 <!-- IF QUICK_REPLY -->
-<br>
 <form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 <input type="hidden" name="mode" value="reply" />
 <input type="hidden" name="t" value="{QR_TOPIC_ID}" />
@@ -594,6 +579,18 @@ function build_poll_add_form (src_el)
 
 </form>
 <!-- ENDIF / QUICK_REPLY -->
+
+<table class="topic" cellpadding="0" cellspacing="0">
+<tr>
+	<td class="catBottom med">
+	<form method="post" action="{S_POST_DAYS_ACTION}">
+		{L_DISPLAY_POSTS}: {S_SELECT_POST_DAYS}&nbsp;
+		{S_SELECT_POST_ORDER}&nbsp;
+		<input type="submit" value="{L_GO}" class="lite" name="submit" />
+	</form>
+	</td>
+</tr>
+</table>
 
 <table cellpadding="0" class="w100" style="padding-top: 2px;">
 <tr>

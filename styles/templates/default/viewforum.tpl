@@ -615,7 +615,7 @@ td.topic_id { cursor: pointer; }
 <!--bottom_info-->
 <div class="bottom_info">
 
-<!-- IF PAGINATION and PAGE_NUMBER -->
+<!-- IF PAGINATION -->
 <div class="nav">
 	<p style="float: left">{PAGE_NUMBER}</p>
 	<p style="float: right">{PAGINATION}</p>

@@ -217,7 +217,6 @@
         <!-- END switch_mod_option -->
     </table>
 
-    <!-- IF PAGINATION and PAGE_NUMBER -->
     <div class="bottom_info">
         <div class="nav">
             <p style="float: left">{PAGE_NUMBER}</p>
@@ -225,7 +224,6 @@
             <div class="clear"></div>
         </div>
     </div><!--/bottom_info-->
-    <!-- ENDIF -->
 
     <!-- IF PENDING_USERS -->
     <table class="forumline">
@@ -306,7 +304,6 @@
     </tfoot>
 </table>
 
-<!-- IF PAGINATION and PAGE_NUMBER -->
 <div class="bottom_info">
     <div class="nav">
         <p style="float: left">{PAGE_NUMBER}</p>
@@ -314,7 +311,6 @@
         <div class="clear"></div>
     </div>
 </div>
-<!-- ENDIF -->
 <!-- ENDIF / RELEASES -->
 
 <!--========================================================================-->
