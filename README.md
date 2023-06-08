@@ -86,6 +86,16 @@ and chmod 0644 for files in them. If you are not sure, leave it as is.
 
 Documentation for TorrentPier can be found on the [TorrentPier docs website](https://docs.torrentpier.com).
 
+## 📤 TMRR — Torrent Merkle Root Reader
+
+A tool for extracting, comparing and calculating file hashes for .torrent files, compatible with the BitTorrent v2 protocol.
+
+Useful for finding the sources of the same copies of files on different trackers & DHT indexers that support BitTorrent v2 protocol, thus reviving dead torrents, valuable Internet artifacts.
+
+<img height="300" src="https://i4.imageban.ru/out/2023/05/21/42ba453949a2b19a204baf2eb1c370a8.gif" alt="TMRR">
+
+Repo: [Link](https://github.com/kovalensky/tmrr) | Download: [Link](https://github.com/kovalensky/tmrr/releases) | Author: [kovalensky](https://github.com/kovalensky)
+
 ## 💚 Contributing / Contributors
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for 
