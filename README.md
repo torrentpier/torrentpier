@@ -81,6 +81,9 @@ and chmod 0644 for files in them. If you are not sure, leave it as is.
 * ⛓ *Ocelot installation.* - We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
   the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot). You can read assembly instructions
   on his repository or in [this thread](https://torrentpier.com/threads/26078/) on our support forum.
+* ⛓ *[TMRR — Torrent Merkle Root Reader.](https://github.com/kovalensky/tmrr)* - A tool for extracting, comparing and calculating file hashes for .torrent files, 
+  compatible with the BitTorrent v2 protocol. Useful for finding the sources of the same copies of files on different trackers & DHT indexers that support BitTorrent v2 protocol, 
+  thus reviving dead torrents, valuable Internet artifacts.
 
 ## 📝 Official documentation
 
