@@ -66,21 +66,6 @@
 
 <script type="text/javascript">new ClipboardJS('.copyElement');</script>
 
-<script type="text/javascript">
-    function checkForm(formObj) {
-        let formErrors = false;
-        if (formObj.message.value.length < 2) {
-            formErrors = "{L_EMPTY_MESSAGE_EMAIL}";
-        } else if (formObj.subject.value.length < 2) {
-            formErrors = "{L_EMPTY_SUBJECT_EMAIL}";
-        }
-        if (formErrors) {
-            alert(formErrors);
-            return false;
-        }
-    }
-</script>
-
 <!-- IF ONLOAD_FOCUS_ID -->
 <script type="text/javascript">
 $p('{ONLOAD_FOCUS_ID}').focus();
