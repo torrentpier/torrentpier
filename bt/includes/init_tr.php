@@ -32,7 +32,7 @@ function error_exit($msg = '')
 {
     silent_exit();
 
-    echo \Rych\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);
+    echo \SandFox\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);
 
     exit;
 }

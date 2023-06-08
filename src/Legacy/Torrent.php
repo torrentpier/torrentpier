@@ -316,14 +316,14 @@ class Torrent
         if (!file_exists($filename)) {
             return self::torrent_error_exit('File not exists');
         }
-        if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
+        if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
             return self::torrent_error_exit('This is not a bencoded file');
         }
 
         if ($bb_cfg['bt_disable_dht']) {
             $tor['info']['private'] = (int)1;
             $fp = fopen($filename, 'wb+');
-            fwrite($fp, \Rych\Bencode\Bencode::encode($tor));
+            fwrite($fp, \SandFox\Bencode\Bencode::encode($tor));
             fclose($fp);
         }
 
@@ -345,7 +345,7 @@ class Torrent
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
-        $info_hash = pack('H*', sha1(\Rych\Bencode\Bencode::encode($info)));
+        $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
         $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
         $info_hash_md5 = md5($info_hash);
 
@@ -496,7 +496,7 @@ class Torrent
         $ann_url = $bb_cfg['bt_announce_url'];
 
         $file_contents = file_get_contents($filename);
-        if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
+        if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
             bb_die('This is not a bencoded file');
         }
 
@@ -539,7 +539,7 @@ class Torrent
         unset($tor['comment.utf-8']);
 
         // Send torrent
-        $output = \Rych\Bencode\Bencode::encode($tor);
+        $output = \SandFox\Bencode\Bencode::encode($tor);
         $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.torrent';
 
         if (!empty($_COOKIE['explain'])) {

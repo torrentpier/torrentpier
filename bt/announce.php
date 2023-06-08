@@ -139,7 +139,7 @@ function drop_fast_announce($lp_info)
 
 function msg_die($msg)
 {
-    $output = \Rych\Bencode\Bencode::encode([
+    $output = \SandFox\Bencode\Bencode::encode([
         'min interval' => (int)1800,
         'failure reason' => (string)$msg,
         'warning message' => (string)$msg,
@@ -409,6 +409,6 @@ if (!$output) {
 }
 
 // Return data to client
-echo \Rych\Bencode\Bencode::encode($output);
+echo \SandFox\Bencode\Bencode::encode($output);
 
 exit;

@@ -30,7 +30,7 @@ $info_hash = $_GET['info_hash'];
 
 function msg_die($msg)
 {
-    $output = \Rych\Bencode\Bencode::encode([
+    $output = \SandFox\Bencode\Bencode::encode([
         'min interval' => (int)1800,
         'failure reason' => (string)$msg,
         'warning message' => (string)$msg,
@@ -57,6 +57,6 @@ $output['files'][$info_hash] = [
     'incomplete' => (int)$row['leechers'],
 ];
 
-echo \Rych\Bencode\Bencode::encode($output);
+echo \SandFox\Bencode\Bencode::encode($output);
 
 exit;
