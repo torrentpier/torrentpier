@@ -468,7 +468,7 @@ $bb_cfg['user_signature_end'] = '</div>'; // Это позволит испол�
 // Posts
 $bb_cfg['use_posts_cache'] = true;
 $bb_cfg['posts_cache_days_keep'] = 14;
-$bb_cfg['max_post_length'] = 120000;
+$bb_cfg['max_post_length'] = 5000;
 $bb_cfg['use_ajax_posts'] = true;
 
 // Search
@@ -497,7 +497,7 @@ $bb_cfg['max_sentbox_privmsgs'] = 500; // максимальное число с
 $bb_cfg['pm_days_keep'] = 180; // время хранения ЛС
 
 // Actions log
-$bb_cfg['log_days_keep'] = 90;
+$bb_cfg['log_days_keep'] = 365;
 
 // Users
 $bb_cfg['color_nick'] = true; // Окраска ников пользователей по user_rank
