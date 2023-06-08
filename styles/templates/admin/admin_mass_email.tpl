@@ -47,3 +47,20 @@
         </tr>
     </table>
 </form>
+
+<script type="text/javascript">
+    function checkForm(formObj) {
+        var formErrors = false;
+
+        if (formObj.message.value.length < 2) {
+            formErrors = "{L_EMPTY_MESSAGE_EMAIL}";
+        } else if (formObj.subject.value.length < 2) {
+            formErrors = "{L_EMPTY_SUBJECT_EMAIL}";
+        }
+
+        if (formErrors) {
+            alert(formErrors);
+            return false;
+        }
+    }
+</script>
