@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Förgör silver';
 $lang['GOLD_STATUS'] = 'GULD TORRENT! LADDA NER TRAFIKEN INTE TÄNKA PÅ!';
 $lang['SILVER_STATUS'] = 'SILVER TORRENT! LADDA NER TRAFIKEN DELVIS BEAKTAS!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Sök i Forum';
 $lang['SELECT_CAT'] = 'Välj kategori';
 $lang['GO_TO_SECTION'] = 'Gå till avsnittet';
