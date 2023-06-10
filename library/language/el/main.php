@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker ρυθμίσεις';
 $lang['RELEASE_TEMPLATES'] = 'Απελευθέρωση Πρότυπα';
 $lang['ACTIONS_LOG'] = 'Έκθεση σχετικά με τη δράση';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Συγγνώμη, ο browser σας δεν φαίνεται να υποστηρίζουν τα πλαίσια';
-$lang['IDX_CLEAR_CACHE'] = 'Clear Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Πρότυπα';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Επίπεδα χρηστών';
-$lang['IDX_SYNCHRONIZE'] = 'Συγχρονισμός:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Θέματα';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Από το χρήστη τις θέσεις μετράνε';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum Στατιστικά';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Δεν είναι διαθέσιμη';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
