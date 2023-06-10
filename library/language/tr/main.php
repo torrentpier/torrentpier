@@ -1611,18 +1611,6 @@ $lang['TRACKER_CONFIG'] = 'İzleyici ayarları';
 $lang['RELEASE_TEMPLATES'] = 'Sürüm Şablonları';
 $lang['ACTIONS_LOG'] = 'Eylem raporu';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Üzgünüz, tarayıcınız çerçeveleri desteklemiyor gibi görünmüyor';
-$lang['IDX_CLEAR_CACHE'] = 'Önbelleği Temizle:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Veri deposuna';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Şablonları';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net haber';
-$lang['IDX_UPDATE'] = 'Güncelleme:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Kullanıcı seviyeleri';
-$lang['IDX_SYNCHRONIZE'] = 'Senkronize:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Konular';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Kullanıcı Mesaj Sayısı';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Dizini';
 $lang['FORUM_STATS'] = 'Forum İstatistikleri';
@@ -1649,7 +1637,7 @@ $lang['NOT_AVAILABLE'] = 'Mevcut değil';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Veri deposuna';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
