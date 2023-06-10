@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker-innstillinger';
 $lang['RELEASE_TEMPLATES'] = 'Slipp Maler';
 $lang['ACTIONS_LOG'] = 'Rapport om tiltak';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Beklager, nettleseren din ikke synes å støtte rammer';
-$lang['IDX_CLEAR_CACHE'] = 'Tøm Buffer:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Maler';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Netto nyheter';
-$lang['IDX_UPDATE'] = 'Oppdatering:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Bruker nivåer';
-$lang['IDX_SYNCHRONIZE'] = 'Synkronisere:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Emner';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Bruker innlegg telle';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum Statistikk';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Ikke tilgjengelig';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
