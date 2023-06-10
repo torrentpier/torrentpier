@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker-inställningar';
 $lang['RELEASE_TEMPLATES'] = 'Släpp Mallar';
 $lang['ACTIONS_LOG'] = 'Rapport om åtgärder';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Tyvärr, din webbläsare verkar inte stödja ramar';
-$lang['IDX_CLEAR_CACHE'] = 'Töm Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Mallar';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Årets nyheter';
-$lang['IDX_UPDATE'] = 'Uppdatering:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Användarnivåer';
-$lang['IDX_SYNCHRONIZE'] = 'Synkronisera:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Ämnen';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Användaren inlägg räkna';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum-Statistik';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Inte tillgänglig';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
