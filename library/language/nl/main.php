@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Te gronde richten zilver';
 $lang['GOLD_STATUS'] = 'GOUD TORRENT! DOWNLOAD VERKEER NIET OVERWEGEN!';
 $lang['SILVER_STATUS'] = 'ZILVER TORRENT! DOWNLOAD VERKEER GEDEELTELIJK BESCHOUWD!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Zoeken in Forums';
 $lang['SELECT_CAT'] = 'Selecteer categorie:';
 $lang['GO_TO_SECTION'] = 'Ga naar de sectie';
