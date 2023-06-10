@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker parametrai';
 $lang['RELEASE_TEMPLATES'] = 'Atleiskite, Šablonus';
 $lang['ACTIONS_LOG'] = 'Ataskaita veiksmų';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Atsiprašome, jūsų naršyklė neatrodo, kad paramos kadrų';
-$lang['IDX_CLEAR_CACHE'] = 'Išvalyti Talpyklą:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Duomenų laikmenos';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Šablonai';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Grynasis naujienos';
-$lang['IDX_UPDATE'] = 'Atnaujinti:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Vartotojo lygis';
-$lang['IDX_SYNCHRONIZE'] = 'Sinchronizuoti:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Temos';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Vartotojo etatų skaičius';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forumas Indeksas';
 $lang['FORUM_STATS'] = 'Forumo Statistika';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Nėra';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Duomenų laikmenos';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
