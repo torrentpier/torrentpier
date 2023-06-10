@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker cilësimet';
 $lang['RELEASE_TEMPLATES'] = 'Lirimin Templates';
 $lang['ACTIONS_LOG'] = 'Raporti për veprimet';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Na vjen keq, browser-i juaj nuk duket për të mbështetur korniza';
-$lang['IDX_CLEAR_CACHE'] = 'Qartë Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Templates';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Neto lajme';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Nivelet e përdoruesit';
-$lang['IDX_SYNCHRONIZE'] = 'Të sinkronizuar:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Temat';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Përdoruesit postimet e numërimit';
-
 // Index
 $lang['MAIN_INDEX'] = 'Indeksi I Forumit';
 $lang['FORUM_STATS'] = 'Forumi Statistikat';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Jo në dispozicion';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
