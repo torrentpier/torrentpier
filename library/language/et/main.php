@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker seaded';
 $lang['RELEASE_TEMPLATES'] = 'Pressiteade Malle';
 $lang['ACTIONS_LOG'] = 'Aruande meetmete kohta,';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Vabandame, sinu brauser ei tundu, et toetada kaadrit';
-$lang['IDX_CLEAR_CACHE'] = 'Kustuta Vahemälu:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Malle';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net uudised';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Kasutaja tasemed';
-$lang['IDX_SYNCHRONIZE'] = 'Sünkroonimine:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Teemasid';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Kasutaja postitusi loota';
-
 // Index
 $lang['MAIN_INDEX'] = 'Foorum Indeks';
 $lang['FORUM_STATS'] = 'Foorumi Statistika';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Ei ole kättesaadav';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
