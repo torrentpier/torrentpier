@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker definições';
 $lang['RELEASE_TEMPLATES'] = 'Lançamento Modelos';
 $lang['ACTIONS_LOG'] = 'Relatório sobre as medidas';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Desculpe, seu navegador parece não suporta frames';
-$lang['IDX_CLEAR_CACHE'] = 'Limpar Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Armazenamento de dados';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Modelos';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Notícias Net';
-$lang['IDX_UPDATE'] = 'Atualização:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Níveis de usuários';
-$lang['IDX_SYNCHRONIZE'] = 'Sincronizar:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Temas';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Usuário postos de contagem';
-
 // Index
 $lang['MAIN_INDEX'] = 'Índice Do Fórum';
 $lang['FORUM_STATS'] = 'Estatísticas Do Fórum';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Não disponível';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Armazenamento de dados';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
