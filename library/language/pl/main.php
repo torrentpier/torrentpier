@@ -1155,6 +1155,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Overplay srebrny';
 $lang['GOLD_STATUS'] = 'ZŁOTY POTOK! POBIERZ RUCH NIE UWAŻA!';
 $lang['SILVER_STATUS'] = 'SREBRNY TORRENT! POBIERZ RUCH CZĘŚCIOWO OMÓWIONO!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Szukaj w forach';
 $lang['SELECT_CAT'] = 'Wybierz kategorię';
 $lang['GO_TO_SECTION'] = 'Sekcja goto';
