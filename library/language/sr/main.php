@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Оверплаи сребро';
 $lang['GOLD_STATUS'] = 'ЗЛАТНИ ТОРЕНТ! ДОВНЛОАД САОБРАЋАЈ НЕ ВЕРУЈЕ!';
 $lang['SILVER_STATUS'] = 'СРЕБРНА ТОРЕНТ! ДОВНЛОАД САОБРАЋАЈ ДЕЛИМИЧНО СЕ БАВИ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Претрага у форумима';
 $lang['SELECT_CAT'] = 'Изаберите категорију';
 $lang['GO_TO_SECTION'] = 'Одељак гото';
