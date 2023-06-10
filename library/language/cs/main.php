@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Zrušit stříbrná';
 $lang['GOLD_STATUS'] = 'ZLATO TORRENT! KE STAŽENÍ DOPRAVNÍ NEPOVAŽUJE!';
 $lang['SILVER_STATUS'] = 'STŘÍBRNÉ TORRENT! KE STAŽENÍ DOPRAVNÍ ČÁSTEČNĚ ZA TO!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Hledat ve Fórech';
 $lang['SELECT_CAT'] = 'Vyberte kategorii';
 $lang['GO_TO_SECTION'] = 'Goto bod';
