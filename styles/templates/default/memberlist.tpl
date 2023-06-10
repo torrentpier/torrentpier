@@ -60,11 +60,13 @@
 
 <div class="bottom_info">
 
+    <!-- IF PAGINATION -->
 	<div class="nav">
 		<p style="float: left">{PAGE_NUMBER}</p>
 		<p style="float: right">{PAGINATION}</p>
 		<div class="clear"></div>
 	</div>
+    <!-- ENDIF -->
 
 	<div class="spacer_4"></div>
 

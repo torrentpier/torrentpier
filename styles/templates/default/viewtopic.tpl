@@ -547,6 +547,7 @@ function build_poll_add_form (src_el)
     </tr>
 </table>
 
+<!-- IF PAGINATION -->
 <table id="pagination" class="topic" cellpadding="0" cellspacing="0">
 <tr>
 	<td class="nav pad_6 {PG_ROW_CLASS}">
@@ -555,6 +556,7 @@ function build_poll_add_form (src_el)
 	</td>
 </tr>
 </table><!--/pagination-->
+<!-- ENDIF -->
 
 <!-- IF QUICK_REPLY -->
 <br>
