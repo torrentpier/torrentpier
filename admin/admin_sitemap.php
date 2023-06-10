@@ -11,6 +11,7 @@ if (!empty($setmodules)) {
     $module['MODS']['SITEMAP'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $sql = 'SELECT * FROM ' . BB_CONFIG;

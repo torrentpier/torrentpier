@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'login');
 define('IN_LOGIN', true);
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 array_deep($_POST, 'trim');

@@ -11,6 +11,7 @@ if (!empty($setmodules)) {
     $module['ATTACHMENTS']['CONTROL_PANEL'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':'))) {

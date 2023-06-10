@@ -13,6 +13,7 @@ if (!empty($setmodules)) {
     }
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 if (!IS_SUPER_ADMIN) {

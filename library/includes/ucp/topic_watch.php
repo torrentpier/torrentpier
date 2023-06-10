@@ -11,10 +11,11 @@ if (empty($bb_cfg['topic_notify_enabled'])) {
     bb_die($lang['DISABLED']);
 }
 
+// Page config
 $page_cfg['use_tablesorter'] = true;
 $page_cfg['include_bbcode_js'] = true;
-$tracking_topics = get_tracks('topic');
 
+$tracking_topics = get_tracks('topic');
 $user_id = $userdata['user_id'];
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $per_page = $bb_cfg['topics_per_page'];

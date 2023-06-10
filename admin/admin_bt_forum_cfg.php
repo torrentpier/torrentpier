@@ -11,6 +11,7 @@ if (!empty($setmodules)) {
     $module['TorrentPier']['FORUM_CONFIG'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $max_forum_name_len = 30;

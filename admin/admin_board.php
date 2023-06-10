@@ -12,6 +12,7 @@ if (!empty($setmodules)) {
     $module['MODS']['CONFIGURATION'] = basename(__FILE__) . '?mode=config_mods';
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $mode = $_GET['mode'] ?? '';

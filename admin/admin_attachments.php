@@ -14,6 +14,7 @@ if (!empty($setmodules)) {
     $module['ATTACHMENTS']['QUOTA_LIMITS'] = $filename . '?mode=quota';
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $error = false;

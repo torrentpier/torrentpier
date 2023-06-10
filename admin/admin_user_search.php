@@ -11,6 +11,7 @@ if (!empty($setmodules)) {
     $module['USERS']['SEARCH'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 array_deep($_POST, 'trim');

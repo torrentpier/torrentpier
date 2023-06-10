@@ -8,7 +8,7 @@
  */
 
 define('BB_SCRIPT', 'info');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 // Start session management

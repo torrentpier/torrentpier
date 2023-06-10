@@ -12,6 +12,7 @@ if (!empty($setmodules)) {
     $module['GROUPS']['PERMISSIONS'] = basename(__FILE__) . '?mode=group';
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $max_forum_name_length = 50;
