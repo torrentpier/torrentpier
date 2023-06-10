@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker параметрлері';
 $lang['RELEASE_TEMPLATES'] = 'Release үлгілер';
 $lang['ACTIONS_LOG'] = 'іс-әрекеттер туралы есеп';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Кешіріңіз, сіздің браузеріңіз фреймдер қолдау емес көрінеді';
-$lang['IDX_CLEAR_CACHE'] = 'Кэшті тазалау:';
-$lang['IDX_CLEAR_DATASTORE'] = 'дерекқор';
-$lang['IDX_CLEAR_TEMPLATES'] = 'үлгілер';
-$lang['IDX_CLEAR_NEWNEWS'] = 'таза жаңалықтар';
-$lang['IDX_UPDATE'] = 'жаңарту:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'пайдаланушы деңгейлері';
-$lang['IDX_SYNCHRONIZE'] = 'синхрондау:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Тақырыптар';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Пайдаланушы хабарламалар санау';
-
 // Index
 $lang['MAIN_INDEX'] = 'Форумдар тізімі';
 $lang['FORUM_STATS'] = 'Форум Статистика';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Жоқ';
 
 // Clear Cache
 $lang['DATASTORE'] = 'дерекқор';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
