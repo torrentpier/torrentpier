@@ -1611,18 +1611,6 @@ $lang['TRACKER_CONFIG'] = 'トラッカーの設定';
 $lang['RELEASE_TEMPLATES'] = 'リリーステンプレート';
 $lang['ACTIONS_LOG'] = '報告書アクション';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = '申し訳は、ブラウザがあるようには見えませんの支援フレーム';
-$lang['IDX_CLEAR_CACHE'] = '透明キャッシュ:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'テンプレート';
-$lang['IDX_CLEAR_NEWNEWS'] = 'ネットニュース';
-$lang['IDX_UPDATE'] = '更新:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'ユーザーレベル';
-$lang['IDX_SYNCHRONIZE'] = '同期:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Topics';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'ユーザーの投稿回数';
-
 // Index
 $lang['MAIN_INDEX'] = 'フォーラム指数';
 $lang['FORUM_STATS'] = '統計フォーラム';
@@ -1649,7 +1637,7 @@ $lang['NOT_AVAILABLE'] = '不可';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
