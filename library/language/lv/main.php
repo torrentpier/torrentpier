@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker uzstādījumi';
 $lang['RELEASE_TEMPLATES'] = 'Atbrīvošanas Veidnes';
 $lang['ACTIONS_LOG'] = 'Ziņojumā par rīcības';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Atvainojiet, jūsu pārlūkprogramma nav, šķiet, lai atbalstītu rāmji';
-$lang['IDX_CLEAR_CACHE'] = 'Notīrīt Kešatmiņu:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Veidnes';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Neto ziņas';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Lietotāja līmenis';
-$lang['IDX_SYNCHRONIZE'] = 'Sinhronizēt:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Tēmas';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Lietotājs amatu skaits';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forums Indekss';
 $lang['FORUM_STATS'] = 'Foruma Statistika';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Nav pieejama';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
