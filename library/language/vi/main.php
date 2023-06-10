@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Thay đổi bạc';
 $lang['GOLD_STATUS'] = 'VÀNG TORRENT! TẢI VỀ GIAO THÔNG KHÔNG XEM XÉT!';
 $lang['SILVER_STATUS'] = 'BẠC TORRENT! TẢI VỀ GIAO THÔNG MỘT PHẦN COI!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Tìm kiếm trong các diễn Đàn';
 $lang['SELECT_CAT'] = 'Chọn loại';
 $lang['GO_TO_SECTION'] = 'Chuyển đến phần';
