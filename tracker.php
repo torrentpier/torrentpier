@@ -47,7 +47,7 @@ $search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_
 $session_id = $userdata['session_id'];
 
 $status = (isset($_POST['status']) && IS_AM && $bb_cfg['tracker']['search_by_tor_status']) ? $_POST['status'] : '';
-$status_list = (!empty($status)) ? join(',', $status) : '';
+$status_list = !empty($status) ? join(',', $status) : '';
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = array();
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -596,7 +596,7 @@ if ($allowed_forums) {
         if ($tor_type) {
             $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
         }
-        if (!empty($status_list)) {
+        if (!empty($status)) {
             $SQL['WHERE'][] = "tor.tor_status IN($status_list)";
         }
 
