@@ -12,8 +12,8 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$force_name = 'torrentpier.com'; // enter here your primary domain name of your site
-$force_port = 80;
+$force_name = 'torrentpier.com'; // The domain name from which this board runs
+$force_port = 80; // The port your server is running on
 $force_ssl = false;
 
 $bb_cfg = [];
