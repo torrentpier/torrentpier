@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker nastavení';
 $lang['RELEASE_TEMPLATES'] = 'Uvolnění Šablon';
 $lang['ACTIONS_LOG'] = 'Zpráva o akci';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Omlouváme se, váš prohlížeč zdá se nepodporuje rámy';
-$lang['IDX_CLEAR_CACHE'] = 'Vymazat Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Šablony';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
-$lang['IDX_UPDATE'] = 'Aktualizace:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Uživatelské úrovně';
-$lang['IDX_SYNCHRONIZE'] = 'Synchronizovat:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Témata';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Uživatel příspěvků počítat';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Fórum Statistiky';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Není k dispozici';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
