@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'تغير الفضة';
 $lang['GOLD_STATUS'] = 'الذهب سيل! تحميل حركة لا تنظر!';
 $lang['SILVER_STATUS'] = 'الفضة سيل! تحميل حركة المرور جزئيا النظر!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'البحث في المنتديات';
 $lang['SELECT_CAT'] = 'اختر الفئة';
 $lang['GO_TO_SECTION'] = 'انتقل الى القسم';
