@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake Silber';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! DOWNLOAD-TRAFFIC NICHT BERÜCKSICHTIGT!';
 $lang['SILVER_STATUS'] = 'SILBER TORRENT! DOWNLOAD-TRAFFIC TEILWEISE BERÜCKSICHTIGT!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Suche in Foren';
 $lang['SELECT_CAT'] = 'Wählen Sie die Kategorie';
 $lang['GO_TO_SECTION'] = 'Goto Abschnitt';
