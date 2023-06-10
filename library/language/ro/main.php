@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Desface argint';
 $lang['GOLD_STATUS'] = 'AUR TORRENT! DESCĂRCAȚI TRAFIC NU IA ÎN CONSIDERARE!';
 $lang['SILVER_STATUS'] = 'ARGINT TORRENT! DESCĂRCAȚI TRAFIC PARȚIAL LUATE ÎN CONSIDERARE!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Căutare în Forumuri';
 $lang['SELECT_CAT'] = 'Selectați categorie';
 $lang['GO_TO_SECTION'] = 'Du-te la secțiunea';
