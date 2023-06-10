@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake hõbe';
 $lang['GOLD_STATUS'] = 'KULD TORRENT! DOWNLOAD LIIKLUS EI PEA!';
 $lang['SILVER_STATUS'] = 'HÕBE TORRENT! DOWNLOAD LIIKLUS OSALISELT PIDADA!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Otsi Foorumeid';
 $lang['SELECT_CAT'] = 'Valige kategooria';
 $lang['GO_TO_SECTION'] = 'Mine jagu';
