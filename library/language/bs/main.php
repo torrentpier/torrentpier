@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Uništiti silver';
 $lang['GOLD_STATUS'] = 'ZLATO POTOKA! PREUZIMANJE SAOBRAĆAJ NE SMATRAJ!';
 $lang['SILVER_STATUS'] = 'SILVER POTOKA! PREUZIMANJE SAOBRAĆAJ DJELOMIČNO SMATRA!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Potrazi u Forumima';
 $lang['SELECT_CAT'] = 'Izaberite kategoriju';
 $lang['GO_TO_SECTION'] = 'Ići sekcija';
