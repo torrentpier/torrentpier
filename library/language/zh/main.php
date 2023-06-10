@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = '废除银';
 $lang['GOLD_STATUS'] = '金TORRENT! 下载业务，不会考虑的！';
 $lang['SILVER_STATUS'] = '银TORRENT! 下载业务部分审议了！';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = '搜索在论坛';
 $lang['SELECT_CAT'] = '选择类别';
 $lang['GO_TO_SECTION'] = 'Goto部分';
