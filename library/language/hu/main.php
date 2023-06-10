@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Visszacsinálják ezüst';
 $lang['GOLD_STATUS'] = 'ARANY TORRENT! TÖLTSE LE A FORGALOM NEM TARTJA!';
 $lang['SILVER_STATUS'] = 'EZÜST TORRENT! TÖLTSE LE A FORGALMAT RÉSZBEN TEKINTHETŐ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Keresés a Fórumban';
 $lang['SELECT_CAT'] = 'Kategória kiválasztása';
 $lang['GO_TO_SECTION'] = 'Goto szakasz';
