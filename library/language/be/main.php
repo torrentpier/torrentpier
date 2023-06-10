@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Перагульваць срэбра';
 $lang['GOLD_STATUS'] = 'ЗАЛАТЫ ТОРЭНТ! СПАМПАВАЦЬ ТРАФІК НЕ ЛІЧЫЦЬ!';
 $lang['SILVER_STATUS'] = 'СРЭБНЫ ТОРЭНТ! СПАМПАВАЦЬ ТРАФІК ЧАСТКОВА РАЗГЛЯДАЮЦЦА!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Пошук у форумах';
 $lang['SELECT_CAT'] = 'Выберыце катэгорыю';
 $lang['GO_TO_SECTION'] = 'Раздзел гота';
