@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = '跟踪设置';
 $lang['RELEASE_TEMPLATES'] = '释放模板';
 $lang['ACTIONS_LOG'] = '行动的报告';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = '对不起，你的浏览器似乎并不支持框架';
-$lang['IDX_CLEAR_CACHE'] = '清除缓冲:';
-$lang['IDX_CLEAR_DATASTORE'] = '数据存储库';
-$lang['IDX_CLEAR_TEMPLATES'] = '模板';
-$lang['IDX_CLEAR_NEWNEWS'] = '网上新闻》';
-$lang['IDX_UPDATE'] = '更新：';
-$lang['IDX_UPDATE_USER_LEVELS'] = '用户一级';
-$lang['IDX_SYNCHRONIZE'] = '同步：';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = '主题';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = '用户员额数';
-
 // Index
 $lang['MAIN_INDEX'] = '论坛指数';
 $lang['FORUM_STATS'] = '论坛的统计数据';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = '不提供';
 
 // Clear Cache
 $lang['DATASTORE'] = '数据存储';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
