@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'ट्रैकर सेटिंग्स';
 $lang['RELEASE_TEMPLATES'] = 'रिलीज़ टेम्पलेट्स';
 $lang['ACTIONS_LOG'] = 'कार्रवाई पर रिपोर्ट';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'क्षमा करें, आपका ब्राउज़र फ़्रेम का समर्थन नहीं करता';
-$lang['IDX_CLEAR_CACHE'] = 'कैश को साफ़ करें:';
-$lang['IDX_CLEAR_DATASTORE'] = 'डेटा भंडार';
-$lang['IDX_CLEAR_TEMPLATES'] = 'टेम्पलेट्स';
-$lang['IDX_CLEAR_NEWNEWS'] = 'नेट समाचार';
-$lang['IDX_UPDATE'] = 'अद्यतन:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'उपयोगकर्ता स्तर';
-$lang['IDX_SYNCHRONIZE'] = 'सिंक्रनाइज़ करें:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'विषय';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'उपयोगकर्ता पदों गिनती';
-
 // Index
 $lang['MAIN_INDEX'] = 'फोरम सूचकांक';
 $lang['FORUM_STATS'] = 'फोरम सांख्यिकी';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'उपलब्ध नहीं है';
 
 // Clear Cache
 $lang['DATASTORE'] = 'डेटा भंडार';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
