@@ -651,6 +651,7 @@ $bb_cfg['tracker'] = [
     'retracker_host' => 'http://retracker.local/announce',
     'freeleech' => false,
     'guest_tracker' => true,
+    'search_by_tor_status' => true
 ];
 
 // Ratio settings

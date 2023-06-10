@@ -264,6 +264,12 @@ $(function(){
 		</tr>
 		<tr>
 			<td colspan="2" width="50%">
+                <!-- IF TOR_STATUS -->
+                <fieldset style="margin-top: 0;">
+                    <legend>{L_TORRENT_STATUS}</legend>
+                    <div>{TOR_STATUS}</div>
+                </fieldset>
+                <!-- ENDIF -->
 				<fieldset style="margin-top: 0;">
 				<legend>{L_SHOW_COLUMN}</legend>
 				<div>
