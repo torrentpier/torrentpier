@@ -224,7 +224,7 @@ if ($mode == 'read') {
         }
 
         //
-        // This makes a copy of the post and stores it as a SENT message from the sendee. Perhaps
+        // This makes a copy of the post and stores it as a sent message from the sender. Perhaps
         // not the most DB friendly way but a lot easier to manage, besides the admin will be able to
         // set limits on numbers of storable posts for users ... hopefully!
         //

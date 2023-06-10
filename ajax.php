@@ -12,6 +12,7 @@ define('IN_AJAX', true);
 
 require __DIR__ . '/common.php';
 
+// Init Ajax class
 $ajax = new TorrentPier\Ajax();
 $ajax->init();
 

@@ -11,6 +11,7 @@ define('BB_SCRIPT', 'feed');
 
 require __DIR__ . '/common.php';
 
+// Init userdata
 $user->session_start(array('req_login' => true));
 
 $mode = $_REQUEST['mode'] ?? '';
