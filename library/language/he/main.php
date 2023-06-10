@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'לשלול כסף';
 $lang['GOLD_STATUS'] = 'זהב סיקור! הורד התנועה אינו רואה!';
 $lang['SILVER_STATUS'] = 'כסף סיקור! הורד התנועה חלקית נחשב!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'חיפוש בפורומים';
 $lang['SELECT_CAT'] = 'בחר קטגוריה';
 $lang['GO_TO_SECTION'] = 'Goto סעיף';
