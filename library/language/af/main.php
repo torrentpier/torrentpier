@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker instellings';
 $lang['RELEASE_TEMPLATES'] = 'Stel sjablone vry';
 $lang['ACTIONS_LOG'] = 'Verslag oor aksie';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Jammer, jou blaaier blyk nie rame te ondersteun nie';
-$lang['IDX_CLEAR_CACHE'] = 'Vee kas uit:';
-$lang['IDX_CLEAR_DATASTORE'] = 'datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'templates';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Netto nuus';
-$lang['IDX_UPDATE'] = 'Opdateer:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Gebruikersvlakke';
-$lang['IDX_SYNCHRONIZE'] = 'sinchroniseer:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'onderwerpe';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Gebruikerposte tel';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Indeks';
 $lang['FORUM_STATS'] = 'Forum Statistiek';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Nie beskikbaar nie';
 
 // Clear Cache
 $lang['DATASTORE'] = 'datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
