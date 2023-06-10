@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker პარამეტრები';
 $lang['RELEASE_TEMPLATES'] = 'გამოშვების თარგები';
 $lang['ACTIONS_LOG'] = 'ანგარიში მოქმედება';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'უკაცრავად, თქვენი ბრაუზერი არ ჩანს, რომ მხარდაჭერის ფარგლებში';
-$lang['IDX_CLEAR_CACHE'] = 'Clear Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'თარგები';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net ამბები';
-$lang['IDX_UPDATE'] = 'განახლება:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'მომხმარებლის დონეზე';
-$lang['IDX_SYNCHRONIZE'] = 'სინქრონიზაციისათვის:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'თემები';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'მომხმარებლის ფორუმზე რაოდენობა';
-
 // Index
 $lang['MAIN_INDEX'] = 'ფორუმი';
 $lang['FORUM_STATS'] = 'ფორუმის სტატისტიკა';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'არ არის მარაგში';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
