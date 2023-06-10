@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tragač postavke';
 $lang['RELEASE_TEMPLATES'] = 'Oslobodi Turskoj';
 $lang['ACTIONS_LOG'] = 'Izvještaj o akciju';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Žao mi je, vezanih ne izgleda da podršku okvira';
-$lang['IDX_CLEAR_CACHE'] = 'Jasno Keš:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Turskoj';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Neto vijest';
-$lang['IDX_UPDATE'] = 'Novosti:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Korisnik nivoima';
-$lang['IDX_SYNCHRONIZE'] = 'Sinhronizacija:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Teme';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Korisnik mjesta računati';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Indeks';
 $lang['FORUM_STATS'] = 'Forum Statistike';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Nisu dostupni';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
