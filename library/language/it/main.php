@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker impostazioni';
 $lang['RELEASE_TEMPLATES'] = 'Rilasciare Modelli';
 $lang['ACTIONS_LOG'] = 'Relazione sull\'azione';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Spiacente, il tuo browser non sembrano telai di supporto';
-$lang['IDX_CLEAR_CACHE'] = 'Cancella Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Modelli';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
-$lang['IDX_UPDATE'] = 'Aggiornamento:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Livelli di utente';
-$lang['IDX_SYNCHRONIZE'] = 'Sincronizzare:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Argomenti';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Utente post count';
-
 // Index
 $lang['MAIN_INDEX'] = 'Indice Del Forum';
 $lang['FORUM_STATS'] = 'Le Statistiche Del Forum';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Non disponibile';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
