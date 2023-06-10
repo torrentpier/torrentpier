@@ -18,6 +18,7 @@ $page_cfg['load_tpl_vars'] = array(
     'topic_icons',
 );
 
+// Start session management
 $user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
 
 set_die_append_msg();

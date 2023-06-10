@@ -14,6 +14,7 @@ require __DIR__ . '/common.php';
 
 array_deep($_POST, 'trim');
 
+// Start session management
 $user->session_start();
 
 // Logout
