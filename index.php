@@ -8,16 +8,21 @@
  */
 
 define('BB_SCRIPT', 'index');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 $page_cfg['load_tpl_vars'] = array(
     'post_icons',
 );
 
+// Show last topic
 $show_last_topic = true;
 $last_topic_max_len = 28;
+
+// Show online stats
 $show_online_users = true;
+
+// Show subforums
 $show_subforums = true;
 
 $datastore->enqueue(array(
@@ -25,6 +30,7 @@ $datastore->enqueue(array(
     'moderators',
     'cat_forums',
 ));
+
 if ($bb_cfg['show_latest_news']) {
     $datastore->enqueue('latest_news');
 }

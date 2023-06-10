@@ -11,6 +11,7 @@ if (!empty($setmodules)) {
     $module['GENERAL']['TERMS'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 require INC_DIR . '/bbcode.php';
 

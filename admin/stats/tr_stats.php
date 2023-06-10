@@ -9,6 +9,7 @@
 
 define('IN_ADMIN', true);
 define('BB_ROOT', './../../');
+
 require BB_ROOT . 'common.php';
 
 $user->session_start();

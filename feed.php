@@ -8,7 +8,7 @@
  */
 
 define('BB_SCRIPT', 'feed');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 $user->session_start(array('req_login' => true));

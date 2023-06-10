@@ -8,7 +8,7 @@
  */
 
 define('BB_SCRIPT', 'callseed');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 // Init userdata

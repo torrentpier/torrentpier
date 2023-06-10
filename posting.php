@@ -8,7 +8,7 @@
  */
 
 define('BB_SCRIPT', 'posting');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 require ATTACH_DIR . '/attachment_mod.php';

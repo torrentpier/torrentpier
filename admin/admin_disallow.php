@@ -11,6 +11,7 @@ if (!empty($setmodules)) {
     $module['USERS']['DISALLOW'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $message = '';

@@ -8,9 +8,8 @@
  */
 
 define('BB_SCRIPT', 'search');
-define('BB_ROOT', './');
-require __DIR__ . '/common.php';
 
+require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
 $page_cfg['load_tpl_vars'] = array(

@@ -9,7 +9,7 @@
 
 define('IN_PROFILE', true);
 define('BB_SCRIPT', 'profile');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 // Start session management

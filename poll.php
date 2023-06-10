@@ -8,6 +8,7 @@
  */
 
 define('BB_SCRIPT', 'vote');
+
 require __DIR__ . '/common.php';
 
 $user->session_start(array('req_login' => true));

@@ -11,6 +11,7 @@ if (!empty($setmodules)) {
     $module['GROUPS']['MANAGE'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;

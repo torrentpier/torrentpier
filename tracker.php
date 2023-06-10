@@ -8,7 +8,7 @@
  */
 
 define('BB_SCRIPT', 'tracker');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 // Page config

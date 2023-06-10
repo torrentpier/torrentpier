@@ -9,7 +9,7 @@
 
 define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 require ATTACH_DIR . '/attachment_mod.php';
 
