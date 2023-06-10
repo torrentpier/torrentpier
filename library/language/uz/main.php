@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Kuzatishdan sozlamalari';
 $lang['RELEASE_TEMPLATES'] = 'relizlar Templates';
 $lang['ACTIONS_LOG'] = 'harakatlar to\'g\'risida hisobot';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Kechirasiz, brauzer rom qo\'llab-quvvatlash uchun emas';
-$lang['IDX_CLEAR_CACHE'] = 'Keshni tozalash:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'andozalar';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net yangiliklari';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Foydalanuvchi darajalari';
-$lang['IDX_SYNCHRONIZE'] = 'sinxronlash:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Mavzular';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Foydalanuvchi bilan aloqa Foydalanuvchining hisoblash';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum statistikasi';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Mavjud emas';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
