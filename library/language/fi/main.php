@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Tekemättömäksi hopea';
 $lang['GOLD_STATUS'] = 'KULTA TORRENT! LATAA LIIKENNE EI PIDÄ!';
 $lang['SILVER_STATUS'] = 'HOPEA TORRENT! LATAA LIIKENNE OSITTAIN PITÄÄ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Haku Foorumeilla';
 $lang['SELECT_CAT'] = 'Valitse luokka';
 $lang['GO_TO_SECTION'] = 'Goto-osiossa';
