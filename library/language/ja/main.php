@@ -1156,6 +1156,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake銀';
 $lang['GOLD_STATUS'] = '金激流です！ ダウンロードの交通とは考えておりません!';
 $lang['SILVER_STATUS'] = '銀激流です！ ダウンロードは交通部分的に考慮す！';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = '検索フォーラム';
 $lang['SELECT_CAT'] = 'カテゴリを選択';
 $lang['GO_TO_SECTION'] = '後藤章';
