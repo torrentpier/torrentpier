@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Abolir l\'argent';
 $lang['GOLD_STATUS'] = 'OR TORRENT! TÉLÉCHARGER LE TRAFIC NE CONSIDÈRE PAS!';
 $lang['SILVER_STATUS'] = 'DE L\'ARGENT EN TORRENT! TÉLÉCHARGER LE TRAFIC PARTIELLEMENT CONSIDÉRÉS!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Recherche dans les Forums';
 $lang['SELECT_CAT'] = 'Sélectionnez une catégorie';
 $lang['GO_TO_SECTION'] = 'Goto section';
