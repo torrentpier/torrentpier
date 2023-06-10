@@ -14,7 +14,7 @@ if (!defined('BB_ROOT')) {
 // Server settings
 $domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
 $domain_name = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name;
-$domain_ssl = false;
+$force_ssl = false;
 
 $bb_cfg = [];
 
@@ -354,7 +354,7 @@ $bb_cfg['show_sidebar2_on_every_page'] = false;
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = $domain_ssl ? true : \TorrentPier\Helpers\IsHelper::isHTTPS();
+$bb_cfg['cookie_secure'] = $force_ssl || \TorrentPier\Helpers\IsHelper::isHTTPS();
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 $bb_cfg['cookie_same_site'] = 'Lax'; // Lax, None, Strict | https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 

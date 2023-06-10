@@ -127,7 +127,7 @@ define('BOT_UID', -746);
  */
 $DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
 
-function DB($db_alias = 'db')
+function DB(string $db_alias = 'db')
 {
     global $DBS;
     return $DBS->get_db_obj($db_alias);
@@ -138,7 +138,7 @@ function DB($db_alias = 'db')
  */
 $CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
 
-function CACHE($cache_name)
+function CACHE(string $cache_name)
 {
     global $CACHES;
     return $CACHES->get_cache_obj($cache_name);
