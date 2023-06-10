@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'ตัวติดตามการตั้งค�
 $lang['RELEASE_TEMPLATES'] = 'ปล่อยตัวต้นแบบ';
 $lang['ACTIONS_LOG'] = 'รายงานการกระทำ';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'ขอโทษของเบราว์เซอร์ไม่ได้ดูเหมือนจะสนับสนุนชุดกรอบ';
-$lang['IDX_CLEAR_CACHE'] = 'ล้างแคช:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'ต้นแบบ';
-$lang['IDX_CLEAR_NEWNEWS'] = 'อข่ายข่าว';
-$lang['IDX_UPDATE'] = 'ปรับปรุง:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'ผู้ใช้ระดับ';
-$lang['IDX_SYNCHRONIZE'] = 'ปรับเทียบข้อมูล:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'หัวข้อคุ';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'ของผู้ใช้โพสนับ';
-
 // Index
 $lang['MAIN_INDEX'] = 'อภิปราดัชนี';
 $lang['FORUM_STATS'] = 'ชุสถิติ';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'ไม่ว่า';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
