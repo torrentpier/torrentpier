@@ -12,7 +12,7 @@
 - Fixed null $u_data if user not found [\#783](https://github.com/torrentpier/torrentpier/pull/783) ([belomaxorka](https://github.com/belomaxorka))
 - Added missing properties in User class [\#782](https://github.com/torrentpier/torrentpier/pull/782) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed some deprecations [\#777](https://github.com/torrentpier/torrentpier/pull/777) ([belomaxorka](https://github.com/belomaxorka))
-- Fixed: preg_match(): Passing null to parameter #2 [\#776](https://github.com/torrentpier/torrentpier/pull/776) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed: preg_match(): Passing null to parameter [\#776](https://github.com/torrentpier/torrentpier/pull/776) ([belomaxorka](https://github.com/belomaxorka))
 - Reformated JS [\#770](https://github.com/torrentpier/torrentpier/pull/770), [\#794](https://github.com/torrentpier/torrentpier/pull/794) ([belomaxorka](https://github.com/belomaxorka))
 - Implemented password_hash API 🥳 [\#768](https://github.com/torrentpier/torrentpier/pull/768) ([belomaxorka](https://github.com/belomaxorka))
 - Updated deps [\#763](https://github.com/torrentpier/torrentpier/pull/763) ([belomaxorka](https://github.com/belomaxorka))
