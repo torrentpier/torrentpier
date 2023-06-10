@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'تعقب الإعدادات';
 $lang['RELEASE_TEMPLATES'] = 'الإفراج عن القوالب';
 $lang['ACTIONS_LOG'] = 'تقرير عن عمل';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'آسف متصفحك لا يدعم الإطارات';
-$lang['IDX_CLEAR_CACHE'] = 'مسح ذاكرة التخزين المؤقت:';
-$lang['IDX_CLEAR_DATASTORE'] = 'مخزن البيانات';
-$lang['IDX_CLEAR_TEMPLATES'] = 'قوالب';
-$lang['IDX_CLEAR_NEWNEWS'] = 'صافي الأخبار';
-$lang['IDX_UPDATE'] = 'تحديث:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'مستويات المستخدم';
-$lang['IDX_SYNCHRONIZE'] = 'مزامنة:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'المواضيع';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'عد مشاركاتك';
-
 // Index
 $lang['MAIN_INDEX'] = 'مؤشر المنتدى';
 $lang['FORUM_STATS'] = 'إحصائيات المنتدى';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'لا تتوفر';
 
 // Clear Cache
 $lang['DATASTORE'] = 'مخزن البيانات';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
