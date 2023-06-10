@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Подешавања трацкер';
 $lang['RELEASE_TEMPLATES'] = 'Шаблони Пуштања';
 $lang['ACTIONS_LOG'] = 'Извештај о акцијама';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Нажалост, ваш прегледач не подржава слике';
-$lang['IDX_CLEAR_CACHE'] = 'Да Обришете Кеш:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Складиште података';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Шаблони';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Нето вест';
-$lang['IDX_UPDATE'] = 'Упдате:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Нивои корисника';
-$lang['IDX_SYNCHRONIZE'] = 'Синхронизацију:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Теме';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Поруке корисника тачка';
-
 // Index
 $lang['MAIN_INDEX'] = 'Индекс Форума';
 $lang['FORUM_STATS'] = 'Статистика Форума';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Није доступан';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Складиште података';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
