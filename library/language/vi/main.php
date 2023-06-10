@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Thiết lập theo dõi';
 $lang['RELEASE_TEMPLATES'] = 'Bản Mẫu';
 $lang['ACTIONS_LOG'] = 'Báo cáo trên hành động';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Xin lỗi, bạn duyệt không có vẻ để hỗ trợ khung';
-$lang['IDX_CLEAR_CACHE'] = 'Xóa Bộ Nhớ Đệm:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Kho dữ liệu';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Mẫu';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Mạng tin tức';
-$lang['IDX_UPDATE'] = 'Cập nhật:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Dùng cấp';
-$lang['IDX_SYNCHRONIZE'] = 'Đồng bộ hóa:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Chủ đề';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Dùng bài đếm';
-
 // Index
 $lang['MAIN_INDEX'] = 'Diễn Đàn Chỉ Số';
 $lang['FORUM_STATS'] = 'Thống Kê';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Không có';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Kho dữ liệu';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

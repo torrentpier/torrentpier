@@ -1610,18 +1610,6 @@ $lang['TRACKER_CONFIG'] = 'Ustawienia tracker';
 $lang['RELEASE_TEMPLATES'] = 'Szablony Produkcji';
 $lang['ACTIONS_LOG'] = 'Raport o działaniach';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Niestety, twoja przeglądarka nie obsługuje ramek';
-$lang['IDX_CLEAR_CACHE'] = 'Wyczyść Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Magazyn danych';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Szablony';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Czysta wiadomość';
-$lang['IDX_UPDATE'] = 'Aktualizacja:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Poziomy użytkowników';
-$lang['IDX_SYNCHRONIZE'] = 'Synchronizuj:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Tematy';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Wiadomości użytkownika hrabia';
-
 // Index
 $lang['MAIN_INDEX'] = 'Indeks Forum';
 $lang['FORUM_STATS'] = 'Statystyki Forum';
@@ -1648,7 +1636,7 @@ $lang['NOT_AVAILABLE'] = 'Nie jest dostępny';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Magazyn danych';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

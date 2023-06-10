@@ -1610,18 +1610,6 @@ $lang['TRACKER_CONFIG'] = 'Postavke tracker';
 $lang['RELEASE_TEMPLATES'] = 'Predlošci Izdavanja';
 $lang['ACTIONS_LOG'] = 'Izvješće o aktivnostima';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Nažalost, vaš browser ne podržava okvire';
-$lang['IDX_CLEAR_CACHE'] = 'Očistiti Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Skladištenje podataka';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Predlošci';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Neto vijesti';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Razine korisnika';
-$lang['IDX_SYNCHRONIZE'] = 'Sinkroniziraj:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Teme';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Poruke korisnika graf';
-
 // Index
 $lang['MAIN_INDEX'] = 'Indeks Foruma';
 $lang['FORUM_STATS'] = 'Statistika Foruma';
@@ -1648,7 +1636,7 @@ $lang['NOT_AVAILABLE'] = 'Nije dostupan';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Skladištenje podataka';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

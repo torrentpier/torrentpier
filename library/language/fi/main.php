@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker asetukset';
 $lang['RELEASE_TEMPLATES'] = 'Julkaisu Malleja';
 $lang['ACTIONS_LOG'] = 'Raportin toimintaa';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Anteeksi, selaimesi ei ilmeisesti tue kehyksiä';
-$lang['IDX_CLEAR_CACHE'] = 'Tyhjennä Välimuisti:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Malleja';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net uutiset';
-$lang['IDX_UPDATE'] = 'Päivitys:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Käyttäjän tasolla';
-$lang['IDX_SYNCHRONIZE'] = 'Synkronoi:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Aiheet';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Käyttäjän viestit count';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum-Index';
 $lang['FORUM_STATS'] = 'Foorumin Tilastot';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Ei saatavilla';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

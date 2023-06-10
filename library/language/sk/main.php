@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker nastavenia';
 $lang['RELEASE_TEMPLATES'] = 'Uvoľnenie Šablóny';
 $lang['ACTIONS_LOG'] = 'Správa o činnosti';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Prepáčte, váš prehliadač nezdá podporu rámy';
-$lang['IDX_CLEAR_CACHE'] = 'Vymazať Vyrovnávaciu Pamäť:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Šablóny';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Čistý novinky';
-$lang['IDX_UPDATE'] = 'Aktualizácia:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Užívateľské úrovne';
-$lang['IDX_SYNCHRONIZE'] = 'Synchronizovať:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Témy';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Používateľ príspevky počítať';
-
 // Index
 $lang['MAIN_INDEX'] = 'Fórum Index';
 $lang['FORUM_STATS'] = 'Štatistiky Fóra';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Nie je k dispozícii';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

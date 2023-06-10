@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Seguidor de configuració';
 $lang['RELEASE_TEMPLATES'] = 'Llançament De Plantilles';
 $lang['ACTIONS_LOG'] = 'Informe sobre l\'acció';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Ho sentim, el teu navegador no sembla suport marcs';
-$lang['IDX_CLEAR_CACHE'] = 'Esborra La Memòria Cau:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Plantilles';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net de notícies';
-$lang['IDX_UPDATE'] = 'Actualització:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Nivells d\'usuari';
-$lang['IDX_SYNCHRONIZE'] = 'Sincronitzar:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Temes';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Usuari missatges comte';
-
 // Index
 $lang['MAIN_INDEX'] = 'Índex Del Fòrum';
 $lang['FORUM_STATS'] = 'Estadístiques Del Fòrum';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'No disponible';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

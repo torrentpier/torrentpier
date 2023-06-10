@@ -1610,18 +1610,6 @@ $lang['TRACKER_CONFIG'] = 'Parametrlər tracker';
 $lang['RELEASE_TEMPLATES'] = 'Şablonlar Buraxılması';
 $lang['ACTIONS_LOG'] = 'Hesabat hərəkətləri';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Təəssüf ki, sizin dəstəkləmir фреймы';
-$lang['IDX_CLEAR_CACHE'] = 'Keşi:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Saxlama məlumat';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Şablonlar';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Təmiz xəbər';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Səviyyəsi istifadəçilər';
-$lang['IDX_SYNCHRONIZE'] = 'Sinxronizasiya edə bilərsiniz:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Mövzular';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Mesaj istifadəçi sayı';
-
 // Index
 $lang['MAIN_INDEX'] = 'İndeksi Forum';
 $lang['FORUM_STATS'] = 'Statistika Forum';
@@ -1648,7 +1636,7 @@ $lang['NOT_AVAILABLE'] = 'Mövcud deyil';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Saxlama məlumat';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

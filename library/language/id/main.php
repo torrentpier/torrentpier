@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker pengaturan';
 $lang['RELEASE_TEMPLATES'] = 'Rilis Template';
 $lang['ACTIONS_LOG'] = 'Laporan tentang tindakan';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Maaf, browser anda tampaknya tidak mendukung frame';
-$lang['IDX_CLEAR_CACHE'] = 'Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Template';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net berita';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Tingkat pengguna';
-$lang['IDX_SYNCHRONIZE'] = 'Sinkronisasi:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Topik';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Posting pengguna count';
-
 // Index
 $lang['MAIN_INDEX'] = 'Indeks Forum';
 $lang['FORUM_STATS'] = 'Forum Statistik';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Tidak tersedia';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'גשש הגדרות';
 $lang['RELEASE_TEMPLATES'] = 'שחרור תבניות';
 $lang['ACTIONS_LOG'] = 'דו " ח על פעולה';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'מצטער, הדפדפן שלך לא נראה מסגרות תמיכה';
-$lang['IDX_CLEAR_CACHE'] = 'נקה מטמון:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'תבניות';
-$lang['IDX_CLEAR_NEWNEWS'] = 'רשת חדשות';
-$lang['IDX_UPDATE'] = 'עדכון:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'רמות המשתמש';
-$lang['IDX_SYNCHRONIZE'] = 'סינכרון:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'נושאים';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'הודעות המשתמש לספור';
-
 // Index
 $lang['MAIN_INDEX'] = 'פורום מדד';
 $lang['FORUM_STATS'] = 'פורום סטטיסטיקה';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'לא זמין';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

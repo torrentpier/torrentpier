@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Настройки трекера';
 $lang['RELEASE_TEMPLATES'] = 'Шаблоны для релизов';
 $lang['ACTIONS_LOG'] = 'Отчет по действиям';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Простите, но ваш браузер не поддерживает фреймы.';
-$lang['IDX_CLEAR_CACHE'] = 'Очистить кеш:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Данные';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Шаблоны';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Новости';
-$lang['IDX_UPDATE'] = 'Обновить:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Уровни пользователей';
-$lang['IDX_SYNCHRONIZE'] = 'Синхронизировать:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Темы';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Количество сообщений';
-
 // Index
 $lang['MAIN_INDEX'] = 'Список форумов';
 $lang['FORUM_STATS'] = 'Статистика форумов';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Недоступно';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

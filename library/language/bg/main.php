@@ -1609,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Настройки на тракера';
 $lang['RELEASE_TEMPLATES'] = 'Шаблони На Издаване';
 $lang['ACTIONS_LOG'] = 'Доклад за дейността';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'За съжаление, вашият браузър не поддържа фреймове';
-$lang['IDX_CLEAR_CACHE'] = 'Изчистите Кеш Паметта:';
-$lang['IDX_CLEAR_DATASTORE'] = 'База данни';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Шаблони';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Чиста новина';
-$lang['IDX_UPDATE'] = 'Актуализация:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Нива на достъп';
-$lang['IDX_SYNCHRONIZE'] = 'Синхронизирайте:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Теми';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Съобщения на потребителя граф';
-
 // Index
 $lang['MAIN_INDEX'] = 'Пощенски Код На Форума';
 $lang['FORUM_STATS'] = 'Статистиката На Форума';
@@ -1647,7 +1635,7 @@ $lang['NOT_AVAILABLE'] = 'Не е наличен';
 
 // Clear Cache
 $lang['DATASTORE'] = 'База данни';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

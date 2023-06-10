@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker beállítások';
 $lang['RELEASE_TEMPLATES'] = 'Kiadás Sablonok';
 $lang['ACTIONS_LOG'] = 'Jelentés akció';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Sajnáljuk, az ön böngészője nem úgy tűnik, hogy támogatja a keretek';
-$lang['IDX_CLEAR_CACHE'] = 'Cache Ürítése:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Sablonok';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Nettó hírek';
-$lang['IDX_UPDATE'] = 'Frissítés:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Felhasználói szinten';
-$lang['IDX_SYNCHRONIZE'] = 'Szinkronizálás:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Témák';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Felhasználó hozzászólások szám';
-
 // Index
 $lang['MAIN_INDEX'] = 'Index Fórum';
 $lang['FORUM_STATS'] = 'Fórum Statisztikák';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Nem elérhető';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

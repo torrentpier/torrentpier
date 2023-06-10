@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = '추적 설정';
 $lang['RELEASE_TEMPLATES'] = '템플릿 릴리스';
 $lang['ACTIONS_LOG'] = '보고서에 작업';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Sorry,당신의 브라우저하지 않는 것 프레임을 지원';
-$lang['IDX_CLEAR_CACHE'] = '캐시 지우기:';
-$lang['IDX_CLEAR_DATASTORE'] = '데이터 저장소';
-$lang['IDX_CLEAR_TEMPLATES'] = '템플릿';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net 뉴스';
-$lang['IDX_UPDATE'] = '업데이트:';
-$lang['IDX_UPDATE_USER_LEVELS'] = '사용자 레벨';
-$lang['IDX_SYNCHRONIZE'] = '기:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = '주제';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = '사용자는 게시물 수';
-
 // Index
 $lang['MAIN_INDEX'] = '포럼 인덱스';
 $lang['FORUM_STATS'] = '포럼을 통계';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = '사용할 수 없';
 
 // Clear Cache
 $lang['DATASTORE'] = '데이터 저장소';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

@@ -1610,18 +1610,6 @@ $lang['TRACKER_CONFIG'] = 'Կառավարում ճանապարհները';
 $lang['RELEASE_TEMPLATES'] = 'Կաղապարներ Թողարկման';
 $lang['ACTIONS_LOG'] = 'Հաշվետվություն գործողությունների մասին';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Ցավոք, ձեր զննարկիչը չի աջակցում фреймы';
-$lang['IDX_CLEAR_CACHE'] = 'Մաքրել Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Տվյալների շտեմարան';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Կաղապարներ';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Մաքուր նորությունը';
-$lang['IDX_UPDATE'] = 'Թարմացնել:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Հարթաչափեր';
-$lang['IDX_SYNCHRONIZE'] = 'Համեմատել:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Թեմաներ';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Գրառումները գրաֆը';
-
 // Index
 $lang['MAIN_INDEX'] = 'Ինդեքսը Համաժողովի';
 $lang['FORUM_STATS'] = 'Ֆորումի Վիճակագրությունը';
@@ -1648,7 +1636,7 @@ $lang['NOT_AVAILABLE'] = 'Հասանելի չէ';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Տվյալների շտեմարան';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update

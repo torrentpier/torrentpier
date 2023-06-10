@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'танзимоти Назоратчии';
 $lang['RELEASE_TEMPLATES'] = 'Шаблон озод';
 $lang['ACTIONS_LOG'] = 'Њисобот оид ба амалиёти';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Мутаасифона, браузери шумо дастгирӣ намекунад, фоторамкахо';
-$lang['IDX_CLEAR_CACHE'] = 'Кеш Clear:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Шаблонҳои';
-$lang['IDX_CLEAR_NEWNEWS'] = 'хабари Net';
-$lang['IDX_UPDATE'] = 'навсозии:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'сатњи корбар';
-$lang['IDX_SYNCHRONIZE'] = 'ҳамоҳанг созед:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Мавзӯҳо';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Заметки корбар ҳисоб';
-
 // Index
 $lang['MAIN_INDEX'] = 'Индекси Форум';
 $lang['FORUM_STATS'] = 'Омор Форум';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Дастрас нест';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
