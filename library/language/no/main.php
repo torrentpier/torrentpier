@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake sølv';
 $lang['GOLD_STATUS'] = 'GULL TORRENT! LAST NED TRAFIKKEN IKKE TENK!';
 $lang['SILVER_STATUS'] = 'SØLV TORRENT! LAST NED TRAFIKKEN DELVIS VURDERT!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Søk i Forum';
 $lang['SELECT_CAT'] = 'Velg kategori';
 $lang['GO_TO_SECTION'] = 'Gå til delen';
