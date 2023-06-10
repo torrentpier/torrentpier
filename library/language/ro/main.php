@@ -1607,18 +1607,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker setări';
 $lang['RELEASE_TEMPLATES'] = 'Eliberarea Template-Uri';
 $lang['ACTIONS_LOG'] = 'Raport privind acțiunea';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Ne pare rău, browser-ul nu pare să suport rame';
-$lang['IDX_CLEAR_CACHE'] = 'Cache Clar:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Template-uri';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Niveluri de utilizatori';
-$lang['IDX_SYNCHRONIZE'] = 'Sincronizarea:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Subiecte';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Mesajele utilizatorului conta';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Statisticile Forumului';
@@ -1645,7 +1633,7 @@ $lang['NOT_AVAILABLE'] = 'Nu este disponibil';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Clear Cache';
+$lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
