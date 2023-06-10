@@ -12,8 +12,8 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
-$domain_name = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name;
+$force_name = 'torrentpier.com'; // enter here your primary domain name of your site
+$force_port = 80;
 $force_ssl = false;
 
 $bb_cfg = [];
@@ -86,8 +86,8 @@ $bb_cfg['cache'] = [
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
-$bb_cfg['server_name'] = $domain_name; // The domain name from which this board runs
-$bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
+$bb_cfg['server_name'] = $domain_name = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $force_name; // The domain name from which this board runs
+$bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : $force_port; // The port your server is running on
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
 // GZip
@@ -354,7 +354,7 @@ $bb_cfg['show_sidebar2_on_every_page'] = false;
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = $force_ssl || \TorrentPier\Helpers\IsHelper::isHTTPS();
+$bb_cfg['cookie_secure'] = \TorrentPier\Helpers\IsHelper::isHTTPS() ? true : $force_ssl;
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 $bb_cfg['cookie_same_site'] = 'Lax'; // Lax, None, Strict | https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
