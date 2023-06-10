@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'күміс UnMake';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! ЖҮКТЕУ ТРАФИК емес деп!';
 $lang['SILVER_STATUS'] = 'КҮМІС TORRENT! ЖҮКТЕУ Жартылай жабылған көшелердің жол деп есептейді!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Форумдар Іздеу';
 $lang['SELECT_CAT'] = 'санатын таңдаңыз';
 $lang['GO_TO_SECTION'] = 'Goto бөлім';
