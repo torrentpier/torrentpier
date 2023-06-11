@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake sidabrinė';
 $lang['GOLD_STATUS'] = 'AUKSO TORRENT! ATSISIŲSTI EISMO NEMANO!';
 $lang['SILVER_STATUS'] = 'SIDABRO TORRENT! ATSISIŲSTI SKRYDŽIŲ IŠ DALIES LAIKYTI!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Paieška forume';
 $lang['SELECT_CAT'] = 'Pasirinkite kategorija';
 $lang['GO_TO_SECTION'] = 'Goto skirsnis';

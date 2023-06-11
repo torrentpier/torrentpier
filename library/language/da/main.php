@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake sølv';
 $lang['GOLD_STATUS'] = 'GULD TORRENT! DOWNLOAD-TRAFIK MENER IKKE!';
 $lang['SILVER_STATUS'] = 'SØLV TORRENT! DOWNLOAD-TRAFIK DELVIST OVERVEJET!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Søg i Fora';
 $lang['SELECT_CAT'] = 'Vælg kategori';
 $lang['GO_TO_SECTION'] = 'Goto afsnit';

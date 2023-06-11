@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Зняти срібло';
 $lang['GOLD_STATUS'] = 'ЗОЛОТА РОЗДАЧА! ЗАВАНТАЖЕНЕ НЕ ЗАРАХОВУЄТЬСЯ!';
 $lang['SILVER_STATUS'] = 'СРІБНА РОЗДАЧА! ЗАВАНТАЖЕНЕ ЗАРАХОВУЄТЬСЯ ЛИШЕ НАПОЛОВИНУ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Шукати на форумах';
 $lang['SELECT_CAT'] = 'Вибрати категорію...';
 $lang['GO_TO_SECTION'] = 'Перейти до розділу';

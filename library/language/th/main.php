@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'ต้องปลดสีเงิน';
 $lang['GOLD_STATUS'] = 'ทองทอร์เรนต์! ดาวน์โหลดการจราจรไม่ได้พิจารณา!';
 $lang['SILVER_STATUS'] = 'เงินทอร์เรนต์! ดาวน์โหลดการจราจรบางส่วนของพิจารณา!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'ค้นหาใน Forums';
 $lang['SELECT_CAT'] = 'เลือกหมวดหมู่';
 $lang['GO_TO_SECTION'] = 'ไปยังส่วน';

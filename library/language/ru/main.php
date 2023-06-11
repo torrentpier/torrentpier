@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Снять серебро';
 $lang['GOLD_STATUS'] = 'ЗОЛОТАЯ РАЗДАЧА! СКАЧАННОЕ НЕ ЗАСЧИТЫВАЕТСЯ!';
 $lang['SILVER_STATUS'] = 'СЕРЕБРЯНАЯ РАЗДАЧА! СКАЧАННОЕ ЗАСЧИТЫВАЕТСЯ ТОЛЬКО НАПОЛОВИНУ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Искать в форумах';
 $lang['SELECT_CAT'] = 'Выбрать категорию…';
 $lang['GO_TO_SECTION'] = 'перейти к разделу';

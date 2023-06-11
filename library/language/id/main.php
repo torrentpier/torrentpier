@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake silver';
 $lang['GOLD_STATUS'] = 'EMAS TORRENT! DOWNLOAD LALU LINTAS TIDAK MEMPERTIMBANGKAN!';
 $lang['SILVER_STATUS'] = 'PERAK TORRENT! DOWNLOAD LALU LINTAS SEBAGIAN DIANGGAP!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Cari di Forum';
 $lang['SELECT_CAT'] = 'Pilih kategori';
 $lang['GO_TO_SECTION'] = 'Goto bagian';

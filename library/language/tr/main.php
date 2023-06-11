@@ -1156,6 +1156,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Yapamazsınız Gümüş';
 $lang['GOLD_STATUS'] = 'ALTIN TORRENT! İNDİR TRAFİK DİKKATE ALMAZ.';
 $lang['SILVER_STATUS'] = 'GÜMÜŞ TORRENT! İNDİR TRAFİK KISMEN KABUL!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Forumlarda arama';
 $lang['SELECT_CAT'] = 'Kategori seçin';
 $lang['GO_TO_SECTION'] = 'Goto bölüm';

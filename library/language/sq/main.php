@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake argjendi';
 $lang['GOLD_STATUS'] = 'ARI TORRENT! SHKARKO TRAFIKUT NUK E KONSIDEROJNË!';
 $lang['SILVER_STATUS'] = 'SILVER PËRRUA! SHKARKO TRAFIKUT PJESËRISHT KONSIDEROHET!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Kërkimi në Forume';
 $lang['SELECT_CAT'] = 'Zgjidhni kategorinë';
 $lang['GO_TO_SECTION'] = 'Shko në seksionin';

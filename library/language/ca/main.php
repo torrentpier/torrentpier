@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake de plata';
 $lang['GOLD_STATUS'] = 'OR TORRENT! DESCARREGAR DE TRÀNSIT NO CONSIDERA!';
 $lang['SILVER_STATUS'] = 'PLATA TORRENT! DESCÀRREGA TRÀNSIT CONSIDERAT PARCIALMENT!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Cerca als Fòrums';
 $lang['SELECT_CAT'] = 'Seleccioneu la categoria';
 $lang['GO_TO_SECTION'] = 'Vés a la secció';

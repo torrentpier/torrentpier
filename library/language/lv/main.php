@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake sudraba';
 $lang['GOLD_STATUS'] = 'ZELTA TORRENT! LEJUPIELĀDĒT SATIKSMES NEUZSKATA!';
 $lang['SILVER_STATUS'] = 'SUDRABA TORRENT! LEJUPIELĀDĒT SATIKSMES DAĻĒJI UZSKATĪT!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Meklēšana Forumos';
 $lang['SELECT_CAT'] = 'Izvēlieties kategoriju';
 $lang['GO_TO_SECTION'] = 'Goto sadaļā';

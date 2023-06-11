@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'yo\'q qilmoq kumush';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! DOWNLOAD TRAFFIC ko\'rib chiqmaydi!';
 $lang['SILVER_STATUS'] = 'KUMUSH TORRENT! DOWNLOAD TRAFFIC qisman ko\'rilgan!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Forumlar Izlash';
 $lang['SELECT_CAT'] = 'Turkum tanlang';
 $lang['GO_TO_SECTION'] = 'Goto qism';

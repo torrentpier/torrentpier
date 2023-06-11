@@ -1154,6 +1154,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Преигравам сребро';
 $lang['GOLD_STATUS'] = 'ЗЛАТЕН ТОРЕНТ! ИЗТЕГЛЯНЕ НА ТРАФИК НЕ ВЯРВА!';
 $lang['SILVER_STATUS'] = 'СРЕБЪРЕН ТОРЕНТ! ИЗТЕГЛЯНЕ НА ТРАФИКА, ЧАСТИЧНО СЕ РАЗГЛЕЖДАТ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Търсене във форумите';
 $lang['SELECT_CAT'] = 'Изберете категория';
 $lang['GO_TO_SECTION'] = 'Раздел гото';

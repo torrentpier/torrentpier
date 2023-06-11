@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Maak silwer';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! DOWNLOAD VERKEER NIE OORWEEG NIE!';
 $lang['SILVER_STATUS'] = 'SILVER TORRENT! DOWNLOAD TRAFFIC PARTIALLY CONSIDERED!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Soek in forums';
 $lang['SELECT_CAT'] = 'Kies kategorie';
 $lang['GO_TO_SECTION'] = 'Gaan afdeling';

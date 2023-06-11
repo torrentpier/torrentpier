@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Desfazer prata';
 $lang['GOLD_STATUS'] = 'OURO TORRENT! O TRÁFEGO DE DOWNLOAD NÃO CONSIDERAR!';
 $lang['SILVER_STATUS'] = 'PRATA TORRENT! O TRÁFEGO DE DOWNLOAD PARCIALMENTE CONSIDERADO!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Pesquisar nos Fóruns';
 $lang['SELECT_CAT'] = 'Selecione a categoria';
 $lang['GO_TO_SECTION'] = 'Goto seção';

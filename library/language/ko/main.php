@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = '부술 실버';
 $lang['GOLD_STATUS'] = '금 토렌트! 다운로드 소통량을 고려하지 않습니다!';
 $lang['SILVER_STATUS'] = '실버트 토런트! 다운로드 트래픽 부분적으로 간주됩니다!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = '포럼에서 검색';
 $lang['SELECT_CAT'] = '카테고리 선택';
 $lang['GO_TO_SECTION'] = 'Goto 섹션';

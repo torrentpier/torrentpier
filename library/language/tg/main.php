@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake нуқра';
 $lang['GOLD_STATUS'] = 'Ҷӯйе GOLD! Ҳаракати БЕРУНОРИ Оё фикр намекунанд!';
 $lang['SILVER_STATUS'] = 'Ҷӯйе нуқра! Ҳаракати БЕРУНОРИ қисман НАЗАР!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Ҷустуҷӯи Форумҳо';
 $lang['SELECT_CAT'] = 'Интихоб кунед категорияи';
 $lang['GO_TO_SECTION'] = 'фасли Goto';

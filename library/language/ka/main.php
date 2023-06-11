@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake ვერცხლის';
 $lang['GOLD_STATUS'] = 'ოქროს TORRENT! უფასო საგზაო არ მიიჩნევს!';
 $lang['SILVER_STATUS'] = 'ვერცხლის TORRENT! უფასო მოძრაობის ნაწილობრივ განიხილება!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'ძიება ფორუმი';
 $lang['SELECT_CAT'] = 'აირჩიეთ კატეგორია';
 $lang['GO_TO_SECTION'] = 'Goto განყოფილება';

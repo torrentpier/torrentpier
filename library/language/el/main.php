@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Ακύρωσέ το ασήμι';
 $lang['GOLD_STATUS'] = 'ΧΡΥΣΌ TORRENT! ΚΑΤΕΒΆΣΤΕ ΚΥΚΛΟΦΟΡΊΑΣ ΔΕΝ ΛΑΜΒΆΝΕΙ ΥΠΌΨΗ!';
 $lang['SILVER_STATUS'] = 'ΑΣΗΜΈΝΙΟ TORRENT! ΚΑΤΕΒΆΣΤΕ ΚΥΚΛΟΦΟΡΊΑΣ ΕΝ ΜΈΡΕΙ ΝΑ ΘΕΩΡΗΘΕΊ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Αναζήτηση στο Φόρουμ';
 $lang['SELECT_CAT'] = 'Επιλέξτε κατηγορία';
 $lang['GO_TO_SECTION'] = 'Goto τμήμα';

@@ -1155,6 +1155,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Համասեռամոլների արծաթ';
 $lang['GOLD_STATUS'] = 'ՈՍԿԵ ՀԵՂԵՂ! ԲԵՌՆԵԼ ԵՐԹԵՒԵԿՈՒԹՅՈՒՆԸ ՉԻ ՀԱՄԱՐՈՒՄ!';
 $lang['SILVER_STATUS'] = 'ԱՐԾԱԹԵ ՀԵՂԵՂ! ԲԵՌՆԵԼ ԵՐԹԵՒԵԿՈՒԹՅՈՒՆԸ ՄԱՍԱՄԲ ՔՆՆԱՐԿՎՈՒՄ ԵՆ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Փնտրում ֆորումներում';
 $lang['SELECT_CAT'] = 'Ընտրել կատեգորիա';
 $lang['GO_TO_SECTION'] = 'Բաժին կլի';

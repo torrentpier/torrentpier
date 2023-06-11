@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake striebro';
 $lang['GOLD_STATUS'] = 'ZLATO TORRENT! DOWNLOAD PREVÁDZKY NEPOVAŽUJE!';
 $lang['SILVER_STATUS'] = 'STRIEBRO TORRENT! DOWNLOAD PREVÁDZKY ČIASTOČNE POVAŽOVAŤ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Vyhľadávanie vo Fóre';
 $lang['SELECT_CAT'] = 'Vyberte kategóriu';
 $lang['GO_TO_SECTION'] = 'Goto oddiel';

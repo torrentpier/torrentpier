@@ -1152,6 +1152,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake srebrna';
 $lang['GOLD_STATUS'] = 'ZLATO TORRENT! PRENOS PROMETA NE MENI!';
 $lang['SILVER_STATUS'] = 'SREBRO TORRENT! PRENOS PROMETA DELNO ŠTEJE!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Iskanje po Forumih';
 $lang['SELECT_CAT'] = 'Izberite kategorijo';
 $lang['GO_TO_SECTION'] = 'Goto oddelek';

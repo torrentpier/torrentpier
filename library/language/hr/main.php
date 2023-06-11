@@ -1155,6 +1155,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Afektirati srebro';
 $lang['GOLD_STATUS'] = 'ZLATNI TORRENT! PREUZIMANJE PROMET NE VJERUJE!';
 $lang['SILVER_STATUS'] = 'SILVER TORRENT! PREUZIMANJE PROMETA DJELOMIČNO OBUHVAĆENO!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Pretraživanje foruma';
 $lang['SELECT_CAT'] = 'Odaberite kategoriju';
 $lang['GO_TO_SECTION'] = 'Odjeljak goto';

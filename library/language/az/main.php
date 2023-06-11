@@ -1155,6 +1155,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Переигрывать gümüş';
 $lang['GOLD_STATUS'] = 'QIZIL TORRENT! DOWNLOAD TRAFİK HESAB ETMİR!';
 $lang['SILVER_STATUS'] = 'GÜMÜŞ TORRENT! DOWNLOAD TRAFİK QİSMƏN BAXILIR!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Axtarış forumlarda';
 $lang['SELECT_CAT'] = 'Bir kateqoriya seçin';
 $lang['GO_TO_SECTION'] = 'Bölmə keçid';
