@@ -46,8 +46,11 @@ $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
 $search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
-$status = (isset($_POST['status']) && IS_AM && $bb_cfg['tracker']['search_by_tor_status']) ? $_POST['status'] : '';
-$status_list = !empty($status) ? join(',', $status) : '';
+if ($tor_statuses = IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
+    if ($status = $_POST['status']) {
+        $status_list = !empty($status) ? implode(', ', $status) : false;
+    }
+}
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = array();
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -596,7 +599,7 @@ if ($allowed_forums) {
         if ($tor_type) {
             $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
         }
-        if (!empty($status)) {
+        if (is_string($status_list)) {
             $SQL['WHERE'][] = "tor.tor_status IN($status_list)";
         }
 
@@ -808,15 +811,13 @@ $search_all_opt = '<option value="' . $search_all . '" value="fs-' . $search_all
 $cat_forum_select = "\n" . '<select id="fs-main" style="width: 100%;" name="' . $forum_key . '[]" multiple size="' . $forum_select_size . "\">\n" . $search_all_opt . $opt . "</select>\n";
 
 // Status select
-$statuses = false;
-if (IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
-    $tor_search_tracker = array_chunk($bb_cfg['tor_icons'], 2, true);
+if ($tor_statuses) {
     $statuses = '<table border="0" cellpadding="0" cellspacing="0">';
-    foreach ($tor_search_tracker as $statuses_part) {
+    foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
             $checked = (!empty($status) && in_array($status_id, $status)) ? 'checked="checked"' : '';
-            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked . '>' . $status_styles . ' ' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
+            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
         }
         $statuses .= '</tr>';
     }
@@ -901,7 +902,7 @@ $template->assign_vars(array(
     'S_RG_SELECT' => build_select($s_rg_key, $s_release_group_select, $s_rg_val),
     'TOR_SEARCH_ACTION' => $tracker_url,
     'TOR_COLSPAN' => $tor_colspan,
-    'TOR_STATUS' => $statuses,
+    'TOR_STATUS' => $statuses ?? false,
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'POSTER_NAME_MAX' => $poster_name_max_len,
     'POSTER_ERROR' => $poster_error,
