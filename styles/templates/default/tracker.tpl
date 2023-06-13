@@ -169,7 +169,7 @@ $(function(){
 
 <div id="fs-nav-legend" style="display: none;">
 	<select id="fs-sel-cat"><option value="all">&nbsp;{L_SELECT_CAT}&nbsp;</option></select>
-	<span id="fs-nav-menu">&middot;&nbsp;<a class="menu-root" href="#fs-nav-list">{L_GO_TO_SECTION}</a></span>
+	<span id="fs-nav-menu">&nbsp;&middot;&nbsp;<a class="menu-root" href="#fs-nav-list">{L_GO_TO_SECTION}</a></span>
 </div>
 
 <form method="POST" name="post" action="{TOR_SEARCH_ACTION}#results">
@@ -181,7 +181,7 @@ $(function(){
 	<th class="thHead">{L_TOR_SEARCH_TITLE}</th>
 </tr>
 <tr>
-	<td class="row4" style="padding: 4px";>
+	<td class="row4" style="padding: 4px;">
 
 		<table class="fieldsets borderless bCenter pad_0" cellspacing="0">
 		<tr>

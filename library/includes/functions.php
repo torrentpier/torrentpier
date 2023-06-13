@@ -1781,11 +1781,6 @@ function decode_text_match($txt)
     return str_replace('&#039;', "'", $txt);
 }
 
-function pad_with_space($str)
-{
-    return $str ? " $str " : $str;
-}
-
 /**
  * Create magnet link
  *
