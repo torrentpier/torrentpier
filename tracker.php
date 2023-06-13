@@ -46,11 +46,8 @@ $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
 $search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
-if ($tor_statuses = IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
-    if ($status = $_POST['status']) {
-        $status_list = !empty($status) ? implode(', ', $status) : false;
-    }
-}
+$status = $_POST['status'] ?? false;
+$status_list = !empty($status) ? implode(', ', $status) : false;
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = array();
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -811,7 +808,7 @@ $search_all_opt = '<option value="' . $search_all . '" value="fs-' . $search_all
 $cat_forum_select = "\n" . '<select id="fs-main" style="width: 100%;" name="' . $forum_key . '[]" multiple size="' . $forum_select_size . "\">\n" . $search_all_opt . $opt . "</select>\n";
 
 // Status select
-if ($tor_statuses) {
+if (IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
     $statuses = '<table border="0" cellpadding="0" cellspacing="0">';
     foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
         $statuses .= '<tr>';
