@@ -550,6 +550,13 @@ if ($submit && !$errors) {
         DB()->query("INSERT INTO " . BB_USERS . $sql_args);
         $new_user_id = DB()->sql_nextid();
 
+        // Auto generate passkey
+        if ($bb_cfg['auto_gen_passkey']) {
+            if (!\TorrentPier\Legacy\Torrent::generate_passkey($new_user_id, true)) {
+                bb_die('Could not generate passkey');
+            }
+        }
+
         if (IS_ADMIN) {
             set_pr_die_append_msg($new_user_id);
             $message = $lang['ACCOUNT_ADDED'];
