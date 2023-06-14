@@ -47,7 +47,6 @@ $search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_
 $session_id = $userdata['session_id'];
 
 $status = $_POST['status'] ?? false;
-$status_list = !empty($status) ? implode(', ', $status) : false;
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = array();
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -596,8 +595,8 @@ if ($allowed_forums) {
         if ($tor_type) {
             $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
         }
-        if (is_string($status_list)) {
-            $SQL['WHERE'][] = "tor.tor_status IN($status_list)";
+        if (is_countable($status)) {
+            $SQL['WHERE'][] = "tor.tor_status IN(" . implode(', ', $status) . ")";
         }
 
         // ORDER
@@ -813,7 +812,7 @@ if (IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
     foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
-            $checked = (!empty($status) && in_array($status_id, $status)) ? 'checked="checked"' : '';
+            $checked = (is_countable($status) && in_array($status_id, $status)) ? 'checked="checked"' : '';
             $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
         }
         $statuses .= '</tr>';
