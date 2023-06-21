@@ -194,6 +194,7 @@ if ($tor_reged && $tor_info) {
             'TRACKER_LINK' => $tracker_link,
             'ATTACH_ID' => $attach_id,
             'TOR_SILVER_GOLD' => $tor_type,
+            'TOR_TYPE' => is_gold($tor_type),
 
             // torrent status mod
             'TOR_FROZEN' => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
