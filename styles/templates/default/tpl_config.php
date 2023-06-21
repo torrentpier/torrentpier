@@ -37,6 +37,9 @@ $images['icon_male'] = $_main . 'icon_male.gif';
 $images['icon_female'] = $_main . 'icon_female.gif';
 $images['icon_nogender'] = $_main . 'icon_nogender.gif';
 
+$images['icon_tor_gold'] = $_img . 'tor_gold.gif';
+$images['icon_tor_silver'] = $_img . 'tor_silver.gif';
+
 // post_icons
 $images['icon_minipost'] = $_main . 'icon_minipost.gif';
 $images['icon_gotopost'] = $_main . 'icon_minipost.gif';
