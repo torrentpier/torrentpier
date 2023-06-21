@@ -24,7 +24,7 @@ if (!$torrent) {
 }
 
 $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
-if (file_exists($filename) && !$file_contents = file_get_contents($filename)) {
+if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
     if (IS_AM) {
         $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
     } else {

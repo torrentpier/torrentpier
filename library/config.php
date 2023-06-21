@@ -449,16 +449,16 @@ $bb_cfg['sf_on_first_page_only'] = true;
 $bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300];
 
 // Topics
-$bb_cfg['show_quick_reply'] = true;
-$bb_cfg['show_rank_text'] = false;
-$bb_cfg['show_rank_image'] = true;
-$bb_cfg['show_poster_joined'] = true;
-$bb_cfg['show_poster_posts'] = true;
-$bb_cfg['show_poster_from'] = true;
-$bb_cfg['show_bot_nick'] = false;
+$bb_cfg['show_quick_reply'] = true; // показывать форму быстрого ответа
+$bb_cfg['show_rank_text'] = false; // показывать название лычки в топиках
+$bb_cfg['show_rank_image'] = true; // показывать картинку лычки в топиках
+$bb_cfg['show_poster_joined'] = true; // показывать дату регистрации пользователя в топиках
+$bb_cfg['show_poster_posts'] = true; // показывать количество постов пользователя в топиках
+$bb_cfg['show_poster_from'] = true; // показывать страну пользователя
+$bb_cfg['show_bot_nick'] = false; // показывать ник бота
 $bb_cfg['text_buttons'] = false; // replace EDIT, QUOTE... images with text links
 $bb_cfg['parse_ed2k_links'] = true; // make ed2k links clickable
-$bb_cfg['post_date_format'] = 'd-M-Y H:i';
+$bb_cfg['post_date_format'] = 'd-M-Y H:i'; // формат даты публикации в топиках
 $bb_cfg['ext_link_new_win'] = true; // open external links in new window
 
 $bb_cfg['topic_moved_days_keep'] = 7; // remove topic moved links after xx days (or FALSE to disable)
@@ -469,25 +469,27 @@ $bb_cfg['user_signature_end'] = '</div>'; // Это позволит испол�
 // Posts
 $bb_cfg['use_posts_cache'] = true;
 $bb_cfg['posts_cache_days_keep'] = 14;
-$bb_cfg['max_post_length'] = 5000;
 $bb_cfg['use_ajax_posts'] = true;
 
 // Search
 $bb_cfg['search_engine_type'] = 'mysql'; // none, mysql, sphinx
+
 $bb_cfg['sphinx_topic_titles_host'] = '127.0.0.1';
 $bb_cfg['sphinx_topic_titles_port'] = 3312;
 $bb_cfg['sphinx_config_path'] = '../install/sphinx/sphinx.conf';
+
 $bb_cfg['disable_ft_search_in_posts'] = false; // disable searching in post bodies
-$bb_cfg['disable_search_for_guest'] = true;
+$bb_cfg['disable_search_for_guest'] = true; // отключить поиск для гостей
 $bb_cfg['allow_search_in_bool_mode'] = true;
-$bb_cfg['max_search_words_per_post'] = 200;
-$bb_cfg['search_min_word_len'] = 3;
-$bb_cfg['search_max_word_len'] = 35;
+$bb_cfg['max_search_words_per_post'] = 200; // максимальное число слов в рамках одного поста
+$bb_cfg['search_min_word_len'] = 3; // минимальное число слов для поиска
+$bb_cfg['search_max_word_len'] = 35; // максимальное число слов для поиска
 $bb_cfg['limit_max_search_results'] = false;
 
 // Posting
 $bb_cfg['prevent_multiposting'] = true; // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
 $bb_cfg['max_smilies'] = 25; // Максимальное число смайлов в посте (0 - без ограничения)
+$bb_cfg['max_symbols_post'] = 5000; // TODO: Максимальное число символов в посте (0 - без ограничения)
 
 // PM
 $bb_cfg['privmsg_disable'] = false; // отключить систему личных сообщений на форуме
@@ -495,10 +497,12 @@ $bb_cfg['max_outgoing_pm_cnt'] = 10; // ограничение на кол. од
 $bb_cfg['max_inbox_privmsgs'] = 500; // максимальное число сообщений в папке входящие
 $bb_cfg['max_savebox_privmsgs'] = 500; // максимальное число сообщений в папке сохраненные
 $bb_cfg['max_sentbox_privmsgs'] = 500; // максимальное число сообщений в папке отправленные
-$bb_cfg['pm_days_keep'] = 180; // время хранения ЛС
+$bb_cfg['max_smilies_pm'] = 15; // TODO: максимальное число смайлов в сообщении (0 - без ограничения)
+$bb_cfg['max_symbols_pm'] = 1500; // TODO: максимальное число символов в сообщении (0 - без ограничения)
+$bb_cfg['pm_days_keep'] = 180; // TODO: время хранения ЛС
 
 // Actions log
-$bb_cfg['log_days_keep'] = 365;
+$bb_cfg['log_days_keep'] = 365; // время хранения истории действий
 
 // Users
 $bb_cfg['color_nick'] = true; // Окраска ников пользователей по user_rank
@@ -506,7 +510,7 @@ $bb_cfg['user_not_activated_days_keep'] = 7; // "not activated" == "not finished
 $bb_cfg['user_not_active_days_keep'] = 180; // inactive users but only with no posts
 
 // Groups
-$bb_cfg['group_members_per_page'] = 50;
+$bb_cfg['group_members_per_page'] = 50; // количество групп на одной странице
 
 // Tidy
 $bb_cfg['tidy_post'] = in_array('tidy', get_loaded_extensions(), true);

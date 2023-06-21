@@ -146,15 +146,11 @@
 	<tr class="row3">
 		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF postrow.attach.tor_reged.TOR_FROZEN == 0 --><!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --><!-- ENDIF --></th>
 	</tr>
-	<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $bb_cfg['tracker']['gold_silver_enabled'] -->
-	<tr class="row4">
-		<th colspan="3" class="row7"><img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
-	</tr>
-	<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $bb_cfg['tracker']['gold_silver_enabled'] -->
-	<tr class="row4">
-		<th colspan="3" class="row7"><img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
-	</tr>
-	<!-- ENDIF -->
+    <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
+    <tr class="row4">
+        <th colspan="3" class="row7">{postrow.attach.tor_reged.TOR_TYPE}&nbsp;<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->{L_SILVER_STATUS}<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->{L_GOLD_STATUS}<!-- ENDIF -->&nbsp;{postrow.attach.tor_reged.TOR_TYPE}</th>
+    </tr>
+    <!-- ENDIF -->
 	<tr class="row1">
 		<td width="15%">{L_TORRENT}:</td>
 		<td width="70%">
@@ -344,9 +340,7 @@ $('#tor-filelist-btn').click(function(){
 	<tr>
 		<td>
 			<div id="tor-fl-treecontrol">
-				<a href="#">{L_COLLAPSE}</a>&middot;
-				<a href="#">{L_EXPAND}</a>&middot;
-				<a href="#">{L_SWITCH}</a>
+				<a href="#">{L_COLLAPSE}</a>&middot;<a href="#">{L_EXPAND}</a>&middot;<a href="#">{L_SWITCH}</a>
 			</div>
 		</td>
 	</tr>

@@ -1888,7 +1888,7 @@ function profile_url($data)
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
 
-    if (!in_array($user_id, array('', GUEST_UID, BOT_UID)) && $username) {
+    if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && $username) {
         $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
     }
 
@@ -1943,7 +1943,7 @@ function gender_image($gender): string
 
 function is_gold($type): string
 {
-    global $lang, $bb_cfg;
+    global $lang, $bb_cfg, $images;
 
     $type = (int)$type;
     $is_gold = '';
@@ -1954,10 +1954,10 @@ function is_gold($type): string
 
     switch ($type) {
         case TOR_TYPE_GOLD:
-            $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_gold'] . '" alt="' . $lang['GOLD'] . '" title="' . $lang['GOLD'] . '" />&nbsp;';
             break;
         case TOR_TYPE_SILVER:
-            $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
+            $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_silver'] . '" alt="' . $lang['SILVER'] . '" title="' . $lang['SILVER'] . '" />&nbsp;';
             break;
         default:
             break;
