@@ -344,9 +344,7 @@ $('#tor-filelist-btn').click(function(){
 	<tr>
 		<td>
 			<div id="tor-fl-treecontrol">
-				<a href="#">{L_COLLAPSE}</a>&middot;
-				<a href="#">{L_EXPAND}</a>&middot;
-				<a href="#">{L_SWITCH}</a>
+				<a href="#">{L_COLLAPSE}</a>&middot;<a href="#">{L_EXPAND}</a>&middot;<a href="#">{L_SWITCH}</a>
 			</div>
 		</td>
 	</tr>
