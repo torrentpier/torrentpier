@@ -81,6 +81,7 @@ define('LOG_MAX_SIZE', 1048576); // bytes
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
+define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_STRICT);
 ini_set('log_errors', 1);
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
 define('WHOOPS_LOG_FILE', LOG_DIR . '/php_whoops.log'); // log file enabled only if log_errors == 1 (whoops)
