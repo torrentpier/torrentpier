@@ -439,9 +439,6 @@ $bb_cfg['super_admins'] = [
     2 => 'admin',
 ];
 
-// Date format
-$bb_cfg['date_format'] = 'Y-m-d';
-
 // Subforums
 $bb_cfg['sf_on_first_page_only'] = true;
 

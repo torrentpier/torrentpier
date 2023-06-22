@@ -77,6 +77,8 @@ class SqlDb
      */
     public function init()
     {
+        mysqli_report(MYSQLI_ERROR_REPORTING);
+
         // Connect to server
         $this->connect();
 
