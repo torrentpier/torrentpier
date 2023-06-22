@@ -364,7 +364,7 @@ function build_poll_add_form (src_el)
 		<!-- IF postrow.POSTER_RANK --><p class="rank_txt">{postrow.POSTER_RANK}</p><!-- ENDIF -->
 		<!-- IF postrow.RANK_IMAGE --><p class="rank_img">{postrow.RANK_IMAGE}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_AVATAR --><p class="avatar">{postrow.POSTER_AVATAR}</p><!-- ENDIF -->
-		<!-- IF postrow.POSTER_GENDER --><p class="joined"><em>{L_GENDER}:</em> {postrow.POSTER_GENDER}</p><!-- ENDIF -->
+		<!-- IF postrow.POSTER_GENDER --><p class="joined"><em>{L_GENDER}:</em>&nbsp;{postrow.POSTER_GENDER}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_JOINED --><p class="joined" title="{postrow.POSTER_JOINED_DATE}"><em>{L_LONGEVITY}:</em> {postrow.POSTER_JOINED}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_POSTS --><p class="posts"><em>{L_POSTS}:</em> {postrow.POSTER_POSTS}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_FROM --><p class="from"><em>{L_LOCATION}:</em> {postrow.POSTER_FROM}</p><!-- ENDIF -->
