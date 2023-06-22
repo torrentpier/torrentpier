@@ -78,7 +78,7 @@ define('LOG_LF', "\n");
 define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
-define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_STRICT);
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
