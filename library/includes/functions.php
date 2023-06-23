@@ -1184,35 +1184,10 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 {
     global $lang, $template;
 
-// Pagination Mod
     $begin_end = 3;
     $from_middle = 1;
-    /*
-        By default, $begin_end is 3, and $from_middle is 1, so on page 6 in a 12 page view, it will look like this:
-
-        a, d = $begin_end = 3
-        b, c = $from_middle = 1
-
-     "begin"        "middle"           "end"
-        |              |                 |
-        |     a     b  |  c     d        |
-        |     |     |  |  |     |        |
-        v     v     v  v  v     v        v
-        1, 2, 3 ... 5, 6, 7 ... 10, 11, 12
-
-        Change $begin_end and $from_middle to suit your needs appropriately
-    */
 
     $total_pages = ceil($num_items / $per_page);
-
-    if ($total_pages == 1 || $num_items == 0) {
-        $template->assign_vars(array(
-            'PAGINATION' => false,
-        ));
-
-        return '';
-    }
-
     $on_page = floor($start_item / $per_page) + 1;
 
     $page_string = '';
@@ -1268,8 +1243,11 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         }
     }
 
-    $pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string : '';
-    $pagination = str_replace('&amp;start=0', '', $pagination);
+    $pagination = false;
+    if ($page_string && $total_pages > 1) {
+        $pagination = '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string;
+        $pagination = str_replace('&amp;start=0', '', $pagination);
+    }
 
     $template->assign_vars(array(
         'PAGINATION' => $pagination,
