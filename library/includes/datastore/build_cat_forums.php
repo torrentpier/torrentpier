@@ -106,15 +106,14 @@ $this->store('cat_forums', $data);
 //
 // jumpbox
 //
-$data = array(
-    'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
-    'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
-);
+if ($bb_cfg['show_jumpbox']) {
+    $data = array(
+        'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
+        'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
+    );
 
-$this->store('jumpbox', $data);
-
-file_write($data['guest'], AJAX_HTML_DIR . '/jumpbox_guest.html', false, true, true);
-file_write($data['user'], AJAX_HTML_DIR . '/jumpbox_user.html', false, true, true);
+    $this->store('jumpbox', $data);
+}
 
 //
 // viewtopic_forum_select

@@ -68,7 +68,7 @@ var user = {
 	}
 };
 
-<!-- IF $bb_cfg['show_jumpbox'] -->
+<!-- IF JUMPBOX -->
 $(document).ready(function(){
 	$("div.jumpbox").html('\
 		<span id="jumpbox-container"> \

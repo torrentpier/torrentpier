@@ -56,6 +56,9 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     ));
 }
 
+// Make jumpbox
+make_jumpbox();
+
 // Info about new private messages
 $icon_pm = $images['pm_no_new_msg'];
 $pm_info = $lang['NO_NEW_PM'];
@@ -190,8 +193,6 @@ $template->assign_vars(array(
     'POSTING_URL' => $bb_cfg['posting_url'],
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
-
-    'AJAX_HTML_DIR' => AJAX_HTML_DIR,
 
     // Misc
     'BOT_UID' => BOT_UID,

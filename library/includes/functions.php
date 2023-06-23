@@ -1002,9 +1002,13 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
     return $u_data;
 }
 
-function make_jumpbox($selected = 0)
+function make_jumpbox()
 {
-    global $datastore, $template;
+    global $datastore, $template, $bb_cfg;
+
+    if (!$bb_cfg['show_jumpbox']) {
+        return;
+    }
 
     if (!$jumpbox = $datastore->get('jumpbox')) {
         $datastore->update('jumpbox');
