@@ -1,4 +1,4 @@
-# Change Log
+# 📖 Change Log
 
 ## [v2.4.0-alpha4](https://github.com/torrentpier/torrentpier/tree/v2.4.0-alpha4) (2023-06-08)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-alpha3...v2.4.0-alpha4)
