@@ -56,7 +56,6 @@ class User
     public $opt_js_guest = [
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
-        'h_smile' => 1,     // hide smilies
         'h_sig' => 1,     // hide signatures
     ];
 
