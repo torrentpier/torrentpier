@@ -72,17 +72,17 @@ define('SQL_SLOW_QUERY_TIME', 10); // slow query in seconds
 define('SQL_PREPEND_SRC_COMM', false); // prepend source file comment to sql query
 
 // Log options
-define('LOG_EXT', 'log');
+define('LOG_EXT', 'log'); // log file extension
 define('LOG_SEPR', ' | ');
 define('LOG_LF', "\n");
 define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
-define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR);
-ini_set('log_errors', 1);
+ini_set('error_reporting', E_ALL); // PHP error reporting mode | https://www.php.net/manual/en/errorfunc.constants.php
+ini_set('display_errors', 0); // Show general php errors
+ini_set('display_startup_errors', 0); // Show startup php errors
+define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR); // MySQL error reporting mode | https://www.php.net/manual/mysqli-driver.report-mode.php
+ini_set('log_errors', 1); // php native logging
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
 define('WHOOPS_LOG_FILE', LOG_DIR . '/php_whoops.log'); // log file enabled only if log_errors == 1 (whoops)
 
