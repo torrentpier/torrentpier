@@ -151,6 +151,7 @@ $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 // Language
 $bb_cfg['charset'] = 'UTF-8'; // page charset
 $bb_cfg['lang'] = [
+    // Список доступных языков для выбора
     'af' => [
         'name' => 'Afrikaans',
         'locale' => 'af_ZA.UTF-8',
@@ -343,14 +344,15 @@ $bb_cfg['lang'] = [
 
 // Templates
 $bb_cfg['templates'] = [
+    // Список доступных шаблонов для выбора
     'default' => 'TorrentPier',
 ];
 
-$bb_cfg['tpl_name'] = 'default';
+$bb_cfg['tpl_name'] = 'default'; // Активный шаблон по умолчанию
 $bb_cfg['stylesheet'] = 'main.css';
 
-$bb_cfg['show_sidebar1_on_every_page'] = false;
-$bb_cfg['show_sidebar2_on_every_page'] = false;
+$bb_cfg['show_sidebar1_on_every_page'] = false; // Показывать левый сайд-бар на каждой странице
+$bb_cfg['show_sidebar2_on_every_page'] = false; // Показывать правый сайд-бар на каждой странице
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".$domain_name";
@@ -481,7 +483,7 @@ $bb_cfg['allow_search_in_bool_mode'] = true;
 $bb_cfg['max_search_words_per_post'] = 200; // максимальное число слов в рамках одного поста
 $bb_cfg['search_min_word_len'] = 3; // минимальное число слов для поиска
 $bb_cfg['search_max_word_len'] = 35; // максимальное число слов для поиска
-$bb_cfg['limit_max_search_results'] = false;
+$bb_cfg['limit_max_search_results'] = false; // лимит на максимальное число результатов поиска (false - отключено)
 
 // Posting
 $bb_cfg['prevent_multiposting'] = true; // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
@@ -516,6 +518,7 @@ $bb_cfg['tidy_post'] = in_array('tidy', get_loaded_extensions(), true);
 $bb_cfg['mem_on_start'] = memory_get_usage();
 $bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
+$bb_cfg['show_jumpbox'] = true;
 
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
@@ -525,8 +528,6 @@ $bb_cfg['allow_change'] = [
     'language' => true,
     'dateformat' => true,
 ];
-
-$bb_cfg['show_jumpbox'] = true;
 
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
@@ -648,12 +649,12 @@ $bb_cfg['tracker'] = [
     'limit_seed_ips' => 0,
     'limit_leech_ips' => 0,
     'tor_topic_up' => true,
-    'gold_silver_enabled' => true,
     'retracker' => true,
     'retracker_host' => 'http://retracker.local/announce',
-    'freeleech' => false,
     'guest_tracker' => true,
-    'search_by_tor_status' => true
+    'search_by_tor_status' => true,
+    'freeleech' => false, // freelech mode (If enabled, then disable "gold_silver_enabled")
+    'gold_silver_enabled' => true // golden / silver days mode (If enabled, then disable "freeleech")
 ];
 
 // Ratio settings
