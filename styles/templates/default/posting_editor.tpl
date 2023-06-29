@@ -70,6 +70,8 @@ ajax.callback.posts = function(data) {
 </select>
 &nbsp;
 <span class="buttons">
+    <input type="button" value="sup" name="codeSup" title="{L_SUPERSCRIPT}" />
+    <input type="button" value="sub" name="codeSub" title="{L_SUBSCRIPT}" />&nbsp;
 	<input type="button" value="&#8212;" name="codeHR" title="{L_HOR_LINE}" style="font-weight: bold; width: 26px;" />
 	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" style="width: 26px;" />&nbsp;
 	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" style="width: 65px;" />
@@ -87,8 +89,6 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="i" name="codeI" title="{L_ITALIC}" style="width: 25px; font-style: italic;" />
 	<input type="button" value="u" name="codeU" title="{L_UNDERLINE}" style="width: 25px; text-decoration: underline;" />
 	<input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="width: 25px; text-decoration: line-through;" />&nbsp;
-    <input type="button" value="sup" name="codeSup" title="{L_SUPERSCRIPT}" />
-    <input type="button" value="sub" name="codeSub" title="{L_SUBSCRIPT}" />&nbsp;
 	<input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" style="width: 57px;" />
 	<input type="button" value="Img" name="codeImg" title="{L_IMG_TITLE}" style="width: 40px;" />
 	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" style="width: 63px; text-decoration: underline;" />&nbsp;
@@ -180,36 +180,51 @@ function checkForm(form) {
 </script>
 
 <script type="text/javascript">
-var bbcode = new BBCode("message");
-var ctrl = "ctrl";
+    var bbcode = new BBCode("message");
+    var ctrl = "ctrl";
 
-bbcode.addTag("codeB", "b", null, "B", ctrl);
-bbcode.addTag("codeI", "i", null, "I", ctrl);
-bbcode.addTag("codeU", "u", null, "U", ctrl);
-bbcode.addTag("codeS", "s", null, "S", ctrl);
+    bbcode.addTag("codeB", "b", null, "B", ctrl);
+    bbcode.addTag("codeI", "i", null, "I", ctrl);
+    bbcode.addTag("codeU", "u", null, "U", ctrl);
+    bbcode.addTag("codeS", "s", null, "S", ctrl);
 
-bbcode.addTag("codeSup", "sup", null, "", ctrl);
-bbcode.addTag("codeSub", "sub", null, "", ctrl);
+    bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
+    bbcode.addTag("codeImg", "img", null, "R", ctrl);
+    bbcode.addTag("codeUrl", "url", "/url", "W", ctrl);
 
-bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
-bbcode.addTag("codeImg", "img", null, "R", ctrl);
-bbcode.addTag("codeUrl", "url", "/url", "W", ctrl);
-
-bbcode.addTag("codeCode", "code", null, "K", ctrl);
-bbcode.addTag("codeList",  "list", null, "L", ctrl);
-bbcode.addTag("codeOpt", "*", "", "0", ctrl);
+    bbcode.addTag("codeCode", "code", null, "K", ctrl);
+    bbcode.addTag("codeList", "list", null, "L", ctrl);
+    bbcode.addTag("codeOpt", "*", "", "0", ctrl);
 </script>
 
 <!-- IF QUICK_REPLY -->
 <!-- ELSE -->
 <script type="text/javascript">
-bbcode.addTag("codeHR",      "hr",      "",   "8", ctrl);
-bbcode.addTag("codeBR",      "br",      "",   "",  ctrl);
-bbcode.addTag("codeSpoiler", "spoiler", null, "",  ctrl);
+    bbcode.addTag("codeHR", "hr", "", "8", ctrl);
+    bbcode.addTag("codeBR", "br", "", "", ctrl);
+    bbcode.addTag("codeSpoiler", "spoiler", null, "", ctrl);
+    bbcode.addTag("codeSup", "sup", null, "", ctrl);
+    bbcode.addTag("codeSub", "sub", null, "", ctrl);
 
-bbcode.addTag("fontFace", function(e) { var v=e.value; e.selectedIndex=0; return "font=\""+v+"\"" }, "/font");
-bbcode.addTag("codeColor", function(e) { var v=e.value; e.selectedIndex=0; return "color="+v }, "/color");
-bbcode.addTag("codeSize", function(e) { var v=e.value; e.selectedIndex=0; return "size="+v }, "/size");
-bbcode.addTag("codeAlign", function(e) { var v=e.value; e.selectedIndex=0; return "align="+v }, "/align");
+    bbcode.addTag("fontFace", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "font=\"" + v + "\""
+    }, "/font");
+    bbcode.addTag("codeColor", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "color=" + v
+    }, "/color");
+    bbcode.addTag("codeSize", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "size=" + v
+    }, "/size");
+    bbcode.addTag("codeAlign", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "align=" + v
+    }, "/align");
 </script>
 <!-- ENDIF -->
