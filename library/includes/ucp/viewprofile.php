@@ -18,15 +18,16 @@ $datastore->enqueue(array(
     'cat_forums',
 ));
 
-if (empty($_GET[POST_USERS_URL]) || $_GET[POST_USERS_URL] == GUEST_UID) {
-    bb_die($lang['NO_USER_ID_SPECIFIED']);
-}
-if (!$profiledata = get_userdata($_GET[POST_USERS_URL])) {
-    bb_die($lang['NO_USER_ID_SPECIFIED']);
-}
-
 if (!$userdata['session_logged_in']) {
     redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
+} else {
+    if (empty($_GET[POST_USERS_URL])) {
+        $_GET[POST_USERS_URL] = $userdata['user_id'];
+    }
+}
+
+if (!$profiledata = get_userdata($_GET[POST_USERS_URL])) {
+    bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
 if (!$ranks = $datastore->get('ranks')) {
