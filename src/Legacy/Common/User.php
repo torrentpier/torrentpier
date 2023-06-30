@@ -335,6 +335,7 @@ class User
      */
     public function session_end(bool $update_lastvisit = false, bool $set_cookie = true)
     {
+        Sessions::cache_rm_userdata($this->data);
         DB()->query("
 			DELETE FROM " . BB_SESSIONS . "
 			WHERE session_id = '{$this->data['session_id']}'
@@ -356,10 +357,7 @@ class User
             if (isset($_REQUEST['reset_autologin'])) {
                 $this->create_autologin_id($this->data, false);
 
-                DB()->query("
-					DELETE FROM " . BB_SESSIONS . "
-					WHERE session_user_id = '{$this->data['user_id']}'
-				");
+                Sessions::delete_user_sessions($this->data['user_id']);
             }
         }
 
