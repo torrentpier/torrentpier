@@ -86,7 +86,7 @@ ini_set('display_startup_errors', 1); // Show startup php errors
 define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR); // MySQL error reporting mode | https://www.php.net/manual/mysqli-driver.report-mode.php
 ini_set('log_errors', 1); // php native logging
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
-define('WHOOPS_LOG_FILE', LOG_DIR . '/php_whoops.log'); // log file enabled only if log_errors == 1 (whoops)
+define('WHOOPS_LOG_FILE', LOG_DIR . '/php_whoops.log'); // log file enabled only if log_errors == 1 and APP_DEBUG == true (whoops)
 
 // Triggers
 define('BB_ENABLED', TRIGGERS_DIR . '/$on');
