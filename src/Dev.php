@@ -30,6 +30,13 @@ use Exception;
 class Dev
 {
     /**
+     * Environment type
+     *
+     * @var string|null
+     */
+    public static ?string $envType = null;
+
+    /**
      * Base debug functionality init
      *
      * @return void
@@ -38,41 +45,69 @@ class Dev
     {
         global $bb_cfg;
 
-        if ($bb_cfg['bugsnag']['enabled']) {
-            if (env('APP_ENV', 'production') !== 'local') {
-                $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
-                Handler::register($bugsnag);
+        self::$envType = env('APP_ENV', 'local');
+
+        if (self::$envType === 'production') {
+            if (!$bb_cfg['bugsnag']['enabled']) {
+                return;
             }
+
+            self::getBugsnag();
         } else {
-            if (DBG_USER) {
-                $whoops = new Run;
-
-                /**
-                 * Show errors on page
-                 */
-                $whoops->pushHandler(new PrettyPageHandler);
-
-                /**
-                 * Show log in browser console
-                 */
-                $loggingInConsole = new PlainTextHandler();
-                $loggingInConsole->loggerOnly(true);
-                $loggingInConsole->setLogger((new Logger('TorrentPier', [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
-                $whoops->pushHandler($loggingInConsole);
-
-                /**
-                 * Log errors in file
-                 */
-                if (ini_get('log_errors') == 1) {
-                    $loggingInFile = new PlainTextHandler();
-                    $loggingInFile->loggerOnly(true);
-                    $loggingInFile->setLogger((new Logger('TorrentPier', [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
-                    $whoops->pushHandler($loggingInFile);
-                }
-
-                $whoops->register();
+            if (!APP_DEBUG) {
+                return;
             }
+
+            self::getWhoops();
         }
+    }
+
+    /**
+     * Bugsnag debug driver
+     *
+     * @return void
+     */
+    private static function getBugsnag(): void
+    {
+        global $bb_cfg;
+
+        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+        Handler::register($bugsnag);
+    }
+
+    /**
+     * Whoops debug driver
+     *
+     * @return void
+     */
+    private static function getWhoops(): void
+    {
+        $whoops = new Run;
+
+        /**
+         * Show errors on page
+         */
+        $whoops->pushHandler(new PrettyPageHandler);
+
+        /**
+         * Show log in browser console
+         */
+        $loggingInConsole = new PlainTextHandler();
+        $loggingInConsole->loggerOnly(true);
+        $loggingInConsole->setLogger((new Logger(APP_NAME, [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
+        $whoops->pushHandler($loggingInConsole);
+
+        /**
+         * Log errors in file
+         */
+        if (ini_get('log_errors') == 1) {
+            $loggingInFile = new PlainTextHandler();
+            $loggingInFile->loggerOnly(true);
+            $loggingInFile->setLogger((new Logger(APP_NAME, [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
+            $whoops->pushHandler($loggingInFile);
+        }
+
+        $whoops->register();
     }
 
     /**
@@ -115,7 +150,7 @@ class Dev
      */
     public static function sql_dbg_enabled(): bool
     {
-        return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
+        return (SQL_DEBUG && APP_DEBUG && !empty($_COOKIE['sql_log']));
     }
 
     /**

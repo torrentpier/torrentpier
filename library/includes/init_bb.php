@@ -96,17 +96,6 @@ function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponl
     ]);
 }
 
-/**
- * Debug options
- */
-if (DBG_USER) {
-    ini_set('error_reporting', E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-} else {
-    unset($_COOKIE['explain']);
-}
-
 // User Levels
 define('DELETED', -1);
 define('USER', 0);

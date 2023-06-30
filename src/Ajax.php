@@ -182,7 +182,7 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        if (DBG_USER) {
+        if (APP_DEBUG) {
             if ($contents) {
                 $this->response['raw_output'] = $contents;
             }

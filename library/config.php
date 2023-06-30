@@ -345,7 +345,7 @@ $bb_cfg['lang'] = [
 // Templates
 $bb_cfg['templates'] = [
     // Список доступных шаблонов для выбора
-    'default' => 'TorrentPier',
+    'default' => 'Default',
 ];
 
 $bb_cfg['tpl_name'] = 'default'; // Активный шаблон по умолчанию
@@ -428,10 +428,6 @@ $bb_cfg['bugsnag'] = [
 ];
 
 // Special users
-$bb_cfg['dbg_users'] = [
-#	user_id => 'name',
-    2 => 'admin',
-];
 $bb_cfg['unlimited_users'] = [
 #	user_id => 'name',
     2 => 'admin',
