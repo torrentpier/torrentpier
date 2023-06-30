@@ -43,21 +43,11 @@ class Dev
      */
     public static function initDebug(): void
     {
-        global $bb_cfg;
-
         self::$envType = env('APP_ENV', 'local');
 
         if (self::$envType === 'production') {
-            if (!$bb_cfg['bugsnag']['enabled']) {
-                return;
-            }
-
             self::getBugsnag();
         } else {
-            if (!APP_DEBUG) {
-                return;
-            }
-
             self::getWhoops();
         }
     }
@@ -71,6 +61,10 @@ class Dev
     {
         global $bb_cfg;
 
+        if (!$bb_cfg['bugsnag']['enabled']) {
+            return;
+        }
+
         $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
         Handler::register($bugsnag);
     }
@@ -82,6 +76,10 @@ class Dev
      */
     private static function getWhoops(): void
     {
+        if (!APP_DEBUG) {
+            return;
+        }
+
         $whoops = new Run;
 
         /**
