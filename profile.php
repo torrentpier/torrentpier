@@ -7,8 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('IN_PROFILE', true);
 define('BB_SCRIPT', 'profile');
+define('IN_PROFILE', true);
 
 require __DIR__ . '/common.php';
 
