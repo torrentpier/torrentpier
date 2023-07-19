@@ -68,7 +68,7 @@ $bb_cfg['cache'] = [
         'port' => 6379,
         'con_required' => true,
     ],
-    // Available cache types: memcache, sqlite, redis, (filecache by default)
+    // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
     'engines' => [
         'bb_cache' => ['filecache', []],
         'bb_config' => ['filecache', []],
@@ -81,7 +81,7 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: memcache, sqlite, redis (filecache by default)
+// Available datastore types: filecache, memcache, sqlite, redis, apcu (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
