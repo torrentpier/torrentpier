@@ -60,3 +60,6 @@ ALTER TABLE `bb_users` CHANGE `user_newpasswd` `user_newpasswd` VARCHAR(255) NOT
 
 // 2.4.0-alpha3
 INSERT INTO bb_config VALUES ('show_board_start_index', '1');
+
+// 2.4.0-beta2
+INSERT INTO `bb_cron` VALUES (NULL, '1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
