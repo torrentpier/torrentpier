@@ -30,7 +30,7 @@
     "forum": "https://torrentpier.com"
   },
   "require": {
-    "php": "^7.4 || ^8.0",
+    "php": "^7.4 || ^8.2",
     "arokettu/bencode": "^1.8",
     "bugsnag/bugsnag": "v3.29.1",
     "egulias/email-validator": "^3.2",
