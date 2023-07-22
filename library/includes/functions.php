@@ -957,45 +957,40 @@ function clean_username($username)
     return $username;
 }
 
-// Get Userdata, $u can be username or user_id. If $force_name is true, the username will be forced.
-function get_userdata($u, $force_name = false, $allow_guest = false)
+/**
+ * Get Userdata
+ *
+ * @param int|string $u
+ * @param bool $is_name
+ * @param bool $allow_guest
+ * @return mixed
+ */
+function get_userdata($u, bool $is_name = false, bool $allow_guest = false)
 {
-    if (!$u) {
+    if (empty($u)) {
         return false;
     }
 
-    if ((int)$u == GUEST_UID && $allow_guest) {
-        if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
-            return $u_data;
+    if (!$is_name) {
+        if ((int)$u === GUEST_UID && $allow_guest) {
+            if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
+                return $u_data;
+            }
         }
-    }
 
-    $u_data = array();
-    $name_search = false;
-    $exclude_anon_sql = (!$allow_guest) ? "AND user_id != " . GUEST_UID : '';
-
-    if ($force_name || !is_numeric($u)) {
-        $name_search = true;
-        $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
-    } else {
         $where_sql = "WHERE user_id = " . (int)$u;
+    } else {
+        $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
     }
 
+    $exclude_anon_sql = (!$allow_guest) ? "AND user_id != " . GUEST_UID : '';
     $sql = "SELECT * FROM " . BB_USERS . " $where_sql $exclude_anon_sql LIMIT 1";
 
     if (!$u_data = DB()->fetch_row($sql)) {
-        if (!is_int($u) && !$name_search) {
-            $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
-            $sql = "SELECT * FROM " . BB_USERS . " $where_sql $exclude_anon_sql LIMIT 1";
-            $u_data = DB()->fetch_row($sql);
-        }
-    }
-
-    if (is_null($u_data)) {
         return false;
     }
 
-    if ($u_data['user_id'] == GUEST_UID) {
+    if ((int)$u_data['user_id'] === GUEST_UID) {
         CACHE('bb_cache')->set('guest_userdata', $u_data);
     }
 
