@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Posty';
 $lang['POSTED'] = 'Opublikowany';
 $lang['USERNAME'] = 'Nazwa użytkownika';
 $lang['PASSWORD'] = 'Hasło';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
