@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Amata';
 $lang['POSTED'] = 'Ievietojis';
 $lang['USERNAME'] = 'Lietotājvārdu';
 $lang['PASSWORD'] = 'Paroles';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-pasts';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autors';
