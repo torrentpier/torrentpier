@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Պաշտոնները';
 $lang['POSTED'] = 'Ավելացնել';
 $lang['USERNAME'] = 'Անուն';
 $lang['PASSWORD'] = 'Գաղտնաբառը';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Էլեկտրոնային փոստի հասցեն';
 $lang['PM'] = 'Թեմա ըստ';
 $lang['AUTHOR'] = 'Հեղինակ';
