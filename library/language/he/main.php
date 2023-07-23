@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'הודעות';
 $lang['POSTED'] = 'פורסם';
 $lang['USERNAME'] = 'שם משתמש';
 $lang['PASSWORD'] = 'הסיסמה';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'דוא " ל';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'מחבר תגובה';
