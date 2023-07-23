@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Príspevky';
 $lang['POSTED'] = 'Publikované';
 $lang['USERNAME'] = 'Užívateľské meno';
 $lang['PASSWORD'] = 'Heslo';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
