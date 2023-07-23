@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Publicacions';
 $lang['POSTED'] = 'Publicat';
 $lang['USERNAME'] = 'Nom d\'usuari';
 $lang['PASSWORD'] = 'Contrasenya';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Correu electrònic';
 $lang['PM'] = 'H';
 $lang['AUTHOR'] = 'Autor';
