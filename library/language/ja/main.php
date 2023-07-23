@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'ポス';
 $lang['POSTED'] = '掲載';
 $lang['USERNAME'] = 'ユーザー名';
 $lang['PASSWORD'] = 'パスワード';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'メール';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = '著者';
