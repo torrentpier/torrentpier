@@ -166,7 +166,7 @@ ajax.callback.index_data = function(data) {
 </script>
 <!-- ENDIF -->
 
-<!-- IF SHOW_PASSKEY && !NEED_GEN_PASSKEY -->
+<!-- IF SHOW_PASSKEY && not NEED_GEN_PASSKEY -->
 <script type="text/javascript">
     ajax.callback.gen_passkey = function (data) {
         if (data.first_creation) {
