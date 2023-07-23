@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = 'Создать новый';
 $lang['BT_PASSKEY_VIEW'] = 'Показать';
 $lang['BT_GEN_PASSKEY_NEW'] = "Внимание! После изменения нового пасскея, вам необходимо будет заново скачать все активные торренты! \n Вы уверены, что хотите создать новый пасскей?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Доступных для поиска форумов не найдено';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Сидам';
 $lang['LEECHS'] = 'Личерам';
