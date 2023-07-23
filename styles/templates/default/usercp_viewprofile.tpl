@@ -385,17 +385,19 @@ ajax.callback.gen_passkey = function(data){
 			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
 				<th>{L_USER_RATIO}:</th>
 				<td>
+                    <!-- IF SHOW_BT_USERDATA -->
 					<!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
 					<b id="u_ratio" class="gen">{USER_RATIO}</b>
 					[<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
 					<!-- ELSE -->
 					<span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
 					<!-- ENDIF -->
+                    <!-- ENDIF -->
 
 					<!-- IF SHOW_PASSKEY -->
-					[ {L_BT_PASSKEY}:  <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
+					[ {L_BT_PASSKEY}: <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
 					<span id="passkey-gen" class="med" style="display: none;">
-						<b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;
+						<b id="passkey" class="med bold">{AUTH_KEY}</b>
 						<a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
