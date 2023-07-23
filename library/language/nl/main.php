@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = 'maak een nieuwe';
 $lang['BT_PASSKEY_VIEW'] = 'toon';
 $lang['BT_GEN_PASSKEY_NEW'] = "Let op! Na het wijzigen van de nieuwe sleutel in te voeren, moet je het opnieuw downloaden van de actieve torrents! \n-Bent u zeker dat u wilt maken van een nieuwe sleutel?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Geen doorzoekbare forums gevonden';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Zaad';
 $lang['LEECHS'] = 'Leech';
