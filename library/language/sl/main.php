@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Objav';
 $lang['POSTED'] = 'Objavljeno';
 $lang['USERNAME'] = 'Uporabniško ime';
 $lang['PASSWORD'] = 'Geslo';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-pošta';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Avtor';
