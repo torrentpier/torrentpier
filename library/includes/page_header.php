@@ -189,6 +189,7 @@ $template->assign_vars(array(
     'POST_URL' => BB_ROOT . POST_URL,
     'POSTING_URL' => $bb_cfg['posting_url'],
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
+    'BONUS_URL' => BB_ROOT . BONUS_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
 
     'AJAX_HTML_DIR' => AJAX_HTML_DIR,

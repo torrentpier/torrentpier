@@ -448,6 +448,7 @@ ajax.callback.gen_passkey = function(data){
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
+            <!-- IF SHOW_BT_USERDATA -->
 			<tr>
 				<td colspan="2" class="pad_4">
 					<table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="bCenter borderless" cellspacing="1">
@@ -487,11 +488,12 @@ ajax.callback.gen_passkey = function(data){
 							<td colspan="1">{L_MAX_SPEED}</td>
 							<td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
 							<td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
+							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="{BONUS_URL}">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
 						</tr>
 					</table>
 				</td>
 			</tr>
+            <!-- ENDIF -->
 		</table>
 		<!--/user_details-->
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->
