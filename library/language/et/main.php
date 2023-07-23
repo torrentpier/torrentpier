@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Postitusi';
 $lang['POSTED'] = 'Postitatud';
 $lang['USERNAME'] = 'Kasutajanimi';
 $lang['PASSWORD'] = 'Parool';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-posti';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
