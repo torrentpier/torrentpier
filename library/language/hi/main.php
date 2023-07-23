@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'पोस्ट';
 $lang['POSTED'] = 'की तैनाती';
 $lang['USERNAME'] = 'उपयोगकर्ता नाम';
 $lang['PASSWORD'] = 'पासवर्ड';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'ईमेल';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'लेखक';
