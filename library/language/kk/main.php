@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Хабарламалар';
 $lang['POSTED'] = 'Posted';
 $lang['USERNAME'] = 'Пайдаланушы аты';
 $lang['PASSWORD'] = 'пароль';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Электрондық пошта';
 $lang['PM'] = 'Премьер-Министр';
 $lang['AUTHOR'] = 'автор';
