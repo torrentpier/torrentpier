@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'poste';
 $lang['POSTED'] = 'gepos';
 $lang['USERNAME'] = 'Gebruikersnaam';
 $lang['PASSWORD'] = 'wagwoord';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'e-pos';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'skrywer';
