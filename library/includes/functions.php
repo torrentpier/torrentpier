@@ -827,10 +827,12 @@ function show_bt_userdata($user_id)
 {
     global $lang, $template;
 
-    $btu = get_bt_userdata($user_id);
+    if (!$btu = get_bt_userdata($user_id)) {
+        return;
+    }
 
     $template->assign_vars(array(
-        'SHOW_BT_USERDATA' => (bool)$btu,
+        'SHOW_BT_USERDATA' => true,
         'UP_TOTAL' => humn_size($btu['u_up_total']),
         'UP_BONUS' => humn_size($btu['u_up_bonus']),
         'RELEASED' => humn_size($btu['u_up_release']),
