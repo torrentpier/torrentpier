@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = 'buat yang baru';
 $lang['BT_PASSKEY_VIEW'] = 'tampilkan';
 $lang['BT_GEN_PASSKEY_NEW'] = "Perhatian! Setelah mengubah kata sandi baru, anda akan perlu untuk men-download ulang semua active torrents! \n Apakah anda yakin anda ingin membuat sandi baru?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Tidak dicari forum ditemukan';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Benih';
 $lang['LEECHS'] = 'Lintah';
