@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Pareigybės';
 $lang['POSTED'] = 'Paskelbtas';
 $lang['USERNAME'] = 'Vartotojo vardas';
 $lang['PASSWORD'] = 'Slaptažodį';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'El. paštas';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autorius';
