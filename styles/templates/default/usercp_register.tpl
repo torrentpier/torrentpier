@@ -73,7 +73,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <!-- IF EDIT_PROFILE and not ADM_EDIT -->
 <tr>
 	<td class="prof-title">{L_CURRENT_PASSWORD}: * <br /><h6>{L_CONFIRM_PASSWORD_EXPLAIN}</h6></td>
-	<td><input type="password" name="cur_pass" size="35" maxlength="32" value="" /></td>
+	<td><input class="show_pass_input" type="password" name="cur_pass" size="35" maxlength="32" value="" />&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{L_PASSWORD_SHOW_BTN}</label></td>
 </tr>
 <!-- ENDIF -->
 <tr>
