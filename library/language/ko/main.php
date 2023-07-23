@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = '게시물';
 $lang['POSTED'] = '게시';
 $lang['USERNAME'] = '사용자 이름';
 $lang['PASSWORD'] = '비밀번호';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = '이메일';
 $lang['PM'] = '오후';
 $lang['AUTHOR'] = '저자';
