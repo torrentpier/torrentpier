@@ -795,6 +795,10 @@ function generate_user_info($row, bool $group_mod = false): array
 
 function get_bt_userdata($user_id)
 {
+    if (!\TorrentPier\Legacy\Torrent::getPasskey($user_id)) {
+        return false;
+    }
+
     if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id)) {
         $btu = DB()->fetch_row("
 			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
@@ -804,14 +808,6 @@ function get_bt_userdata($user_id)
 			GROUP BY bt.user_id
 			LIMIT 1
 		");
-
-        if (empty($btu)) {
-            if (!\TorrentPier\Legacy\Torrent::generate_passkey($user_id, true)) {
-                bb_simple_die('Could not generate passkey');
-            }
-
-            $btu = get_bt_userdata($user_id);
-        }
 
         CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
     }
@@ -834,7 +830,7 @@ function show_bt_userdata($user_id)
     $btu = get_bt_userdata($user_id);
 
     $template->assign_vars(array(
-        'SHOW_BT_USERDATA' => true,
+        'SHOW_BT_USERDATA' => (bool)$btu,
         'UP_TOTAL' => humn_size($btu['u_up_total']),
         'UP_BONUS' => humn_size($btu['u_up_bonus']),
         'RELEASED' => humn_size($btu['u_up_release']),

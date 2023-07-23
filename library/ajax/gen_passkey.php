@@ -16,7 +16,7 @@ global $userdata, $lang;
 $req_uid = (int)$this->request['user_id'];
 
 if ($req_uid == $userdata['user_id'] || IS_ADMIN) {
-    if (empty($this->request['confirmed'])) {
+    if (empty($this->request['confirmed']) && \TorrentPier\Legacy\Torrent::getPasskey($req_uid)) {
         $this->prompt_for_confirm($lang['BT_GEN_PASSKEY_NEW']);
     }
 
