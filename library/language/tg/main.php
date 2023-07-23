@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Posts';
 $lang['POSTED'] = 'Фишка';
 $lang['USERNAME'] = 'Логин';
 $lang['PASSWORD'] = 'Рамз';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'муаллиф';
