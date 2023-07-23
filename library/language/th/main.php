@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'กัปตัน..เสาทางนี้';
 $lang['POSTED'] = 'โพสต์';
 $lang['USERNAME'] = 'ชื่อผู้ใช้';
 $lang['PASSWORD'] = 'รหัสผ่าน';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'อีเมล';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'ผู้เขียน';
