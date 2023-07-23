@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Мнения';
 $lang['POSTED'] = 'Публикувано';
 $lang['USERNAME'] = 'Потребителско име';
 $lang['PASSWORD'] = 'Парола';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Електронна поща';
 $lang['PM'] = 'ФПЧ';
 $lang['AUTHOR'] = 'Авторът';
