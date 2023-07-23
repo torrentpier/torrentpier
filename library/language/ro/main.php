@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Posturi';
 $lang['POSTED'] = 'Postat';
 $lang['USERNAME'] = 'Numele de utilizator';
 $lang['PASSWORD'] = 'Parola';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
