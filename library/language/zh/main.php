@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = '帖子';
 $lang['POSTED'] = '已发布';
 $lang['USERNAME'] = '用户名';
 $lang['PASSWORD'] = '密码';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = '邮箱';
 $lang['PM'] = '私信';
 $lang['AUTHOR'] = '作者';
