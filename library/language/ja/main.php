@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = '新規作成し';
 $lang['BT_PASSKEY_VIEW'] = 'ショー';
 $lang['BT_GEN_PASSKEY_NEW'] = "注意！ 変更後の新しいパスキーは、ダウンロードは全部やり直しの納入です！ おAre you sure you wantへの新しいパスキーのか？";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'ない検索フォーラムの発見';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = '種子';
 $lang['LEECHS'] = 'Leech';
