@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Innlegg';
 $lang['POSTED'] = 'Lagt ut';
 $lang['USERNAME'] = 'Brukernavn';
 $lang['PASSWORD'] = 'Passord';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-post';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Forfatter';
