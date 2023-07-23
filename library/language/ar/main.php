@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = 'إنشاء جديد';
 $lang['BT_PASSKEY_VIEW'] = 'تظهر';
 $lang['BT_GEN_PASSKEY_NEW'] = "الاهتمام! بعد تغيير المرور الجديد, سوف تحتاج إلى إعادة تحميل جميع النشطة السيول! \n هل أنت متأكد من أنك تريد إنشاء مفتاح المرور ؟ ";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'لا يمكن البحث في المنتديات وجدت';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'البذور';
 $lang['LEECHS'] = 'علقة';
