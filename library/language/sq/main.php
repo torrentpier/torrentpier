@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Postimet';
 $lang['POSTED'] = 'Postuar';
 $lang['USERNAME'] = 'Emrin e përdoruesit';
 $lang['PASSWORD'] = 'Password';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PD';
 $lang['AUTHOR'] = 'Autori';
