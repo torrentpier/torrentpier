@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Hozzászólás';
 $lang['POSTED'] = 'Posted';
 $lang['USERNAME'] = 'Felhasználónév';
 $lang['PASSWORD'] = 'Jelszó';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Szerző';
