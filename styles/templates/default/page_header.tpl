@@ -470,6 +470,22 @@ $(document).ready(function() {
 <!--main_content-->
 <td id="main_content">
 	<div id="main_content_wrap">
+        <!-- IF NEED_GEN_PASSKEY -->
+        <script type="text/javascript">
+            ajax.callback.gen_passkey = function (data) {
+                if (data.passkey) {
+                    window.location.reload();
+                }
+            };
+        </script>
+
+        <div class="alert alert-info" style="width: 95%;">
+            <h4 class="alert-heading">{L_PASSKEY_ALERT_TITLE}</h4>
+            <hr>
+            {L_PASSKEY_ALERT_INFO}
+            <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {SESSION_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+        </div>
+        <!-- ENDIF -->
 		<div id="latest_news">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>
