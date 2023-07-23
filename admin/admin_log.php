@@ -281,8 +281,7 @@ if ($log_rowset) {
             'TOPIC_HREF_NEW_S' => url_arg($url, $topic_key, $row['log_topic_id_new']),
             'TOPIC_TITLE_NEW' => $topic_title_new,
 
-            'DATE' => bb_date($row['log_time'], 'j-M'),
-            'TIME' => bb_date($row['log_time'], 'H:i'),
+            'DATETIME' => bb_date($row['log_time'], 'd-M-y H:i'),
             'DATETIME_HREF_S' => $datetime_href_s,
             'MSG' => $msg,
             'ROW_CLASS' => $row_class,

@@ -349,8 +349,8 @@ class BBCode
 
         if ($this->smilies) {
             /** @noinspection NestedPositiveIfStatementsInspection */
-            if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text, 101, $smilies_cnt)) {
-                return (($smilies_cnt <= $bb_cfg['max_smilies']) && $bb_cfg['max_smilies'] > 0) ? $parsed_text : $text;
+            if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text)) {
+                return $parsed_text;
             }
         }
 

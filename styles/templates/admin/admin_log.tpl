@@ -135,9 +135,7 @@
                 <div class="small"><i>{log.USER_IP}</i></div>
             </td>
             <td class="small tCenter nowrap" style="line-height: 14px;">
-                <div>{log.TIME}</div>
-                <div><a class="small" href="{log.DATETIME_HREF_S}"><span class="small"><i>{log.DATE}</i></span></a>
-                </div>
+                <div><a class="small" href="{log.DATETIME_HREF_S}"><span class="small"><i>{log.DATETIME}</i></span></a></div>
             </td>
             <td class="med" style="line-height: 14px;">
                 <!-- IF log.MSG -->

@@ -572,7 +572,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';
     $poster_from = ($postrow[$i]['user_from'] && $poster_id != GUEST_UID) ? $postrow[$i]['user_from'] : '';
-    $poster_joined = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i', false) : '';
+    $poster_joined = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
     $poster_longevity = ($poster_id != GUEST_UID) ? delta_time($postrow[$i]['user_regdate']) : '';
     $post_id = $postrow[$i]['post_id'];
     $mc_type = $postrow[$i]['mc_type'];

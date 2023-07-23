@@ -66,6 +66,16 @@
 
 <script type="text/javascript">new ClipboardJS('.copyElement');</script>
 
+<script type="text/javascript">
+    $('body').on('click', '.password_show_checkbox', function () {
+        if ($(this).is(':checked')) {
+            $('input.show_pass_input').attr('type', 'text');
+        } else {
+            $('input.show_pass_input').attr('type', 'password');
+        }
+    });
+</script>
+
 <!-- IF ONLOAD_FOCUS_ID -->
 <script type="text/javascript">
 $p('{ONLOAD_FOCUS_ID}').focus();

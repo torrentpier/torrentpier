@@ -805,6 +805,15 @@ if ($mode == 'read') {
             $error = true;
             $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['EMPTY_MESSAGE'];
         }
+
+        // Check smilies limit
+        if ($bb_cfg['max_smilies_pm']) {
+            $count_smilies = substr_count(bbcode2html($privmsg_message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
+            if ($count_smilies > $bb_cfg['max_smilies_pm']) {
+                $error = true;
+                $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies_pm']);
+            }
+        }
     }
 
     if ($submit && !$error) {

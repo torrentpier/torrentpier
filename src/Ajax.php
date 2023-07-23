@@ -60,6 +60,7 @@ class Ajax
 
     /**
      * Perform action
+     *
      * @throws Exception
      */
     public function exec()
@@ -159,6 +160,7 @@ class Ajax
 
     /**
      * Send data
+     *
      * @throws Exception
      */
     public function send()
@@ -182,7 +184,7 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        if (DBG_USER) {
+        if (APP_DEBUG) {
             if ($contents) {
                 $this->response['raw_output'] = $contents;
             }
@@ -202,6 +204,7 @@ class Ajax
 
     /**
      * Admin session
+     *
      * @throws Exception
      */
     public function check_admin_session()
@@ -225,6 +228,7 @@ class Ajax
 
     /**
      * Prompt for password
+     *
      * @throws Exception
      */
     public function prompt_for_password()
@@ -267,101 +271,201 @@ class Ajax
         }
     }
 
+    /**
+     * Edit user profile actions
+     *
+     * @return void
+     */
     public function edit_user_profile()
     {
         require AJAX_DIR . '/edit_user_profile.php';
     }
 
+    /**
+     * Change user rank actions
+     *
+     * @return void
+     */
     public function change_user_rank()
     {
         require AJAX_DIR . '/change_user_rank.php';
     }
 
+    /**
+     * Change user opt actions
+     *
+     * @return void
+     */
     public function change_user_opt()
     {
         require AJAX_DIR . '/change_user_opt.php';
     }
 
+    /**
+     * Generate passkey actions
+     *
+     * @return void
+     */
     public function gen_passkey()
     {
         require AJAX_DIR . '/gen_passkey.php';
     }
 
+    /**
+     * Group membership actions
+     *
+     * @return void
+     */
     public function group_membership()
     {
         require AJAX_DIR . '/group_membership.php';
     }
 
+    /**
+     * Manage group actions
+     *
+     * @return void
+     */
     public function manage_group()
     {
         require AJAX_DIR . '/edit_group_profile.php';
     }
 
+    /**
+     * Post moderator comment actions
+     *
+     * @return void
+     */
     public function post_mod_comment()
     {
         require AJAX_DIR . '/post_mod_comment.php';
     }
 
+    /**
+     * View post actions
+     *
+     * @return void
+     */
     public function view_post()
     {
         require AJAX_DIR . '/view_post.php';
     }
 
+    /**
+     * Change torrent status actions
+     *
+     * @return void
+     */
     public function change_tor_status()
     {
         require AJAX_DIR . '/change_tor_status.php';
     }
 
+    /**
+     * Change torrent actions
+     *
+     * @return void
+     */
     public function change_torrent()
     {
         require AJAX_DIR . '/change_torrent.php';
     }
 
+    /**
+     * View torrent actions
+     *
+     * @return void
+     */
     public function view_torrent()
     {
         require AJAX_DIR . '/view_torrent.php';
     }
 
+    /**
+     * User registration actions
+     *
+     * @return void
+     */
     public function user_register()
     {
         require AJAX_DIR . '/user_register.php';
     }
 
+    /**
+     * Moderator actions
+     *
+     * @return void
+     */
     public function mod_action()
     {
         require AJAX_DIR . '/mod_action.php';
     }
 
+    /**
+     * Posts actions
+     *
+     * @return void
+     */
     public function posts()
     {
         require AJAX_DIR . '/posts.php';
     }
 
+    /**
+     * Manage user actions
+     *
+     * @return void
+     */
     public function manage_user()
     {
         require AJAX_DIR . '/manage_user.php';
     }
 
+    /**
+     * Manage admin actions
+     *
+     * @return void
+     */
     public function manage_admin()
     {
         require AJAX_DIR . '/manage_admin.php';
     }
 
+    /**
+     * Topic tpl actions
+     *
+     * @return void
+     */
     public function topic_tpl()
     {
         require AJAX_DIR . '/topic_tpl.php';
     }
 
+    /**
+     * Index data actions
+     *
+     * @return void
+     */
     public function index_data()
     {
         require AJAX_DIR . '/index_data.php';
     }
 
+    /**
+     * Avatar actions
+     *
+     * @return void
+     */
     public function avatar()
     {
         require AJAX_DIR . '/avatar.php';
     }
 
+    /**
+     * Sitemap actions
+     *
+     * @return void
+     */
     public function sitemap()
     {
         require AJAX_DIR . '/sitemap.php';

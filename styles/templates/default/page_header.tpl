@@ -457,7 +457,7 @@ $(document).ready(function() {
 					<tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
 					<tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
 					<tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
-					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
+					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="{BONUS_URL}"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
 			</div><!-- ENDIF -->
 			<!-- IF HTML_SIDEBAR_1 -->
@@ -471,6 +471,22 @@ $(document).ready(function() {
 <!--main_content-->
 <td id="main_content">
 	<div id="main_content_wrap">
+        <!-- IF NEED_GEN_PASSKEY -->
+        <script type="text/javascript">
+            ajax.callback.gen_passkey = function (data) {
+                if (data.first_creation) {
+                    window.location.reload();
+                }
+            };
+        </script>
+
+        <div class="alert alert-info" style="width: 95%;">
+            <h4 class="alert-heading">{L_PASSKEY_ALERT_TITLE}</h4>
+            <hr>
+            {L_PASSKEY_ALERT_INFO}
+            <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {SESSION_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+        </div>
+        <!-- ENDIF -->
 		<div id="latest_news">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>

@@ -56,7 +56,6 @@ class User
     public $opt_js_guest = [
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
-        'h_smile' => 1,     // hide smilies
         'h_sig' => 1,     // hide signatures
     ];
 
@@ -336,6 +335,7 @@ class User
      */
     public function session_end(bool $update_lastvisit = false, bool $set_cookie = true)
     {
+        Sessions::cache_rm_userdata($this->data);
         DB()->query("
 			DELETE FROM " . BB_SESSIONS . "
 			WHERE session_id = '{$this->data['session_id']}'
@@ -357,10 +357,7 @@ class User
             if (isset($_REQUEST['reset_autologin'])) {
                 $this->create_autologin_id($this->data, false);
 
-                DB()->query("
-					DELETE FROM " . BB_SESSIONS . "
-					WHERE session_user_id = '{$this->data['user_id']}'
-				");
+                Sessions::delete_user_sessions($this->data['user_id']);
             }
         }
 
@@ -469,7 +466,6 @@ class User
         if ($user_id == GUEST_UID) {
             $delete_cookies = [
                 COOKIE_DATA,
-                COOKIE_DBG,
                 'torhelp',
                 'explain',
                 'sql_log',
@@ -487,9 +483,6 @@ class User
 
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
-            }
-            if (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
-                bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION);
             }
         }
     }

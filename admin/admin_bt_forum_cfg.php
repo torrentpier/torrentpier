@@ -8,7 +8,7 @@
  */
 
 if (!empty($setmodules)) {
-    $module['TorrentPier']['FORUM_CONFIG'] = basename(__FILE__);
+    $module[APP_NAME]['FORUM_CONFIG'] = basename(__FILE__);
     return;
 }
 
