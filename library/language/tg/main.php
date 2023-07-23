@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = 'эҷод нав';
 $lang['BT_PASSKEY_VIEW'] = 'нишон';
 $lang['BT_GEN_PASSKEY_NEW'] = "Диққат! Баъд аз иваз кардани passkey нав, ба шумо лозим аст, то аз нав зеркашӣ ҳамаи рӯдҳо фаъол! \\ Н Оё шумо боварӣ доред, ки барои сохтани passkey нав?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Не форумҳо ҷустуҷӯшаванда ёфт';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'тухмӣ';
 $lang['LEECHS'] = 'пиявка';
