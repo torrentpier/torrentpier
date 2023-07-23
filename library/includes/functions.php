@@ -1762,11 +1762,13 @@ function create_magnet($infohash, $auth_key): string
 {
     global $bb_cfg, $images;
 
+    // Only for registered users
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
         return false;
     }
 
-    if ($auth_key === false) {
+    // Hasn't passkey
+    if (!$auth_key) {
         return false;
     }
 
