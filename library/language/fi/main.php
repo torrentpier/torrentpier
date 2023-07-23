@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = 'luo uusi';
 $lang['BT_PASSKEY_VIEW'] = 'esityksessä';
 $lang['BT_GEN_PASSKEY_NEW'] = "Huomio! Vaihdon jälkeen uusi salasana, sinun täytyy ladata uudelleen kaikki aktiiviset torrentit! \n oletko varma, että haluat luoda uuden salasanan?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Ei ole haettavissa foorumeilla löytyy';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Siemen';
 $lang['LEECHS'] = 'Iilimato';
