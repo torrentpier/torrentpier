@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Bài';
 $lang['POSTED'] = 'Đăng';
 $lang['USERNAME'] = 'Tên';
 $lang['PASSWORD'] = 'Mật khẩu';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Giả';
