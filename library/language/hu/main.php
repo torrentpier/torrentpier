@@ -1068,6 +1068,8 @@ $lang['BT_GEN_PASSKEY'] = 'hozzon létre egy új';
 $lang['BT_PASSKEY_VIEW'] = 'térkép';
 $lang['BT_GEN_PASSKEY_NEW'] = "Figyelem! Módosítása után az új jelszót, akkor kell újra letölteni az összes aktív torrentet! \n biztos, hogy szeretnénk létrehozni egy új jelszót?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Nem kereshető fórumok megtaláltam';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Mag';
 $lang['LEECHS'] = 'Pióca';
