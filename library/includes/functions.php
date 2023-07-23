@@ -1760,22 +1760,17 @@ function decode_text_match($txt)
  */
 function create_magnet($infohash, $auth_key): string
 {
-    global $bb_cfg, $images, $lang, $userdata;
+    global $bb_cfg, $images;
 
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
-        $passkey = false;
-    } elseif (empty($auth_key)) {
-        if (!$passkey = \TorrentPier\Legacy\Torrent::generate_passkey($userdata['user_id'], true)) {
-            bb_die($lang['PASSKEY_ERR_EMPTY']);
-        }
-        $auth_key = $passkey;
-    } else {
-        $passkey = $auth_key;
+        return false;
     }
 
-    $passkey_url = $passkey ? "?{$bb_cfg['passkey_key']}=$auth_key" : '';
+    if ($auth_key === false) {
+        return false;
+    }
 
-    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . $passkey_url) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
