@@ -404,11 +404,13 @@ ajax.callback.gen_passkey = function(data){
 				</td>
 			</tr>
 
+            <!-- IF SHOW_BT_USERDATA -->
 			<tr id="ratio-expl" style="display: none;">
 				<td colspan="2" class="med tCenter">
 				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 				</td>
 			</tr>
+            <!-- ENDIF -->
 
 			<!-- IF LOCATION -->
 			<tr>
