@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'وظائف';
 $lang['POSTED'] = 'نشر';
 $lang['USERNAME'] = 'اسم المستخدم';
 $lang['PASSWORD'] = 'كلمة المرور';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'البريد الإلكتروني';
 $lang['PM'] = 'مساء';
 $lang['AUTHOR'] = 'الكاتب';
