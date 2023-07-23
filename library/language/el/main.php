@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Θέσεις';
 $lang['POSTED'] = 'Δημοσιεύτηκε';
 $lang['USERNAME'] = 'Όνομα χρήστη';
 $lang['PASSWORD'] = 'Κωδικό πρόσβασης';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'ΜΜ';
 $lang['AUTHOR'] = 'Συγγραφέας';
