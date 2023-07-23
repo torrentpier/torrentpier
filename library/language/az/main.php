@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Vəzifə';
 $lang['POSTED'] = 'Göndərilib';
 $lang['USERNAME'] = 'İstifadəçi adı';
 $lang['PASSWORD'] = 'Parol';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-poçt';
 $lang['PM'] = 'ТЧ';
 $lang['AUTHOR'] = 'Müəllif';
