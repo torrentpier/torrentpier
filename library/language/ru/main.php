@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Сообщ.';
 $lang['POSTED'] = 'Добавлено';
 $lang['USERNAME'] = 'Имя';
 $lang['PASSWORD'] = 'Пароль';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'ЛС';
 $lang['AUTHOR'] = 'Автор';
