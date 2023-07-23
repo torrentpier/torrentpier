@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Xabarlar';
 $lang['POSTED'] = 'Posted';
 $lang['USERNAME'] = 'Foydalanuvchi nomi';
 $lang['PASSWORD'] = 'parol';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'AM';
 $lang['AUTHOR'] = 'Muallif';
