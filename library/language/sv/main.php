@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Inlägg';
 $lang['POSTED'] = 'Inlagd';
 $lang['USERNAME'] = 'Användarnamn';
 $lang['PASSWORD'] = 'Lösenord';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-post';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Författare';
