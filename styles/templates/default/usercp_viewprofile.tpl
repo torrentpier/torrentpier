@@ -168,9 +168,13 @@ ajax.callback.index_data = function(data) {
 
 <!-- IF SHOW_PASSKEY -->
 <script type="text/javascript">
-ajax.callback.gen_passkey = function(data){
-	$('#passkey').text(data.passkey);
-};
+    ajax.callback.gen_passkey = function (data) {
+        if (data.first_creation) {
+            window.location.reload();
+        } else if (data.passkey) {
+            $('#passkey').text(data.passkey);
+        }
+    };
 </script>
 <!-- ENDIF / SHOW_PASSKEY -->
 

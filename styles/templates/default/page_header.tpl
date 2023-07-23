@@ -473,7 +473,7 @@ $(document).ready(function() {
         <!-- IF NEED_GEN_PASSKEY -->
         <script type="text/javascript">
             ajax.callback.gen_passkey = function (data) {
-                if (data.passkey) {
+                if (data.first_creation) {
                     window.location.reload();
                 }
             };
