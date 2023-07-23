@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Viestit';
 $lang['POSTED'] = 'Lähetetty';
 $lang['USERNAME'] = 'Käyttäjätunnus';
 $lang['PASSWORD'] = 'Salasana';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Sähköposti';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Kirjoittaja';
