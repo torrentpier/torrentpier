@@ -795,6 +795,10 @@ function generate_user_info($row, bool $group_mod = false): array
 
 function get_bt_userdata($user_id)
 {
+    if (!\TorrentPier\Legacy\Torrent::getPasskey($user_id)) {
+        return false;
+    }
+
     if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id)) {
         $btu = DB()->fetch_row("
 			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
@@ -804,14 +808,6 @@ function get_bt_userdata($user_id)
 			GROUP BY bt.user_id
 			LIMIT 1
 		");
-
-        if (empty($btu)) {
-            if (!\TorrentPier\Legacy\Torrent::generate_passkey($user_id, true)) {
-                bb_simple_die('Could not generate passkey');
-            }
-
-            $btu = get_bt_userdata($user_id);
-        }
 
         CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
     }
@@ -831,7 +827,9 @@ function show_bt_userdata($user_id)
 {
     global $lang, $template;
 
-    $btu = get_bt_userdata($user_id);
+    if (!$btu = get_bt_userdata($user_id)) {
+        return;
+    }
 
     $template->assign_vars(array(
         'SHOW_BT_USERDATA' => true,
@@ -1764,22 +1762,19 @@ function decode_text_match($txt)
  */
 function create_magnet($infohash, $auth_key): string
 {
-    global $bb_cfg, $images, $lang, $userdata;
+    global $bb_cfg, $images;
 
+    // Only for registered users
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
-        $passkey = false;
-    } elseif (empty($auth_key)) {
-        if (!$passkey = \TorrentPier\Legacy\Torrent::generate_passkey($userdata['user_id'], true)) {
-            bb_die($lang['PASSKEY_ERR_EMPTY']);
-        }
-        $auth_key = $passkey;
-    } else {
-        $passkey = $auth_key;
+        return false;
     }
 
-    $passkey_url = $passkey ? "?{$bb_cfg['passkey_key']}=$auth_key" : '';
+    // Hasn't passkey
+    if (!$auth_key) {
+        return false;
+    }
 
-    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . $passkey_url) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
