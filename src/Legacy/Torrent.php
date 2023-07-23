@@ -740,4 +740,19 @@ class Torrent
 
         return $success;
     }
+
+    /**
+     * Checks if user has a passkey
+     *
+     * @param int|string $user_id
+     * @return bool|string
+     */
+    public static function passkeyExists($user_id)
+    {
+        if ($passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = $user_id LIMIT 1")) {
+            return $passkey['auth_key'];
+        }
+
+        return false;
+    }
 }
