@@ -558,14 +558,14 @@ class Torrent
     /**
      * Generate and save passkey for user
      *
-     * @param int $user_id
+     * @param int|string $user_id
      * @param bool $force_generate
      *
      * @return bool|string
      */
-    public static function generate_passkey($user_id, $force_generate = false)
+    public static function generate_passkey($user_id, bool $force_generate = false)
     {
-        global $bb_cfg, $lang, $sql;
+        global $bb_cfg, $lang;
 
         $user_id = (int)$user_id;
 
@@ -583,21 +583,17 @@ class Torrent
             }
         }
 
-        for ($i = 0; $i < 20; $i++) {
-            $passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
-            $old_passkey = null;
+        $passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
+        $old_passkey = self::getPasskey($user_id);
 
-            if ($row = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = $user_id LIMIT 1")) {
-                $old_passkey = $row['auth_key'];
-            }
-
-            // Insert new row
+        if (!$old_passkey) {
+            // Create first passkey
             DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
             if (DB()->affected_rows() == 1) {
                 return $passkey_val;
             }
-
-            // Update
+        } else {
+            // Update exists passkey
             DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
             if (DB()->affected_rows() == 1) {
                 // Ocelot
@@ -607,6 +603,7 @@ class Torrent
                 return $passkey_val;
             }
         }
+
         return false;
     }
 
@@ -739,5 +736,20 @@ class Torrent
         }
 
         return $success;
+    }
+
+    /**
+     * Returns the user's passkey, false otherwise
+     *
+     * @param int|string $user_id
+     * @return bool|string
+     */
+    public static function getPasskey($user_id)
+    {
+        if ($passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1")) {
+            return $passkey['auth_key'];
+        }
+
+        return false;
     }
 }

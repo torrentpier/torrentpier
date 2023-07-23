@@ -21,7 +21,7 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.4.0-beta1';
+$bb_cfg['tp_version'] = 'v2.4.0-beta1';
 $bb_cfg['tp_release_date'] = '18-07-2023';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
@@ -372,7 +372,7 @@ $bb_cfg['last_visit_update_intrv'] = 3600; // sec
 $bb_cfg['invalid_logins'] = 5; // Количество неверных попыток ввода пароля, перед выводом проверки капчей
 $bb_cfg['new_user_reg_disabled'] = false; // Запретить регистрацию новых учетных записей
 $bb_cfg['unique_ip'] = false; // Запретить регистрацию нескольких учетных записей с одного ip
-$bb_cfg['auto_gen_passkey'] = true; // Генерировать passkey автоматически при регистрации
+$bb_cfg['auto_gen_passkey'] = false; // Генерировать passkey автоматически при регистрации
 $bb_cfg['new_user_reg_restricted'] = false; // Ограничить регистрацию новых пользователей по времени по указанному ниже интервалу
 $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Допустимые часы регистрации
 $bb_cfg['reg_email_activation'] = true; // Требовать активацию учетной записи по email

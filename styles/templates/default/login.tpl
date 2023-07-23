@@ -26,7 +26,7 @@
 	</tr>
 	<tr>
 		<td align="right">{L_PASSWORD}:</td>
-		<td><input type="password" class="post" name="login_password" value="{LOGIN_PASSWORD}" tabindex="102" size="25" maxlength="32" /></td>
+		<td><input type="password" class="post show_pass_input" name="login_password" value="{LOGIN_PASSWORD}" tabindex="102" size="25" maxlength="32" />&nbsp;<label><input type="checkbox" class="password_show_checkbox">&nbsp;{L_PASSWORD_SHOW_BTN}</label></td>
 	</tr>
 	<!-- IF CAPTCHA_HTML -->
 	<tr>
