@@ -34,8 +34,8 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
 
 function delete_avatar($user_id, $avatar_ext_id)
 {
-    $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : '';
-    return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
+    $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : false;
+    return ($avatar_file && file_exists($avatar_file) && unlink($avatar_file));
 }
 
 function get_tracks($type)
@@ -739,8 +739,12 @@ function get_user_id($username)
     if (empty($username)) {
         return false;
     }
-    $row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1");
-    return $row['user_id'];
+
+    if ($row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1")) {
+        return $row['user_id'];
+    }
+
+    return false;
 }
 
 function str_short($text, $max_length, $space = ' ')
