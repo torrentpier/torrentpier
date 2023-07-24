@@ -325,5 +325,14 @@ ajax.callback.posts = function(data){
 
 </tbody>
 </table>
-
 </form>
+
+<script type="text/javascript">
+    $('body').on('click', '.password_show_checkbox', function () {
+        if ($(this).is(':checked')) {
+            $('input.show_pass_input').attr('type', 'text');
+        } else {
+            $('input.show_pass_input').attr('type', 'password');
+        }
+    });
+</script>
