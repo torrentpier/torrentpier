@@ -62,4 +62,6 @@ ALTER TABLE `bb_users` CHANGE `user_newpasswd` `user_newpasswd` VARCHAR(255) NOT
 INSERT INTO bb_config VALUES ('show_board_start_index', '1');
 
 // 2.4.0-beta2
-INSERT INTO `bb_cron` VALUES (NULL, '1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`) VALUES ('1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
