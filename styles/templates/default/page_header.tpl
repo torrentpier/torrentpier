@@ -483,7 +483,7 @@ $(document).ready(function() {
             <h4 class="alert-heading">{L_PASSKEY_ALERT_TITLE}</h4>
             <hr>
             {L_PASSKEY_ALERT_INFO}
-            <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {SESSION_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+            <a href="#" onclick="ajax.exec({ action: 'gen_passkey', mode: 'create', user_id: {SESSION_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
         </div>
         <!-- ENDIF -->
 		<div id="latest_news">

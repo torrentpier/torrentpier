@@ -169,7 +169,7 @@ ajax.callback.index_data = function(data) {
 <!-- IF SHOW_PASSKEY && not NEED_GEN_PASSKEY -->
 <script type="text/javascript">
     ajax.callback.gen_passkey = function (data) {
-        if (data.first_creation) {
+        if (data.first_creation || data.passkey_removed) {
             window.location.reload();
         } else if (data.passkey) {
             $('#passkey').text(data.passkey);
@@ -401,7 +401,7 @@ ajax.callback.index_data = function(data) {
 					<!-- IF SHOW_PASSKEY -->
 					[ {L_BT_PASSKEY}: <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
 					<span id="passkey-gen" class="med" style="display: none;">
-						<!-- IF AUTH_KEY --><b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;|&nbsp;<!-- ENDIF --><a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+						<!-- IF AUTH_KEY --><b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'gen_passkey', mode: 'remove', user_id  : {PROFILE_USER_ID} }); return false;">{L_REMOVE}</a>&nbsp;&middot;&nbsp;<!-- ENDIF --><a href="#" onclick="ajax.exec({ action: 'gen_passkey', mode: 'create', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
 				</td>

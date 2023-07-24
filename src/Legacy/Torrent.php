@@ -739,7 +739,7 @@ class Torrent
     }
 
     /**
-     * Returns the user's passkey, false otherwise
+     * Returns the user passkey, false otherwise
      *
      * @param int|string $user_id
      * @return bool|string
@@ -751,5 +751,16 @@ class Torrent
         }
 
         return false;
+    }
+
+    /**
+     * Removes user passkey, false otherwise
+     *
+     * @param int|string $user_id
+     * @return bool
+     */
+    public static function deletePasskey($user_id): bool
+    {
+        return (bool)DB()->query("DELETE FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id);
     }
 }
