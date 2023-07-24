@@ -829,7 +829,7 @@ function get_bt_ratio($btu)
 
 function show_bt_userdata($user_id)
 {
-    global $lang, $template;
+    global $template;
 
     if (!$btu = get_bt_userdata($user_id)) {
         return;
@@ -845,19 +845,19 @@ function show_bt_userdata($user_id)
         'USER_RATIO' => get_bt_ratio($btu),
         'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
         'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
-        'AUTH_KEY' => ($btu['auth_key']) ?: $lang['NONE'],
+        'AUTH_KEY' => $btu['auth_key'],
 
         'TD_DL' => humn_size($btu['down_today']),
         'TD_UL' => humn_size($btu['up_today']),
         'TD_REL' => humn_size($btu['up_release_today']),
         'TD_BONUS' => humn_size($btu['up_bonus_today']),
-        'TD_POINTS' => ($btu['auth_key']) ? $btu['points_today'] : '0.00',
+        'TD_POINTS' => $btu['auth_key'] ? $btu['points_today'] : '0.00',
 
         'YS_DL' => humn_size($btu['down_yesterday']),
         'YS_UL' => humn_size($btu['up_yesterday']),
         'YS_REL' => humn_size($btu['up_release_yesterday']),
         'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
-        'YS_POINTS' => ($btu['auth_key']) ? $btu['points_yesterday'] : '0.00',
+        'YS_POINTS' => $btu['auth_key'] ? $btu['points_yesterday'] : '0.00',
 
         'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
         'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
