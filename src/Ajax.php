@@ -35,7 +35,7 @@ class Ajax
         'post_mod_comment' => ['mod'],
 
         'avatar' => ['user'],
-        'gen_passkey' => ['user'],
+        'passkey' => ['user'],
         'change_torrent' => ['user'],
         'change_tor_status' => ['user'],
         'manage_group' => ['user'],
@@ -302,13 +302,13 @@ class Ajax
     }
 
     /**
-     * Generate passkey actions
+     * Passkey actions
      *
      * @return void
      */
-    public function gen_passkey()
+    public function passkey()
     {
-        require AJAX_DIR . '/gen_passkey.php';
+        require AJAX_DIR . '/passkey.php';
     }
 
     /**
