@@ -31,7 +31,7 @@ switch ($ajax->action) {
     case 'mod_action':
     case 'change_tor_status':
     case 'change_torrent':
-    case 'gen_passkey':
+    case 'passkey':
         require ATTACH_DIR . '/attachment_mod.php';
         break;
 }
