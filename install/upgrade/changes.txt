@@ -65,3 +65,5 @@ INSERT INTO bb_config VALUES ('show_board_start_index', '1');
 INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
                        `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
                        `disable_board`, `run_counter`) VALUES ('1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
+ALTER TABLE `bb_posts_text` CHANGE `post_text` `post_text` MEDIUMTEXT NOT NULL;
+ALTER TABLE `bb_privmsgs_text` CHANGE `privmsgs_text` `privmsgs_text` MEDIUMTEXT NOT NULL;
