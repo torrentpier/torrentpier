@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Повідомлення';
 $lang['POSTED'] = 'Опубліковано';
 $lang['USERNAME'] = 'Ім\'я користувача';
 $lang['PASSWORD'] = 'Пароль';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'ПП';
 $lang['AUTHOR'] = 'Автор';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'створити новий';
 $lang['BT_PASSKEY_VIEW'] = 'показати';
 $lang['BT_GEN_PASSKEY_NEW'] = "Увага! Після зміни нового passkey, Вам необхідно буде заново завантажити всі активні торренти! \n Ви впевнені, що хочете створити новий passkey?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Доступних для пошуку форумів не знайдено';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Сідам';
 $lang['LEECHS'] = 'Лiчерам';

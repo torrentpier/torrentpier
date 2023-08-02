@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'पोस्ट';
 $lang['POSTED'] = 'की तैनाती';
 $lang['USERNAME'] = 'उपयोगकर्ता नाम';
 $lang['PASSWORD'] = 'पासवर्ड';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'ईमेल';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'लेखक';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'कोई नया बनाएं';
 $lang['BT_PASSKEY_VIEW'] = 'दिखाना';
 $lang['BT_GEN_PASSKEY_NEW'] = "ध्यान! नई पासकी को बदलने के बाद, आपको सभी सक्रिय टोरेंट पुनः डाउनलोड करने की आवश्यकता होगी! \\ N क्या आप वाकई एक नया पासकी बनाना चाहते हैं?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'कोई खोज योग्य फ़ोरम नहीं मिला';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'बीज';
 $lang['LEECHS'] = 'जोंक';

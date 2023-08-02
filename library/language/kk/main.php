@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Хабарламалар';
 $lang['POSTED'] = 'Posted';
 $lang['USERNAME'] = 'Пайдаланушы аты';
 $lang['PASSWORD'] = 'пароль';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Электрондық пошта';
 $lang['PM'] = 'Премьер-Министр';
 $lang['AUTHOR'] = 'автор';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'Жаңа жасау';
 $lang['BT_PASSKEY_VIEW'] = 'көрсету';
 $lang['BT_GEN_PASSKEY_NEW'] = "Назар! Жаңа құпия кілтті өзгерткеннен кейін, сіз қайта жүктеп, барлық белсенді торрент керек болады! \\ N Сіз жаңа құпия кілтті жасау үшін шынымен қалайсыз ба?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'табылған жоқ іздеу форумдар';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'тұқым';
 $lang['LEECHS'] = 'сүлік';

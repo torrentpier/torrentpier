@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Θέσεις';
 $lang['POSTED'] = 'Δημοσιεύτηκε';
 $lang['USERNAME'] = 'Όνομα χρήστη';
 $lang['PASSWORD'] = 'Κωδικό πρόσβασης';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'ΜΜ';
 $lang['AUTHOR'] = 'Συγγραφέας';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'δημιουργήστε μια νέα';
 $lang['BT_PASSKEY_VIEW'] = 'εμφάνιση';
 $lang['BT_GEN_PASSKEY_NEW'] = "Προσοχή! Μετά την αλλαγή το νέο κωδικό πρόσβασης, θα χρειαστεί να κατεβάσετε ξανά όλα τα ενεργά torrents! \n είσαι σίγουρος ότι θέλετε να δημιουργήσετε ένα νέο κωδικό πρόσβασης;";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Δυνατότητα αναζήτησης φόρουμ που βρέθηκαν';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Σπόρων προς σπορά';
 $lang['LEECHS'] = 'Βδέλλα';

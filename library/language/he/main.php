@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'הודעות';
 $lang['POSTED'] = 'פורסם';
 $lang['USERNAME'] = 'שם משתמש';
 $lang['PASSWORD'] = 'הסיסמה';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'דוא " ל';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'מחבר תגובה';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'ליצור חדש.';
 $lang['BT_PASSKEY_VIEW'] = 'להראות';
 $lang['BT_GEN_PASSKEY_NEW'] = "שימו לב! לאחר שינוי החדשה, את המפתח, אתה צריך להוריד מחדש את כל פעיל טורנטים! \n האם אתה בטוח שאתה רוצה ליצור משהו חדש, את המפתח?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'לא לחפש בפורומים מצאתי';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'זרע';
 $lang['LEECHS'] = 'עלוקה';

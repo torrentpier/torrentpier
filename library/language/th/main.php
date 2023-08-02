@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'กัปตัน..เสาทางนี้';
 $lang['POSTED'] = 'โพสต์';
 $lang['USERNAME'] = 'ชื่อผู้ใช้';
 $lang['PASSWORD'] = 'รหัสผ่าน';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'อีเมล';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'ผู้เขียน';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'สร้างใหม่';
 $lang['BT_PASSKEY_VIEW'] = 'แสดง';
 $lang['BT_GEN_PASSKEY_NEW'] = "ความสนใจ! หลังจากการเปลี่ยนใหม่ passkey คุณจะต้องการที่จะดาวน์โหลดใหม่อีกครั้งทั้งที่ทำงานอยู่ torrents! \n คุณแน่ใจหรือว่าคุณต้องการสร้างใหม่ passkey?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'ไม่ searchable forums เจอ';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'เมล็ดพันธ์';
 $lang['LEECHS'] = 'ดูดเลือ';

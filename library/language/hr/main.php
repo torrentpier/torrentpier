@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Postove';
 $lang['POSTED'] = 'Objavljeno';
 $lang['USERNAME'] = 'Korisničko ime';
 $lang['PASSWORD'] = 'Lozinka';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'napravite novi';
 $lang['BT_PASSKEY_VIEW'] = 'prikaži';
 $lang['BT_GEN_PASSKEY_NEW'] = "Pažnja! Nakon smjene novu lozinku, trebat će ponovno preuzeti sve aktivne bujica! \\N jeste li sigurni da želite stvoriti novu lozinku?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Nema foruma traži našli';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Sjeme';
 $lang['LEECHS'] = 'Pijavica';

@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Post';
 $lang['POSTED'] = 'Postato';
 $lang['USERNAME'] = 'Username';
 $lang['PASSWORD'] = 'Password';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autore';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'creare un nuovo';
 $lang['BT_PASSKEY_VIEW'] = 'mostra';
 $lang['BT_GEN_PASSKEY_NEW'] = "Attenzione! Dopo la modifica di la nuova chiave di accesso, sarà necessario scaricare nuovamente tutti i torrent attivi! \n sei sicuro di voler creare una nuova chiave di accesso?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Ricercabili forum trovato';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Seme';
 $lang['LEECHS'] = 'Sanguisuga';

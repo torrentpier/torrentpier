@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Amata';
 $lang['POSTED'] = 'Ievietojis';
 $lang['USERNAME'] = 'Lietotājvārdu';
 $lang['PASSWORD'] = 'Paroles';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-pasts';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autors';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'izveidot jaunu';
 $lang['BT_PASSKEY_VIEW'] = 'rādīt';
 $lang['BT_GEN_PASSKEY_NEW'] = "Uzmanību! Pēc tam, mainot jaunu piekļuves atslēga, jums būs nepieciešams, lai atkārtoti lejupielādēt visus aktīvās torrentiem! \n vai jūs esat pārliecināts, ka jūs vēlaties, lai izveidotu jaunu piekļuves atslēga?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Nav meklējams forumos atrast';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Sēklas';
 $lang['LEECHS'] = 'Dēle';

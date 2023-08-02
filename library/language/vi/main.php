@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Bài';
 $lang['POSTED'] = 'Đăng';
 $lang['USERNAME'] = 'Tên';
 $lang['PASSWORD'] = 'Mật khẩu';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Giả';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'tạo ra một new';
 $lang['BT_PASSKEY_VIEW'] = '!';
 $lang['BT_GEN_PASSKEY_NEW'] = "Chú ý! Sau khi thay đổi mật mã mới, bạn sẽ cần phải tải lại tất cả các hoạt động torrent! n Là bạn chắc chắn muốn tạo ra một mật mã mới?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Không có tìm kiếm các diễn đàn tìm thấy';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Giống';
 $lang['LEECHS'] = 'Con đỉa';

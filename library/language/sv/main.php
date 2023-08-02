@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Inlägg';
 $lang['POSTED'] = 'Inlagd';
 $lang['USERNAME'] = 'Användarnamn';
 $lang['PASSWORD'] = 'Lösenord';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-post';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Författare';
@@ -1068,6 +1069,8 @@ $lang['BT_GEN_PASSKEY'] = 'skapa en ny';
 $lang['BT_PASSKEY_VIEW'] = 'visa';
 $lang['BT_GEN_PASSKEY_NEW'] = "Uppmärksamhet! Efter att ändra nytt lösenord, kommer du behöver för att åter ladda ner alla aktiva torrents! \n Är du säker på att du vill skapa ett nytt lösenord?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Inga sökbara forum som finns';
+$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
+$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Frö';
 $lang['LEECHS'] = 'Leech';
