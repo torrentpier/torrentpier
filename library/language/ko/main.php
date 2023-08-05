@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = '게시물';
 $lang['POSTED'] = '게시';
 $lang['USERNAME'] = '사용자 이름';
 $lang['PASSWORD'] = '비밀번호';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = '이메일';
 $lang['PM'] = '오후';
 $lang['AUTHOR'] = '저자';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = '새로 만들고';
 $lang['BT_PASSKEY_VIEW'] = '보';
 $lang['BT_GEN_PASSKEY_NEW'] = "주의! 후 변경하는 새로운 암호,당신을 다시 다운로드해야 하는 모든 활동 급류! \n 확신을 만들고 싶은 새로 암호를니까?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = '일 수 있 포럼 발견';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = '씨';
 $lang['LEECHS'] = '니';

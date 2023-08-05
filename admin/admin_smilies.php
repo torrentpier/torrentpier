@@ -31,9 +31,9 @@ $dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
 
 while ($file = @readdir($dir)) {
     if (!is_dir(realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
-        $img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
+        $img_size = @getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
 
-        if ($img_size[0] && $img_size[1]) {
+        if ($img_size !== false && $img_size[0] && $img_size[1]) {
             $smiley_images[] = $file;
         } elseif (preg_match('/.pak$/i', $file)) {
             $smiley_paks[] = $file;

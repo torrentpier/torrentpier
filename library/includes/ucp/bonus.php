@@ -56,7 +56,7 @@ if (isset($_POST['bonus_id'])) {
 } else {
     $template->assign_vars(array(
         'U_USER_PROFILE' => PROFILE_URL . $user_id,
-        'S_MODE_ACTION' => BONUS_URL,
+        'S_MODE_ACTION' => 'profile.php?mode=bonus',
         'PAGE_TITLE' => $lang['EXCHANGE_BONUS'],
         'MY_BONUS' => sprintf($lang['MY_BONUS'], $user_points),
     ));

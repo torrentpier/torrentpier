@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = 'Mesaj';
 $lang['POSTED'] = 'Gönderildi';
 $lang['USERNAME'] = 'Kullanıcı adı';
 $lang['PASSWORD'] = 'Şifre';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-posta';
 $lang['PM'] = 'AM';
 $lang['AUTHOR'] = 'Yazar';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = 'yeni oluştur';
 $lang['BT_PASSKEY_VIEW'] = 'göster';
 $lang['BT_GEN_PASSKEY_NEW'] = "Dikkat! Yeni şifreyi değiştirdikten sonra, tüm aktif torrentler yeniden indirmek gerekir. \n yeni bir şifre oluşturmak istediğinizden emin misiniz?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Hayır aranabilir forumlar';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Tohum';
 $lang['LEECHS'] = 'Sülük';

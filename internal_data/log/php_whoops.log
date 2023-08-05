@@ -1,0 +1,208 @@
+[2023-08-05T20:05:41.971079+03:00] TorrentPier.ERROR: Whoops\Exception\ErrorException: Undefined array key "chat" in file C:\OSPanel\domains\localhost\index.php on line 45
+Stack trace:
+  1. Whoops\Exception\ErrorException->() C:\OSPanel\domains\localhost\index.php:45
+  2. Whoops\Run->handleError() C:\OSPanel\domains\localhost\index.php:45
+ [] []
+[2023-08-05T20:05:45.958926+03:00] TorrentPier.ERROR: Whoops\Exception\ErrorException: Undefined array key "chat" in file C:\OSPanel\domains\localhost\index.php on line 45
+Stack trace:
+  1. Whoops\Exception\ErrorException->() C:\OSPanel\domains\localhost\index.php:45
+  2. Whoops\Run->handleError() C:\OSPanel\domains\localhost\index.php:45
+ [] []
+[2023-08-05T20:12:56.545972+03:00] TorrentPier.ERROR: Whoops\Exception\ErrorException: Undefined array key "chat" in file C:\OSPanel\domains\localhost\index.php on line 45
+Stack trace:
+  1. Whoops\Exception\ErrorException->() C:\OSPanel\domains\localhost\index.php:45
+  2. Whoops\Run->handleError() C:\OSPanel\domains\localhost\index.php:45
+ [] []
+[2023-08-05T20:13:55.600106+03:00] TorrentPier.ERROR: Error: Call to undefined function decode_ip() in file C:\OSPanel\domains\localhost\index.php on line 68
+Stack trace:
+  1. Error->() C:\OSPanel\domains\localhost\index.php:68
+ [] []
+[2023-08-05T20:14:48.328184+03:00] TorrentPier.ERROR: TypeError: long2ip(): Argument #1 ($ip) must be of type int, string given in file C:\OSPanel\domains\localhost\vendor\longman\ip-tools\src\Ip.php on line 350
+Stack trace:
+  1. TypeError->() C:\OSPanel\domains\localhost\vendor\longman\ip-tools\src\Ip.php:350
+  2. long2ip() C:\OSPanel\domains\localhost\vendor\longman\ip-tools\src\Ip.php:350
+  3. Longman\IPTools\Ip->long2ip() C:\OSPanel\domains\localhost\admin\admin_user_ban.php:218
+ [] []
+[2023-08-05T20:15:16.320640+03:00] TorrentPier.ERROR: TypeError: long2ip(): Argument #1 ($ip) must be of type int, string given in file C:\OSPanel\domains\localhost\vendor\longman\ip-tools\src\Ip.php on line 350
+Stack trace:
+  1. TypeError->() C:\OSPanel\domains\localhost\vendor\longman\ip-tools\src\Ip.php:350
+  2. long2ip() C:\OSPanel\domains\localhost\vendor\longman\ip-tools\src\Ip.php:350
+  3. Longman\IPTools\Ip->long2ip() C:\OSPanel\domains\localhost\admin\admin_user_ban.php:218
+ [] []
+[2023-08-05T20:17:10.307950+03:00] TorrentPier.ERROR: TypeError: long2ip(): Argument #1 ($ip) must be of type int, string given in file C:\OSPanel\domains\localhost\index.php on line 68
+Stack trace:
+  1. TypeError->() C:\OSPanel\domains\localhost\index.php:68
+  2. long2ip() C:\OSPanel\domains\localhost\index.php:68
+ [] []
+[2023-08-05T20:17:58.278958+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 455
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:518
+ [] []
+[2023-08-05T20:21:21.311798+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 454
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:454
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:518
+ [] []
+[2023-08-05T20:21:36.956136+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 455
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:518
+ [] []
+[2023-08-05T20:23:01.933338+03:00] TorrentPier.ERROR: Error: Call to undefined function decode_ip() in file C:\OSPanel\domains\localhost\index.php on line 68
+Stack trace:
+  1. Error->() C:\OSPanel\domains\localhost\index.php:68
+ [] []
+[2023-08-05T20:23:16.221311+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 454
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:454
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:23:32.457077+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 455
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:27:54.123820+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 455
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:27:59.487291+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 454
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:454
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:11.787137+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 450
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:12.741372+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:13.133437+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:13.338119+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:13.874984+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:14.084983+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:14.338103+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:14.560845+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:16.021069+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:16.208918+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:16.422910+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:22.766692+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 450
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:29:24.247811+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 14 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 449
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:449
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:31:15.897144+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 455
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:31:17.051488+03:00] TorrentPier.ERROR: ParseError: Unclosed '{' on line 17 in file C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php on line 454
+Stack trace:
+  1. ParseError->() C:\OSPanel\domains\localhost\internal_data\cache\tpl__default_index.tpl.php:454
+  2. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:278
+  3. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  4. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:34:37.036085+03:00] TorrentPier.ERROR: Whoops\Exception\ErrorException: Undefined array key "L_SKETCH" in file C:\OSPanel\domains\localhost\src\Legacy\Template.php(240) : eval()'d code on line 202
+Stack trace:
+  1. Whoops\Exception\ErrorException->() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  2. Whoops\Run->handleError() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  3. eval() C:\OSPanel\domains\localhost\src\Legacy\Template.php:240
+  4. TorrentPier\Legacy\Template->execute() C:\OSPanel\domains\localhost\src\Legacy\Template.php:295
+  5. TorrentPier\Legacy\Template->pparse() C:\OSPanel\domains\localhost\library\includes\functions.php:1600
+  6. print_page() C:\OSPanel\domains\localhost\index.php:519
+ [] []
+[2023-08-05T20:45:46.187401+03:00] TorrentPier.ERROR: Whoops\Exception\ErrorException: Trying to access array offset on value of type bool in file C:\OSPanel\domains\localhost\admin\admin_smilies.php on line 36
+Stack trace:
+  1. Whoops\Exception\ErrorException->() C:\OSPanel\domains\localhost\admin\admin_smilies.php:36
+  2. Whoops\Run->handleError() C:\OSPanel\domains\localhost\admin\admin_smilies.php:36
+ [] []

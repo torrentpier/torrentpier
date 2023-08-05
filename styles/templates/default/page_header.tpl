@@ -283,11 +283,51 @@ function go_to_page ()
 <!--/main_nav-->
 
 <!--logo-->
-<div id="logo">
-	<!--<h1>{SITENAME}</h1>
-	<h6>{SITE_DESCRIPTION}</h6> -->
-	<a href="{U_INDEX}"><img src="styles/images/logo/logo.png" alt="{SITENAME}" /></a>
-</div>
+<?php
+// определяем текущий месяц
+$month = date('n');
+
+// путь к папке с картинками
+$images_dir = '/styles/images/shapka/';
+
+// формируем имя файла изображения для текущего месяца
+$image_filename = $month . '.png';
+
+// полный путь к файлу изображения
+$image_path = $_SERVER['DOCUMENT_ROOT'] . $images_dir . $image_filename;
+
+// проверяем, существует ли файл изображения для текущего месяца
+if (file_exists($image_path)) {
+    // выводим HTML-код с нужной картинкой и JavaScript для обновления
+    echo '<div id="logonew" class="header-logo" style="background-image: url(' . $images_dir . $image_filename . '?v=' . mt_rand() . ')">';
+    echo '<a id="logoclick" href="https://crackstatus.net/"></a>';
+    echo '</div>';
+    echo '<script>';
+    echo 'setTimeout(function() {';
+    echo '  var image = document.getElementById("logonew");';
+    echo '  image.style.backgroundImage = "url(' . $images_dir . $image_filename . '?v=' . mt_rand() . ')";';
+    echo '}, 3600000);'; // Проверка каждый час (3600000 миллисекунд)
+    echo '</script>';
+} else {
+    // используем последний доступный файл изображения для предыдущего месяца
+    $last_month = ($month - 1 <= 0) ? 12 : $month - 1;
+    $last_image_filename = $last_month . '.png';
+    
+    // полный путь к последнему доступному файлу изображения
+    $last_image_path = $_SERVER['DOCUMENT_ROOT'] . $images_dir . $last_image_filename;
+    
+    // проверяем, существует ли последний файл изображения
+    if (file_exists($last_image_path)) {
+        // выводим HTML-код с последней доступной картинкой
+        echo '<div id="logonew" class="header-logo" style="background-image: url(' . $images_dir . $last_image_filename . '?v=' . mt_rand() . ')">';
+        echo '<a id="logoclick" href="https://crackstatus.net/"></a>';
+        echo '</div>';
+    } else {
+        // если файл не существует, выводим сообщение об ошибке
+        echo 'Ошибка: файл изображения не найден.';
+    }
+}
+?>
 <!--/logo-->
 
 <!-- IF LOGGED_IN -->
@@ -437,6 +477,101 @@ $(document).ready(function() {
 	</table>
 </div><!--/only-new-options-->
 <!-- ENDIF / SHOW_ONLY_NEW_MENU -->
+<!-- IF LAST_ADDED -->
+<div class="menu-sub" id="hi-poster">
+	<table cellspacing="1" cellpadding="4">
+	<tr>
+		<th>Опции ленты новинок</th>
+	</tr>
+	<tr>
+		<td>
+			<fieldset id="ajax-topics">
+			<legend>Настройка ленты</legend>
+			<div class="pad_4">
+				<label>
+					<input type="checkbox" <!-- IF POSTER -->{CHECKED}<!-- ENDIF -->
+						onclick="user.set('poster', this.checked ? 1 : 0);"
+					/>Показывать ленту постеров
+				</label>
+			</div>
+			</fieldset>			
+			<!-- IF POSTER -->
+			<fieldset id="user_hide_poster">
+			<legend>Скрыть постеры из разделов</legend>
+			<div id="h-poster-ctl" class="pad_4 nowrap">
+				<form autocomplete="off">
+					<!-- BEGIN h_p -->
+					<label><input class="h-poster-cbx" type="checkbox" value="{h_p.H_C_ID}" {h_p.H_C_CHEKED} />{h_p.H_C_TITLE}</label>
+					<!-- END h_p -->
+				</form>
+				<div class="spacer_6"></div>
+				<div class="tCenter">
+					<!-- IF H_P_AL_MESS -->
+					<input style="width: 100px;" type="button" onclick="$('input.h-poster-cbx').attr('checked',false); $('input#sec_h_poster').click(); return false;" value="Сбросить">
+					<!-- ENDIF -->
+					<input id="sec_h_poster" type="button" onclick="set_h_poster();" style="width: 100px;" value="Отправить">
+				    <script type="text/javascript">
+					function set_h_poster ()
+					{
+						h_posters = [];
+						$.each($('input.h-poster-cbx:checked'), function(i,el){
+							h_posters.push( $(this).val() );
+						});
+						user.set('h_poster', h_posters.join('-'), 365, true);
+					}
+					</script>
+				</div>
+			</div>
+			</fieldset>
+			<!-- ENDIF -->		
+		</td>
+	</tr>
+	<!-- IF not POSTER -->
+	<tr>
+		<td class="cat tCenter pad_4"><input type="button" value="{L_SUBMIT}" onclick="window.location.reload();" /></td>
+	</tr>
+	<!-- ENDIF -->
+	</table>
+</div>
+<!-- ENDIF -->
+
+
+<!-- IF LAST_ADDED && POSTER && LOGGED_IN && LENTA -->
+<script type="text/javascript" src="{SITE_URL}styles/js/misc/jquery.cluetip.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/misc/jquery.scrollable.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/misc/jquery.mousewheel.js"></script>
+<!-- IF $bb_cfg['new_poster'] --><script type="text/javascript" src="{SITE_URL}styles/js/misc/cvi_glossy_lib.js"></script><!-- ENDIF -->
+<link type="text/css" rel="stylesheet" href="{SITE_URL}styles/templates/default/css/cluetip.css"/>
+<script type="text/javascript">
+    $(document).ready(function() {
+ 		$('div.load-local').cluetip({local:true, cursor: 'pointer',showTitle: true,arrows: true});
+		$("div.scrollable").scrollable({size: 8, items: "#thumbs", hoverClass: "hover", keyboard: true, loop: false });
+	});
+</script>
+
+<table cellpadding="0" cellspacing="0" class="poster">
+<tr>
+    <td>
+    <!-- root element for scrollable -->
+    <div class="scrollable">
+        <div id="thumbs">
+            <!-- BEGIN last_added -->
+            <div class="load-local" rel="#loadme_{last_added.TOPIC_ID}" title="{last_added.TITLE}" onclick="top.location.href='viewtopic.php?t={last_added.TOPIC_ID}';" onmouseover="initPostImages($('#loadme_{last_added.TOPIC_ID}'));">
+				<a href="viewtopic.php?t={last_added.TOPIC_ID}"><img src="thumb.php?t={last_added.TOPIC_ID}" alt="" <!-- IF $bb_cfg['new_poster'] -->onload="cvi_glossy.add(this,{radius:30,nogradient:true,angle:-33,shadow:30});"<!-- ENDIF -->></a>&nbsp;				
+				<div style="display:none;" id="loadme_{last_added.TOPIC_ID}">
+				    <center><var class="posterImg" title="{last_added.POSTER_FULL}" alt="" border="0">&#10;</var></center>
+					<br /> {L_FORUM}: <b>{last_added.FORUM_NAME}</b> 
+                    <br /> {L_AUTHOR}: <b>{last_added.USER_NAME}</b>
+                    <br /> {L_SIZE}: <b>{last_added.SIZE}</b>
+				</div>
+			</div>	
+            <!-- END last_added -->
+        </div>
+    </div>
+    </td>
+</tr>
+</table>
+<!-- ENDIF -->
 
 <!--/menus-->
 
@@ -456,7 +591,7 @@ $(document).ready(function() {
 					<tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
 					<tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
 					<tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
-					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="{BONUS_URL}"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
+					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
 			</div><!-- ENDIF -->
 			<!-- IF HTML_SIDEBAR_1 -->
@@ -470,22 +605,6 @@ $(document).ready(function() {
 <!--main_content-->
 <td id="main_content">
 	<div id="main_content_wrap">
-        <!-- IF NEED_GEN_PASSKEY -->
-        <script type="text/javascript">
-            ajax.callback.passkey = function (data) {
-                if (data.first_creation) {
-                    window.location.reload();
-                }
-            };
-        </script>
-
-        <div class="alert alert-info" style="width: 95%;">
-            <h4 class="alert-heading">{L_PASSKEY_ALERT_TITLE}</h4>
-            <hr>
-            {L_PASSKEY_ALERT_INFO}
-            <a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'create', user_id: {SESSION_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
-        </div>
-        <!-- ENDIF -->
 		<div id="latest_news">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>

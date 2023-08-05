@@ -380,6 +380,16 @@ function initPostImages(context) {
       }
     }
   });
+  $('var.posterImg', context).each(function(){
+		var $v = $(this);
+		var src = $v.attr('title');
+		var $img = $('<img src="'+ src +'" class="'+ $v.attr('class') +'" width="260px;" alt="{L_LOADING}" border="0" />');
+		$img = fixPostImage($img);
+		$v.empty().append($img);
+		if ($.browser.msie) {
+			$v.after('<wbr>');
+		}
+	});
 }
 
 function initSpoilers(context) {

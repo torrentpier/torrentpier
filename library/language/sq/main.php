@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = 'Postimet';
 $lang['POSTED'] = 'Postuar';
 $lang['USERNAME'] = 'Emrin e përdoruesit';
 $lang['PASSWORD'] = 'Password';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PD';
 $lang['AUTHOR'] = 'Autori';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = 'krijo një të ri';
 $lang['BT_PASSKEY_VIEW'] = 'tregojnë';
 $lang['BT_GEN_PASSKEY_NEW'] = "Kujdes! Pas ndryshimit të reja passkey, ju do të duhet të ri-shkarkuar të gjitha aktiv torrents! \n a Jeni të sigurt që ju doni të krijoni një të ri passkey?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Nuk e kërkueshme forume të gjetur';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Farë';
 $lang['LEECHS'] = 'Gjaku';

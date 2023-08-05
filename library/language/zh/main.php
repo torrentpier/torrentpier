@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = '帖子';
 $lang['POSTED'] = '已发布';
 $lang['USERNAME'] = '用户名';
 $lang['PASSWORD'] = '密码';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = '邮箱';
 $lang['PM'] = '私信';
 $lang['AUTHOR'] = '作者';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = '创建一个新的';
 $lang['BT_PASSKEY_VIEW'] = '显示';
 $lang['BT_GEN_PASSKEY_NEW'] = "注意！ 改变之后的新的密码，你会需要重新下载所有活动的种子！ \n你确定你想要创建一个新的密码?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = '没有搜查的论坛，发现';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = '种子';
 $lang['LEECHS'] = '水蛭';

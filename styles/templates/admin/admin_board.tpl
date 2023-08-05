@@ -204,11 +204,14 @@
 	</td>
 </tr>
 <tr>
-    <td><h4>{L_SHOW_BOARD_STARTED_INDEX}</h4></td>
-    <td>
-        <label><input type="radio" name="show_board_start_index" value="1" <!-- IF SHOW_BOARD_START_INDEX -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-        <label><input type="radio" name="show_board_start_index" value="0" <!-- IF not SHOW_BOARD_START_INDEX -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
-    </td>
+
+<td><h4>{L_SHOW_BOARD_STARTED_INDEX}</h4></td>
+<td>
+    <label><!--<input type="radio" name="show_board_start_index" value="1" <!-- IF SHOW_BOARD_START_INDEX -->checked="checked"<!-- ENDIF --> />-->{L_ENABLED}</label>&nbsp;&nbsp;
+    <label><!--<input type="radio" name="show_board_start_index" value="0" <!-- IF not SHOW_BOARD_START_INDEX -->checked="checked"<!-- ENDIF --> />-->{L_DISABLED}</label>
+</td>
+
+
 </tr>
 <tr>
 	<td>{L_PREMOD_HELP}</td>
@@ -362,6 +365,27 @@
 </tr>
 <tbody class="bonus_upload"></tbody>
 <tr class="row3 med"><td colspan="2"></td></tr>
+<tr class="row3 med">
+	<td class="bold tCenter" colspan="2">Лента последних релизов</td>
+</tr>
+<tr>
+	<td><h4>Включить ленту новинок</h4></td>
+	<td>
+	    <label><input type="radio" name="last_added" value="1" <!-- IF LAST_ADDED_ON -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="last_added" value="0" <!-- IF not LAST_ADDED_ON -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>Использовать плагин для мини постеров?</h4><h6>Изменяет стиль картинок</h6></td>
+	<td>
+	    <label><input type="radio" name="new_poster" value="1" <!-- IF NEW_POSTER -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="new_poster" value="0" <!-- IF not NEW_POSTER -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>Количество раздач в ленте</h4></td>
+	<td><input class="post" type="text" name="limit_poster" value="{LIMIT_POSTER}" size="15" maxlength="4" /></td>
+</tr>
 <!-- ENDIF / CONFIG_MODS -->
 <tr>
 	<td class="catBottom" colspan="2">

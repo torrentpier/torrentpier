@@ -10,7 +10,7 @@
 define('BB_SCRIPT', 'index');
 
 require __DIR__ . '/common.php';
-
+$page_cfg['include_bbcode_js'] = true;
 $page_cfg['load_tpl_vars'] = array(
     'post_icons',
 );
@@ -40,6 +40,45 @@ if ($bb_cfg['show_network_news']) {
 
 // Init userdata
 $user->session_start();
+$page_cfg['include_bbcode_js'] = true;
+
+if($bb_cfg['chat'])
+{
+    if (!$sql = CACHE('bb_cache')->get('chat'))
+    {
+        $sql = DB()->fetch_rowset("SELECT c.*, u.username, u.user_rank, u.avatar_ext_id, u.user_opt
+			FROM bb_chat c
+			LEFT JOIN ". BB_USERS ." u ON(u.user_id = c.user_id)
+			ORDER BY c.id DESC
+			LIMIT {$bb_cfg['chat_message']}");
+        CACHE('bb_cache')->set('chat', $sql);
+    }
+
+    foreach($sql as $row)
+    {
+        $message = '<div class="row1 chat-comment" id="pp_'. $row['id'] .'"><div style="min-height: 32px;">';
+        $message .= ($row['user_id'] == GUEST_UID) ? '' : '<a href="'. PROFILE_URL . $row['user_id'] .'">';
+        $message .= str_replace('<img', '<img align="left" height="32" width="32" style="padding-right: 3px;"', get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar')));
+        $message .= ($row['user_id'] == GUEST_UID) ? '' : '</a>';
+        if(IS_AM)
+        {
+            $message .= '<input onclick="set_hid_chbox('. $row['id'] .');" class="floatR chat-post" type="checkbox" value="'. $row['id'] .'" />';
+            $message .= '<span onclick="edit_comment('. $row['id'] .'); return false;" class="txtb floatR">[p]</span>';
+        }
+        $title_ip = (IS_ADMIN) ? long2ip(ip2long($row['ip'])) : 'Ник в чат';
+
+        $message .= '<a href="#" class="bold" title="'. $title_ip .'" onclick="add_nick(\'[n]'. $row['username'] .'[/n]\'); return false;">'. str_replace('title="', 'data="', profile_url(array('username' => $row['username'], 'user_rank' => $row['user_rank']))) .'</a><div class="small">'. bb_date($row['time']) .'</div></div>';
+        $message .= '<div class="spacer_2"></div><span style="font-size: 11px;">'. $row['text_html'] .'</span></div>';
+        $message .= (IS_AM) ? '<span id="pe_'. $row['id'] .'"></span>' : '';
+
+        $template->assign_block_vars('chat', array(
+            'TEXT'        => $message,
+        ));
+    }
+    $template->assign_vars(array(
+        'CHAT_ID' => (int) @$sql[0]['id'],
+    ));
+}
 
 // Init main vars
 $viewcat = isset($_GET['c']) ? (int)$_GET['c'] : 0;
@@ -55,6 +94,9 @@ caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . $bb_cfg['default_l
 $hide_cat_opt = isset($user->opt_js['h_cat']) ? (string)$user->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
 $showhide = isset($_GET['sh']) ? (int)$_GET['sh'] : 0;
+$hide_poster_opt  = isset($user->opt_js['h_poster']) ? (string) $user->opt_js['h_poster'] : 0;
+$hide_poster_user = array_flip(explode('-', $hide_poster_opt));
+$showposter = isset($_GET['sp']) ? (int) $_GET['sp'] : 0;
 
 // Topics read tracks
 $tracking_topics = get_tracks('topic');
@@ -202,6 +244,18 @@ foreach ($cat_forums as $cid => $c) {
     $template->assign_vars(array(
         'H_C_AL_MESS' => $hide_cat_opt && !$showhide,
     ));
+	if ($bb_cfg['last_added'])
+	{
+		$template->assign_block_vars('h_p', array(
+			'H_C_ID'     => $cid,
+			'H_C_TITLE'  => $cat_title_html[$cid],
+			'H_C_CHEKED' => in_array($cid, preg_split("/[-]+/", $hide_poster_opt)) ? 'checked' : '',
+		));
+
+	    $template->assign_vars(array(
+			'H_P_AL_MESS'  => ($hide_poster_opt && !$showposter) ? true : false
+		));
+	}
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
         continue;
@@ -398,7 +452,53 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
         'WHOSBIRTHDAY_TODAY' => $today_list,
     ));
 }
-
+// Постеры раздач [START]
+if ($bb_cfg['last_added'])
+{
+	if(!$last_added = CACHE('lenta')->get("last_added$hide_poster_opt"))
+    {    
+		$cat_ids = ($hide_poster_opt) ? implode(',', array_flip($hide_poster_user)) : 0;
+		$last_added = DB()->fetch_rowset("SELECT tr.topic_id, tr.forum_id,
+	        tr.size, t.topic_title, t.topic_image, f.forum_name, u.username, u.user_rank
+            FROM  ". BB_BT_TORRENTS ." tr
+            LEFT JOIN ". BB_TOPICS ." t  ON tr.topic_id = t.topic_id
+            LEFT JOIN ". BB_FORUMS ." f  ON tr.forum_id = f.forum_id
+            LEFT JOIN ". BB_USERS  ." u  ON tr.poster_id = u.user_id
+	        WHERE tr.forum_id NOT IN (". $bb_cfg['trash_forum_id'] .")
+	            AND f.cat_id NOT IN(". $cat_ids .")
+				AND f.allow_porno_topic = 0
+				AND f.allow_reg_tracker = 1
+				AND f.auth_view = 0
+            ORDER BY tr.reg_time DESC LIMIT ". $bb_cfg['limit_poster']);
+     	CACHE('lenta')->set("last_added$hide_poster_opt", $last_added, 3600);
+	}
+	
+	$template->assign_vars(array(
+	    'LENTA' => ($last_added) ? true : false,
+	));
+		
+	if($last_added)
+	{		
+		foreach ($last_added as $row)
+	    {		
+		    $poster_full = !empty($row['topic_image']) ? $row['topic_image'] : 'images/noposter_full.png';
+		    $template->assign_block_vars('last_added', array(
+			    'FORUM_NAME'  => $row['forum_name'],
+			    'FORUM_ID'    => $row['forum_id'],
+			    'TOPIC_ID'	  => $row['topic_id'],
+			    'TITLE'	      => wbr(str_short($row['topic_title'], 50)),
+			    'USER_NAME'   => profile_url($row),       
+			    'SIZE'        => humn_size($row['size']),       
+			    'POSTER_FULL' => $poster_full,
+		    ));	
+	    }
+	}
+    else
+    {
+        $template->assign_block_vars('last_added', array());
+    }
+}
+// Постеры раздач [END]
 // Allow cron
 if (IS_AM) {
     if (file_exists(CRON_RUNNING)) {

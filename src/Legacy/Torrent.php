@@ -165,6 +165,7 @@ class Torrent
             set_die_append_msg($forum_id, $topic_id);
             bb_die($lang['BT_UNREGISTERED']);
         }
+		if($bb_cfg['last_added']) CACHE('lenta')->rm();
     }
 
     /**
@@ -415,7 +416,7 @@ class Torrent
             $mess = sprintf($lang['BT_REGISTERED'], DL_URL . $attach_id);
             bb_die($mess);
         }
-
+if($bb_cfg['last_added']) CACHE('lenta')->rm();
         return true;
     }
 
@@ -558,14 +559,14 @@ class Torrent
     /**
      * Generate and save passkey for user
      *
-     * @param int|string $user_id
+     * @param int $user_id
      * @param bool $force_generate
      *
      * @return bool|string
      */
-    public static function generate_passkey($user_id, bool $force_generate = false)
+    public static function generate_passkey($user_id, $force_generate = false)
     {
-        global $bb_cfg, $lang;
+        global $bb_cfg, $lang, $sql;
 
         $user_id = (int)$user_id;
 
@@ -583,17 +584,21 @@ class Torrent
             }
         }
 
-        $passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
-        $old_passkey = self::getPasskey($user_id);
+        for ($i = 0; $i < 20; $i++) {
+            $passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
+            $old_passkey = null;
 
-        if (!$old_passkey) {
-            // Create first passkey
+            if ($row = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = $user_id LIMIT 1")) {
+                $old_passkey = $row['auth_key'];
+            }
+
+            // Insert new row
             DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
             if (DB()->affected_rows() == 1) {
                 return $passkey_val;
             }
-        } else {
-            // Update exists passkey
+
+            // Update
             DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
             if (DB()->affected_rows() == 1) {
                 // Ocelot
@@ -603,7 +608,6 @@ class Torrent
                 return $passkey_val;
             }
         }
-
         return false;
     }
 
@@ -736,31 +740,5 @@ class Torrent
         }
 
         return $success;
-    }
-
-    /**
-     * Returns the user passkey, false otherwise
-     *
-     * @param int|string $user_id
-     * @return bool|string
-     */
-    public static function getPasskey($user_id)
-    {
-        if ($passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1")) {
-            return $passkey['auth_key'];
-        }
-
-        return false;
-    }
-
-    /**
-     * Removes user passkey, false otherwise
-     *
-     * @param int|string $user_id
-     * @return bool
-     */
-    public static function deletePasskey($user_id): bool
-    {
-        return (bool)DB()->query("DELETE FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id);
     }
 }

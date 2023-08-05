@@ -1,0 +1,32 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+before_install:
+    - wget http://sphinxsearch.com/files/sphinx-2.0.8-release.tar.gz
+    - tar xzf sphinx-2.0.8-release.tar.gz
+    - cd sphinx-2.0.8-release
+    - wget http://snowball.tartarus.org/dist/libstemmer_c.tgz
+    - tar xzf libstemmer_c.tgz
+    - ./configure --prefix=/usr/local/sphinx --with-libstemmer --with-iconv --with-mysql --enable-id64 --quiet
+    - make -j --quiet
+    - sudo make install
+    - cd ..
+
+before_script:
+    - mysql -e "CREATE DATABASE IF NOT EXISTS sphinx;"
+    - mysql -e "SOURCE `pwd`/tests/Sphinx/Tests/Fixtures/sphinxtest.sql"
+    - sudo /usr/local/sphinx/bin/indexer -c tests/Sphinx/Tests/Fixtures/sphinxtest.conf --all
+    - sudo /usr/local/sphinx/bin/searchd -c tests/Sphinx/Tests/Fixtures/sphinxtest.conf
+    - composer self-update
+    - composer install --prefer-source --no-interaction --dev
+
+script:
+    - mkdir -p build/logs
+    - phpunit
+
+after_script:
+    - php vendor/bin/coveralls -v

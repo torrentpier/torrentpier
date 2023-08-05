@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$reserved_name = 'torrentpier.com';
+$reserved_name = 'localhost';
 $reserved_port = 80;
 
 $bb_cfg = [];
@@ -21,7 +21,7 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.0-beta1';
+$bb_cfg['tp_version'] = '2.4.0-beta1';
 $bb_cfg['tp_release_date'] = '18-07-2023';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
@@ -32,7 +32,7 @@ $bb_cfg['db'] = [
         // Don't change the settings here!!! Go to .env file
         env('DB_HOST', 'localhost'),
         env('DB_PORT', 3306),
-        env('DB_DATABASE', 'torrentpier'),
+        env('DB_DATABASE', 'tp'),
         env('DB_USERNAME', 'root'),
         env('DB_PASSWORD'),
         'utf8',
@@ -68,12 +68,13 @@ $bb_cfg['cache'] = [
         'port' => 6379,
         'con_required' => true,
     ],
-    // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+    // Available cache types: memcache, sqlite, redis, (filecache by default)
     'engines' => [
         'bb_cache' => ['filecache', []],
         'bb_config' => ['filecache', []],
         'tr_cache' => ['filecache', []],
         'session_cache' => ['filecache', []],
+		'lenta'          => array('sqlite',   array()),
         'bb_cap_sid' => ['filecache', []],
         'bb_login_err' => ['filecache', []],
         'bb_poll_data' => ['filecache', []],
@@ -81,7 +82,7 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+// Available datastore types: memcache, sqlite, redis (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
@@ -493,7 +494,7 @@ $bb_cfg['max_savebox_privmsgs'] = 500; // максимальное число с
 $bb_cfg['max_sentbox_privmsgs'] = 500; // максимальное число сообщений в папке отправленные
 $bb_cfg['max_smilies_pm'] = 15; // максимальное число смайлов в сообщении (0 - без ограничения)
 $bb_cfg['max_symbols_pm'] = 1500; // TODO: максимальное число символов в сообщении (0 - без ограничения)
-$bb_cfg['pm_days_keep'] = 180; // время хранения ЛС
+$bb_cfg['pm_days_keep'] = 180; // TODO: время хранения ЛС
 
 // Actions log
 $bb_cfg['log_days_keep'] = 365; // время хранения истории действий
@@ -736,3 +737,5 @@ if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg[
 } else {
     $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
 }
+$bb_cfg['chat']         = true;
+$bb_cfg['chat_message'] = 50;

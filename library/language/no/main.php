@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = 'Innlegg';
 $lang['POSTED'] = 'Lagt ut';
 $lang['USERNAME'] = 'Brukernavn';
 $lang['PASSWORD'] = 'Passord';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-post';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Forfatter';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = 'opprette en ny';
 $lang['BT_PASSKEY_VIEW'] = 'vis';
 $lang['BT_GEN_PASSKEY_NEW'] = "Oppmerksomhet! Etter at du har endret den nye koden, vil du trenger for å re-laste ned alle aktive torrenter! \n Er du sikker på at du vil opprette en ny nøkkel?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Ingen søkbar fora funnet';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Frø';
 $lang['LEECHS'] = 'Igle';

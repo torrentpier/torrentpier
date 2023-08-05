@@ -366,7 +366,26 @@ if (($delete || $mode == 'delete') && !$confirm) {
         if ($mode == 'newtopic' || $mode == 'reply') {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
         }
-
+// Постеры раздач [START]
+		if ($bb_cfg['last_added'])
+		{
+		    if ($mode == 'newtopic' && defined('TORRENT_ATTACH_ID') || defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
+		    {
+		        $row = DB()->fetch_row("SELECT post_text FROM ". BB_POSTS_TEXT ." WHERE post_id = $post_id");			
+                    preg_match_all('/\[poster\](.*?)\[\/poster\]/i', $row['post_text'], $poster0, PREG_SET_ORDER);
+					preg_match_all('/\[img=right\](.*?)\[\/img\]/i', $row['post_text'], $poster, PREG_SET_ORDER);
+                    preg_match_all('/\[img=left\](.*?)\[\/img\]/i', $row['post_text'], $poster2, PREG_SET_ORDER);
+                    preg_match_all('/\[img\](.*?)\[\/img\]/i', $row['post_text'], $poster3, PREG_SET_ORDER);
+                $url = '';
+                if(isset($poster[0][1])) $url = $poster[0][1];
+                elseif(isset($poster0[0][1])) $url = $poster0[0][1];
+				elseif(isset($poster2[0][1])) $url = $poster2[0][1];
+                elseif(isset($poster3[0][1])) $url = $poster3[0][1];
+	            DB()->query("UPDATE ". BB_TOPICS ." SET topic_image = '$url' WHERE topic_id = $topic_id ");
+	            CACHE('lenta')->rm();
+            }
+		}
+		// Постеры раздач [END]
         if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
             if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
                 if ($bb_cfg['premod']) {

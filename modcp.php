@@ -234,7 +234,7 @@ switch ($mode) {
                 $datastore->enqueue('network_news');
                 $datastore->update('network_news');
             }
-
+if($bb_cfg['last_added']) CACHE('lenta')->rm();
             $msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {

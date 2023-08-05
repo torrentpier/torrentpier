@@ -1,0 +1,64 @@
+{
+    "name": "arokettu/bencode",
+    "description": "BitTorrent's Bencode encoder/decoder",
+    "keywords": ["bittorrent", "torrent", "bencode", "serialize"],
+    "homepage": "https://sandfox.dev/php/bencode.html",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Smirnov",
+            "role": "developer",
+            "homepage": "https://sandfox.me",
+            "email": "sandfox@sandfox.me"
+        }
+    ],
+    "support": {
+        "issues": "https://gitlab.com/sandfox/bencode/-/issues",
+        "source": "https://gitlab.com/sandfox/bencode",
+        "docs": "https://bencode.readthedocs.io/"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "SandFox\\Bencode\\": "src"
+        },
+        "files": [
+            "autoload.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SandFox\\Bencode\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.0 | ^8.0",
+        "arokettu/is-resource": "^1.0"
+    },
+    "require-dev": {
+        "ext-gmp": "*",
+        "ext-json": "*",
+        "brick/math": "*",
+        "mikey179/vfsstream": "^1.6",
+        "pear/math_biginteger": "^1.0",
+        "phpunit/phpunit": ">=6.0.0 <10",
+        "psy/psysh": "*",
+        "sandfox.dev/code-standard": "^10@dev",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "provide": {
+        "sandfoxme/bencode": "self.version"
+    },
+    "suggest": {
+        "php-64bit": "Running 64 bit is recommended to prevent integer overflow",
+        "ext-gmp": "In case you need integers larger than your architecture supports",
+        "brick/math": "In case you need integers larger than your architecture supports",
+        "pear/math_biginteger": "In case you need integers larger than your architecture supports"
+    }
+}

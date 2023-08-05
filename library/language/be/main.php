@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = 'Пасты';
 $lang['POSTED'] = 'Апублікавана';
 $lang['USERNAME'] = 'Імя карыстальніка';
 $lang['PASSWORD'] = 'Пароль';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Электроннай пошты';
 $lang['PM'] = 'ТЧ';
 $lang['AUTHOR'] = 'Аўтар';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = 'стварыце новы';
 $lang['BT_PASSKEY_VIEW'] = 'паказаць';
 $lang['BT_GEN_PASSKEY_NEW'] = "Увага! Пасля змены новы пароль, вам трэба будзе паўторна загрузіць усе актыўныя торэнты! \\N вы ўпэўненыя, што хочаце стварыць новы пароль?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Няма форумаў пошук знайшлі';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Насення';
 $lang['LEECHS'] = 'П\'яўка';

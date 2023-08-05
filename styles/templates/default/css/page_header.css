@@ -5,7 +5,24 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
+/* ---------------------------------- *
+     Logo New
+ * ---------------------------------- */
+#logonew {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 15rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
+#logoclick {
+  width: 100%;
+  height: 100%;
+}
 /* ---------------------------------- *
      TopMenu, Quick Login, PM Info, Logout
  * ---------------------------------- */

@@ -692,6 +692,7 @@ if ($allowed_forums) {
 			$limit
 		";
 
+        $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
         // Build torrents table
         foreach (DB()->fetch_rowset($sql) as $tor) {
             $dl = $tor['speed_down'] ?? 0;
@@ -702,7 +703,7 @@ if ($allowed_forums) {
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], \TorrentPier\Legacy\Torrent::getPasskey($user_id));
+            $tor_magnet = create_magnet($tor['info_hash'], ($passkey['auth_key'] ?? ''));
             $compl = $tor['complete_count'];
             $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
             $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';

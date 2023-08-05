@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = 'Príspevky';
 $lang['POSTED'] = 'Publikované';
 $lang['USERNAME'] = 'Užívateľské meno';
 $lang['PASSWORD'] = 'Heslo';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = 'vytvoriť nový';
 $lang['BT_PASSKEY_VIEW'] = 'zobraziť';
 $lang['BT_GEN_PASSKEY_NEW'] = "Pozornosť! Po výmene nové kľúče, budete musieť znova stiahnuť všetky aktívne torrentov! \n Sú si istí, že chcete vytvoriť nový univerzálny kľúč?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Č vyhľadávať fóra našiel';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Semeno';
 $lang['LEECHS'] = 'Pijavice';

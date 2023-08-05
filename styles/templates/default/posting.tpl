@@ -1,6 +1,34 @@
 <div class="spacer_12"></div>
 
+<!-- IF URL -->
+
+<h3 class="cat_title tCenter">Создание раздач с трекеров тремя тыками =)</h3>
+<div class="f_tbl_wrap">
+<table class="forums">
+<tr>
+     <td class="row2 tCenter">
+          <span id="progress"></span>
+          <span id="hide_form">
+         <form method="post">
+          <input type="radio" id="rutor" name="tracker" value="rutor" checked="checked" /><label for="rutor">rutor.org</label>
+    	  <input type="radio" id="rustorka" name="tracker" value="rustorka" /><label for="rustorka">rustorka.com</label>
+
+               <div class="spacer_10"></div>
+            {SELECT_FORUM}
+               <input type="text" name="url" size="60" class="hint" onfocus="if(this.value=='Введите адрес раздачи...') this.value='';" onblur="if(this.value=='') this.value='Введите адрес раздачи...';" value="Введите адрес раздачи...">
+               <input onclick="$('#hide_form').hide(); $('#progress').html('<img src=./templates/default/images/progress_bar.gif>'); return true;" type="submit" value="Let's GO">
+          </form>
+          </span>
+     </td>
+</tr>
+</table>
+<div class="cat_footer"></div>
+</div>
+<!-- ELSE -->
+
 <!-- IF TPL_SHOW_NEW_POSTS -->
+
+
 <!--========================================================================-->
 
 <table class="topic" cellpadding="0" cellspacing="0">
@@ -195,3 +223,4 @@
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_TOPIC_REVIEW -->
+<!-- ENDIF -->

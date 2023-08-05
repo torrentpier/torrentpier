@@ -25,7 +25,6 @@ $lang['POSTS_SHORT'] = 'Vəzifə';
 $lang['POSTED'] = 'Göndərilib';
 $lang['USERNAME'] = 'İstifadəçi adı';
 $lang['PASSWORD'] = 'Parol';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-poçt';
 $lang['PM'] = 'ТЧ';
 $lang['AUTHOR'] = 'Müəllif';
@@ -1069,8 +1068,6 @@ $lang['BT_GEN_PASSKEY'] = 'yarat yeni';
 $lang['BT_PASSKEY_VIEW'] = 'göstərmək';
 $lang['BT_GEN_PASSKEY_NEW'] = "Diqqət! Dəyişdikdən sonra yeni bir parol lazımdır, yenidən yükləmək və bütün fəal sel! \\N siz əminik ki, yeni parol yaratmaq istəyirsiniz?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Yoxdur forumların axtarış tapıb';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Toxum';
 $lang['LEECHS'] = 'Zəli';

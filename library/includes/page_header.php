@@ -122,7 +122,8 @@ $template->assign_vars(array(
     'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
-    'NEED_GEN_PASSKEY' => (!IS_GUEST && !\TorrentPier\Legacy\Torrent::getPasskey($userdata['user_id'])),
+	'LAST_ADDED'                => ($bb_cfg['last_added'] && BB_SCRIPT == 'index'),
+	'POSTER'                    => $user->opt_js['poster'],
 
     'SITENAME' => $bb_cfg['sitename'],
     'U_INDEX' => BB_ROOT . "index.php",
@@ -190,7 +191,6 @@ $template->assign_vars(array(
     'POST_URL' => BB_ROOT . POST_URL,
     'POSTING_URL' => $bb_cfg['posting_url'],
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
-    'BONUS_URL' => BB_ROOT . BONUS_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
 
     'AJAX_HTML_DIR' => AJAX_HTML_DIR,

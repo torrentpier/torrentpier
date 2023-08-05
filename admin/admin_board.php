@@ -84,6 +84,9 @@ switch ($mode) {
             'SEED_BONUS_ENABLED' => $new['seed_bonus_enabled'],
             'SEED_BONUS_TOR_SIZE' => $new['seed_bonus_tor_size'],
             'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate'],
+			'LAST_ADDED_ON'  => $new['last_added'],
+	        'NEW_POSTER'     => $new['new_poster'],
+	        'LIMIT_POSTER'   => $new['limit_poster'],
         ));
 
         if ($new['seed_bonus_points'] && $new['seed_bonus_release']) {

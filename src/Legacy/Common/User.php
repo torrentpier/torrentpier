@@ -46,6 +46,7 @@ class User
         'hl_tr' => 1,     // show cursor in tracker.php
         'i_aft_l' => 0,     // show images only after full loading
         'h_tsp' => 0,     // show released title {...}
+		'poster'   => 1,     // show mini posters
     ];
 
     /**
