@@ -334,7 +334,7 @@
                     <!-- IF EDIT_PROFILE -->
                     <input type="reset" value="{L_RESET}" name="reset" class="lite"/>&nbsp;&nbsp;
                     <!-- ENDIF -->
-                    <input type="submit" id="agreement" disabled="disabled" name="submit" value="{L_SUBMIT}" class="main"/>
+                    <input type="submit" <!-- IF SHOW_REG_AGREEMENT -->id="agreement" disabled="disabled"<!-- ENDIF --> name="submit" value="{L_SUBMIT}" class="main"/>
                 </div>
             </td>
         </tr>
