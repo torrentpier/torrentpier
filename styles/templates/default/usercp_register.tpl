@@ -321,7 +321,7 @@
                         <div class="bCenter">
                             <?php include($V['HTML_AGREEMENT']); ?>
                         </div>
-                        <p class="med bold mrg_4 tCenter"><label><input type="checkbox" value="" checked="checked" disabled="disabled"/>&nbsp;{L_USER_AGREEMENT_AGREE}</label></p>
+                        <p class="med bold mrg_4 tCenter"><label><input type="checkbox" value="" onclick="toggle_disabled('agreement', this.checked)"/>&nbsp;{L_USER_AGREEMENT_AGREE}</label></p>
                     </fieldset>
                 </div><!--/infobox-wrap-->
             </td>
@@ -334,7 +334,7 @@
                     <!-- IF EDIT_PROFILE -->
                     <input type="reset" value="{L_RESET}" name="reset" class="lite"/>&nbsp;&nbsp;
                     <!-- ENDIF -->
-                    <input type="submit" name="submit" value="{L_SUBMIT}" class="main"/>
+                    <input type="submit" id="agreement" disabled="disabled" name="submit" value="{L_SUBMIT}" class="main"/>
                 </div>
             </td>
         </tr>
