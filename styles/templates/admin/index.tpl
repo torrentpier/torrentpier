@@ -1,7 +1,7 @@
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
 <!DOCTYPE html>
-<html>
+<html lang="{$bb_cfg['default_lang']}">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}"/>
   <meta http-equiv="Content-Style-Type" content="text/css"/>
