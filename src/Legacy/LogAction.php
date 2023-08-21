@@ -20,13 +20,15 @@ class LogAction
         'mod_topic_move' => 2,
         'mod_topic_lock' => 3,
         'mod_topic_unlock' => 4,
-        'mod_post_delete' => 5,
-        'mod_post_pin' => 6,
-        'mod_post_unpin' => 7,
-        'mod_topic_split' => 8,
-        'adm_user_delete' => 9,
-        'adm_user_ban' => 10,
-        'adm_user_unban' => 11,
+        'mod_topic_set_downloaded' => 5,
+        'mod_topic_unset_downloaded' => 6,
+        'mod_post_delete' => 7,
+        'mod_post_pin' => 8,
+        'mod_post_unpin' => 9,
+        'mod_topic_split' => 10,
+        'adm_user_delete' => 11,
+        'adm_user_ban' => 12,
+        'adm_user_unban' => 13,
     ];
     public $log_type_select = [];
     public $log_disabled = false;

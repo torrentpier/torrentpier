@@ -223,6 +223,8 @@ if ($log_rowset) {
             case $log_type['mod_topic_move']:
             case $log_type['mod_topic_lock']:
             case $log_type['mod_topic_unlock']:
+            case $log_type['mod_topic_set_downloaded']:
+            case $log_type['mod_topic_unset_downloaded']:
             case $log_type['mod_post_delete']:
             case $log_type['mod_post_pin']:
             case $log_type['mod_post_unpin']:
