@@ -1517,8 +1517,8 @@ $lang['BOLD'] = 'Жирный текст: [b]текст[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Наклонный текст: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl+S)';
-$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
-$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
+$lang['SUPERSCRIPT'] = 'Надстрочный текст: [sup]текст[/sup]';
+$lang['SUBSCRIPT'] = 'Подстрочный текст: [sub]текст[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Вставить изображение: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Ссылка';
@@ -2156,7 +2156,7 @@ $lang['EXTENSION_GROUP_EXIST'] = 'Группа расширений %s уже с
 
 // Extensions -> Special Categories
 $lang['MANAGE_CATEGORIES'] = 'Контроль специальных категорий';
-$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categories assigned to an Extension Group.';
+$lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Здесь вы можете настроить специальные категории. Вы можете установить специальные параметры и условия для специальных категорий, назначенных группе расширений.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Настройки для специальной категории: Изображения';
 $lang['SETTINGS_CAT_FLASH'] = 'Настройки для специальной категории: Flash файлы';
 $lang['DISPLAY_INLINED'] = 'Отображать изображения в сообщениях';
@@ -2550,7 +2550,11 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'mod_topic_lock' => 'Топик:<br /> <b>закрыт</b>',
     'mod_topic_unlock' => 'Топик:<br /> <b>открыт</b>',
     'mod_topic_split' => 'Топик:<br /> <b>разделен</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
     'mod_post_delete' => 'Пост:<br /> <b>удален</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Юзер:<br /> <b>удален</b>',
     'adm_user_ban' => 'Юзер:<br /> <b>забанен</b>',
     'adm_user_unban' => 'Юзер:<br /> <b>разбанен</b>',
@@ -2810,7 +2814,7 @@ $lang['CAPTCHA_WRONG'] = 'Вы не смогли подтвердить, что 
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha настроена не полностью</h2><p>Если вы еще не сгенерировали ключи, вы можете это сделать на странице <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />После того, как вы сгенерируете ключи, нужно прописать их в файл library/config.php.</p>';
 
 // Sending email
-$lang['REPLY_TO'] = 'Reply to';
+$lang['REPLY_TO'] = 'Адрес для ответных писем';
 $lang['EMAILER_SUBJECT'] = [
     'EMPTY' => 'Без темы',
     'GROUP_ADDED' => 'Вы добавлены в группу пользователей',
