@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang, $datastore;
+global $userdata, $bb_cfg, $lang, $datastore, $log_action;
 
 $mode = (string)$this->request['mode'];
 
@@ -36,8 +36,8 @@ switch ($mode) {
 
     case 'edit_topic_title':
         $topic_id = (int)$this->request['topic_id'];
-        $topic_title = (string)$this->request['topic_title'];
-        $new_title = clean_title($topic_title);
+        $old_title = get_topic_title($topic_id);
+        $new_title = clean_title((string)$this->request['topic_title']);
 
         if (!$topic_id) {
             $this->ajax_die($lang['INVALID_TOPIC_ID']);
@@ -67,6 +67,14 @@ switch ($mode) {
             $datastore->enqueue('network_news');
             $datastore->update('network_news');
         }
+
+        // Log action
+        $log_action->mod('mod_topic_renamed', array(
+            'forum_id' => $t_data['forum_id'],
+            'topic_id' => $topic_id,
+            'topic_title' => $old_title,
+            'topic_title_new' => $new_title,
+        ));
 
         $this->response['topic_id'] = $topic_id;
         $this->response['topic_title'] = $new_title;
