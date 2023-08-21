@@ -2552,6 +2552,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'mod_topic_split' => 'Топик:<br /> <b>разделен</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Пост:<br /> <b>удален</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
     'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
