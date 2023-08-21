@@ -709,6 +709,17 @@ switch ($mode) {
 				WHERE topic_id IN($topic_csv)
 			");
 
+            // Log action
+            $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
+
+            foreach ($log_topics as $topic_id => $topic_title) {
+                $log_action->mod($type, array(
+                    'forum_id' => $forum_id,
+                    'topic_id' => $topic_id,
+                    'topic_title' => $topic_title,
+                ));
+            }
+
             $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
@@ -738,6 +749,17 @@ switch ($mode) {
 					topic_show_first_post = $new_topic_status
 				WHERE topic_id IN($topic_csv)
 			");
+
+            // Log action
+            $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
+
+            foreach ($log_topics as $topic_id => $topic_title) {
+                $log_action->mod($type, array(
+                    'forum_id' => $forum_id,
+                    'topic_id' => $topic_id,
+                    'topic_title' => $topic_title,
+                ));
+            }
 
             $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));

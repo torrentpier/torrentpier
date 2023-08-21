@@ -224,6 +224,8 @@ if ($log_rowset) {
             case $log_type['mod_topic_lock']:
             case $log_type['mod_topic_unlock']:
             case $log_type['mod_post_delete']:
+            case $log_type['mod_post_pin']:
+            case $log_type['mod_post_unpin']:
             case $log_type['mod_topic_split']:
                 // topic_title
                 if (!empty($row['log_topic_title'])) {
