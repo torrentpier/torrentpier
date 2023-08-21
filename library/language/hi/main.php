@@ -2552,6 +2552,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'mod_topic_split' => 'विषय: <br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'पोस्ट: <br /> <b> हटाए गए 1233_2_2_321',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
     'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
