@@ -21,10 +21,12 @@ class LogAction
         'mod_topic_lock' => 3,
         'mod_topic_unlock' => 4,
         'mod_post_delete' => 5,
-        'mod_topic_split' => 6,
-        'adm_user_delete' => 7,
-        'adm_user_ban' => 8,
-        'adm_user_unban' => 9,
+        'mod_post_pin' => 6,
+        'mod_post_unpin' => 7,
+        'mod_topic_split' => 8,
+        'adm_user_delete' => 9,
+        'adm_user_ban' => 10,
+        'adm_user_unban' => 11,
     ];
     public $log_type_select = [];
     public $log_disabled = false;
