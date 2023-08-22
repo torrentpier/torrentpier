@@ -1722,6 +1722,8 @@ $lang['USER_AUTH_UPDATED'] = 'Թույլտվության օգտվողների թ
 $lang['GROUP_AUTH_UPDATED'] = 'Թույլտվության խմբի թարմացվել';
 
 $lang['AUTH_UPDATED'] = 'Թույլտվության թարմացվել';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Սեղմեք %sHere%s վերադարձնել օգտագործողի իրավունքները';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Սեղմեք %sHere%s վերադառնալ խմբում թույլտվության';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Սեղմեք %sHere%s վերադառնալ համաժողովը թույլտվության';
