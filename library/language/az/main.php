@@ -1722,6 +1722,8 @@ $lang['USER_AUTH_UPDATED'] = 'İstifadəçilərin icazəsi yeniləndi';
 $lang['GROUP_AUTH_UPDATED'] = 'İcazə qrupunun yeniləndi';
 
 $lang['AUTH_UPDATED'] = 'İcazə yeniləndi';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Basın %sHere%s qaytarmaq hüququ istifadəçi';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Basın %sHere%s geri qrup icazə';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Basın %sHere%s geri almaq üçün forum icazə';
