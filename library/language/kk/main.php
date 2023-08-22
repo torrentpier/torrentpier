@@ -1719,6 +1719,8 @@ $lang['USER_AUTH_UPDATED'] = 'Пайдаланушы рұқсаттары жаң
 $lang['GROUP_AUTH_UPDATED'] = 'Group рұқсаттар жаңартылды';
 
 $lang['AUTH_UPDATED'] = 'Рұқсаттар жаңартылды';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Пайдаланушы рұқсаттарын оралу үшін %sHere%s басыңыз';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Топ рұқсаттарын оралу үшін %sHere%s басыңыз';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Форум Рұқсаттар оралу үшін %sHere%s басыңыз';
