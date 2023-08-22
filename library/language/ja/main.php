@@ -1723,6 +1723,8 @@ $lang['USER_AUTH_UPDATED'] = 'ユーザーの権限の情報を更新いたし';
 $lang['GROUP_AUTH_UPDATED'] = 'グループの権限の情報を更新いたし';
 
 $lang['AUTH_UPDATED'] = 'アクセス権の情報を更新いたし';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'をクリックし%sHere%sに戻りユーザーの権限';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'をクリックし%sHere%s戻グループの権限';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'をクリックし%sHere%sに戻すフォーラムアクセス権';
