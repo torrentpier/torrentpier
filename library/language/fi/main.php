@@ -1719,6 +1719,8 @@ $lang['USER_AUTH_UPDATED'] = 'Käyttöoikeudet on päivitetty';
 $lang['GROUP_AUTH_UPDATED'] = 'Ryhmän käyttöoikeudet on päivitetty';
 
 $lang['AUTH_UPDATED'] = 'Käyttöoikeudet on päivitetty';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klikkaa %sHere%s palata Käyttöoikeudet';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klikkaa %sHere%s palata Ryhmän Käyttöoikeudet';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikkaa %sHere%s palata Foorumin Oikeudet';
