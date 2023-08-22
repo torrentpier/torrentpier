@@ -1723,6 +1723,8 @@ $lang['USER_AUTH_UPDATED'] = 'Kullanıcı izinleri güncellendi';
 $lang['GROUP_AUTH_UPDATED'] = 'Grup izinleri güncellendi';
 
 $lang['AUTH_UPDATED'] = 'İzinleri güncellendi';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = '%sHere%s Kullanıcı İzinleri geri dönmek için tıklayın';
 $lang['CLICK_RETURN_GROUPAUTH'] = '%sHere%s Grup İzinlerine dönmek için tıklayın';
 $lang['CLICK_RETURN_FORUMAUTH'] = '%sHere%s İzinleri Foruma dönmek için tıklayın';
