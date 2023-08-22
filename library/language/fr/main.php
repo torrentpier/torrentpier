@@ -1719,6 +1719,8 @@ $lang['USER_AUTH_UPDATED'] = 'Les autorisations de l\'utilisateur ont été mis 
 $lang['GROUP_AUTH_UPDATED'] = 'Les autorisations de groupe ont été mis à jour';
 
 $lang['AUTH_UPDATED'] = 'Les autorisations ont été mis à jour';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Cliquez sur %sHere%s pour retourner à l\'Utilisateur des Autorisations';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Cliquez sur %sHere%s pour revenir à des Autorisations de Groupe';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Cliquez sur %sHere%s de retour au Forum des Autorisations';
