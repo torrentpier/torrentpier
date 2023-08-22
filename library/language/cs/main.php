@@ -1719,6 +1719,8 @@ $lang['USER_AUTH_UPDATED'] = 'Uživatelská oprávnění byly aktualizovány';
 $lang['GROUP_AUTH_UPDATED'] = 'Oprávnění skupiny byly aktualizovány';
 
 $lang['AUTH_UPDATED'] = 'Oprávnění byly aktualizovány';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klikněte %sHere%s pro návrat do Uživatelské Oprávnění';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klikněte %sHere%s k návratu do Oprávnění Skupiny';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikněte %sHere%s k návratu k Oprávnění Fóra';
