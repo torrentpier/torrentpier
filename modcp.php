@@ -361,6 +361,15 @@ switch ($mode) {
             clear_dl_list($topic_csv);
         }
 
+        // Log action
+        $type = ($set_download) ? 'mod_topic_set_downloaded' : 'mod_topic_unset_downloaded';
+
+        $log_action->mod($type, array(
+            'forum_id' => $forum_id,
+            'topic_id' => $topic_id,
+            'topic_title' => get_topic_title($topic_id),
+        ));
+
         $msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
         bb_die(return_msg_mcp($msg));
 
