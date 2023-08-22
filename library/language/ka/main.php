@@ -1719,6 +1719,8 @@ $lang['USER_AUTH_UPDATED'] = 'მომხმარებლის უფლე�
 $lang['GROUP_AUTH_UPDATED'] = 'ჯგუფი უფლებები უკვე განახლებულია';
 
 $lang['AUTH_UPDATED'] = 'უფლებები უკვე განახლებულია';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'დააჭირეთ %sHere%s დაბრუნებას მომხმარებლის უფლებები';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'დააჭირეთ %sHere%s დაბრუნებას ჯგუფი უფლებები';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'დააჭირეთ %sHere%s დაბრუნებას ფორუმი ნებართვები';
