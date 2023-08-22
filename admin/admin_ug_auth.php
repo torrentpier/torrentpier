@@ -73,7 +73,7 @@ if ($submit && $mode == 'user') {
     if (isset($_POST['userlevel'])) {
         if ($_POST['userlevel'] === 'admin') {
             if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
-                bb_die('Could not update admin status');
+                bb_die($lang['AUTH_GENERAL_ERROR']);
             }
 
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
@@ -90,7 +90,7 @@ if ($submit && $mode == 'user') {
         elseif ($_POST['userlevel'] === 'user') {
             // ignore if you're trying to change yourself from an admin to user!
             if ($userdata['user_id'] == $user_id) {
-                bb_die('Could not update admin status<br /><br />Could not change yourself from an admin to user');
+                bb_die($lang['AUTH_SELF_ERROR']);
             }
             // Update users level, reset to USER
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
