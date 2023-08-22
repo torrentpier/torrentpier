@@ -1719,6 +1719,8 @@ $lang['USER_AUTH_UPDATED'] = 'Usuari permisos s\'han actualitzat';
 $lang['GROUP_AUTH_UPDATED'] = 'Grup permisos s\'han actualitzat';
 
 $lang['AUTH_UPDATED'] = 'Permisos s\'han actualitzat';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Feu clic %sHere%s per tornar a Permisos d\'Usuari';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Feu clic %sHere%s per tornar a Grup de Permisos';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Feu clic %sHere%s per tornar a Fòrum de Permisos';
