@@ -26,6 +26,7 @@ $sql_error = false;
 switch ($mode) {
     case 'load':
     case 'save':
+    case 'remove':
         if (!$tpl_id = (int)$this->request['tpl_id']) {
             $this->ajax_die('Выбранный шаблон не найден, создайте новый (empty tpl_id)');
         }
@@ -142,6 +143,22 @@ switch ($mode) {
         if (!@DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
+        break;
+
+    // удаление шаблона
+    case 'remove':
+        if (!$forum_id = (int)$this->request['forum_id']) {
+            $this->ajax_die('empty forum_id');
+        }
+        if (!forum_exists($forum_id)) {
+            $this->ajax_die("нет такого форума [id: $forum_id]");
+        }
+        $sql = "DELETE FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1";
+        if (!@DB()->query($sql)) {
+            $sql_error = DB()->sql_error();
+        }
+        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = $forum_id LIMIT 1");
+        $this->response['msg'] = "Шаблон {$tpl_data['tpl_name']} успешно удалён";
         break;
 
     // ошибочный $mode
