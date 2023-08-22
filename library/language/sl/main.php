@@ -1719,6 +1719,8 @@ $lang['USER_AUTH_UPDATED'] = 'Uporabniška dovoljenja so bile posodobljene,';
 $lang['GROUP_AUTH_UPDATED'] = 'Dovoljenja skupine so bile posodobljene,';
 
 $lang['AUTH_UPDATED'] = 'Dovoljenja so bila posodobljena';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Kliknite %sHere%s, da se vrnete Uporabniška Dovoljenja';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Kliknite %sHere%s, da se vrnete Dovoljenja Skupine';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite %sHere%s, da se vrnete Dovoljenja Foruma';
