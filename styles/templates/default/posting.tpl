@@ -79,7 +79,7 @@
 	<td><b>{L_USERNAME}</b></td>
 	<td>
 		<input type="text" name="username" size="25" maxlength="25" tabindex="1" value="{USERNAME}" />&nbsp;
-		<input type="submit" name="usersubmit" class="lite" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US);return false;" />
+        <!-- IF not IS_GUEST --><input type="submit" name="usersubmit" class="lite" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US);return false;" /><!-- ENDIF -->
 	</td>
 </tr>
 <!-- ENDIF -->

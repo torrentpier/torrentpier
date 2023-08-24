@@ -182,7 +182,7 @@ if ($download_mode == PHYSICAL_LINK) {
     exit;
 }
 
-if (IS_GUEST && !bb_captcha('check')) {
+if (IS_GUEST && !$bb_cfg['captcha']['disabled'] && !bb_captcha('check')) {
     global $template;
 
     $redirect_url = $_POST['redirect_url'] ?? $_SERVER['HTTP_REFERER'] ?? '/';
