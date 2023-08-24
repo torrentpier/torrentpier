@@ -64,8 +64,8 @@
 	<tr>
 		<td>{L_RELEASE_GROUP}:</td>
 		<td>
-			<label><input type="radio" name="release_group" value="1" onclick="manage_group(this.name,this.value)" <!-- IF RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-			<label><input type="radio" name="release_group" value="0" onclick="manage_group(this.name,this.value)" <!-- IF not RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+			<label><input type="radio" name="release_group" value="1" onclick="manage_group(this.name,this.value)" <!-- IF RELEASE_GROUP -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+			<label><input type="radio" name="release_group" value="0" onclick="manage_group(this.name,this.value)" <!-- IF not RELEASE_GROUP -->checked<!-- ENDIF --> />{L_NO}</label>
 		</td>
 	</tr>
 	<tr>

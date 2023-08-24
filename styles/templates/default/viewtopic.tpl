@@ -503,16 +503,16 @@ function build_poll_add_form (src_el)
 		</tr>
 		<tr>
 			<td colspan="2" class="row2 tCenter">
-				<label><input type="checkbox" name="after_split_to_old" checked="checked" /> {L_BOT_AFTER_SPLIT_TO_OLD}</label>
+				<label><input type="checkbox" name="after_split_to_old" checked /> {L_BOT_AFTER_SPLIT_TO_OLD}</label>
 				&nbsp;
-				<label><input type="checkbox" name="after_split_to_new" checked="checked" /> {L_BOT_AFTER_SPLIT_TO_NEW}</label>
+				<label><input type="checkbox" name="after_split_to_new" checked /> {L_BOT_AFTER_SPLIT_TO_NEW}</label>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center" class="row3">
-				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled="disabled" onclick="return window.confirm('{L_DELETE_POSTS}?');" />
-				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled="disabled" onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
-				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled="disabled" onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
+				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled onclick="return window.confirm('{L_DELETE_POSTS}?');" />
+				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
+				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
 				<label for="spl_cnf">
 					{L_CONFIRM}
 					<input id="spl_cnf" type="checkbox" name="confirm" value="1" onclick="
@@ -586,7 +586,7 @@ function build_poll_add_form (src_el)
 </tr>
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
-		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked="checked"<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled="disabled"<!-- ENDIF --> />
+		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
 		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
 </tr>

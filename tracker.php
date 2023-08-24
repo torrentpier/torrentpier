@@ -811,7 +811,7 @@ if (IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
     foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
-            $checked = (is_countable($status) && in_array($status_id, $status)) ? 'checked="checked"' : '';
+            $checked = (is_countable($status) && in_array($status_id, $status)) ? 'checked' : '';
             $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
         }
         $statuses .= '</tr>';

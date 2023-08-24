@@ -48,7 +48,7 @@ $mode_types = array(
 $select_sort_mode = '<select name="mode">';
 
 for ($i = 0, $iMax = count($mode_types_text); $i < $iMax; $i++) {
-    $selected = ($mode == $mode_types[$i]) ? ' selected="selected"' : '';
+    $selected = ($mode == $mode_types[$i]) ? ' selected' : '';
     $select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';
 }
 $select_sort_mode .= '</select>';
@@ -57,9 +57,9 @@ $select_sort_mode .= '</select>';
 $select_sort_order = '<select name="order">';
 
 if ($sort_order == 'ASC') {
-    $select_sort_order .= '<option value="ASC" selected="selected">' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC" selected>' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
 } else {
-    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected="selected">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected>' . $lang['DESC'] . '</option>';
 }
 $select_sort_order .= '</select>';
 

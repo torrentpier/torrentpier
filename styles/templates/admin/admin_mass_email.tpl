@@ -16,7 +16,7 @@
             <td class="row1" align="right"><b>{L_MASS_EMAIL_MESSAGE_TYPE}</b></td>
             <td class="row2">
                 <select name="message_type">
-                    <option value="text/plain" selected="selected">text/plain</option>
+                    <option value="text/plain" selected>text/plain</option>
                     <option value="text/html">text/html</option>
                 </select>
             </td>

@@ -1294,7 +1294,7 @@ if ($mode == 'read') {
 
     $select_msg_days = '';
     for ($i = 0, $iMax = count($previous_days); $i < $iMax; $i++) {
-        $selected = ($msg_days == $previous_days[$i]) ? ' selected="selected"' : '';
+        $selected = ($msg_days == $previous_days[$i]) ? ' selected' : '';
         $select_msg_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
     }
 

@@ -49,8 +49,8 @@ function toggle_cat_list (val)
 	<tr id="show_on_index" class="{SHOW_ON_INDEX_CLASS}">
 		<td>{L_SF_SHOW_ON_INDEX}</td>
 		<td>
-			<label><input type="radio" name="show_on_index" value="1" <!-- IF SHOW_ON_INDEX -->checked="checked"<!-- ENDIF -->  />{L_YES}</label>&nbsp;&nbsp;
-			<label><input type="radio" name="show_on_index" value="0" <!-- IF not SHOW_ON_INDEX -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+			<label><input type="radio" name="show_on_index" value="1" <!-- IF SHOW_ON_INDEX -->checked<!-- ENDIF -->  />{L_YES}</label>&nbsp;&nbsp;
+			<label><input type="radio" name="show_on_index" value="0" <!-- IF not SHOW_ON_INDEX -->checked<!-- ENDIF --> />{L_NO}</label>
 		</td>
 	</tr>
 	<tr>

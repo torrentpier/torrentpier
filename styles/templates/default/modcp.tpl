@@ -80,7 +80,7 @@
 				<p class="mrg_2"><input type="checkbox" name="move_leave_shadow" id="move_leave_shadow" /><label for="move_leave_shadow">{L_LEAVE_SHADOW_TOPIC}</label></p>
 				<!-- ENDIF -->
 				<!-- IF SHOW_BOT_OPTIONS -->
-				<p class="mrg_2"><input type="checkbox" name="insert_bot_msg" id="insert_bot_msg" checked="checked" /><label for="insert_bot_msg">{L_BOT_LEAVE_MSG_MOVED}</label></p>
+				<p class="mrg_2"><input type="checkbox" name="insert_bot_msg" id="insert_bot_msg" checked /><label for="insert_bot_msg">{L_BOT_LEAVE_MSG_MOVED}</label></p>
 				<!-- ENDIF -->
 			</td>
 		</tr>

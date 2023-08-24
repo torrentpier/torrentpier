@@ -404,7 +404,7 @@ if ($mode == 'groups') {
             $extension_group[$i]['max_filesize'] = round($extension_group[$i]['max_filesize'] / 1024 * 100) / 100;
         }
 
-        $s_allowed = ($extension_group[$i]['allow_group'] == 1) ? 'checked="checked"' : '';
+        $s_allowed = ($extension_group[$i]['allow_group'] == 1) ? 'checked' : '';
 
         $template->assign_block_vars('grouprow', array(
             'GROUP_ID' => $extension_group[$i]['group_id'],

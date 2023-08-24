@@ -513,7 +513,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     if ($is_auth['auth_sticky']) {
         $topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_STICKY . '"';
         if (isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_STICKY || $topic_type == POST_STICKY)) {
-            $topic_type_toggle .= ' checked="checked"';
+            $topic_type_toggle .= ' checked';
         }
         $topic_type_toggle .= ' /> ' . $lang['POST_STICKY'] . '</label>&nbsp;&nbsp;';
     }
@@ -521,13 +521,13 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     if ($is_auth['auth_announce']) {
         $topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_ANNOUNCE . '"';
         if (isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_ANNOUNCE || $topic_type == POST_ANNOUNCE)) {
-            $topic_type_toggle .= ' checked="checked"';
+            $topic_type_toggle .= ' checked';
         }
         $topic_type_toggle .= ' /> ' . $lang['POST_ANNOUNCEMENT'] . '</label>&nbsp;&nbsp;';
     }
 
     if ($topic_type_toggle != '') {
-        $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': <label><input type="radio" name="topictype" value="' . POST_NORMAL . '"' . ((!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked="checked"' : '') . ' /> ' . $lang['POST_NORMAL'] . '</label>&nbsp;&nbsp;' . $topic_type_toggle;
+        $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': <label><input type="radio" name="topictype" value="' . POST_NORMAL . '"' . ((!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked' : '') . ' /> ' . $lang['POST_NORMAL'] . '</label>&nbsp;&nbsp;' . $topic_type_toggle;
     }
 }
 //bt
@@ -551,12 +551,12 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
         $dl_type_val = ($topic_dl_type) ? 1 : 0;
 
         if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod']) {
-            $dl_ds = ' disabled="disabled" ';
+            $dl_ds = ' disabled ';
             $dl_hid = '<input type="hidden" name="topic_dl_type" value="' . $dl_type_val . '" />';
             $dl_type_name = '';
         }
 
-        $dl_ch = ($mode == 'editpost' && $post_data['first_post'] && $topic_dl_type) ? ' checked="checked" ' : '';
+        $dl_ch = ($mode == 'editpost' && $post_data['first_post'] && $topic_dl_type) ? ' checked ' : '';
 
         $topic_type_toggle .= '<nobr><input type="checkbox" name="' . $dl_type_name . '" id="topic_dl_type_id" ' . $dl_ds . $dl_ch . ' /><label for="topic_dl_type_id"> ' . $lang['POST_DOWNLOAD'] . '</label></nobr>';
         $topic_type_toggle .= $dl_hid;
@@ -617,7 +617,7 @@ $template->assign_vars(array(
     'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
 
     'USERNAME' => @$username,
-    'CAPTCHA_HTML' => (IS_GUEST) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
     'SUBJECT' => $subject,
     'MESSAGE' => $message,
 
@@ -626,7 +626,7 @@ $template->assign_vars(array(
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 
-    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked="checked"' : '',
+    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,

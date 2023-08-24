@@ -203,7 +203,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $filename_list = $smiley_edit_img = '';
             for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
                 if ($smiley_images[$i] == $smile_data['smile_url']) {
-                    $smiley_selected = 'selected="selected"';
+                    $smiley_selected = 'selected';
                     $smiley_edit_img = $smiley_images[$i];
                 } else {
                     $smiley_selected = '';

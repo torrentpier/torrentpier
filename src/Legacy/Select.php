@@ -32,7 +32,7 @@ class Select
         foreach ($bb_cfg['lang'] as $key => $data) {
             $selected = '';
             if ($key == $default_lang) {
-                $selected = ' selected="selected"';
+                $selected = ' selected';
             }
             $lang_select .= '<option value="' . $key . '"' . $selected . '>' . $data['name'] . '</option>';
             $x++;
@@ -59,7 +59,7 @@ class Select
         $tz_select = '<select name="' . $select_name . '">';
 
         foreach ($lang['TZ'] as $offset => $zone) {
-            $selected = ($offset == $default) ? ' selected="selected"' : '';
+            $selected = ($offset == $default) ? ' selected' : '';
             $tz_select .= '<option value="' . $offset . '"' . $selected . '>' . $zone . '</option>';
         }
         $tz_select .= '</select>';
@@ -84,7 +84,7 @@ class Select
         foreach ($bb_cfg['templates'] as $folder => $name) {
             $selected = '';
             if ($folder == $default_style) {
-                $selected = ' selected="selected"';
+                $selected = ' selected';
             }
             $templates_select .= '<option value="' . $folder . '"' . $selected . '>' . $name . '</option>';
             $x++;

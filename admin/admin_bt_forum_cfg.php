@@ -121,7 +121,7 @@ foreach ($db_fields_bool as $field_name => $field_def_val) {
 foreach ($rowset as $rid => $forum) {
     foreach ($db_fields_bool as $field_name => $field_def_val) {
         $forum_name = $forum['forum_name'];
-        $selected = $forum[$field_name] ? ' selected="selected"' : '';
+        $selected = $forum[$field_name] ? ' selected' : '';
 
         $forum_name = str_short($forum_name, $max_forum_name_len);
 

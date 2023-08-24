@@ -167,9 +167,9 @@ thead tr {
 
 <!-- BEGIN c -->
 <!-- BEGIN f -->
-<input type="hidden" name="auth[{c.f.FORUM_ID}][{AUTH_MOD_BF}]" value="{c.f.AUTH_MOD_VAL}" id="cb_{c.f.FORUM_ID}_{AUTH_MOD_BF}" <!-- IF c.f.DISABLED -->disabled="disabled"<!-- ENDIF --> />
+<input type="hidden" name="auth[{c.f.FORUM_ID}][{AUTH_MOD_BF}]" value="{c.f.AUTH_MOD_VAL}" id="cb_{c.f.FORUM_ID}_{AUTH_MOD_BF}" <!-- IF c.f.DISABLED -->disabled<!-- ENDIF --> />
 <!-- BEGIN acl -->
-<input type="hidden" name="auth[{c.f.acl.FORUM_ID}][{c.f.acl.ACL_TYPE_BF}]" value="{c.f.acl.ACL_VAL}" id="cb_{c.f.acl.FORUM_ID}_{c.f.acl.ACL_TYPE_BF}" <!-- IF c.f.acl.DISABLED -->disabled="disabled"<!-- ENDIF --> />
+<input type="hidden" name="auth[{c.f.acl.FORUM_ID}][{c.f.acl.ACL_TYPE_BF}]" value="{c.f.acl.ACL_VAL}" id="cb_{c.f.acl.FORUM_ID}_{c.f.acl.ACL_TYPE_BF}" <!-- IF c.f.acl.DISABLED -->disabled<!-- ENDIF --> />
 <!-- END acl -->
 <!-- END f -->
 <!-- END c -->

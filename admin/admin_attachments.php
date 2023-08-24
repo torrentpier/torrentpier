@@ -246,12 +246,12 @@ if ($mode == 'manage') {
         'MAX_FILESIZE_PM' => $new_attach['max_filesize_pm'],
         'MAX_ATTACHMENTS' => $new_attach['max_attachments'],
         'MAX_ATTACHMENTS_PM' => $new_attach['max_attachments_pm'],
-        'DISABLE_MOD_YES' => $new_attach['disable_mod'] !== '0' ? 'checked="checked"' : '',
-        'DISABLE_MOD_NO' => $new_attach['disable_mod'] === '0' ? 'checked="checked"' : '',
-        'PM_ATTACH_YES' => $new_attach['allow_pm_attach'] !== '0' ? 'checked="checked"' : '',
-        'PM_ATTACH_NO' => $new_attach['allow_pm_attach'] === '0' ? 'checked="checked"' : '',
-        'DISPLAY_ORDER_ASC' => $new_attach['display_order'] !== '0' ? 'checked="checked"' : '',
-        'DISPLAY_ORDER_DESC' => $new_attach['display_order'] === '0' ? 'checked="checked"' : '',
+        'DISABLE_MOD_YES' => $new_attach['disable_mod'] !== '0' ? 'checked' : '',
+        'DISABLE_MOD_NO' => $new_attach['disable_mod'] === '0' ? 'checked' : '',
+        'PM_ATTACH_YES' => $new_attach['allow_pm_attach'] !== '0' ? 'checked' : '',
+        'PM_ATTACH_NO' => $new_attach['allow_pm_attach'] === '0' ? 'checked' : '',
+        'DISPLAY_ORDER_ASC' => $new_attach['display_order'] !== '0' ? 'checked' : '',
+        'DISPLAY_ORDER_DESC' => $new_attach['display_order'] === '0' ? 'checked' : '',
     ));
 }
 
@@ -281,14 +281,14 @@ if ($mode == 'cats') {
         }
     }
 
-    $display_inlined_yes = ($new_attach['img_display_inlined'] != '0') ? 'checked="checked"' : '';
-    $display_inlined_no = ($new_attach['img_display_inlined'] == '0') ? 'checked="checked"' : '';
+    $display_inlined_yes = ($new_attach['img_display_inlined'] != '0') ? 'checked' : '';
+    $display_inlined_no = ($new_attach['img_display_inlined'] == '0') ? 'checked' : '';
 
-    $create_thumbnail_yes = ($new_attach['img_create_thumbnail'] != '0') ? 'checked="checked"' : '';
-    $create_thumbnail_no = ($new_attach['img_create_thumbnail'] == '0') ? 'checked="checked"' : '';
+    $create_thumbnail_yes = ($new_attach['img_create_thumbnail'] != '0') ? 'checked' : '';
+    $create_thumbnail_no = ($new_attach['img_create_thumbnail'] == '0') ? 'checked' : '';
 
-    $use_gd2_yes = ($new_attach['use_gd2'] != '0') ? 'checked="checked"' : '';
-    $use_gd2_no = ($new_attach['use_gd2'] == '0') ? 'checked="checked"' : '';
+    $use_gd2_yes = ($new_attach['use_gd2'] != '0') ? 'checked' : '';
+    $use_gd2_no = ($new_attach['use_gd2'] == '0') ? 'checked' : '';
 
     // Check Thumbnail Support
     if (!is_imagick() && !@extension_loaded('gd')) {

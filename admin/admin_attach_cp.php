@@ -118,7 +118,7 @@ $view_types = array('stats', 'search');
 $select_view = '<select name="view">';
 
 for ($i = 0, $iMax = count($view_types_text); $i < $iMax; $i++) {
-    $selected = ($view === $view_types[$i]) ? ' selected="selected"' : '';
+    $selected = ($view === $view_types[$i]) ? ' selected' : '';
     $select_view .= '<option value="' . $view_types[$i] . '"' . $selected . '>' . $view_types_text[$i] . '</option>';
 }
 $select_view .= '</select>';
@@ -127,7 +127,7 @@ if (count($mode_types_text) > 0) {
     $select_sort_mode = '<select name="mode">';
 
     for ($i = 0, $iMax = count($mode_types_text); $i < $iMax; $i++) {
-        $selected = ($mode === $mode_types[$i]) ? ' selected="selected"' : '';
+        $selected = ($mode === $mode_types[$i]) ? ' selected' : '';
         $select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';
     }
     $select_sort_mode .= '</select>';
@@ -135,9 +135,9 @@ if (count($mode_types_text) > 0) {
 
 $select_sort_order = '<select name="order">';
 if ($sort_order === 'ASC') {
-    $select_sort_order .= '<option value="ASC" selected="selected">' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC" selected>' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
 } else {
-    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected="selected">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected>' . $lang['DESC'] . '</option>';
 }
 $select_sort_order .= '</select>';
 
@@ -385,7 +385,7 @@ if ($view === 'attachments') {
 
             foreach ($delete_id_list as $jValue) {
                 if ($jValue == $attachments[$i]['attach_id']) {
-                    $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" checked="checked" />';
+                    $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" checked />';
                     break;
                 }
             }
