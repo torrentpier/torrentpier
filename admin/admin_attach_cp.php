@@ -427,7 +427,7 @@ if ($view === 'attachments') {
                         $post_title = str_short($post_title, 30);
                     }
 
-                    $view_topic = BB_ROOT . 'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
+                    $view_topic = BB_PATH . 'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
 
                     $post_titles[] = '<a href="' . $view_topic . '" class="gen" target="_blank">' . $post_title . '</a>';
                 } else {
@@ -453,7 +453,7 @@ if ($view === 'attachments') {
 
                 'S_DELETE_BOX' => $delete_box,
                 'S_HIDDEN' => $hidden_field,
-                'U_VIEW_ATTACHMENT' => BB_ROOT . DL_URL . $attachments[$i]['attach_id'],
+                'U_VIEW_ATTACHMENT' => BB_PATH . DL_URL . $attachments[$i]['attach_id'],
             ));
         }
     }

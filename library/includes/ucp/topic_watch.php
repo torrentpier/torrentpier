@@ -30,7 +30,7 @@ if (isset($_POST['topic_id_list'])) {
 
 $template->assign_vars(array(
     'PAGE_TITLE' => $lang['WATCHED_TOPICS'],
-    'S_FORM_ACTION' => BB_ROOT . 'profile.php?mode=watch',
+    'S_FORM_ACTION' => BB_PATH . 'profile.php?mode=watch',
 ));
 
 $sql = "SELECT COUNT(topic_id) as watch_count FROM " . BB_TOPICS_WATCH . " WHERE user_id = $user_id";
@@ -83,9 +83,9 @@ if ($watch_count > 0) {
 
         $template->assign_vars(array(
             'MATCHES' => (count($watch) == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], count($watch)) : sprintf($lang['FOUND_SEARCH_MATCHES'], count($watch)),
-            'PAGINATION' => generate_pagination(BB_ROOT . 'profile.php?mode=watch', $watch_count, $per_page, $start),
+            'PAGINATION' => generate_pagination(BB_PATH . 'profile.php?mode=watch', $watch_count, $per_page, $start),
             'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
-            'U_PER_PAGE' => BB_ROOT . 'profile.php?mode=watch',
+            'U_PER_PAGE' => BB_PATH . 'profile.php?mode=watch',
             'PER_PAGE' => $per_page,
         ));
     }

@@ -394,7 +394,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     if ($mode == 'user') {
         $template->assign_vars(array(
             'TPL_SELECT_USER' => true,
-            'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
+            'U_SEARCH_USER' => BB_PATH . 'search.php?mode=searchuser',
         ));
     } else {
         $template->assign_vars(array(

@@ -21,8 +21,8 @@ $jobs = isset($_POST['select']) ? implode(',', $_POST['select']) : '';
 $cron_action = $_POST['cron_action'] ?? '';
 
 if ($mode == 'run' && !$job_id) {
-    define('BB_ROOT', './../');
-    require BB_ROOT . 'common.php';
+    define('BB_PATH', './../');
+    require BB_PATH . 'common.php';
     $user->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {

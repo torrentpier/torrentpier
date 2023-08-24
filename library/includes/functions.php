@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
+if (!defined('BB_PATH')) {
     die(basename(__FILE__));
 }
 
@@ -874,7 +874,7 @@ function get_attachments_dir($cfg = null)
         return $cfg['upload_dir'];
     }
 
-    return BB_ROOT . $cfg['upload_dir'];
+    return BB_PATH . $cfg['upload_dir'];
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)
@@ -1326,7 +1326,7 @@ function bb_die($msg_text)
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
         if (empty($template)) {
-            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
+            $template = new TorrentPier\Legacy\Template(BB_PATH . "templates/{$bb_cfg['tpl_name']}");
         }
         if (empty($theme)) {
             $theme = setup_style();

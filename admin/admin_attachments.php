@@ -190,7 +190,7 @@ if ($check_upload) {
     if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
         $upload_dir = $attach_config['upload_dir'];
     } else {
-        $upload_dir = BB_ROOT . $attach_config['upload_dir'];
+        $upload_dir = BB_PATH . $attach_config['upload_dir'];
     }
 
     $error = false;
@@ -338,7 +338,7 @@ if ($check_image_cat) {
     if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
         $upload_dir = $attach_config['upload_dir'];
     } else {
-        $upload_dir = BB_ROOT . $attach_config['upload_dir'];
+        $upload_dir = BB_PATH . $attach_config['upload_dir'];
     }
 
     $upload_dir = $upload_dir . '/' . THUMB_DIR;

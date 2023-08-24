@@ -61,7 +61,7 @@ class File extends Common
         $cache_data = ['expire' => $expire, 'value' => $value];
 
         $filecache = "<?php\n";
-        $filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
+        $filecache .= "if (!defined('BB_PATH')) die(basename(__FILE__));\n";
         $filecache .= '$filecache = ' . var_export($cache_data, true) . ";\n";
         $filecache .= '?>';
 

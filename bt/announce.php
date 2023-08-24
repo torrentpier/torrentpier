@@ -8,7 +8,7 @@
  */
 
 define('IN_TRACKER', true);
-define('BB_ROOT', './../');
+define('BB_PATH', './../');
 require dirname(__DIR__) . '/common.php';
 
 global $bb_cfg;

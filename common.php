@@ -31,8 +31,8 @@ if (empty($_SERVER['SERVER_ADDR'])) {
     $_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR');
 }
 
-if (!defined('BB_ROOT')) {
-    define('BB_ROOT', './');
+if (!defined('BB_PATH')) {
+    define('BB_PATH', './');
 }
 if (!defined('BB_SCRIPT')) {
     define('BB_SCRIPT', null);

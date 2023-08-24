@@ -38,7 +38,7 @@ class File extends Common
         $filename = $this->dir . clean_filename($this->prefix . $title) . '.php';
 
         $filecache = "<?php\n";
-        $filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
+        $filecache .= "if (!defined('BB_PATH')) die(basename(__FILE__));\n";
         $filecache .= '$filecache = ' . var_export($var, true) . ";\n";
         $filecache .= '?>';
 

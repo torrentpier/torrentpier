@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_ROOT', './../');
+define('BB_PATH', './../');
 define('IN_ADMIN', true);
 
 require dirname(__DIR__) . '/common.php';

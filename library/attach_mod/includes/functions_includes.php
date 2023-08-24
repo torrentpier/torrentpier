@@ -34,7 +34,7 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
     if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
         $upload_dir = $attach_config['upload_dir'];
     } else {
-        $upload_dir = BB_ROOT . $attach_config['upload_dir'];
+        $upload_dir = BB_PATH . $attach_config['upload_dir'];
     }
 
     include ATTACH_DIR . '/includes/functions_selects.php';

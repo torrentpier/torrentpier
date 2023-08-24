@@ -8,6 +8,6 @@
  */
 
 define('START_CRON', true);
-define('BB_ROOT', __DIR__ . '/');
+define('BB_PATH', __DIR__ . '/');
 
 require __DIR__ . '/common.php';

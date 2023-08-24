@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
+if (!defined('BB_PATH')) {
     die(basename(__FILE__));
 }
 

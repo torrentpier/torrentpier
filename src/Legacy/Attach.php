@@ -695,7 +695,7 @@ class Attach
                 if (@$this->attachment_id_list[$i] == 0) {
                     $download_link = $upload_dir . '/' . basename($this->attachment_list[$i]);
                 } else {
-                    $download_link = BB_ROOT . DL_URL . $this->attachment_id_list[$i];
+                    $download_link = BB_PATH . DL_URL . $this->attachment_id_list[$i];
                 }
 
                 $template->assign_block_vars('attach_row', [

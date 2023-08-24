@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
+if (!defined('BB_PATH')) {
     die(basename(__FILE__));
 }
 if (defined('PAGE_HEADER_SENT')) {
@@ -22,9 +22,9 @@ $logged_in = (int)!empty($userdata['session_logged_in']);
 
 // Generate logged in/logged out status
 if ($logged_in) {
-    $u_login_logout = BB_ROOT . LOGIN_URL . "?logout=1";
+    $u_login_logout = BB_PATH . LOGIN_URL . "?logout=1";
 } else {
-    $u_login_logout = BB_ROOT . LOGIN_URL;
+    $u_login_logout = BB_PATH . LOGIN_URL;
 }
 
 // Online userlist
@@ -125,7 +125,7 @@ $template->assign_vars(array(
     'NEED_GEN_PASSKEY' => (!IS_GUEST && !\TorrentPier\Legacy\Torrent::getPasskey($userdata['user_id'])),
 
     'SITENAME' => $bb_cfg['sitename'],
-    'U_INDEX' => BB_ROOT . "index.php",
+    'U_INDEX' => BB_PATH . "index.php",
     'T_INDEX' => sprintf($lang['FORUM_INDEX'], $bb_cfg['sitename']),
 
     'IS_GUEST' => IS_GUEST,
@@ -180,18 +180,18 @@ $template->assign_vars(array(
 
     // Common urls
     'AVATARS_URL' => 'data/avatars',
-    'CAT_URL' => BB_ROOT . CAT_URL,
-    'DOWNLOAD_URL' => BB_ROOT . DL_URL,
-    'FORUM_URL' => BB_ROOT . FORUM_URL,
-    'GROUP_URL' => BB_ROOT . GROUP_URL,
+    'CAT_URL' => BB_PATH . CAT_URL,
+    'DOWNLOAD_URL' => BB_PATH . DL_URL,
+    'FORUM_URL' => BB_PATH . FORUM_URL,
+    'GROUP_URL' => BB_PATH . GROUP_URL,
     'LOGIN_URL' => $bb_cfg['login_url'],
     'NEWEST_URL' => '&amp;view=newest#newest',
     'PM_URL' => $bb_cfg['pm_url'],
-    'POST_URL' => BB_ROOT . POST_URL,
+    'POST_URL' => BB_PATH . POST_URL,
     'POSTING_URL' => $bb_cfg['posting_url'],
-    'PROFILE_URL' => BB_ROOT . PROFILE_URL,
-    'BONUS_URL' => BB_ROOT . BONUS_URL,
-    'TOPIC_URL' => BB_ROOT . TOPIC_URL,
+    'PROFILE_URL' => BB_PATH . PROFILE_URL,
+    'BONUS_URL' => BB_PATH . BONUS_URL,
+    'TOPIC_URL' => BB_PATH . TOPIC_URL,
 
     'AJAX_HTML_DIR' => AJAX_HTML_DIR,
 

@@ -7,10 +7,10 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_ROOT', './../../');
+define('BB_PATH', './../../');
 define('IN_ADMIN', true);
 
-require BB_ROOT . 'common.php';
+require BB_PATH . 'common.php';
 
 $user->session_start();
 

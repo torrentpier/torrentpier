@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
+if (!defined('BB_PATH')) {
     die(basename(__FILE__));
 }
 
@@ -55,7 +55,7 @@ $bb_cfg['db_alias'] = [
 // Cache
 $bb_cfg['cache'] = [
     'pconnect' => true,
-    'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
+    'db_dir' => realpath(BB_PATH) . '/internal_data/cache/filecache/',
     'prefix' => 'tp_',
     'memcache' => [
         'host' => '127.0.0.1',

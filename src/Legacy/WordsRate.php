@@ -25,7 +25,7 @@ class WordsRate
     public function __construct()
     {
         // слова начинающиеся на..
-        $del_list = file_get_contents(BB_ROOT . '/library/words_rate_del_list.txt');
+        $del_list = file_get_contents(BB_PATH . '/library/words_rate_del_list.txt');
         $del_list = str_compact($del_list);
         $del_list = str_replace(' ', '|', preg_quote($del_list, '/'));
         $del_exp = '/\b(' . $del_list . ')[\w\-]*/i';

@@ -267,22 +267,22 @@ if ($log_rowset) {
             'USER_IP' => \TorrentPier\Helpers\IPHelper::isValid($row['log_user_ip']) ? \TorrentPier\Helpers\IPHelper::long2ip($row['log_user_ip']) : '127.0.0.1',
 
             'FORUM_ID' => $row['log_forum_id'],
-            'FORUM_HREF' => BB_ROOT . FORUM_URL . $row['log_forum_id'],
+            'FORUM_HREF' => BB_PATH . FORUM_URL . $row['log_forum_id'],
             'FORUM_HREF_S' => url_arg($url, $forum_key, $row['log_forum_id']),
             'FORUM_NAME' => htmlCHR($forum_name),
 
             'FORUM_ID_NEW' => $row['log_forum_id_new'],
-            'FORUM_HREF_NEW' => BB_ROOT . FORUM_URL . $row['log_forum_id_new'],
+            'FORUM_HREF_NEW' => BB_PATH . FORUM_URL . $row['log_forum_id_new'],
             'FORUM_HREF_NEW_S' => url_arg($url, $forum_key, $row['log_forum_id_new']),
             'FORUM_NAME_NEW' => htmlCHR($forum_name_new),
 
             'TOPIC_ID' => $row['log_topic_id'],
-            'TOPIC_HREF' => (!$topic_deleted) ? BB_ROOT . TOPIC_URL . $row['log_topic_id'] : '',
+            'TOPIC_HREF' => (!$topic_deleted) ? BB_PATH . TOPIC_URL . $row['log_topic_id'] : '',
             'TOPIC_HREF_S' => url_arg($url, $topic_key, $row['log_topic_id']),
             'TOPIC_TITLE' => $topic_title,
 
             'TOPIC_ID_NEW' => $row['log_topic_id_new'],
-            'TOPIC_HREF_NEW' => BB_ROOT . TOPIC_URL . $row['log_topic_id_new'],
+            'TOPIC_HREF_NEW' => BB_PATH . TOPIC_URL . $row['log_topic_id_new'],
             'TOPIC_HREF_NEW_S' => url_arg($url, $topic_key, $row['log_topic_id_new']),
             'TOPIC_TITLE_NEW' => $topic_title_new,
 

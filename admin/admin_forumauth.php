@@ -209,7 +209,7 @@ if (empty($forum_id)) {
     $template->assign_vars(array(
         'TPL_EDIT_FORUM_AUTH' => true,
         'FORUM_NAME' => htmlCHR($forum_name),
-        'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,
+        'U_VIEWFORUM' => BB_PATH . FORUM_URL . $forum_id,
         'U_SWITCH_MODE' => $u_switch_mode,
         'S_FORUMAUTH_ACTION' => 'admin_forumauth.php',
         'S_COLUMN_SPAN' => $s_column_span,

@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('BB_ROOT')) {
+if (!defined('BB_PATH')) {
     die(basename(__FILE__));
 }
 
@@ -239,7 +239,7 @@ function display_attachments($post_id)
             if ($image) {
                 // Images
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
-                    $img_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'];
+                    $img_source = BB_PATH . DL_URL . $attachments['_' . $post_id][$i]['attach_id'];
                     $download_link = true;
                 } else {
                     $img_source = $filename;
@@ -269,7 +269,7 @@ function display_attachments($post_id)
             if ($thumbnail) {
                 // Images, but display Thumbnail
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
-                    $thumb_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
+                    $thumb_source = BB_PATH . DL_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
                 } else {
                     $thumb_source = $thumbnail_filename;
                 }
@@ -277,7 +277,7 @@ function display_attachments($post_id)
                 $template->assign_block_vars('postrow.attach.cat_thumb_images', array(
                     'DOWNLOAD_NAME' => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
-                    'IMG_SRC' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
+                    'IMG_SRC' => BB_PATH . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'IMG_THUMB_SRC' => $thumb_source,
                     'FILESIZE' => $filesize,
                     'COMMENT' => $comment,
@@ -292,7 +292,7 @@ function display_attachments($post_id)
 
                 // display attachment
                 $template->assign_block_vars('postrow.attach.attachrow', array(
-                    'U_DOWNLOAD_LINK' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
+                    'U_DOWNLOAD_LINK' => BB_PATH . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'DOWNLOAD_NAME' => $display_name,
                     'FILESIZE' => $filesize,

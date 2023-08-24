@@ -46,7 +46,7 @@ var hidePostImg = false;
 <!-- ENDIF / INCLUDE_BBCODE_JS -->
 
 <script type="text/javascript">
-var BB_ROOT      = "{#BB_ROOT#}";
+var BB_PATH      = "{#BB_PATH#}";
 var cookieDomain = "{$bb_cfg['cookie_domain']}";
 var cookiePath   = "{$bb_cfg['script_path']}";
 var cookiePrefix = "{$bb_cfg['cookie_prefix']}";
