@@ -58,13 +58,13 @@ function swap_values()
 	<td><h4>{L_STARTING_POST_ID}</h4><h6>{L_STARTING_POST_ID_EXPLAIN}</h6></td>
 	<td>
 		<!-- BEGIN start_text_input -->
-		<input class="post" type="text" name="start_t" value="0" size="10" disabled="disabled" />
+		<input class="post" type="text" name="start_t" value="0" size="10" disabled />
 		<input type="hidden" name="start" value="0" />
 		<!-- END start_text_input -->
 		<!-- BEGIN start_select_input -->
 		<select name="start" onchange="update_clear_search(this)">
 			<option value="0">0 ({L_START_OPTION_BEGINNING})</option>
-			<option value="{NEXT_START_POST_ID}" selected="selected">{NEXT_START_POST_ID} ({L_START_OPTION_CONTINUE})</option>
+			<option value="{NEXT_START_POST_ID}" selected>{NEXT_START_POST_ID} ({L_START_OPTION_CONTINUE})</option>
 		</select>
 		<!-- END start_select_input -->
 	</td>
@@ -72,7 +72,7 @@ function swap_values()
 <tr>
 	<td><h4>{L_CLEAR_SEARCH_TABLES}</h4><h6>{L_CLEAR_SEARCH_TABLES_EXPLAIN}</h6></td>
 	<td class="nowrap">
-		<input type="radio" name="clear_search" value="0" {CLEAR_SEARCH_DISABLED} checked="checked" />{L_CLEAR_SEARCH_NO}&nbsp;
+		<input type="radio" name="clear_search" value="0" {CLEAR_SEARCH_DISABLED} checked />{L_CLEAR_SEARCH_NO}&nbsp;
 		<input type="radio" name="clear_search" value="1" {CLEAR_SEARCH_DISABLED} />{L_CLEAR_SEARCH_DELETE}&nbsp;
 		<input type="radio" name="clear_search" value="2" {CLEAR_SEARCH_DISABLED} />{L_CLEAR_SEARCH_TRUNCATE}&nbsp;
 	</td>

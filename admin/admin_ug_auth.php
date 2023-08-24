@@ -266,13 +266,13 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $s_user_type = ($this_userdata['user_level'] == ADMIN) ? '
 		<select name="userlevel">
-			<option value="admin" selected="selected">' . $lang['AUTH_ADMIN'] . '</option>
+			<option value="admin" selected>' . $lang['AUTH_ADMIN'] . '</option>
 			<option value="user">' . $lang['AUTH_USER'] . '</option>
 		</select>
 	' : '
 		<select name="userlevel">
 			<option value="admin">' . $lang['AUTH_ADMIN'] . '</option>
-			<option value="user" selected="selected">' . $lang['AUTH_USER'] . '</option>
+			<option value="user" selected>' . $lang['AUTH_USER'] . '</option>
 		</select>
 	';
 

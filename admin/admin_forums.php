@@ -117,7 +117,7 @@ if ($mode) {
             $catlist = get_list('category', $cat_id, true);
             $forumlocked = $forumunlocked = '';
 
-            $forumstatus == FORUM_LOCKED ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
+            $forumstatus == FORUM_LOCKED ? $forumlocked = 'selected' : $forumunlocked = 'selected';
 
             $statuslist = '<option value="' . FORUM_UNLOCKED . '" ' . $forumunlocked . '>' . $lang['STATUS_UNLOCKED'] . '</option>\n';
             $statuslist .= '<option value="' . FORUM_LOCKED . '" ' . $forumlocked . '>' . $lang['STATUS_LOCKED'] . '</option>\n';
@@ -854,7 +854,7 @@ function get_list($mode, $id, $select)
     while ($row = DB()->sql_fetchrow($result)) {
         $s = '';
         if ($row[$idfield] == $id) {
-            $s = ' selected="selected"';
+            $s = ' selected';
         }
         $catlist .= '<option value="' . $row[$idfield] . '"' . $s . '>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
     }

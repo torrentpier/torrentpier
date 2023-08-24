@@ -365,7 +365,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         // check our last status
         if ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_PROCESSED) {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_STOPPED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
-            $clear_search_disabled = 'disabled="disabled"';
+            $clear_search_disabled = 'disabled';
 
             $template->assign_block_vars('start_select_input', array());
         } elseif ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_ABORTED) {
@@ -374,7 +374,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             if (TIMENOW - $last_session_data['end_time'] < $last_session_data['last_cycle_time']) {
                 $last_saved_processing .= '<br />' . $lang['INFO_PROCESSING_ABORTED_SOON'];
             }
-            $clear_search_disabled = 'disabled="disabled"';
+            $clear_search_disabled = 'disabled';
 
             $template->assign_block_vars('start_select_input', array());
         } else {
@@ -382,7 +382,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
             if ($last_session_data['end_post_id'] < $max_post_id) {
                 $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
-                $clear_search_disabled = 'disabled="disabled"';
+                $clear_search_disabled = 'disabled';
 
                 $template->assign_block_vars('start_select_input', array());
             } else {

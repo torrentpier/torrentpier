@@ -11,7 +11,7 @@ ajax.callback.posts = function(data) {
 </script>
 <div class="mrg_4" style="padding-left:2px;">
 <select name="fontFace">
-	<option style="font-family: Verdana" value="-1" selected="selected">{L_QR_FONT_SEL}:</option>
+	<option style="font-family: Verdana" value="-1" selected>{L_QR_FONT_SEL}:</option>
 	<option style="font-family: monospace" value="monospace">&nbsp;Monospace</option>
 	<option style="font-family: serif" value="serif">&nbsp;Serif</option>
 	<option style="font-family: sans-serif" value="sans-serif">&nbsp;Sans Serif</option>
@@ -29,7 +29,7 @@ ajax.callback.posts = function(data) {
 </select>
 
 <select name="codeColor" class="text_color">
-	<option style="color: black; background: #fff;" value="black" selected="selected">{L_QR_COLOR_SEL}:</option>
+	<option style="color: black; background: #fff;" value="black" selected>{L_QR_COLOR_SEL}:</option>
 	<option style="color: darkred;" value="darkred">&nbsp;{L_COLOR_DARK_RED}</option>
 	<option style="color: brown;" value="brown">&nbsp;{L_COLOR_BROWN}</option>
 	<option style="color: #996600;" value="#996600">&nbsp;{L_COLOR_ORANGE}</option>
@@ -46,11 +46,11 @@ ajax.callback.posts = function(data) {
 </select>
 
 <select name="codeSize" class="text_size">
-	<option value="12" selected="selected">{L_QR_SIZE_SEL}:</option>
+	<option value="12" selected>{L_QR_SIZE_SEL}:</option>
 	<option value="9" class="em">{L_FONT_SMALL}</option>
 	<option value="10">&nbsp;size=10</option>
 	<option value="11">&nbsp;size=11</option>
-	<option value="12" class="em" disabled="disabled">{L_FONT_NORMAL}</option>
+	<option value="12" class="em" disabled>{L_FONT_NORMAL}</option>
 	<option value="14">&nbsp;size=14</option>
 	<option value="16">&nbsp;size=16</option>
 	<option value="18" class="em">{L_FONT_LARGE}</option>
@@ -62,7 +62,7 @@ ajax.callback.posts = function(data) {
 </select>
 &nbsp;
 <select name="codeAlign" class="text_size">
-	<option value="left" selected="selected">{L_ALIGN}</option>
+	<option value="left" selected>{L_ALIGN}</option>
 	<option value="left">&nbsp;{L_LEFT}</option>
 	<option value="right">&nbsp;{L_RIGHT}</option>
 	<option value="center">&nbsp;{L_CENTER}</option>

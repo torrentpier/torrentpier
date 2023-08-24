@@ -1434,7 +1434,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     // build list
     if ($action == 'list') {
         foreach ($listrow['lang_key'] as $i => $iValue) {
-            $selected = ($i == $selected_row) ? ' selected="selected"' : '';
+            $selected = ($i == $selected_row) ? ' selected' : '';
             $l_value = $lang[$listrow['lang_key'][$i]] ?? $iValue;
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
         }

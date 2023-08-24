@@ -31,7 +31,7 @@
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_JOINED}</b>&nbsp;<select name="date_type" class="post"><option value="before" selected="selected">{L_BEFORE}</option><option value="after">{L_AFTER}</option></select>&nbsp;<input class="post" type="text" name="date_year" value="{YEAR}" size="4" maxlength="4" />/<input class="post" type="text" name="date_month" value="{MONTH}" size="2" maxlength="2" />/<input class="post" type="text" name="date_day" value="{DAY}" maxlength="2" size="2" />&nbsp;<input type="submit" class="post2" name="search_joindate" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_JOINED_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_JOINED}</b>&nbsp;<select name="date_type" class="post"><option value="before" selected>{L_BEFORE}</option><option value="after">{L_AFTER}</option></select>&nbsp;<input class="post" type="text" name="date_year" value="{YEAR}" size="4" maxlength="4" />/<input class="post" type="text" name="date_month" value="{MONTH}" size="2" maxlength="2" />/<input class="post" type="text" name="date_day" value="{DAY}" maxlength="2" size="2" />&nbsp;<input type="submit" class="post2" name="search_joindate" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_JOINED_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -53,13 +53,13 @@
 	</tr>
 	<!-- END ranks_exist -->
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_POSTCOUNT}</b>&nbsp;<select name="postcount_type"><option value="equals" selected="selected">{L_EQUALS}</option><option value="lesser">{L_LESS_THAN}</option><option value="greater">{L_GREATER_THAN}</option></select>&nbsp;<input class="post" type="text" name="postcount_value" maxlength="25" size="5" />&nbsp;<input type="submit" class="post2" name="search_postcount" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_POSTCOUNT_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_POSTCOUNT}</b>&nbsp;<select name="postcount_type"><option value="equals" selected>{L_EQUALS}</option><option value="lesser">{L_LESS_THAN}</option><option value="greater">{L_GREATER_THAN}</option></select>&nbsp;<input class="post" type="text" name="postcount_value" maxlength="25" size="5" />&nbsp;<input type="submit" class="post2" name="search_postcount" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_POSTCOUNT_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="icq" selected="selected">{L_ICQ}</option><option value="skype">{L_SKYPE}</option><option value="twitter">{L_TWITTER}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_USERFIELD_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="icq" selected>{L_ICQ}</option><option value="skype">{L_SKYPE}</option><option value="twitter">{L_TWITTER}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_USERFIELD_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -91,7 +91,7 @@
 	</tr>
 	<!-- END forums_exist -->
 	<tr>
-		<td class="row1"><span class="gen"><select name="misc" class="post"><option value="admins" selected="selected">{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option></select>&nbsp;<input type="submit" class="post2" name="search_misc" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_MISC_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><select name="misc" class="post"><option value="admins" selected>{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option></select>&nbsp;<input type="submit" class="post2" name="search_misc" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_MISC_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>

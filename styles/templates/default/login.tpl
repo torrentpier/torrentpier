@@ -20,7 +20,7 @@
                     <table class="borderless bCenter">
                         <tr>
                             <td width="35%" align="right">{L_USERNAME}:</td>
-                            <td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{LOGIN_USERNAME}" tabindex="101"<!-- IF ADMIN_LOGIN --> readonly="readonly" style="color: gray"<!-- ENDIF --> />
+                            <td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{LOGIN_USERNAME}" tabindex="101"<!-- IF ADMIN_LOGIN --> readonly style="color: gray"<!-- ENDIF --> />
                             </td>
                         </tr>
                         <tr>
@@ -34,7 +34,7 @@
                         </tr>
                         <!-- ENDIF -->
                         <tr>
-                            <td colspan="2" class="tCenter nowrap">{L_AUTO_LOGIN}: <input type="checkbox" name="autologin" tabindex="103"<!-- IF ADMIN_LOGIN || AUTOLOGIN_DISABLED --> disabled="disabled"<!-- ELSE --> checked="checked"<!-- ENDIF --> />
+                            <td colspan="2" class="tCenter nowrap">{L_AUTO_LOGIN}: <input type="checkbox" name="autologin" tabindex="103"<!-- IF ADMIN_LOGIN || AUTOLOGIN_DISABLED --> disabled<!-- ELSE --> checked<!-- ENDIF --> />
                             </td>
                         </tr>
                         <tr>

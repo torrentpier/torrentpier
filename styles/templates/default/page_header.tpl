@@ -324,7 +324,7 @@ $(document).ready(function() {
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
-					<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
+					<option value="tracker.php#results" selected> {L_TRACKER_S} </option>
 					<option value="search.php"> {L_FORUM_S} </option>
 					<option value="tracker.php" class="hash"> {L_HASH_S} </option>
 				</select>
@@ -360,7 +360,7 @@ $(document).ready(function() {
 					<form action="{S_LOGIN_ACTION}" method="post">
 						{L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
 						{L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
-						<label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked="checked" />{L_REMEMBER}</label>&nbsp;
+						<label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked />{L_REMEMBER}</label>&nbsp;
 						<input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
 					</form> &#0183;
 				<a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>

@@ -83,7 +83,7 @@
         </tr>
         <tr>
             <td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br/><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
-            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}"<!-- IF EDIT_PROFILE --><!-- IF !$bb_cfg['emailer']['enabled'] --> readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> /><span id="check_email"></span></td>
+            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}"<!-- IF EDIT_PROFILE --><!-- IF !$bb_cfg['emailer']['enabled'] --> readonly style="color: gray;"<!-- ENDIF --><!-- ENDIF --> /><span id="check_email"></span></td>
         </tr>
         <!-- IF EDIT_PROFILE and not ADM_EDIT -->
         <tr>
@@ -213,31 +213,31 @@
         <tr>
             <td class="prof-title">{L_PUBLIC_VIEW_EMAIL}:</td>
             <td>
-                <label><input type="radio" name="user_viewemail" value="1" <!-- IF USER_VIEWEMAIL -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_viewemail" value="0" <!-- IF not USER_VIEWEMAIL -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_viewemail" value="1" <!-- IF USER_VIEWEMAIL -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_viewemail" value="0" <!-- IF not USER_VIEWEMAIL -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <!-- ENDIF -->
         <tr>
             <td class="prof-title">{L_HIDE_USER}:</td>
             <td>
-                <label><input type="radio" name="user_viewonline" value="1" <!-- IF USER_VIEWONLINE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_viewonline" value="0" <!-- IF not USER_VIEWONLINE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_viewonline" value="1" <!-- IF USER_VIEWONLINE -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_viewonline" value="0" <!-- IF not USER_VIEWONLINE -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <tr>
             <td class="prof-title">{L_ALWAYS_NOTIFY}:<br/><h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
             <td>
-                <label><input type="radio" name="user_notify" value="1" <!-- IF USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_notify" value="1" <!-- IF USER_NOTIFY -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <!-- IF $bb_cfg['pm_notify_enabled'] -->
         <tr>
             <td class="prof-title">{L_NOTIFY_ON_PRIVMSG}:</td>
             <td>
-                <label><input type="radio" name="user_notify_pm" value="1" <!-- IF USER_NOTIFY_PM -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_notify_pm" value="0" <!-- IF not USER_NOTIFY_PM -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_notify_pm" value="1" <!-- IF USER_NOTIFY_PM -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_notify_pm" value="0" <!-- IF not USER_NOTIFY_PM -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <!-- ENDIF -->
@@ -253,29 +253,29 @@
         <tr>
             <td class="prof-title">{L_HIDE_PORN_FORUMS}:</td>
             <td>
-                <label><input type="radio" name="user_porn_forums" value="1" <!-- IF USER_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_porn_forums" value="0" <!-- IF not USER_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_porn_forums" value="1" <!-- IF USER_PORN_FORUMS -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_porn_forums" value="0" <!-- IF not USER_PORN_FORUMS -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <tr>
             <td class="prof-title">{L_ADD_RETRACKER}:</td>
             <td>
-                <label><input type="radio" name="user_retracker" value="1" <!-- IF USER_RETRACKER -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_retracker" value="0" <!-- IF not USER_RETRACKER -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_retracker" value="1" <!-- IF USER_RETRACKER -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_retracker" value="0" <!-- IF not USER_RETRACKER -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <tr>
             <td class="prof-title">{L_HIDE_DOWNLOADS}:</td>
             <td>
-                <label><input type="radio" name="user_dls" value="1" <!-- IF USER_DLS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_dls" value="0" <!-- IF not USER_DLS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_dls" value="1" <!-- IF USER_DLS -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_dls" value="0" <!-- IF not USER_DLS -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <tr>
             <td class="prof-title">{L_CALLSEED_EXPLAIN}:</td>
             <td>
-                <label><input type="radio" name="user_callseed" value="1" <!-- IF USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-                <label><input type="radio" name="user_callseed" value="0" <!-- IF not USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+                <label><input type="radio" name="user_callseed" value="1" <!-- IF USER_CALLSEED -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_callseed" value="0" <!-- IF not USER_CALLSEED -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
         <tr>
@@ -334,7 +334,7 @@
                     <!-- IF EDIT_PROFILE -->
                     <input type="reset" value="{L_RESET}" name="reset" class="lite"/>&nbsp;&nbsp;
                     <!-- ENDIF -->
-                    <input type="submit" <!-- IF SHOW_REG_AGREEMENT -->id="agreement" disabled="disabled"<!-- ENDIF --> name="submit" value="{L_SUBMIT}" class="main"/>
+                    <input type="submit" <!-- IF SHOW_REG_AGREEMENT -->id="agreement" disabled<!-- ENDIF --> name="submit" value="{L_SUBMIT}" class="main"/>
                 </div>
             </td>
         </tr>
