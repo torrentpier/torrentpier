@@ -57,8 +57,7 @@
     <!-- IF POSTING_TOPIC_ID --><em>&raquo;</em> <a class="normal" href="{TOPIC_URL}{POSTING_TOPIC_ID}">{POSTING_TOPIC_TITLE}</a><!-- ENDIF -->
 </p>
 
-<form action="{S_POST_ACTION}" method="post" name="post"
-      onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {S_FORM_ENCTYPE}>
+<form action="{S_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {S_FORM_ENCTYPE}>
     {S_HIDDEN_FORM_FIELDS}
     {ADD_ATTACH_HIDDEN_FIELDS}
     {POSTED_ATTACHMENTS_HIDDEN_FIELDS}
@@ -123,7 +122,7 @@
                     <table class="borderless inline">
                         <!-- IF SHOW_UPDATE_POST_TIME -->
                         <tr>
-                            <td><input type="checkbox" id="update_post_time" name="update_post_time" <!-- IF UPDATE_POST_TIME_CHECKED -->checked="checked"<!-- ENDIF --> /></td>
+                            <td><input type="checkbox" id="update_post_time" name="update_post_time" <!-- IF UPDATE_POST_TIME_CHECKED -->checked<!-- ENDIF --> /></td>
                             <td><label for="update_post_time">{L_UPDATE_POST_TIME}</label></td>
                         </tr>
                         <!-- ENDIF -->
@@ -159,7 +158,6 @@
         <!-- END switch_type_toggle -->
         <!-- IF ATTACHBOX --><!-- INCLUDE posting_attach.tpl --><!-- ENDIF -->
     </table>
-
 </form>
 
 <!-- IF TPL_TOPIC_REVIEW -->
@@ -189,7 +187,6 @@
         </td>
     </tr>
     <!-- END review -->
-
 </table>
 
 <div class="spacer_12"></div>
