@@ -42,7 +42,35 @@ class TorrentFileList
     public function get_filelist()
     {
         global $html;
+		
+		if (($this->tor_decoded['info']['meta version'] ?? null) == 2 || is_array($this->tor_decoded['info']['file tree'] ?? null)) {
+		// v2
 
+		function fileTree($array) {
+			$folders = [];
+			$rootFiles = [];
+
+			foreach ($array as $key => $value) {
+					if (is_array($value) && !isset($value[''])) {
+						$nestedHtml = fileTree($value);
+						$folders[] = "<li><span class=\"b\">$key</span><ul>$nestedHtml</ul></li>";
+					}
+					else {
+						$length = $value['']['length'];
+						$root = bin2hex($value['']['pieces root'] ?? '');
+						$rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:green;'>$root</h></span></li>";
+					}
+				}
+
+				$allItems = array_merge($folders, $rootFiles);
+
+				return '<ul class="tree-root">' . implode('', $allItems) . '</ul>';
+			}
+
+			return fileTree($this->tor_decoded['info']['file tree']);
+
+		} else {
+		//v1
         $this->build_filelist_array();
 
         if ($this->multiple) {
@@ -55,6 +83,7 @@ class TorrentFileList
         }
 
         return implode('', $this->files_ary['/']);
+		}
     }
 
     /**
@@ -133,11 +162,6 @@ class TorrentFileList
         global $bb_cfg, $images, $lang;
 
         $magnet_name = $magnet_ext = '';
-
-        if ($bb_cfg['magnet_links_enabled']) {
-            $magnet_name = '<a title="' . $lang['DC_MAGNET'] . '" href="dchub:magnet:?kt=' . $name . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet'] . '" width="10" height="10" border="0" /></a>';
-            $magnet_ext = '<a title="' . $lang['DC_MAGNET_EXT'] . '" href="dchub:magnet:?kt=.' . substr(strrchr($name, '.'), 1) . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet_ext'] . '" width="10" height="10" border="0" /></a>';
-        }
 
         return "$name <i>$length</i> $magnet_name $magnet_ext";
     }
