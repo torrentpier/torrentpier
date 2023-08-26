@@ -109,7 +109,7 @@ class TorrentFileList
                     continue;
                 }
                 // Exclude padding files
-                if ($f['attr'] === 'p') {
+                if (($f['attr'] ?? null) === 'p') {
                     continue;
                 }
                 array_deep($f['path'], 'clean_tor_dirname');
