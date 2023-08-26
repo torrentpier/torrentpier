@@ -42,7 +42,33 @@ class TorrentFileList
     public function get_filelist()
     {
         global $html;
+		
+		if (($this->tor_decoded['info']['meta version'] ?? null) == 2 && is_array($this->tor_decoded['info']['file tree'] ?? null)) {
+		// v2
+		function fileTree($array, $name = '') {
+			$folders = [];
+			$rootFiles = [];
 
+			foreach ($array as $key => $value) {
+					if (is_array($value) && !isset($value[''])) {
+						$nestedHtml = fileTree($value);
+						$folders[] = "<li><span class=\"b\">$key</span><ul>$nestedHtml</ul></li>";
+					}
+					else {
+						$length = $value['']['length'];
+						$root = bin2hex($value['']['pieces root'] ?? '');
+						$rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:green;'>$root</h></span></li>";
+					}
+				}
+
+				$allItems = array_merge($folders, $rootFiles);
+
+				return '<div class="tor-root-dir">' . $name . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
+			}
+
+			return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
+		} else {
+		// v1
         $this->build_filelist_array();
 
         if ($this->multiple) {
@@ -78,7 +104,7 @@ class TorrentFileList
                 if (isset($f['path.utf-8'])) {
                     $f['path'] =& $f['path.utf-8'];
                 }
-                if (!isset($f['path']) || !\is_array($f['path'])) {
+                if (!isset($f['path']) || ($f['attr'] ?? null) === 'p' || !\is_array($f['path'])) {
                     continue;
                 }
                 array_deep($f['path'], 'clean_tor_dirname');

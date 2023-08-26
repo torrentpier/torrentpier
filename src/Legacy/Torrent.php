@@ -366,7 +366,9 @@ class Torrent
             $totallen = (float)$info['length'];
         } elseif (isset($info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
-                $totallen += (float)$f['length'];
+				if (($f['attr'] ?? null) !== 'p') {
+					$totallen += (float)$f['length'];
+				}
             }
         } else {
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
