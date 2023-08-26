@@ -365,7 +365,7 @@ class Torrent
             self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0]);
         }
 
-        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
+        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash' LIMIT 1")) {
             $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
             bb_die($msg);
             set_die_append_msg($forum_id, $topic_id);
