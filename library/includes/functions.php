@@ -1764,9 +1764,15 @@ function decode_text_match($txt)
  *
  * @return string
  */
-function create_magnet($infohash, $auth_key): string
+
+function create_magnet($infohash, $infohash_v2, $auth_key): string
 {
     global $bb_cfg, $images;
+
+    $info_hash_v2 = '';
+    if (!empty($infohash_v2)) {
+        $info_hash_v2 = '&xt=urn:btmh:1220' . bin2hex($infohash_v2);
+    }
 
     // Only for registered users
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
@@ -1778,7 +1784,7 @@ function create_magnet($infohash, $auth_key): string
         return false;
     }
 
-    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . $info_hash_v2 . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)

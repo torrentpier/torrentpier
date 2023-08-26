@@ -51,8 +51,8 @@ class TorrentFileList
 
 			foreach ($array as $key => $value) {
 					if (is_array($value) && !isset($value[''])) {
-						$nestedHtml = fileTree($value);
-						$folders[] = "<li><span class=\"b\">$key</span><ul>$nestedHtml</ul></li>";
+						$html_v2 = fileTree($value);
+						$folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
 					}
 					else {
 						$length = $value['']['length'];
@@ -67,8 +67,10 @@ class TorrentFileList
 			}
 
 			return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
-		} else {
-		// v1
+
+			}
+			else {
+			// v1
 			$this->build_filelist_array();
 
 			if ($this->multiple) {

@@ -645,7 +645,7 @@ if ($allowed_forums) {
         $select = "
 			SELECT
 				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
-				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
+				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2
 		";
         $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
         $select .= (!$hide_forum) ? ", tor.forum_id" : '';
@@ -702,7 +702,7 @@ if ($allowed_forums) {
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], \TorrentPier\Legacy\Torrent::getPasskey($user_id));
+            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id));
             $compl = $tor['complete_count'];
             $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
             $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';

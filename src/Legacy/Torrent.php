@@ -345,9 +345,23 @@ class Torrent
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
-        $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
-        $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-        $info_hash_md5 = md5($info_hash);
+		$bt_v2 = false;
+		if (($info['meta version'] ?? null) == 2 && is_array($info['file tree'] ?? null)) {
+			$bt_v2 = true;
+		}
+
+        $info_hash = '';
+        $info_hash_sql = '';
+        if ($bt_v2) {
+          // v2
+          $info_hash = pack('H*', hash('sha256', \SandFox\Bencode\Bencode::encode($info)));
+          $info_hash_sql = rtrim(DB()->escape($info_hash_v2), ' ');
+        } else {
+          // v1
+          $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
+          $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+          $info_hash_md5 = md5($info_hash);
+        }
 
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {
@@ -376,8 +390,8 @@ class Torrent
 
         $size = sprintf('%.0f', (float)$totallen);
 
-        $columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status';
-        $values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
+        $columns = 'info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status, info_hash_v2';
+        $values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status, '$info_hash_v2_sql'";
 
         $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 
