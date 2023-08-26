@@ -352,12 +352,15 @@ class Torrent
         }
 
         // Getting info_hash v1
-        $info_hash = rtrim(DB()->escape(pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)))), ' ');
+        $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
+        $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
         $info_hash_md5 = md5($info_hash);
 
         // Getting info_hash v2
+        $info_hash_v2_sql = null;
         if ($bt_v2) {
-            $info_hash_v2 = rtrim(DB()->escape(pack('H*', hash('sha256', \SandFox\Bencode\Bencode::encode($info)))), ' ');
+            $info_hash_v2 = pack('H*', hash('sha256', \SandFox\Bencode\Bencode::encode($info)));
+            $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
         }
 
         // Ocelot
@@ -365,7 +368,7 @@ class Torrent
             self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0]);
         }
 
-        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash' LIMIT 1")) {
+        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
             $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
             bb_die($msg);
             set_die_append_msg($forum_id, $topic_id);
@@ -389,7 +392,7 @@ class Torrent
         $size = sprintf('%.0f', (float)$totallen);
 
         $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status';
-        $values = "'$info_hash', '$info_hash_v2', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
+        $values = "'$info_hash_sql', '$info_hash_v2_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
 
         $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 
