@@ -274,6 +274,7 @@ DROP TABLE IF EXISTS `bb_bt_torrents`;
 CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
 (
   `info_hash`        VARBINARY(20)         NOT NULL DEFAULT '',
+  `info_hash_v2`     VARBINARY(32)         NOT NULL DEFAULT '',
   `post_id`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `poster_id`        MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',

@@ -287,7 +287,7 @@ class Torrent
         $topic_id = $torrent['topic_id'];
         $forum_id = $torrent['forum_id'];
         $poster_id = $torrent['poster_id'];
-        $info_hash = null;
+        $info_hash = $info_hash_v2 = null;
 
         if ($torrent['extension'] !== TORRENT_EXT) {
             return self::torrent_error_exit($lang['NOT_TORRENT']);
@@ -345,22 +345,19 @@ class Torrent
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
-		$bt_v2 = false;
-		if (($info['meta version'] ?? null) == 2 && is_array($info['file tree'] ?? null)) {
-			$bt_v2 = true;
-		}
+        // Check if torrent contains info_hash v2
+        $bt_v2 = false;
+        if (($info['meta version'] ?? null) == 2 && is_array($info['file tree'] ?? null)) {
+            $bt_v2 = true;
+        }
 
-        $info_hash = '';
-        $info_hash_sql = '';
+        // Getting info_hash v1
+        $info_hash = rtrim(DB()->escape(pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)))), ' ');
+        $info_hash_md5 = md5($info_hash);
+
+        // Getting info_hash v2
         if ($bt_v2) {
-          // v2
-          $info_hash = pack('H*', hash('sha256', \SandFox\Bencode\Bencode::encode($info)));
-          $info_hash_sql = rtrim(DB()->escape($info_hash_v2), ' ');
-        } else {
-          // v1
-          $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
-          $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-          $info_hash_md5 = md5($info_hash);
+            $info_hash_v2 = rtrim(DB()->escape(pack('H*', hash('sha256', \SandFox\Bencode\Bencode::encode($info)))), ' ');
         }
 
         // Ocelot
@@ -380,9 +377,10 @@ class Torrent
             $totallen = (float)$info['length'];
         } elseif (isset($info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
-				if (($f['attr'] ?? null) !== 'p') {
-					$totallen += (float)$f['length'];
-				}
+                // Exclude padding files
+                if ($f['attr'] !== 'p') {
+                    $totallen += (float)$f['length'];
+                }
             }
         } else {
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
@@ -390,8 +388,8 @@ class Torrent
 
         $size = sprintf('%.0f', (float)$totallen);
 
-        $columns = 'info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status, info_hash_v2';
-        $values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status, '$info_hash_v2_sql'";
+        $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status';
+        $values = "'$info_hash', '$info_hash_v2', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
 
         $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 

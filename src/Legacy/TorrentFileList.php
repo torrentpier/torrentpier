@@ -42,49 +42,47 @@ class TorrentFileList
     public function get_filelist()
     {
         global $html;
-		
-		if (($this->tor_decoded['info']['meta version'] ?? null) == 2 && is_array($this->tor_decoded['info']['file tree'] ?? null)) {
-		// v2
-		function fileTree($array, $name = '') {
-			$folders = [];
-			$rootFiles = [];
 
-			foreach ($array as $key => $value) {
-					if (is_array($value) && !isset($value[''])) {
-						$html_v2 = fileTree($value);
-						$folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
-					}
-					else {
-						$length = $value['']['length'];
-						$root = bin2hex($value['']['pieces root'] ?? '');
-						$rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:green;'>$root</h></span></li>";
-					}
-				}
+        if (($this->tor_decoded['info']['meta version'] ?? null) == 2 && is_array($this->tor_decoded['info']['file tree'] ?? null)) {
+            // v2
+            function fileTree($array, $name = '')
+            {
+                $folders = [];
+                $rootFiles = [];
 
-				$allItems = array_merge($folders, $rootFiles);
+                foreach ($array as $key => $value) {
+                    if (is_array($value) && !isset($value[''])) {
+                        $html_v2 = fileTree($value);
+                        $folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
+                    } else {
+                        $length = $value['']['length'];
+                        $root = bin2hex($value['']['pieces root'] ?? '');
+                        $rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:green;'>$root</h></span></li>";
+                    }
+                }
 
-				return '<div class="tor-root-dir">' . $name . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
-			}
+                $allItems = array_merge($folders, $rootFiles);
 
-			return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
+                return '<div class="tor-root-dir">' . $name . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
+            }
 
-			}
-			else {
-			// v1
-			$this->build_filelist_array();
+            return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
+        } else {
+            // v1
+            $this->build_filelist_array();
 
-			if ($this->multiple) {
-				if ($this->files_ary['/'] !== '') {
-					$this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
-					unset($this->files_ary['/']);
-				}
-				$filelist = $html->array2html($this->files_ary);
-				return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
-			}
+            if ($this->multiple) {
+                if ($this->files_ary['/'] !== '') {
+                    $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
+                    unset($this->files_ary['/']);
+                }
+                $filelist = $html->array2html($this->files_ary);
+                return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
+            }
 
-			return implode('', $this->files_ary['/']);
-		}
-	}
+            return implode('', $this->files_ary['/']);
+        }
+    }
 
     /**
      * Формирование списка файлов
@@ -107,7 +105,11 @@ class TorrentFileList
                 if (isset($f['path.utf-8'])) {
                     $f['path'] =& $f['path.utf-8'];
                 }
-                if (!isset($f['path']) || ($f['attr'] ?? null) === 'p' || !\is_array($f['path'])) {
+                if (!isset($f['path']) || !\is_array($f['path'])) {
+                    continue;
+                }
+                // Exclude padding files
+                if ($f['attr'] === 'p') {
                     continue;
                 }
                 array_deep($f['path'], 'clean_tor_dirname');
