@@ -69,19 +69,20 @@ class TorrentFileList
 			return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
 		} else {
 		// v1
-        $this->build_filelist_array();
+			$this->build_filelist_array();
 
-        if ($this->multiple) {
-            if ($this->files_ary['/'] !== '') {
-                $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
-                unset($this->files_ary['/']);
-            }
-            $filelist = $html->array2html($this->files_ary);
-            return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
-        }
+			if ($this->multiple) {
+				if ($this->files_ary['/'] !== '') {
+					$this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
+					unset($this->files_ary['/']);
+				}
+				$filelist = $html->array2html($this->files_ary);
+				return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
+			}
 
-        return implode('', $this->files_ary['/']);
-    }
+			return implode('', $this->files_ary['/']);
+		}
+	}
 
     /**
      * Формирование списка файлов
