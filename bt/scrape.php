@@ -62,6 +62,10 @@ $row = DB()->fetch_row("
 		LIMIT 1
 ");
 
+if (!$row) {
+    msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash_sql));
+}
+
 $output['files'][$info_hash] = [
     'complete' => (int)$row['seeders'],
     'downloaded' => (int)$row['complete_count'],
