@@ -122,7 +122,6 @@ $template->assign_vars(array(
     'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
-    'NEED_GEN_PASSKEY' => (!IS_GUEST && !\TorrentPier\Legacy\Torrent::getPasskey($userdata['user_id'])),
 
     'SITENAME' => $bb_cfg['sitename'],
     'U_INDEX' => BB_ROOT . "index.php",

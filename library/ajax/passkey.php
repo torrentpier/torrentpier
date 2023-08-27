@@ -18,10 +18,8 @@ $mode = (string)$this->request['mode'];
 
 if ($req_uid == $userdata['user_id'] || IS_ADMIN) {
     switch ($mode) {
-        case 'create':
-            $first_creation = !\TorrentPier\Legacy\Torrent::getPasskey($req_uid);
-
-            if (empty($this->request['confirmed']) && !$first_creation) {
+        case 'generate':
+            if (empty($this->request['confirmed'])) {
                 $this->prompt_for_confirm($lang['BT_GEN_PASSKEY_NEW']);
             }
 
@@ -31,19 +29,7 @@ if ($req_uid == $userdata['user_id'] || IS_ADMIN) {
 
             \TorrentPier\Legacy\Torrent::tracker_rm_user($req_uid);
 
-            $this->response['first_creation'] = $first_creation;
             $this->response['passkey'] = $passkey;
-            break;
-        case 'remove':
-            if (empty($this->request['confirmed'])) {
-                $this->prompt_for_confirm($lang['QUESTION']);
-            }
-
-            if (!$delete = \TorrentPier\Legacy\Torrent::deletePasskey($req_uid)) {
-                $this->ajax_die('Could not remove passkey');
-            }
-
-            $this->response['passkey_removed'] = $delete;
             break;
         default:
             $this->ajax_die('Invalid mode');

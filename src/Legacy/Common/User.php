@@ -250,6 +250,13 @@ class User
             }
         }
 
+        // Generate passkey
+        if (!\TorrentPier\Legacy\Torrent::getPasskey($this->data['user_id'])) {
+            if (!\TorrentPier\Legacy\Torrent::generate_passkey($this->data['user_id'], true)) {
+                bb_die('Could not generate passkey');
+            }
+        }
+
         // Create new session
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
             $session_id = make_rand_str(SID_LENGTH);

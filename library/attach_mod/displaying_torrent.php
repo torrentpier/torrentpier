@@ -13,21 +13,6 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
 
-$bt_user_id = $userdata['user_id'];
-$bt_topic_id = $t_data['topic_id'];
-
-$user_passkey = \TorrentPier\Legacy\Torrent::getPasskey($bt_user_id);
-
-if (!$user_passkey) {
-    $template->assign_block_vars('postrow.attach.tor_reged', array());
-    $template->assign_vars(array(
-        'TOR_BLOCKED' => true,
-        'TOR_BLOCKED_MSG' => $lang['PASSKEY_ALERT_INFO'],
-    ));
-
-    return;
-}
-
 $change_peers_bgr_over = true;
 $bgr_class_1 = 'row1';
 $bgr_class_2 = 'row2';
@@ -73,6 +58,8 @@ if ($bb_cfg['bt_allow_spmode_change']) {
     }
 }
 
+$bt_topic_id = $t_data['topic_id'];
+$bt_user_id = $userdata['user_id'];
 $attach_id = $attachments['_' . $post_id][$i]['attach_id'];
 $tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
 $download_count = $attachments['_' . $post_id][$i]['download_count'];
@@ -155,6 +142,7 @@ if ($tor_reged && $tor_info) {
     $tor_type = $tor_info['tor_type'];
 
     // Magnet link
+    $user_passkey = \TorrentPier\Legacy\Torrent::getPasskey($bt_user_id);
     $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey);
 
     // ratio limits
