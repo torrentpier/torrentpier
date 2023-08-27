@@ -534,6 +534,12 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full') {
     ));
 }
 
+// Torrent detailed info
+if ($tor_details) {
+    $template->assign_block_vars('torrent.details', array(
+    ));
+}
+
 $template->assign_vars(array(
     'SHOW_DL_LIST_LINK' => (($bb_cfg['bt_show_dl_list'] || $bb_cfg['allow_dl_list_names_mode']) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
     'SHOW_TOR_ACT' => ($tor_reged && $show_peers && (!isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) || IS_AM)),
