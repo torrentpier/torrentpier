@@ -25,7 +25,7 @@ $count_mode = ($bb_cfg['bt_dl_list_only_count'] && !(@$_GET['dl'] === 'names'));
 
 $dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !($bb_cfg['bt_dl_list_only_1st_page'] && $start));
 $show_dl_list = ($dl_topic && ($bb_cfg['bt_show_dl_list'] || ($bb_cfg['allow_dl_list_names_mode'] && @$_GET['dl'] === 'names')));
-$show_dl_buttons = ($dl_topic && $bb_cfg['bt_show_dl_list_buttons']);
+$show_dl_buttons = (!IS_GUEST && $dl_topic && $bb_cfg['bt_show_dl_list_buttons']);
 
 // link to clear DL-List
 $template->assign_vars(array('S_DL_DELETE' => false));

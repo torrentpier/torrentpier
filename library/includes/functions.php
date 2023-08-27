@@ -799,10 +799,6 @@ function generate_user_info($row, bool $group_mod = false): array
 
 function get_bt_userdata($user_id)
 {
-    if (!\TorrentPier\Legacy\Torrent::getPasskey($user_id)) {
-        return false;
-    }
-
     if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id)) {
         $btu = DB()->fetch_row("
 			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
@@ -1761,21 +1757,16 @@ function decode_text_match($txt)
  *
  * @param string $infohash
  * @param string $infohash_v2
- * @param string|bool $auth_key
+ * @param string $auth_key
  *
  * @return string
  */
-function create_magnet(string $infohash, string $infohash_v2, $auth_key): string
+function create_magnet(string $infohash, string $infohash_v2, string $auth_key): string
 {
     global $bb_cfg, $images;
 
     // Only for registered users
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
-        return false;
-    }
-
-    // Hasn't passkey
-    if (!$auth_key) {
         return false;
     }
 
