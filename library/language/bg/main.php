@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'създаване на нов';
 $lang['BT_PASSKEY_VIEW'] = 'покажи';
 $lang['BT_GEN_PASSKEY_NEW'] = "Внимание! След смяна на паролата, ще трябва отново да изтеглите всички активни торенти! \\N сигурни ли сте, че искате да създадете нова парола?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Няма форуми търсене са намерили';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Семена';
 $lang['LEECHS'] = 'Пиявица';

@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'looge uus';
 $lang['BT_PASSKEY_VIEW'] = 'näitus';
 $lang['BT_GEN_PASSKEY_NEW'] = "Tähelepanu! Pärast muutmist uus parooli, peate uuesti alla laadida kogu aktiivse torrentid! \n-sa Oled kindel, et soovid luua uus parooli?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'No otsitav foorumid leida';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Seeme';
 $lang['LEECHS'] = 'Kaanid';

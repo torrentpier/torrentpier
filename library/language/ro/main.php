@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'creați un nou';
 $lang['BT_PASSKEY_VIEW'] = 'show';
 $lang['BT_GEN_PASSKEY_NEW'] = "Atenție! După schimbarea nouă cheie de acces, va trebui să re-descărca toate active torrents! \n Ești sigur că doriți să creați o nouă cheie de acces?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Nu căutare forumuri găsit';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Semințe';
 $lang['LEECHS'] = 'Lipitoare';

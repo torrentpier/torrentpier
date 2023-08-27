@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'Yangi yaratish';
 $lang['BT_PASSKEY_VIEW'] = 'ko\'rsatish';
 $lang['BT_GEN_PASSKEY_NEW'] = "Diqqat! Yangi parolni o'zgartirib so'ng, barcha faol torrent qayta-yuklab olish uchun kerak bo'ladi! \\ N siz yangi parol yaratmoqchi bo'lgan ishonchingiz komilmi?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Topishi forumlar topildi';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'urug \'';
 $lang['LEECHS'] = 'zuluk';

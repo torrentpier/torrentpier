@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'kurti naują';
 $lang['BT_PASSKEY_VIEW'] = 'rodyti';
 $lang['BT_GEN_PASSKEY_NEW'] = "Dėmesio! Pakeitę naujas prieigos raktą, jums reikės iš naujo atsisiųsti visus aktyvių torrentų! \n ar Esate tikri, kad norite sukurti naują prieigos raktas?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Ne paieškai forumuose rasti';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Sėklos';
 $lang['LEECHS'] = 'Dėlės';

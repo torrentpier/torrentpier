@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'ustvarite novo';
 $lang['BT_PASSKEY_VIEW'] = 'prikaži';
 $lang['BT_GEN_PASSKEY_NEW'] = "Pozor! Po spreminjanju nastavitev novo geslo, ga boste morali ponovno prenesti vse aktivne ploha! \n ali ste prepričani, da želite ustvariti novo geslo?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Ne iskati forumih našel';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Seme';
 $lang['LEECHS'] = 'Leech';
