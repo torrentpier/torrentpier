@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'ստեղծել նոր';
 $lang['BT_PASSKEY_VIEW'] = 'ցույց տալ';
 $lang['BT_GEN_PASSKEY_NEW'] = "Ուշադրություն! Իշխանափոխությունից հետո նոր գաղտնաբառը, դուք պետք է կրկին բացել բոլոր ակտիվ torrents! \\N համոզված եք, որ ցանկանում եք ստեղծել նոր գաղտնաբառը?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Ոչ համաժողովների որոնում են գտել';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Սերմերի';
 $lang['LEECHS'] = 'Մի տզրուկ';
