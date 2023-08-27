@@ -22,7 +22,7 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
     $_GET['info_hash'] = $_GET['?info_hash'];
 }
 
-$info_hash = $_GET['info_hash'];
+$info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 
 if (!isset($info_hash)) {
     msg_die('info_hash does not exists');
