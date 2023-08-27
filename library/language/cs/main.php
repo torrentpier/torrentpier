@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'vytvořit nový';
 $lang['BT_PASSKEY_VIEW'] = 'show';
 $lang['BT_GEN_PASSKEY_NEW'] = "Pozor! Po změně nový přístupový kód, budete muset znovu-stažení všech aktivních torrentů! \n Jsou si jisti, že chcete vytvořit nový přístupový klíč?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Ne vyhledávat fóra nalezen';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'Semeno';
 $lang['LEECHS'] = 'Pijavice';
