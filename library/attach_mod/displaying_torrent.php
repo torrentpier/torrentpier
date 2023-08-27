@@ -169,7 +169,7 @@ if ($tor_reged && $tor_info) {
 
     $user_status = $bt_userdata['user_status'] ?? null;
 
-    if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && $bt_user_id != $poster_id && $tor_type != TOR_TYPE_GOLD) {
+    if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && ($bt_user_id != ($poster_id || GUEST_UID)) && $tor_type != TOR_TYPE_GOLD) {
         if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             $dl_allowed = ($user_ratio > $min_ratio_dl);
         }
