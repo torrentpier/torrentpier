@@ -212,6 +212,7 @@ if ($tor_reged && $tor_info) {
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
             'HASH' => strtoupper(bin2hex($tor_info['info_hash'])),
+            'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
             'DOWNLOAD_COUNT' => declension((int)$download_count, 'times'),
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
