@@ -73,9 +73,6 @@ if ($bb_cfg['bt_allow_spmode_change']) {
     }
 }
 
-// Detailed torrent info
-$tor_details = $_GET['tordetails'] ?? '';
-
 $attach_id = $attachments['_' . $post_id][$i]['attach_id'];
 $tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
 $download_count = $attachments['_' . $post_id][$i]['download_count'];
@@ -531,12 +528,6 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full') {
     $template->assign_vars(array(
         'PEERS_FULL_LINK' => true,
         'SPMODE_FULL_HREF' => "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders",
-    ));
-}
-
-// Torrent detailed info
-if ($tor_details) {
-    $template->assign_block_vars('torrent.details', array(
     ));
 }
 
