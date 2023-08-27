@@ -57,13 +57,13 @@ class TorrentFileList
                     } else {
                         $length = $value['']['length'];
                         $root = bin2hex($value['']['pieces root'] ?? '');
-                        $rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:green;'>$root</h></span></li>";
+                        $rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:gray;'>$root</h></span></li>";
                     }
                 }
 
                 $allItems = array_merge($folders, $rootFiles);
 
-                return '<div class="tor-root-dir">' . $name . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
+                return '<div class="tor-root-dir">' . (empty($folders) ? '' : $name) . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
             }
 
             return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
