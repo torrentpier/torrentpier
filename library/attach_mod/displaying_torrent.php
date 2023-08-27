@@ -73,6 +73,9 @@ if ($bb_cfg['bt_allow_spmode_change']) {
     }
 }
 
+// Detailed torrent info
+$tor_details = $_GET['tordetails'] ?? '';
+
 $attach_id = $attachments['_' . $post_id][$i]['attach_id'];
 $tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
 $download_count = $attachments['_' . $post_id][$i]['download_count'];
