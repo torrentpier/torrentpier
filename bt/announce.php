@@ -69,7 +69,8 @@ if (!isset($info_hash)) {
 if (!isset($peer_id) || strlen($peer_id) != 20) {
     msg_die('Invalid peer_id');
 }
-// Check info_hash v2
+
+// Check info_hash version
 if (strlen($info_hash) == 32) {
     $is_bt_v2 = true;
 } elseif (strlen($info_hash) == 20) {
@@ -77,6 +78,7 @@ if (strlen($info_hash) == 32) {
 } else {
     msg_die('Invalid info_hash');
 }
+
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port');
 }
