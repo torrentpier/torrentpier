@@ -283,7 +283,7 @@ $(function(){
 				</div>
 				</fieldset>
 				<fieldset>
-				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{TITLE_MATCH_NAME}');">{L_TITLE_MATCH}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash');">{L_HASH_S}</span></legend>
+				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{TITLE_MATCH_NAME}').attr('maxlength','{TITLE_MATCH_MAX}');">{L_TITLE_MATCH}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash').attr('maxlength',64);">{L_HASH_S}</span></legend>
 				<div>
 					<p class="input">
 						<input id="title_search" style="width: 95%;" class="post" type="text" size="50" maxlength="{TITLE_MATCH_MAX}" name="{TITLE_MATCH_NAME}" value="{TITLE_MATCH_VAL}" />
