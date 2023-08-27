@@ -25,8 +25,9 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
 $is_bt_v2 = null;
 $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 
+// Verify info_hash
 if (!isset($info_hash)) {
-    msg_die('info_hash does not exists');
+    msg_die('info_hash does not exist');
 }
 
 // Check info_hash version

@@ -64,7 +64,7 @@ $passkey = ${$passkey_key} ?? null;
 // Verify request
 // Required params (info_hash, peer_id, port, uploaded, downloaded, left, passkey)
 if (!isset($info_hash)) {
-    msg_die('info_hash does not exists');
+    msg_die('info_hash does not exist');
 }
 if (!isset($peer_id) || strlen($peer_id) != 20) {
     msg_die('Invalid peer_id');
