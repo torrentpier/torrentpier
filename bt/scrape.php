@@ -22,6 +22,7 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
     $_GET['info_hash'] = $_GET['?info_hash'];
 }
 
+$is_bt_v2 = null;
 $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 
 if (!isset($info_hash)) {
