@@ -155,7 +155,7 @@ if ($tor_reged && $tor_info) {
     $tor_type = $tor_info['tor_type'];
 
     // Magnet link
-    $tor_magnet = create_magnet($tor_info['info_hash'], $user_passkey);
+    $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey);
 
     // ratio limits
     $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
