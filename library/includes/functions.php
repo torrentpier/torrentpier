@@ -1955,12 +1955,12 @@ function hash_search($hash)
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
 
+    $info_hash = DB()->escape(pack('H*', $hash));
+
     // Check info_hash version
     if (mb_strlen($hash, 'UTF-8') == 40) {
-        $info_hash = DB()->escape(pack("H*", $hash));
         $info_hash_where = "WHERE info_hash = '$info_hash'";
     } elseif (mb_strlen($hash, 'UTF-8') == 64) {
-        $info_hash = DB()->escape(pack("H*", hash('sha256', $hash)));
         $info_hash_where = "WHERE info_hash_v2 = '$info_hash'";
     } else {
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
