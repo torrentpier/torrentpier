@@ -1069,8 +1069,6 @@ $lang['BT_GEN_PASSKEY'] = 'შექმნათ ახალი';
 $lang['BT_PASSKEY_VIEW'] = 'ჩვენება';
 $lang['BT_GEN_PASSKEY_NEW'] = "ყურადღება! შეცვლის შემდეგ ახალი გასაღები არასწორია, თქვენ უნდა ხელახლა ჩამოტვირთოთ ყველა აქტიური საიტზე! \n დარწმუნებული ხართ, რომ გსურთ, რათა შევქმნათ ახალი გასაღები არასწორია?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'არ საძიებო ფორუმები ი';
-$lang['PASSKEY_ALERT_TITLE'] = 'Creating a passkey';
-$lang['PASSKEY_ALERT_INFO'] = 'To use the tracker functionality, you need to create a passkey.';
 
 $lang['SEEDS'] = 'სათესლე';
 $lang['LEECHS'] = 'Leech';
