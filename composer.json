@@ -43,7 +43,7 @@
     "monolog/monolog": "^2.9",
     "samdark/sitemap": "2.4.0",
     "symfony/mailer": "^5.4",
-    "symfony/polyfill": "v1.27.0",
+    "symfony/polyfill": "v1.28.0",
     "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {
