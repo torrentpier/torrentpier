@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbc309d56fdcd2fb85185ac081a1c053",
+    "content-hash": "dc4f7e5e375de9b9a16fea7025705dc6",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -2077,16 +2077,16 @@
         },
         {
             "name": "symfony/polyfill",
-            "version": "v1.27.0",
+            "version": "v1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill.git",
-                "reference": "b78222a273aac3e5bab6358bf499d7f1fb88e48b"
+                "reference": "bb3c959f6a888ec0a8b951cb3b23695a26833c98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill/zipball/b78222a273aac3e5bab6358bf499d7f1fb88e48b",
-                "reference": "b78222a273aac3e5bab6358bf499d7f1fb88e48b",
+                "url": "https://api.github.com/repos/symfony/polyfill/zipball/bb3c959f6a888ec0a8b951cb3b23695a26833c98",
+                "reference": "bb3c959f6a888ec0a8b951cb3b23695a26833c98",
                 "shasum": ""
             },
             "require": {
@@ -2119,11 +2119,6 @@
                 "symfony/var-dumper": "^4.4|^5.1|^6.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.27-dev"
-                }
-            },
             "autoload": {
                 "files": [
                     "src/bootstrap.php",
@@ -2145,7 +2140,9 @@
                     "src/Intl/Icu/Resources/stubs",
                     "src/Intl/MessageFormatter/Resources/stubs",
                     "src/Intl/Normalizer/Resources/stubs",
+                    "src/Php83/Resources/stubs",
                     "src/Php82/Resources/stubs",
+                    "src/Php81/Resources/stubs",
                     "src/Php80/Resources/stubs",
                     "src/Php73/Resources/stubs"
                 ]
@@ -2174,7 +2171,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/polyfill/issues",
-                "source": "https://github.com/symfony/polyfill/tree/v1.27.0"
+                "source": "https://github.com/symfony/polyfill/tree/v1.28.0"
             },
             "funding": [
                 {
@@ -2190,7 +2187,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-10T10:11:03+00:00"
+            "time": "2023-08-25T17:30:00+00:00"
         },
         {
             "name": "symfony/service-contracts",
