@@ -43,32 +43,6 @@ class TorrentFileList
     {
         global $html;
 
-        if (($this->tor_decoded['info']['meta version'] ?? null) == 2 && is_array($this->tor_decoded['info']['file tree'] ?? null)) {
-            // v2
-            function fileTree($array, $name = '')
-            {
-                $folders = [];
-                $rootFiles = [];
-
-                foreach ($array as $key => $value) {
-                    if (is_array($value) && !isset($value[''])) {
-                        $html_v2 = fileTree($value);
-                        $folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
-                    } else {
-                        $length = $value['']['length'];
-                        $root = bin2hex($value['']['pieces root'] ?? '');
-                        $rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:gray;'>$root</h></span></li>";
-                    }
-                }
-
-                $allItems = array_merge($folders, $rootFiles);
-
-                return '<div class="tor-root-dir">' . (empty($folders) ? '' : $name) . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
-            }
-
-            return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
-        } else {
-            // v1
             $this->build_filelist_array();
 
             if ($this->multiple) {
@@ -81,7 +55,6 @@ class TorrentFileList
             }
 
             return implode('', $this->files_ary['/']);
-        }
     }
 
     /**
@@ -172,4 +145,26 @@ class TorrentFileList
 
         return "$name <i>$length</i> $magnet_name $magnet_ext";
     }
+
+	public function fileTree($array, $name = '')
+	{
+		$folders = [];
+		$rootFiles = [];
+
+		foreach ($array as $key => $value) {
+			$key = htmlCHR($key);
+			if (!isset($value[''])) {
+				$html_v2 = $this->fileTree($value);
+				$folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
+			} else {
+				$length = (int)$value['']['length'];
+				$root = bin2hex($value['']['pieces root'] ?? '');
+				$rootFiles[] = "<li><span>$key<i>$length</i> <p>$root</p></span></li>";
+			}
+		}
+
+		$allItems = [...$folders, ...$rootFiles];
+
+		return '<div class="tor-root-dir">' . (empty($folders) ? '' : $name) . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
+	}
 }
