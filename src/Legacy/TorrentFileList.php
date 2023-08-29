@@ -43,18 +43,18 @@ class TorrentFileList
     {
         global $html;
 
-            $this->build_filelist_array();
+        $this->build_filelist_array();
 
-            if ($this->multiple) {
-                if ($this->files_ary['/'] !== '') {
-                    $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
-                    unset($this->files_ary['/']);
-                }
-                $filelist = $html->array2html($this->files_ary);
-                return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
+        if ($this->multiple) {
+            if ($this->files_ary['/'] !== '') {
+                $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
+                unset($this->files_ary['/']);
             }
+            $filelist = $html->array2html($this->files_ary);
+            return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
+        }
 
-            return implode('', $this->files_ary['/']);
+        return implode('', $this->files_ary['/']);
     }
 
     /**
@@ -125,52 +125,53 @@ class TorrentFileList
         }
     }
 
-    /*
+    /**
      * File list generation for v2 supported torrents
+     *
+     * @param array $array
+     * @param string $name
      * @return string
-	 *
      */
-
-	public function fileTreeList($array, $name = '')
-	{
-		$folders = [];
-		$rootFiles = [];
-
-		foreach ($array as $key => $value) {
-			$key = htmlCHR($key);
-			if (!isset($value[''])) {
-				$html_v2 = $this->fileTreeList($value);
-				$folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
-			} else {
-				$length = (int)$value['']['length'];
-				$root = bin2hex($value['']['pieces root'] ?? '');
-				$rootFiles[] = "<li><span>$key<i>$length</i> <p>$root</p></span></li>";
-			}
-		}
-
-		$allFiles = [...$folders, ...$rootFiles];
-
-		return '<div class="tor-root-dir">' . (empty($folders) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . implode('', $allFiles) . '</ul>';
-	}
-	
-	/*
-     * Table generation for BitTorrent v2 compatible torrents
-     * @echo string
-	 *
-     */
-
-	 public function fileTreeTable($array, $parent = '')
+    public function fileTreeList(array $array, string $name = ''): string
     {
-      foreach ($array as $key => $value) {
-        $current = "$parent/$key";
-        if (!isset($value[''])) {
-          $this->fileTreeTable($value, $current);
+        $folders = [];
+        $rootFiles = [];
+
+        foreach ($array as $key => $value) {
+            $key = htmlCHR($key);
+            if (!isset($value[''])) {
+                $html_v2 = $this->fileTreeList($value);
+                $folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
+            } else {
+                $length = (int)$value['']['length'];
+                $root = bin2hex($value['']['pieces root'] ?? '');
+                $rootFiles[] = "<li><span>$key<i>$length</i> <p>$root</p></span></li>";
+            }
         }
-        else{
-          $length = (int)$value['']['length'];
-          $root = bin2hex($value['']['pieces root'] ?? '');
-          echo '<tr><td>', $current, '</td><td>', humn_size($length, 2), '</td><td>', $root, '</td></tr><tr>';
+
+        $allFiles = [...$folders, ...$rootFiles];
+
+        return '<div class="tor-root-dir">' . (empty($folders) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . implode('', $allFiles) . '</ul>';
+    }
+
+    /**
+     * Table generation for BitTorrent v2 compatible torrents
+     *
+     * @param array $array
+     * @param string $parent
+     * @return void
+     */
+    public function fileTreeTable(array $array, string $parent = '')
+    {
+        foreach ($array as $key => $value) {
+            $current = "$parent/$key";
+            if (!isset($value[''])) {
+                $this->fileTreeTable($value, $current);
+            } else {
+                $length = (int)$value['']['length'];
+                $root = bin2hex($value['']['pieces root'] ?? '');
+                echo '<tr><td>', $current, '</td><td>', humn_size($length, 2), '</td><td>', $root, '</td></tr><tr>';
+            }
         }
-      }
     }
 }
