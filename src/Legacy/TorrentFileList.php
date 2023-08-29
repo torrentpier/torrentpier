@@ -169,7 +169,7 @@ class TorrentFileList
         else{
           $length = (int)$value['']['length'];
           $root = bin2hex($value['']['pieces root'] ?? '');
-          echo '<tr><td>', $current, '</td><td>', formatBytes($length), '</td><td>', $root, '</td></tr><tr>';
+          echo '<tr><td>', $current, '</td><td>', humn_size($length, 2), '</td><td>', $root, '</td></tr><tr>';
         }
       }
     }
