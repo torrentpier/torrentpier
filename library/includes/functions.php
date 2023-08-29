@@ -1859,20 +1859,17 @@ function profile_url($data)
     return $profile;
 }
 
-function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = 100, $width = 100)
+function get_avatar($user_id, $ext_id, $allow_avatar = true)
 {
     global $bb_cfg;
 
-    $height = $height ? 'height="' . $height . '"' : '';
-    $width = $width ? 'width="' . $width . '"' : '';
-
-    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" />';
 
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
-        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" />';
     } elseif ($allow_avatar && $ext_id) {
         if (file_exists(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" />';
         }
     }
 

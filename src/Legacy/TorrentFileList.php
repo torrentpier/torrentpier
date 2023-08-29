@@ -107,43 +107,22 @@ class TorrentFileList
                                 $GLOBALS['bnc_error'] = 1;
                                 break;
                             }
-                            $cur_files_ary[] = $this->build_file_item($name, $length);
+                            $cur_files_ary[] = "$name <i>$length</i>";
                         }
                     }
                     asort($cur_files_ary);
                 } else {
                     $name = $f['path'][0];
-                    $this->files_ary['/'][] = $this->build_file_item($name, $length);
+                    $this->files_ary['/'][] = "$name <i>$length</i>";
                     natsort($this->files_ary['/']);
                 }
             }
         } else {
             $name = clean_tor_dirname($info['name']);
             $length = (float)$info['length'];
-            $this->files_ary['/'][] = $this->build_file_item($name, $length);
+            $this->files_ary['/'][] = "$name <i>$length</i>";
             natsort($this->files_ary['/']);
         }
-    }
-
-    /**
-     * Формирование файла
-     *
-     * @param $name
-     * @param $length
-     * @return string
-     */
-    private function build_file_item($name, $length): string
-    {
-        global $bb_cfg, $images, $lang;
-
-        $magnet_name = $magnet_ext = '';
-
-        if ($bb_cfg['magnet_links_enabled']) {
-            $magnet_name = '<a title="' . $lang['DC_MAGNET'] . '" href="dchub:magnet:?kt=' . $name . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet'] . '" width="10" height="10" border="0" /></a>';
-            $magnet_ext = '<a title="' . $lang['DC_MAGNET_EXT'] . '" href="dchub:magnet:?kt=.' . substr(strrchr($name, '.'), 1) . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet_ext'] . '" width="10" height="10" border="0" /></a>';
-        }
-
-        return "$name <i>$length</i> $magnet_name $magnet_ext";
     }
 
 	public function fileTree($array, $name = '')
