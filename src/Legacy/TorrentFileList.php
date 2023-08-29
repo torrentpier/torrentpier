@@ -131,7 +131,7 @@ class TorrentFileList
 	 *
      */
 
-	public function fileTree($array, $name = '')
+	public function fileTreeList($array, $name = '')
 	{
 		$folders = [];
 		$rootFiles = [];
@@ -139,7 +139,7 @@ class TorrentFileList
 		foreach ($array as $key => $value) {
 			$key = htmlCHR($key);
 			if (!isset($value[''])) {
-				$html_v2 = $this->fileTree($value);
+				$html_v2 = $this->fileTreeList($value);
 				$folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
 			} else {
 				$length = (int)$value['']['length'];

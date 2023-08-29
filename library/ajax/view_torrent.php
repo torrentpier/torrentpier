@@ -38,7 +38,7 @@ if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
 if (($tor['info']['meta version'] ?? null) == 2 && is_array($tor['info']['file tree'] ?? null)) {
-	$tor_filelist = $torrent->fileTree($tor['info']['file tree'], $tor['info']['name'] ?? ''); // v2
+	$tor_filelist = $torrent->fileTreeList($tor['info']['file tree'], $tor['info']['name'] ?? ''); // v2
 } else {
 	$tor_filelist = $torrent->get_filelist(); // v1
 }
