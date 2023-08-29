@@ -164,7 +164,7 @@ class TorrentFileList
       foreach ($array as $key => $value) {
         $current = "$parent/$key";
         if (!isset($value[''])) {
-          printFiles($value, $current);
+          $this->fileTreeTable($value, $current);
         }
         else{
           $length = (int)$value['']['length'];
