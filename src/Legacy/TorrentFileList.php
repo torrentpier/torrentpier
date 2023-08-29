@@ -125,6 +125,12 @@ class TorrentFileList
         }
     }
 
+    /*
+     * File list generation for v2 supported torrents
+     * @return string
+	 *
+     */
+
 	public function fileTree($array, $name = '')
 	{
 		$folders = [];
