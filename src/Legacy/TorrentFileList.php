@@ -164,6 +164,7 @@ class TorrentFileList
     public function fileTreeTable(array $array, string $parent = '')
     {
         foreach ($array as $key => $value) {
+			$key = htmlCHR($key);
             $current = "$parent/$key";
             if (!isset($value[''])) {
                 $this->fileTreeTable($value, $current);
