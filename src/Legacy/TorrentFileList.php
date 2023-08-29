@@ -152,4 +152,25 @@ class TorrentFileList
 
 		return '<div class="tor-root-dir">' . (empty($folders) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . implode('', $allFiles) . '</ul>';
 	}
+	
+	/*
+     * Table generation for BitTorrent v2 compatible torrents
+     * @echo string
+	 *
+     */
+
+	 public function fileTreeTable($array, $parent = '')
+    {
+      foreach ($array as $key => $value) {
+        $current = "$parent/$key";
+        if (!isset($value[''])) {
+          printFiles($value, $current);
+        }
+        else{
+          $length = (int)$value['']['length'];
+          $root = bin2hex($value['']['pieces root'] ?? '');
+          echo '<tr><td>', $current, '</td><td>', formatBytes($length), '</td><td>', $root, '</td></tr><tr>';
+        }
+      }
+    }
 }
