@@ -292,6 +292,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `speed_up`         INT(11)               NOT NULL DEFAULT '0',
   `speed_down`       INT(11)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`info_hash`),
+  PRIMARY KEY (`info_hash_v2`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
   UNIQUE KEY `attach_id` (`attach_id`),
