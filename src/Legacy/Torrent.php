@@ -289,6 +289,7 @@ class Torrent
         $poster_id = $torrent['poster_id'];
         $info_hash = $info_hash_v2 = null;
         $info_hash_sql = $info_hash_v2_sql = null;
+        $v2_hash = null;
 
         if ($torrent['extension'] !== TORRENT_EXT) {
             return self::torrent_error_exit($lang['NOT_TORRENT']);
@@ -366,7 +367,8 @@ class Torrent
 
         // Getting info_hash v2
         if ($bt_v2) {
-            $info_hash_v2 = pack('H*', $v2_hash = hash('sha256', \SandFox\Bencode\Bencode::encode($info)));
+            $v2_hash = hash('sha256', \SandFox\Bencode\Bencode::encode($info));
+            $info_hash_v2 = pack('H*', $v2_hash);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
         }
 
