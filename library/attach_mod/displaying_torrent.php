@@ -211,7 +211,7 @@ if ($tor_reged && $tor_info) {
             'DL_TITLE_CLASS' => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
-            'HASH' => strtoupper(bin2hex($tor_info['info_hash'])),
+            'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
             'DOWNLOAD_COUNT' => declension((int)$download_count, 'times'),
             'REGED_TIME' => bb_date($tor_info['reg_time']),

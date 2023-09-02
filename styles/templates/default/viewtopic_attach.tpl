@@ -156,7 +156,7 @@
 		<td width="70%">
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
-            <br><br>info_hash: {postrow.attach.tor_reged.HASH}
+            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: {postrow.attach.tor_reged.HASH}<!-- ENDIF -->
             <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: {postrow.attach.tor_reged.HASH_V2}<!-- ENDIF -->
 		</td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
