@@ -351,21 +351,20 @@ class Torrent
         if (($info['meta version'] ?? null) == 2 && is_array($info['file tree'] ?? null)) {
             $bt_v2 = true;
         }
-		if (isset($info['pieces'])){
-			$bt_v1 = true;
-		}
-		/**
-		if (!$bb_cfg['v2_only_torrents'] && !$bt_v1 && $bt_v2) {
-			return self::torrent_error_exit('v2 only torrents disabled by site admin');
-		}
-		*/
+        if (isset($info['pieces'])) {
+            $bt_v1 = true;
+        }
+        /**
+         * if (!$bb_cfg['v2_only_torrents'] && !$bt_v1 && $bt_v2) {
+         * return self::torrent_error_exit('v2 only torrents disabled by site admin');
+         * }
+         */
 
         // Getting info_hash v1
-		
-		if ($bt_v1) {
-			$info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
-			$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-		}
+        if ($bt_v1) {
+            $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
+            $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+        }
 
         // Getting info_hash v2
         if ($bt_v2) {
@@ -396,24 +395,24 @@ class Torrent
                 }
             }
         } elseif ($bt_v2) {
-			$fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
-			$size = 0;
+            $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
+                $size = 0;
 
-				foreach ($array as $key => $value) {
-					if (!isset($value[''])) {
-						$size += $fileTreeSize($value);
-					} else {
-						$size += (int)$value['']['length'];
-					}
-				}
+                foreach ($array as $key => $value) {
+                    if (!isset($value[''])) {
+                        $size += $fileTreeSize($value);
+                    } else {
+                        $size += (int)$value['']['length'];
+                    }
+                }
 
-				return $size;
-			};
+                return $size;
+            };
 
-			$totallen = (float)$fileTreeSize($info['file tree']);
-		} else {
-			return self::torrent_error_exit($lang['TORFILE_INVALID']);
-		}
+            $totallen = (float)$fileTreeSize($info['file tree']);
+        } else {
+            return self::torrent_error_exit($lang['TORFILE_INVALID']);
+        }
 
         $size = sprintf('%.0f', (float)$totallen);
 
