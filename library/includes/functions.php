@@ -59,6 +59,23 @@ function get_tracks($type)
     return $tracks ?: [];
 }
 
+/**
+ * Returns array with all banned users
+ *
+ * @param bool $return_as_names
+ * @return array
+ */
+function get_banned_users(bool $return_as_names = false): array
+{
+    $banned_users = [];
+
+    foreach (DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0") as $user) {
+        $banned_users[] = $return_as_names ? get_username($user['ban_userid']) : $user['ban_userid'];
+    }
+
+    return $banned_users;
+}
+
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
 {
     global $tracking_topics, $tracking_forums, $user;
