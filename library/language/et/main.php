@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Seeme';
 $lang['LEECHING'] = 'Kaanid';
 $lang['IS_REGISTERED'] = 'Registreeritud';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Otsi DC++, mille failinimi';
-$lang['DC_MAGNET_EXT'] = 'Otsi DC++ laiendamise teel';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Staatus';
