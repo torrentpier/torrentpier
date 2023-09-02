@@ -354,7 +354,7 @@ class Torrent
         if (isset($info['pieces'])) {
             $bt_v1 = true;
         }
-        if (!$bb_cfg['tracker']['allow_only_v2_torrents'] && !$bt_v1 && $bt_v2) {
+        if ($bb_cfg['tracker']['allow_only_v2_torrents'] && !$bt_v1 && $bt_v2) {
             return self::torrent_error_exit('v2 only torrents disabled by site admin');
         }
 
