@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Siemen';
 $lang['LEECHING'] = 'Iilimato';
 $lang['IS_REGISTERED'] = 'Rekisteröity';
 $lang['MAGNET'] = 'Magneetti';
-$lang['DC_MAGNET'] = 'Etsi DC++ jonka tiedostonimi';
-$lang['DC_MAGNET_EXT'] = 'Etsi DC++ laajennus';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tila';
