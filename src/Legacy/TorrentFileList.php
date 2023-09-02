@@ -149,9 +149,9 @@ class TorrentFileList
             }
         }
 
-        $allFiles = [...$folders, ...$rootFiles];
+        $allFiles = implode('', [...$folders, ...$rootFiles]);
 
-        return '<div class="tor-root-dir">' . (empty($folders) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . implode('', $allFiles) . '</ul>';
+        return '<div class="tor-root-dir">' . (empty($folders) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . $allFiles . '</ul>';
     }
 
     /**
