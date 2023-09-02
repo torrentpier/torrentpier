@@ -357,7 +357,7 @@ class Torrent
             $bt_v1 = true;
         }
         if ($bb_cfg['tracker']['allow_only_v2_torrents'] && !$bt_v2 && $bt_v1) {
-            return self::torrent_error_exit('Allowed only v2 torrents by site admin');
+            return self::torrent_error_exit('v2-only torrents were disabled, allowed: v1 and hybrids');
         }
 
         // Getting info_hash v1
