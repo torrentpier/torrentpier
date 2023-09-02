@@ -649,7 +649,7 @@ $bb_cfg['tracker'] = [
     'search_by_tor_status' => true,
     'freeleech' => false, // freelech mode (If enabled, then disable "gold_silver_enabled")
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
-    'allow_only_v2_torrents' => false // only allow registration of v2 torrents
+    'disabled_v2_torrents' => false // only allow registration of v2 torrents
 ];
 
 // Ratio settings
