@@ -287,6 +287,7 @@ class Torrent
         $topic_id = $torrent['topic_id'];
         $forum_id = $torrent['forum_id'];
         $poster_id = $torrent['poster_id'];
+
         $info_hash = $info_hash_v2 = null;
         $info_hash_sql = $info_hash_v2_sql = $info_hash_where = null;
         $v2_hash = null;
