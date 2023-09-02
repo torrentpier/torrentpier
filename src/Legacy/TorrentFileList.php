@@ -145,7 +145,7 @@ class TorrentFileList
             } else {
                 $length = (int)$value['']['length'];
                 $root = bin2hex($value['']['pieces root'] ?? '');
-                $rootFiles[] = "<li><span>$key<i>$length</i> <p>$root</p></span></li>";
+                $rootFiles[] = "<li><span>$key<i>$length</i><p>$root</p></span></li>";
             }
         }
 
