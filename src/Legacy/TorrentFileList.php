@@ -43,45 +43,18 @@ class TorrentFileList
     {
         global $html;
 
-        if (($this->tor_decoded['info']['meta version'] ?? null) == 2 && is_array($this->tor_decoded['info']['file tree'] ?? null)) {
-            // v2
-            function fileTree($array, $name = '')
-            {
-                $folders = [];
-                $rootFiles = [];
+        $this->build_filelist_array();
 
-                foreach ($array as $key => $value) {
-                    if (is_array($value) && !isset($value[''])) {
-                        $html_v2 = fileTree($value);
-                        $folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
-                    } else {
-                        $length = $value['']['length'];
-                        $root = bin2hex($value['']['pieces root'] ?? '');
-                        $rootFiles[] = "<li><span>$key<i>$length</i> <h style='color:gray;'>$root</h></span></li>";
-                    }
-                }
-
-                $allItems = array_merge($folders, $rootFiles);
-
-                return '<div class="tor-root-dir">' . (empty($folders) ? '' : $name) . '</div><ul class="tree-root">' . implode('', $allItems) . '</ul>';
+        if ($this->multiple) {
+            if ($this->files_ary['/'] !== '') {
+                $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
+                unset($this->files_ary['/']);
             }
-
-            return fileTree($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name']);
-        } else {
-            // v1
-            $this->build_filelist_array();
-
-            if ($this->multiple) {
-                if ($this->files_ary['/'] !== '') {
-                    $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
-                    unset($this->files_ary['/']);
-                }
-                $filelist = $html->array2html($this->files_ary);
-                return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
-            }
-
-            return implode('', $this->files_ary['/']);
+            $filelist = $html->array2html($this->files_ary);
+            return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
         }
+
+        return implode('', $this->files_ary['/']);
     }
 
     /**
@@ -134,42 +107,76 @@ class TorrentFileList
                                 $GLOBALS['bnc_error'] = 1;
                                 break;
                             }
-                            $cur_files_ary[] = $this->build_file_item($name, $length);
+                            $cur_files_ary[] = "$name <i>$length</i>";
                         }
                     }
                     asort($cur_files_ary);
                 } else {
                     $name = $f['path'][0];
-                    $this->files_ary['/'][] = $this->build_file_item($name, $length);
+                    $this->files_ary['/'][] = "$name <i>$length</i>";
                     natsort($this->files_ary['/']);
                 }
             }
         } else {
             $name = clean_tor_dirname($info['name']);
             $length = (float)$info['length'];
-            $this->files_ary['/'][] = $this->build_file_item($name, $length);
+            $this->files_ary['/'][] = "$name <i>$length</i>";
             natsort($this->files_ary['/']);
         }
     }
 
     /**
-     * Формирование файла
+     * File list generation for v2 supported torrents
      *
-     * @param $name
-     * @param $length
+     * @param array $array
+     * @param string $name
      * @return string
      */
-    private function build_file_item($name, $length): string
+    public function fileTreeList(array $array, string $name = ''): string
     {
-        global $bb_cfg, $images, $lang;
+        $folders = [];
+        $rootFiles = [];
 
-        $magnet_name = $magnet_ext = '';
-
-        if ($bb_cfg['magnet_links_enabled']) {
-            $magnet_name = '<a title="' . $lang['DC_MAGNET'] . '" href="dchub:magnet:?kt=' . $name . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet'] . '" width="10" height="10" border="0" /></a>';
-            $magnet_ext = '<a title="' . $lang['DC_MAGNET_EXT'] . '" href="dchub:magnet:?kt=.' . substr(strrchr($name, '.'), 1) . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet_ext'] . '" width="10" height="10" border="0" /></a>';
+        foreach ($array as $key => $value) {
+            $key = htmlCHR($key);
+            if (!isset($value[''])) {
+                $html_v2 = $this->fileTreeList($value);
+                $folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
+            } else {
+                $length = (int)$value['']['length'];
+                $root = bin2hex($value['']['pieces root'] ?? '');
+                $rootFiles[] = "<li><span>$key<i>$length</i><p>$root</p></span></li>";
+            }
         }
 
-        return "$name <i>$length</i> $magnet_name $magnet_ext";
+        $allFiles = implode('', [...$folders, ...$rootFiles]);
+
+        return '<div class="tor-root-dir">' . (empty($folders) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . $allFiles . '</ul>';
+    }
+
+    /**
+     * Table generation for BitTorrent v2 compatible torrents
+     *
+     * @param array $array
+     * @param string $parent
+     * @return array
+     */
+    public function fileTreeTable(array $array, string $parent = ''): array
+    {
+        $filesList = [];
+
+        foreach ($array as $key => $value) {
+            $key = htmlCHR($key);
+            $current = "$parent/$key";
+            if (!isset($value[''])) {
+                $this->fileTreeTable($value, $current);
+            } else {
+                $length = (int)$value['']['length'];
+                $root = bin2hex($value['']['pieces root'] ?? '');
+                $filesList[] = '<tr><td>' . $current . '</td><td>' . humn_size($length, 2) . '</td><td>' . $root . '</td></tr><tr>';
+            }
+        }
+
+        return $filesList;
     }
 }

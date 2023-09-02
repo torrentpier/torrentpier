@@ -144,7 +144,7 @@
 
 <table class="attach bordered med">
 	<tr class="row3">
-		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF postrow.attach.tor_reged.TOR_FROZEN == 0 --><!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --><!-- ENDIF --></th>
+		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
     <tr class="row4">
@@ -156,7 +156,7 @@
 		<td width="70%">
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
-            <br><br>info_hash: {postrow.attach.tor_reged.HASH}
+            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: {postrow.attach.tor_reged.HASH}<!-- ENDIF -->
             <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: {postrow.attach.tor_reged.HASH_V2}<!-- ENDIF -->
 		</td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
@@ -326,6 +326,7 @@ $('#tor-filelist-btn').click(function(){
 }
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
+#tor-filelist p { color: #7C7C7C; text-decoration: none; }
 #tor-filelist .b > s { color: #800000; }
 #tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('styles/images/folder.gif') no-repeat 3px 50%;}
 #tor-filelist ul li span { padding-left: 20px; background: transparent url('styles/images/page.gif') no-repeat 3px 50%;}

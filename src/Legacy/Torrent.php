@@ -287,8 +287,10 @@ class Torrent
         $topic_id = $torrent['topic_id'];
         $forum_id = $torrent['forum_id'];
         $poster_id = $torrent['poster_id'];
+
         $info_hash = $info_hash_v2 = null;
-        $info_hash_sql = $info_hash_v2_sql = null;
+        $info_hash_sql = $info_hash_v2_sql = $info_hash_where = null;
+        $v2_hash = null;
 
         if ($torrent['extension'] !== TORRENT_EXT) {
             return self::torrent_error_exit($lang['NOT_TORRENT']);
@@ -331,7 +333,7 @@ class Torrent
         if ($bb_cfg['bt_check_announce_url']) {
             include INC_DIR . '/torrent_announce_urls.php';
 
-            $ann = (@$tor['announce']) ? $tor['announce'] : '';
+            $ann = isset($tor['announce']) ? $tor['announce'] : '';
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
             if (!$ann || !\in_array($ann, $announce_urls)) {
@@ -340,35 +342,45 @@ class Torrent
             }
         }
 
-        $info = (@$tor['info']) ? $tor['info'] : [];
+        $info = isset($tor['info']) ? $tor['info'] : [];
 
-        if (!isset($info['name'], $info['piece length'], $info['pieces']) || \strlen($info['pieces']) % 20 != 0) {
+        if (!isset($info['name'], $info['piece length'])) {
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
-        // Check if torrent contains info_hash v2
-        $bt_v2 = false;
+        // Check if torrent contains info_hash v2 or v1
+        $bt_v1 = $bt_v2 = false;
         if (($info['meta version'] ?? null) == 2 && is_array($info['file tree'] ?? null)) {
             $bt_v2 = true;
         }
+        if (isset($info['pieces'])) {
+            $bt_v1 = true;
+        }
+        if ($bb_cfg['tracker']['disabled_v2_torrents'] && $bt_v2 && !$bt_v1) {
+            return self::torrent_error_exit('v2-only torrents were disabled, allowed: v1 and hybrids');
+        }
 
         // Getting info_hash v1
-        $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
-        $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-        $info_hash_md5 = md5($info_hash);
+        if ($bt_v1) {
+            $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
+            $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+            $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
+        }
 
         // Getting info_hash v2
         if ($bt_v2) {
-            $info_hash_v2 = pack('H*', hash('sha256', \SandFox\Bencode\Bencode::encode($info)));
+            $v2_hash = hash('sha256', \SandFox\Bencode\Bencode::encode($info));
+            $info_hash_v2 = pack('H*', $v2_hash);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
+            $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
         }
 
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {
-            self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0]);
+            self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash ?? hex2bin(substr($v2_hash, 0, 40))), 'id' => $topic_id, 'freetorrent' => 0]);
         }
 
-        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
+        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
             $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
             bb_die($msg);
             set_die_append_msg($forum_id, $topic_id);
@@ -378,13 +390,29 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        } elseif (isset($info['files']) && \is_array($info['files'])) {
+        } elseif ($bt_v1 && isset($info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
                 if (($f['attr'] ?? null) !== 'p') {
                     $totallen += (float)$f['length'];
                 }
             }
+        } elseif ($bt_v2) {
+            $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
+                $size = 0;
+
+                foreach ($array as $key => $value) {
+                    if (!isset($value[''])) {
+                        $size += $fileTreeSize($value);
+                    } else {
+                        $size += (int)$value['']['length'];
+                    }
+                }
+
+                return $size;
+            };
+
+            $totallen = (float)$fileTreeSize($info['file tree']);
         } else {
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
         }

@@ -1787,7 +1787,20 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key):
         return false;
     }
 
-    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . (!empty($infohash_v2) ? '&xt=urn:btmh:1220' . bin2hex($infohash_v2) : '') . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    $magnet = 'magnet:?';
+
+    if (!empty($infohash)) {
+        $magnet .= 'xt=urn:btih:' . bin2hex($infohash);
+    }
+
+    if (!empty($infohash_v2)) {
+        if (!empty($infohash)) {
+            $magnet .= '&';
+        }
+        $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
+    }
+
+    return '<a href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
@@ -1876,20 +1889,17 @@ function profile_url($data)
     return $profile;
 }
 
-function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = 100, $width = 100)
+function get_avatar($user_id, $ext_id, $allow_avatar = true)
 {
     global $bb_cfg;
 
-    $height = $height ? 'height="' . $height . '"' : '';
-    $width = $width ? 'width="' . $width . '"' : '';
-
-    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" />';
 
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
-        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" />';
     } elseif ($allow_avatar && $ext_id) {
         if (file_exists(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" />';
         }
     }
 
