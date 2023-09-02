@@ -78,7 +78,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
         }
     }
     if (!$have_new_pm && $userdata['user_unread_privmsg']) {
-        // synch unread pm count
+        // sync unread pm count
         if (defined('IN_PM')) {
             $row = DB()->fetch_row("
 				SELECT COUNT(*) AS pm_count
@@ -88,7 +88,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
 				GROUP BY privmsgs_to_userid
 			");
 
-            $real_unread_pm_count = (int)$row['pm_count'];
+            $real_unread_pm_count = (int)$row['pm_count'] ?? 0;
 
             if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
                 $userdata['user_unread_privmsg'] = $real_unread_pm_count;
