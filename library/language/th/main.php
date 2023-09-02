@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'เมล็ดพันธ์';
 $lang['LEECHING'] = 'ดูดเลือ';
 $lang['IS_REGISTERED'] = 'จดทะเบียน';
 $lang['MAGNET'] = 'แม่เหล็ก';
-$lang['DC_MAGNET'] = 'ค้นหาในวอชิงตั++ยชื่อแฟ้ม';
-$lang['DC_MAGNET_EXT'] = 'ค้นหาในวอชิงตั++โดยส่วนขยาย';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'สถานะ';
