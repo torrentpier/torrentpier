@@ -647,9 +647,9 @@ $bb_cfg['tracker'] = [
     'retracker_host' => 'http://retracker.local/announce',
     'guest_tracker' => true,
     'search_by_tor_status' => true,
-    'freeleech' => false, // freelech mode (If enabled, then disable "gold_silver_enabled")
+    'freeleech' => false, // freeleech mode (If enabled, then disable "gold_silver_enabled")
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
-    'disabled_v2_torrents' => false // only allow registration of v2 torrents
+    'disabled_v2_torrents' => false // allow registration of v2-only torrents
 ];
 
 // Ratio settings
