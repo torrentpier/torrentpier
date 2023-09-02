@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'זרע';
 $lang['LEECHING'] = 'עלוקה';
 $lang['IS_REGISTERED'] = 'רשום';
 $lang['MAGNET'] = 'מגנט';
-$lang['DC_MAGNET'] = 'חיפוש ב-DC++ על ידי שם הקובץ';
-$lang['DC_MAGNET_EXT'] = 'חיפוש ב-DC++ על ידי הסיומת';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'סטטוס';
