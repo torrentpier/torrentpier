@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'البذور';
 $lang['LEECHING'] = 'علقة';
 $lang['IS_REGISTERED'] = 'مسجلة';
 $lang['MAGNET'] = 'المغناطيس';
-$lang['DC_MAGNET'] = 'البحث في DC++ قبل اسم الملف';
-$lang['DC_MAGNET_EXT'] = 'البحث في DC++ واستطرادا';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'حالة';
