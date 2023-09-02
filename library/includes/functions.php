@@ -1770,7 +1770,20 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key):
         return false;
     }
 
-    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . (!empty($infohash_v2) ? '&xt=urn:btmh:1220' . bin2hex($infohash_v2) : '') . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+	$magnet = 'magnet:?';
+	
+	if (!empty($infohash)) {
+		$magnet .= 'xt=urn:btih:' . bin2hex($infohash);
+	}
+
+	if (!empty($infohash_v2)) {
+		if (!empty($infohash)) {
+			$magnet .= '&';
+		}
+		$magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
+	}
+
+    return '<a href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
