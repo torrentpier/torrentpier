@@ -39,6 +39,7 @@ class Ajax
         'change_torrent' => ['user'],
         'change_tor_status' => ['user'],
         'manage_group' => ['user'],
+        'callseed' => ['user'],
 
         'view_post' => ['guest'],
         'view_torrent' => ['guest'],
@@ -469,5 +470,15 @@ class Ajax
     public function sitemap()
     {
         require AJAX_DIR . '/sitemap.php';
+    }
+
+    /**
+     * Call seed actions
+     *
+     * @return void
+     */
+    public function callseed()
+    {
+        require AJAX_DIR . '/callseed.php';
     }
 }

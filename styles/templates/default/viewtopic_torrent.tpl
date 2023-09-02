@@ -9,6 +9,17 @@ $(document).ready(function(){
 		sortList: [[4,1]]
 	});
 });
+
+// callseed
+ajax.callseed = function (topic_id) {
+    ajax.exec({
+        action: 'callseed',
+        topic_id: topic_id,
+    });
+};
+ajax.callback.callseed = function (data) {
+    alert(data.response);
+};
 </script>
 
 <tr>
@@ -238,7 +249,7 @@ $(document).ready(function(){
 		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption" /><!-- ENDIF -->
 	</form>
 	<!-- ENDIF -->
-	<!-- IF CALL_SEED --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->
+    <!-- IF CALL_SEED --><input onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
 	&nbsp;
 	</td>
 </tr>
