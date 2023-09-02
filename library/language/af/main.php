@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'saad';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'geregistreer';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Soek in DC + + volgens lêernaam';
-$lang['DC_MAGNET_EXT'] = 'Soek in DC ++ by uitbreiding';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'status';
