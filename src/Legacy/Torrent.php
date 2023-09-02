@@ -288,7 +288,7 @@ class Torrent
         $forum_id = $torrent['forum_id'];
         $poster_id = $torrent['poster_id'];
         $info_hash = $info_hash_v2 = null;
-        $info_hash_sql = $info_hash_v2_sql = null;
+        $info_hash_sql = $info_hash_v2_sql = $info_hash_where = null;
         $v2_hash = null;
 
         if ($torrent['extension'] !== TORRENT_EXT) {
@@ -356,13 +356,14 @@ class Torrent
             $bt_v1 = true;
         }
         if ($bb_cfg['tracker']['allow_only_v2_torrents'] && !$bt_v1 && $bt_v2) {
-            return self::torrent_error_exit('v2 only torrents disabled by site admin');
+            //return self::torrent_error_exit('v2 only torrents disabled by site admin');
         }
 
         // Getting info_hash v1
         if ($bt_v1) {
             $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
             $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+            $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
         }
 
         // Getting info_hash v2
@@ -370,6 +371,7 @@ class Torrent
             $v2_hash = hash('sha256', \SandFox\Bencode\Bencode::encode($info));
             $info_hash_v2 = pack('H*', $v2_hash);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
+            $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
         }
 
         // Ocelot
@@ -377,7 +379,7 @@ class Torrent
             self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash ?? hex2bin(substr($v2_hash, 0, 40))), 'id' => $topic_id, 'freetorrent' => 0]);
         }
 
-        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
+        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
             $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
             bb_die($msg);
             set_die_append_msg($forum_id, $topic_id);
