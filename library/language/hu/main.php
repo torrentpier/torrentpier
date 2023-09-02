@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Mag';
 $lang['LEECHING'] = 'Pióca';
 $lang['IS_REGISTERED'] = 'Regisztrált';
 $lang['MAGNET'] = 'Mágnes';
-$lang['DC_MAGNET'] = 'Keresés a DC++ által filename';
-$lang['DC_MAGNET_EXT'] = 'Keresés a DC++ kiterjesztés';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Állapot';
