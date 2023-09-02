@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Farë';
 $lang['LEECHING'] = 'Gjaku';
 $lang['IS_REGISTERED'] = 'Regjistruar';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Kërkim në DC++ nga emri i skedarit';
-$lang['DC_MAGNET_EXT'] = 'Kërkim në DC++ vazhdimin';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusi';
