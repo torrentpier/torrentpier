@@ -18,10 +18,10 @@ $last_topic_max_len = 40;
 $title_match_key = 'nm';
 $title_match_max_len = 60;
 
-$page_cfg['load_tpl_vars'] = array(
+$page_cfg['load_tpl_vars'] = [
     'post_icons',
-    'topic_icons',
-);
+    'topic_icons'
+];
 
 // Init request vars
 $forum_id = (int)request_var('f', '');

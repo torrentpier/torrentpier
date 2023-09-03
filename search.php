@@ -12,11 +12,11 @@ define('BB_SCRIPT', 'search');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-$page_cfg['load_tpl_vars'] = array(
+$page_cfg['load_tpl_vars'] = [
     'post_buttons',
     'post_icons',
-    'topic_icons',
-);
+    'topic_icons'
+];
 
 // Start session management
 $user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));

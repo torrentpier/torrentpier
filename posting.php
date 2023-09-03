@@ -13,7 +13,9 @@ require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 require ATTACH_DIR . '/attachment_mod.php';
 
-$page_cfg['load_tpl_vars'] = array('post_icons');
+$page_cfg['load_tpl_vars'] = [
+    'post_icons'
+];
 
 $submit = (bool)@$_REQUEST['post'];
 $preview = (bool)@$_REQUEST['preview'];
@@ -32,7 +34,7 @@ $orig_word = $replacement_word = [];
 
 // Set topic type
 $topic_type = (@$_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
-$topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE)) ? $topic_type : POST_NORMAL;
+$topic_type = in_array($topic_type, [POST_NORMAL, POST_STICKY, POST_ANNOUNCE]) ? $topic_type : POST_NORMAL;
 
 $selected_rg = 0;
 $switch_rg_sig = 0;
@@ -278,17 +280,15 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
             $topic_has_new_posts = true;
 
             foreach ($rowset as $i => $row) {
-                $template->assign_block_vars('new_posts', array(
+                $template->assign_block_vars('new_posts', [
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
                     'POST_DATE' => bb_date($row['post_time'], $bb_cfg['post_date_format']),
-                    'MESSAGE' => get_parsed_post($row),
-                ));
+                    'MESSAGE' => get_parsed_post($row)
+                ]);
             }
-            $template->assign_vars(array(
-                'TPL_SHOW_NEW_POSTS' => true,
-            ));
+            $template->assign_vars(['TPL_SHOW_NEW_POSTS' => true]);
 
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
             unset($rowset);

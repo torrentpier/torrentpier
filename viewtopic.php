@@ -17,11 +17,11 @@ $datastore->enqueue(array(
     'cat_forums',
 ));
 
-$page_cfg['load_tpl_vars'] = array(
+$page_cfg['load_tpl_vars'] = [
     'post_buttons',
     'post_icons',
-    'topic_icons',
-);
+    'topic_icons'
+];
 
 $newest = $next_topic_id = 0;
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
