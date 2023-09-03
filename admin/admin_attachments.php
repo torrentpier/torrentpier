@@ -294,7 +294,7 @@ if ($mode == 'cats') {
     if (!is_imagick() && !@extension_loaded('gd')) {
         $new_attach['img_create_thumbnail'] = '0';
     } else {
-        $template->assign_block_vars('switch_thumbnail_support', array());
+        $template->assign_block_vars('switch_thumbnail_support', []);
     }
 
     $template->assign_vars(array(
@@ -519,7 +519,7 @@ if ($mode == 'quota' && $e_mode == 'view_quota') {
         bb_die('Invalid call');
     }
 
-    $template->assign_block_vars('switch_quota_limit_desc', array());
+    $template->assign_block_vars('switch_quota_limit_desc', []);
 
     $sql = 'SELECT * FROM ' . BB_QUOTA_LIMITS . ' WHERE quota_limit_id = ' . (int)$quota_id . ' LIMIT 1';
 

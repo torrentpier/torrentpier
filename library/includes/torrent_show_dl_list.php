@@ -58,9 +58,9 @@ if ($show_dl_list) {
 
     if ($dl_info = DB()->fetch_rowset($sql)) {
         if ($count_mode) {
-            $template->assign_block_vars('dl_counts', array());
+            $template->assign_block_vars('dl_counts', []);
         } else {
-            $template->assign_block_vars('dl_users', array());
+            $template->assign_block_vars('dl_users', []);
         }
 
         foreach ($dl_info as $rid => $u) {
@@ -99,7 +99,7 @@ if ($show_dl_list) {
             }
         }
     } else {
-        $template->assign_block_vars('dl_list_none', array());
+        $template->assign_block_vars('dl_list_none', []);
     }
 }
 

@@ -276,7 +276,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 		</select>
 	';
 
-    $template->assign_block_vars('switch_user_auth', array());
+    $template->assign_block_vars('switch_user_auth', []);
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,

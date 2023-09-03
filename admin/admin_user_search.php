@@ -31,7 +31,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $group_list = '';
 
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('groups_exist', array());
+        $template->assign_block_vars('groups_exist', []);
 
         while ($row = DB()->sql_fetchrow($result)) {
             $group_list .= '<option value="' . $row['group_id'] . '">' . strip_tags(htmlspecialchars($row['group_name'])) . '</option>';
@@ -44,7 +44,7 @@ if (!isset($_REQUEST['dosearch'])) {
     }
     $rank_select_box = '';
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('ranks_exist', array());
+        $template->assign_block_vars('ranks_exist', []);
         while ($row = DB()->sql_fetchrow($result)) {
             $rank = $row['rank_title'];
             $rank_id = $row['rank_id'];
@@ -66,7 +66,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $forums = [];
 
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('forums_exist', array());
+        $template->assign_block_vars('forums_exist', []);
 
         $last_cat_id = -1;
         $forums_list = '';

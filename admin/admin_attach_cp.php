@@ -330,7 +330,7 @@ if ($view === 'attachments') {
 
         $s_hidden = '<input type="hidden" name="u_id" value="' . (int)$uid . '" />';
 
-        $template->assign_block_vars('switch_user_based', array());
+        $template->assign_block_vars('switch_user_based', []);
 
         $template->assign_vars(array(
             'S_USER_HIDDEN' => $s_hidden,

@@ -173,7 +173,7 @@ function display_attachments($post_id)
         return;
     }
 
-    $template->assign_block_vars('postrow.attach', array());
+    $template->assign_block_vars('postrow.attach', []);
 
     for ($i = 0; $i < $num_attachments; $i++) {
         // Some basic things...

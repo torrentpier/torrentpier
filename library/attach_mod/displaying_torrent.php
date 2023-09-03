@@ -183,7 +183,7 @@ if ($tor_reged && $tor_info) {
     }
 
     if (!$dl_allowed) {
-        $template->assign_block_vars('postrow.attach.tor_reged', array());
+        $template->assign_block_vars('postrow.attach.tor_reged', []);
         $template->assign_vars(array(
             'TOR_BLOCKED' => true,
             'TOR_BLOCKED_MSG' => sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
@@ -392,10 +392,10 @@ if ($tor_reged && $tor_info) {
                             ));
 
                             if ($ip) {
-                                $template->assign_block_vars("$x_full.iphead", array());
+                                $template->assign_block_vars("$x_full.iphead", []);
                             }
                             if ($port !== false) {
-                                $template->assign_block_vars("$x_full.porthead", array());
+                                $template->assign_block_vars("$x_full.porthead", []);
                             }
                         }
                         $compl_perc = ($tor_size) ? round(($p_max_up / $tor_size), 1) : 0;
@@ -415,10 +415,10 @@ if ($tor_reged && $tor_info) {
                             ));
 
                             if ($ip) {
-                                $template->assign_block_vars("$x_full.iphead", array());
+                                $template->assign_block_vars("$x_full.iphead", []);
                             }
                             if ($port !== false) {
-                                $template->assign_block_vars("$x_full.porthead", array());
+                                $template->assign_block_vars("$x_full.porthead", []);
                             }
                         }
                         $compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;

@@ -367,7 +367,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_STOPPED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
             $clear_search_disabled = 'disabled';
 
-            $template->assign_block_vars('start_select_input', array());
+            $template->assign_block_vars('start_select_input', []);
         } elseif ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_ABORTED) {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_ABORTED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
             // check if the interrupted cycle has finished
@@ -376,7 +376,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             }
             $clear_search_disabled = 'disabled';
 
-            $template->assign_block_vars('start_select_input', array());
+            $template->assign_block_vars('start_select_input', []);
         } else {
             // when finished
 
@@ -384,17 +384,17 @@ if ($mode == 'submit' || $mode == 'refresh') {
                 $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
                 $clear_search_disabled = 'disabled';
 
-                $template->assign_block_vars('start_select_input', array());
+                $template->assign_block_vars('start_select_input', []);
             } else {
                 $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED'], $total_posts, $last_saved_date);
 
-                $template->assign_block_vars('start_text_input', array());
+                $template->assign_block_vars('start_text_input', []);
             }
         }
 
-        $template->assign_block_vars('last_saved_info', array());
+        $template->assign_block_vars('last_saved_info', []);
     } else {
-        $template->assign_block_vars('start_text_input', array());
+        $template->assign_block_vars('start_text_input', []);
     }
 
     // create the output of page

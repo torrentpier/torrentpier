@@ -236,7 +236,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 
 // Login box
 $in_out = ($logged_in) ? 'in' : 'out';
-$template->assign_block_vars("switch_user_logged_{$in_out}", array());
+$template->assign_block_vars("switch_user_logged_{$in_out}", []);
 
 if (!IS_GUEST) {
     header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');

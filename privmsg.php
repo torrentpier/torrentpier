@@ -1099,7 +1099,7 @@ if ($mode == 'read') {
     //
     // Enable extensions in posting_body
     //
-    $template->assign_block_vars('switch_privmsg', array());
+    $template->assign_block_vars('switch_privmsg', []);
     $template->assign_var('POSTING_USERNAME');
 
     $post_a = '&nbsp;';
@@ -1434,7 +1434,7 @@ if ($mode == 'read') {
 
         generate_pagination(PM_URL . "?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
     } else {
-        $template->assign_block_vars("switch_no_messages", array());
+        $template->assign_block_vars("switch_no_messages", []);
     }
 }
 

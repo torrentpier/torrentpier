@@ -301,15 +301,15 @@ if (($delete || $mode == 'delete') && !$confirm) {
     if (isset($_POST['cancel'])) {
         redirect(POST_URL . "$post_id#$post_id");
     }
-    $hidden_fields = array(
+    $hidden_fields = [
         'p' => $post_id,
-        'mode' => 'delete',
-    );
-    print_confirmation(array(
+        'mode' => 'delete'
+    ];
+    print_confirmation([
         'QUESTION' => $lang['CONFIRM_DELETE'],
         'FORM_ACTION' => POSTING_URL,
-        'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
-    ));
+        'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
+    ]);
 } elseif (($submit || $confirm) && !$topic_has_new_posts) {
     //
     // Submit post (newtopic, edit, reply, etc.)
@@ -347,13 +347,13 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$post_data['first_post']) {
                 \TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             } else {
-                redirect("modcp.php?" . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . $userdata['session_id']);
+                redirect('modcp.php?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . $userdata['session_id']);
             }
             break;
     }
 
     if (!$error_msg) {
-        if (!in_array($mode, array('editpost', 'delete'))) {
+        if (!in_array($mode, ['editpost', 'delete'])) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
             \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
@@ -432,14 +432,14 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
         $preview_message = htmlCHR($message, false, ENT_NOQUOTES);
         $preview_message = bbcode2html($preview_message);
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_PREVIEW_POST' => true,
             'TOPIC_TITLE' => wbr($preview_subject),
             'POST_SUBJECT' => $preview_subject,
             'POSTER_NAME' => $preview_username,
             'POST_DATE' => bb_date(TIMENOW),
-            'PREVIEW_MSG' => $preview_message,
-        ));
+            'PREVIEW_MSG' => $preview_message
+        ]);
     }
 } else {
     // User default entry point
@@ -489,9 +489,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 }
 
 if ($error_msg) {
-    $template->assign_vars(array(
-        'ERROR_MESSAGE' => $error_msg,
-    ));
+    $template->assign_vars(['ERROR_MESSAGE' => $error_msg]);
 }
 
 if (IS_GUEST || ($mode == 'editpost' && $post_info['poster_id'] == GUEST_UID)) {
@@ -508,7 +506,7 @@ if (!IS_GUEST) {
 // Topic type selection
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
-    $template->assign_block_vars('switch_type_toggle', array());
+    $template->assign_block_vars('switch_type_toggle', []);
 
     if ($is_auth['auth_sticky']) {
         $topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_STICKY . '"';
@@ -603,12 +601,10 @@ switch ($mode) {
 // Generate smilies listing for page output
 generate_smilies('inline');
 
-$template->set_filenames(array(
-    'body' => 'posting.tpl',
-));
+$template->set_filenames(['body' => 'posting.tpl']);
 
 // Output the data to the template
-$template->assign_vars(array(
+$template->assign_vars([
     'FORUM_NAME' => htmlCHR($forum_name),
     'PAGE_TITLE' => $page_title,
     'POSTING_TYPE_TITLE' => $page_title,
@@ -631,7 +627,7 @@ $template->assign_vars(array(
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
     'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields,
-));
+]);
 
 if ($mode == 'newtopic' || $post_data['first_post']) {
     $template->assign_var('POSTING_SUBJECT');
@@ -639,10 +635,10 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 
 // Update post time
 if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SHOW_UPDATE_POST_TIME' => ($is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW)),
         'UPDATE_POST_TIME_CHECKED' => ($post_data['poster_post'] && ($post_info['post_time'] + 3600 * 2 > TIMENOW)),
-    ));
+    ]);
 }
 
 // Topic review

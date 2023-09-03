@@ -323,7 +323,7 @@ if ($log_rowset) {
         'FILTER_USERS' => !empty($filter['users']),
     ));
 } else {
-    $template->assign_block_vars('log_not_found', array());
+    $template->assign_block_vars('log_not_found', []);
 }
 
 // Select
