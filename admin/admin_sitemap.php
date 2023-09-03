@@ -19,7 +19,7 @@ $sql = 'SELECT * FROM ' . BB_CONFIG;
 if (!$result = DB()->sql_query($sql)) {
     bb_die('Could not query config information in admin_sitemap');
 } else {
-    $new_params = array();
+    $new_params = [];
 
     while ($row = DB()->sql_fetchrow($result)) {
         $config_name = $row['config_name'];

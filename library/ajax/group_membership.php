@@ -31,7 +31,7 @@ switch ($mode) {
 					WHERE ug.user_id = $user_id
 					ORDER BY g.group_name
 				";
-        $html = array();
+        $html = [];
         foreach (DB()->fetch_rowset($sql) as $row) {
             $class = ($row['user_pending']) ? 'med' : 'med bold';
             $class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';

@@ -69,12 +69,12 @@ switch ($mode) {
         }
 
         // Log action
-        $log_action->mod('mod_topic_renamed', array(
+        $log_action->mod('mod_topic_renamed', [
             'forum_id' => $t_data['forum_id'],
             'topic_id' => $topic_id,
             'topic_title' => $old_title,
-            'topic_title_new' => $new_title,
-        ));
+            'topic_title_new' => $new_title
+        ]);
 
         $this->response['topic_id'] = $topic_id;
         $this->response['topic_title'] = $new_title;

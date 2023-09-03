@@ -14,9 +14,9 @@ require __DIR__ . '/common.php';
 // Page config
 $page_cfg['include_bbcode_js'] = true;
 $page_cfg['use_tablesorter'] = true;
-$page_cfg['load_tpl_vars'] = array(
-    'post_icons',
-);
+$page_cfg['load_tpl_vars'] = [
+    'post_icons'
+];
 
 // Session start
 $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
@@ -48,7 +48,7 @@ $session_id = $userdata['session_id'];
 
 $status = $_POST['status'] ?? false;
 
-$cat_forum = $tor_to_show = $search_in_forums_ary = array();
+$cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
 $tr_error = $poster_error = false;
 $row_num = $tor_count = 0;
@@ -137,7 +137,7 @@ $order_opt = array(
         'sql' => 'tor.seeder_last_seen',
     ),
 );
-$order_select = array();
+$order_select = [];
 foreach ($order_opt as $val => $opt) {
     $order_select[$opt['lang']] = $val;
 }
@@ -181,7 +181,7 @@ $time_opt = array(
         'sql' => TIMENOW - 86400 * 30,
     ),
 );
-$time_select = array();
+$time_select = [];
 foreach ($time_opt as $val => $opt) {
     $time_select[$opt['lang']] = $val;
 }
@@ -217,7 +217,7 @@ $s_not_seen_opt = array(
         'sql' => 0,
     ),
 );
-$s_not_seen_select = array();
+$s_not_seen_select = [];
 foreach ($s_not_seen_opt as $val => $opt) {
     $s_not_seen_select[$opt['lang']] = $val;
 }
@@ -298,7 +298,7 @@ if (isset($_GET[$user_releases_key])) {
 }
 
 // Restore torrents list and search settings if we have valid $search_id
-$tor_list_ary = array();
+$tor_list_ary = [];
 $tor_list_sql = '';
 
 if ($search_id) {
@@ -349,7 +349,7 @@ $datastore->rm('cat_forums');
 if (!$set_default) {
     // Search in forum or category
     // Get requested cat_id
-    $search_in_forums_fary = array();
+    $search_in_forums_fary = [];
 
     if ($req_cat_id =& $_REQUEST[$cat_key]) {
         if (isset($cat_forum['c'][$req_cat_id])) {
@@ -428,7 +428,7 @@ if (!$set_default) {
     }
 }
 
-$dl_status = array();
+$dl_status = [];
 if ($dl_cancel_val) {
     $dl_status[] = DL_STATUS_CANCEL;
 }
@@ -497,7 +497,7 @@ if ($allowed_forums) {
         'sort',
         'time',
     );
-    $curr_set = array();
+    $curr_set = [];
     foreach ($save_in_db as $name) {
         $curr_set[${"{$name}_key"}] = ${"{$name}_val"};
     }
@@ -879,7 +879,7 @@ $save_through_pages = array(
     'show_speed',
     'tor_type',
 );
-$hidden_fields = array();
+$hidden_fields = [];
 foreach ($save_through_pages as $name) {
     $hidden_fields['prev_' . ${"{$name}_key"}] = ${"{$name}_val"};
 }

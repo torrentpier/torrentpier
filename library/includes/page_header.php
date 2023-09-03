@@ -222,7 +222,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 			WHERE topic_id IN(" . $userdata['torhelp'] . ")
 			LIMIT 8
 		";
-        $torhelp_topics = array();
+        $torhelp_topics = [];
 
         foreach (DB()->fetch_rowset($sql) as $row) {
             $torhelp_topics[] = '<a href="viewtopic.php?t=' . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';
@@ -236,7 +236,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 
 // Login box
 $in_out = ($logged_in) ? 'in' : 'out';
-$template->assign_block_vars("switch_user_logged_{$in_out}", array());
+$template->assign_block_vars("switch_user_logged_{$in_out}", []);
 
 if (!IS_GUEST) {
     header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');

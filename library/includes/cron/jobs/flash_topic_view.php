@@ -12,10 +12,10 @@ if (!defined('BB_ROOT')) {
 }
 
 // Lock tables
-DB()->lock(array(
+DB()->lock([
     BB_TOPICS . ' t',
-    BUF_TOPIC_VIEW . ' buf',
-));
+    BUF_TOPIC_VIEW . ' buf'
+]);
 
 // Flash buffered records
 DB()->query("

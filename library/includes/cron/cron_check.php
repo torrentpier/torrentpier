@@ -35,7 +35,7 @@ if ($cron_jobs) {
     require(CRON_DIR . 'cron_run.php');
 
     // Update cron_last_check
-    bb_update_config(array('cron_last_check' => TIMENOW + 10));
+    bb_update_config(['cron_last_check' => TIMENOW + 10]);
 } else {
     bb_log(date('H:i:s - ') . getmypid() . ' --x- no active jobs found ----------------------------------------------' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 }

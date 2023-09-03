@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$ranks = array();
+$ranks = [];
 
 $sql = "SELECT * FROM " . BB_RANKS;
 

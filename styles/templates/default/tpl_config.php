@@ -9,7 +9,7 @@
 
 global $bb_cfg, $page_cfg, $template, $images, $lang;
 
-$width = $height = array();
+$width = $height = [];
 $template_name = basename(__DIR__);
 
 $_img = BB_ROOT . 'styles/images/';
@@ -113,7 +113,7 @@ $images['voting_graphic'][4] = $_main . 'voting_bar.gif';
 $images['progress_bar'] = $_main . 'progress_bar.gif';
 $images['progress_bar_full'] = $_main . 'progress_bar_full.gif';
 
-$template->assign_vars(array(
+$template->assign_vars([
     'IMG' => $_main,
     'TEXT_BUTTONS' => $bb_cfg['text_buttons'],
     'POST_BTN_SPACER' => $bb_cfg['text_buttons'] ? '&nbsp;' : '',
@@ -124,12 +124,12 @@ $template->assign_vars(array(
     'ATTACH_IMG_WIDTH_DECR_JS' => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['attach_img_width_decr'],
     'MAGNET_LINKS' => $bb_cfg['magnet_links_enabled'],
     'FEED_IMG' => '<img src="' . $_main . 'feed.png" class="feed-small" alt="' . $lang['ATOM_FEED'] . '" />',
-));
+]);
 
 // post_buttons
 if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tpl_vars'])) {
     if (isset($vars['post_buttons'])) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'QUOTE_IMG' => $bb_cfg['text_buttons'] ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="' . $images['icon_quote'] . '" alt="' . $lang['REPLY_WITH_QUOTE_TXTB'] . '" title="' . $lang['REPLY_WITH_QUOTE'] . '" />',
             'EDIT_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="' . $images['icon_edit'] . '" alt="' . $lang['EDIT_DELETE_POST_TXTB'] . '" title="' . $lang['EDIT_POST'] . '" />',
             'DELETE_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['DELETE_POST_TXTB'] : '<img src="' . $images['icon_delpost'] . '" alt="' . $lang['DELETE_POST_TXTB'] . '" title="' . $lang['DELETE_POST'] . '" />',
@@ -149,36 +149,36 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
             'WWW_IMG' => $bb_cfg['text_buttons'] ? $lang['VISIT_WEBSITE_TXTB'] : '<img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE_TXTB'] . '" title="' . $lang['VISIT_WEBSITE'] . '" />',
             'ICQ_IMG' => $bb_cfg['text_buttons'] ? $lang['ICQ_TXTB'] : '<img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ_TXTB'] . '" title="' . $lang['ICQ'] . '" />',
 
-            'EMAIL_URL' => BB_ROOT . "profile.php?mode=email&amp;u=",
+            'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;u=',
             'FORUM_URL' => BB_ROOT . FORUM_URL,
             'ICQ_URL' => 'http://www.icq.com/people/',
             'PM_URL' => BB_ROOT . PM_URL,
-            'PROFILE_URL' => BB_ROOT . PROFILE_URL,
-        ));
+            'PROFILE_URL' => BB_ROOT . PROFILE_URL
+        ]);
     }
     if (isset($vars['post_icons'])) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'MINIPOST_IMG' => '<img src="' . $images['icon_minipost'] . '" class="icon1" alt="' . $lang['POST'] . '" />',
             'ICON_GOTOPOST' => '<img src="' . $images['icon_gotopost'] . '" class="icon1" alt="' . $lang['GO'] . '" title="' . $lang['GOTO_PAGE'] . '" />',
             'MINIPOST_IMG_NEW' => '<img src="' . $images['icon_minipost_new'] . '" class="icon1" alt="' . $lang['NEW'] . '" />',
             'ICON_LATEST_REPLY' => '<img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="' . $lang['LATEST'] . '" title="' . $lang['VIEW_LATEST_POST'] . '" />',
             'ICON_NEWEST_REPLY' => '<img src="' . $images['icon_newest_reply'] . '" class="icon2" alt="' . $lang['NEWEST'] . '" title="' . $lang['VIEW_NEWEST_POST'] . '" />',
-        ));
+        ]);
     }
     if (isset($vars['topic_icons'])) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'MOVED' => TOPIC_MOVED,
             'ANNOUNCE' => POST_ANNOUNCE,
             'STICKY' => POST_STICKY,
-            'LOCKED' => TOPIC_LOCKED,
-        ));
+            'LOCKED' => TOPIC_LOCKED
+        ]);
     }
     if (isset($vars['pm_icons'])) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'INBOX_IMG' => '<img src="' . $images['pm_inbox'] . '" class="pm_box_icon" alt="" />',
             'OUTBOX_IMG' => '<img src="' . $images['pm_outbox'] . '" class="pm_box_icon" alt="" />',
             'SENTBOX_IMG' => '<img src="' . $images['pm_sentbox'] . '" class="pm_box_icon" alt="" />',
             'SAVEBOX_IMG' => '<img src="' . $images['pm_savebox'] . '" class="pm_box_icon" alt="" />',
-        ));
+        ]);
     }
 }
