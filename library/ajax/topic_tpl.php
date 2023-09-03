@@ -60,7 +60,7 @@ switch ($mode) {
         preg_match('#\d+#', (string)$this->request['tpl_rules'], $m);
         $tpl_rules_post_id = isset($m[0]) ? (int)$m[0] : 0;
 
-        $sql_args = array(
+        $sql_args = [
             'tpl_name' => (string)$tpl_name,
             'tpl_src_form' => (string)$tpl_src_form,
             'tpl_src_title' => (string)$tpl_src_title,
@@ -68,8 +68,8 @@ switch ($mode) {
             'tpl_comment' => (string)$tpl_comment,
             'tpl_rules_post_id' => (int)$tpl_rules_post_id,
             'tpl_last_edit_tm' => (int)TIMENOW,
-            'tpl_last_edit_by' => (int)$userdata['user_id'],
-        );
+            'tpl_last_edit_by' => (int)$userdata['user_id']
+        ];
         break;
 }
 // выполнение

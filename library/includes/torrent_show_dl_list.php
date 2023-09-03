@@ -34,7 +34,7 @@ if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
     $template->assign_vars(array('S_DL_DELETE' => $s_dl_delete));
 }
 
-$dl_cat = $dl_count = array();
+$dl_cat = $dl_count = [];
 
 if ($show_dl_list) {
     foreach ($dl_status_css as $i => $desc) {
@@ -58,9 +58,9 @@ if ($show_dl_list) {
 
     if ($dl_info = DB()->fetch_rowset($sql)) {
         if ($count_mode) {
-            $template->assign_block_vars('dl_counts', array());
+            $template->assign_block_vars('dl_counts', []);
         } else {
-            $template->assign_block_vars('dl_users', array());
+            $template->assign_block_vars('dl_users', []);
         }
 
         foreach ($dl_info as $rid => $u) {
@@ -99,7 +99,7 @@ if ($show_dl_list) {
             }
         }
     } else {
-        $template->assign_block_vars('dl_list_none', array());
+        $template->assign_block_vars('dl_list_none', []);
     }
 }
 

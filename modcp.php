@@ -41,7 +41,7 @@ function return_msg_mcp($status_msg)
 
 function validate_topics($forum_id, &$req_topics, &$topic_titles)
 {
-    $valid_topics = $valid_titles = array();
+    $valid_topics = $valid_titles = [];
 
     if ($topic_csv = get_id_csv($req_topics)) {
         $sql = "SELECT topic_id, topic_title FROM " . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND forum_id = $forum_id";
@@ -130,7 +130,7 @@ if ($topic_id) {
 }
 
 // Start session management
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
 if (isset($_POST['cancel']) || IS_GUEST) {
@@ -173,7 +173,7 @@ if ($is_moderator && !$userdata['session_admin']) {
 //
 // Get required vars
 //
-$req_topics = $topic_csv = $topic_titles = $hidden_fields = array();
+$req_topics = $topic_csv = $topic_titles = $hidden_fields = [];
 
 switch ($mode) {
     case 'delete':
@@ -196,12 +196,12 @@ switch ($mode) {
             bb_die($lang['NONE_SELECTED']);
         }
 
-        $hidden_fields = array(
+        $hidden_fields = [
             'sid' => $userdata['session_id'],
             'mode' => $mode,
             'f' => $forum_id,
-            't' => $topic_id,
-        );
+            't' => $topic_id
+        ];
         foreach ($req_topics as $req_topic_id) {
             $hidden_fields['topic_id_list'][] = $req_topic_id;
         }
@@ -238,12 +238,12 @@ switch ($mode) {
             $msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
-            print_confirmation(array(
+            print_confirmation([
                 'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
                 'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
                 'FORM_ACTION' => "modcp.php",
-                'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
-            ));
+                'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
+            ]);
         }
         break;
 
@@ -278,7 +278,7 @@ switch ($mode) {
 
             $forum_select = get_forum_select($forum_select_mode, 'new_forum', $forum_id);
 
-            $template->assign_vars(array(
+            $template->assign_vars([
                 'TPL_MODCP_MOVE' => true,
                 'SHOW_LEAVESHADOW' => $is_moderator,
                 'SHOW_BOT_OPTIONS' => $is_moderator,
@@ -290,9 +290,9 @@ switch ($mode) {
                 'S_FORUM_SELECT' => $forum_select,
                 'S_MODCP_ACTION' => "modcp.php",
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
-            ));
+            ]);
 
-            $template->set_filenames(array('body' => 'modcp.tpl'));
+            $template->set_filenames(['body' => 'modcp.tpl']);
         }
         break;
 
@@ -310,7 +310,7 @@ switch ($mode) {
 				AND topic_status != $new_topic_status
 		";
 
-        $topic_csv = array();
+        $topic_csv = [];
 
         foreach (DB()->fetch_rowset($sql) as $row) {
             $topic_csv[] = $row['topic_id'];
@@ -331,11 +331,11 @@ switch ($mode) {
         $type = ($lock) ? 'mod_topic_lock' : 'mod_topic_unlock';
 
         foreach ($log_topics as $topic_id => $topic_title) {
-            $log_action->mod($type, array(
+            $log_action->mod($type, [
                 'forum_id' => $forum_id,
                 'topic_id' => $topic_id,
-                'topic_title' => $topic_title,
-            ));
+                'topic_title' => $topic_title
+            ]);
         }
 
         $msg = ($lock) ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
@@ -364,11 +364,11 @@ switch ($mode) {
         // Log action
         $type = ($set_download) ? 'mod_topic_set_downloaded' : 'mod_topic_unset_downloaded';
 
-        $log_action->mod($type, array(
+        $log_action->mod($type, [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
-            'topic_title' => get_topic_title($topic_id),
-        ));
+            'topic_title' => get_topic_title($topic_id)
+        ]);
 
         $msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
         bb_die(return_msg_mcp($msg));
@@ -379,12 +379,12 @@ switch ($mode) {
         //mpd
         $delete_posts = isset($_POST['delete_posts']);
         $split = (isset($_POST['split_type_all']) || isset($_POST['split_type_beyond']));
-        $posts = $_POST['post_id_list'] ?? array();
+        $posts = $_POST['post_id_list'] ?? [];
         $start = /* (isset($_POST['start'])) ? intval($_POST['start']) : */
             0;
         $topic_first_post_id = $topic_row['topic_first_post_id'] ?? '';
 
-        $post_id_sql = $req_post_id_sql = array();
+        $post_id_sql = $req_post_id_sql = [];
 
         if (($split || $delete_posts) && ($posts && $topic_id && $forum_id && $topic_first_post_id) && $confirmed) {
             foreach ($posts as $post_id) {
@@ -489,22 +489,22 @@ switch ($mode) {
                     \TorrentPier\Legacy\Post::insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
                 }
 
-                \TorrentPier\Legacy\Admin\Common::sync('topic', array($topic_id, $new_topic_id));
-                \TorrentPier\Legacy\Admin\Common::sync('forum', array($forum_id, $new_forum_id));
+                \TorrentPier\Legacy\Admin\Common::sync('topic', [$topic_id, $new_topic_id]);
+                \TorrentPier\Legacy\Admin\Common::sync('forum', [$forum_id, $new_forum_id]);
 
                 //bot
-                $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
-                $message .= ' &nbsp;::&nbsp; <a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_NEW'] . '</a>';
+                $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
+                $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_NEW'] . '</a>';
 
                 // Log action
-                $log_action->mod('mod_topic_split', array(
+                $log_action->mod('mod_topic_split', [
                     'forum_id' => $forum_id,
                     'forum_id_new' => $new_forum_id,
                     'topic_id' => $topic_id,
                     'topic_title' => get_topic_title($topic_id),
                     'topic_id_new' => $new_topic_id,
-                    'topic_title_new' => htmlCHR($_POST['subject']),
-                ));
+                    'topic_title_new' => htmlCHR($_POST['subject'])
+                ]);
 
                 bb_die($message);
             }
@@ -534,13 +534,13 @@ switch ($mode) {
             if (($total_posts = DB()->num_rows($result)) > 0) {
                 $postrow = DB()->sql_fetchrowset($result);
 
-                $template->assign_vars(array(
+                $template->assign_vars([
                     'FORUM_NAME' => htmlCHR($forum_name),
                     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
                     'S_SPLIT_ACTION' => 'modcp.php',
                     'S_HIDDEN_FIELDS' => $s_hidden_fields,
                     'S_FORUM_SELECT' => get_forum_select('admin', 'new_forum_id', $forum_id),
-                ));
+                ]);
 
                 for ($i = 0; $i < $total_posts; $i++) {
                     $post_id = $postrow[$i]['post_id'];
@@ -559,7 +559,7 @@ switch ($mode) {
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                    $template->assign_block_vars('postrow', array(
+                    $template->assign_block_vars('postrow', [
                         'ROW_CLASS' => $row_class,
                         'POSTER_NAME' => wbr($poster),
                         'POST_DATE' => $post_date,
@@ -567,8 +567,8 @@ switch ($mode) {
                         'CHECKBOX' => defined('BEGIN_CHECKBOX'),
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
-                        'CB_ID' => 'cb_' . $i,
-                    ));
+                        'CB_ID' => 'cb_' . $i
+                    ]);
 
                     if ($post_id == $topic_first_post_id) {
                         define('BEGIN_CHECKBOX', true);
@@ -576,7 +576,7 @@ switch ($mode) {
                 }
             }
         }
-        $template->set_filenames(array('body' => 'modcp_split.tpl'));
+        $template->set_filenames(['body' => 'modcp_split.tpl']);
         break;
 
     case 'ip':
@@ -606,11 +606,11 @@ switch ($mode) {
 
         $poster_id = $post_row['poster_id'];
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
             'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
-        ));
+        ]);
 
         //
         // Get other IP's this user has posted under
@@ -626,9 +626,7 @@ switch ($mode) {
             $i = 0;
             do {
                 if ($row['poster_ip'] == $post_row['poster_ip']) {
-                    $template->assign_vars(array(
-                        'POSTS' => $row['postings'],
-                    ));
+                    $template->assign_vars(['POSTS' => $row['postings']]);
                     continue;
                 }
 
@@ -637,12 +635,12 @@ switch ($mode) {
                 }
                 $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
 
-                $template->assign_block_vars('iprow', array(
+                $template->assign_block_vars('iprow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
                     'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'],
-                ));
+                ]);
 
                 $i++;
             } while ($row = DB()->sql_fetchrow($result));
@@ -671,19 +669,19 @@ switch ($mode) {
                 $id = $row['user_id'];
                 $username = (!$row['username']) ? $lang['GUEST'] : $row['username'];
 
-                $template->assign_block_vars('userrow', array(
+                $template->assign_block_vars('userrow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'USERNAME' => wbr($username),
                     'POSTS' => $row['postings'],
                     'U_PROFILE' => ($id == GUEST_UID) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
                     'U_SEARCHPOSTS' => "search.php?search_author=1&amp;uid=$id",
-                ));
+                ]);
 
                 $i++;
             } while ($row = DB()->sql_fetchrow($result));
         }
 
-        $template->set_filenames(array('body' => 'modcp.tpl'));
+        $template->set_filenames(['body' => 'modcp.tpl']);
         break;
 
     case 'post_pin':
@@ -701,7 +699,7 @@ switch ($mode) {
 					AND topic_show_first_post != $new_topic_status
 			";
 
-            $topic_csv = array();
+            $topic_csv = [];
 
             foreach (DB()->fetch_rowset($sql) as $row) {
                 $topic_csv[] = $row['topic_id'];
@@ -722,11 +720,11 @@ switch ($mode) {
             $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
-                $log_action->mod($type, array(
+                $log_action->mod($type, [
                     'forum_id' => $forum_id,
                     'topic_id' => $topic_id,
-                    'topic_title' => $topic_title,
-                ));
+                    'topic_title' => $topic_title
+                ]);
             }
 
             $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
@@ -742,7 +740,7 @@ switch ($mode) {
 				LIMIT 1
 			";
 
-            $topic_csv = array();
+            $topic_csv = [];
 
             foreach (DB()->fetch_rowset($sql) as $row) {
                 $topic_csv[] = $row['topic_id'];
@@ -763,11 +761,11 @@ switch ($mode) {
             $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
-                $log_action->mod($type, array(
+                $log_action->mod($type, [
                     'forum_id' => $forum_id,
                     'topic_id' => $topic_id,
                     'topic_title' => $topic_title,
-                ));
+                ]);
             }
 
             $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
@@ -780,7 +778,7 @@ switch ($mode) {
         break;
 }
 
-$template->assign_vars(array('PAGE_TITLE' => $lang['MOD_CP']));
+$template->assign_vars(['PAGE_TITLE' => $lang['MOD_CP']]);
 
 require(PAGE_HEADER);
 

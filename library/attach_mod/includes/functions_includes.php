@@ -98,10 +98,10 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
         }
         DB()->sql_freeresult($result);
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('user_upload_quota', $upload_quota),
-            'S_SELECT_PM_QUOTA' => quota_limit_select('user_pm_quota', $pm_quota),
-        ));
+            'S_SELECT_PM_QUOTA' => quota_limit_select('user_pm_quota', $pm_quota)
+        ]);
     }
 
     if ($admin_mode == 'user' && $submit && @$_POST['delete_user']) {
@@ -148,10 +148,10 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
         }
         DB()->sql_freeresult($result);
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('group_upload_quota', $upload_quota),
-            'S_SELECT_PM_QUOTA' => quota_limit_select('group_pm_quota', $pm_quota),
-        ));
+            'S_SELECT_PM_QUOTA' => quota_limit_select('group_pm_quota', $pm_quota)
+        ]);
     }
 
     if ($admin_mode == 'group' && $submit && isset($_POST['group_delete'])) {

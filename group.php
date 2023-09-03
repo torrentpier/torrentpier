@@ -18,7 +18,7 @@ $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_
 $select_sort_mode = $select_sort_order = '';
 
 // Init userdata
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 set_die_append_msg();
 
@@ -28,7 +28,7 @@ $per_page = $bb_cfg['group_members_per_page'];
 $view_mode = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : null;
 $rel_limit = 50;
 
-$group_info = array();
+$group_info = [];
 $is_moderator = false;
 
 if ($group_id) {
@@ -43,7 +43,7 @@ if ($group_id) {
 
 if (!$group_id) {
     // Show the main screen where the user can select a group.
-    $groups = array();
+    $groups = [];
     $pending = 10;
     $member = 20;
 
@@ -92,7 +92,7 @@ if (!$group_id) {
             continue;
         }
 
-        $data = array('id' => $row['group_id'], 'm' => ($row['members'] - $row['candidates']), 'c' => $row['candidates'], 'rg' => $row['release_group']);
+        $data = ['id' => $row['group_id'], 'm' => ($row['members'] - $row['candidates']), 'c' => $row['candidates'], 'rg' => $row['release_group']];
 
         $groups[$type][$row['group_name']] = $data;
     }
@@ -123,18 +123,18 @@ if (!$group_id) {
         $s_hidden_fields = '';
 
         foreach ($groups as $type => $grp) {
-            $template->assign_block_vars('groups', array(
+            $template->assign_block_vars('groups', [
                 'MEMBERSHIP' => $lang["GROUP_MEMBER_{$type}"],
-                'GROUP_SELECT' => build_group($grp),
-            ));
+                'GROUP_SELECT' => build_group($grp)
+            ]);
         }
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'SELECT_GROUP' => true,
             'PAGE_TITLE' => $lang['GROUP_CONTROL_PANEL'],
             'S_USERGROUP_ACTION' => 'group.php',
-            'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        ));
+            'S_HIDDEN_FIELDS' => $s_hidden_fields
+        ]);
     } else {
         if (IS_ADMIN) {
             redirect('admin/admin_groups.php');
@@ -176,12 +176,12 @@ if (!$group_id) {
         $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_REQUEST']);
 
         $emailer->set_template('group_request', $moderator['user_lang']);
-        $emailer->assign_vars(array(
+        $emailer->assign_vars([
             'USER' => $userdata['username'],
             'SITENAME' => $bb_cfg['sitename'],
             'GROUP_MODERATOR' => $moderator['username'],
-            'U_GROUP' => make_url(GROUP_URL . $group_id),
-        ));
+            'U_GROUP' => make_url(GROUP_URL . $group_id)
+        ]);
 
         $emailer->send();
     }
@@ -217,11 +217,11 @@ if (!$group_id) {
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_ADDED']);
 
                 $emailer->set_template('group_added', $row['user_lang']);
-                $emailer->assign_vars(array(
+                $emailer->assign_vars([
                     'SITENAME' => $bb_cfg['sitename'],
                     'GROUP_NAME' => $group_info['group_name'],
-                    'U_GROUP' => make_url(GROUP_URL . $group_id),
-                ));
+                    'U_GROUP' => make_url(GROUP_URL . $group_id)
+                ]);
 
                 $emailer->send();
             }
@@ -229,7 +229,7 @@ if (!$group_id) {
             if (((!empty($_POST['approve']) || !empty($_POST['deny'])) && !empty($_POST['pending_members'])) || (!empty($_POST['remove']) && !empty($_POST['members']))) {
                 $members = (!empty($_POST['approve']) || !empty($_POST['deny'])) ? $_POST['pending_members'] : $_POST['members'];
 
-                $sql_in = array();
+                $sql_in = [];
                 foreach ($members as $members_id) {
                     $sql_in[] = (int)$members_id;
                 }
@@ -275,11 +275,11 @@ if (!$group_id) {
                         $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_APPROVED']);
 
                         $emailer->set_template('group_approved', $row['user_lang']);
-                        $emailer->assign_vars(array(
+                        $emailer->assign_vars([
                             'SITENAME' => $bb_cfg['sitename'],
                             'GROUP_NAME' => $group_info['group_name'],
-                            'U_GROUP' => make_url(GROUP_URL . $group_id),
-                        ));
+                            'U_GROUP' => make_url(GROUP_URL . $group_id)
+                        ]);
 
                         $emailer->send();
                     }
@@ -317,10 +317,10 @@ if (!$group_id) {
         $group_details = $lang['ARE_GROUP_MODERATOR'];
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
     } elseif ($is_group_member || $is_group_pending_member) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'SHOW_UNSUBSCRIBE_CONTROLS' => true,
             'CONTROL_NAME' => ($is_group_member) ? 'unsub' : 'unsubpending',
-        ));
+        ]);
         $group_details = ($is_group_pending_member) ? $lang['PENDING_THIS_GROUP'] : $lang['MEMBER_THIS_GROUP'];
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
     } elseif (IS_GUEST) {
@@ -357,7 +357,7 @@ if (!$group_id) {
     }
 
     $i = 0;
-    $template->assign_vars(array(
+    $template->assign_vars([
         'ROW_NUMBER' => $i + ($start + 1),
         'GROUP_INFO' => true,
         'PAGE_TITLE' => $lang['GROUP_CONTROL_PANEL'],
@@ -395,7 +395,7 @@ if (!$group_id) {
         'S_ORDER_SELECT' => $select_sort_order,
 
         'S_GROUP_ACTION' => "group.php?" . POST_GROUPS_URL . "=$group_id",
-    ));
+    ]);
 
     switch ($view_mode) {
         case 'releases':
@@ -440,20 +440,18 @@ if (!$group_id) {
             foreach ($releases as $i => $release) {
                 $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                $template->assign_block_vars('releases', array(
+                $template->assign_block_vars('releases', [
                     'ROW_NUMBER' => $i + ($start + 1),
                     'ROW_CLASS' => $row_class,
-                    'RELEASER' => profile_url(array('user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank'])),
+                    'RELEASER' => profile_url(['user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank']]),
                     'AVATAR_IMG' => get_avatar($release['poster_id'], $release['avatar_ext_id'], !bf($release['user_opt'], 'user_opt', 'dis_avatar'), 50, 50),
                     'RELEASE_NAME' => sprintf('<a href="%s">%s</a>', TOPIC_URL . $release['topic_id'], htmlCHR($release['topic_title'])),
                     'RELEASE_TIME' => bb_date($release['topic_time']),
                     'RELEASE_FORUM' => sprintf('<a href="%s">%s</a>', FORUM_URL . $release['forum_id'], htmlCHR($release['forum_name'])),
-                ));
+                ]);
             }
 
-            $template->assign_vars(array(
-                'RELEASES' => true,
-            ));
+            $template->assign_vars(['RELEASES' => true]);
 
             break;
 
@@ -499,7 +497,7 @@ if (!$group_id) {
                 if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator) {
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 
-                    $template->assign_block_vars('member', array(
+                    $template->assign_block_vars('member', [
                         'ROW_NUMBER' => $i + ($start + 1),
                         'ROW_CLASS' => $row_class,
                         'USER' => profile_url($member),
@@ -511,23 +509,23 @@ if (!$group_id) {
                         'PM' => $member_info['pm'],
                         'EMAIL' => $member_info['email'],
                         'WWW' => $member_info['www'],
-                        'TIME' => $member_info['user_time'],
-                    ));
+                        'TIME' => $member_info['user_time']
+                    ]);
 
                     if ($is_moderator) {
-                        $template->assign_block_vars('member.switch_mod_option', array());
+                        $template->assign_block_vars('member.switch_mod_option', []);
                     }
                 }
             }
 
             // No group members
             if (!$members_count) {
-                $template->assign_block_vars('switch_no_members', array());
+                $template->assign_block_vars('switch_no_members', []);
             }
 
             // No group members
             if ($group_info['group_type'] == GROUP_HIDDEN && !$is_group_member && !$is_moderator) {
-                $template->assign_block_vars('switch_hidden_group', array());
+                $template->assign_block_vars('switch_hidden_group', []);
             }
 
             // Pending
@@ -554,7 +552,7 @@ if (!$group_id) {
 
                     $user_select = '<input type="checkbox" name="member[]" value="' . $user_id . '">';
 
-                    $template->assign_block_vars('pending', array(
+                    $template->assign_block_vars('pending', [
                         'ROW_CLASS' => $row_class,
                         'AVATAR_IMG' => $member_info['avatar'],
                         'USER' => profile_url($member),
@@ -563,21 +561,19 @@ if (!$group_id) {
                         'POSTS' => $member_info['posts'],
                         'USER_ID' => $user_id,
                         'PM' => $member_info['pm'],
-                        'EMAIL' => $member_info['email'],
-                    ));
+                        'EMAIL' => $member_info['email']
+                    ]);
                 }
 
-                $template->assign_vars(array(
-                    'PENDING_USERS' => true,
-                ));
+                $template->assign_vars(['PENDING_USERS' => true]);
             }
 
-            $template->assign_vars(array('MEMBERS' => true));
+            $template->assign_vars(['MEMBERS' => true]);
     }
 
     if ($is_moderator) {
-        $template->assign_block_vars('switch_mod_option', array());
-        $template->assign_block_vars('switch_add_member', array());
+        $template->assign_block_vars('switch_mod_option', []);
+        $template->assign_block_vars('switch_add_member', []);
     }
 }
 

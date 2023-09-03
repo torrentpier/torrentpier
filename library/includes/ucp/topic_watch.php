@@ -28,10 +28,10 @@ if (isset($_POST['topic_id_list'])) {
     }
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'PAGE_TITLE' => $lang['WATCHED_TOPICS'],
-    'S_FORM_ACTION' => BB_ROOT . 'profile.php?mode=watch',
-));
+    'S_FORM_ACTION' => BB_ROOT . 'profile.php?mode=watch'
+]);
 
 $sql = "SELECT COUNT(topic_id) as watch_count FROM " . BB_TOPICS_WATCH . " WHERE user_id = $user_id";
 if (!($result = DB()->sql_query($sql))) {
@@ -62,7 +62,7 @@ if ($watch_count > 0) {
         for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
 
-            $template->assign_block_vars('watch', array(
+            $template->assign_block_vars('watch', [
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
                 'TOPIC_ID' => $watch[$i]['topic_id'],
@@ -73,21 +73,21 @@ if ($watch_count > 0) {
                 'U_FORUM' => FORUM_URL . $watch[$i]['forum_id'],
                 'REPLIES' => $watch[$i]['topic_replies'],
                 'AUTHOR' => profile_url($watch[$i]),
-                'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . profile_url(array('user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank'])),
+                'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]),
                 'LAST_POST_ID' => $watch[$i]['topic_last_post_id'],
                 'IS_UNREAD' => $is_unread,
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
-                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], $bb_cfg['posts_per_page']),
-            ));
+                'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], $bb_cfg['posts_per_page'])
+            ]);
         }
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'MATCHES' => (count($watch) == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], count($watch)) : sprintf($lang['FOUND_SEARCH_MATCHES'], count($watch)),
             'PAGINATION' => generate_pagination(BB_ROOT . 'profile.php?mode=watch', $watch_count, $per_page, $start),
             'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
             'U_PER_PAGE' => BB_ROOT . 'profile.php?mode=watch',
-            'PER_PAGE' => $per_page,
-        ));
+            'PER_PAGE' => $per_page
+        ]);
     }
     DB()->sql_freeresult($result);
 } else {

@@ -260,13 +260,13 @@ function setbit(&$int, $bit_num, $on)
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
-function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
 
     $is_guest = true;
     $is_admin = false;
-    $auth = $auth_fields = $u_access = array();
+    $auth = $auth_fields = $u_access = [];
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
     //
@@ -437,7 +437,7 @@ function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
     $select_name = null;
-    $select_ary = array();
+    $select_ary = [];
 
     switch ($select) {
         case 'groups':
@@ -680,13 +680,13 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
     if (!$cookie && isset($_COOKIE[$var_name])) {
         if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
-            return (is_array($default)) ? array() : $default;
+            return (is_array($default)) ? [] : $default;
         }
         $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? array() : $default;
+        return (is_array($default)) ? [] : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -708,7 +708,7 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 
     if (is_array($var)) {
         $_var = $var;
-        $var = array();
+        $var = [];
 
         foreach ($_var as $k => $v) {
             set_var($k, $k, $key_type);
@@ -737,10 +737,10 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 function get_username($user_id)
 {
     if (empty($user_id)) {
-        return is_array($user_id) ? array() : false;
+        return is_array($user_id) ? [] : false;
     }
     if (is_array($user_id)) {
-        $usernames = array();
+        $usernames = [];
         foreach (DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
             $usernames[$row['user_id']] = $row['username'];
         }
@@ -893,7 +893,7 @@ function get_attachments_dir($cfg = null)
 function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = CACHE('bb_config')->get("config_{$table}")) {
-        $cfg = array();
+        $cfg = [];
         foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row) {
             $cfg[$row['config_name']] = $row['config_value'];
         }
@@ -906,7 +906,7 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 
 function bb_update_config($params, $table = BB_CONFIG)
 {
-    $updates = array();
+    $updates = [];
     foreach ($params as $name => $val) {
         $updates[] = array(
             'config_name' => $name,
@@ -1038,7 +1038,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     if (null === $max_length) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = null === $all_forums_option ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+    $select = null === $all_forums_option ? [] : array($lang['ALL_AVAILABLE'] => $all_forums_option);
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -1889,17 +1889,20 @@ function profile_url($data)
     return $profile;
 }
 
-function get_avatar($user_id, $ext_id, $allow_avatar = true)
+function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $width = '')
 {
     global $bb_cfg;
 
-    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" />';
+    $height = $height ? 'height="' . $height . '"' : '';
+    $width = $width ? 'width="' . $width . '"' : '';
+
+    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
 
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
-        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" />';
+        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
         if (file_exists(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" />';
+            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }
 

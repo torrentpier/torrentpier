@@ -12,14 +12,14 @@ if (!defined('BB_ROOT')) {
 }
 
 // Delete staled dl-status records
-$keeping_dlstat = array(
+$keeping_dlstat = [
     DL_STATUS_WILL => (int)$bb_cfg['dl_will_days_keep'],
     DL_STATUS_DOWN => (int)$bb_cfg['dl_down_days_keep'],
     DL_STATUS_COMPLETE => (int)$bb_cfg['dl_complete_days_keep'],
-    DL_STATUS_CANCEL => (int)$bb_cfg['dl_cancel_days_keep'],
-);
+    DL_STATUS_CANCEL => (int)$bb_cfg['dl_cancel_days_keep']
+];
 
-$delete_dlstat_sql = array();
+$delete_dlstat_sql = [];
 
 foreach ($keeping_dlstat as $dl_status => $days_to_keep) {
     if ($days_to_keep) {

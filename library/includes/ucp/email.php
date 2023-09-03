@@ -28,7 +28,7 @@ if (!$userdata['session_logged_in']) {
     redirect(LOGIN_URL . "?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id");
 }
 
-$errors = array();
+$errors = [];
 
 $sql = "SELECT username, user_id, user_rank, user_email, user_lang
 	FROM " . BB_USERS . "
@@ -60,12 +60,12 @@ if ($row = DB()->fetch_row($sql)) {
             $emailer->set_subject($subject);
 
             $emailer->set_template('profile_send_email', $user_lang);
-            $emailer->assign_vars(array(
+            $emailer->assign_vars([
                 'SITENAME' => $bb_cfg['sitename'],
                 'FROM_USERNAME' => $userdata['username'],
                 'TO_USERNAME' => $username,
-                'MESSAGE' => $message,
-            ));
+                'MESSAGE' => $message
+            ]);
 
             $emailer->send();
 
@@ -73,12 +73,12 @@ if ($row = DB()->fetch_row($sql)) {
         }
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
         'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
-        'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
-    ));
+        'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : ''
+    ]);
 
     print_page('usercp_email.tpl');
 
