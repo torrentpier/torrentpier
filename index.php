@@ -226,15 +226,15 @@ foreach ($cat_forums as $cid => $c) {
         }
 
         if ($is_sf) {
-            $template->assign_block_vars('c.f.sf', array(
+            $template->assign_block_vars('c.f.sf', [
                 'SF_ID' => $fid,
                 'SF_NAME' => $fname_html,
-                'SF_NEW' => $new ? ' new' : '',
-            ));
+                'SF_NEW' => $new ? ' new' : ''
+            ]);
             continue;
         }
 
-        $template->assign_block_vars('c.f', array(
+        $template->assign_block_vars('c.f', [
             'FORUM_FOLDER_IMG' => $folder_image,
             'FORUM_ID' => $fid,
             'FORUM_NAME' => $fname_html,
@@ -243,22 +243,22 @@ foreach ($cat_forums as $cid => $c) {
             'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
-            'FORUM_FOLDER_ALT' => $new ? $lang['NEW'] : $lang['OLD'],
-        ));
+            'FORUM_FOLDER_ALT' => $new ? $lang['NEW'] : $lang['OLD']
+        ]);
 
         if ($f['last_post_id']) {
-            $template->assign_block_vars('c.f.last', array(
+            $template->assign_block_vars('c.f.last', [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => wbr(str_short($f['last_topic_title'], $last_topic_max_len)),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], $bb_cfg['last_post_date_format']),
-                'LAST_POST_USER' => profile_url(array('username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank'])),
-            ));
+                'LAST_POST_USER' => profile_url(['username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
+            ]);
         }
     }
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'SHOW_FORUMS' => $forums_count,
     'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
     'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : $lang['HOME'],
@@ -308,7 +308,7 @@ $template->assign_vars(array(
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
     'BOARD_START' => $bb_cfg['show_board_start_index'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : false,
-));
+]);
 
 // Set tpl vars for bt_userdata
 if ($bb_cfg['bt_show_dl_stat_on_index'] && !IS_GUEST) {
@@ -322,17 +322,15 @@ if ($bb_cfg['show_latest_news']) {
         $latest_news = $datastore->get('latest_news');
     }
 
-    $template->assign_vars(array(
-        'SHOW_LATEST_NEWS' => true,
-    ));
+    $template->assign_vars(['SHOW_LATEST_NEWS' => true]);
 
     foreach ($latest_news as $news) {
-        $template->assign_block_vars('news', array(
+        $template->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
             'NEWS_TITLE' => str_short($news['topic_title'], $bb_cfg['max_news_title']),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
-        ));
+        ]);
     }
 }
 
@@ -343,17 +341,15 @@ if ($bb_cfg['show_network_news']) {
         $network_news = $datastore->get('network_news');
     }
 
-    $template->assign_vars(array(
-        'SHOW_NETWORK_NEWS' => true,
-    ));
+    $template->assign_vars(['SHOW_NETWORK_NEWS' => true]);
 
     foreach ($network_news as $net) {
-        $template->assign_block_vars('net', array(
+        $template->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
             'NEWS_TITLE' => str_short($net['topic_title'], $bb_cfg['max_net_title']),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
-        ));
+        ]);
     }
 }
 
@@ -391,10 +387,10 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
         $today_list = $lang['NOBIRTHDAY_TODAY'];
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'WHOSBIRTHDAY_WEEK' => $week_list,
-        'WHOSBIRTHDAY_TODAY' => $today_list,
-    ));
+        'WHOSBIRTHDAY_TODAY' => $today_list
+    ]);
 }
 
 // Allow cron
@@ -411,7 +407,7 @@ if (IS_AM) {
 define('SHOW_ONLINE', $show_online_users);
 
 if (isset($_GET['map'])) {
-    $template->assign_vars(array('PAGE_TITLE' => $lang['FORUM_MAP']));
+    $template->assign_vars(['PAGE_TITLE' => $lang['FORUM_MAP']]);
 }
 
 print_page('index.tpl');

@@ -112,7 +112,7 @@ if (isset($_POST['login'])) {
 
 // Login page
 if (IS_GUEST || $mod_admin_login) {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'LOGIN_USERNAME' => htmlCHR($login_username),
         'LOGIN_PASSWORD' => htmlCHR($login_password),
         'ERROR_MESSAGE' => implode('<br />', $login_errors),
@@ -120,8 +120,8 @@ if (IS_GUEST || $mod_admin_login) {
         'REDIRECT_URL' => htmlCHR($redirect_url),
         'CAPTCHA_HTML' => ($need_captcha && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
         'PAGE_TITLE' => $lang['LOGIN'],
-        'S_LOGIN_ACTION' => LOGIN_URL,
-    ));
+        'S_LOGIN_ACTION' => LOGIN_URL
+    ]);
 
     print_page('login.tpl');
 }
