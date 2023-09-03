@@ -109,11 +109,11 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             6
-        );
+        ];
     }
 
     $error = false;
@@ -147,11 +147,11 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             1
-        );
+        ];
     }
 
     $error = false;
@@ -199,11 +199,11 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             2
-        );
+        ];
     }
 
     $error = false;
@@ -245,11 +245,11 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             7
-        );
+        ];
     }
 
     fclose($fp);

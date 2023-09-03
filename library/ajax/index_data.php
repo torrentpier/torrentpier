@@ -19,9 +19,9 @@ $html = '';
 switch ($mode) {
     case 'birthday_week':
         $stats = $datastore->get('stats');
-        $datastore->enqueue(array(
-            'stats',
-        ));
+        $datastore->enqueue([
+            'stats'
+        ]);
 
         $users = [];
 
@@ -37,9 +37,9 @@ switch ($mode) {
 
     case 'birthday_today':
         $stats = $datastore->get('stats');
-        $datastore->enqueue(array(
-            'stats',
-        ));
+        $datastore->enqueue([
+            'stats'
+        ]);
 
         $users = [];
 
@@ -56,10 +56,10 @@ switch ($mode) {
     case 'get_forum_mods':
         $forum_id = (int)$this->request['forum_id'];
 
-        $datastore->enqueue(array(
+        $datastore->enqueue([
             'moderators',
-            'cat_forums',
-        ));
+            'cat_forums'
+        ]);
 
         $moderators = [];
         $mod = $datastore->get('moderators');

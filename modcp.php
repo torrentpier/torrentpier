@@ -493,8 +493,8 @@ switch ($mode) {
                 \TorrentPier\Legacy\Admin\Common::sync('forum', [$forum_id, $new_forum_id]);
 
                 //bot
-                $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
-                $message .= ' &nbsp;::&nbsp; <a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_NEW'] . '</a>';
+                $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
+                $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_NEW'] . '</a>';
 
                 // Log action
                 $log_action->mod('mod_topic_split', [

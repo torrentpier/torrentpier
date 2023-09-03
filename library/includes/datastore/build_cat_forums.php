@@ -16,23 +16,23 @@ global $bf, $bb_cfg;
 //
 // cat_forums
 //
-$data = array(
-    'not_auth_forums' => array(
+$data = [
+    'not_auth_forums' => [
         'guest_view' => [],
         'guest_read' => [],
         'user_view' => [],
-        'user_read' => [],
-    ),
+        'user_read' => []
+    ],
     'tracker_forums' => [],
     'cat_title_html' => [],
     'forum_name_html' => [],
-    'c' => [],                // also has $data['c']['cat_id']['forums'] key
-    'f' => [],                // also has $data['f']['forum_id']['subforums'] key
-);
+    'c' => [], // also has $data['c']['cat_id']['forums'] key
+    'f' => [] // also has $data['f']['forum_id']['subforums'] key
+];
 
 // Store only these fields from BB_FORUMS in $data['f']
 $forum_store_fields = array_flip(array_keys($bf['forum_perm']));
-$forum_store_fields += array_flip(array(
+$forum_store_fields += array_flip([
     'forum_id',
     'cat_id',
     'forum_name',
@@ -40,8 +40,8 @@ $forum_store_fields += array_flip(array(
     'forum_status',
     'forum_posts',
     'forum_topics',
-    'forum_parent',
-));
+    'forum_parent'
+]);
 
 // Categories
 $sql = "SELECT * FROM " . BB_CATEGORIES . " ORDER BY cat_order";
@@ -106,10 +106,10 @@ $this->store('cat_forums', $data);
 //
 // jumpbox
 //
-$data = array(
+$data = [
     'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
     'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
-);
+];
 
 $this->store('jumpbox', $data);
 
@@ -119,9 +119,7 @@ file_write($data['user'], AJAX_HTML_DIR . '/jumpbox_user.html', false, true, tru
 //
 // viewtopic_forum_select
 //
-$data = array(
-    'viewtopic_forum_select' => get_forum_select('admin', 'new_forum_id'),
-);
+$data = ['viewtopic_forum_select' => get_forum_select('admin', 'new_forum_id')];
 
 $this->store('viewtopic_forum_select', $data);
 

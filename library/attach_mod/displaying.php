@@ -200,9 +200,7 @@ function display_attachments($post_id)
         if (!in_array($attachments['_' . $post_id][$i]['extension'], $allowed_extensions)) {
             $denied = true;
 
-            $template->assign_block_vars('postrow.attach.denyrow', array(
-                    'L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_' . $post_id][$i]['extension']))
-            );
+            $template->assign_block_vars('postrow.attach.denyrow', ['L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_' . $post_id][$i]['extension'])]);
         }
 
         if (!$denied || IS_ADMIN) {
@@ -246,13 +244,13 @@ function display_attachments($post_id)
                     $download_link = false;
                 }
 
-                $template->assign_block_vars('postrow.attach.cat_images', array(
+                $template->assign_block_vars('postrow.attach.cat_images', [
                     'DOWNLOAD_NAME' => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'IMG_SRC' => $img_source,
                     'FILESIZE' => $filesize,
-                    'COMMENT' => $comment,
-                ));
+                    'COMMENT' => $comment
+                ]);
 
                 // Directly Viewed Image ... update the download count
                 if (!$download_link) {
@@ -274,14 +272,14 @@ function display_attachments($post_id)
                     $thumb_source = $thumbnail_filename;
                 }
 
-                $template->assign_block_vars('postrow.attach.cat_thumb_images', array(
+                $template->assign_block_vars('postrow.attach.cat_thumb_images', [
                     'DOWNLOAD_NAME' => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'IMG_SRC' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'IMG_THUMB_SRC' => $thumb_source,
                     'FILESIZE' => $filesize,
-                    'COMMENT' => $comment,
-                ));
+                    'COMMENT' => $comment
+                ]);
             }
 
             // bt
@@ -291,15 +289,15 @@ function display_attachments($post_id)
                 $target_blank = ((@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT)) ? 'target="_blank"' : '';
 
                 // display attachment
-                $template->assign_block_vars('postrow.attach.attachrow', array(
+                $template->assign_block_vars('postrow.attach.attachrow', [
                     'U_DOWNLOAD_LINK' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'DOWNLOAD_NAME' => $display_name,
                     'FILESIZE' => $filesize,
                     'COMMENT' => $comment,
                     'TARGET_BLANK' => $target_blank,
-                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times'),
-                ));
+                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times')
+                ]);
             }
         }
     }

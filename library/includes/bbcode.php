@@ -315,7 +315,7 @@ function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $s
             $message = str_replace($m[0], $m[2], $message);
         }
 
-        $replace = array('[*]', '[hr]', '[br]', '[align=center]', '[align=left]', '[align=right]');
+        $replace = ['[*]', '[hr]', '[br]', '[align=center]', '[align=left]', '[align=right]'];
         $message = str_replace($replace, ' ', $message);
     }
 
@@ -331,7 +331,7 @@ function extract_search_words($text)
     $max_word_len = $bb_cfg['search_max_word_len'];
 
     $text = ' ' . str_compact(strip_tags(mb_strtolower($text))) . ' ';
-    $text = str_replace(array('&#91;', '&#93;'), array('[', ']'), $text);
+    $text = str_replace(['&#91;', '&#93;'], ['[', ']'], $text);
 
     // HTML entities like &nbsp;
     $text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/iu', '', $text);
@@ -429,10 +429,10 @@ function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 
     // Posts cache
     if ($bb_cfg['use_posts_cache']) {
-        DB()->shutdown['post_html'][] = array(
+        DB()->shutdown['post_html'][] = [
             'post_id' => (int)$postrow['post_id'],
-            'post_html' => (string)$message,
-        );
+            'post_html' => (string)$message
+        ];
     }
 
     return $message;

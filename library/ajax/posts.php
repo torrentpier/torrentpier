@@ -142,10 +142,10 @@ switch ($this->request['type']) {
                     $s_text = str_replace('\n', "\n", $text);
                     $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
                     add_search_words($post_id, stripslashes($s_text), stripslashes($s_topic_title));
-                    update_post_html(array(
+                    update_post_html([
                         'post_id' => $post_id,
-                        'post_text' => $text,
-                    ));
+                        'post_text' => $text
+                    ]);
                 }
             } else {
                 $this->ajax_die($lang['EMPTY_MESSAGE']);
@@ -276,10 +276,10 @@ switch ($this->request['type']) {
         $s_message = str_replace('\n', "\n", $message);
         $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
         add_search_words($post_id, stripslashes($s_message), stripslashes($s_topic_title));
-        update_post_html(array(
+        update_post_html([
             'post_id' => $post_id,
-            'post_text' => $message,
-        ));
+            'post_text' => $message
+        ]);
 
         if ($bb_cfg['topic_notify_enabled']) {
             $notify = !empty($this->request['notify']);

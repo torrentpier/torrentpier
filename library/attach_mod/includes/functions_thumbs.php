@@ -22,16 +22,16 @@ function get_img_size_format($width, $height)
     $max_width = 400;
 
     if ($width > $height) {
-        return array(
+        return [
             round($width * ($max_width / $width)),
             round($height * ($max_width / $width))
-        );
+        ];
     }
 
-    return array(
+    return [
         round($width * ($max_width / $height)),
         round($height * ($max_width / $height))
-    );
+    ];
 }
 
 /**
@@ -78,14 +78,14 @@ function get_supported_image_types($type)
                 break;
         }
 
-        return array(
+        return [
             'gd' => (bool)$new_type,
             'format' => $new_type,
             'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
-        );
+        ];
     }
 
-    return array('gd' => false);
+    return ['gd' => false];
 }
 
 /**

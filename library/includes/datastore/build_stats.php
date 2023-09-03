@@ -75,20 +75,20 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
 
         if ($user_birthday > $date_today && $user_birthday <= $date_forward) {
             // user are having birthday within the next days
-            $birthday_week_list[] = array(
+            $birthday_week_list[] = [
                 'user_id' => $row['user_id'],
                 'username' => $row['username'],
                 'user_rank' => $row['user_rank'],
-                'user_birthday' => $row['user_birthday'],
-            );
+                'user_birthday' => $row['user_birthday']
+            ];
         } elseif ($user_birthday == $date_today) {
             //user have birthday today
-            $birthday_today_list[] = array(
+            $birthday_today_list[] = [
                 'user_id' => $row['user_id'],
                 'username' => $row['username'],
                 'user_rank' => $row['user_rank'],
-                'user_birthday' => $row['user_birthday'],
-            );
+                'user_birthday' => $row['user_birthday']
+            ];
         }
     }
 

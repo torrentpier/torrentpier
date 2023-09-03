@@ -135,7 +135,7 @@ if ($bb_cfg['torhelp_enabled']) {
     $tor_downloaded_days_ago = 60;  // ">="
     $user_last_seen_online = 15;  // minutes
     $users_limit = 3000;
-    $dl_status_ary = array(DL_STATUS_COMPLETE);
+    $dl_status_ary = [DL_STATUS_COMPLETE];
 
     define('NEW_BB_BT_TORHELP', 'new_torhelp');
     define('OLD_BB_BT_TORHELP', 'old_torhelp');

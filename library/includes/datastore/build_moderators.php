@@ -11,14 +11,14 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$data = array(
-    'name_users' => [],  // only by personal permissions
-    'name_groups' => [],  // only visible to all users
-    'mod_users' => [],  // only by personal permissions
-    'mod_groups' => [],  // only visible to all users
-    'moderators' => [],  // all moderators
-    'admins' => [],  // all admins
-);
+$data = [
+    'name_users' => [], // only by personal permissions
+    'name_groups' => [], // only visible to all users
+    'mod_users' => [], // only by personal permissions
+    'mod_groups' => [], // only visible to all users
+    'moderators' => [], // all moderators
+    'admins' => [] // all admins
+];
 
 // name_users
 // mod_users

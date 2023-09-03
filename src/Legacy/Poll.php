@@ -133,7 +133,7 @@ class Poll
             $opt_text_for_js = htmlCHR($row['vote_text']);
             $opt_result_for_js = (int)$row['vote_result'];
 
-            $items[$row['topic_id']][$row['vote_id']] = array($opt_text_for_js, $opt_result_for_js);
+            $items[$row['topic_id']][$row['vote_id']] = [$opt_text_for_js, $opt_result_for_js];
         }
         foreach ($items as $k => $v) {
             $items[$k] = json_encode($v, JSON_THROW_ON_ERROR);
