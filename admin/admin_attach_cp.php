@@ -427,7 +427,7 @@ if ($view === 'attachments') {
                         $post_title = str_short($post_title, 30);
                     }
 
-                    $view_topic = BB_ROOT . 'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
+                    $view_topic = BB_ROOT . POST_URL . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
 
                     $post_titles[] = '<a href="' . $view_topic . '" class="gen" target="_blank">' . $post_title . '</a>';
                 } else {
