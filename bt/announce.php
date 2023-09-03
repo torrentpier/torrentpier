@@ -130,18 +130,11 @@ $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 
 // Drop fast announce
 if ($lp_info && (!isset($event) || $event !== 'stopped')) {
-
-	$lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id']);
-
-	if ($lp_cached_peers) {
-		drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
-	}
-
-	drop_fast_announce($lp_info);
+    drop_fast_announce($lp_info);
 }
 
 // Functions
-function drop_fast_announce($lp_info, $lp_cached_peers = [])
+function drop_fast_announce($lp_info)
 {
     global $announce_interval;
 
@@ -151,7 +144,7 @@ function drop_fast_announce($lp_info, $lp_cached_peers = [])
 
     $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
 
-    dummy_exit($new_ann_intrv, $lp_cached_peers);
+    dummy_exit($new_ann_intrv);
 }
 
 function msg_die($msg)

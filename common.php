@@ -348,21 +348,13 @@ if (!defined('IN_TRACKER')) {
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
-    function dummy_exit($interval = 1800, $cache_dict = [])
+    function dummy_exit($interval = 1800)
     {
-		$output = [
+        $output = \SandFox\Bencode\Bencode::encode([
             'interval' => (int)$interval,
             'min interval' => (int)$interval,
             'peers' => (string)DUMMY_PEER,
-        ];
-
-		if (!empty($cache_dict)) {
-			$output['complete'] = $cache_dict['complete'];
-			$output['incomplete'] = $cache_dict['incomplete'];
-			$output['peers'] = $cache_dict['peers'];
-		}
-
-        $output = \SandFox\Bencode\Bencode::encode($output);
+        ]);
 
         die($output);
     }
