@@ -130,6 +130,7 @@ $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 
 // Drop fast announce
 if ($lp_info && (!isset($event) || $event !== 'stopped')) {
+
 	$lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id']);
 
 	if ($lp_cached_peers) {
