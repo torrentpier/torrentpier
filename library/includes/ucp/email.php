@@ -28,7 +28,7 @@ if (!$userdata['session_logged_in']) {
     redirect(LOGIN_URL . "?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id");
 }
 
-$errors = array();
+$errors = [];
 
 $sql = "SELECT username, user_id, user_rank, user_email, user_lang
 	FROM " . BB_USERS . "

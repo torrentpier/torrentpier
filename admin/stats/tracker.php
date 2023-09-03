@@ -22,7 +22,7 @@ $peers_in_last_minutes = [30, 15, 5, 1];
 $peers_in_last_sec_limit = 300;
 
 $announce_interval = (int)$bb_cfg['announce_interval'];
-$stat = array();
+$stat = [];
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');
 
@@ -59,7 +59,7 @@ $stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_with_seeder FRO
 $stat += DB()->fetch_row('SELECT COUNT(*) AS tor_all, SUM(size) AS torrents_size FROM ' . BB_BT_TORRENTS);
 
 // Last xx minutes
-$peers_in_last_min = array();
+$peers_in_last_min = [];
 foreach ($peers_in_last_minutes as $t) {
     $row = DB()->fetch_row('
 		SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' WHERE update_time >= ' . (TIMENOW - 60 * $t) . '
@@ -67,7 +67,7 @@ foreach ($peers_in_last_minutes as $t) {
     $peers_in_last_min[$t] = (int)$row['peers'];
 }
 // Last xx seconds
-$peers_in_last_sec = array();
+$peers_in_last_sec = [];
 $rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' GROUP BY update_time ORDER BY update_time DESC LIMIT ' . $peers_in_last_sec_limit);
 foreach ($rowset as $cnt => $row) {
     $peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt % 15)) ? "  \n" : '');

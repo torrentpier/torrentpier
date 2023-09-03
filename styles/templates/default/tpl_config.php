@@ -9,7 +9,7 @@
 
 global $bb_cfg, $page_cfg, $template, $images, $lang;
 
-$width = $height = array();
+$width = $height = [];
 $template_name = basename(__DIR__);
 
 $_img = BB_ROOT . 'styles/images/';

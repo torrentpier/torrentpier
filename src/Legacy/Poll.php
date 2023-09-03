@@ -115,9 +115,9 @@ class Poll
     public static function get_poll_data_items_js($topic_id)
     {
         if (!$topic_id_csv = get_id_csv($topic_id)) {
-            return is_array($topic_id) ? array() : false;
+            return is_array($topic_id) ? [] : false;
         }
-        $items = array();
+        $items = [];
 
         if (!$poll_data = CACHE('bb_poll_data')->get("poll_$topic_id")) {
             $poll_data = DB()->fetch_rowset("

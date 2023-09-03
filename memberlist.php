@@ -13,7 +13,7 @@ require __DIR__ . '/common.php';
 
 $page_cfg['use_tablesorter'] = true;
 
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 $start = abs((int)request_var('start', 0));
 $mode = (string)request_var('mode', 'joined');

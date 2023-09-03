@@ -13,10 +13,10 @@ define('NO_GZIP', true);
 require __DIR__ . '/common.php';
 require ATTACH_DIR . '/attachment_mod.php';
 
-$datastore->enqueue(array(
+$datastore->enqueue([
     'attach_extensions',
-    'cat_forums',
-));
+    'cat_forums'
+]);
 
 $download_id = request_var('id', 0);
 $thumbnail = request_var('thumb', 0);
@@ -194,9 +194,7 @@ if (IS_GUEST && !$bb_cfg['captcha']['disabled'] && !bb_captcha('check')) {
     $message .= '<input type="button" class="bold" value="' . $lang['GO_BACK'] . '" onclick="document.location.href = \'' . $redirect_url . '\';" />';
     $message .= '</form>';
 
-    $template->assign_vars(array(
-        'ERROR_MESSAGE' => $message,
-    ));
+    $template->assign_vars(['ERROR_MESSAGE' => $message]);
 
     require(PAGE_HEADER);
     require(PAGE_FOOTER);

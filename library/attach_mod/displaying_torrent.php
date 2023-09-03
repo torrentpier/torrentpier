@@ -28,7 +28,7 @@ $upload_image = '<img src="' . $images['icon_dn'] . '" alt="' . $lang['DL_TORREN
 
 $peers_cnt = $seed_count = 0;
 $seeders = $leechers = '';
-$tor_info = array();
+$tor_info = [];
 
 $template->assign_vars(array(
     'SEED_COUNT' => false,
@@ -299,11 +299,11 @@ if ($tor_reged && $tor_info) {
         if ($peers = DB()->fetch_rowset($sql)) {
             $peers_cnt = count($peers);
 
-            $cnt = $tr = $sp_up = $sp_down = $sp_up_tot = $sp_down_tot = array();
+            $cnt = $tr = $sp_up = $sp_down = $sp_up_tot = $sp_down_tot = [];
             $cnt['s'] = $tr['s'] = $sp_up['s'] = $sp_down['s'] = $sp_up_tot['s'] = $sp_down_tot['s'] = 0;
             $cnt['l'] = $tr['l'] = $sp_up['l'] = $sp_down['l'] = $sp_up_tot['l'] = $sp_down_tot['l'] = 0;
 
-            $max_up = $max_down = $max_sp_up = $max_sp_down = array();
+            $max_up = $max_down = $max_sp_up = $max_sp_down = [];
             $max_up['s'] = $max_down['s'] = $max_sp_up['s'] = $max_sp_down['s'] = 0;
             $max_up['l'] = $max_down['l'] = $max_sp_up['l'] = $max_sp_down['l'] = 0;
             $max_up_id['s'] = $max_down_id['s'] = $max_sp_up_id['s'] = $max_sp_down_id['s'] = ($peers_cnt + 1);
@@ -348,7 +348,7 @@ if ($tor_reged && $tor_info) {
             }
 
             if ($s_mode == 'count') {
-                $tmp = array();
+                $tmp = [];
                 $tmp[0]['seeder'] = $tmp[0]['username'] = $tmp[1]['username'] = 0;
                 $tmp[1]['seeder'] = 1;
                 $tmp[0]['username'] = (int)@$peers[0]['leechers'];

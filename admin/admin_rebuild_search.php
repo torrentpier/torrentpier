@@ -157,7 +157,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $expire_time = $start_time + $time_limit - 5;
     $start_post_id = $end_post_id = $num_rows = 0;
     $timer_expired = false;
-    $words_sql = array();
+    $words_sql = [];
 
     while ($row = DB()->fetch_next($result) and !$timer_expired) {
         set_time_limit(600);

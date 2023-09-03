@@ -28,7 +28,7 @@ $mode = (string)@$_REQUEST['mode'];
 $confirm = isset($_POST['confirm']);
 
 $refresh = $preview;
-$orig_word = $replacement_word = array();
+$orig_word = $replacement_word = [];
 
 // Set topic type
 $topic_type = (@$_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
@@ -52,7 +52,7 @@ $user->session_start();
 set_die_append_msg($forum_id, $topic_id);
 
 // What auth type do we need to check?
-$is_auth = array();
+$is_auth = [];
 switch ($mode) {
     case 'newtopic':
     case 'new_rel':
@@ -94,7 +94,7 @@ switch ($mode) {
 
 // Various lookups to find topic_id, forum_id, post_id etc
 $error_msg = '';
-$post_data = array();
+$post_data = [];
 switch ($mode) {
     case 'newtopic':
     case 'new_rel':
@@ -376,7 +376,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
                         $forum_parent = $post_info['forum_parent'];
                     }
                     $count_rowset = DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
-                    $sub_forums = array();
+                    $sub_forums = [];
                     foreach ($count_rowset as $count_row) {
                         if ($count_row['forum_id'] != $forum_id) {
                             $sub_forums[] = $count_row['forum_id'];
@@ -455,8 +455,8 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 
         if ($mode == 'quote') {
             if (!defined('WORD_LIST_OBTAINED')) {
-                $orig_word = array();
-                $replace_word = array();
+                $orig_word = [];
+                $replace_word = [];
                 obtain_word_list($orig_word, $replace_word);
                 define('WORD_LIST_OBTAINED', true);
             }

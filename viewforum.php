@@ -219,7 +219,7 @@ if ($is_auth['auth_mod']) {
         $topics_per_page = $req_tpp;
     }
 
-    $select_tpp = array();
+    $select_tpp = [];
     foreach ($bb_cfg['allowed_topics_per_page'] as $tpp) {
         $select_tpp[$tpp] = $tpp;
     }
@@ -313,7 +313,7 @@ if ($title_match =& $_REQUEST[$title_match_key]) {
 }
 
 // Get topics
-$topic_ids = $topic_rowset = array();
+$topic_ids = $topic_rowset = [];
 
 // IDs
 $sql = "
@@ -353,7 +353,7 @@ if ($topics_csv = implode(',', $topic_ids)) {
 }
 
 // Define censored word matches
-$orig_word = $replacement_word = array();
+$orig_word = $replacement_word = [];
 obtain_word_list($orig_word, $replacement_word);
 
 if ($forum_data['allow_reg_tracker']) {
@@ -375,7 +375,7 @@ $template->assign_vars(array(
 ));
 
 // User authorisation levels output
-$u_auth = array();
+$u_auth = [];
 $u_auth[] = ($is_auth['auth_post']) ? $lang['RULES_POST_CAN'] : $lang['RULES_POST_CANNOT'];
 $u_auth[] = ($is_auth['auth_reply']) ? $lang['RULES_REPLY_CAN'] : $lang['RULES_REPLY_CANNOT'];
 $u_auth[] = ($is_auth['auth_edit']) ? $lang['RULES_EDIT_CAN'] : $lang['RULES_EDIT_CANNOT'];

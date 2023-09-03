@@ -19,7 +19,7 @@ $keeping_dlstat = array(
     DL_STATUS_CANCEL => (int)$bb_cfg['dl_cancel_days_keep'],
 );
 
-$delete_dlstat_sql = array();
+$delete_dlstat_sql = [];
 
 foreach ($keeping_dlstat as $dl_status => $days_to_keep) {
     if ($days_to_keep) {

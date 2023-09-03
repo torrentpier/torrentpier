@@ -18,16 +18,16 @@ global $bf, $bb_cfg;
 //
 $data = array(
     'not_auth_forums' => array(
-        'guest_view' => array(),
-        'guest_read' => array(),
-        'user_view' => array(),
-        'user_read' => array(),
+        'guest_view' => [],
+        'guest_read' => [],
+        'user_view' => [],
+        'user_read' => [],
     ),
-    'tracker_forums' => array(),
-    'cat_title_html' => array(),
-    'forum_name_html' => array(),
-    'c' => array(),                // also has $data['c']['cat_id']['forums'] key
-    'f' => array(),                // also has $data['f']['forum_id']['subforums'] key
+    'tracker_forums' => [],
+    'cat_title_html' => [],
+    'forum_name_html' => [],
+    'c' => [],                // also has $data['c']['cat_id']['forums'] key
+    'f' => [],                // also has $data['f']['forum_id']['subforums'] key
 );
 
 // Store only these fields from BB_FORUMS in $data['f']

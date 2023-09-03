@@ -11,11 +11,11 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$allowed_extensions = array();
-$display_categories = array();
-$download_modes = array();
-$upload_icons = array();
-$attachments = array();
+$allowed_extensions = [];
+$display_categories = [];
+$download_modes = [];
+$upload_icons = [];
+$attachments = [];
 
 /**
  * Create needed arrays for Extension Assignments
@@ -28,7 +28,7 @@ function init_complete_extensions_data()
         $GLOBALS['datastore']->update('attach_extensions');
         $extension_informations = get_extension_informations();
     }
-    $allowed_extensions = array();
+    $allowed_extensions = [];
 
     for ($i = 0, $size = count($extension_informations); $i < $size; $i++) {
         $extension = strtolower(trim($extension_informations[$i]['extension']));
@@ -116,7 +116,7 @@ function init_display_post_attachments($switch_attachment)
         return;
     }
 
-    $post_id_array = array();
+    $post_id_array = [];
 
     for ($i = 0; $i < $total_posts; $i++) {
         if ($postrow[$i]['post_attachment'] == 1) {

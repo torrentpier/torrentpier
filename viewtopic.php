@@ -42,7 +42,7 @@ if ($userdata['session_admin']) {
         $posts_per_page = $req_ppp;
     }
 
-    $select_ppp = array();
+    $select_ppp = [];
     foreach ($bb_cfg['allowed_posts_per_page'] as $ppp) {
         $select_ppp[$ppp] = $ppp;
     }
@@ -367,7 +367,7 @@ if (!$ranks = $datastore->get('ranks')) {
 }
 
 // Define censored word matches
-$orig_word = $replacement_word = array();
+$orig_word = $replacement_word = [];
 obtain_word_list($orig_word, $replacement_word);
 
 // Censor topic title
@@ -684,7 +684,7 @@ for ($i = 0; $i < $total_posts; $i++) {
             $mc_class = '';
             break;
     }
-    $mc_select_type = array();
+    $mc_select_type = [];
     foreach ($lang['MC_COMMENT'] as $key => $value) {
         $mc_select_type[$key] = $value['type'];
     }

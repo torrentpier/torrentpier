@@ -21,7 +21,7 @@ if (!$forum_id || !$f_data = DB()->fetch_row($sql)) {
     bb_die($lang['FORUM_NOT_EXIST']);
 }
 // tpl_data
-$tpl_data = array();
+$tpl_data = [];
 $sql = "SELECT * FROM " . BB_TOPIC_TPL . " WHERE tpl_id = {$f_data['forum_tpl_id']} LIMIT 1";
 
 if (!$f_data['forum_tpl_id'] || !$tpl_data = DB()->fetch_row($sql)) {

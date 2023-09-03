@@ -48,8 +48,8 @@ if (isset($this->request['post_id'])) {
 }
 
 if (!defined('WORD_LIST_OBTAINED')) {
-    $orig_word = array();
-    $replace_word = array();
+    $orig_word = [];
+    $replace_word = [];
     obtain_word_list($orig_word, $replace_word);
     define('WORD_LIST_OBTAINED', true);
 }

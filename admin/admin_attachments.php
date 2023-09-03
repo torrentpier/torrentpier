@@ -171,7 +171,7 @@ if ($search_imagick) {
 // Check Settings
 if ($check_upload) {
     // Some tests...
-    $attach_config = array();
+    $attach_config = [];
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
@@ -266,7 +266,7 @@ if ($mode == 'cats') {
 
     $sql = 'SELECT group_name, cat_id FROM ' . BB_EXTENSION_GROUPS . ' WHERE cat_id > 0 ORDER BY cat_id';
 
-    $s_assigned_group_images = array();
+    $s_assigned_group_images = [];
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not get group names from ' . BB_EXTENSION_GROUPS);
@@ -319,7 +319,7 @@ if ($mode == 'cats') {
 // Check Cat Settings
 if ($check_image_cat) {
     // Some tests...
-    $attach_config = array();
+    $attach_config = [];
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
@@ -386,7 +386,7 @@ if ($submit && $mode == 'quota') {
     $filesize_list = get_var('max_filesize_list', array(0));
     $size_select_list = get_var('size_select_list', array(''));
 
-    $allowed_list = array();
+    $allowed_list = [];
 
     for ($i = 0, $iMax = count($quota_change_list); $i < $iMax; $i++) {
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);

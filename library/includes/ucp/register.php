@@ -31,14 +31,14 @@ if (IS_ADMIN) {
 $can_register = (IS_GUEST || IS_ADMIN);
 
 $submit = !empty($_POST['submit']);
-$errors = array();
+$errors = [];
 $adm_edit = false; // редактирование админом чужого профиля
 
 require INC_DIR . '/bbcode.php';
 
-$pr_data = array();   // данные редактируемого либо регистрационного профиля
-$db_data = array();   // данные для базы: регистрационные либо измененные данные юзера
-$tp_data = array();   // данные для tpl
+$pr_data = []; // данные редактируемого либо регистрационного профиля
+$db_data = []; // данные для базы: регистрационные либо измененные данные юзера
+$tp_data = []; // данные для tpl
 
 // Данные профиля
 switch ($mode) {

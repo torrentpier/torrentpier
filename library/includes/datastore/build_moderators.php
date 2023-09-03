@@ -12,12 +12,12 @@ if (!defined('BB_ROOT')) {
 }
 
 $data = array(
-    'name_users' => array(),  // only by personal permissions
-    'name_groups' => array(),  // only visible to all users
-    'mod_users' => array(),  // only by personal permissions
-    'mod_groups' => array(),  // only visible to all users
-    'moderators' => array(),  // all moderators
-    'admins' => array(),  // all admins
+    'name_users' => [],  // only by personal permissions
+    'name_groups' => [],  // only visible to all users
+    'mod_users' => [],  // only by personal permissions
+    'mod_groups' => [],  // only visible to all users
+    'moderators' => [],  // all moderators
+    'admins' => [],  // all admins
 );
 
 // name_users

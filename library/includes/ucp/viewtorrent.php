@@ -11,7 +11,7 @@ if (!defined('IN_PROFILE')) {
     die(basename(__FILE__));
 }
 
-$releasing = $seeding = $leeching = array();
+$releasing = $seeding = $leeching = [];
 $releasing_count = $seeding_count = $leeching_count = 0;
 
 // Auth

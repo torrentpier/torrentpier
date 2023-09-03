@@ -26,7 +26,7 @@ $cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $submit = isset($_REQUEST['submit']);
 
-$group_data = array();
+$group_data = [];
 
 $forum_auth_fields = array(
     'auth_view',
@@ -108,7 +108,7 @@ if ($submit && $mode == 'user') {
     //
     // Submit new USER permissions
     //
-    $auth = array();
+    $auth = [];
 
     if (!empty($_POST['auth']) && is_array($_POST['auth'])) {
         array_deep($_POST['auth'], 'intval');
@@ -139,7 +139,7 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
         bb_die($lang['GROUP_NOT_EXIST']);
     }
 
-    $auth = array();
+    $auth = [];
     array_deep($_POST['auth'], 'intval');
 
     foreach ($_POST['auth'] as $f_id => $bf_ary) {
@@ -185,8 +185,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $ug_data = $this_userdata;
     $ug_data['session_logged_in'] = 1;
 
-    $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_USER_ONLY);
-    $g_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_GROUP_ONLY);
+    $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, [], UG_PERM_USER_ONLY);
+    $g_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, [], UG_PERM_GROUP_ONLY);
 
     foreach ($forums['c'] as $c_id => $c_data) {
         $template->assign_block_vars('c', array(

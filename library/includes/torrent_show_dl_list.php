@@ -34,7 +34,7 @@ if (($is_auth['auth_mod']) && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
     $template->assign_vars(array('S_DL_DELETE' => $s_dl_delete));
 }
 
-$dl_cat = $dl_count = array();
+$dl_cat = $dl_count = [];
 
 if ($show_dl_list) {
     foreach ($dl_status_css as $i => $desc) {

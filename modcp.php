@@ -41,7 +41,7 @@ function return_msg_mcp($status_msg)
 
 function validate_topics($forum_id, &$req_topics, &$topic_titles)
 {
-    $valid_topics = $valid_titles = array();
+    $valid_topics = $valid_titles = [];
 
     if ($topic_csv = get_id_csv($req_topics)) {
         $sql = "SELECT topic_id, topic_title FROM " . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND forum_id = $forum_id";
@@ -130,7 +130,7 @@ if ($topic_id) {
 }
 
 // Start session management
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
 if (isset($_POST['cancel']) || IS_GUEST) {
@@ -173,7 +173,7 @@ if ($is_moderator && !$userdata['session_admin']) {
 //
 // Get required vars
 //
-$req_topics = $topic_csv = $topic_titles = $hidden_fields = array();
+$req_topics = $topic_csv = $topic_titles = $hidden_fields = [];
 
 switch ($mode) {
     case 'delete':
@@ -310,7 +310,7 @@ switch ($mode) {
 				AND topic_status != $new_topic_status
 		";
 
-        $topic_csv = array();
+        $topic_csv = [];
 
         foreach (DB()->fetch_rowset($sql) as $row) {
             $topic_csv[] = $row['topic_id'];
@@ -379,12 +379,12 @@ switch ($mode) {
         //mpd
         $delete_posts = isset($_POST['delete_posts']);
         $split = (isset($_POST['split_type_all']) || isset($_POST['split_type_beyond']));
-        $posts = $_POST['post_id_list'] ?? array();
+        $posts = $_POST['post_id_list'] ?? [];
         $start = /* (isset($_POST['start'])) ? intval($_POST['start']) : */
             0;
         $topic_first_post_id = $topic_row['topic_first_post_id'] ?? '';
 
-        $post_id_sql = $req_post_id_sql = array();
+        $post_id_sql = $req_post_id_sql = [];
 
         if (($split || $delete_posts) && ($posts && $topic_id && $forum_id && $topic_first_post_id) && $confirmed) {
             foreach ($posts as $post_id) {
@@ -701,7 +701,7 @@ switch ($mode) {
 					AND topic_show_first_post != $new_topic_status
 			";
 
-            $topic_csv = array();
+            $topic_csv = [];
 
             foreach (DB()->fetch_rowset($sql) as $row) {
                 $topic_csv[] = $row['topic_id'];
@@ -742,7 +742,7 @@ switch ($mode) {
 				LIMIT 1
 			";
 
-            $topic_csv = array();
+            $topic_csv = [];
 
             foreach (DB()->fetch_rowset($sql) as $row) {
                 $topic_csv[] = $row['topic_id'];

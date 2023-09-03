@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-$data = array();
+$data = [];
 
 // usercount
 $row = DB()->fetch_row("SELECT COUNT(*) AS usercount FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")");
@@ -68,7 +68,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
     $date_today = bb_date(TIMENOW, 'md', false);
     $date_forward = bb_date(TIMENOW + ($bb_cfg['birthday_check_day'] * 86400), 'md', false);
 
-    $birthday_today_list = $birthday_week_list = array();
+    $birthday_today_list = $birthday_week_list = [];
 
     foreach ($sql as $row) {
         $user_birthday = bb_date(strtotime($row['user_birthday']), 'md', false);

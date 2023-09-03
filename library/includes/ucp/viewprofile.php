@@ -120,7 +120,7 @@ $template->assign_vars(array(
 ));
 
 if (IS_ADMIN) {
-    $group_membership = array();
+    $group_membership = [];
     $sql = "
 		SELECT COUNT(g.group_id) AS groups_cnt, g.group_single_user, ug.user_pending
 		FROM " . BB_USER_GROUP . " ug
@@ -195,7 +195,7 @@ if (IS_ADMIN) {
     ));
 }
 
-$user_restrictions = array();
+$user_restrictions = [];
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')) {
     $user_restrictions[] = $lang['HIDE_AVATARS'];

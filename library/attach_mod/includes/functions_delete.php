@@ -23,7 +23,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
     }
 
     if ($post_id_array === 0 && $attach_id_array !== 0) {
-        $post_id_array = array();
+        $post_id_array = [];
 
         if (!is_array($attach_id_array)) {
             if (false !== strpos($attach_id_array, ', ')) {
@@ -32,7 +32,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                 $attach_id_array = explode(',', $attach_id_array);
             } else {
                 $attach_id = (int)$attach_id_array;
-                $attach_id_array = array();
+                $attach_id_array = [];
                 $attach_id_array[] = $attach_id;
             }
         }
@@ -74,7 +74,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         } else {
             $post_id = (int)$post_id_array;
 
-            $post_id_array = array();
+            $post_id_array = [];
             $post_id_array[] = $post_id;
         }
     }
@@ -85,7 +85,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
     // First of all, determine the post id and attach_id
     if ($attach_id_array === 0) {
-        $attach_id_array = array();
+        $attach_id_array = [];
 
         // Get the attach_ids to fill the array
         $whereclause = 'WHERE post_id IN (' . implode(', ', $post_id_array) . ')';
@@ -119,7 +119,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         } else {
             $attach_id = (int)$attach_id_array;
 
-            $attach_id_array = array();
+            $attach_id_array = [];
             $attach_id_array[] = $attach_id;
         }
     }
@@ -147,7 +147,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                 bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
             }
 
-            $torrents_sql = array();
+            $torrents_sql = [];
 
             while ($row = DB()->sql_fetchrow($result)) {
                 $torrents_sql[] = $row['topic_id'];

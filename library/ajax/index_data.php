@@ -61,7 +61,7 @@ switch ($mode) {
             'cat_forums',
         ));
 
-        $moderators = array();
+        $moderators = [];
         $mod = $datastore->get('moderators');
 
         if (isset($mod['mod_users'][$forum_id])) {

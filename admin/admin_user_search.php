@@ -63,7 +63,7 @@ if (!isset($_REQUEST['dosearch'])) {
         bb_die('Could not select forum data');
     }
 
-    $forums = array();
+    $forums = [];
 
     if (DB()->num_rows($result) != 0) {
         $template->assign_block_vars('forums_exist', array());
@@ -912,7 +912,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     unset($banned);
 
-    $banned = array();
+    $banned = [];
 
     while ($row = DB()->sql_fetchrow($result)) {
         $banned[$row['user_id']] = true;

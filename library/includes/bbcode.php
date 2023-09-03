@@ -194,7 +194,7 @@ function strip_quotes($text)
     $lowertext = strtolower($text);
 
     // find all [quote tags
-    $start_pos = array();
+    $start_pos = [];
     $curpos = 0;
     do {
         $pos = strpos($lowertext, '[quote', $curpos);
@@ -209,7 +209,7 @@ function strip_quotes($text)
     }
 
     // find all [/quote] tags
-    $end_pos = array();
+    $end_pos = [];
     $curpos = 0;
     do {
         $pos = strpos($lowertext, '[/quote', $curpos);
@@ -230,7 +230,7 @@ function strip_quotes($text)
     do {
         // build a stack that represents when a quote tag is opened
         // and add non-quote text to the new string
-        $stack = array();
+        $stack = [];
         $newtext = '[...] ';
         $substr_pos = 0;
         foreach ($pos_list as $pos => $type) {
@@ -278,8 +278,8 @@ function strip_quotes($text)
  */
 function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
 {
-    $find = array();
-    $replace = array();
+    $find = [];
+    $replace = [];
 
     if ($stripquotes) {
         // [quote=username] and [quote]
@@ -348,7 +348,7 @@ function extract_search_words($text)
     $text = array_unique(explode(' ', str_compact($text)));
 
     // short & long words 2
-    $text_out = array();
+    $text_out = [];
     foreach ($text as $word) {
         if (mb_strlen($word) > $min_word_len && mb_strlen($word) <= $max_word_len) {
             $text_out[] = $word;
@@ -368,7 +368,7 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
     global $bb_cfg;
 
     $text = $topic_title . ' ' . $post_message;
-    $words = ($text) ? extract_search_words($text) : array();
+    $words = ($text) ? extract_search_words($text) : [];
 
     if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx') {
         return implode("\n", $words);
@@ -393,8 +393,8 @@ function bbcode2html($text)
     if (!isset($bbcode)) {
         $bbcode = new TorrentPier\Legacy\BBCode();
     }
-    $orig_word = array();
-    $replacement_word = array();
+    $orig_word = [];
+    $replacement_word = [];
     obtain_word_list($orig_word, $replacement_word);
     if (count($orig_word)) {
         $text = preg_replace($orig_word, $replacement_word, $text);

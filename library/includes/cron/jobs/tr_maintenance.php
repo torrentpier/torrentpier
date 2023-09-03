@@ -19,7 +19,7 @@ $last_seen_time = TIMENOW - 86400 * $bb_cfg['seeder_last_seen_days_keep'];
 $never_seen_time = TIMENOW - 86400 * $bb_cfg['seeder_never_seen_days_keep'];
 $limit_sql = 3000;
 
-$topics_sql = $attach_sql = array();
+$topics_sql = $attach_sql = [];
 
 $sql = "SELECT topic_id, attach_id
 	FROM " . BB_BT_TORRENTS . "

@@ -26,7 +26,7 @@ if (!empty($_GET['logout'])) {
 }
 
 $redirect_url = "index.php";
-$login_errors = array();
+$login_errors = [];
 
 // Requested redirect
 if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING'], $matches)) {

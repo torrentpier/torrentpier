@@ -35,7 +35,7 @@ while (true) {
     set_time_limit(600);
     $end_id = $start_id + $per_cycle - 1;
 
-    $val = array();
+    $val = [];
 
     if (!$bb_cfg['ocelot']['enabled']) {
         $sql = "
@@ -153,7 +153,7 @@ if ($bb_cfg['torhelp_enabled']) {
 		ORDER BY session_time DESC
 		LIMIT $users_limit
 	";
-    $online_users_ary = array();
+    $online_users_ary = [];
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $online_users_ary[] = $row['uid'];

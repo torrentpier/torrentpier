@@ -11,9 +11,9 @@ define('BB_SCRIPT', 'index');
 
 require __DIR__ . '/common.php';
 
-$page_cfg['load_tpl_vars'] = array(
-    'post_icons',
-);
+$page_cfg['load_tpl_vars'] = [
+    'post_icons'
+];
 
 // Show last topic
 $show_last_topic = true;
@@ -25,11 +25,11 @@ $show_online_users = true;
 // Show subforums
 $show_subforums = true;
 
-$datastore->enqueue(array(
+$datastore->enqueue([
     'stats',
     'moderators',
-    'cat_forums',
-));
+    'cat_forums'
+]);
 
 if ($bb_cfg['show_latest_news']) {
     $datastore->enqueue('latest_news');
@@ -121,15 +121,15 @@ $sql = "
 	ORDER BY c.cat_order, f.forum_order
 ';
 
-$replace_in_parent = array(
+$replace_in_parent = [
     'last_post_id',
     'last_post_time',
     'last_post_user_id',
     'last_post_username',
     'last_post_user_rank',
     'last_topic_title',
-    'last_topic_id',
-);
+    'last_topic_id'
+];
 
 $cache_name = 'index_sql_' . md5($sql);
 if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
@@ -168,7 +168,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
 }
 
 // Obtain list of moderators
-$moderators = array();
+$moderators = [];
 if (!$mod = $datastore->get('moderators')) {
     $datastore->update('moderators');
     $mod = $datastore->get('moderators');
@@ -193,25 +193,23 @@ $datastore->rm('moderators');
 // Build index page
 $forums_count = 0;
 foreach ($cat_forums as $cid => $c) {
-    $template->assign_block_vars('h_c', array(
+    $template->assign_block_vars('h_c', [
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
         'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
-    ));
+    ]);
 
-    $template->assign_vars(array(
-        'H_C_AL_MESS' => $hide_cat_opt && !$showhide,
-    ));
+    $template->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
         continue;
     }
 
-    $template->assign_block_vars('c', array(
+    $template->assign_block_vars('c', [
         'CAT_ID' => $cid,
         'CAT_TITLE' => $cat_title_html[$cid],
         'U_VIEWCAT' => CAT_URL . $cid,
-    ));
+    ]);
 
     foreach ($c['f'] as $fid => $f) {
         if (!$fname_html =& $forum_name_html[$fid]) {
@@ -360,7 +358,7 @@ if ($bb_cfg['show_network_news']) {
 }
 
 if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
-    $week_list = $today_list = array();
+    $week_list = $today_list = [];
     $week_all = $today_all = false;
 
     if (!empty($stats['birthday_week_list'])) {

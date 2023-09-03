@@ -222,7 +222,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 			WHERE topic_id IN(" . $userdata['torhelp'] . ")
 			LIMIT 8
 		";
-        $torhelp_topics = array();
+        $torhelp_topics = [];
 
         foreach (DB()->fetch_rowset($sql) as $row) {
             $torhelp_topics[] = '<a href="viewtopic.php?t=' . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';

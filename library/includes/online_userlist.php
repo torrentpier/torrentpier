@@ -46,7 +46,7 @@ $sql = "
 
 foreach (DB()->fetch_rowset($sql) as $u) {
     if ($u['session_logged_in']) {
-        $stat = array();
+        $stat = [];
         $name = profile_url($u);
         $level = $u['user_level'];
 
@@ -85,7 +85,7 @@ foreach (DB()->fetch_rowset($sql) as $u) {
 }
 
 if ($ulist) {
-    $inline = $block = $short = array();
+    $inline = $block = $short = [];
 
     foreach ($ulist as $level => $users) {
         if (empty($users)) {

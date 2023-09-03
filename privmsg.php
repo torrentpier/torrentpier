@@ -55,7 +55,7 @@ if ($folder =& $_REQUEST['folder']) {
 }
 
 // Start session management
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 $template->assign_vars(array(
     'IN_PM' => true,
@@ -374,8 +374,8 @@ if ($mode == 'read') {
 
     $private_message = $privmsg['privmsgs_text'];
 
-    $orig_word = array();
-    $replacement_word = array();
+    $orig_word = [];
+    $replacement_word = [];
     obtain_word_list($orig_word, $replacement_word);
 
     if (count($orig_word)) {
@@ -411,7 +411,7 @@ if ($mode == 'read') {
 } elseif (($delete && $mark_list) || $delete_all) {
     if (isset($mark_list) && !is_array($mark_list)) {
         // Set to empty array instead of '0' if nothing is selected.
-        $mark_list = array();
+        $mark_list = [];
     }
 
     if (!$confirmed) {
@@ -467,7 +467,7 @@ if ($mode == 'read') {
             bb_die('Could not obtain id list to delete messages');
         }
 
-        $mark_list = array();
+        $mark_list = [];
         while ($row = DB()->sql_fetchrow($result)) {
             $mark_list[] = $row['privmsgs_id'];
         }
@@ -502,7 +502,7 @@ if ($mode == 'read') {
                 }
 
                 if ($row = DB()->sql_fetchrow($result)) {
-                    $update_users = $update_list = array();
+                    $update_users = $update_list = [];
 
                     do {
                         switch ($row['privmsgs_type']) {
@@ -665,7 +665,7 @@ if ($mode == 'read') {
             }
 
             if ($row = DB()->sql_fetchrow($result)) {
-                $update_users = $update_list = array();
+                $update_users = $update_list = [];
 
                 do {
                     switch ($row['privmsgs_type']) {
@@ -1049,8 +1049,8 @@ if ($mode == 'read') {
     $page_title = $lang['SEND_PRIVATE_MESSAGE'];
 
     if ($preview && !$error) {
-        $orig_word = array();
-        $replacement_word = array();
+        $orig_word = [];
+        $replacement_word = [];
         obtain_word_list($orig_word, $replacement_word);
 
         $preview_message = bbcode2html($privmsg_message);
@@ -1182,7 +1182,7 @@ if ($mode == 'read') {
             'body' => 'privmsgs.tpl')
     );
 
-    $orig_word = $replacement_word = array();
+    $orig_word = $replacement_word = [];
     obtain_word_list($orig_word, $replacement_word);
 
     //

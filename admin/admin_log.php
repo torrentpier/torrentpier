@@ -205,7 +205,7 @@ if ($log_count == $per_page + 1) {
 
 generate_pagination($url, $items_count, $per_page, $start);
 
-$filter = array();
+$filter = [];
 
 if ($log_rowset) {
     $log_type = $log_action->log_type;

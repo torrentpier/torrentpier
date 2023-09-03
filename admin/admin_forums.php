@@ -693,7 +693,7 @@ if (!$mode || $show_main_page) {
         }
 
         // Okay, let's build the index
-        $gen_cat = array();
+        $gen_cat = [];
 
         $bgr_class_1 = 'prow1';
         $bgr_class_2 = 'prow2';
@@ -923,7 +923,7 @@ function renumber_order($mode, $cat = 0)
  */
 function get_cat_forums($cat_id = false)
 {
-    $forums = array();
+    $forums = [];
     $where_sql = '';
 
     if ($cat_id = (int)$cat_id) {
@@ -1019,7 +1019,7 @@ function get_orphan_sf()
     global $cat_forums;
 
     $last_root = 0;
-    $bad_sf_ary = array();
+    $bad_sf_ary = [];
 
     foreach ($cat_forums as $cid => $c) {
         foreach ($c['f'] as $fid => $f) {
