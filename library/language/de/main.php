@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Private Nachrichten';
 $lang['NO_NEW_PM'] = 'keine neuen Nachrichten';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('neue Nachricht', 'neue Nachrichten');
+$lang['NEW_PMS_DECLENSION'] = ['neue Nachricht', 'neue Nachrichten'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('ungelesen', 'ungelesen');
+$lang['UNREAD_PMS_DECLENSION'] = ['ungelesen', 'ungelesen'];
 
 $lang['UNREAD_MESSAGE'] = 'Ungelesene Nachricht';
 $lang['READ_MESSAGE'] = 'Nachricht Lesen';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sendet eine e-mail, wenn jemand antwortet auf 
 
 $lang['BOARD_LANG'] = 'Board-Sprache';
 $lang['GENDER'] = 'Geschlecht';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Unbekannt',
     1 => 'Männlich',
     2 => 'Weiblich'
-);
+];
 $lang['MODULE_OFF'] = 'Modul ist deaktiviert!';
 
 $lang['BIRTHDAY'] = 'Geburtstag';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Wählen Sie status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Sie haben nicht ausgewählten status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alle Stati';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nicht geprüft',
     TOR_CLOSED => 'geschlossen',
     TOR_APPROVED => 'geprüft',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'temporäre',
     TOR_PREMOD => 'pre-moderation',
     TOR_REPLENISH => 'wieder aufzufüllen',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Diesen status gibt es nicht!';
 $lang['TORRENT_FAILED'] = 'Die Verteilung wurde nicht gefunden!';
 $lang['TOR_STATUS_DUB'] = 'Die Verteilung hat den gleichen status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('Antwort', 'Antworten');
-$lang['DECLENSION']['TIMES'] = array('Zeit', 'mal');
+$lang['DECLENSION']['REPLIES'] = ['Antwort', 'Antworten'];
+$lang['DECLENSION']['TIMES'] = ['Zeit', 'mal'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('zweite', 'Sekunden'),
-    'minutes' => array('minute', 'Minuten'),
-    'hours' => array('Stunde', 'Stunden'),
-    'mday' => array('Tag', 'Tage'),
-    'mon' => array('Monat', 'Monate'),
-    'year' => array('Jahr', 'Jahre'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['zweite', 'Sekunden'],
+    'minutes' => ['minute', 'Minuten'],
+    'hours' => ['Stunde', 'Stunden'],
+    'mday' => ['Tag', 'Tage'],
+    'mon' => ['Monat', 'Monate'],
+    'year' => ['Jahr', 'Jahre'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn zu Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Erfolgreich Aktualisiert';
 $lang['SET_DEFAULTS'] = 'Wiederherstellen';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum-Einstellungen';
-$lang['TRACKER_SETTINGS'] = 'Tracker-Einstellungen';
-
-$lang['CHANGES_DISABLED'] = 'Änderungen deaktiviert ist (siehe <b>$bb_cfg[\'tracker\']</b> in config.php)';
-
 $lang['OFF_TRACKER'] = 'Deaktivieren tracker';
 $lang['OFF_REASON'] = 'Deaktivieren der Grund';
 $lang['OFF_REASON_EXPL'] = 'diese Nachricht wird an Kunden, wenn der tracker deaktiviert ist';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Reparatur Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Auftrag Bearbeiten';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Aufgabe hinzufügen';
 $lang['CRON_SCRIPT_EXPL'] = 'name des Skripts von "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Wählen Sie start',
     'hourly' => 'stündlich',
     'daily' => 'täglich',
     'weekly' => 'wöchentlich',
     'monthly' => 'monatlich',
     'interval' => 'Intervall'
-);
+];
 $lang['NOSELECT'] = 'Nicht wählen';
 $lang['RUN_DAY'] = 'Ausführen Tag';
 $lang['RUN_DAY_EXPL'] = 'der Tag, wenn diese Arbeit ausführen';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Nachricht wurde gesendet an alle diejenigen, die die
 $lang['CALLSEED_MSG_SPAM'] = 'Anfrage bereits einmal erfolgreich gesendet (Vermutlich nicht du)<br /><br />The nächste Gelegenheit zum senden einer Anfrage zu <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Thema keine Hilfe benötigen (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Thema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Thema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Thema:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Benutzer:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Benutzer:<br /> <b>ban</b>',
     'adm_user_unban' => 'Benutzer:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alle Aktionen';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Aktionen Anmelden: Suchoptionen';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Geben Sie einen Kommentar ein';
 $lang['MC_FAQ'] = 'Eingegebenen text wird angezeigt, die unter dieser Nachricht';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in Ihrer Nachricht";
 $lang['MC_COMMENT_PM_MSG'] = "Hallo, [b]%s[/b]\nModerator Links in Ihrer Nachricht [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Kommentar löschen',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentar von %s',
         'type' => 'Kommentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informationen aus %s',
         'type' => 'Informationen',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Warnung aus %s',
         'type' => 'Warnung',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Verletzung von %s',
         'type' => 'Verletzung',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Verwalten von XML-sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Version mit hash %s nicht gefunden';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Der Text dieser Seite wird bearbeitet unter: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Diese Zeile kann nur Administratoren sehen.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Auf dieser Seite können Sie den text angeben, der die grundlegenden Regeln der Ressource, die den Benutzern angezeigt wird.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inaktive Benutzer in 30 Tagen',
     1 => 'inaktive Benutzer für 90 Tage',
     2 => 'medium Größe-Distributionen auf dem tracker (viele MB)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'wie viele Hände, wo das seeding mehr als 5 Samen',
     6 => 'wie viele von uns uploaders (wer gefüllt ist mindestens 1 Seite)',
     7 => 'wie viele Uploader in den letzten 30 Tagen',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Umfrage aktiviert';
 $lang['NEW_POLL_END'] = 'Umfrage abgeschlossen';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Ungültiger Datei-Typ des Bildes';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Bild-Größe überschreitet die maximal zulässige %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Die hochgeladene Datei ist kein Bild';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Erweiterung %s für downloads ist nicht erlaubt';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'Sie überschritten die maximale Dateigröße für den server',
     UPLOAD_ERR_FORM_SIZE => 'Sie überschritten die maximale Datei-upload-Größe',
     UPLOAD_ERR_PARTIAL => 'wurde die Datei teilweise heruntergeladen',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'das temporäre Verzeichnis nicht gefunden',
     UPLOAD_ERR_CANT_WRITE => 'schreiben Fehler',
     UPLOAD_ERR_EXTENSION => 'upload stopped by extension',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Überprüfen Sie, dass Sie nicht ein Roboter';
