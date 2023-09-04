@@ -49,13 +49,13 @@ if ($mode != '') {
             }
         }
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_ADMIN_WORDS_EDIT' => true,
             'WORD' => $word,
             'REPLACEMENT' => $replacement,
             'S_WORDS_ACTION' => 'admin_words.php',
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        ));
+        ]);
     } elseif ($mode == 'save') {
         $word_id = (int)request_var('id', 0);
         $word = trim(request_var('word', ''));
@@ -110,11 +110,11 @@ if ($mode != '') {
     $word_rows = DB()->sql_fetchrowset($result);
     $word_count = count($word_rows);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ADMIN_WORDS_LIST' => true,
         'S_WORDS_ACTION' => 'admin_words.php',
-        'S_HIDDEN_FIELDS' => '',
-    ));
+        'S_HIDDEN_FIELDS' => ''
+    ]);
 
     for ($i = 0; $i < $word_count; $i++) {
         $word = $word_rows[$i]['word'];
@@ -123,13 +123,13 @@ if ($mode != '') {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('words', array(
+        $template->assign_block_vars('words', [
             'ROW_CLASS' => $row_class,
             'WORD' => $word,
             'REPLACEMENT' => $replacement,
             'U_WORD_EDIT' => "admin_words.php?mode=edit&amp;id=$word_id",
-            'U_WORD_DELETE' => "admin_words.php?mode=delete&amp;id=$word_id",
-        ));
+            'U_WORD_DELETE' => "admin_words.php?mode=delete&amp;id=$word_id"
+        ]);
     }
 }
 

@@ -122,13 +122,13 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $hidden_vars = '<input type="hidden" name="mode" value="import">';
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_SMILE_IMPORT' => true,
 
             'S_SMILEY_ACTION' => 'admin_smilies.php',
             'S_SMILE_SELECT' => $smile_paks_select,
-            'S_HIDDEN_FIELDS' => $hidden_vars,
-        ));
+            'S_HIDDEN_FIELDS' => $hidden_vars
+        ]);
     }
 } elseif (isset($_POST['export_pack']) || isset($_GET['export_pack'])) {
     $export_pack = (string)request_var('export_pack', '');
@@ -165,14 +165,14 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $s_hidden_fields = '<input type="hidden" name="mode" value="savenew" />';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_SMILE_EDIT' => true,
         'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
         'S_SMILEY_ACTION' => 'admin_smilies.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_FILENAME_OPTIONS' => $filename_list,
         'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path']
-    ));
+    ]);
 } elseif ($mode != '') {
     switch ($mode) {
         case 'delete':
@@ -213,7 +213,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             $s_hidden_fields = '<input type="hidden" name="mode" value="save" /><input type="hidden" name="smile_id" value="' . $smile_data['smilies_id'] . '" />';
 
-            $template->assign_vars(array(
+            $template->assign_vars([
                 'TPL_SMILE_EDIT' => true,
                 'SMILEY_CODE' => $smile_data['code'],
                 'SMILEY_EMOTICON' => $smile_data['emoticon'],
@@ -221,8 +221,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                 'S_SMILEY_ACTION' => 'admin_smilies.php',
                 'S_HIDDEN_FIELDS' => $s_hidden_fields,
                 'S_FILENAME_OPTIONS' => $filename_list,
-                'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path'],
-            ));
+                'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path']
+            ]);
 
             break;
 
@@ -291,11 +291,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $smilies = DB()->sql_fetchrowset($result);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_SMILE_MAIN' => true,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        'S_SMILEY_ACTION' => 'admin_smilies.php',
-    ));
+        'S_SMILEY_ACTION' => 'admin_smilies.php'
+    ]);
 
     // Loop throuh the rows of smilies setting block vars for the template
     for ($i = 0, $iMax = count($smilies); $i < $iMax; $i++) {
@@ -305,7 +305,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('smiles', array(
+        $template->assign_block_vars('smiles', [
             'ROW_CLASS' => $row_class,
 
             'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smilies[$i]['smile_url'],
@@ -314,7 +314,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             'U_SMILEY_EDIT' => 'admin_smilies.php?mode=edit&amp;id=' . $smilies[$i]['smilies_id'],
             'U_SMILEY_DELETE' => 'admin_smilies.php?mode=delete&amp;id=' . $smilies[$i]['smilies_id'],
-        ));
+        ]);
     }
 }
 
