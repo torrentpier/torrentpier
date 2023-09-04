@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Tin Nhắn';
 $lang['NO_NEW_PM'] = 'không có tin nhắn mới';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('tin nhắn mới', 'tin nhắn mới');
+$lang['NEW_PMS_DECLENSION'] = ['tin nhắn mới', 'tin nhắn mới'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('chưa đọc', 'chưa đọc');
+$lang['UNREAD_PMS_DECLENSION'] = ['chưa đọc', 'chưa đọc'];
 
 $lang['UNREAD_MESSAGE'] = 'Chưa đọc tin nhắn';
 $lang['READ_MESSAGE'] = 'Đọc tin nhắn';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Gửi một e-mail khi ai đó trả lời m�
 
 $lang['BOARD_LANG'] = 'Hội đồng quản trị ngôn ngữ';
 $lang['GENDER'] = 'Giới';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Không rõ',
     1 => 'Nam',
     2 => 'Nữ'
-);
+];
 $lang['MODULE_OFF'] = 'Module được vô hiệu hóa!';
 
 $lang['BIRTHDAY'] = 'Sinh nhật';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Tình trạng';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Chọn tình trạng';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Bạn đã không chọn tình trạng.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tất cả trạng thái';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'không phải là kiểm tra',
     TOR_CLOSED => 'đóng cửa',
     TOR_APPROVED => 'kiểm tra',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'tạm',
     TOR_PREMOD => 'trước chừng mực',
     TOR_REPLENISH => 'bổ sung',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tình trạng như vậy, không tồn tại!';
 $lang['TORRENT_FAILED'] = 'Giấy phép được không tìm thấy!';
 $lang['TOR_STATUS_DUB'] = 'Phân phối có cùng một tình trạng';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('trả lời', 'câu trả lời');
-$lang['DECLENSION']['TIMES'] = array('thời gian', 'lần');
+$lang['DECLENSION']['REPLIES'] = ['trả lời', 'câu trả lời'];
+$lang['DECLENSION']['TIMES'] = ['thời gian', 'lần'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('thứ hai', 'giây'),
-    'minutes' => array('phút', 'phút'),
-    'hours' => array('giờ', 'giờ'),
-    'mday' => array('ngày', 'ngày'),
-    'mon' => array('tháng', 'tháng'),
-    'year' => array('năm', 'năm'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['thứ hai', 'giây'],
+    'minutes' => ['phút', 'phút'],
+    'hours' => ['giờ', 'giờ'],
+    'mday' => ['ngày', 'ngày'],
+    'mon' => ['tháng', 'tháng'],
+    'year' => ['năm', 'năm'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn để Configuration%s';
 $lang['CONFIG_UPD'] = 'Cấu Hình Cập Nhật Thành Công';
 $lang['SET_DEFAULTS'] = 'Khôi phục mặc định';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Theo dõi';
-$lang['FORUM_CFG_TITLE'] = 'Diễn đàn cài đặt';
-$lang['TRACKER_SETTINGS'] = 'Thiết lập theo dõi';
-
-$lang['CHANGES_DISABLED'] = 'Thay đổi vô hiệu hóa (thấy trong <b>$bb_cfg[\'tracker\']</b> config.php)';
-
 $lang['OFF_TRACKER'] = 'Vô hiệu hóa theo dõi';
 $lang['OFF_REASON'] = 'Vô hiệu hóa lý do';
 $lang['OFF_REASON_EXPL'] = 'tin này sẽ được gửi đến khách hàng khi theo dõi được vô hiệu hóa';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Sửa Chữa Định Kỳ';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Chỉnh sửa công việc';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Thêm công việc';
 $lang['CRON_SCRIPT_EXPL'] = 'tên của kịch bản từ "bao gồm/định kỳ/việc/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Chọn bắt đầu',
     'hourly' => 'giờ',
     'daily' => 'hàng ngày',
     'weekly' => 'hàng tuần',
     'monthly' => 'hàng tháng',
     'interval' => 'khoảng thời gian'
-);
+];
 $lang['NOSELECT'] = 'Không có chọn';
 $lang['RUN_DAY'] = 'Chạy ngày';
 $lang['RUN_DAY_EXPL'] = 'ngày khi công việc này chạy';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Tin nhắn được gửi tới tất cả những n
 $lang['CALLSEED_MSG_SPAM'] = 'Yêu cầu đã được một khi thành công gửi (có Lẽ không phải bạn)<br /><br />The tiếp theo cơ hội để gửi một yêu cầu được <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Chủ đề không yêu cầu giúp đỡ (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Chủ đề:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Chủ đề:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Chủ đề:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Dùng:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Dùng:<br /> <b>ban</b>',
     'adm_user_unban' => 'Dùng:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Tất cả các hành động';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Hành động Ghi: Tìm kiếm lựa chọn';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Loại bình luận';
 $lang['MC_FAQ'] = 'Nhập vào văn bản sẽ được hiển thị dưới tin nhắn này';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s trong tin nhắn của bạn";
 $lang['MC_COMMENT_PM_MSG'] = "Xin chào, [b]%s[/b] tính nModerator để lại tin nhắn của bạn [bạn, %s][b]%s[/b][/url][quote] tính n%s tính n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Rõ ràng bình luận',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Bình luận từ %s',
         'type' => 'Bình luận',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Thông tin từ %s',
         'type' => 'Thông tin',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Cảnh báo từ %s',
         'type' => 'Cảnh báo',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Vi phạm từ %s',
         'type' => 'Vi phạm',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Đồ';
 $lang['SITEMAP_ADMIN'] = 'Quản lý đồ';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Phát hành với băm %s không tìm thấy';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Văn bản của trang này được chỉnh sửa tại: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Dòng này chỉ có thể nhìn thấy quản trị viên.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Trên trang này, anh có thể xác định danh văn bản của các quy tắc cơ bản của các nguồn tài nguyên được hiển thị sử dụng.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'người dùng không hoạt động trong 30 ngày',
     1 => 'người dùng không hoạt động trong 90 ngày',
     2 => 'vừa kích thước phân phối trên theo dõi (nhiều người mà)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'bao nhiêu bàn tay, nơi mà gieo hạt hơn 5 giống',
     6 => 'bao nhiêu người của chúng ta upload (những người đầy ít nhất là 1 tay)',
     7 => 'có bao nhiêu người trong vòng 30 ngày',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Thăm dò được kích hoạt';
 $lang['NEW_POLL_END'] = 'Thăm dò hoàn thành';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Tập tin không hợp lệ của loại hình �
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Hình kích thước quá tối đa cho phép %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Các tập tin được tải lên không phải là một hình ảnh';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Mở rộng %s cho tải không được cho phép';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'bạn đã vượt quá kích thước tối đa cho các server',
     UPLOAD_ERR_FORM_SIZE => 'bạn đã vượt quá mức tối đa thấy kích thước tải lên',
     UPLOAD_ERR_PARTIAL => 'các tập tin đã được tải về một phần',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'tạm thời mục không tìm thấy',
     UPLOAD_ERR_CANT_WRITE => 'viết lỗi',
     UPLOAD_ERR_EXTENSION => 'tải dừng lại bằng cách mở rộng',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kiểm tra đó bạn không phải là một robot';
