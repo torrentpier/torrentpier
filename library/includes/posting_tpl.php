@@ -30,7 +30,7 @@ if (!$f_data['forum_tpl_id'] || !$tpl_data = DB()->fetch_row($sql)) {
     }
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'PAGE_TITLE' => $lang['NEW_RELEASE'],
     'FORUM_NAME' => $f_data['forum_name'],
     'FORUM_ID' => $forum_id,
@@ -39,8 +39,8 @@ $template->assign_vars(array(
     'TOR_REQUIRED' => $f_data['allow_reg_tracker'],
     'EDIT_TPL' => $edit_tpl_mode,
     'CAN_EDIT_TPL' => $can_edit_tpl,
-    'EDIT_TPL_URL' => POSTING_URL . "?mode=new_rel&amp;f=$forum_id&amp;edit_tpl=1",
-));
+    'EDIT_TPL_URL' => POSTING_URL . "?mode=new_rel&amp;f=$forum_id&amp;edit_tpl=1"
+]);
 
 if ($tpl_data) {
     // tpl_rules_html
@@ -53,30 +53,30 @@ if ($tpl_data) {
         }
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ID' => $tpl_data['tpl_id'],
         'TPL_NAME' => $tpl_data['tpl_name'],
         'TPL_SRC_FORM_VAL' => $tpl_data['tpl_src_form'],
         'TPL_SRC_TITLE_VAL' => $tpl_data['tpl_src_title'],
         'TPL_SRC_MSG_VAL' => $tpl_data['tpl_src_msg'],
-        'TPL_RULES_HTML' => $tpl_rules_html,
-    ));
+        'TPL_RULES_HTML' => $tpl_rules_html
+    ]);
 }
 
 if ($edit_tpl_mode) {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'NO_TPL_ASSIGNED' => !($f_data['forum_tpl_id']),
-        'TPL_SELECT' => get_select('forum_tpl', $f_data['forum_tpl_id']),
-    ));
+        'TPL_SELECT' => get_select('forum_tpl', $f_data['forum_tpl_id'])
+    ]);
 
     if ($tpl_data) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_COMMENT' => $tpl_data['tpl_comment'],
             'TPL_RULES_POST_ID' => $tpl_data['tpl_rules_post_id'],
             'TPL_LAST_EDIT_TIME' => bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i'),
             'TPL_LAST_EDIT_USER' => get_username((int)$tpl_data['tpl_last_edit_by']),
-            'TPL_LAST_EDIT_TIMESTAMP' => $tpl_data['tpl_last_edit_tm'],
-        ));
+            'TPL_LAST_EDIT_TIMESTAMP' => $tpl_data['tpl_last_edit_tm']
+        ]);
     }
 }
 
