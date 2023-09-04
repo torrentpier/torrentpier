@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Private Messaging';
 $lang['NO_NEW_PM'] = 'no new messages';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('new message', 'new messages');
+$lang['NEW_PMS_DECLENSION'] = ['new message', 'new messages'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('unread', 'unread');
+$lang['UNREAD_PMS_DECLENSION'] = ['unread', 'unread'];
 
 $lang['UNREAD_MESSAGE'] = 'Unread message';
 $lang['READ_MESSAGE'] = 'Read message';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topi
 
 $lang['BOARD_LANG'] = 'Board language';
 $lang['GENDER'] = 'Gender';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Unknown',
     1 => 'Male',
     2 => 'Female'
-);
+];
 $lang['MODULE_OFF'] = 'Module is disabled!';
 
 $lang['BIRTHDAY'] = 'Birthday';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Select status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'You have not selected status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'All statuses';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'not checked',
     TOR_CLOSED => 'closed',
     TOR_APPROVED => 'checked',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'temporary',
     TOR_PREMOD => 'pre-moderation',
     TOR_REPLENISH => 'replenish',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Such status does not exist!';
 $lang['TORRENT_FAILED'] = 'Distribution was not found!';
 $lang['TOR_STATUS_DUB'] = 'Distribution has the same status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('reply', 'replies');
-$lang['DECLENSION']['TIMES'] = array('time', 'times');
+$lang['DECLENSION']['REPLIES'] = ['reply', 'replies'];
+$lang['DECLENSION']['TIMES'] = ['time', 'times'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('second', 'seconds'),
-    'minutes' => array('minute', 'minutes'),
-    'hours' => array('hour', 'hours'),
-    'mday' => array('day', 'days'),
-    'mon' => array('month', 'months'),
-    'year' => array('year', 'years'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['second', 'seconds'],
+    'minutes' => ['minute', 'minutes'],
+    'hours' => ['hour', 'hours'],
+    'mday' => ['day', 'days'],
+    'mon' => ['month', 'months'],
+    'year' => ['year', 'years'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn to Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuration Updated Successfully';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum settings';
-$lang['TRACKER_SETTINGS'] = 'Tracker settings';
-
-$lang['CHANGES_DISABLED'] = 'Changes disabled (see <b>$bb_cfg[\'tracker\']</b> in config.php)';
-
 $lang['OFF_TRACKER'] = 'Disable tracker';
 $lang['OFF_REASON'] = 'Disable reason';
 $lang['OFF_REASON_EXPL'] = 'this message will be sent to client when the tracker is disabled';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Repair Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit job';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Add job';
 $lang['CRON_SCRIPT_EXPL'] = 'name of the script from "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Select start',
     'hourly' => 'hourly',
     'daily' => 'daily',
     'weekly' => 'weekly',
     'monthly' => 'monthly',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'No select';
 $lang['RUN_DAY'] = 'Run day';
 $lang['RUN_DAY_EXPL'] = 'the day when this job run';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Message has been sent to all those who downloaded th
 $lang['CALLSEED_MSG_SPAM'] = 'Request has already been once successfully sent (Probably not you)<br /><br />The next opportunity to send a request to be <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Topic does not require help (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Topic:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Topic:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Topic:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'User:<br /> <b>deleted</b>',
     'adm_user_ban' => 'User:<br /> <b>ban</b>',
     'adm_user_unban' => 'User:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'All actions';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Actions Log: Search options';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Type a comment';
 $lang['MC_FAQ'] = 'Entered text will be displayed under this message';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in your message";
 $lang['MC_COMMENT_PM_MSG'] = "Hello, [b]%s[/b]\nModerator left in your message [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Delete comment',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Comment from %s',
         'type' => 'Comment',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Information from %s',
         'type' => 'Information',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Warning from %s',
         'type' => 'Warning',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Violation from %s',
         'type' => 'Violation',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Manage sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'On this page, you can specify the text of the basic rules of the resource is displayed to users.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inactive users in 30 days',
     1 => 'inactive users for 90 days',
     2 => 'medium size distributions on the tracker (many megabytes)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'how many hands where that seeding more than 5 seeds',
     6 => 'how many of us uploaders (those who filled at least 1 hand)',
     7 => 'how many uploaders over the last 30 days',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Poll enabled';
 $lang['NEW_POLL_END'] = 'Poll completed';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Invalid file type of image';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'The uploaded file is not an image';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Extension %s for downloads is not allowed';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'you have exceeded the maximum file size for the server',
     UPLOAD_ERR_FORM_SIZE => 'you have exceeded the maximum file upload size',
     UPLOAD_ERR_PARTIAL => 'the file was partially downloaded',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'temporary directory not found',
     UPLOAD_ERR_CANT_WRITE => 'write error',
     UPLOAD_ERR_EXTENSION => 'upload stopped by extension',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Check that you are not a robot';
