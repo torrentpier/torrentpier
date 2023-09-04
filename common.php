@@ -359,6 +359,7 @@ if (!defined('IN_TRACKER')) {
         if (!empty($cache_dict)) {
             $output['complete'] = $cache_dict['complete'];
             $output['incomplete'] = $cache_dict['incomplete'];
+            $output['warning message'] = 'Announce cache update in: ' . round($interval / 60) . ' minutes';
             $output['peers'] = $cache_dict['peers'];
         }
 
