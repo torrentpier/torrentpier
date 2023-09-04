@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Προσωπικά Μηνύματα';
 $lang['NO_NEW_PM'] = 'νέα μηνύματα';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('νέο μήνυμα', 'νέα μηνύματα');
+$lang['NEW_PMS_DECLENSION'] = ['νέο μήνυμα', 'νέα μηνύματα'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('μη αναγνωσμένα', 'μη αναγνωσμένα');
+$lang['UNREAD_PMS_DECLENSION'] = ['μη αναγνωσμένα', 'μη αναγνωσμένα'];
 
 $lang['UNREAD_MESSAGE'] = 'Μη αναγνωσμένο μήνυμα';
 $lang['READ_MESSAGE'] = 'Διαβάστε το μήνυμα';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Στέλνει ένα e-mail όταν κάπο
 
 $lang['BOARD_LANG'] = 'Πίνακας γλώσσα';
 $lang['GENDER'] = 'Το φύλο';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Άγνωστο',
     1 => 'Αρσενικό',
     2 => 'Θηλυκό'
-);
+];
 $lang['MODULE_OFF'] = 'Μονάδα είναι απενεργοποιημένη!';
 
 $lang['BIRTHDAY'] = 'Γενέθλια';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Κατάσταση';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Επιλέξτε κατάσταση';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Δεν έχετε επιλέξει την κατάσταση.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Όλες τις καταστάσεις';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'δεν ελέγχεται',
     TOR_CLOSED => 'κλειστά',
     TOR_APPROVED => 'ελέγχονται',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'προσωρινή',
     TOR_PREMOD => 'προ-μέτρο',
     TOR_REPLENISH => 'αναπληρώ',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Μια τέτοια κατάσταση δεν υπάρχει!';
 $lang['TORRENT_FAILED'] = 'Διανομή δεν βρέθηκε!';
 $lang['TOR_STATUS_DUB'] = 'Διανομή έχει το ίδιο καθεστώς';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('απάντηση', 'απαντήσεις');
-$lang['DECLENSION']['TIMES'] = array('ώρα', 'φορές');
+$lang['DECLENSION']['REPLIES'] = ['απάντηση', 'απαντήσεις'];
+$lang['DECLENSION']['TIMES'] = ['ώρα', 'φορές'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('δεύτερο', 'δευτερόλεπτα'),
-    'minutes' => array('λεπτό', 'λεπτά'),
-    'hours' => array('ώρα', 'ώρες'),
-    'mday' => array('ημέρα', 'ημέρες'),
-    'mon' => array('μήνα', 'μήνες'),
-    'year' => array('έτος', 'χρόνια'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['δεύτερο', 'δευτερόλεπτα'],
+    'minutes' => ['λεπτό', 'λεπτά'],
+    'hours' => ['ώρα', 'ώρες'],
+    'mday' => ['ημέρα', 'ημέρες'],
+    'mon' => ['μήνα', 'μήνες'],
+    'year' => ['έτος', 'χρόνια'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn να Configuration%s';
 $lang['CONFIG_UPD'] = 'Διαμόρφωση Ενημερώθηκε Με Επιτυχία';
 $lang['SET_DEFAULTS'] = 'Επαναφορά προεπιλογών';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Φόρουμ ρυθμίσεις';
-$lang['TRACKER_SETTINGS'] = 'Tracker ρυθμίσεις';
-
-$lang['CHANGES_DISABLED'] = 'Αλλαγές με αναπηρία (βλ. <b>$bb_cfg[\'tracker\']</b> σε config.php)';
-
 $lang['OFF_TRACKER'] = 'Απενεργοποίηση tracker';
 $lang['OFF_REASON'] = 'Απενεργοποίηση λόγο';
 $lang['OFF_REASON_EXPL'] = 'αυτό το μήνυμα θα σταλεί στον πελάτη, όταν ο tracker είναι απενεργοποιημένη';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Επισκευή Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit δουλειά';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Προσθέστε δουλειά';
 $lang['CRON_SCRIPT_EXPL'] = 'το όνομα του script από το "includes/cron/θέσεις εργασίας/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Επιλέξτε έναρξη',
     'hourly' => 'ωριαία',
     'daily' => 'καθημερινά',
     'weekly' => 'εβδομαδιαία',
     'monthly' => 'μηνιαία',
     'interval' => 'διάστημα'
-);
+];
 $lang['NOSELECT'] = 'Όχι, επιλέξτε';
 $lang['RUN_DAY'] = 'Εκτελέστε την ημέρα';
 $lang['RUN_DAY_EXPL'] = 'την ημέρα, όταν αυτή η δουλειά να τρέξει';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Το μήνυμα έχει σταλεί σε όλο�
 $lang['CALLSEED_MSG_SPAM'] = 'Το αίτημα έχει ήδη μια φορά σταλεί με επιτυχία (Ίσως όχι εσείς)<br /><br />The επόμενη ευκαιρία για να στείλετε μια αίτηση για να <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Το θέμα δεν χρειάζονται βοήθεια (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Θέμα:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Θέμα:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Θέμα:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Χρήστης:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Χρήστης:<br /> <b>ban</b>',
     'adm_user_unban' => 'Χρήστης:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Όλες οι δράσεις';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Δράσεις Καταγραφής: επιλογές Αναζήτησης';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Πληκτρολογήστε ένα σχόλιο';
 $lang['MC_FAQ'] = 'Τέθηκε το κείμενο θα εμφανιστεί κάτω από αυτό το μήνυμα';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s στο μήνυμά σας";
 $lang['MC_COMMENT_PM_MSG'] = "Γεια σας, [b]%s[/b]\nModerator αριστερά στο μήνυμά σας [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Διαγραφή σχολίου',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Σχόλιο από %s',
         'type' => 'Σχόλιο',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Πληροφορίες από %s',
         'type' => 'Πληροφορίες',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Προειδοποίηση από %s',
         'type' => 'Προειδοποίηση',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Παραβίαση από %s',
         'type' => 'Παραβίαση',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Διαχείριση sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Απελευθέρωση με hash %s δεν βρέθ
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Το κείμενο αυτής της σελίδας υποβάλλεται σε επεξεργασία στη διεύθυνση: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Αυτή η γραμμή μπορεί να δει μόνο διαχειριστές.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Σε αυτή τη σελίδα, μπορείτε να καθορίσετε το κείμενο των βασικών κανόνων του πόρου εμφανίζεται στους χρήστες.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'ανενεργών χρηστών σε 30 μέρες',
     1 => 'ανενεργοί χρήστες για 90 ημέρες',
     2 => 'μέσου μεγέθους, οι διανομές των ιχνηλατών (πολλά megabytes)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'πόσα χέρια που σπέρνουν περισσότερα από 5 σπόρους',
     6 => 'πόσοι από εμάς uploaders (αυτοί που γεμίζουν τουλάχιστον το 1 χέρι)',
     7 => 'πόσες uploaders τις τελευταίες 30 ημέρες',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Δημοσκόπηση ενεργοποιημένη';
 $lang['NEW_POLL_END'] = 'Δημοσκόπηση ολοκληρώθηκε';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Μη έγκυρος τύπος αρχείου ε
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Διαστάσεις εικόνας πρέπει να υπερβαίνει το μέγιστο επιτρεπόμενο %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Το αρχείο που έχει αποσταλεί δεν είναι μια εικόνα';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Επέκταση %s για τις λήψεις δεν επιτρέπεται';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'έχετε υπερβεί το μέγιστο μέγεθος αρχείου για το διακομιστή',
     UPLOAD_ERR_FORM_SIZE => 'έχετε υπερβεί το μέγιστο μέγεθος αποστολής αρχείου',
     UPLOAD_ERR_PARTIAL => 'το αρχείο ήταν μερικώς κατεβάσει',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'προσωρινό κατάλογο δεν βρέθηκε',
     UPLOAD_ERR_CANT_WRITE => 'σφάλμα εγγραφής',
     UPLOAD_ERR_EXTENSION => 'ανεβάστε σταματήσει κατ \' επέκταση',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Ελέγξτε ότι δεν είστε ρομπότ';
