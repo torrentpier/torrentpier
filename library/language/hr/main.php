@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Privatne Poruke';
 $lang['NO_NEW_PM'] = 'Nema novih postova';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nova poruka', 'nove poruke');
+$lang['NEW_PMS_DECLENSION'] = ['nova poruka', 'nove poruke'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('nepročitane poruke', 'nepročitane poruke');
+$lang['UNREAD_PMS_DECLENSION'] = ['nepročitane poruke', 'nepročitane poruke'];
 
 $lang['UNREAD_MESSAGE'] = 'Nepročitanu poruku';
 $lang['READ_MESSAGE'] = 'U poruci';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Šalje putem e-maila, kada netko odgovori na t
 
 $lang['BOARD_LANG'] = 'Jezik peglanje';
 $lang['GENDER'] = 'Spol';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Nepoznat',
     1 => 'Muško',
     2 => 'Žena'
-);
+];
 $lang['MODULE_OFF'] = 'Modul isključen!';
 
 $lang['BIRTHDAY'] = 'Rođendan';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Odaberite status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Nemate odabran status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Svi statusi';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nije provjereno',
     TOR_CLOSED => 'zatvorene',
     TOR_APPROVED => 'provjereno',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'privremeno',
     TOR_PREMOD => 'премодерации',
     TOR_REPLENISH => 'napuniti',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Takav status ne postoji!';
 $lang['TORRENT_FAILED'] = 'Raspodjela nije pronađen!';
 $lang['TOR_STATUS_DUB'] = 'Distribucija ima isti status';
@@ -1353,17 +1353,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('odgovor', 'odgovori');
-$lang['DECLENSION']['TIMES'] = array('vrijeme', 'put');
+$lang['DECLENSION']['REPLIES'] = ['odgovor', 'odgovori'];
+$lang['DECLENSION']['TIMES'] = ['vrijeme', 'put'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('drugi', 'sekundi'),
-    'minutes' => array('minuti', 'minuta'),
-    'hours' => array('sat', 'sati'),
-    'mday' => array('dan', 'dana'),
-    'mon' => array('mjesec', 'mjeseci'),
-    'year' => array('godine', 'godina'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['drugi', 'sekundi'],
+    'minutes' => ['minuti', 'minuta'],
+    'hours' => ['sat', 'sati'],
+    'mday' => ['dan', 'dana'],
+    'mon' => ['mjesec', 'mjeseci'],
+    'year' => ['godine', 'godina'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2260,13 +2260,6 @@ $lang['RETURN_CONFIG'] = '%sReturn u Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguracija Je Uspješno Snimljen';
 $lang['SET_DEFAULTS'] = 'Vratiti na zadane postavke';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Postavke foruma';
-$lang['TRACKER_SETTINGS'] = 'Postavke tracker';
-
-$lang['CHANGES_DISABLED'] = 'Promjena je deaktivirana (pogledajte <b>$bb_cfg[\'tracker\']</b> u config.php)';
-
 $lang['OFF_TRACKER'] = 'Isključiti tracker';
 $lang['OFF_REASON'] = 'Razlog za isključenje';
 $lang['OFF_REASON_EXPL'] = 'to je poruka će biti poslana klijentu, kada tracker isključen';
@@ -2411,14 +2404,14 @@ $lang['REPAIR_CRON'] = 'Popravak Baba';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Promjena naloga';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Dodaj rad';
 $lang['CRON_SCRIPT_EXPL'] = 'naziv skripte "uključuje/cron/poslovi/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; odaberite start',
     'hourly' => 'satnica',
     'daily' => 'svakodnevno',
     'weekly' => 'tjedno',
     'monthly' => 'mjesečno',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Nema izbora';
 $lang['RUN_DAY'] = 'Pokrenuti dan';
 $lang['RUN_DAY_EXPL'] = 'taj dan, kada je taj posao obavljati';
@@ -2545,7 +2538,7 @@ $lang['CALLSEED_MSG_OK'] = 'Poruka poslana svima onima koji su preuzeli ovo izda
 $lang['CALLSEED_MSG_SPAM'] = 'Zahtjev već bio jednom uspješno poslana (vjerojatno ne)<br /><br />The sljedeće mogućnosti poslati zahtjev na <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Tema nije potrebna pomoć (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Tema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Tema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Tema:<br /> <b>closed</b>',
@@ -2560,7 +2553,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Korisnika:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Korisnika:<br /> <b>ban</b>',
     'adm_user_unban' => 'Korisnika:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Sve akcije';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Akcije iz dnevnika: postavke pretraživanje';
@@ -2700,28 +2693,28 @@ $lang['MC_FAQ'] = 'Upisani tekst će biti prikazan ispod ovom porukom';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s u vašoj poruci";
 $lang['MC_COMMENT_PM_MSG'] = "Bok,\\[b]%s[/b] nModerator ostavio u vašoj komunikaciji sa [URL=%s]\\[b]%s[/b][/url][quote]
 %s n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Ukloniti komentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentar od %s',
         'type' => 'Komentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informacije o %s',
         'type' => 'Informacije',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Upozorenje od %s',
         'type' => 'Upozorenje',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Povrede od %s',
         'type' => 'Povrede',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Upravljanje Sitemap';
@@ -2762,7 +2755,7 @@ $lang['HASH_NOT_FOUND'] = 'Izdanje s hash %s nije pronađen';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Tekst ove stranice uređen je na: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ovu liniju mogu vidjeti samo administratori.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na ovoj stranici možete postaviti tekst, osnovna pravila resursa prikazani za korisnike.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'neaktivni korisnici u roku od 30 dana',
     1 => 'neaktivne korisnike u roku od 90 dana',
     2 => 'raspodjela prosječne veličine na adresi (puno megabajta)',
@@ -2771,7 +2764,7 @@ $lang['TR_STATS'] = array(
     5 => 'koliko ruke, da je sjetva više od 5 sjemena',
     6 => 'kao i mnogi od nas аплоадеров (za one koji je ispunjen barem 1 ruka)',
     7 => 'koliko аплоадеров zadnjih 30 dana',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Istraživanje je uključen';
 $lang['NEW_POLL_END'] = 'Anketa je završena';
@@ -2801,7 +2794,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Neispravan Tip datoteke slike';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Dimenzije slike prelaze maksimalno dozvoljene %sx%s военторга';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Preuzetu datoteku nije slika';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Proširenje %s za preuzimanje nije dozvoljeno';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'vi ste premašili ograničenje veličine datoteke na poslužitelju',
     UPLOAD_ERR_FORM_SIZE => 'te premašiti maksimalnu veličinu datoteke za preuzimanje',
     UPLOAD_ERR_PARTIAL => 'datoteka je djelomično skinuti',
@@ -2809,7 +2802,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'privremeni direktorij nije pronađen',
     UPLOAD_ERR_CANT_WRITE => 'greška zapisa',
     UPLOAD_ERR_EXTENSION => 'preuzimanje zaustavila širenje',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Provjerite da niste robot';
