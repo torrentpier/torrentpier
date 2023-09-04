@@ -520,7 +520,7 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full') {
     ]);
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'SHOW_DL_LIST_LINK' => (($bb_cfg['bt_show_dl_list'] || $bb_cfg['allow_dl_list_names_mode']) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
     'SHOW_TOR_ACT' => ($tor_reged && $show_peers && (!isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) || IS_AM)),
     'S_MODE_COUNT' => ($s_mode == 'count'),
@@ -531,4 +531,4 @@ $template->assign_vars(array(
     'LEECH_EXIST' => ($leechers || defined('LEECHER_EXIST')),
     'TOR_HELP_LINKS' => $bb_cfg['tor_help_links'],
     'CALL_SEED' => ($bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
-));
+]);
