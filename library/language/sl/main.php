@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Pošiljanje Zasebnih Sporočil';
 $lang['NO_NEW_PM'] = 'ni novih sporočil';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('novo sporočilo', 'nova sporočila');
+$lang['NEW_PMS_DECLENSION'] = ['novo sporočilo', 'nova sporočila'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('neprebrana', 'neprebrana');
+$lang['UNREAD_PMS_DECLENSION'] = ['neprebrana', 'neprebrana'];
 
 $lang['UNREAD_MESSAGE'] = 'Neprebrano sporočilo';
 $lang['READ_MESSAGE'] = 'Branje sporočila';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Pošlje e-poštno sporočilo, ko nekdo odgovor
 
 $lang['BOARD_LANG'] = 'Odbor jezik';
 $lang['GENDER'] = 'Spol';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Neznan',
     1 => 'Moški',
     2 => 'Ženski'
-);
+];
 $lang['MODULE_OFF'] = 'Modula je onemogočena!';
 
 $lang['BIRTHDAY'] = 'Rojstni dan';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Stanje';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Izberite stanje';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Niste izbrali stanje.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Vse stanja';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ne preveri',
     TOR_CLOSED => 'zaprto',
     TOR_APPROVED => 'preveri',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'začasne',
     TOR_PREMOD => 'pre-zmernost',
     TOR_REPLENISH => 'dopolnitev',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Takšno stanje ne obstaja!';
 $lang['TORRENT_FAILED'] = 'Distribucija ni bilo mogoče najti!';
 $lang['TOR_STATUS_DUB'] = 'Porazdelitev je enako stanje';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('odgovori', 'odgovori');
-$lang['DECLENSION']['TIMES'] = array('čas', 'krat');
+$lang['DECLENSION']['REPLIES'] = ['odgovori', 'odgovori'];
+$lang['DECLENSION']['TIMES'] = ['čas', 'krat'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('drugo', 'sekund'),
-    'minutes' => array('minuto', 'minut'),
-    'hours' => array('uro', 'ur'),
-    'mday' => array('dan', 'dni'),
-    'mon' => array('mesec', 'mesecev'),
-    'year' => array('leto', 'leta'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['drugo', 'sekund'],
+    'minutes' => ['minuto', 'minut'],
+    'hours' => ['uro', 'ur'],
+    'mday' => ['dan', 'dni'],
+    'mon' => ['mesec', 'mesecev'],
+    'year' => ['leto', 'leta'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn, da Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguracija Uspešno Posodobljen';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum nastavitve';
-$lang['TRACKER_SETTINGS'] = 'Tracker nastavitve';
-
-$lang['CHANGES_DISABLED'] = 'Spremembe invalide (glej <b>$bb_cfg[\'tracker\']</b> v config.php)';
-
 $lang['OFF_TRACKER'] = 'Onemogočite tracker';
 $lang['OFF_REASON'] = 'Onemogočite razlog';
 $lang['OFF_REASON_EXPL'] = 'to sporočilo bo poslano na stranko, ko je sledilnik je onemogočena';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Popravila Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Urejanje delovnih';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Dodaj delo';
 $lang['CRON_SCRIPT_EXPL'] = 'ime skripta iz "vključuje/cron/delovna mesta/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Izberite začni',
     'hourly' => 'uro',
     'daily' => 'dnevno',
     'weekly' => 'tedensko',
     'monthly' => 'mesečno',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Izberite št.';
 $lang['RUN_DAY'] = 'Teči dan';
 $lang['RUN_DAY_EXPL'] = 'dan, ko je to delo teči';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Sporočilo je bilo poslano na vse tiste, ki so prene
 $lang['CALLSEED_MSG_SPAM'] = 'Predlog je že bil enkrat uspešno poslano (Verjetno ne)<br /><br />The naslednjo priložnost, da pošljete zahtevo, da se <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Tema ne potrebujejo pomoč (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Tema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Tema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Tema:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Uporabnik:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Uporabnik:<br /> <b>ban</b>',
     'adm_user_unban' => 'Uporabnik:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Vsi ukrepi, ki';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Ukrepi Dnevnik: možnosti Iskanja';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Vnesite komentar';
 $lang['MC_FAQ'] = 'Vneseno besedilo bo prikazano pod tem sporočilu';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s v vaše sporočilo";
 $lang['MC_COMMENT_PM_MSG'] = "Pozdravljeni, [b]%s[/b]\nModerator levo v vaše sporočilo [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Izbriši komentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentar iz %s',
         'type' => 'Opombe',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informacije iz %s',
         'type' => 'Informacije',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Opozorilo iz %s',
         'type' => 'Opozorilo',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Kršitev iz %s',
         'type' => 'Kršitev',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Kazalo';
 $lang['SITEMAP_ADMIN'] = 'Upravljanje kazalo';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Sprostitev s hash %s ni mogoče najti';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Besedilo te strani je urejeno na: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. To vrstico lahko vidijo samo skrbniki.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na tej strani lahko določite besedilo osnovna pravila virov, se prikaže uporabnikom.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'neaktivne uporabnike v 30 dneh',
     1 => 'neaktivne uporabnike za 90 dni',
     2 => 'je srednje velikosti, razporeditve na tracker (veliko megabajtov)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'koliko roke, kjer se, da je sejanje več kot 5 semen',
     6 => 'koliko od nas uploaders (tisti, ki je napolnjena vsaj 1 strani)',
     7 => 'koliko uploaders v zadnjih 30 dneh',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Anketa omogočeno';
 $lang['NEW_POLL_END'] = 'Anketa končana';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Neveljavna vrsta datoteke slike';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Velikost slik presega največjo dovoljeno %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Naložena datoteka ni sliko';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Razširitev %s za nalaganje ni dovoljeno';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'imate presežena največja dovoljena velikost datoteke za strežnik',
     UPLOAD_ERR_FORM_SIZE => 'imate presegla največjo nalaganje datotek velikost',
     UPLOAD_ERR_PARTIAL => 'datoteka je bila delno prenesli',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'začasni imenik ni mogoče najti',
     UPLOAD_ERR_CANT_WRITE => 'write error',
     UPLOAD_ERR_EXTENSION => 'prenos ustavil za razširitev',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Preverite, da niste robot';
