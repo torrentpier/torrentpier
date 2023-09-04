@@ -48,7 +48,7 @@ $delete_forum = isset($_POST['del_forum']);
 $submit = isset($_POST['submit']);
 
 // Get Attachment Config
-$attach_config = array();
+$attach_config = [];
 
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
@@ -69,7 +69,7 @@ if ($submit && $mode == 'extensions') {
     $group_select_list = get_var('group_select', array(0));
 
     // Generate correct Change List
-    $extensions = array();
+    $extensions = [];
 
     for ($i = 0, $iMax = count($extension_change_list); $i < $iMax; $i++) {
         $extensions['_' . $extension_change_list[$i]]['comment'] = $extension_explain_list[$i];
@@ -236,7 +236,7 @@ if ($submit && $mode == 'groups') {
     $filesize_list = get_var('max_filesize_list', array(0));
     $size_select_list = get_var('size_select_list', array(''));
 
-    $allowed_list = array();
+    $allowed_list = [];
 
     foreach ($group_allowed_list as $iValue) {
         for ($j = 0, $jMax = count($group_change_list); $j < $jMax; $j++) {
@@ -485,7 +485,7 @@ if ($add_forum && $e_mode == 'perm' && $group) {
         DB()->sql_freeresult($result);
 
         if (trim($row['forum_permissions']) == '') {
-            $auth_p = array();
+            $auth_p = [];
         } else {
             $auth_p = auth_unpack($row['forum_permissions']);
         }
@@ -525,7 +525,7 @@ if ($delete_forum && $e_mode == 'perm' && $group) {
     DB()->sql_freeresult($result);
 
     $auth_p2 = auth_unpack(trim($row['forum_permissions']));
-    $auth_p = array();
+    $auth_p = [];
 
     // Generate array for Auth_Pack, delete the chosen ones
     foreach ($auth_p2 as $i => $iValue) {
@@ -560,13 +560,13 @@ if ($e_mode == 'perm' && $group) {
     $group_name = $row['group_name'];
     $allowed_forums = trim($row['forum_permissions']);
 
-    $forum_perm = array();
+    $forum_perm = [];
 
     if ($allowed_forums == '') {
         $forum_perm[0]['forum_id'] = 0;
         $forum_perm[0]['forum_name'] = $lang['PERM_ALL_FORUMS'];
     } else {
-        $forum_p = array();
+        $forum_p = [];
         $act_id = 0;
         $forum_p = auth_unpack($allowed_forums);
         $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . ' WHERE forum_id IN (' . implode(', ', $forum_p) . ')';
@@ -614,7 +614,7 @@ if ($e_mode == 'perm' && $group) {
         );
     }
 
-    $empty_perm_forums = array();
+    $empty_perm_forums = [];
 
     $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . ' WHERE auth_attachments < ' . AUTH_ADMIN;
 

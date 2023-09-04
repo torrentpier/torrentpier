@@ -21,8 +21,8 @@ $db_max_packet = 800000;
 $sql_limit = 3000;
 
 $check_attachments = false;
-$orphan_files = $orphan_db_attach = $orphan_tor = array();
-$posts_without_attach = $topics_without_attach = array();
+$orphan_files = $orphan_db_attach = $orphan_tor = [];
+$posts_without_attach = $topics_without_attach = [];
 
 DB()->query("
 	CREATE TEMPORARY TABLE $tmp_attach_tbl (
@@ -38,7 +38,7 @@ $attach_dir = get_attachments_dir();
 // Get all names of existed attachments and insert them into $tmp_attach_tbl
 if ($dir = @opendir($attach_dir)) {
     $check_attachments = true;
-    $files = array();
+    $files = [];
     $f_len = 0;
 
     while (false !== ($f = readdir($dir))) {
@@ -52,7 +52,7 @@ if ($dir = @opendir($attach_dir)) {
         if ($f_len > $db_max_packet) {
             $files = implode(',', $files);
             DB()->query("INSERT INTO $tmp_attach_tbl VALUES $files");
-            $files = array();
+            $files = [];
             $f_len = 0;
         }
     }

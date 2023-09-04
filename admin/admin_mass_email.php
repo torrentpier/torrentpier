@@ -75,10 +75,10 @@ if (isset($_POST['submit'])) {
             $emailer->set_reply($reply_to);
 
             $emailer->set_template('admin_send_email');
-            $emailer->assign_vars(array(
+            $emailer->assign_vars([
                 'SUBJECT' => html_entity_decode($subject),
-                'MESSAGE' => html_entity_decode($message),
-            ));
+                'MESSAGE' => html_entity_decode($message)
+            ]);
 
             $emailer->send($message_type);
         }
@@ -94,12 +94,12 @@ $sql = 'SELECT group_id, group_name
 	ORDER BY group_name
 ';
 
-$groups = array('-- ' . $lang['ALL_USERS'] . ' --' => -1);
+$groups = ['-- ' . $lang['ALL_USERS'] . ' --' => -1];
 foreach (DB()->fetch_rowset($sql) as $row) {
     $groups[$row['group_name']] = $row['group_id'];
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'MESSAGE' => $message,
     'SUBJECT' => $subject,
     'REPLY_TO' => $reply_to,
@@ -107,7 +107,7 @@ $template->assign_vars(array(
     'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
 
     'S_USER_ACTION' => 'admin_mass_email.php',
-    'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups),
-));
+    'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups)
+]);
 
 print_page('admin_mass_email.tpl', 'admin');

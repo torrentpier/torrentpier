@@ -16,7 +16,7 @@ $users_per_cycle = 1000;
 while (true) {
     @set_time_limit(600);
 
-    $prune_users = $not_activated_users = $not_active_users = array();
+    $prune_users = $not_activated_users = $not_active_users = [];
 
     if ($not_activated_days = (int)$bb_cfg['user_not_activated_days_keep']) {
         $sql = DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "

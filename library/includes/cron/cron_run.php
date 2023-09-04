@@ -50,7 +50,7 @@ foreach ($cron_jobs as $job) {
         $cron_sql_log_file = CRON_LOG_DIR . '/SQL-' . basename($job['cron_script']);
 
         if ($cron_write_log) {
-            $msg = array();
+            $msg = [];
             $msg[] = 'start';
             $msg[] = date('m-d');
             $msg[] = date('H:i:s');
@@ -74,7 +74,7 @@ foreach ($cron_jobs as $job) {
         }
 
         if ($cron_write_log) {
-            $msg = array();
+            $msg = [];
             $msg[] = '  end';
             $msg[] = date('m-d');
             $msg[] = date('H:i:s');

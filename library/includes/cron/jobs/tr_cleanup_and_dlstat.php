@@ -29,10 +29,10 @@ DB()->expect_slow_query(600);
 // Update dlstat (part 1)
 if ($bb_cfg['tracker']['update_dlstat']) {
     // ############################ Tables LOCKED ################################
-    DB()->lock(array(
+    DB()->lock([
         BB_BT_TRACKER,
-        NEW_BB_BT_LAST_TORSTAT,
-    ));
+        NEW_BB_BT_LAST_TORSTAT
+    ]);
 
     // Get PER TORRENT user's dlstat from tracker
     DB()->query("

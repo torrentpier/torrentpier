@@ -56,7 +56,7 @@ if ($view === 'username') {
     $sort_order = 'DESC';
 } else {
     $view = 'stats';
-    $mode_types_text = array();
+    $mode_types_text = [];
     $sort_order = 'ASC';
 }
 
@@ -148,7 +148,7 @@ $delete_id_list = get_var('delete_id_list', array(0));
 $confirm = isset($_POST['confirm']);
 
 if ($confirm && count($delete_id_list) > 0) {
-    $attachments = array();
+    $attachments = [];
 
     delete_attachment(0, $delete_id_list);
 } elseif ($delete && count($delete_id_list) > 0) {
@@ -181,7 +181,7 @@ if ($submit_change && $view === 'attachments') {
     $attach_download_count_list = get_var('attach_count_list', array(0));
 
     // Generate correct Change List
-    $attachments = array();
+    $attachments = [];
 
     for ($i = 0, $iMax = count($attach_change_list); $i < $iMax; $i++) {
         $attachments['_' . $attach_change_list[$i]]['comment'] = $attach_comment_list[$i];
@@ -330,7 +330,7 @@ if ($view === 'attachments') {
 
         $s_hidden = '<input type="hidden" name="u_id" value="' . (int)$uid . '" />';
 
-        $template->assign_block_vars('switch_user_based', array());
+        $template->assign_block_vars('switch_user_based', []);
 
         $template->assign_vars(array(
             'S_USER_HIDDEN' => $s_hidden,
@@ -356,7 +356,7 @@ if ($view === 'attachments') {
 
         $total_rows = $num_attach_ids;
 
-        $attach_id = array();
+        $attach_id = [];
 
         for ($j = 0; $j < $num_attach_ids; $j++) {
             $attach_id[] = (int)$attach_ids[$j]['attach_id'];
@@ -427,7 +427,7 @@ if ($view === 'attachments') {
                         $post_title = str_short($post_title, 30);
                     }
 
-                    $view_topic = BB_ROOT . 'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
+                    $view_topic = BB_ROOT . POST_URL . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
 
                     $post_titles[] = '<a href="' . $view_topic . '" class="gen" target="_blank">' . $post_title . '</a>';
                 } else {

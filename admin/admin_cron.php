@@ -148,7 +148,7 @@ switch ($mode) {
             $run_day[$i] = $i;
         }
 
-        $schedule = array();
+        $schedule = [];
         foreach ($lang['SCHEDULE'] as $type => $key) {
             $schedule[$key] = $type;
         }
