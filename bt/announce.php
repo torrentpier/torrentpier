@@ -159,7 +159,6 @@ function msg_die($msg)
     $output = \SandFox\Bencode\Bencode::encode([
         'min interval' => (int)1800,
         'failure reason' => (string)$msg,
-        'warning message' => (string)$msg,
     ]);
 
     die($output);
