@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Frø';
 $lang['LEECHING'] = 'Agterliget';
 $lang['IS_REGISTERED'] = 'Registreret';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Søg i DC++, som filnavn';
-$lang['DC_MAGNET_EXT'] = 'Søg i DC++ ved udvidelse';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';

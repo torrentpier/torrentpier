@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Սերմերի';
 $lang['LEECHING'] = 'Մի տզրուկ';
 $lang['IS_REGISTERED'] = 'Գրանցված է';
 $lang['MAGNET'] = 'Մագնիս';
-$lang['DC_MAGNET'] = 'Որոնել DC++ անունով';
-$lang['DC_MAGNET_EXT'] = 'Որոնել DC++ - ի ընդլայնմանը';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Կարգավիճակ';

@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Giống';
 $lang['LEECHING'] = 'Con đỉa';
 $lang['IS_REGISTERED'] = 'Đăng ký';
 $lang['MAGNET'] = 'Nam châm';
-$lang['DC_MAGNET'] = 'Tìm kiếm ở DC + + bằng tên';
-$lang['DC_MAGNET_EXT'] = 'Tìm kiếm ở DC + + bằng mở rộng';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tình trạng';

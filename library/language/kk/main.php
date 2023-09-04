@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'тұқым';
 $lang['LEECHING'] = 'сүлік';
 $lang['IS_REGISTERED'] = 'тіркелген';
 $lang['MAGNET'] = 'Магнит';
-$lang['DC_MAGNET'] = 'Файл есімдері бойынша DC Іздеу ++';
-$lang['DC_MAGNET_EXT'] = 'ұзарту DC Іздеу ++';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'мәртебе';

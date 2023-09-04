@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = '씨';
 $lang['LEECHING'] = '니';
 $lang['IS_REGISTERED'] = '등록';
 $lang['MAGNET'] = '석';
-$lang['DC_MAGNET'] = '에서 검색 DC++름';
-$lang['DC_MAGNET_EXT'] = '에서 검색 DC++확장';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '상태';

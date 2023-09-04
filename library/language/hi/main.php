@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'बीज';
 $lang['LEECHING'] = 'जोंक';
 $lang['IS_REGISTERED'] = 'दर्ज कराई';
 $lang['MAGNET'] = 'चुंबक';
-$lang['DC_MAGNET'] = 'फ़ाइल नाम से डीसी ++ में खोजें';
-$lang['DC_MAGNET_EXT'] = 'विस्तार से डीसी + + में खोजें';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'स्थिति';

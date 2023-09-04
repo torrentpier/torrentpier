@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Semințe';
 $lang['LEECHING'] = 'Lipitoare';
 $lang['IS_REGISTERED'] = 'Înregistrați';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Căutare în DC++ de nume de fișier';
-$lang['DC_MAGNET_EXT'] = 'Căutare în DC++, prin extensie,';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Starea';

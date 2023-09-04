@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'სათესლე';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'რეგისტრირებული';
 $lang['MAGNET'] = 'მაგნიტი';
-$lang['DC_MAGNET'] = 'ძიება DC++ მიერ filename';
-$lang['DC_MAGNET_EXT'] = 'ძიება DC++ გაფართოება';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'სტატუსი';

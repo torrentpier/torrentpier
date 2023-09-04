@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Toxum';
 $lang['LEECHING'] = 'Zəli';
 $lang['IS_REGISTERED'] = 'Qeydə';
 $lang['MAGNET'] = 'Maqnit';
-$lang['DC_MAGNET'] = 'Axtarış DC++ adı ilə';
-$lang['DC_MAGNET_EXT'] = 'Axtarış DC++ genişləndirilməsi';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusu';

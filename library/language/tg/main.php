@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'тухмӣ';
 $lang['LEECHING'] = 'пиявка';
 $lang['IS_REGISTERED'] = 'Сабтшуда';
 $lang['MAGNET'] = 'оҳанрабо';
-$lang['DC_MAGNET'] = 'Ҷустуҷӯ дар DC ++ бо номи файл';
-$lang['DC_MAGNET_EXT'] = 'Ҷустуҷӯ дар DC ++ бо тамдиди';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статуси';
