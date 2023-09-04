@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Σπόρων προς σπορά';
 $lang['LEECHING'] = 'Βδέλλα';
 $lang['IS_REGISTERED'] = 'Εγγεγραμμένοι';
 $lang['MAGNET'] = 'Μαγνήτης';
-$lang['DC_MAGNET'] = 'Αναζήτηση στο DC++ από το όνομα αρχείου';
-$lang['DC_MAGNET_EXT'] = 'Αναζήτηση στο DC++ κατ \' επέκταση';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Κατάσταση';

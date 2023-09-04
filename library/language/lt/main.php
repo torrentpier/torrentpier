@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Sėklos';
 $lang['LEECHING'] = 'Dėlės';
 $lang['IS_REGISTERED'] = 'Registruotas';
 $lang['MAGNET'] = 'Magnetas';
-$lang['DC_MAGNET'] = 'Ieškoti DC++ iki failo pavadinimas';
-$lang['DC_MAGNET_EXT'] = 'Ieškoti DC++ pratęsti';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusas';

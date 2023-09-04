@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'Seme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Potrazi u DC-u++ od datoteke';
-$lang['DC_MAGNET_EXT'] = 'Potrazi u DC-u++ podrazumjeva';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';

@@ -1082,8 +1082,6 @@ $lang['SEEDING'] = 'urug \'';
 $lang['LEECHING'] = 'zuluk';
 $lang['IS_REGISTERED'] = 'ro\'yxatga olingan';
 $lang['MAGNET'] = 'magnit';
-$lang['DC_MAGNET'] = 'fayl nomi bilan ++ DC Izlash';
-$lang['DC_MAGNET_EXT'] = 'kengaytmasi tomonidan shahar qidiruv ++';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'holat';
