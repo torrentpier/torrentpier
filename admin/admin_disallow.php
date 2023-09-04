@@ -78,9 +78,9 @@ if (count($disallowed) <= 0) {
 
 $disallow_select .= '</select>';
 
-$template->assign_vars(array(
+$template->assign_vars([
     'S_DISALLOW_SELECT' => $disallow_select,
     'S_FORM_ACTION' => 'admin_disallow.php',
-));
+]);
 
 print_page('admin_disallow.tpl', 'admin');
