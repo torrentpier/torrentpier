@@ -88,7 +88,7 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
 
     if ($tracks) {
         if (!is_array($tracks)) {
-            $tracks = array($tracks => $val);
+            $tracks = [$tracks => $val];
         }
         foreach ($tracks as $key => $val) {
             $key = (int)$key;
@@ -164,7 +164,7 @@ define('UG_PERM_BOTH', 1);  // both user and group
 define('UG_PERM_USER_ONLY', 2);  // only personal user permissions
 define('UG_PERM_GROUP_ONLY', 3);  // only group permissions
 
-$bf['forum_perm'] = array(
+$bf['forum_perm'] = [
     'auth_view' => AUTH_VIEW,
     'auth_read' => AUTH_READ,
     'auth_mod' => AUTH_MOD,
@@ -178,9 +178,9 @@ $bf['forum_perm'] = array(
     'auth_pollcreate' => AUTH_POLLCREATE,
     'auth_attachments' => AUTH_ATTACH,
     'auth_download' => AUTH_DOWNLOAD,
-);
+];
 
-$bf['user_opt'] = array(
+$bf['user_opt'] = [
 #   'dis_opt_name'       =>     ЗАПРЕТЫ используемые администраторами для пользователей
 #   'user_opt_name'      =>     НАСТРОЙКИ используемые пользователями
     'user_viewemail' => 0,  // Показывать e-mail
@@ -199,7 +199,7 @@ $bf['user_opt'] = array(
     'dis_post_edit' => 13, // Запрет на редактирование сообщений
     'user_dls' => 14, // Скрывать список текущих закачек в профиле
     'user_retracker' => 15, // Добавлять ретрекер к скачиваемым торрентам
-);
+];
 
 function bit2dec($bit_num)
 {
@@ -275,7 +275,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     if ($type == AUTH_ALL) {
         $auth_fields = array_keys($bf['forum_perm']);
     } elseif ($auth_type = array_search($type, $bf['forum_perm'])) {
-        $auth_fields = array($auth_type);
+        $auth_fields = [$auth_type];
     }
 
     if (empty($auth_fields)) {
@@ -300,7 +300,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
         }
     } elseif (isset($f_access['forum_id'])) {
         // Change passed $f_access format for later using in foreach()
-        $f_access = array($f_access['forum_id'] => $f_access);
+        $f_access = [$f_access['forum_id'] => $f_access];
     }
 
     if (empty($f_access)) {
@@ -564,8 +564,8 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
-    static $sizes = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-    static $rounders = array(0, 0, 0, 2, 3, 3, 3, 3, 3);
+    static $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    static $rounders = [0, 0, 0, 2, 3, 3, 3, 3, 3];
 
     $size = (float)$size;
     $ext = $sizes[0];
@@ -656,7 +656,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
     $result = $var;
 
     if ($type == 'string') {
-        $result = trim(htmlspecialchars(str_replace(array("\r\n", "\r"), array("\n", "\n"), $result)));
+        $result = trim(htmlspecialchars(str_replace(["\r\n", "\r"], ["\n", "\n"], $result)));
 
         if (!empty($result)) {
             // Make sure multibyte characters are wellformed
@@ -848,7 +848,7 @@ function show_bt_userdata($user_id)
         return;
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SHOW_BT_USERDATA' => true,
         'UP_TOTAL' => humn_size($btu['u_up_total']),
         'UP_BONUS' => humn_size($btu['u_up_bonus']),
@@ -874,7 +874,7 @@ function show_bt_userdata($user_id)
 
         'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
         'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
-    ));
+    ]);
 }
 
 function get_attachments_dir($cfg = null)
@@ -908,10 +908,10 @@ function bb_update_config($params, $table = BB_CONFIG)
 {
     $updates = [];
     foreach ($params as $name => $val) {
-        $updates[] = array(
+        $updates[] = [
             'config_name' => $name,
-            'config_value' => $val,
-        );
+            'config_value' => $val
+        ];
     }
     $updates = DB()->build_array('MULTI_INSERT', $updates);
 
@@ -1021,9 +1021,7 @@ function make_jumpbox($selected = 0)
         $jumpbox = $datastore->get('jumpbox');
     }
 
-    $template->assign_vars(array(
-        'JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user'],
-    ));
+    $template->assign_vars(['JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user']]);
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
@@ -1038,7 +1036,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     if (null === $max_length) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = null === $all_forums_option ? [] : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+    $select = null === $all_forums_option ? [] : [$lang['ALL_AVAILABLE'] => $all_forums_option];
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -1109,17 +1107,17 @@ function setup_style()
     $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SPACER' => make_url('styles/images/spacer.gif'),
         'STYLESHEET' => make_url($css_dir . $stylesheet),
         'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
         'TPL_DIR' => make_url($css_dir),
-        'SITE_URL' => make_url('/'),
-    ));
+        'SITE_URL' => make_url('/')
+    ]);
 
     require_once TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
-    return array('template_name' => $tpl_dir_name);
+    return ['template_name' => $tpl_dir_name];
 }
 
 // Create date / time with format and friendly date
@@ -1259,12 +1257,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         $pagination = str_replace('&amp;start=0', '', $pagination);
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'PAGINATION' => $pagination,
         'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
-        'PG_PER_PAGE' => $per_page,
-    ));
+        'PG_PER_PAGE' => $per_page
+    ]);
 
     return $pagination;
 }
@@ -1297,7 +1295,7 @@ function obtain_word_list(&$orig_word, &$replacement_word)
     if (!$sql = CACHE('bb_cache')->get('censored')) {
         $sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
         if (!$sql) {
-            $sql = array(array('word' => 1, 'replacement' => 1));
+            $sql = [['word' => 1, 'replacement' => 1]];
         }
         CACHE('bb_cache')->set('censored', $sql, 7200);
     }
@@ -1352,12 +1350,12 @@ function bb_die($msg_text)
         $msg_text = $lang[$msg_text];
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_BB_DIE' => true,
-        'MESSAGE_TEXT' => $msg_text,
-    ));
+        'MESSAGE_TEXT' => $msg_text
+    ]);
 
-    $template->set_filenames(array('bb_die' => 'common.tpl'));
+    $template->set_filenames(['bb_die' => 'common.tpl']);
     $template->pparse('bb_die');
 
     require(PAGE_FOOTER);
@@ -1425,14 +1423,14 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 {
     global $lang;
 
-    $forum_display_sort = array(
-        'lang_key' => array('LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'),
-        'fields' => array('t.topic_last_post_time', 't.topic_title', 't.topic_time'),
-    );
-    $forum_display_order = array(
-        'lang_key' => array('DESC', 'ASC'),
-        'fields' => array('DESC', 'ASC'),
-    );
+    $forum_display_sort = [
+        'lang_key' => ['LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'],
+        'fields' => ['t.topic_last_post_time', 't.topic_title', 't.topic_time']
+    ];
+    $forum_display_order = [
+        'lang_key' => ['DESC', 'ASC'],
+        'fields' => ['DESC', 'ASC']
+    ];
 
     // get the good list
     $list_name = 'forum_display_' . $list;
@@ -1569,11 +1567,11 @@ function print_confirmation($tpl_vars)
 {
     global $template, $lang;
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_CONFIRM' => true,
         'CONFIRM_TITLE' => $lang['CONFIRM'],
-        'FORM_METHOD' => 'post',
-    ));
+        'FORM_METHOD' => 'post'
+    ]);
     $template->assign_vars($tpl_vars);
 
     print_page('common.tpl');
@@ -1606,7 +1604,7 @@ function print_page($args, $type = '', $mode = '')
         require(PAGE_HEADER);
     }
 
-    $template->set_filenames(array('body' => $tpl));
+    $template->set_filenames(['body' => $tpl]);
     $template->pparse('body');
 
     if ($mode !== 'no_footer') {
@@ -1686,12 +1684,12 @@ function init_sphinx()
 
 function log_sphinx_error($err_type, $err_msg, $query = '')
 {
-    $ignore_err_txt = array(
+    $ignore_err_txt = [
         'negation on top level',
-        'Query word length is less than min prefix length',
-    );
+        'Query word length is less than min prefix length'
+    ];
     if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
-        $orig_query = strtr($_REQUEST['nm'], array("\n" => '\n'));
+        $orig_query = strtr($_REQUEST['nm'], ["\n" => '\n']);
         bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
     }
 }
@@ -2059,7 +2057,7 @@ function bb_captcha($mode, $callback = '')
 
 function clean_tor_dirname($dirname)
 {
-    return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
+    return str_replace(['[', ']', '<', '>', "'"], ['&#91;', '&#93;', '&lt;', '&gt;', '&#039;'], $dirname);
 }
 
 /**

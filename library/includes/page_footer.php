@@ -14,14 +14,14 @@ if (!defined('BB_ROOT')) {
 global $bb_cfg, $userdata, $template, $DBS, $lang;
 
 if (!empty($template)) {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SIMPLE_FOOTER' => !empty($gen_simple_header),
         'POWERED' => 'Tracker software by <a target="_blank" href="https://torrentpier.com">TorrentPier</a> &copy; 2005-' . date('Y'),
         'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
-        'ADMIN_LINK_HREF' => "admin/index.php",
-    ));
+        'ADMIN_LINK_HREF' => 'admin/index.php',
+    ]);
 
-    $template->set_filenames(array('page_footer' => 'page_footer.tpl'));
+    $template->set_filenames(['page_footer' => 'page_footer.tpl']);
     $template->pparse('page_footer');
 }
 

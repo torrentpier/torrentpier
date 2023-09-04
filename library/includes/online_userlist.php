@@ -31,7 +31,7 @@ $users_cnt = [
     'user' => 0,
     'guest' => 0,
 ];
-$online = $online_short = array('userlist' => '');
+$online = $online_short = ['userlist' => ''];
 
 $sql = "
 	SELECT
@@ -117,10 +117,10 @@ if (!$online['userlist']) {
 $total_online = $logged_online + $guests_online;
 
 if ($total_online > $bb_cfg['record_online_users']) {
-    bb_update_config(array(
+    bb_update_config([
         'record_online_users' => $total_online,
-        'record_online_date' => TIMENOW,
-    ));
+        'record_online_date' => TIMENOW
+    ]);
 }
 
 $online['stat'] = $online_short['stat'] = sprintf($lang['ONLINE_USERS'], $total_online, $logged_online, $guests_online);
