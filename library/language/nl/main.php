@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Prive Berichten';
 $lang['NO_NEW_PM'] = 'geen nieuwe berichten';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nieuw bericht', 'nieuwe berichten');
+$lang['NEW_PMS_DECLENSION'] = ['nieuw bericht', 'nieuwe berichten'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('ongelezen', 'ongelezen');
+$lang['UNREAD_PMS_DECLENSION'] = ['ongelezen', 'ongelezen'];
 
 $lang['UNREAD_MESSAGE'] = 'Ongelezen bericht';
 $lang['READ_MESSAGE'] = 'Lees bericht';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Stuurt een e-mail wanneer iemand reageert op e
 
 $lang['BOARD_LANG'] = 'Raad taal';
 $lang['GENDER'] = 'Geslacht';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Onbekend',
     1 => 'Man',
     2 => 'Vrouw'
-);
+];
 $lang['MODULE_OFF'] = 'De Module is uitgeschakeld!';
 
 $lang['BIRTHDAY'] = 'Verjaardag';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Selecteer status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Je hebt niet gekozen status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alle statussen';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'niet gecontroleerd',
     TOR_CLOSED => 'gesloten',
     TOR_APPROVED => 'gecontroleerd',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'tijdelijk',
     TOR_PREMOD => 'vooraf modereren',
     TOR_REPLENISH => 'vullen',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Een dergelijke status niet bestaat!';
 $lang['TORRENT_FAILED'] = 'Distributie is niet gevonden!';
 $lang['TOR_STATUS_DUB'] = 'De distributie heeft dezelfde status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('beantwoorden', 'antwoorden');
-$lang['DECLENSION']['TIMES'] = array('tijd', 'tijden');
+$lang['DECLENSION']['REPLIES'] = ['beantwoorden', 'antwoorden'];
+$lang['DECLENSION']['TIMES'] = ['tijd', 'tijden'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('tweede', 'seconden'),
-    'minutes' => array('minuut', 'minuten'),
-    'hours' => array('uur', 'uur'),
-    'mday' => array('dag', 'dagen'),
-    'mon' => array('maand', 'maanden'),
-    'year' => array('jaar', 'jaar'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['tweede', 'seconden'],
+    'minutes' => ['minuut', 'minuten'],
+    'hours' => ['uur', 'uur'],
+    'mday' => ['dag', 'dagen'],
+    'mon' => ['maand', 'maanden'],
+    'year' => ['jaar', 'jaar'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn te Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuratie Met Succes Bijgewerkt';
 $lang['SET_DEFAULTS'] = 'Standaardinstellingen herstellen';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum instellingen';
-$lang['TRACKER_SETTINGS'] = 'Tracker instellingen';
-
-$lang['CHANGES_DISABLED'] = 'Wijzigingen uitgeschakeld (zie <b>$bb_cfg[\'tracker\']</b> in config.php)';
-
 $lang['OFF_TRACKER'] = 'Uitschakelen tracker';
 $lang['OFF_REASON'] = 'Uitschakelen reden';
 $lang['OFF_REASON_EXPL'] = 'dit bericht zal worden verzonden aan de opdrachtgever wanneer de tracker is uitgeschakeld';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Reparatie Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Taak bewerken';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Taak toevoegen';
 $lang['CRON_SCRIPT_EXPL'] = 'de naam van het script van "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Selecteer start',
     'hourly' => 'per uur',
     'daily' => 'dagelijks',
     'weekly' => 'wekelijks',
     'monthly' => 'maandelijks',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Geen selecteren';
 $lang['RUN_DAY'] = 'Uitvoeren dag';
 $lang['RUN_DAY_EXPL'] = 'de dag waarop deze taak uitvoeren';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Bericht verzonden naar alle mensen die deze release 
 $lang['CALLSEED_MSG_SPAM'] = 'De aanvraag is al een keer met succes verzonden (Waarschijnlijk niet u)<br /><br />The volgende gelegenheid voor het verzenden van een verzoek om te worden <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Onderwerp niet nodig de help (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Onderwerp:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Onderwerp:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Onderwerp:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Gebruiker:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Gebruiker:<br /> <b>ban</b>',
     'adm_user_unban' => 'Gebruiker:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alle acties';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Acties-Logboek: Search opties';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Typ een commentaar';
 $lang['MC_FAQ'] = 'Ingevoerde tekst zal worden weergegeven onder dit bericht';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in uw bericht";
 $lang['MC_COMMENT_PM_MSG'] = "Hallo, [b]%s[/b]\nModerator links in je bericht [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Opmerking verwijderen',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Reactie van %s',
         'type' => 'Reactie',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informatie van %s',
         'type' => 'Informatie',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Waarschuwing van %s',
         'type' => 'Waarschuwing',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Schending van %s',
         'type' => 'Overtreding',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Beheren sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Release met hash %s niet gevonden';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]De tekst van deze pagina is bewerkt op: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Deze regel kan alleen beheerders zien.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Op deze pagina kunt u de tekst van de fundamentele regels van de bron wordt weergegeven aan gebruikers.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inactieve gebruikers in 30 dagen',
     1 => 'inactieve gebruikers voor 90 dagen',
     2 => 'middelgrote uitkeringen op de drijver van de (vele megabytes)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'hoe vele handen waar dat zaaien meer dan 5 zaden',
     6 => 'hoe velen van ons uploaders (degenen die gevuld zijn met minstens 1 hand)',
     7 => 'hoe veel uploaders over de laatste 30 dagen',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Poll ingeschakeld';
 $lang['NEW_POLL_END'] = 'Poll ingevuld';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Ongeldig bestandstype van de afbeelding';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'De afmetingen van het beeld is dan de maximaal toelaatbare %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Het verstuurde bestand is geen beeld';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Uitbreiding %s voor downloads is niet toegestaan';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'overschrijding van de maximum bestands-grootte voor de server',
     UPLOAD_ERR_FORM_SIZE => 'overschrijding van de maximum file upload size',
     UPLOAD_ERR_PARTIAL => 'het bestand werd gedeeltelijk gedownload',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'tijdelijke map is niet gevonden',
     UPLOAD_ERR_CANT_WRITE => 'schrijf-fout',
     UPLOAD_ERR_EXTENSION => 'upload gestopt door extentie',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Controleren dat u geen robot';
