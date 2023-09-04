@@ -217,7 +217,7 @@ if ($tor_reged && $tor_info) {
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size),
-            'COMPLETED' => declension((int)$tor_info['complete_count'], 'times'),
+            'COMPLETED' => declension((int)$download_count, 'times'),
         ]);
 
         if ($comment) {
