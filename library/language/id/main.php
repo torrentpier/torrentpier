@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Pesan Pribadi';
 $lang['NO_NEW_PM'] = 'tidak ada pesan baru';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('pesan baru', 'pesan baru');
+$lang['NEW_PMS_DECLENSION'] = ['pesan baru', 'pesan baru'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('belum dibaca', 'belum dibaca');
+$lang['UNREAD_PMS_DECLENSION'] = ['belum dibaca', 'belum dibaca'];
 
 $lang['UNREAD_MESSAGE'] = 'Pesan yang belum dibaca';
 $lang['READ_MESSAGE'] = 'Baca pesan';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Mengirim e-mail ketika seseorang balasan untuk
 
 $lang['BOARD_LANG'] = 'Dewan bahasa';
 $lang['GENDER'] = 'Jenis kelamin';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Tidak diketahui',
     1 => 'Laki-laki',
     2 => 'Perempuan'
-);
+];
 $lang['MODULE_OFF'] = 'Modul dinonaktifkan!';
 
 $lang['BIRTHDAY'] = 'Ulang tahun';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Pilih status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Anda belum memilih status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Semua status';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'tidak diperiksa',
     TOR_CLOSED => 'ditutup',
     TOR_APPROVED => 'diperiksa',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'sementara',
     TOR_PREMOD => 'pra-moderasi',
     TOR_REPLENISH => 'mengisi',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Status tersebut tidak ada!';
 $lang['TORRENT_FAILED'] = 'Distribusi tidak ditemukan!';
 $lang['TOR_STATUS_DUB'] = 'Distribusi memiliki status yang sama';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('balas', 'balasan');
-$lang['DECLENSION']['TIMES'] = array('waktu', 'kali');
+$lang['DECLENSION']['REPLIES'] = ['balas', 'balasan'];
+$lang['DECLENSION']['TIMES'] = ['waktu', 'kali'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('kedua', 'detik'),
-    'minutes' => array('menit', 'menit'),
-    'hours' => array('jam', 'jam'),
-    'mday' => array('hari', 'hari'),
-    'mon' => array('bulan', 'bulan'),
-    'year' => array('tahun', 'tahun'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['kedua', 'detik'],
+    'minutes' => ['menit', 'menit'],
+    'hours' => ['jam', 'jam'],
+    'mday' => ['hari', 'hari'],
+    'mon' => ['bulan', 'bulan'],
+    'year' => ['tahun', 'tahun'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn untuk Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurasi Berhasil Diperbarui';
 $lang['SET_DEFAULTS'] = 'Restore default';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum pengaturan';
-$lang['TRACKER_SETTINGS'] = 'Tracker pengaturan';
-
-$lang['CHANGES_DISABLED'] = 'Perubahan dinonaktifkan (lihat <b>$bb_cfg[\'tracker\']</b> di config.php)';
-
 $lang['OFF_TRACKER'] = 'Menonaktifkan tracker';
 $lang['OFF_REASON'] = 'Menonaktifkan alasan';
 $lang['OFF_REASON_EXPL'] = 'pesan ini akan dikirim ke klien ketika tracker dinonaktifkan';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Perbaikan Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Mengedit pekerjaan';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Tambahkan pekerjaan';
 $lang['CRON_SCRIPT_EXPL'] = 'nama script dari "meliputi/cron/lowongan/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Pilih start',
     'hourly' => 'per jam',
     'daily' => 'sehari-hari',
     'weekly' => 'mingguan',
     'monthly' => 'bulanan',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Tidak ada pilih';
 $lang['RUN_DAY'] = 'Berjalan di malam hari';
 $lang['RUN_DAY_EXPL'] = 'hari ketika pekerjaan ini berjalan';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Pesan telah dikirimkan ke semua orang yang mengunduh
 $lang['CALLSEED_MSG_SPAM'] = 'Permintaan sudah pernah berhasil dikirim (Mungkin tidak anda)<br /><br />The kesempatan berikutnya untuk mengirim permintaan untuk menjadi <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Topik tidak memerlukan bantuan (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Topik:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Topik:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Topik:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Pengguna:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Pengguna:<br /> <b>ban</b>',
     'adm_user_unban' => 'Pengguna:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Semua tindakan';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Tindakan Log: pilihan Pencarian';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Jenis komentar';
 $lang['MC_FAQ'] = 'Teks yang dimasukkan akan ditampilkan di bawah pesan ini';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s dalam pesan anda";
 $lang['MC_COMMENT_PM_MSG'] = "Halo, [b]%s[/b]\nModerator kiri dalam pesan anda [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Hapus komentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentar dari %s',
         'type' => 'Komentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informasi dari %s',
         'type' => 'Informasi',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Peringatan dari %s',
         'type' => 'Peringatan',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Pelanggaran dari %s',
         'type' => 'Pelanggaran',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Mengelola sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Rilis dengan hash %s tidak ditemukan';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Teks halaman ini diedit di: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Baris ini hanya dapat melihat administrator.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pada halaman ini, anda dapat menentukan teks aturan dasar dari sumber daya ditampilkan kepada pengguna.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'pengguna yang tidak aktif dalam 30 hari',
     1 => 'pengguna yang tidak aktif selama 90 hari',
     2 => 'ukuran medium distro di pelacak (banyak megabyte)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'berapa banyak tangan mana yang penyemaian lebih dari 5 biji',
     6 => 'berapa banyak dari kita pengunggah (orang-orang yang memenuhi minimal 1 tangan)',
     7 => 'berapa banyak pengunggah selama 30 hari terakhir',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Jajak pendapat diaktifkan';
 $lang['NEW_POLL_END'] = 'Jajak pendapat selesai';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Berkas tidak valid jenis gambar';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Gambar dimensi melebihi maksimum yang diijinkan %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'File yang di upload gambar';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Ekstensi %s untuk download tidak diperbolehkan';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'anda telah melebihi batas maksimal ukuran file untuk server',
     UPLOAD_ERR_FORM_SIZE => 'anda telah melebihi batas maksimum file upload size',
     UPLOAD_ERR_PARTIAL => 'berkas sebagian download',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'direktori sementara tidak ditemukan',
     UPLOAD_ERR_CANT_WRITE => 'kesalahan menulis',
     UPLOAD_ERR_EXTENSION => 'tanggal dihentikan oleh ekstensi',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Periksa bahwa anda bukan robot';
