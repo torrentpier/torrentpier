@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Mensagens Privadas';
 $lang['NO_NEW_PM'] = 'não há novas mensagens';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nova mensagem', 'novas mensagens');
+$lang['NEW_PMS_DECLENSION'] = ['nova mensagem', 'novas mensagens'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('não lida', 'não lida');
+$lang['UNREAD_PMS_DECLENSION'] = ['não lida', 'não lida'];
 
 $lang['UNREAD_MESSAGE'] = 'Mensagens não lidas';
 $lang['READ_MESSAGE'] = 'Ler mensagem';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Envia um e-mail quando alguém responder a um 
 
 $lang['BOARD_LANG'] = 'Conselho idioma';
 $lang['GENDER'] = 'Sexo';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Desconhecido',
     1 => 'Masculino',
     2 => 'Feminino'
-);
+];
 $lang['MODULE_OFF'] = 'Módulo está desabilitado!';
 
 $lang['BIRTHDAY'] = 'Aniversário';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Estado';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Selecione status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Você não selecionou estado.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Todos os estados';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'não verificada',
     TOR_CLOSED => 'fechado',
     TOR_APPROVED => 'verificada',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'temporário',
     TOR_PREMOD => 'a pré-moderação',
     TOR_REPLENISH => 'enchei',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tal status não existe!';
 $lang['TORRENT_FAILED'] = 'A distribuição não foi encontrado!';
 $lang['TOR_STATUS_DUB'] = 'A distribuição tem o mesmo status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('responder', 'respostas');
-$lang['DECLENSION']['TIMES'] = array('tempo', 'vezes');
+$lang['DECLENSION']['REPLIES'] = ['responder', 'respostas'];
+$lang['DECLENSION']['TIMES'] = ['tempo', 'vezes'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('segunda', 'segundos'),
-    'minutes' => array('minutos', 'minutos'),
-    'hours' => array('hora', 'horas'),
-    'mday' => array('dia', 'dias'),
-    'mon' => array('mês', 'meses'),
-    'year' => array('ano', 'anos'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['segunda', 'segundos'],
+    'minutes' => ['minutos', 'minutos'],
+    'hours' => ['hora', 'horas'],
+    'mday' => ['dia', 'dias'],
+    'mon' => ['mês', 'meses'],
+    'year' => ['ano', 'anos'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn para Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuração Actualizados Com Sucesso';
 $lang['SET_DEFAULTS'] = 'Restaurar predefinições';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Perseguidor';
-$lang['FORUM_CFG_TITLE'] = 'Fórum de configurações';
-$lang['TRACKER_SETTINGS'] = 'Tracker definições';
-
-$lang['CHANGES_DISABLED'] = 'Alterações desativada (consulte <b>$bb_cfg[\'tracker\']</b> em config.php)';
-
 $lang['OFF_TRACKER'] = 'Desativar o rastreador';
 $lang['OFF_REASON'] = 'Desactivar a razão';
 $lang['OFF_REASON_EXPL'] = 'esta mensagem será enviada para o cliente quando o tracker estiver desativado';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Reparação De Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edição de trabalho';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Adicionar emprego';
 $lang['CRON_SCRIPT_EXPL'] = 'nome do script de "inclui/cron/empregos/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Selecione iniciar',
     'hourly' => 'de hora em hora',
     'daily' => 'diariamente',
     'weekly' => 'semanal',
     'monthly' => 'mensal',
     'interval' => 'intervalo de'
-);
+];
 $lang['NOSELECT'] = 'Não selecionar';
 $lang['RUN_DAY'] = 'Dia de execução';
 $lang['RUN_DAY_EXPL'] = 'o dia em que esse trabalho seja executado';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'A mensagem foi enviada para todos os que baixei essa
 $lang['CALLSEED_MSG_SPAM'] = 'Solicitação já foi uma vez enviada com sucesso (Provavelmente não)<br /><br />The próxima oportunidade de enviar um pedido para ser <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Tópico não precisam de ajuda (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Tópico:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Tópico:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Tópico:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Usuário:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Usuário:<br /> <b>ban</b>',
     'adm_user_unban' => 'Usuário:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Todas as ações';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Registro de ações: opções de Pesquisa';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Escreva um comentário';
 $lang['MC_FAQ'] = 'O texto digitado será exibido abaixo esta mensagem';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s em sua mensagem";
 $lang['MC_COMMENT_PM_MSG'] = "Olá, [b]%s[/b]\nModerator esquerda em sua mensagem [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Excluir comentário',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Comentário de %s',
         'type' => 'Comentário',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informações do %s',
         'type' => 'Informações',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Aviso de %s',
         'type' => 'Aviso',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Violação de %s',
         'type' => 'Violação',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Gerenciar sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Lançamento com hash %s não encontrado';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]O texto desta página é editado em: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Esta linha pode ver apenas administradores.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Nesta página, você pode especificar o texto das regras básicas do recurso é exibido para os usuários.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'usuários inativos em 30 dias',
     1 => 'usuários inativos para 90 dias',
     2 => 'tamanho médio distribuições no tracker (vários megabytes)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'como muitas mãos, onde o que a propagação mais de 5 sementes',
     6 => 'quantos de nós uploaders (aqueles que preenchido, no mínimo, 1 mão)',
     7 => 'como muitos uploaders nos últimos 30 dias',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Enquete habilitado';
 $lang['NEW_POLL_END'] = 'Enquete concluída';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Inválido tipo de arquivo de imagem';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Dimensões da imagem exceder o máximo permitido %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'O arquivo enviado não é uma imagem';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Extensão %s para download não é permitido';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'você excedeu o tamanho máximo de arquivo para o servidor',
     UPLOAD_ERR_FORM_SIZE => 'você excedeu o máximo tamanho de upload do arquivo',
     UPLOAD_ERR_PARTIAL => 'o arquivo foi baixado parcialmente',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'temporária de diretório não encontrado',
     UPLOAD_ERR_CANT_WRITE => 'erro de gravação',
     UPLOAD_ERR_EXTENSION => 'upload parado por extensão',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Verifique se que você não é um robô';
