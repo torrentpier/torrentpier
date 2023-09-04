@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Privaatsõnumid';
 $lang['NO_NEW_PM'] = 'pole uusi sõnumeid';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('uus sõnum', 'uued sõnumid');
+$lang['NEW_PMS_DECLENSION'] = ['uus sõnum', 'uued sõnumid'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('lugemata', 'lugemata');
+$lang['UNREAD_PMS_DECLENSION'] = ['lugemata', 'lugemata'];
 
 $lang['UNREAD_MESSAGE'] = 'Lugemata kirja';
 $lang['READ_MESSAGE'] = 'Loe sõnum';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Saadab e-kiri, kui keegi vastab teemale teil o
 
 $lang['BOARD_LANG'] = 'Juhatuse keel';
 $lang['GENDER'] = 'Sugu';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Teadmata',
     1 => 'Mees',
     2 => 'Emane'
-);
+];
 $lang['MODULE_OFF'] = 'Moodul on keelatud!';
 
 $lang['BIRTHDAY'] = 'Sünnipäev';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Staatus';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Valige staatus';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Sa ei ole valinud staatus.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Kõik staatused';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ei ole kontrollitud',
     TOR_CLOSED => 'suletud',
     TOR_APPROVED => 'kontrollitud',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'ajutine',
     TOR_PREMOD => 'pre-mõõdukalt',
     TOR_REPLENISH => 'täiendama',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Selline seisund ei ole olemas!';
 $lang['TORRENT_FAILED'] = 'Jaotus ei leitud!';
 $lang['TOR_STATUS_DUB'] = 'Jaotus on sama staatus';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('vastus', 'vastused');
-$lang['DECLENSION']['TIMES'] = array('aeg', 'korda');
+$lang['DECLENSION']['REPLIES'] = ['vastus', 'vastused'];
+$lang['DECLENSION']['TIMES'] = ['aeg', 'korda'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('teine', 'sekundit'),
-    'minutes' => array('minut', 'minutit'),
-    'hours' => array('tund', 'tundi'),
-    'mday' => array('päev', 'päeva'),
-    'mon' => array('kuu', 'kuud'),
-    'year' => array('aasta', 'aasta'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['teine', 'sekundit'],
+    'minutes' => ['minut', 'minutit'],
+    'hours' => ['tund', 'tundi'],
+    'mday' => ['päev', 'päeva'],
+    'mon' => ['kuu', 'kuud'],
+    'year' => ['aasta', 'aasta'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn, et Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguratsiooni Edukalt Uuendatud';
 $lang['SET_DEFAULTS'] = 'Restore defaults (taasta vaikesätted';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Foorumi seaded';
-$lang['TRACKER_SETTINGS'] = 'Tracker seaded';
-
-$lang['CHANGES_DISABLED'] = 'Muudatused puudega (vt <b>$bb_cfg[\'tracker\']</b> aastal config.php)';
-
 $lang['OFF_TRACKER'] = 'Keelata tracker';
 $lang['OFF_REASON'] = 'Keelata põhjus';
 $lang['OFF_REASON_EXPL'] = 'see teade on saadetud kliendile, kui tracker on keelatud';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Remondi-Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit tööd';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Lisa tööd';
 $lang['CRON_SCRIPT_EXPL'] = 'nimi skripti "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Valige start',
     'hourly' => 'tunnitasu',
     'daily' => 'päev',
     'weekly' => 'kord nädalas',
     'monthly' => 'kuu',
     'interval' => 'intervall'
-);
+];
 $lang['NOSELECT'] = 'Ei vali';
 $lang['RUN_DAY'] = 'Run päev';
 $lang['RUN_DAY_EXPL'] = 'päeval, kui see töö joosta';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Teade on saadetud kõigile neile, kes alla laadida s
 $lang['CALLSEED_MSG_SPAM'] = 'Päring on juba kord saatnud (Ilmselt ei ole te)<br /><br />The järgmine võimalus selleks, et saata taotlus <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Teema ei vaja abi (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Teema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Teema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Teema:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Kasutaja:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Kasutaja:<br /> <b>ban</b>',
     'adm_user_unban' => 'Kasutaja:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Kõik tegevused, mis on';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Tegevuste Päevik: Otsingu valikud';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Tüüp kommentaar';
 $lang['MC_FAQ'] = 'Sisestatud tekst kuvatakse käesolevast sõnum';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s teie sõnum";
 $lang['MC_COMMENT_PM_MSG'] = "Tere, [b]%s[/b]\nModerator jätta oma teade [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Kustuta kommentaar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommenteerida %s',
         'type' => 'Kommentaar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Teave %s',
         'type' => 'Teave',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Hoiatus %s',
         'type' => 'Hoiatus',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Rikkumise alates %s',
         'type' => 'Rikkumine',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Halda sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Pressiteade hash %s ei leitud';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Selle lehe teksti on muudetud aadressil: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Sellel real on näha ainult administraatorid.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Sellel lehel saate määrata teksti põhireeglid ressurss on kuvatud kasutajad.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'mitteaktiivsete kasutajate 30 päeva',
     1 => 'mitteaktiivsete kasutajate 90 päeva',
     2 => 'keskmise suurusega väljamakseid tracker (mitu mb)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'kui paljud käed, kus on, et külvi on üle 5 seemned',
     6 => 'kui paljud meist uploaders (need, kes täidetud vähemalt 1 käega)',
     7 => 'kui palju uploaders viimase 30 päeva jooksul',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Küsitlus võimaldas';
 $lang['NEW_POLL_END'] = 'Küsitlus lõppenud';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Vigane faili tüüp pilti';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Pildi mõõtmed ületa maksimaalset lubatud %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Üleslaaditud fail ei ole pilt';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Laiendamine %s eest lingid ei ole lubatud';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'teil on ületatud maksimaalne faili suurus server',
     UPLOAD_ERR_FORM_SIZE => 'sul on ületanud maksimaalse faili üleslaadimise suurus',
     UPLOAD_ERR_PARTIAL => 'fail on osaliselt alla laadida',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'ajutise kataloogi ei leitud.',
     UPLOAD_ERR_CANT_WRITE => 'write error',
     UPLOAD_ERR_EXTENSION => 'upload peatas pikendamine',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kontrollige, et te ei ole robot';
