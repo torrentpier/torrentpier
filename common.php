@@ -109,7 +109,7 @@ define('PEERS_LIST_PREFIX', 'peers_list_');
 define('SCRAPE_LIST_PREFIX', 'scrape_');
 define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor']))); // sec
 define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7)); // sec
-define('SCRAPE_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7)); // sec
+define('SCRAPE_LIST_EXPIRE', 300)); // sec
 
 define('DL_STATUS_RELEASER', -1);
 define('DL_STATUS_DOWN', 0);
