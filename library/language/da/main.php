@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Private Beskeder';
 $lang['NO_NEW_PM'] = 'ingen nye meddelelser';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('ny besked', 'nye meddelelser');
+$lang['NEW_PMS_DECLENSION'] = ['ny besked', 'nye meddelelser'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('ulæste', 'ulæste');
+$lang['UNREAD_PMS_DECLENSION'] = ['ulæste', 'ulæste'];
 
 $lang['UNREAD_MESSAGE'] = 'Ulæst besked';
 $lang['READ_MESSAGE'] = 'Læs besked';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sender en e-mail når nogen svarer til et emne
 
 $lang['BOARD_LANG'] = 'Bestyrelsen sprog';
 $lang['GENDER'] = 'Køn';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Ukendt',
     1 => 'Mand',
     2 => 'Kvinde'
-);
+];
 $lang['MODULE_OFF'] = 'Modulet er deaktiveret!';
 
 $lang['BIRTHDAY'] = 'Fødselsdag';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Vælg status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Du har ikke valgt status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alle statusser';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ikke tjekket',
     TOR_CLOSED => 'lukket',
     TOR_APPROVED => 'kontrolleret',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'midlertidig',
     TOR_PREMOD => 'præ-moderation',
     TOR_REPLENISH => 'genopbygge',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'En sådan tilstand eksisterer ikke!';
 $lang['TORRENT_FAILED'] = 'Distribution blev ikke fundet!';
 $lang['TOR_STATUS_DUB'] = 'Fordeling har samme status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('svar', 'svar');
-$lang['DECLENSION']['TIMES'] = array('tid', 'tider');
+$lang['DECLENSION']['REPLIES'] = ['svar', 'svar'];
+$lang['DECLENSION']['TIMES'] = ['tid', 'tider'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('andet', 'sekunder'),
-    'minutes' => array('minut', 'minutter'),
-    'hours' => array('time', 'timer'),
-    'mday' => array('dag', 'dage'),
-    'mon' => array('måned', 'måneder'),
-    'year' => array('år', 'år'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['andet', 'sekunder'],
+    'minutes' => ['minut', 'minutter'],
+    'hours' => ['time', 'timer'],
+    'mday' => ['dag', 'dage'],
+    'mon' => ['måned', 'måneder'],
+    'year' => ['år', 'år'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn at Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Opdateret';
 $lang['SET_DEFAULTS'] = 'Gendan standarder';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum-indstillinger';
-$lang['TRACKER_SETTINGS'] = 'Tracker-indstillinger';
-
-$lang['CHANGES_DISABLED'] = 'Ændringer deaktiveret (se <b>$bb_cfg[\'tracker\']</b> i config.php)';
-
 $lang['OFF_TRACKER'] = 'Deaktiver tracker';
 $lang['OFF_REASON'] = 'Deaktiver grund';
 $lang['OFF_REASON_EXPL'] = 'denne besked vil blive sendt til kunden, når tracker er deaktiveret';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Reparation Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Rediger job';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Tilføj job';
 $lang['CRON_SCRIPT_EXPL'] = 'navnet på det script, fra "includes/cron/job/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Vælg start',
     'hourly' => 'timeløn',
     'daily' => 'dagligt',
     'weekly' => 'ugentlig',
     'monthly' => 'månedlig',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Vælg';
 $lang['RUN_DAY'] = 'Køre dag';
 $lang['RUN_DAY_EXPL'] = 'den dag, da denne opgave køre';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Besked er blevet sendt til alle dem, der har downloa
 $lang['CALLSEED_MSG_SPAM'] = 'Anmodning har allerede været én gang sendt (Nok ikke dig)<br /><br />The næste mulighed for at sende en anmodning om at blive <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Emne kræver ikke hjælpe (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Emne:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Emne:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Emne:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Bruger:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Bruger:<br /> <b>ban</b>',
     'adm_user_unban' => 'Bruger:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alle handlinger';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Handlinger Log: søgekriterier';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Skriv en kommentar';
 $lang['MC_FAQ'] = 'Den indtastede tekst vil blive vist under denne besked';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s i din besked";
 $lang['MC_COMMENT_PM_MSG'] = "Hej, [b]%s[/b]\nModerator venstre i din besked [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Slet kommentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentar fra %s',
         'type' => 'Kommentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Oplysninger fra %s',
         'type' => 'Information',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Advarsel fra %s',
         'type' => 'Advarsel',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Overtrædelse fra %s',
         'type' => 'Overtrædelse',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Styre sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Udgivelse med hash %s ikke fundet';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksten på denne side er redigeret på: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Denne linje kan kun se administratorer.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På denne side, kan du angive den tekst, der i de grundlæggende regler af den ressource, der vises til brugerne.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inaktive brugere i 30 dage',
     1 => 'inaktive brugere for 90 dage',
     2 => 'medium størrelse distributioner på tracker (mange megabyte)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'hvor mange hænder, hvor der såning mere end 5 frø',
     6 => 'hvor mange af os uploadere (dem, der er fyldt mindst 1 hånd)',
     7 => 'hvor mange uploadere i løbet af de sidste 30 dage',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Meningsmåling aktiveret';
 $lang['NEW_POLL_END'] = 'Afstemning afsluttet';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Invalid fil type billede';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Billede dimensioner overstiger den tilladte maksimale %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Den uploadede fil er ikke et billede';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Udvidelse %s for downloads er ikke tilladt';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'du har overskredet den maksimale filstørrelse for server',
     UPLOAD_ERR_FORM_SIZE => 'du har overskredet den maksimale upload størrelse',
     UPLOAD_ERR_PARTIAL => 'filen blev delvist hentet',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'midlertidige mappe ikke fundet',
     UPLOAD_ERR_CANT_WRITE => 'skrive fejl',
     UPLOAD_ERR_EXTENSION => 'upload stoppet af udvidelse',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kontroller, at du ikke er en robot';

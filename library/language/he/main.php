@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'הודעות פרטיות';
 $lang['NO_NEW_PM'] = 'אין הודעות חדשות';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('הודעה חדשה', 'הודעות חדשות');
+$lang['NEW_PMS_DECLENSION'] = ['הודעה חדשה', 'הודעות חדשות'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('שלא נקראו', 'שלא נקראו');
+$lang['UNREAD_PMS_DECLENSION'] = ['שלא נקראו', 'שלא נקראו'];
 
 $lang['UNREAD_MESSAGE'] = 'הודעה שלא נקראה';
 $lang['READ_MESSAGE'] = 'קראתי את ההודעה';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'שולח דואר אלקטרוני כאשר מ
 
 $lang['BOARD_LANG'] = 'לוח השפה';
 $lang['GENDER'] = 'מין';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'לא ידוע',
     1 => 'זכר',
     2 => 'נקבה'
-);
+];
 $lang['MODULE_OFF'] = 'מודול אינו זמין!';
 
 $lang['BIRTHDAY'] = 'יום הולדת';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'סטטוס';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'בחר מצב';
 $lang['TOR_STATUS_NOT_SELECT'] = 'לא בחרת מצב.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'כל הסטטוסים';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'לא בדקתי',
     TOR_CLOSED => 'סגור',
     TOR_APPROVED => 'בדקתי',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'זמני',
     TOR_PREMOD => 'מראש מתינות',
     TOR_REPLENISH => 'לחדש',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'מעמד כזה לא קיים!';
 $lang['TORRENT_FAILED'] = 'הפצה לא נמצא!';
 $lang['TOR_STATUS_DUB'] = 'הפצה יש את אותו מעמד';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('תגובה', 'תגובות');
-$lang['DECLENSION']['TIMES'] = array('זמן', 'פעמים');
+$lang['DECLENSION']['REPLIES'] = ['תגובה', 'תגובות'];
+$lang['DECLENSION']['TIMES'] = ['זמן', 'פעמים'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('השני', 'שניות'),
-    'minutes' => array('דקה', 'דקות'),
-    'hours' => array('שעה', 'שעות'),
-    'mday' => array('יום', 'ימים'),
-    'mon' => array('בחודש', 'חודשים'),
-    'year' => array('שנה', 'שנים'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['השני', 'שניות'],
+    'minutes' => ['דקה', 'דקות'],
+    'hours' => ['שעה', 'שעות'],
+    'mday' => ['יום', 'ימים'],
+    'mon' => ['בחודש', 'חודשים'],
+    'year' => ['שנה', 'שנים'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn כדי Configuration%s';
 $lang['CONFIG_UPD'] = 'תצורה עודכן בהצלחה';
 $lang['SET_DEFAULTS'] = 'שחזור ברירות מחדל';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'פורום הגדרות';
-$lang['TRACKER_SETTINGS'] = 'גשש הגדרות';
-
-$lang['CHANGES_DISABLED'] = 'שינויים נכים (לראות <b>$bb_cfg[\'tracker\']</b> ב config.php)';
-
 $lang['OFF_TRACKER'] = 'השבת tracker';
 $lang['OFF_REASON'] = 'השבת סיבה';
 $lang['OFF_REASON_EXPL'] = 'הודעה זו תישלח אל הלקוח כאשר הגשש אינו זמין';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'תיקון Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'עריכת העבודה';
 $lang['CRON_EDIT_HEAD_ADD'] = 'להוסיף עבודה';
 $lang['CRON_SCRIPT_EXPL'] = 'השם של קובץ ה-script מתוך "כולל/cron/עבודות/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; בחר התחלה.',
     'hourly' => 'לפי שעה',
     'daily' => 'יומי',
     'weekly' => 'שבועי',
     'monthly' => 'חודשי',
     'interval' => 'מרווח'
-);
+];
 $lang['NOSELECT'] = 'לא בחר';
 $lang['RUN_DAY'] = 'לרוץ היום';
 $lang['RUN_DAY_EXPL'] = 'היום, כאשר העבודה הזאת לרוץ';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'הודעה נשלחה לכל מי הוריד את ז
 $lang['CALLSEED_MSG_SPAM'] = 'הבקשה כבר פעם נשלחו בהצלחה (כנראה לא אתה)<br /><br />The ההזדמנות הבאה לשלוח בקשה להיות <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'הנושא אינו דורש עזרה (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'נושא:<br /> <b>deleted</b>',
     'mod_topic_move' => 'נושא:<br /> <b>moved</b>',
     'mod_topic_lock' => 'נושא:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'משתמש:<br /> <b>deleted</b>',
     'adm_user_ban' => 'משתמש:<br /> <b>ban</b>',
     'adm_user_unban' => 'משתמש:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'כל הפעולות';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'פעולות יומן: אפשרויות חיפוש';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'סוג תגובה';
 $lang['MC_FAQ'] = 'הזנת טקסט יוצג תחת הודעה זו';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s בהודעה שלך";
 $lang['MC_COMMENT_PM_MSG'] = "שלום, [b]%s[/b]\nModerator לך הודעה [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'מחק תגובה',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'אחד מן %s',
         'type' => 'תגובה',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'מידע %s',
         'type' => 'מידע',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'אזהרה מפני %s',
         'type' => 'אזהרה',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'הפרה מן %s',
         'type' => 'הפרה',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'לנהל את ה-sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]הטקסט של דף זה נערך בכתובת: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. שורה זו יכולה לראות רק מנהלי מערכת.[/align]';
 $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקסט של הכללים הבסיסיים של משאב זה מוצג בפני המשתמשים.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'משתמשים לא-פעילים ב-30 ימים',
     1 => 'משתמשים לא-פעילים למשך 90 ימים.',
     2 => 'בינוני גודל הפצות על הגשש (הרבה מגה-בתים)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'כמה ידיים איפה זה זריעה יותר מ-5 זרעים',
     6 => 'כמה מאיתנו uploaders (מי מילא לפחות 1 יד)',
     7 => 'כמה uploaders במהלך 30 הימים האחרונים',
-);
+];
 
 $lang['NEW_POLL_START'] = 'הסקר זמין';
 $lang['NEW_POLL_END'] = 'הסקר הושלם';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'חוקי סוג קובץ של תמונה';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'תמונה מידות עולה על המקסימום המותר %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'הקובץ שהועלה הוא לא תמונה.';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'סיומת %s על הורדות לא מורשות';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'עברת את הגודל המרבי של קובץ על השרת',
     UPLOAD_ERR_FORM_SIZE => 'אתה עולה על גודל הקובץ המרבי של טעינה',
     UPLOAD_ERR_PARTIAL => 'הקובץ היה שהורדו באופן חלקי',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'זמני הספרייה לא נמצאו',
     UPLOAD_ERR_CANT_WRITE => 'כותב שגיאה',
     UPLOAD_ERR_EXTENSION => 'טען נעצר על ידי הסיומת',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'בדוק שאתה לא רובוט';

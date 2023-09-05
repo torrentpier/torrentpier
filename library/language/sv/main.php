@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Privata Meddelanden';
 $lang['NO_NEW_PM'] = 'inga nya meddelanden';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nytt meddelande', 'nya meddelanden');
+$lang['NEW_PMS_DECLENSION'] = ['nytt meddelande', 'nya meddelanden'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('olästa', 'olästa');
+$lang['UNREAD_PMS_DECLENSION'] = ['olästa', 'olästa'];
 
 $lang['UNREAD_MESSAGE'] = 'Olästa meddelande';
 $lang['READ_MESSAGE'] = 'Läsa meddelande';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Skickar ett e-postmeddelande när någon svara
 
 $lang['BOARD_LANG'] = 'Styrelsen språk';
 $lang['GENDER'] = 'Kön';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Okänd',
     1 => 'Hane',
     2 => 'Kvinna'
-);
+];
 $lang['MODULE_OFF'] = 'Modulen är inaktiverad!';
 
 $lang['BIRTHDAY'] = 'Födelsedag';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Välj status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Du har inte valt status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alla statusar';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'inte kontrolleras',
     TOR_CLOSED => 'stängt',
     TOR_APPROVED => 'kollade',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'tillfällig',
     TOR_PREMOD => 'pre-måtta',
     TOR_REPLENISH => 'fylla på',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Denna status finns inte!';
 $lang['TORRENT_FAILED'] = 'Fördelningen var inte hittas!';
 $lang['TOR_STATUS_DUB'] = 'Distributionen har samma status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('svara', 'svar');
-$lang['DECLENSION']['TIMES'] = array('tid', 'gånger');
+$lang['DECLENSION']['REPLIES'] = ['svara', 'svar'];
+$lang['DECLENSION']['TIMES'] = ['tid', 'gånger'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('andra', 'sekunder'),
-    'minutes' => array('minuter', 'minuter'),
-    'hours' => array('timme', 'timmar'),
-    'mday' => array('dag', 'dagar'),
-    'mon' => array('månad', 'månader'),
-    'year' => array('år', 'år'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['andra', 'sekunder'],
+    'minutes' => ['minuter', 'minuter'],
+    'hours' => ['timme', 'timmar'],
+    'mday' => ['dag', 'dagar'],
+    'mon' => ['månad', 'månader'],
+    'year' => ['år', 'år'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn att Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Uppdaterats';
 $lang['SET_DEFAULTS'] = 'Återställ standardvärden';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum inställningar';
-$lang['TRACKER_SETTINGS'] = 'Tracker-inställningar';
-
-$lang['CHANGES_DISABLED'] = 'Förändringar funktionshindrade (se <b>$bb_cfg[\'tracker\']</b> i config.php)';
-
 $lang['OFF_TRACKER'] = 'Inaktivera tracker';
 $lang['OFF_REASON'] = 'Inaktivera anledning';
 $lang['OFF_REASON_EXPL'] = 'detta meddelande kommer att skickas till kunden när tracker är funktionshindrade';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Reparation Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Redigera jobb';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Lägg till jobb';
 $lang['CRON_SCRIPT_EXPL'] = 'namnet på skriptet från "includes/cron/jobb/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Välj start',
     'hourly' => 'tim',
     'daily' => 'dagligen',
     'weekly' => 'vecka',
     'monthly' => 'månad',
     'interval' => 'intervall'
-);
+];
 $lang['NOSELECT'] = 'Välj';
 $lang['RUN_DAY'] = 'Kör dag';
 $lang['RUN_DAY_EXPL'] = 'den dag då detta jobb springa';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Meddelandet har skickats till alla som laddat ner de
 $lang['CALLSEED_MSG_SPAM'] = 'Begäran har redan varit en gång, att du har skickat (och Förmodligen inte du)<br /><br />The nästa tillfälle att skicka en begäran om att <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Ämne inte behöver hjälp (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Ämne:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Ämne:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Ämne:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Användare:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Användare:<br /> <b>ban</b>',
     'adm_user_unban' => 'Användare:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alla åtgärder';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Åtgärder Logga in: Sök alternativ';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Skriv en kommentar';
 $lang['MC_FAQ'] = 'Text kommer att visas under denna meddelande';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s i ditt meddelande";
 $lang['MC_COMMENT_PM_MSG'] = "Hej, [b]%s[/b]\nModerator kvar i ditt meddelande [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Radera kommentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentar från %s',
         'type' => 'Kommentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Information från %s',
         'type' => 'Information',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Varning från %s',
         'type' => 'Varning',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Överträdelse från %s',
         'type' => 'Kränkning',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Hantera sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Release med hash %s inte hittas';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Texten på den här sidan är redigerad på: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Den här raden kan endast se administratörer.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På den här sidan kan du ange texten i de grundläggande reglerna för resursen visas för användare.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inaktiva användare i 30 dagar',
     1 => 'inaktiva användare för 90 dagar',
     2 => 'medium storlek distributioner på tracker (många megabyte)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'hur många händer där som sådd mer än 5 frön',
     6 => 'hur många av oss uppladdare (de som fyllt minst 1 hand)',
     7 => 'hur många uppladdare under de senaste 30 dagarna',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Enkät aktiverad';
 $lang['NEW_POLL_END'] = 'Omröstning avslutad';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Ogiltig fil typ av bild';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Bildens mått överskrider den högsta tillåtna %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Den uppladdade filen är inte en bild';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Förlängning %s för nedladdningar är inte tillåtna';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'du har överskridit det maximala filstorleken för server',
     UPLOAD_ERR_FORM_SIZE => 'du har överskridit det maximala ladda upp fil-storlek',
     UPLOAD_ERR_PARTIAL => 'filen var delvis hämtade',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'tillfälliga katalogen hittades inte',
     UPLOAD_ERR_CANT_WRITE => 'skriva fel',
     UPLOAD_ERR_EXTENSION => 'ladda upp stoppades av tillägg',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kontrollera att du inte är en robot';

@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Özel Mesaj';
 $lang['NO_NEW_PM'] = 'yeni ileti yok';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('Yeni Mesaj', 'Yeni Mesaj');
+$lang['NEW_PMS_DECLENSION'] = ['Yeni Mesaj', 'Yeni Mesaj'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('okunmamış', 'okunmamış');
+$lang['UNREAD_PMS_DECLENSION'] = ['okunmamış', 'okunmamış'];
 
 $lang['UNREAD_MESSAGE'] = 'Okunmamış ileti';
 $lang['READ_MESSAGE'] = 'Okumak mesaj';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Posta birine yayınlanan bir konuya cevap geld
 
 $lang['BOARD_LANG'] = 'Tahta dil';
 $lang['GENDER'] = 'Cinsiyet';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Bilinmeyen',
     1 => 'Erkek',
     2 => 'Kadın'
-);
+];
 $lang['MODULE_OFF'] = 'Modülü devre dışı bırakılır.';
 
 $lang['BIRTHDAY'] = 'Doğum günü';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Durumu';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Durumu seçin';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Durum seçmediniz.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tüm durumlar';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'işaretli değil',
     TOR_CLOSED => 'kapalı',
     TOR_APPROVED => 'kontrol',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'geçici',
     TOR_PREMOD => 'pre-ılımlılık',
     TOR_REPLENISH => 'doldurmak',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Böyle bir durum yok!';
 $lang['TORRENT_FAILED'] = 'Dağıtım bulunamadı!';
 $lang['TOR_STATUS_DUB'] = 'Dağıtım aynı durum vardır';
@@ -1354,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('cevap', 'cevaplar');
-$lang['DECLENSION']['TIMES'] = array('zaman', 'kere');
+$lang['DECLENSION']['REPLIES'] = ['cevap', 'cevaplar'];
+$lang['DECLENSION']['TIMES'] = ['zaman', 'kere'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('ikinci', 'saniye'),
-    'minutes' => array('dakika', 'dakika'),
-    'hours' => array('saat', 'saat'),
-    'mday' => array('gün', 'gün'),
-    'mon' => array('ay', 'ay'),
-    'year' => array('yıl', 'yıl'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['ikinci', 'saniye'],
+    'minutes' => ['dakika', 'dakika'],
+    'hours' => ['saat', 'saat'],
+    'mday' => ['gün', 'gün'],
+    'mon' => ['ay', 'ay'],
+    'year' => ['yıl', 'yıl'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2261,13 +2261,6 @@ $lang['RETURN_CONFIG'] = '%sReturn için Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigürasyon Başarıyla Güncellendi';
 $lang['SET_DEFAULTS'] = 'Varsayılanları geri yükle';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'İzci';
-$lang['FORUM_CFG_TITLE'] = 'Forum Ayarları';
-$lang['TRACKER_SETTINGS'] = 'İzleyici ayarları';
-
-$lang['CHANGES_DISABLED'] = 'Config.php engelli değişiklikler (bkz <b>$bb_cfg[\'tracker\']</b>)';
-
 $lang['OFF_TRACKER'] = 'Devre dışı bırakmak tracker';
 $lang['OFF_REASON'] = 'Devre dışı bırakma nedeni';
 $lang['OFF_REASON_EXPL'] = 'bu mesaj tracker devre dışı bırakıldığında, istemci gönderilecektir';
@@ -2412,14 +2405,14 @@ $lang['REPAIR_CRON'] = 'Tamir Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'İşi Düzenle';
 $lang['CRON_EDIT_HEAD_ADD'] = 'İş ekleyin';
 $lang['CRON_SCRIPT_EXPL'] = '"komut adı/cron/işleri/içerir"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Başlat',
     'hourly' => 'saat',
     'daily' => 'günlük',
     'weekly' => 'haftalık',
     'monthly' => 'aylık',
     'interval' => 'aralığı'
-);
+];
 $lang['NOSELECT'] = 'Hayır seçin';
 $lang['RUN_DAY'] = 'Gün';
 $lang['RUN_DAY_EXPL'] = 'bu gün bu iş çalıştırmak';
@@ -2546,7 +2539,7 @@ $lang['CALLSEED_MSG_OK'] = 'Mesaj tüm bu sürüm indirilen olanlar gönderildi'
 $lang['CALLSEED_MSG_SPAM'] = 'İsteği zaten bir kez başarıyla <br /><br />The değil (Muhtemelen)bir sonraki fırsat <b>%s</b> olmak için bir istek göndermek için gönderildi.';
 $lang['CALLSEED_HAVE_SEED'] = 'Konu (<b>Seeders:</b> %d)yardım gerektirmez';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Konu:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Konu:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Konu:<br /> <b>closed</b>',
@@ -2561,7 +2554,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Kullanıcı:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Kullanıcı:<br /> <b>ban</b>',
     'adm_user_unban' => 'Kullanıcı:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Tüm eylemler';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Eylemler Arama seçeneklerini Günlüğü: ';
@@ -2702,28 +2695,28 @@ $lang['MC_COMMENT_PM_SUBJECT'] = "Mesajında %s";
 $lang['MC_COMMENT_PM_MSG'] = "N[/quote] mesajında %s [url=sol]Merhaba, [b]%s[/b]
 Moderator [b]%s[/b][/url][quote]
 %s\\";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Sil yorum',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => '%s yorum',
         'type' => 'Yorum',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '%s bilgileri',
         'type' => 'Bilgi',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '%s uyarı',
         'type' => 'Uyarı',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '%s gelen ihlali',
         'type' => 'İhlali',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Site haritası';
 $lang['SITEMAP_ADMIN'] = 'Site yönetmek';
@@ -2764,7 +2757,7 @@ $lang['HASH_NOT_FOUND'] = 'Karma %s değilim serbest bulundu';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Bu sayfanın metni şurada düzenlenir: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu satır sadece yöneticileri görebilir.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu sayfada, kaynağın Temel Kurallar metni kullanıcılar için görüntülenir belirtebilirsiniz.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '30 gün aktif olmayan kullanıcılar',
     1 => '90 gün boyunca aktif olmayan kullanıcılar',
     2 => '(kaç megabayt)izleyicideki orta boy dağılımları',
@@ -2773,7 +2766,7 @@ $lang['TR_STATS'] = array(
     5 => '5 Ekim daha fazla tohum birçok eller nasıl',
     6 => 'en az 1 El dolduran bizi yükleyiciler kaç kişi (o)',
     7 => 'birçok son 30 gün içinde yükleyiciler nasıl',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Anket etkin';
 $lang['NEW_POLL_END'] = 'Anket tamamlandı';
@@ -2803,7 +2796,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Görüntü geçersiz dosya türü';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Resim boyutları izin verilen maksimum %sx%s px aşmayacak';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Yüklenen dosya bir resim değil';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'İndirme için %s uzatamazsınız';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'sunucu için en büyük dosya boyutunu aştınız',
     UPLOAD_ERR_FORM_SIZE => 'maksimum dosya boyutunu aştınız',
     UPLOAD_ERR_PARTIAL => 'dosya kısmen indirilmiş',
@@ -2811,7 +2804,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'geçici dizin bulunamadı',
     UPLOAD_ERR_CANT_WRITE => 'yazma hatası',
     UPLOAD_ERR_EXTENSION => 'yükleme uzantısı tarafından durduruldu',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Bir robot olmadığını kontrol edin';

@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = '私人信息';
 $lang['NO_NEW_PM'] = '没有新的消息';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('新消息', '新消息');
+$lang['NEW_PMS_DECLENSION'] = ['新消息', '新消息'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('未读', '未读');
+$lang['UNREAD_PMS_DECLENSION'] = ['未读', '未读'];
 
 $lang['UNREAD_MESSAGE'] = '未读消息';
 $lang['READ_MESSAGE'] = '读消息';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = '发送电子邮件时，有人答复的一个�
 
 $lang['BOARD_LANG'] = '董事会的语言';
 $lang['GENDER'] = '性别问题';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => '未知',
     1 => '男性',
     2 => '女性'
-);
+];
 $lang['MODULE_OFF'] = '模块是残疾人!';
 
 $lang['BIRTHDAY'] = '生日';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = '状态';
 $lang['TOR_STATUS_SELECT_ACTION'] = '选择状况';
 $lang['TOR_STATUS_NOT_SELECT'] = '你没有选择地位。';
 $lang['TOR_STATUS_SELECT_ALL'] = '所有的状态';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => '不检查',
     TOR_CLOSED => '关闭',
     TOR_APPROVED => '检查',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => '临时',
     TOR_PREMOD => '预先审核',
     TOR_REPLENISH => '补充',
-);
+];
 $lang['TOR_STATUS_FAILED'] = '这种状况不存在！';
 $lang['TORRENT_FAILED'] = '分布没有被发现的！';
 $lang['TOR_STATUS_DUB'] = '分配具有相同的状态';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('回复', '答复');
-$lang['DECLENSION']['TIMES'] = array('时间', '时间');
+$lang['DECLENSION']['REPLIES'] = ['回复', '答复'];
+$lang['DECLENSION']['TIMES'] = ['时间', '时间'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('第二', '几秒钟'),
-    'minutes' => array('钟', '分钟'),
-    'hours' => array('小时', '小时'),
-    'mday' => array('一天', '天'),
-    'mon' => array('一个月', '几个月'),
-    'year' => array('年', '年'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['第二', '几秒钟'],
+    'minutes' => ['钟', '分钟'],
+    'hours' => ['小时', '小时'],
+    'mday' => ['一天', '天'],
+    'mon' => ['一个月', '几个月'],
+    'year' => ['年', '年'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn到Configuration%s';
 $lang['CONFIG_UPD'] = '配置更成功';
 $lang['SET_DEFAULTS'] = '恢复默';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = '跟踪器';
-$lang['FORUM_CFG_TITLE'] = '论坛设置';
-$lang['TRACKER_SETTINGS'] = '跟踪设置';
-
-$lang['CHANGES_DISABLED'] = '变化无障碍(见<b>$bb_cfg[\'tracker\']</b>在config.php)';
-
 $lang['OFF_TRACKER'] = '禁止跟踪器';
 $lang['OFF_REASON'] = '禁止的原因';
 $lang['OFF_REASON_EXPL'] = '这个消息会被发送到客户当跟踪器已禁用';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = '修复计划';
 $lang['CRON_EDIT_HEAD_EDIT'] = '编辑工作';
 $lang['CRON_EDIT_HEAD_ADD'] = '增加的工作';
 $lang['CRON_SCRIPT_EXPL'] = '名称的脚本"包括/计划/工作/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo;选择开始',
     'hourly' => '每小时',
     'daily' => '每日',
     'weekly' => '每周',
     'monthly' => '每月',
     'interval' => '时间间隔'
-);
+];
 $lang['NOSELECT'] = '没有选择';
 $lang['RUN_DAY'] = '运行一天';
 $lang['RUN_DAY_EXPL'] = '一天时这项工作运行';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = '信息已经发送到所有这些人释放，下载�
 $lang['CALLSEED_MSG_SPAM'] = '请求已经被一旦成功地发(可能不是你)<br /><br />The下次有机会发送请求被<b>%s</b>的。';
 $lang['CALLSEED_HAVE_SEED'] = '主题不需要帮助(<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => '主题：<br /> <b>deleted</b>',
     'mod_topic_move' => '主题：<br /> <b>moved</b>',
     'mod_topic_lock' => '主题：<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => '用户：<br /> <b>deleted</b>',
     'adm_user_ban' => '用户：<br /> <b>ban</b>',
     'adm_user_unban' => '用户：<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = '所有动作';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = '动作记录：搜索选项';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = '类型的评论';
 $lang['MC_FAQ'] = '输入的文本将会显示在这个消息';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s在你的消息";
 $lang['MC_COMMENT_PM_MSG'] = "你好，[b]%s[/b]\nModerator留在你的消息[url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => '删除的评论',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => '评%s',
         'type' => '评论',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '信息从%s',
         'type' => '的信息',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '警告%s',
         'type' => '警告',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '违反自%s',
         'type' => '违反',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = '网站地图';
 $lang['SITEMAP_ADMIN'] = '管理网站地图';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = '释放与哈希%s找不到';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]本頁文字編輯於：[url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]。這一行只能看到管理員。[/align]';
 $lang['TERMS_EXPLAIN'] = '在这一页面，可以指定的案文的基本规则的资源显示用户使用。';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '不活动的用户在30天',
     1 => '不活动的用户的90天',
     2 => '中等大小的分布上的跟踪器的(许多兆字节)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => '多少手其中，播种的超过5种子',
     6 => '我们中有多少上传者(的那些人充满了至少1手)',
     7 => '有多少上传过去30天',
-);
+];
 
 $lang['NEW_POLL_START'] = '调查启用';
 $lang['NEW_POLL_END'] = '调查完成';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = '无效的文件种类型的图像';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = '图像的尺寸超过最大允许%sx%spx';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = '上载的文件不是一个图像';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = '扩展%s下载的是不允许的';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => '你已经超过了最大的文件大小的服务器',
     UPLOAD_ERR_FORM_SIZE => '你已经超过了最大的文件上载大小',
     UPLOAD_ERR_PARTIAL => '该文件部分下载的',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => '临时目录中找不到',
     UPLOAD_ERR_CANT_WRITE => '写错误',
     UPLOAD_ERR_EXTENSION => '停止上传的延伸',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = '检查你是不是机器人';

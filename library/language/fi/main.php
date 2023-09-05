@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Yksityisviestit';
 $lang['NO_NEW_PM'] = 'ei uusia viestejä';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('uusi viesti', 'uusia viestejä');
+$lang['NEW_PMS_DECLENSION'] = ['uusi viesti', 'uusia viestejä'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('lukematon', 'lukematon');
+$lang['UNREAD_PMS_DECLENSION'] = ['lukematon', 'lukematon'];
 
 $lang['UNREAD_MESSAGE'] = 'Lukematon viesti';
 $lang['READ_MESSAGE'] = 'Lue viesti';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Lähettää sähköpostia kun joku vastaa aihe
 
 $lang['BOARD_LANG'] = 'Hallitus kieli';
 $lang['GENDER'] = 'Sukupuolten';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Tuntematon',
     1 => 'Mies',
     2 => 'Nainen'
-);
+];
 $lang['MODULE_OFF'] = 'Moduuli on poistettu käytöstä!';
 
 $lang['BIRTHDAY'] = 'Syntymäpäivä';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Tila';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Valitse tila';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Et ole valinnut tilan.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Kaikki statukset';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ei tarkastettu',
     TOR_CLOSED => 'suljettu',
     TOR_APPROVED => 'tarkastetaan',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'väliaikainen',
     TOR_PREMOD => 'pre-maltillisesti',
     TOR_REPLENISH => 'täydentää',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tällainen asema ei ole olemassa!';
 $lang['TORRENT_FAILED'] = 'Jakelu ei löytynyt!';
 $lang['TOR_STATUS_DUB'] = 'Jakelu on sama asema';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('vastaus', 'vastaukset');
-$lang['DECLENSION']['TIMES'] = array('aika', 'kertaa');
+$lang['DECLENSION']['REPLIES'] = ['vastaus', 'vastaukset'];
+$lang['DECLENSION']['TIMES'] = ['aika', 'kertaa'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('toinen', 'sekuntia'),
-    'minutes' => array('minuutin', 'minuuttia'),
-    'hours' => array('tunti', 'tuntia'),
-    'mday' => array('päivä', 'päivää'),
-    'mon' => array('kuukausi', 'kuukautta'),
-    'year' => array('vuonna', 'vuotta'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['toinen', 'sekuntia'],
+    'minutes' => ['minuutin', 'minuuttia'],
+    'hours' => ['tunti', 'tuntia'],
+    'mday' => ['päivä', 'päivää'],
+    'mon' => ['kuukausi', 'kuukautta'],
+    'year' => ['vuonna', 'vuotta'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn että Configuration%s';
 $lang['CONFIG_UPD'] = 'Kokoonpano Päivitetty Onnistuneesti';
 $lang['SET_DEFAULTS'] = 'Palauta oletukset';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Foorumin asetuksia';
-$lang['TRACKER_SETTINGS'] = 'Tracker asetukset';
-
-$lang['CHANGES_DISABLED'] = 'Muutokset käytöstä (ks. <b>$bb_cfg[\'tracker\']</b> vuonna config.php)';
-
 $lang['OFF_TRACKER'] = 'Poistaa tracker';
 $lang['OFF_REASON'] = 'Poistaa syy';
 $lang['OFF_REASON_EXPL'] = 'tämä viesti lähetetään asiakkaalle, kun tracker on pois käytöstä';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Korjaus Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Muokkaa työtä';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Lisää työtä';
 $lang['CRON_SCRIPT_EXPL'] = 'nimen kirjoitus "sisältää/cron/työpaikat/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Valitse käynnistä',
     'hourly' => 'tunneittain',
     'daily' => 'päivittäin',
     'weekly' => 'viikoittain',
     'monthly' => 'kuukausittain',
     'interval' => 'väli'
-);
+];
 $lang['NOSELECT'] = 'Ei valitse';
 $lang['RUN_DAY'] = 'Ajaa päivä';
 $lang['RUN_DAY_EXPL'] = 'päivä, jolloin tämä työ ajaa';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Viesti on lähetetty kaikille niille, jotka ladata t
 $lang['CALLSEED_MSG_SPAM'] = 'Pyyntö on jo kerran lähetetty onnistuneesti (Luultavasti ei)<br /><br />The seuraava tilaisuus lähettää pyynnön olla <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Aihe ei vaadi apua (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Aihe:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Aihe:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Aihe:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Käyttäjä:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Käyttäjä:<br /> <b>ban</b>',
     'adm_user_unban' => 'Käyttäjä:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Kaikki toimet';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Toimet Log: Etsi vaihtoehtoja';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Kirjoita kommentti';
 $lang['MC_FAQ'] = 'Syötetty teksti näytetään alla tämä viesti';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s viestisi";
 $lang['MC_COMMENT_PM_MSG'] = "Hei, [b]%s[/b]\nModerator jättää viestisi [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Poista kommentti',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentti %s',
         'type' => 'Kommentti',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Tietoja %s',
         'type' => 'Tiedot',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Varoitus %s',
         'type' => 'Varoitus',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Rikkomuksesta %s',
         'type' => 'Vastoin',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sivukartta';
 $lang['SITEMAP_ADMIN'] = 'Hallita sivukartta';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Julkaisu hash %s ei löytynyt';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Tämän sivun tekstiä on muokattu osoitteessa [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Tämä rivi näkee vain järjestelmänvalvojat.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Tällä sivulla, voit määrittää tekstin perussäännöt resurssi näkyy käyttäjille.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'aktiivisia käyttäjiä 30 päivää',
     1 => 'aktiivisia käyttäjiä 90 päivää',
     2 => 'keskikokoinen jakaumat tracker (useita megatavuja)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'kuinka monta kättä missä se kylvö yli 5 siemenet',
     6 => 'kuinka moni meistä lähettäjät (ne, jotka täyttivät vähintään 1 käsi)',
     7 => 'kuinka monta lähettäjät viimeisten 30 päivää',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Kysely käytössä';
 $lang['NEW_POLL_END'] = 'Kysely täytetty';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Virheellinen tiedostotyyppi kuva';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Kuvan mitat ylittää suurimman sallitun %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Ladattu tiedosto ei ole kuva';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Laajennus %s lataukset ei ole sallittua';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'olet ylittänyt maksimi tiedostokoko server',
     UPLOAD_ERR_FORM_SIZE => 'olet ylittänyt palvelimeen ladattavan tiedoston enimmäiskoko',
     UPLOAD_ERR_PARTIAL => 'tiedosto oli osittain ladattu',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'väliaikaista hakemistoa ei löytynyt',
     UPLOAD_ERR_CANT_WRITE => 'kirjoittaa virhe',
     UPLOAD_ERR_EXTENSION => 'lataa pysäytti laajennus',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Tarkista, että et ole robotti';

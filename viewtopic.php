@@ -12,10 +12,10 @@ define('BB_SCRIPT', 'topic');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-$datastore->enqueue(array(
+$datastore->enqueue([
     'ranks',
-    'cat_forums',
-));
+    'cat_forums'
+]);
 
 $page_cfg['load_tpl_vars'] = [
     'post_buttons',
@@ -119,13 +119,11 @@ if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
     if (IS_ADMIN) {
-        $datastore->enqueue(array('viewtopic_forum_select'));
+        $datastore->enqueue(['viewtopic_forum_select']);
     }
 }
 if ($topic_attachment) {
-    $datastore->enqueue(array(
-        'attach_extensions',
-    ));
+    $datastore->enqueue(['attach_extensions']);
 }
 
 set_die_append_msg($forum_id);
@@ -202,9 +200,7 @@ if ($moderation) {
         $not_auth_forums_csv = $user->get_not_auth_forums(AUTH_VIEW);
         $forum_select_html = get_forum_select(explode(',', $not_auth_forums_csv), 'new_forum_id');
     }
-    $template->assign_vars(array(
-        'S_FORUM_SELECT' => $forum_select_html,
-    ));
+    $template->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
 if (!$forums = $datastore->get('cat_forums')) {
@@ -212,12 +208,12 @@ if (!$forums = $datastore->get('cat_forums')) {
     $forums = $datastore->get('cat_forums');
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
     'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
     'PARENT_FORUM_HREF' => ($parent_id = $t_data['forum_parent']) ? FORUM_URL . $parent_id : '',
     'PARENT_FORUM_NAME' => ($parent_id = $t_data['forum_parent']) ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
-));
+]);
 unset($forums);
 $datastore->rm('cat_forums');
 
@@ -386,7 +382,7 @@ $reply_img = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status']
 $reply_alt = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
 
 // Set 'body' template for attach_mod
-$template->set_filenames(array('body' => 'viewtopic.tpl'));
+$template->set_filenames(['body' => 'viewtopic.tpl']);
 
 //
 // User authorisation levels output
@@ -442,7 +438,7 @@ $pg_url .= ($posts_per_page != $bb_cfg['posts_per_page']) ? "&amp;ppp=$posts_per
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
 // Selects
-$sel_previous_days = array(
+$sel_previous_days = [
     0 => $lang['ALL_POSTS'],
     1 => $lang['1_DAY'],
     7 => $lang['7_DAYS'],
@@ -450,13 +446,13 @@ $sel_previous_days = array(
     30 => $lang['1_MONTH'],
     90 => $lang['3_MONTHS'],
     180 => $lang['6_MONTHS'],
-    364 => $lang['1_YEAR'],
-);
+    364 => $lang['1_YEAR']
+];
 
-$sel_post_order_ary = array(
+$sel_post_order_ary = [
     $lang['OLDEST_FIRST'] => 'asc',
-    $lang['NEWEST_FIRST'] => 'desc',
-);
+    $lang['NEWEST_FIRST'] => 'desc'
+];
 
 $topic_has_poll = ($t_data['topic_vote'] && !IS_GUEST);
 $poll_time_expired = ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days'] * 86400);
@@ -469,7 +465,7 @@ $page_title = ((int)($start / $posts_per_page) === 0) ? $topic_title :
 //
 // Send vars to template
 //
-$template->assign_vars(array(
+$template->assign_vars([
     'PAGE_URL' => $pg_url,
     'PAGE_URL_PPP' => url_arg($pg_url, 'ppp', null),
     'PAGE_START' => $start,
@@ -521,15 +517,15 @@ $template->assign_vars(array(
     'POLL_IS_EDITABLE' => (!$poll_time_expired),
     'POLL_IS_FINISHED' => ($t_data['topic_vote'] == POLL_FINISHED),
     'CAN_MANAGE_POLL' => $can_manage_poll,
-    'CAN_ADD_POLL' => $can_add_poll,
-));
+    'CAN_ADD_POLL' => $can_add_poll
+]);
 
 // Does this topic contain DL-List?
-$template->assign_vars(array(
+$template->assign_vars([
     'SHOW_TOR_ACT' => false,
     'PEERS_FULL_LINK' => false,
     'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
-));
+]);
 require INC_DIR . '/torrent_show_dl_list.php';
 
 if ($topic_attachment) {
@@ -552,14 +548,12 @@ if ($topic_has_poll) {
     $poll_votes_js = \TorrentPier\Legacy\Poll::get_poll_data_items_js($topic_id);
 
     if (!$poll_votes_js) {
-        $template->assign_vars(array(
-            'TOPIC_HAS_POLL' => false,
-        ));
+        $template->assign_vars(['TOPIC_HAS_POLL' => false]);
     } else {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::poll_is_active($t_data),
-            'POLL_VOTES_JS' => $poll_votes_js,
-        ));
+            'POLL_VOTES_JS' => $poll_votes_js
+        ]);
     }
 }
 
@@ -577,7 +571,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $post_id = $postrow[$i]['post_id'];
     $mc_type = $postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
-    $mc_user_id = profile_url(array('username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']));
+    $mc_user_id = profile_url(['username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']]);
 
     $rg_id = ($postrow[$i]['poster_rg_id']) ?: 0;
     $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
@@ -691,11 +685,11 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     $is_first_post = ($post_id == $t_data['topic_first_post_id']);
 
-    $template->assign_block_vars('postrow', array(
+    $template->assign_block_vars('postrow', [
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
         'IS_NEWEST' => ($post_id == $newest),
-        'POSTER_NAME' => profile_url(array('username' => $poster, 'user_rank' => $user_rank)),
+        'POSTER_NAME' => profile_url(['username' => $poster, 'user_rank' => $user_rank]),
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
@@ -740,8 +734,8 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_URL' => GROUP_URL . $rg_id,
         'RG_FIND_URL' => 'tracker.php?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
-        'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig'],
-    ));
+        'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig']
+    ]);
 
     if (isset($postrow[$i]['post_attachment']) && $is_auth['auth_download'] && function_exists('display_post_attachments')) {
         display_post_attachments($post_id, $postrow[$i]['post_attachment']);
@@ -759,47 +753,41 @@ for ($i = 0; $i < $total_posts; $i++) {
 set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id, $max_post_time);
 
 if (defined('SPLIT_FORM_START')) {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SPLIT_FORM' => true,
         'START' => $start,
-        'S_SPLIT_ACTION' => "modcp.php",
+        'S_SPLIT_ACTION' => 'modcp.php',
         'POST_FORUM_URL' => POST_FORUM_URL,
         'POST_TOPIC_URL' => POST_TOPIC_URL,
-    ));
+    ]);
 }
 
 // Quick Reply
 if ($bb_cfg['show_quick_reply']) {
     if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED)) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'QUICK_REPLY' => true,
             'QR_POST_ACTION' => POSTING_URL,
             'QR_TOPIC_ID' => $topic_id,
-            'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
-        ));
+            'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : ''
+        ]);
 
         if (!IS_GUEST) {
             $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
-            $template->assign_vars(array(
-                'QR_NOTIFY_CHECKED' => ($notify_user) ? $notify_user && $is_watching_topic : $is_watching_topic,
-            ));
+            $template->assign_vars(['QR_NOTIFY_CHECKED' => ($notify_user) ? ($notify_user && $is_watching_topic) : $is_watching_topic]);
         }
     }
 }
 
 foreach ($is_auth as $name => $is) {
-    $template->assign_vars(array(strtoupper($name) => $is));
+    $template->assign_vars([strtoupper($name) => $is]);
 }
 
-$template->assign_vars(array(
-    'PG_ROW_CLASS' => $pg_row_class ?? 'row1',
-));
+$template->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
 
 if (IS_ADMIN) {
-    $template->assign_vars(array(
-        'U_LOGS' => "admin/admin_log.php?t=$topic_id&amp;db={$bb_cfg['log_days_keep']}",
-    ));
+    $template->assign_vars(['U_LOGS' => "admin/admin_log.php?t=$topic_id&amp;db={$bb_cfg['log_days_keep']}"]);
 }
 
 print_page('viewtopic.tpl');

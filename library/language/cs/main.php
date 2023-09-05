@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Soukromé Zprávy';
 $lang['NO_NEW_PM'] = 'žádné nové zprávy';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nová zpráva', 'nové zprávy');
+$lang['NEW_PMS_DECLENSION'] = ['nová zpráva', 'nové zprávy'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('nepřečtené', 'nepřečtené');
+$lang['UNREAD_PMS_DECLENSION'] = ['nepřečtené', 'nepřečtené'];
 
 $lang['UNREAD_MESSAGE'] = 'Nepřečtené zprávy';
 $lang['READ_MESSAGE'] = 'Číst zprávu';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Odešle e-mail když někdo odpoví na téma, 
 
 $lang['BOARD_LANG'] = 'Rada jazyk';
 $lang['GENDER'] = 'Pohlaví';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Neznámý',
     1 => 'Muž',
     2 => 'Žena'
-);
+];
 $lang['MODULE_OFF'] = 'Modul je zakázáno!';
 
 $lang['BIRTHDAY'] = 'Narozeniny';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Stav';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Vyberte stav';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Nemáte-li stav.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Všechny stavy';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'není kontrolována',
     TOR_CLOSED => 'zavřeno',
     TOR_APPROVED => 'zkontroloval',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'dočasné',
     TOR_PREMOD => 'pre-moderování',
     TOR_REPLENISH => 'doplnit',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Takový stav neexistuje!';
 $lang['TORRENT_FAILED'] = 'Distribuce nebyla nalezena!';
 $lang['TOR_STATUS_DUB'] = 'Distribuce má stejný status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('odpověď', 'odpovědi');
-$lang['DECLENSION']['TIMES'] = array('čas', 'časy');
+$lang['DECLENSION']['REPLIES'] = ['odpověď', 'odpovědi'];
+$lang['DECLENSION']['TIMES'] = ['čas', 'časy'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('druhý', 'sekund'),
-    'minutes' => array('minutu', 'minut'),
-    'hours' => array('hodinu', 'hodin'),
-    'mday' => array('den', 'dny'),
-    'mon' => array('měsíc', 'měsíců'),
-    'year' => array('rok', 'let'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['druhý', 'sekund'],
+    'minutes' => ['minutu', 'minut'],
+    'hours' => ['hodinu', 'hodin'],
+    'mday' => ['den', 'dny'],
+    'mon' => ['měsíc', 'měsíců'],
+    'year' => ['rok', 'let'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn na Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurace Úspěšně Aktualizován';
 $lang['SET_DEFAULTS'] = 'Obnovit výchozí nastavení';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Nastavení fóra';
-$lang['TRACKER_SETTINGS'] = 'Tracker nastavení';
-
-$lang['CHANGES_DISABLED'] = 'Změny zakázány (viz <b>$bb_cfg[\'tracker\']</b> v config.php)';
-
 $lang['OFF_TRACKER'] = 'Zakázat tracker';
 $lang['OFF_REASON'] = 'Zakázat důvod';
 $lang['OFF_REASON_EXPL'] = 'tato zpráva bude odeslána na klienta, když tracker je zakázáno';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Opravy Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit práci';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Přidat práci';
 $lang['CRON_SCRIPT_EXPL'] = 'název skriptu z "zahrnuje/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Zvolte start',
     'hourly' => 'hodinové',
     'daily' => 'denní',
     'weekly' => 'týdenní',
     'monthly' => 'měsíční',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Ne, zvolte';
 $lang['RUN_DAY'] = 'Spuštění den';
 $lang['RUN_DAY_EXPL'] = 'den, kdy tuto práci spustit';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Zpráva byla odeslána všem těm, kteří si stáhn
 $lang['CALLSEED_MSG_SPAM'] = 'Žádost již byla jednou úspěšně odeslán (Asi ne tobě)<br /><br />The další možnost odeslat žádost být <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Téma nevyžaduje pomoc (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Téma:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Téma:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Téma:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Uživatel:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Uživatel:<br /> <b>ban</b>',
     'adm_user_unban' => 'Uživatel:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Všechny akce';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Akce Log: možnosti Vyhledávání';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Typ komentář';
 $lang['MC_FAQ'] = 'Zadaný text se zobrazí pod tuto zprávu';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s ve své zprávě";
 $lang['MC_COMMENT_PM_MSG'] = "Dobrý den, [b]%s[/b]\nModerator vlevo ve vaší zprávu [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Odstranit komentář',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentář od %s',
         'type' => 'Komentář',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informace z %s',
         'type' => 'Informace',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Varování od %s',
         'type' => 'Varování',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Porušení od %s',
         'type' => 'Porušení',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Mapa';
 $lang['SITEMAP_ADMIN'] = 'Správa sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Zpráva s hash %s nebyl nalezen';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Text této stránky je upraven na: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Tento řádek vidí pouze správci.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na této stránce můžete zadat text ze základních pravidel, zdroje se zobrazí uživatelům.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'neaktivní uživatelé za 30 dní',
     1 => 'neaktivní uživatele po dobu 90 dnů',
     2 => 'střední velikost distribuce na tracker (mnoho megabajtů)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'jak mnoho rukou, kde to očkování o více než 5 semen',
     6 => 'kolik z nás uploaders (ti, kteří vyplnili alespoň 1 stranu)',
     7 => 'kolik nahráli za posledních 30 dní',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Hlasování povoleno';
 $lang['NEW_POLL_END'] = 'Průzkum dokončen';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Neplatný typ souboru obrazu';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Rozměry obrázku přesahují maximální povolenou %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Nahraný soubor není obrázek';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Rozšíření %s pro stahování není povoleno';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'překročili jste maximální velikost souboru pro server',
     UPLOAD_ERR_FORM_SIZE => 'překročili jste maximální velikost souboru nahrávání',
     UPLOAD_ERR_PARTIAL => 'soubor byl částečně stažen',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'dočasný adresář nebyl nalezen',
     UPLOAD_ERR_CANT_WRITE => 'chyba zápisu',
     UPLOAD_ERR_EXTENSION => 'nahrát zastavil rozšíření',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Zkontrolujte, že nejste robot';

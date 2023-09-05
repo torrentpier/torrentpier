@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Privát Üzenetek';
 $lang['NO_NEW_PM'] = 'nincs új üzenet';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('új üzenet', 'új üzenetek');
+$lang['NEW_PMS_DECLENSION'] = ['új üzenet', 'új üzenetek'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('olvasatlan', 'olvasatlan');
+$lang['UNREAD_PMS_DECLENSION'] = ['olvasatlan', 'olvasatlan'];
 
 $lang['UNREAD_MESSAGE'] = 'Olvasatlan üzenet';
 $lang['READ_MESSAGE'] = 'Olvassa el az üzenetet';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Küld egy e-mailt, ha valaki válaszol egy té
 
 $lang['BOARD_LANG'] = 'Igazgatóság nyelv';
 $lang['GENDER'] = 'A nemek közötti';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Ismeretlen',
     1 => 'Férfi',
     2 => 'Női'
-);
+];
 $lang['MODULE_OFF'] = 'Modul tiltva!';
 
 $lang['BIRTHDAY'] = 'Születésnap';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Állapot';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Válassza állapota';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Ha még nem választott állapot.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Minden állapotok';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nem ellenőriztem',
     TOR_CLOSED => 'zárt',
     TOR_APPROVED => 'ellenőrizni',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'ideiglenes',
     TOR_PREMOD => 'előzetes moderálás',
     TOR_REPLENISH => 'teletölt',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Ilyen állapot nem létezik!';
 $lang['TORRENT_FAILED'] = 'Elosztó nem található!';
 $lang['TOR_STATUS_DUB'] = 'Elrendezése ugyanaz állapota';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('válasz', 'válaszok');
-$lang['DECLENSION']['TIMES'] = array('idő', 'szer');
+$lang['DECLENSION']['REPLIES'] = ['válasz', 'válaszok'];
+$lang['DECLENSION']['TIMES'] = ['idő', 'szer'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('második', 'másodperc'),
-    'minutes' => array('perc', 'perc'),
-    'hours' => array('óra', 'óra'),
-    'mday' => array('nap', 'nap'),
-    'mon' => array('hónap', 'hónap'),
-    'year' => array('év', 'év'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['második', 'másodperc'],
+    'minutes' => ['perc', 'perc'],
+    'hours' => ['óra', 'óra'],
+    'mday' => ['nap', 'nap'],
+    'mon' => ['hónap', 'hónap'],
+    'year' => ['év', 'év'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn, hogy Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurációs Sikeresen Frissítve';
 $lang['SET_DEFAULTS'] = 'Alapértékek visszaállítása';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Fórum beállítások';
-$lang['TRACKER_SETTINGS'] = 'Tracker beállítások';
-
-$lang['CHANGES_DISABLED'] = 'Változások a disabled (lásd a <b>$bb_cfg[\'tracker\']</b> config.php)';
-
 $lang['OFF_TRACKER'] = 'Tiltsa le tracker';
 $lang['OFF_REASON'] = 'A letiltás oka';
 $lang['OFF_REASON_EXPL'] = 'ezt az üzenetet küldi, hogy az ügyfél, amikor a tracker le van tiltva';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Javítás Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Szerkesztői munka';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Add munka';
 $lang['CRON_SCRIPT_EXPL'] = 'nevét a forgatókönyvet a "magában foglalja a/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Válassza a start',
     'hourly' => 'óránként',
     'daily' => 'napi',
     'weekly' => 'heti',
     'monthly' => 'havi',
     'interval' => 'intervallum'
-);
+];
 $lang['NOSELECT'] = 'Válassza ki nem';
 $lang['RUN_DAY'] = 'Futtassa a nap';
 $lang['RUN_DAY_EXPL'] = 'a nap, amikor ezt a munkát futás';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Üzenetet küldött, hogy azok, akik letöltötték 
 $lang['CALLSEED_MSG_SPAM'] = 'Kérésére már egyszer sikeresen elküldött (Valószínűleg nem)<br /><br />The következő lehetőséget, hogy küld egy kérést, hogy <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'A téma nem igényel segítséget (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Téma:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Téma:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Téma:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Felhasználó:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Felhasználó:<br /> <b>ban</b>',
     'adm_user_unban' => 'Felhasználó:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Minden cselekvés';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Akciók Bejelentkezés: Keresési opciók';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Írjon be egy megjegyzést';
 $lang['MC_FAQ'] = 'A beírt szöveg fog megjelenni alatt ezt az üzenetet';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s az üzenetet";
 $lang['MC_COMMENT_PM_MSG'] = "Hello, [b]%s[/b]\nModerator maradt az üzenet a [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Törlés hozzászólás',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Hozzászólás a %s',
         'type' => 'Hozzászólás',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Információ a %s',
         'type' => 'Információ',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Figyelmeztetés %s',
         'type' => 'Figyelmeztetés',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Sérti a %s',
         'type' => 'Megsértése',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Oldaltérkép';
 $lang['SITEMAP_ADMIN'] = 'Kezelése oldaltérkép';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Kiadás hash %s nem található';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Az oldal szövegét a következő címen szerkesztették: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ez a sor csak a rendszergazdákat láthatja.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ezen az oldalon adhatja meg, hogy a szöveg az alapvető szabályokat, az erőforrás jelenik meg a felhasználók számára.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inaktív felhasználók 30 nappal',
     1 => 'inaktív felhasználók 90 napig',
     2 => 'közepes méretű disztribúciók a tracker (több megabájt)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'hány kezét, hogy a vetés több mint 5 magok',
     6 => 'hányan feltöltők (azok, akik tele van legalább 1 kezét)',
     7 => 'hány feltöltők az elmúlt 30 napban',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Közvélemény-kutatás engedélyezett';
 $lang['NEW_POLL_END'] = 'Közvélemény-kutatás befejeződött';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Érvénytelen fájl típusú kép';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Kép méretek haladhatja meg a megengedett maximális %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'A feltöltött fájl nem kép';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Kiterjesztés %s a letöltések nem engedélyezett';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'meghaladta a maximális fájlméretet, a szerver',
     UPLOAD_ERR_FORM_SIZE => 'meghaladta a maximális feltöltési méret',
     UPLOAD_ERR_PARTIAL => 'a fájl részben letöltött',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'ideiglenes könyvtárban nem található',
     UPLOAD_ERR_CANT_WRITE => 'írási hiba',
     UPLOAD_ERR_EXTENSION => 'feltöltés megállt kiterjesztés',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Ellenőrizze, hogy nem egy robot';

@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = '비공개 메시지';
 $lang['NO_NEW_PM'] = '새로운 메시지';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('새로운 메시지', '새로운 메시지');
+$lang['NEW_PMS_DECLENSION'] = ['새로운 메시지', '새로운 메시지'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('읽지 않은', '읽지 않은');
+$lang['UNREAD_PMS_DECLENSION'] = ['읽지 않은', '읽지 않은'];
 
 $lang['UNREAD_MESSAGE'] = '읽지 않은 메시지';
 $lang['READ_MESSAGE'] = '메시지 읽기';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = '전자 메일을 보냅 때 누군가가 답�
 
 $lang['BOARD_LANG'] = 'Board 언어';
 $lang['GENDER'] = '성별';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => '알 수 없음',
     1 => '남성',
     2 => '여성'
-);
+];
 $lang['MODULE_OFF'] = '모듈을 사용할 수 없습니다!';
 
 $lang['BIRTHDAY'] = '생일';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = '상태';
 $lang['TOR_STATUS_SELECT_ACTION'] = '선택 상태';
 $lang['TOR_STATUS_NOT_SELECT'] = '당신이 선택하지 않은 상태입니다.';
 $lang['TOR_STATUS_SELECT_ALL'] = '모든 상태';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => '지 확인',
     TOR_CLOSED => '폐',
     TOR_APPROVED => '검사',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => '임시',
     TOR_PREMOD => 'pre-검토',
     TOR_REPLENISH => '을 보충',
-);
+];
 $lang['TOR_STATUS_FAILED'] = '이러한 상태가 존재하지 않습니다!';
 $lang['TORRENT_FAILED'] = '메일 발견되지 않았다!';
 $lang['TOR_STATUS_DUB'] = '유통은 동일한 상태';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('답변', '답글');
-$lang['DECLENSION']['TIMES'] = array('시간', '시간');
+$lang['DECLENSION']['REPLIES'] = ['답변', '답글'];
+$lang['DECLENSION']['TIMES'] = ['시간', '시간'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('두 번째', '초'),
-    'minutes' => array('분', '분'),
-    'hours' => array('시간', '시간'),
-    'mday' => array('일', '일'),
-    'mon' => array('달', '개월'),
-    'year' => array('년도', '세'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['두 번째', '초'],
+    'minutes' => ['분', '분'],
+    'hours' => ['시간', '시간'],
+    'mday' => ['일', '일'],
+    'mon' => ['달', '개월'],
+    'year' => ['년도', '세'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn 을 Configuration%s';
 $lang['CONFIG_UPD'] = '구성 성공적으로 업데이트';
 $lang['SET_DEFAULTS'] = '기본값 복원';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = '추적';
-$lang['FORUM_CFG_TITLE'] = '포럼 설정';
-$lang['TRACKER_SETTINGS'] = '추적 설정';
-
-$lang['CHANGES_DISABLED'] = '변화(<b>$bb_cfg[\'tracker\']</b> 에 config.php 다)';
-
 $lang['OFF_TRACKER'] = '비활성화 추적자';
 $lang['OFF_REASON'] = '사는 이유';
 $lang['OFF_REASON_EXPL'] = '이 메시지를 보낸 클라이언트에 추가 비활성화';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = '수리 Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = '편집 작업';
 $lang['CRON_EDIT_HEAD_ADD'] = '추가 작업';
 $lang['CRON_SCRIPT_EXPL'] = '스크립트의 이름에"이 포함되어/cron/직업/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; 을 선택합 시작',
     'hourly' => '시간별',
     'daily' => '일일',
     'weekly' => '주',
     'monthly' => '월',
     'interval' => '간격'
-);
+];
 $lang['NOSELECT'] = '아무 선택';
 $lang['RUN_DAY'] = '실행 날';
 $lang['RUN_DAY_EXPL'] = '하루 이 작업 실행';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = '메시지가 전송되었습니다 모든 사람들�
 $lang['CALLSEED_MSG_SPAM'] = '요청을 이미 성공적으로 전송(아마 당신)<br /><br />The 다음을 보낼 수있는 기회를 요청 할 <b>%s</b> 니다.';
 $lang['CALLSEED_HAVE_SEED'] = '되지 않는 항목 도움이 필요하(<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => '주제:<br /> <b>deleted</b>',
     'mod_topic_move' => '주제:<br /> <b>moved</b>',
     'mod_topic_lock' => '주제:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => '사용자:<br /> <b>deleted</b>',
     'adm_user_ban' => '사용자:<br /> <b>ban</b>',
     'adm_user_unban' => '사용자:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = '모든 작업';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = '작업 로그인:검색 옵션';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = '의견 유형';
 $lang['MC_FAQ'] = '입력한 텍스트 아래에 표시됩니다 이 메시지';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s 에서 당신의 메시지";
 $lang['MC_COMMENT_PM_MSG'] = "안녕하세요,[b]%s[/b]\nModerator 왼쪽에서 당신의 메시지[url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => '삭제 댓글',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => '댓글 %s',
         'type' => 'Comment',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '정보서 %s',
         'type' => '정보',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '경고서 %s',
         'type' => '경고',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '반에서 %s',
         'type' => '반',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = '사이트맵';
 $lang['SITEMAP_ADMIN'] = '사이트맵 관리';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = '릴리스와 해시 %s 발견되지 않았';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]이 페이지의 텍스트는 [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]에서 편집됩니다. 이 회선은 관리자만 볼 수 있습니다.[/align]';
 $lang['TERMS_EXPLAIN'] = '이 페이지에서 텍스트를 지정할 수 있습의 기본적인 규칙은 자원의 사용자에게 표시합니다.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '비활성 상태에서 사용자는 30 일',
     1 => '비활성화에 대한 사용자는 90 일',
     2 => '중간 크기의 분포 트래커에서(많은 메가바이트)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => '얼마나 많은 손을 어디는 시드를 5 개 이상의 씨앗',
     6 => '우리가 얼마나 많은 업로더(는 사람들로 가득 적어도 1)',
     7 => '얼마나 많은 업로 지난 30 일',
-);
+];
 
 $lang['NEW_POLL_START'] = '폴 사용';
 $lang['NEW_POLL_END'] = '폴 완료';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = '잘못된 파일 형식의 이미지';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = '이미지 크기를 초과하의 최대 허용 %sx%spx';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = '업로드한 파일이 아닌 이미지';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = '확장 %s 다운로드를 위해 허용되지 않습';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => '당신이 초과의 최대 파일 크기 위한 서버',
     UPLOAD_ERR_FORM_SIZE => '당신이 초과의 최대 파일 업로드 크기',
     UPLOAD_ERR_PARTIAL => '파일이었는 부분적으로 다운로드',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => '임시 디렉터리를 찾을 수 없습니다.',
     UPLOAD_ERR_CANT_WRITE => '기록 오류가 발생했습니다.',
     UPLOAD_ERR_EXTENSION => '업로드 중지에 의해 확장',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = '체크인되지 않는 로봇';
