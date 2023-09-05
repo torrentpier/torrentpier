@@ -34,24 +34,24 @@ $view = (isset($_POST['search']) && $_POST['search']) ? 'attachments' : $view;
 
 // process modes based on view
 if ($view === 'username') {
-    $mode_types_text = array($lang['SORT_USERNAME'], $lang['SORT_ATTACHMENTS'], $lang['SORT_SIZE']);
-    $mode_types = array('username', 'attachments', 'filesize');
+    $mode_types_text = [$lang['SORT_USERNAME'], $lang['SORT_ATTACHMENTS'], $lang['SORT_SIZE']];
+    $mode_types = ['username', 'attachments', 'filesize'];
 
     if (!$mode) {
         $mode = 'attachments';
         $sort_order = 'DESC';
     }
 } elseif ($view === 'attachments') {
-    $mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']);
-    $mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time');
+    $mode_types_text = [$lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']];
+    $mode_types = ['real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time'];
 
     if (!$mode) {
         $mode = 'real_filename';
         $sort_order = 'ASC';
     }
 } elseif ($view === 'search') {
-    $mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']);
-    $mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time');
+    $mode_types_text = [$lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']];
+    $mode_types = ['real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time'];
 
     $sort_order = 'DESC';
 } else {
@@ -112,8 +112,8 @@ if ($view === 'username') {
 }
 
 // Set select fields
-$view_types_text = array($lang['VIEW_STATISTIC'], $lang['VIEW_SEARCH']);
-$view_types = array('stats', 'search');
+$view_types_text = [$lang['VIEW_STATISTIC'], $lang['VIEW_SEARCH']];
+$view_types = ['stats', 'search'];
 
 $select_view = '<select name="view">';
 
@@ -143,7 +143,7 @@ $select_sort_order .= '</select>';
 
 $submit_change = isset($_POST['submit_change']);
 $delete = isset($_POST['delete']);
-$delete_id_list = get_var('delete_id_list', array(0));
+$delete_id_list = get_var('delete_id_list', [0]);
 
 $confirm = isset($_POST['confirm']);
 
@@ -163,22 +163,22 @@ if ($confirm && count($delete_id_list) > 0) {
         $hidden_fields .= '<input type="hidden" name="delete_id_list[]" value="' . $iValue . '" />';
     }
 
-    print_confirmation(array(
+    print_confirmation([
         'FORM_ACTION' => 'admin_attach_cp.php',
         'HIDDEN_FIELDS' => $hidden_fields,
-    ));
+    ]);
 }
 
 // Assign Default Template Vars
-$template->assign_vars(array(
+$template->assign_vars([
     'S_VIEW_SELECT' => $select_view,
     'S_MODE_ACTION' => 'admin_attach_cp.php',
-));
+]);
 
 if ($submit_change && $view === 'attachments') {
-    $attach_change_list = get_var('attach_id_list', array(0));
-    $attach_comment_list = get_var('attach_comment_list', array(''));
-    $attach_download_count_list = get_var('attach_count_list', array(0));
+    $attach_change_list = get_var('attach_id_list', [0]);
+    $attach_comment_list = get_var('attach_comment_list', ['']);
+    $attach_download_count_list = get_var('attach_count_list', [0]);
 
     // Generate correct Change List
     $attachments = [];
@@ -232,7 +232,7 @@ if ($view == 'stats') {
     $row = DB()->fetch_row('SELECT COUNT(DISTINCT user_id_1) AS users FROM ' . BB_ATTACHMENTS . ' WHERE post_id != 0');
     $number_of_users = $row['users'];
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ATTACH_STATISTICS' => true,
         'TOTAL_FILESIZE' => $upload_dir_size,
         'ATTACH_QUOTA' => $attachment_quota,
@@ -241,7 +241,7 @@ if ($view == 'stats') {
         'NUMBER_OF_PMS' => $number_of_pms,
         'NUMBER_OF_TOPICS' => $number_of_topics,
         'NUMBER_OF_USERS' => $number_of_users,
-    ));
+    ]);
 }
 
 // Search
@@ -281,22 +281,22 @@ if ($view === 'search') {
         bb_die($lang['NO_SEARCHABLE_FORUMS']);
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ATTACH_SEARCH' => true,
         'S_FORUM_OPTIONS' => $s_forums,
         'S_CATEGORY_OPTIONS' => $s_categories,
         'S_SORT_OPTIONS' => $select_sort_mode,
         'S_SORT_ORDER' => $select_sort_order,
-    ));
+    ]);
 }
 
 // Username
 if ($view === 'username') {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ATTACH_USER' => true,
         'S_MODE_SELECT' => $select_sort_mode,
         'S_ORDER_SELECT' => $select_sort_order,
-    ));
+    ]);
     $total_rows = 0;
     bb_die('removed');
 }
@@ -308,11 +308,11 @@ if ($view === 'attachments') {
 
     $hidden_fields = '';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ATTACH_ATTACHMENTS' => true,
         'S_MODE_SELECT' => $select_sort_mode,
         'S_ORDER_SELECT' => $select_sort_order,
-    ));
+    ]);
 
     $total_rows = 0;
 
@@ -332,10 +332,10 @@ if ($view === 'attachments') {
 
         $template->assign_block_vars('switch_user_based', []);
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_USER_HIDDEN' => $s_hidden,
             'L_STATISTICS_FOR_USER' => sprintf($lang['STATISTICS_FOR_USER'], $username),
-        ));
+        ]);
 
         $sql = 'SELECT attach_id
 		FROM ' . BB_ATTACHMENTS . '
@@ -439,7 +439,7 @@ if ($view === 'attachments') {
 
             $hidden_field = '<input type="hidden" name="attach_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 
-            $template->assign_block_vars('attachrow', array(
+            $template->assign_block_vars('attachrow', [
                 'ROW_NUMBER' => $i + ($_GET['start'] + 1),
                 'ROW_CLASS' => $row_class,
 
@@ -454,7 +454,7 @@ if ($view === 'attachments') {
                 'S_DELETE_BOX' => $delete_box,
                 'S_HIDDEN' => $hidden_field,
                 'U_VIEW_ATTACHMENT' => BB_ROOT . DL_URL . $attachments[$i]['attach_id'],
-            ));
+            ]);
         }
     }
 

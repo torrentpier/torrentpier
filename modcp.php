@@ -241,7 +241,7 @@ switch ($mode) {
             print_confirmation([
                 'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
                 'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
-                'FORM_ACTION' => "modcp.php",
+                'FORM_ACTION' => 'modcp.php',
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
             ]);
         }
@@ -288,7 +288,7 @@ switch ($mode) {
                 'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
-                'S_MODCP_ACTION' => "modcp.php",
+                'S_MODCP_ACTION' => 'modcp.php',
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ]);
 
