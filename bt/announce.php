@@ -123,6 +123,7 @@ $peer_hash = md5(
 // Start announcer
 require __DIR__ . '/includes/init_tr.php';
 
+// Events
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
 $completed = ($event === 'completed');
@@ -165,7 +166,6 @@ if ($lp_info) {
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
 } else {
-    // Verify if torrent registered on tracker and user authorized
     /**
      * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
      * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
@@ -182,6 +182,7 @@ if ($lp_info) {
 
     $row = DB()->fetch_row($sql);
 
+    // Verify if torrent registered on tracker and user authorized
     if (empty($row['topic_id'])) {
         msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash_sql));
     }
