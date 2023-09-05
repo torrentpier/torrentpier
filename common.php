@@ -361,7 +361,7 @@ if (!defined('IN_TRACKER')) {
         if (!empty($cache_dict)) {
             $output['complete'] = $cache_dict['complete'];
             $output['incomplete'] = $cache_dict['incomplete'];
-            $output['warning message'] = 'Statistics cache will be updated in: ' . round($interval / 60) . ' minutes';
+            $output['warning message'] = 'Next statistics update in: ' . round($interval / 60) . ' minutes';
             $output['peers'] = $cache_dict['peers'];
         }
 

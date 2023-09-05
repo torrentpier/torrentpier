@@ -423,6 +423,7 @@ if (!$output) {
         'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
+        'warning message' => 'Statistics were updated',
         'peers' => $peers
     ];
 
