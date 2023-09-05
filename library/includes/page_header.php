@@ -124,7 +124,7 @@ $template->assign_vars([
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 
     'SITENAME' => $bb_cfg['sitename'],
-    'U_INDEX' => BB_ROOT . "index.php",
+    'U_INDEX' => BB_ROOT . 'index.php',
     'T_INDEX' => sprintf($lang['FORUM_INDEX'], $bb_cfg['sitename']),
 
     'IS_GUEST' => IS_GUEST,

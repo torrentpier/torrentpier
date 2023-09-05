@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 // Is send through board enabled? No, return to index
 if (!$bb_cfg['board_email_form']) {
-    redirect("index.php");
+    redirect('index.php');
 }
 
 set_die_append_msg();

@@ -288,7 +288,7 @@ if (empty($_GET) && empty($_POST)) {
 
         'THIS_USER_ID' => $userdata['user_id'],
         'THIS_USER_NAME' => addslashes($userdata['username']),
-        'SEARCH_ACTION' => "search.php",
+        'SEARCH_ACTION' => 'search.php',
         'U_SEARCH_USER' => "search.php?mode=searchuser&amp;input_name=$poster_name_key",
         'ONLOAD_FOCUS_ID' => 'text_match_input',
 
