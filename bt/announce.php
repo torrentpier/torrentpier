@@ -137,8 +137,7 @@ $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WH
 
 // Completed event
 if ($completed) {
-    $sql = "UPDATE " . BB_BT_TORRENTS . " tor SET tor.complete_count = tor.complete_count + 1 $info_hash_where LIMIT 1";
-    DB()->query($sql);
+    DB()->query("UPDATE " . BB_BT_TORRENTS . " tor SET tor.complete_count = tor.complete_count + 1 $info_hash_where LIMIT 1");
 }
 
 // Get cached peer info from previous announce (last peer info)
