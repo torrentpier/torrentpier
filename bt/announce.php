@@ -363,7 +363,7 @@ $lp_info = [
     'tor_type' => (int)$tor_type,
 ];
 
-$lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
+CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
 
 // Get cached output
 $output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
@@ -419,7 +419,7 @@ if (!$output) {
         'peers' => $peers
     ];
 
-    $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+    CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
 }
 
 // Return data to client

@@ -81,7 +81,7 @@ $output['files'][$info_hash] = [
     'incomplete' => (int)$row['leechers'],
 ];
 
-$peers_list_cached = CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($info_hash_hex), $output, SCRAPE_LIST_EXPIRE);
+CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);
 
 echo \SandFox\Bencode\Bencode::encode($output);
 
