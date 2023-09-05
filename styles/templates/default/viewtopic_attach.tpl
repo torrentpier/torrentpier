@@ -84,7 +84,7 @@
 	</tr>
 	<tr class="row1">
 		<td>{L_DOWNLOADED}:</td>
-		<td>{postrow.attach.tor_not_reged.DOWNLOAD_COUNT} &nbsp;[ <a href="{DL_LIST_HREF}" class="med">{L_SHOW_DL_LIST}</a> ] </td>
+		<td>{postrow.attach.tor_not_reged.DOWNLOAD_COUNT} <!-- IF SHOW_DL_LIST_LINK -->&nbsp;[ <a href="{DL_LIST_HREF}" class="med">{L_SHOW_DL_LIST}</a> ] <!-- ENDIF --></td>
 	</tr>
 	<!-- BEGIN comment -->
 	<tr class="row1 tCenter">
