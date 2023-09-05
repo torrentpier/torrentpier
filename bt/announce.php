@@ -108,20 +108,20 @@ if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip'])
         }
     }
 }
+
 // Check that IP format is valid
 if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
     msg_die("Invalid IP: $ip");
 }
+
 // Convert IP to HEX format
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
-// Peer unique id
-$peer_hash = md5(
-    rtrim($info_hash, ' ') . $passkey . $ip . $port
-);
-
 // Start announcer
 require __DIR__ . '/includes/init_tr.php';
+
+// Peer unique id
+$peer_hash = md5(rtrim($info_hash, ' ') . $passkey . $ip . $port);
 
 // Events
 $seeder = ($left == 0) ? 1 : 0;
