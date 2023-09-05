@@ -182,7 +182,7 @@ if ($lp_info) {
 
     // Verify if torrent registered on tracker and user authorized
     if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash_sql));
+        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
     }
     if (empty($row['user_id'])) {
         msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
