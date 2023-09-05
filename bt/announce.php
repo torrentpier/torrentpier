@@ -181,9 +181,6 @@ if (!CACHE('tr_cache')->used && !$lp_info) {
 }
 
 if ($lp_info) {
-    if (!$stopped) {
-        drop_fast_announce($lp_info);
-    }
 
     $user_id = $lp_info['user_id'];
     $topic_id = $lp_info['topic_id'];
