@@ -69,7 +69,7 @@ $select_sort_order .= '</select>';
 $template->assign_vars([
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
-    'S_MODE_ACTION' => "memberlist.php",
+    'S_MODE_ACTION' => 'memberlist.php',
     'S_USERNAME' => $paginationusername,
 ]);
 
