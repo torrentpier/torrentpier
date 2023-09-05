@@ -375,17 +375,20 @@ if (!$output) {
 
     $seeders = 0;
     $leechers = 0;
+    $complete_count = 0;
 
     if ($bb_cfg['tracker']['scrape']) {
         $row = DB()->fetch_row("
-			SELECT seeders, leechers
-			FROM " . BB_BT_TRACKER_SNAP . "
-			WHERE topic_id = $topic_id
-			LIMIT 1
-		");
+            SELECT tor.complete_count, snap.seeders, snap.leechers
+            FROM " . BB_BT_TORRENTS . " tor
+            LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
+            $info_hash_where
+            LIMIT 1
+        ");
 
         $seeders = $row['seeders'] ?? 0;
         $leechers = $row['leechers'] ?? 0;
+        $complete_count = $row['complete_count'] ?? 0;
     }
 
     $output = [
@@ -393,6 +396,7 @@ if (!$output) {
         'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
+        'downloaded' => (int)$complete_count,
         'warning message' => 'Statistics were updated',
         'peers' => $peers
     ];
