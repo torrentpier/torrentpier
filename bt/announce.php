@@ -136,8 +136,6 @@ if ($lp_info && (!isset($event) || $event !== 'stopped')) {
     if ($lp_cached_peers) {
         drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
     }
-
-    drop_fast_announce($lp_info);
 }
 
 // Functions
