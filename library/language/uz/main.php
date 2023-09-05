@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'xususiy Xabarlar';
 $lang['NO_NEW_PM'] = 'yangi xabarlar';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('yangi xabar', 'yangi xabarlar');
+$lang['NEW_PMS_DECLENSION'] = ['yangi xabar', 'yangi xabarlar'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('o\'qilmagan', 'o\'qilmagan');
+$lang['UNREAD_PMS_DECLENSION'] = ['o\'qilmagan', 'o\'qilmagan'];
 
 $lang['UNREAD_MESSAGE'] = 'o\'qilmagan xabar';
 $lang['READ_MESSAGE'] = 'o\'qing Xabar';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'kimdir sizga tashlashdi bir mavzuga javob elek
 
 $lang['BOARD_LANG'] = 'kengashi til';
 $lang['GENDER'] = 'gender';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'noma\'lum',
     1 => 'erkak',
     2 => 'ayol'
-);
+];
 $lang['MODULE_OFF'] = 'Module o\'chiradi!';
 
 $lang['BIRTHDAY'] = 'tug\'ilgan kun';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'holat';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'tanlang holati';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Siz maqomini tanlangan yo\'q.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'barcha statuslar';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'tekshirib bo\'lmaydi',
     TOR_CLOSED => 'yopiq',
     TOR_APPROVED => 'tekshiriladi',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'vaqtincha',
     TOR_PREMOD => 'pre-o\'zini tutish',
     TOR_REPLENISH => 'to\'ldirish',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Bunday vaziyat mavjud emas!';
 $lang['TORRENT_FAILED'] = 'Tarqatish topilmadi!';
 $lang['TOR_STATUS_DUB'] = 'Tarqatish Shu maqomiga ega';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('javob', 'javoblar');
-$lang['DECLENSION']['TIMES'] = array('vaqt', 'marta');
+$lang['DECLENSION']['REPLIES'] = ['javob', 'javoblar'];
+$lang['DECLENSION']['TIMES'] = ['vaqt', 'marta'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('ikkinchi', 'soniya'),
-    'minutes' => array('daqiqa', 'daqiqa'),
-    'hours' => array('soat', 'soat'),
-    'mday' => array('kun', 'kun'),
-    'mon' => array('oy', 'oy'),
-    'year' => array('yil', 'yil'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['ikkinchi', 'soniya'],
+    'minutes' => ['daqiqa', 'daqiqa'],
+    'hours' => ['soat', 'soat'],
+    'mday' => ['kun', 'kun'],
+    'mon' => ['oy', 'oy'],
+    'year' => ['yil', 'yil'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = 'Configuration%s uchun %sReturn';
 $lang['CONFIG_UPD'] = 'Konfiguratsiya muvaffaqiyatli Yangilangan';
 $lang['SET_DEFAULTS'] = 'Standart sozlamalarni tiklash';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Kuzatishdan';
-$lang['FORUM_CFG_TITLE'] = 'Forum ri';
-$lang['TRACKER_SETTINGS'] = 'Kuzatishdan sozlamalari';
-
-$lang['CHANGES_DISABLED'] = 'O\'zgarishlar o\'chirib (config.php yilda <b>$bb_cfg[\'tracker\']</b> qarang)';
-
 $lang['OFF_TRACKER'] = 'O\'chirish Kuzatishdan';
 $lang['OFF_REASON'] = 'O\'chirish sababi';
 $lang['OFF_REASON_EXPL'] = 'Kuzatishdan o\'chirilgan bo\'lsa, bu xabar mijozga yuboriladi';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Cron ta\'mirlash';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit ish';
 $lang['CRON_EDIT_HEAD_ADD'] = 'ish qo\'shish';
 $lang['CRON_SCRIPT_EXPL'] = 'dan ssenariysi nomi "/ cron / Ish / o\'z ichiga oladi"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; tanlang start',
     'hourly' => 'har soat',
     'daily' => 'kundalik',
     'weekly' => 'haftalik',
     'monthly' => 'oylik',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Hech tanlang';
 $lang['RUN_DAY'] = 'ishga tushirish kun';
 $lang['RUN_DAY_EXPL'] = 'kun, bu ish Run';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Xabar bu ozod yuklab kishilar yuborildi';
 $lang['CALLSEED_MSG_SPAM'] = 'So\'rov allaqachon bir marta muvaffaqiyatli <b>%s</b> bo\'lish uchun so\'rov yuborish (Ehtimol emas, balki siz) <br /><br />The keyingi imkoniyat yuborildi.';
 $lang['CALLSEED_HAVE_SEED'] = 'Mavzu yordam talab qilmaydi (<b>Seeders: </b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Mavzu: <br /> <b>deleted</b>',
     'mod_topic_move' => 'Mavzu: <br /> <b>moved</b>',
     'mod_topic_lock' => 'Mavzu: <br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Foydalanuvchi: <br /> <b>deleted</b>',
     'adm_user_ban' => 'Foydalanuvchi: <br /> <b>ban</b>',
     'adm_user_unban' => 'Foydalanuvchi: <br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'barcha harakatlar';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Harakatlari Kirish: Izlash variantlarini';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Izoh kiritish';
 $lang['MC_FAQ'] = 'Kiritilgan matn, bu xabarni ostida paydo bo\'ladi';
 $lang['MC_COMMENT_PM_SUBJECT'] = "Sizning xabarda %s";
 $lang['MC_COMMENT_PM_MSG'] = "Salom, nModerator \\ [b]%s[/b] xabaringizga qolgan [url = %s] [b]%s[/b][/url][quote] \\ n%s \\ n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Izohni o\'chirish',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => '%s sharh',
         'type' => 'izoh',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '%s ma\'lumotlar',
         'type' => 'Ma\'lumot',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '%s dan Ogohlantirish',
         'type' => 'ogohlantirish',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '%s dan buzilishi',
         'type' => 'buzish',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sayt xaritasi';
 $lang['SITEMAP_ADMIN'] = 'sayt xaritasi boshqarish';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'hash %s topilmadi bilan ozod';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Ushbu sahifa matni tahrirlangan: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu qator faqat ma\'murlarni ko\'rishi mumkin.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ushbu sahifada, siz resurs asosiy qoidalarini matn foydalanuvchilarga ko\'rsatish mumkin.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '30 kun ichida harakatsiz foydalanuvchilar',
     1 => '90 kun harakatsiz foydalanuvchilar',
     2 => 'reyting www.uz o\'rta hajmi taqsimlash (ko\'p megabayt)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'qancha qo\'llari qaerda deb sepib ortiq 5 urug \'',
     6 => 'qancha bizdan Yuklovchilar (kamida 1 qo\'lini to\'ldirib qilganlar)',
     7 => 'qancha Yuklovchilar Oxirgi 30 kun davomida',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Poll yoqilgan';
 $lang['NEW_POLL_END'] = 'Poll yakunlandi';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'tasvir noto\'g\'ri fayl turi';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Tasvir o\'lchamlari maksimal ruxsat etilgan %sx%s px oshmasligi';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Yuklanayotgan fayl tasvir emas';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'yuklamalar uchun Extension %s yo\'l qo\'yilmaydi';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'Agar server uchun maksimal fayl hajmi oshdi',
     UPLOAD_ERR_FORM_SIZE => 'Agar maksimal fayl yuklash hajmi oshdi',
     UPLOAD_ERR_PARTIAL => 'Fayl qisman yuklab edi',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'vaqtinchalik katalog topilmadi',
     UPLOAD_ERR_CANT_WRITE => 'yozish xatosi',
     UPLOAD_ERR_EXTENSION => 'kengaytmasi sabali to\'xtatildi va o\'rnatish',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Agar robot emas tekshiring';

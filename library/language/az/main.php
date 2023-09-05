@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Şəxsi İsmarıc';
 $lang['NO_NEW_PM'] = 'Yeni ismarıc yoxdur';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('yeni mesaj', 'yeni ismarıc');
+$lang['NEW_PMS_DECLENSION'] = ['yeni mesaj', 'yeni ismarıc'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('oxunmamış', 'oxunmamış');
+$lang['UNREAD_PMS_DECLENSION'] = ['oxunmamış', 'oxunmamış'];
 
 $lang['UNREAD_MESSAGE'] = 'Непрочитанное mesaj';
 $lang['READ_MESSAGE'] = 'Məlumatda';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Göndərir zaman e-poçt cavab verən tapılar
 
 $lang['BOARD_LANG'] = 'Dil board';
 $lang['GENDER'] = 'Gender';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Məlum deyil',
     1 => 'Kişi',
     2 => 'Qadın'
-);
+];
 $lang['MODULE_OFF'] = 'Modul qaralar!';
 
 $lang['BIRTHDAY'] = 'Ad günü';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Statusu';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Statusu seçin';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Biz sizi deyil seçilmiş statusu.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Bütün halları';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'heç bir test',
     TOR_CLOSED => 'qapalı',
     TOR_APPROVED => 'test',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'müvəqqəti',
     TOR_PREMOD => 'премодерации',
     TOR_REPLENISH => 'artırmaq',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Belə statusu yoxdur!';
 $lang['TORRENT_FAILED'] = 'Paylanması tapılmadı!';
 $lang['TOR_STATUS_DUB'] = 'Paylanması eyni statusa malikdir';
@@ -1353,17 +1353,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('cavab', 'cavablar');
-$lang['DECLENSION']['TIMES'] = array('vaxt', 'dəfə');
+$lang['DECLENSION']['REPLIES'] = ['cavab', 'cavablar'];
+$lang['DECLENSION']['TIMES'] = ['vaxt', 'dəfə'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('ikinci', 'saniyə'),
-    'minutes' => array('dəqiqə', 'dəqiqə'),
-    'hours' => array('saat', 'saat'),
-    'mday' => array('gün', 'gün'),
-    'mon' => array('ay', 'ay'),
-    'year' => array('yaş', 'yaş'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['ikinci', 'saniyə'],
+    'minutes' => ['dəqiqə', 'dəqiqə'],
+    'hours' => ['saat', 'saat'],
+    'mday' => ['gün', 'gün'],
+    'mon' => ['ay', 'ay'],
+    'year' => ['yaş', 'yaş'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2260,13 +2260,6 @@ $lang['RETURN_CONFIG'] = '%sReturn bu Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiqurasiya Uğurla Yenilənib';
 $lang['SET_DEFAULTS'] = 'Bərpa yetirilməməsi';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Parametrlər forum';
-$lang['TRACKER_SETTINGS'] = 'Parametrlər tracker';
-
-$lang['CHANGES_DISABLED'] = 'Dəyişikliklər əlil (bax <b>$bb_cfg[\'tracker\']</b> bu config.php)';
-
 $lang['OFF_TRACKER'] = 'Aradan tracker';
 $lang['OFF_REASON'] = 'Səbəbi kəsilməsi';
 $lang['OFF_REASON_EXPL'] = 'bu mesajı göndəriləcək müştəriyə zaman tracker qaralar';
@@ -2411,14 +2404,14 @@ $lang['REPAIR_CRON'] = 'Təmir Хрон';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Redaktə tapşırığı';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Əlavə iş';
 $lang['CRON_SCRIPT_EXPL'] = 'adı ssenari "daxildir/хрон/iş yerlərinin/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; başlat seçin',
     'hourly' => 'hourly',
     'daily' => 'gündəlik',
     'weekly' => 'həftəlik',
     'monthly' => 'aylıq',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Heç bir seçim';
 $lang['RUN_DAY'] = 'Axır bir gün';
 $lang['RUN_DAY_EXPL'] = 'həmin gün o, zaman bu işləri yerinə yetirmək';
@@ -2545,7 +2538,7 @@ $lang['CALLSEED_MSG_OK'] = 'Mesaj göndərildi hər kəsə nazil bu azad';
 $lang['CALLSEED_MSG_SPAM'] = 'Sorğu artıq idi, bir dəfə uğurla göndərildi (yəqin ki, siz)<br /><br />The aşağıdakı imkanlar üçün sorğu göndərmək <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Mövzu deyil, yardım lazımdır (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Mövzu:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Mövzu:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Mövzu:<br /> <b>closed</b>',
@@ -2560,7 +2553,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'İstifadəçilər:<br /> <b>deleted</b>',
     'adm_user_ban' => 'İstifadəçilər:<br /> <b>ban</b>',
     'adm_user_unban' => 'İstifadəçilər:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Bütün hərəkətləri';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Fəaliyyət jurnalın: axtarış variantları';
@@ -2700,28 +2693,28 @@ $lang['MC_FAQ'] = 'Sizin daxil etdiyiniz mətn göstərilir altında bu mesajı'
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s sizin bildirir ki,";
 $lang['MC_COMMENT_PM_MSG'] = "Salam,\\[b]%s[/b] nModerator saxlayıb sizin məlumatında ilə [URL=%s]\\[b]%s[/b][/url][quote]
 %s n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Şərh sil',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Şərh %s',
         'type' => 'Şərh',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Məlumat %s',
         'type' => 'Məlumat',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Xəbərdarlıq %s',
         'type' => 'Xəbərdarlıq',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Pozulmasına təcrübəsi %s',
         'type' => 'Pozulması',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Saytın xəritəsi';
 $lang['SITEMAP_ADMIN'] = 'İdarə saytın Xəritəsi';
@@ -2762,7 +2755,7 @@ $lang['HASH_NOT_FOUND'] = 'Məsələ ilə hash %s tapılmadı';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Bu səhifənin mətni burada redaktə olunub: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu xətt yalnız idarəçiləri görə bilər.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu səhifədə verə bilərsiniz mətn əsas qaydaları resurs göstərilir istifadəçilər üçün.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'passiv istifadəçiləri 30 gün müddətində',
     1 => 'неактивных istifadəçilər 90 gün ərzində',
     2 => 'paylanması orta boy azn tracker (çox megabayt)',
@@ -2771,7 +2764,7 @@ $lang['TR_STATS'] = array(
     5 => 'nə qədər əlləri ki, əkin daha 5 toxum',
     6 => 'necə bizə çox аплоадеров (edənlər dolu ən azı 1 qol)',
     7 => 'nə qədər аплоадеров son 30 gün',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Sorğu aktivdir';
 $lang['NEW_POLL_END'] = 'Sorğu başa çatıb';
@@ -2801,7 +2794,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Yolverilməz fayl Növü şəkillər';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Ölçüləri şəkillər çoxdur maksimum yol verilən %sx%s военторга';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Yüklədiyiniz fayl deyil şəkil';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Genişləndirilməsi %s yükləmək üçün yol verilmir';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'siz ötüb maksimum fayl ölçüsü server',
     UPLOAD_ERR_FORM_SIZE => 'siz ötüb maksimum ölçüsü daşıyanlar fayl',
     UPLOAD_ERR_PARTIAL => 'fayl idi qismən dolu',
@@ -2809,7 +2802,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'müvəqqəti kataloq tapılmadı',
     UPLOAD_ERR_CANT_WRITE => 'səhv yazmaq',
     UPLOAD_ERR_EXTENSION => 'yüklə dayandırdıq genişləndirilməsi',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Əmin olun ki, Siz robot deyil';

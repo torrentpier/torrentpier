@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = '個人メール';
 $lang['NO_NEW_PM'] = '新しいメッセージ';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('新しいメッセージ', '新しいメッセージ');
+$lang['NEW_PMS_DECLENSION'] = ['新しいメッセージ', '新しいメッセージ'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('未読', '未読');
+$lang['UNREAD_PMS_DECLENSION'] = ['未読', '未読'];
 
 $lang['UNREAD_MESSAGE'] = '未読メッセージ';
 $lang['READ_MESSAGE'] = '読メッセージ';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = '送信メールはこの人の回答のマー�
 
 $lang['BOARD_LANG'] = 'ボードの言語';
 $lang['GENDER'] = '男女別';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => '不明',
     1 => '男性',
     2 => '女性'
-);
+];
 $lang['MODULE_OFF'] = 'モジュールを無効にす！';
 
 $lang['BIRTHDAY'] = '誕生日';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = '状況';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'ステータスステータスを選択し';
 $lang['TOR_STATUS_NOT_SELECT'] = 'い選択されていない状態にします。';
 $lang['TOR_STATUS_SELECT_ALL'] = 'すべてのステータス';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'チェック',
     TOR_CLOSED => '閉鎖',
     TOR_APPROVED => '確認',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => '仮設',
     TOR_PREMOD => '前節度',
     TOR_REPLENISH => '補給',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'そのような状況が存在しない!';
 $lang['TORRENT_FAILED'] = '分布は見つかりませんでしたよ！';
 $lang['TOR_STATUS_DUB'] = '配布と同じ状況';
@@ -1354,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('返信', '回答');
-$lang['DECLENSION']['TIMES'] = array('時間', '倍');
+$lang['DECLENSION']['REPLIES'] = ['返信', '回答'];
+$lang['DECLENSION']['TIMES'] = ['時間', '倍'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('第', '秒'),
-    'minutes' => array('分', '分'),
-    'hours' => array('時間', '時間'),
-    'mday' => array('日', '日'),
-    'mon' => array('月', 'ヶ月'),
-    'year' => array('年', '年'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['第', '秒'],
+    'minutes' => ['分', '分'],
+    'hours' => ['時間', '時間'],
+    'mday' => ['日', '日'],
+    'mon' => ['月', 'ヶ月'],
+    'year' => ['年', '年'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2261,13 +2261,6 @@ $lang['RETURN_CONFIG'] = '%sReturnにConfiguration%s';
 $lang['CONFIG_UPD'] = '構成に成功し';
 $lang['SET_DEFAULTS'] = 'デフォルトの復元';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'トラッカー';
-$lang['FORUM_CFG_TITLE'] = 'フォーラムの設定';
-$lang['TRACKER_SETTINGS'] = 'トラッカーの設定';
-
-$lang['CHANGES_DISABLED'] = 'の変更無効（<b>$bb_cfg[\'tracker\']</b>にconfig.php)';
-
 $lang['OFF_TRACKER'] = 'トラッカーを無効に';
 $lang['OFF_REASON'] = '無効理由';
 $lang['OFF_REASON_EXPL'] = 'このメッセージを送信時にクライアントのトラッカーが無効にな';
@@ -2412,14 +2405,14 @@ $lang['REPAIR_CRON'] = '修理Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = '編集の仕事';
 $lang['CRON_EDIT_HEAD_ADD'] = '仕事に追加';
 $lang['CRON_SCRIPT_EXPL'] = '名前のスクリプトから"含/cron/仕事/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo;選',
     'hourly' => '時間',
     'daily' => '日常',
     'weekly' => '週刊',
     'monthly' => '月',
     'interval' => '間隔'
-);
+];
 $lang['NOSELECT'] = 'Noを選択';
 $lang['RUN_DAY'] = '実行日';
 $lang['RUN_DAY_EXPL'] = 'のがこのジョブ実行';
@@ -2546,7 +2539,7 @@ $lang['CALLSEED_MSG_OK'] = 'メッセージが送られたすべての人をダ�
 $lang['CALLSEED_MSG_SPAM'] = '要求されていまし送(れていないことが考えられます）<br /><br />The次の機会に要求を送信する<b>%s</b>ます。';
 $lang['CALLSEED_HAVE_SEED'] = '話題を必要としないによるものでないことを<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'トピック：<br /> <b>deleted</b>',
     'mod_topic_move' => 'トピック：<br /> <b>moved</b>',
     'mod_topic_lock' => 'トピック：<br /> <b>closed</b>',
@@ -2561,7 +2554,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'ユーザー:<br /> <b>deleted</b>',
     'adm_user_ban' => 'ユーザー:<br /> <b>ban</b>',
     'adm_user_unban' => 'ユーザー:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'すべてのアクション';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = '行動ログを検索オプション';
@@ -2700,28 +2693,28 @@ $lang['MC_LEGEND'] = 'タイプaのコメント';
 $lang['MC_FAQ'] = '入力したテキスト表示されます本メッセージ';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%sにメッセージ";
 $lang['MC_COMMENT_PM_MSG'] = "こんにちは、[b]%s[/b]りnModerator左にメッセージ[url=%s][b]%s[/b][/url][quote]りn%sりn[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'コメント削除',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'コメントから%s',
         'type' => 'コメント',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '情報%s',
         'type' => '情報',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '警告から%s',
         'type' => '警告',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '違反から%s',
         'type' => '違反',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'サイトマップ';
 $lang['SITEMAP_ADMIN'] = '管理サイトマップ';
@@ -2762,7 +2755,7 @@ $lang['HASH_NOT_FOUND'] = 'コーポレートコミュニケーションのハ�
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]このページのテキストは [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]で編集されています。この行は管理者だけが見ることができます。[/align]';
 $lang['TERMS_EXPLAIN'] = 'このページでご指定いただくことができますテキストの基本的なルールのリソースが表示されます。';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '無効のユーザは30日間',
     1 => '不活性ユーザ90日間',
     2 => '中サイズ分布は、トラッカー(多くのメガバイト)',
@@ -2771,7 +2764,7 @@ $lang['TR_STATS'] = array(
     5 => 'どのくらい多くの人の手によることを播種以上の5種',
     6 => 'どのように多くの予想は、対象となっているがぎっしり敷き詰められ少なくとも1)',
     7 => 'どのように多くの予想は、過去30日',
-);
+];
 
 $lang['NEW_POLL_START'] = '調査可能';
 $lang['NEW_POLL_END'] = '調査完了';
@@ -2801,7 +2794,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = '無効なファイル形式の画像';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = '画像寸法を超える最大許容%sx%spx';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'アップロードされたファイルのない画像';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = '拡張%sのためのダウンロードできません';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'いを超えたファイルの最大サイズのサーバー',
     UPLOAD_ERR_FORM_SIZE => 'お値を超えて最大ファイルアップロードサイズ',
     UPLOAD_ERR_PARTIAL => 'ファイルの一部ダウンロード',
@@ -2809,7 +2802,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => '一時ディレクトリに見つかりませんで',
     UPLOAD_ERR_CANT_WRITE => 'イライト：プロフィー',
     UPLOAD_ERR_EXTENSION => 'アップロードを停止による拡張',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'ることを確認等の無断転載は固くお断りいロボット';

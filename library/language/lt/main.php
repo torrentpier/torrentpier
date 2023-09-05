@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Privačios Žinutės';
 $lang['NO_NEW_PM'] = 'nėra naujų pranešimų';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('naujas pranešimas', 'nauji pranešimai');
+$lang['NEW_PMS_DECLENSION'] = ['naujas pranešimas', 'nauji pranešimai'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('neperskaitytus', 'neperskaitytus');
+$lang['UNREAD_PMS_DECLENSION'] = ['neperskaitytus', 'neperskaitytus'];
 
 $lang['UNREAD_MESSAGE'] = 'Neperskaitytą pranešimą';
 $lang['READ_MESSAGE'] = 'Skaityti pranešimą';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Siunčia el. paštu, kai kas nors atsakė į t
 
 $lang['BOARD_LANG'] = 'Valdybos kalba';
 $lang['GENDER'] = 'Lytis';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Nežinomas',
     1 => 'Vyras',
     2 => 'Moteris'
-);
+];
 $lang['MODULE_OFF'] = 'Modulis yra išjungtas!';
 
 $lang['BIRTHDAY'] = 'Gimtadienis';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Statusas';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Pasirinkite statusas';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Jūs neturite pasirinktų statusą.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Visi statusai';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'negali patikrinti',
     TOR_CLOSED => 'uždaryti',
     TOR_APPROVED => 'patikrinta',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'laikinas',
     TOR_PREMOD => 'pre-saikingai',
     TOR_REPLENISH => 'papildyti',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tokio statuso nėra!';
 $lang['TORRENT_FAILED'] = 'Platinti, nerastas!';
 $lang['TOR_STATUS_DUB'] = 'Paskirstymo turi tą patį statusą';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('atsakyti', 'atsakymai');
-$lang['DECLENSION']['TIMES'] = array('laikas', 'laikas');
+$lang['DECLENSION']['REPLIES'] = ['atsakyti', 'atsakymai'];
+$lang['DECLENSION']['TIMES'] = ['laikas', 'laikas'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('antras', 'sekundžių'),
-    'minutes' => array('minutės', 'minutes'),
-    'hours' => array('valanda', 'valandos'),
-    'mday' => array('dieną', 'dienų'),
-    'mon' => array('mėnesį', 'mėnesių'),
-    'year' => array('metų', 'metų'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['antras', 'sekundžių'],
+    'minutes' => ['minutės', 'minutes'],
+    'hours' => ['valanda', 'valandos'],
+    'mday' => ['dieną', 'dienų'],
+    'mon' => ['mėnesį', 'mėnesių'],
+    'year' => ['metų', 'metų'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn į Configuration%s';
 $lang['CONFIG_UPD'] = 'Sąrankos Atnaujinta Sėkmingai';
 $lang['SET_DEFAULTS'] = 'Atkurti numatytuosius';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forumo nustatymai';
-$lang['TRACKER_SETTINGS'] = 'Tracker parametrai';
-
-$lang['CHANGES_DISABLED'] = 'Pokyčiai išjungtas (žr. <b>$bb_cfg[\'tracker\']</b>, config.php)';
-
 $lang['OFF_TRACKER'] = 'Išjungti tracker';
 $lang['OFF_REASON'] = 'Išjungti priežastis';
 $lang['OFF_REASON_EXPL'] = 'šis pranešimas bus siunčiamas klientui, kai tracker yra išjungtas';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Remonto Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit darbo';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Pridėti darbo';
 $lang['CRON_SCRIPT_EXPL'] = 'pavadinimas scenarijų iš "apima/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Pasirinkite pradėti',
     'hourly' => 'valandos',
     'daily' => 'kasdien',
     'weekly' => 'kas savaitę',
     'monthly' => 'kas mėnesį',
     'interval' => 'intervalas'
-);
+];
 $lang['NOSELECT'] = 'Pasirinkite nr.';
 $lang['RUN_DAY'] = 'Paleisti dieną';
 $lang['RUN_DAY_EXPL'] = 'tą dieną, kai šį darbą paleisti';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Išsiuntė pranešimą, kad visi tie, kurie atsisiun
 $lang['CALLSEED_MSG_SPAM'] = 'Prašymas jau buvo kartą sėkmingai išsiųstas (Tikriausiai ne jums)<br /><br />The kitą galimybę išsiųsti prašymą būti <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Tema nėra reikalinga pagalba (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Tema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Tema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Tema:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Vartotojas:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Vartotojas:<br /> <b>ban</b>',
     'adm_user_unban' => 'Vartotojas:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Visi veiksmai';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Veiksmai Žurnalas: Paieškos funkcijos';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Įveskite komentarą';
 $lang['MC_FAQ'] = 'Įrašytas tekstas bus rodomas pagal šį pranešimą';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s jūsų pranešimas";
 $lang['MC_COMMENT_PM_MSG'] = "Sveiki, [b]%s[/b]\nModerator paliko savo pranešimų [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Ištrinti komentarą',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentaras iš %s',
         'type' => 'Komentaras',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informacija iš %s',
         'type' => 'Informacija',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Įspėjimo iš %s',
         'type' => 'Įspėjimas',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Pažeidimas iš %s',
         'type' => 'Pažeidimas',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Svetainės medis';
 $lang['SITEMAP_ADMIN'] = 'Tvarkyti sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Išleidimo su maišos %s nerasta';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Šio puslapio tekstas redaguojamas adresu: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ši eilutė gali matyti tik administratorius.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Šiame puslapyje jūs galite nurodyti tekstą iš pagrindinių taisyklių, ištekliai rodomas naudotojams.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'neaktyvius vartotojus 30 dienų',
     1 => 'neaktyvūs vartotojai 90 dienų',
     2 => 'vidutinio dydžio sumas tracker (daug mb)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'kiek rankos, kai kurie sėja daugiau nei 5 sėklas',
     6 => 'kaip daugelis iš mūsų uploaders (tie, kurie užpildyti ne mažiau kaip 1 ranka)',
     7 => 'kiek uploaders per paskutines 30 dienų',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Apklausa leido';
 $lang['NEW_POLL_END'] = 'Apklausa baigta';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Netinkamas failo tipas vaizdo';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Nuotrauka matmenys viršija didžiausią leistiną %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Įkelto failo nėra atvaizdo';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Pratęsimo %s atsisiuntimų neleidžiama';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'jūs viršijote maksimalų failo dydį serverio',
     UPLOAD_ERR_FORM_SIZE => 'jūs viršijote maksimalų failo įkėlimo dydis',
     UPLOAD_ERR_PARTIAL => 'failas buvo iš dalies parsisiųsti',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'laikiną katalogą nerasta',
     UPLOAD_ERR_CANT_WRITE => 'rašyti klaida',
     UPLOAD_ERR_EXTENSION => 'įkelti sustabdė pratęsimo',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Patikrinkite, kad jūs esate ne robotas';

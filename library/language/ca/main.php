@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Missatgeria Privada';
 $lang['NO_NEW_PM'] = 'no hi ha missatges nous';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('missatge nou', 'els missatges nous');
+$lang['NEW_PMS_DECLENSION'] = ['missatge nou', 'els missatges nous'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('missatges no llegits', 'missatges no llegits');
+$lang['UNREAD_PMS_DECLENSION'] = ['missatges no llegits', 'missatges no llegits'];
 
 $lang['UNREAD_MESSAGE'] = 'Missatge';
 $lang['READ_MESSAGE'] = 'Llegir missatge';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Envia un correu electrònic quan algú respon 
 
 $lang['BOARD_LANG'] = 'Consell llengua';
 $lang['GENDER'] = 'Gènere';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Desconegut',
     1 => 'Masculí',
     2 => 'Femení'
-);
+];
 $lang['MODULE_OFF'] = 'Mòdul està desactivat!';
 
 $lang['BIRTHDAY'] = 'Aniversari';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Estat';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Seleccioneu l\'estat';
 $lang['TOR_STATUS_NOT_SELECT'] = 'No heu seleccionat l\'estat.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tots els estats';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'no està marcada',
     TOR_CLOSED => 'tancat',
     TOR_APPROVED => 'marcada',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'temporal',
     TOR_PREMOD => 'pre-moderat',
     TOR_REPLENISH => 'reposar',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Aquest estatus no existeix!';
 $lang['TORRENT_FAILED'] = 'La distribució no es va trobar!';
 $lang['TOR_STATUS_DUB'] = 'Distribució té el mateix estatus';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('resposta', 'les respostes');
-$lang['DECLENSION']['TIMES'] = array('temps', 'temps');
+$lang['DECLENSION']['REPLIES'] = ['resposta', 'les respostes'];
+$lang['DECLENSION']['TIMES'] = ['temps', 'temps'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('segona', 'segons'),
-    'minutes' => array('minuts', 'minuts'),
-    'hours' => array('hora', 'hores'),
-    'mday' => array('dia', 'dies'),
-    'mon' => array('mes', 'mesos'),
-    'year' => array('any', 'anys'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['segona', 'segons'],
+    'minutes' => ['minuts', 'minuts'],
+    'hours' => ['hora', 'hores'],
+    'mday' => ['dia', 'dies'],
+    'mon' => ['mes', 'mesos'],
+    'year' => ['any', 'anys'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn a Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuració Actualitzat Amb Èxit';
 $lang['SET_DEFAULTS'] = 'Restablir valors predeterminats';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Seguidor';
-$lang['FORUM_CFG_TITLE'] = 'Preferències del fòrum';
-$lang['TRACKER_SETTINGS'] = 'Seguidor de configuració';
-
-$lang['CHANGES_DISABLED'] = 'Els canvis de persones amb discapacitat (vegeu <b>$bb_cfg[\'tracker\']</b> en config.php)';
-
 $lang['OFF_TRACKER'] = 'Desactivar seguidor';
 $lang['OFF_REASON'] = 'Desactivar raó';
 $lang['OFF_REASON_EXPL'] = 'aquest missatge serà enviat a client quan el seguidor està deshabilitada';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Reparació Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edita treball';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Afegir feina';
 $lang['CRON_SCRIPT_EXPL'] = 'nom de l\'script de "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Seleccioneu inici',
     'hourly' => 'horari',
     'daily' => 'diari',
     'weekly' => 'setmanari',
     'monthly' => 'mensual',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'No seleccioneu';
 $lang['RUN_DAY'] = 'Executar dia';
 $lang['RUN_DAY_EXPL'] = 'el dia en aquesta feina executar';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Missatge ha estat enviat a tots aquells que descarre
 $lang['CALLSEED_MSG_SPAM'] = 'La petició ja ha estat un cop enviat correctament (Segurament no)<br /><br />The pròxima oportunitat per enviar una sol·licitud per ser <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Tema no requereixen ajuda (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Tema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Tema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Tema:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Usuari:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Usuari:<br /> <b>ban</b>',
     'adm_user_unban' => 'Usuari:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Totes les accions';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Accions de Registre: opcions de Cerca';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Escriu un comentari';
 $lang['MC_FAQ'] = 'El text introduït, apareixerà en aquest missatge';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s en el seu missatge";
 $lang['MC_COMMENT_PM_MSG'] = "Hola, [b]%s[/b]\nModerator esquerra en el seu missatge [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Suprimeix el comentari',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Comentari de %s',
         'type' => 'Comentari',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informació de %s',
         'type' => 'Informació',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Avís de %s',
         'type' => 'Avís',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Violació de %s',
         'type' => 'Violació',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Mapa del web';
 $lang['SITEMAP_ADMIN'] = 'Gestionar mapa';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Llançament de hash %s no trobat';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]El text d\'aquesta pàgina està editat a: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Aquesta línia només pot veure els administradors.[/align]';
 $lang['TERMS_EXPLAIN'] = 'En aquesta pàgina, es pot especificar el text de les normes bàsiques de recurs es mostra als usuaris.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inactiu usuaris en 30 dies',
     1 => 'inactiu usuaris per 90 dies',
     2 => 'mida mitjana de les distribucions en el rastrejador (molts megabytes)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'quantes mans que quan la sembra de més de 5 llavors',
     6 => 'quants de nosaltres uploaders (els que el ple com a mínim 1 mà)',
     7 => 'com molts uploaders en els últims 30 dies',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Enquesta activat';
 $lang['NEW_POLL_END'] = 'Enquesta completa';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Invalid tipus de fitxer d\'imatge';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions superi la màxima permesa %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'L\'arxiu carregat no és una imatge';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Extensió %s per a baixades, no és permès';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'heu excedit la mida màxima de fitxer per al servidor',
     UPLOAD_ERR_FORM_SIZE => 'heu excedit el fitxer de la mida de càrrega',
     UPLOAD_ERR_PARTIAL => 'l\'arxiu va ser parcialment descarregats',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'directori temporal no trobat',
     UPLOAD_ERR_CANT_WRITE => 'escriure error',
     UPLOAD_ERR_EXTENSION => 'pujar detingut per extensió',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Comprovar que no ets un robot';

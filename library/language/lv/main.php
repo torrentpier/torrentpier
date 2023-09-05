@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Privātās Ziņojumapmaiņas';
 $lang['NO_NEW_PM'] = 'nav jaunu ziņojumu';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('jaunu ziņu', 'jaunas ziņas');
+$lang['NEW_PMS_DECLENSION'] = ['jaunu ziņu', 'jaunas ziņas'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('nelasīto', 'nelasīto');
+$lang['UNREAD_PMS_DECLENSION'] = ['nelasīto', 'nelasīto'];
 
 $lang['UNREAD_MESSAGE'] = 'Nelasītu ziņu';
 $lang['READ_MESSAGE'] = 'Lasīt ziņu';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Nosūta e-pastu, kad kāds atbild uz tēmu, ju
 
 $lang['BOARD_LANG'] = 'Valdes valodā';
 $lang['GENDER'] = 'Dzimums';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Nav zināms',
     1 => 'Vīrietis',
     2 => 'Sieviete'
-);
+];
 $lang['MODULE_OFF'] = 'Modulis ir invalīdi!';
 
 $lang['BIRTHDAY'] = 'Dzimšanas diena';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Statuss';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Izvēlieties statuss';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Neesat izvēlējies statusu.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Visi statusi';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nav pārbaudīts',
     TOR_CLOSED => 'slēgts',
     TOR_APPROVED => 'pārbaudīts',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'pagaidu',
     TOR_PREMOD => 'pre-mērenība',
     TOR_REPLENISH => 'papildināt',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Šādu statusu neeksistē!';
 $lang['TORRENT_FAILED'] = 'Sadales netika atrasts!';
 $lang['TOR_STATUS_DUB'] = 'Sadalījums ir tāds pats statuss';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('atbildēt', 'atbildes');
-$lang['DECLENSION']['TIMES'] = array('laiks', 'reizes');
+$lang['DECLENSION']['REPLIES'] = ['atbildēt', 'atbildes'];
+$lang['DECLENSION']['TIMES'] = ['laiks', 'reizes'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('otrais', 'sekundes'),
-    'minutes' => array('minūtes', 'minūtes'),
-    'hours' => array('stunda', 'stundas'),
-    'mday' => array('diena', 'dienas'),
-    'mon' => array('mēnesis', 'mēneši'),
-    'year' => array('gads', 'gadi'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['otrais', 'sekundes'],
+    'minutes' => ['minūtes', 'minūtes'],
+    'hours' => ['stunda', 'stundas'],
+    'mday' => ['diena', 'dienas'],
+    'mon' => ['mēnesis', 'mēneši'],
+    'year' => ['gads', 'gadi'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn, lai Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurācijas Atjaunināts Veiksmīgi';
 $lang['SET_DEFAULTS'] = 'Restore defaults (atjaunot noklusējumus';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Foruma uzstādījumi';
-$lang['TRACKER_SETTINGS'] = 'Tracker uzstādījumi';
-
-$lang['CHANGES_DISABLED'] = 'Izmaiņas invalīdiem (skatīt <b>$bb_cfg[\'tracker\']</b>, config.php)';
-
 $lang['OFF_TRACKER'] = 'Atspējot tracker';
 $lang['OFF_REASON'] = 'Atspējot iemesls';
 $lang['OFF_REASON_EXPL'] = 'šis ziņojums tiks nosūtīts klientam, ja tracker ir deaktivizēta';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Remonts Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Darbu rediģēšana';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Pievienot darbs';
 $lang['CRON_SCRIPT_EXPL'] = 'nosaukums skripts no "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Izvēlieties sākt',
     'hourly' => 'stundas',
     'daily' => 'diennakts',
     'weekly' => 'iknedēļas',
     'monthly' => 'ikmēneša',
     'interval' => 'intervāls'
-);
+];
 $lang['NOSELECT'] = 'Izvēlieties nē';
 $lang['RUN_DAY'] = 'Palaist diena';
 $lang['RUN_DAY_EXPL'] = 'dienā, kad palaist šo darbu';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Ziņojums ir nosūtīts, lai visiem tiem, kas lejupi
 $lang['CALLSEED_MSG_SPAM'] = 'Pieprasījums jau ir, kad veiksmīgi nosūtīts (Iespējams, ne jums)<br /><br />The nākamā iespēja nosūtīt pieprasījumu <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Tēmu nav nepieciešama palīdzība (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Tēma:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Tēma:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Tēma:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Lietotājs:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Lietotājs:<br /> <b>ban</b>',
     'adm_user_unban' => 'Lietotājs:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Visas darbības';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Darbības Žurnāls: Meklēšanas iespējas';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Ierakstiet savu komentāru';
 $lang['MC_FAQ'] = 'Ievadījis teksts tiks parādīts saskaņā ar šo ziņu';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s savu ziņu";
 $lang['MC_COMMENT_PM_MSG'] = "Sveiki, [b]%s[/b]\nModerator pa kreisi jūsu ziņojums [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Dzēst komentāru',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentārs no %s',
         'type' => 'Komentārs',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informāciju no %s',
         'type' => 'Informācija',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Brīdinājums no %s',
         'type' => 'Brīdinājums',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Pārkāpjot no %s',
         'type' => 'Pārkāpums',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Pārvaldīt vietnes karte';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Atbrīvot ar hash %s nav atrasts';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Šīs lapas teksts ir rediģēts: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Šajā rindā ir redzami tikai administratori.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Šajā lapā jūs varat norādīt teksta pamatnoteikumu resurss ir parādīts lietotājiem.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'neaktīvo lietotāju 30 dienas',
     1 => 'neaktīvos lietotājus par 90 dienām',
     2 => 'vidēja lieluma sadalījumi par tracker (daudzi megabaiti)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'cik daudz rokas, ja, ka iesēt vairāk nekā 5 sēklas',
     6 => 'cik daudzi no mums personas, kuras augšupielādē (tie, kuri ir aizpildījuši vismaz 1 roku)',
     7 => 'cik daudz personas, kuras augšupielādē pēdējo 30 dienas',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Aptauja iespējots';
 $lang['NEW_POLL_END'] = 'Aptauja pabeigta';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Nederīgs faila veids, attēla';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Attēla izmēri nepārsniedz maksimāli pieļaujamo %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Augšupielādēto failu nav attēlu';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Pagarinājums %s lejupielādēm nav atļauta';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'jums ir pārsniegts maksimālais faila izmērs servera',
     UPLOAD_ERR_FORM_SIZE => 'jums ir pārsniegts maksimālais failu augšupielādes izmēra',
     UPLOAD_ERR_PARTIAL => 'fails tika daļēji lejupielādēt',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'pagaidu direktoriju nevar atrast',
     UPLOAD_ERR_CANT_WRITE => 'rakstīt kļūda',
     UPLOAD_ERR_EXTENSION => 'augšupielādēt apstājās, izmantojot paplašināšanu',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Pārbaudiet, ka jums nav robots';

@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Të Mesazheve Private';
 $lang['NO_NEW_PM'] = 'nuk ka mesazhe të reja';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('mesazh i ri', 'mesazhe të reja');
+$lang['NEW_PMS_DECLENSION'] = ['mesazh i ri', 'mesazhe të reja'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('palexuara', 'palexuara');
+$lang['UNREAD_PMS_DECLENSION'] = ['palexuara', 'palexuara'];
 
 $lang['UNREAD_MESSAGE'] = 'Palexuar mesazh';
 $lang['READ_MESSAGE'] = 'Lexoni mesazh';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Dërgon një e-mail, kur dikush përgjigjet n�
 
 $lang['BOARD_LANG'] = 'Bordi gjuhë';
 $lang['GENDER'] = 'Gjinore';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'I panjohur',
     1 => 'Mashkull',
     2 => 'Femra'
-);
+];
 $lang['MODULE_OFF'] = 'Moduli është me aftësi të kufizuara!';
 
 $lang['BIRTHDAY'] = 'Ditëlindjen';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Statusi';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Zgjidhni statusin';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Ju nuk e kanë të zgjedhur statusin.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Të gjitha statuset';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nuk kontrollohen',
     TOR_CLOSED => 'mbyllur',
     TOR_APPROVED => 'kontrolluar',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'të përkohshme',
     TOR_PREMOD => 'para-moderim',
     TOR_REPLENISH => 'plotësoj',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Një status të tillë nuk ekziston!';
 $lang['TORRENT_FAILED'] = 'Shpërndarja nuk u gjet!';
 $lang['TOR_STATUS_DUB'] = 'Shpërndarja e ka të njëjtin status';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('përgjigje', 'përgjigje');
-$lang['DECLENSION']['TIMES'] = array('kohë', 'kohët');
+$lang['DECLENSION']['REPLIES'] = ['përgjigje', 'përgjigje'];
+$lang['DECLENSION']['TIMES'] = ['kohë', 'kohët'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('i dytë', 'sekonda'),
-    'minutes' => array('minutë', 'minuta'),
-    'hours' => array('orë', 'orë'),
-    'mday' => array('ditë', 'ditë'),
-    'mon' => array('muaj', 'muaj'),
-    'year' => array('viti', 'vjet'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['i dytë', 'sekonda'],
+    'minutes' => ['minutë', 'minuta'],
+    'hours' => ['orë', 'orë'],
+    'mday' => ['ditë', 'ditë'],
+    'mon' => ['muaj', 'muaj'],
+    'year' => ['viti', 'vjet'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn të Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurimi I Azhurnuar Me Sukses';
 $lang['SET_DEFAULTS'] = 'Rikthimi standarte';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forumi cilësimet';
-$lang['TRACKER_SETTINGS'] = 'Tracker cilësimet';
-
-$lang['CHANGES_DISABLED'] = 'Ndryshimet me aftësi të kufizuara (shih <b>$bb_cfg[\'tracker\']</b> në config.php)';
-
 $lang['OFF_TRACKER'] = 'Çaktivizoni tracker';
 $lang['OFF_REASON'] = 'Çaktivizoni arsye';
 $lang['OFF_REASON_EXPL'] = 'ky mesazh do të dërgohet klientit kur tracker është me aftësi të kufizuara';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Riparimi Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit punë';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Të shtoni punë';
 $lang['CRON_SCRIPT_EXPL'] = 'emri i shkrimit nga "përfshin/cron/punë/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Zgjidhni start',
     'hourly' => 'orë',
     'daily' => 'e përditshme',
     'weekly' => 'javore',
     'monthly' => 'mujore',
     'interval' => 'intervali'
-);
+];
 $lang['NOSELECT'] = 'Nuk ka zgjidhni';
 $lang['RUN_DAY'] = 'Drejtuar ditës';
 $lang['RUN_DAY_EXPL'] = 'ditën kur këtë punë e drejtuar';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Mesazhi është dërguar për të gjithë ata që sh
 $lang['CALLSEED_MSG_SPAM'] = 'Kërkesa ka qenë tashmë një herë me sukses të dërguar (Ndoshta nuk ju)<br /><br />The mundësi tjetër për të dërguar një kërkesë për të <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Temë nuk kërkojnë ndihmë (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Temë:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Temë:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Temë:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Përdoruesi:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Përdoruesi:<br /> <b>ban</b>',
     'adm_user_unban' => 'Përdoruesi:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Të gjitha veprimet';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Veprimet Log: opsionet e Kërkimit';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Shkruani një koment';
 $lang['MC_FAQ'] = 'Futur tekst do të shfaqet nën këtë mesazh';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s në mesazhin tuaj";
 $lang['MC_COMMENT_PM_MSG'] = "Përshëndetje, [b]%s[/b]\nModerator lënë në mesazhin tuaj [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Fshini koment',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Koment nga %s',
         'type' => 'Koment',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informacion nga %s',
         'type' => 'Informacion',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Paralajmërim nga %s',
         'type' => 'Paralajmërim',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Shkelja %s',
         'type' => 'Shkelje',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Menaxhuar sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Lirimin me të hash %s nuk u gjet';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksti i kësaj faqe është redaktuar në: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Kjo linjë mund të shohë vetëm administratorët.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Në këtë faqe, ju mund të specifikoni tekstin e rregullave bazë të burimeve të shfaqet për përdoruesit.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'joaktiv përdoruesit në 30 ditë',
     1 => 'joaktiv përdoruesit për 90 ditë',
     2 => 'me madhësi të mesme shpërndarjet në tracker (për shumë megabajt)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'si shumë duart se ku shorti më shumë se 5 fara',
     6 => 'sa prej nesh uploaders (ata të cilët mbushur të paktën 1 dorën)',
     7 => 'sa uploaders gjatë fundit 30 ditë',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Sondazhi të aktivizuara';
 $lang['NEW_POLL_END'] = 'Anketa e përfunduar';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'Të pavlefshme file type e imazhit';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Imazhi i tejkalojnë dimensionet maksimale të lejueshme %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'I ngarkuar file nuk është një imazh';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Zgjerimi %s për shkarkim nuk është e lejuar';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'ju keni tejkaluar maksimumi file size për server',
     UPLOAD_ERR_FORM_SIZE => 'ju keni tejkaluar maksimale të ngarkoni fotografi të madhësisë',
     UPLOAD_ERR_PARTIAL => 'file është shkarkuar pjesërisht',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'të përkohshme directory nuk është gjetur',
     UPLOAD_ERR_CANT_WRITE => 'shkruani gabim',
     UPLOAD_ERR_EXTENSION => 'ngarkoni ndalur vazhdimin',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kontrolloni se ju nuk jeni një robot';

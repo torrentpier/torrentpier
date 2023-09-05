@@ -416,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'La Mensajería Privada';
 $lang['NO_NEW_PM'] = 'no hay mensajes nuevos';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nuevo mensaje', 'nuevos mensajes');
+$lang['NEW_PMS_DECLENSION'] = ['nuevo mensaje', 'nuevos mensajes'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('no leídos', 'no leídos');
+$lang['UNREAD_PMS_DECLENSION'] = ['no leídos', 'no leídos'];
 
 $lang['UNREAD_MESSAGE'] = 'Mensaje no leído';
 $lang['READ_MESSAGE'] = 'Leer mensaje';
@@ -546,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Envía un e-mail cuando alguien responde a un 
 
 $lang['BOARD_LANG'] = 'La junta de idioma';
 $lang['GENDER'] = 'Género';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Desconocido',
     1 => 'Macho',
     2 => 'Hembra'
-);
+];
 $lang['MODULE_OFF'] = 'Módulo está deshabilitado!';
 
 $lang['BIRTHDAY'] = 'Cumpleaños';
@@ -1088,7 +1088,7 @@ $lang['TOR_STATUS'] = 'Estatus';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Seleccione estado';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Usted no ha estado seleccionado.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Todos los estados';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'no se comprueba',
     TOR_CLOSED => 'cerrado',
     TOR_APPROVED => 'comprobado',
@@ -1102,7 +1102,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'temporal',
     TOR_PREMOD => 'la pre-moderación',
     TOR_REPLENISH => 'reponer',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tal estado no existe!';
 $lang['TORRENT_FAILED'] = 'La distribución no se encontró!';
 $lang['TOR_STATUS_DUB'] = 'La distribución tiene el mismo estado';
@@ -1350,17 +1350,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('respuesta', 'respuestas');
-$lang['DECLENSION']['TIMES'] = array('tiempo', 'veces');
+$lang['DECLENSION']['REPLIES'] = ['respuesta', 'respuestas'];
+$lang['DECLENSION']['TIMES'] = ['tiempo', 'veces'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('segundo', 'segundos'),
-    'minutes' => array('minutos', 'minutos'),
-    'hours' => array('hora', 'horas'),
-    'mday' => array('día', 'días'),
-    'mon' => array('mes', 'meses'),
-    'year' => array('año', 'años'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['segundo', 'segundos'],
+    'minutes' => ['minutos', 'minutos'],
+    'hours' => ['hora', 'horas'],
+    'mday' => ['día', 'días'],
+    'mon' => ['mes', 'meses'],
+    'year' => ['año', 'años'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -2257,13 +2257,6 @@ $lang['RETURN_CONFIG'] = '%sReturn a Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuración Actualizado Correctamente';
 $lang['SET_DEFAULTS'] = 'Restaurar valores predeterminados';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Rastreador';
-$lang['FORUM_CFG_TITLE'] = 'En el foro de configuración';
-$lang['TRACKER_SETTINGS'] = 'Rastreador de configuración';
-
-$lang['CHANGES_DISABLED'] = 'Cambios en la movilidad (ver <b>$bb_cfg[\'tracker\']</b> en config.php)';
-
 $lang['OFF_TRACKER'] = 'Deshabilitar tracker';
 $lang['OFF_REASON'] = 'Deshabilitar la razón';
 $lang['OFF_REASON_EXPL'] = 'este mensaje será enviado al cliente cuando el tracker está deshabilitado';
@@ -2408,14 +2401,14 @@ $lang['REPAIR_CRON'] = 'Reparación De Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Editar trabajo';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Añadir trabajo';
 $lang['CRON_SCRIPT_EXPL'] = 'nombre de la secuencia de comandos de "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Seleccione inicio',
     'hourly' => 'por hora',
     'daily' => 'diario',
     'weekly' => 'semanal',
     'monthly' => 'mensual',
     'interval' => 'intervalo de'
-);
+];
 $lang['NOSELECT'] = 'No seleccione';
 $lang['RUN_DAY'] = 'Día de ejecución';
 $lang['RUN_DAY_EXPL'] = 'el día cuando este trabajo se ejecute';
@@ -2542,7 +2535,7 @@ $lang['CALLSEED_MSG_OK'] = 'Mensaje ha sido enviado a todos los que descargar es
 $lang['CALLSEED_MSG_SPAM'] = 'La petición ya ha sido una vez que se ha enviado correctamente (Probablemente no)<br /><br />The próxima oportunidad para enviar una solicitud para ser <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Tema no requiere de la ayuda (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Tema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Tema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Tema:<br /> <b>closed</b>',
@@ -2557,7 +2550,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
     'adm_user_delete' => 'Usuario:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Usuario:<br /> <b>ban</b>',
     'adm_user_unban' => 'Usuario:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Todas las acciones';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Registro de acciones: las opciones de Búsqueda';
@@ -2696,28 +2689,28 @@ $lang['MC_LEGEND'] = 'Escribir un comentario';
 $lang['MC_FAQ'] = 'El texto introducido se mostrará debajo de este mensaje';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s en su mensaje";
 $lang['MC_COMMENT_PM_MSG'] = "Hola, [b]%s[/b]\nModerator a la izquierda en su mensaje [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Eliminar comentario',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Comentario de %s',
         'type' => 'Comentario',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Información de %s',
         'type' => 'Información',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Advertencia de %s',
         'type' => 'Advertencia',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Violación de %s',
         'type' => 'Violación',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Administrar sitemap';
@@ -2758,7 +2751,7 @@ $lang['HASH_NOT_FOUND'] = 'Con la liberación de hash %s no se encuentra';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]El texto de esta página está editado en: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Esta línea solo pueden ver los administradores.[/align]';
 $lang['TERMS_EXPLAIN'] = 'En esta página, usted puede especificar el texto de las reglas básicas del recurso se muestra a los usuarios.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'usuarios inactivos en 30 días',
     1 => 'usuarios inactivos durante 90 días',
     2 => 'tamaño medio de las distribuciones en el tracker (muchos megabytes)',
@@ -2767,7 +2760,7 @@ $lang['TR_STATS'] = array(
     5 => 'cuántas manos donde que la siembra de más de 5 semillas',
     6 => '¿cuántos de nosotros subidores (aquellos que se llenan en menos de 1 mano)',
     7 => 'cómo muchos usuarios que suben en los últimos 30 días',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Encuesta habilitada';
 $lang['NEW_POLL_END'] = 'Encuesta completada';
@@ -2797,7 +2790,7 @@ $lang['UPLOAD_ERROR_FORMAT'] = 'No válido tipo de archivo de imagen';
 $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Las dimensiones de la imagen supera el máximo permitido %sx%s px';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'El archivo subido no es una imagen';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'La extensión de %s para las descargas no está permitido';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'se ha superado el tamaño máximo de archivo para el servidor',
     UPLOAD_ERR_FORM_SIZE => 'se ha superado el máximo de carga de archivos de tamaño',
     UPLOAD_ERR_PARTIAL => 'el archivo fue descargado parcialmente',
@@ -2805,7 +2798,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'directorio temporal no se encuentra',
     UPLOAD_ERR_CANT_WRITE => 'error de escritura',
     UPLOAD_ERR_EXTENSION => 'subir detenido por la extensión de',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Comprobar que no eres un robot';
