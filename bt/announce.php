@@ -18,11 +18,6 @@ if (empty($_SERVER['HTTP_USER_AGENT'])) {
     die;
 }
 
-// Ignore 'completed' event
-if (isset($_GET['event']) && $_GET['event'] === 'completed') {
-    dummy_exit(random_int(600, 1200));
-}
-
 $announce_interval = $bb_cfg['announce_interval'];
 $passkey_key = $bb_cfg['passkey_key'];
 $max_left_val = 536870912000; // 500 GB
@@ -125,45 +120,28 @@ $peer_hash = md5(
     rtrim($info_hash, ' ') . $passkey . $ip . $port
 );
 
-// Get cached peer info from previous announce (last peer info)
-$lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
-
-// Drop fast announce
-if ($lp_info && (!isset($event) || $event !== 'stopped')) {
-    if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
-        drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
-    }
-}
-
-// Functions
-function drop_fast_announce($lp_info, $lp_cached_peers = [])
-{
-    global $announce_interval;
-
-    if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
-        return; // if announce interval correct
-    }
-
-    $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
-
-    dummy_exit($new_ann_intrv, $lp_cached_peers);
-}
-
-function msg_die($msg)
-{
-    $output = \SandFox\Bencode\Bencode::encode([
-        'min interval' => (int)1800,
-        'failure reason' => (string)$msg,
-    ]);
-
-    die($output);
-}
-
 // Start announcer
 require __DIR__ . '/includes/init_tr.php';
 
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
+$completed = ($event === 'completed');
+
+// Completed event
+if ($completed) {
+    $sql = "UPDATE " . BB_BT_TORRENTS . " SET complete_count = complete_count + 1 WHERE info_hash = " . $info_hash . " LIMIT 1";
+    DB()->query($sql);
+}
+
+// Get cached peer info from previous announce (last peer info)
+$lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
+
+// Drop fast announce
+if ($lp_info && (!isset($event) || !$stopped)) {
+    if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
+        drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
+    }
+}
 
 // Stopped event
 if ($stopped) {
@@ -419,6 +397,30 @@ if (!$output) {
     ];
 
     CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+}
+
+// Functions
+function drop_fast_announce($lp_info, $lp_cached_peers = [])
+{
+    global $announce_interval;
+
+    if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
+        return; // if announce interval correct
+    }
+
+    $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
+
+    dummy_exit($new_ann_intrv, $lp_cached_peers);
+}
+
+function msg_die($msg)
+{
+    $output = \SandFox\Bencode\Bencode::encode([
+        'min interval' => (int)1800,
+        'failure reason' => (string)$msg,
+    ]);
+
+    die($output);
 }
 
 // Return data to client
