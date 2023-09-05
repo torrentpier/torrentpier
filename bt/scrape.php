@@ -22,9 +22,18 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
     $_GET['info_hash'] = $_GET['?info_hash'];
 }
 
-$is_bt_v2 = null;
 $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
+$info_hash_hex = bin2hex($info_hash);
 
+$lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex);
+
+if ($lp_scrape_info) {
+
+die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
+
+}
+
+$is_bt_v2 = null;
 // Verify info_hash
 if (!isset($info_hash)) {
     msg_die('info_hash does not exist');
@@ -43,8 +52,7 @@ function msg_die($msg)
 {
     $output = \SandFox\Bencode\Bencode::encode([
         'min interval' => (int)1800,
-        'failure reason' => (string)$msg,
-        'warning message' => (string)$msg,
+        'failure reason' => (string)$msg
     ]);
 
     die($output);
@@ -76,6 +84,8 @@ $output['files'][$info_hash] = [
     'downloaded' => (int)$row['complete_count'],
     'incomplete' => (int)$row['leechers'],
 ];
+
+$peers_list_cached = CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($info_hash_hex), $output, SCRAPE_LIST_EXPIRE);
 
 echo \SandFox\Bencode\Bencode::encode($output);
 
