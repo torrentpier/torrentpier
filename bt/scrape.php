@@ -25,12 +25,8 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
 $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 $info_hash_hex = bin2hex($info_hash);
 
-$lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex);
-
-if ($lp_scrape_info) {
-
-die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
-
+if ($lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex)) {
+    die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
 }
 
 $is_bt_v2 = null;
