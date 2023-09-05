@@ -127,9 +127,13 @@ $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
 $completed = ($event === 'completed');
 
+// Info hash SQL
+$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+$info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
+
 // Completed event
 if ($completed) {
-    $sql = "UPDATE " . BB_BT_TORRENTS . " SET complete_count = complete_count + 1 WHERE info_hash = " . $info_hash . " LIMIT 1";
+    $sql = "UPDATE " . BB_BT_TORRENTS . " tor SET tor.complete_count = tor.complete_count + 1 $info_hash_where LIMIT 1";
     DB()->query($sql);
 }
 
@@ -162,12 +166,10 @@ if ($lp_info) {
     $tor_type = $lp_info['tor_type'];
 } else {
     // Verify if torrent registered on tracker and user authorized
-    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     /**
      * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
      * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
      */
-    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
