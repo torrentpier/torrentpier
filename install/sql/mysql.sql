@@ -413,7 +413,7 @@ DROP TABLE IF EXISTS `bb_bt_users`;
 CREATE TABLE IF NOT EXISTS `bb_bt_users`
 (
   `user_id`              MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `auth_key`             CHAR(10)
+  `auth_key`             CHAR(15)
                            CHARACTER SET utf8
                              COLLATE utf8_bin  NOT NULL DEFAULT '',
   `u_up_total`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
