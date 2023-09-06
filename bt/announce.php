@@ -375,9 +375,7 @@ if (!$output) {
         }
     }
 
-    $seeders = 0;
-    $leechers = 0;
-    $complete_count = 0;
+    $complete_count = $leechers = $seeders = 0;
 
     if ($bb_cfg['tracker']['scrape']) {
         $row = DB()->fetch_row("
