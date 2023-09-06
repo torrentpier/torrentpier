@@ -214,7 +214,7 @@
 	</tr>
 	<tr class="row1">
 		<td>{L_COMPLETED}:</td>
-		<td><span title="{L_DOWNLOADED}: {postrow.attach.tor_reged.DOWNLOAD_COUNT}">{postrow.attach.tor_reged.COMPLETED}</span></td>
+		<td><span title="{L_DOWNLOADED}: {postrow.attach.tor_reged.DOWNLOAD_COUNT}">{postrow.attach.tor_reged.DOWNLOAD_COUNT} (Полных: {postrow.attach.tor_reged.COMPLETED})</span></td>
 	</tr>
 	<tr class="row1">
 		<td>{L_SIZE}:</td>

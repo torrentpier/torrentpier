@@ -39,12 +39,17 @@ if (strlen($info_hash) == 32) {
     msg_die('Invalid info_hash');
 }
 
+$info_hash_hex = bin2hex($info_hash);
+
+if ($lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex)) {
+    die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
+}
+
 function msg_die($msg)
 {
     $output = \SandFox\Bencode\Bencode::encode([
         'min interval' => (int)1800,
-        'failure reason' => (string)$msg,
-        'warning message' => (string)$msg,
+        'failure reason' => (string)$msg
     ]);
 
     die($output);
@@ -68,7 +73,7 @@ $row = DB()->fetch_row("
 ");
 
 if (!$row) {
-    msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash_sql));
+    msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
 }
 
 $output['files'][$info_hash] = [
@@ -76,6 +81,8 @@ $output['files'][$info_hash] = [
     'downloaded' => (int)$row['complete_count'],
     'incomplete' => (int)$row['leechers'],
 ];
+
+CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);
 
 echo \SandFox\Bencode\Bencode::encode($output);
 

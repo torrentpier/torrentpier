@@ -361,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `ip`               VARCHAR(42)           NOT NULL DEFAULT '0',
   `ipv6`             VARCHAR(32)                    DEFAULT NULL,
   `port`             SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
-  `client`           VARCHAR(51)           NOT NULL DEFAULT 'Unknown',
+  `client`           VARCHAR(255)          NOT NULL DEFAULT 'Unknown',
   `seeder`           TINYINT(1)            NOT NULL DEFAULT '0',
   `releaser`         TINYINT(1)            NOT NULL DEFAULT '0',
   `tor_type`         TINYINT(1)            NOT NULL DEFAULT '0',
@@ -413,7 +413,7 @@ DROP TABLE IF EXISTS `bb_bt_users`;
 CREATE TABLE IF NOT EXISTS `bb_bt_users`
 (
   `user_id`              MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `auth_key`             CHAR(10)
+  `auth_key`             CHAR(255)
                            CHARACTER SET utf8
                              COLLATE utf8_bin  NOT NULL DEFAULT '',
   `u_up_total`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
