@@ -323,7 +323,7 @@ if ($lp_info) {
 
 if (!$lp_info || !$peer_info_updated) {
     $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, client';
-    $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $client";
+    $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, '$client'";
 
     DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
 }
