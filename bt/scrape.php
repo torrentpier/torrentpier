@@ -41,8 +41,15 @@ if (strlen($info_hash) == 32) {
 
 $info_hash_hex = bin2hex($info_hash);
 
-if ($lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex)) {
-    die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
+if ($lp_scrape_info = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $info_hash_hex)) {
+
+    $output['files'][$info_hash] = [
+        'complete' => (int)$lp_scrape_info['complete'],
+        'downloaded' => (int)$lp_scrape_info['downloaded'],
+        'incomplete' => (int)$lp_scrape_info['incomplete'],
+    ];
+
+    die(\SandFox\Bencode\Bencode::encode($output));
 }
 
 function msg_die($msg)
@@ -81,8 +88,6 @@ $output['files'][$info_hash] = [
     'downloaded' => (int)$row['complete_count'],
     'incomplete' => (int)$row['leechers'],
 ];
-
-CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);
 
 echo \SandFox\Bencode\Bencode::encode($output);
 
