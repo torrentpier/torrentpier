@@ -203,6 +203,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
+                <th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
@@ -219,6 +220,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN port -->
 				<td>{lfull.lrow.port.PORT}</td>
 				<!-- END port -->
+                <td>{lfull.lrow.TOR_CLIENT}</td>
 			</tr>
 			<!-- END lrow -->
 			</table>

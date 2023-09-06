@@ -252,6 +252,7 @@ if ($tor_reged && $tor_info) {
             if (isset($_REQUEST['porder'])) {
                 $peer_orders = [
                     'name' => 'u.username',
+                    'client' => 'tr.client',
                     'ip' => 'tr.ip',
                     'port' => 'tr.port',
                     'compl' => 'tr.remain',
@@ -277,7 +278,7 @@ if ($tor_reged && $tor_info) {
 				WHERE topic_id = $tor_id
 				LIMIT 1";
         } elseif ($s_mode == 'names') {
-            $sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
+            $sql = "SELECT tr.client, tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
 				WHERE tr.topic_id = $tor_id
 					AND u.user_id = tr.user_id
@@ -285,7 +286,7 @@ if ($tor_reged && $tor_info) {
 				LIMIT $show_peers_limit";
         } else {
             $sql = "SELECT
-					tr.user_id, tr.ip, tr.port, tr.uploaded, tr.downloaded, tr.remain,
+					tr.client, tr.user_id, tr.ip, tr.port, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
 					tr.complete_percent, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr
@@ -450,7 +451,8 @@ if ($tor_reged && $tor_info) {
                         'SPEED_UP_RAW' => $peer['speed_up'],
                         'SPEED_DOWN_RAW' => $peer['speed_down'],
                         'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
-                        'TOR_RATIO' => ($up_ratio) ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : ''
+                        'TOR_RATIO' => ($up_ratio) ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : '',
+                        'TOR_CLIENT' => $peer['client']
                     ]);
 
                     if ($ip) {
