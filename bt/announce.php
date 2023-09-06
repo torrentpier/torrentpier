@@ -74,8 +74,6 @@ if (strlen($info_hash) == 32) {
     msg_die('Invalid info_hash');
 }
 
-$info_hash_hex = bin2hex($info_hash);
-
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port');
 }
@@ -147,7 +145,7 @@ $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 
 // Drop fast announce
 if ($lp_info && (!isset($event) || !$stopped)) {
-    if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $info_hash_hex)) {
+    if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
         drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
     }
 }
@@ -184,7 +182,7 @@ if ($lp_info) {
 
     // Verify if torrent registered on tracker and user authorized
     if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
+        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
     }
     if (empty($row['user_id'])) {
         msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
@@ -346,7 +344,7 @@ $lp_info = [
 CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
 
 // Get cached output
-$output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $info_hash_hex);
+$output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
 
 if (!$output) {
     // Retrieve peers
@@ -401,7 +399,7 @@ if (!$output) {
         'peers' => $peers
     ];
 
-    CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $info_hash_hex, $output, PEERS_LIST_EXPIRE);
+    CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
 }
 
 // Functions
