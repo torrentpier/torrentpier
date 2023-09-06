@@ -139,7 +139,7 @@ $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
 
 // Completed event
-if ($completed) {
+if ($completed && $seeder) {
     DB()->query("UPDATE " . BB_BT_TORRENTS . " tor SET tor.complete_count = tor.complete_count + 1 $info_hash_where LIMIT 1");
 }
 
