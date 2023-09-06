@@ -26,7 +26,7 @@ class Memcache extends Common
     public function __construct($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
-            die('Error: Memcached extension not installed');
+            die("Error: $this->engine extension not installed");
         }
 
         $this->cfg = $cfg;
@@ -47,7 +47,7 @@ class Memcache extends Common
         }
 
         if (!$this->connected && $this->cfg['con_required']) {
-            die('Could not connect to memcached server');
+            die("Could not connect to $this->engine server");
         }
 
         $this->debug('stop');
