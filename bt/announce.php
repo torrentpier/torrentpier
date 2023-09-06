@@ -25,10 +25,10 @@ if (isset($_GET['event']) && $_GET['event'] === 'completed') {
 
 $announce_interval = $bb_cfg['announce_interval'];
 $passkey_key = $bb_cfg['passkey_key'];
-$max_left_val = 536870912000;   // 500 GB
-$max_up_down_val = 5497558138880;  // 5 TB
-$max_up_add_val = 85899345920;    // 80 GB
-$max_down_add_val = 85899345920;    // 80 GB
+$max_left_val = 536870912000; // 500 GB
+$max_up_down_val = 5497558138880; // 5 TB
+$max_up_add_val = 85899345920; // 80 GB
+$max_down_add_val = 85899345920; // 80 GB
 
 // Recover info_hash
 if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
@@ -139,7 +139,7 @@ function drop_fast_announce($lp_info)
     global $announce_interval;
 
     if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
-        return;  // if announce interval correct
+        return; // if announce interval correct
     }
 
     $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
@@ -163,6 +163,7 @@ require __DIR__ . '/includes/init_tr.php';
 
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
+$completed = ($event === 'completed');
 
 // Stopped event
 if ($stopped) {
@@ -244,7 +245,7 @@ if ($lp_info) {
             if (!$seeder && $bb_cfg['tracker']['leech_expire_factor'] && $user_ratio < 0.5) {
                 $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
             }
-            $sql .= "	GROUP BY user_id";
+            $sql .= " GROUP BY user_id";
 
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_seed_count']) {
@@ -267,7 +268,7 @@ if ($lp_info) {
             if (!$seeder && $bb_cfg['tracker']['leech_expire_factor']) {
                 $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
             }
-            $sql .= "	GROUP BY topic_id";
+            $sql .= " GROUP BY topic_id";
 
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_seed_ips']) {
@@ -342,7 +343,7 @@ if ($lp_info) {
 }
 
 if (!$lp_info || !$peer_info_updated) {
-    $columns = 'peer_hash,    topic_id,  user_id,   ip,       port,  seeder,  releaser, tor_type,  uploaded,  downloaded, remain, speed_up,  speed_down,  up_add,  down_add,  update_time';
+    $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time';
     $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time";
 
     DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
@@ -397,8 +398,7 @@ if (!$output) {
         }
     }
 
-    $seeders = 0;
-    $leechers = 0;
+    $seeders = $leechers = 0;
 
     if ($bb_cfg['tracker']['scrape']) {
         $row = DB()->fetch_row("
