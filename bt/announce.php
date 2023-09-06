@@ -90,6 +90,9 @@ if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
     msg_die('Invalid passkey');
 }
 
+// Get info about torrent client
+$client = 'Example :D';
+
 // IP
 $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -161,9 +164,6 @@ if (!CACHE('tr_cache')->used && !$lp_info) {
 		SELECT * FROM " . BB_BT_TRACKER . " WHERE peer_hash = '$peer_hash' LIMIT 1
 	");
 }
-
-// Get info about torrent client
-$client = 'qBit :)';
 
 if ($lp_info) {
     $user_id = $lp_info['user_id'];
