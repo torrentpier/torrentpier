@@ -37,10 +37,12 @@ class Redis extends Common
 
     public function connect()
     {
+        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+
         $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
+        if (@$this->redis->$connect_type($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
