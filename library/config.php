@@ -627,8 +627,8 @@ $bb_cfg['page'] = [
 // Tracker settings
 $bb_cfg['tracker'] = [
     'autoclean' => true,
-    'off' => false,
-    'off_reason' => 'temporarily disabled',
+    'bt_off' => false,
+    'bt_off_reason' => 'Temporarily disabled',
     'numwant' => 50,
     'update_dlstat' => true,
     'expire_factor' => 2.5,
