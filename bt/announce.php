@@ -10,6 +10,7 @@
 define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
+require __DIR__ . '/includes/init_tr.php';
 
 global $bb_cfg;
 
@@ -135,9 +136,7 @@ if ($lp_info && (!isset($event) || $event !== 'stopped')) {
     drop_fast_announce($lp_info);
 }
 
-// Start announcer
-require __DIR__ . '/includes/init_tr.php';
-
+// Events
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
 $completed = ($event === 'completed');
@@ -398,31 +397,6 @@ if (!$output) {
     ];
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
-}
-
-// Functions
-function drop_fast_announce($lp_info)
-{
-    global $announce_interval;
-
-    if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
-        return; // if announce interval correct
-    }
-
-    $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
-
-    dummy_exit($new_ann_intrv);
-}
-
-function msg_die($msg)
-{
-    $output = \SandFox\Bencode\Bencode::encode([
-        'min interval' => (int)1800,
-        'failure reason' => (string)$msg,
-        'warning message' => (string)$msg,
-    ]);
-
-    die($output);
 }
 
 // Return data to client

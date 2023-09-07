@@ -36,3 +36,27 @@ function error_exit($msg = '')
 
     exit;
 }
+
+function drop_fast_announce($lp_info)
+{
+    global $announce_interval;
+
+    if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
+        return; // if announce interval correct
+    }
+
+    $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
+
+    dummy_exit($new_ann_intrv);
+}
+
+function msg_die($msg)
+{
+    $output = \SandFox\Bencode\Bencode::encode([
+        'min interval' => (int)1800,
+        'failure reason' => (string)$msg,
+        'warning message' => (string)$msg,
+    ]);
+
+    die($output);
+}

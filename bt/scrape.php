@@ -10,6 +10,7 @@
 define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
+require __DIR__ . '/includes/init_tr.php';
 
 global $bb_cfg;
 
@@ -38,19 +39,6 @@ if (strlen($info_hash) == 32) {
 } else {
     msg_die('Invalid info_hash');
 }
-
-function msg_die($msg)
-{
-    $output = \SandFox\Bencode\Bencode::encode([
-        'min interval' => (int)1800,
-        'failure reason' => (string)$msg,
-        'warning message' => (string)$msg,
-    ]);
-
-    die($output);
-}
-
-require __DIR__ . '/includes/init_tr.php';
 
 $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 /**
