@@ -113,10 +113,12 @@ if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip'])
         }
     }
 }
+
 // Check that IP format is valid
 if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
     msg_die("Invalid IP: $ip");
 }
+
 // Convert IP to HEX format
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
@@ -131,31 +133,6 @@ $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 // Drop fast announce
 if ($lp_info && (!isset($event) || $event !== 'stopped')) {
     drop_fast_announce($lp_info);
-}
-
-// Functions
-function drop_fast_announce($lp_info)
-{
-    global $announce_interval;
-
-    if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
-        return; // if announce interval correct
-    }
-
-    $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
-
-    dummy_exit($new_ann_intrv);
-}
-
-function msg_die($msg)
-{
-    $output = \SandFox\Bencode\Bencode::encode([
-        'min interval' => (int)1800,
-        'failure reason' => (string)$msg,
-        'warning message' => (string)$msg,
-    ]);
-
-    die($output);
 }
 
 // Start announcer
@@ -421,6 +398,31 @@ if (!$output) {
     ];
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+}
+
+// Functions
+function drop_fast_announce($lp_info)
+{
+    global $announce_interval;
+
+    if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
+        return; // if announce interval correct
+    }
+
+    $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
+
+    dummy_exit($new_ann_intrv);
+}
+
+function msg_die($msg)
+{
+    $output = \SandFox\Bencode\Bencode::encode([
+        'min interval' => (int)1800,
+        'failure reason' => (string)$msg,
+        'warning message' => (string)$msg,
+    ]);
+
+    die($output);
 }
 
 // Return data to client
