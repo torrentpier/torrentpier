@@ -64,7 +64,7 @@ ajax.callback.callseed = function (data) {
 
 <!-- BEGIN dl_list_none -->
 <tr>
-	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->DL-List: <!-- ENDIF -->{L_NONE}</td>
+	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->{L_SHOW_DL_LIST}: {L_NONE}<!-- ENDIF --></td>
 </tr>
 <!-- END dl_list_none -->
 
