@@ -62,7 +62,7 @@ $bt_topic_id = $t_data['topic_id'];
 $bt_user_id = $userdata['user_id'];
 $attach_id = $attachments['_' . $post_id][$i]['attach_id'];
 $tracker_status = $attachments['_' . $post_id][$i]['tracker_status'];
-$download_count = $attachments['_' . $post_id][$i]['download_count'];
+$download_count = declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times');
 $tor_file_size = humn_size($attachments['_' . $post_id][$i]['filesize']);
 $tor_file_time = bb_date($attachments['_' . $post_id][$i]['filetime']);
 
@@ -99,7 +99,7 @@ if (!$tor_reged) {
         'U_DOWNLOAD_LINK' => $download_link,
         'FILESIZE' => $tor_file_size,
 
-        'DOWNLOAD_COUNT' => declension((int)$download_count, 'times'),
+        'DOWNLOAD_COUNT' => $download_count,
         'POSTED_TIME' => $tor_file_time,
     ]);
 
@@ -138,6 +138,7 @@ if ($tor_auth) {
 
 if ($tor_reged && $tor_info) {
     $tor_size = ($tor_info['size']) ?: 0;
+    $tor_completed_count = declension((int)$tor_info['complete_count'], 'times');
     $tor_id = $tor_info['topic_id'];
     $tor_type = $tor_info['tor_type'];
 
@@ -213,11 +214,11 @@ if ($tor_reged && $tor_info) {
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
-            'DOWNLOAD_COUNT' => declension((int)$download_count, 'times'),
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size),
-            'COMPLETED' => declension((int)$tor_info['complete_count'], 'times'),
+            'DOWNLOAD_COUNT' => $download_count,
+            'COMPLETED' => $tor_completed_count,
         ]);
 
         if ($comment) {
@@ -232,7 +233,8 @@ if ($tor_reged && $tor_info) {
 
             'TOR_SIZE' => humn_size($tor_size),
             'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
-            'TOR_COMPLETED' => declension((int)$tor_info['complete_count'], 'times'),
+            'TOR_DOWNLOAD_COUNT' => $download_count,
+            'TOR_COMPLETED' => $tor_completed_count,
         ]);
     }
 
