@@ -225,7 +225,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
         $torhelp_topics = [];
 
         foreach (DB()->fetch_rowset($sql) as $row) {
-            $torhelp_topics[] = '<a href="viewtopic.php?t=' . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';
+            $torhelp_topics[] = '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';
         }
 
         $template->assign_vars([
