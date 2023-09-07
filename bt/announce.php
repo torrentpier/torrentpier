@@ -207,7 +207,7 @@ if ($lp_info) {
     $row = DB()->fetch_row($sql);
 
     if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash_sql));
+        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
     }
     if (empty($row['user_id'])) {
         msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
@@ -408,16 +408,16 @@ if (!$output) {
 			LIMIT 1
 		");
 
-        $seeders = $row['seeders'];
-        $leechers = $row['leechers'];
+        $seeders = $row['seeders'] ?? 0;
+        $leechers = $row['leechers'] ?? 0;
     }
 
     $output = [
         'interval' => (int)$announce_interval,
         'min interval' => (int)$announce_interval,
-        'peers' => $peers,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
+        'peers' => $peers,
     ];
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
