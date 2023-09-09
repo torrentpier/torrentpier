@@ -162,36 +162,42 @@ if ($lp_info) {
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
 } else {
-    // Verify if torrent registered on tracker and user authorized
-    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     /**
      * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
      * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
      */
+    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
-		SELECT tor.topic_id, tor.poster_id, tor.tor_type, u.*
+		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.info_hash, tor.info_hash_v2, u.*
 		FROM " . BB_BT_TORRENTS . " tor
 		LEFT JOIN " . BB_BT_USERS . " u ON u.auth_key = '$passkey_sql'
 		$info_hash_where
 		LIMIT 1
 	";
-
     $row = DB()->fetch_row($sql);
 
-    if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
-    }
-    if (empty($row['user_id'])) {
-        msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
-    }
-
+    // Assign variables
     $user_id = $row['user_id'];
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
+
+    // Check user and topic id
+    if (empty($topic_id)) {
+        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
+    }
+    if (empty($user_id)) {
+        msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
+    }
+
+    // Check hybrid torrents
+    $is_hybrid = false;
+    if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
+        $is_hybrid = true;
+    }
 
     // Ratio limits
     if ((TR_RATING_LIMITS || $bb_cfg['tracker']['limit_concurrent_ips']) && !$stopped) {
