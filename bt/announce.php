@@ -36,7 +36,7 @@ if (strpos($_SERVER['REQUEST_URI'], 'scrape') !== false) {
     msg_die('Please disable SCRAPE!');
 }
 if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key]) || strlen($_GET[$passkey_key]) != BT_AUTH_KEY_LENGTH) {
-    msg_die('Please LOG IN and REDOWNLOAD this torrent (passkey not found)');
+    msg_die('Please LOG IN and RE-DOWNLOAD this torrent (passkey not found)');
 }
 
 // Input var names
@@ -63,7 +63,7 @@ if (!isset($info_hash)) {
     msg_die('info_hash does not exist');
 }
 if (!isset($peer_id) || strlen($peer_id) != 20) {
-    msg_die('Invalid peer_id');
+    msg_die('Invalid peer_id: ' . $peer_id);
 }
 
 // Check info_hash version
@@ -72,23 +72,23 @@ if (strlen($info_hash) == 32) {
 } elseif (strlen($info_hash) == 20) {
     $is_bt_v2 = false;
 } else {
-    msg_die('Invalid info_hash');
+    msg_die('Invalid info_hash: ' . $info_hash);
 }
 
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
-    msg_die('Invalid port');
+    msg_die('Invalid port: ' . $port);
 }
 if (!isset($uploaded) || $uploaded < 0) {
-    msg_die('Invalid uploaded value');
+    msg_die('Invalid uploaded value: ' . $uploaded);
 }
 if (!isset($downloaded) || $downloaded < 0) {
-    msg_die('Invalid downloaded value');
+    msg_die('Invalid downloaded value: ' . $downloaded);
 }
 if (!isset($left) || $left < 0) {
-    msg_die('Invalid left value');
+    msg_die('Invalid left value: ' . $left);
 }
 if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
-    msg_die('Invalid passkey');
+    msg_die('Invalid passkey: ' . $passkey);
 }
 
 // IP
@@ -141,6 +141,10 @@ if ($stopped) {
     CACHE('tr_cache')->rm(PEER_HASH_PREFIX . $peer_hash);
 }
 
+// Completed event
+if ($completed) {
+}
+
 // Get last peer info from DB
 if (!CACHE('tr_cache')->used && !$lp_info) {
     $lp_info = DB()->fetch_row("
@@ -186,7 +190,7 @@ if ($lp_info) {
         msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
     }
     if (empty($user_id)) {
-        msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
+        msg_die('Please LOG IN and RE-DOWNLOAD this torrent (user not found)');
     }
 
     // Check hybrid torrents

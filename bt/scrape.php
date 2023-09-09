@@ -36,7 +36,7 @@ if (strlen($info_hash) == 32) {
 } elseif (strlen($info_hash) == 20) {
     $is_bt_v2 = false;
 } else {
-    msg_die('Invalid info_hash');
+    msg_die('Invalid info_hash: ' . $info_hash);
 }
 
 $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
