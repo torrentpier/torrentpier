@@ -170,19 +170,19 @@ if ($lp_info) {
 	";
     $row = DB()->fetch_row($sql);
 
+    // Verify if torrent registered on tracker and user authorized
+    if (empty($row['topic_id'])) {
+        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
+    }
+    if (empty($row['user_id'])) {
+        msg_die('Please LOG IN and RE-DOWNLOAD this torrent (user not found)');
+    }
+
     // Assign variables
     $user_id = $row['user_id'];
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
-
-    // Verify if torrent registered on tracker and user authorized
-    if (empty($topic_id)) {
-        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
-    }
-    if (empty($user_id)) {
-        msg_die('Please LOG IN and RE-DOWNLOAD this torrent (user not found)');
-    }
 
     // Check hybrid torrents
     $is_hybrid = false;
