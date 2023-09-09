@@ -25,10 +25,6 @@ if (isset($_GET['event']) && $_GET['event'] === 'completed') {
 
 $announce_interval = $bb_cfg['announce_interval'];
 $passkey_key = $bb_cfg['passkey_key'];
-$max_left_val = 536870912000; // 500 GB
-$max_up_down_val = 5497558138880; // 5 TB
-$max_up_add_val = 85899345920; // 80 GB
-$max_down_add_val = 85899345920; // 80 GB
 
 // Recover info_hash
 if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
@@ -82,13 +78,13 @@ if (strlen($info_hash) == 32) {
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port');
 }
-if (!isset($uploaded) || $uploaded < 0 || $uploaded > $max_up_down_val || $uploaded == 1844674407370) {
+if (!isset($uploaded) || $uploaded < 0) {
     msg_die('Invalid uploaded value');
 }
-if (!isset($downloaded) || $downloaded < 0 || $downloaded > $max_up_down_val || $downloaded == 1844674407370) {
+if (!isset($downloaded) || $downloaded < 0) {
     msg_die('Invalid downloaded value');
 }
-if (!isset($left) || $left < 0 || $left > $max_left_val) {
+if (!isset($left) || $left < 0) {
     msg_die('Invalid left value');
 }
 if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
@@ -162,36 +158,42 @@ if ($lp_info) {
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
 } else {
-    // Verify if torrent registered on tracker and user authorized
-    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     /**
      * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
      * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
      */
+    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
-		SELECT tor.topic_id, tor.poster_id, tor.tor_type, u.*
+		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.info_hash, tor.info_hash_v2, u.*
 		FROM " . BB_BT_TORRENTS . " tor
 		LEFT JOIN " . BB_BT_USERS . " u ON u.auth_key = '$passkey_sql'
 		$info_hash_where
 		LIMIT 1
 	";
-
     $row = DB()->fetch_row($sql);
 
-    if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
-    }
-    if (empty($row['user_id'])) {
-        msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
-    }
-
+    // Assign variables
     $user_id = $row['user_id'];
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
+
+    // Check user and topic id
+    if (empty($topic_id)) {
+        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
+    }
+    if (empty($user_id)) {
+        msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
+    }
+
+    // Check hybrid torrents
+    $is_hybrid = false;
+    if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
+        $is_hybrid = true;
+    }
 
     // Ratio limits
     if ((TR_RATING_LIMITS || $bb_cfg['tracker']['limit_concurrent_ips']) && !$stopped) {
