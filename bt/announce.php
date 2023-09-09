@@ -25,10 +25,6 @@ if (isset($_GET['event']) && $_GET['event'] === 'completed') {
 
 $announce_interval = $bb_cfg['announce_interval'];
 $passkey_key = $bb_cfg['passkey_key'];
-$max_left_val = 536870912000; // 500 GB
-$max_up_down_val = 5497558138880; // 5 TB
-$max_up_add_val = 85899345920; // 80 GB
-$max_down_add_val = 85899345920; // 80 GB
 
 // Recover info_hash
 if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
@@ -82,13 +78,13 @@ if (strlen($info_hash) == 32) {
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port');
 }
-if (!isset($uploaded) || $uploaded < 0 || $uploaded > $max_up_down_val || $uploaded == 1844674407370) {
+if (!isset($uploaded) || $uploaded < 0) {
     msg_die('Invalid uploaded value');
 }
-if (!isset($downloaded) || $downloaded < 0 || $downloaded > $max_up_down_val || $downloaded == 1844674407370) {
+if (!isset($downloaded) || $downloaded < 0) {
     msg_die('Invalid downloaded value');
 }
-if (!isset($left) || $left < 0 || $left > $max_left_val) {
+if (!isset($left) || $left < 0) {
     msg_die('Invalid left value');
 }
 if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
