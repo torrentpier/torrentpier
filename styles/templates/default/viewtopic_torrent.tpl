@@ -57,14 +57,14 @@ ajax.callback.callseed = function (data) {
 	<td colspan="2" class="borderless bCenter pad_8">
 			{L_SIZE}:&nbsp; <b>{TOR_SIZE}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
 			{L_IS_REGISTERED}:&nbsp; <b>{TOR_LONGEVITY}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
-			{L_COMPLETED}:&nbsp; <b>{TOR_COMPLETED}</b>
+			{L_COMPLETED}:&nbsp; <b title="Полных скачиваний: {TOR_COMPLETED}">{TOR_DOWNLOAD_COUNT}</b>
 	</td>
 </tr>
 <!-- ENDIF / SHOW_DL_LIST_TOR_INFO -->
 
 <!-- BEGIN dl_list_none -->
 <tr>
-	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->DL-List: <!-- ENDIF -->{L_NONE}</td>
+	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->{L_SHOW_DL_LIST}: {L_NONE}<!-- ENDIF --></td>
 </tr>
 <!-- END dl_list_none -->
 

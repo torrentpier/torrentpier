@@ -38,7 +38,6 @@ switch ($mode) {
         global $template;
 
         $match = XS_TPL_PREFIX;
-        $match_len = strlen($match);
         $dir = $template->cachedir;
         $res = @opendir($dir);
         while (($file = readdir($res)) !== false) {

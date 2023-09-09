@@ -18,12 +18,13 @@ if (empty($_SERVER['HTTP_USER_AGENT'])) {
     die;
 }
 
+// Ignore 'completed' event
+if (isset($_GET['event']) && $_GET['event'] === 'completed') {
+    dummy_exit(random_int(600, 1200));
+}
+
 $announce_interval = $bb_cfg['announce_interval'];
 $passkey_key = $bb_cfg['passkey_key'];
-$max_left_val = 536870912000; // 500 GB
-$max_up_down_val = 5497558138880; // 5 TB
-$max_up_add_val = 85899345920; // 80 GB
-$max_down_add_val = 85899345920; // 80 GB
 
 // Recover info_hash
 if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
@@ -77,21 +78,18 @@ if (strlen($info_hash) == 32) {
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port');
 }
-if (!isset($uploaded) || $uploaded < 0 || $uploaded > $max_up_down_val || $uploaded == 1844674407370) {
+if (!isset($uploaded) || $uploaded < 0) {
     msg_die('Invalid uploaded value');
 }
-if (!isset($downloaded) || $downloaded < 0 || $downloaded > $max_up_down_val || $downloaded == 1844674407370) {
+if (!isset($downloaded) || $downloaded < 0) {
     msg_die('Invalid downloaded value');
 }
-if (!isset($left) || $left < 0 || $left > $max_left_val) {
+if (!isset($left) || $left < 0) {
     msg_die('Invalid left value');
 }
 if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
     msg_die('Invalid passkey');
 }
-
-// Get info about torrent client
-$client = 'Example :D';
 
 // IP
 $ip = $_SERVER['REMOTE_ADDR'];
@@ -120,38 +118,23 @@ if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
 // Convert IP to HEX format
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
-// Start announcer
-require __DIR__ . '/includes/init_tr.php';
-
 // Peer unique id
-$peer_hash = md5(rtrim($info_hash, ' ') . $passkey . $ip . $port);
-
-// Events
-$seeder = ($left == 0) ? 1 : 0;
-$stopped = ($event === 'stopped');
-$completed = ($event === 'completed');
-
-/**
- * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
- * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
- */
-$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-$info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
-
-// Completed event
-if ($completed && $seeder) {
-    DB()->query("UPDATE " . BB_BT_TORRENTS . " tor SET tor.complete_count = tor.complete_count + 1 $info_hash_where LIMIT 1");
-}
+$peer_hash = md5(
+    rtrim($info_hash, ' ') . $passkey . $ip . $port
+);
 
 // Get cached peer info from previous announce (last peer info)
 $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 
 // Drop fast announce
-if ($lp_info && (!isset($event) || !$stopped)) {
-    if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
-        drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
-    }
+if ($lp_info && (!isset($event) || $event !== 'stopped')) {
+    drop_fast_announce($lp_info);
 }
+
+// Events
+$seeder = ($left == 0) ? 1 : 0;
+$stopped = ($event === 'stopped');
+$completed = ($event === 'completed');
 
 // Stopped event
 if ($stopped) {
@@ -166,35 +149,51 @@ if (!CACHE('tr_cache')->used && !$lp_info) {
 }
 
 if ($lp_info) {
+    if (!$stopped) {
+        drop_fast_announce($lp_info);
+    }
+
     $user_id = $lp_info['user_id'];
     $topic_id = $lp_info['topic_id'];
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
 } else {
+    /**
+     * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
+     * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
+     */
+    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
-		SELECT tor.topic_id, tor.poster_id, tor.tor_type, u.*
+		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.info_hash, tor.info_hash_v2, u.*
 		FROM " . BB_BT_TORRENTS . " tor
 		LEFT JOIN " . BB_BT_USERS . " u ON u.auth_key = '$passkey_sql'
 		$info_hash_where
 		LIMIT 1
 	";
-
     $row = DB()->fetch_row($sql);
 
-    // Verify if torrent registered on tracker and user authorized
-    if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
-    }
-    if (empty($row['user_id'])) {
-        msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
-    }
-
+    // Assign variables
     $user_id = $row['user_id'];
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
+
+    // Check user and topic id
+    if (empty($topic_id)) {
+        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
+    }
+    if (empty($user_id)) {
+        msg_die('Please LOG IN and REDOWNLOAD this torrent (user not found)');
+    }
+
+    // Check hybrid torrents
+    $is_hybrid = false;
+    if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
+        $is_hybrid = true;
+    }
 
     // Ratio limits
     if ((TR_RATING_LIMITS || $bb_cfg['tracker']['limit_concurrent_ips']) && !$stopped) {
@@ -223,7 +222,7 @@ if ($lp_info) {
             if (!$seeder && $bb_cfg['tracker']['leech_expire_factor'] && $user_ratio < 0.5) {
                 $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
             }
-            $sql .= "	GROUP BY user_id";
+            $sql .= " GROUP BY user_id";
 
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_seed_count']) {
@@ -246,7 +245,7 @@ if ($lp_info) {
             if (!$seeder && $bb_cfg['tracker']['leech_expire_factor']) {
                 $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
             }
-            $sql .= "	GROUP BY topic_id";
+            $sql .= " GROUP BY topic_id";
 
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_seed_ips']) {
@@ -301,7 +300,6 @@ if ($lp_info) {
     $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
 
     $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = $tor_type" : '';
-    $sql .= ($client != $lp_info['client']) ? ", client = $client" : '';
 
     $sql .= ($uploaded != $lp_info['uploaded']) ? ", uploaded = $uploaded" : '';
     $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
@@ -322,8 +320,8 @@ if ($lp_info) {
 }
 
 if (!$lp_info || !$peer_info_updated) {
-    $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, client';
-    $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, '$client'";
+    $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time';
+    $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time";
 
     DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
 }
@@ -343,10 +341,9 @@ $lp_info = [
     'uploaded' => (float)$uploaded,
     'user_id' => (int)$user_id,
     'tor_type' => (int)$tor_type,
-    'client' => (string)$client
 ];
 
-CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
+$lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
 
 // Get cached output
 $output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
@@ -378,20 +375,18 @@ if (!$output) {
         }
     }
 
-    $complete_count = $leechers = $seeders = 0;
+    $seeders = $leechers = 0;
 
     if ($bb_cfg['tracker']['scrape']) {
         $row = DB()->fetch_row("
-            SELECT tor.complete_count, snap.seeders, snap.leechers
-            FROM " . BB_BT_TORRENTS . " tor
-            LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
-            $info_hash_where
-            LIMIT 1
-        ");
+			SELECT seeders, leechers
+			FROM " . BB_BT_TRACKER_SNAP . "
+			WHERE topic_id = $topic_id
+			LIMIT 1
+		");
 
         $seeders = $row['seeders'] ?? 0;
         $leechers = $row['leechers'] ?? 0;
-        $complete_count = $row['complete_count'] ?? 0;
     }
 
     $output = [
@@ -399,36 +394,10 @@ if (!$output) {
         'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
-        'downloaded' => (int)$complete_count,
-        'warning message' => 'Statistics were updated',
-        'peers' => $peers
+        'peers' => $peers,
     ];
 
-    CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
-}
-
-// Functions
-function drop_fast_announce($lp_info, $lp_cached_peers = [])
-{
-    global $announce_interval;
-
-    if ($lp_info['update_time'] < (TIMENOW - $announce_interval + 60)) {
-        return; // if announce interval correct
-    }
-
-    $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
-
-    dummy_exit($new_ann_intrv, $lp_cached_peers);
-}
-
-function msg_die($msg)
-{
-    $output = \SandFox\Bencode\Bencode::encode([
-        'min interval' => (int)1800,
-        'failure reason' => (string)$msg,
-    ]);
-
-    die($output);
+    $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
 }
 
 // Return data to client

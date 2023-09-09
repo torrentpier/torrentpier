@@ -26,7 +26,7 @@ class Redis extends Common
     public function __construct($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
-            die('Error: Redis extension not installed');
+            die("Error: $this->engine extension not installed");
         }
 
         $this->cfg = $cfg;
@@ -37,15 +37,17 @@ class Redis extends Common
 
     public function connect()
     {
+        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+
         $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
+        if (@$this->redis->$connect_type($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
         if (!$this->connected && $this->cfg['con_required']) {
-            die('Could not connect to redis server');
+            die("Could not connect to $this->engine server");
         }
 
         $this->debug('stop');

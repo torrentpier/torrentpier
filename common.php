@@ -102,13 +102,7 @@ define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
 
-define('BT_AUTH_KEY_LENGTH', 15);
-define('PEER_HASH_PREFIX', 'peer_');
-define('PEERS_LIST_PREFIX', 'peers_list_');
-define('SCRAPE_LIST_PREFIX', 'scrape_list_');
-define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor'])));
-define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7));
-define('SCRAPE_LIST_EXPIRE', round($bb_cfg['scrape_interval'] * 0.7));
+define('BT_AUTH_KEY_LENGTH', 10);
 
 define('DL_STATUS_RELEASER', -1);
 define('DL_STATUS_DOWN', 0);
@@ -343,32 +337,18 @@ function sys($param)
     }
 }
 
-// Board or tracker init
+// Initialization
 if (!defined('IN_TRACKER')) {
+    // Init board
     require_once INC_DIR . '/init_bb.php';
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
-    function dummy_exit($interval = 1800, $cache_dict = [])
-    {
-        $output = [
-            'interval' => (int)$interval,
-            'min interval' => (int)$interval,
-            'peers' => (string)DUMMY_PEER,
-        ];
+    define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor'])));
+    define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7));
 
-        if (!empty($cache_dict)) {
-            $output['complete'] = $cache_dict['complete'];
-            $output['incomplete'] = $cache_dict['incomplete'];
-            $output['downloaded'] = $cache_dict['downloaded'];
-            $output['warning message'] = 'Next statistics update in: ' . (floor($interval / 60) % 60) . ' minutes';
-            $output['peers'] = $cache_dict['peers'];
-        }
-
-        $output = \SandFox\Bencode\Bencode::encode($output);
-
-        die($output);
-    }
+    define('PEER_HASH_PREFIX', 'peer_');
+    define('PEERS_LIST_PREFIX', 'peers_list_');
 
     header('Content-Type: text/plain');
     header('Pragma: no-cache');
@@ -379,4 +359,7 @@ if (!defined('IN_TRACKER')) {
             dummy_exit(random_int(60, 2400));
         }
     }
+
+    // Init tracker
+    require_once BB_PATH . '/bt/includes/init_tr.php';
 }
