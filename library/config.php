@@ -66,7 +66,7 @@ $bb_cfg['cache'] = [
     'redis' => [
         'host' => '127.0.0.1',
         'port' => 6379,
-        'pconnect' => true,
+        'pconnect' => PHP_ZTS ? false : true,
         'con_required' => true,
     ],
     // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
@@ -95,6 +95,7 @@ $bb_cfg['gzip_compress'] = false; // compress output
 
 // Tracker
 $bb_cfg['announce_interval'] = 2400; // Announce interval (default: 2400)
+$bb_cfg['scrape_interval'] = 60; // Scrape interval (default: 60)
 $bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']

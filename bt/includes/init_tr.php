@@ -37,7 +37,7 @@ function error_exit($msg = '')
     exit;
 }
 
-function drop_fast_announce($lp_info)
+function drop_fast_announce($lp_info, $lp_cached_peers = [])
 {
     global $announce_interval;
 
@@ -47,7 +47,7 @@ function drop_fast_announce($lp_info)
 
     $new_ann_intrv = $lp_info['update_time'] + $announce_interval - TIMENOW;
 
-    dummy_exit($new_ann_intrv);
+    dummy_exit($new_ann_intrv, $lp_cached_peers);
 }
 
 function msg_die($msg)
@@ -55,19 +55,27 @@ function msg_die($msg)
     $output = \SandFox\Bencode\Bencode::encode([
         'min interval' => (int)1800,
         'failure reason' => (string)$msg,
-        'warning message' => (string)$msg,
     ]);
 
     die($output);
 }
 
-function dummy_exit($interval = 1800)
+function dummy_exit($interval = 1800, $cache_dict = [])
 {
-    $output = \SandFox\Bencode\Bencode::encode([
+    $output = [
         'interval' => (int)$interval,
         'min interval' => (int)$interval,
         'peers' => (string)DUMMY_PEER,
-    ]);
+    ];
+
+    if (!empty($cache_dict)) {
+        $output['complete'] = $cache_dict['complete'];
+        $output['incomplete'] = $cache_dict['incomplete'];
+        $output['warning message'] = 'Next statistics update in: ' . (floor($interval / 60) % 60) . ' minutes';
+        $output['peers'] = $cache_dict['peers'];
+    }
+
+    $output = \SandFox\Bencode\Bencode::encode($output);
 
     die($output);
 }

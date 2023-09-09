@@ -39,6 +39,12 @@ if (strlen($info_hash) == 32) {
     msg_die('Invalid info_hash: ' . $info_hash);
 }
 
+$info_hash_hex = bin2hex($info_hash);
+
+if ($lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex)) {
+    die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
+}
+
 $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 /**
  * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
@@ -55,7 +61,7 @@ $row = DB()->fetch_row("
 ");
 
 if (!$row) {
-    msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
+    msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
 }
 
 $output['files'][$info_hash] = [
@@ -63,6 +69,8 @@ $output['files'][$info_hash] = [
     'downloaded' => (int)$row['complete_count'],
     'incomplete' => (int)$row['leechers'],
 ];
+
+$peers_list_cached = CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);;
 
 echo \SandFox\Bencode\Bencode::encode($output);
 

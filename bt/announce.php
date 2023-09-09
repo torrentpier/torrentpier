@@ -18,11 +18,6 @@ if (empty($_SERVER['HTTP_USER_AGENT'])) {
     die;
 }
 
-// Ignore 'completed' event
-if (isset($_GET['event']) && $_GET['event'] === 'completed') {
-    dummy_exit(random_int(600, 1200));
-}
-
 $announce_interval = $bb_cfg['announce_interval'];
 $passkey_key = $bb_cfg['passkey_key'];
 
@@ -119,30 +114,30 @@ if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
 // Peer unique id
-$peer_hash = md5(
-    rtrim($info_hash, ' ') . $passkey . $ip . $port
-);
-
-// Get cached peer info from previous announce (last peer info)
-$lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
-
-// Drop fast announce
-if ($lp_info && (!isset($event) || $event !== 'stopped')) {
-    drop_fast_announce($lp_info);
-}
+$peer_hash = md5(rtrim($info_hash, ' ') . $passkey . $ip . $port);
 
 // Events
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
 $completed = ($event === 'completed');
 
+// Completed event
+if ($completed && $seeder) {
+}
+
+// Get cached peer info from previous announce (last peer info)
+$lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
+
+// Drop fast announce
+if ($lp_info && (!isset($event) || !$stopped)) {
+    if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
+        drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
+    }
+}
+
 // Stopped event
 if ($stopped) {
     CACHE('tr_cache')->rm(PEER_HASH_PREFIX . $peer_hash);
-}
-
-// Completed event
-if ($completed) {
 }
 
 // Get last peer info from DB
@@ -153,10 +148,6 @@ if (!CACHE('tr_cache')->used && !$lp_info) {
 }
 
 if ($lp_info) {
-    if (!$stopped) {
-        drop_fast_announce($lp_info);
-    }
-
     $user_id = $lp_info['user_id'];
     $topic_id = $lp_info['topic_id'];
     $releaser = $lp_info['releaser'];
@@ -185,7 +176,7 @@ if ($lp_info) {
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
 
-    // Check user and topic id
+    // Verify if torrent registered on tracker and user authorized
     if (empty($topic_id)) {
         msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
     }
@@ -398,6 +389,7 @@ if (!$output) {
         'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
+        'warning message' => 'Statistics were updated',
         'peers' => $peers,
     ];
 
