@@ -103,10 +103,6 @@ define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
 
 define('BT_AUTH_KEY_LENGTH', 10);
-define('PEER_HASH_PREFIX', 'peer_');
-define('PEERS_LIST_PREFIX', 'peers_list_');
-define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor']))); // sec
-define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7)); // sec
 
 define('DL_STATUS_RELEASER', -1);
 define('DL_STATUS_DOWN', 0);
@@ -341,22 +337,18 @@ function sys($param)
     }
 }
 
-// Board or tracker init
+// Initialization
 if (!defined('IN_TRACKER')) {
+    // Init board
     require_once INC_DIR . '/init_bb.php';
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
-    function dummy_exit($interval = 1800)
-    {
-        $output = \SandFox\Bencode\Bencode::encode([
-            'interval' => (int)$interval,
-            'min interval' => (int)$interval,
-            'peers' => (string)DUMMY_PEER,
-        ]);
+    define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor'])));
+    define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7));
 
-        die($output);
-    }
+    define('PEER_HASH_PREFIX', 'peer_');
+    define('PEERS_LIST_PREFIX', 'peers_list_');
 
     header('Content-Type: text/plain');
     header('Pragma: no-cache');
@@ -367,4 +359,7 @@ if (!defined('IN_TRACKER')) {
             dummy_exit(random_int(60, 2400));
         }
     }
+
+    // Init tracker
+    require_once BB_PATH . '/bt/includes/init_tr.php';
 }

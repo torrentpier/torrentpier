@@ -10,7 +10,6 @@
 define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
-require __DIR__ . '/includes/init_tr.php';
 
 global $bb_cfg;
 
