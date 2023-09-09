@@ -60,3 +60,14 @@ function msg_die($msg)
 
     die($output);
 }
+
+function dummy_exit($interval = 1800)
+{
+    $output = \SandFox\Bencode\Bencode::encode([
+        'interval' => (int)$interval,
+        'min interval' => (int)$interval,
+        'peers' => (string)DUMMY_PEER,
+    ]);
+
+    die($output);
+}
