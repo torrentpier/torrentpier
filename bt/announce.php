@@ -58,10 +58,10 @@ $passkey = ${$passkey_key} ?? null;
 // Verify request
 // Required params (info_hash, peer_id, port, uploaded, downloaded, left, passkey)
 if (!isset($info_hash)) {
-    msg_die('info_hash does not exist');
+    msg_die('info_hash was not provided');
 }
 if (!isset($peer_id) || strlen($peer_id) != 20) {
-    msg_die('Invalid peer_id: ' . $peer_id);
+    msg_die('Invalid peer_id: ' . bin2hex($peer_id));
 }
 
 // Check info_hash version
@@ -70,7 +70,7 @@ if (strlen($info_hash) == 32) {
 } elseif (strlen($info_hash) == 20) {
     $is_bt_v2 = false;
 } else {
-    msg_die('Invalid info_hash: ' . $info_hash);
+    msg_die('Invalid info_hash: ' . bin2hex($info_hash));
 }
 
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
