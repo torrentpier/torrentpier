@@ -27,10 +27,12 @@ $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 
 // Verify info_hash
 if (!isset($info_hash)) {
-    msg_die('info_hash does not exist');
+    msg_die('info_hash was not provided');
 }
+
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
+
 // Check info_hash version
 if (strlen($info_hash) == 32) {
     $is_bt_v2 = true;
@@ -39,8 +41,6 @@ if (strlen($info_hash) == 32) {
 } else {
     msg_die('Invalid info_hash: ' . $info_hash_hex);
 }
-
-
 
 if ($lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex)) {
     die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
