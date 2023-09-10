@@ -121,7 +121,6 @@ $peer_hash = md5(rtrim($info_hash, ' ') . $passkey . $ip . $port);
 
 // Events
 $stopped = ($event === 'stopped');
-$completed = ($event === 'completed');
 
 // Set seeder & complete
 $seeder = ($left == 0) ? 1 : 0;
