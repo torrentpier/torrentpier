@@ -69,6 +69,8 @@ if (strlen($info_hash) == 32) {
 } else {
     msg_die('Invalid info_hash: ' . $info_hash);
 }
+// Hybrid torrent checks
+$is_hybrid = $hybrid_v1_hash = $hybrid_v2_hash = $hybrid_tor_update = false;
 
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port: ' . $port);
@@ -185,9 +187,14 @@ if ($lp_info) {
     $tor_type = $row['tor_type'];
 
     // Check hybrid torrents
-    $is_hybrid = false;
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
+        // Helpful dev variables
         $is_hybrid = true;
+        $hybrid_v1_hash = &$row['info_hash'];
+        $hybrid_v2_hash = &$row['info_hash_v2'];
+        if ($info_hash === $hybrid_v1_hash) {
+            $hybrid_tor_update = true;
+        }
     }
 
     // Ratio limits
@@ -287,40 +294,40 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
+if (($is_hybrid && $hybrid_tor_update) || !$is_hybrid) { // Update statistics only for one topic
+    if ($lp_info) {
+        $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
-if ($lp_info) {
-    $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
+        $sql .= ", seeder = $seeder";
+        $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
 
-    $sql .= ", seeder = $seeder";
-    $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
+        $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = $tor_type" : '';
 
-    $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = $tor_type" : '';
+        $sql .= ($uploaded != $lp_info['uploaded']) ? ", uploaded = $uploaded" : '';
+        $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
+        $sql .= ", remain = $left";
 
-    $sql .= ($uploaded != $lp_info['uploaded']) ? ", uploaded = $uploaded" : '';
-    $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
-    $sql .= ", remain = $left";
+        $sql .= $up_add ? ", up_add = up_add + $up_add" : '';
+        $sql .= $down_add ? ", down_add = down_add + $down_add" : '';
 
-    $sql .= $up_add ? ", up_add = up_add + $up_add" : '';
-    $sql .= $down_add ? ", down_add = down_add + $down_add" : '';
+        $sql .= ", speed_up = $speed_up";
+        $sql .= ", speed_down = $speed_down";
 
-    $sql .= ", speed_up = $speed_up";
-    $sql .= ", speed_down = $speed_down";
+        $sql .= " WHERE peer_hash = '$peer_hash'";
+        $sql .= " LIMIT 1";
 
-    $sql .= " WHERE peer_hash = '$peer_hash'";
-    $sql .= " LIMIT 1";
+        DB()->query($sql);
 
-    DB()->query($sql);
+        $peer_info_updated = DB()->affected_rows();
+    }
 
-    $peer_info_updated = DB()->affected_rows();
+    if (!$lp_info || !$peer_info_updated) {
+        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time';
+        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time";
+
+        DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
+    }
 }
-
-if (!$lp_info || !$peer_info_updated) {
-    $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time';
-    $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time";
-
-    DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
-}
-
 // Exit if stopped
 if ($stopped) {
     silent_exit();
@@ -380,8 +387,8 @@ if (!$output) {
 			LIMIT 1
 		");
 
-        $seeders = $row['seeders'] ?? 0;
-        $leechers = $row['leechers'] ?? 0;
+        $seeders = $row['seeders'] ?? ($seeder ? 1 : 0);
+        $leechers = $row['leechers'] ?? (!$seeder ? 1 : 0);
     }
 
     $output = [
@@ -389,11 +396,12 @@ if (!$output) {
         'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
+        //'downloaded' => int($client_complete)
         'warning message' => 'Statistics were updated',
         'peers' => $peers,
     ];
 
-    $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+    CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
 }
 
 // Return data to client
