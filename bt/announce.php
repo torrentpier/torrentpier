@@ -126,7 +126,7 @@ $completed = ($event === 'completed');
 
 // Completed event
 if ($completed && $seeder) {
-    // TODO: BB_BT_TRACKER set complete = 1 where = peer_hash
+    // TODO: BB_BT_TRACKER set complete = 1 (is bool) where = peer_hash
 }
 
 // Get cached peer info from previous announce (last peer info)
