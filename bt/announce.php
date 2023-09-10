@@ -396,12 +396,12 @@ if (!$output) {
         'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
-        //'downloaded' => int($client_complete)
+        // TODO: 'downloaded' => (int)$client_complete,
         'warning message' => 'Statistics were updated',
         'peers' => $peers,
     ];
 
-    CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+    $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
 }
 
 // Return data to client

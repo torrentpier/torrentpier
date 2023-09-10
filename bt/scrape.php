@@ -36,7 +36,7 @@ if (strlen($info_hash) == 32) {
 } elseif (strlen($info_hash) == 20) {
     $is_bt_v2 = false;
 } else {
-    msg_die('Invalid info_hash');
+    msg_die('Invalid info_hash: ' . $info_hash);
 }
 
 $info_hash_hex = bin2hex($info_hash);
@@ -70,7 +70,7 @@ $output['files'][$info_hash] = [
     'incomplete' => (int)$row['leechers'],
 ];
 
-CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);
+$peers_list_cached = CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);
 
 echo \SandFox\Bencode\Bencode::encode($output);
 
