@@ -126,6 +126,7 @@ $completed = ($event === 'completed');
 
 // Completed event
 if ($completed && $seeder) {
+    // TODO: BB_BT_TRACKER set complete = 1 where = peer_hash
 }
 
 // Get cached peer info from previous announce (last peer info)
@@ -329,6 +330,7 @@ if (($is_hybrid && $hybrid_tor_update) || !$is_hybrid) { // Update statistics on
         DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
     }
 }
+
 // Exit if stopped
 if ($stopped) {
     silent_exit();
@@ -382,7 +384,7 @@ if (!$output) {
 
     if ($bb_cfg['tracker']['scrape']) {
         $row = DB()->fetch_row("
-			SELECT seeders, leechers, complete
+			SELECT seeders, leechers, completed
 			FROM " . BB_BT_TRACKER_SNAP . "
 			WHERE topic_id = $topic_id
 			LIMIT 1
@@ -390,7 +392,7 @@ if (!$output) {
 
         $seeders = $row['seeders'] ?? ($seeder ? 1 : 0);
         $leechers = $row['leechers'] ?? (!$seeder ? 1 : 0);
-        $client_completed = $row['complete'] ?? 0;
+        $client_completed = $row['completed'] ?? 0;
     }
 
     $output = [
