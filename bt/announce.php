@@ -70,7 +70,8 @@ if (strlen($info_hash) == 32) {
     msg_die('Invalid info_hash: ' . $info_hash);
 }
 // Hybrid torrent checks
-$is_hybrid = $hybrid_v1_hash = $hybrid_v2_hash = $hybrid_tor_update = false;
+$is_hybrid = $hybrid_tor_update = false;
+$hybrid_v1_hash = $hybrid_v2_hash = null;
 
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port: ' . $port);
