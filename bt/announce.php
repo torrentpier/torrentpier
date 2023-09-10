@@ -378,11 +378,11 @@ if (!$output) {
         }
     }
 
-    $seeders = $leechers = 0;
+    $seeders = $leechers = $client_completed = 0;
 
     if ($bb_cfg['tracker']['scrape']) {
         $row = DB()->fetch_row("
-			SELECT seeders, leechers
+			SELECT seeders, leechers, complete
 			FROM " . BB_BT_TRACKER_SNAP . "
 			WHERE topic_id = $topic_id
 			LIMIT 1
@@ -390,6 +390,7 @@ if (!$output) {
 
         $seeders = $row['seeders'] ?? ($seeder ? 1 : 0);
         $leechers = $row['leechers'] ?? (!$seeder ? 1 : 0);
+        $client_completed = $row['complete'] ?? 0;
     }
 
     $output = [
@@ -397,7 +398,7 @@ if (!$output) {
         'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
-        // TODO: 'downloaded' => (int)$client_complete,
+        'downloaded' => (int)$client_completed,
         'warning message' => 'Statistics were updated',
         'peers' => $peers,
     ];

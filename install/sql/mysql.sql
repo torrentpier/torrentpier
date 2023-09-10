@@ -397,6 +397,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap`
   `leechers`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `speed_up`   INT(10) UNSIGNED      NOT NULL DEFAULT '0',
   `speed_down` INT(10) UNSIGNED      NOT NULL DEFAULT '0',
+  `complete`   INT(10)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM

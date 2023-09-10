@@ -68,3 +68,4 @@ INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `
 ALTER TABLE `bb_posts_text` CHANGE `post_text` `post_text` MEDIUMTEXT NOT NULL;
 ALTER TABLE `bb_privmsgs_text` CHANGE `privmsgs_text` `privmsgs_text` MEDIUMTEXT NOT NULL;
 ALTER TABLE `bb_bt_torrents` ADD COLUMN `info_hash_v2` VARBINARY(32) NOT NULL DEFAULT '';
+ALTER TABLE `bb_bt_tracker_snap` ADD COLUMN `complete` INT(10) NOT NULL DEFAULT '0';
