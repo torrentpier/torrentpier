@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `down_add`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `update_time`      INT(11)               NOT NULL DEFAULT '0',
   `complete_percent` BIGINT(20)            NOT NULL DEFAULT '0',
-  `complete`         BOOLEAN               NOT NULL DEFAULT FALSE,
+  `complete`         TINYINT(1)            NOT NULL DEFAULT '0',
   PRIMARY KEY (`peer_hash`),
   KEY `topic_id` (`topic_id`),
   KEY `user_id` (`user_id`)
