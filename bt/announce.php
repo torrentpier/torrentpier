@@ -120,14 +120,12 @@ $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 $peer_hash = md5(rtrim($info_hash, ' ') . $passkey . $ip . $port);
 
 // Events
-$seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
 $completed = ($event === 'completed');
 
-// Completed event
-if ($completed && $seeder) {
-    // TODO: BB_BT_TRACKER set complete = 1 (is bool) where = peer_hash
-}
+// Set seeder & complete
+$seeder = ($left == 0) ? 1 : 0;
+$complete = ($completed && $seeder) ? 1 : 0;
 
 // Get cached peer info from previous announce (last peer info)
 $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
@@ -315,6 +313,8 @@ if (($is_hybrid && $hybrid_tor_update) || !$is_hybrid) { // Update statistics on
         $sql .= ", speed_up = $speed_up";
         $sql .= ", speed_down = $speed_down";
 
+        $sql .= ", complete = $complete";
+
         $sql .= " WHERE peer_hash = '$peer_hash'";
         $sql .= " LIMIT 1";
 
@@ -324,8 +324,8 @@ if (($is_hybrid && $hybrid_tor_update) || !$is_hybrid) { // Update statistics on
     }
 
     if (!$lp_info || !$peer_info_updated) {
-        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time';
-        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time";
+        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete';
+        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete";
 
         DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
     }
@@ -346,6 +346,7 @@ $lp_info = [
     'uploaded' => (float)$uploaded,
     'user_id' => (int)$user_id,
     'tor_type' => (int)$tor_type,
+    'complete' => (int)$complete,
 ];
 
 $lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
