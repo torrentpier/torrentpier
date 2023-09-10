@@ -26,6 +26,9 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
     $_GET['info_hash'] = $_GET['?info_hash'];
 }
 
+$is_bt_v2 = null;
+$is_hybrid = $hybrid_v1_hash = $hybrid_v2_hash = $hybrid_tor_update = false;
+
 // Initial request verification
 if (strpos($_SERVER['REQUEST_URI'], 'scrape') !== false) {
     msg_die('Please disable SCRAPE!');
@@ -69,8 +72,6 @@ if (strlen($info_hash) == 32) {
 } else {
     msg_die('Invalid info_hash: ' . $info_hash);
 }
-// Hybrid torrent checks
-$is_hybrid = $hybrid_v1_hash = $hybrid_v2_hash = $hybrid_tor_update = false;
 
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port: ' . $port);
