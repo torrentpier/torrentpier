@@ -13,6 +13,18 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
+// Update TORRENT "completed" counters
+DB()->query("
+	UPDATE
+		" . BB_BT_TORRENTS . " tor,
+		" . BB_BT_TRACKER_SNAP . " snap
+	SET
+		tor.complete_count = snap.completed
+	WHERE
+		tor.topic_id = snap.topic_id
+");
+
+/*
 if ($bb_cfg['ocelot']['enabled']) {
     // Update TORRENT "completed" counters
     DB()->query("
@@ -51,4 +63,4 @@ if ($bb_cfg['ocelot']['enabled']) {
 
     // Drop tmp table
     DB()->query("DROP TEMPORARY TABLE tmp_complete_count");
-}
+}*/
