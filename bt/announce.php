@@ -128,9 +128,9 @@ $complete = $seeder = ($left == 0) ? 1 : 0;
 // Get cached peer info from previous announce (last peer info)
 $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 
-// Stopped event
-if ($stopped) {
-    CACHE('tr_cache')->rm(PEER_HASH_PREFIX . $peer_hash);
+// Stopped event, slice peer's cache life to 30 seconds
+if ($stopped && $lp_info) {
+    CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, 30);
 }
 
 // Drop fast announce
