@@ -40,7 +40,7 @@ while (true) {
     if (!$bb_cfg['ocelot']['enabled']) {
         $sql = "
 			SELECT
-				topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
+				topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers, SUM(complete) AS completed,
 				SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down
 			FROM " . BB_BT_TRACKER . "
 			WHERE topic_id BETWEEN $start_id AND $end_id
@@ -64,7 +64,7 @@ while (true) {
         if (!$bb_cfg['ocelot']['enabled']) {
             DB()->query("
 				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
-				(topic_id, seeders, leechers, speed_up, speed_down)
+				(topic_id, seeders, leechers, speed_up, speed_down, completed)
 				VALUES(" . implode('),(', $val) . ")
 			");
         } else {

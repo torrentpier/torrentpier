@@ -123,8 +123,7 @@ $peer_hash = md5(rtrim($info_hash, ' ') . $passkey . $ip . $port);
 $stopped = ($event === 'stopped');
 
 // Set seeder & complete
-$seeder = ($left == 0) ? 1 : 0;
-$complete = $seeder ? 1 : 0;
+$complete = $seeder = ($left == 0) ? 1 : 0;
 
 // Get cached peer info from previous announce (last peer info)
 $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
