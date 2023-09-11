@@ -94,7 +94,7 @@ $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the
 $bb_cfg['gzip_compress'] = false; // compress output
 
 // Tracker
-$bb_cfg['announce_interval'] = 2400; // Announce interval (default: 2400)
+$bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
 $bb_cfg['scrape_interval'] = 60; // Scrape interval (default: 60)
 $bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
