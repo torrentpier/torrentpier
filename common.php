@@ -346,9 +346,11 @@ if (!defined('IN_TRACKER')) {
 
     define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor'])));
     define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7));
+    define('SCRAPE_LIST_EXPIRE', round($bb_cfg['scrape_interval'] * 0.7));
 
     define('PEER_HASH_PREFIX', 'peer_');
     define('PEERS_LIST_PREFIX', 'peers_list_');
+    define('SCRAPE_LIST_PREFIX', 'scrape_list_');
 
     header('Content-Type: text/plain');
     header('Pragma: no-cache');
