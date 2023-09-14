@@ -1773,10 +1773,11 @@ function decode_text_match($txt)
  * @param string $infohash
  * @param string $infohash_v2
  * @param string $auth_key
+ * @param string $name
  *
  * @return string
  */
-function create_magnet(string $infohash, string $infohash_v2, string $auth_key): string
+function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name): string
 {
     global $bb_cfg, $images;
 
@@ -1798,7 +1799,7 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key):
         $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
     }
 
-    return '<a href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    return '<a href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
