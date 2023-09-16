@@ -1,5 +1,38 @@
 # 📖 Change Log
 
+## [v2.4.0-beta2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta2) (2023-09-16)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta1...v2.4.0-beta2)
+
+**Merged pull requests:**
+
+- Tracker announce & scrape improvements 🥳 [\#901](https://github.com/torrentpier/torrentpier/pull/901) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Fixed downloaded counter [\#894](https://github.com/torrentpier/torrentpier/pull/894) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Fixed null seeders & leechers in announcer [\#891](https://github.com/torrentpier/torrentpier/pull/891) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- BitTorrent v2 support enhancements 🥳 [\#876](https://github.com/torrentpier/torrentpier/pull/876) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Added showing info_hash v2 in viewtopic.php [\#870](https://github.com/torrentpier/torrentpier/pull/870) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Added search by info_hash v2 🐯 [\#869](https://github.com/torrentpier/torrentpier/pull/869) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- BitTorrent v2 support 🐸 [\#866](https://github.com/torrentpier/torrentpier/pull/866) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Replace all double quotes with single quotes [\#888](https://github.com/torrentpier/torrentpier/pull/888) ([belomaxorka](https://github.com/belomaxorka))
+- Removed unused lang variables [\#885](https://github.com/torrentpier/torrentpier/pull/885) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed empty $row['pm_count'] [\#880](https://github.com/torrentpier/torrentpier/pull/880) ([belomaxorka](https://github.com/belomaxorka))
+- Created function get_banned_users() [\#878](https://github.com/torrentpier/torrentpier/pull/878) ([belomaxorka](https://github.com/belomaxorka))
+- Moved callseed to ajax actions [\#877](https://github.com/torrentpier/torrentpier/pull/877) ([belomaxorka](https://github.com/belomaxorka))
+- Added ability to remove topic templates [\#862](https://github.com/torrentpier/torrentpier/pull/862) ([belomaxorka](https://github.com/belomaxorka))
+- Added missing translation in admin_ug_auth [\#861](https://github.com/torrentpier/torrentpier/pull/861) ([belomaxorka](https://github.com/belomaxorka))
+- Show renamed topic actions in log actions [\#860](https://github.com/torrentpier/torrentpier/pull/860) ([belomaxorka](https://github.com/belomaxorka))
+- Show set/unset downloaded actions in log actions [\#858](https://github.com/torrentpier/torrentpier/pull/858) ([belomaxorka](https://github.com/belomaxorka))
+- Show pin & unpin actions in log actions [\#857](https://github.com/torrentpier/torrentpier/pull/857) ([belomaxorka](https://github.com/belomaxorka))
+- Increase post_text & privmsgs_text limits [\#848](https://github.com/torrentpier/torrentpier/pull/848) ([belomaxorka](https://github.com/belomaxorka))
+- Added show password button [\#841](https://github.com/torrentpier/torrentpier/pull/841) ([belomaxorka](https://github.com/belomaxorka))
+- Passkey rework 🔫 [\#839](https://github.com/torrentpier/torrentpier/pull/839) ([belomaxorka](https://github.com/belomaxorka))
+- Rename passkeyExists() -> getPasskey() [\#838](https://github.com/torrentpier/torrentpier/pull/838) ([belomaxorka](https://github.com/belomaxorka))
+- Added method passkeyExists() [\#837](https://github.com/torrentpier/torrentpier/pull/837) ([belomaxorka](https://github.com/belomaxorka))
+- Refactored get_userdata() function [\#836](https://github.com/torrentpier/torrentpier/pull/836) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed $bb_cfg['pm_days_keep'] [\#834](https://github.com/torrentpier/torrentpier/pull/834) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#833](https://github.com/torrentpier/torrentpier/pull/833), [\#842](https://github.com/torrentpier/torrentpier/pull/842), [\#843](https://github.com/torrentpier/torrentpier/pull/843), [\#844](https://github.com/torrentpier/torrentpier/pull/844), [\#845](https://github.com/torrentpier/torrentpier/pull/845), [\#846](https://github.com/torrentpier/torrentpier/pull/846), [\#852](https://github.com/torrentpier/torrentpier/pull/852), [\#853](https://github.com/torrentpier/torrentpier/pull/853), [\#854](https://github.com/torrentpier/torrentpier/pull/854), [\#855](https://github.com/torrentpier/torrentpier/pull/855), [\#856](https://github.com/torrentpier/torrentpier/pull/856), [\#863](https://github.com/torrentpier/torrentpier/pull/863), [\#867](https://github.com/torrentpier/torrentpier/pull/867), [\#868](https://github.com/torrentpier/torrentpier/pull/868), [\#879](https://github.com/torrentpier/torrentpier/pull/879), [\#882](https://github.com/torrentpier/torrentpier/pull/882), [\#884](https://github.com/torrentpier/torrentpier/pull/884), [\#887](https://github.com/torrentpier/torrentpier/pull/887), [\#889](https://github.com/torrentpier/torrentpier/pull/889), [\#890](https://github.com/torrentpier/torrentpier/pull/890), [\#892](https://github.com/torrentpier/torrentpier/pull/892), [\#893](https://github.com/torrentpier/torrentpier/pull/893), [\#895](https://github.com/torrentpier/torrentpier/pull/895), [\#897](https://github.com/torrentpier/torrentpier/pull/897), [\#898](https://github.com/torrentpier/torrentpier/pull/898), [\#900](https://github.com/torrentpier/torrentpier/pull/900) ([belomaxorka](https://github.com/belomaxorka))
+- New Crowdin updates [\#840](https://github.com/torrentpier/torrentpier/pull/840), [\#850](https://github.com/torrentpier/torrentpier/pull/850), [\#859](https://github.com/torrentpier/torrentpier/pull/859), [\#871](https://github.com/torrentpier/torrentpier/pull/871), [\#881](https://github.com/torrentpier/torrentpier/pull/881), [\#886](https://github.com/torrentpier/torrentpier/pull/886) ([Exileum](https://github.com/Exileum), [belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#847](https://github.com/torrentpier/torrentpier/pull/847), [\#849](https://github.com/torrentpier/torrentpier/pull/849), [\#875](https://github.com/torrentpier/torrentpier/pull/875), [\#874](https://github.com/torrentpier/torrentpier/pull/874), [\#873](https://github.com/torrentpier/torrentpier/pull/873), [\#872](https://github.com/torrentpier/torrentpier/pull/872) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0-beta1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta1) (2023-07-18)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-alpha4...v2.4.0-beta1)
 
