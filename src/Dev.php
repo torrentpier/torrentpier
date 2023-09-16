@@ -121,7 +121,7 @@ class Dev
         $log = '';
 
         foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj) ? self::get_sql_log_html($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+            $log .= !empty($db_obj->dbg) ? self::get_sql_log_html($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {
