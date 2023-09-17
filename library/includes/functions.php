@@ -2016,9 +2016,9 @@ function bb_captcha($mode, $callback = '')
 
     $secret = $bb_cfg['captcha']['secret_key'];
     $public = $bb_cfg['captcha']['public_key'];
-    $cp_theme = $bb_cfg['captcha']['theme'];
+    $cp_theme = $bb_cfg['captcha']['theme'] ?? 'light';
 
-    if (!$public && !$secret) {
+    if (!$bb_cfg['captcha']['disabled'] && (!$public || !$secret)) {
         bb_die($lang['CAPTCHA_SETTINGS']);
     }
 

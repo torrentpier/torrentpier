@@ -278,7 +278,8 @@ function display_attachments($post_id)
                     'IMG_SRC' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'IMG_THUMB_SRC' => $thumb_source,
                     'FILESIZE' => $filesize,
-                    'COMMENT' => $comment
+                    'COMMENT' => $comment,
+                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times'),
                 ]);
             }
 
