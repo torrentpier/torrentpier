@@ -35,7 +35,7 @@
 	</p>
 	<p class="attach_link">
 		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><b>{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE})</span>
+        <span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE}, {L_DOWNLOADED}: {postrow.attach.cat_thumb_images.DOWNLOAD_COUNT})</span>
 	</p>
 	<!-- IF postrow.attach.cat_thumb_images.COMMENT -->
 	<p class="attach_comment med">
