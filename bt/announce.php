@@ -57,12 +57,20 @@ $passkey = ${$passkey_key} ?? null;
 
 // Verify request
 // Required params (info_hash, peer_id, port, uploaded, downloaded, left, passkey)
+if (!isset($peer_id)) {
+    msg_die('peer_id was not provided');
+}
+if (strlen($peer_id) != 20) {
+    msg_die('Invalid peer_id: ' . bin2hex($peer_id));
+}
+
+// Verify info_hash
 if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
 }
-if (!isset($peer_id) || strlen($peer_id) != 20) {
-    msg_die('Invalid peer_id: ' . bin2hex($peer_id));
-}
+
+// Store info hash in hex format
+$info_hash_hex = bin2hex($info_hash);
 
 // Check info_hash version
 if (strlen($info_hash) == 32) {
@@ -70,7 +78,7 @@ if (strlen($info_hash) == 32) {
 } elseif (strlen($info_hash) == 20) {
     $is_bt_v2 = false;
 } else {
-    msg_die('Invalid info_hash: ' . bin2hex($info_hash));
+    msg_die('Invalid info_hash: ' . $info_hash_hex);
 }
 
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
@@ -172,7 +180,7 @@ if ($lp_info) {
 
     // Verify if torrent registered on tracker and user authorized
     if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash));
+        msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
     }
     if (empty($row['user_id'])) {
         msg_die('Please LOG IN and RE-DOWNLOAD this torrent (user not found)');
