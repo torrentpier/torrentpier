@@ -11,6 +11,8 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+global $attach_config;
+
 DB()->expect_slow_query(600);
 
 $fix_errors = true;
@@ -34,6 +36,16 @@ DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_attach_tbl");
 
 // Get attach_mod config
 $attach_dir = get_attachments_dir();
+
+// Creates thumb directory if not exists
+if ((int)$attach_config['img_create_thumbnail']) {
+    $thumb_dir = "$attach_dir/" . THUMB_DIR;
+
+    if (!is_dir($thumb_dir)) {
+        bb_mkdir($thumb_dir, 0755);
+        @chmod($thumb_dir, 0777);
+    }
+}
 
 // Get all names of existed attachments and insert them into $tmp_attach_tbl
 if ($dir = @opendir($attach_dir)) {
