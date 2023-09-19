@@ -42,8 +42,7 @@ if ((int)$attach_config['img_create_thumbnail']) {
     $thumb_dir = "$attach_dir/" . THUMB_DIR;
 
     if (!is_dir($thumb_dir)) {
-        bb_mkdir($thumb_dir, 0755);
-        @chmod($thumb_dir, 0777);
+        bb_mkdir($thumb_dir);
     }
 }
 

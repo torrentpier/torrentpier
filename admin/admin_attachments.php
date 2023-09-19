@@ -347,10 +347,9 @@ if ($check_image_cat) {
 
     // Does the target directory exist, is it a directory and writeable
     if (!@file_exists(amod_realpath($upload_dir))) {
-        if (!bb_mkdir($upload_dir, 0755) && !is_dir($upload_dir)) {
+        if (!bb_mkdir($upload_dir) && !is_dir($upload_dir)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $upload_dir));
         }
-        @chmod($upload_dir, 0777);
 
         if (!@file_exists(amod_realpath($upload_dir))) {
             $error = true;
