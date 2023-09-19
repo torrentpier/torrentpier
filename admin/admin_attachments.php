@@ -207,7 +207,7 @@ if ($check_upload) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb+'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
         } else {
@@ -347,7 +347,7 @@ if ($check_image_cat) {
 
     // Does the target directory exist, is it a directory and writeable
     if (!@file_exists(amod_realpath($upload_dir))) {
-        if (!mkdir($upload_dir, 0755) && !is_dir($upload_dir)) {
+        if (!bb_mkdir($upload_dir, 0755) && !is_dir($upload_dir)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $upload_dir));
         }
         @chmod($upload_dir, 0777);
@@ -364,7 +364,7 @@ if ($check_image_cat) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb+'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
         } else {
