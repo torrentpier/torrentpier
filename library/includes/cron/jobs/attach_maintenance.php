@@ -38,12 +38,9 @@ DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_attach_tbl");
 $attach_dir = get_attachments_dir();
 
 // Creates thumb directory if not exists
-if ((int)$attach_config['img_create_thumbnail']) {
-    $thumb_dir = "$attach_dir/" . THUMB_DIR;
-
-    if (!is_dir($thumb_dir)) {
-        bb_mkdir($thumb_dir);
-    }
+$thumb_dir = "$attach_dir/" . THUMB_DIR;
+if (!is_dir($thumb_dir)) {
+    bb_mkdir($thumb_dir);
 }
 
 // Get all names of existed attachments and insert them into $tmp_attach_tbl
