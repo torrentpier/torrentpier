@@ -86,7 +86,7 @@ $bb_cfg['cache'] = [
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
-$bb_cfg['server_name'] = $domain_name = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $reserved_name;
+$bb_cfg['server_name'] = $domain_name = !empty($_SERVER['SERVER_NAME']) ? idn_to_utf8($_SERVER['SERVER_NAME']) : $reserved_name;
 $bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : $reserved_port;
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
