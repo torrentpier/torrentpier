@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'كنت <b>can</b> في التصويت في هذا ا�
 $lang['RULES_VOTE_CANNOT'] = 'كنت <b>cannot</b> في التصويت في هذا المنتدى';
 $lang['RULES_MODERATE'] = 'كنت <b>can</b> معتدلة هذا المنتدى';
 
-$lang['NO_TOPICS_POST_ONE'] = 'لا يوجد مشاركات في هذا المنتدى.<br />Click على <b>Post جديدة Topic</b> الرابط في هذه الصفحة بعد واحد.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'عرض الموضوع';
