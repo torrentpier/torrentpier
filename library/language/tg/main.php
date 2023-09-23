@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Шумо <b>can</b> дар раъйдиҳӣ дар и
 $lang['RULES_VOTE_CANNOT'] = 'Шумо <b>cannot</b> дар раъйдиҳӣ дар ин форум овоз';
 $lang['RULES_MODERATE'] = 'Шумо <b>can</b> миёна дар ин форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'ҳастанд, нест, паёмҳои ин forum.<br />Click дар пайванд ба <b>Post нав Topic</b> дар ин саҳифа барои овехтани як нест.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View мавзӯъ';
