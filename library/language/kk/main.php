@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Сіз бұл форумға сауалнамаға �
 $lang['RULES_VOTE_CANNOT'] = 'Сіз бұл форумға сауалнамаға дауыс <b>cannot</b>';
 $lang['RULES_MODERATE'] = 'Сіз бұл форум қалыпты <b>can</b>';
 
-$lang['NO_TOPICS_POST_ONE'] = 'бір қалдыру үшін осы бетте <b>Post Жаңа Topic</b> сілтеме осы forum.<br />Click жарияланымдар жоқ болып табылады.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'қарау тақырып';
