@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ty <b>can</b> hlasovat v tomto fóru';
 $lang['RULES_VOTE_CANNOT'] = 'Ty <b>cannot</b> hlasovat v tomto fóru';
 $lang['RULES_MODERATE'] = 'Ty <b>can</b> středně tomto fóru';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nejsou žádné příspěvky v tomto fóru.<br />Click na <b>Post Nové Topic</b> odkaz na tuto stránku post.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Zobrazit téma';
