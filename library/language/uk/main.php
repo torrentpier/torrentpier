@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ви <b>можете</b> голосувати в оп
 $lang['RULES_VOTE_CANNOT'] = 'Ви <b>не можете</b> голосувати в опитуваннях на форумі';
 $lang['RULES_MODERATE'] = 'Ви <b>можете</b> модерувати цей форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'На форумі поки немає повідомлень.<br />Натисніть на <b>Створити нову тему</b>, і Ваше повідомлення буде першим.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Перегляд теми';
