@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Można <b>can</b> głosować w tym forum';
 $lang['RULES_VOTE_CANNOT'] = 'Można <b>cannot</b> głosować w ankietach na tym forum';
 $lang['RULES_MODERATE'] = 'Można <b>can</b> moderować to forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nie ma żadnych postów na tym forum.<br />Click na <b>Post nowy link Topic</b> na tej stronie w jeden post.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Wyświetl tematy';
