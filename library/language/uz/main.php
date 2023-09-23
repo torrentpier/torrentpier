@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Siz bu forumda So\'rov ovoz <b>can</b>';
 $lang['RULES_VOTE_CANNOT'] = 'Siz bu forumda So\'rov ovoz <b>cannot</b>';
 $lang['RULES_MODERATE'] = 'Siz bu forumda mo\'\'tadil <b>can</b>';
 
-$lang['NO_TOPICS_POST_ONE'] = 'bir post uchun bu sahifada <b>Post Yangi Topic</b> bog\'laning bu forum.<br />Click hech xabarlar bor.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View topic';
