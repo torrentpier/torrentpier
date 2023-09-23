@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'คุณ <b>can</b> โหวตในคุณไ�
 $lang['RULES_VOTE_CANNOT'] = 'คุณ <b>cannot</b> โหวตในคุณไปที่นั่นรอผมติดต่อในชุ';
 $lang['RULES_MODERATE'] = 'คุณ <b>can</b> moderate นี่ชุ';
 
-$lang['NO_TOPICS_POST_ONE'] = 'มันไม่มีกัปตัน..เสาทางนี้ในชุด<br />Click บ <b>Post ใหม่ Topic</b> เชื่อมโยงบนหน้านี้เพื่อโพสต์หนึ่ง';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'มุมมองเรื่อง';
