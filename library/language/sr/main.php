@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ви <b>can</b> гласати у овом форум
 $lang['RULES_VOTE_CANNOT'] = 'Ви <b>cannot</b> гласати у овом форуму';
 $lang['RULES_MODERATE'] = 'Ви <b>can</b> умерене овај форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Нема ни једне поруке на овом форуму.<br />Click на <b>Post нову везу Topic</b> на овој страници у један пост.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Погледај теме';
