@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Sa <b>can</b> hääletada küsitlustes selles foorumi
 $lang['RULES_VOTE_CANNOT'] = 'Sa <b>cannot</b> hääletada küsitlustes selles foorumis';
 $lang['RULES_MODERATE'] = 'Sa <b>can</b> mõõdukas selles foorumis';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Puuduvad postitusi selles foorumis.<br />Click kohta <b>Post Uus Topic</b> link sellele lehele postitada üks.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Vaadata teemat';
