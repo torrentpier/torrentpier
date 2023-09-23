@@ -498,7 +498,7 @@ if ($found_topics) {
     if ($only_new) {
         $no_topics_msg = $lang['NO_NEW_POSTS'];
     } else {
-        $no_topics_msg = ($topic_days || $title_match) ? $lang['NO_SEARCH_MATCH'] : $lang['NO_TOPICS_POST_ONE'];
+        $no_topics_msg = ($topic_days || $title_match) ? $lang['NO_SEARCH_MATCH'] : ($forum_data['allow_reg_tracker'] ? $lang['NO_RELEASES_POST_ONE'] : $lang['NO_TOPICS_POST_ONE']);
     }
     $template->assign_vars(array(
         'NO_TOPICS' => $no_topics_msg,
