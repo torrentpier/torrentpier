@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Vostè <b>can</b> votar a les enquestes en aquest fò
 $lang['RULES_VOTE_CANNOT'] = 'Vostè <b>cannot</b> votar a les enquestes en aquest fòrum';
 $lang['RULES_MODERATE'] = 'Vostè <b>can</b> moderar aquest fòrum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'No hi ha missatges en aquest fòrum.<br />Click a la <b>Post Nou Topic</b> enllaç en aquesta pàgina per enviar una.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Vista sobre el tema';
