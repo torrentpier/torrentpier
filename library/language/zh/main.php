@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = '你 <b>可以</b> 在本论坛参与投票';
 $lang['RULES_VOTE_CANNOT'] = '你 <b>不能</b> 在本论坛参与投票';
 $lang['RULES_MODERATE'] = '你 <b>可以</b> 管理这个论坛';
 
-$lang['NO_TOPICS_POST_ONE'] = '论坛中没有帖子。<br />单击 <b>发布新的主题</b> 链接来发个新帖。';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = '查看主题';

@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Jūs <b>can</b> balsot aptaujās šajā forumā';
 $lang['RULES_VOTE_CANNOT'] = 'Jūs <b>cannot</b> balsot aptaujās šajā forumā';
 $lang['RULES_MODERATE'] = 'Jūs <b>can</b> mērens šajā forumā';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nav posts šajā forumā.<br />Click par <b>Post Jaunu Topic</b> saiti uz šo lapu, ievietot viena.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Apskatīt tēmu';

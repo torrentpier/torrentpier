@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'ま<b>can</b>投票の投票にこのフォーラム'
 $lang['RULES_VOTE_CANNOT'] = 'ま<b>cannot</b>投票の投票にこのフォーラム';
 $lang['RULES_MODERATE'] = 'ま<b>can</b>緩やかなこのフォーラム';
 
-$lang['NO_TOPICS_POST_ONE'] = 'ありませんの投稿はこのフォーラムです。<br />Clickの<b>Post新Topic</b>リンクこのページを投稿します。';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = '話題を見';

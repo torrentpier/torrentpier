@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Du <b>can</b> rösta i omröstningar i detta forum';
 $lang['RULES_VOTE_CANNOT'] = 'Du <b>cannot</b> rösta i omröstningar i detta forum';
 $lang['RULES_MODERATE'] = 'Du <b>can</b> måttlig detta forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Det finns inga inlägg i det här forumet.<br />Click på <b>Post Nya Topic</b> länk på den här sidan för att posta en.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Visa avsnittet';

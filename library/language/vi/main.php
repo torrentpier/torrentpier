@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Bạn <b>can</b> bỏ phiếu trong số phiếu bầ
 $lang['RULES_VOTE_CANNOT'] = 'Bạn <b>cannot</b> bỏ phiếu trong số phiếu bầu trong diễn đàn này';
 $lang['RULES_MODERATE'] = 'Bạn <b>can</b> vừa diễn đàn này';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Không có bài diễn đàn này.<br />Click trên <b>Post Mới Topic</b> liên kết trên trang này để viết.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Xem chủ đề';

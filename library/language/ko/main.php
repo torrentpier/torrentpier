@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = '당신 <b>can</b> 투표에서는 이 포럼';
 $lang['RULES_VOTE_CANNOT'] = '당신 <b>cannot</b> 투표에서는 이 포럼';
 $lang['RULES_MODERATE'] = '당신 <b>can</b> 온 이 포럼';
 
-$lang['NO_TOPICS_POST_ONE'] = '게시물이 없습니다.이 포럼도 있습니다.<br />Click 에 <b>Post 새로운 Topic</b> 이 페이지에 링크를 게시물 중 하나입니다.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View 항목';

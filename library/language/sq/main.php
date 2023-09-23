@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ju <b>can</b> të votuar në sondazhet në këtë for
 $lang['RULES_VOTE_CANNOT'] = 'Ju <b>cannot</b> të votuar në sondazhet në këtë forum';
 $lang['RULES_MODERATE'] = 'Ju <b>can</b> të moderuar të këtij forumi';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nuk ka postime në këtë forum.<br />Click në <b>Post të Reja Topic</b> lidhje në këtë faqe për të postoj një.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Shiko temë';

@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Anda <b>can</b> suara dalam jajak pendapat di forum i
 $lang['RULES_VOTE_CANNOT'] = 'Anda <b>cannot</b> suara dalam jajak pendapat di forum ini';
 $lang['RULES_MODERATE'] = 'Anda <b>can</b> moderat forum ini';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Tidak ada posting di forum ini.<br />Click pada <b>Post Baru Topic</b> link di halaman ini, untuk posting.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Lihat topik';

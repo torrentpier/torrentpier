@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Te <b>can</b> szavazás a szavazás ebben a fórumban
 $lang['RULES_VOTE_CANNOT'] = 'Te <b>cannot</b> szavazás a szavazás ebben a fórumban';
 $lang['RULES_MODERATE'] = 'Te <b>can</b> mérsékelt ezt a fórumot';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nincs hozzászólás ebben a fórumban.<br />Click a <b>Post Új Topic</b> link ezen az oldalon, hogy a poszt.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Téma megtekintése';

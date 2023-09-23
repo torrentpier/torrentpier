@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Դուք <b>can</b> քվեարկել այս համա�
 $lang['RULES_VOTE_CANNOT'] = 'Դուք <b>cannot</b> քվեարկել հետազոտությունների այս ֆորումին';
 $lang['RULES_MODERATE'] = 'Դուք <b>can</b> ելույթների այս համաժողովը';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Չկա ոչ մի գրառումները այս ֆորումում ։ <br />Click է <b>Post նոր հղումը Topic</b> այս էջում գրառում:';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Դիտել թեմաներ';

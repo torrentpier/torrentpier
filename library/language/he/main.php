@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'אתה <b>can</b> להצביע בסקרים בפור�
 $lang['RULES_VOTE_CANNOT'] = 'אתה <b>cannot</b> להצביע בסקרים בפורום זה';
 $lang['RULES_MODERATE'] = 'אתה <b>can</b> מתונה הפורום הזה';
 
-$lang['NO_TOPICS_POST_ONE'] = 'אין הודעות בפורום הזה.<br />Click על <b>Post חדש Topic</b> הקישור בדף זה כדי פוסט אחד.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'הצגת הנושא';

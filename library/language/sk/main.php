@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ste <b>can</b> hlasovať v anketách v tomto fóre';
 $lang['RULES_VOTE_CANNOT'] = 'Ste <b>cannot</b> hlasovať v anketách v tomto fóre';
 $lang['RULES_MODERATE'] = 'Ste <b>can</b> stredne tomto fóre';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nie sú príspevky v tomto fóre.<br />Click na <b>Post Nové Topic</b> odkaz na tejto stránke zverejniť jedno.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Zobraziť tému';

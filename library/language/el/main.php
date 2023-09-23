@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Θα <b>can</b> ψηφίσετε στις δημοσ�
 $lang['RULES_VOTE_CANNOT'] = 'Θα <b>cannot</b> ψηφίσετε στις δημοσκοπήσεις σε αυτό το forum';
 $lang['RULES_MODERATE'] = 'Θα <b>can</b> μέτρια αυτό το φόρουμ';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Δεν υπάρχουν αναρτήσεις σε αυτό το φόρουμ.<br />Click στο <b>Post Νέα Topic</b> σύνδεσμο σε αυτή τη σελίδα για να καταχωρήσετε ένα.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Προβάλετε το θέμα';

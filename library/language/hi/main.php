@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'इस फोरम में आप <b> के </b> 
 $lang['RULES_VOTE_CANNOT'] = 'इस फ़ोरम में आप <b>cannot</b> मतदान में मतदान करते हैं';
 $lang['RULES_MODERATE'] = 'आप <b>can</b> इस मंच को मॉडरेट कर रहे हैं';
 
-$lang['NO_TOPICS_POST_ONE'] = 'इस मंच में कोई पोस्ट नहीं है। <br /> एक पोस्ट करने के लिए <b> पोस्ट नई विषय </b> लिंक पर क्लिक करें।';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'विषय देखें';

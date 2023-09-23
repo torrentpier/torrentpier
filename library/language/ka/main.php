@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'თქვენ <b>can</b> ხმა არჩევ�
 $lang['RULES_VOTE_CANNOT'] = 'თქვენ <b>cannot</b> ხმა არჩევნებში, ეს ფორუმი';
 $lang['RULES_MODERATE'] = 'თქვენ <b>can</b> ზომიერი ამ ფორუმზე';
 
-$lang['NO_TOPICS_POST_ONE'] = 'არ არსებობს პოსტები ამ ფორუმში.<br />Click შესახებ <b>Post ახალი Topic</b> ბმული ამ გვერდზე ერთი პოსტი.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'იხილეთ თემა';

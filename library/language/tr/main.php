@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Bu forumda anketlerde oy <b>can</b>';
 $lang['RULES_VOTE_CANNOT'] = 'Bu forumda anketlerde oy <b>cannot</b>';
 $lang['RULES_MODERATE'] = '<b>can</b> bu forum orta sana';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Bu forumda hiçbir mesaj.Bu sayfada <b>Post Yeni Topic</b> linke <br />Click bir yazı.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Başlık';
