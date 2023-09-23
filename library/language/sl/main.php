@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ste <b>can</b> glasovati v anketi v tem forumu';
 $lang['RULES_VOTE_CANNOT'] = 'Ste <b>cannot</b> glasovati v anketi v tem forumu';
 $lang['RULES_MODERATE'] = 'Ste <b>can</b> zmerno tem forumu';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Ni objav v tem forumu.<br />Click na <b>Post Novo Topic</b> povezavo na tej strani, da objavi eno.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Pogled temo';
