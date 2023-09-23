@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Jy <b>can</b> stem in stembusse in hierdie forum';
 $lang['RULES_VOTE_CANNOT'] = 'Jy <b>cannot</b> stem in stembusse in hierdie forum';
 $lang['RULES_MODERATE'] = 'Jy <b>can</b> modereer hierdie forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Daar is geen plasings in hierdie forum nie.<br />Klik op die <b>Post Nuwe Onderwerp</b> skakel op hierdie bladsy om een ​​te plaas.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Bekyk onderwerp';
