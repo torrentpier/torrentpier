@@ -25,6 +25,7 @@ define('CHECK_REQIREMENTS', [
         'tidy',
         'mysqli',
         'bcmath',
+        'mbstring',
         'intl',
         'xml',
         'xmlwriter',
