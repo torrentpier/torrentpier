@@ -59,6 +59,7 @@ For installation, you need to follow a few simple steps:
 You must provide write permissions to the specified folders:
 * `data/avatars`
 * `data/torrent_files`
+* `data/torrent_files/thumbs`
 * `internal_data/ajax_html`
 * `internal_data/atom`
 * `internal_data/cache`

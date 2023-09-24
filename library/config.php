@@ -414,7 +414,7 @@ $bb_cfg['board_email_sitename'] = $domain_name; // sitename used in all emails h
 $bb_cfg['topic_notify_enabled'] = true;
 $bb_cfg['pm_notify_enabled'] = true;
 $bb_cfg['group_send_email'] = true;
-$bb_cfg['email_change_disabled'] = false; // disable changing email by user
+$bb_cfg['email_change_disabled'] = false; // TODO: disable changing email by user
 
 $bb_cfg['bounce_email'] = "bounce@$domain_name"; // bounce email address
 $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error reports
@@ -482,13 +482,13 @@ $bb_cfg['search_max_word_len'] = 35; // максимальное число сл
 $bb_cfg['limit_max_search_results'] = false; // лимит на максимальное число результатов поиска (false - отключено)
 
 // Posting
-$bb_cfg['prevent_multiposting'] = true; // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
+$bb_cfg['prevent_multiposting'] = true; // TODO: replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
 $bb_cfg['max_smilies'] = 25; // Максимальное число смайлов в посте (0 - без ограничения)
 $bb_cfg['max_symbols_post'] = 5000; // TODO: Максимальное число символов в посте (0 - без ограничения)
 
 // PM
 $bb_cfg['privmsg_disable'] = false; // отключить систему личных сообщений на форуме
-$bb_cfg['max_outgoing_pm_cnt'] = 10; // ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
+$bb_cfg['max_outgoing_pm_cnt'] = 10; // TODO: ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
 $bb_cfg['max_inbox_privmsgs'] = 500; // максимальное число сообщений в папке входящие
 $bb_cfg['max_savebox_privmsgs'] = 500; // максимальное число сообщений в папке сохраненные
 $bb_cfg['max_sentbox_privmsgs'] = 500; // максимальное число сообщений в папке отправленные
