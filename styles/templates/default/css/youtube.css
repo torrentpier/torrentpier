@@ -16,7 +16,7 @@
   background: url(../images/aerobg.png), -webkit-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   background: url(../images/aerobg.png), -o-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   background: url(../images/aerobg.png), -ms-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#66c8c8c8', endColorstr='#ffffff', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66c8c8c8', endColorstr='#ffffff', GradientType=0);
   background: url(../images/aerobg.png), linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   background-size: cover;
   -moz-background-size: cover;
@@ -183,6 +183,7 @@ div#autocomplete_popup div.title {
   font-size: 11px;
   font-weight: bold;
   padding: 6px 8px 7px;
+  cursor: move;
 }
 
 div#autocomplete_popup div.close {
@@ -200,7 +201,7 @@ div#autocomplete_popup div.close {
 div#autocomplete_popup input {
   font-size: 16px;
   margin: 20px 0 0;
-  width: 83px;
+  width: 180px;
 }
 
 div#autocomplete_popup span.regenerate {

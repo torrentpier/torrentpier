@@ -184,8 +184,9 @@
         </tr>
         <!-- ENDIF -->
         <!-- IF not SIG_DISALLOWED -->
-        <tr colspan="2" id="view_message" class="hidden">
-            <td colspan="2">
+        <tr id="view_message" class="hidden">
+            <td class="prof-title">{L_PREVIEW}:</td>
+            <td>
                 <div class="signature"></div>
             </td>
         </tr>
