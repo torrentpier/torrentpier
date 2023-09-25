@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ai <b>can</b> vota în chestionarele din acest forum'
 $lang['RULES_VOTE_CANNOT'] = 'Ai <b>cannot</b> vota în chestionarele din acest forum';
 $lang['RULES_MODERATE'] = 'Ai <b>can</b> moderat acest forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nu sunt mesaje în acest forum.<br />Click pe <b>Post Noi Topic</b> link-ul de pe această pagină pentru a posta.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Vezi subiect';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Atașamentul este prea mare.<br />Could nu ob
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Atașamentul este prea mare.<br />Maximum Incarca Dimensiune: %d MB.<br />Please rețineți că această Dimensiune este definită în php.ini, acest lucru înseamnă că este stabilit de PHP și Atașamentul Mod nu se poate trece peste această valoare.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Extinderea %s nu este permis'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Nu ai voie să postați Fișiere cu Extensia %s în acest Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Atașamentul este prea mare.<br />Max Dimensiune: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Îmi pare rău, dar dimensiunea maxima pentru toate echipamentele este de ajuns. Vă rugăm să contactați Administratorul forumului dacă aveți întrebări.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Atașament nu poate fi adăugat, de max. numărul de %d fișiere Atașate în acest post a fost realizat'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Atașarea/Imagine trebuie să fie mai mică decât %d de pixeli lățime și %d pixeli de înaltă';
