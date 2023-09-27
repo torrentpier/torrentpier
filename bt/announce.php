@@ -242,7 +242,7 @@ if ($lp_info) {
         }
 
         // Limit concurrent IPs
-        if (!isset($bb_cfg['unlimited_users'][$user_id]) && $bb_cfg['tracker']['limit_concurrent_ips'] && (($bb_cfg['tracker']['limit_seed_ips'] && $seeder) || ($bb_cfg['tracker']['limit_leech_ips'] && !$seeder))) {
+        if ($bb_cfg['tracker']['limit_concurrent_ips'] && (($bb_cfg['tracker']['limit_seed_ips'] && $seeder) || ($bb_cfg['tracker']['limit_leech_ips'] && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT ip) AS ips
 				FROM " . BB_BT_TRACKER . "
 				WHERE topic_id = $topic_id
