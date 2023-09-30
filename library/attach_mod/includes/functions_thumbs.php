@@ -54,43 +54,44 @@ function is_imagick()
  */
 function get_supported_image_types($type)
 {
-    if (@extension_loaded('gd')) {
-        $format = imagetypes();
-        $new_type = 0;
-
-        switch ($type) {
-            case 1:
-                $new_type = ($format & IMG_GIF) ? IMG_GIF : 0;
-                break;
-            case 2:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-                $new_type = ($format & IMG_JPG) ? IMG_JPG : 0;
-                break;
-            case 3:
-            case 4:
-                $new_type = ($format & IMG_PNG) ? IMG_PNG : 0;
-                break;
-            case 6:
-            case 8:
-            case 15:
-                $new_type = ($format & IMG_WBMP) ? IMG_WBMP : 0;
-                break;
-            case 32:
-                $new_type = ($format & IMG_WEBP) ? IMG_WEBP : 0;
-                break;
-        }
-
-        return [
-            'gd' => (bool)$new_type,
-            'format' => $new_type,
-            'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
-        ];
+    // Check GD extension
+    if (!extension_loaded('gd')) {
+        return ['gd' => false];
     }
 
-    return ['gd' => false];
+    $format = imagetypes();
+    $new_type = 0;
+
+    switch ($type) {
+        case 1:
+            $new_type = ($format & IMG_GIF) ? IMG_GIF : 0;
+            break;
+        case 2:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+            $new_type = ($format & IMG_JPG) ? IMG_JPG : 0;
+            break;
+        case 3:
+        case 4:
+            $new_type = ($format & IMG_PNG) ? IMG_PNG : 0;
+            break;
+        case 6:
+        case 8:
+        case 15:
+            $new_type = ($format & IMG_WBMP) ? IMG_WBMP : 0;
+            break;
+        case 32:
+            $new_type = ($format & IMG_WEBP) ? IMG_WEBP : 0;
+            break;
+    }
+
+    return [
+        'gd' => (bool)$new_type,
+        'format' => $new_type,
+        'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
+    ];
 }
 
 /**

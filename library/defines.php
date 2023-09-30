@@ -19,10 +19,10 @@ define('CHECK_REQIREMENTS', [
     'php_min_version' => '7.4.0',
     'ext_list' => [
         'json',
-        'gd',
-        'zlib',
+        // 'gd', (optional)
+        // 'zlib', (optional)
         'curl',
-        'tidy',
+        // 'tidy', (optional)
         'mysqli',
         'bcmath',
         'mbstring',
