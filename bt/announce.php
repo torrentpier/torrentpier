@@ -339,7 +339,7 @@ if (($is_hybrid && $hybrid_tor_update) || !$is_hybrid) { // Update statistics on
 
 // Exit if stopped
 if ($stopped) {
-    silent_exit('Event: stopped');
+    silent_exit('Cache statistics will be reset within 30 seconds');
 }
 
 // Store peer info in cache
