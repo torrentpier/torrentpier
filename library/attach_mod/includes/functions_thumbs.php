@@ -69,12 +69,17 @@ function get_supported_image_types($type)
             case 12:
                 $new_type = ($format & IMG_JPG) ? IMG_JPG : 0;
                 break;
+            case 4:
             case 3:
                 $new_type = ($format & IMG_PNG) ? IMG_PNG : 0;
                 break;
             case 6:
+            case 8:
             case 15:
                 $new_type = ($format & IMG_WBMP) ? IMG_WBMP : 0;
+                break;
+            case 32:
+                $new_type = ($format & IMG_WEBP) ? IMG_WEBP : 0;
                 break;
         }
 
