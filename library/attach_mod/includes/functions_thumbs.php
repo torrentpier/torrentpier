@@ -54,7 +54,7 @@ function is_imagick()
  */
 function get_supported_image_types($type)
 {
-    // Check GD extension
+    // Check GD extension installed
     if (!extension_loaded('gd')) {
         return ['gd' => false];
     }
