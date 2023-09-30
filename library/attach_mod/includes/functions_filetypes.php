@@ -70,7 +70,6 @@ function image_getdimension($file)
     $error = false;
 
     // BMP - IMAGE
-
     $tmp_str = fread($fp, 2);
     if ($tmp_str == 'BM') {
         $length = read_longint($fp);
@@ -120,7 +119,6 @@ function image_getdimension($file)
     fclose($fp);
 
     // GIF - IMAGE
-
     $fp = @fopen($file, 'rb');
 
     $tmp_str = fread($fp, 3);
@@ -210,7 +208,6 @@ function image_getdimension($file)
     fclose($fp);
 
     // PCX - IMAGE
-
     $fp = @fopen($file, 'rb');
 
     $tmp_str = fread($fp, 3);
