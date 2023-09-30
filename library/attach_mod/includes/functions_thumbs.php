@@ -90,6 +90,7 @@ function get_supported_image_types($type)
 
 /**
  * Create thumbnail
+ * @throws Exception
  */
 function create_thumbnail($source, $new_file, $mimetype)
 {
@@ -138,6 +139,11 @@ function create_thumbnail($source, $new_file, $mimetype)
                 case IMG_WBMP:
                     $image = imagecreatefromwbmp($source);
                     break;
+                case IMG_WEBP:
+                    $image = imagecreatefromwebp($source);
+                    break;
+                default:
+                    throw new Exception('Unknown file format: ' . $type['format']);
             }
 
             if ($type['version'] == 1 || !$attach_config['use_gd2']) {
@@ -161,6 +167,11 @@ function create_thumbnail($source, $new_file, $mimetype)
                 case IMG_WBMP:
                     imagewbmp($new_image, $new_file);
                     break;
+                case IMG_WEBP:
+                    imagewebp($new_image, $new_file);
+                    break;
+                default:
+                    throw new Exception('Unknown file format: ' . $type['format']);
             }
 
             imagedestroy($new_image);
