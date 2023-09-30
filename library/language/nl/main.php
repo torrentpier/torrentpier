@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'U <b>can</b> stemmen in polls in dit forum';
 $lang['RULES_VOTE_CANNOT'] = 'U <b>cannot</b> stemmen in polls in dit forum';
 $lang['RULES_MODERATE'] = 'U <b>can</b> matige dit forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Er zijn geen berichten in dit forum.<br />Click op de <b>Post Nieuwe Topic</b> link op deze pagina om er een te plaatsen.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Bekijk onderwerp';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'De Bijlage is te groot.<br />Could niet voor 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'De Bijlage is te groot.<br />Maximum Upload Size: %d MB.<br />Please er rekening mee dat deze Maat is gedefinieerd in php.ini, dit betekent dat het instellen van PHP en de Bijlage Mod kan niet overschrijft deze waarde.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'De Uitbreiding %s is niet toegestaan'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'U bent niet toegestaan om te posten Bestanden met de Extensie %s in dit Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'De Bijlage is te groot.<br />Max Grootte: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Sorry, maar de maximale bestandsgrootte voor alle Bijlagen is bereikt. Neem contact op met de Beheerder als je vragen hebt.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Bijlage kan niet worden toegevoegd, aangezien de max. aantal %d Bijlagen in deze post werd bereikt'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'De Bijlage/Afbeelding moet kleiner zijn dan %d pixels breed en %d pixels hoog';

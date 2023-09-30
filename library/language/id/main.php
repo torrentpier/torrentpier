@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Anda <b>can</b> suara dalam jajak pendapat di forum i
 $lang['RULES_VOTE_CANNOT'] = 'Anda <b>cannot</b> suara dalam jajak pendapat di forum ini';
 $lang['RULES_MODERATE'] = 'Anda <b>can</b> moderat forum ini';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Tidak ada posting di forum ini.<br />Click pada <b>Post Baru Topic</b> link di halaman ini, untuk posting.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Lihat topik';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Lampiran terlalu besar.<br />Could tidak mend
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Lampiran terlalu besar.<br />Maximum Tanggal Ukuran: %d MB.<br />Please perhatikan bahwa Ukuran ini didefinisikan dalam php.ini, ini berarti itu ditetapkan oleh PHP dan Lampiran Mod tidak bisa mengesampingkan nilai ini.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Perpanjangan %s tidak diperbolehkan'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Anda tidak diperbolehkan untuk mengirim File dengan Ekstensi %s dalam Forum ini'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Lampiran terlalu besar.<br />Max Ukuran: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Maaf, tapi maksimal ukuran file untuk semua Lampiran tercapai. Silahkan hubungi Administrator Dewan jika anda memiliki pertanyaan.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Lampiran tidak dapat ditambahkan, sejak max. jumlah %d Lampiran dalam posting ini dicapai'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Lampiran/Gambar harus kurang dari %d piksel lebar dan %d piksel tinggi';

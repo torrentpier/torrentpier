@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Sa <b>can</b> hääletada küsitlustes selles foorumi
 $lang['RULES_VOTE_CANNOT'] = 'Sa <b>cannot</b> hääletada küsitlustes selles foorumis';
 $lang['RULES_MODERATE'] = 'Sa <b>can</b> mõõdukas selles foorumis';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Puuduvad postitusi selles foorumis.<br />Click kohta <b>Post Uus Topic</b> link sellele lehele postitada üks.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Vaadata teemat';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Manus on liiga suur.<br />Could ei saada maks
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Manus on liiga suur.<br />Maximum Laadida Suurus: %d MB.<br />Please pange tähele, et see Suurus on määratletud php.ini, see tähendab, et see on määratud PHP ja Attachment Mod ei saa eirata seda väärtust.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Laiendamine %s ei ole lubatud'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Sa ei tohi postitada Faile Laiendiga %s selles Foorumis'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Manus on liiga suur.<br />Max Suurus: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Vabandust, kuid maksimaalne filesize kõik Manused on saavutatud. Palun võta ühendust foorumi Administraatori kui teil on küsimusi.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Manust ei saa lisada, kuna max. arv %d Manuseid selles postituses oli saavutada'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Manus/ - Pilt peab olema väiksem kui %d pikslit lai ja %d pikslit kõrge';

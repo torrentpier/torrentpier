@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Sie <b>can</b> vote in polls in diesem forum';
 $lang['RULES_VOTE_CANNOT'] = 'Sie <b>cannot</b> vote in polls in diesem forum';
 $lang['RULES_MODERATE'] = 'Sie <b>can</b> moderieren dieses forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Es sind keine Beiträge in diesem forum.<br />Click auf die <b>Post Neue Topic</b> link auf dieser Seite zu veröffentlichen.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Thema anzeigen';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Die Anlage ist zu groß.<br />Could nicht die
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Die Anlage ist zu groß.<br />Maximum Upload-Größe: %d MB.<br />Please beachten Sie, dass diese Größe ist definiert in php.ini, das heißt, es ist festgelegt durch PHP und dem Attachment Mod kann nicht diesen Wert überschreiben.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Die Erweiterung %s ist nicht erlaubt'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Sie sind nicht erlaubt zu posten von Dateien mit der Erweiterung %s in diesem Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Die Anlage ist zu groß.<br />Max Größe: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Sorry, aber die maximale Dateigröße für alle Anlagen erreicht wird. Bitte Kontaktieren Sie die Board-Administrator, wenn Sie Fragen haben.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Attachment kann nicht Hinzugefügt werden, da die max. Anzahl der %d Anhänge in diesem Beitrag wurde erreicht'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Das Attachment/Bild muss kleiner sein als %d Pixel breit und %d Pixel hoch';

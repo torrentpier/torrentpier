@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Można <b>can</b> głosować w tym forum';
 $lang['RULES_VOTE_CANNOT'] = 'Można <b>cannot</b> głosować w ankietach na tym forum';
 $lang['RULES_MODERATE'] = 'Można <b>can</b> moderować to forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nie ma żadnych postów na tym forum.<br />Click na <b>Post nowy link Topic</b> na tej stronie w jeden post.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Wyświetl tematy';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Załącznik jest zbyt duży.<br />Could nie d
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Załącznik jest zbyt duży.<br />Maximum Rozmiar pliku do pobrania: %d MB.<br />Please zauważyć, że wartość ta jest określona w PHP.ini, to oznacza, że jest ustawiony na PHP i załącznik mod nie możesz zmienić to ustawienie.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Rozszerzenie %s nie jest dozwolone'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Nie wolno umieszczać pliki z rozszerzeniem %s w ramach tego forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Załącznik jest zbyt duży.Rozmiar <br />Max: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Przepraszam, ale maksymalny rozmiar dla wszystkich aplikacji osiągnięty. Proszę skontaktować się z Administratorem, jeśli masz pytania.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Załączników nie może być dodany, ponieważ maksimum. ilość %d załączników w wiadomości osiągnąć'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Załączniki/zdjęcia powinny być nie mniej %d pikseli szerokości i %d pikseli';

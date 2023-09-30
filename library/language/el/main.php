@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Θα <b>can</b> ψηφίσετε στις δημοσ�
 $lang['RULES_VOTE_CANNOT'] = 'Θα <b>cannot</b> ψηφίσετε στις δημοσκοπήσεις σε αυτό το forum';
 $lang['RULES_MODERATE'] = 'Θα <b>can</b> μέτρια αυτό το φόρουμ';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Δεν υπάρχουν αναρτήσεις σε αυτό το φόρουμ.<br />Click στο <b>Post Νέα Topic</b> σύνδεσμο σε αυτή τη σελίδα για να καταχωρήσετε ένα.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Προβάλετε το θέμα';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Το Συνημμένο είναι πολύ �
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Το Συνημμένο είναι πολύ μεγάλο.<br />Maximum Ανεβάστε Μέγεθος: %d MB.<br />Please να σημειώσετε ότι αυτό το Μέγεθος ορίζεται σε php.ini, αυτό σημαίνει ότι είναι σύνολο από PHP και το Συνημμένο Mod δεν μπορείτε να προσπεράσετε αυτή την τιμή.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Η Επέκταση %s δεν επιτρέπεται'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Δεν επιτρέπεται να δημοσιεύσετε τα Αρχεία με την Επέκταση %s μέσα σε αυτό το Φόρουμ'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Το Συνημμένο είναι πολύ μεγάλο.<br />Max Μέγεθος: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Συγγνώμη, αλλά το μέγιστο μέγεθος αρχείου για όλα τα Συνημμένα. Παρακαλείστε να επικοινωνήσετε με το Διαχειριστή του συστήματος, εάν έχετε ερωτήσεις.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Κατάσχεση δεν μπορεί να προστεθεί, από το max. αριθμός %d Συνημμένα σε αυτό το post επιτεύχθηκε'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Το Συνημμένο/Εικόνας πρέπει να είναι μικρότερη από %d εικονοστοιχεία πλάτος και %d εικονοκυττάρων υψηλά';

@@ -11,10 +11,10 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata;
+global $userdata, $lang;
 
 if (!IS_SUPER_ADMIN) {
-    $this->ajax_die('not auth');
+    $this->ajax_die($lang['NOT_AUTHORISED']);
 }
 
 array_deep($this->request, 'trim');

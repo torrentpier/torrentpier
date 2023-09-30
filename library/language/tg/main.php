@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Шумо <b>can</b> дар раъйдиҳӣ дар и
 $lang['RULES_VOTE_CANNOT'] = 'Шумо <b>cannot</b> дар раъйдиҳӣ дар ин форум овоз';
 $lang['RULES_MODERATE'] = 'Шумо <b>can</b> миёна дар ин форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'ҳастанд, нест, паёмҳои ин forum.<br />Click дар пайванд ба <b>Post нав Topic</b> дар ин саҳифа барои овехтани як нест.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View мавзӯъ';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Дар Замимаи ҳам big.<br />Could 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Дар Замимаи ҳам big.<br />Maximum боргузории Андоза: %d MB.<br />Please қайд кард, ки дар ин аст, ки дар Андоза php.ini муайян, ин маънои онро дорад, он аз тарафи PHP танзим ва Замимаи мудофиа ин арзиши тағири гузоришҳо нест.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Дар Тамдиди %s аст, иҷозат дода намешавад'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Шумо иҷозат дода нашудааст овехтани Files бо васеъкунии %s дар доираи ин форум'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Дар Замимаи низ big.<br />Max Андозаи аст: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Бубахшед, аммо ҳадди filesize барои ҳамаи Замимаҳо ба даст ояд. Лутфан, маъмур Раёсат дар тамос шавед, агар шумо ягон савол.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Замимаи карда намешавад, зеро макс. шумораи %d Замимаҳо дар ин мансаби ба даст омад'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Дар Замимаи / Фишка бояд на камтар аз %d пиксел васеъ ва %d пиксел баланд бошад';

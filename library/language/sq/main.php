@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ju <b>can</b> të votuar në sondazhet në këtë for
 $lang['RULES_VOTE_CANNOT'] = 'Ju <b>cannot</b> të votuar në sondazhet në këtë forum';
 $lang['RULES_MODERATE'] = 'Ju <b>can</b> të moderuar të këtij forumi';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nuk ka postime në këtë forum.<br />Click në <b>Post të Reja Topic</b> lidhje në këtë faqe për të postoj një.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Shiko temë';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Shtojcë është shumë i madh.<br />Could nu
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Shtojcë është shumë i madh.<br />Maximum Ngarkoni Madhësi: %d MB.<br />Please vini re se kjo masë është përcaktuar në php.ini, kjo do të thotë se është vendosur nga PHP dhe Shtojcën V nuk mund të tejkalojnë këtë vlerë.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Zgjerimi %s nuk është e lejuar'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Nuk ju lejohet të postoni Fotografi me Zgjatje %s në kuadër të këtij Forumi'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Shtojcë është shumë i madh.<br />Max Madhësi: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Na vjen keq, por maksimale si kartela për të gjitha Bashkëngjitjet është arritur. Ju lutem kontaktoni Administratorin nëse keni pyetje.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Shtojcë nuk mund të shtohen, pasi max. numri i %d të bashkëngjitni skedarë në këtë post u arrit'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Attachment/Imazhi duhet të jetë më pak se %d pixels gjerë dhe %d (pixels) e lartë';

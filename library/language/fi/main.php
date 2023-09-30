@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Sinun <b>can</b> äänestää tässä foorumissa';
 $lang['RULES_VOTE_CANNOT'] = 'Sinun <b>cannot</b> äänestää tässä foorumissa';
 $lang['RULES_MODERATE'] = 'Sinun <b>can</b> kohtalainen tällä foorumilla';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Ei uusia viestejä tässä foorumissa.<br />Click on <b>Post Uusi Topic</b> linkki tämän sivun viesti.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View topic';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Liite on liian iso.<br />Could saa maksimikok
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Liite on liian iso.<br />Maximum Lähetyksen Koko: %d MB.<br />Please huomaa, että tämä Koko on määritelty php.ini, tämä tarkoittaa, että se on asetettu PHP ja Kiinnitys Mod voi ohittaa tämän arvon.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Laajennus %s ei ole sallittua'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Sinulla ei ole oikeutta lähettää Tiedostoja Laajennus %s Foorumissa'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Liite on liian iso.<br />Max Koko: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Anteeksi, mutta suurin tiedostokoko kaikki Liitteet on saavutettu. Ota yhteyttä ylläpitäjään, jos sinulla on kysyttävää.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Liitettä ei voi lisätä, koska max. määrä %d Liitetiedostoja tämä viesti oli saavutettu'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Liitetiedosto/Kuvan tulee olla vähemmän kuin %d pikseliä leveä ja %d pikseliä korkea';

@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Siz <b>can</b> səs bu forumda';
 $lang['RULES_VOTE_CANNOT'] = 'Siz <b>cannot</b> səs sorğularda bu forumda';
 $lang['RULES_MODERATE'] = 'Siz <b>can</b> bu forum orta';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Heç bir mesaj, bu forumda.<br />Click azn <b>Post yeni link Topic</b> bu səhifədə bir yazı.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Bax mövzular';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Qoyuluşu çox böyükdür.<br />Could almaq 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Qoyuluşu çox böyükdür.<br />Maximum Boy upload: %d MB.<br />Please qeyd etmək lazımdır ki, bu məbləği müəyyən PHP.ини, bu o deməkdir ki, o, müəyyən PHP və əlavə mod deyil bilərsiniz yalnış bu dəyər.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Genişləndirilməsi %s yol verilmir'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Sizə icazə verilmir yerləşdirmək faylları genişləndirilməsi ilə %s çərçivəsində bu forumun'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Qoyuluşu çox böyükdür.Boy <br />Max: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Bağışlayın, ancaq maksimum ölçüsü üçün bütün applications əldə. Admin əlaqə saxlayın, əgər hər hansı bir sualınız varsa,.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Faylları əlavə oluna bilməz, çünki maksimum. sayı %d qoyuluşu bu mesajı əldə'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Əlavə/images olmalıdır azı %d piksel, eni və %d piksel';

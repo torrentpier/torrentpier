@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Bạn <b>can</b> bỏ phiếu trong số phiếu bầ
 $lang['RULES_VOTE_CANNOT'] = 'Bạn <b>cannot</b> bỏ phiếu trong số phiếu bầu trong diễn đàn này';
 $lang['RULES_MODERATE'] = 'Bạn <b>can</b> vừa diễn đàn này';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Không có bài diễn đàn này.<br />Click trên <b>Post Mới Topic</b> liên kết trên trang này để viết.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Xem chủ đề';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Đính Kèm là quá lớn.<br />Could không
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Đính Kèm là quá lớn.<br />Maximum kích Thước Tải lên: %d.<br />Please lưu ý rằng kích Thước này được xác định vị trí.ini, điều này có nghĩa là nó là thiết lập và đính Kèm Mod không thể ghi đè lên giá trị này.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Mở Rộng %s không được cho phép'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Bạn không được phép bài Tập với việc mở Rộng %s trong diễn Đàn này'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Đính Kèm là quá lớn.<br />Max kích Thước: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Xin lỗi, nhưng tối đa kích cỡ cho tất cả đính Kèm đạt được. Xin liên hệ với các Hội đồng quản Trị nếu bạn có những câu hỏi.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Đính kèm không thể thêm vào, vì max. số %d đính Kèm trong bài này đã đạt được'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Đính Kèm hình Ảnh, phải được ít hơn %d ảnh rộng và %d ảnh cao';

@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Du <b>can</b> stemme på afstemninger i dette forum';
 $lang['RULES_VOTE_CANNOT'] = 'Du <b>cannot</b> stemme på afstemninger i dette forum';
 $lang['RULES_MODERATE'] = 'Du <b>can</b> moderat dette forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Der er ingen indlæg i dette forum.<br />Click på <b>Post Nye Topic</b> link på denne side til at sende en.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Vis emne';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Den Vedhæftede fil er for stor.<br />Could i
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Den Vedhæftede fil er for stor.<br />Maximum Upload Size: %d MB.<br />Please bemærk, at denne Størrelse er defineret i php.ini, dette betyder, at det er sæt af PHP og Mod Udlæg kan ikke tilsidesætte denne værdi.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Udvidelse %s er ikke tilladt'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Du har ikke tilladelse til at sende Filer med Filtypenavnet %s i dette Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Den Vedhæftede fil er for stor.<br />Max Størrelse: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Undskyld, men den maksimale filstørrelse for alle Vedhæftede filer er nået. Kontakt venligst Bestyrelsen, Administrator, hvis du har spørgsmål.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Udlæg kan ikke tilføjes, da max. antallet af %d Vedhæftede filer i dette indlæg var opnået'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Den Vedhæftede fil/Billede skal være mindre end %d pixels bredt og %d pixels høj';

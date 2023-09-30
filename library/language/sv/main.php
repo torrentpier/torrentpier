@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Du <b>can</b> rösta i omröstningar i detta forum';
 $lang['RULES_VOTE_CANNOT'] = 'Du <b>cannot</b> rösta i omröstningar i detta forum';
 $lang['RULES_MODERATE'] = 'Du <b>can</b> måttlig detta forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Det finns inga inlägg i det här forumet.<br />Click på <b>Post Nya Topic</b> länk på den här sidan för att posta en.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Visa avsnittet';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Den Bifogade filen är för stor.<br />Could 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Den Bifogade filen är för stor.<br />Maximum Ladda Storlek: %d MB.<br />Please observera att denna Storlek är definierade i php.ini, detta betyder att det är satt av PHP och den Bifogade filen Mod kan inte åsidosätta detta värde.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Förlängning %s är inte tillåtna'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Du är inte tillåtet att publicera Filer med Filändelsen %s inom detta Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Den Bifogade filen är för stor.<br />Max Storlek: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Ledsen, men den maximala filstorleken för Bilagor som ska nås. Kontakta Administratören om du har frågor.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Kvarstad får inte läggas till, eftersom max. antal %d Bilagor i detta inlägg var uppnås'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Den Bifogade filen/Bilden måste vara mindre än %d pixlar bred och %d pixlar hög';

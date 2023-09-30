@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ви <b>can</b> гласати у овом форум
 $lang['RULES_VOTE_CANNOT'] = 'Ви <b>cannot</b> гласати у овом форуму';
 $lang['RULES_MODERATE'] = 'Ви <b>can</b> умерене овај форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Нема ни једне поруке на овом форуму.<br />Click на <b>Post нову везу Topic</b> на овој страници у један пост.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Погледај теме';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Прилог сувише велики.<br />
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Прилог сувише велики.<br />Maximum Величина преузимања: %d МБ.<br />Please напоменути да је ова вредност одређена у ПХП-у.организације, то значи да је она постављена на ПХП и прилог мод не можете да замените ову вредност.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Проширење %s није дозвољено'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Није Вам дозвољено да шаљете датотеке са екстензијом %s у оквиру овог форума'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Прилог сувише велики.Величина <br />Max: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Жао ми је, али максимална величина за све апликације постигнут. Молимо вас, контактирајте Администратора, ако имате питања.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Улагања не може додати, јер је максимум. број %d улагања у овој поруци постићи'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Прилог/слике треба да буде најмање %d пиксела у ширини и %d пиксела';

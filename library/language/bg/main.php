@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Вие <b>can</b> да гласуват в този �
 $lang['RULES_VOTE_CANNOT'] = 'Вие <b>cannot</b> да гласувате в анкети в този форум';
 $lang['RULES_MODERATE'] = 'Вие <b>can</b> модерирате този форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Няма нито едно съобщение в този форум.<br />Click на <b>Post нова връзка Topic</b> на тази страница в един пост.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Преглед на темите';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Прикачен файл е твърде г�
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Прикачен файл е твърде голям.<br />Maximum Размерът на файла: %d MB.<br />Please да се отбележи, че тази стойност е определена в PHP.ини, това означава, че тя се определя на PHP и вграждането на министерството на отбраната не може да замени това е от значение.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Разширяване %s не се допуска'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Нямате право да публикувате файлове с разширение %s в рамките на този форум'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Прикачен файл е твърде голям.Размер <br />Max: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Съжаляваме, но максималният размер за всички приложения се постига. Моля, свържете се с вашия Администратор, ако имате въпроси.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Прикачените файлове не може да бъде добавен, тъй като максимум. брой %d прикачени файлове в този имейл постигнато'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Прикачен файл/на изображението трябва да бъде не по-малко %d пиксела и %d пиксела';

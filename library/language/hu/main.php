@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Te <b>can</b> szavazás a szavazás ebben a fórumban
 $lang['RULES_VOTE_CANNOT'] = 'Te <b>cannot</b> szavazás a szavazás ebben a fórumban';
 $lang['RULES_MODERATE'] = 'Te <b>can</b> mérsékelt ezt a fórumot';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nincs hozzászólás ebben a fórumban.<br />Click a <b>Post Új Topic</b> link ezen az oldalon, hogy a poszt.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Téma megtekintése';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'A Melléklet túl nagy volt.<br />Could nem a
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'A Melléklet túl nagy volt.<br />Maximum Feltöltés Méret: %d MB.<br />Please, vegye figyelembe, hogy ez a Méret határozza meg a php.ini, ez azt jelenti, hogy ez által megállapított PHP, majd a Melléklet Mod nem lehet felülbírálni ezt az értéket.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'A Kiterjesztés %s nem engedélyezett'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Nem engedélyezett, hogy a post kiterjesztésű Fájlok %s belül ez a Fórum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'A Melléklet túl nagy volt.<br />Max Méret: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Sajnáljuk, de a maximális fájlméretet minden Mellékletek elérte. Kérlek, lépj kapcsolatba az adminisztrátorral, ha kérdése van.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Mellékletet nem adható hozzá, mivel a max. száma %d Csatolmányokat ebben a post volt elérni'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'A Mellékletet/Kép lehet kevesebb, mint %d pixel széles %d pixel magas';

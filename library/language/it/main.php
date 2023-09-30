@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Si <b>can</b> votare nei sondaggi in questo forum';
 $lang['RULES_VOTE_CANNOT'] = 'Si <b>cannot</b> votare nei sondaggi in questo forum';
 $lang['RULES_MODERATE'] = 'Si <b>can</b> moderare questo forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Non ci sono messaggi in questo forum.<br />Click sul <b>Post Nuovo Topic</b> link in questa pagina per posta.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Visualizza argomento';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'L\'Allegato è troppo grande.<br />Could non 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'L\'Allegato è troppo grande.<br />Maximum Dimensione di Caricamento: %d MB.<br />Please di notare che questa Dimensione è definita in php.ini, questo significa che è impostato da PHP e l\'Allegato Mod non può eseguire l\'override di questo valore.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'L\'Estensione %s non è consentito'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Non è consentito inviare File con l\'Estensione %s all\'interno di questo Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'L\'Allegato è troppo grande.<br />Max Dimensioni: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Mi dispiace, ma la dimensione massima di file per gli Allegati, viene raggiunto. Si prega di contattare l\'Amministratore del forum se avete domande.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Allegato non può essere aggiunto, dal momento che il max. numero di %d Allegati in questo post è stato raggiunto'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'L\'Allegato/Immagine deve essere inferiore a %d pixel di larghezza e %d pixel di altezza';

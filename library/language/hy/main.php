@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Դուք <b>can</b> քվեարկել այս համա�
 $lang['RULES_VOTE_CANNOT'] = 'Դուք <b>cannot</b> քվեարկել հետազոտությունների այս ֆորումին';
 $lang['RULES_MODERATE'] = 'Դուք <b>can</b> ելույթների այս համաժողովը';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Չկա ոչ մի գրառումները այս ֆորումում ։ <br />Click է <b>Post նոր հղումը Topic</b> այս էջում գրառում:';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Դիտել թեմաներ';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Ներդրումը շատ մեծ է ։ <br />
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Ներդրումը շատ մեծ է ։ <br />Maximum Չափը բեռնում: %d ՄԲ.<br />Please է նշել, որ այս մեծությունը որոշվել է PHP.ини, դա նշանակում է, որ այն սահմանվում է PHP-ի և հավելված պն կարող եք վերանայել այդ արժեքը.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Ընդլայնումը %s չի թույլատրվում'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Ձեզ չի թույլատրվում տեղադրել ֆայլերը ընդլայնման %s շրջանակներում: այս համաժողովի'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Ներդրումը շատ մեծ է ։ Չափը <br />Max: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Կներեք, բայց առավելագույն չափը բոլոր դիմումները կհասնեն. Խնդրում եմ, դիմեք Admin, եթե դուք ունեք հարցեր.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Ներդրումներ չի կարող ավելացված է զամբյուղի մեջ, քանի որ առավելագույնը. միավորների քան-%d ներդրումների մասին հաղորդագրության մեջ հասնել'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Հավելված/պատկերները պետք է ոչ պակաս %d փիքսել լայնությամբ եւ %d փիքսել';

@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Сіз бұл форумға сауалнамаға �
 $lang['RULES_VOTE_CANNOT'] = 'Сіз бұл форумға сауалнамаға дауыс <b>cannot</b>';
 $lang['RULES_MODERATE'] = 'Сіз бұл форум қалыпты <b>can</b>';
 
-$lang['NO_TOPICS_POST_ONE'] = 'бір қалдыру үшін осы бетте <b>Post Жаңа Topic</b> сілтеме осы forum.<br />Click жарияланымдар жоқ болып табылады.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'қарау тақырып';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Тіркеме тым максималды ө
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Тіркеме тым big.<br />Maximum мөлшері қотарып табылады: %d MB.<br />Please бұл PHP және толықтырудың Mod бұл мәнді қайта анықтай алмайды белгілеген деген сөз, осы өлшемі php.ini анықталады екенін ескеріңіз.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Кеңейтім %s рұқсат етілмейді'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Сіз бұл форум аясында Extension %s файлдарды жариялауға рұқсат етілмейді'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Тіркеме тым big.<br />Max өлшемі болып табылады: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Кешіріңіз, бірақ барлық тіркемелерді ең жоғары мөлшері жеткен. Егер Сіздің сұрақтарыңыз болса, Басқарма әкімшісіне хабарласыңыз.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Тіркеме макс бастап, қосу мүмкін емес. осы лауазымға %d тіркемелер саны қол жеткізілді'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Тіркеме / Сурет ені кем %d пиксел және жоғары %d пиксель болуы тиіс';

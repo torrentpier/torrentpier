@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Usted <b>can</b> votar en encuestas en este foro';
 $lang['RULES_VOTE_CANNOT'] = 'Usted <b>cannot</b> votar en encuestas en este foro';
 $lang['RULES_MODERATE'] = 'Usted <b>can</b> moderar este foro';
 
-$lang['NO_TOPICS_POST_ONE'] = 'No hay posts en este foro.<br />Click en el <b>Post Nueva Topic</b> link en esta página para publicar uno.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Ver tema';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'El archivo Adjunto es demasiado grande.<br />
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'El archivo Adjunto es demasiado grande.<br />Maximum el Tamaño de Carga: %d MB.<br />Please tenga en cuenta que este Tamaño se define en php.ini, esto significa que se establece por PHP y el Apego Mod no puede anular este valor.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'La Extensión de %s no está permitido'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'No está permitido publicar los Archivos con la Extensión %s dentro de este Foro'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'El archivo Adjunto es demasiado grande.<br />Max Tamaño: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Lo siento, pero el tamaño máximo de archivo para todos los archivos Adjuntos que se alcanza. Póngase en contacto con el Administrador del foro si tiene preguntas.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'El apego puede ser añadido, ya que la máxima. número de %d archivos Adjuntos en este post se logró'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Los datos Adjuntos/Imagen debe ser menor que %d píxeles de ancho y %d píxeles de alto';

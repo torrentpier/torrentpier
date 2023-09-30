@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = '你 <b>可以</b> 在本论坛参与投票';
 $lang['RULES_VOTE_CANNOT'] = '你 <b>不能</b> 在本论坛参与投票';
 $lang['RULES_MODERATE'] = '你 <b>可以</b> 管理这个论坛';
 
-$lang['NO_TOPICS_POST_ONE'] = '论坛中没有帖子。<br />单击 <b>发布新的主题</b> 链接来发个新帖。';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = '查看主题';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = '附件太大。<br />Could无法获得最大�
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = '附件太大。<br />Maximum上传尺寸：%dMB。<br />Please注意，这种大小的限定在php.ini，这意味着它的设PHP和附件Mod不能替代这种价值。'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = '扩展%s是不允许的'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = '你是不是允许后文件的扩展%s在这一论坛'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = '附件太大。<br />Max尺寸：%d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = '对不起，但是最大filesize用于所有附件为止。 请联络委员会管理员如果你有问题。';
 $lang['TOO_MANY_ATTACHMENTS'] = '附件无法加入，因为最大。 数%d附件中的这一后期实现了'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = '附件/图像必须小于%d素广泛和%d高像素';

@@ -72,7 +72,7 @@ switch ($mode) {
 
         if (isset($mod['mod_groups'][$forum_id])) {
             foreach ($mod['mod_groups'][$forum_id] as $group_id) {
-                $moderators[] = '<a href="' . "group.php?" . POST_GROUPS_URL . "=" . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
+                $moderators[] = '<a href="' . GROUP_URL . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
             }
         }
 

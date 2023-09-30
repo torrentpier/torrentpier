@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Du <b>can</b> stemme i avstemninger i dette forumet';
 $lang['RULES_VOTE_CANNOT'] = 'Du <b>cannot</b> stemme i avstemninger i dette forumet';
 $lang['RULES_MODERATE'] = 'Du <b>can</b> moderate dette forumet';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Det er ingen innlegg i dette forumet.<br />Click på <b>Post Nye Topic</b> link på denne siden til å legge ut én.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Se emnet';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Vedlegget er for stor.<br />Could ikke få ma
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Vedlegget er for stor.<br />Maximum Opplasting Størrelse: %d MB.<br />Please oppmerksom på at denne Størrelsen er definert i php.ini, dette betyr at det er satt av PHP og Vedlegg Mod kan ikke overstyre denne verdien.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Utvidelsen %s er ikke tillatt'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Du har ikke lov til å legge ut Filer med Filtypen %s i dette Forumet'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Vedlegget er for stor.<br />Max Størrelse: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Beklager, men maksimal filstørrelse for alle Vedlegg er nådd. Kontakt Styret Administratoren hvis du har spørsmål.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Vedlegg kan legges til, siden maks. antall %d Vedlegg i dette innlegget ble oppnådd'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Vedlegg/Bilde må være mindre enn %d piksler bredt og %d punkter høy';

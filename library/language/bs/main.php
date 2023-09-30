@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ti <b>can</b> glasova na izborima u forum';
 $lang['RULES_VOTE_CANNOT'] = 'Ti <b>cannot</b> glasova na izborima u forum';
 $lang['RULES_MODERATE'] = 'Ti <b>can</b> umjeren ovo forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nema mjesta u ovom forum.<br />Click na <b>Post Novi Topic</b> veza na ovoj stranici da post.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Pogled temu';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Prilog je prevelik.<br />Could ne maksimalnog
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Prilog je prevelik.<br />Maximum Ubaciti Veličine: %d MB.<br />Please poruku da je ovo Veličina je definiran u php.ini, to znači da je to postavila PHP i Prilog Mod ne mogu da povratimo vrijednosti.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Produžni %s nije dozvoljen'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Nije ti dozvoljeno da post Datoteke sa nastavkom %s u ovo Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Prilog je prevelik.<br />Max Veličine: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Žao mi je, ali maksimalnu filesize za svi Prilozi je postignut. Molimo vas da kontaktirate Odbor Administrator ako imate pitanja.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Prilog ne može biti dodao, od max. broj %d Prilozi u ovo mjesto je ostvarila'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Prilog/Slika mora biti manje od %d piksela širok i %d piksela srednjoj';

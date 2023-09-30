@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Siz bu forumda So\'rov ovoz <b>can</b>';
 $lang['RULES_VOTE_CANNOT'] = 'Siz bu forumda So\'rov ovoz <b>cannot</b>';
 $lang['RULES_MODERATE'] = 'Siz bu forumda mo\'\'tadil <b>can</b>';
 
-$lang['NO_TOPICS_POST_ONE'] = 'bir post uchun bu sahifada <b>Post Yangi Topic</b> bog\'laning bu forum.<br />Click hech xabarlar bor.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View topic';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Ilova Tartibni php.ini belgilangan maksimal u
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Ilova ham big.<br />Maximum upload hajmi: %d MB.<br />Please bu PHP tomonidan belgilangan bo\'lyapdi va ilova Tartibni ushbu qiymati bekor mumkin emas, degan ma\'noni anglatadi, bu hajmi php.ini belgilangan unutmang.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Extension %s ruxsat berilmagan'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Siz bu forumi doirasida uzaytirish %s fayllarni yozish uchun ruxsat yo\'q'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Ilova ham big.<br />Max hajmi: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Kechirasiz, lekin barcha uskunalar uchun maksimal hajmi erishilgan. Agar savollaringiz bo\'lsa, administratorga murojaat qiling.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Ilova max beri, qo\'shimcha mumkin emas. bu xabarga %d Qo\'shilgan soni erishildi'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Ilova / Image keng kam %d piksel va yuqori %d piksel bo\'lishi kerak';

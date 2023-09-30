@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Você <b>can</b> votar em enquetes neste fórum';
 $lang['RULES_VOTE_CANNOT'] = 'Você <b>cannot</b> votar em enquetes neste fórum';
 $lang['RULES_MODERATE'] = 'Você <b>can</b> moderado neste fórum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Não há posts neste fórum.<br />Click no <b>Post Novo Topic</b> link nesta página para postar.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Ver tópico';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'O Anexo é muito grande.<br />Could não obte
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'O Anexo é muito grande.<br />Maximum Upload Tamanho: %d MB.<br />Please note que este Tamanho é definido em php.ini, isso significa que é definido pelo PHP e o Anexo Mod não pode substituir este valor.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'A Extensão %s não é permitido'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Você não tem permissão para postar Arquivos com a Extensão %s dentro deste Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'O Anexo é muito grande.<br />Max Tamanho: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Lamentamos, mas o máximo de tamanho para todos os Anexos, é atingido. Por favor, contate o Administrador se tiver dúvidas.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'O anexo não pode ser adicionado, desde que o max. número de %d Anexos neste post foi alcançado'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'O Anexo/Imagem deve ser menor do que %d pixels de largura e %d pixels de altura';

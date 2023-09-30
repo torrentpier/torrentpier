@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'كنت <b>can</b> في التصويت في هذا ا�
 $lang['RULES_VOTE_CANNOT'] = 'كنت <b>cannot</b> في التصويت في هذا المنتدى';
 $lang['RULES_MODERATE'] = 'كنت <b>can</b> معتدلة هذا المنتدى';
 
-$lang['NO_TOPICS_POST_ONE'] = 'لا يوجد مشاركات في هذا المنتدى.<br />Click على <b>Post جديدة Topic</b> الرابط في هذه الصفحة بعد واحد.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'عرض الموضوع';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'المرفق كبير جدا.<br />Could لا
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'المرفق كبير جدا.<br />Maximum حجم التحميل: %d MB.<br />Please ملاحظة أن هذا الحجم هو محدد في php.ini, هذا يعني انها وضعتها PHP المرفق وزارة الدفاع لا يمكن تجاوز هذه القيمة.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'تمديد %s لا يسمح'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'لا يسمح لك مشاركة الملفات مع التمديد %s في هذا المنتدى'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'المرفق كبير جدا.<br />Max حجم: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'آسف لكن أقصى حجم الملف كافة المرفقات. يرجى الاتصال بمدير إذا كان لديك أسئلة.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'المرفقات لا يمكن إضافة لأن ماكس. عدد %d المرفقات في هذا المنصب يتحقق'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'المرفقات/صورة يجب أن يكون أقل من %d بكسل و %d بكسل عالية';

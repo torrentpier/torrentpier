@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ste <b>can</b> glasovati v anketi v tem forumu';
 $lang['RULES_VOTE_CANNOT'] = 'Ste <b>cannot</b> glasovati v anketi v tem forumu';
 $lang['RULES_MODERATE'] = 'Ste <b>can</b> zmerno tem forumu';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Ni objav v tem forumu.<br />Click na <b>Post Novo Topic</b> povezavo na tej strani, da objavi eno.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Pogled temo';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Prilogo je prevelika.<br />Could ni dobil naj
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Prilogo je prevelika.<br />Maximum Upload Velikost: %d MB.<br />Please upoštevajte, da to Velikost je določena v php.ini, to pomeni, da je nastavitev za PHP in Priloge Mod ne more prevladati nad to vrednostjo.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Razširitev %s ni dovoljeno'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Nimate dovoljenja za objavljanje Datotek s Končnico %s v tem Forumu'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Prilogo je prevelika.<br />Max Velikost: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Žal mi je, ampak največja velikost datoteke za vse Priponke je dosegel. Obrnite Odbora Skrbnik, če imate vprašanja.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Prilogo je ni mogoče dodati, ker je max. število %d Priloge v ta post je bil dosežen'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Prilogo/Slike mora biti manj kot %d pikslov in %d pikslov';

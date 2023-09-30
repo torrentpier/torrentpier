@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'אתה <b>can</b> להצביע בסקרים בפור�
 $lang['RULES_VOTE_CANNOT'] = 'אתה <b>cannot</b> להצביע בסקרים בפורום זה';
 $lang['RULES_MODERATE'] = 'אתה <b>can</b> מתונה הפורום הזה';
 
-$lang['NO_TOPICS_POST_ONE'] = 'אין הודעות בפורום הזה.<br />Click על <b>Post חדש Topic</b> הקישור בדף זה כדי פוסט אחד.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'הצגת הנושא';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'הקובץ המצורף הוא גדול מד�
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'הקובץ המצורף הוא גדול מדי.<br />Maximum טען גודל: %d MB.<br />Please שימו לב כי גודל זה מוגדר ב-php.ini, זה אומר זה נקבע על ידי PHP ו את הקובץ Mod לא יכול לעקוף ערך זה.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'הסיומת %s אסור'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'אתה לא רשאי לפרסם קבצים עם סיומת %s בתוך הפורום הזה'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'הקובץ המצורף הוא גדול מדי.<br />Max גודל: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'מצטער, אבל את גודל קובץ מקסימלי עבור כל הקבצים המצורפים, היא הגיעה. אנא צור קשר עם המנהל הראשי של המערכת אם יש לך שאלות.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'קובץ מצורף יכול להיות הוסיף, מאז מקס. מספר %d מצורפים בפוסט הזה הושג'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'את הקובץ/תמונה חייב להיות פחות מ %d פיקסלים רוחב ו %d פיקסלים גבוהה';

@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ty <b>can</b> hlasovat v tomto fóru';
 $lang['RULES_VOTE_CANNOT'] = 'Ty <b>cannot</b> hlasovat v tomto fóru';
 $lang['RULES_MODERATE'] = 'Ty <b>can</b> středně tomto fóru';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nejsou žádné příspěvky v tomto fóru.<br />Click na <b>Post Nové Topic</b> odkaz na tuto stránku post.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Zobrazit téma';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Příloha je příliš velká.<br />Could nen
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Příloha je příliš velká.<br />Maximum Uploadu Velikost: %d MB.<br />Please na vědomí, že tato Velikost je definována v php.ini, to znamená, že je nastavena pomocí PHP a Přílohu Mod nemůže přepsat hodnotu.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Rozšíření %s není povoleno'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Není dovoleno publikovat Soubory s Příponou %s v rámci tohoto Fóra'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Příloha je příliš velká.<br />Max Velikost: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Promiň, ale maximální velikost všech Příloh je dosaženo. Prosím kontaktujte Administrátora, pokud máte otázky.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Přílohu nelze přidat, protože max. počet %d Příloh v tomto příspěvku bylo dosaženo'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Připevnění/Obrázek musí být menší než %d pixelů široký a %d pixelů vysoký';

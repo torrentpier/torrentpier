@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Bu forumda anketlerde oy <b>can</b>';
 $lang['RULES_VOTE_CANNOT'] = 'Bu forumda anketlerde oy <b>cannot</b>';
 $lang['RULES_MODERATE'] = '<b>can</b> bu forum orta sana';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Bu forumda hiçbir mesaj.Bu sayfada <b>Post Yeni Topic</b> linke <br />Click bir yazı.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Başlık';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Ek çok büyük.<br />Could en büyük Boyutu
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Ek çok büyük.<br />Maximum Yükleme Boyutu: %d MB.Bu Boyutu php tanımlanan <br />Please unutmayın.ini, bu PHP tarafından belirlenen ve Ek Mod bu değeri geçersiz kılabilirsiniz.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = '%s Uzantısı izin verilmez'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = '%s Uzantılı bu Forumu Dosyaları göndermek için izin verilmez'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Ek çok büyük.<br />Max Boyutu: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Üzgünüm, ama tüm Ekleri için maksimum filesize ulaştı. Eğer bir sorunuz varsa, lütfen site yöneticisiyle iletişime geçin.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Eki eklendi, max beri olamaz. bu yazı %d Ekleri sayısı sağlandı'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Ek/Görüntü %d az piksel genişliğinde ve %d piksel yüksek olmalı';

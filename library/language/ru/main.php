@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Вы <b>можете</b> голосовать в оп
 $lang['RULES_VOTE_CANNOT'] = 'Вы <b>не можете</b> голосовать в опросах';
 $lang['RULES_MODERATE'] = 'Вы <b>можете</b> модерировать этот форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'В этом форуме пока нет сообщений<br />Кликните <b>Начать новую тему</b>, и ваше сообщение станет первым.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Просмотр темы';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Вложение слишком велико.
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Вложение слишком велико.<br />Максимальный размер закачиваемого файла: %d MB.<br />Отметьте, что эта величина определена в php.ini и Attachment Mod не может изменить это значение в большую сторону.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Расширение %s запрещено администратором'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Вы не можете публиковать файлы с расширением %s в этом форуме'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Вложение слишком велико.<br/>Максимальный размер: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Достигнут максимальный общий размер ваших вложений. Пожалуйста, обратитесь к администратору по этому вопросу.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Вложение невозможно, так как максимальное количество (%d) вложений в этом сообщении достигнуто.'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Изображение должно быть меньше, чем %d пикселей в ширину и %d пикселей в высоту.';

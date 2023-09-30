@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ste <b>can</b> hlasovať v anketách v tomto fóre';
 $lang['RULES_VOTE_CANNOT'] = 'Ste <b>cannot</b> hlasovať v anketách v tomto fóre';
 $lang['RULES_MODERATE'] = 'Ste <b>can</b> stredne tomto fóre';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nie sú príspevky v tomto fóre.<br />Click na <b>Post Nové Topic</b> odkaz na tejto stránke zverejniť jedno.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Zobraziť tému';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Príloha je príliš veľká.<br />Could, nie
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Príloha je príliš veľká.<br />Maximum Odovzdať Veľkosť: %d MB.<br />Please na vedomie, že táto Veľkosť je definovaná v php.ini, to znamená, že je nastavený PHP a Prílohu Mod nemôže prepísať túto hodnotu.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Rozšírenie %s nie je povolené,'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Ste nesmú post Súbory s Príponou %s v tomto Fóre'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Príloha je príliš veľká.<br />Max Veľkosť: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Ospravedlňujeme sa, ale maximálna filesize pre všetkých Príloh je dosiahnutá. Prosím, obráťte sa na Palube Správcu, ak máte otázky.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Prílohu nie je možné pridať, pretože max. počet %d Príloh v tomto príspevku bolo dosiahnuté'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Prílohu/Obrázok musí byť menej ako %d pixelov a %d pixelov';

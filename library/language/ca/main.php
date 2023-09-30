@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Vostè <b>can</b> votar a les enquestes en aquest fò
 $lang['RULES_VOTE_CANNOT'] = 'Vostè <b>cannot</b> votar a les enquestes en aquest fòrum';
 $lang['RULES_MODERATE'] = 'Vostè <b>can</b> moderar aquest fòrum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'No hi ha missatges en aquest fòrum.<br />Click a la <b>Post Nou Topic</b> enllaç en aquesta pàgina per enviar una.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Vista sobre el tema';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'El fitxer és massa gran.<br />Could no obten
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'El fitxer és massa gran.<br />Maximum la Mida de Càrrega: %d MB.<br />Please tingueu en compte que aquesta Mida es defineix en php.ini, això vol dir que és establert per PHP i l\'Adjunt Mod no pot sobreescriure aquest valor.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'L\'Extensió %s no està permès'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'No està permès publicar els Arxius amb l\'Extensió %s en aquest Fòrum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'El fitxer és massa gran.<br />Max Mida: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Ho sento, però el màxim tamany de tots els fitxers Adjunts s\'assoleix. Si us plau, contactar amb el Consell Administrador si teniu preguntes.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Fitxer adjunt no es pot afegir, ja que el max. nombre de %d fitxers Adjunts en aquest post va aconseguir'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'L\'Adjunt/Imatge ha de ser menor que %d píxels d\'amplada i %d píxels d\'alta';

@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Vous <b>can</b> voter dans les sondages de ce forum';
 $lang['RULES_VOTE_CANNOT'] = 'Vous <b>cannot</b> voter dans les sondages de ce forum';
 $lang['RULES_MODERATE'] = 'Vous <b>can</b> modérer ce forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Il n\'existe pas de messages dans ce forum.<br />Click sur le <b>Post Nouveau Topic</b> lien sur cette page pour en poster un.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Voir le sujet';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'La pièce Jointe est trop grand.<br />Could p
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'La pièce Jointe est trop grand.<br />Maximum la Taille du Téléchargement: %d MO.<br />Please noter que cette Taille est définie en php.ini, cela signifie qu\'il est défini par PHP et l\'Attachement Mod ne peut pas remplacer cette valeur.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'L\'Extension %s n\'est pas autorisé'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Vous n\'êtes pas autorisé à poster des Fichiers avec l\'Extension %s au sein de ce Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'La pièce Jointe est trop grand.<br />Max Taille: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Désolé, mais la taille maximum d\'un fichier pour toutes les pièces Jointes est atteint. Veuillez contacter l\'Administrateur si vous avez des questions.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'La pièce jointe ne peut pas être ajouté, depuis le max. nombre de %d de pièces Jointes dans ce post a été réalisé'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'La pièce Jointe/Image doit être inférieur à %d pixels de large et %d pixels de haut';

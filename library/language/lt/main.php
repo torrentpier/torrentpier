@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Jūs <b>can</b> balsuoti apklausose šiame forume';
 $lang['RULES_VOTE_CANNOT'] = 'Jūs <b>cannot</b> balsuoti apklausose šiame forume';
 $lang['RULES_MODERATE'] = 'Jūs <b>can</b> vidutinio šiame forume';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nėra pranešimų į šį forumą.<br />Click dėl <b>Post Naujas Topic</b> nuoroda į šį puslapį po vieną.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Peržiūrėti temą';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Areštas yra per didelis.<br />Could ne gauti
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Areštas yra per didelis.<br />Maximum Įkelti Dydis: %d MB.<br />Please dėmesį, kad šis Dydis yra apibrėžta php.ini, tai reiškia, kad ji nustato PHP ir Priedą, Mod negali nepaisyti šio vertę.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Pratęsimo %s neleidžiama'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Jums neleidžiama skelbti Failus su Plėtiniu %s šiame Forume'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Areštas yra per didelis.<br />Max Dydis: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Atsiprašome, tačiau maksimalus failo dydis už visus Priedus, yra pasiektas. Prašome kreiptis į forumo Administratorius, jei turite klausimų.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Areštas negali būti pridėta, nes max. skaičius %d Priedų, į šį postą buvo pasiektas'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Priedą/Nuotraukos turi būti mažesnis nei %d pikselių pločio ir %d pikselių aukščio';

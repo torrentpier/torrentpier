@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Jūs <b>can</b> balsot aptaujās šajā forumā';
 $lang['RULES_VOTE_CANNOT'] = 'Jūs <b>cannot</b> balsot aptaujās šajā forumā';
 $lang['RULES_MODERATE'] = 'Jūs <b>can</b> mērens šajā forumā';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nav posts šajā forumā.<br />Click par <b>Post Jaunu Topic</b> saiti uz šo lapu, ievietot viena.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Apskatīt tēmu';
@@ -1004,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Pielikums ir pārāk liels.<br />Could nav ie
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Pielikums ir pārāk liels.<br />Maximum Augšupielādēt Izmērs: %d MB.<br />Please, ņemiet vērā, ka šis Lielums ir definēts php.ini, tas nozīmē, ka tā ir iestatīta ar PHP un Pielikumu Mod nevar ignorēt šo vērtību.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Pagarinājuma %s nav atļauta'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Jums nav atļauts ievietot Failus ar Paplašinājumu %s šajā Forumā'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Pielikums ir pārāk liels.<br />Max Izmērs: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Atvainojiet, bet maksimālais izmērs, lai visi Pielikumi ir sasniegts. Lūdzu, sazinieties Valdes Administratoru ja jums ir jautājumi.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Pielikumu nevar pievienot, jo maks. skaits %d Pielikumus šajā amatā tika sasniegts'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Pielikumu/Attēls nedrīkst būt mazāks par %d pikseļus plats un %d pikseļus augsts';
