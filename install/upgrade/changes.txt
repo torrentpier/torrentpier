@@ -72,4 +72,4 @@ ALTER TABLE `bb_bt_tracker_snap` ADD COLUMN `completed` INT(10) NOT NULL DEFAULT
 ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEFAULT '0';
 
 // 2.4.0-beta3
-INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('1', 'webp', '');
+INSERT INTO `bb_extensions` VALUES ('1', 'webp', '');
