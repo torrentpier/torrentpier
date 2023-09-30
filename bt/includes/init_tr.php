@@ -21,17 +21,15 @@ if ($bb_cfg['tracker']['bt_off']) {
 //
 // Functions
 //
-function silent_exit()
+function silent_exit($msg = '')
 {
-    ob_end_clean();
+    echo \SandFox\Bencode\Bencode::encode(['warning message' => str_compact($msg)]);
 
     exit;
 }
 
 function error_exit($msg = '')
 {
-    silent_exit();
-
     echo \SandFox\Bencode\Bencode::encode(['failure reason' => str_compact($msg)]);
 
     exit;

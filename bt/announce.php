@@ -46,14 +46,14 @@ $input_vars_num = ['port', 'uploaded', 'downloaded', 'left', 'numwant', 'compact
 // Init received data
 // String
 foreach ($input_vars_str as $var_name) {
-    ${$var_name} = isset($_GET[$var_name]) ? (string)$_GET[$var_name] : null;
+    $$var_name = isset($_GET[$var_name]) ? (string)$_GET[$var_name] : null;
 }
 // Numeric
 foreach ($input_vars_num as $var_name) {
-    ${$var_name} = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
+    $$var_name = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
 }
 // Passkey
-$passkey = ${$passkey_key} ?? null;
+$passkey = $$passkey_key ?? null;
 
 // Verify request
 // Required params (info_hash, peer_id, port, uploaded, downloaded, left, passkey)
@@ -339,7 +339,7 @@ if (($is_hybrid && $hybrid_tor_update) || !$is_hybrid) { // Update statistics on
 
 // Exit if stopped
 if ($stopped) {
-    silent_exit();
+    silent_exit('Cache will be reset within 30 seconds');
 }
 
 // Store peer info in cache
