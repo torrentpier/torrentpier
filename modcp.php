@@ -547,7 +547,7 @@ switch ($mode) {
                     $poster_id = $postrow[$i]['poster_id'];
                     $poster = $postrow[$i]['username'];
 
-                    $post_date = bb_date($postrow[$i]['post_time']);
+                    $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
 
                     $message = $postrow[$i]['post_text'];
 
