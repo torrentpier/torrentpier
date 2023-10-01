@@ -291,7 +291,7 @@ if ($mode == 'cats') {
     $use_gd2_no = ($new_attach['use_gd2'] == '0') ? 'checked' : '';
 
     // Check Thumbnail Support
-    if (!is_imagick() && !@extension_loaded('gd')) {
+    if (!is_imagick() && !extension_loaded('gd')) {
         $new_attach['img_create_thumbnail'] = '0';
     } else {
         $template->assign_block_vars('switch_thumbnail_support', []);
