@@ -16,7 +16,7 @@ define('APP_NAME', 'TorrentPier');
 
 define('CHECK_REQIREMENTS', [
     'status' => true,
-    'php_min_version' => '7.4.0',
+    'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
         'gd',
