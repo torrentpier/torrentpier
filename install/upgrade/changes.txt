@@ -73,3 +73,4 @@ ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEF
 
 // 2.4.0-beta3
 INSERT INTO `bb_extensions` VALUES ('1', 'webp', '');
+INSERT INTO `bb_extensions` VALUES ('2', '7z', '');

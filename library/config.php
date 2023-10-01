@@ -556,7 +556,7 @@ $bb_cfg['file_id_ext'] = [
 // Attachments
 $bb_cfg['attach'] = [
     'upload_path' => DATA_DIR . '/torrent_files', // путь к директории с torrent файлами
-    'max_size' => 5 * 1024 * 1024, // максимальный размер файла в байтах
+    'max_size' => 5 * 1024 * 1024, // TODO: максимальный размер файла
 ];
 
 $bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // TODO: для разделов с раздачами
