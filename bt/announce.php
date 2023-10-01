@@ -26,14 +26,11 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
     $_GET['info_hash'] = $_GET['?info_hash'];
 }
 
-$is_bt_v2 = null;
-$is_hybrid = $hybrid_v1_hash = $hybrid_v2_hash = $hybrid_tor_update = false;
-
 // Initial request verification
 if (strpos($_SERVER['REQUEST_URI'], 'scrape') !== false) {
     msg_die('Please disable SCRAPE!');
 }
-if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key]) || strlen($_GET[$passkey_key]) != BT_AUTH_KEY_LENGTH) {
+if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key]) || strlen($_GET[$passkey_key]) !== BT_AUTH_KEY_LENGTH) {
     msg_die('Please LOG IN and RE-DOWNLOAD this torrent (passkey not found)');
 }
 
@@ -60,7 +57,7 @@ $passkey = $$passkey_key ?? null;
 if (!isset($peer_id)) {
     msg_die('peer_id was not provided');
 }
-if (strlen($peer_id) != 20) {
+if (strlen($peer_id) !== 20) {
     msg_die('Invalid peer_id: ' . bin2hex($peer_id));
 }
 
@@ -73,9 +70,9 @@ if (!isset($info_hash)) {
 $info_hash_hex = bin2hex($info_hash);
 
 // Check info_hash version
-if (strlen($info_hash) == 32) {
+if (strlen($info_hash) === 32) {
     $is_bt_v2 = true;
-} elseif (strlen($info_hash) == 20) {
+} elseif (strlen($info_hash) === 20) {
     $is_bt_v2 = false;
 } else {
     msg_die('Invalid info_hash: ' . $info_hash_hex);
@@ -125,8 +122,7 @@ if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
 // Peer unique id
-$peer_hash = md5(rtrim($info_hash, ' ') . $passkey . $ip . $port);
-
+$peer_hash = hash('xxh128', rtrim($info_hash, ' ') . $passkey . $ip . $port);
 // Events
 $stopped = ($event === 'stopped');
 
@@ -300,7 +296,7 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (($is_hybrid && $hybrid_tor_update) || !$is_hybrid) { // Update statistics only for one topic
+if (isset($is_hybrid, $hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only for one topic
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
@@ -408,11 +404,11 @@ if (!$output) {
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
         'downloaded' => (int)$client_completed,
-        'warning message' => 'Statistics were updated',
         'peers' => $peers,
     ];
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+    $output['warning message'] = 'Statistics were updated';
 }
 
 // Return data to client
