@@ -131,7 +131,7 @@ $replace_in_parent = [
     'last_topic_id'
 ];
 
-$cache_name = 'index_sql_' . md5($sql);
+$cache_name = 'index_sql_' . hash('xxh128', $sql);
 if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
     $cat_forums = [];
     foreach (DB()->fetch_rowset($sql) as $row) {

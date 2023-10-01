@@ -362,7 +362,7 @@ class Torrent
 
         // Getting info_hash v1
         if ($bt_v1) {
-            $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
+            $info_hash = pack('H*', hash('sha1', \SandFox\Bencode\Bencode::encode($info)));
             $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
             $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
         }
