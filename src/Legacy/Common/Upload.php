@@ -37,13 +37,18 @@ class Upload
     public $file_size = '';
     public $ext_ids = []; // array_flip($bb_cfg['file_id_ext'])
     public $errors = [];
-    public $img_types = [
-        1 => 'gif',
-        2 => 'jpg',
-        3 => 'png',
-        6 => 'bmp',
-        7 => 'tiff',
-        8 => 'tiff',
+
+    /**
+     * Image types array
+     *
+     * @var array|string[]
+     */
+    public array $img_types = [
+        IMAGETYPE_GIF => 'gif',
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG => 'png',
+        IMAGETYPE_BMP => 'bmp',
+        IMAGETYPE_WEBP => 'webp'
     ];
 
     /**
