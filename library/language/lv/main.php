@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Katra rinda atbilst viena atbilde (maks.';
 $lang['OLD_BROWSER'] = 'Jūs izmantojat novecojušu pārlūku. Mājas lapā netiks rādīta pareizi.';
 $lang['GO_BACK'] = 'Atgriezties';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Failu augšupielādes kļūda';
 $lang['UPLOAD_ERROR_SIZE'] = 'Augšupielādēto failu pārsniedz maksimālo lielumu %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Nederīgs faila veids, attēla';
