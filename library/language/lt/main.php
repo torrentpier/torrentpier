@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Kiekviena eilutė atitinka vieną atsakymą (maks
 $lang['OLD_BROWSER'] = 'Jūs naudojate pasenusią naršyklės. Svetainė bus būti rodomi neteisingai.';
 $lang['GO_BACK'] = 'Grįžti atgal';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Failo įkėlimo klaida';
 $lang['UPLOAD_ERROR_SIZE'] = 'Įkelto failo viršija maksimalų dydį %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Netinkamas failo tipas vaizdo';
