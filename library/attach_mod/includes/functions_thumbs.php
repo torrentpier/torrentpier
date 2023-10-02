@@ -77,6 +77,8 @@ function get_supported_image_types($type)
             $new_type = ($format & IMG_PNG) ? IMG_PNG : 0;
             break;
         case IMAGETYPE_BMP:
+            $new_type = ($format & IMG_BMP) ? IMG_BMP : 0;
+            break;
         case IMAGETYPE_WBMP:
             $new_type = ($format & IMG_WBMP) ? IMG_WBMP : 0;
             break;
@@ -140,6 +142,9 @@ function create_thumbnail($source, $new_file, $mimetype)
                 case IMG_PNG:
                     $image = imagecreatefrompng($source);
                     break;
+                case IMG_BMP:
+                    $image = imagecreatefrombmp($source);
+                    break;
                 case IMG_WBMP:
                     $image = imagecreatefromwbmp($source);
                     break;
@@ -167,6 +172,9 @@ function create_thumbnail($source, $new_file, $mimetype)
                     break;
                 case IMG_PNG:
                     imagepng($new_image, $new_file);
+                    break;
+                case IMG_BMP:
+                    imagebmp($new_image, $new_file);
                     break;
                 case IMG_WBMP:
                     imagewbmp($new_image, $new_file);
