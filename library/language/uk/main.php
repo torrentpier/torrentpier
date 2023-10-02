@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Кожен рядок відповідає одн
 $lang['OLD_BROWSER'] = 'Ви використовуєте застарілий браузер. Сайт може відображатися некоректно.';
 $lang['GO_BACK'] = 'Повернутися назад';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Помилка завантаження файлу';
 $lang['UPLOAD_ERROR_SIZE'] = 'Завантажений файл перевищує максимальний розмір %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Некоректний тип файлу зображення';
