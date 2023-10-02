@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Mỗi hàng tương ứng với một câu trả 
 $lang['OLD_BROWSER'] = 'Bạn đang sử dụng một lỗi thời duyệt. Các trang web sẽ không hiển thị chính xác.';
 $lang['GO_BACK'] = 'Quay trở lại';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Tập tin tải lên lỗi';
 $lang['UPLOAD_ERROR_SIZE'] = 'Các tập tin được tải lên vượt quá mức tối đa kích thước của %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Tập tin không hợp lệ của loại hình ảnh';

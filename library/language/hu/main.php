@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Minden sor megfelel egy válasz (max';
 $lang['OLD_BROWSER'] = 'Ön egy elavult böngészőt használ. A honlap nem jelenik meg megfelelően.';
 $lang['GO_BACK'] = 'Menj vissza';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Fájl feltöltés hiba';
 $lang['UPLOAD_ERROR_SIZE'] = 'A feltöltött fájl mérete meghaladja a maximális méret %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Érvénytelen fájl típusú kép';

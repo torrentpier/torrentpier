@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Iga rida vastab ühele vastus (max';
 $lang['OLD_BROWSER'] = 'Teie kasutate brauseri vananenud. Kui veebisaiti ei kuvata õigesti.';
 $lang['GO_BACK'] = 'Mine tagasi';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Faili üleslaadimise viga';
 $lang['UPLOAD_ERROR_SIZE'] = 'Üleslaaditud fail ületab maksimaalse suuruse %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Vigane faili tüüp pilti';

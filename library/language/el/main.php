@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Κάθε γραμμή αντιστοιχεί σε
 $lang['OLD_BROWSER'] = 'Χρησιμοποιείτε ένα παλιό πρόγραμμα περιήγησης. Η ιστοσελίδα δεν θα εμφανίζονται σωστά.';
 $lang['GO_BACK'] = 'Πάμε πίσω';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Ανεβάστε το αρχείο σφάλμα';
 $lang['UPLOAD_ERROR_SIZE'] = 'Το μεταφορτωμένο αρχείο υπερβαίνει το μέγιστο μέγεθος του %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Μη έγκυρος τύπος αρχείου εικόνας';

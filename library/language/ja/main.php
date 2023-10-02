@@ -2789,6 +2789,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = '各行に対応する一つの答え(max';
 $lang['OLD_BROWSER'] = 'を使用してい古いブラウザです。 本ウェブサイトを正しく表示されないます。';
 $lang['GO_BACK'] = '帰';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'ファイルのアップロードエラー';
 $lang['UPLOAD_ERROR_SIZE'] = 'を超えるファイルをアップロード最大サイズの%s';
 $lang['UPLOAD_ERROR_FORMAT'] = '無効なファイル形式の画像';

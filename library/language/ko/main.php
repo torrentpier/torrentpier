@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = '각각의 행에 대응하는 하나의 답변(ma
 $lang['OLD_BROWSER'] = '당신이 사용하는 오래된 브라우저입니다. 웹사이트는 제대로 표시되지 않습니다.';
 $lang['GO_BACK'] = '로 돌아';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = '파일 업로드는 오류';
 $lang['UPLOAD_ERROR_SIZE'] = '업로드된 파일의 최대 크기를 초과합 %s';
 $lang['UPLOAD_ERROR_FORMAT'] = '잘못된 파일 형식의 이미지';

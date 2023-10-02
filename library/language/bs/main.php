@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Svaki redu odgovara jedan odgovor (max';
 $lang['OLD_BROWSER'] = 'Koristiš zastarelu preglednik. Web stranica neće prikazati ispravno.';
 $lang['GO_BACK'] = 'Vratiti';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Dosije ubaciti greška';
 $lang['UPLOAD_ERROR_SIZE'] = 'Je poslao dosije prelazi maksimalnu veličine %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Nevažeći dosije tip na slici';

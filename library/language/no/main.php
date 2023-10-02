@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Hver rad tilsvarer ett svar (maks.';
 $lang['OLD_BROWSER'] = 'Du bruker en utdatert nettleser. Nettstedet vil ikke vises på riktig måte.';
 $lang['GO_BACK'] = 'Gå tilbake';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Opplasting av fil feil';
 $lang['UPLOAD_ERROR_SIZE'] = 'Den opplastede filen overskrider den maksimale størrelsen på %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Ugyldig fil type bilde';

@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Každý riadok zodpovedá jednému odpoveď (max.
 $lang['OLD_BROWSER'] = 'Používate zastaralý prehliadač. Webové stránky sa nebudú zobrazovať správne.';
 $lang['GO_BACK'] = 'Ísť späť';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Súbor nahrať chyba';
 $lang['UPLOAD_ERROR_SIZE'] = 'Odovzdaný súbor prekračuje maximálnu veľkosť %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Neplatný typ súboru obrázka';

@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Elke ry stem ooreen met een antwoord (maks';
 $lang['OLD_BROWSER'] = 'U gebruik \'n verouderde blaaier. Die webwerf sal nie korrek vertoon word nie.';
 $lang['GO_BACK'] = 'Gaan terug';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Lêeroplaaifout';
 $lang['UPLOAD_ERROR_SIZE'] = 'Die opgelaaide lêer oorskry die maksimum grootte van %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Ongeldige lêertipe beeld';
