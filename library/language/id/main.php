@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Setiap baris sesuai dengan salah satu jawaban (ma
 $lang['OLD_BROWSER'] = 'Anda menggunakan browser usang. Website tidak akan ditampilkan dengan benar.';
 $lang['GO_BACK'] = 'Kembali';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Upload File error';
 $lang['UPLOAD_ERROR_SIZE'] = 'Upload file yang melebihi ukuran maksimum %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Berkas tidak valid jenis gambar';
