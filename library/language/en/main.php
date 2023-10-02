@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Each row corresponds to one answer (max';
 $lang['OLD_BROWSER'] = 'You are using an outdated browser. The website will not display correctly.';
 $lang['GO_BACK'] = 'Go Back';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'File upload error';
 $lang['UPLOAD_ERROR_SIZE'] = 'The uploaded file exceeds the maximum size of %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Invalid file type of image';
