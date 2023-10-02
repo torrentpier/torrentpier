@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'כל שורה מקביל תשובה אחת (מק�
 $lang['OLD_BROWSER'] = 'אתה משתמש מיושנת הדפדפן. האינטרנט לא יוצגו כהלכה.';
 $lang['GO_BACK'] = 'לחזור';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'העלאת קובץ שגיאה';
 $lang['UPLOAD_ERROR_SIZE'] = 'הקובץ שהועלה עולה על הגודל המרבי של %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'חוקי סוג קובץ של תמונה';
