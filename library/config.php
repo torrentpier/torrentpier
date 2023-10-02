@@ -66,7 +66,7 @@ $bb_cfg['cache'] = [
     'redis' => [
         'host' => '127.0.0.1',
         'port' => 6379,
-        'pconnect' => PHP_ZTS ? false : true,
+        'pconnect' => !PHP_ZTS,
         'con_required' => true,
     ],
     // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
