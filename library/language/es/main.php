@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Cada fila corresponde a una respuesta (máx.';
 $lang['OLD_BROWSER'] = 'Estás usando un navegador obsoleto. El sitio web no se muestren correctamente.';
 $lang['GO_BACK'] = 'Volver';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Carga de archivos de error';
 $lang['UPLOAD_ERROR_SIZE'] = 'El archivo subido excede el tamaño máximo de %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'No válido tipo de archivo de imagen';
