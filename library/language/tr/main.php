@@ -2791,6 +2791,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Her satır, bir cevap için (max karşılık geli
 $lang['OLD_BROWSER'] = 'Eski bir tarayıcı kullanıyorsunuz. Web sitesi düzgün görüntülenmez.';
 $lang['GO_BACK'] = 'Geri dönmek';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Yükleme hatası dosya';
 $lang['UPLOAD_ERROR_SIZE'] = 'Yüklenen dosyayı %s en büyük boyutu aşıyor';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Görüntü geçersiz dosya türü';

@@ -2786,6 +2786,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Кожнай радку адпавядае адз
 $lang['OLD_BROWSER'] = 'Вы выкарыстоўваеце састарэлы браўзэр. Сайт не будзе карэктна адлюстроўвацца.';
 $lang['GO_BACK'] = 'Вярнуцца';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Файл памылка загрузкі';
 $lang['UPLOAD_ERROR_SIZE'] = 'Загружаны файл перавышае максімальны памер %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Недапушчальны Тып файла малюнка';

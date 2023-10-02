@@ -63,26 +63,26 @@ function get_supported_image_types($type)
     $new_type = 0;
 
     switch ($type) {
-        case 1:
+        case IMAGETYPE_GIF:
             $new_type = ($format & IMG_GIF) ? IMG_GIF : 0;
             break;
-        case 2:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
+        case IMAGETYPE_JPEG:
+        case IMAGETYPE_JPC:
+        case IMAGETYPE_JP2:
+        case IMAGETYPE_JPX:
+        case IMAGETYPE_JB2:
             $new_type = ($format & IMG_JPG) ? IMG_JPG : 0;
             break;
-        case 3:
-        case 4:
+        case IMAGETYPE_PNG:
             $new_type = ($format & IMG_PNG) ? IMG_PNG : 0;
             break;
-        case 6:
-        case 8:
-        case 15:
+        case IMAGETYPE_BMP:
+            $new_type = ($format & IMG_BMP) ? IMG_BMP : 0;
+            break;
+        case IMAGETYPE_WBMP:
             $new_type = ($format & IMG_WBMP) ? IMG_WBMP : 0;
             break;
-        case 32:
+        case IMAGETYPE_WEBP:
             $new_type = ($format & IMG_WEBP) ? IMG_WEBP : 0;
             break;
     }
@@ -142,6 +142,9 @@ function create_thumbnail($source, $new_file, $mimetype)
                 case IMG_PNG:
                     $image = imagecreatefrompng($source);
                     break;
+                case IMG_BMP:
+                    $image = imagecreatefrombmp($source);
+                    break;
                 case IMG_WBMP:
                     $image = imagecreatefromwbmp($source);
                     break;
@@ -169,6 +172,9 @@ function create_thumbnail($source, $new_file, $mimetype)
                     break;
                 case IMG_PNG:
                     imagepng($new_image, $new_file);
+                    break;
+                case IMG_BMP:
+                    imagebmp($new_image, $new_file);
                     break;
                 case IMG_WBMP:
                     imagewbmp($new_image, $new_file);

@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Cada linha corresponde a uma resposta (max.';
 $lang['OLD_BROWSER'] = 'Você está usando um navegador desatualizado. O site não serão exibidos corretamente.';
 $lang['GO_BACK'] = 'Voltar';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Upload do arquivo de erro';
 $lang['UPLOAD_ERROR_SIZE'] = 'O upload do arquivo excede o tamanho máximo de %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Inválido tipo de arquivo de imagem';

@@ -2789,6 +2789,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Hər bir bar uyğun bir cavab (Max.';
 $lang['OLD_BROWSER'] = 'İstifadə etdiyiniz köhnəlmiş browser. Veb düzgün göstərilir.';
 $lang['GO_BACK'] = 'Geri qayıtmaq';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Fayl səhv downloads';
 $lang['UPLOAD_ERROR_SIZE'] = 'Yüklədiyiniz fayl çoxdur maksimum ölçüsü %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Yolverilməz fayl Növü şəkillər';

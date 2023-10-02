@@ -202,7 +202,7 @@ if ($mode == 'extensions') {
     DB()->sql_freeresult($result);
 
     if ($num_extension_row > 0) {
-        $extension_row = sort_multi_array($extension_row, 'extension');
+        $extension_row = sort_multi_array($extension_row, 'group_id');
 
         for ($i = 0; $i < $num_extension_row; $i++) {
             if ($submit) {

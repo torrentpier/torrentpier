@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Har bir satr, bir javob mos keladi (max';
 $lang['OLD_BROWSER'] = 'Siz eski brauzer foydalanayotgan. Veb-sayt to\'g\'ri aks etmaydi.';
 $lang['GO_BACK'] = 'Qaytish';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Fayl yuklash xatosi';
 $lang['UPLOAD_ERROR_SIZE'] = 'Yuklanayotgan fayl %s maksimal hajmi ekansiz';
 $lang['UPLOAD_ERROR_FORMAT'] = 'tasvir noto\'g\'ri fayl turi';

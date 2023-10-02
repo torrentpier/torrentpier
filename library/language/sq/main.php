@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Çdo rresht i korrespondon një përgjigje (max';
 $lang['OLD_BROWSER'] = 'Ju jeni duke përdorur një të vjetëruara të shfletuesit. Faqja e internetit nuk do të ekranit.';
 $lang['GO_BACK'] = 'Kthehem';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Ngarko gabim';
 $lang['UPLOAD_ERROR_SIZE'] = 'I ngarkuar file kalon madhësia maksimale e %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Të pavlefshme file type e imazhit';

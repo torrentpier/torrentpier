@@ -412,6 +412,6 @@ if (!$output) {
 }
 
 // Return data to client
-echo \SandFox\Bencode\Bencode::encode($output);
+echo \Arokettu\Bencode\Bencode::encode($output);
 
 exit;

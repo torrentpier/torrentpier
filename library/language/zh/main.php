@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = '每个行对应于一个答案(最大值';
 $lang['OLD_BROWSER'] = '您使用的是过时的浏览器。 该网站将不会显示正确的。';
 $lang['GO_BACK'] = '上一页';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = '文件上传错误';
 $lang['UPLOAD_ERROR_SIZE'] = '上载的文件超过最大尺寸的%s';
 $lang['UPLOAD_ERROR_FORMAT'] = '无效的文件种类型的图像';

@@ -43,7 +43,7 @@ if (strlen($info_hash) == 32) {
 }
 
 if ($lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex)) {
-    die(\SandFox\Bencode\Bencode::encode($lp_scrape_info));
+    die(\Arokettu\Bencode\Bencode::encode($lp_scrape_info));
 }
 
 $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
@@ -73,6 +73,6 @@ $output['files'][$info_hash] = [
 
 $peers_list_cached = CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);
 
-echo \SandFox\Bencode\Bencode::encode($output);
+echo \Arokettu\Bencode\Bencode::encode($output);
 
 exit;
