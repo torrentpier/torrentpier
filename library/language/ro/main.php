@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Fiecare rând corespunde un singur răspuns (max'
 $lang['OLD_BROWSER'] = 'Utilizați un browser învechit. Site-ul nu va afișa corect.';
 $lang['GO_BACK'] = 'Du-te înapoi';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Fișier de încărcare de eroare';
 $lang['UPLOAD_ERROR_SIZE'] = 'Fișierul încărcat depășește dimensiunea maximă a %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Invalid tip de fișier de imagine';
