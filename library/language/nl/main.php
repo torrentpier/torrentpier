@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Elke rij correspondeert met een antwoord (max';
 $lang['OLD_BROWSER'] = 'U gebruikt een verouderde browser. De website wordt niet goed weergegeven.';
 $lang['GO_BACK'] = 'Ga terug';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'File upload error';
 $lang['UPLOAD_ERROR_SIZE'] = 'Het geüploade bestand is groter dan de maximale grootte van %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Ongeldig bestandstype van de afbeelding';
