@@ -2789,6 +2789,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Każdy wiersz odpowiada jednej odpowiedzi (Max.';
 $lang['OLD_BROWSER'] = 'Używasz przestarzałej przeglądarki. Strona nie będzie poprawnie wyświetlane.';
 $lang['GO_BACK'] = 'Wrócić';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Plik błąd pobierania';
 $lang['UPLOAD_ERROR_SIZE'] = 'Pobrany plik przekracza maksymalny rozmiar %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Nieprawidłowy Typ pliku obrazu';
