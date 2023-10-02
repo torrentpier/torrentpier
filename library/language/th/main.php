@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'แต่ละแถวด้ว corresponds ต
 $lang['OLD_BROWSER'] = 'คุณคือการใช้ outdated องเบราว์เซอร์ได้ เว็บไซต์จะไม่แสดงอย่างถูกต้อง';
 $lang['GO_BACK'] = 'กลับไป';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'แฟ้มการอัปโหลดเกิดข้อผิดพลาด';
 $lang['UPLOAD_ERROR_SIZE'] = 'ที่อัปโหลดแฟ้ม exceeds สูงสุดของขนาดของ %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'ไม่ถูกต้องประเภทแฟ้มของภาพ';
