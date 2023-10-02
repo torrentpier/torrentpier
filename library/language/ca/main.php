@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Cada fila correspon a una resposta (max';
 $lang['OLD_BROWSER'] = 'Esteu utilitzant un navegador obsolet. La pàgina web no es mostrin correctament.';
 $lang['GO_BACK'] = 'Tornar';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Penjar un fitxer d\'error';
 $lang['UPLOAD_ERROR_SIZE'] = 'El fitxer penjat supera la mida màxima de %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Invalid tipus de fitxer d\'imatge';
