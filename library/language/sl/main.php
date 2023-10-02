@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Vsaka vrstica ustreza en odgovor (maks.';
 $lang['OLD_BROWSER'] = 'Uporabljate zastareli brskalnik. Spletne strani ne bo pravilno prikazano.';
 $lang['GO_BACK'] = 'Pojdi nazaj';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Nalaganje datotek napaka';
 $lang['UPLOAD_ERROR_SIZE'] = 'Naložene datoteke presega največjo velikost %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Neveljavna vrsta datoteke slike';
