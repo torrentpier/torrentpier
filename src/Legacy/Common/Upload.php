@@ -21,6 +21,7 @@ class Upload
         'max_height' => 0,
         'allowed_ext' => [],
         'upload_path' => '',
+        'up_allowed' => false,
     ];
     public $file = [
         'name' => '',
@@ -57,6 +58,12 @@ class Upload
 
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
+
+        // Check upload allowed
+        if (!$this->cfg['up_allowed']) {
+            $this->errors[] = $lang['UPLOAD_ERROR_COMMON_DISABLED'];
+            return false;
+        }
 
         // upload errors from $_FILES
         if ($this->file['error']) {
