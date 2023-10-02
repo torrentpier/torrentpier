@@ -369,6 +369,10 @@ if (!$output) {
 		LIMIT $numwant
 	");
 
+    if (empty($rowset)) {
+        $rowset[] = ['ip' => $ip, 'port' => $port];
+    }
+
     if ($compact_mode) {
         $peers = '';
 
