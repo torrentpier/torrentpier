@@ -542,15 +542,20 @@ $bb_cfg['sitemap_sending'] = [
 
 // Extensions
 $bb_cfg['file_id_ext'] = [
+    // Images
     1 => 'gif',
-    2 => 'gz',
-    3 => 'jpg',
-    4 => 'png',
-    5 => 'rar',
-    6 => 'tar',
-    7 => 'tiff',
-    8 => 'torrent',
+    2 => 'jpg',
+    3 => 'png',
+    4 => 'bmp',
+    5 => 'webp',
+    // Archives
+    6 => 'gz',
+    7 => '7z',
+    8 => 'rar',
     9 => 'zip',
+    10 => 'tar',
+    // Other
+    11 => 'torrent',
 ];
 
 // Attachments
@@ -564,7 +569,7 @@ $bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: для обычны
 
 // Avatars
 $bb_cfg['avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'jpeg', 'png', 'bmp'], // разрешенные форматы файлов
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // разрешенные форматы файлов (При добавлении нового расширения, продублируйте в $bb_cfg['file_id_ext'])
     'bot_avatar' => '/gallery/bot.gif', // аватара бота
     'max_size' => 100 * 1024, // размер аватары в байтах
     'max_height' => 100, // высота аватара в px
@@ -577,7 +582,7 @@ $bb_cfg['avatars'] = [
 
 // Group avatars
 $bb_cfg['group_avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'jpeg', 'png', 'bmp'], // разрешенные форматы файлов
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // разрешенные форматы файлов (При добавлении нового расширения, продублируйте в $bb_cfg['file_id_ext'])
     'max_size' => 300 * 1024, // размер аватары в байтах
     'max_height' => 300, // высота аватара в px
     'max_width' => 300, // ширина аватара в px
