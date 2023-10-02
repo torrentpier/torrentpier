@@ -70,3 +70,7 @@ ALTER TABLE `bb_privmsgs_text` CHANGE `privmsgs_text` `privmsgs_text` MEDIUMTEXT
 ALTER TABLE `bb_bt_torrents` ADD COLUMN `info_hash_v2` VARBINARY(32) NOT NULL DEFAULT '';
 ALTER TABLE `bb_bt_tracker_snap` ADD COLUMN `completed` INT(10) NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEFAULT '0';
+
+// 2.4.0-beta3
+INSERT INTO `bb_extensions` VALUES ('1', 'webp', '');
+INSERT INTO `bb_extensions` VALUES ('2', '7z', '');
