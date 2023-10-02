@@ -2789,6 +2789,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Svaki redak prikazuje jedan odgovor (Max.';
 $lang['OLD_BROWSER'] = 'Koristite zastarjeli preglednik. Web stranice se neće ispravno prikazivati.';
 $lang['GO_BACK'] = 'Povratak';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Pogreška preuzimanja datoteke';
 $lang['UPLOAD_ERROR_SIZE'] = 'Preuzetu datoteku premašuje maksimalnu veličinu %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Neispravan Tip datoteke slike';
