@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Kukin rivi vastaa yksi vastaus (max';
 $lang['OLD_BROWSER'] = 'Käytät vanhentunutta selainta. Sivusto ei näy oikein.';
 $lang['GO_BACK'] = 'Mene takaisin';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Tiedoston siirto palvelimeen-virhe';
 $lang['UPLOAD_ERROR_SIZE'] = 'Lähetetyn tiedoston koko ylittää enimmäiskoon %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Virheellinen tiedostotyyppi kuva';
