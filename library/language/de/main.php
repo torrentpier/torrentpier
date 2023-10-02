@@ -2785,6 +2785,7 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Jede Zeile entspricht einer Antwort (max.';
 $lang['OLD_BROWSER'] = 'Sie verwenden einen veralteten browser. Die website wird nicht richtig angezeigt.';
 $lang['GO_BACK'] = 'Gehen Sie zurück';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Datei hochladen-Fehler';
 $lang['UPLOAD_ERROR_SIZE'] = 'Die hochgeladene Datei überschreitet die maximale Größe von %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Ungültiger Datei-Typ des Bildes';
