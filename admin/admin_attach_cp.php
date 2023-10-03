@@ -446,7 +446,7 @@ if ($view === 'attachments') {
                 'FILENAME' => htmlspecialchars($attachments[$i]['real_filename']),
                 'COMMENT' => htmlspecialchars($attachments[$i]['comment']),
                 'EXTENSION' => $attachments[$i]['extension'],
-                'SIZE' => round($attachments[$i]['filesize'] / 1024, 2),
+                'SIZE' => humn_size($attachments[$i]['filesize'], 2),
                 'DOWNLOAD_COUNT' => $attachments[$i]['download_count'],
                 'POST_TIME' => bb_date($attachments[$i]['filetime']),
                 'POST_TITLE' => $post_titles,
