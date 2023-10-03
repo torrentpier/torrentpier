@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'إعادة تعيين autologin الرئيسية';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'بما في ذلك جميع الأماكن التي قمت بزيارتها المنتدى تمكين تسجيل الدخول التلقائي';
 
 $lang['AVATAR'] = 'الصورة الرمزية';
-$lang['AVATAR_EXPLAIN'] = 'يعرض صورة بيانية صغيرة أدناه التفاصيل الخاصة بك في المشاركات. صورة واحدة فقط يمكن عرضها في وقت واحد ، يمكن أن يكون عرضه لا يزيد %d بكسل ، ارتفاع لا يزيد %d بكسل حجم الملف لا يزيد عن %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'حذف الصورة الرمزية';
 $lang['AVATAR_DISABLE'] = 'الصورة الرمزية خيار التحكم تعطيل انتهاك <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'تحميل الصورة الرمزية';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'طلب الانضمام إلى المجموعة الخ
 $lang['GROUP_APPROVED'] = 'تمت الموافقة على الطلب.';
 $lang['GROUP_ADDED'] = 'لقد تم إضافة مستخدمين.';
 $lang['ALREADY_MEMBER_GROUP'] = 'كنت بالفعل عضوا في هذه المجموعة';
-$lang['USER_IS_MEMBER_GROUP'] = 'المستخدم هو بالفعل عضو في هذه المجموعة';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'تحديثها بنجاح.';
 $lang['EFFECTIVE_DATE'] = 'تاريخ';
 
