@@ -213,7 +213,7 @@ if (isset($_POST['submit'])) {
         $ban_id = $banlist[$i]['ban_id'];
 
         if (!empty($banlist[$i]['ban_ip'])) {
-            $ban_ip = str_replace('255', '*', \TorrentPier\Helpers\IPHelper::long2ip($banlist[$i]['ban_ip']));
+            $ban_ip = str_replace('255', '*', \TorrentPier\Helpers\IPHelper::long2ip_extended($banlist[$i]['ban_ip']));
             $select_iplist .= '<option value="' . $ban_id . '">' . $ban_ip . '</option>';
             $ipban_count++;
         } elseif (!empty($banlist[$i]['ban_email'])) {

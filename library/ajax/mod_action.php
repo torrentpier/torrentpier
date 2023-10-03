@@ -122,8 +122,8 @@ switch ($mode) {
         } elseif ($profiledata['user_level'] == MOD && IS_MOD) {
             $reg_ip = $last_ip = $lang['HIDDEN'];
         } else {
-            $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip($profiledata['user_reg_ip']);
-            $user_last_ip = \TorrentPier\Helpers\IPHelper::long2ip($profiledata['user_last_ip']);
+            $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_reg_ip']);
+            $user_last_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_last_ip']);
             $reg_ip = '<a href="' . $bb_cfg['whois_info'] . $user_reg_ip . '" class="gen" target="_blank">' . $user_reg_ip . '</a>';
             $last_ip = '<a href="' . $bb_cfg['whois_info'] . $user_last_ip . '" class="gen" target="_blank">' . $user_last_ip . '</a>';
         }
