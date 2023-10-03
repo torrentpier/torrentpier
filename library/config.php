@@ -415,6 +415,7 @@ $bb_cfg['topic_notify_enabled'] = true;
 $bb_cfg['pm_notify_enabled'] = true;
 $bb_cfg['group_send_email'] = true;
 $bb_cfg['email_change_disabled'] = false; // TODO: disable changing email by user
+$bb_cfg['show_email_visibility_settings'] = true; // разрешать ли пользователям изменять свои настройки отображения почты (Скрыто или нет)
 
 $bb_cfg['bounce_email'] = "bounce@$domain_name"; // bounce email address
 $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error reports
