@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset Avtomatik asosiy';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'Barcha joylarda, shu jumladan, siz forum yoqishingiz avtomatik kirish tashrif buyurdi ayting';
 
 $lang['AVATAR'] = 'Foydalanuvchining barcha e\'lonlar';
-$lang['AVATAR_EXPLAIN'] = 'xabarlar sizning batafsil quyida kichik grafik tasvirni ko\'rsatadi. Faqat bir tasvir bir vaqtning o\'zida ko\'rsatilishi mumkin, uning kengligi hech katta %d ortiq piksel, balandligi hech dan yuqori %d piksel va fayl hajmi hech %d ortiq KB bo\'lishi mumkin.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Foydalanuvchining profili Foydalanuvchining barcha o\'chirish';
 $lang['AVATAR_DISABLE'] = 'Foydalanuvchining barcha e\'lonlar nazorat variant buzilishi <a href="%s"><b>forum rules</b></a> uchun o\'chirib';
 $lang['UPLOAD_AVATAR_FILE'] = 'Yuklab olish avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Sizning guruhga ishtirok etish uchun talab qilingan.';
 $lang['GROUP_APPROVED'] = 'Sizning so\'rovingiz qabul qilindi.';
 $lang['GROUP_ADDED'] = 'Siz ushbu guruhi qo\'shilgan.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Siz allaqachon bu guruh a\'zosi';
-$lang['USER_IS_MEMBER_GROUP'] = 'Foydalanuvchi allaqachon bu guruhning bir a\'zosi hisoblanadi';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Muvaffaqiyatli guruh turini yangilangan.';
 $lang['EFFECTIVE_DATE'] = 'Ijroga Kirish muddati';
 
