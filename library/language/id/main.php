@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset kunci autologin';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'termasuk semua tempat yang anda telah mengunjungi forum ini memungkinkan auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Menampilkan gambar grafis kecil di bawah ini rincian anda di posting ini. Hanya satu gambar yang dapat ditampilkan pada satu waktu, lebarnya dapat tidak lebih besar dari %d piksel, ketinggian tidak lebih besar dari %d pixel, dan ukuran file tidak lebih dari %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Menghapus avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar pilihan kontrol yang dinonaktifkan karena pelanggaran <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Meng-Upload avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Permintaan untuk bergabung dengan grup anda telah dibu
 $lang['GROUP_APPROVED'] = 'Permintaan anda telah disetujui.';
 $lang['GROUP_ADDED'] = 'Anda telah ditambahkan ke grup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Anda sudah menjadi anggota grup ini';
-$lang['USER_IS_MEMBER_GROUP'] = 'Pengguna ini telah menjadi anggota dari kelompok ini';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Berhasil diperbarui kelompok jenis.';
 $lang['EFFECTIVE_DATE'] = 'Tanggal Efektif';
 

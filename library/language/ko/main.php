@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset 키에 자동 로그인';
 $lang['RESET_AUTOLOGIN_EXPL'] = '을 포함한 모든 장소 당신이 방문한 포럼을 사용하는 자동 로그인';
 
 $lang['AVATAR'] = '아바타';
-$lang['AVATAR_EXPLAIN'] = '전시하는 그래픽 이미지의 아래에 세부 사항에서 게시물이 있습니다. 만 하나의 이미지를 표시할 수 있는 시간에,그것의 폭을 수 없는 더 큰 것보다 %d 픽셀 높이보다 크지 않 %d 픽셀,파일 크기보다는 더 이상 %dKB 니다.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = '아바타 삭제';
 $lang['AVATAR_DISABLE'] = '아바타를 제어 옵션을 사용 중지에 대한 위반 <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = '아바타를 업로드';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = '요청 당신의 그룹에 가입하기 위해 만들�
 $lang['GROUP_APPROVED'] = '귀하의 요청이 승인되었습니다.';
 $lang['GROUP_ADDED'] = '당신이 추가 되었습니다 이 사용자 그룹이다.';
 $lang['ALREADY_MEMBER_GROUP'] = '당신은 이미 이 그룹의 구성원';
-$lang['USER_IS_MEMBER_GROUP'] = '사용자 이미 이 그룹의 구성원';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = '성공적으로 업데이트 그룹 타입니다.';
 $lang['EFFECTIVE_DATE'] = '효과적인 날짜';
 

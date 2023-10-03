@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset-toets in te loggen';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'met inbegrip van al de plaatsen die u heeft bezocht, het forum is ingeschakeld auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Geeft een kleine grafische afbeelding hieronder uw gegevens in berichten. Enkel een afbeelding kan worden weergegeven in een tijd, de breedte niet meer dan %d pixels, de hoogte niet groter is dan %d pixels en de grootte van het bestand niet meer dan %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Verwijderen avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar controle optie uitgeschakeld voor de strijd <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Een verzoek om samen met uw groep heeft gemaakt.';
 $lang['GROUP_APPROVED'] = 'Uw aanvraag is goedgekeurd.';
 $lang['GROUP_ADDED'] = 'Je bent toegevoegd aan deze gebruikersgroep.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Bent u al lid van deze groep';
-$lang['USER_IS_MEMBER_GROUP'] = 'Gebruiker is al lid van deze groep';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Bijgewerkt groep type.';
 $lang['EFFECTIVE_DATE'] = 'Datum';
 

@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'ปรับค่า autologin กุญแจ';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'รวมถึงทั้งหมดที่คุณเคยไปเยี่ยมที่อภิปรากเปิดใช้การล็อกอินอัตโนมัติ';
 
 $lang['AVATAR'] = 'แมปกับร่างอวตาร';
-$lang['AVATAR_EXPLAIN'] = 'แสดงเล็กๆของภาพกราฟิด้านล่างของคุณบอกรายละเอียดในกัปตัน..เสาทางนี้.. เพียงหนึ่งของภาพจะถูกแสดงที่เวลาความกว้างของมันจะไม่มีสิ่งที่ยิ่งใหญ่กว่า %d หน่วยเป็นพิกเซลที่ไม่มีความสูงของสิ่งที่ยิ่งใหญ่กว่า %d หน่วยเป็นพิกเซลและขนาดแฟ้มไม่มีอะไรมากไปกว่า %d กิโลไบต์นะ';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'ลบร่างอวตาร';
 $lang['AVATAR_DISABLE'] = 'แมปกับร่างอวตารควบคุมตัวเลือกปิดการใช้งานสำหรับการละเมิด <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'อัปโหลดรูปแทนตัว';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'เป็นการร้องขอไปเข้
 $lang['GROUP_APPROVED'] = 'คำขอของคุณต้องการ';
 $lang['GROUP_ADDED'] = 'คุณต้องถูกเพิ่มเข้ากับมั usergroup น';
 $lang['ALREADY_MEMBER_GROUP'] = 'คุณอยู่แล้วเป็นสมาชิกของกลุ่มนี้';
-$lang['USER_IS_MEMBER_GROUP'] = 'ของผู้ใช้แล้วเป็นสมาชิกของกลุ่มนี้';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'เรียบร้อยแล้วปรับปรุงกลุ่มประเภทนี้ได้นะ';
 $lang['EFFECTIVE_DATE'] = 'ประสิทธิภาพเดท';
 

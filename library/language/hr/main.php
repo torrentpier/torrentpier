@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Ključ автологина poništi';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'uključujući i sva mjesta koja ste posjetili forum je uključen, automatski ste prijavljeni u sustav';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Prikazuje mali grafički prikaz u nastavku svoje podatke na postove. Možete samo jedna slika istovremeno prikazuju, njegova Širina može biti veća od %d piksela, visina nije više %d piksela, Veličina datoteke manja od %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Maknuti avatar';
 $lang['AVATAR_DISABLE'] = 'Mogućnost upravljanja avatar je isključen zbog kršenja <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Preuzimanje avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Molimo vas da se pridruže vašoj grupi bio postignut.
 $lang['GROUP_APPROVED'] = 'Vaš zahtjev je odobren.';
 $lang['GROUP_ADDED'] = 'Te su dodani u ovu grupu.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Vi ste već član ove grupe';
-$lang['USER_IS_MEMBER_GROUP'] = 'Već korisnik je član grupe';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Uspješno obnovljeno Tip grupe.';
 $lang['EFFECTIVE_DATE'] = 'Datum Stupanja Na Snagu';
 
