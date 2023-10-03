@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Тугмаи ссилкаро аз нав';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'аз он ҷумла ҳамаи ҷойҳои шумо Форуми фаъол худкор-воридшавӣ дидан кардам';
 
 $lang['AVATAR'] = 'Аватар';
-$lang['AVATAR_EXPLAIN'] = 'Намоиш симои графикӣ хурд дар зер маълумоти худро дар хабарҳо. Танҳо як тасвир кардан мумкин аст дар як вақт нишон дода, паҳнои он метавонад, ҳеҷ бузургтар аз %d пиксел, баландии нест, бузургтар аз %d пиксел, ҳаҷми парванда ва на зиёда аз %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'аватари Тозакунии';
 $lang['AVATAR_DISABLE'] = 'хосият назорати Аватар ғайрифаъол барои вайрон кардани rules</b></a> <a href="%s"><b>forum';
 $lang['UPLOAD_AVATAR_FILE'] = 'аватари Замима';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'A дархости ҳамроҳ гурӯҳи худ к
 $lang['GROUP_APPROVED'] = 'дархости шумо тасдиқ карда шуд.';
 $lang['GROUP_ADDED'] = 'Шумо ба ин usergroup илова карда шудаанд.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Шумо аллакай як узви ин гурӯҳ ҳастанд';
-$lang['USER_IS_MEMBER_GROUP'] = 'Корбар аллакай як узви ин гурӯҳ аст,';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Њамгироии навъи гурӯҳи нав карда мешавад.';
 $lang['EFFECTIVE_DATE'] = 'Санаи самаранок';
 

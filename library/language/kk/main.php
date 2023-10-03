@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Автологин пернесін Reset';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'Сіз форум қосылған авто-логинін кірген барлық жерлерде, оның ішінде';
 
 $lang['AVATAR'] = 'Аватар';
-$lang['AVATAR_EXPLAIN'] = 'лауазымдарының сіздің толық ақпарат төменде шағын графикалық кескінді көрсетеді. Тек бір сурет уақытта көрсетілуі мүмкін, оның ені көп емес %d астам KB %d пиксель артық емес, биіктігі ешқандай %d астам пиксель, және файл өлшемі бола алады.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'аватарды жою';
 $lang['AVATAR_DISABLE'] = 'бұзу <a href="%s"><b>forum rules</b></a> өшірілген Аватар бақылау опция';
 $lang['UPLOAD_AVATAR_FILE'] = 'аватар кері қотару';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Сіздің топқа қосылу үшін сұра
 $lang['GROUP_APPROVED'] = 'Сіздің сұрау бекітілді.';
 $lang['GROUP_ADDED'] = 'Сіз бұл пайдаланушылар тобы қосылды.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Сіз осы топтың мүшесі болып табылады';
-$lang['USER_IS_MEMBER_GROUP'] = 'Пайдаланушы қазірдің өзінде осы топтың мүшесі болып табылады';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Сәтті жаңартылған топтық түрі.';
 $lang['EFFECTIVE_DATE'] = 'Күшіне ену күні';
 

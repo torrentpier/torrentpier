@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Tilbakestille autologin-tasten';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'inkludert alle steder du har besøkt forumet aktivert auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Viser et lite bilde under detaljer i innleggene. Kun ett bilde som kan vises på en gang, dens bredde kan være noe større enn %d punkter, høyde ikke er større enn %d punkter, og filstørrelsen ikke mer enn %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Slett avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontroll alternativet deaktivert for brudd <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Laste opp avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'En forespørsel om å bli med i gruppen din har blitt 
 $lang['GROUP_APPROVED'] = 'Din forespørsel har blitt godkjent.';
 $lang['GROUP_ADDED'] = 'Du har blitt lagt til dette brukergruppe.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Du er allerede et medlem av denne gruppen';
-$lang['USER_IS_MEMBER_GROUP'] = 'Bruker er allerede et medlem av denne gruppen';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Oppdatert gruppen type.';
 $lang['EFFECTIVE_DATE'] = 'Effektiv Dato';
 

@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset tlačidlo autologin';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'vrátane všetky miesta, ktoré ste navštívili fóre povolené automatické prihlásenie';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Zobrazí malý grafický obrázok nižšie svoje údaje v pracovných miest. Len jeden obraz môže byť zobrazený na čas, jeho šírka môže byť väčší než %d pixelov, výška č väčší ako %d pixelov, veľkosť súboru nie viac ako %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Vymazať avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontroly možnosť disabled za porušenie <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Odovzdanie avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Žiadosť, aby sa pripojili k vašej skupine dosiahol.
 $lang['GROUP_APPROVED'] = 'Váš návrh bol schválený.';
 $lang['GROUP_ADDED'] = 'Boli ste pridaní do tohto usergroup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Ste už členom tejto skupiny';
-$lang['USER_IS_MEMBER_GROUP'] = 'Užívateľ je už členom tejto skupiny';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Úspešne aktualizované skupiny typu.';
 $lang['EFFECTIVE_DATE'] = 'Dátum Účinnosti';
 

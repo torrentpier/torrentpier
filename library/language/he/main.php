@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'איפוס מפתח כניסה אוטומטית';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'כולל את כל המקומות שבהם ביקרת הפורום איפשר כניסה אוטומטית';
 
 $lang['AVATAR'] = 'אווטאר';
-$lang['AVATAR_EXPLAIN'] = 'מציג קטן גרפי התמונה למטה את הפרטים שלך בפוסטים. רק תמונה אחת יכולה להיות מוצג בכל פעם, ברוחב שלה יכול להיות לא יותר מ %d פיקסלים, גובה לא יותר מ %d פיקסלים, גודל הקובץ לא יותר %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'למחוק את האווטר';
 $lang['AVATAR_DISABLE'] = 'אווטאר אפשרות שליטה נכים, בגין הפרת <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'להעלות אווטר';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'בקשה להצטרף לקבוצה שלך כבר עש�
 $lang['GROUP_APPROVED'] = 'הבקשה שלך אושרה.';
 $lang['GROUP_ADDED'] = 'אתה נוספו הזה משתמשים.';
 $lang['ALREADY_MEMBER_GROUP'] = 'אתה כבר חבר של הקבוצה הזאת.';
-$lang['USER_IS_MEMBER_GROUP'] = 'המשתמש כבר חבר בקבוצה זו';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'עודכן בהצלחה קבוצת סוג.';
 $lang['EFFECTIVE_DATE'] = 'תאריך תחולה';
 

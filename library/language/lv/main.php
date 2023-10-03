@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset taustiņu autologin';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'tostarp visām vietām, esat apmeklējis forumu iespējota auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Tiek parādīts neliels grafiskais attēls, zem jūsu informācija amatu. Tikai viens attēls var tikt rādīts laikā, tās platums var būt lielāks par %d pikseļi, augstums ne lielāks par %d pikseļi, faila izmērs ne vairāk kā %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Dzēst avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontroles iespēja invalīdiem pārkāpšanu <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Lūgums pievienoties jūsu grupai ir veikts.';
 $lang['GROUP_APPROVED'] = 'Jūsu pieprasījums ir apstiprināts.';
 $lang['GROUP_ADDED'] = 'Jums ir pievienoti šo usergroup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Jūs esat jau šīs grupas dalībnieks,';
-$lang['USER_IS_MEMBER_GROUP'] = 'Lietotājs, kas jau ir šīs grupas dalībnieks,';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Veiksmīgi atjaunināta grupa tips.';
 $lang['EFFECTIVE_DATE'] = 'Spēkā Stāšanās Datums';
 

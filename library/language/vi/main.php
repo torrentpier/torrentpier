@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Thiết lập lại tượng chìa khóa';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'bao gồm cả những nơi mà bạn đã đến thăm các diễn đàn bật tự động';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Hiển thị đồ họa nhỏ hình ảnh dưới đây các chi tiết của bạn trong bài viết. Chỉ có một hình ảnh có thể được hiển thị tại một thời gian của nó rộng có thể không lớn hơn %d ảnh, chiều cao không lớn hơn %d ảnh và kích thước tập tin không hơn %d CHẮN.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Rõ ràng avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kiểm soát lựa chọn vô hiệu hóa cho vi phạm <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Tải lên avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Một yêu cầu phải tham gia nhóm của bạn đ�
 $lang['GROUP_APPROVED'] = 'Yêu cầu được chấp thuận.';
 $lang['GROUP_ADDED'] = 'Bạn đã được thêm vào nhóm làm việc này.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Bạn đã là một thành viên của nhóm này';
-$lang['USER_IS_MEMBER_GROUP'] = 'Dùng đã là một thành viên của nhóm này';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Cập nhật thành công, loại.';
 $lang['EFFECTIVE_DATE'] = 'Hiệu Quả Ngày';
 

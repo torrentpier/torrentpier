@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset otomatik girişi anahtarı';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'ziyaret ettiğiniz tüm yerleri de dahil olmak üzere foruma otomatik giriş etkin';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Küçük bir grafik görüntü mesaj bilgilerini aşağıda görüntüler. Sadece bir görüntü bir anda gösterilebilir, genişliği %d fazla piksel, %d piksel daha büyük bir yükseklik ve dosya boyutu %d en fazla BB olabilir.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Silmek avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontrol seçeneği ihlali için <a href="%s"><b>forum rules</b></a> devre dışı';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Grubunuza katılmak için bir istek yapıldı.';
 $lang['GROUP_APPROVED'] = 'Talebiniz onaylandı.';
 $lang['GROUP_ADDED'] = 'Bu grup için eklenmiş.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Zaten bu grubun bir üyesisin';
-$lang['USER_IS_MEMBER_GROUP'] = 'Kullanıcı zaten bu grubun bir üyesidir';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Başarılı bir grup türü güncellendi.';
 $lang['EFFECTIVE_DATE'] = 'Tarih Etkili';
 
