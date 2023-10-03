@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset automatikus kulcs';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'beleértve az összes helyet, ahol meglátogatta a fórum engedélyezve van az automatikus belépés';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Megjelenít egy kis grafikus kép alább a részletek a hozzászólások. Csak egy kép jelenik meg egyszerre, a szélessége nem lehet nagyobb, mint %d pixel, a magassága nem nagyobb, mint %d pixel, a fájlok mérete nem több, mint %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Törlés avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar ellenőrzési lehetőség le van tiltva, mert sérti <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Avatar feltöltés';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Egy kérést, hogy csatlakozz a csoportba került sor.
 $lang['GROUP_APPROVED'] = 'A kérelmet jóváhagyták.';
 $lang['GROUP_ADDED'] = 'Van már hozzá, hogy ez a felhasznalok.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Már ebben a témában';
-$lang['USER_IS_MEMBER_GROUP'] = 'Felhasználó már nem tagja ennek a csoportnak';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Sikeresen frissítve csoport típus.';
 $lang['EFFECTIVE_DATE'] = 'Hatékony Dátuma';
 
