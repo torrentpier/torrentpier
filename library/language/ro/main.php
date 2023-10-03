@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Resetare autologin cheie';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'inclusiv toate locurile pe care le-am vizitat forumul permis auto-conectare';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Afișează un grafic mic imaginea de mai jos datele tale în posturi. Doar o imagine poate fi afișată la un moment dat, lățimea sa poate fi mai mare decât %d pixeli, înălțime mai mare decât %d pixeli, iar dimensiunea fișierului nu mai mult de %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Șterge avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar control dezactivat opțiunea pentru încălcarea <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Încărcați avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'O cerere să se alăture grupului a fost făcut.';
 $lang['GROUP_APPROVED'] = 'Cererea dvs. a fost aprobată.';
 $lang['GROUP_ADDED'] = 'Ai fost adăugată la acest grup de utilizatori.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Sunteți deja un membru al acestui grup';
-$lang['USER_IS_MEMBER_GROUP'] = 'Utilizatorul este deja un membru al acestui grup';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Actualizat cu succes tip de grup.';
 $lang['EFFECTIVE_DATE'] = 'Data Intrării În Vigoare';
 
