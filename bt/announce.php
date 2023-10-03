@@ -373,10 +373,10 @@ if (!$output) {
         $rowset[] = ['ip' => $ip, 'port' => $port];
     }
 
+    if ($compact_mode) {
+
     $peers = '';
     $peers6 = '';
-
-    if ($compact_mode) {
 
         foreach ($rowset as $peer) {
             $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
