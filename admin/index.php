@@ -175,7 +175,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             for ($i = 0, $iMax = count($onlinerow_guest); $i < $iMax; $i++) {
                 $guest_users++;
                 $row_class = 'row2';
-                $guest_ip = \TorrentPier\Helpers\IPHelper::long2ip($onlinerow_guest[$i]['session_ip']);
+                $guest_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_guest[$i]['session_ip']);
 
                 $template->assign_block_vars('guest_user_row', array(
                     'ROW_CLASS' => $row_class,
