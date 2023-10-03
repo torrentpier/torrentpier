@@ -579,7 +579,7 @@ if (!$group_id) {
                         'USER_ID' => $user_id,
                         'PM' => $pending_info['pm'],
                         'EMAIL' => $pending_info['email'],
-                        'WWW' => $pending_info['www'],
+                        'WWW' => $pending_info['www']
                     ]);
                 }
 
