@@ -207,6 +207,18 @@ if (!$group_id) {
                 bb_die($lang['COULD_NOT_ADD_USER']);
             }
 
+            // Prevent adding moderator
+            if ($row['user_id'] == $group_moderator) {
+                bb_die(sprintf($lang['USER_IS_MOD_GROUP'], profile_url($row)));
+            }
+
+            // Prevent infinity user adding into group
+            if ($is_member = DB()->fetch_row("SELECT user_id FROM " . BB_USER_GROUP . " WHERE group_id = $group_id AND user_id = " . $row['user_id'] . " LIMIT 1")) {
+                if ($is_member['user_id']) {
+                    bb_die(sprintf($lang['USER_IS_MEMBER_GROUP'], profile_url($row)));
+                }
+            }
+
             \TorrentPier\Legacy\Group::add_user_into_group($group_id, $row['user_id']);
 
             if ($bb_cfg['group_send_email']) {
