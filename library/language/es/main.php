@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Restablecer la clave de inicio de sesión automátic
 $lang['RESET_AUTOLOGIN_EXPL'] = 'incluyendo todos los lugares que ha visitado el foro habilitado el inicio de sesión automático';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Muestra una pequeña imagen gráfica a continuación sus datos en los mensajes. Solo una imagen puede ser mostrada a la vez, su ancho puede ser no mayor que %d píxeles, la altura no mayor de %d píxeles y el tamaño de archivo no mas de %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Eliminar avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar opción de control de la movilidad por la violación <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Subir avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Una solicitud para unirse a su grupo se ha hecho.';
 $lang['GROUP_APPROVED'] = 'Su solicitud ha sido aprobada.';
 $lang['GROUP_ADDED'] = 'Se han añadido a este grupo de usuarios.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Ya eres un miembro de este grupo';
-$lang['USER_IS_MEMBER_GROUP'] = 'El usuario ya es un miembro de este grupo';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Actualizado correctamente tipo de grupo.';
 $lang['EFFECTIVE_DATE'] = 'Fecha De Vigencia';
 
