@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'リセットautologinキー';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'を含むすべての場所だ訪れたこのフォーラムは有効な自動ログイン';
 
 $lang['AVATAR'] = 'アバター';
-$lang['AVATAR_EXPLAIN'] = '表示の小さなグラフィック画像の下に詳細に。 一つの画像を表示でき、その幅が以上であってはいけません%dピクセル、高さ以上であってはいけません%dピクセルのファイルサイズ以%dKBします。';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'アバター削除';
 $lang['AVATAR_DISABLE'] = 'アバター制御オプションに関して無効に違反<a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'アップロードバ';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = '請求をすごしています。';
 $lang['GROUP_APPROVED'] = 'ご要請が承認されています。';
 $lang['GROUP_ADDED'] = 'きのこusergroupます。';
 $lang['ALREADY_MEMBER_GROUP'] = 'すでに会員の方はこのグループ';
-$lang['USER_IS_MEMBER_GROUP'] = 'ユーザーは既にこのグループのメンバ';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = '成グループを更新します。';
 $lang['EFFECTIVE_DATE'] = '効力発生日';
 
