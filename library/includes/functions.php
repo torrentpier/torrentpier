@@ -793,12 +793,12 @@ function generate_user_info($row, bool $group_mod = false): array
 
     $from = !empty($row['user_from']) ? $row['user_from'] : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
-    $user_time = !empty($row['user_time']) ? bb_date($row['user_time']) : $lang['NOSELECT'];
-    $posts = $row['user_posts'] ?: 0;
+    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($row['user_time']), delta_time($row['user_time'])) : $lang['NOSELECT'];
+    $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
     $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
-    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_AM || $group_mod || ($row['user_id'] == $userdata['user_id'])) {
+    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod || ($row['user_id'] == $userdata['user_id'])) {
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
