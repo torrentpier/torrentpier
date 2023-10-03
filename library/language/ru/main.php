@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Удалить ключ автоматическог
 $lang['RESET_AUTOLOGIN_EXPL'] = 'включая все места, где вы заходили на форум с включенным авто-входом';
 
 $lang['AVATAR'] = 'Аватара';
-$lang['AVATAR_EXPLAIN'] = 'Показывает небольшое изображение под информацией о вас в сообщениях. Может быть показано только одно изображение, шириной не более %d пикселов, высотой не более %d пикселов и объемом не более %d КВ.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Удалить аватар';
 $lang['AVATAR_DISABLE'] = 'Опция управления аватарой отключена за нарушение <a href="%s"><b>правил форума</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Загрузить аватару';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Было подана просьба о вступле
 $lang['GROUP_APPROVED'] = 'Ваша просьба была удовлетворена.';
 $lang['GROUP_ADDED'] = 'Вы были включены в группу';
 $lang['ALREADY_MEMBER_GROUP'] = 'Вы уже являетесь членом этой группы';
-$lang['USER_IS_MEMBER_GROUP'] = 'Пользователь уже является членом этой группы';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Тип группы успешно изменен';
 $lang['EFFECTIVE_DATE'] = 'Дата вступления';
 
