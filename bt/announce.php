@@ -118,7 +118,7 @@ if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
     msg_die("Invalid IP: $ip");
 }
 
-// Convert IP to HEX format
+// Convert IP to long format
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
 // Peer unique id
@@ -373,17 +373,27 @@ if (!$output) {
         $rowset[] = ['ip' => $ip, 'port' => $port];
     }
 
+    $peers = '';
+    $peers6 = '';
+
     if ($compact_mode) {
-        $peers = '';
 
         foreach ($rowset as $peer) {
-            $peers .= pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long(\TorrentPier\Helpers\IPHelper::long2ip($peer['ip'])), $peer['port']);
+            $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
+            $ip_endian = inet_pton($ip) . pack('n', $peer['port']);
+
+            if (\TorrentPier\Helpers\IPHelper::isValidv6($ip)) {
+                $peers6 .= $ip_endian;
+            }
+            else{
+                $peers .= $ip_endian;
+            }
         }
     } else {
         $peers = [];
 
         foreach ($rowset as $peer) {
-            $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip($peer['ip']), 'port' => (int)$peer['port']];
+            $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']), 'port' => (int)$peer['port']];
         }
     }
 
@@ -411,7 +421,12 @@ if (!$output) {
         'peers' => $peers,
     ];
 
+    if (!empty($peers6)) {
+        $output['peers6'] = $peers6;
+    }
+
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+    $output['external ip'] = inet_pton($ip);
     $output['warning message'] = 'Statistics were updated';
 }
 
