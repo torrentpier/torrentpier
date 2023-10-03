@@ -563,7 +563,7 @@ if (!$group_id) {
                 foreach ($modgroup_pending_list as $i => $member) {
                     $user_id = $member['user_id'];
 
-                    $member_info = generate_user_info($member, $is_moderator);
+                    $pending_info = generate_user_info($member, $is_moderator);
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 
@@ -571,14 +571,15 @@ if (!$group_id) {
 
                     $template->assign_block_vars('pending', [
                         'ROW_CLASS' => $row_class,
-                        'AVATAR_IMG' => $member_info['avatar'],
-                        'USER' => profile_url($member),
-                        'FROM' => $member_info['from'],
-                        'JOINED' => $member_info['joined'],
-                        'POSTS' => $member_info['posts'],
+                        'AVATAR_IMG' => $pending_info['avatar'],
+                        'USER' => profile_url($pending_info),
+                        'FROM' => $pending_info['from'],
+                        'JOINED' => $pending_info['joined'],
+                        'POSTS' => $pending_info['posts'],
                         'USER_ID' => $user_id,
-                        'PM' => $member_info['pm'],
-                        'EMAIL' => $member_info['email']
+                        'PM' => $pending_info['pm'],
+                        'EMAIL' => $pending_info['email'],
+                        'WWW' => $pending_info['www'],
                     ]);
                 }
 
