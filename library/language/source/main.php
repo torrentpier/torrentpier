@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'A request to join your group has been made.';
 $lang['GROUP_APPROVED'] = 'Your request has been approved.';
 $lang['GROUP_ADDED'] = 'You have been added to this usergroup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'You are already a member of this group';
-$lang['USER_IS_MEMBER_GROUP'] = 'User is already a member of this group';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Successfully updated group type.';
 $lang['EFFECTIVE_DATE'] = 'Effective Date';
 

@@ -199,12 +199,28 @@ if (!$group_id) {
 
     if (!empty($_POST['add']) || !empty($_POST['remove']) || !empty($_POST['approve']) || !empty($_POST['deny'])) {
         if (!$is_moderator) {
+            set_die_append_msg(false, false, $group_id);
             bb_die($lang['NOT_GROUP_MODERATOR']);
         }
 
         if (!empty($_POST['add'])) {
             if (isset($_POST['username']) && !($row = get_userdata($_POST['username'], true))) {
+                set_die_append_msg(false, false, $group_id);
                 bb_die($lang['COULD_NOT_ADD_USER']);
+            }
+
+            // Prevent adding moderator
+            if ($row['user_id'] == $group_moderator) {
+                set_die_append_msg(false, false, $group_id);
+                bb_die(sprintf($lang['USER_IS_MOD_GROUP'], profile_url($row)));
+            }
+
+            // Prevent infinity user adding into group
+            if ($is_member = DB()->fetch_row("SELECT user_id FROM " . BB_USER_GROUP . " WHERE group_id = $group_id AND user_id = " . $row['user_id'] . " LIMIT 1")) {
+                if ($is_member['user_id']) {
+                    set_die_append_msg(false, false, $group_id);
+                    bb_die(sprintf($lang['USER_IS_MEMBER_GROUP'], profile_url($row)));
+                }
             }
 
             \TorrentPier\Legacy\Group::add_user_into_group($group_id, $row['user_id']);
@@ -234,6 +250,7 @@ if (!$group_id) {
                     $sql_in[] = (int)$members_id;
                 }
                 if (!$sql_in = implode(',', $sql_in)) {
+                    set_die_append_msg(false, false, $group_id);
                     bb_die($lang['NONE_SELECTED']);
                 }
 
