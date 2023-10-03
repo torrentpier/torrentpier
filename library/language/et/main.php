@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset autologin võti';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'sealhulgas kõik kohad, mida olen külastanud foorum on lubatud auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Kuvab väike graafiline kujutis allpool oma andmed postitusi. Ainult ühte pilti saab kuvada korraga, selle laius ei või olla suurem kui %d pikslit, kõrgus ei ole suurem kui %d pikslit, faili suurus mitte rohkem kui %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Kustutada avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontrolli võimalus, puudega rikkumise <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Lae üles avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Taotluse liituda teie grupiga on tehtud.';
 $lang['GROUP_APPROVED'] = 'Teie taotlus on heaks kiidetud.';
 $lang['GROUP_ADDED'] = 'Teil on olnud, mis on lisatud käesoleva usergroup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Sa oled juba selle grupi liige';
-$lang['USER_IS_MEMBER_GROUP'] = 'Kasutaja on juba selle grupi liige';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Edukalt uuendatud grupi tüübist.';
 $lang['EFFECTIVE_DATE'] = 'Jõustumise Kuupäev';
 
