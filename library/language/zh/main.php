@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = '重设自动登录的关键';
 $lang['RESET_AUTOLOGIN_EXPL'] = '包括所有的地方，你已经访问了该论坛启用了自动登录';
 
 $lang['AVATAR'] = '头像';
-$lang['AVATAR_EXPLAIN'] = '显示一个小的图像以下您的详细信息，在员额。 只有一个图像可以显示在一段时间，其宽度不可能有更大比%d素，高度不大于%d素，文件大小不超过%dKB。';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = '删除头像';
 $lang['AVATAR_DISABLE'] = '阿凡达控制的选项，用于违反<a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = '上传的头像';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = '请求参加你的小组已经取得进展。';
 $lang['GROUP_APPROVED'] = '你的请求已获批准。';
 $lang['GROUP_ADDED'] = '你已被添加到这个用户组。';
 $lang['ALREADY_MEMBER_GROUP'] = '你已经是一个成员，这个小组';
-$lang['USER_IS_MEMBER_GROUP'] = '用户已经是该组的成员';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = '成功地更新了小组的类型。';
 $lang['EFFECTIVE_DATE'] = '生效日期';
 
