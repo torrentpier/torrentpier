@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Բանալին автологина վերականգ
 $lang['RESET_AUTOLOGIN_EXPL'] = 'այն բոլոր վայրերը, որոնք այցելել եք համաժողովը ընդգրկված ավտոմատ մուտքը համակարգ';
 
 $lang['AVATAR'] = 'Անձնանշան';
-$lang['AVATAR_EXPLAIN'] = 'Ցուցադրվում է մի փոքր գրաֆիկական պատկերը ստորեւ ձեր տվյալները պաշտոնները: Կարելի է միայն մեկ պատկեր միաժամանակ ցուցադրվում է, Լայնությունը կարող է լինել ոչ ավելի, քան %d փիքսել, բարձրությունը \' ոչ ավելի, քան %d փիքսել, նիշքի ոչ ավելի, քան %d ԿԲ.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Հեռացնել անձնանշան';
 $lang['AVATAR_DISABLE'] = 'Կառավարման հնարավորություն ավատար անջատված խախտելու համար <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Բեռնել անձնանշան';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Խնդրում միանալ ձեր խմբին ձեռք
 $lang['GROUP_APPROVED'] = 'Ձեր հարցումը հավանություն ստանա:';
 $lang['GROUP_ADDED'] = 'Դուք ավելացվել է: այս խմբին.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Դուք արդեն հանդիսանում եք այս խմբի';
-$lang['USER_IS_MEMBER_GROUP'] = 'Օգտագործողը արդեն անդամ է: այդ խմբի';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Հաջողությամբ թարմացվել Տեսակը խմբի.';
 $lang['EFFECTIVE_DATE'] = 'Ուժի Մեջ Մտնելու Ամսաթիվը';
 
