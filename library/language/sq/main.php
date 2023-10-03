@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset autologin kryesore';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'përfshirë të gjitha vendet që kam vizituar në forum mundësuar auto-identifikohu';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Tregon një pjesë të vogël grafik imazhin më poshtë të dhënat tuaja në postimet e bëra. Vetëm një imazh mund të shfaqet në një kohë, gjerësinë e saj mund të jetë jo më e madhe se %d pixels, me lartësi jo më të madhe se %d pixel, madhësia e skedës jo më shumë se %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Fshini avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontrollit opsion me aftësi të kufizuara për shkelje <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Ngarkoni avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Një kërkesë të bashkohet me grupin tuaj ka qenë b
 $lang['GROUP_APPROVED'] = 'Kërkesa juaj është aprovuar.';
 $lang['GROUP_ADDED'] = 'Ju keni qenë të shtuar të këtij grupi.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Ju jeni tashmë një anëtar i këtij grupi';
-$lang['USER_IS_MEMBER_GROUP'] = 'Përdoruesi është tashmë një anëtar i këtij grupi';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Freskua grup lloji.';
 $lang['EFFECTIVE_DATE'] = 'Data E Hyrjes Në Fuqi';
 
