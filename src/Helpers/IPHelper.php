@@ -52,4 +52,16 @@ class IPHelper extends Ip
 
         return $ip;
     }
+
+    /**
+     * Long to IP
+     * Decodes long form from both IPv4 & IPv6.
+     *
+     * @param string $ip
+     * @return string
+     */
+
+    public static function long2ip_extended($ip) {
+        return self::long2ip($ip, $ip > 4294967295);
+    }
 }
