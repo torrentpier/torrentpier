@@ -55,7 +55,7 @@ class IPHelper extends Ip
 
     /**
      * Long to IP
-     * Decodes long form from both IPv4 & IPv6.
+     * Converts long format from both IPv4 & IPv6.
      *
      * @param string $ip
      * @return string
