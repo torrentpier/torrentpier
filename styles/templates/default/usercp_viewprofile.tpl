@@ -438,7 +438,7 @@ ajax.callback.index_data = function(data) {
 			<!-- IF GENDER -->
 			<tr>
 				<th>{L_GENDER}:</th>
-				<td id="user_gender"><span class="editable">{GENDER}</span></td>
+				<td id="user_gender"><b class="editable">{GENDER}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF BIRTHDAY -->

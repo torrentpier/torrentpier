@@ -13,8 +13,13 @@ if (!defined('IN_AJAX')) {
 
 global $userdata, $lang, $bb_cfg;
 
-$mode = (string)$this->request['mode'];
-$user_id = $this->request['user_id'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
+
+if (!$user_id = (int)$this->request['user_id']) {
+    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+}
 
 switch ($mode) {
     case 'delete_profile':

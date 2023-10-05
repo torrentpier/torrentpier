@@ -13,6 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
 
+$tor_status_by_for_all = true;
 $change_peers_bgr_over = true;
 $bgr_class_1 = 'row1';
 $bgr_class_2 = 'row2';
@@ -201,7 +202,7 @@ if ($tor_reged && $tor_info) {
             'TOR_FROZEN' => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
             'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
             'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-            'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
+            'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
             'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
             'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
             //end torrent status mod
