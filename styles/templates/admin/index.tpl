@@ -204,7 +204,7 @@
   <!-- BEGIN reg_user_row -->
   <tr class="{reg_user_row.ROW_CLASS}">
     <td class="bold" nowrap="nowrap">{reg_user_row.USER}</td>
-    <td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
+    <td align="center" nowrap="nowrap"><b>{L_LOGIN}:</b> {reg_user_row.STARTED} | <b>{L_LAST_UPDATED}:</b> {reg_user_row.LASTUPDATE}</td>
     <td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a>
     </td>
   </tr>

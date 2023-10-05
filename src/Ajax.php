@@ -210,7 +210,7 @@ class Ajax
      */
     public function check_admin_session()
     {
-        global $user;
+        global $user, $lang;
 
         if (!$user->data['session_admin']) {
             if (empty($this->request['user_password'])) {
@@ -221,7 +221,7 @@ class Ajax
                     'login_password' => $_POST['user_password'],
                 ];
                 if (!$user->login($login_args, true)) {
-                    $this->ajax_die('Wrong password');
+                    $this->ajax_die($lang['ERROR_LOGIN']);
                 }
             }
         }
