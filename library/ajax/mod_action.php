@@ -13,7 +13,9 @@ if (!defined('IN_AJAX')) {
 
 global $userdata, $bb_cfg, $lang, $datastore, $log_action;
 
-$mode = (string)$this->request['mode'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
 switch ($mode) {
     case 'tor_status':
