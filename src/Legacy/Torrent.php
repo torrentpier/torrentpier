@@ -495,12 +495,17 @@ class Torrent
         }
 
         // Get $topic_id
-        $topic_id_sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$post_id;
+        $topic_id_sql = 'SELECT p.topic_id, t.topic_title
+                 FROM ' . BB_POSTS . ' p
+                 JOIN ' . BB_TOPICS . ' t ON p.topic_id = t.topic_id
+                 WHERE p.post_id = ' . (int)$post_id;
+
         if (!($topic_id_result = DB()->sql_query($topic_id_sql))) {
             bb_die('Could not query post information');
         }
         $topic_id_row = DB()->sql_fetchrow($topic_id_result);
         $topic_id = $topic_id_row['topic_id'];
+        $topic_title = $topic_id_row['topic_title'];
 
         if (!$attachment['tracker_status']) {
             bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
@@ -585,7 +590,8 @@ class Torrent
 
         // Send torrent
         $output = \Arokettu\Bencode\Bencode::encode($tor);
-        $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.torrent';
+
+        $dl_fname =  wbr($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.torrent';
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
