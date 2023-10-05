@@ -367,7 +367,7 @@ if ($tor_reged && $tor_info) {
             }
 
             foreach ($peers as $pid => $peer) {
-                $u_prof_href = ($s_mode == 'count') ? '#' : "profile.php?mode=viewprofile&amp;u=" . $peer['user_id'] . "#torrent";
+                $u_prof_href = ($s_mode == 'count') ? '#' : PROFILE_URL . $peer['user_id'] . "#torrent";
 
                 // Full details mode
                 if ($s_mode == 'full') {
