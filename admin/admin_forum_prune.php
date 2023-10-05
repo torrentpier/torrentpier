@@ -20,7 +20,7 @@ $prune_performed = false;
 
 if (isset($_REQUEST['submit'])) {
     if (!$var =& $_REQUEST['f'] or !$f_selected = get_id_ary($var)) {
-        bb_die('Forum not selected');
+        bb_die($lang['SELECT_FORUM']);
     }
     if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs((int)$var)) {
         bb_die($lang['NOT_DAYS']);
