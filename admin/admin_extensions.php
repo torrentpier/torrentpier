@@ -569,7 +569,7 @@ if ($e_mode == 'perm' && $group) {
         $forum_p = [];
         $act_id = 0;
         $forum_p = auth_unpack($allowed_forums);
-        $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . ' WHERE forum_id IN (' . implode(', ', $forum_p) . ')';
+        $sql = 'SELECT forum_id, forum_name, forum_parent FROM ' . BB_FORUMS . ' WHERE forum_id IN (' . implode(', ', $forum_p) . ') ORDER BY forum_order';
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not get forum names');
         }
@@ -577,15 +577,16 @@ if ($e_mode == 'perm' && $group) {
         while ($row = DB()->sql_fetchrow($result)) {
             $forum_perm[$act_id]['forum_id'] = $row['forum_id'];
             $forum_perm[$act_id]['forum_name'] = $row['forum_name'];
+            $forum_perm[$act_id]['forum_parent'] = $row['forum_parent'];
             $act_id++;
         }
     }
 
     for ($i = 0, $iMax = count($forum_perm); $i < $iMax; $i++) {
-        $template->assign_block_vars('allow_option_values', array(
-                'VALUE' => $forum_perm[$i]['forum_id'],
-                'OPTION' => htmlCHR($forum_perm[$i]['forum_name']))
-        );
+        $template->assign_block_vars('allow_option_values', [
+            'VALUE' => $forum_perm[$i]['forum_id'],
+            'OPTION' => (($forum_perm[$i]['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR($forum_perm[$i]['forum_name'])
+        ]);
     }
 
     $template->assign_vars(array(
@@ -594,24 +595,24 @@ if ($e_mode == 'perm' && $group) {
         'A_PERM_ACTION' => "admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group",
     ));
 
-    $forum_option_values = array(0 => $lang['PERM_ALL_FORUMS']);
+    $forum_option_values = array(0 => array('parent' => 0, 'name' => $lang['PERM_ALL_FORUMS']));
 
-    $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS;
+    $sql = 'SELECT forum_id, forum_name, forum_parent FROM ' . BB_FORUMS . ' ORDER BY forum_order';
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not get forums #1');
     }
 
     while ($row = DB()->sql_fetchrow($result)) {
-        $forum_option_values[(int)$row['forum_id']] = $row['forum_name'];
+        $forum_option_values[(int)$row['forum_id']] = array('parent' => $row['forum_parent'], 'name' => $row['forum_name']);
     }
     DB()->sql_freeresult($result);
 
     foreach ($forum_option_values as $value => $option) {
-        $template->assign_block_vars('forum_option_values', array(
-                'VALUE' => $value,
-                'OPTION' => htmlCHR($option))
-        );
+        $template->assign_block_vars('forum_option_values', [
+            'VALUE' => $value,
+            'OPTION' => (($option['parent']) ? HTML_SF_SPACER : '') . htmlCHR($option['name'])
+        ]);
     }
 
     $empty_perm_forums = [];

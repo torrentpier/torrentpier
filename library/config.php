@@ -411,16 +411,16 @@ $bb_cfg['board_email_form'] = false; // can users send email to each other via b
 $bb_cfg['board_email_sig'] = ''; // this text will be attached to all emails the board sends
 $bb_cfg['board_email_sitename'] = $domain_name; // sitename used in all emails header
 
-$bb_cfg['topic_notify_enabled'] = true;
-$bb_cfg['pm_notify_enabled'] = true;
-$bb_cfg['group_send_email'] = true;
-$bb_cfg['email_change_disabled'] = false; // TODO: disable changing email by user
+$bb_cfg['topic_notify_enabled'] = true; // отправлять ли уведомление на почту, если в теме которую отслеживает пользователь есть новые ответы
+$bb_cfg['pm_notify_enabled'] = true; // отправлять ли уведомление на почту, если пришло личное письмо на сайте
+$bb_cfg['group_send_email'] = true; // отправлять ли уведомление на почту, если пользователя приняли в группу, пригласили в группу
+$bb_cfg['email_change_disabled'] = false; // отключить возможность изменять почту самим пользователям
 $bb_cfg['show_email_visibility_settings'] = true; // разрешать ли пользователям изменять свои настройки отображения почты (Скрыто или нет)
 
 $bb_cfg['bounce_email'] = "bounce@$domain_name"; // bounce email address
 $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error reports
-$bb_cfg['abuse_email'] = "abuse@$domain_name";
-$bb_cfg['adv_email'] = "adv@$domain_name";
+$bb_cfg['abuse_email'] = "abuse@$domain_name"; // почта для жалоб (абуз, правообладатели)
+$bb_cfg['adv_email'] = "adv@$domain_name"; // почта для рекламных предложений
 
 // Bugsnag error reporting
 $bb_cfg['bugsnag'] = [

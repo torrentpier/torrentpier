@@ -83,7 +83,7 @@ if ($mode != '') {
         // The rank image has to be a jpg, gif or png
         //
         if ($rank_image != '') {
-            if (!preg_match('/(\.gif|\.png|\.jpg)$/is', $rank_image)) {
+            if (!preg_match('/(\.gif|\.png|\.jpg|\.jpeg|\.bmp|\.webp)$/is', $rank_image)) {
                 $rank_image = '';
             }
         }

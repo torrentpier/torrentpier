@@ -107,8 +107,8 @@ $this->store('cat_forums', $data);
 // jumpbox
 //
 $data = [
-    'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
-    'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
+    'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
+    'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
 ];
 
 $this->store('jumpbox', $data);
