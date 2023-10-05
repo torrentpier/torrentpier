@@ -237,6 +237,9 @@ foreach ($profile_fields as $field => $can_edit) {
                     $db_data['user_email'] = $email;
                 } elseif ($email != $pr_data['user_email']) {
                     // если смена мейла юзером
+                    if ($bb_cfg['email_change_disabled'] && !$adm_edit && !IS_ADMIN) {
+                        $errors[] = $lang['EMAIL_CHANGING_DISABLED'];
+                    }
                     if (!$cur_pass_valid) {
                         $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
                     }
