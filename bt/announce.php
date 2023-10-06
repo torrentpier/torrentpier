@@ -380,13 +380,13 @@ if (!$output) {
 
         foreach ($rowset as $peer) {
             $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
-            $ip_endian = inet_pton($ip) . pack('n', $peer['port']);
+            $endian = inet_pton($ip) . pack('n', $peer['port']);
 
             if (\TorrentPier\Helpers\IPHelper::isValidv6($ip)) {
-                $peers6 .= $ip_endian;
+                $peers6 .= $endian;
             }
             else{
-                $peers .= $ip_endian;
+                $peers .= $endian;
             }
         }
     } else {
