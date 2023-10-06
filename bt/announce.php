@@ -361,13 +361,16 @@ if (!$output) {
     $numwant = (int)$bb_cfg['tracker']['numwant'];
     $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
 
+    $leechers_only = $seeder ? 'AND seeder = 0' : ''; // Return leechers for seeders
+
     $rowset = DB()->fetch_rowset("
-        SELECT ip, port
-        FROM " . BB_BT_TRACKER . "
-        WHERE topic_id = $topic_id
-        ORDER BY seeder ASC, RAND()
-        LIMIT $numwant
-    ");
+		SELECT ip, port
+		FROM " . BB_BT_TRACKER . "
+		WHERE topic_id = $topic_id
+        $leechers_only
+		ORDER BY RAND()
+		LIMIT $numwant
+	");
 
     if (empty($rowset)) {
         $rowset[] = ['ip' => long2ip(rand(1, 4294967295)), 'port' => rand(1, 65536)];
