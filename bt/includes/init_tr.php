@@ -74,6 +74,10 @@ function dummy_exit($interval = 1800, $cache_dict = [])
         $output['peers'] = $cache_dict['peers'];
     }
 
+    if (isset($cache_dict['peers6'])) {
+        $output['peers6'] = $cache_dict['peers6'];
+    }
+
     $output = \Arokettu\Bencode\Bencode::encode($output);
 
     die($output);
