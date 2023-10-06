@@ -58,7 +58,7 @@ if (!isset($peer_id)) {
     msg_die('peer_id was not provided');
 }
 if (strlen($peer_id) !== 20) {
-    msg_die('Invalid peer_id: ' . bin2hex($peer_id));
+    msg_die('Invalid peer_id: ' . $peer_id);
 }
 
 // Verify info_hash
@@ -361,16 +361,19 @@ if (!$output) {
     $numwant = (int)$bb_cfg['tracker']['numwant'];
     $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
 
+    $leechers_only = $seeder ? 'AND seeder = 0' : ''; // Return leechers for seeders
+
     $rowset = DB()->fetch_rowset("
 		SELECT ip, port
 		FROM " . BB_BT_TRACKER . "
 		WHERE topic_id = $topic_id
+        $leechers_only
 		ORDER BY RAND()
 		LIMIT $numwant
 	");
 
     if (empty($rowset)) {
-        $rowset[] = ['ip' => $ip, 'port' => $port];
+        $rowset[] = ['ip' => long2ip(rand(1, 4294967295)), 'port' => rand(1, 65536)];
     }
 
     if ($compact_mode) {
