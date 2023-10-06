@@ -366,6 +366,7 @@ if (!$output) {
         FROM " . BB_BT_TRACKER . "
         WHERE topic_id = $topic_id
         ORDER BY seeder ASC, RAND()
+        LIMIT $numwant
     ");
 
     if (empty($rowset)) {
