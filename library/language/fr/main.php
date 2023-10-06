@@ -593,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Réinitialiser autologin clé';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'y compris tous les endroits que vous avez visité le forum activé l\'auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Affiche une petite image graphique ci-dessous vos coordonnées dans les postes. Une seule image peut être affichée à la fois, sa largeur ne peut être supérieur à %d pixels, la hauteur non supérieure à %d pixels et la taille du fichier, pas plus de %d KO.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Supprimer l\'avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar de contrôle de l\'option désactivé pour violation <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Télécharger avatar';
@@ -725,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Une demande pour rejoindre votre groupe a été faite.
 $lang['GROUP_APPROVED'] = 'Votre demande a été approuvée.';
 $lang['GROUP_ADDED'] = 'Vous avez été ajouté à ce groupe d\'utilisateurs.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Vous êtes déjà membre de ce groupe';
-$lang['USER_IS_MEMBER_GROUP'] = 'L\'utilisateur est déjà membre de ce groupe';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Mise à jour réussie du type de groupe.';
 $lang['EFFECTIVE_DATE'] = 'Date D\'Entrée En Vigueur';
 
@@ -2789,7 +2790,7 @@ $lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Téléchargement du fichier d\'erreur';
 $lang['UPLOAD_ERROR_SIZE'] = 'Le fichier téléchargé excède la taille maximale de %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Type de fichier non valide de l\'image';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Dimensions de l\'Image ne peut dépasser le maximum admissible %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Le fichier téléchargé n\'est pas une image';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Extension %s pour les téléchargements n\'est pas autorisé';
 $lang['UPLOAD_ERRORS'] = [
