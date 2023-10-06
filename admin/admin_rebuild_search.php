@@ -17,7 +17,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (!IS_SUPER_ADMIN) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 }
 
 require INC_DIR . '/bbcode.php';

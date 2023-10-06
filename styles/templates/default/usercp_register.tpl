@@ -133,7 +133,7 @@
         </tr>
         <!-- ENDIF -->
         <tr>
-            <td class="prof-title">ICQ:</td>
+            <td class="prof-title">{L_ICQ}:</td>
             <td><input type="text" name="user_icq" size="30" maxlength="15" value="{USER_ICQ}"/></td>
         </tr>
         <tr>

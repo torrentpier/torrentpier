@@ -30,7 +30,7 @@ if ($mode == 'run' && !$job_id) {
 }
 
 if (!IS_SUPER_ADMIN) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 }
 
 $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_check_interval'");
