@@ -210,7 +210,7 @@ class Ajax
      */
     public function check_admin_session()
     {
-        global $user, $lang;
+        global $user, $lang123;
 
         if (!$user->data['session_admin']) {
             if (empty($this->request['user_password'])) {
