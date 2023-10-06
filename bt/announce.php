@@ -370,7 +370,7 @@ if (!$output) {
     ");
 
     if (empty($rowset)) {
-        $rowset[] = ['ip' => long2ip(rand(1, 4294967295)), 'port' => rand(1, 65536)];
+        $rowset[] = ['ip' => \TorrentPier\Helpers\IPHelper::ip2long($ip), 'port' => (int)$port];
     }
 
     if ($compact_mode) {
