@@ -1,4 +1,4 @@
-<style type="text/css">
+<style>
 #f-map a  { font-size: 12px; text-decoration: none; padding-left: 8px; }
 #f-map li { margin: 4px 0 0 6px; }
 #f-map .b { font-weight: bold; }

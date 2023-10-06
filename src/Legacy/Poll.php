@@ -104,4 +104,53 @@ class Poll
         DB()->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
         CACHE('bb_poll_data')->rm("poll_$topic_id");
     }
+
+    /**
+     * Get poll items
+     *
+     * @param $topic_id
+     * @return array|false|mixed|string
+     * @throws \JsonException
+     */
+    public static function get_poll_data_items_js($topic_id)
+    {
+        if (!$topic_id_csv = get_id_csv($topic_id)) {
+            return is_array($topic_id) ? [] : false;
+        }
+        $items = [];
+
+        if (!$poll_data = CACHE('bb_poll_data')->get("poll_$topic_id")) {
+            $poll_data = DB()->fetch_rowset("
+			SELECT topic_id, vote_id, vote_text, vote_result
+			FROM " . BB_POLL_VOTES . "
+			WHERE topic_id IN($topic_id_csv)
+			ORDER BY topic_id, vote_id
+		");
+            CACHE('bb_poll_data')->set("poll_$topic_id", $poll_data);
+        }
+
+        foreach ($poll_data as $row) {
+            $opt_text_for_js = htmlCHR($row['vote_text']);
+            $opt_result_for_js = (int)$row['vote_result'];
+
+            $items[$row['topic_id']][$row['vote_id']] = [$opt_text_for_js, $opt_result_for_js];
+        }
+        foreach ($items as $k => $v) {
+            $items[$k] = json_encode($v, JSON_THROW_ON_ERROR);
+        }
+
+        return is_array($topic_id) ? $items : $items[$topic_id];
+    }
+
+    /**
+     * Check whether poll is active
+     *
+     * @param array $t_data
+     * @return bool
+     */
+    public static function poll_is_active(array $t_data): bool
+    {
+        global $bb_cfg;
+        return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+    }
 }

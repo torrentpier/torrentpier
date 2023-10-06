@@ -11,25 +11,25 @@ ajax.callback.posts = function(data) {
 </script>
 <div class="mrg_4" style="padding-left:2px;">
 <select name="fontFace">
-	<option style="font-family: Verdana" value="-1" selected="selected">{L_QR_FONT_SEL}:</option>
+	<option style="font-family: Verdana" value="-1" selected>{L_QR_FONT_SEL}:</option>
 	<option style="font-family: monospace" value="monospace">&nbsp;Monospace</option>
 	<option style="font-family: serif" value="serif">&nbsp;Serif</option>
 	<option style="font-family: sans-serif" value="sans-serif">&nbsp;Sans Serif</option>
 	<option style="font-family: cursive" value="cursive">&nbsp;Cursive</option>
 	<option style="font-family: Arial" value="Arial">&nbsp;Arial</option>
-  <option style="font-family: Arial Black" value="Arial Black">&nbsp;Arial Black</option>
-  <option style="font-family: Times New Roman" value="Times New Roman">&nbsp;Times New Roman</option>
+    <option style="font-family: Arial Black" value="Arial Black">&nbsp;Arial Black</option>
+    <option style="font-family: Times New Roman" value="Times New Roman">&nbsp;Times New Roman</option>
 	<option style="font-family: Tahoma" value="Tahoma">&nbsp;Tahoma</option>
-  <option style="font-family: Courier" value="Courier">&nbsp;Courier</option>
-  <option style="font-family: Bookman Old Style" value="Bookman Old Style">&nbsp;Bookman</option>
-  <option style="font-family: Trebuchet MS" value="Trebuchet MS">&nbsp;Trebuchet</option>
-  <option style="font-family: Garamond" value="Garamond">&nbsp;Garamond</option>
+    <option style="font-family: Courier" value="Courier">&nbsp;Courier</option>
+    <option style="font-family: Bookman Old Style" value="Bookman Old Style">&nbsp;Bookman</option>
+    <option style="font-family: Trebuchet MS" value="Trebuchet MS">&nbsp;Trebuchet</option>
+    <option style="font-family: Garamond" value="Garamond">&nbsp;Garamond</option>
 	<option style="font-family: Georgia" value="Georgia">&nbsp;Georgia</option>
 	<option style="font-family: Fixedsys" value="Fixedsys">&nbsp;Fixedsys</option>
 </select>
-&nbsp;
+
 <select name="codeColor" class="text_color">
-	<option style="color: black; background: #fff;" value="black" selected="selected">{L_QR_COLOR_SEL}:</option>
+	<option style="color: black; background: #fff;" value="black" selected>{L_QR_COLOR_SEL}:</option>
 	<option style="color: darkred;" value="darkred">&nbsp;{L_COLOR_DARK_RED}</option>
 	<option style="color: brown;" value="brown">&nbsp;{L_COLOR_BROWN}</option>
 	<option style="color: #996600;" value="#996600">&nbsp;{L_COLOR_ORANGE}</option>
@@ -44,25 +44,25 @@ ajax.callback.posts = function(data) {
 	<option style="color: indigo;" value="indigo">&nbsp;{L_COLOR_INDIGO}</option>
 	<option style="color: #006699;" value="#006699">&nbsp;{L_COLOR_STEEL_BLUE}</option>
 </select>
-&nbsp;
+
 <select name="codeSize" class="text_size">
-	<option value="12" selected="selected">{L_QR_SIZE_SEL}:</option>
+	<option value="12" selected>{L_QR_SIZE_SEL}:</option>
 	<option value="9" class="em">{L_FONT_SMALL}</option>
 	<option value="10">&nbsp;size=10</option>
 	<option value="11">&nbsp;size=11</option>
-	<option value="12" class="em" disabled="disabled">{L_FONT_NORMAL}</option>
+	<option value="12" class="em" disabled>{L_FONT_NORMAL}</option>
 	<option value="14">&nbsp;size=14</option>
 	<option value="16">&nbsp;size=16</option>
 	<option value="18" class="em">{L_FONT_LARGE}</option>
 	<option value="20">&nbsp;size=20</option>
 	<option value="22">&nbsp;size=22</option>
 	<option value="24" class="em">{L_FONT_HUGE}</option>
-  <option value="26">&nbsp;size=26</option>
-  <option value="28">&nbsp;size=28</option>
+    <option value="26">&nbsp;size=26</option>
+    <option value="28">&nbsp;size=28</option>
 </select>
 &nbsp;
 <select name="codeAlign" class="text_size">
-	<option value="left" selected="selected">{L_ALIGN}</option>
+	<option value="left" selected>{L_ALIGN}</option>
 	<option value="left">&nbsp;{L_LEFT}</option>
 	<option value="right">&nbsp;{L_RIGHT}</option>
 	<option value="center">&nbsp;{L_CENTER}</option>
@@ -70,11 +70,13 @@ ajax.callback.posts = function(data) {
 </select>
 &nbsp;
 <span class="buttons">
+    <input type="button" value="sup" name="codeSup" title="{L_SUPERSCRIPT}" />
+    <input type="button" value="sub" name="codeSub" title="{L_SUBSCRIPT}" />&nbsp;
 	<input type="button" value="&#8212;" name="codeHR" title="{L_HOR_LINE}" style="font-weight: bold; width: 26px;" />
 	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" style="width: 26px;" />&nbsp;
 	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" style="width: 65px;" />
 </span>
-&nbsp;
+
 <div class="buttons floatR">
 	<input type="button" value="+" onclick="$('#message').css({height: parseInt($('#message').css('height')) + 100}); return false;">
 	<input type="button" value="-" onclick="$('#message').css({height: parseInt($('#message').css('height')) - 100}); return false;">
@@ -86,7 +88,7 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="B" name="codeB" title="{L_BOLD}" style="font-weight: bold; width: 25px;" />
 	<input type="button" value="i" name="codeI" title="{L_ITALIC}" style="width: 25px; font-style: italic;" />
 	<input type="button" value="u" name="codeU" title="{L_UNDERLINE}" style="width: 25px; text-decoration: underline;" />
-	<input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
+	<input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="width: 25px; text-decoration: line-through;" />&nbsp;
 	<input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" style="width: 57px;" />
 	<input type="button" value="Img" name="codeImg" title="{L_IMG_TITLE}" style="width: 40px;" />
 	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" style="width: 63px; text-decoration: underline;" />&nbsp;
@@ -107,9 +109,10 @@ ajax.callback.posts = function(data) {
 <div class="mrg_8 tCenter">
 	<div id="post-buttons-block" style="display: none;">
 		<div class="pad_4" align="center">{CAPTCHA_HTML}</div>
-		<input type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();">&nbsp;&nbsp;
-		<input onclick="submitted = true;" title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn">&nbsp;&nbsp;
-		<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#message').val()});">
+		<input type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();">&nbsp;
+		<input onclick="submitted = true;" title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn">&nbsp;
+		<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#message').val()});">&nbsp;
+        <input type="reset" value="{L_CLEAR}">
 	</div>
 	<div id="post-js-warn">{L_JAVASCRIPT_ON}</div>
 </div>
@@ -177,33 +180,51 @@ function checkForm(form) {
 </script>
 
 <script type="text/javascript">
-var bbcode = new BBCode("message");
-var ctrl = "ctrl";
+    var bbcode = new BBCode("message");
+    var ctrl = "ctrl";
 
-bbcode.addTag("codeB", "b", null, "B", ctrl);
-bbcode.addTag("codeI", "i", null, "I", ctrl);
-bbcode.addTag("codeU", "u", null, "U", ctrl);
-bbcode.addTag("codeS", "s", null, "S", ctrl);
+    bbcode.addTag("codeB", "b", null, "B", ctrl);
+    bbcode.addTag("codeI", "i", null, "I", ctrl);
+    bbcode.addTag("codeU", "u", null, "U", ctrl);
+    bbcode.addTag("codeS", "s", null, "S", ctrl);
 
-bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
-bbcode.addTag("codeImg", "img", null, "R", ctrl);
-bbcode.addTag("codeUrl", "url", "/url", "W", ctrl);
+    bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
+    bbcode.addTag("codeImg", "img", null, "R", ctrl);
+    bbcode.addTag("codeUrl", "url", "/url", "W", ctrl);
 
-bbcode.addTag("codeCode", "code", null, "K", ctrl);
-bbcode.addTag("codeList",  "list", null, "L", ctrl);
-bbcode.addTag("codeOpt", "*", "", "0", ctrl);
+    bbcode.addTag("codeCode", "code", null, "K", ctrl);
+    bbcode.addTag("codeList", "list", null, "L", ctrl);
+    bbcode.addTag("codeOpt", "*", "", "0", ctrl);
 </script>
 
 <!-- IF QUICK_REPLY -->
 <!-- ELSE -->
 <script type="text/javascript">
-bbcode.addTag("codeHR",      "hr",      "",   "8", ctrl);
-bbcode.addTag("codeBR",      "br",      "",   "",  ctrl);
-bbcode.addTag("codeSpoiler", "spoiler", null, "",  ctrl);
+    bbcode.addTag("codeHR", "hr", "", "8", ctrl);
+    bbcode.addTag("codeBR", "br", "", "", ctrl);
+    bbcode.addTag("codeSpoiler", "spoiler", null, "", ctrl);
+    bbcode.addTag("codeSup", "sup", null, "", ctrl);
+    bbcode.addTag("codeSub", "sub", null, "", ctrl);
 
-bbcode.addTag("fontFace", function(e) { var v=e.value; e.selectedIndex=0; return "font=\""+v+"\"" }, "/font");
-bbcode.addTag("codeColor", function(e) { var v=e.value; e.selectedIndex=0; return "color="+v }, "/color");
-bbcode.addTag("codeSize", function(e) { var v=e.value; e.selectedIndex=0; return "size="+v }, "/size");
-bbcode.addTag("codeAlign", function(e) { var v=e.value; e.selectedIndex=0; return "align="+v }, "/align");
+    bbcode.addTag("fontFace", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "font=\"" + v + "\""
+    }, "/font");
+    bbcode.addTag("codeColor", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "color=" + v
+    }, "/color");
+    bbcode.addTag("codeSize", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "size=" + v
+    }, "/size");
+    bbcode.addTag("codeAlign", function (e) {
+        var v = e.value;
+        e.selectedIndex = 0;
+        return "align=" + v
+    }, "/align");
 </script>
 <!-- ENDIF -->

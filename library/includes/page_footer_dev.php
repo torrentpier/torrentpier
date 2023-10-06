@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 ?>
 
-<style type="text/css">
+<style>
     .sqlLog {
         clear: both;
         font-family: Courier, monospace;
@@ -71,10 +71,10 @@ if (!empty($_COOKIE['explain'])) {
     }
 }
 
-$sql_log = !empty($_COOKIE['sql_log']) ? \TorrentPier\Dev::get_sql_log() : '';
+$sql_log = !empty($_COOKIE['sql_log']) ? \TorrentPier\Dev::get_sql_log() : false;
 
 if ($sql_log) {
-    echo '<div class="sqlLog" id="sqlLog">' . ($sql_log ?: '') . '</div><!-- / sqlLog --><br clear="all" />';
+    echo '<div class="sqlLog" id="sqlLog">' . $sql_log . '</div><!-- / sqlLog --><br clear="all" />';
 }
 ?>
 

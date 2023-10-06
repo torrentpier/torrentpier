@@ -230,7 +230,7 @@ ajax.callback.view_post = function(data) {
 };
 </script>
 
-<style type="text/css">
+<style>
 .post_wrap { border: 1px #A5AFB4 solid; margin: 8px 8px 6px; overflow: auto; }
 .post_links { margin: 6px; }
 .unfolded2, .folded2 { display: inline !important; }
@@ -256,7 +256,7 @@ $(function(){
 </script>
 <!-- ENDIF / !SESSION_ADMIN -->
 
-<style type="text/css">
+<style>
 .tor-time { font-size: 10px; padding-left: 2px; }
 td.topic_id { cursor: pointer; }
 .tt-edit-input { font-size: 11px; }
@@ -289,10 +289,6 @@ td.topic_id { cursor: pointer; }
 					$('#moderators').append(data.html);
 				};
 			</script>
-
-			<!-- IF SHOW_ONLINE_LIST -->
-			<p class="small">{LOGGED_IN_USER_LIST}</p>
-			<!-- ENDIF -->
 		</td>
 		<td class="tRight vBottom nowrap small"><b>{PAGINATION}</b></td>
 	</tr>

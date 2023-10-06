@@ -7,34 +7,34 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'callseed');
-define('BB_ROOT', './');
-require __DIR__ . '/common.php';
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
-// Init userdata
-$user->session_start(array('req_login' => true));
+global $bb_cfg, $userdata, $lang;
 
-$topic_id = (int)request_var('t', 0);
-$t_data = topic_info($topic_id);
+if (!$bb_cfg['callseed']) {
+    $this->ajax_die($lang['MODULE_OFF']);
+}
+
+if (!$topic_id = (int)$this->request['topic_id']) {
+    $this->ajax_die($lang['INVALID_TOPIC_ID']);
+}
+
+if (!$t_data = topic_info($topic_id)) {
+    $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
+}
+
 $forum_id = $t_data['forum_id'];
 
-set_die_append_msg($forum_id, $topic_id);
-
 if ($t_data['seeders'] > 2) {
-    bb_die(sprintf($lang['CALLSEED_HAVE_SEED'], $t_data['seeders']));
+    $this->ajax_die(sprintf($lang['CALLSEED_HAVE_SEED'], $t_data['seeders']));
 } elseif ($t_data['call_seed_time'] > (TIMENOW - 86400)) {
     $time_left = delta_time($t_data['call_seed_time'] + 86400, TIMENOW, 'days');
-    bb_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
+    $this->ajax_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
 }
 
-$ban_user_id = [];
-
-$sql = DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
-
-foreach ($sql as $row) {
-    $ban_user_id[] = ',' . $row['ban_userid'];
-}
-$ban_user_id = implode('', $ban_user_id);
+$get_banned_users = get_banned_users() ? (', ' . implode(', ', get_banned_users())) : '';
 
 $user_list = DB()->fetch_rowset("
 	SELECT DISTINCT dl.user_id, u.user_opt, tr.user_id as active_dl
@@ -43,7 +43,7 @@ $user_list = DB()->fetch_rowset("
 	LEFT JOIN " . BB_BT_TRACKER . " tr ON(tr.user_id = dl.user_id)
 	WHERE dl.topic_id = $topic_id
 		AND dl.user_status IN (" . DL_STATUS_COMPLETE . ", " . DL_STATUS_DOWN . ")
-		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $ban_user_id . ")
+		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $get_banned_users . ")
 		AND u.user_active = 1
 	GROUP BY dl.user_id
 ");
@@ -67,9 +67,6 @@ if ($user_list) {
 
 DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
 
-meta_refresh(TOPIC_URL . $topic_id);
-bb_die($lang['CALLSEED_MSG_OK']);
-
 function topic_info($topic_id)
 {
     global $lang;
@@ -90,3 +87,5 @@ function topic_info($topic_id)
 
     return $torrent;
 }
+
+$this->response['response'] = $lang['CALLSEED_MSG_OK'];

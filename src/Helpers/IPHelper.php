@@ -17,81 +17,8 @@ use function strlen;
  * Class IPHelper
  * @package TorrentPier\Helpers
  */
-class IPHelper
+class IPHelper extends Ip
 {
-    /**
-     * Decode original IP
-     *
-     * @param string $ip
-     *
-     * @return string
-     */
-    public static function encodeIP(string $ip): string
-    {
-        return Ip::ip2long($ip);
-    }
-
-    /**
-     * Recovery of decoded IP
-     *
-     * @param string|int $ip
-     *
-     * @return string
-     */
-    public static function decodeIP($ip): string
-    {
-        return Ip::long2ip((int)$ip);
-    }
-
-    /**
-     * Checking IP for validity
-     *
-     * @param string $ip
-     *
-     * @return bool
-     */
-    public static function isValid(string $ip): bool
-    {
-        return Ip::isValid($ip);
-    }
-
-    /**
-     * Checking if it is a local IP
-     *
-     * @param string $ip
-     *
-     * @return bool
-     */
-    public static function isLocal(string $ip): bool
-    {
-        return IP::isLocal($ip);
-    }
-
-    /**
-     * Checking if it is a remote IP
-     *
-     * @param string $ip
-     *
-     * @return bool
-     */
-    public static function isRemote(string $ip): bool
-    {
-        return IP::isRemote($ip);
-    }
-
-    /**
-     * Compare IP
-     *
-     * @param string $ip
-     * @param string $range
-     *
-     * @return bool
-     */
-    public static function compareIP(string $ip, string $range): bool
-    {
-        return Ip::compare($ip, $range);
-    }
-
     /**
      * Anonymize an IP/IPv6.
      * Removes the last byte for v4 and the last 8 bytes for v6 IPs
@@ -124,5 +51,18 @@ class IPHelper
         }
 
         return $ip;
+    }
+
+    /**
+     * Long to IP
+     * Decodes long format from both IPv4 & IPv6.
+     *
+     * @param string $ip
+     * @return string
+     */
+
+    public static function long2ip_extended($ip)
+    {
+        return self::long2ip($ip, $ip > 4294967295);
     }
 }

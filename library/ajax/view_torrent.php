@@ -24,7 +24,7 @@ if (!$torrent) {
 }
 
 $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
-if (file_exists($filename) && !$file_contents = file_get_contents($filename)) {
+if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
     if (IS_AM) {
         $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
     } else {
@@ -32,11 +32,14 @@ if (file_exists($filename) && !$file_contents = file_get_contents($filename)) {
     }
 }
 
-if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
+if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents)) {
     return $lang['TORFILE_INVALID'];
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
-$tor_filelist = $torrent->get_filelist();
-
+if (($tor['info']['meta version'] ?? null) == 2 && is_array($tor['info']['file tree'] ?? null)) {
+    $tor_filelist = $torrent->fileTreeList($tor['info']['file tree'], $tor['info']['name'] ?? ''); // v2
+} else {
+    $tor_filelist = $torrent->get_filelist(); // v1
+}
 $this->response['html'] = $tor_filelist;

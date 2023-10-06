@@ -70,7 +70,6 @@ function image_getdimension($file)
     $error = false;
 
     // BMP - IMAGE
-
     $tmp_str = fread($fp, 2);
     if ($tmp_str == 'BM') {
         $length = read_longint($fp);
@@ -109,24 +108,21 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             6
-        );
+        ];
     }
 
     $error = false;
     fclose($fp);
 
     // GIF - IMAGE
-
     $fp = @fopen($file, 'rb');
-
     $tmp_str = fread($fp, 3);
 
     if ($tmp_str == 'GIF') {
-        $tmp_str = fread($fp, 3);
         $width = read_word($fp);
         $height = read_word($fp);
 
@@ -147,11 +143,11 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             1
-        );
+        ];
     }
 
     $error = false;
@@ -159,8 +155,6 @@ function image_getdimension($file)
 
     // JPG - IMAGE
     $fp = @fopen($file, 'rb');
-
-    $tmp_str = fread($fp, 4);
     $w1 = read_word($fp);
 
     if ((int)$w1 < 16) {
@@ -176,7 +170,6 @@ function image_getdimension($file)
             }
 
             if (!$error) {
-                $str = fread($fp, 2);
                 $b = read_byte($fp);
 
                 if ($b != 0 && $b != 1 && $b != 2) {
@@ -199,20 +192,18 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             2
-        );
+        ];
     }
 
     $error = false;
     fclose($fp);
 
     // PCX - IMAGE
-
     $fp = @fopen($file, 'rb');
-
     $tmp_str = fread($fp, 3);
 
     if ((ord($tmp_str[0]) == 10) && (ord($tmp_str[1]) == 0 || ord($tmp_str[1]) == 2 || ord($tmp_str[1]) == 3 || ord($tmp_str[1]) == 4 || ord($tmp_str[1]) == 5) && (ord($tmp_str[2]) == 1)) {
@@ -227,7 +218,6 @@ function image_getdimension($file)
             $ymin = read_word($fp);
             $xmax = read_word($fp);
             $ymax = read_word($fp);
-            $tmp_str = fread($fp, 52);
 
             $b = fread($fp, 1);
             if ($b != 0) {
@@ -245,11 +235,11 @@ function image_getdimension($file)
 
     if (!$error) {
         fclose($fp);
-        return array(
+        return [
             $width,
             $height,
             7
-        );
+        ];
     }
 
     fclose($fp);

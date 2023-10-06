@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Beiträge';
 $lang['POSTED'] = 'Geschrieben';
 $lang['USERNAME'] = 'Benutzername';
 $lang['PASSWORD'] = 'Passwort';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-Mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Aktiviert';
 $lang['DISABLED'] = 'Deaktiviert';
 $lang['ERROR'] = 'Fehler';
 $lang['SELECT_ACTION'] = 'Wählen Sie "Aktion"';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Nächste';
 $lang['PREVIOUS_PAGE'] = 'Vorherige';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klicken Sie auf %sHere%s zurück zum Moderator Co
 $lang['CLICK_RETURN_GROUP'] = 'Klicken Sie auf %sHere%s zurück zum gruppieren von Informationen';
 
 $lang['ADMIN_PANEL'] = 'Gehen Sie zu " Administration Panel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache wurde gelöscht';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template-cache gelöscht wurde';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datenspeicher wurde gelöscht';
 $lang['BOARD_DISABLE'] = 'Sorry, dieses forum ist deaktiviert. Versuchen Sie, um später wieder';
 $lang['BOARD_DISABLE_CRON'] = 'Forum ist down für Wartung. Versuchen Sie, um später wieder';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Sie <b>can</b> vote in polls in diesem forum';
 $lang['RULES_VOTE_CANNOT'] = 'Sie <b>cannot</b> vote in polls in diesem forum';
 $lang['RULES_MODERATE'] = 'Sie <b>can</b> moderieren dieses forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Es sind keine Beiträge in diesem forum.<br />Click auf die <b>Post Neue Topic</b> link auf dieser Seite zu veröffentlichen.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Thema anzeigen';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Private Nachrichten';
 $lang['NO_NEW_PM'] = 'keine neuen Nachrichten';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('neue Nachricht', 'neue Nachrichten');
+$lang['NEW_PMS_DECLENSION'] = ['neue Nachricht', 'neue Nachrichten'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('ungelesen', 'ungelesen');
+$lang['UNREAD_PMS_DECLENSION'] = ['ungelesen', 'ungelesen'];
 
 $lang['UNREAD_MESSAGE'] = 'Ungelesene Nachricht';
 $lang['READ_MESSAGE'] = 'Nachricht Lesen';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sendet eine e-mail, wenn jemand antwortet auf 
 
 $lang['BOARD_LANG'] = 'Board-Sprache';
 $lang['GENDER'] = 'Geschlecht';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Unbekannt',
     1 => 'Männlich',
     2 => 'Weiblich'
-);
+];
 $lang['MODULE_OFF'] = 'Modul ist deaktiviert!';
 
 $lang['BIRTHDAY'] = 'Geburtstag';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset-autologin-key';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'darunter auch alle Orte, die Sie besucht haben, das forum aktiviert auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Zeigt eine kleine Grafik unten Ihre details in den Pfosten. Nur ein Bild kann angezeigt werden, in einer Zeit, deren Breite nicht größer sein kann als %d Pixel, die Höhe nicht größer als %d Pixel, und die Dateigröße nicht mehr als %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Avatar löschen';
 $lang['AVATAR_DISABLE'] = 'Avatar-control-option deaktiviert für die Verletzung <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Hochladen von avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Eine Anfrage zum Beitritt zu Ihrer Gruppe gemacht wurd
 $lang['GROUP_APPROVED'] = 'Ihr Antrag genehmigt wurde.';
 $lang['GROUP_ADDED'] = 'Sie wurden Hinzugefügt, um diese usergroup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Sie sind bereits Mitglied dieser Gruppe';
-$lang['USER_IS_MEMBER_GROUP'] = 'Benutzer ist bereits ein Mitglied dieser Gruppe';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Erfolgreich aktualisiert-Gruppe geben.';
 $lang['EFFECTIVE_DATE'] = 'Datum Des Inkrafttretens';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Die Anlage ist zu groß.<br />Could nicht die
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Die Anlage ist zu groß.<br />Maximum Upload-Größe: %d MB.<br />Please beachten Sie, dass diese Größe ist definiert in php.ini, das heißt, es ist festgelegt durch PHP und dem Attachment Mod kann nicht diesen Wert überschreiben.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Die Erweiterung %s ist nicht erlaubt'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Sie sind nicht erlaubt zu posten von Dateien mit der Erweiterung %s in diesem Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Die Anlage ist zu groß.<br />Max Größe: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Sorry, aber die maximale Dateigröße für alle Anlagen erreicht wird. Bitte Kontaktieren Sie die Board-Administrator, wenn Sie Fragen haben.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Attachment kann nicht Hinzugefügt werden, da die max. Anzahl der %d Anhänge in diesem Beitrag wurde erreicht'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Das Attachment/Bild muss kleiner sein als %d Pixel breit und %d Pixel hoch';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Samen';
 $lang['LEECHING'] = 'Blutegel';
 $lang['IS_REGISTERED'] = 'Registriert';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Suche in DC++ mit dem Namen';
-$lang['DC_MAGNET_EXT'] = 'Suche in DC++ - Erweiterung';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Wählen Sie status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Sie haben nicht ausgewählten status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alle Stati';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nicht geprüft',
     TOR_CLOSED => 'geschlossen',
     TOR_APPROVED => 'geprüft',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'temporäre',
     TOR_PREMOD => 'pre-moderation',
     TOR_REPLENISH => 'wieder aufzufüllen',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Diesen status gibt es nicht!';
 $lang['TORRENT_FAILED'] = 'Die Verteilung wurde nicht gefunden!';
 $lang['TOR_STATUS_DUB'] = 'Die Verteilung hat den gleichen status';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Geben Sie die torrent-erfolgreich geändert';
 $lang['DEL_TORRENT'] = 'Sind Sie sicher, dass Sie wollen, um den torrent zu löschen?';
 $lang['DEL_MOVE_TORRENT'] = 'Sind Sie sicher, dass Sie löschen möchten, und verschieben Sie das Thema?';
 $lang['UNEXECUTED_RELEASE'] = 'Haben Sie eine formlose Freigabe vor dem erstellen einer neuen Korrektur seiner ungeformten!';
-$lang['STATUS_DOES_EXIST'] = 'Ein solcher Zustand nicht existiert: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ändern des status von Vertriebs - %s';
@@ -1154,6 +1153,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake Silber';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! DOWNLOAD-TRAFFIC NICHT BERÜCKSICHTIGT!';
 $lang['SILVER_STATUS'] = 'SILBER TORRENT! DOWNLOAD-TRAFFIC TEILWEISE BERÜCKSICHTIGT!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Suche in Foren';
 $lang['SELECT_CAT'] = 'Wählen Sie die Kategorie';
 $lang['GO_TO_SECTION'] = 'Goto Abschnitt';
@@ -1352,17 +1352,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('Antwort', 'Antworten');
-$lang['DECLENSION']['TIMES'] = array('Zeit', 'mal');
+$lang['DECLENSION']['REPLIES'] = ['Antwort', 'Antworten'];
+$lang['DECLENSION']['TIMES'] = ['Zeit', 'mal'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('zweite', 'Sekunden'),
-    'minutes' => array('minute', 'Minuten'),
-    'hours' => array('Stunde', 'Stunden'),
-    'mday' => array('Tag', 'Tage'),
-    'mon' => array('Monat', 'Monate'),
-    'year' => array('Jahr', 'Jahre'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['zweite', 'Sekunden'],
+    'minutes' => ['minute', 'Minuten'],
+    'hours' => ['Stunde', 'Stunden'],
+    'mday' => ['Tag', 'Tage'],
+    'mon' => ['Monat', 'Monate'],
+    'year' => ['Jahr', 'Jahre'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'Feld für das Passwort dürfen nicht leer sein!!!';
 $lang['CHOOSE_PASS_ERR'] = 'Eingegebenen Passwörter nicht übereinstimmen';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Ihr Passwort muss mindestens %d Zeichen';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ihr Passwort darf nicht länger als $d Zeichen';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Die Kennwörter übereinstimmen';
 $lang['CHOOSE_PASS_REG_OK'] = 'Die Kennwörter übereinstimmen, können Sie mit der Registrierung fortfahren';
 $lang['CHOOSE_PASS_FAILED'] = 'Um das Kennwort zu ändern, Sie müssen richtig geben Sie das aktuelle Passwort';
@@ -1481,6 +1485,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'Abfragen';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Kostenlos herunterladen und mit maximaler Geschwindigkeit!';
@@ -1508,6 +1515,8 @@ $lang['BOLD'] = 'Fettdruck: [b]text[/b] (Strg+B)';
 $lang['ITALIC'] = 'Kursiver text: [i]text[/i] (Strg+I)';
 $lang['UNDERLINE'] = 'Text unterstreichen: [u]text[/u] (Strg+U)';
 $lang['STRIKEOUT'] = 'Strikeout-text: [s]text[/s] (Strg+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Zitat text: [quote]text[/quote] (Strg+Q)';
 $lang['IMG_TITLE'] = 'Bild einfügen: [img]https://image_url[/img] (Strg+R)';
 $lang['URL'] = 'Url';
@@ -1600,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker-Einstellungen';
 $lang['RELEASE_TEMPLATES'] = 'Freigeben Von Vorlagen';
 $lang['ACTIONS_LOG'] = 'Bericht über die Aktion';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Sorry, Ihr browser scheint keine frames unterstützen';
-$lang['IDX_CLEAR_CACHE'] = 'Cache Löschen:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Vorlagen';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Benutzerebenen';
-$lang['IDX_SYNCHRONIZE'] = 'Synchronisieren:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Themen';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Benutzer Beiträge zählen';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum-Index';
 $lang['FORUM_STATS'] = 'Forum-Statistik';
@@ -1637,8 +1634,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip-Komprimierung';
 $lang['NOT_AVAILABLE'] = 'Nicht verfügbar';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Cache Löschen';
-$lang['TEMPLATES'] = 'Vorlagen';
+$lang['DATASTORE'] = 'Datastore';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Benutzerebenen';
@@ -1719,6 +1717,8 @@ $lang['USER_AUTH_UPDATED'] = 'Benutzer-Berechtigungen wurden aktualisiert';
 $lang['GROUP_AUTH_UPDATED'] = 'Gruppe Berechtigungen wurden aktualisiert';
 
 $lang['AUTH_UPDATED'] = 'Berechtigungen wurden aktualisiert';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klicken Sie auf %sHere%s zurück zu Benutzer-Berechtigungen';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klicken Sie auf %sHere%s zurück, um eine Gruppe von Berechtigungen';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klicken Sie auf %sHere%s zurück zu Forum-Berechtigungen';
@@ -2058,6 +2058,7 @@ $lang['NOAVATAR'] = 'Kein avatar';
 $lang['TRACKER_STATS'] = 'Statistiken über die tracker';
 $lang['WHOIS_INFO'] = 'Informationen über IP-Adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Zeigen Sie auf die Moderatoren index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If Sie nicht haben-Distributionen, um den status des v #, T in diesem Abschnitt, einschließlich der Unterbereiche, die Verteilung, erhalten automatisch diese status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentar zum Status einer Verteilung</h4> <h6>Mit dem Kommentar können Sie den Freigeber auf die gemachten Fehler hinweisen. Wenn die Status unvollständig sind, steht dem Freigabemanager ein Freigabeantwortformular zur Verfügung, um die Freigabe zu korrigieren</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Anzahl der Verteilungen, die übergeben werden durch den Benutzer und die Größe der Boni, die für Sie (laden mal eine Stunde) </h6>';
@@ -2258,13 +2259,6 @@ $lang['RETURN_CONFIG'] = '%sReturn zu Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Erfolgreich Aktualisiert';
 $lang['SET_DEFAULTS'] = 'Wiederherstellen';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum-Einstellungen';
-$lang['TRACKER_SETTINGS'] = 'Tracker-Einstellungen';
-
-$lang['CHANGES_DISABLED'] = 'Änderungen deaktiviert ist (siehe <b>$bb_cfg[\'tracker\']</b> in config.php)';
-
 $lang['OFF_TRACKER'] = 'Deaktivieren tracker';
 $lang['OFF_REASON'] = 'Deaktivieren der Grund';
 $lang['OFF_REASON_EXPL'] = 'diese Nachricht wird an Kunden, wenn der tracker deaktiviert ist';
@@ -2409,14 +2403,14 @@ $lang['REPAIR_CRON'] = 'Reparatur Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Auftrag Bearbeiten';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Aufgabe hinzufügen';
 $lang['CRON_SCRIPT_EXPL'] = 'name des Skripts von "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Wählen Sie start',
     'hourly' => 'stündlich',
     'daily' => 'täglich',
     'weekly' => 'wöchentlich',
     'monthly' => 'monatlich',
     'interval' => 'Intervall'
-);
+];
 $lang['NOSELECT'] = 'Nicht wählen';
 $lang['RUN_DAY'] = 'Ausführen Tag';
 $lang['RUN_DAY_EXPL'] = 'der Tag, wenn diese Arbeit ausführen';
@@ -2543,17 +2537,22 @@ $lang['CALLSEED_MSG_OK'] = 'Nachricht wurde gesendet an alle diejenigen, die die
 $lang['CALLSEED_MSG_SPAM'] = 'Anfrage bereits einmal erfolgreich gesendet (Vermutlich nicht du)<br /><br />The nächste Gelegenheit zum senden einer Anfrage zu <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Thema keine Hilfe benötigen (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Thema:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Thema:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Thema:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Thema:<br /> <b>opened</b>',
     'mod_topic_split' => 'Thema:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Benutzer:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Benutzer:<br /> <b>ban</b>',
     'adm_user_unban' => 'Benutzer:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alle Aktionen';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Aktionen Anmelden: Suchoptionen';
@@ -2692,28 +2691,28 @@ $lang['MC_LEGEND'] = 'Geben Sie einen Kommentar ein';
 $lang['MC_FAQ'] = 'Eingegebenen text wird angezeigt, die unter dieser Nachricht';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in Ihrer Nachricht";
 $lang['MC_COMMENT_PM_MSG'] = "Hallo, [b]%s[/b]\nModerator Links in Ihrer Nachricht [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Kommentar löschen',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentar von %s',
         'type' => 'Kommentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informationen aus %s',
         'type' => 'Informationen',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Warnung aus %s',
         'type' => 'Warnung',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Verletzung von %s',
         'type' => 'Verletzung',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Verwalten von XML-sitemap';
@@ -2754,7 +2753,7 @@ $lang['HASH_NOT_FOUND'] = 'Version mit hash %s nicht gefunden';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Der Text dieser Seite wird bearbeitet unter: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Diese Zeile kann nur Administratoren sehen.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Auf dieser Seite können Sie den text angeben, der die grundlegenden Regeln der Ressource, die den Benutzern angezeigt wird.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inaktive Benutzer in 30 Tagen',
     1 => 'inaktive Benutzer für 90 Tage',
     2 => 'medium Größe-Distributionen auf dem tracker (viele MB)',
@@ -2763,7 +2762,7 @@ $lang['TR_STATS'] = array(
     5 => 'wie viele Hände, wo das seeding mehr als 5 Samen',
     6 => 'wie viele von uns uploaders (wer gefüllt ist mindestens 1 Seite)',
     7 => 'wie viele Uploader in den letzten 30 Tagen',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Umfrage aktiviert';
 $lang['NEW_POLL_END'] = 'Umfrage abgeschlossen';
@@ -2787,13 +2786,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Jede Zeile entspricht einer Antwort (max.';
 $lang['OLD_BROWSER'] = 'Sie verwenden einen veralteten browser. Die website wird nicht richtig angezeigt.';
 $lang['GO_BACK'] = 'Gehen Sie zurück';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Datei hochladen-Fehler';
 $lang['UPLOAD_ERROR_SIZE'] = 'Die hochgeladene Datei überschreitet die maximale Größe von %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Ungültiger Datei-Typ des Bildes';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Bild-Größe überschreitet die maximal zulässige %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Die hochgeladene Datei ist kein Bild';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Erweiterung %s für downloads ist nicht erlaubt';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'Sie überschritten die maximale Dateigröße für den server',
     UPLOAD_ERR_FORM_SIZE => 'Sie überschritten die maximale Datei-upload-Größe',
     UPLOAD_ERR_PARTIAL => 'wurde die Datei teilweise heruntergeladen',
@@ -2801,7 +2801,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'das temporäre Verzeichnis nicht gefunden',
     UPLOAD_ERR_CANT_WRITE => 'schreiben Fehler',
     UPLOAD_ERR_EXTENSION => 'upload stopped by extension',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Überprüfen Sie, dass Sie nicht ein Roboter';

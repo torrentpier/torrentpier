@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Bài';
 $lang['POSTED'] = 'Đăng';
 $lang['USERNAME'] = 'Tên';
 $lang['PASSWORD'] = 'Mật khẩu';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Giả';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Kích hoạt';
 $lang['DISABLED'] = 'Vô hiệu hóa';
 $lang['ERROR'] = 'Lỗi';
 $lang['SELECT_ACTION'] = 'Chọn hành động';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
 $lang['PREVIOUS_PAGE'] = 'Trước đó';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Nhấn vào %sHere%s để trở về điều Hà
 $lang['CLICK_RETURN_GROUP'] = 'Nhấn vào %sHere%s để trở về nhóm thông tin';
 
 $lang['ADMIN_PANEL'] = 'Đi đến Bảng điều khiển Quản trị';
-$lang['ALL_CACHE'] = 'Tất cả nhớ tạm';
 $lang['ALL_CACHE_CLEARED'] = 'Nhớ tạm đã được xóa';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Mẫu nhớ tạm đã được xóa';
-$lang['DATASTORE'] = 'Kho dữ liệu';
 $lang['DATASTORE_CLEARED'] = 'Kho dữ liệu đã bị xóa';
 $lang['BOARD_DISABLE'] = 'Xin lỗi, diễn đàn này là vô hiệu hóa. Hãy cố gắng trở lại sau';
 $lang['BOARD_DISABLE_CRON'] = 'Diễn đàn đang tắt để bảo trì. Hãy cố gắng trở lại sau';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Bạn <b>can</b> bỏ phiếu trong số phiếu bầ
 $lang['RULES_VOTE_CANNOT'] = 'Bạn <b>cannot</b> bỏ phiếu trong số phiếu bầu trong diễn đàn này';
 $lang['RULES_MODERATE'] = 'Bạn <b>can</b> vừa diễn đàn này';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Không có bài diễn đàn này.<br />Click trên <b>Post Mới Topic</b> liên kết trên trang này để viết.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Xem chủ đề';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Tin Nhắn';
 $lang['NO_NEW_PM'] = 'không có tin nhắn mới';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('tin nhắn mới', 'tin nhắn mới');
+$lang['NEW_PMS_DECLENSION'] = ['tin nhắn mới', 'tin nhắn mới'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('chưa đọc', 'chưa đọc');
+$lang['UNREAD_PMS_DECLENSION'] = ['chưa đọc', 'chưa đọc'];
 
 $lang['UNREAD_MESSAGE'] = 'Chưa đọc tin nhắn';
 $lang['READ_MESSAGE'] = 'Đọc tin nhắn';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Gửi một e-mail khi ai đó trả lời m�
 
 $lang['BOARD_LANG'] = 'Hội đồng quản trị ngôn ngữ';
 $lang['GENDER'] = 'Giới';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Không rõ',
     1 => 'Nam',
     2 => 'Nữ'
-);
+];
 $lang['MODULE_OFF'] = 'Module được vô hiệu hóa!';
 
 $lang['BIRTHDAY'] = 'Sinh nhật';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Thiết lập lại tượng chìa khóa';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'bao gồm cả những nơi mà bạn đã đến thăm các diễn đàn bật tự động';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Hiển thị đồ họa nhỏ hình ảnh dưới đây các chi tiết của bạn trong bài viết. Chỉ có một hình ảnh có thể được hiển thị tại một thời gian của nó rộng có thể không lớn hơn %d ảnh, chiều cao không lớn hơn %d ảnh và kích thước tập tin không hơn %d CHẮN.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Rõ ràng avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kiểm soát lựa chọn vô hiệu hóa cho vi phạm <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Tải lên avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Một yêu cầu phải tham gia nhóm của bạn đ�
 $lang['GROUP_APPROVED'] = 'Yêu cầu được chấp thuận.';
 $lang['GROUP_ADDED'] = 'Bạn đã được thêm vào nhóm làm việc này.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Bạn đã là một thành viên của nhóm này';
-$lang['USER_IS_MEMBER_GROUP'] = 'Dùng đã là một thành viên của nhóm này';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Cập nhật thành công, loại.';
 $lang['EFFECTIVE_DATE'] = 'Hiệu Quả Ngày';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Đính Kèm là quá lớn.<br />Could không
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Đính Kèm là quá lớn.<br />Maximum kích Thước Tải lên: %d.<br />Please lưu ý rằng kích Thước này được xác định vị trí.ini, điều này có nghĩa là nó là thiết lập và đính Kèm Mod không thể ghi đè lên giá trị này.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Mở Rộng %s không được cho phép'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Bạn không được phép bài Tập với việc mở Rộng %s trong diễn Đàn này'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Đính Kèm là quá lớn.<br />Max kích Thước: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Xin lỗi, nhưng tối đa kích cỡ cho tất cả đính Kèm đạt được. Xin liên hệ với các Hội đồng quản Trị nếu bạn có những câu hỏi.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Đính kèm không thể thêm vào, vì max. số %d đính Kèm trong bài này đã đạt được'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Đính Kèm hình Ảnh, phải được ít hơn %d ảnh rộng và %d ảnh cao';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Giống';
 $lang['LEECHING'] = 'Con đỉa';
 $lang['IS_REGISTERED'] = 'Đăng ký';
 $lang['MAGNET'] = 'Nam châm';
-$lang['DC_MAGNET'] = 'Tìm kiếm ở DC + + bằng tên';
-$lang['DC_MAGNET_EXT'] = 'Tìm kiếm ở DC + + bằng mở rộng';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tình trạng';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Chọn tình trạng';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Bạn đã không chọn tình trạng.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tất cả trạng thái';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'không phải là kiểm tra',
     TOR_CLOSED => 'đóng cửa',
     TOR_APPROVED => 'kiểm tra',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'tạm',
     TOR_PREMOD => 'trước chừng mực',
     TOR_REPLENISH => 'bổ sung',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tình trạng như vậy, không tồn tại!';
 $lang['TORRENT_FAILED'] = 'Giấy phép được không tìm thấy!';
 $lang['TOR_STATUS_DUB'] = 'Phân phối có cùng một tình trạng';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Loại torrent thay đổi thành công';
 $lang['DEL_TORRENT'] = 'Bạn có chắc chắn muốn xóa torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Bạn có chắc chắn muốn xóa và di chuyển chủ đề?';
 $lang['UNEXECUTED_RELEASE'] = 'Bạn đã có một hình thù hành trước khi tạo ra một mới sửa chữa mình vẫn!';
-$lang['STATUS_DOES_EXIST'] = 'Tình trạng như vậy, không tồn tại: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Thay đổi tình trạng của phân phối - %s';
@@ -1154,6 +1153,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Thay đổi bạc';
 $lang['GOLD_STATUS'] = 'VÀNG TORRENT! TẢI VỀ GIAO THÔNG KHÔNG XEM XÉT!';
 $lang['SILVER_STATUS'] = 'BẠC TORRENT! TẢI VỀ GIAO THÔNG MỘT PHẦN COI!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Tìm kiếm trong các diễn Đàn';
 $lang['SELECT_CAT'] = 'Chọn loại';
 $lang['GO_TO_SECTION'] = 'Chuyển đến phần';
@@ -1352,17 +1352,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('trả lời', 'câu trả lời');
-$lang['DECLENSION']['TIMES'] = array('thời gian', 'lần');
+$lang['DECLENSION']['REPLIES'] = ['trả lời', 'câu trả lời'];
+$lang['DECLENSION']['TIMES'] = ['thời gian', 'lần'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('thứ hai', 'giây'),
-    'minutes' => array('phút', 'phút'),
-    'hours' => array('giờ', 'giờ'),
-    'mday' => array('ngày', 'ngày'),
-    'mon' => array('tháng', 'tháng'),
-    'year' => array('năm', 'năm'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['thứ hai', 'giây'],
+    'minutes' => ['phút', 'phút'],
+    'hours' => ['giờ', 'giờ'],
+    'mday' => ['ngày', 'ngày'],
+    'mon' => ['tháng', 'tháng'],
+    'year' => ['năm', 'năm'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'Trường cho mật khẩu không phải là trống r�
 $lang['CHOOSE_PASS_ERR'] = 'Nhập vào mật khẩu không phù hợp với';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Mật khẩu phải có ít nhất %d nhân vật';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Mật khẩu phải có không còn hơn $d nhân vật';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Mật khẩu trận đấu';
 $lang['CHOOSE_PASS_REG_OK'] = 'Mật khẩu phù hợp, anh có thể tiến hành việc đăng ký';
 $lang['CHOOSE_PASS_FAILED'] = 'Để thay đổi mật khẩu, bạn phải chính xác định hiện nay, mật khẩu';
@@ -1481,6 +1485,9 @@ $lang['OFF'] = 'tắt';
 $lang['MEMORY'] = 'Nhớ: ';
 $lang['QUERIES'] = 'thắc mắc';
 $lang['LIMIT'] = 'Giới hạn:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Tải về miễn phí và với tốc độ tối đa!';
@@ -1508,6 +1515,8 @@ $lang['BOLD'] = 'Văn bản đậm: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Nghiêng văn bản: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Nhấn mạnh chữ: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Gạch văn bản: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Báo văn bản: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Chèn hình ảnh: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1600,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Thiết lập theo dõi';
 $lang['RELEASE_TEMPLATES'] = 'Bản Mẫu';
 $lang['ACTIONS_LOG'] = 'Báo cáo trên hành động';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Xin lỗi, bạn duyệt không có vẻ để hỗ trợ khung';
-$lang['IDX_CLEAR_CACHE'] = 'Xóa Bộ Nhớ Đệm:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Kho dữ liệu';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Mẫu';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Mạng tin tức';
-$lang['IDX_UPDATE'] = 'Cập nhật:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Dùng cấp';
-$lang['IDX_SYNCHRONIZE'] = 'Đồng bộ hóa:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Chủ đề';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Dùng bài đếm';
-
 // Index
 $lang['MAIN_INDEX'] = 'Diễn Đàn Chỉ Số';
 $lang['FORUM_STATS'] = 'Thống Kê';
@@ -1637,8 +1634,9 @@ $lang['GZIP_COMPRESSION'] = 'Bao gồm nén';
 $lang['NOT_AVAILABLE'] = 'Không có';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Rõ Ràng Nhớ Tạm';
-$lang['TEMPLATES'] = 'Mẫu';
+$lang['DATASTORE'] = 'Kho dữ liệu';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Dùng cấp';
@@ -1719,6 +1717,8 @@ $lang['USER_AUTH_UPDATED'] = 'Dùng quyền đã được cập nhật';
 $lang['GROUP_AUTH_UPDATED'] = 'Nhóm quyền đã được cập nhật';
 
 $lang['AUTH_UPDATED'] = 'Quyền đã được cập nhật';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Nhấn vào %sHere%s để trở về Quyền Sử dụng';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Nhấn vào %sHere%s để trở về Nhóm Quyền';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Nhấn vào %sHere%s để trở về Đàn Quyền';
@@ -2058,6 +2058,7 @@ $lang['NOAVATAR'] = 'Không avatar';
 $lang['TRACKER_STATS'] = 'Số liệu thống kê trên theo dõi';
 $lang['WHOIS_INFO'] = 'Thông tin về địa chỉ IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Hiển thị trên các điều hành viên index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If bạn không có phân phối cho tình trạng của v, #, hoặc T trong phần này, bao gồm cả các phần phụ, sự phân bố sẽ tự động nhận được điều này status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Nhận xét về trạng thái của bản phân phối</h4> <h6>Nhận xét cho phép bạn chỉ ra các lỗi đối với người phát hành. Nếu các trạng thái không đầy đủ, người quản lý phát hành sẽ có biểu mẫu phản hồi phát hành để sửa bản phát hành</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding giống thưởng </h4> <h6> Số lượng của phân phối được đưa ra bởi người sử dụng và kích thước của tiền thưởng cho họ (sạc lần trong một giờ) </h6>';
@@ -2258,13 +2259,6 @@ $lang['RETURN_CONFIG'] = '%sReturn để Configuration%s';
 $lang['CONFIG_UPD'] = 'Cấu Hình Cập Nhật Thành Công';
 $lang['SET_DEFAULTS'] = 'Khôi phục mặc định';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Theo dõi';
-$lang['FORUM_CFG_TITLE'] = 'Diễn đàn cài đặt';
-$lang['TRACKER_SETTINGS'] = 'Thiết lập theo dõi';
-
-$lang['CHANGES_DISABLED'] = 'Thay đổi vô hiệu hóa (thấy trong <b>$bb_cfg[\'tracker\']</b> config.php)';
-
 $lang['OFF_TRACKER'] = 'Vô hiệu hóa theo dõi';
 $lang['OFF_REASON'] = 'Vô hiệu hóa lý do';
 $lang['OFF_REASON_EXPL'] = 'tin này sẽ được gửi đến khách hàng khi theo dõi được vô hiệu hóa';
@@ -2409,14 +2403,14 @@ $lang['REPAIR_CRON'] = 'Sửa Chữa Định Kỳ';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Chỉnh sửa công việc';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Thêm công việc';
 $lang['CRON_SCRIPT_EXPL'] = 'tên của kịch bản từ "bao gồm/định kỳ/việc/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Chọn bắt đầu',
     'hourly' => 'giờ',
     'daily' => 'hàng ngày',
     'weekly' => 'hàng tuần',
     'monthly' => 'hàng tháng',
     'interval' => 'khoảng thời gian'
-);
+];
 $lang['NOSELECT'] = 'Không có chọn';
 $lang['RUN_DAY'] = 'Chạy ngày';
 $lang['RUN_DAY_EXPL'] = 'ngày khi công việc này chạy';
@@ -2543,17 +2537,22 @@ $lang['CALLSEED_MSG_OK'] = 'Tin nhắn được gửi tới tất cả những n
 $lang['CALLSEED_MSG_SPAM'] = 'Yêu cầu đã được một khi thành công gửi (có Lẽ không phải bạn)<br /><br />The tiếp theo cơ hội để gửi một yêu cầu được <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Chủ đề không yêu cầu giúp đỡ (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Chủ đề:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Chủ đề:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Chủ đề:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Chủ đề:<br /> <b>opened</b>',
     'mod_topic_split' => 'Chủ đề:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Bài:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Dùng:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Dùng:<br /> <b>ban</b>',
     'adm_user_unban' => 'Dùng:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Tất cả các hành động';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Hành động Ghi: Tìm kiếm lựa chọn';
@@ -2692,28 +2691,28 @@ $lang['MC_LEGEND'] = 'Loại bình luận';
 $lang['MC_FAQ'] = 'Nhập vào văn bản sẽ được hiển thị dưới tin nhắn này';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s trong tin nhắn của bạn";
 $lang['MC_COMMENT_PM_MSG'] = "Xin chào, [b]%s[/b] tính nModerator để lại tin nhắn của bạn [bạn, %s][b]%s[/b][/url][quote] tính n%s tính n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Rõ ràng bình luận',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Bình luận từ %s',
         'type' => 'Bình luận',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Thông tin từ %s',
         'type' => 'Thông tin',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Cảnh báo từ %s',
         'type' => 'Cảnh báo',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Vi phạm từ %s',
         'type' => 'Vi phạm',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Đồ';
 $lang['SITEMAP_ADMIN'] = 'Quản lý đồ';
@@ -2754,7 +2753,7 @@ $lang['HASH_NOT_FOUND'] = 'Phát hành với băm %s không tìm thấy';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Văn bản của trang này được chỉnh sửa tại: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Dòng này chỉ có thể nhìn thấy quản trị viên.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Trên trang này, anh có thể xác định danh văn bản của các quy tắc cơ bản của các nguồn tài nguyên được hiển thị sử dụng.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'người dùng không hoạt động trong 30 ngày',
     1 => 'người dùng không hoạt động trong 90 ngày',
     2 => 'vừa kích thước phân phối trên theo dõi (nhiều người mà)',
@@ -2763,7 +2762,7 @@ $lang['TR_STATS'] = array(
     5 => 'bao nhiêu bàn tay, nơi mà gieo hạt hơn 5 giống',
     6 => 'bao nhiêu người của chúng ta upload (những người đầy ít nhất là 1 tay)',
     7 => 'có bao nhiêu người trong vòng 30 ngày',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Thăm dò được kích hoạt';
 $lang['NEW_POLL_END'] = 'Thăm dò hoàn thành';
@@ -2787,13 +2786,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Mỗi hàng tương ứng với một câu trả 
 $lang['OLD_BROWSER'] = 'Bạn đang sử dụng một lỗi thời duyệt. Các trang web sẽ không hiển thị chính xác.';
 $lang['GO_BACK'] = 'Quay trở lại';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Tập tin tải lên lỗi';
 $lang['UPLOAD_ERROR_SIZE'] = 'Các tập tin được tải lên vượt quá mức tối đa kích thước của %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Tập tin không hợp lệ của loại hình ảnh';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Hình kích thước quá tối đa cho phép %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Các tập tin được tải lên không phải là một hình ảnh';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Mở rộng %s cho tải không được cho phép';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'bạn đã vượt quá kích thước tối đa cho các server',
     UPLOAD_ERR_FORM_SIZE => 'bạn đã vượt quá mức tối đa thấy kích thước tải lên',
     UPLOAD_ERR_PARTIAL => 'các tập tin đã được tải về một phần',
@@ -2801,7 +2801,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'tạm thời mục không tìm thấy',
     UPLOAD_ERR_CANT_WRITE => 'viết lỗi',
     UPLOAD_ERR_EXTENSION => 'tải dừng lại bằng cách mở rộng',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kiểm tra đó bạn không phải là một robot';

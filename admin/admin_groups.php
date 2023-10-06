@@ -11,37 +11,38 @@ if (!empty($setmodules)) {
     $module['GROUPS']['MANAGE'] = basename(__FILE__);
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
-attachment_quota_settings('group', isset($_POST['group_update']), $mode);
+attachment_quota_settings('group', $mode, isset($_POST['group_update']));
 
 if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     if (!empty($_POST['edit'])) {
         if (!$row = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die($lang['GROUP_NOT_EXIST']);
         }
-        $group_info = array(
+        $group_info = [
             'group_name' => $row['group_name'],
             'group_description' => $row['group_description'],
             'group_moderator' => $row['group_moderator'],
             'group_mod_name' => $row['moderator_name'],
             'group_type' => $row['group_type'],
-            'release_group' => $row['release_group'],
-        );
+            'release_group' => $row['release_group']
+        ];
         $mode = 'editgroup';
         $template->assign_block_vars('group_edit', []);
     } elseif (!empty($_POST['new'])) {
-        $group_info = array(
+        $group_info = [
             'group_name' => '',
             'group_description' => '',
             'group_moderator' => '',
             'group_mod_name' => '',
             'group_type' => GROUP_OPEN,
-            'release_group' => 0,
-        );
+            'release_group' => 0
+        ];
         $mode = 'newgroup';
     }
 
@@ -51,7 +52,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 		<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />
 	';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_EDIT_GROUP' => true,
 
         'GROUP_NAME' => stripslashes(htmlspecialchars($group_info['group_name'])),
@@ -65,10 +66,10 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         'S_GROUP_OPEN_CHECKED' => ($group_info['group_type'] == GROUP_OPEN) ? HTML_CHECKED : '',
         'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? HTML_CHECKED : '',
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? HTML_CHECKED : '',
-        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
+        'RELEASE_GROUP' => (bool)$group_info['release_group'],
         'S_GROUP_ACTION' => 'admin_groups.php',
-        'S_HIDDEN_FIELDS' => $s_hidden_fields,
-    ));
+        'S_HIDDEN_FIELDS' => $s_hidden_fields
+    ]);
 } elseif (!empty($_POST['group_update'])) {
     if (!empty($_POST['group_delete'])) {
         if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
@@ -100,14 +101,14 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             bb_die($lang['NO_GROUP_MODERATOR']);
         }
 
-        $sql_ary = array(
+        $sql_ary = [
             'group_type' => (int)$group_type,
             'release_group' => (int)$release_group,
             'group_name' => (string)$group_name,
             'group_description' => (string)$group_desc,
             'group_moderator' => (int)$group_moderator,
             'group_single_user' => 0,
-        );
+        ];
 
         if ($mode == 'editgroup') {
             if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
@@ -156,12 +157,12 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         }
     }
 } else {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_GROUP_SELECT' => true,
 
         'S_GROUP_ACTION' => 'admin_groups.php',
         'S_GROUP_SELECT' => stripslashes(get_select('groups')),
-    ));
+    ]);
 }
 
 print_page('admin_groups.tpl', 'admin');

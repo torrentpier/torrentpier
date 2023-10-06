@@ -11,23 +11,21 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-// Root path
-$rootPath = __DIR__;
-if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
-define('BB_PATH', dirname($rootPath));
-
 // System
+define('APP_NAME', 'TorrentPier');
+
 define('CHECK_REQIREMENTS', [
     'status' => true,
-    'php_min_version' => '7.4.0',
+    'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
-        'gd',
-        'zlib',
+        // 'gd', (optional)
+        // 'zlib', (optional)
         'curl',
-        'tidy',
+        // 'tidy', (optional)
         'mysqli',
         'bcmath',
+        'mbstring',
         'intl',
         'xml',
         'xmlwriter',
@@ -67,27 +65,30 @@ define('XS_TAG_ENDIF', 8);
 define('XS_TAG_BEGINELSE', 11);
 
 // Debug
-define('COOKIE_DBG', 'bb_dbg'); // debug cookie name
+define('APP_DEBUG', true); // enable application debug
 define('SQL_DEBUG', true); // enable forum sql & cache debug
 define('SQL_LOG_ERRORS', true); // all SQL_xxx options enabled only if SQL_DEBUG == TRUE
-define('SQL_LOG_NAME', 'sql_error_bb'); // mysql log filename
+define('SQL_BB_LOG_NAME', 'sql_error_bb'); // mysql log filename (Board)
+define('SQL_TR_LOG_NAME', 'sql_error_tr'); // mysql log filename (Tracker)
 define('SQL_CALC_QUERY_TIME', true); // for stats
 define('SQL_LOG_SLOW_QUERIES', true); // log sql slow queries
 define('SQL_SLOW_QUERY_TIME', 10); // slow query in seconds
 define('SQL_PREPEND_SRC_COMM', false); // prepend source file comment to sql query
 
 // Log options
-define('LOG_EXT', 'log');
+define('LOG_EXT', 'log'); // log file extension
 define('LOG_SEPR', ' | ');
 define('LOG_LF', "\n");
 define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
+ini_set('error_reporting', E_ALL); // PHP error reporting mode | https://www.php.net/manual/en/errorfunc.constants.php
+ini_set('display_errors', 1); // Show general php errors
+ini_set('display_startup_errors', 1); // Show startup php errors
+define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR); // MySQL error reporting mode | https://www.php.net/manual/mysqli-driver.report-mode.php
+ini_set('log_errors', 1); // php native logging
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
-define('WHOOPS_LOG_FILE', LOG_DIR . '/php_whoops.log'); // log file enabled only if log_errors == 1 (whoops)
+define('WHOOPS_LOG_FILE', LOG_DIR . '/php_whoops.log'); // log file enabled only if log_errors == 1 and APP_DEBUG == true (whoops)
 
 // Triggers
 define('BB_ENABLED', TRIGGERS_DIR . '/$on');

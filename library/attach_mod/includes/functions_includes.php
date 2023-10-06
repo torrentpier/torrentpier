@@ -26,7 +26,7 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
 /**
  * Called from admin_users.php and admin_groups.php in order to process Quota Settings (admin/admin_users.php:admin/admin_groups.php)
  */
-function attachment_quota_settings($admin_mode, $submit = false, $mode)
+function attachment_quota_settings($admin_mode, $mode, $submit = false)
 {
     global $template, $lang, $attach_config;
     $this_userdata = [];
@@ -46,7 +46,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 
     if ($admin_mode == 'user') {
         // We overwrite submit here... to be sure
-        $submit = (isset($_POST['submit'])) ? true : false;
+        $submit = isset($_POST['submit']);
 
         if (!$submit && $mode != 'save') {
             $user_id = get_var(POST_USERS_URL, 0);
@@ -98,10 +98,10 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
         }
         DB()->sql_freeresult($result);
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('user_upload_quota', $upload_quota),
-            'S_SELECT_PM_QUOTA' => quota_limit_select('user_pm_quota', $pm_quota),
-        ));
+            'S_SELECT_PM_QUOTA' => quota_limit_select('user_pm_quota', $pm_quota)
+        ]);
     }
 
     if ($admin_mode == 'user' && $submit && @$_POST['delete_user']) {
@@ -148,10 +148,10 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
         }
         DB()->sql_freeresult($result);
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('group_upload_quota', $upload_quota),
-            'S_SELECT_PM_QUOTA' => quota_limit_select('group_pm_quota', $pm_quota),
-        ));
+            'S_SELECT_PM_QUOTA' => quota_limit_select('group_pm_quota', $pm_quota)
+        ]);
     }
 
     if ($admin_mode == 'group' && $submit && isset($_POST['group_delete'])) {

@@ -684,7 +684,7 @@ class Template
                     continue;
                 }
                 $line = '<' . '?php ';
-                $filehash = md5($params_str . $this->include_count . TIMENOW);
+                $filehash = hash('xxh128', $params_str . $this->include_count . TIMENOW);
                 $line .= ' $this->set_filename(\'xs_include_' . $filehash . '\', \'' . $params_str . '\', true); ';
                 $line .= ' $this->pparse(\'xs_include_' . $filehash . '\'); ';
                 $line .= ' ?' . '>';
@@ -766,7 +766,7 @@ class Template
         // This will handle the remaining root-level varrefs
         $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($SL[\'$2\']) ? $SL[\'$2\'] : $V[\'$1\']); ?>', $code);
         $code = preg_replace('#\{(\$[a-z_][a-z0-9_$\->\'\"\.\[\]]*?)\}#i', '<?php echo isset($1) ? $1 : \'\'; ?>', $code);
-        $code = preg_replace('#\{(\#([a-z_][a-z0-9_]*?))\}#i', '<?php echo defined(\'$2\') ? $2 : \'\'; ?>', $code);
+        $code = preg_replace('#\{(\#([a-z_][a-z0-9_]*?)\#)\}#i', '<?php echo defined(\'$2\') ? $2 : \'\'; ?>', $code);
         $code = preg_replace('#\{([a-z0-9\-_]+?)\}#i', '<?php echo isset($V[\'$1\']) ? $V[\'$1\'] : \'\'; ?>', $code);
         return $code;
     }
@@ -793,6 +793,7 @@ class Template
 
         for ($i = 0; $i < $tokens_cnt; $i++) {
             $token = &$tokens[$i];
+            $token = $token ?? '';
 
             switch ($token) {
                 case 'eq':

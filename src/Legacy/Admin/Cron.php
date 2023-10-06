@@ -18,9 +18,9 @@ class Cron
     /**
      * Run cron jobs
      *
-     * @param array $jobs
+     * @param string $jobs
      */
-    public static function run_jobs($jobs): void
+    public static function run_jobs(string $jobs): void
     {
         /** @noinspection PhpUnusedLocalVariableInspection */
         global $bb_cfg, $datastore;
@@ -65,9 +65,9 @@ class Cron
     /**
      * Delete cron jobs
      *
-     * @param array $jobs
+     * @param string $jobs
      */
-    public static function delete_jobs($jobs): void
+    public static function delete_jobs(string $jobs): void
     {
         DB()->query("DELETE FROM " . BB_CRON . " WHERE cron_id IN ($jobs)");
     }
@@ -75,10 +75,10 @@ class Cron
     /**
      * Toggle activity of cron jobs
      *
-     * @param array $jobs
+     * @param string $jobs
      * @param string $cron_action
      */
-    public static function toggle_active($jobs, $cron_action): void
+    public static function toggle_active(string $jobs, string $cron_action): void
     {
         $active = ($cron_action == 'disable') ? 0 : 1;
         DB()->query("UPDATE " . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
@@ -91,7 +91,7 @@ class Cron
      *
      * @return int|string
      */
-    public static function validate_cron_post($cron_arr)
+    public static function validate_cron_post(array $cron_arr)
     {
         $errors = 'Errors in: ';
         $errnum = 0;
@@ -116,7 +116,7 @@ class Cron
      *
      * @param array $cron_arr
      */
-    public static function insert_cron_job($cron_arr): void
+    public static function insert_cron_job(array $cron_arr): void
     {
         $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
 
@@ -159,7 +159,7 @@ class Cron
      *
      * @param array $cron_arr
      */
-    public static function update_cron_job($cron_arr): void
+    public static function update_cron_job(array $cron_arr): void
     {
         $cron_id = $cron_arr['cron_id'];
         $cron_active = $cron_arr['cron_active'];

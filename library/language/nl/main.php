@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Berichten';
 $lang['POSTED'] = 'Gepost';
 $lang['USERNAME'] = 'Gebruikersnaam';
 $lang['PASSWORD'] = 'Wachtwoord';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Auteur';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Ingeschakeld';
 $lang['DISABLED'] = 'Uitgeschakeld';
 $lang['ERROR'] = 'Fout';
 $lang['SELECT_ACTION'] = 'Selecteer actie';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Volgende';
 $lang['PREVIOUS_PAGE'] = 'Vorige';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik op %sHere%s om terug te keren naar Moderator
 $lang['CLICK_RETURN_GROUP'] = 'Klik op %sHere%s om terug te keren naar groep informatie';
 
 $lang['ADMIN_PANEL'] = 'Ga naar het Administratie Paneel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'De Cache is uitgeschakeld';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache gewist';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore is gewist';
 $lang['BOARD_DISABLE'] = 'Sorry, dit forum is uitgeschakeld. Probeer om later terug te komen';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is uitgeschakeld voor onderhoud. Probeer om later terug te komen';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'U <b>can</b> stemmen in polls in dit forum';
 $lang['RULES_VOTE_CANNOT'] = 'U <b>cannot</b> stemmen in polls in dit forum';
 $lang['RULES_MODERATE'] = 'U <b>can</b> matige dit forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Er zijn geen berichten in dit forum.<br />Click op de <b>Post Nieuwe Topic</b> link op deze pagina om er een te plaatsen.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Bekijk onderwerp';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Prive Berichten';
 $lang['NO_NEW_PM'] = 'geen nieuwe berichten';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nieuw bericht', 'nieuwe berichten');
+$lang['NEW_PMS_DECLENSION'] = ['nieuw bericht', 'nieuwe berichten'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('ongelezen', 'ongelezen');
+$lang['UNREAD_PMS_DECLENSION'] = ['ongelezen', 'ongelezen'];
 
 $lang['UNREAD_MESSAGE'] = 'Ongelezen bericht';
 $lang['READ_MESSAGE'] = 'Lees bericht';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Stuurt een e-mail wanneer iemand reageert op e
 
 $lang['BOARD_LANG'] = 'Raad taal';
 $lang['GENDER'] = 'Geslacht';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Onbekend',
     1 => 'Man',
     2 => 'Vrouw'
-);
+];
 $lang['MODULE_OFF'] = 'De Module is uitgeschakeld!';
 
 $lang['BIRTHDAY'] = 'Verjaardag';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset-toets in te loggen';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'met inbegrip van al de plaatsen die u heeft bezocht, het forum is ingeschakeld auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Geeft een kleine grafische afbeelding hieronder uw gegevens in berichten. Enkel een afbeelding kan worden weergegeven in een tijd, de breedte niet meer dan %d pixels, de hoogte niet groter is dan %d pixels en de grootte van het bestand niet meer dan %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Verwijderen avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar controle optie uitgeschakeld voor de strijd <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Een verzoek om samen met uw groep heeft gemaakt.';
 $lang['GROUP_APPROVED'] = 'Uw aanvraag is goedgekeurd.';
 $lang['GROUP_ADDED'] = 'Je bent toegevoegd aan deze gebruikersgroep.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Bent u al lid van deze groep';
-$lang['USER_IS_MEMBER_GROUP'] = 'Gebruiker is al lid van deze groep';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Bijgewerkt groep type.';
 $lang['EFFECTIVE_DATE'] = 'Datum';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'De Bijlage is te groot.<br />Could niet voor 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'De Bijlage is te groot.<br />Maximum Upload Size: %d MB.<br />Please er rekening mee dat deze Maat is gedefinieerd in php.ini, dit betekent dat het instellen van PHP en de Bijlage Mod kan niet overschrijft deze waarde.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'De Uitbreiding %s is niet toegestaan'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'U bent niet toegestaan om te posten Bestanden met de Extensie %s in dit Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'De Bijlage is te groot.<br />Max Grootte: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Sorry, maar de maximale bestandsgrootte voor alle Bijlagen is bereikt. Neem contact op met de Beheerder als je vragen hebt.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Bijlage kan niet worden toegevoegd, aangezien de max. aantal %d Bijlagen in deze post werd bereikt'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'De Bijlage/Afbeelding moet kleiner zijn dan %d pixels breed en %d pixels hoog';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Zaad';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Geregistreerd';
 $lang['MAGNET'] = 'Magneet';
-$lang['DC_MAGNET'] = 'Zoeken in DC++ op bestandsnaam';
-$lang['DC_MAGNET_EXT'] = 'Zoeken in DC++ door uitbreiding';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Selecteer status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Je hebt niet gekozen status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alle statussen';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'niet gecontroleerd',
     TOR_CLOSED => 'gesloten',
     TOR_APPROVED => 'gecontroleerd',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'tijdelijk',
     TOR_PREMOD => 'vooraf modereren',
     TOR_REPLENISH => 'vullen',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Een dergelijke status niet bestaat!';
 $lang['TORRENT_FAILED'] = 'Distributie is niet gevonden!';
 $lang['TOR_STATUS_DUB'] = 'De distributie heeft dezelfde status';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Typ de torrent met succes gewijzigd';
 $lang['DEL_TORRENT'] = 'Weet u zeker dat u wilt verwijderen van de torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Weet u zeker dat u wilt verwijderen en verplaats het onderwerp?';
 $lang['UNEXECUTED_RELEASE'] = 'Heb je een vormeloze release voor het maken van een nieuw op te lossen zijn ongevormde!';
-$lang['STATUS_DOES_EXIST'] = 'Een dergelijke status niet bestaat: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Het wijzigen van de status van de distributie - %s';
@@ -1154,6 +1153,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Te gronde richten zilver';
 $lang['GOLD_STATUS'] = 'GOUD TORRENT! DOWNLOAD VERKEER NIET OVERWEGEN!';
 $lang['SILVER_STATUS'] = 'ZILVER TORRENT! DOWNLOAD VERKEER GEDEELTELIJK BESCHOUWD!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Zoeken in Forums';
 $lang['SELECT_CAT'] = 'Selecteer categorie:';
 $lang['GO_TO_SECTION'] = 'Ga naar de sectie';
@@ -1352,17 +1352,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('beantwoorden', 'antwoorden');
-$lang['DECLENSION']['TIMES'] = array('tijd', 'tijden');
+$lang['DECLENSION']['REPLIES'] = ['beantwoorden', 'antwoorden'];
+$lang['DECLENSION']['TIMES'] = ['tijd', 'tijden'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('tweede', 'seconden'),
-    'minutes' => array('minuut', 'minuten'),
-    'hours' => array('uur', 'uur'),
-    'mday' => array('dag', 'dagen'),
-    'mon' => array('maand', 'maanden'),
-    'year' => array('jaar', 'jaar'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['tweede', 'seconden'],
+    'minutes' => ['minuut', 'minuten'],
+    'hours' => ['uur', 'uur'],
+    'mday' => ['dag', 'dagen'],
+    'mon' => ['maand', 'maanden'],
+    'year' => ['jaar', 'jaar'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'Veld voor het wachtwoord mag niet leeg zijn!';
 $lang['CHOOSE_PASS_ERR'] = 'De ingevoerde wachtwoorden komen niet overeen';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Uw wachtwoord moet minimaal %d tekens';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Uw wachtwoord mag niet langer zijn dan $d tekens';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Wachtwoorden overeenkomen,';
 $lang['CHOOSE_PASS_REG_OK'] = 'Wachtwoorden overeenkomen, kunt u verder gaan met de registratie';
 $lang['CHOOSE_PASS_FAILED'] = 'Om het wachtwoord te wijzigen, moet u het correct opgeven van de huidige wachtwoord in';
@@ -1481,6 +1485,9 @@ $lang['OFF'] = 'uit';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'query \' s';
 $lang['LIMIT'] = 'Limiet:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Download gratis en op maximale snelheid!';
@@ -1508,6 +1515,8 @@ $lang['BOLD'] = 'Vetgedrukte tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Cursieve tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Tekst onderstrepen: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Quote tekst: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Afbeelding invoegen: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1600,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker instellingen';
 $lang['RELEASE_TEMPLATES'] = 'Release Sjablonen';
 $lang['ACTIONS_LOG'] = 'Rapport over de actie';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Sorry, uw browser lijkt geen frames ondersteunt';
-$lang['IDX_CLEAR_CACHE'] = 'Cache Wissen:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Sjablonen';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Netto-nieuws';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Gebruiker niveau';
-$lang['IDX_SYNCHRONIZE'] = 'Synchroniseren:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Onderwerpen';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Gebruiker berichten graaf';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum Statistieken';
@@ -1637,8 +1634,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compressie';
 $lang['NOT_AVAILABLE'] = 'Niet beschikbaar';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Cache Wissen';
-$lang['TEMPLATES'] = 'Sjablonen';
+$lang['DATASTORE'] = 'Datastore';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Gebruiker niveau';
@@ -1719,6 +1717,8 @@ $lang['USER_AUTH_UPDATED'] = 'Gebruiker machtigingen zijn bijgewerkt';
 $lang['GROUP_AUTH_UPDATED'] = 'Groep rechten zijn bijgewerkt';
 
 $lang['AUTH_UPDATED'] = 'Machtigingen zijn bijgewerkt';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klik op %sHere%s om terug te keren naar gebruikersmachtigingen';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klik op %sHere%s om terug te keren naar Groeps-Rechten';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik op %sHere%s om terug te keren naar de Forum Permissies';
@@ -2058,6 +2058,7 @@ $lang['NOAVATAR'] = 'Geen avatar';
 $lang['TRACKER_STATS'] = 'De statistieken worden op de tracker -';
 $lang['WHOIS_INFO'] = 'Informatie over het IP-adres';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Toon moderators op de index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If u niet over de uitkeringen aan de status van v, #, of T in deze sectie, met inbegrip van de onderafdelingen, de distributie, krijgt automatisch deze status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Commentaar op de status van een distributie</h4> <h6>Met het commentaar kunt u de releaser wijzen op gemaakte fouten. Als de statussen onvolledig zijn, is er een vrijgave-antwoordformulier beschikbaar voor de vrijgavebeheerder om vrijgave</h6>te corrigeren';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding zaad bonus </h4> <h6> Aantal uitkeringen worden uitgedeeld door de gebruiker en de omvang van de bonussen voor hen (laden keer een uur) </h6>';
@@ -2258,13 +2259,6 @@ $lang['RETURN_CONFIG'] = '%sReturn te Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuratie Met Succes Bijgewerkt';
 $lang['SET_DEFAULTS'] = 'Standaardinstellingen herstellen';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum instellingen';
-$lang['TRACKER_SETTINGS'] = 'Tracker instellingen';
-
-$lang['CHANGES_DISABLED'] = 'Wijzigingen uitgeschakeld (zie <b>$bb_cfg[\'tracker\']</b> in config.php)';
-
 $lang['OFF_TRACKER'] = 'Uitschakelen tracker';
 $lang['OFF_REASON'] = 'Uitschakelen reden';
 $lang['OFF_REASON_EXPL'] = 'dit bericht zal worden verzonden aan de opdrachtgever wanneer de tracker is uitgeschakeld';
@@ -2409,14 +2403,14 @@ $lang['REPAIR_CRON'] = 'Reparatie Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Taak bewerken';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Taak toevoegen';
 $lang['CRON_SCRIPT_EXPL'] = 'de naam van het script van "includes/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Selecteer start',
     'hourly' => 'per uur',
     'daily' => 'dagelijks',
     'weekly' => 'wekelijks',
     'monthly' => 'maandelijks',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Geen selecteren';
 $lang['RUN_DAY'] = 'Uitvoeren dag';
 $lang['RUN_DAY_EXPL'] = 'de dag waarop deze taak uitvoeren';
@@ -2543,17 +2537,22 @@ $lang['CALLSEED_MSG_OK'] = 'Bericht verzonden naar alle mensen die deze release 
 $lang['CALLSEED_MSG_SPAM'] = 'De aanvraag is al een keer met succes verzonden (Waarschijnlijk niet u)<br /><br />The volgende gelegenheid voor het verzenden van een verzoek om te worden <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Onderwerp niet nodig de help (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Onderwerp:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Onderwerp:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Onderwerp:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Onderwerp:<br /> <b>opened</b>',
     'mod_topic_split' => 'Onderwerp:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Gebruiker:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Gebruiker:<br /> <b>ban</b>',
     'adm_user_unban' => 'Gebruiker:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alle acties';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Acties-Logboek: Search opties';
@@ -2692,28 +2691,28 @@ $lang['MC_LEGEND'] = 'Typ een commentaar';
 $lang['MC_FAQ'] = 'Ingevoerde tekst zal worden weergegeven onder dit bericht';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in uw bericht";
 $lang['MC_COMMENT_PM_MSG'] = "Hallo, [b]%s[/b]\nModerator links in je bericht [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Opmerking verwijderen',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Reactie van %s',
         'type' => 'Reactie',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informatie van %s',
         'type' => 'Informatie',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Waarschuwing van %s',
         'type' => 'Waarschuwing',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Schending van %s',
         'type' => 'Overtreding',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Beheren sitemap';
@@ -2754,7 +2753,7 @@ $lang['HASH_NOT_FOUND'] = 'Release met hash %s niet gevonden';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]De tekst van deze pagina is bewerkt op: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Deze regel kan alleen beheerders zien.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Op deze pagina kunt u de tekst van de fundamentele regels van de bron wordt weergegeven aan gebruikers.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inactieve gebruikers in 30 dagen',
     1 => 'inactieve gebruikers voor 90 dagen',
     2 => 'middelgrote uitkeringen op de drijver van de (vele megabytes)',
@@ -2763,7 +2762,7 @@ $lang['TR_STATS'] = array(
     5 => 'hoe vele handen waar dat zaaien meer dan 5 zaden',
     6 => 'hoe velen van ons uploaders (degenen die gevuld zijn met minstens 1 hand)',
     7 => 'hoe veel uploaders over de laatste 30 dagen',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Poll ingeschakeld';
 $lang['NEW_POLL_END'] = 'Poll ingevuld';
@@ -2787,13 +2786,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Elke rij correspondeert met een antwoord (max';
 $lang['OLD_BROWSER'] = 'U gebruikt een verouderde browser. De website wordt niet goed weergegeven.';
 $lang['GO_BACK'] = 'Ga terug';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'File upload error';
 $lang['UPLOAD_ERROR_SIZE'] = 'Het geüploade bestand is groter dan de maximale grootte van %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Ongeldig bestandstype van de afbeelding';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'De afmetingen van het beeld is dan de maximaal toelaatbare %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Het verstuurde bestand is geen beeld';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Uitbreiding %s voor downloads is niet toegestaan';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'overschrijding van de maximum bestands-grootte voor de server',
     UPLOAD_ERR_FORM_SIZE => 'overschrijding van de maximum file upload size',
     UPLOAD_ERR_PARTIAL => 'het bestand werd gedeeltelijk gedownload',
@@ -2801,7 +2801,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'tijdelijke map is niet gevonden',
     UPLOAD_ERR_CANT_WRITE => 'schrijf-fout',
     UPLOAD_ERR_EXTENSION => 'upload gestopt door extentie',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Controleren dat u geen robot';

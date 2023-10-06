@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="{$bb_cfg['default_lang']}">
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <title><!-- IF HAVE_NEW_PM -->({HAVE_NEW_PM}) <!-- ENDIF --><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
-<meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="application-name" content="{SITENAME}"/>
+<meta property="og:site_name" content="{SITENAME}">
 <meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
+<meta property="twitter:image" content="{SITE_URL}styles/images/logo/logo.png">
+<meta property="og:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
+<meta property="twitter:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
-<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
+<meta name="generator" content="TorrentPier">
+<meta name="version" content="{$bb_cfg['tp_version']}">
+
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/oldbrowserdetector.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/clipboard.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/printThis.min.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/libs/legacy.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
@@ -33,7 +46,7 @@ var hidePostImg = false;
 <!-- ENDIF / INCLUDE_BBCODE_JS -->
 
 <script type="text/javascript">
-var BB_ROOT      = "{#BB_ROOT}";
+var BB_ROOT      = "{#BB_ROOT#}";
 var cookieDomain = "{$bb_cfg['cookie_domain']}";
 var cookiePath   = "{$bb_cfg['script_path']}";
 var cookiePrefix = "{$bb_cfg['cookie_prefix']}";
@@ -55,7 +68,7 @@ var user = {
 	}
 };
 
-<!-- IF SHOW_JUMPBOX -->
+<!-- IF $bb_cfg['show_jumpbox'] -->
 $(document).ready(function(){
 	$("div.jumpbox").html('\
 		<span id="jumpbox-container"> \
@@ -115,16 +128,16 @@ function post2url (url, params) {
 }
 </script>
 
-<!--[if gte IE 7]><style type="text/css">
+<!--[if gte IE 7]><style>
 input[type="checkbox"] { margin-bottom: -1px; }
 </style><![endif]-->
 
-<!--[if IE]><style type="text/css">
+<!--[if IE]><style>
 .post-hr { margin: 2px auto; }
 .fieldsets div > p { margin-bottom: 0; }
 </style><![endif]-->
 
-<style type="text/css">
+<style>
 	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title, .q-post { display: none; }
 </style>
 </head>
@@ -215,7 +228,7 @@ function go_to_page ()
 <!-- IF SIMPLE_HEADER -->
 <!--==================-->
 
-<style type="text/css">body { background: #E3E3E3; min-width: 10px; }</style>
+<style>body { background: #E3E3E3; min-width: 10px; }</style>
 
 <!--=================-->
 <!-- ELSEIF IN_ADMIN -->
@@ -311,7 +324,7 @@ $(document).ready(function() {
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
-					<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
+					<option value="tracker.php#results" selected> {L_TRACKER_S} </option>
 					<option value="search.php"> {L_FORUM_S} </option>
 					<option value="tracker.php" class="hash"> {L_HASH_S} </option>
 				</select>
@@ -347,7 +360,7 @@ $(document).ready(function() {
 					<form action="{S_LOGIN_ACTION}" method="post">
 						{L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
 						{L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
-						<label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked="checked" />{L_REMEMBER}</label>&nbsp;
+						<label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked />{L_REMEMBER}</label>&nbsp;
 						<input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
 					</form> &#0183;
 				<a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
@@ -377,14 +390,14 @@ $(document).ready(function() {
 				<label>
 					<input id="only_new_posts" type="checkbox" <!-- IF ONLY_NEW_POSTS_ON -->{CHECKED}<!-- ENDIF -->
 						onclick="
-							user.set('only_new', ( this.checked ? {ONLY_NEW_POSTS} : 0 ), 365, true);
+							user.set('only_new', ( this.checked ? {#ONLY_NEW_POSTS#} : 0 ), 365, true);
 							$('#only_new_topics').attr('checked', false);
 						" />{L_ONLY_NEW_POSTS}
 				</label>
 				<label>
 					<input id="only_new_topics" type="checkbox" <!-- IF ONLY_NEW_TOPICS_ON -->{CHECKED}<!-- ENDIF -->
 						onclick="
-							user.set('only_new', ( this.checked ? {ONLY_NEW_TOPICS} : 0 ), 365, true);
+							user.set('only_new', ( this.checked ? {#ONLY_NEW_TOPICS#} : 0 ), 365, true);
 							$('#only_new_posts').attr('checked', false);
 						" />{L_ONLY_NEW_TOPICS}
 				</label>
@@ -443,7 +456,7 @@ $(document).ready(function() {
 					<tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
 					<tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
 					<tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
-					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
+					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="{BONUS_URL}"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
 			</div><!-- ENDIF -->
 			<!-- IF HTML_SIDEBAR_1 -->

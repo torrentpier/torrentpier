@@ -28,15 +28,15 @@
 <tr>
 	<td><h4>{L_FORUMS_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPLAIN}</h6></td>
 	<td>
-		<label><input type="radio" name="board_disable" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="board_disable" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="board_disable" value="1" <!-- IF DISABLE_BOARD -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="board_disable" value="0" <!-- IF not DISABLE_BOARD -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_AUTOLOGIN}</h4><h6>{L_ALLOW_AUTOLOGIN_EXPLAIN}</h6></td>
 	<td>
-		<label><input type="radio" name="allow_autologin" value="1" <!-- IF ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_autologin" value="0" <!-- IF not ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="allow_autologin" value="1" <!-- IF ALLOW_AUTOLOGIN -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_autologin" value="0" <!-- IF not ALLOW_AUTOLOGIN -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -96,8 +96,8 @@
 <tr>
 	<td><h4>{L_ENABLE_PRUNE}</h4></td>
 	<td>
-		<label><input type="radio" name="prune_enable" value="1" <!-- IF PRUNE_ENABLE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="prune_enable" value="0" <!-- IF not PRUNE_ENABLE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="prune_enable" value="1" <!-- IF PRUNE_ENABLE -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="prune_enable" value="0" <!-- IF not PRUNE_ENABLE -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -110,15 +110,15 @@
 <tr>
 	<td><h4>{L_ALLOW_BBCODE}</h4></td>
 	<td>
-		<label><input type="radio" name="allow_bbcode" value="1" <!-- IF ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_bbcode" value="0" <!-- IF not ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="allow_bbcode" value="1" <!-- IF ALLOW_BBCODE -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_bbcode" value="0" <!-- IF not ALLOW_BBCODE -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_SMILIES}</h4></td>
 	<td>
-		<label><input type="radio" name="allow_smilies" value="1" <!-- IF ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_smilies" value="0" <!-- IF not ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="allow_smilies" value="1" <!-- IF ALLOW_SMILIES -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_smilies" value="0" <!-- IF not ALLOW_SMILIES -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -128,8 +128,8 @@
 <tr>
 	<td><h4>{L_ALLOW_SIG}</h4></td>
 	<td>
-		<label><input type="radio" name="allow_sig" value="1" <!-- IF ALLOW_SIG -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_sig" value="0" <!-- IF not ALLOW_SIG -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="allow_sig" value="1" <!-- IF ALLOW_SIG -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_sig" value="0" <!-- IF not ALLOW_SIG -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -139,8 +139,8 @@
 <tr>
 	<td><h4>{L_ALLOW_NAME_CHANGE}</h4></td>
 	<td>
-		<label><input type="radio" name="allow_namechange" value="1" <!-- IF ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_namechange" value="0" <!-- IF not ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="allow_namechange" value="1" <!-- IF ALLOW_NAMECHANGE -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_namechange" value="0" <!-- IF not ALLOW_NAMECHANGE -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <!-- ENDIF / CONFIG -->
@@ -167,29 +167,29 @@
 <tr>
 	<td><h4>{L_MAGNET}</h4></td>
 	<td>
-		<label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="magnet_links_enabled" value="0" <!-- IF not MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="magnet_links_enabled" value="0" <!-- IF not MAGNET_LINKS_ENABLED -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_GENDER}</h4></td>
 	<td>
-		<label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="gender" value="0" <!-- IF not GENDER -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gender" value="0" <!-- IF not GENDER -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_CALLSEED}</h4></td>
 	<td>
-		<label><input type="radio" name="callseed" value="1" <!-- IF CALLSEED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="callseed" value="0" <!-- IF not CALLSEED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="callseed" value="1" <!-- IF CALLSEED -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="callseed" value="0" <!-- IF not CALLSEED -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_TRACKER_STATS}</h4></td>
 	<td>
-		<label><input type="radio" name="tor_stats" value="1" <!-- IF TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="tor_stats" value="0" <!-- IF not TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="tor_stats" value="1" <!-- IF TOR_STATS -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="tor_stats" value="0" <!-- IF not TOR_STATS -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
@@ -199,22 +199,29 @@
 <tr>
 	<td><h4>{L_SHOW_MOD_HOME_PAGE}</h4></td>
 	<td>
-		<label><input type="radio" name="show_mod_index" value="1" <!-- IF SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="show_mod_index" value="0" <!-- IF not SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="show_mod_index" value="1" <!-- IF SHOW_MOD_INDEX -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_mod_index" value="0" <!-- IF not SHOW_MOD_INDEX -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
+</tr>
+<tr>
+    <td><h4>{L_SHOW_BOARD_STARTED_INDEX}</h4></td>
+    <td>
+        <label><input type="radio" name="show_board_start_index" value="1" <!-- IF SHOW_BOARD_START_INDEX -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+        <label><input type="radio" name="show_board_start_index" value="0" <!-- IF not SHOW_BOARD_START_INDEX -->checked<!-- ENDIF --> />{L_DISABLED}</label>
+    </td>
 </tr>
 <tr>
 	<td>{L_PREMOD_HELP}</td>
 	<td>
-		<label><input type="radio" name="premod" value="1" <!-- IF PREMOD -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="premod" value="0" <!-- IF not PREMOD -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="premod" value="1" <!-- IF PREMOD -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="premod" value="0" <!-- IF not PREMOD -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td>{L_TOR_COMMENT}</td>
 	<td>
-		<label><input type="radio" name="tor_comment" value="1" <!-- IF TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="tor_comment" value="0" <!-- IF not TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="tor_comment" value="1" <!-- IF TOR_COMMENT -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="tor_comment" value="0" <!-- IF not TOR_COMMENT -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 
@@ -224,8 +231,8 @@
 <tr>
 	<td><h4>{L_LATEST_NEWS}</h4></td>
 	<td>
-		<label><input type="radio" name="show_latest_news" value="1" <!-- IF SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="show_latest_news" value="0" <!-- IF not SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="show_latest_news" value="1" <!-- IF SHOW_LATEST_NEWS -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_latest_news" value="0" <!-- IF not SHOW_LATEST_NEWS -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
@@ -247,8 +254,8 @@
 <tr>
 	<td><h4>{L_NETWORK_NEWS}</h4></td>
 	<td>
-		<label><input type="radio" name="show_network_news" value="1" <!-- IF SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="show_network_news" value="0" <!-- IF not SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="show_network_news" value="1" <!-- IF SHOW_NETWORK_NEWS -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_network_news" value="0" <!-- IF not SHOW_NETWORK_NEWS -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
@@ -270,8 +277,8 @@
 <tr>
 	<td><h4>{L_BIRTHDAY_ENABLE}</h4></td>
 	<td>
-		<label><input type="radio" name="birthday_enabled" value="1" <!-- IF BIRTHDAY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="birthday_enabled" value="0" <!-- IF not BIRTHDAY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="birthday_enabled" value="1" <!-- IF BIRTHDAY_ENABLED -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="birthday_enabled" value="0" <!-- IF not BIRTHDAY_ENABLED -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
@@ -293,8 +300,8 @@
 <tr>
 	<td><h4>{L_SEED_BONUS}</h4></td>
 	<td>
-		<label><input type="radio" name="seed_bonus_enabled" value="1" <!-- IF SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="seed_bonus_enabled" value="0" <!-- IF not SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+		<label><input type="radio" name="seed_bonus_enabled" value="1" <!-- IF SEED_BONUS_ENABLED -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="seed_bonus_enabled" value="0" <!-- IF not SEED_BONUS_ENABLED -->checked<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr class="row3 med">

@@ -30,49 +30,82 @@ use Exception;
 class Dev
 {
     /**
+     * Environment type
+     *
+     * @var string|null
+     */
+    public static ?string $envType = null;
+
+    /**
      * Base debug functionality init
      *
      * @return void
      */
     public static function initDebug(): void
     {
+        self::$envType = env('APP_ENV', 'local');
+
+        if (self::$envType === 'production') {
+            self::getBugsnag();
+        } else {
+            self::getWhoops();
+        }
+    }
+
+    /**
+     * Bugsnag debug driver
+     *
+     * @return void
+     */
+    private static function getBugsnag(): void
+    {
         global $bb_cfg;
 
-        if ($bb_cfg['bugsnag']['enabled']) {
-            if (env('APP_ENV', 'production') !== 'local') {
-                $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
-                Handler::register($bugsnag);
-            }
-        } else {
-            if (DBG_USER) {
-                $whoops = new Run;
-
-                /**
-                 * Show errors on page
-                 */
-                $whoops->pushHandler(new PrettyPageHandler);
-
-                /**
-                 * Show log in browser console
-                 */
-                $loggingInConsole = new PlainTextHandler();
-                $loggingInConsole->loggerOnly(true);
-                $loggingInConsole->setLogger((new Logger(env('APP_NAME', 'TorrentPier'), [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
-                $whoops->pushHandler($loggingInConsole);
-
-                /**
-                 * Log errors in file
-                 */
-                if (ini_get('log_errors') == 1) {
-                    $loggingInFile = new PlainTextHandler();
-                    $loggingInFile->loggerOnly(true);
-                    $loggingInFile->setLogger((new Logger(env('APP_NAME', 'TorrentPier'), [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
-                    $whoops->pushHandler($loggingInFile);
-                }
-
-                $whoops->register();
-            }
+        if (!$bb_cfg['bugsnag']['enabled']) {
+            return;
         }
+
+        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+        Handler::register($bugsnag);
+    }
+
+    /**
+     * Whoops debug driver
+     *
+     * @return void
+     */
+    private static function getWhoops(): void
+    {
+        if (!APP_DEBUG) {
+            return;
+        }
+
+        $whoops = new Run;
+
+        /**
+         * Show errors on page
+         */
+        $whoops->pushHandler(new PrettyPageHandler);
+
+        /**
+         * Show log in browser console
+         */
+        $loggingInConsole = new PlainTextHandler();
+        $loggingInConsole->loggerOnly(true);
+        $loggingInConsole->setLogger((new Logger(APP_NAME, [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
+        $whoops->pushHandler($loggingInConsole);
+
+        /**
+         * Log errors in file
+         */
+        if (ini_get('log_errors') == 1) {
+            $loggingInFile = new PlainTextHandler();
+            $loggingInFile->loggerOnly(true);
+            $loggingInFile->setLogger((new Logger(APP_NAME, [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
+            $whoops->pushHandler($loggingInFile);
+        }
+
+        $whoops->register();
     }
 
     /**
@@ -88,21 +121,21 @@ class Dev
         $log = '';
 
         foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj) ? self::get_sql_log_html($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+            $log .= !empty($db_obj->dbg) ? self::get_sql_log_html($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {
-            if (!empty($cache_obj->db)) {
+            if (!empty($cache_obj->db->dbg)) {
                 $log .= self::get_sql_log_html($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
-            } elseif (!empty($cache_obj->engine)) {
+            } elseif (!empty($cache_obj->dbg)) {
                 $log .= self::get_sql_log_html($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
             }
         }
 
         if (!empty($datastore->db->dbg)) {
-            $log .= self::get_sql_log_html($datastore->db, 'cache: datastore [' . $datastore->engine . ']');
+            $log .= self::get_sql_log_html($datastore->db, "cache: datastore [{$datastore->db->engine}]");
         } elseif (!empty($datastore->dbg)) {
-            $log .= self::get_sql_log_html($datastore, 'cache: datastore [' . $datastore->engine . ']');
+            $log .= self::get_sql_log_html($datastore, "cache: datastore [{$datastore->engine}]");
         }
 
         return $log;
@@ -115,7 +148,7 @@ class Dev
      */
     public static function sql_dbg_enabled(): bool
     {
-        return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
+        return (SQL_DEBUG && APP_DEBUG && !empty($_COOKIE['sql_log']));
     }
 
     /**
@@ -150,8 +183,6 @@ class Dev
      */
     private static function get_sql_log_html(object $db_obj, string $log_name): string
     {
-        global $lang;
-
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {

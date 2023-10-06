@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Θέσεις';
 $lang['POSTED'] = 'Δημοσιεύτηκε';
 $lang['USERNAME'] = 'Όνομα χρήστη';
 $lang['PASSWORD'] = 'Κωδικό πρόσβασης';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'ΜΜ';
 $lang['AUTHOR'] = 'Συγγραφέας';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Ενεργοποιημένη';
 $lang['DISABLED'] = 'Με αναπηρία';
 $lang['ERROR'] = 'Σφάλμα';
 $lang['SELECT_ACTION'] = 'Επιλέξτε δράση';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Την επόμενη';
 $lang['PREVIOUS_PAGE'] = 'Προηγούμενο';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Κάντε κλικ %sHere%s για να επισ
 $lang['CLICK_RETURN_GROUP'] = 'Κάντε κλικ %sHere%s να επιστρέψει στην ομάδα πληροφορίες';
 
 $lang['ADMIN_PANEL'] = 'Πηγαίνετε στο Πίνακα Διαχείρισης';
-$lang['ALL_CACHE'] = 'Όλα τα cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache έχει εκκαθαριστεί';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Πρότυπο cache έχει εκκαθαριστεί';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore έχει εκκαθαριστεί';
 $lang['BOARD_DISABLE'] = 'Συγγνώμη, αυτό το φόρουμ είναι απενεργοποιημένη. Προσπαθήστε να επανέλθω αργότερα';
 $lang['BOARD_DISABLE_CRON'] = 'Το φόρουμ είναι κάτω για συντήρηση. Προσπαθήστε να επανέλθω αργότερα';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Θα <b>can</b> ψηφίσετε στις δημοσ�
 $lang['RULES_VOTE_CANNOT'] = 'Θα <b>cannot</b> ψηφίσετε στις δημοσκοπήσεις σε αυτό το forum';
 $lang['RULES_MODERATE'] = 'Θα <b>can</b> μέτρια αυτό το φόρουμ';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Δεν υπάρχουν αναρτήσεις σε αυτό το φόρουμ.<br />Click στο <b>Post Νέα Topic</b> σύνδεσμο σε αυτή τη σελίδα για να καταχωρήσετε ένα.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Προβάλετε το θέμα';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Προσωπικά Μηνύματα';
 $lang['NO_NEW_PM'] = 'νέα μηνύματα';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('νέο μήνυμα', 'νέα μηνύματα');
+$lang['NEW_PMS_DECLENSION'] = ['νέο μήνυμα', 'νέα μηνύματα'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('μη αναγνωσμένα', 'μη αναγνωσμένα');
+$lang['UNREAD_PMS_DECLENSION'] = ['μη αναγνωσμένα', 'μη αναγνωσμένα'];
 
 $lang['UNREAD_MESSAGE'] = 'Μη αναγνωσμένο μήνυμα';
 $lang['READ_MESSAGE'] = 'Διαβάστε το μήνυμα';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Στέλνει ένα e-mail όταν κάπο
 
 $lang['BOARD_LANG'] = 'Πίνακας γλώσσα';
 $lang['GENDER'] = 'Το φύλο';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Άγνωστο',
     1 => 'Αρσενικό',
     2 => 'Θηλυκό'
-);
+];
 $lang['MODULE_OFF'] = 'Μονάδα είναι απενεργοποιημένη!';
 
 $lang['BIRTHDAY'] = 'Γενέθλια';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Επαναφορά autologin κλειδί';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'περιλαμβάνει όλα τα μέρη που έχεις επισκεφθεί το φόρουμ ενεργοποιημένο το auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Εμφανίζει ένα μικρό γραφικό εικόνα παρακάτω τα στοιχεία σας σε θέσεις. Μόνο μια εικόνα μπορεί να εμφανίζεται σε μια στιγμή, το πλάτος μπορεί να είναι μεγαλύτερη από %d pixels, ύψος όχι μεγαλύτερο από %d pixels και το μέγεθος του αρχείου και όχι περισσότερο από %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Διαγραφή avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar επιλογή ελέγχου με αναπηρία για παραβίαση <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Ανεβάστε το avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Αίτηση για να ενταχθούν στην �
 $lang['GROUP_APPROVED'] = 'Το αίτημά σας έχει εγκριθεί.';
 $lang['GROUP_ADDED'] = 'Που έχουν προστεθεί σε αυτή την ομάδα μελών.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Είστε ήδη μέλος αυτής της ομάδας';
-$lang['USER_IS_MEMBER_GROUP'] = 'Ο χρήστης είναι ήδη μέλος αυτής της ομάδας';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Ενημερώθηκε επιτυχώς ομάδα.';
 $lang['EFFECTIVE_DATE'] = 'Αποτελεσματική Ημερομηνία';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Το Συνημμένο είναι πολύ �
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Το Συνημμένο είναι πολύ μεγάλο.<br />Maximum Ανεβάστε Μέγεθος: %d MB.<br />Please να σημειώσετε ότι αυτό το Μέγεθος ορίζεται σε php.ini, αυτό σημαίνει ότι είναι σύνολο από PHP και το Συνημμένο Mod δεν μπορείτε να προσπεράσετε αυτή την τιμή.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Η Επέκταση %s δεν επιτρέπεται'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Δεν επιτρέπεται να δημοσιεύσετε τα Αρχεία με την Επέκταση %s μέσα σε αυτό το Φόρουμ'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Το Συνημμένο είναι πολύ μεγάλο.<br />Max Μέγεθος: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Συγγνώμη, αλλά το μέγιστο μέγεθος αρχείου για όλα τα Συνημμένα. Παρακαλείστε να επικοινωνήσετε με το Διαχειριστή του συστήματος, εάν έχετε ερωτήσεις.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Κατάσχεση δεν μπορεί να προστεθεί, από το max. αριθμός %d Συνημμένα σε αυτό το post επιτεύχθηκε'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Το Συνημμένο/Εικόνας πρέπει να είναι μικρότερη από %d εικονοστοιχεία πλάτος και %d εικονοκυττάρων υψηλά';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Σπόρων προς σπορά';
 $lang['LEECHING'] = 'Βδέλλα';
 $lang['IS_REGISTERED'] = 'Εγγεγραμμένοι';
 $lang['MAGNET'] = 'Μαγνήτης';
-$lang['DC_MAGNET'] = 'Αναζήτηση στο DC++ από το όνομα αρχείου';
-$lang['DC_MAGNET_EXT'] = 'Αναζήτηση στο DC++ κατ \' επέκταση';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Κατάσταση';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Επιλέξτε κατάσταση';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Δεν έχετε επιλέξει την κατάσταση.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Όλες τις καταστάσεις';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'δεν ελέγχεται',
     TOR_CLOSED => 'κλειστά',
     TOR_APPROVED => 'ελέγχονται',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'προσωρινή',
     TOR_PREMOD => 'προ-μέτρο',
     TOR_REPLENISH => 'αναπληρώ',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Μια τέτοια κατάσταση δεν υπάρχει!';
 $lang['TORRENT_FAILED'] = 'Διανομή δεν βρέθηκε!';
 $lang['TOR_STATUS_DUB'] = 'Διανομή έχει το ίδιο καθεστώς';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Πληκτρολογήστε το torrent με επ�
 $lang['DEL_TORRENT'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε το torrent;';
 $lang['DEL_MOVE_TORRENT'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε και να μετακινήσετε το θέμα;';
 $lang['UNEXECUTED_RELEASE'] = 'Έχετε μια άμορφη απελευθέρωση πριν από τη δημιουργία ένα νέο φτιάξει το αδιαμόρφωτο!';
-$lang['STATUS_DOES_EXIST'] = 'Μια τέτοια κατάσταση δεν υπάρχει. ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Η αλλαγή του καθεστώτος διανομής - %s';
@@ -1154,6 +1153,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Ακύρωσέ το ασήμι';
 $lang['GOLD_STATUS'] = 'ΧΡΥΣΌ TORRENT! ΚΑΤΕΒΆΣΤΕ ΚΥΚΛΟΦΟΡΊΑΣ ΔΕΝ ΛΑΜΒΆΝΕΙ ΥΠΌΨΗ!';
 $lang['SILVER_STATUS'] = 'ΑΣΗΜΈΝΙΟ TORRENT! ΚΑΤΕΒΆΣΤΕ ΚΥΚΛΟΦΟΡΊΑΣ ΕΝ ΜΈΡΕΙ ΝΑ ΘΕΩΡΗΘΕΊ!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Αναζήτηση στο Φόρουμ';
 $lang['SELECT_CAT'] = 'Επιλέξτε κατηγορία';
 $lang['GO_TO_SECTION'] = 'Goto τμήμα';
@@ -1352,17 +1352,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('απάντηση', 'απαντήσεις');
-$lang['DECLENSION']['TIMES'] = array('ώρα', 'φορές');
+$lang['DECLENSION']['REPLIES'] = ['απάντηση', 'απαντήσεις'];
+$lang['DECLENSION']['TIMES'] = ['ώρα', 'φορές'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('δεύτερο', 'δευτερόλεπτα'),
-    'minutes' => array('λεπτό', 'λεπτά'),
-    'hours' => array('ώρα', 'ώρες'),
-    'mday' => array('ημέρα', 'ημέρες'),
-    'mon' => array('μήνα', 'μήνες'),
-    'year' => array('έτος', 'χρόνια'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['δεύτερο', 'δευτερόλεπτα'],
+    'minutes' => ['λεπτό', 'λεπτά'],
+    'hours' => ['ώρα', 'ώρες'],
+    'mday' => ['ημέρα', 'ημέρες'],
+    'mon' => ['μήνα', 'μήνες'],
+    'year' => ['έτος', 'χρόνια'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'Το πεδίο για τον κωδικό πρόσβα�
 $lang['CHOOSE_PASS_ERR'] = 'Καταχωρούνται οι κωδικοί πρόσβασης δεν ταιριάζουν';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Ο κωδικός σας πρέπει να είναι τουλάχιστον %d χαρακτήρες';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Ο κωδικός σας πρέπει να είναι όχι περισσότερο από $d χαρακτήρες';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Κωδικοί πρόσβασης ταιριάζουν';
 $lang['CHOOSE_PASS_REG_OK'] = 'Κωδικοί πρόσβασης ταιριάζουν, μπορείτε να προχωρήσετε με την εγγραφή';
 $lang['CHOOSE_PASS_FAILED'] = 'Για να αλλάξετε τον κωδικό πρόσβασης, θα πρέπει να καθορίσετε σωστά τον τρέχοντα κωδικό πρόσβασης';
@@ -1481,6 +1485,9 @@ $lang['OFF'] = 'από';
 $lang['MEMORY'] = 'Μεμ: ';
 $lang['QUERIES'] = 'ερωτήματα';
 $lang['LIMIT'] = 'Όριο:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Κατεβάστε το δωρεάν και με τη μέγιστη ταχύτητα!';
@@ -1508,6 +1515,8 @@ $lang['BOLD'] = 'Κείμενο με έντονη γραφή: [b]text[/b] (Ctrl+
 $lang['ITALIC'] = 'Πλάγια γραφή: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Υπογράμμιση κειμένου: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Κεραυνός κείμενο: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Παραθέτω το κείμενο: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Εισαγωγή εικόνας: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1600,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker ρυθμίσεις';
 $lang['RELEASE_TEMPLATES'] = 'Απελευθέρωση Πρότυπα';
 $lang['ACTIONS_LOG'] = 'Έκθεση σχετικά με τη δράση';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Συγγνώμη, ο browser σας δεν φαίνεται να υποστηρίζουν τα πλαίσια';
-$lang['IDX_CLEAR_CACHE'] = 'Clear Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Πρότυπα';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Επίπεδα χρηστών';
-$lang['IDX_SYNCHRONIZE'] = 'Συγχρονισμός:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Θέματα';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Από το χρήστη τις θέσεις μετράνε';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum Στατιστικά';
@@ -1637,8 +1634,9 @@ $lang['GZIP_COMPRESSION'] = 'Συμπίεση Gzip';
 $lang['NOT_AVAILABLE'] = 'Δεν είναι διαθέσιμη';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Πρότυπα';
+$lang['DATASTORE'] = 'Datastore';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Επίπεδα χρηστών';
@@ -1719,6 +1717,8 @@ $lang['USER_AUTH_UPDATED'] = 'Τα δικαιώματα των χρηστών έ
 $lang['GROUP_AUTH_UPDATED'] = 'Δικαιώματα της ομάδας έχουν ενημερωθεί';
 
 $lang['AUTH_UPDATED'] = 'Δικαιώματα έχουν ενημερωθεί';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Κάντε κλικ %sHere%s να επιστρέψετε τα Δικαιώματα των Χρηστών';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Κάντε κλικ %sHere%s για να επιστρέψετε Δικαιώματα της Ομάδας';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Κάντε κλικ %sHere%s για να επιστρέψετε στο Φόρουμ Δικαιώματα';
@@ -2058,6 +2058,7 @@ $lang['NOAVATAR'] = 'Δεν avatar';
 $lang['TRACKER_STATS'] = 'Τα στατιστικά στοιχεία του tracker';
 $lang['WHOIS_INFO'] = 'Πληροφορίες σχετικά με τη διεύθυνση IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Εμφάνιση στο συντονιστές της index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Προ-moderation</h4> <h6>If δεν έχετε διανομές με το καθεστώς των β, #, ή T σε αυτή την ενότητα, συμπεριλαμβανομένης και υποενότητες, η διανομή θα λάβετε αυτόματα αυτό status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Σχόλιο σχετικά με την κατάσταση μιας διανομής</h4> <h6>Το σχόλιο σάς επιτρέπει να επισημάνετε τα σφάλματα που έγιναν στον εκδότη. Εάν οι καταστάσεις είναι ελλιπείς, μια φόρμα απάντησης έκδοσης είναι διαθέσιμη στον διαχειριστή έκδοσης για τη διόρθωση της έκδοσης</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding σπόρων μπόνους </h4> <h6> Αριθμός των διανομών που δίδονται από το χρήστη και το μέγεθος των μπόνους για τους (φόρτιση φορές την ώρα) </h6>';
@@ -2258,13 +2259,6 @@ $lang['RETURN_CONFIG'] = '%sReturn να Configuration%s';
 $lang['CONFIG_UPD'] = 'Διαμόρφωση Ενημερώθηκε Με Επιτυχία';
 $lang['SET_DEFAULTS'] = 'Επαναφορά προεπιλογών';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Φόρουμ ρυθμίσεις';
-$lang['TRACKER_SETTINGS'] = 'Tracker ρυθμίσεις';
-
-$lang['CHANGES_DISABLED'] = 'Αλλαγές με αναπηρία (βλ. <b>$bb_cfg[\'tracker\']</b> σε config.php)';
-
 $lang['OFF_TRACKER'] = 'Απενεργοποίηση tracker';
 $lang['OFF_REASON'] = 'Απενεργοποίηση λόγο';
 $lang['OFF_REASON_EXPL'] = 'αυτό το μήνυμα θα σταλεί στον πελάτη, όταν ο tracker είναι απενεργοποιημένη';
@@ -2409,14 +2403,14 @@ $lang['REPAIR_CRON'] = 'Επισκευή Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit δουλειά';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Προσθέστε δουλειά';
 $lang['CRON_SCRIPT_EXPL'] = 'το όνομα του script από το "includes/cron/θέσεις εργασίας/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Επιλέξτε έναρξη',
     'hourly' => 'ωριαία',
     'daily' => 'καθημερινά',
     'weekly' => 'εβδομαδιαία',
     'monthly' => 'μηνιαία',
     'interval' => 'διάστημα'
-);
+];
 $lang['NOSELECT'] = 'Όχι, επιλέξτε';
 $lang['RUN_DAY'] = 'Εκτελέστε την ημέρα';
 $lang['RUN_DAY_EXPL'] = 'την ημέρα, όταν αυτή η δουλειά να τρέξει';
@@ -2543,17 +2537,22 @@ $lang['CALLSEED_MSG_OK'] = 'Το μήνυμα έχει σταλεί σε όλο�
 $lang['CALLSEED_MSG_SPAM'] = 'Το αίτημα έχει ήδη μια φορά σταλεί με επιτυχία (Ίσως όχι εσείς)<br /><br />The επόμενη ευκαιρία για να στείλετε μια αίτηση για να <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Το θέμα δεν χρειάζονται βοήθεια (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Θέμα:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Θέμα:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Θέμα:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Θέμα:<br /> <b>opened</b>',
     'mod_topic_split' => 'Θέμα:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Χρήστης:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Χρήστης:<br /> <b>ban</b>',
     'adm_user_unban' => 'Χρήστης:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Όλες οι δράσεις';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Δράσεις Καταγραφής: επιλογές Αναζήτησης';
@@ -2692,28 +2691,28 @@ $lang['MC_LEGEND'] = 'Πληκτρολογήστε ένα σχόλιο';
 $lang['MC_FAQ'] = 'Τέθηκε το κείμενο θα εμφανιστεί κάτω από αυτό το μήνυμα';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s στο μήνυμά σας";
 $lang['MC_COMMENT_PM_MSG'] = "Γεια σας, [b]%s[/b]\nModerator αριστερά στο μήνυμά σας [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Διαγραφή σχολίου',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Σχόλιο από %s',
         'type' => 'Σχόλιο',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Πληροφορίες από %s',
         'type' => 'Πληροφορίες',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Προειδοποίηση από %s',
         'type' => 'Προειδοποίηση',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Παραβίαση από %s',
         'type' => 'Παραβίαση',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Διαχείριση sitemap';
@@ -2754,7 +2753,7 @@ $lang['HASH_NOT_FOUND'] = 'Απελευθέρωση με hash %s δεν βρέθ
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Το κείμενο αυτής της σελίδας υποβάλλεται σε επεξεργασία στη διεύθυνση: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Αυτή η γραμμή μπορεί να δει μόνο διαχειριστές.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Σε αυτή τη σελίδα, μπορείτε να καθορίσετε το κείμενο των βασικών κανόνων του πόρου εμφανίζεται στους χρήστες.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'ανενεργών χρηστών σε 30 μέρες',
     1 => 'ανενεργοί χρήστες για 90 ημέρες',
     2 => 'μέσου μεγέθους, οι διανομές των ιχνηλατών (πολλά megabytes)',
@@ -2763,7 +2762,7 @@ $lang['TR_STATS'] = array(
     5 => 'πόσα χέρια που σπέρνουν περισσότερα από 5 σπόρους',
     6 => 'πόσοι από εμάς uploaders (αυτοί που γεμίζουν τουλάχιστον το 1 χέρι)',
     7 => 'πόσες uploaders τις τελευταίες 30 ημέρες',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Δημοσκόπηση ενεργοποιημένη';
 $lang['NEW_POLL_END'] = 'Δημοσκόπηση ολοκληρώθηκε';
@@ -2787,13 +2786,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Κάθε γραμμή αντιστοιχεί σε
 $lang['OLD_BROWSER'] = 'Χρησιμοποιείτε ένα παλιό πρόγραμμα περιήγησης. Η ιστοσελίδα δεν θα εμφανίζονται σωστά.';
 $lang['GO_BACK'] = 'Πάμε πίσω';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Ανεβάστε το αρχείο σφάλμα';
 $lang['UPLOAD_ERROR_SIZE'] = 'Το μεταφορτωμένο αρχείο υπερβαίνει το μέγιστο μέγεθος του %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Μη έγκυρος τύπος αρχείου εικόνας';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Διαστάσεις εικόνας πρέπει να υπερβαίνει το μέγιστο επιτρεπόμενο %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Το αρχείο που έχει αποσταλεί δεν είναι μια εικόνα';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Επέκταση %s για τις λήψεις δεν επιτρέπεται';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'έχετε υπερβεί το μέγιστο μέγεθος αρχείου για το διακομιστή',
     UPLOAD_ERR_FORM_SIZE => 'έχετε υπερβεί το μέγιστο μέγεθος αποστολής αρχείου',
     UPLOAD_ERR_PARTIAL => 'το αρχείο ήταν μερικώς κατεβάσει',
@@ -2801,7 +2801,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'προσωρινό κατάλογο δεν βρέθηκε',
     UPLOAD_ERR_CANT_WRITE => 'σφάλμα εγγραφής',
     UPLOAD_ERR_EXTENSION => 'ανεβάστε σταματήσει κατ \' επέκταση',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Ελέγξτε ότι δεν είστε ρομπότ';

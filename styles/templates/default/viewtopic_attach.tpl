@@ -35,7 +35,7 @@
 	</p>
 	<p class="attach_link">
 		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><b>{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE})</span>
+        <span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE}, {L_DOWNLOADED}: {postrow.attach.cat_thumb_images.DOWNLOAD_COUNT})</span>
 	</p>
 	<!-- IF postrow.attach.cat_thumb_images.COMMENT -->
 	<p class="attach_comment med">
@@ -111,7 +111,7 @@
 		}
 		</script>
 			<select name="tor_action" id="tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', true)">
-				<option value="" selected="selected" class="select-action">&raquo; {L_SELECT_ACTION}</option>
+				<option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
 			</select>
@@ -144,23 +144,20 @@
 
 <table class="attach bordered med">
 	<tr class="row3">
-		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF postrow.attach.tor_reged.TOR_FROZEN == 0 --><!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --><!-- ENDIF --></th>
+		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
-	<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $bb_cfg['tracker']['gold_silver_enabled'] -->
-	<tr class="row4">
-		<th colspan="3" class="row7"><img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
-	</tr>
-	<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $bb_cfg['tracker']['gold_silver_enabled'] -->
-	<tr class="row4">
-		<th colspan="3" class="row7"><img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
-	</tr>
-	<!-- ENDIF -->
+    <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
+    <tr class="row4">
+        <th colspan="3" class="row7">{postrow.attach.tor_reged.TOR_TYPE}&nbsp;<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->{L_SILVER_STATUS}<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->{L_GOLD_STATUS}<!-- ENDIF -->&nbsp;{postrow.attach.tor_reged.TOR_TYPE}</th>
+    </tr>
+    <!-- ENDIF -->
 	<tr class="row1">
 		<td width="15%">{L_TORRENT}:</td>
 		<td width="70%">
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
-			&#0183; {postrow.attach.tor_reged.HASH}
+            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: {postrow.attach.tor_reged.HASH}<!-- ENDIF -->
+            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: {postrow.attach.tor_reged.HASH_V2}<!-- ENDIF -->
 		</td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
 			<!-- IF postrow.attach.tor_reged.TOR_FROZEN -->
@@ -217,12 +214,17 @@
 	</tr>
 	<tr class="row1">
 		<td>{L_COMPLETED}:</td>
-		<td><span title="{L_DOWNLOADED}: {postrow.attach.tor_reged.DOWNLOAD_COUNT}">{postrow.attach.tor_reged.COMPLETED}</span></td>
+		<td><span title="Полных скачиваний: {postrow.attach.tor_reged.COMPLETED}">{postrow.attach.tor_reged.DOWNLOAD_COUNT}</span></td>
 	</tr>
 	<tr class="row1">
 		<td>{L_SIZE}:</td>
 		<td>{postrow.attach.tor_reged.TORRENT_SIZE}</td>
 	</tr>
+    <!-- BEGIN comment -->
+    <tr class="row1 tCenter">
+        <td colspan="3">{postrow.attach.tor_reged.comment.COMMENT}</td>
+    </tr>
+    <!-- END comment -->
 	<tr class="row3 tCenter">
 		<td colspan="3">
 		<script type="text/javascript">
@@ -243,7 +245,7 @@
 		}
 		</script>
 			<select name="tor_action" id="tor-select-{postrow.attach.tor_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', true)">
-				<option value="" selected="selected" class="select-action">&raquo; {L_SELECT_ACTION}</option>
+				<option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
 				<!-- IF AUTH_MOD -->
@@ -318,7 +320,7 @@ $('#tor-filelist-btn').click(function(){
 });
 </script>
 
-<style type="text/css">
+<style>
 #tor-fl-wrap {
 	margin: 12px auto 0; width: 95%;
 }
@@ -329,6 +331,7 @@ $('#tor-filelist-btn').click(function(){
 }
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
+#tor-filelist p { color: #7C7C7C; text-decoration: none; }
 #tor-filelist .b > s { color: #800000; }
 #tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('styles/images/folder.gif') no-repeat 3px 50%;}
 #tor-filelist ul li span { padding-left: 20px; background: transparent url('styles/images/page.gif') no-repeat 3px 50%;}
@@ -344,9 +347,7 @@ $('#tor-filelist-btn').click(function(){
 	<tr>
 		<td>
 			<div id="tor-fl-treecontrol">
-				<a href="#">{L_COLLAPSE}</a>&middot;
-				<a href="#">{L_EXPAND}</a>&middot;
-				<a href="#">{L_SWITCH}</a>
+				<a href="#">{L_COLLAPSE}</a>&middot;<a href="#">{L_EXPAND}</a>&middot;<a href="#">{L_SWITCH}</a>
 			</div>
 		</td>
 	</tr>

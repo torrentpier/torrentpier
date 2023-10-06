@@ -8,23 +8,29 @@
  */
 
 define('BB_SCRIPT', 'index');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
-$page_cfg['load_tpl_vars'] = array(
-    'post_icons',
-);
+$page_cfg['load_tpl_vars'] = [
+    'post_icons'
+];
 
+// Show last topic
 $show_last_topic = true;
 $last_topic_max_len = 28;
+
+// Show online stats
 $show_online_users = true;
+
+// Show subforums
 $show_subforums = true;
 
-$datastore->enqueue(array(
+$datastore->enqueue([
     'stats',
     'moderators',
-    'cat_forums',
-));
+    'cat_forums'
+]);
+
 if ($bb_cfg['show_latest_news']) {
     $datastore->enqueue('latest_news');
 }
@@ -115,17 +121,17 @@ $sql = "
 	ORDER BY c.cat_order, f.forum_order
 ';
 
-$replace_in_parent = array(
+$replace_in_parent = [
     'last_post_id',
     'last_post_time',
     'last_post_user_id',
     'last_post_username',
     'last_post_user_rank',
     'last_topic_title',
-    'last_topic_id',
-);
+    'last_topic_id'
+];
 
-$cache_name = 'index_sql_' . md5($sql);
+$cache_name = 'index_sql_' . hash('xxh128', $sql);
 if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
     $cat_forums = [];
     foreach (DB()->fetch_rowset($sql) as $row) {
@@ -162,7 +168,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
 }
 
 // Obtain list of moderators
-$moderators = array();
+$moderators = [];
 if (!$mod = $datastore->get('moderators')) {
     $datastore->update('moderators');
     $mod = $datastore->get('moderators');
@@ -187,25 +193,23 @@ $datastore->rm('moderators');
 // Build index page
 $forums_count = 0;
 foreach ($cat_forums as $cid => $c) {
-    $template->assign_block_vars('h_c', array(
+    $template->assign_block_vars('h_c', [
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
         'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
-    ));
+    ]);
 
-    $template->assign_vars(array(
-        'H_C_AL_MESS' => $hide_cat_opt && !$showhide,
-    ));
+    $template->assign_vars(['H_C_AL_MESS' => $hide_cat_opt && !$showhide]);
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
         continue;
     }
 
-    $template->assign_block_vars('c', array(
+    $template->assign_block_vars('c', [
         'CAT_ID' => $cid,
         'CAT_TITLE' => $cat_title_html[$cid],
         'U_VIEWCAT' => CAT_URL . $cid,
-    ));
+    ]);
 
     foreach ($c['f'] as $fid => $f) {
         if (!$fname_html =& $forum_name_html[$fid]) {
@@ -222,39 +226,39 @@ foreach ($cat_forums as $cid => $c) {
         }
 
         if ($is_sf) {
-            $template->assign_block_vars('c.f.sf', array(
+            $template->assign_block_vars('c.f.sf', [
                 'SF_ID' => $fid,
                 'SF_NAME' => $fname_html,
-                'SF_NEW' => $new ? ' new' : '',
-            ));
+                'SF_NEW' => $new ? ' new' : ''
+            ]);
             continue;
         }
 
-        $template->assign_block_vars('c.f', array(
+        $template->assign_block_vars('c.f', [
             'FORUM_FOLDER_IMG' => $folder_image,
             'FORUM_ID' => $fid,
             'FORUM_NAME' => $fname_html,
             'FORUM_DESC' => $f['forum_desc'],
-            'POSTS' => number_format($f['forum_posts']),
-            'TOPICS' => number_format($f['forum_topics']),
+            'POSTS' => commify($f['forum_posts']),
+            'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
-            'FORUM_FOLDER_ALT' => $new ? $lang['NEW'] : $lang['OLD'],
-        ));
+            'FORUM_FOLDER_ALT' => $new ? $lang['NEW'] : $lang['OLD']
+        ]);
 
         if ($f['last_post_id']) {
-            $template->assign_block_vars('c.f.last', array(
+            $template->assign_block_vars('c.f.last', [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => wbr(str_short($f['last_topic_title'], $last_topic_max_len)),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], $bb_cfg['last_post_date_format']),
-                'LAST_POST_USER' => profile_url(array('username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank'])),
-            ));
+                'LAST_POST_USER' => profile_url(['username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
+            ]);
         }
     }
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'SHOW_FORUMS' => $forums_count,
     'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
     'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : $lang['HOME'],
@@ -303,7 +307,8 @@ $template->assign_vars(array(
     'U_ATOM_FEED' => file_exists($bb_cfg['atom']['path'] . '/f/0.atom') ? make_url($bb_cfg['atom']['url'] . '/f/0.atom') : false,
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
-));
+    'BOARD_START' => $bb_cfg['show_board_start_index'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : false,
+]);
 
 // Set tpl vars for bt_userdata
 if ($bb_cfg['bt_show_dl_stat_on_index'] && !IS_GUEST) {
@@ -317,17 +322,15 @@ if ($bb_cfg['show_latest_news']) {
         $latest_news = $datastore->get('latest_news');
     }
 
-    $template->assign_vars(array(
-        'SHOW_LATEST_NEWS' => true,
-    ));
+    $template->assign_vars(['SHOW_LATEST_NEWS' => true]);
 
     foreach ($latest_news as $news) {
-        $template->assign_block_vars('news', array(
+        $template->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
             'NEWS_TITLE' => str_short($news['topic_title'], $bb_cfg['max_news_title']),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
-        ));
+        ]);
     }
 }
 
@@ -338,22 +341,20 @@ if ($bb_cfg['show_network_news']) {
         $network_news = $datastore->get('network_news');
     }
 
-    $template->assign_vars(array(
-        'SHOW_NETWORK_NEWS' => true,
-    ));
+    $template->assign_vars(['SHOW_NETWORK_NEWS' => true]);
 
     foreach ($network_news as $net) {
-        $template->assign_block_vars('net', array(
+        $template->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
             'NEWS_TITLE' => str_short($net['topic_title'], $bb_cfg['max_net_title']),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
-        ));
+        ]);
     }
 }
 
 if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
-    $week_list = $today_list = array();
+    $week_list = $today_list = [];
     $week_all = $today_all = false;
 
     if (!empty($stats['birthday_week_list'])) {
@@ -386,10 +387,10 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
         $today_list = $lang['NOBIRTHDAY_TODAY'];
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'WHOSBIRTHDAY_WEEK' => $week_list,
-        'WHOSBIRTHDAY_TODAY' => $today_list,
-    ));
+        'WHOSBIRTHDAY_TODAY' => $today_list
+    ]);
 }
 
 // Allow cron
@@ -406,7 +407,7 @@ if (IS_AM) {
 define('SHOW_ONLINE', $show_online_users);
 
 if (isset($_GET['map'])) {
-    $template->assign_vars(array('PAGE_TITLE' => $lang['FORUM_MAP']));
+    $template->assign_vars(['PAGE_TITLE' => $lang['FORUM_MAP']]);
 }
 
 print_page('index.tpl');

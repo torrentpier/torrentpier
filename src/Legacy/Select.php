@@ -22,7 +22,7 @@ class Select
      * @param string $select_name
      * @return string
      */
-    public static function language($default_lang, $select_name = 'language')
+    public static function language(string $default_lang, string $select_name = 'language')
     {
         global $bb_cfg;
 
@@ -32,7 +32,7 @@ class Select
         foreach ($bb_cfg['lang'] as $key => $data) {
             $selected = '';
             if ($key == $default_lang) {
-                $selected = ' selected="selected"';
+                $selected = ' selected';
             }
             $lang_select .= '<option value="' . $key . '"' . $selected . '>' . $data['name'] . '</option>';
             $x++;
@@ -49,7 +49,7 @@ class Select
      *
      * @return string
      */
-    public static function timezone($default, $select_name = 'timezone')
+    public static function timezone(string $default, string $select_name = 'timezone'): string
     {
         global $sys_timezone, $lang;
 
@@ -59,7 +59,7 @@ class Select
         $tz_select = '<select name="' . $select_name . '">';
 
         foreach ($lang['TZ'] as $offset => $zone) {
-            $selected = ($offset == $default) ? ' selected="selected"' : '';
+            $selected = ($offset == $default) ? ' selected' : '';
             $tz_select .= '<option value="' . $offset . '"' . $selected . '>' . $zone . '</option>';
         }
         $tz_select .= '</select>';
@@ -75,7 +75,7 @@ class Select
      *
      * @return string
      */
-    public static function template($default_style, $select_name = 'tpl_name')
+    public static function template(string $default_style, string $select_name = 'tpl_name')
     {
         global $bb_cfg;
 
@@ -84,7 +84,7 @@ class Select
         foreach ($bb_cfg['templates'] as $folder => $name) {
             $selected = '';
             if ($folder == $default_style) {
-                $selected = ' selected="selected"';
+                $selected = ' selected';
             }
             $templates_select .= '<option value="' . $folder . '"' . $selected . '>' . $name . '</option>';
             $x++;

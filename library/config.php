@@ -11,9 +11,9 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
-$domain_name = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name;
-$domain_ssl = false;
+// Server settings
+$reserved_name = 'torrentpier.com';
+$reserved_port = 80;
 
 $bb_cfg = [];
 
@@ -21,8 +21,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.4.0-alpha1';
-$bb_cfg['tp_release_date'] = '20-05-2023';
+$bb_cfg['tp_version'] = 'v2.4.0-beta2';
+$bb_cfg['tp_release_date'] = '16-09-2023';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Database
@@ -31,6 +31,7 @@ $bb_cfg['db'] = [
     'db' => [
         // Don't change the settings here!!! Go to .env file
         env('DB_HOST', 'localhost'),
+        env('DB_PORT', 3306),
         env('DB_DATABASE', 'torrentpier'),
         env('DB_USERNAME', 'root'),
         env('DB_PASSWORD'),
@@ -65,9 +66,10 @@ $bb_cfg['cache'] = [
     'redis' => [
         'host' => '127.0.0.1',
         'port' => 6379,
+        'pconnect' => !PHP_ZTS,
         'con_required' => true,
     ],
-    // Available cache types: memcache, sqlite, redis, (filecache by default)
+    // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
     'engines' => [
         'bb_cache' => ['filecache', []],
         'bb_config' => ['filecache', []],
@@ -80,19 +82,20 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: memcache, sqlite, redis (filecache by default)
+// Available datastore types: filecache, memcache, sqlite, redis, apcu (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
-$bb_cfg['server_name'] = $domain_name; // The domain name from which this board runs
-$bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
+$bb_cfg['server_name'] = $domain_name = !empty($_SERVER['SERVER_NAME']) ? idn_to_utf8($_SERVER['SERVER_NAME']) : $reserved_name;
+$bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : $reserved_port;
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
 // GZip
 $bb_cfg['gzip_compress'] = false; // compress output
 
 // Tracker
-$bb_cfg['announce_interval'] = 2400; // Announce interval (default: 1800)
+$bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
+$bb_cfg['scrape_interval'] = 60; // Scrape interval (default: 60)
 $bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
@@ -149,6 +152,7 @@ $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 // Language
 $bb_cfg['charset'] = 'UTF-8'; // page charset
 $bb_cfg['lang'] = [
+    // Список доступных языков для выбора
     'af' => [
         'name' => 'Afrikaans',
         'locale' => 'af_ZA.UTF-8',
@@ -341,19 +345,21 @@ $bb_cfg['lang'] = [
 
 // Templates
 $bb_cfg['templates'] = [
-    'default' => 'TorrentPier',
+    // Список доступных шаблонов для выбора
+    'default' => 'Default',
 ];
 
-$bb_cfg['tpl_name'] = 'default';
+$bb_cfg['tpl_name'] = 'default'; // Активный шаблон по умолчанию
 $bb_cfg['stylesheet'] = 'main.css';
 
-$bb_cfg['show_sidebar1_on_every_page'] = false;
-$bb_cfg['show_sidebar2_on_every_page'] = false;
+$bb_cfg['show_sidebar1_on_every_page'] = false; // Показывать левый сайд-бар на каждой странице
+$bb_cfg['show_sidebar2_on_every_page'] = false; // Показывать правый сайд-бар на каждой странице
 
 // Cookie
-$bb_cfg['cookie_domain'] = in_array($domain_name, [getenv('SERVER_ADDR'), 'localhost'], true) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = $domain_ssl ? true : \TorrentPier\Helpers\IsHelper::isHTTPS();
+$bb_cfg['cookie_domain'] = in_array($domain_name, [$_SERVER['SERVER_ADDR'], 'localhost'], true) ? '' : ".$domain_name";
+$bb_cfg['cookie_secure'] = \TorrentPier\Helpers\IsHelper::isHTTPS();
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
+$bb_cfg['cookie_same_site'] = 'Lax'; // Lax, None, Strict | https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
 
 // Sessions
 $bb_cfg['session_update_intrv'] = 180; // sec
@@ -371,6 +377,20 @@ $bb_cfg['unique_ip'] = false; // Запретить регистрацию не�
 $bb_cfg['new_user_reg_restricted'] = false; // Ограничить регистрацию новых пользователей по времени по указанному ниже интервалу
 $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Допустимые часы регистрации
 $bb_cfg['reg_email_activation'] = true; // Требовать активацию учетной записи по email
+$bb_cfg['password_symbols'] = [
+    // Требовать наличие символов в пароле
+    'nums' => true, // Цифры
+    'spec_symbols' => false, // Спец. символы
+    'letters' => [ // Буквы
+        'uppercase' => true, // Заглавные буквы
+        'lowercase' => true // Строчные буквы
+    ]
+];
+$bb_cfg['password_hash_options'] = [
+    // https://www.php.net/manual/ru/password.constants.php
+    'algo' => PASSWORD_BCRYPT,
+    'options' => []
+];
 
 // Email
 $bb_cfg['emailer'] = [
@@ -391,27 +411,24 @@ $bb_cfg['board_email_form'] = false; // can users send email to each other via b
 $bb_cfg['board_email_sig'] = ''; // this text will be attached to all emails the board sends
 $bb_cfg['board_email_sitename'] = $domain_name; // sitename used in all emails header
 
-$bb_cfg['topic_notify_enabled'] = true;
-$bb_cfg['pm_notify_enabled'] = true;
-$bb_cfg['group_send_email'] = true;
-$bb_cfg['email_change_disabled'] = false; // disable changing email by user
+$bb_cfg['topic_notify_enabled'] = true; // отправлять ли уведомление на почту, если в теме которую отслеживает пользователь есть новые ответы
+$bb_cfg['pm_notify_enabled'] = true; // отправлять ли уведомление на почту, если пришло личное письмо на сайте
+$bb_cfg['group_send_email'] = true; // отправлять ли уведомление на почту, если пользователя приняли в группу, пригласили в группу
+$bb_cfg['email_change_disabled'] = false; // отключить возможность изменять почту самим пользователям
+$bb_cfg['show_email_visibility_settings'] = true; // разрешать ли пользователям изменять свои настройки отображения почты (Скрыто или нет)
 
 $bb_cfg['bounce_email'] = "bounce@$domain_name"; // bounce email address
 $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error reports
-$bb_cfg['abuse_email'] = "abuse@$domain_name";
-$bb_cfg['adv_email'] = "adv@$domain_name";
+$bb_cfg['abuse_email'] = "abuse@$domain_name"; // почта для жалоб (абуз, правообладатели)
+$bb_cfg['adv_email'] = "adv@$domain_name"; // почта для рекламных предложений
 
 // Bugsnag error reporting
 $bb_cfg['bugsnag'] = [
     'enabled' => false,
-    'api_key' => 'ee1adc9739cfceb01ce4a450ae1e52bf',
+    'api_key' => '',
 ];
 
 // Special users
-$bb_cfg['dbg_users'] = [
-#	user_id => 'name',
-    2 => 'admin',
-];
 $bb_cfg['unlimited_users'] = [
 #	user_id => 'name',
     2 => 'admin',
@@ -421,9 +438,6 @@ $bb_cfg['super_admins'] = [
     2 => 'admin',
 ];
 
-// Date format
-$bb_cfg['date_format'] = 'Y-m-d';
-
 // Subforums
 $bb_cfg['sf_on_first_page_only'] = true;
 
@@ -431,16 +445,16 @@ $bb_cfg['sf_on_first_page_only'] = true;
 $bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300];
 
 // Topics
-$bb_cfg['show_quick_reply'] = true;
-$bb_cfg['show_rank_text'] = false;
-$bb_cfg['show_rank_image'] = true;
-$bb_cfg['show_poster_joined'] = true;
-$bb_cfg['show_poster_posts'] = true;
-$bb_cfg['show_poster_from'] = true;
-$bb_cfg['show_bot_nick'] = false;
+$bb_cfg['show_quick_reply'] = true; // показывать форму быстрого ответа
+$bb_cfg['show_rank_text'] = false; // показывать название лычки в топиках
+$bb_cfg['show_rank_image'] = true; // показывать картинку лычки в топиках
+$bb_cfg['show_poster_joined'] = true; // показывать дату регистрации пользователя в топиках
+$bb_cfg['show_poster_posts'] = true; // показывать количество постов пользователя в топиках
+$bb_cfg['show_poster_from'] = true; // показывать страну пользователя
+$bb_cfg['show_bot_nick'] = false; // показывать ник бота
 $bb_cfg['text_buttons'] = false; // replace EDIT, QUOTE... images with text links
 $bb_cfg['parse_ed2k_links'] = true; // make ed2k links clickable
-$bb_cfg['post_date_format'] = 'd-M-Y H:i';
+$bb_cfg['post_date_format'] = 'd-M-Y H:i'; // формат даты публикации в топиках
 $bb_cfg['ext_link_new_win'] = true; // open external links in new window
 
 $bb_cfg['topic_moved_days_keep'] = 7; // remove topic moved links after xx days (or FALSE to disable)
@@ -451,36 +465,40 @@ $bb_cfg['user_signature_end'] = '</div>'; // Это позволит испол�
 // Posts
 $bb_cfg['use_posts_cache'] = true;
 $bb_cfg['posts_cache_days_keep'] = 14;
-$bb_cfg['max_post_length'] = 120000;
 $bb_cfg['use_ajax_posts'] = true;
 
 // Search
 $bb_cfg['search_engine_type'] = 'mysql'; // none, mysql, sphinx
+
 $bb_cfg['sphinx_topic_titles_host'] = '127.0.0.1';
 $bb_cfg['sphinx_topic_titles_port'] = 3312;
 $bb_cfg['sphinx_config_path'] = '../install/sphinx/sphinx.conf';
+
 $bb_cfg['disable_ft_search_in_posts'] = false; // disable searching in post bodies
-$bb_cfg['disable_search_for_guest'] = true;
+$bb_cfg['disable_search_for_guest'] = true; // отключить поиск для гостей
 $bb_cfg['allow_search_in_bool_mode'] = true;
-$bb_cfg['max_search_words_per_post'] = 200;
-$bb_cfg['search_min_word_len'] = 3;
-$bb_cfg['search_max_word_len'] = 35;
-$bb_cfg['limit_max_search_results'] = false;
+$bb_cfg['max_search_words_per_post'] = 200; // максимальное число слов в рамках одного поста
+$bb_cfg['search_min_word_len'] = 3; // минимальное число слов для поиска
+$bb_cfg['search_max_word_len'] = 35; // максимальное число слов для поиска
+$bb_cfg['limit_max_search_results'] = false; // лимит на максимальное число результатов поиска (false - отключено)
 
 // Posting
-$bb_cfg['prevent_multiposting'] = true; // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
+$bb_cfg['prevent_multiposting'] = true; // TODO: replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
 $bb_cfg['max_smilies'] = 25; // Максимальное число смайлов в посте (0 - без ограничения)
+$bb_cfg['max_symbols_post'] = 5000; // TODO: Максимальное число символов в посте (0 - без ограничения)
 
 // PM
 $bb_cfg['privmsg_disable'] = false; // отключить систему личных сообщений на форуме
-$bb_cfg['max_outgoing_pm_cnt'] = 10; // ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
+$bb_cfg['max_outgoing_pm_cnt'] = 10; // TODO: ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
 $bb_cfg['max_inbox_privmsgs'] = 500; // максимальное число сообщений в папке входящие
 $bb_cfg['max_savebox_privmsgs'] = 500; // максимальное число сообщений в папке сохраненные
 $bb_cfg['max_sentbox_privmsgs'] = 500; // максимальное число сообщений в папке отправленные
-$bb_cfg['pm_days_keep'] = 180; // время хранения ЛС
+$bb_cfg['max_smilies_pm'] = 15; // максимальное число смайлов в сообщении (0 - без ограничения)
+$bb_cfg['max_symbols_pm'] = 1500; // TODO: максимальное число символов в сообщении (0 - без ограничения)
+$bb_cfg['pm_days_keep'] = 0; // время хранения ЛС (0 - без ограничения)
 
 // Actions log
-$bb_cfg['log_days_keep'] = 90;
+$bb_cfg['log_days_keep'] = 365; // время хранения истории действий (0 - без ограничения)
 
 // Users
 $bb_cfg['color_nick'] = true; // Окраска ников пользователей по user_rank
@@ -488,15 +506,16 @@ $bb_cfg['user_not_activated_days_keep'] = 7; // "not activated" == "not finished
 $bb_cfg['user_not_active_days_keep'] = 180; // inactive users but only with no posts
 
 // Groups
-$bb_cfg['group_members_per_page'] = 50;
+$bb_cfg['group_members_per_page'] = 50; // количество групп на одной странице
 
 // Tidy
-$bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions(), true)) ? false : true;
+$bb_cfg['tidy_post'] = extension_loaded('tidy');
 
 // Misc
 $bb_cfg['mem_on_start'] = memory_get_usage();
 $bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
+$bb_cfg['show_jumpbox'] = true;
 
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
@@ -524,29 +543,34 @@ $bb_cfg['sitemap_sending'] = [
 
 // Extensions
 $bb_cfg['file_id_ext'] = [
+    // Images
     1 => 'gif',
-    2 => 'gz',
-    3 => 'jpg',
-    4 => 'png',
-    5 => 'rar',
-    6 => 'tar',
-    7 => 'tiff',
-    8 => 'torrent',
+    2 => 'jpg',
+    3 => 'png',
+    4 => 'bmp',
+    5 => 'webp',
+    // Archives
+    6 => 'gz',
+    7 => '7z',
+    8 => 'rar',
     9 => 'zip',
+    10 => 'tar',
+    // Other
+    11 => 'torrent',
 ];
 
 // Attachments
 $bb_cfg['attach'] = [
     'upload_path' => DATA_DIR . '/torrent_files', // путь к директории с torrent файлами
-    'max_size' => 5 * 1024 * 1024, // максимальный размер файла в байтах
+    'max_size' => 5 * 1024 * 1024, // TODO: максимальный размер файла
 ];
 
-$bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // для разделов с раздачами
-$bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // для обычных разделов
+$bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // TODO: для разделов с раздачами
+$bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: для обычных разделов
 
 // Avatars
 $bb_cfg['avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'jpeg', 'png'], // разрешенные форматы файлов
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // разрешенные форматы файлов (При добавлении нового расширения, продублируйте в $bb_cfg['file_id_ext'])
     'bot_avatar' => '/gallery/bot.gif', // аватара бота
     'max_size' => 100 * 1024, // размер аватары в байтах
     'max_height' => 100, // высота аватара в px
@@ -559,7 +583,7 @@ $bb_cfg['avatars'] = [
 
 // Group avatars
 $bb_cfg['group_avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'jpeg', 'png'], // разрешенные форматы файлов
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // разрешенные форматы файлов (При добавлении нового расширения, продублируйте в $bb_cfg['file_id_ext'])
     'max_size' => 300 * 1024, // размер аватары в байтах
     'max_height' => 300, // высота аватара в px
     'max_width' => 300, // ширина аватара в px
@@ -610,8 +634,8 @@ $bb_cfg['page'] = [
 // Tracker settings
 $bb_cfg['tracker'] = [
     'autoclean' => true,
-    'off' => false,
-    'off_reason' => 'temporarily disabled',
+    'bt_off' => false,
+    'bt_off_reason' => 'Temporarily disabled',
     'numwant' => 50,
     'update_dlstat' => true,
     'expire_factor' => 2.5,
@@ -627,11 +651,13 @@ $bb_cfg['tracker'] = [
     'limit_seed_ips' => 0,
     'limit_leech_ips' => 0,
     'tor_topic_up' => true,
-    'gold_silver_enabled' => true,
     'retracker' => true,
     'retracker_host' => 'http://retracker.local/announce',
-    'freeleech' => false,
     'guest_tracker' => true,
+    'search_by_tor_status' => true,
+    'freeleech' => false, // freeleech mode (If enabled, then disable "gold_silver_enabled")
+    'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
+    'disabled_v2_torrents' => false // allow registration of v2-only torrents
 ];
 
 // Ratio settings
@@ -712,6 +738,7 @@ $bb_cfg['topic_left_column_witdh'] = 150;
 $bb_cfg['post_img_width_decr'] = 52;
 $bb_cfg['attach_img_width_decr'] = 130;
 
+// Get default lang
 if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'])) {
     $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/';
 } else {

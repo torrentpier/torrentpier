@@ -12,6 +12,7 @@ if (!empty($setmodules)) {
     $module['GROUPS']['PERMISSIONS'] = basename(__FILE__) . '?mode=group';
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $max_forum_name_length = 50;
@@ -25,7 +26,7 @@ $cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $submit = isset($_REQUEST['submit']);
 
-$group_data = array();
+$group_data = [];
 
 $forum_auth_fields = array(
     'auth_view',
@@ -72,7 +73,7 @@ if ($submit && $mode == 'user') {
     if (isset($_POST['userlevel'])) {
         if ($_POST['userlevel'] === 'admin') {
             if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
-                bb_die('Could not update admin status');
+                bb_die($lang['AUTH_GENERAL_ERROR']);
             }
 
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
@@ -89,7 +90,7 @@ if ($submit && $mode == 'user') {
         elseif ($_POST['userlevel'] === 'user') {
             // ignore if you're trying to change yourself from an admin to user!
             if ($userdata['user_id'] == $user_id) {
-                bb_die('Could not update admin status<br /><br />Could not change yourself from an admin to user');
+                bb_die($lang['AUTH_SELF_ERROR']);
             }
             // Update users level, reset to USER
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
@@ -107,7 +108,7 @@ if ($submit && $mode == 'user') {
     //
     // Submit new USER permissions
     //
-    $auth = array();
+    $auth = [];
 
     if (!empty($_POST['auth']) && is_array($_POST['auth'])) {
         array_deep($_POST['auth'], 'intval');
@@ -138,7 +139,7 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
         bb_die($lang['GROUP_NOT_EXIST']);
     }
 
-    $auth = array();
+    $auth = [];
     array_deep($_POST['auth'], 'intval');
 
     foreach ($_POST['auth'] as $f_id => $bf_ary) {
@@ -184,8 +185,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $ug_data = $this_userdata;
     $ug_data['session_logged_in'] = 1;
 
-    $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_USER_ONLY);
-    $g_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_GROUP_ONLY);
+    $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, [], UG_PERM_USER_ONLY);
+    $g_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, [], UG_PERM_GROUP_ONLY);
 
     foreach ($forums['c'] as $c_id => $c_data) {
         $template->assign_block_vars('c', array(
@@ -265,17 +266,17 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $s_user_type = ($this_userdata['user_level'] == ADMIN) ? '
 		<select name="userlevel">
-			<option value="admin" selected="selected">' . $lang['AUTH_ADMIN'] . '</option>
+			<option value="admin" selected>' . $lang['AUTH_ADMIN'] . '</option>
 			<option value="user">' . $lang['AUTH_USER'] . '</option>
 		</select>
 	' : '
 		<select name="userlevel">
 			<option value="admin">' . $lang['AUTH_ADMIN'] . '</option>
-			<option value="user" selected="selected">' . $lang['AUTH_USER'] . '</option>
+			<option value="user" selected>' . $lang['AUTH_USER'] . '</option>
 		</select>
 	';
 
-    $template->assign_block_vars('switch_user_auth', array());
+    $template->assign_block_vars('switch_user_auth', []);
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,

@@ -8,7 +8,7 @@
  */
 
 define('BB_SCRIPT', 'forum');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 $page_cfg['include_bbcode_js'] = true;
@@ -18,10 +18,10 @@ $last_topic_max_len = 40;
 $title_match_key = 'nm';
 $title_match_max_len = 60;
 
-$page_cfg['load_tpl_vars'] = array(
+$page_cfg['load_tpl_vars'] = [
     'post_icons',
-    'topic_icons',
-);
+    'topic_icons'
+];
 
 // Init request vars
 $forum_id = (int)request_var('f', '');
@@ -95,14 +95,10 @@ if ($is_auth['auth_mod']) {
         unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
         $show_type_separator = false;
     }
-    $select_tst = array_merge(array($lang['TOR_STATUS_SELECT_ALL'] => -1), array_flip($lang['TOR_STATUS_NAME']));
-    $template->assign_vars(array(
-        'SELECT_TST' => build_select('tst', $select_tst, $tor_status),
-    ));
-    $select_st = array_merge(array($lang['TOR_STATUS_SELECT_ACTION'] => -1), array_flip($lang['TOR_STATUS_NAME']));
-    $template->assign_vars(array(
-        'SELECT_ST' => build_select('st', $select_st, -1),
-    ));
+    $select_tst = array_merge([$lang['TOR_STATUS_SELECT_ALL'] => -1], array_flip($lang['TOR_STATUS_NAME']));
+    $template->assign_vars(['SELECT_TST' => build_select('tst', $select_tst, $tor_status)]);
+    $select_st = array_merge([$lang['TOR_STATUS_SELECT_ACTION'] => -1], array_flip($lang['TOR_STATUS_NAME']));
+    $template->assign_vars(['SELECT_ST' => build_select('st', $select_st, -1)]);
 }
 
 // Topics read tracks
@@ -148,12 +144,12 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 	";
 
     if ($rowset = DB()->fetch_rowset($sql)) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'SHOW_SUBFORUMS' => true,
             'FORUM_IMG' => $images['forum'],
             'FORUM_NEW_IMG' => $images['forum_new'],
-            'FORUM_LOCKED_IMG' => $images['forum_locked'],
-        ));
+            'FORUM_LOCKED_IMG' => $images['forum_locked']
+        ]);
     }
     foreach ($rowset as $sf_data) {
         $sf_forum_id = $sf_data['forum_id'];
@@ -171,7 +167,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             $folder_image = $images['forum_new'];
         }
 
-        $last_post_user = profile_url(array('username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']));
+        $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]);
 
         if ($sf_data['forum_last_post_id']) {
             $last_post = bb_date($sf_data['topic_last_post_time'], $bb_cfg['last_post_date_format']);
@@ -179,19 +175,19 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
             $last_post .= '<a href="' . POST_URL . $sf_data['forum_last_post_id'] . '#' . $sf_data['forum_last_post_id'] . '"><img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="latest" title="' . $lang['VIEW_LATEST_POST'] . '" /></a>';
         }
 
-        $template->assign_block_vars('f', array(
+        $template->assign_block_vars('f', [
             'FORUM_FOLDER_IMG' => $folder_image,
 
             'FORUM_NAME' => $fname_html,
             'FORUM_DESC' => $forums['f'][$sf_forum_id]['forum_desc'],
             'U_VIEWFORUM' => FORUM_URL . $sf_forum_id,
-            'TOPICS' => number_format($sf_data['forum_topics']),
-            'POSTS' => number_format($sf_data['forum_posts']),
-            'LAST_POST' => $last_post,
-        ));
+            'TOPICS' => commify($sf_data['forum_topics']),
+            'POSTS' => commify($sf_data['forum_posts']),
+            'LAST_POST' => $last_post
+        ]);
 
         if ($sf_data['forum_last_post_id']) {
-            $template->assign_block_vars('f.last', array(
+            $template->assign_block_vars('f.last', [
                 'FORUM_LAST_POST' => true,
                 'SHOW_LAST_TOPIC' => $show_last_topic,
                 'LAST_TOPIC_ID' => $sf_data['last_topic_id'],
@@ -200,10 +196,10 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
                 'LAST_POST_TIME' => bb_date($sf_data['topic_last_post_time'], $bb_cfg['last_post_date_format']),
                 'LAST_POST_ID' => $sf_data['forum_last_post_id'],
                 'LAST_POST_USER' => $last_post_user,
-                'ICON_LATEST_REPLY' => $images['icon_latest_reply'],
-            ));
+                'ICON_LATEST_REPLY' => $images['icon_latest_reply']
+            ]);
         } else {
-            $template->assign_block_vars('f.last', array('FORUM_LAST_POST' => false));
+            $template->assign_block_vars('f.last', ['FORUM_LAST_POST' => false]);
         }
     }
 }
@@ -219,7 +215,7 @@ if ($is_auth['auth_mod']) {
         $topics_per_page = $req_tpp;
     }
 
-    $select_tpp = array();
+    $select_tpp = [];
     foreach ($bb_cfg['allowed_topics_per_page'] as $tpp) {
         $select_tpp[$tpp] = $tpp;
     }
@@ -229,7 +225,7 @@ if ($is_auth['auth_mod']) {
 $topic_days = 0; // all the time
 $forum_topics = $forum_data['forum_topics'];
 
-$sel_previous_days = array(
+$sel_previous_days = [
     0 => $lang['ALL_POSTS'],
     1 => $lang['1_DAY'],
     7 => $lang['7_DAYS'],
@@ -237,8 +233,8 @@ $sel_previous_days = array(
     30 => $lang['1_MONTH'],
     90 => $lang['3_MONTHS'],
     180 => $lang['6_MONTHS'],
-    364 => $lang['1_YEAR'],
-);
+    364 => $lang['1_YEAR']
+];
 
 if (!empty($_REQUEST['topicdays'])) {
     if ($req_topic_days = abs((int)$_REQUEST['topicdays']) and isset($sel_previous_days[$req_topic_days])) {
@@ -285,7 +281,7 @@ if ($forum_data['allow_reg_tracker']) {
     }
 
     $select_tor_sql = ',
-		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
+		bt.auth_key, tor.info_hash, tor.info_hash_v2, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
 		sn.seeders, sn.leechers
 	';
     $select_tor_sql .= ($join_dl) ? ', dl.user_status AS dl_status' : '';
@@ -304,7 +300,7 @@ $title_match_sql = '';
 if ($title_match =& $_REQUEST[$title_match_key]) {
     if ($tmp = mb_substr(trim($title_match), 0, $title_match_max_len)) {
         $title_match_val = clean_text_match($tmp, true, false);
-        $title_match_topics = get_title_match_topics($title_match_val, array(0 => $forum_id));
+        $title_match_topics = get_title_match_topics($title_match_val, [0 => $forum_id]);
 
         if ($search_match_topics_csv = implode(',', $title_match_topics)) {
             $title_match_sql = "AND t.topic_id IN($search_match_topics_csv)";
@@ -313,7 +309,7 @@ if ($title_match =& $_REQUEST[$title_match_key]) {
 }
 
 // Get topics
-$topic_ids = $topic_rowset = array();
+$topic_ids = $topic_rowset = [];
 
 // IDs
 $sql = "
@@ -353,7 +349,7 @@ if ($topics_csv = implode(',', $topic_ids)) {
 }
 
 // Define censored word matches
-$orig_word = $replacement_word = array();
+$orig_word = $replacement_word = [];
 obtain_word_list($orig_word, $replacement_word);
 
 if ($forum_data['allow_reg_tracker']) {
@@ -375,7 +371,7 @@ $template->assign_vars(array(
 ));
 
 // User authorisation levels output
-$u_auth = array();
+$u_auth = [];
 $u_auth[] = ($is_auth['auth_post']) ? $lang['RULES_POST_CAN'] : $lang['RULES_POST_CANNOT'];
 $u_auth[] = ($is_auth['auth_reply']) ? $lang['RULES_REPLY_CAN'] : $lang['RULES_REPLY_CANNOT'];
 $u_auth[] = ($is_auth['auth_edit']) ? $lang['RULES_EDIT_CAN'] : $lang['RULES_EDIT_CANNOT'];
@@ -387,7 +383,6 @@ $u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
 $u_auth = implode("<br />\n", $u_auth);
 
 $template->assign_vars(array(
-    'SHOW_JUMPBOX' => true,
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
@@ -471,7 +466,7 @@ foreach ($topic_rowset as $topic) {
     ));
 
     if (isset($topic['tor_size'])) {
-        $tor_magnet = create_magnet($topic['info_hash'], ($topic['auth_key'] ?? ''));
+        $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], wbr($topic['topic_title']));
 
         $template->assign_block_vars('t.tor', array(
             'SEEDERS' => (int)$topic['seeders'],
@@ -503,7 +498,7 @@ if ($found_topics) {
     if ($only_new) {
         $no_topics_msg = $lang['NO_NEW_POSTS'];
     } else {
-        $no_topics_msg = ($topic_days || $title_match) ? $lang['NO_SEARCH_MATCH'] : $lang['NO_TOPICS_POST_ONE'];
+        $no_topics_msg = ($topic_days || $title_match) ? $lang['NO_SEARCH_MATCH'] : ($forum_data['allow_reg_tracker'] ? $lang['NO_RELEASES_POST_ONE'] : $lang['NO_TOPICS_POST_ONE']);
     }
     $template->assign_vars(array(
         'NO_TOPICS' => $no_topics_msg,

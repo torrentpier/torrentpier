@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-$smilies = array();
+$smilies = [];
 
 $rowset = DB()->fetch_rowset("SELECT * FROM " . BB_SMILIES);
 sort($rowset);

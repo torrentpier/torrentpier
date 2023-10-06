@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Stillinger';
 $lang['POSTED'] = 'Udgivet';
 $lang['USERNAME'] = 'Brugernavn';
 $lang['PASSWORD'] = 'Password';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Forfatter';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Aktiveret';
 $lang['DISABLED'] = 'Handicappede';
 $lang['ERROR'] = 'Fejl';
 $lang['SELECT_ACTION'] = 'Vælg handling';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Næste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik på %sHere%s for at vende tilbage til Modera
 $lang['CLICK_RETURN_GROUP'] = 'Klik på %sHere%s for at vende tilbage til gruppen oplysninger';
 
 $lang['ADMIN_PANEL'] = 'Gå til Administration Panel';
-$lang['ALL_CACHE'] = 'Alle cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache er blevet ryddet';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Skabelon cache er blevet ryddet';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datalager har været ryddet';
 $lang['BOARD_DISABLE'] = 'Beklager, men dette forum er deaktiveret. Prøv at komme tilbage senere';
 $lang['BOARD_DISABLE_CRON'] = 'Forum er nede for vedligeholdelse. Prøv at komme tilbage senere';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Du <b>can</b> stemme på afstemninger i dette forum';
 $lang['RULES_VOTE_CANNOT'] = 'Du <b>cannot</b> stemme på afstemninger i dette forum';
 $lang['RULES_MODERATE'] = 'Du <b>can</b> moderat dette forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Der er ingen indlæg i dette forum.<br />Click på <b>Post Nye Topic</b> link på denne side til at sende en.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Vis emne';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Private Beskeder';
 $lang['NO_NEW_PM'] = 'ingen nye meddelelser';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('ny besked', 'nye meddelelser');
+$lang['NEW_PMS_DECLENSION'] = ['ny besked', 'nye meddelelser'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('ulæste', 'ulæste');
+$lang['UNREAD_PMS_DECLENSION'] = ['ulæste', 'ulæste'];
 
 $lang['UNREAD_MESSAGE'] = 'Ulæst besked';
 $lang['READ_MESSAGE'] = 'Læs besked';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sender en e-mail når nogen svarer til et emne
 
 $lang['BOARD_LANG'] = 'Bestyrelsen sprog';
 $lang['GENDER'] = 'Køn';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Ukendt',
     1 => 'Mand',
     2 => 'Kvinde'
-);
+];
 $lang['MODULE_OFF'] = 'Modulet er deaktiveret!';
 
 $lang['BIRTHDAY'] = 'Fødselsdag';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Nulstille login-tasten';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'herunder alle de steder, du har besøgt forummet aktiveret auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Viser et lille grafisk billede nedenfor dine oplysninger i indlæg. Kun ét billede kan vises på en gang, dens bredde, kan ikke være større end %d pixels, højde, der ikke er større end %d pixels og filstørrelsen ikke mere end %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Slet avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontrol indstilling deaktiveret for overtrædelse <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'En anmodning om at deltage i din gruppe har lavet.';
 $lang['GROUP_APPROVED'] = 'Din anmodning er blevet godkendt.';
 $lang['GROUP_ADDED'] = 'Du er blevet tilføjet til denne brugergruppe.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Du er allerede medlem af denne gruppe';
-$lang['USER_IS_MEMBER_GROUP'] = 'Bruger er allerede medlem af denne gruppe';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Opdateret group type.';
 $lang['EFFECTIVE_DATE'] = 'Effektiv Dato';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Den Vedhæftede fil er for stor.<br />Could i
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Den Vedhæftede fil er for stor.<br />Maximum Upload Size: %d MB.<br />Please bemærk, at denne Størrelse er defineret i php.ini, dette betyder, at det er sæt af PHP og Mod Udlæg kan ikke tilsidesætte denne værdi.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Udvidelse %s er ikke tilladt'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Du har ikke tilladelse til at sende Filer med Filtypenavnet %s i dette Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Den Vedhæftede fil er for stor.<br />Max Størrelse: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Undskyld, men den maksimale filstørrelse for alle Vedhæftede filer er nået. Kontakt venligst Bestyrelsen, Administrator, hvis du har spørgsmål.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Udlæg kan ikke tilføjes, da max. antallet af %d Vedhæftede filer i dette indlæg var opnået'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Den Vedhæftede fil/Billede skal være mindre end %d pixels bredt og %d pixels høj';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Frø';
 $lang['LEECHING'] = 'Agterliget';
 $lang['IS_REGISTERED'] = 'Registreret';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Søg i DC++, som filnavn';
-$lang['DC_MAGNET_EXT'] = 'Søg i DC++ ved udvidelse';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Vælg status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Du har ikke valgt status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alle statusser';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ikke tjekket',
     TOR_CLOSED => 'lukket',
     TOR_APPROVED => 'kontrolleret',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'midlertidig',
     TOR_PREMOD => 'præ-moderation',
     TOR_REPLENISH => 'genopbygge',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'En sådan tilstand eksisterer ikke!';
 $lang['TORRENT_FAILED'] = 'Distribution blev ikke fundet!';
 $lang['TOR_STATUS_DUB'] = 'Fordeling har samme status';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Type torrent ændret';
 $lang['DEL_TORRENT'] = 'Er du sikker på du vil slette torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Er du sikker på du ønsker at slette og flytte emnet?';
 $lang['UNEXECUTED_RELEASE'] = 'Har du en uformelig udgivelse, før du opretter en ny fastsætte sin formløse!';
-$lang['STATUS_DOES_EXIST'] = 'En sådan tilstand eksisterer ikke: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ændre status for distribution - %s';
@@ -1154,6 +1153,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake sølv';
 $lang['GOLD_STATUS'] = 'GULD TORRENT! DOWNLOAD-TRAFIK MENER IKKE!';
 $lang['SILVER_STATUS'] = 'SØLV TORRENT! DOWNLOAD-TRAFIK DELVIST OVERVEJET!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Søg i Fora';
 $lang['SELECT_CAT'] = 'Vælg kategori';
 $lang['GO_TO_SECTION'] = 'Goto afsnit';
@@ -1352,17 +1352,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('svar', 'svar');
-$lang['DECLENSION']['TIMES'] = array('tid', 'tider');
+$lang['DECLENSION']['REPLIES'] = ['svar', 'svar'];
+$lang['DECLENSION']['TIMES'] = ['tid', 'tider'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('andet', 'sekunder'),
-    'minutes' => array('minut', 'minutter'),
-    'hours' => array('time', 'timer'),
-    'mday' => array('dag', 'dage'),
-    'mon' => array('måned', 'måneder'),
-    'year' => array('år', 'år'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['andet', 'sekunder'],
+    'minutes' => ['minut', 'minutter'],
+    'hours' => ['time', 'timer'],
+    'mday' => ['dag', 'dage'],
+    'mon' => ['måned', 'måneder'],
+    'year' => ['år', 'år'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'Feltet til adgangskoden må ikke være tom!';
 $lang['CHOOSE_PASS_ERR'] = 'Indtastede passwords matcher ikke';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Din adgangskode skal være på mindst %d tegn';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Din adgangskode må ikke være længere end $d tegn';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Adgangskoder matcher';
 $lang['CHOOSE_PASS_REG_OK'] = 'Adgangskoder matcher, du kan gå videre med tilmelding';
 $lang['CHOOSE_PASS_FAILED'] = 'For at ændre den adgangskode, skal du angive den aktuelle adgangskode';
@@ -1481,6 +1485,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'forespørgsler';
 $lang['LIMIT'] = 'Grænse:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Hent gratis og ved maksimal hastighed!';
@@ -1508,6 +1515,8 @@ $lang['BOLD'] = 'Fed tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursiv tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understreget tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Overstrege tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citat af tekst: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Indsæt billede: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1600,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker-indstillinger';
 $lang['RELEASE_TEMPLATES'] = 'Udgivelse Skabeloner';
 $lang['ACTIONS_LOG'] = 'Rapport om aktion';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Beklager, din browser understøtter ikke frames';
-$lang['IDX_CLEAR_CACHE'] = 'Ryd Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Skabeloner';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net-nyheder';
-$lang['IDX_UPDATE'] = 'Opdatering:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Bruger niveauer';
-$lang['IDX_SYNCHRONIZE'] = 'Synkronisere:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Emner';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Bruger indlæg tæller';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Indeks';
 $lang['FORUM_STATS'] = 'Forum Statistik';
@@ -1637,8 +1634,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip-komprimering';
 $lang['NOT_AVAILABLE'] = 'Ikke tilgængelig';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Ryd Cache';
-$lang['TEMPLATES'] = 'Skabeloner';
+$lang['DATASTORE'] = 'Datastore';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Bruger niveauer';
@@ -1719,6 +1717,8 @@ $lang['USER_AUTH_UPDATED'] = 'Brugertilladelser er blevet opdateret';
 $lang['GROUP_AUTH_UPDATED'] = 'Gruppe tilladelser er blevet opdateret';
 
 $lang['AUTH_UPDATED'] = 'Tilladelser er blevet opdateret';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klik på %sHere%s for at vende tilbage til brugertilladelser';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klik på %sHere%s for at vende tilbage til Gruppe rettigheder';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik på %sHere%s for at vende tilbage til Forum Tilladelser';
@@ -2058,6 +2058,7 @@ $lang['NOAVATAR'] = 'Ingen avatar';
 $lang['TRACKER_STATS'] = 'Statistik på tracker';
 $lang['WHOIS_INFO'] = 'Oplysninger om IP-adresse';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Vis på moderatorer den index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du ikke har udlodning til status af v, #, eller T i dette afsnit, herunder de afsnit, distribution vil automatisk modtage dette status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Kommentar til status for en distribution</h4> <h6>Kommentaren giver dig mulighed for at påpege de fejl, der er lavet til udgiveren. Hvis statusserne er ufuldstændige, er en frigivelsessvarformular tilgængelig for udgivelsesadministratoren for at rette udgivelsen</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding frø bonus </h4> <h6> Antallet af distributioner, som er udleveret af brugeren, og størrelsen af bonusser til dem (opladning gange i timen) </h6>';
@@ -2258,13 +2259,6 @@ $lang['RETURN_CONFIG'] = '%sReturn at Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Opdateret';
 $lang['SET_DEFAULTS'] = 'Gendan standarder';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum-indstillinger';
-$lang['TRACKER_SETTINGS'] = 'Tracker-indstillinger';
-
-$lang['CHANGES_DISABLED'] = 'Ændringer deaktiveret (se <b>$bb_cfg[\'tracker\']</b> i config.php)';
-
 $lang['OFF_TRACKER'] = 'Deaktiver tracker';
 $lang['OFF_REASON'] = 'Deaktiver grund';
 $lang['OFF_REASON_EXPL'] = 'denne besked vil blive sendt til kunden, når tracker er deaktiveret';
@@ -2409,14 +2403,14 @@ $lang['REPAIR_CRON'] = 'Reparation Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Rediger job';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Tilføj job';
 $lang['CRON_SCRIPT_EXPL'] = 'navnet på det script, fra "includes/cron/job/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Vælg start',
     'hourly' => 'timeløn',
     'daily' => 'dagligt',
     'weekly' => 'ugentlig',
     'monthly' => 'månedlig',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Vælg';
 $lang['RUN_DAY'] = 'Køre dag';
 $lang['RUN_DAY_EXPL'] = 'den dag, da denne opgave køre';
@@ -2543,17 +2537,22 @@ $lang['CALLSEED_MSG_OK'] = 'Besked er blevet sendt til alle dem, der har downloa
 $lang['CALLSEED_MSG_SPAM'] = 'Anmodning har allerede været én gang sendt (Nok ikke dig)<br /><br />The næste mulighed for at sende en anmodning om at blive <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Emne kræver ikke hjælpe (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Emne:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Emne:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Emne:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Emne:<br /> <b>opened</b>',
     'mod_topic_split' => 'Emne:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Indlæg:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Bruger:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Bruger:<br /> <b>ban</b>',
     'adm_user_unban' => 'Bruger:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alle handlinger';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Handlinger Log: søgekriterier';
@@ -2692,28 +2691,28 @@ $lang['MC_LEGEND'] = 'Skriv en kommentar';
 $lang['MC_FAQ'] = 'Den indtastede tekst vil blive vist under denne besked';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s i din besked";
 $lang['MC_COMMENT_PM_MSG'] = "Hej, [b]%s[/b]\nModerator venstre i din besked [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Slet kommentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentar fra %s',
         'type' => 'Kommentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Oplysninger fra %s',
         'type' => 'Information',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Advarsel fra %s',
         'type' => 'Advarsel',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Overtrædelse fra %s',
         'type' => 'Overtrædelse',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Styre sitemap';
@@ -2754,7 +2753,7 @@ $lang['HASH_NOT_FOUND'] = 'Udgivelse med hash %s ikke fundet';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksten på denne side er redigeret på: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Denne linje kan kun se administratorer.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På denne side, kan du angive den tekst, der i de grundlæggende regler af den ressource, der vises til brugerne.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inaktive brugere i 30 dage',
     1 => 'inaktive brugere for 90 dage',
     2 => 'medium størrelse distributioner på tracker (mange megabyte)',
@@ -2763,7 +2762,7 @@ $lang['TR_STATS'] = array(
     5 => 'hvor mange hænder, hvor der såning mere end 5 frø',
     6 => 'hvor mange af os uploadere (dem, der er fyldt mindst 1 hånd)',
     7 => 'hvor mange uploadere i løbet af de sidste 30 dage',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Meningsmåling aktiveret';
 $lang['NEW_POLL_END'] = 'Afstemning afsluttet';
@@ -2787,13 +2786,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Hver række svarer til et svar (max';
 $lang['OLD_BROWSER'] = 'Du bruger en forældet browser. Hjemmesiden vil ikke blive vist korrekt.';
 $lang['GO_BACK'] = 'Gå tilbage';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Fil upload fejl';
 $lang['UPLOAD_ERROR_SIZE'] = 'Den uploadede fil overstiger den maksimale størrelse af %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Invalid fil type billede';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Billede dimensioner overstiger den tilladte maksimale %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Den uploadede fil er ikke et billede';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Udvidelse %s for downloads er ikke tilladt';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'du har overskredet den maksimale filstørrelse for server',
     UPLOAD_ERR_FORM_SIZE => 'du har overskredet den maksimale upload størrelse',
     UPLOAD_ERR_PARTIAL => 'filen blev delvist hentet',
@@ -2801,7 +2801,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'midlertidige mappe ikke fundet',
     UPLOAD_ERR_CANT_WRITE => 'skrive fejl',
     UPLOAD_ERR_EXTENSION => 'upload stoppet af udvidelse',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kontroller, at du ikke er en robot';

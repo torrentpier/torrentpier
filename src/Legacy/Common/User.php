@@ -56,7 +56,6 @@ class User
     public $opt_js_guest = [
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
-        'h_smile' => 1,     // hide smilies
         'h_sig' => 1,     // hide signatures
     ];
 
@@ -84,6 +83,13 @@ class User
      * @var
      */
     public $id;
+    public $ip;
+    public $lastvisit;
+    public $regdate;
+    public $opt;
+    public $name;
+    public $active;
+    public $level;
 
     /**
      * User constructor
@@ -222,7 +228,7 @@ class User
      *
      * @return array
      */
-    public function session_create($userdata, $auto_created = false)
+    public function session_create($userdata, bool $auto_created = false): array
     {
         global $bb_cfg, $lang;
 
@@ -241,6 +247,13 @@ class User
 
             if (DB()->fetch_row("SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
                 bb_simple_die($lang['YOU_BEEN_BANNED']);
+            }
+        }
+
+        // Generate passkey
+        if (!\TorrentPier\Legacy\Torrent::getPasskey($this->data['user_id'])) {
+            if (!\TorrentPier\Legacy\Torrent::generate_passkey($this->data['user_id'], true)) {
+                bb_die('Could not generate passkey');
             }
         }
 
@@ -327,8 +340,9 @@ class User
      * @param bool $update_lastvisit
      * @param bool $set_cookie
      */
-    public function session_end($update_lastvisit = false, $set_cookie = true)
+    public function session_end(bool $update_lastvisit = false, bool $set_cookie = true)
     {
+        Sessions::cache_rm_userdata($this->data);
         DB()->query("
 			DELETE FROM " . BB_SESSIONS . "
 			WHERE session_id = '{$this->data['session_id']}'
@@ -350,10 +364,7 @@ class User
             if (isset($_REQUEST['reset_autologin'])) {
                 $this->create_autologin_id($this->data, false);
 
-                DB()->query("
-					DELETE FROM " . BB_SESSIONS . "
-					WHERE session_user_id = '{$this->data['user_id']}'
-				");
+                Sessions::delete_user_sessions($this->data['user_id']);
             }
         }
 
@@ -365,33 +376,36 @@ class User
     /**
      * Login
      *
-     * @param $args
+     * @param array $args
      * @param bool $mod_admin_login
      *
      * @return array
      */
-    public function login($args, $mod_admin_login = false)
+    public function login(array $args, bool $mod_admin_login = false): array
     {
         $username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
         $password = !empty($args['login_password']) ? $args['login_password'] : '';
 
         if ($username && $password) {
             $username_sql = str_replace("\\'", "''", $username);
-            $password_sql = md5(md5($password));
 
             $sql = "
 				SELECT *
 				FROM " . BB_USERS . "
 				WHERE username = '$username_sql'
-				  AND user_password = '$password_sql'
 				  AND user_active = 1
 				  AND user_id != " . GUEST_UID . "
 				LIMIT 1
 			";
 
             if ($userdata = DB()->fetch_row($sql)) {
-                if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == GUEST_UID || md5(md5($password)) !== $userdata['user_password'] || !$userdata['user_active']) {
+                if (!$userdata['username'] || !$userdata['user_password'] || ($userdata['user_id'] == GUEST_UID) || !$userdata['user_active']) {
                     trigger_error('invalid userdata', E_USER_ERROR);
+                }
+
+                // Check password
+                if (!$this->checkPassword($password, $userdata)) {
+                    return [];
                 }
 
                 // Start mod/admin session
@@ -459,7 +473,6 @@ class User
         if ($user_id == GUEST_UID) {
             $delete_cookies = [
                 COOKIE_DATA,
-                COOKIE_DBG,
                 'torhelp',
                 'explain',
                 'sql_log',
@@ -477,9 +490,6 @@ class User
 
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
-            }
-            if (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !isset($_COOKIE[COOKIE_DBG])) {
-                bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION);
             }
         }
     }
@@ -755,5 +765,48 @@ class User
             case  'flip':
                 return array_flip(explode(',', $excluded));
         }
+    }
+
+    /**
+     * Check entered password
+     *
+     * @param string $enteredPassword
+     * @param array $userdata
+     * @return bool
+     */
+    public function checkPassword(string $enteredPassword, array $userdata): bool
+    {
+        global $bb_cfg;
+
+        if (password_verify($enteredPassword, $userdata['user_password'])) {
+            if (password_needs_rehash($userdata['user_password'], $bb_cfg['password_hash_options']['algo'], $bb_cfg['password_hash_options']['options'])) {
+                // Update password_hash
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+            }
+
+            return true;
+        } else {
+            if (md5(md5($enteredPassword)) === $userdata['user_password']) {
+                // Update old md5 password
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Create password_hash
+     *
+     * @param string $enteredPassword
+     * @return false|string|null
+     */
+    public function password_hash(string $enteredPassword)
+    {
+        global $bb_cfg;
+
+        return password_hash($enteredPassword, $bb_cfg['password_hash_options']['algo'], $bb_cfg['password_hash_options']['options']);
     }
 }

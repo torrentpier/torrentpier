@@ -47,7 +47,7 @@ ajax.callback.view_post = function(data) {
 };
 </script>
 
-<style type="text/css">
+<style>
 .post_wrap { border: 1px #A5AFB4 solid; margin: 8px 8px 6px; overflow: auto; }
 .post_links { margin: 6px; }
 </style>
@@ -169,7 +169,7 @@ $(function(){
 
 <div id="fs-nav-legend" style="display: none;">
 	<select id="fs-sel-cat"><option value="all">&nbsp;{L_SELECT_CAT}&nbsp;</option></select>
-	<span id="fs-nav-menu">&middot;&nbsp;<a class="menu-root" href="#fs-nav-list">{L_GO_TO_SECTION}</a></span>
+	<span id="fs-nav-menu">&nbsp;&middot;&nbsp;<a class="menu-root" href="#fs-nav-list">{L_GO_TO_SECTION}</a></span>
 </div>
 
 <form method="POST" name="post" action="{TOR_SEARCH_ACTION}#results">
@@ -181,7 +181,7 @@ $(function(){
 	<th class="thHead">{L_TOR_SEARCH_TITLE}</th>
 </tr>
 <tr>
-	<td class="row4" style="padding: 4px";>
+	<td class="row4" style="padding: 4px;">
 
 		<table class="fieldsets borderless bCenter pad_0" cellspacing="0">
 		<tr>
@@ -264,6 +264,12 @@ $(function(){
 		</tr>
 		<tr>
 			<td colspan="2" width="50%">
+                <!-- IF TOR_STATUS -->
+                <fieldset style="margin-top: 0;">
+                    <legend>{L_TORRENT_STATUS}</legend>
+                    <div>{TOR_STATUS}</div>
+                </fieldset>
+                <!-- ENDIF -->
 				<fieldset style="margin-top: 0;">
 				<legend>{L_SHOW_COLUMN}</legend>
 				<div>
@@ -277,7 +283,7 @@ $(function(){
 				</div>
 				</fieldset>
 				<fieldset>
-				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{TITLE_MATCH_NAME}');">{L_TITLE_MATCH}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash');">{L_HASH_S}</span></legend>
+				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{TITLE_MATCH_NAME}').attr('maxlength','{TITLE_MATCH_MAX}');">{L_TITLE_MATCH}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash').attr('maxlength',64);">{L_HASH_S}</span></legend>
 				<div>
 					<p class="input">
 						<input id="title_search" style="width: 95%;" class="post" type="text" size="50" maxlength="{TITLE_MATCH_MAX}" name="{TITLE_MATCH_NAME}" value="{TITLE_MATCH_VAL}" />
@@ -447,11 +453,13 @@ $(function(){
 
 <div class="bottom_info">
 
+    <!-- IF PAGINATION -->
 	<div class="nav">
 		<p style="float: left">{PAGE_NUMBER}</p>
 		<p style="float: right">{PAGINATION}</p>
 		<div class="clear"></div>
 	</div>
+    <!-- ENDIF -->
 
 	<div class="spacer_4"></div>
 

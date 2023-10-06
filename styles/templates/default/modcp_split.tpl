@@ -13,7 +13,7 @@ function toggle_cbox (cb_id, tr_id)
 	return false;
 }
 </script>
-<style type="text/css"> .sel { background-color:#FFEFD5; } </style>
+<style> .sel { background-color:#FFEFD5; } </style>
 
 <form method="post" action="{S_SPLIT_ACTION}">
 
@@ -50,9 +50,9 @@ function toggle_cbox (cb_id, tr_id)
 		<td colspan="2" class="row2" align="center" style="padding: 0">
 		<table class="borderless">
 			<tr>
-				 <td class="row2" align="center"><span class="gen"><input type="checkbox" name="after_split_to_old" id="after_split_to_old" checked="checked" /><label for="after_split_to_old"> {L_BOT_AFTER_SPLIT_TO_OLD}</label></span></td>
+				 <td class="row2" align="center"><span class="gen"><input type="checkbox" name="after_split_to_old" id="after_split_to_old" checked /><label for="after_split_to_old"> {L_BOT_AFTER_SPLIT_TO_OLD}</label></span></td>
 				 <td>&nbsp;</td>
-				 <td class="row2" align="center"><span class="gen"><input type="checkbox" name="after_split_to_new" id="after_split_to_new" checked="checked" /><label for="after_split_to_new"> {L_BOT_AFTER_SPLIT_TO_NEW}</label></span></td>
+				 <td class="row2" align="center"><span class="gen"><input type="checkbox" name="after_split_to_new" id="after_split_to_new" checked /><label for="after_split_to_new"> {L_BOT_AFTER_SPLIT_TO_NEW}</label></span></td>
 				</tr>
 			</table>
 		</td>

@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Mesaj';
 $lang['POSTED'] = 'Gönderildi';
 $lang['USERNAME'] = 'Kullanıcı adı';
 $lang['PASSWORD'] = 'Şifre';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-posta';
 $lang['PM'] = 'AM';
 $lang['AUTHOR'] = 'Yazar';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Etkin';
 $lang['DISABLED'] = 'Devre dışı';
 $lang['ERROR'] = 'Hata';
 $lang['SELECT_ACTION'] = 'Seçin eylem';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
 $lang['PREVIOUS_PAGE'] = 'Önceki';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = '%sHere%s Kontrol Paneli Moderatör dönmek için 
 $lang['CLICK_RETURN_GROUP'] = '%sHere%s bilgi grup geri dönmek için tıklayın';
 
 $lang['ADMIN_PANEL'] = 'Yönetim Paneline git';
-$lang['ALL_CACHE'] = 'Tüm önbellek';
 $lang['ALL_CACHE_CLEARED'] = 'Önbellek temizlendi';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Şablon önbelleği temizlendi';
-$lang['DATASTORE'] = 'Veri deposuna';
 $lang['DATASTORE_CLEARED'] = 'Veri deposu temizlendi';
 $lang['BOARD_DISABLE'] = 'Üzgünüm, bu forumu devre dışı bırakılır. Sonra geri gelmeye çalışın';
 $lang['BOARD_DISABLE_CRON'] = 'Forum bakım için aşağı. Sonra geri gelmeye çalışın';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Bu forumda anketlerde oy <b>can</b>';
 $lang['RULES_VOTE_CANNOT'] = 'Bu forumda anketlerde oy <b>cannot</b>';
 $lang['RULES_MODERATE'] = '<b>can</b> bu forum orta sana';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Bu forumda hiçbir mesaj.Bu sayfada <b>Post Yeni Topic</b> linke <br />Click bir yazı.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Başlık';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Özel Mesaj';
 $lang['NO_NEW_PM'] = 'yeni ileti yok';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('Yeni Mesaj', 'Yeni Mesaj');
+$lang['NEW_PMS_DECLENSION'] = ['Yeni Mesaj', 'Yeni Mesaj'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('okunmamış', 'okunmamış');
+$lang['UNREAD_PMS_DECLENSION'] = ['okunmamış', 'okunmamış'];
 
 $lang['UNREAD_MESSAGE'] = 'Okunmamış ileti';
 $lang['READ_MESSAGE'] = 'Okumak mesaj';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Posta birine yayınlanan bir konuya cevap geld
 
 $lang['BOARD_LANG'] = 'Tahta dil';
 $lang['GENDER'] = 'Cinsiyet';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Bilinmeyen',
     1 => 'Erkek',
     2 => 'Kadın'
-);
+];
 $lang['MODULE_OFF'] = 'Modülü devre dışı bırakılır.';
 
 $lang['BIRTHDAY'] = 'Doğum günü';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset otomatik girişi anahtarı';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'ziyaret ettiğiniz tüm yerleri de dahil olmak üzere foruma otomatik giriş etkin';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Küçük bir grafik görüntü mesaj bilgilerini aşağıda görüntüler. Sadece bir görüntü bir anda gösterilebilir, genişliği %d fazla piksel, %d piksel daha büyük bir yükseklik ve dosya boyutu %d en fazla BB olabilir.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Silmek avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontrol seçeneği ihlali için <a href="%s"><b>forum rules</b></a> devre dışı';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Grubunuza katılmak için bir istek yapıldı.';
 $lang['GROUP_APPROVED'] = 'Talebiniz onaylandı.';
 $lang['GROUP_ADDED'] = 'Bu grup için eklenmiş.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Zaten bu grubun bir üyesisin';
-$lang['USER_IS_MEMBER_GROUP'] = 'Kullanıcı zaten bu grubun bir üyesidir';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Başarılı bir grup türü güncellendi.';
 $lang['EFFECTIVE_DATE'] = 'Tarih Etkili';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Ek çok büyük.<br />Could en büyük Boyutu
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Ek çok büyük.<br />Maximum Yükleme Boyutu: %d MB.Bu Boyutu php tanımlanan <br />Please unutmayın.ini, bu PHP tarafından belirlenen ve Ek Mod bu değeri geçersiz kılabilirsiniz.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = '%s Uzantısı izin verilmez'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = '%s Uzantılı bu Forumu Dosyaları göndermek için izin verilmez'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Ek çok büyük.<br />Max Boyutu: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Üzgünüm, ama tüm Ekleri için maksimum filesize ulaştı. Eğer bir sorunuz varsa, lütfen site yöneticisiyle iletişime geçin.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Eki eklendi, max beri olamaz. bu yazı %d Ekleri sayısı sağlandı'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Ek/Görüntü %d az piksel genişliğinde ve %d piksel yüksek olmalı';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Tohum';
 $lang['LEECHING'] = 'Sülük';
 $lang['IS_REGISTERED'] = 'Kayıtlı';
 $lang['MAGNET'] = 'Mıknatıs';
-$lang['DC_MAGNET'] = 'Dosya adı DC++ arama';
-$lang['DC_MAGNET_EXT'] = 'Uzantısı DC++ arama';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Durumu';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Durumu seçin';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Durum seçmediniz.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tüm durumlar';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'işaretli değil',
     TOR_CLOSED => 'kapalı',
     TOR_APPROVED => 'kontrol',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'geçici',
     TOR_PREMOD => 'pre-ılımlılık',
     TOR_REPLENISH => 'doldurmak',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Böyle bir durum yok!';
 $lang['TORRENT_FAILED'] = 'Dağıtım bulunamadı!';
 $lang['TOR_STATUS_DUB'] = 'Dağıtım aynı durum vardır';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Tür torrent başarıyla değiştirildi';
 $lang['DEL_TORRENT'] = 'Torrent silmek istediğinizden emin misiniz?';
 $lang['DEL_MOVE_TORRENT'] = 'Silmek ve konuyu taşımak istediğinizden emin misiniz?';
 $lang['UNEXECUTED_RELEASE'] = 'Şekilsiz bir sürüm var yeni bir düzeltme oluşmamış onun oluşturmadan önce!';
-$lang['STATUS_DOES_EXIST'] = 'Böyle bir durum yok: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Dağıtım statüsünün değiştirilmesi - %s';
@@ -1158,6 +1157,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'Yapamazsınız Gümüş';
 $lang['GOLD_STATUS'] = 'ALTIN TORRENT! İNDİR TRAFİK DİKKATE ALMAZ.';
 $lang['SILVER_STATUS'] = 'GÜMÜŞ TORRENT! İNDİR TRAFİK KISMEN KABUL!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Forumlarda arama';
 $lang['SELECT_CAT'] = 'Kategori seçin';
 $lang['GO_TO_SECTION'] = 'Goto bölüm';
@@ -1356,17 +1356,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('cevap', 'cevaplar');
-$lang['DECLENSION']['TIMES'] = array('zaman', 'kere');
+$lang['DECLENSION']['REPLIES'] = ['cevap', 'cevaplar'];
+$lang['DECLENSION']['TIMES'] = ['zaman', 'kere'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('ikinci', 'saniye'),
-    'minutes' => array('dakika', 'dakika'),
-    'hours' => array('saat', 'saat'),
-    'mday' => array('gün', 'gün'),
-    'mon' => array('ay', 'ay'),
-    'year' => array('yıl', 'yıl'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['ikinci', 'saniye'],
+    'minutes' => ['dakika', 'dakika'],
+    'hours' => ['saat', 'saat'],
+    'mday' => ['gün', 'gün'],
+    'mon' => ['ay', 'ay'],
+    'year' => ['yıl', 'yıl'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1465,6 +1465,10 @@ $lang['CHOOSE_PASS'] = 'Parola alanı boş olamaz!';
 $lang['CHOOSE_PASS_ERR'] = 'Girilen şifreler eşleşmiyor';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Şifrenizi %d en azından karakter olmalıdır';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Şifrenizi $d artık karakter olması gerekir';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Parolalar eşleşmiyor';
 $lang['CHOOSE_PASS_REG_OK'] = 'Şifreler aynı, kayıt devam edebilirsiniz';
 $lang['CHOOSE_PASS_FAILED'] = 'Şifreyi değiştirmek için doğru, geçerli parola belirtmeniz gerekir';
@@ -1485,6 +1489,9 @@ $lang['OFF'] = 'kapalı';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'sorguları';
 $lang['LIMIT'] = 'Sınırı:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Özgür ve maksimum hızda.';
@@ -1512,6 +1519,8 @@ $lang['BOLD'] = '(Ctrl+B)kalın metin: [b]text[/b]';
 $lang['ITALIC'] = 'İtalik metin: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = '(Ctrl+U)altı çizili metin: [u]text[/u]';
 $lang['STRIKEOUT'] = '(Ctrl+S)üstü çizili metin: [s]text[/s]';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '(Ctrl+Q)alıntı metin: [quote]text[/quote]';
 $lang['IMG_TITLE'] = 'Resim ekle: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1604,18 +1613,6 @@ $lang['TRACKER_CONFIG'] = 'İzleyici ayarları';
 $lang['RELEASE_TEMPLATES'] = 'Sürüm Şablonları';
 $lang['ACTIONS_LOG'] = 'Eylem raporu';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Üzgünüz, tarayıcınız çerçeveleri desteklemiyor gibi görünmüyor';
-$lang['IDX_CLEAR_CACHE'] = 'Önbelleği Temizle:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Veri deposuna';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Şablonları';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net haber';
-$lang['IDX_UPDATE'] = 'Güncelleme:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Kullanıcı seviyeleri';
-$lang['IDX_SYNCHRONIZE'] = 'Senkronize:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Konular';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Kullanıcı Mesaj Sayısı';
-
 // Index
 $lang['MAIN_INDEX'] = 'Forum Dizini';
 $lang['FORUM_STATS'] = 'Forum İstatistikleri';
@@ -1641,8 +1638,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip sıkıştırma';
 $lang['NOT_AVAILABLE'] = 'Mevcut değil';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Önbelleği Temizle';
-$lang['TEMPLATES'] = 'Şablonları';
+$lang['DATASTORE'] = 'Veri deposuna';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Kullanıcı seviyeleri';
@@ -1723,6 +1721,8 @@ $lang['USER_AUTH_UPDATED'] = 'Kullanıcı izinleri güncellendi';
 $lang['GROUP_AUTH_UPDATED'] = 'Grup izinleri güncellendi';
 
 $lang['AUTH_UPDATED'] = 'İzinleri güncellendi';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = '%sHere%s Kullanıcı İzinleri geri dönmek için tıklayın';
 $lang['CLICK_RETURN_GROUPAUTH'] = '%sHere%s Grup İzinlerine dönmek için tıklayın';
 $lang['CLICK_RETURN_FORUMAUTH'] = '%sHere%s İzinleri Foruma dönmek için tıklayın';
@@ -2062,6 +2062,7 @@ $lang['NOAVATAR'] = 'Hayır avatar';
 $lang['TRACKER_STATS'] = 'İzleyici istatistikleri';
 $lang['WHOIS_INFO'] = 'IP adresi hakkında bilgi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Yöneticiler üzerinde index.php göster';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = 'V bu bölümde, * ya da T, kısımlar da dahil olmak üzere durumu dağılımları gerekmez <h4><span class="tor-icon tor-dup">&#8719;</span> Öncesi moderation</h4> <h6>İf, dağıtım otomatik olarak bu status</h6> almak';
 $lang['TOR_COMMENT'] = '<h4>Bir dağıtımın durumu hakkında yorum yapın</h4> <h6>Yorum, yayınlayıcıya yapılan hataları belirtmenizi sağlar. Durumlar eksikse sürüm</h6>düzeltmek için sürüm yöneticisine bir yayın yanıt formu sunulur.';
 $lang['SEED_BONUS_ADD'] = 'Dağılımları <h4>Adding tohum bonus </h4> <h6> Numarası </h6> kullanıcı ve onlar için ikramiye boyutu (saatte şarj) dağıtıldı';
@@ -2262,13 +2263,6 @@ $lang['RETURN_CONFIG'] = '%sReturn için Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigürasyon Başarıyla Güncellendi';
 $lang['SET_DEFAULTS'] = 'Varsayılanları geri yükle';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'İzci';
-$lang['FORUM_CFG_TITLE'] = 'Forum Ayarları';
-$lang['TRACKER_SETTINGS'] = 'İzleyici ayarları';
-
-$lang['CHANGES_DISABLED'] = 'Config.php engelli değişiklikler (bkz <b>$bb_cfg[\'tracker\']</b>)';
-
 $lang['OFF_TRACKER'] = 'Devre dışı bırakmak tracker';
 $lang['OFF_REASON'] = 'Devre dışı bırakma nedeni';
 $lang['OFF_REASON_EXPL'] = 'bu mesaj tracker devre dışı bırakıldığında, istemci gönderilecektir';
@@ -2413,14 +2407,14 @@ $lang['REPAIR_CRON'] = 'Tamir Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'İşi Düzenle';
 $lang['CRON_EDIT_HEAD_ADD'] = 'İş ekleyin';
 $lang['CRON_SCRIPT_EXPL'] = '"komut adı/cron/işleri/içerir"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Başlat',
     'hourly' => 'saat',
     'daily' => 'günlük',
     'weekly' => 'haftalık',
     'monthly' => 'aylık',
     'interval' => 'aralığı'
-);
+];
 $lang['NOSELECT'] = 'Hayır seçin';
 $lang['RUN_DAY'] = 'Gün';
 $lang['RUN_DAY_EXPL'] = 'bu gün bu iş çalıştırmak';
@@ -2547,17 +2541,22 @@ $lang['CALLSEED_MSG_OK'] = 'Mesaj tüm bu sürüm indirilen olanlar gönderildi'
 $lang['CALLSEED_MSG_SPAM'] = 'İsteği zaten bir kez başarıyla <br /><br />The değil (Muhtemelen)bir sonraki fırsat <b>%s</b> olmak için bir istek göndermek için gönderildi.';
 $lang['CALLSEED_HAVE_SEED'] = 'Konu (<b>Seeders:</b> %d)yardım gerektirmez';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Konu:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Konu:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Konu:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Konu:<br /> <b>opened</b>',
     'mod_topic_split' => 'Konu:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Gönderen:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Kullanıcı:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Kullanıcı:<br /> <b>ban</b>',
     'adm_user_unban' => 'Kullanıcı:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Tüm eylemler';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Eylemler Arama seçeneklerini Günlüğü: ';
@@ -2698,28 +2697,28 @@ $lang['MC_COMMENT_PM_SUBJECT'] = "Mesajında %s";
 $lang['MC_COMMENT_PM_MSG'] = "N[/quote] mesajında %s [url=sol]Merhaba, [b]%s[/b]
 Moderator [b]%s[/b][/url][quote]
 %s\\";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Sil yorum',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => '%s yorum',
         'type' => 'Yorum',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '%s bilgileri',
         'type' => 'Bilgi',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '%s uyarı',
         'type' => 'Uyarı',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '%s gelen ihlali',
         'type' => 'İhlali',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Site haritası';
 $lang['SITEMAP_ADMIN'] = 'Site yönetmek';
@@ -2760,7 +2759,7 @@ $lang['HASH_NOT_FOUND'] = 'Karma %s değilim serbest bulundu';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Bu sayfanın metni şurada düzenlenir: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu satır sadece yöneticileri görebilir.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu sayfada, kaynağın Temel Kurallar metni kullanıcılar için görüntülenir belirtebilirsiniz.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '30 gün aktif olmayan kullanıcılar',
     1 => '90 gün boyunca aktif olmayan kullanıcılar',
     2 => '(kaç megabayt)izleyicideki orta boy dağılımları',
@@ -2769,7 +2768,7 @@ $lang['TR_STATS'] = array(
     5 => '5 Ekim daha fazla tohum birçok eller nasıl',
     6 => 'en az 1 El dolduran bizi yükleyiciler kaç kişi (o)',
     7 => 'birçok son 30 gün içinde yükleyiciler nasıl',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Anket etkin';
 $lang['NEW_POLL_END'] = 'Anket tamamlandı';
@@ -2793,13 +2792,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Her satır, bir cevap için (max karşılık geli
 $lang['OLD_BROWSER'] = 'Eski bir tarayıcı kullanıyorsunuz. Web sitesi düzgün görüntülenmez.';
 $lang['GO_BACK'] = 'Geri dönmek';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Yükleme hatası dosya';
 $lang['UPLOAD_ERROR_SIZE'] = 'Yüklenen dosyayı %s en büyük boyutu aşıyor';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Görüntü geçersiz dosya türü';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Resim boyutları izin verilen maksimum %sx%s px aşmayacak';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Yüklenen dosya bir resim değil';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'İndirme için %s uzatamazsınız';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'sunucu için en büyük dosya boyutunu aştınız',
     UPLOAD_ERR_FORM_SIZE => 'maksimum dosya boyutunu aştınız',
     UPLOAD_ERR_PARTIAL => 'dosya kısmen indirilmiş',
@@ -2807,7 +2807,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'geçici dizin bulunamadı',
     UPLOAD_ERR_CANT_WRITE => 'yazma hatası',
     UPLOAD_ERR_EXTENSION => 'yükleme uzantısı tarafından durduruldu',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Bir robot olmadığını kontrol edin';

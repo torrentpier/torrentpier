@@ -20,15 +20,25 @@ class LogAction
         'mod_topic_move' => 2,
         'mod_topic_lock' => 3,
         'mod_topic_unlock' => 4,
-        'mod_post_delete' => 5,
-        'mod_topic_split' => 6,
-        'adm_user_delete' => 7,
-        'adm_user_ban' => 8,
-        'adm_user_unban' => 9,
+        'mod_topic_set_downloaded' => 5,
+        'mod_topic_unset_downloaded' => 6,
+        'mod_topic_renamed' => 7,
+        'mod_post_delete' => 8,
+        'mod_post_pin' => 9,
+        'mod_post_unpin' => 10,
+        'mod_topic_split' => 11,
+        'adm_user_delete' => 12,
+        'adm_user_ban' => 13,
+        'adm_user_unban' => 14,
     ];
     public $log_type_select = [];
     public $log_disabled = false;
 
+    /**
+     * Init
+     *
+     * @return void
+     */
     public function init()
     {
         global $lang, $bb_cfg;
@@ -39,10 +49,12 @@ class LogAction
     }
 
     /**
-     * @param $type_name
+     * Moderator
+     *
+     * @param string $type_name
      * @param array $args
      */
-    public function mod($type_name, array $args = [])
+    public function mod(string $type_name, array $args = [])
     {
         global $userdata;
 
@@ -88,10 +100,12 @@ class LogAction
     }
 
     /**
-     * @param $type_name
+     * Admin
+     *
+     * @param string $type_name
      * @param array $args
      */
-    public function admin($type_name, array $args = [])
+    public function admin(string $type_name, array $args = [])
     {
         $this->mod($type_name, $args);
     }

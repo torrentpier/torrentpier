@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 </script>
 
-<style type="text/css">
+<style>
 #cron_true, #cron_false { width: 95%; }
 #cron_true td { background: #d9facb; padding: 8px 8px; color: #286e0f; }
 #cron_false td { background: #eaeadf; padding: 8px 8px; color: #286e0f; }
@@ -33,13 +33,10 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 		<!-- IF TPL_CRON_LIST -->
 			<table id="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->" class="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->">
 				<tr>
-					<td>{L_CRON_ENABLED}</td>
-					<td>
-						<!-- IF CRON_ENABLED -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF -->
-					</td>
-					<td>{L_CRON_CHECK_INTERVAL}</td>
+					<td>{L_CRON_ENABLED}: <!-- IF CRON_ENABLED -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF --></td>
 					<td>
 						<input class="post" type="text" size="10" maxlength="255" name="cron_check_interval" value="{CRON_CHECK_INTERVAL}" />
+                        {L_CRON_CHECK_INTERVAL}
 					</td>
 					<td>
 						<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
@@ -108,14 +105,14 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 		<td colspan="2" class="catBottom">
 			{L_WITH_SELECTED}
 			<select name="cron_action" id="cron_select" >
-				<option value="" selected="selected" class="select-action">&raquo; {L_NOTHING}</option>
+				<option value="" selected class="select-action">&raquo; {L_NOTHING}</option>
 				<option value="run">{L_CRON_RUN}</option>
 				<option value="delete">{L_CRON_DEL}</option>
 				<option value="disable">{L_CRON_DISABLE}</option>
 				<option value="enable">{L_CRON_ENABLE}</option>
 			</select>
 			<label><input onclick="toggle_disabled('send', this.checked)" type="checkbox" name="confirm" value="1" /></label>&nbsp;
-			<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />
+			<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled />
 		</td>
 	</tr>
 </table>
@@ -149,8 +146,8 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 		<h6>{L_CRON_ACTIVE_EXPL}</h6>
 	</td>
 	<td>
-		<label><input type="radio" name="cron_active" value="1" <!-- IF CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="cron_active" value="0" <!-- IF not CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="cron_active" value="1" <!-- IF CRON_ACTIVE -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="cron_active" value="0" <!-- IF not CRON_ACTIVE -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -192,8 +189,8 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <tr>
 	<td><h4>{L_LOG_ENABLED}</h4></td>
 	<td>
-		<label><input type="radio" name="log_enabled" value="1" <!-- IF LOG_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="log_enabled" value="0" <!-- IF not LOG_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="log_enabled" value="1" <!-- IF LOG_ENABLED -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="log_enabled" value="0" <!-- IF not LOG_ENABLED -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -203,15 +200,15 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <tr>
 	<td><h4>{L_LOG_SQL_QUERIES}</h4></td>
 	<td>
-		<label><input type="radio" name="log_sql_queries" value="1" <!-- IF LOG_SQL_QUERIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="log_sql_queries" value="0" <!-- IF not LOG_SQL_QUERIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="log_sql_queries" value="1" <!-- IF LOG_SQL_QUERIES -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="log_sql_queries" value="0" <!-- IF not LOG_SQL_QUERIES -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_FORUM_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPL}</h6></td>
 	<td>
-		<label><input type="radio" name="disable_board" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="disable_board" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="disable_board" value="1" <!-- IF DISABLE_BOARD -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="disable_board" value="0" <!-- IF not DISABLE_BOARD -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -222,7 +219,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <tr>
 	<td colspan="2" class="catBottom">
 		<input type="reset" value="{L_RESET}" class="liteoption" />&nbsp;&nbsp;
-		<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />&nbsp;&nbsp;
+		<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled />&nbsp;&nbsp;
 		<label for="confirm">{L_CONFIRM}&nbsp;<input onclick="toggle_disabled('send', this.checked)" id="confirm" type="checkbox" name="confirm" value="1" /></label>
 	</td>
 </tr>

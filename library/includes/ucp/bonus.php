@@ -54,12 +54,12 @@ if (isset($_POST['bonus_id'])) {
 
     bb_die($message);
 } else {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'U_USER_PROFILE' => PROFILE_URL . $user_id,
-        'S_MODE_ACTION' => 'profile.php?mode=bonus',
+        'S_MODE_ACTION' => BONUS_URL,
         'PAGE_TITLE' => $lang['EXCHANGE_BONUS'],
-        'MY_BONUS' => sprintf($lang['MY_BONUS'], $user_points),
-    ));
+        'MY_BONUS' => sprintf($lang['MY_BONUS'], $user_points)
+    ]);
 
     foreach ($price_row as $i => $price) {
         if (!$price || !$upload_row[$i]) {
@@ -67,12 +67,12 @@ if (isset($_POST['bonus_id'])) {
         }
         $class = ($user_points >= $price) ? 'seed' : 'leech';
 
-        $template->assign_block_vars('bonus_upload', array(
+        $template->assign_block_vars('bonus_upload', [
             'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
             'ID' => $i,
             'DESC' => sprintf($lang['BONUS_UPLOAD_DESC'], humn_size($upload_row[$i] * 1024 * 1024 * 1024)),
-            'PRICE' => sprintf($lang['BONUS_UPLOAD_PRICE'], $class, sprintf('%.2f', $price)),
-        ));
+            'PRICE' => sprintf($lang['BONUS_UPLOAD_PRICE'], $class, sprintf('%.2f', $price))
+        ]);
     }
 
     print_page('usercp_bonus.tpl');

@@ -76,7 +76,7 @@ class BBCode
     private function init_replacements(): void
     {
         $tpl = $this->tpl;
-        $img_exp = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png)([a-z0-9/?&%;][^\[\]]*)?';
+        $img_exp = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png|bmp|webp)([a-z0-9/?&%;][^\[\]]*)?';
         $email_exp = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
 
         $this->preg = [
@@ -120,6 +120,10 @@ class BBCode
             '[/i]' => '</span>',
             '[s]' => '<span class="post-s">',
             '[/s]' => '</span>',
+            '[sup]' => '<sup>',
+            '[/sup]' => '</sup>',
+            '[sub]' => '<sub>',
+            '[/sub]' => '</sub>',
             '[del]' => '<span class="post-s">',
             '[/del]' => '</span>',
             '[clear]' => '<div class="clear">&nbsp;</div>',
@@ -345,8 +349,8 @@ class BBCode
 
         if ($this->smilies) {
             /** @noinspection NestedPositiveIfStatementsInspection */
-            if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text, 101, $smilies_cnt)) {
-                return (($smilies_cnt <= $bb_cfg['max_smilies']) && $bb_cfg['max_smilies'] > 0) ? $parsed_text : $text;
+            if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text)) {
+                return $parsed_text;
             }
         }
 

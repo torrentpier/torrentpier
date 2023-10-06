@@ -1,7 +1,7 @@
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
 <!DOCTYPE html>
-<html>
+<html lang="{$bb_cfg['default_lang']}">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}"/>
   <meta http-equiv="Content-Style-Type" content="text/css"/>
@@ -20,7 +20,7 @@
 <!-- IF TPL_ADMIN_NAVIGATE -->
 <!--========================================================================-->
 
-<style type="text/css">
+<style>
   body {
     background: #E5E5E5;
     min-width: 10px;
@@ -106,18 +106,18 @@
 
 <table>
   <tr>
-    <td><b>{L_CLEAR_CACHE}:</b></td>
+    <td><b>{L_CLEAR}:</b></td>
     <td>
-      <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
-      <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_ALL_CACHE}</a>,&nbsp;
-      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_TEMPLATES}</a>
+      <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>&nbsp;&middot;
+      <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_CLEAR_CACHE}</a>&nbsp;&middot;
+      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>
     </td>
   </tr>
   <tr>
     <td><b>{L_UPDATE}:</b></td>
     <td>
       <a href="#" id="update_user_level" onclick="ajax.manage_admin('update_user_level'); return false;">{L_USER_LEVELS}</a>
-      <!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->,&nbsp;
+      <!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->&middot;
       <a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); return false;">{L_INDEXER}</a>
       <!-- ENDIF -->
     </td>
@@ -125,14 +125,14 @@
   <tr>
     <td><b>{L_SYNCHRONIZE}:</b></td>
     <td>
-      <a href="#" id="sync_topics" onclick="ajax.manage_admin('sync_topics'); return false;">{L_TOPICS}</a>,&nbsp;
+      <a href="#" id="sync_topics" onclick="ajax.manage_admin('sync_topics'); return false;">{L_TOPICS}</a>&nbsp;&middot;
       <a href="#" id="sync_user_posts" onclick="ajax.manage_admin('sync_user_posts'); return false;">{L_USER_POSTS_COUNT}</a>
     </td>
   </tr>
   <tr>
     <td><b>{L_STATISTICS}:</b></td>
     <td>
-      <a href="stats/tr_stats.php" target="_blank">tr_stats.php</a>,&nbsp;
+      <a href="stats/tr_stats.php" target="_blank">tr_stats.php</a>&nbsp;&middot;
       <a href="stats/tracker.php" target="_blank">tracker.php</a>
     </td>
   </tr>
@@ -204,7 +204,7 @@
   <!-- BEGIN reg_user_row -->
   <tr class="{reg_user_row.ROW_CLASS}">
     <td class="bold" nowrap="nowrap">{reg_user_row.USER}</td>
-    <td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
+    <td align="center" nowrap="nowrap"><b>{L_LOGIN}:</b> {reg_user_row.STARTED} | <b>{L_LAST_UPDATED}:</b> {reg_user_row.LASTUPDATE}</td>
     <td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a>
     </td>
   </tr>

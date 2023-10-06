@@ -12,15 +12,16 @@ if (!empty($setmodules)) {
     $module['MODS']['CONFIGURATION'] = basename(__FILE__) . '?mode=config_mods';
     return;
 }
+
 require __DIR__ . '/pagestart.php';
 
 $mode = $_GET['mode'] ?? '';
 
-$return_links = array(
+$return_links = [
     'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
     'config' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="admin_board.php?mode=config">', '</a>'),
     'config_mods' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="admin_board.php?mode=config_mods">', '</a>')
-);
+];
 
 /**
  * Pull all config data
@@ -44,7 +45,7 @@ if (!$result = DB()->sql_query($sql)) {
             ) {
                 $new[$config_name] = serialize(str_replace(',', '.', $new[$config_name]));
             }
-            bb_update_config(array($config_name => $new[$config_name]));
+            bb_update_config([$config_name => $new[$config_name]]);
         }
     }
 
@@ -55,7 +56,7 @@ if (!$result = DB()->sql_query($sql)) {
 
 switch ($mode) {
     case 'config_mods':
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config_mods',
             'CONFIG_MODS' => true,
 
@@ -73,6 +74,7 @@ switch ($mode) {
             'NETWORK_NEWS_FORUM_ID' => $new['network_news_forum_id'],
             'WHOIS_INFO' => $new['whois_info'],
             'SHOW_MOD_INDEX' => $new['show_mod_index'],
+            'SHOW_BOARD_START_INDEX' => $new['show_board_start_index'],
             'BIRTHDAY_ENABLED' => $new['birthday_enabled'],
             'BIRTHDAY_MAX_AGE' => $new['birthday_max_age'],
             'BIRTHDAY_MIN_AGE' => $new['birthday_min_age'],
@@ -81,8 +83,8 @@ switch ($mode) {
             'TOR_COMMENT' => $new['tor_comment'],
             'SEED_BONUS_ENABLED' => $new['seed_bonus_enabled'],
             'SEED_BONUS_TOR_SIZE' => $new['seed_bonus_tor_size'],
-            'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate'],
-        ));
+            'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate']
+        ]);
 
         if ($new['seed_bonus_points'] && $new['seed_bonus_release']) {
             $seed_bonus = unserialize($new['seed_bonus_points']);
@@ -93,10 +95,10 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('seed_bonus', array(
+                $template->assign_block_vars('seed_bonus', [
                     'RELEASE' => $seed_release[$i],
-                    'POINTS' => $row,
-                ));
+                    'POINTS' => $row
+                ]);
             }
         }
 
@@ -109,23 +111,23 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('bonus_upload', array(
+                $template->assign_block_vars('bonus_upload', [
                     'UP' => $row,
-                    'PRICE' => $price_row[$i],
-                ));
+                    'PRICE' => $price_row[$i]
+                ]);
             }
         }
         break;
 
     default:
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config',
             'CONFIG' => true,
 
             'SITENAME' => htmlCHR($new['sitename']),
             'CONFIG_SITE_DESCRIPTION' => htmlCHR($new['site_desc']),
-            'DISABLE_BOARD' => $new['board_disable'] ? true : false,
-            'ALLOW_AUTOLOGIN' => $new['allow_autologin'] ? true : false,
+            'DISABLE_BOARD' => (bool)$new['board_disable'],
+            'ALLOW_AUTOLOGIN' => (bool)$new['allow_autologin'],
             'AUTOLOGIN_TIME' => (int)$new['max_autologin_time'],
             'MAX_POLL_OPTIONS' => $new['max_poll_options'],
             'FLOOD_INTERVAL' => $new['flood_interval'],
@@ -137,14 +139,14 @@ switch ($mode) {
             'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],
-            'PRUNE_ENABLE' => $new['prune_enable'] ? true : false,
-            'ALLOW_BBCODE' => $new['allow_bbcode'] ? true : false,
-            'ALLOW_SMILIES' => $new['allow_smilies'] ? true : false,
-            'ALLOW_SIG' => $new['allow_sig'] ? true : false,
+            'PRUNE_ENABLE' => (bool)$new['prune_enable'],
+            'ALLOW_BBCODE' => (bool)$new['allow_bbcode'],
+            'ALLOW_SMILIES' => (bool)$new['allow_smilies'],
+            'ALLOW_SIG' => (bool)$new['allow_sig'],
             'SIG_SIZE' => $new['max_sig_chars'],
-            'ALLOW_NAMECHANGE' => $new['allow_namechange'] ? true : false,
-            'SMILIES_PATH' => $new['smilies_path'],
-        ));
+            'ALLOW_NAMECHANGE' => (bool)$new['allow_namechange'],
+            'SMILIES_PATH' => $new['smilies_path']
+        ]);
         break;
 }
 

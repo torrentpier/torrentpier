@@ -8,15 +8,15 @@
  */
 
 define('BB_SCRIPT', 'tracker');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 // Page config
 $page_cfg['include_bbcode_js'] = true;
 $page_cfg['use_tablesorter'] = true;
-$page_cfg['load_tpl_vars'] = array(
-    'post_icons',
-);
+$page_cfg['load_tpl_vars'] = [
+    'post_icons'
+];
 
 // Session start
 $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
@@ -46,7 +46,9 @@ $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
 $search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
-$cat_forum = $tor_to_show = $search_in_forums_ary = array();
+$status = $_POST['status'] ?? false;
+
+$cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
 $tr_error = $poster_error = false;
 $row_num = $tor_count = 0;
@@ -135,7 +137,7 @@ $order_opt = array(
         'sql' => 'tor.seeder_last_seen',
     ),
 );
-$order_select = array();
+$order_select = [];
 foreach ($order_opt as $val => $opt) {
     $order_select[$opt['lang']] = $val;
 }
@@ -179,7 +181,7 @@ $time_opt = array(
         'sql' => TIMENOW - 86400 * 30,
     ),
 );
-$time_select = array();
+$time_select = [];
 foreach ($time_opt as $val => $opt) {
     $time_select[$opt['lang']] = $val;
 }
@@ -215,7 +217,7 @@ $s_not_seen_opt = array(
         'sql' => 0,
     ),
 );
-$s_not_seen_select = array();
+$s_not_seen_select = [];
 foreach ($s_not_seen_opt as $val => $opt) {
     $s_not_seen_select[$opt['lang']] = $val;
 }
@@ -296,7 +298,7 @@ if (isset($_GET[$user_releases_key])) {
 }
 
 // Restore torrents list and search settings if we have valid $search_id
-$tor_list_ary = array();
+$tor_list_ary = [];
 $tor_list_sql = '';
 
 if ($search_id) {
@@ -347,7 +349,7 @@ $datastore->rm('cat_forums');
 if (!$set_default) {
     // Search in forum or category
     // Get requested cat_id
-    $search_in_forums_fary = array();
+    $search_in_forums_fary = [];
 
     if ($req_cat_id =& $_REQUEST[$cat_key]) {
         if (isset($cat_forum['c'][$req_cat_id])) {
@@ -426,7 +428,7 @@ if (!$set_default) {
     }
 }
 
-$dl_status = array();
+$dl_status = [];
 if ($dl_cancel_val) {
     $dl_status[] = DL_STATUS_CANCEL;
 }
@@ -495,7 +497,7 @@ if ($allowed_forums) {
         'sort',
         'time',
     );
-    $curr_set = array();
+    $curr_set = [];
     foreach ($save_in_db as $name) {
         $curr_set[${"{$name}_key"}] = ${"{$name}_val"};
     }
@@ -593,6 +595,9 @@ if ($allowed_forums) {
         if ($tor_type) {
             $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
         }
+        if (is_countable($status)) {
+            $SQL['WHERE'][] = "tor.tor_status IN(" . implode(', ', $status) . ")";
+        }
 
         // ORDER
         $SQL['ORDER BY'][] = "{$order_opt[$order_val]['sql']} {$sort_opt[$sort_val]['sql']}";
@@ -640,7 +645,7 @@ if ($allowed_forums) {
         $select = "
 			SELECT
 				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
-				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
+				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2
 		";
         $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
         $select .= (!$hide_forum) ? ", tor.forum_id" : '';
@@ -687,7 +692,6 @@ if ($allowed_forums) {
 			$limit
 		";
 
-        $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
         // Build torrents table
         foreach (DB()->fetch_rowset($sql) as $tor) {
             $dl = $tor['speed_down'] ?? 0;
@@ -698,7 +702,7 @@ if ($allowed_forums) {
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], ($passkey['auth_key'] ?? ''));
+            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), wbr($tor['topic_title']));
             $compl = $tor['complete_count'];
             $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
             $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
@@ -801,6 +805,20 @@ foreach ($cat_forum['c'] as $cat_id => $forums_ary) {
 $search_all_opt = '<option value="' . $search_all . '" value="fs-' . $search_all . '"' . (($forum_val == $search_all) ? HTML_SELECTED : '') . '>&nbsp;' . htmlCHR($lang['ALL_AVAILABLE']) . "</option>\n";
 $cat_forum_select = "\n" . '<select id="fs-main" style="width: 100%;" name="' . $forum_key . '[]" multiple size="' . $forum_select_size . "\">\n" . $search_all_opt . $opt . "</select>\n";
 
+// Status select
+if (IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
+    $statuses = '<table border="0" cellpadding="0" cellspacing="0">';
+    foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
+        $statuses .= '<tr>';
+        foreach ($statuses_part as $status_id => $status_styles) {
+            $checked = (is_countable($status) && in_array($status_id, $status)) ? 'checked' : '';
+            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
+        }
+        $statuses .= '</tr>';
+    }
+    $statuses .= '</table>';
+}
+
 // Sort dir
 $template->assign_vars(array(
     'SORT_NAME' => $sort_key,
@@ -861,7 +879,7 @@ $save_through_pages = array(
     'show_speed',
     'tor_type',
 );
-$hidden_fields = array();
+$hidden_fields = [];
 foreach ($save_through_pages as $name) {
     $hidden_fields['prev_' . ${"{$name}_key"}] = ${"{$name}_val"};
 }
@@ -879,6 +897,7 @@ $template->assign_vars(array(
     'S_RG_SELECT' => build_select($s_rg_key, $s_release_group_select, $s_rg_val),
     'TOR_SEARCH_ACTION' => $tracker_url,
     'TOR_COLSPAN' => $tor_colspan,
+    'TOR_STATUS' => $statuses ?? false,
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'POSTER_NAME_MAX' => $poster_name_max_len,
     'POSTER_ERROR' => $poster_error,

@@ -9,6 +9,17 @@ $(document).ready(function(){
 		sortList: [[4,1]]
 	});
 });
+
+// callseed
+ajax.callseed = function (topic_id) {
+    ajax.exec({
+        action: 'callseed',
+        topic_id: topic_id,
+    });
+};
+ajax.callback.callseed = function (data) {
+    alert(data.response);
+};
 </script>
 
 <tr>
@@ -46,14 +57,14 @@ $(document).ready(function(){
 	<td colspan="2" class="borderless bCenter pad_8">
 			{L_SIZE}:&nbsp; <b>{TOR_SIZE}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
 			{L_IS_REGISTERED}:&nbsp; <b>{TOR_LONGEVITY}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
-			{L_COMPLETED}:&nbsp; <b>{TOR_COMPLETED}</b>
+			{L_COMPLETED}:&nbsp; <b title="Полных скачиваний: {TOR_COMPLETED}">{TOR_DOWNLOAD_COUNT}</b>
 	</td>
 </tr>
 <!-- ENDIF / SHOW_DL_LIST_TOR_INFO -->
 
 <!-- BEGIN dl_list_none -->
 <tr>
-	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->DL-List: <!-- ENDIF -->{L_NONE}</td>
+	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->{L_SHOW_DL_LIST}: {L_NONE}<!-- ENDIF --></td>
 </tr>
 <!-- END dl_list_none -->
 
@@ -238,7 +249,7 @@ $(document).ready(function(){
 		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption" /><!-- ENDIF -->
 	</form>
 	<!-- ENDIF -->
-	<!-- IF CALL_SEED --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->
+    <!-- IF CALL_SEED --><input onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
 	&nbsp;
 	</td>
 </tr>

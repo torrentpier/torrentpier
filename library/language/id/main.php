@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Posting';
 $lang['POSTED'] = 'Diposting';
 $lang['USERNAME'] = 'Username';
 $lang['PASSWORD'] = 'Password';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Penulis';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Diaktifkan';
 $lang['DISABLED'] = 'Keluarga';
 $lang['ERROR'] = 'Kesalahan';
 $lang['SELECT_ACTION'] = 'Pilih action';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Berikutnya';
 $lang['PREVIOUS_PAGE'] = 'Sebelumnya';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Klik %sHere%s untuk kembali ke Moderator Panel Ko
 $lang['CLICK_RETURN_GROUP'] = 'Klik %sHere%s untuk kembali ke kelompok informasi';
 
 $lang['ADMIN_PANEL'] = 'Pergi ke Panel Administrasi';
-$lang['ALL_CACHE'] = 'Semua cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache yang telah dibersihkan';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache yang telah dibersihkan';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore yang telah dibersihkan';
 $lang['BOARD_DISABLE'] = 'Maaf, forum ini dinonaktifkan. Cobalah untuk datang kembali nanti';
 $lang['BOARD_DISABLE_CRON'] = 'Forum sedang dalam pemeliharaan. Cobalah untuk datang kembali nanti';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Anda <b>can</b> suara dalam jajak pendapat di forum i
 $lang['RULES_VOTE_CANNOT'] = 'Anda <b>cannot</b> suara dalam jajak pendapat di forum ini';
 $lang['RULES_MODERATE'] = 'Anda <b>can</b> moderat forum ini';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Tidak ada posting di forum ini.<br />Click pada <b>Post Baru Topic</b> link di halaman ini, untuk posting.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Lihat topik';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Pesan Pribadi';
 $lang['NO_NEW_PM'] = 'tidak ada pesan baru';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('pesan baru', 'pesan baru');
+$lang['NEW_PMS_DECLENSION'] = ['pesan baru', 'pesan baru'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('belum dibaca', 'belum dibaca');
+$lang['UNREAD_PMS_DECLENSION'] = ['belum dibaca', 'belum dibaca'];
 
 $lang['UNREAD_MESSAGE'] = 'Pesan yang belum dibaca';
 $lang['READ_MESSAGE'] = 'Baca pesan';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Mengirim e-mail ketika seseorang balasan untuk
 
 $lang['BOARD_LANG'] = 'Dewan bahasa';
 $lang['GENDER'] = 'Jenis kelamin';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Tidak diketahui',
     1 => 'Laki-laki',
     2 => 'Perempuan'
-);
+];
 $lang['MODULE_OFF'] = 'Modul dinonaktifkan!';
 
 $lang['BIRTHDAY'] = 'Ulang tahun';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset kunci autologin';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'termasuk semua tempat yang anda telah mengunjungi forum ini memungkinkan auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Menampilkan gambar grafis kecil di bawah ini rincian anda di posting ini. Hanya satu gambar yang dapat ditampilkan pada satu waktu, lebarnya dapat tidak lebih besar dari %d piksel, ketinggian tidak lebih besar dari %d pixel, dan ukuran file tidak lebih dari %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Menghapus avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar pilihan kontrol yang dinonaktifkan karena pelanggaran <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Meng-Upload avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Permintaan untuk bergabung dengan grup anda telah dibu
 $lang['GROUP_APPROVED'] = 'Permintaan anda telah disetujui.';
 $lang['GROUP_ADDED'] = 'Anda telah ditambahkan ke grup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Anda sudah menjadi anggota grup ini';
-$lang['USER_IS_MEMBER_GROUP'] = 'Pengguna ini telah menjadi anggota dari kelompok ini';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Berhasil diperbarui kelompok jenis.';
 $lang['EFFECTIVE_DATE'] = 'Tanggal Efektif';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Lampiran terlalu besar.<br />Could tidak mend
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Lampiran terlalu besar.<br />Maximum Tanggal Ukuran: %d MB.<br />Please perhatikan bahwa Ukuran ini didefinisikan dalam php.ini, ini berarti itu ditetapkan oleh PHP dan Lampiran Mod tidak bisa mengesampingkan nilai ini.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Perpanjangan %s tidak diperbolehkan'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Anda tidak diperbolehkan untuk mengirim File dengan Ekstensi %s dalam Forum ini'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Lampiran terlalu besar.<br />Max Ukuran: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Maaf, tapi maksimal ukuran file untuk semua Lampiran tercapai. Silahkan hubungi Administrator Dewan jika anda memiliki pertanyaan.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Lampiran tidak dapat ditambahkan, sejak max. jumlah %d Lampiran dalam posting ini dicapai'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Lampiran/Gambar harus kurang dari %d piksel lebar dan %d piksel tinggi';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Benih';
 $lang['LEECHING'] = 'Lintah';
 $lang['IS_REGISTERED'] = 'Terdaftar';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Pencarian di DC++ dengan nama file';
-$lang['DC_MAGNET_EXT'] = 'Pencarian di DC++ dengan ekstensi';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Pilih status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Anda belum memilih status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Semua status';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'tidak diperiksa',
     TOR_CLOSED => 'ditutup',
     TOR_APPROVED => 'diperiksa',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'sementara',
     TOR_PREMOD => 'pra-moderasi',
     TOR_REPLENISH => 'mengisi',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Status tersebut tidak ada!';
 $lang['TORRENT_FAILED'] = 'Distribusi tidak ditemukan!';
 $lang['TOR_STATUS_DUB'] = 'Distribusi memiliki status yang sama';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Jenis torrent berhasil diubah';
 $lang['DEL_TORRENT'] = 'Apakah anda yakin anda ingin menghapus torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Apakah anda yakin anda ingin menghapus dan memindahkan topik?';
 $lang['UNEXECUTED_RELEASE'] = 'Apakah anda memiliki berbentuk rilis sebelum membuat yang baru fix nya belum terbentuk!';
-$lang['STATUS_DOES_EXIST'] = 'Status tersebut tidak ada: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Mengubah status distribusi - %s';
@@ -1154,6 +1153,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake silver';
 $lang['GOLD_STATUS'] = 'EMAS TORRENT! DOWNLOAD LALU LINTAS TIDAK MEMPERTIMBANGKAN!';
 $lang['SILVER_STATUS'] = 'PERAK TORRENT! DOWNLOAD LALU LINTAS SEBAGIAN DIANGGAP!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Cari di Forum';
 $lang['SELECT_CAT'] = 'Pilih kategori';
 $lang['GO_TO_SECTION'] = 'Goto bagian';
@@ -1352,17 +1352,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('balas', 'balasan');
-$lang['DECLENSION']['TIMES'] = array('waktu', 'kali');
+$lang['DECLENSION']['REPLIES'] = ['balas', 'balasan'];
+$lang['DECLENSION']['TIMES'] = ['waktu', 'kali'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('kedua', 'detik'),
-    'minutes' => array('menit', 'menit'),
-    'hours' => array('jam', 'jam'),
-    'mday' => array('hari', 'hari'),
-    'mon' => array('bulan', 'bulan'),
-    'year' => array('tahun', 'tahun'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['kedua', 'detik'],
+    'minutes' => ['menit', 'menit'],
+    'hours' => ['jam', 'jam'],
+    'mday' => ['hari', 'hari'],
+    'mon' => ['bulan', 'bulan'],
+    'year' => ['tahun', 'tahun'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'Field untuk password tidak boleh kosong!';
 $lang['CHOOSE_PASS_ERR'] = 'Masukkan kata sandi tidak cocok';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Kata sandi anda harus setidaknya %d karakter';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Kata sandi anda harus tidak lebih dari $d karakter';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Password yang sesuai';
 $lang['CHOOSE_PASS_REG_OK'] = 'Password yang sesuai, anda dapat melanjutkan dengan pendaftaran';
 $lang['CHOOSE_PASS_FAILED'] = 'Untuk mengubah password, anda harus benar menentukan kata sandi saat ini';
@@ -1481,6 +1485,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'query';
 $lang['LIMIT'] = 'Batas:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Download gratis dan dengan kecepatan maksimum!';
@@ -1508,6 +1515,8 @@ $lang['BOLD'] = 'Teks tebal: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Menggarisbawahi teks: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Teks coret: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Kutipan teks: [quote]text[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Sisipkan gambar: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1600,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker pengaturan';
 $lang['RELEASE_TEMPLATES'] = 'Rilis Template';
 $lang['ACTIONS_LOG'] = 'Laporan tentang tindakan';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Maaf, browser anda tampaknya tidak mendukung frame';
-$lang['IDX_CLEAR_CACHE'] = 'Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Template';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net berita';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Tingkat pengguna';
-$lang['IDX_SYNCHRONIZE'] = 'Sinkronisasi:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Topik';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Posting pengguna count';
-
 // Index
 $lang['MAIN_INDEX'] = 'Indeks Forum';
 $lang['FORUM_STATS'] = 'Forum Statistik';
@@ -1637,8 +1634,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Tidak tersedia';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['TEMPLATES'] = 'Template';
+$lang['DATASTORE'] = 'Datastore';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Tingkat pengguna';
@@ -1719,6 +1717,8 @@ $lang['USER_AUTH_UPDATED'] = 'Izin pengguna telah diperbarui';
 $lang['GROUP_AUTH_UPDATED'] = 'Kelompok izin telah diperbarui';
 
 $lang['AUTH_UPDATED'] = 'Izin telah diperbarui';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klik %sHere%s untuk kembali ke User Permissions';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klik %sHere%s untuk kembali ke Kelompok Permissions';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik %sHere%s untuk kembali ke Forum Permissions';
@@ -2058,6 +2058,7 @@ $lang['NOAVATAR'] = 'Tidak ada avatar';
 $lang['TRACKER_STATS'] = 'Statistik tracker';
 $lang['WHOIS_INFO'] = 'Informasi tentang alamat IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Menunjukkan pada moderator index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pra-moderation</h4> <h6>If anda tidak memiliki distribusi status v, #, atau T pada bagian ini, termasuk subbagian, distribusi otomatis akan menerima ini status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Mengomentari status distribusi</h4> <h6>Komentar memungkinkan Anda menunjukkan kesalahan yang dibuat pada penerbit. Jika status tidak lengkap, formulir respons rilis tersedia untuk manajer rilis untuk memperbaiki rilis</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding benih bonus </h4> <h6> Jumlah distro yang diberikan oleh pengguna dan ukuran bonus untuk mereka (pengisian kali dalam satu jam) </h6>';
@@ -2258,13 +2259,6 @@ $lang['RETURN_CONFIG'] = '%sReturn untuk Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurasi Berhasil Diperbarui';
 $lang['SET_DEFAULTS'] = 'Restore default';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum pengaturan';
-$lang['TRACKER_SETTINGS'] = 'Tracker pengaturan';
-
-$lang['CHANGES_DISABLED'] = 'Perubahan dinonaktifkan (lihat <b>$bb_cfg[\'tracker\']</b> di config.php)';
-
 $lang['OFF_TRACKER'] = 'Menonaktifkan tracker';
 $lang['OFF_REASON'] = 'Menonaktifkan alasan';
 $lang['OFF_REASON_EXPL'] = 'pesan ini akan dikirim ke klien ketika tracker dinonaktifkan';
@@ -2409,14 +2403,14 @@ $lang['REPAIR_CRON'] = 'Perbaikan Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Mengedit pekerjaan';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Tambahkan pekerjaan';
 $lang['CRON_SCRIPT_EXPL'] = 'nama script dari "meliputi/cron/lowongan/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Pilih start',
     'hourly' => 'per jam',
     'daily' => 'sehari-hari',
     'weekly' => 'mingguan',
     'monthly' => 'bulanan',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Tidak ada pilih';
 $lang['RUN_DAY'] = 'Berjalan di malam hari';
 $lang['RUN_DAY_EXPL'] = 'hari ketika pekerjaan ini berjalan';
@@ -2543,17 +2537,22 @@ $lang['CALLSEED_MSG_OK'] = 'Pesan telah dikirimkan ke semua orang yang mengunduh
 $lang['CALLSEED_MSG_SPAM'] = 'Permintaan sudah pernah berhasil dikirim (Mungkin tidak anda)<br /><br />The kesempatan berikutnya untuk mengirim permintaan untuk menjadi <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Topik tidak memerlukan bantuan (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Topik:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Topik:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Topik:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Topik:<br /> <b>opened</b>',
     'mod_topic_split' => 'Topik:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Pengguna:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Pengguna:<br /> <b>ban</b>',
     'adm_user_unban' => 'Pengguna:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Semua tindakan';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Tindakan Log: pilihan Pencarian';
@@ -2692,28 +2691,28 @@ $lang['MC_LEGEND'] = 'Jenis komentar';
 $lang['MC_FAQ'] = 'Teks yang dimasukkan akan ditampilkan di bawah pesan ini';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s dalam pesan anda";
 $lang['MC_COMMENT_PM_MSG'] = "Halo, [b]%s[/b]\nModerator kiri dalam pesan anda [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Hapus komentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentar dari %s',
         'type' => 'Komentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informasi dari %s',
         'type' => 'Informasi',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Peringatan dari %s',
         'type' => 'Peringatan',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Pelanggaran dari %s',
         'type' => 'Pelanggaran',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Mengelola sitemap';
@@ -2754,7 +2753,7 @@ $lang['HASH_NOT_FOUND'] = 'Rilis dengan hash %s tidak ditemukan';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Teks halaman ini diedit di: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Baris ini hanya dapat melihat administrator.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pada halaman ini, anda dapat menentukan teks aturan dasar dari sumber daya ditampilkan kepada pengguna.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'pengguna yang tidak aktif dalam 30 hari',
     1 => 'pengguna yang tidak aktif selama 90 hari',
     2 => 'ukuran medium distro di pelacak (banyak megabyte)',
@@ -2763,7 +2762,7 @@ $lang['TR_STATS'] = array(
     5 => 'berapa banyak tangan mana yang penyemaian lebih dari 5 biji',
     6 => 'berapa banyak dari kita pengunggah (orang-orang yang memenuhi minimal 1 tangan)',
     7 => 'berapa banyak pengunggah selama 30 hari terakhir',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Jajak pendapat diaktifkan';
 $lang['NEW_POLL_END'] = 'Jajak pendapat selesai';
@@ -2787,13 +2786,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Setiap baris sesuai dengan salah satu jawaban (ma
 $lang['OLD_BROWSER'] = 'Anda menggunakan browser usang. Website tidak akan ditampilkan dengan benar.';
 $lang['GO_BACK'] = 'Kembali';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Upload File error';
 $lang['UPLOAD_ERROR_SIZE'] = 'Upload file yang melebihi ukuran maksimum %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Berkas tidak valid jenis gambar';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Gambar dimensi melebihi maksimum yang diijinkan %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'File yang di upload gambar';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Ekstensi %s untuk download tidak diperbolehkan';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'anda telah melebihi batas maksimal ukuran file untuk server',
     UPLOAD_ERR_FORM_SIZE => 'anda telah melebihi batas maksimum file upload size',
     UPLOAD_ERR_PARTIAL => 'berkas sebagian download',
@@ -2801,7 +2801,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'direktori sementara tidak ditemukan',
     UPLOAD_ERR_CANT_WRITE => 'kesalahan menulis',
     UPLOAD_ERR_EXTENSION => 'tanggal dihentikan oleh ekstensi',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Periksa bahwa anda bukan robot';

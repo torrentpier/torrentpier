@@ -14,7 +14,7 @@
 	<div class="floatL">
 		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a> &#0183;
 		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
-    <!-- IF U_ATOM_FEED --><a href="{U_ATOM_FEED}" class="med">{FEED_IMG} {L_LATEST_RELEASES}</a> &#0183;<!-- ENDIF -->
+        <!-- IF U_ATOM_FEED --><a href="{U_ATOM_FEED}" class="med">{FEED_IMG} {L_LATEST_RELEASES}</a> &#0183;<!-- ENDIF -->
 		<a href="{U_INDEX}?map=1" class="med bold">{FEED_IMG} {L_FORUM_MAP}</a>
 	</div>
 	<div class="floatR med bold">
@@ -48,7 +48,7 @@
 <div id="forums_wrap">
 
 <!-- IF H_C_AL_MESS -->
-<div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{L_HIDE_CAT_MESS} &middot; <a href="index.php?sh=1">{L_SHOW_ALL}</a></div>
+<div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{L_HIDE_CAT_MESS} &middot; <a href="{U_INDEX}?sh=1">{L_SHOW_ALL}</a></div>
 <div class="spacer_2"></div>
 <!-- ENDIF -->
 
@@ -155,7 +155,7 @@
 <!-- IF LOGGED_IN and SHOW_FORUMS -->
 <div id="mark_all_forums_read">
 	<a href="{U_SEARCH_NEW}" class="med">{L_SEARCH_NEW}</a> &#0183;
-	<a href="{U_INDEX}" class="med" onclick="setCookie('{COOKIE_MARK}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
+	<a href="{U_INDEX}" class="med" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
 </div>
 <!-- ENDIF -->
 
@@ -173,6 +173,10 @@
 				<p>{TOTAL_USERS}</p>
 				<p>{TOTAL_GENDER}</p>
 				<p>{NEWEST_USER}</p>
+
+                <!-- IF BOARD_START -->
+                <p style="margin-top: 4px;">{BOARD_START}</p>
+                <!-- ENDIF -->
 
 				<!-- IF $bb_cfg['tor_stats'] -->
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
@@ -198,7 +202,7 @@
 				<p>{RECORD_USERS}</p>
 
 				<!-- IF SHOW_ONLINE_LIST -->
-					<style type="text/css"><!-- IF IS_ADMIN -->.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }<!-- ELSE -->.ou_stat { display: none; }<!-- ENDIF --></style>
+					<style><!-- IF IS_ADMIN -->.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }<!-- ELSE -->.ou_stat { display: none; }<!-- ENDIF --></style>
 					<a name="online"></a>
 					<div id="online_userlist" style="margin-top: 4px;">{LOGGED_IN_USER_LIST}</div>
 

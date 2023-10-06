@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy;
 
 use mysqli_result;
+
 use TorrentPier\Dev;
 
 /**
@@ -19,7 +20,7 @@ use TorrentPier\Dev;
 class SqlDb
 {
     public $cfg = [];
-    public $cfg_keys = ['dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
+    public $cfg_keys = ['dbhost', 'dbport', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
     private $link;
     public $result;
     public $db_server = '';
@@ -76,6 +77,8 @@ class SqlDb
      */
     public function init()
     {
+        mysqli_report(MYSQLI_ERROR_REPORTING);
+
         // Connect to server
         $this->connect();
 
@@ -97,11 +100,11 @@ class SqlDb
      */
     public function connect()
     {
-        $this->cur_query = $this->dbg_enabled ? "connect to: {$this->cfg['dbhost']}" : 'connect';
+        $this->cur_query = $this->dbg_enabled ? "connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}" : 'connect';
         $this->debug('start');
 
         $p = ((bool)$this->cfg['persist']) ? 'p:' : '';
-        $this->link = mysqli_connect($p . $this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname']);
+        $this->link = mysqli_connect($p . $this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname'], $this->cfg['dbport']);
         $this->selected_db = $this->cfg['dbname'];
 
         register_shutdown_function([&$this, 'close']);
@@ -936,7 +939,7 @@ class SqlDb
         $msg[] = 'PID     : ' . sprintf('%05d', getmypid());
         $msg[] = 'Request : ' . trim(print_r($_REQUEST, true)) . str_repeat('_', 78) . LOG_LF;
         $msg[] = '';
-        bb_log($msg, SQL_LOG_NAME);
+        bb_log($msg, IN_TRACKER ? SQL_TR_LOG_NAME : SQL_BB_LOG_NAME);
     }
 
     /**
@@ -950,8 +953,6 @@ class SqlDb
      */
     public function explain($mode, $html_table = '', $row = '')
     {
-        global $lang;
-
         $query = str_compact($this->cur_query);
         // remove comments
         $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
@@ -1013,7 +1014,7 @@ class SqlDb
                 $this->explain_hold .= '<tr>';
                 foreach (array_values($row) as $i => $val) {
                     $class = !($i % 2) ? 'row1' : 'row2';
-                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->selected_db}.", ',', ';'], ['', ', ', ';<br />'], $val) . '</td>';
+                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->selected_db}.", ',', ';'], ['', ', ', ';<br />'], $val ?? '') . '</td>';
                 }
                 $this->explain_hold .= '</tr>';
 

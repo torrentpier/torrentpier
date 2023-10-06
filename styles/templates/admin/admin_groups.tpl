@@ -35,8 +35,8 @@
 <tr>
 	<td>{L_RELEASE_GROUP}</td>
 	<td>
-		<label><input type="radio" name="release_group" value="1" <!-- IF RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_YES}</label>
-		<label><input type="radio" name="release_group" value="0" <!-- IF not RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="release_group" value="1" <!-- IF RELEASE_GROUP -->checked<!-- ENDIF --> />{L_YES}</label>
+		<label><input type="radio" name="release_group" value="0" <!-- IF not RELEASE_GROUP -->checked<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <!-- BEGIN group_edit -->

@@ -588,7 +588,7 @@ input[type="checkbox"], input[type="radio"] {
   -moz-box-sizing: border-box;
 }
 
-input[disabled="disabled"] {
+input:disabled {
   color: #808080;
 }
 

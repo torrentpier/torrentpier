@@ -3,12 +3,12 @@
 <form method="post" action="{S_MODE_ACTION}" name="post">
 <table width="100%">
 	<tr>
-		<td align="right" class="med" nowrap="nowrap">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}" /></td>
+		<td align="right" class="med" nowrap="nowrap">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}:&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}" /></td>
 	</tr>
 	<tr>
 		<td align="right" nowrap="nowrap">
 			<span class="genmed">
-				<input type="text" class="post" name="username" maxlength="25" size="25" tabindex="1" value="{S_USERNAME}" />&nbsp;<input type="submit" name="submituser" value="{L_FIND_USERNAME}" class="mainoption" />
+				<input placeholder="{L_SEARCH_S}" type="text" class="post" name="username" maxlength="25" size="25" tabindex="1" value="{S_USERNAME}" />&nbsp;<input type="submit" name="submituser" value="{L_FIND_USERNAME}" class="mainoption" />
 			</span>
 		</td>
 	</tr>
@@ -39,7 +39,7 @@
 <!-- BEGIN memberrow -->
 <tr class="{memberrow.ROW_CLASS} tCenter">
 	<td>{memberrow.ROW_NUMBER}</td>
-  <td><div>{memberrow.AVATAR}</div><b>{memberrow.USER}</b></td>
+    <td><div>{memberrow.AVATAR}</div><b>{memberrow.USER}</b></td>
 	<td>{memberrow.PM}</td>
 	<!-- IF IS_ADMIN --><td>{memberrow.EMAIL}</td><!-- ENDIF -->
 	<td>{memberrow.FROM}</td>
@@ -60,11 +60,13 @@
 
 <div class="bottom_info">
 
+    <!-- IF PAGINATION -->
 	<div class="nav">
 		<p style="float: left">{PAGE_NUMBER}</p>
 		<p style="float: right">{PAGINATION}</p>
 		<div class="clear"></div>
 	</div>
+    <!-- ENDIF -->
 
 	<div class="spacer_4"></div>
 

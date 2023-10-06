@@ -57,3 +57,21 @@ ALTER TABLE `bb_users` CHANGE `username` `username` VARCHAR(255) NOT NULL DEFAUL
 ALTER TABLE `bb_users` CHANGE `user_password` `user_password` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
 ALTER TABLE `bb_users` CHANGE `user_actkey` `user_actkey` VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE `bb_users` CHANGE `user_newpasswd` `user_newpasswd` VARCHAR(255) NOT NULL DEFAULT '';
+
+// 2.4.0-alpha3
+INSERT INTO bb_config VALUES ('show_board_start_index', '1');
+
+// 2.4.0-beta2
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`) VALUES ('1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
+ALTER TABLE `bb_posts_text` CHANGE `post_text` `post_text` MEDIUMTEXT NOT NULL;
+ALTER TABLE `bb_privmsgs_text` CHANGE `privmsgs_text` `privmsgs_text` MEDIUMTEXT NOT NULL;
+ALTER TABLE `bb_bt_torrents` ADD COLUMN `info_hash_v2` VARBINARY(32) NOT NULL DEFAULT '';
+ALTER TABLE `bb_bt_tracker_snap` ADD COLUMN `completed` INT(10) NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEFAULT '0';
+
+// 2.4.0-beta3
+INSERT INTO `bb_extensions` VALUES ('1', 'webp', '');
+INSERT INTO `bb_extensions` VALUES ('2', '7z', '');
+INSERT INTO `bb_extensions` VALUES ('1', 'bmp', '');

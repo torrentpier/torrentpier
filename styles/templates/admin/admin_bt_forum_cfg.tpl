@@ -1,4 +1,4 @@
-<h1>{L_FORUM_CFG_TITLE}</h1>
+<h1>{L_FORUM_CONFIG}</h1>
 
 <form action="{S_CONFIG_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
@@ -166,7 +166,7 @@
 <tr>
 	<td colspan="2" class="catBottom">
 		<input type="reset" value="{L_RESET}" class="liteoption" />&nbsp;&nbsp;
-		<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />&nbsp;&nbsp;
+		<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled />&nbsp;&nbsp;
 		<label for="confirm">{L_CONFIRM}&nbsp;<input onclick="toggle_disabled('send', this.checked)" id="confirm" type="checkbox" name="confirm" value="1" /></label>
 	</td>
 </tr>

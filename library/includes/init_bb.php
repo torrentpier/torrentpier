@@ -20,7 +20,7 @@ $user = null;
 
 // Obtain and encode user IP
 $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-$user_ip = \TorrentPier\Helpers\IPHelper::encodeIP($client_ip);
+$user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
@@ -74,6 +74,8 @@ define('COOKIE_PERSIST', TIMENOW + 31536000);
 define('COOKIE_MAX_TRACKS', 90);
 
 /**
+ * Set cookie
+ *
  * @param $name
  * @param $val
  * @param int $lifetime
@@ -83,28 +85,19 @@ define('COOKIE_MAX_TRACKS', 90);
 function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false)
 {
     global $bb_cfg;
+
     return setcookie($name, $val, [
         'expires' => $lifetime,
         'path' => $bb_cfg['script_path'],
         'domain' => $bb_cfg['cookie_domain'],
         'secure' => $bb_cfg['cookie_secure'],
         'httponly' => $httponly,
+        'samesite' => $bb_cfg['cookie_same_site'],
     ]);
 }
 
-/**
- * Debug options
- */
-if (DBG_USER) {
-    ini_set('error_reporting', E_ALL);
-    ini_set('display_errors', 1);
-} else {
-    unset($_COOKIE['explain']);
-}
-
-define('DELETED', -1);
-
 // User Levels
+define('DELETED', -1);
 define('USER', 0);
 define('ADMIN', 1);
 define('MOD', 2);
@@ -299,10 +292,10 @@ define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 define('HTML_SELECT_MAX_LENGTH', 60);
 define('HTML_WBR_LENGTH', 12);
 
-define('HTML_CHECKED', ' checked="checked" ');
-define('HTML_DISABLED', ' disabled="disabled" ');
-define('HTML_READONLY', ' readonly="readonly" ');
-define('HTML_SELECTED', ' selected="selected" ');
+define('HTML_CHECKED', ' checked ');
+define('HTML_DISABLED', ' disabled ');
+define('HTML_READONLY', ' readonly ');
+define('HTML_SELECTED', ' selected ');
 
 define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');
 
@@ -329,41 +322,31 @@ function send_no_cache_headers()
 }
 
 /**
- * @param string $output
- */
-function bb_exit($output = '')
-{
-    if ($output) {
-        echo $output;
-    }
-    exit;
-}
-
-/**
- * @param $var
- * @param string $title
- * @param bool $print
- * @return string
- */
-function prn_r($var, $title = '', $print = true)
-{
-    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
-    if ($print) {
-        echo $r;
-    }
-    return $r;
-}
-
-/**
+ * Convert special characters to HTML entities
+ *
  * @param $txt
  * @param bool $double_encode
  * @param int $quote_style
- * @param string $charset
+ * @param ?string $charset
  * @return string
  */
-function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
 {
-    return (string)htmlspecialchars($txt, $quote_style, $charset, $double_encode);
+    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
+}
+
+/**
+ * Adds commas between every group of thousands
+ *
+ * @param float|null $num
+ * @param int $decimals
+ * @param string|null $decimal_separator
+ * @param string|null $thousands_separator
+ * @return string
+ */
+function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.', ?string $thousands_separator = ','): string
+{
+    return number_format($num ?? 0.0, $decimals, $decimal_separator, $thousands_separator);
 }
 
 /**
@@ -451,7 +434,7 @@ if (
  * Exit if board is disabled via trigger
  */
 if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
-    \TorrentPier\Common\Http::statusCode(503);
+    header('HTTP/1.0 503 Service Unavailable');
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();

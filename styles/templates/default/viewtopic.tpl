@@ -1,5 +1,5 @@
 <!-- IF LOGGED_IN -->
-<style type="text/css">
+<style>
 <!-- IF HIDE_AVATAR -->.avatar { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_RANK_IMG -->.rank_img { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_POST_IMG -->img.postImg, div.postImg-wrap { display: none; }<!-- ENDIF -->
@@ -240,8 +240,8 @@ function build_poll_add_form (src_el)
 			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
 			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="small bold" href="{PIN_HREF}">{PIN_TITLE}</a>
-      &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
-      <a class="small bold" href="#" onclick="$('#main_content').printThis(); return false;">{L_PRINT_PAGE}</a>
+            &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+            <a class="small bold" href="#" onclick="$('#main_content').printThis(); return false;">{L_PRINT_PAGE}</a>
 		</td>
 		<!-- IF SELECT_PPP -->
 		<td class="med" style="padding: 0 4px 2px 4px;">|</td>
@@ -364,7 +364,7 @@ function build_poll_add_form (src_el)
 		<!-- IF postrow.POSTER_RANK --><p class="rank_txt">{postrow.POSTER_RANK}</p><!-- ENDIF -->
 		<!-- IF postrow.RANK_IMAGE --><p class="rank_img">{postrow.RANK_IMAGE}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_AVATAR --><p class="avatar">{postrow.POSTER_AVATAR}</p><!-- ENDIF -->
-		<!-- IF postrow.POSTER_GENDER --><p class="joined"><em>{L_GENDER}:</em> {postrow.POSTER_GENDER}</p><!-- ENDIF -->
+		<!-- IF postrow.POSTER_GENDER --><p class="joined"><em>{L_GENDER}:</em>&nbsp;{postrow.POSTER_GENDER}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_JOINED --><p class="joined" title="{postrow.POSTER_JOINED_DATE}"><em>{L_LONGEVITY}:</em> {postrow.POSTER_JOINED}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_POSTS --><p class="posts"><em>{L_POSTS}:</em> {postrow.POSTER_POSTS}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_FROM --><p class="from"><em>{L_LOCATION}:</em> {postrow.POSTER_FROM}</p><!-- ENDIF -->
@@ -503,16 +503,16 @@ function build_poll_add_form (src_el)
 		</tr>
 		<tr>
 			<td colspan="2" class="row2 tCenter">
-				<label><input type="checkbox" name="after_split_to_old" checked="checked" /> {L_BOT_AFTER_SPLIT_TO_OLD}</label>
+				<label><input type="checkbox" name="after_split_to_old" checked /> {L_BOT_AFTER_SPLIT_TO_OLD}</label>
 				&nbsp;
-				<label><input type="checkbox" name="after_split_to_new" checked="checked" /> {L_BOT_AFTER_SPLIT_TO_NEW}</label>
+				<label><input type="checkbox" name="after_split_to_new" checked /> {L_BOT_AFTER_SPLIT_TO_NEW}</label>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center" class="row3">
-				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled="disabled" onclick="return window.confirm('{L_DELETE_POSTS}?');" />
-				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled="disabled" onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
-				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled="disabled" onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
+				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled onclick="return window.confirm('{L_DELETE_POSTS}?');" />
+				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
+				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
 				<label for="spl_cnf">
 					{L_CONFIRM}
 					<input id="spl_cnf" type="checkbox" name="confirm" value="1" onclick="
@@ -535,6 +535,19 @@ function build_poll_add_form (src_el)
 <!-- IF HIDE_POST_IMG --><script type="text/javascript">$('img.postImg').remove();</script><!-- ENDIF -->
 <!-- IF HIDE_SMILE --><script type="text/javascript">$('img.smile').remove();</script><!-- ENDIF -->
 
+<table class="topic" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="catBottom med">
+            <form method="post" action="{S_POST_DAYS_ACTION}">
+                {L_DISPLAY_POSTS}: {S_SELECT_POST_DAYS}&nbsp;
+                {S_SELECT_POST_ORDER}&nbsp;
+                <input type="submit" value="{L_GO}" class="lite" name="submit" />
+            </form>
+        </td>
+    </tr>
+</table>
+
+<!-- IF PAGINATION -->
 <table id="pagination" class="topic" cellpadding="0" cellspacing="0">
 <tr>
 	<td class="nav pad_6 {PG_ROW_CLASS}">
@@ -543,8 +556,10 @@ function build_poll_add_form (src_el)
 	</td>
 </tr>
 </table><!--/pagination-->
+<!-- ENDIF -->
 
 <!-- IF QUICK_REPLY -->
+<br>
 <form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 <input type="hidden" name="mode" value="reply" />
 <input type="hidden" name="t" value="{QR_TOPIC_ID}" />
@@ -571,7 +586,7 @@ function build_poll_add_form (src_el)
 </tr>
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
-		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked="checked"<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled="disabled"<!-- ENDIF --> />
+		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
 		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
 </tr>
@@ -579,18 +594,6 @@ function build_poll_add_form (src_el)
 
 </form>
 <!-- ENDIF / QUICK_REPLY -->
-
-<table class="topic" cellpadding="0" cellspacing="0">
-<tr>
-	<td class="catBottom med">
-	<form method="post" action="{S_POST_DAYS_ACTION}">
-		{L_DISPLAY_POSTS}: {S_SELECT_POST_DAYS}&nbsp;
-		{S_SELECT_POST_ORDER}&nbsp;
-		<input type="submit" value="{L_GO}" class="lite" name="submit" />
-	</form>
-	</td>
-</tr>
-</table>
 
 <table cellpadding="0" class="w100" style="padding-top: 2px;">
 <tr>

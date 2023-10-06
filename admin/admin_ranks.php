@@ -54,7 +54,7 @@ if ($mode != '') {
 
         $s_hidden_fields .= '<input type="hidden" name="mode" value="save" />';
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_RANKS_EDIT' => true,
 
             'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
@@ -63,8 +63,8 @@ if ($mode != '') {
             'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="../' . $rank_info['rank_image'] . '" />' : '',
 
             'S_RANK_ACTION' => 'admin_ranks.php',
-            'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        ));
+            'S_HIDDEN_FIELDS' => $s_hidden_fields
+        ]);
     } elseif ($mode == 'save') {
         //
         // Ok, they sent us our info, let's update it.
@@ -83,7 +83,7 @@ if ($mode != '') {
         // The rank image has to be a jpg, gif or png
         //
         if ($rank_image != '') {
-            if (!preg_match('/(\.gif|\.png|\.jpg)$/is', $rank_image)) {
+            if (!preg_match('/(\.gif|\.png|\.jpg|\.jpeg|\.bmp|\.webp)$/is', $rank_image)) {
                 $rank_image = '';
             }
         }
@@ -161,10 +161,10 @@ if ($mode != '') {
     $rank_count = DB()->num_rows($result);
     $rank_rows = DB()->sql_fetchrowset($result);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_RANKS_LIST' => true,
-        'S_RANKS_ACTION' => 'admin_ranks.php',
-    ));
+        'S_RANKS_ACTION' => 'admin_ranks.php'
+    ]);
 
     for ($i = 0; $i < $rank_count; $i++) {
         $rank = $rank_rows[$i]['rank_title'];
@@ -172,15 +172,15 @@ if ($mode != '') {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('ranks', array(
+        $template->assign_block_vars('ranks', [
             'ROW_CLASS' => $row_class,
             'RANK' => $rank,
             'STYLE' => $rank_rows[$i]['rank_style'],
             'IMAGE_DISPLAY' => $rank_rows[$i]['rank_image'] ? '<img src="../' . $rank_rows[$i]['rank_image'] . '" />' : '',
 
             'U_RANK_EDIT' => "admin_ranks.php?mode=edit&amp;id=$rank_id",
-            'U_RANK_DELETE' => "admin_ranks.php?mode=delete&amp;id=$rank_id",
-        ));
+            'U_RANK_DELETE' => "admin_ranks.php?mode=delete&amp;id=$rank_id"
+        ]);
     }
 }
 

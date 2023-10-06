@@ -8,12 +8,12 @@
  */
 
 define('BB_SCRIPT', 'memberlist');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
 $page_cfg['use_tablesorter'] = true;
 
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 $start = abs((int)request_var('start', 0));
 $mode = (string)request_var('mode', 'joined');
@@ -24,7 +24,7 @@ $paginationusername = $username;
 //
 // Memberlist sorting
 //
-$mode_types_text = array(
+$mode_types_text = [
     $lang['SORT_JOINED'],
     $lang['SORT_USERNAME'],
     $lang['SORT_LOCATION'],
@@ -32,9 +32,9 @@ $mode_types_text = array(
     $lang['SORT_EMAIL'],
     $lang['SORT_WEBSITE'],
     $lang['SORT_TOP_TEN']
-);
+];
 
-$mode_types = array(
+$mode_types = [
     'joined',
     'username',
     'location',
@@ -42,13 +42,13 @@ $mode_types = array(
     'email',
     'website',
     'topten'
-);
+];
 
 // <select> mode
 $select_sort_mode = '<select name="mode">';
 
 for ($i = 0, $iMax = count($mode_types_text); $i < $iMax; $i++) {
-    $selected = ($mode == $mode_types[$i]) ? ' selected="selected"' : '';
+    $selected = ($mode == $mode_types[$i]) ? ' selected' : '';
     $select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';
 }
 $select_sort_mode .= '</select>';
@@ -57,21 +57,21 @@ $select_sort_mode .= '</select>';
 $select_sort_order = '<select name="order">';
 
 if ($sort_order == 'ASC') {
-    $select_sort_order .= '<option value="ASC" selected="selected">' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC" selected>' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
 } else {
-    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected="selected">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected>' . $lang['DESC'] . '</option>';
 }
 $select_sort_order .= '</select>';
 
 //
 // Generate page
 //
-$template->assign_vars(array(
+$template->assign_vars([
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
-    'S_MODE_ACTION' => "memberlist.php",
+    'S_MODE_ACTION' => 'memberlist.php',
     'S_USERNAME' => $paginationusername,
-));
+]);
 
 switch ($mode) {
     case 'joined':
@@ -139,10 +139,10 @@ $select_letter .= ($by_letter == 'others') ? '<b>' . $lang['OTHERS'] . '</b>&nbs
 $select_letter .= ':&nbsp;';
 $select_letter .= ($by_letter == 'all') ? '<b>' . $lang['ALL'] . '</b>' : '<a class="genmed" href="' . ("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") . '">' . $lang['ALL'] . '</a>';
 
-$template->assign_vars(array(
+$template->assign_vars([
     'S_LETTER_SELECT' => $select_letter,
     'S_LETTER_HIDDEN' => '<input type="hidden" name="letter" value="' . $by_letter . '">',
-));
+]);
 
 // per-letter selection end
 $sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
@@ -160,7 +160,7 @@ if ($result = DB()->fetch_rowset($sql)) {
         $user_info = generate_user_info($row);
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
-        $template->assign_block_vars('memberrow', array(
+        $template->assign_block_vars('memberrow', [
             'ROW_NUMBER' => $i + ($start + 1),
             'ROW_CLASS' => $row_class,
             'USER' => profile_url($row),
@@ -172,13 +172,11 @@ if ($result = DB()->fetch_rowset($sql)) {
             'PM' => $user_info['pm'],
             'EMAIL' => $user_info['email'],
             'WWW' => $user_info['www'],
-            'U_VIEWPROFILE' => PROFILE_URL . $user_id,
-        ));
+            'U_VIEWPROFILE' => PROFILE_URL . $user_id
+        ]);
     }
 } else {
-    $template->assign_block_vars('no_username', array(
-        'NO_USER_ID_SPECIFIED' => $lang['NO_USER_ID_SPECIFIED'],
-    ));
+    $template->assign_block_vars('no_username', ['NO_USER_ID_SPECIFIED' => $lang['NO_USER_ID_SPECIFIED']]);
 }
 
 $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;letter=$by_letter";
@@ -198,8 +196,6 @@ if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
     DB()->sql_freeresult($result);
 }
 
-$template->assign_vars(array(
-    'PAGE_TITLE' => $lang['MEMBERLIST'],
-));
+$template->assign_vars(['PAGE_TITLE' => $lang['MEMBERLIST']]);
 
 print_page('memberlist.tpl');

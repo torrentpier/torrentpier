@@ -81,7 +81,7 @@ class Torrent
         global $template, $lang;
 
         foreach ($default_cfg as $config_name => $config_value) {
-            // YES/NO 'checked="checked"'
+            // YES/NO 'checked'
             $template->assign_vars([
                 strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? HTML_CHECKED : '',
                 strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? HTML_CHECKED : '',

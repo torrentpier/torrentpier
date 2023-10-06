@@ -16,8 +16,6 @@
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
 </p>
 
-<p align="center">🚧 WIP: TorrentPier Cattle (2.4) 🚧</p>
-
 ## 🐂 About TorrentPier
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load 
@@ -35,8 +33,8 @@ and go from there. The documentation will be translated into english in the near
 
 * Apache / nginx
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
-* PHP: 7.4 / 8.0 / 8.1 / 8.2
-* PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
+* PHP: 8.1 / 8.2
+* PHP Extensions: mbstring, bcmath, intl, tidy (optional), xml, xmlwriter
 
 ## 💾 Installation
 
@@ -61,6 +59,7 @@ For installation, you need to follow a few simple steps:
 You must provide write permissions to the specified folders:
 * `data/avatars`
 * `data/torrent_files`
+* `data/torrent_files/thumbs`
 * `internal_data/ajax_html`
 * `internal_data/atom`
 * `internal_data/cache`
@@ -73,14 +72,17 @@ and chmod 0644 for files in them. If you are not sure, leave it as is.
 
 ## 📌 Our recommendations
 
-* ⛓ *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more
+* *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more
   information about that you can read [this thread](https://torrentpier.com/threads/52/) on our support forum.
-* ⛓ *Local configuration copy.* - You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
+* *Local configuration copy.* - You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
   file **.env**. Both files are created by copying the appropriate .example templates without extension. Local configuration files
   should not be available for reading to anyone by setting up access rights for your web server.
-* ⛓ *Ocelot installation.* - We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
+* *Ocelot installation.* - We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
   the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot). You can read assembly instructions
   on his repository or in [this thread](https://torrentpier.com/threads/26078/) on our support forum.
+* *[TMRR — Torrent Merkle Root Reader.](https://github.com/kovalensky/tmrr)* - A tool for extracting, comparing and calculating file hashes for .torrent files, 
+  compatible with the BitTorrent v2 protocol. Useful for finding the sources of the same copies of files on different trackers & DHT indexers that support BitTorrent v2 protocol, 
+  thus reviving dead torrents, valuable Internet artifacts.
 
 ## 📝 Official documentation
 

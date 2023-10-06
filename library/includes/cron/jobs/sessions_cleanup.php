@@ -18,10 +18,10 @@ $user_session_gc_time = $user_session_expire_time - (int)$bb_cfg['user_session_g
 $admin_session_gc_time = $admin_session_expire_time;
 
 // ############################ Tables LOCKED ################################
-DB()->lock(array(
+DB()->lock([
     BB_USERS . ' u',
-    BB_SESSIONS . ' s',
-));
+    BB_SESSIONS . ' s'
+]);
 
 // Update user's session time
 DB()->query("

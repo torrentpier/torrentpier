@@ -12,9 +12,11 @@ require __DIR__ . '/pagestart.php';
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $module = [];
-    if (!$module = CACHE('bb_cache')->get('admin_module_' . $user->id)) {
+
+    // Scan modules
+    if (!CACHE('bb_cache')->get('admin_module_' . $user->id)) {
         $dir = opendir('.');
-        $setmodules = 1;
+        $setmodules = true;
         while ($file = readdir($dir)) {
             if (preg_match('/^admin_.*?\.php$/', $file)) {
                 include './' . $file;
@@ -22,8 +24,13 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         }
         unset($setmodules);
         closedir($dir);
+
+        // Set modules into cache
         CACHE('bb_cache')->set('admin_module_' . $user->id, $module, 600);
     }
+
+    // Get modules from cache
+    $module = CACHE('bb_cache')->get('admin_module_' . $user->id);
 
     $template->assign_vars(array(
         'TPL_ADMIN_NAVIGATE' => true,
@@ -59,8 +66,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
     $template->assign_vars(array(
         'TPL_ADMIN_MAIN' => true,
-        'ADMIN_LOCK' => $bb_cfg['board_disable'] ? true : false,
-        'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED) ? true : false,
+        'ADMIN_LOCK' => (bool)$bb_cfg['board_disable'],
+        'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED),
     ));
 
     // Get forum statistics
@@ -148,7 +155,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             for ($i = 0, $iMax = count($onlinerow_reg); $i < $iMax; $i++) {
                 $users_count++;
                 $row_class = 'row1';
-                $reg_ip = \TorrentPier\Helpers\IPHelper::decodeIP($onlinerow_reg[$i]['session_ip']);
+                $reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_reg[$i]['session_ip']);
 
                 $template->assign_block_vars('reg_user_row', array(
                     'ROW_CLASS' => $row_class,
@@ -168,7 +175,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             for ($i = 0, $iMax = count($onlinerow_guest); $i < $iMax; $i++) {
                 $guest_users++;
                 $row_class = 'row2';
-                $guest_ip = \TorrentPier\Helpers\IPHelper::decodeIP($onlinerow_guest[$i]['session_ip']);
+                $guest_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_guest[$i]['session_ip']);
 
                 $template->assign_block_vars('guest_user_row', array(
                     'ROW_CLASS' => $row_class,

@@ -8,10 +8,11 @@
  */
 
 define('BB_SCRIPT', 'feed');
-define('BB_ROOT', './');
+
 require __DIR__ . '/common.php';
 
-$user->session_start(array('req_login' => true));
+// Init userdata
+$user->session_start(['req_login' => true]);
 
 $mode = $_REQUEST['mode'] ?? '';
 $type = $_POST['type'] ?? '';
@@ -28,7 +29,7 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
         $sql = "SELECT allow_reg_tracker, forum_name FROM " . BB_FORUMS . " WHERE forum_id = $id LIMIT 1";
         if (!$forum_data = DB()->fetch_row($sql)) {
             if ($id == 0) {
-                $forum_data = array();
+                $forum_data = [];
             } else {
                 bb_simple_die($lang['ATOM_ERROR'] . ' #1');
             }

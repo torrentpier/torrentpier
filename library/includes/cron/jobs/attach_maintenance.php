@@ -11,6 +11,8 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+global $attach_config;
+
 DB()->expect_slow_query(600);
 
 $fix_errors = true;
@@ -21,8 +23,8 @@ $db_max_packet = 800000;
 $sql_limit = 3000;
 
 $check_attachments = false;
-$orphan_files = $orphan_db_attach = $orphan_tor = array();
-$posts_without_attach = $topics_without_attach = array();
+$orphan_files = $orphan_db_attach = $orphan_tor = [];
+$posts_without_attach = $topics_without_attach = [];
 
 DB()->query("
 	CREATE TEMPORARY TABLE $tmp_attach_tbl (
@@ -35,10 +37,16 @@ DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_attach_tbl");
 // Get attach_mod config
 $attach_dir = get_attachments_dir();
 
+// Creates thumb directory if not exists
+$thumb_dir = "$attach_dir/" . THUMB_DIR;
+if (!is_dir($thumb_dir)) {
+    bb_mkdir($thumb_dir);
+}
+
 // Get all names of existed attachments and insert them into $tmp_attach_tbl
 if ($dir = @opendir($attach_dir)) {
     $check_attachments = true;
-    $files = array();
+    $files = [];
     $f_len = 0;
 
     while (false !== ($f = readdir($dir))) {
@@ -52,7 +60,7 @@ if ($dir = @opendir($attach_dir)) {
         if ($f_len > $db_max_packet) {
             $files = implode(',', $files);
             DB()->query("INSERT INTO $tmp_attach_tbl VALUES $files");
-            $files = array();
+            $files = [];
             $f_len = 0;
         }
     }
@@ -195,11 +203,11 @@ if ($check_attachments) {
     }
 }
 if ($debug_mode) {
-    prn_r($orphan_files, '$orphan_files');
-    prn_r($orphan_db_attach, '$orphan_db_attach');
-    prn_r($orphan_tor, '$orphan_tor');
-    prn_r($posts_without_attach, '$posts_without_attach');
-    prn_r($topics_without_attach, '$topics_without_attach');
+    dump($orphan_files);
+    dump($orphan_db_attach);
+    dump($orphan_tor);
+    dump($posts_without_attach);
+    dump($topics_without_attach);
 }
 
 DB()->query("DROP TEMPORARY TABLE $tmp_attach_tbl");

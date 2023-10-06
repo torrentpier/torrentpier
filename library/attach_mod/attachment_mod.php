@@ -48,7 +48,7 @@ function get_config()
 {
     global $bb_cfg;
 
-    $attach_config = array();
+    $attach_config = [];
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
@@ -67,7 +67,7 @@ function get_config()
 }
 
 // Get Attachment Config
-$attach_config = array();
+$attach_config = [];
 
 if (!$attach_config = CACHE('bb_cache')->get('attach_config')) {
     $attach_config = get_config();

@@ -52,9 +52,9 @@ VALUES ('upload_dir', 'data/torrent_files'),
        ('img_display_inlined', '1'),
        ('img_max_width', '200'),
        ('img_max_height', '200'),
-       ('img_link_width', '0'),
-       ('img_link_height', '0'),
-       ('img_create_thumbnail', '0'),
+       ('img_link_width', '600'),
+       ('img_link_height', '400'),
+       ('img_create_thumbnail', '1'),
        ('img_min_thumb_filesize', '12000'),
        ('img_imagick', '/usr/bin/convert'),
        ('use_gd2', '1'),
@@ -274,6 +274,7 @@ DROP TABLE IF EXISTS `bb_bt_torrents`;
 CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
 (
   `info_hash`        VARBINARY(20)         NOT NULL DEFAULT '',
+  `info_hash_v2`     VARBINARY(32)         NOT NULL DEFAULT '',
   `post_id`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `poster_id`        MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
@@ -290,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `tor_type`         TINYINT(1)            NOT NULL DEFAULT '0',
   `speed_up`         INT(11)               NOT NULL DEFAULT '0',
   `speed_down`       INT(11)               NOT NULL DEFAULT '0',
-  PRIMARY KEY (`info_hash`),
+  PRIMARY KEY (`topic_id`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
   UNIQUE KEY `attach_id` (`attach_id`),
@@ -373,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `down_add`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `update_time`      INT(11)               NOT NULL DEFAULT '0',
   `complete_percent` BIGINT(20)            NOT NULL DEFAULT '0',
-  `complete`         INT(11)               NOT NULL DEFAULT '0',
+  `complete`         TINYINT(1)            NOT NULL DEFAULT '0',
   PRIMARY KEY (`peer_hash`),
   KEY `topic_id` (`topic_id`),
   KEY `user_id` (`user_id`)
@@ -396,6 +397,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap`
   `leechers`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `speed_up`   INT(10) UNSIGNED      NOT NULL DEFAULT '0',
   `speed_down` INT(10) UNSIGNED      NOT NULL DEFAULT '0',
+  `completed`  INT(10)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM
@@ -577,7 +579,8 @@ VALUES ('allow_autologin', '1'),
        ('show_mod_index', '0'),
        ('premod', '0'),
        ('tor_comment', '1'),
-       ('terms', '');
+       ('terms', ''),
+       ('show_board_start_index', '1');
 
 -- ----------------------------
 -- Table structure for `bb_cron`
@@ -623,6 +626,7 @@ VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00
         '0',
         '1', '0'),
        ('1', 'Logs cleanup', 'clean_log.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0'),
+       ('1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0'),
        ('1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', '', '05:00:00', '90', '', '', '', '1', '', '0', '1',
         '0'),
        ('1', 'Clean dlstat', 'clean_dlstat.php', 'daily', '', '05:00:00', '100', '', '', '', '1', '', '0', '1', '0'),
@@ -673,6 +677,11 @@ CREATE TABLE IF NOT EXISTS `bb_disallow`
 -- ----------------------------
 -- Records of bb_disallow
 -- ----------------------------
+INSERT INTO `bb_disallow` (`disallow_id`, `disallow_username`)
+VALUES ('1', 'torrentpier*'),
+       ('2', 'tracker*'),
+       ('3', 'forum*'),
+       ('4', 'torrent*');
 
 -- ----------------------------
 -- Table structure for `bb_extensions`
@@ -699,12 +708,15 @@ VALUES ('1', 'gif', ''),
        ('1', 'jpg', ''),
        ('1', 'tif', ''),
        ('1', 'tga', ''),
+       ('1', 'webp', ''),
+       ('1', 'bmp', ''),
        ('2', 'gtar', ''),
        ('2', 'gz', ''),
        ('2', 'tar', ''),
        ('2', 'zip', ''),
        ('2', 'rar', ''),
        ('2', 'ace', ''),
+       ('2', '7z', ''),
        ('3', 'txt', ''),
        ('3', 'c', ''),
        ('3', 'h', ''),
@@ -980,7 +992,7 @@ DROP TABLE IF EXISTS `bb_posts_text`;
 CREATE TABLE IF NOT EXISTS `bb_posts_text`
 (
   `post_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `post_text` TEXT                  NOT NULL,
+  `post_text` MEDIUMTEXT            NOT NULL,
   PRIMARY KEY (`post_id`)
 )
   ENGINE = MyISAM
@@ -1024,7 +1036,7 @@ DROP TABLE IF EXISTS `bb_privmsgs_text`;
 CREATE TABLE IF NOT EXISTS `bb_privmsgs_text`
 (
   `privmsgs_text_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `privmsgs_text`    TEXT                  NOT NULL,
+  `privmsgs_text`    MEDIUMTEXT            NOT NULL,
   PRIMARY KEY (`privmsgs_text_id`)
 )
   ENGINE = MyISAM
@@ -1263,7 +1275,8 @@ CREATE TABLE IF NOT EXISTS `bb_topics`
 -- Records of bb_topics
 -- ----------------------------
 INSERT INTO `bb_topics`
-VALUES ('1', '1', 'Добро пожаловать в TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1', '0',
+VALUES ('1', '1', 'Добро пожаловать в TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1',
+        '0',
         '0',
         '0', UNIX_TIMESTAMP(), '0');
 
@@ -1370,21 +1383,24 @@ CREATE TABLE IF NOT EXISTS `bb_users`
 -- Records of bb_users
 -- ----------------------------
 INSERT INTO `bb_users`
-VALUES ('-1', '0', 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
+VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3M53.CEe.O', '0', '0',
+        '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
         'ru', '0',
         '0', '0',
         '0', '0',
         '0', '0',
         '1900-01-01',
         '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
-       ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
+       ('-746', '0', 'bot', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3M53.CEe.O', '0', '0',
+        '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
         'ru', '0',
         '0', '0',
         '144', '0',
         '0', '0',
         '1900-01-01',
         'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
-       ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru',
+       ('2', '1', 'admin', '$2y$10$QeekUGqdfMO0yp7AT7la8OhgbiNBoJ627BO38MdS1h5kY7oX6UUKu', '0', '0',
+        '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru',
         '0',
         '0', '0',
         '304', '1',

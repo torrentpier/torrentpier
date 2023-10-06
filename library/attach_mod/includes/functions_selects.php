@@ -36,9 +36,9 @@ function group_select($select_name, $default_group = 0)
 
         for ($i = 0, $iMax = count($group_name); $i < $iMax; $i++) {
             if (!$default_group) {
-                $selected = ($i == 0) ? ' selected="selected"' : '';
+                $selected = ($i == 0) ? ' selected' : '';
             } else {
-                $selected = ($group_name[$i]['group_id'] == $default_group) ? ' selected="selected"' : '';
+                $selected = ($group_name[$i]['group_id'] == $default_group) ? ' selected' : '';
             }
 
             $group_select .= '<option value="' . $group_name[$i]['group_id'] . '"' . $selected . '>' . $group_name[$i]['group_name'] . '</option>';
@@ -79,9 +79,9 @@ function download_select($select_name, $group_id = 0)
 
     for ($i = 0, $iMax = count($types_download); $i < $iMax; $i++) {
         if (!$group_id) {
-            $selected = ($types_download[$i] == INLINE_LINK) ? ' selected="selected"' : '';
+            $selected = ($types_download[$i] == INLINE_LINK) ? ' selected' : '';
         } else {
-            $selected = ($row['download_mode'] == $types_download[$i]) ? ' selected="selected"' : '';
+            $selected = ($row['download_mode'] == $types_download[$i]) ? ' selected' : '';
         }
 
         $group_select .= '<option value="' . $types_download[$i] . '"' . $selected . '>' . $modes_download[$i] . '</option>';
@@ -97,7 +97,7 @@ function download_select($select_name, $group_id = 0)
  */
 function category_select($select_name, $group_id = 0)
 {
-    global $types_category, $modes_category;
+    global $types_category, $modes_category, $lang;
     $category_type = null;
 
     $sql = 'SELECT group_id, cat_id FROM ' . BB_EXTENSION_GROUPS;
@@ -120,8 +120,8 @@ function category_select($select_name, $group_id = 0)
         }
     }
 
-    $types = array(NONE_CAT);
-    $modes = array('none');
+    $types = [NONE_CAT];
+    $modes = [$lang['NONE']];
 
     for ($i = 0, $iMax = count($types_category); $i < $iMax; $i++) {
         $types[] = $types_category[$i];
@@ -132,9 +132,9 @@ function category_select($select_name, $group_id = 0)
 
     for ($i = 0, $iMax = count($types); $i < $iMax; $i++) {
         if (!$group_id) {
-            $selected = ($types[$i] == NONE_CAT) ? ' selected="selected"' : '';
+            $selected = ($types[$i] == NONE_CAT) ? ' selected' : '';
         } else {
-            $selected = ($types[$i] == $category_type) ? ' selected="selected"' : '';
+            $selected = ($types[$i] == $category_type) ? ' selected' : '';
         }
 
         $group_select .= '<option value="' . $types[$i] . '"' . $selected . '>' . $modes[$i] . '</option>';
@@ -152,13 +152,13 @@ function size_select($select_name, $size_compare)
 {
     global $lang;
 
-    $size_types_text = array($lang['BYTES'], $lang['KB'], $lang['MB']);
-    $size_types = array('b', 'kb', 'mb');
+    $size_types_text = [$lang['BYTES'], $lang['KB'], $lang['MB']];
+    $size_types = ['b', 'kb', 'mb'];
 
     $select_field = '<select name="' . $select_name . '">';
 
     for ($i = 0, $iMax = count($size_types_text); $i < $iMax; $i++) {
-        $selected = ($size_compare == $size_types[$i]) ? ' selected="selected"' : '';
+        $selected = ($size_compare == $size_types[$i]) ? ' selected' : '';
         $select_field .= '<option value="' . $size_types[$i] . '"' . $selected . '>' . $size_types_text[$i] . '</option>';
     }
 
@@ -191,7 +191,7 @@ function quota_limit_select($select_name, $default_quota = 0)
     DB()->sql_freeresult($result);
 
     foreach ($quota_name as $i => $iValue) {
-        $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected="selected"' : '';
+        $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected' : '';
         $quota_select .= '<option value="' . $quota_name[$i]['quota_limit_id'] . '"' . $selected . '>' . $quota_name[$i]['quota_desc'] . '</option>';
     }
     $quota_select .= '</select>';
@@ -223,7 +223,7 @@ function default_quota_limit_select($select_name, $default_quota = 0)
     DB()->sql_freeresult($result);
 
     foreach ($quota_name as $i => $iValue) {
-        $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected="selected"' : '';
+        $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected' : '';
         $quota_select .= '<option value="' . $quota_name[$i]['quota_limit_id'] . '"' . $selected . '>' . $quota_name[$i]['quota_desc'] . '</option>';
     }
     $quota_select .= '</select>';

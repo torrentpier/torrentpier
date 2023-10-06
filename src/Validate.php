@@ -16,6 +16,8 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 use Egulias\EmailValidator\Validation\MessageIDValidation;
 use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
 
+use TorrentPier\Helpers\IsHelper;
+
 /**
  * Class Validate
  * @package TorrentPier
@@ -168,7 +170,7 @@ class Validate
      */
     public static function password(string $password, string $password_confirm)
     {
-        global $lang;
+        global $lang, $bb_cfg;
 
         // Check for empty
         if (empty($password) || empty($password_confirm)) {
@@ -186,6 +188,33 @@ class Validate
         }
         if (mb_strlen($password, 'UTF-8') < PASSWORD_MIN_LENGTH) {
             return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
+        }
+
+        // Symbols check
+        if ($bb_cfg['password_symbols']) {
+            // Numbers
+            if ($bb_cfg['password_symbols']['nums']) {
+                if (!IsHelper::isContainsNums($password)) {
+                    return $lang['CHOOSE_PASS_ERR_NUM'];
+                }
+            }
+            // Letters
+            if ($bb_cfg['password_symbols']['letters']['lowercase']) {
+                if (!IsHelper::isContainsLetters($password)) {
+                    return $lang['CHOOSE_PASS_ERR_LETTER'];
+                }
+            }
+            if ($bb_cfg['password_symbols']['letters']['uppercase']) {
+                if (!IsHelper::isContainsLetters($password, true)) {
+                    return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
+                }
+            }
+            // Spec symbols
+            if ($bb_cfg['password_symbols']['spec_symbols']) {
+                if (!IsHelper::isContainsSpecSymbols($password)) {
+                    return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
+                }
+            }
         }
 
         return false;

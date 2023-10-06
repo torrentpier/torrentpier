@@ -30,7 +30,7 @@ $smiley_paks = [];
 $dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
 
 while ($file = @readdir($dir)) {
-    if (!is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
+    if (!is_dir(realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
         $img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
 
         if ($img_size[0] && $img_size[1]) {
@@ -122,13 +122,13 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $hidden_vars = '<input type="hidden" name="mode" value="import">';
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_SMILE_IMPORT' => true,
 
             'S_SMILEY_ACTION' => 'admin_smilies.php',
             'S_SMILE_SELECT' => $smile_paks_select,
-            'S_HIDDEN_FIELDS' => $hidden_vars,
-        ));
+            'S_HIDDEN_FIELDS' => $hidden_vars
+        ]);
     }
 } elseif (isset($_POST['export_pack']) || isset($_GET['export_pack'])) {
     $export_pack = (string)request_var('export_pack', '');
@@ -165,14 +165,14 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $s_hidden_fields = '<input type="hidden" name="mode" value="savenew" />';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_SMILE_EDIT' => true,
         'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
         'S_SMILEY_ACTION' => 'admin_smilies.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_FILENAME_OPTIONS' => $filename_list,
         'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path']
-    ));
+    ]);
 } elseif ($mode != '') {
     switch ($mode) {
         case 'delete':
@@ -203,7 +203,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $filename_list = $smiley_edit_img = '';
             for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
                 if ($smiley_images[$i] == $smile_data['smile_url']) {
-                    $smiley_selected = 'selected="selected"';
+                    $smiley_selected = 'selected';
                     $smiley_edit_img = $smiley_images[$i];
                 } else {
                     $smiley_selected = '';
@@ -213,7 +213,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             $s_hidden_fields = '<input type="hidden" name="mode" value="save" /><input type="hidden" name="smile_id" value="' . $smile_data['smilies_id'] . '" />';
 
-            $template->assign_vars(array(
+            $template->assign_vars([
                 'TPL_SMILE_EDIT' => true,
                 'SMILEY_CODE' => $smile_data['code'],
                 'SMILEY_EMOTICON' => $smile_data['emoticon'],
@@ -221,15 +221,15 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                 'S_SMILEY_ACTION' => 'admin_smilies.php',
                 'S_HIDDEN_FIELDS' => $s_hidden_fields,
                 'S_FILENAME_OPTIONS' => $filename_list,
-                'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path'],
-            ));
+                'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path']
+            ]);
 
             break;
 
         case 'save':
             $smile_code = isset($_POST['smile_code']) ? trim($_POST['smile_code']) : trim($_GET['smile_code']);
             $smile_url = isset($_POST['smile_url']) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
-            $smile_url = bb_ltrim(basename($smile_url), "'");
+            $smile_url = ltrim(basename($smile_url), "'");
             $smile_emotion = isset($_POST['smile_emotion']) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
             $smile_id = isset($_POST['smile_id']) ? (int)$_POST['smile_id'] : (int)$_GET['smile_id'];
 
@@ -256,7 +256,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         case 'savenew':
             $smile_code = $_POST['smile_code'] ?? $_GET['smile_code'];
             $smile_url = $_POST['smile_url'] ?? $_GET['smile_url'];
-            $smile_url = bb_ltrim(basename($smile_url), "'");
+            $smile_url = ltrim(basename($smile_url), "'");
             $smile_emotion = $_POST['smile_emotion'] ?? $_GET['smile_emotion'];
             $smile_code = trim($smile_code);
             $smile_url = trim($smile_url);
@@ -291,11 +291,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $smilies = DB()->sql_fetchrowset($result);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_SMILE_MAIN' => true,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        'S_SMILEY_ACTION' => 'admin_smilies.php',
-    ));
+        'S_SMILEY_ACTION' => 'admin_smilies.php'
+    ]);
 
     // Loop throuh the rows of smilies setting block vars for the template
     for ($i = 0, $iMax = count($smilies); $i < $iMax; $i++) {
@@ -305,7 +305,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('smiles', array(
+        $template->assign_block_vars('smiles', [
             'ROW_CLASS' => $row_class,
 
             'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smilies[$i]['smile_url'],
@@ -314,7 +314,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             'U_SMILEY_EDIT' => 'admin_smilies.php?mode=edit&amp;id=' . $smilies[$i]['smilies_id'],
             'U_SMILEY_DELETE' => 'admin_smilies.php?mode=delete&amp;id=' . $smilies[$i]['smilies_id'],
-        ));
+        ]);
     }
 }
 

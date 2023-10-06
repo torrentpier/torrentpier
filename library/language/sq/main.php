@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Postimet';
 $lang['POSTED'] = 'Postuar';
 $lang['USERNAME'] = 'Emrin e përdoruesit';
 $lang['PASSWORD'] = 'Password';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PD';
 $lang['AUTHOR'] = 'Autori';
@@ -59,6 +60,7 @@ $lang['ENABLED'] = 'Të aktivizuara';
 $lang['DISABLED'] = 'Me aftësi të kufizuara';
 $lang['ERROR'] = 'Gabim';
 $lang['SELECT_ACTION'] = 'Zgjidhni veprim';
+$lang['CLEAR'] = 'Clear';
 
 $lang['NEXT_PAGE'] = 'Tjetër';
 $lang['PREVIOUS_PAGE'] = 'E mëparshme';
@@ -99,10 +101,8 @@ $lang['CLICK_RETURN_MODCP'] = 'Kliko %sHere%s të kthehen për të Moderator i P
 $lang['CLICK_RETURN_GROUP'] = 'Kliko %sHere%s të kthimit të grupit të informacionit';
 
 $lang['ADMIN_PANEL'] = 'Të shkuar për Administrimin e Panelit';
-$lang['ALL_CACHE'] = 'Të gjithë kujtesën e fshehtë';
 $lang['ALL_CACHE_CLEARED'] = 'Cache ka qenë pastruar';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache ka qenë pastruar';
-$lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore ka qenë pastruar';
 $lang['BOARD_DISABLE'] = 'Na vjen keq, ky forum është me aftësi të kufizuara. Përpiqen për të ardhur sërish më vonë';
 $lang['BOARD_DISABLE_CRON'] = 'Forumi është poshtë për mirëmbajtje. Përpiqen për të ardhur sërish më vonë';
@@ -234,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ju <b>can</b> të votuar në sondazhet në këtë for
 $lang['RULES_VOTE_CANNOT'] = 'Ju <b>cannot</b> të votuar në sondazhet në këtë forum';
 $lang['RULES_MODERATE'] = 'Ju <b>can</b> të moderuar të këtij forumi';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nuk ka postime në këtë forum.<br />Click në <b>Post të Reja Topic</b> lidhje në këtë faqe për të postoj një.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Shiko temë';
@@ -416,10 +417,10 @@ $lang['PRIVATE_MESSAGING'] = 'Të Mesazheve Private';
 $lang['NO_NEW_PM'] = 'nuk ka mesazhe të reja';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('mesazh i ri', 'mesazhe të reja');
+$lang['NEW_PMS_DECLENSION'] = ['mesazh i ri', 'mesazhe të reja'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('palexuara', 'palexuara');
+$lang['UNREAD_PMS_DECLENSION'] = ['palexuara', 'palexuara'];
 
 $lang['UNREAD_MESSAGE'] = 'Palexuar mesazh';
 $lang['READ_MESSAGE'] = 'Lexoni mesazh';
@@ -546,11 +547,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Dërgon një e-mail, kur dikush përgjigjet n�
 
 $lang['BOARD_LANG'] = 'Bordi gjuhë';
 $lang['GENDER'] = 'Gjinore';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'I panjohur',
     1 => 'Mashkull',
     2 => 'Femra'
-);
+];
 $lang['MODULE_OFF'] = 'Moduli është me aftësi të kufizuara!';
 
 $lang['BIRTHDAY'] = 'Ditëlindjen';
@@ -592,7 +593,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset autologin kryesore';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'përfshirë të gjitha vendet që kam vizituar në forum mundësuar auto-identifikohu';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Tregon një pjesë të vogël grafik imazhin më poshtë të dhënat tuaja në postimet e bëra. Vetëm një imazh mund të shfaqet në një kohë, gjerësinë e saj mund të jetë jo më e madhe se %d pixels, me lartësi jo më të madhe se %d pixel, madhësia e skedës jo më shumë se %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Fshini avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontrollit opsion me aftësi të kufizuara për shkelje <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Ngarkoni avatar';
@@ -724,7 +725,8 @@ $lang['GROUP_REQUEST'] = 'Një kërkesë të bashkohet me grupin tuaj ka qenë b
 $lang['GROUP_APPROVED'] = 'Kërkesa juaj është aprovuar.';
 $lang['GROUP_ADDED'] = 'Ju keni qenë të shtuar të këtij grupi.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Ju jeni tashmë një anëtar i këtij grupi';
-$lang['USER_IS_MEMBER_GROUP'] = 'Përdoruesi është tashmë një anëtar i këtij grupi';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Freskua grup lloji.';
 $lang['EFFECTIVE_DATE'] = 'Data E Hyrjes Në Fuqi';
 
@@ -1004,7 +1006,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Shtojcë është shumë i madh.<br />Could nu
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Shtojcë është shumë i madh.<br />Maximum Ngarkoni Madhësi: %d MB.<br />Please vini re se kjo masë është përcaktuar në php.ini, kjo do të thotë se është vendosur nga PHP dhe Shtojcën V nuk mund të tejkalojnë këtë vlerë.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Zgjerimi %s nuk është e lejuar'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Nuk ju lejohet të postoni Fotografi me Zgjatje %s në kuadër të këtij Forumi'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Shtojcë është shumë i madh.<br />Max Madhësi: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Na vjen keq, por maksimale si kartela për të gjitha Bashkëngjitjet është arritur. Ju lutem kontaktoni Administratorin nëse keni pyetje.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Shtojcë nuk mund të shtohen, pasi max. numri i %d të bashkëngjitni skedarë në këtë post u arrit'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Attachment/Imazhi duhet të jetë më pak se %d pixels gjerë dhe %d (pixels) e lartë';
@@ -1082,15 +1084,13 @@ $lang['SEEDING'] = 'Farë';
 $lang['LEECHING'] = 'Gjaku';
 $lang['IS_REGISTERED'] = 'Regjistruar';
 $lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Kërkim në DC++ nga emri i skedarit';
-$lang['DC_MAGNET_EXT'] = 'Kërkim në DC++ vazhdimin';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusi';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Zgjidhni statusin';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Ju nuk e kanë të zgjedhur statusin.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Të gjitha statuset';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nuk kontrollohen',
     TOR_CLOSED => 'mbyllur',
     TOR_APPROVED => 'kontrolluar',
@@ -1104,7 +1104,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'të përkohshme',
     TOR_PREMOD => 'para-moderim',
     TOR_REPLENISH => 'plotësoj',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Një status të tillë nuk ekziston!';
 $lang['TORRENT_FAILED'] = 'Shpërndarja nuk u gjet!';
 $lang['TOR_STATUS_DUB'] = 'Shpërndarja e ka të njëjtin status';
@@ -1118,7 +1118,6 @@ $lang['CHANGE_TOR_TYPE'] = 'Lloji përrua me sukses ndryshuar';
 $lang['DEL_TORRENT'] = 'A jeni të sigurt që ju doni të fshini përrua?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeni i sigurt që dëshironi të fshini dhe për të shkuar temë?';
 $lang['UNEXECUTED_RELEASE'] = 'A keni një shapeless lirimin e para duke krijuar një re të rregulluar tij paformuar!';
-$lang['STATUS_DOES_EXIST'] = 'Një status të tillë nuk ekziston: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ndryshimin e statusit të shpërndarjes - %s';
@@ -1154,6 +1153,7 @@ $lang['UNSET_SILVER_TORRENT'] = 'UnMake argjendi';
 $lang['GOLD_STATUS'] = 'ARI TORRENT! SHKARKO TRAFIKUT NUK E KONSIDEROJNË!';
 $lang['SILVER_STATUS'] = 'SILVER PËRRUA! SHKARKO TRAFIKUT PJESËRISHT KONSIDEROHET!';
 
+$lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Kërkimi në Forume';
 $lang['SELECT_CAT'] = 'Zgjidhni kategorinë';
 $lang['GO_TO_SECTION'] = 'Shko në seksionin';
@@ -1352,17 +1352,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('përgjigje', 'përgjigje');
-$lang['DECLENSION']['TIMES'] = array('kohë', 'kohët');
+$lang['DECLENSION']['REPLIES'] = ['përgjigje', 'përgjigje'];
+$lang['DECLENSION']['TIMES'] = ['kohë', 'kohët'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('i dytë', 'sekonda'),
-    'minutes' => array('minutë', 'minuta'),
-    'hours' => array('orë', 'orë'),
-    'mday' => array('ditë', 'ditë'),
-    'mon' => array('muaj', 'muaj'),
-    'year' => array('viti', 'vjet'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['i dytë', 'sekonda'],
+    'minutes' => ['minutë', 'minuta'],
+    'hours' => ['orë', 'orë'],
+    'mday' => ['ditë', 'ditë'],
+    'mon' => ['muaj', 'muaj'],
+    'year' => ['viti', 'vjet'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1461,6 +1461,10 @@ $lang['CHOOSE_PASS'] = 'Fusha fjalëkalimi nuk duhet të jetë bosh!';
 $lang['CHOOSE_PASS_ERR'] = 'Hyrë në fjalëkalimet nuk përputhen';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Fjalëkalimin tuaj duhet të jetë të paktën %d karaktere';
 $lang['CHOOSE_PASS_ERR_MAX'] = 'Fjalëkalimin tuaj duhet të jetë jo më shumë se $d karaktere';
+$lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
+$lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';
+$lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'] = 'The password must contain at least one special character';
 $lang['CHOOSE_PASS_OK'] = 'Fjalëkalimet ndeshje';
 $lang['CHOOSE_PASS_REG_OK'] = 'Fjalëkalimet ndeshje, ju mund të vazhdoni me regjistrimin';
 $lang['CHOOSE_PASS_FAILED'] = 'Për të ndryshuar fjalëkalimin, ju duhet të saktë të specifikoni fjalëkalimin aktual';
@@ -1481,6 +1485,9 @@ $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem-it: ';
 $lang['QUERIES'] = 'pyetje';
 $lang['LIMIT'] = 'Limit:';
+$lang['SHOW_LOG'] = 'Show log';
+$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Shkarko pa pagesë dhe me shpejtësi maksimale!';
@@ -1508,6 +1515,8 @@ $lang['BOLD'] = 'Tekst Bold: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Theksoj tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
+$lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citoj tekstin: [quote]text[/quote] (Ctrl+P)';
 $lang['IMG_TITLE'] = 'Fut imazhin: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
@@ -1600,18 +1609,6 @@ $lang['TRACKER_CONFIG'] = 'Tracker cilësimet';
 $lang['RELEASE_TEMPLATES'] = 'Lirimin Templates';
 $lang['ACTIONS_LOG'] = 'Raporti për veprimet';
 
-//Welcome page
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Na vjen keq, browser-i juaj nuk duket për të mbështetur korniza';
-$lang['IDX_CLEAR_CACHE'] = 'Qartë Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Templates';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Neto lajme';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'Nivelet e përdoruesit';
-$lang['IDX_SYNCHRONIZE'] = 'Të sinkronizuar:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Temat';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Përdoruesit postimet e numërimit';
-
 // Index
 $lang['MAIN_INDEX'] = 'Indeksi I Forumit';
 $lang['FORUM_STATS'] = 'Forumi Statistikat';
@@ -1637,8 +1634,9 @@ $lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Jo në dispozicion';
 
 // Clear Cache
-$lang['CLEAR_CACHE'] = 'Qartë Cache';
-$lang['TEMPLATES'] = 'Templates';
+$lang['DATASTORE'] = 'Datastore';
+$lang['CLEAR_CACHE'] = 'Cache';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
 
 // Update
 $lang['USER_LEVELS'] = 'Nivelet e përdoruesit';
@@ -1719,6 +1717,8 @@ $lang['USER_AUTH_UPDATED'] = 'Përdoruesit lejet kanë qenë të përditësuar';
 $lang['GROUP_AUTH_UPDATED'] = 'Grupi lejet kanë qenë të përditësuar';
 
 $lang['AUTH_UPDATED'] = 'Lejet kanë qenë të përditësuar';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Kliko %sHere%s të kthehen në Lejet e Përdoruesit';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Kliko %sHere%s të kthehen për Grupin Lejet';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliko %sHere%s të kthehen në Forum Lejet';
@@ -2058,6 +2058,7 @@ $lang['NOAVATAR'] = 'Nuk ka avatar';
 $lang['TRACKER_STATS'] = 'Statistika mbi tracker';
 $lang['WHOIS_INFO'] = 'Informacionin në lidhje me adresën IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Tregojnë për moderatorët e index.php';
+$lang['SHOW_BOARD_STARTED_INDEX'] = 'Show board start date on index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Para-moderation</h4> <h6>If ju nuk keni shpërndarjet për statusin e v, #, ose T në këtë seksion, duke përfshirë seksionet, shpërndarja do të automatikisht të marrë këtë status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Koment mbi statusin e një shpërndarjeje</h4> <h6>Komenti ju lejon të tregoni gabimet e bëra te lëshuesi. Nëse statuset janë të paplota, një formular i përgjigjes së lëshimit është i disponueshëm për menaxherin e lëshimit për të korrigjuar lëshimin</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding farë bonus </h4> <h6> Numri i shpërndarjet janë dorëzuar nga përdoruesit dhe madhësia e shpërblime për ata (të akuzuar herë për një orë) </h6>';
@@ -2258,13 +2259,6 @@ $lang['RETURN_CONFIG'] = '%sReturn të Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurimi I Azhurnuar Me Sukses';
 $lang['SET_DEFAULTS'] = 'Rikthimi standarte';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forumi cilësimet';
-$lang['TRACKER_SETTINGS'] = 'Tracker cilësimet';
-
-$lang['CHANGES_DISABLED'] = 'Ndryshimet me aftësi të kufizuara (shih <b>$bb_cfg[\'tracker\']</b> në config.php)';
-
 $lang['OFF_TRACKER'] = 'Çaktivizoni tracker';
 $lang['OFF_REASON'] = 'Çaktivizoni arsye';
 $lang['OFF_REASON_EXPL'] = 'ky mesazh do të dërgohet klientit kur tracker është me aftësi të kufizuara';
@@ -2409,14 +2403,14 @@ $lang['REPAIR_CRON'] = 'Riparimi Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit punë';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Të shtoni punë';
 $lang['CRON_SCRIPT_EXPL'] = 'emri i shkrimit nga "përfshin/cron/punë/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Zgjidhni start',
     'hourly' => 'orë',
     'daily' => 'e përditshme',
     'weekly' => 'javore',
     'monthly' => 'mujore',
     'interval' => 'intervali'
-);
+];
 $lang['NOSELECT'] = 'Nuk ka zgjidhni';
 $lang['RUN_DAY'] = 'Drejtuar ditës';
 $lang['RUN_DAY_EXPL'] = 'ditën kur këtë punë e drejtuar';
@@ -2543,17 +2537,22 @@ $lang['CALLSEED_MSG_OK'] = 'Mesazhi është dërguar për të gjithë ata që sh
 $lang['CALLSEED_MSG_SPAM'] = 'Kërkesa ka qenë tashmë një herë me sukses të dërguar (Ndoshta nuk ju)<br /><br />The mundësi tjetër për të dërguar një kërkesë për të <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Temë nuk kërkojnë ndihmë (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Temë:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Temë:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Temë:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Temë:<br /> <b>opened</b>',
     'mod_topic_split' => 'Temë:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Përdoruesi:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Përdoruesi:<br /> <b>ban</b>',
     'adm_user_unban' => 'Përdoruesi:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Të gjitha veprimet';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Veprimet Log: opsionet e Kërkimit';
@@ -2692,28 +2691,28 @@ $lang['MC_LEGEND'] = 'Shkruani një koment';
 $lang['MC_FAQ'] = 'Futur tekst do të shfaqet nën këtë mesazh';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s në mesazhin tuaj";
 $lang['MC_COMMENT_PM_MSG'] = "Përshëndetje, [b]%s[/b]\nModerator lënë në mesazhin tuaj [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Fshini koment',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Koment nga %s',
         'type' => 'Koment',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informacion nga %s',
         'type' => 'Informacion',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Paralajmërim nga %s',
         'type' => 'Paralajmërim',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Shkelja %s',
         'type' => 'Shkelje',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Menaxhuar sitemap';
@@ -2754,7 +2753,7 @@ $lang['HASH_NOT_FOUND'] = 'Lirimin me të hash %s nuk u gjet';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksti i kësaj faqe është redaktuar në: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Kjo linjë mund të shohë vetëm administratorët.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Në këtë faqe, ju mund të specifikoni tekstin e rregullave bazë të burimeve të shfaqet për përdoruesit.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'joaktiv përdoruesit në 30 ditë',
     1 => 'joaktiv përdoruesit për 90 ditë',
     2 => 'me madhësi të mesme shpërndarjet në tracker (për shumë megabajt)',
@@ -2763,7 +2762,7 @@ $lang['TR_STATS'] = array(
     5 => 'si shumë duart se ku shorti më shumë se 5 fara',
     6 => 'sa prej nesh uploaders (ata të cilët mbushur të paktën 1 dorën)',
     7 => 'sa uploaders gjatë fundit 30 ditë',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Sondazhi të aktivizuara';
 $lang['NEW_POLL_END'] = 'Anketa e përfunduar';
@@ -2787,13 +2786,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Çdo rresht i korrespondon një përgjigje (max';
 $lang['OLD_BROWSER'] = 'Ju jeni duke përdorur një të vjetëruara të shfletuesit. Faqja e internetit nuk do të ekranit.';
 $lang['GO_BACK'] = 'Kthehem';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Ngarko gabim';
 $lang['UPLOAD_ERROR_SIZE'] = 'I ngarkuar file kalon madhësia maksimale e %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Të pavlefshme file type e imazhit';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Imazhi i tejkalojnë dimensionet maksimale të lejueshme %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'I ngarkuar file nuk është një imazh';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Zgjerimi %s për shkarkim nuk është e lejuar';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'ju keni tejkaluar maksimumi file size për server',
     UPLOAD_ERR_FORM_SIZE => 'ju keni tejkaluar maksimale të ngarkoni fotografi të madhësisë',
     UPLOAD_ERR_PARTIAL => 'file është shkarkuar pjesërisht',
@@ -2801,7 +2801,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'të përkohshme directory nuk është gjetur',
     UPLOAD_ERR_CANT_WRITE => 'shkruani gabim',
     UPLOAD_ERR_EXTENSION => 'ngarkoni ndalur vazhdimin',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kontrolloni se ju nuk jeni një robot';

@@ -15,48 +15,99 @@ namespace TorrentPier\Legacy\Common;
  */
 class Upload
 {
-    public $cfg = [
+    /**
+     * Default config pattern
+     *
+     * @var array
+     */
+    public array $cfg = [
         'max_size' => 0,
         'max_width' => 0,
         'max_height' => 0,
         'allowed_ext' => [],
         'upload_path' => '',
+        'up_allowed' => false,
     ];
-    public $file = [
+
+    /**
+     * File params pattern
+     *
+     * @var array
+     */
+    public array $file = [
         'name' => '',
         'type' => '',
         'size' => 0,
         'tmp_name' => '',
         'error' => UPLOAD_ERR_NO_FILE,
     ];
+
+    /**
+     * Trash...
+     *
+     * TODO: Refactoring
+     * @var string
+     */
     public $orig_name = '';
-    public $file_path = '';      // Stored file path
+    public $file_path = '';
     public $file_ext = '';
     public $file_ext_id = '';
-    public $file_size = '';
-    public $ext_ids = []; // array_flip($bb_cfg['file_id_ext'])
-    public $errors = [];
-    public $img_types = [
-        1 => 'gif',
-        2 => 'jpg',
-        3 => 'png',
-        6 => 'bmp',
-        7 => 'tiff',
-        8 => 'tiff',
+
+    /**
+     * File size
+     *
+     * @var int
+     */
+    public int $file_size = 0;
+
+    /**
+     * All allowed extensions to upload
+     *
+     * @var array
+     */
+    public array $ext_ids = [];
+
+    /**
+     * Store caught errors while uploading
+     *
+     * @var array
+     */
+    public array $errors = [];
+
+    /**
+     * Image types array
+     *
+     * @see https://www.php.net/manual/en/image.constants.php
+     * @var array|string[]
+     */
+    public array $img_types = [
+        IMAGETYPE_GIF => 'gif',
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG => 'png',
+        IMAGETYPE_BMP => 'bmp',
+        IMAGETYPE_WEBP => 'webp'
     ];
 
     /**
+     * Initialize uploader
+     *
      * @param array $cfg
      * @param array $post_params
      * @param bool $uploaded_only
      * @return bool
      */
-    public function init(array $cfg = [], array $post_params = [], $uploaded_only = true)
+    public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true): bool
     {
         global $bb_cfg, $lang;
 
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
+
+        // Check upload allowed
+        if (!$this->cfg['up_allowed']) {
+            $this->errors[] = $lang['UPLOAD_ERROR_COMMON_DISABLED'];
+            return false;
+        }
 
         // upload errors from $_FILES
         if ($this->file['error']) {
@@ -65,12 +116,14 @@ class Upload
             $this->errors[] = $msg;
             return false;
         }
-        // file_exists
+
+        // Check file exists
         if (!file_exists($this->file['tmp_name'])) {
             $this->errors[] = "Uploaded file not exists: {$this->file['tmp_name']}";
             return false;
         }
-        // size
+
+        // Check file size
         if (!$this->file_size = filesize($this->file['tmp_name'])) {
             $this->errors[] = "Uploaded file is empty: {$this->file['tmp_name']}";
             return false;
@@ -79,17 +132,20 @@ class Upload
             $this->errors[] = sprintf($lang['UPLOAD_ERROR_SIZE'], humn_size($this->cfg['max_size']));
             return false;
         }
+
         // is_uploaded_file
         if ($uploaded_only && !is_uploaded_file($this->file['tmp_name'])) {
             $this->errors[] = "Not uploaded file: {$this->file['tmp_name']}";
             return false;
         }
-        // get ext
-        $this->ext_ids = array_flip($bb_cfg['file_id_ext']);
+
+        // Got file extension
         $file_name_ary = explode('.', $this->file['name']);
         $this->file_ext = strtolower(end($file_name_ary));
 
-        // img
+        $this->ext_ids = array_flip($bb_cfg['file_id_ext']);
+
+        // Actions for images [E.g. Change avatar]
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
             if ($img_info = getimagesize($this->file['tmp_name'])) {
                 [$width, $height, $type, $attr] = $img_info;
@@ -111,7 +167,8 @@ class Upload
                 return false;
             }
         }
-        // check ext
+
+        // Check extension
         if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
             $this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
             return false;
@@ -122,11 +179,13 @@ class Upload
     }
 
     /**
+     * Store uploaded file
+     *
      * @param string $mode
      * @param array $params
      * @return bool
      */
-    public function store($mode = '', array $params = [])
+    public function store(string $mode = '', array $params = [])
     {
         if ($mode == 'avatar') {
             delete_avatar($params['user_id'], $params['avatar_ext_id']);
@@ -143,6 +202,8 @@ class Upload
     }
 
     /**
+     * Move file to target path
+     *
      * @param $file_path
      * @return bool
      */

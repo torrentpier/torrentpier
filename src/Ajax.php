@@ -35,10 +35,11 @@ class Ajax
         'post_mod_comment' => ['mod'],
 
         'avatar' => ['user'],
-        'gen_passkey' => ['user'],
+        'passkey' => ['user'],
         'change_torrent' => ['user'],
         'change_tor_status' => ['user'],
         'manage_group' => ['user'],
+        'callseed' => ['user'],
 
         'view_post' => ['guest'],
         'view_torrent' => ['guest'],
@@ -60,6 +61,7 @@ class Ajax
 
     /**
      * Perform action
+     *
      * @throws Exception
      */
     public function exec()
@@ -159,13 +161,14 @@ class Ajax
 
     /**
      * Send data
+     *
      * @throws Exception
      */
     public function send()
     {
         $this->response['action'] = $this->action;
 
-        if (DBG_USER && SQL_DEBUG && !empty($_COOKIE['sql_log'])) {
+        if (Dev::sql_dbg_enabled()) {
             $this->response['sql_log'] = Dev::get_sql_log();
         }
 
@@ -182,7 +185,7 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        if (DBG_USER) {
+        if (APP_DEBUG) {
             if ($contents) {
                 $this->response['raw_output'] = $contents;
             }
@@ -202,11 +205,12 @@ class Ajax
 
     /**
      * Admin session
+     *
      * @throws Exception
      */
     public function check_admin_session()
     {
-        global $user;
+        global $user, $lang;
 
         if (!$user->data['session_admin']) {
             if (empty($this->request['user_password'])) {
@@ -217,7 +221,7 @@ class Ajax
                     'login_password' => $_POST['user_password'],
                 ];
                 if (!$user->login($login_args, true)) {
-                    $this->ajax_die('Wrong password');
+                    $this->ajax_die($lang['ERROR_LOGIN']);
                 }
             }
         }
@@ -225,6 +229,7 @@ class Ajax
 
     /**
      * Prompt for password
+     *
      * @throws Exception
      */
     public function prompt_for_password()
@@ -267,103 +272,213 @@ class Ajax
         }
     }
 
+    /**
+     * Edit user profile actions
+     *
+     * @return void
+     */
     public function edit_user_profile()
     {
         require AJAX_DIR . '/edit_user_profile.php';
     }
 
+    /**
+     * Change user rank actions
+     *
+     * @return void
+     */
     public function change_user_rank()
     {
         require AJAX_DIR . '/change_user_rank.php';
     }
 
+    /**
+     * Change user opt actions
+     *
+     * @return void
+     */
     public function change_user_opt()
     {
         require AJAX_DIR . '/change_user_opt.php';
     }
 
-    public function gen_passkey()
+    /**
+     * Passkey actions
+     *
+     * @return void
+     */
+    public function passkey()
     {
-        require AJAX_DIR . '/gen_passkey.php';
+        require AJAX_DIR . '/passkey.php';
     }
 
+    /**
+     * Group membership actions
+     *
+     * @return void
+     */
     public function group_membership()
     {
         require AJAX_DIR . '/group_membership.php';
     }
 
+    /**
+     * Manage group actions
+     *
+     * @return void
+     */
     public function manage_group()
     {
         require AJAX_DIR . '/edit_group_profile.php';
     }
 
+    /**
+     * Post moderator comment actions
+     *
+     * @return void
+     */
     public function post_mod_comment()
     {
         require AJAX_DIR . '/post_mod_comment.php';
     }
 
+    /**
+     * View post actions
+     *
+     * @return void
+     */
     public function view_post()
     {
         require AJAX_DIR . '/view_post.php';
     }
 
+    /**
+     * Change torrent status actions
+     *
+     * @return void
+     */
     public function change_tor_status()
     {
         require AJAX_DIR . '/change_tor_status.php';
     }
 
+    /**
+     * Change torrent actions
+     *
+     * @return void
+     */
     public function change_torrent()
     {
         require AJAX_DIR . '/change_torrent.php';
     }
 
+    /**
+     * View torrent actions
+     *
+     * @return void
+     */
     public function view_torrent()
     {
         require AJAX_DIR . '/view_torrent.php';
     }
 
+    /**
+     * User registration actions
+     *
+     * @return void
+     */
     public function user_register()
     {
         require AJAX_DIR . '/user_register.php';
     }
 
+    /**
+     * Moderator actions
+     *
+     * @return void
+     */
     public function mod_action()
     {
         require AJAX_DIR . '/mod_action.php';
     }
 
+    /**
+     * Posts actions
+     *
+     * @return void
+     */
     public function posts()
     {
         require AJAX_DIR . '/posts.php';
     }
 
+    /**
+     * Manage user actions
+     *
+     * @return void
+     */
     public function manage_user()
     {
         require AJAX_DIR . '/manage_user.php';
     }
 
+    /**
+     * Manage admin actions
+     *
+     * @return void
+     */
     public function manage_admin()
     {
         require AJAX_DIR . '/manage_admin.php';
     }
 
+    /**
+     * Topic tpl actions
+     *
+     * @return void
+     */
     public function topic_tpl()
     {
         require AJAX_DIR . '/topic_tpl.php';
     }
 
+    /**
+     * Index data actions
+     *
+     * @return void
+     */
     public function index_data()
     {
         require AJAX_DIR . '/index_data.php';
     }
 
+    /**
+     * Avatar actions
+     *
+     * @return void
+     */
     public function avatar()
     {
         require AJAX_DIR . '/avatar.php';
     }
 
+    /**
+     * Sitemap actions
+     *
+     * @return void
+     */
     public function sitemap()
     {
         require AJAX_DIR . '/sitemap.php';
+    }
+
+    /**
+     * Call seed actions
+     *
+     * @return void
+     */
+    public function callseed()
+    {
+        require AJAX_DIR . '/callseed.php';
     }
 }

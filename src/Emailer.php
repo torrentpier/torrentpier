@@ -23,20 +23,20 @@ use Symfony\Component\Mime\Email;
 class Emailer
 {
     /** @var string message text */
-    private $message;
+    private string $message;
 
     /** @var string message subject */
-    private $subject;
+    private string $subject;
 
-    private ?\Symfony\Component\Mime\Address $to = null;
+    private ?Address $to = null;
 
-    private ?\Symfony\Component\Mime\Address $reply = null;
+    private ?Address $reply = null;
 
     /** @var array message template with the language */
     private array $tpl_msg = [];
 
     /** @var array variables to be substituted in message templates */
-    private $vars = [];
+    private array $vars = [];
 
     /**
      * Setting the message subject
@@ -193,7 +193,7 @@ class Emailer
         try {
             $mailer->send($message);
         } catch (TransportExceptionInterface $e) {
-            bb_die('Failed sending email: ' . $e);
+            bb_die('Failed sending email: ' . $e->getMessage());
         }
 
         return true;

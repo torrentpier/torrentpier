@@ -1,5 +1,7 @@
-### TorrentPier ###
+### IDE ###
 .idea
+
+### TorrentPier ###
 .env
 .php_cs.cache
 composer.phar
@@ -20,6 +22,8 @@ vendor
 *.rar
 *.tar
 *.gz
+*.zip
+*.7z
 *.torrent
 
 ### Windows ###

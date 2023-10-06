@@ -168,13 +168,13 @@ ajax.callback.index_data = function(data) {
 
 <!-- IF SHOW_PASSKEY -->
 <script type="text/javascript">
-ajax.callback.gen_passkey = function(data){
-	$('#passkey').text(data.passkey);
-};
+    ajax.callback.passkey = function (data) {
+        $('#passkey').text(data.passkey);
+    };
 </script>
 <!-- ENDIF / SHOW_PASSKEY -->
 
-<style type="text/css">
+<style>
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
 #traf-stats-tbl th { padding: 2px <!-- IF $bb_cfg['seed_bonus_enabled'] -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
@@ -221,8 +221,8 @@ ajax.callback.gen_passkey = function(data){
 			{RANK_IMAGE}
 		<!-- ENDIF -->
 		</p>
-    <!-- IF BIRTHDAY_ICON --><div class="mrg_8">{BIRTHDAY_ICON}</div><!-- ENDIF -->
-		<h4 class="cat border bw_TB" id="username">{L_CONTACT} <span class="editable bold">{USERNAME}</span></h4>
+        <!-- IF BIRTHDAY_ICON --><div class="mrg_8">{BIRTHDAY_ICON}</div><!-- ENDIF -->
+		<h4 class="cat border bw_TB">{L_CONTACT}&nbsp;{USERNAME}</span></h4>
 
 		<div class="spacer_4"></div>
 
@@ -293,6 +293,12 @@ ajax.callback.gen_passkey = function(data){
 		<!-- ENDIF -->
 
 		<table class="user_details borderless w100">
+            <tr>
+                <th>{L_USERNAME}:</th>
+                <td id="username">
+                    <span class="editable bold">{USERNAME}</span>
+                </td>
+            </tr>
 			<!-- IF SHOW_ROLE -->
 			<tr>
 				<th>{L_ROLE}</th>
@@ -379,28 +385,31 @@ ajax.callback.gen_passkey = function(data){
 			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
 				<th>{L_USER_RATIO}:</th>
 				<td>
+                    <!-- IF SHOW_BT_USERDATA -->
 					<!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
 					<b id="u_ratio" class="gen">{USER_RATIO}</b>
 					[<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
 					<!-- ELSE -->
 					<span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
 					<!-- ENDIF -->
+                    <!-- ENDIF -->
 
 					<!-- IF SHOW_PASSKEY -->
-					[ {L_BT_PASSKEY}:  <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
+					[ {L_BT_PASSKEY}: <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
 					<span id="passkey-gen" class="med" style="display: none;">
-						<b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;
-						<a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+						<b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
 				</td>
 			</tr>
 
+            <!-- IF SHOW_BT_USERDATA -->
 			<tr id="ratio-expl" style="display: none;">
 				<td colspan="2" class="med tCenter">
 				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 				</td>
 			</tr>
+            <!-- ENDIF -->
 
 			<!-- IF LOCATION -->
 			<tr>
@@ -429,7 +438,7 @@ ajax.callback.gen_passkey = function(data){
 			<!-- IF GENDER -->
 			<tr>
 				<th>{L_GENDER}:</th>
-				<td id="user_gender"><span class="editable">{GENDER}</span></td>
+				<td id="user_gender"><b class="editable">{GENDER}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF BIRTHDAY -->
@@ -442,6 +451,7 @@ ajax.callback.gen_passkey = function(data){
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
+            <!-- IF SHOW_BT_USERDATA -->
 			<tr>
 				<td colspan="2" class="pad_4">
 					<table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="bCenter borderless" cellspacing="1">
@@ -481,11 +491,12 @@ ajax.callback.gen_passkey = function(data){
 							<td colspan="1">{L_MAX_SPEED}</td>
 							<td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
 							<td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
+							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="{BONUS_URL}">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
 						</tr>
 					</table>
 				</td>
 			</tr>
+            <!-- ENDIF -->
 		</table>
 		<!--/user_details-->
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->
@@ -504,7 +515,7 @@ ajax.callback.gen_passkey = function(data){
 <a name="torrent"></a>
 <div class="spacer_8"></div>
 <!-- IF USER_DLS -->
-<style type="text/css">
+<style>
 #dls-tbl u { display: none; }
 .dls-type, .dls-f { padding: 4px; text-align: center; }
 .dls-cnt { font-size: 16px; font-weight: normal; }
