@@ -1284,7 +1284,7 @@ function get_user_client($peer_id)
         //'-bk' => 'BitKitten (libtorrent)',
         //'-lt' => 'libTorrent (Rakshasa)',
         //'-pb' => 'pbTorrent',
-        ///'PI' => 'PicoTorrent',
+        ///'-PI' => 'PicoTorrent',
         '-qB' => 'qBittorrent',
         //'-st' => 'SharkTorrent',
         //'346-' => 'TorrentTopia',
