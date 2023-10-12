@@ -69,7 +69,7 @@ if (!isset($info_hash)) {
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
 // Store peer id
-$peer_id_sql = rtrim(DB()->escape($peer_id), ' ');
+$peer_id_sql = rtrim(DB()->escape(substr($peer_id, 0, 10)), ' ');
 // Check info_hash version
 if (strlen($info_hash) === 32) {
     $is_bt_v2 = true;
@@ -317,7 +317,7 @@ if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only
         $sql .= ", speed_down = $speed_down";
 
         $sql .= ", complete = $complete";
-        $sql .= ", peer_id = $peer_id_sql";
+        $sql .= ", peer_id = '$peer_id_sql'";
 
         $sql .= " WHERE peer_hash = '$peer_hash'";
         $sql .= " LIMIT 1";

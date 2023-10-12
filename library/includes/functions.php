@@ -1311,7 +1311,7 @@ function get_user_client($peer_id)
     ];
 
     $bestMatchLength = 0;
-    $peer_id = htmlCHR(substr($peer_id, 0, 10));
+    $peer_id = htmlCHR($peer_id);
     foreach ($clients as $key => $clientName) {
         if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
             $bestMatch = $clientName;
