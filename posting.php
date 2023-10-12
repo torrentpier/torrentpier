@@ -610,7 +610,7 @@ $template->assign_vars([
     'POSTING_TYPE_TITLE' => $page_title,
     'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
     'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-    'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
+    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'USERNAME' => @$username,
     'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
