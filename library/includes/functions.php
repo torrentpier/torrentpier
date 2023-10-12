@@ -1271,7 +1271,7 @@ function get_user_client($peer_id)
         //'-WS' => 'HTTP Seed',
         //'-WT' => 'BitLet',
         //'-WT-' => 'BitLet',
-        ///'-WW' => 'WebTorrent',
+        '-WW' => 'WebTorrent',
         //'-WY' => 'FireTorrent',
         //'-XC' => 'Xtorrent',
         //'-XF' => 'Xfplay',
