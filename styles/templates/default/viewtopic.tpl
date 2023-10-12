@@ -380,10 +380,11 @@ function build_poll_add_form (src_el)
 		<div class="post_head">
 			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
 				<!-- IF postrow.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
-				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}</a>
+				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}&nbsp;|&nbsp;#{postrow.POST_NUMBER}</a>
 				<!-- IF postrow.POSTED_AFTER -->
 					<span class="posted_since">({L_POSTED_AFTER} {postrow.POSTED_AFTER})</span>
 				<!-- ENDIF -->
+                <!-- IF postrow.POSTER_AUTHOR -->&middot;&nbsp;<span>{L_AUTHOR}</span><!-- ENDIF -->
 			</p>
 
 			<!-- IF postrow.MOD_CHECKBOX --><input type="checkbox" class="select_post" onclick="set_hid_chbox('{postrow.POST_ID}');"><!-- ENDIF -->
@@ -411,7 +412,8 @@ function build_poll_add_form (src_el)
 					<h4 class="alert-heading">{L_RELEASE_FROM_RG} <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
 					<div id="pg_info_{postrow.POST_ID}">
 						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
-						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr /><div id="rg_sig">{postrow.RG_SIG}</div><!-- ENDIF -->
+                        <!-- IF postrow.RG_DESC --><div class="post-wrap">{L_DESCRIPTION}: {postrow.RG_DESC}</div><!-- ENDIF -->
+						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr /><div id="rg_sig">{L_SIGNATURE}: {postrow.RG_SIG}</div><!-- ENDIF -->
 						<hr /><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
 					</div>
 				</div>
