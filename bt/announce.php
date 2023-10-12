@@ -189,7 +189,7 @@ if ($lp_info) {
     $tor_type = $row['tor_type'];
 
     // Check hybrid torrents
-    if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
+    if (!empty($row['info_hash'], $row['info_hash_v2'])) {
         // Helpful dev variables
         $is_hybrid = true;
         $hybrid_v1_hash = &$row['info_hash'];
@@ -296,7 +296,7 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (isset($is_hybrid, $hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only for one topic
+if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only for one topic
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
