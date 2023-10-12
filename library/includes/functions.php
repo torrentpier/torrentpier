@@ -1310,7 +1310,7 @@ function get_user_client($peer_id)
     ];
 
     $bestMatchLength = 0;
-
+    $peer_id = htmlCHR(substr($peer_id, 0, 10));
     foreach ($clients as $key => $clientName) {
         if (strpos($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
             $bestMatch = $clientName;
@@ -1318,9 +1318,14 @@ function get_user_client($peer_id)
         }
     }
 
-    $client_name = !empty($bestMatch) ? $bestMatch : 'unknown';
+    if (!empty($bestMatch)) {
+        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/'. $bestMatch .'.png" alt="' . $bestMatch . '" title="' . $peer_id  . '">';
+    }
+    else {
+        return $peer_id;
+    }
 
-    return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/'. $client_name .'.png" alt="' . $client_name . '" title="' . htmlCHR(substr($peer_id, 0, 10)) . '">';
+
 }
 
 function birthday_age($date)
