@@ -1324,8 +1324,6 @@ function get_user_client($peer_id)
     else {
         return $peer_id;
     }
-
-
 }
 
 function birthday_age($date)
