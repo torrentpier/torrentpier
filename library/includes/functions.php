@@ -1227,7 +1227,7 @@ function get_user_client($peer_id)
         //'-LC' => 'LeechCraft',
         //'-LH' => 'LH-ABC',
         //'-LP' => 'Lphant',
-        '-LT' => 'libtorrent',
+        '-LT' => 'libTorrent',
         //'-LW' => 'LimeWire',
         ///'-Lr' => 'LibreTorrent',
         ///'-MG' => 'MediaGet',
