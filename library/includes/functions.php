@@ -1261,6 +1261,7 @@ function get_user_client($peer_id)
         '-TR' => 'Transmission',
         //'-TS' => 'Torrentstorm',
         //'-TT' => 'TuoTu',
+        '-tT' => 'tTorrent',
         //'-UE' => "uTorrent Embedded",
         //'-UL' => 'uLeecher!',
         '-UM' => "uTorrent Mac",
