@@ -68,8 +68,10 @@ if (!isset($info_hash)) {
 
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
+
 // Store peer id
 $peer_id_sql = rtrim(DB()->escape(substr($peer_id, 0, 10)), ' ');
+
 // Check info_hash version
 if (strlen($info_hash) === 32) {
     $is_bt_v2 = true;
@@ -377,8 +379,8 @@ if (!$output) {
 
     if ($compact_mode) {
 
-    $peers = '';
-    $peers6 = '';
+        $peers = '';
+        $peers6 = '';
 
         foreach ($rowset as $peer) {
             $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
@@ -386,8 +388,7 @@ if (!$output) {
 
             if (\TorrentPier\Helpers\IPHelper::isValidv6($ip)) {
                 $peers6 .= $endian;
-            }
-            else{
+            } else {
                 $peers .= $endian;
             }
         }

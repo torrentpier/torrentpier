@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL السرعة';
 $lang['DL_DL_SPEED'] = 'دل السرعة';
 $lang['DL_PORT'] = 'ميناء';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'الصيغة: تحميل/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'توقفت';

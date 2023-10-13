@@ -1545,6 +1545,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Brzina str';
 $lang['DL_DL_SPEED'] = 'Brzina dl';
 $lang['DL_PORT'] = 'Luka';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula Je: Skinuti/TorrentSize';
 $lang['DL_ULR'] = 'URL adresa';
 $lang['DL_STOPPED'] = 'zaustavljen';

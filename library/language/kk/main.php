@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL жылдамдығы';
 $lang['DL_DL_SPEED'] = 'DL жылдамдығы';
 $lang['DL_PORT'] = 'Порт';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Формула: Uploaded / TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'тоқтатты';

@@ -77,7 +77,6 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 $template->assign_vars([
     'PAGE_TITLE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
     'USERNAME' => $profiledata['username'],
-
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),

@@ -1546,6 +1546,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL hızı';
 $lang['DL_DL_SPEED'] = 'DL hızı';
 $lang['DL_PORT'] = 'Bağlantı noktası';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formül: Yükledi/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'durdu';

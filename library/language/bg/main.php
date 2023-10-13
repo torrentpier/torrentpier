@@ -1544,6 +1544,7 @@ $lang['DL_DL'] = 'Дл';
 $lang['DL_UL_SPEED'] = 'Скорост на ул.';
 $lang['DL_DL_SPEED'] = 'Скорост на дл';
 $lang['DL_PORT'] = 'Пристанище';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Формула: Качил/TorrentSize';
 $lang['DL_ULR'] = 'URL-адрес';
 $lang['DL_STOPPED'] = 'спря';

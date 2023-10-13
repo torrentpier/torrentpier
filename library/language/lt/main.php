@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL greitis';
 $lang['DL_DL_SPEED'] = 'DL greitis';
 $lang['DL_PORT'] = 'Uostas';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formulė: Upload/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'sustojo';
