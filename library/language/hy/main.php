@@ -1545,6 +1545,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Արագությունը փող';
 $lang['DL_DL_SPEED'] = 'Արագությունը dl';
 $lang['DL_PORT'] = 'Նավահանգիստ';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Բանաձեւը: Բեռնված/TorrentSize';
 $lang['DL_ULR'] = 'URL-հասցե';
 $lang['DL_STOPPED'] = 'կանգ է առել';
