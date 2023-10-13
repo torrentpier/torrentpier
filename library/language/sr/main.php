@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'Дл';
 $lang['DL_UL_SPEED'] = 'Брзина ст';
 $lang['DL_DL_SPEED'] = 'Брзина дл';
 $lang['DL_PORT'] = 'Лука';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Формула: Напуњен/TorrentSize';
 $lang['DL_ULR'] = 'УРЛ адреса';
 $lang['DL_STOPPED'] = 'престао';
