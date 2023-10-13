@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL brzinom';
 $lang['DL_DL_SPEED'] = 'DL brzinom';
 $lang['DL_PORT'] = 'Luke';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formulu: Postavio/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'prestao';
