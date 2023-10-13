@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'Дл';
 $lang['DL_UL_SPEED'] = 'Хуткасць вул';
 $lang['DL_DL_SPEED'] = 'Хуткасць дл';
 $lang['DL_PORT'] = 'Порт';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Формула: Загружаны/TorrentSize';
 $lang['DL_ULR'] = 'URL-адрас';
 $lang['DL_STOPPED'] = 'спыніўся';
