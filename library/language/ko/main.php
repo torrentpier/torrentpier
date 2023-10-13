@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL 속도';
 $lang['DL_DL_SPEED'] = 'DL 속도';
 $lang['DL_PORT'] = '트';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = '공식:에 업로드/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = '을 중지';

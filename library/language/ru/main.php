@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'Скачано';
 $lang['DL_UL_SPEED'] = 'Отдача';
 $lang['DL_DL_SPEED'] = 'Загрузка';
 $lang['DL_PORT'] = 'Порт';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Формула: Отдано/Размер раздачи';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'Остановил Скачивание/Раздачу';

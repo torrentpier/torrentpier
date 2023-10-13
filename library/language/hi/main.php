@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'डीएल';
 $lang['DL_UL_SPEED'] = 'उल गति';
 $lang['DL_DL_SPEED'] = 'डीएल की गति';
 $lang['DL_PORT'] = 'बंदरगाह';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'फॉर्मूला: अपलोड किया गया / टोरेंटिसिज़';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'रोका हुआ';

@@ -1546,6 +1546,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL速度';
 $lang['DL_DL_SPEED'] = 'DL速度';
 $lang['DL_PORT'] = '港';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = '式：掲載/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = '停止';

@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL ātrums';
 $lang['DL_DL_SPEED'] = 'DL ātrums';
 $lang['DL_PORT'] = 'Ostas';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula: Augšupielādēto/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'apturēts';
