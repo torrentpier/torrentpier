@@ -222,7 +222,6 @@ ajax.callback.index_data = function(data) {
 		<!-- ENDIF -->
 		</p>
         <!-- IF BIRTHDAY_ICON --><div class="mrg_8">{BIRTHDAY_ICON}</div><!-- ENDIF -->
-        <!-- IF PEER_ID --><tr><th>{L_TOR_CLIENT}:</th><td id="peer_id">{PEER_ID}</td></tr><!-- ENDIF -->
 		<h4 class="cat border bw_TB">{L_CONTACT}&nbsp;{USERNAME}</span></h4>
 
 		<div class="spacer_4"></div>
