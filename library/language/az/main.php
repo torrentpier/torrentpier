@@ -1545,6 +1545,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Sürət küç';
 $lang['DL_DL_SPEED'] = 'Sürət dl';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Tərkibi: Dolu/TorrentSize';
 $lang['DL_ULR'] = 'URL-ünvanı';
 $lang['DL_STOPPED'] = 'dayandırdı';
