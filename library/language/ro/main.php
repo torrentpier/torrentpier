@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL viteză';
 $lang['DL_DL_SPEED'] = 'Viteza de DL';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula: Încărcat/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'oprit';
