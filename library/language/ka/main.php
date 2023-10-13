@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL სიჩქარე';
 $lang['DL_DL_SPEED'] = 'DL სიჩქარე';
 $lang['DL_PORT'] = 'პორტი';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'ფორმულა: აიტვირთა/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'შეწყვიტა';
