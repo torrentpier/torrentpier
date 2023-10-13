@@ -154,9 +154,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
-                <!-- BEGIN client -->
-                <th class="{sorter: 'text'}"><b class="tbs-text">Client</b></th>
-                <!-- END client -->
+                <th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -207,7 +205,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
                 <!-- END porthead -->
-                <th class="{sorter: 'text'}"><b class="tbs-text">Client</b></th>
+                <th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
