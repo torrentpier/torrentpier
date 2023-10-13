@@ -262,7 +262,7 @@ if ($tor_reged && $tor_info) {
                     'cdown' => 'tr.downloaded',
                     'sup' => 'tr.speed_up',
                     'sdown' => 'tr.speed_down',
-                    'time' => 'tr.update_time'
+                    'time' => 'tr.update_time',
                     'peer_id' => 'tr.peer_id',
                 ];
 
