@@ -263,6 +263,7 @@ if ($tor_reged && $tor_info) {
                     'sup' => 'tr.speed_up',
                     'sdown' => 'tr.speed_down',
                     'time' => 'tr.update_time'
+                    'peer_id' => 'tr.peer_id',
                 ];
 
                 foreach ($peer_orders as $get_key => $order_by_value) {
