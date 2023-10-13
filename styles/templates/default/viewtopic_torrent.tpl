@@ -154,6 +154,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
+                <th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -170,6 +171,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN port -->
 				<td>{sfull.srow.port.PORT}</td>
 				<!-- END port -->
+                <td>{sfull.srow.PEER_ID}</td>
 			</tr>
 			<!-- END srow -->
 			</table>
@@ -202,7 +204,8 @@ ajax.callback.callseed = function (data) {
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-				<!-- END porthead -->
+                <!-- END porthead -->
+                <th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
@@ -219,6 +222,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN port -->
 				<td>{lfull.lrow.port.PORT}</td>
 				<!-- END port -->
+                <td>{lfull.lrow.PEER_ID}</td>
 			</tr>
 			<!-- END lrow -->
 			</table>

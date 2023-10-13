@@ -68,7 +68,8 @@ if (!isset($info_hash)) {
 
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
-
+// Store peer id
+$peer_id_sql = rtrim(DB()->escape(substr($peer_id, 0, 10)), ' ');
 // Check info_hash version
 if (strlen($info_hash) === 32) {
     $is_bt_v2 = true;
@@ -189,7 +190,7 @@ if ($lp_info) {
     $tor_type = $row['tor_type'];
 
     // Check hybrid torrents
-    if (!empty($row['info_hash'], $row['info_hash_v2'])) {
+    if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
         // Helpful dev variables
         $is_hybrid = true;
         $hybrid_v1_hash = &$row['info_hash'];
@@ -316,6 +317,7 @@ if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only
         $sql .= ", speed_down = $speed_down";
 
         $sql .= ", complete = $complete";
+        $sql .= ", peer_id = '$peer_id_sql'";
 
         $sql .= " WHERE peer_hash = '$peer_hash'";
         $sql .= " LIMIT 1";
@@ -326,8 +328,8 @@ if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only
     }
 
     if (!$lp_info || !$peer_info_updated) {
-        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete';
-        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete";
+        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id';
+        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";
 
         DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
     }

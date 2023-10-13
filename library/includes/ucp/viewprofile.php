@@ -77,6 +77,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 $template->assign_vars([
     'PAGE_TITLE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
     'USERNAME' => $profiledata['username'],
+
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
@@ -90,7 +91,6 @@ $template->assign_vars([
     'ICQ' => $profiledata['user_icq'],
     'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
     'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
-
     'USER_ACTIVE' => $profiledata['user_active'],
     'LOCATION' => $profiledata['user_from'],
     'OCCUPATION' => $profiledata['user_occ'],
