@@ -1173,8 +1173,13 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
     return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
-// Get user's torrent client string
-function get_user_client($peer_id)
+/**
+ * Get user's torrent client string
+ *
+ * @param string $peer_id
+ * @return mixed|string
+ */
+function get_user_torrent_client(string $peer_id): mixed
 {
     static $icons_extension = '.png';
     static $clients = [
