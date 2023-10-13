@@ -1542,6 +1542,7 @@ $lang['DL_DL'] = 'Завантажено';
 $lang['DL_UL_SPEED'] = 'Швидкість віддачі';
 $lang['DL_DL_SPEED'] = 'Швидкість завантаження';
 $lang['DL_PORT'] = 'Порт';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Формула: Віддано/Розмір роздачі';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'зупинено';
