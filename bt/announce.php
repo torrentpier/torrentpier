@@ -190,7 +190,7 @@ if ($lp_info) {
     $tor_type = $row['tor_type'];
 
     // Check hybrid torrents
-    if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
+    if (!empty($row['info_hash'], $row['info_hash_v2'])) {
         // Helpful dev variables
         $is_hybrid = true;
         $hybrid_v1_hash = &$row['info_hash'];

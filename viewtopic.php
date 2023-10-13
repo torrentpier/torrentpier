@@ -311,7 +311,7 @@ if ($t_data['topic_show_first_post'] && $start) {
 			u.user_regdate, u.user_sig,
 			u.avatar_ext_id,
 			u.user_opt, u.user_gender, u.user_birthday,
-			p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
+			p.*, g.group_name, g.group_description, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 			u2.username as mc_username, u2.user_rank as mc_user_rank,
 			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 		FROM      " . BB_POSTS . " p
@@ -332,7 +332,7 @@ $sql = "
 		u.user_regdate, u.user_sig,
 		u.avatar_ext_id,
 		u.user_opt, u.user_gender, u.user_birthday,
-		p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
+		p.*, g.group_name, g.group_description, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 		u2.username as mc_username, u2.user_rank as mc_user_rank,
 		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 	FROM      " . BB_POSTS . " p
