@@ -225,52 +225,55 @@
         <td colspan="3">{postrow.attach.tor_reged.comment.COMMENT}</td>
     </tr>
     <!-- END comment -->
-	<tr class="row3 tCenter">
-		<td colspan="3">
-		<script type="text/javascript">
-		ajax.callback.change_torrent = function(data) {
-			if (data.title) alert(data.title);
-			if (data.url) document.location.href = data.url;
-		};
-		</script>
-		<!-- IF TOR_CONTROLS -->
-		<script type="text/javascript">
-		function change_torrents()
-		{
-			ajax.exec({
-				action    : 'change_torrent',
-				attach_id : {postrow.attach.tor_reged.ATTACH_ID},
-				type      : $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}').val(),
-			});
-		}
-		</script>
-			<select name="tor_action" id="tor-select-{postrow.attach.tor_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', true)">
-				<option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
-				<option value="del_torrent">{L_DELETE_TORRENT}</option>
-				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
-				<!-- IF AUTH_MOD -->
-				<!-- IF $bb_cfg['tracker']['gold_silver_enabled'] -->
-				<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->
-				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
-				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
-				<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->
-				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
-				<option value="set_gold">{L_SET_GOLD_TORRENT}</option>
-				<!-- ELSE -->
-				<option value="set_gold">{L_SET_GOLD_TORRENT}</option>
-				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
-				<!-- ENDIF -->
-				<!-- ENDIF -->
-				<!-- ENDIF -->
-			</select>
-			<a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
-		<!-- ELSEIF TOR_HELP_LINKS -->
-		{TOR_HELP_LINKS}
-		<!-- ELSE -->
-		&nbsp;
-		<!-- ENDIF -->
-		</td>
-	</tr>
+    <tr class="row3 tCenter">
+        <td colspan="3">
+            <script type="text/javascript">
+                ajax.callback.change_torrent = function (data) {
+                    if (data.title) alert(data.title);
+                    if (data.url) document.location.href = data.url;
+                };
+            </script>
+            <!-- IF TOR_CONTROLS -->
+            <script type="text/javascript">
+                function change_torrents() {
+                    ajax.exec({
+                        action: 'change_torrent',
+                        attach_id: {postrow.attach.tor_reged.ATTACH_ID},
+                        type: $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}').val(),
+                    });
+                }
+            </script>
+            <select name="tor_action" id="tor-select-{postrow.attach.tor_reged.ATTACH_ID}"
+                    onchange="$('#tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', true);">
+                <option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
+                <option value="del_torrent">{L_DELETE_TORRENT}</option>
+                <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
+                <!-- IF AUTH_MOD -->
+                <!-- IF $bb_cfg['tracker']['gold_silver_enabled'] -->
+                <!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->
+                <option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
+                <option value="set_silver">{L_SET_SILVER_TORRENT}</option>
+                <!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->
+                <option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
+                <option value="set_gold">{L_SET_GOLD_TORRENT}</option>
+                <!-- ELSE -->
+                <option value="set_gold">{L_SET_GOLD_TORRENT}</option>
+                <option value="set_silver">{L_SET_SILVER_TORRENT}</option>
+                <!-- ENDIF -->
+                <!-- ENDIF -->
+                <!-- ENDIF -->
+            </select>
+            <a href="#"
+               onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input
+                    type="submit" value="{L_EDIT}" class="liteoption"/></a>
+            <!-- ENDIF -->
+        </td>
+    </tr>
+    <!-- IF TOR_HELP_LINKS -->
+    <tr class="row3 tCenter">
+        <td colspan="3">{TOR_HELP_LINKS}</td>
+    </tr>
+    <!-- ENDIF -->
 </table>
 
 <script type="text/javascript">
