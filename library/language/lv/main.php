@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Veidni invalīdiem';
 $lang['FOR_NEW_TEMPLATE'] = 'par jauniem modeļiem!';
 $lang['CHANGED'] = 'Mainīt';
 $lang['REMOVED'] = 'Noņemts';
-$lang['QUESTION'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron saraksts';
 $lang['CRON_ID'] = 'ID';
