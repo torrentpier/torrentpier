@@ -2371,7 +2371,7 @@ $lang['TEMPLATE_DISABLE'] = 'Шаблон са изключени';
 $lang['FOR_NEW_TEMPLATE'] = 'за нови модели!';
 $lang['CHANGED'] = 'Промени';
 $lang['REMOVED'] = 'Изтрити';
-$lang['QUESTION'] = 'Сигурни ли сте, че искате да изтриете?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Списък на cron';
 $lang['CRON_ID'] = 'Идентификатор';
