@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mẫu vô hiệu hóa';
 $lang['FOR_NEW_TEMPLATE'] = 'cho mô hình mới!';
 $lang['CHANGED'] = 'Thay đổi';
 $lang['REMOVED'] = 'Bỏ';
-$lang['QUESTION'] = 'Anh có chắc muốn xóa?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Định kỳ danh sách';
 $lang['CRON_ID'] = 'ID';
