@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Šablon za invalide';
 $lang['FOR_NEW_TEMPLATE'] = 'za novi uzorke!';
 $lang['CHANGED'] = 'Promijenio';
 $lang['REMOVED'] = 'Uklonio';
-$lang['QUESTION'] = 'Jesi li siguran da želim da izbrišete?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron liste';
 $lang['CRON_ID'] = 'ID';
