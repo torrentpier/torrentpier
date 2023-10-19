@@ -2373,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = 'テンプレートを無効';
 $lang['FOR_NEW_TEMPLATE'] = '新しいパターンです！';
 $lang['CHANGED'] = '変更';
 $lang['REMOVED'] = '除';
-$lang['QUESTION'] = 'はいを削除したいのか？';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cronのリスト';
 $lang['CRON_ID'] = 'ID';
