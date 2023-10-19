@@ -2372,7 +2372,7 @@ $lang['TEMPLATE_DISABLE'] = 'Կաղապար անջատված';
 $lang['FOR_NEW_TEMPLATE'] = 'համար նոր մոդելներ!';
 $lang['CHANGED'] = 'Փոխվել է';
 $lang['REMOVED'] = 'Հեռացվել է';
-$lang['QUESTION'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Ցուցակը хрон';
 $lang['CRON_ID'] = 'Id';
