@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Template penyandang cacat';
 $lang['FOR_NEW_TEMPLATE'] = 'untuk pola-pola baru!';
 $lang['CHANGED'] = 'Berubah';
 $lang['REMOVED'] = 'Dihapus';
-$lang['QUESTION'] = 'Apakah anda yakin ingin menghapus?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron daftar';
 $lang['CRON_ID'] = 'ID';
