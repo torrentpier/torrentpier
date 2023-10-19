@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'o\'chirilgan Andoza';
 $lang['FOR_NEW_TEMPLATE'] = 'yangi naqsh uchun!';
 $lang['CHANGED'] = 'O\'zgartirilgan';
 $lang['REMOVED'] = 'Ko\'targan';
-$lang['QUESTION'] = 'Agar ishonch o\'chirishni istaysizmi bormi?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'cron ro\'yxati';
 $lang['CRON_ID'] = 'ID';
