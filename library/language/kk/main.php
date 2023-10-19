@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'мүгедектер Үлгі';
 $lang['FOR_NEW_TEMPLATE'] = 'жаңа заңдылықтарын!';
 $lang['CHANGED'] = 'Өзгертілген';
 $lang['REMOVED'] = 'жойылған';
-$lang['QUESTION'] = 'Сіз сенімді жойғыңыз келсе ба?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron тізімі';
 $lang['CRON_ID'] = 'ID';
