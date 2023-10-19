@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mal for funksjonshemmede';
 $lang['FOR_NEW_TEMPLATE'] = 'for nye mønstre!';
 $lang['CHANGED'] = 'Endret';
 $lang['REMOVED'] = 'Fjernet';
-$lang['QUESTION'] = 'Er du sikker på at du ønsker å slette?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron-liste';
 $lang['CRON_ID'] = 'ID';
