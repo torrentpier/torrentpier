@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Образац искључени';
 $lang['FOR_NEW_TEMPLATE'] = 'за нове моделе!';
 $lang['CHANGED'] = 'Променило';
 $lang['REMOVED'] = 'Уклонити';
-$lang['QUESTION'] = 'Да ли сте сигурни да желите да избришете?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Списак хрон';
 $lang['CRON_ID'] = 'Ид';

@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'टेम्पलेट अक्षम है';
 $lang['FOR_NEW_TEMPLATE'] = 'नए पैटर्न के लिए!';
 $lang['CHANGED'] = 'बदला हुआ';
 $lang['REMOVED'] = 'हटा दिया';
-$lang['QUESTION'] = 'क्या आप वाकई हटाना चाहते हैं?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'क्रोन सूची';
 $lang['CRON_ID'] = 'आईडी';

@@ -2372,7 +2372,7 @@ $lang['TEMPLATE_DISABLE'] = 'Szablon wyłączone';
 $lang['FOR_NEW_TEMPLATE'] = 'dla nowych modeli!';
 $lang['CHANGED'] = 'Zmieniło';
 $lang['REMOVED'] = 'Usunięte';
-$lang['QUESTION'] = 'Jesteś pewien, że chcesz usunąć?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Lista crona';
 $lang['CRON_ID'] = 'Identyfikator';

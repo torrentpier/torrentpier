@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Modèle désactivé';
 $lang['FOR_NEW_TEMPLATE'] = 'pour les nouveaux modèles!';
 $lang['CHANGED'] = 'Changé';
 $lang['REMOVED'] = 'Supprimé';
-$lang['QUESTION'] = 'Êtes-vous sûr de vouloir supprimer?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron liste';
 $lang['CRON_ID'] = 'ID';

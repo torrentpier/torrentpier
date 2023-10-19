@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'თარგი შეზღუდული შე�
 $lang['FOR_NEW_TEMPLATE'] = 'ახალი ნიმუშების!';
 $lang['CHANGED'] = 'შეცვალა';
 $lang['REMOVED'] = 'მოხსნა';
-$lang['QUESTION'] = 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron სია';
 $lang['CRON_ID'] = 'ID';

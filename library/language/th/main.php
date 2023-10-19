@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'ต้นแบบปิดการใช้งา
 $lang['FOR_NEW_TEMPLATE'] = 'สำหรับรูปแบบใหม่!';
 $lang['CHANGED'] = 'เปลี่ยนไป';
 $lang['REMOVED'] = 'ถูกเอาออก';
-$lang['QUESTION'] = 'คุณแน่ใจนะว่าต้องการจะลบ?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'ตารางงานของรายการ';
 $lang['CRON_ID'] = 'หมายเลข';

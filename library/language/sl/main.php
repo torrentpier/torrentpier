@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Predlogo invalide';
 $lang['FOR_NEW_TEMPLATE'] = 'za nove vzorce!';
 $lang['CHANGED'] = 'Spremenjeno';
 $lang['REMOVED'] = 'Odstrani';
-$lang['QUESTION'] = 'Ali ste prepričani, da želite izbrisati?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron seznama';
 $lang['CRON_ID'] = 'ID';

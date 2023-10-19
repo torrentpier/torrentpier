@@ -2372,7 +2372,7 @@ $lang['TEMPLATE_DISABLE'] = 'Şablon aradan';
 $lang['FOR_NEW_TEMPLATE'] = 'yeni model!';
 $lang['CHANGED'] = 'Dəyişib';
 $lang['REMOVED'] = 'Xaric';
-$lang['QUESTION'] = 'Siz əminik ki, silmək istəyirəm?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Siyahısı хрон';
 $lang['CRON_ID'] = 'İdentifikatoru';

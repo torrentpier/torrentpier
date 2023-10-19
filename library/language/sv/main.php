@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mall för funktionshindrade';
 $lang['FOR_NEW_TEMPLATE'] = 'för nya mönster!';
 $lang['CHANGED'] = 'Ändrat';
 $lang['REMOVED'] = 'Bort';
-$lang['QUESTION'] = 'Är du säker på att du vill radera?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';

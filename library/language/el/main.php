@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Πρότυπο με αναπηρία';
 $lang['FOR_NEW_TEMPLATE'] = 'για τα νέα σχέδια!';
 $lang['CHANGED'] = 'Άλλαξε';
 $lang['REMOVED'] = 'Αφαιρεθεί';
-$lang['QUESTION'] = 'Είστε βέβαιοι ότι θέλετε να διαγράψετε;';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron λίστα';
 $lang['CRON_ID'] = 'ID';

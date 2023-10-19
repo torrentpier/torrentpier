@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Šablony zdravotně postižené';
 $lang['FOR_NEW_TEMPLATE'] = 'pro nové vzory!';
 $lang['CHANGED'] = 'Změnil';
 $lang['REMOVED'] = 'Odstraněny';
-$lang['QUESTION'] = 'Jsi si jistý, že chcete smazat?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron seznam';
 $lang['CRON_ID'] = 'ID';

@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Plantilla de movilidad';
 $lang['FOR_NEW_TEMPLATE'] = 'para los nuevos modelos!';
 $lang['CHANGED'] = 'Cambiado';
 $lang['REMOVED'] = 'Quita';
-$lang['QUESTION'] = '¿Estás seguro de querer borrar?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';

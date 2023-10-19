@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Sablon tiltva';
 $lang['FOR_NEW_TEMPLATE'] = 'az új minták!';
 $lang['CHANGED'] = 'Megváltozott';
 $lang['REMOVED'] = 'Eltávolítani';
-$lang['QUESTION'] = 'Biztos, hogy törölni akarja?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'AZONOSÍTÓ';
