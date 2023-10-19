@@ -679,7 +679,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
     if (!$cookie && isset($_COOKIE[$var_name])) {
-        if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
+        if (!isset($_GET[$var_name], $_POST[$var_name])) {
             return (is_array($default)) ? [] : $default;
         }
         $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
