@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Template me aftësi të kufizuara';
 $lang['FOR_NEW_TEMPLATE'] = 'për modelet e reja!';
 $lang['CHANGED'] = 'Ndryshuar';
 $lang['REMOVED'] = 'Hiqen';
-$lang['QUESTION'] = 'A jeni i sigurt se doni të fshini?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';
