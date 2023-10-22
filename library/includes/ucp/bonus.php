@@ -30,7 +30,7 @@ if (isset($_POST['bonus_id'])) {
     $points = $price_row[$id];
 
     if ($userdata['user_points'] < $points) {
-        meta_refresh('index.php', 5);
+        meta_refresh('index.php', 10);
 
         $message = $lang['BONUS_NOT_SUCCES'] . '<br /><br /><a href="' . BONUS_URL . '">' . $lang['BONUS_RETURN'] . '</a><br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">' . $lang['RETURN_PROFILE'] . '</a><br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'], '<a href="index.php">', '</a>');
 
@@ -47,7 +47,7 @@ if (isset($_POST['bonus_id'])) {
 	");
 
     \TorrentPier\Sessions::cache_rm_user_sessions($user_id);
-    meta_refresh(BONUS_URL, 5);
+    meta_refresh(BONUS_URL, 10);
 
     $message = sprintf($lang['BONUS_SUCCES'], humn_size($upload_row[$id] * 1024 * 1024 * 1024));
     $message .= '<br /><br /><a href="' . BONUS_URL . '">' . $lang['BONUS_RETURN'] . '</a><br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">' . $lang['RETURN_PROFILE'] . '</a><br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'], '<a href="index.php">', '</a>');

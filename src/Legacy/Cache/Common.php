@@ -87,10 +87,18 @@ class Common
         }
     }
 
-    public function debug_find_source($mode = '')
+    /**
+     * Find caller source
+     *
+     * @param string $mode
+     *
+     * @return string
+     */
+    public function debug_find_source(string $mode = ''): string
     {
+        if (!SQL_PREPEND_SRC_COMM) return 'src disabled';
         foreach (debug_backtrace() as $trace) {
-            if ($trace['file'] !== __FILE__) {
+            if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
                 switch ($mode) {
                     case 'file':
                         return $trace['file'];

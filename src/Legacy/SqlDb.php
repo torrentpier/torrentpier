@@ -128,9 +128,7 @@ class SqlDb
         if (\is_array($query)) {
             $query = $this->build_sql($query);
         }
-        if (SQL_PREPEND_SRC_COMM) {
-            $query = '/* ' . $this->debug_find_source() . ' */ ' . $query;
-        }
+        $query = '/* ' . $this->debug_find_source() . ' */ ' . $query;
         $this->cur_query = $query;
         $this->debug('start');
 
@@ -850,8 +848,9 @@ class SqlDb
      *
      * @return string
      */
-    public function debug_find_source($mode = '')
+    public function debug_find_source(string $mode = ''): string
     {
+        if (!SQL_PREPEND_SRC_COMM) return 'src disabled';
         foreach (debug_backtrace() as $trace) {
             if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
                 switch ($mode) {
@@ -864,7 +863,7 @@ class SqlDb
                 }
             }
         }
-        return '';
+        return 'src not found';
     }
 
     /**

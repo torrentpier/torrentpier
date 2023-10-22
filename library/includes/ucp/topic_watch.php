@@ -95,7 +95,7 @@ if ($watch_count > 0) {
     }
     DB()->sql_freeresult($result);
 } else {
-    meta_refresh('index.php', 3);
+    meta_refresh('index.php');
     bb_die($lang['NO_WATCHED_TOPICS']);
 }
 
