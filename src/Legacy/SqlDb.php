@@ -850,7 +850,9 @@ class SqlDb
      */
     public function debug_find_source(string $mode = ''): string
     {
-        if (!SQL_PREPEND_SRC_COMM) return 'src disabled';
+        if (!SQL_PREPEND_SRC_COMM) {
+            return 'src disabled';
+        }
         foreach (debug_backtrace() as $trace) {
             if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
                 switch ($mode) {
