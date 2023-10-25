@@ -1232,7 +1232,7 @@ function get_user_torrent_client(string $peer_id): mixed
     }
 
     if (!empty($bestMatch)) {
-        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/'. $bestMatch .'.png" alt="' . $bestMatch . '" title="' . $peer_id  . '">';
+        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/' . $bestMatch . '.png" alt="' . $bestMatch . '" title="' . $peer_id . '">';
     } else {
         return $peer_id;
     }

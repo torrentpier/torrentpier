@@ -40,7 +40,6 @@ if ($row = DB()->fetch_row($sql)) {
     $user_email = $row['user_email'];
     $user_lang = $row['user_lang'];
 
-
     if (isset($_POST['submit'])) {
         $subject = trim(html_entity_decode($_POST['subject']));
         $message = trim(html_entity_decode($_POST['message']));

@@ -75,10 +75,7 @@ if (isset($_POST['submit'])) {
             $emailer->set_reply($reply_to);
 
             $emailer->set_template('admin_send_email');
-            $emailer->assign_vars([
-                'SUBJECT' => html_entity_decode($subject),
-                'MESSAGE' => html_entity_decode($message)
-            ]);
+            $emailer->assign_vars(['MESSAGE' => trim(html_entity_decode($message))]);
 
             $emailer->send($message_type);
         }
