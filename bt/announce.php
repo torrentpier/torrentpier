@@ -385,7 +385,7 @@ if (!$output) {
         foreach ($rowset as $peer) {
             $peer_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
             $peer_ip_endian = inet_pton($peer_ip) . pack('n', $peer['port']);
-            \TorrentPier\Helpers\IPHelper::isValidv6($peer_ip) ? ($peers6 .= $peer_ip_endian) : ($peers = $peer_ip_endian);
+            \TorrentPier\Helpers\IPHelper::isValidv6($peer_ip) ? ($peers6 .= $peer_ip_endian) : ($peers .= $peer_ip_endian);
         }
     } else {
         $peers = [];
