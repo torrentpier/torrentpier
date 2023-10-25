@@ -424,10 +424,9 @@ if (!$output) {
     }
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
-    $output['external ip'] = inet_pton($ip);
-    $output['warning message'] = 'Statistics were updated';
 }
-
+$output['external ip'] = inet_pton($ip);
+$output['warning message'] = 'Statistics were updated';
 // Return data to client
 echo \Arokettu\Bencode\Bencode::encode($output);
 
