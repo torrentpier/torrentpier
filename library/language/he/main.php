@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'תבנית נכים';
 $lang['FOR_NEW_TEMPLATE'] = 'עבור תבניות חדשות!';
 $lang['CHANGED'] = 'שינה';
 $lang['REMOVED'] = 'הוסר';
-$lang['QUESTION'] = 'האם אתה בטוח שברצונך למחוק?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron הרשימה';
 $lang['CRON_ID'] = 'ID';

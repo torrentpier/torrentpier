@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Vorlage deaktiviert';
 $lang['FOR_NEW_TEMPLATE'] = 'für neue Muster!';
 $lang['CHANGED'] = 'Geändert';
 $lang['REMOVED'] = 'Entfernt';
-$lang['QUESTION'] = 'Sind Sie sicher löschen möchten?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron-Liste';
 $lang['CRON_ID'] = 'ID';

@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Template disabled';
 $lang['FOR_NEW_TEMPLATE'] = 'for new patterns!';
 $lang['CHANGED'] = 'Changed';
 $lang['REMOVED'] = 'Removed';
-$lang['QUESTION'] = 'Are you sure want to delete?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron list';
 $lang['CRON_ID'] = 'ID';

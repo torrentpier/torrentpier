@@ -2372,7 +2372,7 @@ $lang['TEMPLATE_DISABLE'] = 'Uzorak su isključeni';
 $lang['FOR_NEW_TEMPLATE'] = 'za nove modele!';
 $lang['CHANGED'] = 'Promijenilo';
 $lang['REMOVED'] = 'Izbrisati';
-$lang['QUESTION'] = 'Jeste li sigurni da želite ukloniti?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Popis baba';
 $lang['CRON_ID'] = 'Id';

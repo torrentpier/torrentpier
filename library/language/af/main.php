@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Sjabloon gedeaktiveer';
 $lang['FOR_NEW_TEMPLATE'] = 'Vir nuwe patrone!';
 $lang['CHANGED'] = 'verander';
 $lang['REMOVED'] = 'verwyder';
-$lang['QUESTION'] = 'Is jy seker dat jy wil verwyder?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lys';
 $lang['CRON_ID'] = 'ID';

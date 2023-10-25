@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mallin käytöstä';
 $lang['FOR_NEW_TEMPLATE'] = 'uusia kuvioita!';
 $lang['CHANGED'] = 'Muuttunut';
 $lang['REMOVED'] = 'Poistettu';
-$lang['QUESTION'] = 'Oletko varma, että haluat poistaa?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';

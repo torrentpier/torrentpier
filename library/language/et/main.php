@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mall puudega';
 $lang['FOR_NEW_TEMPLATE'] = 'uued mustrid!';
 $lang['CHANGED'] = 'Muudetud';
 $lang['REMOVED'] = 'Eemaldatud';
-$lang['QUESTION'] = 'Olete kindel, et soovite kustutada?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron nimekirja';
 $lang['CRON_ID'] = 'ID';

@@ -16,6 +16,7 @@ namespace TorrentPier\Legacy\Common;
 class Html
 {
     public $options = '';
+    public $out = '';
     public $attr = [];
     public $cur_attr;
     public $max_length = HTML_SELECT_MAX_LENGTH;

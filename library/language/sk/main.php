@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Šablóny zakázané';
 $lang['FOR_NEW_TEMPLATE'] = 'pre nové vzory!';
 $lang['CHANGED'] = 'Zmeniť';
 $lang['REMOVED'] = 'Odstrániť';
-$lang['QUESTION'] = 'Ste si istí, že chcete zmazať?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron zoznam';
 $lang['CRON_ID'] = 'ID';

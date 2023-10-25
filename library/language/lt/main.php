@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Šablonas neįgaliesiems';
 $lang['FOR_NEW_TEMPLATE'] = 'nauji modeliai!';
 $lang['CHANGED'] = 'Keisti';
 $lang['REMOVED'] = 'Pašalinti';
-$lang['QUESTION'] = 'Ar jūs tikrai norite ištrinti?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron sąrašą';
 $lang['CRON_ID'] = 'ID';

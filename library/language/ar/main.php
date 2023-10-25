@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'قالب المعوقين';
 $lang['FOR_NEW_TEMPLATE'] = 'عن أنماط جديدة!';
 $lang['CHANGED'] = 'تغيرت';
 $lang['REMOVED'] = 'إزالة';
-$lang['QUESTION'] = 'هل أنت متأكد أنك تريد حذف ؟ ';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'كرون قائمة';
 $lang['CRON_ID'] = 'معرف';

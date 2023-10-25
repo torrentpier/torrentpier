@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = '템플릿화';
 $lang['FOR_NEW_TEMPLATE'] = '에 대한 새로운 패턴!';
 $lang['CHANGED'] = '변경';
 $lang['REMOVED'] = '제거';
-$lang['QUESTION'] = '확신하고 싶은 삭제 하시겠습니까?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron 목록';
 $lang['CRON_ID'] = 'ID';

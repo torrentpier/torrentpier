@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'La plantilla de mobilitat reduïda';
 $lang['FOR_NEW_TEMPLATE'] = 'nous models!';
 $lang['CHANGED'] = 'Canviat';
 $lang['REMOVED'] = 'Eliminat';
-$lang['QUESTION'] = 'Esteu segur que voleu suprimir?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron llista';
 $lang['CRON_ID'] = 'ID';

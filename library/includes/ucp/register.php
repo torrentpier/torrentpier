@@ -103,8 +103,8 @@ switch ($mode) {
             'user_password' => true,
             'user_email' => true, // должен быть после user_password
             'user_lang' => true,
-            'user_gender' => true,
-            'user_birthday' => true,
+            'user_gender' => $bb_cfg['gender'],
+            'user_birthday' => $bb_cfg['birthday_enabled'],
             'user_timezone' => true,
             'user_opt' => true,
             'avatar_ext_id' => true,
@@ -159,9 +159,14 @@ if ($submit) {
 $cur_pass_valid = $adm_edit;
 
 foreach ($profile_fields as $field => $can_edit) {
+    // Проверка на возможность редактирования
+    if ((bool)$can_edit === false) {
+        continue;
+    }
+
     switch ($field) {
         /**
-         *  Активация (edit, reg)
+         *  Активация (edit)
          */
         case 'user_active':
             $active = isset($_POST['user_active']) ? (int)$_POST['user_active'] : $pr_data['user_active'];
@@ -182,7 +187,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 if (!$errors and $err && $mode == 'register') {
                     $errors[] = $err;
                 }
-                if ($can_edit && $username != $pr_data['username'] || $mode == 'register') {
+                if ($username != $pr_data['username'] || $mode == 'register') {
                     $pr_data['username'] = $username;
                     $db_data['username'] = $username;
                 }
@@ -281,7 +286,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Пол (edit, reg)
+         *  Пол (edit)
          */
         case 'user_gender':
             $user_gender = isset($_POST['user_gender']) ? (int)$_POST['user_gender'] : $pr_data['user_gender'];
@@ -317,7 +322,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  opt (edit)
+         *  opt (edit, reg)
          */
         case 'user_opt':
             $user_opt = $pr_data['user_opt'];
@@ -328,7 +333,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 'user_viewemail' => $reg_mode ? false : (IS_ADMIN || $bb_cfg['show_email_visibility_settings']),
                 'user_viewonline' => $reg_mode ? false : true,
                 'user_notify' => $reg_mode ? true : true,
-                'user_notify_pm' => $reg_mode ? true : true,
+                'user_notify_pm' => $reg_mode ? true : $bb_cfg['pm_notify_enabled'],
                 'user_porn_forums' => $reg_mode ? false : true,
                 'user_dls' => $reg_mode ? false : true,
                 'user_callseed' => $reg_mode ? true : true,
@@ -453,7 +458,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Интересы
+         *  Интересы (edit)
          */
         case 'user_interests':
             $interests = isset($_POST['user_interests']) ? (string)$_POST['user_interests'] : $pr_data['user_interests'];
@@ -466,7 +471,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Skype
+         *  Skype (edit)
          */
         case 'user_skype':
             $skype = isset($_POST['user_skype']) ? (string)$_POST['user_skype'] : $pr_data['user_skype'];
@@ -481,7 +486,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Twitter
+         *  Twitter (edit)
          */
         case 'user_twitter':
             $twitter = isset($_POST['user_twitter']) ? (string)$_POST['user_twitter'] : $pr_data['user_twitter'];

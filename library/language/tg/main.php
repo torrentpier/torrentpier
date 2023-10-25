@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Шаблон: маъюб';
 $lang['FOR_NEW_TEMPLATE'] = 'намунаҳои нав!';
 $lang['CHANGED'] = 'тағйир';
 $lang['REMOVED'] = 'дур';
-$lang['QUESTION'] = 'Оё шумо дар ҳақиқат мехоҳед нобуд созед?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'рӯйхати Cron';
 $lang['CRON_ID'] = 'ID';

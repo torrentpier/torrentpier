@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Modello di disabili';
 $lang['FOR_NEW_TEMPLATE'] = 'per i nuovi modelli!';
 $lang['CHANGED'] = 'Cambiato';
 $lang['REMOVED'] = 'Rimosso';
-$lang['QUESTION'] = 'Sei sicuro di voler eliminare?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron elenco';
 $lang['CRON_ID'] = 'ID';

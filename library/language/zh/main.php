@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = '模板的残疾';
 $lang['FOR_NEW_TEMPLATE'] = '对于新的模式！';
 $lang['CHANGED'] = '改变了';
 $lang['REMOVED'] = '除去';
-$lang['QUESTION'] = '你确定要删除的吗？';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron列表';
 $lang['CRON_ID'] = 'ID';

@@ -2373,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = 'Şablon devre dışı';
 $lang['FOR_NEW_TEMPLATE'] = 'yeni modeller için!';
 $lang['CHANGED'] = 'Değişti';
 $lang['REMOVED'] = 'Kaldırıldı';
-$lang['QUESTION'] = 'Silmek istediğinizden emin misiniz?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron listesi';
 $lang['CRON_ID'] = 'KİMLİĞİ';

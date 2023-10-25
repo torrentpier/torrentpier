@@ -165,11 +165,11 @@ ajax.callback.mod_action = function(data) {
 	</div>
 	<div class="floatR">
 	<input type="submit" name="delete" value="{L_DELETE}" />
-	<input type="submit" name="move" value="{L_MOVE}" />
+	<input type="submit" name="move" value="{L_MOVE}" />&nbsp;&middot;
 	<input type="submit" name="lock" value="{L_LOCK}" />
-	<input type="submit" name="unlock" value="{L_UNLOCK}" />
+	<input type="submit" name="unlock" value="{L_UNLOCK}" />&nbsp;&middot;
 	<input type="submit" name="post_pin" value="{L_POST_PIN}" />
-	<input type="submit" name="post_unpin" value="{L_POST_UNPIN}" />
+	<input type="submit" name="post_unpin" value="{L_POST_UNPIN}" />&nbsp;&middot;
 	<label><input id="in-new-window" type="checkbox" />{L_NEW_WINDOW}</label>
 	</div>
 </form>

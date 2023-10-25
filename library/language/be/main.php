@@ -2369,7 +2369,7 @@ $lang['TEMPLATE_DISABLE'] = 'Шаблон адключаныя';
 $lang['FOR_NEW_TEMPLATE'] = 'для новых мадэляў!';
 $lang['CHANGED'] = 'Змянілася';
 $lang['REMOVED'] = 'Выдаленыя';
-$lang['QUESTION'] = 'Вы ўпэўненыя, што жадаеце выдаліць?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Спіс хрон';
 $lang['CRON_ID'] = 'Ідэнтыфікатар';
