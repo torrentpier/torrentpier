@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Sizning xabar muvaffaqiyatli o\'chirildi.';
 $lang['POLL_DELETE'] = 'Sizning so\'rov muvaffaqiyatli o\'chirildi.';
 $lang['VOTE_CAST'] = 'Sizning ovoz qilindi.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Mavzu Javob Xabarnoma';
 $lang['EMOTICONS'] = 'jumlalari';
 $lang['MORE_EMOTICONS'] = 'yana SQL ko\'rish';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'reyting www.uz torrent ro\'yxatdan bo\'lmadi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Shu info_hash allaqachon <a href="%s"><b>registered</b></a> bilan yana bir torrent';
 $lang['BT_UNREG_FROM_TRACKER'] = 'izdoshlari o\'chirish';
 $lang['BT_UNREGISTERED'] = 'Ro\'yxatdan o\'tmagan torrent';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent siz torrent</b></a> <a href="%s"><b>download va yuklab olish yo\'liga sifatida ulashmoqdasiz original fayllar bilan jildni sizning BitTorrent mijozi bilan uni ishlatish uchun kerak tracker<br /><br />Now ro\'yxatdan';
 $lang['INVALID_ANN_URL'] = 'Noto\'g\'ri e\'lon URL <b>%s</b> bo\'lishi [%s]<br /><br />must';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'passkey<br /><br />Torrent qo\'shish bo\'lmadi reyting www.uz ro\'yxatdan';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Foydalanuvchilar guruhiga qo‘shilish so‘rovingiz qabul qilindi',
     'GROUP_REQUEST' => 'Foydalanuvchi guruhingizga qo\'shilish so\'rovi',
     'PRIVMSG_NOTIFY' => 'Yangi shaxsiy xabar',
-    'TOPIC_NOTIFY' => 'Mavzuda javob bildirishnomasi %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Hisobni qayta faollashtirish',
     'USER_ACTIVATE_PASSWD' => 'Yangi parol tasdiqlanmoqda',
     'USER_WELCOME' => 'Saytga xush kelibsiz %s',
