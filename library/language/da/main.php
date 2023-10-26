@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Din besked er blevet slettet.';
 $lang['POLL_DELETE'] = 'Din meningsmåling er blevet slettet.';
 $lang['VOTE_CAST'] = 'Din stemme er blevet kastet.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Emne Svar Anmeldelse';
 $lang['EMOTICONS'] = 'Humørikoner';
 $lang['MORE_EMOTICONS'] = 'Se flere Humørikoner';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Kan ikke registrere en torrent på tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'En anden torrent med samme info_hash allerede <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Fjern fra tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent uregistrerede';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent er registreret på tracker<br /><br />Now du er nødt til at <a href="%s"><b>download din torrent</b></a> og køre det ved hjælp af din BitTorrent-klient vælge mappen med de oprindelige filer, du deler som download-sti';
 $lang['INVALID_ANN_URL'] = 'Ugyldig Announce URL [%s]<br /><br />must være <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kunne ikke tilføje passkey<br /><br />Torrent ikke er registreret på tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Din anmodning om at deltage i brugergruppen er blevet imødekommet',
     'GROUP_REQUEST' => 'En anmodning om at blive medlem af din brugergruppe',
     'PRIVMSG_NOTIFY' => 'Ny privat besked',
-    'TOPIC_NOTIFY' => 'Meddelelse om svar i tråden %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Kontogenaktivering',
     'USER_ACTIVATE_PASSWD' => 'Bekræftelse af en ny adgangskode',
     'USER_WELCOME' => 'Velkommen til siden %s',
