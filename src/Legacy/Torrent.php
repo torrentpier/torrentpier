@@ -107,7 +107,7 @@ class Torrent
                 bb_die($lang['TOR_NOT_FOUND']);
             }
             if (!$torrent['tracker_status']) {
-                bb_die('Torrent already unregistered');
+                bb_die($lang['BT_UNREGISTERED_ALREADY']);
             }
             self::torrent_auth_check($forum_id, $torrent['poster_id']);
         }
