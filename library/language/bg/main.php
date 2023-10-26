@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Вашето съобщение беше успешно из
 $lang['POLL_DELETE'] = 'Анкетата е изтрит успешно.';
 $lang['VOTE_CAST'] = 'Вашият глас е бил предаден.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Тема Известие За Отговор';
 $lang['EMOTICONS'] = 'Усмивки';
 $lang['MORE_EMOTICONS'] = 'Вижте повече усмивки';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Не успели да регистрират торен
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Друг торент със същото info_hash вече <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Изтрий от тракера';
 $lang['BT_UNREGISTERED'] = 'Торент нерегистрирани';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Торент регистриран на tracker<br /><br />Now трябва <a href="%s"><b>download си torrent</b></a> и да го стартирате чрез вашия торент клиент като изберете папката с изходен код на файловете, които споделяте, тъй като пътят изтегляне';
 $lang['INVALID_ANN_URL'] = 'Невалиден Информира URL-адрес [%s]<br /><br />must да бъде <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Не могли да добавите passkey<br /><br />Torrent не е регистриран в трекере';
@@ -2820,7 +2820,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Молбата ви за присъединяване към потребителската група е удовлетворена',
     'GROUP_REQUEST' => 'Заявка за присъединяване към вашата потребителска група',
     'PRIVMSG_NOTIFY' => 'Ново лично съобщение',
-    'TOPIC_NOTIFY' => 'Известие за отговор в нишката %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Повторно активиране на акаунта',
     'USER_ACTIVATE_PASSWD' => 'Потвърждаване на нова парола',
     'USER_WELCOME' => 'Добре дошли в сайта %s',
