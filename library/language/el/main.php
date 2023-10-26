@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Το μήνυμα έχει διαγραφεί επιτυχώ
 $lang['POLL_DELETE'] = 'Το poll έχει διαγραφεί επιτυχώς.';
 $lang['VOTE_CAST'] = 'Η ψήφος σας έχει ρίξει.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Θέμα Απάντηση Κοινοποίηση';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Δείτε περισσότερα Emoticons';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Δεν θα μπορούσε να εγγραφείτε t
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Άλλο ένα torrent με το ίδιο info_hash ήδη <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Αφαιρέστε από τον ιχνηλάτη';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent έχετε εγγραφεί στο tracker<br /><br />Now θα πρέπει να <a href="%s"><b>download σας torrent</b></a> και να το εκτελέσετε χρησιμοποιώντας το BitTorrent πελάτη επιλέγοντας το φάκελο με τα πρωτότυπα αρχεία που μοιράζεστε, όπως η λήψη διαδρομή';
 $lang['INVALID_ANN_URL'] = 'Μη έγκυρη Ανακοινώσει URL [%s]<br /><br />must να <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Δεν θα μπορούσε να προσθέσει passkey<br /><br />Torrent δεν έχετε εγγραφεί στο tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Το αίτημά σας για συμμετοχή στην ομάδα χρηστών έγινε δεκτό',
     'GROUP_REQUEST' => 'Ένα αίτημα για συμμετοχή στην ομάδα χρηστών σας',
     'PRIVMSG_NOTIFY' => 'Νέο προσωπικό μήνυμα',
-    'TOPIC_NOTIFY' => 'Ειδοποίηση απάντησης στο νήμα %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Επανενεργοποίηση λογαριασμού',
     'USER_ACTIVATE_PASSWD' => 'Επιβεβαίωση νέου κωδικού πρόσβασης',
     'USER_WELCOME' => 'Καλώς ορίσατε στον ιστότοπο %s',
