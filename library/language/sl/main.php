@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Vaše sporočilo je bilo uspešno izbrisane.';
 $lang['POLL_DELETE'] = 'Vaše ankete je bil izbrisan uspešno.';
 $lang['VOTE_CAST'] = 'Vaš glas je bil cast.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Tema Odgovor Obvestilo';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Oglejte si več Emoticons';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Ni mogel prijaviti na torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Drugi torrent z enakim info_hash že <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Odstrani iz tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrirane';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent, ki je registrirana na tracker<br /><br />Now morate <a href="%s"><b>download vaše torrent</b></a> in zaženete to z uporabo vaše odjemalec BitTorrent z izbiro mape z izvirno datoteke delite kot poti prenosa';
 $lang['INVALID_ANN_URL'] = 'Neveljavna Sporočamo, URL [%s]<br /><br />must biti <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Ne bi mogel dodati passkey<br /><br />Torrent niso registrirani na tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Vaša zahteva za pridružitev uporabniški skupini je bila odobrena',
     'GROUP_REQUEST' => 'Zahteva za pridružitev vaši uporabniški skupini',
     'PRIVMSG_NOTIFY' => 'Novo zasebno sporočilo',
-    'TOPIC_NOTIFY' => 'Obvestilo o odgovoru v temi %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Ponovna aktivacija računa',
     'USER_ACTIVATE_PASSWD' => 'Potrjujem novo geslo',
     'USER_WELCOME' => 'Dobrodošli na spletnem mestu %s',
