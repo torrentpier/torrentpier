@@ -145,7 +145,7 @@ class Ajax
     public function ajax_die(string $error_msg, int $error_code = E_AJAX_GENERAL_ERROR)
     {
         $this->response['error_code'] = $error_code;
-        $this->response['error_msg'] = $error_msg;
+        $this->response['error_msg'] = strip_tags($error_msg);
 
         $this->send();
     }
