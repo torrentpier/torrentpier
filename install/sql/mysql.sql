@@ -368,8 +368,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `uploaded`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `downloaded`       BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `remain`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
-  `speed_up`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `speed_down`       MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `speed_up`         INT(11) UNSIGNED      NOT NULL DEFAULT '0',
+  `speed_down`       INT(11) UNSIGNED      NOT NULL DEFAULT '0',
   `up_add`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `down_add`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `update_time`      INT(11)               NOT NULL DEFAULT '0',
@@ -395,8 +395,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap`
   `topic_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeders`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `leechers`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `speed_up`   INT(10) UNSIGNED      NOT NULL DEFAULT '0',
-  `speed_down` INT(10) UNSIGNED      NOT NULL DEFAULT '0',
+  `speed_up`   INT(11) UNSIGNED      NOT NULL DEFAULT '0',
+  `speed_down` INT(11) UNSIGNED      NOT NULL DEFAULT '0',
   `completed`  INT(10)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
