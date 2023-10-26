@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Your message has been deleted successfully.';
 $lang['POLL_DELETE'] = 'Your poll has been deleted successfully.';
 $lang['VOTE_CAST'] = 'Your vote has been cast.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Topic Reply Notification';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'View more Emoticons';
 
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Your request to join the user group has been granted',
     'GROUP_REQUEST' => 'A request to join your user group',
     'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Account reactivation',
     'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
     'USER_WELCOME' => 'Welcome to the site %s',

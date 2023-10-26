@@ -45,7 +45,7 @@ class Emailer
      *
      * @return void
      */
-    public function set_subject(string $subject)
+    public function set_subject(string $subject): void
     {
         $this->subject = $subject;
     }
@@ -58,7 +58,7 @@ class Emailer
      *
      * @return void
      */
-    public function set_to(string $email, string $name)
+    public function set_to(string $email, string $name): void
     {
         $this->to = new Address($email, $name);
     }
@@ -70,7 +70,7 @@ class Emailer
      *
      * @return void
      */
-    public function set_reply(string $email)
+    public function set_reply(string $email): void
     {
         $this->reply = new Address($email);
     }
@@ -83,7 +83,7 @@ class Emailer
      *
      * @return void
      */
-    public function set_template(string $template_file, string $template_lang = '')
+    public function set_template(string $template_file, string $template_lang = ''): void
     {
         global $bb_cfg;
 
@@ -206,7 +206,7 @@ class Emailer
      *
      * @return void
      */
-    public function assign_vars($vars)
+    public function assign_vars($vars): void
     {
         global $bb_cfg;
 
