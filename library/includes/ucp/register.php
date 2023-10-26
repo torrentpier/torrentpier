@@ -72,7 +72,7 @@ switch ($mode) {
             'user_password' => true,
             'user_email' => true,
             'user_timezone' => true,
-            'user_lang' => $bb_cfg['allow_change']['language'],
+            'user_lang' => true,
             'user_opt' => true
         ];
 

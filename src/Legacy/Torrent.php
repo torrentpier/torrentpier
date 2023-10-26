@@ -424,12 +424,11 @@ class Torrent
         if (!DB()->sql_query($sql)) {
             $sql_error = DB()->sql_error();
 
+            // Duplicate entry
             if ($sql_error['code'] == 1062) {
-                // Duplicate entry
-
                 self::torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
             }
-            bb_die('Could not register torrent on tracker');
+            bb_die($lang['BT_REG_FAIL']);
         }
 
         // update tracker status for this attachment
