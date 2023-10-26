@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Jou boodskap is suksesvol verwyder.';
 $lang['POLL_DELETE'] = 'Jou poll is suksesvol verwyder.';
 $lang['VOTE_CAST'] = 'Jou stem is gegooi.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Onderwerp Antwoord Kennisgewing';
 $lang['EMOTICONS'] = 'emoticons';
 $lang['MORE_EMOTICONS'] = 'Wys meer Emoticons';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Kon nie torrent op spoorsnoer registreer nie';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent geregistreer op tracker<br /><br /> Nou moet jy <a href="%s"><b>download jou torrent</b></a> en hardloop dit met jou BitTorrent-kliënt om die gids te kies met die oorspronklike lêers wat jy deel as die aflaaipad';
 $lang['INVALID_ANN_URL'] = 'Ongeldige aanmelding URL [%s]<br /><br /> moet wees <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kon nie passkey<br /><br />Torrent voeg nie op spoorsnyer geregistreer';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Jou versoek om by die gebruikersgroep aan te sluit is toegestaan',
     'GROUP_REQUEST' => '\'n Versoek om by jou gebruikersgroep aan te sluit',
     'PRIVMSG_NOTIFY' => 'Nuwe privaat boodskap',
-    'TOPIC_NOTIFY' => 'Kennisgewing van reaksie in die draad %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Rekening heraktivering',
     'USER_ACTIVATE_PASSWD' => 'Bevestiging van \'n nuwe wagwoord',
     'USER_WELCOME' => 'Welkom by die webwerf %s',
