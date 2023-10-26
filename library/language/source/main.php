@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Your message has been deleted successfully.';
 $lang['POLL_DELETE'] = 'Your poll has been deleted successfully.';
 $lang['VOTE_CAST'] = 'Your vote has been cast.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Topic Reply Notification';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'View more Emoticons';
 
