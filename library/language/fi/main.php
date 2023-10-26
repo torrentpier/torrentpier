@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Viestisi on poistettu onnistuneesti.';
 $lang['POLL_DELETE'] = 'Kysely on poistettu onnistuneesti.';
 $lang['VOTE_CAST'] = 'Äänestys on valettu.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Aihe Vastaa Ilmoituksen';
 $lang['EMOTICONS'] = 'Hymiöitä';
 $lang['MORE_EMOTICONS'] = 'Katso lisää Hymiöitä';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Ei voitu rekisteröidä torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Toinen torrent kanssa samaa info_hash jo <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Poista tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent rekisteröimätön';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent rekisteröity tracker<br /><br />Now sinun täytyy <a href="%s"><b>download sinun torrent</b></a> ja ajaa se käyttämällä BitTorrent client valitsemalla kansion, jossa alkuperäiset tiedostot jaat, kun lataa polku';
 $lang['INVALID_ANN_URL'] = 'Virheellinen Ilmoittaa URL [%s]<br /><br />must olla <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Ei voitu lisätä passkey<br /><br />Torrent ole rekisteröity tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Pyyntösi liittyä käyttäjäryhmään on hyväksytty',
     'GROUP_REQUEST' => 'Pyyntö liittyä käyttäjäryhmään',
     'PRIVMSG_NOTIFY' => 'Uusi yksityisviesti',
-    'TOPIC_NOTIFY' => 'Ilmoitus vastauksesta säikeessä %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Tilin uudelleenaktivointi',
     'USER_ACTIVATE_PASSWD' => 'Uuden salasanan vahvistaminen',
     'USER_WELCOME' => 'Tervetuloa sivustolle %s',
