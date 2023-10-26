@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Jūsu ziņojums ir veiksmīgi izdzēsti.';
 $lang['POLL_DELETE'] = 'Jūsu aptauja ir dzēsta veiksmīgi.';
 $lang['VOTE_CAST'] = 'Jūsu balsojums ir nodotas.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Tēmas Atbildes Paziņojums';
 $lang['EMOTICONS'] = 'Emocijas';
 $lang['MORE_EMOTICONS'] = 'Skatīt vairāk Emocijas';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Nevarēja reģistrēties par torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Citu torrent ar pašu info_hash jau <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Noņemt no tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent nereģistrētiem';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent, kas reģistrēti tracker<br /><br />Now jums ir nepieciešams, lai <a href="%s"><b>download jūsu torrent</b></a> un palaist to, izmantojot savu BitTorrent klientu, izvēloties mapi ar sākotnējo failus koplietojat kā lejupielādes ceļā';
 $lang['INVALID_ANN_URL'] = 'Nederīgs Paziņot URL [%s]<br /><br />must būt <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nevarēja pievienot passkey<br /><br />Torrent nav reģistrēti tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Jūsu pieprasījums pievienoties lietotāju grupai ir apmierināts',
     'GROUP_REQUEST' => 'Pieprasījums pievienoties jūsu lietotāju grupai',
     'PRIVMSG_NOTIFY' => 'Jauna privāta ziņa',
-    'TOPIC_NOTIFY' => 'Paziņojums par atbildi pavedienā %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Konta atkārtota aktivizēšana',
     'USER_ACTIVATE_PASSWD' => 'Jaunas paroles apstiprināšana',
     'USER_WELCOME' => 'Laipni lūdzam vietnē %s',
