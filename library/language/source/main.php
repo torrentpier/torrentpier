@@ -1083,7 +1083,7 @@ $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'Seed';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registered';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
