@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Sua mensagem foi excluído com êxito.';
 $lang['POLL_DELETE'] = 'A sua enquete do que foi excluído com êxito.';
 $lang['VOTE_CAST'] = 'Seu voto foi fundido.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Tópico Notificação Responder';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Ver mais Emoticons';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Não foi possível registrar torrent no tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Outro torrent com o mesmo info_hash já <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retire do tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent não registrado';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrado no tracker<br /><br />Now você precisa <a href="%s"><b>download seu torrent</b></a> e executá-lo usando seu cliente de BitTorrent escolher a pasta com os arquivos originais que você está compartilhando como caminho download';
 $lang['INVALID_ANN_URL'] = 'Inválido Anunciar URL [%s]<br /><br />must ser <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Não pode adicionar passkey<br /><br />Torrent não registrada no tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Não pode adicionar chave de acesso (chave de acesso é vazio)<br /><br />Go para <a href="%s" target="_blank"><b>your fórum profile</b></a> e gerar';
 $lang['BT_PASSKEY'] = 'Chave de acesso';
 $lang['BT_GEN_PASSKEY'] = 'criar um novo';
 $lang['BT_PASSKEY_VIEW'] = 'mostrar';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Auto';
 $lang['SEEDING'] = 'Semente';
 $lang['LEECHING'] = 'Sanguessuga';
 $lang['IS_REGISTERED'] = 'Registrado';
-$lang['MAGNET'] = 'Magneto';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Estado';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Sua solicitação para ingressar no grupo de usuários foi concedida',
     'GROUP_REQUEST' => 'Uma solicitação para ingressar no seu grupo de usuários',
     'PRIVMSG_NOTIFY' => 'Nova mensagem privada',
-    'TOPIC_NOTIFY' => 'Notificação de resposta no thread %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'reativação de conta',
     'USER_ACTIVATE_PASSWD' => 'Confirmando uma nova senha',
     'USER_WELCOME' => 'Bem vindo ao site %s',

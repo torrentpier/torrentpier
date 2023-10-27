@@ -75,3 +75,7 @@ ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEF
 INSERT INTO `bb_extensions` VALUES ('1', 'webp', '');
 INSERT INTO `bb_extensions` VALUES ('2', '7z', '');
 INSERT INTO `bb_extensions` VALUES ('1', 'bmp', '');
+ALTER TABLE `bb_bt_tracker` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';

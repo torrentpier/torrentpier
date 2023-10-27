@@ -379,7 +379,6 @@ $lang['DELETED'] = 'رسالتك قد تم حذفه بنجاح.';
 $lang['POLL_DELETE'] = 'استطلاع الرأي الخاص بك قد تم حذفه بنجاح.';
 $lang['VOTE_CAST'] = 'صوتك قد تم الإدلاء بها.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'الموضوع الرد على الإخطار';
 $lang['EMOTICONS'] = 'الرموز';
 $lang['MORE_EMOTICONS'] = 'عرض المزيد من الرموز';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'لا يمكن تسجيل سيل على تعقب';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'آخر سيل مع نفسه info_hash بالفعل <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'إزالة من تعقب';
 $lang['BT_UNREGISTERED'] = 'سيل غير المسجلين';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'سيل مسجلة على tracker<br /><br />Now تحتاج إلى <a href="%s"><b>download الخاص بك torrent</b></a> وتشغيله باستخدام تورنت العميل اختيار المجلد مع الملفات الأصلية انت تبادل مسار التحميل';
 $lang['INVALID_ANN_URL'] = 'صالح يعلن URL [%s]<br /><br />must يكون <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'لا يمكن إضافة passkey<br /><br />Torrent غير مسجل على تعقب';
-$lang['PASSKEY_ERR_EMPTY'] = 'لا يمكن إضافة مفتاح المرور (كلمة السر فارغة)<br /><br />Go إلى <a href="%s" target="_blank"><b>your المنتدى profile</b></a> وتوليد ذلك';
 $lang['BT_PASSKEY'] = 'مفتاح المرور';
 $lang['BT_GEN_PASSKEY'] = 'إنشاء جديد';
 $lang['BT_PASSKEY_VIEW'] = 'تظهر';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'النفس';
 $lang['SEEDING'] = 'البذور';
 $lang['LEECHING'] = 'علقة';
 $lang['IS_REGISTERED'] = 'مسجلة';
-$lang['MAGNET'] = 'المغناطيس';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'حالة';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'تم منح طلبك للانضمام إلى مجموعة المستخدمين',
     'GROUP_REQUEST' => 'طلب الانضمام إلى مجموعة المستخدمين الخاصة بك',
     'PRIVMSG_NOTIFY' => 'رسالة خاصة جديدة',
-    'TOPIC_NOTIFY' => 'إخطار الرد في الموضوع %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'إعادة تنشيط الحساب',
     'USER_ACTIVATE_PASSWD' => 'تأكيد كلمة المرور الجديدة',
     'USER_WELCOME' => 'مرحبا بكم في الموقع %s',

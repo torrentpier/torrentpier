@@ -107,7 +107,7 @@ class Torrent
                 bb_die($lang['TOR_NOT_FOUND']);
             }
             if (!$torrent['tracker_status']) {
-                bb_die('Torrent already unregistered');
+                bb_die($lang['BT_UNREGISTERED_ALREADY']);
             }
             self::torrent_auth_check($forum_id, $torrent['poster_id']);
         }
@@ -328,18 +328,20 @@ class Torrent
         }
 
         if ($bb_cfg['bt_check_announce_url']) {
+            $announce_urls = [];
             include INC_DIR . '/torrent_announce_urls.php';
 
-            $ann = isset($tor['announce']) ? $tor['announce'] : '';
+            $ann = $tor['announce'] ?? '';
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
             if (!$ann || !\in_array($ann, $announce_urls)) {
                 $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
                 self::torrent_error_exit($msg);
             }
+            unset($announce_urls);
         }
 
-        $info = isset($tor['info']) ? $tor['info'] : [];
+        $info = $tor['info'] ?? [];
 
         if (!isset($info['name'], $info['piece length'])) {
             self::torrent_error_exit($lang['TORFILE_INVALID']);
@@ -424,12 +426,11 @@ class Torrent
         if (!DB()->sql_query($sql)) {
             $sql_error = DB()->sql_error();
 
+            // Duplicate entry
             if ($sql_error['code'] == 1062) {
-                // Duplicate entry
-
                 self::torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
             }
-            bb_die('Could not register torrent on tracker');
+            bb_die($lang['BT_REG_FAIL']);
         }
 
         // update tracker status for this attachment
@@ -544,7 +545,7 @@ class Torrent
 
         $file_contents = file_get_contents($filename);
         if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents)) {
-            bb_die('This is not a bencoded file');
+            bb_die($lang['TORFILE_INVALID']);
         }
 
         $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
@@ -554,18 +555,27 @@ class Torrent
             $tor['announce'] = $announce;
         }
 
+        // Get additional announce urls
+        $additional_announce_urls = $announce_urls_add = [];
+        include INC_DIR . '/torrent_announce_urls.php';
+
+        foreach ($additional_announce_urls as $additional_announce_url) {
+            $announce_urls_add[] = [$additional_announce_url];
+        }
+        unset($additional_announce_urls);
+
         // Delete all additional urls
         if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
             unset($tor['announce-list']);
         } elseif (isset($tor['announce-list'])) {
-            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]]);
+            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]], $announce_urls_add);
         }
 
         // Add retracker
         if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
                 if (!isset($tor['announce-list'])) {
-                    $tor['announce-list'] = [[$announce], [$bb_cfg['tracker']['retracker_host']]];
+                    $tor['announce-list'] = [[$announce], $announce_urls_add, [$bb_cfg['tracker']['retracker_host']]];
                 } else {
                     $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
                 }

@@ -379,7 +379,6 @@ $lang['DELETED'] = '您的信息已删除成功。';
 $lang['POLL_DELETE'] = '你的调查已被删除成功。';
 $lang['VOTE_CAST'] = '你的票已经铸成。';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = '主题通知的答复';
 $lang['EMOTICONS'] = '表情';
 $lang['MORE_EMOTICONS'] = '看更多的表情';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = '不能登记的洪流上的跟踪器';
 $lang['BT_REG_FAIL_SAME_HASH'] = '另一个种子与同info_hash已经<a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = '删除从跟踪器';
 $lang['BT_UNREGISTERED'] = '未注册的洪流';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent注册tracker<br /><br />Now你需要<a href="%s"><b>download你torrent</b></a>和运用你的BitTorrent客户选择的文件夹，与原始文件在分享作为下载通路';
 $lang['INVALID_ANN_URL'] = '无效的宣布URL[%s]<br /><br />must以<b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = '不可能添加passkey<br /><br />Torrent未注册上的跟踪器';
-$lang['PASSKEY_ERR_EMPTY'] = '不可能添加密钥(密码是空的)<br /><br />Go到<a href="%s" target="_blank"><b>your论坛profile</b></a>和生成它';
 $lang['BT_PASSKEY'] = '密码';
 $lang['BT_GEN_PASSKEY'] = '创建一个新的';
 $lang['BT_PASSKEY_VIEW'] = '显示';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = '自我';
 $lang['SEEDING'] = '种子';
 $lang['LEECHING'] = '水蛭';
 $lang['IS_REGISTERED'] = '注册';
-$lang['MAGNET'] = '磁铁';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状态';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => '您加入用戶組的請求已被批准',
     'GROUP_REQUEST' => '加入您的用戶組的請求',
     'PRIVMSG_NOTIFY' => '新私信',
-    'TOPIC_NOTIFY' => '線程 %s中的響應通知',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => '帳戶重新激活',
     'USER_ACTIVATE_PASSWD' => '確認新密碼',
     'USER_WELCOME' => '歡迎來到網站 %s',

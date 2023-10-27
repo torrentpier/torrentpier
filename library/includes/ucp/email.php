@@ -40,7 +40,6 @@ if ($row = DB()->fetch_row($sql)) {
     $user_email = $row['user_email'];
     $user_lang = $row['user_lang'];
 
-
     if (isset($_POST['submit'])) {
         $subject = trim(html_entity_decode($_POST['subject']));
         $message = trim(html_entity_decode($_POST['message']));
@@ -61,7 +60,6 @@ if ($row = DB()->fetch_row($sql)) {
 
             $emailer->set_template('profile_send_email', $user_lang);
             $emailer->assign_vars([
-                'SITENAME' => $bb_cfg['sitename'],
                 'FROM_USERNAME' => $userdata['username'],
                 'TO_USERNAME' => $username,
                 'MESSAGE' => $message

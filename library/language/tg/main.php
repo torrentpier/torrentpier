@@ -379,7 +379,6 @@ $lang['DELETED'] = 'паёми шумо бо муваффақият ҳазф ш�
 $lang['POLL_DELETE'] = 'назарсанҷии шумо бо муваффақият ҳазф шуд.';
 $lang['VOTE_CAST'] = 'овоз шумо кардааст партофта шуд.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Огоҳинома Ҷавоб Мавзӯъ';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Дидани Emoticons бештар';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Оё ҷӯйе оид ба Назоратчии қайд 
 $lang['BT_REG_FAIL_SAME_HASH'] = 'ҷӯйе дигар бо ҳамин info_hash аллакай <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Хориҷ аз Назоратчии';
 $lang['BT_UNREGISTERED'] = 'ҷӯйе никоњи';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Ҷӯйе ба қайд tracker<br /><br />Now ба шумо лозим аст, ки <a href="%s"><b>download torrent</b></a> худ ва идора ба он бо истифода аз муштарӣ BitTorrent худ интихоби папкаи бо файлҳои аслӣ шумо нақл ҳамчун роҳи боргирӣ аз';
 $lang['INVALID_ANN_URL'] = 'URL хабар нодуруст [%s]<br /><br />must бошад <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Оё passkey<br /><br />Torrent илова на ин ки дар Назоратчии ба қайд гирифта намешавад';
-$lang['PASSKEY_ERR_EMPTY'] = 'Оё passkey илова кунед (passkey холӣ аст) <br /><br />Go ба <a href="%s" target="_blank"><b>your форуми profile</b></a> ва тавлиди он';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'эҷод нав';
 $lang['BT_PASSKEY_VIEW'] = 'нишон';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Худшиносӣ';
 $lang['SEEDING'] = 'тухмӣ';
 $lang['LEECHING'] = 'пиявка';
 $lang['IS_REGISTERED'] = 'Сабтшуда';
-$lang['MAGNET'] = 'оҳанрабо';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статуси';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Дархости шумо барои ҳамроҳ шудан ба гурӯҳи корбарон қабул шуд',
     'GROUP_REQUEST' => 'Дархост барои ҳамроҳ шудан ба гурӯҳи корбарии шумо',
     'PRIVMSG_NOTIFY' => 'Паёми нави хусусӣ',
-    'TOPIC_NOTIFY' => 'Огоҳӣ дар бораи посух дар риштаи %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Аз нав фаъол кардани ҳисоб',
     'USER_ACTIVATE_PASSWD' => 'Тасдиқи пароли нав',
     'USER_WELCOME' => 'Хуш омадед ба сайт %s',

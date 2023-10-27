@@ -102,7 +102,7 @@ switch ($mode) {
             'username' => IS_ADMIN || $bb_cfg['allow_namechange'],
             'user_password' => true,
             'user_email' => true, // должен быть после user_password
-            'user_lang' => true,
+            'user_lang' => $bb_cfg['allow_change']['language'],
             'user_gender' => $bb_cfg['gender'],
             'user_birthday' => $bb_cfg['birthday_enabled'],
             'user_timezone' => true,
@@ -578,7 +578,6 @@ if ($submit && !$errors) {
 
             $emailer->set_template($email_template, $user_lang);
             $emailer->assign_vars([
-                'SITENAME' => $bb_cfg['sitename'],
                 'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
@@ -610,7 +609,6 @@ if ($submit && !$errors) {
 
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
                 $emailer->assign_vars([
-                    'SITENAME' => $bb_cfg['sitename'],
                     'USERNAME' => html_entity_decode($username),
                     'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
                 ]);

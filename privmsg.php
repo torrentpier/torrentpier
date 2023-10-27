@@ -917,7 +917,6 @@ if ($mode == 'read') {
                     'USERNAME' => html_entity_decode($to_username),
                     'NAME_FROM' => $userdata['username'],
                     'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
-                    'SITENAME' => $bb_cfg['sitename'],
                     'U_INBOX' => make_url(PM_URL . "?folder=inbox&mode=read&p=$privmsg_sent_id"),
                 ]);
 

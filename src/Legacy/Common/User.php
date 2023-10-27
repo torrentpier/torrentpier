@@ -253,7 +253,7 @@ class User
         // Generate passkey
         if (!\TorrentPier\Legacy\Torrent::getPasskey($this->data['user_id'])) {
             if (!\TorrentPier\Legacy\Torrent::generate_passkey($this->data['user_id'], true)) {
-                bb_die('Could not generate passkey');
+                bb_simple_die('Could not generate passkey');
             }
         }
 

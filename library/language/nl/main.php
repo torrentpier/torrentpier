@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Uw bericht is succesvol verwijderd.';
 $lang['POLL_DELETE'] = 'Van de poll heeft met succes verwijderd.';
 $lang['VOTE_CAST'] = 'Uw stem heeft uitgebracht.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Onderwerp Antwoord Melding';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Bekijk meer Emoticons';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Kan niet registreren torrent tracker op';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Een andere torrent met dezelfde info_hash al <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwijder van drijver';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent geregistreerd op tracker<br /><br />Now moet u <a href="%s"><b>download uw torrent</b></a> en uitvoeren met behulp van uw BitTorrent-client met het kiezen van de map met de originele bestanden die u deelt als het downloaden pad';
 $lang['INVALID_ANN_URL'] = 'Ongeldige Announce URL [%s]<br /><br />must worden <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kan niet toevoegen passkey<br /><br />Torrent niet geregistreerd op de tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Kan niet toevoegen sleutel (sleutel leeg is)<br /><br />Go te <a href="%s" target="_blank"><b>your forum profile</b></a> en het genereren van het';
 $lang['BT_PASSKEY'] = 'Sleutel';
 $lang['BT_GEN_PASSKEY'] = 'maak een nieuwe';
 $lang['BT_PASSKEY_VIEW'] = 'toon';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Zelf';
 $lang['SEEDING'] = 'Zaad';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Geregistreerd';
-$lang['MAGNET'] = 'Magneet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Uw verzoek om lid te worden van de gebruikersgroep is ingewilligd',
     'GROUP_REQUEST' => 'Een verzoek om lid te worden van uw gebruikersgroep',
     'PRIVMSG_NOTIFY' => 'Nieuw privé bericht',
-    'TOPIC_NOTIFY' => 'Kennisgeving van reactie in de thread %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Account reactiveren',
     'USER_ACTIVATE_PASSWD' => 'Een nieuw wachtwoord bevestigen',
     'USER_WELCOME' => 'Welkom op de site %s',

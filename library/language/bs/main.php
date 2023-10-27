@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Tvoja poruka je obrisana uspješno.';
 $lang['POLL_DELETE'] = 'I tvoju je obrisan uspješno.';
 $lang['VOTE_CAST'] = 'Vaš glas je bačena.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Tema Odgovor Obavijest';
 $lang['EMOTICONS'] = 'Praktički';
 $lang['MORE_EMOTICONS'] = 'Pogled više Smajlica';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Ne mogu registar bujicama na tragač';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Još bujicama sa isti info_hash već <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ukloni od tragač';
 $lang['BT_UNREGISTERED'] = 'Bujicama neprijavljeni';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Bujicama registriran na tracker<br /><br />Now ti treba da <a href="%s"><b>download tvoj torrent</b></a> i vodim ga koristiš svoje BitTorrent klijent izbor mapa sa originalne spise dijeliš kao preuzimanje put';
 $lang['INVALID_ANN_URL'] = 'Nevažeći Objaviti URL [%s]<br /><br />must biti <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nisam mogao dodati passkey<br /><br />Torrent nije registrovan na tragač';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nisam mogao da dodam ključ (ključ-kartica je prazna)<br /><br />Go da <a href="%s" target="_blank"><b>your forum profile</b></a> i otvori to';
 $lang['BT_PASSKEY'] = 'S ključem';
 $lang['BT_GEN_PASSKEY'] = 'stvoriti nova';
 $lang['BT_PASSKEY_VIEW'] = 'pokaži';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'Seme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Vaš zahtjev za pridruživanje korisničkoj grupi je odobren',
     'GROUP_REQUEST' => 'Zahtjev za pridruživanje vašoj korisničkoj grupi',
     'PRIVMSG_NOTIFY' => 'Nova privatna poruka',
-    'TOPIC_NOTIFY' => 'Obavijest o odgovoru u niti %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Reaktivacija računa',
     'USER_ACTIVATE_PASSWD' => 'Potvrđivanje nove lozinke',
     'USER_WELCOME' => 'Dobrodošli na stranicu %s',

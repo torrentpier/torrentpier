@@ -74,7 +74,7 @@ switch ($this->request['type']) {
 
     case 'reply':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
-            $this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
+            $this->ajax_die($lang['RULES_REPLY_CANNOT']);
         } elseif (!$is_auth['auth_reply']) {
             $this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
         }
@@ -217,7 +217,7 @@ switch ($this->request['type']) {
         }
 
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
-            $this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
+            $this->ajax_die($lang['RULES_REPLY_CANNOT']);
         } elseif (!$is_auth['auth_reply']) {
             $this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
         }

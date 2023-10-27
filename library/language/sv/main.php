@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Ditt meddelande har tagits bort.';
 $lang['POLL_DELETE'] = 'Din enkät har tagits bort.';
 $lang['VOTE_CAST'] = 'Din röst har gjutits.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Ämne Svar Anmälan';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Visa fler Emotikoner';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Kunde inte registrera sig torrent på tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'En annan torrent med samma info_hash redan <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ta bort från tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent oregistrerade';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrerade på tracker<br /><br />Now du behöver för att <a href="%s"><b>download din torrent</b></a> och köra den med din BitTorrent klient att välja mappen med de ursprungliga filerna du delar eftersom ladda ner vägen';
 $lang['INVALID_ANN_URL'] = 'Ogiltiga Announce URL [%s]<br /><br />must vara <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kunde inte lägga passkey<br /><br />Torrent som inte är registrerade på tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Kunde inte lägga till nyckel (passkey är tom)<br /><br />Go att <a href="%s" target="_blank"><b>your forum profile</b></a> och generera det';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'skapa en ny';
 $lang['BT_PASSKEY_VIEW'] = 'visa';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Själv';
 $lang['SEEDING'] = 'Frö';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registrerade';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Din begäran om att gå med i användargruppen har beviljats',
     'GROUP_REQUEST' => 'En begäran om att gå med i din användargrupp',
     'PRIVMSG_NOTIFY' => 'Nytt privat meddelande',
-    'TOPIC_NOTIFY' => 'Meddelande om svar i tråden %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Återaktivering av konto',
     'USER_ACTIVATE_PASSWD' => 'Bekräftar ett nytt lösenord',
     'USER_WELCOME' => 'Välkommen till sajten %s',

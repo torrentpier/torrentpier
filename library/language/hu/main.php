@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Az üzenetet sikeresen törölve.';
 $lang['POLL_DELETE'] = 'A szavazás sikeresen törölve.';
 $lang['VOTE_CAST'] = 'A szavazás már el van vetve.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'A Témában Válasz Értesítés';
 $lang['EMOTICONS'] = 'Hangulatjelek';
 $lang['MORE_EMOTICONS'] = 'Részletek Hangulatjelek';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Nem lehet regisztrálni, torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Egy másik torrent azonos info_hash már <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Távolítsa el a tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent regisztrált';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent regisztrált tracker<br /><br />Now kell <a href="%s"><b>download a torrent</b></a> and run használatával a BitTorrent kliens kiválasztják azt a mappát az eredeti fájlok a megosztott, mint a letöltés elérési út';
 $lang['INVALID_ANN_URL'] = 'Érvénytelen Announce URL-[%s]<br /><br />must lehet <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nem hozzáadása passkey<br /><br />Torrent nem regisztrált tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nem hozzáadása jelszót (jelszó üres)<br /><br />Go, hogy <a href="%s" target="_blank"><b>your fórum profile</b></a> termel, ez';
 $lang['BT_PASSKEY'] = 'Jelszó';
 $lang['BT_GEN_PASSKEY'] = 'hozzon létre egy új';
 $lang['BT_PASSKEY_VIEW'] = 'térkép';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Egyéni';
 $lang['SEEDING'] = 'Mag';
 $lang['LEECHING'] = 'Pióca';
 $lang['IS_REGISTERED'] = 'Regisztrált';
-$lang['MAGNET'] = 'Mágnes';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Állapot';
@@ -2817,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'A felhasználói csoporthoz való csatlakozási kérelmét elfogadtuk',
     'GROUP_REQUEST' => 'Kérés a felhasználói csoporthoz való csatlakozásra',
     'PRIVMSG_NOTIFY' => 'Új privát üzenet',
-    'TOPIC_NOTIFY' => 'Értesítés a válaszról a %sszálban',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Fiók újraaktiválása',
     'USER_ACTIVATE_PASSWD' => 'Új jelszó megerősítése',
     'USER_WELCOME' => 'Üdvözöljük az oldalon %s',
