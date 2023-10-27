@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent geregistreer op tracker<br /><br /> Nou moet jy <a href="%s"><b>download jou torrent</b></a> en hardloop dit met jou BitTorrent-kliënt om die gids te kies met die oorspronklike lêers wat jy deel as die aflaaipad';
 $lang['INVALID_ANN_URL'] = 'Ongeldige aanmelding URL [%s]<br /><br /> moet wees <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kon nie passkey<br /><br />Torrent voeg nie op spoorsnyer geregistreer';
-$lang['PASSKEY_ERR_EMPTY'] = 'Kon nie passkey byvoeg nie (wagwoord is leeg) <br /><br />Gaan na <a href="%s" target="_blank"><b>jou forumprofiel</b></a> en genereer dit';
 $lang['BT_PASSKEY'] = 'sleutel';
 $lang['BT_GEN_PASSKEY'] = 'Skep \'n nuwe';
 $lang['BT_PASSKEY_VIEW'] = 'Wys';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'saad';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'geregistreer';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'status';
