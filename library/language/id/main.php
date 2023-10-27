@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent terdaftar di tracker<br /><br />Now yang anda butuhkan untuk <a href="%s"><b>download anda torrent</b></a> dan menjalankannya menggunakan BitTorrent client memilih folder dengan file asli anda berbagi sebagai jalan download';
 $lang['INVALID_ANN_URL'] = 'Tidak valid Mengumumkan URL [%s]<br /><br />must menjadi <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Tidak bisa menambahkan passkey<br /><br />Torrent tidak terdaftar pada tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Tidak bisa menambahkan kata sandi (kata sandi kosong)<br /><br />Go untuk <a href="%s" target="_blank"><b>your forum profile</b></a> dan menghasilkan';
 $lang['BT_PASSKEY'] = 'Kunci sandi';
 $lang['BT_GEN_PASSKEY'] = 'buat yang baru';
 $lang['BT_PASSKEY_VIEW'] = 'tampilkan';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Mandiri';
 $lang['SEEDING'] = 'Benih';
 $lang['LEECHING'] = 'Lintah';
 $lang['IS_REGISTERED'] = 'Terdaftar';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
