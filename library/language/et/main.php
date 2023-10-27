@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Teie sõnum on edukalt kustutatud.';
 $lang['POLL_DELETE'] = 'Sinu küsitlus on edukalt kustutatud.';
 $lang['VOTE_CAST'] = 'Sinu hääl on antud loo.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Teema Vastus Teade';
 $lang['EMOTICONS'] = 'Emotikone';
 $lang['MORE_EMOTICONS'] = 'Vaata rohkem Emotikone';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Ei saanud registreerida torrent tracker kohta';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Teine torrent sama info_hash juba <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Eemalda tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent registreerimata';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registreeritud tracker<br /><br />Now sa pead <a href="%s"><b>download oma torrent</b></a> ja käivitada, kasutades oma BitTorrent klient valida kaust originaal faile sa oled jagamine lae tee';
 $lang['INVALID_ANN_URL'] = 'Kehtetu Teatada URL [%s]<br /><br />must olema <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Ei saanud lisada passkey<br /><br />Torrent ei ole registreeritud tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Teie taotlus kasutajagrupiga liitumiseks on rahuldatud',
     'GROUP_REQUEST' => 'Taotlus liituda teie kasutajagrupiga',
     'PRIVMSG_NOTIFY' => 'Uus privaatsõnum',
-    'TOPIC_NOTIFY' => 'Vastuse teatis lõimes %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Konto taasaktiveerimine',
     'USER_ACTIVATE_PASSWD' => 'Uue parooli kinnitamine',
     'USER_WELCOME' => 'Tere tulemast saidile %s',

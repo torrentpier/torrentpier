@@ -379,7 +379,6 @@ $lang['DELETED'] = 'El teu missatge ha sigut esborrat correctament.';
 $lang['POLL_DELETE'] = 'La seva enquesta ha estat esborrat correctament.';
 $lang['VOTE_CAST'] = 'El teu vot ha estat llançat.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Tema Respondre Notificació';
 $lang['EMOTICONS'] = 'Les emoticones';
 $lang['MORE_EMOTICONS'] = 'Veure més Emoticones';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'No podia registrar-torrent al tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un altre torrent amb la mateixa info_hash ja <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retirar del tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent no registrats';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrat en tracker<br /><br />Now cal <a href="%s"><b>download seu torrent</b></a> i executar-lo utilitzant el client de BitTorrent triar la carpeta amb els fitxers originals compartiu com a descarregar camí';
 $lang['INVALID_ANN_URL'] = 'Invalid Anunciar URL [%s]<br /><br />must ser <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'No podria afegir passkey<br /><br />Torrent no inscrits en el tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'La teva sol·licitud per unir-te al grup d\'usuaris ha estat acceptada',
     'GROUP_REQUEST' => 'Una sol·licitud per unir-se al vostre grup d\'usuaris',
     'PRIVMSG_NOTIFY' => 'Nou missatge privat',
-    'TOPIC_NOTIFY' => 'Notificació de resposta al fil %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Reactivació del compte',
     'USER_ACTIVATE_PASSWD' => 'Confirmació d\'una nova contrasenya',
     'USER_WELCOME' => 'Benvingut al lloc %s',

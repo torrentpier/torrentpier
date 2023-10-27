@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Vaša správa bola úspešne odstránený.';
 $lang['POLL_DELETE'] = 'Váš prieskum bol úspešne odstránený.';
 $lang['VOTE_CAST'] = 'Váš hlas bol obsadený.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Téma Odpoveď Oznámenie';
 $lang['EMOTICONS'] = 'Emotikony';
 $lang['MORE_EMOTICONS'] = 'Zobraziť viac Smajlíkov';
 
@@ -1062,6 +1061,7 @@ $lang['BT_REG_FAIL'] = 'Nemohol zaregistrovať torrent na tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Ďalší torrent s rovnakým info_hash už <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Odstrániť z tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrovaný';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrované na tracker<br /><br />Now potrebujete <a href="%s"><b>download vaše torrent</b></a> a spustite ho pomocou svojho BitTorrent klient výber priečinka s pôvodným súborom zdieľate ako stiahnuť cesta';
 $lang['INVALID_ANN_URL'] = 'Neplatné Oznámiť URL [%s]<br /><br />must byť <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nemohol pridať passkey<br /><br />Torrent nie je registrovaná na tracker';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Vaša žiadosť o pripojenie sa k skupine používateľov bola schválená',
     'GROUP_REQUEST' => 'Žiadosť o pripojenie k vašej skupine používateľov',
     'PRIVMSG_NOTIFY' => 'Nová súkromná správa',
-    'TOPIC_NOTIFY' => 'Oznámenie o odpovedi vo vlákne %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Opätovná aktivácia účtu',
     'USER_ACTIVATE_PASSWD' => 'Potvrdenie nového hesla',
     'USER_WELCOME' => 'Vitajte na stránke %s',
