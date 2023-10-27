@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registreeritud tracker<br /><br />Now sa pead <a href="%s"><b>download oma torrent</b></a> ja käivitada, kasutades oma BitTorrent klient valida kaust originaal faile sa oled jagamine lae tee';
 $lang['INVALID_ANN_URL'] = 'Kehtetu Teatada URL [%s]<br /><br />must olema <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Ei saanud lisada passkey<br /><br />Torrent ei ole registreeritud tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Ei saanud lisada parooli (parooli on tühi)<br /><br />Go, et <a href="%s" target="_blank"><b>your foorumi profile</b></a> ja luua see';
 $lang['BT_PASSKEY'] = 'Parooli';
 $lang['BT_GEN_PASSKEY'] = 'looge uus';
 $lang['BT_PASSKEY_VIEW'] = 'näitus';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Ise';
 $lang['SEEDING'] = 'Seeme';
 $lang['LEECHING'] = 'Kaanid';
 $lang['IS_REGISTERED'] = 'Registreeritud';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Staatus';
