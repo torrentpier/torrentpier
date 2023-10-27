@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent regjistruar në tracker<br /><br />Now ju duhet të <a href="%s"><b>download tuaj torrent</b></a> dhe drejtuar atë tuaj duke përdorur klient BitTorrent zgjedhur dosje me origjinale fotografi ju jeni ndarë si rrugën shkarko';
 $lang['INVALID_ANN_URL'] = 'Të Shpallë të pavlefshme URL [%s]<br /><br />must të <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nuk mund të shtoni passkey<br /><br />Torrent nuk janë të regjistruara në tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nuk mund të shtoni passkey (passkey është e zbrazët)<br /><br />Go të <a href="%s" target="_blank"><b>your forum profile</b></a> dhe të gjenerojë atë';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'krijo një të ri';
 $lang['BT_PASSKEY_VIEW'] = 'tregojnë';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Vetë';
 $lang['SEEDING'] = 'Farë';
 $lang['LEECHING'] = 'Gjaku';
 $lang['IS_REGISTERED'] = 'Regjistruar';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusi';
