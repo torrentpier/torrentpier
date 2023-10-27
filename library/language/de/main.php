@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registriert tracker<br /><br />Now müssen Sie <a href="%s"><b>download Ihre torrent</b></a> und führen Sie es mit Ihrem BitTorrent-client wählen Sie den Ordner mit den original-Dateien, die Sie teilen als download-Pfad';
 $lang['INVALID_ANN_URL'] = 'Ungültige Announce URL [%s]<br /><br />must werden <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Konnte nicht hinzufügen passkey<br /><br />Torrent nicht registriert tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Konnte nicht hinzufügen kennschlüssel (passkey ist leer)<br /><br />Go zu <a href="%s" target="_blank"><b>your forum profile</b></a> und generieren';
 $lang['BT_PASSKEY'] = 'Hauptschlüssel';
 $lang['BT_GEN_PASSKEY'] = 'erstellen Sie eine neue';
 $lang['BT_PASSKEY_VIEW'] = 'zeigen';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Selbst';
 $lang['SEEDING'] = 'Samen';
 $lang['LEECHING'] = 'Blutegel';
 $lang['IS_REGISTERED'] = 'Registriert';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
