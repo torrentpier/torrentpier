@@ -543,7 +543,7 @@ class Torrent
 
         $file_contents = file_get_contents($filename);
         if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents)) {
-            bb_die('This is not a bencoded file');
+            bb_die($lang['TORFILE_INVALID']);
         }
 
         $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
