@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'سيل مسجلة على tracker<br /><br />Now تحتاج إلى <a href="%s"><b>download الخاص بك torrent</b></a> وتشغيله باستخدام تورنت العميل اختيار المجلد مع الملفات الأصلية انت تبادل مسار التحميل';
 $lang['INVALID_ANN_URL'] = 'صالح يعلن URL [%s]<br /><br />must يكون <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'لا يمكن إضافة passkey<br /><br />Torrent غير مسجل على تعقب';
-$lang['PASSKEY_ERR_EMPTY'] = 'لا يمكن إضافة مفتاح المرور (كلمة السر فارغة)<br /><br />Go إلى <a href="%s" target="_blank"><b>your المنتدى profile</b></a> وتوليد ذلك';
 $lang['BT_PASSKEY'] = 'مفتاح المرور';
 $lang['BT_GEN_PASSKEY'] = 'إنشاء جديد';
 $lang['BT_PASSKEY_VIEW'] = 'تظهر';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'النفس';
 $lang['SEEDING'] = 'البذور';
 $lang['LEECHING'] = 'علقة';
 $lang['IS_REGISTERED'] = 'مسجلة';
-$lang['MAGNET'] = 'المغناطيس';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'حالة';
