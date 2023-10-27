@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent <a href="%s"><b>download torrent</b></a> ihtiyaç duyduğunuz ve indirme yolu olarak paylaştığınız özgün dosyaları ile klasör seçme BitTorrent istemcisi kullanarak tracker<br /><br />Now kayıtlı';
 $lang['INVALID_ANN_URL'] = 'Geçersiz İlan URL [%s]<br /><br />must <b>%s</b> olmak';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'İzci kayıtlı değil passkey<br /><br />Torrent eklenemedi';
-$lang['PASSKEY_ERR_EMPTY'] = '(Şifre boş)<br /><br />Go için <a href="%s" target="_blank"><b>your forum profile</b></a> şifre ekleyin ve oluşturamadı';
 $lang['BT_PASSKEY'] = 'Geçiş anahtarı';
 $lang['BT_GEN_PASSKEY'] = 'yeni oluştur';
 $lang['BT_PASSKEY_VIEW'] = 'göster';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Kendini';
 $lang['SEEDING'] = 'Tohum';
 $lang['LEECHING'] = 'Sülük';
 $lang['IS_REGISTERED'] = 'Kayıtlı';
-$lang['MAGNET'] = 'Mıknatıs';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Durumu';
