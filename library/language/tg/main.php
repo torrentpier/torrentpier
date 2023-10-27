@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Ҷӯйе ба қайд tracker<br /><br />Now ба шумо лозим аст, ки <a href="%s"><b>download torrent</b></a> худ ва идора ба он бо истифода аз муштарӣ BitTorrent худ интихоби папкаи бо файлҳои аслӣ шумо нақл ҳамчун роҳи боргирӣ аз';
 $lang['INVALID_ANN_URL'] = 'URL хабар нодуруст [%s]<br /><br />must бошад <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Оё passkey<br /><br />Torrent илова на ин ки дар Назоратчии ба қайд гирифта намешавад';
-$lang['PASSKEY_ERR_EMPTY'] = 'Оё passkey илова кунед (passkey холӣ аст) <br /><br />Go ба <a href="%s" target="_blank"><b>your форуми profile</b></a> ва тавлиди он';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'эҷод нав';
 $lang['BT_PASSKEY_VIEW'] = 'нишон';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Худшиносӣ';
 $lang['SEEDING'] = 'тухмӣ';
 $lang['LEECHING'] = 'пиявка';
 $lang['IS_REGISTERED'] = 'Сабтшуда';
-$lang['MAGNET'] = 'оҳанрабо';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статуси';
