@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent siz torrent</b></a> <a href="%s"><b>download va yuklab olish yo\'liga sifatida ulashmoqdasiz original fayllar bilan jildni sizning BitTorrent mijozi bilan uni ishlatish uchun kerak tracker<br /><br />Now ro\'yxatdan';
 $lang['INVALID_ANN_URL'] = 'Noto\'g\'ri e\'lon URL <b>%s</b> bo\'lishi [%s]<br /><br />must';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'passkey<br /><br />Torrent qo\'shish bo\'lmadi reyting www.uz ro\'yxatdan';
-$lang['PASSKEY_ERR_EMPTY'] = 'parolni kiritish bo\'lmadi <br /><br />Go forum profile</b></a> <a href="%s" target="_blank"><b>your va uni ishlab chiqarish uchun (parol bo\'sh bo\'ladi)';
 $lang['BT_PASSKEY'] = 'Parol';
 $lang['BT_GEN_PASSKEY'] = 'Yangi yaratish';
 $lang['BT_PASSKEY_VIEW'] = 'ko\'rsatish';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'urug \'';
 $lang['LEECHING'] = 'zuluk';
 $lang['IS_REGISTERED'] = 'ro\'yxatga olingan';
-$lang['MAGNET'] = 'magnit';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'holat';
