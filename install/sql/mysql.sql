@@ -759,8 +759,8 @@ INSERT INTO `bb_extension_groups` (`group_name`, `cat_id`, `allow_group`, `downl
                                    `max_filesize`, `forum_permissions`)
 VALUES ('Images', '1', '1', '1', '', '262144', ''),
        ('Archives', '0', '1', '1', '', '262144', ''),
-       ('Plain text', '0', '0', '1', '', '262144', ''),
-       ('Documents', '0', '0', '1', '', '262144', ''),
+       ('Plain text', '0', '1', '1', '', '262144', ''),
+       ('Documents', '0', '1', '1', '', '262144', ''),
        ('Real media', '0', '0', '2', '', '262144', ''),
        ('Torrent', '0', '1', '1', '', '122880', '');
 
