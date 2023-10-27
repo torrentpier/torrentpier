@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Bujicama registriran na tracker<br /><br />Now ti treba da <a href="%s"><b>download tvoj torrent</b></a> i vodim ga koristiš svoje BitTorrent klijent izbor mapa sa originalne spise dijeliš kao preuzimanje put';
 $lang['INVALID_ANN_URL'] = 'Nevažeći Objaviti URL [%s]<br /><br />must biti <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nisam mogao dodati passkey<br /><br />Torrent nije registrovan na tragač';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nisam mogao da dodam ključ (ključ-kartica je prazna)<br /><br />Go da <a href="%s" target="_blank"><b>your forum profile</b></a> i otvori to';
 $lang['BT_PASSKEY'] = 'S ključem';
 $lang['BT_GEN_PASSKEY'] = 'stvoriti nova';
 $lang['BT_PASSKEY_VIEW'] = 'pokaži';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'Seme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';

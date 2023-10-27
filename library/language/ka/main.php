@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent რეგისტრირებული tracker<br /><br />Now თქვენ უნდა <a href="%s"><b>download თქვენი torrent</b></a> და გაუშვით გამოყენებით თქვენი BitTorrent კლიენტი არჩევის საქაღალდეში და ორიგინალი ფაილი თქვენ გაზიარება, როგორც უფასო გზა';
 $lang['INVALID_ANN_URL'] = 'ძალადაკარგულად აცხადებს URL [%s]<br /><br />must იყოს <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'ვერ დამატება passkey<br /><br />Torrent არ არის რეგისტრირებული tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'ვერ დამატება გასაღები არასწორია (გასაღები არასწორია არის ცარიელი)<br /><br />Go, რომ <a href="%s" target="_blank"><b>your ფორუმი profile</b></a> და წარმოქმნის ეს';
 $lang['BT_PASSKEY'] = 'გასაღები არასწორია';
 $lang['BT_GEN_PASSKEY'] = 'შექმნათ ახალი';
 $lang['BT_PASSKEY_VIEW'] = 'ჩვენება';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'თვითმმართველობის';
 $lang['SEEDING'] = 'სათესლე';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'რეგისტრირებული';
-$lang['MAGNET'] = 'მაგნიტი';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'სტატუსი';

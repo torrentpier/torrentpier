@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent, kas reģistrēti tracker<br /><br />Now jums ir nepieciešams, lai <a href="%s"><b>download jūsu torrent</b></a> un palaist to, izmantojot savu BitTorrent klientu, izvēloties mapi ar sākotnējo failus koplietojat kā lejupielādes ceļā';
 $lang['INVALID_ANN_URL'] = 'Nederīgs Paziņot URL [%s]<br /><br />must būt <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nevarēja pievienot passkey<br /><br />Torrent nav reģistrēti tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nevarēja pievienot piekļuves atslēga (patentatslēga ir tukšs)<br /><br />Go, lai <a href="%s" target="_blank"><b>your forumā profile</b></a> un radīt to';
 $lang['BT_PASSKEY'] = 'Patentatslēga';
 $lang['BT_GEN_PASSKEY'] = 'izveidot jaunu';
 $lang['BT_PASSKEY_VIEW'] = 'rādīt';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Automātiskā';
 $lang['SEEDING'] = 'Sēklas';
 $lang['LEECHING'] = 'Dēle';
 $lang['IS_REGISTERED'] = 'Reģistrēts';
-$lang['MAGNET'] = 'Magnēts';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statuss';

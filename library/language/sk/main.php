@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrované na tracker<br /><br />Now potrebujete <a href="%s"><b>download vaše torrent</b></a> a spustite ho pomocou svojho BitTorrent klient výber priečinka s pôvodným súborom zdieľate ako stiahnuť cesta';
 $lang['INVALID_ANN_URL'] = 'Neplatné Oznámiť URL [%s]<br /><br />must byť <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nemohol pridať passkey<br /><br />Torrent nie je registrovaná na tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nemohol pridať univerzálny kľúč (kľúče je prázdny)<br /><br />Go na <a href="%s" target="_blank"><b>your fórum profile</b></a> a generovanie to';
 $lang['BT_PASSKEY'] = 'Univerzálny kľúč';
 $lang['BT_GEN_PASSKEY'] = 'vytvoriť nový';
 $lang['BT_PASSKEY_VIEW'] = 'zobraziť';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Samostatne';
 $lang['SEEDING'] = 'Semeno';
 $lang['LEECHING'] = 'Pijavice';
 $lang['IS_REGISTERED'] = 'Registrovaná';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Stav';

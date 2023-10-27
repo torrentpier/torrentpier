@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent înregistrate pe tracker<br /><br />Now aveți nevoie pentru a <a href="%s"><b>download ta torrent</b></a> și rulați-l folosind BitTorrent client alegerea folder cu fișierele originale sunteți de partajare ca calea de descărcare';
 $lang['INVALID_ANN_URL'] = 'Invalid Anunța URL [%s]<br /><br />must fi <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nu ar putea adăuga passkey<br /><br />Torrent înregistrat pe tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nu ar putea adăuga cheie de acces (passkey este gol)<br /><br />Go să <a href="%s" target="_blank"><b>your forum profile</b></a> și de a genera o';
 $lang['BT_PASSKEY'] = 'Cheia de acces';
 $lang['BT_GEN_PASSKEY'] = 'creați un nou';
 $lang['BT_PASSKEY_VIEW'] = 'show';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Auto';
 $lang['SEEDING'] = 'Semințe';
 $lang['LEECHING'] = 'Lipitoare';
 $lang['IS_REGISTERED'] = 'Înregistrați';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Starea';

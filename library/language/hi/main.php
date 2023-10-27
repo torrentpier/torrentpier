@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'टॉरेंट पर ट्रैकर <br /><br /> पर पंजीकृत किया गया है अब आपको <a href="%s"><b> की जरूरत है अपने टोरेंट डाउनलोड करें </b></a> और अपने बीटटॉरेंट क्लाइंट का उपयोग कर फ़ोल्डर को उन मूल फ़ाइलों के साथ चुनना जो आप डाउनलोड पथ के रूप में साझा कर रहे हैं';
 $lang['INVALID_ANN_URL'] = 'अमान्य घोषणा URL [%s]<br /><br /> होना <b>%s</b> होना चाहिए';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'पासकी नहीं जोड़ा जा सका <br /><br /> टॉरेंट ट्रैकर पर पंजीकृत नहीं है';
-$lang['PASSKEY_ERR_EMPTY'] = 'पासकी जोड़ें नहीं कर सकता (पासकी खाली है) <br /> <br /> <a href="%s" target="_blank"><b>अपने फोरम प्रोफ़ाइल</b></a> पर जाएँ और यह उत्पन्न';
 $lang['BT_PASSKEY'] = 'सर्व-कुंजी';
 $lang['BT_GEN_PASSKEY'] = 'कोई नया बनाएं';
 $lang['BT_PASSKEY_VIEW'] = 'दिखाना';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'स्वयं';
 $lang['SEEDING'] = 'बीज';
 $lang['LEECHING'] = 'जोंक';
 $lang['IS_REGISTERED'] = 'दर्ज कराई';
-$lang['MAGNET'] = 'चुंबक';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'स्थिति';

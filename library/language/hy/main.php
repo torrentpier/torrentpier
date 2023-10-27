@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Հեղեղ գրանցված tracker<br /><br />Now պետք է <a href="%s"><b>download ձեր torrent</b></a> եւ վազում այն միջոցով տարափ հաճախորդը ընտրելով թղթապանակը исходными ֆայլեր եք կիսվում, քանի որ ճանապարհը ներբեռնել';
 $lang['INVALID_ANN_URL'] = 'Սխալ է Տեղեկացնել URL-հասցե [%s]<br /><br />must է <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Չի կարող ավելացնել passkey<br /><br />Torrent չի գրանցվել խուզարկու';
-$lang['PASSKEY_ERR_EMPTY'] = 'Չի կարող ավելացնել գաղտնաբառը (գաղտնաբառը դատարկ)<br /><br />Go է <a href="%s" target="_blank"><b>your համաժողովը profile</b></a> եւ առաջացնում այն';
 $lang['BT_PASSKEY'] = 'Отмычка';
 $lang['BT_GEN_PASSKEY'] = 'ստեղծել նոր';
 $lang['BT_PASSKEY_VIEW'] = 'ցույց տալ';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Собственн';
 $lang['SEEDING'] = 'Սերմերի';
 $lang['LEECHING'] = 'Մի տզրուկ';
 $lang['IS_REGISTERED'] = 'Գրանցված է';
-$lang['MAGNET'] = 'Մագնիս';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Կարգավիճակ';

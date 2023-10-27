@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrat en tracker<br /><br />Now cal <a href="%s"><b>download seu torrent</b></a> i executar-lo utilitzant el client de BitTorrent triar la carpeta amb els fitxers originals compartiu com a descarregar camí';
 $lang['INVALID_ANN_URL'] = 'Invalid Anunciar URL [%s]<br /><br />must ser <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'No podria afegir passkey<br /><br />Torrent no inscrits en el tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'No podria afegir passkey (passkey és buit)<br /><br />Go a <a href="%s" target="_blank"><b>your fòrum profile</b></a> i generar-la';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'crear un nou';
 $lang['BT_PASSKEY_VIEW'] = 'mostra';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Auto';
 $lang['SEEDING'] = 'Llavor';
 $lang['LEECHING'] = 'A la sangonera';
 $lang['IS_REGISTERED'] = 'Registrat';
-$lang['MAGNET'] = 'Imant';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Estat';

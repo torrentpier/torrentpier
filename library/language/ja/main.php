@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = '激流に登録されtracker<br /><br />Nowに必要なもの<a href="%s"><b>downloadおtorrent</b></a>とでご利用BitTorrentトを選択するフォルダのファイルだけを共有してダウンロードパス';
 $lang['INVALID_ANN_URL'] = '無効なURLを発表[%s]<br /><br />mustする<b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'な追加passkey<br /><br />Torrent登録されていないにトラッカー';
-$lang['PASSKEY_ERR_EMPTY'] = 'なの追加パスキー(パスキーは空）<br /><br />Goに<a href="%s" target="_blank"><b>yourフォーラムprofile</b></a>を作成で';
 $lang['BT_PASSKEY'] = 'パスキー';
 $lang['BT_GEN_PASSKEY'] = '新規作成し';
 $lang['BT_PASSKEY_VIEW'] = 'ショー';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = '自己';
 $lang['SEEDING'] = '種子';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = '登録';
-$lang['MAGNET'] = '磁石';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状況';

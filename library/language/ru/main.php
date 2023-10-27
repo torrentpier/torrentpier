@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Торрент зарегистрирован на трекере<br /><br />Теперь вам <a href="%s"><b>нужно его скачать</b></a> и поставить на закачку у самого себя в ту же директорию, где лежат оригинальные файлы';
 $lang['INVALID_ANN_URL'] = 'Неправильный Аnnounce URL [%s]<br /><br />должен быть <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Невозможно добавить пасскей<br /><br />Торрент не зарегистрирован на трекере';
-$lang['PASSKEY_ERR_EMPTY'] = 'Невозможно добавить пасскей<br /><br />Вам необходимо <a href="%s" target="_blank"><b>зайти в ваш форумный профиль</b></a> и сгенерировать пасскей';
 $lang['BT_PASSKEY'] = 'Пасскей';
 $lang['BT_GEN_PASSKEY'] = 'Создать новый';
 $lang['BT_PASSKEY_VIEW'] = 'Показать';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Свои';
 $lang['SEEDING'] = 'Сидер';
 $lang['LEECHING'] = 'Личер';
 $lang['IS_REGISTERED'] = 'Зарегистрирован';
-$lang['MAGNET'] = 'Магнит';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';

@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = '토렌트에 등록된 tracker<br /><br />Now 당신이 필요하 <a href="%s"><b>download 의 torrent</b></a> 를 사용하여 실행하 슬라이 폴더를 선택으로 원본 파일 공유하고 있으로 경로를 다운로드';
 $lang['INVALID_ANN_URL'] = '잘못된 발표 URL[%s]<br /><br />must 수 <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = '에 추가할 수 없습 passkey<br /><br />Torrent 에 등록되지 않 추적';
-$lang['PASSKEY_ERR_EMPTY'] = '을 추가할 수 없습니다 암호(암호는 비어)<br /><br />Go 을 <a href="%s" target="_blank"><b>your 포럼 profile</b></a> 및 생성';
 $lang['BT_PASSKEY'] = '암호';
 $lang['BT_GEN_PASSKEY'] = '새로 만들고';
 $lang['BT_PASSKEY_VIEW'] = '보';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = '셀프';
 $lang['SEEDING'] = '씨';
 $lang['LEECHING'] = '니';
 $lang['IS_REGISTERED'] = '등록';
-$lang['MAGNET'] = '석';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '상태';

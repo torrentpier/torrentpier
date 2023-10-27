@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registriran na tracker<br /><br />Now treba <a href="%s"><b>download vaš torrent</b></a> i pokrenuti ga kroz svoj torrent klijent odaberete mapu s izvornim datotekama dijelite, kao i način preuzimanje';
 $lang['INVALID_ANN_URL'] = 'Neispravno Reći URL [%s]<br /><br />must biti <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Ne bi mogli dodati passkey<br /><br />Torrent nije registriran na adresi';
-$lang['PASSKEY_ERR_EMPTY'] = 'Ne možete dodati lozinku (prazan)<br /><br />Go u <a href="%s" target="_blank"><b>your forum profile</b></a> i generirati njegova';
 $lang['BT_PASSKEY'] = 'Kalauz';
 $lang['BT_GEN_PASSKEY'] = 'napravite novi';
 $lang['BT_PASSKEY_VIEW'] = 'prikaži';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Собственн';
 $lang['SEEDING'] = 'Sjeme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran od';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';

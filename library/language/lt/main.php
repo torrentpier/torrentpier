@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registruotų tracker<br /><br />Now jums reikia <a href="%s"><b>download jūsų torrent</b></a> ir paleisti jį naudojant BitTorrent klientas pasirinkus aplanką su pirminiu failus bendrinate, kaip atsisiųsti kelias';
 $lang['INVALID_ANN_URL'] = 'Neteisingas Paskelbti URL [%s]<br /><br />must būti <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Negalėjo pridėti passkey<br /><br />Torrent ne registruotų tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Negalėjo pridėti prieigos raktas (prieigos raktas yra tuščias)<br /><br />Go į <a href="%s" target="_blank"><b>your forume profile</b></a> ir kurti ją';
 $lang['BT_PASSKEY'] = 'Prieigos raktas';
 $lang['BT_GEN_PASSKEY'] = 'kurti naują';
 $lang['BT_PASSKEY_VIEW'] = 'rodyti';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Savarankiškai';
 $lang['SEEDING'] = 'Sėklos';
 $lang['LEECHING'] = 'Dėlės';
 $lang['IS_REGISTERED'] = 'Registruotas';
-$lang['MAGNET'] = 'Magnetas';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusas';

@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent注册tracker<br /><br />Now你需要<a href="%s"><b>download你torrent</b></a>和运用你的BitTorrent客户选择的文件夹，与原始文件在分享作为下载通路';
 $lang['INVALID_ANN_URL'] = '无效的宣布URL[%s]<br /><br />must以<b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = '不可能添加passkey<br /><br />Torrent未注册上的跟踪器';
-$lang['PASSKEY_ERR_EMPTY'] = '不可能添加密钥(密码是空的)<br /><br />Go到<a href="%s" target="_blank"><b>your论坛profile</b></a>和生成它';
 $lang['BT_PASSKEY'] = '密码';
 $lang['BT_GEN_PASSKEY'] = '创建一个新的';
 $lang['BT_PASSKEY_VIEW'] = '显示';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = '自我';
 $lang['SEEDING'] = '种子';
 $lang['LEECHING'] = '水蛭';
 $lang['IS_REGISTERED'] = '注册';
-$lang['MAGNET'] = '磁铁';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状态';

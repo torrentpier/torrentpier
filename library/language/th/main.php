@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'ทอร์เรนต์จดทะเบียนใน tracker<br /><br />Now คุณต้อง <a href="%s"><b>download ของคุณ torrent</b></a> นแล้วหนีมันใช้ของคุณ name=แฟ้มข้อความ comment ลูกค้าของการเลือกโฟลเดอร์ดั้งเดิมองแฟ้มที่คุณแบ่งปันข้อมูลที่ดาวน์โหลดเส้นทาง';
 $lang['INVALID_ANN_URL'] = 'ไม่ถูกต้องประกาศเรื่องที่อยู่ URL [%s]<br /><br />must เป็น <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'ไม่สามารถเพิ่ม passkey<br /><br />Torrent ไม่ได้จดทะเบียนบนแทร็กเกอร์';
-$lang['PASSKEY_ERR_EMPTY'] = 'ไม่สามารถเพิ่ม passkey(passkey ว่างเปล่า)<br /><br />Go จะ <a href="%s" target="_blank"><b>your ชุ profile</b></a> และสร้างมัน';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'สร้างใหม่';
 $lang['BT_PASSKEY_VIEW'] = 'แสดง';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'ตัวเอง';
 $lang['SEEDING'] = 'เมล็ดพันธ์';
 $lang['LEECHING'] = 'ดูดเลือ';
 $lang['IS_REGISTERED'] = 'จดทะเบียน';
-$lang['MAGNET'] = 'แม่เหล็ก';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'สถานะ';

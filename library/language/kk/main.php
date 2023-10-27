@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Егер сіз torrent</b></a> <a href="%s"><b>download және сіз жүктеу жолы ретінде бөлісудесіз бастапқы файлдары бар папка таңдау сіздің BitTorrent клиент пайдаланып, оны іске қосу үшін қажет tracker<br /><br />Now тіркелген торрент';
 $lang['INVALID_ANN_URL'] = 'URL <b>%s</b> болуы [%s]<br /><br />must жарамсыз хабарлау';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'отслежывателе тіркелген жоқ passkey<br /><br />Torrent қосу мүмкін емес';
-$lang['PASSKEY_ERR_EMPTY'] = '<a href="%s" target="_blank"><b>your форум profile</b></a> үшін <br /><br />Go (кілті бос) кілтті қосу және оны жасау мүмкін емес';
 $lang['BT_PASSKEY'] = 'Рұқсат кілті';
 $lang['BT_GEN_PASSKEY'] = 'Жаңа жасау';
 $lang['BT_PASSKEY_VIEW'] = 'көрсету';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'тұқым';
 $lang['LEECHING'] = 'сүлік';
 $lang['IS_REGISTERED'] = 'тіркелген';
-$lang['MAGNET'] = 'Магнит';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'мәртебе';

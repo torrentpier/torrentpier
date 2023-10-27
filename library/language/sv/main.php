@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrerade på tracker<br /><br />Now du behöver för att <a href="%s"><b>download din torrent</b></a> och köra den med din BitTorrent klient att välja mappen med de ursprungliga filerna du delar eftersom ladda ner vägen';
 $lang['INVALID_ANN_URL'] = 'Ogiltiga Announce URL [%s]<br /><br />must vara <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kunde inte lägga passkey<br /><br />Torrent som inte är registrerade på tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Kunde inte lägga till nyckel (passkey är tom)<br /><br />Go att <a href="%s" target="_blank"><b>your forum profile</b></a> och generera det';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'skapa en ny';
 $lang['BT_PASSKEY_VIEW'] = 'visa';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Själv';
 $lang['SEEDING'] = 'Frö';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registrerade';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
