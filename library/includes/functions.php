@@ -1223,7 +1223,7 @@ function get_user_torrent_client(string $peer_id): mixed
     ];
 
     $bestMatchLength = 0;
-    $peer_id = htmlCHR($peer_id);
+
     foreach ($clients as $key => $clientName) {
         if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
             $bestMatch = $clientName;
