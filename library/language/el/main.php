@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent έχετε εγγραφεί στο tracker<br /><br />Now θα πρέπει να <a href="%s"><b>download σας torrent</b></a> και να το εκτελέσετε χρησιμοποιώντας το BitTorrent πελάτη επιλέγοντας το φάκελο με τα πρωτότυπα αρχεία που μοιράζεστε, όπως η λήψη διαδρομή';
 $lang['INVALID_ANN_URL'] = 'Μη έγκυρη Ανακοινώσει URL [%s]<br /><br />must να <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Δεν θα μπορούσε να προσθέσει passkey<br /><br />Torrent δεν έχετε εγγραφεί στο tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Δεν θα μπορούσε να προσθέσει passkey (κλειδί πρόσβασης είναι κενό)<br /><br />Go να <a href="%s" target="_blank"><b>your φόρουμ profile</b></a> και να δημιουργήσει';
 $lang['BT_PASSKEY'] = 'Κωδικό';
 $lang['BT_GEN_PASSKEY'] = 'δημιουργήστε μια νέα';
 $lang['BT_PASSKEY_VIEW'] = 'εμφάνιση';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Αυτο';
 $lang['SEEDING'] = 'Σπόρων προς σπορά';
 $lang['LEECHING'] = 'Βδέλλα';
 $lang['IS_REGISTERED'] = 'Εγγεγραμμένοι';
-$lang['MAGNET'] = 'Μαγνήτης';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Κατάσταση';
