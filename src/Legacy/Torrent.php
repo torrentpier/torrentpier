@@ -328,6 +328,7 @@ class Torrent
         }
 
         if ($bb_cfg['bt_check_announce_url']) {
+            $announce_urls = [];
             include INC_DIR . '/torrent_announce_urls.php';
 
             $ann = $tor['announce'] ?? '';
@@ -337,6 +338,7 @@ class Torrent
                 $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
                 self::torrent_error_exit($msg);
             }
+            unset($announce_urls);
         }
 
         $info = $tor['info'] ?? [];
@@ -553,18 +555,27 @@ class Torrent
             $tor['announce'] = $announce;
         }
 
+        // Get additional announce urls
+        $additional_announce_urls = $announce_urls_add = [];
+        include INC_DIR . '/torrent_announce_urls.php';
+
+        foreach ($additional_announce_urls as $additional_announce_url) {
+            $announce_urls_add[] = [$additional_announce_url];
+        }
+        unset($additional_announce_urls);
+
         // Delete all additional urls
         if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
             unset($tor['announce-list']);
         } elseif (isset($tor['announce-list'])) {
-            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]]);
+            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]], $announce_urls_add);
         }
 
         // Add retracker
         if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
                 if (!isset($tor['announce-list'])) {
-                    $tor['announce-list'] = [[$announce], [$bb_cfg['tracker']['retracker_host']]];
+                    $tor['announce-list'] = [[$announce], $announce_urls_add, [$bb_cfg['tracker']['retracker_host']]];
                 } else {
                     $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
                 }
