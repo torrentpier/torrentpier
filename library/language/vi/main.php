@@ -1065,7 +1065,6 @@ $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent đăng ký trên tracker<br /><br />Now bạn cần phải <a href="%s"><b>download của torrent</b></a> và chạy, nó sử dụng BitTorrent khách hàng chọn các thư mục, với các tập tin ban đầu anh đang chia sẻ như tải đường';
 $lang['INVALID_ANN_URL'] = 'Không hợp lệ thông Báo URL [%s]<br /><br />must được <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Không thể thêm passkey<br /><br />Torrent không đăng ký trên theo dõi';
-$lang['PASSKEY_ERR_EMPTY'] = 'Không thể thêm mật mã (mật mã là trống)<br /><br />Go để <a href="%s" target="_blank"><b>your diễn đàn profile</b></a> và tạo ra nó';
 $lang['BT_PASSKEY'] = 'Mật mã';
 $lang['BT_GEN_PASSKEY'] = 'tạo ra một new';
 $lang['BT_PASSKEY_VIEW'] = '!';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Tự';
 $lang['SEEDING'] = 'Giống';
 $lang['LEECHING'] = 'Con đỉa';
 $lang['IS_REGISTERED'] = 'Đăng ký';
-$lang['MAGNET'] = 'Nam châm';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tình trạng';
