@@ -330,7 +330,7 @@ class Torrent
         if ($bb_cfg['bt_check_announce_url']) {
             include INC_DIR . '/torrent_announce_urls.php';
 
-            $ann = isset($tor['announce']) ? $tor['announce'] : '';
+            $ann = $tor['announce'] ?? '';
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
             if (!$ann || !\in_array($ann, $announce_urls)) {
@@ -339,7 +339,7 @@ class Torrent
             }
         }
 
-        $info = isset($tor['info']) ? $tor['info'] : [];
+        $info = $tor['info'] ?? [];
 
         if (!isset($info['name'], $info['piece length'])) {
             self::torrent_error_exit($lang['TORFILE_INVALID']);
