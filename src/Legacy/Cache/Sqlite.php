@@ -20,6 +20,7 @@ class Sqlite extends Common
     public $used = true;
     public $db;
     public $prefix;
+    public $engine = 'SQLite';
     public $cfg = [
         'db_file_path' => '/path/to/cache.db.sqlite',
         'table_name' => 'cache',
