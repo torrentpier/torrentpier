@@ -178,7 +178,6 @@ if (!$group_id) {
         $emailer->set_template('group_request', $moderator['user_lang']);
         $emailer->assign_vars([
             'USER' => $userdata['username'],
-            'SITENAME' => $bb_cfg['sitename'],
             'GROUP_MODERATOR' => $moderator['username'],
             'U_GROUP' => make_url(GROUP_URL . $group_id)
         ]);
@@ -234,7 +233,6 @@ if (!$group_id) {
 
                 $emailer->set_template('group_added', $row['user_lang']);
                 $emailer->assign_vars([
-                    'SITENAME' => $bb_cfg['sitename'],
                     'GROUP_NAME' => $group_info['group_name'],
                     'U_GROUP' => make_url(GROUP_URL . $group_id)
                 ]);
@@ -293,7 +291,6 @@ if (!$group_id) {
 
                         $emailer->set_template('group_approved', $row['user_lang']);
                         $emailer->assign_vars([
-                            'SITENAME' => $bb_cfg['sitename'],
                             'GROUP_NAME' => $group_info['group_name'],
                             'U_GROUP' => make_url(GROUP_URL . $group_id)
                         ]);

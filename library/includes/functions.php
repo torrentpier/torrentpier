@@ -679,7 +679,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
     if (!$cookie && isset($_COOKIE[$var_name])) {
-        if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
+        if (!isset($_GET[$var_name], $_POST[$var_name])) {
             return (is_array($default)) ? [] : $default;
         }
         $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
@@ -787,7 +787,21 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
     return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
 }
 
-function generate_user_info($row, bool $group_mod = false): array
+/**
+ * Convert special characters to HTML entities
+ *
+ * @param $txt
+ * @param bool $double_encode
+ * @param int $quote_style
+ * @param ?string $charset
+ * @return string
+ */
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
+{
+    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
+}
+
+function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
     global $userdata, $lang, $images, $bb_cfg;
 
@@ -798,7 +812,7 @@ function generate_user_info($row, bool $group_mod = false): array
     $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
-    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod || ($row['user_id'] == $userdata['user_id'])) {
+    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == $userdata['user_id'])) {
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
@@ -1171,6 +1185,71 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
     }
 
     return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+}
+
+/**
+ * Get user's torrent client string
+ *
+ * @param string $peer_id
+ * @return mixed|string
+ */
+function get_user_torrent_client(string $peer_id): mixed
+{
+    static $icons_extension = '.png';
+    static $clients = [
+        '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',
+        '-BE' => 'BitTorrent SDK', '-BI' => 'BiglyBT', '-BL' => 'BitLord', '-BT' => 'BitTorrent',
+        '-CT' => 'CTorrent', '-DE' => 'Deluge', '-FD' => 'Free Download Manager', 'FD6' => 'Free Download Manager',
+        '-FG' => 'FlashGet', '-FL' => 'Folx', '-HL' => 'Halite', '-KG' => 'KGet',
+        '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent', '-MG' => 'MediaGet',
+        '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => "uTorrent",
+        '-UW' => "uTorrent Web", '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
+        '-PI' => 'PicoTorrent', '-qB' => 'qBittorrent', 'M' => 'BitTorrent', 'MG' => 'MediaGet',
+        'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',
+        /**
+         * ================================ Other ================================
+         * '-BB' => 'BitBuddy', '-AR' => 'Arctic', '-AT' => 'Artemis', '-AV' => 'Avicora',
+         * '-AX' => 'BitPump', '-BB' => 'BitBuddy', '-AD' => 'Advanced Download Manager', '-BF' => 'BitFlu',
+         * '-BG' => 'BTGetit', '-BH' => 'BitZilla', '-BM' => 'BitMagnet', '-BN' => 'Baidu Netdisk',
+         * '-BOW' => 'Bits on Wheels', '-BP' => 'BitTorrent Pro (Azureus + Spyware)', '-BR' => 'BitRocket', '-BS' => 'BTSlave',
+         * '-BW' => 'BitTorrent Web', '-BX' => 'BittorrentX', '-CD' => 'Enhanced CTorrent', '-DP' => 'Propagate Data Client',
+         * '-EB' => 'EBit', '-ES' => 'Electric Sheep', '-FC' => 'FileCroc', '-HN' => 'Hydranode',
+         * '-FT' => 'FoxTorrent/RedSwoosh', '-FW' => 'FrostWire', '-FX' => 'Freebox', '-G3' => 'G3 Torrent',
+         * '-GR' => 'GetRight', '-GS' => 'GSTorrent', '-HK' => 'Hekate', '-LW' => 'LimeWire',
+         * '-LC' => 'LeechCraft', '-LH' => 'LH-ABC', '-LP' => 'Lphant', '-UE' => "uTorrent Embedded",
+         * '-UL' => 'uLeecher!', '-TS' => 'Torrentstorm', '-TT' => 'TuoTu', '-MK' => 'Meerkat',
+         * '-ML' => 'MLDonkey', '-MO' => 'MonoTorrent', '-MP' => 'MooPolice', '-MR' => 'Miro',
+         * '-MT' => 'Moonlight', '-NE' => 'BT Next Evolution', '-NX' => 'Net Transport', '-OS' => 'OneSwarm', '-OT' => 'OmegaTorrent',
+         * '-PD' => 'Pando', '-PI' => 'PicoTorrent', '-QD' => 'QQDownload', '-QT' => 'QT 4 Torrent example',
+         * '-RS' => 'Rufus', '-RT' => 'Retriever', '-RZ' => 'RezTorrent', '-SB' => 'Swiftbit',
+         * '-SD' => 'Thunder', '-SM' => 'SoMud', '-SP' => 'BitSpirit', '-SS' => 'SwarmScope',
+         * '-ST' => 'SymTorrent', '-SZ' => 'Shareaza', '-S~' => 'Shareaza', '-TB' => 'Torch Browser',
+         * '-TN' => 'Torrent .NET', '-WY' => 'FireTorrent', '-XC' => 'Xtorrent', '-XF' => 'Xfplay',
+         * '-VG' => 'Vagaa', '-WS' => 'HTTP Seed', '-WT' => 'BitLet', '-WT-' => 'BitLet',
+         * '-XS' => 'XSwifter', '-XT' => 'XanTorrent', '-XX' => 'Xtorrent', '-ZO' => 'Zona',
+         * '-ZT' => 'Zip Torrent', '-bk' => 'BitKitten (libtorrent)', '-lt' => 'libTorrent (Rakshasa)', '-pb' => 'pbTorrent', 'Mbrst' => 'burst!',
+         * '-st' => 'SharkTorrent', '346-' => 'TorrentTopia', 'AZ2500BT' => 'BitTyrant (Azureus Mod)', 'BLZ' => 'Blizzard Downloader',
+         * 'DNA' => 'BitTorrent DNA', 'FD6' => 'Free Download Manager 6', 'LIME' => 'Limewire', 'Pando' => 'Pando',
+         * 'Plus' => 'Plus!', 'Q' => 'Queen Bee', 'QVOD' => 'QVOD', 'S3' => 'Amazon S3',
+         * 'btpd' => 'BT Protocol Daemon', 'eX' => 'eXeem', 'martini' => 'Martini Man',
+         * =======================================================================
+         **/
+    ];
+
+    $bestMatchLength = 0;
+
+    foreach ($clients as $key => $clientName) {
+        if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
+            $bestMatch = $clientName;
+            $bestMatchLength = strlen($key);
+        }
+    }
+
+    if (!empty($bestMatch)) {
+        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/' . $bestMatch . '.png" alt="' . $bestMatch . '" title="' . $peer_id . '">';
+    } else {
+        return $peer_id;
+    }
 }
 
 function birthday_age($date)
@@ -1572,6 +1651,11 @@ function print_confirmation($tpl_vars)
         'CONFIRM_TITLE' => $lang['CONFIRM'],
         'FORM_METHOD' => 'post'
     ]);
+
+    if (!isset($tpl_vars['QUESTION'])) {
+        $tpl_vars['QUESTION'] = $lang['QUESTION'];
+    }
+
     $template->assign_vars($tpl_vars);
 
     print_page('common.tpl');
@@ -1779,7 +1863,11 @@ function decode_text_match($txt)
  */
 function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name): string
 {
-    global $bb_cfg, $images;
+    global $bb_cfg, $images, $lang;
+
+    if (!$bb_cfg['magnet_links_enabled']) {
+        return false;
+    }
 
     // Only for registered users
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
@@ -1799,7 +1887,7 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key, 
         $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
     }
 
-    return '<a href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    return '<a title="' . $lang['MAGNET'] . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
@@ -2076,5 +2164,5 @@ function user_birthday_icon($user_birthday, $user_id): string
     $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
         ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
-    return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
+    return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
 }

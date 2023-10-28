@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Mesaj idi uğurla çıxarılır.';
 $lang['POLL_DELETE'] = 'Sizin sorğu uğurla silindi.';
 $lang['VOTE_CAST'] = 'Səs verilib.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Mövzu Haqqında Bildiriş Cavab';
 $lang['EMOTICONS'] = 'İfadeler';
 $lang['MORE_EMOTICONS'] = 'Bax daha çox ifadeler';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Uğursuz qeydiyyatdan torrent azn tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Digər torrent ilə eyni info_hash artıq <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Aradan qaldırılması tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent qeydiyyata alınmamış';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent qeydə azn tracker<br /><br />Now lazımdır <a href="%s"><b>download sizin torrent</b></a> və run və onun vasitəsilə sizin torrent-müştəri seçilməsi qovluq mənbəyi faylları, siz share, bir yol kimi yukle';
 $lang['INVALID_ANN_URL'] = 'Yanlış Məlumat URL-ünvanı [%s]<br /><br />must ola <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Heç bir əlavə edə passkey<br /><br />Torrent deyil qeydə tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Heç bir əlavə edə bilər şifrə (parol boş)<br /><br />Go bu <a href="%s" target="_blank"><b>your forum profile</b></a> yaratmaq və onun';
 $lang['BT_PASSKEY'] = 'Jimmy';
 $lang['BT_GEN_PASSKEY'] = 'yarat yeni';
 $lang['BT_PASSKEY_VIEW'] = 'göstərmək';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Собственн';
 $lang['SEEDING'] = 'Toxum';
 $lang['LEECHING'] = 'Zəli';
 $lang['IS_REGISTERED'] = 'Qeydə';
-$lang['MAGNET'] = 'Maqnit';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusu';
@@ -1545,6 +1544,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Sürət küç';
 $lang['DL_DL_SPEED'] = 'Sürət dl';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Tərkibi: Dolu/TorrentSize';
 $lang['DL_ULR'] = 'URL-ünvanı';
 $lang['DL_STOPPED'] = 'dayandırdı';
@@ -2371,7 +2371,7 @@ $lang['TEMPLATE_DISABLE'] = 'Şablon aradan';
 $lang['FOR_NEW_TEMPLATE'] = 'yeni model!';
 $lang['CHANGED'] = 'Dəyişib';
 $lang['REMOVED'] = 'Xaric';
-$lang['QUESTION'] = 'Siz əminik ki, silmək istəyirəm?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Siyahısı хрон';
 $lang['CRON_ID'] = 'İdentifikatoru';
@@ -2820,7 +2820,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'İstifadəçi qrupuna qoşulmaq üçün sorğunuz təmin edildi',
     'GROUP_REQUEST' => 'İstifadəçi qrupunuza qoşulmaq üçün sorğu',
     'PRIVMSG_NOTIFY' => 'Yeni şəxsi mesaj',
-    'TOPIC_NOTIFY' => 'Mövzuda cavab bildirişi %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Hesabın yenidən aktivləşdirilməsi',
     'USER_ACTIVATE_PASSWD' => 'Yeni parol təsdiqlənir',
     'USER_WELCOME' => 'Sayta xoş gəlmisiniz %s',

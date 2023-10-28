@@ -311,7 +311,7 @@ if ($t_data['topic_show_first_post'] && $start) {
 			u.user_regdate, u.user_sig,
 			u.avatar_ext_id,
 			u.user_opt, u.user_gender, u.user_birthday,
-			p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
+			p.*, g.group_name, g.group_description, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 			u2.username as mc_username, u2.user_rank as mc_user_rank,
 			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 		FROM      " . BB_POSTS . " p
@@ -332,7 +332,7 @@ $sql = "
 		u.user_regdate, u.user_sig,
 		u.avatar_ext_id,
 		u.user_opt, u.user_gender, u.user_birthday,
-		p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
+		p.*, g.group_name, g.group_description, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 		u2.username as mc_username, u2.user_rank as mc_user_rank,
 		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 	FROM      " . BB_POSTS . " p
@@ -573,10 +573,11 @@ for ($i = 0; $i < $total_posts; $i++) {
     $mc_comment = $postrow[$i]['mc_comment'];
     $mc_user_id = profile_url(['username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']]);
 
-    $rg_id = ($postrow[$i]['poster_rg_id']) ?: 0;
+    $rg_id = $postrow[$i]['poster_rg_id'] ?: 0;
     $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
-    $rg_name = ($postrow[$i]['group_name']) ? htmlCHR($postrow[$i]['group_name']) : '';
-    $rg_signature = ($postrow[$i]['group_signature']) ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
+    $rg_name = $postrow[$i]['group_name'] ? htmlCHR($postrow[$i]['group_name']) : '';
+    $rg_desc = $postrow[$i]['group_description'] ? bbcode2html(htmlCHR($postrow[$i]['group_description'])) : '';
+    $rg_signature = $postrow[$i]['group_signature'] ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
 
     $poster_avatar = '';
     if (!$user->opt_js['h_av'] && $poster_id != GUEST_UID) {
@@ -587,7 +588,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $user_rank = $postrow[$i]['user_rank'];
     if (!$user->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
         $rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
-        $poster_rank = ($bb_cfg['show_rank_text']) ? $ranks[$user_rank]['rank_title'] : '';
+        $poster_rank = $bb_cfg['show_rank_text'] ? $ranks[$user_rank]['rank_title'] : '';
     }
 
     // Handle anon users posting with usernames
@@ -731,6 +732,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
         'RG_AVATAR' => $rg_avatar,
         'RG_NAME' => $rg_name,
+        'RG_DESC' => $rg_desc,
         'RG_URL' => GROUP_URL . $rg_id,
         'RG_FIND_URL' => 'tracker.php?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,

@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Jūsų pranešimas buvo ištrintas sėkmingai.';
 $lang['POLL_DELETE'] = 'Jūsų apklausa buvo ištrintas sėkmingai.';
 $lang['VOTE_CAST'] = 'Jūsų balsas buvo dauguma.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Atsakymo Tema Pranešimas';
 $lang['EMOTICONS'] = 'Emocijos';
 $lang['MORE_EMOTICONS'] = 'Peržiūrėti daugiau Šypsenėlių';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Nepavyko užsiregistruoti torrent dėl tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Kita torrent su pačiu info_hash jau <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Pašalinti iš tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistruotas';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registruotų tracker<br /><br />Now jums reikia <a href="%s"><b>download jūsų torrent</b></a> ir paleisti jį naudojant BitTorrent klientas pasirinkus aplanką su pirminiu failus bendrinate, kaip atsisiųsti kelias';
 $lang['INVALID_ANN_URL'] = 'Neteisingas Paskelbti URL [%s]<br /><br />must būti <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Negalėjo pridėti passkey<br /><br />Torrent ne registruotų tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Negalėjo pridėti prieigos raktas (prieigos raktas yra tuščias)<br /><br />Go į <a href="%s" target="_blank"><b>your forume profile</b></a> ir kurti ją';
 $lang['BT_PASSKEY'] = 'Prieigos raktas';
 $lang['BT_GEN_PASSKEY'] = 'kurti naują';
 $lang['BT_PASSKEY_VIEW'] = 'rodyti';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Savarankiškai';
 $lang['SEEDING'] = 'Sėklos';
 $lang['LEECHING'] = 'Dėlės';
 $lang['IS_REGISTERED'] = 'Registruotas';
-$lang['MAGNET'] = 'Magnetas';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusas';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL greitis';
 $lang['DL_DL_SPEED'] = 'DL greitis';
 $lang['DL_PORT'] = 'Uostas';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formulė: Upload/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'sustojo';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Šablonas neįgaliesiems';
 $lang['FOR_NEW_TEMPLATE'] = 'nauji modeliai!';
 $lang['CHANGED'] = 'Keisti';
 $lang['REMOVED'] = 'Pašalinti';
-$lang['QUESTION'] = 'Ar jūs tikrai norite ištrinti?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron sąrašą';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Jūsų prašymas prisijungti prie vartotojų grupės buvo patenkintas',
     'GROUP_REQUEST' => 'Prašymas prisijungti prie jūsų vartotojų grupės',
     'PRIVMSG_NOTIFY' => 'Nauja asmenine žinute',
-    'TOPIC_NOTIFY' => 'Pranešimas apie atsakymą gijoje %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Paskyros aktyvinimas iš naujo',
     'USER_ACTIVATE_PASSWD' => 'Naujo slaptažodžio patvirtinimas',
     'USER_WELCOME' => 'Sveiki atvykę į svetainę %s',

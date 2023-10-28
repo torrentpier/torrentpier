@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Il tuo messaggio è stato cancellato con successo.';
 $lang['POLL_DELETE'] = 'Il sondaggio è stato eliminato con successo.';
 $lang['VOTE_CAST'] = 'Il tuo voto è stato gettato.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Argomento Notifica Di Risposta';
 $lang['EMOTICONS'] = 'Emoticon';
 $lang['MORE_EMOTICONS'] = 'Visualizza altre Emoticon';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Non si potrebbe registrare sui tracker torrent';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un altro torrent con lo stesso info_hash già <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Togliere dal tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent non registrati';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrati su tracker<br /><br />Now è necessario <a href="%s"><b>download tuo torrent</b></a> ed eseguire utilizzando il vostro client BitTorrent scegliere la cartella con i file originali con cui stai condividendo il percorso di download';
 $lang['INVALID_ANN_URL'] = 'Voci di Annunciare URL [%s]<br /><br />must essere <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Non poteva aggiungere passkey<br /><br />Torrent non registrato sul tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Non poteva aggiungere la chiave di accesso (password vuota)<br /><br />Go per <a href="%s" target="_blank"><b>your forum profile</b></a> e generare';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'creare un nuovo';
 $lang['BT_PASSKEY_VIEW'] = 'mostra';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Auto';
 $lang['SEEDING'] = 'Seme';
 $lang['LEECHING'] = 'Sanguisuga';
 $lang['IS_REGISTERED'] = 'Registrati';
-$lang['MAGNET'] = 'Magnete';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Stato';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL velocità';
 $lang['DL_DL_SPEED'] = 'DL velocità';
 $lang['DL_PORT'] = 'Porta';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula: Uploaded/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'arrestato';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Modello di disabili';
 $lang['FOR_NEW_TEMPLATE'] = 'per i nuovi modelli!';
 $lang['CHANGED'] = 'Cambiato';
 $lang['REMOVED'] = 'Rimosso';
-$lang['QUESTION'] = 'Sei sicuro di voler eliminare?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron elenco';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'La tua richiesta di adesione al gruppo utenti è stata accolta',
     'GROUP_REQUEST' => 'Una richiesta per unirti al tuo gruppo di utenti',
     'PRIVMSG_NOTIFY' => 'Nuovo messaggio privato',
-    'TOPIC_NOTIFY' => 'Notifica di risposta nel thread %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Riattivazione dell\'account',
     'USER_ACTIVATE_PASSWD' => 'Conferma di una nuova password',
     'USER_WELCOME' => 'Benvenuto nel sito %s',

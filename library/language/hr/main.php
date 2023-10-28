@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Vaša poruka je uspješno uklonjen.';
 $lang['POLL_DELETE'] = 'Vaše istraživanje je uspješno uklonjen.';
 $lang['VOTE_CAST'] = 'Vaš glas je posudio.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Tema Obavijest O Odgovoru';
 $lang['EMOTICONS'] = 'Smajlići';
 $lang['MORE_EMOTICONS'] = 'Vidjeti više smajlića';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Nije moguće registrirati torrent na adresi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Drugi torrent sa istim info_hash već <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ukloni iz tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrirane';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registriran na tracker<br /><br />Now treba <a href="%s"><b>download vaš torrent</b></a> i pokrenuti ga kroz svoj torrent klijent odaberete mapu s izvornim datotekama dijelite, kao i način preuzimanje';
 $lang['INVALID_ANN_URL'] = 'Neispravno Reći URL [%s]<br /><br />must biti <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Ne bi mogli dodati passkey<br /><br />Torrent nije registriran na adresi';
-$lang['PASSKEY_ERR_EMPTY'] = 'Ne možete dodati lozinku (prazan)<br /><br />Go u <a href="%s" target="_blank"><b>your forum profile</b></a> i generirati njegova';
 $lang['BT_PASSKEY'] = 'Kalauz';
 $lang['BT_GEN_PASSKEY'] = 'napravite novi';
 $lang['BT_PASSKEY_VIEW'] = 'prikaži';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Собственн';
 $lang['SEEDING'] = 'Sjeme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran od';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -1545,6 +1544,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Brzina str';
 $lang['DL_DL_SPEED'] = 'Brzina dl';
 $lang['DL_PORT'] = 'Luka';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula Je: Skinuti/TorrentSize';
 $lang['DL_ULR'] = 'URL adresa';
 $lang['DL_STOPPED'] = 'zaustavljen';
@@ -2371,7 +2371,7 @@ $lang['TEMPLATE_DISABLE'] = 'Uzorak su isključeni';
 $lang['FOR_NEW_TEMPLATE'] = 'za nove modele!';
 $lang['CHANGED'] = 'Promijenilo';
 $lang['REMOVED'] = 'Izbrisati';
-$lang['QUESTION'] = 'Jeste li sigurni da želite ukloniti?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Popis baba';
 $lang['CRON_ID'] = 'Id';
@@ -2820,7 +2820,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Vaš zahtjev za pridruživanje grupi korisnika je odobren',
     'GROUP_REQUEST' => 'Zahtjev za pridruživanje vašoj korisničkoj grupi',
     'PRIVMSG_NOTIFY' => 'Nova privatna poruka',
-    'TOPIC_NOTIFY' => 'Obavijest o odgovoru u temi %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Ponovna aktivacija računa',
     'USER_ACTIVATE_PASSWD' => 'Potvrđivanje nove lozinke',
     'USER_WELCOME' => 'Dobrodošli na stranicu %s',

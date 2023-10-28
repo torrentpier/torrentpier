@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Twoja wiadomość została pomyślnie usunięta.';
 $lang['POLL_DELETE'] = 'Swój sondaż został pomyślnie usunięty.';
 $lang['VOTE_CAST'] = 'Twój głos został oddany.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Temat Powiadomienie O Odpowiedzi';
 $lang['EMOTICONS'] = 'Emotikony';
 $lang['MORE_EMOTICONS'] = 'Zobacz więcej emotikonów';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Nie udało się zarejestrować torrent trackera';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Inny torrent z takim samym info_hash już <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Usuń z trackera';
 $lang['BT_UNREGISTERED'] = 'Torrent niezarejestrowanych';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent zarejestrowany na tracker<br /><br />Now trzeba <a href="%s"><b>download twój torrent</b></a> i uruchomić go przez swój torrent-klient wybierając folder z plikami podzielić, jak droga pobierz';
 $lang['INVALID_ANN_URL'] = 'Nieprawidłowy Poinformować adres URL [%s]<br /><br />must być <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nie mogli by dodać passkey<br /><br />Torrent nie jest zarejestrowany na tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nie może dodać hasło (hasło jest puste)<br /><br />Go w <a href="%s" target="_blank"><b>your forum profile</b></a> i wygenerować go';
 $lang['BT_PASSKEY'] = 'Wytrych';
 $lang['BT_GEN_PASSKEY'] = 'utwórz nowy';
 $lang['BT_PASSKEY_VIEW'] = 'pokaż';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Odnowienie';
 $lang['SEEDING'] = 'Nasion';
 $lang['LEECHING'] = 'Pijawka';
 $lang['IS_REGISTERED'] = 'Zarejestrowany';
-$lang['MAGNET'] = 'Magnes';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -1545,6 +1544,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Prędkość ul';
 $lang['DL_DL_SPEED'] = 'Prędkość dl';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formuła: Załadowany/TorrentSize';
 $lang['DL_ULR'] = 'Adres URL';
 $lang['DL_STOPPED'] = 'zatrzymał się';
@@ -2371,7 +2371,7 @@ $lang['TEMPLATE_DISABLE'] = 'Szablon wyłączone';
 $lang['FOR_NEW_TEMPLATE'] = 'dla nowych modeli!';
 $lang['CHANGED'] = 'Zmieniło';
 $lang['REMOVED'] = 'Usunięte';
-$lang['QUESTION'] = 'Jesteś pewien, że chcesz usunąć?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Lista crona';
 $lang['CRON_ID'] = 'Identyfikator';
@@ -2820,7 +2820,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Twoja prośba o dołączenie do grupy użytkowników została spełniona',
     'GROUP_REQUEST' => 'Prośba o dołączenie do Twojej grupy użytkowników',
     'PRIVMSG_NOTIFY' => 'Nowa wiadomość prywatna',
-    'TOPIC_NOTIFY' => 'Powiadomienie o odpowiedzi w wątku %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Reaktywacja konta',
     'USER_ACTIVATE_PASSWD' => 'Potwierdzanie nowego hasła',
     'USER_WELCOME' => 'Witamy na stronie %s',

@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Mesaj başarıyla silindi.';
 $lang['POLL_DELETE'] = 'Anket başarıyla silindi.';
 $lang['VOTE_CAST'] = 'Oyunuzu olmuştur.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Konu Cevap Bildirimi';
 $lang['EMOTICONS'] = 'İfadeler';
 $lang['MORE_EMOTICONS'] = 'Daha fazla İfade görüntüle';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'İzci torrent kaydedilemedi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Aynı info_hash ile başka bir torrent zaten <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'İzleyiciden Kaldır';
 $lang['BT_UNREGISTERED'] = 'Torrent kayıtsız';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent <a href="%s"><b>download torrent</b></a> ihtiyaç duyduğunuz ve indirme yolu olarak paylaştığınız özgün dosyaları ile klasör seçme BitTorrent istemcisi kullanarak tracker<br /><br />Now kayıtlı';
 $lang['INVALID_ANN_URL'] = 'Geçersiz İlan URL [%s]<br /><br />must <b>%s</b> olmak';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'İzci kayıtlı değil passkey<br /><br />Torrent eklenemedi';
-$lang['PASSKEY_ERR_EMPTY'] = '(Şifre boş)<br /><br />Go için <a href="%s" target="_blank"><b>your forum profile</b></a> şifre ekleyin ve oluşturamadı';
 $lang['BT_PASSKEY'] = 'Geçiş anahtarı';
 $lang['BT_GEN_PASSKEY'] = 'yeni oluştur';
 $lang['BT_PASSKEY_VIEW'] = 'göster';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Kendini';
 $lang['SEEDING'] = 'Tohum';
 $lang['LEECHING'] = 'Sülük';
 $lang['IS_REGISTERED'] = 'Kayıtlı';
-$lang['MAGNET'] = 'Mıknatıs';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Durumu';
@@ -1546,6 +1545,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL hızı';
 $lang['DL_DL_SPEED'] = 'DL hızı';
 $lang['DL_PORT'] = 'Bağlantı noktası';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formül: Yükledi/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'durdu';
@@ -2372,7 +2372,7 @@ $lang['TEMPLATE_DISABLE'] = 'Şablon devre dışı';
 $lang['FOR_NEW_TEMPLATE'] = 'yeni modeller için!';
 $lang['CHANGED'] = 'Değişti';
 $lang['REMOVED'] = 'Kaldırıldı';
-$lang['QUESTION'] = 'Silmek istediğinizden emin misiniz?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron listesi';
 $lang['CRON_ID'] = 'KİMLİĞİ';
@@ -2822,7 +2822,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Kullanıcı grubuna katılma isteğiniz kabul edildi',
     'GROUP_REQUEST' => 'Kullanıcı grubunuza katılma isteği',
     'PRIVMSG_NOTIFY' => 'yeni özel mesaj',
-    'TOPIC_NOTIFY' => 'Konu %syanıt bildirimi',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Hesap yeniden etkinleştirme',
     'USER_ACTIVATE_PASSWD' => 'Yeni bir parolanın onaylanması',
     'USER_WELCOME' => 'siteye hoşgeldiniz %s',

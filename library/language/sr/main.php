@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Ваша порука је успешно обрисана.'
 $lang['POLL_DELETE'] = 'Ваша анкета је успешно уклоњен.';
 $lang['VOTE_CAST'] = 'Ваш глас је био дат.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Тема Обавештење О Одговору';
 $lang['EMOTICONS'] = 'Смајлији';
 $lang['MORE_EMOTICONS'] = 'Да видите више смајлија';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Не могу да се региструју на тор
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Други торент са истим info_hash већ <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Уклоните из трацкер';
 $lang['BT_UNREGISTERED'] = 'Торрент нерегистрованих';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Торрент регистровано на tracker<br /><br />Now треба <a href="%s"><b>download ваш torrent</b></a> и покрените га кроз свој торрент клијент изабрати фолдер са изворним датотекама можете да делите, као што је пут довнлоад';
 $lang['INVALID_ANN_URL'] = 'Погрешан Извештај УРЛ адреса [%s]<br /><br />must бити <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Не могу да додам passkey<br /><br />Torrent није регистрован на хттп трацкер';
-$lang['PASSKEY_ERR_EMPTY'] = 'Не може додати лозинку (лозинка празна)<br /><br />Go у <a href="%s" target="_blank"><b>your форум profile</b></a> и генерисати га';
 $lang['BT_PASSKEY'] = 'Кључ скелет';
 $lang['BT_GEN_PASSKEY'] = 'креирајте нови';
 $lang['BT_PASSKEY_VIEW'] = 'показати';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Собственн';
 $lang['SEEDING'] = 'Семена';
 $lang['LEECHING'] = 'Пијавице';
 $lang['IS_REGISTERED'] = 'Регистрован';
-$lang['MAGNET'] = 'Магнет';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'Дл';
 $lang['DL_UL_SPEED'] = 'Брзина ст';
 $lang['DL_DL_SPEED'] = 'Брзина дл';
 $lang['DL_PORT'] = 'Лука';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Формула: Напуњен/TorrentSize';
 $lang['DL_ULR'] = 'УРЛ адреса';
 $lang['DL_STOPPED'] = 'престао';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Образац искључени';
 $lang['FOR_NEW_TEMPLATE'] = 'за нове моделе!';
 $lang['CHANGED'] = 'Променило';
 $lang['REMOVED'] = 'Уклонити';
-$lang['QUESTION'] = 'Да ли сте сигурни да желите да избришете?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Списак хрон';
 $lang['CRON_ID'] = 'Ид';
@@ -2817,7 +2817,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Ваш захтев да се придружите корисничкој групи је одобрен',
     'GROUP_REQUEST' => 'Захтев за придруживање вашој корисничкој групи',
     'PRIVMSG_NOTIFY' => 'Нова приватна порука',
-    'TOPIC_NOTIFY' => 'Обавештење о одговору у нити %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Поновно активирање налога',
     'USER_ACTIVATE_PASSWD' => 'Потврђивање нове лозинке',
     'USER_WELCOME' => 'Добродошли на сајт %s',

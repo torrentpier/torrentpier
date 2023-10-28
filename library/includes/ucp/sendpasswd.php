@@ -55,7 +55,6 @@ if (isset($_POST['submit'])) {
 
             $emailer->set_template('user_activate_passwd', $row['user_lang']);
             $emailer->assign_vars([
-                'SITENAME' => $bb_cfg['sitename'],
                 'USERNAME' => $username,
                 'PASSWORD' => $user_password,
                 'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)

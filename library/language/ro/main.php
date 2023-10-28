@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Mesajul a fost șters cu succes.';
 $lang['POLL_DELETE'] = 'Sondajul a fost șters cu succes.';
 $lang['VOTE_CAST'] = 'Votul tău a fost aruncat.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Subiect Răspuns Notificare';
 $lang['EMOTICONS'] = 'Emoticoane';
 $lang['MORE_EMOTICONS'] = 'Vezi mai multe Emoticoane';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Nu ar putea înregistra torrent pe tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un alt torrent cu același info_hash deja <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Eliminați de la tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neînregistrate';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent înregistrate pe tracker<br /><br />Now aveți nevoie pentru a <a href="%s"><b>download ta torrent</b></a> și rulați-l folosind BitTorrent client alegerea folder cu fișierele originale sunteți de partajare ca calea de descărcare';
 $lang['INVALID_ANN_URL'] = 'Invalid Anunța URL [%s]<br /><br />must fi <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nu ar putea adăuga passkey<br /><br />Torrent înregistrat pe tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nu ar putea adăuga cheie de acces (passkey este gol)<br /><br />Go să <a href="%s" target="_blank"><b>your forum profile</b></a> și de a genera o';
 $lang['BT_PASSKEY'] = 'Cheia de acces';
 $lang['BT_GEN_PASSKEY'] = 'creați un nou';
 $lang['BT_PASSKEY_VIEW'] = 'show';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Auto';
 $lang['SEEDING'] = 'Semințe';
 $lang['LEECHING'] = 'Lipitoare';
 $lang['IS_REGISTERED'] = 'Înregistrați';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Starea';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL viteză';
 $lang['DL_DL_SPEED'] = 'Viteza de DL';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula: Încărcat/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'oprit';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Șablon cu handicap';
 $lang['FOR_NEW_TEMPLATE'] = 'pentru noile modele!';
 $lang['CHANGED'] = 'S-a schimbat';
 $lang['REMOVED'] = 'Eliminat';
-$lang['QUESTION'] = 'Ești sigur că doriți să ștergeți?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Solicitarea dvs. de a vă alătura grupului de utilizatori a fost acceptată',
     'GROUP_REQUEST' => 'O solicitare de a vă alătura grupului dvs. de utilizatori',
     'PRIVMSG_NOTIFY' => 'Mesaj privat nou',
-    'TOPIC_NOTIFY' => 'Notificarea răspunsului în firul %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Reactivarea contului',
     'USER_ACTIVATE_PASSWD' => 'Confirmarea unei noi parole',
     'USER_WELCOME' => 'Bun venit pe site-ul %s',

@@ -496,6 +496,8 @@ class Post
         $post_text_values = "$post_id, '$post_text'";
 
         DB()->query("INSERT INTO " . BB_POSTS_TEXT . " ($post_text_columns) VALUES ($post_text_values)");
+
+        DB()->query("UPDATE " . BB_USERS . " SET user_posts = user_posts + 1 WHERE user_id = $poster_id");
     }
 
     /**

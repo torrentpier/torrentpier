@@ -262,7 +262,8 @@ if ($tor_reged && $tor_info) {
                     'cdown' => 'tr.downloaded',
                     'sup' => 'tr.speed_up',
                     'sdown' => 'tr.speed_down',
-                    'time' => 'tr.update_time'
+                    'time' => 'tr.update_time',
+                    'peer_id' => 'tr.peer_id',
                 ];
 
                 foreach ($peer_orders as $get_key => $order_by_value) {
@@ -288,7 +289,7 @@ if ($tor_reged && $tor_info) {
 				LIMIT $show_peers_limit";
         } else {
             $sql = "SELECT
-					tr.user_id, tr.ip, tr.port, tr.uploaded, tr.downloaded, tr.remain,
+					tr.user_id, tr.ip, tr.port, tr.peer_id, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
 					tr.complete_percent, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr
@@ -443,6 +444,7 @@ if ($tor_reged && $tor_info) {
                     $template->assign_block_vars("$x_full.$x_row", [
                         'ROW_BGR' => $row_bgr,
                         'NAME' => ($peer['update_time']) ? $name : "<s>$name</s>",
+                        'PEER_ID' => isset($peer['peer_id']) ? get_user_torrent_client($peer['peer_id']) : 'unknown',
                         'COMPL_PRC' => $compl_perc,
                         'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>$up_tot</b>" : $up_tot,
                         'DOWN_TOTAL' => ($max_down_id[$x] == $pid) ? "<b>$down_tot</b>" : $down_tot,

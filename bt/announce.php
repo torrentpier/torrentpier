@@ -58,7 +58,7 @@ if (!isset($peer_id)) {
     msg_die('peer_id was not provided');
 }
 if (strlen($peer_id) !== 20) {
-    msg_die('Invalid peer_id: ' . bin2hex($peer_id));
+    msg_die('Invalid peer_id: ' . $peer_id);
 }
 
 // Verify info_hash
@@ -68,6 +68,9 @@ if (!isset($info_hash)) {
 
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
+
+// Store peer id
+$peer_id_sql = rtrim(DB()->escape(htmlCHR($peer_id)), ' ');
 
 // Check info_hash version
 if (strlen($info_hash) === 32) {
@@ -123,6 +126,7 @@ $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
 // Peer unique id
 $peer_hash = hash('xxh128', rtrim($info_hash, ' ') . $passkey . $ip . $port);
+
 // Events
 $stopped = ($event === 'stopped');
 
@@ -296,7 +300,7 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (isset($is_hybrid, $hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only for one topic
+if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only for one topic
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
@@ -316,6 +320,7 @@ if (isset($is_hybrid, $hybrid_tor_update) || !isset($is_hybrid)) { // Update sta
         $sql .= ", speed_down = $speed_down";
 
         $sql .= ", complete = $complete";
+        $sql .= ", peer_id = '$peer_id_sql'";
 
         $sql .= " WHERE peer_hash = '$peer_hash'";
         $sql .= " LIMIT 1";
@@ -326,8 +331,8 @@ if (isset($is_hybrid, $hybrid_tor_update) || !isset($is_hybrid)) { // Update sta
     }
 
     if (!$lp_info || !$peer_info_updated) {
-        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete';
-        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete";
+        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id';
+        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";
 
         DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
     }
@@ -362,32 +367,26 @@ if (!$output) {
     $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
 
     $rowset = DB()->fetch_rowset("
-		SELECT ip, port
-		FROM " . BB_BT_TRACKER . "
-		WHERE topic_id = $topic_id
-		ORDER BY RAND()
-		LIMIT $numwant
-	");
+        SELECT ip, port
+        FROM " . BB_BT_TRACKER . "
+        WHERE topic_id = $topic_id
+        ORDER BY seeder ASC, RAND()
+        LIMIT $numwant
+    ");
 
     if (empty($rowset)) {
-        $rowset[] = ['ip' => $ip, 'port' => $port];
+        $rowset[] = ['ip' => \TorrentPier\Helpers\IPHelper::ip2long($ip), 'port' => (int)$port];
     }
 
     if ($compact_mode) {
 
-    $peers = '';
-    $peers6 = '';
+        $peers = '';
+        $peers6 = '';
 
         foreach ($rowset as $peer) {
-            $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
-            $ip_endian = inet_pton($ip) . pack('n', $peer['port']);
-
-            if (\TorrentPier\Helpers\IPHelper::isValidv6($ip)) {
-                $peers6 .= $ip_endian;
-            }
-            else{
-                $peers .= $ip_endian;
-            }
+            $peer_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
+            $peer_ip_endian = inet_pton($peer_ip) . pack('n', $peer['port']);
+            \TorrentPier\Helpers\IPHelper::isValidv6($peer_ip) ? ($peers6 .= $peer_ip_endian) : ($peers .= $peer_ip_endian);
         }
     } else {
         $peers = [];
@@ -426,9 +425,10 @@ if (!$output) {
     }
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
-    $output['external ip'] = inet_pton($ip);
-    $output['warning message'] = 'Statistics were updated';
 }
+
+$output['external ip'] = inet_pton($ip);
+$output['warning message'] = 'Statistics were updated';
 
 // Return data to client
 echo \Arokettu\Bencode\Bencode::encode($output);

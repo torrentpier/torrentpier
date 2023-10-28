@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Vaša správa bola úspešne odstránený.';
 $lang['POLL_DELETE'] = 'Váš prieskum bol úspešne odstránený.';
 $lang['VOTE_CAST'] = 'Váš hlas bol obsadený.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Téma Odpoveď Oznámenie';
 $lang['EMOTICONS'] = 'Emotikony';
 $lang['MORE_EMOTICONS'] = 'Zobraziť viac Smajlíkov';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Nemohol zaregistrovať torrent na tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Ďalší torrent s rovnakým info_hash už <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Odstrániť z tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrovaný';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrované na tracker<br /><br />Now potrebujete <a href="%s"><b>download vaše torrent</b></a> a spustite ho pomocou svojho BitTorrent klient výber priečinka s pôvodným súborom zdieľate ako stiahnuť cesta';
 $lang['INVALID_ANN_URL'] = 'Neplatné Oznámiť URL [%s]<br /><br />must byť <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nemohol pridať passkey<br /><br />Torrent nie je registrovaná na tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nemohol pridať univerzálny kľúč (kľúče je prázdny)<br /><br />Go na <a href="%s" target="_blank"><b>your fórum profile</b></a> a generovanie to';
 $lang['BT_PASSKEY'] = 'Univerzálny kľúč';
 $lang['BT_GEN_PASSKEY'] = 'vytvoriť nový';
 $lang['BT_PASSKEY_VIEW'] = 'zobraziť';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Samostatne';
 $lang['SEEDING'] = 'Semeno';
 $lang['LEECHING'] = 'Pijavice';
 $lang['IS_REGISTERED'] = 'Registrovaná';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Stav';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL rýchlosť';
 $lang['DL_DL_SPEED'] = 'DL rýchlosť';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Vzorec: Nahrané/TorrentSize';
 $lang['DL_ULR'] = 'Adresa URL';
 $lang['DL_STOPPED'] = 'zastavil';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Šablóny zakázané';
 $lang['FOR_NEW_TEMPLATE'] = 'pre nové vzory!';
 $lang['CHANGED'] = 'Zmeniť';
 $lang['REMOVED'] = 'Odstrániť';
-$lang['QUESTION'] = 'Ste si istí, že chcete zmazať?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron zoznam';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Vaša žiadosť o pripojenie sa k skupine používateľov bola schválená',
     'GROUP_REQUEST' => 'Žiadosť o pripojenie k vašej skupine používateľov',
     'PRIVMSG_NOTIFY' => 'Nová súkromná správa',
-    'TOPIC_NOTIFY' => 'Oznámenie o odpovedi vo vlákne %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Opätovná aktivácia účtu',
     'USER_ACTIVATE_PASSWD' => 'Potvrdenie nového hesla',
     'USER_WELCOME' => 'Vitajte na stránke %s',

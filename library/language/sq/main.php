@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Mesazhi juaj ka qenë fshirë me sukses.';
 $lang['POLL_DELETE'] = 'Tuaj të opinionit ka qenë fshirë me sukses.';
 $lang['VOTE_CAST'] = 'Votën tuaj ka qenë i hedhur.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Temë Përgjigje Të Njoftimit';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Shiko më shumë Emoticons';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Nuk mund të regjistrohen në përrua tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Një tjetër torrent me të njëjtën info_hash tashmë <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hiqni nga tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent paregjistruara';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent regjistruar në tracker<br /><br />Now ju duhet të <a href="%s"><b>download tuaj torrent</b></a> dhe drejtuar atë tuaj duke përdorur klient BitTorrent zgjedhur dosje me origjinale fotografi ju jeni ndarë si rrugën shkarko';
 $lang['INVALID_ANN_URL'] = 'Të Shpallë të pavlefshme URL [%s]<br /><br />must të <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nuk mund të shtoni passkey<br /><br />Torrent nuk janë të regjistruara në tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nuk mund të shtoni passkey (passkey është e zbrazët)<br /><br />Go të <a href="%s" target="_blank"><b>your forum profile</b></a> dhe të gjenerojë atë';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'krijo një të ri';
 $lang['BT_PASSKEY_VIEW'] = 'tregojnë';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Vetë';
 $lang['SEEDING'] = 'Farë';
 $lang['LEECHING'] = 'Gjaku';
 $lang['IS_REGISTERED'] = 'Regjistruar';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusi';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL shpejtësinë';
 $lang['DL_DL_SPEED'] = 'DL shpejtësi';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula: Uploaded/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'u ndal';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Template me aftësi të kufizuara';
 $lang['FOR_NEW_TEMPLATE'] = 'për modelet e reja!';
 $lang['CHANGED'] = 'Ndryshuar';
 $lang['REMOVED'] = 'Hiqen';
-$lang['QUESTION'] = 'A jeni i sigurt se doni të fshini?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Kërkesa juaj për t\'u bashkuar me grupin e përdoruesve është pranuar',
     'GROUP_REQUEST' => 'Një kërkesë për t\'u bashkuar me grupin tuaj të përdoruesve',
     'PRIVMSG_NOTIFY' => 'Mesazh i ri privat',
-    'TOPIC_NOTIFY' => 'Njoftimi i përgjigjes në temën %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Riaktivizimi i llogarisë',
     'USER_ACTIVATE_PASSWD' => 'Konfirmimi i një fjalëkalimi të ri',
     'USER_WELCOME' => 'Mirë se vini në faqen %s',

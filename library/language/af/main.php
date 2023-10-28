@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Jou boodskap is suksesvol verwyder.';
 $lang['POLL_DELETE'] = 'Jou poll is suksesvol verwyder.';
 $lang['VOTE_CAST'] = 'Jou stem is gegooi.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Onderwerp Antwoord Kennisgewing';
 $lang['EMOTICONS'] = 'emoticons';
 $lang['MORE_EMOTICONS'] = 'Wys meer Emoticons';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Kon nie torrent op spoorsnoer registreer nie';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent geregistreer op tracker<br /><br /> Nou moet jy <a href="%s"><b>download jou torrent</b></a> en hardloop dit met jou BitTorrent-kliënt om die gids te kies met die oorspronklike lêers wat jy deel as die aflaaipad';
 $lang['INVALID_ANN_URL'] = 'Ongeldige aanmelding URL [%s]<br /><br /> moet wees <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kon nie passkey<br /><br />Torrent voeg nie op spoorsnyer geregistreer';
-$lang['PASSKEY_ERR_EMPTY'] = 'Kon nie passkey byvoeg nie (wagwoord is leeg) <br /><br />Gaan na <a href="%s" target="_blank"><b>jou forumprofiel</b></a> en genereer dit';
 $lang['BT_PASSKEY'] = 'sleutel';
 $lang['BT_GEN_PASSKEY'] = 'Skep \'n nuwe';
 $lang['BT_PASSKEY_VIEW'] = 'Wys';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'saad';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'geregistreer';
-$lang['MAGNET'] = 'Magnet';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'status';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL spoed';
 $lang['DL_DL_SPEED'] = 'DL spoed';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formule: Opgelaai / TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'gestop';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Sjabloon gedeaktiveer';
 $lang['FOR_NEW_TEMPLATE'] = 'Vir nuwe patrone!';
 $lang['CHANGED'] = 'verander';
 $lang['REMOVED'] = 'verwyder';
-$lang['QUESTION'] = 'Is jy seker dat jy wil verwyder?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lys';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Jou versoek om by die gebruikersgroep aan te sluit is toegestaan',
     'GROUP_REQUEST' => '\'n Versoek om by jou gebruikersgroep aan te sluit',
     'PRIVMSG_NOTIFY' => 'Nuwe privaat boodskap',
-    'TOPIC_NOTIFY' => 'Kennisgewing van reaksie in die draad %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Rekening heraktivering',
     'USER_ACTIVATE_PASSWD' => 'Bevestiging van \'n nuwe wagwoord',
     'USER_WELCOME' => 'Welkom by die webwerf %s',

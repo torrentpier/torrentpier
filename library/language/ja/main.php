@@ -379,7 +379,6 @@ $lang['DELETED'] = 'メッセージが削除されています。';
 $lang['POLL_DELETE'] = 'ご投票が削除されています。';
 $lang['VOTE_CAST'] = 'あなたの投票をしています。';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = '話題の返信通知';
 $lang['EMOTICONS'] = '絵文字';
 $lang['MORE_EMOTICONS'] = 'ありが絵文字';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'な登録激流にトラッカー';
 $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = '激流に登録されtracker<br /><br />Nowに必要なもの<a href="%s"><b>downloadおtorrent</b></a>とでご利用BitTorrentトを選択するフォルダのファイルだけを共有してダウンロードパス';
 $lang['INVALID_ANN_URL'] = '無効なURLを発表[%s]<br /><br />mustする<b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'な追加passkey<br /><br />Torrent登録されていないにトラッカー';
-$lang['PASSKEY_ERR_EMPTY'] = 'なの追加パスキー(パスキーは空）<br /><br />Goに<a href="%s" target="_blank"><b>yourフォーラムprofile</b></a>を作成で';
 $lang['BT_PASSKEY'] = 'パスキー';
 $lang['BT_GEN_PASSKEY'] = '新規作成し';
 $lang['BT_PASSKEY_VIEW'] = 'ショー';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = '自己';
 $lang['SEEDING'] = '種子';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = '登録';
-$lang['MAGNET'] = '磁石';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状況';
@@ -1546,6 +1545,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL速度';
 $lang['DL_DL_SPEED'] = 'DL速度';
 $lang['DL_PORT'] = '港';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = '式：掲載/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = '停止';
@@ -2372,7 +2372,7 @@ $lang['TEMPLATE_DISABLE'] = 'テンプレートを無効';
 $lang['FOR_NEW_TEMPLATE'] = '新しいパターンです！';
 $lang['CHANGED'] = '変更';
 $lang['REMOVED'] = '除';
-$lang['QUESTION'] = 'はいを削除したいのか？';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cronのリスト';
 $lang['CRON_ID'] = 'ID';
@@ -2820,7 +2820,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'ユーザーグループへの参加リクエストが承認されました',
     'GROUP_REQUEST' => 'ユーザーグループへの参加リクエスト',
     'PRIVMSG_NOTIFY' => '新しいプライベート メッセージ',
-    'TOPIC_NOTIFY' => 'スレッド %sでの応答の通知',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'アカウントの再開',
     'USER_ACTIVATE_PASSWD' => '新しいパスワードの確認',
     'USER_WELCOME' => 'サイトへようこそ %s',

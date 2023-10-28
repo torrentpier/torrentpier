@@ -379,7 +379,6 @@ $lang['DELETED'] = 'ההודעה שלך נמחקה בהצלחה.';
 $lang['POLL_DELETE'] = 'את הסקר נמחק בהצלחה.';
 $lang['VOTE_CAST'] = 'ההצבעה שלך כבר יצוקים.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'נושא הודעת תגובה';
 $lang['EMOTICONS'] = 'סמלי הבעה.';
 $lang['MORE_EMOTICONS'] = 'להציג יותר סמלי הבעה.';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'לא יכול לרשום סיקור על טראקר';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'עוד סיקור עם אותו info_hash כבר <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'הסר מ-tracker';
 $lang['BT_UNREGISTERED'] = 'סיקור לא רשומים';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'סיקור רשום על tracker<br /><br />Now אתה צריך <a href="%s"><b>download שלך torrent</b></a> ולהפעיל אותו באמצעות ביטורנט שלך הלקוח בוחר את התיקייה עם הקבצים המקוריים את שיתוף כמו בנתיב ההורדה';
 $lang['INVALID_ANN_URL'] = 'חוקי להכריז URL [%s]<br /><br />must להיות <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'לא יכול להוסיף passkey<br /><br />Torrent לא רשום על tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'לא יכול להוסיף את המפתח (המפתח הוא ריק)<br /><br />Go כדי <a href="%s" target="_blank"><b>your פורום profile</b></a> ולהפיק את זה';
 $lang['BT_PASSKEY'] = 'המפתח';
 $lang['BT_GEN_PASSKEY'] = 'ליצור חדש.';
 $lang['BT_PASSKEY_VIEW'] = 'להראות';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'עצמית';
 $lang['SEEDING'] = 'זרע';
 $lang['LEECHING'] = 'עלוקה';
 $lang['IS_REGISTERED'] = 'רשום';
-$lang['MAGNET'] = 'מגנט';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'סטטוס';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL מהירות';
 $lang['DL_DL_SPEED'] = 'DL מהירות';
 $lang['DL_PORT'] = 'נמל';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'הנוסחה: Uploaded/TorrentSize';
 $lang['DL_ULR'] = 'כתובת';
 $lang['DL_STOPPED'] = 'הפסיקה';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'תבנית נכים';
 $lang['FOR_NEW_TEMPLATE'] = 'עבור תבניות חדשות!';
 $lang['CHANGED'] = 'שינה';
 $lang['REMOVED'] = 'הוסר';
-$lang['QUESTION'] = 'האם אתה בטוח שברצונך למחוק?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron הרשימה';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'בקשתך להצטרף לקבוצת המשתמשים התקבלה',
     'GROUP_REQUEST' => 'בקשה להצטרף לקבוצת המשתמשים שלך',
     'PRIVMSG_NOTIFY' => 'הודעה פרטית חדשה',
-    'TOPIC_NOTIFY' => 'הודעה על תגובה בשרשור %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'הפעלה מחדש של החשבון',
     'USER_ACTIVATE_PASSWD' => 'אישור סיסמה חדשה',
     'USER_WELCOME' => 'ברוכים הבאים לאתר %s',

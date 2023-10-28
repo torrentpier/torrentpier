@@ -379,7 +379,6 @@ $lang['DELETED'] = 'Tin nhắn của bạn đã bị xóa thành công.';
 $lang['POLL_DELETE'] = 'Bạn thăm dò đã bị xóa thành công.';
 $lang['VOTE_CAST'] = 'Phiếu của bạn đã được đúc.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Chủ Đề Trả Lời Thông Báo';
 $lang['EMOTICONS'] = 'Biểu tượng cảm xúc';
 $lang['MORE_EMOTICONS'] = 'Xem nhiều cảm Xúc';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = 'Không thể đăng ký torrent trên theo dõi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Một torrent với cùng một info_hash đã <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Bỏ từ theo dõi';
 $lang['BT_UNREGISTERED'] = 'Torrent không đăng ký';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent đăng ký trên tracker<br /><br />Now bạn cần phải <a href="%s"><b>download của torrent</b></a> và chạy, nó sử dụng BitTorrent khách hàng chọn các thư mục, với các tập tin ban đầu anh đang chia sẻ như tải đường';
 $lang['INVALID_ANN_URL'] = 'Không hợp lệ thông Báo URL [%s]<br /><br />must được <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Không thể thêm passkey<br /><br />Torrent không đăng ký trên theo dõi';
-$lang['PASSKEY_ERR_EMPTY'] = 'Không thể thêm mật mã (mật mã là trống)<br /><br />Go để <a href="%s" target="_blank"><b>your diễn đàn profile</b></a> và tạo ra nó';
 $lang['BT_PASSKEY'] = 'Mật mã';
 $lang['BT_GEN_PASSKEY'] = 'tạo ra một new';
 $lang['BT_PASSKEY_VIEW'] = '!';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = 'Tự';
 $lang['SEEDING'] = 'Giống';
 $lang['LEECHING'] = 'Con đỉa';
 $lang['IS_REGISTERED'] = 'Đăng ký';
-$lang['MAGNET'] = 'Nam châm';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tình trạng';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL tốc độ';
 $lang['DL_DL_SPEED'] = 'DL tốc độ';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Công Thức:/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'dừng lại';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mẫu vô hiệu hóa';
 $lang['FOR_NEW_TEMPLATE'] = 'cho mô hình mới!';
 $lang['CHANGED'] = 'Thay đổi';
 $lang['REMOVED'] = 'Bỏ';
-$lang['QUESTION'] = 'Anh có chắc muốn xóa?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Định kỳ danh sách';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Yêu cầu tham gia nhóm người dùng của bạn đã được cấp',
     'GROUP_REQUEST' => 'Yêu cầu tham gia nhóm người dùng của bạn',
     'PRIVMSG_NOTIFY' => 'Tin nhắn riêng mới',
-    'TOPIC_NOTIFY' => 'Thông báo phản hồi trong chủ đề %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'kích hoạt lại tài khoản',
     'USER_ACTIVATE_PASSWD' => 'Xác nhận mật khẩu mới',
     'USER_WELCOME' => 'Chào mừng đến với trang web %s',

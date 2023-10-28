@@ -379,7 +379,6 @@ $lang['DELETED'] = '귀하의 메시지가 성공적으로 삭제되었음을 �
 $lang['POLL_DELETE'] = '설문조사에 성공적으로 삭제되었음을 안내합니다.';
 $lang['VOTE_CAST'] = '투표를 캐스팅 되었습니다.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = '주제에는 답변 알림';
 $lang['EMOTICONS'] = '이모티콘';
 $lang['MORE_EMOTICONS'] = '보기 더 이모티콘';
 
@@ -1062,10 +1061,10 @@ $lang['BT_REG_FAIL'] = '등록 할 수 있 토렌트에 추적';
 $lang['BT_REG_FAIL_SAME_HASH'] = '다른 토렌트 같은 info_hash 이미 <a href="%s"><b>registered</b></a>';
 $lang['BT_UNREG_FROM_TRACKER'] = '제거에서 추적';
 $lang['BT_UNREGISTERED'] = 'Torrent 등록';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = '토렌트에 등록된 tracker<br /><br />Now 당신이 필요하 <a href="%s"><b>download 의 torrent</b></a> 를 사용하여 실행하 슬라이 폴더를 선택으로 원본 파일 공유하고 있으로 경로를 다운로드';
 $lang['INVALID_ANN_URL'] = '잘못된 발표 URL[%s]<br /><br />must 수 <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = '에 추가할 수 없습 passkey<br /><br />Torrent 에 등록되지 않 추적';
-$lang['PASSKEY_ERR_EMPTY'] = '을 추가할 수 없습니다 암호(암호는 비어)<br /><br />Go 을 <a href="%s" target="_blank"><b>your 포럼 profile</b></a> 및 생성';
 $lang['BT_PASSKEY'] = '암호';
 $lang['BT_GEN_PASSKEY'] = '새로 만들고';
 $lang['BT_PASSKEY_VIEW'] = '보';
@@ -1083,7 +1082,7 @@ $lang['RELEASING'] = '셀프';
 $lang['SEEDING'] = '씨';
 $lang['LEECHING'] = '니';
 $lang['IS_REGISTERED'] = '등록';
-$lang['MAGNET'] = '석';
+$lang['MAGNET'] = 'Magnet-link';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '상태';
@@ -1542,6 +1541,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL 속도';
 $lang['DL_DL_SPEED'] = 'DL 속도';
 $lang['DL_PORT'] = '트';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = '공식:에 업로드/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = '을 중지';
@@ -2368,7 +2368,7 @@ $lang['TEMPLATE_DISABLE'] = '템플릿화';
 $lang['FOR_NEW_TEMPLATE'] = '에 대한 새로운 패턴!';
 $lang['CHANGED'] = '변경';
 $lang['REMOVED'] = '제거';
-$lang['QUESTION'] = '확신하고 싶은 삭제 하시겠습니까?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron 목록';
 $lang['CRON_ID'] = 'ID';
@@ -2816,7 +2816,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => '사용자 그룹 가입 요청이 승인되었습니다.',
     'GROUP_REQUEST' => '사용자 그룹 가입 요청',
     'PRIVMSG_NOTIFY' => '새 비공개 메시지',
-    'TOPIC_NOTIFY' => '스레드 %s의 응답 알림',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => '계정 재활성화',
     'USER_ACTIVATE_PASSWD' => '새 비밀번호 확인',
     'USER_WELCOME' => '사이트에 오신 것을 환영합니다 %s',
