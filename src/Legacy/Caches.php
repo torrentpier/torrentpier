@@ -41,7 +41,6 @@ class Caches
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
-
                     case 'sqlite':
                         if (!isset($this->obj[$cache_name])) {
                             $cache_cfg['pconnect'] = $this->cfg['pconnect'];
@@ -51,26 +50,12 @@ class Caches
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
-
-                    case 'db_sqlite':
-                        if (!isset($this->obj[$cache_name])) {
-                            $cache_cfg['pconnect'] = $this->cfg['pconnect'];
-                            $cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '.sqlite.db');
-                            $cache_cfg['table_name'] = $cache_name;
-                            $cache_cfg['table_schema'] = $this->get_table_schema($cache_cfg);
-
-                            $this->obj[$cache_name] = new Cache\SqliteCommon($cache_cfg);
-                        }
-                        $this->ref[$cache_name] =& $this->obj[$cache_name];
-                        break;
-
                     case 'redis':
                         if (!isset($this->obj[$cache_name])) {
                             $this->obj[$cache_name] = new Cache\Redis($this->cfg['redis'], $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
-
                     case 'filecache':
                     default:
                         if (!isset($this->obj[$cache_name])) {
@@ -92,10 +77,5 @@ class Caches
         }
 
         return $this->cfg['db_dir'] . $name . $ext;
-    }
-
-    public function get_table_schema($cfg)
-    {
-        return "CREATE TABLE {$cfg['table_name']} ( {$cfg['columns']} )";
     }
 }

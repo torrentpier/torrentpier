@@ -787,6 +787,20 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
     return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
 }
 
+/**
+ * Convert special characters to HTML entities
+ *
+ * @param $txt
+ * @param bool $double_encode
+ * @param int $quote_style
+ * @param ?string $charset
+ * @return string
+ */
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
+{
+    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
+}
+
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
     global $userdata, $lang, $images, $bb_cfg;
