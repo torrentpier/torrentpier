@@ -9,7 +9,7 @@
 <form method="post" action="{S_MODE_ACTION}">
 <table width="100%">
 <tr>
-	<td align="right" nowrap="nowrap">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;
+	<td align="right" nowrap="nowrap"><!-- IF S_VIEW_SELECT -->{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;<!-- ENDIF -->
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
 	</td>
 </tr>
@@ -60,7 +60,7 @@
 <form method="post" action="{S_MODE_ACTION}">
 	<table width="100%">
 	<tr>
-	  <td align="right" nowrap="nowrap"><span class="med">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;
+	  <td align="right" nowrap="nowrap"><span class="med"><!-- IF S_VIEW_SELECT -->{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;<!-- ENDIF -->
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
 		</span></td>
 	</tr>
@@ -133,7 +133,7 @@
 	<table width="100%">
 	<tr>
 	  <td align="right" nowrap="nowrap">
-		<span class="med">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
+		<span class="med"><!-- IF S_VIEW_SELECT -->{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;<!-- ENDIF -->{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
 		</span>
 	  </td>
@@ -191,7 +191,7 @@
 <table width="100%">
 	<tr>
 		<td align="right" nowrap="nowrap">
-			<span class="med">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
+			<span class="med"><!-- IF S_VIEW_SELECT -->{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;<!-- ENDIF -->{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
 				<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
 			</span>
 		</td>
