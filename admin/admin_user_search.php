@@ -868,7 +868,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $pagination = '';
 
     if ($page > 1) {
-        $pagination .= '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page - 1) . '">' . $lang['PREVIOUS'] . '</a>';
+        $pagination .= '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page - 1) . '">' . $lang['BACK'] . '</a>';
     }
     if ($page < $num_pages) {
         $pagination .= ($pagination == '') ? '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>' : ' | <a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>';
