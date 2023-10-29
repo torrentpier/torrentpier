@@ -85,7 +85,7 @@ if ($view === 'username') {
     }
 } elseif ($view === 'attachments') {
     switch ($mode) {
-        case 'filename':
+        case 'real_filename':
             $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
             break;
         case 'comment':
@@ -114,18 +114,19 @@ if ($view === 'username') {
 // Set select fields
 $view_types_text = [$lang['VIEW_STATISTIC'], $lang['VIEW_SEARCH']];
 $view_types = ['stats', 'search'];
+$select_view = '';
 
-$select_view = '<select name="view">';
-
-for ($i = 0, $iMax = count($view_types_text); $i < $iMax; $i++) {
-    $selected = ($view === $view_types[$i]) ? ' selected' : '';
-    $select_view .= '<option value="' . $view_types[$i] . '"' . $selected . '>' . $view_types_text[$i] . '</option>';
+if (in_array($view, $view_types)) {
+    $select_view = '<select name="view">';
+    for ($i = 0, $iMax = count($view_types_text); $i < $iMax; $i++) {
+        $selected = ($view === $view_types[$i]) ? ' selected' : '';
+        $select_view .= '<option value="' . $view_types[$i] . '"' . $selected . '>' . $view_types_text[$i] . '</option>';
+    }
+    $select_view .= '</select>';
 }
-$select_view .= '</select>';
 
-if (count($mode_types_text) > 0) {
+if (count($mode_types_text) > 0 && !empty($mode_types)) {
     $select_sort_mode = '<select name="mode">';
-
     for ($i = 0, $iMax = count($mode_types_text); $i < $iMax; $i++) {
         $selected = ($mode === $mode_types[$i]) ? ' selected' : '';
         $select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';
@@ -172,7 +173,7 @@ if ($confirm && count($delete_id_list) > 0) {
 // Assign Default Template Vars
 $template->assign_vars([
     'S_VIEW_SELECT' => $select_view,
-    'S_MODE_ACTION' => 'admin_attach_cp.php',
+    'S_MODE_ACTION' => 'admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid
 ]);
 
 if ($submit_change && $view === 'attachments') {
