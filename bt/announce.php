@@ -30,7 +30,7 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
 if (strpos($_SERVER['REQUEST_URI'], 'scrape') !== false) {
     msg_die('Please disable SCRAPE!');
 }
-if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key]) || strlen($_GET[$passkey_key]) !== BT_AUTH_KEY_LENGTH) {
+if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key])) {
     msg_die('Please LOG IN and RE-DOWNLOAD this torrent (passkey not found)');
 }
 
@@ -92,9 +92,6 @@ if (!isset($downloaded) || $downloaded < 0) {
 }
 if (!isset($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
-}
-if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
-    msg_die('Invalid passkey: ' . $passkey);
 }
 
 // IP

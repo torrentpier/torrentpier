@@ -1188,10 +1188,10 @@ function get_user_torrent_client(string $peer_id): mixed
         '-CT' => 'CTorrent', '-DE' => 'Deluge', '-FD' => 'Free Download Manager', 'FD6' => 'Free Download Manager',
         '-FG' => 'FlashGet', '-FL' => 'Folx', '-HL' => 'Halite', '-KG' => 'KGet',
         '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent', '-MG' => 'MediaGet',
-        '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => "uTorrent",
-        '-UW' => "uTorrent Web", '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
+        '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => 'uTorrent',
+        '-UW' => 'uTorrent Web', '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
         '-PI' => 'PicoTorrent', '-qB' => 'qBittorrent', 'M' => 'BitTorrent', 'MG' => 'MediaGet',
-        'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',
+        '-MG' => 'MediaGet', 'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',
         /**
          * ================================ Other ================================
          * '-BB' => 'BitBuddy', '-AR' => 'Arctic', '-AT' => 'Artemis', '-AV' => 'Avicora',
@@ -1233,9 +1233,10 @@ function get_user_torrent_client(string $peer_id): mixed
 
     if (!empty($bestMatch)) {
         return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/' . $bestMatch . '.png" alt="' . $bestMatch . '" title="' . $peer_id . '">';
-    } else {
-        return $peer_id;
     }
+
+    return $peer_id;
+
 }
 
 function birthday_age($date)
