@@ -524,6 +524,7 @@ switch ($mode) {
 				WHERE p.topic_id = $topic_id
 					AND p.poster_id = u.user_id
 					AND p.post_id = pt.post_id
+					AND p.poster_id != " . BOT_UID . "
 				ORDER BY p.post_time ASC";
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not get topic / post information');

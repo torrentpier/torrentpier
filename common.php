@@ -265,6 +265,20 @@ function clean_filename($fname)
 }
 
 /**
+ * Convert special characters to HTML entities
+ *
+ * @param $txt
+ * @param bool $double_encode
+ * @param int $quote_style
+ * @param ?string $charset
+ * @return string
+ */
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
+{
+    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
+}
+
+/**
  * @param string $str
  * @return string
  */

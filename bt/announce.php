@@ -70,7 +70,7 @@ if (!isset($info_hash)) {
 $info_hash_hex = bin2hex($info_hash);
 
 // Store peer id
-$peer_id_sql = rtrim(DB()->escape(htmlspecialchars($peer_id, ENT_QUOTES, 'UTF-8', false)), ' ');
+$peer_id_sql = rtrim(DB()->escape(htmlCHR($peer_id)), ' ');
 
 // Check info_hash version
 if (strlen($info_hash) === 32) {
