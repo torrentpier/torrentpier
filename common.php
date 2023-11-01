@@ -102,7 +102,7 @@ define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
 
-define('BT_AUTH_KEY_LENGTH', 10);
+define('BT_AUTH_KEY_LENGTH', 20);
 
 define('DL_STATUS_RELEASER', -1);
 define('DL_STATUS_DOWN', 0);
@@ -297,9 +297,14 @@ function str_compact($str)
  */
 function make_rand_str($length = 10): string
 {
-    $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $pool = str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
-    return substr(str_shuffle(str_repeat($pool, (int)$length)), 0, $length);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $pool[random_int(0, 61)];
+    }
+
+    return $randomString;
 }
 
 function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)

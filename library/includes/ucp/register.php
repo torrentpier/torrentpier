@@ -534,7 +534,7 @@ if ($submit && !$errors) {
      */
     if ($mode == 'register') {
         if ($bb_cfg['reg_email_activation']) {
-            $user_actkey = make_rand_str(ACTKEY_LENGHT);
+            $user_actkey = make_rand_str(ACTKEY_LENGTH);
             $db_data['user_active'] = 0;
             $db_data['user_actkey'] = $user_actkey;
         } else {
@@ -597,7 +597,7 @@ if ($submit && !$errors) {
         // если что-то было изменено
         if ($db_data) {
             if (!$pr_data['user_active']) {
-                $user_actkey = make_rand_str(ACTKEY_LENGHT);
+                $user_actkey = make_rand_str(ACTKEY_LENGTH);
                 $pr_data['user_actkey'] = $user_actkey;
                 $db_data['user_actkey'] = $user_actkey;
 

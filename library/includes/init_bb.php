@@ -262,7 +262,7 @@ define('SHOW_PEERS_NAMES', 2);
 define('SHOW_PEERS_FULL', 3);
 
 define('SEARCH_ID_LENGTH', 12);
-define('ACTKEY_LENGHT', 32);
+define('ACTKEY_LENGTH', 32);
 define('SID_LENGTH', 20);
 define('LOGIN_KEY_LENGTH', 32);
 define('USERNAME_MIN_LENGTH', 3);
