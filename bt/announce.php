@@ -122,7 +122,7 @@ if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
 // Peer unique id
-$peer_hash = hash('xxh128', rtrim($info_hash, ' ') . $passkey . $ip . $port);
+$peer_hash = hash('xxh128', $passkey . $info_hash_hex);
 
 // Events
 $stopped = ($event === 'stopped');
@@ -372,7 +372,7 @@ if (!$output) {
     ");
 
     if (empty($rowset)) {
-        $rowset[] = ['ip' => \TorrentPier\Helpers\IPHelper::ip2long($ip), 'port' => (int)$port];
+        $rowset[] = ['ip' => $ip_sql, 'port' => (int)$port];
     }
 
     if ($compact_mode) {
