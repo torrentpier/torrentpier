@@ -67,7 +67,7 @@ if (!isset($info_hash)) {
 }
 
 // Store info hash in hex format
-$info_hash_hex = bin2hex($info_hash);
+$info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
 
 // Store peer id
 $peer_id_sql = rtrim(DB()->escape(htmlCHR($peer_id)), ' ');
@@ -436,9 +436,11 @@ if (!$output) {
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
         'downloaded' => (int)$client_completed,
-        'peers' => $peers,
     ];
 
+    if (!empty($peers)) {
+        $output['peers'] = $peers;
+    }
     if (!empty($peers6)) {
         $output['peers6'] = $peers6;
     }
