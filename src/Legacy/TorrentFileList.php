@@ -132,7 +132,7 @@ class TorrentFileList
      * @param string $name
      * @return string
      */
-    public function fileTreeList(array $array, string $name = ''): string
+    public function fileTreeList($array, string $name = ''): string
     {
         $folders = [];
         $rootFiles = [];
