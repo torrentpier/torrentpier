@@ -88,7 +88,7 @@ class Ajax
 
         // Exit if board is disabled via ON/OFF trigger or by admin
         if ($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) {
-            if ($action_params[1] !== true) {
+            if (!isset($action_params[1]) || $action_params[1] !== true) {
                 if ($bb_cfg['board_disable']) {
                     $this->ajax_die($lang['BOARD_DISABLE']);
                 } elseif (file_exists(BB_DISABLED)) {
