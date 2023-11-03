@@ -285,7 +285,7 @@ class Ajax
      * @param string $mode
      * @return mixed|string
      */
-    function debug_find_source(string $mode = 'all'): mixed
+    public function debug_find_source(string $mode = 'all'): mixed
     {
         if (empty($_COOKIE['explain'])) {
             return 'src disabled';
