@@ -132,6 +132,9 @@ $peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
 // Events
 $stopped = ($event === 'stopped');
 
+// Get the real port to help NAT users
+$port = $_SERVER['REMOTE_PORT'];
+
 // Set seeder & complete
 $complete = $seeder = ($left == 0) ? 1 : 0;
 
