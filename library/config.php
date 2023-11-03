@@ -524,7 +524,7 @@ $bb_cfg['poll_max_days'] = 180; // сколько дней с момента с�
 
 $bb_cfg['allow_change'] = [
     'language' => true,
-    'dateformat' => true,
+    'timezone' => true
 ];
 
 $bb_cfg['trash_forum_id'] = 0; // (int) 7

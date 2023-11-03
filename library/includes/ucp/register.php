@@ -105,7 +105,7 @@ switch ($mode) {
             'user_lang' => $bb_cfg['allow_change']['language'],
             'user_gender' => $bb_cfg['gender'],
             'user_birthday' => $bb_cfg['birthday_enabled'],
-            'user_timezone' => true,
+            'user_timezone' => $bb_cfg['allow_change']['timezone'],
             'user_opt' => true,
             'avatar_ext_id' => true,
             'user_icq' => true,
@@ -276,9 +276,9 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Часовой пояс (edit, reg)
          */
         case 'user_timezone':
-            $user_timezone = isset($_POST['user_timezone']) ? (int)$_POST['user_timezone'] : $pr_data['user_timezone'];
+            $user_timezone = isset($_POST['user_timezone']) ? (float)$_POST['user_timezone'] : (float)$pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
-                if (isset($lang['TZ'][$user_timezone])) {
+                if (isset($lang['TZ'][str_replace(',', '.', $user_timezone)])) {
                     $pr_data['user_timezone'] = $user_timezone;
                     $db_data['user_timezone'] = $user_timezone;
                 }
@@ -663,7 +663,6 @@ $template->assign_vars([
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
-    'USER_TIMEZONE' => $pr_data['user_timezone'],
 
     'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], humn_size($bb_cfg['avatars']['max_size'])),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
