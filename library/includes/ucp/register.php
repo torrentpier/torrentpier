@@ -663,7 +663,6 @@ $template->assign_vars([
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
-    'USER_TIMEZONE' => $pr_data['user_timezone'],
 
     'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], humn_size($bb_cfg['avatars']['max_size'])),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
