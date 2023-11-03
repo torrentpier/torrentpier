@@ -386,7 +386,6 @@ class Torrent
         }
 
         $totallen = 0;
-
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
         } elseif ($bt_v1 && isset($info['files']) && \is_array($info['files'])) {
@@ -397,7 +396,7 @@ class Torrent
                 }
             }
         } elseif ($bt_v2) {
-            $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
+            $fileTreeSize = function ($array, string $name = '') use (&$fileTreeSize) {
                 $size = 0;
 
                 foreach ($array as $key => $value) {
