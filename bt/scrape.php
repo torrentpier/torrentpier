@@ -42,56 +42,56 @@ if (strlen($info_hash) == 32) {
 
 // Handle multiple hashes
 
-preg_match_all('/info_hash=([^&]*)/i', $_SERVER["QUERY_STRING"], $info_hash_array);
+preg_match_all('/info_hash=([^&]*)/i', $_SERVER['QUERY_STRING'], $info_hash_array);
 
-    $torrents = [];
-    $info_hashes = [];
+$torrents = [];
+$info_hashes = [];
 
-    foreach ($info_hash_array[1] as $hash) {
+foreach ($info_hash_array[1] as $hash) {
 
-        $decoded_hash = urldecode($hash);
+    $decoded_hash = urldecode($hash);
 
-        if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
-            $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
-        }
-        else{
-            $info_hashes[] = '\''. DB()->escape(($decoded_hash)) . '\'';
-        }
+    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
+        $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
+    }
+    else{
+        $info_hashes[] = '\''. DB()->escape(($decoded_hash)) . '\'';
+    }
+}
+
+$info_hash_count = count($info_hashes);
+
+if (!empty($info_hash_count)) {
+
+    if ($info_hash_count > $bb_cfg['max_scrapes']) {
+      $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
     }
 
-    $info_hash_count = count($info_hashes);
+    $info_hashes_sql = 'tor.info_hash' . ' IN ( ' . implode(', ', $info_hashes). ' )';
+    $sql = "
+        SELECT tor.info_hash, tor.complete_count, snap.seeders, snap.leechers
+        FROM " . BB_BT_TORRENTS . " tor
+        LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
+        WHERE $info_hashes_sql
+        LIMIT $info_hash_count
+    ";
 
-    if (!empty($info_hash_count)) {
+    $rowset = DB()->fetch_rowset($sql);
 
-        if ($info_hash_count > $bb_cfg['max_scrapes']) {
-          $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
-        }
-
-        $info_hashes_sql = 'tor.info_hash' . ' IN ( ' . implode(', ', $info_hashes). ' )';
-        $sql = "
-            SELECT tor.info_hash, tor.complete_count, snap.seeders, snap.leechers
-            FROM " . BB_BT_TORRENTS . " tor
-            LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
-            WHERE $info_hashes_sql
-            LIMIT $info_hash_count
-        ";
-
-        $rowset = DB()->fetch_rowset($sql);
-
-        if (count($rowset) > 0) {
-            foreach ($rowset as $scrapes) {
-                $torrents['files'][$scrapes['info_hash']] = [
-                    'complete' => (int)$scrapes['seeders'],
-                    'downloaded' => (int)$scrapes['complete_count'],
-                    'incomplete' => (int)$scrapes['leechers']
-                ];
-                CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($scrapes['info_hash']), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
-            }
+    if (!empty($rowset)) {
+        foreach ($rowset as $scrapes) {
+            $torrents['files'][$scrapes['info_hash']] = [
+                'complete' => (int)$scrapes['seeders'],
+                'downloaded' => (int)$scrapes['complete_count'],
+                'incomplete' => (int)$scrapes['leechers']
+            ];
+            CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($scrapes['info_hash']), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
         }
     }
+}
 
-    if (empty($torrents)) {
-        msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
-    }
+if (empty($torrents)) {
+    msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
+}
 
-    die(\Arokettu\Bencode\Bencode::encode($torrents));
+die(\Arokettu\Bencode\Bencode::encode($torrents));
