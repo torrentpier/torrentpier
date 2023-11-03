@@ -95,7 +95,8 @@ $bb_cfg['gzip_compress'] = false; // compress output
 
 // Tracker
 $bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
-$bb_cfg['scrape_interval'] = 60; // Scrape interval (default: 60)
+$bb_cfg['scrape_interval'] = 100; // Scrape interval (default: 100)
+$bb_cfg['max_scrapes'] = 20; // Allowed number of info-hashes for simultaneous scraping (default: 20)
 $bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
