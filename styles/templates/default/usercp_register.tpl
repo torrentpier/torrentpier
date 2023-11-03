@@ -53,6 +53,7 @@
       class="tokenized" enctype="multipart/form-data">
     <input type="hidden" name="mode" value="{MODE}"/>
     <input type="hidden" name="reg_agreed" value="1"/>
+    <input type="hidden" name="user_timezone" value="{USER_TIMEZONE}"/>
     <!-- IF NEW_USER --><input type="hidden" name="admin" value="1"/><!-- ENDIF -->
     <!-- IF ADM_EDIT -->
     <input type="hidden" name="u" value="{PR_USER_ID}"/>
