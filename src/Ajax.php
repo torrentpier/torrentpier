@@ -88,7 +88,7 @@ class Ajax
 
         // Exit if board is disabled via ON/OFF trigger or by admin
         if ($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) {
-            if ($action_params[1] !== true) {
+            if (!isset($action_params[1]) || $action_params[1] !== true) {
                 if ($bb_cfg['board_disable']) {
                     $this->ajax_die($lang['BOARD_DISABLE']);
                 } elseif (file_exists(BB_DISABLED)) {
@@ -146,6 +146,13 @@ class Ajax
     {
         $this->response['error_code'] = $error_code;
         $this->response['error_msg'] = strip_tags($error_msg);
+
+        // Get caller info
+        if (!empty($_COOKIE['explain'])) {
+            $ajax_debug = 'ajax die: ' . $this->debug_find_source();
+            $this->response['error_msg'] .= "\n\n" . $ajax_debug;
+            $this->response['console_log'] = $ajax_debug;
+        }
 
         $this->send();
     }
@@ -270,6 +277,33 @@ class Ajax
         if (!$is_auth['auth_mod']) {
             $this->ajax_die($lang['ONLY_FOR_MOD']);
         }
+    }
+
+    /**
+     * Find caller source
+     *
+     * @param string $mode
+     * @return mixed|string
+     */
+    public function debug_find_source(string $mode = 'all'): mixed
+    {
+        if (empty($_COOKIE['explain'])) {
+            return 'src disabled';
+        }
+        foreach (debug_backtrace() as $trace) {
+            if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
+                switch ($mode) {
+                    case 'file':
+                        return $trace['file'];
+                    case 'line':
+                        return $trace['line'];
+                    case 'all':
+                    default:
+                        return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+                }
+            }
+        }
+        return 'src not found';
     }
 
     /**

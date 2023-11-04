@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = '추가';
 $lang['BT_REG_ON_TRACKER'] = '등록에 추적';
 $lang['BT_REG_FAIL'] = '등록 할 수 있 토렌트에 추적';
 $lang['BT_REG_FAIL_SAME_HASH'] = '다른 토렌트 같은 info_hash 이미 <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = '제거에서 추적';
 $lang['BT_UNREGISTERED'] = 'Torrent 등록';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

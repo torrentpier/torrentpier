@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'הוסיף';
 $lang['BT_REG_ON_TRACKER'] = 'לרשום על tracker';
 $lang['BT_REG_FAIL'] = 'לא יכול לרשום סיקור על טראקר';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'עוד סיקור עם אותו info_hash כבר <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'הסר מ-tracker';
 $lang['BT_UNREGISTERED'] = 'סיקור לא רשומים';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

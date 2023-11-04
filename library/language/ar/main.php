@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'وأضاف';
 $lang['BT_REG_ON_TRACKER'] = 'التسجيل في تعقب';
 $lang['BT_REG_FAIL'] = 'لا يمكن تسجيل سيل على تعقب';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'آخر سيل مع نفسه info_hash بالفعل <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'إزالة من تعقب';
 $lang['BT_UNREGISTERED'] = 'سيل غير المسجلين';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

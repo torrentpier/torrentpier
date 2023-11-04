@@ -291,25 +291,6 @@ function go_to_page ()
 <!--/logo-->
 
 <!-- IF LOGGED_IN -->
-<script type="text/javascript">
-ajax.index_data = function(tz) {
-	ajax.exec({
-		action  : 'index_data',
-		mode    : 'change_tz',
-		tz      : tz
-	});
-};
-ajax.callback.index_data = function(data) {};
-$(document).ready(function() {
-	x = new Date();
-	tz = -x.getTimezoneOffset()/60;
-	if (tz != {BOARD_TIMEZONE})
-	{
-		ajax.index_data(tz);
-	}
-});
-</script>
-
 <!--logout-->
 <div class="topmenu">
 <table width="100%" cellpadding="0" cellspacing="0">

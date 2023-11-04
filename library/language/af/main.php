@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'bygevoeg';
 $lang['BT_REG_ON_TRACKER'] = 'Registreer op spoorsnyer';
 $lang['BT_REG_FAIL'] = 'Kon nie torrent op spoorsnoer registreer nie';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

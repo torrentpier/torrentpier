@@ -57,15 +57,6 @@
     <!-- IF ADM_EDIT -->
     <input type="hidden" name="u" value="{PR_USER_ID}"/>
     <!-- ENDIF -->
-    <!-- IF not ADM_EDIT -->
-    <script type="text/javascript">
-        x = new Date();
-        tz = -x.getTimezoneOffset() / 60;
-        document.write('<input type="hidden" name="user_timezone" value="' + tz + '" />');
-    </script>
-    <!-- ELSE -->
-    <input type="hidden" name="user_timezone" value="{USER_TIMEZONE}"/>
-    <!-- ENDIF -->
 
     <table class="forumline prof-tbl">
         <col class="row1" width="35%">
@@ -83,7 +74,7 @@
         </tr>
         <tr>
             <td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br/><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
-            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}"<!-- IF EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN --><!-- IF $bb_cfg['emailer_disabled'] or $bb_cfg['email_change_disabled'] --> readonly style="color: gray;"<!-- ENDIF --><!-- ENDIF --> /><span id="check_email"></span></td>
+            <td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}"<!-- IF EDIT_PROFILE and not ADM_EDIT and not IS_ADMIN --><!-- IF !$bb_cfg['emailer']['enabled'] or $bb_cfg['email_change_disabled'] --> readonly style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />&nbsp;<span id="check_email"></span></td>
         </tr>
         <!-- IF EDIT_PROFILE and not ADM_EDIT -->
         <tr>
@@ -101,7 +92,7 @@
             <td class="prof-title">{L_CONFIRM_PASSWORD}: * <!-- IF EDIT_PROFILE --><br/>
                 <h6>{L_PASSWORD_CONFIRM_IF_CHANGED}</h6><!-- ENDIF --></td>
             <td>
-                <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value=""/><span id="check_pass"></span>
+                <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="check_pass"></span>
             </td>
         </tr>
         <!-- IF CAPTCHA_HTML -->
@@ -167,6 +158,12 @@
         <tr>
             <td class="prof-title">{L_BOARD_LANG}:</td>
             <td>{LANGUAGE_SELECT}</td>
+        </tr>
+        <!-- ENDIF -->
+        <!-- IF $bb_cfg['allow_change']['timezone'] -->
+        <tr>
+            <td class="prof-title">{L_SYSTEM_TIMEZONE}:</td>
+            <td>{TIMEZONE_SELECT}</td>
         </tr>
         <!-- ENDIF -->
         <!-- IF EDIT_PROFILE -->

@@ -67,7 +67,7 @@ if (!isset($info_hash)) {
 }
 
 // Store info hash in hex format
-$info_hash_hex = bin2hex($info_hash);
+$info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
 
 // Store peer id
 $peer_id_sql = rtrim(DB()->escape(htmlCHR($peer_id)), ' ');
@@ -132,6 +132,9 @@ $peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
 // Events
 $stopped = ($event === 'stopped');
 
+// Get the real port to help some NAT users
+$port = $_SERVER['REMOTE_PORT'];
+
 // Set seeder & complete
 $complete = $seeder = ($left == 0) ? 1 : 0;
 
@@ -169,7 +172,7 @@ if ($lp_info) {
      * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
      */
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
+    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
@@ -436,9 +439,11 @@ if (!$output) {
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
         'downloaded' => (int)$client_completed,
-        'peers' => $peers,
     ];
 
+    if (!empty($peers)) {
+        $output['peers'] = $peers;
+    }
     if (!empty($peers6)) {
         $output['peers6'] = $peers6;
     }

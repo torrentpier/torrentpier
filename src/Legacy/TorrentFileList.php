@@ -42,6 +42,11 @@ class TorrentFileList
     public function get_filelist()
     {
         global $html;
+        if (($this->tor_decoded['info']['meta version'] ?? null) == 2) {
+            if (is_array($this->tor_decoded['info']['file tree'] ?? null)) {
+                return $this->fileTreeList($this->tor_decoded['info']['file tree']); //v2
+            }
+        }
 
         $this->build_filelist_array();
 
