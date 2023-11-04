@@ -348,7 +348,7 @@ class Torrent
         }
 
         // Check if torrent contains info_hash v2 or v1
-        if (($info['meta version'] ?? null) == 2 ) {
+        if (($info['meta version'] ?? null) == 2) {
             if (is_array($info['file tree'] ?? null)) {
                 $bt_v2 = true;
             }
