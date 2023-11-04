@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Dodano';
 $lang['BT_REG_ON_TRACKER'] = 'Zarejestrować się na tracker';
 $lang['BT_REG_FAIL'] = 'Nie udało się zarejestrować torrent trackera';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Inny torrent z takim samym info_hash już <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Usuń z trackera';
 $lang['BT_UNREGISTERED'] = 'Torrent niezarejestrowanych';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
