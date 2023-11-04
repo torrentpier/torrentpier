@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = '追加';
 $lang['BT_REG_ON_TRACKER'] = '登録トラッカー';
 $lang['BT_REG_FAIL'] = 'な登録激流にトラッカー';
 $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

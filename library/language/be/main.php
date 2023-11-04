@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Дададзена';
 $lang['BT_REG_ON_TRACKER'] = 'Зарэгістравацца на трэкеры';
 $lang['BT_REG_FAIL'] = 'Не атрымалася зарэгістраваць торэнт на трэкеры';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Іншы торэнт з такім жа info_hash ўжо <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Выдаліць з трэкера';
 $lang['BT_UNREGISTERED'] = 'Торэнт незарэгістраваных';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

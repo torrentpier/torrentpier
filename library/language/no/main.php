@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Lagt';
 $lang['BT_REG_ON_TRACKER'] = 'Registrer deg på tracker';
 $lang['BT_REG_FAIL'] = 'Kunne ikke registrere torrent på tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'En annen torrent med samme info_hash allerede <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Fjern fra tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent uregistrerte';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
