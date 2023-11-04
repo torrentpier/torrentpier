@@ -357,20 +357,19 @@ class Torrent
             $bt_v1 = true;
         }
         if ($bb_cfg['tracker']['disabled_v2_torrents'] && isset($bt_v2) && !isset($bt_v1)) {
-            self::torrent_error_exit('v2-only torrents were disabled, allowed: v1 and hybrids');
+            self::torrent_error_exit($lang['BT_V2_ONLY_DISALLOWED']);
         }
 
         // Getting info_hash v1
         if (isset($bt_v1)) {
-            $info_hash = pack('H*', hash('sha1', \Arokettu\Bencode\Bencode::encode($info)));
+            $info_hash = hash('sha1', \Arokettu\Bencode\Bencode::encode($info), true);
             $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
             $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
         }
 
         // Getting info_hash v2
         if (isset($bt_v2)) {
-            $v2_hash = hash('sha256', \Arokettu\Bencode\Bencode::encode($info));
-            $info_hash_v2 = pack('H*', $v2_hash);
+            $info_hash_v2 = hash('sha256', \Arokettu\Bencode\Bencode::encode($info), true);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
             $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
         }
@@ -390,7 +389,8 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        } elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
+        }
+        elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
                 if (($f['attr'] ?? null) !== 'p') {
