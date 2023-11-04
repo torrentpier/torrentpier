@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Shtuar';
 $lang['BT_REG_ON_TRACKER'] = 'Të regjistroheni në tracker';
 $lang['BT_REG_FAIL'] = 'Nuk mund të regjistrohen në përrua tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Një tjetër torrent me të njëjtën info_hash tashmë <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hiqni nga tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent paregjistruara';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

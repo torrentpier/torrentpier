@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Thêm';
 $lang['BT_REG_ON_TRACKER'] = 'Đăng ký trên theo dõi';
 $lang['BT_REG_FAIL'] = 'Không thể đăng ký torrent trên theo dõi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Một torrent với cùng một info_hash đã <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Bỏ từ theo dõi';
 $lang['BT_UNREGISTERED'] = 'Torrent không đăng ký';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
