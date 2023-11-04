@@ -1084,6 +1084,7 @@ $lang['SEEDING'] = 'Sēklas';
 $lang['LEECHING'] = 'Dēle';
 $lang['IS_REGISTERED'] = 'Reģistrēts';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statuss';
