@@ -348,7 +348,7 @@ class Torrent
         }
 
         // Check if torrent contains info_hash v2 or v1
-        if (($info['meta version'] ?? null) == 2 ) {
+        if (($info['meta version'] ?? null) == 2) {
             if (is_array($info['file tree'] ?? null)) {
                 $bt_v2 = true;
             }
@@ -390,7 +390,7 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        } elseif (isset($bt_v1) && isset($info['files']) && \is_array($info['files'])) {
+        } elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
                 if (($f['attr'] ?? null) !== 'p') {
