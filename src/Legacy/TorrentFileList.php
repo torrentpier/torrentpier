@@ -42,7 +42,7 @@ class TorrentFileList
     public function get_filelist()
     {
         global $html;
-        if (($this->tor_decoded['info']['meta version'] ?? null) == 2) {
+        if (($this->tor_decoded['info']['meta version'] ?? 1) === 2) {
             if (is_array($this->tor_decoded['info']['file tree'] ?? null)) {
                 return $this->fileTreeList($this->tor_decoded['info']['file tree']); //v2
             }
@@ -87,7 +87,7 @@ class TorrentFileList
                     continue;
                 }
                 // Exclude padding files
-                if (($f['attr'] ?? null) === 'p') {
+                if (isset($f['attr']) && $f['attr'] === 'p') {
                     continue;
                 }
                 array_deep($f['path'], 'clean_tor_dirname');
