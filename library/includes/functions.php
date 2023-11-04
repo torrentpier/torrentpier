@@ -1861,20 +1861,23 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key, 
         return false;
     }
 
+    $v1_support = !empty($infohash);
+    $v2_support = !empty($infohash_v2);
+
     $magnet = 'magnet:?';
 
-    if (!empty($infohash)) {
+    if ($v1_support) {
         $magnet .= 'xt=urn:btih:' . bin2hex($infohash);
     }
 
-    if (!empty($infohash_v2)) {
-        if (!empty($infohash)) {
+    if ($v2_support) {
+        if ($v1_support) {
             $magnet .= '&';
         }
         $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
     }
 
-    return '<a title="' . $lang['MAGNET'] . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    return '<a title="' . ($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']) . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . ($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']) . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
