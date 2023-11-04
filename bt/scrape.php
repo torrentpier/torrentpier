@@ -51,7 +51,7 @@ foreach ($info_hash_array[1] as $hash) {
 
     $decoded_hash = urldecode($hash);
 
-    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
+    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex(substr($hash, 0, 20)))) {
         $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
     }
     else{
@@ -67,25 +67,27 @@ if (!empty($info_hash_count)) {
       $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
     }
 
-    $info_hashes_sql = 'tor.info_hash' . ' IN ( ' . implode(', ', $info_hashes). ' )';
+    $info_hashes_sql = implode(', ', $info_hashes);
+    $info_hash_where = $is_bt_v2 ? "tor.info_hash_v2 IN ($info_hashes_sql)" : "tor.info_hash IN ($info_hashes_sql) OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ($info_hashes_sql)";
+
     $sql = "
-        SELECT tor.info_hash, tor.complete_count, snap.seeders, snap.leechers
+        SELECT tor.info_hash, tor.info_hash_v2, tor.complete_count, snap.seeders, snap.leechers
         FROM " . BB_BT_TORRENTS . " tor
         LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
-        WHERE $info_hashes_sql
-        LIMIT $info_hash_count
+        WHERE $info_hash_where
     ";
 
     $rowset = DB()->fetch_rowset($sql);
 
     if (!empty($rowset)) {
         foreach ($rowset as $scrapes) {
-            $torrents['files'][$scrapes['info_hash']] = [
+            $info_hash_scrape = !empty($scrapes['info_hash_v2']) ? $scrapes['info_hash_v2'] : $scrapes['info_hash'];
+            $torrents['files'][$info_hash_scrape] = [
                 'complete' => (int)$scrapes['seeders'],
                 'downloaded' => (int)$scrapes['complete_count'],
                 'incomplete' => (int)$scrapes['leechers']
             ];
-            CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($scrapes['info_hash']), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
+            CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex(substr($info_hash_scrape, 0, 20)), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
         }
     }
 }
