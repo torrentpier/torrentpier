@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = '加入';
 $lang['BT_REG_ON_TRACKER'] = '登记册上的跟踪器';
 $lang['BT_REG_FAIL'] = '不能登记的洪流上的跟踪器';
 $lang['BT_REG_FAIL_SAME_HASH'] = '另一个种子与同info_hash已经<a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = '删除从跟踪器';
 $lang['BT_UNREGISTERED'] = '未注册的洪流';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

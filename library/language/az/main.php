@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Əlavə';
 $lang['BT_REG_ON_TRACKER'] = 'Qeydiyyatdan tracker';
 $lang['BT_REG_FAIL'] = 'Uğursuz qeydiyyatdan torrent azn tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Digər torrent ilə eyni info_hash artıq <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Aradan qaldırılması tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent qeydiyyata alınmamış';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

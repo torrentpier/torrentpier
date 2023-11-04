@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Ki';
 $lang['BT_REG_ON_TRACKER'] = 'Regisztrálni tracker';
 $lang['BT_REG_FAIL'] = 'Nem lehet regisztrálni, torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Egy másik torrent azonos info_hash már <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Távolítsa el a tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent regisztrált';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

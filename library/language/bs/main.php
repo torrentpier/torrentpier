@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Dodao';
 $lang['BT_REG_ON_TRACKER'] = 'Registrirati na tragač';
 $lang['BT_REG_FAIL'] = 'Ne mogu registar bujicama na tragač';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Još bujicama sa isti info_hash već <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ukloni od tragač';
 $lang['BT_UNREGISTERED'] = 'Bujicama neprijavljeni';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
