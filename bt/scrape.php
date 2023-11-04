@@ -81,7 +81,7 @@ if (!empty($info_hash_count)) {
 
     if (!empty($rowset)) {
         foreach ($rowset as $scrapes) {
-            $info_hash_scrape = !empty($scrapes['info_hash']) ? $scrapes['info_hash'] : $scrapes['info_hash_v2'];
+            $info_hash_scrape = !empty($scrapes['info_hash_v2']) ? $scrapes['info_hash_v2'] : $scrapes['info_hash'];
             $torrents['files'][$info_hash_scrape] = [
                 'complete' => (int)$scrapes['seeders'],
                 'downloaded' => (int)$scrapes['complete_count'],
