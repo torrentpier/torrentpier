@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Ավելացված է';
 $lang['BT_REG_ON_TRACKER'] = 'Գրանցվել խուզարկու';
 $lang['BT_REG_FAIL'] = 'Չի հաջողվել գրանցել տարափ է խուզարկու';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Այլ հեղեղ նույն info_hash արդեն <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Հեռացնել ճանապարհները';
 $lang['BT_UNREGISTERED'] = 'Հեղեղ չգրանցված';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
