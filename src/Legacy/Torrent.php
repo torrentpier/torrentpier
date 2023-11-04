@@ -316,7 +316,7 @@ class Torrent
         if (!is_file($filename) || !file_exists($filename)) {
             self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT']);
         }
-        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents)) {
+        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
             self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
@@ -348,26 +348,27 @@ class Torrent
         }
 
         // Check if torrent contains info_hash v2 or v1
-        $bt_v1 = $bt_v2 = false;
-        if (($info['meta version'] ?? null) == 2 && is_array($info['file tree'] ?? null)) {
-            $bt_v2 = true;
+        if (($info['meta version'] ?? null) == 2) {
+            if (is_array($info['file tree'] ?? null)) {
+                $bt_v2 = true;
+            }
         }
         if (isset($info['pieces'])) {
             $bt_v1 = true;
         }
-        if ($bb_cfg['tracker']['disabled_v2_torrents'] && $bt_v2 && !$bt_v1) {
+        if ($bb_cfg['tracker']['disabled_v2_torrents'] && isset($bt_v2) && !isset($bt_v1)) {
             self::torrent_error_exit('v2-only torrents were disabled, allowed: v1 and hybrids');
         }
 
         // Getting info_hash v1
-        if ($bt_v1) {
+        if (isset($bt_v1)) {
             $info_hash = pack('H*', hash('sha1', \Arokettu\Bencode\Bencode::encode($info)));
             $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
             $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
         }
 
         // Getting info_hash v2
-        if ($bt_v2) {
+        if (isset($bt_v2)) {
             $v2_hash = hash('sha256', \Arokettu\Bencode\Bencode::encode($info));
             $info_hash_v2 = pack('H*', $v2_hash);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
@@ -386,6 +387,7 @@ class Torrent
         }
 
         $totallen = 0;
+
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
         } elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
@@ -395,8 +397,8 @@ class Torrent
                     $totallen += (float)$f['length'];
                 }
             }
-        } elseif ($bt_v2) {
-            $fileTreeSize = function ($array, string $name = '') use (&$fileTreeSize) {
+        } elseif (isset($bt_v2)) {
+            $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
                 $size = 0;
 
                 foreach ($array as $key => $value) {
@@ -543,7 +545,7 @@ class Torrent
         $ann_url = $bb_cfg['bt_announce_url'];
 
         $file_contents = file_get_contents($filename);
-        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents)) {
+        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
             bb_die($lang['TORFILE_INVALID']);
         }
 
