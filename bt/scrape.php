@@ -42,7 +42,7 @@ foreach ($info_hash_array[1] as $hash) {
 
     $decoded_hash = urldecode($hash);
 
-    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash)) {
+    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
         $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
     }
     else{
