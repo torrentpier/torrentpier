@@ -72,7 +72,7 @@ function dummy_exit($interval = 1800, $cache_dict = [])
         $output['warning message'] = 'Next statistics update in: ' . (floor($interval / 60) % 60) . ' minutes';
     }
 
-    if (isset($cache_dict['peers6'])) {
+    if (isset($cache_dict['peers'])) {
         $output['peers'] = $cache_dict['peers'];
     }
 
