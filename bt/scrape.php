@@ -31,15 +31,6 @@ if (!isset($info_hash)) {
 // Store info hash in hex format
 $info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
 
-// Check info_hash version
-if (strlen($info_hash) == 32) {
-    $is_bt_v2 = true;
-} elseif (strlen($info_hash) == 20) {
-    $is_bt_v2 = false;
-} else {
-    msg_die('Invalid info_hash: ' . $info_hash_hex);
-}
-
 // Handle multiple hashes
 
 preg_match_all('/info_hash=([^&]*)/i', $_SERVER['QUERY_STRING'], $info_hash_array);
@@ -51,11 +42,11 @@ foreach ($info_hash_array[1] as $hash) {
 
     $decoded_hash = urldecode($hash);
 
-    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex(substr($hash, 0, 20)))) {
+    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash)) {
         $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
     }
     else{
-        $info_hashes[] = '\''. DB()->escape(($decoded_hash)) . '\'';
+        $info_hashes[] = DB()->escape(($decoded_hash));
     }
 }
 
@@ -67,8 +58,8 @@ if (!empty($info_hash_count)) {
       $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
     }
 
-    $info_hashes_sql = implode(', ', $info_hashes);
-    $info_hash_where = $is_bt_v2 ? "tor.info_hash_v2 IN ($info_hashes_sql)" : "tor.info_hash IN ($info_hashes_sql) OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ($info_hashes_sql)";
+    $info_hashes_sql = implode('\', \'', $info_hashes);
+    $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
 
     $sql = "
         SELECT tor.info_hash, tor.info_hash_v2, tor.complete_count, snap.seeders, snap.leechers
