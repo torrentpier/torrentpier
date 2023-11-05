@@ -1084,6 +1084,7 @@ $lang['SEEDING'] = 'Σπόρων προς σπορά';
 $lang['LEECHING'] = 'Βδέλλα';
 $lang['IS_REGISTERED'] = 'Εγγεγραμμένοι';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Κατάσταση';

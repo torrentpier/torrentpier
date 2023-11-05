@@ -1084,6 +1084,7 @@ $lang['SEEDING'] = 'Mag';
 $lang['LEECHING'] = 'Pióca';
 $lang['IS_REGISTERED'] = 'Regisztrált';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Állapot';
