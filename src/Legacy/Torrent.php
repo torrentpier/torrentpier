@@ -389,8 +389,7 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        }
-        elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
+        } elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
                 if (($f['attr'] ?? null) !== 'p') {
