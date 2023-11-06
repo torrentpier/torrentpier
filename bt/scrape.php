@@ -72,13 +72,13 @@ if (!empty($info_hash_count)) {
 
     if (!empty($rowset)) {
         foreach ($rowset as $scrapes) {
-            $info_hash_scrape = !empty($scrapes['info_hash_v2']) ? $scrapes['info_hash_v2'] : $scrapes['info_hash'];
+            $info_hash_scrape = in_array(urlencode($scrapes['info_hash']), $info_hash_array[1]) ? $scrapes['info_hash'] : substr($scrapes['info_hash_v2'], 0, 20);
             $torrents['files'][$info_hash_scrape] = [
                 'complete' => (int)$scrapes['seeders'],
                 'downloaded' => (int)$scrapes['complete_count'],
                 'incomplete' => (int)$scrapes['leechers']
             ];
-            CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex(substr($info_hash_scrape, 0, 20)), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
+            CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($info_hash_scrape), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
         }
     }
 }
