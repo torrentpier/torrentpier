@@ -26,7 +26,7 @@ if (!$userdata['session_logged_in']) {
     }
 }
 
-if (!$profiledata = get_userdata($_GET[POST_USERS_URL])) {
+if (!$profiledata = get_userdata($_GET[POST_USERS_URL], !is_numeric($_GET[POST_USERS_URL]))) {
     bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
