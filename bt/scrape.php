@@ -68,15 +68,18 @@ if (!empty($info_hash_count)) {
         WHERE $info_hash_where
     ";
 
-    $rowset = DB()->fetch_rowset($sql);
+    $scrapes = DB()->fetch_rowset($sql);
 
-    if (!empty($rowset)) {
-        foreach ($rowset as $scrapes) {
-            $info_hash_scrape = in_array(urlencode($scrapes['info_hash']), $info_hash_array[1]) ? $scrapes['info_hash'] : substr($scrapes['info_hash_v2'], 0, 20);
+    if (!empty($scrapes)) {
+        foreach ($scrapes as $scrape) {
+            $hash_v1 = !empty($scrape['info_hash']) ? $scrape['info_hash'] : '';
+            $hash_v2 = !empty($scrape['info_hash_v2']) ? substr($scrape['info_hash_v2'], 0, 20) : '';
+            $info_hash_scrape = (in_array(urlencode($hash_v2), $info_hash_array[1])) ? $hash_v2 : $hash_v1;
+
             $torrents['files'][$info_hash_scrape] = [
-                'complete' => (int)$scrapes['seeders'],
-                'downloaded' => (int)$scrapes['complete_count'],
-                'incomplete' => (int)$scrapes['leechers']
+                'complete' => (int)$scrape['seeders'],
+                'downloaded' => (int)$scrape['complete_count'],
+                'incomplete' => (int)$scrape['leechers']
             ];
             CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($info_hash_scrape), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
         }
