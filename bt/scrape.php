@@ -72,7 +72,6 @@ if (!empty($info_hash_count)) {
 
     if (!empty($scrapes)) {
         foreach ($scrapes as $scrape) {
-
             $hash_v1 = !empty($scrape['info_hash']) ? $scrape['info_hash'] : '';
             $hash_v2 = !empty($scrape['info_hash_v2']) ? substr($scrape['info_hash_v2'], 0, 20) : '';
             $info_hash_scrape = (in_array(urlencode($hash_v2), $info_hash_array[1])) ? $hash_v2 : $hash_v1;
