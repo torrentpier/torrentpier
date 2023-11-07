@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topik telah dipindahkan dari forum [b]%s[/b]
 $lang['BOT_MESS_SPLITS'] = 'Topik telah terbelah. Topik baru - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Topik telah berpisah dari [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Download call';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Memperhatikan dengan permintaan untuk kembali ke distribusi';
 $lang['CALLSEED_SUBJECT'] = 'Download membantu %s';
 $lang['CALLSEED_TEXT'] = 'Hello![br]Your bantuan yang diperlukan dalam rilis [url=%s]%s[/url][br]if anda memutuskan untuk membantu, tapi sudah dihapus file torrent, anda dapat men-download [url=%s]this[/url][br][br]i berharap untuk bantuan anda!';
