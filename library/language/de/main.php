@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Thema wurde verschoben aus forum [b]%s[/b] f
 $lang['BOT_MESS_SPLITS'] = 'Thema wurde aufgeteilt. Neues Thema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Thema wurde geteilt von [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Heruntergeladen nennen';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Nehmen Sie Abmahnung mit Aufforderung zur Rückgabe der Verteilung';
 $lang['CALLSEED_SUBJECT'] = 'Download-Hilfe %s';
 $lang['CALLSEED_TEXT'] = 'Hallo![br]Your Hilfe gebraucht wird in der Veröffentlichung [url=%s]%s[/url][br]if Sie sich entscheiden zu helfen, der aber bereits gelöscht die torrent-Datei, können Sie es herunterladen, [url=%s]this[/url][br][br]i hoffe auf Eure Hilfe!';

@@ -2534,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Temat został przeniesiony z forum [b]%s[/b]
 $lang['BOT_MESS_SPLITS'] = 'Temat został podzielony. Nowy temat - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Temat został podzielony z [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Ściągnąłem połączenia';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Odbierać powiadomienia z prośbą o powrót na rozdanie';
 $lang['CALLSEED_SUBJECT'] = 'Pobierz pomóż %s';
 $lang['CALLSEED_TEXT'] = 'Witam![br]Your pomoc jest potrzebna, aby wyjść z [URL=%s]%s[/url][br]if zdecydujesz się pomóc, ale już usunięto plik torrent można pobrać [URL=%s]this[/url][br][br]i liczę na Waszą pomoc!';

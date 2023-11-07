@@ -2535,7 +2535,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Konu forum [b]%s[/b] gelen [b]%s[/b][br][br]
 $lang['BOT_MESS_SPLITS'] = 'Konu bölünmüş. Yeni konu [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Konu [b]%s[/b][br][br]%s arasında bölünmüş';
 
-$lang['CALLSEED'] = 'Çağrı indirilmiş';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Talep dağılımı için geri bildirim almak';
 $lang['CALLSEED_SUBJECT'] = 'İndir %s yardım';
 $lang['CALLSEED_TEXT'] = 'Merhaba![br]Your yardım etmeye karar, ama zaten torrent dosyası silinmiş %s[/url][br]if %s [url=] açıklamasında, yardımın için %s [url=] this[/url][br][br]i umut indirebilirsiniz gereklidir.';

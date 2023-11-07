@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Temo je bil prestavljen iz foruma [b]%s[/b] 
 $lang['BOT_MESS_SPLITS'] = 'Temo je bilo razdeljeno. Novo temo - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Temo je bilo razdeljeno iz [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Prenesli klic';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Obvestilo z zahtevo, da se vrnete na distribucijsko';
 $lang['CALLSEED_SUBJECT'] = 'Download pomoč %s';
 $lang['CALLSEED_TEXT'] = 'Pozdravljeni![br]Your je potrebna pomoč v javnost [url=%s]%s[/url][br]if ste se odločili pomagati, vendar že izbrisan torrent datoteke, ga lahko prenesete [url=%s]this[/url][br][br]i upanje za vašo pomoč!';

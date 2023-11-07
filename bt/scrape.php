@@ -44,8 +44,7 @@ foreach ($info_hash_array[1] as $hash) {
 
     if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
         $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
-    }
-    else{
+    } else {
         $info_hashes[] = DB()->escape(($decoded_hash));
     }
 }
@@ -55,7 +54,7 @@ $info_hash_count = count($info_hashes);
 if (!empty($info_hash_count)) {
 
     if ($info_hash_count > $bb_cfg['max_scrapes']) {
-      $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
+        $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
     }
 
     $info_hashes_sql = implode('\', \'', $info_hashes);

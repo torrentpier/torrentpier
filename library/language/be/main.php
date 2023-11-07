@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тэма была перанесена з ф
 $lang['BOT_MESS_SPLITS'] = 'Тэма была падзелена. Новая тэма - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тэма была падзелена з [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Запампаваў выкліку';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Прымаць паведамлення з просьбай вярнуцца на раздачу';
 $lang['CALLSEED_SUBJECT'] = 'Спампаваць дапамажыце %s';
 $lang['CALLSEED_TEXT'] = 'Добры дзень![br]Your даведка патрэбна для выхаду з [URL=%s]%s[/url][br]if вы вырашылі дапамагчы, але ўжо выдалілі торэнт-файл, вы можаце спампаваць яго [URL=%s]this[/url][br][br]i спадзяюся на Вашу дапамогу!';

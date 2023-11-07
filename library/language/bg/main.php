@@ -2533,7 +2533,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Темата е преместена от ф
 $lang['BOT_MESS_SPLITS'] = 'Темата е разделена. Нова тема - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Темата е разделена от [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Свалих повикване';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Вземат бележка с молба да се върне на ръка';
 $lang['CALLSEED_SUBJECT'] = 'Изтегляне помогнете %s';
 $lang['CALLSEED_TEXT'] = 'Здравейте![br]Your нужда от помощ, за да излезете от [URL=%s]%s[/url][br]if сте решили да помогнат, но вече са премахнали торент-файл, можете да го изтеглите от [URL=%s]this[/url][br][br]i се надявам на Вашата помощ!';

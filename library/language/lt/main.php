@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema buvo perkelta iš forumo [b]%s[/b] foru
 $lang['BOT_MESS_SPLITS'] = 'Tema buvo padalinta. Nauja tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tema buvo padalinti iš [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Atsisiųsti skambinti';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Imtis pranešimas su prašymu grįžti į platinimo';
 $lang['CALLSEED_SUBJECT'] = 'Atsisiųsti padėti %s';
 $lang['CALLSEED_TEXT'] = 'Sveiki![br]Your padėti reikia paleisti [url=%s]%s[/url][br]if jūs nuspręsite padėti, bet jau ištrynė torrent failą, jūs galite jį atsisiųsti [url=%s]this[/url][br][br]i tikiuosi jūsų pagalbos!';

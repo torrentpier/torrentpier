@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'თემა უკვე გადავი
 $lang['BOT_MESS_SPLITS'] = 'თემა უკვე გაყოფილი. ახალი თემა - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'თემა უკვე გაყოფილი [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'გადმოწერილი დარეკეთ';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'მიაქციოს თხოვნით დაბრუნებას განაწილება';
 $lang['CALLSEED_SUBJECT'] = 'უფასო დახმარება %s';
 $lang['CALLSEED_TEXT'] = 'გამარჯობა![br]Your დახმარება არის საჭირო გამოშვების [url=%s]%s[/url][br]if თქვენ გადაწყვიტეთ, რათა დაეხმაროს, მაგრამ უკვე წაშლილი torrent ფაილი, თქვენ შეგიძლიათ გადმოწეროთ [url=%s]this[/url][br][br]i იმედი მაქვს, თქვენი დახმარება!';

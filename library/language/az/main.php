@@ -2534,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Mövzu köçürülüb forum [b]%s[/b] forumd
 $lang['BOT_MESS_SPLITS'] = 'Mövzu bölündü. Yeni mövzu - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Mövzu bölündü biri [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Nazil zəng';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Qəbul bildiriş xahişi ilə geri paylanmasını';
 $lang['CALLSEED_SUBJECT'] = 'Download kömək %s';
 $lang['CALLSEED_TEXT'] = 'Salam![br]Your arayış üçün lazımdır çıxış yolu ilə [URL=%s]%s[/url][br]if karar kömək, lakin artıq silindi torrent faylı yükləyə bilərsiniz [URL=%s]this[/url][br][br]i ümid edirəm ki, Sizin yardım!';

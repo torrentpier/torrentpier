@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'El tema ha sido movido desde el foro de [b]%
 $lang['BOT_MESS_SPLITS'] = 'El tema se ha dividido. Nuevo tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'El tema se ha dividido de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Descargar la llamada';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Tomar nota con una solicitud para volver a la distribución';
 $lang['CALLSEED_SUBJECT'] = 'Descargar ayuda %s';
 $lang['CALLSEED_TEXT'] = 'Hola![br]Your se necesita ayuda en la liberación de [url=%s]%s[/url][br]if usted decide ayudar, pero ya eliminado el archivo torrent, puede descargar de [url=%s]this[/url][br][br]i espero por su ayuda!';

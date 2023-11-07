@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Téma átkerült a fórum [b]%s[/b], hogy a 
 $lang['BOT_MESS_SPLITS'] = 'Téma már osztott. Új téma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Téma már szét a [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Letöltött hívás';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Vegye észre, azzal a kéréssel, hogy visszatérjen az engedély';
 $lang['CALLSEED_SUBJECT'] = 'Letöltés segíteni %s';
 $lang['CALLSEED_TEXT'] = 'Helló![br]Your segítségre van szükség, a kiadás [url=%s]%s[/url][br]if úgy dönt, hogy segítsen, de már törölt a torrent fájlt, akkor töltse le a [url=%s]this[/url][br][br]i remélem a segítséget!';
