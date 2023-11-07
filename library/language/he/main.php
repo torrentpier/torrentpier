@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'הנושא הועבר מתוך פורום [b
 $lang['BOT_MESS_SPLITS'] = 'הנושא מפוצל. נושא חדש - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'הנושא כבר עזב [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'הורדתי את השיחה.';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'שימו לב עם בקשה לחזור הפצה';
 $lang['CALLSEED_SUBJECT'] = 'הורד לעזור %s';
 $lang['CALLSEED_TEXT'] = 'שלום![br]Your צריך עזרה בשחרור [url=%s]%s[/url][br]if אתה מחליט לעזור, אבל כבר מחקתי את קובץ הטורנט, אתה יכול להוריד אותו [url=%s]this[/url][br][br]i מקווה לעזרה שלכם!';
