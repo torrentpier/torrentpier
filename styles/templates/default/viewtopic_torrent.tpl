@@ -73,7 +73,7 @@ ajax.callback.callseed = function (data) {
 		<tr>
 			<td colspan="2" class="<!-- IF SHOW_DL_LIST -->row2<!-- ELSE -->row1<!-- ENDIF --> pad_2">
 				<!-- IF not SEED_COUNT -->
-				<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+				<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 				<!-- ENDIF -->
 
 				<!-- IF PEER_EXIST -->
@@ -105,7 +105,7 @@ ajax.callback.callseed = function (data) {
 		<!-- ELSE -->
 		<tr>
 			<td colspan="2" class="row2 pad_4">
-				<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+				<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 			</td>
 		</tr>
 		<!-- ENDIF -->
@@ -123,7 +123,7 @@ ajax.callback.callseed = function (data) {
 
 		<!-- IF SEEDER_LAST_SEEN -->
 		<div id="last_seed_info" class="row5 w60 mrg_4 bCenter">
-			<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+			<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 		</div>
 		<!-- ENDIF -->
 

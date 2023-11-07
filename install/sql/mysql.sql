@@ -291,6 +291,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `tor_type`         TINYINT(1)            NOT NULL DEFAULT '0',
   `speed_up`         INT(11)               NOT NULL DEFAULT '0',
   `speed_down`       INT(11)               NOT NULL DEFAULT '0',
+  `last_seeder_id`   INT(11)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
@@ -1456,6 +1457,7 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
 (
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
+  `user_id`          INT(11)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM
