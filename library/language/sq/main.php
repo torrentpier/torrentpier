@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema është lëvizur nga forumi [b]%s[/b] t
 $lang['BOT_MESS_SPLITS'] = 'Temë ka qenë e ndarë. Temë të re - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Temë ka qenë e ndarë nga [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Shkarkuar thirrjen';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Vërej me një kërkesë për kthim të shpërndarjes';
 $lang['CALLSEED_SUBJECT'] = 'Shkarko ndihmojë %s';
 $lang['CALLSEED_TEXT'] = 'Përshëndetje![br]Your ndihma është e nevojshme në lirimin [url=%s]%s[/url][br]if ju vendosni për të ndihmuar, por tashmë fshihet torrent file, ju mund të shkarkoni atë [url=%s]this[/url][br][br]i shpresë për ndihmën tuaj!';
