@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Onderwerp is verplaatst van forum [b]%s[/b] 
 $lang['BOT_MESS_SPLITS'] = 'Onderwerp is gesplitst. Nieuwe thema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Topic gesplitst uit [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Gedownload van de oproep';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Kennis te nemen met een verzoek om terug te keren naar de verdeling';
 $lang['CALLSEED_SUBJECT'] = 'Download helpen %s';
 $lang['CALLSEED_TEXT'] = 'Hallo![br]Your hulp nodig is in de release [url=%s]%s[/url][br]if u besluit om te helpen, maar al verwijderd u het torrent-bestand, kunt u het downloaden [url=%s]this[/url][br][br]i hoop voor je hulp!';
