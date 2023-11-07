@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Το θέμα έχει μεταφερθεί 
 $lang['BOT_MESS_SPLITS'] = 'Το θέμα έχει χωριστεί. Νέο θέμα - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Το θέμα έχει χωριστεί από [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Κατέβασαν την κλήση';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Να λαμβάνουν ειδοποίηση με το αίτημα να επιστρέψει στην διανομή';
 $lang['CALLSEED_SUBJECT'] = 'Κατεβάστε βοηθήσει %s';
 $lang['CALLSEED_TEXT'] = 'Γεια σας![br]Your βοήθεια είναι απαραίτητη για την απελευθέρωση [url=%s]%s[/url][br]if αποφασίσετε να βοηθήσει, αλλά ήδη διαγραφεί το αρχείο torrent, μπορείτε να το κατεβάσετε από [url=%s]this[/url][br][br]i ελπίζω για τη βοήθειά σας!';
