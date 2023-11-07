@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Chủ đề đã được chuyển từ di�
 $lang['BOT_MESS_SPLITS'] = 'Chủ đề đã được chia. Chủ đề mới - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Chủ đề đã được chia từ [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Đã tải về cuộc gọi';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Có thông báo với một yêu cầu để trở về phân phối';
 $lang['CALLSEED_SUBJECT'] = 'Tải giúp %s';
 $lang['CALLSEED_TEXT'] = 'Xin chào![br]Your đang cần sự giúp đỡ trong việc phát hành [bạn, %s]%s[/url][br]if bạn quyết định để giúp đỡ, nhưng đã bị xóa các tập tin torrent, bạn có thể tải về nó [bạn, %s]this[/url][br][br]i hy vọng cho bạn giúp đỡ!';

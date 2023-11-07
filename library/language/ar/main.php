@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'الموضوع تم نقله من منتدى
 $lang['BOT_MESS_SPLITS'] = 'الموضوع تم تقسيمها. موضوع جديد - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'الموضوع تم تقسيمها من [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'تحميل المكالمة';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'تنتبه مع طلب العودة إلى توزيع';
 $lang['CALLSEED_SUBJECT'] = 'تحميل مساعدة %s';
 $lang['CALLSEED_TEXT'] = 'مرحبا![br]Your الحاجة إلى المساعدة في الإفراج عن [url=%s]%s[/url][br]if عليك أن تقرر أن تساعد ولكن بالفعل حذف ملف التورنت يمكنك تحميل البرنامج [url=%s]this[/url][br][br]i نأمل مساعدتكم!';

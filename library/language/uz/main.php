@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Mavzu forum [b]%s[/b][br][br]%s uchun forum 
 $lang['BOT_MESS_SPLITS'] = 'Mavzu bo\'lindi etildi. Yangi mavzu - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Mavzu [b]%s[/b][br][br]%s dan YARILMIŞTIR';
 
-$lang['CALLSEED'] = 'qo\'ng\'iroq Yuklandi';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'tarqatish qaytish uchun bir iltimosi bilan e\'tibor';
 $lang['CALLSEED_SUBJECT'] = 'Yuklab yordam %s';
 $lang['CALLSEED_TEXT'] = 'Agar yordam berish uchun qaror, lekin allaqachon torrent faylni o\'chirib %s[/url][br]If Salom! [br]Your Yordam ozod kerak [url = %s], siz uni yuklab olishingiz mumkin [url = %s] Yordamingiz uchun this[/url][br][br]I umid!';

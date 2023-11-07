@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = '专题已经从论坛[b]%s[/b]论坛[b]%s[/b
 $lang['BOT_MESS_SPLITS'] = '主题已经分裂。 新的话题-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '主题已被拆分从[b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = '下载的电话';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = '注意到要求回归的分布';
 $lang['CALLSEED_SUBJECT'] = '下载帮助%s';
 $lang['CALLSEED_TEXT'] = '你好！[br]Your帮助是必要的，释放[url=%s]%s[/url][br]if你决定帮助，但是已经被删除的种子文件，可以下载[url=%s]this[/url][br][br]i希望你的帮助！';

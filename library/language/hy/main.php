@@ -2534,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Թեմա տեղափոխվել են: համա
 $lang['BOT_MESS_SPLITS'] = 'Թեմա բաժանված էր. Նոր թեմա - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Թեմա բաժանվել են [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Բեռնել կանչի';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Վերցնել ծանուցում ՝ խնդրելով վերադառնալ раздачу';
 $lang['CALLSEED_SUBJECT'] = 'Բեռնել օգնություն %s';
 $lang['CALLSEED_TEXT'] = 'Բարեւ ձեզ![br]Your տեղեկանք պետք է դուրս գալու հետ [URL=%s]%s[/url][br]if դուք որոշել է օգնել, բայց արդեն հեռացրել են torrent ֆայլը, դուք կարող եք բեռնել այն [URL=%s]this[/url][br][br]i ակնկալում եմ Ձեր օգնությունը.';

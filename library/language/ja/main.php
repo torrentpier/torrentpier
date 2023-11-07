@@ -2535,7 +2535,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = '課題として、フォーラム[b]%s[/b]�
 $lang['BOT_MESS_SPLITS'] = '話題にして分割します。 新しいトピック[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '課題分割されたから[b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'ダウンロードコ';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = '注依頼の流通';
 $lang['CALLSEED_SUBJECT'] = 'ダウンロードヘ%s';
 $lang['CALLSEED_TEXT'] = 'ハロー！[br]Yourお手伝いが必要にリリース[url=%s]%s[/url][br]ifが決まりましたのですが既に削除のtorrentファイルをダウンロードできますので、[url=%s]this[/url][br][br]iろしくお願いい！！';

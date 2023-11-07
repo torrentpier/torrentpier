@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Ämnet har flyttats från forum [b]%s[/b] fo
 $lang['BOT_MESS_SPLITS'] = 'Ämnet har delats upp. Nytt ämne - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Ämnet har delats upp från [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Laddat samtal';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ta meddelande med en begäran att återgå till distribution';
 $lang['CALLSEED_SUBJECT'] = 'Ladda ner hjälp %s';
 $lang['CALLSEED_TEXT'] = 'Hej![br]Your hjälp behövs i utgivningen [url=%s]%s[/url][br]if du bestämmer dig för att hjälpa, men redan bort torrent-filen, kan du ladda ner det [url=%s]this[/url][br][br]i hoppas för din hjälp!';

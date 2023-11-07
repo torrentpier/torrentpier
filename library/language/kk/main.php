@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тақырып форумға форумны
 $lang['BOT_MESS_SPLITS'] = 'Тақырыбы бөлінген болатын. Жаңа тақырып - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тақырып [b]%s[/b][br][br]%s бөлініп отыр';
 
-$lang['CALLSEED'] = 'қоңырауды жүктелген';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'бөлу оралу үшін өтініші бар хабарлама алыңыз';
 $lang['CALLSEED_SUBJECT'] = 'көмек жүктеп %s';
 $lang['CALLSEED_TEXT'] = 'Сәлеметсіз бе! [br]Your көмек босату қажет [URL = %s] Сіз көмектесе шешеді, бірақ қазірдің өзінде торрент файлын жойылған %s[/url][br]If, оны жүктеуге болады [URL = %s] сіздің көмек үшін this[/url][br][br]I үміт!';

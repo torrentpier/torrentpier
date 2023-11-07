@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Le sujet a été déplacé du forum [b]%s[/b
 $lang['BOT_MESS_SPLITS'] = 'Le sujet a été divisé. Nouveau sujet - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Le sujet a été partagé à partir de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Téléchargé à l\'appel';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Prendre l\'avis d\'une demande de retour à la distribution';
 $lang['CALLSEED_SUBJECT'] = 'Télécharger aide %s';
 $lang['CALLSEED_TEXT'] = 'Bonjour![br]Your l\'aide est nécessaire dans le communiqué de [url=%s]%s[/url][br]if vous décidez d\'aider, mais déjà supprimé le fichier torrent, vous pouvez le télécharger [url=%s]this[/url][br][br]i espère pour votre aide!';

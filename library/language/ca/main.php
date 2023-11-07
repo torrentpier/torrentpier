@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'El tema ha estat traslladat des de fòrum [b
 $lang['BOT_MESS_SPLITS'] = 'El tema ha estat dividida. Nou tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'El tema ha estat dividits de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Descarregar la convocatòria';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Prendre nota amb la sol·licitud de retorn a la distribució';
 $lang['CALLSEED_SUBJECT'] = 'Descarregar ajudar %s';
 $lang['CALLSEED_TEXT'] = 'Hola![br]Your es necessita ajuda a l\'alliberament [url=%s]%s[/url][br]if vostè decideix ajudar, però ja esborrat el fitxer torrent, podeu baixar - [url=%s]this[/url][br][br]i esperança per la vostra ajuda!';
