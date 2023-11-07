@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Subiectul a fost mutat de la forum [b]%s[/b]
 $lang['BOT_MESS_SPLITS'] = 'Subiectul a fost divizat. Subiect nou - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Subiectul a fost despărțit de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Descărcat call';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ia notificare cu o cerere pentru a reveni la distributie';
 $lang['CALLSEED_SUBJECT'] = 'Descărcați ajuta %s';
 $lang['CALLSEED_TEXT'] = 'Buna ziua![br]Your este nevoie de ajutor în eliberarea [url=%s]%s[/url][br]if vă decideți pentru a ajuta, dar deja eliminat fișier torrent, o puteți descărca de [url=%s]this[/url][br][br]i speranță pentru ajutor!';
