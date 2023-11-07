@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tēma ir pārcelta no foruma [b]%s[/b] uz fo
 $lang['BOT_MESS_SPLITS'] = 'Tēma ir sadalīts. Jauna tēma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tēma ir sadalīts no [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Lejupielādēt zvanu';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Pieņemt paziņojumu ar lūgumu, lai atgrieztos sadales';
 $lang['CALLSEED_SUBJECT'] = 'Lejupielādēt palīdzēt %s';
 $lang['CALLSEED_TEXT'] = 'Labdien![br]Your palīdzība ir nepieciešama piesārņojošo [url=%s]%s[/url][br]if jums izlemt, lai palīdzētu, bet jau izdzēsts torrent failu, jūs varat lejupielādēt to [url=%s]this[/url][br][br]i ceru uz jūsu palīdzību!';
