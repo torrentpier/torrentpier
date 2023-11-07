@@ -501,8 +501,10 @@ if ($tor_reged && $tor_info) {
         // Show "seeder last seen info"
         if (($s_mode == 'count' && !$seed_count) || (!$seeders && !defined('SEEDER_EXIST'))) {
             $last_seen_time = ($tor_info['seeder_last_seen']) ? delta_time($tor_info['seeder_last_seen']) : $lang['NEVER'];
+            $last_seeder_username = !empty($tor_info['last_seeder_id']) ? '(' .get_userdata($tor_info['last_seeder_id'])['username']. ')' : '';
 
             $template->assign_vars(['SEEDER_LAST_SEEN' => sprintf($lang['SEEDER_LAST_SEEN'], $last_seen_time)]);
+            $template->assign_vars(['SEEDER_USERNAME' => $last_seeder_username]);
         }
     }
 
