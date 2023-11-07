@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Aihe on siirretty foorumin [b]%s[/b] forum [
 $lang['BOT_MESS_SPLITS'] = 'Aihe on jaettu kahteen osaan. Uusi aihe - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Aihe on erotettu [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Ladataan call';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ota ilmoitus pyynnön palata jakelu';
 $lang['CALLSEED_SUBJECT'] = 'Lataa auttaa %s';
 $lang['CALLSEED_TEXT'] = 'Hei![br]Your apua tarvitaan, vapauttaa [url=%s]%s[/url][br]if päätät auttaa, mutta jo poistaa torrent-tiedoston, voit ladata sen [url=%s]this[/url][br][br]i toivoa apuasi!';
