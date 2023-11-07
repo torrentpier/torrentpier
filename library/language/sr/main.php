@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тема је премештена из фо
 $lang['BOT_MESS_SPLITS'] = 'Тема је подељена. Нова тема - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема је подељена од [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Преузети позив';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Примате обавештења са захтевом да се врати на руку';
 $lang['CALLSEED_SUBJECT'] = 'Преузмите помозите %s';
 $lang['CALLSEED_TEXT'] = 'Здраво![br]Your помоћ је потребна за излазак са [URL=%s]%s[/url][br]if сте одлучили да помогну, али већ уклонили торрент фајл, можете га преузети са [URL=%s]this[/url][br][br]i надам се у Вашу помоћ!';
