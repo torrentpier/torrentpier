@@ -118,7 +118,7 @@ $template->assign_vars([
     'TRAF_STATS' => !(IS_AM || $profile_user_id),
 ]);
 
-if (IS_ADMIN) {
+if (IS_AM) {
     $group_membership = [];
     $sql = "
 		SELECT COUNT(g.group_id) AS groups_cnt, g.group_single_user, ug.user_pending
@@ -154,8 +154,6 @@ if (IS_ADMIN) {
         'GROUP_MEMBERSHIP' => (bool)$group_membership,
         'GROUP_MEMBERSHIP_TXT' => $group_membership
     ]);
-} elseif (IS_MOD) {
-    $template->assign_vars(['SHOW_GROUP_MEMBERSHIP' => ($profiledata['user_level'] != USER)]);
 }
 
 // Show users torrent-profile
