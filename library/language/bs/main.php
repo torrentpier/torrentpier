@@ -2531,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema je premešten iz forum [b]%s[/b] da for
 $lang['BOT_MESS_SPLITS'] = 'Tema je podijeljen. Nova tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tema je bila podeljena od [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Skinuo zovi';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Primetiti sa zahtjev da se vratim u distribuciji';
 $lang['CALLSEED_SUBJECT'] = 'Preuzimanje pomoći %s';
 $lang['CALLSEED_TEXT'] = 'Zdravo![br]Your pomoći u oslobodi [url=%s]%s[/url][br]if odlučiš da ti pomognem, ali već je izbrisao potoka dosije, možete preuzeti to [url=%s]this[/url][br][br]i nadam se, za tvoje pomoći!';
