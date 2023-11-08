@@ -30,14 +30,16 @@ DB()->query('
 	CREATE TEMPORARY TABLE ' . TMP_TRACKER_TABLE . " (
 		`topic_id` mediumint(8) unsigned NOT NULL default '0',
 		`user_id` mediumint(9) NOT NULL default '0',
-		`ip` char(8) binary NOT NULL default '0',
+		`ip` char(42) binary default '0',
+		`ipv6` char(42) binary default '0',
+		`peer_id` char(20) binary default '0',
 		`seeder` tinyint(1) NOT NULL default '0',
 		`speed_up` mediumint(8) unsigned NOT NULL default '0',
 		`speed_down` mediumint(8) unsigned NOT NULL default '0',
 		`update_time` int(11) NOT NULL default '0'
 	)
 	SELECT
-		topic_id, user_id, ip, seeder, speed_up, speed_down, update_time
+		topic_id, user_id, ip, ipv6, peer_id, seeder, speed_up, speed_down, update_time
 	FROM " . BB_BT_TRACKER . '
 ');
 
@@ -72,6 +74,21 @@ $rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABL
 foreach ($rowset as $cnt => $row) {
     $peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt % 15)) ? "  \n" : '');
 }
+
+$clients = [];
+$rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM ' . TMP_TRACKER_TABLE);
+foreach ($rowset as $cnt => $row) {
+    $clients[] = get_user_torrent_client(substr($row['client'], 0, 3), true);
+}
+
+$client_count = count($clients);
+$client_values = array_count_values($clients);
+
+foreach ($client_values as $value => $count) {
+    $percentage = ($count / $client_count) * 100;
+    $clients_percentage[] ="$value ($count) => $percentage%";
+}
+$clients = implode('<br>', $clients_percentage);
 
 function commify_callback($matches)
 {
@@ -112,6 +129,13 @@ echo "\n<tr><td align=center> peers: in last " . implode(' / ', $peers_in_last_m
 echo "\n<td align=center>" . implode(' / ', $peers_in_last_min) . "</td></tr>\n";
 echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br /> [ per second, DESC order --> ] <br /> last peer: $stat[last_peer_time] seconds ago <br /> " . date('j M H:i:s [T O]') . " </td>\n";
 echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . implode(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
+echo "\n
+	<tr><td align=center> clients: </td>
+	<td align=center>
+		&nbsp;
+    $clients
+	</td></tr>
+\n";
 echo '</table>';
 echo '<div align="center"><pre>';
 

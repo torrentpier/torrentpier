@@ -1179,7 +1179,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
  * @param string $peer_id
  * @return mixed|string
  */
-function get_user_torrent_client(string $peer_id): mixed
+function get_user_torrent_client(string $peer_id, bool $nameOnly = false): mixed
 {
     static $icons_extension = '.png';
     static $clients = [
@@ -1231,12 +1231,18 @@ function get_user_torrent_client(string $peer_id): mixed
         }
     }
 
-    if (!empty($bestMatch)) {
+    if ($nameOnly) {
+        if (!empty($bestMatchLength)) {
+            return $bestMatch;
+        }
+        return $peer_id;
+    }
+
+    if (!empty($bestMatchLength)) {
         return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/' . $bestMatch . '.png" alt="' . $bestMatch . '" title="' . $peer_id . '">';
     }
 
     return $peer_id;
-
 }
 
 function birthday_age($date)
