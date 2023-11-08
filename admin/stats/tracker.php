@@ -75,18 +75,21 @@ foreach ($rowset as $cnt => $row) {
     $peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt % 15)) ? "  \n" : '');
 }
 
+// Detailed statistics for peer clients
 $clients = [];
 $client_count = 0;
+$client_list = '';
 $rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM ' . TMP_TRACKER_TABLE);
-foreach ($rowset as $cnt => $row) {
-    $clientString = substr($row['client'], 0, 3);
-    if (!isset($clients[$clientString])) {
-        $clients[$clientString] = 1;
-    }
-    else {
-        $clients[$clientString]++;
-    }
-    $client_count++;
+if (!empty($rowset)) {
+    foreach ($rowset as $cnt => $row) {
+        $clientString = substr($row['client'], 0, 3);
+        if (!isset($clients[$clientString])) {
+            $clients[$clientString] = 1;
+        }
+        else {
+            $clients[$clientString]++;
+        }
+        $client_count++;
 }
 
 foreach ($clients as $value => $count) {
@@ -94,7 +97,8 @@ foreach ($clients as $value => $count) {
     $clients_percentage[] = get_user_torrent_client($value) . " ($count) => $percentage%";
 }
 
-$clients = implode('<br>', $clients_percentage);
+$client_list = implode('<br>', $clients_percentage);
+}
 
 function commify_callback($matches)
 {
@@ -139,7 +143,7 @@ echo "\n
 	<tr><td align=center> clients: </td>
 	<td align=center>
 		&nbsp;
-    $clients
+    $client_list
 	</td></tr>
 \n";
 echo '</table>';
