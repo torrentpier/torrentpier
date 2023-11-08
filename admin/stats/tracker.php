@@ -78,6 +78,7 @@ foreach ($rowset as $cnt => $row) {
 // Detailed statistics for peer clients
 
 $client_list = '';
+$clients_percentage = [];
 $numwant = !empty($_GET['client_numwant']) ? (int)$_GET['client_numwant'] : 100;
 $client_full = !empty($_GET['client_length']) ? (int)$_GET['client_length'] : false;
 
@@ -153,7 +154,7 @@ echo "\n
 <br>
 \n";
 echo (count($clients_percentage) > $numwant) ? ('<a href="' . 'tracker.php?client_numwant=' . ($numwant + 100) . '">' . 'Show more' . '</a><br>') : '';
-echo $client_full ? '<br><b>Get more length and numbers via modifying the parameters in the url<b>' : '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>';
+echo $client_full ? '<br><b>Get more length and numbers via modifying the parameters in the url<b>' : (!empty($client_list) ? '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>': '');
 echo '</td></tr>';
 echo '</table>';
 echo '<div align="center"><pre>';
