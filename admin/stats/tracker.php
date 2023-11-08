@@ -76,18 +76,24 @@ foreach ($rowset as $cnt => $row) {
 }
 
 $clients = [];
+$client_count = 0;
 $rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM ' . TMP_TRACKER_TABLE);
 foreach ($rowset as $cnt => $row) {
-    $clients[] = get_user_torrent_client(substr($row['client'], 0, 3), true);
+    $clientString = substr($row['client'], 0, 3);
+    if (!isset($clients[$clientString])) {
+        $clients[$clientString] = 1;
+    }
+    else {
+        $clients[$clientString]++;
+    }
+    $client_count++;
 }
 
-$client_count = count($clients);
-$client_values = array_count_values($clients);
-
-foreach ($client_values as $value => $count) {
+foreach ($clients as $value => $count) {
     $percentage = ($count / $client_count) * 100;
-    $clients_percentage[] ="$value ($count) => $percentage%";
+    $clients_percentage[] = get_user_torrent_client($value) . " ($count) => $percentage%";
 }
+
 $clients = implode('<br>', $clients_percentage);
 
 function commify_callback($matches)
