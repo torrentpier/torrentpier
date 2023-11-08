@@ -76,13 +76,19 @@ foreach ($rowset as $cnt => $row) {
 }
 
 // Detailed statistics for peer clients
-$clients = [];
-$client_count = 0;
+
 $client_list = '';
+$numwant = !empty($_GET['client_numwant']) ? (int)$_GET['client_numwant'] : 100;
+$client_full = !empty($_GET['client_length']) ? (int)$_GET['client_length'] : false;
+
 $rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM ' . TMP_TRACKER_TABLE);
+
 if (!empty($rowset)) {
+
+    $client_count = 0;
+
     foreach ($rowset as $cnt => $row) {
-        $clientString = substr($row['client'], 0, 3);
+        $clientString = $client_full ? substr($row['client'], 0, $client_full) : substr($row['client'], 0, 3);
         if (!isset($clients[$clientString])) {
             $clients[$clientString] = 1;
         }
@@ -90,14 +96,14 @@ if (!empty($rowset)) {
             $clients[$clientString]++;
         }
         $client_count++;
-}
+    }
 
-foreach ($clients as $value => $count) {
-    $percentage = ($count / $client_count) * 100;
-    $clients_percentage[] = get_user_torrent_client($value) . " ($count) => $percentage%";
-}
+    foreach ($clients as $client => $count) {
+        $percentage = ($count / $client_count) * 100;
+        $clients_percentage[] = ($client_full ? $client : get_user_torrent_client($client)) . " [$count] => $percentage%";
+    }
 
-$client_list = implode('<br>', $clients_percentage);
+    $client_list = implode('<br>', array_slice($clients_percentage, 0, $numwant));
 }
 
 function commify_callback($matches)
@@ -142,10 +148,13 @@ echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Cour
 echo "\n
 	<tr><td align=center> clients: </td>
 	<td align=center>
-		&nbsp;
+
     $client_list
-	</td></tr>
+<br>
 \n";
+echo (count($clients_percentage) > $numwant) ? ('<a href="' . 'tracker.php?client_numwant=' . ($numwant + 100) . '">' . 'Show more' . '</a><br>') : '';
+echo $client_full ? '<br><b>Get more length and numbers via modifying the parameters in the url<b>' : '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>';
+echo '</td></tr>';
 echo '</table>';
 echo '<div align="center"><pre>';
 
