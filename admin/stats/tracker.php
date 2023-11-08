@@ -99,7 +99,7 @@ if (!empty($rowset)) {
     }
 
     foreach ($clients as $client => $count) {
-        $percentage = ($count / $client_count) * 100;
+        $percentage = number_format(($count / $client_count) * 100, 2);
         $clients_percentage[] = ($client_full ? $client : get_user_torrent_client($client)) . " [$count] => $percentage%";
     }
 
