@@ -169,7 +169,7 @@
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
             <!-- IF postrow.attach.tor_reged.HASH_V2 -->
-            <p><a href="{PAGE_URL}&filelist=1" target="_blank">...</a></p>
+            <p><a href="{PAGE_URL}&filelist=1" title = "File hashes" target="_blank">...</a></p>
             <!-- ENDIF -->
 		</td>
 	</tr>
