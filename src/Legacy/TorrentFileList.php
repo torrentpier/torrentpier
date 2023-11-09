@@ -44,7 +44,7 @@ class TorrentFileList
         global $html;
         if (($this->tor_decoded['info']['meta version'] ?? 1) === 2) {
             if (is_array($this->tor_decoded['info']['file tree'] ?? null)) {
-                return $this->fileTreeList($this->tor_decoded['info']['file tree']); //v2
+                return $this->fileTreeList($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name'] ?? ''); //v2
             }
         }
 
@@ -139,24 +139,21 @@ class TorrentFileList
      */
     public function fileTreeList(array $array, string $name = ''): string
     {
-        $folders = [];
-        $rootFiles = [];
+        $allItems = '';
 
         foreach ($array as $key => $value) {
             $key = htmlCHR($key);
             if (!isset($value[''])) {
                 $html_v2 = $this->fileTreeList($value);
-                $folders[] = "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
+                $allItems .= "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
             } else {
                 $length = (int)$value['']['length'];
                 $root = bin2hex($value['']['pieces root'] ?? '');
-                $rootFiles[] = "<li><span>$key<i>$length</i><p>$root</p></span></li>";
+                $allItems .= "<li><span>$key<i>$length</i><p>$root</p></span></li>";
             }
         }
 
-        $allFiles = implode('', [...$folders, ...$rootFiles]);
-
-        return '<div class="tor-root-dir">' . (empty($folders) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . $allFiles . '</ul>';
+        return '<div class="tor-root-dir">' . (empty($allItems) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . $allItems . '</ul>';
     }
 
     /**
@@ -168,8 +165,7 @@ class TorrentFileList
      */
     public function fileTreeTable(array $array, string $parent = ''): array
     {
-        $filesList = [];
-        $size = 0;
+        static $filesList = ['list' => '', 'size' => 0];
         foreach ($array as $key => $value) {
             $key = htmlCHR($key);
             $current = "$parent/$key";
@@ -178,14 +174,11 @@ class TorrentFileList
             } else {
                 $length = (int)$value['']['length'];
                 $root = bin2hex($value['']['pieces root'] ?? '');
-                $size += $length;
-                $filesList[] = '<tr><td>' . $current . '</td><td>' . humn_size($length, 2) . '</td><td>' . $root . '</td></tr><tr>';
+                $filesList['size'] += $length;
+                $filesList['list'] .= '<tr><td>' . $current . '</td><td>' . humn_size($length, 2) . '</td><td>' . $root . '</td></tr><tr>';
             }
         }
 
-        return [
-        'list' => $filesList,
-        'size' => $size
-        ];
+        return $filesList;
     }
 }

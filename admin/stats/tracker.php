@@ -82,29 +82,40 @@ $clients_percentage = [];
 $numwant = !empty($_GET['client_numwant']) ? (int)$_GET['client_numwant'] : 100;
 $client_full = !empty($_GET['client_length']) ? (int)$_GET['client_length'] : false;
 
-$rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM ' . TMP_TRACKER_TABLE);
+if ($client_full || !$stats_cache = CACHE('tr_cache')->get('tracker_clients_stats')) {
 
-if (!empty($rowset)) {
+    $rowset = DB()->fetch_rowset('SELECT peer_id AS client FROM ' . TMP_TRACKER_TABLE);
 
-    $client_count = 0;
+    if (!empty($rowset)) {
 
-    foreach ($rowset as $cnt => $row) {
-        $clientString = $client_full ? substr($row['client'], 0, $client_full) : substr($row['client'], 0, 3);
-        if (!isset($clients[$clientString])) {
-            $clients[$clientString] = 1;
+        $client_count = 0;
+
+        foreach ($rowset as $cnt => $row) {
+            $clientString = $client_full ? substr($row['client'], 0, $client_full) : substr($row['client'], 0, 3);
+            if (!isset($clients[$clientString])) {
+                $clients[$clientString] = 1;
+            }
+            else {
+                $clients[$clientString]++;
+            }
+            $client_count++;
         }
-        else {
-            $clients[$clientString]++;
+
+        foreach ($clients as $client => $count) {
+            $percentage = number_format(($count / $client_count) * 100, 2);
+            $clients_percentage[$client] = "[$count] => $percentage%";
         }
-        $client_count++;
-    }
 
-    foreach ($clients as $client => $count) {
-        $percentage = number_format(($count / $client_count) * 100, 2);
-        $clients_percentage[] = ($client_full ? $client : get_user_torrent_client($client)) . " [$count] => $percentage%";
+        if (!$client_full) {
+            CACHE('tr_cache')->set('tracker_clients_stats', $clients_percentage, 3600);
+        }
     }
+} else {
+    $clients_percentage = $stats_cache;
+}
 
-    $client_list = implode('<br>', array_slice($clients_percentage, 0, $numwant));
+foreach (array_slice($clients_percentage, 0, $numwant) as $client => $value) {
+    $client_list .= ($client_full) ? ("$client => $value<br>") : get_user_torrent_client($client) . " => $value<br>";
 }
 
 function commify_callback($matches)
@@ -157,6 +168,7 @@ echo (count($clients_percentage) > $numwant) ? ('<a href="' . 'tracker.php?clien
 echo $client_full ? '<br><b>Get more length and numbers via modifying the parameters in the url<b>' : (!empty($client_list) ? '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>': '');
 echo '</td></tr>';
 echo '</table>';
+echo !$client_full ? '<p style = "text-align:right;">Simple stats for clients are being cached for one hour.</p>' : '';
 echo '<div align="center"><pre>';
 
 if ($l = sys('la')) {
