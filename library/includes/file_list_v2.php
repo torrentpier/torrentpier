@@ -42,15 +42,16 @@ if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokett
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
 $file_list = $torrent->fileTreeTable($tor['info']['file tree']);
 
-$date = '';
-$name = htmlCHR($tor['info']['name'] ?? '');
-$client = htmlCHR(substr($tor['created by'] ?? 'unknown client', 0, 20));
+$data = [
+    'date' => '',
+    'name' => htmlCHR($tor['info']['name'] ?? ''),
+    'client' => htmlCHR(substr($tor['created by'] ?? 'unknown client', 0, 20)),
+    'size' => humn_size($file_list['size'])
+];
 
 if (isset($tor['creation date']) && is_numeric($tor['creation date'])) {
-  $date = date("d M Y | G:i:s T", $tor['creation date']);
+    $data['date'] = date("d M Y | G:i:s T", $tor['creation date']);
 }
-
-$size = humn_size($file_list['size']);
 
 echo "<html>
 <head>
@@ -58,7 +59,7 @@ echo "<html>
 <meta name=\"robots\" content=\"index, follow\">
 <meta name=\"description\" content=\"File list for topic - $topic_id\">
 
-<title>File list — $name ($size)</title>
+<title>File list — {$data['name']} ({$data['size']})</title>
 </head>
 <body style=\"background-color: #1f1f1f; color: #ffffff;\">
 <style>
@@ -95,9 +96,9 @@ echo "<html>
 
 </style>
 <center>
-<h2 style = \"color: #b3b3b3;font-family: Monospace\">Document name: $name | Date: ($date) | Size: $size
+<h2 style = \"color: #b3b3b3;font-family: Monospace\">Document name: {$data['name']} | Date: ({$data['date']}) | Size: {$data['size']}
 </h2>
-<p><i>Created by: $client</i></p>
+<p><i>Created by: {$data['client']}</i></p>
 <hr>
 
 <table><tr><th>Path</th><th>Size</th><th title=\"BitTorrent Merkle Root — The hash of the file, which is embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also deduplicate torrents using desktop tools such as Torrent Merkle Root Reader.\">Hash <sup>?</sup></th></tr>";
