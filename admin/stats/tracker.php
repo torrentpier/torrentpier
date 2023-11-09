@@ -101,6 +101,7 @@ if ($client_full || !$stats_cache = CACHE('tr_cache')->get('tracker_clients_stat
             $client_count++;
         }
 
+        arsort($clients, SORT_NUMERIC);
         foreach ($clients as $client => $count) {
             $percentage = number_format(($count / $client_count) * 100, 2);
             $clients_percentage[$client] = "[$count] => $percentage%";
