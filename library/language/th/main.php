@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'เครื่องคิดเงินบน�
 $lang['BT_REG_FAIL'] = 'ไม่สามารถลงทะเบียนทอร์เรนต์บนแทร็กเกอร์';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'อีกทอร์เรนต์กับเดียวกัน info_hash แล้ว <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ลบออกจากแทร็กเกอร์';
 $lang['BT_UNREGISTERED'] = 'ทอร์เรนต์ไม่จดทะเบี';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -2321,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'ประกาศเรื่องที่อย�
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'คุณสามารถกำหนดเพิ่มเติมได้รับอนุญาตที่อยู่ url ใน"includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'ปิดการใช้งาน DHT เครือข่าย';
 $lang['BT_DISABLE_DHT_EXPL'] = 'ปิดการใช้งานการแลกเปลี่ยนการเชื่อมต่อตรงและ DHT น(แนะนำให้ใช้ตัวเลือกนี้สำหรับส่วนตัวเครือข่าย,เดียวที่อยู่ url ที่จะประกาศ)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'ตรวจสอบประกาศเรื่องที่อยู่ url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'เครื่องคิดเงินบนแทร็กเกอร์เดียวที่ได้รับอนุญาตที่อยู่ url';
 $lang['BT_REPLACE_ANN_URL'] = 'แทนที่จะประกาศที่อยู่ url';

@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Зареєструватися на трекері
 $lang['BT_REG_FAIL'] = 'Не вдалося зареєструвати торент на трекері';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Інший торрент з таким же info_hash вже <a href="%s"><b>зареєстрований</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Вилучити з трекера';
 $lang['BT_UNREGISTERED'] = 'Торент незареєстрований';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -2321,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'URL-адреса анонсу';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'ви можете задати додаткові дозволені Url-адреси в "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Вимкнути DHT мережі';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Заборонити обмін між пiрами та DHT (рекомендовано для приватних мереж, тільки url анонсів)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Перевіряти url анонсу';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'реєструвати на трекері тільки дозволені URL-адреси';
 $lang['BT_REPLACE_ANN_URL'] = 'Замінити url анонсу';

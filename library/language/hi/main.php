@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'ट्रैकर पर रजिस्टर �
 $lang['BT_REG_FAIL'] = 'ट्रैकर पर धार डाउनलोड नहीं किया जा सका';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'उसी जानकारी के साथ एक और धार पहले ही <a href="%s"><b> रजिस्ट्रीकृत 1233_2_2_321</a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ट्रैकर से निकालें';
 $lang['BT_UNREGISTERED'] = 'टॉरेंट अपंजीकृत';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -2321,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'यूआरएल की घोषणा';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'आप "शामिल / torrent_announce_urls.php" में अतिरिक्त स्वीकृत यूआरएल को परिभाषित कर सकते हैं';
 $lang['BT_DISABLE_DHT'] = 'DHT नेटवर्क अक्षम करें';
 $lang['BT_DISABLE_DHT_EXPL'] = 'पीर एक्सचेंज और डीएचटी अक्षम करें (निजी नेटवर्क के लिए अनुशंसित, केवल यूआरएल की घोषणा)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'यूआरएल की घोषणा करें सत्यापित करें';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'ट्रैकर पर रजिस्टर केवल यूआरएल की अनुमति';
 $lang['BT_REPLACE_ANN_URL'] = 'घोषणा यूआरएल बदलें';
