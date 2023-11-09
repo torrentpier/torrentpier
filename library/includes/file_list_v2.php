@@ -66,6 +66,7 @@ if (isset($tor['creation date']) && is_numeric($tor['creation date'])) {
 echo <<<EOF
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="index, follow">
 <meta name="description" content="File list for topic - $topic_id">
