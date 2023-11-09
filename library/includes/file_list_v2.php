@@ -4,6 +4,8 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+$user->session_start();
+
 $topic_id = (int)$_GET['t'];
 
 $sql = 'SELECT t.attach_id, t.info_hash_v2, ad.physical_filename
@@ -17,18 +19,24 @@ $row = DB()->fetch_row($sql);
 
 if (empty($row) || empty($row['physical_filename'])) {
     http_response_code(404);
-    die('Valid topic id is missing');
+    die($lang['TOPIC_POST_NOT_EXIST']);
 }
 
 if (empty($row['info_hash_v2'])) {
     http_response_code(404);
-    die('Currently v2 torrents support file list displaying');
+    die('Currently torrents with BitTorrent v2 support are enabled for file listing');
 }
 
-$file_contents = file_get_contents(get_attachments_dir() . '/' . $row['physical_filename']);
+$file_path = get_attachments_dir() . '/' . $row['physical_filename'];
+
+if(!is_file($file_path)){
+    die($lang['INVALID_ATTACH_ID']);
+}
+
+$file_contents = file_get_contents($file_path);
 
 if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
-    return $lang['TORFILE_INVALID'];
+    die($lang['TORFILE_INVALID']);
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
@@ -37,9 +45,11 @@ $file_list = $torrent->fileTreeTable($tor['info']['file tree']);
 $date = '';
 $name = htmlCHR($tor['info']['name'] ?? '');
 $client = htmlCHR(substr($tor['created by'] ?? 'unknown client', 0, 20));
+
 if (isset($tor['creation date']) && is_numeric($tor['creation date'])) {
   $date = date("d M Y | G:i:s T", $tor['creation date']);
 }
+
 $size = humn_size($file_list['size']);
 
 echo "<html>

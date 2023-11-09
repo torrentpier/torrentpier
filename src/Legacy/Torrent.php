@@ -311,11 +311,13 @@ class Torrent
         self::torrent_auth_check($forum_id, $torrent['poster_id']);
 
         $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
-        $file_contents = file_get_contents($filename);
 
-        if (!is_file($filename) || !file_exists($filename)) {
+        if (!is_file($filename)) {
             self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT']);
         }
+
+        $file_contents = file_get_contents($filename);
+
         if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
             self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
