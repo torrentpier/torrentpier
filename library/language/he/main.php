@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'לרשום על tracker';
 $lang['BT_REG_FAIL'] = 'לא יכול לרשום סיקור על טראקר';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'עוד סיקור עם אותו info_hash כבר <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'הסר מ-tracker';
 $lang['BT_UNREGISTERED'] = 'סיקור לא רשומים';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'זרע';
 $lang['LEECHING'] = 'עלוקה';
 $lang['IS_REGISTERED'] = 'רשום';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'סטטוס';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'להכריז url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'ניתן לקבוע נוספים רשאי כתובות url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'בטל DHT רשת';
 $lang['BT_DISABLE_DHT_EXPL'] = 'השבת את Peer Exchange ו-DHT (מומלץ עבור רשתות פרטיות, רק כתובת url להכריז)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'ודא להכריז url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'לרשום על הגשש מותר רק כתובות';
 $lang['BT_REPLACE_ANN_URL'] = 'להחליף להכריז url';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'הנושא הועבר מתוך פורום [b
 $lang['BOT_MESS_SPLITS'] = 'הנושא מפוצל. נושא חדש - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'הנושא כבר עזב [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'הורדתי את השיחה.';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'שימו לב עם בקשה לחזור הפצה';
 $lang['CALLSEED_SUBJECT'] = 'הורד לעזור %s';
 $lang['CALLSEED_TEXT'] = 'שלום![br]Your צריך עזרה בשחרור [url=%s]%s[/url][br]if אתה מחליט לעזור, אבל כבר מחקתי את קובץ הטורנט, אתה יכול להוריד אותו [url=%s]this[/url][br][br]i מקווה לעזרה שלכם!';

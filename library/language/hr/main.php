@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Prijavite se na adresi';
 $lang['BT_REG_FAIL'] = 'Nije moguće registrirati torrent na adresi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Drugi torrent sa istim info_hash već <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ukloni iz tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrirane';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Sjeme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran od';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2323,6 +2325,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Prijavi URL';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'možete odrediti dodatne dopuštenih URL-u "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Isključiti DHT mreža u';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Onemogućite dijeljenje пирами i DHT (preporučuje se za privatne mreže, samo URL-a prijavi)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Provjerite obavijestiti URL';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'Prijavite se na adresi dopušteno samo URL adrese';
 $lang['BT_REPLACE_ANN_URL'] = 'Zamijeniti definišite URL adresu';
@@ -2533,7 +2537,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema je premještena iz foruma [b]%s[/b] na 
 $lang['BOT_MESS_SPLITS'] = 'Tema je bila podijeljena. Nova tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tema je bila podijeljena od [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Preuzimanje poziva';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Primati obavijesti sa zahtjevom za povratak na ruku';
 $lang['CALLSEED_SUBJECT'] = 'Preuzimanje pomoć %s';
 $lang['CALLSEED_TEXT'] = 'Pozdrav![br]Your pomoć potrebna za izlaz [URL=%s]%s[/url][br]if ste se odlučili pomoći, ali već uklonili torrent datoteku, možete ga preuzeti [URL=%s]this[/url][br][br]i nadam se u Vašu pomoć!';

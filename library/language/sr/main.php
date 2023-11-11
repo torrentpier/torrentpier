@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Пријавите се на хттп трацке
 $lang['BT_REG_FAIL'] = 'Не могу да се региструју на торрент трацкер';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Други торент са истим info_hash већ <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Уклоните из трацкер';
 $lang['BT_UNREGISTERED'] = 'Торрент нерегистрованих';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Семена';
 $lang['LEECHING'] = 'Пијавице';
 $lang['IS_REGISTERED'] = 'Регистрован';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Извештај УРЛ адреса';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'можете одредити додатне дозвољених УРЛ адресе у "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Онемогућите мрежу DHT у';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Искључите дељење пирами и DHT (препоручује се за приватне мреже, само УРЛ адреса извештај)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Проверите да обавести УРЛ адреса';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'Пријавите се на хттп трацкер је дозвољено само УРЛ адресе';
 $lang['BT_REPLACE_ANN_URL'] = 'Замени објави УРЛ адреса';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тема је премештена из фо
 $lang['BOT_MESS_SPLITS'] = 'Тема је подељена. Нова тема - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема је подељена од [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Преузети позив';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Примате обавештења са захтевом да се врати на руку';
 $lang['CALLSEED_SUBJECT'] = 'Преузмите помозите %s';
 $lang['CALLSEED_TEXT'] = 'Здраво![br]Your помоћ је потребна за излазак са [URL=%s]%s[/url][br]if сте одлучили да помогну, али већ уклонили торрент фајл, можете га преузети са [URL=%s]this[/url][br][br]i надам се у Вашу помоћ!';

@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = '登録トラッカー';
 $lang['BT_REG_FAIL'] = 'な登録激流にトラッカー';
 $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = '種子';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = '登録';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状況';
@@ -2324,6 +2326,8 @@ $lang['BT_ANNOUNCE_URL'] = '発表すurl';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'またの追加を許url"includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Disable DHTネットワーク';
 $lang['BT_DISABLE_DHT_EXPL'] = '無効ピア交流DHT(おすすめのプライベートネットワーク構築、urlお)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = '確認知url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = '登録トラッカーにのみ許されたurl';
 $lang['BT_REPLACE_ANN_URL'] = '代わせurlの';
@@ -2534,7 +2538,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = '課題として、フォーラム[b]%s[/b]�
 $lang['BOT_MESS_SPLITS'] = '話題にして分割します。 新しいトピック[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '課題分割されたから[b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'ダウンロードコ';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = '注依頼の流通';
 $lang['CALLSEED_SUBJECT'] = 'ダウンロードヘ%s';
 $lang['CALLSEED_TEXT'] = 'ハロー！[br]Yourお手伝いが必要にリリース[url=%s]%s[/url][br]ifが決まりましたのですが既に削除のtorrentファイルをダウンロードできますので、[url=%s]this[/url][br][br]iろしくお願いい！！';

@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Zaregistrujte sa na tracker';
 $lang['BT_REG_FAIL'] = 'Nemohol zaregistrovať torrent na tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Ďalší torrent s rovnakým info_hash už <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Odstrániť z tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrovaný';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Semeno';
 $lang['LEECHING'] = 'Pijavice';
 $lang['IS_REGISTERED'] = 'Registrovaná';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Stav';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Oznamujeme url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'môžete definovať ďalšie povolené adresy url v "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Vypnúť DHT siete';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Vypnúť Peer Exchange a DHT (odporúčané pre súkromné siete, len url oznámiť)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Overenie oznámiť url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'zaregistrujte sa na sledovanie povolené iba adresy url';
 $lang['BT_REPLACE_ANN_URL'] = 'Nahradiť oznámiť url';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Téma bola presunutá z fóra [b]%s[/b] na f
 $lang['BOT_MESS_SPLITS'] = 'Téma bola rozdelená. Nová téma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Téma bola rozdelená z [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Stiahnuť hovor';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Všimnite so žiadosťou o návrat k distribučnej';
 $lang['CALLSEED_SUBJECT'] = 'Stiahnuť pomôcť %s';
 $lang['CALLSEED_TEXT'] = 'Dobrý deň![br]Your pomoc je potrebné v release [url=%s]%s[/url][br]if ste sa rozhodli pomôcť, ale už odstránené torrent súboru, môžete si ho stiahnuť [url=%s]this[/url][br][br]i nádej pre vašu pomoc!';

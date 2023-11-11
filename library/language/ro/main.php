@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Înregistrați pe tracker';
 $lang['BT_REG_FAIL'] = 'Nu ar putea înregistra torrent pe tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un alt torrent cu același info_hash deja <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Eliminați de la tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neînregistrate';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Semințe';
 $lang['LEECHING'] = 'Lipitoare';
 $lang['IS_REGISTERED'] = 'Înregistrați';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Starea';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Anunta url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'puteți defini suplimentare permis url-uri în "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Dezactivați DHT network';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Dezactivați Peer Exchange și DHT (recomandat pentru rețele private, doar url-anunt)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verifica anunța url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'înregistrați pe tracker permis doar url-uri';
 $lang['BT_REPLACE_ANN_URL'] = 'Înlocuiți url anunt';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Subiectul a fost mutat de la forum [b]%s[/b]
 $lang['BOT_MESS_SPLITS'] = 'Subiectul a fost divizat. Subiect nou - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Subiectul a fost despărțit de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Descărcat call';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ia notificare cu o cerere pentru a reveni la distributie';
 $lang['CALLSEED_SUBJECT'] = 'Descărcați ajuta %s';
 $lang['CALLSEED_TEXT'] = 'Buna ziua![br]Your este nevoie de ajutor în eliberarea [url=%s]%s[/url][br]if vă decideți pentru a ajuta, dar deja eliminat fișier torrent, o puteți descărca de [url=%s]this[/url][br][br]i speranță pentru ajutor!';

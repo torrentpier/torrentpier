@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = '登记册上的跟踪器';
 $lang['BT_REG_FAIL'] = '不能登记的洪流上的跟踪器';
 $lang['BT_REG_FAIL_SAME_HASH'] = '另一个种子与同info_hash已经<a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = '删除从跟踪器';
 $lang['BT_UNREGISTERED'] = '未注册的洪流';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = '种子';
 $lang['LEECHING'] = '水蛭';
 $lang['IS_REGISTERED'] = '注册';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状态';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = '宣布url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = '你可以定义的附加允许的网址在"includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = '禁止散网络';
 $lang['BT_DISABLE_DHT_EXPL'] = '禁止对等交流和双氢(建议对于私人网络，只有url宣布)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = '验证宣布的url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = '登记册上的跟踪器只允许的网址';
 $lang['BT_REPLACE_ANN_URL'] = '替代宣布的url';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = '专题已经从论坛[b]%s[/b]论坛[b]%s[/b
 $lang['BOT_MESS_SPLITS'] = '主题已经分裂。 新的话题-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '主题已被拆分从[b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = '下载的电话';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = '注意到要求回归的分布';
 $lang['CALLSEED_SUBJECT'] = '下载帮助%s';
 $lang['CALLSEED_TEXT'] = '你好！[br]Your帮助是必要的，释放[url=%s]%s[/url][br]if你决定帮助，但是已经被删除的种子文件，可以下载[url=%s]this[/url][br][br]i希望你的帮助！';

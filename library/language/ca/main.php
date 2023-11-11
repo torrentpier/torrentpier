@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Registre a seguidor';
 $lang['BT_REG_FAIL'] = 'No podia registrar-torrent al tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un altre torrent amb la mateixa info_hash ja <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retirar del tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent no registrats';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Llavor';
 $lang['LEECHING'] = 'A la sangonera';
 $lang['IS_REGISTERED'] = 'Registrat';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Estat';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Anunciar url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'podeu definir addicional admesos url a "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Desactivar DHT xarxa';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Desactivar Peer Intercanvi i la DHT (recomanat per a xarxes privades, només url anunciar)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verificar anunciar url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registre a seguidor només es permet url';
 $lang['BT_REPLACE_ANN_URL'] = 'Substituir anunciar url';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'El tema ha estat traslladat des de fòrum [b
 $lang['BOT_MESS_SPLITS'] = 'El tema ha estat dividida. Nou tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'El tema ha estat dividits de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Descarregar la convocatòria';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Prendre nota amb la sol·licitud de retorn a la distribució';
 $lang['CALLSEED_SUBJECT'] = 'Descarregar ajudar %s';
 $lang['CALLSEED_TEXT'] = 'Hola![br]Your es necessita ajuda a l\'alliberament [url=%s]%s[/url][br]if vostè decideix ajudar, però ja esborrat el fitxer torrent, podeu baixar - [url=%s]this[/url][br][br]i esperança per la vostra ajuda!';

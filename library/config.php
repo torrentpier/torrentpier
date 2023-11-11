@@ -95,8 +95,8 @@ $bb_cfg['gzip_compress'] = false; // compress output
 
 // Tracker
 $bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
-$bb_cfg['scrape_interval'] = 100; // Scrape interval (default: 100)
-$bb_cfg['max_scrapes'] = 20; // Allowed number of info-hashes for simultaneous scraping (default: 20)
+$bb_cfg['scrape_interval'] = 80; // Scrape interval (default: 100)
+$bb_cfg['max_scrapes'] = 150; // Allowed number of info-hashes for simultaneous scraping (default: 150)
 $bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
@@ -454,7 +454,6 @@ $bb_cfg['show_poster_posts'] = true; // показывать количеств�
 $bb_cfg['show_poster_from'] = true; // показывать страну пользователя
 $bb_cfg['show_bot_nick'] = false; // показывать ник бота
 $bb_cfg['text_buttons'] = false; // replace EDIT, QUOTE... images with text links
-$bb_cfg['parse_ed2k_links'] = true; // make ed2k links clickable
 $bb_cfg['post_date_format'] = 'd-M-Y H:i'; // формат даты публикации в топиках
 $bb_cfg['ext_link_new_win'] = true; // open external links in new window
 

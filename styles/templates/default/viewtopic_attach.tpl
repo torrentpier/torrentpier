@@ -168,6 +168,9 @@
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
+            <!-- IF postrow.attach.tor_reged.HASH_V2 -->
+            <p><a href="{PAGE_URL}&filelist=1" title = "File hashes | Detailed .torrent meta info" target="_blank">...</a></p>
+            <!-- ENDIF -->
 		</td>
 	</tr>
 	<tr class="row1">
@@ -213,8 +216,8 @@
 		</td>
 	</tr>
 	<tr class="row1">
-		<td>{L_COMPLETED}:</td>
-		<td><span title="Полных скачиваний: {postrow.attach.tor_reged.COMPLETED}">{postrow.attach.tor_reged.DOWNLOAD_COUNT}</span></td>
+		<td>{L_DOWNLOADED}:</td>
+		<td><span title="{L_COMPLETED}: {postrow.attach.tor_reged.COMPLETED}">{postrow.attach.tor_reged.DOWNLOAD_COUNT}</span></td>
 	</tr>
 	<tr class="row1">
 		<td>{L_SIZE}:</td>

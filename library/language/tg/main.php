@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Ба Реестри оид ба Назоратчи
 $lang['BT_REG_FAIL'] = 'Оё ҷӯйе оид ба Назоратчии қайд намегиранд';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'ҷӯйе дигар бо ҳамин info_hash аллакай <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Хориҷ аз Назоратчии';
 $lang['BT_UNREGISTERED'] = 'ҷӯйе никоњи';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'тухмӣ';
 $lang['LEECHING'] = 'пиявка';
 $lang['IS_REGISTERED'] = 'Сабтшуда';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статуси';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'эълон URL';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'Шумо метавонед URL-иҷозат иловагӣ дар «мегирад / torrent_announce_urls.php" муайян';
 $lang['BT_DISABLE_DHT'] = 'Хомӯш кардани шабакаи DHT';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Хомӯш кардани њамсол асъор ва DHT (тавсия шабакаҳои хусусӣ, танҳо URL эълон)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Тасдиқ эълон URL';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'қайд оид ба Назоратчии URL-танҳо иҷозат дода';
 $lang['BT_REPLACE_ANN_URL'] = 'Ҷойгузорӣ эълон URL';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Мавзӯъ шудааст, ки аз ҳа�
 $lang['BOT_MESS_SPLITS'] = 'Мавзӯъ кардааст, тақсим шудааст. мавзӯъ Сиёсат - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Мавзӯъ аз [b]%s[/b][br][br]%s тақсим шудааст';
 
-$lang['CALLSEED'] = 'Дарёфт занг';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Андешидани огоҳинома бо дархости барои баргаштан ба тақсимоти';
 $lang['CALLSEED_SUBJECT'] = 'Download кӯмак %s';
 $lang['CALLSEED_TEXT'] = 'Салом! Кӯмак [br]Your дар озод зарур аст [URL = %s] %s[/url][br]If шумо қарор ба кӯмак, балки аллакай ҳазф файли ҷӯйе, шумо метавонед онро зеркашӣ [URL = %s] this[/url][br][br]I умед барои кӯмак кунед!';

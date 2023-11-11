@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Registar-se no tracker';
 $lang['BT_REG_FAIL'] = 'Não foi possível registrar torrent no tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Outro torrent com o mesmo info_hash já <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retire do tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent não registrado';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Semente';
 $lang['LEECHING'] = 'Sanguessuga';
 $lang['IS_REGISTERED'] = 'Registrado';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Estado';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Anunciar url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'você pode definir outros permitido urls "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Desativar a rede DHT';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Desabilitar o Peer Exchange e DHT (recomendado para redes privadas, apenas a url anunciar)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verifique anunciar url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registar-se no tracker só urls permitidos';
 $lang['BT_REPLACE_ANN_URL'] = 'Substituir anunciar url';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'O tópico foi movido do forum [b]%s[/b] do f
 $lang['BOT_MESS_SPLITS'] = 'O tópico foi dividido. Novo tópico - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'O tópico foi dividido a partir de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Baixou a chamada';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Observe-se com um pedido para voltar para a distribuição';
 $lang['CALLSEED_SUBJECT'] = 'Download ajudar %s';
 $lang['CALLSEED_TEXT'] = 'Olá![br]Your é necessária ajuda na liberação de [url=%s]%s[/url][br]if você decide ajudar, mas já excluído o arquivo torrent, você pode baixá-lo [url=%s]this[/url][br][br]i espero por sua ajuda!';

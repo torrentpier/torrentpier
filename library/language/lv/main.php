@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Reģistrēties tracker';
 $lang['BT_REG_FAIL'] = 'Nevarēja reģistrēties par torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Citu torrent ar pašu info_hash jau <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Noņemt no tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent nereģistrētiem';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Sēklas';
 $lang['LEECHING'] = 'Dēle';
 $lang['IS_REGISTERED'] = 'Reģistrēts';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statuss';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Announce url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'jūs varat definēt papildu atļauts url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Atspējot DHT tīklu';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Atspējot Peer Exchange un DHT (ieteicams privātiem tīkliem, tikai url paziņot)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Pārbaudīt paziņot url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'reģistrēties tracker atļauta tikai url';
 $lang['BT_REPLACE_ANN_URL'] = 'Aizstāt paziņot url';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tēma ir pārcelta no foruma [b]%s[/b] uz fo
 $lang['BOT_MESS_SPLITS'] = 'Tēma ir sadalīts. Jauna tēma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tēma ir sadalīts no [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Lejupielādēt zvanu';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Pieņemt paziņojumu ar lūgumu, lai atgrieztos sadales';
 $lang['CALLSEED_SUBJECT'] = 'Lejupielādēt palīdzēt %s';
 $lang['CALLSEED_TEXT'] = 'Labdien![br]Your palīdzība ir nepieciešama piesārņojošo [url=%s]%s[/url][br]if jums izlemt, lai palīdzētu, bet jau izdzēsts torrent failu, jūs varat lejupielādēt to [url=%s]this[/url][br][br]i ceru uz jūsu palīdzību!';

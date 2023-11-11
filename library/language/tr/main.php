@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'İzci kayıt';
 $lang['BT_REG_FAIL'] = 'İzci torrent kaydedilemedi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Aynı info_hash ile başka bir torrent zaten <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'İzleyiciden Kaldır';
 $lang['BT_UNREGISTERED'] = 'Torrent kayıtsız';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'Tohum';
 $lang['LEECHING'] = 'Sülük';
 $lang['IS_REGISTERED'] = 'Kayıtlı';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Durumu';
@@ -2324,6 +2326,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Url duyurmak';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'includes/torrent_announce_urls.php "ek izin urls tanımlayabilirsiniz';
 $lang['BT_DISABLE_DHT'] = 'Devre dışı bırakmak DHT ağ';
 $lang['BT_DISABLE_DHT_EXPL'] = '(Özel ağlar için önerilir)devre dışı bırakın, Eş Değişimi ve DHT url sadece duyurmak';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Doğrulamak url duyurmak';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'kayıt tracker sadece urls izin';
 $lang['BT_REPLACE_ANN_URL'] = 'İlan url değiştirin';
@@ -2534,7 +2538,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Konu forum [b]%s[/b] gelen [b]%s[/b][br][br]
 $lang['BOT_MESS_SPLITS'] = 'Konu bölünmüş. Yeni konu [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Konu [b]%s[/b][br][br]%s arasında bölünmüş';
 
-$lang['CALLSEED'] = 'Çağrı indirilmiş';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Talep dağılımı için geri bildirim almak';
 $lang['CALLSEED_SUBJECT'] = 'İndir %s yardım';
 $lang['CALLSEED_TEXT'] = 'Merhaba![br]Your yardım etmeye karar, ama zaten torrent dosyası silinmiş %s[/url][br]if %s [url=] açıklamasında, yardımın için %s [url=] this[/url][br][br]i umut indirebilirsiniz gereklidir.';

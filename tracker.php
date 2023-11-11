@@ -29,7 +29,7 @@ $max_forum_name_len = 60; // inside forum select box
 $max_forums_selected = 50;
 $title_match_max_len = 60;
 $poster_name_max_len = 25;
-$tor_colspan = 13; // torrents table colspan with all columns
+$tor_colspan = 12; // torrents table colspan with all columns
 $per_page = $bb_cfg['topics_per_page'];
 $tracker_url = basename(__FILE__);
 

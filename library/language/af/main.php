@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'Registreer op spoorsnyer';
 $lang['BT_REG_FAIL'] = 'Kon nie torrent op spoorsnoer registreer nie';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1084,6 +1085,7 @@ $lang['SEEDING'] = 'saad';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'geregistreer';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'status';
@@ -2320,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Verkondig url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'Jy kan addisionele toegelate URL\'s definieer in "include / torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Deaktiveer DHT-netwerk';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Deaktiveer Peer Exchange en DHT (aanbeveel vir privaat netwerke, net url aankondig)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verifieer aankondiging url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'Registreer slegs op spoorsnyers wat toegelaat word';
 $lang['BT_REPLACE_ANN_URL'] = 'Vervang aankondig url';
@@ -2530,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Onderwerp is verskuif vanaf forum [b]%s[/b] 
 $lang['BOT_MESS_SPLITS'] = 'Onderwerp is verdeel. Nuwe onderwerp - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Onderwerp is verdeel van [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Laai die oproep af';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Neem kennis met \'n versoek om terug te keer na die verspreiding';
 $lang['CALLSEED_SUBJECT'] = 'Laai hulp op %s af';
 $lang['CALLSEED_TEXT'] = 'Hallo! [br]Jou hulp is nodig in die vrylating [url = %s] %s[/url][br]Indien jy besluit om te help, maar alreeds die torrent-lêer verwyder, kan jy dit aflaai [url = %s] this[/url][br][br] Ek hoop vir jou hulp!';
