@@ -126,33 +126,35 @@ function show_edit_options ()
 
 <div id="mod-action-content" style="display: none;">
 <form id="mod-action" method="POST" action="{U_SEARCH}" target="_blank">
-	<table class="borderless pad_0" cellpadding="0" cellspacing="0">
-	    <tr>
-		    <td class="pad_4">
-		        <input type="submit" name="del_my_post" value="{L_DEL_LIST_MY_MESSAGE}" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false };" />
-	        </td>
-			<td class="med" style="padding: 0 8px;">{L_DEL_LIST_MY_MESSAGE_INFO}</td>
-		</tr>
-	</table>
+    <table class="borderless pad_0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="pad_4">
+                <input type="submit" name="del_my_post" value="{L_DEL_LIST_MY_MESSAGE}" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false }"/>
+            </td>
+            <td class="med" style="padding: 0 8px;">{L_DEL_LIST_MY_MESSAGE_INFO}</td>
+        </tr>
+    </table>
 </form>
 </div>
 <!-- ENDIF -->
 
-<table class="forumline forum">
+<table class="forumline tablesorter forum">
 <col class="row1">
 <col class="row1" width="25%">
 <col class="row4" width="75%">
 <col class="row1">
 <col class="row4">
 <col class="row1">
+<thead>
 <tr>
 	<th>&nbsp;</th>
-	<th>{L_FORUM}</th>
-	<th>{L_TOPICS}</th>
-	<th>{L_AUTHOR}</th>
-	<th>{L_REPLIES_SHORT}</th>
-	<th>{L_LASTPOST}</th>
+	<th class="{sorter: 'text'}" title="{L_FORUM}"><b class="tbs-text">{L_FORUM}</b></th>
+	<th class="{sorter: 'text'}" title="{L_TOPICS}"><b class="tbs-text">{L_TOPICS}</b></th>
+	<th class="{sorter: 'text'}" title="{L_AUTHOR}"><b class="tbs-text">{L_AUTHOR}</b></th>
+	<th class="{sorter: 'digit'}" title="{L_REPLIES}"><b class="tbs-text">{L_REPLIES_SHORT}</b></th>
+	<th class="{sorter: 'text'}" title="{L_LASTPOST}"><b class="tbs-text">{L_LASTPOST}</b></th>
 </tr>
+</thead>
 <!-- BEGIN t -->
 <tr id="tr-{t.TOPIC_ID}" class="tCenter">
 	<td id="{t.TOPIC_ID}" class="topic_id">
@@ -177,7 +179,7 @@ function show_edit_options ()
 		</div>
 	</td>
 	<td class="med nowrap">{t.TOPIC_AUTHOR}</td>
-	<td class="small">{t.REPLIES}</td>
+	<td title="{L_REPLIES}: {t.REPLIES}" class="small">{t.REPLIES}</td>
 	<td class="small nowrap" style="padding: 1px 4px 3px 4px;">
 		<p>{t.LAST_POST_TIME}</p>
 		<p>
@@ -187,6 +189,7 @@ function show_edit_options ()
 	</td>
 </tr>
 <!-- END t -->
+<tfoot>
 <!-- IF MY_POSTS -->
 <tr id="mod-action-row">
 	<td colspan="6" id="mod-action-cell" class="row2">
@@ -208,6 +211,7 @@ function show_edit_options ()
 		<!-- ENDIF -->
 	</td>
 </tr>
+</tfoot>
 </table>
 
 <!-- IF DL_CONTROLS -->

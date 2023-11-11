@@ -226,7 +226,7 @@ class Atom
         }
         $atom .= "</feed>";
         @unlink($file_path);
-        $fp = fopen($file_path, 'wb');
+        $fp = fopen($file_path, 'wb+');
         fwrite($fp, $atom);
         fclose($fp);
         return true;

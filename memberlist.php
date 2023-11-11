@@ -141,7 +141,6 @@ $sql .= " ORDER BY $order_by";
 if ($result = DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
-
         $user_info = generate_user_info($row);
 
         $row_class = !($i % 2) ? 'row1' : 'row2';

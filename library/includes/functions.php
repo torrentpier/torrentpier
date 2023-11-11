@@ -1176,17 +1176,17 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
 /**
  * Get user's torrent client string
  *
- * @param string $peer_id
+ * @param string $peerId
  * @return mixed|string
  */
-function get_user_torrent_client(string $peer_id): mixed
+function get_user_torrent_client(string $peerId): mixed
 {
     static $clients = [
         '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',
         '-BE' => 'BitTorrent SDK', '-BI' => 'BiglyBT', '-BL' => 'BitLord', '-BT' => 'BitTorrent',
         '-CT' => 'CTorrent', '-DE' => 'Deluge', '-FD' => 'Free Download Manager', 'FD6' => 'Free Download Manager',
         '-FG' => 'FlashGet', '-FL' => 'Folx', '-HL' => 'Halite', '-KG' => 'KGet',
-        '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent', '-MG' => 'MediaGet',
+        '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent',
         '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => 'uTorrent',
         '-UW' => 'uTorrent Web', '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
         '-PI' => 'PicoTorrent', '-qB' => 'qBittorrent', 'M' => 'BitTorrent', 'MG' => 'MediaGet',
@@ -1220,21 +1220,28 @@ function get_user_torrent_client(string $peer_id): mixed
          * =======================================================================
          **/
     ];
+    static $iconExtension = '.png';
 
+    $bestMatch = null;
     $bestMatchLength = 0;
 
     foreach ($clients as $key => $clientName) {
-        if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
+        if (str_starts_with($peerId, $key) !== false && strlen($key) > $bestMatchLength) {
             $bestMatch = $clientName;
             $bestMatchLength = strlen($key);
         }
     }
 
-    if (!empty($bestMatchLength)) {
-        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/' . $bestMatch . '.png" alt="' . $bestMatch . '" title="' . $peer_id . '">';
+    if (!empty($bestMatchLength) && !empty($bestMatch)) {
+        $clientIconPath = 'styles/images/clients/' . $bestMatch . $iconExtension;
+        if (is_file($clientIconPath)) {
+            return '<img width="auto" height="auto" style="display: inline !important; vertical-align: middle;" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peerId . '">';
+        } else {
+            return $bestMatch;
+        }
     }
 
-    return $peer_id;
+    return $peerId;
 }
 
 function birthday_age($date)
