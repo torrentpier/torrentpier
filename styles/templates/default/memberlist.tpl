@@ -52,7 +52,7 @@
     <!-- BEGIN no_username -->
     <tbody>
     <tr>
-        <td class="row1 tCenter pad_8" colspan="9">{no_username.NO_USER_ID_SPECIFIED}</span></td>
+        <td class="row1 tCenter pad_8" colspan="9">{no_username.NO_USER_ID_SPECIFIED}</td>
     </tr>
     </tbody>
     <!-- END no_username -->
