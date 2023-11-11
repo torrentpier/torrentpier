@@ -52,26 +52,22 @@ $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
 $files = $torrent->fileTreeTable($tor['info']['file tree']);
 
 $data = [
-    'date' => '',
     'name' => htmlCHR($tor['info']['name'] ?? ''),
     'client' => htmlCHR(substr($tor['created by'] ?? 'unknown client', 0, 20)),
     'size' => humn_size($files['size']),
-    'hash' => bin2hex($row['info_hash_v2'])
+    'hash' => bin2hex($row['info_hash_v2']),
+    'date' => (isset($tor['creation date']) && is_numeric($tor['creation date'])) ? delta_time($tor['creation date']) : 'unknown'
 ];
-
-if (isset($tor['creation date']) && is_numeric($tor['creation date'])) {
-    $data['date'] = date("d M Y | G:i:s T", $tor['creation date']);
-}
 
 echo <<<EOF
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="index, follow">
-<meta name="description" content="File list for topic - $topic_id">
+<meta name="robots" content="index, follow, noarchive">
+<meta name="description" content="File listing for topic - $topic_id | {$data['name']} ({$data['size']})">
 
-<title>File information listing | {$data['name']} ({$data['size']}) | {$data['hash']}</title>
+<title>{$data['name']} ({$data['size']}) | {$data['hash']} | {$bb_cfg['sitename']}</title>
 </head>
 <body style="background-color: #1f1f1f; color: #ffffff;">
 <style>
@@ -108,12 +104,12 @@ echo <<<EOF
 
 </style>
 <center>
-<h2 style="color: #b3b3b3;font-family: Monospace">Document name: {$data['name']} | Date: ({$data['date']}) | Size: {$data['size']}
+<h2 style="color: #b3b3b3;font-family: Monospace">Name: {$data['name']} | Age: ({$data['date']}) | Size: {$data['size']}
 </h2>
 <p><i>Created by: {$data['client']}</i></p>
 <hr>
 
-<table><tr><th>Path</th><th>Size</th><th title="BitTorrent Merkle Root — The hash of the file, which is embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also deduplicate torrents using desktop tools such as Torrent Merkle Root Reader.">Hash <sup>?</sup></th></tr>
+<table><tr><th>Path</th><th>Size</th><th title="BitTorrent Merkle Root — The hash of a file, which is embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also deduplicate torrents using desktop tools such as Torrent Merkle Root Reader.">BTMR hash <sup>?</sup></th></tr>
 EOF;
 
 echo $files['list'];
