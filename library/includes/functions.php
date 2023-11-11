@@ -1025,7 +1025,7 @@ function make_jumpbox()
         $jumpbox = $datastore->get('jumpbox');
     }
 
-    $template->assign_vars(['JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user']]);
+    $template->assign_vars(['JUMPBOX' => (IS_GUEST) ? DB()->escape($jumpbox['guest']) : DB()->escape($jumpbox['user'])]);
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
