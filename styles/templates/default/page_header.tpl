@@ -80,7 +80,7 @@ $(document).ready(function () {
 	');
     $('#jumpbox-container').one('click', function () {
         $('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
-        $(this).html();
+        $(this).html('{JUMPBOX}');
         $('#jumpbox-submit').click(function () {
             window.location.href = '{FORUM_URL}' + $('#jumpbox').val();
         });
