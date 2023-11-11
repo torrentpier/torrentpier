@@ -51,7 +51,7 @@ class TorrentFileList
         $this->build_filelist_array();
 
         if ($this->multiple) {
-            if ($this->files_ary['/'] !== '') {
+            if (!empty($this->files_ary['/'])) {
                 $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
                 unset($this->files_ary['/']);
             }
@@ -102,7 +102,7 @@ class TorrentFileList
                     for ($i = 0, $j = 1; $i < $subdir_count; $i++, $j++) {
                         $subdir = $f['path'][$i];
 
-                        if (!isset($cur_files_ary[$subdir])) {
+                        if (!isset($cur_files_ary[$subdir]) || !is_array($cur_files_ary[$subdir])) {
                             $cur_files_ary[$subdir] = [];
                         }
                         $cur_files_ary =& $cur_files_ary[$subdir];
