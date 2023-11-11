@@ -8,7 +8,6 @@ composer.phar
 configs/local.php
 data/avatars
 data/torrent_files
-internal_data/ajax_html
 internal_data/atom
 internal_data/cache
 internal_data/log

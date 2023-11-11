@@ -1012,16 +1012,20 @@ function get_userdata($u, bool $is_name = false, bool $allow_guest = false)
     return $u_data;
 }
 
-function make_jumpbox($selected = 0)
+function make_jumpbox()
 {
-    global $datastore, $template;
+    global $datastore, $template, $bb_cfg;
+
+    if (!$bb_cfg['show_jumpbox']) {
+        return;
+    }
 
     if (!$jumpbox = $datastore->get('jumpbox')) {
         $datastore->update('jumpbox');
         $jumpbox = $datastore->get('jumpbox');
     }
 
-    $template->assign_vars(['JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user']]);
+    $template->assign_vars(['JUMPBOX' => (IS_GUEST) ? DB()->escape($jumpbox['guest']) : DB()->escape($jumpbox['user'])]);
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
