@@ -1,4 +1,11 @@
 <?php
+/**
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -34,7 +41,7 @@ if (empty($row['info_hash_v2'])) {
 
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
 
-if(!is_file($file_path)){
+if (!is_file($file_path)) {
     die($lang['TOR_NOT_FOUND']);
 }
 
@@ -72,7 +79,6 @@ echo <<<EOF
 </head>
 <body style="background-color: #1f1f1f; color: #ffffff;">
 <style>
-
     table {
         table-layout: auto;
         border-collapse: collapse;
@@ -102,10 +108,9 @@ echo <<<EOF
     a {
         color: #187700;
     }
-
 </style>
 <center>
-<h2 style="color: #b3b3b3;font-family: Monospace">Name: {$data['name']} | Age: ({$data['date']}) | Size: {$data['size']}
+<h2 style="color: #b3b3b3; font-family: Monospace;">Name: {$data['name']} | Age: ({$data['date']}) | Size: {$data['size']}
 </h2>
 <p><i>Created by: {$data['client']}</i></p>
 <hr>
