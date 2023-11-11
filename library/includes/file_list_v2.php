@@ -156,7 +156,7 @@ sup {
 <hr>
 <table>
     <tr>
-        <th>Path</th>
+        <th>Path ({$files['count']} files)</th>
         <th>Size</th>
         <th class="tooltip" style="width: auto;">
             BTMR hash

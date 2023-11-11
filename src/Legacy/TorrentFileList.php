@@ -165,7 +165,7 @@ class TorrentFileList
      */
     public function fileTreeTable(array $array, string $parent = ''): array
     {
-        static $filesList = ['list' => '', 'size' => 0];
+        static $filesList = ['list' => '', 'size' => 0, 'count' => 0];
         foreach ($array as $key => $value) {
             $key = htmlCHR($key);
             $current = "$parent/$key";
@@ -176,6 +176,7 @@ class TorrentFileList
                 $root = bin2hex($value['']['pieces root'] ?? '');
                 $filesList['size'] += $length;
                 $filesList['list'] .= '<tr><td>' . $current . '</td><td>' . humn_size($length, 2) . '</td><td>' . $root . '</td></tr><tr>';
+                $filesList['count']++;
             }
         }
 
