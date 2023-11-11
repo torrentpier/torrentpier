@@ -132,7 +132,7 @@ a {
     opacity: 0;
     transition: opacity 0.7s;
     width: 400px;
-    background-color: #1f1f1f;
+    background-color: #111;
     color: #c6c4c4;
     text-align: left;
     border-radius: 5px;
