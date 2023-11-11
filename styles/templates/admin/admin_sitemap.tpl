@@ -111,7 +111,7 @@ ajax.callback.sitemap = function(data) {
 		</td>
 		<td>
 			<textarea name="static_sitemap" rows="5" cols="70">{STATIC_SITEMAP}</textarea><br />
-			<br><p>{L_SITEMAP_ADD_EXP_1} <b style="color: #993300;">{L_SITEMAP_ADD_EXP_2}</b></p>
+			<br><p>{L_SITEMAP_ADD_EXP_1} <br><br><b style="color: #993300;">{L_SITEMAP_ADD_EXP_2}</b></p>
 		</td>
 	</tr>
 	<tr>

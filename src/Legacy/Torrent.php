@@ -275,7 +275,6 @@ class Torrent
     {
         global $bb_cfg, $lang, $reg_mode;
 
-        $announce_urls = [];
         $attach_id = (int)$attach_id;
         $reg_mode = $mode;
 

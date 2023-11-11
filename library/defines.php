@@ -36,7 +36,6 @@ define('CHECK_REQIREMENTS', [
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
-define('AJAX_HTML_DIR', BB_PATH . '/internal_data/ajax_html');
 define('CACHE_DIR', BB_PATH . '/internal_data/cache');
 define('LOG_DIR', BB_PATH . '/internal_data/log');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
@@ -73,7 +72,7 @@ define('SQL_TR_LOG_NAME', 'sql_error_tr'); // mysql log filename (Tracker)
 define('SQL_CALC_QUERY_TIME', true); // for stats
 define('SQL_LOG_SLOW_QUERIES', true); // log sql slow queries
 define('SQL_SLOW_QUERY_TIME', 10); // slow query in seconds
-define('SQL_PREPEND_SRC_COMM', false); // prepend source file comment to sql query
+define('SQL_PREPEND_SRC', true); // prepend source file to sql query
 
 // Log options
 define('LOG_EXT', 'log'); // log file extension

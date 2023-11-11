@@ -12,6 +12,7 @@ define('BB_SCRIPT', 'search');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
+$page_cfg['use_tablesorter'] = true;
 $page_cfg['load_tpl_vars'] = [
     'post_buttons',
     'post_icons',

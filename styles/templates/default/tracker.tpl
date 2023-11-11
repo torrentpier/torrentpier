@@ -422,7 +422,6 @@ $(function(){
 	</td>
 	<td class="row4 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>
 	<td class="row4 leechmed" title="{L_LEECHERS}"><b>{tor.LEECHS}</b></td>
-	<td class="row4 small" title="{L_REPLIES}: {tor.REPLIES}">{tor.COMPLETED}</td>
     <td class="row4 small" style="padding: 3px 4px 2px;">
         <p>
             <span title="{L_REPLIES}: {tor.REPLIES}">{tor.REPLIES}</span>
