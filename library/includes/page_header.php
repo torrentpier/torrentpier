@@ -91,7 +91,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
 				GROUP BY privmsgs_to_userid
 			");
 
-            $real_unread_pm_count = (int)$row['pm_count'] ?? 0;
+            $real_unread_pm_count = (int)($row['pm_count'] ?? 0);
 
             if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
                 $userdata['user_unread_privmsg'] = $real_unread_pm_count;
