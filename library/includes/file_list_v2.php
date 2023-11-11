@@ -48,8 +48,9 @@ if (isset($tor['info']['private']) && IS_GUEST) {
     die($lang['BT_PRIVATE_TORRENT']);
 }
 
-$torrent = new TorrentPier\Legacy\TorrentFileList($tor);
-$files = $torrent->fileTreeTable($tor['info']['file tree']);
+$list_handler = new TorrentPier\Legacy\TorrentFileList($tor);
+
+$files = $list_handler->fileTreeTable($tor['info']['file tree']);
 
 $data = [
     'name' => htmlCHR($tor['info']['name'] ?? ''),
