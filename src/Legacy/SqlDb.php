@@ -849,7 +849,7 @@ class SqlDb
      */
     public function debug_find_source(string $mode = 'all'): string
     {
-        if (!SQL_PREPEND_SRC_COMM) {
+        if (!SQL_PREPEND_SRC) {
             return 'src disabled';
         }
         foreach (debug_backtrace() as $trace) {
