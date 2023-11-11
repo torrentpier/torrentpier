@@ -134,7 +134,7 @@ ajax.callback.callseed = function (data) {
 		<a name="seeders"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td><p class="floatL" style="margin-top: 4px;"><b>{L_SEEDERS}</b>:</p></td>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="seed">{L_SEEDERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
@@ -185,7 +185,7 @@ ajax.callback.callseed = function (data) {
 		<a name="leechers"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td><p class="floatL" style="margin-top: 4px;"><b>{L_LEECHERS}</b>:</p></td>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="leech">{L_LEECHERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
