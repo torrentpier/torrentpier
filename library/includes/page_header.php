@@ -32,11 +32,11 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     $online_full = !empty($_REQUEST['online_full']);
     $online_list = $online_full ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
 
-    ${$online_list} = array(
+    ${$online_list} = [
         'stat' => '',
         'userlist' => '',
-        'cnt' => '',
-    );
+        'cnt' => ''
+    ];
 
     if (defined('IS_GUEST') && !(IS_GUEST || IS_USER)) {
         $template->assign_var('SHOW_ONLINE_LIST');
@@ -48,12 +48,12 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
         }
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
         'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
         'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], $bb_cfg['record_online_users'], bb_date($bb_cfg['record_online_date'])),
-    ));
+    ]);
 }
 
 // Make jumpbox
@@ -73,15 +73,15 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
         if ($userdata['user_last_privmsg'] > $userdata['user_lastvisit'] && defined('IN_PM')) {
             $userdata['user_last_privmsg'] = $userdata['user_lastvisit'];
 
-            \TorrentPier\Sessions::db_update_userdata($userdata, array(
-                'user_last_privmsg' => $userdata['user_lastvisit'],
-            ));
+            \TorrentPier\Sessions::db_update_userdata($userdata, [
+                'user_last_privmsg' => $userdata['user_lastvisit']
+            ]);
 
             $have_new_pm = ($userdata['user_new_privmsg'] > 1);
         }
     }
     if (!$have_new_pm && $userdata['user_unread_privmsg']) {
-        // synch unread pm count
+        // sync unread pm count
         if (defined('IN_PM')) {
             $row = DB()->fetch_row("
 				SELECT COUNT(*) AS pm_count
@@ -91,14 +91,14 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
 				GROUP BY privmsgs_to_userid
 			");
 
-            $real_unread_pm_count = (int)$row['pm_count'];
+            $real_unread_pm_count = (int)$row['pm_count'] ?? 0;
 
             if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
                 $userdata['user_unread_privmsg'] = $real_unread_pm_count;
 
-                \TorrentPier\Sessions::db_update_userdata($userdata, array(
-                    'user_unread_privmsg' => $real_unread_pm_count,
-                ));
+                \TorrentPier\Sessions::db_update_userdata($userdata, [
+                    'user_unread_privmsg' => $real_unread_pm_count
+                ]);
             }
         }
 
@@ -106,13 +106,13 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
         $have_unread_pm = true;
     }
 }
-$template->assign_vars(array(
+$template->assign_vars([
     'HAVE_NEW_PM' => $have_new_pm,
-    'HAVE_UNREAD_PM' => $have_unread_pm,
-));
+    'HAVE_UNREAD_PM' => $have_unread_pm
+]);
 
 // The following assigns all _common_ variables that may be used at any point in a template
-$template->assign_vars(array(
+$template->assign_vars([
     'SIMPLE_HEADER' => !empty($gen_simple_header),
     'CONTENT_ENCODING' => $bb_cfg['charset'],
 
@@ -125,10 +125,9 @@ $template->assign_vars(array(
     'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
-    'NEED_GEN_PASSKEY' => (!IS_GUEST && !\TorrentPier\Legacy\Torrent::getPasskey($userdata['user_id'])),
 
     'SITENAME' => $bb_cfg['sitename'],
-    'U_INDEX' => BB_ROOT . "index.php",
+    'U_INDEX' => BB_ROOT . 'index.php',
     'T_INDEX' => sprintf($lang['FORUM_INDEX'], $bb_cfg['sitename']),
 
     'IS_GUEST' => IS_GUEST,
@@ -157,20 +156,20 @@ $template->assign_vars(array(
     'S_LOGIN_ACTION' => LOGIN_URL,
 
     'U_CUR_DOWNLOADS' => PROFILE_URL . $userdata['user_id'],
-    'U_FORUM' => "viewforum.php",
-    'U_GROUPS' => "group.php",
+    'U_FORUM' => 'viewforum.php',
+    'U_GROUPS' => 'group.php',
     'U_LOGIN_LOGOUT' => $u_login_logout,
-    'U_MEMBERLIST' => "memberlist.php",
-    'U_MODCP' => "modcp.php",
-    'U_OPTIONS' => "profile.php?mode=editprofile",
+    'U_MEMBERLIST' => 'memberlist.php',
+    'U_MODCP' => 'modcp.php',
+    'U_OPTIONS' => 'profile.php?mode=editprofile',
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
     'U_PROFILE' => PROFILE_URL . $userdata['user_id'],
     'U_READ_PM' => PM_URL . "?folder=inbox" . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&p={$userdata['user_newest_pm_id']}" : ''),
-    'U_REGISTER' => "profile.php?mode=register",
-    'U_SEARCH' => "search.php",
+    'U_REGISTER' => 'profile.php?mode=register',
+    'U_SEARCH' => 'search.php',
     'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
     'U_TERMS' => $bb_cfg['terms_and_conditions_url'],
-    'U_TRACKER' => "tracker.php",
+    'U_TRACKER' => 'tracker.php',
 
     'SHOW_SIDEBAR1' => !empty($bb_cfg['page']['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page'],
     'SHOW_SIDEBAR2' => !empty($bb_cfg['page']['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page'],
@@ -207,8 +206,8 @@ $template->assign_vars(array(
     'SELECTED' => HTML_SELECTED,
 
     'U_SEARCH_SELF_BY_LAST' => "search.php?uid={$userdata['user_id']}&amp;o=5",
-    'U_WATCHED_TOPICS' => "profile.php?mode=watch",
-));
+    'U_WATCHED_TOPICS' => 'profile.php?mode=watch'
+]);
 
 if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
@@ -224,21 +223,21 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 			WHERE topic_id IN(" . $userdata['torhelp'] . ")
 			LIMIT 8
 		";
-        $torhelp_topics = array();
+        $torhelp_topics = [];
 
         foreach (DB()->fetch_rowset($sql) as $row) {
-            $torhelp_topics[] = '<a href="viewtopic.php?t=' . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';
+            $torhelp_topics[] = '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';
         }
 
-        $template->assign_vars(array(
-            'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics),
-        ));
+        $template->assign_vars([
+            'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics)
+        ]);
     }
 }
 
 // Login box
 $in_out = ($logged_in) ? 'in' : 'out';
-$template->assign_block_vars("switch_user_logged_{$in_out}", array());
+$template->assign_block_vars("switch_user_logged_{$in_out}", []);
 
 if (!IS_GUEST) {
     header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
@@ -246,7 +245,7 @@ if (!IS_GUEST) {
     header('Pragma: no-cache');
 }
 
-$template->set_filenames(array('page_header' => 'page_header.tpl'));
+$template->set_filenames(['page_header' => 'page_header.tpl']);
 $template->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);

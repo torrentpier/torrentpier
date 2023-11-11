@@ -30,11 +30,11 @@ if (!$post) {
     $this->ajax_die('not post');
 }
 
-$data = array(
+$data = [
     'mc_comment' => ($mc_type) ? $mc_text : '',
     'mc_type' => $mc_type,
-    'mc_user_id' => ($mc_type) ? $userdata['user_id'] : 0,
-);
+    'mc_user_id' => ($mc_type) ? $userdata['user_id'] : 0
+];
 $sql_args = DB()->build_array('UPDATE', $data);
 DB()->query("UPDATE " . BB_POSTS . " SET $sql_args WHERE post_id = $post_id");
 

@@ -1,7 +1,7 @@
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
 <!DOCTYPE html>
-<html>
+<html lang="{$bb_cfg['default_lang']}">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}"/>
   <meta http-equiv="Content-Style-Type" content="text/css"/>
@@ -204,7 +204,7 @@
   <!-- BEGIN reg_user_row -->
   <tr class="{reg_user_row.ROW_CLASS}">
     <td class="bold" nowrap="nowrap">{reg_user_row.USER}</td>
-    <td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
+    <td align="center" nowrap="nowrap"><b>{L_LOGIN}:</b> {reg_user_row.STARTED} | <b>{L_LAST_UPDATED}:</b> {reg_user_row.LASTUPDATE}</td>
     <td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a>
     </td>
   </tr>

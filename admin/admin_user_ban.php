@@ -167,9 +167,7 @@ if (isset($_POST['submit'])) {
 
     bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 } else {
-    $template->assign_vars(array(
-        'S_BANLIST_ACTION' => 'admin_user_ban.php',
-    ));
+    $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
 
     $userban_count = 0;
     $ipban_count = 0;
@@ -215,7 +213,7 @@ if (isset($_POST['submit'])) {
         $ban_id = $banlist[$i]['ban_id'];
 
         if (!empty($banlist[$i]['ban_ip'])) {
-            $ban_ip = str_replace('255', '*', \TorrentPier\Helpers\IPHelper::long2ip($banlist[$i]['ban_ip']));
+            $ban_ip = str_replace('255', '*', \TorrentPier\Helpers\IPHelper::long2ip_extended($banlist[$i]['ban_ip']));
             $select_iplist .= '<option value="' . $ban_id . '">' . $ban_ip . '</option>';
             $ipban_count++;
         } elseif (!empty($banlist[$i]['ban_email'])) {
@@ -236,13 +234,13 @@ if (isset($_POST['submit'])) {
     $select_iplist = '<select name="unban_ip[]" multiple size="15">' . $select_iplist . '</select>';
     $select_emaillist = '<select name="unban_email[]" multiple size="10">' . $select_emaillist . '</select>';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'U_SEARCH_USER' => './../search.php?mode=searchuser',
         'S_UNBAN_USERLIST_SELECT' => $select_userlist,
         'S_UNBAN_IPLIST_SELECT' => $select_iplist,
         'S_UNBAN_EMAILLIST_SELECT' => $select_emaillist,
-        'S_BAN_ACTION' => 'admin_user_ban.php',
-    ));
+        'S_BAN_ACTION' => 'admin_user_ban.php'
+    ]);
 }
 
 print_page('admin_user_ban.tpl', 'admin');

@@ -30,14 +30,14 @@ if (isset($_POST['submit'])) {
             if (!$row['user_active']) {
                 bb_die($lang['NO_SEND_ACCOUNT_INACTIVE']);
             }
-            if (in_array($row['user_level'], array(MOD, ADMIN))) {
+            if (in_array($row['user_level'], [MOD, ADMIN])) {
                 bb_die($lang['NO_SEND_ACCOUNT']);
             }
 
             $username = $row['username'];
             $user_id = $row['user_id'];
 
-            $user_actkey = make_rand_str(ACTKEY_LENGHT);
+            $user_actkey = make_rand_str(ACTKEY_LENGTH);
             $user_password = make_rand_str(PASSWORD_MIN_LENGTH);
 
             $sql = "UPDATE " . BB_USERS . "
@@ -54,12 +54,11 @@ if (isset($_POST['submit'])) {
             $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE_PASSWD']);
 
             $emailer->set_template('user_activate_passwd', $row['user_lang']);
-            $emailer->assign_vars(array(
-                'SITENAME' => $bb_cfg['sitename'],
+            $emailer->assign_vars([
                 'USERNAME' => $username,
                 'PASSWORD' => $user_password,
                 'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
-            ));
+            ]);
 
             $emailer->send();
 
@@ -74,12 +73,12 @@ if (isset($_POST['submit'])) {
     $email = $username = '';
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'USERNAME' => $username,
     'EMAIL' => $email,
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
     'S_HIDDEN_FIELDS' => '',
-    'S_PROFILE_ACTION' => "profile.php?mode=sendpassword",
-));
+    'S_PROFILE_ACTION' => 'profile.php?mode=sendpassword'
+]);
 
 print_page('usercp_sendpasswd.tpl');

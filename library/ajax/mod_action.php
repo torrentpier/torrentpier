@@ -11,9 +11,11 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang, $datastore;
+global $userdata, $bb_cfg, $lang, $datastore, $log_action;
 
-$mode = (string)$this->request['mode'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
 switch ($mode) {
     case 'tor_status':
@@ -36,8 +38,8 @@ switch ($mode) {
 
     case 'edit_topic_title':
         $topic_id = (int)$this->request['topic_id'];
-        $topic_title = (string)$this->request['topic_title'];
-        $new_title = clean_title($topic_title);
+        $old_title = get_topic_title($topic_id);
+        $new_title = clean_title((string)$this->request['topic_title']);
 
         if (!$topic_id) {
             $this->ajax_die($lang['INVALID_TOPIC_ID']);
@@ -67,6 +69,14 @@ switch ($mode) {
             $datastore->enqueue('network_news');
             $datastore->update('network_news');
         }
+
+        // Log action
+        $log_action->mod('mod_topic_renamed', [
+            'forum_id' => $t_data['forum_id'],
+            'topic_id' => $topic_id,
+            'topic_title' => $old_title,
+            'topic_title_new' => $new_title
+        ]);
 
         $this->response['topic_id'] = $topic_id;
         $this->response['topic_title'] = $new_title;
@@ -111,11 +121,11 @@ switch ($mode) {
 
         if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) {
             $reg_ip = $last_ip = $lang['HIDDEN'];
-        } elseif ($profiledata['user_level'] == MOD && IS_MOD) {
+        } elseif ($profiledata['user_level'] == MOD && !IS_AM) {
             $reg_ip = $last_ip = $lang['HIDDEN'];
         } else {
-            $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip($profiledata['user_reg_ip']);
-            $user_last_ip = \TorrentPier\Helpers\IPHelper::long2ip($profiledata['user_last_ip']);
+            $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_reg_ip']);
+            $user_last_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_last_ip']);
             $reg_ip = '<a href="' . $bb_cfg['whois_info'] . $user_reg_ip . '" class="gen" target="_blank">' . $user_reg_ip . '</a>';
             $last_ip = '<a href="' . $bb_cfg['whois_info'] . $user_last_ip . '" class="gen" target="_blank">' . $user_last_ip . '</a>';
         }

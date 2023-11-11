@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Príspevky';
 $lang['POSTED'] = 'Publikované';
 $lang['USERNAME'] = 'Užívateľské meno';
 $lang['PASSWORD'] = 'Heslo';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-mail';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autor';
@@ -233,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Ste <b>can</b> hlasovať v anketách v tomto fóre';
 $lang['RULES_VOTE_CANNOT'] = 'Ste <b>cannot</b> hlasovať v anketách v tomto fóre';
 $lang['RULES_MODERATE'] = 'Ste <b>can</b> stredne tomto fóre';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Nie sú príspevky v tomto fóre.<br />Click na <b>Post Nové Topic</b> odkaz na tejto stránke zverejniť jedno.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Zobraziť tému';
@@ -377,7 +379,6 @@ $lang['DELETED'] = 'Vaša správa bola úspešne odstránený.';
 $lang['POLL_DELETE'] = 'Váš prieskum bol úspešne odstránený.';
 $lang['VOTE_CAST'] = 'Váš hlas bol obsadený.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Téma Odpoveď Oznámenie';
 $lang['EMOTICONS'] = 'Emotikony';
 $lang['MORE_EMOTICONS'] = 'Zobraziť viac Smajlíkov';
 
@@ -415,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Súkromné Správy';
 $lang['NO_NEW_PM'] = 'žiadne nové správy';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nová správa', 'nové správy');
+$lang['NEW_PMS_DECLENSION'] = ['nová správa', 'nové správy'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('neprečítané', 'neprečítané');
+$lang['UNREAD_PMS_DECLENSION'] = ['neprečítané', 'neprečítané'];
 
 $lang['UNREAD_MESSAGE'] = 'Neprečítané správy';
 $lang['READ_MESSAGE'] = 'Čítať správy';
@@ -545,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sa odošle e-mailom, keď niekto odpovede k t�
 
 $lang['BOARD_LANG'] = 'Rada jazyk';
 $lang['GENDER'] = 'Pohlavie';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Neznáma',
     1 => 'Muž',
     2 => 'Žena'
-);
+];
 $lang['MODULE_OFF'] = 'Modul je zakázané!';
 
 $lang['BIRTHDAY'] = 'Narodeniny';
@@ -591,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset tlačidlo autologin';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'vrátane všetky miesta, ktoré ste navštívili fóre povolené automatické prihlásenie';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Zobrazí malý grafický obrázok nižšie svoje údaje v pracovných miest. Len jeden obraz môže byť zobrazený na čas, jeho šírka môže byť väčší než %d pixelov, výška č väčší ako %d pixelov, veľkosť súboru nie viac ako %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Vymazať avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontroly možnosť disabled za porušenie <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Odovzdanie avatar';
@@ -723,7 +724,8 @@ $lang['GROUP_REQUEST'] = 'Žiadosť, aby sa pripojili k vašej skupine dosiahol.
 $lang['GROUP_APPROVED'] = 'Váš návrh bol schválený.';
 $lang['GROUP_ADDED'] = 'Boli ste pridaní do tohto usergroup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Ste už členom tejto skupiny';
-$lang['USER_IS_MEMBER_GROUP'] = 'Užívateľ je už členom tejto skupiny';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Úspešne aktualizované skupiny typu.';
 $lang['EFFECTIVE_DATE'] = 'Dátum Účinnosti';
 
@@ -1003,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Príloha je príliš veľká.<br />Could, nie
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Príloha je príliš veľká.<br />Maximum Odovzdať Veľkosť: %d MB.<br />Please na vedomie, že táto Veľkosť je definovaná v php.ini, to znamená, že je nastavený PHP a Prílohu Mod nemôže prepísať túto hodnotu.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Rozšírenie %s nie je povolené,'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Ste nesmú post Súbory s Príponou %s v tomto Fóre'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Príloha je príliš veľká.<br />Max Veľkosť: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Ospravedlňujeme sa, ale maximálna filesize pre všetkých Príloh je dosiahnutá. Prosím, obráťte sa na Palube Správcu, ak máte otázky.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Prílohu nie je možné pridať, pretože max. počet %d Príloh v tomto príspevku bolo dosiahnuté'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Prílohu/Obrázok musí byť menej ako %d pixelov a %d pixelov';
@@ -1057,12 +1059,14 @@ $lang['BT_ADDED'] = 'Pridané';
 $lang['BT_REG_ON_TRACKER'] = 'Zaregistrujte sa na tracker';
 $lang['BT_REG_FAIL'] = 'Nemohol zaregistrovať torrent na tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Ďalší torrent s rovnakým info_hash už <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Odstrániť z tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrovaný';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrované na tracker<br /><br />Now potrebujete <a href="%s"><b>download vaše torrent</b></a> a spustite ho pomocou svojho BitTorrent klient výber priečinka s pôvodným súborom zdieľate ako stiahnuť cesta';
 $lang['INVALID_ANN_URL'] = 'Neplatné Oznámiť URL [%s]<br /><br />must byť <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Nemohol pridať passkey<br /><br />Torrent nie je registrovaná na tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Nemohol pridať univerzálny kľúč (kľúče je prázdny)<br /><br />Go na <a href="%s" target="_blank"><b>your fórum profile</b></a> a generovanie to';
 $lang['BT_PASSKEY'] = 'Univerzálny kľúč';
 $lang['BT_GEN_PASSKEY'] = 'vytvoriť nový';
 $lang['BT_PASSKEY_VIEW'] = 'zobraziť';
@@ -1080,16 +1084,15 @@ $lang['RELEASING'] = 'Samostatne';
 $lang['SEEDING'] = 'Semeno';
 $lang['LEECHING'] = 'Pijavice';
 $lang['IS_REGISTERED'] = 'Registrovaná';
-$lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Hľadať v DC++ podľa názvu súboru';
-$lang['DC_MAGNET_EXT'] = 'Hľadať v DC++ prostredníctvom rozšírenia';
+$lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Stav';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Vyberte položku stav';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Nevybrali ste stavu.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Všetky stavy';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nie je kontrolovaná',
     TOR_CLOSED => 'zatvorené',
     TOR_APPROVED => 'kontrolovať',
@@ -1103,7 +1106,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'dočasné',
     TOR_PREMOD => 'pre-moderovanie',
     TOR_REPLENISH => 'doplniť',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Takýto stav neexistuje!';
 $lang['TORRENT_FAILED'] = 'Distribúcia nebol nájdený!';
 $lang['TOR_STATUS_DUB'] = 'Distribúcia má rovnaký stav';
@@ -1351,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('odpovedať', 'odpovede');
-$lang['DECLENSION']['TIMES'] = array('čas', 'časy');
+$lang['DECLENSION']['REPLIES'] = ['odpovedať', 'odpovede'];
+$lang['DECLENSION']['TIMES'] = ['čas', 'časy'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('druhý', 'sekúnd'),
-    'minutes' => array('minúta', 'minút'),
-    'hours' => array('hodina', 'hodín'),
-    'mday' => array('deň', 'dní'),
-    'mon' => array('mesiac', 'mesiacov'),
-    'year' => array('rok', 'rokov'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['druhý', 'sekúnd'],
+    'minutes' => ['minúta', 'minút'],
+    'hours' => ['hodina', 'hodín'],
+    'mday' => ['deň', 'dní'],
+    'mon' => ['mesiac', 'mesiacov'],
+    'year' => ['rok', 'rokov'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1541,6 +1544,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL rýchlosť';
 $lang['DL_DL_SPEED'] = 'DL rýchlosť';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Vzorec: Nahrané/TorrentSize';
 $lang['DL_ULR'] = 'Adresa URL';
 $lang['DL_STOPPED'] = 'zastavil';
@@ -1716,6 +1720,8 @@ $lang['USER_AUTH_UPDATED'] = 'Používateľ povolenia boli aktualizované';
 $lang['GROUP_AUTH_UPDATED'] = 'Povolenia skupiny boli aktualizované';
 
 $lang['AUTH_UPDATED'] = 'Povolenia boli aktualizované';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť do Povolenia Používateľa';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť do Skupiny Povolenia';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete vrátiť na Fórum Povolenia';
@@ -2256,13 +2262,6 @@ $lang['RETURN_CONFIG'] = '%sReturn na Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurácia Úspešne Aktualizovaný';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Fórum nastavenia';
-$lang['TRACKER_SETTINGS'] = 'Tracker nastavenia';
-
-$lang['CHANGES_DISABLED'] = 'Zmeny zakázané (pozri <b>$bb_cfg[\'tracker\']</b> v config.php)';
-
 $lang['OFF_TRACKER'] = 'Vypnúť tracker';
 $lang['OFF_REASON'] = 'Vypnúť dôvod';
 $lang['OFF_REASON_EXPL'] = 'táto správa bude odoslaná klientovi pri tracker je zakázané';
@@ -2323,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Oznamujeme url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'môžete definovať ďalšie povolené adresy url v "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Vypnúť DHT siete';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Vypnúť Peer Exchange a DHT (odporúčané pre súkromné siete, len url oznámiť)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Overenie oznámiť url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'zaregistrujte sa na sledovanie povolené iba adresy url';
 $lang['BT_REPLACE_ANN_URL'] = 'Nahradiť oznámiť url';
@@ -2372,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = 'Šablóny zakázané';
 $lang['FOR_NEW_TEMPLATE'] = 'pre nové vzory!';
 $lang['CHANGED'] = 'Zmeniť';
 $lang['REMOVED'] = 'Odstrániť';
-$lang['QUESTION'] = 'Ste si istí, že chcete zmazať?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron zoznam';
 $lang['CRON_ID'] = 'ID';
@@ -2407,14 +2408,14 @@ $lang['REPAIR_CRON'] = 'Opravy Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Upraviť práce';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Pridať práce';
 $lang['CRON_SCRIPT_EXPL'] = 'meno skriptu z "zahŕňa/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Vyberte položku štart',
     'hourly' => 'hodinová',
     'daily' => 'denne',
     'weekly' => 'týždenne',
     'monthly' => 'mesačný',
     'interval' => 'interval'
-);
+];
 $lang['NOSELECT'] = 'Vyberte položku č.';
 $lang['RUN_DAY'] = 'Spustiť deň';
 $lang['RUN_DAY_EXPL'] = 'deň, keď túto prácu spustiť';
@@ -2533,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Téma bola presunutá z fóra [b]%s[/b] na f
 $lang['BOT_MESS_SPLITS'] = 'Téma bola rozdelená. Nová téma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Téma bola rozdelená z [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Stiahnuť hovor';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Všimnite so žiadosťou o návrat k distribučnej';
 $lang['CALLSEED_SUBJECT'] = 'Stiahnuť pomôcť %s';
 $lang['CALLSEED_TEXT'] = 'Dobrý deň![br]Your pomoc je potrebné v release [url=%s]%s[/url][br]if ste sa rozhodli pomôcť, ale už odstránené torrent súboru, môžete si ho stiahnuť [url=%s]this[/url][br][br]i nádej pre vašu pomoc!';
@@ -2541,17 +2542,22 @@ $lang['CALLSEED_MSG_OK'] = 'Správa bola zaslaná na všetkých tých, ktorí pr
 $lang['CALLSEED_MSG_SPAM'] = 'Žiadosť už bola raz úspešne odoslaná (Pravdepodobne nie ste)<br /><br />The ďalšiu možnosť poslať žiadosť, aby sa <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Téma nevyžaduje pomoc (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Téma:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Téma:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Téma:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Téma:<br /> <b>opened</b>',
     'mod_topic_split' => 'Téma:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Príspevok:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Používateľ:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Používateľ:<br /> <b>ban</b>',
     'adm_user_unban' => 'Používateľ:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Všetky akcie';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Akcie Denníka: možnosti Vyhľadávania';
@@ -2690,28 +2696,28 @@ $lang['MC_LEGEND'] = 'Napíšte komentár';
 $lang['MC_FAQ'] = 'Zadaný text sa zobrazí pod túto správu';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s v správe";
 $lang['MC_COMMENT_PM_MSG'] = "Dobrý deň, [b]%s[/b]\nModerator vľavo v správe [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Vymazať komentár',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Komentár od %s',
         'type' => 'Komentár',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informácie z %s',
         'type' => 'Informácie',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Upozornenie od %s',
         'type' => 'Upozornenie',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Porušenie pravidiel %s',
         'type' => 'Porušenie',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Mapa stránok';
 $lang['SITEMAP_ADMIN'] = 'Spravovať sitemap';
@@ -2752,7 +2758,7 @@ $lang['HASH_NOT_FOUND'] = 'Prepustenie s hash %s nebol nájdený';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Text tejto stránky je upravený na: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Tento riadok môžu vidieť iba správcovia.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na tejto stránke môžete zadať text základné pravidlá zdrojov sa zobrazujú používateľom.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'neaktívnych používateľov do 30 dní',
     1 => 'neaktívnych používateľov na 90 dní',
     2 => 'stredná veľkosť rozdelenia na tracker (mnoho mb)',
@@ -2761,7 +2767,7 @@ $lang['TR_STATS'] = array(
     5 => 'koľko rúk, kde sa, že sejba viac ako 5 semená',
     6 => 'koľko z nás uploaders (tí, ktorí vyplnený aspoň 1 strane)',
     7 => 'koľko uploaders za posledných 30 dní',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Anketa povolené';
 $lang['NEW_POLL_END'] = 'Hlasovanie ukončené';
@@ -2785,13 +2791,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Každý riadok zodpovedá jednému odpoveď (max.
 $lang['OLD_BROWSER'] = 'Používate zastaralý prehliadač. Webové stránky sa nebudú zobrazovať správne.';
 $lang['GO_BACK'] = 'Ísť späť';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Súbor nahrať chyba';
 $lang['UPLOAD_ERROR_SIZE'] = 'Odovzdaný súbor prekračuje maximálnu veľkosť %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Neplatný typ súboru obrázka';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Obrázok rozmery prekročiť maximálne prípustné %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Odovzdaný súbor nie je obrázok';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Rozšírenie %s pre stiahnutie nie je povolené,';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'máte prekročila maximálnu veľkosť súboru na server',
     UPLOAD_ERR_FORM_SIZE => 'prekročili ste maximálny súbor nahrať veľkosť',
     UPLOAD_ERR_PARTIAL => 'súbor bol čiastočne stiahnuté',
@@ -2799,7 +2806,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'dočasný adresár nebol nájdený',
     UPLOAD_ERR_CANT_WRITE => 'napíšte chyba',
     UPLOAD_ERR_EXTENSION => 'odovzdanie zastavil rozšírenie',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Skontrolujte, že nie ste robot';
@@ -2814,7 +2821,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Vaša žiadosť o pripojenie sa k skupine používateľov bola schválená',
     'GROUP_REQUEST' => 'Žiadosť o pripojenie k vašej skupine používateľov',
     'PRIVMSG_NOTIFY' => 'Nová súkromná správa',
-    'TOPIC_NOTIFY' => 'Oznámenie o odpovedi vo vlákne %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Opätovná aktivácia účtu',
     'USER_ACTIVATE_PASSWD' => 'Potvrdenie nového hesla',
     'USER_WELCOME' => 'Vitajte na stránke %s',

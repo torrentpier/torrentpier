@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Viestit';
 $lang['POSTED'] = 'Lähetetty';
 $lang['USERNAME'] = 'Käyttäjätunnus';
 $lang['PASSWORD'] = 'Salasana';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Sähköposti';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Kirjoittaja';
@@ -233,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Sinun <b>can</b> äänestää tässä foorumissa';
 $lang['RULES_VOTE_CANNOT'] = 'Sinun <b>cannot</b> äänestää tässä foorumissa';
 $lang['RULES_MODERATE'] = 'Sinun <b>can</b> kohtalainen tällä foorumilla';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Ei uusia viestejä tässä foorumissa.<br />Click on <b>Post Uusi Topic</b> linkki tämän sivun viesti.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View topic';
@@ -377,7 +379,6 @@ $lang['DELETED'] = 'Viestisi on poistettu onnistuneesti.';
 $lang['POLL_DELETE'] = 'Kysely on poistettu onnistuneesti.';
 $lang['VOTE_CAST'] = 'Äänestys on valettu.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Aihe Vastaa Ilmoituksen';
 $lang['EMOTICONS'] = 'Hymiöitä';
 $lang['MORE_EMOTICONS'] = 'Katso lisää Hymiöitä';
 
@@ -415,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Yksityisviestit';
 $lang['NO_NEW_PM'] = 'ei uusia viestejä';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('uusi viesti', 'uusia viestejä');
+$lang['NEW_PMS_DECLENSION'] = ['uusi viesti', 'uusia viestejä'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('lukematon', 'lukematon');
+$lang['UNREAD_PMS_DECLENSION'] = ['lukematon', 'lukematon'];
 
 $lang['UNREAD_MESSAGE'] = 'Lukematon viesti';
 $lang['READ_MESSAGE'] = 'Lue viesti';
@@ -545,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Lähettää sähköpostia kun joku vastaa aihe
 
 $lang['BOARD_LANG'] = 'Hallitus kieli';
 $lang['GENDER'] = 'Sukupuolten';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Tuntematon',
     1 => 'Mies',
     2 => 'Nainen'
-);
+];
 $lang['MODULE_OFF'] = 'Moduuli on poistettu käytöstä!';
 
 $lang['BIRTHDAY'] = 'Syntymäpäivä';
@@ -591,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = 'Palauta avain autologin';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'kuten kaikki paikkoja, joissa olet käynyt foorumilla käytössä automaattinen kirjautuminen';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Näyttää pieni graafinen kuva alla yksityiskohtia virkaa. Vain yksi kuva voidaan näyttää kerrallaan, sen leveys voi olla suurempi kuin %d pikseliä, korkeus ei ole suurempi kuin %d pikseliä ja tiedostokoko enintään %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Poista avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar-ohjaus-vaihtoehto on pois käytöstä vastoin <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Ladata avatar';
@@ -723,7 +724,8 @@ $lang['GROUP_REQUEST'] = 'Pyynnön liittyä ryhmään on tehty.';
 $lang['GROUP_APPROVED'] = 'Pyyntösi on hyväksytty.';
 $lang['GROUP_ADDED'] = 'Sinut on lisätty tähän käyttäjäryhmään.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Sinulla on jo tämän ryhmän jäsen';
-$lang['USER_IS_MEMBER_GROUP'] = 'Käyttäjä on jo tämän ryhmän jäsen';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Onnistuneesti päivitetty ryhmä tyyppi.';
 $lang['EFFECTIVE_DATE'] = 'Voimaantulopäivä';
 
@@ -1003,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Liite on liian iso.<br />Could saa maksimikok
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Liite on liian iso.<br />Maximum Lähetyksen Koko: %d MB.<br />Please huomaa, että tämä Koko on määritelty php.ini, tämä tarkoittaa, että se on asetettu PHP ja Kiinnitys Mod voi ohittaa tämän arvon.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Laajennus %s ei ole sallittua'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Sinulla ei ole oikeutta lähettää Tiedostoja Laajennus %s Foorumissa'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Liite on liian iso.<br />Max Koko: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Anteeksi, mutta suurin tiedostokoko kaikki Liitteet on saavutettu. Ota yhteyttä ylläpitäjään, jos sinulla on kysyttävää.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Liitettä ei voi lisätä, koska max. määrä %d Liitetiedostoja tämä viesti oli saavutettu'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Liitetiedosto/Kuvan tulee olla vähemmän kuin %d pikseliä leveä ja %d pikseliä korkea';
@@ -1057,12 +1059,14 @@ $lang['BT_ADDED'] = 'Lisätty';
 $lang['BT_REG_ON_TRACKER'] = 'Rekisteröityä tracker';
 $lang['BT_REG_FAIL'] = 'Ei voitu rekisteröidä torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Toinen torrent kanssa samaa info_hash jo <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Poista tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent rekisteröimätön';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent rekisteröity tracker<br /><br />Now sinun täytyy <a href="%s"><b>download sinun torrent</b></a> ja ajaa se käyttämällä BitTorrent client valitsemalla kansion, jossa alkuperäiset tiedostot jaat, kun lataa polku';
 $lang['INVALID_ANN_URL'] = 'Virheellinen Ilmoittaa URL [%s]<br /><br />must olla <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Ei voitu lisätä passkey<br /><br />Torrent ole rekisteröity tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Ei voitu lisätä salasana (salasana on tyhjä)<br /><br />Go että <a href="%s" target="_blank"><b>your forum profile</b></a> ja luoda se';
 $lang['BT_PASSKEY'] = 'Salasana';
 $lang['BT_GEN_PASSKEY'] = 'luo uusi';
 $lang['BT_PASSKEY_VIEW'] = 'esityksessä';
@@ -1080,16 +1084,15 @@ $lang['RELEASING'] = 'Itse';
 $lang['SEEDING'] = 'Siemen';
 $lang['LEECHING'] = 'Iilimato';
 $lang['IS_REGISTERED'] = 'Rekisteröity';
-$lang['MAGNET'] = 'Magneetti';
-$lang['DC_MAGNET'] = 'Etsi DC++ jonka tiedostonimi';
-$lang['DC_MAGNET_EXT'] = 'Etsi DC++ laajennus';
+$lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tila';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Valitse tila';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Et ole valinnut tilan.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Kaikki statukset';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ei tarkastettu',
     TOR_CLOSED => 'suljettu',
     TOR_APPROVED => 'tarkastetaan',
@@ -1103,7 +1106,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'väliaikainen',
     TOR_PREMOD => 'pre-maltillisesti',
     TOR_REPLENISH => 'täydentää',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tällainen asema ei ole olemassa!';
 $lang['TORRENT_FAILED'] = 'Jakelu ei löytynyt!';
 $lang['TOR_STATUS_DUB'] = 'Jakelu on sama asema';
@@ -1351,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('vastaus', 'vastaukset');
-$lang['DECLENSION']['TIMES'] = array('aika', 'kertaa');
+$lang['DECLENSION']['REPLIES'] = ['vastaus', 'vastaukset'];
+$lang['DECLENSION']['TIMES'] = ['aika', 'kertaa'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('toinen', 'sekuntia'),
-    'minutes' => array('minuutin', 'minuuttia'),
-    'hours' => array('tunti', 'tuntia'),
-    'mday' => array('päivä', 'päivää'),
-    'mon' => array('kuukausi', 'kuukautta'),
-    'year' => array('vuonna', 'vuotta'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['toinen', 'sekuntia'],
+    'minutes' => ['minuutin', 'minuuttia'],
+    'hours' => ['tunti', 'tuntia'],
+    'mday' => ['päivä', 'päivää'],
+    'mon' => ['kuukausi', 'kuukautta'],
+    'year' => ['vuonna', 'vuotta'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1541,6 +1544,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL-nopeus';
 $lang['DL_DL_SPEED'] = 'DL-nopeus';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Kaava: Ladataan/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'pysähtyi';
@@ -1716,6 +1720,8 @@ $lang['USER_AUTH_UPDATED'] = 'Käyttöoikeudet on päivitetty';
 $lang['GROUP_AUTH_UPDATED'] = 'Ryhmän käyttöoikeudet on päivitetty';
 
 $lang['AUTH_UPDATED'] = 'Käyttöoikeudet on päivitetty';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klikkaa %sHere%s palata Käyttöoikeudet';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klikkaa %sHere%s palata Ryhmän Käyttöoikeudet';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikkaa %sHere%s palata Foorumin Oikeudet';
@@ -2256,13 +2262,6 @@ $lang['RETURN_CONFIG'] = '%sReturn että Configuration%s';
 $lang['CONFIG_UPD'] = 'Kokoonpano Päivitetty Onnistuneesti';
 $lang['SET_DEFAULTS'] = 'Palauta oletukset';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Foorumin asetuksia';
-$lang['TRACKER_SETTINGS'] = 'Tracker asetukset';
-
-$lang['CHANGES_DISABLED'] = 'Muutokset käytöstä (ks. <b>$bb_cfg[\'tracker\']</b> vuonna config.php)';
-
 $lang['OFF_TRACKER'] = 'Poistaa tracker';
 $lang['OFF_REASON'] = 'Poistaa syy';
 $lang['OFF_REASON_EXPL'] = 'tämä viesti lähetetään asiakkaalle, kun tracker on pois käytöstä';
@@ -2323,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Ilmoittaa url-osoitteen';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'voit määrittää tiedostojen sallittu url-osoitteita "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Poistaa DHT-verkko';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Poistaa Peer Vaihtoa ja DHT (suositellaan yksityisiä verkkoja, vain url-osoite ilmoittaa)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Varmista, ilmoittaa url-osoitteen';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'rekisteröityä tracker sallittu vain url-osoitteita';
 $lang['BT_REPLACE_ANN_URL'] = 'Vaihda ilmoittaa url-osoitteen';
@@ -2372,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mallin käytöstä';
 $lang['FOR_NEW_TEMPLATE'] = 'uusia kuvioita!';
 $lang['CHANGED'] = 'Muuttunut';
 $lang['REMOVED'] = 'Poistettu';
-$lang['QUESTION'] = 'Oletko varma, että haluat poistaa?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';
@@ -2407,14 +2408,14 @@ $lang['REPAIR_CRON'] = 'Korjaus Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Muokkaa työtä';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Lisää työtä';
 $lang['CRON_SCRIPT_EXPL'] = 'nimen kirjoitus "sisältää/cron/työpaikat/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Valitse käynnistä',
     'hourly' => 'tunneittain',
     'daily' => 'päivittäin',
     'weekly' => 'viikoittain',
     'monthly' => 'kuukausittain',
     'interval' => 'väli'
-);
+];
 $lang['NOSELECT'] = 'Ei valitse';
 $lang['RUN_DAY'] = 'Ajaa päivä';
 $lang['RUN_DAY_EXPL'] = 'päivä, jolloin tämä työ ajaa';
@@ -2533,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Aihe on siirretty foorumin [b]%s[/b] forum [
 $lang['BOT_MESS_SPLITS'] = 'Aihe on jaettu kahteen osaan. Uusi aihe - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Aihe on erotettu [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Ladataan call';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ota ilmoitus pyynnön palata jakelu';
 $lang['CALLSEED_SUBJECT'] = 'Lataa auttaa %s';
 $lang['CALLSEED_TEXT'] = 'Hei![br]Your apua tarvitaan, vapauttaa [url=%s]%s[/url][br]if päätät auttaa, mutta jo poistaa torrent-tiedoston, voit ladata sen [url=%s]this[/url][br][br]i toivoa apuasi!';
@@ -2541,17 +2542,22 @@ $lang['CALLSEED_MSG_OK'] = 'Viesti on lähetetty kaikille niille, jotka ladata t
 $lang['CALLSEED_MSG_SPAM'] = 'Pyyntö on jo kerran lähetetty onnistuneesti (Luultavasti ei)<br /><br />The seuraava tilaisuus lähettää pyynnön olla <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Aihe ei vaadi apua (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Aihe:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Aihe:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Aihe:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Aihe:<br /> <b>opened</b>',
     'mod_topic_split' => 'Aihe:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Viesti:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Käyttäjä:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Käyttäjä:<br /> <b>ban</b>',
     'adm_user_unban' => 'Käyttäjä:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Kaikki toimet';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Toimet Log: Etsi vaihtoehtoja';
@@ -2690,28 +2696,28 @@ $lang['MC_LEGEND'] = 'Kirjoita kommentti';
 $lang['MC_FAQ'] = 'Syötetty teksti näytetään alla tämä viesti';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s viestisi";
 $lang['MC_COMMENT_PM_MSG'] = "Hei, [b]%s[/b]\nModerator jättää viestisi [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Poista kommentti',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentti %s',
         'type' => 'Kommentti',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Tietoja %s',
         'type' => 'Tiedot',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Varoitus %s',
         'type' => 'Varoitus',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Rikkomuksesta %s',
         'type' => 'Vastoin',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sivukartta';
 $lang['SITEMAP_ADMIN'] = 'Hallita sivukartta';
@@ -2752,7 +2758,7 @@ $lang['HASH_NOT_FOUND'] = 'Julkaisu hash %s ei löytynyt';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Tämän sivun tekstiä on muokattu osoitteessa [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Tämä rivi näkee vain järjestelmänvalvojat.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Tällä sivulla, voit määrittää tekstin perussäännöt resurssi näkyy käyttäjille.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'aktiivisia käyttäjiä 30 päivää',
     1 => 'aktiivisia käyttäjiä 90 päivää',
     2 => 'keskikokoinen jakaumat tracker (useita megatavuja)',
@@ -2761,7 +2767,7 @@ $lang['TR_STATS'] = array(
     5 => 'kuinka monta kättä missä se kylvö yli 5 siemenet',
     6 => 'kuinka moni meistä lähettäjät (ne, jotka täyttivät vähintään 1 käsi)',
     7 => 'kuinka monta lähettäjät viimeisten 30 päivää',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Kysely käytössä';
 $lang['NEW_POLL_END'] = 'Kysely täytetty';
@@ -2785,13 +2791,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Kukin rivi vastaa yksi vastaus (max';
 $lang['OLD_BROWSER'] = 'Käytät vanhentunutta selainta. Sivusto ei näy oikein.';
 $lang['GO_BACK'] = 'Mene takaisin';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Tiedoston siirto palvelimeen-virhe';
 $lang['UPLOAD_ERROR_SIZE'] = 'Lähetetyn tiedoston koko ylittää enimmäiskoon %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Virheellinen tiedostotyyppi kuva';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Kuvan mitat ylittää suurimman sallitun %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Ladattu tiedosto ei ole kuva';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Laajennus %s lataukset ei ole sallittua';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'olet ylittänyt maksimi tiedostokoko server',
     UPLOAD_ERR_FORM_SIZE => 'olet ylittänyt palvelimeen ladattavan tiedoston enimmäiskoko',
     UPLOAD_ERR_PARTIAL => 'tiedosto oli osittain ladattu',
@@ -2799,7 +2806,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'väliaikaista hakemistoa ei löytynyt',
     UPLOAD_ERR_CANT_WRITE => 'kirjoittaa virhe',
     UPLOAD_ERR_EXTENSION => 'lataa pysäytti laajennus',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Tarkista, että et ole robotti';
@@ -2814,7 +2821,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Pyyntösi liittyä käyttäjäryhmään on hyväksytty',
     'GROUP_REQUEST' => 'Pyyntö liittyä käyttäjäryhmään',
     'PRIVMSG_NOTIFY' => 'Uusi yksityisviesti',
-    'TOPIC_NOTIFY' => 'Ilmoitus vastauksesta säikeessä %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Tilin uudelleenaktivointi',
     'USER_ACTIVATE_PASSWD' => 'Uuden salasanan vahvistaminen',
     'USER_WELCOME' => 'Tervetuloa sivustolle %s',

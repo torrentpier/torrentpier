@@ -1,4 +1,4 @@
-<span class="maintitle">{PAGE_TITLE}</span>
+<h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <table width="100%">
 <tr>

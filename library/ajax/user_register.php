@@ -13,7 +13,9 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang, $userdata;
 
-$mode = (string)$this->request['mode'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
 $html = '<img src="./styles/images/good.gif">';
 switch ($mode) {

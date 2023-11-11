@@ -380,7 +380,8 @@ function build_poll_add_form (src_el)
 		<div class="post_head">
 			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
 				<!-- IF postrow.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
-				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}</a>
+				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}&nbsp;|&nbsp;#{postrow.POST_NUMBER}</a>
+                <!-- IF postrow.POSTER_AUTHOR -->&middot;&nbsp;<span>{L_AUTHOR}</span><!-- ENDIF -->
 				<!-- IF postrow.POSTED_AFTER -->
 					<span class="posted_since">({L_POSTED_AFTER} {postrow.POSTED_AFTER})</span>
 				<!-- ENDIF -->
@@ -411,7 +412,8 @@ function build_poll_add_form (src_el)
 					<h4 class="alert-heading">{L_RELEASE_FROM_RG} <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
 					<div id="pg_info_{postrow.POST_ID}">
 						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
-						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr /><div id="rg_sig">{postrow.RG_SIG}</div><!-- ENDIF -->
+                        <!-- IF postrow.RG_DESC --><div class="post-wrap">{L_DESCRIPTION}: {postrow.RG_DESC}</div><!-- ENDIF -->
+						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr /><div id="rg_sig">{L_SIGNATURE}: {postrow.RG_SIG}</div><!-- ENDIF -->
 						<hr /><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
 					</div>
 				</div>
@@ -503,16 +505,16 @@ function build_poll_add_form (src_el)
 		</tr>
 		<tr>
 			<td colspan="2" class="row2 tCenter">
-				<label><input type="checkbox" name="after_split_to_old" checked="checked" /> {L_BOT_AFTER_SPLIT_TO_OLD}</label>
+				<label><input type="checkbox" name="after_split_to_old" checked /> {L_BOT_AFTER_SPLIT_TO_OLD}</label>
 				&nbsp;
-				<label><input type="checkbox" name="after_split_to_new" checked="checked" /> {L_BOT_AFTER_SPLIT_TO_NEW}</label>
+				<label><input type="checkbox" name="after_split_to_new" checked /> {L_BOT_AFTER_SPLIT_TO_NEW}</label>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center" class="row3">
-				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled="disabled" onclick="return window.confirm('{L_DELETE_POSTS}?');" />
-				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled="disabled" onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
-				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled="disabled" onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
+				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled onclick="return window.confirm('{L_DELETE_POSTS}?');" />
+				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
+				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
 				<label for="spl_cnf">
 					{L_CONFIRM}
 					<input id="spl_cnf" type="checkbox" name="confirm" value="1" onclick="
@@ -586,7 +588,7 @@ function build_poll_add_form (src_el)
 </tr>
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
-		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked="checked"<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled="disabled"<!-- ENDIF --> />
+		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
 		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
 </tr>

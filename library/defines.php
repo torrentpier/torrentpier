@@ -16,15 +16,16 @@ define('APP_NAME', 'TorrentPier');
 
 define('CHECK_REQIREMENTS', [
     'status' => true,
-    'php_min_version' => '7.4.0',
+    'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
-        'gd',
-        'zlib',
+        // 'gd', (optional)
+        // 'zlib', (optional)
         'curl',
-        'tidy',
+        // 'tidy', (optional)
         'mysqli',
         'bcmath',
+        'mbstring',
         'intl',
         'xml',
         'xmlwriter',
@@ -66,11 +67,12 @@ define('XS_TAG_BEGINELSE', 11);
 define('APP_DEBUG', true); // enable application debug
 define('SQL_DEBUG', true); // enable forum sql & cache debug
 define('SQL_LOG_ERRORS', true); // all SQL_xxx options enabled only if SQL_DEBUG == TRUE
-define('SQL_LOG_NAME', 'sql_error_bb'); // mysql log filename
+define('SQL_BB_LOG_NAME', 'sql_error_bb'); // mysql log filename (Board)
+define('SQL_TR_LOG_NAME', 'sql_error_tr'); // mysql log filename (Tracker)
 define('SQL_CALC_QUERY_TIME', true); // for stats
 define('SQL_LOG_SLOW_QUERIES', true); // log sql slow queries
 define('SQL_SLOW_QUERY_TIME', 10); // slow query in seconds
-define('SQL_PREPEND_SRC_COMM', false); // prepend source file comment to sql query
+define('SQL_PREPEND_SRC', true); // prepend source file to sql query
 
 // Log options
 define('LOG_EXT', 'log'); // log file extension

@@ -13,14 +13,14 @@ if (!defined('IN_AJAX')) {
 
 global $userdata, $lang, $bb_cfg;
 
-$mode = (string)$this->request['mode'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
 switch ($mode) {
     case 'clear_cache':
         foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
-            if (!in_array('db_sqlite', $cache_val)) {
-                CACHE($cache_name)->rm();
-            }
+            CACHE($cache_name)->rm();
         }
 
         $this->response['cache_html'] = '<span class="seed bold">' . $lang['ALL_CACHE_CLEARED'] . '</span>';
@@ -38,7 +38,6 @@ switch ($mode) {
         global $template;
 
         $match = XS_TPL_PREFIX;
-        $match_len = strlen($match);
         $dir = $template->cachedir;
         $res = @opendir($dir);
         while (($file = readdir($res)) !== false) {

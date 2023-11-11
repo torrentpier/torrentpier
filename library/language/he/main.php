@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'הודעות';
 $lang['POSTED'] = 'פורסם';
 $lang['USERNAME'] = 'שם משתמש';
 $lang['PASSWORD'] = 'הסיסמה';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'דוא " ל';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'מחבר תגובה';
@@ -233,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'אתה <b>can</b> להצביע בסקרים בפור�
 $lang['RULES_VOTE_CANNOT'] = 'אתה <b>cannot</b> להצביע בסקרים בפורום זה';
 $lang['RULES_MODERATE'] = 'אתה <b>can</b> מתונה הפורום הזה';
 
-$lang['NO_TOPICS_POST_ONE'] = 'אין הודעות בפורום הזה.<br />Click על <b>Post חדש Topic</b> הקישור בדף זה כדי פוסט אחד.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'הצגת הנושא';
@@ -377,7 +379,6 @@ $lang['DELETED'] = 'ההודעה שלך נמחקה בהצלחה.';
 $lang['POLL_DELETE'] = 'את הסקר נמחק בהצלחה.';
 $lang['VOTE_CAST'] = 'ההצבעה שלך כבר יצוקים.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'נושא הודעת תגובה';
 $lang['EMOTICONS'] = 'סמלי הבעה.';
 $lang['MORE_EMOTICONS'] = 'להציג יותר סמלי הבעה.';
 
@@ -415,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'הודעות פרטיות';
 $lang['NO_NEW_PM'] = 'אין הודעות חדשות';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('הודעה חדשה', 'הודעות חדשות');
+$lang['NEW_PMS_DECLENSION'] = ['הודעה חדשה', 'הודעות חדשות'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('שלא נקראו', 'שלא נקראו');
+$lang['UNREAD_PMS_DECLENSION'] = ['שלא נקראו', 'שלא נקראו'];
 
 $lang['UNREAD_MESSAGE'] = 'הודעה שלא נקראה';
 $lang['READ_MESSAGE'] = 'קראתי את ההודעה';
@@ -545,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'שולח דואר אלקטרוני כאשר מ
 
 $lang['BOARD_LANG'] = 'לוח השפה';
 $lang['GENDER'] = 'מין';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'לא ידוע',
     1 => 'זכר',
     2 => 'נקבה'
-);
+];
 $lang['MODULE_OFF'] = 'מודול אינו זמין!';
 
 $lang['BIRTHDAY'] = 'יום הולדת';
@@ -591,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = 'איפוס מפתח כניסה אוטומטית';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'כולל את כל המקומות שבהם ביקרת הפורום איפשר כניסה אוטומטית';
 
 $lang['AVATAR'] = 'אווטאר';
-$lang['AVATAR_EXPLAIN'] = 'מציג קטן גרפי התמונה למטה את הפרטים שלך בפוסטים. רק תמונה אחת יכולה להיות מוצג בכל פעם, ברוחב שלה יכול להיות לא יותר מ %d פיקסלים, גובה לא יותר מ %d פיקסלים, גודל הקובץ לא יותר %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'למחוק את האווטר';
 $lang['AVATAR_DISABLE'] = 'אווטאר אפשרות שליטה נכים, בגין הפרת <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'להעלות אווטר';
@@ -723,7 +724,8 @@ $lang['GROUP_REQUEST'] = 'בקשה להצטרף לקבוצה שלך כבר עש�
 $lang['GROUP_APPROVED'] = 'הבקשה שלך אושרה.';
 $lang['GROUP_ADDED'] = 'אתה נוספו הזה משתמשים.';
 $lang['ALREADY_MEMBER_GROUP'] = 'אתה כבר חבר של הקבוצה הזאת.';
-$lang['USER_IS_MEMBER_GROUP'] = 'המשתמש כבר חבר בקבוצה זו';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'עודכן בהצלחה קבוצת סוג.';
 $lang['EFFECTIVE_DATE'] = 'תאריך תחולה';
 
@@ -1003,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'הקובץ המצורף הוא גדול מד�
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'הקובץ המצורף הוא גדול מדי.<br />Maximum טען גודל: %d MB.<br />Please שימו לב כי גודל זה מוגדר ב-php.ini, זה אומר זה נקבע על ידי PHP ו את הקובץ Mod לא יכול לעקוף ערך זה.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'הסיומת %s אסור'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'אתה לא רשאי לפרסם קבצים עם סיומת %s בתוך הפורום הזה'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'הקובץ המצורף הוא גדול מדי.<br />Max גודל: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'מצטער, אבל את גודל קובץ מקסימלי עבור כל הקבצים המצורפים, היא הגיעה. אנא צור קשר עם המנהל הראשי של המערכת אם יש לך שאלות.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'קובץ מצורף יכול להיות הוסיף, מאז מקס. מספר %d מצורפים בפוסט הזה הושג'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'את הקובץ/תמונה חייב להיות פחות מ %d פיקסלים רוחב ו %d פיקסלים גבוהה';
@@ -1057,12 +1059,14 @@ $lang['BT_ADDED'] = 'הוסיף';
 $lang['BT_REG_ON_TRACKER'] = 'לרשום על tracker';
 $lang['BT_REG_FAIL'] = 'לא יכול לרשום סיקור על טראקר';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'עוד סיקור עם אותו info_hash כבר <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'הסר מ-tracker';
 $lang['BT_UNREGISTERED'] = 'סיקור לא רשומים';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'סיקור רשום על tracker<br /><br />Now אתה צריך <a href="%s"><b>download שלך torrent</b></a> ולהפעיל אותו באמצעות ביטורנט שלך הלקוח בוחר את התיקייה עם הקבצים המקוריים את שיתוף כמו בנתיב ההורדה';
 $lang['INVALID_ANN_URL'] = 'חוקי להכריז URL [%s]<br /><br />must להיות <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'לא יכול להוסיף passkey<br /><br />Torrent לא רשום על tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'לא יכול להוסיף את המפתח (המפתח הוא ריק)<br /><br />Go כדי <a href="%s" target="_blank"><b>your פורום profile</b></a> ולהפיק את זה';
 $lang['BT_PASSKEY'] = 'המפתח';
 $lang['BT_GEN_PASSKEY'] = 'ליצור חדש.';
 $lang['BT_PASSKEY_VIEW'] = 'להראות';
@@ -1080,16 +1084,15 @@ $lang['RELEASING'] = 'עצמית';
 $lang['SEEDING'] = 'זרע';
 $lang['LEECHING'] = 'עלוקה';
 $lang['IS_REGISTERED'] = 'רשום';
-$lang['MAGNET'] = 'מגנט';
-$lang['DC_MAGNET'] = 'חיפוש ב-DC++ על ידי שם הקובץ';
-$lang['DC_MAGNET_EXT'] = 'חיפוש ב-DC++ על ידי הסיומת';
+$lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'סטטוס';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'בחר מצב';
 $lang['TOR_STATUS_NOT_SELECT'] = 'לא בחרת מצב.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'כל הסטטוסים';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'לא בדקתי',
     TOR_CLOSED => 'סגור',
     TOR_APPROVED => 'בדקתי',
@@ -1103,7 +1106,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'זמני',
     TOR_PREMOD => 'מראש מתינות',
     TOR_REPLENISH => 'לחדש',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'מעמד כזה לא קיים!';
 $lang['TORRENT_FAILED'] = 'הפצה לא נמצא!';
 $lang['TOR_STATUS_DUB'] = 'הפצה יש את אותו מעמד';
@@ -1351,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('תגובה', 'תגובות');
-$lang['DECLENSION']['TIMES'] = array('זמן', 'פעמים');
+$lang['DECLENSION']['REPLIES'] = ['תגובה', 'תגובות'];
+$lang['DECLENSION']['TIMES'] = ['זמן', 'פעמים'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('השני', 'שניות'),
-    'minutes' => array('דקה', 'דקות'),
-    'hours' => array('שעה', 'שעות'),
-    'mday' => array('יום', 'ימים'),
-    'mon' => array('בחודש', 'חודשים'),
-    'year' => array('שנה', 'שנים'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['השני', 'שניות'],
+    'minutes' => ['דקה', 'דקות'],
+    'hours' => ['שעה', 'שעות'],
+    'mday' => ['יום', 'ימים'],
+    'mon' => ['בחודש', 'חודשים'],
+    'year' => ['שנה', 'שנים'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1541,6 +1544,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL מהירות';
 $lang['DL_DL_SPEED'] = 'DL מהירות';
 $lang['DL_PORT'] = 'נמל';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'הנוסחה: Uploaded/TorrentSize';
 $lang['DL_ULR'] = 'כתובת';
 $lang['DL_STOPPED'] = 'הפסיקה';
@@ -1716,6 +1720,8 @@ $lang['USER_AUTH_UPDATED'] = 'הרשאות משתמש עודכנו';
 $lang['GROUP_AUTH_UPDATED'] = 'קבוצת הרשאות עודכנו';
 
 $lang['AUTH_UPDATED'] = 'הרשאות עודכנו';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'לחץ על %sHere%s לחזור הרשאות משתמש';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'לחץ על %sHere%s לחזור הרשאות הקבוצה';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'לחץ על %sHere%s לחזור פורום הרשאות';
@@ -2256,13 +2262,6 @@ $lang['RETURN_CONFIG'] = '%sReturn כדי Configuration%s';
 $lang['CONFIG_UPD'] = 'תצורה עודכן בהצלחה';
 $lang['SET_DEFAULTS'] = 'שחזור ברירות מחדל';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'פורום הגדרות';
-$lang['TRACKER_SETTINGS'] = 'גשש הגדרות';
-
-$lang['CHANGES_DISABLED'] = 'שינויים נכים (לראות <b>$bb_cfg[\'tracker\']</b> ב config.php)';
-
 $lang['OFF_TRACKER'] = 'השבת tracker';
 $lang['OFF_REASON'] = 'השבת סיבה';
 $lang['OFF_REASON_EXPL'] = 'הודעה זו תישלח אל הלקוח כאשר הגשש אינו זמין';
@@ -2323,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'להכריז url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'ניתן לקבוע נוספים רשאי כתובות url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'בטל DHT רשת';
 $lang['BT_DISABLE_DHT_EXPL'] = 'השבת את Peer Exchange ו-DHT (מומלץ עבור רשתות פרטיות, רק כתובת url להכריז)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'ודא להכריז url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'לרשום על הגשש מותר רק כתובות';
 $lang['BT_REPLACE_ANN_URL'] = 'להחליף להכריז url';
@@ -2372,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = 'תבנית נכים';
 $lang['FOR_NEW_TEMPLATE'] = 'עבור תבניות חדשות!';
 $lang['CHANGED'] = 'שינה';
 $lang['REMOVED'] = 'הוסר';
-$lang['QUESTION'] = 'האם אתה בטוח שברצונך למחוק?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron הרשימה';
 $lang['CRON_ID'] = 'ID';
@@ -2407,14 +2408,14 @@ $lang['REPAIR_CRON'] = 'תיקון Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'עריכת העבודה';
 $lang['CRON_EDIT_HEAD_ADD'] = 'להוסיף עבודה';
 $lang['CRON_SCRIPT_EXPL'] = 'השם של קובץ ה-script מתוך "כולל/cron/עבודות/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; בחר התחלה.',
     'hourly' => 'לפי שעה',
     'daily' => 'יומי',
     'weekly' => 'שבועי',
     'monthly' => 'חודשי',
     'interval' => 'מרווח'
-);
+];
 $lang['NOSELECT'] = 'לא בחר';
 $lang['RUN_DAY'] = 'לרוץ היום';
 $lang['RUN_DAY_EXPL'] = 'היום, כאשר העבודה הזאת לרוץ';
@@ -2533,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'הנושא הועבר מתוך פורום [b
 $lang['BOT_MESS_SPLITS'] = 'הנושא מפוצל. נושא חדש - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'הנושא כבר עזב [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'הורדתי את השיחה.';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'שימו לב עם בקשה לחזור הפצה';
 $lang['CALLSEED_SUBJECT'] = 'הורד לעזור %s';
 $lang['CALLSEED_TEXT'] = 'שלום![br]Your צריך עזרה בשחרור [url=%s]%s[/url][br]if אתה מחליט לעזור, אבל כבר מחקתי את קובץ הטורנט, אתה יכול להוריד אותו [url=%s]this[/url][br][br]i מקווה לעזרה שלכם!';
@@ -2541,17 +2542,22 @@ $lang['CALLSEED_MSG_OK'] = 'הודעה נשלחה לכל מי הוריד את ז
 $lang['CALLSEED_MSG_SPAM'] = 'הבקשה כבר פעם נשלחו בהצלחה (כנראה לא אתה)<br /><br />The ההזדמנות הבאה לשלוח בקשה להיות <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'הנושא אינו דורש עזרה (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'נושא:<br /> <b>deleted</b>',
     'mod_topic_move' => 'נושא:<br /> <b>moved</b>',
     'mod_topic_lock' => 'נושא:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'נושא:<br /> <b>opened</b>',
     'mod_topic_split' => 'נושא:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'פוסט:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'משתמש:<br /> <b>deleted</b>',
     'adm_user_ban' => 'משתמש:<br /> <b>ban</b>',
     'adm_user_unban' => 'משתמש:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'כל הפעולות';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'פעולות יומן: אפשרויות חיפוש';
@@ -2690,28 +2696,28 @@ $lang['MC_LEGEND'] = 'סוג תגובה';
 $lang['MC_FAQ'] = 'הזנת טקסט יוצג תחת הודעה זו';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s בהודעה שלך";
 $lang['MC_COMMENT_PM_MSG'] = "שלום, [b]%s[/b]\nModerator לך הודעה [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'מחק תגובה',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'אחד מן %s',
         'type' => 'תגובה',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'מידע %s',
         'type' => 'מידע',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'אזהרה מפני %s',
         'type' => 'אזהרה',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'הפרה מן %s',
         'type' => 'הפרה',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'לנהל את ה-sitemap';
@@ -2752,7 +2758,7 @@ $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]הטקסט של דף זה נערך בכתובת: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. שורה זו יכולה לראות רק מנהלי מערכת.[/align]';
 $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקסט של הכללים הבסיסיים של משאב זה מוצג בפני המשתמשים.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'משתמשים לא-פעילים ב-30 ימים',
     1 => 'משתמשים לא-פעילים למשך 90 ימים.',
     2 => 'בינוני גודל הפצות על הגשש (הרבה מגה-בתים)',
@@ -2761,7 +2767,7 @@ $lang['TR_STATS'] = array(
     5 => 'כמה ידיים איפה זה זריעה יותר מ-5 זרעים',
     6 => 'כמה מאיתנו uploaders (מי מילא לפחות 1 יד)',
     7 => 'כמה uploaders במהלך 30 הימים האחרונים',
-);
+];
 
 $lang['NEW_POLL_START'] = 'הסקר זמין';
 $lang['NEW_POLL_END'] = 'הסקר הושלם';
@@ -2785,13 +2791,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'כל שורה מקביל תשובה אחת (מק�
 $lang['OLD_BROWSER'] = 'אתה משתמש מיושנת הדפדפן. האינטרנט לא יוצגו כהלכה.';
 $lang['GO_BACK'] = 'לחזור';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'העלאת קובץ שגיאה';
 $lang['UPLOAD_ERROR_SIZE'] = 'הקובץ שהועלה עולה על הגודל המרבי של %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'חוקי סוג קובץ של תמונה';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'תמונה מידות עולה על המקסימום המותר %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'הקובץ שהועלה הוא לא תמונה.';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'סיומת %s על הורדות לא מורשות';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'עברת את הגודל המרבי של קובץ על השרת',
     UPLOAD_ERR_FORM_SIZE => 'אתה עולה על גודל הקובץ המרבי של טעינה',
     UPLOAD_ERR_PARTIAL => 'הקובץ היה שהורדו באופן חלקי',
@@ -2799,7 +2806,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'זמני הספרייה לא נמצאו',
     UPLOAD_ERR_CANT_WRITE => 'כותב שגיאה',
     UPLOAD_ERR_EXTENSION => 'טען נעצר על ידי הסיומת',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'בדוק שאתה לא רובוט';
@@ -2814,7 +2821,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'בקשתך להצטרף לקבוצת המשתמשים התקבלה',
     'GROUP_REQUEST' => 'בקשה להצטרף לקבוצת המשתמשים שלך',
     'PRIVMSG_NOTIFY' => 'הודעה פרטית חדשה',
-    'TOPIC_NOTIFY' => 'הודעה על תגובה בשרשור %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'הפעלה מחדש של החשבון',
     'USER_ACTIVATE_PASSWD' => 'אישור סיסמה חדשה',
     'USER_WELCOME' => 'ברוכים הבאים לאתר %s',

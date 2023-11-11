@@ -39,10 +39,10 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status') {
 $full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialchars($_POST['full_url'])) : '';
 
 if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
-    $redirect_type = "search.php";
+    $redirect_type = 'search.php';
     $redirect = $full_url ?: "$dl_key=1";
 } else {
-    $redirect_type = (!$topic_id) ? "viewforum.php" : "viewtopic.php";
+    $redirect_type = (!$topic_id) ? 'viewforum.php' : 'viewtopic.php';
     $redirect = $full_url ?: ((!$topic_id) ? POST_FORUM_URL . "=$forum_id" : POST_TOPIC_URL . "=$topic_id");
 }
 
@@ -78,16 +78,16 @@ if ($mode == 'dl_delete' && $topic_id) {
     }
 
     if (!$confirmed) {
-        $hidden_fields = array(
+        $hidden_fields = [
             't' => $topic_id,
             'mode' => 'dl_delete',
-        );
+        ];
 
-        print_confirmation(array(
+        print_confirmation([
             'QUESTION' => $lang['DL_LIST_DEL_CONFIRM'],
             'FORM_ACTION' => 'dl_list.php',
             'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
-        ));
+        ]);
     }
 
     clear_dl_list($topic_id);
@@ -95,7 +95,7 @@ if ($mode == 'dl_delete' && $topic_id) {
 }
 
 // Update DL status
-$req_topics_ary = $topics_ary = array();
+$req_topics_ary = $topics_ary = [];
 
 // Get topics selected by user
 if ($mode == 'set_topics_dl_status') {
@@ -120,14 +120,14 @@ if ($req_topics_sql = implode(',', $req_topics_ary)) {
 }
 
 if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')) {
-    $new_dlstatus_ary = array();
+    $new_dlstatus_ary = [];
 
     foreach ($topics_ary as $topic_id) {
-        $new_dlstatus_ary[] = array(
+        $new_dlstatus_ary[] = [
             'user_id' => (int)$user->id,
             'topic_id' => (int)$topic_id,
             'user_status' => (int)$new_dl_status,
-        );
+        ];
     }
     $new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
 
@@ -136,4 +136,4 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
     redirect("$redirect_type?$redirect");
 }
 
-redirect("index.php");
+redirect('index.php');

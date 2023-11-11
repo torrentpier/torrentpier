@@ -121,21 +121,21 @@ class Dev
         $log = '';
 
         foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj) ? self::get_sql_log_html($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+            $log .= !empty($db_obj->dbg) ? self::get_sql_log_html($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {
-            if (!empty($cache_obj->db)) {
+            if (!empty($cache_obj->db->dbg)) {
                 $log .= self::get_sql_log_html($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
-            } elseif (!empty($cache_obj->engine)) {
+            } elseif (!empty($cache_obj->dbg)) {
                 $log .= self::get_sql_log_html($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
             }
         }
 
         if (!empty($datastore->db->dbg)) {
-            $log .= self::get_sql_log_html($datastore->db, 'cache: datastore [' . $datastore->engine . ']');
+            $log .= self::get_sql_log_html($datastore->db, "cache: datastore [{$datastore->db->engine}]");
         } elseif (!empty($datastore->dbg)) {
-            $log .= self::get_sql_log_html($datastore, 'cache: datastore [' . $datastore->engine . ']');
+            $log .= self::get_sql_log_html($datastore, "cache: datastore [{$datastore->engine}]");
         }
 
         return $log;
@@ -189,7 +189,7 @@ class Dev
             $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
             $sql = self::short_query($dbg['sql'], true);
             $time = sprintf('%.4f', $dbg['time']);
-            $perc = @sprintf('[%2d]', $dbg['time'] * 100 / $db_obj->sql_timetotal);
+            $perc = @sprintf('[%d%%]', round($dbg['time'] * 100 / $db_obj->sql_timetotal));
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
 
             $log .= ''

@@ -128,9 +128,7 @@ class SqlDb
         if (\is_array($query)) {
             $query = $this->build_sql($query);
         }
-        if (SQL_PREPEND_SRC_COMM) {
-            $query = '/* ' . $this->debug_find_source() . ' */ ' . $query;
-        }
+        $query = '/* ' . $this->debug_find_source() . ' */ ' . $query;
         $this->cur_query = $query;
         $this->debug('start');
 
@@ -847,11 +845,13 @@ class SqlDb
      * Find caller source
      *
      * @param string $mode
-     *
      * @return string
      */
-    public function debug_find_source($mode = '')
+    public function debug_find_source(string $mode = 'all'): string
     {
+        if (!SQL_PREPEND_SRC) {
+            return 'src disabled';
+        }
         foreach (debug_backtrace() as $trace) {
             if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
                 switch ($mode) {
@@ -859,12 +859,13 @@ class SqlDb
                         return $trace['file'];
                     case 'line':
                         return $trace['line'];
+                    case 'all':
                     default:
                         return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
                 }
             }
         }
-        return '';
+        return 'src not found';
     }
 
     /**
@@ -939,7 +940,7 @@ class SqlDb
         $msg[] = 'PID     : ' . sprintf('%05d', getmypid());
         $msg[] = 'Request : ' . trim(print_r($_REQUEST, true)) . str_repeat('_', 78) . LOG_LF;
         $msg[] = '';
-        bb_log($msg, SQL_LOG_NAME);
+        bb_log($msg, IN_TRACKER ? SQL_TR_LOG_NAME : SQL_BB_LOG_NAME);
     }
 
     /**

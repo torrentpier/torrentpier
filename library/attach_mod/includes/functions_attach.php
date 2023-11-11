@@ -55,7 +55,7 @@ function base64_unpack($string)
 
     for ($i = 1; $i <= $length; $i++) {
         $pos = $length - $i;
-        $operand = strpos($chars, (string) $string[$pos]);
+        $operand = strpos($chars, (string)$string[$pos]);
         $exponent = $base ** ($i - 1);
         $decValue = $operand * $exponent;
         $number += $decValue;
@@ -454,7 +454,7 @@ function _set_var(&$result, $var, $type, $multibyte = false)
     $result = $var;
 
     if ($type == 'string') {
-        $result = trim(str_replace(array("\r\n", "\r", '\xFF'), array("\n", "\n", ' '), $result));
+        $result = trim(str_replace(["\r\n", "\r", '\xFF'], ["\n", "\n", ' '], $result));
         // 2.0.x is doing addslashes on all variables
         $result = stripslashes($result);
         if ($multibyte) {

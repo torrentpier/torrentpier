@@ -221,12 +221,12 @@ class Atom
             $atom .= "	</author>\n";
             $atom .= "	<updated>" . $date . "T$time+00:00</updated>\n";
             $atom .= "	<id>tag:rto.feed," . $date . ":/t/$topic_id</id>\n";
-            $atom .= "	<link href=\"viewtopic.php?t=$topic_id\" />\n";
+            $atom .= "	<link href=\"" . TOPIC_URL . $topic_id . "\" />\n";
             $atom .= "</entry>\n";
         }
         $atom .= "</feed>";
         @unlink($file_path);
-        $fp = fopen($file_path, 'wb');
+        $fp = fopen($file_path, 'wb+');
         fwrite($fp, $atom);
         fclose($fp);
         return true;

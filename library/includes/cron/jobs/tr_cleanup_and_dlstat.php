@@ -29,10 +29,10 @@ DB()->expect_slow_query(600);
 // Update dlstat (part 1)
 if ($bb_cfg['tracker']['update_dlstat']) {
     // ############################ Tables LOCKED ################################
-    DB()->lock(array(
+    DB()->lock([
         BB_BT_TRACKER,
-        NEW_BB_BT_LAST_TORSTAT,
-    ));
+        NEW_BB_BT_LAST_TORSTAT
+    ]);
 
     // Get PER TORRENT user's dlstat from tracker
     DB()->query("
@@ -54,13 +54,14 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 
 // Update last seeder info in BUF
 DB()->query("
-	REPLACE INTO " . BUF_LAST_SEEDER . "
-		(topic_id, seeder_last_seen)
-	SELECT
-		topic_id, " . TIMENOW . "
-	FROM " . BB_BT_TRACKER . "
-	WHERE seeder = 1
-	GROUP BY topic_id
+    REPLACE INTO " . BUF_LAST_SEEDER . "
+        (topic_id, user_id, seeder_last_seen)
+    SELECT
+        topic_id, user_id, " . TIMENOW . "
+    FROM " . BB_BT_TRACKER . "
+    WHERE seeder = 1
+    GROUP BY topic_id, user_id
+    ORDER BY update_time DESC
 ");
 
 // Clean peers table

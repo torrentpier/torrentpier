@@ -155,13 +155,13 @@ if ($search_imagick) {
         } elseif (false !== stripos(PHP_OS, "WIN")) {
             $path = 'c:/imagemagick/convert.exe';
 
-            if (!@file_exists(amod_realpath($path))) {
+            if (file_exists(amod_realpath($path))) {
                 $imagick = $path;
             }
         }
     }
 
-    if (!@file_exists(amod_realpath(trim($imagick)))) {
+    if (file_exists(amod_realpath(trim($imagick)))) {
         $new_attach['img_imagick'] = trim($imagick);
     } else {
         $new_attach['img_imagick'] = '';
@@ -171,7 +171,7 @@ if ($search_imagick) {
 // Check Settings
 if ($check_upload) {
     // Some tests...
-    $attach_config = array();
+    $attach_config = [];
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
@@ -207,7 +207,7 @@ if ($check_upload) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb+'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
         } else {
@@ -246,12 +246,12 @@ if ($mode == 'manage') {
         'MAX_FILESIZE_PM' => $new_attach['max_filesize_pm'],
         'MAX_ATTACHMENTS' => $new_attach['max_attachments'],
         'MAX_ATTACHMENTS_PM' => $new_attach['max_attachments_pm'],
-        'DISABLE_MOD_YES' => $new_attach['disable_mod'] !== '0' ? 'checked="checked"' : '',
-        'DISABLE_MOD_NO' => $new_attach['disable_mod'] === '0' ? 'checked="checked"' : '',
-        'PM_ATTACH_YES' => $new_attach['allow_pm_attach'] !== '0' ? 'checked="checked"' : '',
-        'PM_ATTACH_NO' => $new_attach['allow_pm_attach'] === '0' ? 'checked="checked"' : '',
-        'DISPLAY_ORDER_ASC' => $new_attach['display_order'] !== '0' ? 'checked="checked"' : '',
-        'DISPLAY_ORDER_DESC' => $new_attach['display_order'] === '0' ? 'checked="checked"' : '',
+        'DISABLE_MOD_YES' => $new_attach['disable_mod'] !== '0' ? 'checked' : '',
+        'DISABLE_MOD_NO' => $new_attach['disable_mod'] === '0' ? 'checked' : '',
+        'PM_ATTACH_YES' => $new_attach['allow_pm_attach'] !== '0' ? 'checked' : '',
+        'PM_ATTACH_NO' => $new_attach['allow_pm_attach'] === '0' ? 'checked' : '',
+        'DISPLAY_ORDER_ASC' => $new_attach['display_order'] !== '0' ? 'checked' : '',
+        'DISPLAY_ORDER_DESC' => $new_attach['display_order'] === '0' ? 'checked' : '',
     ));
 }
 
@@ -266,7 +266,7 @@ if ($mode == 'cats') {
 
     $sql = 'SELECT group_name, cat_id FROM ' . BB_EXTENSION_GROUPS . ' WHERE cat_id > 0 ORDER BY cat_id';
 
-    $s_assigned_group_images = array();
+    $s_assigned_group_images = [];
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not get group names from ' . BB_EXTENSION_GROUPS);
@@ -281,20 +281,20 @@ if ($mode == 'cats') {
         }
     }
 
-    $display_inlined_yes = ($new_attach['img_display_inlined'] != '0') ? 'checked="checked"' : '';
-    $display_inlined_no = ($new_attach['img_display_inlined'] == '0') ? 'checked="checked"' : '';
+    $display_inlined_yes = ($new_attach['img_display_inlined'] != '0') ? 'checked' : '';
+    $display_inlined_no = ($new_attach['img_display_inlined'] == '0') ? 'checked' : '';
 
-    $create_thumbnail_yes = ($new_attach['img_create_thumbnail'] != '0') ? 'checked="checked"' : '';
-    $create_thumbnail_no = ($new_attach['img_create_thumbnail'] == '0') ? 'checked="checked"' : '';
+    $create_thumbnail_yes = ($new_attach['img_create_thumbnail'] != '0') ? 'checked' : '';
+    $create_thumbnail_no = ($new_attach['img_create_thumbnail'] == '0') ? 'checked' : '';
 
-    $use_gd2_yes = ($new_attach['use_gd2'] != '0') ? 'checked="checked"' : '';
-    $use_gd2_no = ($new_attach['use_gd2'] == '0') ? 'checked="checked"' : '';
+    $use_gd2_yes = ($new_attach['use_gd2'] != '0') ? 'checked' : '';
+    $use_gd2_no = ($new_attach['use_gd2'] == '0') ? 'checked' : '';
 
     // Check Thumbnail Support
-    if (!is_imagick() && !@extension_loaded('gd')) {
+    if (!is_imagick() && !extension_loaded('gd')) {
         $new_attach['img_create_thumbnail'] = '0';
     } else {
-        $template->assign_block_vars('switch_thumbnail_support', array());
+        $template->assign_block_vars('switch_thumbnail_support', []);
     }
 
     $template->assign_vars(array(
@@ -319,7 +319,7 @@ if ($mode == 'cats') {
 // Check Cat Settings
 if ($check_image_cat) {
     // Some tests...
-    $attach_config = array();
+    $attach_config = [];
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
@@ -347,10 +347,9 @@ if ($check_image_cat) {
 
     // Does the target directory exist, is it a directory and writeable
     if (!@file_exists(amod_realpath($upload_dir))) {
-        if (!mkdir($upload_dir, 0755) && !is_dir($upload_dir)) {
+        if (!bb_mkdir($upload_dir) && !is_dir($upload_dir)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $upload_dir));
         }
-        @chmod($upload_dir, 0777);
 
         if (!@file_exists(amod_realpath($upload_dir))) {
             $error = true;
@@ -364,7 +363,7 @@ if ($check_image_cat) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb+'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
         } else {
@@ -386,7 +385,7 @@ if ($submit && $mode == 'quota') {
     $filesize_list = get_var('max_filesize_list', array(0));
     $size_select_list = get_var('size_select_list', array(''));
 
-    $allowed_list = array();
+    $allowed_list = [];
 
     for ($i = 0, $iMax = count($quota_change_list); $i < $iMax; $i++) {
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
@@ -519,7 +518,7 @@ if ($mode == 'quota' && $e_mode == 'view_quota') {
         bb_die('Invalid call');
     }
 
-    $template->assign_block_vars('switch_quota_limit_desc', array());
+    $template->assign_block_vars('switch_quota_limit_desc', []);
 
     $sql = 'SELECT * FROM ' . BB_QUOTA_LIMITS . ' WHERE quota_limit_id = ' . (int)$quota_id . ' LIMIT 1';
 

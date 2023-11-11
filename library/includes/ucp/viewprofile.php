@@ -13,10 +13,10 @@ if (!defined('BB_ROOT')) {
 
 require INC_DIR . '/bbcode.php';
 
-$datastore->enqueue(array(
+$datastore->enqueue([
     'ranks',
-    'cat_forums',
-));
+    'cat_forums'
+]);
 
 if (!$userdata['session_logged_in']) {
     redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
@@ -26,7 +26,7 @@ if (!$userdata['session_logged_in']) {
     }
 }
 
-if (!$profiledata = get_userdata($_GET[POST_USERS_URL])) {
+if (!$profiledata = get_userdata($_GET[POST_USERS_URL], !is_numeric($_GET[POST_USERS_URL]))) {
     bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
@@ -42,14 +42,14 @@ if ($user_rank = $profiledata['user_rank'] and isset($ranks[$user_rank])) {
     $rank_style = $ranks[$user_rank]['rank_style'];
 }
 if (IS_ADMIN) {
-    $rank_select = array($lang['NONE'] => 0);
+    $rank_select = [$lang['NONE'] => 0];
     foreach ($ranks as $row) {
         $rank_select[$row['rank_title']] = $row['rank_id'];
     }
     $rank_select = build_select('rank-sel', $rank_select, $user_rank);
 }
 
-if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM) {
+if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_ADMIN) {
     $email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
@@ -74,7 +74,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     $signature = bbcode2html($signature);
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'PAGE_TITLE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
     'USERNAME' => $profiledata['username'],
     'PROFILE_USER_ID' => $profiledata['user_id'],
@@ -90,7 +90,6 @@ $template->assign_vars(array(
     'ICQ' => $profiledata['user_icq'],
     'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
     'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
-
     'USER_ACTIVE' => $profiledata['user_active'],
     'LOCATION' => $profiledata['user_from'],
     'OCCUPATION' => $profiledata['user_occ'],
@@ -117,10 +116,10 @@ $template->assign_vars(array(
     'SHOW_ROLE' => (IS_AM || $profile_user_id || $profiledata['user_active']),
     'GROUP_MEMBERSHIP' => false,
     'TRAF_STATS' => !(IS_AM || $profile_user_id),
-));
+]);
 
-if (IS_ADMIN) {
-    $group_membership = array();
+if (IS_AM) {
+    $group_membership = [];
     $sql = "
 		SELECT COUNT(g.group_id) AS groups_cnt, g.group_single_user, ug.user_pending
 		FROM " . BB_USER_GROUP . " ug
@@ -151,14 +150,10 @@ if (IS_ADMIN) {
         }
         $group_membership = implode(', ', $group_membership);
     }
-    $template->assign_vars(array(
+    $template->assign_vars([
         'GROUP_MEMBERSHIP' => (bool)$group_membership,
-        'GROUP_MEMBERSHIP_TXT' => $group_membership,
-    ));
-} elseif (IS_MOD) {
-    $template->assign_vars(array(
-        'SHOW_GROUP_MEMBERSHIP' => ($profiledata['user_level'] != USER),
-    ));
+        'GROUP_MEMBERSHIP_TXT' => $group_membership
+    ]);
 }
 
 // Show users torrent-profile
@@ -170,14 +165,14 @@ if (IS_AM || $profile_user_id || !bf($profiledata['user_opt'], 'user_opt', 'user
 if (IS_AM || $profile_user_id) {
     show_bt_userdata($profiledata['user_id']);
 } else {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'DOWN_TOTAL_BYTES' => false,
         'MIN_DL_BYTES' => false,
-    ));
+    ]);
 }
 
 if (IS_ADMIN) {
-    $ajax_user_opt = json_encode(array(
+    $ajax_user_opt = json_encode([
         'dis_avatar' => bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'),
         'dis_sig' => bf($profiledata['user_opt'], 'user_opt', 'dis_sig'),
         'dis_passkey' => bf($profiledata['user_opt'], 'user_opt', 'dis_passkey'),
@@ -185,17 +180,17 @@ if (IS_ADMIN) {
         'dis_post' => bf($profiledata['user_opt'], 'user_opt', 'dis_post'),
         'dis_post_edit' => bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit'),
         'dis_topic' => bf($profiledata['user_opt'], 'user_opt', 'dis_topic'),
-    ), JSON_THROW_ON_ERROR);
+    ], JSON_THROW_ON_ERROR);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'EDITABLE_TPLS' => true,
         'AJAX_USER_OPT' => $ajax_user_opt,
         'U_MANAGE' => "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}",
         'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;u={$profiledata['user_id']}",
-    ));
+    ]);
 }
 
-$user_restrictions = array();
+$user_restrictions = [];
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')) {
     $user_restrictions[] = $lang['HIDE_AVATARS'];

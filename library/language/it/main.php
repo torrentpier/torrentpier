@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Post';
 $lang['POSTED'] = 'Postato';
 $lang['USERNAME'] = 'Username';
 $lang['PASSWORD'] = 'Password';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Autore';
@@ -233,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Si <b>can</b> votare nei sondaggi in questo forum';
 $lang['RULES_VOTE_CANNOT'] = 'Si <b>cannot</b> votare nei sondaggi in questo forum';
 $lang['RULES_MODERATE'] = 'Si <b>can</b> moderare questo forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Non ci sono messaggi in questo forum.<br />Click sul <b>Post Nuovo Topic</b> link in questa pagina per posta.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Visualizza argomento';
@@ -377,7 +379,6 @@ $lang['DELETED'] = 'Il tuo messaggio è stato cancellato con successo.';
 $lang['POLL_DELETE'] = 'Il sondaggio è stato eliminato con successo.';
 $lang['VOTE_CAST'] = 'Il tuo voto è stato gettato.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Argomento Notifica Di Risposta';
 $lang['EMOTICONS'] = 'Emoticon';
 $lang['MORE_EMOTICONS'] = 'Visualizza altre Emoticon';
 
@@ -415,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Per I Messaggi Privati';
 $lang['NO_NEW_PM'] = 'nessun nuovo messaggio';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nuovo messaggio', 'nuovi messaggi');
+$lang['NEW_PMS_DECLENSION'] = ['nuovo messaggio', 'nuovi messaggi'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('da leggere', 'da leggere');
+$lang['UNREAD_PMS_DECLENSION'] = ['da leggere', 'da leggere'];
 
 $lang['UNREAD_MESSAGE'] = 'Messaggio non letto';
 $lang['READ_MESSAGE'] = 'Lettura di un messaggio';
@@ -545,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Invia un messaggio e-mail quando qualcuno risp
 
 $lang['BOARD_LANG'] = 'Consiglio di lingua';
 $lang['GENDER'] = 'Sesso';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Sconosciuto',
     1 => 'Maschio',
     2 => 'Femmina'
-);
+];
 $lang['MODULE_OFF'] = 'Il modulo è disattivato!';
 
 $lang['BIRTHDAY'] = 'Compleanno';
@@ -591,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = 'Reset autologin chiave';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'tra tutti i posti che hai visitato il forum abilitato il login automatico';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Visualizza una piccola immagine qui sotto i tuoi dati nei messaggi. Solo le immagini possono essere visualizzate in un momento, la sua larghezza può essere maggiore di %d pixel, l\'altezza massima non superiore a %d pixel e la dimensione del file non più di %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Eliminare avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar di controllo opzione è disabilitata per violazione <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
@@ -723,7 +724,8 @@ $lang['GROUP_REQUEST'] = 'Una richiesta di unirsi al vostro gruppo è stato fatt
 $lang['GROUP_APPROVED'] = 'La tua richiesta è stata approvata.';
 $lang['GROUP_ADDED'] = 'Si sono stati aggiunti a questo gruppo.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Sei già un membro di questo gruppo';
-$lang['USER_IS_MEMBER_GROUP'] = 'L\'utente è già un membro di questo gruppo';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Aggiornato correttamente il tipo di gruppo.';
 $lang['EFFECTIVE_DATE'] = 'Data Di Efficacia';
 
@@ -1003,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'L\'Allegato è troppo grande.<br />Could non 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'L\'Allegato è troppo grande.<br />Maximum Dimensione di Caricamento: %d MB.<br />Please di notare che questa Dimensione è definita in php.ini, questo significa che è impostato da PHP e l\'Allegato Mod non può eseguire l\'override di questo valore.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'L\'Estensione %s non è consentito'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Non è consentito inviare File con l\'Estensione %s all\'interno di questo Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'L\'Allegato è troppo grande.<br />Max Dimensioni: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Mi dispiace, ma la dimensione massima di file per gli Allegati, viene raggiunto. Si prega di contattare l\'Amministratore del forum se avete domande.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Allegato non può essere aggiunto, dal momento che il max. numero di %d Allegati in questo post è stato raggiunto'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'L\'Allegato/Immagine deve essere inferiore a %d pixel di larghezza e %d pixel di altezza';
@@ -1057,12 +1059,14 @@ $lang['BT_ADDED'] = 'Aggiunto';
 $lang['BT_REG_ON_TRACKER'] = 'Registrarsi sul tracker';
 $lang['BT_REG_FAIL'] = 'Non si potrebbe registrare sui tracker torrent';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un altro torrent con lo stesso info_hash già <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Togliere dal tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent non registrati';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrati su tracker<br /><br />Now è necessario <a href="%s"><b>download tuo torrent</b></a> ed eseguire utilizzando il vostro client BitTorrent scegliere la cartella con i file originali con cui stai condividendo il percorso di download';
 $lang['INVALID_ANN_URL'] = 'Voci di Annunciare URL [%s]<br /><br />must essere <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Non poteva aggiungere passkey<br /><br />Torrent non registrato sul tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Non poteva aggiungere la chiave di accesso (password vuota)<br /><br />Go per <a href="%s" target="_blank"><b>your forum profile</b></a> e generare';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'creare un nuovo';
 $lang['BT_PASSKEY_VIEW'] = 'mostra';
@@ -1080,16 +1084,15 @@ $lang['RELEASING'] = 'Auto';
 $lang['SEEDING'] = 'Seme';
 $lang['LEECHING'] = 'Sanguisuga';
 $lang['IS_REGISTERED'] = 'Registrati';
-$lang['MAGNET'] = 'Magnete';
-$lang['DC_MAGNET'] = 'Ricerca in DC++ per nome';
-$lang['DC_MAGNET_EXT'] = 'Ricerca in DC++ per estensione';
+$lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Stato';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Seleziona lo stato';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Si non sono stato selezionato.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tutti gli stati';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'non controllato',
     TOR_CLOSED => 'chiuso',
     TOR_APPROVED => 'verificato',
@@ -1103,7 +1106,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'temporaneo',
     TOR_PREMOD => 'pre-moderazione',
     TOR_REPLENISH => 'rifornire',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Tale stato non esiste!';
 $lang['TORRENT_FAILED'] = 'La distribuzione non è stata trovata!';
 $lang['TOR_STATUS_DUB'] = 'La distribuzione ha lo stesso stato';
@@ -1351,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('risposta', 'risposte');
-$lang['DECLENSION']['TIMES'] = array('tempo', 'volte');
+$lang['DECLENSION']['REPLIES'] = ['risposta', 'risposte'];
+$lang['DECLENSION']['TIMES'] = ['tempo', 'volte'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('secondo', 'secondi'),
-    'minutes' => array('minuti', 'minuti'),
-    'hours' => array('ora', 'ore'),
-    'mday' => array('giorno', 'giorni'),
-    'mon' => array('mese', 'mesi'),
-    'year' => array('anno', 'anni'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['secondo', 'secondi'],
+    'minutes' => ['minuti', 'minuti'],
+    'hours' => ['ora', 'ore'],
+    'mday' => ['giorno', 'giorni'],
+    'mon' => ['mese', 'mesi'],
+    'year' => ['anno', 'anni'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1541,6 +1544,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL velocità';
 $lang['DL_DL_SPEED'] = 'DL velocità';
 $lang['DL_PORT'] = 'Porta';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formula: Uploaded/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'arrestato';
@@ -1716,6 +1720,8 @@ $lang['USER_AUTH_UPDATED'] = 'Autorizzazioni utente sono stati aggiornati';
 $lang['GROUP_AUTH_UPDATED'] = 'Autorizzazioni di gruppo sono stati aggiornati';
 
 $lang['AUTH_UPDATED'] = 'Le autorizzazioni sono state aggiornate';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Fare clic su %sHere%s per tornare a Autorizzazioni Utente';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Fare clic su %sHere%s per tornare alle Autorizzazioni di Gruppo';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Fare clic su %sHere%s per tornare al Forum di Autorizzazioni';
@@ -2256,13 +2262,6 @@ $lang['RETURN_CONFIG'] = '%sReturn per Configuration%s';
 $lang['CONFIG_UPD'] = 'Configurazione Aggiornata Correttamente';
 $lang['SET_DEFAULTS'] = 'Ripristinare le impostazioni predefinite';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Le impostazioni del Forum';
-$lang['TRACKER_SETTINGS'] = 'Tracker impostazioni';
-
-$lang['CHANGES_DISABLED'] = 'Modifiche per disabili (vedi <b>$bb_cfg[\'tracker\']</b> in config.php)';
-
 $lang['OFF_TRACKER'] = 'Disattivare tracker';
 $lang['OFF_REASON'] = 'Disattivare ragione';
 $lang['OFF_REASON_EXPL'] = 'questo messaggio verrà inviato al client quando il tracker è disabilitato';
@@ -2323,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Annunciare url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'è possibile definire ulteriori ammessi url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Disattivare la rete DHT';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Disattivare Peer Exchange e DHT (consigliato per le reti private, solo url annunciare)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verificare annunciare url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registrarsi sul tracker ammessi solo gli url';
 $lang['BT_REPLACE_ANN_URL'] = 'Sostituire annunciare url';
@@ -2372,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = 'Modello di disabili';
 $lang['FOR_NEW_TEMPLATE'] = 'per i nuovi modelli!';
 $lang['CHANGED'] = 'Cambiato';
 $lang['REMOVED'] = 'Rimosso';
-$lang['QUESTION'] = 'Sei sicuro di voler eliminare?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron elenco';
 $lang['CRON_ID'] = 'ID';
@@ -2407,14 +2408,14 @@ $lang['REPAIR_CRON'] = 'Riparazione Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit lavoro';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Aggiungi lavoro';
 $lang['CRON_SCRIPT_EXPL'] = 'nome dello script da "include/cron/jobs/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Selezionare start',
     'hourly' => 'orari',
     'daily' => 'quotidiano',
     'weekly' => 'settimanale',
     'monthly' => 'mensile',
     'interval' => 'intervallo di'
-);
+];
 $lang['NOSELECT'] = 'Non selezionare';
 $lang['RUN_DAY'] = 'Giorno di esecuzione';
 $lang['RUN_DAY_EXPL'] = 'il giorno in cui questo processo di esecuzione';
@@ -2533,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Argomento è stato spostato da forum [b]%s[/
 $lang['BOT_MESS_SPLITS'] = 'L\'argomento è stato suddiviso. Nuovo argomento - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'L\'argomento è stato diviso da [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Scaricati la chiamata';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Prendere nota con la richiesta di tornare alla distribuzione';
 $lang['CALLSEED_SUBJECT'] = 'Scarica aiuto %s';
 $lang['CALLSEED_TEXT'] = 'Ciao![br]Your aiuto necessario il rilascio [url=%s]%s[/url][br]if si decide di aiutare, ma già eliminato il file torrent, è possibile scaricare [url=%s]this[/url][br][br]i speranza per il vostro aiuto!';
@@ -2541,17 +2542,22 @@ $lang['CALLSEED_MSG_OK'] = 'Il messaggio è stato inviato a tutti coloro che han
 $lang['CALLSEED_MSG_SPAM'] = 'La richiesta è già stata inviata con successo (Probabilmente non è)<br /><br />The prossima occasione per inviare una richiesta di <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Argomento non necessita di aiuto (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Argomento:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Argomento:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Argomento:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Argomento:<br /> <b>opened</b>',
     'mod_topic_split' => 'Argomento:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post di:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Utente:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Utente:<br /> <b>ban</b>',
     'adm_user_unban' => 'Utente:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Tutte le azioni';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Il Log delle azioni: le opzioni di Ricerca';
@@ -2690,28 +2696,28 @@ $lang['MC_LEGEND'] = 'Digitare un commento';
 $lang['MC_FAQ'] = 'Il testo inserito verrà visualizzato sotto questo messaggio';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s nel tuo messaggio";
 $lang['MC_COMMENT_PM_MSG'] = "Ciao, [b]%s[/b]\nModerator sinistra nel messaggio [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Elimina commento',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Commento da %s',
         'type' => 'Commento',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Informazioni %s',
         'type' => 'Informazioni',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Avviso da %s',
         'type' => 'Avviso',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Violazione da %s',
         'type' => 'Violazione',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Gestire sitemap';
@@ -2752,7 +2758,7 @@ $lang['HASH_NOT_FOUND'] = 'Versione con hash %s non trovato';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Il testo di questa pagina è modificato in: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Questa linea può vedere solo gli amministratori.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Su questa pagina, è possibile specificare il testo di le regole di base della risorsa viene visualizzato dagli utenti.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'gli utenti inattivi in 30 giorni',
     1 => 'gli utenti inattivi per più di 90 giorni',
     2 => 'di dimensioni medie distribuzioni sul tracker (molti mb)',
@@ -2761,7 +2767,7 @@ $lang['TR_STATS'] = array(
     5 => 'quante mani che semina più di 5 semi',
     6 => 'come molti di noi uploaders (quelli che hanno riempito di almeno 1 mano)',
     7 => 'quante uploaders negli ultimi 30 giorni',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Sondaggio attivato';
 $lang['NEW_POLL_END'] = 'Sondaggio completato';
@@ -2785,13 +2791,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Ogni riga corrisponde ad una risposta (max';
 $lang['OLD_BROWSER'] = 'Stai usando un browser obsoleto. Il sito non sarà visualizzato correttamente.';
 $lang['GO_BACK'] = 'Tornare indietro';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Caricamento di File di errore';
 $lang['UPLOAD_ERROR_SIZE'] = 'Il file caricato eccede la dimensione massima di %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Non valido il tipo di file di immagine';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Immagine dimensioni superano il massimo consentito %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Il file caricato non è un\'immagine';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Estensione %s per il download non è consentito';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'hai superato la dimensione massima del file per il server',
     UPLOAD_ERR_FORM_SIZE => 'hai superato la dimensione massima di caricamento',
     UPLOAD_ERR_PARTIAL => 'il file è stato scaricato parzialmente',
@@ -2799,7 +2806,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'directory temporanea non trovato',
     UPLOAD_ERR_CANT_WRITE => 'errore di scrittura',
     UPLOAD_ERR_EXTENSION => 'upload è stato fermato dall\'estensione',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Controllare che tu non sia un robot';
@@ -2814,7 +2821,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'La tua richiesta di adesione al gruppo utenti è stata accolta',
     'GROUP_REQUEST' => 'Una richiesta per unirti al tuo gruppo di utenti',
     'PRIVMSG_NOTIFY' => 'Nuovo messaggio privato',
-    'TOPIC_NOTIFY' => 'Notifica di risposta nel thread %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Riattivazione dell\'account',
     'USER_ACTIVATE_PASSWD' => 'Conferma di una nuova password',
     'USER_WELCOME' => 'Benvenuto nel sito %s',

@@ -14,14 +14,14 @@ if (!defined('BB_ROOT')) {
 global $bb_cfg, $userdata, $template, $DBS, $lang;
 
 if (!empty($template)) {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SIMPLE_FOOTER' => !empty($gen_simple_header),
         'POWERED' => 'Tracker software by <a target="_blank" href="https://torrentpier.com">TorrentPier</a> &copy; 2005-' . date('Y'),
         'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
-        'ADMIN_LINK_HREF' => "admin/index.php",
-    ));
+        'ADMIN_LINK_HREF' => 'admin/index.php',
+    ]);
 
-    $template->set_filenames(array('page_footer' => 'page_footer.tpl'));
+    $template->set_filenames(['page_footer' => 'page_footer.tpl']);
     $template->pparse('page_footer');
 }
 
@@ -34,7 +34,7 @@ if (!$bb_cfg['gzip_compress']) {
 if ($show_dbg_info) {
     $gen_time = utime() - TIMESTART;
     $gen_time_txt = sprintf('%.3f', $gen_time);
-    $gzip_text = UA_GZIP_SUPPORTED ? 'GZIP ' : '<s>GZIP</s> ';
+    $gzip_text = UA_GZIP_SUPPORTED ? "{$lang['GZIP_COMPRESSION']}: " : "<s>{$lang['GZIP_COMPRESSION']}:</s> ";
     $gzip_text .= $bb_cfg['gzip_compress'] ? $lang['ON'] : $lang['OFF'];
 
     $stat = '[&nbsp; ' . $lang['EXECUTION_TIME'] . " $gen_time_txt " . $lang['SEC'];
@@ -61,11 +61,11 @@ if ($show_dbg_info) {
         $stat .= " &nbsp;|&nbsp; " . $lang['LIMIT'] . " $l[0] $l[1] $l[2]";
     }
 
-    $stat .= ' &nbsp;]';
-    $stat .= '
-		<label><input type="checkbox" onclick="setCookie(\'sql_log\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log']) ? HTML_CHECKED : '') . ' />' . $lang['SHOW_LOG'] . '</label>&nbsp;<label><input type="checkbox" onclick="setCookie(\'explain\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['explain']) ? HTML_CHECKED : '') . ' />' . $lang['EXPLAINED_LOG'] . '</label>
-	';
-    $stat .= !empty($_COOKIE['sql_log']) ? '&nbsp;[&nbsp;<a href="#" class="med" onclick="$p(\'sqlLog\').className=\'sqlLog sqlLogWrapped\'; return false;">wrap</a> &middot; <a href="#sqlLog" class="med" onclick="$(\'#sqlLog\').css({ height: $(window).height()-50 }); return false;">max</a>&nbsp;&middot;&nbsp;<label title="cut long queries"><input type="checkbox" onclick="setCookie(\'sql_log_full\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log_full']) ? HTML_CHECKED : '') . ' />' . $lang['CUT_LOG'] . '</label>&nbsp;]' : '';
+    $stat .= ' &nbsp;]&nbsp;|';
+    $stat .= !empty($_COOKIE['sql_log']) ? '&nbsp;[ <a href="#" class="med" onclick="$p(\'sqlLog\').className=\'sqlLog sqlLogWrapped\'; return false;">wrap</a> &middot; <a href="#sqlLog" class="med" onclick="$(\'#sqlLog\').css({ height: $(window).height()-50 }); return false;">max</a> ]&nbsp;|' : '';
+    $stat .= '&nbsp;<label title="' . $lang['SHOW_LOG'] . '"><input type="checkbox" onclick="setCookie(\'sql_log\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log']) ? HTML_CHECKED : '') . ' />' . $lang['SHOW_LOG'] . '</label>&nbsp;|
+        <label title="' . $lang['CUT_LOG'] . '"><input type="checkbox" onclick="setCookie(\'sql_log_full\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['sql_log_full']) ? HTML_CHECKED : '') . ' />' . $lang['CUT_LOG'] . '</label>&nbsp;|
+        <label title="' . $lang['EXPLAINED_LOG'] . '"><input type="checkbox" onclick="setCookie(\'explain\', this.checked ? 1 : 0); window.location.reload();" ' . (!empty($_COOKIE['explain']) ? HTML_CHECKED : '') . ' />' . $lang['EXPLAINED_LOG'] . '</label>';
 
     echo '<div style="margin: 6px; font-size:10px; color: #444444; letter-spacing: -1px; text-align: center;">' . $stat . '</div>';
 }

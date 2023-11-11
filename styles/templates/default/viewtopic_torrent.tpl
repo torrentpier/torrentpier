@@ -9,6 +9,17 @@ $(document).ready(function(){
 		sortList: [[4,1]]
 	});
 });
+
+// callseed
+ajax.callseed = function (topic_id) {
+    ajax.exec({
+        action: 'callseed',
+        topic_id: topic_id,
+    });
+};
+ajax.callback.callseed = function (data) {
+    alert(data.response);
+};
 </script>
 
 <tr>
@@ -46,14 +57,14 @@ $(document).ready(function(){
 	<td colspan="2" class="borderless bCenter pad_8">
 			{L_SIZE}:&nbsp; <b>{TOR_SIZE}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
 			{L_IS_REGISTERED}:&nbsp; <b>{TOR_LONGEVITY}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
-			{L_COMPLETED}:&nbsp; <b>{TOR_COMPLETED}</b>
+			{L_DOWNLOADED}:&nbsp; <b title="{L_COMPLETED}: {TOR_COMPLETED}">{TOR_DOWNLOAD_COUNT}</b>
 	</td>
 </tr>
 <!-- ENDIF / SHOW_DL_LIST_TOR_INFO -->
 
 <!-- BEGIN dl_list_none -->
 <tr>
-	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->DL-List: <!-- ENDIF -->{L_NONE}</td>
+	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->{L_SHOW_DL_LIST}: {L_NONE}<!-- ENDIF --></td>
 </tr>
 <!-- END dl_list_none -->
 
@@ -62,7 +73,7 @@ $(document).ready(function(){
 		<tr>
 			<td colspan="2" class="<!-- IF SHOW_DL_LIST -->row2<!-- ELSE -->row1<!-- ENDIF --> pad_2">
 				<!-- IF not SEED_COUNT -->
-				<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+				<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 				<!-- ENDIF -->
 
 				<!-- IF PEER_EXIST -->
@@ -94,7 +105,7 @@ $(document).ready(function(){
 		<!-- ELSE -->
 		<tr>
 			<td colspan="2" class="row2 pad_4">
-				<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+				<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 			</td>
 		</tr>
 		<!-- ENDIF -->
@@ -112,7 +123,7 @@ $(document).ready(function(){
 
 		<!-- IF SEEDER_LAST_SEEN -->
 		<div id="last_seed_info" class="row5 w60 mrg_4 bCenter">
-			<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+			<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 		</div>
 		<!-- ENDIF -->
 
@@ -123,7 +134,7 @@ $(document).ready(function(){
 		<a name="seeders"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td><p class="floatL" style="margin-top: 4px;"><b>{L_SEEDERS}</b>:</p></td>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="seed">{L_SEEDERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
@@ -143,6 +154,7 @@ $(document).ready(function(){
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
+                <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -159,6 +171,7 @@ $(document).ready(function(){
 				<!-- BEGIN port -->
 				<td>{sfull.srow.port.PORT}</td>
 				<!-- END port -->
+                <td>{sfull.srow.PEER_ID}</td>
 			</tr>
 			<!-- END srow -->
 			</table>
@@ -172,7 +185,7 @@ $(document).ready(function(){
 		<a name="leechers"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td><p class="floatL" style="margin-top: 4px;"><b>{L_LEECHERS}</b>:</p></td>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="leech">{L_LEECHERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
@@ -191,7 +204,8 @@ $(document).ready(function(){
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-				<!-- END porthead -->
+                <!-- END porthead -->
+                <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
@@ -208,6 +222,7 @@ $(document).ready(function(){
 				<!-- BEGIN port -->
 				<td>{lfull.lrow.port.PORT}</td>
 				<!-- END port -->
+                <td>{lfull.lrow.PEER_ID}</td>
 			</tr>
 			<!-- END lrow -->
 			</table>
@@ -238,7 +253,7 @@ $(document).ready(function(){
 		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption" /><!-- ENDIF -->
 	</form>
 	<!-- ENDIF -->
-	<!-- IF CALL_SEED --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->
+    <!-- IF CALL_SEED --><input onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
 	&nbsp;
 	</td>
 </tr>

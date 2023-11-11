@@ -12,11 +12,12 @@ define('BB_SCRIPT', 'search');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-$page_cfg['load_tpl_vars'] = array(
+$page_cfg['use_tablesorter'] = true;
+$page_cfg['load_tpl_vars'] = [
     'post_buttons',
     'post_icons',
-    'topic_icons',
-);
+    'topic_icons'
+];
 
 // Start session management
 $user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
@@ -61,7 +62,7 @@ if (isset($_POST['del_my_post'])) {
 //
 // Define censored word matches
 //
-$orig_word = $replacement_word = array();
+$orig_word = $replacement_word = [];
 obtain_word_list($orig_word, $replacement_word);
 
 $tracking_topics = get_tracks('topic');
@@ -160,7 +161,7 @@ $order_opt = array(
         'sql' => 't.topic_replies',
     ),
 );
-$order_select = array();
+$order_select = [];
 foreach ($order_opt as $val => $opt) {
     $order_select[$opt['lang']] = $val;
 }
@@ -176,7 +177,7 @@ $sort_opt = array(
         'sql' => ' DESC ',
     ),
 );
-$sort_select = array();
+$sort_select = [];
 foreach ($sort_opt as $val => $opt) {
     $sort_select[$opt['lang']] = $val;
 }
@@ -208,7 +209,7 @@ $time_opt = array(
         'sql' => TIMENOW - 86400 * 30,
     ),
 );
-$time_select = array();
+$time_select = [];
 foreach ($time_opt as $val => $opt) {
     $time_select[$opt['lang']] = $val;
 }
@@ -222,7 +223,7 @@ $display_as_opt = array(
         'lang' => $lang['MESSAGE'],
     ),
 );
-$display_as_select = array();
+$display_as_select = [];
 foreach ($display_as_opt as $val => $opt) {
     $display_as_select[$opt['lang']] = $val;
 }
@@ -236,7 +237,7 @@ $chars_opt = array(
         'lang' => $lang['BRIEFLY'],
     ),
 );
-$chars_select = array();
+$chars_select = [];
 foreach ($chars_opt as $val => $opt) {
     $chars_select[$opt['lang']] = $val;
 }
@@ -288,7 +289,7 @@ if (empty($_GET) && empty($_POST)) {
 
         'THIS_USER_ID' => $userdata['user_id'],
         'THIS_USER_NAME' => addslashes($userdata['username']),
-        'SEARCH_ACTION' => "search.php",
+        'SEARCH_ACTION' => 'search.php',
         'U_SEARCH_USER' => "search.php?mode=searchuser&amp;input_name=$poster_name_key",
         'ONLOAD_FOCUS_ID' => 'text_match_input',
 
@@ -404,7 +405,7 @@ if (!$items_found) {
     }
 }
 
-$dl_status = array();
+$dl_status = [];
 if ($dl_cancel_val) {
     $dl_status[] = DL_STATUS_CANCEL;
 }
@@ -549,7 +550,7 @@ if ($post_mode) {
     if (!$unsorted_rows = DB()->fetch_rowset($sql)) {
         bb_die($lang['NO_SEARCH_MATCH']);
     }
-    $tmp = $sorted_rows = array();
+    $tmp = $sorted_rows = [];
 
     foreach ($unsorted_rows as $row) {
         $tmp[$row['post_id']] = $row;
@@ -563,7 +564,7 @@ if ($post_mode) {
     }
 
     // Output page
-    $new_tracks = array();
+    $new_tracks = [];
 
     foreach ($sorted_rows as $topic_id => $topic_posts) {
         // Topic title block
@@ -585,11 +586,16 @@ if ($post_mode) {
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
         ));
 
-        $quote_btn = true;
-        $edit_btn = $delpost_btn = $ip_btn = (IS_AM);
+        $quote_btn = $edit_btn = $ip_btn = '';
+        $delpost_btn = (IS_AM);
 
         // Topic posts block
         foreach ($topic_posts as $row_num => $post) {
+            if ($post['poster_id'] != BOT_UID) {
+                $quote_btn = true;
+                $edit_btn = $ip_btn = (IS_AM);
+            }
+
             $message = get_parsed_post($post);
 
             if (count($orig_word)) {
@@ -770,7 +776,7 @@ else {
     $SQL['LIMIT'][] = (string)$per_page;
 
     // Fetch topics data
-    $topic_rows = array();
+    $topic_rows = [];
     foreach (DB()->fetch_rowset($SQL) as $row) {
         $topic_rows[$row['topic_id']] = $row;
     }
@@ -845,7 +851,7 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
 {
     global $lang, $search_id, $session_id, $items_found, $per_page;
 
-    $items_found = array();
+    $items_found = [];
     foreach (DB()->fetch_rowset($sql) as $row) {
         $items_found[] = $row['item_id'];
     }
@@ -878,7 +884,7 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
             $save_in_db[] = 'dl_will';
         }
 
-        $curr_set = array();
+        $curr_set = [];
         foreach ($save_in_db as $name) {
             $curr_set[$GLOBALS["{$name}_key"]] = $GLOBALS["{$name}_val"];
         }
@@ -899,7 +905,7 @@ function prevent_huge_searches($SQL)
 
     if ($bb_cfg['limit_max_search_results']) {
         $SQL['select_options'][] = 'SQL_CALC_FOUND_ROWS';
-        $SQL['ORDER BY'] = array();
+        $SQL['ORDER BY'] = [];
         $SQL['LIMIT'] = array('0');
 
         if (DB()->query($SQL) and $row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count")) {

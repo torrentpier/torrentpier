@@ -14,10 +14,10 @@ require __DIR__ . '/common.php';
 $page_cfg['include_bbcode_js'] = true;
 
 // Start session management
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
-$group_info = array();
+$group_info = [];
 $is_moderator = false;
 
 $submit = !empty($_POST['submit']);
@@ -38,7 +38,7 @@ if ($is_moderator) {
         if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed']) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
-            if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id']))) {
+            if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
                 $avatar_ext_id = (int)$upload->file_ext_id;
             } else {
                 bb_die(implode($upload->errors));
@@ -59,7 +59,7 @@ if ($is_moderator) {
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'PAGE_TITLE' => $lang['GROUP_CONTROL_PANEL'],
         'GROUP_NAME' => htmlCHR($group_info['group_name']),
         'GROUP_ID' => $group_id,
@@ -71,18 +71,18 @@ if ($is_moderator) {
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
         'S_GROUP_HIDDEN_TYPE' => GROUP_HIDDEN,
-        'S_GROUP_OPEN_CHECKED' => ($group_info['group_type'] == GROUP_OPEN) ? ' checked="checked"' : '',
-        'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked="checked"' : '',
-        'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked="checked"' : '',
+        'S_GROUP_OPEN_CHECKED' => ($group_info['group_type'] == GROUP_OPEN) ? ' checked' : '',
+        'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked' : '',
+        'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked' : '',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_GROUP_CONFIG_ACTION' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
 
-        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], (round($bb_cfg['group_avatars']['max_size'] / 1024))),
+        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], humn_size($bb_cfg['group_avatars']['max_size'])),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
-    ));
+    ]);
 
-    $template->set_filenames(array('body' => 'group_edit.tpl'));
-    $template->assign_vars(array('PAGE_TITLE' => $lang['GROUP_CONFIGURATION']));
+    $template->set_filenames(['body' => 'group_edit.tpl']);
+    $template->assign_vars(['PAGE_TITLE' => $lang['GROUP_CONFIGURATION']]);
 
     require(PAGE_HEADER);
 

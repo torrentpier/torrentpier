@@ -17,11 +17,11 @@ require __DIR__ . '/pagestart.php';
 
 $mode = $_GET['mode'] ?? '';
 
-$return_links = array(
+$return_links = [
     'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
     'config' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="admin_board.php?mode=config">', '</a>'),
     'config_mods' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="admin_board.php?mode=config_mods">', '</a>')
-);
+];
 
 /**
  * Pull all config data
@@ -45,7 +45,7 @@ if (!$result = DB()->sql_query($sql)) {
             ) {
                 $new[$config_name] = serialize(str_replace(',', '.', $new[$config_name]));
             }
-            bb_update_config(array($config_name => $new[$config_name]));
+            bb_update_config([$config_name => $new[$config_name]]);
         }
     }
 
@@ -56,7 +56,7 @@ if (!$result = DB()->sql_query($sql)) {
 
 switch ($mode) {
     case 'config_mods':
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config_mods',
             'CONFIG_MODS' => true,
 
@@ -83,8 +83,8 @@ switch ($mode) {
             'TOR_COMMENT' => $new['tor_comment'],
             'SEED_BONUS_ENABLED' => $new['seed_bonus_enabled'],
             'SEED_BONUS_TOR_SIZE' => $new['seed_bonus_tor_size'],
-            'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate'],
-        ));
+            'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate']
+        ]);
 
         if ($new['seed_bonus_points'] && $new['seed_bonus_release']) {
             $seed_bonus = unserialize($new['seed_bonus_points']);
@@ -95,10 +95,10 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('seed_bonus', array(
+                $template->assign_block_vars('seed_bonus', [
                     'RELEASE' => $seed_release[$i],
-                    'POINTS' => $row,
-                ));
+                    'POINTS' => $row
+                ]);
             }
         }
 
@@ -111,16 +111,16 @@ switch ($mode) {
                     continue;
                 }
 
-                $template->assign_block_vars('bonus_upload', array(
+                $template->assign_block_vars('bonus_upload', [
                     'UP' => $row,
-                    'PRICE' => $price_row[$i],
-                ));
+                    'PRICE' => $price_row[$i]
+                ]);
             }
         }
         break;
 
     default:
-        $template->assign_vars(array(
+        $template->assign_vars([
             'S_CONFIG_ACTION' => 'admin_board.php?mode=config',
             'CONFIG' => true,
 
@@ -145,8 +145,8 @@ switch ($mode) {
             'ALLOW_SIG' => (bool)$new['allow_sig'],
             'SIG_SIZE' => $new['max_sig_chars'],
             'ALLOW_NAMECHANGE' => (bool)$new['allow_namechange'],
-            'SMILIES_PATH' => $new['smilies_path'],
-        ));
+            'SMILIES_PATH' => $new['smilies_path']
+        ]);
         break;
 }
 

@@ -1,5 +1,7 @@
-### TorrentPier ###
+### IDE ###
 .idea
+
+### TorrentPier ###
 .env
 .php_cs.cache
 composer.phar

@@ -33,8 +33,8 @@ and go from there. The documentation will be translated into english in the near
 
 * Apache / nginx
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
-* PHP: 7.4 / 8.0 / 8.1 / 8.2
-* PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
+* PHP: 8.1 / 8.2
+* PHP Extensions: mbstring, bcmath, intl, tidy (optional), xml, xmlwriter
 
 ## 💾 Installation
 
@@ -59,6 +59,7 @@ For installation, you need to follow a few simple steps:
 You must provide write permissions to the specified folders:
 * `data/avatars`
 * `data/torrent_files`
+* `data/torrent_files/thumbs`
 * `internal_data/ajax_html`
 * `internal_data/atom`
 * `internal_data/cache`

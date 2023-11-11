@@ -32,11 +32,12 @@ if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
     }
 }
 
-if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
+if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
     return $lang['TORFILE_INVALID'];
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
+
 $tor_filelist = $torrent->get_filelist();
 
 $this->response['html'] = $tor_filelist;

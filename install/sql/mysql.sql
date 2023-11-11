@@ -52,9 +52,9 @@ VALUES ('upload_dir', 'data/torrent_files'),
        ('img_display_inlined', '1'),
        ('img_max_width', '200'),
        ('img_max_height', '200'),
-       ('img_link_width', '0'),
-       ('img_link_height', '0'),
-       ('img_create_thumbnail', '0'),
+       ('img_link_width', '600'),
+       ('img_link_height', '400'),
+       ('img_create_thumbnail', '1'),
        ('img_min_thumb_filesize', '12000'),
        ('img_imagick', '/usr/bin/convert'),
        ('use_gd2', '1'),
@@ -274,6 +274,7 @@ DROP TABLE IF EXISTS `bb_bt_torrents`;
 CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
 (
   `info_hash`        VARBINARY(20)         NOT NULL DEFAULT '',
+  `info_hash_v2`     VARBINARY(32)         NOT NULL DEFAULT '',
   `post_id`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `poster_id`        MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
@@ -283,14 +284,15 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `reg_time`         INT(11)               NOT NULL DEFAULT '0',
   `call_seed_time`   INT(11)               NOT NULL DEFAULT '0',
   `complete_count`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
+  `seeder_last_seen` MEDIUMINT(10)         NOT NULL DEFAULT '0',
   `tor_status`       TINYINT(4)            NOT NULL DEFAULT '0',
   `checked_user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `checked_time`     INT(11)               NOT NULL DEFAULT '0',
   `tor_type`         TINYINT(1)            NOT NULL DEFAULT '0',
   `speed_up`         INT(11)               NOT NULL DEFAULT '0',
   `speed_down`       INT(11)               NOT NULL DEFAULT '0',
-  PRIMARY KEY (`info_hash`),
+  `last_seeder_id`   INT(11)               NOT NULL DEFAULT '0',
+  PRIMARY KEY (`topic_id`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
   UNIQUE KEY `attach_id` (`attach_id`),
@@ -357,8 +359,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `peer_id`          VARCHAR(20)           NOT NULL DEFAULT '0',
   `user_id`          MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `ip`               VARCHAR(42)           NOT NULL DEFAULT '0',
-  `ipv6`             VARCHAR(32)                    DEFAULT NULL,
+  `ip`               VARCHAR(42)                    DEFAULT NULL,
+  `ipv6`             VARCHAR(42)                    DEFAULT NULL,
   `port`             SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `client`           VARCHAR(51)           NOT NULL DEFAULT 'Unknown',
   `seeder`           TINYINT(1)            NOT NULL DEFAULT '0',
@@ -367,13 +369,13 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `uploaded`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `downloaded`       BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `remain`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
-  `speed_up`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `speed_down`       MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `speed_up`         INT(11) UNSIGNED      NOT NULL DEFAULT '0',
+  `speed_down`       INT(11) UNSIGNED      NOT NULL DEFAULT '0',
   `up_add`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `down_add`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `update_time`      INT(11)               NOT NULL DEFAULT '0',
   `complete_percent` BIGINT(20)            NOT NULL DEFAULT '0',
-  `complete`         INT(11)               NOT NULL DEFAULT '0',
+  `complete`         TINYINT(1)            NOT NULL DEFAULT '0',
   PRIMARY KEY (`peer_hash`),
   KEY `topic_id` (`topic_id`),
   KEY `user_id` (`user_id`)
@@ -394,8 +396,9 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap`
   `topic_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeders`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `leechers`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `speed_up`   INT(10) UNSIGNED      NOT NULL DEFAULT '0',
-  `speed_down` INT(10) UNSIGNED      NOT NULL DEFAULT '0',
+  `speed_up`   INT(11) UNSIGNED      NOT NULL DEFAULT '0',
+  `speed_down` INT(11) UNSIGNED      NOT NULL DEFAULT '0',
+  `completed`  INT(10)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM
@@ -412,7 +415,7 @@ DROP TABLE IF EXISTS `bb_bt_users`;
 CREATE TABLE IF NOT EXISTS `bb_bt_users`
 (
   `user_id`              MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `auth_key`             CHAR(10)
+  `auth_key`             CHAR(20)
                            CHARACTER SET utf8
                              COLLATE utf8_bin  NOT NULL DEFAULT '',
   `u_up_total`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
@@ -706,12 +709,15 @@ VALUES ('1', 'gif', ''),
        ('1', 'jpg', ''),
        ('1', 'tif', ''),
        ('1', 'tga', ''),
+       ('1', 'webp', ''),
+       ('1', 'bmp', ''),
        ('2', 'gtar', ''),
        ('2', 'gz', ''),
        ('2', 'tar', ''),
        ('2', 'zip', ''),
        ('2', 'rar', ''),
        ('2', 'ace', ''),
+       ('2', '7z', ''),
        ('3', 'txt', ''),
        ('3', 'c', ''),
        ('3', 'h', ''),
@@ -754,8 +760,8 @@ INSERT INTO `bb_extension_groups` (`group_name`, `cat_id`, `allow_group`, `downl
                                    `max_filesize`, `forum_permissions`)
 VALUES ('Images', '1', '1', '1', '', '262144', ''),
        ('Archives', '0', '1', '1', '', '262144', ''),
-       ('Plain text', '0', '0', '1', '', '262144', ''),
-       ('Documents', '0', '0', '1', '', '262144', ''),
+       ('Plain text', '0', '1', '1', '', '262144', ''),
+       ('Documents', '0', '1', '1', '', '262144', ''),
        ('Real media', '0', '0', '2', '', '262144', ''),
        ('Torrent', '0', '1', '1', '', '122880', '');
 
@@ -987,7 +993,7 @@ DROP TABLE IF EXISTS `bb_posts_text`;
 CREATE TABLE IF NOT EXISTS `bb_posts_text`
 (
   `post_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `post_text` TEXT                  NOT NULL,
+  `post_text` MEDIUMTEXT            NOT NULL,
   PRIMARY KEY (`post_id`)
 )
   ENGINE = MyISAM
@@ -1031,7 +1037,7 @@ DROP TABLE IF EXISTS `bb_privmsgs_text`;
 CREATE TABLE IF NOT EXISTS `bb_privmsgs_text`
 (
   `privmsgs_text_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `privmsgs_text`    TEXT                  NOT NULL,
+  `privmsgs_text`    MEDIUMTEXT            NOT NULL,
   PRIMARY KEY (`privmsgs_text_id`)
 )
   ENGINE = MyISAM
@@ -1294,6 +1300,8 @@ CREATE TABLE IF NOT EXISTS `bb_topics_watch`
 -- ----------------------------
 -- Records of bb_topics_watch
 -- ----------------------------
+INSERT INTO `bb_topics_watch`
+VALUES ('1', '2', '1');
 
 -- ----------------------------
 -- Table structure for `bb_topic_tpl`
@@ -1449,6 +1457,7 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
 (
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
+  `user_id`          MEDIUMINT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM

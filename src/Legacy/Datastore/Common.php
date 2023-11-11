@@ -161,15 +161,25 @@ class Common
         }
     }
 
-    public function debug_find_source($mode = '')
+    /**
+     * Find caller source
+     *
+     * @param string $mode
+     * @return string
+     */
+    public function debug_find_source(string $mode = 'all'): string
     {
+        if (!SQL_PREPEND_SRC) {
+            return 'src disabled';
+        }
         foreach (debug_backtrace() as $trace) {
-            if ($trace['file'] !== __FILE__) {
+            if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
                 switch ($mode) {
                     case 'file':
                         return $trace['file'];
                     case 'line':
                         return $trace['line'];
+                    case 'all':
                     default:
                         return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
                 }

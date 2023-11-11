@@ -283,7 +283,7 @@ $(function(){
 				</div>
 				</fieldset>
 				<fieldset>
-				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{TITLE_MATCH_NAME}');">{L_TITLE_MATCH}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash');">{L_HASH_S}</span></legend>
+				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{TITLE_MATCH_NAME}').attr('maxlength','{TITLE_MATCH_MAX}');">{L_TITLE_MATCH}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash').attr('maxlength',64);">{L_HASH_S}</span></legend>
 				<div>
 					<p class="input">
 						<input id="title_search" style="width: 95%;" class="post" type="text" size="50" maxlength="{TITLE_MATCH_MAX}" name="{TITLE_MATCH_NAME}" value="{TITLE_MATCH_VAL}" />
@@ -391,9 +391,9 @@ $(function(){
 	<th class="{sorter: 'digit'}" title="{L_SIZE}"><b class="tbs-text">{L_SIZE}</b></th>
 	<th class="{sorter: 'digit'}" title="{L_SEEDERS}"><b class="tbs-text">S</b></th>
 	<th class="{sorter: 'digit'}" title="{L_LEECHERS}"><b class="tbs-text">L</b></th>
-	<th class="{sorter: 'digit'}" title="{L_COMPLETED} / {L_REPLIES}"><b class="tbs-text">C</b></th>
+    <th class="{sorter: false}" title="{L_REPLIES}"><b class="tbs-text">{L_REPLIES_SHORT}</b></th>
 	<!-- IF SHOW_SPEED -->
-	<th class="{sorter: false }" title="{L_DL_SPEED}"><b class="tbs-text">SP</b></th>
+	<th class="{sorter: false}" title="{L_DL_SPEED}"><b class="tbs-text">SP</b></th>
 	<!-- ENDIF -->
 	<th class="{sorter: 'digit'}" title="{L_ADDED}"><b class="tbs-text">{L_ADDED}</b></th>
 </tr>
@@ -417,12 +417,21 @@ $(function(){
 	<!-- ENDIF -->
 	<td class="row4 small nowrap">
 		<u>{tor.TOR_SIZE_RAW}</u>
-		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.ATTACH_ID}">{tor.TOR_SIZE}</a> <!-- IF MAGNET_LINKS --><span title="{L_MAGNET}">{tor.MAGNET}</span><!-- ENDIF --><!-- ELSE -->
+		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.ATTACH_ID}">{tor.TOR_SIZE}</a> <!-- IF MAGNET_LINKS -->{tor.MAGNET}<!-- ENDIF --><!-- ELSE -->
 		{tor.TOR_SIZE}<!-- ENDIF -->
 	</td>
 	<td class="row4 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>
 	<td class="row4 leechmed" title="{L_LEECHERS}"><b>{tor.LEECHS}</b></td>
-	<td class="row4 small" title="{L_REPLIES}: {tor.REPLIES}">{tor.COMPLETED}</td>
+    <td class="row4 small" style="padding: 3px 4px 2px;">
+        <p>
+            <span title="{L_REPLIES}: {tor.REPLIES}">{tor.REPLIES}</span>
+            <span class="small"> | </span>
+            <span title="{L_VIEWS}: {tor.VIEWS}">{tor.VIEWS}</span>
+        </p>
+        <p style="padding-top: 2px" class="med" title="{L_COMPLETED}: {tor.COMPLETED}">
+            <b>{tor.COMPLETED}</b>
+        </p>
+    </td>
 	<!-- IF SHOW_SPEED -->
 	<td class="row4 nowrap">
 		<p class="seedmed">{tor.UL_SPEED}</p>

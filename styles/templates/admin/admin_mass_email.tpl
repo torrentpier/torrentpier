@@ -16,7 +16,7 @@
             <td class="row1" align="right"><b>{L_MASS_EMAIL_MESSAGE_TYPE}</b></td>
             <td class="row2">
                 <select name="message_type">
-                    <option value="text/plain" selected="selected">text/plain</option>
+                    <option value="text/plain" selected>text/plain</option>
                     <option value="text/html">text/html</option>
                 </select>
             </td>
@@ -50,7 +50,7 @@
 
 <script type="text/javascript">
     function checkForm(formObj) {
-        var formErrors = false;
+        let formErrors = false;
 
         if (formObj.message.value.length < 2) {
             formErrors = "{L_EMPTY_MESSAGE_EMAIL}";

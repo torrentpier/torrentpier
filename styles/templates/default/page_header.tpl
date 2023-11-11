@@ -287,30 +287,11 @@ function go_to_page ()
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<a href="{U_INDEX}"><img src="styles/images/logo/logo.png" alt="{SITENAME}" /></a>
+	<a href="{U_INDEX}"><img src="styles/images/logo/logo.png" title="{SITENAME}" alt="{SITENAME}" /></a>
 </div>
 <!--/logo-->
 
 <!-- IF LOGGED_IN -->
-<script type="text/javascript">
-ajax.index_data = function(tz) {
-	ajax.exec({
-		action  : 'index_data',
-		mode    : 'change_tz',
-		tz      : tz
-	});
-};
-ajax.callback.index_data = function(data) {};
-$(document).ready(function() {
-	x = new Date();
-	tz = -x.getTimezoneOffset()/60;
-	if (tz != {BOARD_TIMEZONE})
-	{
-		ajax.index_data(tz);
-	}
-});
-</script>
-
 <!--logout-->
 <div class="topmenu">
 <table width="100%" cellpadding="0" cellspacing="0">
@@ -325,7 +306,7 @@ $(document).ready(function() {
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
-					<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
+					<option value="tracker.php#results" selected> {L_TRACKER_S} </option>
 					<option value="search.php"> {L_FORUM_S} </option>
 					<option value="tracker.php" class="hash"> {L_HASH_S} </option>
 				</select>
@@ -361,7 +342,7 @@ $(document).ready(function() {
 					<form action="{S_LOGIN_ACTION}" method="post">
 						{L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
 						{L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
-						<label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked="checked" />{L_REMEMBER}</label>&nbsp;
+						<label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked />{L_REMEMBER}</label>&nbsp;
 						<input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
 					</form> &#0183;
 				<a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
@@ -471,22 +452,6 @@ $(document).ready(function() {
 <!--main_content-->
 <td id="main_content">
 	<div id="main_content_wrap">
-        <!-- IF NEED_GEN_PASSKEY -->
-        <script type="text/javascript">
-            ajax.callback.gen_passkey = function (data) {
-                if (data.first_creation) {
-                    window.location.reload();
-                }
-            };
-        </script>
-
-        <div class="alert alert-info" style="width: 95%;">
-            <h4 class="alert-heading">{L_PASSKEY_ALERT_TITLE}</h4>
-            <hr>
-            {L_PASSKEY_ALERT_INFO}
-            <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {SESSION_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
-        </div>
-        <!-- ENDIF -->
 		<div id="latest_news">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>

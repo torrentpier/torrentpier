@@ -23,22 +23,20 @@ if (IS_ADMIN) {
         $gen_simple_header = true;
     }
 
-    $template->assign_vars(array(
-        'NEW_USER' => $new_user,
-    ));
+    $template->assign_vars(['NEW_USER' => $new_user]);
 }
 
 $can_register = (IS_GUEST || IS_ADMIN);
 
 $submit = !empty($_POST['submit']);
-$errors = array();
+$errors = [];
 $adm_edit = false; // редактирование админом чужого профиля
 
 require INC_DIR . '/bbcode.php';
 
-$pr_data = array();   // данные редактируемого либо регистрационного профиля
-$db_data = array();   // данные для базы: регистрационные либо измененные данные юзера
-$tp_data = array();   // данные для tpl
+$pr_data = []; // данные редактируемого либо регистрационного профиля
+$db_data = []; // данные для базы: регистрационные либо измененные данные юзера
+$tp_data = []; // данные для tpl
 
 // Данные профиля
 switch ($mode) {
@@ -69,16 +67,16 @@ switch ($mode) {
         }
 
         // field => can_edit
-        $profile_fields = array(
+        $profile_fields = [
             'username' => true,
             'user_password' => true,
             'user_email' => true,
             'user_timezone' => true,
             'user_lang' => true,
-            'user_opt' => true,
-        );
+            'user_opt' => true
+        ];
 
-        $pr_data = array(
+        $pr_data = [
             'user_id' => GUEST_UID,
             'username' => '',
             'user_password' => '',
@@ -86,8 +84,8 @@ switch ($mode) {
             'user_timezone' => $bb_cfg['board_timezone'],
             'user_lang' => $bb_cfg['default_lang'],
             'user_opt' => 0,
-            'avatar_ext_id' => 0,
-        );
+            'avatar_ext_id' => 0
+        ];
         break;
 
     /**
@@ -99,15 +97,15 @@ switch ($mode) {
         }
 
         // field => can_edit
-        $profile_fields = array(
+        $profile_fields = [
             'user_active' => IS_ADMIN,
             'username' => IS_ADMIN || $bb_cfg['allow_namechange'],
             'user_password' => true,
             'user_email' => true, // должен быть после user_password
-            'user_lang' => true,
-            'user_gender' => true,
-            'user_birthday' => true,
-            'user_timezone' => true,
+            'user_lang' => $bb_cfg['allow_change']['language'],
+            'user_gender' => $bb_cfg['gender'],
+            'user_birthday' => $bb_cfg['birthday_enabled'],
+            'user_timezone' => $bb_cfg['allow_change']['timezone'],
             'user_opt' => true,
             'avatar_ext_id' => true,
             'user_icq' => true,
@@ -118,8 +116,8 @@ switch ($mode) {
             'user_sig' => true,
             'user_occ' => true,
             'user_interests' => true,
-            'tpl_name' => true,
-        );
+            'tpl_name' => true
+        ];
 
         // Выбор профиля: для юзера свой, для админа любой
         if (IS_ADMIN && !empty($_REQUEST['u'])) {
@@ -161,9 +159,15 @@ if ($submit) {
 $cur_pass_valid = $adm_edit;
 
 foreach ($profile_fields as $field => $can_edit) {
+    // Проверка на возможность редактирования
+    if ((bool)$can_edit === false) {
+        // TODO: При continue; не устанавливаются переменные ($tp_data) шаблона прописанные в case
+        // continue;
+    }
+
     switch ($field) {
         /**
-         *  Активация (edit, reg)
+         *  Активация (edit)
          */
         case 'user_active':
             $active = isset($_POST['user_active']) ? (int)$_POST['user_active'] : $pr_data['user_active'];
@@ -184,7 +188,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 if (!$errors and $err && $mode == 'register') {
                     $errors[] = $err;
                 }
-                if ($can_edit && $username != $pr_data['username'] || $mode == 'register') {
+                if ($username != $pr_data['username'] || $mode == 'register') {
                     $pr_data['username'] = $username;
                     $db_data['username'] = $username;
                 }
@@ -239,6 +243,9 @@ foreach ($profile_fields as $field => $can_edit) {
                     $db_data['user_email'] = $email;
                 } elseif ($email != $pr_data['user_email']) {
                     // если смена мейла юзером
+                    if ($bb_cfg['email_change_disabled'] && !$adm_edit && !IS_ADMIN) {
+                        $errors[] = $lang['EMAIL_CHANGING_DISABLED'];
+                    }
                     if (!$cur_pass_valid) {
                         $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
                     }
@@ -270,9 +277,9 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Часовой пояс (edit, reg)
          */
         case 'user_timezone':
-            $user_timezone = isset($_POST['user_timezone']) ? (int)$_POST['user_timezone'] : $pr_data['user_timezone'];
+            $user_timezone = isset($_POST['user_timezone']) ? (float)$_POST['user_timezone'] : (float)$pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
-                if (isset($lang['TZ'][$user_timezone])) {
+                if (isset($lang['TZ'][str_replace(',', '.', $user_timezone)])) {
                     $pr_data['user_timezone'] = $user_timezone;
                     $db_data['user_timezone'] = $user_timezone;
                 }
@@ -280,7 +287,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Пол (edit, reg)
+         *  Пол (edit)
          */
         case 'user_gender':
             $user_gender = isset($_POST['user_gender']) ? (int)$_POST['user_gender'] : $pr_data['user_gender'];
@@ -316,23 +323,23 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  opt (edit)
+         *  opt (edit, reg)
          */
         case 'user_opt':
             $user_opt = $pr_data['user_opt'];
             $reg_mode = ($mode == 'register');
 
-            $update_user_opt = array(
+            $update_user_opt = [
                 #	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
-                'user_viewemail' => $reg_mode ? false : true,
+                'user_viewemail' => $reg_mode ? false : (IS_ADMIN || $bb_cfg['show_email_visibility_settings']),
                 'user_viewonline' => $reg_mode ? false : true,
                 'user_notify' => $reg_mode ? true : true,
-                'user_notify_pm' => $reg_mode ? true : true,
+                'user_notify_pm' => $reg_mode ? true : $bb_cfg['pm_notify_enabled'],
                 'user_porn_forums' => $reg_mode ? false : true,
                 'user_dls' => $reg_mode ? false : true,
                 'user_callseed' => $reg_mode ? true : true,
                 'user_retracker' => $reg_mode ? true : true,
-            );
+            ];
 
             foreach ($update_user_opt as $opt => $can_change_opt) {
                 if ($submit && (isset($_POST[$opt]) && $can_change_opt || $reg_mode)) {
@@ -452,7 +459,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Интересы
+         *  Интересы (edit)
          */
         case 'user_interests':
             $interests = isset($_POST['user_interests']) ? (string)$_POST['user_interests'] : $pr_data['user_interests'];
@@ -465,7 +472,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Skype
+         *  Skype (edit)
          */
         case 'user_skype':
             $skype = isset($_POST['user_skype']) ? (string)$_POST['user_skype'] : $pr_data['user_skype'];
@@ -480,7 +487,7 @@ foreach ($profile_fields as $field => $can_edit) {
             break;
 
         /**
-         *  Twitter
+         *  Twitter (edit)
          */
         case 'user_twitter':
             $twitter = isset($_POST['user_twitter']) ? (string)$_POST['user_twitter'] : $pr_data['user_twitter'];
@@ -528,7 +535,7 @@ if ($submit && !$errors) {
      */
     if ($mode == 'register') {
         if ($bb_cfg['reg_email_activation']) {
-            $user_actkey = make_rand_str(ACTKEY_LENGHT);
+            $user_actkey = make_rand_str(ACTKEY_LENGTH);
             $db_data['user_active'] = 0;
             $db_data['user_actkey'] = $user_actkey;
         } else {
@@ -549,13 +556,6 @@ if ($submit && !$errors) {
 
         DB()->query("INSERT INTO " . BB_USERS . $sql_args);
         $new_user_id = DB()->sql_nextid();
-
-        // Auto generate passkey
-        if ($bb_cfg['auto_gen_passkey']) {
-            if (!\TorrentPier\Legacy\Torrent::generate_passkey($new_user_id, true)) {
-                bb_die('Could not generate passkey');
-            }
-        }
 
         if (IS_ADMIN) {
             set_pr_die_append_msg($new_user_id);
@@ -578,13 +578,12 @@ if ($submit && !$errors) {
             $emailer->set_subject($email_subject);
 
             $emailer->set_template($email_template, $user_lang);
-            $emailer->assign_vars(array(
-                'SITENAME' => $bb_cfg['sitename'],
+            $emailer->assign_vars([
                 'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
                 'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
-            ));
+            ]);
 
             $emailer->send();
         }
@@ -599,7 +598,7 @@ if ($submit && !$errors) {
         // если что-то было изменено
         if ($db_data) {
             if (!$pr_data['user_active']) {
-                $user_actkey = make_rand_str(ACTKEY_LENGHT);
+                $user_actkey = make_rand_str(ACTKEY_LENGTH);
                 $pr_data['user_actkey'] = $user_actkey;
                 $db_data['user_actkey'] = $user_actkey;
 
@@ -610,11 +609,10 @@ if ($submit && !$errors) {
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE']);
 
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
-                $emailer->assign_vars(array(
-                    'SITENAME' => $bb_cfg['sitename'],
+                $emailer->assign_vars([
                     'USERNAME' => html_entity_decode($username),
                     'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
-                ));
+                ]);
 
                 $emailer->send();
 
@@ -653,7 +651,7 @@ if ($submit && !$errors) {
 
 $template->assign_vars($tp_data);
 
-$template->assign_vars(array(
+$template->assign_vars([
     'PAGE_TITLE' => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
     'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
     'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
@@ -666,9 +664,8 @@ $template->assign_vars(array(
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
-    'USER_TIMEZONE' => $pr_data['user_timezone'],
 
-    'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
+    'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], humn_size($bb_cfg['avatars']['max_size'])),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
     'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $bb_cfg['terms_and_conditions_url']),
     'AVATAR_IMG' => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),
@@ -678,6 +675,6 @@ $template->assign_vars(array(
 
     'PR_USER_ID' => $pr_data['user_id'],
     'U_RESET_AUTOLOGIN' => LOGIN_URL . "?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",
-));
+]);
 
 print_page('usercp_register.tpl');

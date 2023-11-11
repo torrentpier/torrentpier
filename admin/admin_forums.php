@@ -117,7 +117,7 @@ if ($mode) {
             $catlist = get_list('category', $cat_id, true);
             $forumlocked = $forumunlocked = '';
 
-            $forumstatus == FORUM_LOCKED ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
+            $forumstatus == FORUM_LOCKED ? $forumlocked = 'selected' : $forumunlocked = 'selected';
 
             $statuslist = '<option value="' . FORUM_UNLOCKED . '" ' . $forumunlocked . '>' . $lang['STATUS_UNLOCKED'] . '</option>\n';
             $statuslist .= '<option value="' . FORUM_LOCKED . '" ' . $forumlocked . '>' . $lang['STATUS_LOCKED'] . '</option>\n';
@@ -693,7 +693,7 @@ if (!$mode || $show_main_page) {
         }
 
         // Okay, let's build the index
-        $gen_cat = array();
+        $gen_cat = [];
 
         $bgr_class_1 = 'prow1';
         $bgr_class_2 = 'prow2';
@@ -854,7 +854,7 @@ function get_list($mode, $id, $select)
     while ($row = DB()->sql_fetchrow($result)) {
         $s = '';
         if ($row[$idfield] == $id) {
-            $s = ' selected="selected"';
+            $s = ' selected';
         }
         $catlist .= '<option value="' . $row[$idfield] . '"' . $s . '>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
     }
@@ -923,7 +923,7 @@ function renumber_order($mode, $cat = 0)
  */
 function get_cat_forums($cat_id = false)
 {
-    $forums = array();
+    $forums = [];
     $where_sql = '';
 
     if ($cat_id = (int)$cat_id) {
@@ -1019,7 +1019,7 @@ function get_orphan_sf()
     global $cat_forums;
 
     $last_root = 0;
-    $bad_sf_ary = array();
+    $bad_sf_ary = [];
 
     foreach ($cat_forums as $cid => $c) {
         foreach ($c['f'] as $fid => $f) {

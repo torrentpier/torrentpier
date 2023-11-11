@@ -17,7 +17,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (!IS_SUPER_ADMIN) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 }
 
 require INC_DIR . '/bbcode.php';
@@ -157,7 +157,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $expire_time = $start_time + $time_limit - 5;
     $start_post_id = $end_post_id = $num_rows = 0;
     $timer_expired = false;
-    $words_sql = array();
+    $words_sql = [];
 
     while ($row = DB()->fetch_next($result) and !$timer_expired) {
         set_time_limit(600);
@@ -365,36 +365,36 @@ if ($mode == 'submit' || $mode == 'refresh') {
         // check our last status
         if ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_PROCESSED) {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_STOPPED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
-            $clear_search_disabled = 'disabled="disabled"';
+            $clear_search_disabled = 'disabled';
 
-            $template->assign_block_vars('start_select_input', array());
+            $template->assign_block_vars('start_select_input', []);
         } elseif ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_ABORTED) {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_ABORTED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
             // check if the interrupted cycle has finished
             if (TIMENOW - $last_session_data['end_time'] < $last_session_data['last_cycle_time']) {
                 $last_saved_processing .= '<br />' . $lang['INFO_PROCESSING_ABORTED_SOON'];
             }
-            $clear_search_disabled = 'disabled="disabled"';
+            $clear_search_disabled = 'disabled';
 
-            $template->assign_block_vars('start_select_input', array());
+            $template->assign_block_vars('start_select_input', []);
         } else {
             // when finished
 
             if ($last_session_data['end_post_id'] < $max_post_id) {
                 $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
-                $clear_search_disabled = 'disabled="disabled"';
+                $clear_search_disabled = 'disabled';
 
-                $template->assign_block_vars('start_select_input', array());
+                $template->assign_block_vars('start_select_input', []);
             } else {
                 $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED'], $total_posts, $last_saved_date);
 
-                $template->assign_block_vars('start_text_input', array());
+                $template->assign_block_vars('start_text_input', []);
             }
         }
 
-        $template->assign_block_vars('last_saved_info', array());
+        $template->assign_block_vars('last_saved_info', []);
     } else {
-        $template->assign_block_vars('start_text_input', array());
+        $template->assign_block_vars('start_text_input', []);
     }
 
     // create the output of page

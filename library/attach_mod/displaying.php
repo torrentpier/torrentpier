@@ -11,11 +11,11 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$allowed_extensions = array();
-$display_categories = array();
-$download_modes = array();
-$upload_icons = array();
-$attachments = array();
+$allowed_extensions = [];
+$display_categories = [];
+$download_modes = [];
+$upload_icons = [];
+$attachments = [];
 
 /**
  * Create needed arrays for Extension Assignments
@@ -28,7 +28,7 @@ function init_complete_extensions_data()
         $GLOBALS['datastore']->update('attach_extensions');
         $extension_informations = get_extension_informations();
     }
-    $allowed_extensions = array();
+    $allowed_extensions = [];
 
     for ($i = 0, $size = count($extension_informations); $i < $size; $i++) {
         $extension = strtolower(trim($extension_informations[$i]['extension']));
@@ -116,7 +116,7 @@ function init_display_post_attachments($switch_attachment)
         return;
     }
 
-    $post_id_array = array();
+    $post_id_array = [];
 
     for ($i = 0; $i < $total_posts; $i++) {
         if ($postrow[$i]['post_attachment'] == 1) {
@@ -173,7 +173,7 @@ function display_attachments($post_id)
         return;
     }
 
-    $template->assign_block_vars('postrow.attach', array());
+    $template->assign_block_vars('postrow.attach', []);
 
     for ($i = 0; $i < $num_attachments; $i++) {
         // Some basic things...
@@ -200,9 +200,7 @@ function display_attachments($post_id)
         if (!in_array($attachments['_' . $post_id][$i]['extension'], $allowed_extensions)) {
             $denied = true;
 
-            $template->assign_block_vars('postrow.attach.denyrow', array(
-                    'L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_' . $post_id][$i]['extension']))
-            );
+            $template->assign_block_vars('postrow.attach.denyrow', ['L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_' . $post_id][$i]['extension'])]);
         }
 
         if (!$denied || IS_ADMIN) {
@@ -246,13 +244,13 @@ function display_attachments($post_id)
                     $download_link = false;
                 }
 
-                $template->assign_block_vars('postrow.attach.cat_images', array(
+                $template->assign_block_vars('postrow.attach.cat_images', [
                     'DOWNLOAD_NAME' => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'IMG_SRC' => $img_source,
                     'FILESIZE' => $filesize,
-                    'COMMENT' => $comment,
-                ));
+                    'COMMENT' => $comment
+                ]);
 
                 // Directly Viewed Image ... update the download count
                 if (!$download_link) {
@@ -274,14 +272,15 @@ function display_attachments($post_id)
                     $thumb_source = $thumbnail_filename;
                 }
 
-                $template->assign_block_vars('postrow.attach.cat_thumb_images', array(
+                $template->assign_block_vars('postrow.attach.cat_thumb_images', [
                     'DOWNLOAD_NAME' => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'IMG_SRC' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'IMG_THUMB_SRC' => $thumb_source,
                     'FILESIZE' => $filesize,
                     'COMMENT' => $comment,
-                ));
+                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times'),
+                ]);
             }
 
             // bt
@@ -291,15 +290,15 @@ function display_attachments($post_id)
                 $target_blank = ((@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT)) ? 'target="_blank"' : '';
 
                 // display attachment
-                $template->assign_block_vars('postrow.attach.attachrow', array(
+                $template->assign_block_vars('postrow.attach.attachrow', [
                     'U_DOWNLOAD_LINK' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'DOWNLOAD_NAME' => $display_name,
                     'FILESIZE' => $filesize,
                     'COMMENT' => $comment,
                     'TARGET_BLANK' => $target_blank,
-                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times'),
-                ));
+                    'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times')
+                ]);
             }
         }
     }

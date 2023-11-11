@@ -16,23 +16,23 @@ global $bf, $bb_cfg;
 //
 // cat_forums
 //
-$data = array(
-    'not_auth_forums' => array(
-        'guest_view' => array(),
-        'guest_read' => array(),
-        'user_view' => array(),
-        'user_read' => array(),
-    ),
-    'tracker_forums' => array(),
-    'cat_title_html' => array(),
-    'forum_name_html' => array(),
-    'c' => array(),                // also has $data['c']['cat_id']['forums'] key
-    'f' => array(),                // also has $data['f']['forum_id']['subforums'] key
-);
+$data = [
+    'not_auth_forums' => [
+        'guest_view' => [],
+        'guest_read' => [],
+        'user_view' => [],
+        'user_read' => []
+    ],
+    'tracker_forums' => [],
+    'cat_title_html' => [],
+    'forum_name_html' => [],
+    'c' => [], // also has $data['c']['cat_id']['forums'] key
+    'f' => [] // also has $data['f']['forum_id']['subforums'] key
+];
 
 // Store only these fields from BB_FORUMS in $data['f']
 $forum_store_fields = array_flip(array_keys($bf['forum_perm']));
-$forum_store_fields += array_flip(array(
+$forum_store_fields += array_flip([
     'forum_id',
     'cat_id',
     'forum_name',
@@ -40,8 +40,8 @@ $forum_store_fields += array_flip(array(
     'forum_status',
     'forum_posts',
     'forum_topics',
-    'forum_parent',
-));
+    'forum_parent'
+]);
 
 // Categories
 $sql = "SELECT * FROM " . BB_CATEGORIES . " ORDER BY cat_order";
@@ -108,8 +108,8 @@ $this->store('cat_forums', $data);
 //
 if ($bb_cfg['show_jumpbox']) {
     $data = array(
-        'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
-        'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'viewforum.php?f=\'+this.value;"'),
+        'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
+        'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
     );
 
     $this->store('jumpbox', $data);
@@ -118,9 +118,7 @@ if ($bb_cfg['show_jumpbox']) {
 //
 // viewtopic_forum_select
 //
-$data = array(
-    'viewtopic_forum_select' => get_forum_select('admin', 'new_forum_id'),
-);
+$data = ['viewtopic_forum_select' => get_forum_select('admin', 'new_forum_id')];
 
 $this->store('viewtopic_forum_select', $data);
 

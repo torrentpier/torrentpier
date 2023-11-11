@@ -205,7 +205,7 @@ if ($log_count == $per_page + 1) {
 
 generate_pagination($url, $items_count, $per_page, $start);
 
-$filter = array();
+$filter = [];
 
 if ($log_rowset) {
     $log_type = $log_action->log_type;
@@ -223,7 +223,12 @@ if ($log_rowset) {
             case $log_type['mod_topic_move']:
             case $log_type['mod_topic_lock']:
             case $log_type['mod_topic_unlock']:
+            case $log_type['mod_topic_set_downloaded']:
+            case $log_type['mod_topic_unset_downloaded']:
+            case $log_type['mod_topic_renamed']:
             case $log_type['mod_post_delete']:
+            case $log_type['mod_post_pin']:
+            case $log_type['mod_post_unpin']:
             case $log_type['mod_topic_split']:
                 // topic_title
                 if (!empty($row['log_topic_title'])) {
@@ -259,7 +264,7 @@ if ($log_rowset) {
             'USER_ID' => $row['log_user_id'],
             'USERNAME' => profile_url($row),
             'USER_HREF_S' => url_arg($url, $user_key, $row['log_user_id']),
-            'USER_IP' => \TorrentPier\Helpers\IPHelper::isValid($row['log_user_ip']) ? \TorrentPier\Helpers\IPHelper::long2ip($row['log_user_ip']) : '127.0.0.1',
+            'USER_IP' => \TorrentPier\Helpers\IPHelper::isValid($row['log_user_ip']) ? \TorrentPier\Helpers\IPHelper::long2ip_extended($row['log_user_ip']) : '127.0.0.1',
 
             'FORUM_ID' => $row['log_forum_id'],
             'FORUM_HREF' => BB_ROOT . FORUM_URL . $row['log_forum_id'],
@@ -318,7 +323,7 @@ if ($log_rowset) {
         'FILTER_USERS' => !empty($filter['users']),
     ));
 } else {
-    $template->assign_block_vars('log_not_found', array());
+    $template->assign_block_vars('log_not_found', []);
 }
 
 // Select

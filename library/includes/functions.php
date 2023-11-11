@@ -34,8 +34,8 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
 
 function delete_avatar($user_id, $avatar_ext_id)
 {
-    $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : '';
-    return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
+    $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : false;
+    return ($avatar_file && file_exists($avatar_file) && unlink($avatar_file));
 }
 
 function get_tracks($type)
@@ -59,6 +59,23 @@ function get_tracks($type)
     return $tracks ?: [];
 }
 
+/**
+ * Returns array with all banned users
+ *
+ * @param bool $return_as_names
+ * @return array
+ */
+function get_banned_users(bool $return_as_names = false): array
+{
+    $banned_users = [];
+
+    foreach (DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0") as $user) {
+        $banned_users[] = $return_as_names ? get_username($user['ban_userid']) : $user['ban_userid'];
+    }
+
+    return $banned_users;
+}
+
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
 {
     global $tracking_topics, $tracking_forums, $user;
@@ -71,7 +88,7 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
 
     if ($tracks) {
         if (!is_array($tracks)) {
-            $tracks = array($tracks => $val);
+            $tracks = [$tracks => $val];
         }
         foreach ($tracks as $key => $val) {
             $key = (int)$key;
@@ -147,7 +164,7 @@ define('UG_PERM_BOTH', 1);  // both user and group
 define('UG_PERM_USER_ONLY', 2);  // only personal user permissions
 define('UG_PERM_GROUP_ONLY', 3);  // only group permissions
 
-$bf['forum_perm'] = array(
+$bf['forum_perm'] = [
     'auth_view' => AUTH_VIEW,
     'auth_read' => AUTH_READ,
     'auth_mod' => AUTH_MOD,
@@ -161,9 +178,9 @@ $bf['forum_perm'] = array(
     'auth_pollcreate' => AUTH_POLLCREATE,
     'auth_attachments' => AUTH_ATTACH,
     'auth_download' => AUTH_DOWNLOAD,
-);
+];
 
-$bf['user_opt'] = array(
+$bf['user_opt'] = [
 #   'dis_opt_name'       =>     ЗАПРЕТЫ используемые администраторами для пользователей
 #   'user_opt_name'      =>     НАСТРОЙКИ используемые пользователями
     'user_viewemail' => 0,  // Показывать e-mail
@@ -182,7 +199,7 @@ $bf['user_opt'] = array(
     'dis_post_edit' => 13, // Запрет на редактирование сообщений
     'user_dls' => 14, // Скрывать список текущих закачек в профиле
     'user_retracker' => 15, // Добавлять ретрекер к скачиваемым торрентам
-);
+];
 
 function bit2dec($bit_num)
 {
@@ -243,13 +260,13 @@ function setbit(&$int, $bit_num, $on)
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
-function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
 
     $is_guest = true;
     $is_admin = false;
-    $auth = $auth_fields = $u_access = array();
+    $auth = $auth_fields = $u_access = [];
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
     //
@@ -258,7 +275,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm
     if ($type == AUTH_ALL) {
         $auth_fields = array_keys($bf['forum_perm']);
     } elseif ($auth_type = array_search($type, $bf['forum_perm'])) {
-        $auth_fields = array($auth_type);
+        $auth_fields = [$auth_type];
     }
 
     if (empty($auth_fields)) {
@@ -283,7 +300,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm
         }
     } elseif (isset($f_access['forum_id'])) {
         // Change passed $f_access format for later using in foreach()
-        $f_access = array($f_access['forum_id'] => $f_access);
+        $f_access = [$f_access['forum_id'] => $f_access];
     }
 
     if (empty($f_access)) {
@@ -420,7 +437,7 @@ function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
     $select_name = null;
-    $select_ary = array();
+    $select_ary = [];
 
     switch ($select) {
         case 'groups':
@@ -547,8 +564,8 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
-    static $sizes = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-    static $rounders = array(0, 0, 0, 2, 3, 3, 3, 3, 3);
+    static $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    static $rounders = [0, 0, 0, 2, 3, 3, 3, 3, 3];
 
     $size = (float)$size;
     $ext = $sizes[0];
@@ -577,7 +594,7 @@ function bt_show_ip($ip, $port = '')
     global $bb_cfg;
 
     if (IS_AM) {
-        $ip = \TorrentPier\Helpers\IPHelper::long2ip($ip);
+        $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
     }
@@ -639,7 +656,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
     $result = $var;
 
     if ($type == 'string') {
-        $result = trim(htmlspecialchars(str_replace(array("\r\n", "\r"), array("\n", "\n"), $result)));
+        $result = trim(htmlspecialchars(str_replace(["\r\n", "\r"], ["\n", "\n"], $result)));
 
         if (!empty($result)) {
             // Make sure multibyte characters are wellformed
@@ -662,14 +679,14 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
     if (!$cookie && isset($_COOKIE[$var_name])) {
-        if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
-            return (is_array($default)) ? array() : $default;
+        if (!isset($_GET[$var_name], $_POST[$var_name])) {
+            return (is_array($default)) ? [] : $default;
         }
         $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? array() : $default;
+        return (is_array($default)) ? [] : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -691,7 +708,7 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 
     if (is_array($var)) {
         $_var = $var;
-        $var = array();
+        $var = [];
 
         foreach ($_var as $k => $v) {
             set_var($k, $k, $key_type);
@@ -720,10 +737,10 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 function get_username($user_id)
 {
     if (empty($user_id)) {
-        return is_array($user_id) ? array() : false;
+        return is_array($user_id) ? [] : false;
     }
     if (is_array($user_id)) {
-        $usernames = array();
+        $usernames = [];
         foreach (DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
             $usernames[$row['user_id']] = $row['username'];
         }
@@ -739,8 +756,12 @@ function get_user_id($username)
     if (empty($username)) {
         return false;
     }
-    $row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1");
-    return $row['user_id'];
+
+    if ($row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1")) {
+        return $row['user_id'];
+    }
+
+    return false;
 }
 
 function str_short($text, $max_length, $space = ' ')
@@ -766,18 +787,18 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
     return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
 }
 
-function generate_user_info($row, bool $group_mod = false): array
+function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
     global $userdata, $lang, $images, $bb_cfg;
 
     $from = !empty($row['user_from']) ? $row['user_from'] : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
-    $user_time = !empty($row['user_time']) ? bb_date($row['user_time']) : $lang['NOSELECT'];
-    $posts = $row['user_posts'] ?: 0;
+    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($row['user_time']), delta_time($row['user_time'])) : $lang['NOSELECT'];
+    $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
     $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
-    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_AM || $group_mod || ($row['user_id'] == $userdata['user_id'])) {
+    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $have_auth || ($row['user_id'] == $userdata['user_id'])) {
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
@@ -795,10 +816,6 @@ function generate_user_info($row, bool $group_mod = false): array
 
 function get_bt_userdata($user_id)
 {
-    if (!\TorrentPier\Legacy\Torrent::getPasskey($user_id)) {
-        return false;
-    }
-
     if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id)) {
         $btu = DB()->fetch_row("
 			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
@@ -825,13 +842,13 @@ function get_bt_ratio($btu)
 
 function show_bt_userdata($user_id)
 {
-    global $lang, $template;
+    global $template;
 
     if (!$btu = get_bt_userdata($user_id)) {
         return;
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SHOW_BT_USERDATA' => true,
         'UP_TOTAL' => humn_size($btu['u_up_total']),
         'UP_BONUS' => humn_size($btu['u_up_bonus']),
@@ -841,23 +858,23 @@ function show_bt_userdata($user_id)
         'USER_RATIO' => get_bt_ratio($btu),
         'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
         'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
-        'AUTH_KEY' => ($btu['auth_key']) ?: $lang['NONE'],
+        'AUTH_KEY' => $btu['auth_key'],
 
         'TD_DL' => humn_size($btu['down_today']),
         'TD_UL' => humn_size($btu['up_today']),
         'TD_REL' => humn_size($btu['up_release_today']),
         'TD_BONUS' => humn_size($btu['up_bonus_today']),
-        'TD_POINTS' => ($btu['auth_key']) ? $btu['points_today'] : '0.00',
+        'TD_POINTS' => $btu['auth_key'] ? $btu['points_today'] : '0.00',
 
         'YS_DL' => humn_size($btu['down_yesterday']),
         'YS_UL' => humn_size($btu['up_yesterday']),
         'YS_REL' => humn_size($btu['up_release_yesterday']),
         'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
-        'YS_POINTS' => ($btu['auth_key']) ? $btu['points_yesterday'] : '0.00',
+        'YS_POINTS' => $btu['auth_key'] ? $btu['points_yesterday'] : '0.00',
 
         'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
         'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
-    ));
+    ]);
 }
 
 function get_attachments_dir($cfg = null)
@@ -876,7 +893,7 @@ function get_attachments_dir($cfg = null)
 function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = CACHE('bb_config')->get("config_{$table}")) {
-        $cfg = array();
+        $cfg = [];
         foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row) {
             $cfg[$row['config_name']] = $row['config_value'];
         }
@@ -889,12 +906,12 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 
 function bb_update_config($params, $table = BB_CONFIG)
 {
-    $updates = array();
+    $updates = [];
     foreach ($params as $name => $val) {
-        $updates[] = array(
+        $updates[] = [
             'config_name' => $name,
-            'config_value' => $val,
-        );
+            'config_value' => $val
+        ];
     }
     $updates = DB()->build_array('MULTI_INSERT', $updates);
 
@@ -1008,9 +1025,7 @@ function make_jumpbox()
         $jumpbox = $datastore->get('jumpbox');
     }
 
-    $template->assign_vars(array(
-        'JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user'],
-    ));
+    $template->assign_vars(['JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user']]);
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
@@ -1025,7 +1040,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     if (null === $max_length) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = null === $all_forums_option ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+    $select = null === $all_forums_option ? [] : [$lang['ALL_AVAILABLE'] => $all_forums_option];
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -1096,17 +1111,17 @@ function setup_style()
     $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SPACER' => make_url('styles/images/spacer.gif'),
         'STYLESHEET' => make_url($css_dir . $stylesheet),
         'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
         'TPL_DIR' => make_url($css_dir),
-        'SITE_URL' => make_url('/'),
-    ));
+        'SITE_URL' => make_url('/')
+    ]);
 
     require_once TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
-    return array('template_name' => $tpl_dir_name);
+    return ['template_name' => $tpl_dir_name];
 }
 
 // Create date / time with format and friendly date
@@ -1160,6 +1175,77 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
     }
 
     return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+}
+
+/**
+ * Get user's torrent client string
+ *
+ * @param string $peerId
+ * @return mixed|string
+ */
+function get_user_torrent_client(string $peerId): mixed
+{
+    static $clients = [
+        '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',
+        '-BE' => 'BitTorrent SDK', '-BI' => 'BiglyBT', '-BL' => 'BitLord', '-BT' => 'BitTorrent',
+        '-CT' => 'CTorrent', '-DE' => 'Deluge', '-FD' => 'Free Download Manager', 'FD6' => 'Free Download Manager',
+        '-FG' => 'FlashGet', '-FL' => 'Folx', '-HL' => 'Halite', '-KG' => 'KGet',
+        '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent',
+        '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => 'uTorrent',
+        '-UW' => 'uTorrent Web', '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
+        '-PI' => 'PicoTorrent', '-qB' => 'qBittorrent', 'M' => 'BitTorrent', 'MG' => 'MediaGet',
+        '-MG' => 'MediaGet', 'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',
+        /**
+         * ================================ Other ================================
+         * '-BB' => 'BitBuddy', '-AR' => 'Arctic', '-AT' => 'Artemis', '-AV' => 'Avicora',
+         * '-AX' => 'BitPump', '-BB' => 'BitBuddy', '-AD' => 'Advanced Download Manager', '-BF' => 'BitFlu',
+         * '-BG' => 'BTGetit', '-BH' => 'BitZilla', '-BM' => 'BitMagnet', '-BN' => 'Baidu Netdisk',
+         * '-BOW' => 'Bits on Wheels', '-BP' => 'BitTorrent Pro (Azureus + Spyware)', '-BR' => 'BitRocket', '-BS' => 'BTSlave',
+         * '-BW' => 'BitTorrent Web', '-BX' => 'BittorrentX', '-CD' => 'Enhanced CTorrent', '-DP' => 'Propagate Data Client',
+         * '-EB' => 'EBit', '-ES' => 'Electric Sheep', '-FC' => 'FileCroc', '-HN' => 'Hydranode',
+         * '-FT' => 'FoxTorrent/RedSwoosh', '-FW' => 'FrostWire', '-FX' => 'Freebox', '-G3' => 'G3 Torrent',
+         * '-GR' => 'GetRight', '-GS' => 'GSTorrent', '-HK' => 'Hekate', '-LW' => 'LimeWire',
+         * '-LC' => 'LeechCraft', '-LH' => 'LH-ABC', '-LP' => 'Lphant', '-UE' => "uTorrent Embedded",
+         * '-UL' => 'uLeecher!', '-TS' => 'Torrentstorm', '-TT' => 'TuoTu', '-MK' => 'Meerkat',
+         * '-ML' => 'MLDonkey', '-MO' => 'MonoTorrent', '-MP' => 'MooPolice', '-MR' => 'Miro',
+         * '-MT' => 'Moonlight', '-NE' => 'BT Next Evolution', '-NX' => 'Net Transport', '-OS' => 'OneSwarm', '-OT' => 'OmegaTorrent',
+         * '-PD' => 'Pando', '-PI' => 'PicoTorrent', '-QD' => 'QQDownload', '-QT' => 'QT 4 Torrent example',
+         * '-RS' => 'Rufus', '-RT' => 'Retriever', '-RZ' => 'RezTorrent', '-SB' => 'Swiftbit',
+         * '-SD' => 'Thunder', '-SM' => 'SoMud', '-SP' => 'BitSpirit', '-SS' => 'SwarmScope',
+         * '-ST' => 'SymTorrent', '-SZ' => 'Shareaza', '-S~' => 'Shareaza', '-TB' => 'Torch Browser',
+         * '-TN' => 'Torrent .NET', '-WY' => 'FireTorrent', '-XC' => 'Xtorrent', '-XF' => 'Xfplay',
+         * '-VG' => 'Vagaa', '-WS' => 'HTTP Seed', '-WT' => 'BitLet', '-WT-' => 'BitLet',
+         * '-XS' => 'XSwifter', '-XT' => 'XanTorrent', '-XX' => 'Xtorrent', '-ZO' => 'Zona',
+         * '-ZT' => 'Zip Torrent', '-bk' => 'BitKitten (libtorrent)', '-lt' => 'libTorrent (Rakshasa)', '-pb' => 'pbTorrent', 'Mbrst' => 'burst!',
+         * '-st' => 'SharkTorrent', '346-' => 'TorrentTopia', 'AZ2500BT' => 'BitTyrant (Azureus Mod)', 'BLZ' => 'Blizzard Downloader',
+         * 'DNA' => 'BitTorrent DNA', 'FD6' => 'Free Download Manager 6', 'LIME' => 'Limewire', 'Pando' => 'Pando',
+         * 'Plus' => 'Plus!', 'Q' => 'Queen Bee', 'QVOD' => 'QVOD', 'S3' => 'Amazon S3',
+         * 'btpd' => 'BT Protocol Daemon', 'eX' => 'eXeem', 'martini' => 'Martini Man',
+         * =======================================================================
+         **/
+    ];
+    static $iconExtension = '.png';
+
+    $bestMatch = null;
+    $bestMatchLength = 0;
+
+    foreach ($clients as $key => $clientName) {
+        if (str_starts_with($peerId, $key) !== false && strlen($key) > $bestMatchLength) {
+            $bestMatch = $clientName;
+            $bestMatchLength = strlen($key);
+        }
+    }
+
+    if (!empty($bestMatchLength) && !empty($bestMatch)) {
+        $clientIconPath = 'styles/images/clients/' . $bestMatch . $iconExtension;
+        if (is_file($clientIconPath)) {
+            return '<img width="auto" height="auto" style="display: inline !important; vertical-align: middle;" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peerId . '">';
+        } else {
+            return $bestMatch;
+        }
+    }
+
+    return $peerId;
 }
 
 function birthday_age($date)
@@ -1246,12 +1332,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         $pagination = str_replace('&amp;start=0', '', $pagination);
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'PAGINATION' => $pagination,
         'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
-        'PG_PER_PAGE' => $per_page,
-    ));
+        'PG_PER_PAGE' => $per_page
+    ]);
 
     return $pagination;
 }
@@ -1284,7 +1370,7 @@ function obtain_word_list(&$orig_word, &$replacement_word)
     if (!$sql = CACHE('bb_cache')->get('censored')) {
         $sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
         if (!$sql) {
-            $sql = array(array('word' => 1, 'replacement' => 1));
+            $sql = [['word' => 1, 'replacement' => 1]];
         }
         CACHE('bb_cache')->set('censored', $sql, 7200);
     }
@@ -1339,12 +1425,12 @@ function bb_die($msg_text)
         $msg_text = $lang[$msg_text];
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_BB_DIE' => true,
-        'MESSAGE_TEXT' => $msg_text,
-    ));
+        'MESSAGE_TEXT' => $msg_text
+    ]);
 
-    $template->set_filenames(array('bb_die' => 'common.tpl'));
+    $template->set_filenames(['bb_die' => 'common.tpl']);
     $template->pparse('bb_die');
 
     require(PAGE_FOOTER);
@@ -1412,14 +1498,14 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 {
     global $lang;
 
-    $forum_display_sort = array(
-        'lang_key' => array('LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'),
-        'fields' => array('t.topic_last_post_time', 't.topic_title', 't.topic_time'),
-    );
-    $forum_display_order = array(
-        'lang_key' => array('DESC', 'ASC'),
-        'fields' => array('DESC', 'ASC'),
-    );
+    $forum_display_sort = [
+        'lang_key' => ['LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'],
+        'fields' => ['t.topic_last_post_time', 't.topic_title', 't.topic_time']
+    ];
+    $forum_display_order = [
+        'lang_key' => ['DESC', 'ASC'],
+        'fields' => ['DESC', 'ASC']
+    ];
 
     // get the good list
     $list_name = 'forum_display_' . $list;
@@ -1434,7 +1520,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     // build list
     if ($action == 'list') {
         foreach ($listrow['lang_key'] as $i => $iValue) {
-            $selected = ($i == $selected_row) ? ' selected="selected"' : '';
+            $selected = ($i == $selected_row) ? ' selected' : '';
             $l_value = $lang[$listrow['lang_key'][$i]] ?? $iValue;
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
         }
@@ -1556,11 +1642,16 @@ function print_confirmation($tpl_vars)
 {
     global $template, $lang;
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_CONFIRM' => true,
         'CONFIRM_TITLE' => $lang['CONFIRM'],
-        'FORM_METHOD' => 'post',
-    ));
+        'FORM_METHOD' => 'post'
+    ]);
+
+    if (!isset($tpl_vars['QUESTION'])) {
+        $tpl_vars['QUESTION'] = $lang['QUESTION'];
+    }
+
     $template->assign_vars($tpl_vars);
 
     print_page('common.tpl');
@@ -1593,7 +1684,7 @@ function print_page($args, $type = '', $mode = '')
         require(PAGE_HEADER);
     }
 
-    $template->set_filenames(array('body' => $tpl));
+    $template->set_filenames(['body' => $tpl]);
     $template->pparse('body');
 
     if ($mode !== 'no_footer') {
@@ -1673,12 +1764,12 @@ function init_sphinx()
 
 function log_sphinx_error($err_type, $err_msg, $query = '')
 {
-    $ignore_err_txt = array(
+    $ignore_err_txt = [
         'negation on top level',
-        'Query word length is less than min prefix length',
-    );
+        'Query word length is less than min prefix length'
+    ];
     if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
-        $orig_query = strtr($_REQUEST['nm'], array("\n" => '\n'));
+        $orig_query = strtr($_REQUEST['nm'], ["\n" => '\n']);
         bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
     }
 }
@@ -1760,25 +1851,42 @@ function decode_text_match($txt)
  * Create magnet link
  *
  * @param string $infohash
- * @param string|bool $auth_key
+ * @param string $infohash_v2
+ * @param string $auth_key
+ * @param string $name
  *
  * @return string
  */
-function create_magnet($infohash, $auth_key): string
+function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name): string
 {
-    global $bb_cfg, $images;
+    global $bb_cfg, $images, $lang;
+
+    if (!$bb_cfg['magnet_links_enabled']) {
+        return false;
+    }
 
     // Only for registered users
     if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
         return false;
     }
 
-    // Hasn't passkey
-    if (!$auth_key) {
-        return false;
+    $v1_support = !empty($infohash);
+    $v2_support = !empty($infohash_v2);
+
+    $magnet = 'magnet:?';
+
+    if ($v1_support) {
+        $magnet .= 'xt=urn:btih:' . bin2hex($infohash);
     }
 
-    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    if ($v2_support) {
+        if ($v1_support) {
+            $magnet .= '&';
+        }
+        $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
+    }
+
+    return '<a title="' . ($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']) . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . ($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']) . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
@@ -1867,7 +1975,7 @@ function profile_url($data)
     return $profile;
 }
 
-function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = 100, $width = 100)
+function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $width = '')
 {
     global $bb_cfg;
 
@@ -1957,14 +2065,24 @@ function hash_search($hash)
     global $lang;
 
     $hash = htmlCHR(trim($hash));
+    $info_hash_where = null;
 
-    if (!isset($hash) || mb_strlen($hash, 'UTF-8') != 40) {
+    if (!isset($hash)) {
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
 
-    $info_hash = DB()->escape(pack("H*", $hash));
+    $info_hash = DB()->escape(pack('H*', $hash));
 
-    if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash'")) {
+    // Check info_hash version
+    if (mb_strlen($hash, 'UTF-8') == 40) {
+        $info_hash_where = "WHERE info_hash = '$info_hash'";
+    } elseif (mb_strlen($hash, 'UTF-8') == 64) {
+        $info_hash_where = "WHERE info_hash_v2 = '$info_hash'";
+    } else {
+        bb_die(sprintf($lang['HASH_INVALID'], $hash));
+    }
+
+    if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where")) {
         redirect(TOPIC_URL . $row['topic_id']);
     } else {
         bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));
@@ -1985,9 +2103,9 @@ function bb_captcha($mode, $callback = '')
 
     $secret = $bb_cfg['captcha']['secret_key'];
     $public = $bb_cfg['captcha']['public_key'];
-    $cp_theme = $bb_cfg['captcha']['theme'];
+    $cp_theme = $bb_cfg['captcha']['theme'] ?? 'light';
 
-    if (!$public && !$secret) {
+    if (!$bb_cfg['captcha']['disabled'] && (!$public || !$secret)) {
         bb_die($lang['CAPTCHA_SETTINGS']);
     }
 
@@ -2027,7 +2145,7 @@ function bb_captcha($mode, $callback = '')
 
 function clean_tor_dirname($dirname)
 {
-    return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
+    return str_replace(['[', ']', '<', '>', "'"], ['&#91;', '&#93;', '&lt;', '&gt;', '&#039;'], $dirname);
 }
 
 /**
@@ -2045,5 +2163,5 @@ function user_birthday_icon($user_birthday, $user_id): string
     $user_birthday = ($user_id != GUEST_UID && !empty($user_birthday) && $user_birthday != '1900-01-01')
         ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
-    return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
+    return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
 }

@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'ポス';
 $lang['POSTED'] = '掲載';
 $lang['USERNAME'] = 'ユーザー名';
 $lang['PASSWORD'] = 'パスワード';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'メール';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = '著者';
@@ -233,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'ま<b>can</b>投票の投票にこのフォーラム'
 $lang['RULES_VOTE_CANNOT'] = 'ま<b>cannot</b>投票の投票にこのフォーラム';
 $lang['RULES_MODERATE'] = 'ま<b>can</b>緩やかなこのフォーラム';
 
-$lang['NO_TOPICS_POST_ONE'] = 'ありませんの投稿はこのフォーラムです。<br />Clickの<b>Post新Topic</b>リンクこのページを投稿します。';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = '話題を見';
@@ -377,7 +379,6 @@ $lang['DELETED'] = 'メッセージが削除されています。';
 $lang['POLL_DELETE'] = 'ご投票が削除されています。';
 $lang['VOTE_CAST'] = 'あなたの投票をしています。';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = '話題の返信通知';
 $lang['EMOTICONS'] = '絵文字';
 $lang['MORE_EMOTICONS'] = 'ありが絵文字';
 
@@ -415,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = '個人メール';
 $lang['NO_NEW_PM'] = '新しいメッセージ';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('新しいメッセージ', '新しいメッセージ');
+$lang['NEW_PMS_DECLENSION'] = ['新しいメッセージ', '新しいメッセージ'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('未読', '未読');
+$lang['UNREAD_PMS_DECLENSION'] = ['未読', '未読'];
 
 $lang['UNREAD_MESSAGE'] = '未読メッセージ';
 $lang['READ_MESSAGE'] = '読メッセージ';
@@ -545,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = '送信メールはこの人の回答のマー�
 
 $lang['BOARD_LANG'] = 'ボードの言語';
 $lang['GENDER'] = '男女別';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => '不明',
     1 => '男性',
     2 => '女性'
-);
+];
 $lang['MODULE_OFF'] = 'モジュールを無効にす！';
 
 $lang['BIRTHDAY'] = '誕生日';
@@ -591,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = 'リセットautologinキー';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'を含むすべての場所だ訪れたこのフォーラムは有効な自動ログイン';
 
 $lang['AVATAR'] = 'アバター';
-$lang['AVATAR_EXPLAIN'] = '表示の小さなグラフィック画像の下に詳細に。 一つの画像を表示でき、その幅が以上であってはいけません%dピクセル、高さ以上であってはいけません%dピクセルのファイルサイズ以%dKBします。';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'アバター削除';
 $lang['AVATAR_DISABLE'] = 'アバター制御オプションに関して無効に違反<a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'アップロードバ';
@@ -723,7 +724,8 @@ $lang['GROUP_REQUEST'] = '請求をすごしています。';
 $lang['GROUP_APPROVED'] = 'ご要請が承認されています。';
 $lang['GROUP_ADDED'] = 'きのこusergroupます。';
 $lang['ALREADY_MEMBER_GROUP'] = 'すでに会員の方はこのグループ';
-$lang['USER_IS_MEMBER_GROUP'] = 'ユーザーは既にこのグループのメンバ';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = '成グループを更新します。';
 $lang['EFFECTIVE_DATE'] = '効力発生日';
 
@@ -1003,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = '添付ファイルは大きすぎます。<br
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = '添付ファイルは大きすぎます。<br />Maximumアップロードサイズ:%d応募を推奨いたします。<br />Pleaseなお、このサイズを定義してクリアしました。iniは、この設定はPHPの添付Modできませんこのメソッドをオーバーライドす。'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'の延長%sが許可されない'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'ことができませんのでポストのファイルの拡張子%sこのフォーラム'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = '添付ファイルは大きすぎます。<br />Maxサイズ：%d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = '申し訳ございません、あなたの最大filesizeのためのすべての添付ファイルできます。 お板の管理者な手続き"をご一読いただきます。';
 $lang['TOO_MANY_ATTACHMENTS'] = '別紙に追加できないので、最大です。 数%d添付ファイルをこの募集でしたが実現'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'の添付画像よりも大きな%dピクセル幅%dピクセルの高';
@@ -1057,12 +1059,14 @@ $lang['BT_ADDED'] = '追加';
 $lang['BT_REG_ON_TRACKER'] = '登録トラッカー';
 $lang['BT_REG_FAIL'] = 'な登録激流にトラッカー';
 $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = '激流に登録されtracker<br /><br />Nowに必要なもの<a href="%s"><b>downloadおtorrent</b></a>とでご利用BitTorrentトを選択するフォルダのファイルだけを共有してダウンロードパス';
 $lang['INVALID_ANN_URL'] = '無効なURLを発表[%s]<br /><br />mustする<b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'な追加passkey<br /><br />Torrent登録されていないにトラッカー';
-$lang['PASSKEY_ERR_EMPTY'] = 'なの追加パスキー(パスキーは空）<br /><br />Goに<a href="%s" target="_blank"><b>yourフォーラムprofile</b></a>を作成で';
 $lang['BT_PASSKEY'] = 'パスキー';
 $lang['BT_GEN_PASSKEY'] = '新規作成し';
 $lang['BT_PASSKEY_VIEW'] = 'ショー';
@@ -1080,16 +1084,15 @@ $lang['RELEASING'] = '自己';
 $lang['SEEDING'] = '種子';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = '登録';
-$lang['MAGNET'] = '磁石';
-$lang['DC_MAGNET'] = '検索DC++によるファイル名';
-$lang['DC_MAGNET_EXT'] = '検索DC++による拡張';
+$lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状況';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'ステータスステータスを選択し';
 $lang['TOR_STATUS_NOT_SELECT'] = 'い選択されていない状態にします。';
 $lang['TOR_STATUS_SELECT_ALL'] = 'すべてのステータス';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'チェック',
     TOR_CLOSED => '閉鎖',
     TOR_APPROVED => '確認',
@@ -1103,7 +1106,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => '仮設',
     TOR_PREMOD => '前節度',
     TOR_REPLENISH => '補給',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'そのような状況が存在しない!';
 $lang['TORRENT_FAILED'] = '分布は見つかりませんでしたよ！';
 $lang['TOR_STATUS_DUB'] = '配布と同じ状況';
@@ -1355,17 +1358,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('返信', '回答');
-$lang['DECLENSION']['TIMES'] = array('時間', '倍');
+$lang['DECLENSION']['REPLIES'] = ['返信', '回答'];
+$lang['DECLENSION']['TIMES'] = ['時間', '倍'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('第', '秒'),
-    'minutes' => array('分', '分'),
-    'hours' => array('時間', '時間'),
-    'mday' => array('日', '日'),
-    'mon' => array('月', 'ヶ月'),
-    'year' => array('年', '年'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['第', '秒'],
+    'minutes' => ['分', '分'],
+    'hours' => ['時間', '時間'],
+    'mday' => ['日', '日'],
+    'mon' => ['月', 'ヶ月'],
+    'year' => ['年', '年'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1545,6 +1548,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL速度';
 $lang['DL_DL_SPEED'] = 'DL速度';
 $lang['DL_PORT'] = '港';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = '式：掲載/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = '停止';
@@ -1720,6 +1724,8 @@ $lang['USER_AUTH_UPDATED'] = 'ユーザーの権限の情報を更新いたし';
 $lang['GROUP_AUTH_UPDATED'] = 'グループの権限の情報を更新いたし';
 
 $lang['AUTH_UPDATED'] = 'アクセス権の情報を更新いたし';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'をクリックし%sHere%sに戻りユーザーの権限';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'をクリックし%sHere%s戻グループの権限';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'をクリックし%sHere%sに戻すフォーラムアクセス権';
@@ -2260,13 +2266,6 @@ $lang['RETURN_CONFIG'] = '%sReturnにConfiguration%s';
 $lang['CONFIG_UPD'] = '構成に成功し';
 $lang['SET_DEFAULTS'] = 'デフォルトの復元';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'トラッカー';
-$lang['FORUM_CFG_TITLE'] = 'フォーラムの設定';
-$lang['TRACKER_SETTINGS'] = 'トラッカーの設定';
-
-$lang['CHANGES_DISABLED'] = 'の変更無効（<b>$bb_cfg[\'tracker\']</b>にconfig.php)';
-
 $lang['OFF_TRACKER'] = 'トラッカーを無効に';
 $lang['OFF_REASON'] = '無効理由';
 $lang['OFF_REASON_EXPL'] = 'このメッセージを送信時にクライアントのトラッカーが無効にな';
@@ -2327,6 +2326,8 @@ $lang['BT_ANNOUNCE_URL'] = '発表すurl';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'またの追加を許url"includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Disable DHTネットワーク';
 $lang['BT_DISABLE_DHT_EXPL'] = '無効ピア交流DHT(おすすめのプライベートネットワーク構築、urlお)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = '確認知url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = '登録トラッカーにのみ許されたurl';
 $lang['BT_REPLACE_ANN_URL'] = '代わせurlの';
@@ -2376,7 +2377,7 @@ $lang['TEMPLATE_DISABLE'] = 'テンプレートを無効';
 $lang['FOR_NEW_TEMPLATE'] = '新しいパターンです！';
 $lang['CHANGED'] = '変更';
 $lang['REMOVED'] = '除';
-$lang['QUESTION'] = 'はいを削除したいのか？';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cronのリスト';
 $lang['CRON_ID'] = 'ID';
@@ -2411,14 +2412,14 @@ $lang['REPAIR_CRON'] = '修理Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = '編集の仕事';
 $lang['CRON_EDIT_HEAD_ADD'] = '仕事に追加';
 $lang['CRON_SCRIPT_EXPL'] = '名前のスクリプトから"含/cron/仕事/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo;選',
     'hourly' => '時間',
     'daily' => '日常',
     'weekly' => '週刊',
     'monthly' => '月',
     'interval' => '間隔'
-);
+];
 $lang['NOSELECT'] = 'Noを選択';
 $lang['RUN_DAY'] = '実行日';
 $lang['RUN_DAY_EXPL'] = 'のがこのジョブ実行';
@@ -2537,7 +2538,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = '課題として、フォーラム[b]%s[/b]�
 $lang['BOT_MESS_SPLITS'] = '話題にして分割します。 新しいトピック[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '課題分割されたから[b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'ダウンロードコ';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = '注依頼の流通';
 $lang['CALLSEED_SUBJECT'] = 'ダウンロードヘ%s';
 $lang['CALLSEED_TEXT'] = 'ハロー！[br]Yourお手伝いが必要にリリース[url=%s]%s[/url][br]ifが決まりましたのですが既に削除のtorrentファイルをダウンロードできますので、[url=%s]this[/url][br][br]iろしくお願いい！！';
@@ -2545,17 +2546,22 @@ $lang['CALLSEED_MSG_OK'] = 'メッセージが送られたすべての人をダ�
 $lang['CALLSEED_MSG_SPAM'] = '要求されていまし送(れていないことが考えられます）<br /><br />The次の機会に要求を送信する<b>%s</b>ます。';
 $lang['CALLSEED_HAVE_SEED'] = '話題を必要としないによるものでないことを<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'トピック：<br /> <b>deleted</b>',
     'mod_topic_move' => 'トピック：<br /> <b>moved</b>',
     'mod_topic_lock' => 'トピック：<br /> <b>closed</b>',
     'mod_topic_unlock' => 'トピック：<br /> <b>opened</b>',
     'mod_topic_split' => 'トピック：<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'ユーザー:<br /> <b>deleted</b>',
     'adm_user_ban' => 'ユーザー:<br /> <b>ban</b>',
     'adm_user_unban' => 'ユーザー:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'すべてのアクション';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = '行動ログを検索オプション';
@@ -2694,28 +2700,28 @@ $lang['MC_LEGEND'] = 'タイプaのコメント';
 $lang['MC_FAQ'] = '入力したテキスト表示されます本メッセージ';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%sにメッセージ";
 $lang['MC_COMMENT_PM_MSG'] = "こんにちは、[b]%s[/b]りnModerator左にメッセージ[url=%s][b]%s[/b][/url][quote]りn%sりn[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'コメント削除',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'コメントから%s',
         'type' => 'コメント',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '情報%s',
         'type' => '情報',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '警告から%s',
         'type' => '警告',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '違反から%s',
         'type' => '違反',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'サイトマップ';
 $lang['SITEMAP_ADMIN'] = '管理サイトマップ';
@@ -2756,7 +2762,7 @@ $lang['HASH_NOT_FOUND'] = 'コーポレートコミュニケーションのハ�
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]このページのテキストは [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]で編集されています。この行は管理者だけが見ることができます。[/align]';
 $lang['TERMS_EXPLAIN'] = 'このページでご指定いただくことができますテキストの基本的なルールのリソースが表示されます。';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '無効のユーザは30日間',
     1 => '不活性ユーザ90日間',
     2 => '中サイズ分布は、トラッカー(多くのメガバイト)',
@@ -2765,7 +2771,7 @@ $lang['TR_STATS'] = array(
     5 => 'どのくらい多くの人の手によることを播種以上の5種',
     6 => 'どのように多くの予想は、対象となっているがぎっしり敷き詰められ少なくとも1)',
     7 => 'どのように多くの予想は、過去30日',
-);
+];
 
 $lang['NEW_POLL_START'] = '調査可能';
 $lang['NEW_POLL_END'] = '調査完了';
@@ -2789,13 +2795,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = '各行に対応する一つの答え(max';
 $lang['OLD_BROWSER'] = 'を使用してい古いブラウザです。 本ウェブサイトを正しく表示されないます。';
 $lang['GO_BACK'] = '帰';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'ファイルのアップロードエラー';
 $lang['UPLOAD_ERROR_SIZE'] = 'を超えるファイルをアップロード最大サイズの%s';
 $lang['UPLOAD_ERROR_FORMAT'] = '無効なファイル形式の画像';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = '画像寸法を超える最大許容%sx%spx';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'アップロードされたファイルのない画像';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = '拡張%sのためのダウンロードできません';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'いを超えたファイルの最大サイズのサーバー',
     UPLOAD_ERR_FORM_SIZE => 'お値を超えて最大ファイルアップロードサイズ',
     UPLOAD_ERR_PARTIAL => 'ファイルの一部ダウンロード',
@@ -2803,7 +2810,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => '一時ディレクトリに見つかりませんで',
     UPLOAD_ERR_CANT_WRITE => 'イライト：プロフィー',
     UPLOAD_ERR_EXTENSION => 'アップロードを停止による拡張',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'ることを確認等の無断転載は固くお断りいロボット';
@@ -2818,7 +2825,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'ユーザーグループへの参加リクエストが承認されました',
     'GROUP_REQUEST' => 'ユーザーグループへの参加リクエスト',
     'PRIVMSG_NOTIFY' => '新しいプライベート メッセージ',
-    'TOPIC_NOTIFY' => 'スレッド %sでの応答の通知',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'アカウントの再開',
     'USER_ACTIVATE_PASSWD' => '新しいパスワードの確認',
     'USER_WELCOME' => 'サイトへようこそ %s',

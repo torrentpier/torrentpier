@@ -17,9 +17,9 @@ $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_mess
 
 // Page config
 $page_cfg['use_tablesorter'] = true;
-$page_cfg['load_tpl_vars'] = array(
-    'pm_icons',
-);
+$page_cfg['load_tpl_vars'] = [
+    'pm_icons'
+];
 
 //
 // Is PM disabled?
@@ -55,12 +55,12 @@ if ($folder =& $_REQUEST['folder']) {
 }
 
 // Start session management
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
-$template->assign_vars(array(
+$template->assign_vars([
     'IN_PM' => true,
     'QUICK_REPLY' => $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read',
-));
+]);
 
 //
 // Cancel
@@ -246,13 +246,13 @@ if ($mode == 'read') {
     //
     // Pick a folder, any folder, so long as it's one below ...
     //
-    $post_urls = array(
-        'post' => PM_URL . "?mode=post",
-        'reply' => PM_URL . "?mode=reply&amp;" . POST_POST_URL . "=$privmsg_id",
-        'quote' => PM_URL . "?mode=quote&amp;" . POST_POST_URL . "=$privmsg_id",
-        'edit' => PM_URL . "?mode=edit&amp;" . POST_POST_URL . "=$privmsg_id"
-    );
-    $post_icons = array(
+    $post_urls = [
+        'post' => PM_URL . '?mode=post',
+        'reply' => PM_URL . '?mode=reply&amp;' . POST_POST_URL . "=$privmsg_id",
+        'quote' => PM_URL . '?mode=quote&amp;' . POST_POST_URL . "=$privmsg_id",
+        'edit' => PM_URL . '?mode=edit&amp;' . POST_POST_URL . "=$privmsg_id"
+    ];
+    $post_icons = [
         'post_img' => '<a href="' . $post_urls['post'] . '"><img src="' . $images['pm_postmsg'] . '" alt="' . $lang['POST_NEW_PM'] . '" border="0" /></a>',
         'post' => '<a href="' . $post_urls['post'] . '">' . $lang['POST_NEW_PM'] . '</a>',
         'reply_img' => '<a href="' . $post_urls['reply'] . '"><img src="' . $images['pm_replymsg'] . '" alt="' . $lang['POST_REPLY_PM'] . '" border="0" /></a>',
@@ -261,7 +261,7 @@ if ($mode == 'read') {
         'quote' => '<a href="' . $post_urls['quote'] . '">' . $lang['POST_QUOTE_PM'] . '</a>',
         'edit_img' => '<a href="' . $post_urls['edit'] . '"><img src="' . $images['pm_editmsg'] . '" alt="' . $lang['EDIT_PM'] . '" border="0" /></a>',
         'edit' => '<a href="' . $post_urls['edit'] . '">' . $lang['EDIT_PM'] . '</a>'
-    );
+    ];
 
     if ($folder == 'inbox') {
         $post_img = $post_icons['post_img'];
@@ -323,11 +323,9 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    $template->set_filenames(array(
-            'body' => 'privmsgs_read.tpl')
-    );
+    $template->set_filenames(['body' => 'privmsgs_read.tpl']);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'INBOX' => $inbox_url,
 
         'POST_PM_IMG' => $post_img,
@@ -345,8 +343,8 @@ if ($mode == 'read') {
         'BOX_NAME' => $l_box_name,
 
         'S_PRIVMSGS_ACTION' => PM_URL . "?folder=$folder",
-        'S_HIDDEN_FIELDS' => $s_hidden_fields,
-    ));
+        'S_HIDDEN_FIELDS' => $s_hidden_fields
+    ]);
 
     $username_from = $privmsg['username'];
     $user_id_from = $privmsg['user_id'];
@@ -374,8 +372,8 @@ if ($mode == 'read') {
 
     $private_message = $privmsg['privmsgs_text'];
 
-    $orig_word = array();
-    $replacement_word = array();
+    $orig_word = [];
+    $replacement_word = [];
     obtain_word_list($orig_word, $replacement_word);
 
     if (count($orig_word)) {
@@ -388,8 +386,8 @@ if ($mode == 'read') {
     //
     // Dump it to the templating engine
     //
-    $template->assign_vars(array(
-        'TO_USER' => profile_url(array('username' => $username_to, 'user_id' => $user_id_to, 'user_rank' => $privmsg['to_user_rank'])),
+    $template->assign_vars([
+        'TO_USER' => profile_url(['username' => $username_to, 'user_id' => $user_id_to, 'user_rank' => $privmsg['to_user_rank']]),
         'FROM_USER' => profile_url($privmsg),
 
         'QR_SUBJECT' => (!preg_match('/^Re:/', $post_subject) ? 'Re: ' : '') . $post_subject,
@@ -406,30 +404,30 @@ if ($mode == 'read') {
         'PROFILE_IMG' => $profile_img,
         'PROFILE' => $profile,
         'SEARCH_IMG' => $search_img,
-        'SEARCH' => $search,
-    ));
+        'SEARCH' => $search
+    ]);
 } elseif (($delete && $mark_list) || $delete_all) {
     if (isset($mark_list) && !is_array($mark_list)) {
         // Set to empty array instead of '0' if nothing is selected.
-        $mark_list = array();
+        $mark_list = [];
     }
 
     if (!$confirmed) {
         $delete = isset($_POST['delete']) ? 'delete' : 'deleteall';
 
-        $hidden_fields = array(
+        $hidden_fields = [
             'mode' => $mode,
-            $delete => 1,
-        );
+            $delete => 1
+        ];
         foreach ($mark_list as $pm_id) {
             $hidden_fields['mark'][] = (int)$pm_id;
         }
 
-        print_confirmation(array(
+        print_confirmation([
             'QUESTION' => (count($mark_list) == 1) ? $lang['CONFIRM_DELETE_PM'] : $lang['CONFIRM_DELETE_PMS'],
             'FORM_ACTION' => PM_URL . "?folder=$folder",
-            'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
-        ));
+            'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields)
+        ]);
     } elseif ($confirmed) {
         $delete_sql_id = '';
 
@@ -467,7 +465,7 @@ if ($mode == 'read') {
             bb_die('Could not obtain id list to delete messages');
         }
 
-        $mark_list = array();
+        $mark_list = [];
         while ($row = DB()->sql_fetchrow($result)) {
             $mark_list[] = $row['privmsgs_id'];
         }
@@ -502,7 +500,7 @@ if ($mode == 'read') {
                 }
 
                 if ($row = DB()->sql_fetchrow($result)) {
-                    $update_users = $update_list = array();
+                    $update_users = $update_list = [];
 
                     do {
                         switch ($row['privmsgs_type']) {
@@ -665,7 +663,7 @@ if ($mode == 'read') {
             }
 
             if ($row = DB()->sql_fetchrow($result)) {
-                $update_users = $update_list = array();
+                $update_users = $update_list = [];
 
                 do {
                     switch ($row['privmsgs_type']) {
@@ -915,13 +913,12 @@ if ($mode == 'read') {
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['PRIVMSG_NOTIFY']);
 
                 $emailer->set_template('privmsg_notify', $to_userdata['user_lang']);
-                $emailer->assign_vars(array(
+                $emailer->assign_vars([
                     'USERNAME' => html_entity_decode($to_username),
                     'NAME_FROM' => $userdata['username'],
                     'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
-                    'SITENAME' => $bb_cfg['sitename'],
                     'U_INBOX' => make_url(PM_URL . "?folder=inbox&mode=read&p=$privmsg_sent_id"),
-                ));
+                ]);
 
                 $emailer->send();
             }
@@ -1049,8 +1046,8 @@ if ($mode == 'read') {
     $page_title = $lang['SEND_PRIVATE_MESSAGE'];
 
     if ($preview && !$error) {
-        $orig_word = array();
-        $replacement_word = array();
+        $orig_word = [];
+        $replacement_word = [];
         obtain_word_list($orig_word, $replacement_word);
 
         $preview_message = bbcode2html($privmsg_message);
@@ -1069,7 +1066,7 @@ if ($mode == 'read') {
             $s_hidden_fields .= '<input type="hidden" name="' . POST_POST_URL . '" value="' . $privmsg_id . '" />';
         }
 
-        $template->assign_vars(array(
+        $template->assign_vars([
             'TPL_PREVIEW_POST' => true,
             'TOPIC_TITLE' => wbr($preview_subject),
             'POST_SUBJECT' => $preview_subject,
@@ -1078,28 +1075,26 @@ if ($mode == 'read') {
             'POST_DATE' => bb_date(TIMENOW),
             'PREVIEW_MSG' => $preview_message,
 
-            'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        ));
+            'S_HIDDEN_FIELDS' => $s_hidden_fields
+        ]);
     }
 
     //
     // Start error handling
     //
     if ($error) {
-        $template->assign_vars(array('ERROR_MESSAGE' => $error_msg));
+        $template->assign_vars(['ERROR_MESSAGE' => $error_msg]);
     }
 
     //
     // Load templates
     //
-    $template->set_filenames(array(
-            'body' => 'posting.tpl')
-    );
+    $template->set_filenames(['body' => 'posting.tpl']);
 
     //
     // Enable extensions in posting_body
     //
-    $template->assign_block_vars('switch_privmsg', array());
+    $template->assign_block_vars('switch_privmsg', []);
     $template->assign_var('POSTING_USERNAME');
 
     $post_a = '&nbsp;';
@@ -1125,7 +1120,7 @@ if ($mode == 'read') {
 
     $privmsg_subject = clean_title($privmsg_subject);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'SUBJECT' => htmlCHR($privmsg_subject),
         'USERNAME' => $to_username,
         'MESSAGE' => $privmsg_message,
@@ -1142,9 +1137,9 @@ if ($mode == 'read') {
         'S_HIDDEN_FORM_FIELDS' => $s_hidden_fields,
         'S_POST_ACTION' => PM_URL,
 
-        'U_SEARCH_USER' => "search.php?mode=searchuser",
-        'U_VIEW_FORUM' => PM_URL,
-    ));
+        'U_SEARCH_USER' => 'search.php?mode=searchuser',
+        'U_VIEW_FORUM' => PM_URL
+    ]);
 } else {
     //
     // Reset PM counters
@@ -1156,11 +1151,11 @@ if ($mode == 'read') {
     //
     // Update unread status
     //
-    \TorrentPier\Sessions::db_update_userdata($userdata, array(
+    \TorrentPier\Sessions::db_update_userdata($userdata, [
         'user_unread_privmsg' => 'user_unread_privmsg + user_new_privmsg',
         'user_new_privmsg' => 0,
-        'user_last_privmsg' => $userdata['session_start'],
-    ));
+        'user_last_privmsg' => $userdata['session_start']
+    ]);
 
     $sql = "UPDATE " . BB_PRIVMSGS . "
 		SET privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "
@@ -1178,11 +1173,9 @@ if ($mode == 'read') {
     //
     // Load templates
     //
-    $template->set_filenames(array(
-            'body' => 'privmsgs.tpl')
-    );
+    $template->set_filenames(['body' => 'privmsgs.tpl']);
 
-    $orig_word = $replacement_word = array();
+    $orig_word = $replacement_word = [];
     obtain_word_list($orig_word, $replacement_word);
 
     //
@@ -1289,12 +1282,12 @@ if ($mode == 'read') {
     //
     // Build select box
     //
-    $previous_days = array(0, 1, 7, 14, 30, 90, 180, 364);
-    $previous_days_text = array($lang['ALL_POSTS'], $lang['1_DAY'], $lang['7_DAYS'], $lang['2_WEEKS'], $lang['1_MONTH'], $lang['3_MONTHS'], $lang['6_MONTHS'], $lang['1_YEAR']);
+    $previous_days = [0, 1, 7, 14, 30, 90, 180, 364];
+    $previous_days_text = [$lang['ALL_POSTS'], $lang['1_DAY'], $lang['7_DAYS'], $lang['2_WEEKS'], $lang['1_MONTH'], $lang['3_MONTHS'], $lang['6_MONTHS'], $lang['1_YEAR']];
 
     $select_msg_days = '';
     for ($i = 0, $iMax = count($previous_days); $i < $iMax; $i++) {
-        $selected = ($msg_days == $previous_days[$i]) ? ' selected="selected"' : '';
+        $selected = ($msg_days == $previous_days[$i]) ? ' selected' : '';
         $select_msg_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
     }
 
@@ -1351,7 +1344,7 @@ if ($mode == 'read') {
     //
     // Dump vars to template
     //
-    $template->assign_vars(array(
+    $template->assign_vars([
         'BOX_NAME' => $l_box_name,
         'BOX_EXPL' => ($folder == 'outbox') ? $lang['OUTBOX_EXPL'] : '',
         'INBOX' => $inbox_url,
@@ -1374,8 +1367,8 @@ if ($mode == 'read') {
         'S_POST_NEW_MSG' => $post_new_mesg_url,
         'S_SELECT_MSG_DAYS' => $select_msg_days,
 
-        'U_POST_NEW_TOPIC' => PM_URL . "?mode=post",
-    ));
+        'U_POST_NEW_TOPIC' => PM_URL . '?mode=post'
+    ]);
 
     //
     // Okay, let's build the correct folder
@@ -1416,29 +1409,26 @@ if ($mode == 'read') {
             $row_class = !($i & 1) ? 'row1' : 'row2';
             $i++;
 
-            $template->assign_block_vars('listrow', array(
+            $template->assign_block_vars('listrow', [
                 'ROW_CLASS' => $row_class,
                 'FROM' => $msg_user,
                 'SUBJECT' => htmlCHR($msg_subject),
                 'DATE' => $msg_date,
 
                 'PRIVMSG_FOLDER_IMG' => $icon_flag,
-
                 'L_PRIVMSG_FOLDER_ALT' => $icon_flag_alt,
-
                 'S_MARK_ID' => $privmsg_id,
-
-                'U_READ' => $u_subject,
-            ));
+                'U_READ' => $u_subject
+            ]);
         } while ($row = DB()->sql_fetchrow($result));
 
         generate_pagination(PM_URL . "?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
     } else {
-        $template->assign_block_vars("switch_no_messages", array());
+        $template->assign_block_vars('switch_no_messages', []);
     }
 }
 
-$template->assign_vars(array('PAGE_TITLE' => @$page_title));
+$template->assign_vars(['PAGE_TITLE' => @$page_title]);
 
 require(PAGE_HEADER);
 

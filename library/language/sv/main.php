@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = 'Inlägg';
 $lang['POSTED'] = 'Inlagd';
 $lang['USERNAME'] = 'Användarnamn';
 $lang['PASSWORD'] = 'Lösenord';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = 'E-post';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Författare';
@@ -233,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Du <b>can</b> rösta i omröstningar i detta forum';
 $lang['RULES_VOTE_CANNOT'] = 'Du <b>cannot</b> rösta i omröstningar i detta forum';
 $lang['RULES_MODERATE'] = 'Du <b>can</b> måttlig detta forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'Det finns inga inlägg i det här forumet.<br />Click på <b>Post Nya Topic</b> länk på den här sidan för att posta en.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Visa avsnittet';
@@ -377,7 +379,6 @@ $lang['DELETED'] = 'Ditt meddelande har tagits bort.';
 $lang['POLL_DELETE'] = 'Din enkät har tagits bort.';
 $lang['VOTE_CAST'] = 'Din röst har gjutits.';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = 'Ämne Svar Anmälan';
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'Visa fler Emotikoner';
 
@@ -415,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = 'Privata Meddelanden';
 $lang['NO_NEW_PM'] = 'inga nya meddelanden';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('nytt meddelande', 'nya meddelanden');
+$lang['NEW_PMS_DECLENSION'] = ['nytt meddelande', 'nya meddelanden'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('olästa', 'olästa');
+$lang['UNREAD_PMS_DECLENSION'] = ['olästa', 'olästa'];
 
 $lang['UNREAD_MESSAGE'] = 'Olästa meddelande';
 $lang['READ_MESSAGE'] = 'Läsa meddelande';
@@ -545,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Skickar ett e-postmeddelande när någon svara
 
 $lang['BOARD_LANG'] = 'Styrelsen språk';
 $lang['GENDER'] = 'Kön';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => 'Okänd',
     1 => 'Hane',
     2 => 'Kvinna'
-);
+];
 $lang['MODULE_OFF'] = 'Modulen är inaktiverad!';
 
 $lang['BIRTHDAY'] = 'Födelsedag';
@@ -591,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = 'Återställ autologin nyckel';
 $lang['RESET_AUTOLOGIN_EXPL'] = 'inklusive alla de platser som du har besökt forumet aktiverats auto-login';
 
 $lang['AVATAR'] = 'Avatar';
-$lang['AVATAR_EXPLAIN'] = 'Visar en liten grafisk bild nedan dina uppgifter i inlägg. Endast en bild kan visas på en gång, dess bredd kan vara större än %d pixlar, höjd större än %d pixlar, filstorlek inte mer än %d KB.';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = 'Ta bort avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar kontroll alternativet är inaktiverat för kränkning <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Ladda upp avatar';
@@ -723,7 +724,8 @@ $lang['GROUP_REQUEST'] = 'En begäran att ansluta sig till din grupp har gjorts.
 $lang['GROUP_APPROVED'] = 'Din begäran har godkänts.';
 $lang['GROUP_ADDED'] = 'Du har lagts till denna användargrupp.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Är du redan medlem i denna grupp';
-$lang['USER_IS_MEMBER_GROUP'] = 'Användaren är redan medlem i denna grupp';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Uppdaterat grupp typ.';
 $lang['EFFECTIVE_DATE'] = 'Datum';
 
@@ -1003,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Den Bifogade filen är för stor.<br />Could 
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Den Bifogade filen är för stor.<br />Maximum Ladda Storlek: %d MB.<br />Please observera att denna Storlek är definierade i php.ini, detta betyder att det är satt av PHP och den Bifogade filen Mod kan inte åsidosätta detta värde.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Förlängning %s är inte tillåtna'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Du är inte tillåtet att publicera Filer med Filändelsen %s inom detta Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'Den Bifogade filen är för stor.<br />Max Storlek: %d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Ledsen, men den maximala filstorleken för Bilagor som ska nås. Kontakta Administratören om du har frågor.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Kvarstad får inte läggas till, eftersom max. antal %d Bilagor i detta inlägg var uppnås'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Den Bifogade filen/Bilden måste vara mindre än %d pixlar bred och %d pixlar hög';
@@ -1057,12 +1059,14 @@ $lang['BT_ADDED'] = 'Läggas till';
 $lang['BT_REG_ON_TRACKER'] = 'Registrera dig på tracker';
 $lang['BT_REG_FAIL'] = 'Kunde inte registrera sig torrent på tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'En annan torrent med samma info_hash redan <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ta bort från tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent oregistrerade';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent registrerade på tracker<br /><br />Now du behöver för att <a href="%s"><b>download din torrent</b></a> och köra den med din BitTorrent klient att välja mappen med de ursprungliga filerna du delar eftersom ladda ner vägen';
 $lang['INVALID_ANN_URL'] = 'Ogiltiga Announce URL [%s]<br /><br />must vara <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Kunde inte lägga passkey<br /><br />Torrent som inte är registrerade på tracker';
-$lang['PASSKEY_ERR_EMPTY'] = 'Kunde inte lägga till nyckel (passkey är tom)<br /><br />Go att <a href="%s" target="_blank"><b>your forum profile</b></a> och generera det';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'skapa en ny';
 $lang['BT_PASSKEY_VIEW'] = 'visa';
@@ -1080,16 +1084,15 @@ $lang['RELEASING'] = 'Själv';
 $lang['SEEDING'] = 'Frö';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registrerade';
-$lang['MAGNET'] = 'Magnet';
-$lang['DC_MAGNET'] = 'Sök på DC++ med filnamn';
-$lang['DC_MAGNET_EXT'] = 'Sök på DC++ med extension';
+$lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Välj status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Du har inte valt status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alla statusar';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'inte kontrolleras',
     TOR_CLOSED => 'stängt',
     TOR_APPROVED => 'kollade',
@@ -1103,7 +1106,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => 'tillfällig',
     TOR_PREMOD => 'pre-måtta',
     TOR_REPLENISH => 'fylla på',
-);
+];
 $lang['TOR_STATUS_FAILED'] = 'Denna status finns inte!';
 $lang['TORRENT_FAILED'] = 'Fördelningen var inte hittas!';
 $lang['TOR_STATUS_DUB'] = 'Distributionen har samma status';
@@ -1351,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('svara', 'svar');
-$lang['DECLENSION']['TIMES'] = array('tid', 'gånger');
+$lang['DECLENSION']['REPLIES'] = ['svara', 'svar'];
+$lang['DECLENSION']['TIMES'] = ['tid', 'gånger'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('andra', 'sekunder'),
-    'minutes' => array('minuter', 'minuter'),
-    'hours' => array('timme', 'timmar'),
-    'mday' => array('dag', 'dagar'),
-    'mon' => array('månad', 'månader'),
-    'year' => array('år', 'år'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['andra', 'sekunder'],
+    'minutes' => ['minuter', 'minuter'],
+    'hours' => ['timme', 'timmar'],
+    'mday' => ['dag', 'dagar'],
+    'mon' => ['månad', 'månader'],
+    'year' => ['år', 'år'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1541,6 +1544,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL hastighet';
 $lang['DL_DL_SPEED'] = 'DL hastighet';
 $lang['DL_PORT'] = 'Port';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = 'Formel: Upp/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'slutat';
@@ -1716,6 +1720,8 @@ $lang['USER_AUTH_UPDATED'] = 'Användarbehörigheter har uppdaterats';
 $lang['GROUP_AUTH_UPDATED'] = 'Behörigheter grupp har uppdaterats';
 
 $lang['AUTH_UPDATED'] = 'Behörigheter har uppdaterats';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = 'Klicka %sHere%s för att återgå till Användare Behörigheter';
 $lang['CLICK_RETURN_GROUPAUTH'] = 'Klicka %sHere%s för att återgå till Grupp Behörigheter';
 $lang['CLICK_RETURN_FORUMAUTH'] = 'Klicka %sHere%s för att återvända till Forumet Behörigheter';
@@ -2256,13 +2262,6 @@ $lang['RETURN_CONFIG'] = '%sReturn att Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Uppdaterats';
 $lang['SET_DEFAULTS'] = 'Återställ standardvärden';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum inställningar';
-$lang['TRACKER_SETTINGS'] = 'Tracker-inställningar';
-
-$lang['CHANGES_DISABLED'] = 'Förändringar funktionshindrade (se <b>$bb_cfg[\'tracker\']</b> i config.php)';
-
 $lang['OFF_TRACKER'] = 'Inaktivera tracker';
 $lang['OFF_REASON'] = 'Inaktivera anledning';
 $lang['OFF_REASON_EXPL'] = 'detta meddelande kommer att skickas till kunden när tracker är funktionshindrade';
@@ -2323,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Meddela url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'du kan definiera ytterligare tillåtna webbadresser i "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Inaktivera DHT nätverk';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Inaktivera Peer Exchange och DHT (rekommenderas för privata nät, endast url, meddela)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Kontrollera announce url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registrera dig på tracker endast tillåtet webbadresser';
 $lang['BT_REPLACE_ANN_URL'] = 'Byt announce url';
@@ -2372,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = 'Mall för funktionshindrade';
 $lang['FOR_NEW_TEMPLATE'] = 'för nya mönster!';
 $lang['CHANGED'] = 'Ändrat';
 $lang['REMOVED'] = 'Bort';
-$lang['QUESTION'] = 'Är du säker på att du vill radera?';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron lista';
 $lang['CRON_ID'] = 'ID';
@@ -2407,14 +2408,14 @@ $lang['REPAIR_CRON'] = 'Reparation Cron';
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Redigera jobb';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Lägg till jobb';
 $lang['CRON_SCRIPT_EXPL'] = 'namnet på skriptet från "includes/cron/jobb/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo; Välj start',
     'hourly' => 'tim',
     'daily' => 'dagligen',
     'weekly' => 'vecka',
     'monthly' => 'månad',
     'interval' => 'intervall'
-);
+];
 $lang['NOSELECT'] = 'Välj';
 $lang['RUN_DAY'] = 'Kör dag';
 $lang['RUN_DAY_EXPL'] = 'den dag då detta jobb springa';
@@ -2533,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Ämnet har flyttats från forum [b]%s[/b] fo
 $lang['BOT_MESS_SPLITS'] = 'Ämnet har delats upp. Nytt ämne - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Ämnet har delats upp från [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Laddat samtal';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ta meddelande med en begäran att återgå till distribution';
 $lang['CALLSEED_SUBJECT'] = 'Ladda ner hjälp %s';
 $lang['CALLSEED_TEXT'] = 'Hej![br]Your hjälp behövs i utgivningen [url=%s]%s[/url][br]if du bestämmer dig för att hjälpa, men redan bort torrent-filen, kan du ladda ner det [url=%s]this[/url][br][br]i hoppas för din hjälp!';
@@ -2541,17 +2542,22 @@ $lang['CALLSEED_MSG_OK'] = 'Meddelandet har skickats till alla som laddat ner de
 $lang['CALLSEED_MSG_SPAM'] = 'Begäran har redan varit en gång, att du har skickat (och Förmodligen inte du)<br /><br />The nästa tillfälle att skicka en begäran om att <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Ämne inte behöver hjälp (<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => 'Ämne:<br /> <b>deleted</b>',
     'mod_topic_move' => 'Ämne:<br /> <b>moved</b>',
     'mod_topic_lock' => 'Ämne:<br /> <b>closed</b>',
     'mod_topic_unlock' => 'Ämne:<br /> <b>opened</b>',
     'mod_topic_split' => 'Ämne:<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Inlägg:<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => 'Användare:<br /> <b>deleted</b>',
     'adm_user_ban' => 'Användare:<br /> <b>ban</b>',
     'adm_user_unban' => 'Användare:<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'Alla åtgärder';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Åtgärder Logga in: Sök alternativ';
@@ -2690,28 +2696,28 @@ $lang['MC_LEGEND'] = 'Skriv en kommentar';
 $lang['MC_FAQ'] = 'Text kommer att visas under denna meddelande';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s i ditt meddelande";
 $lang['MC_COMMENT_PM_MSG'] = "Hej, [b]%s[/b]\nModerator kvar i ditt meddelande [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => 'Radera kommentar',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => 'Kommentar från %s',
         'type' => 'Kommentar',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => 'Information från %s',
         'type' => 'Information',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => 'Varning från %s',
         'type' => 'Varning',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => 'Överträdelse från %s',
         'type' => 'Kränkning',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = 'Sitemap';
 $lang['SITEMAP_ADMIN'] = 'Hantera sitemap';
@@ -2752,7 +2758,7 @@ $lang['HASH_NOT_FOUND'] = 'Release med hash %s inte hittas';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Texten på den här sidan är redigerad på: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Den här raden kan endast se administratörer.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På den här sidan kan du ange texten i de grundläggande reglerna för resursen visas för användare.';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => 'inaktiva användare i 30 dagar',
     1 => 'inaktiva användare för 90 dagar',
     2 => 'medium storlek distributioner på tracker (många megabyte)',
@@ -2761,7 +2767,7 @@ $lang['TR_STATS'] = array(
     5 => 'hur många händer där som sådd mer än 5 frön',
     6 => 'hur många av oss uppladdare (de som fyllt minst 1 hand)',
     7 => 'hur många uppladdare under de senaste 30 dagarna',
-);
+];
 
 $lang['NEW_POLL_START'] = 'Enkät aktiverad';
 $lang['NEW_POLL_END'] = 'Omröstning avslutad';
@@ -2785,13 +2791,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Varje rad motsvarar ett svar (max';
 $lang['OLD_BROWSER'] = 'Du använder en för gammal webbläsare. Webbplatsen kommer inte att visas korrekt.';
 $lang['GO_BACK'] = 'Gå tillbaka';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = 'Ladda upp fil fel';
 $lang['UPLOAD_ERROR_SIZE'] = 'Den uppladdade filen överskrider den maximala storleken av %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Ogiltig fil typ av bild';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Bildens mått överskrider den högsta tillåtna %sx%s px';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Den uppladdade filen är inte en bild';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Förlängning %s för nedladdningar är inte tillåtna';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => 'du har överskridit det maximala filstorleken för server',
     UPLOAD_ERR_FORM_SIZE => 'du har överskridit det maximala ladda upp fil-storlek',
     UPLOAD_ERR_PARTIAL => 'filen var delvis hämtade',
@@ -2799,7 +2806,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => 'tillfälliga katalogen hittades inte',
     UPLOAD_ERR_CANT_WRITE => 'skriva fel',
     UPLOAD_ERR_EXTENSION => 'ladda upp stoppades av tillägg',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = 'Kontrollera att du inte är en robot';
@@ -2814,7 +2821,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Din begäran om att gå med i användargruppen har beviljats',
     'GROUP_REQUEST' => 'En begäran om att gå med i din användargrupp',
     'PRIVMSG_NOTIFY' => 'Nytt privat meddelande',
-    'TOPIC_NOTIFY' => 'Meddelande om svar i tråden %s',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => 'Återaktivering av konto',
     'USER_ACTIVATE_PASSWD' => 'Bekräftar ett nytt lösenord',
     'USER_WELCOME' => 'Välkommen till sajten %s',

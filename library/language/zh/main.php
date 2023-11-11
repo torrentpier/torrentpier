@@ -25,6 +25,7 @@ $lang['POSTS_SHORT'] = '帖子';
 $lang['POSTED'] = '已发布';
 $lang['USERNAME'] = '用户名';
 $lang['PASSWORD'] = '密码';
+$lang['PASSWORD_SHOW_BTN'] = 'Show password';
 $lang['EMAIL'] = '邮箱';
 $lang['PM'] = '私信';
 $lang['AUTHOR'] = '作者';
@@ -233,7 +234,8 @@ $lang['RULES_VOTE_CAN'] = '你 <b>可以</b> 在本论坛参与投票';
 $lang['RULES_VOTE_CANNOT'] = '你 <b>不能</b> 在本论坛参与投票';
 $lang['RULES_MODERATE'] = '你 <b>可以</b> 管理这个论坛';
 
-$lang['NO_TOPICS_POST_ONE'] = '论坛中没有帖子。<br />单击 <b>发布新的主题</b> 链接来发个新帖。';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = '查看主题';
@@ -377,7 +379,6 @@ $lang['DELETED'] = '您的信息已删除成功。';
 $lang['POLL_DELETE'] = '你的调查已被删除成功。';
 $lang['VOTE_CAST'] = '你的票已经铸成。';
 
-$lang['TOPIC_REPLY_NOTIFICATION'] = '主题通知的答复';
 $lang['EMOTICONS'] = '表情';
 $lang['MORE_EMOTICONS'] = '看更多的表情';
 
@@ -415,10 +416,10 @@ $lang['PRIVATE_MESSAGING'] = '私人信息';
 $lang['NO_NEW_PM'] = '没有新的消息';
 
 $lang['NEW_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['NEW_PMS_DECLENSION'] = array('新消息', '新消息');
+$lang['NEW_PMS_DECLENSION'] = ['新消息', '新消息'];
 
 $lang['UNREAD_PMS_FORMAT'] = '<b>%1$s</b> %2$s'; // 1 new message
-$lang['UNREAD_PMS_DECLENSION'] = array('未读', '未读');
+$lang['UNREAD_PMS_DECLENSION'] = ['未读', '未读'];
 
 $lang['UNREAD_MESSAGE'] = '未读消息';
 $lang['READ_MESSAGE'] = '读消息';
@@ -545,11 +546,11 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = '发送电子邮件时，有人答复的一个�
 
 $lang['BOARD_LANG'] = '董事会的语言';
 $lang['GENDER'] = '性别问题';
-$lang['GENDER_SELECT'] = array(
+$lang['GENDER_SELECT'] = [
     0 => '未知',
     1 => '男性',
     2 => '女性'
-);
+];
 $lang['MODULE_OFF'] = '模块是残疾人!';
 
 $lang['BIRTHDAY'] = '生日';
@@ -591,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = '重设自动登录的关键';
 $lang['RESET_AUTOLOGIN_EXPL'] = '包括所有的地方，你已经访问了该论坛启用了自动登录';
 
 $lang['AVATAR'] = '头像';
-$lang['AVATAR_EXPLAIN'] = '显示一个小的图像以下您的详细信息，在员额。 只有一个图像可以显示在一段时间，其宽度不可能有更大比%d素，高度不大于%d素，文件大小不超过%dKB。';
+$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
 $lang['AVATAR_DELETE'] = '删除头像';
 $lang['AVATAR_DISABLE'] = '阿凡达控制的选项，用于违反<a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = '上传的头像';
@@ -723,7 +724,8 @@ $lang['GROUP_REQUEST'] = '请求参加你的小组已经取得进展。';
 $lang['GROUP_APPROVED'] = '你的请求已获批准。';
 $lang['GROUP_ADDED'] = '你已被添加到这个用户组。';
 $lang['ALREADY_MEMBER_GROUP'] = '你已经是一个成员，这个小组';
-$lang['USER_IS_MEMBER_GROUP'] = '用户已经是该组的成员';
+$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
+$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
 $lang['GROUP_TYPE_UPDATED'] = '成功地更新了小组的类型。';
 $lang['EFFECTIVE_DATE'] = '生效日期';
 
@@ -1003,7 +1005,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = '附件太大。<br />Could无法获得最大�
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = '附件太大。<br />Maximum上传尺寸：%dMB。<br />Please注意，这种大小的限定在php.ini，这意味着它的设PHP和附件Mod不能替代这种价值。'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = '扩展%s是不允许的'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = '你是不是允许后文件的扩展%s在这一论坛'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = '附件太大。<br />Max尺寸：%d'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = '对不起，但是最大filesize用于所有附件为止。 请联络委员会管理员如果你有问题。';
 $lang['TOO_MANY_ATTACHMENTS'] = '附件无法加入，因为最大。 数%d附件中的这一后期实现了'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = '附件/图像必须小于%d素广泛和%d高像素';
@@ -1057,12 +1059,14 @@ $lang['BT_ADDED'] = '加入';
 $lang['BT_REG_ON_TRACKER'] = '登记册上的跟踪器';
 $lang['BT_REG_FAIL'] = '不能登记的洪流上的跟踪器';
 $lang['BT_REG_FAIL_SAME_HASH'] = '另一个种子与同info_hash已经<a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = '删除从跟踪器';
 $lang['BT_UNREGISTERED'] = '未注册的洪流';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
 $lang['BT_REGISTERED'] = 'Torrent注册tracker<br /><br />Now你需要<a href="%s"><b>download你torrent</b></a>和运用你的BitTorrent客户选择的文件夹，与原始文件在分享作为下载通路';
 $lang['INVALID_ANN_URL'] = '无效的宣布URL[%s]<br /><br />must以<b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = '不可能添加passkey<br /><br />Torrent未注册上的跟踪器';
-$lang['PASSKEY_ERR_EMPTY'] = '不可能添加密钥(密码是空的)<br /><br />Go到<a href="%s" target="_blank"><b>your论坛profile</b></a>和生成它';
 $lang['BT_PASSKEY'] = '密码';
 $lang['BT_GEN_PASSKEY'] = '创建一个新的';
 $lang['BT_PASSKEY_VIEW'] = '显示';
@@ -1080,16 +1084,15 @@ $lang['RELEASING'] = '自我';
 $lang['SEEDING'] = '种子';
 $lang['LEECHING'] = '水蛭';
 $lang['IS_REGISTERED'] = '注册';
-$lang['MAGNET'] = '磁铁';
-$lang['DC_MAGNET'] = '搜索DC++通过的文件';
-$lang['DC_MAGNET_EXT'] = '搜索DC++通过扩展';
+$lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '状态';
 $lang['TOR_STATUS_SELECT_ACTION'] = '选择状况';
 $lang['TOR_STATUS_NOT_SELECT'] = '你没有选择地位。';
 $lang['TOR_STATUS_SELECT_ALL'] = '所有的状态';
-$lang['TOR_STATUS_NAME'] = array(
+$lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => '不检查',
     TOR_CLOSED => '关闭',
     TOR_APPROVED => '检查',
@@ -1103,7 +1106,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_TMP => '临时',
     TOR_PREMOD => '预先审核',
     TOR_REPLENISH => '补充',
-);
+];
 $lang['TOR_STATUS_FAILED'] = '这种状况不存在！';
 $lang['TORRENT_FAILED'] = '分布没有被发现的！';
 $lang['TOR_STATUS_DUB'] = '分配具有相同的状态';
@@ -1351,17 +1354,17 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[PM]';
 
-$lang['DECLENSION']['REPLIES'] = array('回复', '答复');
-$lang['DECLENSION']['TIMES'] = array('时间', '时间');
+$lang['DECLENSION']['REPLIES'] = ['回复', '答复'];
+$lang['DECLENSION']['TIMES'] = ['时间', '时间'];
 
-$lang['DELTA_TIME']['INTERVALS'] = array(
-    'seconds' => array('第二', '几秒钟'),
-    'minutes' => array('钟', '分钟'),
-    'hours' => array('小时', '小时'),
-    'mday' => array('一天', '天'),
-    'mon' => array('一个月', '几个月'),
-    'year' => array('年', '年'),
-);
+$lang['DELTA_TIME']['INTERVALS'] = [
+    'seconds' => ['第二', '几秒钟'],
+    'minutes' => ['钟', '分钟'],
+    'hours' => ['小时', '小时'],
+    'mday' => ['一天', '天'],
+    'mon' => ['一个月', '几个月'],
+    'year' => ['年', '年'],
+];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
 $lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
@@ -1541,6 +1544,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL速度';
 $lang['DL_DL_SPEED'] = 'DL速度';
 $lang['DL_PORT'] = '口';
+$lang['DL_CLIENT'] = 'Client';
 $lang['DL_FORMULA'] = '公式：传/TorrentSize';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = '停止';
@@ -1716,6 +1720,8 @@ $lang['USER_AUTH_UPDATED'] = '用户的权限已经更新，';
 $lang['GROUP_AUTH_UPDATED'] = '集团的权限已经更新，';
 
 $lang['AUTH_UPDATED'] = '权限已更新';
+$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
+$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
 $lang['CLICK_RETURN_USERAUTH'] = '点击%sHere%s回到用户的权限';
 $lang['CLICK_RETURN_GROUPAUTH'] = '点击%sHere%s回到小组的权限';
 $lang['CLICK_RETURN_FORUMAUTH'] = '点击%sHere%s回到论坛的权限';
@@ -2256,13 +2262,6 @@ $lang['RETURN_CONFIG'] = '%sReturn到Configuration%s';
 $lang['CONFIG_UPD'] = '配置更成功';
 $lang['SET_DEFAULTS'] = '恢复默';
 
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = '跟踪器';
-$lang['FORUM_CFG_TITLE'] = '论坛设置';
-$lang['TRACKER_SETTINGS'] = '跟踪设置';
-
-$lang['CHANGES_DISABLED'] = '变化无障碍(见<b>$bb_cfg[\'tracker\']</b>在config.php)';
-
 $lang['OFF_TRACKER'] = '禁止跟踪器';
 $lang['OFF_REASON'] = '禁止的原因';
 $lang['OFF_REASON_EXPL'] = '这个消息会被发送到客户当跟踪器已禁用';
@@ -2323,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = '宣布url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = '你可以定义的附加允许的网址在"includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = '禁止散网络';
 $lang['BT_DISABLE_DHT_EXPL'] = '禁止对等交流和双氢(建议对于私人网络，只有url宣布)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = '验证宣布的url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = '登记册上的跟踪器只允许的网址';
 $lang['BT_REPLACE_ANN_URL'] = '替代宣布的url';
@@ -2372,7 +2373,7 @@ $lang['TEMPLATE_DISABLE'] = '模板的残疾';
 $lang['FOR_NEW_TEMPLATE'] = '对于新的模式！';
 $lang['CHANGED'] = '改变了';
 $lang['REMOVED'] = '除去';
-$lang['QUESTION'] = '你确定要删除的吗？';
+$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
 
 $lang['CRON_LIST'] = 'Cron列表';
 $lang['CRON_ID'] = 'ID';
@@ -2407,14 +2408,14 @@ $lang['REPAIR_CRON'] = '修复计划';
 $lang['CRON_EDIT_HEAD_EDIT'] = '编辑工作';
 $lang['CRON_EDIT_HEAD_ADD'] = '增加的工作';
 $lang['CRON_SCRIPT_EXPL'] = '名称的脚本"包括/计划/工作/"';
-$lang['SCHEDULE'] = array(
+$lang['SCHEDULE'] = [
     'select' => '&raquo;选择开始',
     'hourly' => '每小时',
     'daily' => '每日',
     'weekly' => '每周',
     'monthly' => '每月',
     'interval' => '时间间隔'
-);
+];
 $lang['NOSELECT'] = '没有选择';
 $lang['RUN_DAY'] = '运行一天';
 $lang['RUN_DAY_EXPL'] = '一天时这项工作运行';
@@ -2533,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = '专题已经从论坛[b]%s[/b]论坛[b]%s[/b
 $lang['BOT_MESS_SPLITS'] = '主题已经分裂。 新的话题-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '主题已被拆分从[b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = '下载的电话';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = '注意到要求回归的分布';
 $lang['CALLSEED_SUBJECT'] = '下载帮助%s';
 $lang['CALLSEED_TEXT'] = '你好！[br]Your帮助是必要的，释放[url=%s]%s[/url][br]if你决定帮助，但是已经被删除的种子文件，可以下载[url=%s]this[/url][br][br]i希望你的帮助！';
@@ -2541,17 +2542,22 @@ $lang['CALLSEED_MSG_OK'] = '信息已经发送到所有这些人释放，下载�
 $lang['CALLSEED_MSG_SPAM'] = '请求已经被一旦成功地发(可能不是你)<br /><br />The下次有机会发送请求被<b>%s</b>的。';
 $lang['CALLSEED_HAVE_SEED'] = '主题不需要帮助(<b>Seeders:</b> %d)';
 
-$lang['LOG_ACTION']['LOG_TYPE'] = array(
+$lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_delete' => '主题：<br /> <b>deleted</b>',
     'mod_topic_move' => '主题：<br /> <b>moved</b>',
     'mod_topic_lock' => '主题：<br /> <b>closed</b>',
     'mod_topic_unlock' => '主题：<br /> <b>opened</b>',
     'mod_topic_split' => '主题：<br /> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => '员额：<br /> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
     'adm_user_delete' => '用户：<br /> <b>deleted</b>',
     'adm_user_ban' => '用户：<br /> <b>ban</b>',
     'adm_user_unban' => '用户：<br /> <b>unban</b>',
-);
+];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = '所有动作';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = '动作记录：搜索选项';
@@ -2690,28 +2696,28 @@ $lang['MC_LEGEND'] = '类型的评论';
 $lang['MC_FAQ'] = '输入的文本将会显示在这个消息';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s在你的消息";
 $lang['MC_COMMENT_PM_MSG'] = "你好，[b]%s[/b]\nModerator留在你的消息[url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
-$lang['MC_COMMENT'] = array(
-    0 => array(
+$lang['MC_COMMENT'] = [
+    0 => [
         'title' => '',
         'type' => '删除的评论',
-    ),
-    1 => array(
+    ],
+    1 => [
         'title' => '评%s',
         'type' => '评论',
-    ),
-    2 => array(
+    ],
+    2 => [
         'title' => '信息从%s',
         'type' => '的信息',
-    ),
-    3 => array(
+    ],
+    3 => [
         'title' => '警告%s',
         'type' => '警告',
-    ),
-    4 => array(
+    ],
+    4 => [
         'title' => '违反自%s',
         'type' => '违反',
-    ),
-);
+    ],
+];
 
 $lang['SITEMAP'] = '网站地图';
 $lang['SITEMAP_ADMIN'] = '管理网站地图';
@@ -2752,7 +2758,7 @@ $lang['HASH_NOT_FOUND'] = '释放与哈希%s找不到';
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]本頁文字編輯於：[url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]。這一行只能看到管理員。[/align]';
 $lang['TERMS_EXPLAIN'] = '在这一页面，可以指定的案文的基本规则的资源显示用户使用。';
 
-$lang['TR_STATS'] = array(
+$lang['TR_STATS'] = [
     0 => '不活动的用户在30天',
     1 => '不活动的用户的90天',
     2 => '中等大小的分布上的跟踪器的(许多兆字节)',
@@ -2761,7 +2767,7 @@ $lang['TR_STATS'] = array(
     5 => '多少手其中，播种的超过5种子',
     6 => '我们中有多少上传者(的那些人充满了至少1手)',
     7 => '有多少上传过去30天',
-);
+];
 
 $lang['NEW_POLL_START'] = '调查启用';
 $lang['NEW_POLL_END'] = '调查完成';
@@ -2785,13 +2791,14 @@ $lang['NEW_POLL_M_EXPLAIN'] = '每个行对应于一个答案(最大值';
 $lang['OLD_BROWSER'] = '您使用的是过时的浏览器。 该网站将不会显示正确的。';
 $lang['GO_BACK'] = '上一页';
 
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
 $lang['UPLOAD_ERROR_COMMON'] = '文件上传错误';
 $lang['UPLOAD_ERROR_SIZE'] = '上载的文件超过最大尺寸的%s';
 $lang['UPLOAD_ERROR_FORMAT'] = '无效的文件种类型的图像';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = '图像的尺寸超过最大允许%sx%spx';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = '上载的文件不是一个图像';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = '扩展%s下载的是不允许的';
-$lang['UPLOAD_ERRORS'] = array(
+$lang['UPLOAD_ERRORS'] = [
     UPLOAD_ERR_INI_SIZE => '你已经超过了最大的文件大小的服务器',
     UPLOAD_ERR_FORM_SIZE => '你已经超过了最大的文件上载大小',
     UPLOAD_ERR_PARTIAL => '该文件部分下载的',
@@ -2799,7 +2806,7 @@ $lang['UPLOAD_ERRORS'] = array(
     UPLOAD_ERR_NO_TMP_DIR => '临时目录中找不到',
     UPLOAD_ERR_CANT_WRITE => '写错误',
     UPLOAD_ERR_EXTENSION => '停止上传的延伸',
-);
+];
 
 // Captcha
 $lang['CAPTCHA'] = '检查你是不是机器人';
@@ -2814,7 +2821,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => '您加入用戶組的請求已被批准',
     'GROUP_REQUEST' => '加入您的用戶組的請求',
     'PRIVMSG_NOTIFY' => '新私信',
-    'TOPIC_NOTIFY' => '線程 %s中的響應通知',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
     'USER_ACTIVATE' => '帳戶重新激活',
     'USER_ACTIVATE_PASSWD' => '確認新密碼',
     'USER_WELCOME' => '歡迎來到網站 %s',

@@ -262,7 +262,7 @@ define('SHOW_PEERS_NAMES', 2);
 define('SHOW_PEERS_FULL', 3);
 
 define('SEARCH_ID_LENGTH', 12);
-define('ACTKEY_LENGHT', 32);
+define('ACTKEY_LENGTH', 32);
 define('SID_LENGTH', 20);
 define('LOGIN_KEY_LENGTH', 32);
 define('USERNAME_MIN_LENGTH', 3);
@@ -292,10 +292,10 @@ define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 define('HTML_SELECT_MAX_LENGTH', 60);
 define('HTML_WBR_LENGTH', 12);
 
-define('HTML_CHECKED', ' checked="checked" ');
-define('HTML_DISABLED', ' disabled="disabled" ');
-define('HTML_READONLY', ' readonly="readonly" ');
-define('HTML_SELECTED', ' selected="selected" ');
+define('HTML_CHECKED', ' checked ');
+define('HTML_DISABLED', ' disabled ');
+define('HTML_READONLY', ' readonly ');
+define('HTML_SELECTED', ' selected ');
 
 define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');
 
@@ -319,20 +319,6 @@ function send_no_cache_headers()
     header('Cache-Control: no-store, no-cache, must-revalidate');
     header('Cache-Control: post-check=0, pre-check=0', false);
     header('Pragma: no-cache');
-}
-
-/**
- * Convert special characters to HTML entities
- *
- * @param $txt
- * @param bool $double_encode
- * @param int $quote_style
- * @param ?string $charset
- * @return string
- */
-function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
-{
-    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
 }
 
 /**

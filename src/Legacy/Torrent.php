@@ -107,7 +107,7 @@ class Torrent
                 bb_die($lang['TOR_NOT_FOUND']);
             }
             if (!$torrent['tracker_status']) {
-                bb_die('Torrent already unregistered');
+                bb_die($lang['BT_UNREGISTERED_ALREADY']);
             }
             self::torrent_auth_check($forum_id, $torrent['poster_id']);
         }
@@ -275,7 +275,6 @@ class Torrent
     {
         global $bb_cfg, $lang, $reg_mode;
 
-        $announce_urls = [];
         $attach_id = (int)$attach_id;
         $reg_mode = $mode;
 
@@ -287,74 +286,101 @@ class Torrent
         $topic_id = $torrent['topic_id'];
         $forum_id = $torrent['forum_id'];
         $poster_id = $torrent['poster_id'];
-        $info_hash = null;
+
+        $info_hash = $info_hash_v2 = null;
+        $info_hash_sql = $info_hash_v2_sql = $info_hash_where = null;
+        $v2_hash = null;
 
         if ($torrent['extension'] !== TORRENT_EXT) {
-            return self::torrent_error_exit($lang['NOT_TORRENT']);
+            self::torrent_error_exit($lang['NOT_TORRENT']);
         }
         if (!$torrent['allow_reg_tracker']) {
-            return self::torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
+            self::torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
         }
         if ($post_id != $torrent['topic_first_post_id']) {
-            return self::torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
+            self::torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
         }
         if ($torrent['tracker_status']) {
-            return self::torrent_error_exit($lang['ALREADY_REG']);
+            self::torrent_error_exit($lang['ALREADY_REG']);
         }
         if ($this_topic_torrents = self::get_registered_torrents($topic_id, 'topic')) {
-            return self::torrent_error_exit($lang['ONLY_1_TOR_PER_TOPIC']);
+            self::torrent_error_exit($lang['ONLY_1_TOR_PER_TOPIC']);
         }
 
         self::torrent_auth_check($forum_id, $torrent['poster_id']);
 
         $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
-        $file_contents = file_get_contents($filename);
 
         if (!is_file($filename)) {
-            return self::torrent_error_exit('File name error');
+            self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT']);
         }
-        if (!file_exists($filename)) {
-            return self::torrent_error_exit('File not exists');
-        }
-        if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
-            return self::torrent_error_exit('This is not a bencoded file');
+
+        $file_contents = file_get_contents($filename);
+
+        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
+            self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
         if ($bb_cfg['bt_disable_dht']) {
             $tor['info']['private'] = (int)1;
             $fp = fopen($filename, 'wb+');
-            fwrite($fp, \SandFox\Bencode\Bencode::encode($tor));
+            fwrite($fp, \Arokettu\Bencode\Bencode::encode($tor));
             fclose($fp);
         }
 
         if ($bb_cfg['bt_check_announce_url']) {
+            $announce_urls = [];
             include INC_DIR . '/torrent_announce_urls.php';
 
-            $ann = (@$tor['announce']) ? $tor['announce'] : '';
+            $ann = $tor['announce'] ?? '';
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
             if (!$ann || !\in_array($ann, $announce_urls)) {
                 $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
-                return self::torrent_error_exit($msg);
+                self::torrent_error_exit($msg);
+            }
+            unset($announce_urls);
+        }
+
+        $info = $tor['info'] ?? [];
+
+        if (!isset($info['name'], $info['piece length'])) {
+            self::torrent_error_exit($lang['TORFILE_INVALID']);
+        }
+
+        // Check if torrent contains info_hash v2 or v1
+        if (($info['meta version'] ?? null) == 2) {
+            if (is_array($info['file tree'] ?? null)) {
+                $bt_v2 = true;
             }
         }
-
-        $info = (@$tor['info']) ? $tor['info'] : [];
-
-        if (!isset($info['name'], $info['piece length'], $info['pieces']) || \strlen($info['pieces']) % 20 != 0) {
-            return self::torrent_error_exit($lang['TORFILE_INVALID']);
+        if (isset($info['pieces'])) {
+            $bt_v1 = true;
+        }
+        if ($bb_cfg['tracker']['disabled_v2_torrents'] && isset($bt_v2) && !isset($bt_v1)) {
+            self::torrent_error_exit($lang['BT_V2_ONLY_DISALLOWED']);
         }
 
-        $info_hash = pack('H*', sha1(\SandFox\Bencode\Bencode::encode($info)));
-        $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-        $info_hash_md5 = md5($info_hash);
+        // Getting info_hash v1
+        if (isset($bt_v1)) {
+            $info_hash = hash('sha1', \Arokettu\Bencode\Bencode::encode($info), true);
+            $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+            $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
+        }
+
+        // Getting info_hash v2
+        if (isset($bt_v2)) {
+            $info_hash_v2 = hash('sha256', \Arokettu\Bencode\Bencode::encode($info), true);
+            $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
+            $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
+        }
 
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {
-            self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0]);
+            self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash ?? hex2bin(substr($v2_hash, 0, 40))), 'id' => $topic_id, 'freetorrent' => 0]);
         }
 
-        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
+        if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
             $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
             bb_die($msg);
             set_die_append_msg($forum_id, $topic_id);
@@ -364,30 +390,48 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        } elseif (isset($info['files']) && \is_array($info['files'])) {
+        } elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
-                $totallen += (float)$f['length'];
+                // Exclude padding files
+                if (($f['attr'] ?? null) !== 'p') {
+                    $totallen += (float)$f['length'];
+                }
             }
+        } elseif (isset($bt_v2)) {
+            $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
+                $size = 0;
+
+                foreach ($array as $key => $value) {
+                    if (!isset($value[''])) {
+                        $size += $fileTreeSize($value);
+                    } else {
+                        $size += (int)$value['']['length'];
+                    }
+                }
+
+                return $size;
+            };
+
+            $totallen = (float)$fileTreeSize($info['file tree']);
         } else {
-            return self::torrent_error_exit($lang['TORFILE_INVALID']);
+            self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
         $size = sprintf('%.0f', (float)$totallen);
 
-        $columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status';
-        $values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
+        $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status';
+        $values = "'$info_hash_sql', '$info_hash_v2_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
 
         $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 
         if (!DB()->sql_query($sql)) {
             $sql_error = DB()->sql_error();
 
+            // Duplicate entry
             if ($sql_error['code'] == 1062) {
-                // Duplicate entry
-
-                return self::torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
+                self::torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
             }
-            bb_die('Could not register torrent on tracker');
+            bb_die($lang['BT_REG_FAIL']);
         }
 
         // update tracker status for this attachment
@@ -450,12 +494,17 @@ class Torrent
         }
 
         // Get $topic_id
-        $topic_id_sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$post_id;
+        $topic_id_sql = 'SELECT p.topic_id, t.topic_title
+                 FROM ' . BB_POSTS . ' p
+                 JOIN ' . BB_TOPICS . ' t ON p.topic_id = t.topic_id
+                 WHERE p.post_id = ' . (int)$post_id;
+
         if (!($topic_id_result = DB()->sql_query($topic_id_sql))) {
             bb_die('Could not query post information');
         }
         $topic_id_row = DB()->sql_fetchrow($topic_id_result);
         $topic_id = $topic_id_row['topic_id'];
+        $topic_title = $topic_id_row['topic_title'];
 
         if (!$attachment['tracker_status']) {
             bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
@@ -496,8 +545,8 @@ class Torrent
         $ann_url = $bb_cfg['bt_announce_url'];
 
         $file_contents = file_get_contents($filename);
-        if (!$tor = \SandFox\Bencode\Bencode::decode($file_contents)) {
-            bb_die('This is not a bencoded file');
+        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
+            bb_die($lang['TORFILE_INVALID']);
         }
 
         $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
@@ -507,18 +556,27 @@ class Torrent
             $tor['announce'] = $announce;
         }
 
+        // Get additional announce urls
+        $additional_announce_urls = $announce_urls_add = [];
+        include INC_DIR . '/torrent_announce_urls.php';
+
+        foreach ($additional_announce_urls as $additional_announce_url) {
+            $announce_urls_add[] = [$additional_announce_url];
+        }
+        unset($additional_announce_urls);
+
         // Delete all additional urls
         if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
             unset($tor['announce-list']);
         } elseif (isset($tor['announce-list'])) {
-            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]]);
+            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]], $announce_urls_add);
         }
 
         // Add retracker
         if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
                 if (!isset($tor['announce-list'])) {
-                    $tor['announce-list'] = [[$announce], [$bb_cfg['tracker']['retracker_host']]];
+                    $tor['announce-list'] = [[$announce], $announce_urls_add, [$bb_cfg['tracker']['retracker_host']]];
                 } else {
                     $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
                 }
@@ -539,8 +597,9 @@ class Torrent
         unset($tor['comment.utf-8']);
 
         // Send torrent
-        $output = \SandFox\Bencode\Bencode::encode($tor);
-        $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.torrent';
+        $output = \Arokettu\Bencode\Bencode::encode($tor);
+
+        $dl_fname = wbr($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.torrent';
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
@@ -649,9 +708,9 @@ class Torrent
      *
      * @param string $message
      *
-     * @return bool
+     * @return void
      */
-    private static function torrent_error_exit($message)
+    private static function torrent_error_exit(string $message): void
     {
         global $reg_mode, $return_message, $lang;
 
@@ -665,8 +724,6 @@ class Torrent
         }
 
         bb_die($msg . $message);
-
-        return true;
     }
 
     /**
@@ -739,7 +796,7 @@ class Torrent
     }
 
     /**
-     * Returns the user's passkey, false otherwise
+     * Returns the user passkey, false otherwise
      *
      * @param int|string $user_id
      * @return bool|string

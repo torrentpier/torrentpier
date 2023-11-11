@@ -22,16 +22,16 @@ function get_img_size_format($width, $height)
     $max_width = 400;
 
     if ($width > $height) {
-        return array(
+        return [
             round($width * ($max_width / $width)),
             round($height * ($max_width / $width))
-        );
+        ];
     }
 
-    return array(
+    return [
         round($width * ($max_width / $height)),
         round($height * ($max_width / $height))
-    );
+    ];
 }
 
 /**
@@ -54,42 +54,49 @@ function is_imagick()
  */
 function get_supported_image_types($type)
 {
-    if (@extension_loaded('gd')) {
-        $format = imagetypes();
-        $new_type = 0;
-
-        switch ($type) {
-            case 1:
-                $new_type = ($format & IMG_GIF) ? IMG_GIF : 0;
-                break;
-            case 2:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-                $new_type = ($format & IMG_JPG) ? IMG_JPG : 0;
-                break;
-            case 3:
-                $new_type = ($format & IMG_PNG) ? IMG_PNG : 0;
-                break;
-            case 6:
-            case 15:
-                $new_type = ($format & IMG_WBMP) ? IMG_WBMP : 0;
-                break;
-        }
-
-        return array(
-            'gd' => (bool)$new_type,
-            'format' => $new_type,
-            'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
-        );
+    // Check GD extension installed
+    if (!extension_loaded('gd')) {
+        return ['gd' => false];
     }
 
-    return array('gd' => false);
+    $format = imagetypes();
+    $new_type = 0;
+
+    switch ($type) {
+        case IMAGETYPE_GIF:
+            $new_type = ($format & IMG_GIF) ? IMG_GIF : 0;
+            break;
+        case IMAGETYPE_JPEG:
+        case IMAGETYPE_JPC:
+        case IMAGETYPE_JP2:
+        case IMAGETYPE_JPX:
+        case IMAGETYPE_JB2:
+            $new_type = ($format & IMG_JPG) ? IMG_JPG : 0;
+            break;
+        case IMAGETYPE_PNG:
+            $new_type = ($format & IMG_PNG) ? IMG_PNG : 0;
+            break;
+        case IMAGETYPE_BMP:
+            $new_type = ($format & IMG_BMP) ? IMG_BMP : 0;
+            break;
+        case IMAGETYPE_WBMP:
+            $new_type = ($format & IMG_WBMP) ? IMG_WBMP : 0;
+            break;
+        case IMAGETYPE_WEBP:
+            $new_type = ($format & IMG_WEBP) ? IMG_WEBP : 0;
+            break;
+    }
+
+    return [
+        'gd' => (bool)$new_type,
+        'format' => $new_type,
+        'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
+    ];
 }
 
 /**
  * Create thumbnail
+ * @throws Exception
  */
 function create_thumbnail($source, $new_file, $mimetype)
 {
@@ -135,9 +142,17 @@ function create_thumbnail($source, $new_file, $mimetype)
                 case IMG_PNG:
                     $image = imagecreatefrompng($source);
                     break;
+                case IMG_BMP:
+                    $image = imagecreatefrombmp($source);
+                    break;
                 case IMG_WBMP:
                     $image = imagecreatefromwbmp($source);
                     break;
+                case IMG_WEBP:
+                    $image = imagecreatefromwebp($source);
+                    break;
+                default:
+                    throw new Exception('Unknown file format: ' . $type['format']);
             }
 
             if ($type['version'] == 1 || !$attach_config['use_gd2']) {
@@ -158,9 +173,17 @@ function create_thumbnail($source, $new_file, $mimetype)
                 case IMG_PNG:
                     imagepng($new_image, $new_file);
                     break;
+                case IMG_BMP:
+                    imagebmp($new_image, $new_file);
+                    break;
                 case IMG_WBMP:
                     imagewbmp($new_image, $new_file);
                     break;
+                case IMG_WEBP:
+                    imagewebp($new_image, $new_file);
+                    break;
+                default:
+                    throw new Exception('Unknown file format: ' . $type['format']);
             }
 
             imagedestroy($new_image);

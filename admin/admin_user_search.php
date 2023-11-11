@@ -31,7 +31,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $group_list = '';
 
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('groups_exist', array());
+        $template->assign_block_vars('groups_exist', []);
 
         while ($row = DB()->sql_fetchrow($result)) {
             $group_list .= '<option value="' . $row['group_id'] . '">' . strip_tags(htmlspecialchars($row['group_name'])) . '</option>';
@@ -44,7 +44,7 @@ if (!isset($_REQUEST['dosearch'])) {
     }
     $rank_select_box = '';
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('ranks_exist', array());
+        $template->assign_block_vars('ranks_exist', []);
         while ($row = DB()->sql_fetchrow($result)) {
             $rank = $row['rank_title'];
             $rank_id = $row['rank_id'];
@@ -63,10 +63,10 @@ if (!isset($_REQUEST['dosearch'])) {
         bb_die('Could not select forum data');
     }
 
-    $forums = array();
+    $forums = [];
 
     if (DB()->num_rows($result) != 0) {
-        $template->assign_block_vars('forums_exist', array());
+        $template->assign_block_vars('forums_exist', []);
 
         $last_cat_id = -1;
         $forums_list = '';
@@ -81,14 +81,14 @@ if (!isset($_REQUEST['dosearch'])) {
         }
     }
 
-    $lastvisited = array(1, 7, 14, 30, 60, 120, 365, 500, 730, 1000);
+    $lastvisited = [1, 7, 14, 30, 60, 120, 365, 500, 730, 1000];
     $lastvisited_list = '';
 
     foreach ($lastvisited as $days) {
         $lastvisited_list .= '<option value="' . $days . '">' . $days . ' ' . (($days > 1) ? $lang['DAYS'] : $lang['DAY']) . '</option>';
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ADMIN_USER_SEARCH_MAIN' => true,
 
         'YEAR' => date('Y'),
@@ -102,8 +102,8 @@ if (!isset($_REQUEST['dosearch'])) {
         'LASTVISITED_LIST' => $lastvisited_list,
 
         'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
-        'S_SEARCH_ACTION' => 'admin_user_search.php',
-    ));
+        'S_SEARCH_ACTION' => 'admin_user_search.php'
+    ]);
 } else {
     $mode = '';
 
@@ -868,7 +868,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $pagination = '';
 
     if ($page > 1) {
-        $pagination .= '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page - 1) . '">' . $lang['PREVIOUS'] . '</a>';
+        $pagination .= '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page - 1) . '">' . $lang['BACK'] . '</a>';
     }
     if ($page < $num_pages) {
         $pagination .= ($pagination == '') ? '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>' : ' | <a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>';
@@ -876,7 +876,7 @@ if (!isset($_REQUEST['dosearch'])) {
     if ($num_pages > 2) {
         $pagination .= '&nbsp;&nbsp;<input type="text" name="page" maxlength="5" size="2" class="post" />&nbsp;<input type="submit" name="submit" value="' . $lang['GO'] . '" class="post" />';
     }
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ADMIN_USER_SEARCH_RESULTS' => true,
 
         'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], $page, $num_pages),
@@ -890,7 +890,7 @@ if (!isset($_REQUEST['dosearch'])) {
         'U_LASTVISIT' => ($sort == 'lastvisit') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=lastvisit&order=$order",
 
         'S_POST_ACTION' => "$base_url&sort=$sort&order=$order"
-    ));
+    ]);
 
     if (!$result = DB()->sql_query($select_sql)) {
         bb_die('Could not select user data');
@@ -912,7 +912,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     unset($banned);
 
-    $banned = array();
+    $banned = [];
 
     while ($row = DB()->sql_fetchrow($result)) {
         $banned[$row['user_id']] = true;
@@ -921,12 +921,12 @@ if (!isset($_REQUEST['dosearch'])) {
     for ($i = 0, $iMax = count($rowset); $i < $iMax; $i++) {
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $template->assign_block_vars('userrow', array(
+        $template->assign_block_vars('userrow', [
             'ROW_CLASS' => $row_class,
             'USER' => profile_url($rowset[$i]),
             'EMAIL' => $rowset[$i]['user_email'],
             'JOINDATE' => bb_date($rowset[$i]['user_regdate']),
-            'LASTVISIT' => bb_date($rowset[$i]['user_lastvisit']),
+            'LASTVISIT' => $rowset[$i]['user_lastvisit'] ? bb_date($rowset[$i]['user_lastvisit']) : $lang['NEVER'],
             'POSTS' => $rowset[$i]['user_posts'],
             'BAN' => (!isset($banned[$rowset[$i]['user_id']])) ? $lang['NOT_BANNED'] : $lang['BANNED'],
             'ABLED' => $rowset[$i]['user_active'] ? $lang['ENABLED'] : $lang['DISABLED'],
@@ -934,7 +934,7 @@ if (!isset($_REQUEST['dosearch'])) {
             'U_VIEWPOSTS' => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
             'U_MANAGE' => '../profile.php?mode=editprofile&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'] . '&admin=1',
             'U_PERMISSIONS' => 'admin_ug_auth.php?mode=user&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'],
-        ));
+        ]);
     }
 }
 

@@ -19,9 +19,9 @@ $html = '';
 switch ($mode) {
     case 'birthday_week':
         $stats = $datastore->get('stats');
-        $datastore->enqueue(array(
-            'stats',
-        ));
+        $datastore->enqueue([
+            'stats'
+        ]);
 
         $users = [];
 
@@ -37,9 +37,9 @@ switch ($mode) {
 
     case 'birthday_today':
         $stats = $datastore->get('stats');
-        $datastore->enqueue(array(
-            'stats',
-        ));
+        $datastore->enqueue([
+            'stats'
+        ]);
 
         $users = [];
 
@@ -56,12 +56,12 @@ switch ($mode) {
     case 'get_forum_mods':
         $forum_id = (int)$this->request['forum_id'];
 
-        $datastore->enqueue(array(
+        $datastore->enqueue([
             'moderators',
-            'cat_forums',
-        ));
+            'cat_forums'
+        ]);
 
-        $moderators = array();
+        $moderators = [];
         $mod = $datastore->get('moderators');
 
         if (isset($mod['mod_users'][$forum_id])) {
@@ -72,7 +72,7 @@ switch ($mode) {
 
         if (isset($mod['mod_groups'][$forum_id])) {
             foreach ($mod['mod_groups'][$forum_id] as $group_id) {
-                $moderators[] = '<a href="' . "group.php?" . POST_GROUPS_URL . "=" . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
+                $moderators[] = '<a href="' . GROUP_URL . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
             }
         }
 
@@ -80,22 +80,6 @@ switch ($mode) {
         $html .= ($moderators) ? implode(', ', $moderators) : $lang['NONE'];
         unset($moderators, $mod);
         $datastore->rm('moderators');
-        break;
-
-    case 'change_tz':
-        $tz = (int)$this->request['tz'];
-        if ($tz < -12) {
-            $tz = -12;
-        }
-        if ($tz > 13) {
-            $tz = 13;
-        }
-        if ($tz != $bb_cfg['board_timezone']) {
-            // Set current user timezone
-            DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id']);
-            $bb_cfg['board_timezone'] = $tz;
-            \TorrentPier\Sessions::cache_rm_user_sessions($userdata['user_id']);
-        }
         break;
 
     case 'get_traf_stats':

@@ -22,6 +22,12 @@
       "email": "roman25052006.kelesh@gmail.com",
       "homepage": "https://github.com/belomaxorka",
       "role": "Developer"
+    },
+    {
+      "name": "kovalensky",
+      "email": "kovalensky@evergarden.ru",
+      "homepage": "https://github.com/kovalensky",
+      "role": "Developer"
     }
   ],
   "support": {
@@ -30,24 +36,24 @@
     "forum": "https://torrentpier.com"
   },
   "require": {
-    "php": "^7.4 || ^8.0",
-    "arokettu/bencode": "^1.8",
-    "bugsnag/bugsnag": "v3.29.1",
-    "egulias/email-validator": "^3.2",
+    "php": "^8.1",
+    "arokettu/bencode": "^4.1.0",
+    "bugsnag/bugsnag": "^v3.29.1",
+    "egulias/email-validator": "^4.0.1",
     "filp/whoops": "^2.15",
     "gigablah/sphinxphp": "2.0.8",
-    "google/recaptcha": "^1.2",
-    "guzzlehttp/guzzle": "^7.5",
-    "guzzlehttp/psr7": "^2.4",
+    "google/recaptcha": "^1.3",
+    "guzzlehttp/guzzle": "^7.8",
+    "guzzlehttp/psr7": "^2.6",
     "longman/ip-tools": "1.2.1",
-    "monolog/monolog": "^2.9",
-    "samdark/sitemap": "2.4.0",
-    "symfony/mailer": "^5.4",
-    "symfony/polyfill": "v1.27.0",
+    "monolog/monolog": "^3.4",
+    "samdark/sitemap": "2.4.1",
+    "symfony/mailer": "^6.3",
+    "symfony/polyfill": "v1.28.0",
     "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {
-    "symfony/var-dumper": "^5.4"
+    "symfony/var-dumper": "^6.3"
   },
   "autoload": {
     "psr-4": {
