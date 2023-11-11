@@ -226,6 +226,7 @@ table.forums {
 
 .f_icon {
   width: 46px;
+  text-align: center;
   padding: 6px 0 !important;
 }
 
