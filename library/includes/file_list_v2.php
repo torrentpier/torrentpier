@@ -67,7 +67,8 @@ $data = [
     'client' => htmlCHR(substr($tor['created by'] ?? 'unknown client', 0, 20)),
     'size' => humn_size($files['size']),
     'hash' => bin2hex($row['info_hash_v2']),
-    'date' => (isset($tor['creation date']) && is_numeric($tor['creation date'])) ? delta_time($tor['creation date']) : 'unknown'
+    'date' => (isset($tor['creation date']) && is_numeric($tor['creation date'])) ? delta_time($tor['creation date']) : 'unknown',
+    'site_url' => FULL_URL
 ];
 
 echo <<<EOF
@@ -78,6 +79,7 @@ echo <<<EOF
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="index, follow, noarchive">
 <meta name="description" content="File listing for topic - $topic_id | {$data['name']} ({$data['size']})">
+<link rel="shortcut icon" href="{$data['site_url']}favicon.png" type="image/x-icon">
 
 <title>{$data['name']} ({$data['size']}) | {$data['hash']} | {$bb_cfg['sitename']}</title>
 </head>
