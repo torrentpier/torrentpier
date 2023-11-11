@@ -1234,7 +1234,7 @@ function get_user_torrent_client(string $peerId): mixed
 
     if (!empty($bestMatchLength) && !empty($bestMatch)) {
         $clientIconPath = 'styles/images/clients/' . $bestMatch . $iconExtension;
-        if (file_exists($clientIconPath)) {
+        if (is_file($clientIconPath)) {
             return '<img width="auto" height="auto" style="display: inline !important; vertical-align: middle;" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peerId . '">';
         } else {
             return $bestMatch;
