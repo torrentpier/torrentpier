@@ -66,90 +66,88 @@ function show_forum_mod_options ()
 	ajax.in_moderation = true;
 }
 
-function edit_topic_title (topic_id)
-{
-	if (ajax.in_title_edit) return false;
+function edit_topic_title(topic_id) {
+    if (ajax.in_title_edit) return false;
 
-	var $tt_td = $('td#'+topic_id).siblings('td.tt');
-	var tt_text = $tt_td.find('.tt-text').text();
+    var $tt_td = $('td#' + topic_id).siblings('td.tt');
+    var tt_text = $tt_td.find('.tt-text').text();
 
-	$tt_td.attr({id: 'tte-'+topic_id});
-	ajax.tte_cur_topic_id = topic_id;
-	ajax.tte_orig_html = $tt_td.html();
+    $tt_td.attr({id: 'tte-'+topic_id});
+    ajax.tte_cur_topic_id = topic_id;
+    ajax.tte_orig_html = $tt_td.html();
 
-	$tt_td.html( $('#tt-edit-tpl').html() );
-	$('.tt-edit-input', $tt_td).val(tt_text).focus();
+    $tt_td.html($('#tt-edit-tpl').html());
+    $('.tt-edit-input', $tt_td).val(tt_text).focus();
 
-	ajax.in_title_edit = true;
+    ajax.in_title_edit = true;
 }
 
-function tte_submit (mode)
-{
-	var topic_id = ajax.tte_cur_topic_id;
-	var $tt_td = $('#tte-'+topic_id);
-	var topic_title = $('.tt-edit-input', $tt_td).val();
+function tte_submit(mode) {
+    var topic_id = ajax.tte_cur_topic_id;
+    var $tt_td = $('#tte-' + topic_id);
+    var topic_title = $('.tt-edit-input', $tt_td).val();
 
-	if (mode == 'save') {
-		ajax.edit_topic_title(topic_id, topic_title);
-	}
-	else {
-		$tt_td.html(ajax.tte_orig_html);
-		$('.tt-text').addClass('folded2 tLink')
-			.click(function(){ ajax.view_post(topic_id, this); return false; });
-	}
-	ajax.in_title_edit = false;
+    if (mode == 'save') {
+        ajax.edit_topic_title(topic_id, topic_title);
+    } else {
+        $tt_td.html(ajax.tte_orig_html);
+        $('.tt-text').addClass('folded2 tLink').click(function () {
+            ajax.view_post(topic_id, this);
+            return false;
+        });
+    }
+    ajax.in_title_edit = false;
 }
 
-ajax.edit_topic_title = function(topic_id, topic_title) {
-	ajax.exec({
-	    action      : 'mod_action',
-		mode        : 'edit_topic_title',
-		topic_id    : topic_id,
-		topic_title : topic_title
-	});
+ajax.edit_topic_title = function (topic_id, topic_title) {
+    ajax.exec({
+        action: 'mod_action',
+        mode: 'edit_topic_title',
+        topic_id: topic_id,
+        topic_title: topic_title
+    });
 };
 
-function mod_action (mode)
-{
-	var topics = 0;
-	$('input.topic-chbox:checked').each(function(){
-		topics += ','+ this.value;
-	});
-	if(!topics){
-		alert('{L_NONE_SELECTED}');
-		return false;
-	}
-	if(mode == 'tor_status'){
-		status = $('#st option:selected').val();
-		if(status == '-1'){
-			alert('{L_TOR_STATUS_NOT_SELECT}');
-			return false;
-		}
-		ajax.mod_action(topics, mode, status);
-	}
-	return true;
+function mod_action(mode) {
+    var topics = 0;
+    $('input.topic-chbox:checked').each(function () {
+        topics += ',' + this.value;
+    });
+    if (!topics) {
+        alert('{L_NONE_SELECTED}');
+        return false;
+    }
+    if (mode == 'tor_status') {
+        status = $('#st option:selected').val();
+        if (status == '-1') {
+            alert('{L_TOR_STATUS_NOT_SELECT}');
+            return false;
+        }
+        ajax.mod_action(topics, mode, status);
+    }
+    return true;
 }
 
-ajax.mod_action = function(topic_ids, mode, status) {
-	ajax.exec({
-		action    : 'mod_action',
-		mode      : mode,
-		topic_ids : topic_ids,
-		status    : status
-	});
+ajax.mod_action = function (topic_ids, mode, status) {
+    ajax.exec({
+        action: 'mod_action',
+        mode: mode,
+        topic_ids: topic_ids,
+        status: status
+    });
 };
 
-ajax.callback.mod_action = function(data) {
-	if(data.topics) {
-		for(i=0; i < data.topics.length; i++) {
-			$('#status-'+ data.topics[i]).html(data.status);
-		}
-	}
-	if(data.topic_title) {
-		var $tt_td = $('#tte-'+data.topic_id);
-		$tt_td.html(ajax.tte_orig_html);
-		$('.tt-text', $tt_td).html(data.topic_title);
-	}
+ajax.callback.mod_action = function (data) {
+    if (data.topics) {
+        for (i = 0; i < data.topics.length; i++) {
+            $('#status-' + data.topics[i]).html(data.status);
+        }
+    }
+    if (data.topic_title) {
+        var $tt_td = $('#tte-' + data.topic_id);
+        $tt_td.html(ajax.tte_orig_html);
+        $('.tt-text', $tt_td).html(data.topic_title);
+    }
 };
 </script>
 
