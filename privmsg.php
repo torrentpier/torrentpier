@@ -668,11 +668,11 @@ if ($mode == 'read') {
                 do {
                     switch ($row['privmsgs_type']) {
                         case PRIVMSGS_NEW_MAIL:
-                            $update_users['new'][$row['privmsgs_to_userid']]++;
+                            ($update_users['new'][$row['privmsgs_to_userid']] ??= 0) + 1;
                             break;
 
                         case PRIVMSGS_UNREAD_MAIL:
-                            $update_users['unread'][$row['privmsgs_to_userid']]++;
+                            ($update_users['unread'][$row['privmsgs_to_userid']] ??= 0) + 1;
                             break;
                     }
                 } while ($row = DB()->sql_fetchrow($result));
@@ -778,7 +778,7 @@ if ($mode == 'read') {
 
     if ($submit) {
         if (!empty($_POST['username'])) {
-            $to_userdata = get_userdata($_POST['username']);
+            $to_userdata = get_userdata($_POST['username'], true);
 
             if (!$to_userdata || $to_userdata['user_id'] == GUEST_UID) {
                 $error = true;
