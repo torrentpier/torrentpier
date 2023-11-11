@@ -69,7 +69,7 @@ var user = {
 };
 
 <!-- IF JUMPBOX -->
-$(document).ready(function(){
+$(document).ready(function () {
     $("div.jumpbox").html('\
 		<span id="jumpbox-container"> \
 		<select id="jumpbox"> \

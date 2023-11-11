@@ -107,10 +107,10 @@ $this->store('cat_forums', $data);
 // jumpbox
 //
 if ($bb_cfg['show_jumpbox']) {
-    $data = array(
+    $data = [
         'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
         'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
-    );
+    ];
 
     $this->store('jumpbox', $data);
 }
