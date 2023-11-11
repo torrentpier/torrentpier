@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Hinzugefügt';
 $lang['BT_REG_ON_TRACKER'] = 'Registrieren Sie sich auf tracker';
 $lang['BT_REG_FAIL'] = 'Konnten Sie nicht registrieren, torrent-tracker auf';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Anderen torrent mit der gleichen info_hash bereits <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Entfernen von tracker';
 $lang['BT_UNREGISTERED'] = 'Unregistered Torrent';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Samen';
 $lang['LEECHING'] = 'Blutegel';
 $lang['IS_REGISTERED'] = 'Registriert';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Announce url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'Sie können festlegen, zusätzliche erlaubte urls "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Deaktivieren DHT-Netzwerk';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Deaktivieren Peer-Exchange-und DHT (empfohlen für private Netzwerke, die nur die url bekannt geben)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Überprüfen Sie die announce-url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registrieren Sie sich auf tracker nur erlaubte urls';
 $lang['BT_REPLACE_ANN_URL'] = 'Ersetzen Sie die announce-url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Thema wurde verschoben aus forum [b]%s[/b] f
 $lang['BOT_MESS_SPLITS'] = 'Thema wurde aufgeteilt. Neues Thema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Thema wurde geteilt von [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Heruntergeladen nennen';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Nehmen Sie Abmahnung mit Aufforderung zur Rückgabe der Verteilung';
 $lang['CALLSEED_SUBJECT'] = 'Download-Hilfe %s';
 $lang['CALLSEED_TEXT'] = 'Hallo![br]Your Hilfe gebraucht wird in der Veröffentlichung [url=%s]%s[/url][br]if Sie sich entscheiden zu helfen, der aber bereits gelöscht die torrent-Datei, können Sie es herunterladen, [url=%s]this[/url][br][br]i hoffe auf Eure Hilfe!';

@@ -82,22 +82,6 @@ switch ($mode) {
         $datastore->rm('moderators');
         break;
 
-    case 'change_tz':
-        $tz = (int)$this->request['tz'];
-        if ($tz < -12) {
-            $tz = -12;
-        }
-        if ($tz > 13) {
-            $tz = 13;
-        }
-        if ($tz != $bb_cfg['board_timezone']) {
-            // Set current user timezone
-            DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id']);
-            $bb_cfg['board_timezone'] = $tz;
-            \TorrentPier\Sessions::cache_rm_user_sessions($userdata['user_id']);
-        }
-        break;
-
     case 'get_traf_stats':
         $user_id = (int)$this->request['user_id'];
         $btu = get_bt_userdata($user_id);

@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'დასძინა';
 $lang['BT_REG_ON_TRACKER'] = 'რეგისტრაცია tracker';
 $lang['BT_REG_FAIL'] = 'ვერ რეგისტრაცია torrent on tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'კიდევ ერთი torrent იგივე info_hash უკვე <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ამოღება tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent არარეგისტრირებული';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'სათესლე';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'რეგისტრირებული';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'სტატუსი';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'ანონსი url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'თქვენ შეგიძლიათ განსაზღვროს დამატებითი დაშვებული მისამართები "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'გამორთე DHT network';
 $lang['BT_DISABLE_DHT_EXPL'] = 'გამორთე Peer Exchange და DHT (რეკომენდირებულია კერძო ქსელები, მხოლოდ url ანონსი)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'გადაამოწმონ აცხადებს url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'რეგისტრაცია tracker ნებადართულია მხოლოდ მისამართები';
 $lang['BT_REPLACE_ANN_URL'] = 'შეცვლის, აცხადებს url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'თემა უკვე გადავი
 $lang['BOT_MESS_SPLITS'] = 'თემა უკვე გაყოფილი. ახალი თემა - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'თემა უკვე გაყოფილი [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'გადმოწერილი დარეკეთ';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'მიაქციოს თხოვნით დაბრუნებას განაწილება';
 $lang['CALLSEED_SUBJECT'] = 'უფასო დახმარება %s';
 $lang['CALLSEED_TEXT'] = 'გამარჯობა![br]Your დახმარება არის საჭირო გამოშვების [url=%s]%s[/url][br]if თქვენ გადაწყვიტეთ, რათა დაეხმაროს, მაგრამ უკვე წაშლილი torrent ფაილი, თქვენ შეგიძლიათ გადმოწეროთ [url=%s]this[/url][br][br]i იმედი მაქვს, თქვენი დახმარება!';

@@ -391,9 +391,9 @@ $(function(){
 	<th class="{sorter: 'digit'}" title="{L_SIZE}"><b class="tbs-text">{L_SIZE}</b></th>
 	<th class="{sorter: 'digit'}" title="{L_SEEDERS}"><b class="tbs-text">S</b></th>
 	<th class="{sorter: 'digit'}" title="{L_LEECHERS}"><b class="tbs-text">L</b></th>
-	<th class="{sorter: 'digit'}" title="{L_COMPLETED} / {L_REPLIES}"><b class="tbs-text">C</b></th>
+    <th class="{sorter: false}" title="{L_REPLIES}"><b class="tbs-text">{L_REPLIES_SHORT}</b></th>
 	<!-- IF SHOW_SPEED -->
-	<th class="{sorter: false }" title="{L_DL_SPEED}"><b class="tbs-text">SP</b></th>
+	<th class="{sorter: false}" title="{L_DL_SPEED}"><b class="tbs-text">SP</b></th>
 	<!-- ENDIF -->
 	<th class="{sorter: 'digit'}" title="{L_ADDED}"><b class="tbs-text">{L_ADDED}</b></th>
 </tr>
@@ -422,7 +422,16 @@ $(function(){
 	</td>
 	<td class="row4 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>
 	<td class="row4 leechmed" title="{L_LEECHERS}"><b>{tor.LEECHS}</b></td>
-	<td class="row4 small" title="{L_REPLIES}: {tor.REPLIES}">{tor.COMPLETED}</td>
+    <td class="row4 small" style="padding: 3px 4px 2px;">
+        <p>
+            <span title="{L_REPLIES}: {tor.REPLIES}">{tor.REPLIES}</span>
+            <span class="small"> | </span>
+            <span title="{L_VIEWS}: {tor.VIEWS}">{tor.VIEWS}</span>
+        </p>
+        <p style="padding-top: 2px" class="med" title="{L_COMPLETED}: {tor.COMPLETED}">
+            <b>{tor.COMPLETED}</b>
+        </p>
+    </td>
 	<!-- IF SHOW_SPEED -->
 	<td class="row4 nowrap">
 		<p class="seedmed">{tor.UL_SPEED}</p>

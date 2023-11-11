@@ -54,13 +54,14 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 
 // Update last seeder info in BUF
 DB()->query("
-	REPLACE INTO " . BUF_LAST_SEEDER . "
-		(topic_id, seeder_last_seen)
-	SELECT
-		topic_id, " . TIMENOW . "
-	FROM " . BB_BT_TRACKER . "
-	WHERE seeder = 1
-	GROUP BY topic_id
+    REPLACE INTO " . BUF_LAST_SEEDER . "
+        (topic_id, user_id, seeder_last_seen)
+    SELECT
+        topic_id, user_id, " . TIMENOW . "
+    FROM " . BB_BT_TRACKER . "
+    WHERE seeder = 1
+    GROUP BY topic_id, user_id
+    ORDER BY update_time DESC
 ");
 
 // Clean peers table

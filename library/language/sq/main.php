@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Shtuar';
 $lang['BT_REG_ON_TRACKER'] = 'Të regjistroheni në tracker';
 $lang['BT_REG_FAIL'] = 'Nuk mund të regjistrohen në përrua tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Një tjetër torrent me të njëjtën info_hash tashmë <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hiqni nga tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent paregjistruara';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Farë';
 $lang['LEECHING'] = 'Gjaku';
 $lang['IS_REGISTERED'] = 'Regjistruar';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusi';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Të njoftuar url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'ju mund të përcaktoni shtesë e lejuar url-në "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Çaktivizoni DHT rrjetit';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Çaktivizoni Peer Exchange dhe DHT (e rekomanduar për rrjetet private, vetëm url të njoftuar)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Të verifikuar njoftuar url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'të regjistroheni në tracker lejuar vetëm urls';
 $lang['BT_REPLACE_ANN_URL'] = 'Zëvendësojë të njoftuar url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema është lëvizur nga forumi [b]%s[/b] t
 $lang['BOT_MESS_SPLITS'] = 'Temë ka qenë e ndarë. Temë të re - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Temë ka qenë e ndarë nga [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Shkarkuar thirrjen';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Vërej me një kërkesë për kthim të shpërndarjes';
 $lang['CALLSEED_SUBJECT'] = 'Shkarko ndihmojë %s';
 $lang['CALLSEED_TEXT'] = 'Përshëndetje![br]Your ndihma është e nevojshme në lirimin [url=%s]%s[/url][br]if ju vendosni për të ndihmuar, por tashmë fshihet torrent file, ju mund të shkarkoni atë [url=%s]this[/url][br][br]i shpresë për ndihmën tuaj!';

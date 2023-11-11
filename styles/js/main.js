@@ -343,6 +343,7 @@ Ajax.prototype = {
       }
     } else if (response.error_code) {
       ajax.showErrorMsg(response.error_msg);
+      console.log(response.console_log);
       $('.loading-1').removeClass('loading-1').html('error');
     } else {
       ajax.callback[action](response);

@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Дададзена';
 $lang['BT_REG_ON_TRACKER'] = 'Зарэгістравацца на трэкеры';
 $lang['BT_REG_FAIL'] = 'Не атрымалася зарэгістраваць торэнт на трэкеры';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Іншы торэнт з такім жа info_hash ўжо <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Выдаліць з трэкера';
 $lang['BT_UNREGISTERED'] = 'Торэнт незарэгістраваных';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Насення';
 $lang['LEECHING'] = 'П\'яўка';
 $lang['IS_REGISTERED'] = 'Зарэгістраваны';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Паведаміць URL-адрас';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'вы можаце вызначыць дадатковыя дазволеных URL-адрасоў ў "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Адключыць сетку DHT ў';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Адключыць абмен пірамі і DHT (рэкамендуецца для прыватных сетак, толькі URL-адрас паведаміць)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Праверыць паведаміць URL-адрас';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'Зарэгістравацца на трэкеры дазволена толькі URL-адрасы';
 $lang['BT_REPLACE_ANN_URL'] = 'Замяніць абвясціць URL-адрас';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тэма была перанесена з ф
 $lang['BOT_MESS_SPLITS'] = 'Тэма была падзелена. Новая тэма - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тэма была падзелена з [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Запампаваў выкліку';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Прымаць паведамлення з просьбай вярнуцца на раздачу';
 $lang['CALLSEED_SUBJECT'] = 'Спампаваць дапамажыце %s';
 $lang['CALLSEED_TEXT'] = 'Добры дзень![br]Your даведка патрэбна для выхаду з [URL=%s]%s[/url][br]if вы вырашылі дапамагчы, але ўжо выдалілі торэнт-файл, вы можаце спампаваць яго [URL=%s]this[/url][br][br]i спадзяюся на Вашу дапамогу!';

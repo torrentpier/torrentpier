@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Thêm';
 $lang['BT_REG_ON_TRACKER'] = 'Đăng ký trên theo dõi';
 $lang['BT_REG_FAIL'] = 'Không thể đăng ký torrent trên theo dõi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Một torrent với cùng một info_hash đã <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Bỏ từ theo dõi';
 $lang['BT_UNREGISTERED'] = 'Torrent không đăng ký';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Giống';
 $lang['LEECHING'] = 'Con đỉa';
 $lang['IS_REGISTERED'] = 'Đăng ký';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tình trạng';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Thông báo url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'bạn có thể xác định bổ sung cho phép url trong "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Vô hiệu hóa THIỂU';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Vô hiệu hóa trao Đổi Ngang và THIỂU (đề nghị cho mạng lưới tư nhân, chỉ có url thông báo)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Kiểm tra thông báo url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'đăng ký trên theo dõi chỉ được phép url';
 $lang['BT_REPLACE_ANN_URL'] = 'Thay thế thông báo url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Chủ đề đã được chuyển từ di�
 $lang['BOT_MESS_SPLITS'] = 'Chủ đề đã được chia. Chủ đề mới - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Chủ đề đã được chia từ [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Đã tải về cuộc gọi';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Có thông báo với một yêu cầu để trở về phân phối';
 $lang['CALLSEED_SUBJECT'] = 'Tải giúp %s';
 $lang['CALLSEED_TEXT'] = 'Xin chào![br]Your đang cần sự giúp đỡ trong việc phát hành [bạn, %s]%s[/url][br]if bạn quyết định để giúp đỡ, nhưng đã bị xóa các tập tin torrent, bạn có thể tải về nó [bạn, %s]this[/url][br][br]i hy vọng cho bạn giúp đỡ!';

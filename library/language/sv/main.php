@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Läggas till';
 $lang['BT_REG_ON_TRACKER'] = 'Registrera dig på tracker';
 $lang['BT_REG_FAIL'] = 'Kunde inte registrera sig torrent på tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'En annan torrent med samma info_hash redan <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ta bort från tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent oregistrerade';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Frö';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registrerade';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Meddela url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'du kan definiera ytterligare tillåtna webbadresser i "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Inaktivera DHT nätverk';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Inaktivera Peer Exchange och DHT (rekommenderas för privata nät, endast url, meddela)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Kontrollera announce url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registrera dig på tracker endast tillåtet webbadresser';
 $lang['BT_REPLACE_ANN_URL'] = 'Byt announce url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Ämnet har flyttats från forum [b]%s[/b] fo
 $lang['BOT_MESS_SPLITS'] = 'Ämnet har delats upp. Nytt ämne - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Ämnet har delats upp från [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Laddat samtal';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ta meddelande med en begäran att återgå till distribution';
 $lang['CALLSEED_SUBJECT'] = 'Ladda ner hjälp %s';
 $lang['CALLSEED_TEXT'] = 'Hej![br]Your hjälp behövs i utgivningen [url=%s]%s[/url][br]if du bestämmer dig för att hjälpa, men redan bort torrent-filen, kan du ladda ner det [url=%s]this[/url][br][br]i hoppas för din hjälp!';

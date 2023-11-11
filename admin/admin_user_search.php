@@ -868,7 +868,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $pagination = '';
 
     if ($page > 1) {
-        $pagination .= '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page - 1) . '">' . $lang['PREVIOUS'] . '</a>';
+        $pagination .= '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page - 1) . '">' . $lang['BACK'] . '</a>';
     }
     if ($page < $num_pages) {
         $pagination .= ($pagination == '') ? '<a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>' : ' | <a href="' . $base_url . '&sort=' . $sort . '&order=' . $order . '&page=' . ($page + 1) . '">' . $lang['NEXT'] . '</a>';
@@ -926,7 +926,7 @@ if (!isset($_REQUEST['dosearch'])) {
             'USER' => profile_url($rowset[$i]),
             'EMAIL' => $rowset[$i]['user_email'],
             'JOINDATE' => bb_date($rowset[$i]['user_regdate']),
-            'LASTVISIT' => bb_date($rowset[$i]['user_lastvisit']),
+            'LASTVISIT' => $rowset[$i]['user_lastvisit'] ? bb_date($rowset[$i]['user_lastvisit']) : $lang['NEVER'],
             'POSTS' => $rowset[$i]['user_posts'],
             'BAN' => (!isset($banned[$rowset[$i]['user_id']])) ? $lang['NOT_BANNED'] : $lang['BANNED'],
             'ABLED' => $rowset[$i]['user_active'] ? $lang['ENABLED'] : $lang['DISABLED'],

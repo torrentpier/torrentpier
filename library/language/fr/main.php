@@ -1059,6 +1059,7 @@ $lang['BT_ADDED'] = 'Ajouté';
 $lang['BT_REG_ON_TRACKER'] = 'S\'inscrire sur le tracker';
 $lang['BT_REG_FAIL'] = 'N\'a pas pu inscrire torrent sur le tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un autre torrent avec même info_hash déjà <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retirer du tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent non enregistré';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1084,7 @@ $lang['SEEDING'] = 'De la graine';
 $lang['LEECHING'] = 'Sangsue';
 $lang['IS_REGISTERED'] = 'Enregistré';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statut';
@@ -2529,7 +2531,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Le sujet a été déplacé du forum [b]%s[/b
 $lang['BOT_MESS_SPLITS'] = 'Le sujet a été divisé. Nouveau sujet - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Le sujet a été partagé à partir de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Téléchargé à l\'appel';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Prendre l\'avis d\'une demande de retour à la distribution';
 $lang['CALLSEED_SUBJECT'] = 'Télécharger aide %s';
 $lang['CALLSEED_TEXT'] = 'Bonjour![br]Your l\'aide est nécessaire dans le communiqué de [url=%s]%s[/url][br]if vous décidez d\'aider, mais déjà supprimé le fichier torrent, vous pouvez le télécharger [url=%s]this[/url][br][br]i espère pour votre aide!';

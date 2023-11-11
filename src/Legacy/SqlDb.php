@@ -845,12 +845,11 @@ class SqlDb
      * Find caller source
      *
      * @param string $mode
-     *
      * @return string
      */
-    public function debug_find_source(string $mode = ''): string
+    public function debug_find_source(string $mode = 'all'): string
     {
-        if (!SQL_PREPEND_SRC_COMM) {
+        if (!SQL_PREPEND_SRC) {
             return 'src disabled';
         }
         foreach (debug_backtrace() as $trace) {
@@ -860,6 +859,7 @@ class SqlDb
                         return $trace['file'];
                     case 'line':
                         return $trace['line'];
+                    case 'all':
                     default:
                         return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
                 }

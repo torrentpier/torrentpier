@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Ki';
 $lang['BT_REG_ON_TRACKER'] = 'Regisztrálni tracker';
 $lang['BT_REG_FAIL'] = 'Nem lehet regisztrálni, torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Egy másik torrent azonos info_hash már <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Távolítsa el a tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent regisztrált';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Mag';
 $lang['LEECHING'] = 'Pióca';
 $lang['IS_REGISTERED'] = 'Regisztrált';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Állapot';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Announce url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'megadhatunk további engedélyezett url-ek "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Tiltsa le a DHT hálózat';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Tiltsa le a Peer Exchange, valamint a DHT (ajánlott a privát hálózatok, csak url bejelenteni)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Ellenőrizze, announce url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'regisztrálni a tracker csak az engedélyezett url-ek';
 $lang['BT_REPLACE_ANN_URL'] = 'Cserélje ki announce url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Téma átkerült a fórum [b]%s[/b], hogy a 
 $lang['BOT_MESS_SPLITS'] = 'Téma már osztott. Új téma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Téma már szét a [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Letöltött hívás';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Vegye észre, azzal a kéréssel, hogy visszatérjen az engedély';
 $lang['CALLSEED_SUBJECT'] = 'Letöltés segíteni %s';
 $lang['CALLSEED_TEXT'] = 'Helló![br]Your segítségre van szükség, a kiadás [url=%s]%s[/url][br]if úgy dönt, hogy segítsen, de már törölt a torrent fájlt, akkor töltse le a [url=%s]this[/url][br][br]i remélem a segítséget!';

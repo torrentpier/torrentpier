@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Añadido';
 $lang['BT_REG_ON_TRACKER'] = 'Registrar en el tracker';
 $lang['BT_REG_FAIL'] = 'No se pudo registrar en tracker torrent';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Otro torrent con el mismo info_hash ya <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retirar del tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent no registrado';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'La semilla';
 $lang['LEECHING'] = 'Sanguijuela';
 $lang['IS_REGISTERED'] = 'Registrado';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Estatus';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Anunciar url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'puede definir adicional permitido url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Deshabilitar la red DHT';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Deshabilitar el Intercambio de Pares y DHT (recomendado para redes privadas, sólo la url de anunciar)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Compruebe anunciar url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registrar en tracker sólo se permite url';
 $lang['BT_REPLACE_ANN_URL'] = 'Reemplazar anunciar url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'El tema ha sido movido desde el foro de [b]%
 $lang['BOT_MESS_SPLITS'] = 'El tema se ha dividido. Nuevo tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'El tema se ha dividido de [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Descargar la llamada';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Tomar nota con una solicitud para volver a la distribución';
 $lang['CALLSEED_SUBJECT'] = 'Descargar ayuda %s';
 $lang['CALLSEED_TEXT'] = 'Hola![br]Your se necesita ayuda en la liberación de [url=%s]%s[/url][br]if usted decide ayudar, pero ya eliminado el archivo torrent, puede descargar de [url=%s]this[/url][br][br]i espero por su ayuda!';

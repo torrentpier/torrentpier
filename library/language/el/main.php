@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Πρόσθεσε';
 $lang['BT_REG_ON_TRACKER'] = 'Εγγραφείτε στο tracker';
 $lang['BT_REG_FAIL'] = 'Δεν θα μπορούσε να εγγραφείτε torrent στον tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Άλλο ένα torrent με το ίδιο info_hash ήδη <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Αφαιρέστε από τον ιχνηλάτη';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Σπόρων προς σπορά';
 $lang['LEECHING'] = 'Βδέλλα';
 $lang['IS_REGISTERED'] = 'Εγγεγραμμένοι';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Κατάσταση';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Announce url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'μπορείτε να ορίσετε πρόσθετες επιτρέπεται url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Disable το DHT δίκτυο';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Απενεργοποίηση Peer Exchange και DHT (συνιστάται για ιδιωτικά δίκτυα, μόνο url ανακοινώσει)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Βεβαιωθείτε ανακοινώσει url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'εγγραφείτε στο tracker επιτρέπεται μόνο διευθύνσεις url';
 $lang['BT_REPLACE_ANN_URL'] = 'Αντικαταστήστε το announce url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Το θέμα έχει μεταφερθεί 
 $lang['BOT_MESS_SPLITS'] = 'Το θέμα έχει χωριστεί. Νέο θέμα - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Το θέμα έχει χωριστεί από [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Κατέβασαν την κλήση';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Να λαμβάνουν ειδοποίηση με το αίτημα να επιστρέψει στην διανομή';
 $lang['CALLSEED_SUBJECT'] = 'Κατεβάστε βοηθήσει %s';
 $lang['CALLSEED_TEXT'] = 'Γεια σας![br]Your βοήθεια είναι απαραίτητη για την απελευθέρωση [url=%s]%s[/url][br]if αποφασίσετε να βοηθήσει, αλλά ήδη διαγραφεί το αρχείο torrent, μπορείτε να το κατεβάσετε από [url=%s]this[/url][br][br]i ελπίζω για τη βοήθειά σας!';

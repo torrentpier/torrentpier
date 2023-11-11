@@ -32,14 +32,12 @@ if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
     }
 }
 
-if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents)) {
+if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
     return $lang['TORFILE_INVALID'];
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
-if (($tor['info']['meta version'] ?? null) == 2 && is_array($tor['info']['file tree'] ?? null)) {
-    $tor_filelist = $torrent->fileTreeList($tor['info']['file tree'], $tor['info']['name'] ?? ''); // v2
-} else {
-    $tor_filelist = $torrent->get_filelist(); // v1
-}
+
+$tor_filelist = $torrent->get_filelist();
+
 $this->response['html'] = $tor_filelist;

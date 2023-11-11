@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Pridėta';
 $lang['BT_REG_ON_TRACKER'] = 'Užsiregistruoti tracker';
 $lang['BT_REG_FAIL'] = 'Nepavyko užsiregistruoti torrent dėl tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Kita torrent su pačiu info_hash jau <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Pašalinti iš tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistruotas';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Sėklos';
 $lang['LEECHING'] = 'Dėlės';
 $lang['IS_REGISTERED'] = 'Registruotas';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Statusas';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Pranešti url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'galite nustatyti papildomus leidžiama url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Išjungti DHT tinklo';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Išjungti Tarpusavio Mainus ir DHT (rekomenduojama asmeninių tinklų, tik url pranešti)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Patikrinti paskelbti url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'užsiregistruoti tracker leidžiama tik url';
 $lang['BT_REPLACE_ANN_URL'] = 'Pakeisti paskelbti url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema buvo perkelta iš forumo [b]%s[/b] foru
 $lang['BOT_MESS_SPLITS'] = 'Tema buvo padalinta. Nauja tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tema buvo padalinti iš [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Atsisiųsti skambinti';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Imtis pranešimas su prašymu grįžti į platinimo';
 $lang['CALLSEED_SUBJECT'] = 'Atsisiųsti padėti %s';
 $lang['CALLSEED_TEXT'] = 'Sveiki![br]Your padėti reikia paleisti [url=%s]%s[/url][br]if jūs nuspręsite padėti, bet jau ištrynė torrent failą, jūs galite jį atsisiųsti [url=%s]this[/url][br][br]i tikiuosi jūsų pagalbos!';

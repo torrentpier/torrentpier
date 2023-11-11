@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Қосылған';
 $lang['BT_REG_ON_TRACKER'] = 'отслежывателе тіркеу';
 $lang['BT_REG_FAIL'] = 'отслежывателе торрент тіркеу мүмкін болмады';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'қазірдің өзінде сол info_hash <a href="%s"><b>registered</b></a> бар басқа торрент';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'трекер алып тастау';
 $lang['BT_UNREGISTERED'] = 'Torrent тіркелмеген';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'тұқым';
 $lang['LEECHING'] = 'сүлік';
 $lang['IS_REGISTERED'] = 'тіркелген';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'мәртебе';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'URL жариялайды';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'Сіз «кіреді / torrent_announce_urls.php» қосымша рұқсат URL мекенжайларын анықтауға болады';
 $lang['BT_DISABLE_DHT'] = 'DHT желісін өшіру';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Peer Exchange және DHT (тек URL жариялайды, жеке желілеріне ұсынылады) өшіру';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'URL жариялайды тексеріңіз';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'отслежывателе тіркеу ғана рұқсат URL мекенжайлары';
 $lang['BT_REPLACE_ANN_URL'] = 'URL жариялайды ауыстырыңыз';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тақырып форумға форумны
 $lang['BOT_MESS_SPLITS'] = 'Тақырыбы бөлінген болатын. Жаңа тақырып - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тақырып [b]%s[/b][br][br]%s бөлініп отыр';
 
-$lang['CALLSEED'] = 'қоңырауды жүктелген';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'бөлу оралу үшін өтініші бар хабарлама алыңыз';
 $lang['CALLSEED_SUBJECT'] = 'көмек жүктеп %s';
 $lang['CALLSEED_TEXT'] = 'Сәлеметсіз бе! [br]Your көмек босату қажет [URL = %s] Сіз көмектесе шешеді, бірақ қазірдің өзінде торрент файлын жойылған %s[/url][br]If, оны жүктеуге болады [URL = %s] сіздің көмек үшін this[/url][br][br]I үміт!';

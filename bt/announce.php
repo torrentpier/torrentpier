@@ -30,7 +30,7 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
 if (strpos($_SERVER['REQUEST_URI'], 'scrape') !== false) {
     msg_die('Please disable SCRAPE!');
 }
-if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key]) || strlen($_GET[$passkey_key]) !== BT_AUTH_KEY_LENGTH) {
+if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key])) {
     msg_die('Please LOG IN and RE-DOWNLOAD this torrent (passkey not found)');
 }
 
@@ -67,7 +67,7 @@ if (!isset($info_hash)) {
 }
 
 // Store info hash in hex format
-$info_hash_hex = bin2hex($info_hash);
+$info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
 
 // Store peer id
 $peer_id_sql = rtrim(DB()->escape(htmlCHR($peer_id)), ' ');
@@ -92,9 +92,6 @@ if (!isset($downloaded) || $downloaded < 0) {
 }
 if (!isset($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
-}
-if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
-    msg_die('Invalid passkey: ' . $passkey);
 }
 
 // IP
@@ -124,11 +121,19 @@ if (!\TorrentPier\Helpers\IPHelper::isValid($ip)) {
 // Convert IP to long format
 $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 
+// Detect IP version
+$ipv4 = $ipv6 = null;
+$ip_version = \TorrentPier\Helpers\IPHelper::isValidv6($ip) ? 'ipv6' : 'ip';
+($ip_version === 'ipv6') ? ($ipv6 = $ip_sql) : ($ipv4 = $ip_sql);
+
 // Peer unique id
-$peer_hash = hash('xxh128', rtrim($info_hash, ' ') . $passkey . $ip . $port);
+$peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
 
 // Events
 $stopped = ($event === 'stopped');
+
+// Get the real port to help some NAT users
+$port = $_SERVER['REMOTE_PORT'];
 
 // Set seeder & complete
 $complete = $seeder = ($left == 0) ? 1 : 0;
@@ -143,11 +148,12 @@ if ($stopped && $lp_info) {
 
 // Drop fast announce
 if ($lp_info && (!isset($event) || !$stopped)) {
-    if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
-        drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
+    if ($lp_info['ip_ver4'] === $ipv4 || $lp_info['ip_ver6'] === $ipv6) {
+        if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
+            drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
+        }
     }
 }
-
 // Get last peer info from DB
 if (!CACHE('tr_cache')->used && !$lp_info) {
     $lp_info = DB()->fetch_row("
@@ -166,7 +172,7 @@ if ($lp_info) {
      * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
      */
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
+    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
@@ -248,7 +254,7 @@ if ($lp_info) {
 				WHERE topic_id = $topic_id
 					AND user_id = $user_id
 					AND seeder = $seeder
-					AND ip != '$ip_sql'";
+					AND $ip_version != '$ip_sql'";
 
             if (!$seeder && $bb_cfg['tracker']['leech_expire_factor']) {
                 $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
@@ -304,6 +310,7 @@ if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
+        $sql .= ", $ip_version = '$ip_sql'";
         $sql .= ", seeder = $seeder";
         $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
 
@@ -331,7 +338,8 @@ if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only
     }
 
     if (!$lp_info || !$peer_info_updated) {
-        $columns = 'peer_hash, topic_id, user_id, ip, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id';
+
+        $columns = "peer_hash, topic_id, user_id, $ip_version, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id";
         $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";
 
         DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
@@ -354,6 +362,8 @@ $lp_info = [
     'user_id' => (int)$user_id,
     'tor_type' => (int)$tor_type,
     'complete' => (int)$complete,
+    'ip_ver4' => $lp_info['ip_ver4'] ?? $ipv4,
+    'ip_ver6' => $lp_info['ip_ver6'] ?? $ipv6,
 ];
 
 $lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
@@ -367,7 +377,7 @@ if (!$output) {
     $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
 
     $rowset = DB()->fetch_rowset("
-        SELECT ip, port
+        SELECT ip, ipv6, port
         FROM " . BB_BT_TRACKER . "
         WHERE topic_id = $topic_id
         ORDER BY seeder ASC, RAND()
@@ -375,7 +385,7 @@ if (!$output) {
     ");
 
     if (empty($rowset)) {
-        $rowset[] = ['ip' => \TorrentPier\Helpers\IPHelper::ip2long($ip), 'port' => (int)$port];
+        $rowset[] = ['ip' => $ip_sql, 'port' => (int)$port];
     }
 
     if ($compact_mode) {
@@ -384,15 +394,27 @@ if (!$output) {
         $peers6 = '';
 
         foreach ($rowset as $peer) {
-            $peer_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
-            $peer_ip_endian = inet_pton($peer_ip) . pack('n', $peer['port']);
-            \TorrentPier\Helpers\IPHelper::isValidv6($peer_ip) ? ($peers6 .= $peer_ip_endian) : ($peers .= $peer_ip_endian);
+            if (!empty($peer['ip'])) {
+                $peer_ipv4 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
+                $peers .= inet_pton($peer_ipv4) . pack('n', $peer['port']);
+            }
+            if (!empty($peer['ipv6'])) {
+                $peer_ipv6 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ipv6']);
+                $peers6 .= inet_pton($peer_ipv6) . pack('n', $peer['port']);
+            }
         }
     } else {
         $peers = [];
 
         foreach ($rowset as $peer) {
-            $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']), 'port' => (int)$peer['port']];
+            if (!empty($peer['ip'])) {
+                $peer_ipv4 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']);
+                $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ip']), 'port' => (int)$peer['port']];
+            }
+            if (!empty($peer['ipv6'])) {
+                $peer_ipv6 = \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ipv6']);
+                $peers[] = ['ip' => \TorrentPier\Helpers\IPHelper::long2ip_extended($peer['ipv6']), 'port' => (int)$peer['port']];
+            }
         }
     }
 
@@ -417,9 +439,11 @@ if (!$output) {
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
         'downloaded' => (int)$client_completed,
-        'peers' => $peers,
     ];
 
+    if (!empty($peers)) {
+        $output['peers'] = $peers;
+    }
     if (!empty($peers6)) {
         $output['peers6'] = $peers6;
     }

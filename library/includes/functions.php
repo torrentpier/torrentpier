@@ -787,20 +787,6 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
     return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
 }
 
-/**
- * Convert special characters to HTML entities
- *
- * @param $txt
- * @param bool $double_encode
- * @param int $quote_style
- * @param ?string $charset
- * @return string
- */
-function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
-{
-    return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
-}
-
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
     global $userdata, $lang, $images, $bb_cfg;
@@ -1190,22 +1176,21 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
 /**
  * Get user's torrent client string
  *
- * @param string $peer_id
+ * @param string $peerId
  * @return mixed|string
  */
-function get_user_torrent_client(string $peer_id): mixed
+function get_user_torrent_client(string $peerId): mixed
 {
-    static $icons_extension = '.png';
     static $clients = [
         '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',
         '-BE' => 'BitTorrent SDK', '-BI' => 'BiglyBT', '-BL' => 'BitLord', '-BT' => 'BitTorrent',
         '-CT' => 'CTorrent', '-DE' => 'Deluge', '-FD' => 'Free Download Manager', 'FD6' => 'Free Download Manager',
         '-FG' => 'FlashGet', '-FL' => 'Folx', '-HL' => 'Halite', '-KG' => 'KGet',
-        '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent', '-MG' => 'MediaGet',
-        '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => "uTorrent",
-        '-UW' => "uTorrent Web", '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
+        '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent',
+        '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => 'uTorrent',
+        '-UW' => 'uTorrent Web', '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
         '-PI' => 'PicoTorrent', '-qB' => 'qBittorrent', 'M' => 'BitTorrent', 'MG' => 'MediaGet',
-        'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',
+        '-MG' => 'MediaGet', 'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',
         /**
          * ================================ Other ================================
          * '-BB' => 'BitBuddy', '-AR' => 'Arctic', '-AT' => 'Artemis', '-AV' => 'Avicora',
@@ -1235,21 +1220,28 @@ function get_user_torrent_client(string $peer_id): mixed
          * =======================================================================
          **/
     ];
+    static $iconExtension = '.png';
 
+    $bestMatch = null;
     $bestMatchLength = 0;
 
     foreach ($clients as $key => $clientName) {
-        if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
+        if (str_starts_with($peerId, $key) !== false && strlen($key) > $bestMatchLength) {
             $bestMatch = $clientName;
             $bestMatchLength = strlen($key);
         }
     }
 
-    if (!empty($bestMatch)) {
-        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/' . $bestMatch . '.png" alt="' . $bestMatch . '" title="' . $peer_id . '">';
-    } else {
-        return $peer_id;
+    if (!empty($bestMatchLength) && !empty($bestMatch)) {
+        $clientIconPath = 'styles/images/clients/' . $bestMatch . $iconExtension;
+        if (is_file($clientIconPath)) {
+            return '<img width="auto" height="auto" style="display: inline !important; vertical-align: middle;" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peerId . '">';
+        } else {
+            return $bestMatch;
+        }
     }
+
+    return $peerId;
 }
 
 function birthday_age($date)
@@ -1874,20 +1866,23 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key, 
         return false;
     }
 
+    $v1_support = !empty($infohash);
+    $v2_support = !empty($infohash_v2);
+
     $magnet = 'magnet:?';
 
-    if (!empty($infohash)) {
+    if ($v1_support) {
         $magnet .= 'xt=urn:btih:' . bin2hex($infohash);
     }
 
-    if (!empty($infohash_v2)) {
-        if (!empty($infohash)) {
+    if ($v2_support) {
+        if ($v1_support) {
             $magnet .= '&';
         }
         $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
     }
 
-    return '<a title="' . $lang['MAGNET'] . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    return '<a title="' . ($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']) . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . ($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']) . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)

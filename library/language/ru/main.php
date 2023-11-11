@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Добавлен';
 $lang['BT_REG_ON_TRACKER'] = 'Зарегистрировать торрент';
 $lang['BT_REG_FAIL'] = 'Не удалось зарегистрировать торрент на трекере';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Другой торрент с таким же info_hash уже <a href="%s"><b>зарегистрирован</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Разрегистрировать торрент';
 $lang['BT_UNREGISTERED'] = 'Торрент разрегистрирован';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Сидер';
 $lang['LEECHING'] = 'Личер';
 $lang['IS_REGISTERED'] = 'Зарегистрирован';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'URL-адрес анонсера';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'дополнительные разрешенные адреса можно задать в "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Запретить DHT сети';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Запретить обмен пирами и DHT (рекомендовано для приватных сетей, только url announce)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Проверять announce url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'разрешить регистрацию на трекере только если announce url входит в список разрешенных';
 $lang['BT_REPLACE_ANN_URL'] = 'Заменять announce url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Топик был перенесен из ф
 $lang['BOT_MESS_SPLITS'] = 'Сообщения из этой темы были выделены в отдельный топик [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема была выделена из [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Позвать скачавших';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Принимать уведомления с просьбой вернуться на раздачу';
 $lang['CALLSEED_SUBJECT'] = 'Помогите скачать %s';
 $lang['CALLSEED_TEXT'] = 'Здравствуйте![br]Ваша помощь необходима в раздаче [url=%s]%s[/url][br]Если Вы решили помочь, но уже удалили торрент-файл, Вы можете скачать его [url=%s]здесь[/url][br][br]Надеюсь на Вашу помощь!';

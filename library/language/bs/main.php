@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Dodao';
 $lang['BT_REG_ON_TRACKER'] = 'Registrirati na tragač';
 $lang['BT_REG_FAIL'] = 'Ne mogu registar bujicama na tragač';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Još bujicama sa isti info_hash već <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ukloni od tragač';
 $lang['BT_UNREGISTERED'] = 'Bujicama neprijavljeni';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Seme';
 $lang['LEECHING'] = 'Pijavica';
 $lang['IS_REGISTERED'] = 'Registriran';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Objaviti url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'možeš definiše dodatne dozvoljeno url-ovima u "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Onesposobite DHT mreže';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Onesposobite Peer Zamjenu i DHT (preporučila za privatne mreže, samo url objaviti)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Potvrdi objaviti url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registrirati na tragač samo dozvoljeno url-ovima';
 $lang['BT_REPLACE_ANN_URL'] = 'Zamijeniti objaviti url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema je premešten iz forum [b]%s[/b] da for
 $lang['BOT_MESS_SPLITS'] = 'Tema je podijeljen. Nova tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tema je bila podeljena od [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Skinuo zovi';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Primetiti sa zahtjev da se vratim u distribuciji';
 $lang['CALLSEED_SUBJECT'] = 'Preuzimanje pomoći %s';
 $lang['CALLSEED_TEXT'] = 'Zdravo![br]Your pomoći u oslobodi [url=%s]%s[/url][br]if odlučiš da ti pomognem, ali već je izbrisao potoka dosije, možete preuzeti to [url=%s]this[/url][br][br]i nadam se, za tvoje pomoći!';

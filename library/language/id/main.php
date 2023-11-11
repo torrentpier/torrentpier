@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Ditambahkan';
 $lang['BT_REG_ON_TRACKER'] = 'Mendaftar di tracker';
 $lang['BT_REG_FAIL'] = 'Tidak bisa mendaftar torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Torrent lain yang sama info_hash sudah <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hapus dari tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent terdaftar';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Benih';
 $lang['LEECHING'] = 'Lintah';
 $lang['IS_REGISTERED'] = 'Terdaftar';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Mengumumkan url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'anda dapat menentukan tambahan diperbolehkan url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Menonaktifkan jaringan DHT';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Menonaktifkan Peer Exchange dan DHT (dianjurkan untuk jaringan pribadi, hanya url mengumumkan)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verifikasi mengumumkan url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'mendaftar di tracker hanya diperbolehkan url';
 $lang['BT_REPLACE_ANN_URL'] = 'Mengganti mengumumkan url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topik telah dipindahkan dari forum [b]%s[/b]
 $lang['BOT_MESS_SPLITS'] = 'Topik telah terbelah. Topik baru - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Topik telah berpisah dari [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Download call';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Memperhatikan dengan permintaan untuk kembali ke distribusi';
 $lang['CALLSEED_SUBJECT'] = 'Download membantu %s';
 $lang['CALLSEED_TEXT'] = 'Hello![br]Your bantuan yang diperlukan dalam rilis [url=%s]%s[/url][br]if anda memutuskan untuk membantu, tapi sudah dihapus file torrent, anda dapat men-download [url=%s]this[/url][br][br]i berharap untuk bantuan anda!';

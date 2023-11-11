@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = '추가';
 $lang['BT_REG_ON_TRACKER'] = '등록에 추적';
 $lang['BT_REG_FAIL'] = '등록 할 수 있 토렌트에 추적';
 $lang['BT_REG_FAIL_SAME_HASH'] = '다른 토렌트 같은 info_hash 이미 <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = '제거에서 추적';
 $lang['BT_UNREGISTERED'] = 'Torrent 등록';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = '씨';
 $lang['LEECHING'] = '니';
 $lang['IS_REGISTERED'] = '등록';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = '상태';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = '발표 url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = '정의할 수 있습니다 추가 허용되 url"includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = '사용 DHT 네트워크';
 $lang['BT_DISABLE_DHT_EXPL'] = '사용 피어 교환 및 DHT(을 권장 전용 네트워크,url 을 발표)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = '확인을 발표한 url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = '등록에 추적만 허용 url';
 $lang['BT_REPLACE_ANN_URL'] = '대체 발표 url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = '항목에서 이동되었습 forum[b]%s[/b] 
 $lang['BOT_MESS_SPLITS'] = '항목 분리되었습니다. 새로운 주제-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '항목 분리되었습에서 [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = '다운로드 통화';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = '을 주는 요청과 함께 반환하는 배포';
 $lang['CALLSEED_SUBJECT'] = '다운로드하는 데 도움 %s';
 $lang['CALLSEED_TEXT'] = '안녕하세요![br]Your 도움이 필요한에서는 출시[url=%s]%s[/url][br]if 당신이 결정하는 데 도움이지만,이미 삭제 torrent 파일 다운로드할 수 있습니다 그것은[url=%s]this[/url][br][br]i 당신의 도움에 대한 희망을!';

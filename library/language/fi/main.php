@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Lisätty';
 $lang['BT_REG_ON_TRACKER'] = 'Rekisteröityä tracker';
 $lang['BT_REG_FAIL'] = 'Ei voitu rekisteröidä torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Toinen torrent kanssa samaa info_hash jo <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Poista tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent rekisteröimätön';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Siemen';
 $lang['LEECHING'] = 'Iilimato';
 $lang['IS_REGISTERED'] = 'Rekisteröity';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Tila';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Ilmoittaa url-osoitteen';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'voit määrittää tiedostojen sallittu url-osoitteita "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Poistaa DHT-verkko';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Poistaa Peer Vaihtoa ja DHT (suositellaan yksityisiä verkkoja, vain url-osoite ilmoittaa)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Varmista, ilmoittaa url-osoitteen';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'rekisteröityä tracker sallittu vain url-osoitteita';
 $lang['BT_REPLACE_ANN_URL'] = 'Vaihda ilmoittaa url-osoitteen';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Aihe on siirretty foorumin [b]%s[/b] forum [
 $lang['BOT_MESS_SPLITS'] = 'Aihe on jaettu kahteen osaan. Uusi aihe - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Aihe on erotettu [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Ladataan call';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Ota ilmoitus pyynnön palata jakelu';
 $lang['CALLSEED_SUBJECT'] = 'Lataa auttaa %s';
 $lang['CALLSEED_TEXT'] = 'Hei![br]Your apua tarvitaan, vapauttaa [url=%s]%s[/url][br]if päätät auttaa, mutta jo poistaa torrent-tiedoston, voit ladata sen [url=%s]this[/url][br][br]i toivoa apuasi!';

@@ -22,57 +22,71 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
     $_GET['info_hash'] = $_GET['?info_hash'];
 }
 
-$is_bt_v2 = null;
 $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 
 // Verify info_hash
 if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
 }
-
 // Store info hash in hex format
-$info_hash_hex = bin2hex($info_hash);
+$info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
 
-// Check info_hash version
-if (strlen($info_hash) == 32) {
-    $is_bt_v2 = true;
-} elseif (strlen($info_hash) == 20) {
-    $is_bt_v2 = false;
-} else {
-    msg_die('Invalid info_hash: ' . $info_hash_hex);
+// Handle multiple hashes
+
+preg_match_all('/info_hash=([^&]*)/i', $_SERVER['QUERY_STRING'], $info_hash_array);
+
+$torrents = [];
+$info_hashes = [];
+
+foreach ($info_hash_array[1] as $hash) {
+
+    $decoded_hash = urldecode($hash);
+
+    if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
+        $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
+    } else {
+        $info_hashes[] = DB()->escape(($decoded_hash));
+    }
 }
 
-if ($lp_scrape_info = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . $info_hash_hex)) {
-    die(\Arokettu\Bencode\Bencode::encode($lp_scrape_info));
+$info_hash_count = count($info_hashes);
+
+if (!empty($info_hash_count)) {
+
+    if ($info_hash_count > $bb_cfg['max_scrapes']) {
+        $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
+    }
+
+    $info_hashes_sql = implode('\', \'', $info_hashes);
+    $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
+
+    $sql = "
+        SELECT tor.info_hash, tor.info_hash_v2, tor.complete_count, snap.seeders, snap.leechers
+        FROM " . BB_BT_TORRENTS . " tor
+        LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
+        WHERE $info_hash_where
+    ";
+
+    $scrapes = DB()->fetch_rowset($sql);
+
+    if (!empty($scrapes)) {
+        foreach ($scrapes as $scrape) {
+            $hash_v1 = !empty($scrape['info_hash']) ? $scrape['info_hash'] : '';
+            $hash_v2 = !empty($scrape['info_hash_v2']) ? substr($scrape['info_hash_v2'], 0, 20) : '';
+            $info_hash_scrape = (in_array(urlencode($hash_v2), $info_hash_array[1])) ? $hash_v2 : $hash_v1;
+
+            $torrents['files'][$info_hash_scrape] = [
+                'complete' => (int)$scrape['seeders'],
+                'downloaded' => (int)$scrape['complete_count'],
+                'incomplete' => (int)$scrape['leechers']
+            ];
+            CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . bin2hex($info_hash_scrape), array_slice($torrents['files'], -1, null, true), SCRAPE_LIST_EXPIRE);
+        }
+    }
 }
 
-$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-/**
- * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
- * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
- */
-$info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR tor.info_hash_v2 LIKE '$info_hash_sql%'";
-
-$row = DB()->fetch_row("
-		SELECT tor.complete_count, snap.seeders, snap.leechers
-		FROM " . BB_BT_TORRENTS . " tor
-		LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)
-		$info_hash_where
-		LIMIT 1
-");
-
-if (!$row) {
+if (empty($torrents)) {
     msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
 }
 
-$output['files'][$info_hash] = [
-    'complete' => (int)$row['seeders'],
-    'downloaded' => (int)$row['complete_count'],
-    'incomplete' => (int)$row['leechers'],
-];
-
-$peers_list_cached = CACHE('tr_cache')->set(SCRAPE_LIST_PREFIX . $info_hash_hex, $output, SCRAPE_LIST_EXPIRE);
-
-echo \Arokettu\Bencode\Bencode::encode($output);
-
-exit;
+die(\Arokettu\Bencode\Bencode::encode($torrents));

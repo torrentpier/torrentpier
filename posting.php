@@ -284,7 +284,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
-                    'POST_DATE' => bb_date($row['post_time'], $bb_cfg['post_date_format']),
+                    'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . $lang['POST_LINK'] . '">' . bb_date($row['post_time'], $bb_cfg['post_date_format']) . '</a>',
                     'MESSAGE' => get_parsed_post($row)
                 ]);
             }

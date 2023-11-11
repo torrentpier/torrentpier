@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Yükladi';
 $lang['BT_REG_ON_TRACKER'] = 'reyting www.uz ro\'yxatdan';
 $lang['BT_REG_FAIL'] = 'reyting www.uz torrent ro\'yxatdan bo\'lmadi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Shu info_hash allaqachon <a href="%s"><b>registered</b></a> bilan yana bir torrent';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'izdoshlari o\'chirish';
 $lang['BT_UNREGISTERED'] = 'Ro\'yxatdan o\'tmagan torrent';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'urug \'';
 $lang['LEECHING'] = 'zuluk';
 $lang['IS_REGISTERED'] = 'ro\'yxatga olingan';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'holat';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'url e\'lon';
 $lang['BT_ANNOUNCE_URL_EXPL'] = '"Includes / torrent_announce_urls.php" siz qo\'shimcha ruxsat URL, belgilashingiz mumkin';
 $lang['BT_DISABLE_DHT'] = 'DHT tarmog\'ini o\'chiring';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Peer Birja va DHT (xususiy tarmoqlari uchun tavsiya etiladi, faqat url e\'lon) o\'chirish';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'url e\'lon tasdiqlang';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'Kuzatishdan faqat ruxsat URL ro\'yxatdan';
 $lang['BT_REPLACE_ANN_URL'] = 'url e\'lon o\'rniga';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Mavzu forum [b]%s[/b][br][br]%s uchun forum 
 $lang['BOT_MESS_SPLITS'] = 'Mavzu bo\'lindi etildi. Yangi mavzu - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Mavzu [b]%s[/b][br][br]%s dan YARILMIŞTIR';
 
-$lang['CALLSEED'] = 'qo\'ng\'iroq Yuklandi';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'tarqatish qaytish uchun bir iltimosi bilan e\'tibor';
 $lang['CALLSEED_SUBJECT'] = 'Yuklab yordam %s';
 $lang['CALLSEED_TEXT'] = 'Agar yordam berish uchun qaror, lekin allaqachon torrent faylni o\'chirib %s[/url][br]If Salom! [br]Your Yordam ozod kerak [url = %s], siz uni yuklab olishingiz mumkin [url = %s] Yordamingiz uchun this[/url][br][br]I umid!';

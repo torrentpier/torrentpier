@@ -121,7 +121,7 @@ switch ($mode) {
 
         if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) {
             $reg_ip = $last_ip = $lang['HIDDEN'];
-        } elseif ($profiledata['user_level'] == MOD && IS_MOD) {
+        } elseif ($profiledata['user_level'] == MOD && !IS_AM) {
             $reg_ip = $last_ip = $lang['HIDDEN'];
         } else {
             $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_reg_ip']);

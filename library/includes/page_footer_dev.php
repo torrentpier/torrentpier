@@ -50,7 +50,7 @@ if (!defined('BB_ROOT')) {
     .sqlExplain {
         color: #B50000;
         font-size: 13px;
-        cursor: default;
+        cursor: inherit !important;
     }
 
     .sqlHover {

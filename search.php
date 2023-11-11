@@ -12,6 +12,7 @@ define('BB_SCRIPT', 'search');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
+$page_cfg['use_tablesorter'] = true;
 $page_cfg['load_tpl_vars'] = [
     'post_buttons',
     'post_icons',
@@ -585,11 +586,16 @@ if ($post_mode) {
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
         ));
 
-        $quote_btn = true;
-        $edit_btn = $delpost_btn = $ip_btn = (IS_AM);
+        $quote_btn = $edit_btn = $ip_btn = '';
+        $delpost_btn = (IS_AM);
 
         // Topic posts block
         foreach ($topic_posts as $row_num => $post) {
+            if ($post['poster_id'] != BOT_UID) {
+                $quote_btn = true;
+                $edit_btn = $ip_btn = (IS_AM);
+            }
+
             $message = get_parsed_post($post);
 
             if (count($orig_word)) {

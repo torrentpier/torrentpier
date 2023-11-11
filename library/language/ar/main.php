@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'وأضاف';
 $lang['BT_REG_ON_TRACKER'] = 'التسجيل في تعقب';
 $lang['BT_REG_FAIL'] = 'لا يمكن تسجيل سيل على تعقب';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'آخر سيل مع نفسه info_hash بالفعل <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'إزالة من تعقب';
 $lang['BT_UNREGISTERED'] = 'سيل غير المسجلين';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'البذور';
 $lang['LEECHING'] = 'علقة';
 $lang['IS_REGISTERED'] = 'مسجلة';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'حالة';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'أعلن url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'يمكنك تحديد المزيد من سمح عناوين url في "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'تعطيل شبكة DHT';
 $lang['BT_DISABLE_DHT_EXPL'] = 'تعطيل تبادل الآراء بين الأقران DHT (موصى به الشبكات الخاصة فقط url تعلن)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'التحقق من يعلن url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'التسجيل في المقتفي يسمح فقط عناوين المواقع';
 $lang['BT_REPLACE_ANN_URL'] = 'محل أعلن url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'الموضوع تم نقله من منتدى
 $lang['BOT_MESS_SPLITS'] = 'الموضوع تم تقسيمها. موضوع جديد - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'الموضوع تم تقسيمها من [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'تحميل المكالمة';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'تنتبه مع طلب العودة إلى توزيع';
 $lang['CALLSEED_SUBJECT'] = 'تحميل مساعدة %s';
 $lang['CALLSEED_TEXT'] = 'مرحبا![br]Your الحاجة إلى المساعدة في الإفراج عن [url=%s]%s[/url][br]if عليك أن تقرر أن تساعد ولكن بالفعل حذف ملف التورنت يمكنك تحميل البرنامج [url=%s]this[/url][br][br]i نأمل مساعدتكم!';

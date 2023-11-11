@@ -57,7 +57,7 @@ ajax.callback.callseed = function (data) {
 	<td colspan="2" class="borderless bCenter pad_8">
 			{L_SIZE}:&nbsp; <b>{TOR_SIZE}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
 			{L_IS_REGISTERED}:&nbsp; <b>{TOR_LONGEVITY}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
-			{L_COMPLETED}:&nbsp; <b title="Полных скачиваний: {TOR_COMPLETED}">{TOR_DOWNLOAD_COUNT}</b>
+			{L_DOWNLOADED}:&nbsp; <b title="{L_COMPLETED}: {TOR_COMPLETED}">{TOR_DOWNLOAD_COUNT}</b>
 	</td>
 </tr>
 <!-- ENDIF / SHOW_DL_LIST_TOR_INFO -->
@@ -73,7 +73,7 @@ ajax.callback.callseed = function (data) {
 		<tr>
 			<td colspan="2" class="<!-- IF SHOW_DL_LIST -->row2<!-- ELSE -->row1<!-- ENDIF --> pad_2">
 				<!-- IF not SEED_COUNT -->
-				<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+				<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 				<!-- ENDIF -->
 
 				<!-- IF PEER_EXIST -->
@@ -105,7 +105,7 @@ ajax.callback.callseed = function (data) {
 		<!-- ELSE -->
 		<tr>
 			<td colspan="2" class="row2 pad_4">
-				<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+				<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 			</td>
 		</tr>
 		<!-- ENDIF -->
@@ -123,7 +123,7 @@ ajax.callback.callseed = function (data) {
 
 		<!-- IF SEEDER_LAST_SEEN -->
 		<div id="last_seed_info" class="row5 w60 mrg_4 bCenter">
-			<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
+			<p class="mrg_10">{SEEDER_LAST_SEEN} {SEEDER_USERNAME}</p>
 		</div>
 		<!-- ENDIF -->
 
@@ -134,7 +134,7 @@ ajax.callback.callseed = function (data) {
 		<a name="seeders"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td><p class="floatL" style="margin-top: 4px;"><b>{L_SEEDERS}</b>:</p></td>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="seed">{L_SEEDERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
@@ -154,7 +154,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
-                <th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -185,7 +185,7 @@ ajax.callback.callseed = function (data) {
 		<a name="leechers"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td><p class="floatL" style="margin-top: 4px;"><b>{L_LEECHERS}</b>:</p></td>
+			<td><p class="floatL" style="margin-top: 4px;"><b class="leech">{L_LEECHERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
@@ -205,7 +205,7 @@ ajax.callback.callseed = function (data) {
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
                 <!-- END porthead -->
-                <th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->

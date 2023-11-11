@@ -1,87 +1,72 @@
 <!-- IF IS_ADMIN -->
 <script type="text/javascript">
-ajax.init.edit_user_profile = function(params){
-	if (params.submit) {
-		ajax.exec({
-			action  : params.action,
-			edit_id : params.id,
-			user_id : params.user_id || {PROFILE_USER_ID},
-			field   : params.field || params.id,
-			value   : params.value
-		});
-	}
-	else {
-		editableType = params.editableType || "input";
-		ajax.makeEditable(params.id, editableType);
-	}
-};
-ajax.callback.edit_user_profile = function(data){
-	ajax.restoreEditable(data.edit_id, data.new_value);
-};
+    // edit_user_profile
+    ajax.init.edit_user_profile = function (params) {
+        if (params.submit) {
+            ajax.exec({
+                action: params.action,
+                edit_id: params.id,
+                user_id: params.user_id || {PROFILE_USER_ID},
+                field: params.field || params.id,
+                value: params.value
+            });
+        } else {
+            editableType = params.editableType || "input";
+            ajax.makeEditable(params.id, editableType);
+        }
+    };
+    ajax.callback.edit_user_profile = function (data) {
+        ajax.restoreEditable(data.edit_id, data.new_value);
+    };
 
-// avatar
-ajax.avatar = function (mode, uid) {
-	ajax.exec({
-		action  : 'avatar',
-		mode    : mode,
-		user_id : uid
-	});
-};
-ajax.callback.avatar = function (data) {
-	$('#avatar-img').html(data.avatar_html);
-	$('#avatar-adm').hide();
-};
+    // change_user_rank
+    ajax.change_user_rank = function (uid, rank_id) {
+        $('#rank-msg').html('<i class="loading-1">{L_LOADING}</i>');
+        ajax.exec({
+            action: 'change_user_rank',
+            user_id: uid,
+            rank_id: rank_id
+        });
+    };
+    ajax.callback.change_user_rank = function (data) {
+        $('#rank-msg').html(data.html);
+        $('#rank-name').html(data.rank_name);
+    };
 
-// change_user_rank
-ajax.change_user_rank = function (uid, rank_id) {
-	$('#rank-msg').html('<i class="loading-1">{L_LOADING}</i>');
-	ajax.exec({
-		action  : 'change_user_rank',
-		user_id : uid,
-		rank_id : rank_id
-	});
-};
-ajax.callback.change_user_rank = function (data) {
-	$('#rank-msg').html(data.html);
-	$('#rank-name').html(data.rank_name);
-};
-
-ajax.user_opt = {AJAX_USER_OPT};
-
-// change_user_opt
-ajax.change_user_opt = function() {
-	ajax.exec({
-		action   : 'change_user_opt',
-		user_id  : {PROFILE_USER_ID},
-		user_opt : $.toJSON(ajax.user_opt)
-	});
-};
-ajax.callback.change_user_opt = function (data) {
-	$('#user-opt-resp').html(data.resp_html);
-	$('#user-opt-save-btn').removeAttr('disabled');
-};
-
-$(document).ready(function(){
-	$('#user-opt').find('input[type=checkbox]').click(function(){
-		var $chbox = $(this);
-		var opt_name = $chbox.attr('name');
-		var opt_val  = $chbox.attr('checked') ? 1 : 0;
-		ajax.user_opt[opt_name] = opt_val;
-		$chbox.parents('label').toggleClass('bold');
-		$('#user-opt-save').show();
-	});
-	$('#user-opt').find('input[type=checkbox]').each(function(){
-		if (ajax.user_opt[ $(this).attr('name') ]) {
-			$(this).attr({checked: 'checked'});
-			$(this).parents('label').addClass('bold');
-		}
-	});
-	$('#user-opt-save-btn').click(function(){
-		this.disabled = 1;
-		$('#user-opt-resp').html('&nbsp;');
-		ajax.change_user_opt();
-	});
-});
+    // change_user_opt
+    ajax.user_opt = {AJAX_USER_OPT};
+    ajax.change_user_opt = function () {
+        ajax.exec({
+            action: 'change_user_opt',
+            user_id: {PROFILE_USER_ID},
+            user_opt: $.toJSON(ajax.user_opt)
+        });
+    };
+    ajax.callback.change_user_opt = function (data) {
+        $('#user-opt-resp').html(data.resp_html);
+        $('#user-opt-save-btn').removeAttr('disabled');
+    };
+    $(document).ready(function () {
+        $('#user-opt').find('input[type=checkbox]').click(function () {
+            var $chbox = $(this);
+            var opt_name = $chbox.attr('name');
+            var opt_val = $chbox.attr('checked') ? 1 : 0;
+            ajax.user_opt[opt_name] = opt_val;
+            $chbox.parents('label').toggleClass('bold');
+            $('#user-opt-save').show();
+        });
+        $('#user-opt').find('input[type=checkbox]').each(function () {
+            if (ajax.user_opt[$(this).attr('name')]) {
+                $(this).attr({checked: 'checked'});
+                $(this).parents('label').addClass('bold');
+            }
+        });
+        $('#user-opt-save-btn').click(function () {
+            this.disabled = 1;
+            $('#user-opt-resp').html('&nbsp;');
+            ajax.change_user_opt();
+        });
+    });
 </script>
 
 <var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
@@ -193,6 +178,10 @@ ajax.callback.index_data = function(data) {
 		<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;
 		<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>
 	</p>
+    <!-- ELSE -->
+    <p class="floatR">
+        <a href="{U_OPTIONS}">{L_PROFILE}</a>
+    </p>
 	<!-- ENDIF -->
 	<div class="clear"></div>
 </div>
@@ -206,7 +195,21 @@ ajax.callback.index_data = function(data) {
 
 		<div id="avatar-img" class="mrg_4 med">
 			{AVATAR_IMG}
-			<!-- IF IS_ADMIN -->
+            <!-- IF IS_ADMIN || PROFILE_USER -->
+            <script type="text/javascript">
+                // avatar
+                ajax.avatar = function (mode, uid) {
+                    ajax.exec({
+                        action: 'avatar',
+                        mode: mode,
+                        user_id: uid
+                    });
+                };
+                ajax.callback.avatar = function (data) {
+                    $('#avatar-img').html(data.avatar_html);
+                    $('#avatar-adm').hide();
+                };
+            </script>
 			<p id="avatar-adm" class="med mrg_4">[ <a href="#" onclick="if (window.confirm('{L_AVATAR_DELETE}?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">{L_AVATAR_DELETE}</a> ]</p>
 			<!-- ENDIF -->
 		</div>

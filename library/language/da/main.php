@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Tilføjet';
 $lang['BT_REG_ON_TRACKER'] = 'Registrere på tracker';
 $lang['BT_REG_FAIL'] = 'Kan ikke registrere en torrent på tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'En anden torrent med samme info_hash allerede <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Fjern fra tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent uregistrerede';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Frø';
 $lang['LEECHING'] = 'Agterliget';
 $lang['IS_REGISTERED'] = 'Registreret';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -2319,6 +2322,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Announce url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'du kan definere yderligere tilladte webadresser i "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Deaktiver DHT-netværk';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Deaktiver Peer Udveksling og DHT (anbefales til private netværk, kun url-announce)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Kontrollere announce url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'registrere på tracker kun tilladt webadresser';
 $lang['BT_REPLACE_ANN_URL'] = 'Udskift announce url';
@@ -2529,7 +2534,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Emnet er blevet flyttet fra forum [b]%s[/b] 
 $lang['BOT_MESS_SPLITS'] = 'Emnet er blevet delt. Nyt emne - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Emnet er blevet skilt fra [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Hentet opkald';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Tage varsel med en anmodning om at vende tilbage til distribution';
 $lang['CALLSEED_SUBJECT'] = 'Hjælp til Download %s';
 $lang['CALLSEED_TEXT'] = 'Hej![br]Your der er behov for hjælp i udgivelsen [url=%s]%s[/url][br]if du beslutter dig for at hjælpe, men allerede slettet torrent-fil, kan du downloade det [url=%s]this[/url][br][br]i håber for din hjælp!';

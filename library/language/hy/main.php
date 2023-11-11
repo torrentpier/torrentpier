@@ -1059,6 +1059,8 @@ $lang['BT_ADDED'] = 'Ավելացված է';
 $lang['BT_REG_ON_TRACKER'] = 'Գրանցվել խուզարկու';
 $lang['BT_REG_FAIL'] = 'Չի հաջողվել գրանցել տարափ է խուզարկու';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Այլ հեղեղ նույն info_hash արդեն <a href="%s"><b>registered</b></a>';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Հեռացնել ճանապարհները';
 $lang['BT_UNREGISTERED'] = 'Հեղեղ չգրանցված';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1083,6 +1085,7 @@ $lang['SEEDING'] = 'Սերմերի';
 $lang['LEECHING'] = 'Մի տզրուկ';
 $lang['IS_REGISTERED'] = 'Գրանցված է';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Կարգավիճակ';
@@ -2322,6 +2325,8 @@ $lang['BT_ANNOUNCE_URL'] = 'Տեղեկացնել URL-հասցե';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'դուք կարող եք սահմանել լրացուցիչ թույլատրելի URL-հասցեներ է "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Անջատել ցանցը DHT-ի';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Անջատել փոխանակում пирами և DHT (խորհուրդ է տրվում մասնավոր ցանցերի, միայն URL-հասցե տեղեկացնել)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Ստուգել տեղեկացնել URL-հասցե';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'Գրանցվել խուզարկու թույլատրվում է միայն URL-հասցեները';
 $lang['BT_REPLACE_ANN_URL'] = 'Փոխարինել հայտարարել է URL-հասցե';
@@ -2532,7 +2537,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Թեմա տեղափոխվել են: համա
 $lang['BOT_MESS_SPLITS'] = 'Թեմա բաժանված էր. Նոր թեմա - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Թեմա բաժանվել են [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Բեռնել կանչի';
+$lang['CALLSEED'] = 'Call seeds';
 $lang['CALLSEED_EXPLAIN'] = 'Վերցնել ծանուցում ՝ խնդրելով վերադառնալ раздачу';
 $lang['CALLSEED_SUBJECT'] = 'Բեռնել օգնություն %s';
 $lang['CALLSEED_TEXT'] = 'Բարեւ ձեզ![br]Your տեղեկանք պետք է դուրս գալու հետ [URL=%s]%s[/url][br]if դուք որոշել է օգնել, բայց արդեն հեռացրել են torrent ֆայլը, դուք կարող եք բեռնել այն [URL=%s]this[/url][br][br]i ակնկալում եմ Ձեր օգնությունը.';
