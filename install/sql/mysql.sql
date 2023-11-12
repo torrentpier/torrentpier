@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `reg_time`         INT(11)               NOT NULL DEFAULT '0',
   `call_seed_time`   INT(11)               NOT NULL DEFAULT '0',
   `complete_count`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `seeder_last_seen` MEDIUMINT(10)         NOT NULL DEFAULT '0',
+  `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
   `tor_status`       TINYINT(4)            NOT NULL DEFAULT '0',
   `checked_user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `checked_time`     INT(11)               NOT NULL DEFAULT '0',
@@ -1458,7 +1458,7 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
 (
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
-  `user_id`          MEDIUMINT(10)         NOT NULL DEFAULT '0',
+  `user_id`          MEDIUMINT(8)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM
