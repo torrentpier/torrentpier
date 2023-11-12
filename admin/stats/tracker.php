@@ -117,7 +117,7 @@ if ($client_full || !$stats_cache = CACHE('tr_cache')->get('tracker_clients_stat
 
 $n = 1;
 foreach (array_slice($clients_percentage, 0, $numwant) as $client => $value) {
-    $client_list .= ($client_full) ? ("$client => $value<br>") : "$n. " . get_user_torrent_client($client) . " => $value<br>";
+    $client_list .= ($client_full) ? ("$client => $value<br>") : "$n. " . get_user_torrent_client($client) . " $value<br>";
     $n++;
 }
 
