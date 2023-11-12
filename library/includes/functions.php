@@ -1237,7 +1237,7 @@ function get_user_torrent_client(string $peerId): mixed
     }
 
     if (!empty($bestMatch)) {
-        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="/styles/images/clients/'. $bestMatch . $iconExtension . '" alt="' . $bestMatch . '" title="' . $peerId  . '">';
+        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="' . FULL_URL . 'styles/images/clients/'. $bestMatch . $iconExtension . '" alt="' . $bestMatch . '" title="' . $peerId  . '">';
     }
 
     return $peerId;
