@@ -72,9 +72,9 @@ ALTER TABLE `bb_bt_tracker_snap` ADD COLUMN `completed` INT(10) NOT NULL DEFAULT
 ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEFAULT '0';
 
 // 2.4.0-beta3
-INSERT INTO `bb_extensions` VALUES ('1', 'webp', '');
-INSERT INTO `bb_extensions` VALUES ('2', '7z', '');
-INSERT INTO `bb_extensions` VALUES ('1', 'bmp', '');
+INSERT INTO `bb_extensions` VALUES ('994', '1', 'webp', '');
+INSERT INTO `bb_extensions` VALUES ('995', '2', '7z', '');
+INSERT INTO `bb_extensions` VALUES ('996', '1', 'bmp', '');
 ALTER TABLE `bb_bt_tracker` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
@@ -84,3 +84,10 @@ ALTER TABLE `buf_last_seeder` ADD COLUMN `user_id` MEDIUMINT(10) NOT NULL DEFAUL
 ALTER TABLE `bb_bt_tracker` CHANGE `ip` `ip` VARCHAR(42) DEFAULT NULL;
 ALTER TABLE `bb_bt_tracker` CHANGE `ipv6` `ipv6` VARCHAR(42) DEFAULT NULL;
 ALTER TABLE `bb_bt_users` CHANGE `auth_key` `auth_key` CHAR(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+
+// 2.4.0-beta4
+DELETE FROM `bb_extensions` WHERE `extension` = 'tif';
+INSERT INTO `bb_extensions` VALUES ('997', '4', 'tif', '');
+INSERT INTO `bb_extensions` VALUES ('998', '4', 'tiff', '');
+DELETE FROM `bb_extensions` WHERE `extension` = 'tga';
+INSERT INTO `bb_extensions` VALUES ('999', '4', 'tga', '');
