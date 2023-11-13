@@ -936,7 +936,7 @@ function username_search($search_match)
 		";
 
         foreach (DB()->fetch_rowset($sql) as $row) {
-            $username = htmlCHR(stripslashes(html_entity_decode($row['username'])));
+            $username = htmlCHR(stripslashes(html_ent_decode($row['username'])));
             $username_list .= '<option value="' . $username . '">' . $username . '</option>';
         }
         if (!$username_list) {

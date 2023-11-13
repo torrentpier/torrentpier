@@ -394,7 +394,7 @@ if (!$set_default) {
 
                 if ($poster_id = get_user_id($poster_name_sql)) {
                     $poster_id_val = $poster_id;
-                    $poster_name_val = stripslashes(html_entity_decode($req_poster_name));
+                    $poster_name_val = stripslashes(html_ent_decode($req_poster_name));
                 } else {
                     $poster_name_val = $lang['BT_USER_NOT_FOUND'];
                     $tr_error = $poster_error = true;
@@ -410,7 +410,7 @@ if (!$set_default) {
                 $poster_id_val = GUEST_UID;
                 $poster_name_val = $lang['GUEST'];
             } elseif ($poster_name_val = get_username($req_poster_id)) {
-                $poster_name_val = stripslashes(html_entity_decode($poster_name_val));
+                $poster_name_val = stripslashes(html_ent_decode($poster_name_val));
                 $poster_id_val = $req_poster_id;
             }
         }
@@ -702,7 +702,7 @@ if ($allowed_forums) {
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), html_entity_decode($tor['topic_title'], ENT_QUOTES, 'UTF-8'));
+            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), html_ent_decode($tor['topic_title']));
             $compl = $tor['complete_count'];
             $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
             $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';

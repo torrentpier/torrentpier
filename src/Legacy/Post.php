@@ -377,7 +377,7 @@ class Post
 
                         $emailer->set_template('topic_notify', $row['user_lang']);
                         $emailer->assign_vars([
-                            'TOPIC_TITLE' => html_entity_decode($topic_title),
+                            'TOPIC_TITLE' => html_ent_decode($topic_title),
                             'SITENAME' => $bb_cfg['sitename'],
                             'USERNAME' => $row['username'],
                             'U_TOPIC' => $u_topic,

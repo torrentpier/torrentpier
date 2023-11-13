@@ -837,7 +837,7 @@ class Attach
                 if (FILENAME_CRYPTIC) {
                     $this->attach_filename = make_rand_str(FILENAME_CRYPTIC_LENGTH);
                 } else { // original
-                    $this->attach_filename = html_entity_decode(trim(stripslashes($this->attach_filename)));
+                    $this->attach_filename = html_ent_decode(trim(stripslashes($this->attach_filename)));
                     $this->attach_filename = delete_extension($this->attach_filename);
                     $this->attach_filename = str_replace([' ', '-'], '_', $this->attach_filename);
                     $this->attach_filename = str_replace('__', '_', $this->attach_filename);
