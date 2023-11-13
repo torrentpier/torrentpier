@@ -56,9 +56,6 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     ]);
 }
 
-// Make jumpbox
-make_jumpbox();
-
 // Info about new private messages
 $icon_pm = $images['pm_no_new_msg'];
 $pm_info = $lang['NO_NEW_PM'];
