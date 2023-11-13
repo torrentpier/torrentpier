@@ -218,6 +218,9 @@ $template->assign_vars([
 unset($forums);
 $datastore->rm('cat_forums');
 
+// Make jumpbox
+make_jumpbox();
+
 if ($post_id && !empty($t_data['prev_posts'])) {
     $start = floor(($t_data['prev_posts'] - 1) / $posts_per_page) * $posts_per_page;
 }

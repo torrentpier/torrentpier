@@ -51,6 +51,9 @@ if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
     bb_die($lang['FORUM_NOT_EXIST']);
 }
 
+// Make jumpbox
+make_jumpbox();
+
 // Only new
 $only_new = $user->opt_js['only_new'];
 $only_new_sql = '';
