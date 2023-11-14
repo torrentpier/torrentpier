@@ -2062,7 +2062,7 @@ function hash_search($hash)
     $hash = htmlCHR(trim($hash));
     $info_hash_where = null;
 
-    if (!isset($hash)) {
+    if (!isset($hash) || !ctype_xdigit($hash)) {
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
 
