@@ -2184,7 +2184,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Arama Imagick';
 
 $lang['USE_GD2'] = 'GD2 Uzantısı kullanın';
 $lang['USE_GD2_EXPLAIN'] = 'PHP görüntü işleme için GD1 veya GD2 Uzantısı ile derlenmiş olabilir. Doğru Eki Mod iki farklı yöntem, seçim sana bağlı kullanır ımagemagick olmadan Küçük oluşturmak için. Eğer küçük kötü bir kalitede ya da berbat etti, bu ayarı değiştirmeyi deneyin.';
-$lang['ATTACHMENT_VERSION'] = '%s Eki Mod Sürüm'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Yasak Uzantıları Yönet';
