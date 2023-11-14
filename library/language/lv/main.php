@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Meklēšanas Imagick';
 
 $lang['USE_GD2'] = 'Izmantot GD2 Pagarināšana';
 $lang['USE_GD2_EXPLAIN'] = 'PHP ir spējīgs tikt apkopoti ar GD1 vai GD2 Paplašinājumu uz attēla manipulējot. Lai pareizi izveidot Sīktēlus bez imagemagick Pielikumu Mod izmanto divas dažādas metodes, pamatojoties uz savu izvēli šeit. Ja jūsu sīktēliem, ir sliktas kvalitātes vai ieskrūvē augšu, mēģināt mainīt šo iestatījumu.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Versija %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Pārvaldīt Aizliegts Paplašinājumi';
