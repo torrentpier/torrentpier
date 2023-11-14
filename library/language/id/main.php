@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Pencarian Imagick';
 
 $lang['USE_GD2'] = 'Menggunakan Ekstensi GD2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP dapat disusun dengan GD1 atau GD2 Ekstensi untuk memanipulasi gambar. Untuk benar membuat Thumbnail tanpa imagemagick Lampiran Mod menggunakan dua metode yang berbeda, berdasarkan pada pilihan anda di sini. Jika anda thumbnail berada dalam kualitas yang buruk atau kacau, cobalah untuk mengubah pengaturan ini.';
-$lang['ATTACHMENT_VERSION'] = 'Lampiran Mod Versi %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Mengelola Dilarang Ekstensi';
