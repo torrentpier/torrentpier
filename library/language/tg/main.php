@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Ҷустуҷӯ Imagick';
 
 $lang['USE_GD2'] = 'Ворид истифодаи GD2 Тамдиди';
 $lang['USE_GD2_EXPLAIN'] = 'PHP тавонист бо GD1 ё GD2 Тамдиди барои таҳрир тасвир тартиб дода мешавад. Барои дуруст ангораи бе ImageMagick ба Замимаи мудофиа истифода мебарад, ду усулҳои гуногун, дар асоси интихоби худро дар инҷо эҷод. Агар ангораи худро дар хислати бад доранд, ё screwed то, кӯшиш кунед, ки ба тағйир додани ин танзиматро.';
-$lang['ATTACHMENT_VERSION'] = 'Замимаи мудофиа Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Идоракунии васеъшавии мамнӯъ';

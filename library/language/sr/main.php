@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Претрага Imagick';
 
 $lang['USE_GD2'] = 'Користите додатак gd2';
 $lang['USE_GD2_EXPLAIN'] = 'ПХП-то могу бити обједињени са правог gd1 или проширење gd2 за обраду слике. Да би се правилно направи сличице без пакета imagemagick прилог мод користи две различите методе, на основу вашег избора овде. Ако ваши превьюшки у лошем квалитету или забрљали, покушајте да промените ову поставку.';
-$lang['ATTACHMENT_VERSION'] = 'Прилог Мод Верзија %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Управљање Забрањене Додатке';

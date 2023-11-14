@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = '검색 Imagick';
 
 $lang['USE_GD2'] = '를 이용하의 GD2 확장';
 $lang['USE_GD2_EXPLAIN'] = 'PHP 할 수 있으로 컴파일 GD1 또는 GD2 확장에 대한 이미지를 조작합니다. 을 제대로 축소판을 만들지 않고 imagemagick 첨부 파일을 모는 두 가지 방법을 사용하여,당신의 선택에 따라 여기합니다. 면의 축소판이 나쁜 품질 또는 망하려고 이 설정을 변경합니다.';
-$lang['ATTACHMENT_VERSION'] = '첨부파일 모드 버전 %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '관리 금지 확장';

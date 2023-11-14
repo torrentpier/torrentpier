@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = '搜索Imagick';
 
 $lang['USE_GD2'] = '使用扩展GD2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP是能够编制与GD1或GD2扩展对于图像操纵的。 正确的创造略图，而不imagemagick该附件的国防部使用两种不同的方法，根据你的选择在这里。 如果你的缩略是在一个糟糕的品质或搞砸了，试图改变这一设置。';
-$lang['ATTACHMENT_VERSION'] = '附件Mod版%s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '管理被禁止的扩展';

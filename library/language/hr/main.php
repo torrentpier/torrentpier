@@ -2183,7 +2183,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Traži Imagick';
 
 $lang['USE_GD2'] = 'Koristite proširenje gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-to može biti sastavljen s pravog gd1 ili proširenje gd2 za obradu slike. Kako pravilno izraditi skice bez paketa imagemagick privitak mod koristi dvije različite metode, na temelju vašeg odabira ovdje. Ako vaše превьюшки u lošem ili kao zeznuo, pokušajte promijeniti postavku.';
-$lang['ATTACHMENT_VERSION'] = 'Privitak Mod Verzija %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Upravljanje Zabranjene Za Proširenje';

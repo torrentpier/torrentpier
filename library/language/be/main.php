@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Пошук Imagick';
 
 $lang['USE_GD2'] = 'Выкарыстоўваць пашырэнне gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-гэта могуць быць скампіляваны з падыходнага gd1 або пашырэнне gd2 для апрацоўкі малюнка. Каб правільна стварыць эскізы без imagemagick ўкладанне мод выкарыстоўвае два розных метаду, на аснове вашага выбару тут. Калі вашы прэв\'юшкі ў дрэнным якасці або аблажаліся, паспрабуйце змяніць гэты параметр.';
-$lang['ATTACHMENT_VERSION'] = 'Ўкладанне Мод Версія %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Кіраваць Забароненыя Пашырэння';

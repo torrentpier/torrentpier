@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Αναζήτηση Imagick';
 
 $lang['USE_GD2'] = 'Κάντε χρήση GD2 Επέκταση';
 $lang['USE_GD2_EXPLAIN'] = 'Η PHP είναι σε θέση να καταρτίζονται με την GD1 ή GD2 για Επέκταση εικόνας χειρισμό. Για να δημιουργήσετε σωστά Μικρογραφίες χωρίς imagemagick το Συνημμένο Mod χρησιμοποιεί δύο διαφορετικές μεθόδους, με βάση την επιλογή σας. Αν σας μικρογραφίες είναι σε κακή ποιότητα ή τα θαλάσσωσε, προσπαθήστε να αλλάξετε αυτή τη ρύθμιση.';
-$lang['ATTACHMENT_VERSION'] = 'Συνημμένο Έκδοση Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Διαχείριση Απαγορεύεται Επεκτάσεις';

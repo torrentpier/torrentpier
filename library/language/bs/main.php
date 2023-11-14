@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Potrazi Imagick';
 
 $lang['USE_GD2'] = 'Iskoristi GD2 Produženje';
 $lang['USE_GD2_EXPLAIN'] = 'PHP je u mogućnosti da se složio sa GD1 ili GD2 Produženje za sliku manipulira. Da pravilno stvoriti Vanjski bez imagemagick Prilog Mod koriste dva različita metode, na osnovu tvog izbor ovdje. Ako ti vanjski su u lošem kvalitetu ili zabrljao, pokušati promijeniti ovo mjesto.';
-$lang['ATTACHMENT_VERSION'] = 'Prilog Mod Verzija %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Snaći Zabranjeno Ekstenzije';

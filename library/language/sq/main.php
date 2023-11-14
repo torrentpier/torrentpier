@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Kërkim Imagick';
 
 $lang['USE_GD2'] = 'Bëni përdorimin e GD2 Zgjatje';
 $lang['USE_GD2_EXPLAIN'] = 'PHP është në gjendje të jetë e përpiluar me GD1 ose GD2 Këshillëdhënëse për manipulimin e imazhit. Të saktë të krijojë Thumbnails pa imagemagick Shtojcën Mod përdor dy metoda të ndryshme, bazuar në zgjedhjen tuaj këtu. Nëse tuaj të miniaturave janë në një cilësi të keqe ose të dehur, do të përpiqen për ta ndryshoni këtë cilësim.';
-$lang['ATTACHMENT_VERSION'] = 'Shtojcë Mod Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Menaxhuar Ndaluar Zgjerime';

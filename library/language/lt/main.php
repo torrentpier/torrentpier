@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Paieškos Imagick';
 
 $lang['USE_GD2'] = 'Naudoti GD2 Pratęsimo';
 $lang['USE_GD2_EXPLAIN'] = 'PHP gali būti sukompiliuotos su GD1 ar GD2 Pratęsimo vaizdo manipuliuoti. Teisingai kurti Miniatiūras be imagemagick Priedą Mod naudoja du skirtingus metodus, pagrįsti savo pasirinkimą čia. Jei jūsų miniatiūros yra prastos kokybės arba įsukus, pabandykite pakeisti šį parametrą.';
-$lang['ATTACHMENT_VERSION'] = 'Tvirtinimo Mod Versija %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Tvarkyti Draudžiama Plėtiniai';

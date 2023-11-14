@@ -2183,7 +2183,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Որոնում Imagick';
 
 $lang['USE_GD2'] = 'Օգտագործել gd2 extension';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-դա կարող է լինել скомпилированы հետ հարմար gd1 կամ gd2 extension մշակման պատկերը. Ճիշտ ստեղծել էսքիզներ առանց փաթեթի imagemagick հավելված պն օգտագործում է երկու տարբեր մեթոդի հիման վրա ձեր ընտրության այստեղ. Եթե ձեր превьюшки վատ է որպես կամ облажались, փորձեք փոխել այս տարբերակը.';
-$lang['ATTACHMENT_VERSION'] = 'Հավելված Պն Տարբերակը %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Կառավարել Արգելված Ընդլայնման';

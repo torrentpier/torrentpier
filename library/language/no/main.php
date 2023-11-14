@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Søk Imagick';
 
 $lang['USE_GD2'] = 'Gjøre bruk av GD2 Extension';
 $lang['USE_GD2_EXPLAIN'] = 'PHP er i stand til å være kompilert med GD1 eller GD2 Extension for bilde-manipulering. Du skal lage Miniatyrbilder uten imagemagick Vedlegget Mod bruker to forskjellige metoder, basert på dine valg her. Hvis miniatyrbildene er i en dårlig kvalitet eller skrudd opp, prøv å endre denne innstillingen.';
-$lang['ATTACHMENT_VERSION'] = 'Vedlegg Mod Versjon %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Administrere Forbudt Utvidelser';

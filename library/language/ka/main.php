@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'საძიებო Imagick';
 
 $lang['USE_GD2'] = 'გამოიყენონ GD2 გაფართოება';
 $lang['USE_GD2_EXPLAIN'] = 'PHP შეუძლია იყოს შედგენილი ერთად GD1 ან GD2 გაგრძელების გამოსახულების მანიპულირება. სწორად შექმნათ გამოსახულება გარეშე imagemagick დანართი Mod იყენებს ორი სხვადასხვა მეთოდები, ეფუძნება თქვენი არჩევანი აქ. თუ თქვენი დაბრუნება არიან ცუდი ხარისხის ან ბრალია, შეეცადეთ შეცვალოთ ეს პარამეტრი.';
-$lang['ATTACHMENT_VERSION'] = 'დანართი Mod ვერსია %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'მართვა აკრძალული გაგრძელება';

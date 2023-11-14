@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Suche Imagick';
 
 $lang['USE_GD2'] = 'Nutzen GD2-Erweiterung';
 $lang['USE_GD2_EXPLAIN'] = 'PHP ist in der Lage zu sein, wurden mit GD1 oder GD2-Erweiterung für Bild-Manipulation. Um korrekt zu erstellen Thumbnails ohne imagemagick der Attachment Mod benutzt zwei unterschiedliche Methoden, basierend auf Ihrer Auswahl hier. Wenn Ihr die thumbnails sind in einer schlechten Qualität oder geschraubt wird, können Sie versuchen, diese Einstellung zu ändern.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Verwalten Verboten Erweiterungen';

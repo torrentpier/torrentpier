@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Sök Imagick';
 
 $lang['USE_GD2'] = 'Använda GD2 Förlängning';
 $lang['USE_GD2_EXPLAIN'] = 'PHP kan sammanställas med GD1 eller GD2 Förlängning för bild-och manipulera. För att på rätt sätt skapar Miniatyrer utan imagemagick den Bifogade filen Mod använder sig av två olika metoder, baserat på ditt val här. Om dina miniatyrer är i en dålig kvalitet eller skruvas upp, försök att ändra denna inställning.';
-$lang['ATTACHMENT_VERSION'] = 'Bilaga Mod Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Hantera Förbjudet Tillägg';
