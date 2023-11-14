@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Zoeken Imagick';
 
 $lang['USE_GD2'] = 'Maak gebruik van GD2 Uitbreiding';
 $lang['USE_GD2_EXPLAIN'] = 'PHP is in staat te worden gecompileerd met de GD1 of GD2-Extensie voor het beeld te manipuleren. Juist het maken van Miniaturen, zonder imagemagick de Bijlage Mod maakt gebruik van twee verschillende methoden, gebaseerd op uw selectie hier. Als uw miniaturen in een slechte kwaliteit of verknoeid, proberen om deze instelling te wijzigen.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Versie %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Beheren Verboden Extensies';
