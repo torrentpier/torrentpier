@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Іздеу Imagick';
 
 $lang['USE_GD2'] = 'GD2 кеңейту пайдалану';
 $lang['USE_GD2_EXPLAIN'] = 'PHP сурет шарғы GD1 немесе GD2 Extension бар жасалады қабілетті. дұрыс ImageMagicK жоқ Mod жерде сіздің таңдау негізінде екі түрлі әдістерін пайдаланады Тіркеме Нобайлар жасау үшін. Егер нобайлар нашар сапасы болып табылады немесе прищурил болса, осы параметрді өзгерту үшін көріңіз.';
-$lang['ATTACHMENT_VERSION'] = 'Тіркеме Mod нұсқасы %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Forbidden кеңейтімдерін басқару';
