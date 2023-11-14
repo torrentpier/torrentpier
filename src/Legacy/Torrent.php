@@ -599,7 +599,7 @@ class Torrent
         // Send torrent
         $output = \Arokettu\Bencode\Bencode::encode($tor);
 
-        $dl_fname = html_entity_decode($topic_title, ENT_QUOTES, 'UTF-8') . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.torrent';
+        $dl_fname = html_entity_decode($topic_title, ENT_QUOTES, 'UTF-8') . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
