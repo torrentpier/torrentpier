@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Vyhľadávanie Imagick';
 
 $lang['USE_GD2'] = 'Využiť GD2 Rozšírenie';
 $lang['USE_GD2_EXPLAIN'] = 'PHP je schopný byť skompilovaný s GD1 alebo GD2 Rozšírenie pre obraz manipuláciu. Správne vytvárať Náhľady bez imagemagick Prílohu Mod používa dve rôzne metódy, založené na výber tu. Ak váš miniatúry sú v zlej kvalite alebo skrutkované, skúste toto nastavenie zmeniť.';
-$lang['ATTACHMENT_VERSION'] = 'Príloha Mod Verzia %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Spravovať Zakázané Rozšírenia';
