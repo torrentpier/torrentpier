@@ -200,12 +200,9 @@ if ($lp_info) {
 
     // Check hybrid torrents
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
-        // Helpful dev variables
         $is_hybrid = true;
-        $hybrid_v1_hash = &$row['info_hash'];
-        $hybrid_v2_hash = &$row['info_hash_v2'];
-        if ($info_hash === $hybrid_v1_hash) {
-            $hybrid_tor_update = true;
+        if ($info_hash === $row['info_hash']) {
+            $update_hybrid = true;
         }
     }
 
@@ -306,7 +303,7 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only for one topic
+if (!isset($is_hybrid) || isset($update_hybrid)) { // Update statistics only for one topic
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
@@ -337,7 +334,7 @@ if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only
         $peer_info_updated = DB()->affected_rows();
     }
 
-    if (!$lp_info || !$peer_info_updated) {
+    if ((!$lp_info || !$peer_info_updated) && !$stopped) {
 
         $columns = "peer_hash, topic_id, user_id, $ip_version, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id";
         $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";
