@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Haku Imagick';
 
 $lang['USE_GD2'] = 'Käyttää GD2 Laajennus';
 $lang['USE_GD2_EXPLAIN'] = 'PHP voi olla koottu kanssa GD1 tai GD2 Laajennus kuvan manipulointi. Oikein luoda Esikatselukuvat ilman imagemagick Kiinnitys Mod käyttää kahta eri menetelmää, joka perustuu omaan valintaan. Jos miniatyyrit ovat huono laatu tai sekaisin, yritä muuttaa tätä asetusta.';
-$lang['ATTACHMENT_VERSION'] = 'Kiinnitys Mod Versio %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Hallita Kielletty Laajennukset';
