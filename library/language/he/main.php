@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'חיפוש Imagick';
 
 $lang['USE_GD2'] = 'לעשות שימוש GD2 הרחבה';
 $lang['USE_GD2_EXPLAIN'] = 'PHP הוא מסוגל להיות הידור עם GD1 או GD2 הרחבה על התמונה מניפולציה. בצורה נכונה כדי ליצור תמונות ממוזערות ללא imagemagick את הקובץ Mod משתמשת בשתי שיטות שונות, בהתבסס על הבחירה שלך. אם התמונות הממוזערות נמצא באיכות גרועה או דפוק, נסה לשנות הגדרה זו.';
-$lang['ATTACHMENT_VERSION'] = 'מצורף Mod גרסה %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'לנהל אסור הרחבות';
