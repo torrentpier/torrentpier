@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Ricerca Imagick';
 
 $lang['USE_GD2'] = 'Fare uso di GD2 Estensione';
 $lang['USE_GD2_EXPLAIN'] = 'PHP è in grado di essere compilato con il GD1 o GD2 Estensione per la manipolazione delle immagini. Per creare correttamente le Miniature senza imagemagick l\'Allegato Mod utilizza due metodi diversi, a seconda della selezione qui. Se le tue miniature sono in una cattiva qualità o avvitato, il tentativo di modificare questa impostazione.';
-$lang['ATTACHMENT_VERSION'] = 'Allegato Mod Versione %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gestire Vietato Estensioni';
