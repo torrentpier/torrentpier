@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Otsingu Imagick';
 
 $lang['USE_GD2'] = 'Kasutada GD2 Pikendamine';
 $lang['USE_GD2_EXPLAIN'] = 'PHP on võimalik siduda GD1 või GD2 Laiendamine pildi manipuleerides. Õigesti luua Pisipildid ilma imagemagick Manus Mod kasutab kahte erinevat meetodit, mis põhineb teie valik on siin. Kui teie pisipildid on halb kvaliteet või silmamunad, proovige seda sätet muuta.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Versioon %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Halda Keelatud Laiendid';
