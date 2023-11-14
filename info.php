@@ -18,7 +18,7 @@ global $lang;
 
 $info = [];
 $html_dir = LANG_DIR . 'html/';
-$req_mode = (string)$_REQUEST['show'];
+$req_mode = (string)($_REQUEST['show'] ?? '');
 
 switch ($req_mode) {
     case 'advert':

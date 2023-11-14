@@ -16,17 +16,18 @@ $user->session_start(['req_login' => true]);
 
 $mode = $_REQUEST['mode'] ?? '';
 $type = $_POST['type'] ?? '';
-$id = $_POST['id'] ?? 0;
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 $timecheck = TIMENOW - 600;
 
 if (!$mode) {
     bb_simple_die($lang['ATOM_NO_MODE']);
 }
 
-if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
+if ($mode === 'get_feed_url' && ($type === 'f' || $type === 'u') && $id >= 0) {
     if ($type == 'f') {
         // Check if the user has actually sent a forum ID
         $sql = "SELECT allow_reg_tracker, forum_name FROM " . BB_FORUMS . " WHERE forum_id = $id LIMIT 1";
+        //DIE($sql);
         if (!$forum_data = DB()->fetch_row($sql)) {
             if ($id == 0) {
                 $forum_data = [];
@@ -44,7 +45,7 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
             }
         }
     }
-    if ($type == 'u') {
+    if ($type === 'u') {
         // Check if the user has actually sent a user ID
         if ($id < 1) {
             bb_simple_die($lang['ATOM_ERROR'] . ' #2');
