@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Iskanje Imagick';
 
 $lang['USE_GD2'] = 'Uporabiti GD2 Razširitev';
 $lang['USE_GD2_EXPLAIN'] = 'PHP je lahko pripravijo z GD1 ali GD2 Razširitve za obdelovanje slik. Za pravilno ustvariti Sličice brez imagemagick Prilogo Mod uporablja dveh različnih metod, ki temeljijo na vaše izbire tukaj. Če vaše sličice so slabe kakovosti ali zajebali, poskusite spremeniti to nastavitev.';
-$lang['ATTACHMENT_VERSION'] = 'Prilogo Mod Različica %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Upravljanje Prepovedano Razširitve';
