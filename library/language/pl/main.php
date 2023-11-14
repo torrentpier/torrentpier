@@ -2183,7 +2183,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Wyszukaj Imagick';
 
 $lang['USE_GD2'] = 'Używać rozszerzenia gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-to mogą być skompilowane z odpowiedniego gd1 lub rozszerzenie gd2 do przetwarzania obrazu. Aby poprawnie utworzyć miniatury bez pakietu imagemagick załącznik mod wykorzystuje dwa różne metody, na podstawie wyboru tutaj. Jeśli twoje miniatury w złej jakości lub wkręca, spróbuj zmienić to ustawienie.';
-$lang['ATTACHMENT_VERSION'] = 'Załącznik Mod Wersja %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Zarządzanie Niedozwolone Rozszerzenie';
