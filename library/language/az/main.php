@@ -2183,7 +2183,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Axtarış İmagick';
 
 $lang['USE_GD2'] = 'İstifadə genişləndirilməsi gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-bu, ola bilər скомпилированы ilə uyğun gd1 və ya genişləndirilməsi gd2 üçün image emal. Düzgün yaratmaq kiçik olmadan paket imagemagick qoyuluşu mod istifadə edir ki, iki müxtəlif metod seçimi əsasında burada. Əgər sizin превьюшки pis kimi və ya облажались, dəyişdirmək üçün cəhd edin, bu seçimi edin.';
-$lang['ATTACHMENT_VERSION'] = 'Əlavə Mod Versiya %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'İdarə Etmək Qadağan Olunmuş Genişləndirilməsi';
