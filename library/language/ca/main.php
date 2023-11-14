@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Cerca Imagick';
 
 $lang['USE_GD2'] = 'Fer ús de GD2 Extensió';
 $lang['USE_GD2_EXPLAIN'] = 'PHP és capaç de ser compilats amb la GD1 o GD2 Extensió de la imatge manipular. Per a la correcta crear Miniatures sense imagemagick l\'Adjunt Mod utilitza dos mètodes diferents, basat en la seva selecció aquí. Si el vostre miniatures són de mala qualitat o la pota, intentar canviar aquesta configuració.';
-$lang['ATTACHMENT_VERSION'] = 'Adjunt Mod Versió %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gestionar Prohibit Extensions';
