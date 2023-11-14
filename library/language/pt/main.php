@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Pesquisa Imagick';
 
 $lang['USE_GD2'] = 'Fazer uso de GD2 Extensão';
 $lang['USE_GD2_EXPLAIN'] = 'O PHP é capaz de ser compilado com o GD1 ou GD2 Extensão para manipulação de imagem. Para criar corretamente Miniaturas sem imagemagick o Anexo Mod usa dois diferentes métodos, com base na sua seleção aqui. Se o seu miniaturas estão em uma má qualidade ou asneira, tente alterar esta definição.';
-$lang['ATTACHMENT_VERSION'] = 'Anexo Versão Do Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gerenciar Extensões Proibido';
