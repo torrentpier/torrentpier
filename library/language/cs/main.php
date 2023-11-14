@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Vyhledávání Imagick';
 
 $lang['USE_GD2'] = 'Využít Rozšíření GD2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP je schopen být sestaven s GD1 GD2 nebo Rozšíření pro obrázek manipulace. Správně vytvářet Náhledy bez imagemagick Přílohu Mod používá dvě různé metody, na základě vašeho výběru. Pokud vaše náhledy jsou ve špatné kvalitě, nebo to podělal, zkuste změnit toto nastavení.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Verze %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Spravovat Zakázané Rozšíření';
