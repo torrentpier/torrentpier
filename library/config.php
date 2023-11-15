@@ -21,7 +21,7 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.0-beta4';
+$bb_cfg['tp_version'] = 'v2.4.0-rc1';
 $bb_cfg['tp_release_date'] = '14-11-2023';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
@@ -91,7 +91,7 @@ $bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
 // GZip
-$bb_cfg['gzip_compress'] = false; // compress output
+$bb_cfg['gzip_compress'] = false; // Compress output
 
 // Tracker
 $bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
@@ -138,10 +138,10 @@ $bb_cfg['dl_complete_days_keep'] = 180;
 $bb_cfg['dl_cancel_days_keep'] = 30;
 
 // Tor-Stats
-$bb_cfg['torstat_days_keep'] = 60; // days to keep user's per-torrent stats
+$bb_cfg['torstat_days_keep'] = 60; // Days to keep user's per-torrent stats
 
 // Tor-Help
-$bb_cfg['torhelp_enabled'] = false; // find dead torrents (without seeder) that user might help seeding
+$bb_cfg['torhelp_enabled'] = false; // Find dead torrents (without seeder) that user might help seeding
 
 // URL's
 $bb_cfg['ajax_url'] = 'ajax.php'; # "http://{$_SERVER['SERVER_NAME']}/ajax.php"
