@@ -168,8 +168,8 @@ if ($lp_info) {
     $tor_type = $lp_info['tor_type'];
 } else {
     /**
-     * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
-     * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
+     * Currently torrent clients send truncated v2 hashes (the design raises questions).
+     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
@@ -198,10 +198,10 @@ if ($lp_info) {
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
 
-    // Check hybrid torrents
+    // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
         $is_hybrid = true;
-        if ($info_hash === $row['info_hash']) {
+        if ($info_hash === $row['info_hash']) { // Change this to substr($row['info_hash_v2'], 0, 20) in the future to update statistics, when v2 torrents will be default.
             $update_hybrid = true;
         }
     }
