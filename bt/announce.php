@@ -72,12 +72,8 @@ $info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($i
 // Store peer id
 $peer_id_sql = rtrim(DB()->escape(htmlCHR($peer_id)), ' ');
 
-// Check info_hash version
-if (strlen($info_hash) === 32) {
-    $is_bt_v2 = true;
-} elseif (strlen($info_hash) === 20) {
-    $is_bt_v2 = false;
-} else {
+// Check info_hash length
+if (strlen($info_hash) !== 20) {
     msg_die('Invalid info_hash: ' . $info_hash_hex);
 }
 
@@ -132,7 +128,7 @@ $peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
 // Events
 $stopped = ($event === 'stopped');
 
-// Get the real port to help some NAT users
+// Get the real port to help port-restricted NAT users
 $port = $_SERVER['REMOTE_PORT'];
 
 // Set seeder & complete
@@ -167,12 +163,12 @@ if ($lp_info) {
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
 } else {
+    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     /**
      * Currently torrent clients send truncated v2 hashes (the design raises questions).
      * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
-    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
+    $info_hash_where = "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
@@ -201,7 +197,7 @@ if ($lp_info) {
     // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
         $is_hybrid = true;
-        if ($info_hash === $row['info_hash']) { // Change this to substr($row['info_hash_v2'], 0, 20) in the future to update statistics, when v2 torrents will be default.
+        if ($info_hash === $row['info_hash']) { // Change this to substr($row['info_hash_v2'], 0, 20) in the future for updating statistics, in case of v2 torrents being prioritized.
             $update_hybrid = true;
         }
     }
@@ -303,11 +299,12 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (!isset($is_hybrid) || isset($update_hybrid)) { // Update statistics only for one topic
+if (!isset($is_hybrid) || isset($update_hybrid)) { // Record statistics only for one topic
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
         $sql .= ", $ip_version = '$ip_sql'";
+        $sql .= ", port = '$port'";
         $sql .= ", seeder = $seeder";
         $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
 
