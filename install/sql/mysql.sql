@@ -539,7 +539,7 @@ VALUES ('allow_autologin', '1'),
        ('bt_unset_dltype_on_tor_unreg', '1'),
        ('cron_last_check', '0'),
        ('default_dateformat', 'Y-m-d H:i'),
-       ('default_lang', 'ru'),
+       ('default_lang', 'en'),
        ('flood_interval', '15'),
        ('hot_threshold', '300'),
        ('login_reset_time', '30'),
@@ -1089,7 +1089,7 @@ CREATE TABLE IF NOT EXISTS `bb_ranks`
 -- Records of bb_ranks
 -- ----------------------------
 INSERT INTO `bb_ranks` (`rank_title`, `rank_image`, `rank_style`)
-VALUES ('Администратор', 'styles/images/ranks/admin.png', 'colorAdmin');
+VALUES ('Administrator', 'styles/images/ranks/admin.png', 'colorAdmin');
 
 -- ----------------------------
 -- Table structure for `bb_search_rebuild`
@@ -1349,7 +1349,7 @@ CREATE TABLE IF NOT EXISTS `bb_users`
   `user_level`          TINYINT(4)            NOT NULL DEFAULT '0',
   `user_posts`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_timezone`       DECIMAL(5, 2)         NOT NULL DEFAULT '0.00',
-  `user_lang`           VARCHAR(255)          NOT NULL DEFAULT 'ru',
+  `user_lang`           VARCHAR(255)          NOT NULL DEFAULT 'en',
   `user_new_privmsg`    SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `user_unread_privmsg` SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `user_last_privmsg`   INT(11)               NOT NULL DEFAULT '0',
@@ -1389,7 +1389,7 @@ CREATE TABLE IF NOT EXISTS `bb_users`
 INSERT INTO `bb_users`
 VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3M53.CEe.O', '0', '0',
         '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
-        'ru', '0',
+        'en', '0',
         '0', '0',
         '0', '0',
         '0', '0',
@@ -1397,14 +1397,14 @@ VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3
         '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
        ('-746', '0', 'bot', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3M53.CEe.O', '0', '0',
         '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
-        'ru', '0',
+        'en', '0',
         '0', '0',
         '144', '0',
         '0', '0',
         '1900-01-01',
         'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
        ('2', '1', 'admin', '$2y$10$QeekUGqdfMO0yp7AT7la8OhgbiNBoJ627BO38MdS1h5kY7oX6UUKu', '0', '0',
-        '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru',
+        '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'en',
         '0',
         '0', '0',
         '304', '1',
