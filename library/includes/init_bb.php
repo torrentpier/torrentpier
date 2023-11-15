@@ -336,14 +336,16 @@ function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.
 }
 
 /**
- * @param $txt
- * @param int $quote_style
- * @param string $charset
+ * Convert HTML entities to their corresponding characters
+ *
+ * @param string $string
+ * @param int $flags
+ * @param string|null $encoding
  * @return string
  */
-function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+function html_ent_decode(string $string, int $flags = ENT_QUOTES, ?string $encoding = 'UTF-8'): string
 {
-    return (string)html_entity_decode($txt, $quote_style, $charset);
+    return html_entity_decode($string, $flags, $encoding);
 }
 
 /**
