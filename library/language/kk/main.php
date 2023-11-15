@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Іздеу Imagick';
 
 $lang['USE_GD2'] = 'GD2 кеңейту пайдалану';
 $lang['USE_GD2_EXPLAIN'] = 'PHP сурет шарғы GD1 немесе GD2 Extension бар жасалады қабілетті. дұрыс ImageMagicK жоқ Mod жерде сіздің таңдау негізінде екі түрлі әдістерін пайдаланады Тіркеме Нобайлар жасау үшін. Егер нобайлар нашар сапасы болып табылады немесе прищурил болса, осы параметрді өзгерту үшін көріңіз.';
-$lang['ATTACHMENT_VERSION'] = 'Тіркеме Mod нұсқасы %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Forbidden кеңейтімдерін басқару';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Форумға картасы';
 $lang['ATOM_FEED'] = 'жем';
 $lang['ATOM_ERROR'] = 'Қате генерациялайтын жем';
 $lang['ATOM_SUBSCRIBE'] = 'каналға жазылу';
-$lang['ATOM_NO_MODE'] = 'жем үшін режимін көрсетіңіз емес пе';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Бұл форум арнаны (жоқ тұрақты тақырыптар) ие емес';
 $lang['ATOM_NO_USER'] = 'Бұл пайдаланушы арнаны (жоқ тұрақты тақырыптар) ие емес';
 $lang['ATOM_UPDATED'] = 'Жаңартылған';

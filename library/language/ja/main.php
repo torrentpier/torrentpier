@@ -2184,7 +2184,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = '検索Imagick';
 
 $lang['USE_GD2'] = '利用GD2延長';
 $lang['USE_GD2_EXPLAIN'] = 'PHPで作成し、GD1はGD2の拡張イメージを操作します。 を正しく作成するにはサムネイルなしにimagemagickの添付Mod用途の異なる二つの方法からお選びいた。 場合において、サムネイルが悪い質奮いうのは、この設定を変更します。';
-$lang['ATTACHMENT_VERSION'] = '添付Mod版%s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '管理禁断の拡張';
@@ -2750,7 +2749,7 @@ $lang['FORUM_MAP'] = 'フォーラム"地図';
 $lang['ATOM_FEED'] = '飼料';
 $lang['ATOM_ERROR'] = 'エラー発生飼料';
 $lang['ATOM_SUBSCRIBE'] = '購読の飼料';
-$lang['ATOM_NO_MODE'] = '指定がないモードの飼料';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'このフォーラムがない飼料(継続的な課題)';
 $lang['ATOM_NO_USER'] = 'このユーザーがない飼料(継続的な課題)';
 $lang['ATOM_UPDATED'] = '更新日時';

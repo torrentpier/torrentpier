@@ -2183,7 +2183,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Axtarış İmagick';
 
 $lang['USE_GD2'] = 'İstifadə genişləndirilməsi gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-bu, ola bilər скомпилированы ilə uyğun gd1 və ya genişləndirilməsi gd2 üçün image emal. Düzgün yaratmaq kiçik olmadan paket imagemagick qoyuluşu mod istifadə edir ki, iki müxtəlif metod seçimi əsasında burada. Əgər sizin превьюшки pis kimi və ya облажались, dəyişdirmək üçün cəhd edin, bu seçimi edin.';
-$lang['ATTACHMENT_VERSION'] = 'Əlavə Mod Versiya %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'İdarə Etmək Qadağan Olunmuş Genişləndirilməsi';
@@ -2750,7 +2749,7 @@ $lang['FORUM_MAP'] = 'Kart forumların';
 $lang['ATOM_FEED'] = 'Yem';
 $lang['ATOM_ERROR'] = 'Yaradan səhv qidalanma';
 $lang['ATOM_SUBSCRIBE'] = 'Abunə kanal';
-$lang['ATOM_NO_MODE'] = 'Unknown rejimi üçün yem';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Bu forum qidalanma (cari mövzuları)';
 $lang['ATOM_NO_USER'] = 'Bu istifadəçi heç bir güc yoxdur (heç bir daimi mövzuları)';
 $lang['ATOM_UPDATED'] = 'Yenilə';

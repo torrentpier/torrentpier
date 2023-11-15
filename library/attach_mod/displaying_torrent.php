@@ -88,7 +88,7 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-$display_name = wbr($t_data['topic_title']) . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.torrent';
+$display_name = wbr($t_data['topic_title']) . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
 
 if (!$tor_reged) {
     $template->assign_block_vars('postrow.attach.tor_not_reged', [

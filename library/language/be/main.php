@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Пошук Imagick';
 
 $lang['USE_GD2'] = 'Выкарыстоўваць пашырэнне gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-гэта могуць быць скампіляваны з падыходнага gd1 або пашырэнне gd2 для апрацоўкі малюнка. Каб правільна стварыць эскізы без imagemagick ўкладанне мод выкарыстоўвае два розных метаду, на аснове вашага выбару тут. Калі вашы прэв\'юшкі ў дрэнным якасці або аблажаліся, паспрабуйце змяніць гэты параметр.';
-$lang['ATTACHMENT_VERSION'] = 'Ўкладанне Мод Версія %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Кіраваць Забароненыя Пашырэння';
@@ -2747,7 +2746,7 @@ $lang['FORUM_MAP'] = 'Карта форумаў';
 $lang['ATOM_FEED'] = 'Лента';
 $lang['ATOM_ERROR'] = 'Генеруючы памылкі карміць';
 $lang['ATOM_SUBSCRIBE'] = 'Падпісацца на канал';
-$lang['ATOM_NO_MODE'] = 'Не паказаны рэжым для ленты';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Гэты форум не карміць (не бягучай тэмы)';
 $lang['ATOM_NO_USER'] = 'У гэтага карыстальніка няма харчавання (няма пастаяннай тэмы)';
 $lang['ATOM_UPDATED'] = 'Абнавлено';

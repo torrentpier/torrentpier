@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = '搜索Imagick';
 
 $lang['USE_GD2'] = '使用扩展GD2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP是能够编制与GD1或GD2扩展对于图像操纵的。 正确的创造略图，而不imagemagick该附件的国防部使用两种不同的方法，根据你的选择在这里。 如果你的缩略是在一个糟糕的品质或搞砸了，试图改变这一设置。';
-$lang['ATTACHMENT_VERSION'] = '附件Mod版%s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '管理被禁止的扩展';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = '论坛\'地图';
 $lang['ATOM_FEED'] = '订阅';
 $lang['ATOM_ERROR'] = '错误发生料';
 $lang['ATOM_SUBSCRIBE'] = '订阅料';
-$lang['ATOM_NO_MODE'] = '不要指定一个模式用于饲料';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = '这个论坛不具有饲料(没有正在进行的主题)';
 $lang['ATOM_NO_USER'] = '这个用户不具有饲料(没有正在进行的主题)';
 $lang['ATOM_UPDATED'] = '已更新';

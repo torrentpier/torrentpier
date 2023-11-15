@@ -72,12 +72,8 @@ $info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($i
 // Store peer id
 $peer_id_sql = rtrim(DB()->escape(htmlCHR($peer_id)), ' ');
 
-// Check info_hash version
-if (strlen($info_hash) === 32) {
-    $is_bt_v2 = true;
-} elseif (strlen($info_hash) === 20) {
-    $is_bt_v2 = false;
-} else {
+// Check info_hash length
+if (strlen($info_hash) !== 20) {
     msg_die('Invalid info_hash: ' . $info_hash_hex);
 }
 
@@ -132,7 +128,7 @@ $peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
 // Events
 $stopped = ($event === 'stopped');
 
-// Get the real port to help some NAT users
+// Get the real port to help port-restricted NAT users
 $port = $_SERVER['REMOTE_PORT'];
 
 // Set seeder & complete
@@ -167,12 +163,12 @@ if ($lp_info) {
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
 } else {
-    /**
-     * Поскольку торрент-клиенты в настоящее время обрезают инфо-хэш до 20 символов (независимо от его типа, как известно v1 = 20 символов, а v2 = 32 символа),
-     * то результатов $is_bt_v2 (исходя из длины строки определяем тип инфо-хэша) проверки нам будет мало, именно поэтому происходит поиск v2 хэша, если торрент является v1 (по длине) и если в tor.info_hash столбце нету v1 хэша.
-     */
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-    $info_hash_where = $is_bt_v2 ? "WHERE tor.info_hash_v2 = '$info_hash_sql'" : "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
+    /**
+     * Currently torrent clients send truncated v2 hashes (the design raises questions).
+     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+     */
+    $info_hash_where = "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
@@ -198,14 +194,11 @@ if ($lp_info) {
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
 
-    // Check hybrid torrents
+    // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
-        // Helpful dev variables
         $is_hybrid = true;
-        $hybrid_v1_hash = &$row['info_hash'];
-        $hybrid_v2_hash = &$row['info_hash_v2'];
-        if ($info_hash === $hybrid_v1_hash) {
-            $hybrid_tor_update = true;
+        if ($info_hash === $row['info_hash']) { // Change this to substr($row['info_hash_v2'], 0, 20) in the future for updating statistics, in case of v2 torrents being prioritized.
+            $update_hybrid = true;
         }
     }
 
@@ -306,11 +299,12 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only for one topic
+if (!isset($is_hybrid) || isset($update_hybrid)) { // Record statistics only for one topic
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
         $sql .= ", $ip_version = '$ip_sql'";
+        $sql .= ", port = '$port'";
         $sql .= ", seeder = $seeder";
         $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
 
@@ -337,7 +331,7 @@ if (isset($hybrid_tor_update) || !isset($is_hybrid)) { // Update statistics only
         $peer_info_updated = DB()->affected_rows();
     }
 
-    if (!$lp_info || !$peer_info_updated) {
+    if ((!$lp_info || !$peer_info_updated) && !$stopped) {
 
         $columns = "peer_hash, topic_id, user_id, $ip_version, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id";
         $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";

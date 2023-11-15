@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Пошук Imagick';
 
 $lang['USE_GD2'] = 'Використовувати розширення GD2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP може бути скомпільовано з розширенням GD1 або GD2 для роботи із зображеннями. Щоб правильно створити мініатюри без imagemagick, режим вкладень може використовувати два різних способи, ґрунтуючись на Вашому виборі даної опції. Якщо Ваші ескізи будуть поганої якості або спотворені, спробуйте змінити це налаштування.';
-$lang['ATTACHMENT_VERSION'] = 'Версія моду вкладень %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Керування забороненими розширеннями';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Карта форумів';
 $lang['ATOM_FEED'] = 'Стрічка';
 $lang['ATOM_ERROR'] = 'Помилка створення стрічки';
 $lang['ATOM_SUBSCRIBE'] = 'Підписка на стрічку';
-$lang['ATOM_NO_MODE'] = 'Не вказано режим для стрічки';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Для цього форуму немає стрічки (немає початих тем)';
 $lang['ATOM_NO_USER'] = 'Для цього користувача немає стрічки (немає початих тем)';
 $lang['ATOM_UPDATED'] = 'Оновлено';

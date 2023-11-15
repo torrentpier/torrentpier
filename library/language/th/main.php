@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'การค้นหา Imagick';
 
 $lang['USE_GD2'] = 'ทำให้ใช้ของ GD2 ส่วนขยาย';
 $lang['USE_GD2_EXPLAIN'] = 'PHP เป็นสามารถที่จะรวบรวมข้อมูลเสร็กับ GD1 หรือ GD2 ส่วนขยายสำหรับภาพหลอกใช้ได้ เพื่ออย่างถูกต้องสร้างภาพตัวอย่างขนาดเล็กโดยไม่มี imagemagick สิ่งที่แนบมาด้วย@info:whatsthis ลม็อใช้สองคนต่างออกวิธีการของจากการเลือกของคุณอยู่ที่นี่ ถ้าคุณภาพตัวอย่างใหม่ทั้งหมดอยู่ในร้ายคุณภาพหรือทำมันพังพยายามจะเปลี่ยนค่าที่กำหนดนี้';
-$lang['ATTACHMENT_VERSION'] = 'สิ่งที่แนบมาด้วยลม็อรุ่น %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'จัดการเรื่องต้องห้ามส่วนเสริม';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Forums\'แผนที่';
 $lang['ATOM_FEED'] = 'แหล่งป้อน';
 $lang['ATOM_ERROR'] = 'เกิดข้อผิดพลาดในการสร้างแหล่งป้อน';
 $lang['ATOM_SUBSCRIBE'] = 'บอกรับการแหล่งป้อน';
-$lang['ATOM_NO_MODE'] = 'ยังไม่ได้กำหนดเป็นโหมดสำหรับแหล่งป้อน';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'นี่ชุไม่มีแหล่งป้อนได้(ไม่มีเรื่องหัวข้อคุ)';
 $lang['ATOM_NO_USER'] = 'ผู้ใช้นี้ไม่มีแหล่งป้อนได้(ไม่มีเรื่องหัวข้อคุ)';
 $lang['ATOM_UPDATED'] = 'ปรับปรุง';

@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Qidiruv Imagick';
 
 $lang['USE_GD2'] = 'GD2 uzaytirish foydalanish';
 $lang['USE_GD2_EXPLAIN'] = 'PHP tasvir manipulyatsiyasi uchun GD1 yoki GD2 uzaytirish bilan olingan bo\'lishi mumkin emas. to\'g\'ri Tartibni bu erda tanlash asosida ikki xil usullar, foydalanadi plagin ImageMagick holda kichik yaratish uchun. Sizning eskizlari yomon sifatli yoki mast bo\'lsa, bu moslamani o\'zgartirishni harakat qiling.';
-$lang['ATTACHMENT_VERSION'] = 'Ilova Tartibni Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Man kengaytmasini boshqarish';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Forumlar xaritasi';
 $lang['ATOM_FEED'] = 'Tasma';
 $lang['ATOM_ERROR'] = 'Xato ishlab ozuqa';
 $lang['ATOM_SUBSCRIBE'] = 'tasmasiga obuna';
-$lang['ATOM_NO_MODE'] = 'Tasma holati ko`rsatilmagan';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Bu forum bir ovqatni (davom etgan har qanday sifatlar) yo\'q';
 $lang['ATOM_NO_USER'] = 'Ushbu foydalanuvchi bir ovqatni (davom etgan har qanday sifatlar) yo\'q';
 $lang['ATOM_UPDATED'] = 'Yangilandi';

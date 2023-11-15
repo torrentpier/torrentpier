@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Tìm Kiếm Imagick';
 
 $lang['USE_GD2'] = 'Hãy sử dụng GD2 mở Rộng';
 $lang['USE_GD2_EXPLAIN'] = 'Bộ sưu tập thể được biên dịch với GD1 hoặc GD2 mở Rộng cho ảnh thao tác. Một cách chính xác để tạo ra Hình thu nhỏ mà không có máy đính Kèm Mod sử dụng hai phương pháp khác nhau, dựa trên sự lựa chọn của bạn ở đây. Nếu hình thu nhỏ của bạn đang ở trong một chất lượng xấu hoặc hơi say lên, cố gắng để thay đổi này.';
-$lang['ATTACHMENT_VERSION'] = 'Đính Kèm Mod Phiên Bản %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Quản Lý Cấm Mở Rộng';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Các diễn đàn\' bản đồ';
 $lang['ATOM_FEED'] = 'Thức ăn';
 $lang['ATOM_ERROR'] = 'Lỗi tạo ra thức ăn';
 $lang['ATOM_SUBSCRIBE'] = 'Theo dõi các nguồn';
-$lang['ATOM_NO_MODE'] = 'Không chỉ định một chế độ ăn';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Diễn đàn này không có thức ăn (không liên tục chủ đề)';
 $lang['ATOM_NO_USER'] = 'Người này không có thức ăn (không liên tục chủ đề)';
 $lang['ATOM_UPDATED'] = 'Đã cập nhật';

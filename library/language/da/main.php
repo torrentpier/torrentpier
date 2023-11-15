@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Søg Imagick';
 
 $lang['USE_GD2'] = 'Gøre brug af GD2 Udvidelse';
 $lang['USE_GD2_EXPLAIN'] = 'PHP er i stand til at være udarbejdet med GD1 eller GD2 Udvidelse til billede manipulere. Til korrekt at oprette Miniaturebilleder uden imagemagick den Vedhæftede fil Mod anvender to forskellige metoder, der er baseret på dine valg her. Hvis dine billeder er i en dårlig kvalitet eller skruet op, kan du prøve at ændre denne indstilling.';
-$lang['ATTACHMENT_VERSION'] = 'Udlæg Mod Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Styre Forbudt Udvidelser';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Fora\' kort';
 $lang['ATOM_FEED'] = 'Foder';
 $lang['ATOM_ERROR'] = 'Fejl ved generering af foder';
 $lang['ATOM_SUBSCRIBE'] = 'Abonnér på feed';
-$lang['ATOM_NO_MODE'] = 'Ikke angive en tilstand for foder';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Dette forum har ikke et feed (ingen løbende emner)';
 $lang['ATOM_NO_USER'] = 'Denne bruger har ikke et feed (ingen løbende emner)';
 $lang['ATOM_UPDATED'] = 'Updated';

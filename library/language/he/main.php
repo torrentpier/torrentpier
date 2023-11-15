@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'חיפוש Imagick';
 
 $lang['USE_GD2'] = 'לעשות שימוש GD2 הרחבה';
 $lang['USE_GD2_EXPLAIN'] = 'PHP הוא מסוגל להיות הידור עם GD1 או GD2 הרחבה על התמונה מניפולציה. בצורה נכונה כדי ליצור תמונות ממוזערות ללא imagemagick את הקובץ Mod משתמשת בשתי שיטות שונות, בהתבסס על הבחירה שלך. אם התמונות הממוזערות נמצא באיכות גרועה או דפוק, נסה לשנות הגדרה זו.';
-$lang['ATTACHMENT_VERSION'] = 'מצורף Mod גרסה %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'לנהל אסור הרחבות';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'פורומים של המפה';
 $lang['ATOM_FEED'] = 'להאכיל';
 $lang['ATOM_ERROR'] = 'שגיאה ביצירת להאכיל';
 $lang['ATOM_SUBSCRIBE'] = 'הירשם ל-rss';
-$lang['ATOM_NO_MODE'] = 'לא לציין את מצב ההזנה';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'הפורום הזה לא צריך להאכיל (לא שוטף נושאים)';
 $lang['ATOM_NO_USER'] = 'משתמש זה אינו חייב להאכיל (לא שוטף נושאים)';
 $lang['ATOM_UPDATED'] = 'עדכן';

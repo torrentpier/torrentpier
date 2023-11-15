@@ -1060,6 +1060,7 @@ $lang['BT_REG_ON_TRACKER'] = 'S\'inscrire sur le tracker';
 $lang['BT_REG_FAIL'] = 'N\'a pas pu inscrire torrent sur le tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un autre torrent avec même info_hash déjà <a href="%s"><b>registered</b></a>';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retirer du tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent non enregistré';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -2179,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Recherche Imagick';
 
 $lang['USE_GD2'] = 'Faire usage de l\'Extension GD2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP est capable d\'être compilé avec le GD1 ou Extension GD2 pour la manipulation d\'image. Pour créer correctement les Vignettes sans imagemagick la pièce Jointe Mod utilise deux méthodes différentes, en fonction de votre sélection ici. Si vos images sont de mauvaise qualité ou vissées, essayez de modifier ce paramètre.';
-$lang['ATTACHMENT_VERSION'] = 'L\'Attachement Version Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gérer Interdit Extensions';
@@ -2321,6 +2321,8 @@ $lang['BT_ANNOUNCE_URL'] = 'L\'annonce de l\'url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'vous pouvez définir d\'autres permis url "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Désactiver le DHT réseau';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Désactiver l\'Échange entre Pairs et de la DHT (recommandé pour les réseaux privés, seuls url annoncer)';
+$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
+$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Vérifiez l\'annonce de l\'url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'inscrivez-vous sur tracker seulement permis url';
 $lang['BT_REPLACE_ANN_URL'] = 'Remplacer l\'annonce de l\'url';
@@ -2743,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Forums de la carte';
 $lang['ATOM_FEED'] = 'Alimentation';
 $lang['ATOM_ERROR'] = 'Erreur de génération de flux';
 $lang['ATOM_SUBSCRIBE'] = 'Abonnez-vous au flux';
-$lang['ATOM_NO_MODE'] = 'Ne spécifiez pas un mode pour le nourrir';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Ce forum n\'a pas une alimentation (pas de cours les sujets)';
 $lang['ATOM_NO_USER'] = 'Cet utilisateur n\'a pas une alimentation (pas de cours les sujets)';
 $lang['ATOM_UPDATED'] = 'Mis à jour le';

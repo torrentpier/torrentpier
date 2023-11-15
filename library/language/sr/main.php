@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Претрага Imagick';
 
 $lang['USE_GD2'] = 'Користите додатак gd2';
 $lang['USE_GD2_EXPLAIN'] = 'ПХП-то могу бити обједињени са правог gd1 или проширење gd2 за обраду слике. Да би се правилно направи сличице без пакета imagemagick прилог мод користи две различите методе, на основу вашег избора овде. Ако ваши превьюшки у лошем квалитету или забрљали, покушајте да промените ову поставку.';
-$lang['ATTACHMENT_VERSION'] = 'Прилог Мод Верзија %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Управљање Забрањене Додатке';
@@ -2747,7 +2746,7 @@ $lang['FORUM_MAP'] = 'Карта форума';
 $lang['ATOM_FEED'] = 'Нахрани';
 $lang['ATOM_ERROR'] = 'Генерише грешке нахрани';
 $lang['ATOM_SUBSCRIBE'] = 'Претплатите се на канал';
-$lang['ATOM_NO_MODE'] = 'Није унет је режим за храну';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Овај форум не храни (не тренутне теме)';
 $lang['ATOM_NO_USER'] = 'Овај корисник нема хране (нема сталне теме)';
 $lang['ATOM_UPDATED'] = 'Izmenjeno';

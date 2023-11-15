@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Soek Imagick';
 
 $lang['USE_GD2'] = 'Maak gebruik van GD2 Uitbreiding';
 $lang['USE_GD2_EXPLAIN'] = 'PHP kan saamgestel word met die GD1 of GD2 Uitbreiding vir beeld manipulering. Om Miniatuur te skep sonder verbeeldingskrag, gebruik die Attachment Mod twee verskillende metodes, gebaseer op jou keuse hier. As jou duimnaels in \'n slegte kwaliteit is of opskroef, probeer om hierdie instelling te verander.';
-$lang['ATTACHMENT_VERSION'] = 'Aanhegsel Mod Weergawe %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Bestuur Verboden Extensions';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Forums \'kaart';
 $lang['ATOM_FEED'] = 'Voer';
 $lang['ATOM_ERROR'] = 'Kon nie voer voer nie';
 $lang['ATOM_SUBSCRIBE'] = 'Teken in op die voer';
-$lang['ATOM_NO_MODE'] = 'Moenie \'n modus vir die voer spesifiseer nie';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Hierdie forum het geen feed (geen deurlopende onderwerpe)';
 $lang['ATOM_NO_USER'] = 'Hierdie gebruiker het geen feed (geen deurlopende onderwerpe)';
 $lang['ATOM_UPDATED'] = 'Updated';

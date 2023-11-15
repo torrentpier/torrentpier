@@ -2183,7 +2183,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Որոնում Imagick';
 
 $lang['USE_GD2'] = 'Օգտագործել gd2 extension';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-դա կարող է լինել скомпилированы հետ հարմար gd1 կամ gd2 extension մշակման պատկերը. Ճիշտ ստեղծել էսքիզներ առանց փաթեթի imagemagick հավելված պն օգտագործում է երկու տարբեր մեթոդի հիման վրա ձեր ընտրության այստեղ. Եթե ձեր превьюшки վատ է որպես կամ облажались, փորձեք փոխել այս տարբերակը.';
-$lang['ATTACHMENT_VERSION'] = 'Հավելված Պն Տարբերակը %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Կառավարել Արգելված Ընդլայնման';
@@ -2750,7 +2749,7 @@ $lang['FORUM_MAP'] = 'Քարտեզ համաժողովների';
 $lang['ATOM_FEED'] = 'Կերակրել';
 $lang['ATOM_ERROR'] = 'Генерируя սխալները կերակրել';
 $lang['ATOM_SUBSCRIBE'] = 'Բաժանորդագրվեք rss';
-$lang['ATOM_NO_MODE'] = 'Նշված ռեժիմը համար կեր';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Այս համաժողովը է կերակրել (ոչ ընթացիկ թեմաներ)';
 $lang['ATOM_NO_USER'] = 'Այս օգտագործողի չկա սննդի (ոչ մշտական թեմաները)';
 $lang['ATOM_UPDATED'] = 'Թարմացնել';

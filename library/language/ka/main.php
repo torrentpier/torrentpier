@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'საძიებო Imagick';
 
 $lang['USE_GD2'] = 'გამოიყენონ GD2 გაფართოება';
 $lang['USE_GD2_EXPLAIN'] = 'PHP შეუძლია იყოს შედგენილი ერთად GD1 ან GD2 გაგრძელების გამოსახულების მანიპულირება. სწორად შექმნათ გამოსახულება გარეშე imagemagick დანართი Mod იყენებს ორი სხვადასხვა მეთოდები, ეფუძნება თქვენი არჩევანი აქ. თუ თქვენი დაბრუნება არიან ცუდი ხარისხის ან ბრალია, შეეცადეთ შეცვალოთ ეს პარამეტრი.';
-$lang['ATTACHMENT_VERSION'] = 'დანართი Mod ვერსია %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'მართვა აკრძალული გაგრძელება';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'ფორუმები\' რუკაზე';
 $lang['ATOM_FEED'] = 'არხი';
 $lang['ATOM_ERROR'] = 'შეცდომა მომტანი არხი';
 $lang['ATOM_SUBSCRIBE'] = 'გამოწერა არხი';
-$lang['ATOM_NO_MODE'] = 'არ მიუთითოთ რეჟიმი არხი';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'ეს ფორუმი არ გაქვთ შესანახი (არა თემები მიმდინარე)';
 $lang['ATOM_NO_USER'] = 'ამ მომხმარებელს ჯერ არ შეუყვანია არხი (არა თემები მიმდინარე)';
 $lang['ATOM_UPDATED'] = 'განახლება';

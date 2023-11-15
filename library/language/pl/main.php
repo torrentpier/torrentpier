@@ -2183,7 +2183,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Wyszukaj Imagick';
 
 $lang['USE_GD2'] = 'Używać rozszerzenia gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-to mogą być skompilowane z odpowiedniego gd1 lub rozszerzenie gd2 do przetwarzania obrazu. Aby poprawnie utworzyć miniatury bez pakietu imagemagick załącznik mod wykorzystuje dwa różne metody, na podstawie wyboru tutaj. Jeśli twoje miniatury w złej jakości lub wkręca, spróbuj zmienić to ustawienie.';
-$lang['ATTACHMENT_VERSION'] = 'Załącznik Mod Wersja %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Zarządzanie Niedozwolone Rozszerzenie';
@@ -2750,7 +2749,7 @@ $lang['FORUM_MAP'] = 'Mapa forum';
 $lang['ATOM_FEED'] = 'Karmić';
 $lang['ATOM_ERROR'] = 'Generując błędy karmić';
 $lang['ATOM_SUBSCRIBE'] = 'Subskrybuj kanał';
-$lang['ATOM_NO_MODE'] = 'Nie określono tryb dla paszy';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'To forum nie karmić (nie do bieżącego tematu)';
 $lang['ATOM_NO_USER'] = 'Ten użytkownik nie ma zasilania (nie ma stałej tematu)';
 $lang['ATOM_UPDATED'] = 'Zaktualizowano';

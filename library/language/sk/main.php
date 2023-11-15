@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Vyhľadávanie Imagick';
 
 $lang['USE_GD2'] = 'Využiť GD2 Rozšírenie';
 $lang['USE_GD2_EXPLAIN'] = 'PHP je schopný byť skompilovaný s GD1 alebo GD2 Rozšírenie pre obraz manipuláciu. Správne vytvárať Náhľady bez imagemagick Prílohu Mod používa dve rôzne metódy, založené na výber tu. Ak váš miniatúry sú v zlej kvalite alebo skrutkované, skúste toto nastavenie zmeniť.';
-$lang['ATTACHMENT_VERSION'] = 'Príloha Mod Verzia %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Spravovať Zakázané Rozšírenia';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Fórum\' mapa';
 $lang['ATOM_FEED'] = 'Zdroj';
 $lang['ATOM_ERROR'] = 'Chyba generovanie zdroj';
 $lang['ATOM_SUBSCRIBE'] = 'Prihlásenie na odber informačných kanálov';
-$lang['ATOM_NO_MODE'] = 'Nie je uvedená v režime feed';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Toto fórum nemá krmív (bez prebieha témy)';
 $lang['ATOM_NO_USER'] = 'Tento používateľ nemá krmiva (č prebieha témy)';
 $lang['ATOM_UPDATED'] = 'Aktualizované';

@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Căutare Imagick';
 
 $lang['USE_GD2'] = 'Face uz de GD2 Extensie';
 $lang['USE_GD2_EXPLAIN'] = 'PHP este capabil de a fi compilat cu GD1 sau GD2 Extensie pentru imagine manipularea. Corect, pentru a crea Miniaturi, fără imagemagick Atașamentul Mod utilizează două metode diferite, în funcție de selecția dumneavoastră aici. Dacă miniaturile sunt într-o stare proastă calitate sau greșit, încercați să modificați această setare.';
-$lang['ATTACHMENT_VERSION'] = 'Atașament Versiune Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gestiona Interzis Extensii';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Forumuri hartă';
 $lang['ATOM_FEED'] = 'Hrana';
 $lang['ATOM_ERROR'] = 'Eroare la generarea unui feed';
 $lang['ATOM_SUBSCRIBE'] = 'Aboneaza-te la feed';
-$lang['ATOM_NO_MODE'] = 'Nu specificați un modul pentru alimentare';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Acest forum nu are un flux (nr. în curs de desfășurare subiecte)';
 $lang['ATOM_NO_USER'] = 'Acest utilizator nu are o alimentare (nu in curs de desfasurare subiecte)';
 $lang['ATOM_UPDATED'] = 'Actualizat';

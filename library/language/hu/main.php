@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Keresés Imagick';
 
 $lang['USE_GD2'] = 'Használja GD2 Kiterjesztés';
 $lang['USE_GD2_EXPLAIN'] = 'A PHP képes összeállítani a GD1 vagy GD2 Kiterjesztés képet manipulálja. Helyesen létre a Miniatűrök, anélkül, hogy imagemagick a Mellékletet Mod alkalmaz két különböző módszer alapján a kiválasztás. Ha a miniatűrök, van egy rossz minőségű, vagy elcsesztem, akkor próbáljuk meg módosítani ezt a beállítást.';
-$lang['ATTACHMENT_VERSION'] = 'Melléklet Mod Verzió %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Kezelése Tiltott Kiterjesztések';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Fórumok\' térkép';
 $lang['ATOM_FEED'] = 'Takarmány';
 $lang['ATOM_ERROR'] = 'A hibát generáló takarmány';
 $lang['ATOM_SUBSCRIBE'] = 'Iratkozz fel a feed';
-$lang['ATOM_NO_MODE'] = 'Nem határozza meg a módot, hogy a takarmány';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Ez a fórum nem egy feed (nincs folyamatban lévő témák)';
 $lang['ATOM_NO_USER'] = 'Ez a felhasználó nem rendelkezik takarmány (nincs folyamatban lévő témák)';
 $lang['ATOM_UPDATED'] = 'Módosítva';

@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Búsqueda Imagick';
 
 $lang['USE_GD2'] = 'Hacer uso de GD2 Extensión';
 $lang['USE_GD2_EXPLAIN'] = 'PHP es capaz de ser compilado con el GD1 GD2 o Extensión de manipulación de imagen. Para crear correctamente las Miniaturas sin imagemagick el Apego Mod utiliza dos métodos diferentes, basado en su selección. Si sus miniaturas son de mala calidad o de la pata, tratar de cambiar esta configuración.';
-$lang['ATTACHMENT_VERSION'] = 'Adjunto Versión Del Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Administrar Prohibido Extensiones';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Los foros de\' mapa';
 $lang['ATOM_FEED'] = 'Alimentación';
 $lang['ATOM_ERROR'] = 'Error al generar feed';
 $lang['ATOM_SUBSCRIBE'] = 'Suscribirse a la fuente';
-$lang['ATOM_NO_MODE'] = 'No se especifica un modo para la alimentación';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Este foro no tiene una fuente (no continuo temas)';
 $lang['ATOM_NO_USER'] = 'Este usuario no tiene una fuente (no continuo temas)';
 $lang['ATOM_UPDATED'] = 'Actualizado';

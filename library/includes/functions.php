@@ -2062,11 +2062,9 @@ function hash_search($hash)
     $hash = htmlCHR(trim($hash));
     $info_hash_where = null;
 
-    if (!isset($hash)) {
+    if (!isset($hash) || !ctype_xdigit($hash)) {
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
-
-    $info_hash = DB()->escape(pack('H*', $hash));
 
     // Check info_hash version
     if (mb_strlen($hash, 'UTF-8') == 40) {
@@ -2076,6 +2074,8 @@ function hash_search($hash)
     } else {
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
+
+    $info_hash = DB()->escape(pack('H*', $hash));
 
     if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where")) {
         redirect(TOPIC_URL . $row['topic_id']);

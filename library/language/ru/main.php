@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Поиск Imagick';
 
 $lang['USE_GD2'] = 'Включить использование GD2 расширения';
 $lang['USE_GD2_EXPLAIN'] = 'PHP может быть скомпилировано с расширением GD1 или GD2 для работы с изображениями. Чтобы правильно создать миниатюры без imagemagick, Мод приложений может использовать два разных способа, основываясь на Вашем выборе в данной опции. Если Ваши Эскизы будут плохого качества или обезображены, попробуйте изменить эту настройку.';
-$lang['ATTACHMENT_VERSION'] = 'Версия Мода приложений (Attachment Mod) %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Управление запрещенными расширениями';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Карта форумов';
 $lang['ATOM_FEED'] = 'Лента';
 $lang['ATOM_ERROR'] = 'Ошибка генерации ленты';
 $lang['ATOM_SUBSCRIBE'] = 'Подписка на ленту';
-$lang['ATOM_NO_MODE'] = 'Не указан режим для ленты';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Для этого форума нет ленты (нет начатых тем)';
 $lang['ATOM_NO_USER'] = 'Для этого пользователя нет ленты (нет начатых тем)';
 $lang['ATOM_UPDATED'] = 'Обновлено';

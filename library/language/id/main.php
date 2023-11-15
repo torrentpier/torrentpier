@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Pencarian Imagick';
 
 $lang['USE_GD2'] = 'Menggunakan Ekstensi GD2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP dapat disusun dengan GD1 atau GD2 Ekstensi untuk memanipulasi gambar. Untuk benar membuat Thumbnail tanpa imagemagick Lampiran Mod menggunakan dua metode yang berbeda, berdasarkan pada pilihan anda di sini. Jika anda thumbnail berada dalam kualitas yang buruk atau kacau, cobalah untuk mengubah pengaturan ini.';
-$lang['ATTACHMENT_VERSION'] = 'Lampiran Mod Versi %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Mengelola Dilarang Ekstensi';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Forum peta';
 $lang['ATOM_FEED'] = 'Pakan';
 $lang['ATOM_ERROR'] = 'Kesalahan menghasilkan pakan';
 $lang['ATOM_SUBSCRIBE'] = 'Berlangganan feed';
-$lang['ATOM_NO_MODE'] = 'Tidak menentukan mode untuk pakan';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Forum ini tidak memiliki pakan (tidak ada yang sedang berlangsung topik)';
 $lang['ATOM_NO_USER'] = 'Pengguna ini tidak memiliki pakan (tidak ada yang sedang berlangsung topik)';
 $lang['ATOM_UPDATED'] = 'Updated';

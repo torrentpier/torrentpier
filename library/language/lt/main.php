@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Paieškos Imagick';
 
 $lang['USE_GD2'] = 'Naudoti GD2 Pratęsimo';
 $lang['USE_GD2_EXPLAIN'] = 'PHP gali būti sukompiliuotos su GD1 ar GD2 Pratęsimo vaizdo manipuliuoti. Teisingai kurti Miniatiūras be imagemagick Priedą Mod naudoja du skirtingus metodus, pagrįsti savo pasirinkimą čia. Jei jūsų miniatiūros yra prastos kokybės arba įsukus, pabandykite pakeisti šį parametrą.';
-$lang['ATTACHMENT_VERSION'] = 'Tvirtinimo Mod Versija %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Tvarkyti Draudžiama Plėtiniai';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Forumuose " žemėlapį';
 $lang['ATOM_FEED'] = 'Pašarų';
 $lang['ATOM_ERROR'] = 'Klaida generuojant pašarų';
 $lang['ATOM_SUBSCRIBE'] = 'Prenumeruoti informacijos santrauką,';
-$lang['ATOM_NO_MODE'] = 'Nėra nurodyta režimas pašarų';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Šis forumas neturi pašarų (joks temas)';
 $lang['ATOM_NO_USER'] = 'Šis vartotojas neturi pašarų (joks temas)';
 $lang['ATOM_UPDATED'] = 'Atnaujinta';

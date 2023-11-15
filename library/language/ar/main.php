@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'البحث Imagick';
 
 $lang['USE_GD2'] = 'الاستفادة من GD2 امتداد';
 $lang['USE_GD2_EXPLAIN'] = 'PHP هي قادرة على ترجمة مع GD1 أو GD2 امتداد صورة التلاعب. بشكل صحيح إنشاء الصور المصغرة من دون يماغيماغيك المرفق وزارة الدفاع يستخدم اثنين من أساليب مختلفة ، استنادا إلى التحديد الخاص بك هنا. إذا الصور المصغرة الخاصة بك هي في نوعية سيئة أو أخفقت محاولة تغيير هذا الإعداد.';
-$lang['ATTACHMENT_VERSION'] = 'مرفق إصدار وزارة الدفاع %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'إدارة المحرمة امتداد';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'منتديات\' خريطة';
 $lang['ATOM_FEED'] = 'تغذية';
 $lang['ATOM_ERROR'] = 'خطأ في إنشاء تغذية';
 $lang['ATOM_SUBSCRIBE'] = 'اشترك في تغذية';
-$lang['ATOM_NO_MODE'] = 'لم تحدد وضع العلف';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'هذا المنتدى ليس الأعلاف (أي الجارية المواضيع)';
 $lang['ATOM_NO_USER'] = 'هذا المستخدم ليس لديه تغذية (أي الجارية المواضيع)';
 $lang['ATOM_UPDATED'] = 'تم تحديثه';

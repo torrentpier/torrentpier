@@ -2182,7 +2182,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Търсене Imagick';
 
 $lang['USE_GD2'] = 'Използват за разширяване gd2';
 $lang['USE_GD2_EXPLAIN'] = 'PHP-това могат да се компилират с подходяща gd1 или разширяване на gd2 за обработка на изображения. За правилно създаване на скици, без пакет imagemagick инвестиция на министерството на отбраната използва два различни метода, на базата на вашия избор тук. Ако си миниатюрите в лошо качество или облажались, опитайте се да промените тази настройка.';
-$lang['ATTACHMENT_VERSION'] = 'Вграждането На Министерството На Отбраната Версия %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Управление На Забранени Разширяване';
@@ -2749,7 +2748,7 @@ $lang['FORUM_MAP'] = 'Карта форуми';
 $lang['ATOM_FEED'] = 'Да се хранят';
 $lang['ATOM_ERROR'] = 'Генериране на грешки да се хранят';
 $lang['ATOM_SUBSCRIBE'] = 'Да се абонирате за фураж';
-$lang['ATOM_NO_MODE'] = 'Не е указан режим за храна';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Този форум не е да се хранят (не сегашната тема)';
 $lang['ATOM_NO_USER'] = 'Този потребител няма захранване (не е постоянна тема)';
 $lang['ATOM_UPDATED'] = 'Обновен';

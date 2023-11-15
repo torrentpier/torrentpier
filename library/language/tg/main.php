@@ -2180,7 +2180,6 @@ $lang['IMAGE_SEARCH_IMAGICK'] = 'Ҷустуҷӯ Imagick';
 
 $lang['USE_GD2'] = 'Ворид истифодаи GD2 Тамдиди';
 $lang['USE_GD2_EXPLAIN'] = 'PHP тавонист бо GD1 ё GD2 Тамдиди барои таҳрир тасвир тартиб дода мешавад. Барои дуруст ангораи бе ImageMagick ба Замимаи мудофиа истифода мебарад, ду усулҳои гуногун, дар асоси интихоби худро дар инҷо эҷод. Агар ангораи худро дар хислати бад доранд, ё screwed то, кӯшиш кунед, ки ба тағйир додани ин танзиматро.';
-$lang['ATTACHMENT_VERSION'] = 'Замимаи мудофиа Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Идоракунии васеъшавии мамнӯъ';
@@ -2746,7 +2745,7 @@ $lang['FORUM_MAP'] = 'Харитаи Форумҳо \'';
 $lang['ATOM_FEED'] = 'Feed';
 $lang['ATOM_ERROR'] = 'хўроки тавлиди Хатои';
 $lang['ATOM_SUBSCRIBE'] = 'Обуна ба хўроки';
-$lang['ATOM_NO_MODE'] = 'Оё як ҳолати барои хўроки чорво муайян карда наметавонед';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Ин баҳс надорад, хўроки (на мавзӯъҳои ҷорӣ) нест,';
 $lang['ATOM_NO_USER'] = 'Корбари мазкур ба як хўроки (на мавзӯъҳои ҷорӣ) нест,';
 $lang['ATOM_UPDATED'] = 'Updated';

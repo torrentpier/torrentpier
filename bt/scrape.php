@@ -42,6 +42,9 @@ foreach ($info_hash_array[1] as $hash) {
 
     $decoded_hash = urldecode($hash);
 
+    if (strlen($decoded_hash) !== 20) {
+        continue;
+    }
     if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
         $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
     } else {
@@ -58,6 +61,12 @@ if (!empty($info_hash_count)) {
     }
 
     $info_hashes_sql = implode('\', \'', $info_hashes);
+
+    /**
+    * Currently torrent clients send truncated v2 hashes (the design raises questions).
+    * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+    */
+
     $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
 
     $sql = "
@@ -73,7 +82,7 @@ if (!empty($info_hash_count)) {
         foreach ($scrapes as $scrape) {
             $hash_v1 = !empty($scrape['info_hash']) ? $scrape['info_hash'] : '';
             $hash_v2 = !empty($scrape['info_hash_v2']) ? substr($scrape['info_hash_v2'], 0, 20) : '';
-            $info_hash_scrape = (in_array(urlencode($hash_v2), $info_hash_array[1])) ? $hash_v2 : $hash_v1;
+            $info_hash_scrape = (in_array(urlencode($hash_v1), $info_hash_array[1])) ? $hash_v1 : $hash_v2; // Replace logic to prioritize $hash_v2, in case of future prioritization of v2
 
             $torrents['files'][$info_hash_scrape] = [
                 'complete' => (int)$scrape['seeders'],

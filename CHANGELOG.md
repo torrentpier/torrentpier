@@ -1,5 +1,27 @@
 # 📖 Change Log
 
+## [v2.4.0-beta4](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta4) (2023-11-14)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta3...v2.4.0-beta4)
+
+**Merged pull requests:**
+
+- Use TORRENT_EXT constants for definition torrent extension [\#1096](https://github.com/torrentpier/torrentpier/pull/1096) ([belomaxorka](https://github.com/belomaxorka))
+- Remove html entities for file names [\#1094](https://github.com/torrentpier/torrentpier/pull/1094) ([kovalensky](https://github.com/kovalensky))
+- Fix for html entities being displayed in magnet links [\#1092](https://github.com/torrentpier/torrentpier/pull/1092) ([kovalensky](https://github.com/kovalensky))
+- Calling make_jumpbox() where it needed [\#1091](https://github.com/torrentpier/torrentpier/pull/1091) ([belomaxorka](https://github.com/belomaxorka))
+- Include full url for client icon displaying [\#1088](https://github.com/torrentpier/torrentpier/pull/1088) ([kovalensky](https://github.com/kovalensky))
+- Fix not working code [\#1087](https://github.com/torrentpier/torrentpier/pull/1087) ([kovalensky](https://github.com/kovalensky))
+- Fixed data types for seeder_last_seen [\#1086](https://github.com/torrentpier/torrentpier/pull/1086) ([belomaxorka](https://github.com/belomaxorka))
+- Fix broken PM (Private messages) [\#1085](https://github.com/torrentpier/torrentpier/pull/1085) ([kovalensky](https://github.com/kovalensky))
+- Fixed a bug causing inability to view file contents for some torrents [\#1084](https://github.com/torrentpier/torrentpier/pull/1084) ([kovalensky](https://github.com/kovalensky))
+- Show file count while listing [\#1082](https://github.com/torrentpier/torrentpier/pull/1082) ([kovalensky](https://github.com/kovalensky))
+- Simplified jumpbox 📜 [\#815](https://github.com/torrentpier/torrentpier/pull/815) ([belomaxorka](https://github.com/belomaxorka))
+- Removed sorting for torrent clients in table [\#1080](https://github.com/torrentpier/torrentpier/pull/1080) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken table in tracker [\#1079](https://github.com/torrentpier/torrentpier/pull/1079) ([belomaxorka](https://github.com/belomaxorka))
+- CSS improvement for file listing [\#1077](https://github.com/torrentpier/torrentpier/pull/1077), [\#1081](https://github.com/torrentpier/torrentpier/pull/1081), [\#1083](https://github.com/torrentpier/torrentpier/pull/1083) ([kovalensky](https://github.com/kovalensky))
+- Minor improvements [\#1078](https://github.com/torrentpier/torrentpier/pull/1078), [\#1095](https://github.com/torrentpier/torrentpier/pull/1095) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#1089](https://github.com/torrentpier/torrentpier/pull/1089), [\#1090](https://github.com/torrentpier/torrentpier/pull/1090) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0-beta3](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta3) (2023-11-11)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta2...v2.4.0-beta3)
 
