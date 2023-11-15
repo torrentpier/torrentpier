@@ -322,6 +322,17 @@ function send_no_cache_headers()
 }
 
 /**
+ * Converts "<br>" tags to "\n" line breaks
+ *
+ * @param string $string
+ * @return string
+ */
+function br2nl(string $string): string
+{
+    return preg_replace('#<br\s*/?>#i', "\n", $string);
+}
+
+/**
  * Adds commas between every group of thousands
  *
  * @param float|null $num
