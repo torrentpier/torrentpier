@@ -162,6 +162,8 @@ if ($lp_info) {
     $topic_id = $lp_info['topic_id'];
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
+    $is_hybrid = $lp_info['hybrid_info']['is_hybrid'] ?? 0;
+    $update_hybrid = $lp_info['hybrid_info']['update_hybrid'] ?? 0;
 } else {
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     /**
@@ -299,7 +301,7 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (!isset($is_hybrid) || isset($update_hybrid)) { // Record statistics only for one topic
+if (empty($is_hybrid) || !empty($update_hybrid)) { // Record statistics only for one topic
     if ($lp_info) {
         $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
@@ -346,7 +348,7 @@ if ($stopped) {
 }
 
 // Store peer info in cache
-$lp_info = [
+$lp_info_new = [
     'downloaded' => (float)$downloaded,
     'releaser' => (int)$releaser,
     'seeder' => (int)$seeder,
@@ -360,7 +362,15 @@ $lp_info = [
     'ip_ver6' => $lp_info['ip_ver6'] ?? $ipv6,
 ];
 
-$lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
+if (!empty($is_hybrid)) {
+    $lp_info_new['hybrid_info'] = [
+    'is_hybrid' => $lp_info['hybrid_info']['is_hybrid'] ?? isset($is_hybrid),
+    'update_hybrid' => $lp_info['hybrid_info']['update_hybrid'] ?? isset($update_hybrid)
+    ];
+}
+
+// Cache new list with peer hash
+$lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info_new, PEER_HASH_EXPIRE);
 
 // Get cached output
 $output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
