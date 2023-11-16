@@ -162,8 +162,7 @@ if ($lp_info) {
     $topic_id = $lp_info['topic_id'];
     $releaser = $lp_info['releaser'];
     $tor_type = $lp_info['tor_type'];
-    $is_hybrid = $lp_info['hybrid_info']['is_hybrid'] ?? 0;
-    $update_hybrid = $lp_info['hybrid_info']['update_hybrid'] ?? 0;
+    $hybrid_unrecord = $lp_info['hybrid_unrecord'] ?? false;
 } else {
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
     /**
@@ -198,9 +197,8 @@ if ($lp_info) {
 
     // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
-        $is_hybrid = true;
-        if ($info_hash === $row['info_hash']) { // Change this to substr($row['info_hash_v2'], 0, 20) in the future for updating statistics, in case of v2 torrents being prioritized.
-            $update_hybrid = true;
+        if ($info_hash !== $row['info_hash']) { // Change this to substr($row['info_hash_v2'], 0, 20) in the future for updating statistics, in case of v2 torrents being prioritized.
+            $hybrid_unrecord = true; // This allows us to announce only for one info-hash
         }
     }
 
@@ -301,46 +299,46 @@ if ($bb_cfg['tracker']['freeleech'] && $down_add) {
 // Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
-if (empty($is_hybrid) || !empty($update_hybrid)) { // Record statistics only for one topic
-    if ($lp_info) {
-        $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
-        $sql .= ", $ip_version = '$ip_sql'";
-        $sql .= ", port = '$port'";
-        $sql .= ", seeder = $seeder";
-        $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
+if ($lp_info && empty($hybrid_unrecord)) {
+    $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
 
-        $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = $tor_type" : '';
+    $sql .= ", $ip_version = '$ip_sql'";
+    $sql .= ", port = '$port'";
+    $sql .= ", seeder = $seeder";
+    $sql .= ($releaser != $lp_info['releaser']) ? ", releaser = $releaser" : '';
 
-        $sql .= ($uploaded != $lp_info['uploaded']) ? ", uploaded = $uploaded" : '';
-        $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
-        $sql .= ", remain = $left";
+    $sql .= ($tor_type != $lp_info['tor_type']) ? ", tor_type = $tor_type" : '';
 
-        $sql .= $up_add ? ", up_add = up_add + $up_add" : '';
-        $sql .= $down_add ? ", down_add = down_add + $down_add" : '';
+    $sql .= ($uploaded != $lp_info['uploaded']) ? ", uploaded = $uploaded" : '';
+    $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
+    $sql .= ", remain = $left";
 
-        $sql .= ", speed_up = $speed_up";
-        $sql .= ", speed_down = $speed_down";
+    $sql .= $up_add ? ", up_add = up_add + $up_add" : '';
+    $sql .= $down_add ? ", down_add = down_add + $down_add" : '';
 
-        $sql .= ", complete = $complete";
-        $sql .= ", peer_id = '$peer_id_sql'";
+    $sql .= ", speed_up = $speed_up";
+    $sql .= ", speed_down = $speed_down";
 
-        $sql .= " WHERE peer_hash = '$peer_hash'";
-        $sql .= " LIMIT 1";
+    $sql .= ", complete = $complete";
+    $sql .= ", peer_id = '$peer_id_sql'";
 
-        DB()->query($sql);
+    $sql .= " WHERE peer_hash = '$peer_hash'";
+    $sql .= " LIMIT 1";
 
-        $peer_info_updated = DB()->affected_rows();
-    }
+    DB()->query($sql);
 
-    if ((!$lp_info || !$peer_info_updated) && !$stopped) {
-
-        $columns = "peer_hash, topic_id, user_id, $ip_version, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id";
-        $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";
-
-        DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
-    }
+    $peer_info_updated = DB()->affected_rows();
 }
+
+if ((!$lp_info || !$peer_info_updated) && !$stopped && empty($hybrid_unrecord)) {
+
+    $columns = "peer_hash, topic_id, user_id, $ip_version, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id";
+    $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";
+
+    DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
+}
+
 
 // Exit if stopped
 if ($stopped) {
@@ -362,11 +360,8 @@ $lp_info_new = [
     'ip_ver6' => $lp_info['ip_ver6'] ?? $ipv6,
 ];
 
-if (!empty($is_hybrid)) {
-    $lp_info_new['hybrid_info'] = [
-    'is_hybrid' => $lp_info['hybrid_info']['is_hybrid'] ?? isset($is_hybrid),
-    'update_hybrid' => $lp_info['hybrid_info']['update_hybrid'] ?? isset($update_hybrid)
-    ];
+if (!empty($hybrid_unrecord)) {
+    $lp_info_new['hybrid_unrecord'] = $hybrid_unrecord;
 }
 
 // Cache new list with peer hash
