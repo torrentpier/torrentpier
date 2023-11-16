@@ -144,7 +144,7 @@ if ($stopped && $lp_info) {
 
 // Drop fast announce
 if ($lp_info && (!isset($event) || !$stopped)) {
-    if ($lp_info['ip_ver4'] === $ipv4 || $lp_info['ip_ver6'] === $ipv6) {
+    if ($lp_info['ip_ver4'] === $ipv4 || $lp_info['ip_ver6'] === $ipv6 || isset($lp_info['ip_ver4'], $lp_info['ip_ver6'])) {
         if ($lp_cached_peers = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $lp_info['topic_id'])) {
             drop_fast_announce($lp_info, $lp_cached_peers); // Use cache but with new calculated interval and seed, peer count set
         }
