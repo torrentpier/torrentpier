@@ -366,12 +366,12 @@ if ($forum_data['allow_reg_tracker']) {
 }
 
 // Post URL generation for templating vars
-$template->assign_vars(array(
+$template->assign_vars([
     'U_POST_NEW_TOPIC' => $post_new_topic_url,
     'S_SELECT_TOPIC_DAYS' => build_select('topicdays', array_flip($sel_previous_days), $topic_days),
     'S_POST_DAYS_ACTION' => FORUM_URL . "$forum_id&amp;start=$start",
     'S_DISPLAY_ORDER' => $s_display_order,
-));
+]);
 
 // User authorisation levels output
 $u_auth = [];
@@ -385,7 +385,7 @@ $u_auth[] = ($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['R
 $u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
 $u_auth = implode("<br />\n", $u_auth);
 
-$template->assign_vars(array(
+$template->assign_vars([
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
@@ -411,7 +411,7 @@ $template->assign_vars(array(
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
     'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&f=$forum_id",
-));
+]);
 
 // Okay, lets dump out the page ...
 $found_topics = 0;
@@ -437,7 +437,7 @@ foreach ($topic_rowset as $topic) {
         }
     }
 
-    $template->assign_block_vars('t', array(
+    $template->assign_block_vars('t', [
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
         'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
@@ -462,23 +462,23 @@ foreach ($topic_rowset as $topic) {
         'POLL' => $topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
-        'TOPIC_AUTHOR' => profile_url(array('username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
-        'LAST_POSTER' => profile_url(array('username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
+        'TOPIC_AUTHOR' => profile_url(['username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
+        'LAST_POSTER' => profile_url(['username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
         'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
         'LAST_POST_ID' => $topic['topic_last_post_id'],
-    ));
+    ]);
 
     if (isset($topic['tor_size'])) {
         $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']));
 
-        $template->assign_block_vars('t.tor', array(
+        $template->assign_block_vars('t.tor', [
             'SEEDERS' => (int)$topic['seeders'],
             'LEECHERS' => (int)$topic['leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size']),
             'COMPL_CNT' => (int)$topic['complete_count'],
             'ATTACH_ID' => $topic['attach_id'],
             'MAGNET' => $tor_magnet,
-        ));
+        ]);
     }
     $found_topics++;
 }
@@ -503,12 +503,12 @@ if ($found_topics) {
     } else {
         $no_topics_msg = ($topic_days || $title_match) ? $lang['NO_SEARCH_MATCH'] : ($forum_data['allow_reg_tracker'] ? $lang['NO_RELEASES_POST_ONE'] : $lang['NO_TOPICS_POST_ONE']);
     }
-    $template->assign_vars(array(
+    $template->assign_vars([
         'NO_TOPICS' => $no_topics_msg,
-    ));
+    ]);
 }
 
-$template->assign_vars(array(
+$template->assign_vars([
     'PAGE_URL' => $pg_url,
     'PAGE_URL_TPP' => url_arg($pg_url, 'tpp', null),
     'FOUND_TOPICS' => $found_topics,
@@ -524,6 +524,6 @@ $template->assign_vars(array(
     'U_VIEWCAT' => CAT_URL . $forum_data['cat_id'],
     'PARENT_FORUM_HREF' => ($parent_id = $forum_data['forum_parent']) ? FORUM_URL . $forum_data['forum_parent'] : '',
     'PARENT_FORUM_NAME' => ($parent_id = $forum_data['forum_parent']) ? $forums['forum_name_html'][$parent_id] : '',
-));
+]);
 
 print_page('viewforum.tpl');
