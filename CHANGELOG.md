@@ -1,5 +1,24 @@
 # 📖 Change Log
 
+## [v2.4.0-rc1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc1)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta4...v2.4.0-rc1)
+
+**Merged pull requests:**
+
+- Use http_response_code() functions instead of old header() functions [\#1110](https://github.com/torrentpier/torrentpier/pull/1110) ([belomaxorka](https://github.com/belomaxorka))
+- Fix bypassing cache if IP changed while using cache [\#1109](https://github.com/torrentpier/torrentpier/pull/1109) ([kovalensky](https://github.com/kovalensky))
+- Use one variable to determine update status for hybrids [\#1108](https://github.com/torrentpier/torrentpier/pull/1108) ([kovalensky](https://github.com/kovalensky))
+- Don't re-announce even if peer cache is present [\#1107](https://github.com/torrentpier/torrentpier/pull/1107) ([kovalensky](https://github.com/kovalensky))
+- Used br2nl() in ajax alert messages [\#1106](https://github.com/torrentpier/torrentpier/pull/1106) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced some html_entity_decode to engine's built-in function [\#1105](https://github.com/torrentpier/torrentpier/pull/1105) ([belomaxorka](https://github.com/belomaxorka))
+- Fix typo [\#1104](https://github.com/torrentpier/torrentpier/pull/1104) ([kovalensky](https://github.com/kovalensky))
+- Change default engine language to en [\#1103](https://github.com/torrentpier/torrentpier/pull/1103) ([kovalensky](https://github.com/kovalensky))
+- Record changed port while re-announcing [\#1102](https://github.com/torrentpier/torrentpier/pull/1102) ([kovalensky](https://github.com/kovalensky))
+- Translations for config.php, raised scrape interval [\#1100](https://github.com/torrentpier/torrentpier/pull/1100) ([kovalensky](https://github.com/kovalensky))
+- Don't re-announce for hybrids if the event is "stopped" [\#1099](https://github.com/torrentpier/torrentpier/pull/1099) ([kovalensky](https://github.com/kovalensky))
+- Security measures [\#1098](https://github.com/torrentpier/torrentpier/pull/1098) ([kovalensky](https://github.com/kovalensky))
+- New Crowdin updates [\#1097](https://github.com/torrentpier/torrentpier/pull/1097), [\#1101](https://github.com/torrentpier/torrentpier/pull/1101) ([Exileum](https://github.com/Exileum))
+
 ## [v2.4.0-beta4](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta4) (2023-11-14)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta3...v2.4.0-beta4)
 
