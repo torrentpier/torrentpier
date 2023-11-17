@@ -28,6 +28,7 @@ $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
 }
+
 // Store info hash in hex format
 $info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
 
@@ -45,6 +46,7 @@ foreach ($info_hash_array[1] as $hash) {
     if (strlen($decoded_hash) !== 20) {
         continue;
     }
+
     if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
         $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
     } else {
