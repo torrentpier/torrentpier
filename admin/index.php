@@ -32,20 +32,20 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     // Get modules from cache
     $module = CACHE('bb_cache')->get('admin_module_' . $user->id);
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ADMIN_NAVIGATE' => true,
         'U_FORUM_INDEX' => '../index.php',
         'U_ADMIN_INDEX' => 'index.php?pane=right',
-    ));
+    ]);
 
     ksort($module);
 
     foreach ($module as $cat => $action_array) {
         $cat = (!empty($lang[$cat])) ? $lang[$cat] : str_replace("_", ' ', $cat);
 
-        $template->assign_block_vars('catrow', array(
+        $template->assign_block_vars('catrow', [
             'ADMIN_CATEGORY' => $cat,
-        ));
+        ]);
 
         ksort($action_array);
 
@@ -55,20 +55,20 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
             $action = (!empty($lang[$action])) ? $lang[$action] : str_replace("_", ' ', $action);
 
-            $template->assign_block_vars('catrow.modulerow', array(
+            $template->assign_block_vars('catrow.modulerow', [
                 'ROW_CLASS' => $row_class,
                 'ADMIN_MODULE' => $action,
                 'U_ADMIN_MODULE' => $file,
-            ));
+            ]);
             $row_count++;
         }
     }
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_ADMIN_MAIN' => true,
         'ADMIN_LOCK' => (bool)$bb_cfg['board_disable'],
         'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED),
-    ));
+    ]);
 
     // Get forum statistics
     $total_posts = get_db_stat('postcount');
@@ -108,7 +108,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $users_per_day = $total_users;
     }
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'NUMBER_OF_POSTS' => $total_posts,
         'NUMBER_OF_TOPICS' => $total_topics,
         'NUMBER_OF_USERS' => $total_users,
@@ -117,12 +117,12 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'TOPICS_PER_DAY' => $topics_per_day,
         'USERS_PER_DAY' => $users_per_day,
         'AVATAR_DIR_SIZE' => $avatar_dir_size,
-    ));
+    ]);
 
     if (isset($_GET['users_online'])) {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'SHOW_USERS_ONLINE' => true,
-        ));
+        ]);
 
         // Get users online information.
         $sql = 'SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
@@ -157,14 +157,14 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $row_class = 'row1';
                 $reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_reg[$i]['session_ip']);
 
-                $template->assign_block_vars('reg_user_row', array(
+                $template->assign_block_vars('reg_user_row', [
                     'ROW_CLASS' => $row_class,
                     'USER' => profile_url($onlinerow_reg[$i]),
                     'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
                     'IP_ADDRESS' => $reg_ip,
                     'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
-                ));
+                ]);
             }
         }
 
@@ -177,26 +177,26 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $row_class = 'row2';
                 $guest_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($onlinerow_guest[$i]['session_ip']);
 
-                $template->assign_block_vars('guest_user_row', array(
+                $template->assign_block_vars('guest_user_row', [
                     'ROW_CLASS' => $row_class,
                     'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i', false),
                     'IP_ADDRESS' => $guest_ip,
                     'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
-                ));
+                ]);
             }
         }
     } else {
-        $template->assign_vars(array(
+        $template->assign_vars([
             'USERS_ONLINE_HREF' => 'index.php?pane=right&users_online=1',
-        ));
+        ]);
     }
 } else {
     // Generate frameset
-    $template->assign_vars(array(
+    $template->assign_vars([
         'CONTENT_ENCODING' => $bb_cfg['charset'],
         'TPL_ADMIN_FRAMESET' => true,
-    ));
+    ]);
     send_no_cache_headers();
     print_page('index.tpl', 'admin', 'no_header');
 }

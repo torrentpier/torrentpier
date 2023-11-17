@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Used new-style [] array constructions in some cases [\#1111](https://github.com/torrentpier/torrentpier/pull/1111) ([belomaxorka](https://github.com/belomaxorka))
 - Use http_response_code() functions instead of old header() functions [\#1110](https://github.com/torrentpier/torrentpier/pull/1110) ([belomaxorka](https://github.com/belomaxorka))
 - Fix bypassing cache if IP changed while using cache [\#1109](https://github.com/torrentpier/torrentpier/pull/1109) ([kovalensky](https://github.com/kovalensky))
 - Use one variable to determine update status for hybrids [\#1108](https://github.com/torrentpier/torrentpier/pull/1108) ([kovalensky](https://github.com/kovalensky))
