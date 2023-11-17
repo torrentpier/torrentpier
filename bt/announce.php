@@ -30,11 +30,13 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
 if (strpos($_SERVER['REQUEST_URI'], 'scrape') !== false) {
     msg_die('Please disable SCRAPE!');
 }
+
 if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key])) {
     msg_die('Please LOG IN and RE-DOWNLOAD this torrent (passkey not found)');
 }
 
 // Input var names
+
 // String
 $input_vars_str = ['info_hash', 'peer_id', 'event', $passkey_key];
 // Numeric
@@ -45,10 +47,12 @@ $input_vars_num = ['port', 'uploaded', 'downloaded', 'left', 'numwant', 'compact
 foreach ($input_vars_str as $var_name) {
     $$var_name = isset($_GET[$var_name]) ? (string)$_GET[$var_name] : null;
 }
+
 // Numeric
 foreach ($input_vars_num as $var_name) {
     $$var_name = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
 }
+
 // Passkey
 $passkey = $$passkey_key ?? null;
 
@@ -83,9 +87,11 @@ if (!isset($port) || $port < 0 || $port > 0xFFFF) {
 if (!isset($uploaded) || $uploaded < 0) {
     msg_die('Invalid uploaded value: ' . $uploaded);
 }
+
 if (!isset($downloaded) || $downloaded < 0) {
     msg_die('Invalid downloaded value: ' . $downloaded);
 }
+
 if (!isset($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
 }
@@ -150,6 +156,7 @@ if ($lp_info && (!isset($event) || !$stopped)) {
         }
     }
 }
+
 // Get last peer info from DB
 if (!CACHE('tr_cache')->used && !$lp_info) {
     $lp_info = DB()->fetch_row("
@@ -339,7 +346,6 @@ if ((!$lp_info || !$peer_info_updated) && !$stopped && empty($hybrid_unrecord)) 
     DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
 }
 
-
 // Exit if stopped
 if ($stopped) {
     silent_exit('Cache will be reset within 30 seconds');
@@ -443,6 +449,7 @@ if (!$output) {
     if (!empty($peers)) {
         $output['peers'] = $peers;
     }
+
     if (!empty($peers6)) {
         $output['peers6'] = $peers6;
     }
