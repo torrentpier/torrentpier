@@ -491,6 +491,15 @@ class User
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
             }
+
+            // Unset sql debug cookies
+            if (!SQL_DEBUG || !APP_DEBUG) {
+                foreach (array('explain', 'sql_log', 'sql_log_full') as $cookie) {
+                    if (isset($_COOKIE[$cookie])) {
+                        bb_setcookie($cookie, '', COOKIE_EXPIRED);
+                    }
+                }
+            }
         }
     }
 
