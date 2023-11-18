@@ -569,7 +569,7 @@ class Torrent
         if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
             unset($tor['announce-list']);
         } else {
-            $tor['announce-list'] = array_merge($tor['announce-list'] ?? [], [[$announce]], $announce_urls_add);
+            $tor['announce-list'] = array_merge($tor['announce-list'] ?? [], $announce_urls_add);
         }
 
         // Add retracker
