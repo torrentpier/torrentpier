@@ -24,14 +24,14 @@ $thumbnail = request_var('thumb', 0);
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
 {
-    global $bb_cfg, $lang, $userdata;
+    global $bb_cfg, $lang;
 
     $filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
 
     $gotit = false;
 
     if (@!file_exists(@amod_realpath($filename))) {
-        bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename . "<br /><br />" . $lang['TOR_NOT_FOUND']);
+        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
     } else {
         $gotit = true;
     }
@@ -66,7 +66,7 @@ function send_file_to_browser($attachment, $upload_dir)
         }
         readfile($filename);
     } else {
-        bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename . "<br /><br />" . $lang['TOR_NOT_FOUND']);
+        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
     }
 
     exit;
@@ -149,6 +149,7 @@ $datastore->rm('cat_forums');
 $rows = get_extension_informations();
 $num_rows = count($rows);
 
+$allowed_extensions = $download_mode = [];
 for ($i = 0; $i < $num_rows; $i++) {
     $extension = strtolower(trim($rows[$i]['extension']));
     $allowed_extensions[] = $extension;
@@ -156,8 +157,8 @@ for ($i = 0; $i < $num_rows; $i++) {
 }
 
 // Disallowed
-if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
-    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']));
+if (!in_array($attachment['extension'], $allowed_extensions)) {
+    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($attachment['physical_filename']));
 }
 
 $download_mode = (int)$download_mode[$attachment['extension']];

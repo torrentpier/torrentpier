@@ -312,7 +312,7 @@ class Torrent
         $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
 
         if (!is_file($filename)) {
-            self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT']);
+            self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
         }
 
         $file_contents = file_get_contents($filename);
