@@ -573,13 +573,9 @@ class Torrent
         }
 
         // Add retracker
-        if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
+        if (!empty($bb_cfg['tracker']['retracker_host']) && $bb_cfg['tracker']['retracker']) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
-                if (!isset($tor['announce-list'])) {
-                    $tor['announce-list'] = [[$announce], $announce_urls_add, [$bb_cfg['tracker']['retracker_host']]];
-                } else {
-                    $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
-                }
+                $tor['announce-list'] = array_merge($tor['announce-list'] ?? [], [$bb_cfg['tracker']['retracker_host']]);
             }
         }
 
