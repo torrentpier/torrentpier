@@ -20,7 +20,7 @@
 - Don't re-announce even if peer cache is present [\#1107](https://github.com/torrentpier/torrentpier/pull/1107) ([kovalensky](https://github.com/kovalensky))
 - Used br2nl() in ajax alert messages [\#1106](https://github.com/torrentpier/torrentpier/pull/1106) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced some html_entity_decode to engine's built-in function [\#1105](https://github.com/torrentpier/torrentpier/pull/1105) ([belomaxorka](https://github.com/belomaxorka))
-- Fix typo [\#1104](https://github.com/torrentpier/torrentpier/pull/1104) ([kovalensky](https://github.com/kovalensky))
+- Fix typo [\#1104](https://github.com/torrentpier/torrentpier/pull/1104), [\#1124](https://github.com/torrentpier/torrentpier/pull/1124) ([kovalensky](https://github.com/kovalensky))
 - Change default engine language to en [\#1103](https://github.com/torrentpier/torrentpier/pull/1103) ([kovalensky](https://github.com/kovalensky))
 - Record changed port while re-announcing [\#1102](https://github.com/torrentpier/torrentpier/pull/1102) ([kovalensky](https://github.com/kovalensky))
 - Translations for config.php, raised scrape interval [\#1100](https://github.com/torrentpier/torrentpier/pull/1100) ([kovalensky](https://github.com/kovalensky))
