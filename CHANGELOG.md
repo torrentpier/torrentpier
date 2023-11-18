@@ -5,6 +5,8 @@
 
 **Merged pull requests:**
 
+- Don't use main announce url inside announce-list [\#1117](https://github.com/torrentpier/torrentpier/pull/1117) ([kovalensky](https://github.com/kovalensky))
+- Don't check for announce-list while adding new urls [\#1116](https://github.com/torrentpier/torrentpier/pull/1116) ([kovalensky](https://github.com/kovalensky))
 - Cleanup: Removed useless global variable [\#1115](https://github.com/torrentpier/torrentpier/pull/1115) ([belomaxorka](https://github.com/belomaxorka))
 - Unset debug cookies if SQL_DEBUG disabled [\#1114](https://github.com/torrentpier/torrentpier/pull/1114) ([belomaxorka](https://github.com/belomaxorka))
 - Announcer's code re-formatting [\#1112](https://github.com/torrentpier/torrentpier/pull/1112) ([kovalensky](https://github.com/kovalensky))
