@@ -25,11 +25,7 @@ if (!$torrent) {
 
 $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
 if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
-    if (IS_AM) {
-        $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
-    } else {
-        $this->ajax_die($lang['ERROR_NO_ATTACHMENT']);
-    }
+    $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
 }
 
 if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
