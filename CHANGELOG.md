@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Announcer's code re-formatting [\#1112](https://github.com/torrentpier/torrentpier/pull/1112) ([kovalensky](https://github.com/kovalensky))
 - Used new-style [] array constructions in some cases [\#1111](https://github.com/torrentpier/torrentpier/pull/1111) ([belomaxorka](https://github.com/belomaxorka))
 - Use http_response_code() functions instead of old header() functions [\#1110](https://github.com/torrentpier/torrentpier/pull/1110) ([belomaxorka](https://github.com/belomaxorka))
 - Fix bypassing cache if IP changed while using cache [\#1109](https://github.com/torrentpier/torrentpier/pull/1109) ([kovalensky](https://github.com/kovalensky))
@@ -17,7 +18,7 @@
 - Record changed port while re-announcing [\#1102](https://github.com/torrentpier/torrentpier/pull/1102) ([kovalensky](https://github.com/kovalensky))
 - Translations for config.php, raised scrape interval [\#1100](https://github.com/torrentpier/torrentpier/pull/1100) ([kovalensky](https://github.com/kovalensky))
 - Don't re-announce for hybrids if the event is "stopped" [\#1099](https://github.com/torrentpier/torrentpier/pull/1099) ([kovalensky](https://github.com/kovalensky))
-- Security measures [\#1098](https://github.com/torrentpier/torrentpier/pull/1098) ([kovalensky](https://github.com/kovalensky))
+- Security measures [\#1098](https://github.com/torrentpier/torrentpier/pull/1098), [\#1113](https://github.com/torrentpier/torrentpier/pull/1113) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1097](https://github.com/torrentpier/torrentpier/pull/1097), [\#1101](https://github.com/torrentpier/torrentpier/pull/1101) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-beta4](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta4) (2023-11-14)
