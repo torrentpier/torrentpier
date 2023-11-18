@@ -468,8 +468,6 @@ class User
      */
     public function set_session_cookies($user_id)
     {
-        global $bb_cfg;
-
         if ($user_id == GUEST_UID) {
             $delete_cookies = [
                 COOKIE_DATA,
