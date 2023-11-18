@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Cleanup: Removed useless global variable [\#1115](https://github.com/torrentpier/torrentpier/pull/1115) ([belomaxorka](https://github.com/belomaxorka))
 - Unset debug cookies if SQL_DEBUG disabled [\#1114](https://github.com/torrentpier/torrentpier/pull/1114) ([belomaxorka](https://github.com/belomaxorka))
 - Announcer's code re-formatting [\#1112](https://github.com/torrentpier/torrentpier/pull/1112) ([kovalensky](https://github.com/kovalensky))
 - Used new-style [] array constructions in some cases [\#1111](https://github.com/torrentpier/torrentpier/pull/1111) ([belomaxorka](https://github.com/belomaxorka))
