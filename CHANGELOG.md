@@ -5,6 +5,8 @@
 
 **Merged pull requests:**
 
+- Don't create empty announce-list dict, if ann_urls are empty [\#1119](https://github.com/torrentpier/torrentpier/pull/1119) ([kovalensky](https://github.com/kovalensky))
+- Improve code for retracker addition [\#1118](https://github.com/torrentpier/torrentpier/pull/1118) ([kovalensky](https://github.com/kovalensky))
 - Don't use main announce url inside announce-list [\#1117](https://github.com/torrentpier/torrentpier/pull/1117) ([kovalensky](https://github.com/kovalensky))
 - Don't check for announce-list while adding new urls [\#1116](https://github.com/torrentpier/torrentpier/pull/1116) ([kovalensky](https://github.com/kovalensky))
 - Cleanup: Removed useless global variable [\#1115](https://github.com/torrentpier/torrentpier/pull/1115) ([belomaxorka](https://github.com/belomaxorka))
