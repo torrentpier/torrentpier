@@ -568,14 +568,14 @@ class Torrent
         // Delete all additional urls
         if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
             unset($tor['announce-list']);
-        } else {
+        } elseif (!empty($announce_urls_add)) {
             $tor['announce-list'] = array_merge($tor['announce-list'] ?? [], $announce_urls_add);
         }
 
         // Add retracker
         if (!empty($bb_cfg['tracker']['retracker_host']) && $bb_cfg['tracker']['retracker']) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
-                $tor['announce-list'] = array_merge($tor['announce-list'] ?? [], [$bb_cfg['tracker']['retracker_host']]);
+                $tor['announce-list'] = array_merge($tor['announce-list'] ?? [], [[$bb_cfg['tracker']['retracker_host']]]);
             }
         }
 
