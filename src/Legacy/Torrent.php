@@ -541,19 +541,15 @@ class Torrent
             }
         }
 
-        // Announce URL
-        $ann_url = $bb_cfg['bt_announce_url'];
-
+        // Torrent decoding
         $file_contents = file_get_contents($filename);
         if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
             bb_die($lang['TORFILE_INVALID']);
         }
 
-        $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
-
         // Replace original announce url with tracker default
         if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
-            $tor['announce'] = $announce;
+            $tor['announce'] = $bb_cfg['ocelot']['enabled'] ? $bb_cfg['ocelot']['url'] . "$passkey_val/announce" : $bb_cfg['bt_announce_url'] . "?$passkey_key=$passkey_val";
         }
 
         // Get additional announce urls
