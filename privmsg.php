@@ -1097,14 +1097,24 @@ if ($mode == 'read') {
     $template->assign_block_vars('switch_privmsg', []);
     $template->assign_var('POSTING_USERNAME');
 
-    $post_a = '&nbsp;';
-    if ($mode == 'post') {
-        $post_a = $lang['SEND_A_NEW_MESSAGE'];
-    } elseif ($mode == 'reply') {
-        $post_a = $lang['SEND_A_REPLY'];
-        $mode = 'post';
-    } elseif ($mode == 'edit') {
-        $post_a = $lang['EDIT_MESSAGE'];
+    //
+    // Assign posting title & hidden fields
+    //
+    $post_a = false;
+    switch ($mode) {
+        case 'post':
+            $post_a = $lang['SEND_A_NEW_MESSAGE'];
+            break;
+        case 'reply':
+            $post_a = $lang['SEND_A_REPLY'];
+            $mode = 'post';
+            break;
+        case 'edit':
+            $post_a = $lang['EDIT_MESSAGE'];
+            break;
+        default:
+            pm_die($lang['NONE_SELECTED']);
+            break;
     }
 
     $s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
