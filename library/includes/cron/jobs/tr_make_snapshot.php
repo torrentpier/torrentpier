@@ -18,13 +18,11 @@ DB()->expect_slow_query(600);
 //
 // Make tracker snapshot
 //
-if (!$bb_cfg['ocelot']['enabled']) {
-    define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
-    define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
+define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
+define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
 
-    DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-    DB()->query("CREATE TABLE " . NEW_BB_BT_TRACKER_SNAP . " LIKE " . BB_BT_TRACKER_SNAP);
-}
+DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
+DB()->query("CREATE TABLE " . NEW_BB_BT_TRACKER_SNAP . " LIKE " . BB_BT_TRACKER_SNAP);
 
 $per_cycle = 50000;
 $row = DB()->fetch_row("SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM " . BB_BT_TRACKER);
@@ -65,15 +63,13 @@ while (true) {
     $start_id += $per_cycle;
 }
 
-if (!$bb_cfg['ocelot']['enabled']) {
-    DB()->query("
-		RENAME TABLE
+DB()->query("
+	RENAME TABLE
 		" . BB_BT_TRACKER_SNAP . " TO " . OLD_BB_BT_TRACKER_SNAP . ",
 		" . NEW_BB_BT_TRACKER_SNAP . " TO " . BB_BT_TRACKER_SNAP . "
-	");
+");
 
-    DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-}
+DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
 
 //
 // Make dl-list snapshot
