@@ -5,7 +5,7 @@
 
 **Merged pull requests:**
 
-- Fixed announcer-list issue [\#1129](https://github.com/torrentpier/torrentpier/pull/1129) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed announcer-list issue [\#1129](https://github.com/torrentpier/torrentpier/pull/1129), [\#1130](https://github.com/torrentpier/torrentpier/pull/1130) ([belomaxorka](https://github.com/belomaxorka))
 - Removed client column from bb_bt_tracker table [\#1128](https://github.com/torrentpier/torrentpier/pull/1128) ([belomaxorka](https://github.com/belomaxorka))
 - Removed one-time used variables [\#1120](https://github.com/torrentpier/torrentpier/pull/1120) ([belomaxorka](https://github.com/belomaxorka))
 - Don't create empty announce-list dict, if ann_urls are empty [\#1119](https://github.com/torrentpier/torrentpier/pull/1119) ([kovalensky](https://github.com/kovalensky))
