@@ -102,16 +102,6 @@ $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
 $bb_cfg['allow_internal_ip'] = false; // Allow internal IP (10.xx.. etc.)
 
-// Ocelot
-$bb_cfg['ocelot'] = [
-    'enabled' => false,
-    'host' => $domain_name,
-    'port' => 34000,
-    'url' => "http://$domain_name:34000/", // with '/'
-    'secret' => 'some_10_chars', // 10 chars
-    'stats' => 'some_10_chars', // 10 chars
-];
-
 // FAQ url help link
 $bb_cfg['how_to_download_url_help'] = 'viewtopic.php?t=1'; // How to download?
 $bb_cfg['what_is_torrent_url_help'] = 'viewtopic.php?t=2'; // What is a torrent?
