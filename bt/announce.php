@@ -102,7 +102,8 @@ $ip = $_SERVER['REMOTE_ADDR'];
 if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip']) {
     if (!$bb_cfg['verify_reported_ip']) {
         $ip = $_GET['ip'];
-    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
+    }
+    elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
         foreach ($matches[0] as $x_ip) {
             if ($x_ip === $_GET['ip']) {
                 if (!$bb_cfg['allow_internal_ip'] && preg_match("#(127\.([0-9]{1,3}\.){2}[0-9]{1,3}|10\.([0-9]{1,3}\.){2}[0-9]{1,3}|172\.[123][0-9]\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3})#", $x_ip)) {
@@ -126,7 +127,11 @@ $ip_sql = \TorrentPier\Helpers\IPHelper::ip2long($ip);
 // Detect IP version
 $ipv4 = $ipv6 = null;
 $ip_version = \TorrentPier\Helpers\IPHelper::isValidv6($ip) ? 'ipv6' : 'ip';
-($ip_version === 'ipv6') ? ($ipv6 = $ip_sql) : ($ipv4 = $ip_sql);
+if ($ip_version === 'ipv6') {
+    $ipv6 = $ip_sql;
+} else {
+    $ipv4 = $ip_sql;
+}
 
 // Peer unique id
 $peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
@@ -241,7 +246,8 @@ if ($lp_info) {
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_seed_count']) {
                     msg_die('Only ' . $bb_cfg['tracker']['limit_seed_count'] . ' torrent(s) allowed for seeding');
-                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_leech_count']) {
+                }
+                elseif (!$seeder && $bb_cfg['tracker']['limit_leech_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_leech_count']) {
                     msg_die('Only ' . $bb_cfg['tracker']['limit_leech_count'] . ' torrent(s) allowed for leeching' . $rating_msg);
                 }
             }
@@ -264,7 +270,8 @@ if ($lp_info) {
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_seed_ips']) {
                     msg_die('You can seed only from ' . $bb_cfg['tracker']['limit_seed_ips'] . " IP's");
-                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_leech_ips']) {
+                }
+                elseif (!$seeder && $bb_cfg['tracker']['limit_leech_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_leech_ips']) {
                     msg_die('You can leech only from ' . $bb_cfg['tracker']['limit_leech_ips'] . " IP's");
                 }
             }
