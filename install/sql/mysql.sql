@@ -652,8 +652,6 @@ VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00
         '0', '0'),
        ('1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', '', '', '255', '', '', '01:00:00', '0',
         '', '0', '0', '0'),
-       ('1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', '', '', '255', '', '', '06:00:00', '0',
-        '', '0', '0', '0'),
        ('1', 'Cache garbage collector', 'cache_gc.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '', '0',
         '0',
         '0'),

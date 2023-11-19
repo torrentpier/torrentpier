@@ -91,3 +91,6 @@ INSERT INTO `bb_extensions` VALUES ('997', '4', 'tif', '');
 INSERT INTO `bb_extensions` VALUES ('998', '4', 'tiff', '');
 DELETE FROM `bb_extensions` WHERE `extension` = 'tga';
 INSERT INTO `bb_extensions` VALUES ('999', '4', 'tga', '');
+
+// 2.4.0-rc1
+DELETE FROM `bb_cron` WHERE `cron_script` = 'tr_complete_count.php';
