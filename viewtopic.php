@@ -755,7 +755,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         define('SPLIT_FORM_START', true);
     }
 
-    if ($poster_id != BOT_UID) {
+    if (!$poster_bot) {
         $prev_post_time = $postrow[$i]['post_time'];
     }
 }
