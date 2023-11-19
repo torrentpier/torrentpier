@@ -551,8 +551,18 @@ class Torrent
         $announce_url = $bb_cfg['ocelot']['enabled'] ? $bb_cfg['ocelot']['url'] . "$passkey_val/announce" : $bb_cfg['bt_announce_url'] . "?$passkey_key=$passkey_val";
 
         // Replace original announce url with tracker default
-        if ($bb_cfg['bt_replace_ann_url']) {
+        if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
             $tor['announce'] = $announce_url;
+        }
+
+        // Delete all additional urls
+        if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
+            unset($tor['announce-list']);
+        }
+
+        // Creating announce-list if not exist
+        if (!isset($tor['announce-list']) || !is_array($tor['announce-list'])) {
+            $tor['announce-list'] = [];
         }
 
         // Get additional announce urls
@@ -564,28 +574,18 @@ class Torrent
         }
         unset($additional_announce_urls);
 
-        // Delete all additional urls
-        if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
-            unset($tor['announce-list']);
+        // Adding tracker announcer to announce-list
+        if ($bb_cfg['bt_replace_ann_url']) {
+            // Adding tracker announcer as main announcer (At start)
+            array_unshift($tor['announce-list'], [$announce_url]);
         } else {
-            // Creating announce-list if not exist
-            if (!isset($tor['announce-list']) || !is_array($tor['announce-list'])) {
-                $tor['announce-list'] = [];
-            }
+            // Adding tracker announcer (At end)
+            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce_url]]);
+        }
 
-            // Adding tracker announcer to announce-list
-            if ($bb_cfg['bt_replace_ann_url']) {
-                // Adding tracker announcer as main announcer (At start)
-                array_unshift($tor['announce-list'], [$announce_url]);
-            } else {
-                // Adding tracker announcer (At end)
-                $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce_url]]);
-            }
-
-            // Adding additional announce urls (If present)
-            if (!empty($announce_urls_add)) {
-                $tor['announce-list'] = array_merge($tor['announce-list'], $announce_urls_add);
-            }
+        // Adding additional announce urls (If present)
+        if (!empty($announce_urls_add)) {
+            $tor['announce-list'] = array_merge($tor['announce-list'], $announce_urls_add);
         }
 
         // Add retracker
