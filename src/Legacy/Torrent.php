@@ -574,15 +574,6 @@ class Torrent
         }
         unset($additional_announce_urls);
 
-        // Adding tracker announcer to announce-list
-        if ($bb_cfg['bt_replace_ann_url']) {
-            // Adding tracker announcer as main announcer (At start)
-            array_unshift($tor['announce-list'], [$announce_url]);
-        } else {
-            // Adding tracker announcer (At end)
-            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce_url]]);
-        }
-
         // Adding additional announce urls (If present)
         if (!empty($announce_urls_add)) {
             $tor['announce-list'] = array_merge($tor['announce-list'], $announce_urls_add);
@@ -593,6 +584,27 @@ class Torrent
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
                 $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
             }
+        }
+
+        // Adding tracker announcer to announce-list
+        if (!empty($tor['announce-list'])) {
+            if ($bb_cfg['bt_replace_ann_url']) {
+                // Adding tracker announcer as main announcer (At start)
+                array_unshift($tor['announce-list'], [$announce_url]);
+            } else {
+                // Adding torrent announcer (At start)
+                array_unshift($tor['announce-list'], [$tor['announce']]);
+
+                // Adding tracker announcer (At end)
+                if ($tor['announce'] != $announce_url) {
+                    $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce_url]]);
+                }
+            }
+        }
+
+        // Remove announce-list if empty
+        if (empty($tor['announce-list'])) {
+            unset($tor['announce-list']);
         }
 
         // Add publisher & topic url
