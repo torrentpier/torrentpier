@@ -645,7 +645,7 @@ class Torrent
             }
         } else {
             // Update exists passkey
-            DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
+            DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
             if (DB()->affected_rows() == 1) {
                 // Ocelot
                 if ($bb_cfg['ocelot']['enabled']) {

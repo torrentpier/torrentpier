@@ -704,8 +704,8 @@ if ($allowed_forums) {
             $size = $tor['size'];
             $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), html_ent_decode($tor['topic_title']));
             $compl = $tor['complete_count'];
-            $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
-            $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
+            $dl_sp = $dl ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
+            $ul_sp = $ul ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
 
             $dl_class = isset($tor['dl_status']) ? $dl_link_css[$tor['dl_status']] : 'genmed';
             $row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
@@ -717,15 +717,15 @@ if ($allowed_forums) {
 
             $template->assign_block_vars('tor', array(
                 'CAT_ID' => $cat_id,
-                'CAT_TITLE' => ($cat_id) ? $cat_title_html[$cat_id] : '',
+                'CAT_TITLE' => $cat_id ? $cat_title_html[$cat_id] : '',
                 'FORUM_ID' => $forum_id,
-                'FORUM_NAME' => ($forum_id) ? $forum_name_html[$forum_id] : '',
+                'FORUM_NAME' => $forum_id ? $forum_name_html[$forum_id] : '',
                 'TOPIC_ID' => $tor['topic_id'],
                 'TOPIC_TITLE' => wbr($tor['topic_title']),
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . delta_time($tor['topic_time']),
                 'POST_ID' => $tor['post_id'],
                 'POSTER_ID' => $poster_id,
-                'USERNAME' => ($hide_author) ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
+                'USERNAME' => $hide_author ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 
                 'ROW_CLASS' => $row_class,
                 'ROW_NUM' => $row_num,
@@ -737,7 +737,7 @@ if ($allowed_forums) {
                 'MAGNET' => $tor_magnet,
                 'TOR_TYPE' => is_gold($tor['tor_type']),
 
-                'TOR_FROZEN' => (!IS_AM) ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
+                'TOR_FROZEN' => !IS_AM ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
                 'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],
                 'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 
@@ -746,7 +746,7 @@ if ($allowed_forums) {
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
                 'SEEDS' => $seeds ?: 0,
-                'SEEDS_TITLE' => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
+                'SEEDS_TITLE' => $seeds ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
                 'LEECHS' => $leechs ?: 0,
                 'COMPLETED' => $compl ?: 0,
                 'REPLIES' => $tor['topic_replies'],

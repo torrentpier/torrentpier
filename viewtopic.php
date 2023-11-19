@@ -427,7 +427,7 @@ if ($can_watch_topic) {
         $s_watching_topic_img = (isset($images['topic_un_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . $lang['STOP_WATCHING_TOPIC'] . '" title="' . $lang['STOP_WATCHING_TOPIC'] . '" border="0"></a>' : '';
     } else {
         $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['START_WATCHING_TOPIC'] . '</a>';
-        $s_watching_topic_img = (isset($images['Topic_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
+        $s_watching_topic_img = (isset($images['topic_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
     }
 }
 
@@ -565,13 +565,16 @@ $prev_post_time = $max_post_time = 0;
 
 for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
-    $poster = ($poster_id == GUEST_UID) ? $lang['GUEST'] : $postrow[$i]['username'];
+    $poster_guest = ($poster_id == GUEST_UID);
+    $poster_bot = ($poster_id == BOT_UID);
+    $poster = $poster_guest ? $lang['GUEST'] : $postrow[$i]['username'];
+
     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
-    $poster_posts = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';
-    $poster_from = ($postrow[$i]['user_from'] && $poster_id != GUEST_UID) ? $postrow[$i]['user_from'] : '';
-    $poster_joined = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
-    $poster_longevity = ($poster_id != GUEST_UID) ? delta_time($postrow[$i]['user_regdate']) : '';
+    $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
+    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
+    $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
+    $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
     $post_id = $postrow[$i]['post_id'];
     $mc_type = $postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
@@ -584,7 +587,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $rg_signature = $postrow[$i]['group_signature'] ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
 
     $poster_avatar = '';
-    if (!$user->opt_js['h_av'] && $poster_id != GUEST_UID) {
+    if (!$user->opt_js['h_av'] && !$poster_guest) {
         $poster_avatar = get_avatar($poster_id, $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
     }
 
@@ -596,19 +599,19 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     // Handle anon users posting with usernames
-    if ($poster_id == GUEST_UID && $postrow[$i]['post_username'] != '') {
+    if ($poster_guest && !empty($postrow[$i]['post_username'])) {
         $poster = $postrow[$i]['post_username'];
     }
 
     // Buttons
     $pm_btn = $profile_btn = $delpost_btn = $edit_btn = $ip_btn = $quote_btn = '';
 
-    if ($poster_id != GUEST_UID) {
+    if (!$poster_guest) {
         $profile_btn = true;
         $pm_btn = true;
     }
 
-    if ($poster_id != BOT_UID) {
+    if (!$poster_bot) {
         $quote_btn = true;
         $edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
         $ip_btn = ($is_auth['auth_mod'] || IS_MOD);
@@ -698,16 +701,17 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
-        'POSTER_JOINED' => ($bb_cfg['show_poster_joined']) ? $poster_longevity : '',
+        'POSTER_JOINED' => $bb_cfg['show_poster_joined'] ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
-        'POSTER_POSTS' => ($bb_cfg['show_poster_posts']) ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
-        'POSTER_FROM' => ($bb_cfg['show_poster_from']) ? wbr($poster_from) : '',
-        'POSTER_BOT' => ($poster_id == BOT_UID),
+        'POSTER_POSTS' => $bb_cfg['show_poster_posts'] ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
+        'POSTER_FROM' => $bb_cfg['show_poster_from'] ? wbr($poster_from) : '',
+        'POSTER_BOT' => $poster_bot,
+        'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
-        'POSTER_GENDER' => ($bb_cfg['gender']) ? gender_image($postrow[$i]['user_gender']) : '',
-        'POSTED_AFTER' => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
+        'POSTER_GENDER' => $bb_cfg['gender'] ? gender_image($postrow[$i]['user_gender']) : '',
+        'POSTED_AFTER' => $prev_post_time ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
         'IS_FIRST_POST' => (!$start && $is_first_post),
         'MOD_CHECKBOX' => ($moderation && ($start || defined('SPLIT_FORM_START'))),
@@ -728,8 +732,8 @@ for ($i = 0; $i < $total_posts; $i++) {
 
         'POSTER_BIRTHDAY' => user_birthday_icon($postrow[$i]['user_birthday'], $postrow[$i]['user_id']),
 
-        'MC_COMMENT' => ($mc_type) ? bbcode2html($mc_comment) : '',
-        'MC_BBCODE' => ($mc_type) ? $mc_comment : '',
+        'MC_COMMENT' => $mc_type ? bbcode2html($mc_comment) : '',
+        'MC_BBCODE' => $mc_type ? $mc_comment : '',
         'MC_CLASS' => $mc_class,
         'MC_TITLE' => sprintf($lang['MC_COMMENT'][$mc_type]['title'], $mc_user_id),
         'MC_SELECT_TYPE' => build_select("mc_type_$post_id", array_flip($mc_select_type), $mc_type),
@@ -751,7 +755,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         define('SPLIT_FORM_START', true);
     }
 
-    if ($poster_id != BOT_UID) {
+    if (!$poster_bot) {
         $prev_post_time = $postrow[$i]['post_time'];
     }
 }

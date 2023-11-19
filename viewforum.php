@@ -33,7 +33,7 @@ $anon = GUEST_UID;
 // Start session
 $user->session_start();
 
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output
 $req_page = "forum_f{$forum_id}";
@@ -440,12 +440,12 @@ foreach ($topic_rowset as $topic) {
     $template->assign_block_vars('t', [
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
-        'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
+        'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
         'TOPIC_TITLE' => wbr($topic['topic_title']),
         'TOPICS_SEPARATOR' => $separator,
         'IS_UNREAD' => $is_unread,
         'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-        'PAGINATION' => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
+        'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
         'REPLIES' => $replies,
         'VIEWS' => $topic['topic_views'],
         'TOR_STALED' => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
@@ -485,14 +485,14 @@ foreach ($topic_rowset as $topic) {
 unset($topic_rowset);
 
 $pg_url = FORUM_URL . $forum_id;
-$pg_url .= ($sort_value) ? "&sort=$sort_value" : '';
-$pg_url .= ($order_value) ? "&order=$order_value" : '';
+$pg_url .= $sort_value ? "&sort=$sort_value" : '';
+$pg_url .= $order_value ? "&order=$order_value" : '';
 $template->assign_var('MOD_URL', $pg_url);
 $pg_url = FORUM_URL . $forum_id;
-$pg_url .= ($topic_days) ? "&amp;topicdays=$topic_days" : '';
-$pg_url .= ($sort_value) ? "&amp;sort=$sort_value" : '';
-$pg_url .= ($order_value) ? "&amp;order=$order_value" : '';
-$pg_url .= ($moderation) ? "&amp;mod=1" : '';
+$pg_url .= $topic_days ? "&amp;topicdays=$topic_days" : '';
+$pg_url .= $sort_value ? "&amp;sort=$sort_value" : '';
+$pg_url .= $order_value ? "&amp;order=$order_value" : '';
+$pg_url .= $moderation ? "&amp;mod=1" : '';
 $pg_url .= ($topics_per_page != $bb_cfg['topics_per_page']) ? "&amp;tpp=$topics_per_page" : '';
 
 if ($found_topics) {

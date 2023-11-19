@@ -90,7 +90,7 @@ $url = basename(__FILE__);
 
 $anon_id = GUEST_UID;
 $user_id = $userdata['user_id'];
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 $search_id = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
 $session_id = $userdata['session_id'];
 
@@ -800,11 +800,11 @@ else {
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
+            'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
             'TOPIC_TITLE' => wbr($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-            'PAGINATION' => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
+            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
             'REPLIES' => $topic['topic_replies'],
             'ATTACH' => $topic['topic_attachment'],
             'STATUS' => $topic['topic_status'],
