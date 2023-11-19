@@ -566,6 +566,9 @@ $prev_post_time = $max_post_time = 0;
 for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
     $poster = ($poster_id == GUEST_UID) ? $lang['GUEST'] : $postrow[$i]['username'];
+    $poster_guest = ($poster_id == GUEST_UID);
+    $poster_bot = ($poster_id == BOT_UID);
+
     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';

@@ -119,7 +119,7 @@ $template->assign_vars([
     'USER_LANG' => $userdata['user_lang'],
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
-    'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
+    'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 
