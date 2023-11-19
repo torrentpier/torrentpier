@@ -93,11 +93,10 @@ class Torrent
         global $lang, $bb_cfg;
 
         $attach_id = (int)$attach_id;
-        $post_id = $topic_id = $forum_id = $info_hash = null;
+        $topic_id = $forum_id = null;
 
         // Get torrent info
         if ($torrent = self::get_torrent_info($attach_id)) {
-            $post_id = $torrent['post_id'];
             $topic_id = $torrent['topic_id'];
             $forum_id = $torrent['forum_id'];
         }
@@ -492,6 +491,7 @@ class Torrent
             bb_die($lang['DISALLOWED']);
         }
 
+        // Get passkey
         if ($bt_userdata = get_bt_userdata($user_id)) {
             $passkey_val = $bt_userdata['auth_key'];
         }
