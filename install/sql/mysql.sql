@@ -362,7 +362,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `ip`               VARCHAR(42)                    DEFAULT NULL,
   `ipv6`             VARCHAR(42)                    DEFAULT NULL,
   `port`             SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
-  `client`           VARCHAR(51)           NOT NULL DEFAULT 'Unknown',
   `seeder`           TINYINT(1)            NOT NULL DEFAULT '0',
   `releaser`         TINYINT(1)            NOT NULL DEFAULT '0',
   `tor_type`         TINYINT(1)            NOT NULL DEFAULT '0',
