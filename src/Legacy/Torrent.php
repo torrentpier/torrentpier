@@ -555,13 +555,8 @@ class Torrent
             $tor['announce'] = $announce_url;
         }
 
-        // Delete all additional urls
-        if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
-            unset($tor['announce-list']);
-        }
-
-        // Creating announce-list if not exist
-        if (!isset($tor['announce-list']) || !is_array($tor['announce-list'])) {
+        // Creating / cleaning announce-list
+        if (!isset($tor['announce-list']) || !is_array($tor['announce-list']) || $bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
             $tor['announce-list'] = [];
         }
 
