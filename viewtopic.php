@@ -565,16 +565,16 @@ $prev_post_time = $max_post_time = 0;
 
 for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
-    $poster = ($poster_id == GUEST_UID) ? $lang['GUEST'] : $postrow[$i]['username'];
     $poster_guest = ($poster_id == GUEST_UID);
     $poster_bot = ($poster_id == BOT_UID);
+    $poster = $poster_guest ? $lang['GUEST'] : $postrow[$i]['username'];
 
     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
-    $poster_posts = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';
-    $poster_from = ($postrow[$i]['user_from'] && $poster_id != GUEST_UID) ? $postrow[$i]['user_from'] : '';
-    $poster_joined = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
-    $poster_longevity = ($poster_id != GUEST_UID) ? delta_time($postrow[$i]['user_regdate']) : '';
+    $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
+    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
+    $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
+    $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
     $post_id = $postrow[$i]['post_id'];
     $mc_type = $postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
@@ -587,7 +587,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $rg_signature = $postrow[$i]['group_signature'] ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
 
     $poster_avatar = '';
-    if (!$user->opt_js['h_av'] && $poster_id != GUEST_UID) {
+    if (!$user->opt_js['h_av'] && !$poster_guest) {
         $poster_avatar = get_avatar($poster_id, $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
     }
 
@@ -599,19 +599,19 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     // Handle anon users posting with usernames
-    if ($poster_id == GUEST_UID && $postrow[$i]['post_username'] != '') {
+    if ($poster_guest && !empty($postrow[$i]['post_username'])) {
         $poster = $postrow[$i]['post_username'];
     }
 
     // Buttons
     $pm_btn = $profile_btn = $delpost_btn = $edit_btn = $ip_btn = $quote_btn = '';
 
-    if ($poster_id != GUEST_UID) {
+    if (!$poster_guest) {
         $profile_btn = true;
         $pm_btn = true;
     }
 
-    if ($poster_id != BOT_UID) {
+    if (!$poster_bot) {
         $quote_btn = true;
         $edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
         $ip_btn = ($is_auth['auth_mod'] || IS_MOD);
@@ -706,7 +706,8 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_JOINED_DATE' => $poster_joined,
         'POSTER_POSTS' => ($bb_cfg['show_poster_posts']) ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
         'POSTER_FROM' => ($bb_cfg['show_poster_from']) ? wbr($poster_from) : '',
-        'POSTER_BOT' => ($poster_id == BOT_UID),
+        'POSTER_BOT' => $poster_bot,
+        'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
         'POSTER_GENDER' => ($bb_cfg['gender']) ? gender_image($postrow[$i]['user_gender']) : '',
