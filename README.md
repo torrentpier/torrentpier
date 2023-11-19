@@ -19,7 +19,7 @@
 ## 🐂 About TorrentPier
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load 
-architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition, we have very helpful 
+architecture. In addition, we have very helpful 
 [official support forum](https://torrentpier.com), where among other things it is possible to test the live 
 demo, get any support and download modifications for engine.
 
