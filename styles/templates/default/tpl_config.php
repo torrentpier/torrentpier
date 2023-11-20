@@ -96,8 +96,6 @@ $images['pm_new_msg'] = '';
 $images['pm_no_new_msg'] = '';
 
 // topic_mod_icons will be replaced with SELECT later...
-$images['topic_watch'] = '';
-$images['topic_un_watch'] = '';
 $images['topic_mod_lock'] = $_main . 'topic_lock.gif';
 $images['topic_mod_unlock'] = $_main . 'topic_unlock.gif';
 $images['topic_mod_split'] = $_main . 'topic_split.gif';
