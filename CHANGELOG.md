@@ -5,6 +5,8 @@
 
 **Merged pull requests:**
 
+- Vote button code improvements [\#1140](https://github.com/torrentpier/torrentpier/pull/1140) ([belomaxorka](https://github.com/belomaxorka))
+- Vote button and v2 file list topic url display [\#1138](https://github.com/torrentpier/torrentpier/pull/1138) ([kovalensky](https://github.com/kovalensky))
 - Removed topic watch useless code [\#1137](https://github.com/torrentpier/torrentpier/pull/1137) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed topic_watch array key name [\#1136](https://github.com/torrentpier/torrentpier/pull/1136) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed announce-list indexes ordering [\#1135](https://github.com/torrentpier/torrentpier/pull/1135) ([belomaxorka](https://github.com/belomaxorka))
@@ -33,7 +35,7 @@
 - Translations for config.php, raised scrape interval [\#1100](https://github.com/torrentpier/torrentpier/pull/1100) ([kovalensky](https://github.com/kovalensky))
 - Don't re-announce for hybrids if the event is "stopped" [\#1099](https://github.com/torrentpier/torrentpier/pull/1099) ([kovalensky](https://github.com/kovalensky))
 - Security measures [\#1098](https://github.com/torrentpier/torrentpier/pull/1098), [\#1113](https://github.com/torrentpier/torrentpier/pull/1113) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1121](https://github.com/torrentpier/torrentpier/pull/1121), [\#1122](https://github.com/torrentpier/torrentpier/pull/1122), [\#1123](https://github.com/torrentpier/torrentpier/pull/1123), [\#1125](https://github.com/torrentpier/torrentpier/pull/1125) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1121](https://github.com/torrentpier/torrentpier/pull/1121), [\#1122](https://github.com/torrentpier/torrentpier/pull/1122), [\#1123](https://github.com/torrentpier/torrentpier/pull/1123), [\#1125](https://github.com/torrentpier/torrentpier/pull/1125), [\#1141](https://github.com/torrentpier/torrentpier/pull/1141) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1097](https://github.com/torrentpier/torrentpier/pull/1097), [\#1101](https://github.com/torrentpier/torrentpier/pull/1101) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-beta4](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta4) (2023-11-14)
