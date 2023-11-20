@@ -454,7 +454,6 @@ $('#tor-filelist-btn').click(function(){
         }
     }
 </script>
-
 <div id="thx-block">
     <div id="thx-btn-div">
         <input id="thx-btn" type="button" class="bold" style="width: 200px;" value='{$lang['THANK_TOPIC']}'/>
