@@ -66,7 +66,6 @@ $data = [
     'name' => htmlCHR($tor['info']['name'] ?? ''),
     'client' => htmlCHR(substr($tor['created by'] ?? 'unknown client', 0, 20)),
     'size' => humn_size($files['size']),
-    'hash' => bin2hex($row['info_hash_v2']),
     'date' => (isset($tor['creation date']) && is_numeric($tor['creation date'])) ? delta_time($tor['creation date']) : 'unknown',
     'site_url' => FULL_URL
 ];
@@ -81,7 +80,7 @@ echo <<<EOF
 <meta name="description" content="File listing for topic - $topic_id | {$data['name']} ({$data['size']})">
 <link rel="shortcut icon" href="{$data['site_url']}favicon.png" type="image/x-icon">
 
-<title>{$data['name']} ({$data['size']}) | {$data['hash']} | {$bb_cfg['sitename']}</title>
+<title>{$data['name']} ({$data['size']}) | {$bb_cfg['sitename']}</title>
 </head>
 <body>
 <style>
@@ -150,6 +149,7 @@ sup {
     opacity: 0.97;
 }
 </style>
+<a href = "{$data['site_url']}viewtopic.php?t={$topic_id}" style = "font-family: Monospace; color: #569904;">🠔 Back to the topic</a>
 <center>
     <h2 style="color: #b3b3b3; font-family: Monospace;">Name: {$data['name']} | Age: ({$data['date']}) | Size: {$data['size']}</h2>
 <p>

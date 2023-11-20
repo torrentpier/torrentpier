@@ -505,6 +505,9 @@ $bb_cfg['color_nick'] = true; // Colour user names in accordance with user_rank
 $bb_cfg['user_not_activated_days_keep'] = 7; // "not activated" == "not finished registration"
 $bb_cfg['user_not_active_days_keep'] = 180; // inactive users but only with no posts
 
+// Vote for torrents
+$bb_cfg['tor_thank'] = true;
+
 // Groups
 $bb_cfg['group_members_per_page'] = 50; // How many groups will be displayed in a page
 
