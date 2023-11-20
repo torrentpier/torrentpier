@@ -251,6 +251,7 @@ define('BB_TOPICS_WATCH', 'bb_topics_watch');
 define('BB_USER_GROUP', 'bb_user_group');
 define('BB_USERS', 'bb_users');
 define('BB_WORDS', 'bb_words');
+define('BB_THX', 'bb_thx');
 
 define('TORRENT_EXT', 'torrent');
 

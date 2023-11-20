@@ -1468,6 +1468,24 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `bb_thx`
+-- ----------------------------
+DROP TABLE IF EXISTS `bb_thx`;
+CREATE TABLE IF NOT EXISTS `bb_thx`
+(
+  `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id`          MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `time`             INT(11)               NOT NULL DEFAULT '0',
+  PRIMARY KEY (`topic_id`)
+)
+  ENGINE = MyISAM
+  DEFAULT CHARSET = utf8;
+
+-- ----------------------------
+-- Records of bb_thx
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `buf_topic_view`
 -- ----------------------------
 DROP TABLE IF EXISTS `buf_topic_view`;
