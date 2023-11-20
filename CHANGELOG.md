@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Normalizing announce-list [\#1133](https://github.com/torrentpier/torrentpier/pull/1133) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed announcer-list issue [\#1129](https://github.com/torrentpier/torrentpier/pull/1129), [\#1130](https://github.com/torrentpier/torrentpier/pull/1130), [\#1131](https://github.com/torrentpier/torrentpier/pull/1131), [\#1132](https://github.com/torrentpier/torrentpier/pull/1132) ([belomaxorka](https://github.com/belomaxorka))
 - Removed client column from bb_bt_tracker table [\#1128](https://github.com/torrentpier/torrentpier/pull/1128) ([belomaxorka](https://github.com/belomaxorka))
 - Removed one-time used variables [\#1120](https://github.com/torrentpier/torrentpier/pull/1120) ([belomaxorka](https://github.com/belomaxorka))
