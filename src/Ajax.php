@@ -528,13 +528,14 @@ class Ajax
     {
         global $bb_cfg, $lang, $userdata;
 
-        if (!$bb_cfg['tor_thank']) $this->ajax_die($lang['DISABLED']);
+        if (!$bb_cfg['tor_thank']) {
+            $this->ajax_die($lang['DISABLED']);
+        }
 
         $mode = (string) $this->request['mode'];
         $topic_id = (int) $this->request['topic_id'];
 
-        switch($mode)
-        {
+        switch($mode) {
             case 'add':
                 $row = DB()->fetch_row('SELECT * FROM '. BB_THX ." WHERE topic_id = $topic_id  AND user_id = ". $userdata['user_id']);
 
