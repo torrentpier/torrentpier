@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Fixed topic_watch array key name [\#1136](https://github.com/torrentpier/torrentpier/pull/1136) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed announce-list indexes ordering [\#1135](https://github.com/torrentpier/torrentpier/pull/1135) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed $bb_cfg['file_id_ext'] ordering [\#1134](https://github.com/torrentpier/torrentpier/pull/1134) ([belomaxorka](https://github.com/belomaxorka))
 - Normalizing announce-list [\#1133](https://github.com/torrentpier/torrentpier/pull/1133) ([belomaxorka](https://github.com/belomaxorka))
