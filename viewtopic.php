@@ -420,14 +420,12 @@ if ($is_auth['auth_mod']) {
 }
 
 // Topic watch information
-$s_watching_topic = $s_watching_topic_img = '';
+$s_watching_topic = '';
 if ($can_watch_topic) {
     if ($is_watching_topic) {
         $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['STOP_WATCHING_TOPIC'] . '</a>';
-        $s_watching_topic_img = isset($images['topic_un_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . $lang['STOP_WATCHING_TOPIC'] . '" title="' . $lang['STOP_WATCHING_TOPIC'] . '" border="0"></a>' : '';
     } else {
         $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['START_WATCHING_TOPIC'] . '</a>';
-        $s_watching_topic_img = isset($images['topic_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
     }
 }
 
@@ -508,7 +506,6 @@ $template->assign_vars([
     'S_AUTH_LIST' => $s_auth_can,
     'S_TOPIC_ADMIN' => $topic_mod,
     'S_WATCH_TOPIC' => $s_watching_topic,
-    'S_WATCH_TOPIC_IMG' => $s_watching_topic_img,
     'U_VIEW_TOPIC' => TOPIC_URL . $topic_id,
     'U_VIEW_FORUM' => $view_forum_url,
     'U_VIEW_OLDER_TOPIC' => $view_prev_topic_url,
