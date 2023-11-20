@@ -543,20 +543,18 @@ $bb_cfg['sitemap_sending'] = [
 
 // Extensions
 $bb_cfg['file_id_ext'] = [
-    // Images
     1 => 'gif',
-    2 => 'jpg',
-    3 => 'png',
-    4 => 'bmp',
-    5 => 'webp',
-    // Archives
-    6 => 'gz',
-    7 => '7z',
-    8 => 'rar',
+    2 => 'gz',
+    3 => 'jpg',
+    4 => 'png',
+    5 => 'rar',
+    6 => 'tar',
+    7 => 'tiff',
+    8 => 'torrent',
     9 => 'zip',
-    10 => 'tar',
-    // Other
-    11 => 'torrent',
+    10 => '7z',
+    11 => 'bmp',
+    12 => 'webp'
 ];
 
 // Attachments
