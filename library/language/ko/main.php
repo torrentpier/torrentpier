@@ -680,6 +680,14 @@ $lang['ASC'] = '오름차순';
 $lang['DESC'] = '내림차순';
 $lang['ORDER'] = '주문';
 
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = '사용자 그룹';
 $lang['GROUP_CONFIGURATION'] = '그룹 구성';
