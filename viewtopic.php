@@ -424,10 +424,10 @@ $s_watching_topic = $s_watching_topic_img = '';
 if ($can_watch_topic) {
     if ($is_watching_topic) {
         $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['STOP_WATCHING_TOPIC'] . '</a>';
-        $s_watching_topic_img = (isset($images['topic_un_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . $lang['STOP_WATCHING_TOPIC'] . '" title="' . $lang['STOP_WATCHING_TOPIC'] . '" border="0"></a>' : '';
+        $s_watching_topic_img = isset($images['topic_un_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . $lang['STOP_WATCHING_TOPIC'] . '" title="' . $lang['STOP_WATCHING_TOPIC'] . '" border="0"></a>' : '';
     } else {
         $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['START_WATCHING_TOPIC'] . '</a>';
-        $s_watching_topic_img = (isset($images['topic_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
+        $s_watching_topic_img = isset($images['topic_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
     }
 }
 
