@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Fixed $bb_cfg['file_id_ext'] ordering [\#1134](https://github.com/torrentpier/torrentpier/pull/1134) ([belomaxorka](https://github.com/belomaxorka))
 - Normalizing announce-list [\#1133](https://github.com/torrentpier/torrentpier/pull/1133) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed announcer-list issue [\#1129](https://github.com/torrentpier/torrentpier/pull/1129), [\#1130](https://github.com/torrentpier/torrentpier/pull/1130), [\#1131](https://github.com/torrentpier/torrentpier/pull/1131), [\#1132](https://github.com/torrentpier/torrentpier/pull/1132) ([belomaxorka](https://github.com/belomaxorka))
 - Removed client column from bb_bt_tracker table [\#1128](https://github.com/torrentpier/torrentpier/pull/1128) ([belomaxorka](https://github.com/belomaxorka))
