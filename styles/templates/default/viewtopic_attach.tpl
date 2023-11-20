@@ -421,8 +421,8 @@ $('#tor-filelist-btn').click(function(){
         $thx_head = $('#thx-block').find('.sp-head');
         close_thx_list();
         $('#thx-btn').one('click', function () {
-            $(this).prop({disabled: true});
             ajax.thx('add');
+            $(this).prop({disabled: true});
         });
         $thx_head.one('click', function () {
             if (!BB.thx_btn_clicked) {
