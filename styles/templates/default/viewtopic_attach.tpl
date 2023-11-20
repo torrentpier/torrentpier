@@ -415,14 +415,7 @@ $('#tor-filelist-btn').click(function(){
             BB.thx_btn_clicked = true;
         }
         $('#thx-list').html(data.html);
-        $('#thx-list b').after(' ');
         open_thx_list();
-        $('#thx-list b').each(function () {
-            var uid = $(this).find('u').text();
-            if (uid > 0) {
-                $(this).wrap('<a href="./profile.php?mode=viewprofile&amp;u=' + uid + '"></a>');
-            }
-        });
     }
     $(function () {
         $thx_head = $('#thx-block').find('.sp-head');
