@@ -366,73 +366,104 @@ $('#tor-filelist-btn').click(function(){
 
 <!-- IF $bb_cfg['tor_thank'] -->
 <style type="text/css">
-    #thx-block { width: 95%; margin: 12px auto 0; }
-    #thx-block .sp-wrap { width: 100% !important; }
-    #thx-btn-div { text-align: center; margin: 0 0 12px; }
-    #thx-list a { text-decoration: none; }
-    #thx-list b { font-size: 11px; color: #2E2E2E; white-space: nowrap; }
-    #thx-list i { font-weight: normal; color: #000000; }
-    #thx-list u { display: none; }
+    #thx-block {
+        width: 95%;
+        margin: 12px auto 0;
+    }
+
+    #thx-block .sp-wrap {
+        width: 100% !important;
+    }
+
+    #thx-btn-div {
+        text-align: center;
+        margin: 0 0 12px;
+    }
+
+    #thx-list a {
+        text-decoration: none;
+    }
+
+    #thx-list b {
+        font-size: 11px;
+        color: #2E2E2E;
+        white-space: nowrap;
+    }
+
+    #thx-list i {
+        font-weight: normal;
+        color: #000000;
+    }
+
+    #thx-list u {
+        display: none;
+    }
 </style>
 <script type="text/javascript">
     BB.thx_btn_clicked = false;
 
-    ajax.thx = function(mode) {
+    ajax.thx = function (mode) {
         ajax.exec({
-            action   : 'thx',
-            mode     : mode,
-            topic_id : {TOPIC_ID}
+            action: 'thx',
+            mode: mode,
+            topic_id: {TOPIC_ID}
         });
     }
-    ajax.callback.thx = function(data) {
-        if (data.mode == 'add') {
+    ajax.callback.thx = function (data) {
+        if (data.mode === 'add') {
             $('#thx-btn').hide().after('<h2 style="color: green;">{$lang['THANKS_GRATITUDE']}!<h2>');
             BB.thx_btn_clicked = true;
         }
         $('#thx-list').html(data.html);
         $('#thx-list b').after(' ');
         open_thx_list();
-        $('#thx-list b').each(function(){
+        $('#thx-list b').each(function () {
             var uid = $(this).find('u').text();
             if (uid > 0) {
-                $(this).wrap('<a href="./profile.php?mode=viewprofile&amp;u='+ uid +'"></a>');
+                $(this).wrap('<a href="./profile.php?mode=viewprofile&amp;u=' + uid + '"></a>');
             }
         });
     }
-    $(function(){
+    $(function () {
         $thx_head = $('#thx-block').find('.sp-head');
         close_thx_list();
-        $('#thx-btn').one('click', function(){
+        $('#thx-btn').one('click', function () {
             $(this).prop({disabled: true});
             ajax.thx('add');
         });
-        $thx_head.one('click', function(){
+        $thx_head.one('click', function () {
             if (!BB.thx_btn_clicked) {
                 ajax.thx('get');
             }
         });
     });
-    function thx_is_visible () {
+
+    function thx_is_visible() {
         return $('#thx-list').is(':visible');
     }
-    function open_thx_list () {
-        if (!thx_is_visible()){ $thx_head.click(); }
+
+    function open_thx_list() {
+        if (!thx_is_visible()) {
+            $thx_head.click();
+        }
     }
-    function close_thx_list () {
-        if (thx_is_visible()){ $thx_head.click(); }
+
+    function close_thx_list() {
+        if (thx_is_visible()) {
+            $thx_head.click();
+        }
     }
 </script>
 
 <div id="thx-block">
     <div id="thx-btn-div">
-        <input id="thx-btn" type="button" class="bold" style="width: 200px;" value='{$lang['THANK_TOPIC']}' />
+        <input id="thx-btn" type="button" class="bold" style="width: 200px;" value='{$lang['THANK_TOPIC']}'/>
     </div>
     <div class="sp-wrap">
         <div id="thx-list" class="sp-body" title="{$lang['LAST_LIKES']}"></div>
     </div>
 </div>
 <!-- ENDIF -->
-
 
 <div class="spacer_12"></div>
 <!-- ENDIF -->
