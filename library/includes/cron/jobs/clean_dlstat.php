@@ -38,7 +38,7 @@ if ($delete_dlstat_sql = implode(') OR (', $delete_dlstat_sql)) {
 // Save the last 50 votes for topics
 DB()->query('
     DELETE t1
-    FROM' . BB_THX . ' t1
+    FROM ' . BB_THX . ' t1
     JOIN (
         SELECT topic_id, MAX(time) as max_time
         FROM ' . BB_THX . '
