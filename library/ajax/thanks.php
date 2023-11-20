@@ -45,8 +45,7 @@ switch ($mode) {
             $user_list[] = '<b>' . profile_url($row) . ' <i>(' . bb_date($row['time']) . ')</i></b>';
         }
 
-        $thx_list = join(' ', $user_list);
-        $this->response['html'] = ($thx_list) ?: $lang['NO_LIKES'];
+        $this->response['html'] = join(', ', $user_list) ?: $lang['NO_LIKES'];
         break;
 
     default:
