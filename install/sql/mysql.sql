@@ -1473,9 +1473,9 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
 DROP TABLE IF EXISTS `bb_thx`;
 CREATE TABLE IF NOT EXISTS `bb_thx`
 (
-  `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `user_id`          MEDIUMINT(8)          NOT NULL DEFAULT '0',
-  `time`             INT(11)               NOT NULL DEFAULT '0',
+  `topic_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `time`     INT(11)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM
