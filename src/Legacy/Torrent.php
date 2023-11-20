@@ -597,9 +597,13 @@ class Torrent
             }
         }
 
-        // Remove announce-list if empty
+        // Preparing announce-list
         if (empty($tor['announce-list'])) {
+            // Remove announce-list if empty
             unset($tor['announce-list']);
+        } else {
+            // Normalizing announce-list
+            $tor['announce-list'] = array_unique($tor['announce-list'], SORT_REGULAR);
         }
 
         // Add publisher & topic url
