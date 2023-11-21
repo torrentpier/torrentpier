@@ -680,6 +680,14 @@ $lang['ASC'] = 'за зростанням';
 $lang['DESC'] = 'за спаданням';
 $lang['ORDER'] = 'Сортувати';
 
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Групи користувачів';
 $lang['GROUP_CONFIGURATION'] = 'Налаштування групи';

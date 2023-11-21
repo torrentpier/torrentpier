@@ -1,7 +1,7 @@
 <!-- IF TORHELP_TOPICS -->
 	<!-- INCLUDE torhelp.tpl -->
 	<div class="spacer_6"></div>
-<!-- ENDIF -->
+<!-- ENDIF / TORHELP_TOPICS -->
 
 <div id="forums_list_wrap">
 
@@ -41,7 +41,7 @@
 	</tr>
 	</table>
 </div><!--/search-my-posts-->
-<!-- ENDIF -->
+<!-- ENDIF / LOGGED_IN -->
 
 <img width="540" class="spacer" src="{SPACER}" alt="" />
 
