@@ -384,30 +384,14 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
             if (!isset($f_data[$auth_type])) {
                 continue;
             }
-            switch ($f_data[$auth_type]) {
-                case AUTH_ALL:
-                    $auth[$f_id][$auth_type] = true;
-                    break;
-
-                case AUTH_REG:
-                    $auth[$f_id][$auth_type] = !$is_guest;
-                    break;
-
-                case AUTH_ACL:
-                    $auth[$f_id][$auth_type] = (auth_check('forum_perm', $auth_type, $u_access, $f_id, $is_admin) || $auth[$f_id]['auth_mod']);
-                    break;
-
-                case AUTH_MOD:
-                    $auth[$f_id][$auth_type] = $auth[$f_id]['auth_mod'];
-                    break;
-
-                case AUTH_ADMIN:
-                    $auth[$f_id][$auth_type] = $is_admin;
-                    break;
-
-                default:
-                    $auth[$f_id][$auth_type] = false;
-            }
+            $auth[$f_id][$auth_type] = match ($f_data[$auth_type]) {
+                AUTH_ALL => true,
+                AUTH_REG => !$is_guest,
+                AUTH_ACL => (auth_check('forum_perm', $auth_type, $u_access, $f_id, $is_admin) || $auth[$f_id]['auth_mod']),
+                AUTH_MOD => $auth[$f_id]['auth_mod'],
+                AUTH_ADMIN => $is_admin,
+                default => false,
+            };
             if ($add_auth_type_desc) {
                 $auth[$f_id][$auth_type . '_type'] =& $lang['AUTH_TYPES'][$f_data[$auth_type]];
             }
@@ -945,22 +929,13 @@ function get_db_stat($mode)
 
     $row = DB()->sql_fetchrow($result);
 
-    switch ($mode) {
-        case 'usercount':
-            return $row['total'];
-            break;
-        case 'newestuser':
-            return $row;
-            break;
-        case 'postcount':
-            return $row['post_total'];
-            break;
-        case 'topiccount':
-            return $row['topic_total'];
-            break;
-    }
-
-    return false;
+    return match ($mode) {
+        'usercount' => $row['total'],
+        'newestuser' => $row,
+        'postcount' => $row['post_total'],
+        'topiccount' => $row['topic_total'],
+        default => false,
+    };
 }
 
 function clean_username($username)
@@ -2001,19 +1976,11 @@ function gender_image($gender): string
         return $user_gender;
     }
 
-    switch ($gender) {
-        case MALE:
-            $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
-            break;
-        case FEMALE:
-            $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
-            break;
-        default:
-            $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
-            break;
-    }
-
-    return $user_gender;
+    return match ($gender) {
+        MALE => '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />',
+        FEMALE => '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />',
+        default => '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />',
+    };
 }
 
 function is_gold($type): string

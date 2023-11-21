@@ -205,23 +205,13 @@ if (!$is_auth[$is_auth_type]) {
         bb_die(sprintf($lang['SORRY_' . strtoupper($is_auth_type)], $is_auth[$is_auth_type . '_type']));
     }
 
-    switch ($mode) {
-        case 'newtopic':
-            $redirect = "mode=newtopic&f=$forum_id";
-            break;
-        case 'new_rel':
-            $redirect = "mode=new_rel&f=$forum_id";
-            break;
-        case 'reply':
-            $redirect = "mode=reply&t=$topic_id";
-            break;
-        case 'quote':
-        case 'editpost':
-            $redirect = "mode=quote&p=$post_id";
-            break;
-        default:
-            $redirect = '';
-    }
+    $redirect = match ($mode) {
+        'newtopic' => "mode=newtopic&f=$forum_id",
+        'new_rel' => "mode=new_rel&f=$forum_id",
+        'reply' => "mode=reply&t=$topic_id",
+        'quote', 'editpost' => "mode=quote&p=$post_id",
+        default => '',
+    };
     redirect(LOGIN_URL . "?redirect=/" . POSTING_URL . "?$redirect");
 }
 
