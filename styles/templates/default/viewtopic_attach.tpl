@@ -407,7 +407,7 @@ $('#tor-filelist-btn').click(function(){
 
         $thx_btn.one('click', function () {
             ajax.thx('add');
-            $thx_btn.prop({disabled: true});
+            $(this).prop({disabled: true});
         });
         $thx_head.one('click', function () {
             ajax.thx('get');
