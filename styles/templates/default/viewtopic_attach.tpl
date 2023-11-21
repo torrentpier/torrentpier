@@ -424,10 +424,10 @@ $('#tor-filelist-btn').click(function(){
     ajax.callback.thx = function (data) {
         if (data.mode === 'add') {
             $thx_btn.hide().after('<h2 style="color: green;">{$lang['THANKS_GRATITUDE']}!<h2>');
+            open_thx_list();
         } else {
             $('#thx-list').html(data.html);
         }
-        open_thx_list();
     }
 
     function thx_is_visible() {
@@ -435,8 +435,8 @@ $('#tor-filelist-btn').click(function(){
     }
 
     function open_thx_list() {
+        ajax.thx('get');
         if (!thx_is_visible()) {
-            ajax.thx('get');
             $thx_head.click();
         }
     }
