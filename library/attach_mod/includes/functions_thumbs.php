@@ -132,28 +132,15 @@ function create_thumbnail($source, $new_file, $mimetype)
         $type = get_supported_image_types($type);
 
         if ($type['gd']) {
-            switch ($type['format']) {
-                case IMG_GIF:
-                    $image = imagecreatefromgif($source);
-                    break;
-                case IMG_JPG:
-                    $image = imagecreatefromjpeg($source);
-                    break;
-                case IMG_PNG:
-                    $image = imagecreatefrompng($source);
-                    break;
-                case IMG_BMP:
-                    $image = imagecreatefrombmp($source);
-                    break;
-                case IMG_WBMP:
-                    $image = imagecreatefromwbmp($source);
-                    break;
-                case IMG_WEBP:
-                    $image = imagecreatefromwebp($source);
-                    break;
-                default:
-                    throw new Exception('Unknown file format: ' . $type['format']);
-            }
+            $image = match ($type['format']) {
+                IMG_GIF => imagecreatefromgif($source),
+                IMG_JPG => imagecreatefromjpeg($source),
+                IMG_PNG => imagecreatefrompng($source),
+                IMG_BMP => imagecreatefrombmp($source),
+                IMG_WBMP => imagecreatefromwbmp($source),
+                IMG_WEBP => imagecreatefromwebp($source),
+                default => throw new Exception('Unknown file format: ' . $type['format']),
+            };
 
             if ($type['version'] == 1 || !$attach_config['use_gd2']) {
                 $new_image = imagecreate($new_width, $new_height);
