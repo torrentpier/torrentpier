@@ -1476,7 +1476,7 @@ CREATE TABLE IF NOT EXISTS `bb_thx`
   `topic_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `time`     INT(11)               NOT NULL DEFAULT '0',
-  PRIMARY KEY (`topic_id`)
+  PRIMARY KEY (`topic_id`, `user_id`)
 )
   ENGINE = MyISAM
   DEFAULT CHARSET = utf8;

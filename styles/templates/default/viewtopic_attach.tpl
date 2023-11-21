@@ -400,7 +400,19 @@ $('#tor-filelist-btn').click(function(){
     }
 </style>
 <script type="text/javascript">
-    BB.thx_btn_clicked = false;
+    $(function () {
+        $thx_head = $('#thx-block').find('.sp-head');
+        $thx_btn = $('#thx-btn');
+        close_thx_list();
+
+        $thx_btn.one('click', function () {
+            ajax.thx('add');
+            $(this).prop({disabled: true});
+        });
+        $thx_head.one('click', function () {
+            ajax.thx('get');
+        });
+    });
 
     ajax.thx = function (mode) {
         ajax.exec({
@@ -411,31 +423,19 @@ $('#tor-filelist-btn').click(function(){
     }
     ajax.callback.thx = function (data) {
         if (data.mode === 'add') {
-            $('#thx-btn').hide().after('<h2 style="color: green;">{$lang['THANKS_GRATITUDE']}!<h2>');
-            BB.thx_btn_clicked = true;
+            $thx_btn.hide().after('<h2 style="color: green;">{$lang['THANKS_GRATITUDE']}!<h2>');
+            open_thx_list();
+        } else {
+            $('#thx-list').html(data.html);
         }
-        $('#thx-list').html(data.html);
-        open_thx_list();
     }
-    $(function () {
-        $thx_head = $('#thx-block').find('.sp-head');
-        close_thx_list();
-        $('#thx-btn').one('click', function () {
-            ajax.thx('add');
-            $(this).prop({disabled: true});
-        });
-        $thx_head.one('click', function () {
-            if (!BB.thx_btn_clicked) {
-                ajax.thx('get');
-            }
-        });
-    });
 
     function thx_is_visible() {
         return $('#thx-list').is(':visible');
     }
 
     function open_thx_list() {
+        ajax.thx('get');
         if (!thx_is_visible()) {
             $thx_head.click();
         }
