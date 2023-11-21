@@ -110,7 +110,7 @@ switch ($this->request['type']) {
         $message = htmlCHR($message, false, ENT_NOQUOTES);
 
         $this->response['message_html'] = bbcode2html($message);
-        $this->response['res_id'] = @$this->request['res_id'];
+        $this->response['res_id'] = $this->request['res_id'];
         break;
 
     case 'edit':
