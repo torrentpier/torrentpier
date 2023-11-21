@@ -150,7 +150,6 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
 
             'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;u=',
             'FORUM_URL' => BB_ROOT . FORUM_URL,
-            'ICQ_URL' => 'http://www.icq.com/people/',
             'PM_URL' => BB_ROOT . PM_URL,
             'PROFILE_URL' => BB_ROOT . PROFILE_URL
         ]);

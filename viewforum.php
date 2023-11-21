@@ -143,6 +143,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		WHERE f.forum_parent = $forum_id
 			$only_new_sql
 			$ignore_forum_sql
+		GROUP BY f.forum_id
 		ORDER BY f.forum_order
 	";
 
@@ -181,6 +182,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         $template->assign_block_vars('f', [
             'FORUM_FOLDER_IMG' => $folder_image,
 
+            'FORUM_ID' => $sf_forum_id,
             'FORUM_NAME' => $fname_html,
             'FORUM_DESC' => $forums['f'][$sf_forum_id]['forum_desc'],
             'U_VIEWFORUM' => FORUM_URL . $sf_forum_id,

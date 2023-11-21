@@ -128,7 +128,7 @@ switch ($mode) {
             $this->ajax_die($msg);
         }
         $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id";
-        if (!@DB()->query($sql)) {
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         $this->response['tpl_id'] = $tpl_id;
@@ -140,7 +140,7 @@ switch ($mode) {
     // создание нового шаблона
     case 'new':
         $sql = "INSERT INTO " . BB_TOPIC_TPL . DB()->build_array('INSERT', $sql_args);
-        if (!@DB()->query($sql)) {
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         break;
@@ -154,7 +154,7 @@ switch ($mode) {
             $this->ajax_die("нет такого форума [id: $forum_id]");
         }
         $sql = "DELETE FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1";
-        if (!@DB()->query($sql)) {
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = $forum_id LIMIT 1");
