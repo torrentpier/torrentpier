@@ -33,6 +33,7 @@ switch ($mode) {
         $columns = 'topic_id, user_id, time';
         $values = "$topic_id, {$userdata['user_id']}, " . TIMENOW;
         DB()->query('REPLACE INTO ' . BB_THX . " ($columns) VALUES ($values)");
+
         $this->response['html'] = '<b>' . profile_url($userdata) . ' <i>(' . bb_date(TIMENOW) . ')</i></b>';
         break;
 
