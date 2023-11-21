@@ -385,7 +385,7 @@ $bb_cfg['invite_only'] = false;
 // The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
 // Invite link example: site_url/profile.php?mode=register&invite=new_year
 $bb_cfg['invite_codes'] = [
-    'new_year' => 'last Sunday',
+    'new_year' => '+1 month',
     'ein_volk' => '29 July 1936',
     'catch_up_overtake' => '1917-10-09'
 ];
