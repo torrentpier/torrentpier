@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Replaced some 'switch' with the 'match' expression [\#1147](https://github.com/torrentpier/torrentpier/pull/1147) ([belomaxorka](https://github.com/belomaxorka))
 - Vote button code improvements [\#1140](https://github.com/torrentpier/torrentpier/pull/1140), [\#1142](https://github.com/torrentpier/torrentpier/pull/1142), [\#1143](https://github.com/torrentpier/torrentpier/pull/1143), [\#1146](https://github.com/torrentpier/torrentpier/pull/1146) ([belomaxorka](https://github.com/belomaxorka))
 - Vote button and v2 file list topic url display [\#1138](https://github.com/torrentpier/torrentpier/pull/1138) ([kovalensky](https://github.com/kovalensky))
 - Removed topic watch useless code [\#1137](https://github.com/torrentpier/torrentpier/pull/1137) ([belomaxorka](https://github.com/belomaxorka))
