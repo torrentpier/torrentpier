@@ -1335,12 +1335,20 @@ if ($mode == 'read') {
 
         $template->assign_var('PM_BOX_SIZE_INFO');
 
-        $l_box_size_status = match ($folder) {
-            'inbox' => sprintf($lang['INBOX_SIZE'], $box_limit_percent),
-            'sentbox' => sprintf($lang['SENTBOX_SIZE'], $box_limit_percent),
-            'savebox' => sprintf($lang['SAVEBOX_SIZE'], $box_limit_percent),
-            default => '',
-        };
+        switch ($folder) {
+            case 'inbox':
+                $l_box_size_status = sprintf($lang['INBOX_SIZE'], $box_limit_percent);
+                break;
+            case 'sentbox':
+                $l_box_size_status = sprintf($lang['SENTBOX_SIZE'], $box_limit_percent);
+                break;
+            case 'savebox':
+                $l_box_size_status = sprintf($lang['SAVEBOX_SIZE'], $box_limit_percent);
+                break;
+            default:
+                $l_box_size_status = '';
+                break;
+        }
     }
 
     //

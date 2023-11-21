@@ -666,13 +666,23 @@ for ($i = 0; $i < $total_posts; $i++) {
     $pg_row_class = !($i % 2) ? 'row2' : 'row1';
 
     // Mod comment
-    $mc_class = match ($mc_type) {
-        1 => 'success',
-        2 => 'info',
-        3 => 'warning',
-        4 => 'danger',
-        default => '',
-    };
+    switch ($mc_type) {
+        case 1: // Комментарий
+            $mc_class = 'success';
+            break;
+        case 2: // Информация
+            $mc_class = 'info';
+            break;
+        case 3: // Предупреждение
+            $mc_class = 'warning';
+            break;
+        case 4: // Нарушение
+            $mc_class = 'danger';
+            break;
+        default:
+            $mc_class = '';
+            break;
+    }
     $mc_select_type = [];
     foreach ($lang['MC_COMMENT'] as $key => $value) {
         $mc_select_type[$key] = $value['type'];

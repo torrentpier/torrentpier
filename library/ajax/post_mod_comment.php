@@ -46,13 +46,23 @@ if ($mc_type && $post['poster_id'] != $userdata['user_id']) {
     \TorrentPier\Sessions::cache_rm_user_sessions($post['poster_id']);
 }
 
-$mc_class = match ($mc_type) {
-    1 => 'success',
-    2 => 'info',
-    3 => 'warning',
-    4 => 'danger',
-    default => '',
-};
+switch ($mc_type) {
+    case 1: // Комментарий
+        $mc_class = 'success';
+        break;
+    case 2: // Информация
+        $mc_class = 'info';
+        break;
+    case 3: // Предупреждение
+        $mc_class = 'warning';
+        break;
+    case 4: // Нарушение
+        $mc_class = 'danger';
+        break;
+    default:
+        $mc_class = '';
+        break;
+}
 
 $this->response['mc_type'] = $mc_type;
 $this->response['post_id'] = $post_id;

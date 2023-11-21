@@ -174,11 +174,15 @@ class Common
         }
         foreach (debug_backtrace() as $trace) {
             if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
-                return match ($mode) {
-                    'file' => $trace['file'],
-                    'line' => $trace['line'],
-                    default => hide_bb_path($trace['file']) . '(' . $trace['line'] . ')',
-                };
+                switch ($mode) {
+                    case 'file':
+                        return $trace['file'];
+                    case 'line':
+                        return $trace['line'];
+                    case 'all':
+                    default:
+                        return hide_bb_path($trace['file']) . '(' . $trace['line'] . ')';
+                }
             }
         }
         return 'src not found';
