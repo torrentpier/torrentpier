@@ -380,9 +380,10 @@ $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 1
 $bb_cfg['reg_email_activation'] = true; // Demand to activate profile by email confirmation
 // Invites
 $bb_cfg['invite_only'] = true;
-// Invite codes, invite link syntax: site_url/profile.php?mode=register&invite=new_year
-// Syntax: 'invite_code' => 'Time'
-// The 'Time' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
+// Invite codes
+// Syntax: 'invite_code' => 'validity_period'
+// The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
+// Invite link example: site_url/profile.php?mode=register&invite=new_year
 $bb_cfg['invite_codes'] = [
     'new_year' => '+1 month',
     'ein_volk' => '29 July 1936',
