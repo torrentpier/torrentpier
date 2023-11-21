@@ -680,6 +680,14 @@ $lang['ASC'] = 'Αύξουσα';
 $lang['DESC'] = 'Φθίνουσα';
 $lang['ORDER'] = 'Παραγγελία';
 
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Ομάδες Χρηστών';
 $lang['GROUP_CONFIGURATION'] = 'Ομάδα Παραμέτρων';
