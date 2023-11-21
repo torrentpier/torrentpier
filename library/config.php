@@ -379,7 +379,7 @@ $bb_cfg['new_user_reg_restricted'] = false; // Disallow registration in below ho
 $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Available hours
 $bb_cfg['reg_email_activation'] = true; // Demand to activate profile by email confirmation
 // Invites
-$bb_cfg['invite_only'] = false;
+$bb_cfg['invite_only'] = true;
 // Invite codes
 // Syntax: 'invite_code' => 'validity_period'
 // The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
