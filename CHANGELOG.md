@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Vote: Use REPLACE INTO instead of INSERT IGNORE INTO [\#1145](https://github.com/torrentpier/torrentpier/pull/1145) ([belomaxorka](https://github.com/belomaxorka))
 - Vote button code improvements [\#1140](https://github.com/torrentpier/torrentpier/pull/1140), [\#1142](https://github.com/torrentpier/torrentpier/pull/1142), [\#1143](https://github.com/torrentpier/torrentpier/pull/1143) ([belomaxorka](https://github.com/belomaxorka))
 - Vote button and v2 file list topic url display [\#1138](https://github.com/torrentpier/torrentpier/pull/1138) ([kovalensky](https://github.com/kovalensky))
 - Removed topic watch useless code [\#1137](https://github.com/torrentpier/torrentpier/pull/1137) ([belomaxorka](https://github.com/belomaxorka))
