@@ -95,6 +95,12 @@
                 <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="check_pass"></span>
             </td>
         </tr>
+        <!-- IF $bb_cfg['invite_only'] and not EDIT_PROFILE -->
+            <tr>
+                <td class="prof-title">{L_INVITE_CODE}: *</td>
+                <td><input type="text" name="invite_code" size="35" value="{INVITE_CODE}"/></td>
+            </tr>
+        <!-- ENDIF -->
         <!-- IF CAPTCHA_HTML -->
         <tr>
             <td class="prof-title">{L_CAPTCHA}: *</td>
