@@ -71,6 +71,7 @@ switch ($mode) {
             'username' => true,
             'user_password' => true,
             'user_email' => true,
+            'invite_code' => true,
             'user_timezone' => true,
             'user_lang' => true,
             'user_opt' => true
@@ -81,6 +82,7 @@ switch ($mode) {
             'username' => '',
             'user_password' => '',
             'user_email' => '',
+            'invite_code' => '',
             'user_timezone' => $bb_cfg['board_timezone'],
             'user_lang' => $bb_cfg['default_lang'],
             'user_opt' => 0,
@@ -195,6 +197,25 @@ foreach ($profile_fields as $field => $can_edit) {
             }
             $tp_data['CAN_EDIT_USERNAME'] = $can_edit;
             $tp_data['USERNAME'] = $pr_data['username'];
+            break;
+
+        /**
+         *  Invite code (reg)
+         */
+        case 'invite_code':
+            if ($bb_cfg['invite_only']) {
+                $invite_code = $_POST['invite_code'] ?? '';
+                if ($submit) {
+                    if (isset($bb_cfg['invite_codes'][$invite_code])) {
+                        if (TIMENOW > strtotime($bb_cfg['invite_codes'][$invite_code])) {
+                            $errors[] = $lang['INVITE_EXPIRED'];
+                        }
+                    }
+                    else {
+                        $errors[] = $lang['INCORRECT_INVITE'];
+                    }
+                }
+            }
             break;
 
         /**
@@ -660,6 +681,7 @@ $template->assign_vars([
     'ADM_EDIT' => $adm_edit,
     'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
     'PASSWORD_LONG' => sprintf($lang['PASSWORD_LONG'], PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH),
+    'INVITE_CODE' => !empty($_GET['invite']) ? htmlCHR($_GET['invite']) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
