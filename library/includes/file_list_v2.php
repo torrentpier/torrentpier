@@ -76,7 +76,7 @@ echo <<<EOF
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="index, follow, noarchive">
+<meta name="robots" content="index">
 <meta name="description" content="File listing for topic - $topic_id | {$data['name']} ({$data['size']})">
 <link rel="shortcut icon" href="{$data['site_url']}favicon.png" type="image/x-icon">
 
