@@ -41,7 +41,7 @@ class Dbs
     }
 
     /**
-     * Получение / инициализация класса сервера $srv_name
+     * Initialization / Fetching of $srv_name
      *
      * @param string $srv_name_or_alias
      *
@@ -59,7 +59,7 @@ class Dbs
     }
 
     /**
-     * Определение имени сервера
+     * Fetching server name
      *
      * @param string $name
      *

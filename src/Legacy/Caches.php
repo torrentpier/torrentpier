@@ -15,9 +15,9 @@ namespace TorrentPier\Legacy;
  */
 class Caches
 {
-    public $cfg = []; // конфиг
-    public $obj = []; // кеш-объекты
-    public $ref = []; // ссылки на $obj (имя_кеша => кеш_объект)
+    public $cfg = []; // config
+    public $obj = []; // cache-objects
+    public $ref = []; // links to $obj (cache_name => cache_objects)
 
     public function __construct($cfg)
     {

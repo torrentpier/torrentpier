@@ -55,7 +55,7 @@ class Common
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_sync_forums");
 
-                // начальное обнуление значений
+                // init values with zeros
                 $forum_ary = explode(',', $forum_csv);
                 DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . implode('),(', $forum_ary) . ")");
 
@@ -95,7 +95,7 @@ class Common
                     break;
                 }
 
-                // Проверка на остаточные записи об уже удаленных топиках
+                // Check for left-overs after deleted posts
                 DB()->query("DELETE FROM " . BB_TOPICS . " WHERE topic_first_post_id NOT IN (SELECT post_id FROM " . BB_POSTS . ")");
 
                 $tmp_sync_topics = 'tmp_sync_topics';
@@ -542,7 +542,7 @@ class Common
                 return false;
             }
 
-            // фильтр заглавных сообщений в теме
+            // Filter for header messages
             if ($exclude_first) {
                 $sql = "SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_first_post_id IN($post_csv)";
 

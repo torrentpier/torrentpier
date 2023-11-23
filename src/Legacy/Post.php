@@ -197,7 +197,7 @@ class Post
 
         update_post_html(['post_id' => $post_id, 'post_text' => $post_message]);
 
-        //Обновление кеша новостей на главной
+        // Updating news cache on index page
         if ($bb_cfg['show_latest_news']) {
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
             if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic') {
