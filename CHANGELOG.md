@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Some improvements in default template [\#1159](https://github.com/torrentpier/torrentpier/pull/1159) ([belomaxorka](https://github.com/belomaxorka))
 - Use sent port instead of source [\#1158](https://github.com/torrentpier/torrentpier/pull/1158) ([kovalensky](https://github.com/kovalensky))
 - Remove unnecessary meta tags from file listing [\#1157](https://github.com/torrentpier/torrentpier/pull/1157) ([kovalensky](https://github.com/kovalensky))
 - Use different file listing url parameters for effective indexing by search engines [\#1156](https://github.com/torrentpier/torrentpier/pull/1156) ([kovalensky](https://github.com/kovalensky))
