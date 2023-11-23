@@ -58,6 +58,8 @@ if (isset($torrent['info']['private']) && IS_GUEST) {
     die($lang['BT_PRIVATE_TORRENT']);
 }
 
+header('Cache-Control: public, max-age=3600');
+
 $files = (new TorrentPier\Legacy\TorrentFileList($torrent)) -> fileTreeTable($torrent['info']['file tree']);
 
 $data = [
