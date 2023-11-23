@@ -151,7 +151,7 @@ $bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 
 // Language
-$bb_cfg['charset'] = 'UTF-8'; // page charset
+$bb_cfg['charset'] = 'UTF-8';
 $bb_cfg['lang'] = [
     // Languages available for selecting
     'af' => [
@@ -390,7 +390,7 @@ $bb_cfg['invites_system'] = [
     ]
 ];
 $bb_cfg['password_symbols'] = [
-    // Whay symbols should be required in the password
+    // What symbols should be required in the password
     'nums' => true, // Numeric
     'spec_symbols' => false, // Special symbols
     'letters' => [ // Letters
@@ -442,19 +442,19 @@ $bb_cfg['bugsnag'] = [
 
 // Special users
 $bb_cfg['unlimited_users'] = [
-#	user_id => 'name',
+    // Syntax: 'user_id' => 'username'
     2 => 'admin',
 ];
 $bb_cfg['super_admins'] = [
-#	user_id => 'name',
+    // Syntax: 'user_id' => 'username'
     2 => 'admin',
 ];
 
 // Subforums
-$bb_cfg['sf_on_first_page_only'] = true;
+$bb_cfg['sf_on_first_page_only'] = true; // Show subforums only on the first page of the forum
 
 // Forums
-$bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300];
+$bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300]; // Allowed number of topics per page
 
 // Topics
 $bb_cfg['show_quick_reply'] = true; // Show quick reply forim
@@ -491,7 +491,7 @@ $bb_cfg['allow_search_in_bool_mode'] = true;
 $bb_cfg['max_search_words_per_post'] = 200; // Max word count for a post
 $bb_cfg['search_min_word_len'] = 3; // Min letters to perform a search
 $bb_cfg['search_max_word_len'] = 35; // Maximum letters to perform a search
-$bb_cfg['limit_max_search_results'] = false; // Lmit for number of search results (false - unlimited)
+$bb_cfg['limit_max_search_results'] = false; // Limit for number of search results (false - unlimited)
 
 // Posting
 $bb_cfg['prevent_multiposting'] = true; // TODO: replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
@@ -512,9 +512,9 @@ $bb_cfg['pm_days_keep'] = 0; // Max time for storing personal messages (0 - unli
 $bb_cfg['log_days_keep'] = 365; // How much time will action history will be stored (0 - unlimited)
 
 // Users
-$bb_cfg['color_nick'] = true; // Colour user names in accordance with user_rank
-$bb_cfg['user_not_activated_days_keep'] = 7; // "not activated" == "not finished registration"
-$bb_cfg['user_not_active_days_keep'] = 180; // inactive users but only with no posts
+$bb_cfg['color_nick'] = true; // Colour usernames in accordance with user_rank
+$bb_cfg['user_not_activated_days_keep'] = 7; // After how many days to delete users who have not completed registration (that is, the account is not activated)
+$bb_cfg['user_not_active_days_keep'] = 180; // After how many days should I delete users who were inactive and did not have a single post?
 
 // Vote for torrents
 $bb_cfg['tor_thank'] = true;
@@ -529,21 +529,21 @@ $bb_cfg['tidy_post'] = extension_loaded('tidy');
 $bb_cfg['mem_on_start'] = memory_get_usage();
 $bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
-$bb_cfg['show_jumpbox'] = true;
+$bb_cfg['show_jumpbox'] = true; // Whether to show jumpbox (on viewtopic.php and viewforum.php)
 
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
 
 $bb_cfg['allow_change'] = [
-    'language' => true,
-    'timezone' => true
+    'language' => true, // Allow user to change language
+    'timezone' => true // Allow user to change time zone
 ];
 
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
-$bb_cfg['first_logon_redirect_url'] = 'index.php';
-$bb_cfg['terms_and_conditions_url'] = 'terms.php';
+$bb_cfg['first_logon_redirect_url'] = 'index.php'; // Which page should the user be redirected to after registration is completed?
+$bb_cfg['terms_and_conditions_url'] = 'terms.php'; // Link to forum rules page
 $bb_cfg['tor_help_links'] = 'terms.php';
 
 $bb_cfg['user_agreement_url'] = 'info.php?show=user_agreement';
@@ -551,7 +551,8 @@ $bb_cfg['copyright_holders_url'] = 'info.php?show=copyright_holders';
 $bb_cfg['advert_url'] = 'info.php?show=advert';
 
 $bb_cfg['sitemap_sending'] = [
-#   'Source name' => 'http://ping_url'
+    // A list of URLs to which to send a sitemap for indexing by a search robot.
+    // Syntax: 'Resource name' => 'link to endpoint'
     'Google' => 'http://google.com/webmasters/sitemaps/ping?sitemap=',
 ];
 
@@ -563,7 +564,7 @@ $bb_cfg['file_id_ext'] = [
     4 => 'png',
     5 => 'rar',
     6 => 'tar',
-    7 => 'tiff',
+    // 7 => 'tiff',
     8 => 'torrent',
     9 => 'zip',
     10 => '7z',
@@ -611,7 +612,7 @@ $bb_cfg['captcha'] = [
     'disabled' => true,
     'public_key' => '', // your public key
     'secret_key' => '', // your secret key
-    'theme' => 'light', // light or dark
+    'theme' => 'light', // theming (available: light, dark)
 ];
 
 // Atom feed
