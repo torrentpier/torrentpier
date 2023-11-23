@@ -203,15 +203,14 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Invite code (reg)
          */
         case 'invite_code':
-            if ($bb_cfg['invite_only']) {
+            if ($bb_cfg['invites_system']['enabled']) {
                 $invite_code = $_POST['invite_code'] ?? '';
                 if ($submit) {
-                    if (isset($bb_cfg['invite_codes'][$invite_code])) {
-                        if (TIMENOW > strtotime($bb_cfg['invite_codes'][$invite_code])) {
+                    if (isset($bb_cfg['invites_system']['codes'][$invite_code])) {
+                        if (TIMENOW > strtotime($bb_cfg['invites_system']['codes'][$invite_code])) {
                             $errors[] = $lang['INVITE_EXPIRED'];
                         }
-                    }
-                    else {
+                    } else {
                         $errors[] = $lang['INCORRECT_INVITE'];
                     }
                 }
