@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Use external cookie library to prevent incorrect cookie setting [\#1160](https://github.com/torrentpier/torrentpier/pull/1160) ([belomaxorka](https://github.com/belomaxorka))
 - Some improvements in default template [\#1159](https://github.com/torrentpier/torrentpier/pull/1159) ([belomaxorka](https://github.com/belomaxorka))
 - Use sent port instead of source [\#1158](https://github.com/torrentpier/torrentpier/pull/1158) ([kovalensky](https://github.com/kovalensky))
 - Remove unnecessary meta tags from file listing [\#1157](https://github.com/torrentpier/torrentpier/pull/1157) ([kovalensky](https://github.com/kovalensky))

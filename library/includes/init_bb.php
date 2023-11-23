@@ -82,18 +82,11 @@ define('COOKIE_MAX_TRACKS', 90);
  * @param bool $httponly
  * @return bool
  */
-function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false)
+function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false): bool
 {
     global $bb_cfg;
 
-    return setcookie($name, $val, [
-        'expires' => $lifetime,
-        'path' => $bb_cfg['script_path'],
-        'domain' => $bb_cfg['cookie_domain'],
-        'secure' => $bb_cfg['cookie_secure'],
-        'httponly' => $httponly,
-        'samesite' => $bb_cfg['cookie_same_site'],
-    ]);
+    return \Delight\Cookie\Cookie::setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['server_secure'], $httponly, $bb_cfg['cookie_same_site']);
 }
 
 // User Levels
