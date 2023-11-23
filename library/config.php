@@ -378,16 +378,17 @@ $bb_cfg['unique_ip'] = false; // Disallow registration from multiple IP addresse
 $bb_cfg['new_user_reg_restricted'] = false; // Disallow registration in below hours
 $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Available hours
 $bb_cfg['reg_email_activation'] = true; // Demand to activate profile by email confirmation
-// Invites
-$bb_cfg['invite_only'] = false;
-// Invite codes
-// Syntax: 'invite_code' => 'validity_period'
-// The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
-// Invite link example: site_url/profile.php?mode=register&invite=new_year
-$bb_cfg['invite_codes'] = [
-    'new_year' => '2022-12-31 00:00:01',
-    'ein_volk' => '29 July 1936',
-    'catch_up_overtake' => '1917-10-09'
+
+$bb_cfg['invites_system'] = [
+    'enabled' => false,
+    'codes' => [
+        // Syntax: 'invite_code' => 'validity_period'
+        // The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
+        // Invite link example: site_url/profile.php?mode=register&invite=new_year
+        'new_year' => '2022-12-31 00:00:01',
+        'ein_volk' => '29 July 1936',
+        'catch_up_overtake' => '1917-10-09'
+    ]
 ];
 
 $bb_cfg['password_symbols'] = [
