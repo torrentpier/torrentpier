@@ -380,7 +380,7 @@ $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 1
 $bb_cfg['reg_email_activation'] = true; // Demand to activate profile by email confirmation
 
 $bb_cfg['invites_system'] = [
-    'enabled' => true,
+    'enabled' => false,
     'codes' => [
         // Syntax: 'invite_code' => 'validity_period'
         // The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
