@@ -5,6 +5,14 @@
 
 **Merged pull requests:**
 
+- Use sent port instead of source [\#1158](https://github.com/torrentpier/torrentpier/pull/1158) ([kovalensky](https://github.com/kovalensky))
+- Remove unnecessary meta tags from file listing [\#1157](https://github.com/torrentpier/torrentpier/pull/1157) ([kovalensky](https://github.com/kovalensky))
+- Use different file listing url parameters for effective indexing by search engines [\#1156](https://github.com/torrentpier/torrentpier/pull/1156) ([kovalensky](https://github.com/kovalensky))
+- Check topic_id existence while searching in tracker mode [\#1155](https://github.com/torrentpier/torrentpier/pull/1155) ([kovalensky](https://github.com/kovalensky))
+- Some improvement [\#1151](https://github.com/torrentpier/torrentpier/pull/1151) ([kovalensky](https://github.com/kovalensky))
+- Disable invites by default [\#1150](https://github.com/torrentpier/torrentpier/pull/1150) ([kovalensky](https://github.com/kovalensky))
+- Event based invite system [\#1149](https://github.com/torrentpier/torrentpier/pull/1149) ([kovalensky](https://github.com/kovalensky))
+- Some code quality improvements [\#1148](https://github.com/torrentpier/torrentpier/pull/1148) ([belomaxorka](https://github.com/belomaxorka))
 - Vote button code improvements [\#1140](https://github.com/torrentpier/torrentpier/pull/1140), [\#1142](https://github.com/torrentpier/torrentpier/pull/1142), [\#1143](https://github.com/torrentpier/torrentpier/pull/1143), [\#1146](https://github.com/torrentpier/torrentpier/pull/1146) ([belomaxorka](https://github.com/belomaxorka))
 - Vote button and v2 file list topic url display [\#1138](https://github.com/torrentpier/torrentpier/pull/1138) ([kovalensky](https://github.com/kovalensky))
 - Removed topic watch useless code [\#1137](https://github.com/torrentpier/torrentpier/pull/1137) ([belomaxorka](https://github.com/belomaxorka))
@@ -29,14 +37,14 @@
 - Don't re-announce even if peer cache is present [\#1107](https://github.com/torrentpier/torrentpier/pull/1107) ([kovalensky](https://github.com/kovalensky))
 - Used br2nl() in ajax alert messages [\#1106](https://github.com/torrentpier/torrentpier/pull/1106) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced some html_entity_decode to engine's built-in function [\#1105](https://github.com/torrentpier/torrentpier/pull/1105) ([belomaxorka](https://github.com/belomaxorka))
-- Fix typo [\#1104](https://github.com/torrentpier/torrentpier/pull/1104), [\#1124](https://github.com/torrentpier/torrentpier/pull/1124) ([kovalensky](https://github.com/kovalensky))
+- Fix typo [\#1104](https://github.com/torrentpier/torrentpier/pull/1104), [\#1124](https://github.com/torrentpier/torrentpier/pull/1124), [\#1153](https://github.com/torrentpier/torrentpier/pull/1153) ([kovalensky](https://github.com/kovalensky))
 - Change default engine language to en [\#1103](https://github.com/torrentpier/torrentpier/pull/1103) ([kovalensky](https://github.com/kovalensky))
 - Record changed port while re-announcing [\#1102](https://github.com/torrentpier/torrentpier/pull/1102) ([kovalensky](https://github.com/kovalensky))
 - Translations for config.php, raised scrape interval [\#1100](https://github.com/torrentpier/torrentpier/pull/1100) ([kovalensky](https://github.com/kovalensky))
 - Don't re-announce for hybrids if the event is "stopped" [\#1099](https://github.com/torrentpier/torrentpier/pull/1099) ([kovalensky](https://github.com/kovalensky))
 - Security measures [\#1098](https://github.com/torrentpier/torrentpier/pull/1098), [\#1113](https://github.com/torrentpier/torrentpier/pull/1113) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1121](https://github.com/torrentpier/torrentpier/pull/1121), [\#1122](https://github.com/torrentpier/torrentpier/pull/1122), [\#1123](https://github.com/torrentpier/torrentpier/pull/1123), [\#1125](https://github.com/torrentpier/torrentpier/pull/1125), [\#1141](https://github.com/torrentpier/torrentpier/pull/1141) ([belomaxorka](https://github.com/belomaxorka))
-- New Crowdin updates [\#1097](https://github.com/torrentpier/torrentpier/pull/1097), [\#1101](https://github.com/torrentpier/torrentpier/pull/1101) ([Exileum](https://github.com/Exileum))
+- New Crowdin updates [\#1097](https://github.com/torrentpier/torrentpier/pull/1097), [\#1101](https://github.com/torrentpier/torrentpier/pull/1101), [\#1144](https://github.com/torrentpier/torrentpier/pull/1144), [\#1154](https://github.com/torrentpier/torrentpier/pull/1154) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-beta4](https://github.com/torrentpier/torrentpier/tree/v2.4.0-beta4) (2023-11-14)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta3...v2.4.0-beta4)
