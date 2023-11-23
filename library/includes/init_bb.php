@@ -86,7 +86,7 @@ function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponl
 {
     global $bb_cfg;
 
-    return \Delight\Cookie\Cookie::setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['server_secure'], $httponly, $bb_cfg['cookie_same_site']);
+    return \Delight\Cookie\Cookie::setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly, $bb_cfg['cookie_same_site']);
 }
 
 // User Levels
