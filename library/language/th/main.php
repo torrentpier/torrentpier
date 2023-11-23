@@ -688,6 +688,11 @@ $lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
 $lang['NO_LIKES'] = 'Nobody gave a vote yet';
 $lang['LIKE_ALREADY'] = 'You already voted this topic';
 
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
+
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'กลุ่มผู้ใช้';
 $lang['GROUP_CONFIGURATION'] = 'กลุ่มการปรับแต่ง';
