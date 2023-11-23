@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Invites config re-formatting [\#1162](https://github.com/torrentpier/torrentpier/pull/1162) ([belomaxorka](https://github.com/belomaxorka))
 - Use external cookie library to prevent incorrect cookie setting [\#1160](https://github.com/torrentpier/torrentpier/pull/1160), [\#1161](https://github.com/torrentpier/torrentpier/pull/1161) ([belomaxorka](https://github.com/belomaxorka))
 - Some improvements in default template [\#1159](https://github.com/torrentpier/torrentpier/pull/1159) ([belomaxorka](https://github.com/belomaxorka))
 - Use sent port instead of source [\#1158](https://github.com/torrentpier/torrentpier/pull/1158) ([kovalensky](https://github.com/kovalensky))
