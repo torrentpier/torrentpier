@@ -306,9 +306,9 @@ function go_to_page ()
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
-					<option value="tracker.php#results" selected> {L_TRACKER_S} </option>
-					<option value="search.php"> {L_FORUM_S} </option>
-					<option value="tracker.php" class="hash"> {L_HASH_S} </option>
+					<option value="{U_TRACKER}#results" selected> {L_TRACKER_S} </option>
+					<option value="{U_SEARCH}"> {L_FORUM_S} </option>
+					<option value="{U_TRACKER}" class="hash"> {L_HASH_S} </option>
 				</select>
 				<input type="submit" class="med" value="{L_SEARCH}" style="width: 55px;" />
 			</form>
