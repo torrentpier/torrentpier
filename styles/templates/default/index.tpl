@@ -78,7 +78,7 @@
 		<!-- BEGIN f -->
 		<tr>
 			<td class="row1 f_icon">
-			<a href="search.php?f={c.f.FORUM_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1"><img class="forum_icon" src="{c.f.FORUM_FOLDER_IMG}" alt="{c.f.FORUM_FOLDER_ALT}" /></a>
+			<a href="{U_SEARCH}?f={c.f.FORUM_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1"><img class="forum_icon" src="{c.f.FORUM_FOLDER_IMG}" alt="{c.f.FORUM_FOLDER_ALT}" /></a>
 			</td>
 			<td class="row1 f_titles">
 
@@ -92,7 +92,7 @@
 				<p class="subforums">
 					<em>{L_SUBFORUMS}:</em>
 					<!-- BEGIN sf -->
-					<span class="sf_title{c.f.sf.SF_NEW}"><a href="search.php?f={c.f.sf.SF_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1" class="dot-sf">&#9658;</a><a href="{FORUM_URL}{c.f.sf.SF_ID}" class="dot-sf">{c.f.sf.SF_NAME}</a></span><span class="sf_separator"></span>
+					<span class="sf_title{c.f.sf.SF_NEW}"><a href="{U_SEARCH}?f={c.f.sf.SF_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1" class="dot-sf">&#9658;</a><a href="{FORUM_URL}{c.f.sf.SF_ID}" class="dot-sf">{c.f.sf.SF_NAME}</a></span><span class="sf_separator"></span>
 					<!-- END sf -->
 				</p>
 				<!-- ENDIF -->
