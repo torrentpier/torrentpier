@@ -267,11 +267,11 @@ class BBCode
      */
     private function escape_titles_callback($m): string
     {
-        $tilte = substr($m[3], 0, 250);
-        $tilte = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $tilte);
-        // еще раз htmlspecialchars, т.к. при извлечении из title происходит обратное преобразование
-        $tilte = htmlspecialchars($tilte, ENT_QUOTES);
-        return $m[1] . $tilte . $m[4];
+        $title = substr($m[3], 0, 250);
+        $title = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $title);
+        // reconvert because after extracting title there's a reverse convertion
+        $title = htmlspecialchars($title, ENT_QUOTES);
+        return $m[1] . $title . $m[4];
     }
 
     /**

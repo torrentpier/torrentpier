@@ -35,7 +35,7 @@ class TorrentFileList
     }
 
     /**
-     * Получение списка файлов
+     * Fetching file list
      *
      * @return string
      */
@@ -63,7 +63,7 @@ class TorrentFileList
     }
 
     /**
-     * Формирование списка файлов
+     * Forming file list
      *
      * @return void
      */

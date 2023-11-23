@@ -64,7 +64,7 @@ class SqlDb
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
-        // ссылки на глобальные переменные (для включения логов сразу на всех серверах, подсчета общего количества запросов и т.д.)
+        // Links to the global vairables (for recording all the logs on all servers, counting total request count and etc)
         $this->DBS['log_file'] =& $DBS->log_file;
         $this->DBS['log_counter'] =& $DBS->log_counter;
         $this->DBS['num_queries'] =& $DBS->num_queries;
@@ -820,7 +820,7 @@ class SqlDb
             if ($this->do_explain) {
                 $this->explain('stop');
             }
-            // проверка установки $this->inited - для пропуска инициализационных запросов
+            // check for $this->inited - to bypass request controlling
             if ($this->DBS['log_counter'] && $this->inited) {
                 $this->log_query($this->DBS['log_file']);
                 $this->DBS['log_counter']--;

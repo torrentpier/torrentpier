@@ -26,7 +26,7 @@ class CronHelper
     }
 
     /**
-     * Снятие блокировки крона (по времени)
+     * Unlock cron (time-dependent)
      *
      * @return void
      */

@@ -26,7 +26,7 @@ class Poll
     }
 
     /**
-     * Формирование результатов голосования
+     * Forming poll results
      *
      * @param $posted_data
      * @return string
@@ -41,7 +41,7 @@ class Poll
             global $lang;
             return $this->err_msg = $lang['EMPTY_POLL_TITLE'];
         }
-        $this->poll_votes[] = $poll_caption; // заголовок имеет vote_id = 0
+        $this->poll_votes[] = $poll_caption; // header is vote_id = 0
 
         foreach (explode("\n", $poll_votes) as $vote) {
             if (!$vote = str_compact($vote)) {
@@ -50,7 +50,7 @@ class Poll
             $this->poll_votes[] = $vote;
         }
 
-        // проверять на "< 3" -- 2 варианта ответа + заголовок
+        // check for "< 3" -- 2 answer variants + header
         if (\count($this->poll_votes) < 3 || \count($this->poll_votes) > $this->max_votes + 1) {
             global $lang;
             return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
@@ -58,7 +58,7 @@ class Poll
     }
 
     /**
-     * Добавление голосов в базу данных
+     * Recording poll info to the database
      *
      * @param int $topic_id
      */
@@ -83,7 +83,7 @@ class Poll
     }
 
     /**
-     * Удаление голосования
+     * Remove poll
      *
      * @param int $topic_id
      */
@@ -94,7 +94,7 @@ class Poll
     }
 
     /**
-     * Удаление информации о проголосовавших и голосов
+     * Remove info about voters and their choices
      *
      * @param int $topic_id
      */

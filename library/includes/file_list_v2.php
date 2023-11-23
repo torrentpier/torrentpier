@@ -48,25 +48,23 @@ if (!is_file($file_path)) {
 
 $file_contents = file_get_contents($file_path);
 
-if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
+if (!$torrent = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
     http_response_code(410);
     die($lang['TORFILE_INVALID']);
 }
 
-if (isset($tor['info']['private']) && IS_GUEST) {
+if (isset($torrent['info']['private']) && IS_GUEST) {
     http_response_code(403);
     die($lang['BT_PRIVATE_TORRENT']);
 }
 
-$list_handler = new TorrentPier\Legacy\TorrentFileList($tor);
-
-$files = $list_handler->fileTreeTable($tor['info']['file tree']);
+$files = (new TorrentPier\Legacy\TorrentFileList($torrent)) -> fileTreeTable($torrent['info']['file tree']);
 
 $data = [
-    'name' => htmlCHR($tor['info']['name'] ?? ''),
-    'client' => htmlCHR(substr($tor['created by'] ?? 'unknown client', 0, 20)),
+    'name' => htmlCHR($torrent['info']['name'] ?? ''),
+    'client' => htmlCHR(substr($torrent['created by'] ?? 'unknown client', 0, 20)),
     'size' => humn_size($files['size']),
-    'date' => (isset($tor['creation date']) && is_numeric($tor['creation date'])) ? delta_time($tor['creation date']) : 'unknown',
+    'date' => (isset($torrent['creation date']) && is_numeric($torrent['creation date'])) ? delta_time($torrent['creation date']) : 'unknown',
     'site_url' => FULL_URL
 ];
 
