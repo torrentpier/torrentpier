@@ -378,7 +378,6 @@ $bb_cfg['unique_ip'] = false; // Disallow registration from multiple IP addresse
 $bb_cfg['new_user_reg_restricted'] = false; // Disallow registration in below hours
 $bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Available hours
 $bb_cfg['reg_email_activation'] = true; // Demand to activate profile by email confirmation
-
 $bb_cfg['invites_system'] = [
     'enabled' => false,
     'codes' => [
@@ -390,7 +389,6 @@ $bb_cfg['invites_system'] = [
         'catch_up_overtake' => '1917-10-09'
     ]
 ];
-
 $bb_cfg['password_symbols'] = [
     // Whay symbols should be required in the password
     'nums' => true, // Numeric
