@@ -1,6 +1,6 @@
 # 📖 Change Log
 
-## [v2.4.0-rc1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc1)
+## [v2.4.0-rc1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc1) (2023-11-25)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta4...v2.4.0-rc1)
 
 **Merged pull requests:**
