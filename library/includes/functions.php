@@ -980,7 +980,7 @@ function clean_username($username)
  * @param bool $allow_guest
  * @return mixed
  */
-function get_userdata($u, bool $is_name = false, bool $allow_guest = false)
+function get_userdata($u, bool $is_name = false, bool $allow_guest = false, bool $profile_view = false)
 {
     if (empty($u)) {
         return false;
@@ -996,6 +996,10 @@ function get_userdata($u, bool $is_name = false, bool $allow_guest = false)
         $where_sql = "WHERE user_id = " . (int)$u;
     } else {
         $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
+    }
+
+    if ($profile_view) {
+        $where_sql = "WHERE user_id = " . (int)$u . " OR username = '" . DB()->escape(clean_username($u)) . "'";
     }
 
     $exclude_anon_sql = (!$allow_guest) ? "AND user_id != " . GUEST_UID : '';
