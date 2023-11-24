@@ -400,7 +400,6 @@ class Torrent
             $totallen = (float)$totallen;
         } elseif (isset($bt_v2)) {
             $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
-
                 global $lang;
 
                 $size = 0;
