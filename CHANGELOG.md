@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Revert "Fix sql group (#128)" [1753db1](https://github.com/torrentpier/torrentpier/commit/1753db1fcef7d50eb8f8ba4b1f5a4ad7585ffaa4) ([belomaxorka](https://github.com/belomaxorka))
 - Simplified gender function [\#1167](https://github.com/torrentpier/torrentpier/pull/1167) ([belomaxorka](https://github.com/belomaxorka))
 - Revert "Fixed input types in some cases (#697)" [20ce8ca](https://github.com/torrentpier/torrentpier/commit/20ce8cae9cf6447f5100ab2d8f4a5299254f5412) ([belomaxorka](https://github.com/belomaxorka))
 - Revert "Fixed input types in some cases (#693)" [74aa6ff](https://github.com/torrentpier/torrentpier/commit/74aa6ff29991186ffc6484980972d5f74e4d0393) ([belomaxorka](https://github.com/belomaxorka))
@@ -47,7 +48,7 @@
 - Don't re-announce even if peer cache is present [\#1107](https://github.com/torrentpier/torrentpier/pull/1107) ([kovalensky](https://github.com/kovalensky))
 - Used br2nl() in ajax alert messages [\#1106](https://github.com/torrentpier/torrentpier/pull/1106) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced some html_entity_decode to engine's built-in function [\#1105](https://github.com/torrentpier/torrentpier/pull/1105) ([belomaxorka](https://github.com/belomaxorka))
-- Fix typo [\#1104](https://github.com/torrentpier/torrentpier/pull/1104), [\#1124](https://github.com/torrentpier/torrentpier/pull/1124), [\#1153](https://github.com/torrentpier/torrentpier/pull/1153) ([kovalensky](https://github.com/kovalensky))
+- Fix typo [\#1104](https://github.com/torrentpier/torrentpier/pull/1104), [\#1124](https://github.com/torrentpier/torrentpier/pull/1124), [\#1153](https://github.com/torrentpier/torrentpier/pull/1153), [\#1168](https://github.com/torrentpier/torrentpier/pull/1168) ([kovalensky](https://github.com/kovalensky))
 - Change default engine language to en [\#1103](https://github.com/torrentpier/torrentpier/pull/1103) ([kovalensky](https://github.com/kovalensky))
 - Record changed port while re-announcing [\#1102](https://github.com/torrentpier/torrentpier/pull/1102) ([kovalensky](https://github.com/kovalensky))
 - Translations for config.php, raised scrape interval [\#1100](https://github.com/torrentpier/torrentpier/pull/1100) ([kovalensky](https://github.com/kovalensky))
