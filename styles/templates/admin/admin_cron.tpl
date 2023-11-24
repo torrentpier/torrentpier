@@ -172,7 +172,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 </tr>
 <tr>
 	<td><h4>{L_RUN_ORDER}</h4></td>
-	<td><input class="post" type="number" size="35" maxlength="255" name="run_order" value="{RUN_ORDER}" /></td>
+	<td><input class="post" type="text" size="35" maxlength="255" name="run_order" value="{RUN_ORDER}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_LAST_RUN}</h4></td>
@@ -213,7 +213,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 </tr>
 <tr>
 	<td><h4>{L_RUN_COUNTER}</h4></td>
-	<td><input class="post" type="number" size="35" maxlength="255" name="run_counter" value="{RUN_COUNTER}" /></td>
+	<td><input class="post" type="text" size="35" maxlength="255" name="run_counter" value="{RUN_COUNTER}" /></td>
 </tr>
 
 <tr>
