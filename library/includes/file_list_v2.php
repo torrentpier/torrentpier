@@ -20,7 +20,7 @@ if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
 
 $topic_id = !empty($_GET['topic']) ? (int)$_GET['topic'] : (http_response_code(404) && die($lang['INVALID_TOPIC_ID']));
 
-$sql = 'SELECT t.attach_id, t.info_hash_v2, ad.physical_filename
+$sql = 'SELECT t.attach_id, t.info_hash_v2, t.size, ad.physical_filename
         FROM ' . BB_BT_TORRENTS . ' t
         LEFT JOIN ' . BB_ATTACHMENTS_DESC . ' ad
         ON t.attach_id = ad.attach_id
@@ -58,17 +58,17 @@ if (isset($torrent['info']['private']) && IS_GUEST) {
     die($lang['BT_PRIVATE_TORRENT']);
 }
 
-header('Cache-Control: public, max-age=3600');
-
 $files = (new TorrentPier\Legacy\TorrentFileList($torrent)) -> fileTreeTable($torrent['info']['file tree']);
 
 $data = [
-    'name' => htmlCHR($torrent['info']['name'] ?? ''),
-    'client' => htmlCHR(substr($torrent['created by'] ?? 'unknown client', 0, 20)),
-    'size' => humn_size($files['size']),
+    'name' => isset($torrent['info']['name']) ? htmlCHR(substr($torrent['info']['name'], 0, 255)) : 'undefined',
+    'client' => isset($torrent['created by']) ? htmlCHR(substr($torrent['created by'], 0, 20)) : 'unknown client',
     'date' => (isset($torrent['creation date']) && is_numeric($torrent['creation date'])) ? delta_time($torrent['creation date']) : 'unknown',
+    'size' => humn_size($row['size']),
     'site_url' => FULL_URL
 ];
+
+header('Cache-Control: public, max-age=3600');
 
 echo <<<EOF
 <!DOCTYPE html>
