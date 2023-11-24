@@ -5,6 +5,7 @@
 
 **Merged pull requests:**
 
+- Simplified gender function [\#1167](https://github.com/torrentpier/torrentpier/pull/1167) ([belomaxorka](https://github.com/belomaxorka))
 - Revert "Fixed input types in some cases (#697)" [20ce8ca](https://github.com/torrentpier/torrentpier/commit/20ce8cae9cf6447f5100ab2d8f4a5299254f5412) ([belomaxorka](https://github.com/belomaxorka))
 - Revert "Fixed input types in some cases (#693)" [74aa6ff](https://github.com/torrentpier/torrentpier/commit/74aa6ff29991186ffc6484980972d5f74e4d0393) ([belomaxorka](https://github.com/belomaxorka))
 - Support simultaneous id & username inputs for browsing profiles [\#1166](https://github.com/torrentpier/torrentpier/pull/1166) ([kovalensky](https://github.com/kovalensky))
