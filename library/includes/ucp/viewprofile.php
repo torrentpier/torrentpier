@@ -97,7 +97,7 @@ $template->assign_vars([
     'SKYPE' => $profiledata['user_skype'],
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
-    'GENDER' => ($bb_cfg['gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+    'GENDER' => $bb_cfg['gender'] ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
     'BIRTHDAY' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? $profiledata['user_birthday'] : '',
     'BIRTHDAY_ICON' => user_birthday_icon($profiledata['user_birthday'], $profiledata['user_id']),
     'AGE' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
