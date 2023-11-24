@@ -5,6 +5,12 @@
 
 **Merged pull requests:**
 
+- Revert "Fixed input types in some cases (#697)" [20ce8ca](https://github.com/torrentpier/torrentpier/commit/20ce8cae9cf6447f5100ab2d8f4a5299254f5412) ([belomaxorka](https://github.com/belomaxorka))
+- Revert "Fixed input types in some cases (#693)" [74aa6ff](https://github.com/torrentpier/torrentpier/commit/74aa6ff29991186ffc6484980972d5f74e4d0393) ([belomaxorka](https://github.com/belomaxorka))
+- Support simultaneous id & username inputs for browsing profiles [\#1166](https://github.com/torrentpier/torrentpier/pull/1166) ([kovalensky](https://github.com/kovalensky))
+- Tighten registration requirements for torrent files [\#1165](https://github.com/torrentpier/torrentpier/pull/1165) ([kovalensky](https://github.com/kovalensky))
+- File listing — use browser cache [\#1164](https://github.com/torrentpier/torrentpier/pull/1164) ([kovalensky](https://github.com/kovalensky))
+- Legacy code comment translations [\#1163](https://github.com/torrentpier/torrentpier/pull/1163) ([kovalensky](https://github.com/kovalensky))
 - Invites config re-formatting [\#1162](https://github.com/torrentpier/torrentpier/pull/1162) ([belomaxorka](https://github.com/belomaxorka))
 - Use external cookie library to prevent incorrect cookie setting [\#1160](https://github.com/torrentpier/torrentpier/pull/1160), [\#1161](https://github.com/torrentpier/torrentpier/pull/1161) ([belomaxorka](https://github.com/belomaxorka))
 - Some improvements in default template [\#1159](https://github.com/torrentpier/torrentpier/pull/1159) ([belomaxorka](https://github.com/belomaxorka))
