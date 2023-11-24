@@ -1994,30 +1994,25 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     return $user_avatar;
 }
 
-function gender_image($gender): string
+/**
+ * Returns gender image
+ *
+ * @param int $gender
+ * @return string|null
+ */
+function genderImage(int $gender): ?string
 {
     global $bb_cfg, $lang, $images;
 
-    $gender = (int)$gender;
-    $user_gender = '';
-
     if (!$bb_cfg['gender']) {
-        return $user_gender;
+        return false;
     }
 
-    switch ($gender) {
-        case MALE:
-            $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
-            break;
-        case FEMALE:
-            $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
-            break;
-        default:
-            $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
-            break;
-    }
-
-    return $user_gender;
+    return match ($gender) {
+        MALE => '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />',
+        FEMALE => '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />',
+        default => '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />',
+    };
 }
 
 function is_gold($type): string

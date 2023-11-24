@@ -707,7 +707,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
-        'POSTER_GENDER' => $bb_cfg['gender'] ? gender_image($postrow[$i]['user_gender']) : '',
+        'POSTER_GENDER' => genderImage((int)$postrow[$i]['user_gender']),
         'POSTED_AFTER' => $prev_post_time ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
         'IS_FIRST_POST' => (!$start && $is_first_post),
