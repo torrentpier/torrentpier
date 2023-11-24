@@ -147,7 +147,7 @@ class TorrentFileList
                 $html_v2 = $this->fileTreeList($value);
                 $allItems .= "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
             } else {
-                $length = (float)$value['']['length'];
+                $length = $value['']['length'];
                 $root = bin2hex($value['']['pieces root'] ?? '');
                 $allItems .= "<li><span>$key<i>$length</i><p>$root</p></span></li>";
             }
@@ -172,7 +172,7 @@ class TorrentFileList
             if (!isset($value[''])) {
                 $this->fileTreeTable($value, $current);
             } else {
-                $length = (float)$value['']['length'];
+                $length = $value['']['length'];
                 $root = bin2hex($value['']['pieces root'] ?? '');
                 $filesList['list'] .= '<tr><td>' . $current . '</td><td>' . humn_size($length, 2) . '</td><td>' . $root . '</td></tr><tr>';
                 $filesList['count']++;
