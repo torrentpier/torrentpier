@@ -92,15 +92,15 @@
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_MAX_FILESIZE_ATTACH}<br /><span class="small">{L_MAX_FILESIZE_ATTACH_EXPLAIN}</span></td>
-		<td class="row2"><input type="number" size="8" maxlength="15" name="max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
+		<td class="row2"><input type="text" size="8" maxlength="15" name="max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_ATTACH_QUOTA}<br /><span class="small">{L_ATTACH_QUOTA_EXPLAIN}</span></td>
-		<td class="row2"><input type="number" size="8" maxlength="15" name="attachment_quota" class="post" value="{ATTACHMENT_QUOTA}" /> {S_FILESIZE_QUOTA}</td>
+		<td class="row2"><input type="text" size="8" maxlength="15" name="attachment_quota" class="post" value="{ATTACHMENT_QUOTA}" /> {S_FILESIZE_QUOTA}</td>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_MAX_FILESIZE_PM}<br /><span class="small">{L_MAX_FILESIZE_PM_EXPLAIN}</span></td>
-		<td class="row2"><input type="number" size="8" maxlength="15" name="max_filesize_pm" class="post" value="{MAX_FILESIZE_PM}" /> {S_FILESIZE_PM}</td>
+		<td class="row2"><input type="text" size="8" maxlength="15" name="max_filesize_pm" class="post" value="{MAX_FILESIZE_PM}" /> {S_FILESIZE_PM}</td>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_DEFAULT_QUOTA_LIMIT}<br /><span class="small">{L_DEFAULT_QUOTA_LIMIT_EXPLAIN}</span></td>
@@ -122,11 +122,11 @@
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_MAX_ATTACHMENTS}<br /><span class="small">{L_MAX_ATTACHMENTS_EXPLAIN}</span></td>
-		<td class="row2"><input type="number" size="3" maxlength="3" name="max_attachments" class="post" value="{MAX_ATTACHMENTS}" /></td>
+		<td class="row2"><input type="text" size="3" maxlength="3" name="max_attachments" class="post" value="{MAX_ATTACHMENTS}" /></td>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_MAX_ATTACHMENTS_PM}<br /><span class="small">{L_MAX_ATTACHMENTS_PM_EXPLAIN}</span></td>
-		<td class="row2"><input type="number" size="3" maxlength="3" name="max_attachments_pm" class="post" value="{MAX_ATTACHMENTS_PM}" /></td>
+		<td class="row2"><input type="text" size="3" maxlength="3" name="max_attachments_pm" class="post" value="{MAX_ATTACHMENTS_PM}" /></td>
 	</tr>
 	<tr>
 	  <th colspan="2">{L_ATTACH_OPTIONS_SETTINGS}</th>
