@@ -11,6 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+// Start session management
 $user->session_start();
 
 if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
@@ -58,7 +59,7 @@ if (isset($torrent['info']['private']) && IS_GUEST) {
     die($lang['BT_PRIVATE_TORRENT']);
 }
 
-$files = (new TorrentPier\Legacy\TorrentFileList($torrent)) -> fileTreeTable($torrent['info']['file tree']);
+$files = (new TorrentPier\Legacy\TorrentFileList($torrent))->fileTreeTable($torrent['info']['file tree']);
 
 $data = [
     'name' => isset($torrent['info']['name']) ? htmlCHR(substr($torrent['info']['name'], 0, 255)) : 'undefined',
