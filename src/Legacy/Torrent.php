@@ -394,7 +394,11 @@ class Torrent
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
                 if (($f['attr'] ?? null) !== 'p') {
-                    $totallen += (isset($f['length']) && is_numeric($f['length'])) ? $f['length'] : self::torrent_error_exit($lang['TORFILE_INVALID']);
+                    if (isset($f['length']) && is_numeric($f['length'])) {
+                        $totallen += $f['length'];
+                    } else {
+                        self::torrent_error_exit($lang['TORFILE_INVALID']);
+                    }
                 }
             }
             $totallen = (float)$totallen;
@@ -407,7 +411,11 @@ class Torrent
                     if (!isset($value[''])) {
                         $size += $fileTreeSize($value);
                     } else {
-                        $size += (isset($value['']['length']) && is_numeric($value['']['length'])) ? $value['']['length'] : self::torrent_error_exit($lang['TORFILE_INVALID']);
+                        if (isset($value['']['length']) && is_numeric($value['']['length'])) {
+                            $size += $value['']['length'];
+                        } else {
+                            self::torrent_error_exit($lang['TORFILE_INVALID']);
+                        }
                     }
                 }
 
