@@ -27,7 +27,7 @@ if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
 }
 
 // Initial request verification
-if (strpos($_SERVER['REQUEST_URI'], 'scrape') !== false) {
+if (str_contains($_SERVER['REQUEST_URI'], 'scrape')) {
     msg_die('Please disable SCRAPE!');
 }
 

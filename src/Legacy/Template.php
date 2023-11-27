@@ -310,7 +310,7 @@ class Template
      */
     public function assign_block_vars($blockname, $vararray)
     {
-        if (false !== strpos($blockname, '.')) {
+        if (str_contains($blockname, '.')) {
             // Nested block.
             $blocks = explode('.', $blockname);
             $blockcount = \count($blocks) - 1;
@@ -994,7 +994,7 @@ class Template
         $this->vars['LANG'] ??= $bb_cfg['default_lang'];
         // adding current template
         $tpl = $this->root . '/';
-        if (0 === strpos($tpl, './')) {
+        if (str_starts_with($tpl, './')) {
             $tpl = substr($tpl, 2, \strlen($tpl));
         }
         $this->vars['TEMPLATE'] ??= $tpl;

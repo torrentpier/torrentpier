@@ -968,7 +968,7 @@ class SqlDb
                     $query = "SELECT * FROM $m[1] WHERE $m[2]";
                 }
 
-                if (0 === strpos($query, "SELECT")) {
+                if (str_starts_with($query, "SELECT")) {
                     $html_table = false;
 
                     if ($result = mysqli_query($this->link, "EXPLAIN $query")) {

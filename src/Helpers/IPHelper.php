@@ -29,7 +29,7 @@ class IPHelper extends Ip
     public static function anonymizeIP(string $ip): string
     {
         $wrappedIPv6 = false;
-        if ('[' === substr($ip, 0, 1) && ']' === substr($ip, -1, 1)) {
+        if (str_starts_with($ip, '[') && str_ends_with($ip, ']')) {
             $wrappedIPv6 = true;
             $ip = substr($ip, 1, -1);
         }

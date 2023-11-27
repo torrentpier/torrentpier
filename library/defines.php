@@ -97,7 +97,7 @@ define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 
 // Gzip
 define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
-define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false);
+define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip'));
 
 // Torrents (reserved: -1)
 define('TOR_NOT_APPROVED', 0); // не проверено

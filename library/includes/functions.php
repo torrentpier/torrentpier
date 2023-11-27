@@ -553,7 +553,7 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
         $url = str_replace($cur, $new, $url);
     } // добавляем параметр
     elseif (null !== $value) {
-        $div = (strpos($url, '?') !== false) ? $amp : '?';
+        $div = str_contains($url, '?') ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
     }
     return $url . $anchor;
@@ -1469,7 +1469,7 @@ function redirect($url)
         trigger_error("Headers already sent in $filename($linenum)", E_USER_ERROR);
     }
 
-    if (false !== strpos(urldecode($url), "\n") || false !== strpos(urldecode($url), "\r") || false !== strpos(urldecode($url), ';url')) {
+    if (str_contains(urldecode($url), "\n") || str_contains(urldecode($url), "\r") || str_contains(urldecode($url), ';url')) {
         bb_die('Tried to redirect to potentially insecure url');
     }
 
