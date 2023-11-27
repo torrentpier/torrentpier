@@ -255,7 +255,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $username = str_replace("\*", '%', trim(strip_tags(strtolower($username))));
 
-            if (false !== strpos($username, '%')) {
+            if (str_contains($username, '%')) {
                 $op = 'LIKE';
             } else {
                 $op = '=';
@@ -276,7 +276,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $email = str_replace("\*", '%', trim(strip_tags(strtolower($email))));
 
-            if (false !== strpos($email, '%')) {
+            if (str_contains($email, '%')) {
                 $op = 'LIKE';
             } else {
                 $op = '=';
@@ -524,7 +524,7 @@ if (!isset($_REQUEST['dosearch'])) {
                     break;
                 case 'equals':
                     // looking for a -
-                    if (false !== strpos($postcount_value, '-')) {
+                    if (str_contains($postcount_value, '-')) {
                         $range = preg_split('/[-\s]+/', $postcount_value);
 
                         $range_begin = (int)$range[0];
@@ -571,7 +571,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $userfield_value = str_replace("\*", '%', trim(strip_tags(strtolower($userfield_value))));
 
-            if (false !== strpos($userfield_value, '%')) {
+            if (str_contains($userfield_value, '%')) {
                 $op = 'LIKE';
             } else {
                 $op = '=';

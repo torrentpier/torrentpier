@@ -169,7 +169,7 @@ class BBCode
     private function parse($text): string
     {
         // Tag parse
-        if (strpos($text, '[') === false) {
+        if (!str_contains($text, '[')) {
             return $text;
         }
 

@@ -382,7 +382,7 @@ function attachment_sync_topic($topics)
  */
 function get_extension($filename)
 {
-    if (false === strpos($filename, '.')) {
+    if (!str_contains($filename, '.')) {
         return '';
     }
     $extension = strrchr(strtolower($filename), '.');
