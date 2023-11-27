@@ -76,17 +76,33 @@ define('COOKIE_MAX_TRACKS', 90);
 /**
  * Set cookie
  *
- * @param $name
- * @param $val
+ * @param string $name
+ * @param mixed $val
  * @param int $lifetime
  * @param bool $httponly
- * @return bool
+ * @param bool $isRaw
+ * @return void
+ * @throws \Josantonius\Cookie\Exceptions\CookieException
  */
-function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false): bool
+function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false, bool $isRaw = false): void
 {
     global $bb_cfg;
 
-    return \Delight\Cookie\Cookie::setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly, $bb_cfg['cookie_same_site']);
+    if (!empty($val)) {
+        $cookie = new \Josantonius\Cookie\Cookie(
+            domain: $bb_cfg['cookie_domain'],
+            expires: $lifetime,
+            httpOnly: $httponly,
+            path: $bb_cfg['script_path'],
+            raw: $isRaw,
+            sameSite: $bb_cfg['cookie_same_site'],
+            secure: $bb_cfg['cookie_secure']
+        );
+        $cookie->set($name, $val);
+    } else {
+        $cookie = new \Josantonius\Cookie\Cookie();
+        $cookie->remove($name);
+    }
 }
 
 // User Levels

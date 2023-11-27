@@ -301,8 +301,8 @@ class User
 					LIMIT 1
 				");
 
-                bb_setcookie(COOKIE_TOPIC, '');
-                bb_setcookie(COOKIE_FORUM, '');
+                bb_setcookie(COOKIE_TOPIC, null);
+                bb_setcookie(COOKIE_FORUM, null);
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
@@ -479,7 +479,7 @@ class User
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
-                    bb_setcookie($cookie, '', COOKIE_EXPIRED);
+                    bb_setcookie($cookie, null);
                 }
             }
         } else {
@@ -487,14 +487,14 @@ class User
             $c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
 
             if ($c_sdata_curr !== $c_sdata_resv) {
-                bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
+                bb_setcookie(COOKIE_DATA, $c_sdata_curr, httponly: true);
             }
 
             // Unset sql debug cookies
             if (!SQL_DEBUG || !APP_DEBUG) {
                 foreach (array('explain', 'sql_log', 'sql_log_full') as $cookie) {
                     if (isset($_COOKIE[$cookie])) {
-                        bb_setcookie($cookie, '', COOKIE_EXPIRED);
+                        bb_setcookie($cookie, null);
                     }
                 }
             }
@@ -650,9 +650,9 @@ class User
             ]);
 
             // Delete cookies
-            bb_setcookie(COOKIE_TOPIC, '');
-            bb_setcookie(COOKIE_FORUM, '');
-            bb_setcookie(COOKIE_MARK, '');
+            bb_setcookie(COOKIE_TOPIC, null);
+            bb_setcookie(COOKIE_FORUM, null);
+            bb_setcookie(COOKIE_MARK, null);
         }
     }
 
