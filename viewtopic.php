@@ -429,7 +429,7 @@ if ($can_watch_topic) {
     }
 }
 
-// If we've got a hightlight set pass it on to pagination,
+// If we've got a highlight set pass it on to pagination,
 $pg_url = TOPIC_URL . $topic_id;
 $pg_url .= $post_days ? "&amp;postdays=$post_days" : '';
 $pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
@@ -573,7 +573,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
     $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
     $post_id = $postrow[$i]['post_id'];
-    $mc_type = $postrow[$i]['mc_type'];
+    $mc_type = (int)$postrow[$i]['mc_type'];
     $mc_comment = $postrow[$i]['mc_comment'];
     $mc_user_id = profile_url(['username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']]);
 
@@ -666,23 +666,13 @@ for ($i = 0; $i < $total_posts; $i++) {
     $pg_row_class = !($i % 2) ? 'row2' : 'row1';
 
     // Mod comment
-    switch ($mc_type) {
-        case 1: // Комментарий
-            $mc_class = 'success';
-            break;
-        case 2: // Информация
-            $mc_class = 'info';
-            break;
-        case 3: // Предупреждение
-            $mc_class = 'warning';
-            break;
-        case 4: // Нарушение
-            $mc_class = 'danger';
-            break;
-        default:
-            $mc_class = '';
-            break;
-    }
+    $mc_class = match ($mc_type) {
+        1 => 'success',
+        2 => 'info',
+        3 => 'warning',
+        4 => 'danger',
+        default => '',
+    };
     $mc_select_type = [];
     foreach ($lang['MC_COMMENT'] as $key => $value) {
         $mc_select_type[$key] = $value['type'];

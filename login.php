@@ -59,7 +59,7 @@ $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 $login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
 $login_password = $_POST['login_password'] ?? '';
 
-// Проверка на неверную комбинацию логин/пароль
+// Checking for incorrect login/password combination
 $need_captcha = false;
 if (!$mod_admin_login) {
     $need_captcha = CACHE('bb_login_err')->get('l_err_' . USER_IP);
