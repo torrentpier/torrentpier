@@ -120,7 +120,7 @@ class Sitemap
         $sitemap = new STM(SITEMAP_DIR . '/sitemap_dynamic.xml');
 
         foreach ($this->getForumUrls() as $forum) {
-            $sitemap->addItem(make_url($forum['url']), time(), STM::HOURLY, 0.7);
+            $sitemap->addItem(make_url($forum['url']), TIMENOW, STM::HOURLY, 0.7);
         }
 
         foreach ($this->getTopicUrls() as $topic) {
@@ -144,7 +144,7 @@ class Sitemap
         $staticSitemap = new STM(SITEMAP_DIR . '/sitemap_static.xml');
 
         foreach ($this->getStaticUrls() as $url) {
-            $staticSitemap->addItem($url['url'], time(), STM::WEEKLY, 0.5);
+            $staticSitemap->addItem($url['url'], TIMENOW, STM::WEEKLY, 0.5);
         }
 
         $staticSitemap->write();
