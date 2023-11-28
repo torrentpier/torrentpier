@@ -1,5 +1,16 @@
 # 📖 Change Log
 
+## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
+
+**Merged pull requests:**
+
+- Fixed void function result used [\#1170](https://github.com/torrentpier/torrentpier/pull/1170) ([belomaxorka](https://github.com/belomaxorka))
+- Improved cookie management 🍪 [\#1171](https://github.com/torrentpier/torrentpier/pull/1171) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced strpos() with simplified realization [\#1172](https://github.com/torrentpier/torrentpier/pull/1172) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced some 'switch' with the 'match' expression [\#1173](https://github.com/torrentpier/torrentpier/pull/1173) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced some time() with TIMENOW constant [\#1174](https://github.com/torrentpier/torrentpier/pull/1174) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0-rc1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc1) (2023-11-25)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta4...v2.4.0-rc1)
 
