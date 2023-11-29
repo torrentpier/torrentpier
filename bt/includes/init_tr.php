@@ -69,7 +69,6 @@ function dummy_exit($interval = 1800, $cache_dict = [])
         $output['complete'] = $cache_dict['complete'];
         $output['incomplete'] = $cache_dict['incomplete'];
         $output['downloaded'] = $cache_dict['downloaded'];
-        $output['warning message'] = 'Next statistics update in: ' . (floor($interval / 60) % 60) . ' minutes';
     }
 
     if (isset($cache_dict['peers'])) {

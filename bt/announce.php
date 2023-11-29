@@ -65,6 +65,15 @@ if (strlen($peer_id) !== 20) {
     msg_die('Invalid peer_id: ' . $peer_id);
 }
 
+// Check for client ban
+if ($bb_cfg['client_ban']['enabled']) {
+    foreach (array_keys($bb_cfg['client_ban']['clients']) as $client) {
+        if (str_starts_with($peer_id, $client)) {
+            msg_die($bb_cfg['client_ban']['clients'][$client]);
+        }
+    }
+}
+
 // Verify info_hash
 if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
@@ -352,7 +361,7 @@ if ((!$lp_info || !$peer_info_updated) && !$stopped && empty($hybrid_unrecord)) 
 
 // Exit if stopped
 if ($stopped) {
-    silent_exit('Cache will be reset within 30 seconds');
+    dummy_exit();
 }
 
 // Store peer info in cache
@@ -462,7 +471,6 @@ if (!$output) {
 }
 
 $output['external ip'] = inet_pton($ip);
-$output['warning message'] = 'Statistics were updated';
 
 // Return data to client
 echo \Arokettu\Bencode\Bencode::encode($output);
