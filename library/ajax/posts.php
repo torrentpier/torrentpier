@@ -171,16 +171,16 @@ switch ($this->request['type']) {
 				<form action="' . POSTING_URL . '" method="post" name="post">
 					' . $hidden_form . '
 					<div class="buttons mrg_4">
-						<input type="button" value="B" name="codeB" title="' . $lang['BOLD'] . '" style="font-weight: bold; width: 25px;" />
-						<input type="button" value="i" name="codeI" title="' . $lang['ITALIC'] . '" style="width: 25px; font-style: italic;" />
-						<input type="button" value="u" name="codeU" title="' . $lang['UNDERLINE'] . '" style="width: 25px; text-decoration: underline;" />
-						<input type="button" value="s" name="codeS" title="' . $lang['STRIKEOUT'] . '" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
-						<input type="button" value="' . $lang['QUOTE'] . '" name="codeQuote" title="' . $lang['QUOTE_TITLE'] . '" style="width: 57px;" />
-						<input type="button" value="Img" name="codeImg" title="' . $lang['IMG_TITLE'] . '" style="width: 40px;" />
-						<input type="button" value="' . $lang['URL'] . '" name="codeUrl" title="' . $lang['URL_TITLE'] . '" style="width: 63px; text-decoration: underline;" />&nbsp;
-						<input type="button" value="' . $lang['CODE'] . '" name="codeCode" title="' . $lang['CODE_TITLE'] . '" style="width: 43px;" />
-						<input type="button" value="' . $lang['LIST'] . '" name="codeList" title="' . $lang['LIST_TITLE'] . '" style="width: 60px;" />
-						<input type="button" value="1." name="codeOpt" title="' . $lang['LIST_ITEM'] . '" style="width: 30px;" />&nbsp;
+						<input type="button" value="B" name="codeB" title="' . $lang['BOLD'] . '" style="font-weight: bold;" />
+						<input type="button" value="i" name="codeI" title="' . $lang['ITALIC'] . '" style="font-style: italic;" />
+						<input type="button" value="u" name="codeU" title="' . $lang['UNDERLINE'] . '" style="text-decoration: underline;" />
+						<input type="button" value="s" name="codeS" title="' . $lang['STRIKEOUT'] . '" style="text-decoration: line-through;" />&nbsp;&nbsp;
+						<input type="button" value="' . $lang['QUOTE'] . '" name="codeQuote" title="' . $lang['QUOTE_TITLE'] . '" />
+						<input type="button" value="Img" name="codeImg" title="' . $lang['IMG_TITLE'] . '" />
+						<input type="button" value="' . $lang['URL'] . '" name="codeUrl" title="' . $lang['URL_TITLE'] . '" style="text-decoration: underline;" />&nbsp;
+						<input type="button" value="' . $lang['CODE'] . '" name="codeCode" title="' . $lang['CODE_TITLE'] . '" />
+						<input type="button" value="' . $lang['LIST'] . '" name="codeList" title="' . $lang['LIST_TITLE'] . '" />
+						<input type="button" value="1." name="codeOpt" title="' . $lang['LIST_ITEM'] . '" />&nbsp;
 						<input type="button" value="' . $lang['QUOTE_SEL'] . '" name="quoteselected" title="' . $lang['QUOTE_SELECTED'] . '" onclick="bbcode.onclickQuoteSel();" />&nbsp;
 					</div>
 					<textarea id="message-' . $post_id . '" class="editor mrg_4" name="message" rows="18" cols="92">' . $post['post_text'] . '</textarea>
