@@ -10,6 +10,7 @@
 - Replaced strpos() with simplified realization [\#1172](https://github.com/torrentpier/torrentpier/pull/1172) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced some 'switch' with the 'match' expression [\#1173](https://github.com/torrentpier/torrentpier/pull/1173) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced some time() with TIMENOW constant [\#1174](https://github.com/torrentpier/torrentpier/pull/1174) ([belomaxorka](https://github.com/belomaxorka))
+- Feature to ban specific torrent clients [\#1175](https://github.com/torrentpier/torrentpier/pull/1175) ([kovalensky](https://github.com/kovalensky))
 
 ## [v2.4.0-rc1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc1) (2023-11-25)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-beta4...v2.4.0-rc1)
