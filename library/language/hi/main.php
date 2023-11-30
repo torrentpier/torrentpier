@@ -1072,6 +1072,7 @@ $lang['BT_ADDED'] = 'जोड़ा गया';
 $lang['BT_REG_ON_TRACKER'] = 'ट्रैकर पर रजिस्टर करें';
 $lang['BT_REG_FAIL'] = 'ट्रैकर पर धार डाउनलोड नहीं किया जा सका';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'उसी जानकारी के साथ एक और धार पहले ही <a href="%s"><b> रजिस्ट्रीकृत 1233_2_2_321</a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ट्रैकर से निकालें';
