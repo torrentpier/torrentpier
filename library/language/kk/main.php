@@ -1072,6 +1072,7 @@ $lang['BT_ADDED'] = 'Қосылған';
 $lang['BT_REG_ON_TRACKER'] = 'отслежывателе тіркеу';
 $lang['BT_REG_FAIL'] = 'отслежывателе торрент тіркеу мүмкін болмады';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'қазірдің өзінде сол info_hash <a href="%s"><b>registered</b></a> бар басқа торрент';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'трекер алып тастау';
