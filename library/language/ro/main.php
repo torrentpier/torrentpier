@@ -680,6 +680,19 @@ $lang['ASC'] = 'Crescator';
 $lang['DESC'] = 'Descendent';
 $lang['ORDER'] = 'Pentru';
 
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
+
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Grupuri De Utilizatori';
 $lang['GROUP_CONFIGURATION'] = 'Grupul De Configurare';
@@ -1059,6 +1072,7 @@ $lang['BT_ADDED'] = 'Adăugat';
 $lang['BT_REG_ON_TRACKER'] = 'Înregistrați pe tracker';
 $lang['BT_REG_FAIL'] = 'Nu ar putea înregistra torrent pe tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un alt torrent cu același info_hash deja <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Eliminați de la tracker';

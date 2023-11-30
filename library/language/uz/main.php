@@ -1072,6 +1072,7 @@ $lang['BT_ADDED'] = 'Yükladi';
 $lang['BT_REG_ON_TRACKER'] = 'reyting www.uz ro\'yxatdan';
 $lang['BT_REG_FAIL'] = 'reyting www.uz torrent ro\'yxatdan bo\'lmadi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Shu info_hash allaqachon <a href="%s"><b>registered</b></a> bilan yana bir torrent';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'izdoshlari o\'chirish';

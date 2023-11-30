@@ -1072,6 +1072,7 @@ $lang['BT_ADDED'] = 'bygevoeg';
 $lang['BT_REG_ON_TRACKER'] = 'Registreer op spoorsnyer';
 $lang['BT_REG_FAIL'] = 'Kon nie torrent op spoorsnoer registreer nie';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
