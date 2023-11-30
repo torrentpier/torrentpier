@@ -349,15 +349,21 @@ class Torrent
         }
 
         // Check if torrent contains info_hash v2 or v1
-        if (($info['meta version'] ?? null) == 2) {
-            if (is_array($info['file tree'] ?? null)) {
+        if (isset($info['meta version'], $info['file tree'])) {
+            if ($info['meta version'] === 2 && is_array($info['file tree'])) {
                 $bt_v2 = true;
             }
         }
+
         if (isset($info['pieces'])) {
             $bt_v1 = true;
         }
-        if ($bb_cfg['tracker']['disabled_v2_torrents'] && isset($bt_v2) && !isset($bt_v1)) {
+
+        if ($bb_cfg['tracker']['disabled_v1_torrents'] && isset($bt_v1) && !isset($bt_v2)) {
+            self::torrent_error_exit($lang['BT_V1_ONLY_DISALLOWED']);
+        }
+
+        if ($bb_cfg['tracker']['disabled_v2_torrents'] && !isset($bt_v1) && isset($bt_v2)) {
             self::torrent_error_exit($lang['BT_V2_ONLY_DISALLOWED']);
         }
 

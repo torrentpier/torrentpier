@@ -65,6 +65,15 @@ if (strlen($peer_id) !== 20) {
     msg_die('Invalid peer_id: ' . $peer_id);
 }
 
+// Check for client ban
+if ($bb_cfg['client_ban']['enabled']) {
+    foreach (array_keys($bb_cfg['client_ban']['clients']) as $client) {
+        if (str_starts_with($peer_id, $client)) {
+            msg_die($bb_cfg['client_ban']['clients'][$client]);
+        }
+    }
+}
+
 // Verify info_hash
 if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
@@ -102,8 +111,7 @@ $ip = $_SERVER['REMOTE_ADDR'];
 if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip']) {
     if (!$bb_cfg['verify_reported_ip']) {
         $ip = $_GET['ip'];
-    }
-    elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
         foreach ($matches[0] as $x_ip) {
             if ($x_ip === $_GET['ip']) {
                 if (!$bb_cfg['allow_internal_ip'] && preg_match("#(127\.([0-9]{1,3}\.){2}[0-9]{1,3}|10\.([0-9]{1,3}\.){2}[0-9]{1,3}|172\.[123][0-9]\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3})#", $x_ip)) {
@@ -243,8 +251,7 @@ if ($lp_info) {
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_seed_count']) {
                     msg_die('Only ' . $bb_cfg['tracker']['limit_seed_count'] . ' torrent(s) allowed for seeding');
-                }
-                elseif (!$seeder && $bb_cfg['tracker']['limit_leech_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_leech_count']) {
+                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_leech_count']) {
                     msg_die('Only ' . $bb_cfg['tracker']['limit_leech_count'] . ' torrent(s) allowed for leeching' . $rating_msg);
                 }
             }
@@ -267,8 +274,7 @@ if ($lp_info) {
             if ($row = DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_seed_ips']) {
                     msg_die('You can seed only from ' . $bb_cfg['tracker']['limit_seed_ips'] . " IP's");
-                }
-                elseif (!$seeder && $bb_cfg['tracker']['limit_leech_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_leech_ips']) {
+                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_leech_ips']) {
                     msg_die('You can leech only from ' . $bb_cfg['tracker']['limit_leech_ips'] . " IP's");
                 }
             }
@@ -352,7 +358,7 @@ if ((!$lp_info || !$peer_info_updated) && !$stopped && empty($hybrid_unrecord)) 
 
 // Exit if stopped
 if ($stopped) {
-    silent_exit('Cache will be reset within 30 seconds');
+    dummy_exit();
 }
 
 // Store peer info in cache
@@ -462,7 +468,6 @@ if (!$output) {
 }
 
 $output['external ip'] = inet_pton($ip);
-$output['warning message'] = 'Statistics were updated';
 
 // Return data to client
 echo \Arokettu\Bencode\Bencode::encode($output);
