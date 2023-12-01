@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Bánh phải được kích hoạt!';
 $lang['SESSION_EXPIRED'] = 'Phiên hết hạn';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Show chỉ có một tên bắt đầu với';
-$lang['OTHERS'] = 'những người khác';
-$lang['ALL'] = 'tất cả';
-
 $lang['POST_LINK'] = 'Bài liên kết';
 $lang['GOTO_QUOTED_POST'] = 'Đi đến các trích dẫn bài';
 $lang['LAST_VISITED'] = 'Cuối Cùng Đã Đến Thăm';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Vui lòng điền vào mẫu phát hành';
 $lang['NEW_RELEASE'] = 'Mới phát hành';
 $lang['NEXT'] = 'Tiếp tục';
 $lang['OTHER'] = 'Khác';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Anh phải điền vào lĩnh vực này <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Bạn phải chọn <b>%s</b>';
