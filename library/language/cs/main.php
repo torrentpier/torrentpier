@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies musí být povolen!';
 $lang['SESSION_EXPIRED'] = 'Relace vypršela';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Zobrazit pouze jména začínající s';
-$lang['OTHERS'] = 'ostatní';
-$lang['ALL'] = 'všechny';
-
 $lang['POST_LINK'] = 'Post odkaz';
 $lang['GOTO_QUOTED_POST'] = 'Přejít na citovaný příspěvek';
 $lang['LAST_VISITED'] = 'Poslední Navštívené';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Vyplňte prosím formulář uvolnění';
 $lang['NEW_RELEASE'] = 'Nové vydání';
 $lang['NEXT'] = 'Pokračovat';
 $lang['OTHER'] = 'Další';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Musíte vyplnit pole <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Musíte vybrat <b>%s</b>';
