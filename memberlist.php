@@ -40,9 +40,6 @@ if ($sort_order == 'ASC') {
 $select_sort_order .= '</select>';
 
 switch ($mode) {
-    case 'joined':
-        $order_by = "user_id $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
-        break;
     case 'username':
         $order_by = "username $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
         break;
@@ -64,7 +61,6 @@ switch ($mode) {
     case 'joined':
     default:
         $order_by = "user_regdate $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
-        $mode = 'joined';
         break;
 }
 
