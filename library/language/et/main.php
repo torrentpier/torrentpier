@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Küpsised peavad olema lubatud!';
 $lang['SESSION_EXPIRED'] = 'Istung lõppenud';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Näita ainult kasutajanimed alustades';
-$lang['OTHERS'] = 'muud';
-$lang['ALL'] = 'kõik';
-
 $lang['POST_LINK'] = 'Postitus link';
 $lang['GOTO_QUOTED_POST'] = 'Minge tsiteeritud postitus';
 $lang['LAST_VISITED'] = 'Viimati Külastas';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Palun täitke vabastusvorm';
 $lang['NEW_RELEASE'] = 'Uus pressiteade';
 $lang['NEXT'] = 'Jätka';
 $lang['OTHER'] = 'Muud';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Tuleb täita väli <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Teil tuleb valida <b>%s</b>';

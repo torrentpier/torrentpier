@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'I Cookies devono essere abilitati!';
 $lang['SESSION_EXPIRED'] = 'Sessione scaduta';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Mostra solo i nomi a partire';
-$lang['OTHERS'] = 'altri';
-$lang['ALL'] = 'tutti';
-
 $lang['POST_LINK'] = 'Postare il link';
 $lang['GOTO_QUOTED_POST'] = 'Vai al post citato';
 $lang['LAST_VISITED'] = 'Ultima Visita';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Si prega di compilare il modulo di rilascio';
 $lang['NEW_RELEASE'] = 'Nuova release';
 $lang['NEXT'] = 'Continua';
 $lang['OTHER'] = 'Altri';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'È necessario compilare il campo <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'È necessario selezionare <b>%s</b>';

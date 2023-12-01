@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies must be enabled!';
 $lang['SESSION_EXPIRED'] = '会议期';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = '只显示用户名开始';
-$lang['OTHERS'] = '其他人';
-$lang['ALL'] = '所有';
-
 $lang['POST_LINK'] = '后链接';
 $lang['GOTO_QUOTED_POST'] = '去所报的员额';
 $lang['LAST_VISITED'] = '最后一次访问';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = '請填寫發布表格';
 $lang['NEW_RELEASE'] = '新的释放';
 $lang['NEXT'] = '继续';
 $lang['OTHER'] = '其他的';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '你必须填补的领域<b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = '你必须选择<b>%s</b>';

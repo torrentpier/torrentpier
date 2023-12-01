@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies må være aktivert!';
 $lang['SESSION_EXPIRED'] = 'Økt utløpt';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Vis bare brukernavn som starter med';
-$lang['OTHERS'] = 'andre';
-$lang['ALL'] = 'alle';
-
 $lang['POST_LINK'] = 'Innlegget lenke';
 $lang['GOTO_QUOTED_POST'] = 'Gå til den siterte innlegget';
 $lang['LAST_VISITED'] = 'Sist Besøkt';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Vennligst fyll ut utgivelsesskjemaet';
 $lang['NEW_RELEASE'] = 'Ny utgivelse';
 $lang['NEXT'] = 'Fortsett';
 $lang['OTHER'] = 'Andre';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Du må fylle ut feltet <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Du må velge <b>%s</b>';

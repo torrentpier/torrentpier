@@ -1313,10 +1313,6 @@ $lang['COOKIES_REQUIRED'] = 'クッキーにしておく必要があります!';
 $lang['SESSION_EXPIRED'] = 'セッション終了しました';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'ないユーザ名を始め';
-$lang['OTHERS'] = 'その他';
-$lang['ALL'] = 'すべての';
-
 $lang['POST_LINK'] = 'ポストのリンク';
 $lang['GOTO_QUOTED_POST'] = 'の引用ポスト';
 $lang['LAST_VISITED'] = '最後の訪問';
@@ -2603,6 +2599,8 @@ $lang['RELEASE_WELCOME'] = 'リリースフォームに入力してください'
 $lang['NEW_RELEASE'] = '新しいリリース';
 $lang['NEXT'] = '続き';
 $lang['OTHER'] = 'その他';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '必分野に<b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'を選択してください<b>%s</b>';

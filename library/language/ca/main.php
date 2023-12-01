@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Les galetes deuen estar activades!';
 $lang['SESSION_EXPIRED'] = 'Sessió ha caducat';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Només es mostren els noms que comencen amb';
-$lang['OTHERS'] = 'altres';
-$lang['ALL'] = 'tot';
-
 $lang['POST_LINK'] = 'Post enllaç';
 $lang['GOTO_QUOTED_POST'] = 'Anar a la citada publicació';
 $lang['LAST_VISITED'] = 'Última Visita';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Si us plau, ompliu el formulari d\'alliberament';
 $lang['NEW_RELEASE'] = 'Nova versió';
 $lang['NEXT'] = 'Continuar';
 $lang['OTHER'] = 'Altres';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Heu d\'omplir el camp <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Heu de seleccionar com <b>%s</b>';

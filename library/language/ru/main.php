@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Куки должны быть включены!';
 $lang['SESSION_EXPIRED'] = 'Сессия устарела';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Имя начинается с буквы';
-$lang['OTHERS'] = 'другие';
-$lang['ALL'] = 'все';
-
 $lang['POST_LINK'] = 'Линк на это сообщение';
 $lang['GOTO_QUOTED_POST'] = 'Перейти к цитируемому сообщению';
 $lang['LAST_VISITED'] = 'Последний визит';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Заполните форму для релиза';
 $lang['NEW_RELEASE'] = 'Новый релиз';
 $lang['NEXT'] = 'Продолжить';
 $lang['OTHER'] = 'Другой';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Вы должны заполнить поле <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Вы должны выбрать <b>%s</b>';

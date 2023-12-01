@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookie harus diaktifkan!';
 $lang['SESSION_EXPIRED'] = 'Sesi berakhir';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Tampilkan hanya nama pengguna dimulai dengan';
-$lang['OTHERS'] = 'lain-lain';
-$lang['ALL'] = 'semua';
-
 $lang['POST_LINK'] = 'Posting link';
 $lang['GOTO_QUOTED_POST'] = 'Pergi ke dikutip posting';
 $lang['LAST_VISITED'] = 'Terakhir Dikunjungi';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Silakan isi formulir rilis';
 $lang['NEW_RELEASE'] = 'Baru rilis';
 $lang['NEXT'] = 'Terus';
 $lang['OTHER'] = 'Lainnya';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Anda harus mengisi field <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Anda harus memilih <b>%s</b>';

@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Kolačiće mora biti omogućeno!';
 $lang['SESSION_EXPIRED'] = 'Sjednica je istekao';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Pokaži samo usernames počevši';
-$lang['OTHERS'] = 'drugi';
-$lang['ALL'] = 'sve';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Idi u navodi post';
 $lang['LAST_VISITED'] = 'Prošle Posjetio';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Molimo popunite formular za oslobađanje';
 $lang['NEW_RELEASE'] = 'Novo izdanje';
 $lang['NEXT'] = 'Nastavi';
 $lang['OTHER'] = 'Drugi';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Moraš ispuniti terenu <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Moraš izabrati <b>%s</b>';

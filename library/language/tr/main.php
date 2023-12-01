@@ -1313,10 +1313,6 @@ $lang['COOKIES_REQUIRED'] = 'Çerezler etkin olmalıdır.';
 $lang['SESSION_EXPIRED'] = 'Oturum süresi doldu';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Haritayı sadece başlangıç adlarını';
-$lang['OTHERS'] = 'Diğerleri';
-$lang['ALL'] = 'tüm';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Alıntı mesaja git';
 $lang['LAST_VISITED'] = 'Dün Ziyaret Etti';
@@ -2603,6 +2599,8 @@ $lang['RELEASE_WELCOME'] = 'Lütfen izin formunu doldurun';
 $lang['NEW_RELEASE'] = 'Yeni sürüm';
 $lang['NEXT'] = 'Devam';
 $lang['OTHER'] = 'Başka';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '<b>%s</b> alanını doldurmalısınız';
 $lang['TPL_EMPTY_SEL'] = '<b>%s</b> seçmeniz gerekir';

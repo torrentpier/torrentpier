@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Evästeiden on oltava käytössä!';
 $lang['SESSION_EXPIRED'] = 'Istunto vanhentunut';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Näytä ainoastaan käyttäjätunnukset alkaen';
-$lang['OTHERS'] = 'muut';
-$lang['ALL'] = 'kaikki';
-
 $lang['POST_LINK'] = 'Post linkki';
 $lang['GOTO_QUOTED_POST'] = 'Mene lainattu viesti';
 $lang['LAST_VISITED'] = 'Viimeksi Käynyt';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Ole hyvä ja täytä vapautuslomake';
 $lang['NEW_RELEASE'] = 'Uusi julkaisu';
 $lang['NEXT'] = 'Edelleen';
 $lang['OTHER'] = 'Muut';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Sinun täytyy täyttää kentän <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Sinun täytyy valita <b>%s</b>';

@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'A cookie-k engedélyezve kell legyen!';
 $lang['SESSION_EXPIRED'] = 'A munkamenet lejárt';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Csak felhasználónevek kezdve';
-$lang['OTHERS'] = 'mások';
-$lang['ALL'] = 'összes';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Menj az idézett poszt';
 $lang['LAST_VISITED'] = 'Utoljára Látogatott';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Kérjük, töltse ki a kiadási űrlapot';
 $lang['NEW_RELEASE'] = 'Új kiadás';
 $lang['NEXT'] = 'Tovább';
 $lang['OTHER'] = 'Egyéb';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Töltse ki a mezőt <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Válassza ki <b>%s</b>';

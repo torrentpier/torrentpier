@@ -1072,6 +1072,7 @@ $lang['BT_ADDED'] = 'Ajouté';
 $lang['BT_REG_ON_TRACKER'] = 'S\'inscrire sur le tracker';
 $lang['BT_REG_FAIL'] = 'N\'a pas pu inscrire torrent sur le tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un autre torrent avec même info_hash déjà <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retirer du tracker';
@@ -1308,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Les Cookies doivent être activés!';
 $lang['SESSION_EXPIRED'] = 'Session a expiré';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Afficher uniquement les noms d\'utilisateur débutant avec';
-$lang['OTHERS'] = 'd\'autres';
-$lang['ALL'] = 'tous';
-
 $lang['POST_LINK'] = 'Post le lien';
 $lang['GOTO_QUOTED_POST'] = 'Aller à la cité post';
 $lang['LAST_VISITED'] = 'Dernière Visite';
@@ -2598,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Veuillez remplir le formulaire de décharge';
 $lang['NEW_RELEASE'] = 'Nouvelle version';
 $lang['NEXT'] = 'Continuer';
 $lang['OTHER'] = 'D\'autres';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Vous devez remplir le champ <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Vous devez sélectionner <b>%s</b>';

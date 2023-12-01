@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies бояд фаъол шавад!';
 $lang['SESSION_EXPIRED'] = 'ҷаласаи гузашта';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Танҳо гузарвожаҳо бо сар';
-$lang['OTHERS'] = 'дигарон';
-$lang['ALL'] = 'ҳама';
-
 $lang['POST_LINK'] = 'пайванд Post';
 $lang['GOTO_QUOTED_POST'] = 'Бирав ба мансаби иқтибос';
 $lang['LAST_VISITED'] = 'Last дидан';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Лутфан варақаи нашрро пур ку
 $lang['NEW_RELEASE'] = 'озод нав';
 $lang['NEXT'] = 'давом додан';
 $lang['OTHER'] = 'дигар';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Шумо бояд дар соҳаи пур <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Шумо бояд <b>%s</b>-ро интихоб кунед';
