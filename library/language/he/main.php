@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'עוגיות חייב להיות מופעל!';
 $lang['SESSION_EXPIRED'] = 'הפעלה שפג תוקפם';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'הצג רק שמות משתמש מתחיל עם';
-$lang['OTHERS'] = 'אחרים';
-$lang['ALL'] = 'כל';
-
 $lang['POST_LINK'] = 'לפרסם קישור';
 $lang['GOTO_QUOTED_POST'] = 'ללכת המצוטטת פוסט';
 $lang['LAST_VISITED'] = 'אתמול ביקר';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'נא למלא את טופס השחרור';
 $lang['NEW_RELEASE'] = 'פרסום חדש';
 $lang['NEXT'] = 'המשך';
 $lang['OTHER'] = 'אחרים';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'אתה חייב למלא את שדה <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'עליך לבחור <b>%s</b>';
