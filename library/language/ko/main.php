@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = '쿠키 활성화해야합니다!';
 $lang['SESSION_EXPIRED'] = '료 세션';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = '쇼 사용자 이름만으로 시작';
-$lang['OTHERS'] = '다른 사람';
-$lang['ALL'] = '모든';
-
 $lang['POST_LINK'] = '포스트 링크';
 $lang['GOTO_QUOTED_POST'] = '가시되는 게시물';
 $lang['LAST_VISITED'] = '마지막으로 방문';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = '릴리스 양식을 작성하십시오';
 $lang['NEW_RELEASE'] = '새로운 릴리스';
 $lang['NEXT'] = '계속';
 $lang['OTHER'] = '기타';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '을 작성해야 할 필드 <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = '선택해야 합니다 <b>%s</b>';
