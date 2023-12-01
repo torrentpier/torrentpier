@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookie-urile trebuie să fie activate!';
 $lang['SESSION_EXPIRED'] = 'Sesiunea a expirat';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Arată doar numele de utilizator incepand cu';
-$lang['OTHERS'] = 'altele';
-$lang['ALL'] = 'toate';
-
 $lang['POST_LINK'] = 'Posta link-ul';
 $lang['GOTO_QUOTED_POST'] = 'Du-te la post, citat de';
 $lang['LAST_VISITED'] = 'Ultima Vizitat';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Vă rugăm să completați formularul de eliberare';
 $lang['NEW_RELEASE'] = 'Noua versiune';
 $lang['NEXT'] = 'Continua';
 $lang['OTHER'] = 'Alte';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Trebuie să completați câmpul <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Trebuie să selectați <b>%s</b>';
