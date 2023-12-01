@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Sausainėliai (Cookies) turi būti įjungta!';
 $lang['SESSION_EXPIRED'] = 'Sesija baigėsi';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Rodyti tik vardai prasideda';
-$lang['OTHERS'] = 'kita';
-$lang['ALL'] = 'visi';
-
 $lang['POST_LINK'] = 'Po saitą';
 $lang['GOTO_QUOTED_POST'] = 'Eikite į cituojamą postą';
 $lang['LAST_VISITED'] = 'Paskutinis Lankėsi';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Prašome užpildyti atleidimo formą';
 $lang['NEW_RELEASE'] = 'Nauja versija';
 $lang['NEXT'] = 'Toliau';
 $lang['OTHER'] = 'Kita';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Jūs turite užpildyti lauką <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Turite pasirinkti <b>%s</b>';
