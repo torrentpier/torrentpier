@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies ni yoqishingiz shart!';
 $lang['SESSION_EXPIRED'] = 'Seans muddati';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'faqat foydalanuvchi nomi bilan boshlangan ko\'rsatish';
-$lang['OTHERS'] = 'Boshqalar';
-$lang['ALL'] = 'hamma';
-
 $lang['POST_LINK'] = 'Post bog\'laning';
 $lang['GOTO_QUOTED_POST'] = 'keltirilgan xabarga';
 $lang['LAST_VISITED'] = 'Oxirgi tashrif buyurdi,';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Iltimos, chiqarish shaklini to\'ldiring';
 $lang['NEW_RELEASE'] = 'Yangi relizlar';
 $lang['NEXT'] = 'Davom';
 $lang['OTHER'] = 'boshqa';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Siz maydonini to\'ldirish kerak <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Siz <b>%s</b> tanlashingiz kerak';
