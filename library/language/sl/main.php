@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Piškotki morajo biti omogočeni!';
 $lang['SESSION_EXPIRED'] = 'Sejo veljavnosti';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Prikaži samo imena, začenši z';
-$lang['OTHERS'] = 'drugi';
-$lang['ALL'] = 'vse';
-
 $lang['POST_LINK'] = 'Objavite povezavo';
 $lang['GOTO_QUOTED_POST'] = 'Pojdi na ponujeni post';
 $lang['LAST_VISITED'] = 'Nazadnje Obiskali,';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Prosimo, izpolnite obrazec za sprostitev';
 $lang['NEW_RELEASE'] = 'Nova objava';
 $lang['NEXT'] = 'Naprej';
 $lang['OTHER'] = 'Drugo';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Morate izpolniti polja <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Izbrati morate <b>%s</b>';
