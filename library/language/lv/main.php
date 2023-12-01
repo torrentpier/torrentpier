@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Sīkfaili ir jābūt aktivizētam!';
 $lang['SESSION_EXPIRED'] = 'Sesijas beidzies';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Rādīt tikai sākot ar lietotājvārdu';
-$lang['OTHERS'] = 'citi';
-$lang['ALL'] = 'visas';
-
 $lang['POST_LINK'] = 'Post saiti';
 $lang['GOTO_QUOTED_POST'] = 'Dodieties uz kotētas pastu';
 $lang['LAST_VISITED'] = 'Pēdējā Apmeklēja';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Lūdzu, aizpildiet atbrīvošanas veidlapu';
 $lang['NEW_RELEASE'] = 'Jauno atbrīvošanu';
 $lang['NEXT'] = 'Turpināt';
 $lang['OTHER'] = 'Citi';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Jums ir aizpildiet jomā <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Jums ir jāizvēlas <b>%s</b>';
