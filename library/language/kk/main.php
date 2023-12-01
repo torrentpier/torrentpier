@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies рұқсат етілуі керек!';
 $lang['SESSION_EXPIRED'] = 'сессия мерзімі өтіп кеткен';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'бастап тек пайдаланушы көрсету';
-$lang['OTHERS'] = 'басқалар';
-$lang['ALL'] = 'барлық';
-
 $lang['POST_LINK'] = 'Post сілтеме';
 $lang['GOTO_QUOTED_POST'] = 'кесілетін хабарға өту';
 $lang['LAST_VISITED'] = 'соңғы болған уақыты';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Шығарылым пішінін толтырыңы
 $lang['NEW_RELEASE'] = 'жаңа релизі';
 $lang['NEXT'] = 'жалғастыру';
 $lang['OTHER'] = 'басқа';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Сіз өрісті толтыру керек <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Сіз <b>%s</b> таңдау керек';
