@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies moeten zijn ingeschakeld!';
 $lang['SESSION_EXPIRED'] = 'Sessie verlopen';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Toon alleen gebruikersnamen beginnend met';
-$lang['OTHERS'] = 'anderen';
-$lang['ALL'] = 'alle';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Ga naar het geciteerde post';
 $lang['LAST_VISITED'] = 'Laatste Bezoek';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Vul dan het vrijgaveformulier in';
 $lang['NEW_RELEASE'] = 'Nieuwe release';
 $lang['NEXT'] = 'Doorgaan';
 $lang['OTHER'] = 'Andere';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'U vult het veld <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Moet u <b>%s</b>';
