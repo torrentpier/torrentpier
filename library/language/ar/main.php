@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'يجب تمكين ملفات تعريف الارت�
 $lang['SESSION_EXPIRED'] = 'الدورة انتهت';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'تظهر فقط أسماء المستخدمين بدءا من';
-$lang['OTHERS'] = 'الآخرين';
-$lang['ALL'] = 'كل';
-
 $lang['POST_LINK'] = 'رابط آخر';
 $lang['GOTO_QUOTED_POST'] = 'انتقل إلى نقلا عن بعد';
 $lang['LAST_VISITED'] = 'آخر زيارة';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'يرجى ملء نموذج الإفراج';
 $lang['NEW_RELEASE'] = 'الإصدار الجديد';
 $lang['NEXT'] = 'تواصل';
 $lang['OTHER'] = 'أخرى';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'يجب ملء الحقل <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'يجب تحديد <b>%s</b>';
