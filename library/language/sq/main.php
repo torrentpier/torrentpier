@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookit duhet të jenë të aktivizuara!';
 $lang['SESSION_EXPIRED'] = 'Sesioni i skaduar';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Tregojnë vetëm përdoruesve duke filluar me';
-$lang['OTHERS'] = 'të tjerët';
-$lang['ALL'] = 'të gjitha';
-
 $lang['POST_LINK'] = 'Pas lidhje';
 $lang['GOTO_QUOTED_POST'] = 'Shko tek cituar post';
 $lang['LAST_VISITED'] = 'Vizituar Të Fundit';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Ju lutemi plotësoni formularin e lirimit';
 $lang['NEW_RELEASE'] = 'Lirimin e re';
 $lang['NEXT'] = 'Vazhdo';
 $lang['OTHER'] = 'Të tjera';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Ju duhet të plotësoni fushën <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Ju duhet të zgjidhni <b>%s</b>';
