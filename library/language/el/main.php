@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Τα Cookies πρέπει να είναι ενερ�
 $lang['SESSION_EXPIRED'] = 'Συνεδρία έληξε';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Εμφάνιση μόνο ονόματα που αρχίζουν με';
-$lang['OTHERS'] = 'άλλοι';
-$lang['ALL'] = 'όλα';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Πάω να το quoted post';
 $lang['LAST_VISITED'] = 'Τελευταία Επίσκεψη';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'Συμπληρώστε τη φόρμα απελευ�
 $lang['NEW_RELEASE'] = 'Νέα έκδοση';
 $lang['NEXT'] = 'Συνεχίστε';
 $lang['OTHER'] = 'Άλλα';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Θα πρέπει να συμπληρώσετε το πεδίο <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Θα πρέπει να επιλέξετε <b>%s</b>';
