@@ -12,9 +12,6 @@
 			</span>
             </td>
         </tr>
-        <tr>
-            <td align="right" class="med">{L_SORT_PER_LETTER}:&nbsp;{S_LETTER_SELECT}{S_LETTER_HIDDEN}</td>
-        </tr>
     </table>
 </form>
 
