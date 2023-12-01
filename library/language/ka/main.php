@@ -1309,10 +1309,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies უნდა იყოს!';
 $lang['SESSION_EXPIRED'] = 'სხდომაზე ვადაგასული';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'შოუ მხოლოდ სახელისა დაწყებული';
-$lang['OTHERS'] = 'სხვები';
-$lang['ALL'] = 'ყველა';
-
 $lang['POST_LINK'] = 'პოსტის ლინკი';
 $lang['GOTO_QUOTED_POST'] = 'წასვლა ციტირებული პოსტი';
 $lang['LAST_VISITED'] = 'ბოლო ვიზიტი';
@@ -2599,6 +2595,8 @@ $lang['RELEASE_WELCOME'] = 'გთხოვთ შეავსოთ გათ�
 $lang['NEW_RELEASE'] = 'ახალი გამოშვების';
 $lang['NEXT'] = 'გაგრძელება';
 $lang['OTHER'] = 'სხვა';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'თქვენ უნდა შეავსოთ სფეროში <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'თქვენ უნდა შეარჩიოთ <b>%s</b>';
