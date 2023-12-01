@@ -1312,10 +1312,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies daxil edilməlidir!';
 $lang['SESSION_EXPIRED'] = 'Sessiya истекла';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Yalnız göstər adları ilə başlayan';
-$lang['OTHERS'] = 'digər';
-$lang['ALL'] = 'bütün';
-
 $lang['POST_LINK'] = 'Post linki';
 $lang['GOTO_QUOTED_POST'] = 'Gedin, sitat post';
 $lang['LAST_VISITED'] = 'Son Ziyarət';
@@ -2602,6 +2598,8 @@ $lang['RELEASE_WELCOME'] = 'Zəhmət olmasa buraxılış formasını doldurun';
 $lang['NEW_RELEASE'] = 'Yeni nəşr';
 $lang['NEXT'] = 'Davam';
 $lang['OTHER'] = 'Digər';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Siz doldurun sahəsində <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Siz seçmək lazımdır <b>%s</b>';
