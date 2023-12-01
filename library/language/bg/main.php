@@ -1311,10 +1311,6 @@ $lang['COOKIES_REQUIRED'] = 'Бисквитките трябва да бъдат
 $lang['SESSION_EXPIRED'] = 'Сесията ви е изтекла';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Покажи само имена, започващи с';
-$lang['OTHERS'] = 'други';
-$lang['ALL'] = 'всички';
-
 $lang['POST_LINK'] = 'Публикация на линка';
 $lang['GOTO_QUOTED_POST'] = 'Преминете към цитиран пост';
 $lang['LAST_VISITED'] = 'Последно Посещение';
@@ -2601,6 +2597,8 @@ $lang['RELEASE_WELCOME'] = 'Моля, попълнете формуляра за
 $lang['NEW_RELEASE'] = 'В новия брой на';
 $lang['NEXT'] = 'Продължи';
 $lang['OTHER'] = 'Други';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Вие трябва да попълните полето <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Вие трябва да изберете <b>%s</b>';
