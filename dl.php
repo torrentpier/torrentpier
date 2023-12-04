@@ -154,7 +154,7 @@ if (!IS_AM) {
 
     $row = DB()->sql_fetchrow($result);
 
-    if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && (!isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $userdata['user_id'] !== $row['poster_id'])) {
+    if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
         bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$row['tor_status']]);
     }
 
