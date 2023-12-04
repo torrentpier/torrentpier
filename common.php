@@ -253,11 +253,6 @@ function mkdir_rec($path, $mode): bool
     return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
 }
 
-function verify_id($id, $length): bool
-{
-    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
-}
-
 function clean_filename($fname)
 {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
@@ -292,10 +287,10 @@ function str_compact($str)
  *
  * Should not be considered sufficient for cryptography, etc.
  *
- * @param int|string $length
+ * @param int $length
  * @return string
  */
-function make_rand_str($length = 10): string
+function make_rand_str(int $length = 10): string
 {
     $pool = str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
