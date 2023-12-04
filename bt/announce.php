@@ -83,7 +83,7 @@ if (!isset($info_hash)) {
 $info_hash_hex = bin2hex($info_hash);
 
 // Store peer id
-$peer_id_sql = rtrim(DB()->escape(preg_replace('/[^a-zA-Z0-9\-\_\.]/', '', $peer_id)), ' ');
+$peer_id_sql = rtrim(DB()->escape(preg_replace('/[^a-zA-Z0-9\-\_]/', '', $peer_id)), ' ');
 
 // Check info_hash length
 if (strlen($info_hash) !== 20) {
