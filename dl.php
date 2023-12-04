@@ -143,9 +143,26 @@ if (!$authorised) {
 
 $datastore->rm('cat_forums');
 
-//
+
+// Check tor status
+if (!IS_ADMIN) {
+    $sql = 'SELECT tor_status FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
+
+    if (!($result = DB()->sql_query($sql))) {
+        bb_die('Could not query tor_status information');
+    }
+
+    $row = DB()->sql_fetchrow($result);
+
+    if (in_array($row['tor_status'], [TOR_CLOSED, TOR_DUP, TOR_CLOSED_CPHOLD, TOR_CONSUMED])) {
+        bb_die('Downloading torrents with <b>' . $lang['TOR_STATUS_NAME'][$row['tor_status']] . '</b> status is disabled');
+    }
+
+    DB()->sql_freeresult($result);
+}
+
 // Get Information on currently allowed Extensions
-//
+
 $rows = get_extension_informations();
 $num_rows = count($rows);
 
