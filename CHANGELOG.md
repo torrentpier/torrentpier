@@ -14,7 +14,9 @@
 - Code re-formatting [\#1176](https://github.com/torrentpier/torrentpier/pull/1176) ([kovalensky](https://github.com/kovalensky))
 - Removed useless width for BBCode buttons [\#1180](https://github.com/torrentpier/torrentpier/pull/1180) ([belomaxorka](https://github.com/belomaxorka))
 - Refactored memberlist.php 🎓 [\#1181](https://github.com/torrentpier/torrentpier/pull/1181) ([belomaxorka](https://github.com/belomaxorka))
-- Updated deps [\#1177](https://github.com/torrentpier/torrentpier/pull/1177), [\#1178](https://github.com/torrentpier/torrentpier/pull/1178) ([belomaxorka](https://github.com/belomaxorka))
+- Peer ID was erased if it contained non-latin characters [\#1185](https://github.com/torrentpier/torrentpier/pull/1185) ([belomaxorka](https://github.com/belomaxorka))
+- Removed verify_id() function [\#1187](https://github.com/torrentpier/torrentpier/pull/1187) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#1177](https://github.com/torrentpier/torrentpier/pull/1177), [\#1178](https://github.com/torrentpier/torrentpier/pull/1178),[\#1183](https://github.com/torrentpier/torrentpier/pull/1183), [\#1184](https://github.com/torrentpier/torrentpier/pull/1184) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1179](https://github.com/torrentpier/torrentpier/pull/1179), [\#1182](https://github.com/torrentpier/torrentpier/pull/1182) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc1](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc1) (2023-11-25)
