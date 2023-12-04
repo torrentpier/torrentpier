@@ -154,7 +154,7 @@ if (!IS_ADMIN) {
 
     $row = DB()->sql_fetchrow($result);
 
-    if (in_array($row['tor_status'], [TOR_CLOSED, TOR_DUP, TOR_CLOSED_CPHOLD, TOR_CONSUMED])) {
+    if (in_array($row['tor_status'], [TOR_CLOSED, TOR_DUP, TOR_CLOSED_CPHOLD, TOR_CONSUMED, TOR_CHECKING])) {
         bb_die('Downloading torrents with <b>' . $lang['TOR_STATUS_NAME'][$row['tor_status']] . '</b> status is disabled');
     }
 
