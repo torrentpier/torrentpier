@@ -145,7 +145,7 @@ $datastore->rm('cat_forums');
 
 
 // Check tor status
-if (!IS_ADMIN) {
+if (!IS_ADMIN || !IS_MOD) {
     $sql = 'SELECT tor_status FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
 
     if (!($result = DB()->sql_query($sql))) {
