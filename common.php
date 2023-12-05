@@ -25,7 +25,7 @@ if (empty($_SERVER['HTTP_REFERER'])) {
     $_SERVER['HTTP_REFERER'] = '';
 }
 if (empty($_SERVER['SERVER_NAME'])) {
-    $_SERVER['SERVER_NAME'] = '';
+    $_SERVER['SERVER_NAME'] = getenv('SERVER_NAME');
 }
 if (empty($_SERVER['SERVER_ADDR'])) {
     $_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR');
