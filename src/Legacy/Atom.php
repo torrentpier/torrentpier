@@ -44,13 +44,13 @@ class Atom
 				p1.post_time AS topic_first_post_time, p1.post_edit_time AS topic_first_post_edit_time,
 				p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
 				tor.size AS tor_size, tor.tor_status, tor.attach_id,
-                pt.post_text
+                pt.post_html
 			FROM      " . BB_BT_TORRENTS . " tor
 			LEFT JOIN " . BB_TOPICS . " t   ON(tor.topic_id = t.topic_id)
 			LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
 			LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
 			LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
-            LEFT JOIN " . BB_POSTS_TEXT . " pt ON(p1.post_id = pt.post_id)
+            LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
 			ORDER BY t.topic_last_post_time DESC
 			LIMIT 100
 		";
@@ -61,13 +61,13 @@ class Atom
 				u1.username AS first_username,
 				p1.post_time AS topic_first_post_time, p1.post_edit_time AS topic_first_post_edit_time,
 				p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
-                pt.post_text
+                pt.post_html
 				$select_tor_sql
 			FROM      " . BB_TOPICS . " t
 			LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
 			LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
 			LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
-            LEFT JOIN " . BB_POSTS_TEXT . " pt ON(p1.post_id = pt.post_id)
+            LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
 				$join_tor_sql
 			WHERE t.forum_id = $forum_id
 			ORDER BY t.topic_last_post_time DESC
@@ -119,12 +119,12 @@ class Atom
 			p1.post_time AS topic_first_post_time, p1.post_edit_time AS topic_first_post_edit_time,
 			p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
 			tor.size AS tor_size, tor.tor_status, tor.attach_id,
-            pt.post_text
+            pt.post_html
 		FROM      " . BB_TOPICS . " t
 		LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
 		LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
 		LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
-        LEFT JOIN " . BB_POSTS_TEXT . " pt ON(p1.post_id = pt.post_id)
+        LEFT JOIN " . BB_POSTS_HTML . " pt ON(p1.post_id = pt.post_id)
 		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
 		WHERE t.topic_poster = $user_id
 		ORDER BY t.topic_last_post_time DESC
@@ -239,7 +239,7 @@ class Atom
             }
 
             if ($bb_cfg['atom']['direct_view']) {
-                $atom .= "	<description>" . $topic['post_text'] . "\n\nNews URL: " . FULL_URL . TOPIC_URL . $topic_id . "</description>\n";
+                $atom .= "	<description>" . $topic['post_html'] . "\n\nNews URL: " . FULL_URL . TOPIC_URL . $topic_id . "</description>\n";
             }
 
             $atom .= "</entry>\n";
