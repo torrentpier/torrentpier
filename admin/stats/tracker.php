@@ -174,14 +174,6 @@ echo '</table>';
 echo !$client_full ? '<p style = "text-align:right;">Simple stats for clients are being cached for one hour.</p>' : '';
 echo '<div align="center"><pre>';
 
-if ($l = sys('la')) {
-    $l = explode(' ', $l);
-    for ($i = 0; $i < 3; $i++) {
-        $l[$i] = round($l[$i], 1);
-    }
-    echo "\n\n<b>loadavg: </b>$l[0] $l[1] $l[2]\n\n";
-}
-
 echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
 echo '</pre></div>';
 echo '</body></html>';

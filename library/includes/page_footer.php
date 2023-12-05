@@ -53,14 +53,6 @@ if ($show_dbg_info) {
     $stat .= humn_size(sys('mem_peak'), 2) . ' / ';
     $stat .= humn_size(sys('mem'), 2);
 
-    if ($l = sys('la')) {
-        $l = explode(' ', $l);
-        for ($i = 0; $i < 3; $i++) {
-            $l[$i] = round($l[$i], 1);
-        }
-        $stat .= " &nbsp;|&nbsp; " . $lang['LIMIT'] . " $l[0] $l[1] $l[2]";
-    }
-
     $stat .= ' &nbsp;]';
 
     if (SQL_DEBUG) {

@@ -334,18 +334,13 @@ function hide_bb_path(string $path): string
     return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
 
-function sys($param)
+function sys(string $param)
 {
     switch ($param) {
-        case 'la':
-            return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
-            break;
         case 'mem':
             return memory_get_usage();
-            break;
         case 'mem_peak':
             return memory_get_peak_usage();
-            break;
         default:
             trigger_error("invalid param: $param", E_USER_ERROR);
     }

@@ -891,7 +891,6 @@ class SqlDb
         $msg[] = round($this->sql_starttime);
         $msg[] = date('m-d H:i:s', $this->sql_starttime);
         $msg[] = sprintf('%-6s', $q_time);
-        $msg[] = sprintf('%-4s', round(sys('la'), 1));
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
         $msg[] = Dev::short_query($this->cur_query);

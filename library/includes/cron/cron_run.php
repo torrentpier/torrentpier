@@ -54,7 +54,6 @@ foreach ($cron_jobs as $job) {
             $msg[] = 'start';
             $msg[] = date('m-d');
             $msg[] = date('H:i:s');
-            $msg[] = sprintf('%-4s', round(sys('la'), 1));
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = $job['cron_title'];
             $msg = implode(LOG_SEPR, $msg);
@@ -78,7 +77,6 @@ foreach ($cron_jobs as $job) {
             $msg[] = '  end';
             $msg[] = date('m-d');
             $msg[] = date('H:i:s');
-            $msg[] = sprintf('%-4s', round(sys('la'), 1));
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = round(utime() - $cron_start_time) . '/' . round(utime() - TIMESTART) . ' sec';
             $msg = implode(LOG_SEPR, $msg);
