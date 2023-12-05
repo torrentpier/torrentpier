@@ -187,8 +187,7 @@ class Atom
             $time = bb_date($last_time, 'H:i:s', 0);
             break;
         }
-        $atom = "";
-        $atom .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
+        $atom = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
         $atom .= "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:base=\"" . FULL_URL . "\">\n";
         $atom .= "<title>$title</title>\n";
         $atom .= "<updated>" . $date . "T$time+00:00</updated>\n";
