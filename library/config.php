@@ -629,6 +629,8 @@ $bb_cfg['captcha'] = [
 $bb_cfg['atom'] = [
     'path' => INT_DATA_DIR . '/atom', // without ending slash
     'url' => './internal_data/atom', // without ending slash
+    'direct_down' => true, // Allow direct downloading of torrents from feeds
+    'direct_view' => true // Allow direct viewing of post texts in feeds
 ];
 
 // Nofollow
