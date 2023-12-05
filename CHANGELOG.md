@@ -9,7 +9,6 @@
 - Improved cookie management 🍪 [\#1171](https://github.com/torrentpier/torrentpier/pull/1171) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced strpos() with simplified realization [\#1172](https://github.com/torrentpier/torrentpier/pull/1172) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced some 'switch' with the 'match' expression [\#1173](https://github.com/torrentpier/torrentpier/pull/1173) ([belomaxorka](https://github.com/belomaxorka))
-- Replaced some time() with TIMENOW constant [\#1174](https://github.com/torrentpier/torrentpier/pull/1174) ([belomaxorka](https://github.com/belomaxorka))
 - Feature to ban specific torrent clients [\#1175](https://github.com/torrentpier/torrentpier/pull/1175) ([kovalensky](https://github.com/kovalensky))
 - Code re-formatting [\#1176](https://github.com/torrentpier/torrentpier/pull/1176) ([kovalensky](https://github.com/kovalensky))
 - Removed useless width for BBCode buttons [\#1180](https://github.com/torrentpier/torrentpier/pull/1180) ([belomaxorka](https://github.com/belomaxorka))
