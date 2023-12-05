@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$reserved_name = 'torrentpier.com'; // Use your domain name for auto-generated atom feeds
+$reserved_name = 'torrentpier.com';
 $reserved_port = 80;
 
 $bb_cfg = [];
