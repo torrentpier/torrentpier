@@ -15,6 +15,7 @@
 - Refactored memberlist.php 🎓 [\#1181](https://github.com/torrentpier/torrentpier/pull/1181) ([belomaxorka](https://github.com/belomaxorka))
 - Peer ID was erased if it contained non-latin characters [\#1185](https://github.com/torrentpier/torrentpier/pull/1185) ([belomaxorka](https://github.com/belomaxorka))
 - Removed verify_id() function [\#1187](https://github.com/torrentpier/torrentpier/pull/1187) ([belomaxorka](https://github.com/belomaxorka))
+- Removed sys_getloadavg() [\#1188](https://github.com/torrentpier/torrentpier/pull/1188) ([belomaxorka](https://github.com/belomaxorka))
 - Updated deps [\#1177](https://github.com/torrentpier/torrentpier/pull/1177), [\#1178](https://github.com/torrentpier/torrentpier/pull/1178),[\#1183](https://github.com/torrentpier/torrentpier/pull/1183), [\#1184](https://github.com/torrentpier/torrentpier/pull/1184) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1179](https://github.com/torrentpier/torrentpier/pull/1179), [\#1182](https://github.com/torrentpier/torrentpier/pull/1182) ([Exileum](https://github.com/Exileum))
 
