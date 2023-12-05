@@ -148,8 +148,7 @@ class TorrentFileList
                 $allItems .= "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
             } else {
                 $length = $value['']['length'];
-                $root = bin2hex($value['']['pieces root'] ?? '');
-                $allItems .= "<li><span>$key<i>$length</i><p>$root</p></span></li>";
+                $allItems .= "<li><span>$key<i>$length</i></span></li>";
             }
         }
 
