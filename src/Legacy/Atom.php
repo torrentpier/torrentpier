@@ -232,8 +232,7 @@ class Atom
             $atom .= "	<id>tag:rto.feed," . $date . ":/t/$topic_id</id>\n";
             if ($bb_cfg['atom']['direct_down'] && isset($topic['attach_id'])) {
                 $atom .= "	<link href=\"" . DL_URL . $topic['attach_id'] . "\" />\n";
-            }
-            else {
+            } else {
                 $atom .= "	<link href=\"" . TOPIC_URL . $topic_id . "\" />\n";
             }
 
