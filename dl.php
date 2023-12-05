@@ -143,9 +143,26 @@ if (!$authorised) {
 
 $datastore->rm('cat_forums');
 
-//
+
+// Check tor status
+if (!IS_AM) {
+    $sql = 'SELECT tor_status, poster_id FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
+
+    if (!($result = DB()->sql_query($sql))) {
+        bb_die('Could not query tor_status information');
+    }
+
+    $row = DB()->sql_fetchrow($result);
+
+    if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
+        bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$row['tor_status']]);
+    }
+
+    DB()->sql_freeresult($result);
+}
+
 // Get Information on currently allowed Extensions
-//
+
 $rows = get_extension_informations();
 $num_rows = count($rows);
 

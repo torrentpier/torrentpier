@@ -83,7 +83,7 @@ if (!isset($info_hash)) {
 $info_hash_hex = bin2hex($info_hash);
 
 // Store peer id
-$peer_id_sql = rtrim(DB()->escape(preg_replace('/[^a-zA-Z0-9\-\_\.]/', '', $peer_id)), ' ');
+$peer_id_sql = rtrim(DB()->escape(preg_replace('/[^a-zA-Z0-9\-\_]/', '', $peer_id)), ' ');
 
 // Check info_hash length
 if (strlen($info_hash) !== 20) {
@@ -390,13 +390,12 @@ if (!$output) {
     // Retrieve peers
     $numwant = (int)$bb_cfg['tracker']['numwant'];
     $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
-    $priority = $seeder ? 'seeder ASC, RAND()' : 'RAND()';
 
     $rowset = DB()->fetch_rowset("
         SELECT ip, ipv6, port
         FROM " . BB_BT_TRACKER . "
         WHERE topic_id = $topic_id
-        ORDER BY $priority
+        ORDER BY seeder ASC, RAND()
         LIMIT $numwant
     ");
 
