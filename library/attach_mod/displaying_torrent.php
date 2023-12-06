@@ -215,6 +215,7 @@ if ($tor_reged && $tor_info) {
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
+            'FILELIST_LINK' => !empty($tor_info['info_hash_v2']) ? (FILELIST_URL . $tor_info['topic_id']) : false,
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size),

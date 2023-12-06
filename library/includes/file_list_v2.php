@@ -19,7 +19,7 @@ if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
     die($lang['BT_PRIVATE_TRACKER']);
 }
 
-$topic_id = !empty($_GET['topic']) ? (int)$_GET['topic'] : (http_response_code(404) && die($lang['INVALID_TOPIC_ID']));
+$topic_id = !empty($_GET['filelist']) ? (int)$_GET['filelist'] : (http_response_code(404) && die($lang['INVALID_TOPIC_ID']));
 
 $sql = 'SELECT t.attach_id, t.info_hash_v2, t.size, ad.physical_filename
         FROM ' . BB_BT_TORRENTS . ' t
