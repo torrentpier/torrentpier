@@ -171,7 +171,7 @@
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
             <!-- IF postrow.attach.tor_reged.HASH_V2 -->
-            <p><a href="{FULL_URL}viewtopic.php?filelist&topic={TOPIC_ID}" title = "File hashes | .torrent meta-info" target="_blank">...</a></p>
+            <p><a href="{postrow.attach.tor_reged.FILELIST_LINK}" title = "File hashes | .torrent meta-info" target="_blank">...</a></p>
             <!-- ENDIF -->
 		</td>
 	</tr>
