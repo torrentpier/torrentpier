@@ -21,6 +21,7 @@
 - Remove unnecessary file hashes for in-forum file-listing [\#1192](https://github.com/torrentpier/torrentpier/pull/1192) ([kovalensky](https://github.com/kovalensky))
 - Use one GET variable for filelisting [\#1193](https://github.com/torrentpier/torrentpier/pull/1193) ([kovalensky](https://github.com/kovalensky))
 - Refactored poll.php [\#1194](https://github.com/torrentpier/torrentpier/pull/1194) ([belomaxorka](https://github.com/belomaxorka))
+- Removed useless global $lang; from info.php [\#1195](https://github.com/torrentpier/torrentpier/pull/1195) ([belomaxorka](https://github.com/belomaxorka))
 - Updated deps [\#1177](https://github.com/torrentpier/torrentpier/pull/1177), [\#1178](https://github.com/torrentpier/torrentpier/pull/1178),[\#1183](https://github.com/torrentpier/torrentpier/pull/1183), [\#1184](https://github.com/torrentpier/torrentpier/pull/1184) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1179](https://github.com/torrentpier/torrentpier/pull/1179), [\#1182](https://github.com/torrentpier/torrentpier/pull/1182), [\#1191](https://github.com/torrentpier/torrentpier/pull/1191) ([Exileum](https://github.com/Exileum))
 
