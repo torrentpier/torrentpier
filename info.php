@@ -14,13 +14,10 @@ require __DIR__ . '/common.php';
 // Start session management
 $user->session_start();
 
-global $lang;
-
 $info = [];
-$html_dir = LANG_DIR . 'html/';
-$req_mode = (string)($_REQUEST['show'] ?? '');
+$htmlDir = LANG_DIR . 'html/';
 
-switch ($req_mode) {
+switch ((string)$_REQUEST['show']) {
     case 'advert':
         $info['title'] = $lang['ADVERT'];
         $info['src'] = 'advert.html';
@@ -43,7 +40,7 @@ switch ($req_mode) {
         break;
 }
 
-$require = file_exists($html_dir . $info['src']) ? $html_dir . $info['src'] : false;
+$require = file_exists($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
 
 $template->assign_vars([
     'PAGE_TITLE' => mb_strtoupper($info['title'], 'UTF-8'),
