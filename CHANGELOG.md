@@ -13,7 +13,7 @@
 - Code re-formatting [\#1176](https://github.com/torrentpier/torrentpier/pull/1176) ([kovalensky](https://github.com/kovalensky))
 - Removed useless width for BBCode buttons [\#1180](https://github.com/torrentpier/torrentpier/pull/1180) ([belomaxorka](https://github.com/belomaxorka))
 - Refactored memberlist.php 🎓 [\#1181](https://github.com/torrentpier/torrentpier/pull/1181) ([belomaxorka](https://github.com/belomaxorka))
-- Peer ID was erased if it contained non-latin characters [\#1185](https://github.com/torrentpier/torrentpier/pull/1185) ([belomaxorka](https://github.com/belomaxorka))
+- Peer ID was erased if it contained non-latin characters [\#1185](https://github.com/torrentpier/torrentpier/pull/1185) ([kovalensky](https://github.com/kovalensky))
 - Removed verify_id() function [\#1187](https://github.com/torrentpier/torrentpier/pull/1187) ([belomaxorka](https://github.com/belomaxorka))
 - Removed sys_getloadavg() [\#1188](https://github.com/torrentpier/torrentpier/pull/1188) ([belomaxorka](https://github.com/belomaxorka))
 - RC2 timeline [\#1186](https://github.com/torrentpier/torrentpier/pull/1186) ([kovalensky](https://github.com/kovalensky))
