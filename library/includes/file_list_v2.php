@@ -66,7 +66,7 @@ $data = [
     'client' => isset($torrent['created by']) ? htmlCHR(substr($torrent['created by'], 0, 20)) : 'unknown client',
     'date' => (isset($torrent['creation date']) && is_numeric($torrent['creation date'])) ? delta_time($torrent['creation date']) : 'unknown',
     'size' => humn_size($row['size']),
-    'site_url' => FULL_URL
+    'site_url' => TOPIC_URL . $topic_id,
 ];
 
 header('Cache-Control: public, max-age=3600');
@@ -150,7 +150,7 @@ sup {
     opacity: 0.97;
 }
 </style>
-<a href = "{$data['site_url']}viewtopic.php?t={$topic_id}" style = "font-family: Monospace; color: #569904;">🠔 Back to the topic</a>
+<a href = "{$data['site_url']}" style = "font-family: Monospace; color: #569904;">🠔 Back to the topic</a>
 <center>
     <h2 style="color: #b3b3b3; font-family: Monospace;">Name: {$data['name']} | Age: ({$data['date']}) | Size: {$data['size']}</h2>
 <p>
