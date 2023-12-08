@@ -143,7 +143,6 @@ if (!$authorised) {
 
 $datastore->rm('cat_forums');
 
-
 // Check tor status
 if (!IS_AM) {
     $sql = 'SELECT tor_status, poster_id FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
@@ -162,7 +161,6 @@ if (!IS_AM) {
 }
 
 // Get Information on currently allowed Extensions
-
 $rows = get_extension_informations();
 $num_rows = count($rows);
 
