@@ -30,7 +30,7 @@ if (!isset($info_hash)) {
 }
 
 // Store info hash in hex format
-$info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
+$info_hash_hex = bin2hex($info_hash);
 
 // Handle multiple hashes
 
@@ -97,7 +97,7 @@ if (!empty($info_hash_count)) {
 }
 
 if (empty($torrents)) {
-    msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
+    msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
 
 die(\Arokettu\Bencode\Bencode::encode($torrents));
