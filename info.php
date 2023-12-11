@@ -17,7 +17,7 @@ $user->session_start();
 $info = [];
 $htmlDir = LANG_DIR . 'html/';
 
-switch ((string)$_REQUEST['show']) {
+switch ((string)$_REQUEST['show'] ?? 'not_found') {
     case 'advert':
         $info['title'] = $lang['ADVERT'];
         $info['src'] = 'advert.html';
