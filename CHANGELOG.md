@@ -6,6 +6,10 @@
 **Merged pull requests:**
 
 - Updated copyright year [\#1201](https://github.com/torrentpier/torrentpier/pull/1201) ([belomaxorka](https://github.com/belomaxorka))
+- Update file_list_v2.php [\#1202](https://github.com/torrentpier/torrentpier/pull/1202) ([kovalensky](https://github.com/kovalensky))
+- Updated TorrentPier footer text (: [\#1204](https://github.com/torrentpier/torrentpier/pull/1204) ([kovalensky](https://github.com/kovalensky))
+- Repository link in page footer instead of forum [\#1205](https://github.com/torrentpier/torrentpier/pull/1205) ([kovalensky](https://github.com/kovalensky))
+- Minor improvements [\#1206](https://github.com/torrentpier/torrentpier/pull/1206) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
