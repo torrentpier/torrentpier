@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -234,8 +234,8 @@ $lang['RULES_VOTE_CAN'] = 'Вы <b>можете</b> голосовать в оп
 $lang['RULES_VOTE_CANNOT'] = 'Вы <b>не можете</b> голосовать в опросах';
 $lang['RULES_MODERATE'] = 'Вы <b>можете</b> модерировать этот форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
-$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
+$lang['NO_TOPICS_POST_ONE'] = 'В этом форуме пока нет сообщений<br />Нажмите на иконку <b>"New Topic"</b> и ваше сообщение будет первым.';
+$lang['NO_RELEASES_POST_ONE'] = 'В этом форуме пока нет релизов<br />Нажмите на иконку <b>"New Release"</b> и ваш релиз будет первым.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Просмотр темы';
@@ -592,7 +592,7 @@ $lang['RESET_AUTOLOGIN'] = 'Удалить ключ автоматическог
 $lang['RESET_AUTOLOGIN_EXPL'] = 'включая все места, где вы заходили на форум с включенным авто-входом';
 
 $lang['AVATAR'] = 'Аватара';
-$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
+$lang['AVATAR_EXPLAIN'] = 'Показывает небольшое изображение под информацией о вас в сообщениях. Может быть показано только одно изображение, шириной не более %d пикселов, высотой не более %d пикселов и объемом не более %d.';
 $lang['AVATAR_DELETE'] = 'Удалить аватар';
 $lang['AVATAR_DISABLE'] = 'Опция управления аватарой отключена за нарушение <a href="%s"><b>правил форума</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Загрузить аватару';
@@ -681,17 +681,17 @@ $lang['DESC'] = 'по убыванию';
 $lang['ORDER'] = 'Порядок';
 
 // Thanks
-$lang['THANK_TOPIC'] = 'Vote for this topic';
-$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
-$lang['LAST_LIKES'] = 'Last votes';
-$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
-$lang['NO_LIKES'] = 'Nobody gave a vote yet';
-$lang['LIKE_ALREADY'] = 'You already voted this topic';
+$lang['THANK_TOPIC'] = 'Голосовать за эту тему';
+$lang['THANKS_GRATITUDE'] = 'Спасибо за голос';
+$lang['LAST_LIKES'] = 'Последние проголосовавшие';
+$lang['LIKE_OWN_POST'] = 'Вы не можете голосовать за собственный топик';
+$lang['NO_LIKES'] = 'Никто еще не проголосовал';
+$lang['LIKE_ALREADY'] = 'Вы уже проголосовали за этот пост';
 
 // Invites
-$lang['INVITE_CODE'] = 'Invite code';
-$lang['INCORRECT_INVITE'] = 'Invite not found';
-$lang['INVITE_EXPIRED'] = 'Invite expired';
+$lang['INVITE_CODE'] = 'Код приглашения';
+$lang['INCORRECT_INVITE'] = 'Приглашение не найдено';
+$lang['INVITE_EXPIRED'] = 'Срок действия приглашения истек';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Группы';
@@ -737,8 +737,8 @@ $lang['GROUP_REQUEST'] = 'Было подана просьба о вступле
 $lang['GROUP_APPROVED'] = 'Ваша просьба была удовлетворена.';
 $lang['GROUP_ADDED'] = 'Вы были включены в группу';
 $lang['ALREADY_MEMBER_GROUP'] = 'Вы уже являетесь членом этой группы';
-$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
-$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
+$lang['USER_IS_MEMBER_GROUP'] = 'Пользователь %s уже является членом этой группы';
+$lang['USER_IS_MOD_GROUP'] = '%s является модератором этой группы';
 $lang['GROUP_TYPE_UPDATED'] = 'Тип группы успешно изменен';
 $lang['EFFECTIVE_DATE'] = 'Дата вступления';
 
@@ -1018,7 +1018,7 @@ $lang['ATTACHMENT_PHP_SIZE_NA'] = 'Вложение слишком велико.
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'Вложение слишком велико.<br />Максимальный размер закачиваемого файла: %d MB.<br />Отметьте, что эта величина определена в php.ini и Attachment Mod не может изменить это значение в большую сторону.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'Расширение %s запрещено администратором'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'Вы не можете публиковать файлы с расширением %s в этом форуме'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'Вложение слишком велико.<br/>Максимальный размер: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Достигнут максимальный общий размер ваших вложений. Пожалуйста, обратитесь к администратору по этому вопросу.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Вложение невозможно, так как максимальное количество (%d) вложений в этом сообщении достигнуто.'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'Изображение должно быть меньше, чем %d пикселей в ширину и %d пикселей в высоту.';
@@ -1072,12 +1072,12 @@ $lang['BT_ADDED'] = 'Добавлен';
 $lang['BT_REG_ON_TRACKER'] = 'Зарегистрировать торрент';
 $lang['BT_REG_FAIL'] = 'Не удалось зарегистрировать торрент на трекере';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Другой торрент с таким же info_hash уже <a href="%s"><b>зарегистрирован</b></a>';
-$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
-$lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'В данный момент администратор отключил только v1 торренты, разрешены: v2 и гибриды (hybrids)';
+$lang['BT_V2_ONLY_DISALLOWED'] = 'В данный момент администратор отключил v2 торренты, разрешены: v1 и гибриды (hybrids)';
+$lang['BT_V2_FILE_LIST_ONLY'] = 'В настоящее время для отдельного списка файлов поддерживаются только торренты с поддержкой BitTorrent версии 2';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Разрегистрировать торрент';
 $lang['BT_UNREGISTERED'] = 'Торрент разрегистрирован';
-$lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
+$lang['BT_UNREGISTERED_ALREADY'] = 'Торрент уже разрегистрирован';
 $lang['BT_REGISTERED'] = 'Торрент зарегистрирован на трекере<br /><br />Теперь вам <a href="%s"><b>нужно его скачать</b></a> и поставить на закачку у самого себя в ту же директорию, где лежат оригинальные файлы';
 $lang['INVALID_ANN_URL'] = 'Неправильный Аnnounce URL [%s]<br /><br />должен быть <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Невозможно добавить пасскей<br /><br />Торрент не зарегистрирован на трекере';
@@ -1098,34 +1098,34 @@ $lang['RELEASING'] = 'Свои';
 $lang['SEEDING'] = 'Сидер';
 $lang['LEECHING'] = 'Личер';
 $lang['IS_REGISTERED'] = 'Зарегистрирован';
-$lang['MAGNET'] = 'Magnet-link';
-$lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
+$lang['MAGNET'] = 'Magnet-ссылка';
+$lang['MAGNET_v2'] = 'Magnet-ссылка (поддерживается BitTorrent v2)';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Выберите статус';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Вы не выбрали статус.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Все статусы';
-$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
+$lang['TOR_STATUS_FORBIDDEN'] = 'Статус этой темы: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'не проверено',
     TOR_CLOSED => 'закрыто',
     TOR_APPROVED => 'проверено',
     TOR_NEED_EDIT => 'недооформлено',
     TOR_NO_DESC => 'неоформлено',
-    TOR_DUP => 'duplicate',
-    TOR_CLOSED_CPHOLD => 'closed (copyright)',
+    TOR_DUP => 'дубликат',
+    TOR_CLOSED_CPHOLD => 'закрыто (правообладателем)',
     TOR_CONSUMED => 'поглощено',
     TOR_DOUBTFUL => 'сомнительно',
-    TOR_CHECKING => 'being checked',
+    TOR_CHECKING => 'проверяется',
     TOR_TMP => 'временная',
     TOR_PREMOD => 'премодерация',
-    TOR_REPLENISH => 'replenishing',
+    TOR_REPLENISH => 'пополняемая',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Такого статуса не существует!';
 $lang['TORRENT_FAILED'] = 'Раздача не найдена!';
 $lang['TOR_STATUS_DUB'] = 'Раздача имеет тот же статус';
-$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
+$lang['TOR_DONT_CHANGE'] = 'Изменение статуса невозможно!';
 $lang['TOR_STATUS_OF'] = 'Раздача имеет статус:';
 $lang['TOR_STATUS_CHANGED'] = 'Статус изменил: ';
 $lang['TOR_BACK'] = ' назад';
@@ -1555,7 +1555,7 @@ $lang['DL_DL'] = 'Скачано';
 $lang['DL_UL_SPEED'] = 'Отдача';
 $lang['DL_DL_SPEED'] = 'Загрузка';
 $lang['DL_PORT'] = 'Порт';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'Клиент';
 $lang['DL_FORMULA'] = 'Формула: Отдано/Размер раздачи';
 $lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'Остановил Скачивание/Раздачу';
@@ -1731,8 +1731,8 @@ $lang['USER_AUTH_UPDATED'] = 'Права пользователя изменен
 $lang['GROUP_AUTH_UPDATED'] = 'Права группы изменены';
 
 $lang['AUTH_UPDATED'] = 'Права доступа изменены';
-$lang['AUTH_GENERAL_ERROR'] = 'Could not update admin status';
-$lang['AUTH_SELF_ERROR'] = 'Could not change yourself from an admin to user';
+$lang['AUTH_GENERAL_ERROR'] = 'Не удалось обновить статус администратора';
+$lang['AUTH_SELF_ERROR'] = 'Не удалось сменить себя с администратора на пользователя';
 $lang['CLICK_RETURN_USERAUTH'] = '%sВернуться к управлению правами пользователей%s';
 $lang['CLICK_RETURN_GROUPAUTH'] = '%sВернуться к управлению правами групп%s';
 $lang['CLICK_RETURN_FORUMAUTH'] = '%sВернуться к управлению доступом к форумам%s';
@@ -2332,8 +2332,8 @@ $lang['BT_ANNOUNCE_URL'] = 'URL-адрес анонсера';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'дополнительные разрешенные адреса можно задать в "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Запретить DHT сети';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Запретить обмен пирами и DHT (рекомендовано для приватных сетей, только url announce)';
-$lang['BT_PRIVATE_TRACKER'] = 'This tracker is private: file listing (for guests), DHT | PEX are disabled';
-$lang['BT_PRIVATE_TORRENT'] = 'The creator of this torrent made it private';
+$lang['BT_PRIVATE_TRACKER'] = 'Этот трекер является приватным: список файлов (для гостей), DHT | PEX отключен';
+$lang['BT_PRIVATE_TORRENT'] = 'Создатель этого торрента сделал его приватным';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Проверять announce url';
 $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'разрешить регистрацию на трекере только если announce url входит в список разрешенных';
 $lang['BT_REPLACE_ANN_URL'] = 'Заменять announce url';
@@ -2383,7 +2383,7 @@ $lang['TEMPLATE_DISABLE'] = 'Шаблон отключен';
 $lang['FOR_NEW_TEMPLATE'] = 'для новых шаблонов!';
 $lang['CHANGED'] = 'Изменено';
 $lang['REMOVED'] = 'Удалено';
-$lang['QUESTION'] = 'Confirm are you sure you want to perform this action';
+$lang['QUESTION'] = 'Вы уверены, что хотите выполнить это действие?';
 
 $lang['CRON_LIST'] = 'Список задач';
 $lang['CRON_ID'] = 'ID';
@@ -2544,7 +2544,7 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Топик был перенесен из ф
 $lang['BOT_MESS_SPLITS'] = 'Сообщения из этой темы были выделены в отдельный топик [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема была выделена из [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED'] = 'Call seeds';
+$lang['CALLSEED'] = 'Позвать скачавших';
 $lang['CALLSEED_EXPLAIN'] = 'Принимать уведомления с просьбой вернуться на раздачу';
 $lang['CALLSEED_SUBJECT'] = 'Помогите скачать %s';
 $lang['CALLSEED_TEXT'] = 'Здравствуйте![br]Ваша помощь необходима в раздаче [url=%s]%s[/url][br]Если Вы решили помочь, но уже удалили торрент-файл, Вы можете скачать его [url=%s]здесь[/url][br][br]Надеюсь на Вашу помощь!';
@@ -2558,12 +2558,12 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_lock' => 'Топик:<br /> <b>закрыт</b>',
     'mod_topic_unlock' => 'Топик:<br /> <b>открыт</b>',
     'mod_topic_split' => 'Топик:<br /> <b>разделен</b>',
-    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
-    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
-    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
+    'mod_topic_set_downloaded' => 'Топик:<br /> <b>скачивание разрешено</b>',
+    'mod_topic_unset_downloaded' => 'Топик:<br /> <b>скачивание запрещено</b>',
+    'mod_topic_renamed' => 'Топик:<br /> <b>переименован</b>',
     'mod_post_delete' => 'Пост:<br /> <b>удален</b>',
-    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
-    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
+    'mod_post_pin' => 'Пост:<br /> <b>закреплен</b>',
+    'mod_post_unpin' => 'Пост:<br /> <b>откреплен</b>',
     'adm_user_delete' => 'Юзер:<br /> <b>удален</b>',
     'adm_user_ban' => 'Юзер:<br /> <b>забанен</b>',
     'adm_user_unban' => 'Юзер:<br /> <b>разбанен</b>',
@@ -2596,8 +2596,8 @@ $lang['RELEASE_WELCOME'] = 'Заполните форму для релиза';
 $lang['NEW_RELEASE'] = 'Новый релиз';
 $lang['NEXT'] = 'Продолжить';
 $lang['OTHER'] = 'Другой';
-$lang['OTHERS'] = 'Others';
-$lang['ALL'] = 'All';
+$lang['OTHERS'] = 'Другие';
+$lang['ALL'] = 'Все';
 
 $lang['TPL_EMPTY_FIELD'] = 'Вы должны заполнить поле <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Вы должны выбрать <b>%s</b>';
@@ -2758,7 +2758,7 @@ $lang['FORUM_MAP'] = 'Карта форумов';
 $lang['ATOM_FEED'] = 'Лента';
 $lang['ATOM_ERROR'] = 'Ошибка генерации ленты';
 $lang['ATOM_SUBSCRIBE'] = 'Подписка на ленту';
-$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
+$lang['ATOM_NO_MODE'] = 'Не выбран режим для feed-канала';
 $lang['ATOM_NO_FORUM'] = 'Для этого форума нет ленты (нет начатых тем)';
 $lang['ATOM_NO_USER'] = 'Для этого пользователя нет ленты (нет начатых тем)';
 $lang['ATOM_UPDATED'] = 'Обновлено';
@@ -2803,11 +2803,11 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Каждая строка соответству�
 $lang['OLD_BROWSER'] = 'Вы используете устаревший браузер. Сайт может отображаться некорректно.';
 $lang['GO_BACK'] = 'Вернуться обратно';
 
-$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'File upload disabled';
+$lang['UPLOAD_ERROR_COMMON_DISABLED'] = 'Загрузка файлов отключена';
 $lang['UPLOAD_ERROR_COMMON'] = 'Ошибка загрузки файла';
 $lang['UPLOAD_ERROR_SIZE'] = 'Загруженный файл превышает максимальный размер %s';
 $lang['UPLOAD_ERROR_FORMAT'] = 'Недопустимый тип файла изображения';
-$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s pixels';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Размеры изображения превышают максимально допустимые %sx%s пикселей';
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'Загруженный файл не является изображением';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Расширение %s для загружаемых файлов не разрешено';
 $lang['UPLOAD_ERRORS'] = [
@@ -2833,7 +2833,7 @@ $lang['EMAILER_SUBJECT'] = [
     'GROUP_APPROVED' => 'Ваш запрос на вступление в группу пользователей был удовлетворен',
     'GROUP_REQUEST' => 'Запрос на вступление в вашу группу пользователей',
     'PRIVMSG_NOTIFY' => 'Новое личное сообщение',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread - %s',
+    'TOPIC_NOTIFY' => 'Уведомление об ответе в теме - %s',
     'USER_ACTIVATE' => 'Повторная активация аккаунта',
     'USER_ACTIVATE_PASSWD' => 'Подтверждение нового пароля',
     'USER_WELCOME' => 'Добро пожаловать на сайт %s',
