@@ -16,7 +16,7 @@ global $bb_cfg, $userdata, $template, $DBS, $lang;
 if (!empty($template)) {
     $template->assign_vars([
         'SIMPLE_FOOTER' => !empty($gen_simple_header),
-        'POWERED' => 'Tracker software by <a target="_blank" href="https://torrentpier.com">TorrentPier</a> &copy; 2005-' . date('Y'),
+        'POWERED' => 'Powered by <a target="_blank" href="https://github.com/torrentpier/torrentpier">TorrentPier</a> &copy; 2005-' . date('Y'),
         'SHOW_ADMIN_LINK' => (IS_ADMIN && !defined('IN_ADMIN')),
         'ADMIN_LINK_HREF' => 'admin/index.php',
     ]);
@@ -33,7 +33,7 @@ if (!$bb_cfg['gzip_compress']) {
 
 if ($show_dbg_info) {
     $gen_time = utime() - TIMESTART;
-    $gen_time_txt = sprintf('%.3f', $gen_time);
+    $gen_time_txt = sprintf('%.4f', $gen_time);
     $gzip_text = UA_GZIP_SUPPORTED ? "{$lang['GZIP_COMPRESSION']}: " : "<s>{$lang['GZIP_COMPRESSION']}:</s> ";
     $gzip_text .= $bb_cfg['gzip_compress'] ? $lang['ON'] : $lang['OFF'];
 
@@ -41,7 +41,7 @@ if ($show_dbg_info) {
 
     if (!empty($DBS)) {
         $sql_t = $DBS->sql_timetotal;
-        $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
+        $sql_time_txt = ($sql_t) ? sprintf('%.4f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
         $num_q = $DBS->num_queries;
         $stat .= " &nbsp;|&nbsp; {$DBS->get_db_obj()->engine}: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
     }
