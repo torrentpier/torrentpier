@@ -11,6 +11,7 @@
 - Repository link in page footer instead of forum [\#1205](https://github.com/torrentpier/torrentpier/pull/1205) ([kovalensky](https://github.com/kovalensky))
 - Minor improvements [\#1206](https://github.com/torrentpier/torrentpier/pull/1206) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements for dl.php [\#1209](https://github.com/torrentpier/torrentpier/pull/1209) ([belomaxorka](https://github.com/belomaxorka))
+- Cleanup for attach_mod [\#1210](https://github.com/torrentpier/torrentpier/pull/1210) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
