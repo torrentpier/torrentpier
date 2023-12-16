@@ -47,7 +47,6 @@ class TorrentFileList
                 return $this->fileTreeList($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name'] ?? ''); //v2
             }
         }
-
         $this->build_filelist_array();
 
         if ($this->multiple) {
@@ -69,6 +68,8 @@ class TorrentFileList
      */
     private function build_filelist_array()
     {
+        global $bb_cfg;
+
         $info = $this->tor_decoded['info'];
 
         if (isset($info['name.utf-8'])) {
@@ -90,7 +91,11 @@ class TorrentFileList
                 if (isset($f['attr']) && $f['attr'] === 'p') {
                     continue;
                 }
-                array_deep($f['path'], 'clean_tor_dirname');
+
+                $structure = array_deep($f['path'], 'clean_tor_dirname', time_limit: $bb_cfg['flist_time_limit']);
+                if (isset($structure['timeout'])) {
+                    bb_die("Too many nested files/directories for file listing, aborting after \n(" . $structure['recs'] . ") recursive calls\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
+                }
 
                 $length = isset($f['length']) ? (float)$f['length'] : 0;
                 $subdir_count = \count($f['path']) - 1;

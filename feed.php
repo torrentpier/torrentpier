@@ -27,7 +27,6 @@ if ($mode === 'get_feed_url' && ($type === 'f' || $type === 'u') && $id >= 0) {
     if ($type == 'f') {
         // Check if the user has actually sent a forum ID
         $sql = "SELECT allow_reg_tracker, forum_name FROM " . BB_FORUMS . " WHERE forum_id = $id LIMIT 1";
-        //DIE($sql);
         if (!$forum_data = DB()->fetch_row($sql)) {
             if ($id == 0) {
                 $forum_data = [];

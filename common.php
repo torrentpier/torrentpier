@@ -302,8 +302,18 @@ function make_rand_str(int $length = 10): string
     return $randomString;
 }
 
-function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
+function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $time_limit = false)
 {
+    if ($time_limit) {
+        static $recursions = 0;
+        if (time() > (TIMENOW + $time_limit)) {
+            return [
+                'timeout' => true,
+                'recs' => $recursions
+            ];
+        }
+        $recursions++;
+    }
     if (is_array($var)) {
         foreach ($var as $k => $v) {
             if (is_array($v)) {
