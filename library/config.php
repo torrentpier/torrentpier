@@ -574,7 +574,6 @@ $bb_cfg['file_id_ext'] = [
     4 => 'png',
     5 => 'rar',
     6 => 'tar',
-    // 7 => 'tiff',
     8 => 'torrent',
     9 => 'zip',
     10 => '7z',
