@@ -36,7 +36,6 @@ if (!isset($_GET[$passkey_key]) || !is_string($_GET[$passkey_key])) {
 }
 
 // Input var names
-
 // String
 $input_vars_str = ['info_hash', 'peer_id', 'event', $passkey_key];
 // Numeric
@@ -182,11 +181,13 @@ if ($lp_info) {
     $hybrid_unrecord = $lp_info['hybrid_unrecord'] ?? false;
 } else {
     $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+
     /**
      * Currently torrent clients send truncated v2 hashes (the design raises questions).
      * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
     $info_hash_where = "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
+
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
@@ -200,7 +201,7 @@ if ($lp_info) {
 
     // Verify if torrent registered on tracker and user authorized
     if (empty($row['topic_id'])) {
-        msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
+        msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
     }
     if (empty($row['user_id'])) {
         msg_die('Please LOG IN and RE-DOWNLOAD this torrent (user not found)');
@@ -349,7 +350,6 @@ if ($lp_info && empty($hybrid_unrecord)) {
 }
 
 if ((!$lp_info || !$peer_info_updated) && !$stopped && empty($hybrid_unrecord)) {
-
     $columns = "peer_hash, topic_id, user_id, $ip_version, port, seeder, releaser, tor_type, uploaded, downloaded, remain, speed_up, speed_down, up_add, down_add, update_time, complete, peer_id";
     $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time, $complete, '$peer_id_sql'";
 
@@ -404,7 +404,6 @@ if (!$output) {
     }
 
     if ($compact_mode) {
-
         $peers = '';
         $peers6 = '';
 
