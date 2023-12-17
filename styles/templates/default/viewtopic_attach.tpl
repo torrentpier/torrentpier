@@ -157,8 +157,8 @@
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
             <!-- IF not postrow.attach.tor_reged.TOR_FROZEN -->
-            <br><!-- IF postrow.attach.tor_reged.HASH and not postrow.attach.tor_reged.TOR_FROZEN --><br>info_hash: {postrow.attach.tor_reged.HASH}<!-- ENDIF -->
-            <!-- IF postrow.attach.tor_reged.HASH_V2 and not postrow.attach.tor_reged.TOR_FROZEN --><br>info_hash v2: {postrow.attach.tor_reged.HASH_V2}<!-- ENDIF -->
+            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: {postrow.attach.tor_reged.HASH}<!-- ENDIF -->
+            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: {postrow.attach.tor_reged.HASH_V2}<!-- ENDIF -->
             <!-- ENDIF -->
         </td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
