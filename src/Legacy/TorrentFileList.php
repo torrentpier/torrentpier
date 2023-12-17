@@ -94,7 +94,7 @@ class TorrentFileList
 
                 $structure = array_deep($f['path'], 'clean_tor_dirname', time_limit: $bb_cfg['flist_time_limit']);
                 if (isset($structure['timeout'])) {
-                    bb_die("Too many nested files/directories for file listing, aborting after \n" . $structure['recs'] . " recursive calls\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
+                    bb_die("Too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
                 }
 
                 $length = isset($f['length']) ? (float)$f['length'] : 0;
