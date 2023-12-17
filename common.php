@@ -302,11 +302,11 @@ function make_rand_str(int $length = 10): string
     return $randomString;
 }
 
-function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $time_limit = false)
+function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $timeout = false)
 {
-    if ($time_limit) {
+    if ($timeout) {
         static $recursions = 0;
-        if (time() > (TIMENOW + $time_limit)) {
+        if (time() > (TIMENOW + $timeout)) {
             return [
                 'timeout' => true,
                 'recs' => $recursions
