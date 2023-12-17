@@ -46,4 +46,5 @@ var.ajax-params {
 .loading-1 {
   background: transparent url(../images/loading.gif) no-repeat left center;
   padding-left: 22px;
+  padding-block: inherit;
 }
