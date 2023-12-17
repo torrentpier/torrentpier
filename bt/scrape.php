@@ -32,15 +32,18 @@ if (!isset($info_hash)) {
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
 
-// Handle multiple hashes
+// Check info_hash length
+if (strlen($info_hash) !== 20) {
+    msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
+}
 
+// Handle multiple hashes
 preg_match_all('/info_hash=([^&]*)/i', $_SERVER['QUERY_STRING'], $info_hash_array);
 
 $torrents = [];
 $info_hashes = [];
 
 foreach ($info_hash_array[1] as $hash) {
-
     $decoded_hash = urldecode($hash);
 
     if (strlen($decoded_hash) !== 20) {
@@ -57,7 +60,6 @@ foreach ($info_hash_array[1] as $hash) {
 $info_hash_count = count($info_hashes);
 
 if (!empty($info_hash_count)) {
-
     if ($info_hash_count > $bb_cfg['max_scrapes']) {
         $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
     }
@@ -65,10 +67,9 @@ if (!empty($info_hash_count)) {
     $info_hashes_sql = implode('\', \'', $info_hashes);
 
     /**
-    * Currently torrent clients send truncated v2 hashes (the design raises questions).
-    * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
-    */
-
+     * Currently torrent clients send truncated v2 hashes (the design raises questions).
+     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+     */
     $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
 
     $sql = "
@@ -96,6 +97,7 @@ if (!empty($info_hash_count)) {
     }
 }
 
+// Verify if torrent registered on tracker
 if (empty($torrents)) {
     msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
