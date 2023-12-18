@@ -816,6 +816,7 @@ else {
             'TOPIC_AUTHOR' => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
             'LAST_POSTER' => profile_url(array('username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
             'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
+            'LAST_POST_TIME_RAW' => $topic['topic_last_post_time'],
             'LAST_POST_ID' => $topic['topic_last_post_id'],
         ));
     }

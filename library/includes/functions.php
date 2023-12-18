@@ -811,7 +811,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
         $www = $lang['NOSELECT'];
     }
 
-    return ['from' => $from, 'joined' => $joined, 'posts' => $posts, 'pm' => $pm, 'avatar' => $avatar, 'user_time' => $user_time, 'email' => $email, 'www' => $www];
+    return ['from' => $from, 'joined' => $joined, 'joined_raw' => $row['user_regdate'], 'posts' => $posts, 'pm' => $pm, 'avatar' => $avatar, 'user_time' => $user_time, 'user_time_raw' => $row['user_time'], 'email' => $email, 'www' => $www];
 }
 
 function get_bt_userdata($user_id)
