@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'למצוא נושאים המשתמש'; // Find al
 $lang['NO_USER_ID_SPECIFIED'] = 'מצטער, אבל משתמש זה אינו קיים.';
 $lang['WRONG_PROFILE'] = 'לא ניתן לשנות פרופיל זה היא לא שלך.';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'את הקובץ בכתובת האתר שנתת לא מכיל נתונים';
 $lang['NO_CONNECTION_URL'] = 'חיבור לא יכול להיות עשה את כתובת האתר שנתת';
 $lang['INCOMPLETE_URL'] = 'הכתובת שהזנת אינה שלמה';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'לא יכול לרשום סיקור על טראקר';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'עוד סיקור עם אותו info_hash כבר <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'הסר מ-tracker';
 $lang['BT_UNREGISTERED'] = 'סיקור לא רשומים';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
