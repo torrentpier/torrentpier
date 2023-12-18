@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Benutzer Themen'; // Find all topics by username
 $lang['NO_USER_ID_SPECIFIED'] = 'Sorry, aber, dass Benutzer nicht existiert.';
 $lang['WRONG_PROFILE'] = 'Sie können ein Profil Bearbeiten, das ist nicht Ihre eigenen.';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Die Datei an der URL, die Sie gab, enthält keine Daten';
 $lang['NO_CONNECTION_URL'] = 'Eine Verbindung konnte nicht hergestellt werden, um die URL, die Sie gab';
 $lang['INCOMPLETE_URL'] = 'Die URL, die Sie eingegeben haben, ist unvollständig';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'Konnten Sie nicht registrieren, torrent-tracker auf';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Anderen torrent mit der gleichen info_hash bereits <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Entfernen von tracker';
 $lang['BT_UNREGISTERED'] = 'Unregistered Torrent';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
