@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Meg a felhasználói témák'; // Find all topics
 $lang['NO_USER_ID_SPECIFIED'] = 'Sajnálom, de ez a felhasználó nem létezik.';
 $lang['WRONG_PROFILE'] = 'Nem lehet módosítani a profil, ami nem a tiéd.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Csak egy típusú avatar megadható';
 $lang['FILE_NO_DATA'] = 'A fájl URL-t, amit adott nem tartalmaz adatokat';
 $lang['NO_CONNECTION_URL'] = 'Egy kapcsolat, nem lehet-e, hogy az URL-t adott';
 $lang['INCOMPLETE_URL'] = 'A megadott URL hiányos';
