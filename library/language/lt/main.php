@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Ieškoti vartotojo temos'; // Find all topics by 
 $lang['NO_USER_ID_SPECIFIED'] = 'Atsiprašome, bet vartotojas neegzistuoja.';
 $lang['WRONG_PROFILE'] = 'Jums negali keisti aplinką, kad ne savo.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Tik vieno tipo avataras gali būti nurodyta,';
 $lang['FILE_NO_DATA'] = 'Failo URL, jums davė sudėtyje nėra duomenų';
 $lang['NO_CONNECTION_URL'] = 'Ryšys negali būti pateiktas URL jums davė';
 $lang['INCOMPLETE_URL'] = 'URL adresas, kurį jūs įvedėte yra neišsamūs';
