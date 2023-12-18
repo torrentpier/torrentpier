@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Пайдо мавзӯъҳои истифодаб�
 $lang['NO_USER_ID_SPECIFIED'] = 'Бубахшед, аммо ин истифодабаранда вуҷуд надорад.';
 $lang['WRONG_PROFILE'] = 'Шумо метавонед профили аст, ки худи ту нест, тағйир нест.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Танҳо як намуди аватари метавон муайян';
 $lang['FILE_NO_DATA'] = 'Файл дар URL ба шумо дорои маълумоте надорад';
 $lang['NO_CONNECTION_URL'] = 'Пайвастшавӣ метавонад ба URL ба шумо баста шавад';
 $lang['INCOMPLETE_URL'] = 'Дар URL шумо ворид нопурра аст';
