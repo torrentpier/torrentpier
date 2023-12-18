@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Atrast lietotāja tēmas'; // Find all topics by 
 $lang['NO_USER_ID_SPECIFIED'] = 'Atvainojiet, bet, ka lietotājs neeksistē.';
 $lang['WRONG_PROFILE'] = 'Jūs nevarat modificētu profilu, kas nav jūsu.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Tikai viena tipa avatar var būt norādīts';
 $lang['FILE_NO_DATA'] = 'Faila URL, kas jums deva satur nav datu';
 $lang['NO_CONNECTION_URL'] = 'Savienojumu nevar tikt veikti uz URL, kas jums deva';
 $lang['INCOMPLETE_URL'] = 'URL, ko jūs ievadījāt, ir nepilnīga';
