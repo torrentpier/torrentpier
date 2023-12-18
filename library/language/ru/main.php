@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Начатые темы'; // Find all topics by u
 $lang['NO_USER_ID_SPECIFIED'] = 'Извините, такого пользователя не существует';
 $lang['WRONG_PROFILE'] = 'Вы не можете редактировать чужой профиль.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Может быть указан только один тип аватары';
 $lang['FILE_NO_DATA'] = 'Файл по указанному вами URL не содержит данных';
 $lang['NO_CONNECTION_URL'] = 'Невозможно установить соединения с указанным вами URL';
 $lang['INCOMPLETE_URL'] = 'Вы указали неполный URL';
