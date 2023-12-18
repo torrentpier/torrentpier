@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'მოვძებნოთ მომხმარ
 $lang['NO_USER_ID_SPECIFIED'] = 'უკაცრავად, მაგრამ, რომ მომხმარებელი არ არსებობს.';
 $lang['WRONG_PROFILE'] = 'თქვენ არ შეგიძლიათ მოდიფიცირება ნახვა, რომ არ არის თქვენი საკუთარი.';
 
-$lang['ONLY_ONE_AVATAR'] = 'მხოლოდ ერთი ტიპის ავატარი შეიძლება იყოს მითითებული';
 $lang['FILE_NO_DATA'] = 'ფაილი ზე URL თქვენ მისცა არ შეიცავს მონაცემებს';
 $lang['NO_CONNECTION_URL'] = 'კავშირი არ შეიძლებოდა URL თქვენ მისცა';
 $lang['INCOMPLETE_URL'] = 'URL თქვენ შევიდა არასრული';
