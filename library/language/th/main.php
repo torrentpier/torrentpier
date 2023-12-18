@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'เจอของผู้ใช้หัวข�
 $lang['NO_USER_ID_SPECIFIED'] = 'ขอโทษแต่มันใช้ยังไม่มีอยู่';
 $lang['WRONG_PROFILE'] = 'คุณไม่สามารถแก้ไขโพรไฟล์นั่นไม่ใช่ของคุณเอง';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'แฟ้มที่อยู่ URL ที่คุณให้ไม่มีข้อมูล';
 $lang['NO_CONNECTION_URL'] = 'เป็นการเชื่อมต่อไม่สามารถทำเพื่อที่อยู่ URL ที่คุณให้';
 $lang['INCOMPLETE_URL'] = 'ที่อยู่ URL ที่คุณป้อนไปยังไม่สมบูรณ์';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'ไม่สามารถลงทะเบียน�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'อีกทอร์เรนต์กับเดียวกัน info_hash แล้ว <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ลบออกจากแทร็กเกอร์';
 $lang['BT_UNREGISTERED'] = 'ทอร์เรนต์ไม่จดทะเบี';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
