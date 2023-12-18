@@ -28,11 +28,14 @@ function init_complete_extensions_data()
         $GLOBALS['datastore']->update('attach_extensions');
         $extension_informations = get_extension_informations();
     }
-    $allowed_extensions = [];
 
+    $allowed_extensions = [];
     for ($i = 0, $size = count($extension_informations); $i < $size; $i++) {
         $extension = strtolower(trim($extension_informations[$i]['extension']));
-        $allowed_extensions[] = $extension;
+        // Get allowed extensions
+        if ((int)$extension_informations[$i]['allow_group'] === 1) {
+            $allowed_extensions[] = $extension;
+        }
         $display_categories[$extension] = (int)$extension_informations[$i]['cat_id'];
         $download_modes[$extension] = (int)$extension_informations[$i]['download_mode'];
         $upload_icons[$extension] = trim($extension_informations[$i]['upload_icon']);

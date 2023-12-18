@@ -173,12 +173,15 @@ $num_rows = count($rows);
 $allowed_extensions = $download_mode = [];
 for ($i = 0; $i < $num_rows; $i++) {
     $extension = strtolower(trim($rows[$i]['extension']));
-    $allowed_extensions[] = $extension;
+    // Get allowed extensions
+    if ((int)$rows[$i]['allow_group'] === 1) {
+        $allowed_extensions[] = $extension;
+    }
     $download_mode[$extension] = $rows[$i]['download_mode'];
 }
 
 // Disallowed
-if (!in_array($attachment['extension'], $allowed_extensions)) {
+if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
     bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
 }
 
