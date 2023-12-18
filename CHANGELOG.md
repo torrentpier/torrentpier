@@ -12,6 +12,12 @@
 - Minor improvements [\#1206](https://github.com/torrentpier/torrentpier/pull/1206) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements for dl.php [\#1209](https://github.com/torrentpier/torrentpier/pull/1209) ([belomaxorka](https://github.com/belomaxorka))
 - Cleanup for attach_mod [\#1210](https://github.com/torrentpier/torrentpier/pull/1210) ([belomaxorka](https://github.com/belomaxorka))
+- Removed useless condition in viewtopic_attach.tpl [\#1208](https://github.com/torrentpier/torrentpier/pull/1208) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements for announcer [\#1207](https://github.com/torrentpier/torrentpier/pull/1207) ([belomaxorka](https://github.com/belomaxorka))
+- tracker.php parameter sanitizing [\#1212](https://github.com/torrentpier/torrentpier/pull/1212) ([kovalensky](https://github.com/kovalensky))
+- search.php parameter sanitizing [\#1213](https://github.com/torrentpier/torrentpier/pull/1213) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
+- Limit execution time for forum file-listing [\#1211](https://github.com/torrentpier/torrentpier/pull/1211) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
+- Some reported bugfixes [\#1214](https://github.com/torrentpier/torrentpier/pull/1214) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
