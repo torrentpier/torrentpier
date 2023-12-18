@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Find user topics'; // Find all topics by username
 $lang['NO_USER_ID_SPECIFIED'] = 'Sorry, but that user does not exist.';
 $lang['WRONG_PROFILE'] = 'You cannot modify a profile that is not your own.';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'The file at the URL you gave contains no data';
 $lang['NO_CONNECTION_URL'] = 'A connection could not be made to the URL you gave';
 $lang['INCOMPLETE_URL'] = 'The URL you entered is incomplete';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'Could not register torrent on tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Another torrent with same info_hash already <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Remove from tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
