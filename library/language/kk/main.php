@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'пайдаланушы тақырыптарын �
 $lang['NO_USER_ID_SPECIFIED'] = 'Кешіріңіз, бірақ бұл пайдаланушы жоқ.';
 $lang['WRONG_PROFILE'] = 'Сіз өз емес, профайлды өзгерте алмайсыз.';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Сіз берді мекенжай бойынша файл жоқ деректерді қамтиды';
 $lang['NO_CONNECTION_URL'] = 'Байланысы, Сіз берген URL мекенжайына жасалған мүмкін емес';
 $lang['INCOMPLETE_URL'] = 'Сіз енгізген URL толық емес';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'отслежывателе торрент тіркеу �
 $lang['BT_REG_FAIL_SAME_HASH'] = 'қазірдің өзінде сол info_hash <a href="%s"><b>registered</b></a> бар басқа торрент';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'трекер алып тастау';
 $lang['BT_UNREGISTERED'] = 'Torrent тіркелмеген';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
