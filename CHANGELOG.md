@@ -19,7 +19,7 @@
 - search.php parameter sanitizing [\#1213](https://github.com/torrentpier/torrentpier/pull/1213) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - Limit execution time for forum file-listing [\#1211](https://github.com/torrentpier/torrentpier/pull/1211) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - Some reported bugfixes [\#1214](https://github.com/torrentpier/torrentpier/pull/1214) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215), [\#1217](https://github.com/torrentpier/torrentpier/pull/1217) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
