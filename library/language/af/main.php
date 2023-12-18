@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Vind gebruikers onderwerpe'; // Find all topics b
 $lang['NO_USER_ID_SPECIFIED'] = 'Jammer, maar daardie gebruiker bestaan ​​nie.';
 $lang['WRONG_PROFILE'] = 'Jy kan nie \'n profiel wat nie jou eie is verander nie.';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Die lêer op die URL wat jy gegee het, bevat geen data nie';
 $lang['NO_CONNECTION_URL'] = '\'N Konneksie kon nie gemaak word aan die URL wat jy gegee het nie';
 $lang['INCOMPLETE_URL'] = 'Die URL wat jy ingevoer het, is onvolledig';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'Kon nie torrent op spoorsnoer registreer nie';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
