@@ -849,7 +849,7 @@ redirect(basename(__FILE__));
 //
 function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
 {
-    global $lang, $session_id, $items_found, $per_page;
+    global $lang, $search_id, $session_id, $items_found, $per_page;
 
     $items_found = [];
     foreach (DB()->fetch_rowset($sql) as $row) {
@@ -859,7 +859,9 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
         bb_die($lang['NO_SEARCH_MATCH']);
     }
 
+    // Save results in DB
     if ($items_count > $per_page) {
+        $search_id = make_rand_str(SEARCH_ID_LENGTH);
         $search_array = implode(',', $items_found);
 
         $save_in_db = array(
@@ -886,9 +888,6 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
             $curr_set[$GLOBALS["{$name}_key"]] = $GLOBALS["{$name}_val"];
         }
         $search_settings = DB()->escape(serialize($curr_set));
-
-        // Save results in DB
-        $search_id = make_rand_str(SEARCH_ID_LENGTH);
 
         $columns = 'session_id,   search_type,   search_id,   search_time,    search_settings,    search_array';
         $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$search_settings', '$search_array'";
