@@ -540,7 +540,7 @@ $bb_cfg['mem_on_start'] = memory_get_usage();
 $bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
 $bb_cfg['show_jumpbox'] = true; // Whether to show jumpbox (on viewtopic.php and viewforum.php)
-
+$bb_cfg['flist_time_limit'] = 15; // Max number of seconds to process file lists before throwing an error
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active

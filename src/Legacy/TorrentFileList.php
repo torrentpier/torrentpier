@@ -41,10 +41,12 @@ class TorrentFileList
      */
     public function get_filelist()
     {
-        global $html;
-        if (($this->tor_decoded['info']['meta version'] ?? 1) === 2) {
-            if (is_array($this->tor_decoded['info']['file tree'] ?? null)) {
-                return $this->fileTreeList($this->tor_decoded['info']['file tree'], $this->tor_decoded['info']['name'] ?? ''); //v2
+        global $bb_cfg, $html;
+
+        $info = &$this->tor_decoded['info'];
+        if (isset($info['meta version'], $info['file tree'])) { //v2
+            if (($info['meta version']) === 2 && is_array($info['file tree'])) {
+                return $this->fileTreeList($info['file tree'], $info['name'] ?? '', $bb_cfg['flist_time_limit']);
             }
         }
 
@@ -69,7 +71,9 @@ class TorrentFileList
      */
     private function build_filelist_array()
     {
-        $info = $this->tor_decoded['info'];
+        global $bb_cfg;
+
+        $info = &$this->tor_decoded['info'];
 
         if (isset($info['name.utf-8'])) {
             $info['name'] =& $info['name.utf-8'];
@@ -90,7 +94,11 @@ class TorrentFileList
                 if (isset($f['attr']) && $f['attr'] === 'p') {
                     continue;
                 }
-                array_deep($f['path'], 'clean_tor_dirname');
+
+                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: $bb_cfg['flist_time_limit']);
+                if (isset($structure['timeout'])) {
+                    bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
+                }
 
                 $length = isset($f['length']) ? (float)$f['length'] : 0;
                 $subdir_count = \count($f['path']) - 1;
@@ -137,14 +145,22 @@ class TorrentFileList
      * @param string $name
      * @return string
      */
-    public function fileTreeList(array $array, string $name = ''): string
+    public function fileTreeList(array $array, string $name = '', int $timeout = 0, bool $child = false): string
     {
         $allItems = '';
 
+        if ($timeout) {
+            static $recursions = 0;
+            if (time() > (TIMENOW + $timeout)) {
+                bb_die("Timeout, too many nested files/directories for file listing, aborting after \n$recursions recursive calls.\nNesting level: " . count($this->tor_decoded['info']['file tree'], COUNT_RECURSIVE));
+            }
+            $recursions++;
+        }
+
         foreach ($array as $key => $value) {
-            $key = htmlCHR($key);
+            $key = clean_tor_dirname($key);
             if (!isset($value[''])) {
-                $html_v2 = $this->fileTreeList($value);
+                $html_v2 = $this->fileTreeList($value, timeout: $timeout, child: true);
                 $allItems .= "<li><span class=\"b\">$key</span><ul>$html_v2</ul></li>";
             } else {
                 $length = $value['']['length'];
@@ -152,7 +168,11 @@ class TorrentFileList
             }
         }
 
-        return '<div class="tor-root-dir">' . (empty($allItems) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . $allItems . '</ul>';
+        if (!$child) {
+            return '<div class="tor-root-dir">' . (empty($allItems) ? '' : htmlCHR($name)) . '</div><ul class="tree-root">' . $allItems . '</ul>';
+        }
+
+        return $allItems;
     }
 
     /**
@@ -166,7 +186,7 @@ class TorrentFileList
     {
         static $filesList = ['list' => '', 'count' => 0];
         foreach ($array as $key => $value) {
-            $key = htmlCHR($key);
+            $key = clean_tor_dirname($key);
             $current = "$parent/$key";
             if (!isset($value[''])) {
                 $this->fileTreeTable($value, $current);

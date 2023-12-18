@@ -302,8 +302,18 @@ function make_rand_str(int $length = 10): string
     return $randomString;
 }
 
-function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
+function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $timeout = false)
 {
+    if ($timeout) {
+        static $recursions = 0;
+        if (time() > (TIMENOW + $timeout)) {
+            return [
+                'timeout' => true,
+                'recs' => $recursions
+            ];
+        }
+        $recursions++;
+    }
     if (is_array($var)) {
         foreach ($var as $k => $v) {
             if (is_array($v)) {
@@ -312,7 +322,7 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
                 } elseif ($array_only) {
                     $var[$k] = $fn($v);
                 } else {
-                    array_deep($var[$k], $fn);
+                    array_deep($var[$k], $fn, timeout: $timeout);
                 }
             } elseif (!$array_only) {
                 $var[$k] = $fn($v);

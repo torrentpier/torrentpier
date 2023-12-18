@@ -297,34 +297,44 @@ function humn_size (size) {
 }
 
 ajax.tor_filelist_loaded = false;
-$('#tor-filelist-btn').click(function(){
-	if (ajax.tor_filelist_loaded) {
-		$('#tor-fl-wrap').toggle();
-		return false;
-	}
-	$('#tor-fl-wrap').show();
+$('#tor-filelist-btn').click(function () {
+    if (ajax.tor_filelist_loaded) {
+        $('#tor-fl-wrap').toggle();
+        return false;
+    } else {
+        $("#tor-filelist-btn").attr('disabled', true);
+    }
+    $('#tor-fl-wrap').show();
 
-	ajax.exec({action: 'view_torrent', attach_id: {postrow.attach.tor_reged.ATTACH_ID} });
-	ajax.callback.view_torrent = function(data) {
-		$('#tor-filelist').html(data.html);
-		$('#tor-filelist > ul.tree-root').treeview({
-			control: "#tor-fl-treecontrol"
-		});
-		$('#tor-filelist li.collapsable').each(function(){
-			var $li = $(this);
-			var dir_size = 0;
-			$('i', $li).each(function(){ dir_size += parseInt(this.innerHTML) });
-			$('span.b:first', $li).append(' &middot; <s>' + humn_size(dir_size) + '</s>');
-		});
-		$('#tor-filelist i').each(function(){
-			var size_bytes = this.innerHTML;
-			this.innerHTML = '('+ size_bytes +')';
-			$(this).prepend('<s>'+ humn_size(size_bytes) +'</s> ');
-		});
-		ajax.tor_filelist_loaded = true;
-	};
-	$('#tor-fl-treecontrol a').click(function(){ this.blur(); });
-	return false;
+    ajax.exec({
+        action: 'view_torrent',
+        attach_id: {postrow.attach.tor_reged.ATTACH_ID}
+    });
+    ajax.callback.view_torrent = function (data) {
+        $('#tor-filelist').html(data.html);
+        $('#tor-filelist > ul.tree-root').treeview({
+            control: "#tor-fl-treecontrol"
+        });
+        $('#tor-filelist li.collapsable').each(function () {
+            var $li = $(this);
+            var dir_size = 0;
+            $('i', $li).each(function () {
+                dir_size += parseInt(this.innerHTML)
+            });
+            $('span.b:first', $li).append(' &middot; <s>' + humn_size(dir_size) + '</s>');
+        });
+        $('#tor-filelist i').each(function () {
+            var size_bytes = this.innerHTML;
+            this.innerHTML = '(' + size_bytes + ')';
+            $(this).prepend('<s>' + humn_size(size_bytes) + '</s> ');
+        });
+        ajax.tor_filelist_loaded = true;
+        $("#tor-filelist-btn").attr('disabled', false);
+    };
+    $('#tor-fl-treecontrol a').click(function () {
+        this.blur();
+    });
+    return false;
 });
 </script>
 
