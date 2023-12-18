@@ -152,7 +152,7 @@ function show_edit_options ()
 	<th class="{sorter: 'text'}" title="{L_TOPICS}"><b class="tbs-text">{L_TOPICS}</b></th>
 	<th class="{sorter: 'text'}" title="{L_AUTHOR}"><b class="tbs-text">{L_AUTHOR}</b></th>
 	<th class="{sorter: 'digit'}" title="{L_REPLIES}"><b class="tbs-text">{L_REPLIES_SHORT}</b></th>
-	<th class="{sorter: 'text'}" title="{L_LASTPOST}"><b class="tbs-text">{L_LASTPOST}</b></th>
+	<th class="{sorter: 'digit'}" title="{L_LASTPOST}"><b class="tbs-text">{L_LASTPOST}</b></th>
 </tr>
 </thead>
 <!-- BEGIN t -->
@@ -181,6 +181,7 @@ function show_edit_options ()
 	<td class="med nowrap">{t.TOPIC_AUTHOR}</td>
 	<td title="{L_REPLIES}: {t.REPLIES}" class="small">{t.REPLIES}</td>
 	<td class="small nowrap" style="padding: 1px 4px 3px 4px;">
+        <u>{t.LAST_POST_TIME_RAW}</u>
 		<p>{t.LAST_POST_TIME}</p>
 		<p>
 			{t.LAST_POSTER}

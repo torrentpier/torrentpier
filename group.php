@@ -385,11 +385,13 @@ if (!$group_id) {
         'MOD_AVATAR' => $moderator_info['avatar'],
         'MOD_FROM' => $moderator_info['from'],
         'MOD_JOINED' => $moderator_info['joined'],
+        'MOD_JOINED_RAW' => $moderator_info['joined_raw'],
         'MOD_POSTS' => $moderator_info['posts'],
         'MOD_PM' => $moderator_info['pm'],
         'MOD_EMAIL' => $moderator_info['email'],
         'MOD_WWW' => $moderator_info['www'],
         'MOD_TIME' => !empty($group_info['mod_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($group_info['mod_time']), delta_time($group_info['mod_time'])) : $lang['NONE'],
+        'MOD_TIME_RAW' => !empty($group_info['mod_time']) ? $group_info['mod_time'] : '',
         'U_SEARCH_USER' => 'search.php?mode=searchuser',
         'U_SEARCH_RELEASES' => "tracker.php?srg=$group_id",
         'U_GROUP_RELEASES' => GROUP_URL . $group_id . "&view=releases",
@@ -518,12 +520,14 @@ if (!$group_id) {
                         'AVATAR_IMG' => $member_info['avatar'],
                         'FROM' => $member_info['from'],
                         'JOINED' => $member_info['joined'],
+                        'JOINED_RAW' => $member_info['joined_raw'],
                         'POSTS' => $member_info['posts'],
                         'USER_ID' => $user_id,
                         'PM' => $member_info['pm'],
                         'EMAIL' => $member_info['email'],
                         'WWW' => $member_info['www'],
-                        'TIME' => $member_info['user_time']
+                        'TIME' => $member_info['user_time'],
+                        'TIME_RAW' => $member_info['user_time_raw']
                     ]);
 
                     if ($is_moderator) {
@@ -572,6 +576,7 @@ if (!$group_id) {
                         'USER' => profile_url($pending_info),
                         'FROM' => $pending_info['from'],
                         'JOINED' => $pending_info['joined'],
+                        'JOINED_RAW' => $pending_info['joined_raw'],
                         'POSTS' => $pending_info['posts'],
                         'USER_ID' => $user_id,
                         'PM' => $pending_info['pm'],

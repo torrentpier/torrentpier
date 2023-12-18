@@ -21,6 +21,7 @@
 - Some reported bugfixes [\#1214](https://github.com/torrentpier/torrentpier/pull/1214) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215), [\#1217](https://github.com/torrentpier/torrentpier/pull/1217), [\#1219](https://github.com/torrentpier/torrentpier/pull/1219), [\#1220](https://github.com/torrentpier/torrentpier/pull/1220) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed extensions issue [\#1218](https://github.com/torrentpier/torrentpier/pull/1218) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken sorting in group.php [\#1221](https://github.com/torrentpier/torrentpier/pull/1221) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)

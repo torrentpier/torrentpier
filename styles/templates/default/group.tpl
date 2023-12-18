@@ -141,7 +141,7 @@
             <th width="10%" class="{sorter: 'digit'}"><b class="tbs-text">{L_JOINED}</b></th>
             <th class="{sorter: 'digit'}"><b class="tbs-text">{L_POSTS_SHORT}</b></th>
             <th class="{sorter: false}"><b class="tbs-text">{L_WEBSITE}</b></th>
-            <th width="10%" class="{sorter: false}"><b class="tbs-text">{L_EFFECTIVE_DATE}</b></th>
+            <th width="10%" class="{sorter: 'digit'}"><b class="tbs-text">{L_EFFECTIVE_DATE}</b></th>
             <th class="{sorter: false}"><b class="tbs-text">#</b></th>
         </tr>
         <tr>
@@ -154,10 +154,10 @@
             <td>{MOD_PM}</td>
             <td>{MOD_EMAIL}</td>
             <td>{MOD_FROM}</td>
-            <td class="small">{MOD_JOINED}</td>
+            <td class="small"><u>{MOD_JOINED_RAW}</u>{MOD_JOINED}</td>
             <td>{MOD_POSTS}</td>
             <td>{MOD_WWW}</td>
-            <td class="small">{MOD_TIME}</td>
+            <td class="small"><u>{MOD_TIME_RAW}</u>{MOD_TIME}</td>
             <td width="3%">&nbsp;</td>
         </tr>
         <tr>
@@ -173,10 +173,10 @@
             <td>{member.PM}</td>
             <td>{member.EMAIL}</td>
             <td>{member.FROM}</td>
-            <td class="small">{member.JOINED}</td>
+            <td class="small"><u>{member.JOINED_RAW}</u>{member.JOINED}</td>
             <td>{member.POSTS}</td>
             <td>{member.WWW}</td>
-            <td class="small">{member.TIME}</td>
+            <td class="small"><u>{member.TIME_RAW}</u>{member.TIME}</td>
             <td width="3%">
                 <!-- BEGIN switch_mod_option -->
                 <input type="checkbox" name="members[]" value="{member.USER_ID}"/>
@@ -253,7 +253,7 @@
             <td>{pending.PM}</td>
             <td>{pending.EMAIL}</td>
             <td>{pending.FROM}</td>
-            <td>{pending.JOINED}</td>
+            <td><u>{pending.JOINED_RAW}</u>{pending.JOINED}</td>
             <td>{pending.POSTS}</td>
             <td>{pending.WWW}</td>
         </tr>
