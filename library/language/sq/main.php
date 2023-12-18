@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Gjeni përdorues temat'; // Find all topics by us
 $lang['NO_USER_ID_SPECIFIED'] = 'Na vjen keq, por që përdoruesit nuk ekziston.';
 $lang['WRONG_PROFILE'] = 'Ju nuk mund të modifikoni një profil që nuk është e vetja.';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'File në URL ju dha nuk përmban të dhënat e';
 $lang['NO_CONNECTION_URL'] = 'Një lidhje mund të mos jenë bërë për URL që ju dha';
 $lang['INCOMPLETE_URL'] = 'URL që keni futur nuk është e plotë';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'Nuk mund të regjistrohen në përrua tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Një tjetër torrent me të njëjtën info_hash tashmë <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hiqni nga tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent paregjistruara';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
