@@ -91,7 +91,7 @@ $url = basename(__FILE__);
 $anon_id = GUEST_UID;
 $user_id = $userdata['user_id'];
 $lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
-$search_id = (isset($_GET['id']) && is_string($_GET['id'])) ? DB()->escape($_GET['id']) : '';
+$search_id = (isset($_GET['id']) && is_string($_GET['id'])) ? $_GET['id'] : '';
 $session_id = $userdata['session_id'];
 
 $items_found = $items_display = $previous_settings = null;
@@ -325,7 +325,7 @@ if ($search_id) {
 		FROM " . BB_SEARCH . "
 		WHERE session_id = '$session_id'
 			AND search_type = " . SEARCH_TYPE_POST . "
-			AND search_id = '$search_id'
+			AND search_id = '" . DB()->escape($search_id) . "'
 		LIMIT 1
 	");
 
@@ -849,7 +849,7 @@ redirect(basename(__FILE__));
 //
 function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
 {
-    global $lang, $search_id, $session_id, $items_found, $per_page;
+    global $lang, $session_id, $items_found, $per_page;
 
     $items_found = [];
     foreach (DB()->fetch_rowset($sql) as $row) {
@@ -858,9 +858,6 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
     if (!$items_count = count($items_found)) {
         bb_die($lang['NO_SEARCH_MATCH']);
     }
-
-    // Save results in DB
-    $search_id = make_rand_str(SEARCH_ID_LENGTH);
 
     if ($items_count > $per_page) {
         $search_array = implode(',', $items_found);
@@ -889,6 +886,9 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
             $curr_set[$GLOBALS["{$name}_key"]] = $GLOBALS["{$name}_val"];
         }
         $search_settings = DB()->escape(serialize($curr_set));
+
+        // Save results in DB
+        $search_id = make_rand_str(SEARCH_ID_LENGTH);
 
         $columns = 'session_id,   search_type,   search_id,   search_time,    search_settings,    search_array';
         $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$search_settings', '$search_array'";
