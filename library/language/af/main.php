@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,7 +25,7 @@ $lang['POSTS_SHORT'] = 'poste';
 $lang['POSTED'] = 'gepos';
 $lang['USERNAME'] = 'Gebruikersnaam';
 $lang['PASSWORD'] = 'wagwoord';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
+$lang['PASSWORD_SHOW_BTN'] = 'Wys wagwoord';
 $lang['EMAIL'] = 'e-pos';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'skrywer';
@@ -60,7 +60,7 @@ $lang['ENABLED'] = 'enabled';
 $lang['DISABLED'] = 'gestremde';
 $lang['ERROR'] = 'fout';
 $lang['SELECT_ACTION'] = 'Kies aksie';
-$lang['CLEAR'] = 'Clear';
+$lang['CLEAR'] = 'Verwyder';
 
 $lang['NEXT_PAGE'] = 'volgende';
 $lang['PREVIOUS_PAGE'] = 'vorige';
@@ -234,7 +234,7 @@ $lang['RULES_VOTE_CAN'] = 'Jy <b>can</b> stem in stembusse in hierdie forum';
 $lang['RULES_VOTE_CANNOT'] = 'Jy <b>cannot</b> stem in stembusse in hierdie forum';
 $lang['RULES_MODERATE'] = 'Jy <b>can</b> modereer hierdie forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_TOPICS_POST_ONE'] = '';
 $lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Vind gebruikers onderwerpe'; // Find all topics b
 $lang['NO_USER_ID_SPECIFIED'] = 'Jammer, maar daardie gebruiker bestaan ​​nie.';
 $lang['WRONG_PROFILE'] = 'Jy kan nie \'n profiel wat nie jou eie is verander nie.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Slegs een tipe avatar kan gespesifiseer word';
 $lang['FILE_NO_DATA'] = 'Die lêer op die URL wat jy gegee het, bevat geen data nie';
 $lang['NO_CONNECTION_URL'] = '\'N Konneksie kon nie gemaak word aan die URL wat jy gegee het nie';
 $lang['INCOMPLETE_URL'] = 'Die URL wat jy ingevoer het, is onvolledig';
