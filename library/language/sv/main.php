@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Hitta användare ämnen'; // Find all topics by u
 $lang['NO_USER_ID_SPECIFIED'] = 'Ledsen, men den användaren existerar inte.';
 $lang['WRONG_PROFILE'] = 'Du kan inte ändra en profil som inte är din egen.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Endast en typ av avatar kan anges';
 $lang['FILE_NO_DATA'] = 'Filen på den WEBBADRESS som du gav innehåller inga uppgifter';
 $lang['NO_CONNECTION_URL'] = 'En anslutning kan inte göras till den URL som du gav';
 $lang['INCOMPLETE_URL'] = 'URL: en du angav är ofullständig';
