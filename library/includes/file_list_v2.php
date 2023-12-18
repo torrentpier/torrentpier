@@ -37,7 +37,7 @@ if (empty($row) || empty($row['physical_filename'])) {
 
 if (empty($row['info_hash_v2'])) {
     http_response_code(410);
-    die($lang['BT_V2_FILE_LIST_ONLY']);
+    die($lang['BT_V2_FLIST_ONLY']);
 }
 
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
@@ -48,6 +48,17 @@ if (!is_file($file_path)) {
 }
 
 $file_contents = file_get_contents($file_path);
+
+if ($bb_cfg['flist_max_files']) {
+    $filetree_pos = strpos($file_contents, ':file tree');
+    $files_pos = strpos($file_contents, ':files', $filetree_pos);
+    $file_count = substr_count(substr($file_contents, $filetree_pos, ($files_pos ? ($files_pos - $filetree_pos) : null)), ':length');
+
+    if ($file_count > $bb_cfg['flist_max_files']) {
+        http_response_code(410);
+        die(sprintf($lang['BT_V2_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count));
+    }
+}
 
 if (!$torrent = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
     http_response_code(410);
