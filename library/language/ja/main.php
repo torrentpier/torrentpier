@@ -532,6 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = '見つユーザー課題'; // Find all topics by 
 $lang['NO_USER_ID_SPECIFIED'] = '申し訳ございません、あなたのユーザーは存在しない。';
 $lang['WRONG_PROFILE'] = '変更できませんのプロファイルになります。';
 
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'ファイルのURLやりくりは夫婦で別にされていま含まないデータ';
 $lang['NO_CONNECTION_URL'] = '接続できませんでしたURLへのやりくりは夫婦で別にされていま';
 $lang['INCOMPLETE_URL'] = 'URLを入力された不完全';
@@ -1073,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'な登録激流にトラッカー';
 $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
