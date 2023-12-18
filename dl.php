@@ -186,8 +186,10 @@ if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
 }
 
 // Getting download mode by extension
-if (!$download_mode = (int)$download_mode[$attachment['extension']]) {
-    bb_die('Incorrect download mode');
+if (isset($download_mode[$attachment['extension']])) {
+    $download_mode = intval($download_mode[$attachment['extension']]);
+} else {
+    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
 }
 
 // Update download count
