@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,6 @@ $lang['SEARCH_USER_TOPICS'] = 'Знайти теми користувача'; //
 $lang['NO_USER_ID_SPECIFIED'] = 'Вибачте, але такого користувача не існує.';
 $lang['WRONG_PROFILE'] = 'Ви не можете редагувати чужий профіль.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Можна вказати тільки один тип аватара';
 $lang['FILE_NO_DATA'] = 'Файл з вказаною Вами URL-адресою не містить даних';
 $lang['NO_CONNECTION_URL'] = 'Неможливо встановити з\'єднання з URL-адресою, що Ви вказали';
 $lang['INCOMPLETE_URL'] = 'Ви вказали неповний URL';
