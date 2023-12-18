@@ -322,7 +322,7 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $
                 } elseif ($array_only) {
                     $var[$k] = $fn($v);
                 } else {
-                    array_deep($var[$k], $fn);
+                    array_deep($var[$k], $fn, timeout: $timeout);
                 }
             } elseif (!$array_only) {
                 $var[$k] = $fn($v);
