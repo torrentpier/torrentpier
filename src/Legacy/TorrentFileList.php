@@ -46,7 +46,7 @@ class TorrentFileList
         $info = &$this->tor_decoded['info'];
         if (isset($info['meta version'], $info['file tree'])) { //v2
             if (($info['meta version']) === 2 && is_array($info['file tree'])) {
-                return $this->fileTreeList($info['file tree'], $info['name'] ?? '', $bb_cfg['flist_time_limit']);
+                return $this->fileTreeList($info['file tree'], $info['name'] ?? '', $bb_cfg['flist_timeout']);
             }
         }
 
@@ -95,7 +95,7 @@ class TorrentFileList
                     continue;
                 }
 
-                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: $bb_cfg['flist_time_limit']);
+                $structure = array_deep($f['path'], 'clean_tor_dirname', timeout: $bb_cfg['flist_timeout']);
                 if (isset($structure['timeout'])) {
                     bb_die("Timeout, too many nested files/directories for file listing, aborting after \n{$structure['recs']} recursive calls.\nNesting level: " . count($info['files'], COUNT_RECURSIVE));
                 }
