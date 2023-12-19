@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -532,7 +532,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Знайсці тэмы карыстальнік�
 $lang['NO_USER_ID_SPECIFIED'] = 'Прабачце, але такога карыстальніка не існуе.';
 $lang['WRONG_PROFILE'] = 'Нельга змяніць профіль, які не з\'яўляецца вашым уласным.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Можа быць паказаны толькі адзін тып аватар';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Файл па URL, які вы далі не ўтрымлівае дадзеных';
 $lang['NO_CONNECTION_URL'] = 'Злучэнне не можа быць зроблена, каб URL, які вы далі';
 $lang['INCOMPLETE_URL'] = 'URL, які вы ўвялі няпоўныя';
@@ -1074,7 +1074,8 @@ $lang['BT_REG_FAIL'] = 'Не атрымалася зарэгістраваць �
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Іншы торэнт з такім жа info_hash ўжо <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Выдаліць з трэкера';
 $lang['BT_UNREGISTERED'] = 'Торэнт незарэгістраваных';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
