@@ -21,7 +21,7 @@ if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
 
 $topic_id = !empty($_GET['filelist']) ? (int)$_GET['filelist'] : (http_response_code(404) && die($lang['INVALID_TOPIC_ID']));
 
-$sql = 'SELECT t.attach_id, t.info_hash_v2, t.size, ad.physical_filename
+$sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_filename
         FROM ' . BB_BT_TORRENTS . ' t
         LEFT JOIN ' . BB_ATTACHMENTS_DESC . ' ad
         ON t.attach_id = ad.attach_id
@@ -51,8 +51,8 @@ $file_contents = file_get_contents($file_path);
 
 if ($bb_cfg['flist_max_files']) {
     $filetree_pos = strpos($file_contents, ':file tree');
-    $files_pos = strpos($file_contents, ':files', $filetree_pos);
-    $file_count = substr_count(substr($file_contents, $filetree_pos, ($files_pos ? ($files_pos - $filetree_pos) : null)), ':length');
+    $files_pos = !empty($row['info_hash']) ? strpos($file_contents, ':files', $filetree_pos) : false;
+$file_count = substr_count($file_contents, ':length', $filetree_pos, ($files_pos ? ($files_pos - $filetree_pos) : null));
 
     if ($file_count > $bb_cfg['flist_max_files']) {
         http_response_code(410);
