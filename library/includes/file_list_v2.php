@@ -52,7 +52,7 @@ $file_contents = file_get_contents($file_path);
 if ($bb_cfg['flist_max_files']) {
     $filetree_pos = strpos($file_contents, ':file tree');
     $files_pos = !empty($row['info_hash']) ? strpos($file_contents, ':files', $filetree_pos) : false;
-$file_count = substr_count($file_contents, ':length', $filetree_pos, ($files_pos ? ($files_pos - $filetree_pos) : null));
+    $file_count = substr_count($file_contents, ':length', $filetree_pos, ($files_pos ? ($files_pos - $filetree_pos) : null));
 
     if ($file_count > $bb_cfg['flist_max_files']) {
         http_response_code(410);
