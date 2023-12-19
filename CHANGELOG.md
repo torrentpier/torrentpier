@@ -19,7 +19,7 @@
 - search.php parameter sanitizing [\#1213](https://github.com/torrentpier/torrentpier/pull/1213) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - Limit execution time for forum file-listing [\#1211](https://github.com/torrentpier/torrentpier/pull/1211) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - Some reported bugfixes [\#1214](https://github.com/torrentpier/torrentpier/pull/1214) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215), [\#1217](https://github.com/torrentpier/torrentpier/pull/1217), [\#1219](https://github.com/torrentpier/torrentpier/pull/1219), [\#1220](https://github.com/torrentpier/torrentpier/pull/1220) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215), [\#1217](https://github.com/torrentpier/torrentpier/pull/1217), [\#1219](https://github.com/torrentpier/torrentpier/pull/1219), [\#1220](https://github.com/torrentpier/torrentpier/pull/1220), [\#1224](https://github.com/torrentpier/torrentpier/pull/1224) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed extensions issue [\#1218](https://github.com/torrentpier/torrentpier/pull/1218) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken sorting in group.php [\#1221](https://github.com/torrentpier/torrentpier/pull/1221) ([belomaxorka](https://github.com/belomaxorka))
 
