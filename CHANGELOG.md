@@ -22,6 +22,7 @@
 - Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215), [\#1217](https://github.com/torrentpier/torrentpier/pull/1217), [\#1219](https://github.com/torrentpier/torrentpier/pull/1219), [\#1220](https://github.com/torrentpier/torrentpier/pull/1220), [\#1224](https://github.com/torrentpier/torrentpier/pull/1224) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed extensions issue [\#1218](https://github.com/torrentpier/torrentpier/pull/1218) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken sorting in group.php [\#1221](https://github.com/torrentpier/torrentpier/pull/1221) ([belomaxorka](https://github.com/belomaxorka))
+- Introduce limit setting for max number of files to be processed in separate index file-listing [\#1223](https://github.com/torrentpier/torrentpier/pull/1223) ([kovalensky](https://github.com/kovalensky))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
