@@ -78,6 +78,7 @@ if ($watch_count > 0) {
                 'REPLIES' => $watch[$i]['topic_replies'],
                 'AUTHOR' => profile_url($watch[$i]),
                 'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]),
+                'LAST_POST_RAW' => $watch[$i]['topic_last_post_time'],
                 'LAST_POST_ID' => $watch[$i]['topic_last_post_id'],
                 'IS_UNREAD' => $is_unread,
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
