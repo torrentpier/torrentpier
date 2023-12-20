@@ -128,7 +128,7 @@ function html2text (str)
 
 <!-- IF not POLL_ALREADY_VOTED && SHOW_VOTE_BTN -->
 <div id="vote-btn-a" class="mrg_8 tCenter">[ <a href="#" onclick="build_votes(); return false;" class="gen"><b>{L_SUBMIT_VOTE}</b></a> ]</div>
-<div id="vote-btn-input" class="mrg_6 tCenter" style="display: none;"><input type="button" onclick="submit_vote(); return false;" value="{L_SUBMIT_VOTE}" class="bold" /></div>
+<div id="vote-btn-input" class="mrg_6 tCenter" style="display: none;"><input onclick="window.location.reload();" type="button" class="bold" value="{L_CANCEL}" />&nbsp;&nbsp;<input type="button" onclick="submit_vote(); return false;" value="{L_SUBMIT_VOTE}" class="bold" /></div>
 <!-- ELSEIF not SHOW_VOTE_BTN -->
 <div class="mrg_8 tCenter">[ <b>{L_NEW_POLL_END}</b> ]</div>
 <!-- ENDIF -->

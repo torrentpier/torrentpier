@@ -218,7 +218,7 @@ function build_poll_add_form (src_el)
 		<div class="med" style="margin-top: 4px;">{L_NEW_POLL_M_VOTES}:</div>
 		<textarea id="poll-votes-inp" rows="8" cols="10" wrap="off" class="gen" style="width: 550px;"></textarea>
 		<div class="med mrg_4"><i>{L_NEW_POLL_M_EXPLAIN}: {$bb_cfg['max_poll_options']})</i></div>
-		<div class="mrg_8 tCenter"><input id="poll-edit-submit-btn" type="button" value="{L_SUBMIT}" class="bold" style="width: 100px;" /></div>
+		<div class="mrg_8 tCenter"><input onclick="window.location.reload();" type="button" class="bold" value="{L_CANCEL}" />&nbsp;&nbsp;<input id="poll-edit-submit-btn" type="button" value="{L_SUBMIT}" class="bold" style="width: 100px;" /></div>
 	</fieldset>
 	</td></tr></table>
 </div>
