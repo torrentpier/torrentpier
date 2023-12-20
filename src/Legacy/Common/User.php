@@ -489,15 +489,6 @@ class User
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, httponly: true);
             }
-
-            // Unset sql debug cookies
-            if (!SQL_DEBUG || !APP_DEBUG) {
-                foreach (array('explain', 'sql_log', 'sql_log_full') as $cookie) {
-                    if (isset($_COOKIE[$cookie])) {
-                        bb_setcookie($cookie, null);
-                    }
-                }
-            }
         }
     }
 
@@ -510,7 +501,7 @@ class User
      *
      * @return bool|string
      */
-    public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
+    public function verify_autologin_id($userdata, bool $expire_check = false, bool $create_new = true): bool|string
     {
         global $bb_cfg;
 
@@ -534,14 +525,14 @@ class User
     /**
      * Create autologin_id
      *
-     * @param $userdata
+     * @param array $userdata
      * @param bool $create_new
      *
-     * @return bool|string
+     * @return string
      */
-    public function create_autologin_id($userdata, $create_new = true)
+    public function create_autologin_id(array $userdata, bool $create_new = true): string
     {
-        $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
+        $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
         DB()->query("
 			UPDATE " . BB_USERS . " SET
