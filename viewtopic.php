@@ -569,7 +569,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
-    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
+    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? wbr($postrow[$i]['user_from']) : '';
     $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
     $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
     $post_id = $postrow[$i]['post_id'];
@@ -691,13 +691,13 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_JOINED' => $bb_cfg['show_poster_joined'] ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
-        'POSTER_POSTS' => $bb_cfg['show_poster_posts'] ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
-        'POSTER_FROM' => $bb_cfg['show_poster_from'] ? wbr($poster_from) : '',
+        'POSTER_POSTS' => ($bb_cfg['show_poster_posts'] && $poster_posts) ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
+        'POSTER_FROM' => $bb_cfg['show_poster_from'] ? $poster_from : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
-        'POSTER_GENDER' => genderImage((int)$postrow[$i]['user_gender']),
+        'POSTER_GENDER' => !$poster_guest ? genderImage((int)$postrow[$i]['user_gender']) : '',
         'POSTED_AFTER' => $prev_post_time ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
         'IS_FIRST_POST' => (!$start && $is_first_post),
