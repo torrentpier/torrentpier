@@ -91,35 +91,36 @@
 		<td colspan="3">{postrow.attach.tor_not_reged.comment.COMMENT}</td>
 	</tr>
 	<!-- END comment -->
-	<tr class="row3 tCenter">
-		<td colspan="3">&nbsp;
-		<script type="text/javascript">
-		ajax.callback.change_torrent = function(data) {
-		    if(data.title) alert(data.title);
-		    if(data.url) document.location.href = data.url;
-		};
-		</script>
-		<!-- IF TOR_CONTROLS -->
-		<script type="text/javascript">
-		function change_torrents()
-		{
-			ajax.exec({
-				action    : 'change_torrent',
-				attach_id : {postrow.attach.tor_not_reged.ATTACH_ID},
-				type      : $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}').val(),
-			});
-		}
-		</script>
-			<select name="tor_action" id="tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', true)">
-				<option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
-				<option value="del_torrent">{L_DELETE_TORRENT}</option>
-				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
-			</select>
-
-			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_SUBMIT}" class="liteoption" /></a>
-		<!-- ENDIF -->
-		&nbsp;</td>
-	</tr>
+    <!-- IF TOR_CONTROLS -->
+    <tr class="row3 tCenter">
+        <td colspan="3">
+            <script type="text/javascript">
+                ajax.callback.change_torrent = function (data) {
+                    if (data.title) alert(data.title);
+                    if (data.url) document.location.href = data.url;
+                };
+            </script>
+            <script type="text/javascript">
+                function change_torrents() {
+                    ajax.exec({
+                        action: 'change_torrent',
+                        attach_id: {postrow.attach.tor_not_reged.ATTACH_ID},
+                        type: $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}').val(),
+                    });
+                }
+            </script>
+            <select name="tor_action" id="tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}"
+                    onchange="$('#tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', true);">
+                <option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
+                <option value="del_torrent">{L_DELETE_TORRENT}</option>
+                <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
+            </select>
+            <a href="#"
+               onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input
+                    type="submit" value="{L_SUBMIT}" class="liteoption"/></a>
+        </td>
+    </tr>
+    <!-- ENDIF -->
 </table>
 
 <div class="spacer_12"></div>
@@ -230,6 +231,7 @@
         <td colspan="3">{postrow.attach.tor_reged.comment.COMMENT}</td>
     </tr>
     <!-- END comment -->
+    <!-- IF TOR_CONTROLS -->
     <tr class="row3 tCenter">
         <td colspan="3">
             <script type="text/javascript">
@@ -238,7 +240,6 @@
                     if (data.url) document.location.href = data.url;
                 };
             </script>
-            <!-- IF TOR_CONTROLS -->
             <script type="text/javascript">
                 function change_torrents() {
                     ajax.exec({
@@ -271,9 +272,9 @@
             <a href="#"
                onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input
                     type="submit" value="{L_EDIT}" class="liteoption"/></a>
-            <!-- ENDIF -->
         </td>
     </tr>
+    <!-- ENDIF -->
     <!-- IF TOR_HELP_LINKS -->
     <tr class="row3 tCenter">
         <td colspan="3">{TOR_HELP_LINKS}</td>
