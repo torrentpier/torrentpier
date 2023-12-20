@@ -25,6 +25,7 @@
 - Code re-formatting [\#1225](https://github.com/torrentpier/torrentpier/pull/1225) ([kovalensky](https://github.com/kovalensky))
 - Introduce limit setting for max number of files to be processed in separate index file-listing [\#1223](https://github.com/torrentpier/torrentpier/pull/1223) ([kovalensky](https://github.com/kovalensky))
 - Fixed set auth cookie issue [\#1227](https://github.com/torrentpier/torrentpier/pull/1227) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed incorrect condition in bb_captcha [\#1231](https://github.com/torrentpier/torrentpier/pull/1231) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
