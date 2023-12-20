@@ -317,7 +317,10 @@ class Torrent
 
         $file_contents = file_get_contents($filename);
 
-        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
+        try {
+            $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
+        }
+        catch (Exception ) {
             self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
@@ -559,7 +562,10 @@ class Torrent
 
         // Torrent decoding
         $file_contents = file_get_contents($filename);
-        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
+        try {
+            $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
+        }
+        catch (Exception) {
             bb_die($lang['TORFILE_INVALID']);
         }
 
