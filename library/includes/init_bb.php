@@ -88,19 +88,19 @@ function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, 
 {
     global $bb_cfg;
 
+    $cookie = new \Josantonius\Cookie\Cookie(
+        domain: $bb_cfg['cookie_domain'],
+        expires: $lifetime,
+        httpOnly: $httponly,
+        path: $bb_cfg['script_path'],
+        raw: $isRaw,
+        sameSite: $bb_cfg['cookie_same_site'],
+        secure: $bb_cfg['cookie_secure']
+    );
+
     if (!empty($val)) {
-        $cookie = new \Josantonius\Cookie\Cookie(
-            domain: $bb_cfg['cookie_domain'],
-            expires: $lifetime,
-            httpOnly: $httponly,
-            path: $bb_cfg['script_path'],
-            raw: $isRaw,
-            sameSite: $bb_cfg['cookie_same_site'],
-            secure: $bb_cfg['cookie_secure']
-        );
         $cookie->set($name, $val);
     } else {
-        $cookie = new \Josantonius\Cookie\Cookie();
         $cookie->remove($name);
     }
 }
