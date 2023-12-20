@@ -126,10 +126,10 @@ function html2text (str)
 <table id="poll-results-block" class="borderless bCenter"></table>
 <table id="poll-votes-block" class="borderless bCenter"></table>
 
-<!-- IF SHOW_VOTE_BTN -->
+<!-- IF not POLL_ALREADY_VOTED && SHOW_VOTE_BTN -->
 <div id="vote-btn-a" class="mrg_8 tCenter">[ <a href="#" onclick="build_votes(); return false;" class="gen"><b>{L_SUBMIT_VOTE}</b></a> ]</div>
 <div id="vote-btn-input" class="mrg_6 tCenter" style="display: none;"><input type="button" onclick="submit_vote(); return false;" value="{L_SUBMIT_VOTE}" class="bold" /></div>
-<!-- ELSE -->
+<!-- ELSEIF not SHOW_VOTE_BTN -->
 <div class="mrg_8 tCenter">[ <b>{L_NEW_POLL_END}</b> ]</div>
 <!-- ENDIF -->
 
