@@ -552,7 +552,8 @@ if ($topic_has_poll) {
         $template->assign_vars(['TOPIC_HAS_POLL' => false]);
     } else {
         $template->assign_vars([
-            'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::poll_is_active($t_data),
+            'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::pollIsActive($t_data),
+            'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id']),
             'POLL_VOTES_JS' => $poll_votes_js
         ]);
     }

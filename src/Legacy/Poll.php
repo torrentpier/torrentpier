@@ -143,12 +143,24 @@ class Poll
     }
 
     /**
+     * Checks whether the user has voted in a poll
+     *
+     * @param int $topic_id
+     * @param int $user_id
+     * @return bool
+     */
+    public static function userIsAlreadyVoted(int $topic_id, int $user_id): bool
+    {
+        return (bool)DB()->fetch_row("SELECT user_id FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
+    }
+
+    /**
      * Check whether poll is active
      *
      * @param array $t_data
      * @return bool
      */
-    public static function poll_is_active(array $t_data): bool
+    public static function pollIsActive(array $t_data): bool
     {
         global $bb_cfg;
         return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);

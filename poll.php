@@ -68,7 +68,7 @@ switch ($mode) {
         }
 
         // Checking that poll has not been finished
-        if (!\TorrentPier\Legacy\Poll::poll_is_active($t_data)) {
+        if (!\TorrentPier\Legacy\Poll::pollIsActive($t_data)) {
             bb_die($lang['NEW_POLL_ENDED']);
         }
 
@@ -76,7 +76,7 @@ switch ($mode) {
             bb_die($lang['NO_VOTE_OPTION']);
         }
 
-        if (DB()->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']} LIMIT 1")) {
+        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id'])) {
             bb_die($lang['ALREADY_VOTED']);
         }
 
