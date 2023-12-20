@@ -28,7 +28,10 @@ if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
     $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
 }
 
-if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
+try {
+    $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
+}
+catch (Exception) {
     return $lang['TORFILE_INVALID'];
 }
 
