@@ -30,9 +30,9 @@ if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
 
 try {
     $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
-}
-catch (Exception) {
-    return $lang['TORFILE_INVALID'];
+} catch (Exception) {
+    $this->response['html'] = $lang['TORFILE_INVALID'];
+    return;
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);
