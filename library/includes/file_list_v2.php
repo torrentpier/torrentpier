@@ -62,7 +62,7 @@ if ($bb_cfg['flist_max_files']) {
 
 try {
     $torrent = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
-} catch (Exception) {
+} catch (\Exception) {
     http_response_code(410);
     die($lang['TORFILE_INVALID']);
 }
