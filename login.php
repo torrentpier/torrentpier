@@ -80,7 +80,7 @@ if (isset($_POST['login'])) {
     }
 
     // Captcha
-    if ($need_captcha && !bb_captcha('check') && !$bb_cfg['captcha']['disabled']) {
+    if ($need_captcha && !$bb_cfg['captcha']['disabled'] && !bb_captcha('check')) {
         $login_errors[] = $lang['CAPTCHA_WRONG'];
     }
 
