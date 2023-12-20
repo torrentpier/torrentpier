@@ -696,7 +696,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
-        'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
+        'POSTER_AUTHOR' => !$poster_guest && ($poster_id == $t_data['topic_poster']),
         'POSTER_GENDER' => !$poster_guest ? genderImage((int)$postrow[$i]['user_gender']) : '',
         'POSTED_AFTER' => $prev_post_time ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
