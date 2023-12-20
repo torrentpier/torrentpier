@@ -734,22 +734,25 @@ class Attach
             $file = $_FILES['fileupload']['tmp_name'];
             $this->type = $_FILES['fileupload']['type'];
 
-        if (isset($_FILES['fileupload']['error'])) {
-            switch($_FILES['fileupload']['error']) {
-                case UPLOAD_ERR_NO_FILE:
-                bb_die('No file content sent');
-                case UPLOAD_ERR_INI_SIZE:
-                bb_die('upload_max_filesize setting: ' . ini_get('upload_max_filesize'));
-                case UPLOAD_ERR_CANT_WRITE:
-                bb_die('Failed to write file to disk, check permissions');
-                case UPLOAD_ERR_PARTIAL:
-                bb_die('The uploaded file was only partially uploaded');
+            if (isset($_FILES['fileupload']['error'])) {
+                switch($_FILES['fileupload']['error']) {
+                    case UPLOAD_ERR_NO_FILE:
+                        bb_die('No file content sent');
+                        // no break
+                    case UPLOAD_ERR_INI_SIZE:
+                        bb_die('upload_max_filesize setting: ' . ini_get('upload_max_filesize'));
+                        // no break
+                    case UPLOAD_ERR_CANT_WRITE:
+                        bb_die('Failed to write file to disk, check permissions');
+                        // no break
+                    case UPLOAD_ERR_PARTIAL:
+                        bb_die('The uploaded file was only partially uploaded');
+                }
             }
-        }
 
-        if (isset($_FILES['fileupload']['size']) && $_FILES['fileupload']['size'] === 0) {
-            bb_die('Tried to upload empty file');
-        }
+            if (isset($_FILES['fileupload']['size']) && $_FILES['fileupload']['size'] === 0) {
+                bb_die('Tried to upload empty file');
+            }
 
             $this->type = strtolower($this->type);
             $this->extension = strtolower(get_extension($this->filename));
