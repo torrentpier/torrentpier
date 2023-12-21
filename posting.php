@@ -90,6 +90,9 @@ switch ($mode) {
         break;
 
     default:
+        if (empty($_POST)) {
+            bb_simple_die('POST data is empty, could be size limit, check php.ini configuration, if sent data exceeds post_max_size: ' . ini_get('post_max_size'));
+        }
         bb_simple_die($lang['NO_POST_MODE']);
         break;
 }
