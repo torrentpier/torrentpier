@@ -19,6 +19,14 @@ class Attach
     public $attach_filename = '';
     public $filename = '';
     public $type = '';
+
+    /**
+     * Upload status code
+     *
+     * @var int
+     */
+    public int $error = UPLOAD_ERR_OK;
+
     public $extension = '';
     public $file_comment = '';
     public $num_attachments = 0; // number of attachments in message
@@ -733,30 +741,14 @@ class Attach
             $r_file = trim(basename($this->filename));
             $file = $_FILES['fileupload']['tmp_name'];
             $this->type = $_FILES['fileupload']['type'];
+            $this->error = $_FILES['fileupload']['error'];
 
-            if (isset($_FILES['fileupload']['error'])) {
-                switch ($_FILES['fileupload']['error']) {
-                    case UPLOAD_ERR_NO_FILE:
-                        bb_die('No file content sent');
-                        break;
-                    case UPLOAD_ERR_INI_SIZE:
-                        bb_die('php.ini<br><b>upload_max_filesize</b> setting: ' . ini_get('upload_max_filesize'));
-                        break;
-                    case UPLOAD_ERR_FORM_SIZE:
-                        bb_die('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form');
-                        break;
-                    case UPLOAD_ERR_CANT_WRITE:
-                        bb_die('Failed to write file to disk, check permissions');
-                        break;
-                    case UPLOAD_ERR_PARTIAL:
-                        bb_die('The uploaded file was only partially uploaded');
-                        break;
-                    case UPLOAD_ERR_EXTENSION:
-                        bb_die('File upload stopped by extension');
-                        break;
-                    case UPLOAD_ERR_NO_TMP_DIR:
-                        bb_die('Missing a temporary folder');
-                        break;
+            // Handling errors while uploading
+            if (isset($this->error) && ($this->error !== UPLOAD_ERR_OK)) {
+                if (isset($lang['UPLOAD_ERRORS'][$this->error])) {
+                    bb_die($lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->error]);
+                } else {
+                    bb_die($lang['UPLOAD_ERROR_COMMON']);
                 }
             }
 

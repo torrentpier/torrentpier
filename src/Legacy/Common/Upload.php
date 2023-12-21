@@ -75,6 +75,13 @@ class Upload
     public array $errors = [];
 
     /**
+     * Upload status code
+     *
+     * @var int
+     */
+    public int $error = UPLOAD_ERR_OK;
+
+    /**
      * Image types array
      *
      * @see https://www.php.net/manual/en/image.constants.php
@@ -102,6 +109,7 @@ class Upload
 
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
+        $this->error = $this->file['error'];
 
         // Check upload allowed
         if (!$this->cfg['up_allowed']) {
@@ -109,11 +117,13 @@ class Upload
             return false;
         }
 
-        // upload errors from $_FILES
-        if ($this->file['error']) {
-            $msg = $lang['UPLOAD_ERROR_COMMON'];
-            $msg .= ($err_desc =& $lang['UPLOAD_ERRORS'][$this->file['error']]) ? " ($err_desc)" : '';
-            $this->errors[] = $msg;
+        // Handling errors while uploading
+        if (isset($this->error) && ($this->error !== UPLOAD_ERR_OK)) {
+            if (isset($lang['UPLOAD_ERRORS'][$this->error])) {
+                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->error];
+            } else {
+                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'];
+            }
             return false;
         }
 
