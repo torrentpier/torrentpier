@@ -320,7 +320,7 @@ class Torrent
         try {
             $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
         } catch (\Exception $e) {
-            self::torrent_error_exit($lang['TORFILE_INVALID']);
+            self::torrent_error_exit(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
         if ($bb_cfg['bt_disable_dht']) {
@@ -564,7 +564,7 @@ class Torrent
         try {
             $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
         } catch (\Exception $e) {
-            bb_die($lang['TORFILE_INVALID']);
+            bb_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
         // Get tracker announcer

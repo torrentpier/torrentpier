@@ -740,7 +740,7 @@ class Attach
                         bb_die('No file content sent');
                         break;
                     case UPLOAD_ERR_INI_SIZE:
-                        bb_die('upload_max_filesize setting: ' . ini_get('upload_max_filesize'));
+                        bb_die('php.ini<br><b>upload_max_filesize</b> setting: ' . ini_get('upload_max_filesize'));
                         break;
                     case UPLOAD_ERR_FORM_SIZE:
                         bb_die('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form');
@@ -756,9 +756,6 @@ class Attach
                         break;
                     case UPLOAD_ERR_NO_TMP_DIR:
                         bb_die('Missing a temporary folder');
-                        break;
-                    default:
-                        bb_die('Unknown upload error');
                         break;
                 }
             }

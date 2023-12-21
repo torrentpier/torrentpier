@@ -64,7 +64,7 @@ try {
     $torrent = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
 } catch (\Exception $e) {
     http_response_code(410);
-    die($lang['TORFILE_INVALID']);
+    die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
 }
 
 if (isset($torrent['info']['private']) && IS_GUEST) {
