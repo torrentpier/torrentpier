@@ -735,18 +735,31 @@ class Attach
             $this->type = $_FILES['fileupload']['type'];
 
             if (isset($_FILES['fileupload']['error'])) {
-                switch($_FILES['fileupload']['error']) {
+                switch ($_FILES['fileupload']['error']) {
                     case UPLOAD_ERR_NO_FILE:
                         bb_die('No file content sent');
-                        // no break
+                        break;
                     case UPLOAD_ERR_INI_SIZE:
                         bb_die('upload_max_filesize setting: ' . ini_get('upload_max_filesize'));
-                        // no break
+                        break;
+                    case UPLOAD_ERR_FORM_SIZE:
+                        bb_die('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form');
+                        break;
                     case UPLOAD_ERR_CANT_WRITE:
                         bb_die('Failed to write file to disk, check permissions');
-                        // no break
+                        break;
                     case UPLOAD_ERR_PARTIAL:
                         bb_die('The uploaded file was only partially uploaded');
+                        break;
+                    case UPLOAD_ERR_EXTENSION:
+                        bb_die('File upload stopped by extension');
+                        break;
+                    case UPLOAD_ERR_NO_TMP_DIR:
+                        bb_die('Missing a temporary folder');
+                        break;
+                    default:
+                        bb_die('Unknown upload error');
+                        break;
                 }
             }
 

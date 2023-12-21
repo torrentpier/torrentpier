@@ -30,7 +30,7 @@ if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
 
 try {
     $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
-} catch (\Exception) {
+} catch (\Exception $e) {
     $this->response['html'] = $lang['TORFILE_INVALID'];
     return;
 }
