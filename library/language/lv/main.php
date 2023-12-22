@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Ja tas definēts Dimensiju Attēlu, kas ir s
 $lang['ASSIGNED_GROUP'] = 'Piešķirtie Grupu';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Izveidot Sīktēlu';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Vienmēr izveidot Sīktēlu. Šis līdzeklis nomāc gandrīz visus Iestatījumus, šajā Īpaša Kategorija, izņemot gadījumus, Maksimālā Attēla Izmēri. Ar šo Funkciju Sīktēlu tiks attēlota pastu, Lietotājs var noklikšķināt, lai atvērtu reālu Attēlu.<br />Please, Ņemiet vērā, ka šo funkciju Imagick uzstādīšanai, ja tas nav instalēts, vai ja-Drošajā Režīmā ir ļāvusi GD-pagarināt PHP tiks izmantots. Ja Attēla Tips netiek atbalstīts PHP, šī iespēja netiks izmantota.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimālais Sīktēla Izmērs';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Ja Attēls ir mazāks, nekā tas ir noteikts Izmērs, nav Sīktēla tiks izveidots, jo tas ir pietiekami mazs.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programma (Pilns Ceļš)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Ievadiet Ceļu uz datu pārvērst programma imagick, parasti /usr/bin/konvertēt (windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Meklēšanas Imagick';
-
-$lang['USE_GD2'] = 'Izmantot GD2 Pagarināšana';
-$lang['USE_GD2_EXPLAIN'] = 'PHP ir spējīgs tikt apkopoti ar GD1 vai GD2 Paplašinājumu uz attēla manipulējot. Lai pareizi izveidot Sīktēlus bez imagemagick Pielikumu Mod izmanto divas dažādas metodes, pamatojoties uz savu izvēli šeit. Ja jūsu sīktēliem, ir sliktas kvalitātes vai ieskrūvē augšu, mēģināt mainīt šo iestatījumu.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Pārvaldīt Aizliegts Paplašinājumi';
