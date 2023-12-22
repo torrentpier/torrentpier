@@ -35,33 +35,20 @@ function get_img_size_format($width, $height)
 }
 
 /**
- * Check if imagick is present
- */
-function is_imagick()
-{
-    global $imagick, $attach_config;
-
-    if ($attach_config['img_imagick'] != '') {
-        $imagick = $attach_config['img_imagick'];
-        return true;
-    }
-
-    return false;
-}
-
-/**
  * Get supported image types
  */
-function get_supported_image_types($type)
+function get_supported_image_types(int $type): int
 {
     // Check GD extension installed
     if (!extension_loaded('gd')) {
-        return ['gd' => false];
+        return false;
     }
 
+    // Get supported image types
     $format = imagetypes();
-    $new_type = 0;
+    $new_type = null;
 
+    // Select target type
     switch ($type) {
         case IMAGETYPE_GIF:
             $new_type = ($format & IMG_GIF) ? IMG_GIF : 0;
@@ -80,11 +67,7 @@ function get_supported_image_types($type)
             break;
     }
 
-    return [
-        'gd' => (bool)$new_type,
-        'format' => $new_type,
-        'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
-    ];
+    return $new_type;
 }
 
 /**
@@ -104,84 +87,74 @@ function create_thumbnail($source, $new_file, $mimetype)
         return false;
     }
 
-    [$width, $height, $type,] = getimagesize($source);
+    [$width, $height, $type] = getimagesize($source);
 
-    if (!$width || !$height) {
+    if (!$width || !$height || !$type) {
         return false;
     }
 
     [$new_width, $new_height] = get_img_size_format($width, $height);
 
-    $used_imagick = false;
-
-    if (is_imagick()) {
-        passthru($imagick . ' -quality 85 -antialias -sample ' . $new_width . 'x' . $new_height . ' "' . str_replace('\\', '/', $source) . '" +profile "*" "' . str_replace('\\', '/', $new_file) . '"');
-        if (@file_exists($new_file)) {
-            $used_imagick = true;
+    if ($type = get_supported_image_types($type)) {
+        switch ($type) {
+            case IMG_GIF:
+                $image = imagecreatefromgif($source);
+                break;
+            case IMG_JPG:
+                $image = imagecreatefromjpeg($source);
+                break;
+            case IMG_PNG:
+                $image = imagecreatefrompng($source);
+                break;
+            case IMG_BMP:
+                $image = imagecreatefrombmp($source);
+                break;
+            case IMG_WEBP:
+                $image = imagecreatefromwebp($source);
+                break;
         }
+
+        $new_image = imagecreatetruecolor($new_width, $new_height);
+
+        // Set transparency options for GIFs and PNGs
+        if ($type == IMG_GIF || $type == IMG_PNG) {
+            // Make image transparent
+            imagecolortransparent($new_image, imagecolorallocate($new_image, 0, 0, 0));
+
+            // Additional settings for PNGs
+            if ($type == IMG_PNG) {
+                imagealphablending($new_image, false);
+                imagesavealpha($new_image, true);
+            }
+        }
+
+        imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+        switch ($type) {
+            case IMG_GIF:
+                imagegif($new_image, $new_file);
+                break;
+            case IMG_JPG:
+                imagejpeg($new_image, $new_file, 90);
+                break;
+            case IMG_PNG:
+                imagepng($new_image, $new_file);
+                break;
+            case IMG_BMP:
+                imagebmp($new_image, $new_file);
+                break;
+            case IMG_WEBP:
+                imagewebp($new_image, $new_file);
+                break;
+        }
+
+        imagedestroy($new_image);
     }
 
-    if (!$used_imagick) {
-        $type = get_supported_image_types($type);
-
-        if ($type['gd']) {
-            switch ($type['format']) {
-                case IMG_GIF:
-                    $image = imagecreatefromgif($source);
-                    break;
-                case IMG_JPG:
-                    $image = imagecreatefromjpeg($source);
-                    break;
-                case IMG_PNG:
-                    $image = imagecreatefrompng($source);
-                    break;
-                case IMG_BMP:
-                    $image = imagecreatefrombmp($source);
-                    break;
-                case IMG_WEBP:
-                    $image = imagecreatefromwebp($source);
-                    break;
-                default:
-                    throw new Exception('Unknown file format: ' . $type['format']);
-            }
-
-            if ($type['version'] == 1 || !$attach_config['use_gd2']) {
-                $new_image = imagecreate($new_width, $new_height);
-                imagecopyresized($new_image, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-            } else {
-                $new_image = imagecreatetruecolor($new_width, $new_height);
-                imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-            }
-
-            switch ($type['format']) {
-                case IMG_GIF:
-                    imagegif($new_image, $new_file);
-                    break;
-                case IMG_JPG:
-                    imagejpeg($new_image, $new_file, 90);
-                    break;
-                case IMG_PNG:
-                    imagepng($new_image, $new_file);
-                    break;
-                case IMG_BMP:
-                    imagebmp($new_image, $new_file);
-                    break;
-                case IMG_WEBP:
-                    imagewebp($new_image, $new_file);
-                    break;
-                default:
-                    throw new Exception('Unknown file format: ' . $type['format']);
-            }
-
-            imagedestroy($new_image);
-        }
-    }
-
-    if (!@file_exists($new_file)) {
+    if (!file_exists($new_file)) {
         return false;
     }
 
-    @chmod($new_file, 0664);
-
+    chmod($new_file, 0664);
     return true;
 }

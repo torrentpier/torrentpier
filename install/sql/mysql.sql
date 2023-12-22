@@ -56,8 +56,6 @@ VALUES ('upload_dir', 'data/torrent_files'),
        ('img_link_height', '400'),
        ('img_create_thumbnail', '1'),
        ('img_min_thumb_filesize', '12000'),
-       ('img_imagick', '/usr/bin/convert'),
-       ('use_gd2', '1'),
        ('wma_autoplay', '0'),
        ('flash_autoplay', '0');
 
