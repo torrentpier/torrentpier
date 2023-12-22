@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Se questo definisce la Dimensione di un\'Imm
 $lang['ASSIGNED_GROUP'] = 'Gruppo Assegnato';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Creare Miniature';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Sempre creare una Miniatura. Questa funzione esegue l\'override di quasi tutte le Impostazioni all\'interno di questa Speciale Categoria, ad eccezione di Massima dimensione dell\'Immagine. Con questa Funzione, una Miniatura viene visualizzata all\'interno del post, l\'Utente può fare clic su di esso per aprire l\'Immagine reale.<br />Please si noti che questa funzionalità richiede Imagick per essere installato, se non è installato o se in Modalità Provvisoria) è attivata, il GD-Estensione di PHP verrà utilizzato. Se l\'Immagine non è supportato PHP, questa Funzionalità non saranno utilizzati.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimo Miniatura Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Se un Immagine è più piccola definito Filesize, nessuna Miniatura verrà creato, perché è abbastanza piccolo.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programma (Percorso Completo)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Immettere il Percorso per la conversione programma di imagick, di solito è /usr/bin/convert (su windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Ricerca Imagick';
-
-$lang['USE_GD2'] = 'Fare uso di GD2 Estensione';
-$lang['USE_GD2_EXPLAIN'] = 'PHP è in grado di essere compilato con il GD1 o GD2 Estensione per la manipolazione delle immagini. Per creare correttamente le Miniature senza imagemagick l\'Allegato Mod utilizza due metodi diversi, a seconda della selezione qui. Se le tue miniature sono in una cattiva qualità o avvitato, il tentativo di modificare questa impostazione.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gestire Vietato Estensioni';
