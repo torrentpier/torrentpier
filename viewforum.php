@@ -33,8 +33,6 @@ $anon = GUEST_UID;
 // Start session
 $user->session_start();
 
-set_die_append_msg($forum_id);
-
 $lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output
@@ -44,6 +42,7 @@ $req_page .= ($start) ? "_start{$start}" : '';
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest');
 
+set_die_append_msg();
 if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
@@ -111,6 +110,8 @@ $tracking_forums = get_tracks('forum');
 
 if ($mark_read && !IS_GUEST) {
     set_tracks(COOKIE_FORUM, $tracking_forums, $forum_id);
+
+    set_die_append_msg($forum_id);
     bb_die($lang['TOPICS_MARKED_READ']);
 }
 
