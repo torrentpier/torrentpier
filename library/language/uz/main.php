@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'bir surat, bu belgilangan mezon etib bo\'lsa
 $lang['ASSIGNED_GROUP'] = 'Tayinlangan Group';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Thumbnail yaratish';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Har doim, bir kichik rasm yaratish. Ushbu xususiyat maksimal Rasm hajmi tashqari, bu maxsus Turkum doirasida deyarli barcha parametrlarini bekor qiladi. u o\'rnatilmagan bo\'lsa kichik rasm post doirasida paydo bo\'ladi, shu xususiyati bilan, Foydalanuvchi, o\'rnatilgan bo\'lishi bu xususiyat Imagick talab real Image.<br />Please Eslatma ochish uchun uni bosing yoki xavfsiz-Mode yoqilgan bo\'lsa GD-Extension PHP foydalaniladi. Image-turi PHP bilan qo\'llab-quvvatlanadi bo\'lmasa, bu xususiyat mavjud emas bo\'ladi.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimal Thumbnail Fayl hajmi';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'a Image bu Fayl hajmi belgilangan kichik bo\'lsa, u etarli kichik, chunki, hech Thumbnail, tashkil etiladi.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick dasturi (to\'liq yo\'l)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Imagick ning convert dasturi, (: c: /imagemagick/convert.exe Derazalardagi) odatda / usr / bin / aylantirish yo\'lini kiriting.';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Qidiruv Imagick';
-
-$lang['USE_GD2'] = 'GD2 uzaytirish foydalanish';
-$lang['USE_GD2_EXPLAIN'] = 'PHP tasvir manipulyatsiyasi uchun GD1 yoki GD2 uzaytirish bilan olingan bo\'lishi mumkin emas. to\'g\'ri Tartibni bu erda tanlash asosida ikki xil usullar, foydalanadi plagin ImageMagick holda kichik yaratish uchun. Sizning eskizlari yomon sifatli yoki mast bo\'lsa, bu moslamani o\'zgartirishni harakat qiling.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Man kengaytmasini boshqarish';
