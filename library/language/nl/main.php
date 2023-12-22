@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Als deze gedefinieerd Afmetingen van een Afb
 $lang['ASSIGNED_GROUP'] = 'Toegewezen Groep';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Het Maken Van Miniatuur';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Maak altijd een Miniatuur. Deze functie overschrijft bijna alle Instellingen in deze Speciale Categorie, met uitzondering van de Maximale Afmetingen van het Beeld. Met deze Functie wordt een Miniatuur weergegeven in de post, de Gebruiker kan klikken om het te openen in het echte Beeld.<br />Please Opmerking deze functie is vereist Imagick te worden geïnstalleerd, als het niet geïnstalleerd of als u de Veilige Modus is ingeschakeld, wordt de GD-Extensie van PHP zal worden gebruikt. Als de Beeld-Type wordt niet ondersteund door PHP, deze Functie zal niet worden gebruikt.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Miniatuur Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Als een Afbeelding is kleiner dan deze omschreven Bestandsgrootte, geen Miniatuur zal worden gemaakt, omdat het klein genoeg was.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programma (Met Het Volledige Pad)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Voer het Pad naar converteer programma van imagick, normaal /usr/bin/zetten (op windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Zoeken Imagick';
-
-$lang['USE_GD2'] = 'Maak gebruik van GD2 Uitbreiding';
-$lang['USE_GD2_EXPLAIN'] = 'PHP is in staat te worden gecompileerd met de GD1 of GD2-Extensie voor het beeld te manipuleren. Juist het maken van Miniaturen, zonder imagemagick de Bijlage Mod maakt gebruik van twee verschillende methoden, gebaseerd op uw selectie hier. Als uw miniaturen in een slechte kwaliteit of verknoeid, proberen om deze instelling te wijzigen.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Beheren Verboden Extensies';
