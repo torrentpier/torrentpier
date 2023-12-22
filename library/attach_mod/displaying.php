@@ -233,11 +233,13 @@ function display_attachments($post_id)
                 }
             }
 
+            // Checks if image is thumbnail
             if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && $attachments['_' . $post_id][$i]['thumbnail'] == 1) {
                 $thumbnail = true;
                 $image = false;
             }
 
+            // Checks whether the image should be displayed as a link
             if (!$image && !$thumbnail) {
                 $link = true;
             }
