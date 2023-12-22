@@ -539,7 +539,7 @@ class Torrent
             }
         }
 
-        // Ratio limits
+        // Ratio limit for torrents dl
         $min_ratio = $bb_cfg['bt_min_ratio_allow_dl_tor'];
 
         if ($min_ratio && $user_id != $poster_id && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
