@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'As hierdie gedefinieerde dimensie van \'n pr
 $lang['ASSIGNED_GROUP'] = 'Toegewysde Groep';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Skep duimnaelskets';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Maak altyd \'n Miniatuur. Hierdie funksie oortref byna alle instellings binne hierdie spesiale kategorie, behalwe die maksimum beeldafmetings. Met hierdie funksie sal \'n duimnaelskets binne die pos vertoon word. Die gebruiker kan dit kliek om die regte prent te maak. Die prentjie moet eers vertoon word. Let wel, hierdie funksie vereis Imagick om geïnstalleer te word, as dit nie geïnstalleer is nie of as Veilige modus die GD-uitbreiding van PHP sal gebruik word. As die prent tipe nie deur PHP ondersteun word nie, sal hierdie kenmerk nie gebruik word nie.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Duimnaelskets Lêergrootte';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'As \'n beeld kleiner is as hierdie gedefinieerde lêergrootte, sal geen Duimnaelskets geskep word nie, want dit is klein genoeg.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Volledige Pad)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Gee die pad na die omskakel program van verbeelding, gewoonlik / usr / bin / convert (op vensters: c: /imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Soek Imagick';
-
-$lang['USE_GD2'] = 'Maak gebruik van GD2 Uitbreiding';
-$lang['USE_GD2_EXPLAIN'] = 'PHP kan saamgestel word met die GD1 of GD2 Uitbreiding vir beeld manipulering. Om Miniatuur te skep sonder verbeeldingskrag, gebruik die Attachment Mod twee verskillende metodes, gebaseer op jou keuse hier. As jou duimnaels in \'n slegte kwaliteit is of opskroef, probeer om hierdie instelling te verander.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Bestuur Verboden Extensions';
