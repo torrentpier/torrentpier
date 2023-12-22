@@ -17,7 +17,7 @@
 	</tr>
 <!-- BEGIN switch_thumbnail_support -->
 	<tr>
-		<td class="row1" width="80%">{L_IMAGE_CREATE_THUMBNAIL}<br /><span class="small">{L_IMAGE_CREATE_THUMBNAIL_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_IMAGE_CREATE_THUMBNAIL}<br /></td>
 		<td class="row2"><input type="radio" name="img_create_thumbnail" value="1" {CREATE_THUMBNAIL_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="img_create_thumbnail" value="0" {CREATE_THUMBNAIL_NO} /> {L_NO}</td>
 	</tr>
 	<tr>
