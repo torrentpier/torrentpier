@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Ha ez meghatározott Dimenzió a Kép eléri
 $lang['ASSIGNED_GROUP'] = 'Hozzárendelt Csoport';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Hozzon Létre Bélyegkép';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Mindig hozzon létre egy Miniatűr. Ez a funkció felülírja majdnem mind a Beállítások, ezen belül Külön Kategória, kivéve a Maximális képméretet. Ez a Funkció egy Indexkép megjelenik belül a post, a Felhasználó rákattinthat, hogy nyissa ki az igazi Kép.<br />Please, vegye figyelembe, hogy ezen funkció használatához Imagick kell telepíteni, ha ez nincs telepítve, vagy ha Biztonságos Üzemmód engedélyezve van-e a GD-Kiterjesztése PHP fogja használni. Ha a Kép-Típus nem támogatja a PHP, ez a Funkció nem használható.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimális Miniatűr Fájlméretet';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Ha a Kép kisebb, mint ez a meghatározott Fájlméretet, nem Miniatűr jön létre, mert elég kicsi.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Teljes Elérési Út)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Adja meg az elérési Utat, hogy a konvertáló program az imagick, általában a /usr/bin/convert (windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Keresés Imagick';
-
-$lang['USE_GD2'] = 'Használja GD2 Kiterjesztés';
-$lang['USE_GD2_EXPLAIN'] = 'A PHP képes összeállítani a GD1 vagy GD2 Kiterjesztés képet manipulálja. Helyesen létre a Miniatűrök, anélkül, hogy imagemagick a Mellékletet Mod alkalmaz két különböző módszer alapján a kiválasztás. Ha a miniatűrök, van egy rossz minőségű, vagy elcsesztem, akkor próbáljuk meg módosítani ezt a beállítást.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Kezelése Tiltott Kiterjesztések';
