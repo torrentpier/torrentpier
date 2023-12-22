@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Jos tämä on määritelty Ulottuvuus Kuva o
 $lang['ASSIGNED_GROUP'] = 'Valittu Ryhmä';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Luo Thumbnail';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Aina luoda Pikkukuvan. Tämä ominaisuus ohittaa lähes kaikki Asetukset majoitusliike, tämä Erityinen Luokkaan, paitsi Suurin Kuvan Mitat. Tämä Ominaisuus Pienoiskuva näkyy sisällä postitse, Käyttäjä voi klikata sitä avata todellinen Kuva.<br />Please Huomaa, että tämä ominaisuus edellyttää Imagick voitu asentaa, jos sitä ei ole asennettu tai jos Safe-Tila on käytössä GD-Laajennus PHP käytetään. Jos Kuva-Tyyppi ei ole tuettu PHP, tämä Ominaisuus ei ole käytössä.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Pienin Pikkukuva Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Jos Kuva on pienempi kuin tämä on määritelty Tiedostokoko, ei Thumbnail luodaan, koska se on tarpeeksi pieni.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Ohjelma (Koko Polku)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Anna Polku muuntaa ohjelma imagick, yleensä /usr/bin/convert (windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Haku Imagick';
-
-$lang['USE_GD2'] = 'Käyttää GD2 Laajennus';
-$lang['USE_GD2_EXPLAIN'] = 'PHP voi olla koottu kanssa GD1 tai GD2 Laajennus kuvan manipulointi. Oikein luoda Esikatselukuvat ilman imagemagick Kiinnitys Mod käyttää kahta eri menetelmää, joka perustuu omaan valintaan. Jos miniatyyrit ovat huono laatu tai sekaisin, yritä muuttaa tätä asetusta.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Hallita Kielletty Laajennukset';

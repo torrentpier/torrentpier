@@ -2187,15 +2187,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Eğer bir Görüntü tanımlanan bu Boyuta u
 $lang['ASSIGNED_GROUP'] = 'Atanan Grup';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Küçük Resim Oluşturma';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Her zaman bir Küçük resim oluşturmak. Bu özellik, bu Özel bir Kategori içinde neredeyse tüm Ayarları geçersiz kılar, Maksimum Resim Boyutları dışında. Bu Özelliği ile Küçük bir yazı içinde görüntülenir, Kullanıcının gerçek Resmi açmak için tıklatın.Bu özellik yüklenecek Imagick gerektirir, eğer yüklü değilse veya Mod GD etkin-PHP Uzantısı kullanılacaksa Güvenli eğer <br />Please Unutmayın. Eğer Görüntü Tipi PHP tarafından desteklenen değilse, bu Özellik kullanılmıyor.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'En Az Küçük Resim Boyutu';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Eğer bir Resim bu tanımlanmış dosya Boyutu daha küçük ise, Küçük resim yok yeterince küçük olduğu için oluşturulacak.';
-$lang['IMAGE_IMAGICK_PATH'] = '(Tam Yol)Imagick Programı';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Imagick dönüştürme programının Yolunu girin, normalde /usr/bin/(windows: c:/imagemagick/convert.exe dönüştürme.';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Arama Imagick';
-
-$lang['USE_GD2'] = 'GD2 Uzantısı kullanın';
-$lang['USE_GD2_EXPLAIN'] = 'PHP görüntü işleme için GD1 veya GD2 Uzantısı ile derlenmiş olabilir. Doğru Eki Mod iki farklı yöntem, seçim sana bağlı kullanır ımagemagick olmadan Küçük oluşturmak için. Eğer küçük kötü bir kalitede ya da berbat etti, bu ayarı değiştirmeyi deneyin.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Yasak Uzantıları Yönet';

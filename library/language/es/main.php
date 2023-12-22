@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Si esto se define la Dimensión de una Image
 $lang['ASSIGNED_GROUP'] = 'Grupo Asignado';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Crear Miniaturas';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Siempre crear una Miniatura. Esta función anula casi todos los Ajustes dentro de esta Categoría Especial, a excepción de la Máxima dimensión de la Imagen. Con esta Característica una de las Miniaturas se mostrarán en el post, el Usuario puede hacer clic en él para abrir la Imagen real.<br />Please tenga en cuenta que esta característica requiere Imagick para ser instalado, si no está instalado o si Safe-Mode está activada, el GD-Extensión de PHP que será utilizado. Si la Imagen-Tipo no es compatible con PHP, esta Función no se utiliza.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Mínimo De Miniaturas De Tamaño De Archivo';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Si una Imagen es más pequeña que esta se define de Tamaño, ninguna Miniatura va a ser creado, porque es lo suficientemente pequeño.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programa (Ruta Completa)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Introduzca la Ruta de acceso al programa de conversión de imagick, normalmente /usr/bin/convertir (en windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Búsqueda Imagick';
-
-$lang['USE_GD2'] = 'Hacer uso de GD2 Extensión';
-$lang['USE_GD2_EXPLAIN'] = 'PHP es capaz de ser compilado con el GD1 GD2 o Extensión de manipulación de imagen. Para crear correctamente las Miniaturas sin imagemagick el Apego Mod utiliza dos métodos diferentes, basado en su selección. Si sus miniaturas son de mala calidad o de la pata, tratar de cambiar esta configuración.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Administrar Prohibido Extensiones';

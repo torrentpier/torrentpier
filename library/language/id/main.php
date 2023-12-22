@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Jika ini didefinisikan Dimensi dari Gambar t
 $lang['ASSIGNED_GROUP'] = 'Ditugaskan Group';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Membuat Thumbnail';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Selalu membuat Thumbnail. Fitur ini menimpa hampir semua Pengaturan dalam Kategori Khusus, kecuali Maksimum Dimensi Gambar. Dengan Fitur ini gambar yang akan ditampilkan dalam posting, Pengguna dapat klik untuk membuka Gambar nyata.<br />Please Perhatikan bahwa fitur ini membutuhkan Imagick yang akan diinstal, jika tidak diinstal atau jika Safe Mode diaktifkan GD-Ekstensi PHP yang akan digunakan. Jika Gambar-Tipe ini tidak didukung oleh PHP, Fitur ini tidak akan digunakan.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Thumbnail Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Jika sebuah Gambar lebih kecil dari ini didefinisikan Filesize, tidak ada Thumbnail akan dibuat, karena itu cukup kecil.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Path Lengkap)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Masukkan Path untuk mengkonversi program imagick, biasanya di /usr/bin/convert (pada windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Pencarian Imagick';
-
-$lang['USE_GD2'] = 'Menggunakan Ekstensi GD2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP dapat disusun dengan GD1 atau GD2 Ekstensi untuk memanipulasi gambar. Untuk benar membuat Thumbnail tanpa imagemagick Lampiran Mod menggunakan dua metode yang berbeda, berdasarkan pada pilihan anda di sini. Jika anda thumbnail berada dalam kualitas yang buruk atau kacau, cobalah untuk mengubah pengaturan ini.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Mengelola Dilarang Ekstensi';

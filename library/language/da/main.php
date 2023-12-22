@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Hvis dette er defineret Dimension af et Bill
 $lang['ASSIGNED_GROUP'] = 'Tildelte Gruppe';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Opret Miniaturebilleder';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Opret altid en Miniature. Denne funktion tilsidesætter næsten alle Indstillinger i denne Særlige Kategori, med undtagelse af den Maksimale Billede Dimensioner. Med denne Funktion kan et Miniaturebillede vil blive vist inden for de indlæg, som Brugeren kan klikke på det for at åbne det reelle Billede.<br />Please Bemærk, at denne funktion kræver, at Imagick til at blive installeret, hvis det ikke er installeret, eller hvis Safe-Mode er aktiveret GD-Udvidelse for PHP vil blive brugt. Hvis Billedet-Type understøttes ikke af PHP, kan denne Funktion ikke bruges.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Thumbnail Fil Størrelse';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Hvis et Billede er mindre end det, der er defineret Filesize, ingen Miniature vil blive skabt, fordi det er lille nok.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Komplette Sti)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Indtast Stien til den konverter program af imagick, normalt /usr/bin/konvertere (på windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Søg Imagick';
-
-$lang['USE_GD2'] = 'Gøre brug af GD2 Udvidelse';
-$lang['USE_GD2_EXPLAIN'] = 'PHP er i stand til at være udarbejdet med GD1 eller GD2 Udvidelse til billede manipulere. Til korrekt at oprette Miniaturebilleder uden imagemagick den Vedhæftede fil Mod anvender to forskellige metoder, der er baseret på dine valg her. Hvis dine billeder er i en dårlig kvalitet eller skruet op, kan du prøve at ændre denne indstilling.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Styre Forbudt Udvidelser';

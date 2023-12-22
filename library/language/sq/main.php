@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Nëse kjo përcaktuar përmasat e një Imazh
 $lang['ASSIGNED_GROUP'] = 'Të Caktuar E Grupit';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Të Krijuar Tablo';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Gjithmonë të krijuar një Tablo. Ky funksion dominon pothuajse të gjitha Cilësimet në kuadër të kësaj Kategorie të Veçantë, përveç Maksimum Imazhin Dimensione. Me këtë Funksion të një Miniaturë do të shfaqet brenda post, Përdoruesi mund të klikoni për të hapur Imazhin e vërtetë.<br />Please vini re se kjo veçori kërkon Imagick të jetë i instaluar, në qoftë se ajo nuk është instaluar ose nëse Safe-Mode është i aktivizuar GD-Zgjerimi i PHP do të përdoren. Nëse Imazhit-Lloji nuk është i mbështetur nga PHP, këtë Funksion do të jetë të mos përdoret.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimale Miniaturë Si Kartela';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Nëse një Imazh është më e vogël se kjo e përcaktuar si kartela, nuk Miniaturë do të krijohen, për shkak se ajo është mjaft i vogël.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programi (I Plotë Rrugë)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Të hyjë në Rrugën e kthyer programin e imagick, normalisht /usr/bin/të kthyer (në windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Kërkim Imagick';
-
-$lang['USE_GD2'] = 'Bëni përdorimin e GD2 Zgjatje';
-$lang['USE_GD2_EXPLAIN'] = 'PHP është në gjendje të jetë e përpiluar me GD1 ose GD2 Këshillëdhënëse për manipulimin e imazhit. Të saktë të krijojë Thumbnails pa imagemagick Shtojcën Mod përdor dy metoda të ndryshme, bazuar në zgjedhjen tuaj këtu. Nëse tuaj të miniaturave janë në një cilësi të keqe ose të dehur, do të përpiqen për ta ndryshoni këtë cilësim.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Menaxhuar Ndaluar Zgjerime';

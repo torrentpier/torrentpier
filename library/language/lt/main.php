@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Jei tai apibrėžta Aspektas Vaizdas yra pas
 $lang['ASSIGNED_GROUP'] = 'Asignuotosios Grupė';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Sukurti Miniatiūrą';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Visada sukurti Miniatiūrą. Ši funkcija pakeičia beveik visus Parametrus, per šią Ypatingą Kategorijos, išskyrus Didžiausias Vaizdo Matmenys. Su šia Funkcija Miniatiūra bus rodomas per po, Vartotojas gali jį spustelėkite, kad atidarytumėte realus Vaizdas.<br />Please Dėmesį, kad ši funkcija reikalauja, Imagick turi būti įrengti, jei jis nėra įdiegtas, ar jei Safe-Mode įjungtas, GD-Pratęsti PHP bus naudojamas. Jei Nuotraukos Tipo nepalaiko PHP, ši Funkcija nebus naudojama.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Mažiausią Miniatiūrą Failo Dydis';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Jei Vaizdas yra mažesnis kaip tai apibrėžta failo dydis, ne Vaizdelis bus sukurta, nes jis pakankamai mažas.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programa (Visas Kelias)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Įvesti Kelią iki konvertuoti programa imagick, paprastai /usr/bin/convert (windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Paieškos Imagick';
-
-$lang['USE_GD2'] = 'Naudoti GD2 Pratęsimo';
-$lang['USE_GD2_EXPLAIN'] = 'PHP gali būti sukompiliuotos su GD1 ar GD2 Pratęsimo vaizdo manipuliuoti. Teisingai kurti Miniatiūras be imagemagick Priedą Mod naudoja du skirtingus metodus, pagrįsti savo pasirinkimą čia. Jei jūsų miniatiūros yra prastos kokybės arba įsukus, pabandykite pakeisti šį parametrą.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Tvarkyti Draudžiama Plėtiniai';

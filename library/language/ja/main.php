@@ -2187,15 +2187,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'この定義次元画像によっては、�
 $lang['ASSIGNED_GROUP'] = 'されているグループ';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'サムネイルの作成';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = '常にサムネイルも作成します。 この機能はオーバーライドほぼすべての設定この特別なカテゴリーを除き、最大画像寸法です。 このサムネイルが表示され、ユーザーをクリックで開きのイメージです。<br />Pleaseこの機能を必要とImagick設置する場合の置していない場合又は安全-モードが有効になっていると、GD-拡張のPHPが使用されます。 の場合は画像タイプによってサポートされていないPHP、この機能は使用していません。';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = '最小限のサムネイルFilesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = '場合、画像はより小さいここを定義Filesize、サムネイルが作成されで十分小さいです。';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagickプログラム(完全なパス)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'へのパスを入力変換プログラムのimagick、通常は/usr/bin/convert(windowsの場合:c:/imagemagick/convert.exeます。';
-$lang['IMAGE_SEARCH_IMAGICK'] = '検索Imagick';
-
-$lang['USE_GD2'] = '利用GD2延長';
-$lang['USE_GD2_EXPLAIN'] = 'PHPで作成し、GD1はGD2の拡張イメージを操作します。 を正しく作成するにはサムネイルなしにimagemagickの添付Mod用途の異なる二つの方法からお選びいた。 場合において、サムネイルが悪い質奮いうのは、この設定を変更します。';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '管理禁断の拡張';

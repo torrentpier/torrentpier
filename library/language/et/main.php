@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Kui see on määratletud Mõõde Pilt on saa
 $lang['ASSIGNED_GROUP'] = 'Sihtotstarbeline Grupp';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Loo Pisipilt';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Alati luua Pisipilti. See funktsioon katab peaaegu kõik Seaded jooksul see Eriline Kategooria, välja arvatud juhul Maksimaalsed Pildi Mõõtmed. See Funktsioon Pisipilt kuvatakse jooksul postitust, Kasutaja saab klõpsake sellel, et avada reaalne Pilt.<br />Please pange Tähele, et see funktsioon nõuab Imagick olema paigaldatud, kui see ei ole paigaldatud või kui Safe-Mode on sisse lülitatud GD-Laiendamine PHP kasutatakse. Kui Pilt-Tüüp ei toeta PHP, see Funktsioon ei ole kasutusel.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimaalne Pisipilt Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Kui Pilt on väiksem, kui see on määratletud Filesize, nr Pisipilt luuakse, sest see on piisavalt väike.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programmi (Terve Tee)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Sisestage Tee teisendada programmi imagick, tavaliselt /usr/bin/convert (windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Otsingu Imagick';
-
-$lang['USE_GD2'] = 'Kasutada GD2 Pikendamine';
-$lang['USE_GD2_EXPLAIN'] = 'PHP on võimalik siduda GD1 või GD2 Laiendamine pildi manipuleerides. Õigesti luua Pisipildid ilma imagemagick Manus Mod kasutab kahte erinevat meetodit, mis põhineb teie valik on siin. Kui teie pisipildid on halb kvaliteet või silmamunad, proovige seda sätet muuta.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Halda Keelatud Laiendid';

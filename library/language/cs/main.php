@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Pokud je tento definován Rozměr Obrazu je 
 $lang['ASSIGNED_GROUP'] = 'Přiřazené Skupiny';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Vytvořit Miniaturu';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Vždy vytvořit Miniaturu. Tato funkce přepíše téměř všechna Nastavení v této Speciální Kategorii, s výjimkou Maximální Rozměry Obrázku. Pomocí této Funkce Miniaturu, zobrazí se v příspěvku, Uživatel může klepněte na tlačítko otevřít reálný Obraz.<br />Please na Vědomí, že tato funkce vyžaduje Imagick být nainstalován, pokud to není nainstalována nebo pokud je Bezpečný-je povolen Režim GD-Rozšíření PHP bude použit. Pokud je Obrázek-Typ není podporován PHP, tato Funkce nebude použita.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimální Velikost Náhledů';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Pokud je Obrázek menší než definovaná Velikost, ne Miniatura bude vytvořen, protože je to dost malé.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Kompletní Cesta)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Zadejte Cestu k převést program imagick, obvykle /usr/bin/convert (na windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Vyhledávání Imagick';
-
-$lang['USE_GD2'] = 'Využít Rozšíření GD2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP je schopen být sestaven s GD1 GD2 nebo Rozšíření pro obrázek manipulace. Správně vytvářet Náhledy bez imagemagick Přílohu Mod používá dvě různé metody, na základě vašeho výběru. Pokud vaše náhledy jsou ve špatné kvalitě, nebo to podělal, zkuste změnit toto nastavení.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Spravovat Zakázané Rozšíření';

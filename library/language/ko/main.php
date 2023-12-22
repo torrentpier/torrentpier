@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = '이 정의의 차원 이미지에 도달했�
 $lang['ASSIGNED_GROUP'] = '그룹 할당';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = '을 만들의 썸네일';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = '항상 미리보기 이미지를 만드니다. 이 기능을 재정의 거의 모든 설정에는 이 특별한 카테고리를 제외하고,최대의 이미지 크기입니다. 이 기능으로 축소판 표시됩니다 내에 게시,사용자 클릭할 수 있는 그것을 열고 진짜 이미지합니다.<br />Please 이 기능이 필요 Imagick 설치하는 경우,그것은 설치하지 않을 경우 또는 안전 모드를 사용 GD-의 확장은 PHP 이 사용됩니다. 이미지 유형이 지원하지 않는 PHP 에 의해,이 기능을 사용하지 않습니다.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = '최소 썸네일을 파일 크기';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = '는 경우 이미지보다 작은 이 정의 최대 파일크기,축소판이 될 만들었기 때문에,그것은 작은 충분합니다.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick 프로그램(완전한 경로)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = '의 경로를 입력하는 변환 프로그램의 imagick,일반적으로/usr/bin/변환(windows:c:/imagemagick/convert.exe 니다.)';
-$lang['IMAGE_SEARCH_IMAGICK'] = '검색 Imagick';
-
-$lang['USE_GD2'] = '를 이용하의 GD2 확장';
-$lang['USE_GD2_EXPLAIN'] = 'PHP 할 수 있으로 컴파일 GD1 또는 GD2 확장에 대한 이미지를 조작합니다. 을 제대로 축소판을 만들지 않고 imagemagick 첨부 파일을 모는 두 가지 방법을 사용하여,당신의 선택에 따라 여기합니다. 면의 축소판이 나쁜 품질 또는 망하려고 이 설정을 변경합니다.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '관리 금지 확장';

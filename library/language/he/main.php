@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'אם זה מוגדר מימד של תמונ�
 $lang['ASSIGNED_GROUP'] = 'להקצות קבוצה';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'צור תמונות ממוזערות';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'תמיד ליצור תמונה ממוזערת. תכונה זו עוקף כמעט את כל הגדרות במסגרת זו קטגוריה מיוחדת, חוץ מרבית תמונה מידות. עם תכונה זו. התמונה הממוזערת תוצג בתוך ההודעה, המשתמש יכול ללחוץ על זה כדי לפתוח את התמונה האמיתית.<br />Please שים לב כי תכונה זו דורשת Imagick להיות מותקן, אם זה לא מותקן, או אם מצב בטוח \' מופעלת GD-סיומת של PHP תהיה בשימוש. אם התמונה מסוג זה אינו נתמך על ידי PHP, תכונה זו תהיה לא רגילה.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'מינימום גודל קובץ התמונה הממוזערת';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'אם תמונה קטן יותר מאשר זה מוגדר גודל קובץ, לא ממוזערת יהיה נברא, כי הוא קטן מספיק.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick התכנית (הנתיב המלא)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'הזן את הנתיב להמיר תוכנית של imagick, בדרך כלל /usr/bin/להמיר (ב-windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'חיפוש Imagick';
-
-$lang['USE_GD2'] = 'לעשות שימוש GD2 הרחבה';
-$lang['USE_GD2_EXPLAIN'] = 'PHP הוא מסוגל להיות הידור עם GD1 או GD2 הרחבה על התמונה מניפולציה. בצורה נכונה כדי ליצור תמונות ממוזערות ללא imagemagick את הקובץ Mod משתמשת בשתי שיטות שונות, בהתבסס על הבחירה שלך. אם התמונות הממוזערות נמצא באיכות גרועה או דפוק, נסה לשנות הגדרה זו.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'לנהל אסור הרחבות';
