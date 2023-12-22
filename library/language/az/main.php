@@ -2186,15 +2186,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Əgər bu müəyyən Boy şəkillər, şəki
 $lang['ASSIGNED_GROUP'] = 'Bu Qrupu';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Yaratmaq Eskiz';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Həmişə eskiz yaradır. Bu xüsusiyyət kəsir, demək olar ki, bütün parametrlər bu kateqoriyalar istisna olmaqla maksimum ölçüsü şəkillər. Bu funksiyadan istifadə edərək eskiz göstərilir poçt, istifadəçi basın, onu açmaq üçün real obrazdır.<br />Please qeyd edək ki, bu xüsusiyyət tələb edir İmagick yüklü olmalıdır, əgər o, yüklü deyil ya əgər safe mode aktiv GU-PHP uzadılması üçün istifadə olunacaq. Əgər obraz Növü dəstəklənmir PHP, bu xüsusiyyət istifadə olunacaq.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimal Boy Miniatür';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Əgər şəkil azdır, bu, müəyyən Boy, eskiz yaradılacaq, çünki o, kifayət qədər kiçik.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Proqram İmagick (Tam Yol)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Yazın yol proqramında dəyişikliklər biri imagick, adətən bu, /usr/Bin/dönüşüm (Windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Axtarış İmagick';
-
-$lang['USE_GD2'] = 'İstifadə genişləndirilməsi gd2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP-bu, ola bilər скомпилированы ilə uyğun gd1 və ya genişləndirilməsi gd2 üçün image emal. Düzgün yaratmaq kiçik olmadan paket imagemagick qoyuluşu mod istifadə edir ki, iki müxtəlif metod seçimi əsasında burada. Əgər sizin превьюшки pis kimi və ya облажались, dəyişdirmək üçün cəhd edin, bu seçimi edin.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'İdarə Etmək Qadağan Olunmuş Genişləndirilməsi';
