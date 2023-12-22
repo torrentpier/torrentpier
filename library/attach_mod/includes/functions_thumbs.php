@@ -35,12 +35,17 @@ function createThumbnail(string $source, string $newFile, string $mimeType): boo
     }
 
     // Making the thumbnail image
-    $image = new \claviska\SimpleImage();
-    $image
-        ->fromFile($source)
-        ->autoOrient()
-        ->resize(200)
-        ->toFile($newFile, $mimeType);
+    try {
+        $image = new \claviska\SimpleImage();
+        $image
+            ->fromFile($source)
+            ->autoOrient()
+            ->resize(150)
+            ->toFile($newFile, $mimeType);
+    } catch (Exception $e) {
+        // Handle errors
+        throw new Exception($e->getMessage());
+    }
 
     // Check the thumbnail existence after creating
     if (!file_exists($newFile)) {
