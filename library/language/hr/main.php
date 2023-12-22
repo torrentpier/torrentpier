@@ -2186,15 +2186,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Ako ovaj određenu Veličinu slike, slika se
 $lang['ASSIGNED_GROUP'] = 'Zadužena Grupa';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Stvaranje Skica';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Uvijek stvaraju skica. Ova funkcija pokriva gotovo sve postavke u ovoj kategoriji, osim maksimalne veličine slike. Pomoću ove opcije thumbnail će biti prikazan na mail, korisnik može kliknuti da biste ga otvorili pravi način.<br />Please imajte na umu da ova značajka zahtijeva Imagick mora biti instaliran, ako nije instaliran ili ako je siguran način rada omogućen je GU-proširenje PHP će koristiti. Ako je slika-Tip ne podržava PHP-u, ova funkcija neće koristiti.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimalna Veličina Minijature';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Ako je slika manja, nego što je to definirano Veličina, thumbnail će biti stvorena, jer on je dovoljno mali.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Program Imagick (Cijeli Put)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Unesite put na program transformacije iz imagick, obično je to /usr/Bin/pretvorbe (na Windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Traži Imagick';
-
-$lang['USE_GD2'] = 'Koristite proširenje gd2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP-to može biti sastavljen s pravog gd1 ili proširenje gd2 za obradu slike. Kako pravilno izraditi skice bez paketa imagemagick privitak mod koristi dvije različite metode, na temelju vašeg odabira ovdje. Ako vaše превьюшки u lošem ili kao zeznuo, pokušajte promijeniti postavku.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Upravljanje Zabranjene Za Proširenje';
