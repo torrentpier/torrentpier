@@ -41,7 +41,7 @@ function createThumbnail(string $source, string $newFile, string $mimeType): boo
             ->fromFile($source)
             ->autoOrient()
             ->resize(150)
-            ->toFile($newFile, $mimeType);
+            ->toFile($newFile, $mimeType, ['quality' => 85]);
     } catch (Exception $e) {
         // Handle errors
         throw new Exception($e->getMessage());
