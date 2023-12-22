@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Si aquesta definir la Dimensió d\'una Imatg
 $lang['ASSIGNED_GROUP'] = 'Assignat Grup';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Crear Una Miniatura';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Sempre crear una Miniatura. Aquesta funció de substitució gairebé tots els Paràmetres dins d\'aquesta Categoria Especial, a excepció de les Màximes Dimensions de la Imatge. Amb aquesta Funció en una Miniatura es mostraran dins la publicació, l\'Usuari pot fer clic per obrir la Imatge real.<br />Please tingueu en Compte que aquesta característica requereix Imagick a instal·lar, si és que no teniu instal·lat, o si Safe-Mode està activada, el GD-Extensió de PHP. Si la Imatge de Tipus no és compatible amb PHP, aquesta Funció no serà utilitzat.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Mínim Tamany Miniatura';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Si una Imatge és més petit que aquest defineix Tamany, sense Miniatura serà creat, perquè és prou petit.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programa (Ruta Completa)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Introduïu el Camí cap a l\'convertir programa de imagick, normalment /usr/bin/convert (en windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Cerca Imagick';
-
-$lang['USE_GD2'] = 'Fer ús de GD2 Extensió';
-$lang['USE_GD2_EXPLAIN'] = 'PHP és capaç de ser compilats amb la GD1 o GD2 Extensió de la imatge manipular. Per a la correcta crear Miniatures sense imagemagick l\'Adjunt Mod utilitza dos mètodes diferents, basat en la seva selecció aquí. Si el vostre miniatures són de mala qualitat o la pota, intentar canviar aquesta configuració.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gestionar Prohibit Extensions';
