@@ -25,7 +25,7 @@ function createThumbnail(string $source, string $newFile, string $mimeType): boo
     global $attach_config;
 
     // Get the file information
-    $source = amod_realpath($source);
+    $source = realpath($source);
     $min_filesize = (int)$attach_config['img_min_thumb_filesize'];
     $img_filesize = file_exists($source) ? filesize($source) : false;
 

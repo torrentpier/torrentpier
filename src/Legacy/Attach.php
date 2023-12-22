@@ -550,7 +550,7 @@ class Attach
 
                     // update entry in db if attachment already stored in db and filespace
                     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
-						SET comment = '" . @attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
+						SET comment = '" . DB()->escape($this->attachment_comment_list[$i]) . "'
 						WHERE attach_id = " . $this->attachment_id_list[$i];
 
                     if (!(DB()->sql_query($sql))) {
@@ -757,22 +757,22 @@ class Attach
             }
 
             $this->type = strtolower($this->type);
-            $this->extension = strtolower(get_extension($this->filename));
-
-            $this->filesize = @filesize($file);
-            $this->filesize = (int)$this->filesize;
+            $this->extension = strtolower(pathinfo($this->filename, PATHINFO_EXTENSION));
+            $this->filesize = (int)filesize($file);
 
             $sql = 'SELECT g.allow_group, g.max_filesize, g.cat_id, g.forum_permissions
 				FROM ' . BB_EXTENSION_GROUPS . ' g, ' . BB_EXTENSIONS . " e
 				WHERE g.group_id = e.group_id
-					AND e.extension = '" . attach_mod_sql_escape($this->extension) . "'
+					AND e.extension = '" . DB()->escape($this->extension) . "'
 				LIMIT 1";
 
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not query extensions');
             }
 
-            $row = DB()->sql_fetchrow($result);
+            if (!($row = DB()->sql_fetchrow($result))) {
+                /** TODO **/
+            }
             DB()->sql_freeresult($result);
 
             $allowed_filesize = $row['max_filesize'] ?: $attach_config['max_filesize'];
@@ -848,15 +848,14 @@ class Attach
                 $this->filename = $r_file;
 
                 // physical filename
-                //$this->attach_filename = strtolower($this->filename);
                 $this->attach_filename = $this->filename;
 
                 //bt
                 if (FILENAME_CRYPTIC) {
                     $this->attach_filename = make_rand_str(FILENAME_CRYPTIC_LENGTH);
-                } else { // original
+                } else {
                     $this->attach_filename = html_entity_decode(trim(stripslashes($this->attach_filename)));
-                    $this->attach_filename = delete_extension($this->attach_filename);
+                    $this->attach_filename = pathinfo($this->attach_filename, PATHINFO_FILENAME);
                     $this->attach_filename = str_replace([' ', '-'], '_', $this->attach_filename);
                     $this->attach_filename = str_replace('__', '_', $this->attach_filename);
                     $this->attach_filename = str_replace([',', '.', '!', '?', 'ь', 'Ь', 'ц', 'Ц', 'д', 'Д', ';', ':', '@', "'", '"', '&'], ['', '', '', '', 'ue', 'ue', 'oe', 'oe', 'ae', 'ae', '', '', '', '', '', 'and'], $this->attach_filename);
@@ -1082,7 +1081,7 @@ class Attach
 
         if (!$error && $this->thumbnail === 1) {
             $source = $upload_dir . '/' . basename($this->attach_filename);
-            $dest_file = amod_realpath($upload_dir);
+            $dest_file = realpath($upload_dir);
             $dest_file .= '/' . THUMB_DIR . '/t_' . basename($this->attach_filename);
 
             if (!createThumbnail($source, $dest_file, $this->type)) {
