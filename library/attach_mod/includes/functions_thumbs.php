@@ -15,11 +15,12 @@ if (!defined('BB_ROOT')) {
  * Create thumbnail
  *
  * @param string $source
- * @param string $new_file
+ * @param string $newFile
+ * @param string $mimeType
  * @return bool
  * @throws Exception
  */
-function create_thumbnail(string $source, string $new_file): bool
+function createThumbnail(string $source, string $newFile, string $mimeType): bool
 {
     global $attach_config;
 
@@ -39,10 +40,10 @@ function create_thumbnail(string $source, string $new_file): bool
         ->fromFile($source)
         ->autoOrient()
         ->resize(200)
-        ->toFile($new_file);
+        ->toFile($newFile, $mimeType);
 
     // Check the thumbnail existence after creating
-    if (!file_exists($new_file)) {
+    if (!file_exists($newFile)) {
         return false;
     }
 

@@ -1085,8 +1085,8 @@ class Attach
             $dest_file = amod_realpath($upload_dir);
             $dest_file .= '/' . THUMB_DIR . '/t_' . basename($this->attach_filename);
 
-            if (!create_thumbnail($source, $dest_file, $this->type)) {
-                if (!$file || !create_thumbnail($file, $dest_file, $this->type)) {
+            if (!createThumbnail($source, $dest_file, $this->type)) {
+                if (!$file || !createThumbnail($file, $dest_file, $this->type)) {
                     $this->thumbnail = 0;
                 }
             }
