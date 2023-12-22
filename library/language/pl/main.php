@@ -2186,15 +2186,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Jeśli ten konkretny Rozmiar obrazu, obraz j
 $lang['ASSIGNED_GROUP'] = 'Przypisana Grupa';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Utworzyć Szkic';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Zawsze tworzą szkic. Funkcja ta obejmuje prawie wszystkie ustawienia w tej kategorii, za wyjątkiem maksymalnego rozmiaru obrazu. Za pomocą tej funkcji szkic będzie wyświetlany w mail, użytkownik może kliknąć, aby otworzyć prawdziwy obraz.<br />Please należy pamiętać, że funkcja ta wymaga Imagick musi być zainstalowany, jeśli nie jest zainstalowany lub jeśli tryb bezpieczny jest włączony GU-rozszerzenie PHP będzie używany. Jeśli obraz-ten Typ nie jest obsługiwany PHP, ta funkcja nie będzie używana.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimalny Rozmiar Miniatury';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Jeżeli obrazek jest mniejszy niż określony Rozmiar, szkic zostanie utworzony, bo jest on dość mały.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Program Imagick (Pełna Ścieżka)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Wpisz ścieżkę do programu konwersji z imagick, zwykle jest to /usr/Bin/konwersji (na Windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Wyszukaj Imagick';
-
-$lang['USE_GD2'] = 'Używać rozszerzenia gd2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP-to mogą być skompilowane z odpowiedniego gd1 lub rozszerzenie gd2 do przetwarzania obrazu. Aby poprawnie utworzyć miniatury bez pakietu imagemagick załącznik mod wykorzystuje dwa różne metody, na podstawie wyboru tutaj. Jeśli twoje miniatury w złej jakości lub wkręca, spróbuj zmienić to ustawienie.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Zarządzanie Niedozwolone Rozszerzenie';
