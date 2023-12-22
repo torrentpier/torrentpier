@@ -12,9 +12,6 @@ define('BB_SCRIPT', 'topic');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
 
-// Start session
-$user->session_start();
-
 $datastore->enqueue([
     'ranks',
     'cat_forums'
@@ -31,6 +28,11 @@ $file_list = isset($_GET['filelist']) ? include(INC_DIR . '/file_list_v2.php') :
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 $post_id = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int)$_GET[POST_POST_URL] : 0;
+
+// Start session
+$user->session_start();
+
+set_die_append_msg();
 
 // Posts per page
 $posts_per_page = $bb_cfg['posts_per_page'];
@@ -125,7 +127,7 @@ if ($topic_attachment) {
     $datastore->enqueue(['attach_extensions']);
 }
 
-set_die_append_msg($forum_id, $topic_id);
+set_die_append_msg($forum_id);
 
 // Find newest post
 if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
@@ -238,6 +240,7 @@ if ($bb_cfg['topic_notify_enabled']) {
                     DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
 
+                set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['NO_LONGER_WATCHING']);
             } else {
                 $is_watching_topic = true;
@@ -257,6 +260,7 @@ if ($bb_cfg['topic_notify_enabled']) {
 					");
                 }
 
+                set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['YOU_ARE_WATCHING']);
             } else {
                 $is_watching_topic = 0;

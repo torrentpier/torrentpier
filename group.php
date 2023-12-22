@@ -162,7 +162,7 @@ if (!$group_id) {
         bb_die($lang['NO_GROUPS_EXIST']);
     }
     if ($row['user_id']) {
-        set_die_append_msg(group_id: $group_id);
+        set_die_append_msg(false, false, $group_id);
         bb_die($lang['ALREADY_MEMBER_GROUP']);
     }
 
@@ -185,12 +185,12 @@ if (!$group_id) {
         $emailer->send();
     }
 
-    set_die_append_msg(group_id: $group_id);
+    set_die_append_msg(false, false, $group_id);
     bb_die($lang['GROUP_JOINED']);
 } elseif (!empty($_POST['unsub']) || !empty($_POST['unsubpending'])) {
     \TorrentPier\Legacy\Group::delete_user_group($group_id, $userdata['user_id']);
 
-    set_die_append_msg(group_id: $group_id);
+    set_die_append_msg(false, false, $group_id);
     bb_die($lang['UNSUB_SUCCESS']);
 } else {
     // Handle Additions, removals, approvals and denials
@@ -198,26 +198,26 @@ if (!$group_id) {
 
     if (!empty($_POST['add']) || !empty($_POST['remove']) || !empty($_POST['approve']) || !empty($_POST['deny'])) {
         if (!$is_moderator) {
-            set_die_append_msg(group_id: $group_id);
+            set_die_append_msg(false, false, $group_id);
             bb_die($lang['NOT_GROUP_MODERATOR']);
         }
 
         if (!empty($_POST['add'])) {
             if (isset($_POST['username']) && !($row = get_userdata($_POST['username'], true))) {
-                set_die_append_msg(group_id: $group_id);
+                set_die_append_msg(false, false, $group_id);
                 bb_die($lang['COULD_NOT_ADD_USER']);
             }
 
             // Prevent adding moderator
             if ($row['user_id'] == $group_moderator) {
-                set_die_append_msg(group_id: $group_id);
+                set_die_append_msg(false, false, $group_id);
                 bb_die(sprintf($lang['USER_IS_MOD_GROUP'], profile_url($row)));
             }
 
             // Prevent infinity user adding into group
             if ($is_member = DB()->fetch_row("SELECT user_id FROM " . BB_USER_GROUP . " WHERE group_id = $group_id AND user_id = " . $row['user_id'] . " LIMIT 1")) {
                 if ($is_member['user_id']) {
-                    set_die_append_msg(group_id: $group_id);
+                    set_die_append_msg(false, false, $group_id);
                     bb_die(sprintf($lang['USER_IS_MEMBER_GROUP'], profile_url($row)));
                 }
             }
@@ -248,7 +248,7 @@ if (!$group_id) {
                     $sql_in[] = (int)$members_id;
                 }
                 if (!$sql_in = implode(',', $sql_in)) {
-                    set_die_append_msg(group_id: $group_id);
+                    set_die_append_msg(false, false, $group_id);
                     bb_die($lang['NONE_SELECTED']);
                 }
 
@@ -418,7 +418,7 @@ if (!$group_id) {
             // TODO Correct SQL to posts with attach and limit them, optimization
 
             if (!$group_info['release_group']) {
-                set_die_append_msg(group_id: $group_id);
+                set_die_append_msg(false, false, $group_id);
                 bb_die($lang['NOT_A_RELEASE_GROUP']);
             }
 
@@ -449,7 +449,7 @@ if (!$group_id) {
 			";
 
             if (!$releases = DB()->fetch_rowset($sql)) {
-                set_die_append_msg(group_id: $group_id);
+                set_die_append_msg(false, false, $group_id);
                 bb_die($lang['NO_SEARCH_MATCH']);
             }
 
