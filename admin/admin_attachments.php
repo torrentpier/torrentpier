@@ -37,7 +37,6 @@ $pm_size = request_var('pm_size', '');
 $submit = isset($_POST['submit']);
 $check_upload = isset($_POST['settings']);
 $check_image_cat = isset($_POST['cat_settings']);
-$search_imagick = isset($_POST['search_imagick']);
 
 // Re-evaluate the Attachment Configuration
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
@@ -129,44 +128,6 @@ CACHE('bb_cache')->rm('attach_config');
 $select_size_mode = size_select('size', $size);
 $select_quota_size_mode = size_select('quota_size', $quota_size);
 $select_pm_size_mode = size_select('pm_size', $pm_size);
-
-// Search Imagick
-if ($search_imagick) {
-    $imagick = '';
-
-    if (false !== stripos($imagick, "convert")) {
-        return true;
-    }
-
-    if ($imagick != 'none') {
-        if (!false !== stripos(PHP_OS, "WIN")) {
-            $retval = @exec('whereis convert');
-            $paths = explode(' ', $retval);
-
-            if (is_array($paths)) {
-                foreach ($paths as $i => $iValue) {
-                    $path = basename($paths[$i]);
-
-                    if ($path == 'convert') {
-                        $imagick = $iValue;
-                    }
-                }
-            }
-        } elseif (false !== stripos(PHP_OS, "WIN")) {
-            $path = 'c:/imagemagick/convert.exe';
-
-            if (file_exists(amod_realpath($path))) {
-                $imagick = $path;
-            }
-        }
-    }
-
-    if (file_exists(amod_realpath(trim($imagick)))) {
-        $new_attach['img_imagick'] = trim($imagick);
-    } else {
-        $new_attach['img_imagick'] = '';
-    }
-}
 
 // Check Settings
 if ($check_upload) {
@@ -287,11 +248,8 @@ if ($mode == 'cats') {
     $create_thumbnail_yes = ($new_attach['img_create_thumbnail'] != '0') ? 'checked' : '';
     $create_thumbnail_no = ($new_attach['img_create_thumbnail'] == '0') ? 'checked' : '';
 
-    $use_gd2_yes = ($new_attach['use_gd2'] != '0') ? 'checked' : '';
-    $use_gd2_no = ($new_attach['use_gd2'] == '0') ? 'checked' : '';
-
     // Check Thumbnail Support
-    if (!is_imagick() && !extension_loaded('gd')) {
+    if (!extension_loaded('gd')) {
         $new_attach['img_create_thumbnail'] = '0';
     } else {
         $template->assign_block_vars('switch_thumbnail_support', []);
@@ -304,13 +262,10 @@ if ($mode == 'cats') {
         'IMAGE_LINK_HEIGHT' => $new_attach['img_link_height'],
         'IMAGE_LINK_WIDTH' => $new_attach['img_link_width'],
         'IMAGE_MIN_THUMB_FILESIZE' => $new_attach['img_min_thumb_filesize'],
-        'IMAGE_IMAGICK_PATH' => $new_attach['img_imagick'],
         'DISPLAY_INLINED_YES' => $display_inlined_yes,
         'DISPLAY_INLINED_NO' => $display_inlined_no,
         'CREATE_THUMBNAIL_YES' => $create_thumbnail_yes,
         'CREATE_THUMBNAIL_NO' => $create_thumbnail_no,
-        'USE_GD2_YES' => $use_gd2_yes,
-        'USE_GD2_NO' => $use_gd2_no,
         'S_ASSIGNED_GROUP_IMAGES' => implode(', ', $s_assigned_group_images),
         'S_ATTACH_ACTION' => 'admin_attachments.php?mode=cats',
     ));

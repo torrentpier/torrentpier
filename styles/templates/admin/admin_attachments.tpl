@@ -17,22 +17,14 @@
 	</tr>
 <!-- BEGIN switch_thumbnail_support -->
 	<tr>
-		<td class="row1" width="80%">{L_IMAGE_CREATE_THUMBNAIL}<br /><span class="small">{L_IMAGE_CREATE_THUMBNAIL_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_IMAGE_CREATE_THUMBNAIL}<br /></td>
 		<td class="row2"><input type="radio" name="img_create_thumbnail" value="1" {CREATE_THUMBNAIL_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="img_create_thumbnail" value="0" {CREATE_THUMBNAIL_NO} /> {L_NO}</td>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_IMAGE_MIN_THUMB_FILESIZE}<br /><span class="small">{L_IMAGE_MIN_THUMB_FILESIZE_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="7" maxlength="15" name="img_min_thumb_filesize" value="{IMAGE_MIN_THUMB_FILESIZE}" class="post" /> {L_BYTES}</td>
 	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_USE_GD2}<br /><span class="small">{L_USE_GD2_EXPLAIN}</span></td>
-		<td class="row2"><input type="radio" name="use_gd2" value="1" {USE_GD2_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="use_gd2" value="0" {USE_GD2_NO} /> {L_NO}</td>
-	</tr>
 <!-- END switch_thumbnail_support -->
-	<tr>
-		<td class="row1" width="80%">{L_IMAGE_IMAGICK_PATH}<br /><span class="small">{L_IMAGE_IMAGICK_PATH_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="20" maxlength="200" name="img_imagick" value="{IMAGE_IMAGICK_PATH}" class="post" /></td>
-	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_MAX_IMAGE_SIZE} <br /><span class="small">{L_MAX_IMAGE_SIZE_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="3" maxlength="4" name="img_max_width" value="{IMAGE_MAX_WIDTH}" class="post" /> x <input type="text" size="3" maxlength="4" name="img_max_height" value="{IMAGE_MAX_HEIGHT}" class="post" /></td>

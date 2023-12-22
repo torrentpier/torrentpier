@@ -183,6 +183,11 @@ function display_attachments($post_id)
         $filename = $upload_dir . '/' . basename($attachments['_' . $post_id][$i]['physical_filename']);
         $thumbnail_filename = $upload_dir . '/' . THUMB_DIR . '/t_' . basename($attachments['_' . $post_id][$i]['physical_filename']);
 
+        // Checks the file existence
+        if (!is_file($filename)) {
+            continue;
+        }
+
         $upload_image = '';
 
         if ($attach_config['upload_img'] && empty($upload_icons[$attachments['_' . $post_id][$i]['extension']])) {
@@ -214,7 +219,12 @@ function display_attachments($post_id)
 
             if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && (int)$attach_config['img_display_inlined']) {
                 if ((int)$attach_config['img_link_width'] != 0 || (int)$attach_config['img_link_height'] != 0) {
-                    [$width, $height] = image_getdimension($filename);
+                    // Checks the thumbnail existence
+                    if (!is_file($thumbnail_filename)) {
+                        continue;
+                    }
+
+                    [$width, $height] = getimagesize($filename);
 
                     if ($width == 0 && $height == 0) {
                         $image = true;

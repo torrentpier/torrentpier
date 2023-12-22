@@ -925,7 +925,7 @@ class Attach
 
             // Check Image Size, if it's an image
             if (!$error && !IS_ADMIN && $cat_id === IMAGE_CAT) {
-                [$width, $height] = image_getdimension($upload_dir . '/' . $this->attach_filename);
+                [$width, $height] = getimagesize($upload_dir . '/' . $this->attach_filename);
 
                 if ($width && $height && (int)$attach_config['img_max_width'] && (int)$attach_config['img_max_height']) {
                     if ($width > (int)$attach_config['img_max_width'] || $height > (int)$attach_config['img_max_height']) {
@@ -1085,8 +1085,8 @@ class Attach
             $dest_file = amod_realpath($upload_dir);
             $dest_file .= '/' . THUMB_DIR . '/t_' . basename($this->attach_filename);
 
-            if (!create_thumbnail($source, $dest_file, $this->type)) {
-                if (!$file || !create_thumbnail($file, $dest_file, $this->type)) {
+            if (!createThumbnail($source, $dest_file, $this->type)) {
+                if (!$file || !createThumbnail($file, $dest_file, $this->type)) {
                     $this->thumbnail = 0;
                 }
             }
