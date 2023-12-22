@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Če je to določeno Dimenzijo Slike, ki je d
 $lang['ASSIGNED_GROUP'] = 'Namenske Skupine';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Ustvariti Sličice';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Vedno ustvarite Sličico. Ta funkcija preglasi skoraj vse Nastavitve v tej Posebne Kategorije, razen Največja velikost Slik. S to Funkcijo Predogledu, bodo prikazani v mesto, lahko Uporabnik jo kliknite, da odprete realno Sliko.<br />Please, Upoštevajte, da ta funkcija zahteva Imagick biti nameščen, če je ne namestite ali če Safe-Mode je omogočena GV-Razširitev PHP bodo uporabljali. Če Sliko-je Tip, ki ne podpira PHP, to Funkcijo bo ne uporablja.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimalno Sličico, Velikost Datoteke';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Če Slike je manjša, kot je to določeno velikost datoteke, št Sličico bo ustvaril, ker je dovolj majhna.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Popolna Pot)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Vpišite Pot do pretvori v program imagick, navadno /usr/bin/pretvorbo (v operacijskem sistemu windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Iskanje Imagick';
-
-$lang['USE_GD2'] = 'Uporabiti GD2 Razširitev';
-$lang['USE_GD2_EXPLAIN'] = 'PHP je lahko pripravijo z GD1 ali GD2 Razširitve za obdelovanje slik. Za pravilno ustvariti Sličice brez imagemagick Prilogo Mod uporablja dveh različnih metod, ki temeljijo na vaše izbire tukaj. Če vaše sličice so slabe kakovosti ali zajebali, poskusite spremeniti to nastavitev.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Upravljanje Prepovedano Razširitve';
