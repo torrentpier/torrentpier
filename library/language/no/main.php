@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Hvis dette er definert Dimensjon av et Bilde
 $lang['ASSIGNED_GROUP'] = 'Tildelt Gruppe';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Opprette Miniatyrbilder';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Alltid lage et Miniatyrbilde. Denne funksjonen overstyrer nesten alle Innstillinger i denne Spesielle Kategori, med unntak av den Høyeste Image Dimensjoner. Med denne Funksjonen en Miniatyr vil bli vist i innlegget, Brukeren kan klikke på den for å åpne den virkelige Bildet.<br />Please Oppmerksom på at denne funksjonen krever Imagick til å bli installert, hvis det ikke er installert, eller hvis Sikker-Modus er aktivert, GD-Utvidelse av PHP vil bli brukt. Hvis Bildet-Typen støttes ikke av PHP, denne Funksjonen vil ikke være brukt.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Miniatyrbilde Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Hvis et Bilde er mindre enn dette definert Filstørrelse, ingen Miniatyr vil bli opprettet, fordi det er liten nok.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Fullstendig Bane)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Angi Banen for å konvertere program av imagick, normalt /usr/bin/convert (på windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Søk Imagick';
-
-$lang['USE_GD2'] = 'Gjøre bruk av GD2 Extension';
-$lang['USE_GD2_EXPLAIN'] = 'PHP er i stand til å være kompilert med GD1 eller GD2 Extension for bilde-manipulering. Du skal lage Miniatyrbilder uten imagemagick Vedlegget Mod bruker to forskjellige metoder, basert på dine valg her. Hvis miniatyrbildene er i en dårlig kvalitet eller skrudd opp, prøv å endre denne innstillingen.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Administrere Forbudt Utvidelser';
