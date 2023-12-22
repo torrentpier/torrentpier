@@ -179,9 +179,7 @@ function display_attachments($post_id)
     $template->assign_block_vars('postrow.attach', []);
 
     for ($i = 0; $i < $num_attachments; $i++) {
-        // Some basic things...
         $filename = $upload_dir . '/' . basename($attachments['_' . $post_id][$i]['physical_filename']);
-        $thumbnail_filename = $upload_dir . '/' . THUMB_DIR . '/t_' . basename($attachments['_' . $post_id][$i]['physical_filename']);
 
         // Checks the file existence
         if (!is_file($filename)) {
@@ -189,7 +187,6 @@ function display_attachments($post_id)
         }
 
         $upload_image = '';
-
         if ($attach_config['upload_img'] && empty($upload_icons[$attachments['_' . $post_id][$i]['extension']])) {
             $upload_image = '<img src="' . $attach_config['upload_img'] . '" alt="" border="0" />';
         } elseif (trim($upload_icons[$attachments['_' . $post_id][$i]['extension']]) != '') {
@@ -217,15 +214,13 @@ function display_attachments($post_id)
             $thumbnail = false;
             $link = false;
 
+            // Shows the images in topic
             if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && (int)$attach_config['img_display_inlined']) {
                 if ((int)$attach_config['img_link_width'] != 0 || (int)$attach_config['img_link_height'] != 0) {
-                    // Checks the thumbnail existence
-                    if (!is_file($thumbnail_filename)) {
-                        continue;
-                    }
-
+                    // Get image sizes
                     [$width, $height] = getimagesize($filename);
 
+                    // Check if image sizes is allowed
                     if ($width == 0 && $height == 0) {
                         $image = true;
                     } else {
@@ -238,11 +233,13 @@ function display_attachments($post_id)
                 }
             }
 
+            // Checks if image is thumbnail
             if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && $attachments['_' . $post_id][$i]['thumbnail'] == 1) {
                 $thumbnail = true;
                 $image = false;
             }
 
+            // Checks whether the image should be displayed as a link
             if (!$image && !$thumbnail) {
                 $link = true;
             }
@@ -278,6 +275,14 @@ function display_attachments($post_id)
             }
 
             if ($thumbnail) {
+                // Get the thumbnail image
+                $thumbnail_filename = $upload_dir . '/' . THUMB_DIR . '/t_' . basename($attachments['_' . $post_id][$i]['physical_filename']);
+
+                // Checks the thumbnail existence
+                if (!is_file($thumbnail_filename)) {
+                    continue;
+                }
+
                 // Images, but display Thumbnail
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
                     $thumb_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';

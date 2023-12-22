@@ -146,7 +146,7 @@ function search_attachments($order_by, &$total_rows)
         $search_author = stripslashes(clean_username($search_author));
 
         // Prepare for directly going into sql query
-        $search_author = str_replace('*', '%', attach_mod_sql_escape($search_author));
+        $search_author = str_replace('*', '%', DB()->escape($search_author));
 
         // We need the post_id's, because we want to query the Attachment Table
         $sql = 'SELECT user_id FROM ' . BB_USERS . " WHERE username LIKE '$search_author'";
@@ -172,13 +172,13 @@ function search_attachments($order_by, &$total_rows)
     $search_keyword_fname = get_var('search_keyword_fname', '');
     if ($search_keyword_fname) {
         $match_word = str_replace('*', '%', $search_keyword_fname);
-        $where_sql[] = " (a.real_filename LIKE '" . attach_mod_sql_escape($match_word) . "') ";
+        $where_sql[] = " (a.real_filename LIKE '" . DB()->escape($match_word) . "') ";
     }
 
     $search_keyword_comment = get_var('search_keyword_comment', '');
     if ($search_keyword_comment) {
         $match_word = str_replace('*', '%', $search_keyword_comment);
-        $where_sql[] = " (a.comment LIKE '" . attach_mod_sql_escape($match_word) . "') ";
+        $where_sql[] = " (a.comment LIKE '" . DB()->escape($match_word) . "') ";
     }
 
     // Search Download Count

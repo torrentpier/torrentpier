@@ -30,7 +30,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     $gotit = false;
 
-    if (@!file_exists(@amod_realpath($filename))) {
+    if (@!file_exists(realpath($filename))) {
         bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
     } else {
         $gotit = true;

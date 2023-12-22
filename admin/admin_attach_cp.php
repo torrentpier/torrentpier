@@ -201,7 +201,7 @@ if ($submit_change && $view === 'attachments') {
         if (isset($attachments['_' . $attachrow['attach_id']])) {
             if ($attachrow['comment'] != $attachments['_' . $attachrow['attach_id']]['comment'] || $attachrow['download_count'] != $attachments['_' . $attachrow['attach_id']]['download_count']) {
                 $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
-					SET comment = '" . attach_mod_sql_escape($attachments['_' . $attachrow['attach_id']]['comment']) . "', download_count = " . (int)$attachments['_' . $attachrow['attach_id']]['download_count'] . '
+					SET comment = '" . DB()->escape($attachments['_' . $attachrow['attach_id']]['comment']) . "', download_count = " . (int)$attachments['_' . $attachrow['attach_id']]['download_count'] . '
 					WHERE attach_id = ' . (int)$attachrow['attach_id'];
 
                 if (!DB()->sql_query($sql)) {

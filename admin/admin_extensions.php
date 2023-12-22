@@ -499,7 +499,7 @@ if ($add_forum && $e_mode == 'perm' && $group) {
 
         $auth_bitstream = auth_pack($auth_p);
 
-        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
+        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . DB()->escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not update permissions #2');
@@ -536,7 +536,7 @@ if ($delete_forum && $e_mode == 'perm' && $group) {
 
     $auth_bitstream = (count($auth_p) > 0) ? auth_pack($auth_p) : '';
 
-    $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
+    $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . DB()->escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not update permissions #3');
