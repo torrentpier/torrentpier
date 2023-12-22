@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Ako je ovo definisana Dimenziju Slika je dos
 $lang['ASSIGNED_GROUP'] = 'Dodijeljen Grupi';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Nema Stvoriti';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Uvek stvara Nema. Ovaj oblik nadjačava skoro sve Postavke u ovom Posebnom Kategoriji, osim na Maksimum Sliku Dimenzije. Sa ovim nastupati Nema će biti prikazana u pošti, Korisnik mogu da upalim da otvori prava Slika.<br />Please Poruku da je ovo karakteristika zahtijeva Imagick biti instalirana, ako nije instalirao ili ako Siguran Način uključena GD-Produženje PHP će se koristiti. Ako Sliku-Tip je ne podržava PHP, ovaj članak će se ne koristi.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Nema Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Ako Slika je manji od ovo definisana Filesize, ne Nema će biti stvorena, jer to je dovoljno mala.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Kompletan Put)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Unesite Put do preobratiti program imagick, obično /usr/bin/preobratiti (na prozore: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Potrazi Imagick';
-
-$lang['USE_GD2'] = 'Iskoristi GD2 Produženje';
-$lang['USE_GD2_EXPLAIN'] = 'PHP je u mogućnosti da se složio sa GD1 ili GD2 Produženje za sliku manipulira. Da pravilno stvoriti Vanjski bez imagemagick Prilog Mod koriste dva različita metode, na osnovu tvog izbor ovdje. Ako ti vanjski su u lošem kvalitetu ili zabrljao, pokušati promijeniti ovo mjesto.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Snaći Zabranjeno Ekstenzije';
