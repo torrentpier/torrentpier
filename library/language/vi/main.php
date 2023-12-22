@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Nếu điều này được xác định kí
 $lang['ASSIGNED_GROUP'] = 'Nhóm Giao';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Tạo Hình Thu Nhỏ';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Luôn tạo ra một hình thu Nhỏ. Tính năng này sẽ thay gần như tất cả các thiết Lập trong vòng này Loại Đặc biệt, ngoại trừ của các hình Ảnh Tối đa Chiều. Với tính Năng này một thu Nhỏ sẽ được hiển thị trong bài, các Người có thể nhấn vào nó để mở thực Ảnh.<br />Please lưu Ý rằng đây năng yêu cầu Imagick để được cài đặt, nếu nó không được cài đặt, hay nếu Chế độ két An toàn được kích hoạt các APO-Mở các file sẽ được sử dụng. Nếu những hình Ảnh Loại là không được hỗ trợ bằng lệnh tính Năng này sẽ không được sử dụng.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Tối Thiểu Thu Nhỏ Kích Cỡ';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Nếu một hình Ảnh nhỏ hơn này được xác định Kích cỡ, không thu Nhỏ sẽ được tạo ra, bởi vì nó là đủ nhỏ.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Chương Trình (Con Đường Hoàn Thành)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Nhập Đường dẫn đến sự chuyển đổi chương trình của imagick, thường /usr/là:/chuyển đổi (trên cửa sổ: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Tìm Kiếm Imagick';
-
-$lang['USE_GD2'] = 'Hãy sử dụng GD2 mở Rộng';
-$lang['USE_GD2_EXPLAIN'] = 'Bộ sưu tập thể được biên dịch với GD1 hoặc GD2 mở Rộng cho ảnh thao tác. Một cách chính xác để tạo ra Hình thu nhỏ mà không có máy đính Kèm Mod sử dụng hai phương pháp khác nhau, dựa trên sự lựa chọn của bạn ở đây. Nếu hình thu nhỏ của bạn đang ở trong một chất lượng xấu hoặc hơi say lên, cố gắng để thay đổi này.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Quản Lý Cấm Mở Rộng';
