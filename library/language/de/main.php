@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Wenn diese definiert die Dimension des Bilde
 $lang['ASSIGNED_GROUP'] = 'Zugewiesene Gruppe';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Erstellen Sie Miniaturbilder';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Immer erstellen Sie eine Miniaturansicht. Diese Funktion überschreibt fast alle Einstellungen in dieser Speziellen Kategorie, außer die Maximale Bild-Abmessungen. Mit diesem Feature wird eine Miniaturansicht angezeigt, in der post, die der Benutzer klicken kann, um Sie zu öffnen das Reale Bild.<br />Please Beachten Sie, dass dieses feature erfordert Imagick installiert werden, wenn es nicht installiert ist, oder wenn Safe-Mode aktiviert, wird die GD-Erweiterung von PHP verwendet werden. Wenn Sie das Bild-Typ wird nicht unterstützt durch PHP, diese Funktion wird nicht verwendet.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimale Vorschaubild-Dateigröße';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Wenn ein Bild kleiner als dieser festgelegte Dateigrösse, keine Thumbnail erstellt werden, da es klein genug ist.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick-Programm (Kompletter Pfad)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Geben Sie den Pfad zum convert-Programm von imagick, normalerweise /usr/bin/convert (unter windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Suche Imagick';
-
-$lang['USE_GD2'] = 'Nutzen GD2-Erweiterung';
-$lang['USE_GD2_EXPLAIN'] = 'PHP ist in der Lage zu sein, wurden mit GD1 oder GD2-Erweiterung für Bild-Manipulation. Um korrekt zu erstellen Thumbnails ohne imagemagick der Attachment Mod benutzt zwei unterschiedliche Methoden, basierend auf Ihrer Auswahl hier. Wenn Ihr die thumbnails sind in einer schlechten Qualität oder geschraubt wird, können Sie versuchen, diese Einstellung zu ändern.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Verwalten Verboten Erweiterungen';
