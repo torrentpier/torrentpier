@@ -5,7 +5,7 @@
 
 **Merged pull requests:**
 
-- Release 2.4.0 🔥 ([belomaxorka](https://github.com/belomaxorka))
+- Release 2.4.0 🔥 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Updated copyright year [\#1201](https://github.com/torrentpier/torrentpier/pull/1201) ([belomaxorka](https://github.com/belomaxorka))
 - Update file_list_v2.php [\#1202](https://github.com/torrentpier/torrentpier/pull/1202) ([kovalensky](https://github.com/kovalensky))
 - Updated TorrentPier footer text (: [\#1204](https://github.com/torrentpier/torrentpier/pull/1204) ([kovalensky](https://github.com/kovalensky))
@@ -32,6 +32,7 @@
 - Little improvements [\#1244](https://github.com/torrentpier/torrentpier/pull/1244) ([kovalensky](https://github.com/kovalensky))
 - Improved handling errors while uploading [\#1246](https://github.com/torrentpier/torrentpier/pull/1246)
 - Use hardcoded dictionary names for better counting result in file listing [\#1247](https://github.com/torrentpier/torrentpier/pull/1247) ([kovalensky](https://github.com/kovalensky))
+- Refactored thumbnail creation 🌄 [\#1249](https://github.com/torrentpier/torrentpier/pull/1249) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
