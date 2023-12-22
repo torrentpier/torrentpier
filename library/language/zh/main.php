@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = '如果这一定义的尺寸的一个图像�
 $lang['ASSIGNED_GROUP'] = '分配组';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = '创建缩略';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = '总是创建一个图。 这一功能将复盖几乎所有内设置这种特殊类别，除了图像中最大的尺寸。 这个特征的缩略会内显示的员额，用户可以点击它，打开真正的图像。<br />Please注意，这个特点要求Imagick安装，如果没有安装或者如果安全模式的启用GD-扩PHP将被使用。 如果图像类型是不支持通过PHP，这一功能将未使用。';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = '最小的缩略Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = '如果一个影像小于这个定义Filesize，没有缩略将创建的，因为它是小够的。';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick程序(完整的路径)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = '进入路径转换程序的imagick，通常/usr/bin/转换(在窗口：c:/imagemagick/convert.exe条)。';
-$lang['IMAGE_SEARCH_IMAGICK'] = '搜索Imagick';
-
-$lang['USE_GD2'] = '使用扩展GD2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP是能够编制与GD1或GD2扩展对于图像操纵的。 正确的创造略图，而不imagemagick该附件的国防部使用两种不同的方法，根据你的选择在这里。 如果你的缩略是在一个糟糕的品质或搞砸了，试图改变这一设置。';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '管理被禁止的扩展';
