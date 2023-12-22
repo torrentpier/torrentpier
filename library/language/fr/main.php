@@ -2183,15 +2183,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Si cette Dimension de l\'Image est atteint, 
 $lang['ASSIGNED_GROUP'] = 'Affecté Au Groupe';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Créer Une Vignette';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Toujours créer une Vignette. Cette fonctionnalité remplace presque tous les Paramètres à l\'intérieur de cette Catégorie Particulière, à l\'exception de la au Maximum les Dimensions de l\'Image. Avec cette Fonctionnalité, une Vignette sera affiché dans le poste, l\'Utilisateur peut cliquer pour ouvrir l\'Image réelle.<br />Please Noter que cette fonctionnalité nécessite Imagick à être installé, si il n\'est pas installé ou si le Safe Mode est activé, le GD-Extension de PHP sera utilisé. Si l\'Image-Type n\'est pas pris en charge par PHP, cette Fonction sera pas utilisé.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Miniature De La Taille Des Fichiers';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Si une Image est plus petite que la Taille du fichier, pas de Vignette sera créé, car il est assez petit.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programme (Chemin Complet)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Entrez le Chemin d\'accès du programme de conversion de imagick, normalement /usr/bin/convert (sur windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Recherche Imagick';
-
-$lang['USE_GD2'] = 'Faire usage de l\'Extension GD2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP est capable d\'être compilé avec le GD1 ou Extension GD2 pour la manipulation d\'image. Pour créer correctement les Vignettes sans imagemagick la pièce Jointe Mod utilise deux méthodes différentes, en fonction de votre sélection ici. Si vos images sont de mauvaise qualité ou vissées, essayez de modifier ce paramètre.';
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gérer Interdit Extensions';
