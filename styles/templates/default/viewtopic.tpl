@@ -634,7 +634,7 @@ function build_poll_add_form (src_el)
 <!-- ENDIF -->
 <!-- IF IS_ADMIN -->
 		<div class="med" style="float: right;">
-		Admin:&nbsp;
+		{L_ADMIN}:&nbsp;
 		<a href="{U_LOGS}">{L_LOGS}</a>&nbsp;
 		</div>
 <!-- ENDIF -->

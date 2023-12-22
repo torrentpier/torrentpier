@@ -474,8 +474,7 @@ class Torrent
 
         if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
             set_die_append_msg($forum_id, $topic_id);
-            $mess = sprintf($lang['BT_REGISTERED'], DL_URL . $attach_id);
-            bb_die($mess);
+            bb_die(sprintf($lang['BT_REGISTERED'], DL_URL . $attach_id));
         }
 
         return true;
