@@ -275,18 +275,18 @@ function display_attachments($post_id)
             }
 
             if ($thumbnail) {
-                // Get the thumbnail image
-                $thumbnail_filename = $upload_dir . '/' . THUMB_DIR . '/t_' . basename($attachments['_' . $post_id][$i]['physical_filename']);
-
-                // Checks the thumbnail existence
-                if (!is_file($thumbnail_filename)) {
-                    continue;
-                }
-
                 // Images, but display Thumbnail
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
                     $thumb_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
                 } else {
+                    // Get the thumbnail image
+                    $thumbnail_filename = $upload_dir . '/' . THUMB_DIR . '/t_' . basename($attachments['_' . $post_id][$i]['physical_filename']);
+
+                    // Checks the thumbnail existence
+                    if (!is_file($thumbnail_filename)) {
+                        continue;
+                    }
+
                     $thumb_source = $thumbnail_filename;
                 }
 

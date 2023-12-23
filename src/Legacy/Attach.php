@@ -898,21 +898,13 @@ class Attach
 
             // Upload Attachment
             if (!$error) {
-                // Descide the Upload method
-                $ini_val = 'ini_get';
-
-                if (@$ini_val('open_basedir')) {
-                    $upload_mode = 'move';
-                } elseif (@$ini_val('safe_mode')) {
+                if (ini_get('open_basedir')) {
                     $upload_mode = 'move';
                 } else {
                     $upload_mode = 'copy';
                 }
 
-                // Ok, upload the Attachment
-                if (!$error) {
-                    $this->move_uploaded_attachment($upload_mode, $file);
-                }
+                $this->move_uploaded_attachment($upload_mode, $file);
             }
 
             // Now, check filesize parameters

@@ -24,24 +24,21 @@ if (isset($_POST['mode']) || isset($_GET['mode'])) {
 
 $delimeter = '=+:';
 $s_hidden_fields = '';
-$smiley_paks = [];
+$smiley_paks = $smiley_images = [];
 
-// Read a listing of uploaded smilies for use in the add or edit smliey code
-$dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
+// Read a listing of uploaded smiles
+$smilesDirectory = new DirectoryIterator(BB_ROOT . $bb_cfg['smilies_path']);
 
-while ($file = @readdir($dir)) {
-    if (!is_dir(realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
-        $img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
-
-        if ($img_size[0] && $img_size[1]) {
-            $smiley_images[] = $file;
-        } elseif (preg_match('/.pak$/i', $file)) {
-            $smiley_paks[] = $file;
+foreach ($smilesDirectory as $files) {
+    if ($files->isFile()) {
+        $extension = strtolower(pathinfo($files->getFilename(), PATHINFO_EXTENSION));
+        if (in_array($extension, ['png', 'gif'], true) && getimagesize($files->getFilename())) {
+            $smiley_images[] = $files->getFilename();
+        } else if ($extension === 'pak') {
+            $smiley_paks[] = $files->getFilename();
         }
     }
 }
-
-closedir($dir);
 
 // Select main mode
 if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {

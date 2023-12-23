@@ -75,13 +75,6 @@ class Upload
     public array $errors = [];
 
     /**
-     * Upload status code
-     *
-     * @var int
-     */
-    public int $error = UPLOAD_ERR_OK;
-
-    /**
      * Image types array
      *
      * @see https://www.php.net/manual/en/image.constants.php
@@ -109,7 +102,6 @@ class Upload
 
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
-        $this->error = $this->file['error'];
 
         // Check upload allowed
         if (!$this->cfg['up_allowed']) {
@@ -118,9 +110,9 @@ class Upload
         }
 
         // Handling errors while uploading
-        if (isset($this->error) && ($this->error !== UPLOAD_ERR_OK)) {
-            if (isset($lang['UPLOAD_ERRORS'][$this->error])) {
-                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->error];
+        if (isset($this->file['error']) && ($this->file['error'] !== UPLOAD_ERR_OK)) {
+            if (isset($lang['UPLOAD_ERRORS'][$this->file['error']])) {
+                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->file['error']];
             } else {
                 $this->errors[] = $lang['UPLOAD_ERROR_COMMON'];
             }
@@ -158,7 +150,7 @@ class Upload
         // Actions for images [E.g. Change avatar]
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
             if ($img_info = getimagesize($this->file['tmp_name'])) {
-                [$width, $height, $type, $attr] = $img_info;
+                [$width, $height, $type] = $img_info;
 
                 // redefine ext
                 if (!$width || !$height || !$type || !isset($this->img_types[$type])) {
