@@ -24,6 +24,7 @@ vendor
 *.zip
 *.7z
 *.torrent
+*.pak
 
 ### Windows ###
 Thumbs.db
