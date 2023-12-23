@@ -884,9 +884,8 @@ class Attach
                     $this->attach_filename = $new_physical_filename;
                 }
 
-
                 // Do we have to create a thumbnail ?
-                if ($cat_id == IMAGE_CAT && (int)$attach_config['img_create_thumbnail']) {
+                if ($cat_id == IMAGE_CAT && (int)$attach_config['img_create_thumbnail'] && (int)$attach_config['img_display_inlined']) {
                     $this->thumbnail = 1;
                 }
             }
