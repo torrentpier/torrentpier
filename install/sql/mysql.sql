@@ -54,9 +54,7 @@ VALUES ('upload_dir', 'data/torrent_files'),
        ('img_link_width', '600'),
        ('img_link_height', '400'),
        ('img_create_thumbnail', '1'),
-       ('img_min_thumb_filesize', '12000'),
-       ('wma_autoplay', '0'),
-       ('flash_autoplay', '0');
+       ('img_min_thumb_filesize', '12000');
 
 -- ----------------------------
 -- Table structure for `bb_attachments_desc`

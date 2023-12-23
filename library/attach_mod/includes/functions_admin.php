@@ -38,7 +38,7 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
                     'quota_type' => (int)$quota_type,
                     'quota_limit_id' => (int)$quota_limit_id
                 ];
-                $sql = 'INSERT INTO ' . BB_QUOTA . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_QUOTA . ' ' . DB()->build_array('INSERT', $sql_ary);
             } else {
                 $sql = 'UPDATE ' . BB_QUOTA . "
 					SET quota_limit_id = $quota_limit_id
