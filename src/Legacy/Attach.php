@@ -454,7 +454,7 @@ class Attach
                             'thumbnail' => (int)$this->thumbnail
                         ];
 
-                        $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
+                        $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET ' . DB()->build_array('UPDATE', $sql_ary) . '
 							WHERE attach_id = ' . (int)$attachment_id;
 
                         if (!(DB()->sql_query($sql))) {
@@ -573,7 +573,7 @@ class Attach
                         'thumbnail' => (int)$this->attachment_thumbnail_list[$i]
                     ];
 
-                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                     if (!(DB()->sql_query($sql))) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
@@ -593,7 +593,7 @@ class Attach
                         'user_id_1' => (int)$user_id_1,
                     ];
 
-                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                     if (!(DB()->sql_query($sql))) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
@@ -618,7 +618,7 @@ class Attach
                     'thumbnail' => (int)$this->thumbnail
                 ];
 
-                $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                 // Inform the user that his post has been created, but nothing is attached
                 if (!(DB()->sql_query($sql))) {
@@ -633,7 +633,7 @@ class Attach
                     'user_id_1' => (int)$user_id_1,
                 ];
 
-                $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                 if (!(DB()->sql_query($sql))) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');

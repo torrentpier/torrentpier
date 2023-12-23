@@ -93,7 +93,7 @@ if ($submit && $mode == 'extensions') {
                     'group_id' => (int)$extensions['_' . $extension_row[$i]['ext_id']]['group_id']
                 );
 
-                $sql = 'UPDATE ' . BB_EXTENSIONS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
+                $sql = 'UPDATE ' . BB_EXTENSIONS . ' SET ' . DB()->build_array('UPDATE', $sql_ary) . '
 					WHERE ext_id = ' . (int)$extension_row[$i]['ext_id'];
 
                 if (!DB()->sql_query($sql)) {
@@ -159,7 +159,7 @@ if ($submit && $mode == 'extensions') {
                     'comment' => (string)$extension_explain
                 );
 
-                $sql = 'INSERT INTO ' . BB_EXTENSIONS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_EXTENSIONS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                 if (!DB()->sql_query($sql)) {
                     bb_die('Could not add extension');
@@ -260,7 +260,7 @@ if ($submit && $mode == 'groups') {
             'max_filesize' => (int)$filesize_list[$i]
         );
 
-        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
+        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . ' SET ' . DB()->build_array('UPDATE', $sql_ary) . '
 			WHERE group_id = ' . (int)$group_change_list[$i];
 
         if (!DB()->sql_query($sql)) {
@@ -340,7 +340,7 @@ if ($submit && $mode == 'groups') {
                 'forum_permissions' => ''
             );
 
-            $sql = 'INSERT INTO ' . BB_EXTENSION_GROUPS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+            $sql = 'INSERT INTO ' . BB_EXTENSION_GROUPS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not add extension group');
