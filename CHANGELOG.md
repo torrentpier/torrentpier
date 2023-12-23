@@ -34,7 +34,7 @@
 - Use hardcoded dictionary names for better counting result in file listing [\#1247](https://github.com/torrentpier/torrentpier/pull/1247) ([kovalensky](https://github.com/kovalensky))
 - Refactored thumbnail creation 🌄 [\#1249](https://github.com/torrentpier/torrentpier/pull/1249) ([belomaxorka](https://github.com/belomaxorka))
 - Some cleanup for attach mod [\#1250](https://github.com/torrentpier/torrentpier/pull/1250) ([belomaxorka](https://github.com/belomaxorka))
-- New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222) ([Exileum](https://github.com/Exileum))
+- New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222), [\#1251](https://github.com/torrentpier/torrentpier/pull/1251) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
