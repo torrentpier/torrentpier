@@ -317,13 +317,15 @@ if ($t_data['topic_show_first_post'] && $start) {
 			u.user_opt, u.user_gender, u.user_birthday,
 			p.*, g.group_name, g.group_description, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 			u2.username as mc_username, u2.user_rank as mc_user_rank,
-			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
+			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
+            ban.ban_userid
 		FROM      " . BB_POSTS . " p
 		LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
 		LEFT JOIN " . BB_USERS . " u2 ON(u2.user_id = p.mc_user_id)
 		LEFT JOIN " . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
+        LEFT JOIN " . BB_BANLIST . " ban ON(ban.ban_userid = u.user_id)
 		WHERE
 			p.post_id = {$t_data['topic_first_post_id']}
 		LIMIT 1
@@ -338,13 +340,15 @@ $sql = "
 		u.user_opt, u.user_gender, u.user_birthday,
 		p.*, g.group_name, g.group_description, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 		u2.username as mc_username, u2.user_rank as mc_user_rank,
-		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
+		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
+        ban.ban_userid
 	FROM      " . BB_POSTS . " p
 	LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
 	LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
 	LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
 	LEFT JOIN " . BB_USERS . " u2 ON(u2.user_id = p.mc_user_id)
 	LEFT JOIN " . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
+    LEFT JOIN " . BB_BANLIST . " ban ON(ban.ban_userid = u.user_id)
 	WHERE p.topic_id = $topic_id
 		$limit_posts_time
 	GROUP BY p.post_id
@@ -591,6 +595,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     $poster_rank = $rank_image = '';
     $user_rank = $postrow[$i]['user_rank'];
+    $user_ban_status = $postrow[$i]['ban_userid'];
     if (!$user->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
         $rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
         $poster_rank = $bb_cfg['show_rank_text'] ? $ranks[$user_rank]['rank_title'] : '';
@@ -689,6 +694,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
+        'POSTER_BANNED' => $user_ban_status,
         'POSTER_JOINED' => $bb_cfg['show_poster_joined'] ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,

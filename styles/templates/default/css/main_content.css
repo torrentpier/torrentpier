@@ -489,6 +489,17 @@ a.postLink:visited {
   line-height: 110%;
 }
 
+.poster-banned {
+  background:#f6f6f6;
+  border:1px solid #b71c1c;
+  padding:4px;
+  border-radius:2px;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:1px;
+  text-align:center
+}
+
 .poster_info .avatar {
   margin: 5px 0 4px;
   max-width: 100px;
