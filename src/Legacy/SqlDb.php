@@ -889,7 +889,7 @@ class SqlDb
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.4f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
-        $msg[] = date('m-d H:i:s', $this->sql_starttime);
+        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
