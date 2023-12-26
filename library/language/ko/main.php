@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = '클릭 %sHere%s 를 반환하는 포럼을 �
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban 컨트롤';
-$lang['BAN_EXPLAIN'] = '여기에 제어할 수 있습니다 금지하의 사용자가입니다. 이를 달성할 수 있습에 의해 금지하거나 또는 모두의 특정 사용자 또는 개별적 또는 범위의 IP 주소이다. 이러한 방식을 사용자에게도 도달하는 인덱스 페이지의 보드이다. 를 막기 위해 사용자 등록한 다른 사용자 이름을 지정할 수도 있습니다 금지된 이메일 주소입니다. 주 금지하는 이메일 주소지 않을 방지하는 사용자에서 할 수있는 로그인이나 게시판입니다. 중 하나를 사용해야 합니다 첫 번째는 두 가지 방법을 이를 달성하기 위해합니다.';
-$lang['BAN_EXPLAIN_WARN'] = '참고하는 입력 범위의 IP 주소에서 결과 모든 주소 시작 및 끝에 추가되는 의 banlist 는니다. 시도를 만든 것입을 최소화하는 수의 주소를 추가하여 데이터베이스를 소개하는 와일드카드를 자동으로 적절한 경우입니다. 당신이 정말로 입력해야 범위,그것을 유지하려고 작은 더 나은 아직 국가 특정 주소입니다.';
-
-$lang['SELECT_IP'] = '선택하는 IP 주소';
-$lang['SELECT_EMAIL'] = '선택하는 이메일 주소';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban 하나 이상의 특정 사용자';
 $lang['BAN_USERNAME_EXPLAIN'] = '금지할 수 있습에서 여러 사용자 중 하나를 사용하여 이동의 적절한 조합 마우스 및 키보드와 컴퓨터 브라우저';
-
-$lang['BAN_IP'] = 'Ban 하나 이상의 IP 주소';
-$lang['IP_HOSTNAME'] = 'IP 주소';
-$lang['BAN_IP_EXPLAIN'] = '을 지정하는 여러 가지 서로 다른 IP 주소를 쉼표로 구분합니다.';
-
-$lang['BAN_EMAIL'] = 'Ban 하나 이상의 이메일 주소';
-$lang['BAN_EMAIL_EXPLAIN'] = '을 지정하는 하나 이상의 이메일 주소,쉼표로 구분합니다. 을 지정하는 와일드카드를 사용자 이름,사용**@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Un 금지 하나 이상의 특정 사용자';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = '할 수 있습 접근을 허용한 여러 사용자가에서 한 가지를 사용하여 적절한 조합의 마우스 및 키보드와 컴퓨터 브라우저';
-
-$lang['UNBAN_IP'] = 'Un 금지 하나 이상의 IP 주소';
-$lang['UNBAN_IP_EXPLAIN'] = '당신이 접근을 허용할 수 있는 여러 IP 주소에서 한 가지를 사용하여 적절한 조합의 마우스 및 키보드와 컴퓨터 브라우저';
-
-$lang['UNBAN_EMAIL'] = 'Un 금지 하나 이상의 이메일 주소';
-$lang['UNBAN_EMAIL_EXPLAIN'] = '당신이 접근을 허용할 수 있는 여러 이메일 주소 중 하나에서 가을 사용하여 적절한 조합의 마우스 및 키보드와 컴퓨터 브라우저';
-
 $lang['NO_BANNED_USERS'] = '아 금지된 사용자 이름';
-$lang['NO_BANNED_IP'] = '아 금지 IP 주소';
-$lang['NO_BANNED_EMAIL'] = '아 금지된 이메일 주소';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = '의 의 banlist 는가 성공적으로 업데이트되었습니다';
 $lang['CLICK_RETURN_BANADMIN'] = '클릭 %sHere%s 을 반환을 금지하 제어';
 
