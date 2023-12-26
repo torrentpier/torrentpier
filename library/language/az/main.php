@@ -1250,7 +1250,7 @@ $lang['ALREADY_REG'] = 'Torrent artıq qeydə';
 $lang['NOT_TORRENT'] = 'Fayl torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Siz qeydiyyatdan yalnız bir feed bir post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Siz qeydiyyatdan yalnız bir torrent bir mövzu';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-Bax :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiv torrent';
 
 $lang['TD_TRAF'] = 'Bu gün';
