@@ -93,11 +93,11 @@ class Validate
      * Validate user entered email
      *
      * @param string $email
-     * @param bool $check_ban_and_taken
+     * @param bool $check_taken
      *
      * @return bool|string
      */
-    public static function email(string $email, bool $check_ban_and_taken = true)
+    public static function email(string $email, bool $check_taken = true)
     {
         global $lang, $userdata, $bb_cfg;
 
@@ -132,19 +132,8 @@ class Validate
             }
         }
 
-        if ($check_ban_and_taken) {
-            // Check banned
-            $banned_emails = [];
-            foreach (DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
-                $banned_emails[] = str_replace('\*', '.*?', preg_quote($row['ban_email'], '#'));
-            }
-            if ($banned_emails_exp = implode('|', $banned_emails)) {
-                if (preg_match("#^($banned_emails_exp)$#i", $email)) {
-                    return sprintf($lang['EMAIL_BANNED'], $email);
-                }
-            }
-
-            // Check taken
+        // Check taken
+        if ($check_taken) {
             $email_sql = DB()->escape($email);
             if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
                 if ($row['user_email'] == $userdata['user_email']) {
