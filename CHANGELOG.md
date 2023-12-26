@@ -37,6 +37,7 @@
 - Show user's ban status [\#1258](https://github.com/torrentpier/torrentpier/pull/1258) ([kovalensky](https://github.com/kovalensky))
 - Changed default upload path [\#1261](https://github.com/torrentpier/torrentpier/pull/1261) ([belomaxorka](https://github.com/belomaxorka))
 - Some improvements for Ban functionality [\#1262](https://github.com/torrentpier/torrentpier/pull/1262) ([belomaxorka](https://github.com/belomaxorka))
+- Striked username if user banned [\#1267](https://github.com/torrentpier/torrentpier/pull/1267) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222), [\#1251](https://github.com/torrentpier/torrentpier/pull/1251), [\#1260](https://github.com/torrentpier/torrentpier/pull/1260), [\#1264](https://github.com/torrentpier/torrentpier/pull/1264) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
