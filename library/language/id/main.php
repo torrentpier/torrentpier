@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik %sHere%s untuk kembali ke Forum Permissi
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrol';
-$lang['BAN_EXPLAIN'] = 'Di sini anda dapat mengontrol melarang pengguna. Anda dapat mencapai hal ini dengan melarang salah satu atau kedua dari pengguna tertentu atau individu atau kisaran alamat IP. Metode ini mencegah pengguna bahkan mencapai halaman indeks papan anda. Untuk mencegah pengguna yang mendaftar di bawah nama pengguna yang berbeda anda juga dapat menentukan dilarang alamat email. Harap dicatat bahwa pelarangan alamat email saja tidak akan mencegah agar pengguna dapat log on atau posting ke forum anda. Anda harus menggunakan salah satu dari dua metode untuk mencapai hal ini.';
-$lang['BAN_EXPLAIN_WARN'] = 'Harap dicatat bahwa memasuki kisaran alamat IP hasil di semua alamat antara awal dan akhir yang ditambahkan ke banlist. Upaya yang akan dilakukan untuk meminimalkan jumlah alamat yang ditambahkan ke database dengan memperkenalkan wildcard secara otomatis mana yang sesuai. Jika anda benar-benar harus memasukkan jangkauan, cobalah untuk tetap kecil atau lebih baik lagi negara alamat tertentu.';
-
-$lang['SELECT_IP'] = 'Pilih alamat IP';
-$lang['SELECT_EMAIL'] = 'Pilih alamat Email';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Larangan satu atau lebih pengguna tertentu';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Anda dapat melarang beberapa pengguna dalam satu pergi menggunakan kombinasi yang tepat dari mouse dan keyboard untuk komputer anda dan browser';
-
-$lang['BAN_IP'] = 'Larangan satu atau lebih alamat IP';
-$lang['IP_HOSTNAME'] = 'Alamat IP';
-$lang['BAN_IP_EXPLAIN'] = 'Untuk menentukan beberapa alamat IP yang berbeda pisahkan dengan koma.';
-
-$lang['BAN_EMAIL'] = 'Larangan satu atau lebih alamat email';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Untuk menentukan lebih dari satu alamat email, pisahkan dengan koma. Untuk menentukan wildcard username, gunakan * suka *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Un-ban satu lagi pengguna tertentu';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Anda dapat meng beberapa pengguna dalam satu pergi menggunakan kombinasi yang tepat dari mouse dan keyboard untuk komputer anda dan browser';
-
-$lang['UNBAN_IP'] = 'Un-ban satu atau lebih alamat IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Anda dapat meng beberapa alamat IP dalam satu pergi menggunakan kombinasi yang tepat dari mouse dan keyboard untuk komputer anda dan browser';
-
-$lang['UNBAN_EMAIL'] = 'Un-ban satu atau lebih alamat email';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Anda dapat meng beberapa alamat email dalam satu pergi menggunakan kombinasi yang tepat dari mouse dan keyboard untuk komputer anda dan browser';
-
 $lang['NO_BANNED_USERS'] = 'Tidak dilarang username';
-$lang['NO_BANNED_IP'] = 'Tidak ada alamat IP yang diblokir';
-$lang['NO_BANNED_EMAIL'] = 'Tidak dilarang alamat email';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Yang banlist telah berhasil diperbarui';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klik %sHere%s untuk kembali ke Ban Kontrol';
 
