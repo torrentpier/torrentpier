@@ -361,7 +361,10 @@ function build_poll_add_form (src_el)
 		<p class="nick">{postrow.POSTER_NAME} <!-- IF postrow.POSTER_AUTHOR --><sup>&reg;</sup><!-- ENDIF --></p>
 		<!-- ENDIF -->
 
+        <!-- BEGIN ban -->
 		<!-- IF postrow.ban.IS_BANNED --><p class="poster-banned" title="{L_BANNED_USERS}">{L_BANNED}</p><!-- ENDIF -->
+        <!-- END ban -->
+
 		<!-- IF postrow.POSTER_RANK --><p class="rank_txt">{postrow.POSTER_RANK}</p><!-- ENDIF -->
 		<!-- IF postrow.RANK_IMAGE --><p class="rank_img">{postrow.RANK_IMAGE}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_AVATAR --><p class="avatar">{postrow.POSTER_AVATAR}</p><!-- ENDIF -->

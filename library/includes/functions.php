@@ -2175,9 +2175,9 @@ function user_birthday_icon($user_birthday, $user_id): string
  * Returns information about user ban
  *
  * @param int $userId
- * @return array
+ * @return array|null
  */
-function getUserBanInfo(int $userId): array
+function getUserBanInfo(int $userId): ?array
 {
     return DB()->fetch_row("SELECT * FROM " . BB_BANLIST . " WHERE ban_userid = $userId LIMIT 1");
 }
@@ -2185,9 +2185,9 @@ function getUserBanInfo(int $userId): array
 /**
  * Returns information about all bans
  *
- * @return array
+ * @return array|null
  */
-function getAllBans(): array
+function getAllBans(): ?array
 {
     return DB()->fetch_rowset("SELECT * FROM " . BB_BANLIST);
 }

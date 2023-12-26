@@ -295,7 +295,9 @@ ajax.callback.index_data = function(data) {
                 <th>{L_USERNAME}:</th>
                 <td id="username">
                     <span class="editable bold">{USERNAME}</span>
+                    <!-- BEGIN ban -->
                     <!-- IF ban.IS_BANNED --><b title="{L_BANNED_USERS}" style="color: red;">{L_BANNED}</b><!-- ENDIF -->
+                    <!-- END ban -->
                 </td>
             </tr>
 			<!-- IF SHOW_ROLE -->

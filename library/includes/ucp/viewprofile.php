@@ -75,7 +75,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 }
 
 // Ban information
-if ($banInfo = getUserBanInfo($profiledata['user_id'])) {
+if ($banInfo = getUserBanInfo((int)$profiledata['user_id'])) {
     $template->assign_block_vars('ban', [
         'IS_BANNED' => true,
         'BAN_REASON' => $banInfo['ban_reason']
