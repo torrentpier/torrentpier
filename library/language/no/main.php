@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikk %sHere%s for å gå tilbake til Forumet
 
 // Banning
 $lang['BAN_CONTROL'] = 'Forbudet Kontroll';
-$lang['BAN_EXPLAIN'] = 'Her kan du styre ved å stenge ute brukere. Du kan oppnå dette ved å forby en eller begge av en bestemt bruker eller en person eller flere IP-adresser. Disse metodene forhindrer at en bruker fra selv å nå indeks side av brettet. For å hindre en bruker fra å registrere under et annet brukernavn, kan du også angi en utestengt e-postadressen. Vær oppmerksom på at banning en e-postadresse alene vil ikke hindre at brukeren blir i stand til å logge på eller legge til styret. Du bør bruke en av de to første metodene for å oppnå dette.';
-$lang['BAN_EXPLAIN_WARN'] = 'Vær oppmerksom på at når du legger inn et område med IP-adresser resultater i alle adressene mellom start og slutt å bli lagt til banlist. Forsøk vil bli gjort for å minimere antall adresser er lagt til i databasen ved å innføre jokertegn automatisk når det er hensiktsmessig. Hvis du virkelig må skrive inn et utvalg, kan du prøve å holde det liten eller enda bedre staten bestemte adresser.';
-
-$lang['SELECT_IP'] = 'Velg en IP-adresse';
-$lang['SELECT_EMAIL'] = 'Velg en E-postadresse';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Forbudet én eller flere bestemte brukere';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Du kan stenge ute flere brukere på en gang ved å bruke den riktige kombinasjon av mus og tastatur til din datamaskin og nettleser';
-
-$lang['BAN_IP'] = 'Forbudet én eller flere IP-adresser';
-$lang['IP_HOSTNAME'] = 'IP-adresser';
-$lang['BAN_IP_EXPLAIN'] = 'For å angi flere forskjellige IP-adresser, skiller du dem med komma.';
-
-$lang['BAN_EMAIL'] = 'Forbudet én eller flere e-post adresser';
-$lang['BAN_EMAIL_EXPLAIN'] = 'For å angi mer enn én e-postadresse, skiller du dem med komma. For å angi et jokertegn brukernavn, bruker du * liker *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Fn-ban en mer spesifikke brukere';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Du kan unban flere brukere på en gang ved å bruke den riktige kombinasjon av mus og tastatur til din datamaskin og nettleser';
-
-$lang['UNBAN_IP'] = 'Fn-forbud i ett eller flere IP-adresser';
-$lang['UNBAN_IP_EXPLAIN'] = 'Du kan unban flere IP-adresser på en gang ved å bruke den riktige kombinasjon av mus og tastatur til din datamaskin og nettleser';
-
-$lang['UNBAN_EMAIL'] = 'Fn-forbud i ett eller flere e-post adresser';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Du kan unban flere e-post adresser på en gang ved å bruke den riktige kombinasjon av mus og tastatur til din datamaskin og nettleser';
-
 $lang['NO_BANNED_USERS'] = 'Ingen utestengt brukernavn';
-$lang['NO_BANNED_IP'] = 'Uten utestengte IP-adresser';
-$lang['NO_BANNED_EMAIL'] = 'Ingen utestengt e-post adresser';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Den banlist har blitt fullført';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klikk %sHere%s for å gå tilbake til å stenge ute Kontroll';
 

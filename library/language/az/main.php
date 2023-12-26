@@ -1743,35 +1743,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Basın %sHere%s geri almaq üçün forum icaz
 
 // Banning
 $lang['BAN_CONTROL'] = 'Nəzarət Qadağa';
-$lang['BAN_EXPLAIN'] = 'Burada siz nəzarət edə bilərsiniz qadağa istifadəçilər. Siz nail olmaq, bu yolla qadağan bir və ya hər iki konkret bir istifadəçi və ya fərdi və ya sıra IP-ünvanları. Bu metod imkan verir ki, istifadəçi hətta çatan ana səhifə sizin şuranın. Verməmək, istifadəçi qeydiyyatdan altında başqa istifadəçi adı olar da qeyd qadağan e-mail ünvanı. Qeyd edək ki, qadağa bir e-mail ünvanı olacaq qarşısını almaq istifadəçilər təcrübəsi etmək üçün daxil ol və ya yerləşdirə board. İstifadə etməlidir biri ilk iki üsulları, buna nail olmaq üçün.';
-$lang['BAN_EXPLAIN_WARN'] = 'Qeyd edək ki, gələn bir sıra IP-ünvanı ünvan arasında başlanğıc və son əlavə olunacaq банлист. Atılacaqdır cəhdləri sayı minimuma endirmək ünvanlar əlavə məlumat bazası yolu ilə tətbiq maskalar avtomatik olaraq ehtiyac olduğu halda. Əgər siz, həqiqətən, daxil olmalıdır sıra saxlamaq üçün cəhd, kiçik və ya daha yaxşı hələ konkret ünvanlar.';
-
-$lang['SELECT_IP'] = 'Seçin IP-ünvanı';
-$lang['SELECT_EMAIL'] = 'Seçin və e-poçt ünvanı';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Qadağan bir və ya bir neçə konkret istifadəçilər';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Siz qadağan bir neçə istifadəçi üçün bir dəfə istifadə edərək, müvafiq birləşməsi siçan və klaviatura üçün kompüter və browser';
-
-$lang['BAN_IP'] = 'Qadağan bir və ya birdən çox IP-ünvanlar';
-$lang['IP_HOSTNAME'] = 'IP-ünvanlar';
-$lang['BAN_IP_EXPLAIN'] = 'Müəyyən etmək üçün bir neçə müxtəlif IP-ünvanları, разделяйте onların vergül işarəsi ilə.';
-
-$lang['BAN_EMAIL'] = 'Qadağan bir və ya bir neçə e-poçt';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Qeyd etmək daha bir e-poçt ünvanları, bölüşdürülməsi və onların vergül işarəsi ilə. Qeyd etmək şablon istifadəçi adı istifadə * * * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'BMT-Pan bir daha konkret istifadəçilər';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Siz разбанить bir neçə istifadəçi üçün bir dəfə istifadə edərək, müvafiq birləşməsi siçan və klaviatura üçün kompüter və browser';
-
-$lang['UNBAN_IP'] = 'BMT-bu qadağa bir və ya bir neçə IP ünvanlarını';
-$lang['UNBAN_IP_EXPLAIN'] = 'Siz разбанить bir neçə IP-ünvanlar bir nəfəs istifadə edərək, müvafiq birləşməsi siçan və klaviatura üçün kompüter və browser';
-
-$lang['UNBAN_EMAIL'] = 'BMT-qadağa, bir və ya bir neçə e-poçt';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Siz разбанить bir neçə elektron poçt ünvanları bir-bir qəbul edərək müvafiq birləşməsi siçan və klaviatura üçün kompüter və browser';
-
 $lang['NO_BANNED_USERS'] = 'Qadağan deyil giriş';
-$lang['NO_BANNED_IP'] = 'Heç bir qadağan edilmiş, IP-ünvanlar';
-$lang['NO_BANNED_EMAIL'] = 'Heç bir qadağan olunmuş e-poçt';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Bu банлист idi uğurla yenilənib';
 $lang['CLICK_RETURN_BANADMIN'] = 'Basın %sHere%s qayıtmaq üçün qadağa nəzarət';
 

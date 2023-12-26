@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = '点击%sHere%s回到论坛的权限';
 
 // Banning
 $lang['BAN_CONTROL'] = '禁止控制';
-$lang['BAN_EXPLAIN'] = '在这里你可以控制的，禁止的用户。 你可以实现这一禁止任一或两个特定用户或个人或者IP地址范围。 这些方法防止用户甚至达到的指标网页板。 防止用户注册在一个不同的用户名，你也可以指定一个禁止电子邮件地址。 请注意，禁止一个电子邮件地址本身不会阻止用户能够登录或后来你的董事会。 你应该使用的第一个两种方法来实现这一点。';
-$lang['BAN_EXPLAIN_WARN'] = '请注意，进入一个IP地址范围的结果在所有的地址之间开始和结束正在加入的banlist的。 尝试将尽量减少地址的数目添加到数据库，通过引入符自动适当的。 如果你真的必须进一范围内，尽量保持小或者更好，但国家的具体地址。';
-
-$lang['SELECT_IP'] = '选择一个IP地址';
-$lang['SELECT_EMAIL'] = '选择一个电子邮件地址';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = '禁止一个或多个特定用户';
 $lang['BAN_USERNAME_EXPLAIN'] = '你可以禁止多个用户在一个去使用的适当组合键鼠你的电脑和浏览器';
-
-$lang['BAN_IP'] = '禁止一个或多个IP地址';
-$lang['IP_HOSTNAME'] = 'IP地址';
-$lang['BAN_IP_EXPLAIN'] = '指定若干不同的IP地址使用逗号隔开。';
-
-$lang['BAN_EMAIL'] = '禁止一个或多个电子邮件地址';
-$lang['BAN_EMAIL_EXPLAIN'] = '要指定多于一个电子邮件地址、使用逗号隔开。 指定一个通配符的用户名，使用的**@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = '联合国禁止一个更具体的用户';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = '你可以取消禁止多个用户在一个去使用的适当组合键鼠你的电脑和浏览器';
-
-$lang['UNBAN_IP'] = '联合国禁止一个或多个IP地址';
-$lang['UNBAN_IP_EXPLAIN'] = '你可以取消禁止多的IP地址是在一个去使用的适当组合键鼠你的电脑和浏览器';
-
-$lang['UNBAN_EMAIL'] = '联合国禁止一个或多个电子邮件地址';
-$lang['UNBAN_EMAIL_EXPLAIN'] = '你可以取消禁止多个电子邮件地址是在一个去使用的适当组合键鼠你的电脑和浏览器';
-
 $lang['NO_BANNED_USERS'] = '不禁止的用户名';
-$lang['NO_BANNED_IP'] = '没有禁止的IP地址';
-$lang['NO_BANNED_EMAIL'] = '没有禁止电子邮件地址';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = '该banlist已经成功更新';
 $lang['CLICK_RETURN_BANADMIN'] = '点击%sHere%s返回的禁令控制';
 

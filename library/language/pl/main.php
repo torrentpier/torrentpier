@@ -1743,35 +1743,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknij %sHere%s, aby powrócić na forum roz
 
 // Banning
 $lang['BAN_CONTROL'] = 'Kontrola Zakazu';
-$lang['BAN_EXPLAIN'] = 'Tutaj można kontrolować zakaz użytkowników. Można to osiągnąć przez wyłączenie jednej lub obu konkretnego użytkownika lub indywidualne lub zakresu adresów IP. Metody te pozwalają użytkownikowi, nawet osiągając strona główna twojej rady. Aby uniemożliwić użytkownikowi zarejestrować się pod inną nazwą użytkownika można również określić niedozwolony adres e-mail. Należy zwrócić uwagę, że zakaz na jeden adres e-mail nie będzie zapobiec użytkowników od tego, aby zalogować się lub umieścić na tablicy. Należy użyć jednego z dwóch pierwszych metod, aby to osiągnąć.';
-$lang['BAN_EXPLAIN_WARN'] = 'Należy pamiętać, że wchodząc w zakres adresów IP na adresy między początkowym i końcowym zostaną dodane w банлист. Zostaną podjęte próby zminimalizować liczbę adresów dodano do bazy danych poprzez wprowadzenie maski automatycznie w razie potrzeby. Jeśli naprawdę musisz wpisać zakres, starać się utrzymać mały lub jeszcze lepiej konkretne adresy.';
-
-$lang['SELECT_IP'] = 'Wybierz adres IP';
-$lang['SELECT_EMAIL'] = 'Wybierz adres e-mail';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Zakaz jednego lub kilku konkretnych użytkowników';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Możesz zapobiec wielu użytkowników na raz, korzystając z odpowiedniej kombinacji myszy i klawiatury komputera i przeglądarki';
-
-$lang['BAN_IP'] = 'Zakaz jednego lub więcej adresów IP';
-$lang['IP_HOSTNAME'] = 'Adresy IP';
-$lang['BAN_IP_EXPLAIN'] = 'Aby określić kilka różnych adresów IP, należy je oddzielić przecinkami.';
-
-$lang['BAN_EMAIL'] = 'Zakaz jeden lub więcej adresów e-mail';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Aby określić więcej niż jeden adres e-mail, rozdzielając je przecinkami. Aby określić wzorzec nazwy użytkownika, użyj * jako *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'ONZ-Ban jedna z bardziej konkretnych użytkowników';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Można разбанить wielu użytkowników na raz, korzystając z odpowiedniej kombinacji myszy i klawiatury komputera i przeglądarki';
-
-$lang['UNBAN_IP'] = 'UN-bana jednej lub wielu adresów IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Można разбанить kilka adresów IP na jednym oddechu, korzystając z odpowiedniej kombinacji myszy i klawiatury komputera i przeglądarki';
-
-$lang['UNBAN_EMAIL'] = 'ONZ-ban na jeden lub wiele adresów e-mail';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Można разбанить kilka adresów e-mail w jednym kroku przy użyciu odpowiedniej kombinacji myszy i klawiatury komputera i przeglądarki';
-
 $lang['NO_BANNED_USERS'] = 'Nie jest zabronione loginy';
-$lang['NO_BANNED_IP'] = 'Żadnych zabronionych adresów IP';
-$lang['NO_BANNED_EMAIL'] = 'Żadnych zakazanych adresów e-mail';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'W банлист został pomyślnie zaktualizowany';
 $lang['CLICK_RETURN_BANADMIN'] = 'Kliknij %sHere%s, aby powrócić do bana kontroli';
 

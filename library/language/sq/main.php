@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliko %sHere%s të kthehen në Forum Lejet';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrollit';
-$lang['BAN_EXPLAIN'] = 'Këtu ju mund të kontrollojë ndalimin e përdoruesit. Ju mund të arrijnë këtë duke ndaluar ose të dy, e një përdorues të veçantë ose të një individi ose një varg të adresave IP. Këto metoda të parandaluar përdoruesit nga edhe arrijnë indeksi faqe të bordin tuaj. Për të parandaluar një përdorues të regjistruar nën një username të ndryshme ju gjithashtu mund të specifikoni një ndalua adresë e-mail. Ju lutem vini re se ndalimi i një email adresë të vetëm nuk do të parandaluar përdoruesit nga të qenit në gjendje për të hyni në, ose pas tuaj bordit. Ju duhet të përdorni një prej dy metoda për të arritur këtë.';
-$lang['BAN_EXPLAIN_WARN'] = 'Ju lutem vini re se të hyjnë në një varg të adresave IP rezultatet në të gjitha adresat në mes fillimit dhe mbarimit duke u shtuar në banlist. Përpjekje do të bëhen për të minimizuar numrin e adresave të shtuar në bazën e të dhënave duke futur wildcards automatikisht aty ku është e përshtatshme. Nëse ju me të vërtetë duhet të hyjë në një varg, të përpiqemi për ta mbajtur atë të vogla ose më mirë akoma, të veçantë shtetëror adresave.';
-
-$lang['SELECT_IP'] = 'Përzgjidhni një adresë IP';
-$lang['SELECT_EMAIL'] = 'Përzgjidhni një adresë e-Mail';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban një ose më shumë përdoruesit të veçanta';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Ju mund të ndalimit të përdoruesit të shumta në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
-$lang['BAN_IP'] = 'Ban një ose më shumë adresat IP';
-$lang['IP_HOSTNAME'] = 'Adresat IP';
-$lang['BAN_IP_EXPLAIN'] = 'Për të specifikojë të ndryshme adresat IP të veçantë ato me presje.';
-
-$lang['BAN_EMAIL'] = 'Ban një ose më shumë adresat e-mail';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Për të specifikuar më shumë se një adresë e-mail, të ndarë ato me presje. Për të përcaktuar një wildcard emrin, përdor * si *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Okb-ban një më specifike përdoruesit';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Ju mund të unban përdoruesit të shumta në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
-$lang['UNBAN_IP'] = 'Okb-ban një ose më shumë adresat IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Ju mund të unban të shumta të adresave IP në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
-$lang['UNBAN_EMAIL'] = 'Okb-ban një ose më shumë adresat e-mail';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Ju mund të unban të shumta adresat e-mail në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
 $lang['NO_BANNED_USERS'] = 'Asnjë i ndaluar përdoruesve';
-$lang['NO_BANNED_IP'] = 'Asnjë i ndaluar adresat IP';
-$lang['NO_BANNED_EMAIL'] = 'Asnjë i ndaluar adresat e-mail';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'E banlist ka qenë i përditësuar me sukses';
 $lang['CLICK_RETURN_BANADMIN'] = 'Kliko %sHere%s të kthehen për Ndalimin e Kontrollit të';
 

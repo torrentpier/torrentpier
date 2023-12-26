@@ -1743,35 +1743,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite %sHere%s, da se vratim na forum dozv
 
 // Banning
 $lang['BAN_CONTROL'] = 'Kontrola Zabrane';
-$lang['BAN_EXPLAIN'] = 'Ovdje možete pratiti zabrana korisnicima. Možete se to postigne kroz zabranu jedne ili obje određenog korisnika ili solo ili raspon IP adresa. Ove metode omogućuju korisniku, čak i dostizanje indeksnu stranicu vašeg vijeća. Želite zabraniti korisniku registrirati pod drugim imenom korisnik se može odrediti zabranjena adresu e-pošte. Imajte na umu da je zabrana na jednu adresu e-pošte neće spriječiti korisnike od potrebe da se prijavite ili staviti na ploču. Morate koristiti jedan od prva dva načina da se to postigne.';
-$lang['BAN_EXPLAIN_WARN'] = 'Imajte na umu da ulaze u raspon IP adresa u adrese između početnog i krajnjeg će biti dodan u банлист. Će pokušaji kako bi se smanjila broj adresa dodan u bazu podataka uvođenjem maske automatski u slučaju potrebe. Ako ste stvarno morati unijeti raspon, pokušati zadržati mali ili još bolje određenu adresu.';
-
-$lang['SELECT_IP'] = 'Odaberite IP adresu';
-$lang['SELECT_EMAIL'] = 'Odaberite adresu e-pošte';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Zabrana jedne ili više specifičnih korisnika';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Možete zabraniti više korisnika u jednom trenutku, koristeći odgovarajuću kombinaciju miša i tipkovnice vašeg računala i internetskog preglednika';
-
-$lang['BAN_IP'] = 'Zabrana jednog ili više IP adresa';
-$lang['IP_HOSTNAME'] = 'IP-adrese';
-$lang['BAN_IP_EXPLAIN'] = 'Za unos više različitih IP adresa, odvojite ih zarezom.';
-
-$lang['BAN_EMAIL'] = 'Zabrana jednu ili više adresa e-pošte';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Navesti više od jedne adrese e-pošte, odvajajući ih zarezima. Da biste odredili uzorak korisničko ime, koristiti * kao *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'UN-a Ban jedna više specifičnih korisnika';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Možete разбанить više korisnika u jednom trenutku, koristeći odgovarajuću kombinaciju miša i tipkovnice vašeg računala i internetskog preglednika';
-
-$lang['UNBAN_IP'] = 'UN-zabrana jedne ili više IP adresa';
-$lang['UNBAN_IP_EXPLAIN'] = 'Možete разбанить nekoliko IP adresa, u istom dahu, koristeći odgovarajuću kombinaciju miša i tipkovnice vašeg računala i internetskog preglednika';
-
-$lang['UNBAN_EMAIL'] = 'UN-zabrana na jednu ili više adresa e-pošte';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Možete разбанить neke adrese e-pošte u jedan trik pomoću odgovarajuće kombinacije miša i tipkovnice vašeg računala i internetskog preglednika';
-
 $lang['NO_BANNED_USERS'] = 'Ne kućne ljubimce prijave';
-$lang['NO_BANNED_IP'] = 'Nema zabranjenih IP adresa';
-$lang['NO_BANNED_EMAIL'] = 'Nema zabranjenih ip adresa e-pošte';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'U банлист uspješno je nadograđen';
 $lang['CLICK_RETURN_BANADMIN'] = 'Kliknite %sHere%s, da se vratim na zabranu kontrole';
 

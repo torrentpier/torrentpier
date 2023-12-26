@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Haga clic en %sHere%s para volver a Foro de P
 
 // Banning
 $lang['BAN_CONTROL'] = 'Prohibición De Control De';
-$lang['BAN_EXPLAIN'] = 'Aquí usted puede controlar la prohibición de los usuarios. Usted puede lograr esto mediante la prohibición de que uno o ambos de un usuario específico o de un individuo o de un rango de direcciones IP. Estos métodos evitan que un usuario, incluso llegar a la página de índice de su junta directiva. Para evitar que un usuario registrarse con otro nombre de usuario también puede especificar un prohibió la dirección de correo electrónico. Por favor, tenga en cuenta que la prohibición de una dirección de correo electrónico por sí sola no impide que el usuario pueda iniciar sesión en o posterior a su junta directiva. Debe utilizar uno de los dos primeros métodos para lograr esto.';
-$lang['BAN_EXPLAIN_WARN'] = 'Por favor, tenga en cuenta que entrar en un rango de direcciones IP de los resultados en todas las direcciones entre el inicio y el final que se añade a la banlist. Se intentará reducir al mínimo el número de las direcciones añadidas a la base de datos mediante la introducción de caracteres comodín automáticamente cuando proceda. Si usted realmente tiene que entrar en una serie, tratamos de mantenerlo pequeño, o mejor aún, el estado de las direcciones específicas.';
-
-$lang['SELECT_IP'] = 'Seleccione una dirección IP';
-$lang['SELECT_EMAIL'] = 'Seleccione una dirección de Correo electrónico';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'La prohibición de uno o más usuarios específicos';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Se le puede prohibir a varios usuarios en un solo paso mediante la adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
-$lang['BAN_IP'] = 'La prohibición de una o más direcciones IP';
-$lang['IP_HOSTNAME'] = 'Las direcciones IP';
-$lang['BAN_IP_EXPLAIN'] = 'Para especificar varias direcciones IP diferentes sepárelos con comas.';
-
-$lang['BAN_EMAIL'] = 'La prohibición de una o más direcciones de correo electrónico';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Para especificar más de una dirección de correo electrónico, sepárelos con comas. Para especificar un comodín nombre de usuario, use * como *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'De la onu-ban uno más específicas de los usuarios';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Usted puede desbloquear a varios usuarios en un solo paso mediante la adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
-$lang['UNBAN_IP'] = 'De la onu-ban una o más direcciones IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Usted puede desbloquear a varias direcciones IP en una sola por medio de una adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
-$lang['UNBAN_EMAIL'] = 'De la onu-ban una o más direcciones de correo electrónico';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Usted puede desbloquear a varias direcciones de correo electrónico en un solo paso mediante la adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
 $lang['NO_BANNED_USERS'] = 'No prohibidos los nombres de usuario';
-$lang['NO_BANNED_IP'] = 'No hay direcciones IP prohibidas';
-$lang['NO_BANNED_EMAIL'] = 'No prohibió las direcciones de correo electrónico';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'La banlist se ha actualizado correctamente';
 $lang['CLICK_RETURN_BANADMIN'] = 'Haga clic en %sHere%s para volver a la Prohibición de Control de';
 

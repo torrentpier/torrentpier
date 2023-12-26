@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Nhấn vào %sHere%s để trở về Đàn Q
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Điều Khiển';
-$lang['BAN_EXPLAIN'] = 'Ở đây anh có thể kiểm soát cấm sử dụng. Bạn có thể đạt được điều này bằng cách cấm hoặc cả hai của một người sử dụng cụ thể, hay một cá nhân hoặc phạm vi địa chỉ IP. Những phương pháp ngăn chặn một người dùng từ thậm chí đạt các chỉ số trang của bạn đồng quản trị. Để ngăn chặn một người dùng từ đăng ký dưới một người bạn có thể cũng chỉ định một cấm địa chỉ email. Xin lưu ý rằng cấm địa chỉ email mình sẽ không ngăn chặn điều đó dùng từ có thể nhập vào hoặc gửi tới tàu của bạn. Bạn phải sử dụng một trong những lần đầu tiên, hai phương pháp để đạt được điều này.';
-$lang['BAN_EXPLAIN_WARN'] = 'Xin lưu ý rằng bước vào một loạt các địa chỉ IP kết quả trong tất cả các địa chỉ giữa bắt đầu và kết thúc được thêm vào danh sách hạn chế. Chúng tôi sẽ cố gắng để giảm thiểu số các địa chỉ thêm vào cơ sở dữ liệu bằng cách giới thiệu các kí tự động nơi thích hợp. Nếu bạn thực sự phải nhập một loạt, cố gắng để giữ cho nó nhỏ hoặc tốt hơn nước địa chỉ cụ thể.';
-
-$lang['SELECT_IP'] = 'Chọn một địa chỉ IP';
-$lang['SELECT_EMAIL'] = 'Chọn một địa chỉ Email';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban một hoặc nhiều người sử dụng cụ thể';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Bạn có thể ban nhiều người dùng trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
-$lang['BAN_IP'] = 'Cấm một hay hơn, các địa chỉ IP';
-$lang['IP_HOSTNAME'] = 'Các địa chỉ IP';
-$lang['BAN_IP_EXPLAIN'] = 'Để xác định một số khác địa chỉ IP tách chúng ra với dấu phẩy.';
-
-$lang['BAN_EMAIL'] = 'Cấm một địa chỉ email';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Để xác định nhiều hơn một địa chỉ email, tách chúng ra với dấu phẩy. Để xác định một ký tên, sử dụng * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Liên hiệp quốc cấm một người sử dụng cụ thể hơn';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Bạn có thể bỏ cấm nhiều người dùng trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
-$lang['UNBAN_IP'] = 'Liên hiệp quốc cấm một hay hơn, các địa chỉ IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Bạn có thể bỏ cấm nhiều địa chỉ IP trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
-$lang['UNBAN_EMAIL'] = 'Liên hiệp quốc cấm một địa chỉ email';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Bạn có thể bỏ cấm nhiều địa chỉ email trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
 $lang['NO_BANNED_USERS'] = 'Không cấm người';
-$lang['NO_BANNED_IP'] = 'Không cấm địa chỉ IP';
-$lang['NO_BANNED_EMAIL'] = 'Không cấm địa chỉ email';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Các danh sách hạn chế đã được cập nhật thành công';
 $lang['CLICK_RETURN_BANADMIN'] = 'Nhấn vào %sHere%s để trở về lệnh Cấm kiểm Soát';
 

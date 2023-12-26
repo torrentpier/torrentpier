@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite %sHere%s, da se vrnete Dovoljenja Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Prepoved Nadzor';
-$lang['BAN_EXPLAIN'] = 'Tukaj lahko nadzor prepoved uporabnikov. To lahko dosežete z prepoved eno ali oboje od določenega uporabnika ali posameznika ali obseg naslovov IP. Te metode, ki preprečujejo, da bi uporabniki tudi doseže kazalo stran vašega odbora. Preprečiti, da bi se uporabnik registrira z drugim uporabniškim imenom, lahko pa določite tudi prepovedane e-poštni naslov. Prosimo, upoštevajte, da prepoved e-poštni naslov sam po sebi ne bo preprečila, da uporabnik ne bi mogli prijaviti v ali objavite na vašem vozilu. Morate uporabiti eno od prvih dveh metod za dosego tega.';
-$lang['BAN_EXPLAIN_WARN'] = 'Prosimo, upoštevajte, da vnesete obseg naslovov IP rezultate v vseh naslovov, med začetkom in koncem, ki se doda na banlist. Poskusi bo treba zmanjšati število naslovov, ki so dodane v bazo podatkov z uvedbo nadomestni znaki samodejno kjer je to primerno. Če si res mora vnesite obseg, poskusite, da ostane majhna, ali še bolje članica posamezne naslove.';
-
-$lang['SELECT_IP'] = 'Izberite IP naslov';
-$lang['SELECT_EMAIL'] = 'Izberite E-poštni naslov';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Zavrnite enega ali več določenih uporabnikov';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Lahko ban več uporabnikov v enem pojdi z ustrezno kombinacijo miško in tipkovnico za vaš računalnik in brskalnik';
-
-$lang['BAN_IP'] = 'Zavrnite enega ali več IP naslovov,';
-$lang['IP_HOSTNAME'] = 'IP naslovi';
-$lang['BAN_IP_EXPLAIN'] = 'Določite več različnih IP naslovov, jih ločite z vejicami.';
-
-$lang['BAN_EMAIL'] = 'Zavrnite enega ali več e-poštnih naslovov';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Če želite navesti več kot en e-poštnih naslovov, jih ločite z vejicami. Določite nadomestni uporabniško ime, uporabite * kot *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Zn-zavrnite enega bolj posebnih uporabnikov';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Lahko unban več uporabnikov v enem pojdi z ustrezno kombinacijo miško in tipkovnico za vaš računalnik in brskalnik';
-
-$lang['UNBAN_IP'] = 'Zn-zavrnite enega ali več IP naslovov,';
-$lang['UNBAN_IP_EXPLAIN'] = 'Lahko unban, več naslovov IP v eni gredo z ustrezno kombinacijo miško in tipkovnico za vaš računalnik in brskalnik';
-
-$lang['UNBAN_EMAIL'] = 'Zn-zavrnite enega ali več e-poštnih naslovov';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Lahko unban več e-poštnih naslovov v enem pojdi z ustrezno kombinacijo miško in tipkovnico za vaš računalnik in brskalnik';
-
 $lang['NO_BANNED_USERS'] = 'Ni prepovedano, uporabniška imena';
-$lang['NO_BANNED_IP'] = 'Št prepovedanih IP naslovi';
-$lang['NO_BANNED_EMAIL'] = 'Ni prepovedano, e-poštni naslovi';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'V banlist je bil uspešno posodobljen';
 $lang['CLICK_RETURN_BANADMIN'] = 'Kliknite %sHere%s, da se vrnete na Prepoved Nadzor';
 

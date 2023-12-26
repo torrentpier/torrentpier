@@ -1744,35 +1744,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'をクリックし%sHere%sに戻すフォー�
 
 // Banning
 $lang['BAN_CONTROL'] = '禁止制御';
-$lang['BAN_EXPLAIN'] = 'こちらを制御することができ禁止ユーザーです。 できする"という目標の達成に向けての禁止は、特定のユーザーまたは個人の範囲の全てのIPアドレスを使います。 これらの方法をユーザーからのインデックスページのボードです。 を防止するユーザーからの登録はどのような由来があるのですかユーザー名を指定することもできますメールアドレスを禁止します。 ごとの禁止、メールアドレスだけを妨げない限りにおいてユーザーできるようになってしまうことへのログインまたはポストをボードです。 のものを使用できる最初の二つの方法でこれを達成する。';
-$lang['BAN_EXPLAIN_WARN'] = 'ご入力IPアドレスの結果すべてのアドレスの開始と終了の間の追加にbanlistます。 うにすることを最小限にとどめるためのアドレス数のデータベースの導入によるワイルドカードを自動的に適切な場合です。 なので、しばらく日本に再入力が必要となる範囲になるように心がけていますので小型による状態で特定のメールアドレスです。';
-
-$lang['SELECT_IP'] = '選択IPアドレス';
-$lang['SELECT_EMAIL'] = 'を選択メールアドレス';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = '禁止一又は二以上の特定のユーザー';
 $lang['BAN_USERNAME_EXPLAIN'] = 'でき禁止複数のユーザーの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
-$lang['BAN_IP'] = '禁止はIPアドレス';
-$lang['IP_HOSTNAME'] = 'IPアドレス';
-$lang['BAN_IP_EXPLAIN'] = '指定数の異なるIPアドレスとカンマ区切りで入力します。';
-
-$lang['BAN_EMAIL'] = '禁止を一つ以上のメールアドレス';
-$lang['BAN_EMAIL_EXPLAIN'] = '一つ以上指定するにはメールアドレスとカンマ区切りで入力します。 を指定するにはワイルドカードのユーザー名を使用**@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = '国連-潘り特定のユーザー';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'でき誤解を複数のユーザーの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
-$lang['UNBAN_IP'] = '国連番が一つ以上のIPアドレス';
-$lang['UNBAN_IP_EXPLAIN'] = 'でき誤解を複数のIPアドレスの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
-$lang['UNBAN_EMAIL'] = '国連番が一つ以上のメールアドレス';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'でき誤解を複数のメールアドレスの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
 $lang['NO_BANNED_USERS'] = '禁ユーザ名';
-$lang['NO_BANNED_IP'] = '禁IPアドレス';
-$lang['NO_BANNED_EMAIL'] = '禁メールアドレス';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'のbanlistを更新しました';
 $lang['CLICK_RETURN_BANADMIN'] = 'をクリックし%sHere%s返還を禁止制御';
 

@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikkaa %sHere%s palata Foorumin Oikeudet';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Kiellon Valvonta';
-$lang['BAN_EXPLAIN'] = 'Täällä voit hallita kieltää käyttäjiä. Voit saavuttaa tämän kieltämällä jompikumpi tai molemmat tietyn käyttäjän tai yksilön tai IP-osoitteiden alueen. Nämä menetelmät estävät käyttäjää jopa saavuttaa indeksin sivu teidän aluksella. Estää käyttäjän rekisteröinti eri käyttäjätunnuksella voit myös määrittää kielletty sähköpostiosoite. Huomaa, että kieltäminen sähköpostiosoite yksin ei estä, että käyttäjä voi kirjautua sisään tai lähettää oman hallituksen. Sinun pitäisi käyttää yksi ensimmäisistä kaksi tapaa saavuttaa tämä.';
-$lang['BAN_EXPLAIN_WARN'] = 'Huomaa, että kirjoittamalla IP-osoitteiden alueen tulokset kaikki osoitteet välillä alkuun ja loppuun lisätään bannilista. Yritetään minimoida määrä osoitteita lisätään tietokantaan ottamalla käyttöön yleismerkkejä automaattisesti tarvittaessa. Jos todella täytyy syöttää alue, yritä pitää se pieni tai parempi vielä valtion erityisiä osoitteita.';
-
-$lang['SELECT_IP'] = 'Valitse IP-osoite';
-$lang['SELECT_EMAIL'] = 'Valitse Sähköpostiosoite';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban yksi tai useampi tietyille käyttäjille';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Voit estää useita käyttäjiä kerralla käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
-$lang['BAN_IP'] = 'Ban yksi tai useampi IP-osoitteita';
-$lang['IP_HOSTNAME'] = 'IP-osoitteet';
-$lang['BAN_IP_EXPLAIN'] = 'Voit määrittää useita eri IP-osoitteita, erota ne pilkuilla.';
-
-$lang['BAN_EMAIL'] = 'Ban on yksi tai useampia sähköposti osoitteita';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Voit määrittää useamman kuin yhden sähköpostiosoitteen, erota ne pilkuilla. Määritä jokeri käyttäjätunnus, * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Yk: n ban yksi enemmän tietyille käyttäjille';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Voit unban useille käyttäjille kerralla käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
-$lang['UNBAN_IP'] = 'Yk: n ban yksi tai useampi IP-osoitteita';
-$lang['UNBAN_IP_EXPLAIN'] = 'Voit unban useita IP-osoitteita kerralla käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
-$lang['UNBAN_EMAIL'] = 'Un-ban on yksi tai useampia sähköposti osoitteita';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Voit unban useita sähköpostiosoitteita yhdellä kertaa käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
 $lang['NO_BANNED_USERS'] = 'Ei ole kielletty käyttäjätunnuksia';
-$lang['NO_BANNED_IP'] = 'Ei estetyt IP-osoitteet';
-$lang['NO_BANNED_EMAIL'] = 'Ei ole kielletty sähköpostiosoitteet';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Se bannilista on päivitetty onnistuneesti';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klikkaa %sHere%s palata Kiellon Valvonta';
 
