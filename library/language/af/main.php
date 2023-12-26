@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik %sHere%s om terug te keer na Forum toest
 
 // Banning
 $lang['BAN_CONTROL'] = 'Verbodsbepaling';
-$lang['BAN_EXPLAIN'] = 'Hier kan jy die verbod op gebruikers beheer. U kan dit bereik deur die een of beide van \'n spesifieke gebruiker of \'n individu of reeks IP-adresse te verbied. Hierdie metodes verhoed dat \'n gebruiker selfs die indeksbladsy van jou raad bereik. Om te verhoed dat \'n gebruiker onder \'n ander gebruikersnaam registreer, kan jy ook \'n verbande e-posadres spesifiseer. Let daarop dat die verbod op \'n e-pos adres alleen nie verhoed dat daardie gebruiker kan aanmeld of na u direksie stuur nie. U moet een van die eerste twee metodes gebruik om dit te bereik.';
-$lang['BAN_EXPLAIN_WARN'] = 'Let asseblief daarop dat die invoer van \'n verskeidenheid IP-adresse resultate in al die adresse tussen die begin en einde by die verbodlys gevoeg word. Pogings sal aangewend word om die aantal adresse wat by die databasis gevoeg word, te verminder deur outomaties wildkaarte te plaas waar toepaslik. As jy regtig \'n reeks moet invoer, probeer om dit klein of beter te hou, maar spesifiseer spesifieke adresse.';
-
-$lang['SELECT_IP'] = 'Kies \'n IP-adres';
-$lang['SELECT_EMAIL'] = 'Kies \'n e-pos adres';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Verbied een of meer spesifieke gebruikers';
 $lang['BAN_USERNAME_EXPLAIN'] = 'U kan verskeie gebruikers op een slag verbied deur die toepaslike kombinasie van muis en sleutelbord vir u rekenaar en blaaier te gebruik';
-
-$lang['BAN_IP'] = 'Verbied een of meer IP-adresse';
-$lang['IP_HOSTNAME'] = 'IP Adres';
-$lang['BAN_IP_EXPLAIN'] = 'Om verskillende IP-adresse te spesifiseer, skei hulle met kommas.';
-
-$lang['BAN_EMAIL'] = 'Verbied een of meer e-posadresse';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Om meer as een e-posadres te spesifiseer, skei hulle met kommas. Om \'n wildcard-gebruikersnaam te spesifiseer, gebruik * soos *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Verbied nog een spesifieke gebruiker';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'U kan verskeie gebruikers op een slag ontban met die toepaslike kombinasie van muis en sleutelbord vir u rekenaar en blaaier';
-
-$lang['UNBAN_IP'] = 'Verbied een of meer IP-adresse';
-$lang['UNBAN_IP_EXPLAIN'] = 'U kan verskeie IP-adresse op een slag ontbreek deur die toepaslike kombinasie van muis en sleutelbord vir u rekenaar en blaaier te gebruik';
-
-$lang['UNBAN_EMAIL'] = 'Verbied een of meer e-posadresse';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'U kan verskeie e-posadresse op een slag ontban met die toepaslike kombinasie van muis en sleutelbord vir u rekenaar en blaaier';
-
 $lang['NO_BANNED_USERS'] = 'Geen verbode gebruikers name';
-$lang['NO_BANNED_IP'] = 'Geen verbanne IP-adresse';
-$lang['NO_BANNED_EMAIL'] = 'Geen verbode e-pos adresse';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Die verbodlys is suksesvol opgedateer';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klik %sHere%s om terug te keer na Banbeheer';
 
