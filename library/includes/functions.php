@@ -2174,18 +2174,31 @@ function user_birthday_icon($user_birthday, $user_id): string
 /**
  * Returns true if user was banned
  *
- * @param array $ban_info
+ * @param int $userId
  * @return bool
  */
-function is_user_banned(array $ban_info): bool
+function isUserBanned(int $userId): bool
 {
-    $where_sql = 'ban_ip = ' . $ban_info['user_ip'];
-    $where_sql .= !empty($ban_info['user_id']) ? " OR ban_userid = {$ban_info['user_id']}" : '';
-    $where_sql .= !empty($ban_info['user_email']) ? " OR ban_email = {$ban_info['user_email']}" : '';
+    return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_BANLIST . " WHERE ban_userid = $userId LIMIT 1");
+}
 
-    if ((bool)DB()->fetch_row("SELECT 1 FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
-        return true;
-    }
+/**
+ * Returns information about user ban
+ *
+ * @param int $userId
+ * @return array
+ */
+function getUserBanInfo(int $userId): array
+{
+    return DB()->fetch_row("SELECT * FROM " . BB_BANLIST . " WHERE ban_userid = $userId LIMIT 1");
+}
 
-    return false;
+/**
+ * Returns information about all bans
+ *
+ * @return array
+ */
+function getAllBans(): array
+{
+    return DB()->fetch_rowset("SELECT * FROM " . BB_BANLIST);
 }
