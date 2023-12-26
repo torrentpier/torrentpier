@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikněte %sHere%s k návratu k Oprávnění 
 
 // Banning
 $lang['BAN_CONTROL'] = 'Zákaz Řízení';
-$lang['BAN_EXPLAIN'] = 'Zde můžete ovládat zákazu uživatele. Můžete dosáhnout tím, že zákaz jedné nebo obou konkrétního uživatele nebo jednotlivec nebo rozsah IP adres. Tyto metody zabránit uživateli i od dosažení index stránky vaší desce. Aby se zabránilo uživateli registraci pod jiným uživatelským jménem, můžete také zadat zakázal e-mailovou adresu. Vezměte prosím na vědomí, že zákaz e-mailovou adresu sám se nebrání, že uživatel je schopen se přihlásit na nebo poštou na své palubě. Měli byste použít jednu z prvních dvou metod k dosažení tohoto cíle.';
-$lang['BAN_EXPLAIN_WARN'] = 'Vezměte prosím na vědomí, že zadáním rozsahu IP adres výsledky ve všech adres mezi start a end je přidána do banlist. Pokusy budou provedeny, aby se minimalizoval počet adres přidán do databáze zavedením zástupné znaky automaticky tam, kde je to vhodné. Pokud opravdu musíte zadat rozsah, snažte se, aby to bylo malé, nebo ještě lépe uvádět konkrétní adresy.';
-
-$lang['SELECT_IP'] = 'Vyberte IP adresu';
-$lang['SELECT_EMAIL'] = 'Vyberte E-mailovou adresu';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Zakázat jednu nebo více konkrétních uživatelů';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Můžete zakázat více uživatelů najednou pomocí vhodné kombinace myši a klávesnice pro váš počítač a prohlížeč';
-
-$lang['BAN_IP'] = 'Zakázat jednu nebo více IP adres';
-$lang['IP_HOSTNAME'] = 'IP adresy';
-$lang['BAN_IP_EXPLAIN'] = 'Zadat několik různých IP adres, oddělte je čárkami.';
-
-$lang['BAN_EMAIL'] = 'Zakázat jednu nebo více e-mailových adres';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Chcete-li zadat více než jednu e-mailovou adresu, oddělte je čárkami. Zadat zástupný znak, uživatelské jméno, použijte * jako *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Un-ban jednu konkrétní uživatele';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Můžete unban více uživatelů najednou pomocí vhodné kombinace myši a klávesnice pro váš počítač a prohlížeč';
-
-$lang['UNBAN_IP'] = 'Un-ban jednu nebo více IP adres';
-$lang['UNBAN_IP_EXPLAIN'] = 'Můžete unban více IP adres v jednom kroku pomocí vhodné kombinace myši a klávesnice pro váš počítač a prohlížeč';
-
-$lang['UNBAN_EMAIL'] = 'Un-ban jednu nebo více e-mailových adres';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Můžete unban více e-mailových adres v jednom kroku pomocí vhodné kombinace myši a klávesnice pro váš počítač a prohlížeč';
-
 $lang['NO_BANNED_USERS'] = 'Žádné zakázané uživatelská jména';
-$lang['NO_BANNED_IP'] = 'Žádné zakázané adresy IP';
-$lang['NO_BANNED_EMAIL'] = 'Ne, zakázal e-mailové adresy';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Na banlist byl aktualizován úspěšně';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klikněte %sHere%s vrátit k Zákazu Řízení';
 
