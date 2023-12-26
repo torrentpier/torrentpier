@@ -151,7 +151,7 @@ class Poll
      */
     public static function userIsAlreadyVoted(int $topic_id, int $user_id): bool
     {
-        return (bool)DB()->fetch_row("SELECT user_id FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
+        return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
     }
 
     /**

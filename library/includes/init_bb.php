@@ -395,6 +395,20 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
+ * Initial ban check against user_id, user_email or IP address
+ */
+if (!IS_GUEST) {
+    $where_sql = 'ban_ip = ' . USER_IP;
+    $where_sql .= " OR ban_userid = {$userdata['user_id']}";
+    $where_sql .= " OR ban_email = {$userdata['user_email']}";
+
+    if (DB()->fetch_row("SELECT 1 FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
+        $user->session_end();
+        bb_simple_die($lang['YOU_BEEN_BANNED']);
+    }
+}
+
+/**
  * Cron
  */
 if (
