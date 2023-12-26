@@ -14,24 +14,6 @@ if (!defined('BB_ROOT')) {
 // System
 define('APP_NAME', 'TorrentPier');
 
-define('CHECK_REQIREMENTS', [
-    'status' => true,
-    'php_min_version' => '8.1.0',
-    'ext_list' => [
-        'json',
-        // 'gd', (optional)
-        // 'zlib', (optional)
-        'curl',
-        // 'tidy', (optional)
-        'mysqli',
-        'bcmath',
-        'mbstring',
-        'intl',
-        'xml',
-        'xmlwriter',
-    ],
-]);
-
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');

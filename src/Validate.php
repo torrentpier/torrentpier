@@ -32,10 +32,9 @@ class Validate
      *
      * @return bool|string
      */
-    public static function username(string $username, bool $check_ban_and_taken = true)
+    public static function username(string $username, bool $check_ban_and_taken = true): bool|string
     {
         global $user, $lang;
-
         static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
         // Check for empty
@@ -43,7 +42,6 @@ class Validate
             return $lang['CHOOSE_A_NAME'];
         }
 
-        $username = str_compact($username);
         $username = clean_username($username);
 
         // Length
