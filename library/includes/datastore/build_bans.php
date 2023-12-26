@@ -11,11 +11,11 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$sql = "SELECT * FROM " . BB_RANKS;
-$ranks = [];
+$sql = "SELECT * FROM " . BB_BANLIST;
+$bans = [];
 
 foreach (DB()->fetch_rowset($sql) as $row) {
-    $ranks[$row['rank_id']] = $row;
+    $bans[$row['ban_userid']] = $row;
 }
 
-$this->store('ranks', $ranks);
+$this->store('ban_list', $bans);
