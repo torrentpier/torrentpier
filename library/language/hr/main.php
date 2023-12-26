@@ -1250,7 +1250,7 @@ $lang['ALREADY_REG'] = 'Torrent je već registriran';
 $lang['NOT_TORRENT'] = 'Ova je datoteka bujica';
 $lang['ONLY_1_TOR_PER_POST'] = 'Možete se registrirati samo jedna nit u jedan post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Možete prijaviti samo jedan torrent na jednoj temi';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-Prikaz profila :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktivnih torrenta';
 
 $lang['TD_TRAF'] = 'Danas';
