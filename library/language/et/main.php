@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klõpsake %sHere%s naasta Foorumi Õigused';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrolli';
-$lang['BAN_EXPLAIN'] = 'Siin te saate kontrollida, keelatakse kasutajad. Teil on võimalik saavutada seda, millega keelatakse kas või nii konkreetse kasutaja või isik või erinevaid IP aadresse. Need meetodid vältida kasutaja alates isegi jõuda esilehele teie juhatuse. Et vältida kasutaja alates registreerimise alusel eri kasutajanimi võite määrata ka keelatud e-posti aadress. Palun pange tähele, et keelata e-posti aadress üksi ei takista, et kasutaja olema võimeline logi sisse või postiga oma pardal. Sa peaksid kasutama ühte kahe esimese meetodeid selle saavutamiseks.';
-$lang['BAN_EXPLAIN_WARN'] = 'Palun pange tähele, et vahemiku IP-aadressidest, mille tulemuseks kõik aadressid vahel alguse ja lõpu lisanduvad banlist. Katsed on tehtud võimalikult väike arv aadressid lisatakse andmebaasi, lisades metamärgid automaatselt, kui see on asjakohane. Kui sa tõesti tuleb sisestada vahemik, proovige hoida seda väikest või veel parem riigi aadresse.';
-
-$lang['SELECT_IP'] = 'Valige IP aadress';
-$lang['SELECT_EMAIL'] = 'Valige e-Posti aadress';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban ühe või mitme konkreetse kasutajad';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Saate ban mitu kasutajat korraga, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
-$lang['BAN_IP'] = 'Ban üks või mitu IP-aadressid';
-$lang['IP_HOSTNAME'] = 'IP-aadressid';
-$lang['BAN_IP_EXPLAIN'] = 'Määrata mitu erinevat IP-aadressid eraldi neid with commas.';
-
-$lang['BAN_EMAIL'] = 'Ban üks või mitu e-posti aadressid';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Määrata rohkem kui üks e-posti aadressi, eraldage need with commas. Määrata lühend kasutajanimi, kasuta * nagu *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Üro-ban üks konkreetsemaid kasutajad';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Saad unban mitu kasutajat korraga, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
-$lang['UNBAN_IP'] = 'Üro-ban üks või mitu IP-aadressid';
-$lang['UNBAN_IP_EXPLAIN'] = 'Saad unban mitu IP-aadressi ühes minna, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
-$lang['UNBAN_EMAIL'] = 'Üro-ban üks või mitu e-posti aadressid';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Saad unban mitu e-posti aadressid ühekorraga, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
 $lang['NO_BANNED_USERS'] = 'Nr keelatud kasutajanimed';
-$lang['NO_BANNED_IP'] = 'Nr keelatud IP-aadressid';
-$lang['NO_BANNED_EMAIL'] = 'Nr keelatud e-posti aadressid';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Kui banlist on edukalt uuendatud';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klõpsake %sHere%s naasta Keeld Kontrolli';
 
