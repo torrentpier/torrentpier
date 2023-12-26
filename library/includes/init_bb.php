@@ -397,7 +397,7 @@ $userdata =& $user->data;
 /**
  * Initial ban check
  */
-if ($banInfo = getUserBanInfo($user->id)) {
+if ($banInfo = getUserBanInfo((int)$user->id)) {
     if (!IS_GUEST) {
         $user->session_end();
     }

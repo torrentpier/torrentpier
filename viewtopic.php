@@ -736,7 +736,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     ]);
 
     // Ban information
-    if ($banInfo = getUserBanInfo($poster_id)) {
+    if ($banInfo = getUserBanInfo((int)$poster_id)) {
         $template->assign_block_vars('postrow.ban', [
             'IS_BANNED' => true,
             'BAN_REASON' => $banInfo['ban_reason']
