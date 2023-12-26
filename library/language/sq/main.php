@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent tashmë të regjistruar';
 $lang['NOT_TORRENT'] = 'Kjo skedë nuk është torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Ju mund të regjistroheni vetëm një përrua në një post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Ju mund të regjistroheni vetëm një përrua në një temë';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Shikimin torrent-profili :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiv torrents';
 
 $lang['TD_TRAF'] = 'Sot';

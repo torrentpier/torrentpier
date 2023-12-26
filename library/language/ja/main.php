@@ -1251,7 +1251,7 @@ $lang['ALREADY_REG'] = '激流に登録されてい';
 $lang['NOT_TORRENT'] = 'このファイルがない急流';
 $lang['ONLY_1_TOR_PER_POST'] = '登録することができ唯一の激流に日本人の配偶者やその家族';
 $lang['ONLY_1_TOR_PER_TOPIC'] = '登録することができ唯一の激流が一つの話題';
-$lang['VIEWING_USER_BT_PROFILE'] = '閲覧激流-プロフィール::%s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = '活納入';
 
 $lang['TD_TRAF'] = '今日の';

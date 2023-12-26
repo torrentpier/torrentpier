@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = '토렌트가 이미 등록';
 $lang['NOT_TORRENT'] = '이 파일은 파일 토렌트';
 $lang['ONLY_1_TOR_PER_POST'] = '당신이 등록할 수 있는 단 하나의 토렌트에서 하나의 게시물';
 $lang['ONLY_1_TOR_PER_TOPIC'] = '당신이 등록할 수 있는 단 하나의 토렌트에서 하나의 주제';
-$lang['VIEWING_USER_BT_PROFILE'] = '보 토렌트 프로파일::%s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Active 급류';
 
 $lang['TD_TRAF'] = '오늘';

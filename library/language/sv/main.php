@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent som redan är registrerat';
 $lang['NOT_TORRENT'] = 'Den här filen är inte torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Du kan endast registrera en torrent i ett inlägg';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Du kan endast registrera en torrent i ett ämne';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Visa torrent-profil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiva torrents';
 
 $lang['TD_TRAF'] = 'Idag';

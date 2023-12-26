@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent, kas jau reģistrēts';
 $lang['NOT_TORRENT'] = 'Šis fails nav torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Jūs varat reģistrēties tikai vienā torrent viens sūtījums';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Jūs varat reģistrēties tikai vienā torrent viena tēma';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Apskate torrent-profils :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktīvā straumēm';
 
 $lang['TD_TRAF'] = 'Šodien';

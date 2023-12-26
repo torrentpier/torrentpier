@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Ҷӯйе аллакай ба қайд гирифта';
 $lang['NOT_TORRENT'] = 'Ин файл ҷӯйе нест,';
 $lang['ONLY_1_TOR_PER_POST'] = 'Шумо метавонед танҳо як ҷӯйе дар як мансаби ба қайд';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Шумо метавонед танҳо як ҷӯйе дар як мавзӯъ ба қайд';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Тамошои ҷӯйе-намуди :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'рӯдҳо фаъол';
 
 $lang['TD_TRAF'] = 'имрӯз';

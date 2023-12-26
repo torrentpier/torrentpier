@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent már regisztrált';
 $lang['NOT_TORRENT'] = 'Ezt a fájlt nem torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Lehet regisztrálni, csak egy torrent egy post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Lehet regisztrálni, csak egy torrent egy téma';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Megtekintése torrent-profil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktív torrentek';
 
 $lang['TD_TRAF'] = 'Ma';

@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent sudah terdaftar';
 $lang['NOT_TORRENT'] = 'File ini tidak torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Anda dapat mendaftar hanya satu torrent di salah satu posting';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Anda dapat mendaftar hanya satu torrent dalam satu topik';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Melihat torrent-profile :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Active torrents';
 
 $lang['TD_TRAF'] = 'Hari ini';

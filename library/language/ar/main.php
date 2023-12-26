@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'سيل مسجل بالفعل';
 $lang['NOT_TORRENT'] = 'هذا الملف ليس تورنت';
 $lang['ONLY_1_TOR_PER_POST'] = 'يمكنك تسجيل واحد فقط سيل في وظيفة واحدة';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'يمكنك تسجيل واحد فقط تورنت في موضوع واحد';
-$lang['VIEWING_USER_BT_PROFILE'] = 'مشاهدة سيل الشخصي :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'نشط السيول';
 
 $lang['TD_TRAF'] = 'اليوم';

@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent已经注册';
 $lang['NOT_TORRENT'] = '这个文件不是洪流';
 $lang['ONLY_1_TOR_PER_POST'] = '你可以注册只有一个种子中的一个职位';
 $lang['ONLY_1_TOR_PER_TOPIC'] = '你可以注册只有一个种子中的一个主题';
-$lang['VIEWING_USER_BT_PROFILE'] = '看torrent profile::%s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = '活动的种子';
 
 $lang['TD_TRAF'] = '今天';

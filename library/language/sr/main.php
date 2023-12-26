@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Торент је већ регистрован';
 $lang['NOT_TORRENT'] = 'Овај фајл није торент';
 $lang['ONLY_1_TOR_PER_POST'] = 'Можете се регистровати само један ток у један пост';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Можете се регистровати само један торрент у једној теми';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Торрент-Прегледај профил :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Активне бујица';
 
 $lang['TD_TRAF'] = 'Данас';

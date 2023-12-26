@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Potpuno je već registrovan';
 $lang['NOT_TORRENT'] = 'Ovaj fajl ne bujicama';
 $lang['ONLY_1_TOR_PER_POST'] = 'Možete prijaviti samo jedan bujicama u jednom post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Možete prijaviti samo jedan bujicama u jedna tema';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Gledanje bujicama-profilom :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktivni bujica';
 
 $lang['TD_TRAF'] = 'Danas';

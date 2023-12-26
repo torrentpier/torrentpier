@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Торэнт ужо зарэгістраваны';
 $lang['NOT_TORRENT'] = 'Гэты файл не торэнт';
 $lang['ONLY_1_TOR_PER_POST'] = 'Вы можаце зарэгістраваць толькі адзін струмень у адзін пост';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Вы можаце зарэгістраваць толькі адзін торэнт у адной тэме';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Торэнт-Прагляд профілю :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Актыўных торэнтаў';
 
 $lang['TD_TRAF'] = 'Сёння';

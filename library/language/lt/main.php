@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent jau registruotas';
 $lang['NOT_TORRENT'] = 'Šis failas yra ne torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Galite registruotis tik vieną torrent į vieną postą';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Galite registruotis tik vieną torrent viena tema';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Peržiūrėti torrent-profile :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktyvių torrentų';
 
 $lang['TD_TRAF'] = 'Šiandien';
