@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Торрент уже зарегистрирован';
 $lang['NOT_TORRENT'] = 'Это не торрент-файл';
 $lang['ONLY_1_TOR_PER_POST'] = 'Вы не можете зарегистрировать еще один торрент для этого сообщения';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Вы не можете зарегистрировать еще один торрент для этого топика';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Торрент-профиль'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Активные раздачи';
 
 $lang['TD_TRAF'] = 'Сегодня';
