@@ -1744,35 +1744,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = '%sHere%s İzinleri Foruma dönmek için tıkl
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrol';
-$lang['BAN_EXPLAIN'] = 'Burada kullanıcılar yasaklanması kontrol edebilirsiniz. Belirli bir kullanıcı veya IP adresleri tek tek ya da bir dizi ya da yasaklayan bu elde edebilirsiniz. Bu yöntemler, Yönetim Kurulu indeks sayfası ulaşmak bile bir kullanıcı önlemek. Ayrıca yasaklı e-posta adresi belirtebilirsiniz farklı bir kullanıcı adı altında kayıt bir kullanıcı önlemek için. Yalnız bir e-posta adresi yasaklama oturum ya da Yönetim Kurulu için post edememek kullanıcı engellemez unutmayın. Bunu başarmak için ilk iki yöntemden birini kullanmalısınız.';
-$lang['BAN_EXPLAIN_WARN'] = 'IP aralığı girerek status eklenen başlangıç ve bitiş arasındaki tüm adresleri sonuçları adreslerini unutmayın. Çalışır veritabanına otomatik olarak uygun yere joker tanıtarak ekledi adresleri sayısını en aza indirmek için yapılır. Eğer gerçekten bir dizi girin, küçük ya da daha iyisi belirli adresleri devlet tutmaya çalışın.';
-
-$lang['SELECT_IP'] = 'Bir IP adresi seçin';
-$lang['SELECT_EMAIL'] = 'E-Posta adresi seçin';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Bir veya daha fazla belirli kullanıcılar Ban';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Bir bilgisayar fare ve klavye uygun kombinasyonu kullanılarak tarayıcı birden çok kullanıcının yasağı ve';
-
-$lang['BAN_IP'] = 'Bir veya daha fazla IP adresleri yasağı';
-$lang['IP_HOSTNAME'] = 'IP adresleri';
-$lang['BAN_IP_EXPLAIN'] = 'Birkaç farklı IP adreslerini belirtmek için virgül ile ayırın.';
-
-$lang['BAN_EMAIL'] = 'Bir veya daha fazla e-posta adresleri yasağı';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Birden fazla e-posta adresi belirtmek için, bir virgül ile ayırın. Joker bir kullanıcı adı belirtmek için * *@hotmail.com gibi kullanın';
-
-$lang['UNBAN_USERNAME'] = 'BM-belirli kullanıcılar ban';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Bir bilgisayar fare ve klavye uygun kombinasyonu kullanılarak tarayıcı birden çok kullanıcı yasak kaldırma ve';
-
-$lang['UNBAN_IP'] = 'BM-bir veya daha fazla IP adresleri yasağı';
-$lang['UNBAN_IP_EXPLAIN'] = 'Bilgisayarınızın fare ve klavye uygun kombinasyonu kullanarak tarayıcı ve birden çok IP adresi yasak kaldırma edebilirsiniz';
-
-$lang['UNBAN_EMAIL'] = 'BM-bir veya daha fazla e-posta adresleri yasağı';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Bilgisayarınızın fare ve klavye uygun kombinasyonu kullanarak tarayıcı ve birden çok e-posta adresleri Kazanmalı yapabilirsiniz';
-
 $lang['NO_BANNED_USERS'] = 'Hayır yasaklı kullanıcı adları';
-$lang['NO_BANNED_IP'] = 'Hayır, yasaklanan IP adresleri';
-$lang['NO_BANNED_EMAIL'] = 'Hayır yasaklı e-posta adresleri';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Status başarıyla güncellendi';
 $lang['CLICK_RETURN_BANADMIN'] = 'Denetim Yasağı dönmek için %sHere%s tıklayın';
 
