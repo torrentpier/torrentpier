@@ -218,7 +218,7 @@ class User
         $this->init_userprefs();
 
         // Initial ban check
-        if ($banInfo = getUserBanInfo((int)$this->id)) {
+        if ($banInfo = getBanInfo((int)$this->id)) {
             if (!empty($banInfo['ban_reason'])) {
                 bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $banInfo['ban_reason']);
             } else {
