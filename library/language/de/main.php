@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klicken Sie auf %sHere%s zurück zu Forum-Ber
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrolle';
-$lang['BAN_EXPLAIN'] = 'Hier können Sie Steuern, den user zu bannen. Dies können Sie erreichen, durch das Verbot der beiden oder beide einen bestimmten Benutzer oder eine einzelne oder einen Bereich von IP-Adressen. Diese Methoden verhindern, dass ein Benutzer auch erreichen die index-Seite von deinem board. Um zu verhindern, dass ein Benutzer von der Anmeldung unter einem anderen Benutzernamen ein, den Sie können auch angeben, eine verbotene E-Mail-Adresse. Bitte beachten Sie, dass das sperren einer E-Mail-Adresse allein wird nicht verhindern, dass Benutzer in der Lage, anmelden oder post auf dem board. Sollten Sie mit einer der ersten beiden Methoden, dies zu erreichen.';
-$lang['BAN_EXPLAIN_WARN'] = 'Bitte beachten Sie, dass die Eingabe einer Reihe von IP-Adressen führt in alle Adressen zwischen der start-und end-Eintrag in die Bannliste. Es wird versucht, minimieren die Anzahl der Adressen in die Datenbank aufgenommen durch die Einführung von Platzhaltern automatisch wo es sinnvoll ist. Wenn Sie wirklich müssen, geben Sie ein range sind, versuchen Sie klein zu halten oder besser noch Staat bestimmte Adressen.';
-
-$lang['SELECT_IP'] = 'Wählen Sie eine IP-Adresse';
-$lang['SELECT_EMAIL'] = 'Wählen Sie eine E-Mail-Adresse';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban einen oder mehrere bestimmte Benutzer';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Sie verbieten können mehrere Benutzer in einem Rutsch mit der entsprechenden Kombination von Maus und Tastatur für Ihren computer und browser';
-
-$lang['BAN_IP'] = 'Ban eine oder mehrere IP-Adressen';
-$lang['IP_HOSTNAME'] = 'IP-Adressen';
-$lang['BAN_IP_EXPLAIN'] = 'Um anzugeben, mehrere verschiedene IP-Adressen trennen Sie diese mit Kommas.';
-
-$lang['BAN_EMAIL'] = 'Ban eine oder mehrere E-Mail Adressen';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Festlegen mehr als einer email Adresse, trennen Sie Sie mit Kommas. , Legen Sie einen Platzhalter username * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Un-ban eine weitere bestimmte Benutzer';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Sie können unban mehrere Benutzer in einem Rutsch mit der entsprechenden Kombination von Maus und Tastatur für Ihren computer und browser';
-
-$lang['UNBAN_IP'] = 'Un-ban eine oder mehrere IP-Adressen';
-$lang['UNBAN_IP_EXPLAIN'] = 'Sie können unban mehrere IP-Adressen in einem Rutsch mit der entsprechenden Kombination von Maus und Tastatur für Ihren computer und browser';
-
-$lang['UNBAN_EMAIL'] = 'Un-ban eine oder mehrere E-Mail Adressen';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Sie können unban mehrere E-Mail Adressen in einem Rutsch mit der entsprechenden Kombination von Maus und Tastatur für Ihren computer und browser';
-
 $lang['NO_BANNED_USERS'] = 'Keine Verbotenen Benutzernamen';
-$lang['NO_BANNED_IP'] = 'Keine gebannten IP-Adressen';
-$lang['NO_BANNED_EMAIL'] = 'Keine Verbotenen E-Mail-Adressen';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Die Bannliste wurde erfolgreich aktualisiert';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klicken Sie auf %sHere%s zurück zu Verbieten, Kontrollieren';
 
