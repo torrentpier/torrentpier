@@ -15,12 +15,9 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (isset($_POST['submit'])) {
-    $user_bansql = '';
-
     $user_list = [];
     if (!empty($_POST['username'])) {
-        $this_userdata = get_userdata($_POST['username'], true);
-        if (!$this_userdata) {
+        if (!$this_userdata = get_userdata($_POST['username'], true)) {
             bb_die($lang['NO_USER_ID_SPECIFIED']);
         }
 
@@ -35,8 +32,6 @@ if (isset($_POST['submit'])) {
     $current_banlist = DB()->sql_fetchrowset($result);
     DB()->sql_freeresult($result);
 
-    $kill_session_sql = '';
-
     for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
         $in_banlist = false;
         for ($j = 0, $jMax = count($current_banlist); $j < $jMax; $j++) {
@@ -46,20 +41,10 @@ if (isset($_POST['submit'])) {
         }
 
         if (!$in_banlist) {
-            $kill_session_sql .= (($kill_session_sql != '') ? ' OR ' : '') . 'session_user_id = ' . $user_list[$i];
-
             $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid) VALUES (' . $user_list[$i] . ')';
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not insert ban_userid info into database');
             }
-        }
-    }
-
-    // Now we'll delete all entries from the session table
-    if ($kill_session_sql != '') {
-        $sql = 'DELETE FROM ' . BB_SESSIONS . " WHERE $kill_session_sql";
-        if (!DB()->sql_query($sql)) {
-            bb_die('Could not delete banned sessions from database');
         }
     }
 
@@ -70,15 +55,15 @@ if (isset($_POST['submit'])) {
 
         for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
             if ($user_list[$i] != -1) {
-                $where_sql .= (($where_sql != '') ? ', ' : '') . (int)$user_list[$i];
+                $where_sql = (int)$user_list[$i];
             }
         }
-    }
 
-    if ($where_sql != '') {
-        $sql = 'DELETE FROM ' . BB_BANLIST . " WHERE ban_id IN ($where_sql)";
-        if (!DB()->sql_query($sql)) {
-            bb_die('Could not delete ban info from database');
+        if ($where_sql != '') {
+            $sql = 'DELETE FROM ' . BB_BANLIST . " WHERE ban_id IN ($where_sql)";
+            if (!DB()->sql_query($sql)) {
+                bb_die('Could not delete ban info from database');
+            }
         }
     }
 

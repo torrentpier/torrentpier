@@ -28,4 +28,3 @@
 </form>
 
 <br>
-<p>{L_BAN_EXPLAIN_WARN}</p>
