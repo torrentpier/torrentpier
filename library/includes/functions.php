@@ -2180,8 +2180,8 @@ function user_birthday_icon($user_birthday, $user_id): string
 function is_user_banned(array $ban_info): bool
 {
     $where_sql = 'ban_ip = ' . $ban_info['user_ip'];
-    $where_sql .= " OR ban_userid = {$ban_info['user_id']}";
-    $where_sql .= " OR ban_email = {$ban_info['user_email']}";
+    $where_sql .= $ban_info['user_id'] ? " OR ban_userid = {$ban_info['user_id']}" : '';
+    $where_sql .= $ban_info['user_email'] ? " OR ban_email = {$ban_info['user_email']}" : '';
 
     if ((bool)DB()->fetch_row("SELECT 1 FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
         return true;

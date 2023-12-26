@@ -399,8 +399,8 @@ $userdata =& $user->data;
  */
 if (is_user_banned([
     'user_ip' => USER_IP,
-    'user_id' => $userdata['user_id'],
-    'user_email' => $userdata['user_email']
+    'user_id' => !IS_GUEST ? $userdata['user_id'] : false,
+    'user_email' => !IS_GUEST ? $userdata['user_email'] : false
 ])) {
     if (!IS_GUEST) {
         $user->session_end();
