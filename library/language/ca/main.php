@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Feu clic %sHere%s per tornar a Fòrum de Perm
 
 // Banning
 $lang['BAN_CONTROL'] = 'Prohibició De Control';
-$lang['BAN_EXPLAIN'] = 'Aquí es pot controlar la prohibició dels usuaris. Podeu aconseguir-ho prohibició o bé totes dues d\'un usuari concret o un individu o un interval d\'adreces IP. Aquests mètodes impedir a un usuari d\'arribar fins i tot a la pàgina d\'índex de la seva junta directiva. Per evitar que un usuari ha de registrar-se sota un nom d\'usuari diferent també podeu especificar una prohibit adreça de correu electrònic. Si us plau, tingueu en compte que la prohibició d\'una adreça de correu electrònic per si sol no impedeix que l\'usuari pugui connectar-o post al consell. Vostè ha d\'utilitzar un dels dos primers mètodes per a aconseguir-ho.';
-$lang['BAN_EXPLAIN_WARN'] = 'Si us plau, tingueu en compte que entrar en un interval d\'adreces IP de resultats en totes les direccions entre l\'inici i el final que s\'afegeix a la banlist. Els intents es fan per tal de minimitzar el nombre d\'adreces afegit a la base de dades per introduir caràcters especials automàticament si s\'escau. Si realment han d\'introduir una sèrie, intentar mantenir-lo petit o millor encara, d\'estat específica de les adreces.';
-
-$lang['SELECT_IP'] = 'Seleccioneu una adreça IP';
-$lang['SELECT_EMAIL'] = 'Seleccioneu una adreça de Correu electrònic';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'La prohibició d\'un o més usuaris específics';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Vostè pot prohibir a múltiples usuaris en un anar amb la combinació adequada de ratolí i teclat de l\'ordinador i el navegador';
-
-$lang['BAN_IP'] = 'Prohibició una o més adreces IP';
-$lang['IP_HOSTNAME'] = 'Les adreces IP';
-$lang['BAN_IP_EXPLAIN'] = 'Per especificar diferents adreces IP separar-les per comes.';
-
-$lang['BAN_EMAIL'] = 'Prohibició una o més adreces de correu electrònic';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Per especificar més d\'una adreça de correu electrònic, separar-les per comes. Per especificar un comodí nom d\'usuari, useu * com *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Onu-ban una de més específica usuaris';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Podeu unban a múltiples usuaris en un anar amb la combinació adequada de ratolí i teclat de l\'ordinador i el navegador';
-
-$lang['UNBAN_IP'] = 'Onu-ban una o més adreces IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Podeu unban múltiples adreces IP en un anar amb la combinació adequada de ratolí i teclat de l\'ordinador i el navegador';
-
-$lang['UNBAN_EMAIL'] = 'Onu-ban una o més adreces de correu electrònic';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Podeu unban múltiples adreces de correu electrònic en un anar amb la combinació adequada de ratolí i teclat de l\'ordinador i el navegador';
-
 $lang['NO_BANNED_USERS'] = 'No hi ha prohibit el nom d\'usuari';
-$lang['NO_BANNED_IP'] = 'No prohibides les adreces IP';
-$lang['NO_BANNED_EMAIL'] = 'No prohibides les adreces de correu electrònic';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'La banlist s\'ha actualitzat amb èxit';
 $lang['CLICK_RETURN_BANADMIN'] = 'Feu clic %sHere%s per tornar a la Prohibició de Control';
 
