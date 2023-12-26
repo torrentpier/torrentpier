@@ -1980,6 +1980,10 @@ function profile_url($data)
 
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && $username) {
         $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+
+        if ((bool)getUserBanInfo($user_id)) {
+            return '<s>' . $profile . '</s>';
+        }
     }
 
     return $profile;
