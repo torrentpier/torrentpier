@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Noklikšķiniet uz %sHere%s atgriezties uz Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Aizliegumu Kontrole';
-$lang['BAN_EXPLAIN'] = 'Šeit jūs varat kontrolēt aizliedzot lietotājiem. Jūs varat sasniegt šo aizliedzot vienu vai abus no konkrēta lietotāja, vai individuāli vai vairākas IP adreses. Šīs metodes liegt lietotājam pat sasniedzot indeksa lapā jūsu kuģa. Liegt lietotājam reģistrējoties ar citu lietotājvārdu, varat arī norādīt aizliegts e-pasta adresi. Lūdzu, ņemiet vērā, ka, aizliedzot e-pasta adresi, vien nepieļautu, ka lietotājam ir iespēja pieteikties vai pa pastu uz jūsu kuģa. Jums vajadzētu izmantot vienu no pirmās divas metodes, lai sasniegtu šo.';
-$lang['BAN_EXPLAIN_WARN'] = 'Lūdzu, ņemiet vērā, ka ievadot IP adrešu diapazona rezultātus visās adreses, starp sākuma un beigu tiek pievienoti banlist. Mēģinājumi tiks veikti, lai samazinātu skaitu, adreses pievienots datubāzei ieviešot aizstājējzīmju automātiski, ja nepieciešams. Ja jums tiešām ir jāievada diapazonā, mēģiniet, lai saglabātu to mazo vai vēl labāk valsts konkrētām adresēm.';
-
-$lang['SELECT_IP'] = 'Izvēlieties IP adresi';
-$lang['SELECT_EMAIL'] = 'Izvēlieties e-Pasta adresi';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Bloķēt vienu vai vairākus īpašus lietotāji';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Jūs varat aizliegumu vairākiem lietotājiem vienā piegājienā, izmantojot atbilstošu kombināciju peli un tastatūru, lai jūsu datoru un pārlūka';
-
-$lang['BAN_IP'] = 'Bloķēt vienu vai vairākas IP adreses';
-$lang['IP_HOSTNAME'] = 'IP adreses';
-$lang['BAN_IP_EXPLAIN'] = 'Lai norādītu vairākus dažādas IP adreses, atdaliet tās ar komatiem.';
-
-$lang['BAN_EMAIL'] = 'Bloķēt vienu vai vairākas e-pasta adreses';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Lai norādītu vairāk nekā vienu e-pasta adreses, atdaliet tās ar komatiem. Lai norādītu aizstājējzīmi lietotājvārdu, izmantojiet * kā *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Ano-aizliegums vienu konkrētu lietotāji';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Jūs varat unban vairākiem lietotājiem vienā piegājienā, izmantojot atbilstošu kombināciju peli un tastatūru, lai jūsu datoru un pārlūka';
-
-$lang['UNBAN_IP'] = 'Ano-aizliegums vienu vai vairākas IP adreses';
-$lang['UNBAN_IP_EXPLAIN'] = 'Jūs varat unban vairākas IP adreses vienā piegājienā, izmantojot atbilstošu kombināciju peli un tastatūru, lai jūsu datoru un pārlūka';
-
-$lang['UNBAN_EMAIL'] = 'Ano-aizliegums vienu vai vairākas e-pasta adreses';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Jūs varat unban vairākas e-pasta adreses, vienā piegājienā, izmantojot atbilstošu kombināciju peli un tastatūru, lai jūsu datoru un pārlūka';
-
 $lang['NO_BANNED_USERS'] = 'Nav aizliegts lietotājvārdu';
-$lang['NO_BANNED_IP'] = 'Nē aizliegta IP adreses';
-$lang['NO_BANNED_EMAIL'] = 'Nav aizliegts e-pasta adreses';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'To banlist ir atjaunināta veiksmīgi';
 $lang['CLICK_RETURN_BANADMIN'] = 'Noklikšķiniet uz %sHere%s, lai atgrieztos Aizliegumu Kontrole';
 
