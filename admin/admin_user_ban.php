@@ -14,6 +14,12 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
+// Get bans info from datastore
+if (!$bans = $datastore->get('ban_list')) {
+    $datastore->update('ban_list');
+    $bans = $datastore->get('ban_list');
+}
+
 if (isset($_POST['submit'])) {
     $user_list = [];
     if (!empty($_POST['username'])) {
@@ -55,7 +61,7 @@ if (isset($_POST['submit'])) {
 
         for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
             if ($user_list[$i] != -1) {
-                $where_sql = (int)$user_list[$i];
+                $where_sql .= (($where_sql != '') ? ', ' : '') . (int)$user_list[$i];
             }
         }
 
@@ -71,25 +77,10 @@ if (isset($_POST['submit'])) {
     bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 } else {
     $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
-    $userban_count = 0;
-
-    $sql = 'SELECT b.ban_id, u.user_id, u.username
-		FROM ' . BB_BANLIST . ' b, ' . BB_USERS . ' u
-		WHERE u.user_id = b.ban_userid
-			AND b.ban_userid <> 0
-			AND u.user_id <> ' . GUEST_UID . '
-		ORDER BY u.username ASC';
-    if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not select current user_id ban list');
-    }
-
-    $user_list = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
 
     $select_userlist = '';
-    for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
-        $select_userlist .= '<option value="' . $user_list[$i]['ban_id'] . '">' . $user_list[$i]['username'] . '</option>';
-        $userban_count++;
+    foreach ($bans as $ban) {
+        $select_userlist .= '<option value="' . $ban['ban_id'] . '">' . get_username($ban['ban_userid']) . '</option>';
     }
 
     if ($select_userlist == '') {
