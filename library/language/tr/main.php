@@ -1251,7 +1251,7 @@ $lang['ALREADY_REG'] = 'Torrent zaten kayıtlı';
 $lang['NOT_TORRENT'] = 'Bu dosya torrent değil';
 $lang['ONLY_1_TOR_PER_POST'] = 'Bir yazı yalnızca bir torrent kaydedebilirsiniz';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Bir konuda tek bir torrent kaydedebilirsiniz';
-$lang['VIEWING_USER_BT_PROFILE'] = '%s görüntüleme torrent-profil :'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Etkin torrentler';
 
 $lang['TD_TRAF'] = 'Bugün';
