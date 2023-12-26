@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'סיקור כבר רשום';
 $lang['NOT_TORRENT'] = 'קובץ זה לא סיקור';
 $lang['ONLY_1_TOR_PER_POST'] = 'אתה יכול להירשם רק סיקור אחד בפוסט אחד';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'אתה יכול להירשם רק סיקור אחד בנושא אחד';
-$lang['VIEWING_USER_BT_PROFILE'] = 'הצגת סיקור פרופיל :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'טורנטים פעילים';
 
 $lang['TD_TRAF'] = 'היום';
