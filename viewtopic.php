@@ -24,7 +24,6 @@ $page_cfg['load_tpl_vars'] = [
 ];
 
 $newest = $next_topic_id = 0;
-$file_list = isset($_GET['filelist']) ? include(INC_DIR . '/file_list_v2.php') : 0;
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 $post_id = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int)$_GET[POST_POST_URL] : 0;
