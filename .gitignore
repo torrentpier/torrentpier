@@ -7,7 +7,7 @@
 composer.phar
 configs/local.php
 data/avatars
-#data/uploads
+data/uploads
 internal_data/atom
 internal_data/cache
 internal_data/log
