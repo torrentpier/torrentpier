@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent đã đăng ký';
 $lang['NOT_TORRENT'] = 'Tập tin này là không torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Bạn chỉ có thể đăng ký một torrent trong một bài';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Bạn chỉ có thể đăng ký một torrent trong một chủ đề';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Xem torrent-hồ sơ :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Hoạt động torrent';
 
 $lang['TD_TRAF'] = 'Ngày hôm nay';
