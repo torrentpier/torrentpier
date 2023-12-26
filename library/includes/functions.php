@@ -2183,15 +2183,13 @@ function user_birthday_icon($user_birthday, $user_id): string
  */
 function getUserBanInfo(int $userId): ?array
 {
-    return DB()->fetch_row("SELECT * FROM " . BB_BANLIST . " WHERE ban_userid = $userId LIMIT 1");
-}
+    global $datastore;
 
-/**
- * Returns information about all bans
- *
- * @return array|null
- */
-function getAllBans(): ?array
-{
-    return DB()->fetch_rowset("SELECT * FROM " . BB_BANLIST);
+    // Get bans info from datastore
+    if (!$bans = $datastore->get('ban_list')) {
+        $datastore->update('ban_list');
+        $bans = $datastore->get('ban_list');
+    }
+
+    return $bans[$userId] ?? [];
 }
