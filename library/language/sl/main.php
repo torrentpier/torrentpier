@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent že registrirani';
 $lang['NOT_TORRENT'] = 'Ta datoteka ni torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Prijavite se lahko samo en torrent v en post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Prijavite se lahko samo en torrent v eno temo';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Ogled torrent-profil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktivno hudournikov';
 
 $lang['TD_TRAF'] = 'Danes';
