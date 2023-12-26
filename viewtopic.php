@@ -689,7 +689,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
-        'POSTER_BANNED' => isUserBanned($poster_id),
+        'POSTER_BANNED' => getUserBanInfo($poster_id),
         'POSTER_JOINED' => $bb_cfg['show_poster_joined'] ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,

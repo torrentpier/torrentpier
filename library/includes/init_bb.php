@@ -395,13 +395,9 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
- * Initial ban check against user_id, user_email or IP address
+ * Initial ban check
  */
-if (is_user_banned([
-    'user_ip' => USER_IP,
-    'user_id' => !IS_GUEST ? $userdata['user_id'] : false,
-    'user_email' => !IS_GUEST ? $userdata['user_email'] : false
-])) {
+if ($banInfo = getUserBanInfo($user->id)) {
     if (!IS_GUEST) {
         $user->session_end();
     }

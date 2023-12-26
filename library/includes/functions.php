@@ -2172,17 +2172,6 @@ function user_birthday_icon($user_birthday, $user_id): string
 }
 
 /**
- * Returns true if user was banned
- *
- * @param int $userId
- * @return bool
- */
-function isUserBanned(int $userId): bool
-{
-    return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_BANLIST . " WHERE ban_userid = $userId LIMIT 1");
-}
-
-/**
  * Returns information about user ban
  *
  * @param int $userId

@@ -80,7 +80,7 @@ $template->assign_vars([
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'BANNED' => isUserBanned($profiledata['user_id']),
+    'BANNED' => getUserBanInfo($profiledata['user_id']),
     'POSTER_RANK' => ($poster_rank) ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : $lang['USER'],
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,
