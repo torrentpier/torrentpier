@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Cliquez sur %sHere%s de retour au Forum des A
 
 // Banning
 $lang['BAN_CONTROL'] = 'Interdiction De Contrôle';
-$lang['BAN_EXPLAIN'] = 'Ici, vous pouvez contrôler l\'interdiction des utilisateurs. Vous pouvez y parvenir en interdisant l\'un ou l\'autre ou les deux d\'un utilisateur spécifique ou une personne ou une plage d\'adresses IP. Ces méthodes d\'empêcher un utilisateur de même d\'atteindre la page d\'index de votre conseil d\'administration. Pour empêcher un utilisateur de s\'enregistrer sous un autre nom d\'utilisateur, vous pouvez également spécifier un interdit adresse e-mail. Veuillez noter que le fait d\'interdire une adresse e-mail seront les seuls à ne pas empêcher l\'utilisateur d\'être en mesure de se connecter ou par la poste à votre conseil d\'administration. Vous devez utiliser l\'une des deux premières méthodes pour y parvenir.';
-$lang['BAN_EXPLAIN_WARN'] = 'Veuillez noter que l\'entrée dans une plage d\'adresses IP résultats dans toutes les adresses entre le début et la fin d\'être ajoutée à la liste des bannissements. Des tentatives seront faites pour minimiser le nombre d\'adresses ajoutées à la base de données en introduisant des jokers automatiquement le cas échéant. Si vraiment vous devez entrer une plage, essayez de garder les petits ou mieux encore de l\'état des adresses spécifiques.';
-
-$lang['SELECT_IP'] = 'Sélectionnez une adresse IP';
-$lang['SELECT_EMAIL'] = 'Sélectionnez une adresse e-Mail';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'L\'interdiction d\'un ou de plusieurs utilisateurs spécifiques';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Vous pouvez interdiction de plusieurs utilisateurs en une seule fois à l\'aide de la combinaison appropriée de la souris et du clavier de votre ordinateur et de navigateur';
-
-$lang['BAN_IP'] = 'L\'interdiction d\'un ou de plusieurs adresses IP';
-$lang['IP_HOSTNAME'] = 'Les adresses IP';
-$lang['BAN_IP_EXPLAIN'] = 'Pour spécifier plusieurs adresses IP séparées par des virgules.';
-
-$lang['BAN_EMAIL'] = 'L\'interdiction d\'un ou de plusieurs adresses e-mail';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Pour spécifier plusieurs adresses, séparez-les par des virgules. Pour spécifier un nom d\'utilisateur générique, utilisez * comme *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Onu-ban plus spécifiques des utilisateurs';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Vous pouvez unban plusieurs utilisateurs en une seule fois à l\'aide de la combinaison appropriée de la souris et du clavier de votre ordinateur et de navigateur';
-
-$lang['UNBAN_IP'] = 'Des nations unies sur l\'interdiction d\'un ou de plusieurs adresses IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Vous pouvez unban plusieurs adresses IP en une seule fois à l\'aide de la combinaison appropriée de la souris et du clavier de votre ordinateur et de navigateur';
-
-$lang['UNBAN_EMAIL'] = 'Des nations unies sur l\'interdiction d\'un ou de plusieurs adresses e-mail';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Vous pouvez unban plusieurs adresses e-mail en une seule fois à l\'aide de la combinaison appropriée de la souris et du clavier de votre ordinateur et de navigateur';
-
 $lang['NO_BANNED_USERS'] = 'Pas interdit les noms d\'utilisateur';
-$lang['NO_BANNED_IP'] = 'Pas d\'adresses IP interdites';
-$lang['NO_BANNED_EMAIL'] = 'Pas interdit adresses e-mail';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'La liste des bannissements a été mis à jour avec succès';
 $lang['CLICK_RETURN_BANADMIN'] = 'Cliquez sur %sHere%s pour revenir à l\'Interdiction de Contrôle';
 
