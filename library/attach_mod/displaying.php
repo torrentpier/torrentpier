@@ -315,6 +315,7 @@ function display_attachments($post_id)
                     'FILESIZE' => $filesize,
                     'COMMENT' => $comment,
                     'TARGET_BLANK' => $target_blank,
+                    'IS_IMAGE' => (bool)$target_blank,
                     'DOWNLOAD_COUNT' => declension((int)$attachments['_' . $post_id][$i]['download_count'], 'times')
                 ]);
             }
