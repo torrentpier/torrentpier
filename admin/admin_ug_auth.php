@@ -168,7 +168,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     if (!empty($_POST['username'])) {
         $this_userdata = get_userdata($_POST['username'], true);
-        $user_id = $this_userdata['user_id'];
+        $user_id = $this_userdata ? $this_userdata['user_id'] : false;
     } else {
         $this_userdata = get_userdata($user_id);
     }
