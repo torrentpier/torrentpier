@@ -471,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `bb_categories`
 -- Records of bb_categories
 -- ----------------------------
 INSERT INTO `bb_categories`
-VALUES ('1', 'Ваша первая категория', '10');
+VALUES ('1', 'Your first category', '10');
 
 -- ----------------------------
 -- Table structure for `bb_config`
@@ -804,7 +804,7 @@ CREATE TABLE IF NOT EXISTS `bb_forums`
 -- Records of bb_forums
 -- ----------------------------
 INSERT INTO `bb_forums`
-VALUES ('1', '1', 'Ваш первый форум', 'Описание вашего первого форума.', '0', '10', '1', '1', '1', '0', '0', '0', '0',
+VALUES ('1', '1', 'Your first forum', 'Description of the forum.', '0', '10', '1', '1', '1', '0', '0', '0', '0',
         '1',
         '1', '1', '1',
         '3', '3', '1',
@@ -994,7 +994,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text`
 -- ----------------------------
 INSERT INTO `bb_posts_text`
 VALUES ('1',
-        'Благодарим вас за установку новой версии TorrentPier Cattle!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.com/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.com/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.com/\n[*]Демо-версия: https://demo.torrentpier.com/\n[*]Инструкция: https://docs.torrentpier.com/\n[*]Перевод на другие языки: https://crowdin.com/project/torrentpier\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
+        'Thank you for installing the new — TorrentPier Cattle!\n\nWhat to do next? First of all configure your site in the administration panel (link in the bottom).\n\nChange main options: site description, number of messages per topic, time zone, language by default, seed-bonus options, birthdays etc... Create a couple of forums, delete or change this one. Change settings of categories to allow registration of torrents. If you will have questions or want additional modifications of the engine, [url=https://torrentpier.com/]visit our forum[/url] (you can use english, we will try to help in any case).\n\nIf you want to help with the translations: [url=https://crowdin.com/project/torrentpier]Crowdin[/url].\n\nWe are sure that you will be able to create the best tracker available.\nGood luck!');
 
 -- ----------------------------
 -- Table structure for `bb_privmsgs`
@@ -1266,7 +1266,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics`
 -- Records of bb_topics
 -- ----------------------------
 INSERT INTO `bb_topics`
-VALUES ('1', '1', 'Добро пожаловать в TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1',
+VALUES ('1', '1', 'Welcome to TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1',
         '0',
         '0',
         '0', UNIX_TIMESTAMP(), '0');
