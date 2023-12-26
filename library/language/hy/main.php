@@ -1250,7 +1250,7 @@ $lang['ALREADY_REG'] = 'Հեղեղ արդեն գրանցվել է';
 $lang['NOT_TORRENT'] = 'Այս ֆայլը torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Դուք կարող եք գրանցել միայն մեկ հոսքը պաշտոնում';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Դուք կարող եք գրանցել միայն մեկ հեղեղ մեկ թեմայի';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-Դիտել պրոֆիլը :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Ակտիվ торрентов';
 
 $lang['TD_TRAF'] = 'Այսօր';
