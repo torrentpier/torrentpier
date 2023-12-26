@@ -1249,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Торент вече е регистриран';
 $lang['NOT_TORRENT'] = 'Този файл не е торент';
 $lang['ONLY_1_TOR_PER_POST'] = 'Можете да се регистрирате само една нишка в един пост';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Можете да се регистрирате само един торент в една тема';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Торент-Преглед на профила :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Активни торенти';
 
 $lang['TD_TRAF'] = 'Днес';
