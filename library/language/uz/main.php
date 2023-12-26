@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent allaqachon ro\'yxatga';
 $lang['NOT_TORRENT'] = 'Bu fayl torrent emas';
 $lang['ONLY_1_TOR_PER_POST'] = 'Siz bir post faqat bitta torrent ro\'yxatdan mumkin';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Bir mavzu faqat bitta torrent ro\'yxatdan mumkin';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Ko\'rish sel-profili :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Foydalanuvchining barcha e\'lonlar, torrent';
 
 $lang['TD_TRAF'] = 'Bugun';
