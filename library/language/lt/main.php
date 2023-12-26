@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Spustelėkite %sHere%s grįžti į Forumo Tei
 
 // Banning
 $lang['BAN_CONTROL'] = 'Draudimo Kontrolė';
-$lang['BAN_EXPLAIN'] = 'Čia jūs galite kontroliuoti uždrausti vartotojams. Jūs galite tai pasiekti uždrausti arba (ir konkrečiam vartotojui ar individualus asmuo arba IP adresų diapazoną. Šie metodai naudotojams neleidžiama net pasiekti puslapis iš jūsų laive. Siekiant išvengti vartotojo registravimas pagal kitą vartotojo vardą taip pat galite nurodyti uždrausta el. pašto adresą. Prašome atkreipti dėmesį, kad draudimas el. pašto adresą, vien tik netrukdo, kad vartotojas galėtų prisijungti arba rašyti į savo laivą. Jums reikia naudoti vieną iš dviejų būdų šiam tikslui pasiekti.';
-$lang['BAN_EXPLAIN_WARN'] = 'Prašome atkreipti dėmesį, kad patekti IP adresų diapazoną rezultatus visose adresus tarp pradžios ir pabaigos yra įtraukta į banlist. Bandymai bus atliekami iki minimumo sumažinti skaičių adresai įtraukta į duomenų bazę įvesti wildcards automatiškai, kai tinkama. Jei jūs tikrai turi įvesti asortimentą, stenkitės, kad jis mažas, ar dar geriau valstybės konkrečius adresus.';
-
-$lang['SELECT_IP'] = 'Pasirinkite IP adresas';
-$lang['SELECT_EMAIL'] = 'Pasirinkite el. Pašto adresas';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban) vienas ar daugiau specifinių vartotojai';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Galite uždrausti keli vartotojai vienu metu, naudodami tinkamą derinį, pelę ir klaviatūrą jūsų kompiuteryje ir naršyklėje';
-
-$lang['BAN_IP'] = 'Uždrausti vieno ar daugiau IP adresų';
-$lang['IP_HOSTNAME'] = 'IP adresai';
-$lang['BAN_IP_EXPLAIN'] = 'Nurodyti kelis skirtingus IP adresus atskirkite juos kableliais.';
-
-$lang['BAN_EMAIL'] = 'Uždrausti vieno ar daugiau el. pašto adresų';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Nurodyti daugiau nei vieną el. pašto adresą, atskirkite juos kableliais. Nurodyti pakaitos vartotojo vardą, pasinaudokite * patinka *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Un-ban dar vienas savitas vartotojai';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Galite unban keli vartotojai vienu metu, naudodami tinkamą derinį, pelę ir klaviatūrą jūsų kompiuteryje ir naršyklėje';
-
-$lang['UNBAN_IP'] = 'Un-ban vieną ar daugiau IP adresų';
-$lang['UNBAN_IP_EXPLAIN'] = 'Galite unban kelis IP adresus, viena eiti, naudodami tinkamą derinį, pelę ir klaviatūrą jūsų kompiuteryje ir naršyklėje';
-
-$lang['UNBAN_EMAIL'] = 'Un-ban vieną ar daugiau el. pašto adresų';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Galite unban kelis el. pašto adresus, eiti, naudojant tinkamas derinys, pele ir klaviatūra už jūsų kompiuteryje ir naršyklėje';
-
 $lang['NO_BANNED_USERS'] = 'Nėra uždrausta vardai';
-$lang['NO_BANNED_IP'] = 'Nėra uždrausta, IP adresai';
-$lang['NO_BANNED_EMAIL'] = 'Nėra uždrausta, el. pašto adresus';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Į banlist buvo atnaujinta sėkmingai';
 $lang['CLICK_RETURN_BANADMIN'] = 'Spustelėkite %sHere%s grįžti į Draudimo Kontrolė';
 
