@@ -7,7 +7,7 @@
 
 - Release 2.4.0 🔥 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Updated copyright year [\#1201](https://github.com/torrentpier/torrentpier/pull/1201) ([belomaxorka](https://github.com/belomaxorka))
-- Update file_list_v2.php [\#1202](https://github.com/torrentpier/torrentpier/pull/1202) ([kovalensky](https://github.com/kovalensky))
+- Update file_list_v2.php [\#1202](https://github.com/torrentpier/torrentpier/pull/1202), [\#1256](https://github.com/torrentpier/torrentpier/pull/1256) ([kovalensky](https://github.com/kovalensky))
 - Updated TorrentPier footer text (: [\#1204](https://github.com/torrentpier/torrentpier/pull/1204) ([kovalensky](https://github.com/kovalensky))
 - Repository link in page footer instead of forum [\#1205](https://github.com/torrentpier/torrentpier/pull/1205) ([kovalensky](https://github.com/kovalensky))
 - Minor improvements [\#1206](https://github.com/torrentpier/torrentpier/pull/1206) ([belomaxorka](https://github.com/belomaxorka))
@@ -19,7 +19,7 @@
 - search.php parameter sanitizing [\#1213](https://github.com/torrentpier/torrentpier/pull/1213) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - Limit execution time for forum file-listing [\#1211](https://github.com/torrentpier/torrentpier/pull/1211) ([kovalensky](https://github.com/kovalensky), [belomaxorka](https://github.com/belomaxorka))
 - Some reported bugfixes [\#1214](https://github.com/torrentpier/torrentpier/pull/1214) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215), [\#1217](https://github.com/torrentpier/torrentpier/pull/1217), [\#1219](https://github.com/torrentpier/torrentpier/pull/1219), [\#1220](https://github.com/torrentpier/torrentpier/pull/1220), [\#1224](https://github.com/torrentpier/torrentpier/pull/1224), [\#1228](https://github.com/torrentpier/torrentpier/pull/1228), [\#1229](https://github.com/torrentpier/torrentpier/pull/1229), [\#1230](https://github.com/torrentpier/torrentpier/pull/1230), [\#1234](https://github.com/torrentpier/torrentpier/pull/1234), [\#1236](https://github.com/torrentpier/torrentpier/pull/1236), [\#1243](https://github.com/torrentpier/torrentpier/pull/1243), [\#1248](https://github.com/torrentpier/torrentpier/pull/1248), [\#1253](https://github.com/torrentpier/torrentpier/pull/1253), [\#1254](https://github.com/torrentpier/torrentpier/pull/1254) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1215](https://github.com/torrentpier/torrentpier/pull/1215), [\#1217](https://github.com/torrentpier/torrentpier/pull/1217), [\#1219](https://github.com/torrentpier/torrentpier/pull/1219), [\#1220](https://github.com/torrentpier/torrentpier/pull/1220), [\#1224](https://github.com/torrentpier/torrentpier/pull/1224), [\#1228](https://github.com/torrentpier/torrentpier/pull/1228), [\#1229](https://github.com/torrentpier/torrentpier/pull/1229), [\#1230](https://github.com/torrentpier/torrentpier/pull/1230), [\#1234](https://github.com/torrentpier/torrentpier/pull/1234), [\#1236](https://github.com/torrentpier/torrentpier/pull/1236), [\#1243](https://github.com/torrentpier/torrentpier/pull/1243), [\#1248](https://github.com/torrentpier/torrentpier/pull/1248), [\#1253](https://github.com/torrentpier/torrentpier/pull/1253), [\#1254](https://github.com/torrentpier/torrentpier/pull/1254), [\#1259](https://github.com/torrentpier/torrentpier/pull/1259) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed extensions issue [\#1218](https://github.com/torrentpier/torrentpier/pull/1218) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken sorting in group.php [\#1221](https://github.com/torrentpier/torrentpier/pull/1221) ([belomaxorka](https://github.com/belomaxorka))
 - Code re-formatting [\#1225](https://github.com/torrentpier/torrentpier/pull/1225) ([kovalensky](https://github.com/kovalensky))
@@ -34,6 +34,8 @@
 - Use hardcoded dictionary names for better counting result in file listing [\#1247](https://github.com/torrentpier/torrentpier/pull/1247) ([kovalensky](https://github.com/kovalensky))
 - Refactored thumbnail creation 🌄 [\#1249](https://github.com/torrentpier/torrentpier/pull/1249) ([belomaxorka](https://github.com/belomaxorka))
 - Some cleanup for attach mod [\#1250](https://github.com/torrentpier/torrentpier/pull/1250), [\#1255](https://github.com/torrentpier/torrentpier/pull/1255) ([belomaxorka](https://github.com/belomaxorka))
+- Use "Views" string for thumbnails [\#1257](https://github.com/torrentpier/torrentpier/pull/1257) ([kovalensky](https://github.com/kovalensky))
+- Show user's ban status [\#1258](https://github.com/torrentpier/torrentpier/pull/1258) ([kovalensky](https://github.com/kovalensky))
 - New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222), [\#1251](https://github.com/torrentpier/torrentpier/pull/1251) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
