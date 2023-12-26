@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik op %sHere%s om terug te keren naar de Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Verbod Controle';
-$lang['BAN_EXPLAIN'] = 'Hier kunt u het verbieden van gebruikers. Dit kunt u bereiken door het verbieden van een of beide van een specifieke gebruiker of een individu of een bereik van IP-adressen. Deze methoden voorkomen dat een gebruiker zelfs het bereiken van de index pagina van uw raad. Om te voorkomen dat een gebruiker registreren onder een andere gebruikersnaam kunt u ook een verboden e-mail adres. Houd er rekening mee dat het verbieden van een e-mailadres alleen zal niet voorkomen dat gebruikers kunnen inloggen op of post naar uw bord. Moet u gebruik maken van één van de eerste twee methoden om dit te bereiken.';
-$lang['BAN_EXPLAIN_WARN'] = 'Houd er rekening mee dat het invoeren van een bereik van IP-adressen resultaten in alle adressen tussen het begin en het einde wordt toegevoegd aan de banlijst. Pogingen zullen worden gedaan om het minimaliseren van het aantal adressen toegevoegd aan de database door de invoering van wildcards automatisch in voorkomend geval. Als je echt moet invoeren in een bereik, probeer om het kleine of beter nog specifieke adressen.';
-
-$lang['SELECT_IP'] = 'Selecteer een IP-adres';
-$lang['SELECT_EMAIL'] = 'Selecteer een e-Mail adres';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Een verbod een of meer specifieke gebruikers';
 $lang['BAN_USERNAME_EXPLAIN'] = 'U kunt ban meerdere gebruikers in één keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
-$lang['BAN_IP'] = 'Een verbod een of meer IP-adressen';
-$lang['IP_HOSTNAME'] = 'IP-adressen';
-$lang['BAN_IP_EXPLAIN'] = 'Opgeven verschillende IP-adressen scheiden met komma \' s.';
-
-$lang['BAN_EMAIL'] = 'Een verbod een of meer e-mail adressen';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Opgeven meer dan één e-mailadres, scheidt je ze met komma \' s. Voor het opgeven van een wildcard gebruikersnaam, gebruiken * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Vn-ban een meer specifieke gebruikers';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'U kunt unban meerdere gebruikers in één keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
-$lang['UNBAN_IP'] = 'Vn-ban een of meer IP-adressen';
-$lang['UNBAN_IP_EXPLAIN'] = 'U kunt unban meerdere IP-adressen in een keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
-$lang['UNBAN_EMAIL'] = 'Vn-ban een of meer e-mail adressen';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'U kunt unban meerdere e-mailadressen in één keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
 $lang['NO_BANNED_USERS'] = 'Geen verboden gebruikersnamen';
-$lang['NO_BANNED_IP'] = 'Geen verboden IP-adressen';
-$lang['NO_BANNED_EMAIL'] = 'Geen verboden e-mail adressen';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'De banlijst met succes is bijgewerkt';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klik op %sHere%s om terug te keren naar Ban Controle';
 
