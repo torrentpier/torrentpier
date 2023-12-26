@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent ήδη καταχωρηθεί';
 $lang['NOT_TORRENT'] = 'Αυτό το αρχείο δεν είναι torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Μπορείτε να καταχωρήσετε μόνο ένα torrent σε ένα post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Μπορείτε να καταχωρήσετε μόνο ένα torrent σε ένα θέμα';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Προβολή torrent-προφίλ :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Active torrents';
 
 $lang['TD_TRAF'] = 'Σήμερα';
