@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kattintson %sHere%s vissza Fórum Jogosultsá
 
 // Banning
 $lang['BAN_CONTROL'] = 'Tilalom Ellenőrzése';
-$lang['BAN_EXPLAIN'] = 'Itt tudod irányítani a banning a felhasználók. Ezt úgy tudod elérni, betiltásával vagy mindkettő egy adott felhasználó vagy az egyén, vagy IP címek tartománya. Ezek a módszerek megakadályozzák, hogy a felhasználó is elérte az index oldalt a fórumon. Megakadályozza, hogy a felhasználó a regisztráció alatt egy másik felhasználónevet is megadhatja betiltották e-mail címét. Kérjük, vegye figyelembe, hogy a tiltó e-mail címét, hogy egyedül nem akadályozza meg, hogy a felhasználó nem tudja, hogy jelentkezzen be, vagy hozzászólást a fórumon. Használja az első két módszer ennek elérésére.';
-$lang['BAN_EXPLAIN_WARN'] = 'Kérjük, vegye figyelembe, hogy a belépő egy IP címek tartománya eredmények a címek között a start, majd a végén hozzáadjuk a banlist. Kísérlet történik számának minimalizálása címek az adatbázisba bevezetésével a helyettesítő karakterek automatikusan adott esetben. Ha tényleg meg kell adnia egy tartomány, próbálja meg, hogy kis vagy még inkább állami adott címet.';
-
-$lang['SELECT_IP'] = 'Válassza ki az IP cím';
-$lang['SELECT_EMAIL'] = 'Válasszon ki egy e-Mail címet';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Tilalmát egy vagy több meghatározott felhasználók';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Lehet tilalom több felhasználó egyszerre használja a megfelelő kombinációja, az egér, a billentyűzet a számítógép, illetve böngésző';
-
-$lang['BAN_IP'] = 'Tilalmát egy vagy több IP-címek';
-$lang['IP_HOSTNAME'] = 'IP-címek';
-$lang['BAN_IP_EXPLAIN'] = 'Adja meg, több különböző IP-címeket külön nekik a vesszőt.';
-
-$lang['BAN_EMAIL'] = 'Tilalmát egy vagy több e-mail címek';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Adja meg több e-mail címet, külön nekik a vesszőt. Adjon meg egy helyettesítő felhasználónevét, használja * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Ensz-ban még egy bizonyos felhasználók';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Lehet unban több felhasználó egyszerre használja a megfelelő kombinációja, az egér, a billentyűzet a számítógép, illetve böngésző';
-
-$lang['UNBAN_IP'] = 'Ensz-ban, egy vagy több IP-címek';
-$lang['UNBAN_IP_EXPLAIN'] = 'Lehet unban több IP-címek egy go segítségével a megfelelő kombinációja, az egér, a billentyűzet a számítógép, illetve böngésző';
-
-$lang['UNBAN_EMAIL'] = 'Ensz-ban, egy vagy több e-mail címek';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Lehet unban több e-mail címet egyszerre használja a megfelelő kombinációja, az egér, a billentyűzet a számítógép, illetve böngésző';
-
 $lang['NO_BANNED_USERS'] = 'Nem tiltott felhasználónevek';
-$lang['NO_BANNED_IP'] = 'Nem tiltott IP címek';
-$lang['NO_BANNED_EMAIL'] = 'Nem tiltott, e-mail címek';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'A banlist frissült sikeresen';
 $lang['CLICK_RETURN_BANADMIN'] = 'Kattintson %sHere%s vissza Tilalom Ellenőrzése';
 
