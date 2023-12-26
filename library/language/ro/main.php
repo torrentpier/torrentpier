@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Faceți clic pe %sHere%s pentru a reveni la F
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Control';
-$lang['BAN_EXPLAIN'] = 'Aici aveți posibilitatea de a controla interzicerea de utilizatori. Puteți realiza acest lucru prin interzicerea una sau ambele de un anumit utilizator sau un individ sau un interval de adrese IP. Aceste metode pentru a preveni un utilizator de ajungand chiar la pagina de index de bord. Pentru a împiedica un utilizator de la inregistrarea sub alt nume de utilizator, puteți specifica, de asemenea, un interzise adresa de e-mail. Vă rugăm să rețineți că interzicerea o adresa de e-mail nu va preveni că utilizatorul de la a fi capabil să vă conectați sau posta la bord. Ar trebui să utilizați una din primele două metode pentru a realiza acest lucru.';
-$lang['BAN_EXPLAIN_WARN'] = 'Vă rugăm să rețineți că intrarea într-un interval de adrese IP rezultate în toate adresele între începutul și sfârșitul a fi adăugat la lista de banuri. Încercări vor fi făcute pentru a reduce la minimum numărul de adrese adăugate la baza de date prin introducerea metacaractere în mod automat, dacă este cazul. Dacă într-adevăr trebuie să introduceți un interval, să încercați să păstrați-l mic sau mai bine încă de stat adrese specifice.';
-
-$lang['SELECT_IP'] = 'Selectați o adresă IP';
-$lang['SELECT_EMAIL'] = 'Selectați o adresă de e-Mail';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Interzicerea unuia sau a mai multor utilizatori';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Puteți ban mai mulți utilizatori într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
-$lang['BAN_IP'] = 'Ban una sau mai multe adrese IP';
-$lang['IP_HOSTNAME'] = 'Adrese IP';
-$lang['BAN_IP_EXPLAIN'] = 'Pentru a specifica mai multe adrese IP diferite separați-le prin virgulă.';
-
-$lang['BAN_EMAIL'] = 'Ban una sau mai multe adrese de e-mail';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Pentru a specifica mai mult de o adresă de e-mail, separate prin virgule. Pentru a specifica un wildcard de utilizator, utilizați * ca *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Onu-ban mai specifice de utilizatori';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Puteți unban mai mulți utilizatori într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
-$lang['UNBAN_IP'] = 'Onu-ban una sau mai multe adrese IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Puteți unban mai multe adrese IP într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
-$lang['UNBAN_EMAIL'] = 'Onu-ban una sau mai multe adrese de e-mail';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Puteți unban mai multe adrese de e-mail într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
 $lang['NO_BANNED_USERS'] = 'Nu a interzis numele de utilizator';
-$lang['NO_BANNED_IP'] = 'Nu adrese IP interzise';
-$lang['NO_BANNED_EMAIL'] = 'Nu interzis adrese de e-mail';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'De banuri a fost actualizat cu succes';
 $lang['CLICK_RETURN_BANADMIN'] = 'Faceți clic pe %sHere%s pentru a reveni la Interdicția de Control';
 
