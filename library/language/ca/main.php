@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent ja està registrat';
 $lang['NOT_TORRENT'] = 'Aquest fitxer torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Podeu registrar només un torrent en un lloc';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Podeu registrar només un torrent en un tema';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Visualització de torrent-perfil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Activa torrents';
 
 $lang['TD_TRAF'] = 'Avui';
