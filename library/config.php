@@ -584,7 +584,7 @@ $bb_cfg['file_id_ext'] = [
 
 // Attachments
 $bb_cfg['attach'] = [
-    'upload_path' => DATA_DIR . '/torrent_files', // Storage path for torrent files
+    'upload_path' => DATA_DIR . '/uploads', // Storage path for torrent files
     'max_size' => 5 * 1024 * 1024, // TODO: Max size of a file
 ];
 

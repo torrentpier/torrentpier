@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config`
 -- Records of bb_attachments_config
 -- ----------------------------
 INSERT INTO `bb_attachments_config`
-VALUES ('upload_dir', 'data/torrent_files'),
+VALUES ('upload_dir', 'data/uploads'),
        ('upload_img', 'styles/images/icon_clip.gif'),
        ('topic_icon', 'styles/images/icon_clip.gif'),
        ('display_order', '0'),
