@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent reeds geregistreer';
 $lang['NOT_TORRENT'] = 'Hierdie lêer is nie torrent nie';
 $lang['ONLY_1_TOR_PER_POST'] = 'Jy kan slegs een torrent in een pos registreer';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'U kan slegs een torrent in een onderwerp registreer';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Besigtig torrent-profiel :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiewe torrents';
 
 $lang['TD_TRAF'] = 'vandag';
