@@ -689,7 +689,6 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
-        'POSTER_BANNED' => getUserBanInfo($poster_id),
         'POSTER_JOINED' => $bb_cfg['show_poster_joined'] ? $poster_longevity : '',
 
         'POSTER_JOINED_DATE' => $poster_joined,
@@ -735,6 +734,14 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_SIG' => $rg_signature,
         'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig']
     ]);
+
+    // Ban information
+    if ($banInfo = getUserBanInfo($poster_id)) {
+        $template->assign_block_vars('postrow.ban', [
+            'IS_BANNED' => true,
+            'BAN_REASON' => $banInfo['ban_reason']
+        ]);
+    }
 
     if (isset($postrow[$i]['post_attachment']) && $is_auth['auth_download'] && function_exists('display_post_attachments')) {
         display_post_attachments($post_id, $postrow[$i]['post_attachment']);
