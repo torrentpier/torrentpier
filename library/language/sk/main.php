@@ -1247,7 +1247,7 @@ $lang['ALREADY_REG'] = 'Torrent je už registrovaná';
 $lang['NOT_TORRENT'] = 'Tento súbor nie je torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Môžete sa zaregistrovať iba jeden torrent v jednom príspevku';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Môžete sa zaregistrovať iba jeden torrent v jednej témy';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Prezeranie torrent-profil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktívne torrenty';
 
 $lang['TD_TRAF'] = 'Dnes';
