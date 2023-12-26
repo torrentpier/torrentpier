@@ -1981,7 +1981,7 @@ function profile_url($data)
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && $username) {
         $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
 
-        if ((bool)getUserBanInfo($user_id)) {
+        if (getBanInfo((int)$user_id)) {
             return '<s>' . $profile . '</s>';
         }
     }
@@ -2178,10 +2178,10 @@ function user_birthday_icon($user_birthday, $user_id): string
 /**
  * Returns information about user ban
  *
- * @param int $userId
+ * @param int|null $userId
  * @return array|null
  */
-function getUserBanInfo(int $userId): ?array
+function getBanInfo(int $userId = null): ?array
 {
     global $datastore;
 
@@ -2189,6 +2189,10 @@ function getUserBanInfo(int $userId): ?array
     if (!$bans = $datastore->get('ban_list')) {
         $datastore->update('ban_list');
         $bans = $datastore->get('ban_list');
+    }
+
+    if (!isset($userId)) {
+        return $bans;
     }
 
     return $bans[$userId] ?? [];

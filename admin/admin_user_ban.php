@@ -14,20 +14,14 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-// Get bans info from datastore
-if (!$bans = $datastore->get('ban_list')) {
-    $datastore->update('ban_list');
-    $bans = $datastore->get('ban_list');
-}
-
 if (isset($_POST['submit'])) {
     // Ban action
     if (!empty($_POST['username'])) {
         if (!$this_userdata = get_userdata($_POST['username'], true)) {
-            bb_die($lang['NO_USER_ID_SPECIFIED']);
+            bb_die($lang['NO_USER_ID_SPECIFIED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         }
 
-        if (!array_key_exists($this_userdata['user_id'], $bans)) {
+        if (!getBanInfo((int)$this_userdata['user_id'])) {
             $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid) VALUES (' . $this_userdata['user_id'] . ')';
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not insert ban_userid info into database');
@@ -61,7 +55,7 @@ if (isset($_POST['submit'])) {
     $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
 
     $select_userlist = '';
-    foreach ($bans as $ban) {
+    foreach (getBanInfo() as $ban) {
         $select_userlist .= '<option value="' . $ban['ban_id'] . '">' . get_username($ban['ban_userid']) . '</option>';
     }
 
