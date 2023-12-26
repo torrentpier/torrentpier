@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik på %sHere%s for at vende tilbage til Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Forbud, Kontrol';
-$lang['BAN_EXPLAIN'] = 'Her kan du kontrollere forbuddet af brugere. Du kan opnå dette ved at forbyde den ene eller begge af en bestemt bruger eller en person eller et interval af IP-adresser. Disse metoder forhindrer en bruger i at nå frem til index-siden af dit board. For at forhindre en bruger i at registrere under et andet brugernavn, så kan du også angive en forbudt e-mail-adresse. Bemærk venligst, at et forbud mod en e-mail-adresse vil ikke alene forhindre, at brugeren bliver i stand til at logge på, eller post den på dit bord. Du skal bruge en af de to første metoder til at opnå dette.';
-$lang['BAN_EXPLAIN_WARN'] = 'Bemærk venligst at indtaste et interval af IP-adresser resultater i alle de adresser, der er mellem starten og slutningen bliver tilføjet til banlist. Forsøg vil blive gjort for at minimere det antal adresser, der er tilføjet til databasen ved at indføre automatisk jokertegn hvor det er relevant. Hvis du virkelig skal ind i et område, skal du forsøge at holde det lille eller endnu bedre tilstand specifikke adresser.';
-
-$lang['SELECT_IP'] = 'Vælg en IP-adresse';
-$lang['SELECT_EMAIL'] = 'Vælg en e-Mail-adresse';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Udeluk en eller flere bestemte brugere';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Du kan forbyde flere brugere på én gang ved hjælp af den rette kombination af mus og tastatur til din computer og browser';
-
-$lang['BAN_IP'] = 'Udeluk en eller flere IP-adresser';
-$lang['IP_HOSTNAME'] = 'IP-adresser';
-$lang['BAN_IP_EXPLAIN'] = 'For at angive flere forskellige IP-adresser, skal du adskille dem med kommaer.';
-
-$lang['BAN_EMAIL'] = 'Udeluk en eller flere e-mail adresser';
-$lang['BAN_EMAIL_EXPLAIN'] = 'For at angive mere end én e-mail-adresse, skal du adskille dem med kommaer. For at angive et wildcard brugernavn, skal du bruge * som *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Fn-forbud mod et mere specifikke brugere';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Du kan unban flere brugere på én gang ved hjælp af den rette kombination af mus og tastatur til din computer og browser';
-
-$lang['UNBAN_IP'] = 'Fn-udeluk en eller flere IP-adresser';
-$lang['UNBAN_IP_EXPLAIN'] = 'Du kan unban flere IP-adresser på én gang ved hjælp af den rette kombination af mus og tastatur til din computer og browser';
-
-$lang['UNBAN_EMAIL'] = 'Fn-udeluk en eller flere e-mail adresser';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Du kan unban flere e-mail adresser på én gang ved hjælp af den rette kombination af mus og tastatur til din computer og browser';
-
 $lang['NO_BANNED_USERS'] = 'Ingen forbudte brugernavne';
-$lang['NO_BANNED_IP'] = 'Ingen forbudte IP-adresser';
-$lang['NO_BANNED_EMAIL'] = 'Ingen forbudte e-mail-adresser';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Den banlist er blevet opdateret';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klik på %sHere%s for at vende tilbage til Ban Kontrol';
 
