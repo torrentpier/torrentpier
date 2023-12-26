@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Clique %sHere%s para retornar ao Fórum Permi
 
 // Banning
 $lang['BAN_CONTROL'] = 'Proibição De Controle';
-$lang['BAN_EXPLAIN'] = 'Aqui você pode controlar o banimento de usuários. Pode-se conseguir isso por meio da proibição de um ou ambos de um usuário específico ou de um indivíduo ou de um intervalo de endereços IP. Estes métodos impedem que um usuário alcançando até mesmo a página de índice do seu conselho. Para impedir que um usuário de registrar, sob um nome de usuário diferente você também pode especificar um banido endereço de e-mail. Por favor, note que a proibição de um endereço de e-mail por si só não vai impedir que o usuário seja capaz de fazer logon ou postar em seu conselho. Você deve usar um dos dois primeiros métodos para conseguir isso.';
-$lang['BAN_EXPLAIN_WARN'] = 'Por favor, note que a entrada de um intervalo de endereços IP resultados em todos os endereços entre o início e o fim a ser adicionado para a banlist. Serão feitas tentativas para minimizar o número de endereços adicionados ao banco de dados através da introdução de caracteres universais automaticamente quando apropriado. Se você realmente tem de introduzir um intervalo, tente mantê-lo pequeno, ou melhor ainda do estado de endereços específicos.';
-
-$lang['SELECT_IP'] = 'Seleccione um endereço IP';
-$lang['SELECT_EMAIL'] = 'Selecione um endereço de e-Mail';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Para banir um ou mais usuários específicos';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Você pode proibir que vários usuários de uma só vez usando a combinação de mouse e teclado para o seu computador e navegador';
-
-$lang['BAN_IP'] = 'Para banir um ou mais endereços IP';
-$lang['IP_HOSTNAME'] = 'Endereços IP';
-$lang['BAN_IP_EXPLAIN'] = 'Para especificar vários endereços IP diferentes separe-os com vírgulas.';
-
-$lang['BAN_EMAIL'] = 'Para banir um ou mais endereços de e-mail';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Para especificar mais de um endereço de e-mail, separe-os com vírgulas. Para especificar um caractere curinga nome de usuário, use * como *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Onu-ban mais usuários específicos';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Você pode unban vários usuários de uma só vez usando a combinação de mouse e teclado para o seu computador e navegador';
-
-$lang['UNBAN_IP'] = 'Un-proibição de um ou mais endereços IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Você pode unban vários endereços IP em uma aceda usando a combinação de mouse e teclado para o seu computador e navegador';
-
-$lang['UNBAN_EMAIL'] = 'Un-proibição de um ou mais endereços de e-mail';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Você pode unban vários endereços de e-mail de uma só vez usando a combinação de mouse e teclado para o seu computador e navegador';
-
 $lang['NO_BANNED_USERS'] = 'Não banido nomes de usuários';
-$lang['NO_BANNED_IP'] = 'Não endereços IP proibidos';
-$lang['NO_BANNED_EMAIL'] = 'Não banido endereços de e-mail';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Banlist foi atualizado com sucesso';
 $lang['CLICK_RETURN_BANADMIN'] = 'Clique %sHere%s para retornar à Proibição de Controle';
 
