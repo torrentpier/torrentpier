@@ -1981,7 +1981,7 @@ function profile_url($data)
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && $username) {
         $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
 
-        if (getBanInfo($user_id)) {
+        if (getBanInfo((int)$user_id)) {
             return '<s>' . $profile . '</s>';
         }
     }
