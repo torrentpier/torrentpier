@@ -2170,3 +2170,24 @@ function user_birthday_icon($user_birthday, $user_id): string
 
     return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
 }
+
+/**
+ * Returns information about user ban
+ *
+ * @param int $userId
+ * @return array
+ */
+function getUserBanInfo(int $userId): array
+{
+    return DB()->fetch_row("SELECT * FROM " . BB_BANLIST . " WHERE ban_userid = $userId LIMIT 1");
+}
+
+/**
+ * Returns information about all bans
+ *
+ * @return array
+ */
+function getAllBans(): array
+{
+    return DB()->fetch_rowset("SELECT * FROM " . BB_BANLIST);
+}

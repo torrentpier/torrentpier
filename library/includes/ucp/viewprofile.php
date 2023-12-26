@@ -74,9 +74,12 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     $signature = bbcode2html($signature);
 }
 
-$user_banned = false;
-if (DB()->fetch_row('SELECT ban_userid FROM ' . BB_BANLIST . " WHERE ban_userid = {$profiledata['user_id']} LIMIT 1")) {
-    $user_banned = true;
+// Ban information
+if ($banInfo = getUserBanInfo($profiledata['user_id'])) {
+    $template->assign_block_vars('ban', [
+        'IS_BANNED' => true,
+        'BAN_REASON' => $banInfo['ban_reason']
+    ]);
 }
 
 $template->assign_vars([
@@ -85,7 +88,6 @@ $template->assign_vars([
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'BANNED' => $user_banned,
     'POSTER_RANK' => ($poster_rank) ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : $lang['USER'],
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,

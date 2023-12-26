@@ -149,10 +149,8 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
 (
   `ban_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ban_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
-  `ban_ip`     VARCHAR(42)           NOT NULL DEFAULT '0',
-  `ban_email`  VARCHAR(255)          NOT NULL DEFAULT '',
-  PRIMARY KEY (`ban_id`),
-  KEY `ban_ip_user_id` (`ban_ip`, `ban_userid`)
+  `ban_reason` VARCHAR(255)          NOT NULL DEFAULT '',
+  PRIMARY KEY (`ban_id`, `ban_userid`)
 )
   ENGINE = MyISAM
   DEFAULT CHARSET = utf8;

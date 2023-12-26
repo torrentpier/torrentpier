@@ -16,8 +16,6 @@ require __DIR__ . '/pagestart.php';
 
 if (isset($_POST['submit'])) {
     $user_bansql = '';
-    $email_bansql = '';
-    $ip_bansql = '';
 
     $user_list = [];
     if (!empty($_POST['username'])) {
@@ -29,28 +27,6 @@ if (isset($_POST['submit'])) {
         $user_list[] = $this_userdata['user_id'];
     }
 
-    $ip_list = [];
-    if (isset($_POST['ban_ip'])) {
-        $ip_list_temp = explode(',', $_POST['ban_ip']);
-
-        foreach ($ip_list_temp as $ip) {
-            if (\TorrentPier\Helpers\IPHelper::isValid($ip)) {
-                $ip_list[] = \TorrentPier\Helpers\IPHelper::ip2long($ip);
-            }
-        }
-    }
-
-    $email_list = [];
-    if (isset($_POST['ban_email'])) {
-        $email_list_temp = explode(',', $_POST['ban_email']);
-
-        foreach ($email_list_temp as $i => $iValue) {
-            if (preg_match('/^(([a-z0-9&\'\.\-_\+])|(\*))+@(([a-z0-9\-])|(\*))+\.([a-z0-9\-]+\.)*?[a-z]+$/is', trim($email_list_temp[$i]))) {
-                $email_list[] = trim($email_list_temp[$i]);
-            }
-        }
-    }
-
     $sql = 'SELECT * FROM ' . BB_BANLIST;
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not obtain banlist information');
@@ -60,6 +36,7 @@ if (isset($_POST['submit'])) {
     DB()->sql_freeresult($result);
 
     $kill_session_sql = '';
+
     for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
         $in_banlist = false;
         for ($j = 0, $jMax = count($current_banlist); $j < $jMax; $j++) {
@@ -78,51 +55,11 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    for ($i = 0, $iMax = count($ip_list); $i < $iMax; $i++) {
-        $in_banlist = false;
-        for ($j = 0, $jMax = count($current_banlist); $j < $jMax; $j++) {
-            if ($ip_list[$i] == $current_banlist[$j]['ban_ip']) {
-                $in_banlist = true;
-            }
-        }
-
-        if (!$in_banlist) {
-            if (preg_match('/(ff\.)|(\.ff)/is', chunk_split($ip_list[$i], 2, '.'))) {
-                $kill_ip_sql = "session_ip LIKE '" . str_replace('.', '', preg_replace('/(ff\.)|(\.ff)/is', '%', chunk_split($ip_list[$i], 2, '.'))) . "'";
-            } else {
-                $kill_ip_sql = "session_ip = '" . $ip_list[$i] . "'";
-            }
-
-            $kill_session_sql .= (($kill_session_sql != '') ? ' OR ' : '') . $kill_ip_sql;
-
-            $sql = 'INSERT INTO ' . BB_BANLIST . " (ban_ip) VALUES ('" . $ip_list[$i] . "')";
-            if (!DB()->sql_query($sql)) {
-                bb_die('Could not insert ban_ip info into database');
-            }
-        }
-    }
-
     // Now we'll delete all entries from the session table
     if ($kill_session_sql != '') {
         $sql = 'DELETE FROM ' . BB_SESSIONS . " WHERE $kill_session_sql";
         if (!DB()->sql_query($sql)) {
             bb_die('Could not delete banned sessions from database');
-        }
-    }
-
-    for ($i = 0, $iMax = count($email_list); $i < $iMax; $i++) {
-        $in_banlist = false;
-        for ($j = 0, $jMax = count($current_banlist); $j < $jMax; $j++) {
-            if ($email_list[$i] == $current_banlist[$j]['ban_email']) {
-                $in_banlist = true;
-            }
-        }
-
-        if (!$in_banlist) {
-            $sql = 'INSERT INTO ' . BB_BANLIST . " (ban_email) VALUES ('" . DB()->escape($email_list[$i]) . "')";
-            if (!DB()->sql_query($sql)) {
-                bb_die('Could not insert ban_email info into database');
-            }
         }
     }
 
@@ -138,26 +75,6 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    if (isset($_POST['unban_ip'])) {
-        $ip_list = $_POST['unban_ip'];
-
-        for ($i = 0, $iMax = count($ip_list); $i < $iMax; $i++) {
-            if ($ip_list[$i] != -1) {
-                $where_sql .= (($where_sql != '') ? ', ' : '') . DB()->escape($ip_list[$i]);
-            }
-        }
-    }
-
-    if (isset($_POST['unban_email'])) {
-        $email_list = $_POST['unban_email'];
-
-        for ($i = 0, $iMax = count($email_list); $i < $iMax; $i++) {
-            if ($email_list[$i] != -1) {
-                $where_sql .= (($where_sql != '') ? ', ' : '') . DB()->escape($email_list[$i]);
-            }
-        }
-    }
-
     if ($where_sql != '') {
         $sql = 'DELETE FROM ' . BB_BANLIST . " WHERE ban_id IN ($where_sql)";
         if (!DB()->sql_query($sql)) {
@@ -168,10 +85,7 @@ if (isset($_POST['submit'])) {
     bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 } else {
     $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
-
     $userban_count = 0;
-    $ipban_count = 0;
-    $emailban_count = 0;
 
     $sql = 'SELECT b.ban_id, u.user_id, u.username
 		FROM ' . BB_BANLIST . ' b, ' . BB_USERS . ' u
@@ -195,50 +109,11 @@ if (isset($_POST['submit'])) {
     if ($select_userlist == '') {
         $select_userlist = '<option value="-1">' . $lang['NO_BANNED_USERS'] . '</option>';
     }
-
     $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
-
-    $sql = 'SELECT ban_id, ban_ip, ban_email FROM ' . BB_BANLIST . ' ORDER BY ban_ip';
-    if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not select current ip ban list');
-    }
-
-    $banlist = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
-
-    $select_iplist = '';
-    $select_emaillist = '';
-
-    for ($i = 0, $iMax = count($banlist); $i < $iMax; $i++) {
-        $ban_id = $banlist[$i]['ban_id'];
-
-        if (!empty($banlist[$i]['ban_ip'])) {
-            $ban_ip = str_replace('255', '*', \TorrentPier\Helpers\IPHelper::long2ip_extended($banlist[$i]['ban_ip']));
-            $select_iplist .= '<option value="' . $ban_id . '">' . $ban_ip . '</option>';
-            $ipban_count++;
-        } elseif (!empty($banlist[$i]['ban_email'])) {
-            $ban_email = $banlist[$i]['ban_email'];
-            $select_emaillist .= '<option value="' . $ban_id . '">' . $ban_email . '</option>';
-            $emailban_count++;
-        }
-    }
-
-    if ($select_iplist == '') {
-        $select_iplist = '<option value="-1">' . $lang['NO_BANNED_IP'] . '</option>';
-    }
-
-    if ($select_emaillist == '') {
-        $select_emaillist = '<option value="-1">' . $lang['NO_BANNED_EMAIL'] . '</option>';
-    }
-
-    $select_iplist = '<select name="unban_ip[]" multiple size="15">' . $select_iplist . '</select>';
-    $select_emaillist = '<select name="unban_email[]" multiple size="10">' . $select_emaillist . '</select>';
 
     $template->assign_vars([
         'U_SEARCH_USER' => './../search.php?mode=searchuser',
         'S_UNBAN_USERLIST_SELECT' => $select_userlist,
-        'S_UNBAN_IPLIST_SELECT' => $select_iplist,
-        'S_UNBAN_EMAILLIST_SELECT' => $select_emaillist,
         'S_BAN_ACTION' => 'admin_user_ban.php'
     ]);
 }

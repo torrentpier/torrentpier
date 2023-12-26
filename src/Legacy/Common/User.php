@@ -240,16 +240,6 @@ class User
         $user_id = (int)$this->data['user_id'];
         $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
 
-        // Initial ban check against user_id or IP address
-        if ($is_user) {
-            $where_sql = 'ban_ip = ' . USER_IP;
-            $where_sql .= $login ? " OR ban_userid = $user_id" : '';
-
-            if (DB()->fetch_row("SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
-                bb_simple_die($lang['YOU_BEEN_BANNED']);
-            }
-        }
-
         // Generate passkey
         if (!\TorrentPier\Legacy\Torrent::getPasskey($this->data['user_id'])) {
             if (!\TorrentPier\Legacy\Torrent::generate_passkey($this->data['user_id'], true)) {
