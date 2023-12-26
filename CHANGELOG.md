@@ -37,7 +37,7 @@
 - Use "Views" string for thumbnails [\#1257](https://github.com/torrentpier/torrentpier/pull/1257) ([kovalensky](https://github.com/kovalensky))
 - Show user's ban status [\#1258](https://github.com/torrentpier/torrentpier/pull/1258) ([kovalensky](https://github.com/kovalensky))
 - Changed default upload path [\#1261](https://github.com/torrentpier/torrentpier/pull/1261) ([belomaxorka](https://github.com/belomaxorka))
-- New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222), [\#1251](https://github.com/torrentpier/torrentpier/pull/1251) ([Exileum](https://github.com/Exileum))
+- New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222), [\#1251](https://github.com/torrentpier/torrentpier/pull/1251), [\#1260](https://github.com/torrentpier/torrentpier/pull/1260) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc1...v2.4.0-rc2)
