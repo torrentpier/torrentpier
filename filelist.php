@@ -93,6 +93,8 @@ echo <<<EOF
 <meta name="viewport" content="width=device-width, initial-scale=0.1, maximum-scale=1.0" />
 <meta name="robots" content="index" />
 <meta name="description" content="File listing for topic - $topic_id | {$data['name']} ({$data['size']})" />
+<meta property="og:description" content="File listing for topic - $topic_id | {$data['name']} ({$data['size']})" />
+<meta property="og:site_name" content="{$bb_cfg['sitename']}" />
 <meta name="generator" content="TorrentPier" />
 <meta name="version" content="{$bb_cfg['tp_version']}" />
 <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
