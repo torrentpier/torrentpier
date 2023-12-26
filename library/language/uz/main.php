@@ -1740,35 +1740,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Forum ruxsati qaytish uchun %sHere%s bosing';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Control';
-$lang['BAN_EXPLAIN'] = 'Bu yerda siz foydalanuvchilar man nazorat qilishingiz mumkin. Siz man bilan bu erishish mumkin yoki ma\'lum bir foydalanuvchi yoki IP-manzillar bir shaxs yoki qator ikkala. Bu usullar hatto kengashi indeksi sahifa yetib kelgan bir foydalanuvchi oldini olish. Siz ham taqiqlangan elektron pochta manzilini ko\'rsatish mumkin Boshqa foydalanuvchi nomi ostida ro\'yxatdan bir foydalanuvchi oldini olish uchun. yolg\'iz elektron pochta manzilini man tizimga yoki Kengashiga post ega bo\'lishdan deb foydalanuvchini oldini olmaydi, deb iltimos unutmang. Siz bu erishish uchun birinchi ikki yo\'llar birini kerak.';
-$lang['BAN_EXPLAIN_WARN'] = 'boshida va oxirida o\'rtasidagi barcha manzillar IP manzillar natijalari bir qator kirib banlist qo\'shilmoqda ekanini unutmang. Urinishlar qaerga tegishli avtomatik joker joriy tomonidan bazasiga kiritiladi manzillar sonini kamaytirish uchun amalga oshiriladi. Agar chindan ham bir qator kirishingiz zarur bo\'lsa, kichik uni saqlashga harakat yoki yaxshiroq hali aniq manzillari davlat.';
-
-$lang['SELECT_IP'] = 'bir IP-manzil tanlang';
-$lang['SELECT_EMAIL'] = 'E-pochta manzilini tanlang';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban bir yoki bir necha muayyan foydalanuvchilar';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Siz kompyuter va brauzer uchun sichqoncha va klaviatura tegishli birlashmasidan foydalanib, bir-yo\'lakay bir necha foydalanuvchilarni taqiqlash mumkin';
-
-$lang['BAN_IP'] = 'Bir yoki bir necha IP manzillar ta\'qiqlanishi';
-$lang['IP_HOSTNAME'] = 'IР-адрес';
-$lang['BAN_IP_EXPLAIN'] = 'Bir necha xil IP-manzillar vergul bilan ajratib belgilash.';
-
-$lang['BAN_EMAIL'] = 'bir yoki bir necha elektron pochta manzillari ta\'qiqlanishi';
-$lang['BAN_EMAIL_EXPLAIN'] = 'bir necha elektron pochta manzilini belgilash uchun, vergul bilan ajratib. Joker Foydalanuvchi nomi belgilash uchun, *@hotmail.com kabi * foydalanish';
-
-$lang['UNBAN_USERNAME'] = 'Un-ban yana bir o\'ziga xos foydalanuvchilar';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Siz kompyuter va brauzer uchun sichqoncha va klaviatura tegishli birlashmasidan foydalanib, bir-yo\'lakay bir necha foydalanuvchilarni unban mumkin';
-
-$lang['UNBAN_IP'] = 'Un-ban bir yoki bir necha IP-manzillar';
-$lang['UNBAN_IP_EXPLAIN'] = 'Siz kompyuter va brauzer uchun sichqoncha va klaviatura tegishli birlashmasidan foydalanib, bir-yo\'lakay bir necha IP manzillar unban mumkin';
-
-$lang['UNBAN_EMAIL'] = 'Un-ban bir yoki bir necha elektron pochta manzillari';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Siz kompyuter va brauzer uchun sichqoncha va klaviatura tegishli birlashmasidan foydalanib, bir-yo\'lakay bir necha elektron pochta manzillarini unban mumkin';
-
 $lang['NO_BANNED_USERS'] = 'Yo\'q, man nomlarini';
-$lang['NO_BANNED_IP'] = 'Yo\'q, man IP manzillar';
-$lang['NO_BANNED_EMAIL'] = 'Yo\'q, man email manzillari';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'banlist muvaffaqiyatli yangilandi';
 $lang['CLICK_RETURN_BANADMIN'] = 'Control Ban qaytish uchun %sHere%s bosing';
 
