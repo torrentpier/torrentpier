@@ -401,7 +401,11 @@ if ($banInfo = getUserBanInfo($user->id)) {
     if (!IS_GUEST) {
         $user->session_end();
     }
-    bb_die($lang['YOU_BEEN_BANNED']);
+    if (!empty($banInfo['ban_reason'])) {
+        bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $banInfo['ban_reason']);
+    } else {
+        bb_die($lang['YOU_BEEN_BANNED']);
+    }
 }
 
 /**
