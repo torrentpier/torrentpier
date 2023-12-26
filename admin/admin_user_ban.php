@@ -67,6 +67,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    $datastore->update('ban_list');
     bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 } else {
     $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);

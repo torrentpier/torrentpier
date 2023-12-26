@@ -395,20 +395,6 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
- * Initial ban check
- */
-if ($banInfo = getUserBanInfo((int)$user->id)) {
-    if (!IS_GUEST) {
-        $user->session_end();
-    }
-    if (!empty($banInfo['ban_reason'])) {
-        bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $banInfo['ban_reason']);
-    } else {
-        bb_die($lang['YOU_BEEN_BANNED']);
-    }
-}
-
-/**
  * Cron
  */
 if (

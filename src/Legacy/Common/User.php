@@ -108,7 +108,7 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-        global $bb_cfg;
+        global $bb_cfg, $lang;
 
         $update_sessions_table = false;
         $this->cfg = array_merge($this->cfg, $cfg);
@@ -217,26 +217,35 @@ class User
 
         $this->init_userprefs();
 
+        // Initial ban check
+        if ($banInfo = getUserBanInfo((int)$this->id)) {
+            if (!empty($banInfo['ban_reason'])) {
+                bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $banInfo['ban_reason']);
+            } else {
+                bb_die($lang['YOU_BEEN_BANNED']);
+            }
+            $this->session_end();
+        }
+
         return $this->data;
     }
 
     /**
      * Create new session for the given user
      *
-     * @param $userdata
+     * @param array $userdata
      * @param bool $auto_created
      *
      * @return array
      */
-    public function session_create($userdata, bool $auto_created = false): array
+    public function session_create(array $userdata, bool $auto_created = false): array
     {
-        global $bb_cfg, $lang;
+        global $bb_cfg;
 
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
         $login = ((int)$this->data['user_id'] !== GUEST_UID);
-        $is_user = ((int)$this->data['user_level'] !== ADMIN);
         $user_id = (int)$this->data['user_id'];
         $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
 
