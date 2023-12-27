@@ -16,7 +16,7 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 use Egulias\EmailValidator\Validation\MessageIDValidation;
 use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
 
-use TorrentPier\Helpers\IsHelper;
+use TorrentPier\Helpers\StringHelper;
 
 /**
  * Class Validate
@@ -181,24 +181,24 @@ class Validate
         if ($bb_cfg['password_symbols']) {
             // Numbers
             if ($bb_cfg['password_symbols']['nums']) {
-                if (!IsHelper::isContainsNums($password)) {
+                if (!StringHelper::isContainsNums($password)) {
                     return $lang['CHOOSE_PASS_ERR_NUM'];
                 }
             }
             // Letters
             if ($bb_cfg['password_symbols']['letters']['lowercase']) {
-                if (!IsHelper::isContainsLetters($password)) {
+                if (!StringHelper::isContainsLetters($password)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER'];
                 }
             }
             if ($bb_cfg['password_symbols']['letters']['uppercase']) {
-                if (!IsHelper::isContainsLetters($password, true)) {
+                if (!StringHelper::isContainsLetters($password, true)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
                 }
             }
             // Spec symbols
             if ($bb_cfg['password_symbols']['spec_symbols']) {
-                if (!IsHelper::isContainsSpecSymbols($password)) {
+                if (!StringHelper::isContainsSpecSymbols($password)) {
                     return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
                 }
             }

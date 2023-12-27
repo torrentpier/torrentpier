@@ -35,7 +35,7 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
 function delete_avatar($user_id, $avatar_ext_id)
 {
     $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : false;
-    return ($avatar_file && file_exists($avatar_file) && unlink($avatar_file));
+    return ($avatar_file && is_file($avatar_file) && unlink($avatar_file));
 }
 
 function get_tracks($type)
@@ -2001,7 +2001,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
         $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
-        if (file_exists(get_avatar_path($user_id, $ext_id))) {
+        if (is_file(get_avatar_path($user_id, $ext_id))) {
             $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }

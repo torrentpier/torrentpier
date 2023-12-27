@@ -49,7 +49,7 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
 require_once BB_PATH . '/library/defines.php';
 
 // Composer
-if (!file_exists(BB_PATH . '/vendor/autoload.php')) {
+if (!is_file(BB_PATH . '/vendor/autoload.php')) {
     die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
 require_once BB_PATH . '/vendor/autoload.php';
@@ -58,10 +58,10 @@ require_once BB_PATH . '/vendor/autoload.php';
  * Gets the value of an environment variable.
  *
  * @param string $key
- * @param mixed $default
+ * @param mixed|null $default
  * @return mixed
  */
-function env(string $key, $default = null)
+function env(string $key, mixed $default = null): mixed
 {
     return \TorrentPier\Env::get($key, $default);
 }
@@ -78,7 +78,7 @@ try {
 require_once BB_PATH . '/library/config.php';
 
 // Local config
-if (file_exists(BB_PATH . '/library/config.local.php')) {
+if (is_file(BB_PATH . '/library/config.local.php')) {
     require_once BB_PATH . '/library/config.local.php';
 }
 
@@ -357,7 +357,7 @@ if (!defined('IN_TRACKER')) {
 
     if (!defined('IN_ADMIN')) {
         // Exit if tracker is disabled via ON/OFF trigger
-        if (file_exists(BB_DISABLED)) {
+        if (is_file(BB_DISABLED)) {
             dummy_exit(random_int(60, 2400));
         }
     }

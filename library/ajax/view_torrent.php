@@ -23,8 +23,9 @@ if (!$torrent) {
     $this->ajax_die($lang['ERROR_BUILD']);
 }
 
+$file_contents = null;
 $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
-if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
+if (!is_file($filename) || !$file_contents = file_get_contents($filename)) {
     $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
 }
 

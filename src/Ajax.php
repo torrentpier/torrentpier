@@ -88,11 +88,11 @@ class Ajax
         }
 
         // Exit if board is disabled via ON/OFF trigger or by admin
-        if ($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) {
+        if ($bb_cfg['board_disable'] || is_file(BB_DISABLED)) {
             if (!isset($action_params[1]) || $action_params[1] !== true) {
                 if ($bb_cfg['board_disable']) {
                     $this->ajax_die($lang['BOARD_DISABLE']);
-                } elseif (file_exists(BB_DISABLED)) {
+                } elseif (is_file(BB_DISABLED)) {
                     $this->ajax_die($lang['BOARD_DISABLE_CRON']);
                 }
             }

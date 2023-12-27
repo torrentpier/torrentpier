@@ -94,10 +94,10 @@ class Emailer
         if (empty($this->tpl_msg[$template_lang . $template_file])) {
             $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
 
-            if (!file_exists($tpl_file)) {
+            if (!is_file($tpl_file)) {
                 $tpl_file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/email/' . $template_file . '.html';
 
-                if (!file_exists($tpl_file)) {
+                if (!is_file($tpl_file)) {
                     bb_die('Could not find email template file: ' . $template_file);
                 }
             }

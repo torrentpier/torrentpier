@@ -32,7 +32,7 @@ class CronHelper
      */
     public static function releaseDeadlock(): void
     {
-        if (file_exists(CRON_RUNNING)) {
+        if (is_file(CRON_RUNNING)) {
             if (TIMENOW - filemtime(CRON_RUNNING) > 2400) {
                 self::enableBoard();
                 self::releaseLockFile();
@@ -47,7 +47,7 @@ class CronHelper
      */
     public static function releaseLockFile(): void
     {
-        if (file_exists(CRON_RUNNING)) {
+        if (is_file(CRON_RUNNING)) {
             rename(CRON_RUNNING, CRON_ALLOWED);
         }
         self::touchLockFile(CRON_ALLOWED);
@@ -57,7 +57,6 @@ class CronHelper
      * Создание файла блокировки
      *
      * @param string $lock_file
-     *
      * @return void
      */
     public static function touchLockFile(string $lock_file): void
@@ -72,7 +71,7 @@ class CronHelper
      */
     public static function enableBoard(): void
     {
-        if (file_exists(BB_DISABLED)) {
+        if (is_file(BB_DISABLED)) {
             rename(BB_DISABLED, BB_ENABLED);
         }
     }
@@ -84,7 +83,7 @@ class CronHelper
      */
     public static function disableBoard(): void
     {
-        if (file_exists(BB_ENABLED)) {
+        if (is_file(BB_ENABLED)) {
             rename(BB_ENABLED, BB_DISABLED);
         }
     }
@@ -98,11 +97,11 @@ class CronHelper
     {
         $lock_obtained = false;
 
-        if (file_exists(CRON_ALLOWED)) {
+        if (is_file(CRON_ALLOWED)) {
             $lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
-        } elseif (file_exists(CRON_RUNNING)) {
+        } elseif (is_file(CRON_RUNNING)) {
             self::releaseDeadlock();
-        } elseif (!file_exists(CRON_ALLOWED) && !file_exists(CRON_RUNNING)) {
+        } elseif (!is_file(CRON_ALLOWED) && !is_file(CRON_RUNNING)) {
             file_write('', CRON_ALLOWED);
             $lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
         }
@@ -114,8 +113,9 @@ class CronHelper
      * Отслеживание запуска задач
      *
      * @param string $mode
+     * @return void
      */
-    public static function trackRunning(string $mode)
+    public static function trackRunning(string $mode): void
     {
         if (!defined('START_MARK')) {
             define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
@@ -127,7 +127,7 @@ class CronHelper
                 file_write('', START_MARK);
                 break;
             case 'end':
-                if (file_exists(START_MARK)) {
+                if (is_file(START_MARK)) {
                     unlink(START_MARK);
                 }
                 break;

@@ -60,7 +60,6 @@ class IPHelper extends Ip
      * @param string $ip
      * @return string
      */
-
     public static function long2ip_extended(string $ip): string
     {
         return self::long2ip($ip, $ip > 0xFFFFFFFF);

@@ -304,7 +304,7 @@ $template->assign_vars([
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
     'U_SEARCH_LATEST' => 'search.php?search_id=latest',
     'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
-    'U_ATOM_FEED' => file_exists($bb_cfg['atom']['path'] . '/f/0.atom') ? make_url($bb_cfg['atom']['url'] . '/f/0.atom') : false,
+    'U_ATOM_FEED' => is_file($bb_cfg['atom']['path'] . '/f/0.atom') ? make_url($bb_cfg['atom']['url'] . '/f/0.atom') : false,
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
     'BOARD_START' => $bb_cfg['show_board_start_index'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : false,
@@ -395,8 +395,8 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
 
 // Allow cron
 if (IS_AM) {
-    if (file_exists(CRON_RUNNING)) {
-        if (file_exists(CRON_ALLOWED)) {
+    if (is_file(CRON_RUNNING)) {
+        if (is_file(CRON_ALLOWED)) {
             unlink(CRON_ALLOWED);
         }
         rename(CRON_RUNNING, CRON_ALLOWED);
