@@ -16,7 +16,6 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 use Egulias\EmailValidator\Validation\MessageIDValidation;
 use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
 
-use TorrentPier\Helpers\IsHelper;
 use TorrentPier\Helpers\StringHelper;
 
 /**
