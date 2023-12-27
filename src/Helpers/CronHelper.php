@@ -57,7 +57,6 @@ class CronHelper
      * Создание файла блокировки
      *
      * @param string $lock_file
-     *
      * @return void
      */
     public static function touchLockFile(string $lock_file): void
@@ -114,8 +113,9 @@ class CronHelper
      * Отслеживание запуска задач
      *
      * @param string $mode
+     * @return void
      */
-    public static function trackRunning(string $mode)
+    public static function trackRunning(string $mode): void
     {
         if (!defined('START_MARK')) {
             define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());

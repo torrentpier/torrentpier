@@ -30,38 +30,4 @@ class IsHelper
         }
         return $is_secure;
     }
-
-    /**
-     * Return true if $value contains numbers
-     *
-     * @param string $value
-     * @return bool
-     */
-    public static function isContainsNums(string $value): bool
-    {
-        return preg_match('@[[:digit:]]@', $value);
-    }
-
-    /**
-     * Return true if $value contains letters (Uppercase included)
-     *
-     * @param string $value
-     * @param bool $uppercase
-     * @return bool
-     */
-    public static function isContainsLetters(string $value, bool $uppercase = false): bool
-    {
-        return $uppercase ? preg_match('@[A-Z]@', $value) : preg_match('@[a-z]@', $value);
-    }
-
-    /**
-     * Return true if $value contains special symbols
-     *
-     * @param string $value
-     * @return bool
-     */
-    public static function isContainsSpecSymbols(string $value): bool
-    {
-        return preg_match('@[[:punct:]]@', $value);
-    }
 }
