@@ -105,7 +105,7 @@ if (!isset($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
 }
 
-if (max($uploaded, $downloaded, $left) >= 18446744073709551615) { // BIGINT
+if (max($uploaded, $downloaded, $left) >= (2**64 - 1)) { // BIGINT
     msg_die('Integer overflow');
 }
 
