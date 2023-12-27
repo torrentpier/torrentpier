@@ -32,7 +32,7 @@ class CronHelper
      */
     public static function releaseDeadlock(): void
     {
-        if (file_exists(CRON_RUNNING)) {
+        if (is_file(CRON_RUNNING)) {
             if (TIMENOW - filemtime(CRON_RUNNING) > 2400) {
                 self::enableBoard();
                 self::releaseLockFile();
@@ -47,7 +47,7 @@ class CronHelper
      */
     public static function releaseLockFile(): void
     {
-        if (file_exists(CRON_RUNNING)) {
+        if (is_file(CRON_RUNNING)) {
             rename(CRON_RUNNING, CRON_ALLOWED);
         }
         self::touchLockFile(CRON_ALLOWED);
@@ -72,7 +72,7 @@ class CronHelper
      */
     public static function enableBoard(): void
     {
-        if (file_exists(BB_DISABLED)) {
+        if (is_file(BB_DISABLED)) {
             rename(BB_DISABLED, BB_ENABLED);
         }
     }
@@ -84,7 +84,7 @@ class CronHelper
      */
     public static function disableBoard(): void
     {
-        if (file_exists(BB_ENABLED)) {
+        if (is_file(BB_ENABLED)) {
             rename(BB_ENABLED, BB_DISABLED);
         }
     }
@@ -98,11 +98,11 @@ class CronHelper
     {
         $lock_obtained = false;
 
-        if (file_exists(CRON_ALLOWED)) {
+        if (is_file(CRON_ALLOWED)) {
             $lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
-        } elseif (file_exists(CRON_RUNNING)) {
+        } elseif (is_file(CRON_RUNNING)) {
             self::releaseDeadlock();
-        } elseif (!file_exists(CRON_ALLOWED) && !file_exists(CRON_RUNNING)) {
+        } elseif (!is_file(CRON_ALLOWED) && !is_file(CRON_RUNNING)) {
             file_write('', CRON_ALLOWED);
             $lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
         }

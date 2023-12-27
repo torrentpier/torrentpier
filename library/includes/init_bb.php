@@ -400,7 +400,7 @@ $userdata =& $user->data;
 if (
     empty($_POST) &&
     !defined('IN_ADMIN') && !defined('IN_AJAX') &&
-    !file_exists(CRON_RUNNING) &&
+    !is_file(CRON_RUNNING) &&
     (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
 ) {
     if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval']) {
@@ -443,13 +443,13 @@ if (
 /**
  * Exit if board is disabled via trigger
  */
-if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
+if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     http_response_code(503);
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();
         bb_die('BOARD_DISABLE');
-    } elseif (file_exists(BB_DISABLED)) {
+    } elseif (is_file(BB_DISABLED)) {
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();

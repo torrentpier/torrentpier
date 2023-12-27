@@ -34,7 +34,7 @@ if ($mode === 'get_feed_url' && ($type === 'f' || $type === 'u') && $id >= 0) {
                 bb_simple_die($lang['ATOM_ERROR'] . ' #1');
             }
         }
-        if (file_exists($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') > $timecheck) {
+        if (is_file($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') > $timecheck) {
             redirect($bb_cfg['atom']['url'] . '/f/' . $id . '.atom');
         } else {
             if (\TorrentPier\Legacy\Atom::update_forum_feed($id, $forum_data)) {
@@ -52,7 +52,7 @@ if ($mode === 'get_feed_url' && ($type === 'f' || $type === 'u') && $id >= 0) {
         if (!$username = get_username($id)) {
             bb_simple_die($lang['ATOM_ERROR'] . ' #3');
         }
-        if (file_exists($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > $timecheck) {
+        if (is_file($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > $timecheck) {
             redirect($bb_cfg['atom']['url'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
         } else {
             if (\TorrentPier\Legacy\Atom::update_user_feed($id, $username)) {

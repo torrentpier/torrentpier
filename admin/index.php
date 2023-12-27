@@ -67,7 +67,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $template->assign_vars([
         'TPL_ADMIN_MAIN' => true,
         'ADMIN_LOCK' => (bool)$bb_cfg['board_disable'],
-        'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED),
+        'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
     ]);
 
     // Get forum statistics

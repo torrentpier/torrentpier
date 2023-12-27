@@ -48,7 +48,7 @@ function createThumbnail(string $source, string $newFile, string $mimeType): boo
     }
 
     // Check the thumbnail existence after creating
-    if (!file_exists($newFile)) {
+    if (!is_file($newFile)) {
         return false;
     }
 
