@@ -219,12 +219,12 @@ class User
 
         // Initial ban check
         if ($banInfo = getBanInfo((int)$this->id)) {
+            $this->session_end();
             if (!empty($banInfo['ban_reason'])) {
-                bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $banInfo['ban_reason']);
+                bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $lang['REASON'] . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
             } else {
                 bb_die($lang['YOU_BEEN_BANNED']);
             }
-            $this->session_end();
         }
 
         return $this->data;
