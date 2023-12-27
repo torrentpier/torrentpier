@@ -127,7 +127,7 @@ class CronHelper
                 file_write('', START_MARK);
                 break;
             case 'end':
-                if (file_exists(START_MARK)) {
+                if (is_file(START_MARK)) {
                     unlink(START_MARK);
                 }
                 break;
