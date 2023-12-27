@@ -24,13 +24,14 @@ function createThumbnail(string $source, string $newFile, string $mimeType): boo
 {
     global $attach_config;
 
-    // Get the file information
-    $source = realpath($source);
-    $min_filesize = (int)$attach_config['img_min_thumb_filesize'];
-    $img_filesize = file_exists($source) ? filesize($source) : false;
+    // Check for source image existence
+    if (!$source = realpath($source)) {
+        return false;
+    }
 
     // Checks the max allowed filesize
-    if (!$img_filesize || $img_filesize <= $min_filesize) {
+    $min_filesize = (int)$attach_config['img_min_thumb_filesize'];
+    if (!filesize($source) || filesize($source) <= $min_filesize) {
         return false;
     }
 
