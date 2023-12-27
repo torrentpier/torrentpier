@@ -765,7 +765,7 @@ $bb_cfg['post_img_width_decr'] = 52;
 $bb_cfg['attach_img_width_decr'] = 130;
 
 // Get default lang
-if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'])) {
+if (isset($bb_cfg['default_lang']) && is_file(LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'])) {
     $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/';
 } else {
     $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
