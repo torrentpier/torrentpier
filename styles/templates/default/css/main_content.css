@@ -610,6 +610,13 @@ table.peers td {
   border: 1px #A5AFB4 solid;
 }
 
+.clients {
+  width: auto;
+  height: auto;
+  display: inline!important;
+  vertical-align:middle;
+}
+
 .dl_list {
 }
 
