@@ -63,6 +63,7 @@ function dummy_exit($interval = 1800, $cache_dict = [])
     $output = [
         'interval' => (int)$interval,
         'peers' => (string)DUMMY_PEER,
+        'external ip' => inet_pton($_SERVER['REMOTE_ADDR']),
     ];
 
     if (!empty($cache_dict)) {

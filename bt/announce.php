@@ -92,6 +92,7 @@ if (strlen($info_hash) !== 20) {
 if (!isset($port) || $port < 0 || $port > 0xFFFF) {
     msg_die('Invalid port: ' . $port);
 }
+
 if (!isset($uploaded) || $uploaded < 0) {
     msg_die('Invalid uploaded value: ' . $uploaded);
 }
@@ -102,6 +103,10 @@ if (!isset($downloaded) || $downloaded < 0) {
 
 if (!isset($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
+}
+
+if (max($uploaded, $downloaded, $left) >= (2**64 - 1)) { // BIGINT
+    msg_die('Integer overflow');
 }
 
 // IP
