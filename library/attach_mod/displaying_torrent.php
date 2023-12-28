@@ -148,39 +148,40 @@ if ($tor_reged && $tor_info) {
     $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, html_ent_decode($t_data['topic_title']));
 
     // ratio limits
-    $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
-    $min_ratio_warn = $bb_cfg['bt_min_ratio_warning'];
     $dl_allowed = true;
     $user_ratio = 0;
 
-    if (($min_ratio_dl || $min_ratio_warn) && $bt_user_id != $poster_id) {
-        $sql = "SELECT u.*, dl.user_status
+    if ($bt_user_id != $poster_id && $bt_user_id != GUEST_UID) {
+        $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
+        $min_ratio_warn = $bb_cfg['bt_min_ratio_warning'];
+
+        if ($min_ratio_dl || $min_ratio_warn) {
+            $sql = "SELECT u.*, dl.user_status
 			FROM " . BB_BT_USERS . " u
 			LEFT JOIN " . BB_BT_DLSTATUS . " dl ON dl.user_id = $bt_user_id AND dl.topic_id = $bt_topic_id
 			WHERE u.user_id = $bt_user_id
 			LIMIT 1";
-    } else {
-        $sql = "SELECT user_status
+        } else {
+            $sql = "SELECT user_status
 			FROM " . BB_BT_DLSTATUS . "
 			WHERE user_id = $bt_user_id
 				AND topic_id = $bt_topic_id
 			LIMIT 1";
-    }
-
-    $bt_userdata = DB()->fetch_row($sql);
-
-    $user_status = $bt_userdata['user_status'] ?? null;
-
-    if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && ($bt_user_id != $poster_id && $bt_user_id != GUEST_UID) && $tor_type != TOR_TYPE_GOLD) {
-        if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
-            $dl_allowed = ($user_ratio > $min_ratio_dl);
         }
 
-        if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
-            $template->assign_vars([
-                'SHOW_RATIO_WARN' => true,
-                'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help'])
-            ]);
+        if ($bt_userdata = DB()->fetch_row($sql)) {
+            if (($min_ratio_dl || $min_ratio_warn) && (isset($bt_userdata['user_status']) && $bt_userdata['user_status'] != DL_STATUS_COMPLETE) && $tor_type != TOR_TYPE_GOLD) {
+                if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
+                    $dl_allowed = ($user_ratio > $min_ratio_dl);
+                }
+
+                if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
+                    $template->assign_vars([
+                        'SHOW_RATIO_WARN' => true,
+                        'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help'])
+                    ]);
+                }
+            }
         }
     }
 
@@ -197,10 +198,10 @@ if ($tor_reged && $tor_info) {
             'ATTACH_ID' => $attach_id,
             'TOR_SILVER_GOLD' => $tor_type,
             'TOR_TYPE' => is_gold($tor_type),
-            'TOR_AUTHOR' => $bt_user_id == $poster_id && !IS_GUEST,
+            'TOR_AUTHOR' => $bt_user_id == $poster_id && $bt_user_id == GUEST_UID,
 
             // torrent status mod
-            'TOR_FROZEN' => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
+            'TOR_FROZEN' => !IS_AM ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
             'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
             'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
             'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
@@ -210,8 +211,8 @@ if ($tor_reged && $tor_info) {
 
             'S_UPLOAD_IMAGE' => $upload_image,
             'U_DOWNLOAD_LINK' => $download_link,
-            'DL_LINK_CLASS' => (isset($bt_userdata['user_status'])) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
-            'DL_TITLE_CLASS' => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
+            'DL_LINK_CLASS' => isset($bt_userdata['user_status']) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
+            'DL_TITLE_CLASS' => isset($bt_userdata['user_status']) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
@@ -248,9 +249,7 @@ if ($tor_reged && $tor_info) {
             $full_mode_order = 'tr.remain';
             $full_mode_sort_dir = 'ASC';
 
-            if (isset($_REQUEST['psortasc'])) {
-                $full_mode_sort_dir = 'ASC';
-            } elseif (isset($_REQUEST['psortdesc'])) {
+            if (isset($_REQUEST['psortdesc'])) {
                 $full_mode_sort_dir = 'DESC';
             }
 
