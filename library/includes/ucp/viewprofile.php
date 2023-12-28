@@ -99,7 +99,7 @@ $template->assign_vars([
     'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
     'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
     'USER_ACTIVE' => $profiledata['user_active'],
-    'LOCATION' => $profiledata['user_from'],
+    'LOCATION' => render_flag($profiledata['user_from']),
     'OCCUPATION' => $profiledata['user_occ'],
     'INTERESTS' => $profiledata['user_interests'],
     'SKYPE' => $profiledata['user_skype'],
