@@ -1252,7 +1252,7 @@ function get_user_torrent_client(string $peer_id): mixed
     }
 
     if (!empty($bestMatch)) {
-        return '<img width="auto" height="auto" style="display:inline!important;vertical-align:middle" src="' . FULL_URL . 'styles/images/clients/' . $bestMatch . $iconExtension . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
+        return '<img class="clients" src="' . FULL_URL . 'styles/images/clients/' . $bestMatch . $iconExtension . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
     }
 
     return $peer_id;
@@ -1513,6 +1513,7 @@ function render_flag($code) {
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
     'YE' => 'Yemen',
+    'YU' => 'Yugoslavia',
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
