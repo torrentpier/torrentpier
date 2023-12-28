@@ -171,7 +171,7 @@ if ($tor_reged && $tor_info) {
 
     $user_status = $bt_userdata['user_status'] ?? null;
 
-    if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && ($bt_user_id != ($poster_id || GUEST_UID)) && $tor_type != TOR_TYPE_GOLD) {
+    if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && ($bt_user_id != $poster_id && $bt_user_id != GUEST_UID) && $tor_type != TOR_TYPE_GOLD) {
         if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             $dl_allowed = ($user_ratio > $min_ratio_dl);
         }
@@ -197,6 +197,7 @@ if ($tor_reged && $tor_info) {
             'ATTACH_ID' => $attach_id,
             'TOR_SILVER_GOLD' => $tor_type,
             'TOR_TYPE' => is_gold($tor_type),
+            'TOR_AUTHOR' => $bt_user_id == $poster_id && !IS_GUEST,
 
             // torrent status mod
             'TOR_FROZEN' => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
