@@ -460,11 +460,13 @@ $('#tor-filelist-btn').click(function () {
     }
 </script>
 <div id="thx-block">
+    <!-- IF not postrow.POSTER_AUTHOR -->
     <div id="thx-btn-div">
-        <input id="thx-btn" type="button" class="bold" style="width: 200px;" value='{$lang['THANK_TOPIC']}'/>
+        <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{L_THANK_TOPIC}">
     </div>
+    <!-- ENDIF -->
     <div class="sp-wrap">
-        <div id="thx-list" class="sp-body" title="{$lang['LAST_LIKES']}"></div>
+        <div id="thx-list" class="sp-body" title="{L_LAST_LIKES}"></div>
     </div>
 </div>
 <!-- ENDIF -->
