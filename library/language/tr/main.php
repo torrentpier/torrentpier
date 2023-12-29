@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'Avatar kontrol paneli';
 
 $lang['WEBSITE'] = 'Web sitesi';
 $lang['LOCATION'] = 'Konum';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'İletişim';
 $lang['EMAIL_ADDRESS'] = 'E-posta adresi';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Özel mesaj gönder';
