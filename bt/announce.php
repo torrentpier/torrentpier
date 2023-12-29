@@ -469,7 +469,7 @@ if (!$output) {
 
 $output['external ip'] = inet_pton($ip);
 
-// Return sql errors to client
+// Return last sql error to client
 if (!empty(DB()->sql_error()['code'])) {
     sql_die(DB()->sql_error()['code']);
 }

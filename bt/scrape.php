@@ -102,7 +102,7 @@ if (empty($torrents)) {
     msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
 
-// Return sql errors to client
+// Return last sql error to client
 if (!empty(DB()->sql_error()['code'])) {
     sql_die(DB()->sql_error()['code']);
 }
