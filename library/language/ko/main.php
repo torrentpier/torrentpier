@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = '아바타를 제어 패널';
 
 $lang['WEBSITE'] = '웹사이트';
 $lang['LOCATION'] = '위치';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = '연락처';
 $lang['EMAIL_ADDRESS'] = 'E-mail address';
 $lang['SEND_PRIVATE_MESSAGE'] = '개인 메시지를 보내';
