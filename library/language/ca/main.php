@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar tauler de control';
 
 $lang['WEBSITE'] = 'Lloc web';
 $lang['LOCATION'] = 'Ubicació';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Contacte';
 $lang['EMAIL_ADDRESS'] = 'Adreça de correu electrònic';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Enviar missatge privat';
