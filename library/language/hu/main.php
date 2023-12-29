@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'Avatar vezérlőpult';
 
 $lang['WEBSITE'] = 'Honlap';
 $lang['LOCATION'] = 'Helyszín';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kapcsolat';
 $lang['EMAIL_ADDRESS'] = 'E-mail cím';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Küldj privát üzenetet';

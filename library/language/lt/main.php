@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'Avataro valdymo pultas';
 
 $lang['WEBSITE'] = 'Svetainė';
 $lang['LOCATION'] = 'Vieta';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontaktai';
 $lang['EMAIL_ADDRESS'] = 'El. pašto adresas';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Siųsti asmeninę žinutę';

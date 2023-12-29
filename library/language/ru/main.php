@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'Управление аватарой';
 
 $lang['WEBSITE'] = 'Сайт';
 $lang['LOCATION'] = 'Откуда';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Как связаться с';
 $lang['EMAIL_ADDRESS'] = 'Адрес e-mail';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Отправить ЛС';

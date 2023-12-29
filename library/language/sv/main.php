@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'Avatar kontrollpanelen';
 
 $lang['WEBSITE'] = 'Hemsida';
 $lang['LOCATION'] = 'Läge';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontakta';
 $lang['EMAIL_ADDRESS'] = 'E-post adress';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Skicka ett privat meddelande';
