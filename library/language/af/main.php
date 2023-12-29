@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar beheerpaneel';
 
 $lang['WEBSITE'] = 'webwerf';
 $lang['LOCATION'] = 'plek';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontak';
 $lang['EMAIL_ADDRESS'] = 'E-pos adres';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Stuur privaat boodskap';
