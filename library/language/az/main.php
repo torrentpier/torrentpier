@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Control panel avatar';
 
 $lang['WEBSITE'] = 'Sayt';
 $lang['LOCATION'] = 'Yer';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Əlaqə';
 $lang['EMAIL_ADDRESS'] = 'E-poçt';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Şəxsi mesaj göndərmək';

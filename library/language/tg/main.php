@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'ба панели идоракунӣ Аватар';
 
 $lang['WEBSITE'] = 'Сомонаи';
 $lang['LOCATION'] = 'макон';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Тамос';
 $lang['EMAIL_ADDRESS'] = 'Суроғаи имэйл';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Паёми хусусӣ';

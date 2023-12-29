@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar panoul de control';
 
 $lang['WEBSITE'] = 'Site-ul';
 $lang['LOCATION'] = 'Locație';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Contact';
 $lang['EMAIL_ADDRESS'] = 'E-mail';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Trimite un mesaj privat';

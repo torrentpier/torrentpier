@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar bảng điều khiển';
 
 $lang['WEBSITE'] = 'Trang web';
 $lang['LOCATION'] = 'Vị trí';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Liên hệ';
 $lang['EMAIL_ADDRESS'] = 'Địa chỉ E-mail';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Gửi tin nhắn';
