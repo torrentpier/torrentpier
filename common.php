@@ -352,6 +352,9 @@ if (!defined('IN_TRACKER')) {
     define('PEERS_LIST_PREFIX', 'peers_list_');
     define('SCRAPE_LIST_PREFIX', 'scrape_list_');
 
+    // Init tracker
+    require_once BB_PATH . '/bt/includes/init_tr.php';
+
     header('Content-Type: text/plain');
     header('Pragma: no-cache');
 
@@ -361,7 +364,4 @@ if (!defined('IN_TRACKER')) {
             dummy_exit(random_int(60, 2400));
         }
     }
-
-    // Init tracker
-    require_once BB_PATH . '/bt/includes/init_tr.php';
 }
