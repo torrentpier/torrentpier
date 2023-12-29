@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'アバターの制御パネル';
 
 $lang['WEBSITE'] = 'Webサイト';
 $lang['LOCATION'] = '所在地';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = '連絡先';
 $lang['EMAIL_ADDRESS'] = 'Eメールアドレス';
 $lang['SEND_PRIVATE_MESSAGE'] = '送信メッセージ';
