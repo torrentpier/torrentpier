@@ -733,13 +733,8 @@ $bb_cfg['tor_frozen_author_download'] = [
     TOR_PREMOD => true,
 ];
 
-// Disallowed for changing the title
-$bb_cfg['tor_cannot_edit'] = [
-    TOR_CHECKING => true,
-    TOR_CLOSED => true,
-    TOR_CONSUMED => true,
-    TOR_DUP => true,
-];
+// Disallowed release editing with a certain status
+$bb_cfg['tor_cannot_edit'] = [TOR_CHECKING, TOR_CLOSED, TOR_CONSUMED, TOR_DUP];
 
 // Disallowed for creating new releases if status is not fully formatted/unformatted/suspicious
 $bb_cfg['tor_cannot_new'] = [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL];
