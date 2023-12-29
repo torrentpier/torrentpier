@@ -39,9 +39,6 @@ and go from there. The documentation will be translated into english in the near
 * Atom feeds
 * and many more.
 
-## Interface (default)
-<img src="https://i1.imageban.ru/out/2023/12/29/b4e2995d4f0762ba3b37af7cc8d59a83.png?1" alt="" />
-
 ## 🔧 Requirements
 
 * Apache / nginx
