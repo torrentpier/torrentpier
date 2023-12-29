@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'الصورة الرمزية من لوحة التحكم'
 
 $lang['WEBSITE'] = 'الموقع';
 $lang['LOCATION'] = 'الموقع';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'الاتصال';
 $lang['EMAIL_ADDRESS'] = 'عنوان البريد الإلكتروني';
 $lang['SEND_PRIVATE_MESSAGE'] = 'إرسال رسالة خاصة';
