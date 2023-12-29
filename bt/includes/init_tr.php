@@ -58,6 +58,21 @@ function msg_die($msg)
     die($output);
 }
 
+function sql_die(int $code)
+{
+    $error = null;
+
+    switch ($code) {
+        case 1264:
+            $error = 'SQL: Out of range';
+            break;
+    }
+
+    if (isset($error)) {
+        msg_die($error . " ($code)");
+    }
+}
+
 function dummy_exit($interval = 1800, $cache_dict = [])
 {
     $output = [
