@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'אווטאר הבקרה';
 
 $lang['WEBSITE'] = 'באתר';
 $lang['LOCATION'] = 'מיקום';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'קשר';
 $lang['EMAIL_ADDRESS'] = 'כתובת דואר אלקטרוני';
 $lang['SEND_PRIVATE_MESSAGE'] = 'שלח הודעה פרטית';
