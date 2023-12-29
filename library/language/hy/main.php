@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'Կառավարման վահանակի անձնանշա�
 
 $lang['WEBSITE'] = 'Կայք';
 $lang['LOCATION'] = 'Գտնվելու վայրը';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Հետադարձ կապ';
 $lang['EMAIL_ADDRESS'] = 'Էլեկտրոնային փոստի հասցեն';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Ուղարկել անձնական հաղորդագրություն';
