@@ -156,7 +156,7 @@
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
             <td>
-                <div><input type="text" name="user_from" size="50" maxlength="100" value="{USER_FROM}"/><br><h6>{L_LOCATION_FLAGS} <a href="https://github.com/hampusborgos/country-flags/blob/ba2cf4101bf029d2ada26da2f95121de74581a4d/countries.json" target="_blank">{L_LIST}</a></h6></div>
+                <div><input type="text" name="user_from" size="50" maxlength="100" value="{USER_FROM}"/><br><h6>❤️ Country flags provided by <a href="https://github.com/hampusborgos/country-flags/" target="_blank">https://github.com/hampusborgos/country-flags/</a></h6></div>
             </td>
         </tr>
         <!-- ENDIF -->
