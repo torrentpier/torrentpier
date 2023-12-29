@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar vadības panelis';
 
 $lang['WEBSITE'] = 'Mājas lapa';
 $lang['LOCATION'] = 'Atrašanās vieta';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontaktinformācija';
 $lang['EMAIL_ADDRESS'] = 'E-pasta adrese';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Sūtīt privātu ziņu';
