@@ -514,7 +514,6 @@ $lang['AVATAR_PANEL'] = 'แผงควบคุมร่างอวตาร'
 
 $lang['WEBSITE'] = 'เว็บไซต์';
 $lang['LOCATION'] = 'ตำแหน่ง';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'ติดต่อ';
 $lang['EMAIL_ADDRESS'] = 'อีเมลล์ที่อยู่';
 $lang['SEND_PRIVATE_MESSAGE'] = 'ส่งข้อความส่วนตัว';
