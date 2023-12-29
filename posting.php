@@ -328,7 +328,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $poster_rg_id = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int)$_POST['poster_rg'] : 0;
 
             // Disable edit release if tor_status in $bb_cfg['tor_cannot_edit']
-            if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && !empty($bb_cfg['tor_cannot_edit']) /*&& !IS_AM*/) {
+            if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
                 if ($tor_status = DB()->fetch_row("SELECT tor_status FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id AND forum_id = $forum_id AND tor_status IN(" . implode(',', array_keys($bb_cfg['tor_cannot_edit'])) . ") LIMIT 1")) {
                     bb_die('Вы не можете редактировать релиз, если он имеет статус: ' . '<span title="' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '">' . $bb_cfg['tor_icons'][$tor_status['tor_status']] . '&nbsp;' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '</span>.');
                 }
