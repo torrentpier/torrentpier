@@ -69,7 +69,7 @@ class File extends Common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)file_write($filecache, $filename, false, true, true);
+        return (bool)file_write($filecache, $filename, max_size: false, replace_content: true);
     }
 
     public function rm($name = '')

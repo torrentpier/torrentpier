@@ -10,12 +10,12 @@
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
+
 if (defined('PAGE_HEADER_SENT')) {
     return;
 }
 
 // Parse and show the overall page header
-
 global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
