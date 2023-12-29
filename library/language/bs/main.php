@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar kontrolnu ploču';
 
 $lang['WEBSITE'] = 'Web stranica';
 $lang['LOCATION'] = 'Lokacija';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontakt';
 $lang['EMAIL_ADDRESS'] = 'E-mail adresa';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Pošalji poruku privatni';
