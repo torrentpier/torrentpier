@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar πίνακα ελέγχου';
 
 $lang['WEBSITE'] = 'Ιστοσελίδα';
 $lang['LOCATION'] = 'Τοποθεσία';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Επικοινωνήστε με';
 $lang['EMAIL_ADDRESS'] = 'E-mail';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Αποστολή ιδιωτικού μηνύματος';
