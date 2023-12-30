@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Панэль кіравання аватар';
 
 $lang['WEBSITE'] = 'Сайт';
 $lang['LOCATION'] = 'Размяшчэнне';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Кантакты';
 $lang['EMAIL_ADDRESS'] = 'Адрас электроннай пошты';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Адправіць асабістае паведамленне';

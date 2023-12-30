@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar ohjauspaneeli';
 
 $lang['WEBSITE'] = 'Sivustolla';
 $lang['LOCATION'] = 'Sijainti';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Ota yhteyttä';
 $lang['EMAIL_ADDRESS'] = 'E-mail-osoite';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Lähetä yksityinen viesti';

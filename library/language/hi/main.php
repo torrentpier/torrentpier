@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'अवतार नियंत्रण कक्ष';
 
 $lang['WEBSITE'] = 'वेबसाइट';
 $lang['LOCATION'] = 'स्थान';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'संपर्क करें';
 $lang['EMAIL_ADDRESS'] = 'ईमेल पता';
 $lang['SEND_PRIVATE_MESSAGE'] = 'निजी संदेश भेजें';

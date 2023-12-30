@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'ავატარი პანელი';
 
 $lang['WEBSITE'] = 'ნახვა';
 $lang['LOCATION'] = 'მდებარეობა';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'კონტაქტი';
 $lang['EMAIL_ADDRESS'] = 'E-mail მისამართი';
 $lang['SEND_PRIVATE_MESSAGE'] = 'პირადი შეტყობინების გაგზავნა';

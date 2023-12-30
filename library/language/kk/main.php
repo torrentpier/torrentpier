@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Аватар басқару панелі';
 
 $lang['WEBSITE'] = 'Сайт';
 $lang['LOCATION'] = 'орналасқан жері';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'байланыс';
 $lang['EMAIL_ADDRESS'] = 'Электрондық пошта';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Жеке хабар жіберу';
