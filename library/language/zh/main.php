@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = '阿凡达控制面板';
 
 $lang['WEBSITE'] = '网站';
 $lang['LOCATION'] = '位置';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = '接触';
 $lang['EMAIL_ADDRESS'] = 'E-mail地址';
 $lang['SEND_PRIVATE_MESSAGE'] = '送私人消息';
