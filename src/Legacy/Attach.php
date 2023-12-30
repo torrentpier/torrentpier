@@ -824,9 +824,17 @@ class Attach
             }
 
             //bt
+            // Block uploading more than one torrent file
+            global $update_attachment;
+            if (!$error && !$update_attachment && $this->extension === TORRENT_EXT && in_array(TORRENT_EXT, $this->attachment_extension_list)) {
+                $error = true;
+                if (!empty($error_msg)) {
+                    $error_msg .= '<br />';
+                }
+                $error_msg .= $lang['ONLY_1_TOR_PER_TOPIC'];
+            }
             // Check if user can post torrent
             global $post_data;
-
             if (!$error && $this->extension === TORRENT_EXT && !$post_data['first_post']) {
                 $error = true;
                 if (!empty($error_msg)) {
