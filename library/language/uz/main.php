@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Foydalanuvchining barcha e\'lonlar nazorat panel';
 
 $lang['WEBSITE'] = 'Veb-sayt';
 $lang['LOCATION'] = 'Manzil';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'aloqa';
 $lang['EMAIL_ADDRESS'] = 'Elektron pochta manzili';
 $lang['SEND_PRIVATE_MESSAGE'] = 'shaxsiy xabar yuboring';
