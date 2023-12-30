@@ -514,6 +514,7 @@ $lang['AVATAR_PANEL'] = 'Avatar ovládací panel';
 
 $lang['WEBSITE'] = 'Webové stránky';
 $lang['LOCATION'] = 'Umístění';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontakt';
 $lang['EMAIL_ADDRESS'] = 'E-mailovou adresu';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Poslat soukromou zprávu';
