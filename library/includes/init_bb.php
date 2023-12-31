@@ -296,7 +296,7 @@ define('POSTING_URL', $bb_cfg['posting_url']);
 define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;u=');
 define('BONUS_URL', 'profile.php?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?t=');
-define('FILELIST_URL', 'filelist.php?topic=');
+define('FILELIST_URL', 'viewtopic.php?filelist=');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
