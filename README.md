@@ -112,6 +112,11 @@ Support this project by becoming a sponsor or a backer.
   bc1qselchy0nnh7xl99glfffedqp7p9gpvatdr9dz9
 </details>
 
+<details>
+  <summary>ЮMoney</summary>
+  4100118022415720
+</details>
+
 ## 📦 Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags). 
