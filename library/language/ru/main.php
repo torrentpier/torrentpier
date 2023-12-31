@@ -198,7 +198,7 @@ $lang['WHOSONLINE'] = 'Кто сейчас на форуме';
 $lang['MARK_ALL_FORUMS_READ'] = 'Отметить все форумы как прочтенные';
 $lang['FORUMS_MARKED_READ'] = 'Все форумы были отмечены как прочтенные';
 
-$lang['LATEST_NEWS'] = 'Последние новости';
+$lang['LATEST_NEWS'] = 'Новости трекера';
 $lang['NETWORK_NEWS'] = 'Новости в сети';
 $lang['SUBFORUMS'] = 'Подфорумы';
 
