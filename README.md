@@ -28,7 +28,7 @@ TorrentPier is currently in active development. The goal is to remove all legacy
 modern standards. If you want to go deep on the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) 
 and go from there. The documentation will be translated into english in the near future, currently russian is the main language of it.
 
-## 🛠 Features
+## ✨ Features
 * Rich forum browsing/moderation tools
 * High-load capable, heavily configurable announcer
 * Scrape support
@@ -103,15 +103,14 @@ Support this project by becoming a sponsor or a backer.
 [![OpenCollective backers](https://opencollective.com/torrentpier/backers/badge.svg)](https://opencollective.com/torrentpier)
 
 <details>
-<summary>Monero</summary>
-42zJE3FDvN8foP9QYgDrBjgtd7h2FipGCGmAcmG5VFQuRkJBGMbCvoLSmivepmAMEgik2E8MPWUzKaoYsGCtmhvL7ZN73jh
+  <summary>Monero</summary>
+  42zJE3FDvN8foP9QYgDrBjgtd7h2FipGCGmAcmG5VFQuRkJBGMbCvoLSmivepmAMEgik2E8MPWUzKaoYsGCtmhvL7ZN73jh
 </details>
 
 <details>
-<summary>Bitcoin</summary>
-bc1qselchy0nnh7xl99glfffedqp7p9gpvatdr9dz9
+  <summary>Bitcoin</summary>
+  bc1qselchy0nnh7xl99glfffedqp7p9gpvatdr9dz9
 </details>
-
 
 ## 📦 Versioning
 
