@@ -1,4 +1,5 @@
 User-agent: *
+
 Disallow: /bt/*
 Disallow: /dl.php
 Disallow: /group.php
@@ -10,4 +11,4 @@ Disallow: /privmsg.php
 Disallow: /profile.php
 
 Host: torrentpier.com
-Sitemap: http://torrentpier.com/sitemap.xml
+Sitemap: http://torrentpier.com/sitemap/sitemap.xml

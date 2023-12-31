@@ -55,14 +55,13 @@ For installation, you need to follow a few simple steps:
 3. After run `composer install` on the project directory
 4. Create database and import dump located at **install/sql/mysql.sql**
 5. Edit database configuration settings in the configuration file or a local copy (see below)
-6. Edit domain name in the configuration file or a local copy (see below)
-7. Edit domain ssl setting in the configuration file or a local copy (see below)
-8. Edit this files:
+6. Edit domain name in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
+7. Edit this files:
    1. **favicon.png** (change on your own)
    2. **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
    3. **opensearch_desc.xml** (change the description and address on your own)
    4. **opensearch_desc_bt.xml** (change the description and address on your own)
-9. Log in to the forum with admin/admin login/password and finish setting up via admin panel
+8. Log in to the forum with admin/admin login/password and finish setting up via admin panel
 
 ## 🔑 Access rights on folders and files
 
