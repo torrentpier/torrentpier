@@ -5,7 +5,7 @@
 
 **Merged pull requests:**
 
-- Release 2.4.0 🔥 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Release 2.4.0 ☃️ ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Updated copyright year [\#1201](https://github.com/torrentpier/torrentpier/pull/1201) ([belomaxorka](https://github.com/belomaxorka))
 - Update file_list_v2.php [\#1202](https://github.com/torrentpier/torrentpier/pull/1202), [\#1256](https://github.com/torrentpier/torrentpier/pull/1256) ([kovalensky](https://github.com/kovalensky))
 - Updated TorrentPier footer text (: [\#1204](https://github.com/torrentpier/torrentpier/pull/1204) ([kovalensky](https://github.com/kovalensky))
@@ -50,6 +50,7 @@
 - Some CSS additions [\#1280](https://github.com/torrentpier/torrentpier/pull/1280) ([kovalensky](https://github.com/kovalensky))
 - Block uploading more than one torrent file [\#1293](https://github.com/torrentpier/torrentpier/pull/1293) ([belomaxorka](https://github.com/belomaxorka))
 - Added missing lang variable [\#1295](https://github.com/torrentpier/torrentpier/pull/1295) ([belomaxorka](https://github.com/belomaxorka))
+- Moved file_list_v2.php back to includes [\#1303](https://github.com/torrentpier/torrentpier/pull/1303) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1203](https://github.com/torrentpier/torrentpier/pull/1203), [\#1222](https://github.com/torrentpier/torrentpier/pull/1222), [\#1251](https://github.com/torrentpier/torrentpier/pull/1251), [\#1260](https://github.com/torrentpier/torrentpier/pull/1260), [\#1264](https://github.com/torrentpier/torrentpier/pull/1264), [\#1282](https://github.com/torrentpier/torrentpier/pull/1282), [\#1287](https://github.com/torrentpier/torrentpier/pull/1287), [\#1296](https://github.com/torrentpier/torrentpier/pull/1296), [\#1297](https://github.com/torrentpier/torrentpier/pull/1297), [\#1299](https://github.com/torrentpier/torrentpier/pull/1299), [\#1300](https://github.com/torrentpier/torrentpier/pull/1300) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0-rc2](https://github.com/torrentpier/torrentpier/tree/v2.4.0-rc2) (2023-12-12)
