@@ -199,7 +199,7 @@ class Attach
      */
     public function handle_attachments($mode)
     {
-        global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang;
+        global $is_auth, $attach_config, $refresh, $update_attachment, $post_id, $submit, $preview, $error, $error_msg, $lang;
 
         //
         // ok, what shall we do ;)
@@ -826,7 +826,7 @@ class Attach
             //bt
             // Block uploading more than one torrent file
             global $update_attachment;
-            if (!$error && !$update_attachment && $this->extension === TORRENT_EXT && in_array(TORRENT_EXT, $this->attachment_extension_list)) {
+            if (!$error && $this->extension === TORRENT_EXT && in_array(TORRENT_EXT, $this->attachment_extension_list) && !$update_attachment) {
                 $error = true;
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
