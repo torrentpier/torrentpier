@@ -54,7 +54,7 @@ For installation, you need to follow a few simple steps:
 2. Run `composer create-project torrentpier/torrentpier`
 3. After run `composer install` on the project directory
 4. Create database and import dump located at **install/sql/mysql.sql**
-5. Edit database configuration settings in the environment (`.env.example`)
+5. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
 6. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 7. Edit this files:
    1. **favicon.png** (change on your own)
@@ -81,9 +81,7 @@ and chmod 0644 for files in them. If you are not sure, leave it as is.
 ## 📌 Our recommendations
 
 * *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
-* *Local configuration copy.* - You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
-  file **.env**. Both files are created by copying the appropriate .example templates without extension. Local configuration files
-  should not be available for reading to anyone by setting up access rights for your web server.
+* *Local configuration copy.* - You can override the settings using local configuration file **library/config.local.php**.
 
 ## 💚 Contributing / Contributors
 
