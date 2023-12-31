@@ -14,7 +14,7 @@ $user->session_start();
 
 if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
     http_response_code(403);
-    die($lang['BT_PRIVATE_TRACKER']);
+    bb_simple_die($lang['BT_PRIVATE_TRACKER']);
 }
 
 $topic_id = !empty($_GET['topic']) ? (int)$_GET['topic'] : (http_response_code(404) && die($lang['INVALID_TOPIC_ID']));
@@ -30,19 +30,19 @@ $row = DB()->fetch_row($sql);
 
 if (empty($row) || empty($row['physical_filename'])) {
     http_response_code(404);
-    die($lang['TOPIC_POST_NOT_EXIST']);
+    bb_simple_die($lang['TOPIC_POST_NOT_EXIST']);
 }
 
 if (empty($row['info_hash_v2'])) {
     http_response_code(410);
-    die($lang['BT_V2_FLIST_ONLY']);
+    bb_simple_die($lang['BT_V2_FLIST_ONLY']);
 }
 
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
 
 if (!is_file($file_path)) {
     http_response_code(410);
-    die($lang['TOR_NOT_FOUND']);
+    bb_simple_die($lang['TOR_NOT_FOUND']);
 }
 
 $file_contents = file_get_contents($file_path);
@@ -54,7 +54,7 @@ if ($bb_cfg['flist_max_files']) {
 
     if ($file_count > $bb_cfg['flist_max_files']) {
         http_response_code(410);
-        die(sprintf($lang['BT_V2_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count));
+        bb_simple_die(sprintf($lang['BT_V2_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count));
     }
 }
 
@@ -62,12 +62,12 @@ try {
     $torrent = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
 } catch (\Exception $e) {
     http_response_code(410);
-    die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
+    bb_simple_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
 }
 
 if (isset($torrent['info']['private']) && IS_GUEST) {
     http_response_code(403);
-    die($lang['BT_PRIVATE_TORRENT']);
+    bb_simple_die($lang['BT_PRIVATE_TORRENT']);
 }
 
 $files = (new TorrentPier\Legacy\TorrentFileList($torrent))->fileTreeTable($torrent['info']['file tree']);
