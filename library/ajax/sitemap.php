@@ -18,8 +18,8 @@ if (!$mode = (string)$this->request['mode']) {
 }
 
 $map = new TorrentPier\Sitemap();
-$html = '';
 
+$html = '';
 switch ($mode) {
     case 'create':
         $map->createSitemap();
