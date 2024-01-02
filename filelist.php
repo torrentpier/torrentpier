@@ -17,7 +17,12 @@ if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
     bb_simple_die($lang['BT_PRIVATE_TRACKER']);
 }
 
-$topic_id = !empty($_GET['topic']) ? (int)$_GET['topic'] : (http_response_code(404) && die($lang['INVALID_TOPIC_ID']));
+$topic_id = !empty($_GET['topic']) ? (int)$_GET['topic'] : false;
+
+if (!$topic_id) {
+    http_response_code(404);
+    bb_simple_die($lang['INVALID_TOPIC_ID']);
+}
 
 $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_filename
         FROM ' . BB_BT_TORRENTS . ' t
@@ -30,7 +35,7 @@ $row = DB()->fetch_row($sql);
 
 if (empty($row) || empty($row['physical_filename'])) {
     http_response_code(404);
-    bb_simple_die($lang['TOPIC_POST_NOT_EXIST']);
+    bb_simple_die($lang['INVALID_TOPIC_ID_DB']);
 }
 
 if (empty($row['info_hash_v2'])) {

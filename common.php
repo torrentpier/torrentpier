@@ -190,7 +190,7 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
     $bytes_written = false;
     clearstatcache();
 
-    if (is_file($file) && ($max_size && filesize($file) >= $max_size)) {
+    if (is_file($file) && ($max_size && (filesize($file) >= $max_size))) {
         $file_parts = pathinfo($file);
         $new_name = ($file_parts['dirname'] . '/' . $file_parts['filename'] . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . '.' . $file_parts['extension']);
         clearstatcache();
@@ -198,6 +198,7 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
             rename($file, $new_name);
         }
     }
+
     clearstatcache();
     if (bb_mkdir(dirname($file))) {
         if ($fp = fopen($file, 'ab+')) {
