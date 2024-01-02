@@ -1672,7 +1672,7 @@ function obtain_word_list(&$orig_word, &$replacement_word)
 
 function bb_die($msg_text)
 {
-    global $ajax, $bb_cfg, $lang, $template, $theme, $userdata;
+    global $ajax, $bb_cfg, $lang, $template, $theme, $userdata, $user;
 
     if (defined('IN_AJAX')) {
         $ajax->ajax_die($msg_text);
@@ -1692,7 +1692,7 @@ function bb_die($msg_text)
 
     // If empty session
     if (empty($userdata)) {
-        $userdata = \TorrentPier\Sessions::session_pagestart();
+        $userdata = $user->session_start();
     }
 
     // If the header hasn't been output then do it
