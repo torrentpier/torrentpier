@@ -599,7 +599,7 @@ function bt_show_ip($ip, $port = '')
         return $ip;
     }
 
-    return ($bb_cfg['bt_show_ip_only_moder']) ? false : \TorrentPier\Helpers\IPHelper::anonymizeIP($ip);
+    return $bb_cfg['bt_show_ip_only_moder'] ? false : \TorrentPier\Helpers\IPHelper::anonymizeIP($ip);
 }
 
 function bt_show_port($port)
@@ -610,7 +610,7 @@ function bt_show_port($port)
         return $port;
     }
 
-    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
+    return $bb_cfg['bt_show_port_only_moder'] ? false : $port;
 }
 
 function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
@@ -843,7 +843,7 @@ function get_bt_userdata($user_id)
     return $btu;
 }
 
-function get_bt_ratio($btu)
+function get_bt_ratio($btu): ?float
 {
     return
         (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
@@ -851,7 +851,7 @@ function get_bt_ratio($btu)
             : null;
 }
 
-function show_bt_userdata($user_id)
+function show_bt_userdata($user_id): void
 {
     global $template;
 
