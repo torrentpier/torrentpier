@@ -13,9 +13,11 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang, $userdata, $datastore;
 
-$mode = (string)$this->request['mode'];
-$html = '';
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
+$html = '';
 switch ($mode) {
     case 'birthday_week':
         $stats = $datastore->get('stats');
@@ -122,7 +124,7 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die('Invalid mode');
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['html'] = $html;
