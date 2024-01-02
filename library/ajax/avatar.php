@@ -13,9 +13,11 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang, $user;
 
-$mode = (string)$this->request['mode'];
-$user_id = (int)$this->request['user_id'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
+$user_id = (int)$this->request['user_id'];
 if (!$user_id or !$u_data = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
@@ -33,7 +35,7 @@ switch ($mode) {
         $response = get_avatar($user_id, $new_ext_id);
         break;
     default:
-        $this->ajax_die('Invalid mode');
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = $new_ext_id WHERE user_id = $user_id LIMIT 1");

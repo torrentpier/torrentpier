@@ -17,8 +17,13 @@ if (!$bb_cfg['tor_thank']) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
-$mode = (string)$this->request['mode'];
-$topic_id = (int)$this->request['topic_id'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
+
+if (!$topic_id = (int)$this->request['topic_id']) {
+    $this->ajax_die($lang['INVALID_TOPIC_ID']);
+}
 
 switch ($mode) {
     case 'add':
@@ -47,7 +52,7 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die('Invalid mode');
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['mode'] = $mode;
