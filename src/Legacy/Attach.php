@@ -879,7 +879,7 @@ class Attach
                 $this->attach_filename = substr(trim($this->attach_filename), 0, FILENAME_MAX_LENGTH);
 
                 for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
-                    $fn_prefix = make_rand_str(FILENAME_PREFIX_LENGTH) . '_';
+                    $fn_prefix = FILENAME_PREFIX ? (make_rand_str(FILENAME_PREFIX_LENGTH) . '_') : '';
                     $new_physical_filename = clean_filename($fn_prefix . $this->attach_filename);
 
                     if (!physical_filename_already_stored($new_physical_filename)) {
