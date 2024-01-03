@@ -845,14 +845,11 @@ class Attach
             //bt end
 
             // Upload File
-
             $this->thumbnail = 0;
 
             if (!$error) {
-                //
                 // Prepare Values
                 $this->filetime = TIMENOW;
-
                 $this->filename = $r_file;
 
                 // physical filename
