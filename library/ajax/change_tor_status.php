@@ -13,13 +13,15 @@ if (!defined('IN_AJAX')) {
 
 global $userdata, $bb_cfg, $lang;
 
-if (!isset($this->request['attach_id'])) {
+if (!$attach_id = (int)$this->request['attach_id']) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }
 
-$attach_id = (int)$this->request['attach_id'];
-$mode = (string)$this->request['mode'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
+$comment = false;
 if ($bb_cfg['tor_comment']) {
     $comment = (string)$this->request['comment'];
 }
@@ -117,6 +119,9 @@ switch ($mode) {
         send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
         \TorrentPier\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
         break;
+
+    default:
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['attach_id'] = $attach_id;
