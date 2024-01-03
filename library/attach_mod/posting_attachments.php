@@ -11,11 +11,11 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-define('FILENAME_PREFIX', false);
+define('FILENAME_PREFIX', true);
 define('FILENAME_PREFIX_LENGTH', 6);
-define('FILENAME_MAX_LENGTH', 180);
+define('FILENAME_MAX_LENGTH', 128);
 define('FILENAME_CRYPTIC', false);
-define('FILENAME_CRYPTIC_LENGTH', 64);
+define('FILENAME_CRYPTIC_LENGTH', 32);
 
 /**
  * Entry Point
