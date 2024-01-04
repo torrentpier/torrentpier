@@ -856,25 +856,21 @@ class Attach
                 $this->attach_filename = $this->filename;
 
                 //bt
-                if (FILENAME_CRYPTIC) {
-                    $this->attach_filename = make_rand_str(FILENAME_CRYPTIC_LENGTH) . '_' . TIMENOW;
-                } else {
-                    $this->attach_filename = html_entity_decode(trim(stripslashes($this->attach_filename)));
-                    $this->attach_filename = pathinfo($this->attach_filename, PATHINFO_FILENAME);
-                    $this->attach_filename = str_replace([' ', '-'], '_', $this->attach_filename);
-                    $this->attach_filename = str_replace('__', '_', $this->attach_filename);
-                    $this->attach_filename = str_replace([',', '.', '!', '?', 'ь', 'Ь', 'ц', 'Ц', 'д', 'Д', ';', ':', '@', "'", '"', '&'], ['', '', '', '', 'ue', 'ue', 'oe', 'oe', 'ae', 'ae', '', '', '', '', '', 'and'], $this->attach_filename);
-                    $this->attach_filename = str_replace(['$', 'Я', '>', '<', '§', '%', '=', '/', '(', ')', '#', '*', '+', "\\", '{', '}', '[', ']'], ['dollar', 'ss', 'greater', 'lower', 'paragraph', 'percent', 'equal', '', '', '', '', '', '', '', '', '', '', ''], $this->attach_filename);
-                    // Remove non-latin characters
-                    $this->attach_filename = preg_replace('#([\xC2\xC3])([\x80-\xBF])#', 'chr(ord(\'$1\')<<6&0xC0|ord(\'$2\')&0x3F)', $this->attach_filename);
-                    $this->attach_filename = rawurlencode($this->attach_filename);
-                    $this->attach_filename = preg_replace("/(%[0-9A-F]{1,2})/i", '', $this->attach_filename);
-                    $this->attach_filename = trim($this->attach_filename . '_' . make_rand_str(13));
-                }
+                $this->attach_filename = html_entity_decode(trim(stripslashes($this->attach_filename)));
+                $this->attach_filename = pathinfo($this->attach_filename, PATHINFO_FILENAME);
+                $this->attach_filename = str_replace([' ', '-'], '_', $this->attach_filename);
+                $this->attach_filename = str_replace('__', '_', $this->attach_filename);
+                $this->attach_filename = str_replace([',', '.', '!', '?', 'ь', 'Ь', 'ц', 'Ц', 'д', 'Д', ';', ':', '@', "'", '"', '&'], ['', '', '', '', 'ue', 'ue', 'oe', 'oe', 'ae', 'ae', '', '', '', '', '', 'and'], $this->attach_filename);
+                $this->attach_filename = str_replace(['$', 'Я', '>', '<', '§', '%', '=', '/', '(', ')', '#', '*', '+', "\\", '{', '}', '[', ']'], ['dollar', 'ss', 'greater', 'lower', 'paragraph', 'percent', 'equal', '', '', '', '', '', '', '', '', '', '', ''], $this->attach_filename);
+                // Remove non-latin characters
+                $this->attach_filename = preg_replace('#([\xC2\xC3])([\x80-\xBF])#', 'chr(ord(\'$1\')<<6&0xC0|ord(\'$2\')&0x3F)', $this->attach_filename);
+                $this->attach_filename = rawurlencode($this->attach_filename);
+                $this->attach_filename = preg_replace("/(%[0-9A-F]{1,2})/i", '', $this->attach_filename);
+                $this->attach_filename = trim($this->attach_filename . '_' . make_rand_str(13));
                 $this->attach_filename = str_replace(['&amp;', '&', ' '], '_', $this->attach_filename);
                 $this->attach_filename = str_replace('php', '_php_', $this->attach_filename);
-                $this->attach_filename = substr(trim($this->attach_filename), 0, FILENAME_MAX_LENGTH);
 
+                $new_physical_filename = null;
                 for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
                     $fn_prefix = FILENAME_PREFIX ? (make_rand_str(FILENAME_PREFIX_LENGTH) . '_') : '';
                     $new_physical_filename = clean_filename($fn_prefix . $this->attach_filename);
@@ -885,8 +881,11 @@ class Attach
                     if ($i === $max_try) {
                         bb_die('Could not create filename for attachment');
                     }
+                }
 
-                    $this->attach_filename = $new_physical_filename;
+                $this->attach_filename = $new_physical_filename;
+                if (!empty($this->attach_filename)) {
+                    $this->attach_filename = substr(trim($this->attach_filename), 0, FILENAME_MAX_LENGTH);
                 }
 
                 // Do we have to create a thumbnail ?
