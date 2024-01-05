@@ -13,7 +13,11 @@ if (!defined('IN_AJAX')) {
 
 global $datastore, $lang;
 
-$ranks = $datastore->get('ranks');
+if (!$ranks = $datastore->get('ranks')) {
+    $datastore->update('ranks');
+    $ranks = $datastore->get('ranks');
+}
+
 $rank_id = (int)$this->request['rank_id'];
 
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
