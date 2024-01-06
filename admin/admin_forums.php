@@ -433,6 +433,7 @@ if ($mode) {
             if ($to_id == -1) {
                 // Delete everything from forum
                 \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $from_id, 0, true);
+                $datastore->update('stats');
             } else {
                 // Move all posts
                 $sql = 'SELECT * FROM ' . BB_FORUMS . " WHERE forum_id IN($from_id, $to_id)";
@@ -472,7 +473,6 @@ if ($mode) {
             fix_orphan_sf();
             \TorrentPier\Legacy\Group::update_user_level('all');
             $datastore->update('cat_forums');
-            $datastore->update('stats');
             CACHE('bb_cache')->rm();
 
             bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
