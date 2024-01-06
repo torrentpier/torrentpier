@@ -646,7 +646,7 @@ if (!isset($_REQUEST['dosearch'])) {
 											AND u.user_id <> " . GUEST_UID;
                     break;
                 case 'after':
-                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'], $lastvisited_days, delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
+                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'], delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
 									FROM ' . BB_USERS . "
