@@ -472,6 +472,7 @@ if ($mode) {
             fix_orphan_sf();
             \TorrentPier\Legacy\Group::update_user_level('all');
             $datastore->update('cat_forums');
+            $datastore->update('stats');
             CACHE('bb_cache')->rm();
 
             bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
