@@ -739,7 +739,7 @@ if (!$mode || $show_main_page) {
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
                         'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
                         'NUM_POSTS' => $forum_rows[$j]['forum_posts'],
-                        'PRUNE_DAYS' => $forum_rows[$j]['prune_days'] ?: '-',
+                        'PRUNE_DAYS' => !empty($forum_rows[$j]['prune_days']) ? $forum_rows[$j]['prune_days'] . '&nbsp;' . (((int)$forum_rows[$j]['prune_days'] > 1) ? $lang['DAYS'] : $lang['DAY']) : '-',
 
                         'ORDER' => $forum_rows[$j]['forum_order'],
                         'FORUM_ID' => $forum_rows[$j]['forum_id'],
