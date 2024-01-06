@@ -117,7 +117,7 @@
 	</tr>
 </table>
 <p>&nbsp;</p>
-<table width="98%" align="center">
+<table width="98%" class="bCenter">
 	<tr>
 		<td class="nav"><span class="gen">{PAGE_NUMBER}</span></td>
 		<td class="nav tRight nowrap"><span class="gen">{PAGINATION}</span></td>
