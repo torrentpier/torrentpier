@@ -9,6 +9,12 @@
 
 require __DIR__ . '/pagestart.php';
 
+// Statistics
+if (!$stats = $datastore->get('stats')) {
+    $datastore->update('stats');
+    $stats = $datastore->get('stats');
+}
+
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $module = [];
@@ -71,9 +77,9 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ]);
 
     // Get forum statistics
-    $total_posts = get_db_stat('postcount');
-    $total_users = get_db_stat('usercount');
-    $total_topics = get_db_stat('topiccount');
+    $total_posts = $stats['postcount'];
+    $total_topics = $stats['topiccount'];
+    $total_users = $stats['usercount'];
     $start_date = bb_date($bb_cfg['board_startdate']);
     $boarddays = (TIMENOW - $bb_cfg['board_startdate']) / 86400;
 
