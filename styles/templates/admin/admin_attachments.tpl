@@ -182,7 +182,7 @@
 		<input type="hidden" name="quota_change_list[]" value="{limit_row.QUOTA_ID}" />
 		<table width="100%" class="borderless">
 		<tr>
-		<td class="row1" align="center" width="10%" wrap="nowrap"><b><span class="small"><a href="{limit_row.U_VIEW}" class="small">{L_VIEW}</a></span></b></td>
+		<td class="row1 nowrap tCenter" width="10%"><b><span class="small"><a href="{limit_row.U_VIEW}" class="small">{L_VIEW}</a></span></b></td>
 		<td class="row1"><input type="text" size="20" maxlength="25" name="quota_desc_list[]" class="post" value="{limit_row.QUOTA_NAME}" /></td>
 	  </tr>
 	  </table>
