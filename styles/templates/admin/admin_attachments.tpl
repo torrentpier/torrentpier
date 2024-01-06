@@ -164,11 +164,11 @@
 		<td class="row2" align="center"><input type="text" size="8" maxlength="15" name="add_max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
 		<td class="row1" align="center"><input type="checkbox" name="add_quota_check" /></td>
 	</tr>
-    <tr align="right">
+    <tr class="tRight">
         <td class="catBottom" colspan="3">
             {S_HIDDEN_FIELDS}
-            <input type="reset" value="{L_CANCEL}" class="liteoption"/>
-            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}"/>
+            <input type="reset" value="{L_CANCEL}" class="liteoption">
+            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}">
         </td>
     </tr>
 	<tr>
@@ -191,10 +191,10 @@
 	  <td class="row1" align="center"><input type="checkbox" name="quota_id_list[]" value="{limit_row.QUOTA_ID}" /></td>
 	</tr>
     <!-- END limit_row -->
-    <tr align="right">
+    <tr class="tRight">
         <td class="catBottom" colspan="3">
-            <input type="reset" value="{L_CANCEL}" class="liteoption"/>
-            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}"/>
+            <input type="reset" value="{L_CANCEL}" class="liteoption">
+            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}">
         </td>
     </tr>
 </table>
@@ -204,7 +204,7 @@
 
 <!-- BEGIN switch_quota_limit_desc -->
 <div align="center"><h1>{L_QUOTA_LIMIT_DESC}</h1></div>
-<table width="99%" align="center">
+<table width="99%" class="bCenter">
 	<tr>
 		<td width="49%">
 		<table class="forumline">
@@ -227,7 +227,7 @@
 		<td width="2%">
 			&nbsp;&nbsp;&nbsp;
 		</td>
-		<td align="right" width="49%">
+		<td class="tRight" width="49%">
 		<table class="forumline">
 		<tr>
 					<th>{L_ASSIGNED_GROUPS} - {L_UPLOAD_QUOTA}</th>
@@ -273,13 +273,13 @@
 		<td width="2%">
 			&nbsp;&nbsp;&nbsp;
 		</td>
-		<td align="right" width="49%">
+		<td class="tRight" width="49%">
 		<table class="forumline">
 				<tr>
 					<th>{L_ASSIGNED_GROUPS} - {L_PM_QUOTA}</th>
 				</tr>
 				<tr>
-					<td class="row1" align="center">
+					<td class="row1 tCenter">
 					<select style="width:99%" name="entries[]" multiple size="5">
 <!-- END switch_quota_limit_desc -->
 					<!-- BEGIN groups_pm_row -->
