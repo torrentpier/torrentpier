@@ -1,5 +1,17 @@
 # 📖 Change Log
 
+## [v2.4.1](https://github.com/torrentpier/torrentpier/tree/v2.4.0) (2024-02-01)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0...v2.4.1)
+
+**Merged pull requests:**
+
+- Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Used declensions for days in some cases [\#1310](https://github.com/torrentpier/torrentpier/pull/1310) ([belomaxorka](https://github.com/belomaxorka))
+- Used datastore to show statistic for more performance [\#1309](https://github.com/torrentpier/torrentpier/pull/1309) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1306](https://github.com/torrentpier/torrentpier/pull/1306), [\#1307](https://github.com/torrentpier/torrentpier/pull/1307), [\#1308](https://github.com/torrentpier/torrentpier/pull/1308) ([belomaxorka](https://github.com/belomaxorka))
+- Bring back **file_list_v2.php** to includes folder [\#1303](https://github.com/torrentpier/torrentpier/pull/1303) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#1304](https://github.com/torrentpier/torrentpier/pull/1304), [\#1305](https://github.com/torrentpier/torrentpier/pull/1305) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.0](https://github.com/torrentpier/torrentpier/tree/v2.4.0) (2024-01-01)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc2...v2.4.0)
 
