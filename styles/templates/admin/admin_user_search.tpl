@@ -154,7 +154,7 @@
 </table>
 <table width="100%">
 	<tr>
-		<td align="right" valign="top"></td>
+		<td class="tRight" valign="top"></td>
 	</tr>
 </table>
 </form>
