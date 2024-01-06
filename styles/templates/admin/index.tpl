@@ -210,7 +210,7 @@
   </tr>
   <!-- END reg_user_row -->
   <tr>
-    <td colspan="3" class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+    <td colspan="3" class="row3"><img src="{SPACER}" width="1" height="1" alt=""></td>
   </tr>
   <!-- BEGIN guest_user_row -->
   <tr class="{guest_user_row.ROW_CLASS}">

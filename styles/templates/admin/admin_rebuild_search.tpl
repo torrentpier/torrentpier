@@ -194,10 +194,10 @@ function updateButton()
 			<div class="spacer_4"></div>
 
 			<table class="forumline med">
-				<col class="row1" width="30%" align="right">
-				<col class="row2" width="20%" align="center">
-				<col class="row1" width="30%" align="right">
-				<col class="row2" width="20%" align="center">
+				<col class="row1 tRight" width="30%">
+				<col class="row2 tCenter" width="20%">
+				<col class="row1 tRight" width="30%">
+				<col class="row2 tCenter" width="20%">
 				<tr>
 					<th colspan="4" class="pad_4">{L_PROCESSING_TIME_DETAILS}</th>
 				</tr>

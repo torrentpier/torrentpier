@@ -111,16 +111,16 @@
 <br />
 
 <form action="{S_POST_ACTION}" method="post" name="post">
-<table width="98%" align="center">
+<table width="98%" class="bCenter">
 	<tr>
-		<td align="center" class="nav"><span class="gen">{L_SORT_OPTIONS}</span> <a href="{U_USERNAME}">{L_USERNAME}</a> | <a href="{U_EMAIL}">{L_EMAIL_ADDRESS}</a> | <a href="{U_POSTS}">{L_POSTS}</a> | <a href="{U_JOINDATE}">{L_JOINED}</a> | <a href="{U_LASTVISIT}">{L_LAST_VISIT}</a></td>
+		<td class="nav tCenter"><span class="gen">{L_SORT_OPTIONS}</span> <a href="{U_USERNAME}">{L_USERNAME}</a> | <a href="{U_EMAIL}">{L_EMAIL_ADDRESS}</a> | <a href="{U_POSTS}">{L_POSTS}</a> | <a href="{U_JOINDATE}">{L_JOINED}</a> | <a href="{U_LASTVISIT}">{L_LAST_VISIT}</a></td>
 	</tr>
 </table>
 <p>&nbsp;</p>
 <table width="98%" align="center">
 	<tr>
 		<td class="nav"><span class="gen">{PAGE_NUMBER}</span></td>
-		<td align="right" class="nav" nowrap="nowrap"><span class="gen">{PAGINATION}</span></td>
+		<td class="nav tRight nowrap"><span class="gen">{PAGINATION}</span></td>
 	</tr>
 </table>
 <table class="forumline">
@@ -137,19 +137,19 @@
 	</tr>
 	<!-- BEGIN userrow -->
 	<tr class="gen nowrap tCenter {userrow.ROW_CLASS}">
-		<td>&nbsp;{userrow.USER}&nbsp;</td>
-		<td>&nbsp;{userrow.EMAIL}&nbsp;</td>
-		<td>&nbsp;{userrow.JOINDATE}&nbsp;</td>
-		<td>&nbsp;<a href="{userrow.U_VIEWPOSTS}" class="gen" target="_blank">{userrow.POSTS}&nbsp;</td>
-		<td>&nbsp;{userrow.LASTVISIT}&nbsp;</td>
-		<td>&nbsp;<a href="{userrow.U_MANAGE}" class="gen">{L_MANAGE}</a>&nbsp;</td>
-		<td>&nbsp;<a href="{userrow.U_PERMISSIONS}" class="gen">{L_PERMISSIONS}</a>&nbsp;</td>
-		<td>&nbsp;{userrow.BAN}&nbsp;</td>
-		<td>&nbsp;{userrow.ABLED}&nbsp;</td>
+		<td>{userrow.USER}</td>
+		<td>{userrow.EMAIL}</td>
+		<td>{userrow.JOINDATE}</td>
+		<td><a href="{userrow.U_VIEWPOSTS}" class="gen" target="_blank">{userrow.POSTS}</td>
+		<td>{userrow.LASTVISIT}</td>
+		<td><a href="{userrow.U_MANAGE}" class="gen">{L_MANAGE}</a></td>
+		<td><a href="{userrow.U_PERMISSIONS}" class="gen">{L_PERMISSIONS}</a></td>
+		<td>{userrow.BAN}</td>
+		<td>{userrow.ABLED}</td>
 	</tr>
 	<!-- END userrow -->
 	<tr>
-		<td class="row3" colspan="9"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3" colspan="9"><img src="{SPACER}" width="1" height="1" alt=""></td>
 	</tr>
 </table>
 <table width="100%">
