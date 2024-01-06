@@ -152,7 +152,7 @@ function toggle_cat_list (val)
 </tbody>
 <tr>
 	<td colspan="2" class="catBottom pad_4">
-		<input type="submit" name="submit" value="{S_SUBMIT_VALUE}" class="bold" />
+		<input type="submit" <!-- IF NOWHERE_TO_MOVE -->disabled<!-- ENDIF --> name="submit" value="{S_SUBMIT_VALUE}" class="bold" />
 	</td>
 </tr>
 </table>
