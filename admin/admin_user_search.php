@@ -635,7 +635,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             switch ($lastvisited_type) {
                 case 'in':
-                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_INTHELAST'], $lastvisited_days, delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
+                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_INTHELAST'], delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
 									FROM ' . BB_USERS . "
