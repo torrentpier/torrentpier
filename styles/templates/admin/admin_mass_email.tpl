@@ -30,7 +30,7 @@
         <tr>
             <td class="row1 tRight"><b>{L_SUBJECT}</b></td>
             <td class="row2">
-                <input type="text" name="subject" size="45" maxlength="100" style="width:98%" value="{SUBJECT}"/>
+                <input type="text" name="subject" size="45" maxlength="100" style="width:98%;" value="{SUBJECT}">
             </td>
         </tr>
         <tr>

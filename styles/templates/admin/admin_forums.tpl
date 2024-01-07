@@ -32,15 +32,15 @@ function toggle_cat_list (val)
 	</tr>
 	<tr>
 		<td>{L_FORUM_NAME}</td>
-		<td><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post" /></td>
+		<td><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post"></td>
 	</tr>
 	<tr>
 		<td>{L_FORUM_DESC}</td>
-		<td><textarea style="width: 96%;" rows="2" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
+		<td><textarea style="width: 96%;" rows="2" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
 	</tr>
 	<tr>
 		<td>{L_SF_PARENT_FORUM}</td>
-		<td><select onchange="toggle_cat_list(this.value)" name="forum_parent">{S_PARENT_FORUM}</select></td>
+		<td><select onchange="toggle_cat_list(this.value);" name="forum_parent">{S_PARENT_FORUM}</select></td>
 	</tr>
 	<tr id="cat_list" class="{CAT_LIST_CLASS}">
 		<td>{L_CATEGORY}</td>
