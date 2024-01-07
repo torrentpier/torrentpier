@@ -160,9 +160,9 @@
 		<th>{L_ADD_NEW}</th>
 	</tr>
 	<tr>
-		<td class="row1" align="center"><input type="text" size="20" maxlength="25" name="quota_description" class="post"/></td>
-		<td class="row2" align="center"><input type="text" size="8" maxlength="15" name="add_max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
-		<td class="row1" align="center"><input type="checkbox" name="add_quota_check" /></td>
+		<td class="row1 tCenter"><input type="text" size="20" maxlength="25" name="quota_description" class="post"/></td>
+		<td class="row2 tCenter"><input type="text" size="8" maxlength="15" name="add_max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
+		<td class="row1 tCenter"><input type="checkbox" name="add_quota_check" /></td>
 	</tr>
     <tr class="tRight">
         <td class="catBottom" colspan="3">

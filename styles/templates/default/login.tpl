@@ -40,7 +40,7 @@
                             <td colspan="2" class="tCenter pad_6"><input type="submit" name="login" class="bold long" value="{L_LOGIN}"></td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="center"><a href="{U_SEND_PASSWORD}" class="small">{L_FORGOTTEN_PASSWORD}</a>&nbsp;&middot;&nbsp;<a href="{U_REGISTER}" class="small">{L_REGISTER}</a></td>
+                            <td colspan="2" class="tCenter"><a href="{U_SEND_PASSWORD}" class="small">{L_FORGOTTEN_PASSWORD}</a>&nbsp;&middot;&nbsp;<a href="{U_REGISTER}" class="small">{L_REGISTER}</a></td>
                         </tr>
                     </table>
                 </div>
