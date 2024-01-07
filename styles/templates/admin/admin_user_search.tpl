@@ -31,7 +31,7 @@
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_JOINED}</b>&nbsp;<select name="date_type" class="post"><option value="before" selected>{L_BEFORE}</option><option value="after">{L_AFTER}</option></select>&nbsp;<input class="post" type="text" name="date_year" value="{YEAR}" size="4" maxlength="4" />/<input class="post" type="text" name="date_month" value="{MONTH}" size="2" maxlength="2" />/<input class="post" type="text" name="date_day" value="{DAY}" maxlength="2" size="2" />&nbsp;<input type="submit" class="post2" name="search_joindate" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_JOINED_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_JOINED}:</b>&nbsp;<select name="date_type" class="post"><option value="before" selected>{L_BEFORE}</option><option value="after">{L_AFTER}</option></select>&nbsp;<input class="post" type="text" name="date_year" value="{YEAR}" size="4" maxlength="4" />/<input class="post" type="text" name="date_month" value="{MONTH}" size="2" maxlength="2" />/<input class="post" type="text" name="date_day" value="{DAY}" maxlength="2" size="2" />&nbsp;<input type="submit" class="post2" name="search_joindate" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_JOINED_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -53,7 +53,7 @@
 	</tr>
 	<!-- END ranks_exist -->
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_POSTCOUNT}</b>&nbsp;<select name="postcount_type"><option value="equals" selected>{L_EQUALS}</option><option value="lesser">{L_LESS_THAN}</option><option value="greater">{L_GREATER_THAN}</option></select>&nbsp;<input class="post" type="text" name="postcount_value" maxlength="25" size="5" />&nbsp;<input type="submit" class="post2" name="search_postcount" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_POSTCOUNT_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_POSTCOUNT}:</b>&nbsp;<select name="postcount_type"><option value="equals" selected>{L_EQUALS}</option><option value="lesser">{L_LESS_THAN}</option><option value="greater">{L_GREATER_THAN}</option></select>&nbsp;<input class="post" type="text" name="postcount_value" maxlength="25" size="5" />&nbsp;<input type="submit" class="post2" name="search_postcount" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_POSTCOUNT_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -65,7 +65,7 @@
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_LASTVISITED}</b>&nbsp;<select name="lastvisited_type"><option value="in">{L_IN_THE_LAST}</option><option value="after">{L_AFTER_THE_LAST}</option></select>&nbsp;<select name="lastvisited_days">{LASTVISITED_LIST}</select>&nbsp;<input type="submit" class="post2" name="search_lastvisited" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_LASTVISITED_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_LASTVISITED}:</b>&nbsp;<select name="lastvisited_type"><option value="in">{L_IN_THE_LAST}</option><option value="after">{L_AFTER_THE_LAST}</option></select>&nbsp;<select name="lastvisited_days">{LASTVISITED_LIST}</select>&nbsp;<input type="submit" class="post2" name="search_lastvisited" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_LASTVISITED_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
