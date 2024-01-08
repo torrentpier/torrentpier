@@ -159,7 +159,7 @@ switch ($mode) {
             'S_MODE' => 'add',
             'SCHEDULE' => build_select('schedule', $schedule, 'select', null, null),
             'RUN_DAY' => build_select('run_day', $run_day, 0, null, null),
-            'CRON_ID' => 'none',
+            'CRON_ID' => '',
             'CRON_ACTIVE' => 1,
             'CRON_TITLE' => '',
             'CRON_SCRIPT' => '',
