@@ -20,7 +20,7 @@ if (!IS_ADMIN) {
 
 $sql[] = 'SELECT count(*) FROM `' . BB_USERS . '` WHERE `user_lastvisit` < UNIX_TIMESTAMP()-2592000 AND user_id NOT IN (' . EXCLUDED_USERS . ')';
 $sql[] = 'SELECT count(*) FROM `' . BB_USERS . '` WHERE `user_lastvisit` < UNIX_TIMESTAMP()-7776000 AND user_id NOT IN (' . EXCLUDED_USERS . ')';
-$sql[] = 'SELECT round(avg(size)/1048576) FROM `' . BB_BT_TORRENTS . '`';
+$sql[] = 'SELECT round(avg(size)) FROM `' . BB_BT_TORRENTS . '`';
 $sql[] = 'SELECT count(*) FROM `' . BB_BT_TORRENTS . '`';
 $sql[] = 'SELECT count(distinct(topic_id)) FROM `' . BB_BT_TRACKER_SNAP . '` WHERE seeders > 0';
 $sql[] = 'SELECT count(distinct(topic_id)) FROM `' . BB_BT_TRACKER_SNAP . '` WHERE seeders > 5';
@@ -31,8 +31,9 @@ echo '<html><body><head></head>';
 echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center">';
 
 foreach ($sql as $i => $query) {
-    $row = mysqli_fetch_row(DB()->query($query));
-    echo "<tr><td>{$lang['TR_STATS'][$i]}</td><td><b>{$row[0]}</b></td>";
+    $row = mysqli_fetch_row(DB()->query($query))[0];
+    $row = ($i == 2) ? humn_size($row) : $row;
+    echo "<tr><td>{$lang['TR_STATS'][$i]}</td><td><b>$row</b></td>";
 }
 
 echo '</table>';
