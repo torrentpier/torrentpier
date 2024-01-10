@@ -65,7 +65,7 @@
             <td colspan="2"><h2>{GROUP_NAME}</h2></td>
         </tr>
         <tr>
-            <td align="center" valign="top">
+            <td class="tCenter" valign="top">
                 {GROUP_AVATAR}
             </td>
             <td valign="top">
@@ -149,7 +149,7 @@
         </tr>
         <tr class="row1 tCenter">
             <td width="3%">{ROW_NUMBER}</td>
-            <td width="3%" align="center">{MOD_AVATAR}</td>
+            <td width="3%" class="tCenter">{MOD_AVATAR}</td>
             <td><b>{MOD_USER}</b></td>
             <td>{MOD_PM}</td>
             <td>{MOD_EMAIL}</td>
@@ -168,7 +168,7 @@
         <!-- BEGIN member -->
         <tr class="{member.ROW_CLASS} tCenter">
             <td width="3%">{member.ROW_NUMBER}</td>
-            <td width="3%" align="center">{member.AVATAR_IMG}</td>
+            <td width="3%" class="tCenter">{member.AVATAR_IMG}</td>
             <td>{member.USER}</td>
             <td>{member.PM}</td>
             <td>{member.EMAIL}</td>
