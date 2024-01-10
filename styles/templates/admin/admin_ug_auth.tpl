@@ -111,7 +111,7 @@ thead tr {
 </thead>
 <tfoot>
 	<tr>
-		<td colspan="{S_COLUMN_SPAN}" class="row1" align="center">
+		<td colspan="{S_COLUMN_SPAN}" class="row1 tCenter">
 			<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
 		</td>
 	</tr>

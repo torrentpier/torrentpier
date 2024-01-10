@@ -301,7 +301,7 @@
     <!-- END releases -->
     <tfoot>
     <tr>
-        <td class="cat" colspan="9" align="center"><b><a href="{U_SEARCH_RELEASES}">{L_MORE_RELEASES}</a></b></td>
+        <td class="cat tCenter" colspan="9"><b><a href="{U_SEARCH_RELEASES}">{L_MORE_RELEASES}</a></b></td>
     </tr>
     </tfoot>
 </table>

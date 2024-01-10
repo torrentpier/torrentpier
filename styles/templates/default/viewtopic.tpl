@@ -515,7 +515,7 @@ function build_poll_add_form (src_el)
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center" class="row3">
+			<td colspan="2" class="row3 tCenter">
 				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled onclick="return window.confirm('{L_DELETE_POSTS}?');" />
 				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
 				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
