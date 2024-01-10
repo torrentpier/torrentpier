@@ -51,90 +51,91 @@
 <br />
 
 <form action="{S_ATTACH_ACTION}" method="post">
-<table class="forumline">
-	<tr>
-	  <th colspan="2">{L_ATTACH_SETTINGS}</th>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_UPLOAD_DIRECTORY}<br /><span class="small">{L_UPLOAD_DIRECTORY_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="25" maxlength="100" name="upload_dir" class="post" value="{UPLOAD_DIR}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_ATTACH_IMG_PATH}<br /><span class="small">{L_ATTACH_IMG_PATH_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="25" maxlength="100" name="upload_img" class="post" value="{ATTACHMENT_IMG_PATH}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_ATTACH_TOPIC_ICON}<br /><span class="small">{L_ATTACH_TOPIC_ICON_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="25" maxlength="100" name="topic_icon" class="post" value="{TOPIC_ICON}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_ATTACH_DISPLAY_ORDER}<br /><span class="small">{L_ATTACH_DISPLAY_ORDER_EXPLAIN}</span></td>
-		<td class="row2">
-		<table class="borderless">
-			<tr>
-				<td><input type="radio" name="display_order" value="0" {DISPLAY_ORDER_DESC} /> {L_DESC}</td>
-      </tr>
-      <tr>
-        <td><input type="radio" name="display_order" value="1" {DISPLAY_ORDER_ASC} /> {L_ASC}</td>
-       </tr>
-		</table></td>
-	</tr>
-	<tr>
-	  <th colspan="2">{L_ATTACH_FILESIZE_SETTINGS}</th>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_MAX_FILESIZE_ATTACH}<br /><span class="small">{L_MAX_FILESIZE_ATTACH_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="8" maxlength="15" name="max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_ATTACH_QUOTA}<br /><span class="small">{L_ATTACH_QUOTA_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="8" maxlength="15" name="attachment_quota" class="post" value="{ATTACHMENT_QUOTA}" /> {S_FILESIZE_QUOTA}</td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_MAX_FILESIZE_PM}<br /><span class="small">{L_MAX_FILESIZE_PM_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="8" maxlength="15" name="max_filesize_pm" class="post" value="{MAX_FILESIZE_PM}" /> {S_FILESIZE_PM}</td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_DEFAULT_QUOTA_LIMIT}<br /><span class="small">{L_DEFAULT_QUOTA_LIMIT_EXPLAIN}</span></td>
-		<td class="row2">
-		<table class="borderless">
-		<tr>
-			<td nowrap="nowrap">{S_DEFAULT_UPLOAD_LIMIT}</td>
-			<td nowrap="nowrap"><span class="small">&nbsp;{L_UPLOAD_QUOTA}&nbsp;</span></td>
-		</tr>
-		<tr>
-			<td nowrap="nowrap">{S_DEFAULT_PM_LIMIT}</td>
-			<td nowrap="nowrap"><span class="small">&nbsp;{L_PM_QUOTA}&nbsp;</span></td>
-		</tr>
-		</table>
-		</td>
-	</tr>
-	<tr>
-	  <th colspan="2">{L_ATTACH_NUMBER_SETTINGS}</th>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_MAX_ATTACHMENTS}<br /><span class="small">{L_MAX_ATTACHMENTS_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="3" maxlength="3" name="max_attachments" class="post" value="{MAX_ATTACHMENTS}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_MAX_ATTACHMENTS_PM}<br /><span class="small">{L_MAX_ATTACHMENTS_PM_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="3" maxlength="3" name="max_attachments_pm" class="post" value="{MAX_ATTACHMENTS_PM}" /></td>
-	</tr>
-	<tr>
-	  <th colspan="2">{L_ATTACH_OPTIONS_SETTINGS}</th>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_DISABLE_MOD}<br /><span class="small">{L_DISABLE_MOD_EXPLAIN}</span></td>
-		<td class="row2"><input type="radio" name="disable_mod" value="1" {DISABLE_MOD_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="disable_mod" value="0" {DISABLE_MOD_NO} /> {L_NO}</td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_PM_ATTACHMENTS}<br /><span class="small">{L_PM_ATTACHMENTS_EXPLAIN}</span></td>
-		<td class="row2"><input type="radio" name="allow_pm_attach" value="1" {PM_ATTACH_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_pm_attach" value="0" {PM_ATTACH_NO} /> {L_NO}</td>
-	</tr>
-	<tr>
-		<td class="catBottom" colspan="2">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" />&nbsp;&nbsp;<input type="submit" name="settings" value="{L_TEST_SETTINGS}" class="liteoption" /></td>
-	</tr>
-</table>
+    <table class="forumline">
+        <tr>
+            <th colspan="2">{L_ATTACH_SETTINGS}</th>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_UPLOAD_DIRECTORY}<br/><span class="small">{L_UPLOAD_DIRECTORY_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="25" maxlength="100" name="upload_dir" class="post" value="{UPLOAD_DIR}"/></td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_ATTACH_IMG_PATH}<br/><span class="small">{L_ATTACH_IMG_PATH_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="25" maxlength="100" name="upload_img" class="post" value="{ATTACHMENT_IMG_PATH}"/></td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_ATTACH_TOPIC_ICON}<br/><span class="small">{L_ATTACH_TOPIC_ICON_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="25" maxlength="100" name="topic_icon" class="post" value="{TOPIC_ICON}"/></td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_ATTACH_DISPLAY_ORDER}<br/><span class="small">{L_ATTACH_DISPLAY_ORDER_EXPLAIN}</span></td>
+            <td class="row2">
+                <table class="borderless">
+                    <tr>
+                        <td><input type="radio" name="display_order" value="0" {DISPLAY_ORDER_DESC} /> {L_DESC}</td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio" name="display_order" value="1" {DISPLAY_ORDER_ASC} /> {L_ASC}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">{L_ATTACH_FILESIZE_SETTINGS}</th>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_MAX_FILESIZE_ATTACH}<br/><span class="small">{L_MAX_FILESIZE_ATTACH_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="8" maxlength="15" name="max_filesize" class="post" value="{MAX_FILESIZE}"/>{S_FILESIZE}</td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_ATTACH_QUOTA}<br/><span class="small">{L_ATTACH_QUOTA_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="8" maxlength="15" name="attachment_quota" class="post" value="{ATTACHMENT_QUOTA}"/>{S_FILESIZE_QUOTA}</td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_MAX_FILESIZE_PM}<br/><span class="small">{L_MAX_FILESIZE_PM_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="8" maxlength="15" name="max_filesize_pm" class="post" value="{MAX_FILESIZE_PM}"/>{S_FILESIZE_PM}</td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_DEFAULT_QUOTA_LIMIT}<br/><span class="small">{L_DEFAULT_QUOTA_LIMIT_EXPLAIN}</span></td>
+            <td class="row2">
+                <table class="borderless">
+                    <tr>
+                        <td nowrap="nowrap">{S_DEFAULT_UPLOAD_LIMIT}</td>
+                        <td nowrap="nowrap"><span class="small">{L_UPLOAD_QUOTA}</span></td>
+                    </tr>
+                    <tr>
+                        <td nowrap="nowrap">{S_DEFAULT_PM_LIMIT}</td>
+                        <td nowrap="nowrap"><span class="small">{L_PM_QUOTA}</span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">{L_ATTACH_NUMBER_SETTINGS}</th>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_MAX_ATTACHMENTS}<br/><span class="small">{L_MAX_ATTACHMENTS_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="3" maxlength="3" name="max_attachments" class="post" value="{MAX_ATTACHMENTS}"/></td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_MAX_ATTACHMENTS_PM}<br/><span class="small">{L_MAX_ATTACHMENTS_PM_EXPLAIN}</span></td>
+            <td class="row2"><input type="text" size="3" maxlength="3" name="max_attachments_pm" class="post" value="{MAX_ATTACHMENTS_PM}"/></td>
+        </tr>
+        <tr>
+            <th colspan="2">{L_ATTACH_OPTIONS_SETTINGS}</th>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_DISABLE_MOD}<br/><span class="small">{L_DISABLE_MOD_EXPLAIN}</span></td>
+            <td class="row2"><input type="radio" name="disable_mod" value="1" {DISABLE_MOD_YES} />&nbsp;{L_YES}&nbsp;&nbsp;<input type="radio" name="disable_mod" value="0" {DISABLE_MOD_NO} />&nbsp;{L_NO}</td>
+        </tr>
+        <tr>
+            <td class="row1" width="80%">{L_PM_ATTACHMENTS}<br/><span class="small">{L_PM_ATTACHMENTS_EXPLAIN}</span></td>
+            <td class="row2"><input type="radio" name="allow_pm_attach" value="1" {PM_ATTACH_YES} />&nbsp;{L_YES}&nbsp;&nbsp;<input type="radio" name="allow_pm_attach" value="0" {PM_ATTACH_NO} />&nbsp;{L_NO}</td>
+        </tr>
+        <tr>
+            <td class="catBottom" colspan="2">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption"/>&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption"/>&nbsp;&nbsp;<input type="submit" name="settings" value="{L_TEST_SETTINGS}" class="liteoption"/></td>
+        </tr>
+    </table>
 </form>
 
 <!--========================================================================-->
@@ -160,15 +161,15 @@
 		<th>{L_ADD_NEW}</th>
 	</tr>
 	<tr>
-		<td class="row1" align="center"><input type="text" size="20" maxlength="25" name="quota_description" class="post"/></td>
-		<td class="row2" align="center"><input type="text" size="8" maxlength="15" name="add_max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
-		<td class="row1" align="center"><input type="checkbox" name="add_quota_check" /></td>
+		<td class="row1 tCenter"><input type="text" size="20" maxlength="25" name="quota_description" class="post"/></td>
+		<td class="row2 tCenter"><input type="text" size="8" maxlength="15" name="add_max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
+		<td class="row1 tCenter"><input type="checkbox" name="add_quota_check" /></td>
 	</tr>
-    <tr align="right">
+    <tr class="tRight">
         <td class="catBottom" colspan="3">
             {S_HIDDEN_FIELDS}
-            <input type="reset" value="{L_CANCEL}" class="liteoption"/>
-            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}"/>
+            <input type="reset" value="{L_CANCEL}" class="liteoption">
+            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}">
         </td>
     </tr>
 	<tr>
@@ -178,23 +179,23 @@
 	</tr>
     <!-- BEGIN limit_row -->
 	<tr>
-	  <td class="row1" align="center">
+	  <td class="row1 tCenter">
 		<input type="hidden" name="quota_change_list[]" value="{limit_row.QUOTA_ID}" />
 		<table width="100%" class="borderless">
 		<tr>
-		<td class="row1" align="center" width="10%" wrap="nowrap"><b><span class="small"><a href="{limit_row.U_VIEW}" class="small">{L_VIEW}</a></span></b></td>
-		<td class="row1"><input type="text" size="20" maxlength="25" name="quota_desc_list[]" class="post" value="{limit_row.QUOTA_NAME}" /></td>
+		<td class="row1 nowrap tCenter" width="10%"><b><span class="small"><a href="{limit_row.U_VIEW}" class="small">{L_VIEW}</a></span></b></td>
+		<td class="row1"><input type="text" size="20" maxlength="25" name="quota_desc_list[]" class="post" value="{limit_row.QUOTA_NAME}"></td>
 	  </tr>
 	  </table>
 	  </td>
-	  <td class="row2" align="center"><input type="text" size="8" maxlength="15" name="max_filesize_list[]" class="post" value="{limit_row.MAX_FILESIZE}" /> {limit_row.S_FILESIZE}</td>
-	  <td class="row1" align="center"><input type="checkbox" name="quota_id_list[]" value="{limit_row.QUOTA_ID}" /></td>
+	  <td class="row2 tCenter"><input type="text" size="8" maxlength="15" name="max_filesize_list[]" class="post" value="{limit_row.MAX_FILESIZE}">{limit_row.S_FILESIZE}</td>
+	  <td class="row1 tCenter"><input type="checkbox" name="quota_id_list[]" value="{limit_row.QUOTA_ID}"></td>
 	</tr>
     <!-- END limit_row -->
-    <tr align="right">
+    <tr class="tRight">
         <td class="catBottom" colspan="3">
-            <input type="reset" value="{L_CANCEL}" class="liteoption"/>
-            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}"/>
+            <input type="reset" value="{L_CANCEL}" class="liteoption">
+            <input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}">
         </td>
     </tr>
 </table>
@@ -204,7 +205,7 @@
 
 <!-- BEGIN switch_quota_limit_desc -->
 <div align="center"><h1>{L_QUOTA_LIMIT_DESC}</h1></div>
-<table width="99%" align="center">
+<table width="99%" class="bCenter">
 	<tr>
 		<td width="49%">
 		<table class="forumline">
@@ -212,7 +213,7 @@
 					<th>{L_ASSIGNED_USERS} - {L_UPLOAD_QUOTA}</th>
 				</tr>
 				<tr>
-					<td class="row1" align="center">
+					<td class="row1 tCenter">
 						<select style="width:99%" name="entries[]" multiple size="5">
 <!-- END switch_quota_limit_desc -->
 						<!-- BEGIN users_upload_row -->
@@ -227,13 +228,13 @@
 		<td width="2%">
 			&nbsp;&nbsp;&nbsp;
 		</td>
-		<td align="right" width="49%">
+		<td class="tRight" width="49%">
 		<table class="forumline">
 		<tr>
 					<th>{L_ASSIGNED_GROUPS} - {L_UPLOAD_QUOTA}</th>
 				</tr>
 				<tr>
-					<td class="row1" align="center">
+					<td class="row1 tCenter">
 					<select style="width:99%" name="entries[]" multiple size="5">
 <!-- END switch_quota_limit_desc -->
 					<!-- BEGIN groups_upload_row -->
@@ -258,7 +259,7 @@
 					<th>{L_ASSIGNED_USERS} - {L_PM_QUOTA}</th>
 				</tr>
 				<tr>
-					<td class="row1" align="center">
+					<td class="row1 tCenter">
 						<select style="width:99%" name="entries[]" multiple size="5">
 <!-- END switch_quota_limit_desc -->
 						<!-- BEGIN users_pm_row -->
@@ -273,13 +274,13 @@
 		<td width="2%">
 			&nbsp;&nbsp;&nbsp;
 		</td>
-		<td align="right" width="49%">
+		<td class="tRight" width="49%">
 		<table class="forumline">
 				<tr>
 					<th>{L_ASSIGNED_GROUPS} - {L_PM_QUOTA}</th>
 				</tr>
 				<tr>
-					<td class="row1" align="center">
+					<td class="row1 tCenter">
 					<select style="width:99%" name="entries[]" multiple size="5">
 <!-- END switch_quota_limit_desc -->
 					<!-- BEGIN groups_pm_row -->

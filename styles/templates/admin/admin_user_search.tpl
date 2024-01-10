@@ -31,7 +31,7 @@
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_JOINED}</b>&nbsp;<select name="date_type" class="post"><option value="before" selected>{L_BEFORE}</option><option value="after">{L_AFTER}</option></select>&nbsp;<input class="post" type="text" name="date_year" value="{YEAR}" size="4" maxlength="4" />/<input class="post" type="text" name="date_month" value="{MONTH}" size="2" maxlength="2" />/<input class="post" type="text" name="date_day" value="{DAY}" maxlength="2" size="2" />&nbsp;<input type="submit" class="post2" name="search_joindate" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_JOINED_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_JOINED}:</b>&nbsp;<select name="date_type" class="post"><option value="before" selected>{L_BEFORE}</option><option value="after">{L_AFTER}</option></select>&nbsp;<input class="post" type="text" name="date_year" value="{YEAR}" size="4" maxlength="4" />/<input class="post" type="text" name="date_month" value="{MONTH}" size="2" maxlength="2" />/<input class="post" type="text" name="date_day" value="{DAY}" maxlength="2" size="2" />&nbsp;<input type="submit" class="post2" name="search_joindate" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_JOINED_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -53,7 +53,7 @@
 	</tr>
 	<!-- END ranks_exist -->
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_POSTCOUNT}</b>&nbsp;<select name="postcount_type"><option value="equals" selected>{L_EQUALS}</option><option value="lesser">{L_LESS_THAN}</option><option value="greater">{L_GREATER_THAN}</option></select>&nbsp;<input class="post" type="text" name="postcount_value" maxlength="25" size="5" />&nbsp;<input type="submit" class="post2" name="search_postcount" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_POSTCOUNT_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_POSTCOUNT}:</b>&nbsp;<select name="postcount_type"><option value="equals" selected>{L_EQUALS}</option><option value="lesser">{L_LESS_THAN}</option><option value="greater">{L_GREATER_THAN}</option></select>&nbsp;<input class="post" type="text" name="postcount_value" maxlength="25" size="5" />&nbsp;<input type="submit" class="post2" name="search_postcount" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_POSTCOUNT_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -65,7 +65,7 @@
 		<td class="row2">&nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_LASTVISITED}</b>&nbsp;<select name="lastvisited_type"><option value="in">{L_IN_THE_LAST}</option><option value="after">{L_AFTER_THE_LAST}</option></select>&nbsp;<select name="lastvisited_days">{LASTVISITED_LIST}</select>&nbsp;<input type="submit" class="post2" name="search_lastvisited" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_LASTVISITED_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_SEARCH_USERS_LASTVISITED}:</b>&nbsp;<select name="lastvisited_type"><option value="in">{L_IN_THE_LAST}</option><option value="after">{L_AFTER_THE_LAST}</option></select>&nbsp;<select name="lastvisited_days">{LASTVISITED_LIST}</select>&nbsp;<input type="submit" class="post2" name="search_lastvisited" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_LASTVISITED_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -91,7 +91,7 @@
 	</tr>
 	<!-- END forums_exist -->
 	<tr>
-		<td class="row1"><span class="gen"><select name="misc" class="post"><option value="admins" selected>{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option></select>&nbsp;<input type="submit" class="post2" name="search_misc" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_MISC_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_ROLE}</b>&nbsp;<select name="misc" class="post"><option value="admins" selected>{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option></select>&nbsp;<input type="submit" class="post2" name="search_misc" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_MISC_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -111,16 +111,16 @@
 <br />
 
 <form action="{S_POST_ACTION}" method="post" name="post">
-<table width="98%" align="center">
+<table width="98%" class="bCenter">
 	<tr>
-		<td align="center" class="nav"><span class="gen">{L_SORT_OPTIONS}</span> <a href="{U_USERNAME}">{L_USERNAME}</a> | <a href="{U_EMAIL}">{L_EMAIL_ADDRESS}</a> | <a href="{U_POSTS}">{L_POSTS}</a> | <a href="{U_JOINDATE}">{L_JOINED}</a> | <a href="{U_LASTVISIT}">{L_LAST_VISIT}</a></td>
+		<td class="nav tCenter"><span class="gen">{L_SORT_OPTIONS}</span> <a href="{U_USERNAME}">{L_USERNAME}</a> | <a href="{U_EMAIL}">{L_EMAIL_ADDRESS}</a> | <a href="{U_POSTS}">{L_POSTS}</a> | <a href="{U_JOINDATE}">{L_JOINED}</a> | <a href="{U_LASTVISIT}">{L_LAST_VISIT}</a></td>
 	</tr>
 </table>
 <p>&nbsp;</p>
-<table width="98%" align="center">
+<table width="98%" class="bCenter">
 	<tr>
 		<td class="nav"><span class="gen">{PAGE_NUMBER}</span></td>
-		<td align="right" class="nav" nowrap="nowrap"><span class="gen">{PAGINATION}</span></td>
+		<td class="nav tRight nowrap"><span class="gen">{PAGINATION}</span></td>
 	</tr>
 </table>
 <table class="forumline">
@@ -137,24 +137,24 @@
 	</tr>
 	<!-- BEGIN userrow -->
 	<tr class="gen nowrap tCenter {userrow.ROW_CLASS}">
-		<td>&nbsp;{userrow.USER}&nbsp;</td>
-		<td>&nbsp;{userrow.EMAIL}&nbsp;</td>
-		<td>&nbsp;{userrow.JOINDATE}&nbsp;</td>
-		<td>&nbsp;<a href="{userrow.U_VIEWPOSTS}" class="gen" target="_blank">{userrow.POSTS}&nbsp;</td>
-		<td>&nbsp;{userrow.LASTVISIT}&nbsp;</td>
-		<td>&nbsp;<a href="{userrow.U_MANAGE}" class="gen">{L_MANAGE}</a>&nbsp;</td>
-		<td>&nbsp;<a href="{userrow.U_PERMISSIONS}" class="gen">{L_PERMISSIONS}</a>&nbsp;</td>
-		<td>&nbsp;{userrow.BAN}&nbsp;</td>
-		<td>&nbsp;{userrow.ABLED}&nbsp;</td>
+		<td>{userrow.USER}</td>
+		<td>{userrow.EMAIL}</td>
+		<td>{userrow.JOINDATE}</td>
+		<td><a href="{userrow.U_VIEWPOSTS}" class="gen" target="_blank">{userrow.POSTS}</td>
+		<td>{userrow.LASTVISIT}</td>
+		<td><a href="{userrow.U_MANAGE}" class="gen">{L_MANAGE}</a></td>
+		<td><a href="{userrow.U_PERMISSIONS}" class="gen">{L_PERMISSIONS}</a></td>
+		<td>{userrow.BAN}</td>
+		<td>{userrow.ABLED}</td>
 	</tr>
 	<!-- END userrow -->
 	<tr>
-		<td class="row3" colspan="9"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3" colspan="9"><img src="{SPACER}" width="1" height="1" alt=""></td>
 	</tr>
 </table>
 <table width="100%">
 	<tr>
-		<td align="right" valign="top"></td>
+		<td class="tRight" valign="top"></td>
 	</tr>
 </table>
 </form>

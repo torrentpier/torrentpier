@@ -58,7 +58,7 @@
             </td>
         </tr>
         <tr>
-            <td align="center" class="row1">
+            <td class="row1 tCenter">
                 <table class="fieldsets borderless">
                     <tr>
                         <td valign="top" class="row1">

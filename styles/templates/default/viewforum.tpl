@@ -632,7 +632,7 @@ td.topic_id { cursor: pointer; }
 <!-- IF LOGGED_IN -->
 <p class="med"><a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a></p>
 <!-- IF IS_AM -->
-<p class="mrg_2 tRight">{L_AUTOCLEAN}: <!-- IF PRUNE_DAYS --><b>{PRUNE_DAYS} {L_DAYS}</b><!-- ELSE -->{L_DISABLED}<!-- ENDIF --></p>
+<p class="mrg_2 tRight">{L_AUTOCLEAN}: <!-- IF PRUNE_DAYS --><b>{PRUNE_DAYS}</b><!-- ELSE -->{L_DISABLED}<!-- ENDIF --></p>
 <!-- ENDIF -->
 
 <!-- IF IS_ADMIN -->

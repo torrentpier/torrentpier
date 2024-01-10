@@ -269,7 +269,7 @@ function go_to_page ()
 			<a href="{U_GROUPS}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a>
 		</td>
-		<td class="nowrap" align="right">
+		<td class="nowrap tRight">
 			<!-- IF LOGGED_IN -->
 				<!-- IF HAVE_NEW_PM || HAVE_UNREAD_PM -->
 					<a href="{U_READ_PM}" class="new-pm-link"><b>{L_PRIVATE_MESSAGES}: {PM_INFO}</b></a>

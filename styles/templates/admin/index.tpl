@@ -203,19 +203,19 @@
   </tr>
   <!-- BEGIN reg_user_row -->
   <tr class="{reg_user_row.ROW_CLASS}">
-    <td class="bold" nowrap="nowrap">{reg_user_row.USER}</td>
-    <td align="center" nowrap="nowrap"><b>{L_LOGIN}:</b> {reg_user_row.STARTED} | <b>{L_LAST_UPDATED}:</b> {reg_user_row.LASTUPDATE}</td>
+    <td class="bold nowrap">{reg_user_row.USER}</td>
+    <td class="nowrap tCenter"><b>{L_LOGIN}:</b> {reg_user_row.STARTED} | <b>{L_LAST_UPDATED}:</b> {reg_user_row.LASTUPDATE}</td>
     <td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a>
     </td>
   </tr>
   <!-- END reg_user_row -->
   <tr>
-    <td colspan="3" class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+    <td colspan="3" class="row3"><img src="{SPACER}" width="1" height="1" alt=""></td>
   </tr>
   <!-- BEGIN guest_user_row -->
   <tr class="{guest_user_row.ROW_CLASS}">
-    <td nowrap="nowrap">{L_GUEST}</td>
-    <td align="center">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</td>
+    <td class="nowrap">{L_GUEST}</td>
+    <td class="tCenter">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</td>
     <td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" target="_blank">{guest_user_row.IP_ADDRESS}</a></td>
   </tr>
   <!-- END guest_user_row -->
