@@ -54,9 +54,9 @@
 	</tr>
 	<!-- BEGIN forum_row -->
 	<tr>
-		<td class="{cat_row.forum_row.ROW_CLASS}<!-- IF cat_row.forum_row.IS_SUBFORUM --> sf<!-- ENDIF -->">{cat_row.forum_row.FORUM_NAME}</td>
+		<td class="{cat_row.forum_row.ROW_CLASS} <!-- IF cat_row.forum_row.IS_SUBFORUM -->sf<!-- ENDIF -->">{cat_row.forum_row.FORUM_NAME}</td>
 		<!-- BEGIN forum_auth_data -->
-		<td class="{cat_row.forum_row.ROW_CLASS}" align="center"><span class="med" title="{cat_row.forum_row.forum_auth_data.AUTH_EXPLAIN}">{cat_row.forum_row.forum_auth_data.CELL_VALUE}</span></td>
+		<td class="{cat_row.forum_row.ROW_CLASS} tCenter"><span class="med" title="{cat_row.forum_row.forum_auth_data.AUTH_EXPLAIN}">{cat_row.forum_row.forum_auth_data.CELL_VALUE}</span></td>
 		<!-- END forum_auth_data -->
 	</tr>
 	<!-- END forum_row -->
@@ -75,7 +75,7 @@
 	<tr>
 		<td class="row1">{CAT_NAME}</td>
 		<!-- BEGIN forum_auth_data -->
-		<td class="row1" align="center">{forum_auth_data.S_AUTH_LEVELS_SELECT}</td>
+		<td class="row1 tCenter">{forum_auth_data.S_AUTH_LEVELS_SELECT}</td>
 		<!-- END forum_auth_data -->
 	</tr>
 	<tr>

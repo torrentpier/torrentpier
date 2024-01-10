@@ -99,13 +99,9 @@ thead tr {
 <thead>
 	<tr>
 		<td class="row2 tdHead" valign="center" width="20%">{L_FORUM}</td>
-		<td
-			id="type_{AUTH_MOD_BF}"
-			class="row2 tdHead" valign="center" width="20%">{L_MODERATOR_STATUS}</td>
+		<td id="type_{AUTH_MOD_BF}" class="row2 tdHead" valign="center" width="20%">{L_MODERATOR_STATUS}</td>
 		<!-- BEGIN acltype -->
-		<td
-			id="type_{acltype.ACL_TYPE_BF}"
-			class="row2 tdHead" valign="center">{acltype.ACL_TYPE_NAME}</td>
+		<td id="type_{acltype.ACL_TYPE_BF}" class="row2 tdHead" valign="center">{acltype.ACL_TYPE_NAME}</td>
 		<!-- END acltype -->
 	</tr>
 </thead>
