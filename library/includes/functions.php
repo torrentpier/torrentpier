@@ -303,10 +303,6 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
         $f_access = [$f_access['forum_id'] => $f_access];
     }
 
-    if (empty($f_access)) {
-        trigger_error(__FUNCTION__ . '(): empty $f_access', E_USER_ERROR);
-    }
-
     //
     // Get user or group permissions
     //
