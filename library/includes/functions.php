@@ -264,11 +264,6 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
 {
     global $lang, $bf, $datastore;
 
-    // Check for forum existence
-    if (!forum_exists($forum_id)) {
-        return [];
-    }
-
     $is_guest = true;
     $is_admin = false;
     $auth = $auth_fields = $u_access = [];
