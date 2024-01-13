@@ -304,7 +304,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     }
 
     if (empty($f_access)) {
-        trigger_error(__FUNCTION__ . '(): empty $f_access', E_USER_ERROR);
+        return [];
     }
 
     //
@@ -802,7 +802,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
-        $email = $lang['NOSELECT'];
+        $email = $lang['HIDDEN_USER'];
     }
 
     if ($row['user_website']) {

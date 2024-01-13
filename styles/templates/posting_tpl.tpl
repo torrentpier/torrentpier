@@ -4717,7 +4717,7 @@ $(function(){
 			<fieldset>
 			<legend>Включить/Загрузить</legend>
 			<div style="padding: 2px 12px 6px;">
-			Шаблоны: &nbsp;
+            {L_RELEASE}: &nbsp;
 			<!-- IF TPL_SELECT -->{TPL_SELECT} &nbsp;
 			<input type="button" value="Включить в этом форуме" class="bold" onclick="ajax.topic_tpl('assign', {tpl_id: $('#forum_tpl_select').val()})" /> &nbsp;
 			<input type="button" value="Загрузить" onclick="ajax.topic_tpl('load')" /> &nbsp;
@@ -4728,7 +4728,7 @@ $(function(){
 			<!-- IF NO_TPL_ASSIGNED -->
 			В этом форуме шаблоны <b>не включены</b><br />
 			<!-- ELSE -->
-			Сейчас в этом форуме включен шаблон <b>{TPL_NAME}</b><br />
+			Сейчас в этом форуме включен шаблон: <b>{TPL_NAME}</b><br />
 			<!-- ENDIF -->
 			</span>
 			</div>
@@ -4745,7 +4745,7 @@ $(function(){
 			<div class="label"><a href="{POST_URL}{TPL_RULES_POST_ID}#{TPL_RULES_POST_ID}" id="tpl-rules-link" target="_blank">Правила</a> (ссылка на сообщение с правилами или номер сообщения):</div>
 			<input type="text" id="tpl-rules-save" size="60" value="{TPL_RULES_POST_ID}" style="width: 75%" /><br />
 
-			<div class="label">Комментарий:</div>
+			<div class="label">{L_COMMENT}:</div>
 			<textarea id="tpl-comment-save" rows="2" cols="80" class="editor" style="width: 90%">{TPL_COMMENT}</textarea>
 
 			<div class="label">Последний раз редактировалось: <i id="tpl-last-edit-time">{TPL_LAST_EDIT_TIME}</i> by <b id="tpl-last-edit-by">{TPL_LAST_EDIT_USER}</b></div>
@@ -4769,7 +4769,7 @@ $(function(){
 			<div class="label">Правила (ссылка на сообщение с правилами или номер сообщения):</div>
 			<input type="text" id="tpl-rules-new" size="60" value="" style="width: 75%" /><br />
 
-			<div class="label">Комментарий:</div>
+			<div class="label">{L_COMMENT}:</div>
 			<textarea id="tpl-comment-new" rows="2" cols="10" class="editor" style="width: 100%"></textarea><br />
 
 			<input type="button" class="bold" value="Создать новый шаблон" onclick="ajax.topic_tpl('new');" /><br /><br />

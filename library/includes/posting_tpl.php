@@ -74,7 +74,7 @@ if ($edit_tpl_mode) {
             'TPL_COMMENT' => $tpl_data['tpl_comment'],
             'TPL_RULES_POST_ID' => $tpl_data['tpl_rules_post_id'],
             'TPL_LAST_EDIT_TIME' => bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i'),
-            'TPL_LAST_EDIT_USER' => get_username((int)$tpl_data['tpl_last_edit_by']),
+            'TPL_LAST_EDIT_USER' => profile_url(get_userdata((int)$tpl_data['tpl_last_edit_by'])),
             'TPL_LAST_EDIT_TIMESTAMP' => $tpl_data['tpl_last_edit_tm']
         ]);
     }
