@@ -802,7 +802,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
-        $email = $lang['NOSELECT'];
+        $email = $lang['HIDDEN_USER'];
     }
 
     if ($row['user_website']) {
