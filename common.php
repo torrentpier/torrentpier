@@ -39,6 +39,7 @@ if (!defined('BB_SCRIPT')) {
 }
 
 header('X-Frame-Options: SAMEORIGIN');
+date_default_timezone_set('UTC');
 
 // Cloudflare
 if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {

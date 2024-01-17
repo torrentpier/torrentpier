@@ -40,8 +40,7 @@ function send_file_to_browser($attachment, $upload_dir)
     // Please do not change this, it is a security precaution
     if (!str_contains($attachment['mimetype'], 'image')) {
         $attachment['mimetype'] = 'application/octet-stream';
-    }
-    else {
+    } else {
         header('Cache-Control: public, max-age=3600');
     }
 
@@ -147,7 +146,7 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
 
 // Check the auth rights
 if (!$authorised) {
-    bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);
+    bb_die($lang['SORRY_AUTH_VIEW_ATTACH'], 403);
 }
 
 $datastore->rm('cat_forums');

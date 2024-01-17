@@ -82,7 +82,7 @@ function topic_info($topic_id)
 	";
 
     if (!$torrent = DB()->fetch_row($sql)) {
-        bb_die($lang['TOPIC_POST_NOT_EXIST']);
+        bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
     }
 
     return $torrent;
