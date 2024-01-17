@@ -15,7 +15,7 @@ if (!defined('BB_ROOT')) {
 define('APP_NAME', 'TorrentPier');
 define('DEBUG_TELEGRAM_SENDER', [
     // Send bug reports to developers
-    // Better not turn it off. But you can turn it off anyway for privacy reasons.
+    // Better not turn it off! But you can turn it off anyway for privacy reasons (It's easy, just remove this constant)
     'token' => '5956771201:AAFQZ4edS475VWdfdbeSuAvBnhzHnhg-hCc',
     'chat_id' => 669508248
 ]);

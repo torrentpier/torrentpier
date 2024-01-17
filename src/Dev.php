@@ -117,7 +117,7 @@ class Dev
         /**
          * Send debug to us :D
          */
-        if (is_array(DEBUG_TELEGRAM_SENDER)) {
+        if (defined('DEBUG_TELEGRAM_SENDER') && is_array(DEBUG_TELEGRAM_SENDER)) {
             $telegramSender = new PlainTextHandler();
             $telegramSender->loggerOnly(true);
             $telegramSender->setLogger((new Logger(APP_NAME,
