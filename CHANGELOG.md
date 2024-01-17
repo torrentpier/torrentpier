@@ -11,6 +11,7 @@
 - Used `humn_size()` to count average of releases in tr_stats.php [\#1313](https://github.com/torrentpier/torrentpier/pull/1313) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements in default template [\#1312](https://github.com/torrentpier/torrentpier/pull/1312) ([belomaxorka](https://github.com/belomaxorka))
 - Set response code in some cases [\#1319](https://github.com/torrentpier/torrentpier/pull/1319) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed HTTP 500 while cron running in server-side [\#1321](https://github.com/torrentpier/torrentpier/pull/1321) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1306](https://github.com/torrentpier/torrentpier/pull/1306), [\#1307](https://github.com/torrentpier/torrentpier/pull/1307), [\#1308](https://github.com/torrentpier/torrentpier/pull/1308), [\#1315](https://github.com/torrentpier/torrentpier/pull/1315) ([belomaxorka](https://github.com/belomaxorka))
 - Updated deps [\#1304](https://github.com/torrentpier/torrentpier/pull/1304), [\#1305](https://github.com/torrentpier/torrentpier/pull/1305) ([belomaxorka](https://github.com/belomaxorka))
 
