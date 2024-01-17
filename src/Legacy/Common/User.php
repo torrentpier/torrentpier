@@ -483,7 +483,7 @@ class User
             }
         } else {
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
-            $c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
+            $c_sdata_curr = $this->sessiondata ? serialize($this->sessiondata) : null;
 
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, httponly: true);
