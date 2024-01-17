@@ -13,6 +13,12 @@ if (!defined('BB_ROOT')) {
 
 // System
 define('APP_NAME', 'TorrentPier');
+define('DEBUG_TELEGRAM_SENDER', [
+    // Send bug reports to developers
+    // Better not turn it off. But you can turn it off anyway for privacy reasons.
+    'token' => '5956771201:AAFQZ4edS475VWdfdbeSuAvBnhzHnhg-hCc',
+    'chat_id' => 669508248
+]);
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('ADMIN_DIR', BB_PATH . '/admin');
