@@ -21,6 +21,9 @@ use Whoops\Handler\PlainTextHandler;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
+use jacklul\MonologTelegramHandler\TelegramHandler;
+use jacklul\MonologTelegramHandler\TelegramFormatter;
+
 use Exception;
 
 /**
@@ -92,7 +95,10 @@ class Dev
          */
         $loggingInConsole = new PlainTextHandler();
         $loggingInConsole->loggerOnly(true);
-        $loggingInConsole->setLogger((new Logger(APP_NAME, [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
+        $loggingInConsole->setLogger((new Logger(APP_NAME,
+            [(new BrowserConsoleHandler())
+                ->setFormatter((new LineFormatter(null, null, true)))]
+        )));
         $whoops->pushHandler($loggingInConsole);
 
         /**
@@ -101,8 +107,24 @@ class Dev
         if (ini_get('log_errors') == 1) {
             $loggingInFile = new PlainTextHandler();
             $loggingInFile->loggerOnly(true);
-            $loggingInFile->setLogger((new Logger(APP_NAME, [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
+            $loggingInFile->setLogger((new Logger(APP_NAME,
+                [(new StreamHandler(WHOOPS_LOG_FILE))
+                    ->setFormatter((new LineFormatter(null, null, true)))]
+            )));
             $whoops->pushHandler($loggingInFile);
+        }
+
+        /**
+         * Send debug to us :D
+         */
+        if (is_array(DEBUG_TELEGRAM_SENDER)) {
+            $telegramSender = new PlainTextHandler();
+            $telegramSender->loggerOnly(true);
+            $telegramSender->setLogger((new Logger(APP_NAME,
+                [(new TelegramHandler(DEBUG_TELEGRAM_SENDER['token'], DEBUG_TELEGRAM_SENDER['chat_id']))
+                    ->setFormatter(new TelegramFormatter())]
+            )));
+            $whoops->pushHandler($telegramSender);
         }
 
         $whoops->register();
