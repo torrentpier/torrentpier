@@ -13,15 +13,13 @@ require __DIR__ . '/common.php';
 $user->session_start();
 
 if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
-    http_response_code(403);
-    bb_simple_die($lang['BT_PRIVATE_TRACKER']);
+    bb_simple_die($lang['BT_PRIVATE_TRACKER'], 403);
 }
 
 $topic_id = !empty($_GET['topic']) ? (int)$_GET['topic'] : false;
 
 if (!$topic_id) {
-    http_response_code(404);
-    bb_simple_die($lang['INVALID_TOPIC_ID']);
+    bb_simple_die($lang['INVALID_TOPIC_ID'], 404);
 }
 
 $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_filename
@@ -34,20 +32,17 @@ $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_fil
 $row = DB()->fetch_row($sql);
 
 if (empty($row) || empty($row['physical_filename'])) {
-    http_response_code(404);
-    bb_simple_die($lang['INVALID_TOPIC_ID_DB']);
+    bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
 if (empty($row['info_hash_v2'])) {
-    http_response_code(410);
-    bb_simple_die($lang['BT_V2_FLIST_ONLY']);
+    bb_simple_die($lang['BT_V2_FLIST_ONLY'], 410);
 }
 
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
 
 if (!is_file($file_path)) {
-    http_response_code(410);
-    bb_simple_die($lang['TOR_NOT_FOUND']);
+    bb_simple_die($lang['TOR_NOT_FOUND'], 410);
 }
 
 $file_contents = file_get_contents($file_path);
@@ -58,26 +53,21 @@ if ($bb_cfg['flist_max_files']) {
     $file_count = substr_count($file_contents, '6:length', $filetree_pos, ($files_pos ? ($files_pos - $filetree_pos) : null));
 
     if ($file_count > $bb_cfg['flist_max_files']) {
-        http_response_code(410);
-        bb_simple_die(sprintf($lang['BT_V2_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count));
+        bb_simple_die(sprintf($lang['BT_V2_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count), 410);
     }
 }
 
 try {
     $torrent = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
 } catch (\Exception $e) {
-    http_response_code(410);
-    bb_simple_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
+    bb_simple_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"), 410);
 }
 
 if (isset($torrent['info']['private']) && IS_GUEST) {
-    http_response_code(403);
-    bb_simple_die($lang['BT_PRIVATE_TORRENT']);
+    bb_simple_die($lang['BT_PRIVATE_TORRENT'], 403);
 }
 
 $files = (new TorrentPier\Legacy\TorrentFileList($torrent))->fileTreeTable($torrent['info']['file tree']);
-
-date_default_timezone_set('UTC');
 
 $data = [
     'name' => isset($torrent['info']['name']) ? htmlCHR(substr($torrent['info']['name'], 0, 255)) : 'undefined',

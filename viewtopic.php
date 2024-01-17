@@ -55,7 +55,7 @@ if (isset($_REQUEST['single'])) {
 }
 
 if (!$topic_id && !$post_id) {
-    bb_die($lang['TOPIC_POST_NOT_EXIST']);
+    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
 }
 
 $tracking_topics = get_tracks('topic');
@@ -100,12 +100,12 @@ if ($topic_id) {
 		WHERE p.post_id = $post_id
 	";
 } else {
-    bb_die($lang['TOPIC_POST_NOT_EXIST']);
+    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
 }
 
 if (!$t_data = DB()->fetch_row($sql)) {
     meta_refresh('index.php', 10);
-    bb_die($lang['TOPIC_POST_NOT_EXIST']);
+    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
 }
 
 $forum_topic_data =& $t_data;
@@ -166,7 +166,7 @@ if (!$is_auth['auth_read']) {
         $redirect .= ($start && !$post_id) ? "&start=$start" : '';
         redirect(LOGIN_URL . "?redirect=$redirect");
     }
-    bb_die($lang['TOPIC_POST_NOT_EXIST']);
+    bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
 }
 
 $forum_name = $t_data['forum_name'];

@@ -124,7 +124,7 @@ switch ($mode) {
         if ($tpl_data['tpl_last_edit_tm'] > $this->request['tpl_l_ed_tst'] && $tpl_data['tpl_last_edit_by'] != $userdata['user_id']) {
             $last_edit_by_username = get_username((int)$tpl_data['tpl_last_edit_by']);
             $msg = "Изменения не были сохранены!\n\n";
-            $msg .= 'Шаблон был отредактирован: ' . htmlCHR($last_edit_by_username) . ', ' . bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i');
+            $msg .= 'Шаблон был отредактирован: ' . html_ent_decode($last_edit_by_username) . ', ' . bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i');
             $this->ajax_die($msg);
         }
         $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id";

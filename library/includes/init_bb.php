@@ -444,15 +444,14 @@ if (
  * Exit if board is disabled via trigger
  */
 if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
-    http_response_code(503);
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();
-        bb_die('BOARD_DISABLE');
+        bb_die('BOARD_DISABLE', 503);
     } elseif (is_file(BB_DISABLED)) {
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
-        bb_die('BOARD_DISABLE_CRON');
+        bb_die('BOARD_DISABLE_CRON', 503);
     }
 }
