@@ -727,9 +727,9 @@ class User
      * @param $auth_type
      * @param string $return_as
      *
-     * @return array|bool|string
+     * @return array|string
      */
-    public function get_excluded_forums($auth_type, $return_as = 'csv')
+    public function get_excluded_forums($auth_type, string $return_as = 'csv')
     {
         $excluded = [];
 
@@ -754,14 +754,13 @@ class User
             }
         }
 
-        switch ($return_as) {
-            case   'csv':
-                return implode(',', $excluded);
-            case 'array':
-                return $excluded;
-            case  'flip':
-                return array_flip(explode(',', $excluded));
-        }
+        return match ($return_as) {
+            'csv' => implode(',', $excluded),
+            'flip_csv' => implode(',', array_flip($excluded)),
+            'array' => $excluded,
+            'flip' => array_flip($excluded),
+            default => [],
+        };
     }
 
     /**

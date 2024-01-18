@@ -269,6 +269,11 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     $auth = $auth_fields = $u_access = [];
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
+    // Check forum existence
+    if ($add_auth_type_desc && !forum_exists($forum_id)) {
+        return [];
+    }
+
     //
     // Get $auth_fields
     //
@@ -304,7 +309,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     }
 
     if (empty($f_access)) {
-        return [];
+        trigger_error(__FUNCTION__ . '(): empty $f_access', E_USER_ERROR);
     }
 
     //
