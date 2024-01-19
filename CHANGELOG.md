@@ -6,7 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
-- Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka))
+- Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Used declensions for days in some cases [\#1310](https://github.com/torrentpier/torrentpier/pull/1310) ([belomaxorka](https://github.com/belomaxorka))
 - Used datastore to show statistic for more performance [\#1309](https://github.com/torrentpier/torrentpier/pull/1309) ([belomaxorka](https://github.com/belomaxorka))
 - Used `humn_size()` to count average of releases in tr_stats.php [\#1313](https://github.com/torrentpier/torrentpier/pull/1313) ([belomaxorka](https://github.com/belomaxorka))
