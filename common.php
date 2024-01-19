@@ -45,7 +45,7 @@ date_default_timezone_set('UTC');
 $allowedCDNs = ['HTTP_X_FORWARDED_FOR', 'HTTP_FASTLY_CLIENT_IP', 'HTTP_CF_CONNECTING_IP'];
 foreach ($allowedCDNs as $allowedCDN) {
     if (isset($_SERVER[$allowedCDN]) && filter_var($_SERVER[$allowedCDN], FILTER_VALIDATE_IP)) {
-        $_SERVER['REMOTE_ADDR'] = $allowedCDN;
+        $_SERVER['REMOTE_ADDR'] = $_SERVER[$allowedCDN];
     }
 }
 
