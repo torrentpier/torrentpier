@@ -41,9 +41,12 @@ if (!defined('BB_SCRIPT')) {
 header('X-Frame-Options: SAMEORIGIN');
 date_default_timezone_set('UTC');
 
-// Cloudflare
-if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-    $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+// Set remote address
+$allowedCDNs = ['HTTP_X_FORWARDED_FOR', 'HTTP_FASTLY_CLIENT_IP', 'HTTP_CF_CONNECTING_IP'];
+foreach ($allowedCDNs as $allowedCDN) {
+    if (isset($_SERVER[$allowedCDN]) && filter_var($_SERVER[$allowedCDN], FILTER_VALIDATE_IP)) {
+        $_SERVER['REMOTE_ADDR'] = $allowedCDN;
+    }
 }
 
 // Get all constants
