@@ -64,12 +64,11 @@ if (!isset($_REQUEST['dosearch'])) {
     }
 
     $forums = [];
+    $last_cat_id = -1;
+    $forums_list = '';
 
     if (DB()->num_rows($result) != 0) {
         $template->assign_block_vars('forums_exist', []);
-
-        $last_cat_id = -1;
-        $forums_list = '';
 
         while ($row = DB()->sql_fetchrow($result)) {
             if ($row['cat_id'] != $last_cat_id) {
