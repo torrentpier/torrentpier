@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29829118bcf2c44f41d12e79091d79e6",
+    "content-hash": "3e19fe76f513cea154195f8eb132bfa0",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -1036,6 +1036,67 @@
                 }
             ],
             "time": "2023-12-03T20:05:35+00:00"
+        },
+        {
+            "name": "jacklul/monolog-telegram",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jacklul/monolog-telegram.git",
+                "reference": "ec8674fbd280bbb369b5f48447259e44a92f39c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jacklul/monolog-telegram/zipball/ec8674fbd280bbb369b5f48447259e44a92f39c8",
+                "reference": "ec8674fbd280bbb369b5f48447259e44a92f39c8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "monolog/monolog": "^3.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "^3.2",
+                "vlucas/phpdotenv": "^5.0"
+            },
+            "suggest": {
+                "ext-curl": "cURL generally works better and is recommended"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jacklul\\MonologTelegramHandler\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jack'lul",
+                    "email": "jacklulcat@gmail.com",
+                    "homepage": "https://jacklul.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Monolog handler that sends logs through Telegram bot to any chat in HTML format",
+            "keywords": [
+                "bot",
+                "log",
+                "logging",
+                "monolog",
+                "telegram"
+            ],
+            "support": {
+                "issues": "https://github.com/jacklul/monolog-telegram/issues",
+                "source": "https://github.com/jacklul/monolog-telegram"
+            },
+            "time": "2023-11-21T18:26:36+00:00"
         },
         {
             "name": "josantonius/cookie",
@@ -2957,15 +3018,16 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1",
-        "ext-mysqli": "*",
-        "ext-mbstring": "*",
-        "ext-json": "*",
         "ext-bcmath": "*",
+        "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-intl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-mysqli": "*",
         "ext-xml": "*",
-        "ext-xmlwriter": "*",
-        "ext-curl": "*"
+        "ext-xmlwriter": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

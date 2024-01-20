@@ -245,25 +245,3 @@ function search_attachments($order_by, &$total_rows)
 
     return $attachments;
 }
-
-/**
- * Perform limit statement on arrays
- *
- * @param $array
- * @param $start
- * @param $pagelimit
- * @return array
- */
-function limit_array($array, $start, $pagelimit)
-{
-    // array from start - start+pagelimit
-    $limit = (count($array) < ($start + $pagelimit)) ? count($array) : $start + $pagelimit;
-
-    $limit_array = [];
-
-    for ($i = $start; $i < $limit; $i++) {
-        $limit_array[] = $array[$i];
-    }
-
-    return $limit_array;
-}
