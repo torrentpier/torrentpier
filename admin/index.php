@@ -165,7 +165,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
                 $template->assign_block_vars('reg_user_row', [
                     'ROW_CLASS' => $row_class,
-                    'USER' => profile_url($onlinerow_reg[$i]),
+                    'USER' => profile_url($onlinerow_reg[$i], true),
                     'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
                     'IP_ADDRESS' => $reg_ip,

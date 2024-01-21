@@ -280,7 +280,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
-        'USER_OR_GROUPNAME' => profile_url($this_userdata),
+        'USER_OR_GROUPNAME' => profile_url($this_userdata, true),
         'USER_LEVEL' => $lang['USER_LEVEL'] . ' : ' . $s_user_type,
         'T_USER_OR_GROUPNAME' => $lang['USERNAME'],
         'T_AUTH_TITLE' => $lang['AUTH_CONTROL_USER'],
