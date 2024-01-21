@@ -2202,7 +2202,7 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
 }
 
-function profile_url($data)
+function profile_url($data, $target_blank = false)
 {
     global $bb_cfg, $lang, $datastore;
 
@@ -2234,7 +2234,8 @@ function profile_url($data)
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
 
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && $username) {
-        $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+        $target_blank = $target_blank ? ' target="_blank" ' : '';
+        $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
 
         if (getBanInfo((int)$user_id)) {
             return '<s>' . $profile . '</s>';
