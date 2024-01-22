@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Use `target="_blank"` in admin for profile_url() redirects [\#1330](https://github.com/torrentpier/torrentpier/pull/1330) ([belomaxorka](https://github.com/belomaxorka))
 - Used declensions for days in some cases [\#1310](https://github.com/torrentpier/torrentpier/pull/1310) ([belomaxorka](https://github.com/belomaxorka))
