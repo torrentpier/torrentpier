@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You mavjud bonuslarni yo\'q. Qo
 $lang['BONUS_RETURN'] = 'urug \'bonus almashish qaytish';
 
 $lang['TRACKER'] = 'Kuzatishdan';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'ochiq mavzu';
 $lang['OPEN_IN_SAME_WINDOW'] = 'shu oynada ochish';
 $lang['SHOW_TIME_TOPICS'] = 'yaratish mavzularidan vaqt ko\'rsatadi';
