@@ -191,13 +191,6 @@ if (tCont.offsetHeight > document.body.clientHeight) {
 	tCont.style.height = document.body.clientHeight;
 }
 
-if ($.browser.mozilla) {
-	if (tBody.offsetHeight > document.body.clientHeight - 65) {
-		tBody.style.height = document.body.clientHeight - 65;
-	}
-	tCont.style.maxWidth = document.body.clientWidth - 20;
-}
-
 function flip_perm (f_id, acl_id)
 {
 	id = f_id + '_' + acl_id;
