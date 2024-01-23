@@ -1587,7 +1587,7 @@ $lang['DEL_LIST_INFO'] = 'Հեռացնել պատվերը ցուցակից, սե
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Նայում թեմաներ';
-$lang['NO_WATCHED_TOPICS'] = 'Դուք չեք տես ցանկացած թեմայի';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Վերադառնալ գլխավոր էջ';
