@@ -297,6 +297,16 @@ if (isset($_GET[$user_releases_key])) {
     }
 }
 
+// Random release
+if (isset($_GET['random_release'])) {
+    if ($random_release = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE tor_status NOT IN(" . implode(', ', array_keys($bb_cfg['tor_frozen'])) . ") ORDER BY RAND() LIMIT 1")) {
+        redirect(TOPIC_URL . $random_release['topic_id']);
+        unset($random_release);
+    } else {
+        bb_die($lang['NO_MATCH']);
+    }
+}
+
 // Restore torrents list and search settings if we have valid $search_id
 $tor_list_ary = [];
 $tor_list_sql = '';

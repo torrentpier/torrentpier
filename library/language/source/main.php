@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You do not have bonuses availab
 $lang['BONUS_RETURN'] = 'Return to the seed bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Open topics';
 $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
 $lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';
