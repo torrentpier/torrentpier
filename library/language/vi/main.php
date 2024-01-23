@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You không có tiền thưởng
 $lang['BONUS_RETURN'] = 'Trở về hạt giống thưởng đổi';
 
 $lang['TRACKER'] = 'Theo dõi';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Mở chủ đề';
 $lang['OPEN_IN_SAME_WINDOW'] = 'mở trong cùng một cửa sổ';
 $lang['SHOW_TIME_TOPICS'] = 'show thời gian của sự sáng tạo chủ đề';
