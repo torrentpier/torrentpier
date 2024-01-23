@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'For å slette en ordre fra listen, klikker du på ikon
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Så emner';
-$lang['NO_WATCHED_TOPICS'] = 'Du er ikke ser noen emner';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Tilbake til startsiden';
