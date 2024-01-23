@@ -17,6 +17,8 @@ internal_data/triggers
 library/config.local.php
 vendor
 node_modules
+/scripts.js
+/scripts-min.js
 
 ### Archives ###
 *.log
