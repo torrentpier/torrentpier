@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'To delete an order from the list, click on the icon to
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Watched topics';
-$lang['NO_WATCHED_TOPICS'] = 'You are not watching any topics';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Back to home page';
