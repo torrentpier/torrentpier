@@ -1587,7 +1587,7 @@ $lang['DEL_LIST_INFO'] = 'Da biste uklonili nalog iz liste, kliknite na ikonu li
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Gledao teme';
-$lang['NO_WATCHED_TOPICS'] = 'Vi ne gledate na bilo koju temu';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Povratak na početnu stranicu';
