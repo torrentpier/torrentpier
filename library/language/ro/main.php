@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Pentru a șterge o comandă din listă, faceți clic p
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Privit subiecte';
-$lang['NO_WATCHED_TOPICS'] = 'Tu nu sunt cu ochii pe orice subiecte';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Înapoi la pagina de start';
