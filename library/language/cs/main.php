@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Chcete-li odstranit, aby ze seznamu, klepněte na ikon
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Sledoval témata';
-$lang['NO_WATCHED_TOPICS'] = 'Nejste sledování všech témat';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Zpět na úvodní stránku';
