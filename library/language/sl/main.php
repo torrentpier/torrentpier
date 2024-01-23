@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Če želite zbrisati vrstnem redu s seznama, kliknite 
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Gledal teme';
-$lang['NO_WATCHED_TOPICS'] = 'Niste gledal vse teme';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Nazaj na domačo stran';
