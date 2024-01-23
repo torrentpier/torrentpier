@@ -14,6 +14,7 @@
 - Used datastore to show statistic for more performance [\#1309](https://github.com/torrentpier/torrentpier/pull/1309) ([belomaxorka](https://github.com/belomaxorka))
 - Used `humn_size()` to count average of releases in tr_stats.php [\#1313](https://github.com/torrentpier/torrentpier/pull/1313) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements in default template [\#1312](https://github.com/torrentpier/torrentpier/pull/1312) ([belomaxorka](https://github.com/belomaxorka))
+- Some enhancements in default template (Part 2) [\#1322](https://github.com/torrentpier/torrentpier/pull/1322) ([belomaxorka](https://github.com/belomaxorka))
 - Set response code in some cases [\#1319](https://github.com/torrentpier/torrentpier/pull/1319) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed auth(): empty $f_access [\#1329](https://github.com/torrentpier/torrentpier/pull/1329) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed HTTP 500 while cron running in server-side [\#1321](https://github.com/torrentpier/torrentpier/pull/1321) ([belomaxorka](https://github.com/belomaxorka))

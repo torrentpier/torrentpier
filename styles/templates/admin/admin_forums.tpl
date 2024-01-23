@@ -209,7 +209,13 @@ function hl (id, on)
 		<td class="small tCenter" title="{L_TOPICS_SHORT}"><em class="med" style="color: grey">{L_TOPICS_SHORT}:</em> {c.f.NUM_TOPICS}</td>
 		<td class="small tCenter" title="{L_POSTS_SHORT}"><em class="med" style="color: grey">{L_POSTS_SHORT}:</em> {c.f.NUM_POSTS}</td>
 		<td class="med nowrap tCenter">
-			<a class="med" href="{c.f.U_FORUM_EDIT}">{L_EDIT}</a>&middot;<a class="med" href="{c.f.U_FORUM_PERM}">{L_PERMISSIONS}</a>&middot;<a class="med" href="{c.f.U_FORUM_RESYNC}">{L_SYNC}</a>&middot;<a class="med" href="{c.f.U_FORUM_DELETE}">{L_DELETE}</a>
+			<a class="med" href="{c.f.U_FORUM_EDIT}">{L_EDIT}</a>
+            &middot;
+            <a class="med" href="{c.f.U_FORUM_PERM}">{L_PERMISSIONS}</a>
+            &middot;
+            <a class="med" href="{c.f.U_FORUM_RESYNC}">{L_SYNC}</a>
+            &middot;
+            <a class="med" href="{c.f.U_FORUM_DELETE}">{L_DELETE}</a>
 		</td>
 		<td class="small nowrap tCenter"><b>{c.f.PRUNE_DAYS}</b></td>
 	</tr>

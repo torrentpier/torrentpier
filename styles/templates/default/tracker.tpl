@@ -39,10 +39,6 @@ ajax.callback.view_post = function(data) {
 	var $links = $('div.post_links', $('#post_'+post_id));
 	$post.css({ maxWidth: maxW, maxHeight: maxH });
 	$links.css({ maxWidth: maxW });
-	if ($.browser.msie) {
-		if ($post.height() > maxH) { $post.height(maxH); }
-		if ($post.width() > maxW)  { $post.width(maxW); $links.width(maxW); }
-	}
 	ajax.openedPosts[post_id] = true;
 };
 </script>
@@ -81,85 +77,76 @@ ajax.callback.view_post = function(data) {
 
 <!-- IF SHOW_SEARCH_OPT -->
 <script type="text/javascript">
-var FSN = {
-	fs_all      : '',
-	fs_og       : [],
-	fs_lb       : [],
-	sel_width   : null,
-	scroll      : $.browser.mozilla,
-	nav_inited  : false,
+    var FSN = {
+        fs_all: '',
+        fs_og: [],
+        fs_lb: [],
+        sel_width: null,
+        nav_inited: false,
 
-	show_nav: function() {
-		$('#fs>legend').empty().append( $('#fs-nav-legend').contents() );
-	},
-	build_nav: function() {
+        show_nav: function () {
+            $('#fs>legend').empty().append($('#fs-nav-legend').contents());
+        },
+        build_nav: function () {
 
-		if (FSN.nav_inited) return;
+            if (FSN.nav_inited) return;
 
-		var $fieldset = $('fieldset#fs');
-		var $select = $('select:last', $fieldset);
-		var $optgroup = $('optgroup', $select);
+            var $fieldset = $('fieldset#fs');
+            var $select = $('select:last', $fieldset);
+            var $optgroup = $('optgroup', $select);
 
-		$optgroup.each(function(i){
-			var $og = $(this);
-			$og.attr({ id: 'og-'+i });
-			FSN.fs_og[i] = $(this).html();
-			FSN.fs_lb[i] = $(this).attr('label');
-			$('#fs-sel-cat').append('<option class="cat-title" value="'+ i +'">&nbsp;&nbsp;&middot;&nbsp;'+ FSN.fs_lb[i] +'&nbsp;</option>\n');
-			$('<li><span class="b">'+ FSN.fs_lb[i] +'</span>\n<ul id="nav-c-'+ i +'"></ul>\n</li>').appendTo('#fs-nav-ul').click(function(){
-				if (FSN.scroll) {
-					$select.scrollTo('#og-'+i);
-				}
-			});
-			$('option', $og).each(function(){
-				var $op = $(this);
-				if ($op[0].className) {
-					$('<li><span class="f">'+ $op.html() +'</span>\n</li>').appendTo('#nav-c-'+ i).click(function(e){
-						e.stopPropagation();
-						if (FSN.scroll) {
-							$select.scrollTo( '#'+$op.attr('id'), { duration:300 } ).scrollTo( '-=3px' );
-						}
-						$('option', $select).removeAttr('selected');
-						$('#'+$op.attr('id')).attr({ selected: 1 });
-						$('#fs-nav-list').fadeOut();
-					});
-				}
-			});
-		});
+            $optgroup.each(function (i) {
+                var $og = $(this);
+                $og.attr({id: 'og-' + i});
+                FSN.fs_og[i] = $(this).html();
+                FSN.fs_lb[i] = $(this).attr('label');
+                $('#fs-sel-cat').append('<option class="cat-title" value="' + i + '">&nbsp;&nbsp;&middot;&nbsp;' + FSN.fs_lb[i] + '&nbsp;</option>\n');
+                $('<li><span class="b">' + FSN.fs_lb[i] + '</span>\n<ul id="nav-c-' + i + '"></ul>\n</li>').appendTo('#fs-nav-ul').click(function () {
+                });
+                $('option', $og).each(function () {
+                    var $op = $(this);
+                    if ($op[0].className) {
+                        $('<li><span class="f">' + $op.html() + '</span>\n</li>').appendTo('#nav-c-' + i).click(function (e) {
+                            e.stopPropagation();
+                            $('option', $select).removeAttr('selected');
+                            $('#' + $op.attr('id')).attr({selected: 1});
+                            $('#fs-nav-list').fadeOut();
+                        });
+                    }
+                });
+            });
 
-		$('#fs-nav-ul').treeview({ collapsed: true });
+            $('#fs-nav-ul').treeview({collapsed: true});
 
-		$('#fs-sel-cat').bind('change', function(){
-			var i = $(this).val();
-			if (FSN.sel_width == null) {
-				FSN.sel_width = $select.width() + 4;
-			}
-			if (i == 'all') {
-				var fs_html = FSN.fs_all;
-			}
-			else {
-				var fs_html = '<optgroup label="'+ FSN.fs_lb[i] +'">'+ FSN.fs_og[i] +'</optgroup>';
-			}
-			$select.html(fs_html).focus();
-			if (i == 'all') {
-				$('#fs-nav-menu').show();
-			}
-			else {
-				$('#fs-nav-menu').hide();
-			}
-			$select.width(FSN.sel_width);
-		});
+            $('#fs-sel-cat').bind('change', function () {
+                var i = $(this).val();
+                if (FSN.sel_width == null) {
+                    FSN.sel_width = $select.width() + 4;
+                }
+                if (i == 'all') {
+                    var fs_html = FSN.fs_all;
+                } else {
+                    var fs_html = '<optgroup label="' + FSN.fs_lb[i] + '">' + FSN.fs_og[i] + '</optgroup>';
+                }
+                $select.html(fs_html).focus();
+                if (i == 'all') {
+                    $('#fs-nav-menu').show();
+                } else {
+                    $('#fs-nav-menu').hide();
+                }
+                $select.width(FSN.sel_width);
+            });
 
-		FSN.fs_all = $select.html();
+            FSN.fs_all = $select.html();
 
-		FSN.nav_inited = true;
-	}
-};
+            FSN.nav_inited = true;
+        }
+    };
 
-$(function(){
-	FSN.show_nav();
-	$('#fs legend').one('mouseenter', FSN.build_nav);
-});
+    $(function () {
+        FSN.show_nav();
+        $('#fs legend').one('mouseenter', FSN.build_nav);
+    });
 </script>
 
 <div class="menu-sub" id="fs-nav-list">
@@ -513,17 +500,6 @@ $(function(){
 			}
 		}
 	});
-	if ($.browser.mozilla) {
-	$('#fs-qs-input').focus().quicksearch('#fs-main option', {
-		delay   : 300,
-		onAfter : function(){
-			$('#fs-main optgroup').show();
-			$('#fs-main option:hidden').parent('optgroup').not( $('#fs-main :visible').parent('optgroup') ).hide();
-		}
-	});
-	$('#fs-main').attr( 'size', $('#fs-main').attr('size')-1 );
-	$('#fs-qs-div').show();
-}
 });
 function get_fs_link() {
   var fs_url = '{TRACKER_URL}';
