@@ -1282,6 +1282,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You չունեն բոնուսն
 $lang['BONUS_RETURN'] = 'Վերադարձ բոնուսային սերմացուի դիմաց';
 
 $lang['TRACKER'] = 'Ճանապարհները';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Բացել թեմաներ';
 $lang['OPEN_IN_SAME_WINDOW'] = 'բացել նույն պատուհանում';
 $lang['SHOW_TIME_TOPICS'] = 'ցույց է տալիս ժամանակը թեմաներ ստեղծել';
