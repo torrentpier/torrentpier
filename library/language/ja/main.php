@@ -1283,6 +1283,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">Youい賞与引当金可能で�
 $lang['BONUS_RETURN'] = 'の種ボーナス交換';
 
 $lang['TRACKER'] = 'トラッカー';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = '開放題';
 $lang['OPEN_IN_SAME_WINDOW'] = '同じウィンドウで開く';
 $lang['SHOW_TIME_TOPICS'] = 'ショーの創出論';
