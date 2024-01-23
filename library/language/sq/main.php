@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You mos ketë shpërblime në d
 $lang['BONUS_RETURN'] = 'Kthimit të farës së bonusit të këmbimit';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Të hapni tema';
 $lang['OPEN_IN_SAME_WINDOW'] = 'të hapur në të njëjtën dritare';
 $lang['SHOW_TIME_TOPICS'] = 'tregojnë kohën e krijimit temat';
