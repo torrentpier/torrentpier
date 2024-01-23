@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ei ole bonuksia saatavilla.
 $lang['BONUS_RETURN'] = 'Palaa siemen bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Avata aiheita';
 $lang['OPEN_IN_SAME_WINDOW'] = 'avaa saman ikkunan';
 $lang['SHOW_TIME_TOPICS'] = 'näyttää aika luoda aiheita';
