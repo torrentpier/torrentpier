@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You haben keine Boni zur Verfü
 $lang['BONUS_RETURN'] = 'Zurück zu den seed bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Offene Themen';
 $lang['OPEN_IN_SAME_WINDOW'] = 'öffnen im selben Fenster';
 $lang['SHOW_TIME_TOPICS'] = 'show-Zeit der Schöpfung-Themen';
