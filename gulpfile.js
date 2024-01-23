@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
 
 // Config
 const paths = {
@@ -17,12 +18,8 @@ const paths = {
 
 gulp.task('build-js', function () {
     return gulp.src(paths.javascript.src)
+        .pipe(sourcemaps.init())
         .pipe(concat(paths.javascript.concat))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths.javascript.output));
-});
-
-gulp.task('build-css', function () {
-    return gulp.src(['assets/css/main.css', 'assets/css/custom.css'])
-        .pipe(concat('stylesheet.css'))
-        .pipe(gulp.dest('public/build/css'));
 });
