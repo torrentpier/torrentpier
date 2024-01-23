@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Ha megrendelést szeretne törölni a listából, katt
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Nézte témák';
-$lang['NO_WATCHED_TOPICS'] = 'Nem nézed minden olyan téma';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Vissza a kezdőlapra';
