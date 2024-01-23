@@ -19,5 +19,8 @@
     ],
     "devDependencies": {
         "gulp": "^4.0.2"
+    },
+    "dependencies": {
+        "gulp-concat": "^2.6.1"
     }
 }

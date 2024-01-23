@@ -58,6 +58,11 @@ if (!is_file(BB_PATH . '/vendor/autoload.php')) {
 }
 require_once BB_PATH . '/vendor/autoload.php';
 
+// Node.js
+if (!is_dir(BB_PATH . '/node_modules')) {
+    die('Please <a href="https://nodejs.org/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install Node.js</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">npm install</code>');
+}
+
 /**
  * Gets the value of an environment variable.
  *
