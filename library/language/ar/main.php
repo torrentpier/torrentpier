@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'حذف من القائمة ، انقر على أيقو
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'شاهد مواضيع';
-$lang['NO_WATCHED_TOPICS'] = 'أنت لا تشاهد أي مواضيع';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'العودة إلى الصفحة الرئيسية';
