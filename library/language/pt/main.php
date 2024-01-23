@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You não têm bónus disponíve
 $lang['BONUS_RETURN'] = 'Voltar para a semente de bônus do exchange';
 
 $lang['TRACKER'] = 'Perseguidor';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Abrir tópicos';
 $lang['OPEN_IN_SAME_WINDOW'] = 'abrir na mesma janela';
 $lang['SHOW_TIME_TOPICS'] = 'mostrar a hora da criação de tópicos';
