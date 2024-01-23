@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Pour supprimer une commande dans la liste, cliquez sur
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Regardé les sujets';
-$lang['NO_WATCHED_TOPICS'] = 'Vous n\'êtes pas à regarder tous les sujets';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Retour à la page d\'accueil';
