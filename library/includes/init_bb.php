@@ -394,6 +394,11 @@ $user = new TorrentPier\Legacy\Common\User();
 
 $userdata =& $user->data;
 
+// Set announcer default URL
+if (empty($bb_cfg['bt_announce_url'])) {
+    bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
+}
+
 /**
  * Cron
  */
