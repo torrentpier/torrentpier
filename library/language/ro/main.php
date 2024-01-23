@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You nu au bonusuri disponibile.
 $lang['BONUS_RETURN'] = 'Reveni la semințe bonus de schimb';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Deschide subiecte';
 $lang['OPEN_IN_SAME_WINDOW'] = 'deschide în aceeași fereastră';
 $lang['SHOW_TIME_TOPICS'] = 'show timp de crearea subiecte';
