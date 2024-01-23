@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You neturi premijos. Daugiau s�
 $lang['BONUS_RETURN'] = 'Grįžti į sėklų bonus keistis';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Atviros temos';
 $lang['OPEN_IN_SAME_WINDOW'] = 'atidaryti tame pačiame lange';
 $lang['SHOW_TIME_TOPICS'] = 'rodyti kūrimo metu temas';
