@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Para excluir um fim na lista, clique no ícone à esqu
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Assisti tópicos';
-$lang['NO_WATCHED_TOPICS'] = 'Você não está assistindo a quaisquer tópicos';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Volta para página inicial';
