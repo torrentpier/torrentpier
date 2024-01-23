@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Для удаления тем из списка кл�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Отслеживаемые темы';
-$lang['NO_WATCHED_TOPICS'] = 'Вы не отслеживаете ни одну из тем';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Вернуться на главную';
