@@ -4,5 +4,6 @@
     <Description>TorrentPier (Forum)</Description>
     <InputEncoding>UTF-8</InputEncoding>
     <Image height="16" width="16" type="image/x-icon">https://torrentpier.com/favicon.ico</Image>
-    <Url type="text/html" template="https://torrentpier.com/search.php?mode=results&amp;show_results=topics&amp;search_keywords={searchTerms}"/>
+    <Url type="text/html"
+         template="https://torrentpier.com/search.php?mode=results&amp;show_results=topics&amp;search_keywords={searchTerms}"/>
 </OpenSearchDescription>
