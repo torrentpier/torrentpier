@@ -6,7 +6,9 @@
     "main": "",
     "author": "",
     "license": "MIT",
-    "scripts": {},
+    "scripts": {
+        "build-js": "gulp build-js"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/torrentpier"
