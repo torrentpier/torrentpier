@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Kustutada tellimuse loetelust, siis kliki ikooni vasak
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Vaatasin teemasid';
-$lang['NO_WATCHED_TOPICS'] = 'Sa ei ole vaadates mingeid teemasid';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Tagasi avalehele';
