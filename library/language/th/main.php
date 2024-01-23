@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'แบบอักษรเพื่อทำการ
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'มองดูหัวข้อคุ';
-$lang['NO_WATCHED_TOPICS'] = 'คุณไม่ดูมีหัวข้อคุ';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'กลับไปบ้านหน้า';
