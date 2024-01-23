@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'כדי למחוק הזמנה מתוך הרשימה, ל
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'צפו נושאים';
-$lang['NO_WATCHED_TOPICS'] = 'אתה לא צופה כל הנושאים';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'חזרה לעמוד הבית';
