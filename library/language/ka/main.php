@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You არ აქვს ბო�
 $lang['BONUS_RETURN'] = 'დაბრუნება სათესლე ბონუს გაცვლა';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'ღია თემები';
 $lang['OPEN_IN_SAME_WINDOW'] = 'ღია იგივე ფანჯარა';
 $lang['SHOW_TIME_TOPICS'] = 'შოუ დრო შექმნის თემა';
