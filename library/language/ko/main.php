@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You 있지 않은 보너스를 
 $lang['BONUS_RETURN'] = '로 돌아가는 씨 보너스 교환';
 
 $lang['TRACKER'] = '추적';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = '열어 주제';
 $lang['OPEN_IN_SAME_WINDOW'] = '에서 열린 동일한 창';
 $lang['SHOW_TIME_TOPICS'] = '시간 표시 창조의 항목';
