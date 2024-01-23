@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Added ability to view "Watching topics" of other people's (For admins only) [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
 - Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
 - Added "Random release" button in tracker.php [\#1334](https://github.com/torrentpier/torrentpier/pull/1334) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))

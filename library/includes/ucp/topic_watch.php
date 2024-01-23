@@ -21,6 +21,17 @@ $page_cfg['include_bbcode_js'] = true;
 
 $tracking_topics = get_tracks('topic');
 $user_id = $userdata['user_id'];
+if (isset($_GET['uid'])) {
+    if (get_username($_GET['uid'])) {
+        if ($_GET['uid'] == $userdata['user_id'] || IS_ADMIN) {
+            $user_id = DB()->escape($_GET['uid']);
+        } else {
+            bb_die($lang['NOT_AUTHORISED']);
+        }
+    } else {
+        bb_die($lang['USER_NOT_EXIST']);
+    }
+}
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $per_page = $bb_cfg['topics_per_page'];
 
