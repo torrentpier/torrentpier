@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Untuk menghapus aplikasi dari daftar, klik pada ikon d
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Melihat topik';
-$lang['NO_WATCHED_TOPICS'] = 'Anda tidak menonton setiap topik';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Kembali ke halaman rumah';
