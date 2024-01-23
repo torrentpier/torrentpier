@@ -1282,6 +1282,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You yoxdur bonuslar. Daha ос�
 $lang['BONUS_RETURN'] = 'Geri bonus toxum mübadiləsi';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Açıq mövzu';
 $lang['OPEN_IN_SAME_WINDOW'] = 'açmaq eyni pəncərə';
 $lang['SHOW_TIME_TOPICS'] = 'göstərir vaxt yaradılması mövzular';
