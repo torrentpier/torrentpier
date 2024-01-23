@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ikke har bonuser som er til
 $lang['BONUS_RETURN'] = 'Tilbake til frø bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Åpne emner';
 $lang['OPEN_IN_SAME_WINDOW'] = 'åpne i samme vindu';
 $lang['SHOW_TIME_TOPICS'] = 'vis klokkeslett for oppretting av emner';
