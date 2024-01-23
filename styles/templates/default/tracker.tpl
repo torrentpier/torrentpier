@@ -39,6 +39,10 @@ ajax.callback.view_post = function(data) {
 	var $links = $('div.post_links', $('#post_'+post_id));
 	$post.css({ maxWidth: maxW, maxHeight: maxH });
 	$links.css({ maxWidth: maxW });
+	if ($.browser.msie) {
+		if ($post.height() > maxH) { $post.height(maxH); }
+		if ($post.width() > maxW)  { $post.width(maxW); $links.width(maxW); }
+	}
 	ajax.openedPosts[post_id] = true;
 };
 </script>
@@ -507,6 +511,14 @@ $(function(){
 			else {
 				fs_last_val = fs_val;
 			}
+		}
+	});
+	if ($.browser.mozilla) {
+	$('#fs-qs-input').focus().quicksearch('#fs-main option', {
+		delay   : 300,
+		onAfter : function(){
+			$('#fs-main optgroup').show();
+			$('#fs-main option:hidden').parent('optgroup').not( $('#fs-main :visible').parent('optgroup') ).hide();
 		}
 	});
 	$('#fs-main').attr( 'size', $('#fs-main').attr('size')-1 );

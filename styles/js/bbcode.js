@@ -363,6 +363,9 @@ function initPostImages(context) {
       $('#preload').append($img);
       var loading_icon = '<a href="' + src + '" target="_blank"><img src="' + bb_url + 'styles/images/pic_loading.gif" alt="" /></a>';
       $v.html(loading_icon);
+      if ($.browser.msie) {
+        $v.after('<wbr>');
+      }
       $img.one('load', function () {
         imgFit(this, maxW);
         $v.empty().append(this);
@@ -372,6 +375,9 @@ function initPostImages(context) {
         imgFit(this, maxW)
       });
       $v.empty().append($img);
+      if ($.browser.msie) {
+        $v.after('<wbr>');
+      }
     }
   });
 }

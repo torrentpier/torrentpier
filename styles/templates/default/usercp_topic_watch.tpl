@@ -24,7 +24,11 @@
         });
 
         $('input.topic-chbox').click(function () {
-            $('#tr-' + this.value).toggleClass('hl-selected-row');
+            if ($.browser.mozilla) {
+                $('#tr-' + this.value + ' td').toggleClass('hl-selected-row');
+            } else {
+                $('#tr-' + this.value).toggleClass('hl-selected-row');
+            }
         });
         $('#pagination a.pg').each(function () {
             this.href += '&mod=1';

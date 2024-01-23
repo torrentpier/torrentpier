@@ -220,6 +220,10 @@ ajax.callback.view_post = function(data) {
 	var $links = $('div.post_links', $('#post_'+topic_id));
 	$post.css({ maxWidth: maxW, maxHeight: maxH });
 	$links.css({ maxWidth: maxW });
+	if ($.browser.msie) {
+		if ($post.height() > maxH) { $post.height(maxH); }
+		if ($post.width() > maxW)  { $post.width(maxW); $links.width(maxW); }
+	}
 	ajax.openedPosts[topic_id] = true;
 };
 </script>
