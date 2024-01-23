@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You tidak memiliki bonus yang t
 $lang['BONUS_RETURN'] = 'Kembali ke benih bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Membuka topik';
 $lang['OPEN_IN_SAME_WINDOW'] = 'membuka di jendela yang sama';
 $lang['SHOW_TIME_TOPICS'] = 'menunjukkan waktu dari penciptaan topik';
