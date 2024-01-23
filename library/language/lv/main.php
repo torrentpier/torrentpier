@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Lai izdzēstu uzdevumu no saraksta, noklikšķiniet uz
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Noskatījos tēmas';
-$lang['NO_WATCHED_TOPICS'] = 'Jums nav skatīties jebkuru tēmu';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Atpakaļ uz sākuma lapu';
