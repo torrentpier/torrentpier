@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You δεν έχουν μπόν�
 $lang['BONUS_RETURN'] = 'Επιστροφή από το seed bonus ανταλλαγής';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Ανοιχτά θέματα';
 $lang['OPEN_IN_SAME_WINDOW'] = 'άνοιγμα στο ίδιο παράθυρο';
 $lang['SHOW_TIME_TOPICS'] = 'δείτε την ώρα τη δημιουργία θεμάτων';
