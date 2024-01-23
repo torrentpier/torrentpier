@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You бонустар қолже
 $lang['BONUS_RETURN'] = 'тұқым бонус алмасу оралу';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Ашық тақырыптар';
 $lang['OPEN_IN_SAME_WINDOW'] = 'сол терезеде ашық';
 $lang['SHOW_TIME_TOPICS'] = 'құру тақырыптар шоу уақыты';
