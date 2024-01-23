@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Voor het verwijderen van een volgorde in de lijst, kli
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Bekeken onderwerpen';
-$lang['NO_WATCHED_TOPICS'] = 'U bent niet kijken naar alle onderwerpen';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Terug naar home pagina';
