@@ -1,0 +1,21 @@
+{
+  "name": "torrentpier",
+  "version": "2.4.1",
+  "description": "TorrentPier. Bull-powered BitTorrent tracker engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/torrentpier"
+  },
+  "keywords": [
+    "bittorrent",
+    "forum",
+    "torrent",
+    "tracker"
+  ],
+  "author": "belomaxorka",
+  "license": "MIT"
+}
