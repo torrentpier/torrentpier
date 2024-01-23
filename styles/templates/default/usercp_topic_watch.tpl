@@ -24,11 +24,7 @@
         });
 
         $('input.topic-chbox').click(function () {
-            if ($.browser.mozilla) {
-                $('#tr-' + this.value + ' td').toggleClass('hl-selected-row');
-            } else {
-                $('#tr-' + this.value).toggleClass('hl-selected-row');
-            }
+            $('#tr-' + this.value).toggleClass('hl-selected-row');
         });
         $('#pagination a.pg').each(function () {
             this.href += '&mod=1';
