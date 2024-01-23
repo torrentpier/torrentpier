@@ -1588,7 +1588,7 @@ $lang['DEL_LIST_INFO'] = 'Listeden bir sipariş silmek için, simgesine herhangi
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'İzlenen konular';
-$lang['NO_WATCHED_TOPICS'] = 'Herhangi bir konu seyredemezsin';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Ev sayfasına geri dön';
