@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You немају бонуса. 
 $lang['BONUS_RETURN'] = 'Повратак на бонус семена дељење';
 
 $lang['TRACKER'] = 'Трацкер';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Отвори тему';
 $lang['OPEN_IN_SAME_WINDOW'] = 'отворена у истом прозору';
 $lang['SHOW_TIME_TOPICS'] = 'показују време стварању теме';
