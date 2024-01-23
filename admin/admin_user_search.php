@@ -922,7 +922,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
         $template->assign_block_vars('userrow', [
             'ROW_CLASS' => $row_class,
-            'USER' => profile_url($rowset[$i]),
+            'USER' => profile_url($rowset[$i], true),
             'EMAIL' => $rowset[$i]['user_email'],
             'JOINDATE' => bb_date($rowset[$i]['user_regdate']),
             'LASTVISIT' => $rowset[$i]['user_lastvisit'] ? bb_date($rowset[$i]['user_lastvisit']) : $lang['NEVER'],
