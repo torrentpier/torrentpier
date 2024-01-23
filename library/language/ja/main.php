@@ -1588,7 +1588,7 @@ $lang['DEL_LIST_INFO'] = '削除からクリックすると、一覧にアイコ
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = '見題';
-$lang['NO_WATCHED_TOPICS'] = 'いを見せtopics';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'ホームページに戻る';
