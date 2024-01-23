@@ -2,7 +2,7 @@
 
 const gulp = require('gulp');
 const concat = require('gulp-concat');
-const sourcemaps = require('gulp-sourcemaps');
+const minify = require('gulp-minify');
 
 // Config
 const paths = {
@@ -18,8 +18,7 @@ const paths = {
 
 gulp.task('build-js', function () {
     return gulp.src(paths.javascript.src)
-        .pipe(sourcemaps.init())
         .pipe(concat(paths.javascript.concat))
-        .pipe(sourcemaps.write())
+        .pipe(minify())
         .pipe(gulp.dest(paths.javascript.output));
 });
