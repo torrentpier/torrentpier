@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You inte har bonusar som finns 
 $lang['BONUS_RETURN'] = 'Tillbaka till utsäde bonus utbyte';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Öppna frågor';
 $lang['OPEN_IN_SAME_WINDOW'] = 'öppna i samma fönster';
 $lang['SHOW_TIME_TOPICS'] = 'visa tid av skapande ämnen';

@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You n\'ont pas de bonus disponi
 $lang['BONUS_RETURN'] = 'Retour à la graine de bonus de change';
 
 $lang['TRACKER'] = 'Traqueur';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Ouvrir des rubriques';
 $lang['OPEN_IN_SAME_WINDOW'] = 'ouvrir dans la même fenêtre';
 $lang['SHOW_TIME_TOPICS'] = 'afficher l\'heure de la création des sujets';

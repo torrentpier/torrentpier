@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You не маюць бонус�
 $lang['BONUS_RETURN'] = 'Вяртанне на бонусны насення абмен';
 
 $lang['TRACKER'] = 'Трэкер';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Адкрываць тэмы';
 $lang['OPEN_IN_SAME_WINDOW'] = 'адкрыць у тым жа акне';
 $lang['SHOW_TIME_TOPICS'] = 'паказваюць час стварэнні тэмы';

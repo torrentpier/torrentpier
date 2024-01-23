@@ -1282,6 +1282,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You nie mają bonusów. Bardzie
 $lang['BONUS_RETURN'] = 'Powrót do bonusowy nasion wymiana';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Zakładać tematy';
 $lang['OPEN_IN_SAME_WINDOW'] = 'otwórz w tym samym oknie';
 $lang['SHOW_TIME_TOPICS'] = 'pokazują czas tworzenia tematów';

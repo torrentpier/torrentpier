@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You no tenen bonificacions disp
 $lang['BONUS_RETURN'] = 'Tornar a la llavor de bonificació intercanvi';
 
 $lang['TRACKER'] = 'Seguidor';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Obrir temes';
 $lang['OPEN_IN_SAME_WINDOW'] = 'obri en la mateixa finestra';
 $lang['SHOW_TIME_TOPICS'] = 'mostra el temps de la creació temes';

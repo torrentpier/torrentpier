@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ikke har bonusser til rådi
 $lang['BONUS_RETURN'] = 'Tilbage til frø bonus udveksling';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Åbne emner';
 $lang['OPEN_IN_SAME_WINDOW'] = 'åbne i samme vindue';
 $lang['SHOW_TIME_TOPICS'] = 'vis tidspunktet for oprettelsen emner';

@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ไม่มี bonuses ว
 $lang['BONUS_RETURN'] = 'กลับไปยังเมล็ดพันธ์การแลกเปลี่ยนโบนัส';
 
 $lang['TRACKER'] = 'แทร็กเกอร์';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'เปิดหัวข้อคุ';
 $lang['OPEN_IN_SAME_WINDOW'] = 'เปิดในหน้าต่างเดียวกัน';
 $lang['SHOW_TIME_TOPICS'] = 'แสดงเวลาของการสร้างหัวข้อคุ';

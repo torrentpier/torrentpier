@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You没有奖金。 更多的种
 $lang['BONUS_RETURN'] = '回到种奖励交换';
 
 $lang['TRACKER'] = '跟踪器';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = '打开话题';
 $lang['OPEN_IN_SAME_WINDOW'] = '在同一窗口打开';
 $lang['SHOW_TIME_TOPICS'] = '时间显示的创作主题';

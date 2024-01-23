@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">У вас недостаточ�
 $lang['BONUS_RETURN'] = 'Вернуться к обмену сидбонусов';
 
 $lang['TRACKER'] = 'Трекер';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Открывать топики';
 $lang['OPEN_IN_SAME_WINDOW'] = 'открывать в этом же окне';
 $lang['SHOW_TIME_TOPICS'] = 'показывать время создания темы';

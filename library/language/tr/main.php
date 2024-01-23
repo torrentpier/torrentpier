@@ -1283,6 +1283,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ikramiye yok. Daha fazla to
 $lang['BONUS_RETURN'] = 'Tohum bonus değişimi dönmek';
 
 $lang['TRACKER'] = 'İzci';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Açık konular';
 $lang['OPEN_IN_SAME_WINDOW'] = 'aynı pencerede aç';
 $lang['SHOW_TIME_TOPICS'] = 'yaratılış konuları zaman gösterecek';

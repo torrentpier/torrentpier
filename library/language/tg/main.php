@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You Оё мукофотпулӣ
 $lang['BONUS_RETURN'] = 'Бозгашт ба мубодилаи бонуси насли';
 
 $lang['TRACKER'] = 'Назоратчии';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'мавзӯъҳои Open';
 $lang['OPEN_IN_SAME_WINDOW'] = 'кушода дар ҳамин тиреза';
 $lang['SHOW_TIME_TOPICS'] = 'замони мавзӯъҳои офариниш нишон';

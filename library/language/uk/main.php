@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="витоків">У Вас недост
 $lang['BONUS_RETURN'] = 'Повернутися до обміну сидбонусів';
 
 $lang['TRACKER'] = 'Трекер';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Відкривати теми';
 $lang['OPEN_IN_SAME_WINDOW'] = 'відкрити в цьому ж вікні';
 $lang['SHOW_TIME_TOPICS'] = 'показувати час створення теми';

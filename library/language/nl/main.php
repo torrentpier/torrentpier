@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You niet over bonussen beschikb
 $lang['BONUS_RETURN'] = 'Terug naar het zaad bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Onderwerpen geopend';
 $lang['OPEN_IN_SAME_WINDOW'] = 'openen in hetzelfde venster';
 $lang['SHOW_TIME_TOPICS'] = 'toon de tijd van de schepping onderwerpen';

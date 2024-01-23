@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ei ole saadaolevad preemiad
 $lang['BONUS_RETURN'] = 'Tagasi seemne boonus vahetada';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Avatud teemasid';
 $lang['OPEN_IN_SAME_WINDOW'] = 'avatud sama aken';
 $lang['SHOW_TIME_TOPICS'] = 'näita aega loomise teemasid';

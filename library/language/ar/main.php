@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You لا يكون المكاف�
 $lang['BONUS_RETURN'] = 'العودة إلى البذور منحة الصرف';
 
 $lang['TRACKER'] = 'تعقب';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'فتح المواضيع';
 $lang['OPEN_IN_SAME_WINDOW'] = 'تفتح في نفس النافذة';
 $lang['SHOW_TIME_TOPICS'] = 'تظهر وقت إنشاء المواضيع';

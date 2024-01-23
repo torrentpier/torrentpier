@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You nav pieejamie bonusi. Vair�
 $lang['BONUS_RETURN'] = 'Atgriezties sēklas bonusa apmaiņa';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Atvērt tēmas';
 $lang['OPEN_IN_SAME_WINDOW'] = 'atvērt tajā pašā logā';
 $lang['SHOW_TIME_TOPICS'] = 'rādīt laiku radīšanas tēmām';

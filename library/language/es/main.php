@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You no tienen bonificaciones di
 $lang['BONUS_RETURN'] = 'Volver a la semilla bono de exchange';
 
 $lang['TRACKER'] = 'Rastreador';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Temas abiertos';
 $lang['OPEN_IN_SAME_WINDOW'] = 'se abren en la misma ventana';
 $lang['SHOW_TIME_TOPICS'] = 'mostrar la hora de la creación de temas';

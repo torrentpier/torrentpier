@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You nemají bonusy k dispozici.
 $lang['BONUS_RETURN'] = 'Návrat k seed bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Otevřená témata';
 $lang['OPEN_IN_SAME_WINDOW'] = 'otevřít ve stejném okně';
 $lang['SHOW_TIME_TOPICS'] = 'zobrazit čas vytvoření témata';

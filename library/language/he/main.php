@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You אין בונוסים זמ�
 $lang['BONUS_RETURN'] = 'לחזור זרע בונוס exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'לפתוח נושאים';
 $lang['OPEN_IN_SAME_WINDOW'] = 'לפתוח באותו חלון';
 $lang['SHOW_TIME_TOPICS'] = 'זמן ההצגה של היצירה נושאים';

@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You nem bónuszok áll rendelke
 $lang['BONUS_RETURN'] = 'Vissza a vetőmag bónusz árfolyam';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Nyitott témák';
 $lang['OPEN_IN_SAME_WINDOW'] = 'nyitva ugyanabban az ablakban';
 $lang['SHOW_TIME_TOPICS'] = 'a műsor a teremtés témák';

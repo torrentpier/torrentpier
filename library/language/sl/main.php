@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You nimajo bonusov, ki so na vo
 $lang['BONUS_RETURN'] = 'Vrnitev na začetni bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Proste teme';
 $lang['OPEN_IN_SAME_WINDOW'] = 'odprla v istem oknu,';
 $lang['SHOW_TIME_TOPICS'] = 'prikaži času ustanovitve teme';

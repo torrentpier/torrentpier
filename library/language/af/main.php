@@ -1279,6 +1279,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">Jy het nie bonusse beskikbaar n
 $lang['BONUS_RETURN'] = 'Keer terug na die saad bonus ruil';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Open onderwerpe';
 $lang['OPEN_IN_SAME_WINDOW'] = 'Oop in dieselfde venster';
 $lang['SHOW_TIME_TOPICS'] = 'Wys tyd van die skeppingsonderwerpe';
