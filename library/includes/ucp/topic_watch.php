@@ -21,10 +21,10 @@ $page_cfg['include_bbcode_js'] = true;
 
 $tracking_topics = get_tracks('topic');
 $user_id = $userdata['user_id'];
-if (isset($_GET['uid'])) {
-    if (get_username($_GET['uid'])) {
-        if ($_GET['uid'] == $userdata['user_id'] || IS_ADMIN) {
-            $user_id = DB()->escape($_GET['uid']);
+if (isset($_GET[POST_USERS_URL])) {
+    if (get_username($_GET[POST_USERS_URL])) {
+        if ($_GET[POST_USERS_URL] == $userdata['user_id'] || IS_ADMIN) {
+            $user_id = DB()->escape($_GET[POST_USERS_URL]);
         } else {
             bb_die($lang['NOT_AUTHORISED']);
         }
