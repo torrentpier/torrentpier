@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Барои нест кардани тартиби аз
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'мавзӯъҳои мепоиданд';
-$lang['NO_WATCHED_TOPICS'] = 'Шумо ба тамошои ягон мавзӯъҳои нест,';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Бозгашт ба саҳифаи';

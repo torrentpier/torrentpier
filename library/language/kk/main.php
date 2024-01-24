@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'тізімінен тапсырыс жою үшін, �
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'көрілген тақырыптар';
-$lang['NO_WATCHED_TOPICS'] = 'Сіз кез келген тақырыптарды көріп емес,';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Басты бетке қайта оралу';

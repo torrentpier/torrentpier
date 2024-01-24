@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Da izbrišete naređenje od listi, klik na ikona lijev
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Gledao teme';
-$lang['NO_WATCHED_TOPICS'] = 'Ne gledaš li teme';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Nazad u kući stranica';

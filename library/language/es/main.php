@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Para eliminar una orden de la lista, haga clic en el i
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Visto temas';
-$lang['NO_WATCHED_TOPICS'] = 'Usted no está viendo los temas';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Volver a la página principal';

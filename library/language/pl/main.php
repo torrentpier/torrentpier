@@ -1587,7 +1587,7 @@ $lang['DEL_LIST_INFO'] = 'Aby usunąć zlecenie z listy, kliknij ikonę po lewej
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Oglądałem tematu';
-$lang['NO_WATCHED_TOPICS'] = 'Nie patrz na wszelkie tematy';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Powrót na stronę główną';

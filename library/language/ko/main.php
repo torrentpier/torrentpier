@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = '를 삭제하기 위해,목록에서 아이콘을 클�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = '본 항목';
-$lang['NO_WATCHED_TOPICS'] = '당신은하지 않고 어떤 주제';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = '홈 페이지';

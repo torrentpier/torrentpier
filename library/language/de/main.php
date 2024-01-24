@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Zum löschen eines Auftrags aus der Liste, klicken Sie
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Beobachtete Themen';
-$lang['NO_WATCHED_TOPICS'] = 'Sie sind nicht gerade Themen';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Zurück zur Startseite';

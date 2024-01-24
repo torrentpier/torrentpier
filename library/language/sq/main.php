@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Për të fshirë një urdhër nga lista, klikoni mbi i
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Shikuar temat';
-$lang['NO_WATCHED_TOPICS'] = 'Ju nuk jeni të shikuar ndonjë temat';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Mbrapa në faqen kryesore';

@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'ro\'yxatdan buyurtma o\'chirish uchun, har qanday qism
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'tomosha mavzular';
-$lang['NO_WATCHED_TOPICS'] = 'Siz har qanday mavzu tomosha qilish emas';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Orqaga Bosh sahifa sahifaga';

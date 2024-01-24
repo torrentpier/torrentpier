@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'För att ta bort en order från listan, klicka på iko
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Såg ämnen';
-$lang['NO_WATCHED_TOPICS'] = 'Du är inte titta på någon ämnen';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Tillbaka till startsidan';

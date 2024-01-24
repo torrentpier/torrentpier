@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Каб выдаліць заказ з спісу, на
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Глядзеў тэмы';
-$lang['NO_WATCHED_TOPICS'] = 'Вы не глядзіце на любыя тэмы';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Вярнуцца на галоўную старонку';

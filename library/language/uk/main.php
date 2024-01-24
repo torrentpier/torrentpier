@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Для видалення тем зі списку н�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Переглянуті теми';
-$lang['NO_WATCHED_TOPICS'] = 'Ви не відстежуєте жодну з тем';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Повернутися на головну';

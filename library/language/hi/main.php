@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'सूची से ऑर्डर हटाने �
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'देखा गया विषय';
-$lang['NO_WATCHED_TOPICS'] = 'आप किसी भी विषय नहीं देख रहे हैं';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'वापस मुख्य पृष्ठ पर';

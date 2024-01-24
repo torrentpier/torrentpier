@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Jei norite, kad iš sąrašo, spustelėkite piktogram�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Stebėjo temos';
-$lang['NO_WATCHED_TOPICS'] = 'Jūs esate ne žiūrėti, bet temos';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Atgal į pradinį puslapį';

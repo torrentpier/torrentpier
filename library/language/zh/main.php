@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = '删除了从清单中点击图标名字左边的任何
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = '看着主题';
-$lang['NO_WATCHED_TOPICS'] = '你是不是看的任何主题';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = '回到主页';

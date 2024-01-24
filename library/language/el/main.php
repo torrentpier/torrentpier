@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Για να διαγράψετε μια παραγγε
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Είδα θέματα';
-$lang['NO_WATCHED_TOPICS'] = 'Δεν βλέπω θέματα';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Πίσω στην αρχική σελίδα';

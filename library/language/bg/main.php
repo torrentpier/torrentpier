@@ -1586,7 +1586,7 @@ $lang['DEL_LIST_INFO'] = 'За да премахнете поръчка от с�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Гледах теми';
-$lang['NO_WATCHED_TOPICS'] = 'Вие не гледайте на всякакви теми';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Обратно към началната страница';

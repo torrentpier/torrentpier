@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Để hủy bỏ mệnh lệnh từ danh sách, bấm 
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Nhìn chủ đề';
-$lang['NO_WATCHED_TOPICS'] = 'Bạn không được xem bất kỳ chủ đề';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Trở lại trang';

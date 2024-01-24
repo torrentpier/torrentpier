@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Да бисте уклонили налог са ли�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Гледао теме';
-$lang['NO_WATCHED_TOPICS'] = 'Не гледате на било коју тему';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Вратите се на почетну страницу';

@@ -1584,7 +1584,7 @@ $lang['DEL_LIST_INFO'] = 'Om \'n bestelling uit die lys te verwyder, klik die ik
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Gekyk onderwerpe';
-$lang['NO_WATCHED_TOPICS'] = 'Jy kyk nie na enige onderwerpe nie';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Terug na tuisblad';
