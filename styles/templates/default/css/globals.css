@@ -477,10 +477,13 @@ img.smile, img.postImg {
 
 img.postImg {
   margin: 2px 2px 0 0;
+  max-width: 100%;
+  height: auto;
 }
 
 img.postImgAligned {
   margin: 4px 4px 2px;
+
 }
 
 var.img-left {

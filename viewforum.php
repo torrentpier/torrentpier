@@ -476,7 +476,7 @@ foreach ($topic_rowset as $topic) {
         $template->assign_block_vars('t.tor', [
             'SEEDERS' => (int)$topic['seeders'],
             'LEECHERS' => (int)$topic['leechers'],
-            'TOR_SIZE' => humn_size($topic['tor_size']),
+            'TOR_SIZE' => humn_size($topic['tor_size'], 1),
             'COMPL_CNT' => (int)$topic['complete_count'],
             'ATTACH_ID' => $topic['attach_id'],
             'MAGNET' => $tor_magnet,

@@ -220,7 +220,7 @@ if ($tor_reged && $tor_info) {
             'FILELIST_LINK' => !empty($tor_info['info_hash_v2']) ? (FILELIST_URL . $tor_info['topic_id']) : false,
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
-            'TORRENT_SIZE' => humn_size($tor_size),
+            'TORRENT_SIZE' => humn_size($tor_size, 2),
             'DOWNLOAD_COUNT' => $download_count,
             'COMPLETED' => $tor_completed_count,
         ]);
@@ -235,7 +235,7 @@ if ($tor_reged && $tor_info) {
             'SHOW_DL_LIST' => true,
             'SHOW_DL_LIST_TOR_INFO' => true,
 
-            'TOR_SIZE' => humn_size($tor_size),
+            'TOR_SIZE' => humn_size($tor_size, 1),
             'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
             'TOR_DOWNLOAD_COUNT' => $download_count,
             'TOR_COMPLETED' => $tor_completed_count,
@@ -257,6 +257,7 @@ if ($tor_reged && $tor_info) {
                 $peer_orders = [
                     'name' => 'u.username',
                     'ip' => 'tr.ip',
+                    'ipv6' => 'tr.ipv6',
                     'port' => 'tr.port',
                     'compl' => 'tr.remain',
                     'cup' => 'tr.uploaded',
@@ -282,7 +283,7 @@ if ($tor_reged && $tor_info) {
 				WHERE topic_id = $tor_id
 				LIMIT 1";
         } elseif ($s_mode == 'names') {
-            $sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
+            $sql = "SELECT tr.user_id, tr.ip, tr.ipv6, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
 				WHERE tr.topic_id = $tor_id
 					AND u.user_id = tr.user_id
@@ -290,7 +291,7 @@ if ($tor_reged && $tor_info) {
 				LIMIT $show_peers_limit";
         } else {
             $sql = "SELECT
-					tr.user_id, tr.ip, tr.port, tr.peer_id, tr.uploaded, tr.downloaded, tr.remain,
+					tr.user_id, tr.ip, tr.ipv6, tr.port, tr.peer_id, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
 					tr.complete_percent, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr
@@ -373,7 +374,7 @@ if ($tor_reged && $tor_info) {
 
                 // Full details mode
                 if ($s_mode == 'full') {
-                    $ip = bt_show_ip($peer['ip']);
+                    $ip = bt_show_ip(!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']);
                     $port = bt_show_port($peer['port']);
 
                     // peer max/current up/down
