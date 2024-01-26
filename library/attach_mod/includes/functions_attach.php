@@ -387,3 +387,16 @@ function get_var($var_name, $default, $multibyte = false)
 
     return $var;
 }
+
+/**
+ * Check if Attachment exist
+ *
+ * @param string $filename
+ * @return bool
+ */
+function attachment_exists(string $filename): bool
+{
+    global $upload_dir;
+
+    return file_exists(realpath($upload_dir . '/' . basename($filename)));
+}

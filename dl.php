@@ -22,15 +22,14 @@ $download_id = request_var('id', 0);
 $thumbnail = request_var('thumb', 0);
 
 // Send file to browser
-function send_file_to_browser($attachment, $upload_dir)
+function send_file_to_browser($attachment): void
 {
     global $bb_cfg, $lang;
 
-    $filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
-
+    $filename = $attachment['physical_filename'];
     $gotit = false;
 
-    if (@!file_exists(realpath($filename))) {
+    if (!attachment_exists($filename)) {
         bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
     } else {
         $gotit = true;
@@ -195,7 +194,7 @@ if (isset($download_mode[$attachment['extension']])) {
 }
 
 // Update download count
-if (!$thumbnail) {
+if (!$thumbnail && attachment_exists($attachment['physical_filename'])) {
     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int)$attachment['attach_id'];
 
     if (!DB()->sql_query($sql)) {
@@ -228,7 +227,7 @@ switch ($download_mode) {
             require(PAGE_FOOTER);
         }
 
-        send_file_to_browser($attachment, $upload_dir);
+        send_file_to_browser($attachment);
         exit;
     default:
         bb_die('Incorrect download mode: ' . $download_mode);
