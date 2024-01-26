@@ -217,7 +217,7 @@ if ($tor_reged && $tor_info) {
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
-            'FILELIST_LINK' => !empty($tor_info['info_hash_v2']) ? (FILELIST_URL . $tor_info['topic_id']) : false,
+            'FILELIST_LINK' => FILELIST_URL . $tor_info['topic_id'],
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size, 2),
@@ -257,7 +257,6 @@ if ($tor_reged && $tor_info) {
                 $peer_orders = [
                     'name' => 'u.username',
                     'ip' => 'tr.ip',
-                    'ipv6' => 'tr.ipv6',
                     'port' => 'tr.port',
                     'compl' => 'tr.remain',
                     'cup' => 'tr.uploaded',
@@ -374,7 +373,12 @@ if ($tor_reged && $tor_info) {
 
                 // Full details mode
                 if ($s_mode == 'full') {
-                    $ip = bt_show_ip(!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']);
+                    if (!empty($peer['ip']) && !empty($peer['ipv6'])) {
+                        $ip = bt_show_ip($peer['ipv6']) . ' (' . bt_show_ip($peer['ip']) . ')';
+                    }
+                    else {
+                        $ip = bt_show_ip(!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']);
+                    }
                     $port = bt_show_port($peer['port']);
 
                     // peer max/current up/down

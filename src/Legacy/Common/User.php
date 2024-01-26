@@ -570,7 +570,10 @@ class User
         }  // prevent multiple calling
 
         if (IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) { // Apply browser language
-            $bb_cfg['default_lang'] = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+            $http_accept_language = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+            if (isset($bb_cfg['lang'][$http_accept_language])) {
+                $bb_cfg['default_lang'] = $http_accept_language;
+            }
         }
 
         \define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
