@@ -398,5 +398,5 @@ function attachment_exists(string $filename): bool
 {
     global $upload_dir;
 
-    return file_exists(realpath($upload_dir . '/' . basename($filename)));
+    return is_file(realpath($upload_dir . '/' . basename($filename)));
 }

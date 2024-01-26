@@ -157,7 +157,7 @@ if ($check_upload) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(realpath($upload_dir))) {
+    if (!file_exists(realpath($upload_dir))) {
         $error = true;
         $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
     }
@@ -301,12 +301,12 @@ if ($check_image_cat) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(realpath($upload_dir))) {
+    if (!file_exists(realpath($upload_dir))) {
         if (!bb_mkdir($upload_dir) && !is_dir($upload_dir)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $upload_dir));
         }
 
-        if (!@file_exists(realpath($upload_dir))) {
+        if (!file_exists(realpath($upload_dir))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
         }
