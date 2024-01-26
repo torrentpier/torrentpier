@@ -70,7 +70,7 @@ try {
     bb_simple_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"), 410);
 }
 
-if ($torrent->isPrivate() && IS_GUEST) {
+if (IS_GUEST && $torrent->isPrivate()) {
     bb_simple_die($lang['BT_PRIVATE_TORRENT'], 403);
 }
 
@@ -78,7 +78,10 @@ $files = $torrent->$t_version_field()->$t_files_field();
 
 $allFiles = '';
 foreach ($files as $file) {
-    $allFiles .= '<tr><td>' . clean_tor_dirname(implode('/', $file->path)) . '</td><td>' . humn_size($file->length, 2) . '</td><td>' . ($t_hash_field === 'sha1' ? 'SHA1: ' : '') . $file->$t_hash_field . '</td></tr><tr>';
+    $path = clean_tor_dirname(implode('/', $file->path));
+    $size = humn_size($file->length, 2);
+    $hash = ($t_hash_field === 'sha1' && isset($file->$t_hash_field)) ? "SHA1: {$file->$t_hash_field}" : $file->$t_hash_field;
+    $allFiles .= '<tr><td>' . $path . '</td><td>' . $size . '</td><td>' . $hash . '</td></tr><tr>';
 }
 
 $data = [
