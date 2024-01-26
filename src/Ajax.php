@@ -38,10 +38,10 @@ class Ajax
         'passkey' => ['user'],
         'change_torrent' => ['user'],
         'change_tor_status' => ['user'],
-        'thx' => ['user'],
         'manage_group' => ['user'],
         'callseed' => ['user'],
 
+        'thx' => ['guest'],
         'view_post' => ['guest'],
         'view_torrent' => ['guest'],
         'user_register' => ['guest'],

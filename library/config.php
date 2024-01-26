@@ -528,6 +528,7 @@ $bb_cfg['user_not_active_days_keep'] = 180; // After how many days should I dele
 
 // Vote for torrents
 $bb_cfg['tor_thank'] = true;
+$bb_cfg['tor_thanks_list_guests'] = true; // Show voters to guests
 
 // Groups
 $bb_cfg['group_members_per_page'] = 50; // How many groups will be displayed in a page
@@ -682,7 +683,8 @@ $bb_cfg['tracker'] = [
     'search_by_tor_status' => true,
     'freeleech' => false, // freeleech mode (If enabled, then disable "gold_silver_enabled")
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
-    'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, relieving tracker
+    'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
+    'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
     'disabled_v2_torrents' => false // disallow registration of v2-only torrents
 ];
 

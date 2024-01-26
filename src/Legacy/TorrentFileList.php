@@ -80,7 +80,7 @@ class TorrentFileList
         }
 
         if (isset($info['files']) && \is_array($info['files'])) {
-            $this->root_dir = isset($info['name']) ? '../' . clean_tor_dirname($info['name']) : '...';
+            $this->root_dir = isset($info['name']) ? clean_tor_dirname($info['name']) : '...';
             $this->multiple = true;
 
             foreach ($info['files'] as $f) {
@@ -173,31 +173,5 @@ class TorrentFileList
         }
 
         return $allItems;
-    }
-
-    /**
-     * Table generation for BitTorrent v2 compatible torrents
-     *
-     * @param array $array
-     * @param string $parent
-     * @return array
-     */
-    public function fileTreeTable(array $array, string $parent = ''): array
-    {
-        static $filesList = ['list' => '', 'count' => 0];
-        foreach ($array as $key => $value) {
-            $key = clean_tor_dirname($key);
-            $current = "$parent/$key";
-            if (!isset($value[''])) {
-                $this->fileTreeTable($value, $current);
-            } else {
-                $length = $value['']['length'];
-                $root = bin2hex($value['']['pieces root'] ?? '');
-                $filesList['list'] .= '<tr><td>' . $current . '</td><td>' . humn_size($length, 2) . '</td><td>' . $root . '</td></tr><tr>';
-                $filesList['count']++;
-            }
-        }
-
-        return $filesList;
     }
 }

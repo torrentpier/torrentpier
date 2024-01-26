@@ -145,7 +145,9 @@
 
 <table class="attach bordered med">
 	<tr class="row3">
-		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
+		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}
+        <a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="File hashes | .torrent meta-info" target="_blank"><img src="./styles/images/t_info.png" width="12" height="12" border="0"></a>
+        <!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
     <tr class="row4">
@@ -171,9 +173,6 @@
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
-            <!-- IF postrow.attach.tor_reged.HASH_V2 -->
-            <p><a href="{postrow.attach.tor_reged.FILELIST_LINK}" title = "File hashes | .torrent meta-info" target="_blank">...</a></p>
-            <!-- ENDIF -->
 		</td>
 	</tr>
 	<tr class="row1">
