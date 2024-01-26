@@ -1075,8 +1075,7 @@ $lang['BT_REG_FAIL'] = 'ट्रैकर पर धार डाउनलो�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'उसी जानकारी के साथ एक और धार पहले ही <a href="%s"><b> रजिस्ट्रीकृत 1233_2_2_321</a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FLIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
-$lang['BT_V2_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ट्रैकर से निकालें';
 $lang['BT_UNREGISTERED'] = 'टॉरेंट अपंजीकृत';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
