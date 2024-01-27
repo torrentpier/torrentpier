@@ -480,8 +480,8 @@ td.topic_id { cursor: pointer; }
             <span title="{L_VIEWS}: {t.VIEWS}">{t.VIEWS}</span>
         </p>
         <!-- BEGIN tor -->
-        <p style="padding-top: 2px" class="med" title="{L_COMPLETED}: {t.tor.COMPL_CNT}">
-            <b>{t.tor.COMPL_CNT}</b>
+        <p style="padding-top: 2px;" class="med" title="{L_COMPLETED}: {t.tor.COMPL_CNT}">
+            <b>{t.tor.DOWNLOADED}</b>
         </p>
         <!-- END tor -->
     </td>

@@ -415,8 +415,8 @@ ajax.callback.view_post = function(data) {
             <span class="small"> | </span>
             <span title="{L_VIEWS}: {tor.VIEWS}">{tor.VIEWS}</span>
         </p>
-        <p style="padding-top: 2px" class="med" title="{L_COMPLETED}: {tor.COMPLETED}">
-            <b>{tor.COMPLETED}</b>
+        <p style="padding-top: 2px;" class="med" title="{L_COMPLETED}: {tor.COMPLETED}">
+            <b>{tor.DOWNLOADED}</b>
         </p>
     </td>
 	<!-- IF SHOW_SPEED -->
