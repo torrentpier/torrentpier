@@ -413,7 +413,7 @@ function build_poll_add_form (src_el)
 				<span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
 				<!-- IF postrow.RG_NAME -->
 				<div id="pg_{postrow.POST_ID}" class="alert alert-gray" style="width: 92%;">
-					<h4 class="alert-heading">{L_RELEASE_FROM_RG} <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
+					<h4 class="alert-heading">{L_RELEASE_FROM_RG} — <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
 					<div id="pg_info_{postrow.POST_ID}">
 						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
                         <!-- IF postrow.RG_DESC --><div class="post-wrap">{L_DESCRIPTION}: {postrow.RG_DESC}</div><!-- ENDIF -->
