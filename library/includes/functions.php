@@ -1484,6 +1484,7 @@ function render_flag(string $code): string
         'VI' => 'Virgin Islands, U.S.',
         'VN' => 'Vietnam',
         'VU' => 'Vanuatu',
+        'WBW' => 'Wonderful Russia of the Future 🕊',
         'WF' => 'Wallis and Futuna Islands',
         'WS' => 'Samoa',
         'XK' => 'Kosovo',
