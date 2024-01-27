@@ -242,7 +242,7 @@ ajax.callback.callseed = function (data) {
 	<!-- ENDIF / S_MODE_FULL -->
 <!-- ENDIF / SHOW_TOR_ACT -->
 
-<!-- IF DL_BUTTONS or CALL_SEED -->
+<!-- IF LOGGED_IN -->
 <tr>
 	<td colspan="2" class="row3 pad_4">
 	<!-- IF DL_BUTTONS -->
