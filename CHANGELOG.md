@@ -19,6 +19,7 @@
 - Some enhancements in default template (Part 2) [\#1322](https://github.com/torrentpier/torrentpier/pull/1322) ([belomaxorka](https://github.com/belomaxorka))
 - Set response code in some cases [\#1319](https://github.com/torrentpier/torrentpier/pull/1319) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed auth(): empty $f_access [\#1329](https://github.com/torrentpier/torrentpier/pull/1329) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed download counter for torrents [\#1346](https://github.com/torrentpier/torrentpier/pull/1346) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed HTTP 500 while cron running in server-side [\#1321](https://github.com/torrentpier/torrentpier/pull/1321) ([belomaxorka](https://github.com/belomaxorka))
 - Sending debug errors to us 🌚 via Telegram bot [\#1323](https://github.com/torrentpier/torrentpier/pull/1323) ([belomaxorka](https://github.com/belomaxorka))
 - Don't update downloads counter if attachment not exists [\#1345](https://github.com/torrentpier/torrentpier/pull/1345) ([belomaxorka](https://github.com/belomaxorka))
