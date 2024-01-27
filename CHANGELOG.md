@@ -7,6 +7,9 @@
 
 - Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Timeline — 2.4.1 [\#1340](https://github.com/torrentpier/torrentpier/pull/1340), [\#1341](https://github.com/torrentpier/torrentpier/pull/1341), [\#1342](https://github.com/torrentpier/torrentpier/pull/1342), [\#1343](https://github.com/torrentpier/torrentpier/pull/1343) ([kovalensky](https://github.com/kovalensky))
+- [BEP47] sha1 hash files are binary by default [\#1348](https://github.com/torrentpier/torrentpier/pull/1348) ([kovalensky](https://github.com/kovalensky))
+- Extend css contrast attributes [\#1349](https://github.com/torrentpier/torrentpier/pull/1349) ([kovalensky](https://github.com/kovalensky))
+- Flatten file list for hybrid files [\#1350](https://github.com/torrentpier/torrentpier/pull/1350) ([kovalensky](https://github.com/kovalensky))
 - Added new flag 🕊 [\#1347](https://github.com/torrentpier/torrentpier/pull/1347) ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to view "Watching topics" of other people's (For admins only) [\#1336](https://github.com/torrentpier/torrentpier/pull/1336) ([belomaxorka](https://github.com/belomaxorka))
 - Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
@@ -19,6 +22,7 @@
 - Some enhancements in default template [\#1312](https://github.com/torrentpier/torrentpier/pull/1312) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements in default template (Part 2) [\#1322](https://github.com/torrentpier/torrentpier/pull/1322) ([belomaxorka](https://github.com/belomaxorka))
 - Set response code in some cases [\#1319](https://github.com/torrentpier/torrentpier/pull/1319) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken user dl status [\#1351](https://github.com/torrentpier/torrentpier/pull/1351) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed auth(): empty $f_access [\#1329](https://github.com/torrentpier/torrentpier/pull/1329) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed download counter for torrents [\#1346](https://github.com/torrentpier/torrentpier/pull/1346) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed HTTP 500 while cron running in server-side [\#1321](https://github.com/torrentpier/torrentpier/pull/1321) ([belomaxorka](https://github.com/belomaxorka))

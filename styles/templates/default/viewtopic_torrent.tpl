@@ -242,9 +242,9 @@ ajax.callback.callseed = function (data) {
 	<!-- ENDIF / S_MODE_FULL -->
 <!-- ENDIF / SHOW_TOR_ACT -->
 
+<!-- IF LOGGED_IN -->
 <tr>
 	<td colspan="2" class="row3 pad_4">
-	&nbsp;
 	<!-- IF DL_BUTTONS -->
 	<form method="POST" action="{S_DL_ACTION}">{DL_HIDDEN_FIELDS}
 		<!-- IF DL_BUT_WILL --><input type="submit" name="dl_set_will" value="{L_DLWILL}" class="liteoption" />&nbsp;<!-- ENDIF -->
@@ -254,9 +254,9 @@ ajax.callback.callseed = function (data) {
 	</form>
 	<!-- ENDIF -->
     <!-- IF CALL_SEED --><input onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
-	&nbsp;
 	</td>
 </tr>
+<!-- ENDIF -->
 
 </table>
 <div class="spacer_6"></div>
