@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Timeline — 2.4.1 [\#1340](https://github.com/torrentpier/torrentpier/pull/1340), [\#1341](https://github.com/torrentpier/torrentpier/pull/1341), [\#1342](https://github.com/torrentpier/torrentpier/pull/1342), [\#1343](https://github.com/torrentpier/torrentpier/pull/1343) ([kovalensky](https://github.com/kovalensky))
 - Added ability to view "Watching topics" of other people's (For admins only) [\#1336](https://github.com/torrentpier/torrentpier/pull/1336) ([belomaxorka](https://github.com/belomaxorka))
 - Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
 - Added "Random release" button in tracker.php [\#1334](https://github.com/torrentpier/torrentpier/pull/1334) ([belomaxorka](https://github.com/belomaxorka))
@@ -24,6 +25,7 @@
 - Minor improvements [\#1306](https://github.com/torrentpier/torrentpier/pull/1306), [\#1307](https://github.com/torrentpier/torrentpier/pull/1307), [\#1308](https://github.com/torrentpier/torrentpier/pull/1308), [\#1315](https://github.com/torrentpier/torrentpier/pull/1315), [\#1328](https://github.com/torrentpier/torrentpier/pull/1328), [\#1338](https://github.com/torrentpier/torrentpier/pull/1338) ([belomaxorka](https://github.com/belomaxorka))
 - Some bugfixes [\#1326](https://github.com/torrentpier/torrentpier/pull/1326) ([belomaxorka](https://github.com/belomaxorka))
 - Updated deps [\#1304](https://github.com/torrentpier/torrentpier/pull/1304), [\#1305](https://github.com/torrentpier/torrentpier/pull/1305) ([belomaxorka](https://github.com/belomaxorka))
+- New Crowdin updates [\#1311](https://github.com/torrentpier/torrentpier/pull/1311), [\#1314](https://github.com/torrentpier/torrentpier/pull/1314), [\#1335](https://github.com/torrentpier/torrentpier/pull/1335), [\#1337](https://github.com/torrentpier/torrentpier/pull/1337), [\#1344](https://github.com/torrentpier/torrentpier/pull/1344) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0](https://github.com/torrentpier/torrentpier/tree/v2.4.0) (2024-01-01)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0-rc2...v2.4.0)
