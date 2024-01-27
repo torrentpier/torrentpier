@@ -31,7 +31,7 @@ ajax.callback.callseed = function (data) {
 <!-- BEGIN dl_users -->
 	<!-- BEGIN users_row -->
 	<tr>
-		<td width="5%" class="nowrap"><span title=" {dl_users.users_row.DL_COUNT} "><b>{dl_users.users_row.DL_OPTION_NAME}</b></span></td>
+		<td width="5%" class="nowrap"><span title="{dl_users.users_row.DL_OPTION_NAME}: {dl_users.users_row.DL_COUNT}"><b>{dl_users.users_row.DL_OPTION_NAME}</b></span></td>
 		<td width="95%" class="tLeft med pad_4"><div style="{dl_users.users_row.DL_USERS_DIV_STYLE}"><b>{dl_users.users_row.DL_OPTION_USERS}</b></div></td>
 	</tr>
 	<!-- END users_row -->
