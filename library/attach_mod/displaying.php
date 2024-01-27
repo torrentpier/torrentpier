@@ -181,11 +181,6 @@ function display_attachments($post_id)
     for ($i = 0; $i < $num_attachments; $i++) {
         $filename = $upload_dir . '/' . basename($attachments['_' . $post_id][$i]['physical_filename']);
 
-        // Checks the file existence
-        if (!is_file($filename)) {
-            continue;
-        }
-
         $upload_image = '';
         if ($attach_config['upload_img'] && empty($upload_icons[$attachments['_' . $post_id][$i]['extension']])) {
             $upload_image = '<img src="' . $attach_config['upload_img'] . '" alt="" border="0" />';
