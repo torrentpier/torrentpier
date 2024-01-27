@@ -35,9 +35,11 @@ if (empty($row['physical_filename'])) {
     bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
-// Method fields
+// Protocol meta
 $meta_v1 = !empty($row['info_hash']);
 $meta_v2 = !empty($row['info_hash_v2']);
+
+// Method fields
 $t_version_field = $meta_v2 ? 'v2' : 'v1';
 $t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
 $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
@@ -183,7 +185,7 @@ sup {
     opacity: 0.97;
 }
 </style>
-<a href = "{$data['site_url']}{$data['topic_url']}" style = "font-family: Monospace; color: #569904;">🠔 Back to the topic</a>
+<a href = "{$data['site_url']}{$data['topic_url']}" style = "font-family: Monospace; color: #569904;">&larr; Back to the topic</a>
 <center>
     <h2 style="color: #b3b3b3; font-family: Monospace;">Name: {$data['name']} | Date: {$data['date']} | Size: {$data['size']}</h2>
 <p>

@@ -68,6 +68,8 @@
 #logo img {
   padding: 7px 7px 6px 5px;
   width: 460px;
+  display: block;
+  margin: 0 auto;
 }
 
 /* ---------------------------------- *
