@@ -210,7 +210,6 @@ if ($tor_reged && $tor_info) {
             'S_UPLOAD_IMAGE' => $upload_image,
             'U_DOWNLOAD_LINK' => $download_link,
             'DL_LINK_CLASS' => isset($bt_userdata['user_status']) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
-            'DL_TITLE_CLASS' => isset($bt_userdata['user_status']) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,

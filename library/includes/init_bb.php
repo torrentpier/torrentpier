@@ -208,7 +208,6 @@ $dl_link_css = [
 ];
 
 $dl_status_css = [
-    DL_STATUS_RELEASER => 'genmed',
     DL_STATUS_WILL => 'dlWill',
     DL_STATUS_DOWN => 'dlDown',
     DL_STATUS_COMPLETE => 'dlComplete',

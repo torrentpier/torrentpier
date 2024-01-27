@@ -58,12 +58,6 @@ if ($show_dl_list) {
     }
 
     if ($dl_info = DB()->fetch_rowset($sql)) {
-        if ($count_mode) {
-            $template->assign_block_vars('dl_counts', []);
-        } else {
-            $template->assign_block_vars('dl_users', []);
-        }
-
         foreach ($dl_info as $rid => $u) {
             $u_link_class = $dl_status_css[$u['user_status']];
 
@@ -77,6 +71,7 @@ if ($show_dl_list) {
             }
         }
 
+        $hide_dl_count_empty = false;
         foreach ($dl_status_css as $i => $desc) {
             if ($dl_cat[$i] && !$count_mode) {
                 $dl_users_div_style = ($dl_count[$i] > $max_dl_users_before_overflow) ? $dl_users_div_style_overflow : $dl_users_div_style_normal;
@@ -91,6 +86,7 @@ if ($show_dl_list) {
                 ]);
             } elseif ($dl_count[$i] && $count_mode) {
                 if ($i == DL_STATUS_CANCEL && !$show_canceled_in_count_mode) {
+                    $hide_dl_count_empty = true;
                     continue;
                 }
                 $template->assign_block_vars('dl_counts.count_row', [
@@ -98,6 +94,14 @@ if ($show_dl_list) {
                     'DL_OPTION_USERS' => $dl_count[$i]
                 ]);
             }
+        }
+
+        if ($count_mode) {
+            if (!$hide_dl_count_empty) {
+                $template->assign_block_vars('dl_counts', []);
+            }
+        } else {
+            $template->assign_block_vars('dl_users', []);
         }
     } else {
         $template->assign_block_vars('dl_list_none', []);
