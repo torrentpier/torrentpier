@@ -751,7 +751,7 @@ if ($allowed_forums) {
                 'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 
                 'TOR_SIZE_RAW' => $size,
-                'TOR_SIZE' => humn_size($size),
+                'TOR_SIZE' => humn_size($size, 1),
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
                 'SEEDS' => $seeds ?: 0,

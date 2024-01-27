@@ -75,6 +75,7 @@ pre {
 
 a {
   background-color: transparent;
+  transition: color 0.5s;
 }
 
 /**

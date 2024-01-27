@@ -1327,6 +1327,7 @@ function render_flag(string $code): string
         'GN' => 'Guinea',
         'GP' => 'Guadeloupe',
         'GQ' => 'Equatorial Guinea',
+        'GR3' => 'German Reich (3rd)',
         'GR' => 'Greece',
         'GS' => 'South Georgia and the South Sandwich Islands',
         'GT' => 'Guatemala',

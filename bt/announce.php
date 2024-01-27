@@ -82,7 +82,7 @@ if (!isset($info_hash)) {
 $info_hash_hex = bin2hex($info_hash);
 
 // Store peer id
-$peer_id_sql = rtrim(DB()->escape(preg_replace('/[^a-zA-Z0-9\-\_]/', '', $peer_id)), ' ');
+$peer_id_sql = preg_replace('/[^a-zA-Z0-9\-\_]/', '', $peer_id);
 
 // Check info_hash length
 if (strlen($info_hash) !== 20) {
@@ -108,17 +108,15 @@ if (!isset($left) || $left < 0) {
 // IP
 $ip = $_SERVER['REMOTE_ADDR'];
 
+// 'ip' query handling
 if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip']) {
-    if (!$bb_cfg['verify_reported_ip']) {
-        $ip = $_GET['ip'];
-    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
-        foreach ($matches[0] as $x_ip) {
-            if ($x_ip === $_GET['ip']) {
-                if (!$bb_cfg['allow_internal_ip'] && preg_match("#(127\.([0-9]{1,3}\.){2}[0-9]{1,3}|10\.([0-9]{1,3}\.){2}[0-9]{1,3}|172\.[123][0-9]\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3})#", $x_ip)) {
-                    break;
-                }
-                $ip = $x_ip;
-                break;
+    if (!$bb_cfg['verify_reported_ip'] && isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $x_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+        if ($x_ip === $_GET['ip']) {
+            $filteredIp = filter_var($x_ip, FILTER_VALIDATE_IP);
+            if ($filteredIp !== false && ($bb_cfg['allow_internal_ip'] || !filter_var($filteredIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
+                $ip = $filteredIp;
             }
         }
     }
@@ -216,7 +214,12 @@ if ($lp_info) {
 
     // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
-        if ($info_hash !== $row['info_hash']) { // Change this to substr($row['info_hash_v2'], 0, 20) in the future for updating statistics, in case of v2 torrents being prioritized.
+    $stat_protocol = match($bb_cfg['tracker']['hybrid_stat_protocol']) {
+        1 => $row['info_hash'],
+        2 => substr($row['info_hash_v2'], 0, 20),
+        default => $row['info_hash']
+    };
+        if ($info_hash !== $stat_protocol) {
             $hybrid_unrecord = true; // This allows us to announce only for one info-hash
         }
     }
@@ -450,7 +453,6 @@ if (!$output) {
 
     $output = [
         'interval' => (int)$announce_interval,
-        'min interval' => (int)$announce_interval,
         'complete' => (int)$seeders,
         'incomplete' => (int)$leechers,
         'downloaded' => (int)$client_completed,
