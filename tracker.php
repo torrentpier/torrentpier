@@ -759,7 +759,7 @@ if ($allowed_forums) {
                 'SEEDS' => $seeds ?: 0,
                 'SEEDS_TITLE' => $seeds ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
                 'LEECHS' => $leechs ?: 0,
-                'COMPLETED' => $compl ?: 0,
+                'COMPLETED' => declension($compl ?: 0, 'times'),
                 'DOWNLOADED' => $tor['download_count'],
                 'REPLIES' => $tor['topic_replies'],
                 'VIEWS' => $tor['topic_views'],
