@@ -957,20 +957,21 @@ function clean_username($username)
  * @param bool $allow_guest
  * @return mixed
  */
-function get_userdata($u, bool $is_name = false, bool $allow_guest = false, bool $profile_view = false)
+function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = false, bool $profile_view = false)
 {
     if (empty($u)) {
         return false;
     }
 
     if (!$is_name) {
-        if ((int)$u === GUEST_UID && $allow_guest) {
+        $u = (int)$u;
+        if ($u === GUEST_UID && $allow_guest) {
             if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
                 return $u_data;
             }
         }
 
-        $where_sql = "WHERE user_id = " . (int)$u;
+        $where_sql = "WHERE user_id = " . $u;
     } else {
         $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
     }
@@ -993,7 +994,7 @@ function get_userdata($u, bool $is_name = false, bool $allow_guest = false, bool
     return $u_data;
 }
 
-function make_jumpbox()
+function make_jumpbox(): void
 {
     global $datastore, $template, $bb_cfg;
 

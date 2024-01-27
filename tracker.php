@@ -62,6 +62,7 @@ $users_tbl = BB_USERS . ' u';
 $tracker_tbl = BB_BT_TRACKER . ' tr';
 $tr_snap_tbl = BB_BT_TRACKER_SNAP . ' sn';
 $dl_stat_tbl = BB_BT_DLSTATUS . ' dl';
+$attach_desc_tbl = BB_ATTACHMENTS_DESC . ' ad';
 
 //
 // Search options
@@ -654,7 +655,7 @@ if ($allowed_forums) {
         $select = "
 			SELECT
 				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
-				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2
+				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2, ad.download_count
 		";
         $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
         $select .= (!$hide_forum) ? ", tor.forum_id" : '';
@@ -677,6 +678,7 @@ if ($allowed_forums) {
 			LEFT JOIN $dl_stat_tbl ON(dl.topic_id = tor.topic_id AND dl.user_id = $user_id)
 		" : '';
         $from .= "LEFT JOIN $tr_snap_tbl ON(sn.topic_id = tor.topic_id)";
+        $from .= "LEFT JOIN $attach_desc_tbl ON(ad.attach_id = tor.attach_id)";
 
         // WHERE
         $where = "
@@ -758,6 +760,7 @@ if ($allowed_forums) {
                 'SEEDS_TITLE' => $seeds ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
                 'LEECHS' => $leechs ?: 0,
                 'COMPLETED' => $compl ?: 0,
+                'DOWNLOADED' => $tor['download_count'],
                 'REPLIES' => $tor['topic_replies'],
                 'VIEWS' => $tor['topic_views'],
                 'ADDED_RAW' => $tor['reg_time'],
