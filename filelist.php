@@ -31,14 +31,16 @@ $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_fil
 
 $row = DB()->fetch_row($sql);
 
-if (empty($row) || empty($row['physical_filename'])) {
+if (empty($row['physical_filename'])) {
     bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
 // Method fields
-$t_version_field = !empty($row['info_hash_v2']) ? 'v2' : 'v1';
-$t_files_field = ($t_version_field === 'v2') ? 'getFileTree' : 'getFiles';
-$t_hash_field = ($t_version_field === 'v2') ? 'piecesRoot' : 'sha1';
+$meta_v1 = !empty($row['info_hash']);
+$meta_v2 = !empty($row['info_hash_v2']);
+$t_version_field = $meta_v2 ? 'v2' : 'v1';
+$t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
+$t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
 
@@ -76,6 +78,10 @@ if (IS_GUEST && $torrent->isPrivate()) {
 
 $files = $torrent->$t_version_field()->$t_files_field();
 
+if ($meta_v1 && $meta_v2) {
+    $files = new \RecursiveIteratorIterator($files); // Flatten the list
+}
+
 $allFiles = '';
 foreach ($files as $file) {
     $allFiles .= '<tr><td>' . clean_tor_dirname(implode('/', $file->path)) . '</td><td>' . humn_size($file->length, 2) . '</td><td>' . $file->$t_hash_field . '</td></tr>';
@@ -84,9 +90,9 @@ foreach ($files as $file) {
 $data = [
     'name' => !empty($t_name = $torrent->getName()) ? htmlCHR(substr($t_name, 0, 255)) : 'undefined',
     'client' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR(substr($creator, 0, 20)) : 'unknown client',
-    'date' => (!empty($creation_date = $torrent->getCreationDate()->getTimestamp()) && is_numeric($creation_date)) ? date('d-M-Y H:i (e)', $creation_date) : 'unknown',
+    'date' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : 'unknown',
     'size' => humn_size($row['size'], 2),
-    'file_count' => count($files),
+    'file_count' => $files->count(),
     'site_url' => FULL_URL,
     'topic_url' => TOPIC_URL . $topic_id,
 ];
@@ -206,5 +212,3 @@ sup {
 </body>
 </html>
 EOF;
-
-die();
