@@ -613,8 +613,8 @@ table.peers td {
 .clients {
   width: auto;
   height: auto;
-  display: inline!important;
-  vertical-align:middle;
+  display: inline !important;
+  vertical-align: middle;
 }
 
 .dl_list {

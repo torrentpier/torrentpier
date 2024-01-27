@@ -537,7 +537,8 @@ input, textarea, select {
   font-family: Verdana, sans-serif;
 }
 
-input.post, textarea.post {}
+input.post, textarea.post {
+}
 
 select, input {
   font-size: 11px;
@@ -647,11 +648,12 @@ legend a {
   text-decoration: none;
 }
 
-fieldset>legend {
+fieldset > legend {
   margin-left: 6px;
 }
 
-.root_forum {}
+.root_forum {
+}
 
 .has_sf {
   color: #333333;
@@ -693,7 +695,7 @@ textarea.editor {
   margin-bottom: 1px;
 }
 
-.fieldsets div>p {
+.fieldsets div > p {
   margin-bottom: 2px;
 }
 
@@ -701,11 +703,14 @@ textarea.editor {
   margin-bottom: 3px;
 }
 
-.fieldsets .radio {}
+.fieldsets .radio {
+}
 
-.fieldsets .chbox {}
+.fieldsets .chbox {
+}
 
-.fieldsets .input {}
+.fieldsets .input {
+}
 
 table.my_downloads {
   margin-bottom: 2px;

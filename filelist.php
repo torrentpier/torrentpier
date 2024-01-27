@@ -56,8 +56,7 @@ if ($bb_cfg['flist_max_files']) {
 
     if ($filetree_pos) {
         $file_count = substr_count($file_contents, '6:length', $filetree_pos, ($files_pos ? ($files_pos - $filetree_pos) : null));
-    }
-    else {
+    } else {
         $file_count = substr_count($file_contents, '6:length', $files_pos);
     }
 

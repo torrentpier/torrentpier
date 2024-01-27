@@ -43,7 +43,8 @@ body, th, td, font {
   position: relative;
 }
 
-#sidebar1 {}
+#sidebar1 {
+}
 
 #sidebar2 {
   padding: 0 3px 0 6px;
@@ -56,13 +57,15 @@ body, th, td, font {
   width: 210px;
 }
 
-#sidebar2-wrap {}
+#sidebar2-wrap {
+}
 
 #main_content {
   vertical-align: top;
 }
 
-#main_content_wrap {}
+#main_content_wrap {
+}
 
 #page_footer {
   clear: both;
