@@ -578,6 +578,7 @@ input.long {
 input.button, .buttons input, input.mainoption, input.main, input.liteoption, input.lite {
   color: #000000;
   border-color: #ABABAB;
+  background-color: #F7F7F7;
 }
 
 input[type="checkbox"], input[type="radio"] {
@@ -672,6 +673,7 @@ input.pOrdSel {
 textarea.editor {
   display: block;
   width: 98%;
+  background-color: #F4F4F4;
 }
 
 .fieldsets td {
