@@ -26,14 +26,13 @@ function send_file_to_browser($attachment, $upload_dir)
 {
     global $bb_cfg, $lang;
 
-    $filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
-
+    $filename = $upload_dir . '/' . $attachment['physical_filename'];
     $gotit = false;
 
-    if (@!file_exists(realpath($filename))) {
-        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
-    } else {
+    if (is_file(realpath($filename))) {
         $gotit = true;
+    } else {
+        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
     }
 
     // Correct the mime type - we force application/octet-stream for all files, except images
@@ -62,7 +61,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     // Now send the File Contents to the Browser
     if ($gotit) {
-        $size = @filesize($filename);
+        $size = filesize($filename);
         if ($size) {
             header("Content-length: $size");
         }
@@ -195,7 +194,7 @@ if (isset($download_mode[$attachment['extension']])) {
 }
 
 // Update download count
-if (!$thumbnail) {
+if (!$thumbnail && is_file(realpath($upload_dir . '/' . $attachment['physical_filename']))) {
     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int)$attachment['attach_id'];
 
     if (!DB()->sql_query($sql)) {

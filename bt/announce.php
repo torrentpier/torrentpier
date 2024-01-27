@@ -214,11 +214,11 @@ if ($lp_info) {
 
     // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
-    $stat_protocol = match($bb_cfg['tracker']['hybrid_stat_protocol']) {
-        1 => $row['info_hash'],
-        2 => substr($row['info_hash_v2'], 0, 20),
-        default => $row['info_hash']
-    };
+        $stat_protocol = match ($bb_cfg['tracker']['hybrid_stat_protocol']) {
+            1 => $row['info_hash'],
+            2 => substr($row['info_hash_v2'], 0, 20),
+            default => $row['info_hash']
+        };
         if ($info_hash !== $stat_protocol) {
             $hybrid_unrecord = true; // This allows us to announce only for one info-hash
         }
