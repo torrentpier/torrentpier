@@ -366,10 +366,10 @@ ajax.callback.view_post = function(data) {
 	<th class="{sorter: false}">&nbsp;</th>
 	<th class="{sorter: 'text'}">&nbsp;</th>
 	<!-- IF SHOW_CAT -->
-	<th class="{sorter: 'text'}" title="{L_CATEGORY}"><b class="tbs-text">{L_CATEGORY}</b></th>
+	<th class="{sorter: 'text'}" width="10%" title="{L_CATEGORY}"><b class="tbs-text">{L_CATEGORY}</b></th>
 	<!-- ENDIF -->
 	<!-- IF SHOW_FORUM -->
-	<th class="{sorter: 'text'}" width="25%" title="{L_FORUM}"><b class="tbs-text">{L_FORUM}</b></th>
+	<th class="{sorter: 'text'}" width="10%" title="{L_FORUM}"><b class="tbs-text">{L_FORUM}</b></th>
 	<!-- ENDIF -->
 	<th class="{sorter: 'text'}" width="75%" title="{L_TOPIC}"><b class="tbs-text">{L_TOPIC}</b></th>
 	<!-- IF SHOW_AUTHOR -->
@@ -378,7 +378,7 @@ ajax.callback.view_post = function(data) {
 	<th class="{sorter: 'digit'}" title="{L_SIZE}"><b class="tbs-text">{L_SIZE}</b></th>
 	<th class="{sorter: 'digit'}" title="{L_SEEDERS}"><b class="tbs-text">S</b></th>
 	<th class="{sorter: 'digit'}" title="{L_LEECHERS}"><b class="tbs-text">L</b></th>
-    <th class="{sorter: false}" title="{L_REPLIES}"><b class="tbs-text">{L_REPLIES_SHORT}</b></th>
+    <th class="{sorter: false}" width="5%" title="{L_REPLIES}"><b class="tbs-text">{L_REPLIES_SHORT}</b></th>
 	<!-- IF SHOW_SPEED -->
 	<th class="{sorter: false}" title="{L_DL_SPEED}"><b class="tbs-text">SP</b></th>
 	<!-- ENDIF -->
