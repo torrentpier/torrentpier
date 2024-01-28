@@ -4796,9 +4796,10 @@ $(function(){
 	<div style="width: 99%">
 		<div><input type="text" id="preview-title" size="60" value="" class="bold" style="width: 100%" /></div>
 		<div><textarea id="preview-msg" rows="15" cols="10" wrap="off" class="editor" style="width: 100%"></textarea></div>
-		<div class="tCenter">
-			<input type="button" value="Создать HTML" onclick="ajax.posts( $('#preview-msg').val(), 'preview-html-body' );" class="bold" />
-		</div>
+        <div class="tCenter mrg_8">
+            <input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.posts( $('#preview-msg').val(), 'preview-html-body' );" class="bold"/>&nbsp;&nbsp;
+            <input type="button" value="Продолжить (Создать релиз)" onclick="tpl_submit(true);" class="bold"/>
+        </div>
 	</div>
 	</td>
 </tr>
@@ -4843,19 +4844,19 @@ $(function(){
 <col class="row2" width="80%">
 <thead>
 <tr>
-	<th colspan="2">Заполните форму для релиза<!-- IF EDIT_TPL --> &nbsp; [ <u class="clickable" onclick="tpl_fill_form();">Заполнить</u> ]<!-- ENDIF --></th>
+	<th colspan="2">Заполните форму для релиза<!-- IF EDIT_TPL --> &nbsp; [ <u title="Генерирует случайное заполнение" class="clickable" onclick="tpl_fill_form();">Заполнить</u> ]<!-- ENDIF --></th>
 </tr>
 </thead>
 <tbody id="rel-tpl">
 </tbody>
 <tfoot>
 <tr>
-	<td colspan="2" class="pad_8 tCenter bold">На следующей странице проверьте оформление и загрузите torrent файл</td>
+	<td colspan="2" class="pad_8 tCenter bold">На следующей странице проверьте оформление и загрузите файл</td>
 </tr>
 <tr>
 	<td class="catBottom" colspan="2">
 		<!-- IF EDIT_TPL -->
-		<input type="button" value="Заполнить" style="width: 120px;" onclick="tpl_fill_form();" />&nbsp;&nbsp;
+		<input type="button" title="Генерирует случайное заполнение" value="Заполнить" style="width: 120px;" onclick="tpl_fill_form();" />&nbsp;&nbsp;
 		<input type="button" value="Продолжить" class="bold" style="width: 150px;" onclick="tpl_build_msg(true);" />
 		<!-- ELSE -->
 		<input type="button" value="Продолжить" class="bold" style="width: 150px;" onclick="tpl_submit(true);" />
