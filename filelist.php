@@ -121,7 +121,7 @@ echo <<<EOF
 <body>
 <style>
 body {
-    background-color: #1f1f1f; color: #ffffff;
+    background-color: #1f1f1f;
 }
 
 table {
