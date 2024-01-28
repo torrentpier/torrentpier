@@ -134,7 +134,7 @@ switch ($mode) {
         $this->response['tpl_id'] = $tpl_id;
         $this->response['tpl_name'] = $tpl_name;
         $this->response['html']['tpl-last-edit-time'] = bb_date(TIMENOW, 'd-M-y H:i');
-        $this->response['html']['tpl-last-edit-by'] = $userdata['username'];
+        $this->response['html']['tpl-last-edit-by'] = profile_url(get_userdata($userdata['username'], true));
         break;
 
     // создание нового шаблона
@@ -157,7 +157,10 @@ switch ($mode) {
         if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
-        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = $forum_id LIMIT 1");
+        $get_forum_tpl_id = DB()->fetch_row("SELECT forum_tpl_id FROM " . BB_FORUMS . " WHERE forum_id = " . $forum_id . " LIMIT 1");
+        if ($tpl_id == $get_forum_tpl_id['forum_tpl_id']) {
+            DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = $forum_id LIMIT 1");
+        }
         $this->response['msg'] = "Шаблон {$tpl_data['tpl_name']} успешно удалён";
         break;
 
