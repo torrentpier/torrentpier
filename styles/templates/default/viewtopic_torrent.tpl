@@ -62,11 +62,13 @@ ajax.callback.callseed = function (data) {
 </tr>
 <!-- ENDIF / SHOW_DL_LIST_TOR_INFO -->
 
+<!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->
 <!-- BEGIN dl_list_none -->
 <tr>
-	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->{L_SHOW_DL_LIST}: {L_NONE}<!-- ENDIF --></td>
+    <td colspan="2" class="pad_6">{L_SHOW_DL_LIST}: {L_NONE}</td>
 </tr>
 <!-- END dl_list_none -->
+<!-- ENDIF -->
 
 <!-- IF SHOW_TOR_ACT -->
 	<!-- IF S_MODE_COUNT -->
