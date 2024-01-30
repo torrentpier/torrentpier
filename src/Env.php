@@ -111,6 +111,6 @@ class Env
 
                 return $value;
             })
-            ->getOrCall(fn () => $default instanceof Closure ? $default() : $default);
+            ->getOrCall(fn() => $default instanceof Closure ? $default() : $default);
     }
 }
