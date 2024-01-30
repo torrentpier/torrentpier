@@ -94,8 +94,7 @@ if ($client_full || !$stats_cache = CACHE('tr_cache')->get('tracker_clients_stat
             $clientString = $client_full ? substr($row['client'], 0, $client_full) : substr($row['client'], 0, 3);
             if (!isset($clients[$clientString])) {
                 $clients[$clientString] = 1;
-            }
-            else {
+            } else {
                 $clients[$clientString]++;
             }
             $client_count++;
@@ -168,7 +167,7 @@ echo "\n
 <br>
 \n";
 echo (count($clients_percentage) > $numwant) ? ('<a href="' . 'tracker.php?client_numwant=' . ($numwant + 100) . '">' . 'Show more' . '</a><br>') : '';
-echo $client_full ? '<br><b>Get more length and numbers via modifying the parameters in the url<b>' : (!empty($client_list) ? '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>': '');
+echo $client_full ? '<br><b>Get more length and numbers via modifying the parameters in the url<b>' : (!empty($client_list) ? '<a href="tracker.php?client_length=6&client_numwant=10">Peer_ids with more length (version debugging)</a>' : '');
 echo '</td></tr>';
 echo '</table>';
 echo !$client_full ? '<p style = "text-align:right;">Simple stats for clients are being cached for one hour.</p>' : '';

@@ -40,8 +40,7 @@ switch ($mode) {
             $values = "$topic_id, {$userdata['user_id']}, " . TIMENOW;
             DB()->query('INSERT IGNORE INTO ' . BB_THX . " ($columns) VALUES ($values)");
             break;
-        }
-        else {
+        } else {
             $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
 
@@ -56,12 +55,11 @@ switch ($mode) {
 
             $this->response['html'] = join(', ', $user_list) ?: $lang['NO_LIKES'];
             break;
-        }
-        else {
+        } else {
             $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
-        default:
-            $this->ajax_die('Invalid mode: ' . $mode);
+    default:
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['mode'] = $mode;
