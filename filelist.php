@@ -93,7 +93,7 @@ $data = [
     'client' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR(substr($creator, 0, 20)) : 'unknown client',
     'date' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : 'unknown',
     'size' => humn_size($row['size'], 2),
-    'file_count' => $files->count(),
+    'file_count' => iterator_count($files),
     'site_url' => FULL_URL,
     'topic_url' => TOPIC_URL . $topic_id,
 ];
@@ -189,7 +189,7 @@ sup {
 <center>
     <h2 style="color: #b3b3b3; font-family: Monospace;">Name: {$data['name']} | Date: {$data['date']} | Size: {$data['size']}</h2>
 <p>
-    <i>Created by: {$data['client']}</i>
+    <p style= "font-family:Calibri;">Created by: <i title="Torrent client's name">{$data['client']}</i></p>
 </p>
 <hr>
 <table>
@@ -200,7 +200,7 @@ sup {
             BTMR hash
             <sup>?
                 <span class="tooltiptext">
-                    BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, and download deduplicated torrents using desktop tools such as
+                    BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as
                     <a href="https://github.com/kovalensky/tmrr" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader.</a>
                 </span>
             </sup>
