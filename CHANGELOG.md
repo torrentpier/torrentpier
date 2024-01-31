@@ -6,7 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
-- Timeline — 2.4.1 [\#1340](https://github.com/torrentpier/torrentpier/pull/1340), [\#1341](https://github.com/torrentpier/torrentpier/pull/1341), [\#1342](https://github.com/torrentpier/torrentpier/pull/1342), [\#1343](https://github.com/torrentpier/torrentpier/pull/1343) ([kovalensky](https://github.com/kovalensky))
+- Timeline — 2.4.1 [\#1340](https://github.com/torrentpier/torrentpier/pull/1340), [\#1341](https://github.com/torrentpier/torrentpier/pull/1341), [\#1342](https://github.com/torrentpier/torrentpier/pull/1342), [\#1343](https://github.com/torrentpier/torrentpier/pull/1343), [\#1362](https://github.com/torrentpier/torrentpier/pull/1362) ([kovalensky](https://github.com/kovalensky))
 - [BEP47] sha1 hash files are binary by default [\#1348](https://github.com/torrentpier/torrentpier/pull/1348) ([kovalensky](https://github.com/kovalensky))
 - Extend css contrast attributes [\#1349](https://github.com/torrentpier/torrentpier/pull/1349) ([kovalensky](https://github.com/kovalensky))
 - Flatten file list for hybrid files [\#1350](https://github.com/torrentpier/torrentpier/pull/1350) ([kovalensky](https://github.com/kovalensky))
@@ -20,6 +20,7 @@
 - Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Use `target="_blank"` in admin for profile_url() redirects [\#1330](https://github.com/torrentpier/torrentpier/pull/1330) ([belomaxorka](https://github.com/belomaxorka))
 - Used declensions for days in some cases [\#1310](https://github.com/torrentpier/torrentpier/pull/1310) ([belomaxorka](https://github.com/belomaxorka))
+- Used `modern-normalize` instead of outdated `nornalize-css` [\#1363](https://github.com/torrentpier/torrentpier/pull/1363) ([belomaxorka](https://github.com/belomaxorka))
 - Used datastore to show statistic for more performance [\#1309](https://github.com/torrentpier/torrentpier/pull/1309) ([belomaxorka](https://github.com/belomaxorka))
 - Used `humn_size()` to count average of releases in tr_stats.php [\#1313](https://github.com/torrentpier/torrentpier/pull/1313) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements in default template [\#1312](https://github.com/torrentpier/torrentpier/pull/1312) ([belomaxorka](https://github.com/belomaxorka))
