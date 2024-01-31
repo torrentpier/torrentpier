@@ -160,6 +160,7 @@ p {
 }
 
 a {
+    text-decoration: none;
     color: #1d9100;
 }
 
