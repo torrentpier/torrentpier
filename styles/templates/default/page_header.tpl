@@ -258,7 +258,7 @@ function go_to_page ()
 </script>
 
 <!--main_nav-->
-<div id="main-nav" <!-- IF HAVE_NEW_PM -->class="new-pm"<!-- ENDIF --> style="height: 17px;">
+<div id="main-nav"<!-- IF HAVE_NEW_PM --> class="new-pm"<!-- ENDIF -->>
 	<table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="nowrap">
