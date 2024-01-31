@@ -18,6 +18,7 @@
 - Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
 - Added "Random release" button in tracker.php [\#1334](https://github.com/torrentpier/torrentpier/pull/1334) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
+- Moved announcer url autofill into cron [\#1364](https://github.com/torrentpier/torrentpier/pull/1364) ([belomaxorka](https://github.com/belomaxorka))
 - Use `target="_blank"` in admin for profile_url() redirects [\#1330](https://github.com/torrentpier/torrentpier/pull/1330) ([belomaxorka](https://github.com/belomaxorka))
 - Used declensions for days in some cases [\#1310](https://github.com/torrentpier/torrentpier/pull/1310) ([belomaxorka](https://github.com/belomaxorka))
 - Used `modern-normalize` instead of outdated `nornalize-css` [\#1363](https://github.com/torrentpier/torrentpier/pull/1363) ([belomaxorka](https://github.com/belomaxorka))

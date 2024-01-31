@@ -11,12 +11,12 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-// Синхронизация
+// Synchronization
 \TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
 \TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');
 \TorrentPier\Legacy\Admin\Common::sync_all_forums();
 
-// Чистка bb_poll_users
+// Cleaning bb_poll_users
 if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {
     $per_cycle = 20000;
     $row = DB()->fetch_row("SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM " . BB_POLL_USERS);
@@ -41,10 +41,15 @@ if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {
     }
 }
 
-// Чистка user_newpasswd
+// Cleaning user_newpasswd
 DB()->query("UPDATE " . BB_USERS . " SET user_newpasswd = '' WHERE user_lastvisit < " . (TIMENOW - 7 * 86400));
 
-// Чистка кеша постов
+// Cleaning post cache
 if ($posts_days = (int)$bb_cfg['posts_cache_days_keep']) {
     DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL $posts_days DAY)");
+}
+
+// Autofill announcer url
+if (empty($bb_cfg['bt_announce_url'])) {
+    bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
 }
