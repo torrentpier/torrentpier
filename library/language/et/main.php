@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Rasvane tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kaldkirjas tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Allajoonitud tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Tsiteerin teksti: [quote]text[/quote] (Ctrl+Q)';

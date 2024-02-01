@@ -1532,6 +1532,7 @@ $lang['BOLD'] = 'Удебелен текст: [b]text[/b] (клавишна ко
 $lang['ITALIC'] = 'Курсивный текст: [i]text[/i] (Ctrl+i)';
 $lang['UNDERLINE'] = 'Подчертаване на текст: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачертан текст: [s]text[/s] (Ctrl+c)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитирам текст: [quote]text[/quote] (комбинация от клавиши Ctrl+M)';

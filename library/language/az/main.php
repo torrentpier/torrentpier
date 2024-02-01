@@ -1533,6 +1533,7 @@ $lang['BOLD'] = 'Qalın mətn: [b]text[/b] (əsas birləşməsi Ctrl+B)';
 $lang['ITALIC'] = 'Курсивный mətn: [i]text[/i] (əsas birləşməsi Ctrl+ı)';
 $lang['UNDERLINE'] = 'Qeyd mətni: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый mətn: [s]text[/s] (Ctrl+c)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Sitat mətn: [quote]text[/quote] (əsas birləşməsi Ctrl+M)';

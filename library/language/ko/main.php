@@ -1530,6 +1530,7 @@ $lang['BOLD'] = '굵은 텍스트:[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = '이탤릭체 텍스트:[i]text[/i](Ctrl+)';
 $lang['UNDERLINE'] = '밑줄 텍스트:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '삼진 텍스트:[s]text[/s](Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '견적 텍스트:[quote]text[/quote](Ctrl+Q)';

@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Texto em negrito: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Texto em itálico: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Sublinhar o texto: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Texto rasurado: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citação de texto: [quote]text[/quote] (Ctrl+Q)';

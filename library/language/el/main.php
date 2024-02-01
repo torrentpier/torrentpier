@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Κείμενο με έντονη γραφή: [b]text[/b] (Ctrl+
 $lang['ITALIC'] = 'Πλάγια γραφή: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Υπογράμμιση κειμένου: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Κεραυνός κείμενο: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Παραθέτω το κείμενο: [quote]text[/quote] (Ctrl+Q)';

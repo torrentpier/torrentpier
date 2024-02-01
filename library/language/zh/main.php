@@ -1530,6 +1530,7 @@ $lang['BOLD'] = '粗体文字：[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = '斜体文字：[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下划线的案文：[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '删除线文本：[s]text[/s](Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '引文：[quote]text[/quote](Ctrl+Q)';
