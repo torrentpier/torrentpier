@@ -79,6 +79,8 @@ class Dev
      */
     private static function getWhoops(): void
     {
+        global $bb_cfg;
+
         if (!APP_DEBUG) {
             return;
         }
@@ -117,14 +119,14 @@ class Dev
         }
 
         /**
-         * Send debug to us :D
+         * Send debug via Telegram
          */
-        if (defined('DEBUG_TELEGRAM_SENDER') && is_array(DEBUG_TELEGRAM_SENDER)) {
+        if ($bb_cfg['telegram_sender']['enabled']) {
             $telegramSender = new PlainTextHandler();
             $telegramSender->loggerOnly(true);
             $telegramSender->setLogger((new Logger(
                 APP_NAME,
-                [(new TelegramHandler(DEBUG_TELEGRAM_SENDER['token'], DEBUG_TELEGRAM_SENDER['chat_id']))
+                [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: $bb_cfg['telegram_sender']['timeout']))
                     ->setFormatter(new TelegramFormatter())]
             )));
             $whoops->pushHandler($telegramSender);
