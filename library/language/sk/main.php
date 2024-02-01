@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Tučným písmom (Bold): [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kurzíva text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Podčiarknutie textu: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Preškrtnuté text: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citát text: [quote]text[/quote] (Ctrl+Q)';
