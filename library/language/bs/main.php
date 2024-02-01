@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Hrabar tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic tekst: [i]text[/i] (Ctrl+sam)';
 $lang['UNDERLINE'] = 'Podvući tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Istakni tekst: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citiram tekst: [quote]text[/quote] (Ctrl+Q)';
