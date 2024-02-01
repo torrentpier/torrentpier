@@ -444,10 +444,17 @@ $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error r
 $bb_cfg['abuse_email'] = "abuse@$domain_name"; // abuse email (e.g. DMCA)
 $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 
-// Bugsnag error reporting
+// Error reporting
 $bb_cfg['bugsnag'] = [
     'enabled' => false,
     'api_key' => '',
+];
+
+$bb_cfg['telegram_sender'] = [
+    'enabled' => false,
+    'token' => '',
+    'chat_id' => '',
+    'timeout' => 10
 ];
 
 // Special users
@@ -565,7 +572,7 @@ $bb_cfg['advert_url'] = 'info.php?show=advert';
 $bb_cfg['sitemap_sending'] = [
     // A list of URLs to which to send a sitemap for indexing by a search robot.
     // Syntax: 'Resource name' => 'link to endpoint'
-    'Google' => 'http://google.com/webmasters/sitemaps/ping?sitemap=',
+    'Google' => 'https://google.com/webmasters/sitemaps/ping?sitemap=',
 ];
 
 // Extensions
@@ -621,8 +628,8 @@ $bb_cfg['group_avatars'] = [
 // Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = [
     'disabled' => true,
-    'public_key' => '', // your public key
-    'secret_key' => '', // your secret key
+    'public_key' => '',
+    'secret_key' => '',
     'theme' => 'light', // theming (available: light, dark)
 ];
 
