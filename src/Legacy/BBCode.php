@@ -124,6 +124,8 @@ class BBCode
             '[/sup]' => '</sup>',
             '[sub]' => '<sub>',
             '[/sub]' => '</sub>',
+            '[box]' => '<div class="post-box-default"><div class="post-box">',
+            '[/box]' => '</div></div>',
             '[del]' => '<span class="post-s">',
             '[/del]' => '</span>',
             '[clear]' => '<div class="clear">&nbsp;</div>',

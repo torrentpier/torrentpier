@@ -366,6 +366,20 @@ a.gen, a.med, a.genmed, a.small, a.gensmall {
   text-decoration: line-through;
 }
 
+.post-box-default {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.post-box {
+  display: inline-block;
+  border: 1px solid #a7b4ba;
+  border-radius: 3px;
+  line-height: 150%;
+  margin: 1px 5px;
+  padding: 0 8px 1px;
+}
+
 /* ---------------------------------- *
      Code blocks
  * ---------------------------------- */
