@@ -121,7 +121,7 @@ echo <<<EOF
 <body>
 <style>
 body {
-    background-color: #1f1f1f;
+    background-color: #1f1f1f; color: #ffffff;
 }
 
 hr {

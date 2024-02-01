@@ -136,11 +136,6 @@
   color: #000000;
 }
 
-#latest_news a:hover {
-  text-shadow: 0 0 4px grey;
-  transition: 0.5s;
-}
-
 #latest_news .new a {
   color: #A52A2A;
   font-weight: bold;
