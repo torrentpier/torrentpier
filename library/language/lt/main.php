@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Bold tekstas: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Pasvirasis tekstas: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Pabrėžiama tekstas: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekstas: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citata tekstas: [quote]text[/quote] (Ctrl+Q)';
