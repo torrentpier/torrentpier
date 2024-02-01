@@ -15,6 +15,7 @@
 - Add referrer "origin" policy to repository links [\#1357](https://github.com/torrentpier/torrentpier/pull/1357) ([kovalensky](https://github.com/kovalensky))
 - Added new flag 🕊 [\#1347](https://github.com/torrentpier/torrentpier/pull/1347) ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to view "Watching topics" of other people's (For admins only) [\#1336](https://github.com/torrentpier/torrentpier/pull/1336) ([belomaxorka](https://github.com/belomaxorka))
+- Added `[box]` BBCode tag [\#1368](https://github.com/torrentpier/torrentpier/pull/1368) ([belomaxorka](https://github.com/belomaxorka))
 - Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
 - Added "Random release" button in tracker.php [\#1334](https://github.com/torrentpier/torrentpier/pull/1334) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
