@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Матни Bold: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Матни Italic: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Таъкид матн: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Матни Strikeout: [s]text[/s] (Ctrl + S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Матни Quote: [quote]text[/quote] (Ctrl + Q)';
