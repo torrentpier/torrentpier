@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Тоўсты тэкст: [b]text[/b] (спалучэнне кл
 $lang['ITALIC'] = 'Курсіўны тэкст: [i]text[/i] (спалучэнне клавіш Ctrl+я)';
 $lang['UNDERLINE'] = 'Падкрэсліванне тэксту: [u]text[/u] (клавішы Ctrl+U)';
 $lang['STRIKEOUT'] = 'Закрэслены тэкст: [s]text[/s] (Ctrl+з)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Цытую тэкст: [quote]text[/quote] (спалучэнне клавіш Ctrl+М)';
