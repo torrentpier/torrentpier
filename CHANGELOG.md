@@ -8,7 +8,6 @@
 - Release 2.4.1 🦉 ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Timeline — 2.4.1 [\#1340](https://github.com/torrentpier/torrentpier/pull/1340), [\#1341](https://github.com/torrentpier/torrentpier/pull/1341), [\#1342](https://github.com/torrentpier/torrentpier/pull/1342), [\#1343](https://github.com/torrentpier/torrentpier/pull/1343), [\#1362](https://github.com/torrentpier/torrentpier/pull/1362) ([kovalensky](https://github.com/kovalensky))
 - [BEP47] sha1 hash files are binary by default [\#1348](https://github.com/torrentpier/torrentpier/pull/1348) ([kovalensky](https://github.com/kovalensky))
-- Extend css contrast attributes [\#1349](https://github.com/torrentpier/torrentpier/pull/1349) ([kovalensky](https://github.com/kovalensky))
 - Flatten file list for hybrid files [\#1350](https://github.com/torrentpier/torrentpier/pull/1350) ([kovalensky](https://github.com/kovalensky))
 - Counter is not precise [\#1360](https://github.com/torrentpier/torrentpier/pull/1360) ([kovalensky](https://github.com/kovalensky))
 - Add referrer "origin" policy to repository links [\#1357](https://github.com/torrentpier/torrentpier/pull/1357) ([kovalensky](https://github.com/kovalensky))
