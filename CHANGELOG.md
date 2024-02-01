@@ -15,7 +15,7 @@
 - Added ability to view "Watching topics" of other people's (For admins only) [\#1336](https://github.com/torrentpier/torrentpier/pull/1336) ([belomaxorka](https://github.com/belomaxorka))
 - Added `[box]` BBCode tag [\#1368](https://github.com/torrentpier/torrentpier/pull/1368) ([belomaxorka](https://github.com/belomaxorka))
 - Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
-- Added ability to send debug via Telegram [\#1323](https://github.com/torrentpier/torrentpier/pull/1323), [\#1323](https://github.com/torrentpier/torrentpier/pull/1323) ([belomaxorka](https://github.com/belomaxorka))
+- Added ability to send debug via Telegram [\#1323](https://github.com/torrentpier/torrentpier/pull/1323), [\#1372](https://github.com/torrentpier/torrentpier/pull/1372) ([belomaxorka](https://github.com/belomaxorka))
 - Added "Random release" button in tracker.php [\#1334](https://github.com/torrentpier/torrentpier/pull/1334) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
 - Moved announcer url autofill into cron [\#1364](https://github.com/torrentpier/torrentpier/pull/1364) ([belomaxorka](https://github.com/belomaxorka))
