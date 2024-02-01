@@ -75,6 +75,7 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="&#8212;" name="codeHR" title="{L_HOR_LINE}" style="font-weight: bold;" />
 	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" />&nbsp;
 	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" />
+    <input type="button" value="box" name="codeBox" title="{L_BOX_TAG}" />
 </span>
 
 <div class="buttons floatR">
@@ -205,6 +206,7 @@ function checkForm(form) {
     bbcode.addTag("codeSpoiler", "spoiler", null, "", ctrl);
     bbcode.addTag("codeSup", "sup", null, "", ctrl);
     bbcode.addTag("codeSub", "sub", null, "", ctrl);
+    bbcode.addTag("codeBox", "box", null, "", ctrl);
 
     bbcode.addTag("fontFace", function (e) {
         var v = e.value;

@@ -15,6 +15,7 @@
 - Add referrer "origin" policy to repository links [\#1357](https://github.com/torrentpier/torrentpier/pull/1357) ([kovalensky](https://github.com/kovalensky))
 - Added new flag 🕊 [\#1347](https://github.com/torrentpier/torrentpier/pull/1347) ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to view "Watching topics" of other people's (For admins only) [\#1336](https://github.com/torrentpier/torrentpier/pull/1336) ([belomaxorka](https://github.com/belomaxorka))
+- Added `[box]` BBCode tag [\#1368](https://github.com/torrentpier/torrentpier/pull/1368) ([belomaxorka](https://github.com/belomaxorka))
 - Added `bt_announce_url` autofill [\#1331](https://github.com/torrentpier/torrentpier/pull/1331) ([belomaxorka](https://github.com/belomaxorka))
 - Added "Random release" button in tracker.php [\#1334](https://github.com/torrentpier/torrentpier/pull/1334) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for fastly cdn [\#1327](https://github.com/torrentpier/torrentpier/pull/1327) ([belomaxorka](https://github.com/belomaxorka), [kovalensky](https://github.com/kovalensky))
@@ -36,7 +37,7 @@
 - Don't update downloads counter if attachment not exists [\#1345](https://github.com/torrentpier/torrentpier/pull/1345) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1306](https://github.com/torrentpier/torrentpier/pull/1306), [\#1307](https://github.com/torrentpier/torrentpier/pull/1307), [\#1308](https://github.com/torrentpier/torrentpier/pull/1308), [\#1315](https://github.com/torrentpier/torrentpier/pull/1315), [\#1328](https://github.com/torrentpier/torrentpier/pull/1328), [\#1338](https://github.com/torrentpier/torrentpier/pull/1338), [\#1353](https://github.com/torrentpier/torrentpier/pull/1353), [\#1355](https://github.com/torrentpier/torrentpier/pull/1355), [\#1358](https://github.com/torrentpier/torrentpier/pull/1358) ([belomaxorka](https://github.com/belomaxorka))
 - Some bugfixes [\#1326](https://github.com/torrentpier/torrentpier/pull/1326) ([belomaxorka](https://github.com/belomaxorka))
-- Updated deps [\#1304](https://github.com/torrentpier/torrentpier/pull/1304), [\#1305](https://github.com/torrentpier/torrentpier/pull/1305) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#1304](https://github.com/torrentpier/torrentpier/pull/1304), [\#1305](https://github.com/torrentpier/torrentpier/pull/1305), [\#1305](https://github.com/torrentpier/torrentpier/pull/1305), [\#1367](https://github.com/torrentpier/torrentpier/pull/1367), [\#1366](https://github.com/torrentpier/torrentpier/pull/1366), [\#1365](https://github.com/torrentpier/torrentpier/pull/1365) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1311](https://github.com/torrentpier/torrentpier/pull/1311), [\#1314](https://github.com/torrentpier/torrentpier/pull/1314), [\#1335](https://github.com/torrentpier/torrentpier/pull/1335), [\#1337](https://github.com/torrentpier/torrentpier/pull/1337), [\#1344](https://github.com/torrentpier/torrentpier/pull/1344) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.0](https://github.com/torrentpier/torrentpier/tree/v2.4.0) (2024-01-01)
