@@ -1530,6 +1530,7 @@ $lang['BOLD'] = 'Félkövér szöveg: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Dőlt szöveg: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Aláhúzott szöveg: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout szöveg: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Idézet szövege: [quote]text[/quote] (Ctrl+Q)';
