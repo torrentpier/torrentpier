@@ -11,7 +11,6 @@
 - Extend css contrast attributes [\#1349](https://github.com/torrentpier/torrentpier/pull/1349) ([kovalensky](https://github.com/kovalensky))
 - Flatten file list for hybrid files [\#1350](https://github.com/torrentpier/torrentpier/pull/1350) ([kovalensky](https://github.com/kovalensky))
 - Counter is not precise [\#1360](https://github.com/torrentpier/torrentpier/pull/1360) ([kovalensky](https://github.com/kovalensky))
-- CSS hover for news [\#1359](https://github.com/torrentpier/torrentpier/pull/1359) ([kovalensky](https://github.com/kovalensky))
 - Add referrer "origin" policy to repository links [\#1357](https://github.com/torrentpier/torrentpier/pull/1357) ([kovalensky](https://github.com/kovalensky))
 - Added new flag 🕊 [\#1347](https://github.com/torrentpier/torrentpier/pull/1347) ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to view "Watching topics" of other people's (For admins only) [\#1336](https://github.com/torrentpier/torrentpier/pull/1336) ([belomaxorka](https://github.com/belomaxorka))
