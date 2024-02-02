@@ -74,7 +74,7 @@ ajax.callback.posts = function(data) {
     <input type="button" value="sub" name="codeSub" title="{L_SUBSCRIPT}" />&nbsp;
 	<input type="button" value="&#8212;" name="codeHR" title="{L_HOR_LINE}" style="font-weight: bold;" />
 	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" />
-	<input type="button" value="&#8667;" name="codeIndent" title="Отступ" />&nbsp;
+	<input type="button" value="&#8667;" name="codeIndent" title="{L_INDENT_TAG}" />&nbsp;
 	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" />
     <input type="button" value="box" name="codeBox" title="{L_BOX_TAG}" />
 </span>
