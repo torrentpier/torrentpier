@@ -787,7 +787,7 @@ function str_short($text, $max_length, $space = ' ')
         $text = preg_replace('!&#?(\w+)?;?(\w{1,5})?\.\.\.$!', '...', $text);
     }
 
-    return $text;
+    return $text ?? '';
 }
 
 function wbr($text, $max_word_length = HTML_WBR_LENGTH)
