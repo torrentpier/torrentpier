@@ -28,6 +28,7 @@
 - Set response code in some cases [\#1319](https://github.com/torrentpier/torrentpier/pull/1319) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `admin_terms.php` textarea reset in preview mode [\#1371](https://github.com/torrentpier/torrentpier/pull/1371) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken user dl status [\#1351](https://github.com/torrentpier/torrentpier/pull/1351) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed: mb_strlen(): Passing null parameter [\#1374](https://github.com/torrentpier/torrentpier/pull/1374) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed auth(): empty $f_access [\#1329](https://github.com/torrentpier/torrentpier/pull/1329) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed download counter for torrents [\#1346](https://github.com/torrentpier/torrentpier/pull/1346) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed HTTP 500 while cron running in server-side [\#1321](https://github.com/torrentpier/torrentpier/pull/1321) ([belomaxorka](https://github.com/belomaxorka))
