@@ -126,6 +126,8 @@ class BBCode
             '[/sub]' => '</sub>',
             '[box]' => '<div class="post-box-default"><div class="post-box">',
             '[/box]' => '</div></div>',
+            '[indent]' => '<div class="post-indent">',
+            '[/indent]' => '</div>',
             '[del]' => '<span class="post-s">',
             '[/del]' => '</span>',
             '[clear]' => '<div class="clear">&nbsp;</div>',

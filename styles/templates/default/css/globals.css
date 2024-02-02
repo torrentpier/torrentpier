@@ -380,6 +380,10 @@ a.gen, a.med, a.genmed, a.small, a.gensmall {
   padding: 0 8px 1px;
 }
 
+.post-indent {
+  margin-left: 2em;
+}
+
 /* ---------------------------------- *
      Code blocks
  * ---------------------------------- */
