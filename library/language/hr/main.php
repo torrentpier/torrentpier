@@ -1534,6 +1534,7 @@ $lang['ITALIC'] = 'Курсивный tekst: [i]text[/i] (Ctrl+i)';
 $lang['UNDERLINE'] = 'Podvlačenje teksta: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Prekriženo tekst: [s]text[/s] (Ctrl+s)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citiram tekst: [quote]text[/quote] (Ctrl+M)';

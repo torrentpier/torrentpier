@@ -1534,6 +1534,7 @@ $lang['ITALIC'] = 'Курсивный տեքստը: [i]text[/i] (դյուրան�
 $lang['UNDERLINE'] = 'Ընդգծելով տեքստը: [u]text[/u] (բանալիների Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый տեքստը: [s]text[/s] (Ctrl+c)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Մեջբերում եմ տեքստը: [quote]text[/quote] (դյուրանցման Ctrl+M)';
