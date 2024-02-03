@@ -26,7 +26,7 @@ foreach ($keeping_dlstat as $dl_status => $days_to_keep) {
         $delete_dlstat_sql[] = "
 			user_status = $dl_status
 			AND
-			last_modified_dlstatus < (UNIX_TIMESTAMP() - $days_to_keep*86400)
+			last_modified_dlstatus < DATE_SUB(NOW(), INTERVAL $days_to_keep DAY)
 		";
     }
 }

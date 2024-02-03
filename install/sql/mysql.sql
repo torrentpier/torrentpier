@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus`
   `user_id`                MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `topic_id`               MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_status`            TINYINT(1)            NOT NULL DEFAULT '0',
-  `last_modified_dlstatus` INT(11)               NOT NULL DEFAULT '0',
+  `last_modified_dlstatus` TIMESTAMP             NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`, `topic_id`),
   KEY `topic_id` (`topic_id`)
 )
