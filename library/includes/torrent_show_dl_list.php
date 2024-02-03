@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 $show_canceled_in_count_mode = false;
-$title_date_format = 'Y-m-d';
+$title_date_format = 'd-M-y H:i';
 $dl_list_sql_limit = 300;     // DL-List overall limit
 $max_dl_users_before_overflow = 100;     // for each dl-status
 $dl_users_overflow_div_height = '120px';
@@ -48,12 +48,12 @@ if ($show_dl_list) {
 			FROM " . BB_BT_DLSTATUS_SNAP . "
 			WHERE topic_id = $topic_id";
     } else {
-        $sql = "SELECT d.user_status, d.user_id, DATE_FORMAT(d.last_modified_dlstatus, '%Y-%m-%d') AS last_modified_dlstatus, u.username, u.user_rank
+        $sql = "SELECT d.user_status, d.user_id, d.last_modified_dlstatus, u.username, u.user_rank
 			FROM " . BB_BT_DLSTATUS . " d, " . BB_USERS . " u
 			WHERE d.topic_id = $topic_id
 				AND d.user_id = u.user_id
 				AND d.user_status != " . DL_STATUS_RELEASER . "
-			ORDER BY d.user_status /* ASC, d.last_modified_dlstatus DESC */
+			ORDER BY d.user_status ASC, d.last_modified_dlstatus DESC
 			LIMIT $dl_list_sql_limit";
     }
 
@@ -72,7 +72,7 @@ if ($show_dl_list) {
                 $dl_count[$u['user_status']] = $u['username'];
             } else {
                 $u_prof_href = ($u['user_id'] == GUEST_UID) ? '#' : PROFILE_URL . $u['user_id'] . "#torrent";
-                $dl_cat[$u['user_status']] .= '<nobr><a class="' . $u_link_class . '" href="' . $u_prof_href . '" title="' . $u['last_modified_dlstatus'] . '">' . profile_url(['username' => $u['username'], 'user_rank' => $u['user_rank']]) . '</a></nobr>, ';
+                $dl_cat[$u['user_status']] .= '<nobr><a class="' . $u_link_class . '" href="' . $u_prof_href . '" title="' . bb_date($u['last_modified_dlstatus'], $title_date_format) . '">' . profile_url(['username' => $u['username'], 'user_rank' => $u['user_rank']]) . '</a></nobr>, ';
                 $dl_count[$u['user_status']]++;
             }
         }
