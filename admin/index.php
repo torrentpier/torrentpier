@@ -166,8 +166,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                 $template->assign_block_vars('reg_user_row', [
                     'ROW_CLASS' => $row_class,
                     'USER' => profile_url($onlinerow_reg[$i], true),
-                    'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
-                    'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
+                    'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'd-M-Y H:i', false),
+                    'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'd-M-Y H:i', false),
                     'IP_ADDRESS' => $reg_ip,
                     'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
                 ]);
@@ -185,8 +185,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
                 $template->assign_block_vars('guest_user_row', [
                     'ROW_CLASS' => $row_class,
-                    'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', false),
-                    'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i', false),
+                    'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'd-M-Y H:i', false),
+                    'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'd-M-Y H:i', false),
                     'IP_ADDRESS' => $guest_ip,
                     'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
                 ]);
