@@ -774,7 +774,7 @@ function get_user_id($username)
 
 function str_short($text, $max_length, $space = ' ')
 {
-    if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
+    if (!empty($max_length) && !empty($text) && (mb_strlen($text, 'UTF-8') > $max_length)) {
         $text = mb_substr($text, 0, $max_length, 'UTF-8');
 
         if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string)$space)) {
@@ -787,7 +787,7 @@ function str_short($text, $max_length, $space = ' ')
         $text = preg_replace('!&#?(\w+)?;?(\w{1,5})?\.\.\.$!', '...', $text);
     }
 
-    return $text;
+    return $text ?? '';
 }
 
 function wbr($text, $max_word_length = HTML_WBR_LENGTH)

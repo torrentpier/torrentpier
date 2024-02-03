@@ -1531,6 +1531,7 @@ $lang['ITALIC'] = 'इटैलिक टेक्स्ट: [i]text[/i] (Ctrl +
 $lang['UNDERLINE'] = 'टेक्स्ट रेखांकित करें: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'स्ट्राइकआउट पाठ: [s]text[/s] (Ctrl + S)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'उद्धरण पाठ: [quote]text[/quote] (Ctrl + Q)';

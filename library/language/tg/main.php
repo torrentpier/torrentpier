@@ -1531,6 +1531,7 @@ $lang['ITALIC'] = 'Матни Italic: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Таъкид матн: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Матни Strikeout: [s]text[/s] (Ctrl + S)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Матни Quote: [quote]text[/quote] (Ctrl + Q)';

@@ -1531,6 +1531,7 @@ $lang['ITALIC'] = 'ตัวเอียงข้อความ:[i]text[/i](ป
 $lang['UNDERLINE'] = 'ขีดเส้นใต้ข้อความ:[u]text[/u](ปุ่มพิมพ์ Ctrl+ดำน้ำ)';
 $lang['STRIKEOUT'] = 'ตัวขีดเส้นพาดกลางข้อความ:[s]text[/s](ปุ่มพิมพ์ Ctrl+S)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'อ้างอิงข้อความ:[quote]text[/quote](ปุ่มพิมพ์ Ctrl+Q)';

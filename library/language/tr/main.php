@@ -1535,6 +1535,7 @@ $lang['ITALIC'] = 'İtalik metin: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = '(Ctrl+U)altı çizili metin: [u]text[/u]';
 $lang['STRIKEOUT'] = '(Ctrl+S)üstü çizili metin: [s]text[/s]';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '(Ctrl+Q)alıntı metin: [quote]text[/quote]';

@@ -1531,6 +1531,7 @@ $lang['ITALIC'] = 'Қиғаш мәтін: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Астын сызу мәтін: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Сызылған мәтін: [s]text[/s] (Ctrl + S)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Дәйексөз мәтіні: [quote]text[/quote] (Ctrl + Q)';
