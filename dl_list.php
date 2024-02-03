@@ -127,6 +127,7 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
             'user_id' => (int)$user->id,
             'topic_id' => (int)$topic_id,
             'user_status' => (int)$new_dl_status,
+            'last_modified_dlstatus' => TIMENOW
         ];
     }
     $new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
