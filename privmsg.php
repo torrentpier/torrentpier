@@ -1103,11 +1103,9 @@ if ($mode == 'read') {
             break;
         case 'quote':
             $post_a = $lang['POST_QUOTE_PM'];
-            $mode = 'post';
             break;
         case 'reply':
             $post_a = $lang['SEND_A_REPLY'];
-            $mode = 'post';
             break;
         case 'edit':
             $post_a = $lang['EDIT_MESSAGE'];
