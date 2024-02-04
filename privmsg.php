@@ -939,11 +939,7 @@ if ($mode == 'read') {
         //
         // Do mode specific things
         //
-        if ($mode == 'post') {
-            $page_title = $lang['POST_NEW_PM'];
-        } elseif ($mode == 'reply') {
-            $page_title = $lang['POST_REPLY_PM'];
-        } elseif ($mode == 'edit') {
+        if ($mode == 'edit') {
             $page_title = $lang['EDIT_PM'];
 
             $sql = "SELECT u.user_id
@@ -1021,12 +1017,8 @@ if ($mode == 'read') {
 
             if ($mode == 'quote') {
                 $privmsg_message = $privmsg['privmsgs_text'];
-
                 $msg_date = bb_date($privmsg['privmsgs_date']);
-
                 $privmsg_message = '[quote="' . $to_username . '"]' . $privmsg_message . '[/quote]';
-
-                $mode = 'reply';
             }
         } else {
             $privmsg_subject = $privmsg_message = $to_username = '';
@@ -1043,7 +1035,15 @@ if ($mode == 'read') {
     //
     // Start output, first preview, then errors then post form
     //
-    $page_title = $lang['SEND_PRIVATE_MESSAGE'];
+    if ($mode == 'post') {
+        $page_title = $lang['POST_NEW_PM'];
+    } elseif ($mode == 'reply') {
+        $page_title = $lang['POST_REPLY_PM'];
+    } elseif ($mode == 'quote') {
+        $page_title = $lang['POST_QUOTE_PM'];
+    } elseif ($mode == 'edit') {
+        $page_title = $lang['EDIT_PM'];
+    }
 
     if ($preview && !$error) {
         $orig_word = [];
@@ -1105,15 +1105,12 @@ if ($mode == 'read') {
         case 'post':
             $post_a = $lang['SEND_A_NEW_MESSAGE'];
             break;
+        case 'quote':
         case 'reply':
             $post_a = $lang['SEND_A_REPLY'];
-            $mode = 'post';
             break;
         case 'edit':
             $post_a = $lang['EDIT_MESSAGE'];
-            break;
-        default:
-            pm_die($lang['NONE_SELECTED']);
             break;
     }
 
