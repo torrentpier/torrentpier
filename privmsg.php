@@ -1112,9 +1112,6 @@ if ($mode == 'read') {
         case 'edit':
             $post_a = $lang['EDIT_MESSAGE'];
             break;
-        default:
-            pm_die($lang['NONE_SELECTED']);
-            break;
     }
 
     $s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
