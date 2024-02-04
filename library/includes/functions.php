@@ -1368,6 +1368,7 @@ function render_flag(string $code): string
         'KZ' => 'Kazakhstan',
         'LA' => 'Laos (Lao People\'s Democratic Republic)',
         'LB' => 'Lebanon',
+        'LGBT' => 'Pride flag 🏳️‍🌈',
         'LC' => 'Saint Lucia',
         'LI' => 'Liechtenstein',
         'LK' => 'Sri Lanka',
