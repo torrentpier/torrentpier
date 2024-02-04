@@ -943,6 +943,8 @@ if ($mode == 'read') {
             $page_title = $lang['POST_NEW_PM'];
         } elseif ($mode == 'reply') {
             $page_title = $lang['POST_REPLY_PM'];
+        } elseif ($mode == 'quote') {
+            $page_title = $lang['POST_QUOTE_PM'];
         } elseif ($mode == 'edit') {
             $page_title = $lang['EDIT_PM'];
 
