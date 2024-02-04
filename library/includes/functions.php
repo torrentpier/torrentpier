@@ -1415,6 +1415,7 @@ function render_flag(string $code): string
         'NZ' => 'New Zealand',
         'OM' => 'Oman',
         'PA' => 'Panama',
+        'PACE' => 'Peace flag 🕊',
         'PE' => 'Peru',
         'PF' => 'French Polynesia',
         'PG' => 'Papua New Guinea',
