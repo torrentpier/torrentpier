@@ -1105,6 +1105,10 @@ if ($mode == 'read') {
         case 'post':
             $post_a = $lang['SEND_A_NEW_MESSAGE'];
             break;
+        case 'quote':
+            $post_a = $lang['POST_QUOTE_PM'];
+            $mode = 'post';
+            break;
         case 'reply':
             $post_a = $lang['SEND_A_REPLY'];
             $mode = 'post';
