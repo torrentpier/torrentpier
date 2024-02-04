@@ -939,13 +939,7 @@ if ($mode == 'read') {
         //
         // Do mode specific things
         //
-        if ($mode == 'post') {
-            $page_title = $lang['POST_NEW_PM'];
-        } elseif ($mode == 'reply') {
-            $page_title = $lang['POST_REPLY_PM'];
-        } elseif ($mode == 'quote') {
-            $page_title = $lang['POST_QUOTE_PM'];
-        } elseif ($mode == 'edit') {
+        if ($mode == 'edit') {
             $page_title = $lang['EDIT_PM'];
 
             $sql = "SELECT u.user_id
@@ -1041,7 +1035,15 @@ if ($mode == 'read') {
     //
     // Start output, first preview, then errors then post form
     //
-    $page_title = $lang['SEND_PRIVATE_MESSAGE'];
+    if ($mode == 'post') {
+        $page_title = $lang['POST_NEW_PM'];
+    } elseif ($mode == 'reply') {
+        $page_title = $lang['POST_REPLY_PM'];
+    } elseif ($mode == 'quote') {
+        $page_title = $lang['POST_QUOTE_PM'];
+    } elseif ($mode == 'edit') {
+        $page_title = $lang['EDIT_PM'];
+    }
 
     if ($preview && !$error) {
         $orig_word = [];
