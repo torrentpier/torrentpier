@@ -1021,12 +1021,8 @@ if ($mode == 'read') {
 
             if ($mode == 'quote') {
                 $privmsg_message = $privmsg['privmsgs_text'];
-
                 $msg_date = bb_date($privmsg['privmsgs_date']);
-
                 $privmsg_message = '[quote="' . $to_username . '"]' . $privmsg_message . '[/quote]';
-
-                $mode = 'reply';
             }
         } else {
             $privmsg_subject = $privmsg_message = $to_username = '';
