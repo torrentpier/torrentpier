@@ -153,7 +153,7 @@ if ($tor_reged && $tor_info) {
     $dl_allowed = true;
     $user_ratio = 0;
 
-    if (($min_ratio_dl || $min_ratio_warn) && $bt_user_id != $poster_id) {
+    if (($min_ratio_dl || $min_ratio_warn) && ($bt_user_id != $poster_id && $bt_user_id != GUEST_UID)) {
         $sql = "SELECT u.*, dl.user_status
 			FROM " . BB_BT_USERS . " u
 			LEFT JOIN " . BB_BT_DLSTATUS . " dl ON dl.user_id = $bt_user_id AND dl.topic_id = $bt_topic_id

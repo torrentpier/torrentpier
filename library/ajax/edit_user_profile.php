@@ -127,6 +127,10 @@ switch ($field) {
         $table = BB_BT_USERS;
         $value = (float)str_replace(',', '.', $this->request['value']);
 
+        if ($value < 0.0) {
+            $this->ajax_die($lang['WRONG_INPUT']);
+        }
+
         foreach (['KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4, 'PB' => 5, 'EB' => 6, 'ZB' => 7, 'YB' => 8] as $s => $m) {
             if (stripos($this->request['value'], $s) !== false) {
                 $value *= (1024 ** $m);

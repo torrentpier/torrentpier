@@ -63,6 +63,13 @@ $template->assign_vars([
 ]);
 
 //
+// Set mode for quick reply
+//
+if ($bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read' && $preview) {
+    $mode = 'reply';
+}
+
+//
 // Cancel
 //
 if ($cancel) {
@@ -90,10 +97,9 @@ $outbox_url = ($folder != 'outbox' || $mode != '') ? '<a href="' . PM_URL . "?fo
 $sentbox_url = ($folder != 'sentbox' || $mode != '') ? '<a href="' . PM_URL . "?folder=sentbox" . '">' . $lang['SENTBOX'] . '</a>' : $lang['SENTBOX'];
 $savebox_url = ($folder != 'savebox' || $mode != '') ? '<a href="' . PM_URL . "?folder=savebox" . '">' . $lang['SAVEBOX'] . '</a>' : $lang['SAVEBOX'];
 
-// ----------
+//
 // Start main
 //
-
 $template->assign_var('POSTING_SUBJECT');
 
 if ($mode == 'read') {
@@ -317,6 +323,7 @@ if ($mode == 'read') {
     }
 
     $s_hidden_fields = '<input type="hidden" name="mark[]" value="' . $privmsgs_id . '" />';
+    $s_hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
 
     $page_title = $lang['READ_PM'];
 
