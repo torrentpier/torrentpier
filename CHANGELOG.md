@@ -1,5 +1,13 @@
 # 📖 Change Log
 
+## [v2.4.2](https://github.com/torrentpier/torrentpier/tree/v2.4.2) (NO ETA)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.1...v2.4.2)
+
+**Merged pull requests:**
+
+- Release 2.4.2 🐯 ([belomaxorka](https://github.com/belomaxorka))
+- Some bugfixes
+
 ## [v2.4.1](https://github.com/torrentpier/torrentpier/tree/v2.4.1) (2024-02-04)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0...v2.4.1)
 
