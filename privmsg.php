@@ -65,7 +65,7 @@ $template->assign_vars([
 //
 // Set mode for quick reply
 //
-if ($mode == 'read' && $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $preview) {
+if ($bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read' && $preview) {
     $mode = 'reply';
 }
 
