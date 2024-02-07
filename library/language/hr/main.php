@@ -1812,6 +1812,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Administracija Foruma';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Uz pomoć ove trake možete dodavati, uklanjati, uređivati, mijenjati redoslijed i ponovno sinkronizirati kategorija i foruma';
 $lang['EDIT_FORUM'] = 'Uređivanje foruma';
 $lang['CREATE_FORUM'] = 'Stvoriti novi forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Stvoriti novu kategoriju';
 $lang['REMOVE'] = 'Izbrisati';
 $lang['UPDATE_ORDER'] = 'Postupak Nadogradnje';
