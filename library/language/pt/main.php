@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Fórum De Administração';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'A partir deste painel, você pode adicionar, excluir, editar, reorganizar e re-sincronizar as categorias e fóruns';
 $lang['EDIT_FORUM'] = 'Editar fórum';
 $lang['CREATE_FORUM'] = 'Criar novo fórum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Criar nova categoria';
 $lang['REMOVE'] = 'Remover';
 $lang['UPDATE_ORDER'] = 'Atualização Ordem';
