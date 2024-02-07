@@ -1813,6 +1813,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Yönetimi';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Bu panelden Ekle, sil, Düzenle, Yeniden Sipariş ve yeniden senkronize kategoriler ve forumlar';
 $lang['EDIT_FORUM'] = 'Forum Düzenle';
 $lang['CREATE_FORUM'] = 'Yeni bir forum oluşturmak';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Yeni kategori oluşturma';
 $lang['REMOVE'] = 'Kaldır';
 $lang['UPDATE_ORDER'] = 'Güncelleme Sırası';
