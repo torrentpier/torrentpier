@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forumi Administratës';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Nga ky panel ju mund të shtoni, fshini, edit, ri-qëllim dhe ri-sinkronizoni kategoritë dhe forumet e';
 $lang['EDIT_FORUM'] = 'Edit forumi';
 $lang['CREATE_FORUM'] = 'Krijuar new forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Të krijojë kategori të re';
 $lang['REMOVE'] = 'Hiq';
 $lang['UPDATE_ORDER'] = 'Update Mënyrë Që';
