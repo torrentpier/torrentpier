@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'פורום ניהול';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'מן הלוח הזה אתה יכול להוסיף, למחוק, לערוך מחדש ההוראה מחדש סינכרון קטגוריות ופורומים';
 $lang['EDIT_FORUM'] = 'עריכה פורום';
 $lang['CREATE_FORUM'] = 'ליצור פורום חדשות';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'ליצור קטגוריה חדשה';
 $lang['REMOVE'] = 'הסר';
 $lang['UPDATE_ORDER'] = 'עדכון פקודה';
