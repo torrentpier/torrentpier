@@ -204,7 +204,7 @@ function hl (id, on)
 	<!-- BEGIN f -->
 	<tr class="row1 hl-tr" onmouseover="hl('fname_{c.f.FORUM_ID}', 1);" onmouseout="hl('fname_{c.f.FORUM_ID}', 0);">
 		<td class="gen tCenter"><a class="gen" title="{L_MOVE_UP}" href="{c.f.U_FORUM_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{c.f.U_FORUM_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
-        <td class="small nowrap tCenter"><!-- IF c.f.ADD_SUB_HREF --><a class="small" href="{c.f.ADD_SUB_HREF}" title="Add subforum">+sub</a><!-- ENDIF --></td>
+		<td class="small nowrap tCenter"><!-- IF c.f.ADD_SUB_HREF --><a class="small" href="{c.f.ADD_SUB_HREF}" title="Add subforum">+sub</a><!-- ENDIF --></td>
 		<td width="100%" {c.f.SF_PAD}><a title="{c.f.FORUM_DESC}" class="{c.f.FORUM_NAME_CLASS}" href="{c.f.U_VIEWFORUM}" target="_new"><!-- IF c.f.SHOW_ON_INDEX --><b><!-- ENDIF --><span id="fname_{c.f.FORUM_ID}">{c.f.FORUM_NAME}</span><!-- IF c.f.SHOW_ON_INDEX --></b><!-- ENDIF --></a></td>
 		<td class="small tCenter" title="{L_TOPICS_SHORT}"><em class="med" style="color: grey">{L_TOPICS_SHORT}:</em> {c.f.NUM_TOPICS}</td>
 		<td class="small tCenter" title="{L_POSTS_SHORT}"><em class="med" style="color: grey">{L_POSTS_SHORT}:</em> {c.f.NUM_POSTS}</td>
