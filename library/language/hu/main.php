@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Fórum Adminisztráció';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Ezen a panelen lehet hozzáadás, törlés, szerkesztés, re-order, majd újra szinkronba kategóriák, fórumok';
 $lang['EDIT_FORUM'] = 'Szerkesztés fórum';
 $lang['CREATE_FORUM'] = 'Új fórum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Új kategória létrehozása';
 $lang['REMOVE'] = 'Eltávolítani';
 $lang['UPDATE_ORDER'] = 'Frissítés Érdekében,';
