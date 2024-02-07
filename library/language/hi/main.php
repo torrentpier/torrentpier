@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'फोरम प्रशासन';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'इस पैनल से आप श्रेणियां और मंचों को जोड़, हटा, संपादित, पुन: आदेश और पुन: सिंक्रनाइज़ कर सकते हैं';
 $lang['EDIT_FORUM'] = 'मंच संपादित करें';
 $lang['CREATE_FORUM'] = 'नया मंच बनाएं';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'नई श्रेणी बनाएं';
 $lang['REMOVE'] = 'हटाना';
 $lang['UPDATE_ORDER'] = 'आर्डर का अद्यतन करें';
