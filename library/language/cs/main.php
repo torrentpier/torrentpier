@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Fórum Správy';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Z tohoto panelu můžete přidávat, mazat, upravovat, re-order a re-synchronizovat kategorie a fóra';
 $lang['EDIT_FORUM'] = 'Upravit fórum';
 $lang['CREATE_FORUM'] = 'Vytvořit nové fórum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Vytvořit novou kategorii';
 $lang['REMOVE'] = 'Odstranit';
 $lang['UPDATE_ORDER'] = 'Aktualizace Pořadí';
