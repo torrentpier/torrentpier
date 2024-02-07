@@ -1813,6 +1813,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'フォーラム管理';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'このパネルの追加、削除、編集、再び再synchroniseカテゴリやフォーラム';
 $lang['EDIT_FORUM'] = '編集フォーラム';
 $lang['CREATE_FORUM'] = '新規作成フォーラム';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = '新しいカテゴリ';
 $lang['REMOVE'] = '削除';
 $lang['UPDATE_ORDER'] = '更新順';
