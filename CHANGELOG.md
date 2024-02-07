@@ -7,7 +7,7 @@
 
 - Release 2.4.2 🐯 ([belomaxorka](https://github.com/belomaxorka))
 - Created template file for AJAX quick actions [\#1381](https://github.com/torrentpier/torrentpier/pull/1381) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1382](https://github.com/torrentpier/torrentpier/pull/1382) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1382](https://github.com/torrentpier/torrentpier/pull/1382), [\#1383](https://github.com/torrentpier/torrentpier/pull/1383) ([belomaxorka](https://github.com/belomaxorka))
 - Some bugfixes [\#1380](https://github.com/torrentpier/torrentpier/pull/1380) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.1](https://github.com/torrentpier/torrentpier/tree/v2.4.1) (2024-02-04)
