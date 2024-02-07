@@ -354,9 +354,6 @@ td.topic_id { cursor: pointer; }
 	</td>
 </tr>
 <!-- END f -->
-<tr>
-	<td colspan="5" class="spaceRow"><div class="spacer_6"></div></td>
-</tr>
 </table>
 <div class="spacer_6"></div>
 
