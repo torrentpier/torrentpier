@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'ชุผู้บริหาร';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'จากนี้คุณสามารถเพิ่มพาเนลง,ลบ,แก้ไข,ส่งคำสั่งและกลั synchronise หมวดหมู่และ forums';
 $lang['EDIT_FORUM'] = 'แก้ไขชุ';
 $lang['CREATE_FORUM'] = 'สร้างใหม่ชุ';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'สร้างใหม่หมวดหมู่';
 $lang['REMOVE'] = 'ลบ';
 $lang['UPDATE_ORDER'] = 'ปรับปรุงคำสั่ง';
