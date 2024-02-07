@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Fórum Správy';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Z tohto panelu môžete pridať, odstrániť, upraviť, re-objednávky a znovu synchronizovať kategórie a fórach';
 $lang['EDIT_FORUM'] = 'Upraviť fórum';
 $lang['CREATE_FORUM'] = 'Vytvoriť nové fórum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Vytvorenie novej kategórie';
 $lang['REMOVE'] = 'Odstrániť';
 $lang['UPDATE_ORDER'] = 'Aktualizácia Objednávky';
