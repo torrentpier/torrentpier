@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Administration';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Fra dette panel kan du tilføje, slette, redigere, ændre rækkefølgen og re-synkroniser kategorier og fora';
 $lang['EDIT_FORUM'] = 'Rediger forum';
 $lang['CREATE_FORUM'] = 'Opret nyt forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Opret ny kategori';
 $lang['REMOVE'] = 'Fjern';
 $lang['UPDATE_ORDER'] = 'Opdatering For';
