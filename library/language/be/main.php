@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Адміністрацыя Форума';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'З дапамогай гэтай панэлі можна дадаваць, выдаляць, рэдагаваць, змяняць парадак і паўторна сінхранізаваць катэгорый і форумаў';
 $lang['EDIT_FORUM'] = 'Рэдагаванне форуму';
 $lang['CREATE_FORUM'] = 'Стварыць новы форум';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Стварыць новую катэгорыю';
 $lang['REMOVE'] = 'Выдаліць';
 $lang['UPDATE_ORDER'] = 'Парадак Абнаўлення';
