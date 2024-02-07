@@ -1812,6 +1812,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Administracja Forum';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Za pomocą tego panelu można dodawać, edytować, usuwać, zmieniać kolejność i ponownie zsynchronizować kategorii i forów';
 $lang['EDIT_FORUM'] = 'Edycja forum';
 $lang['CREATE_FORUM'] = 'Utworzyć nowe forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Utworzyć nową kategorię';
 $lang['REMOVE'] = 'Usunąć';
 $lang['UPDATE_ORDER'] = 'Kolejność Aktualizacji';
