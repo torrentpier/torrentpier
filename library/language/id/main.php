@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Administrasi';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Dari panel ini, anda dapat menambah, menghapus, mengedit, re-order dan kembali sinkronisasi kategori dan forum';
 $lang['EDIT_FORUM'] = 'Mengedit forum';
 $lang['CREATE_FORUM'] = 'Membuat forum baru';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Membuat kategori baru';
 $lang['REMOVE'] = 'Menghapus';
 $lang['UPDATE_ORDER'] = 'Update Order';
