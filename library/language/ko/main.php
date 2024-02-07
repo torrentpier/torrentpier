@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = '포럼 관리';
 $lang['FORUM_ADMIN_EXPLAIN'] = '이 패널에서 당신할 수 있습을 추가,삭제,편집,다시 주문하고 다시 동기화 카테고리고 포럼';
 $lang['EDIT_FORUM'] = '포럼 편집';
 $lang['CREATE_FORUM'] = '새로 만드 포럼';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = '을 만들 새로운 카테고리';
 $lang['REMOVE'] = '제거';
 $lang['UPDATE_ORDER'] = '업데이트 순서';
