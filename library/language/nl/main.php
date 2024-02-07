@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Beheer';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Vanaf dit paneel kunt u toevoegen, verwijderen, bewerken, de volgorde en opnieuw synchroniseren categorieën en forums';
 $lang['EDIT_FORUM'] = 'Wijzig forum';
 $lang['CREATE_FORUM'] = 'Maak nieuwe forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Nieuwe categorie maken';
 $lang['REMOVE'] = 'Verwijderen';
 $lang['UPDATE_ORDER'] = 'Update Om';
