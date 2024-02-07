@@ -132,6 +132,8 @@ if ($topic_id) {
 // Start session management
 $user->session_start(['req_login' => true]);
 
+set_die_append_msg($forum_id, $topic_id);
+
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
 if (isset($_POST['cancel']) || IS_GUEST) {
     $redirect = 'index.php';

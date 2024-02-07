@@ -65,7 +65,7 @@ $template->assign_vars([
 //
 // Set mode for quick reply
 //
-if ($bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read' && $preview) {
+if (empty($mode) && $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $preview) {
     $mode = 'reply';
 }
 
@@ -323,7 +323,6 @@ if ($mode == 'read') {
     }
 
     $s_hidden_fields = '<input type="hidden" name="mark[]" value="' . $privmsgs_id . '" />';
-    $s_hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
 
     $page_title = $lang['READ_PM'];
 
