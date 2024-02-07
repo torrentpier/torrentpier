@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Administration';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Från denna instans kan du lägga till, ta bort, redigera, ändra ordning och re-synkronisera kategorier och forum';
 $lang['EDIT_FORUM'] = 'Redigera forum';
 $lang['CREATE_FORUM'] = 'Skapa nytt forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Skapa ny kategori';
 $lang['REMOVE'] = 'Ta bort';
 $lang['UPDATE_ORDER'] = 'Uppdatera För';
