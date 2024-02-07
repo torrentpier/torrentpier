@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'منتدى الإدارة';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'من هذه اللوحة يمكنك إضافة أو حذف أو تعديل أو إعادة ترتيب و إعادة مزامنة الفئات و المنتديات';
 $lang['EDIT_FORUM'] = 'تحرير المنتدى';
 $lang['CREATE_FORUM'] = 'إنشاء منتدى جديد';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'إنشاء فئة جديدة';
 $lang['REMOVE'] = 'إزالة';
 $lang['UPDATE_ORDER'] = 'تحديث النظام';
