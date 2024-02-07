@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Форум әкімшілігі';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Осы тақтасынан қосу, жою, өңдеу, қайта тәртібі және қайта синхрондау санаттары мен форумдар болады';
 $lang['EDIT_FORUM'] = 'өңдеу форум';
 $lang['CREATE_FORUM'] = 'Жаңа форум жасау';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Жаңа санатын жасау';
 $lang['REMOVE'] = 'кетіру';
 $lang['UPDATE_ORDER'] = 'жаңарту тәртібі';
