@@ -788,6 +788,13 @@ class User
             }
 
             return true;
+        } else {
+            if (md5(md5($enteredPassword)) === $userdata['user_password']) {
+                // Update old md5 password
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+
+                return true;
+            }
         }
 
         return false;
@@ -797,9 +804,9 @@ class User
      * Create password_hash
      *
      * @param string $enteredPassword
-     * @return string
+     * @return false|string|null
      */
-    public function password_hash(string $enteredPassword): string
+    public function password_hash(string $enteredPassword)
     {
         global $bb_cfg;
 
