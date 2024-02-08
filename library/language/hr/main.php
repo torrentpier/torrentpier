@@ -1324,6 +1324,7 @@ $lang['NEVER'] = 'Nikada';
 //mpd
 $lang['DELETE_POSTS'] = 'Brisanje odabrane poruke';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Neke poruke su uspješno uklonjene';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Oglasi';
