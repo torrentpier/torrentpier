@@ -79,7 +79,7 @@ switch ($this->request['type']) {
         $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
         // hide sid
         $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
-        $message = !empty($message) ? $wordCensor->censorString($message) : '';
+        $message = $wordCensor->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
             $message = "[quote]" . $post['topic_title'] . "[/quote]\r";

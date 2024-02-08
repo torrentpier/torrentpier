@@ -327,7 +327,7 @@ if ($bb_cfg['show_latest_news']) {
     foreach ($latest_news as $news) {
         $template->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
-            'NEWS_TITLE' => str_short($news['topic_title'], $bb_cfg['max_news_title']),
+            'NEWS_TITLE' => str_short($wordCensor->censorString($news['topic_title']), $bb_cfg['max_news_title']),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
         ]);
@@ -346,7 +346,7 @@ if ($bb_cfg['show_network_news']) {
     foreach ($network_news as $net) {
         $template->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
-            'NEWS_TITLE' => str_short($net['topic_title'], $bb_cfg['max_net_title']),
+            'NEWS_TITLE' => str_short($wordCensor->censorString($net['topic_title']), $bb_cfg['max_net_title']),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
         ]);

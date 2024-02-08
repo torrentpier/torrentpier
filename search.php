@@ -566,13 +566,12 @@ if ($post_mode) {
         $topic_id = (int)$topic_id;
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
-        $topic_title = $wordCensor->censorString($first_post['topic_title']);
 
         $template->assign_block_vars('t', array(
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'TOPIC_TITLE' => $topic_title,
+            'TOPIC_TITLE' => $wordCensor->censorString($first_post['topic_title']),
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
         ));
 
@@ -788,7 +787,7 @@ else {
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
             'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
-            'TOPIC_TITLE' => $topic['topic_title'],
+            'TOPIC_TITLE' => $wordCensor->censorString($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
             'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
