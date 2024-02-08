@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Niekada';
 //mpd
 $lang['DELETE_POSTS'] = 'Trinti pažymėtus pranešimų';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Pasirinktų pareigybių buvo sėkmingai pašalintas';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Skelbimai';
