@@ -1339,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Թարմացվել է պաշտոնից անգամ';
 $lang['TOPIC_SPLIT_NEW'] = 'Նոր թեմա';
 $lang['TOPIC_SPLIT_OLD'] = 'Հին թեմաները';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Ավելացնել բոտի հաղորդագրություն տեղափոխվելու մասին';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Ավելացնել բոտի հաղորդագրություն պառակտման մասին <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Ավելացնել բոտի հաղորդագրություն պառակտման մասին <b>new topic</b>';
 //qr
@@ -2518,7 +2519,7 @@ $lang['WRONG_INPUT'] = 'Դուք մտել սխալ արժեքները. Խնդր�
 $lang['PROCESSING'] = 'Մշակում...';
 $lang['FINISHED'] = 'Ավարտել է';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Թեմա տեղափոխվել են: համաժողովի [b]%s[/b] համաժողովում [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Թեմա բաժանված էր. Նոր թեմա - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Թեմա բաժանվել են [b]%s[/b][br][br]%s';
 
