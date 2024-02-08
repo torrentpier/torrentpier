@@ -1321,6 +1321,7 @@ $lang['NEVER'] = '从来没有';
 //mpd
 $lang['DELETE_POSTS'] = '删除选定的职位';
 $lang['DELETE_POSTS_SUCCESFULLY'] = '选定的员额已经成功地除去';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = '公告';
