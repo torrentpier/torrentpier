@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Nekad';
 //mpd
 $lang['DELETE_POSTS'] = 'Izdzēst izvēlēto amatu';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Izvēlēto amatu ir veiksmīgi noņemts';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Paziņojumi';
