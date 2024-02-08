@@ -441,7 +441,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 
         $template->assign_vars([
             'TPL_PREVIEW_POST' => true,
-            'TOPIC_TITLE' => wbr($preview_subject),
+            'TOPIC_TITLE' => $preview_subject,
             'POST_SUBJECT' => $preview_subject,
             'POSTER_NAME' => $preview_username,
             'POST_DATE' => bb_date(TIMENOW),
@@ -618,7 +618,7 @@ $template->assign_vars([
     'PAGE_TITLE' => $page_title,
     'POSTING_TYPE_TITLE' => $page_title,
     'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
-    'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
+    'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? $post_info['topic_title'] : '',
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'USERNAME' => @$username,

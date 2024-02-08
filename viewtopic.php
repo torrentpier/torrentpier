@@ -475,7 +475,7 @@ $template->assign_vars([
     'FORUM_NAME' => htmlCHR($forum_name),
     'TOPIC_ID' => $topic_id,
     'PAGE_TITLE' => $page_title,
-    'TOPIC_TITLE' => wbr($topic_title),
+    'TOPIC_TITLE' => $topic_title,
     'PORNO_FORUM' => $t_data['allow_porno_topic'],
     'REPLY_IMG' => $reply_img,
     'SHOW_BOT_NICK' => $bb_cfg['show_bot_nick'],
@@ -569,7 +569,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = !$poster_guest ? $postrow[$i]['user_posts'] : '';
-    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? wbr($postrow[$i]['user_from']) : '';
+    $poster_from = ($postrow[$i]['user_from'] && !$poster_guest) ? $postrow[$i]['user_from'] : '';
     $poster_joined = !$poster_guest ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], 'Y-m-d H:i') : '';
     $poster_longevity = !$poster_guest ? delta_time($postrow[$i]['user_regdate']) : '';
     $post_id = $postrow[$i]['post_id'];

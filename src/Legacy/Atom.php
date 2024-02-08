@@ -149,7 +149,7 @@ class Atom
             @unlink($file_path);
             return false;
         }
-        if (self::create_atom($file_path, 'u', $user_id, wbr($username), $topics)) {
+        if (self::create_atom($file_path, 'u', $user_id, $username, $topics)) {
             return true;
         }
 
@@ -210,8 +210,7 @@ class Atom
             if (\count($orig_word)) {
                 $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
             }
-            $topic_title = wbr($topic_title);
-            $author_name = $topic['first_username'] ? wbr($topic['first_username']) : $lang['GUEST'];
+            $author_name = $topic['first_username'] ?: $lang['GUEST'];
             $last_time = $topic['topic_last_post_time'];
             if ($topic['topic_last_post_edit_time']) {
                 $last_time = $topic['topic_last_post_edit_time'];
