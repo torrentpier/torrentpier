@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'אף פעם לא';
 //mpd
 $lang['DELETE_POSTS'] = 'למחוק פוסטים נבחרים';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'הנבחרת ההודעות שנכתבו כבר הוסר בהצלחה';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'הודעות';
