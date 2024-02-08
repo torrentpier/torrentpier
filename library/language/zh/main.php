@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = '更新后的时间';
 $lang['TOPIC_SPLIT_NEW'] = '新的话题';
 $lang['TOPIC_SPLIT_OLD'] = '老话题';
 $lang['BOT_LEAVE_MSG_MOVED'] = '增加机器人-消息，关于移动';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '增加机器人-消息有关的分裂<b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '增加机器人-消息有关的分裂<b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = '你已经进入了一些错误的价值观。 请输入�
 $lang['PROCESSING'] = '处理...';
 $lang['FINISHED'] = '完成';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = '专题已经从论坛[b]%s[/b]论坛[b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = '主题已经分裂。 新的话题-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '主题已被拆分从[b]%s[/b][br][br]%s';
 
