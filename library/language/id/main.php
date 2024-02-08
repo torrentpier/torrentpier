@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Tidak pernah';
 //mpd
 $lang['DELETE_POSTS'] = 'Menghapus posting yang dipilih';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Yang dipilih posting telah berhasil dihapus';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Pengumuman';
