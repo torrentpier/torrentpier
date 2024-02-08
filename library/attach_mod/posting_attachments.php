@@ -11,10 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-define('FILENAME_PREFIX', true);
-define('FILENAME_PREFIX_LENGTH', 6);
-define('FILENAME_MAX_LENGTH', 128);
-
 /**
  * Entry Point
  */
