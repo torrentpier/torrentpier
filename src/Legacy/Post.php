@@ -417,16 +417,15 @@ class Post
      * Insert post to the existing thread
      *
      * @param string $mode
-     * @param int $topic_id
-     * @param int $forum_id
-     * @param int $old_forum_id
-     * @param int $new_topic_id
+     * @param int|string $topic_id
+     * @param int|string|null $forum_id
+     * @param int|string|null $old_forum_id
+     * @param int|string|null $new_topic_id
      * @param string $new_topic_title
-     * @param int $old_topic_id
-     * @param string $message
-     * @param int $poster_id
+     * @param int|null $old_topic_id
+     * @param string $reason_move
      */
-    public static function insert_post($mode, $topic_id, $forum_id = null, $old_forum_id = null, $new_topic_id = null, $new_topic_title = '', $old_topic_id = null, $message = '', $poster_id = null)
+    public static function insert_post(string $mode, int|string $topic_id, int|string $forum_id = null, int|string $old_forum_id = null, int|string $new_topic_id = null, string $new_topic_title = '', int $old_topic_id = null, string $reason_move = ''): void
     {
         global $userdata, $lang;
 
@@ -434,9 +433,11 @@ class Post
             return;
         }
 
-        $post_username = $post_text = $poster_ip = '';
-
+        $post_username = '';
         $post_time = TIMENOW;
+
+        $poster_id = BOT_UID;
+        $poster_ip = '7f000001';
 
         if ($mode == 'after_move') {
             if (!$forum_id || !$old_forum_id) {
@@ -455,15 +456,10 @@ class Post
                 return;
             }
 
-            $post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', profile_url($userdata));
-
-            $poster_id = BOT_UID;
-            $poster_ip = '7f000001';
+            $reason_move = !empty($reason_move) ? htmlCHR($reason_move) : $lang['NOSELECT'];
+            $post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', $reason_move, profile_url($userdata));
         } elseif ($mode == 'after_split_to_old') {
             $post_text = sprintf($lang['BOT_MESS_SPLITS'], '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
-
-            $poster_id = BOT_UID;
-            $poster_ip = '7f000001';
         } elseif ($mode == 'after_split_to_new') {
             $sql = "SELECT t.topic_title, p.post_time
 			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
@@ -474,9 +470,6 @@ class Post
                 $post_time = $row['post_time'] - 1;
 
                 $post_text = sprintf($lang['BOT_TOPIC_SPLITS'], '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url($userdata));
-
-                $poster_id = BOT_UID;
-                $poster_ip = '7f000001';
             } else {
                 return;
             }
