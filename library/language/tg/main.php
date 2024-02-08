@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Ҳеҷ';
 //mpd
 $lang['DELETE_POSTS'] = 'Тоза кардани Заметки интихобшуда';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Дар Заметки интихобшуда бомуваффақият бардошта шуд';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Эълонҳо';
