@@ -375,14 +375,9 @@ if ($mode == 'read') {
     // Processing of post
     //
     $post_subject = htmlCHR($privmsg['privmsgs_subject']);
-
     $private_message = $privmsg['privmsgs_text'];
 
-    $orig_word = [];
-    $replacement_word = [];
-    obtain_word_list($orig_word, $replacement_word);
-
-    if (count($orig_word)) {
+    if (!empty($orig_word)) {
         $post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
         $private_message = preg_replace($orig_word, $replacement_word, $private_message);
     }
@@ -1052,13 +1047,9 @@ if ($mode == 'read') {
     }
 
     if ($preview && !$error) {
-        $orig_word = [];
-        $replacement_word = [];
-        obtain_word_list($orig_word, $replacement_word);
-
         $preview_message = bbcode2html($privmsg_message);
 
-        if (count($orig_word)) {
+        if (!empty($orig_word)) {
             $preview_subject = preg_replace($orig_word, $replacement_word, $privmsg_subject);
             $preview_message = preg_replace($orig_word, $replacement_word, $preview_message);
         } else {
@@ -1187,9 +1178,6 @@ if ($mode == 'read') {
     // Load templates
     //
     $template->set_filenames(['body' => 'privmsgs.tpl']);
-
-    $orig_word = $replacement_word = [];
-    obtain_word_list($orig_word, $replacement_word);
 
     //
     // New message
@@ -1405,7 +1393,7 @@ if ($mode == 'read') {
 
             $msg_subject = $row['privmsgs_subject'];
 
-            if (count($orig_word)) {
+            if (!empty($orig_word)) {
                 $msg_subject = preg_replace($orig_word, $replacement_word, $msg_subject);
             }
 

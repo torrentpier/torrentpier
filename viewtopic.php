@@ -365,12 +365,8 @@ if (!$ranks = $datastore->get('ranks')) {
     $ranks = $datastore->get('ranks');
 }
 
-// Define censored word matches
-$orig_word = $replacement_word = [];
-obtain_word_list($orig_word, $replacement_word);
-
 // Censor topic title
-if (count($orig_word)) {
+if (!empty($orig_word)) {
     $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 }
 
@@ -627,7 +623,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     // Replace naughty words
-    if (count($orig_word)) {
+    if (!empty($orig_word)) {
         if ($user_sig) {
             $user_sig = str_replace(
                 '\"', '"',

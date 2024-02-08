@@ -354,10 +354,6 @@ if ($topics_csv = implode(',', $topic_ids)) {
 	");
 }
 
-// Define censored word matches
-$orig_word = $replacement_word = [];
-obtain_word_list($orig_word, $replacement_word);
-
 if ($forum_data['allow_reg_tracker']) {
     $post_new_topic_url = POSTING_URL . "?mode=new_rel&amp;f=$forum_id";
     $post_img = $images['release_new'];

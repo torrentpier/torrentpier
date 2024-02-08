@@ -461,13 +461,6 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
         $message = $post_info['post_text'];
 
         if ($mode == 'quote') {
-            if (!defined('WORD_LIST_OBTAINED')) {
-                $orig_word = [];
-                $replace_word = [];
-                obtain_word_list($orig_word, $replace_word);
-                define('WORD_LIST_OBTAINED', true);
-            }
-
             if ($post_info['post_attachment'] && !IS_AM) {
                 $message = $post_info['topic_title'];
             }

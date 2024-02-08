@@ -395,6 +395,12 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
+ * Word censor
+ */
+$orig_word = $replacement_word = [];
+obtain_word_list($orig_word, $replacement_word);
+
+/**
  * Cron
  */
 if (

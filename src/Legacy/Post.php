@@ -335,7 +335,7 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        global $bb_cfg, $lang, $userdata;
+        global $bb_cfg, $lang, $userdata, $orig_word, $replacement_word;
 
         if (!$bb_cfg['topic_notify_enabled']) {
             return;
@@ -358,10 +358,7 @@ class Post
 			");
 
                 if ($watch_list) {
-                    $orig_word = $replacement_word = [];
-                    obtain_word_list($orig_word, $replacement_word);
-
-                    if (\count($orig_word)) {
+                    if (!empty($orig_word)) {
                         $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
                     }
 

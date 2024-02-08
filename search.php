@@ -59,12 +59,6 @@ if (isset($_POST['del_my_post'])) {
     redirect("search.php?u={$user->id}");
 }
 
-//
-// Define censored word matches
-//
-$orig_word = $replacement_word = [];
-obtain_word_list($orig_word, $replacement_word);
-
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
@@ -574,7 +568,7 @@ if ($post_mode) {
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
         $topic_title = $first_post['topic_title'];
 
-        if (count($orig_word)) {
+        if (!empty($orig_word)) {
             $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
         }
 
@@ -598,7 +592,7 @@ if ($post_mode) {
 
             $message = get_parsed_post($post);
 
-            if (count($orig_word)) {
+            if (!empty($orig_word)) {
                 $message = preg_replace($orig_word, $replacement_word, $message);
             }
 

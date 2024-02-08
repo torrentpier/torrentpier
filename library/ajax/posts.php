@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $bb_cfg, $userdata;
+global $lang, $bb_cfg, $userdata, $orig_word, $replacement_word;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
@@ -45,13 +45,6 @@ if (isset($this->request['post_id'])) {
     }
 
     $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
-}
-
-if (!defined('WORD_LIST_OBTAINED')) {
-    $orig_word = [];
-    $replace_word = [];
-    obtain_word_list($orig_word, $replace_word);
-    define('WORD_LIST_OBTAINED', true);
 }
 
 switch ($this->request['type']) {
@@ -88,7 +81,7 @@ switch ($this->request['type']) {
         $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]{12}#', 'sid', $message);
 
         if (!empty($orig_word)) {
-            $message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
+            $message = !empty($message) ? preg_replace($orig_word, $replacement_word, $message) : '';
         }
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
