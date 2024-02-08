@@ -1321,6 +1321,7 @@ $lang['NEVER'] = '지';
 //mpd
 $lang['DELETE_POSTS'] = '선택한 게시물 삭제';
 $lang['DELETE_POSTS_SUCCESFULLY'] = '선택한 게시물이 성공적으로 제거되었습';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = '공지사항';
