@@ -15,7 +15,18 @@ namespace TorrentPier;
  */
 class Censor
 {
+    /**
+     * Word replacements
+     *
+     * @var array
+     */
     public array $replacements = [];
+
+    /**
+     * All censored words (RegEx)
+     *
+     * @var array
+     */
     public array $words = [];
 
     /**
@@ -29,12 +40,12 @@ class Censor
             return;
         }
 
-        if (!$this->words = CACHE('bb_cache')->get('censored')) {
-            $this->words = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
-            CACHE('bb_cache')->set('censored', $this->words, 7200);
+        if (!$words = CACHE('bb_cache')->get('censored')) {
+            $words = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
+            CACHE('bb_cache')->set('censored', $words, 7200);
         }
 
-        foreach ($this->words as $word) {
+        foreach ($words as $word) {
             $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
             $this->replacements[] = $word['replacement'];
         }
@@ -48,10 +59,6 @@ class Censor
      */
     public function censorString(string $word): string
     {
-        if (empty($this->words) || empty($this->replacements)) {
-            return $word;
-        }
-
         return preg_replace($this->words, $this->replacements, $word);
     }
 }
