@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Nem';
 //mpd
 $lang['DELETE_POSTS'] = 'Törli a kiválasztott hozzászólás';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'A választott hozzászólás sikeresen eltávolították';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Közlemények';

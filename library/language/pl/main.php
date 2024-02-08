@@ -1324,6 +1324,7 @@ $lang['NEVER'] = 'Nigdy';
 //mpd
 $lang['DELETE_POSTS'] = 'Usuń wybrane wiadomości';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Niektóre komunikaty zostały pomyślnie usunięte';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Ogłoszenia';

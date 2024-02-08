@@ -1325,6 +1325,7 @@ $lang['NEVER'] = 'ない';
 //mpd
 $lang['DELETE_POSTS'] = '削除選択した投稿';
 $lang['DELETE_POSTS_SUCCESFULLY'] = '選択したい削除に成功したと';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = '発表';

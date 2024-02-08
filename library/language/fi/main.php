@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Koskaan';
 //mpd
 $lang['DELETE_POSTS'] = 'Poista valitut viestit';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Valitut viestit on poistettu onnistuneesti poistaa';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Ilmoitukset';

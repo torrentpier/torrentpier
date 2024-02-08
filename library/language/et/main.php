@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Kunagi';
 //mpd
 $lang['DELETE_POSTS'] = 'Kustuta valitud postitusi';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Valitud ametikohad on edukalt eemaldatud';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Teated';

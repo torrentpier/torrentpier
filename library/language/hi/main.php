@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'कभी नहीँ';
 //mpd
 $lang['DELETE_POSTS'] = 'चयनित पोस्ट हटाएं';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'चयनित पद सफलतापूर्वक हटा दिए गए हैं';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'घोषणाएँ';

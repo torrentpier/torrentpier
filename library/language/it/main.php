@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Mai';
 //mpd
 $lang['DELETE_POSTS'] = 'Eliminare il post';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Selezionati i post sono stati rimossi correttamente';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Annunci';

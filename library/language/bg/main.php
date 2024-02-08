@@ -1323,6 +1323,7 @@ $lang['NEVER'] = 'Никога';
 //mpd
 $lang['DELETE_POSTS'] = 'Да изтриете маркираните съобщения';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Някои мнения бяха изтрити успешно';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Обяви';

@@ -1325,6 +1325,7 @@ $lang['NEVER'] = 'Asla';
 //mpd
 $lang['DELETE_POSTS'] = 'Sil seçilen mesaj';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Seçilen mesajlar başarıyla kaldırıldı';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Duyurular';

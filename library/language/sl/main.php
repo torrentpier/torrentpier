@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Nikoli';
 //mpd
 $lang['DELETE_POSTS'] = 'Izbriši izbrane objave';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Izbrane objave so bila uspešno odstranjena';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Objav';

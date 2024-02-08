@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Không bao giờ';
 //mpd
 $lang['DELETE_POSTS'] = 'Xóa lựa chọn bài';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Các lựa chọn bài nào đã được loại bỏ thành công';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Thông báo';
