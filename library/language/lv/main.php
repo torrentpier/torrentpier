@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Update pēc laika';
 $lang['TOPIC_SPLIT_NEW'] = 'Jaunās tēmas';
 $lang['TOPIC_SPLIT_OLD'] = 'Veco tēmu';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Pievienot bot-ziņojums par pārcelšanos';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Pievienot bot-ziņa par to sadalīt, lai <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Pievienot bot-ziņa par to sadalīt, lai <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Jums ir ienākuši daži nepareizi vērtības. Lūdzu, p
 $lang['PROCESSING'] = 'Apstrādes...';
 $lang['FINISHED'] = 'Pabeigts';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tēma ir pārcelta no foruma [b]%s[/b] uz forumu [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Tēma ir sadalīts. Jauna tēma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Tēma ir sadalīts no [b]%s[/b][br][br]%s';
 
