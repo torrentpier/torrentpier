@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Φόρουμ Διοίκησης';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Από αυτόν τον πίνακα μπορείτε να προσθέσετε, να διαγράψετε, να επεξεργαστείτε, να αλλάξετε τη σειρά και να επαν-συγχρονίστε τις κατηγορίες και φόρουμ';
 $lang['EDIT_FORUM'] = 'Edit φόρουμ';
 $lang['CREATE_FORUM'] = 'Δημιουργία νέου φόρουμ';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Δημιουργία νέας κατηγορίας';
 $lang['REMOVE'] = 'Αφαιρέστε';
 $lang['UPDATE_ORDER'] = 'Προκειμένου Ενημέρωση';

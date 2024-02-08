@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Administrare Forum';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'De la acest panou puteți adăuga, șterge, edita, re-comanda și re-sincroniza categorii și forumuri';
 $lang['EDIT_FORUM'] = 'Edit forum';
 $lang['CREATE_FORUM'] = 'Crea noi pe forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'De a crea noi categorii';
 $lang['REMOVE'] = 'Elimina';
 $lang['UPDATE_ORDER'] = 'Actualizare Pentru';

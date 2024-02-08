@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forumo Administracija';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Nuo šio skydo, galite įtraukti, ištrinti, redaguoti, iš naujo, kad ir pakartotinai sinchronizuoti kategorijas ir forumus';
 $lang['EDIT_FORUM'] = 'Redaguoti forume';
 $lang['CREATE_FORUM'] = 'Kurti naują forume';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Kurti naują kategorija';
 $lang['REMOVE'] = 'Pašalinti';
 $lang['UPDATE_ORDER'] = 'Atnaujinimo Tvarka';

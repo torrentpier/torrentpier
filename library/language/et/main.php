@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Foorumi Administratsioon';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Selle paneeli saab lisada, kustutada, redigeerida, ümber-et ja uuesti sünkroonida kategooriad ja foorumid';
 $lang['EDIT_FORUM'] = 'Edit foorum';
 $lang['CREATE_FORUM'] = 'Luua uus foorum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Loo uus kategooria';
 $lang['REMOVE'] = 'Eemalda';
 $lang['UPDATE_ORDER'] = 'Update, Et';

@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Маъмурияти Форум';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Аз ин панел шумо метавонед илова кунед, нест кунед, таҳрир, аз нав тартиб ва дубора ҳамоҳангсозии категорияҳои ва форумҳо';
 $lang['EDIT_FORUM'] = 'Таҳрири форум';
 $lang['CREATE_FORUM'] = 'Эҷоди Форуми нав';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Эҷоди категорияи нави';
 $lang['REMOVE'] = 'хориҷ';
 $lang['UPDATE_ORDER'] = 'навсозии Тартиби';

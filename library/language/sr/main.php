@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Администрација Форума';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Са овом панелу могуће је додавање, брисање, измена, измене процедура и ре-синц категорија и форумима';
 $lang['EDIT_FORUM'] = 'Уређивање форума';
 $lang['CREATE_FORUM'] = 'Направите нови форум';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Креирајте нову категорију';
 $lang['REMOVE'] = 'Уклонити';
 $lang['UPDATE_ORDER'] = 'Поступак Исправке';

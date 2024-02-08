@@ -1812,6 +1812,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Վարչակազմը Համաժողովի';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Օգտագործելով այս վահանակի կարելի է ավելացնել, ջնջել, խմբագրել, փոփոխել կարգը և կրկին համեմատել բաժիններում եւ ֆորումներում';
 $lang['EDIT_FORUM'] = 'Խմբագրում համաժողովի';
 $lang['CREATE_FORUM'] = 'Ստեղծել նոր ֆորում';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Ստեղծել նոր կատեգորիա';
 $lang['REMOVE'] = 'Հեռացնել';
 $lang['UPDATE_ORDER'] = 'Կարգը Թարմացումները';

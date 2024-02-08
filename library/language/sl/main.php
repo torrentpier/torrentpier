@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Uprava';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Iz te skupine lahko dodajate, brišete, urejate, re-order in znova sinhronizirate kategorije in forumih';
 $lang['EDIT_FORUM'] = 'Urejanje foruma';
 $lang['CREATE_FORUM'] = 'Ustvarite nov forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Ustvarjanje nove kategorije';
 $lang['REMOVE'] = 'Odstrani';
 $lang['UPDATE_ORDER'] = 'Posodobitev Red';

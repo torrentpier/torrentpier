@@ -1811,6 +1811,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Администрацията На Форума';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'С помощта на тази лента можете да добавяте, изтривате, редактирате, променяте реда и повторно синхронизиране на категории и форуми';
 $lang['EDIT_FORUM'] = 'Редактиране на форума';
 $lang['CREATE_FORUM'] = 'Създаване на нов форум';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Да създадете нова категория';
 $lang['REMOVE'] = 'Изтриете';
 $lang['UPDATE_ORDER'] = 'Ред За Актуализация';

@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = '论坛的管理';
 $lang['FORUM_ADMIN_EXPLAIN'] = '从这个小组可以添加、删除、修改、重新秩序并重新同步的类别和论坛';
 $lang['EDIT_FORUM'] = '编辑论坛';
 $lang['CREATE_FORUM'] = '创建新的论坛，';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = '创建新类别';
 $lang['REMOVE'] = '删除';
 $lang['UPDATE_ORDER'] = '更新了';

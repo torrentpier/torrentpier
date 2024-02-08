@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum ma\'muriyati';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Agar, kiritish, tahrir, qayta-tartibotni o\'chirish va kategoriyalari va forumlar qayta sinxronlashtirish mumkin, bu panel';
 $lang['EDIT_FORUM'] = 'Edit forum';
 $lang['CREATE_FORUM'] = 'Yangi forum yaratish';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'yangi bo\'lim yaratish';
 $lang['REMOVE'] = 'olib tashlash';
 $lang['UPDATE_ORDER'] = 'yangilash tartibi';

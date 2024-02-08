@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Foruma Administrācija';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'No šī paneļa jūs varat pievienot, dzēst, rediģēt, atkārtotu rīkojumu un re-sinhronizēt kategorijām un forumos';
 $lang['EDIT_FORUM'] = 'Edit forumā';
 $lang['CREATE_FORUM'] = 'Izveidot jaunu foruma';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Izveidot jaunu kategoriju';
 $lang['REMOVE'] = 'Noņemt';
 $lang['UPDATE_ORDER'] = 'Atjauninājumu, Lai';

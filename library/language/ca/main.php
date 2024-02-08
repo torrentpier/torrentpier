@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Fòrum De L\'Administració';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Des d\'aquest panell es pot afegir, eliminar, editar, re-ordre i tornar-la a sincronitzar les categories i els fòrums';
 $lang['EDIT_FORUM'] = 'Edita fòrum';
 $lang['CREATE_FORUM'] = 'Crear nous fòrum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Crear nova categoria';
 $lang['REMOVE'] = 'Eliminar';
 $lang['UPDATE_ORDER'] = 'Actualització Ordre';

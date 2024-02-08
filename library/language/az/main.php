@@ -1812,6 +1812,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forumun Administrasiyası';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Köməyi ilə bu panel olar ki, əlavə etmək, silmək, redaktə etmək, dəyişdirmək qaydası və yenidən sinxronizasiya kateqoriyalar və forumların';
 $lang['EDIT_FORUM'] = 'Redaktə forum';
 $lang['CREATE_FORUM'] = 'Yaratmaq, yeni forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Yeni bir kateqoriya yaratmaq';
 $lang['REMOVE'] = 'Sil';
 $lang['UPDATE_ORDER'] = 'Qaydası Yenilikləri';

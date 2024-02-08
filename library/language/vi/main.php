@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Diễn Đàn Quản Trị';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Từ bảng điều khiển này ông có thể thêm vào, rõ ràng, chỉnh sửa lại trật tự và tái-đồng loại và forums';
 $lang['EDIT_FORUM'] = 'Chỉnh sửa diễn đàn';
 $lang['CREATE_FORUM'] = 'Tạo diễn đàn new';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Tạo thể loại mới';
 $lang['REMOVE'] = 'Bỏ';
 $lang['UPDATE_ORDER'] = 'Để Cập Nhật,';

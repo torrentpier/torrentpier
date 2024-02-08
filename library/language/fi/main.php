@@ -1809,6 +1809,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Foorumin Hallinto';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Tässä paneelissa voit lisätä, poistaa, muokata, järjestää uudelleen ja uudelleen synkronoi kategoriat ja foorumit';
 $lang['EDIT_FORUM'] = 'Edit forum';
 $lang['CREATE_FORUM'] = 'Luo uusi foorumi';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Luo uusi luokka';
 $lang['REMOVE'] = 'Poista';
 $lang['UPDATE_ORDER'] = 'Päivitys Jotta';
