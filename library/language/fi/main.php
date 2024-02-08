@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Päivitys postitse kerran';
 $lang['TOPIC_SPLIT_NEW'] = 'Uusi aihe';
 $lang['TOPIC_SPLIT_OLD'] = 'Vanha aihe';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Lisää bot-viestin muuttoa';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Lisää bot-viestin split <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Lisää bot-viestin split <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Olet antanut joitakin vääriä arvoja. Tarkista input j
 $lang['PROCESSING'] = 'Käsittely...';
 $lang['FINISHED'] = 'Valmis';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Aihe on siirretty foorumin [b]%s[/b] forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Aihe on jaettu kahteen osaan. Uusi aihe - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Aihe on erotettu [b]%s[/b][br][br]%s';
 
