@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Nikdy';
 //mpd
 $lang['DELETE_POSTS'] = 'Smazat vybrané příspěvky';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Vybrané příspěvky byly úspěšně odstraněny';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Oznámení';
