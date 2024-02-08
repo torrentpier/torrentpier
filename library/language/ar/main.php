@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'أبدا';
 //mpd
 $lang['DELETE_POSTS'] = 'حذف المشاركات المحدد';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'اختيار الوظائف تم بنجاح إزالة';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'إعلانات';
