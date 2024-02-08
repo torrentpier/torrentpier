@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Mai';
 //mpd
 $lang['DELETE_POSTS'] = 'El botó esborrar seleccionats';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Seleccionat llocs de treball s\'han eliminat amb èxit';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Convocatòries';
