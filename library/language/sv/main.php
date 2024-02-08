@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Aldrig';
 //mpd
 $lang['DELETE_POSTS'] = 'Ta bort valda inlägg';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Den valda inlägg har tagits bort';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Meddelanden';
