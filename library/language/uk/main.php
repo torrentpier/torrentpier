@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Оновити час повідомлення';
 $lang['TOPIC_SPLIT_NEW'] = 'Нова тема';
 $lang['TOPIC_SPLIT_OLD'] = 'Стара тема';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Додати повідомлення бота про переміщення';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Додати повідомлення бота про поділ до<b> старої теми</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Додати повідомлення про поділ до <b>нової теми</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Ви ввели деякі неправильні зна
 $lang['PROCESSING'] = 'Йде обробка...';
 $lang['FINISHED'] = 'Завершено';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тему було перенесено з форуму [b]%s[/b] на форум [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Повідомлення з цієї теми були виділені в окрему тему [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема була розділена з [b]%s[/b][br][br]%s';
 
