@@ -59,12 +59,6 @@ if (isset($_POST['del_my_post'])) {
     redirect("search.php?u={$user->id}");
 }
 
-//
-// Define censored word matches
-//
-$orig_word = $replacement_word = [];
-obtain_word_list($orig_word, $replacement_word);
-
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
@@ -572,35 +566,27 @@ if ($post_mode) {
         $topic_id = (int)$topic_id;
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
-        $topic_title = $first_post['topic_title'];
-
-        if (count($orig_word)) {
-            $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-        }
 
         $template->assign_block_vars('t', array(
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'TOPIC_TITLE' => $topic_title,
+            'TOPIC_TITLE' => $wordCensor->censorString($first_post['topic_title']),
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
         ));
 
         $quote_btn = $edit_btn = $ip_btn = '';
-        $delpost_btn = (IS_AM);
+        $delpost_btn = IS_AM;
 
         // Topic posts block
         foreach ($topic_posts as $row_num => $post) {
             if ($post['poster_id'] != BOT_UID) {
                 $quote_btn = true;
-                $edit_btn = $ip_btn = (IS_AM);
+                $edit_btn = $ip_btn = IS_AM;
             }
 
             $message = get_parsed_post($post);
-
-            if (count($orig_word)) {
-                $message = preg_replace($orig_word, $replacement_word, $message);
-            }
+            $message = $wordCensor->censorString($message);
 
             $template->assign_block_vars('t.p', array(
                 'ROW_NUM' => $row_num,
@@ -801,7 +787,7 @@ else {
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
             'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
-            'TOPIC_TITLE' => $topic['topic_title'],
+            'TOPIC_TITLE' => $wordCensor->censorString($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
             'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),

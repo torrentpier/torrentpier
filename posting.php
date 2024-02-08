@@ -18,19 +18,14 @@ $page_cfg['load_tpl_vars'] = [
 ];
 
 $submit = (bool)@$_REQUEST['post'];
-$preview = (bool)@$_REQUEST['preview'];
+$refresh = $preview = (bool)@$_REQUEST['preview'];
 $delete = (bool)@$_REQUEST['delete'];
+$mode = (string)@$_REQUEST['mode'];
+$confirm = isset($_POST['confirm']);
 
 $forum_id = (int)@$_REQUEST[POST_FORUM_URL];
 $topic_id = (int)@$_REQUEST[POST_TOPIC_URL];
 $post_id = (int)@$_REQUEST[POST_POST_URL];
-
-$mode = (string)@$_REQUEST['mode'];
-
-$confirm = isset($_POST['confirm']);
-
-$refresh = $preview;
-$orig_word = $replacement_word = [];
 
 // Set topic type
 $topic_type = (@$_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
@@ -461,13 +456,6 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
         $message = $post_info['post_text'];
 
         if ($mode == 'quote') {
-            if (!defined('WORD_LIST_OBTAINED')) {
-                $orig_word = [];
-                $replace_word = [];
-                obtain_word_list($orig_word, $replace_word);
-                define('WORD_LIST_OBTAINED', true);
-            }
-
             if ($post_info['post_attachment'] && !IS_AM) {
                 $message = $post_info['topic_title'];
             }
@@ -475,16 +463,14 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 
             // hide user passkey
-            $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9]{10}(?=&)#', 'passkey', $message);
+            $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
             // hide sid
-            $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]{12}#', 'sid', $message);
+            $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
-            if (!empty($orig_word)) {
-                $subject = (!empty($subject)) ? preg_replace($orig_word, $replace_word, $subject) : '';
-                $message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
-            }
+            $subject = $wordCensor->censorString($subject);
+            $message = $wordCensor->censorString($message);
 
-            if (!preg_match('/^Re:/', $subject) && strlen($subject) > 0) {
+            if (!preg_match('/^Re:/', $subject) && !empty($subject)) {
                 $subject = 'Re: ' . $subject;
             }
 
