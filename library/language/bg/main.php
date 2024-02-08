@@ -1338,6 +1338,7 @@ $lang['UPDATE_POST_TIME'] = 'Актуализация на гладно пъти
 $lang['TOPIC_SPLIT_NEW'] = 'Нова тема';
 $lang['TOPIC_SPLIT_OLD'] = 'Старите теми';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Добавяне на бота-съобщение за преместване';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Добавяне на бота-съобщение за разцепление в <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Добавяне на бота-съобщение за разцепление в <b>new topic</b>';
 //qr
@@ -2517,7 +2518,7 @@ $lang['WRONG_INPUT'] = 'Въвели сте неправилни стойнос�
 $lang['PROCESSING'] = 'Обработка...';
 $lang['FINISHED'] = 'Завърши';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Темата е преместена от форума [b]%s[/b] на форума [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Темата е разделена. Нова тема - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Темата е разделена от [b]%s[/b][br][br]%s';
 
