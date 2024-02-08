@@ -10,6 +10,7 @@
 - Created template file for AJAX quick actions [\#1381](https://github.com/torrentpier/torrentpier/pull/1381) ([belomaxorka](https://github.com/belomaxorka))
 - Removed `wbr()` [\#1387](https://github.com/torrentpier/torrentpier/pull/1387) ([belomaxorka](https://github.com/belomaxorka))
 - Removed converting for legacy md5 passwords [\#1386](https://github.com/torrentpier/torrentpier/pull/1386) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed issue with poll_users cleaning at every cron job startup [\#1390](https://github.com/torrentpier/torrentpier/pull/1390) ([belomaxorka](https://github.com/belomaxorka))
 - Used hashing for filenames generation [\#1385](https://github.com/torrentpier/torrentpier/pull/1385) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1382](https://github.com/torrentpier/torrentpier/pull/1382), [\#1383](https://github.com/torrentpier/torrentpier/pull/1383) ([belomaxorka](https://github.com/belomaxorka))
 - Some bugfixes [\#1380](https://github.com/torrentpier/torrentpier/pull/1380) ([belomaxorka](https://github.com/belomaxorka))
