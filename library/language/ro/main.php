@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Nu';
 //mpd
 $lang['DELETE_POSTS'] = 'Șterge mesajele selectate';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Selectate posturi au fost eliminate cu succes';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Anunțuri';
