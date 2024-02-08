@@ -132,8 +132,6 @@ if ($topic_id) {
 // Start session management
 $user->session_start(['req_login' => true]);
 
-set_die_append_msg($forum_id, $topic_id);
-
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
 if (isset($_POST['cancel']) || IS_GUEST) {
     $redirect = 'index.php';
@@ -237,7 +235,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
+            $msg = $result ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             print_confirmation([
@@ -268,7 +266,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
+            $msg = $result ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             if (IS_ADMIN) {
@@ -518,7 +516,7 @@ switch ($mode) {
             // Delete posts
             $result = \TorrentPier\Legacy\Admin\Common::post_delete(explode(',', $post_id_sql));
 
-            $msg = ($result) ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
+            $msg = $result ? $lang['DELETE_POSTS_SUCCESFULLY'] : $lang['NO_POSTS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
