@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'nooit';
 //mpd
 $lang['DELETE_POSTS'] = 'Verwyder geselekteerde plasings';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Die geselekteerde plasings is suksesvol verwyder';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'aankondigings';
