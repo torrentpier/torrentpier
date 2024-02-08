@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Aldrig';
 //mpd
 $lang['DELETE_POSTS'] = 'Slet valgte indlæg';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Det valgte indlæg er blevet fjernet';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Meddelelser';
