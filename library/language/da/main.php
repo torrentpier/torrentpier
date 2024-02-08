@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Opdatere post gang';
 $lang['TOPIC_SPLIT_NEW'] = 'Nyt emne';
 $lang['TOPIC_SPLIT_OLD'] = 'Gamle emne';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Tilføj bot-besked om at flytte';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Tilføj bot-besked om delt til <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Tilføj bot-besked om delt til <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Du har indtastet nogle forkerte værdier. Check venligst
 $lang['PROCESSING'] = 'Behandling...';
 $lang['FINISHED'] = 'Færdig';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Emnet er blevet flyttet fra forum [b]%s[/b] til forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Emnet er blevet delt. Nyt emne - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Emnet er blevet skilt fra [b]%s[/b][br][br]%s';
 

@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Жаңарту кейінгі уақыт';
 $lang['TOPIC_SPLIT_NEW'] = 'жаңа тақырып';
 $lang['TOPIC_SPLIT_OLD'] = 'Ескі тақырып';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'жылжыту туралы Bot-хабарлама қосу';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'topic</b> <b>old ыдырау туралы Bot-хабарлама қосу';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '<b>new topic</b> ыдырау туралы Bot-хабарлама қосу';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Сіз кейбір дұрыс мәндерін енгі
 $lang['PROCESSING'] = 'Өңдеу ...';
 $lang['FINISHED'] = 'аяқталған';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тақырып форумға форумның [b]%s[/b] көшірілді [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Тақырыбы бөлінген болатын. Жаңа тақырып - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тақырып [b]%s[/b][br][br]%s бөлініп отыр';
 

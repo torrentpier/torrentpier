@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Update post aeg';
 $lang['TOPIC_SPLIT_NEW'] = 'Uus teema';
 $lang['TOPIC_SPLIT_OLD'] = 'Vana teema';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Lisa bot sõnumi teisaldamise kohta';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Lisa bot-sõnumit jagada <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Lisa bot-sõnumit jagada <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Olete sisestanud mõned valed väärtused. Palun kontrol
 $lang['PROCESSING'] = 'Töötlemine...';
 $lang['FINISHED'] = 'Lõpetanud';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Teema on liikunud foorumi [b]%s[/b] foorumi [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Teema on jagatud. Uus teema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Teema on jagatud alates [b]%s[/b][br][br]%s';
 

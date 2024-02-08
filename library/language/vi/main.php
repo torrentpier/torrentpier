@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Viết bài thời gian';
 $lang['TOPIC_SPLIT_NEW'] = 'Chủ đề mới';
 $lang['TOPIC_SPLIT_OLD'] = 'Già chủ đề';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Thêm bot-tin nhắn về di chuyển';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Thêm bot-tin nhắn về chia để <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Thêm bot-tin nhắn về chia để <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Bạn đã ký một số sai giá trị. Xin vui lòng 
 $lang['PROCESSING'] = 'Chế biến...';
 $lang['FINISHED'] = 'Xong';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Chủ đề đã được chuyển từ diễn đàn [b]%s[/b] để diễn đàn [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Chủ đề đã được chia. Chủ đề mới - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Chủ đề đã được chia từ [b]%s[/b][br][br]%s';
 

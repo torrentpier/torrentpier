@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'вақти Навсозии баъди';
 $lang['TOPIC_SPLIT_NEW'] = 'мавзӯъ Сиёсат';
 $lang['TOPIC_SPLIT_OLD'] = 'мавзӯъ кӯҳна';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Иловаи боти-хабар дар бораи ҳаракат';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Иловаи боти-хабар дар бораи ҹудо ба <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Иловаи боти-хабар дар бораи ҹудо ба <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Шумо ба баъзе арзишҳои нодурус
 $lang['PROCESSING'] = 'Коркарди ...';
 $lang['FINISHED'] = 'анҷом';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Мавзӯъ шудааст, ки аз ҳамоиши [b]%s[/b] ба форум [b]%s[/b][br][br]%s кӯчидааст';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Мавзӯъ кардааст, тақсим шудааст. мавзӯъ Сиёсат - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Мавзӯъ аз [b]%s[/b][br][br]%s тақсим шудааст';
 

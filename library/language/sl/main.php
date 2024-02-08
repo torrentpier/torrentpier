@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Posodobitev post time';
 $lang['TOPIC_SPLIT_NEW'] = 'Novo temo';
 $lang['TOPIC_SPLIT_OLD'] = 'Staro temo';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Dodaj bot-sporočilo o selitvi';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Dodaj bot-sporočilo o delih, da <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Dodaj bot-sporočilo o delih, da <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Ste vnesli nekatere napačne vrednosti. Prosimo, preveri
 $lang['PROCESSING'] = 'Obdelava...';
 $lang['FINISHED'] = 'Končal';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Temo je bil prestavljen iz foruma [b]%s[/b] forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Temo je bilo razdeljeno. Novo temo - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Temo je bilo razdeljeno iz [b]%s[/b][br][br]%s';
 

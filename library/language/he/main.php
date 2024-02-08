@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'עדכון פוסט הזמן';
 $lang['TOPIC_SPLIT_NEW'] = 'נושא חדש';
 $lang['TOPIC_SPLIT_OLD'] = 'זקן נושא';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'להוסיף בוט-הודעה על העברת';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'להוסיף בוט-הודעה על פיצול כדי <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'להוסיף בוט-הודעה על פיצול כדי <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'אתה נכנס כמה ערכים לא נכונים. א�
 $lang['PROCESSING'] = 'עיבוד...';
 $lang['FINISHED'] = 'סיימתי';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'הנושא הועבר מתוך פורום [b]%s[/b] פורום [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'הנושא מפוצל. נושא חדש - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'הנושא כבר עזב [b]%s[/b][br][br]%s';
 

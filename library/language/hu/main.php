@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Frissítés utáni idő';
 $lang['TOPIC_SPLIT_NEW'] = 'Új téma';
 $lang['TOPIC_SPLIT_OLD'] = 'A régi topic';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Add bot-üzenetet mozgó';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Add bot-üzenetet osztott, hogy <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Add bot-üzenetet osztott, hogy <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'A beírt néhány rossz értékeket. Kérjük, ellenőri
 $lang['PROCESSING'] = 'Feldolgozás...';
 $lang['FINISHED'] = 'Vége';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Téma átkerült a fórum [b]%s[/b], hogy a fórum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Téma már osztott. Új téma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Téma már szét a [b]%s[/b][br][br]%s';
 

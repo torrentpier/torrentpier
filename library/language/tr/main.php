@@ -1340,6 +1340,7 @@ $lang['UPDATE_POST_TIME'] = 'Post zaman güncelleme';
 $lang['TOPIC_SPLIT_NEW'] = 'Yeni konu';
 $lang['TOPIC_SPLIT_OLD'] = 'Eski konu';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Taşınmayı bot Ekle-mesaj';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '<b>old topic</b> split hakkında bot-mesaj ekleyin';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '<b>new topic</b> split hakkında bot-mesaj ekleyin';
 //qr
@@ -2519,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Bazı yanlış değerler girdiniz. Lütfen girişinizi k
 $lang['PROCESSING'] = 'İşleme...';
 $lang['FINISHED'] = 'Bitmiş';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Konu forum [b]%s[/b] gelen [b]%s[/b][br][br]%s foruma taşındı';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Konu bölünmüş. Yeni konu [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Konu [b]%s[/b][br][br]%s arasında bölünmüş';
 

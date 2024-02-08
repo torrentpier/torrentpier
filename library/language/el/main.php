@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Ενημέρωση των υστέρων ώρα';
 $lang['TOPIC_SPLIT_NEW'] = 'Νέο θέμα';
 $lang['TOPIC_SPLIT_OLD'] = 'Παλιό το θέμα';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Προσθέστε bot-μήνυμα για την κίνηση';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Προσθέστε bot-μήνυμα για τη διαίρεση για να <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Προσθέστε bot-μήνυμα για τη διαίρεση για να <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Έχετε εισέλθει σε λάθος αξίες. 
 $lang['PROCESSING'] = 'Επεξεργασία...';
 $lang['FINISHED'] = 'Τελείωσε';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Το θέμα έχει μεταφερθεί από το φόρουμ [b]%s[/b] στο φόρουμ [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Το θέμα έχει χωριστεί. Νέο θέμα - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Το θέμα έχει χωριστεί από [b]%s[/b][br][br]%s';
 
