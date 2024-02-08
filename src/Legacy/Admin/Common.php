@@ -419,15 +419,15 @@ class Common
     /**
      * Topic movement
      *
-     * @param array|string $topic_id
-     * @param int $to_forum_id
-     * @param null $from_forum_id
+     * @param int|array|string $topic_id
+     * @param int|string $to_forum_id
+     * @param int|string|null $from_forum_id
      * @param bool $leave_shadow
      * @param bool $insert_bot_msg
-     *
+     * @param string $reason_move
      * @return bool
      */
-    public static function topic_move($topic_id, $to_forum_id, $from_forum_id = null, $leave_shadow = false, $insert_bot_msg = false)
+    public static function topic_move(int|array|string $topic_id, int|string $to_forum_id, int|string $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
     {
         global $log_action;
 
@@ -496,7 +496,7 @@ class Common
         // Bot
         if ($insert_bot_msg) {
             foreach ($topics as $topic_id => $row) {
-                Post::insert_post('after_move', $topic_id, $to_forum_id, $row['forum_id']);
+                Post::insert_post('after_move', $topic_id, $to_forum_id, $row['forum_id'], reason_move: $reason_move);
             }
             self::sync('topic', array_keys($topics));
         }
