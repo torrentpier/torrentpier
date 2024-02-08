@@ -2172,24 +2172,44 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
 }
 
-function profile_url($data, $target_blank = false)
+/**
+ * Generates link to profile
+ *
+ * @param array $data
+ * @param bool $target_blank
+ * @return string
+ */
+function profile_url(array $data, bool $target_blank = false): string
 {
     global $bb_cfg, $lang, $datastore;
+
+    $user_id = (int)$data['user_id'];
+    $username = $data['username'];
+    $user_rank = $data['user_rank'];
 
     if (!$ranks = $datastore->get('ranks')) {
         $datastore->update('ranks');
         $ranks = $datastore->get('ranks');
     }
 
-    $user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
-
+    $title = $style = '';
     if (isset($ranks[$user_rank])) {
         $title = $ranks[$user_rank]['rank_title'];
         $style = $ranks[$user_rank]['rank_style'];
     }
-    if (empty($title)) {
-        $title = $lang['USER'];
+
+    if (empty($username)) {
+        $username = $lang['GUEST'];
     }
+
+    if (empty($title)) {
+        $title = match ($user_id) {
+            GUEST_UID => $lang['GUEST'],
+            BOT_UID => $username,
+            default => $lang['USER'],
+        };
+    }
+
     if (empty($style)) {
         $style = 'colorUser';
     }
@@ -2198,16 +2218,12 @@ function profile_url($data, $target_blank = false)
         $style = '';
     }
 
-    $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
-    $user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : GUEST_UID;
-
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
-
-    if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && $username) {
+    if (!in_array($user_id, explode(',', EXCLUDED_USERS))) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
         $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
 
-        if (getBanInfo((int)$user_id)) {
+        if (getBanInfo($user_id)) {
             return '<s>' . $profile . '</s>';
         }
     }
