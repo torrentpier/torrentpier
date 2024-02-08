@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $bb_cfg, $userdata, $orig_word, $replacement_word;
+global $lang, $bb_cfg, $userdata;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
@@ -79,10 +79,7 @@ switch ($this->request['type']) {
         $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
         // hide sid
         $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
-
-        if (!empty($orig_word)) {
-            $message = !empty($message) ? preg_replace($orig_word, $replacement_word, $message) : '';
-        }
+        $message = !empty($message) ? $wordCensor->censorString($message) : '';
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
             $message = "[quote]" . $post['topic_title'] . "[/quote]\r";

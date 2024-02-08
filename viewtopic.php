@@ -366,9 +366,7 @@ if (!$ranks = $datastore->get('ranks')) {
 }
 
 // Censor topic title
-if (!empty($orig_word)) {
-    $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-}
+$topic_title = $wordCensor->censorString($topic_title);
 
 // Post, reply and other URL generation for templating vars
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=" . $forum_id;
@@ -623,27 +621,25 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     // Replace naughty words
-    if (!empty($orig_word)) {
-        if ($user_sig) {
-            $user_sig = str_replace(
-                '\"', '"',
-                substr(
-                    preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($orig_word, $replacement_word) {
-                        return preg_replace($orig_word, $replacement_word, reset($matches));
-                    }, '>' . $user_sig . '<'), 1, -1
-                )
-            );
-        }
-
-        $message = str_replace(
+    if ($user_sig) {
+        $user_sig = str_replace(
             '\"', '"',
             substr(
-                preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($orig_word, $replacement_word) {
-                    return preg_replace($orig_word, $replacement_word, reset($matches));
-                }, '>' . $message . '<'), 1, -1
+                preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($wordCensor) {
+                    return $wordCensor->censorString(reset($matches));
+                }, '>' . $user_sig . '<'), 1, -1
             )
         );
     }
+
+    $message = str_replace(
+        '\"', '"',
+        substr(
+            preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($wordCensor) {
+                return $wordCensor->censorString(reset($matches));
+            }, '>' . $message . '<'), 1, -1
+        )
+    );
 
     // Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
     if ($user_sig) {

@@ -467,10 +467,8 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             // hide sid
             $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
-            if (!empty($orig_word)) {
-                $subject = !empty($subject) ? preg_replace($orig_word, $replacement_word, $subject) : '';
-                $message = !empty($message) ? preg_replace($orig_word, $replacement_word, $message) : '';
-            }
+            $subject = !empty($subject) ? $wordCensor->censorString($subject) : '';
+            $message = !empty($message) ? $wordCensor->censorString($message) : '';
 
             if (!preg_match('/^Re:/', $subject) && strlen($subject) > 0) {
                 $subject = 'Re: ' . $subject;

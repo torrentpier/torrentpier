@@ -566,11 +566,7 @@ if ($post_mode) {
         $topic_id = (int)$topic_id;
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
-        $topic_title = $first_post['topic_title'];
-
-        if (!empty($orig_word)) {
-            $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-        }
+        $topic_title = $wordCensor->censorString($first_post['topic_title']);
 
         $template->assign_block_vars('t', array(
             'FORUM_ID' => $forum_id,
@@ -581,20 +577,17 @@ if ($post_mode) {
         ));
 
         $quote_btn = $edit_btn = $ip_btn = '';
-        $delpost_btn = (IS_AM);
+        $delpost_btn = IS_AM;
 
         // Topic posts block
         foreach ($topic_posts as $row_num => $post) {
             if ($post['poster_id'] != BOT_UID) {
                 $quote_btn = true;
-                $edit_btn = $ip_btn = (IS_AM);
+                $edit_btn = $ip_btn = IS_AM;
             }
 
             $message = get_parsed_post($post);
-
-            if (!empty($orig_word)) {
-                $message = preg_replace($orig_word, $replacement_word, $message);
-            }
+            $message = $wordCensor->censorString($message);
 
             $template->assign_block_vars('t.p', array(
                 'ROW_NUM' => $row_num,

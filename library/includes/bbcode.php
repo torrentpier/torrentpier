@@ -388,14 +388,12 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
 function bbcode2html($text)
 {
-    global $bbcode, $orig_word, $replacement_word;
+    global $bbcode, $wordCensor;
 
     if (!isset($bbcode)) {
         $bbcode = new TorrentPier\Legacy\BBCode();
     }
-    if (!empty($orig_word)) {
-        $text = preg_replace($orig_word, $replacement_word, $text);
-    }
+    $text = $wordCensor->censorString($text);
     return $bbcode->bbcode2html($text);
 }
 
