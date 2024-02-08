@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Update post kohë';
 $lang['TOPIC_SPLIT_NEW'] = 'Temë të re';
 $lang['TOPIC_SPLIT_OLD'] = 'Vjetër temë';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Të shtoni bot-mesazhi për të lëvizur';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Të shtoni bot-mesazhi për të ndarë të <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Të shtoni bot-mesazhi për të ndarë të <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Ju keni hyrë në disa vlera të gabuara. Ju lutem kontr
 $lang['PROCESSING'] = 'Përpunimi...';
 $lang['FINISHED'] = 'Përfundoi';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema është lëvizur nga forumi [b]%s[/b] të forumit [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Temë ka qenë e ndarë. Temë të re - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Temë ka qenë e ndarë nga [b]%s[/b][br][br]%s';
 

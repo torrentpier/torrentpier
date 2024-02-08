@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Yangilash post vaqti';
 $lang['TOPIC_SPLIT_NEW'] = 'Yangi mavzu';
 $lang['TOPIC_SPLIT_OLD'] = 'Old mavzu';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'harakat haqida bot-xabar qo\'shish';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'topic</b> <b>old Split haqida bot-xabar qo\'shish';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'topic</b> <b>new Split haqida bot-xabar qo\'shish';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Agar ba\'zi noto\'g\'ri qadriyatlar kirib. Kiritilgan ma
 $lang['PROCESSING'] = 'Qayta ishlash ...';
 $lang['FINISHED'] = 'yakunladi';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Mavzu forum [b]%s[/b][br][br]%s uchun forum [b]%s[/b] topdi';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Mavzu bo\'lindi etildi. Yangi mavzu - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Mavzu [b]%s[/b][br][br]%s dan YARILMIŞTIR';
 

@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Aktualizácie post čas';
 $lang['TOPIC_SPLIT_NEW'] = 'Novú tému';
 $lang['TOPIC_SPLIT_OLD'] = 'Staré tému';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Pridať bot-hlásenie o sťahovaní';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Pridať bot-správa o rozdeliť na <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Pridať bot-správa o rozdeliť na <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Ste zadali niektoré zle hodnoty. Skontrolujte prosím v
 $lang['PROCESSING'] = 'Spracovanie...';
 $lang['FINISHED'] = 'Skončil';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Téma bola presunutá z fóra [b]%s[/b] na fórum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Téma bola rozdelená. Nová téma - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Téma bola rozdelená z [b]%s[/b][br][br]%s';
 

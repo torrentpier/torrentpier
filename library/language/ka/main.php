@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'განახლება პოსტი დრ�
 $lang['TOPIC_SPLIT_NEW'] = 'ახალი თემა';
 $lang['TOPIC_SPLIT_OLD'] = 'ძველი თემა';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'რჩეულებში bot-გაგზავნა მოძრაობის შესახებ';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'რჩეულებში bot-გაგზავნა გაყოფილი <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'რჩეულებში bot-გაგზავნა გაყოფილი <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'თქვენ არ შევიდა ზოგი�
 $lang['PROCESSING'] = 'დამუშავება...';
 $lang['FINISHED'] = 'დასრულდა';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'თემა უკვე გადავიდა ფორუმის [b]%s[/b], რომ ფორუმი [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'თემა უკვე გაყოფილი. ახალი თემა - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'თემა უკვე გაყოფილი [b]%s[/b][br][br]%s';
 

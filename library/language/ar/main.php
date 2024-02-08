@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'تحديث آخر الوقت';
 $lang['TOPIC_SPLIT_NEW'] = 'موضوع جديد';
 $lang['TOPIC_SPLIT_OLD'] = 'الموضوع القديم';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'إضافة بوت رسالة عن الانتقال';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'إضافة بوت-رسالة حول تقسيم <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'إضافة بوت-رسالة حول تقسيم <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'كنت قد دخلت بعض قيم خاطئة. يرجى 
 $lang['PROCESSING'] = 'تجهيز...';
 $lang['FINISHED'] = 'انتهى';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'الموضوع تم نقله من منتدى [b]%s[/b] المنتدى [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'الموضوع تم تقسيمها. موضوع جديد - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'الموضوع تم تقسيمها من [b]%s[/b][br][br]%s';
 

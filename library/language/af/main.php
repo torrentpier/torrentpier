@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Dateer tyd op';
 $lang['TOPIC_SPLIT_NEW'] = 'Nuwe onderwerp';
 $lang['TOPIC_SPLIT_OLD'] = 'Ou onderwerp';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Voeg bot-boodskap oor beweeg';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Voeg bot-boodskap oor verdeel na <b>old onderwerp</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Voeg bot-boodskap oor verdeel na <b>nieuw onderwerp</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'U het foutiewe waardes ingevoer. Gaan asseblief jou invo
 $lang['PROCESSING'] = 'Verwerking ...';
 $lang['FINISHED'] = 'klaar';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Onderwerp is verskuif vanaf forum [b]%s[/b] na forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Onderwerp is verdeel. Nuwe onderwerp - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Onderwerp is verdeel van [b]%s[/b][br][br]%s';
 

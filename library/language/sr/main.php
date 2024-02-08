@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Ажурирање поста пут';
 $lang['TOPIC_SPLIT_NEW'] = 'Нову тему';
 $lang['TOPIC_SPLIT_OLD'] = 'Старе теме';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Додајте бот-поруку о селидби';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Додајте бот-поруку о расколу у <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Додајте бот-поруку о расколу у <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Сте унели погрешне вредности. �
 $lang['PROCESSING'] = 'Обрада...';
 $lang['FINISHED'] = 'Завршио';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Тема је премештена из форума [b]%s[/b] на форуму [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Тема је подељена. Нова тема - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема је подељена од [b]%s[/b][br][br]%s';
 

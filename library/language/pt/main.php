@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Atualização de tempo de pós';
 $lang['TOPIC_SPLIT_NEW'] = 'Novo tópico';
 $lang['TOPIC_SPLIT_OLD'] = 'Velho tema';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Adicionar bot-mensagem sobre a mudança';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Adicionar bot-mensagem sobre a divisão para <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Adicionar bot-mensagem sobre a divisão para <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Você inseriu alguns valores errados. Por favor, verifiq
 $lang['PROCESSING'] = 'Processamento de...';
 $lang['FINISHED'] = 'Terminado';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'O tópico foi movido do forum [b]%s[/b] do fórum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'O tópico foi dividido. Novo tópico - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'O tópico foi dividido a partir de [b]%s[/b][br][br]%s';
 

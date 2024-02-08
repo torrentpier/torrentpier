@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Update posting kali';
 $lang['TOPIC_SPLIT_NEW'] = 'Topik baru';
 $lang['TOPIC_SPLIT_OLD'] = 'Topik lama';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Tambahkan bot-pesan tentang pindah';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Tambahkan bot-pesan tentang split untuk <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Tambahkan bot-pesan tentang split untuk <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Anda telah memasukkan beberapa nilai-nilai yang salah. S
 $lang['PROCESSING'] = 'Pengolahan...';
 $lang['FINISHED'] = 'Selesai';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topik telah dipindahkan dari forum [b]%s[/b] untuk forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Topik telah terbelah. Topik baru - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Topik telah berpisah dari [b]%s[/b][br][br]%s';
 
