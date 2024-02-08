@@ -1339,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Yeniləmə oruc dəfə';
 $lang['TOPIC_SPLIT_NEW'] = 'Yeni mövzu';
 $lang['TOPIC_SPLIT_OLD'] = 'Köhnə mövzular';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Əlavə bot-mesaj hərəkət haqqında';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Əlavə bot-mesaj ictimaiyyətində bu <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Əlavə bot-mesaj ictimaiyyətində bu <b>new topic</b>';
 //qr
@@ -2518,7 +2519,7 @@ $lang['WRONG_INPUT'] = 'Yazdığınız yanlış dəyərlər. Buyurun, yoxlayın 
 $lang['PROCESSING'] = 'Emal...';
 $lang['FINISHED'] = 'Başa';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Mövzu köçürülüb forum [b]%s[/b] forumda [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Mövzu bölündü. Yeni mövzu - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Mövzu bölündü biri [b]%s[/b][br][br]%s';
 
