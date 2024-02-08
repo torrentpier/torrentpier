@@ -564,7 +564,7 @@ switch ($mode) {
 
                     $template->assign_block_vars('postrow', [
                         'ROW_CLASS' => $row_class,
-                        'POSTER_NAME' => wbr($poster),
+                        'POSTER_NAME' => $poster,
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
                         'CHECKBOX' => defined('BEGIN_CHECKBOX'),
@@ -674,7 +674,7 @@ switch ($mode) {
 
                 $template->assign_block_vars('userrow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
-                    'USERNAME' => wbr($username),
+                    'USERNAME' => $username,
                     'POSTS' => $row['postings'],
                     'U_PROFILE' => ($id == GUEST_UID) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
                     'U_SEARCHPOSTS' => "search.php?search_author=1&amp;uid=$id",
