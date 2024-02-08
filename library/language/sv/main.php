@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Uppdatering inlägg';
 $lang['TOPIC_SPLIT_NEW'] = 'Nytt ämne';
 $lang['TOPIC_SPLIT_OLD'] = 'Gammalt ämne';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Lägg till bot-meddelande om att flytta';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Lägg till bot-meddelande om split till <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Lägg till bot-meddelande om split till <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Du har skrivit lite fel värden. Vänligen kontrollera d
 $lang['PROCESSING'] = 'Bearbetning...';
 $lang['FINISHED'] = 'Klar';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Ämnet har flyttats från forum [b]%s[/b] forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Ämnet har delats upp. Nytt ämne - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Ämnet har delats upp från [b]%s[/b][br][br]%s';
 
