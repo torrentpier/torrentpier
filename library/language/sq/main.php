@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Kurrë nuk';
 //mpd
 $lang['DELETE_POSTS'] = 'Fshini zgjedhur postimet';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'E përzgjedhur postimet janë hequr me sukses';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Njoftimet';
