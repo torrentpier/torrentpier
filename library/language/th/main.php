@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'ไม่เคย';
 //mpd
 $lang['DELETE_POSTS'] = 'ลบรายการที่เลือกไว้กัปตัน..เสาทางนี้';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'คอนที่เลือกไว้ออกัปตัน..เสาทางนี้ต้องเรียบร้อยแล้ถูกเอาออก';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'ประกาศเสียงตามสาย';
