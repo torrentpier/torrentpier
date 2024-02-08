@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = '업데이트 게시간';
 $lang['TOPIC_SPLIT_NEW'] = '새로운 주제';
 $lang['TOPIC_SPLIT_OLD'] = '오래된 주제';
 $lang['BOT_LEAVE_MSG_MOVED'] = '을 추가할 수 있습니다.에 대한 메시지를 이동';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '을 추가할 수 있습니다.에 대한 메시지를 분할하 <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '을 추가할 수 있습니다.에 대한 메시지를 분할하 <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = '입력하신 몇 가지 잘못된 값입니다. 을 확�
 $lang['PROCESSING'] = 'Processing...';
 $lang['FINISHED'] = '완료';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = '항목에서 이동되었습 forum[b]%s[/b] 포럼 [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = '항목 분리되었습니다. 새로운 주제-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '항목 분리되었습에서 [b]%s[/b][br][br]%s';
 
