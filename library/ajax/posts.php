@@ -47,13 +47,6 @@ if (isset($this->request['post_id'])) {
     $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 }
 
-if (!defined('WORD_LIST_OBTAINED')) {
-    $orig_word = [];
-    $replace_word = [];
-    obtain_word_list($orig_word, $replace_word);
-    define('WORD_LIST_OBTAINED', true);
-}
-
 switch ($this->request['type']) {
     case 'delete':
         if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600 * 3 > TIMENOW))) {
@@ -83,13 +76,10 @@ switch ($this->request['type']) {
         $message = "[quote=\"" . $quote_username . "\"][qpost=" . $post['post_id'] . "]" . $post['post_text'] . "[/quote]\r";
 
         // hide user passkey
-        $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9]{10}(?=&)#', 'passkey', $message);
+        $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
         // hide sid
-        $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]{12}#', 'sid', $message);
-
-        if (!empty($orig_word)) {
-            $message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
-        }
+        $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
+        $message = $wordCensor->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
             $message = "[quote]" . $post['topic_title'] . "[/quote]\r";

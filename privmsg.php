@@ -375,18 +375,9 @@ if ($mode == 'read') {
     // Processing of post
     //
     $post_subject = htmlCHR($privmsg['privmsgs_subject']);
-
     $private_message = $privmsg['privmsgs_text'];
-
-    $orig_word = [];
-    $replacement_word = [];
-    obtain_word_list($orig_word, $replacement_word);
-
-    if (count($orig_word)) {
-        $post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
-        $private_message = preg_replace($orig_word, $replacement_word, $private_message);
-    }
-
+    $post_subject = $wordCensor->censorString($post_subject);
+    $private_message = $wordCensor->censorString($private_message);
     $private_message = bbcode2html($private_message);
 
     //
@@ -1052,18 +1043,9 @@ if ($mode == 'read') {
     }
 
     if ($preview && !$error) {
-        $orig_word = [];
-        $replacement_word = [];
-        obtain_word_list($orig_word, $replacement_word);
-
         $preview_message = bbcode2html($privmsg_message);
-
-        if (count($orig_word)) {
-            $preview_subject = preg_replace($orig_word, $replacement_word, $privmsg_subject);
-            $preview_message = preg_replace($orig_word, $replacement_word, $preview_message);
-        } else {
-            $preview_subject = $privmsg_subject;
-        }
+        $preview_subject = $wordCensor->censorString($privmsg_subject);
+        $preview_message = $wordCensor->censorString($preview_message);
 
         $s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
         $s_hidden_fields .= '<input type="hidden" name="mode" value="' . $mode . '" />';
@@ -1187,9 +1169,6 @@ if ($mode == 'read') {
     // Load templates
     //
     $template->set_filenames(['body' => 'privmsgs.tpl']);
-
-    $orig_word = $replacement_word = [];
-    obtain_word_list($orig_word, $replacement_word);
 
     //
     // New message
@@ -1402,12 +1381,7 @@ if ($mode == 'read') {
 
             $msg_userid = $row['user_id'];
             $msg_user = profile_url($row);
-
-            $msg_subject = $row['privmsgs_subject'];
-
-            if (count($orig_word)) {
-                $msg_subject = preg_replace($orig_word, $replacement_word, $msg_subject);
-            }
+            $msg_subject = $wordCensor->censorString($row['privmsgs_subject']);
 
             $u_subject = PM_URL . "?folder=$folder&amp;mode=read&amp;" . POST_POST_URL . "=$privmsg_id";
 

@@ -335,7 +335,7 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        global $bb_cfg, $lang, $userdata;
+        global $bb_cfg, $lang, $userdata, $wordCensor;
 
         if (!$bb_cfg['topic_notify_enabled']) {
             return;
@@ -358,12 +358,7 @@ class Post
 			");
 
                 if ($watch_list) {
-                    $orig_word = $replacement_word = [];
-                    obtain_word_list($orig_word, $replacement_word);
-
-                    if (\count($orig_word)) {
-                        $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-                    }
+                    $topic_title = $wordCensor->censorString($topic_title);
 
                     $u_topic = make_url(TOPIC_URL . $topic_id . '&view=newest#newest');
                     $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");

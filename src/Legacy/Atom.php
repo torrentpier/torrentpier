@@ -169,7 +169,7 @@ class Atom
      */
     private static function create_atom($file_path, $mode, $id, $title, $topics)
     {
-        global $bb_cfg, $lang;
+        global $bb_cfg, $lang, $wordCensor;
         $date = null;
         $time = null;
         $dir = \dirname($file_path);
@@ -203,13 +203,7 @@ class Atom
             if (isset($topic['tor_status'])) {
                 $tor_status = " ({$lang['TOR_STATUS_NAME'][$topic['tor_status']]})";
             }
-            $topic_title = $topic['topic_title'];
-            $orig_word = [];
-            $replacement_word = [];
-            obtain_word_list($orig_word, $replacement_word);
-            if (\count($orig_word)) {
-                $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-            }
+            $topic_title = $wordCensor->censorString($topic['topic_title']);
             $author_name = $topic['first_username'] ?: $lang['GUEST'];
             $last_time = $topic['topic_last_post_time'];
             if ($topic['topic_last_post_edit_time']) {

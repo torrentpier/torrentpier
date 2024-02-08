@@ -395,6 +395,11 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
+ * Word censor
+ */
+$wordCensor = new \TorrentPier\Censor();
+
+/**
  * Cron
  */
 if (
