@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'ешқашан да';
 //mpd
 $lang['DELETE_POSTS'] = 'Таңдалған жазбаларды жою';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Таңдалған хабарламалар сәтті жойылған';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Хабарландырулар';
