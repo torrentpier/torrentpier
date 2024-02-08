@@ -1074,7 +1074,7 @@ if ($mode == 'read') {
 
         $template->assign_vars([
             'TPL_PREVIEW_POST' => true,
-            'TOPIC_TITLE' => wbr($preview_subject),
+            'TOPIC_TITLE' => $preview_subject,
             'POST_SUBJECT' => $preview_subject,
             'MESSAGE_TO' => $to_username,
             'MESSAGE_FROM' => $userdata['username'],

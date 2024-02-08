@@ -250,7 +250,7 @@ foreach ($cat_forums as $cid => $c) {
             $template->assign_block_vars('c.f.last', [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
-                'LAST_TOPIC_TITLE' => wbr(str_short($f['last_topic_title'], $last_topic_max_len)),
+                'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], $bb_cfg['last_post_date_format']),
                 'LAST_POST_USER' => profile_url(['username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
             ]);
