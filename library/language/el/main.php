@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'Ποτέ';
 //mpd
 $lang['DELETE_POSTS'] = 'Διαγραφή των επιλεγμένων θέσεων';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Οι επιλεγμένες θέσεις έχουν αφαιρεθεί επιτυχώς';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Ανακοινώσεις';
