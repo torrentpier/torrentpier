@@ -1336,6 +1336,7 @@ $lang['UPDATE_POST_TIME'] = 'Update post timp';
 $lang['TOPIC_SPLIT_NEW'] = 'Subiect nou';
 $lang['TOPIC_SPLIT_OLD'] = 'Subiect vechi';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Adaugă bot-mesaj despre mutarea';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Adaugă bot-mesaj despre split spre <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Adaugă bot-mesaj despre split spre <b>new topic</b>';
 //qr
@@ -2515,7 +2516,7 @@ $lang['WRONG_INPUT'] = 'Ați introdus unele valori greșite. Vă rugăm să veri
 $lang['PROCESSING'] = 'Prelucrare...';
 $lang['FINISHED'] = 'Terminat';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Subiectul a fost mutat de la forum [b]%s[/b] la forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Subiectul a fost divizat. Subiect nou - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Subiectul a fost despărțit de [b]%s[/b][br][br]%s';
 
