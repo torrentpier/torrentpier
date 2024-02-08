@@ -1340,6 +1340,7 @@ $lang['UPDATE_POST_TIME'] = '更新後の時間';
 $lang['TOPIC_SPLIT_NEW'] = '新しい話題';
 $lang['TOPIC_SPLIT_OLD'] = '昔の話題';
 $lang['BOT_LEAVE_MSG_MOVED'] = '追加ボット-メッセージ移動';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '追加ボット-メッセージが分割<b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '追加ボット-メッセージが分割<b>new topic</b>';
 //qr
@@ -2519,7 +2520,7 @@ $lang['WRONG_INPUT'] = '現在の入力の一部間違った値です。 を確�
 $lang['PROCESSING'] = '処---';
 $lang['FINISHED'] = '完成';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = '課題として、フォーラム[b]%s[/b]るフォーラム[b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = '話題にして分割します。 新しいトピック[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '課題分割されたから[b]%s[/b][br][br]%s';
 
