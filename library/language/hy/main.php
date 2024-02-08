@@ -1324,6 +1324,7 @@ $lang['NEVER'] = 'Երբեք';
 //mpd
 $lang['DELETE_POSTS'] = 'Հեռացնել ընտրված հաղորդագրությունները';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Որոշ հաղորդագրություններ էին հաջողությամբ հեռացվել';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Հայտարարություններ';
