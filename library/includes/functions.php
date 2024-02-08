@@ -1606,35 +1606,6 @@ function bb_preg_quote($str, $delimiter)
     return $text;
 }
 
-/**
- * Word censor
- *
- * @param array $orig_word
- * @param array $replacement_word
- * @return void
- */
-function obtain_word_list(array &$orig_word, array &$replacement_word): void
-{
-    global $bb_cfg;
-
-    if (!$bb_cfg['use_word_censor']) {
-        return;
-    }
-
-    if (!$sql = CACHE('bb_cache')->get('censored')) {
-        $sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
-        if (!$sql) {
-            $sql = [['word' => 1, 'replacement' => 1]];
-        }
-        CACHE('bb_cache')->set('censored', $sql, 7200);
-    }
-
-    foreach ($sql as $row) {
-        $orig_word[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($row['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
-        $replacement_word[] = $row['replacement'];
-    }
-}
-
 function bb_die($msg_text, $status_code = null)
 {
     global $ajax, $bb_cfg, $lang, $template, $theme, $userdata, $user;
