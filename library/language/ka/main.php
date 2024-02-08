@@ -1321,6 +1321,7 @@ $lang['NEVER'] = 'არასოდეს';
 //mpd
 $lang['DELETE_POSTS'] = 'წაშლა შერჩეული პოსტები';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'შერჩეული პოსტები წარმატებით ამოღებულ';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'განცხადებები';
