@@ -2291,20 +2291,24 @@ function is_gold($type): string
         case TOR_TYPE_SILVER:
             $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_silver'] . '" alt="' . $lang['SILVER'] . '" title="' . $lang['SILVER'] . '" />&nbsp;';
             break;
-        default:
-            break;
     }
 
     return $is_gold;
 }
 
-function update_atom($type, $id)
+/**
+ * Update atom feed
+ *
+ * @param string $type
+ * @param $id
+ * @return void
+ */
+function update_atom(string $type, $id): void
 {
     switch ($type) {
         case 'user':
             \TorrentPier\Legacy\Atom::update_user_feed($id, get_username($id));
             break;
-
         case 'topic':
             $topic_poster = (int)DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
             \TorrentPier\Legacy\Atom::update_user_feed($topic_poster, get_username($topic_poster));
