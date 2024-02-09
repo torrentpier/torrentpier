@@ -2206,7 +2206,7 @@ function profile_url(array $data, bool $target_blank = false): string
     $style = 'colorUser';
     if (isset($ranks[$user_rank])) {
         $title = $ranks[$user_rank]['rank_title'];
-        if (!empty($ranks[$user_rank]['rank_style']) && $bb_cfg['color_nick']) {
+        if ($bb_cfg['color_nick']) {
             $style = $ranks[$user_rank]['rank_style'];
         }
     }
