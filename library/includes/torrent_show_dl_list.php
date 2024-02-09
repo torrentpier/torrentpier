@@ -72,7 +72,7 @@ if ($show_dl_list) {
                 $dl_count[$u['user_status']] = $u['username'];
             } else {
                 $u_prof_href = ($u['user_id'] == GUEST_UID) ? '#' : PROFILE_URL . $u['user_id'] . "#torrent";
-                $dl_cat[$u['user_status']] .= '<nobr><a class="' . $u_link_class . '" href="' . $u_prof_href . '" title="' . $u['last_modified_dlstatus'] . '">' . profile_url(['username' => $u['username'], 'user_rank' => $u['user_rank']]) . '</a></nobr>, ';
+                $dl_cat[$u['user_status']] .= '<nobr><a class="' . $u_link_class . '" href="' . $u_prof_href . '" title="' . $u['last_modified_dlstatus'] . '">' . profile_url(['username' => $u['username'], 'user_id' => $u['user_id'], 'user_rank' => $u['user_rank']]) . '</a></nobr>, ';
                 $dl_count[$u['user_status']]++;
             }
         }

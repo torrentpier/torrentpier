@@ -2187,6 +2187,16 @@ function profile_url(array $data, bool $target_blank = false): string
     $username = $data['username'];
     $user_rank = $data['user_rank'];
 
+    if (!isset($user_id)) {
+        throw new InvalidArgumentException('Missing argument: user_id');
+    }
+    if (!isset($username)) {
+        throw new InvalidArgumentException('Missing argument: username');
+    }
+    if (!isset($user_rank)) {
+        throw new InvalidArgumentException('Missing argument: user_rank');
+    }
+
     if (!$ranks = $datastore->get('ranks')) {
         $datastore->update('ranks');
         $ranks = $datastore->get('ranks');
@@ -2201,16 +2211,12 @@ function profile_url(array $data, bool $target_blank = false): string
         }
     }
 
-    if (!empty($username)) {
-        if (empty($title)) {
-            $title = match ($user_id) {
-                GUEST_UID => $lang['GUEST'],
-                BOT_UID => $username,
-                default => $lang['USER'],
-            };
-        }
-    } else {
-        $username = $lang['GUEST'];
+    if (empty($title)) {
+        $title = match ($user_id) {
+            GUEST_UID => $lang['GUEST'],
+            BOT_UID => $username,
+            default => $lang['USER'],
+        };
     }
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
