@@ -272,7 +272,6 @@ class Torrent
 
         $info_hash = $info_hash_v2 = null;
         $info_hash_sql = $info_hash_v2_sql = $info_hash_where = null;
-        $v2_hash = null;
 
         if ($torrent['extension'] !== TORRENT_EXT) {
             self::torrent_error_exit($lang['NOT_TORRENT']);
@@ -307,7 +306,7 @@ class Torrent
         }
 
         if ($bb_cfg['bt_disable_dht']) {
-            $tor['info']['private'] = (int)1;
+            $tor['info']['private'] = 1;
             $fp = fopen($filename, 'wb+');
             fwrite($fp, \Arokettu\Bencode\Bencode::encode($tor));
             fclose($fp);
@@ -640,7 +639,7 @@ class Torrent
      */
     public static function generate_passkey($user_id, bool $force_generate = false)
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         $user_id = (int)$user_id;
 
@@ -664,15 +663,12 @@ class Torrent
         if (!$old_passkey) {
             // Create first passkey
             DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
-            if (DB()->affected_rows() == 1) {
-                return $passkey_val;
-            }
         } else {
             // Update exists passkey
             DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
-            if (DB()->affected_rows() == 1) {
-                return $passkey_val;
-            }
+        }
+        if (DB()->affected_rows() == 1) {
+            return $passkey_val;
         }
 
         return false;
