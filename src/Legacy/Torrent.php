@@ -226,9 +226,9 @@ class Torrent
      * @param int $attach_id
      * @param int $tor_status_gold
      */
-    public static function change_tor_type($attach_id, $tor_status_gold)
+    public static function change_tor_type($attach_id, $tor_status_gold): void
     {
-        global $topic_id, $lang, $bb_cfg;
+        global $topic_id, $lang;
 
         if (!$torrent = self::get_torrent_info($attach_id)) {
             bb_die($lang['TOR_NOT_FOUND']);
@@ -240,7 +240,6 @@ class Torrent
 
         $topic_id = $torrent['topic_id'];
         $tor_status_gold = (int)$tor_status_gold;
-        $info_hash = null;
 
         DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id");
     }
