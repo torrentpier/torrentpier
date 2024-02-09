@@ -2192,30 +2192,25 @@ function profile_url(array $data, bool $target_blank = false): string
         $ranks = $datastore->get('ranks');
     }
 
-    $title = $style = '';
+    $title = '';
+    $style = 'colorUser';
     if (isset($ranks[$user_rank])) {
         $title = $ranks[$user_rank]['rank_title'];
-        $style = $ranks[$user_rank]['rank_style'];
+        if (!empty($ranks[$user_rank]['rank_style']) && $bb_cfg['color_nick']) {
+            $style = $ranks[$user_rank]['rank_style'];
+        }
     }
 
-    if (empty($username)) {
+    if (!empty($username)) {
+        if (empty($title)) {
+            $title = match ($user_id) {
+                GUEST_UID => $lang['GUEST'],
+                BOT_UID => $username,
+                default => $lang['USER'],
+            };
+        }
+    } else {
         $username = $lang['GUEST'];
-    }
-
-    if (empty($title)) {
-        $title = match ($user_id) {
-            GUEST_UID => $lang['GUEST'],
-            BOT_UID => $username,
-            default => $lang['USER'],
-        };
-    }
-
-    if (empty($style)) {
-        $style = 'colorUser';
-    }
-
-    if (!$bb_cfg['color_nick']) {
-        $style = '';
     }
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
