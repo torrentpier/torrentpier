@@ -165,7 +165,8 @@ foreach ($profile_fields as $field => $can_edit) {
     $can_edit = (bool)$can_edit;
     $can_edit_tpl['CAN_EDIT_' . strtoupper($field)] = $can_edit;
     if ($can_edit === false) {
-        continue;
+        // TODO: При continue; не устанавливаются переменные ($tp_data) шаблона прописанные в case
+        // continue;
     }
 
     switch ($field) {
