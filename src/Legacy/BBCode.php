@@ -91,6 +91,7 @@ class BBCode
             '#\[size=([1-2]?[0-9])\]#isu' => '<span style="font-size: $1px; line-height: normal;">',
             '#\[align=(left|right|center|justify)\]#isu' => '<span class="post-align" style="text-align: $1;">',
             '#\[font="([\w\- \']+)"\]#isu' => '<span style="font-family: $1;">',
+            '#\[font=([\w\- \']+)\]#isu' => '<span style="font-family: $1;">',
             "#\[img\]($img_exp)\[/img\]#isu" => $tpl['img'],
             "#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu" => $tpl['img_aligned'],
             "#\[email\]($email_exp)\[/email\]#isu" => '<a href="mailto:$1">$1</a>',
