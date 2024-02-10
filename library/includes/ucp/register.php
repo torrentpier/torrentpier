@@ -159,12 +159,13 @@ if ($submit) {
 
 // Валидация данных
 $cur_pass_valid = $adm_edit;
+$can_edit_tpl = [];
 
 foreach ($profile_fields as $field => $can_edit) {
-    // Проверка на возможность редактирования
-    if ((bool)$can_edit === false) {
-        // TODO: При continue; не устанавливаются переменные ($tp_data) шаблона прописанные в case
-        // continue;
+    $can_edit = (bool)$can_edit;
+    $can_edit_tpl['CAN_EDIT_' . strtoupper($field)] = $can_edit;
+    if ($can_edit === false) {
+        continue;
     }
 
     switch ($field) {
@@ -195,7 +196,6 @@ foreach ($profile_fields as $field => $can_edit) {
                     $db_data['username'] = $username;
                 }
             }
-            $tp_data['CAN_EDIT_USERNAME'] = $can_edit;
             $tp_data['USERNAME'] = $pr_data['username'];
             break;
 
@@ -669,6 +669,7 @@ if ($submit && !$errors) {
     }
 }
 
+$template->assign_vars($can_edit_tpl);
 $template->assign_vars($tp_data);
 
 $template->assign_vars([
