@@ -70,7 +70,7 @@
         </tr>
         <tr>
             <td class="prof-title">{L_USERNAME}: *</td>
-            <td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}"/><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF --><span id="check_name"></span></td>
+            <td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}"/><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->&nbsp;<span id="check_name"></span></td>
         </tr>
         <tr>
             <td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br/><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
