@@ -2187,28 +2187,19 @@ function profile_url(array $data, bool $target_blank = false): string
     $username = $data['username'];
     $user_rank = $data['user_rank'];
 
-    if (!isset($user_id)) {
-        throw new InvalidArgumentException('Missing argument: user_id');
-    }
-    if (!isset($username)) {
-        throw new InvalidArgumentException('Missing argument: username');
-    }
-    if (!isset($user_rank)) {
-        throw new InvalidArgumentException('Missing argument: user_rank');
-    }
-
     if (!$ranks = $datastore->get('ranks')) {
         $datastore->update('ranks');
         $ranks = $datastore->get('ranks');
     }
 
-    $title = '';
-    $style = 'colorUser';
+    $title = $style = '';
     if (isset($ranks[$user_rank])) {
         $title = $ranks[$user_rank]['rank_title'];
-        if ($bb_cfg['color_nick']) {
-            $style = $ranks[$user_rank]['rank_style'];
-        }
+        $style = $ranks[$user_rank]['rank_style'];
+    }
+
+    if (empty($username)) {
+        $username = $lang['GUEST'];
     }
 
     if (empty($title)) {
@@ -2217,6 +2208,14 @@ function profile_url(array $data, bool $target_blank = false): string
             BOT_UID => $username,
             default => $lang['USER'],
         };
+    }
+
+    if (empty($style)) {
+        $style = 'colorUser';
+    }
+
+    if (!$bb_cfg['color_nick']) {
+        $style = '';
     }
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
@@ -2291,24 +2290,20 @@ function is_gold($type): string
         case TOR_TYPE_SILVER:
             $is_gold = '<img width="16" height="15" src="' . $images['icon_tor_silver'] . '" alt="' . $lang['SILVER'] . '" title="' . $lang['SILVER'] . '" />&nbsp;';
             break;
+        default:
+            break;
     }
 
     return $is_gold;
 }
 
-/**
- * Update atom feed
- *
- * @param string $type
- * @param $id
- * @return void
- */
-function update_atom(string $type, $id): void
+function update_atom($type, $id)
 {
     switch ($type) {
         case 'user':
             \TorrentPier\Legacy\Atom::update_user_feed($id, get_username($id));
             break;
+
         case 'topic':
             $topic_poster = (int)DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
             \TorrentPier\Legacy\Atom::update_user_feed($topic_poster, get_username($topic_poster));
