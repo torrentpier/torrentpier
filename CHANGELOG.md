@@ -6,7 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.2 🐯 ([belomaxorka](https://github.com/belomaxorka))
-- Added support for rutracker font BBCode tag [\#1388](https://github.com/torrentpier/torrentpier/pull/1388) ([belomaxorka](https://github.com/belomaxorka))
+- Added support for rutracker font BBCode tag [\#1397](https://github.com/torrentpier/torrentpier/pull/1397) ([belomaxorka](https://github.com/belomaxorka))
 - Added mod "Reason to move topic" [\#1388](https://github.com/torrentpier/torrentpier/pull/1388) ([belomaxorka](https://github.com/belomaxorka))
 - Created template file for AJAX quick actions [\#1381](https://github.com/torrentpier/torrentpier/pull/1381) ([belomaxorka](https://github.com/belomaxorka))
 - Removed `wbr()` [\#1387](https://github.com/torrentpier/torrentpier/pull/1387) ([belomaxorka](https://github.com/belomaxorka))
