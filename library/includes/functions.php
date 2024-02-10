@@ -2172,7 +2172,14 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
 }
 
-function profile_url($data, $target_blank = false)
+/**
+ * Generates link to profile
+ *
+ * @param array $data
+ * @param bool $target_blank
+ * @return string
+ */
+function profile_url(array $data, bool $target_blank = false): string
 {
     global $bb_cfg, $lang, $datastore;
 
