@@ -578,7 +578,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $rg_signature = $postrow[$i]['group_signature'] ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
 
     $poster_avatar = '';
-    if ((!$user->opt_js['h_av'] || $poster_bot) && !$poster_guest) {
+    if (!$user->opt_js['h_av'] && !$poster_guest) {
         $poster_avatar = get_avatar($poster_id, $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
     }
 
@@ -649,7 +649,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     // Editing information
     if ($postrow[$i]['post_edit_count']) {
         $l_edit_time_total = ($postrow[$i]['post_edit_count'] == 1) ? $lang['EDITED_TIME_TOTAL'] : $lang['EDITED_TIMES_TOTAL'];
-        $l_edited_by = '<br /><br />' . sprintf($l_edit_time_total, profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $user_rank]), bb_date($postrow[$i]['post_edit_time']), $postrow[$i]['post_edit_count']);
+        $l_edited_by = '<br /><br />' . sprintf($l_edit_time_total, $poster, bb_date($postrow[$i]['post_edit_time']), $postrow[$i]['post_edit_count']);
     } else {
         $l_edited_by = '';
     }
@@ -676,7 +676,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
         'IS_NEWEST' => ($post_id == $newest),
-        'POSTER_NAME' => profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $user_rank]),
+        'POSTER_NAME' => profile_url(['username' => $poster, 'user_rank' => $user_rank]),
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
         'RANK_IMAGE' => $rank_image,
