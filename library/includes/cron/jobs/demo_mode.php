@@ -11,12 +11,10 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-ini_set('memory_limit', '-1');
 set_time_limit(600);
 
 global $cron_runtime_log;
 
-define('SELECTED_DB', DB()->selected_db);
 $dump_path = BB_ROOT . 'install/sql/mysql.sql';
 
 if (!IN_DEMO_MODE || !is_file($dump_path) || !is_readable($dump_path)) {
@@ -44,7 +42,7 @@ foreach ($sql_dump as $line) {
     $temp_line .= $line;
     if (str_ends_with(trim($line), ';')) {
         if (!DB()->query($temp_line)) {
-            $cron_runtime_log = 'Error performing query: ' . $temp_line;
+            $cron_runtime_log = 'Error performing query: ' . $temp_line . ' | ' . DB()->sql_error()['message'];
         }
         $temp_line = '';
     }
