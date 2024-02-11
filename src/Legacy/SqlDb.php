@@ -164,6 +164,21 @@ class SqlDb
     }
 
     /**
+     * Performs one or more queries on the database
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function multi_query($query): mixed
+    {
+        if (!$result = $this->multi_query($query)) {
+            $this->trigger_error();
+        }
+
+        return $result;
+    }
+
+    /**
      * Return number of rows
      *
      * @param bool $result
