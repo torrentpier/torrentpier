@@ -11,6 +11,8 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+global $cron_runtime_log;
+
 $dump_path = BB_ROOT . 'install/sql/mysql.sql';
 
 if (!IN_DEMO_MODE || !is_file($dump_path) || !is_readable($dump_path)) {
