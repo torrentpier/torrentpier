@@ -23,16 +23,7 @@ if (!IN_DEMO_MODE || !is_file($dump_path) || !is_readable($dump_path)) {
 
 $sql_dump = file($dump_path);
 
-// Drop tables
-DB()->query('SET foreign_key_checks = 0');
-if ($result = DB()->query('SHOW TABLES')) {
-    while ($row = DB()->sql_fetchrow($result)) {
-        DB()->query('DROP TABLE IF EXISTS ' . current($row));
-    }
-}
-DB()->query('SET foreign_key_checks = 1');
-
-// Insert sql dump
+// Drop tables & Insert sql dump
 $temp_line = '';
 foreach ($sql_dump as $line) {
     if (str_starts_with($line, '--') || $line == '') {
