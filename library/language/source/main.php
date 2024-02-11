@@ -128,7 +128,7 @@ $lang['ONLINE_ADMIN'] = 'Administrator';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Group member';
 
-$lang['CANT_EDIT_IN_DEMO_MODE'] = 'You can\'t change this field in demo mode';
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'You can\'t change this in demo mode';
 
 $lang['CURRENT_TIME'] = 'Current time is: <span class="tz_time">%s</span>';
 
