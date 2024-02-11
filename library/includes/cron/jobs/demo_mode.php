@@ -34,8 +34,3 @@ if (!DB()->query("DROP DATABASE " . SELECTED_DB)) {
 if (!DB()->query("CREATE DATABASE " . SELECTED_DB)) {
     return;
 }
-
-// Import sql dump from file
-if (!DB()->multi_query($sql_dump)) {
-    return;
-}
