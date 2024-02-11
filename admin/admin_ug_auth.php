@@ -170,13 +170,12 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
 if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $page_cfg['quirks_mode'] = true;
 
-    $this_userdata = false;
     if (!empty($_POST['username'])) {
         $this_userdata = get_userdata($_POST['username'], true);
-    } elseif (!empty($user_id)) {
+        $user_id = $this_userdata['user_id'];
+    } else {
         $this_userdata = get_userdata($user_id);
     }
-
     if (!$this_userdata) {
         bb_die($lang['NO_SUCH_USER']);
     }
