@@ -8,7 +8,9 @@
  */
 
 if (!empty($setmodules)) {
-    $module['GENERAL']['PHP_INFO'] = basename(__FILE__);
+    if (IS_SUPER_ADMIN) {
+        $module['GENERAL']['PHP_INFO'] = basename(__FILE__);
+    }
     return;
 }
 
