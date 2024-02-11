@@ -47,6 +47,10 @@ $add_forum = isset($_POST['add_forum']);
 $delete_forum = isset($_POST['del_forum']);
 $submit = isset($_POST['submit']);
 
+if (($submit || $add_forum || $delete_forum) && IN_DEMO_MODE) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
 // Get Attachment Config
 $attach_config = [];
 
