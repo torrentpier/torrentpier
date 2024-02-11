@@ -646,14 +646,14 @@ VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00
         '', '0', '0', '0'),
        ('1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', '', '', '255', '', '', '06:00:00', '0',
         '', '0', '0', '0'),
-       ('1', 'Cache garbage collector', 'cache_gc.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '', '0',
+       ('1', 'Cache garbage collector', 'cache_gc.php', 'interval', '', '', '255', '', '', '00:05:00', '1', 'cache_gc_log', '0',
         '0',
         '0'),
        ('1', 'Sitemap update', 'sitemap.php', 'daily', '', '06:00:00', '30', '', '', '', '0', '', '0', '0', '0'),
        ('1', 'Update forums atom', 'update_forums_atom.php', 'interval', '', '', '255', '', '', '00:15:00', '0', '',
         '0',
         '0', '0'),
-       ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '90', '', '', '', '1', '', '0', '1',
+       ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '260', '', '', '', '1', 'demo_mode_log', '0', '1',
         '0');
 
 -- ----------------------------
