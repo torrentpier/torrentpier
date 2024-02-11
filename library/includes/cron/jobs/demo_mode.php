@@ -11,6 +11,9 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+ini_set('memory_limit', '-1');
+set_time_limit(600);
+
 global $cron_runtime_log;
 
 $dump_path = BB_ROOT . 'install/sql/mysql.sql';
@@ -23,6 +26,11 @@ $sql_dump = file_get_contents($dump_path);
 
 // Delete database
 if (!DB()->query("DROP DATABASE " . DB()->selected_db)) {
+    return;
+}
+
+// Create database
+if (!DB()->query("CREATE DATABASE " . DB()->selected_db)) {
     return;
 }
 
