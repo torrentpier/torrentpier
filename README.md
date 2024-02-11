@@ -36,8 +36,17 @@ and go from there. The documentation will be translated into english in the near
 * BitTorrent v2 support
 * Event-based invite system
 * Bonus points
+* Polls System
+* PM System
+* Multilingual Support
 * Atom feeds
-* and many more.
+* and MUCH MORE!
+
+## 🖥️ Demo
+
+* URL: https://torrentpier.duckdns.org
+* Username: admin
+* Password: admin
 
 ## 🔧 Requirements
 
@@ -45,6 +54,7 @@ and go from there. The documentation will be translated into english in the near
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
 * PHP: 8.1 / 8.2
 * PHP Extensions: mbstring, bcmath, intl, tidy (optional), xml, xmlwriter
+* Crontab (Recommended)
 
 ## 💾 Installation
 
@@ -78,6 +88,10 @@ You must provide write permissions to the specified folders:
 The specific settings depend on the server you are using, but in general case we recommend chmod 0755 for folders, 
 and chmod 0644 for files in them. If you are not sure, leave it as is.
 
+## 🔐 Security
+
+If you discover any security related issues, please email [admin@torrentpier.com](mailto:admin@torrentpier.com) or [roman25052006.kelesh@gmail.com](mailto:roman25052006.kelesh@gmail.com) instead of using the issue tracker.
+
 ## 📌 Our recommendations
 
 * *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
@@ -85,12 +99,12 @@ and chmod 0644 for files in them. If you are not sure, leave it as is.
 
 ## 💚 Contributing / Contributors
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for 
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details, and the process for 
 submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
 these requirements. Just send it.
 
 <a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" />
+  <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" alt="Contributors"/>
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
