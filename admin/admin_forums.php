@@ -56,6 +56,7 @@ if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
 if (in_array($mode, [
         // Category
         'editcat',
+        'modcat',
         'deletecat',
         // Forum
         'editforum',
