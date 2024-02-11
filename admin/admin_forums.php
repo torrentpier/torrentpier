@@ -53,6 +53,18 @@ if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
     }
 }
 
+if (in_array($mode, [
+        // Category
+        'editcat',
+        'deletecat',
+        // Forum
+        'editforum',
+        'modforum',
+        'deleteforum'
+    ]) && IN_DEMO_MODE) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
 $show_main_page = false;
 
 if ($mode) {
