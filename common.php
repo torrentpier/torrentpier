@@ -92,13 +92,6 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 \TorrentPier\Dev::initDebug();
 
 /**
- * Demo mode
- *
- * TODO: Move to EnvHelper class (In future)
- */
-define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
-
-/**
  * Server variables initialize
  */
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';

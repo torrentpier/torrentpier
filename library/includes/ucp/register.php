@@ -101,9 +101,9 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = [
             'user_active' => IS_ADMIN,
-            'username' => IS_ADMIN || $bb_cfg['allow_namechange'],
-            'user_password' => true,
-            'user_email' => true, // должен быть после user_password
+            'username' => (IS_ADMIN || $bb_cfg['allow_namechange']) && !IN_DEMO_MODE,
+            'user_password' => !IN_DEMO_MODE,
+            'user_email' => !IN_DEMO_MODE, // должен быть после user_password
             'user_lang' => $bb_cfg['allow_change']['language'],
             'user_gender' => $bb_cfg['gender'],
             'user_birthday' => $bb_cfg['birthday_enabled'],

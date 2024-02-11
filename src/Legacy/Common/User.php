@@ -227,6 +227,9 @@ class User
             }
         }
 
+        // Initial demo mode
+        define('IN_DEMO_MODE', env('APP_DEMO_MODE', false) && $this->id == 2);
+
         return $this->data;
     }
 
