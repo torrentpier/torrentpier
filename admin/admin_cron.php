@@ -29,7 +29,7 @@ if ($mode == 'run' && !$job_id) {
     require __DIR__ . '/pagestart.php';
 }
 
-if ($submit && IN_DEMO_MODE) {
+if (IN_DEMO_MODE && $submit) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 

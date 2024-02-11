@@ -82,7 +82,7 @@ if (isset($_GET['adv'])) {
 
 $submit = isset($_POST['submit']);
 
-if ($submit && IN_DEMO_MODE) {
+if (IN_DEMO_MODE && $submit) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 

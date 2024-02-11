@@ -53,7 +53,7 @@ if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
     }
 }
 
-if (in_array($mode, [
+if (IN_DEMO_MODE && in_array($mode, [
         // Category
         'editcat',
         'modcat',
@@ -62,7 +62,7 @@ if (in_array($mode, [
         'editforum',
         'modforum',
         'deleteforum'
-    ]) && IN_DEMO_MODE) {
+    ])) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 
