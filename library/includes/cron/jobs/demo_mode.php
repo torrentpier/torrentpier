@@ -23,14 +23,29 @@ if (!IN_DEMO_MODE || !is_file($dump_path) || !is_readable($dump_path)) {
     return;
 }
 
-$sql_dump = file_get_contents($dump_path);
+$sql_dump = file($dump_path);
 
-// Delete database
-if (!DB()->query("DROP DATABASE " . SELECTED_DB)) {
-    return;
+// Drop tables
+DB()->query('SET foreign_key_checks = 0');
+if ($result = DB()->query('SHOW TABLES')) {
+    while ($row = DB()->sql_fetchrow($result)) {
+        DB()->query('DROP TABLE IF EXISTS ' . current($row));
+    }
 }
+DB()->query('SET foreign_key_checks = 1');
 
-// Create database
-if (!DB()->query("CREATE DATABASE " . SELECTED_DB)) {
-    return;
+// Insert sql dump
+$temp_line = '';
+foreach ($sql_dump as $line) {
+    if (str_starts_with($line, '--') || $line == '') {
+        continue;
+    }
+
+    $temp_line .= $line;
+    if (str_ends_with(trim($line), ';')) {
+        if (!DB()->query($temp_line)) {
+            $cron_runtime_log = 'Error performing query: ' . $temp_line;
+        }
+        $temp_line = '';
+    }
 }
