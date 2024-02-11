@@ -72,10 +72,16 @@ if (isset($_GET['adv'])) {
     unset($adv);
 }
 
+$submit = isset($_POST['submit']);
+
+if ($submit && IN_DEMO_MODE) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
 /**
  * Start program proper
  */
-if (isset($_POST['submit'])) {
+if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {
