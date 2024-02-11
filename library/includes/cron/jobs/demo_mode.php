@@ -16,6 +16,7 @@ set_time_limit(600);
 
 global $cron_runtime_log;
 
+define('SELECTED_DB', DB()->selected_db);
 $dump_path = BB_ROOT . 'install/sql/mysql.sql';
 
 if (!IN_DEMO_MODE || !is_file($dump_path) || !is_readable($dump_path)) {
@@ -25,12 +26,12 @@ if (!IN_DEMO_MODE || !is_file($dump_path) || !is_readable($dump_path)) {
 $sql_dump = file_get_contents($dump_path);
 
 // Delete database
-if (!DB()->query("DROP DATABASE " . DB()->selected_db)) {
+if (!DB()->query("DROP DATABASE " . SELECTED_DB)) {
     return;
 }
 
 // Create database
-if (!DB()->query("CREATE DATABASE " . DB()->selected_db)) {
+if (!DB()->query("CREATE DATABASE " . SELECTED_DB)) {
     return;
 }
 
