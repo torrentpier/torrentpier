@@ -73,7 +73,7 @@ For installation, you need to follow a few simple steps:
    2. **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
    3. **opensearch_desc.xml** (change the description and address on your own)
    4. **opensearch_desc_bt.xml** (change the description and address on your own)
-8. Log in to the forum with admin/admin login/password and finish setting up via admin panel
+8. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
 ## 🔑 Access rights on folders and files
 
@@ -87,8 +87,8 @@ You must provide write permissions to the specified folders:
 * `internal_data/triggers`
 * `sitemap`
 
-The specific settings depend on the server you are using, but in general case we recommend chmod 0755 for folders, 
-and chmod 0644 for files in them. If you are not sure, leave it as is.
+The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, 
+and chmod **0644** for files in them. If you are not sure, leave it as is.
 
 ## 🔐 Security
 
