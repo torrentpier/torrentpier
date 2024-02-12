@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'Administraator';
 $lang['ONLINE_MOD'] = 'Moderaator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Grupi liige';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'Praegune aeg on: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'Vaadata uusim postitusi';
