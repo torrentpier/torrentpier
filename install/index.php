@@ -35,9 +35,6 @@ switch ($step) {
         $next_button = '<a href="index.php?step=insert_dump" class="btn btn-lg btn-light fw-bold border-white bg-white">Next</a>';
         break;
     case 'insert_dump':
-        $title = $step_description = 'Processing...😴';
-        $step_content = '';
-        sleep(3);
         // Drop tables & Insert sql dump
         $temp_line = '';
         foreach (file($dump_path) as $line) {
