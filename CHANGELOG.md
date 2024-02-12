@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.2 🐯 ([belomaxorka](https://github.com/belomaxorka))
+- Added demo mode 📺 [\#1399](https://github.com/torrentpier/torrentpier/pull/1399) ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to view post_text of topic [\#1401](https://github.com/torrentpier/torrentpier/pull/1401) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for rutracker font BBCode tag [\#1397](https://github.com/torrentpier/torrentpier/pull/1397) ([belomaxorka](https://github.com/belomaxorka))
 - Added mod "Reason to move topic" [\#1388](https://github.com/torrentpier/torrentpier/pull/1388) ([belomaxorka](https://github.com/belomaxorka))
@@ -18,7 +19,7 @@
 - Used hashing for filenames generation [\#1385](https://github.com/torrentpier/torrentpier/pull/1385) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1382](https://github.com/torrentpier/torrentpier/pull/1382), [\#1383](https://github.com/torrentpier/torrentpier/pull/1383), [\#1391](https://github.com/torrentpier/torrentpier/pull/1391), [\#1398](https://github.com/torrentpier/torrentpier/pull/1398) ([belomaxorka](https://github.com/belomaxorka))
 - Some bugfixes [\#1380](https://github.com/torrentpier/torrentpier/pull/1380) ([belomaxorka](https://github.com/belomaxorka))
-- New Crowdin updates [\#1384](https://github.com/torrentpier/torrentpier/pull/1384), [\#1389](https://github.com/torrentpier/torrentpier/pull/1389), [\#1392](https://github.com/torrentpier/torrentpier/pull/1392) ([Exileum](https://github.com/Exileum))
+- New Crowdin updates [\#1384](https://github.com/torrentpier/torrentpier/pull/1384), [\#1389](https://github.com/torrentpier/torrentpier/pull/1389), [\#1392](https://github.com/torrentpier/torrentpier/pull/1392), [\#1402](https://github.com/torrentpier/torrentpier/pull/1402) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.1](https://github.com/torrentpier/torrentpier/tree/v2.4.1) (2024-02-04)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0...v2.4.1)

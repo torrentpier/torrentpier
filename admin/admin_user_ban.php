@@ -14,7 +14,14 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-if (isset($_POST['submit'])) {
+$submit = isset($_POST['submit']);
+
+// Check for demo mode
+if (IN_DEMO_MODE && $submit) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
+if ($submit) {
     // Ban action
     if (!empty($_POST['username'])) {
         if (!$this_userdata = get_userdata($_POST['username'], true)) {

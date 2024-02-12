@@ -101,9 +101,9 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = [
             'user_active' => IS_ADMIN,
-            'username' => IS_ADMIN || $bb_cfg['allow_namechange'],
-            'user_password' => true,
-            'user_email' => true, // должен быть после user_password
+            'username' => (IS_ADMIN || $bb_cfg['allow_namechange']) && !IN_DEMO_MODE,
+            'user_password' => !IN_DEMO_MODE,
+            'user_email' => !IN_DEMO_MODE, // должен быть после user_password
             'user_lang' => $bb_cfg['allow_change']['language'],
             'user_gender' => $bb_cfg['gender'],
             'user_birthday' => $bb_cfg['birthday_enabled'],
@@ -164,10 +164,6 @@ $can_edit_tpl = [];
 foreach ($profile_fields as $field => $can_edit) {
     $can_edit = (bool)$can_edit;
     $can_edit_tpl['CAN_EDIT_' . strtoupper($field)] = $can_edit;
-    if ($can_edit === false) {
-        // TODO: При continue; не устанавливаются переменные ($tp_data) шаблона прописанные в case
-        // continue;
-    }
 
     switch ($field) {
         /**
@@ -187,7 +183,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'username':
             $username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
 
-            if ($submit) {
+            if ($submit && $can_edit) {
                 $err = \TorrentPier\Validate::username($username);
                 if (!$errors and $err && $mode == 'register') {
                     $errors[] = $err;
@@ -222,7 +218,7 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Пароль (edit, reg)
          */
         case 'user_password':
-            if ($submit) {
+            if ($submit && $can_edit) {
                 $cur_pass = (string)@$_POST['cur_pass'];
                 $new_pass = (string)@$_POST['new_pass'];
                 $cfm_pass = (string)@$_POST['cfm_pass'];
@@ -256,14 +252,13 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'user_email':
             $email = !empty($_POST['user_email']) ? (string)$_POST['user_email'] : $pr_data['user_email'];
-            if ($submit) {
+            if ($submit && $can_edit) {
                 if ($mode == 'register') {
                     if (!$errors and $err = \TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
                 } elseif ($email != $pr_data['user_email']) {
-                    // если смена мейла юзером
                     if ($bb_cfg['email_change_disabled'] && !$adm_edit && !IS_ADMIN) {
                         $errors[] = $lang['EMAIL_CHANGING_DISABLED'];
                     }

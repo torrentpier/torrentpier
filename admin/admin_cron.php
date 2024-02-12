@@ -29,6 +29,11 @@ if ($mode == 'run' && !$job_id) {
     require __DIR__ . '/pagestart.php';
 }
 
+// Check for demo mode
+if (IN_DEMO_MODE && ($submit || !in_array($mode, ['add', 'list']))) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
 if (!IS_SUPER_ADMIN) {
     bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 }

@@ -80,10 +80,17 @@ if (isset($_GET['adv'])) {
     unset($adv);
 }
 
-//
-// Start program proper
-//
-if (isset($_POST['submit'])) {
+$submit = isset($_POST['submit']);
+
+// Check for demo mode
+if (IN_DEMO_MODE && $submit) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
+/**
+ * Start program proper
+ */
+if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {

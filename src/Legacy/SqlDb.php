@@ -64,7 +64,7 @@ class SqlDb
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
-        // Links to the global vairables (for recording all the logs on all servers, counting total request count and etc)
+        // Links to the global variables (for recording all the logs on all servers, counting total request count and etc)
         $this->DBS['log_file'] =& $DBS->log_file;
         $this->DBS['log_counter'] =& $DBS->log_counter;
         $this->DBS['num_queries'] =& $DBS->num_queries;

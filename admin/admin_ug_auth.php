@@ -26,6 +26,11 @@ $cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $submit = isset($_REQUEST['submit']);
 
+// Check for demo mode
+if (IN_DEMO_MODE && $submit) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
 $group_data = [];
 
 $forum_auth_fields = array(
@@ -166,13 +171,12 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
 if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $page_cfg['quirks_mode'] = true;
 
-    $this_userdata = false;
     if (!empty($_POST['username'])) {
         $this_userdata = get_userdata($_POST['username'], true);
-    } elseif (!empty($user_id)) {
+        $user_id = $this_userdata['user_id'];
+    } else {
         $this_userdata = get_userdata($user_id);
     }
-
     if (!$this_userdata) {
         bb_die($lang['NO_SUCH_USER']);
     }

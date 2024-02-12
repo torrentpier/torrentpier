@@ -80,8 +80,8 @@
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_icq"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_skype"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_twitter",  editableType: "yesno-twitter"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_gender",   editableType: "yesno-gender"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_twitter", editableType: "yesno-twitter"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_birthday", editableType: "yesno-birthday"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_down_total"}</var>
