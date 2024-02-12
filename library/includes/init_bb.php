@@ -403,6 +403,13 @@ $userdata =& $user->data;
 $wordCensor = new \TorrentPier\Censor();
 
 /**
+ * Check for install
+ */
+if (is_file('install/index.php')) {
+    redirect('install/');
+}
+
+/**
  * Cron
  */
 if (
