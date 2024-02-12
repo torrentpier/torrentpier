@@ -52,4 +52,9 @@ if ($post_data['auth_read'] == AUTH_REG) {
 
 $this->response['post_id'] = $post_id;
 $this->response['topic_id'] = $topic_id;
-$this->response['post_html'] = get_parsed_post($post_data);
+dump($post_data);
+if (isset($this->request['return_text'])) {
+    $this->response['post_text'] = $post_data;
+} else {
+    $this->response['post_html'] = get_parsed_post($post_data);
+}
