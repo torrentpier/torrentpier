@@ -11,6 +11,30 @@
 	$(document).ready(function(){ $('div.sp-head').click(); });
 </script>
 <!-- ENDIF -->
+
+<script type="text/javascript">
+    (function () {
+        let loadedText = [];
+
+        ajax.view_post = function (post_id) {
+            if (loadedText[post_id] != null) {
+                $('#ptx-' + post_id).toggle();
+                return;
+            }
+            ajax.exec({
+                action: 'view_post',
+                post_id: post_id,
+                return_text: true,
+            });
+        };
+        ajax.callback.view_post = function (data) {
+            loadedText[data.post_id] = true;
+            $('#post_' + data.post_id + ' div.post_body').prepend(
+                '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px;">' + data['post_text'] + '</textarea><hr></div>'
+            );
+        };
+    })();
+</script>
 <!-- ENDIF / LOGGED_IN -->
 
 <!-- IF $bb_cfg['use_ajax_posts'] && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
@@ -394,6 +418,7 @@ function build_poll_add_form (src_el)
 			<!-- IF postrow.MOD_CHECKBOX --><input type="checkbox" class="select_post" onclick="set_hid_chbox('{postrow.POST_ID}');"><!-- ENDIF -->
 
 			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
+                <!-- IF postrow.IS_FIRST_POST --><a href="#" class="txtb" onclick="ajax.view_post('{TOPIC_ID}'); return false;">[{L_CODE}]</a><!-- ENDIF -->
 				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{POLL_IMG}</a><!-- ENDIF -->
 				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->

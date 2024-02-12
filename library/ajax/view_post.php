@@ -23,7 +23,7 @@ if (is_null($post_id)) {
 $sql = "
 	SELECT
 	  p.*,
-	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
+	  h.post_html, pt.post_text,
 	  f.auth_read
 	FROM       " . BB_POSTS . " p
 	INNER JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
@@ -54,7 +54,7 @@ $this->response['post_id'] = $post_id;
 $this->response['topic_id'] = $topic_id;
 dump($post_data);
 if (isset($this->request['return_text'])) {
-    $this->response['post_text'] = $post_data;
+    $this->response['post_text'] = $post_data['post_text'];
 } else {
     $this->response['post_html'] = get_parsed_post($post_data);
 }
