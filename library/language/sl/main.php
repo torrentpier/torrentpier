@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'Administrator';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Član skupine';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'Trenutni čas: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'Ogledate najnovejše objave';

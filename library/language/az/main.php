@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'Admin';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Bir qrup üzvü';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'Cari vaxt: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'İzləmək üçün yeni vəzifə';

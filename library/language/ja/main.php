@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = '管理者';
 $lang['ONLINE_MOD'] = 'モデレーター';
 $lang['ONLINE_GROUP_MEMBER'] = 'グループの一員';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = '現在の時間は<span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'ビューの最新の投稿';

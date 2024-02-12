@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'מנהל';
 $lang['ONLINE_MOD'] = 'מנחה';
 $lang['ONLINE_GROUP_MEMBER'] = 'בקבוצה';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'הזמן הנוכחי הוא: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'התצוגה החדשה הודעות';

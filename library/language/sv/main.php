@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'Administratör';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Grupp-medlem';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'Aktuell tid är: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'Visa senaste inlägg';
