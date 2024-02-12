@@ -48,6 +48,8 @@ and go from there. The documentation will be translated into english in the near
 * Username: admin
 * Password: admin
 
+Demo is reset every 24 hours!
+
 ## 🔧 Requirements
 
 * Apache / nginx
