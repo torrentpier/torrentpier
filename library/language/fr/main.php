@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'Administrateur';
 $lang['ONLINE_MOD'] = 'Modérateur';
 $lang['ONLINE_GROUP_MEMBER'] = 'Membre du groupe';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'Le temps actuel est: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'Afficher les plus récents messages';
