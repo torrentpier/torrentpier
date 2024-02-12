@@ -41,3 +41,15 @@ switch ($step) {
         bb_simple_die('Invalid step: ' . $step);
         break;
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><?php echo APP_NAME; ?></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="shortcut icon" href="<?php echo BB_ROOT; ?>favicon.png" type="image/x-icon">
+</head>
+<body>
+</body>
+</html>
