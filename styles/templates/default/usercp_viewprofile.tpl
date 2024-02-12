@@ -9,7 +9,6 @@
                 edit_id: params.id,
                 user_id: params.user_id || {PROFILE_USER_ID},
                 field: params.field || params.id,
-                off_edit_demo: params.off_edit_demo,
                 value: params.value
             });
         } else {
@@ -71,8 +70,8 @@
     });
 </script>
 
-<var class="ajax-params">{action: "edit_user_profile", id: "username", off_edit_demo: true}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_email", off_edit_demo: true}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_email"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_regdate"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_lastvisit"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_from"}</var>
