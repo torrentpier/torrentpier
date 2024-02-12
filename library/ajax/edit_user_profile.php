@@ -13,16 +13,16 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang;
 
-if (IN_DEMO_MODE && @$this->request['off_edit_demo']) {
-    $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
-}
-
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
 if (!$field = (string)$this->request['field']) {
     $this->ajax_die('invalid profile field');
+}
+
+if (IN_DEMO_MODE && ($field == 'username' || $field == 'user_email')) {
+    $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 
 $table = BB_USERS;

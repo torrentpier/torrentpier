@@ -21,9 +21,12 @@ if (!$user_id = (int)$this->request['user_id']) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
+if (IN_DEMO_MODE) {
+    $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
 switch ($mode) {
     case 'delete_profile':
-
         if ($userdata['user_id'] == $user_id) {
             $this->ajax_die($lang['USER_DELETE_ME']);
         }
@@ -39,11 +42,8 @@ switch ($mode) {
         } else {
             $this->ajax_die($lang['USER_DELETE_CSV']);
         }
-
         break;
-
     case 'delete_topics':
-
         if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) {
             $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
         }
@@ -60,11 +60,8 @@ switch ($mode) {
         } else {
             $this->ajax_die($lang['NOT_ADMIN']);
         }
-
         break;
-
     case 'delete_message':
-
         if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) {
             $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
         }
@@ -79,23 +76,16 @@ switch ($mode) {
         } else {
             $this->ajax_die($lang['NOT_ADMIN']);
         }
-
         break;
-
     case 'user_activate':
-
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEACTIVATE_CONFIRM']);
         }
 
         DB()->query("UPDATE " . BB_USERS . " SET user_active = '1' WHERE user_id = " . $user_id);
-
         $this->response['info'] = $lang['USER_ACTIVATE_ON'];
-
         break;
-
     case 'user_deactivate':
-
         if ($userdata['user_id'] == $user_id) {
             $this->ajax_die($lang['USER_DEACTIVATE_ME']);
         }
@@ -105,9 +95,7 @@ switch ($mode) {
 
         DB()->query("UPDATE " . BB_USERS . " SET user_active = '0' WHERE user_id = " . $user_id);
         \TorrentPier\Sessions::delete_user_sessions($user_id);
-
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
-
         break;
 
     default:

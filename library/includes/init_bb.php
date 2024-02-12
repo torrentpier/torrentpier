@@ -24,7 +24,7 @@ $user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
-// Initial demo mode
+// Initialize demo mode
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
 
 /**
