@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $bb_cfg, $userdata;
+global $lang, $bb_cfg, $userdata, $wordCensor;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
