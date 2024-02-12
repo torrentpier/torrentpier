@@ -15,13 +15,13 @@ global $user, $lang;
 
 $post_id = isset($this->request['post_id']) ? (int)$this->request['post_id'] : null;
 $topic_id = isset($this->request['topic_id']) ? (int)$this->request['topic_id'] : null;
-$return_text = isset($this->request['return_text']) ? (bool)$this->request['return_text'] : null;
+$return_text = isset($this->request['return_text']) && (bool)$this->request['return_text'];
 
 if (is_null($post_id)) {
     $post_id = DB()->fetch_row("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_first_post_id');
 }
 
-$post_text_sql = $return_text ? " pt.post_text, " : " IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text, ";
+$post_text_sql = $return_text ? "pt.post_text," : "IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,";
 
 $sql = "
 	SELECT
