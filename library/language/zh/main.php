@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = '管理员';
 $lang['ONLINE_MOD'] = '版主';
 $lang['ONLINE_GROUP_MEMBER'] = '组成员';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = '当前时间是︰ <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = '查看最新帖子';
