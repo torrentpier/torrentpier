@@ -17,6 +17,7 @@ $_main = BB_ROOT . 'styles/' . basename(TEMPLATES_DIR) . '/' . $template_name . 
 $_lang = $_main . 'lang/' . basename($bb_cfg['default_lang']) . '/';
 
 // post_buttons
+$images['icon_code'] = $_lang . 'icon_code.gif';
 $images['icon_quote'] = $_lang . 'icon_quote.gif';
 $images['icon_edit'] = $_lang . 'icon_edit.gif';
 $images['icon_search'] = $_lang . 'icon_search.gif';
