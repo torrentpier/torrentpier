@@ -11,6 +11,32 @@
 	$(document).ready(function(){ $('div.sp-head').click(); });
 </script>
 <!-- ENDIF -->
+
+<!-- IF $bb_cfg['show_post_bbcode_button'] -->
+<script type="text/javascript">
+    (function () {
+        let loadedText = [];
+
+        ajax.view_post = function (post_id) {
+            if (loadedText[post_id] != null) {
+                $('#ptx-' + post_id).toggle();
+                return;
+            }
+            ajax.exec({
+                action: 'view_post',
+                post_id: post_id,
+                return_text: true,
+            });
+        };
+        ajax.callback.view_post = function (data) {
+            loadedText[data.post_id] = true;
+            $('#post_' + data.post_id + ' div.post_body').prepend(
+                '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px; line-height: 1.2;">' + data['post_text'] + '</textarea><hr></div>'
+            );
+        };
+    })();
+</script>
+<!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
 
 <!-- IF $bb_cfg['use_ajax_posts'] && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
@@ -398,6 +424,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.IS_FIRST_POST && $bb_cfg['show_post_bbcode_button'] --><a href="#" class="txtb" onclick="ajax.view_post('{TOPIC_ID}'); return false;">{CODE_IMG}</a><!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
