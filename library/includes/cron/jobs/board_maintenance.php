@@ -56,5 +56,5 @@ if (empty($bb_cfg['bt_announce_url'])) {
 
 // Rename installation file
 if (is_file(BB_ROOT . 'install/index.php')) {
-    rename(BB_ROOT . 'install/index.php', make_rand_str(15));
+    rename(BB_ROOT . 'install/index.php', BB_ROOT . 'install/' . make_rand_str(15) . '.php');
 }
