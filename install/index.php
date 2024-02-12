@@ -19,11 +19,11 @@ $step = request_var('step', 'welcoming');
 // Load SQL dump
 $dump_path = BB_ROOT . 'install/sql/mysql.sql';
 
-// Drop tables & Insert sql dump
 switch ($step) {
     case 'welcoming':
         break;
     case 'insert_dump':
+        // Drop tables & Insert sql dump
         $temp_line = '';
         foreach (file($dump_path) as $line) {
             if (str_starts_with($line, '--') || $line == '') {
