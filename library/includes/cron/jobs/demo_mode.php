@@ -42,5 +42,3 @@ foreach (file($dump_path) as $line) {
         $temp_line = '';
     }
 }
-
-$cron_runtime_log = date('Y-m-d H:i:s') . " -- Tables imported successfully!\n";
