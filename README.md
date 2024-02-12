@@ -36,9 +36,9 @@ and go from there. The documentation will be translated into english in the near
 * BitTorrent v2 support
 * Event-based invite system
 * Bonus points
-* Polls System
-* PM System
-* Multilingual Support
+* Polls system
+* PM system
+* Multilingual support
 * Atom feeds
 * and MUCH MORE!
 
