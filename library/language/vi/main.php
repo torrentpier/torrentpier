@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'Quản trị';
 $lang['ONLINE_MOD'] = 'Điều hành';
 $lang['ONLINE_GROUP_MEMBER'] = 'Thành viên của nhóm';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'Thời gian hiện tại là: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'Xem bài viết mới nhất';
