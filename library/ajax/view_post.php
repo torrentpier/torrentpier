@@ -23,7 +23,7 @@ if (is_null($post_id)) {
 $sql = "
 	SELECT
 	  p.*,
-	  h.post_html, pt.post_text,
+	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
 	  f.auth_read
 	FROM       " . BB_POSTS . " p
 	INNER JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
