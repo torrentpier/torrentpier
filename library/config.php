@@ -494,6 +494,7 @@ $bb_cfg['user_signature_end'] = '</div>'; // It allows user signatures to have c
 $bb_cfg['use_posts_cache'] = true;
 $bb_cfg['posts_cache_days_keep'] = 14;
 $bb_cfg['use_ajax_posts'] = true;
+$bb_cfg['show_post_bbcode_button'] = true;
 
 // Search
 $bb_cfg['search_engine_type'] = 'mysql'; // none, mysql, sphinx
