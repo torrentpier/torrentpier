@@ -21,6 +21,7 @@ if (!$user_id = (int)$this->request['user_id']) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
+// Check for demo mode
 if (IN_DEMO_MODE) {
     $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }

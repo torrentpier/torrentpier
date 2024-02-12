@@ -26,6 +26,7 @@ $cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $submit = isset($_REQUEST['submit']);
 
+// Check for demo mode
 if (IN_DEMO_MODE && $submit) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }

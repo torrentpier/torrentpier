@@ -20,6 +20,7 @@ if (!IS_SUPER_ADMIN) {
     bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 }
 
+// Check for demo mode
 if (IN_DEMO_MODE) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }

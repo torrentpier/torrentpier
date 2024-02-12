@@ -53,6 +53,7 @@ if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
     }
 }
 
+// Check for demo mode
 if (IN_DEMO_MODE && in_array($mode, [
         // Category
         'editcat',

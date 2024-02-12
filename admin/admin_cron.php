@@ -29,7 +29,8 @@ if ($mode == 'run' && !$job_id) {
     require __DIR__ . '/pagestart.php';
 }
 
-if (IN_DEMO_MODE && ($submit || $mode == 'delete')) {
+// Check for demo mode
+if (IN_DEMO_MODE && ($submit || $mode != 'list')) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 

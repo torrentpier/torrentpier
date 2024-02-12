@@ -47,6 +47,7 @@ $add_forum = isset($_POST['add_forum']);
 $delete_forum = isset($_POST['del_forum']);
 $submit = isset($_POST['submit']);
 
+// Check for demo mode
 if (IN_DEMO_MODE && ($submit || $add_forum || $delete_forum)) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }

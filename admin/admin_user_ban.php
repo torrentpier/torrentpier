@@ -16,6 +16,7 @@ require __DIR__ . '/pagestart.php';
 
 $submit = isset($_POST['submit']);
 
+// Check for demo mode
 if (IN_DEMO_MODE && $submit) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }

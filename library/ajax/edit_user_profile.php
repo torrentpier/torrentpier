@@ -21,6 +21,7 @@ if (!$field = (string)$this->request['field']) {
     $this->ajax_die('invalid profile field');
 }
 
+// Check for demo mode
 if (IN_DEMO_MODE && ($field == 'username' || $field == 'user_email')) {
     $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
