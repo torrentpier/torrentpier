@@ -52,7 +52,6 @@ if ($post_data['auth_read'] == AUTH_REG) {
 
 $this->response['post_id'] = $post_id;
 $this->response['topic_id'] = $topic_id;
-dump($post_data);
 if (isset($this->request['return_text'])) {
     $this->response['post_text'] = $post_data['post_text'];
 } else {
