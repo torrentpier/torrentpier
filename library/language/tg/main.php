@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'маъмурӣ';
 $lang['ONLINE_MOD'] = 'Модератор';
 $lang['ONLINE_GROUP_MEMBER'] = 'узви гурӯҳи';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'замони ҷорӣ аст: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'Дидани навтарин Заметки';

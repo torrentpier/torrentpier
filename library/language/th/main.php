@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'ผู้ดูแลระบบ';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'กลุ่มสมาชิก';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'เวลาปัจจุบันคือ:<span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'มุมมองใหม่ล่าสุดของกัปตัน..เสาทางนี้';

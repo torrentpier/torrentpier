@@ -128,6 +128,8 @@ $lang['ONLINE_ADMIN'] = 'administrateur';
 $lang['ONLINE_MOD'] = 'moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Groeplid';
 
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+
 $lang['CURRENT_TIME'] = 'Huidige tyd is: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'Bekyk nuutste plasings';
