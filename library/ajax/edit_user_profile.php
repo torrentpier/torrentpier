@@ -22,7 +22,7 @@ if (!$field = (string)$this->request['field']) {
 }
 
 // Check for demo mode
-if (IN_DEMO_MODE && ($field == 'username' || $field == 'user_email')) {
+if (IN_DEMO_MODE && in_array($field, ['username', 'user_email'])) {
     $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 
