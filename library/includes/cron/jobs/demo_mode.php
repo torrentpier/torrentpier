@@ -27,11 +27,9 @@ foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
     CACHE($cache_name)->rm();
 }
 
-$sql_dump = file($dump_path);
-
 // Drop tables & Insert sql dump
 $temp_line = '';
-foreach ($sql_dump as $line) {
+foreach (file($dump_path) as $line) {
     if (str_starts_with($line, '--') || $line == '') {
         continue;
     }
