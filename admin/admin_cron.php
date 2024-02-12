@@ -30,7 +30,7 @@ if ($mode == 'run' && !$job_id) {
 }
 
 // Check for demo mode
-if (IN_DEMO_MODE && ($submit || ($mode != 'list' && $mode != 'add'))) {
+if (IN_DEMO_MODE && ($submit || !in_array($mode, ['add', 'list']))) {
     bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 
