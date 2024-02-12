@@ -405,7 +405,7 @@ $wordCensor = new \TorrentPier\Censor();
 /**
  * Check for install
  */
-if (is_file('install/index.php')) {
+if (is_file('install/index.php') && !defined('IN_INSTALL')) {
     redirect('install/');
 }
 
@@ -414,7 +414,7 @@ if (is_file('install/index.php')) {
  */
 if (
     empty($_POST) &&
-    !defined('IN_ADMIN') && !defined('IN_AJAX') &&
+    !defined('IN_INSTALL') && !defined('IN_ADMIN') && !defined('IN_AJAX') &&
     !is_file(CRON_RUNNING) &&
     (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
 ) {
@@ -458,7 +458,7 @@ if (
 /**
  * Exit if board is disabled via trigger
  */
-if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
+if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_INSTALL') && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();

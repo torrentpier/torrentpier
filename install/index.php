@@ -9,3 +9,5 @@
 
 define('BB_ROOT', './../');
 define('IN_INSTALL', true);
+
+require BB_ROOT . 'common.php';

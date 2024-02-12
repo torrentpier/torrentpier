@@ -53,3 +53,8 @@ if ($posts_days = (int)$bb_cfg['posts_cache_days_keep']) {
 if (empty($bb_cfg['bt_announce_url'])) {
     bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
 }
+
+// Rename installation file
+if (is_file(BB_ROOT . 'install/index.php')) {
+    rename(BB_ROOT . 'install/index.php', make_rand_str(15));
+}
