@@ -10,7 +10,7 @@
 	<span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span>
 	<!-- ENDIF -->
 	&nbsp;&middot;&nbsp;
-	<!-- IF LOGGED_IN --><a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); post2url ('{SITE_URL}'); return false;">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
+	<!-- IF LOGGED_IN --><a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); window.location.reload();">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
 </div>
 
 <!-- IF DISPLAY_AS_POSTS -->
