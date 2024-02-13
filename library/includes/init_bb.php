@@ -405,8 +405,8 @@ $wordCensor = new \TorrentPier\Censor();
 /**
  * Check for install
  */
-if (is_file('install/index.php') && !defined('IN_INSTALL')) {
-    redirect('install/');
+if (is_file('install.php') && !defined('IN_INSTALL')) {
+    redirect('install.php');
 }
 
 /**
