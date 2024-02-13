@@ -82,7 +82,7 @@
                 <a href="{U_INDEX}">{T_INDEX}</a>&nbsp;<em>&middot;</em>
                 <span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>
                 <span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span><em>&middot;</em>
-                <a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); return false;">{L_MARK_ALL_FORUMS_READ}</a>
+                <a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); window.location.reload();">{L_MARK_ALL_FORUMS_READ}</a>
             </div>
         </td>
         <td class="vBottom tLeft nowrap med"><b>{PAGINATION}</b></td>
