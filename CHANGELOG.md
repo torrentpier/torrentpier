@@ -17,7 +17,7 @@
 - Fixed Undefined variable $wordCensor [\#1400](https://github.com/torrentpier/torrentpier/pull/1400) ([belomaxorka](https://github.com/belomaxorka))
 - Improved word censor 🤐 [\#1393](https://github.com/torrentpier/torrentpier/pull/1393) ([belomaxorka](https://github.com/belomaxorka))
 - Used hashing for filenames generation [\#1385](https://github.com/torrentpier/torrentpier/pull/1385) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1382](https://github.com/torrentpier/torrentpier/pull/1382), [\#1383](https://github.com/torrentpier/torrentpier/pull/1383), [\#1391](https://github.com/torrentpier/torrentpier/pull/1391), [\#1398](https://github.com/torrentpier/torrentpier/pull/1398) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1382](https://github.com/torrentpier/torrentpier/pull/1382), [\#1383](https://github.com/torrentpier/torrentpier/pull/1383), [\#1391](https://github.com/torrentpier/torrentpier/pull/1391), [\#1398](https://github.com/torrentpier/torrentpier/pull/1398), [\#1405](https://github.com/torrentpier/torrentpier/pull/1405) ([belomaxorka](https://github.com/belomaxorka))
 - Some bugfixes [\#1380](https://github.com/torrentpier/torrentpier/pull/1380) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1384](https://github.com/torrentpier/torrentpier/pull/1384), [\#1389](https://github.com/torrentpier/torrentpier/pull/1389), [\#1392](https://github.com/torrentpier/torrentpier/pull/1392), [\#1402](https://github.com/torrentpier/torrentpier/pull/1402) ([Exileum](https://github.com/Exileum))
 
