@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS `bb_attachments`
   `user_id_1` MEDIUMINT(8)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`attach_id`, `post_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_attachments
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config`
   `config_value` VARCHAR(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`config_name`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_attachments_config
@@ -78,8 +78,8 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_desc`
   KEY `filesize` (`filesize`),
   KEY `physical_filename` (`physical_filename`(10))
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_attachments_desc
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `bb_attach_quota`
   `quota_limit_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   KEY `quota_type` (`quota_type`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_attach_quota
@@ -116,8 +116,8 @@ CREATE TABLE IF NOT EXISTS `bb_auth_access`
   PRIMARY KEY (`group_id`, `forum_id`),
   KEY `forum_id` (`forum_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_auth_access
@@ -134,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `bb_auth_access_snap`
   `forum_perm` INT(11)      NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`, `forum_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_auth_access_snap
@@ -152,8 +152,8 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
   `ban_reason` VARCHAR(255)          NOT NULL DEFAULT '',
   PRIMARY KEY (`ban_id`, `ban_userid`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_banlist
@@ -172,8 +172,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus`
   PRIMARY KEY (`user_id`, `topic_id`),
   KEY `topic_id` (`topic_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_dlstatus
@@ -190,8 +190,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus_snap`
   `users_count` SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   KEY `topic_id` (`topic_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_dlstatus_snap
@@ -214,8 +214,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_last_torstat`
   `speed_down`  BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`, `user_id`) USING BTREE
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_last_torstat
@@ -236,8 +236,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_last_userstat`
   `speed_down`  BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_last_userstat
@@ -253,8 +253,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torhelp`
   `topic_id_csv` TEXT         NOT NULL,
   PRIMARY KEY (`user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_torhelp
@@ -293,8 +293,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   KEY `forum_id` (`forum_id`),
   KEY `poster_id` (`poster_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_torrents
@@ -312,8 +312,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torstat`
   `completed`             TINYINT(1)            NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`, `user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_torstat
@@ -333,8 +333,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tor_dl_stat`
   `t_bonus_total` BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`, `user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_tor_dl_stat
@@ -372,8 +372,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   KEY `topic_id` (`topic_id`),
   KEY `user_id` (`user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_tracker
@@ -393,8 +393,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap`
   `completed`  INT(10)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_tracker_snap
@@ -427,8 +427,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_users`
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `auth_key` (`auth_key`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_users
@@ -445,8 +445,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_user_settings`
   `last_modified`  INT(11)      NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_bt_user_settings
@@ -464,8 +464,8 @@ CREATE TABLE IF NOT EXISTS `bb_categories`
   PRIMARY KEY (`cat_id`),
   KEY `cat_order` (`cat_order`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_categories
@@ -483,8 +483,8 @@ CREATE TABLE IF NOT EXISTS `bb_config`
   `config_value` TEXT         NOT NULL,
   PRIMARY KEY (`config_name`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_config
@@ -601,8 +601,8 @@ CREATE TABLE IF NOT EXISTS `bb_cron`
   UNIQUE KEY `title` (`cron_title`),
   UNIQUE KEY `script` (`cron_script`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_cron
@@ -666,8 +666,8 @@ CREATE TABLE IF NOT EXISTS `bb_disallow`
   `disallow_username` VARCHAR(25)           NOT NULL DEFAULT '',
   PRIMARY KEY (`disallow_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_disallow
@@ -690,8 +690,8 @@ CREATE TABLE IF NOT EXISTS `bb_extensions`
   `comment`   VARCHAR(100)          NOT NULL DEFAULT '',
   PRIMARY KEY (`ext_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_extensions
@@ -742,8 +742,8 @@ CREATE TABLE IF NOT EXISTS `bb_extension_groups`
   `forum_permissions` TEXT                NOT NULL,
   PRIMARY KEY (`group_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_extension_groups
@@ -799,8 +799,8 @@ CREATE TABLE IF NOT EXISTS `bb_forums`
   KEY `forum_last_post_id` (`forum_last_post_id`),
   KEY `forum_parent` (`forum_parent`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_forums
@@ -833,8 +833,8 @@ CREATE TABLE IF NOT EXISTS `bb_groups`
   PRIMARY KEY (`group_id`),
   KEY `group_single_user` (`group_single_user`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_groups
@@ -860,8 +860,8 @@ CREATE TABLE IF NOT EXISTS `bb_log`
   KEY `log_time` (`log_time`),
   FULLTEXT KEY `log_topic_title` (`log_topic_title`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_log
@@ -879,8 +879,8 @@ CREATE TABLE IF NOT EXISTS `bb_poll_users`
   `vote_dt`  INT(11)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`, `user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_poll_users
@@ -898,8 +898,8 @@ CREATE TABLE IF NOT EXISTS `bb_poll_votes`
   `vote_result` MEDIUMINT(8) UNSIGNED NOT NULL,
   PRIMARY KEY (`topic_id`, `vote_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_poll_votes
@@ -933,8 +933,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts`
   KEY `post_time` (`post_time`),
   KEY `forum_id_post_time` (`forum_id`, `post_time`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_posts
@@ -953,8 +953,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts_html`
   `post_html`      MEDIUMTEXT   NOT NULL DEFAULT '',
   PRIMARY KEY (`post_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_posts_html
@@ -971,8 +971,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts_search`
   PRIMARY KEY (`post_id`),
   FULLTEXT KEY `search_words` (`search_words`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_posts_search
@@ -988,8 +988,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text`
   `post_text` MEDIUMTEXT            NOT NULL,
   PRIMARY KEY (`post_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_posts_text
@@ -1015,8 +1015,8 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs`
   KEY `privmsgs_from_userid` (`privmsgs_from_userid`),
   KEY `privmsgs_to_userid` (`privmsgs_to_userid`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_privmsgs
@@ -1032,8 +1032,8 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs_text`
   `privmsgs_text`    MEDIUMTEXT            NOT NULL,
   PRIMARY KEY (`privmsgs_text_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_privmsgs_text
@@ -1050,8 +1050,8 @@ CREATE TABLE IF NOT EXISTS `bb_quota_limits`
   `quota_limit`    BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   PRIMARY KEY (`quota_limit_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_quota_limits
@@ -1073,8 +1073,8 @@ CREATE TABLE IF NOT EXISTS `bb_ranks`
   `rank_style` VARCHAR(255)         NOT NULL DEFAULT '',
   PRIMARY KEY (`rank_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_ranks
@@ -1101,8 +1101,8 @@ CREATE TABLE IF NOT EXISTS `bb_search_rebuild`
   `rebuild_session_status` TINYINT(1)            NOT NULL DEFAULT '0',
   PRIMARY KEY (`rebuild_session_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_search_rebuild
@@ -1126,8 +1126,8 @@ CREATE TABLE IF NOT EXISTS `bb_search_results`
   `search_array`    TEXT                 NOT NULL,
   PRIMARY KEY (`session_id`, `search_type`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_search_results
@@ -1150,8 +1150,8 @@ CREATE TABLE IF NOT EXISTS `bb_sessions`
   `session_admin`     TINYINT(2)           NOT NULL DEFAULT '0',
   PRIMARY KEY (`session_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_sessions
@@ -1169,8 +1169,8 @@ CREATE TABLE IF NOT EXISTS `bb_smilies`
   `emoticon`   VARCHAR(75)          NOT NULL DEFAULT '',
   PRIMARY KEY (`smilies_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_smilies
@@ -1261,8 +1261,8 @@ CREATE TABLE IF NOT EXISTS `bb_topics`
   KEY `topic_last_post_time` (`topic_last_post_time`),
   FULLTEXT KEY `topic_title` (`topic_title`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_topics
@@ -1286,8 +1286,8 @@ CREATE TABLE IF NOT EXISTS `bb_topics_watch`
   KEY `user_id` (`user_id`),
   KEY `notify_status` (`notify_status`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_topics_watch
@@ -1313,8 +1313,8 @@ CREATE TABLE IF NOT EXISTS `bb_topic_tpl`
   PRIMARY KEY (`tpl_id`),
   UNIQUE KEY `tpl_name` (`tpl_name`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_topic_tpl
@@ -1371,8 +1371,8 @@ CREATE TABLE IF NOT EXISTS `bb_users`
   KEY `user_email` (`user_email`(10)),
   KEY `user_level` (`user_level`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_users
@@ -1416,8 +1416,8 @@ CREATE TABLE IF NOT EXISTS `bb_user_group`
   PRIMARY KEY (`group_id`, `user_id`),
   KEY `user_id` (`user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_user_group
@@ -1434,8 +1434,8 @@ CREATE TABLE IF NOT EXISTS `bb_words`
   `replacement` CHAR(100)             NOT NULL DEFAULT '',
   PRIMARY KEY (`word_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_words
@@ -1452,8 +1452,8 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
   `user_id`          MEDIUMINT(8)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of buf_last_seeder
@@ -1470,8 +1470,8 @@ CREATE TABLE IF NOT EXISTS `bb_thx`
   `time`     INT(11)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`, `user_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of bb_thx
@@ -1487,8 +1487,8 @@ CREATE TABLE IF NOT EXISTS `buf_topic_view`
   `topic_views` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- ----------------------------
 -- Records of buf_topic_view

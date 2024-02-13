@@ -35,7 +35,7 @@ $bb_cfg['db'] = [
         env('DB_DATABASE', 'torrentpier'),
         env('DB_USERNAME', 'root'),
         env('DB_PASSWORD'),
-        'utf8',
+        'utf8mb4',
         false
     ],
 ];
