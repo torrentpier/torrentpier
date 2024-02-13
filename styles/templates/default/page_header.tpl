@@ -68,9 +68,9 @@ var user = {
 	}
 };
 
-<!-- IF $bb_cfg['show_jumpbox'] -->
-$(document).ready(function(){
-	$("div.jumpbox").html('\
+<!-- IF JUMPBOX -->
+$(document).ready(function () {
+    $("div.jumpbox").html('\
 		<span id="jumpbox-container"> \
 		<select id="jumpbox"> \
 			<option id="jumpbox-title" value="-1">&nbsp;&raquo;&raquo; {L_JUMPBOX_TITLE} &nbsp;</option> \
@@ -78,12 +78,13 @@ $(document).ready(function(){
 		</span> \
 		<input id="jumpbox-submit" type="button" class="lite" value="{L_GO}" /> \
 	');
-	$('#jumpbox-container').one('click', function(){
-		$('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
-		var jumpbox_src = '/internal_data/ajax_html' + ({LOGGED_IN} ? '/jumpbox_user.html' : '/jumpbox_guest.html');
-		$(this).load(jumpbox_src);
-		$('#jumpbox-submit').click(function(){ window.location.href='{FORUM_URL}'+$('#jumpbox').val(); });
-	});
+    $('#jumpbox-container').one('click', function () {
+        $('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
+        $(this).html('{JUMPBOX}');
+        $('#jumpbox-submit').click(function () {
+            window.location.href = '{FORUM_URL}' + $('#jumpbox').val();
+        });
+    });
 });
 <!-- ENDIF -->
 
@@ -143,59 +144,6 @@ input[type="checkbox"] { margin-bottom: -1px; }
 </head>
 
 <body>
-<!-- IF EDITABLE_TPLS -->
-<div id="editable-tpl-input" style="display: none;">
-	<span class="editable-inputs nowrap" style="display: none;">
-		<input type="text" class="editable-value" />
-		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;" />
-		<input type="button" class="editable-cancel" value="x" style="width: 30px;" />
-	</span>
-</div>
-<div id="editable-tpl-yesno-select" style="display: none;">
-	<span class="editable-inputs nowrap" style="display: none;">
-		<select class="editable-value">
-			<option value="1">&nbsp;{L_YES}&nbsp;</option>
-			<option value="0">&nbsp;{L_NO}&nbsp;</option>
-		</select>
-		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;" />
-		<input type="button" class="editable-cancel" value="x" style="width: 30px;" />
-	</span>
-</div>
-<div id="editable-tpl-yesno-radio" style="display: none;">
-	<span class="editable-inputs nowrap" style="display: none;">
-		<label><input class="editable-value" type="radio" name="editable-value" value="1" />{L_YES}</label>
-		<label><input class="editable-value" type="radio" name="editable-value" value="0" />{L_NO}</label>&nbsp;
-		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;" />
-		<input type="button" class="editable-cancel" value="x" style="width: 30px;" />
-	</span>
-</div>
-<div id="editable-tpl-yesno-gender" style="display: none;">
-	<span class="editable-inputs nowrap" style="display: none;">
-		<select class="editable-value">
-			<option value="0">&nbsp;{$lang['GENDER_SELECT'][0]}&nbsp;</option>
-			<option value="1">&nbsp;{$lang['GENDER_SELECT'][1]}&nbsp;</option>
-			<option value="2">&nbsp;{$lang['GENDER_SELECT'][2]}&nbsp;</option>
-		</select>
-		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
-		<input type="button" class="editable-cancel" value="x" style="width: 30px;">
-	</span>
-</div>
-<div id="editable-tpl-yesno-twitter" style="display: none;">
-	<span class="editable-inputs nowrap" style="display: none;">
-		<input type="text" class="editable-value" value="{TWITTER}" />
-		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
-		<input type="button" class="editable-cancel" value="x" style="width: 30px;">
-	</span>
-</div>
-<div id="editable-tpl-yesno-birthday" style="display: none;">
-	<span class="editable-inputs nowrap" style="display: none;">
-		<input type="date" class="editable-value" value="{BIRTHDAY}" />
-		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
-		<input type="button" class="editable-cancel" value="x" style="width: 30px;">
-	</span>
-</div>
-<!-- ENDIF / EDITABLE_TPLS -->
-
 <!-- IF PAGINATION -->
 <div class="menu-sub" id="pg-jump">
 	<table cellspacing="1" cellpadding="4">
@@ -257,7 +205,7 @@ function go_to_page ()
 </script>
 
 <!--main_nav-->
-<div id="main-nav" <!-- IF HAVE_NEW_PM -->class="new-pm"<!-- ENDIF --> style="height: 17px;">
+<div id="main-nav"<!-- IF HAVE_NEW_PM --> class="new-pm"<!-- ENDIF -->>
 	<table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="nowrap">
@@ -268,7 +216,7 @@ function go_to_page ()
 			<a href="{U_GROUPS}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a>
 		</td>
-		<td class="nowrap" align="right">
+		<td class="nowrap tRight">
 			<!-- IF LOGGED_IN -->
 				<!-- IF HAVE_NEW_PM || HAVE_UNREAD_PM -->
 					<a href="{U_READ_PM}" class="new-pm-link"><b>{L_PRIVATE_MESSAGES}: {PM_INFO}</b></a>
@@ -305,9 +253,9 @@ function go_to_page ()
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
-					<option value="tracker.php#results" selected> {L_TRACKER_S} </option>
-					<option value="search.php"> {L_FORUM_S} </option>
-					<option value="tracker.php" class="hash"> {L_HASH_S} </option>
+					<option value="{U_TRACKER}#results" selected> {L_TRACKER_S} </option>
+					<option value="{U_SEARCH}"> {L_FORUM_S} </option>
+					<option value="{U_TRACKER}" class="hash"> {L_HASH_S} </option>
 				</select>
 				<input type="submit" class="med" value="{L_SEARCH}" style="width: 55px;" />
 			</form>

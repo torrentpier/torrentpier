@@ -220,10 +220,6 @@ ajax.callback.view_post = function(data) {
 	var $links = $('div.post_links', $('#post_'+topic_id));
 	$post.css({ maxWidth: maxW, maxHeight: maxH });
 	$links.css({ maxWidth: maxW });
-	if ($.browser.msie) {
-		if ($post.height() > maxH) { $post.height(maxH); }
-		if ($post.width() > maxW)  { $post.width(maxW); $links.width(maxW); }
-	}
 	ajax.openedPosts[topic_id] = true;
 };
 </script>
@@ -358,9 +354,6 @@ td.topic_id { cursor: pointer; }
 	</td>
 </tr>
 <!-- END f -->
-<tr>
-	<td colspan="5" class="spaceRow"><div class="spacer_6"></div></td>
-</tr>
 </table>
 <div class="spacer_6"></div>
 
@@ -484,8 +477,8 @@ td.topic_id { cursor: pointer; }
             <span title="{L_VIEWS}: {t.VIEWS}">{t.VIEWS}</span>
         </p>
         <!-- BEGIN tor -->
-        <p style="padding-top: 2px" class="med" title="{L_COMPLETED}: {t.tor.COMPL_CNT}">
-            <b>{t.tor.COMPL_CNT}</b>
+        <p style="padding-top: 2px;" class="med" title="{L_COMPLETED}: {t.tor.COMPL_CNT}">
+            <b>{t.tor.DOWNLOADED}</b>
         </p>
         <!-- END tor -->
     </td>
@@ -632,7 +625,7 @@ td.topic_id { cursor: pointer; }
 <!-- IF LOGGED_IN -->
 <p class="med"><a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a></p>
 <!-- IF IS_AM -->
-<p class="mrg_2 tRight">{L_AUTOCLEAN}: <!-- IF PRUNE_DAYS --><b>{PRUNE_DAYS} {L_DAYS}</b><!-- ELSE -->{L_DISABLED}<!-- ENDIF --></p>
+<p class="mrg_2 tRight">{L_AUTOCLEAN}: <!-- IF PRUNE_DAYS --><b>{PRUNE_DAYS}</b><!-- ELSE -->{L_DISABLED}<!-- ENDIF --></p>
 <!-- ENDIF -->
 
 <!-- IF IS_ADMIN -->

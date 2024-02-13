@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -27,6 +27,11 @@ if ($mode == 'run' && !$job_id) {
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {
     require __DIR__ . '/pagestart.php';
+}
+
+// Check for demo mode
+if (IN_DEMO_MODE && ($submit || !in_array($mode, ['add', 'list']))) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 
 if (!IS_SUPER_ADMIN) {
@@ -79,7 +84,7 @@ switch ($mode) {
         ));
 
         //detect cron status
-        if (file_exists(CRON_RUNNING)) {
+        if (is_file(CRON_RUNNING)) {
             $template->assign_vars(array(
                 'CRON_RUNNING' => true,
             ));
@@ -87,7 +92,7 @@ switch ($mode) {
         break;
 
     case 'repair':
-        if (file_exists(CRON_RUNNING)) {
+        if (is_file(CRON_RUNNING)) {
             rename(CRON_RUNNING, CRON_ALLOWED);
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
@@ -159,7 +164,7 @@ switch ($mode) {
             'S_MODE' => 'add',
             'SCHEDULE' => build_select('schedule', $schedule, 'select', null, null),
             'RUN_DAY' => build_select('run_day', $run_day, 0, null, null),
-            'CRON_ID' => 'none',
+            'CRON_ID' => '',
             'CRON_ACTIVE' => 1,
             'CRON_TITLE' => '',
             'CRON_SCRIPT' => '',

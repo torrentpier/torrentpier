@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -17,6 +17,7 @@ $_main = BB_ROOT . 'styles/' . basename(TEMPLATES_DIR) . '/' . $template_name . 
 $_lang = $_main . 'lang/' . basename($bb_cfg['default_lang']) . '/';
 
 // post_buttons
+$images['icon_code'] = $_lang . 'icon_code.gif';
 $images['icon_quote'] = $_lang . 'icon_quote.gif';
 $images['icon_edit'] = $_lang . 'icon_edit.gif';
 $images['icon_search'] = $_lang . 'icon_search.gif';
@@ -96,8 +97,6 @@ $images['pm_new_msg'] = '';
 $images['pm_no_new_msg'] = '';
 
 // topic_mod_icons will be replaced with SELECT later...
-$images['topic_watch'] = '';
-$images['topic_un_watch'] = '';
 $images['topic_mod_lock'] = $_main . 'topic_lock.gif';
 $images['topic_mod_unlock'] = $_main . 'topic_unlock.gif';
 $images['topic_mod_split'] = $_main . 'topic_split.gif';
@@ -131,6 +130,7 @@ $template->assign_vars([
 if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tpl_vars'])) {
     if (isset($vars['post_buttons'])) {
         $template->assign_vars([
+            'CODE_IMG' => $bb_cfg['text_buttons'] ? $lang['CODE_TOPIC_TXTB'] : '<img src="' . $images['icon_code'] . '" alt="' . $lang['CODE_TOPIC_TXTB'] . '" title="' . $lang['CODE'] . '" />',
             'QUOTE_IMG' => $bb_cfg['text_buttons'] ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="' . $images['icon_quote'] . '" alt="' . $lang['REPLY_WITH_QUOTE_TXTB'] . '" title="' . $lang['REPLY_WITH_QUOTE'] . '" />',
             'EDIT_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="' . $images['icon_edit'] . '" alt="' . $lang['EDIT_DELETE_POST_TXTB'] . '" title="' . $lang['EDIT_POST'] . '" />',
             'DELETE_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['DELETE_POST_TXTB'] : '<img src="' . $images['icon_delpost'] . '" alt="' . $lang['DELETE_POST_TXTB'] . '" title="' . $lang['DELETE_POST'] . '" />',
@@ -152,7 +152,6 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
 
             'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;u=',
             'FORUM_URL' => BB_ROOT . FORUM_URL,
-            'ICQ_URL' => 'http://www.icq.com/people/',
             'PM_URL' => BB_ROOT . PM_URL,
             'PROFILE_URL' => BB_ROOT . PROFILE_URL
         ]);

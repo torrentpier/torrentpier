@@ -42,7 +42,7 @@ $(function(){
 	$.each($('#f-map a'), function(i,a) {
 		var f_id = $(a).attr('href');
 		$(a)
-			.attr('href', 'viewforum.php?f='+ f_id)
+			.attr('href', '{U_FORUM}?f='+ f_id)
 			.before('<img class="feed-small" src="{IMG}feed.png" alt="feed" onclick="open_feed('+ f_id +')">')
 		;
 	});

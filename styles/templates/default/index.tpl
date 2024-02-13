@@ -1,7 +1,14 @@
+<!-- IF #IN_DEMO_MODE -->
+<div class="tCenter">
+    <span class="leech">{L_TP_VERSION}: {$bb_cfg['tp_version']}</span><br>
+    <span class="seed">{L_USERNAME}: admin / {L_PASSWORD}: admin</span>
+</div>
+<!-- ENDIF -->
+
 <!-- IF TORHELP_TOPICS -->
 	<!-- INCLUDE torhelp.tpl -->
 	<div class="spacer_6"></div>
-<!-- ENDIF -->
+<!-- ENDIF / TORHELP_TOPICS -->
 
 <div id="forums_list_wrap">
 
@@ -41,7 +48,7 @@
 	</tr>
 	</table>
 </div><!--/search-my-posts-->
-<!-- ENDIF -->
+<!-- ENDIF / LOGGED_IN -->
 
 <img width="540" class="spacer" src="{SPACER}" alt="" />
 
@@ -78,7 +85,7 @@
 		<!-- BEGIN f -->
 		<tr>
 			<td class="row1 f_icon">
-			<a href="search.php?f={c.f.FORUM_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1"><img class="forum_icon" src="{c.f.FORUM_FOLDER_IMG}" alt="{c.f.FORUM_FOLDER_ALT}" /></a>
+			<a href="{U_SEARCH}?f={c.f.FORUM_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1"><img class="forum_icon" src="{c.f.FORUM_FOLDER_IMG}" alt="{c.f.FORUM_FOLDER_ALT}" /></a>
 			</td>
 			<td class="row1 f_titles">
 
@@ -92,7 +99,7 @@
 				<p class="subforums">
 					<em>{L_SUBFORUMS}:</em>
 					<!-- BEGIN sf -->
-					<span class="sf_title{c.f.sf.SF_NEW}"><a href="search.php?f={c.f.sf.SF_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1" class="dot-sf">&#9658;</a><a href="{FORUM_URL}{c.f.sf.SF_ID}" class="dot-sf">{c.f.sf.SF_NAME}</a></span><span class="sf_separator"></span>
+					<span class="sf_title{c.f.sf.SF_NEW}"><a href="{U_SEARCH}?f={c.f.sf.SF_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1" class="dot-sf">&#9658;</a><a href="{FORUM_URL}{c.f.sf.SF_ID}" class="dot-sf">{c.f.sf.SF_NAME}</a></span><span class="sf_separator"></span>
 					<!-- END sf -->
 				</p>
 				<!-- ENDIF -->
@@ -155,7 +162,7 @@
 <!-- IF LOGGED_IN and SHOW_FORUMS -->
 <div id="mark_all_forums_read">
 	<a href="{U_SEARCH_NEW}" class="med">{L_SEARCH_NEW}</a> &#0183;
-	<a href="{U_INDEX}" class="med" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
+	<a href="{U_INDEX}" class="med" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); window.location.reload();">{L_MARK_ALL_FORUMS_READ}</a>
 </div>
 <!-- ENDIF -->
 

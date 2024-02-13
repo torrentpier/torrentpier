@@ -1,7 +1,7 @@
 /*
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -150,7 +150,7 @@ table.forums {
   display: none;
 }
 
-.subforums+.moderators {
+.subforums + .moderators {
   margin-top: 0;
 }
 
@@ -172,7 +172,8 @@ table.forums {
   margin-right: 1px;
 }
 
-.sf_separator {}
+.sf_separator {
+}
 
 .sf_title a {
   text-decoration: none;
@@ -218,7 +219,8 @@ table.forums {
   white-space: nowrap;
 }
 
-.f_stat_topics {}
+.f_stat_topics {
+}
 
 .f_stat_posts {
   padding-left: 3px;
@@ -489,6 +491,23 @@ a.postLink:visited {
   line-height: 110%;
 }
 
+.poster-banned {
+  background: #f6f6f6;
+  border: 1px solid #b71c1c;
+  padding: 4px;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center
+}
+
+.poster-flag {
+  width: 32px;
+  height: 20px;
+  vertical-align: middle;
+}
+
 .poster_info .avatar {
   margin: 5px 0 4px;
   max-width: 100px;
@@ -591,7 +610,15 @@ table.peers td {
   border: 1px #A5AFB4 solid;
 }
 
-.dl_list {}
+.clients {
+  width: auto;
+  height: auto;
+  display: inline !important;
+  vertical-align: middle;
+}
+
+.dl_list {
+}
 
 .dl_list td {
   text-align: center;

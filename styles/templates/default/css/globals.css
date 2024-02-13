@@ -1,7 +1,7 @@
 /*
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -366,6 +366,24 @@ a.gen, a.med, a.genmed, a.small, a.gensmall {
   text-decoration: line-through;
 }
 
+.post-box-default {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.post-box {
+  display: inline-block;
+  border: 1px solid #a7b4ba;
+  border-radius: 3px;
+  line-height: 150%;
+  margin: 1px 5px;
+  padding: 0 8px 1px;
+}
+
+.post-indent {
+  margin-left: 2em;
+}
+
 /* ---------------------------------- *
      Code blocks
  * ---------------------------------- */
@@ -477,10 +495,13 @@ img.smile, img.postImg {
 
 img.postImg {
   margin: 2px 2px 0 0;
+  max-width: 100%;
+  height: auto;
 }
 
 img.postImgAligned {
   margin: 4px 4px 2px;
+
 }
 
 var.img-left {
@@ -534,7 +555,8 @@ input, textarea, select {
   font-family: Verdana, sans-serif;
 }
 
-input.post, textarea.post {}
+input.post, textarea.post {
+}
 
 select, input {
   font-size: 11px;
@@ -643,11 +665,12 @@ legend a {
   text-decoration: none;
 }
 
-fieldset>legend {
+fieldset > legend {
   margin-left: 6px;
 }
 
-.root_forum {}
+.root_forum {
+}
 
 .has_sf {
   color: #333333;
@@ -688,7 +711,7 @@ textarea.editor {
   margin-bottom: 1px;
 }
 
-.fieldsets div>p {
+.fieldsets div > p {
   margin-bottom: 2px;
 }
 
@@ -696,11 +719,14 @@ textarea.editor {
   margin-bottom: 3px;
 }
 
-.fieldsets .radio {}
+.fieldsets .radio {
+}
 
-.fieldsets .chbox {}
+.fieldsets .chbox {
+}
 
-.fieldsets .input {}
+.fieldsets .input {
+}
 
 table.my_downloads {
   margin-bottom: 2px;
@@ -804,7 +830,7 @@ table.forumline {
   color: #D5E4EC;
   font-size: 11px;
   font-weight: bold;
-  background: #1C508C;
+  background: #4E5E6F;
 }
 
 /* "lte IE 6" in page_header.tpl */

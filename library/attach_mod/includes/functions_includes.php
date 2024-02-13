@@ -2,26 +2,10 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
-/**
- * Setup s_auth_can in viewforum and viewtopic (viewtopic.php/viewforum.php)
- */
-function attach_build_auth_levels($is_auth, &$s_auth_can)
-{
-    global $lang, $attach_config;
-
-    if ((int)$attach_config['disable_mod']) {
-        return;
-    }
-
-    // If you want to have the rules window link within the forum view too, comment out the two lines, and comment the third line
-    $s_auth_can .= (($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT']) . '<br />';
-    $s_auth_can .= (($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT']) . '<br />';
-}
 
 /**
  * Called from admin_users.php and admin_groups.php in order to process Quota Settings (admin/admin_users.php:admin/admin_groups.php)

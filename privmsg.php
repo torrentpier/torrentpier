@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -40,7 +40,7 @@ $confirmed = (isset($_POST['confirm'])) ? true : 0;
 $delete = (isset($_POST['delete'])) ? true : 0;
 $delete_all = (isset($_POST['deleteall'])) ? true : 0;
 $save = (isset($_POST['save'])) ? true : 0;
-$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$mode = isset($_REQUEST['mode']) ? htmlCHR($_REQUEST['mode']) : '';
 
 $refresh = $preview || $submit_search;
 
@@ -61,6 +61,13 @@ $template->assign_vars([
     'IN_PM' => true,
     'QUICK_REPLY' => $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read',
 ]);
+
+//
+// Set mode for quick reply
+//
+if (empty($mode) && $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $preview) {
+    $mode = 'reply';
+}
 
 //
 // Cancel
@@ -90,10 +97,9 @@ $outbox_url = ($folder != 'outbox' || $mode != '') ? '<a href="' . PM_URL . "?fo
 $sentbox_url = ($folder != 'sentbox' || $mode != '') ? '<a href="' . PM_URL . "?folder=sentbox" . '">' . $lang['SENTBOX'] . '</a>' : $lang['SENTBOX'];
 $savebox_url = ($folder != 'savebox' || $mode != '') ? '<a href="' . PM_URL . "?folder=savebox" . '">' . $lang['SAVEBOX'] . '</a>' : $lang['SAVEBOX'];
 
-// ----------
+//
 // Start main
 //
-
 $template->assign_var('POSTING_SUBJECT');
 
 if ($mode == 'read') {
@@ -369,18 +375,9 @@ if ($mode == 'read') {
     // Processing of post
     //
     $post_subject = htmlCHR($privmsg['privmsgs_subject']);
-
     $private_message = $privmsg['privmsgs_text'];
-
-    $orig_word = [];
-    $replacement_word = [];
-    obtain_word_list($orig_word, $replacement_word);
-
-    if (count($orig_word)) {
-        $post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
-        $private_message = preg_replace($orig_word, $replacement_word, $private_message);
-    }
-
+    $post_subject = $wordCensor->censorString($post_subject);
+    $private_message = $wordCensor->censorString($private_message);
     $private_message = bbcode2html($private_message);
 
     //
@@ -668,11 +665,11 @@ if ($mode == 'read') {
                 do {
                     switch ($row['privmsgs_type']) {
                         case PRIVMSGS_NEW_MAIL:
-                            $update_users['new'][$row['privmsgs_to_userid']]++;
+                            ($update_users['new'][$row['privmsgs_to_userid']] ??= 0) + 1;
                             break;
 
                         case PRIVMSGS_UNREAD_MAIL:
-                            $update_users['unread'][$row['privmsgs_to_userid']]++;
+                            ($update_users['unread'][$row['privmsgs_to_userid']] ??= 0) + 1;
                             break;
                     }
                 } while ($row = DB()->sql_fetchrow($result));
@@ -778,7 +775,7 @@ if ($mode == 'read') {
 
     if ($submit) {
         if (!empty($_POST['username'])) {
-            $to_userdata = get_userdata($_POST['username']);
+            $to_userdata = get_userdata($_POST['username'], true);
 
             if (!$to_userdata || $to_userdata['user_id'] == GUEST_UID) {
                 $error = true;
@@ -939,11 +936,7 @@ if ($mode == 'read') {
         //
         // Do mode specific things
         //
-        if ($mode == 'post') {
-            $page_title = $lang['POST_NEW_PM'];
-        } elseif ($mode == 'reply') {
-            $page_title = $lang['POST_REPLY_PM'];
-        } elseif ($mode == 'edit') {
+        if ($mode == 'edit') {
             $page_title = $lang['EDIT_PM'];
 
             $sql = "SELECT u.user_id
@@ -1021,12 +1014,8 @@ if ($mode == 'read') {
 
             if ($mode == 'quote') {
                 $privmsg_message = $privmsg['privmsgs_text'];
-
                 $msg_date = bb_date($privmsg['privmsgs_date']);
-
                 $privmsg_message = '[quote="' . $to_username . '"]' . $privmsg_message . '[/quote]';
-
-                $mode = 'reply';
             }
         } else {
             $privmsg_subject = $privmsg_message = $to_username = '';
@@ -1043,21 +1032,20 @@ if ($mode == 'read') {
     //
     // Start output, first preview, then errors then post form
     //
-    $page_title = $lang['SEND_PRIVATE_MESSAGE'];
+    if ($mode == 'post') {
+        $page_title = $lang['POST_NEW_PM'];
+    } elseif ($mode == 'reply') {
+        $page_title = $lang['POST_REPLY_PM'];
+    } elseif ($mode == 'quote') {
+        $page_title = $lang['POST_QUOTE_PM'];
+    } elseif ($mode == 'edit') {
+        $page_title = $lang['EDIT_PM'];
+    }
 
     if ($preview && !$error) {
-        $orig_word = [];
-        $replacement_word = [];
-        obtain_word_list($orig_word, $replacement_word);
-
         $preview_message = bbcode2html($privmsg_message);
-
-        if (count($orig_word)) {
-            $preview_subject = preg_replace($orig_word, $replacement_word, $privmsg_subject);
-            $preview_message = preg_replace($orig_word, $replacement_word, $preview_message);
-        } else {
-            $preview_subject = $privmsg_subject;
-        }
+        $preview_subject = $wordCensor->censorString($privmsg_subject);
+        $preview_message = $wordCensor->censorString($preview_message);
 
         $s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
         $s_hidden_fields .= '<input type="hidden" name="mode" value="' . $mode . '" />';
@@ -1068,7 +1056,7 @@ if ($mode == 'read') {
 
         $template->assign_vars([
             'TPL_PREVIEW_POST' => true,
-            'TOPIC_TITLE' => wbr($preview_subject),
+            'TOPIC_TITLE' => $preview_subject,
             'POST_SUBJECT' => $preview_subject,
             'MESSAGE_TO' => $to_username,
             'MESSAGE_FROM' => $userdata['username'],
@@ -1097,14 +1085,21 @@ if ($mode == 'read') {
     $template->assign_block_vars('switch_privmsg', []);
     $template->assign_var('POSTING_USERNAME');
 
-    $post_a = '&nbsp;';
-    if ($mode == 'post') {
-        $post_a = $lang['SEND_A_NEW_MESSAGE'];
-    } elseif ($mode == 'reply') {
-        $post_a = $lang['SEND_A_REPLY'];
-        $mode = 'post';
-    } elseif ($mode == 'edit') {
-        $post_a = $lang['EDIT_MESSAGE'];
+    //
+    // Assign posting title & hidden fields
+    //
+    $post_a = false;
+    switch ($mode) {
+        case 'post':
+            $post_a = $lang['SEND_A_NEW_MESSAGE'];
+            break;
+        case 'quote':
+        case 'reply':
+            $post_a = $lang['SEND_A_REPLY'];
+            break;
+        case 'edit':
+            $post_a = $lang['EDIT_MESSAGE'];
+            break;
     }
 
     $s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
@@ -1174,9 +1169,6 @@ if ($mode == 'read') {
     // Load templates
     //
     $template->set_filenames(['body' => 'privmsgs.tpl']);
-
-    $orig_word = $replacement_word = [];
-    obtain_word_list($orig_word, $replacement_word);
 
     //
     // New message
@@ -1389,12 +1381,7 @@ if ($mode == 'read') {
 
             $msg_userid = $row['user_id'];
             $msg_user = profile_url($row);
-
-            $msg_subject = $row['privmsgs_subject'];
-
-            if (count($orig_word)) {
-                $msg_subject = preg_replace($orig_word, $replacement_word, $msg_subject);
-            }
+            $msg_subject = $wordCensor->censorString($row['privmsgs_subject']);
 
             $u_subject = PM_URL . "?folder=$folder&amp;mode=read&amp;" . POST_POST_URL . "=$privmsg_id";
 

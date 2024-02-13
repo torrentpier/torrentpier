@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -38,7 +38,7 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
                     'quota_type' => (int)$quota_type,
                     'quota_limit_id' => (int)$quota_limit_id
                 ];
-                $sql = 'INSERT INTO ' . BB_QUOTA . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_QUOTA . ' ' . DB()->build_array('INSERT', $sql_ary);
             } else {
                 $sql = 'UPDATE ' . BB_QUOTA . "
 					SET quota_limit_id = $quota_limit_id
@@ -146,7 +146,7 @@ function search_attachments($order_by, &$total_rows)
         $search_author = stripslashes(clean_username($search_author));
 
         // Prepare for directly going into sql query
-        $search_author = str_replace('*', '%', attach_mod_sql_escape($search_author));
+        $search_author = str_replace('*', '%', DB()->escape($search_author));
 
         // We need the post_id's, because we want to query the Attachment Table
         $sql = 'SELECT user_id FROM ' . BB_USERS . " WHERE username LIKE '$search_author'";
@@ -172,13 +172,13 @@ function search_attachments($order_by, &$total_rows)
     $search_keyword_fname = get_var('search_keyword_fname', '');
     if ($search_keyword_fname) {
         $match_word = str_replace('*', '%', $search_keyword_fname);
-        $where_sql[] = " (a.real_filename LIKE '" . attach_mod_sql_escape($match_word) . "') ";
+        $where_sql[] = " (a.real_filename LIKE '" . DB()->escape($match_word) . "') ";
     }
 
     $search_keyword_comment = get_var('search_keyword_comment', '');
     if ($search_keyword_comment) {
         $match_word = str_replace('*', '%', $search_keyword_comment);
-        $where_sql[] = " (a.comment LIKE '" . attach_mod_sql_escape($match_word) . "') ";
+        $where_sql[] = " (a.comment LIKE '" . DB()->escape($match_word) . "') ";
     }
 
     // Search Download Count
@@ -244,26 +244,4 @@ function search_attachments($order_by, &$total_rows)
     DB()->sql_freeresult($result);
 
     return $attachments;
-}
-
-/**
- * Perform limit statement on arrays
- *
- * @param $array
- * @param $start
- * @param $pagelimit
- * @return array
- */
-function limit_array($array, $start, $pagelimit)
-{
-    // array from start - start+pagelimit
-    $limit = (count($array) < ($start + $pagelimit)) ? count($array) : $start + $pagelimit;
-
-    $limit_array = [];
-
-    for ($i = $start; $i < $limit; $i++) {
-        $limit_array[] = $array[$i];
-    }
-
-    return $limit_array;
 }

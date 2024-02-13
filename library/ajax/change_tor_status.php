@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,13 +13,15 @@ if (!defined('IN_AJAX')) {
 
 global $userdata, $bb_cfg, $lang;
 
-if (!isset($this->request['attach_id'])) {
+if (!$attach_id = (int)$this->request['attach_id']) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }
 
-$attach_id = (int)$this->request['attach_id'];
-$mode = (string)$this->request['mode'];
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
+$comment = false;
 if ($bb_cfg['tor_comment']) {
     $comment = (string)$this->request['comment'];
 }
@@ -68,7 +70,7 @@ switch ($mode) {
             if (!IS_ADMIN) {
                 $this->verify_mod_rights($tor['forum_id']);
             }
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']}");
+            DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']} LIMIT 1");
         } else {
             $this->verify_mod_rights($tor['forum_id']);
         }
@@ -117,6 +119,9 @@ switch ($mode) {
         send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
         \TorrentPier\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
         break;
+
+    default:
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['attach_id'] = $attach_id;

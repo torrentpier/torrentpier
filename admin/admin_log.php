@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -262,7 +262,7 @@ if ($log_rowset) {
             'ACTION_HREF_S' => url_arg($url, $type_key, $row['log_type_id']),
 
             'USER_ID' => $row['log_user_id'],
-            'USERNAME' => profile_url($row),
+            'USERNAME' => profile_url($row, true),
             'USER_HREF_S' => url_arg($url, $user_key, $row['log_user_id']),
             'USER_IP' => \TorrentPier\Helpers\IPHelper::isValid($row['log_user_ip']) ? \TorrentPier\Helpers\IPHelper::long2ip_extended($row['log_user_ip']) : '127.0.0.1',
 
@@ -310,7 +310,7 @@ if ($log_rowset) {
         // Users
         if ($user_csv && empty($filter['users'])) {
             $template->assign_block_vars('users', array(
-                'USERNAME' => profile_url($row),
+                'USERNAME' => profile_url($row, true),
             ));
             $filter['users'] = true;
         }

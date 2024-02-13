@@ -70,7 +70,7 @@
         </tr>
         <tr>
             <td class="prof-title">{L_USERNAME}: *</td>
-            <td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}"/><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF --><span id="check_name"></span></td>
+            <td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}"/><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->&nbsp;<span id="check_name"></span></td>
         </tr>
         <tr>
             <td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br/><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
@@ -95,6 +95,12 @@
                 <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="check_pass"></span>
             </td>
         </tr>
+        <!-- IF $bb_cfg['invites_system']['enabled'] and not EDIT_PROFILE -->
+        <tr>
+            <td class="prof-title">{L_INVITE_CODE}: *</td>
+            <td><input type="text" name="invite_code" size="35" value="{INVITE_CODE}"/></td>
+        </tr>
+        <!-- ENDIF -->
         <!-- IF CAPTCHA_HTML -->
         <tr>
             <td class="prof-title">{L_CAPTCHA}: *</td>
@@ -150,7 +156,7 @@
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
             <td>
-                <div><input type="text" name="user_from" size="50" maxlength="100" value="{USER_FROM}"/></div>
+                <div><input type="text" name="user_from" size="50" maxlength="100" value="{USER_FROM}"/><br><h6>{L_LOCATION_FLAGS} <a href="https://github.com/torrentpier/torrentpier/blob/2d6baa50b0bf6b5f1268563686acde436e55bcdb/library/includes/functions.php#L1237" target="_blank">{L_LIST}</a></h6></div>
             </td>
         </tr>
         <!-- ENDIF -->

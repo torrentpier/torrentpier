@@ -81,6 +81,7 @@
 				<!-- ENDIF -->
 				<!-- IF SHOW_BOT_OPTIONS -->
 				<p class="mrg_2"><input type="checkbox" name="insert_bot_msg" id="insert_bot_msg" checked /><label for="insert_bot_msg">{L_BOT_LEAVE_MSG_MOVED}</label></p>
+				<p class="mrg_2">{L_BOT_REASON_MOVED}&nbsp;<input type="text" name="reason_move_bot" maxlength="60" size="30"/></p>
 				<!-- ENDIF -->
 			</td>
 		</tr>

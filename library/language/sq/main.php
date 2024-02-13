@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'faqe';
 $lang['GOTO_PAGE'] = 'Shko tek faqja';
 $lang['GOTO_SHORT'] = 'Faqe';
 $lang['JOINED'] = 'U bashkuan';
-$lang['LONGEVITY'] = 'Jeta';
+$lang['LONGEVITY'] = 'Regjistruar';
 $lang['IP_ADDRESS'] = 'IP Adresa';
 $lang['POSTED_AFTER'] = 'pas';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'Përdoruesit më kurrë online ishte <b>%s</b> n
 $lang['ONLINE_ADMIN'] = 'Administratori';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Anëtari i grupit';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Kohën e tanishme është: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar paneli i kontrollit';
 
 $lang['WEBSITE'] = 'Website';
 $lang['LOCATION'] = 'Location';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontaktoni';
 $lang['EMAIL_ADDRESS'] = 'E-mail adresa';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Dërgo mesazh privat';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Gjeni përdorues temat'; // Find all topics by us
 $lang['NO_USER_ID_SPECIFIED'] = 'Na vjen keq, por që përdoruesit nuk ekziston.';
 $lang['WRONG_PROFILE'] = 'Ju nuk mund të modifikoni një profil që nuk është e vetja.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Vetëm një lloj avatar, mund të përcaktohen';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'File në URL ju dha nuk përmban të dhënat e';
 $lang['NO_CONNECTION_URL'] = 'Një lidhje mund të mos jenë bërë për URL që ju dha';
 $lang['INCOMPLETE_URL'] = 'URL që keni futur nuk është e plotë';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Website';
 $lang['ASC'] = 'Ngjitje';
 $lang['DESC'] = 'Duke zbritur';
 $lang['ORDER'] = 'Urdhër';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Grupet E Shfrytëzuesve Të';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Shtuar';
 $lang['BT_REG_ON_TRACKER'] = 'Të regjistroheni në tracker';
 $lang['BT_REG_FAIL'] = 'Nuk mund të regjistrohen në përrua tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Një tjetër torrent me të njëjtën info_hash tashmë <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hiqni nga tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent paregjistruara';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Statusi';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Zgjidhni statusin';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Ju nuk e kanë të zgjedhur statusin.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Të gjitha statuset';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nuk kontrollohen',
     TOR_CLOSED => 'mbyllur',
     TOR_APPROVED => 'kontrolluar',
     TOR_NEED_EDIT => 'nuk zyrtarizuar deri',
     TOR_NO_DESC => 'nuk e formalizuara',
-    TOR_DUP => 'përsëriteni',
-    TOR_CLOSED_CPHOLD => 'i mbyllur të drejtë',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'absorbohet',
     TOR_DOUBTFUL => 'të dyshimta',
-    TOR_CHECKING => 'i verifikuar',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'të përkohshme',
     TOR_PREMOD => 'para-moderim',
-    TOR_REPLENISH => 'plotësoj',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Një status të tillë nuk ekziston!';
 $lang['TORRENT_FAILED'] = 'Shpërndarja nuk u gjet!';
 $lang['TOR_STATUS_DUB'] = 'Shpërndarja e ka të njëjtin status';
-$lang['TOR_DONT_CHANGE'] = 'Ndryshimi i statusit nuk mund të jetë!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Shpërndarja e ka statusin e:';
 $lang['TOR_STATUS_CHANGED'] = 'Statusi i ndryshuar: ';
 $lang['TOR_BACK'] = ' prapa';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent tashmë të regjistruar';
 $lang['NOT_TORRENT'] = 'Kjo skedë nuk është torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Ju mund të regjistroheni vetëm një përrua në një post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Ju mund të regjistroheni vetëm një përrua në një temë';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Shikimin torrent-profili :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiv torrents';
 
 $lang['TD_TRAF'] = 'Sot';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You mos ketë shpërblime në d
 $lang['BONUS_RETURN'] = 'Kthimit të farës së bonusit të këmbimit';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Të hapni tema';
 $lang['OPEN_IN_SAME_WINDOW'] = 'të hapur në të njëjtën dritare';
 $lang['SHOW_TIME_TOPICS'] = 'tregojnë kohën e krijimit temat';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookit duhet të jenë të aktivizuara!';
 $lang['SESSION_EXPIRED'] = 'Sesioni i skaduar';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Tregojnë vetëm përdoruesve duke filluar me';
-$lang['OTHERS'] = 'të tjerët';
-$lang['ALL'] = 'të gjitha';
-
 $lang['POST_LINK'] = 'Pas lidhje';
 $lang['GOTO_QUOTED_POST'] = 'Shko tek cituar post';
 $lang['LAST_VISITED'] = 'Vizituar Të Fundit';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Kurrë nuk';
 //mpd
 $lang['DELETE_POSTS'] = 'Fshini zgjedhur postimet';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'E përzgjedhur postimet janë hequr me sukses';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Njoftimet';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Update post kohë';
 $lang['TOPIC_SPLIT_NEW'] = 'Temë të re';
 $lang['TOPIC_SPLIT_OLD'] = 'Vjetër temë';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Të shtoni bot-mesazhi për të lëvizur';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Të shtoni bot-mesazhi për të ndarë të <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Të shtoni bot-mesazhi për të ndarë të <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Tekst Bold: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Theksoj tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citoj tekstin: [quote]text[/quote] (Ctrl+P)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Për të fshirë një urdhër nga lista, klikoni mbi i
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Shikuar temat';
-$lang['NO_WATCHED_TOPICS'] = 'Ju nuk jeni të shikuar ndonjë temat';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Mbrapa në faqen kryesore';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliko %sHere%s të kthehen në Forum Lejet';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrollit';
-$lang['BAN_EXPLAIN'] = 'Këtu ju mund të kontrollojë ndalimin e përdoruesit. Ju mund të arrijnë këtë duke ndaluar ose të dy, e një përdorues të veçantë ose të një individi ose një varg të adresave IP. Këto metoda të parandaluar përdoruesit nga edhe arrijnë indeksi faqe të bordin tuaj. Për të parandaluar një përdorues të regjistruar nën një username të ndryshme ju gjithashtu mund të specifikoni një ndalua adresë e-mail. Ju lutem vini re se ndalimi i një email adresë të vetëm nuk do të parandaluar përdoruesit nga të qenit në gjendje për të hyni në, ose pas tuaj bordit. Ju duhet të përdorni një prej dy metoda për të arritur këtë.';
-$lang['BAN_EXPLAIN_WARN'] = 'Ju lutem vini re se të hyjnë në një varg të adresave IP rezultatet në të gjitha adresat në mes fillimit dhe mbarimit duke u shtuar në banlist. Përpjekje do të bëhen për të minimizuar numrin e adresave të shtuar në bazën e të dhënave duke futur wildcards automatikisht aty ku është e përshtatshme. Nëse ju me të vërtetë duhet të hyjë në një varg, të përpiqemi për ta mbajtur atë të vogla ose më mirë akoma, të veçantë shtetëror adresave.';
-
-$lang['SELECT_IP'] = 'Përzgjidhni një adresë IP';
-$lang['SELECT_EMAIL'] = 'Përzgjidhni një adresë e-Mail';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban një ose më shumë përdoruesit të veçanta';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Ju mund të ndalimit të përdoruesit të shumta në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
-$lang['BAN_IP'] = 'Ban një ose më shumë adresat IP';
-$lang['IP_HOSTNAME'] = 'Adresat IP';
-$lang['BAN_IP_EXPLAIN'] = 'Për të specifikojë të ndryshme adresat IP të veçantë ato me presje.';
-
-$lang['BAN_EMAIL'] = 'Ban një ose më shumë adresat e-mail';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Për të specifikuar më shumë se një adresë e-mail, të ndarë ato me presje. Për të përcaktuar një wildcard emrin, përdor * si *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Okb-ban një më specifike përdoruesit';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Ju mund të unban përdoruesit të shumta në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
-$lang['UNBAN_IP'] = 'Okb-ban një ose më shumë adresat IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Ju mund të unban të shumta të adresave IP në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
-$lang['UNBAN_EMAIL'] = 'Okb-ban një ose më shumë adresat e-mail';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Ju mund të unban të shumta adresat e-mail në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
-
 $lang['NO_BANNED_USERS'] = 'Asnjë i ndaluar përdoruesve';
-$lang['NO_BANNED_IP'] = 'Asnjë i ndaluar adresat IP';
-$lang['NO_BANNED_EMAIL'] = 'Asnjë i ndaluar adresat e-mail';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'E banlist ka qenë i përditësuar me sukses';
 $lang['CLICK_RETURN_BANADMIN'] = 'Kliko %sHere%s të kthehen për Ndalimin e Kontrollit të';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forumi Administratës';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Nga ky panel ju mund të shtoni, fshini, edit, ri-qëllim dhe ri-sinkronizoni kategoritë dhe forumet e';
 $lang['EDIT_FORUM'] = 'Edit forumi';
 $lang['CREATE_FORUM'] = 'Krijuar new forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Të krijojë kategori të re';
 $lang['REMOVE'] = 'Hiq';
 $lang['UPDATE_ORDER'] = 'Update Mënyrë Që';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Nëse kjo përcaktuar përmasat e një Imazh
 $lang['ASSIGNED_GROUP'] = 'Të Caktuar E Grupit';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Të Krijuar Tablo';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Gjithmonë të krijuar një Tablo. Ky funksion dominon pothuajse të gjitha Cilësimet në kuadër të kësaj Kategorie të Veçantë, përveç Maksimum Imazhin Dimensione. Me këtë Funksion të një Miniaturë do të shfaqet brenda post, Përdoruesi mund të klikoni për të hapur Imazhin e vërtetë.<br />Please vini re se kjo veçori kërkon Imagick të jetë i instaluar, në qoftë se ajo nuk është instaluar ose nëse Safe-Mode është i aktivizuar GD-Zgjerimi i PHP do të përdoren. Nëse Imazhit-Lloji nuk është i mbështetur nga PHP, këtë Funksion do të jetë të mos përdoret.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimale Miniaturë Si Kartela';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Nëse një Imazh është më e vogël se kjo e përcaktuar si kartela, nuk Miniaturë do të krijohen, për shkak se ajo është mjaft i vogël.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programi (I Plotë Rrugë)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Të hyjë në Rrugën e kthyer programin e imagick, normalisht /usr/bin/të kthyer (në windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Kërkim Imagick';
-
-$lang['USE_GD2'] = 'Bëni përdorimin e GD2 Zgjatje';
-$lang['USE_GD2_EXPLAIN'] = 'PHP është në gjendje të jetë e përpiluar me GD1 ose GD2 Këshillëdhënëse për manipulimin e imazhit. Të saktë të krijojë Thumbnails pa imagemagick Shtojcën Mod përdor dy metoda të ndryshme, bazuar në zgjedhjen tuaj këtu. Nëse tuaj të miniaturave janë në një cilësi të keqe ose të dehur, do të përpiqen për ta ndryshoni këtë cilësim.';
-$lang['ATTACHMENT_VERSION'] = 'Shtojcë Mod Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Menaxhuar Ndaluar Zgjerime';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Ju keni hyrë në disa vlera të gabuara. Ju lutem kontr
 $lang['PROCESSING'] = 'Përpunimi...';
 $lang['FINISHED'] = 'Përfundoi';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Tema është lëvizur nga forumi [b]%s[/b] të forumit [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Temë ka qenë e ndarë. Temë të re - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Temë ka qenë e ndarë nga [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Ju lutemi plotësoni formularin e lirimit';
 $lang['NEW_RELEASE'] = 'Lirimin e re';
 $lang['NEXT'] = 'Vazhdo';
 $lang['OTHER'] = 'Të tjera';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Ju duhet të plotësoni fushën <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Ju duhet të zgjidhni <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Kërkimi për përdoruesit me një Faqe
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Kërkimi për përdoruesit me një Vend përputhen %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Kërkimi për përdoruesit me Interesat e tyre në terren përputhen %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Kërkimi për përdoruesit me Profesionin e tyre në terren përputhen %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Kërkimi për përdoruesit të cilët kanë vizituar të fundit %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Kërkimi për përdoruesit të cilët kanë vizituar pas fundit %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Kërkimi për përdoruesit të cilët kanë vendosur %s si gjuhën e tyre';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Kërkimi për përdoruesit të cilët kanë vendosur UTC %s si brezin e tyre';
 $lang['SEARCH_FOR_STYLE'] = 'Kërkimi për përdoruesit të cilët kanë vendosur %s si stili i tyre';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Forumet\' harta';
 $lang['ATOM_FEED'] = 'Feed';
 $lang['ATOM_ERROR'] = 'Gabim gjeneruar feed';
 $lang['ATOM_SUBSCRIBE'] = 'Të regjistroheni për të ushqyer';
-$lang['ATOM_NO_MODE'] = 'Nuk e specifikon një mënyrë për të ushqyer';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Në këtë forum nuk ka një ushqim (jo të vazhdueshme tema)';
 $lang['ATOM_NO_USER'] = 'Ky përdorues nuk ka një ushqim (jo të vazhdueshme tema)';
 $lang['ATOM_UPDATED'] = 'Përditësim';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'Në këtë faqe, ju mund të specifikoni tekstin e rre
 $lang['TR_STATS'] = [
     0 => 'joaktiv përdoruesit në 30 ditë',
     1 => 'joaktiv përdoruesit për 90 ditë',
-    2 => 'me madhësi të mesme shpërndarjet në tracker (për shumë megabajt)',
+    2 => 'medium size distributions on the tracker',
     3 => 'si shumë totale duart në tracker',
     4 => 'sa jetojnë duart (ekziston të paktën 1 led)',
     5 => 'si shumë duart se ku shorti më shumë se 5 fara',

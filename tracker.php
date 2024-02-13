@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -43,7 +43,7 @@ $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $set_default = isset($_GET['def']);
 $user_id = $userdata['user_id'];
 $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
-$search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
+$search_id = (isset($_GET['search_id']) && is_string($_GET['search_id'])) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
 $status = $_POST['status'] ?? false;
@@ -62,6 +62,7 @@ $users_tbl = BB_USERS . ' u';
 $tracker_tbl = BB_BT_TRACKER . ' tr';
 $tr_snap_tbl = BB_BT_TRACKER_SNAP . ' sn';
 $dl_stat_tbl = BB_BT_DLSTATUS . ' dl';
+$attach_desc_tbl = BB_ATTACHMENTS_DESC . ' ad';
 
 //
 // Search options
@@ -297,6 +298,15 @@ if (isset($_GET[$user_releases_key])) {
     }
 }
 
+// Random release
+if (isset($_GET['random_release'])) {
+    if ($random_release = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE tor_status NOT IN(" . implode(', ', array_keys($bb_cfg['tor_frozen'])) . ") ORDER BY RAND() LIMIT 1")) {
+        redirect(TOPIC_URL . $random_release['topic_id']);
+    } else {
+        bb_die($lang['NO_MATCH']);
+    }
+}
+
 // Restore torrents list and search settings if we have valid $search_id
 $tor_list_ary = [];
 $tor_list_sql = '';
@@ -307,7 +317,7 @@ if ($search_id) {
 		FROM " . BB_SEARCH . "
 		WHERE session_id = '$session_id'
 			AND search_type = " . SEARCH_TYPE_TRACKER . "
-			AND search_id = '$search_id'
+			AND search_id = '" . DB()->escape($search_id) . "'
 		LIMIT 1
 	");
 
@@ -645,7 +655,7 @@ if ($allowed_forums) {
         $select = "
 			SELECT
 				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
-				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2
+				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2, ad.download_count
 		";
         $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
         $select .= (!$hide_forum) ? ", tor.forum_id" : '';
@@ -668,6 +678,7 @@ if ($allowed_forums) {
 			LEFT JOIN $dl_stat_tbl ON(dl.topic_id = tor.topic_id AND dl.user_id = $user_id)
 		" : '';
         $from .= "LEFT JOIN $tr_snap_tbl ON(sn.topic_id = tor.topic_id)";
+        $from .= "LEFT JOIN $attach_desc_tbl ON(ad.attach_id = tor.attach_id)";
 
         // WHERE
         $where = "
@@ -702,10 +713,10 @@ if ($allowed_forums) {
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), wbr($tor['topic_title']));
+            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), html_ent_decode($tor['topic_title']));
             $compl = $tor['complete_count'];
-            $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
-            $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
+            $dl_sp = $dl ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
+            $ul_sp = $ul ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
 
             $dl_class = isset($tor['dl_status']) ? $dl_link_css[$tor['dl_status']] : 'genmed';
             $row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
@@ -717,15 +728,15 @@ if ($allowed_forums) {
 
             $template->assign_block_vars('tor', array(
                 'CAT_ID' => $cat_id,
-                'CAT_TITLE' => ($cat_id) ? $cat_title_html[$cat_id] : '',
+                'CAT_TITLE' => $cat_id ? $cat_title_html[$cat_id] : '',
                 'FORUM_ID' => $forum_id,
-                'FORUM_NAME' => ($forum_id) ? $forum_name_html[$forum_id] : '',
+                'FORUM_NAME' => $forum_id ? $forum_name_html[$forum_id] : '',
                 'TOPIC_ID' => $tor['topic_id'],
-                'TOPIC_TITLE' => wbr($tor['topic_title']),
+                'TOPIC_TITLE' => $tor['topic_title'],
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . delta_time($tor['topic_time']),
                 'POST_ID' => $tor['post_id'],
                 'POSTER_ID' => $poster_id,
-                'USERNAME' => ($hide_author) ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
+                'USERNAME' => $hide_author ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 
                 'ROW_CLASS' => $row_class,
                 'ROW_NUM' => $row_num,
@@ -737,18 +748,19 @@ if ($allowed_forums) {
                 'MAGNET' => $tor_magnet,
                 'TOR_TYPE' => is_gold($tor['tor_type']),
 
-                'TOR_FROZEN' => (!IS_AM) ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
+                'TOR_FROZEN' => !IS_AM ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
                 'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],
                 'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 
                 'TOR_SIZE_RAW' => $size,
-                'TOR_SIZE' => humn_size($size),
+                'TOR_SIZE' => humn_size($size, 1),
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
                 'SEEDS' => $seeds ?: 0,
-                'SEEDS_TITLE' => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
+                'SEEDS_TITLE' => $seeds ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
                 'LEECHS' => $leechs ?: 0,
-                'COMPLETED' => $compl ?: 0,
+                'COMPLETED' => declension($compl ?: 0, 'times'),
+                'DOWNLOADED' => $tor['download_count'],
                 'REPLIES' => $tor['topic_replies'],
                 'VIEWS' => $tor['topic_views'],
                 'ADDED_RAW' => $tor['reg_time'],

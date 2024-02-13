@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -14,29 +14,10 @@ if (!defined('BB_ROOT')) {
 // System
 define('APP_NAME', 'TorrentPier');
 
-define('CHECK_REQIREMENTS', [
-    'status' => true,
-    'php_min_version' => '8.1.0',
-    'ext_list' => [
-        'json',
-        // 'gd', (optional)
-        // 'zlib', (optional)
-        'curl',
-        // 'tidy', (optional)
-        'mysqli',
-        'bcmath',
-        'mbstring',
-        'intl',
-        'xml',
-        'xmlwriter',
-    ],
-]);
-
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
-define('AJAX_HTML_DIR', BB_PATH . '/internal_data/ajax_html');
 define('CACHE_DIR', BB_PATH . '/internal_data/cache');
 define('LOG_DIR', BB_PATH . '/internal_data/log');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
@@ -98,7 +79,7 @@ define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 
 // Gzip
 define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
-define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false);
+define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip'));
 
 // Torrents (reserved: -1)
 define('TOR_NOT_APPROVED', 0); // не проверено

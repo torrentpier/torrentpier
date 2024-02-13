@@ -31,7 +31,7 @@ ajax.callback.callseed = function (data) {
 <!-- BEGIN dl_users -->
 	<!-- BEGIN users_row -->
 	<tr>
-		<td width="5%" class="nowrap"><span title=" {dl_users.users_row.DL_COUNT} "><b>{dl_users.users_row.DL_OPTION_NAME}</b></span></td>
+		<td width="5%" class="nowrap"><span title="{dl_users.users_row.DL_OPTION_NAME}: {dl_users.users_row.DL_COUNT}"><b>{dl_users.users_row.DL_OPTION_NAME}</b></span></td>
 		<td width="95%" class="tLeft med pad_4"><div style="{dl_users.users_row.DL_USERS_DIV_STYLE}"><b>{dl_users.users_row.DL_OPTION_USERS}</b></div></td>
 	</tr>
 	<!-- END users_row -->
@@ -62,11 +62,13 @@ ajax.callback.callseed = function (data) {
 </tr>
 <!-- ENDIF / SHOW_DL_LIST_TOR_INFO -->
 
+<!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->
 <!-- BEGIN dl_list_none -->
 <tr>
-	<td colspan="2" class="pad_6"><!-- IF SHOW_DL_LIST && SHOW_TOR_ACT -->{L_SHOW_DL_LIST}: {L_NONE}<!-- ENDIF --></td>
+    <td colspan="2" class="pad_6">{L_SHOW_DL_LIST}: {L_NONE}</td>
 </tr>
 <!-- END dl_list_none -->
+<!-- ENDIF -->
 
 <!-- IF SHOW_TOR_ACT -->
 	<!-- IF S_MODE_COUNT -->
@@ -242,9 +244,9 @@ ajax.callback.callseed = function (data) {
 	<!-- ENDIF / S_MODE_FULL -->
 <!-- ENDIF / SHOW_TOR_ACT -->
 
+<!-- IF LOGGED_IN -->
 <tr>
 	<td colspan="2" class="row3 pad_4">
-	&nbsp;
 	<!-- IF DL_BUTTONS -->
 	<form method="POST" action="{S_DL_ACTION}">{DL_HIDDEN_FIELDS}
 		<!-- IF DL_BUT_WILL --><input type="submit" name="dl_set_will" value="{L_DLWILL}" class="liteoption" />&nbsp;<!-- ENDIF -->
@@ -254,9 +256,9 @@ ajax.callback.callseed = function (data) {
 	</form>
 	<!-- ENDIF -->
     <!-- IF CALL_SEED --><input onclick="ajax.callseed({TOPIC_ID}); return false;" type="button" value="{L_CALLSEED}" class="liteoption"/>&nbsp;<!-- ENDIF -->
-	&nbsp;
 	</td>
 </tr>
+<!-- ENDIF -->
 
 </table>
 <div class="spacer_6"></div>

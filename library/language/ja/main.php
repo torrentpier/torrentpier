@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'ページ';
 $lang['GOTO_PAGE'] = 'くページ';
 $lang['GOTO_SHORT'] = 'ページ';
 $lang['JOINED'] = '入';
-$lang['LONGEVITY'] = '長寿';
+$lang['LONGEVITY'] = '登録';
 $lang['IP_ADDRESS'] = 'IPアドレス';
 $lang['POSTED_AFTER'] = '後';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = '最もユーザーもオンラインでした<b>
 $lang['ONLINE_ADMIN'] = '管理者';
 $lang['ONLINE_MOD'] = 'モデレーター';
 $lang['ONLINE_GROUP_MEMBER'] = 'グループの一員';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = '現在の時間は<span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'アバターの制御パネル';
 
 $lang['WEBSITE'] = 'Webサイト';
 $lang['LOCATION'] = '所在地';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = '連絡先';
 $lang['EMAIL_ADDRESS'] = 'Eメールアドレス';
 $lang['SEND_PRIVATE_MESSAGE'] = '送信メッセージ';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = '見つユーザー課題'; // Find all topics by 
 $lang['NO_USER_ID_SPECIFIED'] = '申し訳ございません、あなたのユーザーは存在しない。';
 $lang['WRONG_PROFILE'] = '変更できませんのプロファイルになります。';
 
-$lang['ONLY_ONE_AVATAR'] = 'みタイプのアバターに指定できる';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'ファイルのURLやりくりは夫婦で別にされていま含まないデータ';
 $lang['NO_CONNECTION_URL'] = '接続できませんでしたURLへのやりくりは夫婦で別にされていま';
 $lang['INCOMPLETE_URL'] = 'URLを入力された不完全';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Webサイト';
 $lang['ASC'] = '昇順';
 $lang['DESC'] = '降順';
 $lang['ORDER'] = '注文';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'ユーザーグループ';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = '追加';
 $lang['BT_REG_ON_TRACKER'] = '登録トラッカー';
 $lang['BT_REG_FAIL'] = 'な登録激流にトラッカー';
 $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = '状況';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'ステータスステータスを選択し';
 $lang['TOR_STATUS_NOT_SELECT'] = 'い選択されていない状態にします。';
 $lang['TOR_STATUS_SELECT_ALL'] = 'すべてのステータス';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'チェック',
     TOR_CLOSED => '閉鎖',
     TOR_APPROVED => '確認',
     TOR_NEED_EDIT => '形式化されていないので',
     TOR_NO_DESC => '形式化されていない',
-    TOR_DUP => '繰り返し',
-    TOR_CLOSED_CPHOLD => '閉右',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => '吸収',
     TOR_DOUBTFUL => '貸倒',
-    TOR_CHECKING => '確認',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => '仮設',
     TOR_PREMOD => '前節度',
-    TOR_REPLENISH => '補給',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'そのような状況が存在しない!';
 $lang['TORRENT_FAILED'] = '分布は見つかりませんでしたよ！';
 $lang['TOR_STATUS_DUB'] = '配布と同じ状況';
-$lang['TOR_DONT_CHANGE'] = '変更はできません!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = '分布の状況:';
 $lang['TOR_STATUS_CHANGED'] = 'ステータスが変わった: ';
 $lang['TOR_BACK'] = ' 裏';
@@ -1235,7 +1253,7 @@ $lang['ALREADY_REG'] = '激流に登録されてい';
 $lang['NOT_TORRENT'] = 'このファイルがない急流';
 $lang['ONLY_1_TOR_PER_POST'] = '登録することができ唯一の激流に日本人の配偶者やその家族';
 $lang['ONLY_1_TOR_PER_TOPIC'] = '登録することができ唯一の激流が一つの話題';
-$lang['VIEWING_USER_BT_PROFILE'] = '閲覧激流-プロフィール::%s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = '活納入';
 
 $lang['TD_TRAF'] = '今日の';
@@ -1266,6 +1284,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">Youい賞与引当金可能で�
 $lang['BONUS_RETURN'] = 'の種ボーナス交換';
 
 $lang['TRACKER'] = 'トラッカー';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = '開放題';
 $lang['OPEN_IN_SAME_WINDOW'] = '同じウィンドウで開く';
 $lang['SHOW_TIME_TOPICS'] = 'ショーの創出論';
@@ -1299,10 +1318,6 @@ $lang['COOKIES_REQUIRED'] = 'クッキーにしておく必要があります!';
 $lang['SESSION_EXPIRED'] = 'セッション終了しました';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'ないユーザ名を始め';
-$lang['OTHERS'] = 'その他';
-$lang['ALL'] = 'すべての';
-
 $lang['POST_LINK'] = 'ポストのリンク';
 $lang['GOTO_QUOTED_POST'] = 'の引用ポスト';
 $lang['LAST_VISITED'] = '最後の訪問';
@@ -1312,6 +1327,7 @@ $lang['NEVER'] = 'ない';
 //mpd
 $lang['DELETE_POSTS'] = '削除選択した投稿';
 $lang['DELETE_POSTS_SUCCESFULLY'] = '選択したい削除に成功したと';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = '発表';
@@ -1327,6 +1343,7 @@ $lang['UPDATE_POST_TIME'] = '更新後の時間';
 $lang['TOPIC_SPLIT_NEW'] = '新しい話題';
 $lang['TOPIC_SPLIT_OLD'] = '昔の話題';
 $lang['BOT_LEAVE_MSG_MOVED'] = '追加ボット-メッセージ移動';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '追加ボット-メッセージが分割<b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '追加ボット-メッセージが分割<b>new topic</b>';
 //qr
@@ -1352,6 +1369,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1521,6 +1539,8 @@ $lang['BOLD'] = '大胆な文:[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = 'テキストを斜体:[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下線文:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout文:[s]text[/s](Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '引用文:[quote]text[/quote](Ctrl+Q)';
@@ -1574,7 +1594,7 @@ $lang['DEL_LIST_INFO'] = '削除からクリックすると、一覧にアイコ
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = '見題';
-$lang['NO_WATCHED_TOPICS'] = 'いを見せtopics';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'ホームページに戻る';
@@ -1732,35 +1752,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'をクリックし%sHere%sに戻すフォー�
 
 // Banning
 $lang['BAN_CONTROL'] = '禁止制御';
-$lang['BAN_EXPLAIN'] = 'こちらを制御することができ禁止ユーザーです。 できする"という目標の達成に向けての禁止は、特定のユーザーまたは個人の範囲の全てのIPアドレスを使います。 これらの方法をユーザーからのインデックスページのボードです。 を防止するユーザーからの登録はどのような由来があるのですかユーザー名を指定することもできますメールアドレスを禁止します。 ごとの禁止、メールアドレスだけを妨げない限りにおいてユーザーできるようになってしまうことへのログインまたはポストをボードです。 のものを使用できる最初の二つの方法でこれを達成する。';
-$lang['BAN_EXPLAIN_WARN'] = 'ご入力IPアドレスの結果すべてのアドレスの開始と終了の間の追加にbanlistます。 うにすることを最小限にとどめるためのアドレス数のデータベースの導入によるワイルドカードを自動的に適切な場合です。 なので、しばらく日本に再入力が必要となる範囲になるように心がけていますので小型による状態で特定のメールアドレスです。';
-
-$lang['SELECT_IP'] = '選択IPアドレス';
-$lang['SELECT_EMAIL'] = 'を選択メールアドレス';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = '禁止一又は二以上の特定のユーザー';
 $lang['BAN_USERNAME_EXPLAIN'] = 'でき禁止複数のユーザーの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
-$lang['BAN_IP'] = '禁止はIPアドレス';
-$lang['IP_HOSTNAME'] = 'IPアドレス';
-$lang['BAN_IP_EXPLAIN'] = '指定数の異なるIPアドレスとカンマ区切りで入力します。';
-
-$lang['BAN_EMAIL'] = '禁止を一つ以上のメールアドレス';
-$lang['BAN_EMAIL_EXPLAIN'] = '一つ以上指定するにはメールアドレスとカンマ区切りで入力します。 を指定するにはワイルドカードのユーザー名を使用**@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = '国連-潘り特定のユーザー';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'でき誤解を複数のユーザーの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
-$lang['UNBAN_IP'] = '国連番が一つ以上のIPアドレス';
-$lang['UNBAN_IP_EXPLAIN'] = 'でき誤解を複数のIPアドレスの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
-$lang['UNBAN_EMAIL'] = '国連番が一つ以上のメールアドレス';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'でき誤解を複数のメールアドレスの利用の適切な組合せマウスやキーボードのためのコンピュータのブラウザ';
-
 $lang['NO_BANNED_USERS'] = '禁ユーザ名';
-$lang['NO_BANNED_IP'] = '禁IPアドレス';
-$lang['NO_BANNED_EMAIL'] = '禁メールアドレス';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'のbanlistを更新しました';
 $lang['CLICK_RETURN_BANADMIN'] = 'をクリックし%sHere%s返還を禁止制御';
 
@@ -1821,6 +1818,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'フォーラム管理';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'このパネルの追加、削除、編集、再び再synchroniseカテゴリやフォーラム';
 $lang['EDIT_FORUM'] = '編集フォーラム';
 $lang['CREATE_FORUM'] = '新規作成フォーラム';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = '新しいカテゴリ';
 $lang['REMOVE'] = '削除';
 $lang['UPDATE_ORDER'] = '更新順';
@@ -2175,16 +2173,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'この定義次元画像によっては、�
 $lang['ASSIGNED_GROUP'] = 'されているグループ';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'サムネイルの作成';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = '常にサムネイルも作成します。 この機能はオーバーライドほぼすべての設定この特別なカテゴリーを除き、最大画像寸法です。 このサムネイルが表示され、ユーザーをクリックで開きのイメージです。<br />Pleaseこの機能を必要とImagick設置する場合の置していない場合又は安全-モードが有効になっていると、GD-拡張のPHPが使用されます。 の場合は画像タイプによってサポートされていないPHP、この機能は使用していません。';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = '最小限のサムネイルFilesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = '場合、画像はより小さいここを定義Filesize、サムネイルが作成されで十分小さいです。';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagickプログラム(完全なパス)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'へのパスを入力変換プログラムのimagick、通常は/usr/bin/convert(windowsの場合:c:/imagemagick/convert.exeます。';
-$lang['IMAGE_SEARCH_IMAGICK'] = '検索Imagick';
-
-$lang['USE_GD2'] = '利用GD2延長';
-$lang['USE_GD2_EXPLAIN'] = 'PHPで作成し、GD1はGD2の拡張イメージを操作します。 を正しく作成するにはサムネイルなしにimagemagickの添付Mod用途の異なる二つの方法からお選びいた。 場合において、サムネイルが悪い質奮いうのは、この設定を変更します。';
-$lang['ATTACHMENT_VERSION'] = '添付Mod版%s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '管理禁断の拡張';
@@ -2534,7 +2524,7 @@ $lang['WRONG_INPUT'] = '現在の入力の一部間違った値です。 を確�
 $lang['PROCESSING'] = '処---';
 $lang['FINISHED'] = '完成';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = '課題として、フォーラム[b]%s[/b]るフォーラム[b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = '話題にして分割します。 新しいトピック[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '課題分割されたから[b]%s[/b][br][br]%s';
 
@@ -2590,6 +2580,8 @@ $lang['RELEASE_WELCOME'] = 'リリースフォームに入力してください'
 $lang['NEW_RELEASE'] = '新しいリリース';
 $lang['NEXT'] = '続き';
 $lang['OTHER'] = 'その他';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '必分野に<b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'を選択してください<b>%s</b>';
@@ -2646,8 +2638,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = '検索ユーザーのサイトマッチ
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = '検索ユーザーのロケ地マッチング%s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = '検索ユーザーに自分のフェッショナル版の処理スピ%s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = '検索ユーザの職業分野のマッチング%s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = '検索ユーザにとって訪問した最後の%s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = '検索ユーザにとって訪問した後%s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = '検索ユーザを設定してい%sとしての言語';
 $lang['SEARCH_FOR_TIMEZONE'] = '検索ユーザを設定していUTC%sとしてタイムゾーン';
 $lang['SEARCH_FOR_STYLE'] = '検索ユーザを設定してい%sとしてそのスタイル';
@@ -2750,7 +2742,7 @@ $lang['FORUM_MAP'] = 'フォーラム"地図';
 $lang['ATOM_FEED'] = '飼料';
 $lang['ATOM_ERROR'] = 'エラー発生飼料';
 $lang['ATOM_SUBSCRIBE'] = '購読の飼料';
-$lang['ATOM_NO_MODE'] = '指定がないモードの飼料';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'このフォーラムがない飼料(継続的な課題)';
 $lang['ATOM_NO_USER'] = 'このユーザーがない飼料(継続的な課題)';
 $lang['ATOM_UPDATED'] = '更新日時';
@@ -2765,7 +2757,7 @@ $lang['TERMS_EXPLAIN'] = 'このページでご指定いただくことができ
 $lang['TR_STATS'] = [
     0 => '無効のユーザは30日間',
     1 => '不活性ユーザ90日間',
-    2 => '中サイズ分布は、トラッカー(多くのメガバイト)',
+    2 => 'medium size distributions on the tracker',
     3 => 'どのように多くの計手のトラッカー',
     4 => 'どのように多くの生き手が少なくとも1led)',
     5 => 'どのくらい多くの人の手によることを播種以上の5種',

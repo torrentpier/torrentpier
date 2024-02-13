@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -312,13 +312,15 @@ class Torrent
         $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
 
         if (!is_file($filename)) {
-            self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT']);
+            self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
         }
 
         $file_contents = file_get_contents($filename);
 
-        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
-            self::torrent_error_exit($lang['TORFILE_INVALID']);
+        try {
+            $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
+        } catch (\Exception $e) {
+            self::torrent_error_exit(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
         if ($bb_cfg['bt_disable_dht']) {
@@ -349,15 +351,21 @@ class Torrent
         }
 
         // Check if torrent contains info_hash v2 or v1
-        if (($info['meta version'] ?? null) == 2) {
-            if (is_array($info['file tree'] ?? null)) {
+        if (isset($info['meta version'], $info['file tree'])) {
+            if ($info['meta version'] === 2 && is_array($info['file tree'])) {
                 $bt_v2 = true;
             }
         }
+
         if (isset($info['pieces'])) {
             $bt_v1 = true;
         }
-        if ($bb_cfg['tracker']['disabled_v2_torrents'] && isset($bt_v2) && !isset($bt_v1)) {
+
+        if ($bb_cfg['tracker']['disabled_v1_torrents'] && isset($bt_v1) && !isset($bt_v2)) {
+            self::torrent_error_exit($lang['BT_V1_ONLY_DISALLOWED']);
+        }
+
+        if ($bb_cfg['tracker']['disabled_v2_torrents'] && !isset($bt_v1) && isset($bt_v2)) {
             self::torrent_error_exit($lang['BT_V2_ONLY_DISALLOWED']);
         }
 
@@ -390,22 +398,32 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        } elseif (isset($bt_v1, $info['files']) && \is_array($info['files'])) {
+        } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
-                if (($f['attr'] ?? null) !== 'p') {
-                    $totallen += (float)$f['length'];
+                if (!isset($f['attr']) || $f['attr'] !== 'p') {
+                    if (isset($f['length']) && is_numeric($f['length'])) {
+                        $totallen += $f['length'];
+                    } else {
+                        self::torrent_error_exit($lang['TORFILE_INVALID']);
+                    }
                 }
             }
+            $totallen = (float)$totallen;
         } elseif (isset($bt_v2)) {
             $fileTreeSize = function (array $array, string $name = '') use (&$fileTreeSize) {
-                $size = 0;
+                global $lang;
 
+                $size = 0;
                 foreach ($array as $key => $value) {
                     if (!isset($value[''])) {
                         $size += $fileTreeSize($value);
                     } else {
-                        $size += (int)$value['']['length'];
+                        if (isset($value['']['length']) && is_numeric($value['']['length'])) {
+                            $size += $value['']['length'];
+                        } else {
+                            self::torrent_error_exit($lang['TORFILE_INVALID']);
+                        }
                     }
                 }
 
@@ -456,8 +474,7 @@ class Torrent
 
         if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
             set_die_append_msg($forum_id, $topic_id);
-            $mess = sprintf($lang['BT_REGISTERED'], DL_URL . $attach_id);
-            bb_die($mess);
+            bb_die(sprintf($lang['BT_REGISTERED'], DL_URL . $attach_id));
         }
 
         return true;
@@ -541,19 +558,25 @@ class Torrent
             }
         }
 
-        // Announce URL
-        $ann_url = $bb_cfg['bt_announce_url'];
-
+        // Torrent decoding
         $file_contents = file_get_contents($filename);
-        if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
-            bb_die($lang['TORFILE_INVALID']);
+        try {
+            $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
+        } catch (\Exception $e) {
+            bb_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
-        $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
+        // Get tracker announcer
+        $announce_url = $bb_cfg['ocelot']['enabled'] ? $bb_cfg['ocelot']['url'] . "$passkey_val/announce" : $bb_cfg['bt_announce_url'] . "?$passkey_key=$passkey_val";
 
         // Replace original announce url with tracker default
         if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
-            $tor['announce'] = $announce;
+            $tor['announce'] = $announce_url;
+        }
+
+        // Creating / cleaning announce-list
+        if (!isset($tor['announce-list']) || !is_array($tor['announce-list']) || $bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
+            $tor['announce-list'] = [];
         }
 
         // Get additional announce urls
@@ -565,22 +588,41 @@ class Torrent
         }
         unset($additional_announce_urls);
 
-        // Delete all additional urls
-        if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
-            unset($tor['announce-list']);
-        } elseif (isset($tor['announce-list'])) {
-            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]], $announce_urls_add);
+        // Adding additional announce urls (If present)
+        if (!empty($announce_urls_add)) {
+            $tor['announce-list'] = array_merge($tor['announce-list'], $announce_urls_add);
         }
 
         // Add retracker
-        if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
+        if (!empty($bb_cfg['tracker']['retracker_host']) && $bb_cfg['tracker']['retracker']) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
-                if (!isset($tor['announce-list'])) {
-                    $tor['announce-list'] = [[$announce], $announce_urls_add, [$bb_cfg['tracker']['retracker_host']]];
-                } else {
-                    $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
+                $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
+            }
+        }
+
+        // Adding tracker announcer to announce-list
+        if (!empty($tor['announce-list'])) {
+            if ($bb_cfg['bt_replace_ann_url']) {
+                // Adding tracker announcer as main announcer (At start)
+                array_unshift($tor['announce-list'], [$announce_url]);
+            } else {
+                // Adding torrent announcer (At start)
+                array_unshift($tor['announce-list'], [$tor['announce']]);
+
+                // Adding tracker announcer (At end)
+                if ($tor['announce'] != $announce_url) {
+                    $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce_url]]);
                 }
             }
+        }
+
+        // Preparing announce-list
+        if (empty($tor['announce-list'])) {
+            // Remove announce-list if empty
+            unset($tor['announce-list']);
+        } else {
+            // Normalizing announce-list
+            $tor['announce-list'] = array_values(array_unique($tor['announce-list'], SORT_REGULAR));
         }
 
         // Add publisher & topic url
@@ -599,7 +641,7 @@ class Torrent
         // Send torrent
         $output = \Arokettu\Bencode\Bencode::encode($tor);
 
-        $dl_fname = wbr($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.torrent';
+        $dl_fname = html_entity_decode($topic_title, ENT_QUOTES, 'UTF-8') . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
@@ -653,7 +695,7 @@ class Torrent
             }
         } else {
             // Update exists passkey
-            DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
+            DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
             if (DB()->affected_rows() == 1) {
                 // Ocelot
                 if ($bb_cfg['ocelot']['enabled']) {
@@ -801,7 +843,7 @@ class Torrent
      * @param int|string $user_id
      * @return bool|string
      */
-    public static function getPasskey($user_id)
+    public static function getPasskey(int|string $user_id): bool|string
     {
         if ($passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1")) {
             return $passkey['auth_key'];

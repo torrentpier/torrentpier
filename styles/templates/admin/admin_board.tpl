@@ -42,13 +42,13 @@
 <tr>
 	<td><h4>{L_AUTOLOGIN_TIME}</h4><h6>{L_AUTOLOGIN_TIME_EXPLAIN}</h6></td>
 	<td>
-		<input class="post" type="number" size="3" maxlength="4" name="max_autologin_time" value="{AUTOLOGIN_TIME}" /> {L_DAYS}
+		<input class="post" type="text" size="3" maxlength="4" name="max_autologin_time" value="{AUTOLOGIN_TIME}" /> {L_DAYS}
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_FLOOD_INTERVAL}</h4><h6>{L_FLOOD_INTERVAL_EXPLAIN}</h6></td>
 	<td>
-		<input class="post" type="number" size="3" maxlength="4" name="flood_interval" value="{FLOOD_INTERVAL}" /> {L_SEC}
+		<input class="post" type="text" size="3" maxlength="4" name="flood_interval" value="{FLOOD_INTERVAL}" /> {L_SEC}
 	</td>
 </tr>
 <!--
@@ -68,18 +68,18 @@
 <tr>
 	<td><h4>{L_TOPICS_PER_PAGE}</h4></td>
 	<td>
-		<input class="post" type="number" name="topics_per_page" size="5" maxlength="4" value="{TOPICS_PER_PAGE}" />
+		<input class="post" type="text" name="topics_per_page" size="5" maxlength="4" value="{TOPICS_PER_PAGE}" />
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_POSTS_PER_PAGE}</h4></td>
 	<td>
-		<input class="post" type="number" name="posts_per_page" size="5" maxlength="4" value="{POSTS_PER_PAGE}" />
+		<input class="post" type="text" name="posts_per_page" size="5" maxlength="4" value="{POSTS_PER_PAGE}" />
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_HOT_THRESHOLD}</h4></td>
-	<td><input class="post" type="number" name="hot_threshold" size="5" maxlength="4" value="{HOT_TOPIC}" /></td>
+	<td><input class="post" type="text" name="hot_threshold" size="5" maxlength="4" value="{HOT_TOPIC}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_DEFAULT_LANGUAGE}</h4></td>
@@ -105,7 +105,7 @@
 </tr>
 <tr>
 	<td><h4>{L_MAX_POLL_OPTIONS}</h4></td>
-	<td><input class="post" type="number" name="max_poll_options" size="4" maxlength="4" value="{MAX_POLL_OPTIONS}" /></td>
+	<td><input class="post" type="text" name="max_poll_options" size="4" maxlength="4" value="{MAX_POLL_OPTIONS}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_BBCODE}</h4></td>
@@ -134,7 +134,7 @@
 </tr>
 <tr>
 	<td><h4>{L_MAX_SIG_LENGTH}</h4><h6>{L_MAX_SIG_LENGTH_EXPLAIN}</h6></td>
-	<td><input class="post" type="number" size="5" maxlength="4" name="max_sig_chars" value="{SIG_SIZE}" /></td>
+	<td><input class="post" type="text" size="5" maxlength="4" name="max_sig_chars" value="{SIG_SIZE}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_NAME_CHANGE}</h4></td>
@@ -237,15 +237,15 @@
 </tr>
 <tr>
 	<td><h4>{L_MAX_NEWS_TITLE}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="max_news_title" value="{MAX_NEWS_TITLE}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="max_news_title" value="{MAX_NEWS_TITLE}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_NEWS_COUNT}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="latest_news_count" value="{LATEST_NEWS_COUNT}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="latest_news_count" value="{LATEST_NEWS_COUNT}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_NEWS_FORUM_ID}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="latest_news_forum_id" value="{LATEST_NEWS_FORUM_ID}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="latest_news_forum_id" value="{LATEST_NEWS_FORUM_ID}" /></td>
 </tr>
 
 <tr class="row3 med">
@@ -260,15 +260,15 @@
 </tr>
 <tr>
 	<td><h4>{L_MAX_NEWS_TITLE}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="max_net_title" value="{MAX_NET_TITLE}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="max_net_title" value="{MAX_NET_TITLE}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_NEWS_COUNT}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="network_news_count" value="{NETWORK_NEWS_COUNT}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="network_news_count" value="{NETWORK_NEWS_COUNT}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_NEWS_FORUM_ID}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="network_news_forum_id" value="{NETWORK_NEWS_FORUM_ID}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="network_news_forum_id" value="{NETWORK_NEWS_FORUM_ID}" /></td>
 </tr>
 
 <tr class="row3 med">
@@ -283,15 +283,15 @@
 </tr>
 <tr>
 	<td><h4>{L_BIRTHDAY_MAX_AGE}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="birthday_max_age" value="{BIRTHDAY_MAX_AGE}" />&nbsp;{L_YEARS}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_max_age" value="{BIRTHDAY_MAX_AGE}" />&nbsp;{L_YEARS}</td>
 </tr>
 <tr>
 	<td><h4>{L_BIRTHDAY_MIN_AGE}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="birthday_min_age" value="{BIRTHDAY_MIN_AGE}" />&nbsp;{L_YEARS}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_min_age" value="{BIRTHDAY_MIN_AGE}" />&nbsp;{L_YEARS}</td>
 </tr>
 <tr>
 	<td><h4>{L_BIRTHDAY_CHECK_DAY}</h4></td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="birthday_check_day" value="{BIRTHDAY_CHECK_DAY}" />&nbsp;{L_DAYS}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_check_day" value="{BIRTHDAY_CHECK_DAY}" />&nbsp;{L_DAYS}</td>
 </tr>
 
 <tr class="row3 med">
@@ -331,11 +331,11 @@
 <tr class="row3 med"><td colspan="2"></td></tr>
 <tr>
 	<td>{L_SEED_BONUS_TOR_SIZE}</td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="seed_bonus_tor_size" value="{SEED_BONUS_TOR_SIZE}" />&nbsp;{L_GB}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="seed_bonus_tor_size" value="{SEED_BONUS_TOR_SIZE}" />&nbsp;{L_GB}</td>
 </tr>
 <tr>
 	<td>{L_SEED_BONUS_USER_REGDATA}</td>
-	<td><input class="post" type="number" size="25" maxlength="100" name="seed_bonus_user_regdate" value="{SEED_BONUS_USER_REGDATE}" />&nbsp;{L_DAYS}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="seed_bonus_user_regdate" value="{SEED_BONUS_USER_REGDATE}" />&nbsp;{L_DAYS}</td>
 </tr>
 <tr class="row3 med">
 	<td class="bold tCenter" colspan="2">{L_SEED_BONUS_EXCHANGE}</td>

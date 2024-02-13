@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -46,6 +46,11 @@ $error = false;
 $add_forum = isset($_POST['add_forum']);
 $delete_forum = isset($_POST['del_forum']);
 $submit = isset($_POST['submit']);
+
+// Check for demo mode
+if (IN_DEMO_MODE && ($submit || $add_forum || $delete_forum)) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
 
 // Get Attachment Config
 $attach_config = [];
@@ -93,7 +98,7 @@ if ($submit && $mode == 'extensions') {
                     'group_id' => (int)$extensions['_' . $extension_row[$i]['ext_id']]['group_id']
                 );
 
-                $sql = 'UPDATE ' . BB_EXTENSIONS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
+                $sql = 'UPDATE ' . BB_EXTENSIONS . ' SET ' . DB()->build_array('UPDATE', $sql_ary) . '
 					WHERE ext_id = ' . (int)$extension_row[$i]['ext_id'];
 
                 if (!DB()->sql_query($sql)) {
@@ -159,7 +164,7 @@ if ($submit && $mode == 'extensions') {
                     'comment' => (string)$extension_explain
                 );
 
-                $sql = 'INSERT INTO ' . BB_EXTENSIONS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_EXTENSIONS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                 if (!DB()->sql_query($sql)) {
                     bb_die('Could not add extension');
@@ -260,7 +265,7 @@ if ($submit && $mode == 'groups') {
             'max_filesize' => (int)$filesize_list[$i]
         );
 
-        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
+        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . ' SET ' . DB()->build_array('UPDATE', $sql_ary) . '
 			WHERE group_id = ' . (int)$group_change_list[$i];
 
         if (!DB()->sql_query($sql)) {
@@ -340,7 +345,7 @@ if ($submit && $mode == 'groups') {
                 'forum_permissions' => ''
             );
 
-            $sql = 'INSERT INTO ' . BB_EXTENSION_GROUPS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+            $sql = 'INSERT INTO ' . BB_EXTENSION_GROUPS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not add extension group');
@@ -499,7 +504,7 @@ if ($add_forum && $e_mode == 'perm' && $group) {
 
         $auth_bitstream = auth_pack($auth_p);
 
-        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
+        $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . DB()->escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not update permissions #2');
@@ -536,7 +541,7 @@ if ($delete_forum && $e_mode == 'perm' && $group) {
 
     $auth_bitstream = (count($auth_p) > 0) ? auth_pack($auth_p) : '';
 
-    $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
+    $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . DB()->escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not update permissions #3');

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -43,7 +43,7 @@ DB()->add_shutdown_query("
 foreach ($cron_jobs as $job) {
     $job_script = CRON_JOB_DIR . basename($job['cron_script']);
 
-    if (file_exists($job_script)) {
+    if (is_file($job_script)) {
         $cron_start_time = utime();
         $cron_runtime_log = '';
         $cron_write_log = (CRON_LOG_ENABLED && (CRON_FORCE_LOG || $job['log_enabled'] >= 1));
@@ -54,7 +54,6 @@ foreach ($cron_jobs as $job) {
             $msg[] = 'start';
             $msg[] = date('m-d');
             $msg[] = date('H:i:s');
-            $msg[] = sprintf('%-4s', round(sys('la'), 1));
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = $job['cron_title'];
             $msg = implode(LOG_SEPR, $msg);
@@ -78,7 +77,6 @@ foreach ($cron_jobs as $job) {
             $msg[] = '  end';
             $msg[] = date('m-d');
             $msg[] = date('H:i:s');
-            $msg[] = sprintf('%-4s', round(sys('la'), 1));
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = round(utime() - $cron_start_time) . '/' . round(utime() - TIMESTART) . ' sec';
             $msg = implode(LOG_SEPR, $msg);

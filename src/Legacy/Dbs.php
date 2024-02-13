@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -41,7 +41,7 @@ class Dbs
     }
 
     /**
-     * Получение / инициализация класса сервера $srv_name
+     * Initialization / Fetching of $srv_name
      *
      * @param string $srv_name_or_alias
      *
@@ -59,7 +59,7 @@ class Dbs
     }
 
     /**
-     * Определение имени сервера
+     * Fetching server name
      *
      * @param string $name
      *

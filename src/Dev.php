@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -20,6 +20,9 @@ use Monolog\Logger;
 use Whoops\Handler\PlainTextHandler;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
+
+use jacklul\MonologTelegramHandler\TelegramHandler;
+use jacklul\MonologTelegramHandler\TelegramFormatter;
 
 use Exception;
 
@@ -76,6 +79,8 @@ class Dev
      */
     private static function getWhoops(): void
     {
+        global $bb_cfg;
+
         if (!APP_DEBUG) {
             return;
         }
@@ -92,7 +97,11 @@ class Dev
          */
         $loggingInConsole = new PlainTextHandler();
         $loggingInConsole->loggerOnly(true);
-        $loggingInConsole->setLogger((new Logger(APP_NAME, [(new BrowserConsoleHandler())->setFormatter((new LineFormatter(null, null, true)))])));
+        $loggingInConsole->setLogger((new Logger(
+            APP_NAME,
+            [(new BrowserConsoleHandler())
+                ->setFormatter((new LineFormatter(null, null, true)))]
+        )));
         $whoops->pushHandler($loggingInConsole);
 
         /**
@@ -101,8 +110,26 @@ class Dev
         if (ini_get('log_errors') == 1) {
             $loggingInFile = new PlainTextHandler();
             $loggingInFile->loggerOnly(true);
-            $loggingInFile->setLogger((new Logger(APP_NAME, [(new StreamHandler(WHOOPS_LOG_FILE))->setFormatter((new LineFormatter(null, null, true)))])));
+            $loggingInFile->setLogger((new Logger(
+                APP_NAME,
+                [(new StreamHandler(WHOOPS_LOG_FILE))
+                    ->setFormatter((new LineFormatter(null, null, true)))]
+            )));
             $whoops->pushHandler($loggingInFile);
+        }
+
+        /**
+         * Send debug via Telegram
+         */
+        if ($bb_cfg['telegram_sender']['enabled']) {
+            $telegramSender = new PlainTextHandler();
+            $telegramSender->loggerOnly(true);
+            $telegramSender->setLogger((new Logger(
+                APP_NAME,
+                [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: $bb_cfg['telegram_sender']['timeout']))
+                    ->setFormatter(new TelegramFormatter())]
+            )));
+            $whoops->pushHandler($telegramSender);
         }
 
         $whoops->register();

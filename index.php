@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -250,7 +250,7 @@ foreach ($cat_forums as $cid => $c) {
             $template->assign_block_vars('c.f.last', [
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
-                'LAST_TOPIC_TITLE' => wbr(str_short($f['last_topic_title'], $last_topic_max_len)),
+                'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
                 'LAST_POST_TIME' => bb_date($f['last_post_time'], $bb_cfg['last_post_date_format']),
                 'LAST_POST_USER' => profile_url(['username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
             ]);
@@ -304,7 +304,7 @@ $template->assign_vars([
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
     'U_SEARCH_LATEST' => 'search.php?search_id=latest',
     'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
-    'U_ATOM_FEED' => file_exists($bb_cfg['atom']['path'] . '/f/0.atom') ? make_url($bb_cfg['atom']['url'] . '/f/0.atom') : false,
+    'U_ATOM_FEED' => is_file($bb_cfg['atom']['path'] . '/f/0.atom') ? make_url($bb_cfg['atom']['url'] . '/f/0.atom') : false,
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
     'BOARD_START' => $bb_cfg['show_board_start_index'] ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date($bb_cfg['board_startdate']) . '</b>') : false,
@@ -327,7 +327,7 @@ if ($bb_cfg['show_latest_news']) {
     foreach ($latest_news as $news) {
         $template->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
-            'NEWS_TITLE' => str_short($news['topic_title'], $bb_cfg['max_news_title']),
+            'NEWS_TITLE' => str_short($wordCensor->censorString($news['topic_title']), $bb_cfg['max_news_title']),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
         ]);
@@ -346,7 +346,7 @@ if ($bb_cfg['show_network_news']) {
     foreach ($network_news as $net) {
         $template->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
-            'NEWS_TITLE' => str_short($net['topic_title'], $bb_cfg['max_net_title']),
+            'NEWS_TITLE' => str_short($wordCensor->censorString($net['topic_title']), $bb_cfg['max_net_title']),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
         ]);
@@ -395,8 +395,8 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
 
 // Allow cron
 if (IS_AM) {
-    if (file_exists(CRON_RUNNING)) {
-        if (file_exists(CRON_ALLOWED)) {
+    if (is_file(CRON_RUNNING)) {
+        if (is_file(CRON_ALLOWED)) {
             unlink(CRON_ALLOWED);
         }
         rename(CRON_RUNNING, CRON_ALLOWED);

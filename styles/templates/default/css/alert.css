@@ -1,7 +1,7 @@
 /*
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -23,11 +23,11 @@
   font-weight: bold;
 }
 
-.alert>p, .alert>ul {
+.alert > p, .alert > ul {
   margin: 0 0 1px 15px;
 }
 
-.alert>p+p {
+.alert > p + p {
   margin-top: 5px;
 }
 
@@ -116,7 +116,7 @@
 .alert-success {
   background-image: -webkit-linear-gradient(top, #dff0d8 0%, #c8e5bc 100%);
   background-image: linear-gradient(to bottom, #dff0d8 0%, #c8e5bc 100%);
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffdff0d8', endColorstr='#ffc8e5bc', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdff0d8', endColorstr='#ffc8e5bc', GradientType=0);
   background-repeat: repeat-x;
   border-color: #b2dba1;
 }
@@ -124,7 +124,7 @@
 .alert-info {
   background-image: -webkit-linear-gradient(top, #d9edf7 0%, #b9def0 100%);
   background-image: linear-gradient(to bottom, #d9edf7 0%, #b9def0 100%);
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffb9def0', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffb9def0', GradientType=0);
   background-repeat: repeat-x;
   border-color: #9acfea;
 }
@@ -132,7 +132,7 @@
 .alert-warning {
   background-image: -webkit-linear-gradient(top, #fcf8e3 0%, #f8efc0 100%);
   background-image: linear-gradient(to bottom, #fcf8e3 0%, #f8efc0 100%);
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#fffcf8e3', endColorstr='#fff8efc0', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffcf8e3', endColorstr='#fff8efc0', GradientType=0);
   background-repeat: repeat-x;
   border-color: #f0d575;
 }
@@ -140,7 +140,7 @@
 .alert-danger {
   background-image: -webkit-linear-gradient(top, #f2dede 0%, #e7c3c3 100%);
   background-image: linear-gradient(to bottom, #f2dede 0%, #e7c3c3 100%);
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede', endColorstr='#ffe7c3c3', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede', endColorstr='#ffe7c3c3', GradientType=0);
   background-repeat: repeat-x;
   border-color: #dca7a7;
 }

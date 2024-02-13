@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $bb_cfg, $userdata;
+global $lang, $bb_cfg, $userdata, $wordCensor;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
@@ -47,13 +47,6 @@ if (isset($this->request['post_id'])) {
     $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 }
 
-if (!defined('WORD_LIST_OBTAINED')) {
-    $orig_word = [];
-    $replace_word = [];
-    obtain_word_list($orig_word, $replace_word);
-    define('WORD_LIST_OBTAINED', true);
-}
-
 switch ($this->request['type']) {
     case 'delete':
         if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600 * 3 > TIMENOW))) {
@@ -83,13 +76,10 @@ switch ($this->request['type']) {
         $message = "[quote=\"" . $quote_username . "\"][qpost=" . $post['post_id'] . "]" . $post['post_text'] . "[/quote]\r";
 
         // hide user passkey
-        $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9]{10}(?=&)#', 'passkey', $message);
+        $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
         // hide sid
-        $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]{12}#', 'sid', $message);
-
-        if (!empty($orig_word)) {
-            $message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
-        }
+        $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
+        $message = $wordCensor->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
             $message = "[quote]" . $post['topic_title'] . "[/quote]\r";
@@ -135,9 +125,9 @@ switch ($this->request['type']) {
                             $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
                         }
                     }
-                    DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id");
+                    DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id LIMIT 1");
                     if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id']) {
-                        DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id");
+                        DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
                     }
                     $s_text = str_replace('\n', "\n", $text);
                     $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
@@ -171,16 +161,16 @@ switch ($this->request['type']) {
 				<form action="' . POSTING_URL . '" method="post" name="post">
 					' . $hidden_form . '
 					<div class="buttons mrg_4">
-						<input type="button" value="B" name="codeB" title="' . $lang['BOLD'] . '" style="font-weight: bold; width: 25px;" />
-						<input type="button" value="i" name="codeI" title="' . $lang['ITALIC'] . '" style="width: 25px; font-style: italic;" />
-						<input type="button" value="u" name="codeU" title="' . $lang['UNDERLINE'] . '" style="width: 25px; text-decoration: underline;" />
-						<input type="button" value="s" name="codeS" title="' . $lang['STRIKEOUT'] . '" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
-						<input type="button" value="' . $lang['QUOTE'] . '" name="codeQuote" title="' . $lang['QUOTE_TITLE'] . '" style="width: 57px;" />
-						<input type="button" value="Img" name="codeImg" title="' . $lang['IMG_TITLE'] . '" style="width: 40px;" />
-						<input type="button" value="' . $lang['URL'] . '" name="codeUrl" title="' . $lang['URL_TITLE'] . '" style="width: 63px; text-decoration: underline;" />&nbsp;
-						<input type="button" value="' . $lang['CODE'] . '" name="codeCode" title="' . $lang['CODE_TITLE'] . '" style="width: 43px;" />
-						<input type="button" value="' . $lang['LIST'] . '" name="codeList" title="' . $lang['LIST_TITLE'] . '" style="width: 60px;" />
-						<input type="button" value="1." name="codeOpt" title="' . $lang['LIST_ITEM'] . '" style="width: 30px;" />&nbsp;
+						<input type="button" value="B" name="codeB" title="' . $lang['BOLD'] . '" style="font-weight: bold;" />
+						<input type="button" value="i" name="codeI" title="' . $lang['ITALIC'] . '" style="font-style: italic;" />
+						<input type="button" value="u" name="codeU" title="' . $lang['UNDERLINE'] . '" style="text-decoration: underline;" />
+						<input type="button" value="s" name="codeS" title="' . $lang['STRIKEOUT'] . '" style="text-decoration: line-through;" />&nbsp;&nbsp;
+						<input type="button" value="' . $lang['QUOTE'] . '" name="codeQuote" title="' . $lang['QUOTE_TITLE'] . '" />
+						<input type="button" value="Img" name="codeImg" title="' . $lang['IMG_TITLE'] . '" />
+						<input type="button" value="' . $lang['URL'] . '" name="codeUrl" title="' . $lang['URL_TITLE'] . '" style="text-decoration: underline;" />&nbsp;
+						<input type="button" value="' . $lang['CODE'] . '" name="codeCode" title="' . $lang['CODE_TITLE'] . '" />
+						<input type="button" value="' . $lang['LIST'] . '" name="codeList" title="' . $lang['LIST_TITLE'] . '" />
+						<input type="button" value="1." name="codeOpt" title="' . $lang['LIST_ITEM'] . '" />&nbsp;
 						<input type="button" value="' . $lang['QUOTE_SEL'] . '" name="quoteselected" title="' . $lang['QUOTE_SELECTED'] . '" onclick="bbcode.onclickQuoteSel();" />&nbsp;
 					</div>
 					<textarea id="message-' . $post_id . '" class="editor mrg_4" name="message" rows="18" cols="92">' . $post['post_text'] . '</textarea>
@@ -229,7 +219,7 @@ switch ($this->request['type']) {
         $message = prepare_message($message);
 
         // Flood control
-        $where_sql = (IS_GUEST) ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
 
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
         if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {

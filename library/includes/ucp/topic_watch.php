@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -21,6 +21,17 @@ $page_cfg['include_bbcode_js'] = true;
 
 $tracking_topics = get_tracks('topic');
 $user_id = $userdata['user_id'];
+if (isset($_GET[POST_USERS_URL])) {
+    if (get_username($_GET[POST_USERS_URL])) {
+        if ($_GET[POST_USERS_URL] == $userdata['user_id'] || IS_ADMIN) {
+            $user_id = DB()->escape($_GET[POST_USERS_URL]);
+        } else {
+            bb_die($lang['NOT_AUTHORISED']);
+        }
+    } else {
+        bb_die($lang['USER_NOT_EXIST']);
+    }
+}
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $per_page = $bb_cfg['topics_per_page'];
 
@@ -70,14 +81,15 @@ if ($watch_count > 0) {
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
                 'TOPIC_ID' => $watch[$i]['topic_id'],
-                'TOPIC_TITLE' => wbr(str_short($watch[$i]['topic_title'], 70)),
-                'FULL_TOPIC_TITLE' => wbr($watch[$i]['topic_title']),
+                'TOPIC_TITLE' => str_short($wordCensor->censorString($watch[$i]['topic_title']), 70),
+                'FULL_TOPIC_TITLE' => $watch[$i]['topic_title'],
                 'U_TOPIC' => TOPIC_URL . $watch[$i]['topic_id'],
-                'FORUM_TITLE' => wbr($watch[$i]['forum_name']),
+                'FORUM_TITLE' => $watch[$i]['forum_name'],
                 'U_FORUM' => FORUM_URL . $watch[$i]['forum_id'],
                 'REPLIES' => $watch[$i]['topic_replies'],
                 'AUTHOR' => profile_url($watch[$i]),
                 'LAST_POST' => bb_date($watch[$i]['topic_last_post_time']) . '<br />' . profile_url(['user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank']]),
+                'LAST_POST_RAW' => $watch[$i]['topic_last_post_time'],
                 'LAST_POST_ID' => $watch[$i]['topic_last_post_id'],
                 'IS_UNREAD' => $is_unread,
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),

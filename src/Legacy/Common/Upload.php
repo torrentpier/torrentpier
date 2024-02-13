@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -109,11 +109,13 @@ class Upload
             return false;
         }
 
-        // upload errors from $_FILES
-        if ($this->file['error']) {
-            $msg = $lang['UPLOAD_ERROR_COMMON'];
-            $msg .= ($err_desc =& $lang['UPLOAD_ERRORS'][$this->file['error']]) ? " ($err_desc)" : '';
-            $this->errors[] = $msg;
+        // Handling errors while uploading
+        if (isset($this->file['error']) && ($this->file['error'] !== UPLOAD_ERR_OK)) {
+            if (isset($lang['UPLOAD_ERRORS'][$this->file['error']])) {
+                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->file['error']];
+            } else {
+                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'];
+            }
             return false;
         }
 
@@ -148,7 +150,7 @@ class Upload
         // Actions for images [E.g. Change avatar]
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
             if ($img_info = getimagesize($this->file['tmp_name'])) {
-                [$width, $height, $type, $attr] = $img_info;
+                [$width, $height, $type] = $img_info;
 
                 // redefine ext
                 if (!$width || !$height || !$type || !isset($this->img_types[$type])) {

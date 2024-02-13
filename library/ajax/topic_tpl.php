@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -88,7 +88,7 @@ switch ($mode) {
         $this->response['val']['tpl-last-edit-tst'] = $tpl_data['tpl_last_edit_tm'];
         $this->response['html']['tpl-name-old-save'] = $tpl_data['tpl_name'];
         $this->response['html']['tpl-last-edit-time'] = bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i');
-        $this->response['html']['tpl-last-edit-by'] = get_username((int)$tpl_data['tpl_last_edit_by']);
+        $this->response['html']['tpl-last-edit-by'] = profile_url(get_userdata((int)$tpl_data['tpl_last_edit_by']));
 
         $this->response['tpl_rules_href'] = POST_URL . $tpl_data['tpl_rules_post_id'] . '#' . $tpl_data['tpl_rules_post_id'];
         break;
@@ -124,23 +124,23 @@ switch ($mode) {
         if ($tpl_data['tpl_last_edit_tm'] > $this->request['tpl_l_ed_tst'] && $tpl_data['tpl_last_edit_by'] != $userdata['user_id']) {
             $last_edit_by_username = get_username((int)$tpl_data['tpl_last_edit_by']);
             $msg = "Изменения не были сохранены!\n\n";
-            $msg .= 'Шаблон был отредактирован: ' . html_entity_decode($last_edit_by_username) . ', ' . delta_time($tpl_data['tpl_last_edit_tm']) . " назад\n\n";
+            $msg .= 'Шаблон был отредактирован: ' . html_ent_decode($last_edit_by_username) . ', ' . bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i');
             $this->ajax_die($msg);
         }
         $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id";
-        if (!@DB()->query($sql)) {
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         $this->response['tpl_id'] = $tpl_id;
         $this->response['tpl_name'] = $tpl_name;
         $this->response['html']['tpl-last-edit-time'] = bb_date(TIMENOW, 'd-M-y H:i');
-        $this->response['html']['tpl-last-edit-by'] = $userdata['username'];
+        $this->response['html']['tpl-last-edit-by'] = profile_url(get_userdata($userdata['username'], true));
         break;
 
     // создание нового шаблона
     case 'new':
         $sql = "INSERT INTO " . BB_TOPIC_TPL . DB()->build_array('INSERT', $sql_args);
-        if (!@DB()->query($sql)) {
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         break;
@@ -154,10 +154,13 @@ switch ($mode) {
             $this->ajax_die("нет такого форума [id: $forum_id]");
         }
         $sql = "DELETE FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1";
-        if (!@DB()->query($sql)) {
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
-        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = $forum_id LIMIT 1");
+        $get_forum_tpl_id = DB()->fetch_row("SELECT forum_tpl_id FROM " . BB_FORUMS . " WHERE forum_id = " . $forum_id . " LIMIT 1");
+        if ($tpl_id == $get_forum_tpl_id['forum_tpl_id']) {
+            DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = 0 WHERE forum_id = $forum_id LIMIT 1");
+        }
         $this->response['msg'] = "Шаблон {$tpl_data['tpl_name']} успешно удалён";
         break;
 

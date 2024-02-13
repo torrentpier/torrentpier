@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -201,7 +201,7 @@ if ($submit_change && $view === 'attachments') {
         if (isset($attachments['_' . $attachrow['attach_id']])) {
             if ($attachrow['comment'] != $attachments['_' . $attachrow['attach_id']]['comment'] || $attachrow['download_count'] != $attachments['_' . $attachrow['attach_id']]['download_count']) {
                 $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
-					SET comment = '" . attach_mod_sql_escape($attachments['_' . $attachrow['attach_id']]['comment']) . "', download_count = " . (int)$attachments['_' . $attachrow['attach_id']]['download_count'] . '
+					SET comment = '" . DB()->escape($attachments['_' . $attachrow['attach_id']]['comment']) . "', download_count = " . (int)$attachments['_' . $attachrow['attach_id']]['download_count'] . '
 					WHERE attach_id = ' . (int)$attachrow['attach_id'];
 
                 if (!DB()->sql_query($sql)) {

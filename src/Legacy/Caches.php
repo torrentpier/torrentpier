@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -15,9 +15,9 @@ namespace TorrentPier\Legacy;
  */
 class Caches
 {
-    public $cfg = []; // конфиг
-    public $obj = []; // кеш-объекты
-    public $ref = []; // ссылки на $obj (имя_кеша => кеш_объект)
+    public $cfg = []; // config
+    public $obj = []; // cache-objects
+    public $ref = []; // links to $obj (cache_name => cache_objects)
 
     public function __construct($cfg)
     {

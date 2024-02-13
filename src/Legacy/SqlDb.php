@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -64,7 +64,7 @@ class SqlDb
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
-        // ссылки на глобальные переменные (для включения логов сразу на всех серверах, подсчета общего количества запросов и т.д.)
+        // Links to the global variables (for recording all the logs on all servers, counting total request count and etc)
         $this->DBS['log_file'] =& $DBS->log_file;
         $this->DBS['log_counter'] =& $DBS->log_counter;
         $this->DBS['num_queries'] =& $DBS->num_queries;
@@ -820,7 +820,7 @@ class SqlDb
             if ($this->do_explain) {
                 $this->explain('stop');
             }
-            // проверка установки $this->inited - для пропуска инициализационных запросов
+            // check for $this->inited - to bypass request controlling
             if ($this->DBS['log_counter'] && $this->inited) {
                 $this->log_query($this->DBS['log_file']);
                 $this->DBS['log_counter']--;
@@ -889,9 +889,8 @@ class SqlDb
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.4f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
-        $msg[] = date('m-d H:i:s', $this->sql_starttime);
+        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
         $msg[] = sprintf('%-6s', $q_time);
-        $msg[] = sprintf('%-4s', round(sys('la'), 1));
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
         $msg[] = Dev::short_query($this->cur_query);
@@ -940,7 +939,7 @@ class SqlDb
         $msg[] = 'PID     : ' . sprintf('%05d', getmypid());
         $msg[] = 'Request : ' . trim(print_r($_REQUEST, true)) . str_repeat('_', 78) . LOG_LF;
         $msg[] = '';
-        bb_log($msg, IN_TRACKER ? SQL_TR_LOG_NAME : SQL_BB_LOG_NAME);
+        bb_log($msg, (defined('IN_TRACKER') ? SQL_TR_LOG_NAME : SQL_BB_LOG_NAME));
     }
 
     /**
@@ -968,7 +967,7 @@ class SqlDb
                     $query = "SELECT * FROM $m[1] WHERE $m[2]";
                 }
 
-                if (0 === strpos($query, "SELECT")) {
+                if (str_starts_with($query, "SELECT")) {
                     $html_table = false;
 
                     if ($result = mysqli_query($this->link, "EXPLAIN $query")) {

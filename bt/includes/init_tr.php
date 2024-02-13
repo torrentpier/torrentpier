@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -63,13 +63,13 @@ function dummy_exit($interval = 1800, $cache_dict = [])
     $output = [
         'interval' => (int)$interval,
         'peers' => (string)DUMMY_PEER,
+        'external ip' => inet_pton($_SERVER['REMOTE_ADDR']),
     ];
 
     if (!empty($cache_dict)) {
         $output['complete'] = $cache_dict['complete'];
         $output['incomplete'] = $cache_dict['incomplete'];
         $output['downloaded'] = $cache_dict['downloaded'];
-        $output['warning message'] = 'Next statistics update in: ' . (floor($interval / 60) % 60) . ' minutes';
     }
 
     if (isset($cache_dict['peers'])) {

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -32,7 +32,7 @@ $login_errors = [];
 if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING'], $matches)) {
     $redirect_url = $matches[1];
 
-    if (false === strpos($redirect_url, '?') && $first_amp = strpos($redirect_url, '&')) {
+    if (!str_contains($redirect_url, '?') && $first_amp = strpos($redirect_url, '&')) {
         $redirect_url[$first_amp] = '?';
     }
 } elseif (!empty($_POST['redirect'])) {
@@ -43,7 +43,7 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING
 
 $redirect_url = str_replace(['&admin=1', '?admin=1'], '', $redirect_url);
 
-if (!$redirect_url || false !== strpos(urldecode($redirect_url), "\n") || false !== strpos(urldecode($redirect_url), "\r") || false !== strpos(urldecode($redirect_url), ';url')) {
+if (!$redirect_url || str_contains(urldecode($redirect_url), "\n") || str_contains(urldecode($redirect_url), "\r") || str_contains(urldecode($redirect_url), ';url')) {
     $redirect_url = 'index.php';
 }
 
@@ -59,7 +59,7 @@ $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 $login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
 $login_password = $_POST['login_password'] ?? '';
 
-// Проверка на неверную комбинацию логин/пароль
+// Checking for incorrect login/password combination
 $need_captcha = false;
 if (!$mod_admin_login) {
     $need_captcha = CACHE('bb_login_err')->get('l_err_' . USER_IP);
@@ -80,7 +80,7 @@ if (isset($_POST['login'])) {
     }
 
     // Captcha
-    if ($need_captcha && !bb_captcha('check') && !$bb_cfg['captcha']['disabled']) {
+    if ($need_captcha && !$bb_cfg['captcha']['disabled'] && !bb_captcha('check')) {
         $login_errors[] = $lang['CAPTCHA_WRONG'];
     }
 

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -55,7 +55,7 @@ class Common
 			");
                 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_sync_forums");
 
-                // начальное обнуление значений
+                // init values with zeros
                 $forum_ary = explode(',', $forum_csv);
                 DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . implode('),(', $forum_ary) . ")");
 
@@ -95,7 +95,7 @@ class Common
                     break;
                 }
 
-                // Проверка на остаточные записи об уже удаленных топиках
+                // Check for left-overs after deleted posts
                 DB()->query("DELETE FROM " . BB_TOPICS . " WHERE topic_first_post_id NOT IN (SELECT post_id FROM " . BB_POSTS . ")");
 
                 $tmp_sync_topics = 'tmp_sync_topics';
@@ -419,15 +419,15 @@ class Common
     /**
      * Topic movement
      *
-     * @param array|string $topic_id
-     * @param int $to_forum_id
-     * @param null $from_forum_id
+     * @param int|array|string $topic_id
+     * @param int|string $to_forum_id
+     * @param int|string|null $from_forum_id
      * @param bool $leave_shadow
      * @param bool $insert_bot_msg
-     *
+     * @param string $reason_move
      * @return bool
      */
-    public static function topic_move($topic_id, $to_forum_id, $from_forum_id = null, $leave_shadow = false, $insert_bot_msg = false)
+    public static function topic_move(int|array|string $topic_id, int|string $to_forum_id, int|string $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
     {
         global $log_action;
 
@@ -496,7 +496,7 @@ class Common
         // Bot
         if ($insert_bot_msg) {
             foreach ($topics as $topic_id => $row) {
-                Post::insert_post('after_move', $topic_id, $to_forum_id, $row['forum_id']);
+                Post::insert_post('after_move', $topic_id, $to_forum_id, $row['forum_id'], reason_move: $reason_move);
             }
             self::sync('topic', array_keys($topics));
         }
@@ -542,7 +542,7 @@ class Common
                 return false;
             }
 
-            // фильтр заглавных сообщений в теме
+            // Filter for header messages
             if ($exclude_first) {
                 $sql = "SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_first_post_id IN($post_csv)";
 

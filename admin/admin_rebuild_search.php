@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -329,7 +329,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         'TOTAL_PERCENT' => sprintf($lang['PERCENT_COMPLETED'], round($total_percent, 2)),
 
         'LAST_CYCLE_TIME' => delta_time(TIMENOW),
-        'SESSION_TIME' => delta_time($last_session_data['start_time']),
+        'SESSION_TIME' => delta_time(($last_session_data['start_time'] == 0) ? TIMENOW : $last_session_data['start_time']),
         'SESSION_AVERAGE_CYCLE_TIME' => delta_time((int)$session_average_cycle_time, 0),
         'SESSION_ESTIMATED_TIME' => delta_time((int)$session_estimated_time, 0),
 

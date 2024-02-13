@@ -7,8 +7,7 @@
 composer.phar
 configs/local.php
 data/avatars
-data/torrent_files
-internal_data/ajax_html
+data/uploads
 internal_data/atom
 internal_data/cache
 internal_data/log
@@ -25,12 +24,14 @@ vendor
 *.zip
 *.7z
 *.torrent
+*.pak
 
 ### Windows ###
 Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 *.lnk
+*.bat
 
 ### OSX ###
 .DS_Store

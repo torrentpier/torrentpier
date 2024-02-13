@@ -33,26 +33,26 @@ function toggle_cbox (cb_id, tr_id)
 		<th colspan="2">{L_TOPIC_SPLIT}</th>
 	</tr>
 	<tr>
-		<td class="row2" colspan="2" align="center">
+		<td class="row2 tCenter" colspan="2">
 			<span class="small">{L_SPLIT_TOPIC_EXPLAIN}</span>
 		</td>
 	</tr>
 	<tr>
-		<td class="row1" nowrap="nowrap"><span class="gen">{L_NEW_TOPIC_TITLE}</span></td>
-		<td class="row2"><input class="post" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
+		<td class="row1 nowrap"><span class="gen">{L_NEW_TOPIC_TITLE}</span></td>
+		<td class="row2"><input class="post" type="text" size="35" style="width: 500px;" maxlength="120" name="subject"></td>
 	</tr>
 	<tr>
-		<td class="row1" nowrap="nowrap"><span class="gen">{L_FORUM_FOR_NEW_TOPIC}</span></td>
+		<td class="row1 nowrap"><span class="gen">{L_FORUM_FOR_NEW_TOPIC}</span></td>
 		<td class="row2">{S_FORUM_SELECT}</td>
 	</tr>
 	<!-- //bot -->
 	<tr>
-		<td colspan="2" class="row2" align="center" style="padding: 0">
+		<td colspan="2" class="row2 tCenter" style="padding: 0;">
 		<table class="borderless">
 			<tr>
-				 <td class="row2" align="center"><span class="gen"><input type="checkbox" name="after_split_to_old" id="after_split_to_old" checked /><label for="after_split_to_old"> {L_BOT_AFTER_SPLIT_TO_OLD}</label></span></td>
+				 <td class="row2 tCenter"><span class="gen"><input type="checkbox" name="after_split_to_old" id="after_split_to_old" checked><label for="after_split_to_old">{L_BOT_AFTER_SPLIT_TO_OLD}</label></span></td>
 				 <td>&nbsp;</td>
-				 <td class="row2" align="center"><span class="gen"><input type="checkbox" name="after_split_to_new" id="after_split_to_new" checked /><label for="after_split_to_new"> {L_BOT_AFTER_SPLIT_TO_NEW}</label></span></td>
+				 <td class="row2 tCenter"><span class="gen"><input type="checkbox" name="after_split_to_new" id="after_split_to_new" checked><label for="after_split_to_new">{L_BOT_AFTER_SPLIT_TO_NEW}</label></span></td>
 				</tr>
 			</table>
 		</td>
@@ -60,13 +60,13 @@ function toggle_cbox (cb_id, tr_id)
 	<!-- //bot end -->
 	<tr>
 		<td colspan="2" class="catBottom">
-			<input type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;" />
-			<input type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 215px;" />
-			<input type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 280px;" />
+			<input type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;">
+			<input type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 215px;">
+			<input type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 280px;">
 		</td>
 	</tr>
 </table>
-<div><img src="{SPACER}" alt="" width="1" height="6" /></div>
+<div><img src="{SPACER}" alt="" width="1" height="6"></div>
 
 <table class="topic" cellpadding="0" cellspacing="0">
 	<tr>
@@ -90,10 +90,10 @@ function toggle_cbox (cb_id, tr_id)
 	<!-- END postrow -->
 	<tr>
 		<td class="catBottom" colspan="3">
-			<input type="hidden" name="confirm" value="1" />
-			<input class="liteoption" type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;" />
-			<input class="liteoption" type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 210px;" />
-			<input class="liteoption" type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 270px;" />
+			<input type="hidden" name="confirm" value="1">
+			<input class="liteoption" type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;">
+			<input class="liteoption" type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 210px;">
+			<input class="liteoption" type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 270px;">
 		{S_HIDDEN_FIELDS}
 		</td>
 	</tr>

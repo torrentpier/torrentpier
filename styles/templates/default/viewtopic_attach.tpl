@@ -14,11 +14,11 @@
 <!-- BEGIN cat_images -->
 <fieldset class="attach">
 <legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE})</legend>
-	<p class="tCenter pad_6">
+	<p class="tCenter">
 		<img src="{postrow.attach.cat_images.IMG_SRC}" id="attachImg" class="postImg" alt="img" border="0" />
 	</p>
 	<!-- IF postrow.attach.cat_images.COMMENT -->
-	<p class="tCenter med lh_110">
+	<p class="attach_comment med">
 		{postrow.attach.cat_images.COMMENT}
 	</p>
 	<!-- ENDIF -->
@@ -35,7 +35,7 @@
 	</p>
 	<p class="attach_link">
 		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><b>{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}</b></a>
-        <span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE}, {L_DOWNLOADED}: {postrow.attach.cat_thumb_images.DOWNLOAD_COUNT})</span>
+        <span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE}, {L_VIEWS}: {postrow.attach.cat_thumb_images.DOWNLOAD_COUNT})</span>
 	</p>
 	<!-- IF postrow.attach.cat_thumb_images.COMMENT -->
 	<p class="attach_comment med">
@@ -52,7 +52,7 @@
 <legend>{postrow.attach.attachrow.S_UPLOAD_IMAGE} {L_ATTACHMENT}</legend>
 	<p class="attach_link">
 		<a href="{postrow.attach.attachrow.U_DOWNLOAD_LINK}" {postrow.attach.attachrow.TARGET_BLANK}><b>{postrow.attach.attachrow.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.attachrow.FILESIZE}, {L_DOWNLOADED}: {postrow.attach.attachrow.DOWNLOAD_COUNT})</span>
+		<span class="attach_stats med">({postrow.attach.attachrow.FILESIZE}, <!-- IF postrow.attach.attachrow.IS_IMAGE -->{L_VIEWS}<!-- ELSE -->{L_DOWNLOADED}<!-- ENDIF -->: {postrow.attach.attachrow.DOWNLOAD_COUNT})</span>
 	</p>
 	<!-- IF postrow.attach.attachrow.COMMENT -->
 	<p class="attach_comment med">
@@ -91,35 +91,36 @@
 		<td colspan="3">{postrow.attach.tor_not_reged.comment.COMMENT}</td>
 	</tr>
 	<!-- END comment -->
-	<tr class="row3 tCenter">
-		<td colspan="3">&nbsp;
-		<script type="text/javascript">
-		ajax.callback.change_torrent = function(data) {
-		    if(data.title) alert(data.title);
-		    if(data.url) document.location.href = data.url;
-		};
-		</script>
-		<!-- IF TOR_CONTROLS -->
-		<script type="text/javascript">
-		function change_torrents()
-		{
-			ajax.exec({
-				action    : 'change_torrent',
-				attach_id : {postrow.attach.tor_not_reged.ATTACH_ID},
-				type      : $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}').val(),
-			});
-		}
-		</script>
-			<select name="tor_action" id="tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', true)">
-				<option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
-				<option value="del_torrent">{L_DELETE_TORRENT}</option>
-				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
-			</select>
-
-			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_SUBMIT}" class="liteoption" /></a>
-		<!-- ENDIF -->
-		&nbsp;</td>
-	</tr>
+    <!-- IF TOR_CONTROLS -->
+    <tr class="row3 tCenter">
+        <td colspan="3">
+            <script type="text/javascript">
+                ajax.callback.change_torrent = function (data) {
+                    if (data.title) alert(data.title);
+                    if (data.url) document.location.href = data.url;
+                };
+            </script>
+            <script type="text/javascript">
+                function change_torrents() {
+                    ajax.exec({
+                        action: 'change_torrent',
+                        attach_id: {postrow.attach.tor_not_reged.ATTACH_ID},
+                        type: $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}').val(),
+                    });
+                }
+            </script>
+            <select name="tor_action" id="tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}"
+                    onchange="$('#tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('checked', false); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', true);">
+                <option value="" selected class="select-action">&raquo; {L_SELECT_ACTION}</option>
+                <option value="del_torrent">{L_DELETE_TORRENT}</option>
+                <option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
+            </select>
+            <a href="#"
+               onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input
+                    type="submit" value="{L_SUBMIT}" class="liteoption"/></a>
+        </td>
+    </tr>
+    <!-- ENDIF -->
 </table>
 
 <div class="spacer_12"></div>
@@ -144,7 +145,9 @@
 
 <table class="attach bordered med">
 	<tr class="row3">
-		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
+		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}
+        <a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="File hashes | .torrent meta-info" target="_blank"><img src="./styles/images/t_info.png" width="12" height="12" border="0"></a>
+        <!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
     <tr class="row4">
@@ -156,9 +159,11 @@
 		<td width="70%">
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
+            <!-- IF not postrow.attach.tor_reged.TOR_FROZEN -->
             <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: {postrow.attach.tor_reged.HASH}<!-- ENDIF -->
             <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: {postrow.attach.tor_reged.HASH_V2}<!-- ENDIF -->
-		</td>
+            <!-- ENDIF -->
+        </td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
 			<!-- IF postrow.attach.tor_reged.TOR_FROZEN -->
 			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p>{L_DOWNLOAD}</p>
@@ -168,9 +173,6 @@
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
-            <!-- IF postrow.attach.tor_reged.HASH_V2 -->
-            <p><a href="{PAGE_URL}&filelist=1" title = "File hashes | Detailed .torrent meta info" target="_blank">...</a></p>
-            <!-- ENDIF -->
 		</td>
 	</tr>
 	<tr class="row1">
@@ -228,6 +230,7 @@
         <td colspan="3">{postrow.attach.tor_reged.comment.COMMENT}</td>
     </tr>
     <!-- END comment -->
+    <!-- IF TOR_CONTROLS -->
     <tr class="row3 tCenter">
         <td colspan="3">
             <script type="text/javascript">
@@ -236,7 +239,6 @@
                     if (data.url) document.location.href = data.url;
                 };
             </script>
-            <!-- IF TOR_CONTROLS -->
             <script type="text/javascript">
                 function change_torrents() {
                     ajax.exec({
@@ -269,9 +271,9 @@
             <a href="#"
                onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input
                     type="submit" value="{L_EDIT}" class="liteoption"/></a>
-            <!-- ENDIF -->
         </td>
     </tr>
+    <!-- ENDIF -->
     <!-- IF TOR_HELP_LINKS -->
     <tr class="row3 tCenter">
         <td colspan="3">{TOR_HELP_LINKS}</td>
@@ -295,34 +297,44 @@ function humn_size (size) {
 }
 
 ajax.tor_filelist_loaded = false;
-$('#tor-filelist-btn').click(function(){
-	if (ajax.tor_filelist_loaded) {
-		$('#tor-fl-wrap').toggle();
-		return false;
-	}
-	$('#tor-fl-wrap').show();
+$('#tor-filelist-btn').click(function () {
+    if (ajax.tor_filelist_loaded) {
+        $('#tor-fl-wrap').toggle();
+        return false;
+    } else {
+        $("#tor-filelist-btn").attr('disabled', true);
+    }
+    $('#tor-fl-wrap').show();
 
-	ajax.exec({action: 'view_torrent', attach_id: {postrow.attach.tor_reged.ATTACH_ID} });
-	ajax.callback.view_torrent = function(data) {
-		$('#tor-filelist').html(data.html);
-		$('#tor-filelist > ul.tree-root').treeview({
-			control: "#tor-fl-treecontrol"
-		});
-		$('#tor-filelist li.collapsable').each(function(){
-			var $li = $(this);
-			var dir_size = 0;
-			$('i', $li).each(function(){ dir_size += parseInt(this.innerHTML) });
-			$('span.b:first', $li).append(' &middot; <s>' + humn_size(dir_size) + '</s>');
-		});
-		$('#tor-filelist i').each(function(){
-			var size_bytes = this.innerHTML;
-			this.innerHTML = '('+ size_bytes +')';
-			$(this).prepend('<s>'+ humn_size(size_bytes) +'</s> ');
-		});
-		ajax.tor_filelist_loaded = true;
-	};
-	$('#tor-fl-treecontrol a').click(function(){ this.blur(); });
-	return false;
+    ajax.exec({
+        action: 'view_torrent',
+        attach_id: {postrow.attach.tor_reged.ATTACH_ID}
+    });
+    ajax.callback.view_torrent = function (data) {
+        $('#tor-filelist').html(data.html);
+        $('#tor-filelist > ul.tree-root').treeview({
+            control: "#tor-fl-treecontrol"
+        });
+        $('#tor-filelist li.collapsable').each(function () {
+            var $li = $(this);
+            var dir_size = 0;
+            $('i', $li).each(function () {
+                dir_size += parseInt(this.innerHTML)
+            });
+            $('span.b:first', $li).append(' &middot; <s>' + humn_size(dir_size) + '</s>');
+        });
+        $('#tor-filelist i').each(function () {
+            var size_bytes = this.innerHTML;
+            this.innerHTML = '(' + size_bytes + ')';
+            $(this).prepend('<s>' + humn_size(size_bytes) + '</s> ');
+        });
+        ajax.tor_filelist_loaded = true;
+        $("#tor-filelist-btn").attr('disabled', false);
+    };
+    $('#tor-fl-treecontrol a').click(function () {
+        this.blur();
+    });
+    return false;
 });
 </script>
 
@@ -337,7 +349,6 @@ $('#tor-filelist-btn').click(function(){
 }
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
-#tor-filelist p { color: #7C7C7C; text-decoration: none; }
 #tor-filelist .b > s { color: #800000; }
 #tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('styles/images/folder.gif') no-repeat 3px 50%;}
 #tor-filelist ul li span { padding-left: 20px; background: transparent url('styles/images/page.gif') no-repeat 3px 50%;}
@@ -363,6 +374,101 @@ $('#tor-filelist-btn').click(function(){
 	</table>
 </div>
 </div>
+
+<!-- IF $bb_cfg['tor_thank'] -->
+<style type="text/css">
+    #thx-block {
+        width: 95%;
+        margin: 12px auto 0;
+    }
+
+    #thx-block .sp-wrap {
+        width: 100% !important;
+    }
+
+    #thx-btn-div {
+        text-align: center;
+        margin: 0 0 12px;
+    }
+
+    #thx-list a {
+        text-decoration: none;
+    }
+
+    #thx-list b {
+        font-size: 11px;
+        color: #2E2E2E;
+        white-space: nowrap;
+    }
+
+    #thx-list i {
+        font-weight: normal;
+        color: #000000;
+    }
+
+    #thx-list u {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $thx_head = $('#thx-block').find('.sp-head');
+        $thx_btn = $('#thx-btn');
+        close_thx_list();
+
+        $thx_btn.one('click', function () {
+            ajax.thx('add');
+            $(this).prop({disabled: true});
+        });
+        $thx_head.one('click', function () {
+            ajax.thx('get');
+        });
+    });
+
+    ajax.thx = function (mode) {
+        ajax.exec({
+            action: 'thx',
+            mode: mode,
+            topic_id: {TOPIC_ID}
+        });
+    }
+    ajax.callback.thx = function (data) {
+        if (data.mode === 'add') {
+            $thx_btn.hide().after('<h2 style="color: green;">{$lang['THANKS_GRATITUDE']}!<h2>');
+            open_thx_list();
+        } else {
+            $('#thx-list').html(data.html);
+        }
+    }
+
+    function thx_is_visible() {
+        return $('#thx-list').is(':visible');
+    }
+
+    function open_thx_list() {
+        ajax.thx('get');
+        if (!thx_is_visible()) {
+            $thx_head.click();
+        }
+    }
+
+    function close_thx_list() {
+        if (thx_is_visible()) {
+            $thx_head.click();
+        }
+    }
+</script>
+<div id="thx-block">
+    <!-- IF not postrow.attach.tor_reged.TOR_AUTHOR -->
+    <div id="thx-btn-div">
+        <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{L_THANK_TOPIC}">
+    </div>
+    <!-- ENDIF -->
+    <div class="sp-wrap">
+        <div id="thx-list" class="sp-body" title="{L_LAST_LIKES}"></div>
+    </div>
+</div>
+<!-- ENDIF -->
 
 <div class="spacer_12"></div>
 <!-- ENDIF -->

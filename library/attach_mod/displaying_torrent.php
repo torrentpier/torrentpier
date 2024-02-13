@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -88,7 +88,7 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-$display_name = wbr($t_data['topic_title']) . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.torrent';
+$display_name = $t_data['topic_title'] . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
 
 if (!$tor_reged) {
     $template->assign_block_vars('postrow.attach.tor_not_reged', [
@@ -145,7 +145,7 @@ if ($tor_reged && $tor_info) {
 
     // Magnet link
     $user_passkey = \TorrentPier\Legacy\Torrent::getPasskey($bt_user_id);
-    $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, wbr($t_data['topic_title']));
+    $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, html_ent_decode($t_data['topic_title']));
 
     // ratio limits
     $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
@@ -153,7 +153,7 @@ if ($tor_reged && $tor_info) {
     $dl_allowed = true;
     $user_ratio = 0;
 
-    if (($min_ratio_dl || $min_ratio_warn) && $bt_user_id != $poster_id) {
+    if (($min_ratio_dl || $min_ratio_warn) && ($bt_user_id != $poster_id && $bt_user_id != GUEST_UID)) {
         $sql = "SELECT u.*, dl.user_status
 			FROM " . BB_BT_USERS . " u
 			LEFT JOIN " . BB_BT_DLSTATUS . " dl ON dl.user_id = $bt_user_id AND dl.topic_id = $bt_topic_id
@@ -168,10 +168,9 @@ if ($tor_reged && $tor_info) {
     }
 
     $bt_userdata = DB()->fetch_row($sql);
-
     $user_status = $bt_userdata['user_status'] ?? null;
 
-    if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && ($bt_user_id != ($poster_id || GUEST_UID)) && $tor_type != TOR_TYPE_GOLD) {
+    if (($min_ratio_dl || $min_ratio_warn) && (isset($user_status) && $user_status != DL_STATUS_COMPLETE) && ($bt_user_id != $poster_id && $bt_user_id != GUEST_UID) && $tor_type != TOR_TYPE_GOLD) {
         if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             $dl_allowed = ($user_ratio > $min_ratio_dl);
         }
@@ -179,7 +178,7 @@ if ($tor_reged && $tor_info) {
         if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
             $template->assign_vars([
                 'SHOW_RATIO_WARN' => true,
-                'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help'])
+                'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help']),
             ]);
         }
     }
@@ -197,9 +196,10 @@ if ($tor_reged && $tor_info) {
             'ATTACH_ID' => $attach_id,
             'TOR_SILVER_GOLD' => $tor_type,
             'TOR_TYPE' => is_gold($tor_type),
+            'TOR_AUTHOR' => $bt_user_id == $poster_id && $bt_user_id != GUEST_UID,
 
             // torrent status mod
-            'TOR_FROZEN' => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
+            'TOR_FROZEN' => !IS_AM ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
             'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
             'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
             'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && ($is_auth['auth_mod'] || $tor_status_by_for_all)) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
@@ -209,15 +209,16 @@ if ($tor_reged && $tor_info) {
 
             'S_UPLOAD_IMAGE' => $upload_image,
             'U_DOWNLOAD_LINK' => $download_link,
-            'DL_LINK_CLASS' => (isset($bt_userdata['user_status'])) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
-            'DL_TITLE_CLASS' => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
+            'DL_LINK_CLASS' => isset($bt_userdata['user_status']) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
+            'DL_TITLE_CLASS' => isset($bt_userdata['user_status']) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
+            'FILELIST_LINK' => FILELIST_URL . $tor_info['topic_id'],
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
-            'TORRENT_SIZE' => humn_size($tor_size),
+            'TORRENT_SIZE' => humn_size($tor_size, 2),
             'DOWNLOAD_COUNT' => $download_count,
             'COMPLETED' => $tor_completed_count,
         ]);
@@ -232,7 +233,7 @@ if ($tor_reged && $tor_info) {
             'SHOW_DL_LIST' => true,
             'SHOW_DL_LIST_TOR_INFO' => true,
 
-            'TOR_SIZE' => humn_size($tor_size),
+            'TOR_SIZE' => humn_size($tor_size, 1),
             'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
             'TOR_DOWNLOAD_COUNT' => $download_count,
             'TOR_COMPLETED' => $tor_completed_count,
@@ -246,9 +247,7 @@ if ($tor_reged && $tor_info) {
             $full_mode_order = 'tr.remain';
             $full_mode_sort_dir = 'ASC';
 
-            if (isset($_REQUEST['psortasc'])) {
-                $full_mode_sort_dir = 'ASC';
-            } elseif (isset($_REQUEST['psortdesc'])) {
+            if (isset($_REQUEST['psortdesc'])) {
                 $full_mode_sort_dir = 'DESC';
             }
 
@@ -281,7 +280,7 @@ if ($tor_reged && $tor_info) {
 				WHERE topic_id = $tor_id
 				LIMIT 1";
         } elseif ($s_mode == 'names') {
-            $sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
+            $sql = "SELECT tr.user_id, tr.ip, tr.ipv6, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
 				WHERE tr.topic_id = $tor_id
 					AND u.user_id = tr.user_id
@@ -289,7 +288,7 @@ if ($tor_reged && $tor_info) {
 				LIMIT $show_peers_limit";
         } else {
             $sql = "SELECT
-					tr.user_id, tr.ip, tr.port, tr.peer_id, tr.uploaded, tr.downloaded, tr.remain,
+					tr.user_id, tr.ip, tr.ipv6, tr.port, tr.peer_id, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
 					tr.complete_percent, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr
@@ -372,7 +371,11 @@ if ($tor_reged && $tor_info) {
 
                 // Full details mode
                 if ($s_mode == 'full') {
-                    $ip = bt_show_ip($peer['ip']);
+                    if (!empty($peer['ip']) && !empty($peer['ipv6'])) {
+                        $ip = bt_show_ip($peer['ipv6']) . ' (' . bt_show_ip($peer['ip']) . ')';
+                    } else {
+                        $ip = bt_show_ip(!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']);
+                    }
                     $port = bt_show_port($peer['port']);
 
                     // peer max/current up/down
@@ -537,5 +540,5 @@ $template->assign_vars([
     'SEED_EXIST' => ($seeders || defined('SEEDER_EXIST')),
     'LEECH_EXIST' => ($leechers || defined('LEECHER_EXIST')),
     'TOR_HELP_LINKS' => $bb_cfg['tor_help_links'],
-    'CALL_SEED' => ($bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
+    'CALL_SEED' => (!IS_GUEST && $bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
 ]);

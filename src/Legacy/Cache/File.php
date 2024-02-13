@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -69,7 +69,7 @@ class File extends Common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)file_write($filecache, $filename, false, true, true);
+        return (bool)file_write($filecache, $filename, max_size: false, replace_content: true);
     }
 
     public function rm($name = '')

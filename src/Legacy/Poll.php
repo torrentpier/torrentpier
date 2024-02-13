@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -26,7 +26,7 @@ class Poll
     }
 
     /**
-     * Формирование результатов голосования
+     * Forming poll results
      *
      * @param $posted_data
      * @return string
@@ -41,7 +41,7 @@ class Poll
             global $lang;
             return $this->err_msg = $lang['EMPTY_POLL_TITLE'];
         }
-        $this->poll_votes[] = $poll_caption; // заголовок имеет vote_id = 0
+        $this->poll_votes[] = $poll_caption; // header is vote_id = 0
 
         foreach (explode("\n", $poll_votes) as $vote) {
             if (!$vote = str_compact($vote)) {
@@ -50,7 +50,7 @@ class Poll
             $this->poll_votes[] = $vote;
         }
 
-        // проверять на "< 3" -- 2 варианта ответа + заголовок
+        // check for "< 3" -- 2 answer variants + header
         if (\count($this->poll_votes) < 3 || \count($this->poll_votes) > $this->max_votes + 1) {
             global $lang;
             return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
@@ -58,7 +58,7 @@ class Poll
     }
 
     /**
-     * Добавление голосов в базу данных
+     * Recording poll info to the database
      *
      * @param int $topic_id
      */
@@ -83,7 +83,7 @@ class Poll
     }
 
     /**
-     * Удаление голосования
+     * Remove poll
      *
      * @param int $topic_id
      */
@@ -94,7 +94,7 @@ class Poll
     }
 
     /**
-     * Удаление информации о проголосовавших и голосов
+     * Remove info about voters and their choices
      *
      * @param int $topic_id
      */
@@ -143,12 +143,24 @@ class Poll
     }
 
     /**
+     * Checks whether the user has voted in a poll
+     *
+     * @param int $topic_id
+     * @param int $user_id
+     * @return bool
+     */
+    public static function userIsAlreadyVoted(int $topic_id, int $user_id): bool
+    {
+        return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
+    }
+
+    /**
      * Check whether poll is active
      *
      * @param array $t_data
      * @return bool
      */
-    public static function poll_is_active(array $t_data): bool
+    public static function pollIsActive(array $t_data): bool
     {
         global $bb_cfg;
         return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);

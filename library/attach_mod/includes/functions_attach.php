@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -178,38 +178,6 @@ function unlink_attach($filename, $mode = false)
 }
 
 /**
- * Check if Attachment exist
- */
-function attachment_exists($filename)
-{
-    global $upload_dir, $attach_config;
-
-    $filename = basename($filename);
-
-    if (!@file_exists(@amod_realpath($upload_dir . '/' . $filename))) {
-        return false;
-    }
-
-    return true;
-}
-
-/**
- * Check if Thumbnail exist
- */
-function thumbnail_exists($filename)
-{
-    global $upload_dir, $attach_config;
-
-    $filename = basename($filename);
-
-    if (!@file_exists(@amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename))) {
-        return false;
-    }
-
-    return true;
-}
-
-/**
  * Physical Filename stored already ?
  */
 function physical_filename_already_stored($filename)
@@ -222,7 +190,7 @@ function physical_filename_already_stored($filename)
 
     $sql = 'SELECT attach_id
 		FROM ' . BB_ATTACHMENTS_DESC . "
-		WHERE physical_filename = '" . attach_mod_sql_escape($filename) . "'
+		WHERE physical_filename = '" . DB()->escape($filename) . "'
 		LIMIT 1";
 
     if (!($result = DB()->sql_query($sql))) {
@@ -281,37 +249,6 @@ function get_attachments_from_post($post_id_array)
     }
 
     return $attachments;
-}
-
-/**
- * Count Filesize of Attachments in Database based on the attachment id
- */
-function get_total_attach_filesize($attach_ids)
-{
-    if (!is_array($attach_ids) || !count($attach_ids)) {
-        return 0;
-    }
-
-    $attach_ids = implode(', ', array_map('\intval', $attach_ids));
-
-    if (!$attach_ids) {
-        return 0;
-    }
-
-    $sql = 'SELECT filesize FROM ' . BB_ATTACHMENTS_DESC . " WHERE attach_id IN ($attach_ids)";
-
-    if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not query total filesize');
-    }
-
-    $total_filesize = 0;
-
-    while ($row = DB()->sql_fetchrow($result)) {
-        $total_filesize += (int)$row['filesize'];
-    }
-    DB()->sql_freeresult($result);
-
-    return $total_filesize;
 }
 
 /**
@@ -375,70 +312,6 @@ function attachment_sync_topic($topics)
             DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }
     }
-}
-
-/**
- * Get Extension
- */
-function get_extension($filename)
-{
-    if (false === strpos($filename, '.')) {
-        return '';
-    }
-    $extension = strrchr(strtolower($filename), '.');
-    $extension[0] = ' ';
-    $extension = strtolower(trim($extension));
-    if (is_array($extension)) {
-        return '';
-    }
-
-    return $extension;
-}
-
-/**
- * Delete Extension
- */
-function delete_extension($filename)
-{
-    return substr($filename, 0, strripos(trim($filename), '.'));
-}
-
-/**
- * Check if a user is within Group
- */
-function user_in_group($user_id, $group_id)
-{
-    $user_id = (int)$user_id;
-    $group_id = (int)$group_id;
-
-    if (!$user_id || !$group_id) {
-        return false;
-    }
-
-    $sql = 'SELECT u.group_id
-		FROM ' . BB_USER_GROUP . ' u, ' . BB_GROUPS . " g
-		WHERE g.group_single_user = 0
-			AND u.group_id = g.group_id
-			AND u.user_id = $user_id
-			AND g.group_id = $group_id
-		LIMIT 1";
-
-    if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not get user group');
-    }
-
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
-
-    return !($num_rows == 0);
-}
-
-/**
- * Realpath replacement for attachment mod
- */
-function amod_realpath($path)
-{
-    return (function_exists('realpath')) ? realpath($path) : $path;
 }
 
 /**
@@ -513,80 +386,4 @@ function get_var($var_name, $default, $multibyte = false)
     }
 
     return $var;
-}
-
-/**
- * Escaping SQL
- */
-function attach_mod_sql_escape($text)
-{
-    if (function_exists('mysqli_real_escape_string')) {
-        return DB()->escape_string($text);
-    }
-
-    return str_replace(['\\', "'"], ['\\\\', "''"], $text);
-}
-
-/**
- * Build sql statement from array for insert/update/select statements
- *
- * Idea for this from Ikonboard
- * Possible query values: INSERT, INSERT_SELECT, MULTI_INSERT, UPDATE, SELECT
- */
-function attach_mod_sql_build_array($query, $assoc_ary = false)
-{
-    if (!is_array($assoc_ary)) {
-        return false;
-    }
-
-    $fields = [];
-    $values = [];
-    if ($query == 'INSERT' || $query == 'INSERT_SELECT') {
-        foreach ($assoc_ary as $key => $var) {
-            $fields[] = $key;
-
-            if (null === $var) {
-                $values[] = 'NULL';
-            } elseif (is_string($var)) {
-                $values[] = "'" . attach_mod_sql_escape($var) . "'";
-            } elseif (is_array($var) && is_string($var[0])) {
-                $values[] = $var[0];
-            } else {
-                $values[] = (is_bool($var)) ? (int)$var : $var;
-            }
-        }
-
-        $query = ($query == 'INSERT') ? ' (' . implode(', ', $fields) . ') VALUES (' . implode(', ', $values) . ')' : ' (' . implode(', ', $fields) . ') SELECT ' . implode(', ', $values) . ' ';
-    } elseif ($query == 'MULTI_INSERT') {
-        $ary = [];
-        foreach ($assoc_ary as $id => $sql_ary) {
-            $values = [];
-            foreach ($sql_ary as $key => $var) {
-                if (null === $var) {
-                    $values[] = 'NULL';
-                } elseif (is_string($var)) {
-                    $values[] = "'" . attach_mod_sql_escape($var) . "'";
-                } else {
-                    $values[] = (is_bool($var)) ? (int)$var : $var;
-                }
-            }
-            $ary[] = '(' . implode(', ', $values) . ')';
-        }
-
-        $query = ' (' . implode(', ', array_keys($assoc_ary[0])) . ') VALUES ' . implode(', ', $ary);
-    } elseif ($query == 'UPDATE' || $query == 'SELECT') {
-        $values = [];
-        foreach ($assoc_ary as $key => $var) {
-            if (null === $var) {
-                $values[] = "$key = NULL";
-            } elseif (is_string($var)) {
-                $values[] = "$key = '" . attach_mod_sql_escape($var) . "'";
-            } else {
-                $values[] = (is_bool($var)) ? "$key = " . (int)$var : "$key = $var";
-            }
-        }
-        $query = implode(($query == 'UPDATE') ? ', ' : ' AND ', $values);
-    }
-
-    return $query;
 }

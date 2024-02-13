@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -49,7 +49,7 @@ foreach ($sql as $rowset) {
 
 if ($releasing) {
     foreach ($releasing as $i => $row) {
-        $topic_title = wbr($row['topic_title']);
+        $topic_title = $row['topic_title'];
 
         $template->assign_block_vars('released', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
@@ -69,7 +69,7 @@ if ($releasing) {
 
 if ($seeding) {
     foreach ($seeding as $i => $row) {
-        $topic_title = wbr($row['topic_title']);
+        $topic_title = $row['topic_title'];
 
         $template->assign_block_vars('seed', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
@@ -89,9 +89,9 @@ if ($seeding) {
 
 if ($leeching) {
     foreach ($leeching as $i => $row) {
-        $compl_size = ($row['remain'] && $row['size'] && $row['size'] > $row['remain']) ? ($row['size'] - $row['remain']) : 0;
-        $compl_perc = ($compl_size) ? floor($compl_size * 100 / $row['size']) : 0;
-        $topic_title = wbr($row['topic_title']);
+        $compl_size = ($row['remain'] && $row['size'] && ($row['size'] > $row['remain'])) ? ($row['size'] - $row['remain']) : 0;
+        $compl_perc = $compl_size ? floor($compl_size * 100 / $row['size']) : 0;
+        $topic_title = $row['topic_title'];
 
         $template->assign_block_vars('leech', [
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -22,26 +22,24 @@ if (isset($_POST['mode']) || isset($_GET['mode'])) {
     $mode = '';
 }
 
+$pathToSmilesDir = BB_ROOT . $bb_cfg['smilies_path'];
 $delimeter = '=+:';
 $s_hidden_fields = '';
-$smiley_paks = [];
+$smiley_paks = $smiley_images = [];
 
-// Read a listing of uploaded smilies for use in the add or edit smliey code
-$dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
+// Read a listing of uploaded smiles
+$smilesDirectory = new DirectoryIterator($pathToSmilesDir);
 
-while ($file = @readdir($dir)) {
-    if (!is_dir(realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
-        $img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
-
-        if ($img_size[0] && $img_size[1]) {
-            $smiley_images[] = $file;
-        } elseif (preg_match('/.pak$/i', $file)) {
-            $smiley_paks[] = $file;
+foreach ($smilesDirectory as $files) {
+    if ($files->isFile()) {
+        $extension = strtolower(pathinfo($files->getFilename(), PATHINFO_EXTENSION));
+        if (in_array($extension, ['png', 'gif'], true) && getimagesize($pathToSmilesDir . '/' . $files->getFilename())) {
+            $smiley_images[] = $files->getFilename();
+        } else if ($extension === 'pak') {
+            $smiley_paks[] = $files->getFilename();
         }
     }
 }
-
-closedir($dir);
 
 // Select main mode
 if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
@@ -71,7 +69,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
         }
 
-        $fcontents = file(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smile_pak);
+        $fcontents = file($pathToSmilesDir . '/' . $smile_pak);
 
         if (empty($fcontents)) {
             bb_die('Could not read smiley pak file');
@@ -167,11 +165,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $template->assign_vars([
         'TPL_SMILE_EDIT' => true,
-        'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
+        'SMILEY_IMG' => $pathToSmilesDir . '/' . $smiley_images[0],
         'S_SMILEY_ACTION' => 'admin_smilies.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_FILENAME_OPTIONS' => $filename_list,
-        'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path']
+        'S_SMILEY_BASEDIR' => $pathToSmilesDir
     ]);
 } elseif ($mode != '') {
     switch ($mode) {
@@ -217,11 +215,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                 'TPL_SMILE_EDIT' => true,
                 'SMILEY_CODE' => $smile_data['code'],
                 'SMILEY_EMOTICON' => $smile_data['emoticon'],
-                'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
+                'SMILEY_IMG' => $pathToSmilesDir . '/' . $smiley_edit_img,
                 'S_SMILEY_ACTION' => 'admin_smilies.php',
                 'S_HIDDEN_FIELDS' => $s_hidden_fields,
                 'S_FILENAME_OPTIONS' => $filename_list,
-                'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path']
+                'S_SMILEY_BASEDIR' => $pathToSmilesDir
             ]);
 
             break;
@@ -308,7 +306,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         $template->assign_block_vars('smiles', [
             'ROW_CLASS' => $row_class,
 
-            'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smilies[$i]['smile_url'],
+            'SMILEY_IMG' => $pathToSmilesDir . '/' . $smilies[$i]['smile_url'],
             'CODE' => $smilies[$i]['code'],
             'EMOT' => $smilies[$i]['emoticon'],
 

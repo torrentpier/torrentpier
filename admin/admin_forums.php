@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -51,6 +51,20 @@ if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
         $cat_id = reset($req_cat_id);
         $forumname = stripslashes($_POST['forumname'][$cat_id]);
     }
+}
+
+// Check for demo mode
+if (IN_DEMO_MODE && in_array($mode, [
+        // Category
+        'editcat',
+        'modcat',
+        'deletecat',
+        // Forum
+        'editforum',
+        'modforum',
+        'deleteforum'
+    ])) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 
 $show_main_page = false;
@@ -433,6 +447,7 @@ if ($mode) {
             if ($to_id == -1) {
                 // Delete everything from forum
                 \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $from_id, 0, true);
+                $datastore->update('stats');
             } else {
                 // Move all posts
                 $sql = 'SELECT * FROM ' . BB_FORUMS . " WHERE forum_id IN($from_id, $to_id)";
@@ -517,7 +532,11 @@ if ($mode) {
         case 'movedelcat':
             // Move or delete a category in the DB
             $from_id = (int)$_POST['from_id'];
-            $to_id = (int)$_POST['to_id'];
+            $to_id = (int)$_POST['to_id'] ?? -1;
+
+            if ($to_id === -1) {
+                bb_die($lang['NOWHERE_TO_MOVE']);
+            }
 
             if ($from_id == $to_id || !cat_exists($from_id) || !cat_exists($to_id)) {
                 bb_die('Bad input');
@@ -649,7 +668,6 @@ if ($mode) {
 
         default:
             bb_die($lang['NO_MODE']);
-
             break;
     }
 }
@@ -734,7 +752,7 @@ if (!$mode || $show_main_page) {
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
                         'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
                         'NUM_POSTS' => $forum_rows[$j]['forum_posts'],
-                        'PRUNE_DAYS' => $forum_rows[$j]['prune_days'] ?: '-',
+                        'PRUNE_DAYS' => !empty($forum_rows[$j]['prune_days']) ? delta_time((TIMENOW - 86400 * $forum_rows[$j]['prune_days']), TIMENOW, 'days') : $lang['DISABLED'],
 
                         'ORDER' => $forum_rows[$j]['forum_order'],
                         'FORUM_ID' => $forum_rows[$j]['forum_id'],
@@ -744,7 +762,7 @@ if (!$mode || $show_main_page) {
                         'FORUM_PARENT' => $forum_rows[$j]['forum_parent'],
                         'SF_PAD' => $forum_rows[$j]['forum_parent'] ? ' style="padding-left: 20px;" ' : '',
                         'FORUM_NAME_CLASS' => $forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen',
-                        'ADD_SUB_HREF' => "admin_forums.php?mode=addforum&amp;forum_parent={$forum_rows[$j]['forum_id']}",
+                        'ADD_SUB_HREF' => !$forum_rows[$j]['forum_parent'] ? "admin_forums.php?mode=addforum&amp;forum_parent={$forum_rows[$j]['forum_id']}" : '',
                         'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,
                         'U_FORUM_EDIT' => "admin_forums.php?mode=editforum&amp;f=$forum_id",
                         'U_FORUM_PERM' => "admin_forumauth.php?f=$forum_id",
@@ -753,10 +771,10 @@ if (!$mode || $show_main_page) {
                         'U_FORUM_MOVE_DOWN' => "admin_forums.php?mode=forum_order&amp;move=15&amp;f=$forum_id&amp;c=$req_cat_id",
                         'U_FORUM_RESYNC' => "admin_forums.php?mode=forum_sync&amp;f=$forum_id",
                     ));
-                }// if ... forumid == catid
-            } // for ... forums
-        } // for ... categories
-    }// if ... total_categories
+                }
+            }
+        }
+    }
 }
 
 print_page('admin_forums.tpl', 'admin');

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -24,7 +24,7 @@ class WordsRate
 
     public function __construct()
     {
-        // слова начинающиеся на..
+        // words starting with..
         $del_list = file_get_contents(BB_ROOT . '/library/words_rate_del_list.txt');
         $del_list = str_compact($del_list);
         $del_list = str_replace(' ', '|', preg_quote($del_list, '/'));
@@ -34,7 +34,7 @@ class WordsRate
     }
 
     /**
-     * Возвращает "показатель полезности" сообщения используемый для автоудаления коротких сообщений типа "спасибо", "круто" и т.д.
+     * Returns "usefulness coefficient" for automatic deletion of short sentences as "thanks", "cool" and etc.
      *
      * @param string $text
      * @return int
@@ -45,19 +45,19 @@ class WordsRate
         $this->deleted_words = [];
         $this->del_text_hl = $text;
 
-        // длинное сообщение
+        // Long text
         if (\strlen($text) > 600) {
             return $this->words_rate;
         }
-        // вырезаем цитаты если содержит +1
+        // Crop quotes if contains +1
         if (preg_match('#\+\d+#', $text)) {
             $text = strip_quotes($text);
         }
-        // содержит ссылку
+        // Contains a link
         if (strpos($text, '://')) {
             return $this->words_rate;
         }
-        // вопрос
+        // Question
         if ($questions = preg_match_all('#\w\?+#', $text, $m)) {
             if ($questions >= 1) {
                 return $this->words_rate;
@@ -71,9 +71,9 @@ class WordsRate
         }
         $text = preg_replace($this->words_del_exp, '', $text);
 
-        // удаление смайлов
+        // Delete smilies
         $text = preg_replace('#:\w+:#', '', $text);
-        // удаление bbcode тегов
+        // Delete bb_code tags
         $text = preg_replace('#\[\S+\]#', '', $text);
 
         $words_count = preg_match_all($this->words_cnt_exp, $text, $m);

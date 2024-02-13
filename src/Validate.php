@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -16,7 +16,7 @@ use Egulias\EmailValidator\Validation\RFCValidation;
 use Egulias\EmailValidator\Validation\MessageIDValidation;
 use Egulias\EmailValidator\Validation\Extra\SpoofCheckValidation;
 
-use TorrentPier\Helpers\IsHelper;
+use TorrentPier\Helpers\StringHelper;
 
 /**
  * Class Validate
@@ -32,10 +32,9 @@ class Validate
      *
      * @return bool|string
      */
-    public static function username(string $username, bool $check_ban_and_taken = true)
+    public static function username(string $username, bool $check_ban_and_taken = true): bool|string
     {
         global $user, $lang;
-
         static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
         // Check for empty
@@ -43,7 +42,6 @@ class Validate
             return $lang['CHOOSE_A_NAME'];
         }
 
-        $username = str_compact($username);
         $username = clean_username($username);
 
         // Length
@@ -95,11 +93,11 @@ class Validate
      * Validate user entered email
      *
      * @param string $email
-     * @param bool $check_ban_and_taken
+     * @param bool $check_taken
      *
      * @return bool|string
      */
-    public static function email(string $email, bool $check_ban_and_taken = true)
+    public static function email(string $email, bool $check_taken = true)
     {
         global $lang, $userdata, $bb_cfg;
 
@@ -134,19 +132,8 @@ class Validate
             }
         }
 
-        if ($check_ban_and_taken) {
-            // Check banned
-            $banned_emails = [];
-            foreach (DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
-                $banned_emails[] = str_replace('\*', '.*?', preg_quote($row['ban_email'], '#'));
-            }
-            if ($banned_emails_exp = implode('|', $banned_emails)) {
-                if (preg_match("#^($banned_emails_exp)$#i", $email)) {
-                    return sprintf($lang['EMAIL_BANNED'], $email);
-                }
-            }
-
-            // Check taken
+        // Check taken
+        if ($check_taken) {
             $email_sql = DB()->escape($email);
             if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
                 if ($row['user_email'] == $userdata['user_email']) {
@@ -194,24 +181,24 @@ class Validate
         if ($bb_cfg['password_symbols']) {
             // Numbers
             if ($bb_cfg['password_symbols']['nums']) {
-                if (!IsHelper::isContainsNums($password)) {
+                if (!StringHelper::isContainsNums($password)) {
                     return $lang['CHOOSE_PASS_ERR_NUM'];
                 }
             }
             // Letters
             if ($bb_cfg['password_symbols']['letters']['lowercase']) {
-                if (!IsHelper::isContainsLetters($password)) {
+                if (!StringHelper::isContainsLetters($password)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER'];
                 }
             }
             if ($bb_cfg['password_symbols']['letters']['uppercase']) {
-                if (!IsHelper::isContainsLetters($password, true)) {
+                if (!StringHelper::isContainsLetters($password, true)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
                 }
             }
             // Spec symbols
             if ($bb_cfg['password_symbols']['spec_symbols']) {
-                if (!IsHelper::isContainsSpecSymbols($password)) {
+                if (!StringHelper::isContainsSpecSymbols($password)) {
                     return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
                 }
             }

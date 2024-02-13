@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -14,13 +14,10 @@ require __DIR__ . '/common.php';
 // Start session management
 $user->session_start();
 
-global $lang;
-
 $info = [];
-$html_dir = LANG_DIR . 'html/';
-$req_mode = (string)$_REQUEST['show'];
+$htmlDir = LANG_DIR . 'html/';
 
-switch ($req_mode) {
+switch ((string)$_REQUEST['show'] ?? 'not_found') {
     case 'advert':
         $info['title'] = $lang['ADVERT'];
         $info['src'] = 'advert.html';
@@ -43,7 +40,7 @@ switch ($req_mode) {
         break;
 }
 
-$require = file_exists($html_dir . $info['src']) ? $html_dir . $info['src'] : false;
+$require = is_file($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
 
 $template->assign_vars([
     'PAGE_TITLE' => mb_strtoupper($info['title'], 'UTF-8'),

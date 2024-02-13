@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -18,12 +18,12 @@ if (!$mode = (string)$this->request['mode']) {
 }
 
 $map = new TorrentPier\Sitemap();
-$html = '';
 
+$html = '';
 switch ($mode) {
     case 'create':
         $map->createSitemap();
-        if (file_exists(SITEMAP_DIR . '/sitemap.xml')) {
+        if (is_file(SITEMAP_DIR . '/sitemap.xml')) {
             $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
         } else {
             $html .= $lang['SITEMAP_NOT_CREATED'];
@@ -31,7 +31,7 @@ switch ($mode) {
         break;
 
     case 'search_update':
-        if (!file_exists(SITEMAP_DIR . '/sitemap.xml')) {
+        if (!is_file(SITEMAP_DIR . '/sitemap.xml')) {
             $map->createSitemap();
         }
 

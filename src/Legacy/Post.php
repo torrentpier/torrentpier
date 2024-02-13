@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -101,7 +101,7 @@ class Post
 
         // Flood control
         $row = null;
-        $where_sql = (IS_GUEST) ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+        $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
 
         if ($mode == 'newtopic' || $mode == 'reply') {
             $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
@@ -172,7 +172,7 @@ class Post
         if ($update_post_time && $mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
             $edited_sql .= ", post_time = $current_time ";
             //lpt
-            DB()->sql_query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id");
+            DB()->sql_query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id LIMIT 1");
         }
 
         $sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
@@ -197,7 +197,7 @@ class Post
 
         update_post_html(['post_id' => $post_id, 'post_text' => $post_message]);
 
-        //Обновление кеша новостей на главной
+        // Updating news cache on index page
         if ($bb_cfg['show_latest_news']) {
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
             if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic') {
@@ -335,7 +335,7 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        global $bb_cfg, $lang, $userdata;
+        global $bb_cfg, $lang, $userdata, $wordCensor;
 
         if (!$bb_cfg['topic_notify_enabled']) {
             return;
@@ -358,12 +358,7 @@ class Post
 			");
 
                 if ($watch_list) {
-                    $orig_word = $replacement_word = [];
-                    obtain_word_list($orig_word, $replacement_word);
-
-                    if (\count($orig_word)) {
-                        $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-                    }
+                    $topic_title = $wordCensor->censorString($topic_title);
 
                     $u_topic = make_url(TOPIC_URL . $topic_id . '&view=newest#newest');
                     $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");
@@ -417,16 +412,15 @@ class Post
      * Insert post to the existing thread
      *
      * @param string $mode
-     * @param int $topic_id
-     * @param int $forum_id
-     * @param int $old_forum_id
-     * @param int $new_topic_id
+     * @param int|string $topic_id
+     * @param int|string|null $forum_id
+     * @param int|string|null $old_forum_id
+     * @param int|string|null $new_topic_id
      * @param string $new_topic_title
-     * @param int $old_topic_id
-     * @param string $message
-     * @param int $poster_id
+     * @param int|null $old_topic_id
+     * @param string $reason_move
      */
-    public static function insert_post($mode, $topic_id, $forum_id = null, $old_forum_id = null, $new_topic_id = null, $new_topic_title = '', $old_topic_id = null, $message = '', $poster_id = null)
+    public static function insert_post(string $mode, int|string $topic_id, int|string $forum_id = null, int|string $old_forum_id = null, int|string $new_topic_id = null, string $new_topic_title = '', int $old_topic_id = null, string $reason_move = ''): void
     {
         global $userdata, $lang;
 
@@ -434,9 +428,11 @@ class Post
             return;
         }
 
-        $post_username = $post_text = $poster_ip = '';
-
+        $post_username = '';
         $post_time = TIMENOW;
+
+        $poster_id = BOT_UID;
+        $poster_ip = '7f000001';
 
         if ($mode == 'after_move') {
             if (!$forum_id || !$old_forum_id) {
@@ -455,15 +451,10 @@ class Post
                 return;
             }
 
-            $post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', profile_url($userdata));
-
-            $poster_id = BOT_UID;
-            $poster_ip = '7f000001';
+            $reason_move = !empty($reason_move) ? htmlCHR($reason_move) : $lang['NOSELECT'];
+            $post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', $reason_move, profile_url($userdata));
         } elseif ($mode == 'after_split_to_old') {
             $post_text = sprintf($lang['BOT_MESS_SPLITS'], '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
-
-            $poster_id = BOT_UID;
-            $poster_ip = '7f000001';
         } elseif ($mode == 'after_split_to_new') {
             $sql = "SELECT t.topic_title, p.post_time
 			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
@@ -474,9 +465,6 @@ class Post
                 $post_time = $row['post_time'] - 1;
 
                 $post_text = sprintf($lang['BOT_TOPIC_SPLITS'], '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url($userdata));
-
-                $poster_id = BOT_UID;
-                $poster_ip = '7f000001';
             } else {
                 return;
             }

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'העמוד';
 $lang['GOTO_PAGE'] = 'עבור לדף';
 $lang['GOTO_SHORT'] = 'דף';
 $lang['JOINED'] = 'הצטרף';
-$lang['LONGEVITY'] = 'אריכות ימים';
+$lang['LONGEVITY'] = 'רשום';
 $lang['IP_ADDRESS'] = 'כתובת ה-IP';
 $lang['POSTED_AFTER'] = 'אחרי';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'את רוב המשתמשים אי פעם היה 
 $lang['ONLINE_ADMIN'] = 'מנהל';
 $lang['ONLINE_MOD'] = 'מנחה';
 $lang['ONLINE_GROUP_MEMBER'] = 'בקבוצה';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'הזמן הנוכחי הוא: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'אווטאר הבקרה';
 
 $lang['WEBSITE'] = 'באתר';
 $lang['LOCATION'] = 'מיקום';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'קשר';
 $lang['EMAIL_ADDRESS'] = 'כתובת דואר אלקטרוני';
 $lang['SEND_PRIVATE_MESSAGE'] = 'שלח הודעה פרטית';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'למצוא נושאים המשתמש'; // Find al
 $lang['NO_USER_ID_SPECIFIED'] = 'מצטער, אבל משתמש זה אינו קיים.';
 $lang['WRONG_PROFILE'] = 'לא ניתן לשנות פרופיל זה היא לא שלך.';
 
-$lang['ONLY_ONE_AVATAR'] = 'רק סוג אחד של האווטאר יכול להיות מוגדר';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'את הקובץ בכתובת האתר שנתת לא מכיל נתונים';
 $lang['NO_CONNECTION_URL'] = 'חיבור לא יכול להיות עשה את כתובת האתר שנתת';
 $lang['INCOMPLETE_URL'] = 'הכתובת שהזנת אינה שלמה';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'באתר';
 $lang['ASC'] = 'עולה';
 $lang['DESC'] = 'יורד';
 $lang['ORDER'] = 'סדר';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'קבוצות משתמשים';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'הוסיף';
 $lang['BT_REG_ON_TRACKER'] = 'לרשום על tracker';
 $lang['BT_REG_FAIL'] = 'לא יכול לרשום סיקור על טראקר';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'עוד סיקור עם אותו info_hash כבר <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'הסר מ-tracker';
 $lang['BT_UNREGISTERED'] = 'סיקור לא רשומים';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'סטטוס';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'בחר מצב';
 $lang['TOR_STATUS_NOT_SELECT'] = 'לא בחרת מצב.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'כל הסטטוסים';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'לא בדקתי',
     TOR_CLOSED => 'סגור',
     TOR_APPROVED => 'בדקתי',
     TOR_NEED_EDIT => 'לא מוסדר עד',
     TOR_NO_DESC => 'לא מוסדר',
-    TOR_DUP => 'חוזר',
-    TOR_CLOSED_CPHOLD => 'סגור טוב.',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'נספג',
     TOR_DOUBTFUL => 'אני בספק',
-    TOR_CHECKING => 'מאומת',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'זמני',
     TOR_PREMOD => 'מראש מתינות',
-    TOR_REPLENISH => 'לחדש',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'מעמד כזה לא קיים!';
 $lang['TORRENT_FAILED'] = 'הפצה לא נמצא!';
 $lang['TOR_STATUS_DUB'] = 'הפצה יש את אותו מעמד';
-$lang['TOR_DONT_CHANGE'] = 'שינוי מעמד לא יכול להיות!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'הפצה יש מצב של:';
 $lang['TOR_STATUS_CHANGED'] = 'מצב שינה: ';
 $lang['TOR_BACK'] = ' חזרה';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'סיקור כבר רשום';
 $lang['NOT_TORRENT'] = 'קובץ זה לא סיקור';
 $lang['ONLY_1_TOR_PER_POST'] = 'אתה יכול להירשם רק סיקור אחד בפוסט אחד';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'אתה יכול להירשם רק סיקור אחד בנושא אחד';
-$lang['VIEWING_USER_BT_PROFILE'] = 'הצגת סיקור פרופיל :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'טורנטים פעילים';
 
 $lang['TD_TRAF'] = 'היום';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You אין בונוסים זמ�
 $lang['BONUS_RETURN'] = 'לחזור זרע בונוס exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'לפתוח נושאים';
 $lang['OPEN_IN_SAME_WINDOW'] = 'לפתוח באותו חלון';
 $lang['SHOW_TIME_TOPICS'] = 'זמן ההצגה של היצירה נושאים';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'עוגיות חייב להיות מופעל!';
 $lang['SESSION_EXPIRED'] = 'הפעלה שפג תוקפם';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'הצג רק שמות משתמש מתחיל עם';
-$lang['OTHERS'] = 'אחרים';
-$lang['ALL'] = 'כל';
-
 $lang['POST_LINK'] = 'לפרסם קישור';
 $lang['GOTO_QUOTED_POST'] = 'ללכת המצוטטת פוסט';
 $lang['LAST_VISITED'] = 'אתמול ביקר';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'אף פעם לא';
 //mpd
 $lang['DELETE_POSTS'] = 'למחוק פוסטים נבחרים';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'הנבחרת ההודעות שנכתבו כבר הוסר בהצלחה';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'הודעות';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'עדכון פוסט הזמן';
 $lang['TOPIC_SPLIT_NEW'] = 'נושא חדש';
 $lang['TOPIC_SPLIT_OLD'] = 'זקן נושא';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'להוסיף בוט-הודעה על העברת';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'להוסיף בוט-הודעה על פיצול כדי <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'להוסיף בוט-הודעה על פיצול כדי <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'טקסט מודגש: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'טקסט נטוי: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'קו תחתון טקסט: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'טקסט חוצה: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'ציטוט טקסט: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'כדי למחוק הזמנה מתוך הרשימה, ל
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'צפו נושאים';
-$lang['NO_WATCHED_TOPICS'] = 'אתה לא צופה כל הנושאים';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'חזרה לעמוד הבית';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'לחץ על %sHere%s לחזור פורום ה
 
 // Banning
 $lang['BAN_CONTROL'] = 'איסור שליטה';
-$lang['BAN_EXPLAIN'] = 'כאן אתה יכול לשלוט בנינג של משתמשים. אתה יכול להשיג זאת על ידי איסור או שניהם של משתמש מסוים או יחיד או טווח של כתובות IP. שיטות אלו למנוע ממשתמשים מגיעים אל דף האינדקס של הלוח שלך. כדי למנוע ממשתמשים רישום תחת שם משתמש אחר, אתה יכול גם לציין אסר כתובת דוא " ל. אנא שימו לב כי איסור כתובת דוא " ל לבד לא ימנע מהמשתמש להיות מסוגל להתחבר או להציב את הלוח שלך. אתה צריך להשתמש באחת הראשון שתי שיטות להשיג את זה.';
-$lang['BAN_EXPLAIN_WARN'] = 'אנא שימו לב כי הזנת טווח של כתובות IP תוצאות כל הכתובות בין התחלה וסוף להתווסף את banlist. ניסיונות ייעשה כדי למזער את מספר כתובות להוסיף מסד הנתונים על ידי החדרת כלליים באופן אוטומטי במידת הצורך. אם אתם ממש חייבים להזין טווח, לנסות לשמור על זה קטן, או יותר טוב עדיין מדינה כתובות ספציפיות.';
-
-$lang['SELECT_IP'] = 'בחר את כתובת ה-IP';
-$lang['SELECT_EMAIL'] = 'בחר כתובת דוא " ל';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'איסור ספציפי אחד או יותר משתמשים';
 $lang['BAN_USERNAME_EXPLAIN'] = 'אתה יכול לאסור משתמשים מרובים בבת-אחת באמצעות המתאים שילוב של עכבר ומקלדת למחשב שלך ודפדפן';
-
-$lang['BAN_IP'] = 'איסור אחד או יותר כתובות IP';
-$lang['IP_HOSTNAME'] = 'כתובות IP';
-$lang['BAN_IP_EXPLAIN'] = 'כדי לציין מספר בכתובות IP שונות יש להפריד ביניהם באמצעות פסיקים.';
-
-$lang['BAN_EMAIL'] = 'איסור אחד או יותר כתובות דוא " ל';
-$lang['BAN_EMAIL_EXPLAIN'] = 'כדי להגדיר יותר מכתובת דוא " ל אחת, יש להפריד ביניהם באמצעות פסיקים. לציין כלליים שם המשתמש, השתמש * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'האו " ם, באן עוד משתמשים ספציפיים';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'אתה יכול לסור חסימה של משתמש למשתמשים מרובים בבת-אחת באמצעות המתאים שילוב של עכבר ומקלדת למחשב שלך ודפדפן';
-
-$lang['UNBAN_IP'] = 'האו " ם, באן אחד או יותר כתובות IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'אתה יכול לסור חסימה של משתמש בכתובות IP מרובות בבת-אחת באמצעות המתאים שילוב של עכבר ומקלדת למחשב שלך ודפדפן';
-
-$lang['UNBAN_EMAIL'] = 'האו "ם, באן אחד או יותר כתובות דוא" ל';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'אתה יכול לסור חסימה של משתמש מספר כתובות דוא " ל אחת באמצעות המתאים שילוב של עכבר ומקלדת למחשב שלך ודפדפן';
-
 $lang['NO_BANNED_USERS'] = 'לא אסר שמות משתמש';
-$lang['NO_BANNED_IP'] = 'לא אסר כתובות IP';
-$lang['NO_BANNED_EMAIL'] = 'לא אסר כתובות דוא " ל';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'את banlist עודכן בהצלחה';
 $lang['CLICK_RETURN_BANADMIN'] = 'לחץ על %sHere%s לחזור איסור שליטה';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'פורום ניהול';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'מן הלוח הזה אתה יכול להוסיף, למחוק, לערוך מחדש ההוראה מחדש סינכרון קטגוריות ופורומים';
 $lang['EDIT_FORUM'] = 'עריכה פורום';
 $lang['CREATE_FORUM'] = 'ליצור פורום חדשות';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'ליצור קטגוריה חדשה';
 $lang['REMOVE'] = 'הסר';
 $lang['UPDATE_ORDER'] = 'עדכון פקודה';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'אם זה מוגדר מימד של תמונ�
 $lang['ASSIGNED_GROUP'] = 'להקצות קבוצה';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'צור תמונות ממוזערות';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'תמיד ליצור תמונה ממוזערת. תכונה זו עוקף כמעט את כל הגדרות במסגרת זו קטגוריה מיוחדת, חוץ מרבית תמונה מידות. עם תכונה זו. התמונה הממוזערת תוצג בתוך ההודעה, המשתמש יכול ללחוץ על זה כדי לפתוח את התמונה האמיתית.<br />Please שים לב כי תכונה זו דורשת Imagick להיות מותקן, אם זה לא מותקן, או אם מצב בטוח \' מופעלת GD-סיומת של PHP תהיה בשימוש. אם התמונה מסוג זה אינו נתמך על ידי PHP, תכונה זו תהיה לא רגילה.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'מינימום גודל קובץ התמונה הממוזערת';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'אם תמונה קטן יותר מאשר זה מוגדר גודל קובץ, לא ממוזערת יהיה נברא, כי הוא קטן מספיק.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick התכנית (הנתיב המלא)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'הזן את הנתיב להמיר תוכנית של imagick, בדרך כלל /usr/bin/להמיר (ב-windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'חיפוש Imagick';
-
-$lang['USE_GD2'] = 'לעשות שימוש GD2 הרחבה';
-$lang['USE_GD2_EXPLAIN'] = 'PHP הוא מסוגל להיות הידור עם GD1 או GD2 הרחבה על התמונה מניפולציה. בצורה נכונה כדי ליצור תמונות ממוזערות ללא imagemagick את הקובץ Mod משתמשת בשתי שיטות שונות, בהתבסס על הבחירה שלך. אם התמונות הממוזערות נמצא באיכות גרועה או דפוק, נסה לשנות הגדרה זו.';
-$lang['ATTACHMENT_VERSION'] = 'מצורף Mod גרסה %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'לנהל אסור הרחבות';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'אתה נכנס כמה ערכים לא נכונים. א�
 $lang['PROCESSING'] = 'עיבוד...';
 $lang['FINISHED'] = 'סיימתי';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'הנושא הועבר מתוך פורום [b]%s[/b] פורום [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'הנושא מפוצל. נושא חדש - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'הנושא כבר עזב [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'נא למלא את טופס השחרור';
 $lang['NEW_RELEASE'] = 'פרסום חדש';
 $lang['NEXT'] = 'המשך';
 $lang['OTHER'] = 'אחרים';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'אתה חייב למלא את שדה <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'עליך לבחור <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'חיפוש עבור משתמשים עם
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'חיפוש עבור משתמשים עם מיקום התאמת %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'חיפוש עבור משתמשים עם תחומי העניין שלהם בתחום התאמת %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'חיפוש עבור משתמשים עם הכיבוש שלהם בתחום התאמת %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'מחפשים את המשתמשים שביקרו בחודש האחרון %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'מחפשים את המשתמשים שביקרו לאחר שעבר %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'מחפשים המשתמשים להגדיר %s כמו השפה שלהם';
 $lang['SEARCH_FOR_TIMEZONE'] = 'מחפשים המשתמשים להגדיר UTC %s כמו אזור הזמן שלהם.';
 $lang['SEARCH_FOR_STYLE'] = 'מחפשים המשתמשים להגדיר %s כמו הסגנון שלהם';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'פורומים של המפה';
 $lang['ATOM_FEED'] = 'להאכיל';
 $lang['ATOM_ERROR'] = 'שגיאה ביצירת להאכיל';
 $lang['ATOM_SUBSCRIBE'] = 'הירשם ל-rss';
-$lang['ATOM_NO_MODE'] = 'לא לציין את מצב ההזנה';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'הפורום הזה לא צריך להאכיל (לא שוטף נושאים)';
 $lang['ATOM_NO_USER'] = 'משתמש זה אינו חייב להאכיל (לא שוטף נושאים)';
 $lang['ATOM_UPDATED'] = 'עדכן';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקס�
 $lang['TR_STATS'] = [
     0 => 'משתמשים לא-פעילים ב-30 ימים',
     1 => 'משתמשים לא-פעילים למשך 90 ימים.',
-    2 => 'בינוני גודל הפצות על הגשש (הרבה מגה-בתים)',
+    2 => 'medium size distributions on the tracker',
     3 => 'כמה סך ידיים על הגשש',
     4 => 'כמה חיים ידיים (יש לפחות 1 led)',
     5 => 'כמה ידיים איפה זה זריעה יותר מ-5 זרעים',

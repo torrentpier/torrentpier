@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -71,6 +71,7 @@ switch ($mode) {
             'username' => true,
             'user_password' => true,
             'user_email' => true,
+            'invite_code' => true,
             'user_timezone' => true,
             'user_lang' => true,
             'user_opt' => true
@@ -81,6 +82,7 @@ switch ($mode) {
             'username' => '',
             'user_password' => '',
             'user_email' => '',
+            'invite_code' => '',
             'user_timezone' => $bb_cfg['board_timezone'],
             'user_lang' => $bb_cfg['default_lang'],
             'user_opt' => 0,
@@ -99,9 +101,9 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = [
             'user_active' => IS_ADMIN,
-            'username' => IS_ADMIN || $bb_cfg['allow_namechange'],
-            'user_password' => true,
-            'user_email' => true, // должен быть после user_password
+            'username' => (IS_ADMIN || $bb_cfg['allow_namechange']) && !IN_DEMO_MODE,
+            'user_password' => !IN_DEMO_MODE,
+            'user_email' => !IN_DEMO_MODE, // должен быть после user_password
             'user_lang' => $bb_cfg['allow_change']['language'],
             'user_gender' => $bb_cfg['gender'],
             'user_birthday' => $bb_cfg['birthday_enabled'],
@@ -157,13 +159,11 @@ if ($submit) {
 
 // Валидация данных
 $cur_pass_valid = $adm_edit;
+$can_edit_tpl = [];
 
 foreach ($profile_fields as $field => $can_edit) {
-    // Проверка на возможность редактирования
-    if ((bool)$can_edit === false) {
-        // TODO: При continue; не устанавливаются переменные ($tp_data) шаблона прописанные в case
-        // continue;
-    }
+    $can_edit = (bool)$can_edit;
+    $can_edit_tpl['CAN_EDIT_' . strtoupper($field)] = $can_edit;
 
     switch ($field) {
         /**
@@ -183,7 +183,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'username':
             $username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
 
-            if ($submit) {
+            if ($submit && $can_edit) {
                 $err = \TorrentPier\Validate::username($username);
                 if (!$errors and $err && $mode == 'register') {
                     $errors[] = $err;
@@ -193,15 +193,32 @@ foreach ($profile_fields as $field => $can_edit) {
                     $db_data['username'] = $username;
                 }
             }
-            $tp_data['CAN_EDIT_USERNAME'] = $can_edit;
             $tp_data['USERNAME'] = $pr_data['username'];
+            break;
+
+        /**
+         *  Invite code (reg)
+         */
+        case 'invite_code':
+            if ($bb_cfg['invites_system']['enabled']) {
+                $invite_code = $_POST['invite_code'] ?? '';
+                if ($submit) {
+                    if (isset($bb_cfg['invites_system']['codes'][$invite_code])) {
+                        if (TIMENOW > strtotime($bb_cfg['invites_system']['codes'][$invite_code])) {
+                            $errors[] = $lang['INVITE_EXPIRED'];
+                        }
+                    } else {
+                        $errors[] = $lang['INCORRECT_INVITE'];
+                    }
+                }
+            }
             break;
 
         /**
          *  Пароль (edit, reg)
          */
         case 'user_password':
-            if ($submit) {
+            if ($submit && $can_edit) {
                 $cur_pass = (string)@$_POST['cur_pass'];
                 $new_pass = (string)@$_POST['new_pass'];
                 $cfm_pass = (string)@$_POST['cfm_pass'];
@@ -235,14 +252,13 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'user_email':
             $email = !empty($_POST['user_email']) ? (string)$_POST['user_email'] : $pr_data['user_email'];
-            if ($submit) {
+            if ($submit && $can_edit) {
                 if ($mode == 'register') {
                     if (!$errors and $err = \TorrentPier\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
                 } elseif ($email != $pr_data['user_email']) {
-                    // если смена мейла юзером
                     if ($bb_cfg['email_change_disabled'] && !$adm_edit && !IS_ADMIN) {
                         $errors[] = $lang['EMAIL_CHANGING_DISABLED'];
                     }
@@ -649,6 +665,7 @@ if ($submit && !$errors) {
     }
 }
 
+$template->assign_vars($can_edit_tpl);
 $template->assign_vars($tp_data);
 
 $template->assign_vars([
@@ -660,6 +677,7 @@ $template->assign_vars([
     'ADM_EDIT' => $adm_edit,
     'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
     'PASSWORD_LONG' => sprintf($lang['PASSWORD_LONG'], PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH),
+    'INVITE_CODE' => !empty($_GET['invite']) ? htmlCHR($_GET['invite']) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),

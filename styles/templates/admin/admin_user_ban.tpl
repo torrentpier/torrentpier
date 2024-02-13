@@ -21,34 +21,6 @@
 		<td class="row2">{S_UNBAN_USERLIST_SELECT}</td>
 	</tr>
 	<tr>
-		<th colspan="2">{L_BAN_IP}</th>
-	</tr>
-	<tr>
-		<td class="row1">{L_IP_HOSTNAME}: <br /><span class="small">{L_BAN_IP_EXPLAIN}</span></td>
-		<td class="row2"><input class="post" type="text" name="ban_ip" size="35" /></td>
-	</tr>
-	<tr>
-		<th colspan="2">{L_UNBAN_IP}</th>
-	</tr>
-	<tr>
-		<td class="row1">{L_IP_HOSTNAME}: <br /><span class="small">{L_UNBAN_IP_EXPLAIN}</span></td>
-		<td class="row2">{S_UNBAN_IPLIST_SELECT}</td>
-	</tr>
-	<tr>
-		<th colspan="2">{L_BAN_EMAIL}</th>
-	</tr>
-	<tr>
-		<td class="row1">{L_EMAIL_ADDRESS}: <br /><span class="small">{L_BAN_EMAIL_EXPLAIN}</span></td>
-		<td class="row2"><input class="post" type="text" name="ban_email" size="35" /></td>
-	</tr>
-	<tr>
-		<th colspan="2">{L_UNBAN_EMAIL}</th>
-	</tr>
-	<tr>
-		<td class="row1">{L_EMAIL_ADDRESS}: <br /><span class="small">{L_UNBAN_EMAIL_EXPLAIN}</span></td>
-		<td class="row2">{S_UNBAN_EMAILLIST_SELECT}</td>
-	</tr>
-	<tr>
 		<td class="catBottom" colspan="2"><input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" /></td>
 	</tr>
 </table>
@@ -56,4 +28,3 @@
 </form>
 
 <br>
-<p>{L_BAN_EXPLAIN_WARN}</p>

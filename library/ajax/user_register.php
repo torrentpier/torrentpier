@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -42,13 +42,13 @@ switch ($mode) {
         if ($err = \TorrentPier\Validate::password($pass, $pass_confirm)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         } else {
-            $text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
+            $text = IS_GUEST ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
             $html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
         }
         break;
 
     default:
-        $this->ajax_die('Invalid mode');
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['html'] = $html;

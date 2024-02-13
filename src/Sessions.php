@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -32,7 +32,7 @@ class Sessions
      *
      * @return bool|array
      */
-    public static function cache_get_userdata(string $id)
+    public static function cache_get_userdata(string $id): bool|array
     {
         if (self::ignore_cached_userdata()) {
             return false;
@@ -81,9 +81,9 @@ class Sessions
     /**
      * Delete user sessions from cache
      *
-     * @param string|int $user_id
+     * @param int|string $user_id
      */
-    public static function cache_rm_user_sessions($user_id)
+    public static function cache_rm_user_sessions(int|string $user_id): void
     {
         $user_id = get_id_csv(explode(',', (string)$user_id));
 
@@ -134,31 +134,13 @@ class Sessions
     /**
      * Delete user sessions from cache and database
      *
-     * @param string|int $user_id
+     * @param int|string $user_id
      */
-    public static function delete_user_sessions($user_id)
+    public static function delete_user_sessions(int|string $user_id): void
     {
         self::cache_rm_user_sessions($user_id);
 
         $user_id = get_id_csv(explode(',', (string)$user_id));
         DB()->query("DELETE FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
-    }
-
-    /**
-     * Start user session on page header
-     * @param string $user_ip
-     * @param int $page_id
-     * @param bool $req_login
-     *
-     * @return array
-     * @deprecated
-     */
-    public static function session_pagestart($user_ip = USER_IP, $page_id = 0, bool $req_login = false): array
-    {
-        global $user;
-
-        $user->session_start(['req_login' => $req_login]);
-
-        return $user->data;
     }
 }

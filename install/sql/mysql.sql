@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config`
 -- Records of bb_attachments_config
 -- ----------------------------
 INSERT INTO `bb_attachments_config`
-VALUES ('upload_dir', 'data/torrent_files'),
+VALUES ('upload_dir', 'data/uploads'),
        ('upload_img', 'styles/images/icon_clip.gif'),
        ('topic_icon', 'styles/images/icon_clip.gif'),
        ('display_order', '0'),
@@ -46,20 +46,15 @@ VALUES ('upload_dir', 'data/torrent_files'),
        ('max_attachments_pm', '1'),
        ('disable_mod', '0'),
        ('allow_pm_attach', '1'),
-       ('attach_version', '2.3.14'),
        ('default_upload_quota', '0'),
        ('default_pm_quota', '0'),
        ('img_display_inlined', '1'),
-       ('img_max_width', '200'),
-       ('img_max_height', '200'),
+       ('img_max_width', '2000'),
+       ('img_max_height', '2000'),
        ('img_link_width', '600'),
        ('img_link_height', '400'),
        ('img_create_thumbnail', '1'),
-       ('img_min_thumb_filesize', '12000'),
-       ('img_imagick', '/usr/bin/convert'),
-       ('use_gd2', '1'),
-       ('wma_autoplay', '0'),
-       ('flash_autoplay', '0');
+       ('img_min_thumb_filesize', '12000');
 
 -- ----------------------------
 -- Table structure for `bb_attachments_desc`
@@ -154,10 +149,8 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
 (
   `ban_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ban_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
-  `ban_ip`     VARCHAR(42)           NOT NULL DEFAULT '0',
-  `ban_email`  VARCHAR(255)          NOT NULL DEFAULT '',
-  PRIMARY KEY (`ban_id`),
-  KEY `ban_ip_user_id` (`ban_ip`, `ban_userid`)
+  `ban_reason` VARCHAR(255)          NOT NULL DEFAULT '',
+  PRIMARY KEY (`ban_id`, `ban_userid`)
 )
   ENGINE = MyISAM
   DEFAULT CHARSET = utf8;
@@ -284,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `reg_time`         INT(11)               NOT NULL DEFAULT '0',
   `call_seed_time`   INT(11)               NOT NULL DEFAULT '0',
   `complete_count`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `seeder_last_seen` MEDIUMINT(10)         NOT NULL DEFAULT '0',
+  `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
   `tor_status`       TINYINT(4)            NOT NULL DEFAULT '0',
   `checked_user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `checked_time`     INT(11)               NOT NULL DEFAULT '0',
@@ -362,7 +355,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
   `ip`               VARCHAR(42)                    DEFAULT NULL,
   `ipv6`             VARCHAR(42)                    DEFAULT NULL,
   `port`             SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
-  `client`           VARCHAR(51)           NOT NULL DEFAULT 'Unknown',
   `seeder`           TINYINT(1)            NOT NULL DEFAULT '0',
   `releaser`         TINYINT(1)            NOT NULL DEFAULT '0',
   `tor_type`         TINYINT(1)            NOT NULL DEFAULT '0',
@@ -479,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `bb_categories`
 -- Records of bb_categories
 -- ----------------------------
 INSERT INTO `bb_categories`
-VALUES ('1', 'Ваша первая категория', '10');
+VALUES ('1', 'Your first category', '10');
 
 -- ----------------------------
 -- Table structure for `bb_config`
@@ -514,7 +506,7 @@ VALUES ('allow_autologin', '1'),
        ('birthday_check_day', '7'),
        ('bt_add_auth_key', '1'),
        ('bt_allow_spmode_change', '1'),
-       ('bt_announce_url', 'https://demo.torrentpier.com/bt/announce.php'),
+       ('bt_announce_url', ''),
        ('bt_disable_dht', '0'),
        ('bt_check_announce_url', '0'),
        ('bt_del_addit_ann_urls', '1'),
@@ -539,7 +531,7 @@ VALUES ('allow_autologin', '1'),
        ('bt_unset_dltype_on_tor_unreg', '1'),
        ('cron_last_check', '0'),
        ('default_dateformat', 'Y-m-d H:i'),
-       ('default_lang', 'ru'),
+       ('default_lang', 'en'),
        ('flood_interval', '15'),
        ('hot_threshold', '300'),
        ('login_reset_time', '30'),
@@ -556,9 +548,9 @@ VALUES ('allow_autologin', '1'),
        ('seed_bonus_points', ''),
        ('seed_bonus_tor_size', '0'),
        ('seed_bonus_user_regdate', '0'),
-       ('site_desc', 'A little text to describe your forum'),
+       ('site_desc', 'Bull-powered BitTorrent tracker engine'),
        ('sitemap_time', ''),
-       ('sitename', 'TorrentPier - Bull-powered BitTorrent tracker engine'),
+       ('sitename', 'TorrentPier'),
        ('smilies_path', 'styles/images/smiles'),
        ('static_sitemap', ''),
        ('topics_per_page', '50'),
@@ -618,20 +610,20 @@ CREATE TABLE IF NOT EXISTS `bb_cron`
 INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
                        `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
                        `disable_board`, `run_counter`)
-VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0',
+VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '0', '', '0',
         '1', '0'),
-       ('1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1',
+       ('1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '0', '', '0', '1',
         '0'),
-       ('1', 'Prune forums', 'prune_forums.php', 'daily', '', '05:00:00', '50', '', '', '', '1', '', '0', '1', '0'),
-       ('1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', '', '05:00:00', '60', '', '', '', '1', '',
+       ('1', 'Prune forums', 'prune_forums.php', 'daily', '', '05:00:00', '50', '', '', '', '0', '', '0', '1', '0'),
+       ('1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', '', '05:00:00', '60', '', '', '', '0', '',
         '0',
         '1', '0'),
-       ('1', 'Logs cleanup', 'clean_log.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0'),
-       ('1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0'),
-       ('1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', '', '05:00:00', '90', '', '', '', '1', '', '0', '1',
+       ('1', 'Logs cleanup', 'clean_log.php', 'daily', '', '05:00:00', '70', '', '', '', '0', '', '0', '1', '0'),
+       ('1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '0', '', '0', '1', '0'),
+       ('1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', '', '05:00:00', '90', '', '', '', '0', '', '0', '1',
         '0'),
-       ('1', 'Clean dlstat', 'clean_dlstat.php', 'daily', '', '05:00:00', '100', '', '', '', '1', '', '0', '1', '0'),
-       ('1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', '', '05:00:00', '110', '', '', '', '1', '',
+       ('1', 'Clean dlstat', 'clean_dlstat.php', 'daily', '', '05:00:00', '100', '', '', '', '0', '', '0', '1', '0'),
+       ('1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', '', '05:00:00', '110', '', '', '', '0', '',
         '0', '1', '0'),
        ('1', 'Sessions cleanup', 'sessions_cleanup.php', 'interval', '', '', '255', '', '', '00:03:00', '0', '', '0',
         '0', '0'),
@@ -660,7 +652,9 @@ VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00
        ('1', 'Sitemap update', 'sitemap.php', 'daily', '', '06:00:00', '30', '', '', '', '0', '', '0', '0', '0'),
        ('1', 'Update forums atom', 'update_forums_atom.php', 'interval', '', '', '255', '', '', '00:15:00', '0', '',
         '0',
-        '0', '0');
+        '0', '0'),
+       ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '255', '', '', '', '1', 'demo_mode_cron', '1', '1',
+        '0');
 
 -- ----------------------------
 -- Table structure for `bb_disallow`
@@ -707,8 +701,6 @@ VALUES ('1', 'gif', ''),
        ('1', 'png', ''),
        ('1', 'jpeg', ''),
        ('1', 'jpg', ''),
-       ('1', 'tif', ''),
-       ('1', 'tga', ''),
        ('1', 'webp', ''),
        ('1', 'bmp', ''),
        ('2', 'gtar', ''),
@@ -814,7 +806,7 @@ CREATE TABLE IF NOT EXISTS `bb_forums`
 -- Records of bb_forums
 -- ----------------------------
 INSERT INTO `bb_forums`
-VALUES ('1', '1', 'Ваш первый форум', 'Описание вашего первого форума.', '0', '10', '1', '1', '1', '0', '0', '0', '0',
+VALUES ('1', '1', 'Your first forum', 'Description of the forum.', '0', '10', '1', '1', '1', '0', '0', '0', '0',
         '1',
         '1', '1', '1',
         '3', '3', '1',
@@ -1004,7 +996,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text`
 -- ----------------------------
 INSERT INTO `bb_posts_text`
 VALUES ('1',
-        'Благодарим вас за установку новой версии TorrentPier Cattle!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.com/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.com/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.com/\n[*]Демо-версия: https://demo.torrentpier.com/\n[*]Инструкция: https://docs.torrentpier.com/\n[*]Перевод на другие языки: https://crowdin.com/project/torrentpier\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
+        'Thank you for installing the new — TorrentPier Cattle!\n\nWhat to do next? First of all configure your site in the administration panel (link in the bottom).\n\nChange main options: site description, number of messages per topic, time zone, language by default, seed-bonus options, birthdays etc... Create a couple of forums, delete or change this one. Change settings of categories to allow registration of torrents, change announcer url. If you will have questions or want additional modifications of the engine, [url=https://torrentpier.com/]visit our forum[/url] (you can use english, we will try to help in any case).\n\nIf you want to help with the translations: [url=https://crowdin.com/project/torrentpier]Crowdin[/url].\n\nWe are sure that you will be able to create the best tracker available.\nGood luck!');
 
 -- ----------------------------
 -- Table structure for `bb_privmsgs`
@@ -1088,7 +1080,7 @@ CREATE TABLE IF NOT EXISTS `bb_ranks`
 -- Records of bb_ranks
 -- ----------------------------
 INSERT INTO `bb_ranks` (`rank_title`, `rank_image`, `rank_style`)
-VALUES ('Администратор', 'styles/images/ranks/admin.png', 'colorAdmin');
+VALUES ('Administrator', 'styles/images/ranks/admin.png', 'colorAdmin');
 
 -- ----------------------------
 -- Table structure for `bb_search_rebuild`
@@ -1276,7 +1268,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics`
 -- Records of bb_topics
 -- ----------------------------
 INSERT INTO `bb_topics`
-VALUES ('1', '1', 'Добро пожаловать в TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1',
+VALUES ('1', '1', 'Welcome to TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1',
         '0',
         '0',
         '0', UNIX_TIMESTAMP(), '0');
@@ -1348,7 +1340,7 @@ CREATE TABLE IF NOT EXISTS `bb_users`
   `user_level`          TINYINT(4)            NOT NULL DEFAULT '0',
   `user_posts`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_timezone`       DECIMAL(5, 2)         NOT NULL DEFAULT '0.00',
-  `user_lang`           VARCHAR(255)          NOT NULL DEFAULT 'ru',
+  `user_lang`           VARCHAR(255)          NOT NULL DEFAULT 'en',
   `user_new_privmsg`    SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `user_unread_privmsg` SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `user_last_privmsg`   INT(11)               NOT NULL DEFAULT '0',
@@ -1388,7 +1380,7 @@ CREATE TABLE IF NOT EXISTS `bb_users`
 INSERT INTO `bb_users`
 VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3M53.CEe.O', '0', '0',
         '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
-        'ru', '0',
+        'en', '0',
         '0', '0',
         '0', '0',
         '0', '0',
@@ -1396,14 +1388,14 @@ VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3
         '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
        ('-746', '0', 'bot', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3M53.CEe.O', '0', '0',
         '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
-        'ru', '0',
+        'en', '0',
         '0', '0',
         '144', '0',
         '0', '0',
         '1900-01-01',
         'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
        ('2', '1', 'admin', '$2y$10$QeekUGqdfMO0yp7AT7la8OhgbiNBoJ627BO38MdS1h5kY7oX6UUKu', '0', '0',
-        '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru',
+        '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'en',
         '0',
         '0', '0',
         '304', '1',
@@ -1457,7 +1449,7 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
 (
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
-  `user_id`          MEDIUMINT(10)         NOT NULL DEFAULT '0',
+  `user_id`          MEDIUMINT(8)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
 )
   ENGINE = MyISAM
@@ -1465,6 +1457,24 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder`
 
 -- ----------------------------
 -- Records of buf_last_seeder
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `bb_thx`
+-- ----------------------------
+DROP TABLE IF EXISTS `bb_thx`;
+CREATE TABLE IF NOT EXISTS `bb_thx`
+(
+  `topic_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `time`     INT(11)               NOT NULL DEFAULT '0',
+  PRIMARY KEY (`topic_id`, `user_id`)
+)
+  ENGINE = MyISAM
+  DEFAULT CHARSET = utf8;
+
+-- ----------------------------
+-- Records of bb_thx
 -- ----------------------------
 
 -- ----------------------------

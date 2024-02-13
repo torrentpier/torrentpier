@@ -3,17 +3,14 @@
 <form method="post" action="{S_MODE_ACTION}" name="post">
     <table width="100%">
         <tr>
-            <td align="right" class="med" nowrap="nowrap">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}:&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}"/></td>
+            <td class="med nowrap tRight">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&middot;&nbsp;{L_ORDER}:&nbsp;{S_ORDER_SELECT}&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}"></td>
         </tr>
         <tr>
-            <td align="right" nowrap="nowrap">
-			<span class="genmed">
-				<input placeholder="{L_SEARCH_S}" type="text" class="post" name="username" maxlength="25" size="25" tabindex="1" value="{S_USERNAME}"/>&nbsp;<input type="submit" name="submituser" value="{L_FIND_USERNAME}" class="mainoption"/>
-			</span>
+            <td class="nowrap tRight">
+			    <span class="genmed">
+				    <input placeholder="{L_SEARCH_S}" type="text" class="post" name="username" maxlength="25" size="25" tabindex="1" value="{S_USERNAME}">&nbsp;<input type="submit" name="submituser" value="{L_FIND_USERNAME}" class="mainoption">
+			    </span>
             </td>
-        </tr>
-        <tr>
-            <td align="right" class="med">{L_SORT_PER_LETTER}:&nbsp;{S_LETTER_SELECT}{S_LETTER_HIDDEN}</td>
         </tr>
     </table>
 </form>

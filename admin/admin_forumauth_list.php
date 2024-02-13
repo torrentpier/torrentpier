@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -80,10 +80,17 @@ if (isset($_GET['adv'])) {
     unset($adv);
 }
 
-//
-// Start program proper
-//
-if (isset($_POST['submit'])) {
+$submit = isset($_POST['submit']);
+
+// Check for demo mode
+if (IN_DEMO_MODE && $submit) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
+/**
+ * Start program proper
+ */
+if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {

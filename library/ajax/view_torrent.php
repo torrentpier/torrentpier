@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -23,17 +23,17 @@ if (!$torrent) {
     $this->ajax_die($lang['ERROR_BUILD']);
 }
 
+$file_contents = null;
 $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
-if (!file_exists($filename) || !$file_contents = file_get_contents($filename)) {
-    if (IS_AM) {
-        $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
-    } else {
-        $this->ajax_die($lang['ERROR_NO_ATTACHMENT']);
-    }
+if (!is_file($filename) || !$file_contents = file_get_contents($filename)) {
+    $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
 }
 
-if (!$tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY)) {
-    return $lang['TORFILE_INVALID'];
+try {
+    $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
+} catch (\Exception $e) {
+    $this->response['html'] = htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}");
+    return;
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);

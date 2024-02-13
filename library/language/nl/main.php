@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'pagina';
 $lang['GOTO_PAGE'] = 'Ga naar pagina';
 $lang['GOTO_SHORT'] = 'Pagina';
 $lang['JOINED'] = 'Samengevoegd';
-$lang['LONGEVITY'] = 'Lange levensduur';
+$lang['LONGEVITY'] = 'Geregistreerd';
 $lang['IP_ADDRESS'] = 'IP-Adres';
 $lang['POSTED_AFTER'] = 'na';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'De meeste gebruikers ooit online was <b>%s</b> o
 $lang['ONLINE_ADMIN'] = 'Beheerder';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Lid van de groep';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'De huidige tijd is: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar bedieningspaneel';
 
 $lang['WEBSITE'] = 'Website';
 $lang['LOCATION'] = 'Locatie';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Contact';
 $lang['EMAIL_ADDRESS'] = 'E-mail adres';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Stuur privé bericht';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Gebruiker zoeken op onderwerpen'; // Find all top
 $lang['NO_USER_ID_SPECIFIED'] = 'Sorry, maar dat de gebruiker niet bestaat.';
 $lang['WRONG_PROFILE'] = 'Kunt u niet wijzigen van een profiel dat is niet uw eigen.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Slechts een type avatar kan worden opgegeven';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Het bestand op de URL die u gaf, bevat geen gegevens';
 $lang['NO_CONNECTION_URL'] = 'Een verbinding kan niet worden gemaakt naar de URL die u gaf';
 $lang['INCOMPLETE_URL'] = 'De URL die je hebt ingevoerd, is onvolledig';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Website';
 $lang['ASC'] = 'Oplopend';
 $lang['DESC'] = 'Aflopend';
 $lang['ORDER'] = 'Bestelling';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Gebruikersgroepen';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Toegevoegd';
 $lang['BT_REG_ON_TRACKER'] = 'Registreren op tracker';
 $lang['BT_REG_FAIL'] = 'Kan niet registreren torrent tracker op';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Een andere torrent met dezelfde info_hash al <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwijder van drijver';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Selecteer status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Je hebt niet gekozen status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alle statussen';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'niet gecontroleerd',
     TOR_CLOSED => 'gesloten',
     TOR_APPROVED => 'gecontroleerd',
     TOR_NEED_EDIT => 'niet geformaliseerd tot',
     TOR_NO_DESC => 'niet geformaliseerd',
-    TOR_DUP => 'herhaal',
-    TOR_CLOSED_CPHOLD => 'gesloten rechts',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'opgenomen',
     TOR_DOUBTFUL => 'dubieuze',
-    TOR_CHECKING => 'geverifieerde',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'tijdelijk',
     TOR_PREMOD => 'vooraf modereren',
-    TOR_REPLENISH => 'vullen',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Een dergelijke status niet bestaat!';
 $lang['TORRENT_FAILED'] = 'Distributie is niet gevonden!';
 $lang['TOR_STATUS_DUB'] = 'De distributie heeft dezelfde status';
-$lang['TOR_DONT_CHANGE'] = 'Verandering van de status kan niet worden!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'De distributie heeft de status van:';
 $lang['TOR_STATUS_CHANGED'] = 'De Status is veranderd: ';
 $lang['TOR_BACK'] = ' terug';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent al geregistreerd';
 $lang['NOT_TORRENT'] = 'Dit bestand is niet torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'U kunt zich inschrijven alleen een torrent in één post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'U kunt zich inschrijven alleen een torrent in een onderwerp';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Het bekijken van torrent-profiel :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Actieve torrents';
 
 $lang['TD_TRAF'] = 'Vandaag';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You niet over bonussen beschikb
 $lang['BONUS_RETURN'] = 'Terug naar het zaad bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Onderwerpen geopend';
 $lang['OPEN_IN_SAME_WINDOW'] = 'openen in hetzelfde venster';
 $lang['SHOW_TIME_TOPICS'] = 'toon de tijd van de schepping onderwerpen';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies moeten zijn ingeschakeld!';
 $lang['SESSION_EXPIRED'] = 'Sessie verlopen';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Toon alleen gebruikersnamen beginnend met';
-$lang['OTHERS'] = 'anderen';
-$lang['ALL'] = 'alle';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Ga naar het geciteerde post';
 $lang['LAST_VISITED'] = 'Laatste Bezoek';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Nooit';
 //mpd
 $lang['DELETE_POSTS'] = 'Verwijder het geselecteerde berichten';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'De geselecteerde posten zijn succesvol verwijderd';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Mededelingen';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Post updaten tijd';
 $lang['TOPIC_SPLIT_NEW'] = 'Nieuw onderwerp';
 $lang['TOPIC_SPLIT_OLD'] = 'Oude topic';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Toevoegen bot-bericht over het verplaatsen van';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Toevoegen bot-bericht over split naar <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Toevoegen bot-bericht over split naar <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Vetgedrukte tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Cursieve tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Tekst onderstrepen: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Quote tekst: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Voor het verwijderen van een volgorde in de lijst, kli
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Bekeken onderwerpen';
-$lang['NO_WATCHED_TOPICS'] = 'U bent niet kijken naar alle onderwerpen';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Terug naar home pagina';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik op %sHere%s om terug te keren naar de Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Verbod Controle';
-$lang['BAN_EXPLAIN'] = 'Hier kunt u het verbieden van gebruikers. Dit kunt u bereiken door het verbieden van een of beide van een specifieke gebruiker of een individu of een bereik van IP-adressen. Deze methoden voorkomen dat een gebruiker zelfs het bereiken van de index pagina van uw raad. Om te voorkomen dat een gebruiker registreren onder een andere gebruikersnaam kunt u ook een verboden e-mail adres. Houd er rekening mee dat het verbieden van een e-mailadres alleen zal niet voorkomen dat gebruikers kunnen inloggen op of post naar uw bord. Moet u gebruik maken van één van de eerste twee methoden om dit te bereiken.';
-$lang['BAN_EXPLAIN_WARN'] = 'Houd er rekening mee dat het invoeren van een bereik van IP-adressen resultaten in alle adressen tussen het begin en het einde wordt toegevoegd aan de banlijst. Pogingen zullen worden gedaan om het minimaliseren van het aantal adressen toegevoegd aan de database door de invoering van wildcards automatisch in voorkomend geval. Als je echt moet invoeren in een bereik, probeer om het kleine of beter nog specifieke adressen.';
-
-$lang['SELECT_IP'] = 'Selecteer een IP-adres';
-$lang['SELECT_EMAIL'] = 'Selecteer een e-Mail adres';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Een verbod een of meer specifieke gebruikers';
 $lang['BAN_USERNAME_EXPLAIN'] = 'U kunt ban meerdere gebruikers in één keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
-$lang['BAN_IP'] = 'Een verbod een of meer IP-adressen';
-$lang['IP_HOSTNAME'] = 'IP-adressen';
-$lang['BAN_IP_EXPLAIN'] = 'Opgeven verschillende IP-adressen scheiden met komma \' s.';
-
-$lang['BAN_EMAIL'] = 'Een verbod een of meer e-mail adressen';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Opgeven meer dan één e-mailadres, scheidt je ze met komma \' s. Voor het opgeven van een wildcard gebruikersnaam, gebruiken * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Vn-ban een meer specifieke gebruikers';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'U kunt unban meerdere gebruikers in één keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
-$lang['UNBAN_IP'] = 'Vn-ban een of meer IP-adressen';
-$lang['UNBAN_IP_EXPLAIN'] = 'U kunt unban meerdere IP-adressen in een keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
-$lang['UNBAN_EMAIL'] = 'Vn-ban een of meer e-mail adressen';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'U kunt unban meerdere e-mailadressen in één keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
-
 $lang['NO_BANNED_USERS'] = 'Geen verboden gebruikersnamen';
-$lang['NO_BANNED_IP'] = 'Geen verboden IP-adressen';
-$lang['NO_BANNED_EMAIL'] = 'Geen verboden e-mail adressen';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'De banlijst met succes is bijgewerkt';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klik op %sHere%s om terug te keren naar Ban Controle';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Beheer';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Vanaf dit paneel kunt u toevoegen, verwijderen, bewerken, de volgorde en opnieuw synchroniseren categorieën en forums';
 $lang['EDIT_FORUM'] = 'Wijzig forum';
 $lang['CREATE_FORUM'] = 'Maak nieuwe forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Nieuwe categorie maken';
 $lang['REMOVE'] = 'Verwijderen';
 $lang['UPDATE_ORDER'] = 'Update Om';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Als deze gedefinieerd Afmetingen van een Afb
 $lang['ASSIGNED_GROUP'] = 'Toegewezen Groep';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Het Maken Van Miniatuur';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Maak altijd een Miniatuur. Deze functie overschrijft bijna alle Instellingen in deze Speciale Categorie, met uitzondering van de Maximale Afmetingen van het Beeld. Met deze Functie wordt een Miniatuur weergegeven in de post, de Gebruiker kan klikken om het te openen in het echte Beeld.<br />Please Opmerking deze functie is vereist Imagick te worden geïnstalleerd, als het niet geïnstalleerd of als u de Veilige Modus is ingeschakeld, wordt de GD-Extensie van PHP zal worden gebruikt. Als de Beeld-Type wordt niet ondersteund door PHP, deze Functie zal niet worden gebruikt.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimum Miniatuur Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Als een Afbeelding is kleiner dan deze omschreven Bestandsgrootte, geen Miniatuur zal worden gemaakt, omdat het klein genoeg was.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programma (Met Het Volledige Pad)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Voer het Pad naar converteer programma van imagick, normaal /usr/bin/zetten (op windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Zoeken Imagick';
-
-$lang['USE_GD2'] = 'Maak gebruik van GD2 Uitbreiding';
-$lang['USE_GD2_EXPLAIN'] = 'PHP is in staat te worden gecompileerd met de GD1 of GD2-Extensie voor het beeld te manipuleren. Juist het maken van Miniaturen, zonder imagemagick de Bijlage Mod maakt gebruik van twee verschillende methoden, gebaseerd op uw selectie hier. Als uw miniaturen in een slechte kwaliteit of verknoeid, proberen om deze instelling te wijzigen.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Versie %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Beheren Verboden Extensies';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'U hebt ingevuld een aantal verkeerde waarden. Controleer
 $lang['PROCESSING'] = 'De verwerking van de...';
 $lang['FINISHED'] = 'Voltooid';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Onderwerp is verplaatst van forum [b]%s[/b] forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Onderwerp is gesplitst. Nieuwe thema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Topic gesplitst uit [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Vul dan het vrijgaveformulier in';
 $lang['NEW_RELEASE'] = 'Nieuwe release';
 $lang['NEXT'] = 'Doorgaan';
 $lang['OTHER'] = 'Andere';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'U vult het veld <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Moet u <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Zoeken naar gebruikers met een bijpasse
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Zoeken naar gebruikers met een Locatie bijpassende %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Gebruikers zoeken met hun Belangen veld bijpassende %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Gebruikers zoeken met hun Bezetting veld bijpassende %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Zoeken naar gebruikers die bezocht in de laatste %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Zoeken naar gebruikers die bezocht na de laatste %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Zoeken naar gebruikers die een %s als hun taal';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Zoeken naar gebruikers die hebben UTC %s als hun tijdzone';
 $lang['SEARCH_FOR_STYLE'] = 'Zoeken naar gebruikers die een %s als hun stijl';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Forums\' kaart';
 $lang['ATOM_FEED'] = 'Feed';
 $lang['ATOM_ERROR'] = 'Fout bij het genereren van feed';
 $lang['ATOM_SUBSCRIBE'] = 'Abonneren op de feed';
-$lang['ATOM_NO_MODE'] = 'Geef geen modus voor de invoer';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Dit forum beschikt niet over een voeding (geen doorlopende onderwerpen)';
 $lang['ATOM_NO_USER'] = 'Deze gebruiker heeft geen voeding (geen doorlopende onderwerpen)';
 $lang['ATOM_UPDATED'] = 'Bijgewerkt';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'Op deze pagina kunt u de tekst van de fundamentele reg
 $lang['TR_STATS'] = [
     0 => 'inactieve gebruikers in 30 dagen',
     1 => 'inactieve gebruikers voor 90 dagen',
-    2 => 'middelgrote uitkeringen op de drijver van de (vele megabytes)',
+    2 => 'medium size distributions on the tracker',
     3 => 'hoeveel in totaal handen op de tracker',
     4 => 'hoe veel live handen (er is ten minste 1 led)',
     5 => 'hoe vele handen waar dat zaaien meer dan 5 zaden',

@@ -10,7 +10,7 @@
 	<span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span>
 	<!-- ENDIF -->
 	&nbsp;&middot;&nbsp;
-	<!-- IF LOGGED_IN --><a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); post2url ('{SITE_URL}'); return false;">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
+	<!-- IF LOGGED_IN --><a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); window.location.reload();">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
 </div>
 
 <!-- IF DISPLAY_AS_POSTS -->
@@ -101,11 +101,7 @@ function show_edit_options ()
 	});
 
 	$('input.topic-chbox').click(function(){
-		if ($.browser.mozilla) {
-			$('#tr-'+this.value+' td').toggleClass('hl-selected-row');
-		}	else {
-			$('#tr-'+this.value).toggleClass('hl-selected-row');
-		}
+		$('#tr-'+this.value).toggleClass('hl-selected-row');
 	});
 	$('#pagination a.pg').each(function(){ this.href += '&mod=1'; });
 	$('#ed-list-desc').hide();
@@ -152,7 +148,7 @@ function show_edit_options ()
 	<th class="{sorter: 'text'}" title="{L_TOPICS}"><b class="tbs-text">{L_TOPICS}</b></th>
 	<th class="{sorter: 'text'}" title="{L_AUTHOR}"><b class="tbs-text">{L_AUTHOR}</b></th>
 	<th class="{sorter: 'digit'}" title="{L_REPLIES}"><b class="tbs-text">{L_REPLIES_SHORT}</b></th>
-	<th class="{sorter: 'text'}" title="{L_LASTPOST}"><b class="tbs-text">{L_LASTPOST}</b></th>
+	<th class="{sorter: 'digit'}" title="{L_LASTPOST}"><b class="tbs-text">{L_LASTPOST}</b></th>
 </tr>
 </thead>
 <!-- BEGIN t -->
@@ -181,6 +177,7 @@ function show_edit_options ()
 	<td class="med nowrap">{t.TOPIC_AUTHOR}</td>
 	<td title="{L_REPLIES}: {t.REPLIES}" class="small">{t.REPLIES}</td>
 	<td class="small nowrap" style="padding: 1px 4px 3px 4px;">
+        <u>{t.LAST_POST_TIME_RAW}</u>
 		<p>{t.LAST_POST_TIME}</p>
 		<p>
 			{t.LAST_POSTER}

@@ -1,7 +1,7 @@
 /*
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -363,9 +363,6 @@ function initPostImages(context) {
       $('#preload').append($img);
       var loading_icon = '<a href="' + src + '" target="_blank"><img src="' + bb_url + 'styles/images/pic_loading.gif" alt="" /></a>';
       $v.html(loading_icon);
-      if ($.browser.msie) {
-        $v.after('<wbr>');
-      }
       $img.one('load', function () {
         imgFit(this, maxW);
         $v.empty().append(this);
@@ -375,9 +372,6 @@ function initPostImages(context) {
         imgFit(this, maxW)
       });
       $v.empty().append($img);
-      if ($.browser.msie) {
-        $v.after('<wbr>');
-      }
     }
   });
 }

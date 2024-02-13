@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'pagina';
 $lang['GOTO_PAGE'] = 'Du-te la pagina';
 $lang['GOTO_SHORT'] = 'Pagina';
 $lang['JOINED'] = 'S-au alăturat';
-$lang['LONGEVITY'] = 'Longevitate';
+$lang['LONGEVITY'] = 'Înregistrați';
 $lang['IP_ADDRESS'] = 'Adresa IP';
 $lang['POSTED_AFTER'] = 'după';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'Cei mai mulți utilizatori online a fost <b>%s</
 $lang['ONLINE_ADMIN'] = 'Administrator';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Membru al grupului';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Ora curentă este: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar panoul de control';
 
 $lang['WEBSITE'] = 'Site-ul';
 $lang['LOCATION'] = 'Locație';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Contact';
 $lang['EMAIL_ADDRESS'] = 'E-mail';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Trimite un mesaj privat';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Găsi subiecte de utilizator'; // Find all topics
 $lang['NO_USER_ID_SPECIFIED'] = 'Îmi pare rău, dar acest utilizator nu există.';
 $lang['WRONG_PROFILE'] = 'Nu puteți modifica un profil care nu este a ta.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Doar un singur tip de avatar poate fi specificat';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Fișierul de la URL-ul dat nu conține date';
 $lang['NO_CONNECTION_URL'] = 'Conexiunea nu a putut fi făcute la URL-ai dat';
 $lang['INCOMPLETE_URL'] = 'URL-ul introdus este incompletă';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Site-ul';
 $lang['ASC'] = 'Crescator';
 $lang['DESC'] = 'Descendent';
 $lang['ORDER'] = 'Pentru';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Grupuri De Utilizatori';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Adăugat';
 $lang['BT_REG_ON_TRACKER'] = 'Înregistrați pe tracker';
 $lang['BT_REG_FAIL'] = 'Nu ar putea înregistra torrent pe tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Un alt torrent cu același info_hash deja <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Eliminați de la tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neînregistrate';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Starea';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Selectați starea';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Nu ați selectat statut.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Toate stările';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'nu am verificat',
     TOR_CLOSED => 'închis',
     TOR_APPROVED => 'verificat',
     TOR_NEED_EDIT => 'nu formalizate până',
     TOR_NO_DESC => 'nu formalizate',
-    TOR_DUP => 'repet',
-    TOR_CLOSED_CPHOLD => 'închis',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'absorbit',
     TOR_DOUBTFUL => 'îndoielnic',
-    TOR_CHECKING => 'verificate',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'temporar',
     TOR_PREMOD => 'pre-moderare',
-    TOR_REPLENISH => 'reface',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'O astfel de stare nu exista!';
 $lang['TORRENT_FAILED'] = 'Distributia nu a fost găsit!';
 $lang['TOR_STATUS_DUB'] = 'Distribuția are același statut';
-$lang['TOR_DONT_CHANGE'] = 'Schimbarea de statut nu poate fi!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Distribuția are statut de:';
 $lang['TOR_STATUS_CHANGED'] = 'S-a modificat statutul: ';
 $lang['TOR_BACK'] = ' înapoi';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent înregistrat deja';
 $lang['NOT_TORRENT'] = 'Acest fișier nu este torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Vă puteți înregistra doar un singur torrent intr-un singur post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Vă puteți înregistra doar un singur torrent într-un singur subiect';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Vizualizarea torrent-profil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Active torrents';
 
 $lang['TD_TRAF'] = 'Astăzi';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You nu au bonusuri disponibile.
 $lang['BONUS_RETURN'] = 'Reveni la semințe bonus de schimb';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Deschide subiecte';
 $lang['OPEN_IN_SAME_WINDOW'] = 'deschide în aceeași fereastră';
 $lang['SHOW_TIME_TOPICS'] = 'show timp de crearea subiecte';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookie-urile trebuie să fie activate!';
 $lang['SESSION_EXPIRED'] = 'Sesiunea a expirat';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Arată doar numele de utilizator incepand cu';
-$lang['OTHERS'] = 'altele';
-$lang['ALL'] = 'toate';
-
 $lang['POST_LINK'] = 'Posta link-ul';
 $lang['GOTO_QUOTED_POST'] = 'Du-te la post, citat de';
 $lang['LAST_VISITED'] = 'Ultima Vizitat';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Nu';
 //mpd
 $lang['DELETE_POSTS'] = 'Șterge mesajele selectate';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Selectate posturi au fost eliminate cu succes';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Anunțuri';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Update post timp';
 $lang['TOPIC_SPLIT_NEW'] = 'Subiect nou';
 $lang['TOPIC_SPLIT_OLD'] = 'Subiect vechi';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Adaugă bot-mesaj despre mutarea';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Adaugă bot-mesaj despre split spre <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Adaugă bot-mesaj despre split spre <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Bold text: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Subliniere text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Ratari text: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Text citat: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Pentru a șterge o comandă din listă, faceți clic p
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Privit subiecte';
-$lang['NO_WATCHED_TOPICS'] = 'Tu nu sunt cu ochii pe orice subiecte';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Înapoi la pagina de start';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Faceți clic pe %sHere%s pentru a reveni la F
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Control';
-$lang['BAN_EXPLAIN'] = 'Aici aveți posibilitatea de a controla interzicerea de utilizatori. Puteți realiza acest lucru prin interzicerea una sau ambele de un anumit utilizator sau un individ sau un interval de adrese IP. Aceste metode pentru a preveni un utilizator de ajungand chiar la pagina de index de bord. Pentru a împiedica un utilizator de la inregistrarea sub alt nume de utilizator, puteți specifica, de asemenea, un interzise adresa de e-mail. Vă rugăm să rețineți că interzicerea o adresa de e-mail nu va preveni că utilizatorul de la a fi capabil să vă conectați sau posta la bord. Ar trebui să utilizați una din primele două metode pentru a realiza acest lucru.';
-$lang['BAN_EXPLAIN_WARN'] = 'Vă rugăm să rețineți că intrarea într-un interval de adrese IP rezultate în toate adresele între începutul și sfârșitul a fi adăugat la lista de banuri. Încercări vor fi făcute pentru a reduce la minimum numărul de adrese adăugate la baza de date prin introducerea metacaractere în mod automat, dacă este cazul. Dacă într-adevăr trebuie să introduceți un interval, să încercați să păstrați-l mic sau mai bine încă de stat adrese specifice.';
-
-$lang['SELECT_IP'] = 'Selectați o adresă IP';
-$lang['SELECT_EMAIL'] = 'Selectați o adresă de e-Mail';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Interzicerea unuia sau a mai multor utilizatori';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Puteți ban mai mulți utilizatori într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
-$lang['BAN_IP'] = 'Ban una sau mai multe adrese IP';
-$lang['IP_HOSTNAME'] = 'Adrese IP';
-$lang['BAN_IP_EXPLAIN'] = 'Pentru a specifica mai multe adrese IP diferite separați-le prin virgulă.';
-
-$lang['BAN_EMAIL'] = 'Ban una sau mai multe adrese de e-mail';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Pentru a specifica mai mult de o adresă de e-mail, separate prin virgule. Pentru a specifica un wildcard de utilizator, utilizați * ca *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Onu-ban mai specifice de utilizatori';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Puteți unban mai mulți utilizatori într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
-$lang['UNBAN_IP'] = 'Onu-ban una sau mai multe adrese IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Puteți unban mai multe adrese IP într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
-$lang['UNBAN_EMAIL'] = 'Onu-ban una sau mai multe adrese de e-mail';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Puteți unban mai multe adrese de e-mail într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
-
 $lang['NO_BANNED_USERS'] = 'Nu a interzis numele de utilizator';
-$lang['NO_BANNED_IP'] = 'Nu adrese IP interzise';
-$lang['NO_BANNED_EMAIL'] = 'Nu interzis adrese de e-mail';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'De banuri a fost actualizat cu succes';
 $lang['CLICK_RETURN_BANADMIN'] = 'Faceți clic pe %sHere%s pentru a reveni la Interdicția de Control';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Administrare Forum';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'De la acest panou puteți adăuga, șterge, edita, re-comanda și re-sincroniza categorii și forumuri';
 $lang['EDIT_FORUM'] = 'Edit forum';
 $lang['CREATE_FORUM'] = 'Crea noi pe forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'De a crea noi categorii';
 $lang['REMOVE'] = 'Elimina';
 $lang['UPDATE_ORDER'] = 'Actualizare Pentru';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Dacă Dimensiunea definită de o Imagine est
 $lang['ASSIGNED_GROUP'] = 'Grupul Atribuit';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Crea Miniaturi';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Creați întotdeauna o Miniatură. Această funcție înlocuiește aproape toate Setările din această Categorie Specială, cu excepția de Maxim Dimensiuni de Imagine. Cu această Caracteristică, o Miniatură vor fi afișate în post, Utilizatorul poate faceți clic pe acesta pentru a deschide Imaginea reală.<br />Please Rețineți că această caracteristică necesită Imagick să fie instalat, dacă nu este instalat sau dacă Safe-Mode este activat GD-Extensie a PHP va fi folosit. Dacă Imaginea-Tip nu este susținută de PHP, această Caracteristică va fi folosit.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minim Miniatură Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Dacă o Imagine este mai mică decât această definit Dimensiunea, nu Miniatură vor fi create, pentru că e destul de mic.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Calea Completă)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Introduceți Calea pentru a converti program de imagick, în mod normal, /usr/bin/converti (pe windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Căutare Imagick';
-
-$lang['USE_GD2'] = 'Face uz de GD2 Extensie';
-$lang['USE_GD2_EXPLAIN'] = 'PHP este capabil de a fi compilat cu GD1 sau GD2 Extensie pentru imagine manipularea. Corect, pentru a crea Miniaturi, fără imagemagick Atașamentul Mod utilizează două metode diferite, în funcție de selecția dumneavoastră aici. Dacă miniaturile sunt într-o stare proastă calitate sau greșit, încercați să modificați această setare.';
-$lang['ATTACHMENT_VERSION'] = 'Atașament Versiune Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Gestiona Interzis Extensii';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Ați introdus unele valori greșite. Vă rugăm să veri
 $lang['PROCESSING'] = 'Prelucrare...';
 $lang['FINISHED'] = 'Terminat';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Subiectul a fost mutat de la forum [b]%s[/b] la forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Subiectul a fost divizat. Subiect nou - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Subiectul a fost despărțit de [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Vă rugăm să completați formularul de eliberare';
 $lang['NEW_RELEASE'] = 'Noua versiune';
 $lang['NEXT'] = 'Continua';
 $lang['OTHER'] = 'Alte';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Trebuie să completați câmpul <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Trebuie să selectați <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'În căutarea pentru utilizatorii cu si
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'În căutarea pentru utilizatorii cu o Locație potrivire %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'În căutarea pentru utilizatorii cu Interesele lor domeniu de potrivire %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'În căutarea pentru utilizatorii cu Ocupația lor domeniu de potrivire %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Căutarea utilizatorilor care au vizitat în ultimul %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Căutarea utilizatorilor care au vizitat după ultima %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'În căutarea pentru utilizatorii care au stabilit %s ca limba lor';
 $lang['SEARCH_FOR_TIMEZONE'] = 'În căutarea pentru utilizatorii care au stabilit UTC %s ca fus orar';
 $lang['SEARCH_FOR_STYLE'] = 'În căutarea pentru utilizatorii care au stabilit %s ca stilul lor';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Forumuri hartă';
 $lang['ATOM_FEED'] = 'Hrana';
 $lang['ATOM_ERROR'] = 'Eroare la generarea unui feed';
 $lang['ATOM_SUBSCRIBE'] = 'Aboneaza-te la feed';
-$lang['ATOM_NO_MODE'] = 'Nu specificați un modul pentru alimentare';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Acest forum nu are un flux (nr. în curs de desfășurare subiecte)';
 $lang['ATOM_NO_USER'] = 'Acest utilizator nu are o alimentare (nu in curs de desfasurare subiecte)';
 $lang['ATOM_UPDATED'] = 'Actualizat';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'Pe această pagină, puteți specifica textul de regul
 $lang['TR_STATS'] = [
     0 => 'utilizatorii inactivi în 30 de zile',
     1 => 'utilizatorii inactivi pentru 90 de zile',
-    2 => 'dimensiuni medii distribuții pe tracker (de multe megabytes)',
+    2 => 'medium size distributions on the tracker',
     3 => 'cât de multe totală mâinile pe tracker',
     4 => 'câți locuiesc pe mâini (există cel puțin 1 led)',
     5 => 'cât de multe mâini în cazul în care a semănat mai mult de 5 seminte',

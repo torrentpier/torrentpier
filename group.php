@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -162,7 +162,7 @@ if (!$group_id) {
         bb_die($lang['NO_GROUPS_EXIST']);
     }
     if ($row['user_id']) {
-        set_die_append_msg(false, false, $group_id);
+        set_die_append_msg(group_id: $group_id);
         bb_die($lang['ALREADY_MEMBER_GROUP']);
     }
 
@@ -185,12 +185,12 @@ if (!$group_id) {
         $emailer->send();
     }
 
-    set_die_append_msg(false, false, $group_id);
+    set_die_append_msg(group_id: $group_id);
     bb_die($lang['GROUP_JOINED']);
 } elseif (!empty($_POST['unsub']) || !empty($_POST['unsubpending'])) {
     \TorrentPier\Legacy\Group::delete_user_group($group_id, $userdata['user_id']);
 
-    set_die_append_msg(false, false, $group_id);
+    set_die_append_msg(group_id: $group_id);
     bb_die($lang['UNSUB_SUCCESS']);
 } else {
     // Handle Additions, removals, approvals and denials
@@ -198,26 +198,26 @@ if (!$group_id) {
 
     if (!empty($_POST['add']) || !empty($_POST['remove']) || !empty($_POST['approve']) || !empty($_POST['deny'])) {
         if (!$is_moderator) {
-            set_die_append_msg(false, false, $group_id);
+            set_die_append_msg(group_id: $group_id);
             bb_die($lang['NOT_GROUP_MODERATOR']);
         }
 
         if (!empty($_POST['add'])) {
             if (isset($_POST['username']) && !($row = get_userdata($_POST['username'], true))) {
-                set_die_append_msg(false, false, $group_id);
+                set_die_append_msg(group_id: $group_id);
                 bb_die($lang['COULD_NOT_ADD_USER']);
             }
 
             // Prevent adding moderator
             if ($row['user_id'] == $group_moderator) {
-                set_die_append_msg(false, false, $group_id);
+                set_die_append_msg(group_id: $group_id);
                 bb_die(sprintf($lang['USER_IS_MOD_GROUP'], profile_url($row)));
             }
 
             // Prevent infinity user adding into group
             if ($is_member = DB()->fetch_row("SELECT user_id FROM " . BB_USER_GROUP . " WHERE group_id = $group_id AND user_id = " . $row['user_id'] . " LIMIT 1")) {
                 if ($is_member['user_id']) {
-                    set_die_append_msg(false, false, $group_id);
+                    set_die_append_msg(group_id: $group_id);
                     bb_die(sprintf($lang['USER_IS_MEMBER_GROUP'], profile_url($row)));
                 }
             }
@@ -248,7 +248,7 @@ if (!$group_id) {
                     $sql_in[] = (int)$members_id;
                 }
                 if (!$sql_in = implode(',', $sql_in)) {
-                    set_die_append_msg(false, false, $group_id);
+                    set_die_append_msg(group_id: $group_id);
                     bb_die($lang['NONE_SELECTED']);
                 }
 
@@ -380,16 +380,18 @@ if (!$group_id) {
         'GROUP_SIGNATURE' => bbcode2html($group_info['group_signature']),
         'GROUP_AVATAR' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
         'GROUP_DETAILS' => $group_details,
-        'GROUP_TIME' => !empty($group_info['group_time']) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($group_info['group_time']), delta_time($group_info['group_time'])) : $lang['NONE'],
+        'GROUP_TIME' => !empty($group_info['group_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($group_info['group_time']), delta_time($group_info['group_time'])) : $lang['NONE'],
         'MOD_USER' => profile_url($group_moderator),
         'MOD_AVATAR' => $moderator_info['avatar'],
         'MOD_FROM' => $moderator_info['from'],
         'MOD_JOINED' => $moderator_info['joined'],
+        'MOD_JOINED_RAW' => $moderator_info['joined_raw'],
         'MOD_POSTS' => $moderator_info['posts'],
         'MOD_PM' => $moderator_info['pm'],
         'MOD_EMAIL' => $moderator_info['email'],
         'MOD_WWW' => $moderator_info['www'],
-        'MOD_TIME' => !empty($group_info['mod_time']) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($group_info['mod_time']), delta_time($group_info['mod_time'])) : $lang['NONE'],
+        'MOD_TIME' => !empty($group_info['mod_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($group_info['mod_time']), delta_time($group_info['mod_time'])) : $lang['NONE'],
+        'MOD_TIME_RAW' => !empty($group_info['mod_time']) ? $group_info['mod_time'] : '',
         'U_SEARCH_USER' => 'search.php?mode=searchuser',
         'U_SEARCH_RELEASES' => "tracker.php?srg=$group_id",
         'U_GROUP_RELEASES' => GROUP_URL . $group_id . "&view=releases",
@@ -416,7 +418,7 @@ if (!$group_id) {
             // TODO Correct SQL to posts with attach and limit them, optimization
 
             if (!$group_info['release_group']) {
-                set_die_append_msg(false, false, $group_id);
+                set_die_append_msg(group_id: $group_id);
                 bb_die($lang['NOT_A_RELEASE_GROUP']);
             }
 
@@ -447,7 +449,7 @@ if (!$group_id) {
 			";
 
             if (!$releases = DB()->fetch_rowset($sql)) {
-                set_die_append_msg(false, false, $group_id);
+                set_die_append_msg(group_id: $group_id);
                 bb_die($lang['NO_SEARCH_MATCH']);
             }
 
@@ -518,12 +520,14 @@ if (!$group_id) {
                         'AVATAR_IMG' => $member_info['avatar'],
                         'FROM' => $member_info['from'],
                         'JOINED' => $member_info['joined'],
+                        'JOINED_RAW' => $member_info['joined_raw'],
                         'POSTS' => $member_info['posts'],
                         'USER_ID' => $user_id,
                         'PM' => $member_info['pm'],
                         'EMAIL' => $member_info['email'],
                         'WWW' => $member_info['www'],
-                        'TIME' => $member_info['user_time']
+                        'TIME' => $member_info['user_time'],
+                        'TIME_RAW' => $member_info['user_time_raw']
                     ]);
 
                     if ($is_moderator) {
@@ -572,6 +576,7 @@ if (!$group_id) {
                         'USER' => profile_url($pending_info),
                         'FROM' => $pending_info['from'],
                         'JOINED' => $pending_info['joined'],
+                        'JOINED_RAW' => $pending_info['joined_raw'],
                         'POSTS' => $pending_info['posts'],
                         'USER_ID' => $user_id,
                         'PM' => $pending_info['pm'],

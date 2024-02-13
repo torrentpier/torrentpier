@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -59,12 +59,6 @@ if (isset($_POST['del_my_post'])) {
     redirect("search.php?u={$user->id}");
 }
 
-//
-// Define censored word matches
-//
-$orig_word = $replacement_word = [];
-obtain_word_list($orig_word, $replacement_word);
-
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
@@ -90,8 +84,8 @@ $url = basename(__FILE__);
 
 $anon_id = GUEST_UID;
 $user_id = $userdata['user_id'];
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
-$search_id = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
+$search_id = (isset($_GET['id']) && is_string($_GET['id'])) ? $_GET['id'] : '';
 $session_id = $userdata['session_id'];
 
 $items_found = $items_display = $previous_settings = null;
@@ -325,7 +319,7 @@ if ($search_id) {
 		FROM " . BB_SEARCH . "
 		WHERE session_id = '$session_id'
 			AND search_type = " . SEARCH_TYPE_POST . "
-			AND search_id = '$search_id'
+			AND search_id = '" . DB()->escape($search_id) . "'
 		LIMIT 1
 	");
 
@@ -572,35 +566,27 @@ if ($post_mode) {
         $topic_id = (int)$topic_id;
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
-        $topic_title = $first_post['topic_title'];
-
-        if (count($orig_word)) {
-            $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-        }
 
         $template->assign_block_vars('t', array(
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'TOPIC_TITLE' => $topic_title,
+            'TOPIC_TITLE' => $wordCensor->censorString($first_post['topic_title']),
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
         ));
 
         $quote_btn = $edit_btn = $ip_btn = '';
-        $delpost_btn = (IS_AM);
+        $delpost_btn = IS_AM;
 
         // Topic posts block
         foreach ($topic_posts as $row_num => $post) {
             if ($post['poster_id'] != BOT_UID) {
                 $quote_btn = true;
-                $edit_btn = $ip_btn = (IS_AM);
+                $edit_btn = $ip_btn = IS_AM;
             }
 
             $message = get_parsed_post($post);
-
-            if (count($orig_word)) {
-                $message = preg_replace($orig_word, $replacement_word, $message);
-            }
+            $message = $wordCensor->censorString($message);
 
             $template->assign_block_vars('t.p', array(
                 'ROW_NUM' => $row_num,
@@ -800,22 +786,23 @@ else {
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
-            'TOPIC_TITLE' => wbr($topic['topic_title']),
+            'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
+            'TOPIC_TITLE' => $wordCensor->censorString($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-            'PAGINATION' => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
+            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
             'REPLIES' => $topic['topic_replies'],
             'ATTACH' => $topic['topic_attachment'],
             'STATUS' => $topic['topic_status'],
             'TYPE' => $topic['topic_type'],
             'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),
-            'POLL' => $topic['topic_vote'],
+            'POLL' => !IS_GUEST && $topic['topic_vote'],
             'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
             'TOPIC_AUTHOR' => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
             'LAST_POSTER' => profile_url(array('username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
             'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
+            'LAST_POST_TIME_RAW' => $topic['topic_last_post_time'],
             'LAST_POST_ID' => $topic['topic_last_post_id'],
         ));
     }

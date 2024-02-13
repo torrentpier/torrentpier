@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -23,6 +23,9 @@ $client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER[
 $user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
+
+// Initialize demo mode
+define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
 
 /**
  * @param $contents
@@ -76,24 +79,33 @@ define('COOKIE_MAX_TRACKS', 90);
 /**
  * Set cookie
  *
- * @param $name
- * @param $val
+ * @param string $name
+ * @param mixed $val
  * @param int $lifetime
  * @param bool $httponly
- * @return bool
+ * @param bool $isRaw
+ * @return void
+ * @throws \Josantonius\Cookie\Exceptions\CookieException
  */
-function bb_setcookie($name, $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false)
+function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false, bool $isRaw = false): void
 {
     global $bb_cfg;
 
-    return setcookie($name, $val, [
-        'expires' => $lifetime,
-        'path' => $bb_cfg['script_path'],
-        'domain' => $bb_cfg['cookie_domain'],
-        'secure' => $bb_cfg['cookie_secure'],
-        'httponly' => $httponly,
-        'samesite' => $bb_cfg['cookie_same_site'],
-    ]);
+    $cookie = new \Josantonius\Cookie\Cookie(
+        domain: $bb_cfg['cookie_domain'],
+        expires: $lifetime,
+        httpOnly: $httponly,
+        path: $bb_cfg['script_path'],
+        raw: $isRaw,
+        sameSite: $bb_cfg['cookie_same_site'],
+        secure: $bb_cfg['cookie_secure']
+    );
+
+    if (!empty($val)) {
+        $cookie->set($name, $val);
+    } else {
+        $cookie->remove($name);
+    }
 }
 
 // User Levels
@@ -251,6 +263,7 @@ define('BB_TOPICS_WATCH', 'bb_topics_watch');
 define('BB_USER_GROUP', 'bb_user_group');
 define('BB_USERS', 'bb_users');
 define('BB_WORDS', 'bb_words');
+define('BB_THX', 'bb_thx');
 
 define('TORRENT_EXT', 'torrent');
 
@@ -286,6 +299,7 @@ define('POSTING_URL', $bb_cfg['posting_url']);
 define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;u=');
 define('BONUS_URL', 'profile.php?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?t=');
+define('FILELIST_URL', 'filelist.php?topic=');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
@@ -322,6 +336,17 @@ function send_no_cache_headers()
 }
 
 /**
+ * Converts "<br>" tags to "\n" line breaks
+ *
+ * @param string $string
+ * @return string
+ */
+function br2nl(string $string): string
+{
+    return preg_replace('#<br\s*/?>#i', "\n", $string);
+}
+
+/**
  * Adds commas between every group of thousands
  *
  * @param float|null $num
@@ -336,14 +361,16 @@ function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.
 }
 
 /**
- * @param $txt
- * @param int $quote_style
- * @param string $charset
+ * Convert HTML entities to their corresponding characters
+ *
+ * @param string $string
+ * @param int $flags
+ * @param string|null $encoding
  * @return string
  */
-function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+function html_ent_decode(string $string, int $flags = ENT_QUOTES, ?string $encoding = 'UTF-8'): string
 {
-    return (string)html_entity_decode($txt, $quote_style, $charset);
+    return html_entity_decode($string, $flags, $encoding);
 }
 
 /**
@@ -371,12 +398,17 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
+ * Word censor
+ */
+$wordCensor = new \TorrentPier\Censor();
+
+/**
  * Cron
  */
 if (
     empty($_POST) &&
     !defined('IN_ADMIN') && !defined('IN_AJAX') &&
-    !file_exists(CRON_RUNNING) &&
+    !is_file(CRON_RUNNING) &&
     (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
 ) {
     if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval']) {
@@ -419,16 +451,19 @@ if (
 /**
  * Exit if board is disabled via trigger
  */
-if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
-    header('HTTP/1.0 503 Service Unavailable');
+if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();
-        bb_die('BOARD_DISABLE');
-    } elseif (file_exists(BB_DISABLED)) {
+        if (\TorrentPier\Helpers\CronHelper::isEnabled()) {
+            bb_die('BOARD_DISABLE', 503);
+        }
+    } elseif (is_file(BB_DISABLED)) {
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
-        bb_die('BOARD_DISABLE_CRON');
+        if (\TorrentPier\Helpers\CronHelper::isEnabled()) {
+            bb_die('BOARD_DISABLE_CRON', 503);
+        }
     }
 }

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -18,19 +18,14 @@ $page_cfg['load_tpl_vars'] = [
 ];
 
 $submit = (bool)@$_REQUEST['post'];
-$preview = (bool)@$_REQUEST['preview'];
+$refresh = $preview = (bool)@$_REQUEST['preview'];
 $delete = (bool)@$_REQUEST['delete'];
+$mode = (string)@$_REQUEST['mode'];
+$confirm = isset($_POST['confirm']);
 
 $forum_id = (int)@$_REQUEST[POST_FORUM_URL];
 $topic_id = (int)@$_REQUEST[POST_TOPIC_URL];
 $post_id = (int)@$_REQUEST[POST_POST_URL];
-
-$mode = (string)@$_REQUEST['mode'];
-
-$confirm = isset($_POST['confirm']);
-
-$refresh = $preview;
-$orig_word = $replacement_word = [];
 
 // Set topic type
 $topic_type = (@$_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
@@ -247,6 +242,13 @@ if ($mode == 'new_rel') {
     exit;
 }
 
+// Disallowed release editing with a certain status
+if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
+    if ($tor_status = DB()->fetch_row("SELECT tor_status FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id AND forum_id = $forum_id AND tor_status IN(" . implode(',', $bb_cfg['tor_cannot_edit']) . ") LIMIT 1")) {
+        bb_die($lang['NOT_EDIT_TOR_STATUS'] . ':&nbsp;<span title="' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '">' . $bb_cfg['tor_icons'][$tor_status['tor_status']] . '&nbsp;' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '</span>.');
+    }
+}
+
 // Notify
 if ($submit || $refresh) {
     $notify_user = (int)!empty($_POST['notify']);
@@ -434,7 +436,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 
         $template->assign_vars([
             'TPL_PREVIEW_POST' => true,
-            'TOPIC_TITLE' => wbr($preview_subject),
+            'TOPIC_TITLE' => $preview_subject,
             'POST_SUBJECT' => $preview_subject,
             'POSTER_NAME' => $preview_username,
             'POST_DATE' => bb_date(TIMENOW),
@@ -454,13 +456,6 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
         $message = $post_info['post_text'];
 
         if ($mode == 'quote') {
-            if (!defined('WORD_LIST_OBTAINED')) {
-                $orig_word = [];
-                $replace_word = [];
-                obtain_word_list($orig_word, $replace_word);
-                define('WORD_LIST_OBTAINED', true);
-            }
-
             if ($post_info['post_attachment'] && !IS_AM) {
                 $message = $post_info['topic_title'];
             }
@@ -468,16 +463,14 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 
             // hide user passkey
-            $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9]{10}(?=&)#', 'passkey', $message);
+            $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
             // hide sid
-            $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]{12}#', 'sid', $message);
+            $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
-            if (!empty($orig_word)) {
-                $subject = (!empty($subject)) ? preg_replace($orig_word, $replace_word, $subject) : '';
-                $message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
-            }
+            $subject = $wordCensor->censorString($subject);
+            $message = $wordCensor->censorString($message);
 
-            if (!preg_match('/^Re:/', $subject) && strlen($subject) > 0) {
+            if (!preg_match('/^Re:/', $subject) && !empty($subject)) {
                 $subject = 'Re: ' . $subject;
             }
 
@@ -579,6 +572,8 @@ if ($userdata['user_level'] == GROUP_MEMBER || IS_AM) {
     }
 }
 
+// Assign posting title & hidden fields
+$page_title = '';
 $hidden_form_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
 
 switch ($mode) {
@@ -609,7 +604,7 @@ $template->assign_vars([
     'PAGE_TITLE' => $page_title,
     'POSTING_TYPE_TITLE' => $page_title,
     'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
-    'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
+    'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? $post_info['topic_title'] : '',
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'USERNAME' => @$username,

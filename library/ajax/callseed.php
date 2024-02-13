@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -65,7 +65,7 @@ if ($user_list) {
     send_pm($t_data['poster_id'], $subject, $message, BOT_UID);
 }
 
-DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
+DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id LIMIT 1");
 
 function topic_info($topic_id)
 {
@@ -82,7 +82,7 @@ function topic_info($topic_id)
 	";
 
     if (!$torrent = DB()->fetch_row($sql)) {
-        bb_die($lang['TOPIC_POST_NOT_EXIST']);
+        bb_die($lang['TOPIC_POST_NOT_EXIST'], 404);
     }
 
     return $torrent;

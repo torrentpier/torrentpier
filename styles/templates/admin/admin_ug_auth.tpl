@@ -99,19 +99,15 @@ thead tr {
 <thead>
 	<tr>
 		<td class="row2 tdHead" valign="center" width="20%">{L_FORUM}</td>
-		<td
-			id="type_{AUTH_MOD_BF}"
-			class="row2 tdHead" valign="center" width="20%">{L_MODERATOR_STATUS}</td>
+		<td id="type_{AUTH_MOD_BF}" class="row2 tdHead" valign="center" width="20%">{L_MODERATOR_STATUS}</td>
 		<!-- BEGIN acltype -->
-		<td
-			id="type_{acltype.ACL_TYPE_BF}"
-			class="row2 tdHead" valign="center">{acltype.ACL_TYPE_NAME}</td>
+		<td id="type_{acltype.ACL_TYPE_BF}" class="row2 tdHead" valign="center">{acltype.ACL_TYPE_NAME}</td>
 		<!-- END acltype -->
 	</tr>
 </thead>
 <tfoot>
 	<tr>
-		<td colspan="{S_COLUMN_SPAN}" class="row1" align="center">
+		<td colspan="{S_COLUMN_SPAN}" class="row1 tCenter">
 			<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
 		</td>
 	</tr>
@@ -193,13 +189,6 @@ var tBody = $p('tScrollBody');
 
 if (tCont.offsetHeight > document.body.clientHeight) {
 	tCont.style.height = document.body.clientHeight;
-}
-
-if ($.browser.mozilla) {
-	if (tBody.offsetHeight > document.body.clientHeight - 65) {
-		tBody.style.height = document.body.clientHeight - 65;
-	}
-	tCont.style.maxWidth = document.body.clientWidth - 20;
 }
 
 function flip_perm (f_id, acl_id)

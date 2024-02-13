@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -20,7 +20,7 @@ $row = DB()->fetch_row("SELECT COUNT(*) AS usercount FROM " . BB_USERS . " WHERE
 $data['usercount'] = commify($row['usercount']);
 
 // newestuser
-$row = DB()->fetch_row("SELECT user_id, username, user_rank FROM " . BB_USERS . " WHERE user_active = 1 ORDER BY user_id DESC LIMIT 1");
+$row = DB()->fetch_row("SELECT user_id, username, user_rank FROM " . BB_USERS . " WHERE user_active = 1 AND user_id NOT IN(" . EXCLUDED_USERS . ") ORDER BY user_id DESC LIMIT 1");
 $data['newestuser'] = $row;
 
 // post/topic count

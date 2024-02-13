@@ -72,9 +72,11 @@ ajax.callback.posts = function(data) {
 <span class="buttons">
     <input type="button" value="sup" name="codeSup" title="{L_SUPERSCRIPT}" />
     <input type="button" value="sub" name="codeSub" title="{L_SUBSCRIPT}" />&nbsp;
-	<input type="button" value="&#8212;" name="codeHR" title="{L_HOR_LINE}" style="font-weight: bold; width: 26px;" />
-	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" style="width: 26px;" />&nbsp;
-	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" style="width: 65px;" />
+	<input type="button" value="&#8212;" name="codeHR" title="{L_HOR_LINE}" style="font-weight: bold;" />
+	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" />
+	<input type="button" value="&#8667;" name="codeIndent" title="{L_INDENT_TAG}" />&nbsp;
+	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" />
+    <input type="button" value="box" name="codeBox" title="{L_BOX_TAG}" />
 </span>
 
 <div class="buttons floatR">
@@ -85,16 +87,16 @@ ajax.callback.posts = function(data) {
 <!-- ENDIF / !QUICK_REPLY -->
 
 <div class="buttons mrg_4">
-	<input type="button" value="B" name="codeB" title="{L_BOLD}" style="font-weight: bold; width: 25px;" />
-	<input type="button" value="i" name="codeI" title="{L_ITALIC}" style="width: 25px; font-style: italic;" />
-	<input type="button" value="u" name="codeU" title="{L_UNDERLINE}" style="width: 25px; text-decoration: underline;" />
-	<input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="width: 25px; text-decoration: line-through;" />&nbsp;
-	<input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" style="width: 57px;" />
-	<input type="button" value="Img" name="codeImg" title="{L_IMG_TITLE}" style="width: 40px;" />
-	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" style="width: 63px; text-decoration: underline;" />&nbsp;
-	<input type="button" value="{L_CODE}" name="codeCode" title="{L_CODE_TITLE}" style="width: 43px;" />
-	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 60px;"/>
-	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" style="width: 30px;" />&nbsp;
+	<input type="button" value="B" name="codeB" title="{L_BOLD}" style="font-weight: bold;" />
+	<input type="button" value="i" name="codeI" title="{L_ITALIC}" style="font-style: italic;" />
+	<input type="button" value="u" name="codeU" title="{L_UNDERLINE}" style="text-decoration: underline;" />
+	<input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="text-decoration: line-through;" />&nbsp;
+	<input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" />
+	<input type="button" value="Img" name="codeImg" title="{L_IMG_TITLE}" />
+	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" style="text-decoration: underline;" />&nbsp;
+	<input type="button" value="{L_CODE}" name="codeCode" title="{L_CODE_TITLE}" />
+	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}" />
+	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" />&nbsp;
 	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onclick="bbcode.onclickQuoteSel();" />
 </div>
 
@@ -205,6 +207,8 @@ function checkForm(form) {
     bbcode.addTag("codeSpoiler", "spoiler", null, "", ctrl);
     bbcode.addTag("codeSup", "sup", null, "", ctrl);
     bbcode.addTag("codeSub", "sub", null, "", ctrl);
+    bbcode.addTag("codeBox", "box", null, "", ctrl);
+    bbcode.addTag("codeIndent", "indent", null, "", ctrl);
 
     bbcode.addTag("fontFace", function (e) {
         var v = e.value;

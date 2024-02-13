@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -235,7 +235,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
+            $msg = $result ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             print_confirmation([
@@ -251,7 +251,7 @@ switch ($mode) {
 
         if ($confirmed) {
             $new_forum_id = (int)$_POST['new_forum'];
-            $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
+            $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']), $_POST['reason_move_bot']);
 
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
@@ -266,7 +266,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
+            $msg = $result ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             if (IS_ADMIN) {
@@ -516,7 +516,7 @@ switch ($mode) {
             // Delete posts
             $result = \TorrentPier\Legacy\Admin\Common::post_delete(explode(',', $post_id_sql));
 
-            $msg = ($result) ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
+            $msg = $result ? $lang['DELETE_POSTS_SUCCESFULLY'] : $lang['NO_POSTS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
@@ -562,7 +562,7 @@ switch ($mode) {
 
                     $template->assign_block_vars('postrow', [
                         'ROW_CLASS' => $row_class,
-                        'POSTER_NAME' => wbr($poster),
+                        'POSTER_NAME' => $poster,
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
                         'CHECKBOX' => defined('BEGIN_CHECKBOX'),
@@ -672,7 +672,7 @@ switch ($mode) {
 
                 $template->assign_block_vars('userrow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
-                    'USERNAME' => wbr($username),
+                    'USERNAME' => $username,
                     'POSTS' => $row['postings'],
                     'U_PROFILE' => ($id == GUEST_UID) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
                     'U_SEARCHPOSTS' => "search.php?search_author=1&amp;uid=$id",

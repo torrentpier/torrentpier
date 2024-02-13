@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -41,7 +41,7 @@ switch ($mode) {
         $dir = $template->cachedir;
         $res = @opendir($dir);
         while (($file = readdir($res)) !== false) {
-            if (0 === strpos($file, $match)) {
+            if (str_starts_with($file, $match)) {
                 @unlink($dir . $file);
             }
         }
@@ -95,7 +95,7 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die('Invalid mode');
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['mode'] = $mode;

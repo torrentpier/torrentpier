@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'sida';
 $lang['GOTO_PAGE'] = 'Gå till sidan';
 $lang['GOTO_SHORT'] = 'Sida';
 $lang['JOINED'] = 'Gick';
-$lang['LONGEVITY'] = 'Livslängd';
+$lang['LONGEVITY'] = 'Registrerade';
 $lang['IP_ADDRESS'] = 'IP-Adress';
 $lang['POSTED_AFTER'] = 'efter';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'Flest användare online någonsin var <b>%s</b> 
 $lang['ONLINE_ADMIN'] = 'Administratör';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Grupp-medlem';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Aktuell tid är: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar kontrollpanelen';
 
 $lang['WEBSITE'] = 'Hemsida';
 $lang['LOCATION'] = 'Läge';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontakta';
 $lang['EMAIL_ADDRESS'] = 'E-post adress';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Skicka ett privat meddelande';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Hitta användare ämnen'; // Find all topics by u
 $lang['NO_USER_ID_SPECIFIED'] = 'Ledsen, men den användaren existerar inte.';
 $lang['WRONG_PROFILE'] = 'Du kan inte ändra en profil som inte är din egen.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Endast en typ av avatar kan anges';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Filen på den WEBBADRESS som du gav innehåller inga uppgifter';
 $lang['NO_CONNECTION_URL'] = 'En anslutning kan inte göras till den URL som du gav';
 $lang['INCOMPLETE_URL'] = 'URL: en du angav är ofullständig';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Hemsida';
 $lang['ASC'] = 'Stigande';
 $lang['DESC'] = 'Fallande';
 $lang['ORDER'] = 'Beställning';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Användargrupper';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Läggas till';
 $lang['BT_REG_ON_TRACKER'] = 'Registrera dig på tracker';
 $lang['BT_REG_FAIL'] = 'Kunde inte registrera sig torrent på tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'En annan torrent med samma info_hash redan <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ta bort från tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent oregistrerade';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Välj status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Du har inte valt status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Alla statusar';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'inte kontrolleras',
     TOR_CLOSED => 'stängt',
     TOR_APPROVED => 'kollade',
     TOR_NEED_EDIT => 'inte formaliserat tills',
     TOR_NO_DESC => 'inte formaliserade',
-    TOR_DUP => 'upprepa',
-    TOR_CLOSED_CPHOLD => 'stängt rätt',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'absorberas',
     TOR_DOUBTFUL => 'tveksamt',
-    TOR_CHECKING => 'kontrollerat',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'tillfällig',
     TOR_PREMOD => 'pre-måtta',
-    TOR_REPLENISH => 'fylla på',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Denna status finns inte!';
 $lang['TORRENT_FAILED'] = 'Fördelningen var inte hittas!';
 $lang['TOR_STATUS_DUB'] = 'Distributionen har samma status';
-$lang['TOR_DONT_CHANGE'] = 'Förändring av status kan inte vara!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Distributionen har den status:';
 $lang['TOR_STATUS_CHANGED'] = 'Status ändras: ';
 $lang['TOR_BACK'] = ' tillbaka';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent som redan är registrerat';
 $lang['NOT_TORRENT'] = 'Den här filen är inte torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Du kan endast registrera en torrent i ett inlägg';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Du kan endast registrera en torrent i ett ämne';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Visa torrent-profil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiva torrents';
 
 $lang['TD_TRAF'] = 'Idag';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You inte har bonusar som finns 
 $lang['BONUS_RETURN'] = 'Tillbaka till utsäde bonus utbyte';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Öppna frågor';
 $lang['OPEN_IN_SAME_WINDOW'] = 'öppna i samma fönster';
 $lang['SHOW_TIME_TOPICS'] = 'visa tid av skapande ämnen';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies måste vara aktiverat!';
 $lang['SESSION_EXPIRED'] = 'Sessionen gått ut';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Visa endast användarnamn som börjar med';
-$lang['OTHERS'] = 'andra';
-$lang['ALL'] = 'alla';
-
 $lang['POST_LINK'] = 'Skicka länk';
 $lang['GOTO_QUOTED_POST'] = 'Gå till den citerade inlägg';
 $lang['LAST_VISITED'] = 'Senast Besökt';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Aldrig';
 //mpd
 $lang['DELETE_POSTS'] = 'Ta bort valda inlägg';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Den valda inlägg har tagits bort';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Meddelanden';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Uppdatering inlägg';
 $lang['TOPIC_SPLIT_NEW'] = 'Nytt ämne';
 $lang['TOPIC_SPLIT_OLD'] = 'Gammalt ämne';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Lägg till bot-meddelande om att flytta';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Lägg till bot-meddelande om split till <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Lägg till bot-meddelande om split till <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Fet text: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursiv text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understruken text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Genomstruken text: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citera text: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'För att ta bort en order från listan, klicka på iko
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Såg ämnen';
-$lang['NO_WATCHED_TOPICS'] = 'Du är inte titta på någon ämnen';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Tillbaka till startsidan';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klicka %sHere%s för att återvända till For
 
 // Banning
 $lang['BAN_CONTROL'] = 'Förbud-Kontroll';
-$lang['BAN_EXPLAIN'] = 'Här kan du kontrollera förbudet av användare. Du kan uppnå detta genom att förbjuda någon eller båda av en specifik användare eller en enskild person eller IP-adresser. Dessa metoder för att förhindra en användare från att ens nå index sidan av din styrelse. För att förhindra en användare från att registrera sig i ett annat användarnamn kan du även ange en förbjuden e-postadress. Observera att ett förbud mot en e-postadress sig kommer inte att förhindra att användare från att kunna logga in eller lägga till din styrelse. Du bör använda en av de första två metoderna för att uppnå detta.';
-$lang['BAN_EXPLAIN_WARN'] = 'Observera att ange ett intervall av IP-adresser resultat i alla adresser mellan start-och slut läggs till bannlysningslistan. Försök kommer att göras för att minimera antalet adresser som lagts till i databasen genom att införa jokertecken automatiskt när så är lämpligt. Om du verkligen måste ange ett intervall, försök att hålla den liten eller ännu bättre tillstånd specifika adresser.';
-
-$lang['SELECT_IP'] = 'Välj en IP-adress';
-$lang['SELECT_EMAIL'] = 'Välja en E-postadress';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Förbjuda en eller flera specifika användare';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Du kan stänga av flera användare på en gång genom att använda lämplig kombination av mus och tangentbord till din dator och webbläsare';
-
-$lang['BAN_IP'] = 'Förbjuda en eller flera IP-adresser';
-$lang['IP_HOSTNAME'] = 'IP-adresser';
-$lang['BAN_IP_EXPLAIN'] = 'För att ange flera olika IP-adresser separera dem med kommatecken.';
-
-$lang['BAN_EMAIL'] = 'Förbjuda en eller flera e-postadresser';
-$lang['BAN_EMAIL_EXPLAIN'] = 'För att ange mer än en e-postadress avgränsar du dem med kommatecken. För att ange ett wildcard användarnamn, så använd * som *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Fn-förbud mot en mer specifik användare';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Du kan unban flera användare på en gång genom att använda lämplig kombination av mus och tangentbord till din dator och webbläsare';
-
-$lang['UNBAN_IP'] = 'Fn-avvisa en eller flera IP-adresser';
-$lang['UNBAN_IP_EXPLAIN'] = 'Du kan unban flera IP-adresser på en gång med hjälp av en lämplig kombination av mus och tangentbord till din dator och webbläsare';
-
-$lang['UNBAN_EMAIL'] = 'Fn-avvisa en eller flera e-postadresser';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Du kan unban flera e-postadresser på en gång med hjälp av en lämplig kombination av mus och tangentbord till din dator och webbläsare';
-
 $lang['NO_BANNED_USERS'] = 'Ingen förbjudit användarnamn';
-$lang['NO_BANNED_IP'] = 'Inga förbjudna IP-adresser';
-$lang['NO_BANNED_EMAIL'] = 'Inga förbjudna e-postadresser';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Bannlysningslistan har uppdaterats';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klicka %sHere%s för att återgå till Ban Kontroll';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Administration';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Från denna instans kan du lägga till, ta bort, redigera, ändra ordning och re-synkronisera kategorier och forum';
 $lang['EDIT_FORUM'] = 'Redigera forum';
 $lang['CREATE_FORUM'] = 'Skapa nytt forum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Skapa ny kategori';
 $lang['REMOVE'] = 'Ta bort';
 $lang['UPDATE_ORDER'] = 'Uppdatera För';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Om denna Dimension som definieras av en Bild
 $lang['ASSIGNED_GROUP'] = 'Tilldelade Gruppen';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Skapa Miniatyrbilder';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Skapa alltid en Miniatyrbild. Denna funktion åsidosätter nästan alla Inställningar inom denna Speciella Kategori, med undantag för den Högsta Bildens Dimensioner. Med den här Funktionen en Miniatyr visas i inlägget, kan Användaren klicka på den för att öppna den verkliga Bilden.<br />Please Observera att denna funktion kräver Imagick att installeras, om det inte är installerad eller om Safe-Mode är aktiverat GD-Utökning av PHP kommer att användas. Om Bilden-Skriv stöds inte av PHP, kommer denna Funktion inte används.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minsta Filstorlek Miniatyr';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Om en Bild som är mindre än detta definieras Filstorlek, inga Miniatyrbilder att skapas, eftersom den är liten nog.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Program (Fullständig Sökväg)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Ange Sökvägen till den konvertera programmet för imagick, normalt /usr/bin/convert (i windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Sök Imagick';
-
-$lang['USE_GD2'] = 'Använda GD2 Förlängning';
-$lang['USE_GD2_EXPLAIN'] = 'PHP kan sammanställas med GD1 eller GD2 Förlängning för bild-och manipulera. För att på rätt sätt skapar Miniatyrer utan imagemagick den Bifogade filen Mod använder sig av två olika metoder, baserat på ditt val här. Om dina miniatyrer är i en dålig kvalitet eller skruvas upp, försök att ändra denna inställning.';
-$lang['ATTACHMENT_VERSION'] = 'Bilaga Mod Version %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Hantera Förbjudet Tillägg';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Du har skrivit lite fel värden. Vänligen kontrollera d
 $lang['PROCESSING'] = 'Bearbetning...';
 $lang['FINISHED'] = 'Klar';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Ämnet har flyttats från forum [b]%s[/b] forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Ämnet har delats upp. Nytt ämne - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Ämnet har delats upp från [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Vänligen fyll i releaseformuläret';
 $lang['NEW_RELEASE'] = 'Ny utgåva';
 $lang['NEXT'] = 'Fortsätt';
 $lang['OTHER'] = 'Andra';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Du måste fylla i fältet <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Du måste välja <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Söker efter användare med en Webbplat
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Söker efter användare med en Plats matchande %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Söker efter användare med deras Intressen fält matchande %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Söker efter användare med sitt Yrke fält matchande %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Söker efter användare som har besökt under de senaste %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Söker efter användare som har besökt efter den sista %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Söker efter användare som har satt %s som språk';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Söker efter användare som har satt UTC %s som sin tidszon';
 $lang['SEARCH_FOR_STYLE'] = 'Söker efter användare som har satt %s som sin stil';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Forum\' karta';
 $lang['ATOM_FEED'] = 'Foder';
 $lang['ATOM_ERROR'] = 'Fel skapa foder';
 $lang['ATOM_SUBSCRIBE'] = 'Prenumerera på feed';
-$lang['ATOM_NO_MODE'] = 'Inte anger ett läge för foder';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Detta forum inte har en feed (inga aktuella ämnen)';
 $lang['ATOM_NO_USER'] = 'Den här användaren har inte en feed (inga aktuella ämnen)';
 $lang['ATOM_UPDATED'] = 'Uppdaterad';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'På den här sidan kan du ange texten i de grundlägga
 $lang['TR_STATS'] = [
     0 => 'inaktiva användare i 30 dagar',
     1 => 'inaktiva användare för 90 dagar',
-    2 => 'medium storlek distributioner på tracker (många megabyte)',
+    2 => 'medium size distributions on the tracker',
     3 => 'hur många totalt händerna på tracker',
     4 => 'hur många lever händer (det är minst 1-lysdiod)',
     5 => 'hur många händer där som sådd mer än 5 frön',

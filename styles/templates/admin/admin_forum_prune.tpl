@@ -34,7 +34,7 @@
 </tr>
 <tr>
 	<td colspan="2" class="row1 tCenter">
-		<p>{L_PRUNE_TOPICS_NOT_POSTED} <input class="post" type="number" name="prunedays" size="4" /> {L_DAYS}</p>
+		<p>{L_PRUNE_TOPICS_NOT_POSTED} <input class="post" type="text" name="prunedays" size="4" /> {L_DAYS}</p>
 		<p class="med"><label><input class="post" type="checkbox" name="prune_all_topic_types" value="1" />{L_DELETE_ALL_TOPICS}</label></p>
 	</td>
 </tr>

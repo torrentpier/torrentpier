@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'página';
 $lang['GOTO_PAGE'] = 'Ir a la página';
 $lang['GOTO_SHORT'] = 'Página';
 $lang['JOINED'] = 'Unido';
-$lang['LONGEVITY'] = 'La longevidad';
+$lang['LONGEVITY'] = 'Registrado';
 $lang['IP_ADDRESS'] = 'Dirección IP';
 $lang['POSTED_AFTER'] = 'tras';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'La mayoría de los usuarios conectados a la vez 
 $lang['ONLINE_ADMIN'] = 'Administrador';
 $lang['ONLINE_MOD'] = 'Moderador';
 $lang['ONLINE_GROUP_MEMBER'] = 'Miembro del grupo';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Hora actual es: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'El panel de control de Avatar';
 
 $lang['WEBSITE'] = 'Sitio web';
 $lang['LOCATION'] = 'Ubicación';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Contacto';
 $lang['EMAIL_ADDRESS'] = 'La dirección de correo electrónico';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Enviar mensaje privado';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Encontrar temas de usuario'; // Find all topics b
 $lang['NO_USER_ID_SPECIFIED'] = 'Lo siento, pero que el usuario no existe.';
 $lang['WRONG_PROFILE'] = 'Usted no puede modificar un perfil que no es suyo.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Sólo un tipo de avatar puede ser especificado';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'El archivo en la URL dio no contiene datos';
 $lang['NO_CONNECTION_URL'] = 'Una conexión que no podía hacerse a la dirección URL que le dio';
 $lang['INCOMPLETE_URL'] = 'La URL que has introducido es incompleta';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Sitio web';
 $lang['ASC'] = 'Ascendente';
 $lang['DESC'] = 'Descendente';
 $lang['ORDER'] = 'El fin de';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Los Grupos De Usuarios';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Añadido';
 $lang['BT_REG_ON_TRACKER'] = 'Registrar en el tracker';
 $lang['BT_REG_FAIL'] = 'No se pudo registrar en tracker torrent';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Otro torrent con el mismo info_hash ya <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retirar del tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent no registrado';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Estatus';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Seleccione estado';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Usted no ha estado seleccionado.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Todos los estados';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'no se comprueba',
     TOR_CLOSED => 'cerrado',
     TOR_APPROVED => 'comprobado',
     TOR_NEED_EDIT => 'no se formalizó hasta',
     TOR_NO_DESC => 'no se formalizó',
-    TOR_DUP => 'repita',
-    TOR_CLOSED_CPHOLD => 'cerradas a la derecha',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'absorbido',
     TOR_DOUBTFUL => 'dudoso',
-    TOR_CHECKING => 'verificado',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'temporal',
     TOR_PREMOD => 'la pre-moderación',
-    TOR_REPLENISH => 'reponer',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Tal estado no existe!';
 $lang['TORRENT_FAILED'] = 'La distribución no se encontró!';
 $lang['TOR_STATUS_DUB'] = 'La distribución tiene el mismo estado';
-$lang['TOR_DONT_CHANGE'] = 'Cambio de estado no puede ser!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Distribución de la condición de:';
 $lang['TOR_STATUS_CHANGED'] = 'Cambio de estado: ';
 $lang['TOR_BACK'] = ' de vuelta';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'El Torrent ya registrado';
 $lang['NOT_TORRENT'] = 'Este archivo no es torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Usted puede registrar una sola torrent en un solo post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Usted puede registrar una sola torrent en uno de los temas';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Visualización de torrent-perfil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Los torrents activos';
 
 $lang['TD_TRAF'] = 'Hoy';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You no tienen bonificaciones di
 $lang['BONUS_RETURN'] = 'Volver a la semilla bono de exchange';
 
 $lang['TRACKER'] = 'Rastreador';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Temas abiertos';
 $lang['OPEN_IN_SAME_WINDOW'] = 'se abren en la misma ventana';
 $lang['SHOW_TIME_TOPICS'] = 'mostrar la hora de la creación de temas';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Las Cookies deben estar habilitadas!';
 $lang['SESSION_EXPIRED'] = 'Sesión caducado';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Mostrar sólo los nombres de usuario de inicio con';
-$lang['OTHERS'] = 'otros';
-$lang['ALL'] = 'todos';
-
 $lang['POST_LINK'] = 'Link Post';
 $lang['GOTO_QUOTED_POST'] = 'Ir al post citado';
 $lang['LAST_VISITED'] = 'La Última Vez Que Visitó';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Nunca';
 //mpd
 $lang['DELETE_POSTS'] = 'Eliminar seleccionados puestos';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'El seleccionado puestos se han eliminado con éxito';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Anuncios';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Actualización post de tiempo';
 $lang['TOPIC_SPLIT_NEW'] = 'Nuevo tema';
 $lang['TOPIC_SPLIT_OLD'] = 'Viejo tema';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Agregar bot-mensaje sobre el movimiento de';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Agregar bot-mensaje acerca de split a <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Agregar bot-mensaje acerca de split a <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'El texto en negrita: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Texto en cursiva: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Subrayar texto: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Tachado de texto: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Cita de texto: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Para eliminar una orden de la lista, haga clic en el i
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Visto temas';
-$lang['NO_WATCHED_TOPICS'] = 'Usted no está viendo los temas';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Volver a la página principal';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Haga clic en %sHere%s para volver a Foro de P
 
 // Banning
 $lang['BAN_CONTROL'] = 'Prohibición De Control De';
-$lang['BAN_EXPLAIN'] = 'Aquí usted puede controlar la prohibición de los usuarios. Usted puede lograr esto mediante la prohibición de que uno o ambos de un usuario específico o de un individuo o de un rango de direcciones IP. Estos métodos evitan que un usuario, incluso llegar a la página de índice de su junta directiva. Para evitar que un usuario registrarse con otro nombre de usuario también puede especificar un prohibió la dirección de correo electrónico. Por favor, tenga en cuenta que la prohibición de una dirección de correo electrónico por sí sola no impide que el usuario pueda iniciar sesión en o posterior a su junta directiva. Debe utilizar uno de los dos primeros métodos para lograr esto.';
-$lang['BAN_EXPLAIN_WARN'] = 'Por favor, tenga en cuenta que entrar en un rango de direcciones IP de los resultados en todas las direcciones entre el inicio y el final que se añade a la banlist. Se intentará reducir al mínimo el número de las direcciones añadidas a la base de datos mediante la introducción de caracteres comodín automáticamente cuando proceda. Si usted realmente tiene que entrar en una serie, tratamos de mantenerlo pequeño, o mejor aún, el estado de las direcciones específicas.';
-
-$lang['SELECT_IP'] = 'Seleccione una dirección IP';
-$lang['SELECT_EMAIL'] = 'Seleccione una dirección de Correo electrónico';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'La prohibición de uno o más usuarios específicos';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Se le puede prohibir a varios usuarios en un solo paso mediante la adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
-$lang['BAN_IP'] = 'La prohibición de una o más direcciones IP';
-$lang['IP_HOSTNAME'] = 'Las direcciones IP';
-$lang['BAN_IP_EXPLAIN'] = 'Para especificar varias direcciones IP diferentes sepárelos con comas.';
-
-$lang['BAN_EMAIL'] = 'La prohibición de una o más direcciones de correo electrónico';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Para especificar más de una dirección de correo electrónico, sepárelos con comas. Para especificar un comodín nombre de usuario, use * como *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'De la onu-ban uno más específicas de los usuarios';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Usted puede desbloquear a varios usuarios en un solo paso mediante la adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
-$lang['UNBAN_IP'] = 'De la onu-ban una o más direcciones IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Usted puede desbloquear a varias direcciones IP en una sola por medio de una adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
-$lang['UNBAN_EMAIL'] = 'De la onu-ban una o más direcciones de correo electrónico';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Usted puede desbloquear a varias direcciones de correo electrónico en un solo paso mediante la adecuada combinación de ratón y teclado de su ordenador y el navegador';
-
 $lang['NO_BANNED_USERS'] = 'No prohibidos los nombres de usuario';
-$lang['NO_BANNED_IP'] = 'No hay direcciones IP prohibidas';
-$lang['NO_BANNED_EMAIL'] = 'No prohibió las direcciones de correo electrónico';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'La banlist se ha actualizado correctamente';
 $lang['CLICK_RETURN_BANADMIN'] = 'Haga clic en %sHere%s para volver a la Prohibición de Control de';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Administración Del Foro';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Desde este panel usted puede agregar, eliminar, modificar, re-ordenar y re-sincronización de categorías y foros';
 $lang['EDIT_FORUM'] = 'Editar foro';
 $lang['CREATE_FORUM'] = 'Crear nuevo foro';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Crear nueva categoría';
 $lang['REMOVE'] = 'Quitar';
 $lang['UPDATE_ORDER'] = 'Pedido De Actualización De';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Si esto se define la Dimensión de una Image
 $lang['ASSIGNED_GROUP'] = 'Grupo Asignado';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Crear Miniaturas';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Siempre crear una Miniatura. Esta función anula casi todos los Ajustes dentro de esta Categoría Especial, a excepción de la Máxima dimensión de la Imagen. Con esta Característica una de las Miniaturas se mostrarán en el post, el Usuario puede hacer clic en él para abrir la Imagen real.<br />Please tenga en cuenta que esta característica requiere Imagick para ser instalado, si no está instalado o si Safe-Mode está activada, el GD-Extensión de PHP que será utilizado. Si la Imagen-Tipo no es compatible con PHP, esta Función no se utiliza.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Mínimo De Miniaturas De Tamaño De Archivo';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Si una Imagen es más pequeña que esta se define de Tamaño, ninguna Miniatura va a ser creado, porque es lo suficientemente pequeño.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programa (Ruta Completa)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Introduzca la Ruta de acceso al programa de conversión de imagick, normalmente /usr/bin/convertir (en windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Búsqueda Imagick';
-
-$lang['USE_GD2'] = 'Hacer uso de GD2 Extensión';
-$lang['USE_GD2_EXPLAIN'] = 'PHP es capaz de ser compilado con el GD1 GD2 o Extensión de manipulación de imagen. Para crear correctamente las Miniaturas sin imagemagick el Apego Mod utiliza dos métodos diferentes, basado en su selección. Si sus miniaturas son de mala calidad o de la pata, tratar de cambiar esta configuración.';
-$lang['ATTACHMENT_VERSION'] = 'Adjunto Versión Del Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Administrar Prohibido Extensiones';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Se han introducido algunos de los valores equivocados. P
 $lang['PROCESSING'] = 'Procesamiento de...';
 $lang['FINISHED'] = 'Terminado';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'El tema ha sido movido desde el foro de [b]%s[/b] en el foro [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'El tema se ha dividido. Nuevo tema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'El tema se ha dividido de [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Por favor complete el formulario de liberación';
 $lang['NEW_RELEASE'] = 'Nueva versión';
 $lang['NEXT'] = 'Continuar';
 $lang['OTHER'] = 'Otros';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Usted debe llenar el campo <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Debe seleccionar <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'La búsqueda de usuarios con un sitio W
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'La búsqueda de usuarios con una Ubicación coincidente %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'La búsqueda de usuarios con sus Intereses campo de juego %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'La búsqueda de usuarios con su Ocupación campo de juego %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'La búsqueda de usuarios que han visitado en los últimos %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'La búsqueda de usuarios que han visitado después de la última %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'La búsqueda de los usuarios que han establecido %s como su idioma';
 $lang['SEARCH_FOR_TIMEZONE'] = 'La búsqueda de los usuarios que han establecido UTC %s como su zona horaria';
 $lang['SEARCH_FOR_STYLE'] = 'La búsqueda de los usuarios que han establecido %s como su estilo';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Los foros de\' mapa';
 $lang['ATOM_FEED'] = 'Alimentación';
 $lang['ATOM_ERROR'] = 'Error al generar feed';
 $lang['ATOM_SUBSCRIBE'] = 'Suscribirse a la fuente';
-$lang['ATOM_NO_MODE'] = 'No se especifica un modo para la alimentación';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Este foro no tiene una fuente (no continuo temas)';
 $lang['ATOM_NO_USER'] = 'Este usuario no tiene una fuente (no continuo temas)';
 $lang['ATOM_UPDATED'] = 'Actualizado';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'En esta página, usted puede especificar el texto de l
 $lang['TR_STATS'] = [
     0 => 'usuarios inactivos en 30 días',
     1 => 'usuarios inactivos durante 90 días',
-    2 => 'tamaño medio de las distribuciones en el tracker (muchos megabytes)',
+    2 => 'medium size distributions on the tracker',
     3 => 'cuántas manos en el tracker',
     4 => 'cuántos viven manos (hay al menos 1 led)',
     5 => 'cuántas manos donde que la siembra de más de 5 semillas',

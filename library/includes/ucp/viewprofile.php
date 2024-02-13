@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -26,7 +26,7 @@ if (!$userdata['session_logged_in']) {
     }
 }
 
-if (!$profiledata = get_userdata($_GET[POST_USERS_URL], !is_numeric($_GET[POST_USERS_URL]))) {
+if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
     bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
@@ -74,6 +74,14 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     $signature = bbcode2html($signature);
 }
 
+// Ban information
+if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
+    $template->assign_block_vars('ban', [
+        'IS_BANNED' => true,
+        'BAN_REASON' => $banInfo['ban_reason']
+    ]);
+}
+
 $template->assign_vars([
     'PAGE_TITLE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
     'USERNAME' => $profiledata['username'],
@@ -91,13 +99,13 @@ $template->assign_vars([
     'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
     'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
     'USER_ACTIVE' => $profiledata['user_active'],
-    'LOCATION' => $profiledata['user_from'],
+    'LOCATION' => render_flag($profiledata['user_from']),
     'OCCUPATION' => $profiledata['user_occ'],
     'INTERESTS' => $profiledata['user_interests'],
     'SKYPE' => $profiledata['user_skype'],
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
-    'GENDER' => ($bb_cfg['gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+    'GENDER' => $bb_cfg['gender'] ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
     'BIRTHDAY' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? $profiledata['user_birthday'] : '',
     'BIRTHDAY_ICON' => user_birthday_icon($profiledata['user_birthday'], $profiledata['user_id']),
     'AGE' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,6 +25,11 @@ $user_id = isset($_REQUEST['u']) ? (int)$_REQUEST['u'] : 0;
 $cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $submit = isset($_REQUEST['submit']);
+
+// Check for demo mode
+if (IN_DEMO_MODE && $submit) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
 
 $group_data = [];
 
@@ -280,7 +285,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
-        'USER_OR_GROUPNAME' => profile_url($this_userdata),
+        'USER_OR_GROUPNAME' => profile_url($this_userdata, true),
         'USER_LEVEL' => $lang['USER_LEVEL'] . ' : ' . $s_user_type,
         'T_USER_OR_GROUPNAME' => $lang['USERNAME'],
         'T_AUTH_TITLE' => $lang['AUTH_CONTROL_USER'],

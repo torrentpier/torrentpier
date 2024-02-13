@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'lehel';
 $lang['GOTO_PAGE'] = 'Mine lehele';
 $lang['GOTO_SHORT'] = 'Lehekülg';
 $lang['JOINED'] = 'Liitunud';
-$lang['LONGEVITY'] = 'Pikaealisuse';
+$lang['LONGEVITY'] = 'Registreeritud';
 $lang['IP_ADDRESS'] = 'IP Aadress';
 $lang['POSTED_AFTER'] = 'pärast';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'Kõige kunagi kasutajad online oli <b>%s</b> koh
 $lang['ONLINE_ADMIN'] = 'Administraator';
 $lang['ONLINE_MOD'] = 'Moderaator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Grupi liige';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Praegune aeg on: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar control panel';
 
 $lang['WEBSITE'] = 'Koduleht';
 $lang['LOCATION'] = 'Asukoht';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Kontakt';
 $lang['EMAIL_ADDRESS'] = 'E-posti aadress';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Saada privaatsõnum';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Leia kasutaja teemasid'; // Find all topics by us
 $lang['NO_USER_ID_SPECIFIED'] = 'Vabandust, aga see kasutaja ei ole olemas.';
 $lang['WRONG_PROFILE'] = 'Te ei saa muuta profiili seadeid, mis ei ole sinu oma.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Ainult üks tüüp avatar võib olla määratud';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Faili URL-i, kui andsid sisaldab andmeid pole';
 $lang['NO_CONNECTION_URL'] = 'Ühendus ei saa teha URL te andsite';
 $lang['INCOMPLETE_URL'] = 'URL sisestatud on puudulik';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Koduleht';
 $lang['ASC'] = 'Tõusev';
 $lang['DESC'] = 'Laskumine';
 $lang['ORDER'] = 'Et';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Grupid';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Lisatud';
 $lang['BT_REG_ON_TRACKER'] = 'Registri tracker';
 $lang['BT_REG_FAIL'] = 'Ei saanud registreerida torrent tracker kohta';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Teine torrent sama info_hash juba <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Eemalda tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent registreerimata';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Staatus';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Valige staatus';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Sa ei ole valinud staatus.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Kõik staatused';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ei ole kontrollitud',
     TOR_CLOSED => 'suletud',
     TOR_APPROVED => 'kontrollitud',
     TOR_NEED_EDIT => 'ei ole vormistatud, kuni',
     TOR_NO_DESC => 'ei ole vormistatud',
-    TOR_DUP => 'korda',
-    TOR_CLOSED_CPHOLD => 'suletud õiguse',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'imendub',
     TOR_DOUBTFUL => 'ebatõenäoliselt laekuvad',
-    TOR_CHECKING => 'kontrollitud',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'ajutine',
     TOR_PREMOD => 'pre-mõõdukalt',
-    TOR_REPLENISH => 'täiendama',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Selline seisund ei ole olemas!';
 $lang['TORRENT_FAILED'] = 'Jaotus ei leitud!';
 $lang['TOR_STATUS_DUB'] = 'Jaotus on sama staatus';
-$lang['TOR_DONT_CHANGE'] = 'Staatuse muutmine ei ole võimalik!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Jaotus on olek:';
 $lang['TOR_STATUS_CHANGED'] = 'Staatus muudetud: ';
 $lang['TOR_BACK'] = ' tagasi';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent on juba registreeritud';
 $lang['NOT_TORRENT'] = 'See fail ei ole torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Sa saad registreerida ainult üks torrent üks postitus';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Sa saad registreerida ainult üks torrent üks teema';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Vaatamise torrent-profiil :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiivne torrents';
 
 $lang['TD_TRAF'] = 'Täna';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ei ole saadaolevad preemiad
 $lang['BONUS_RETURN'] = 'Tagasi seemne boonus vahetada';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Avatud teemasid';
 $lang['OPEN_IN_SAME_WINDOW'] = 'avatud sama aken';
 $lang['SHOW_TIME_TOPICS'] = 'näita aega loomise teemasid';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Küpsised peavad olema lubatud!';
 $lang['SESSION_EXPIRED'] = 'Istung lõppenud';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Näita ainult kasutajanimed alustades';
-$lang['OTHERS'] = 'muud';
-$lang['ALL'] = 'kõik';
-
 $lang['POST_LINK'] = 'Postitus link';
 $lang['GOTO_QUOTED_POST'] = 'Minge tsiteeritud postitus';
 $lang['LAST_VISITED'] = 'Viimati Külastas';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Kunagi';
 //mpd
 $lang['DELETE_POSTS'] = 'Kustuta valitud postitusi';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Valitud ametikohad on edukalt eemaldatud';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Teated';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Update post aeg';
 $lang['TOPIC_SPLIT_NEW'] = 'Uus teema';
 $lang['TOPIC_SPLIT_OLD'] = 'Vana teema';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Lisa bot sõnumi teisaldamise kohta';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Lisa bot-sõnumit jagada <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Lisa bot-sõnumit jagada <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Rasvane tekst: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kaldkirjas tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Allajoonitud tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Tsiteerin teksti: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Kustutada tellimuse loetelust, siis kliki ikooni vasak
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Vaatasin teemasid';
-$lang['NO_WATCHED_TOPICS'] = 'Sa ei ole vaadates mingeid teemasid';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Tagasi avalehele';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klõpsake %sHere%s naasta Foorumi Õigused';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrolli';
-$lang['BAN_EXPLAIN'] = 'Siin te saate kontrollida, keelatakse kasutajad. Teil on võimalik saavutada seda, millega keelatakse kas või nii konkreetse kasutaja või isik või erinevaid IP aadresse. Need meetodid vältida kasutaja alates isegi jõuda esilehele teie juhatuse. Et vältida kasutaja alates registreerimise alusel eri kasutajanimi võite määrata ka keelatud e-posti aadress. Palun pange tähele, et keelata e-posti aadress üksi ei takista, et kasutaja olema võimeline logi sisse või postiga oma pardal. Sa peaksid kasutama ühte kahe esimese meetodeid selle saavutamiseks.';
-$lang['BAN_EXPLAIN_WARN'] = 'Palun pange tähele, et vahemiku IP-aadressidest, mille tulemuseks kõik aadressid vahel alguse ja lõpu lisanduvad banlist. Katsed on tehtud võimalikult väike arv aadressid lisatakse andmebaasi, lisades metamärgid automaatselt, kui see on asjakohane. Kui sa tõesti tuleb sisestada vahemik, proovige hoida seda väikest või veel parem riigi aadresse.';
-
-$lang['SELECT_IP'] = 'Valige IP aadress';
-$lang['SELECT_EMAIL'] = 'Valige e-Posti aadress';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban ühe või mitme konkreetse kasutajad';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Saate ban mitu kasutajat korraga, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
-$lang['BAN_IP'] = 'Ban üks või mitu IP-aadressid';
-$lang['IP_HOSTNAME'] = 'IP-aadressid';
-$lang['BAN_IP_EXPLAIN'] = 'Määrata mitu erinevat IP-aadressid eraldi neid with commas.';
-
-$lang['BAN_EMAIL'] = 'Ban üks või mitu e-posti aadressid';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Määrata rohkem kui üks e-posti aadressi, eraldage need with commas. Määrata lühend kasutajanimi, kasuta * nagu *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Üro-ban üks konkreetsemaid kasutajad';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Saad unban mitu kasutajat korraga, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
-$lang['UNBAN_IP'] = 'Üro-ban üks või mitu IP-aadressid';
-$lang['UNBAN_IP_EXPLAIN'] = 'Saad unban mitu IP-aadressi ühes minna, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
-$lang['UNBAN_EMAIL'] = 'Üro-ban üks või mitu e-posti aadressid';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Saad unban mitu e-posti aadressid ühekorraga, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
-
 $lang['NO_BANNED_USERS'] = 'Nr keelatud kasutajanimed';
-$lang['NO_BANNED_IP'] = 'Nr keelatud IP-aadressid';
-$lang['NO_BANNED_EMAIL'] = 'Nr keelatud e-posti aadressid';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Kui banlist on edukalt uuendatud';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klõpsake %sHere%s naasta Keeld Kontrolli';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Foorumi Administratsioon';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Selle paneeli saab lisada, kustutada, redigeerida, ümber-et ja uuesti sünkroonida kategooriad ja foorumid';
 $lang['EDIT_FORUM'] = 'Edit foorum';
 $lang['CREATE_FORUM'] = 'Luua uus foorum';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Loo uus kategooria';
 $lang['REMOVE'] = 'Eemalda';
 $lang['UPDATE_ORDER'] = 'Update, Et';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Kui see on määratletud Mõõde Pilt on saa
 $lang['ASSIGNED_GROUP'] = 'Sihtotstarbeline Grupp';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Loo Pisipilt';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Alati luua Pisipilti. See funktsioon katab peaaegu kõik Seaded jooksul see Eriline Kategooria, välja arvatud juhul Maksimaalsed Pildi Mõõtmed. See Funktsioon Pisipilt kuvatakse jooksul postitust, Kasutaja saab klõpsake sellel, et avada reaalne Pilt.<br />Please pange Tähele, et see funktsioon nõuab Imagick olema paigaldatud, kui see ei ole paigaldatud või kui Safe-Mode on sisse lülitatud GD-Laiendamine PHP kasutatakse. Kui Pilt-Tüüp ei toeta PHP, see Funktsioon ei ole kasutusel.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Minimaalne Pisipilt Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Kui Pilt on väiksem, kui see on määratletud Filesize, nr Pisipilt luuakse, sest see on piisavalt väike.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Programmi (Terve Tee)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Sisestage Tee teisendada programmi imagick, tavaliselt /usr/bin/convert (windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Otsingu Imagick';
-
-$lang['USE_GD2'] = 'Kasutada GD2 Pikendamine';
-$lang['USE_GD2_EXPLAIN'] = 'PHP on võimalik siduda GD1 või GD2 Laiendamine pildi manipuleerides. Õigesti luua Pisipildid ilma imagemagick Manus Mod kasutab kahte erinevat meetodit, mis põhineb teie valik on siin. Kui teie pisipildid on halb kvaliteet või silmamunad, proovige seda sätet muuta.';
-$lang['ATTACHMENT_VERSION'] = 'Attachment Mod Versioon %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Halda Keelatud Laiendid';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Olete sisestanud mõned valed väärtused. Palun kontrol
 $lang['PROCESSING'] = 'Töötlemine...';
 $lang['FINISHED'] = 'Lõpetanud';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Teema on liikunud foorumi [b]%s[/b] foorumi [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Teema on jagatud. Uus teema - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Teema on jagatud alates [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Palun täitke vabastusvorm';
 $lang['NEW_RELEASE'] = 'Uus pressiteade';
 $lang['NEXT'] = 'Jätka';
 $lang['OTHER'] = 'Muud';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Tuleb täita väli <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Teil tuleb valida <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Otsides kasutajatele Veebisaidi sobitam
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Otsides kasutajatele Asukoha sobitamine %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Otsides kasutajad, kellel on oma Huvide valdkonnas sobitamine %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Otsides kasutajatele nende kutseala valdkonnas sobitamine %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Otsides kasutajad, kes on külastanud viimase %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Otsides kasutajad, kes on külastanud pärast viimast %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Otsides kasutajaid, kes on seadnud %s, kuna nende keel';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Otsides kasutajaid, kes on seadnud UTC %s oma ajatsooni';
 $lang['SEARCH_FOR_STYLE'] = 'Otsides kasutajaid, kes on seadnud %s oma stiili';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Foorumid\' kaart';
 $lang['ATOM_FEED'] = 'Sööt';
 $lang['ATOM_ERROR'] = 'Viga teeniva sööt';
 $lang['ATOM_SUBSCRIBE'] = 'Tellida sööda';
-$lang['ATOM_NO_MODE'] = 'Ei täpsusta režiim sööt';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'See foorum ei ole sööda kohta (nr käimasolevad teemad)';
 $lang['ATOM_NO_USER'] = 'See kasutaja ei ole sööda kohta (nr käimasolevad teemad)';
 $lang['ATOM_UPDATED'] = 'Uuendus';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'Sellel lehel saate määrata teksti põhireeglid ressu
 $lang['TR_STATS'] = [
     0 => 'mitteaktiivsete kasutajate 30 päeva',
     1 => 'mitteaktiivsete kasutajate 90 päeva',
-    2 => 'keskmise suurusega väljamakseid tracker (mitu mb)',
+    2 => 'medium size distributions on the tracker',
     3 => 'kui palju kokku käed tracker',
     4 => 'kui palju live kätte (seal on vähemalt 1 led)',
     5 => 'kui paljud käed, kus on, et külvi on üle 5 seemned',

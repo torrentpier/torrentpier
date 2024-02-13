@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'sayfa';
 $lang['GOTO_PAGE'] = 'Sayfaya git';
 $lang['GOTO_SHORT'] = 'Sayfa';
 $lang['JOINED'] = 'Katıldı';
-$lang['LONGEVITY'] = 'Uzun ömürlü';
+$lang['LONGEVITY'] = 'Kayıtlı';
 $lang['IP_ADDRESS'] = 'IP Adresi';
 $lang['POSTED_AFTER'] = 'sonra';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'İnternetteki çoğu kullanıcı %s üzerinde <b
 $lang['ONLINE_ADMIN'] = 'Yönetici';
 $lang['ONLINE_MOD'] = 'Moderatör';
 $lang['ONLINE_GROUP_MEMBER'] = 'Grup üyesi';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Geçerli zaman <span class="tz_time">%s</span>: ';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar kontrol paneli';
 
 $lang['WEBSITE'] = 'Web sitesi';
 $lang['LOCATION'] = 'Konum';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'İletişim';
 $lang['EMAIL_ADDRESS'] = 'E-posta adresi';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Özel mesaj gönder';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Kullanıcı konuları bul'; // Find all topics by
 $lang['NO_USER_ID_SPECIFIED'] = 'Üzgünüm, ama bu kullanıcı yok.';
 $lang['WRONG_PROFILE'] = 'Sana ait olmayan bir profil değiştiremezsiniz.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Avatar sadece bir tür belirtilebilir';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Verdiğin URL de dosya hiçbir veri içermiyor';
 $lang['NO_CONNECTION_URL'] = 'Bir URL bağlantı kurulamadı verdin';
 $lang['INCOMPLETE_URL'] = 'Girilen URL sayfası eksik';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Web sitesi';
 $lang['ASC'] = 'Artan';
 $lang['DESC'] = 'İnen';
 $lang['ORDER'] = 'Sipariş';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Kullanıcı Grupları';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Eklendi';
 $lang['BT_REG_ON_TRACKER'] = 'İzci kayıt';
 $lang['BT_REG_FAIL'] = 'İzci torrent kaydedilemedi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Aynı info_hash ile başka bir torrent zaten <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'İzleyiciden Kaldır';
 $lang['BT_UNREGISTERED'] = 'Torrent kayıtsız';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Durumu';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Durumu seçin';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Durum seçmediniz.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tüm durumlar';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'işaretli değil',
     TOR_CLOSED => 'kapalı',
     TOR_APPROVED => 'kontrol',
     TOR_NEED_EDIT => 'resmiyet kadar değil',
     TOR_NO_DESC => 'resmiyet değil',
-    TOR_DUP => 'tekrar',
-    TOR_CLOSED_CPHOLD => 'kapalı sağ',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'emilen',
     TOR_DOUBTFUL => 'şüpheli',
-    TOR_CHECKING => 'doğrulanmış',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'geçici',
     TOR_PREMOD => 'pre-ılımlılık',
-    TOR_REPLENISH => 'doldurmak',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Böyle bir durum yok!';
 $lang['TORRENT_FAILED'] = 'Dağıtım bulunamadı!';
 $lang['TOR_STATUS_DUB'] = 'Dağıtım aynı durum vardır';
-$lang['TOR_DONT_CHANGE'] = 'Durum değişikliği olamaz!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Dağıtım durumu vardır:';
 $lang['TOR_STATUS_CHANGED'] = 'Durum değişti: ';
 $lang['TOR_BACK'] = ' geri';
@@ -1235,7 +1253,7 @@ $lang['ALREADY_REG'] = 'Torrent zaten kayıtlı';
 $lang['NOT_TORRENT'] = 'Bu dosya torrent değil';
 $lang['ONLY_1_TOR_PER_POST'] = 'Bir yazı yalnızca bir torrent kaydedebilirsiniz';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Bir konuda tek bir torrent kaydedebilirsiniz';
-$lang['VIEWING_USER_BT_PROFILE'] = '%s görüntüleme torrent-profil :'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Etkin torrentler';
 
 $lang['TD_TRAF'] = 'Bugün';
@@ -1266,6 +1284,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ikramiye yok. Daha fazla to
 $lang['BONUS_RETURN'] = 'Tohum bonus değişimi dönmek';
 
 $lang['TRACKER'] = 'İzci';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Açık konular';
 $lang['OPEN_IN_SAME_WINDOW'] = 'aynı pencerede aç';
 $lang['SHOW_TIME_TOPICS'] = 'yaratılış konuları zaman gösterecek';
@@ -1299,10 +1318,6 @@ $lang['COOKIES_REQUIRED'] = 'Çerezler etkin olmalıdır.';
 $lang['SESSION_EXPIRED'] = 'Oturum süresi doldu';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Haritayı sadece başlangıç adlarını';
-$lang['OTHERS'] = 'Diğerleri';
-$lang['ALL'] = 'tüm';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Alıntı mesaja git';
 $lang['LAST_VISITED'] = 'Dün Ziyaret Etti';
@@ -1312,6 +1327,7 @@ $lang['NEVER'] = 'Asla';
 //mpd
 $lang['DELETE_POSTS'] = 'Sil seçilen mesaj';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Seçilen mesajlar başarıyla kaldırıldı';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Duyurular';
@@ -1327,6 +1343,7 @@ $lang['UPDATE_POST_TIME'] = 'Post zaman güncelleme';
 $lang['TOPIC_SPLIT_NEW'] = 'Yeni konu';
 $lang['TOPIC_SPLIT_OLD'] = 'Eski konu';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Taşınmayı bot Ekle-mesaj';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '<b>old topic</b> split hakkında bot-mesaj ekleyin';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '<b>new topic</b> split hakkında bot-mesaj ekleyin';
 //qr
@@ -1352,6 +1369,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1521,6 +1539,8 @@ $lang['BOLD'] = '(Ctrl+B)kalın metin: [b]text[/b]';
 $lang['ITALIC'] = 'İtalik metin: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = '(Ctrl+U)altı çizili metin: [u]text[/u]';
 $lang['STRIKEOUT'] = '(Ctrl+S)üstü çizili metin: [s]text[/s]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '(Ctrl+Q)alıntı metin: [quote]text[/quote]';
@@ -1574,7 +1594,7 @@ $lang['DEL_LIST_INFO'] = 'Listeden bir sipariş silmek için, simgesine herhangi
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'İzlenen konular';
-$lang['NO_WATCHED_TOPICS'] = 'Herhangi bir konu seyredemezsin';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Ev sayfasına geri dön';
@@ -1732,35 +1752,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = '%sHere%s İzinleri Foruma dönmek için tıkl
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrol';
-$lang['BAN_EXPLAIN'] = 'Burada kullanıcılar yasaklanması kontrol edebilirsiniz. Belirli bir kullanıcı veya IP adresleri tek tek ya da bir dizi ya da yasaklayan bu elde edebilirsiniz. Bu yöntemler, Yönetim Kurulu indeks sayfası ulaşmak bile bir kullanıcı önlemek. Ayrıca yasaklı e-posta adresi belirtebilirsiniz farklı bir kullanıcı adı altında kayıt bir kullanıcı önlemek için. Yalnız bir e-posta adresi yasaklama oturum ya da Yönetim Kurulu için post edememek kullanıcı engellemez unutmayın. Bunu başarmak için ilk iki yöntemden birini kullanmalısınız.';
-$lang['BAN_EXPLAIN_WARN'] = 'IP aralığı girerek status eklenen başlangıç ve bitiş arasındaki tüm adresleri sonuçları adreslerini unutmayın. Çalışır veritabanına otomatik olarak uygun yere joker tanıtarak ekledi adresleri sayısını en aza indirmek için yapılır. Eğer gerçekten bir dizi girin, küçük ya da daha iyisi belirli adresleri devlet tutmaya çalışın.';
-
-$lang['SELECT_IP'] = 'Bir IP adresi seçin';
-$lang['SELECT_EMAIL'] = 'E-Posta adresi seçin';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Bir veya daha fazla belirli kullanıcılar Ban';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Bir bilgisayar fare ve klavye uygun kombinasyonu kullanılarak tarayıcı birden çok kullanıcının yasağı ve';
-
-$lang['BAN_IP'] = 'Bir veya daha fazla IP adresleri yasağı';
-$lang['IP_HOSTNAME'] = 'IP adresleri';
-$lang['BAN_IP_EXPLAIN'] = 'Birkaç farklı IP adreslerini belirtmek için virgül ile ayırın.';
-
-$lang['BAN_EMAIL'] = 'Bir veya daha fazla e-posta adresleri yasağı';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Birden fazla e-posta adresi belirtmek için, bir virgül ile ayırın. Joker bir kullanıcı adı belirtmek için * *@hotmail.com gibi kullanın';
-
-$lang['UNBAN_USERNAME'] = 'BM-belirli kullanıcılar ban';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Bir bilgisayar fare ve klavye uygun kombinasyonu kullanılarak tarayıcı birden çok kullanıcı yasak kaldırma ve';
-
-$lang['UNBAN_IP'] = 'BM-bir veya daha fazla IP adresleri yasağı';
-$lang['UNBAN_IP_EXPLAIN'] = 'Bilgisayarınızın fare ve klavye uygun kombinasyonu kullanarak tarayıcı ve birden çok IP adresi yasak kaldırma edebilirsiniz';
-
-$lang['UNBAN_EMAIL'] = 'BM-bir veya daha fazla e-posta adresleri yasağı';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Bilgisayarınızın fare ve klavye uygun kombinasyonu kullanarak tarayıcı ve birden çok e-posta adresleri Kazanmalı yapabilirsiniz';
-
 $lang['NO_BANNED_USERS'] = 'Hayır yasaklı kullanıcı adları';
-$lang['NO_BANNED_IP'] = 'Hayır, yasaklanan IP adresleri';
-$lang['NO_BANNED_EMAIL'] = 'Hayır yasaklı e-posta adresleri';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Status başarıyla güncellendi';
 $lang['CLICK_RETURN_BANADMIN'] = 'Denetim Yasağı dönmek için %sHere%s tıklayın';
 
@@ -1821,6 +1818,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Forum Yönetimi';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Bu panelden Ekle, sil, Düzenle, Yeniden Sipariş ve yeniden senkronize kategoriler ve forumlar';
 $lang['EDIT_FORUM'] = 'Forum Düzenle';
 $lang['CREATE_FORUM'] = 'Yeni bir forum oluşturmak';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Yeni kategori oluşturma';
 $lang['REMOVE'] = 'Kaldır';
 $lang['UPDATE_ORDER'] = 'Güncelleme Sırası';
@@ -2175,16 +2173,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Eğer bir Görüntü tanımlanan bu Boyuta u
 $lang['ASSIGNED_GROUP'] = 'Atanan Grup';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Küçük Resim Oluşturma';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Her zaman bir Küçük resim oluşturmak. Bu özellik, bu Özel bir Kategori içinde neredeyse tüm Ayarları geçersiz kılar, Maksimum Resim Boyutları dışında. Bu Özelliği ile Küçük bir yazı içinde görüntülenir, Kullanıcının gerçek Resmi açmak için tıklatın.Bu özellik yüklenecek Imagick gerektirir, eğer yüklü değilse veya Mod GD etkin-PHP Uzantısı kullanılacaksa Güvenli eğer <br />Please Unutmayın. Eğer Görüntü Tipi PHP tarafından desteklenen değilse, bu Özellik kullanılmıyor.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'En Az Küçük Resim Boyutu';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Eğer bir Resim bu tanımlanmış dosya Boyutu daha küçük ise, Küçük resim yok yeterince küçük olduğu için oluşturulacak.';
-$lang['IMAGE_IMAGICK_PATH'] = '(Tam Yol)Imagick Programı';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Imagick dönüştürme programının Yolunu girin, normalde /usr/bin/(windows: c:/imagemagick/convert.exe dönüştürme.';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Arama Imagick';
-
-$lang['USE_GD2'] = 'GD2 Uzantısı kullanın';
-$lang['USE_GD2_EXPLAIN'] = 'PHP görüntü işleme için GD1 veya GD2 Uzantısı ile derlenmiş olabilir. Doğru Eki Mod iki farklı yöntem, seçim sana bağlı kullanır ımagemagick olmadan Küçük oluşturmak için. Eğer küçük kötü bir kalitede ya da berbat etti, bu ayarı değiştirmeyi deneyin.';
-$lang['ATTACHMENT_VERSION'] = '%s Eki Mod Sürüm'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Yasak Uzantıları Yönet';
@@ -2534,7 +2524,7 @@ $lang['WRONG_INPUT'] = 'Bazı yanlış değerler girdiniz. Lütfen girişinizi k
 $lang['PROCESSING'] = 'İşleme...';
 $lang['FINISHED'] = 'Bitmiş';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Konu forum [b]%s[/b] gelen [b]%s[/b][br][br]%s foruma taşındı';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Konu bölünmüş. Yeni konu [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Konu [b]%s[/b][br][br]%s arasında bölünmüş';
 
@@ -2590,6 +2580,8 @@ $lang['RELEASE_WELCOME'] = 'Lütfen izin formunu doldurun';
 $lang['NEW_RELEASE'] = 'Yeni sürüm';
 $lang['NEXT'] = 'Devam';
 $lang['OTHER'] = 'Başka';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '<b>%s</b> alanını doldurmalısınız';
 $lang['TPL_EMPTY_SEL'] = '<b>%s</b> seçmeniz gerekir';
@@ -2646,8 +2638,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Kullanıcılar için %s bir web Sitesi 
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Kullanıcılar için bir Konum ile arama %s eşleşen';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Kullanıcıların Çıkarları ile arama eşleşen %s alan';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Kullanıcılar için İşgal alanı ile arama %s eşleşen';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Son %s %s ziyaret eden kullanıcıları aranıyor';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Ziyaret sonrası olan kullanıcılar için aramaya son %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = '%s ayarlanmış olan kullanıcılar için dil olarak aranıyor';
 $lang['SEARCH_FOR_TIMEZONE'] = '%s UTC ayarlanmış olan kullanıcılar için zaman dilimi olarak aranıyor';
 $lang['SEARCH_FOR_STYLE'] = '%s ayarlanmış olan kullanıcılar için arama tarzı';
@@ -2752,7 +2744,7 @@ $lang['FORUM_MAP'] = 'Forum göster';
 $lang['ATOM_FEED'] = 'Yayın';
 $lang['ATOM_ERROR'] = 'Hata üreten besleme';
 $lang['ATOM_SUBSCRIBE'] = 'Beslemesine abone';
-$lang['ATOM_NO_MODE'] = 'Yem için bir mod belirtin';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Bu forumda (devam eden konular)bir besleme yok';
 $lang['ATOM_NO_USER'] = 'Bu kullanıcı (devam eden konular)bir besleme yok';
 $lang['ATOM_UPDATED'] = 'Güncellenme Tarihi';
@@ -2767,7 +2759,7 @@ $lang['TERMS_EXPLAIN'] = 'Bu sayfada, kaynağın Temel Kurallar metni kullanıc�
 $lang['TR_STATS'] = [
     0 => '30 gün aktif olmayan kullanıcılar',
     1 => '90 gün boyunca aktif olmayan kullanıcılar',
-    2 => '(kaç megabayt)izleyicideki orta boy dağılımları',
+    2 => 'medium size distributions on the tracker',
     3 => 'birçok izleyici toplam ellerini nasıl',
     4 => '(en az 1 led kaç canlı eller)',
     5 => '5 Ekim daha fazla tohum birçok eller nasıl',

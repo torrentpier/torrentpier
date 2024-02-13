@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'σελίδα';
 $lang['GOTO_PAGE'] = 'Μεταβείτε στη σελίδα';
 $lang['GOTO_SHORT'] = 'Σελίδα';
 $lang['JOINED'] = 'Συνεκδικασθείσες';
-$lang['LONGEVITY'] = 'Μακροζωία';
+$lang['LONGEVITY'] = 'Εγγεγραμμένοι';
 $lang['IP_ADDRESS'] = 'Διεύθυνση IP';
 $lang['POSTED_AFTER'] = 'μετά';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'Οι περισσότεροι χρήστες onl
 $lang['ONLINE_ADMIN'] = 'Διαχειριστής';
 $lang['ONLINE_MOD'] = 'Συντονιστής';
 $lang['ONLINE_GROUP_MEMBER'] = 'Μέλος της ομάδας';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Τρέχουσα ώρα είναι: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar πίνακα ελέγχου';
 
 $lang['WEBSITE'] = 'Ιστοσελίδα';
 $lang['LOCATION'] = 'Τοποθεσία';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Επικοινωνήστε με';
 $lang['EMAIL_ADDRESS'] = 'E-mail';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Αποστολή ιδιωτικού μηνύματος';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Βρείτε χρήστη θέματα'; // Find 
 $lang['NO_USER_ID_SPECIFIED'] = 'Συγνώμη, αλλά αυτός ο χρήστης δεν υπάρχει.';
 $lang['WRONG_PROFILE'] = 'Δεν μπορείτε να τροποποιήσετε ένα προφίλ που δεν είναι δική σου.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Μόνο ένα είδος avatar μπορεί να καθοριστεί';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Το αρχείο με το URL που δώσατε δεν περιέχει δεδομένα';
 $lang['NO_CONNECTION_URL'] = 'Μια σύνδεση δεν θα μπορούσε να γίνει για να το URL που έδωσες';
 $lang['INCOMPLETE_URL'] = 'Το URL που δώσατε είναι ελλιπείς';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Ιστοσελίδα';
 $lang['ASC'] = 'Αύξουσα';
 $lang['DESC'] = 'Φθίνουσα';
 $lang['ORDER'] = 'Παραγγελία';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Ομάδες Χρηστών';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Πρόσθεσε';
 $lang['BT_REG_ON_TRACKER'] = 'Εγγραφείτε στο tracker';
 $lang['BT_REG_FAIL'] = 'Δεν θα μπορούσε να εγγραφείτε torrent στον tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Άλλο ένα torrent με το ίδιο info_hash ήδη <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Αφαιρέστε από τον ιχνηλάτη';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Κατάσταση';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Επιλέξτε κατάσταση';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Δεν έχετε επιλέξει την κατάσταση.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Όλες τις καταστάσεις';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'δεν ελέγχεται',
     TOR_CLOSED => 'κλειστά',
     TOR_APPROVED => 'ελέγχονται',
     TOR_NEED_EDIT => 'δεν επισημοποιήθηκε μέχρι',
     TOR_NO_DESC => 'δεν επισημοποιήθηκε',
-    TOR_DUP => 'επαναλάβετε',
-    TOR_CLOSED_CPHOLD => 'κλειστά',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'απορροφάται',
     TOR_DOUBTFUL => 'αμφίβολο',
-    TOR_CHECKING => 'επαληθεύεται',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'προσωρινή',
     TOR_PREMOD => 'προ-μέτρο',
-    TOR_REPLENISH => 'αναπληρώ',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Μια τέτοια κατάσταση δεν υπάρχει!';
 $lang['TORRENT_FAILED'] = 'Διανομή δεν βρέθηκε!';
 $lang['TOR_STATUS_DUB'] = 'Διανομή έχει το ίδιο καθεστώς';
-$lang['TOR_DONT_CHANGE'] = 'Αλλαγή της κατάστασης δεν μπορεί να είναι!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Διανομή έχει η κατάσταση:';
 $lang['TOR_STATUS_CHANGED'] = 'Κατάσταση άλλαξε: ';
 $lang['TOR_BACK'] = ' πίσω';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent ήδη καταχωρηθεί';
 $lang['NOT_TORRENT'] = 'Αυτό το αρχείο δεν είναι torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Μπορείτε να καταχωρήσετε μόνο ένα torrent σε ένα post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Μπορείτε να καταχωρήσετε μόνο ένα torrent σε ένα θέμα';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Προβολή torrent-προφίλ :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Active torrents';
 
 $lang['TD_TRAF'] = 'Σήμερα';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You δεν έχουν μπόν�
 $lang['BONUS_RETURN'] = 'Επιστροφή από το seed bonus ανταλλαγής';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Ανοιχτά θέματα';
 $lang['OPEN_IN_SAME_WINDOW'] = 'άνοιγμα στο ίδιο παράθυρο';
 $lang['SHOW_TIME_TOPICS'] = 'δείτε την ώρα τη δημιουργία θεμάτων';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Τα Cookies πρέπει να είναι ενερ�
 $lang['SESSION_EXPIRED'] = 'Συνεδρία έληξε';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Εμφάνιση μόνο ονόματα που αρχίζουν με';
-$lang['OTHERS'] = 'άλλοι';
-$lang['ALL'] = 'όλα';
-
 $lang['POST_LINK'] = 'Post link';
 $lang['GOTO_QUOTED_POST'] = 'Πάω να το quoted post';
 $lang['LAST_VISITED'] = 'Τελευταία Επίσκεψη';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Ποτέ';
 //mpd
 $lang['DELETE_POSTS'] = 'Διαγραφή των επιλεγμένων θέσεων';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Οι επιλεγμένες θέσεις έχουν αφαιρεθεί επιτυχώς';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Ανακοινώσεις';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Ενημέρωση των υστέρων ώρα';
 $lang['TOPIC_SPLIT_NEW'] = 'Νέο θέμα';
 $lang['TOPIC_SPLIT_OLD'] = 'Παλιό το θέμα';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Προσθέστε bot-μήνυμα για την κίνηση';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Προσθέστε bot-μήνυμα για τη διαίρεση για να <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Προσθέστε bot-μήνυμα για τη διαίρεση για να <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Κείμενο με έντονη γραφή: [b]text[/b] (Ctrl+
 $lang['ITALIC'] = 'Πλάγια γραφή: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Υπογράμμιση κειμένου: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Κεραυνός κείμενο: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Παραθέτω το κείμενο: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Για να διαγράψετε μια παραγγε
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Είδα θέματα';
-$lang['NO_WATCHED_TOPICS'] = 'Δεν βλέπω θέματα';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Πίσω στην αρχική σελίδα';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Κάντε κλικ %sHere%s για να επ
 
 // Banning
 $lang['BAN_CONTROL'] = 'Απαγόρευση Ελέγχου';
-$lang['BAN_EXPLAIN'] = 'Εδώ μπορείτε να ελέγξετε την απαγόρευση των χρηστών. Μπορείτε να επιτύχετε αυτό με την απαγόρευση είτε ή και τα δύο από έναν συγκεκριμένο χρήστη ή ένα άτομο ή μια περιοχή διευθύνσεων IP. Αυτές τις μεθόδους για να αποτρέψει έναν χρήστη από το να αγγίζει ακόμα και την αρχική σελίδα του σκάφους σας. Για να αποτρέψετε έναν χρήστη από την εγγραφή τους κάτω από ένα διαφορετικό όνομα χρήστη, μπορείτε επίσης να καθορίσετε μια απαγορευτεί η διεύθυνση ηλεκτρονικού ταχυδρομείου. Παρακαλείστε να σημειώσετε ότι η απαγόρευση του μια διεύθυνση ηλεκτρονικού ταχυδρομείου από μόνη της δεν θα αποτρέψει το χρήστη από το να είναι σε θέση να συνδεθείτε ή να δημοσιεύσετε στο διοικητικό συμβούλιο. Θα πρέπει να χρησιμοποιήσετε μία από τις δύο πρώτες μεθόδους για να επιτευχθεί αυτό.';
-$lang['BAN_EXPLAIN_WARN'] = 'Παρακαλείστε να σημειώσετε ότι η είσοδος σε μια περιοχή διευθύνσεων IP αποτελέσματα σε όλες τις διευθύνσεις μεταξύ της έναρξης και τέλος να προστεθεί η banlist. Θα γίνουν προσπάθειες να ελαχιστοποιηθεί ο αριθμός των διευθύνσεων προστεθεί στην βάση δεδομένων με την εισαγωγή μπαλαντέρ αυτόματα κατά περίπτωση. Αν πραγματικά πρέπει να μπει μια σειρά, να προσπαθήσουμε να το κρατήσει μικρό ή ακόμα καλύτερα μέλος συγκεκριμένες διευθύνσεις.';
-
-$lang['SELECT_IP'] = 'Επιλέξτε μια διεύθυνση IP';
-$lang['SELECT_EMAIL'] = 'Επιλέξτε μια διεύθυνση Ηλεκτρονικού ταχυδρομείου';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Απαγόρευση έναν ή περισσότερους συγκεκριμένους χρήστες';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Μπορείτε να απαγορεύσει σε πολλούς χρήστες με τη μία, χρησιμοποιώντας το κατάλληλο συνδυασμό ποντίκι και το πληκτρολόγιο για τον υπολογιστή σας και το πρόγραμμα περιήγησης';
-
-$lang['BAN_IP'] = 'Απαγόρευση μία ή περισσότερες διευθύνσεις IP';
-$lang['IP_HOSTNAME'] = 'Διευθύνσεις IP';
-$lang['BAN_IP_EXPLAIN'] = 'Για να καθορίσετε πολλές διαφορετικές IP διευθύνσεις, διαχωρίστε τις με κόμματα.';
-
-$lang['BAN_EMAIL'] = 'Απαγόρευση μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Για να καθορίσετε περισσότερες από μία διεύθυνση ηλεκτρονικού ταχυδρομείου, διαχωρίστε τις με κόμματα. Για να καθορίσετε ένα χαρακτήρα μπαλαντέρ όνομα χρήστη, χρησιμοποιήστε * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Un-απαγόρευση μία πιο συγκεκριμένους χρήστες';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Μπορείτε να unban πολλούς χρήστες με τη μία, χρησιμοποιώντας το κατάλληλο συνδυασμό ποντίκι και το πληκτρολόγιο για τον υπολογιστή σας και το πρόγραμμα περιήγησης';
-
-$lang['UNBAN_IP'] = 'Un-απαγόρευση μία ή περισσότερες διευθύνσεις IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Μπορείτε να unban πολλαπλές διευθύνσεις IP με τη μία, χρησιμοποιώντας το κατάλληλο συνδυασμό ποντίκι και το πληκτρολόγιο για τον υπολογιστή σας και το πρόγραμμα περιήγησης';
-
-$lang['UNBAN_EMAIL'] = 'Un-απαγόρευση μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Μπορείτε να unban πολλαπλές διευθύνσεις ηλεκτρονικού ταχυδρομείου με τη μία, χρησιμοποιώντας το κατάλληλο συνδυασμό ποντίκι και το πληκτρολόγιο για τον υπολογιστή σας και το πρόγραμμα περιήγησης';
-
 $lang['NO_BANNED_USERS'] = 'Δεν υπάρχουν απαγορευμένες usernames';
-$lang['NO_BANNED_IP'] = 'Δεν υπάρχουν απαγορευμένες διευθύνσεις IP';
-$lang['NO_BANNED_EMAIL'] = 'Δεν υπάρχουν απαγορευμένες διευθύνσεις ηλεκτρονικού ταχυδρομείου';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Η banlist έχει ενημερωθεί με επιτυχία';
 $lang['CLICK_RETURN_BANADMIN'] = 'Κάντε κλικ %sHere%s να επιστρέψει στην Απαγόρευση Ελέγχου';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Φόρουμ Διοίκησης';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Από αυτόν τον πίνακα μπορείτε να προσθέσετε, να διαγράψετε, να επεξεργαστείτε, να αλλάξετε τη σειρά και να επαν-συγχρονίστε τις κατηγορίες και φόρουμ';
 $lang['EDIT_FORUM'] = 'Edit φόρουμ';
 $lang['CREATE_FORUM'] = 'Δημιουργία νέου φόρουμ';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Δημιουργία νέας κατηγορίας';
 $lang['REMOVE'] = 'Αφαιρέστε';
 $lang['UPDATE_ORDER'] = 'Προκειμένου Ενημέρωση';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Αν αυτό ορίζεται Διάστα�
 $lang['ASSIGNED_GROUP'] = 'Ανατεθεί Ομάδα';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Δημιουργία Μικρογραφιών';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Πάντα να δημιουργήσετε μια Μικρογραφία. Αυτό το χαρακτηριστικό παρακάμπτει σχεδόν όλες οι Ρυθμίσεις σε αυτό το Ειδικής Κατηγορίας, εκτός από τις Μέγιστες Διαστάσεις Εικόνας. Με αυτό το Χαρακτηριστικό, μια Μικρογραφία θα εμφανιστεί στο μήνυμα, ο Χρήστης μπορεί να κάντε κλικ για να ανοίξετε την πραγματική Εικόνα.<br />Please Σημειώστε ότι αυτή η λειτουργία απαιτεί Imagick να εγκατασταθεί, αν δεν είναι εγκατεστημένο ή εάν η Ασφαλής Λειτουργία είναι ενεργοποιημένη, το GD-Επέκταση της PHP θα χρησιμοποιηθεί. Αν η Εικόνα-Τύπος δεν υποστηρίζεται από την PHP, αυτό το Χαρακτηριστικό θα είναι να μην χρησιμοποιηθεί.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Ελάχιστη Μικρογραφία Μέγεθος Αρχείου';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Αν μια Εικόνα είναι μικρότερο από αυτό που ορίζεται Filesize, καμία Μικρογραφία, θα δημιουργηθεί, επειδή είναι αρκετά μικρή.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Πρόγραμμα (Πλήρης Διαδρομή)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Πληκτρολογήστε τη Διαδρομή προς τη μετατροπή του προγράμματος του imagick, συνήθως /usr/bin/convert (σε windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Αναζήτηση Imagick';
-
-$lang['USE_GD2'] = 'Κάντε χρήση GD2 Επέκταση';
-$lang['USE_GD2_EXPLAIN'] = 'Η PHP είναι σε θέση να καταρτίζονται με την GD1 ή GD2 για Επέκταση εικόνας χειρισμό. Για να δημιουργήσετε σωστά Μικρογραφίες χωρίς imagemagick το Συνημμένο Mod χρησιμοποιεί δύο διαφορετικές μεθόδους, με βάση την επιλογή σας. Αν σας μικρογραφίες είναι σε κακή ποιότητα ή τα θαλάσσωσε, προσπαθήστε να αλλάξετε αυτή τη ρύθμιση.';
-$lang['ATTACHMENT_VERSION'] = 'Συνημμένο Έκδοση Mod %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Διαχείριση Απαγορεύεται Επεκτάσεις';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Έχετε εισέλθει σε λάθος αξίες. 
 $lang['PROCESSING'] = 'Επεξεργασία...';
 $lang['FINISHED'] = 'Τελείωσε';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Το θέμα έχει μεταφερθεί από το φόρουμ [b]%s[/b] στο φόρουμ [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Το θέμα έχει χωριστεί. Νέο θέμα - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Το θέμα έχει χωριστεί από [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Συμπληρώστε τη φόρμα απελευ�
 $lang['NEW_RELEASE'] = 'Νέα έκδοση';
 $lang['NEXT'] = 'Συνεχίστε';
 $lang['OTHER'] = 'Άλλα';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Θα πρέπει να συμπληρώσετε το πεδίο <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Θα πρέπει να επιλέξετε <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Αναζήτηση για χρήστε�
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Αναζήτηση για χρήστες με μια Τοποθεσία που ταιριάζουν %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Αναζήτηση για χρήστες με τους Συμφέροντα πεδίο που ταιριάζουν %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Αναζήτηση για χρήστες με τους Επάγγελμα πεδίο που ταιριάζουν %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Αναζήτηση για τους χρήστες που έχουν επισκεφθεί τα τελευταία %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Αναζήτηση για τους χρήστες που έχουν επισκεφθεί μετά την τελευταία %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Αναζήτηση για τους χρήστες που έχουν οριστεί %s ως τη γλώσσα τους';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Αναζήτηση για τους χρήστες που έχουν οριστεί UTC %s ως ώρας';
 $lang['SEARCH_FOR_STYLE'] = 'Αναζήτηση για τους χρήστες που έχουν οριστεί %s όπως το στυλ τους';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Φόρουμ χάρτης';
 $lang['ATOM_FEED'] = 'Feed';
 $lang['ATOM_ERROR'] = 'Σφάλμα κατά τη δημιουργία ζωοτροφών';
 $lang['ATOM_SUBSCRIBE'] = 'Εγγραφείτε στην ζωοτροφών';
-$lang['ATOM_NO_MODE'] = 'Δεν καθορίσετε μια λειτουργία για την τροφοδοσία';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Αυτό το φόρουμ δεν έχει τροφών (όχι εν εξελίξει θέματα)';
 $lang['ATOM_NO_USER'] = 'Αυτός ο χρήστης δεν έχει τις ζωοτροφές (όχι εν εξελίξει θέματα)';
 $lang['ATOM_UPDATED'] = 'Ενημέρωση';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'Σε αυτή τη σελίδα, μπορείτε να
 $lang['TR_STATS'] = [
     0 => 'ανενεργών χρηστών σε 30 μέρες',
     1 => 'ανενεργοί χρήστες για 90 ημέρες',
-    2 => 'μέσου μεγέθους, οι διανομές των ιχνηλατών (πολλά megabytes)',
+    2 => 'medium size distributions on the tracker',
     3 => 'πόσα χέρια του tracker',
     4 => 'πόσοι ζουν τα χέρια (τουλάχιστον 1 led)',
     5 => 'πόσα χέρια που σπέρνουν περισσότερα από 5 σπόρους',

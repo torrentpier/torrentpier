@@ -82,16 +82,16 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 
 <!-- BEGIN list -->
 <tr class="{list.ROW_CLASS} hl-tr">
-	<td align="center"><input type="checkbox" name="select[]" class="checkbox" value="{list.CRON_ID}"></td>
-	<td nowrap="nowrap" align="center">{list.JOB_ID}</td>
-	<td nowrap="nowrap" align="center">{list.CRON_ACTIVE}</td>
-	<td nowrap="nowrap" align="left">{list.CRON_TITLE}</td>
-	<td nowrap="nowrap" align="left">{list.CRON_SCRIPT}</td>
-	<td nowrap="nowrap" class="med tCenter">{list.SCHEDULE}</td>
-	<td nowrap="nowrap" align="center">{list.LAST_RUN}</td>
-	<td nowrap="nowrap" align="center">{list.NEXT_RUN}</td>
-	<td nowrap="nowrap" align="center"><span style="color: #505050;" class="leechmed"><b>{list.RUN_COUNT}</b></span></td>
-	<td nowrap="nowrap" align="center">
+	<td class="tCenter"><input type="checkbox" name="select[]" class="checkbox" value="{list.CRON_ID}"></td>
+	<td class="nowrap tCenter">{list.JOB_ID}</td>
+	<td class="nowrap tCenter">{list.CRON_ACTIVE}</td>
+	<td class="tLeft nowrap">{list.CRON_TITLE}</td>
+	<td class="tLeft nowrap">{list.CRON_SCRIPT}</td>
+	<td class="nowrap tCenter">{list.SCHEDULE}</td>
+	<td class="nowrap tCenter">{list.LAST_RUN}</td>
+	<td class="nowrap tCenter">{list.NEXT_RUN}</td>
+	<td class="nowrap tCenter"><span style="color: #505050;" class="leechmed"><b>{list.RUN_COUNT}</b></span></td>
+	<td class="nowrap tCenter">
 		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
 		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>
 		<a href="admin_cron.php?mode=delete&id={list.CRON_ID}"><img src="{SITE_URL}styles/images/icon_delete.gif" alt="[Del]" title="{L_CRON_DEL}" onclick="return cfm('{L_DELETE_JOB}');" /></a>
@@ -136,10 +136,12 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <tr>
 	<th colspan="2">{L_CRON_EDIT_HEAD_EDIT}</th>
 </tr>
+<!-- IF CRON_ID -->
 <tr>
 	<td><h4>{L_CRON_ID}</h4></td>
 	<td><input class="text" type="hidden" size="30" maxlength="255" name="cron_id" value="{CRON_ID}" /> <b>{CRON_ID}</b></td>
 </tr>
+<!-- ENDIF -->
 <tr>
 	<td>
 		<h4>{L_CRON_ACTIVE}</h4>
@@ -172,7 +174,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 </tr>
 <tr>
 	<td><h4>{L_RUN_ORDER}</h4></td>
-	<td><input class="post" type="number" size="35" maxlength="255" name="run_order" value="{RUN_ORDER}" /></td>
+	<td><input class="post" type="text" size="35" maxlength="255" name="run_order" value="{RUN_ORDER}" /></td>
 </tr>
 <tr>
 	<td><h4>{L_LAST_RUN}</h4></td>
@@ -213,7 +215,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 </tr>
 <tr>
 	<td><h4>{L_RUN_COUNTER}</h4></td>
-	<td><input class="post" type="number" size="35" maxlength="255" name="run_counter" value="{RUN_COUNTER}" /></td>
+	<td><input class="post" type="text" size="35" maxlength="255" name="run_counter" value="{RUN_COUNTER}" /></td>
 </tr>
 
 <tr>

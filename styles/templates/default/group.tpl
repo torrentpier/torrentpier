@@ -65,7 +65,7 @@
             <td colspan="2"><h2>{GROUP_NAME}</h2></td>
         </tr>
         <tr>
-            <td align="center" valign="top">
+            <td class="tCenter" valign="top">
                 {GROUP_AVATAR}
             </td>
             <td valign="top">
@@ -141,7 +141,7 @@
             <th width="10%" class="{sorter: 'digit'}"><b class="tbs-text">{L_JOINED}</b></th>
             <th class="{sorter: 'digit'}"><b class="tbs-text">{L_POSTS_SHORT}</b></th>
             <th class="{sorter: false}"><b class="tbs-text">{L_WEBSITE}</b></th>
-            <th width="10%" class="{sorter: false}"><b class="tbs-text">{L_EFFECTIVE_DATE}</b></th>
+            <th width="10%" class="{sorter: 'digit'}"><b class="tbs-text">{L_EFFECTIVE_DATE}</b></th>
             <th class="{sorter: false}"><b class="tbs-text">#</b></th>
         </tr>
         <tr>
@@ -149,15 +149,15 @@
         </tr>
         <tr class="row1 tCenter">
             <td width="3%">{ROW_NUMBER}</td>
-            <td width="3%" align="center">{MOD_AVATAR}</td>
+            <td width="3%" class="tCenter">{MOD_AVATAR}</td>
             <td><b>{MOD_USER}</b></td>
             <td>{MOD_PM}</td>
             <td>{MOD_EMAIL}</td>
             <td>{MOD_FROM}</td>
-            <td class="small">{MOD_JOINED}</td>
+            <td class="small"><u>{MOD_JOINED_RAW}</u>{MOD_JOINED}</td>
             <td>{MOD_POSTS}</td>
             <td>{MOD_WWW}</td>
-            <td class="small">{MOD_TIME}</td>
+            <td class="small"><u>{MOD_TIME_RAW}</u>{MOD_TIME}</td>
             <td width="3%">&nbsp;</td>
         </tr>
         <tr>
@@ -168,15 +168,15 @@
         <!-- BEGIN member -->
         <tr class="{member.ROW_CLASS} tCenter">
             <td width="3%">{member.ROW_NUMBER}</td>
-            <td width="3%" align="center">{member.AVATAR_IMG}</td>
+            <td width="3%" class="tCenter">{member.AVATAR_IMG}</td>
             <td>{member.USER}</td>
             <td>{member.PM}</td>
             <td>{member.EMAIL}</td>
             <td>{member.FROM}</td>
-            <td class="small">{member.JOINED}</td>
+            <td class="small"><u>{member.JOINED_RAW}</u>{member.JOINED}</td>
             <td>{member.POSTS}</td>
             <td>{member.WWW}</td>
-            <td class="small">{member.TIME}</td>
+            <td class="small"><u>{member.TIME_RAW}</u>{member.TIME}</td>
             <td width="3%">
                 <!-- BEGIN switch_mod_option -->
                 <input type="checkbox" name="members[]" value="{member.USER_ID}"/>
@@ -253,7 +253,7 @@
             <td>{pending.PM}</td>
             <td>{pending.EMAIL}</td>
             <td>{pending.FROM}</td>
-            <td>{pending.JOINED}</td>
+            <td><u>{pending.JOINED_RAW}</u>{pending.JOINED}</td>
             <td>{pending.POSTS}</td>
             <td>{pending.WWW}</td>
         </tr>
@@ -301,7 +301,7 @@
     <!-- END releases -->
     <tfoot>
     <tr>
-        <td class="cat" colspan="9" align="center"><b><a href="{U_SEARCH_RELEASES}">{L_MORE_RELEASES}</a></b></td>
+        <td class="cat tCenter" colspan="9"><b><a href="{U_SEARCH_RELEASES}">{L_MORE_RELEASES}</a></b></td>
     </tr>
     </tfoot>
 </table>

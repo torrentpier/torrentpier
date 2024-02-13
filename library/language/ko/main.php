@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = '페이지';
 $lang['GOTO_PAGE'] = '페이지로 이동';
 $lang['GOTO_SHORT'] = '페이지';
 $lang['JOINED'] = '류';
-$lang['LONGEVITY'] = '수명';
+$lang['LONGEVITY'] = '등록';
 $lang['IP_ADDRESS'] = 'IP 주소';
 $lang['POSTED_AFTER'] = '후에';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = '대부분의 사용자 온라인이었 <b>%s</b>
 $lang['ONLINE_ADMIN'] = '관리자';
 $lang['ONLINE_MOD'] = '중재자';
 $lang['ONLINE_GROUP_MEMBER'] = '그룹 구성원';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = '현재 시간:<span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = '아바타를 제어 패널';
 
 $lang['WEBSITE'] = '웹사이트';
 $lang['LOCATION'] = '위치';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = '연락처';
 $lang['EMAIL_ADDRESS'] = 'E-mail address';
 $lang['SEND_PRIVATE_MESSAGE'] = '개인 메시지를 보내';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = '을 찾아 사용자 주제'; // Find all topics 
 $lang['NO_USER_ID_SPECIFIED'] = '죄송하지만,는 사용자가 존재하지 않습니다.';
 $lang['WRONG_PROFILE'] = '할 수 없습니다 프로파일을 수정하지 않은 자신의합니다.';
 
-$lang['ONLY_ONE_AVATAR'] = '한 유형의 아바타를 지정할 수 있다';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = '파일이 URL 에서 당신에게 데이터를 포함하지 않습니다';
 $lang['NO_CONNECTION_URL'] = '연결을 만들 수 없습니다 URL 신';
 $lang['INCOMPLETE_URL'] = 'URL 을 입력하는 불완전';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = '웹사이트';
 $lang['ASC'] = '오름차순';
 $lang['DESC'] = '내림차순';
 $lang['ORDER'] = '주문';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = '사용자 그룹';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = '추가';
 $lang['BT_REG_ON_TRACKER'] = '등록에 추적';
 $lang['BT_REG_FAIL'] = '등록 할 수 있 토렌트에 추적';
 $lang['BT_REG_FAIL_SAME_HASH'] = '다른 토렌트 같은 info_hash 이미 <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = '제거에서 추적';
 $lang['BT_UNREGISTERED'] = 'Torrent 등록';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = '상태';
 $lang['TOR_STATUS_SELECT_ACTION'] = '선택 상태';
 $lang['TOR_STATUS_NOT_SELECT'] = '당신이 선택하지 않은 상태입니다.';
 $lang['TOR_STATUS_SELECT_ALL'] = '모든 상태';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => '지 확인',
     TOR_CLOSED => '폐',
     TOR_APPROVED => '검사',
     TOR_NEED_EDIT => '공식하지 않습까지',
     TOR_NO_DESC => '공식하지 않습',
-    TOR_DUP => '반복',
-    TOR_CLOSED_CPHOLD => '폐 바로',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => '흡수',
     TOR_DOUBTFUL => '의심스럽',
-    TOR_CHECKING => '검증',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => '임시',
     TOR_PREMOD => 'pre-검토',
-    TOR_REPLENISH => '을 보충',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = '이러한 상태가 존재하지 않습니다!';
 $lang['TORRENT_FAILED'] = '메일 발견되지 않았다!';
 $lang['TOR_STATUS_DUB'] = '유통은 동일한 상태';
-$lang['TOR_DONT_CHANGE'] = '상태 변경 될 수 없습니다!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = '분배는 상태:';
 $lang['TOR_STATUS_CHANGED'] = '상태 변경: ';
 $lang['TOR_BACK'] = ' 시';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = '토렌트가 이미 등록';
 $lang['NOT_TORRENT'] = '이 파일은 파일 토렌트';
 $lang['ONLY_1_TOR_PER_POST'] = '당신이 등록할 수 있는 단 하나의 토렌트에서 하나의 게시물';
 $lang['ONLY_1_TOR_PER_TOPIC'] = '당신이 등록할 수 있는 단 하나의 토렌트에서 하나의 주제';
-$lang['VIEWING_USER_BT_PROFILE'] = '보 토렌트 프로파일::%s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Active 급류';
 
 $lang['TD_TRAF'] = '오늘';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You 있지 않은 보너스를 
 $lang['BONUS_RETURN'] = '로 돌아가는 씨 보너스 교환';
 
 $lang['TRACKER'] = '추적';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = '열어 주제';
 $lang['OPEN_IN_SAME_WINDOW'] = '에서 열린 동일한 창';
 $lang['SHOW_TIME_TOPICS'] = '시간 표시 창조의 항목';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = '쿠키 활성화해야합니다!';
 $lang['SESSION_EXPIRED'] = '료 세션';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = '쇼 사용자 이름만으로 시작';
-$lang['OTHERS'] = '다른 사람';
-$lang['ALL'] = '모든';
-
 $lang['POST_LINK'] = '포스트 링크';
 $lang['GOTO_QUOTED_POST'] = '가시되는 게시물';
 $lang['LAST_VISITED'] = '마지막으로 방문';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = '지';
 //mpd
 $lang['DELETE_POSTS'] = '선택한 게시물 삭제';
 $lang['DELETE_POSTS_SUCCESFULLY'] = '선택한 게시물이 성공적으로 제거되었습';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = '공지사항';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = '업데이트 게시간';
 $lang['TOPIC_SPLIT_NEW'] = '새로운 주제';
 $lang['TOPIC_SPLIT_OLD'] = '오래된 주제';
 $lang['BOT_LEAVE_MSG_MOVED'] = '을 추가할 수 있습니다.에 대한 메시지를 이동';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '을 추가할 수 있습니다.에 대한 메시지를 분할하 <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '을 추가할 수 있습니다.에 대한 메시지를 분할하 <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = '굵은 텍스트:[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = '이탤릭체 텍스트:[i]text[/i](Ctrl+)';
 $lang['UNDERLINE'] = '밑줄 텍스트:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '삼진 텍스트:[s]text[/s](Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '견적 텍스트:[quote]text[/quote](Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = '를 삭제하기 위해,목록에서 아이콘을 클�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = '본 항목';
-$lang['NO_WATCHED_TOPICS'] = '당신은하지 않고 어떤 주제';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = '홈 페이지';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = '클릭 %sHere%s 를 반환하는 포럼을 �
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban 컨트롤';
-$lang['BAN_EXPLAIN'] = '여기에 제어할 수 있습니다 금지하의 사용자가입니다. 이를 달성할 수 있습에 의해 금지하거나 또는 모두의 특정 사용자 또는 개별적 또는 범위의 IP 주소이다. 이러한 방식을 사용자에게도 도달하는 인덱스 페이지의 보드이다. 를 막기 위해 사용자 등록한 다른 사용자 이름을 지정할 수도 있습니다 금지된 이메일 주소입니다. 주 금지하는 이메일 주소지 않을 방지하는 사용자에서 할 수있는 로그인이나 게시판입니다. 중 하나를 사용해야 합니다 첫 번째는 두 가지 방법을 이를 달성하기 위해합니다.';
-$lang['BAN_EXPLAIN_WARN'] = '참고하는 입력 범위의 IP 주소에서 결과 모든 주소 시작 및 끝에 추가되는 의 banlist 는니다. 시도를 만든 것입을 최소화하는 수의 주소를 추가하여 데이터베이스를 소개하는 와일드카드를 자동으로 적절한 경우입니다. 당신이 정말로 입력해야 범위,그것을 유지하려고 작은 더 나은 아직 국가 특정 주소입니다.';
-
-$lang['SELECT_IP'] = '선택하는 IP 주소';
-$lang['SELECT_EMAIL'] = '선택하는 이메일 주소';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban 하나 이상의 특정 사용자';
 $lang['BAN_USERNAME_EXPLAIN'] = '금지할 수 있습에서 여러 사용자 중 하나를 사용하여 이동의 적절한 조합 마우스 및 키보드와 컴퓨터 브라우저';
-
-$lang['BAN_IP'] = 'Ban 하나 이상의 IP 주소';
-$lang['IP_HOSTNAME'] = 'IP 주소';
-$lang['BAN_IP_EXPLAIN'] = '을 지정하는 여러 가지 서로 다른 IP 주소를 쉼표로 구분합니다.';
-
-$lang['BAN_EMAIL'] = 'Ban 하나 이상의 이메일 주소';
-$lang['BAN_EMAIL_EXPLAIN'] = '을 지정하는 하나 이상의 이메일 주소,쉼표로 구분합니다. 을 지정하는 와일드카드를 사용자 이름,사용**@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Un 금지 하나 이상의 특정 사용자';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = '할 수 있습 접근을 허용한 여러 사용자가에서 한 가지를 사용하여 적절한 조합의 마우스 및 키보드와 컴퓨터 브라우저';
-
-$lang['UNBAN_IP'] = 'Un 금지 하나 이상의 IP 주소';
-$lang['UNBAN_IP_EXPLAIN'] = '당신이 접근을 허용할 수 있는 여러 IP 주소에서 한 가지를 사용하여 적절한 조합의 마우스 및 키보드와 컴퓨터 브라우저';
-
-$lang['UNBAN_EMAIL'] = 'Un 금지 하나 이상의 이메일 주소';
-$lang['UNBAN_EMAIL_EXPLAIN'] = '당신이 접근을 허용할 수 있는 여러 이메일 주소 중 하나에서 가을 사용하여 적절한 조합의 마우스 및 키보드와 컴퓨터 브라우저';
-
 $lang['NO_BANNED_USERS'] = '아 금지된 사용자 이름';
-$lang['NO_BANNED_IP'] = '아 금지 IP 주소';
-$lang['NO_BANNED_EMAIL'] = '아 금지된 이메일 주소';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = '의 의 banlist 는가 성공적으로 업데이트되었습니다';
 $lang['CLICK_RETURN_BANADMIN'] = '클릭 %sHere%s 을 반환을 금지하 제어';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = '포럼 관리';
 $lang['FORUM_ADMIN_EXPLAIN'] = '이 패널에서 당신할 수 있습을 추가,삭제,편집,다시 주문하고 다시 동기화 카테고리고 포럼';
 $lang['EDIT_FORUM'] = '포럼 편집';
 $lang['CREATE_FORUM'] = '새로 만드 포럼';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = '을 만들 새로운 카테고리';
 $lang['REMOVE'] = '제거';
 $lang['UPDATE_ORDER'] = '업데이트 순서';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = '이 정의의 차원 이미지에 도달했�
 $lang['ASSIGNED_GROUP'] = '그룹 할당';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = '을 만들의 썸네일';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = '항상 미리보기 이미지를 만드니다. 이 기능을 재정의 거의 모든 설정에는 이 특별한 카테고리를 제외하고,최대의 이미지 크기입니다. 이 기능으로 축소판 표시됩니다 내에 게시,사용자 클릭할 수 있는 그것을 열고 진짜 이미지합니다.<br />Please 이 기능이 필요 Imagick 설치하는 경우,그것은 설치하지 않을 경우 또는 안전 모드를 사용 GD-의 확장은 PHP 이 사용됩니다. 이미지 유형이 지원하지 않는 PHP 에 의해,이 기능을 사용하지 않습니다.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = '최소 썸네일을 파일 크기';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = '는 경우 이미지보다 작은 이 정의 최대 파일크기,축소판이 될 만들었기 때문에,그것은 작은 충분합니다.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick 프로그램(완전한 경로)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = '의 경로를 입력하는 변환 프로그램의 imagick,일반적으로/usr/bin/변환(windows:c:/imagemagick/convert.exe 니다.)';
-$lang['IMAGE_SEARCH_IMAGICK'] = '검색 Imagick';
-
-$lang['USE_GD2'] = '를 이용하의 GD2 확장';
-$lang['USE_GD2_EXPLAIN'] = 'PHP 할 수 있으로 컴파일 GD1 또는 GD2 확장에 대한 이미지를 조작합니다. 을 제대로 축소판을 만들지 않고 imagemagick 첨부 파일을 모는 두 가지 방법을 사용하여,당신의 선택에 따라 여기합니다. 면의 축소판이 나쁜 품질 또는 망하려고 이 설정을 변경합니다.';
-$lang['ATTACHMENT_VERSION'] = '첨부파일 모드 버전 %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '관리 금지 확장';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = '입력하신 몇 가지 잘못된 값입니다. 을 확�
 $lang['PROCESSING'] = 'Processing...';
 $lang['FINISHED'] = '완료';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = '항목에서 이동되었습 forum[b]%s[/b] 포럼 [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = '항목 분리되었습니다. 새로운 주제-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '항목 분리되었습에서 [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = '릴리스 양식을 작성하십시오';
 $lang['NEW_RELEASE'] = '새로운 릴리스';
 $lang['NEXT'] = '계속';
 $lang['OTHER'] = '기타';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '을 작성해야 할 필드 <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = '선택해야 합니다 <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = '검색에 대한 사용자와 웹사이
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = '검색에 대한 사용자와 위치에 일치하는 %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = '검색에 대한 사용자의 관심 분야 일치하는 %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = '검색에 대한 사용자는 자신의 직업 분야 일치하는 %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = '검색에 대한 방문한 사용자가 마지막에 %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = '검색에 대한 방문한 사용자가 마지막 %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = '검색에 대한 사용자 설정 %s 언어';
 $lang['SEARCH_FOR_TIMEZONE'] = '검색에 대한 사용자 설정 UTC%s 으로 자신의 시간대';
 $lang['SEARCH_FOR_STYLE'] = '검색에 대한 사용자 설정 %s 으로 자신의 스타일';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = '포럼\'맵';
 $lang['ATOM_FEED'] = '피드';
 $lang['ATOM_ERROR'] = '오류가 생성 피드';
 $lang['ATOM_SUBSCRIBE'] = '피드 구독';
-$lang['ATOM_NO_MODE'] = '를 지정하지 않은 모드에 대한 피드';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = '이 포럼을 가지지 않 피드(지속적인 항목)';
 $lang['ATOM_NO_USER'] = '이 사용자가 없 피드(지속적인 항목)';
 $lang['ATOM_UPDATED'] = '업데이트되었습니다.';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = '이 페이지에서 텍스트를 지정할 수 있습�
 $lang['TR_STATS'] = [
     0 => '비활성 상태에서 사용자는 30 일',
     1 => '비활성화에 대한 사용자는 90 일',
-    2 => '중간 크기의 분포 트래커에서(많은 메가바이트)',
+    2 => 'medium size distributions on the tracker',
     3 => '얼마나 많은 총 손에 추적',
     4 => '얼마나 많은 라이브(적어도 led1)',
     5 => '얼마나 많은 손을 어디는 시드를 5 개 이상의 씨앗',

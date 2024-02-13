@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -16,13 +16,13 @@ namespace TorrentPier\Legacy;
 class BBCode
 {
     /** @var array $tpl Replacements for some code elements */
-    public $tpl = [];
+    public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
     public $smilies;
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
-    public $tidy_cfg = [
+    public array $tidy_cfg = [
         'drop-empty-paras' => false,
         'fix-uri' => false,
         'force-output' => true,
@@ -42,7 +42,7 @@ class BBCode
     ];
 
     /** @var array $block_tags Define some elements as block-processed */
-    public $block_tags = [
+    public array $block_tags = [
         'align',
         'br',
         'clear',
@@ -91,6 +91,7 @@ class BBCode
             '#\[size=([1-2]?[0-9])\]#isu' => '<span style="font-size: $1px; line-height: normal;">',
             '#\[align=(left|right|center|justify)\]#isu' => '<span class="post-align" style="text-align: $1;">',
             '#\[font="([\w\- \']+)"\]#isu' => '<span style="font-family: $1;">',
+            '#\[font=([\w\- \']+)\]#isu' => '<span style="font-family: $1;">',
             "#\[img\]($img_exp)\[/img\]#isu" => $tpl['img'],
             "#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu" => $tpl['img_aligned'],
             "#\[email\]($email_exp)\[/email\]#isu" => '<a href="mailto:$1">$1</a>',
@@ -124,6 +125,10 @@ class BBCode
             '[/sup]' => '</sup>',
             '[sub]' => '<sub>',
             '[/sub]' => '</sub>',
+            '[box]' => '<div class="post-box-default"><div class="post-box">',
+            '[/box]' => '</div></div>',
+            '[indent]' => '<div class="post-indent">',
+            '[/indent]' => '</div>',
             '[del]' => '<span class="post-s">',
             '[/del]' => '</span>',
             '[clear]' => '<div class="clear">&nbsp;</div>',
@@ -142,7 +147,7 @@ class BBCode
      *
      * @return string
      */
-    public function bbcode2html($text): string
+    public function bbcode2html(string $text): string
     {
         global $bb_cfg;
 
@@ -166,10 +171,10 @@ class BBCode
      *
      * @return string
      */
-    private function parse($text): string
+    private function parse(string $text): string
     {
         // Tag parse
-        if (strpos($text, '[') === false) {
+        if (!str_contains($text, '[')) {
             return $text;
         }
 
@@ -205,23 +210,22 @@ class BBCode
      *
      * @return string
      */
-    public static function clean_up($text): string
+    public static function clean_up(string $text): string
     {
         $text = trim($text);
         $text = str_replace("\r", '', $text);
         $text = preg_replace('#[ \t]+$#m', '', $text);
-        $text = preg_replace('#\n{3,}#', "\n\n", $text);
-        return $text;
+        return preg_replace('#\n{3,}#', "\n\n", $text);
     }
 
     /**
      * Callback to [code]
      *
-     * @param string $m
+     * @param array $m
      *
      * @return string
      */
-    private function code_callback($m): string
+    private function code_callback(array $m): string
     {
         $code = trim($m[2]);
         $code = str_replace('  ', '&nbsp; ', $code);
@@ -234,11 +238,11 @@ class BBCode
     /**
      * Callback to [url]
      *
-     * @param string $m
+     * @param array $m
      *
      * @return string
      */
-    private function url_callback($m): string
+    private function url_callback(array $m): string
     {
         global $bb_cfg;
 
@@ -261,17 +265,17 @@ class BBCode
     /**
      * Callback to escape titles in block elements
      *
-     * @param string $m
+     * @param array $m
      *
      * @return string
      */
-    private function escape_titles_callback($m): string
+    private function escape_titles_callback(array $m): string
     {
-        $tilte = substr($m[3], 0, 250);
-        $tilte = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $tilte);
-        // еще раз htmlspecialchars, т.к. при извлечении из title происходит обратное преобразование
-        $tilte = htmlspecialchars($tilte, ENT_QUOTES);
-        return $m[1] . $tilte . $m[4];
+        $title = substr($m[3], 0, 250);
+        $title = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $title);
+        // reconvert because after extracting title there's a reverse convertion
+        $title = htmlspecialchars($title, ENT_QUOTES);
+        return $m[1] . $title . $m[4];
     }
 
     /**
@@ -281,7 +285,7 @@ class BBCode
      *
      * @return string
      */
-    private function make_clickable($text): string
+    private function make_clickable(string $text): string
     {
         $url_regexp = "#
 			(?<![\"'=])
@@ -311,11 +315,11 @@ class BBCode
     /**
      * Callback to make URL clickable
      *
-     * @param string $m
+     * @param array $m
      *
      * @return string
      */
-    private function make_url_clickable_callback($m): string
+    private function make_url_clickable_callback(array $m): string
     {
         global $bb_cfg;
 
@@ -339,9 +343,9 @@ class BBCode
      *
      * @return string
      */
-    private function smilies_pass($text): string
+    private function smilies_pass(string $text): string
     {
-        global $bb_cfg, $datastore;
+        global $datastore;
 
         if (null === $this->smilies) {
             $this->smilies = $datastore->get('smile_replacements');
@@ -364,11 +368,10 @@ class BBCode
      *
      * @return string
      */
-    private function new_line2html($text): string
+    private function new_line2html(string $text): string
     {
         $text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
-        $text = str_replace("\n", '<br />', $text);
-        return $text;
+        return str_replace("\n", '<br />', $text);
     }
 
     /**
@@ -378,9 +381,8 @@ class BBCode
      *
      * @return string
      */
-    private function tidy($text): string
+    private function tidy(string $text): string
     {
-        $text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
-        return $text;
+        return tidy_repair_string($text, $this->tidy_cfg, 'utf8');
     }
 }

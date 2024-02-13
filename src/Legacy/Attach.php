@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -19,6 +19,14 @@ class Attach
     public $attach_filename = '';
     public $filename = '';
     public $type = '';
+
+    /**
+     * Upload status code
+     *
+     * @var int
+     */
+    public int $error = UPLOAD_ERR_OK;
+
     public $extension = '';
     public $file_comment = '';
     public $num_attachments = 0; // number of attachments in message
@@ -191,7 +199,7 @@ class Attach
      */
     public function handle_attachments($mode)
     {
-        global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang;
+        global $is_auth, $attach_config, $refresh, $update_attachment, $post_id, $submit, $preview, $error, $error_msg, $lang;
 
         //
         // ok, what shall we do ;)
@@ -446,7 +454,7 @@ class Attach
                             'thumbnail' => (int)$this->thumbnail
                         ];
 
-                        $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
+                        $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET ' . DB()->build_array('UPDATE', $sql_ary) . '
 							WHERE attach_id = ' . (int)$attachment_id;
 
                         if (!(DB()->sql_query($sql))) {
@@ -542,7 +550,7 @@ class Attach
 
                     // update entry in db if attachment already stored in db and filespace
                     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
-						SET comment = '" . @attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
+						SET comment = '" . DB()->escape($this->attachment_comment_list[$i]) . "'
 						WHERE attach_id = " . $this->attachment_id_list[$i];
 
                     if (!(DB()->sql_query($sql))) {
@@ -565,7 +573,7 @@ class Attach
                         'thumbnail' => (int)$this->attachment_thumbnail_list[$i]
                     ];
 
-                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                     if (!(DB()->sql_query($sql))) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
@@ -585,7 +593,7 @@ class Attach
                         'user_id_1' => (int)$user_id_1,
                     ];
 
-                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                    $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                     if (!(DB()->sql_query($sql))) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
@@ -610,7 +618,7 @@ class Attach
                     'thumbnail' => (int)$this->thumbnail
                 ];
 
-                $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                 // Inform the user that his post has been created, but nothing is attached
                 if (!(DB()->sql_query($sql))) {
@@ -625,7 +633,7 @@ class Attach
                     'user_id_1' => (int)$user_id_1,
                 ];
 
-                $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
+                $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . DB()->build_array('INSERT', $sql_ary);
 
                 if (!(DB()->sql_query($sql))) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
@@ -733,28 +741,38 @@ class Attach
             $r_file = trim(basename($this->filename));
             $file = $_FILES['fileupload']['tmp_name'];
             $this->type = $_FILES['fileupload']['type'];
+            $this->error = $_FILES['fileupload']['error'];
 
-            if (isset($_FILES['fileupload']['size']) && $_FILES['fileupload']['size'] == 0) {
+            // Handling errors while uploading
+            if (isset($this->error) && ($this->error !== UPLOAD_ERR_OK)) {
+                if (isset($lang['UPLOAD_ERRORS'][$this->error])) {
+                    bb_die($lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->error]);
+                } else {
+                    bb_die($lang['UPLOAD_ERROR_COMMON']);
+                }
+            }
+
+            if (isset($_FILES['fileupload']['size']) && $_FILES['fileupload']['size'] === 0) {
                 bb_die('Tried to upload empty file');
             }
 
             $this->type = strtolower($this->type);
-            $this->extension = strtolower(get_extension($this->filename));
-
-            $this->filesize = @filesize($file);
-            $this->filesize = (int)$this->filesize;
+            $this->extension = strtolower(pathinfo($this->filename, PATHINFO_EXTENSION));
+            $this->filesize = (int)filesize($file);
 
             $sql = 'SELECT g.allow_group, g.max_filesize, g.cat_id, g.forum_permissions
 				FROM ' . BB_EXTENSION_GROUPS . ' g, ' . BB_EXTENSIONS . " e
 				WHERE g.group_id = e.group_id
-					AND e.extension = '" . attach_mod_sql_escape($this->extension) . "'
+					AND e.extension = '" . DB()->escape($this->extension) . "'
 				LIMIT 1";
 
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not query extensions');
             }
 
-            $row = DB()->sql_fetchrow($result);
+            if (!($row = DB()->sql_fetchrow($result))) {
+                /** TODO **/
+            }
             DB()->sql_freeresult($result);
 
             $allowed_filesize = $row['max_filesize'] ?: $attach_config['max_filesize'];
@@ -806,9 +824,17 @@ class Attach
             }
 
             //bt
+            // Block uploading more than one torrent file
+            global $update_attachment;
+            if (!$error && $this->extension === TORRENT_EXT && in_array(TORRENT_EXT, $this->attachment_extension_list) && !$update_attachment) {
+                $error = true;
+                if (!empty($error_msg)) {
+                    $error_msg .= '<br />';
+                }
+                $error_msg .= $lang['ONLY_1_TOR_PER_TOPIC'];
+            }
             // Check if user can post torrent
             global $post_data;
-
             if (!$error && $this->extension === TORRENT_EXT && !$post_data['first_post']) {
                 $error = true;
                 if (!empty($error_msg)) {
@@ -819,57 +845,18 @@ class Attach
             //bt end
 
             // Upload File
-
             $this->thumbnail = 0;
 
             if (!$error) {
-                //
                 // Prepare Values
                 $this->filetime = TIMENOW;
-
                 $this->filename = $r_file;
 
-                // physical filename
-                //$this->attach_filename = strtolower($this->filename);
-                $this->attach_filename = $this->filename;
-
-                //bt
-                if (FILENAME_CRYPTIC) {
-                    $this->attach_filename = make_rand_str(FILENAME_CRYPTIC_LENGTH);
-                } else { // original
-                    $this->attach_filename = html_entity_decode(trim(stripslashes($this->attach_filename)));
-                    $this->attach_filename = delete_extension($this->attach_filename);
-                    $this->attach_filename = str_replace([' ', '-'], '_', $this->attach_filename);
-                    $this->attach_filename = str_replace('__', '_', $this->attach_filename);
-                    $this->attach_filename = str_replace([',', '.', '!', '?', 'ь', 'Ь', 'ц', 'Ц', 'д', 'Д', ';', ':', '@', "'", '"', '&'], ['', '', '', '', 'ue', 'ue', 'oe', 'oe', 'ae', 'ae', '', '', '', '', '', 'and'], $this->attach_filename);
-                    $this->attach_filename = str_replace(['$', 'Я', '>', '<', '§', '%', '=', '/', '(', ')', '#', '*', '+', "\\", '{', '}', '[', ']'], ['dollar', 'ss', 'greater', 'lower', 'paragraph', 'percent', 'equal', '', '', '', '', '', '', '', '', '', '', ''], $this->attach_filename);
-                    // Remove non-latin characters
-                    $this->attach_filename = preg_replace('#([\xC2\xC3])([\x80-\xBF])#', 'chr(ord(\'$1\')<<6&0xC0|ord(\'$2\')&0x3F)', $this->attach_filename);
-                    $this->attach_filename = rawurlencode($this->attach_filename);
-                    $this->attach_filename = preg_replace("/(%[0-9A-F]{1,2})/i", '', $this->attach_filename);
-                    $this->attach_filename = trim($this->attach_filename . '_' .make_rand_str(13));
-                }
-                $this->attach_filename = str_replace(['&amp;', '&', ' '], '_', $this->attach_filename);
-                $this->attach_filename = str_replace('php', '_php_', $this->attach_filename);
-                $this->attach_filename = substr(trim($this->attach_filename), 0, FILENAME_MAX_LENGTH);
-
-                for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
-                    $fn_prefix = make_rand_str(FILENAME_PREFIX_LENGTH) . '_';
-                    $new_physical_filename = clean_filename($fn_prefix . $this->attach_filename);
-
-                    if (!physical_filename_already_stored($new_physical_filename)) {
-                        break;
-                    }
-                    if ($i === $max_try) {
-                        bb_die('Could not create filename for attachment');
-                    }
-
-                    $this->attach_filename = $new_physical_filename;
-                }
-
+                // Generate hashed filename
+                $this->attach_filename = TIMENOW . hash('xxh128', $this->filename);
 
                 // Do we have to create a thumbnail ?
-                if ($cat_id == IMAGE_CAT && (int)$attach_config['img_create_thumbnail']) {
+                if ($cat_id == IMAGE_CAT && (int)$attach_config['img_create_thumbnail'] && (int)$attach_config['img_display_inlined']) {
                     $this->thumbnail = 1;
                 }
             }
@@ -881,21 +868,13 @@ class Attach
 
             // Upload Attachment
             if (!$error) {
-                // Descide the Upload method
-                $ini_val = 'ini_get';
-
-                if (@$ini_val('open_basedir')) {
-                    $upload_mode = 'move';
-                } elseif (@$ini_val('safe_mode')) {
+                if (ini_get('open_basedir')) {
                     $upload_mode = 'move';
                 } else {
                     $upload_mode = 'copy';
                 }
 
-                // Ok, upload the Attachment
-                if (!$error) {
-                    $this->move_uploaded_attachment($upload_mode, $file);
-                }
+                $this->move_uploaded_attachment($upload_mode, $file);
             }
 
             // Now, check filesize parameters
@@ -907,7 +886,7 @@ class Attach
 
             // Check Image Size, if it's an image
             if (!$error && !IS_ADMIN && $cat_id === IMAGE_CAT) {
-                [$width, $height] = image_getdimension($upload_dir . '/' . $this->attach_filename);
+                [$width, $height] = getimagesize($upload_dir . '/' . $this->attach_filename);
 
                 if ($width && $height && (int)$attach_config['img_max_width'] && (int)$attach_config['img_max_height']) {
                     if ($width > (int)$attach_config['img_max_width'] || $height > (int)$attach_config['img_max_height']) {
@@ -1064,11 +1043,11 @@ class Attach
 
         if (!$error && $this->thumbnail === 1) {
             $source = $upload_dir . '/' . basename($this->attach_filename);
-            $dest_file = amod_realpath($upload_dir);
+            $dest_file = realpath($upload_dir);
             $dest_file .= '/' . THUMB_DIR . '/t_' . basename($this->attach_filename);
 
-            if (!create_thumbnail($source, $dest_file, $this->type)) {
-                if (!$file || !create_thumbnail($file, $dest_file, $this->type)) {
+            if (!createThumbnail($source, $dest_file, $this->type)) {
+                if (!$file || !createThumbnail($file, $dest_file, $this->type)) {
                     $this->thumbnail = 0;
                 }
             }

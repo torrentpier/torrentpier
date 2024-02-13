@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -16,8 +16,14 @@ global $bb_cfg, $lang;
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
+
 if (!$field = (string)$this->request['field']) {
     $this->ajax_die('invalid profile field');
+}
+
+// Check for demo mode
+if (IN_DEMO_MODE && in_array($field, ['username', 'user_email'])) {
+    $this->ajax_die($lang['CANT_EDIT_IN_DEMO_MODE']);
 }
 
 $table = BB_USERS;
@@ -126,6 +132,10 @@ switch ($field) {
         $table = BB_BT_USERS;
         $value = (float)str_replace(',', '.', $this->request['value']);
 
+        if ($value < 0.0) {
+            $this->ajax_die($lang['WRONG_INPUT']);
+        }
+
         foreach (['KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4, 'PB' => 5, 'EB' => 6, 'ZB' => 7, 'YB' => 8] as $s => $m) {
             if (stripos($this->request['value'], $s) !== false) {
                 $value *= (1024 ** $m);
@@ -144,7 +154,7 @@ switch ($field) {
     case 'user_points':
         $value = (float)str_replace(',', '.', $this->request['value']);
         $value = sprintf('%.2f', $value);
-        if (strlen(strstr($value, '.', true)) > 14) {
+        if ($value < 0.0 || strlen(strstr($value, '.', true)) > 14) {
             $this->ajax_die($lang['WRONG_INPUT']);
         }
         $this->response['new_value'] = $value;

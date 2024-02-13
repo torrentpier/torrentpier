@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,7 +25,7 @@ if (empty($_SERVER['HTTP_REFERER'])) {
     $_SERVER['HTTP_REFERER'] = '';
 }
 if (empty($_SERVER['SERVER_NAME'])) {
-    $_SERVER['SERVER_NAME'] = '';
+    $_SERVER['SERVER_NAME'] = getenv('SERVER_NAME');
 }
 if (empty($_SERVER['SERVER_ADDR'])) {
     $_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR');
@@ -39,17 +39,21 @@ if (!defined('BB_SCRIPT')) {
 }
 
 header('X-Frame-Options: SAMEORIGIN');
+date_default_timezone_set('UTC');
 
-// Cloudflare
-if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-    $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+// Set remote address
+$allowedCDNs = ['HTTP_X_FORWARDED_FOR', 'HTTP_FASTLY_CLIENT_IP', 'HTTP_CF_CONNECTING_IP'];
+foreach ($allowedCDNs as $allowedCDN) {
+    if (isset($_SERVER[$allowedCDN]) && filter_var($_SERVER[$allowedCDN], FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+        $_SERVER['REMOTE_ADDR'] = $_SERVER[$allowedCDN];
+    }
 }
 
 // Get all constants
 require_once BB_PATH . '/library/defines.php';
 
 // Composer
-if (!file_exists(BB_PATH . '/vendor/autoload.php')) {
+if (!is_file(BB_PATH . '/vendor/autoload.php')) {
     die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
 require_once BB_PATH . '/vendor/autoload.php';
@@ -58,10 +62,10 @@ require_once BB_PATH . '/vendor/autoload.php';
  * Gets the value of an environment variable.
  *
  * @param string $key
- * @param mixed $default
+ * @param mixed|null $default
  * @return mixed
  */
-function env(string $key, $default = null)
+function env(string $key, mixed $default = null): mixed
 {
     return \TorrentPier\Env::get($key, $default);
 }
@@ -78,7 +82,7 @@ try {
 require_once BB_PATH . '/library/config.php';
 
 // Local config
-if (file_exists(BB_PATH . '/library/config.local.php')) {
+if (is_file(BB_PATH . '/library/config.local.php')) {
     require_once BB_PATH . '/library/config.local.php';
 }
 
@@ -164,26 +168,6 @@ switch ($bb_cfg['datastore_type']) {
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
-if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
-    // [1] Check PHP Version
-    if (!\TorrentPier\Helpers\IsHelper::isPHP(CHECK_REQIREMENTS['php_min_version'])) {
-        die("TorrentPier requires PHP version " . CHECK_REQIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
-    }
-
-    // [2] Check installed PHP Extensions on server
-    $data = [];
-    foreach (CHECK_REQIREMENTS['ext_list'] as $ext) {
-        if (!extension_loaded($ext)) {
-            $data[] = '<code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">' . $ext . '</code>';
-        }
-    }
-    if (!empty($data)) {
-        die(sprintf("TorrentPier requires %s extension(s) installed on server", implode(', ', $data)));
-    }
-
-    CACHE('bb_cache')->set('system_req', true);
-}
-
 // Functions
 function utime()
 {
@@ -210,14 +194,15 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
     $bytes_written = false;
     clearstatcache();
 
-    if (($max_size && file_exists($file) && is_file($file)) && filesize($file) >= $max_size) {
+    if (is_file($file) && ($max_size && (filesize($file) >= $max_size))) {
         $file_parts = pathinfo($file);
         $new_name = ($file_parts['dirname'] . '/' . $file_parts['filename'] . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . '.' . $file_parts['extension']);
         clearstatcache();
-        if (!file_exists($new_name) && !is_file($new_name)) {
+        if (!is_file($new_name)) {
             rename($file, $new_name);
         }
     }
+
     clearstatcache();
     if (bb_mkdir(dirname($file))) {
         if ($fp = fopen($file, 'ab+')) {
@@ -251,11 +236,6 @@ function mkdir_rec($path, $mode): bool
     }
 
     return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
-}
-
-function verify_id($id, $length): bool
-{
-    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
 }
 
 function clean_filename($fname)
@@ -292,10 +272,11 @@ function str_compact($str)
  *
  * Should not be considered sufficient for cryptography, etc.
  *
- * @param int|string $length
+ * @param int $length
  * @return string
+ * @throws Exception
  */
-function make_rand_str($length = 10): string
+function make_rand_str(int $length = 10): string
 {
     $pool = str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
@@ -307,8 +288,18 @@ function make_rand_str($length = 10): string
     return $randomString;
 }
 
-function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
+function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $timeout = false)
 {
+    if ($timeout) {
+        static $recursions = 0;
+        if (time() > (TIMENOW + $timeout)) {
+            return [
+                'timeout' => true,
+                'recs' => $recursions
+            ];
+        }
+        $recursions++;
+    }
     if (is_array($var)) {
         foreach ($var as $k => $v) {
             if (is_array($v)) {
@@ -317,7 +308,7 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
                 } elseif ($array_only) {
                     $var[$k] = $fn($v);
                 } else {
-                    array_deep($var[$k], $fn);
+                    array_deep($var[$k], $fn, timeout: $timeout);
                 }
             } elseif (!$array_only) {
                 $var[$k] = $fn($v);
@@ -339,18 +330,13 @@ function hide_bb_path(string $path): string
     return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
 
-function sys($param)
+function sys(string $param)
 {
     switch ($param) {
-        case 'la':
-            return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
-            break;
         case 'mem':
             return memory_get_usage();
-            break;
         case 'mem_peak':
             return memory_get_peak_usage();
-            break;
         default:
             trigger_error("invalid param: $param", E_USER_ERROR);
     }
@@ -371,16 +357,16 @@ if (!defined('IN_TRACKER')) {
     define('PEERS_LIST_PREFIX', 'peers_list_');
     define('SCRAPE_LIST_PREFIX', 'scrape_list_');
 
+    // Init tracker
+    require_once BB_PATH . '/bt/includes/init_tr.php';
+
     header('Content-Type: text/plain');
     header('Pragma: no-cache');
 
     if (!defined('IN_ADMIN')) {
         // Exit if tracker is disabled via ON/OFF trigger
-        if (file_exists(BB_DISABLED)) {
+        if (is_file(BB_DISABLED)) {
             dummy_exit(random_int(60, 2400));
         }
     }
-
-    // Init tracker
-    require_once BB_PATH . '/bt/includes/init_tr.php';
 }

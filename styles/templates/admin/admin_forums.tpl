@@ -32,15 +32,15 @@ function toggle_cat_list (val)
 	</tr>
 	<tr>
 		<td>{L_FORUM_NAME}</td>
-		<td><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post" /></td>
+		<td><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post"></td>
 	</tr>
 	<tr>
 		<td>{L_FORUM_DESC}</td>
-		<td><textarea style="width: 96%;" rows="2" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
+		<td><textarea style="width: 96%;" rows="2" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
 	</tr>
 	<tr>
 		<td>{L_SF_PARENT_FORUM}</td>
-		<td><select onchange="toggle_cat_list(this.value)" name="forum_parent">{S_PARENT_FORUM}</select></td>
+		<td><select onchange="toggle_cat_list(this.value);" name="forum_parent">{S_PARENT_FORUM}</select></td>
 	</tr>
 	<tr id="cat_list" class="{CAT_LIST_CLASS}">
 		<td>{L_CATEGORY}</td>
@@ -152,7 +152,7 @@ function toggle_cat_list (val)
 </tbody>
 <tr>
 	<td colspan="2" class="catBottom pad_4">
-		<input type="submit" name="submit" value="{S_SUBMIT_VALUE}" class="bold" />
+		<input type="submit" <!-- IF NOWHERE_TO_MOVE -->disabled<!-- ENDIF --> name="submit" value="{S_SUBMIT_VALUE}" class="bold" />
 	</td>
 </tr>
 </table>
@@ -199,27 +199,25 @@ function hl (id, on)
 				<a class="gen" href="{c.U_CAT_DELETE}">{L_DELETE}</a>
 			</span>
 		</td>
-		<td>{L_PRUNE}</td>
+        <td class="tCenter">{L_PRUNE}</td>
 	</tr>
 	<!-- BEGIN f -->
 	<tr class="row1 hl-tr" onmouseover="hl('fname_{c.f.FORUM_ID}', 1);" onmouseout="hl('fname_{c.f.FORUM_ID}', 0);">
-		<td class="gen" align="center"><a class="gen" title="{L_MOVE_UP}" href="{c.f.U_FORUM_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{c.f.U_FORUM_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
-		<td class="small" align="center" nowrap="nowrap"><a class="small" href="{c.f.ADD_SUB_HREF}" title="Add subforum">&nbsp;+sub&nbsp;</a><!-- <span title="Order index">{c.f.ORDER} [{c.f.FORUM_ID}-{c.f.FORUM_PARENT}]</span> --></td>
-		<td width="100%" {c.f.SF_PAD}><a title="{c.f.FORUM_DESC}" class="{c.f.FORUM_NAME_CLASS}" href="{c.f.U_VIEWFORUM}" target="_new"><!-- IF c.f.SHOW_ON_INDEX --><b><!-- ENDIF --><span id="fname_{c.f.FORUM_ID}">{c.f.FORUM_NAME}</span><!-- IF c.f.SHOW_ON_INDEX --></b><!-- ENDIF --></a></td>
+		<td class="gen tCenter"><a class="gen" title="{L_MOVE_UP}" href="{c.f.U_FORUM_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{c.f.U_FORUM_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
+		<td class="small nowrap tCenter"><!-- IF c.f.ADD_SUB_HREF --><a class="small" href="{c.f.ADD_SUB_HREF}" title="{L_CREATE_SUB_FORUM}">+sub</a><!-- ENDIF --></td>
+		<td width="100%" {c.f.SF_PAD}><a title="{c.f.FORUM_DESC}" class="{c.f.FORUM_NAME_CLASS}" href="{c.f.U_VIEWFORUM}" target="_blank"><!-- IF c.f.SHOW_ON_INDEX --><b><!-- ENDIF --><span id="fname_{c.f.FORUM_ID}">{c.f.FORUM_NAME}</span><!-- IF c.f.SHOW_ON_INDEX --></b><!-- ENDIF --></a></td>
 		<td class="small tCenter" title="{L_TOPICS_SHORT}"><em class="med" style="color: grey">{L_TOPICS_SHORT}:</em> {c.f.NUM_TOPICS}</td>
 		<td class="small tCenter" title="{L_POSTS_SHORT}"><em class="med" style="color: grey">{L_POSTS_SHORT}:</em> {c.f.NUM_POSTS}</td>
 		<td class="med nowrap tCenter">
-			&nbsp;
 			<a class="med" href="{c.f.U_FORUM_EDIT}">{L_EDIT}</a>
-			&nbsp;&middot;&nbsp;
-			<a class="med" href="{c.f.U_FORUM_PERM}">{L_PERMISSIONS}</a>
-			&nbsp;&middot;&nbsp;
-			<a class="med" href="{c.f.U_FORUM_RESYNC}">{L_SYNC}</a>
-			&nbsp;&middot;&nbsp;
-			<a class="med" href="{c.f.U_FORUM_DELETE}">{L_DELETE}</a>
-			&nbsp;
+            &middot;
+            <a class="med" href="{c.f.U_FORUM_PERM}">{L_PERMISSIONS}</a>
+            &middot;
+            <a class="med" href="{c.f.U_FORUM_RESYNC}">{L_SYNC}</a>
+            &middot;
+            <a class="med" href="{c.f.U_FORUM_DELETE}">{L_DELETE}</a>
 		</td>
-		<td class="small" align="center" nowrap="nowrap"><b>{c.f.PRUNE_DAYS}</b></td>
+		<td class="small nowrap tCenter"><b>{c.f.PRUNE_DAYS}</b></td>
 	</tr>
 	<!-- END f -->
 </table>

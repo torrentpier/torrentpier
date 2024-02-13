@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -37,7 +37,6 @@ $pm_size = request_var('pm_size', '');
 $submit = isset($_POST['submit']);
 $check_upload = isset($_POST['settings']);
 $check_image_cat = isset($_POST['cat_settings']);
-$search_imagick = isset($_POST['search_imagick']);
 
 // Re-evaluate the Attachment Configuration
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
@@ -104,12 +103,12 @@ while ($row = DB()->sql_fetchrow($result)) {
             }
 
             $sql = 'UPDATE ' . BB_ATTACH_CONFIG . "
-				SET	config_value = '" . attach_mod_sql_escape($new_attach[$config_name]) . "'
-				WHERE config_name = '" . attach_mod_sql_escape($config_name) . "'";
+				SET	config_value = '" . DB()->escape($new_attach[$config_name]) . "'
+				WHERE config_name = '" . DB()->escape($config_name) . "'";
         } else {
             $sql = 'UPDATE ' . BB_ATTACH_CONFIG . "
-				SET	config_value = '" . attach_mod_sql_escape($new_attach[$config_name]) . "'
-				WHERE config_name = '" . attach_mod_sql_escape($config_name) . "'";
+				SET	config_value = '" . DB()->escape($new_attach[$config_name]) . "'
+				WHERE config_name = '" . DB()->escape($config_name) . "'";
         }
 
         if (!DB()->sql_query($sql)) {
@@ -129,44 +128,6 @@ CACHE('bb_cache')->rm('attach_config');
 $select_size_mode = size_select('size', $size);
 $select_quota_size_mode = size_select('quota_size', $quota_size);
 $select_pm_size_mode = size_select('pm_size', $pm_size);
-
-// Search Imagick
-if ($search_imagick) {
-    $imagick = '';
-
-    if (false !== stripos($imagick, "convert")) {
-        return true;
-    }
-
-    if ($imagick != 'none') {
-        if (!false !== stripos(PHP_OS, "WIN")) {
-            $retval = @exec('whereis convert');
-            $paths = explode(' ', $retval);
-
-            if (is_array($paths)) {
-                foreach ($paths as $i => $iValue) {
-                    $path = basename($paths[$i]);
-
-                    if ($path == 'convert') {
-                        $imagick = $iValue;
-                    }
-                }
-            }
-        } elseif (false !== stripos(PHP_OS, "WIN")) {
-            $path = 'c:/imagemagick/convert.exe';
-
-            if (file_exists(amod_realpath($path))) {
-                $imagick = $path;
-            }
-        }
-    }
-
-    if (file_exists(amod_realpath(trim($imagick)))) {
-        $new_attach['img_imagick'] = trim($imagick);
-    } else {
-        $new_attach['img_imagick'] = '';
-    }
-}
 
 // Check Settings
 if ($check_upload) {
@@ -196,7 +157,7 @@ if ($check_upload) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(amod_realpath($upload_dir))) {
+    if (!@file_exists(realpath($upload_dir))) {
         $error = true;
         $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
     }
@@ -287,11 +248,8 @@ if ($mode == 'cats') {
     $create_thumbnail_yes = ($new_attach['img_create_thumbnail'] != '0') ? 'checked' : '';
     $create_thumbnail_no = ($new_attach['img_create_thumbnail'] == '0') ? 'checked' : '';
 
-    $use_gd2_yes = ($new_attach['use_gd2'] != '0') ? 'checked' : '';
-    $use_gd2_no = ($new_attach['use_gd2'] == '0') ? 'checked' : '';
-
     // Check Thumbnail Support
-    if (!is_imagick() && !extension_loaded('gd')) {
+    if (!extension_loaded('gd')) {
         $new_attach['img_create_thumbnail'] = '0';
     } else {
         $template->assign_block_vars('switch_thumbnail_support', []);
@@ -304,13 +262,10 @@ if ($mode == 'cats') {
         'IMAGE_LINK_HEIGHT' => $new_attach['img_link_height'],
         'IMAGE_LINK_WIDTH' => $new_attach['img_link_width'],
         'IMAGE_MIN_THUMB_FILESIZE' => $new_attach['img_min_thumb_filesize'],
-        'IMAGE_IMAGICK_PATH' => $new_attach['img_imagick'],
         'DISPLAY_INLINED_YES' => $display_inlined_yes,
         'DISPLAY_INLINED_NO' => $display_inlined_no,
         'CREATE_THUMBNAIL_YES' => $create_thumbnail_yes,
         'CREATE_THUMBNAIL_NO' => $create_thumbnail_no,
-        'USE_GD2_YES' => $use_gd2_yes,
-        'USE_GD2_NO' => $use_gd2_no,
         'S_ASSIGNED_GROUP_IMAGES' => implode(', ', $s_assigned_group_images),
         'S_ATTACH_ACTION' => 'admin_attachments.php?mode=cats',
     ));
@@ -346,12 +301,12 @@ if ($check_image_cat) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(amod_realpath($upload_dir))) {
+    if (!@file_exists(realpath($upload_dir))) {
         if (!bb_mkdir($upload_dir) && !is_dir($upload_dir)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $upload_dir));
         }
 
-        if (!@file_exists(amod_realpath($upload_dir))) {
+        if (!@file_exists(realpath($upload_dir))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
         }
@@ -391,7 +346,7 @@ if ($submit && $mode == 'quota') {
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
 
         $sql = 'UPDATE ' . BB_QUOTA_LIMITS . "
-			SET quota_desc = '" . attach_mod_sql_escape($quota_desc_list[$i]) . "', quota_limit = " . (int)$filesize_list[$i] . '
+			SET quota_desc = '" . DB()->escape($quota_desc_list[$i]) . "', quota_limit = " . (int)$filesize_list[$i] . '
 			WHERE quota_limit_id = ' . (int)$quota_change_list[$i];
 
         if (!DB()->sql_query($sql)) {
@@ -453,7 +408,7 @@ if ($submit && $mode == 'quota') {
             $filesize = ($size_select == 'kb') ? round($filesize * 1024) : (($size_select == 'mb') ? round($filesize * 1048576) : $filesize);
 
             $sql = 'INSERT INTO ' . BB_QUOTA_LIMITS . " (quota_desc, quota_limit)
-			VALUES ('" . attach_mod_sql_escape($quota_desc) . "', " . (int)$filesize . ')';
+			VALUES ('" . DB()->escape($quota_desc) . "', " . (int)$filesize . ')';
 
             if (!DB()->sql_query($sql)) {
                 bb_die('Could not add quota limit');

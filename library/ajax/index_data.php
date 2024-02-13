@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,9 +13,11 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang, $userdata, $datastore;
 
-$mode = (string)$this->request['mode'];
-$html = '';
+if (!$mode = (string)$this->request['mode']) {
+    $this->ajax_die('invalid mode (empty)');
+}
 
+$html = '';
 switch ($mode) {
     case 'birthday_week':
         $stats = $datastore->get('stats');
@@ -122,7 +124,7 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die('Invalid mode');
+        $this->ajax_die('Invalid mode: ' . $mode);
 }
 
 $this->response['html'] = $html;

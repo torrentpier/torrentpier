@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -40,7 +40,7 @@ $sql = "
 	FROM " . BB_SESSIONS . " s, " . BB_USERS . " u
 	WHERE s.session_time > $time_online
 		AND u.user_id = s.session_user_id
-	GROUP BY u.username, u.user_id, u.user_opt, u.user_rank, u.user_level, s.session_user_id, s.session_logged_in, s.session_ip, s.session_time, s.session_start
+	GROUP BY s.session_user_id
 	ORDER BY u.username
 ";
 

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -15,17 +15,6 @@ namespace TorrentPier\Helpers;
  */
 class IsHelper
 {
-    /**
-     * Determines if the current version of PHP is equal to or greater than the supplied value
-     *
-     * @param string $version
-     * @return bool TRUE if the current version is $version or higher
-     */
-    public static function isPHP(string $version): bool
-    {
-        return version_compare(PHP_VERSION, $version, '>=');
-    }
-
     /**
      * Return true if server have SSL
      *
@@ -40,39 +29,5 @@ class IsHelper
             $is_secure = true;
         }
         return $is_secure;
-    }
-
-    /**
-     * Return true if $value contains numbers
-     *
-     * @param string $value
-     * @return bool
-     */
-    public static function isContainsNums(string $value): bool
-    {
-        return preg_match('@[[:digit:]]@', $value);
-    }
-
-    /**
-     * Return true if $value contains letters (Uppercase included)
-     *
-     * @param string $value
-     * @param bool $uppercase
-     * @return bool
-     */
-    public static function isContainsLetters(string $value, bool $uppercase = false): bool
-    {
-        return $uppercase ? preg_match('@[A-Z]@', $value) : preg_match('@[a-z]@', $value);
-    }
-
-    /**
-     * Return true if $value contains special symbols
-     *
-     * @param string $value
-     * @return bool
-     */
-    public static function isContainsSpecSymbols(string $value): bool
-    {
-        return preg_match('@[[:punct:]]@', $value);
     }
 }

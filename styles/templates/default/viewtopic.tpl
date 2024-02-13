@@ -11,6 +11,32 @@
 	$(document).ready(function(){ $('div.sp-head').click(); });
 </script>
 <!-- ENDIF -->
+
+<!-- IF $bb_cfg['show_post_bbcode_button'] -->
+<script type="text/javascript">
+    (function () {
+        let loadedText = [];
+
+        ajax.view_post = function (post_id) {
+            if (loadedText[post_id] != null) {
+                $('#ptx-' + post_id).toggle();
+                return;
+            }
+            ajax.exec({
+                action: 'view_post',
+                post_id: post_id,
+                return_text: true,
+            });
+        };
+        ajax.callback.view_post = function (data) {
+            loadedText[data.post_id] = true;
+            $('#post_' + data.post_id + ' div.post_body').prepend(
+                '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px; line-height: 1.2;">' + data['post_text'] + '</textarea><hr></div>'
+            );
+        };
+    })();
+</script>
+<!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
 
 <!-- IF $bb_cfg['use_ajax_posts'] && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
@@ -218,7 +244,7 @@ function build_poll_add_form (src_el)
 		<div class="med" style="margin-top: 4px;">{L_NEW_POLL_M_VOTES}:</div>
 		<textarea id="poll-votes-inp" rows="8" cols="10" wrap="off" class="gen" style="width: 550px;"></textarea>
 		<div class="med mrg_4"><i>{L_NEW_POLL_M_EXPLAIN}: {$bb_cfg['max_poll_options']})</i></div>
-		<div class="mrg_8 tCenter"><input id="poll-edit-submit-btn" type="button" value="{L_SUBMIT}" class="bold" style="width: 100px;" /></div>
+		<div class="mrg_8 tCenter"><input onclick="window.location.reload();" type="button" class="bold" value="{L_CANCEL}" />&nbsp;&nbsp;<input id="poll-edit-submit-btn" type="button" value="{L_SUBMIT}" class="bold" style="width: 100px;" /></div>
 	</fieldset>
 	</td></tr></table>
 </div>
@@ -261,7 +287,7 @@ function build_poll_add_form (src_el)
 		</td>
 
 		<td class="nowrap" style="padding: 0 4px 2px 4px;">
-			<form action="search.php?t={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
+			<form action="{U_SEARCH}?t={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
 				<input id="search-text" type="text" name="nm" class="hint" style="width: 150px;" placeholder="{L_SEARCH_IN_TOPIC}" required />
 				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />
 			</form>
@@ -361,6 +387,10 @@ function build_poll_add_form (src_el)
 		<p class="nick">{postrow.POSTER_NAME} <!-- IF postrow.POSTER_AUTHOR --><sup>&reg;</sup><!-- ENDIF --></p>
 		<!-- ENDIF -->
 
+        <!-- BEGIN ban -->
+		<!-- IF postrow.ban.IS_BANNED --><p class="poster-banned" title="{L_BANNED_USERS}">{L_BANNED}</p><!-- ENDIF -->
+        <!-- END ban -->
+
 		<!-- IF postrow.POSTER_RANK --><p class="rank_txt">{postrow.POSTER_RANK}</p><!-- ENDIF -->
 		<!-- IF postrow.RANK_IMAGE --><p class="rank_img">{postrow.RANK_IMAGE}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_AVATAR --><p class="avatar">{postrow.POSTER_AVATAR}</p><!-- ENDIF -->
@@ -381,7 +411,7 @@ function build_poll_add_form (src_el)
 			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
 				<!-- IF postrow.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
 				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}&nbsp;|&nbsp;#{postrow.POST_NUMBER}</a>
-                <!-- IF postrow.POSTER_AUTHOR -->&middot;&nbsp;<span>{L_AUTHOR}</span><!-- ENDIF -->
+                <!-- IF postrow.POSTER_AUTHOR and not postrow.POSTER_GUEST -->&middot;&nbsp;<span>{L_AUTHOR}</span><!-- ENDIF -->
 				<!-- IF postrow.POSTED_AFTER -->
 					<span class="posted_since">({L_POSTED_AFTER} {postrow.POSTED_AFTER})</span>
 				<!-- ENDIF -->
@@ -394,6 +424,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.IS_FIRST_POST && $bb_cfg['show_post_bbcode_button'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">{CODE_IMG}</a><!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
@@ -409,7 +440,7 @@ function build_poll_add_form (src_el)
 				<span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
 				<!-- IF postrow.RG_NAME -->
 				<div id="pg_{postrow.POST_ID}" class="alert alert-gray" style="width: 92%;">
-					<h4 class="alert-heading">{L_RELEASE_FROM_RG} <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
+					<h4 class="alert-heading">{L_RELEASE_FROM_RG} — <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
 					<div id="pg_info_{postrow.POST_ID}">
 						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
                         <!-- IF postrow.RG_DESC --><div class="post-wrap">{L_DESCRIPTION}: {postrow.RG_DESC}</div><!-- ENDIF -->
@@ -511,7 +542,7 @@ function build_poll_add_form (src_el)
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center" class="row3">
+			<td colspan="2" class="row3 tCenter">
 				<input type="submit" name="delete_posts" id="del" value="{L_DELETE_POSTS}" disabled onclick="return window.confirm('{L_DELETE_POSTS}?');" />
 				<input type="submit" name="split_type_all" id="spl_all" value="{L_SPLIT_POSTS}" disabled onclick="return window.confirm('{L_SPLIT_POSTS}?');" />
 				<input type="submit" name="split_type_beyond" id="spl_b" value="{L_SPLIT_AFTER}" disabled onclick="return window.confirm('{L_SPLIT_AFTER}?');" />
@@ -634,7 +665,7 @@ function build_poll_add_form (src_el)
 <!-- ENDIF -->
 <!-- IF IS_ADMIN -->
 		<div class="med" style="float: right;">
-		Admin:&nbsp;
+		{L_ADMIN}:&nbsp;
 		<a href="{U_LOGS}">{L_LOGS}</a>&nbsp;
 		</div>
 <!-- ENDIF -->

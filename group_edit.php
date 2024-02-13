@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -40,11 +40,10 @@ if ($is_moderator) {
 
             if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
                 $avatar_ext_id = (int)$upload->file_ext_id;
+                DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
             } else {
                 bb_die(implode($upload->errors));
             }
-
-            DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id");
         }
     }
 

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -15,7 +15,6 @@ require ATTACH_DIR . '/includes/functions_includes.php';
 require ATTACH_DIR . '/includes/functions_attach.php';
 require ATTACH_DIR . '/includes/functions_delete.php';
 require ATTACH_DIR . '/includes/functions_thumbs.php';
-require ATTACH_DIR . '/includes/functions_filetypes.php';
 
 if (defined('ATTACH_INSTALL')) {
     return;

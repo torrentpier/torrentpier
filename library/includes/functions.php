@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -35,7 +35,7 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
 function delete_avatar($user_id, $avatar_ext_id)
 {
     $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : false;
-    return ($avatar_file && file_exists($avatar_file) && unlink($avatar_file));
+    return ($avatar_file && is_file($avatar_file) && unlink($avatar_file));
 }
 
 function get_tracks($type)
@@ -268,6 +268,14 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     $is_admin = false;
     $auth = $auth_fields = $u_access = [];
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
+
+    // Check forum existence
+    if (!forum_exists()) {
+        return [];
+    }
+    if ($add_auth_type_desc && !forum_exists($forum_id)) {
+        return [];
+    }
 
     //
     // Get $auth_fields
@@ -553,7 +561,7 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
         $url = str_replace($cur, $new, $url);
     } // добавляем параметр
     elseif (null !== $value) {
-        $div = (strpos($url, '?') !== false) ? $amp : '?';
+        $div = str_contains($url, '?') ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
     }
     return $url . $anchor;
@@ -599,7 +607,7 @@ function bt_show_ip($ip, $port = '')
         return $ip;
     }
 
-    return ($bb_cfg['bt_show_ip_only_moder']) ? false : \TorrentPier\Helpers\IPHelper::anonymizeIP($ip);
+    return $bb_cfg['bt_show_ip_only_moder'] ? false : \TorrentPier\Helpers\IPHelper::anonymizeIP($ip);
 }
 
 function bt_show_port($port)
@@ -610,7 +618,7 @@ function bt_show_port($port)
         return $port;
     }
 
-    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
+    return $bb_cfg['bt_show_port_only_moder'] ? false : $port;
 }
 
 function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
@@ -747,7 +755,7 @@ function get_username($user_id)
         return $usernames;
     }
 
-    $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+    $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = '" . DB()->escape($user_id) . "' LIMIT 1");
     return $row['username'];
 }
 
@@ -766,7 +774,7 @@ function get_user_id($username)
 
 function str_short($text, $max_length, $space = ' ')
 {
-    if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
+    if (!empty($max_length) && !empty($text) && (mb_strlen($text, 'UTF-8') > $max_length)) {
         $text = mb_substr($text, 0, $max_length, 'UTF-8');
 
         if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string)$space)) {
@@ -779,12 +787,7 @@ function str_short($text, $max_length, $space = ' ')
         $text = preg_replace('!&#?(\w+)?;?(\w{1,5})?\.\.\.$!', '...', $text);
     }
 
-    return $text;
-}
-
-function wbr($text, $max_word_length = HTML_WBR_LENGTH)
-{
-    return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
+    return $text ?? '';
 }
 
 function generate_user_info($row, bool $have_auth = IS_ADMIN): array
@@ -793,7 +796,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 
     $from = !empty($row['user_from']) ? $row['user_from'] : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
-    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($row['user_time']), delta_time($row['user_time'])) : $lang['NOSELECT'];
+    $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), delta_time($row['user_time'])) : $lang['NOSELECT'];
     $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
     $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
@@ -802,7 +805,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
-        $email = $lang['NOSELECT'];
+        $email = $lang['HIDDEN_USER'];
     }
 
     if ($row['user_website']) {
@@ -811,7 +814,18 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
         $www = $lang['NOSELECT'];
     }
 
-    return ['from' => $from, 'joined' => $joined, 'posts' => $posts, 'pm' => $pm, 'avatar' => $avatar, 'user_time' => $user_time, 'email' => $email, 'www' => $www];
+    return [
+        'from' => $from,
+        'joined' => $joined,
+        'joined_raw' => $row['user_regdate'],
+        'posts' => $posts,
+        'pm' => $pm,
+        'avatar' => $avatar,
+        'user_time' => $user_time,
+        'user_time_raw' => ($row['user_time'] ?? ''),
+        'email' => $email,
+        'www' => $www
+    ];
 }
 
 function get_bt_userdata($user_id)
@@ -832,7 +846,7 @@ function get_bt_userdata($user_id)
     return $btu;
 }
 
-function get_bt_ratio($btu)
+function get_bt_ratio($btu): ?float
 {
     return
         (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
@@ -840,7 +854,7 @@ function get_bt_ratio($btu)
             : null;
 }
 
-function show_bt_userdata($user_id)
+function show_bt_userdata($user_id): void
 {
     global $template;
 
@@ -921,48 +935,6 @@ function bb_update_config($params, $table = BB_CONFIG)
     bb_get_config($table, true, true);
 }
 
-function get_db_stat($mode)
-{
-    $sql = null;
-    switch ($mode) {
-        case 'usercount':
-            $sql = "SELECT COUNT(user_id) AS total FROM " . BB_USERS;
-            break;
-
-        case 'newestuser':
-            $sql = "SELECT user_id, username FROM " . BB_USERS . " WHERE user_id <> " . GUEST_UID . " ORDER BY user_id DESC LIMIT 1";
-            break;
-
-        case 'postcount':
-        case 'topiccount':
-            $sql = "SELECT SUM(forum_topics) AS topic_total, SUM(forum_posts) AS post_total FROM " . BB_FORUMS;
-            break;
-    }
-
-    if (!($result = DB()->sql_query($sql))) {
-        return false;
-    }
-
-    $row = DB()->sql_fetchrow($result);
-
-    switch ($mode) {
-        case 'usercount':
-            return $row['total'];
-            break;
-        case 'newestuser':
-            return $row;
-            break;
-        case 'postcount':
-            return $row['post_total'];
-            break;
-        case 'topiccount':
-            return $row['topic_total'];
-            break;
-    }
-
-    return false;
-}
-
 function clean_username($username)
 {
     $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
@@ -980,22 +952,27 @@ function clean_username($username)
  * @param bool $allow_guest
  * @return mixed
  */
-function get_userdata($u, bool $is_name = false, bool $allow_guest = false)
+function get_userdata(int|string $u, bool $is_name = false, bool $allow_guest = false, bool $profile_view = false)
 {
     if (empty($u)) {
         return false;
     }
 
     if (!$is_name) {
-        if ((int)$u === GUEST_UID && $allow_guest) {
+        $u = (int)$u;
+        if ($u === GUEST_UID && $allow_guest) {
             if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
                 return $u_data;
             }
         }
 
-        $where_sql = "WHERE user_id = " . (int)$u;
+        $where_sql = "WHERE user_id = " . $u;
     } else {
         $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
+    }
+
+    if ($profile_view) {
+        $where_sql = "WHERE user_id = " . (int)$u . " OR username = '" . DB()->escape(clean_username($u)) . "'";
     }
 
     $exclude_anon_sql = (!$allow_guest) ? "AND user_id != " . GUEST_UID : '';
@@ -1012,16 +989,20 @@ function get_userdata($u, bool $is_name = false, bool $allow_guest = false)
     return $u_data;
 }
 
-function make_jumpbox($selected = 0)
+function make_jumpbox(): void
 {
-    global $datastore, $template;
+    global $datastore, $template, $bb_cfg;
+
+    if (!$bb_cfg['show_jumpbox']) {
+        return;
+    }
 
     if (!$jumpbox = $datastore->get('jumpbox')) {
         $datastore->update('jumpbox');
         $jumpbox = $datastore->get('jumpbox');
     }
 
-    $template->assign_vars(['JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user']]);
+    $template->assign_vars(['JUMPBOX' => IS_GUEST ? DB()->escape($jumpbox['guest']) : DB()->escape($jumpbox['user'])]);
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
@@ -1176,10 +1157,10 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
 /**
  * Get user's torrent client string
  *
- * @param string $peerId
- * @return mixed|string
+ * @param string $peer_id
+ * @return string
  */
-function get_user_torrent_client(string $peerId): mixed
+function get_user_torrent_client(string $peer_id): string
 {
     static $clients = [
         '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',
@@ -1226,22 +1207,297 @@ function get_user_torrent_client(string $peerId): mixed
     $bestMatchLength = 0;
 
     foreach ($clients as $key => $clientName) {
-        if (str_starts_with($peerId, $key) !== false && strlen($key) > $bestMatchLength) {
+        if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
             $bestMatch = $clientName;
             $bestMatchLength = strlen($key);
         }
     }
 
-    if (!empty($bestMatchLength) && !empty($bestMatch)) {
-        $clientIconPath = 'styles/images/clients/' . $bestMatch . $iconExtension;
-        if (is_file($clientIconPath)) {
-            return '<img width="auto" height="auto" style="display: inline !important; vertical-align: middle;" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peerId . '">';
-        } else {
-            return $bestMatch;
-        }
+    if (!empty($bestMatch)) {
+        return '<img class="clients" src="' . FULL_URL . 'styles/images/clients/' . $bestMatch . $iconExtension . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
     }
 
-    return $peerId;
+    return $peer_id;
+}
+
+/**
+ * Returns country flag by country code
+ *
+ * @param string $code
+ * @return string
+ */
+function render_flag(string $code): string
+{
+    static $iconExtension = '.svg';
+    static $country_codes = [
+        'AD' => 'Andorra',
+        'AE' => 'United Arab Emirates',
+        'AF' => 'Afghanistan',
+        'AG' => 'Antigua and Barbuda',
+        'AI' => 'Anguilla',
+        'AL' => 'Albania',
+        'AM' => 'Armenia',
+        'AO' => 'Angola',
+        'AQ' => 'Antarctica',
+        'AR' => 'Argentina',
+        'AS' => 'American Samoa',
+        'AT' => 'Austria',
+        'AU' => 'Australia',
+        'AW' => 'Aruba',
+        'AX' => 'Aland Islands',
+        'AZ' => 'Azerbaijan',
+        'BA' => 'Bosnia and Herzegovina',
+        'BB' => 'Barbados',
+        'BD' => 'Bangladesh',
+        'BE' => 'Belgium',
+        'BF' => 'Burkina Faso',
+        'BG' => 'Bulgaria',
+        'BH' => 'Bahrain',
+        'BI' => 'Burundi',
+        'BJ' => 'Benin',
+        'BL' => 'Saint Barthélemy',
+        'BM' => 'Bermuda',
+        'BN' => 'Brunei Darussalam',
+        'BO' => 'Bolivia, Plurinational State of',
+        'BQ' => 'Caribbean Netherlands',
+        'BR' => 'Brazil',
+        'BS' => 'Bahamas',
+        'BT' => 'Bhutan',
+        'BV' => 'Bouvet Island',
+        'BW' => 'Botswana',
+        'BY' => 'Belarus',
+        'BZ' => 'Belize',
+        'CA' => 'Canada',
+        'CC' => 'Cocos (Keeling) Islands',
+        'CD' => 'Congo, the Democratic Republic of the',
+        'CF' => 'Central African Republic',
+        'CG' => 'Republic of the Congo',
+        'CH' => 'Switzerland',
+        'CI' => 'Republic of Cote d\'Ivoire',
+        'CK' => 'Cook Islands',
+        'CL' => 'Chile',
+        'CM' => 'Cameroon',
+        'CN' => 'China (People\'s Republic of China)',
+        'CO' => 'Colombia',
+        'CR' => 'Costa Rica',
+        'CU' => 'Cuba',
+        'CV' => 'Cape Verde',
+        'CW' => 'Country of Curaçao',
+        'CX' => 'Christmas Island',
+        'CY' => 'Cyprus',
+        'CZ' => 'Czech Republic',
+        'DE' => 'Germany',
+        'DJ' => 'Djibouti',
+        'DK' => 'Denmark',
+        'DM' => 'Dominica',
+        'DO' => 'Dominican Republic',
+        'DZ' => 'Algeria',
+        'EC' => 'Ecuador',
+        'EE' => 'Estonia',
+        'EG' => 'Egypt',
+        'EH' => 'Western Sahara',
+        'ER' => 'Eritrea',
+        'ES' => 'Spain',
+        'ET' => 'Ethiopia',
+        'EU' => 'Europe',
+        'FI' => 'Finland',
+        'FJ' => 'Fiji',
+        'FK' => 'Falkland Islands (Malvinas)',
+        'FM' => 'Micronesia, Federated States of',
+        'FO' => 'Faroe Islands',
+        'FR' => 'France',
+        'GA' => 'Gabon',
+        'GB-ENG' => 'England',
+        'GB-NIR' => 'Northern Ireland',
+        'GB-SCT' => 'Scotland',
+        'GB-WLS' => 'Wales',
+        'GB' => 'United Kingdom',
+        'GD' => 'Grenada',
+        'GE' => 'Georgia',
+        'GF' => 'French Guiana',
+        'GG' => 'Guernsey',
+        'GH' => 'Ghana',
+        'GI' => 'Gibraltar',
+        'GL' => 'Greenland',
+        'GM' => 'Gambia',
+        'GN' => 'Guinea',
+        'GP' => 'Guadeloupe',
+        'GQ' => 'Equatorial Guinea',
+        'GR3' => 'German Reich (3rd)',
+        'GR' => 'Greece',
+        'GS' => 'South Georgia and the South Sandwich Islands',
+        'GT' => 'Guatemala',
+        'GU' => 'Guam',
+        'GW' => 'Guinea-Bissau',
+        'GY' => 'Guyana',
+        'HK' => 'Hong Kong',
+        'HM' => 'Heard Island and McDonald Islands',
+        'HN' => 'Honduras',
+        'HR' => 'Croatia',
+        'HT' => 'Haiti',
+        'HU' => 'Hungary',
+        'ID' => 'Indonesia',
+        'IE' => 'Ireland',
+        'IL' => 'Israel',
+        'IM' => 'Isle of Man',
+        'IN' => 'India',
+        'IO' => 'British Indian Ocean Territory',
+        'IQ' => 'Iraq',
+        'IR' => 'Iran, Islamic Republic of',
+        'IS' => 'Iceland',
+        'IT' => 'Italy',
+        'JE' => 'Jersey',
+        'JM' => 'Jamaica',
+        'JO' => 'Jordan',
+        'JP' => 'Japan',
+        'KE' => 'Kenya',
+        'KG' => 'Kyrgyzstan',
+        'KH' => 'Cambodia',
+        'KI' => 'Kiribati',
+        'KM' => 'Comoros',
+        'KN' => 'Saint Kitts and Nevis',
+        'KP' => 'Korea, Democratic People\'s Republic of',
+        'KR' => 'Korea, Republic of',
+        'KW' => 'Kuwait',
+        'KY' => 'Cayman Islands',
+        'KZ' => 'Kazakhstan',
+        'LA' => 'Laos (Lao People\'s Democratic Republic)',
+        'LB' => 'Lebanon',
+        'LGBT' => 'Pride flag 🏳️‍🌈',
+        'LC' => 'Saint Lucia',
+        'LI' => 'Liechtenstein',
+        'LK' => 'Sri Lanka',
+        'LR' => 'Liberia',
+        'LS' => 'Lesotho',
+        'LT' => 'Lithuania',
+        'LU' => 'Luxembourg',
+        'LV' => 'Latvia',
+        'LY' => 'Libya',
+        'MA' => 'Morocco',
+        'MC' => 'Monaco',
+        'MD' => 'Moldova, Republic of',
+        'ME' => 'Montenegro',
+        'MF' => 'Saint Martin',
+        'MG' => 'Madagascar',
+        'MH' => 'Marshall Islands',
+        'MK' => 'North Macedonia',
+        'ML' => 'Mali',
+        'MM' => 'Myanmar',
+        'MN' => 'Mongolia',
+        'MO' => 'Macao',
+        'MP' => 'Northern Mariana Islands',
+        'MQ' => 'Martinique',
+        'MR' => 'Mauritania',
+        'MS' => 'Montserrat',
+        'MT' => 'Malta',
+        'MU' => 'Mauritius',
+        'MV' => 'Maldives',
+        'MW' => 'Malawi',
+        'MX' => 'Mexico',
+        'MY' => 'Malaysia',
+        'MZ' => 'Mozambique',
+        'NA' => 'Namibia',
+        'NC' => 'New Caledonia',
+        'NE' => 'Niger',
+        'NF' => 'Norfolk Island',
+        'NG' => 'Nigeria',
+        'NI' => 'Nicaragua',
+        'NL' => 'Netherlands',
+        'NO' => 'Norway',
+        'NP' => 'Nepal',
+        'NR' => 'Nauru',
+        'NU' => 'Niue',
+        'NZ' => 'New Zealand',
+        'OM' => 'Oman',
+        'PA' => 'Panama',
+        'PACE' => 'Peace flag 🕊',
+        'PE' => 'Peru',
+        'PF' => 'French Polynesia',
+        'PG' => 'Papua New Guinea',
+        'PH' => 'Philippines',
+        'PK' => 'Pakistan',
+        'PL' => 'Poland',
+        'PM' => 'Saint Pierre and Miquelon',
+        'PN' => 'Pitcairn',
+        'PR' => 'Puerto Rico',
+        'PS' => 'Palestine',
+        'PT' => 'Portugal',
+        'PW' => 'Palau',
+        'PY' => 'Paraguay',
+        'QA' => 'Qatar',
+        'RE' => 'Réunion',
+        'RO' => 'Romania',
+        'RS' => 'Serbia',
+        'RU' => 'Russian Federation',
+        'RW' => 'Rwanda',
+        'SA' => 'Saudi Arabia',
+        'SB' => 'Solomon Islands',
+        'SC' => 'Seychelles',
+        'SD' => 'Sudan',
+        'SE' => 'Sweden',
+        'SG' => 'Singapore',
+        'SH' => 'Saint Helena, Ascension and Tristan da Cunha',
+        'SI' => 'Slovenia',
+        'SJ' => 'Svalbard and Jan Mayen Islands',
+        'SK' => 'Slovakia',
+        'SL' => 'Sierra Leone',
+        'SM' => 'San Marino',
+        'SN' => 'Senegal',
+        'SO' => 'Somalia',
+        'SR' => 'Suriname',
+        'SS' => 'South Sudan',
+        'SU' => 'Soviet Union',
+        'ST' => 'Sao Tome and Principe',
+        'SV' => 'El Salvador',
+        'SX' => 'Sint Maarten (Dutch part)',
+        'SY' => 'Syrian Arab Republic',
+        'SZ' => 'Swaziland',
+        'TC' => 'Turks and Caicos Islands',
+        'TD' => 'Chad',
+        'TF' => 'French Southern Territories',
+        'TG' => 'Togo',
+        'TH' => 'Thailand',
+        'TJ' => 'Tajikistan',
+        'TK' => 'Tokelau',
+        'TL' => 'Timor-Leste',
+        'TM' => 'Turkmenistan',
+        'TN' => 'Tunisia',
+        'TO' => 'Tonga',
+        'TR' => 'Turkey',
+        'TT' => 'Trinidad and Tobago',
+        'TV' => 'Tuvalu',
+        'TW' => 'Taiwan (Republic of China)',
+        'TZ' => 'Tanzania, United Republic of',
+        'UA' => 'Ukraine',
+        'UG' => 'Uganda',
+        'UM' => 'US Minor Outlying Islands',
+        'US' => 'United States',
+        'UY' => 'Uruguay',
+        'UZ' => 'Uzbekistan',
+        'VA' => 'Holy See (Vatican City State)',
+        'VC' => 'Saint Vincent and the Grenadines',
+        'VE' => 'Venezuela, Bolivarian Republic of',
+        'VG' => 'Virgin Islands, British',
+        'VI' => 'Virgin Islands, U.S.',
+        'VN' => 'Vietnam',
+        'VU' => 'Vanuatu',
+        'WBW' => 'Wonderful Russia of the Future 🕊',
+        'WF' => 'Wallis and Futuna Islands',
+        'WS' => 'Samoa',
+        'XK' => 'Kosovo',
+        'YE' => 'Yemen',
+        'YU' => 'Yugoslavia',
+        'YT' => 'Mayotte',
+        'ZA' => 'South Africa',
+        'ZM' => 'Zambia',
+        'ZW' => 'Zimbabwe'
+    ];
+
+    if (isset($country_codes[$code])) {
+        return '<img src="' . FULL_URL . 'styles/images/flags/' . $code . $iconExtension . '" class="poster-flag" alt="' . $code . '" title="' . $country_codes[$code] . '">';
+    }
+
+    return $code;
 }
 
 function birthday_age($date)
@@ -1350,39 +1606,13 @@ function bb_preg_quote($str, $delimiter)
     return $text;
 }
 
-//
-// Obtain list of naughty words and build preg style replacement arrays for use by the
-// calling script, note that the vars are passed as references this just makes it easier
-// to return both sets of arrays
-//
-function obtain_word_list(&$orig_word, &$replacement_word)
+function bb_die($msg_text, $status_code = null)
 {
-    global $bb_cfg;
+    global $ajax, $bb_cfg, $lang, $template, $theme, $userdata, $user;
 
-    if (!$bb_cfg['use_word_censor']) {
-        return false;
+    if (isset($status_code)) {
+        http_response_code($status_code);
     }
-
-    if (!$sql = CACHE('bb_cache')->get('censored')) {
-        $sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
-        if (!$sql) {
-            $sql = [['word' => 1, 'replacement' => 1]];
-        }
-        CACHE('bb_cache')->set('censored', $sql, 7200);
-    }
-
-    foreach ($sql as $row) {
-        //$orig_word[] = '#(?<!\S)(' . str_replace('\*', '\S*?', preg_quote($row['word'], '#')) . ')(?!\S)#iu';
-        $orig_word[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($row['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
-        $replacement_word[] = $row['replacement'];
-    }
-
-    return true;
-}
-
-function bb_die($msg_text)
-{
-    global $ajax, $bb_cfg, $lang, $template, $theme, $userdata;
 
     if (defined('IN_AJAX')) {
         $ajax->ajax_die($msg_text);
@@ -1402,7 +1632,7 @@ function bb_die($msg_text)
 
     // If empty session
     if (empty($userdata)) {
-        $userdata = \TorrentPier\Sessions::session_pagestart();
+        $userdata = $user->session_start();
     }
 
     // If the header hasn't been output then do it
@@ -1434,15 +1664,20 @@ function bb_die($msg_text)
     exit;
 }
 
-function bb_simple_die($txt)
+function bb_simple_die($txt, $status_code = null)
 {
     global $bb_cfg;
+
+    header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
+
+    if (isset($status_code)) {
+        http_response_code($status_code);
+    }
 
     if (!empty($_COOKIE['explain'])) {
         bb_die("bb_simple_die:<br /><br />$txt");
     }
 
-    header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
     die($txt);
 }
 
@@ -1466,7 +1701,7 @@ function redirect($url)
         trigger_error("Headers already sent in $filename($linenum)", E_USER_ERROR);
     }
 
-    if (false !== strpos(urldecode($url), "\n") || false !== strpos(urldecode($url), "\r") || false !== strpos(urldecode($url), ';url')) {
+    if (str_contains(urldecode($url), "\n") || str_contains(urldecode($url), "\r") || str_contains(urldecode($url), ';url')) {
         bb_die('Tried to redirect to potentially insecure url');
     }
 
@@ -1485,7 +1720,7 @@ function redirect($url)
     $redirect_url = $server_protocol . $server_name . $server_port . $script_name . preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
 
     // Behave as per HTTP/1.1 spec for others
-    header('Location: ' . $redirect_url);
+    header('Location: ' . $redirect_url, response_code: 301);
     exit;
 }
 
@@ -1567,8 +1802,12 @@ function get_topic_title($topic_id)
     return $row['topic_title'];
 }
 
-function forum_exists($forum_id): bool
+function forum_exists($forum_id = null): bool
 {
+    if (!isset($forum_id)) {
+        return (bool)DB()->fetch_row("SELECT * FROM " . BB_FORUMS . " LIMIT 1");
+    }
+
     return (bool)DB()->fetch_row("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1");
 }
 
@@ -1933,7 +2172,14 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
 }
 
-function profile_url($data)
+/**
+ * Generates link to profile
+ *
+ * @param array $data
+ * @param bool $target_blank
+ * @return string
+ */
+function profile_url(array $data, bool $target_blank = false): string
 {
     global $bb_cfg, $lang, $datastore;
 
@@ -1942,30 +2188,35 @@ function profile_url($data)
         $ranks = $datastore->get('ranks');
     }
 
+    $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
+    $user_id = !empty($data['user_id']) ? (int)$data['user_id'] : GUEST_UID;
     $user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
+    $title = '';
+    $style = 'colorUser';
     if (isset($ranks[$user_rank])) {
         $title = $ranks[$user_rank]['rank_title'];
-        $style = $ranks[$user_rank]['rank_style'];
+        if ($bb_cfg['color_nick']) {
+            $style = $ranks[$user_rank]['rank_style'];
+        }
     }
+
     if (empty($title)) {
-        $title = $lang['USER'];
+        $title = match ($user_id) {
+            GUEST_UID => $lang['GUEST'],
+            BOT_UID => $username,
+            default => $lang['USER'],
+        };
     }
-    if (empty($style)) {
-        $style = 'colorUser';
-    }
-
-    if (!$bb_cfg['color_nick']) {
-        $style = '';
-    }
-
-    $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
-    $user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : GUEST_UID;
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
+    if (!in_array($user_id, explode(',', EXCLUDED_USERS))) {
+        $target_blank = $target_blank ? ' target="_blank" ' : '';
+        $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
 
-    if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && $username) {
-        $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+        if (getBanInfo($user_id)) {
+            return '<s>' . $profile . '</s>';
+        }
     }
 
     return $profile;
@@ -1983,7 +2234,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
         $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
-        if (file_exists(get_avatar_path($user_id, $ext_id))) {
+        if (is_file(get_avatar_path($user_id, $ext_id))) {
             $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }
@@ -1991,30 +2242,25 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     return $user_avatar;
 }
 
-function gender_image($gender): string
+/**
+ * Returns gender image
+ *
+ * @param int $gender
+ * @return string|null
+ */
+function genderImage(int $gender): ?string
 {
     global $bb_cfg, $lang, $images;
 
-    $gender = (int)$gender;
-    $user_gender = '';
-
     if (!$bb_cfg['gender']) {
-        return $user_gender;
+        return false;
     }
 
-    switch ($gender) {
-        case MALE:
-            $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
-            break;
-        case FEMALE:
-            $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
-            break;
-        default:
-            $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
-            break;
-    }
-
-    return $user_gender;
+    return match ($gender) {
+        MALE => '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />',
+        FEMALE => '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />',
+        default => '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />',
+    };
 }
 
 function is_gold($type): string
@@ -2063,7 +2309,7 @@ function hash_search($hash)
     $hash = htmlCHR(trim($hash));
     $info_hash_where = null;
 
-    if (!isset($hash)) {
+    if (!isset($hash) || !ctype_xdigit($hash)) {
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
 
@@ -2160,4 +2406,27 @@ function user_birthday_icon($user_birthday, $user_id): string
         ? bb_date(strtotime($user_birthday), 'md', false) : false;
 
     return ($bb_cfg['birthday_enabled'] && $current_date == $user_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="' . $lang['HAPPY_BIRTHDAY'] . '" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '';
+}
+
+/**
+ * Returns information about user ban
+ *
+ * @param int|null $userId
+ * @return array|null
+ */
+function getBanInfo(int $userId = null): ?array
+{
+    global $datastore;
+
+    // Get bans info from datastore
+    if (!$bans = $datastore->get('ban_list')) {
+        $datastore->update('ban_list');
+        $bans = $datastore->get('ban_list');
+    }
+
+    if (!isset($userId)) {
+        return $bans;
+    }
+
+    return $bans[$userId] ?? [];
 }

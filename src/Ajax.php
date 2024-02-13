@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -41,6 +41,7 @@ class Ajax
         'manage_group' => ['user'],
         'callseed' => ['user'],
 
+        'thx' => ['guest'],
         'view_post' => ['guest'],
         'view_torrent' => ['guest'],
         'user_register' => ['guest'],
@@ -87,11 +88,11 @@ class Ajax
         }
 
         // Exit if board is disabled via ON/OFF trigger or by admin
-        if ($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) {
+        if ($bb_cfg['board_disable'] || is_file(BB_DISABLED)) {
             if (!isset($action_params[1]) || $action_params[1] !== true) {
                 if ($bb_cfg['board_disable']) {
                     $this->ajax_die($lang['BOARD_DISABLE']);
-                } elseif (file_exists(BB_DISABLED)) {
+                } elseif (is_file(BB_DISABLED)) {
                     $this->ajax_die($lang['BOARD_DISABLE_CRON']);
                 }
             }
@@ -145,7 +146,7 @@ class Ajax
     public function ajax_die(string $error_msg, int $error_code = E_AJAX_GENERAL_ERROR): void
     {
         $this->response['error_code'] = $error_code;
-        $this->response['error_msg'] = strip_tags($error_msg);
+        $this->response['error_msg'] = strip_tags(br2nl($error_msg));
 
         // Get caller info
         if (!empty($_COOKIE['explain'])) {
@@ -258,7 +259,7 @@ class Ajax
         }
 
         $this->response['prompt_confirm'] = 1;
-        $this->response['confirm_msg'] = strip_tags($confirm_msg);
+        $this->response['confirm_msg'] = strip_tags(br2nl($confirm_msg));
         $this->send();
     }
 
@@ -514,5 +515,16 @@ class Ajax
     public function callseed()
     {
         require AJAX_DIR . '/callseed.php';
+    }
+
+    /**
+     * Get / Set votes
+     *
+     * @return void
+     */
+
+    public function thx()
+    {
+        require AJAX_DIR . '/thanks.php';
     }
 }

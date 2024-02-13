@@ -194,39 +194,39 @@ function updateButton()
 			<div class="spacer_4"></div>
 
 			<table class="forumline med">
-				<col class="row1" width="30%" align="right">
-				<col class="row2" width="20%" align="center">
-				<col class="row1" width="30%" align="right">
-				<col class="row2" width="20%" align="center">
+				<col class="row1 tRight" width="30%">
+				<col class="row2 tCenter" width="20%">
+				<col class="row1 tRight" width="30%">
+				<col class="row2 tCenter" width="20%">
 				<tr>
 					<th colspan="4" class="pad_4">{L_PROCESSING_TIME_DETAILS}</th>
 				</tr>
 				<tr>
-					<td>{L_TIME_LAST_POSTS_ADMIN}&nbsp;</td>
+					<td>{L_TIME_LAST_POSTS_ADMIN}</td>
 					<td>{LAST_CYCLE_TIME}</td>
-					<td>{L_TIME_FROM_THE_BEGINNING}&nbsp;</td>
+					<td>{L_TIME_FROM_THE_BEGINNING}</td>
 					<td>{SESSION_TIME}</td>
 				</tr>
 				<tr>
-					<td>{L_TIME_AVERAGE}&nbsp;</td>
+					<td>{L_TIME_AVERAGE}</td>
 					<td>{SESSION_AVERAGE_CYCLE_TIME}</td>
-					<td>{L_TIME_ESTIMATED}&nbsp;</td>
+					<td>{L_TIME_ESTIMATED}</td>
 					<td>{SESSION_ESTIMATED_TIME}</td>
 				</tr>
 				<tr>
-					<td>{L_SIZE_SEARCH_TABLES}&nbsp;</td>
+					<td>{L_SIZE_SEARCH_TABLES}</td>
 					<td>{SEARCH_TABLES_SIZE}</td>
-					<td>Data size&nbsp;</td>
+					<td>Data size</td>
 					<td>{SEARCH_DATA_SIZE}</td>
 				</tr>
 				<tr>
-					<td>{L_SIZE_ESTIMATED}&nbsp;</td>
+					<td>{L_SIZE_ESTIMATED}</td>
 					<td>{FINAL_SEARCH_TABLES_SIZE}</td>
-					<td>Index size&nbsp;</td>
+					<td>Index size</td>
 					<td>{SEARCH_INDEX_SIZE}</td>
 				</tr>
 				<tr>
-					<td colspan="4" class="row3" align="center">
+					<td colspan="4" class="row3 tCenter">
 					{L_STARTING_POST_ID}: {START_POST},
 					{L_POSTS_LAST_CYCLE}: {POST_LIMIT},
 					{L_TIME_LIMIT}: {TIME_LIMIT}

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'trang';
 $lang['GOTO_PAGE'] = 'Đi tới trang';
 $lang['GOTO_SHORT'] = 'Trang';
 $lang['JOINED'] = 'Tham gia';
-$lang['LONGEVITY'] = 'Tuổi thọ';
+$lang['LONGEVITY'] = 'Đăng ký';
 $lang['IP_ADDRESS'] = 'Địa chỉ IP';
 $lang['POSTED_AFTER'] = 'sau';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'Hầu hết các người sử dụng bao giờ 
 $lang['ONLINE_ADMIN'] = 'Quản trị';
 $lang['ONLINE_MOD'] = 'Điều hành';
 $lang['ONLINE_GROUP_MEMBER'] = 'Thành viên của nhóm';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Thời gian hiện tại là: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar bảng điều khiển';
 
 $lang['WEBSITE'] = 'Trang web';
 $lang['LOCATION'] = 'Vị trí';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Liên hệ';
 $lang['EMAIL_ADDRESS'] = 'Địa chỉ E-mail';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Gửi tin nhắn';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Tìm người sử dụng chủ đề'; // Find a
 $lang['NO_USER_ID_SPECIFIED'] = 'Xin lỗi, nhưng đó không tồn tại.';
 $lang['WRONG_PROFILE'] = 'Bạn không thể thay đổi một hồ sơ đó không phải của riêng bạn.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Chỉ có một loại avatar có thể được quy định';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Các tập tin tại đường dẫn bạn đánh chứa không có dữ liệu';
 $lang['NO_CONNECTION_URL'] = 'Một kết nối không thể đến địa chỉ em đưa';
 $lang['INCOMPLETE_URL'] = 'Các địa chỉ bạn bước vào được không đầy đủ';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Trang web';
 $lang['ASC'] = 'Tăng dần';
 $lang['DESC'] = 'Giảm dần';
 $lang['ORDER'] = 'Trật tự';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Nhóm Người Dùng';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Thêm';
 $lang['BT_REG_ON_TRACKER'] = 'Đăng ký trên theo dõi';
 $lang['BT_REG_FAIL'] = 'Không thể đăng ký torrent trên theo dõi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Một torrent với cùng một info_hash đã <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Bỏ từ theo dõi';
 $lang['BT_UNREGISTERED'] = 'Torrent không đăng ký';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Tình trạng';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Chọn tình trạng';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Bạn đã không chọn tình trạng.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Tất cả trạng thái';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'không phải là kiểm tra',
     TOR_CLOSED => 'đóng cửa',
     TOR_APPROVED => 'kiểm tra',
     TOR_NEED_EDIT => 'không chính thức cho đến khi',
     TOR_NO_DESC => 'không định trước',
-    TOR_DUP => 'lặp lại',
-    TOR_CLOSED_CPHOLD => 'đóng cửa ngay',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'hấp thụ',
     TOR_DOUBTFUL => 'nghi ngờ',
-    TOR_CHECKING => 'xác nhận',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'tạm',
     TOR_PREMOD => 'trước chừng mực',
-    TOR_REPLENISH => 'bổ sung',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Tình trạng như vậy, không tồn tại!';
 $lang['TORRENT_FAILED'] = 'Giấy phép được không tìm thấy!';
 $lang['TOR_STATUS_DUB'] = 'Phân phối có cùng một tình trạng';
-$lang['TOR_DONT_CHANGE'] = 'Thay đổi của tình trạng không thể được!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Phân phối có tình trạng:';
 $lang['TOR_STATUS_CHANGED'] = 'Tình trạng thay đổi: ';
 $lang['TOR_BACK'] = ' trở lại';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent đã đăng ký';
 $lang['NOT_TORRENT'] = 'Tập tin này là không torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Bạn chỉ có thể đăng ký một torrent trong một bài';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Bạn chỉ có thể đăng ký một torrent trong một chủ đề';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Xem torrent-hồ sơ :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Hoạt động torrent';
 
 $lang['TD_TRAF'] = 'Ngày hôm nay';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You không có tiền thưởng
 $lang['BONUS_RETURN'] = 'Trở về hạt giống thưởng đổi';
 
 $lang['TRACKER'] = 'Theo dõi';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Mở chủ đề';
 $lang['OPEN_IN_SAME_WINDOW'] = 'mở trong cùng một cửa sổ';
 $lang['SHOW_TIME_TOPICS'] = 'show thời gian của sự sáng tạo chủ đề';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Bánh phải được kích hoạt!';
 $lang['SESSION_EXPIRED'] = 'Phiên hết hạn';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Show chỉ có một tên bắt đầu với';
-$lang['OTHERS'] = 'những người khác';
-$lang['ALL'] = 'tất cả';
-
 $lang['POST_LINK'] = 'Bài liên kết';
 $lang['GOTO_QUOTED_POST'] = 'Đi đến các trích dẫn bài';
 $lang['LAST_VISITED'] = 'Cuối Cùng Đã Đến Thăm';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Không bao giờ';
 //mpd
 $lang['DELETE_POSTS'] = 'Xóa lựa chọn bài';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Các lựa chọn bài nào đã được loại bỏ thành công';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Thông báo';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Viết bài thời gian';
 $lang['TOPIC_SPLIT_NEW'] = 'Chủ đề mới';
 $lang['TOPIC_SPLIT_OLD'] = 'Già chủ đề';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Thêm bot-tin nhắn về di chuyển';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Thêm bot-tin nhắn về chia để <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Thêm bot-tin nhắn về chia để <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Văn bản đậm: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Nghiêng văn bản: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Nhấn mạnh chữ: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Gạch văn bản: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Báo văn bản: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Để hủy bỏ mệnh lệnh từ danh sách, bấm 
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Nhìn chủ đề';
-$lang['NO_WATCHED_TOPICS'] = 'Bạn không được xem bất kỳ chủ đề';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Trở lại trang';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Nhấn vào %sHere%s để trở về Đàn Q
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Điều Khiển';
-$lang['BAN_EXPLAIN'] = 'Ở đây anh có thể kiểm soát cấm sử dụng. Bạn có thể đạt được điều này bằng cách cấm hoặc cả hai của một người sử dụng cụ thể, hay một cá nhân hoặc phạm vi địa chỉ IP. Những phương pháp ngăn chặn một người dùng từ thậm chí đạt các chỉ số trang của bạn đồng quản trị. Để ngăn chặn một người dùng từ đăng ký dưới một người bạn có thể cũng chỉ định một cấm địa chỉ email. Xin lưu ý rằng cấm địa chỉ email mình sẽ không ngăn chặn điều đó dùng từ có thể nhập vào hoặc gửi tới tàu của bạn. Bạn phải sử dụng một trong những lần đầu tiên, hai phương pháp để đạt được điều này.';
-$lang['BAN_EXPLAIN_WARN'] = 'Xin lưu ý rằng bước vào một loạt các địa chỉ IP kết quả trong tất cả các địa chỉ giữa bắt đầu và kết thúc được thêm vào danh sách hạn chế. Chúng tôi sẽ cố gắng để giảm thiểu số các địa chỉ thêm vào cơ sở dữ liệu bằng cách giới thiệu các kí tự động nơi thích hợp. Nếu bạn thực sự phải nhập một loạt, cố gắng để giữ cho nó nhỏ hoặc tốt hơn nước địa chỉ cụ thể.';
-
-$lang['SELECT_IP'] = 'Chọn một địa chỉ IP';
-$lang['SELECT_EMAIL'] = 'Chọn một địa chỉ Email';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban một hoặc nhiều người sử dụng cụ thể';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Bạn có thể ban nhiều người dùng trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
-$lang['BAN_IP'] = 'Cấm một hay hơn, các địa chỉ IP';
-$lang['IP_HOSTNAME'] = 'Các địa chỉ IP';
-$lang['BAN_IP_EXPLAIN'] = 'Để xác định một số khác địa chỉ IP tách chúng ra với dấu phẩy.';
-
-$lang['BAN_EMAIL'] = 'Cấm một địa chỉ email';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Để xác định nhiều hơn một địa chỉ email, tách chúng ra với dấu phẩy. Để xác định một ký tên, sử dụng * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Liên hiệp quốc cấm một người sử dụng cụ thể hơn';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Bạn có thể bỏ cấm nhiều người dùng trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
-$lang['UNBAN_IP'] = 'Liên hiệp quốc cấm một hay hơn, các địa chỉ IP';
-$lang['UNBAN_IP_EXPLAIN'] = 'Bạn có thể bỏ cấm nhiều địa chỉ IP trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
-$lang['UNBAN_EMAIL'] = 'Liên hiệp quốc cấm một địa chỉ email';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Bạn có thể bỏ cấm nhiều địa chỉ email trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
-
 $lang['NO_BANNED_USERS'] = 'Không cấm người';
-$lang['NO_BANNED_IP'] = 'Không cấm địa chỉ IP';
-$lang['NO_BANNED_EMAIL'] = 'Không cấm địa chỉ email';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Các danh sách hạn chế đã được cập nhật thành công';
 $lang['CLICK_RETURN_BANADMIN'] = 'Nhấn vào %sHere%s để trở về lệnh Cấm kiểm Soát';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Diễn Đàn Quản Trị';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Từ bảng điều khiển này ông có thể thêm vào, rõ ràng, chỉnh sửa lại trật tự và tái-đồng loại và forums';
 $lang['EDIT_FORUM'] = 'Chỉnh sửa diễn đàn';
 $lang['CREATE_FORUM'] = 'Tạo diễn đàn new';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Tạo thể loại mới';
 $lang['REMOVE'] = 'Bỏ';
 $lang['UPDATE_ORDER'] = 'Để Cập Nhật,';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Nếu điều này được xác định kí
 $lang['ASSIGNED_GROUP'] = 'Nhóm Giao';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Tạo Hình Thu Nhỏ';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Luôn tạo ra một hình thu Nhỏ. Tính năng này sẽ thay gần như tất cả các thiết Lập trong vòng này Loại Đặc biệt, ngoại trừ của các hình Ảnh Tối đa Chiều. Với tính Năng này một thu Nhỏ sẽ được hiển thị trong bài, các Người có thể nhấn vào nó để mở thực Ảnh.<br />Please lưu Ý rằng đây năng yêu cầu Imagick để được cài đặt, nếu nó không được cài đặt, hay nếu Chế độ két An toàn được kích hoạt các APO-Mở các file sẽ được sử dụng. Nếu những hình Ảnh Loại là không được hỗ trợ bằng lệnh tính Năng này sẽ không được sử dụng.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Tối Thiểu Thu Nhỏ Kích Cỡ';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Nếu một hình Ảnh nhỏ hơn này được xác định Kích cỡ, không thu Nhỏ sẽ được tạo ra, bởi vì nó là đủ nhỏ.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Chương Trình (Con Đường Hoàn Thành)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Nhập Đường dẫn đến sự chuyển đổi chương trình của imagick, thường /usr/là:/chuyển đổi (trên cửa sổ: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Tìm Kiếm Imagick';
-
-$lang['USE_GD2'] = 'Hãy sử dụng GD2 mở Rộng';
-$lang['USE_GD2_EXPLAIN'] = 'Bộ sưu tập thể được biên dịch với GD1 hoặc GD2 mở Rộng cho ảnh thao tác. Một cách chính xác để tạo ra Hình thu nhỏ mà không có máy đính Kèm Mod sử dụng hai phương pháp khác nhau, dựa trên sự lựa chọn của bạn ở đây. Nếu hình thu nhỏ của bạn đang ở trong một chất lượng xấu hoặc hơi say lên, cố gắng để thay đổi này.';
-$lang['ATTACHMENT_VERSION'] = 'Đính Kèm Mod Phiên Bản %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Quản Lý Cấm Mở Rộng';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Bạn đã ký một số sai giá trị. Xin vui lòng 
 $lang['PROCESSING'] = 'Chế biến...';
 $lang['FINISHED'] = 'Xong';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Chủ đề đã được chuyển từ diễn đàn [b]%s[/b] để diễn đàn [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Chủ đề đã được chia. Chủ đề mới - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Chủ đề đã được chia từ [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Vui lòng điền vào mẫu phát hành';
 $lang['NEW_RELEASE'] = 'Mới phát hành';
 $lang['NEXT'] = 'Tiếp tục';
 $lang['OTHER'] = 'Khác';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Anh phải điền vào lĩnh vực này <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Bạn phải chọn <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Tìm kiếm người sử dụng với 
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Tìm kiếm người sử dụng với một vị Trí phù hợp với %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Tìm kiếm người sử dụng với Lợi ích của họ trường hợp %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Tìm kiếm người sử dụng với họ Nghề nghiệp trường hợp %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Tìm kiếm những ai đã truy cập trong các tác %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Tìm kiếm những ai có đến thăm sau khi cuối cùng %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Tìm kiếm những ai có thiết lập %s như ngôn ngữ của họ';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Tìm kiếm những ai có thiết lập GIỜ %s như là của họ múi giờ';
 $lang['SEARCH_FOR_STYLE'] = 'Tìm kiếm những ai có thiết lập %s như là phong cách của họ';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Các diễn đàn\' bản đồ';
 $lang['ATOM_FEED'] = 'Thức ăn';
 $lang['ATOM_ERROR'] = 'Lỗi tạo ra thức ăn';
 $lang['ATOM_SUBSCRIBE'] = 'Theo dõi các nguồn';
-$lang['ATOM_NO_MODE'] = 'Không chỉ định một chế độ ăn';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Diễn đàn này không có thức ăn (không liên tục chủ đề)';
 $lang['ATOM_NO_USER'] = 'Người này không có thức ăn (không liên tục chủ đề)';
 $lang['ATOM_UPDATED'] = 'Đã cập nhật';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'Trên trang này, anh có thể xác định danh văn
 $lang['TR_STATS'] = [
     0 => 'người dùng không hoạt động trong 30 ngày',
     1 => 'người dùng không hoạt động trong 90 ngày',
-    2 => 'vừa kích thước phân phối trên theo dõi (nhiều người mà)',
+    2 => 'medium size distributions on the tracker',
     3 => 'tổng cộng bao nhiêu tay trên theo dõi',
     4 => 'bao nhiêu sống tay (có ít nhất là 1 dẫn)',
     5 => 'bao nhiêu bàn tay, nơi mà gieo hạt hơn 5 giống',

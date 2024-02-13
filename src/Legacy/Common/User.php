@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -108,7 +108,7 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-        global $bb_cfg;
+        global $bb_cfg, $lang;
 
         $update_sessions_table = false;
         $this->cfg = array_merge($this->cfg, $cfg);
@@ -188,7 +188,7 @@ class User
 
             if ($userdata = get_userdata((int)$user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
-                    if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
+                    if (is_string($this->sessiondata['uk']) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
                     }
                 }
@@ -217,38 +217,37 @@ class User
 
         $this->init_userprefs();
 
+        // Initial ban check
+        if ($banInfo = getBanInfo((int)$this->id)) {
+            $this->session_end();
+            if (!empty($banInfo['ban_reason'])) {
+                bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $lang['REASON'] . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
+            } else {
+                bb_die($lang['YOU_BEEN_BANNED']);
+            }
+        }
+
         return $this->data;
     }
 
     /**
      * Create new session for the given user
      *
-     * @param $userdata
+     * @param array $userdata
      * @param bool $auto_created
      *
      * @return array
      */
-    public function session_create($userdata, bool $auto_created = false): array
+    public function session_create(array $userdata, bool $auto_created = false): array
     {
-        global $bb_cfg, $lang;
+        global $bb_cfg;
 
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
         $login = ((int)$this->data['user_id'] !== GUEST_UID);
-        $is_user = ((int)$this->data['user_level'] !== ADMIN);
         $user_id = (int)$this->data['user_id'];
         $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
-
-        // Initial ban check against user_id or IP address
-        if ($is_user) {
-            $where_sql = 'ban_ip = ' . USER_IP;
-            $where_sql .= $login ? " OR ban_userid = $user_id" : '';
-
-            if (DB()->fetch_row("SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
-                bb_simple_die($lang['YOU_BEEN_BANNED']);
-            }
-        }
 
         // Generate passkey
         if (!\TorrentPier\Legacy\Torrent::getPasskey($this->data['user_id'])) {
@@ -301,8 +300,8 @@ class User
 					LIMIT 1
 				");
 
-                bb_setcookie(COOKIE_TOPIC, '');
-                bb_setcookie(COOKIE_FORUM, '');
+                bb_setcookie(COOKIE_TOPIC, null);
+                bb_setcookie(COOKIE_FORUM, null);
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
@@ -445,10 +444,10 @@ class User
      */
     public function get_sessiondata()
     {
-        $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : [];
+        $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? unserialize($_COOKIE[COOKIE_DATA], ['allowed_classes' => false]) : [];
 
         // autologin_id
-        if (!empty($sd_resv['uk']) && verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH)) {
+        if (!empty($sd_resv['uk']) && is_string($sd_resv['uk'])) {
             $this->sessiondata['uk'] = $sd_resv['uk'];
         }
         // user_id
@@ -456,7 +455,7 @@ class User
             $this->sessiondata['uid'] = (int)$sd_resv['uid'];
         }
         // sid
-        if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
+        if (!empty($sd_resv['sid']) && is_string($sd_resv['sid'])) {
             $this->sessiondata['sid'] = $sd_resv['sid'];
         }
     }
@@ -468,8 +467,6 @@ class User
      */
     public function set_session_cookies($user_id)
     {
-        global $bb_cfg;
-
         if ($user_id == GUEST_UID) {
             $delete_cookies = [
                 COOKIE_DATA,
@@ -481,7 +478,7 @@ class User
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
-                    bb_setcookie($cookie, '', COOKIE_EXPIRED);
+                    bb_setcookie($cookie, null);
                 }
             }
         } else {
@@ -489,7 +486,7 @@ class User
             $c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
 
             if ($c_sdata_curr !== $c_sdata_resv) {
-                bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
+                bb_setcookie(COOKIE_DATA, $c_sdata_curr, httponly: true);
             }
         }
     }
@@ -503,7 +500,7 @@ class User
      *
      * @return bool|string
      */
-    public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
+    public function verify_autologin_id($userdata, bool $expire_check = false, bool $create_new = true): bool|string
     {
         global $bb_cfg;
 
@@ -521,20 +518,20 @@ class User
             }
         }
 
-        return verify_id($autologin_id, LOGIN_KEY_LENGTH);
+        return is_string($autologin_id);
     }
 
     /**
      * Create autologin_id
      *
-     * @param $userdata
+     * @param array $userdata
      * @param bool $create_new
      *
-     * @return bool|string
+     * @return string
      */
-    public function create_autologin_id($userdata, $create_new = true)
+    public function create_autologin_id(array $userdata, bool $create_new = true): string
     {
-        $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
+        $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
         DB()->query("
 			UPDATE " . BB_USERS . " SET
@@ -571,6 +568,13 @@ class User
         if (\defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
+
+        if (IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) { // Apply browser language
+            $http_accept_language = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+            if (isset($bb_cfg['lang'][$http_accept_language])) {
+                $bb_cfg['default_lang'] = $http_accept_language;
+            }
+        }
 
         \define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
         \define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
@@ -643,9 +647,9 @@ class User
             ]);
 
             // Delete cookies
-            bb_setcookie(COOKIE_TOPIC, '');
-            bb_setcookie(COOKIE_FORUM, '');
-            bb_setcookie(COOKIE_MARK, '');
+            bb_setcookie(COOKIE_TOPIC, null);
+            bb_setcookie(COOKIE_FORUM, null);
+            bb_setcookie(COOKIE_MARK, null);
         }
     }
 
@@ -730,9 +734,9 @@ class User
      * @param $auth_type
      * @param string $return_as
      *
-     * @return array|bool|string
+     * @return array|string
      */
-    public function get_excluded_forums($auth_type, $return_as = 'csv')
+    public function get_excluded_forums($auth_type, string $return_as = 'csv')
     {
         $excluded = [];
 
@@ -757,14 +761,13 @@ class User
             }
         }
 
-        switch ($return_as) {
-            case   'csv':
-                return implode(',', $excluded);
-            case 'array':
-                return $excluded;
-            case  'flip':
-                return array_flip(explode(',', $excluded));
-        }
+        return match ($return_as) {
+            'csv' => implode(',', $excluded),
+            'flip_csv' => implode(',', array_flip($excluded)),
+            'array' => $excluded,
+            'flip' => array_flip($excluded),
+            default => [],
+        };
     }
 
     /**
@@ -785,13 +788,6 @@ class User
             }
 
             return true;
-        } else {
-            if (md5(md5($enteredPassword)) === $userdata['user_password']) {
-                // Update old md5 password
-                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
-
-                return true;
-            }
         }
 
         return false;
@@ -801,9 +797,9 @@ class User
      * Create password_hash
      *
      * @param string $enteredPassword
-     * @return false|string|null
+     * @return string
      */
-    public function password_hash(string $enteredPassword)
+    public function password_hash(string $enteredPassword): string
     {
         global $bb_cfg;
 

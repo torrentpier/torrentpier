@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -64,12 +64,11 @@ if (!isset($_REQUEST['dosearch'])) {
     }
 
     $forums = [];
+    $last_cat_id = -1;
+    $forums_list = '';
 
     if (DB()->num_rows($result) != 0) {
         $template->assign_block_vars('forums_exist', []);
-
-        $last_cat_id = -1;
-        $forums_list = '';
 
         while ($row = DB()->sql_fetchrow($result)) {
             if ($row['cat_id'] != $last_cat_id) {
@@ -85,7 +84,7 @@ if (!isset($_REQUEST['dosearch'])) {
     $lastvisited_list = '';
 
     foreach ($lastvisited as $days) {
-        $lastvisited_list .= '<option value="' . $days . '">' . $days . ' ' . (($days > 1) ? $lang['DAYS'] : $lang['DAY']) . '</option>';
+        $lastvisited_list .= '<option value="' . $days . '">' . delta_time((TIMENOW - 86400 * $days), TIMENOW, 'days') . '</option>';
     }
 
     $template->assign_vars([
@@ -255,7 +254,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $username = str_replace("\*", '%', trim(strip_tags(strtolower($username))));
 
-            if (false !== strpos($username, '%')) {
+            if (str_contains($username, '%')) {
                 $op = 'LIKE';
             } else {
                 $op = '=';
@@ -276,7 +275,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $email = str_replace("\*", '%', trim(strip_tags(strtolower($email))));
 
-            if (false !== strpos($email, '%')) {
+            if (str_contains($email, '%')) {
                 $op = 'LIKE';
             } else {
                 $op = '=';
@@ -524,7 +523,7 @@ if (!isset($_REQUEST['dosearch'])) {
                     break;
                 case 'equals':
                     // looking for a -
-                    if (false !== strpos($postcount_value, '-')) {
+                    if (str_contains($postcount_value, '-')) {
                         $range = preg_split('/[-\s]+/', $postcount_value);
 
                         $range_begin = (int)$range[0];
@@ -571,7 +570,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $userfield_value = str_replace("\*", '%', trim(strip_tags(strtolower($userfield_value))));
 
-            if (false !== strpos($userfield_value, '%')) {
+            if (str_contains($userfield_value, '%')) {
                 $op = 'LIKE';
             } else {
                 $op = '=';
@@ -635,7 +634,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             switch ($lastvisited_type) {
                 case 'in':
-                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_INTHELAST'], $lastvisited_days, (($lastvisited_days > 1) ? $lang['DAYS'] : $lang['DAY']));
+                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_INTHELAST'], delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
 									FROM ' . BB_USERS . "
@@ -646,7 +645,7 @@ if (!isset($_REQUEST['dosearch'])) {
 											AND u.user_id <> " . GUEST_UID;
                     break;
                 case 'after':
-                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'], $lastvisited_days, (($lastvisited_days > 1) ? $lang['DAYS'] : $lang['DAY']));
+                    $text = sprintf($lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'], delta_time((TIMENOW - 86400 * $lastvisited_days), TIMENOW, 'days'));
 
                     $total_sql .= 'SELECT COUNT(user_id) AS total
 									FROM ' . BB_USERS . "
@@ -923,7 +922,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
         $template->assign_block_vars('userrow', [
             'ROW_CLASS' => $row_class,
-            'USER' => profile_url($rowset[$i]),
+            'USER' => profile_url($rowset[$i], true),
             'EMAIL' => $rowset[$i]['user_email'],
             'JOINDATE' => bb_date($rowset[$i]['user_regdate']),
             'LASTVISIT' => $rowset[$i]['user_lastvisit'] ? bb_date($rowset[$i]['user_lastvisit']) : $lang['NEVER'],

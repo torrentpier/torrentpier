@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -388,17 +388,12 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
 function bbcode2html($text)
 {
-    global $bbcode;
+    global $bbcode, $wordCensor;
 
     if (!isset($bbcode)) {
         $bbcode = new TorrentPier\Legacy\BBCode();
     }
-    $orig_word = [];
-    $replacement_word = [];
-    obtain_word_list($orig_word, $replacement_word);
-    if (count($orig_word)) {
-        $text = preg_replace($orig_word, $replacement_word, $text);
-    }
+    $text = $wordCensor->censorString($text);
     return $bbcode->bbcode2html($text);
 }
 

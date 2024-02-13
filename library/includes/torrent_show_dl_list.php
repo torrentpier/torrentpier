@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -23,6 +23,7 @@ $template->assign_vars(['DL_BUTTONS' => false]);
 
 $count_mode = ($bb_cfg['bt_dl_list_only_count'] && !(@$_GET['dl'] === 'names'));
 
+$have_dl_buttons_enabled = ($bb_cfg['bt_show_dl_but_will'] || $bb_cfg['bt_show_dl_but_down'] || $bb_cfg['bt_show_dl_but_compl'] || $bb_cfg['bt_show_dl_but_cancel']);
 $dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !($bb_cfg['bt_dl_list_only_1st_page'] && $start));
 $show_dl_list = ($dl_topic && ($bb_cfg['bt_show_dl_list'] || ($bb_cfg['allow_dl_list_names_mode'] && @$_GET['dl'] === 'names')));
 $show_dl_buttons = (!IS_GUEST && $dl_topic && $bb_cfg['bt_show_dl_list_buttons']);
@@ -98,7 +99,7 @@ if ($show_dl_list) {
                 ]);
             }
         }
-    } else {
+    } elseif ($bb_cfg['bt_show_dl_list_buttons'] && $have_dl_buttons_enabled) {
         $template->assign_block_vars('dl_list_none', []);
     }
 }

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = '页';
 $lang['GOTO_PAGE'] = '转到页面';
 $lang['GOTO_SHORT'] = '页面';
 $lang['JOINED'] = '加入时间';
-$lang['LONGEVITY'] = '寿命';
+$lang['LONGEVITY'] = '注册';
 $lang['IP_ADDRESS'] = 'IP地址';
 $lang['POSTED_AFTER'] = '之后';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = '最多同时在线用户数：<b>%s</b>，在%s'
 $lang['ONLINE_ADMIN'] = '管理员';
 $lang['ONLINE_MOD'] = '版主';
 $lang['ONLINE_GROUP_MEMBER'] = '组成员';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = '当前时间是︰ <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = '阿凡达控制面板';
 
 $lang['WEBSITE'] = '网站';
 $lang['LOCATION'] = '位置';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = '接触';
 $lang['EMAIL_ADDRESS'] = 'E-mail地址';
 $lang['SEND_PRIVATE_MESSAGE'] = '送私人消息';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = '找到用户的主题'; // Find all topics by use
 $lang['NO_USER_ID_SPECIFIED'] = '对不起，但是，用户不存在。';
 $lang['WRONG_PROFILE'] = '你不能修改的概要文件是不是你自己的。';
 
-$lang['ONLY_ONE_AVATAR'] = '只有一种类型的化身可以被指定';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = '该文件在网址给了含有数据';
 $lang['NO_CONNECTION_URL'] = '一个连接不可能做到的网址给了';
 $lang['INCOMPLETE_URL'] = '该网址输入不完整';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = '网站';
 $lang['ASC'] = '升';
 $lang['DESC'] = '降';
 $lang['ORDER'] = '了';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = '用户群体';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = '加入';
 $lang['BT_REG_ON_TRACKER'] = '登记册上的跟踪器';
 $lang['BT_REG_FAIL'] = '不能登记的洪流上的跟踪器';
 $lang['BT_REG_FAIL_SAME_HASH'] = '另一个种子与同info_hash已经<a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = '删除从跟踪器';
 $lang['BT_UNREGISTERED'] = '未注册的洪流';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = '状态';
 $lang['TOR_STATUS_SELECT_ACTION'] = '选择状况';
 $lang['TOR_STATUS_NOT_SELECT'] = '你没有选择地位。';
 $lang['TOR_STATUS_SELECT_ALL'] = '所有的状态';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => '不检查',
     TOR_CLOSED => '关闭',
     TOR_APPROVED => '检查',
     TOR_NEED_EDIT => '没有正式的直到',
     TOR_NO_DESC => '不是正式的',
-    TOR_DUP => '重复',
-    TOR_CLOSED_CPHOLD => '闭右',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => '吸收',
     TOR_DOUBTFUL => '值得怀疑的',
-    TOR_CHECKING => '验证',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => '临时',
     TOR_PREMOD => '预先审核',
-    TOR_REPLENISH => '补充',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = '这种状况不存在！';
 $lang['TORRENT_FAILED'] = '分布没有被发现的！';
 $lang['TOR_STATUS_DUB'] = '分配具有相同的状态';
-$lang['TOR_DONT_CHANGE'] = '改变的状态是不可能的！';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = '分布的状态：';
 $lang['TOR_STATUS_CHANGED'] = '状况改变： ';
 $lang['TOR_BACK'] = ' 回';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent已经注册';
 $lang['NOT_TORRENT'] = '这个文件不是洪流';
 $lang['ONLY_1_TOR_PER_POST'] = '你可以注册只有一个种子中的一个职位';
 $lang['ONLY_1_TOR_PER_TOPIC'] = '你可以注册只有一个种子中的一个主题';
-$lang['VIEWING_USER_BT_PROFILE'] = '看torrent profile::%s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = '活动的种子';
 
 $lang['TD_TRAF'] = '今天';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You没有奖金。 更多的种
 $lang['BONUS_RETURN'] = '回到种奖励交换';
 
 $lang['TRACKER'] = '跟踪器';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = '打开话题';
 $lang['OPEN_IN_SAME_WINDOW'] = '在同一窗口打开';
 $lang['SHOW_TIME_TOPICS'] = '时间显示的创作主题';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Cookies must be enabled!';
 $lang['SESSION_EXPIRED'] = '会议期';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = '只显示用户名开始';
-$lang['OTHERS'] = '其他人';
-$lang['ALL'] = '所有';
-
 $lang['POST_LINK'] = '后链接';
 $lang['GOTO_QUOTED_POST'] = '去所报的员额';
 $lang['LAST_VISITED'] = '最后一次访问';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = '从来没有';
 //mpd
 $lang['DELETE_POSTS'] = '删除选定的职位';
 $lang['DELETE_POSTS_SUCCESFULLY'] = '选定的员额已经成功地除去';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = '公告';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = '更新后的时间';
 $lang['TOPIC_SPLIT_NEW'] = '新的话题';
 $lang['TOPIC_SPLIT_OLD'] = '老话题';
 $lang['BOT_LEAVE_MSG_MOVED'] = '增加机器人-消息，关于移动';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = '增加机器人-消息有关的分裂<b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = '增加机器人-消息有关的分裂<b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = '粗体文字：[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = '斜体文字：[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下划线的案文：[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '删除线文本：[s]text[/s](Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '引文：[quote]text[/quote](Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = '删除了从清单中点击图标名字左边的任何
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = '看着主题';
-$lang['NO_WATCHED_TOPICS'] = '你是不是看的任何主题';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = '回到主页';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = '点击%sHere%s回到论坛的权限';
 
 // Banning
 $lang['BAN_CONTROL'] = '禁止控制';
-$lang['BAN_EXPLAIN'] = '在这里你可以控制的，禁止的用户。 你可以实现这一禁止任一或两个特定用户或个人或者IP地址范围。 这些方法防止用户甚至达到的指标网页板。 防止用户注册在一个不同的用户名，你也可以指定一个禁止电子邮件地址。 请注意，禁止一个电子邮件地址本身不会阻止用户能够登录或后来你的董事会。 你应该使用的第一个两种方法来实现这一点。';
-$lang['BAN_EXPLAIN_WARN'] = '请注意，进入一个IP地址范围的结果在所有的地址之间开始和结束正在加入的banlist的。 尝试将尽量减少地址的数目添加到数据库，通过引入符自动适当的。 如果你真的必须进一范围内，尽量保持小或者更好，但国家的具体地址。';
-
-$lang['SELECT_IP'] = '选择一个IP地址';
-$lang['SELECT_EMAIL'] = '选择一个电子邮件地址';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = '禁止一个或多个特定用户';
 $lang['BAN_USERNAME_EXPLAIN'] = '你可以禁止多个用户在一个去使用的适当组合键鼠你的电脑和浏览器';
-
-$lang['BAN_IP'] = '禁止一个或多个IP地址';
-$lang['IP_HOSTNAME'] = 'IP地址';
-$lang['BAN_IP_EXPLAIN'] = '指定若干不同的IP地址使用逗号隔开。';
-
-$lang['BAN_EMAIL'] = '禁止一个或多个电子邮件地址';
-$lang['BAN_EMAIL_EXPLAIN'] = '要指定多于一个电子邮件地址、使用逗号隔开。 指定一个通配符的用户名，使用的**@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = '联合国禁止一个更具体的用户';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = '你可以取消禁止多个用户在一个去使用的适当组合键鼠你的电脑和浏览器';
-
-$lang['UNBAN_IP'] = '联合国禁止一个或多个IP地址';
-$lang['UNBAN_IP_EXPLAIN'] = '你可以取消禁止多的IP地址是在一个去使用的适当组合键鼠你的电脑和浏览器';
-
-$lang['UNBAN_EMAIL'] = '联合国禁止一个或多个电子邮件地址';
-$lang['UNBAN_EMAIL_EXPLAIN'] = '你可以取消禁止多个电子邮件地址是在一个去使用的适当组合键鼠你的电脑和浏览器';
-
 $lang['NO_BANNED_USERS'] = '不禁止的用户名';
-$lang['NO_BANNED_IP'] = '没有禁止的IP地址';
-$lang['NO_BANNED_EMAIL'] = '没有禁止电子邮件地址';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = '该banlist已经成功更新';
 $lang['CLICK_RETURN_BANADMIN'] = '点击%sHere%s返回的禁令控制';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = '论坛的管理';
 $lang['FORUM_ADMIN_EXPLAIN'] = '从这个小组可以添加、删除、修改、重新秩序并重新同步的类别和论坛';
 $lang['EDIT_FORUM'] = '编辑论坛';
 $lang['CREATE_FORUM'] = '创建新的论坛，';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = '创建新类别';
 $lang['REMOVE'] = '删除';
 $lang['UPDATE_ORDER'] = '更新了';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = '如果这一定义的尺寸的一个图像�
 $lang['ASSIGNED_GROUP'] = '分配组';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = '创建缩略';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = '总是创建一个图。 这一功能将复盖几乎所有内设置这种特殊类别，除了图像中最大的尺寸。 这个特征的缩略会内显示的员额，用户可以点击它，打开真正的图像。<br />Please注意，这个特点要求Imagick安装，如果没有安装或者如果安全模式的启用GD-扩PHP将被使用。 如果图像类型是不支持通过PHP，这一功能将未使用。';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = '最小的缩略Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = '如果一个影像小于这个定义Filesize，没有缩略将创建的，因为它是小够的。';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick程序(完整的路径)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = '进入路径转换程序的imagick，通常/usr/bin/转换(在窗口：c:/imagemagick/convert.exe条)。';
-$lang['IMAGE_SEARCH_IMAGICK'] = '搜索Imagick';
-
-$lang['USE_GD2'] = '使用扩展GD2';
-$lang['USE_GD2_EXPLAIN'] = 'PHP是能够编制与GD1或GD2扩展对于图像操纵的。 正确的创造略图，而不imagemagick该附件的国防部使用两种不同的方法，根据你的选择在这里。 如果你的缩略是在一个糟糕的品质或搞砸了，试图改变这一设置。';
-$lang['ATTACHMENT_VERSION'] = '附件Mod版%s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = '管理被禁止的扩展';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = '你已经进入了一些错误的价值观。 请输入�
 $lang['PROCESSING'] = '处理...';
 $lang['FINISHED'] = '完成';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = '专题已经从论坛[b]%s[/b]论坛[b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = '主题已经分裂。 新的话题-[b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = '主题已被拆分从[b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = '請填寫發布表格';
 $lang['NEW_RELEASE'] = '新的释放';
 $lang['NEXT'] = '继续';
 $lang['OTHER'] = '其他的';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = '你必须填补的领域<b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = '你必须选择<b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = '寻找用户与网站相匹配%s';
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = '寻找用户位置的匹配%s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = '寻找用户与他们利益的领域匹配%s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = '寻找用户与他们的职业领域的匹配%s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = '搜索的用户访问过，在过去%s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = '搜索的用户已访问了最后%s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = '搜索的用户已经设置%s作为他们的语言';
 $lang['SEARCH_FOR_TIMEZONE'] = '搜索的用户已经设置UTC%s作为他们的时区';
 $lang['SEARCH_FOR_STYLE'] = '搜索的用户已经设置%s作为自己的风格';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = '论坛\'地图';
 $lang['ATOM_FEED'] = '订阅';
 $lang['ATOM_ERROR'] = '错误发生料';
 $lang['ATOM_SUBSCRIBE'] = '订阅料';
-$lang['ATOM_NO_MODE'] = '不要指定一个模式用于饲料';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = '这个论坛不具有饲料(没有正在进行的主题)';
 $lang['ATOM_NO_USER'] = '这个用户不具有饲料(没有正在进行的主题)';
 $lang['ATOM_UPDATED'] = '已更新';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = '在这一页面，可以指定的案文的基本规则
 $lang['TR_STATS'] = [
     0 => '不活动的用户在30天',
     1 => '不活动的用户的90天',
-    2 => '中等大小的分布上的跟踪器的(许多兆字节)',
+    2 => 'medium size distributions on the tracker',
     3 => '总共有多少手上的跟踪器',
     4 => '多少生活的手中(至少有1led)',
     5 => '多少手其中，播种的超过5种子',

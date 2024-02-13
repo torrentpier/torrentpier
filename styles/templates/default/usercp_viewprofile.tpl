@@ -1,3 +1,4 @@
+<!-- INCLUDE ajax_edit.tpl -->
 <!-- IF IS_ADMIN -->
 <script type="text/javascript">
     // edit_user_profile
@@ -79,8 +80,8 @@
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_icq"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_skype"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_twitter",  editableType: "yesno-twitter"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_gender",   editableType: "yesno-gender"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_twitter", editableType: "yesno-twitter"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_birthday", editableType: "yesno-birthday"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_down_total"}</var>
@@ -246,20 +247,15 @@ ajax.callback.index_data = function(data) {
 		<tr>
 			<th>{L_ICQ}:</th>
 			<td class="tLeft med" id="user_icq">
-				<span class="editable">{ICQ}
-					<a href="http://www.icq.com/people/{ICQ}"><img align="middle" src="http://web.icq.com/whitepages/online?icq={ICQ}&img=5"></a>
-				</span>
+				<span class="editable">{ICQ}</span>
 			</td>
 		</tr>
 		<!-- ENDIF -->
 		<!-- IF SKYPE -->
-		<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
 		<tr>
 			<th>{L_SKYPE}:</th>
 			<td class="tLeft med" id="user_skype">
-				<span class="editable">{SKYPE}
-					<a href="skype:{SKYPE}"><img align="middle" src="http://mystatus.skype.com/smallicon/{SKYPE}" width="16" height="16"></a>
-				</span>
+				<span class="editable">{SKYPE}</span>
 			</td>
 		</tr>
 		<!-- ENDIF -->
@@ -300,6 +296,9 @@ ajax.callback.index_data = function(data) {
                 <th>{L_USERNAME}:</th>
                 <td id="username">
                     <span class="editable bold">{USERNAME}</span>
+                    <!-- BEGIN ban -->
+                    <!-- IF ban.IS_BANNED -->(<b title="{L_BANNED_USERS}" style="color: red;">{L_BANNED}</b>)<!-- ENDIF -->
+                    <!-- END ban -->
                 </td>
             </tr>
 			<!-- IF SHOW_ROLE -->
@@ -379,7 +378,7 @@ ajax.callback.index_data = function(data) {
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a href="{U_SEARCH_RELEASES}" class="med">{L_SEARCH_RELEASES}</a> ]
-						<!-- IF PROFILE_USER -->[ <a href="{U_WATCHED_TOPICS}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF -->
+						<!-- IF PROFILE_USER || IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}&u={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF -->
 						[ <a title="{L_ATOM_SUBSCRIBE}" href="#" onclick="return post2url('feed.php', {mode: 'get_feed_url', type: 'u', id: {PROFILE_USER_ID}})">{FEED_IMG}</a> ]
 					</p>
 				</td>
@@ -400,7 +399,7 @@ ajax.callback.index_data = function(data) {
 					<!-- IF SHOW_PASSKEY -->
 					[ {L_BT_PASSKEY}: <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
 					<span id="passkey-gen" class="med" style="display: none;">
-						<b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+						<b id="passkey" class="med bold"><!-- IF AUTH_KEY -->{AUTH_KEY}<!-- ELSE -->{L_NOSELECT}<!-- ENDIF --></b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
 				</td>

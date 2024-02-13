@@ -4717,7 +4717,7 @@ $(function(){
 			<fieldset>
 			<legend>Включить/Загрузить</legend>
 			<div style="padding: 2px 12px 6px;">
-			Шаблоны: &nbsp;
+            {L_RELEASE}: &nbsp;
 			<!-- IF TPL_SELECT -->{TPL_SELECT} &nbsp;
 			<input type="button" value="Включить в этом форуме" class="bold" onclick="ajax.topic_tpl('assign', {tpl_id: $('#forum_tpl_select').val()})" /> &nbsp;
 			<input type="button" value="Загрузить" onclick="ajax.topic_tpl('load')" /> &nbsp;
@@ -4728,7 +4728,7 @@ $(function(){
 			<!-- IF NO_TPL_ASSIGNED -->
 			В этом форуме шаблоны <b>не включены</b><br />
 			<!-- ELSE -->
-			Сейчас в этом форуме включен шаблон <b>{TPL_NAME}</b><br />
+			Сейчас в этом форуме включен шаблон: <b>{TPL_NAME}</b><br />
 			<!-- ENDIF -->
 			</span>
 			</div>
@@ -4745,7 +4745,7 @@ $(function(){
 			<div class="label"><a href="{POST_URL}{TPL_RULES_POST_ID}#{TPL_RULES_POST_ID}" id="tpl-rules-link" target="_blank">Правила</a> (ссылка на сообщение с правилами или номер сообщения):</div>
 			<input type="text" id="tpl-rules-save" size="60" value="{TPL_RULES_POST_ID}" style="width: 75%" /><br />
 
-			<div class="label">Комментарий:</div>
+			<div class="label">{L_COMMENT}:</div>
 			<textarea id="tpl-comment-save" rows="2" cols="80" class="editor" style="width: 90%">{TPL_COMMENT}</textarea>
 
 			<div class="label">Последний раз редактировалось: <i id="tpl-last-edit-time">{TPL_LAST_EDIT_TIME}</i> by <b id="tpl-last-edit-by">{TPL_LAST_EDIT_USER}</b></div>
@@ -4769,7 +4769,7 @@ $(function(){
 			<div class="label">Правила (ссылка на сообщение с правилами или номер сообщения):</div>
 			<input type="text" id="tpl-rules-new" size="60" value="" style="width: 75%" /><br />
 
-			<div class="label">Комментарий:</div>
+			<div class="label">{L_COMMENT}:</div>
 			<textarea id="tpl-comment-new" rows="2" cols="10" class="editor" style="width: 100%"></textarea><br />
 
 			<input type="button" class="bold" value="Создать новый шаблон" onclick="ajax.topic_tpl('new');" /><br /><br />
@@ -4796,9 +4796,10 @@ $(function(){
 	<div style="width: 99%">
 		<div><input type="text" id="preview-title" size="60" value="" class="bold" style="width: 100%" /></div>
 		<div><textarea id="preview-msg" rows="15" cols="10" wrap="off" class="editor" style="width: 100%"></textarea></div>
-		<div class="tCenter">
-			<input type="button" value="Создать HTML" onclick="ajax.posts( $('#preview-msg').val(), 'preview-html-body' );" class="bold" />
-		</div>
+        <div class="tCenter mrg_8">
+            <input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.posts( $('#preview-msg').val(), 'preview-html-body' );" class="bold"/>&nbsp;&nbsp;
+            <input type="button" value="Продолжить (Создать релиз)" onclick="tpl_submit(true);" class="bold"/>
+        </div>
 	</div>
 	</td>
 </tr>
@@ -4814,12 +4815,13 @@ $(function(){
 	<td colspan="2">
 	<div class="tRight med">[ <u class="clickable" onclick="$('#tpl-howto').toggle();">Инструкция</u> ]</div>
 	<div id="tpl-howto" class="med pad_12" style="display: none;">
-	После заполнения поля <i>форма</i> нажмите кнопку <i>Создать форму</i><br /><br />
-	В поле <i>сообщение</i> добавьте элементам необходимые атрибуты (req, spoiler и т.д.)<br /><br />
+	После заполнения поля <b>форма</b> нажмите кнопку <b>Создать форму</b><br /><br />
+	В поле <b>сообщение</b> добавьте элементам необходимые атрибуты (req, spoiler и т.д.)<br /><br />
 	Заполните созданную форму (вручную либо автозаполнителем)<br /><br />
-	Кнопки <i>Продолжить</i> и <i>Создать сообщение</i> создают ббкод сообщения<br /><br />
-	Кнопка <i>Создать HTML</i> - создает HTML сообщения<br /><br />
-	Заполните поле <i>название</i>
+    Кнопки <b>Продолжить</b> и <b>Создать сообщение</b> - создают BBCode сообщения<br /><br />
+    Далее заполните поле <b>название</b><br /><br />
+    Кнопка <b>{L_AJAX_PREVIEW}</b> - показывает итоговый результат<br /><br />
+    Далее нажмите на кнопку <b>Продолжить (Создать релиз)</b> - откроется страница где вы сможете прикрепить файл и опубликовать релиз
 	</div>
 	</td>
 </tr>
@@ -4843,19 +4845,19 @@ $(function(){
 <col class="row2" width="80%">
 <thead>
 <tr>
-	<th colspan="2">Заполните форму для релиза<!-- IF EDIT_TPL --> &nbsp; [ <u class="clickable" onclick="tpl_fill_form();">Заполнить</u> ]<!-- ENDIF --></th>
+	<th colspan="2">Заполните форму для релиза<!-- IF EDIT_TPL --> &nbsp; [ <u title="Генерирует случайное заполнение" class="clickable" onclick="tpl_fill_form();">Заполнить</u> ]<!-- ENDIF --></th>
 </tr>
 </thead>
 <tbody id="rel-tpl">
 </tbody>
 <tfoot>
 <tr>
-	<td colspan="2" class="pad_8 tCenter bold">На следующей странице проверьте оформление и загрузите torrent файл</td>
+	<td colspan="2" class="pad_8 tCenter bold">На следующей странице проверьте оформление и загрузите файл</td>
 </tr>
 <tr>
 	<td class="catBottom" colspan="2">
 		<!-- IF EDIT_TPL -->
-		<input type="button" value="Заполнить" style="width: 120px;" onclick="tpl_fill_form();" />&nbsp;&nbsp;
+		<input type="button" title="Генерирует случайное заполнение" value="Заполнить" style="width: 120px;" onclick="tpl_fill_form();" />&nbsp;&nbsp;
 		<input type="button" value="Продолжить" class="bold" style="width: 150px;" onclick="tpl_build_msg(true);" />
 		<!-- ELSE -->
 		<input type="button" value="Продолжить" class="bold" style="width: 150px;" onclick="tpl_submit(true);" />

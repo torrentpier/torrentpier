@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -10,12 +10,12 @@
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
+
 if (defined('PAGE_HEADER_SENT')) {
     return;
 }
 
 // Parse and show the overall page header
-
 global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
@@ -88,7 +88,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
 				GROUP BY privmsgs_to_userid
 			");
 
-            $real_unread_pm_count = (int)$row['pm_count'] ?? 0;
+            $real_unread_pm_count = (int)($row['pm_count'] ?? 0);
 
             if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
                 $userdata['user_unread_privmsg'] = $real_unread_pm_count;
@@ -119,7 +119,7 @@ $template->assign_vars([
     'USER_LANG' => $userdata['user_lang'],
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
-    'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
+    'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 
@@ -192,8 +192,6 @@ $template->assign_vars([
     'BONUS_URL' => BB_ROOT . BONUS_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
 
-    'AJAX_HTML_DIR' => AJAX_HTML_DIR,
-
     // Misc
     'BOT_UID' => BOT_UID,
     'SID' => $userdata['session_id'],
@@ -213,7 +211,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 
     if (TIMENOW > $ignore_time) {
         if ($ignore_time) {
-            bb_setcookie('torhelp', '', COOKIE_EXPIRED);
+            bb_setcookie('torhelp', null);
         }
 
         $sql = "

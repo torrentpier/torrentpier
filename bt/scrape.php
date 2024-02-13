@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -28,19 +28,27 @@ $info_hash = isset($_GET['info_hash']) ? (string)$_GET['info_hash'] : null;
 if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
 }
+
 // Store info hash in hex format
-$info_hash_hex = mb_check_encoding($info_hash, 'UTF8') ? $info_hash : bin2hex($info_hash);
+$info_hash_hex = bin2hex($info_hash);
+
+// Check info_hash length
+if (strlen($info_hash) !== 20) {
+    msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
+}
 
 // Handle multiple hashes
-
 preg_match_all('/info_hash=([^&]*)/i', $_SERVER['QUERY_STRING'], $info_hash_array);
 
 $torrents = [];
 $info_hashes = [];
 
 foreach ($info_hash_array[1] as $hash) {
-
     $decoded_hash = urldecode($hash);
+
+    if (strlen($decoded_hash) !== 20) {
+        continue;
+    }
 
     if ($scrape_cache = CACHE('tr_cache')->get(SCRAPE_LIST_PREFIX . bin2hex($decoded_hash))) {
         $torrents['files'][$info_key = array_key_first($scrape_cache)] = $scrape_cache[$info_key];
@@ -52,12 +60,16 @@ foreach ($info_hash_array[1] as $hash) {
 $info_hash_count = count($info_hashes);
 
 if (!empty($info_hash_count)) {
-
     if ($info_hash_count > $bb_cfg['max_scrapes']) {
         $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
     }
 
     $info_hashes_sql = implode('\', \'', $info_hashes);
+
+    /**
+     * Currently torrent clients send truncated v2 hashes (the design raises questions).
+     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+     */
     $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
 
     $sql = "
@@ -73,7 +85,7 @@ if (!empty($info_hash_count)) {
         foreach ($scrapes as $scrape) {
             $hash_v1 = !empty($scrape['info_hash']) ? $scrape['info_hash'] : '';
             $hash_v2 = !empty($scrape['info_hash_v2']) ? substr($scrape['info_hash_v2'], 0, 20) : '';
-            $info_hash_scrape = (in_array(urlencode($hash_v2), $info_hash_array[1])) ? $hash_v2 : $hash_v1;
+            $info_hash_scrape = (in_array(urlencode($hash_v1), $info_hash_array[1])) ? $hash_v1 : $hash_v2; // Replace logic to prioritize $hash_v2, in case of future prioritization of v2
 
             $torrents['files'][$info_hash_scrape] = [
                 'complete' => (int)$scrape['seeders'],
@@ -85,8 +97,9 @@ if (!empty($info_hash_count)) {
     }
 }
 
+// Verify if torrent registered on tracker
 if (empty($torrents)) {
-    msg_die('Torrent not registered, info_hash = ' . $info_hash_hex);
+    msg_die('Torrent not registered, info_hash = ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
 
 die(\Arokettu\Bencode\Bencode::encode($torrents));

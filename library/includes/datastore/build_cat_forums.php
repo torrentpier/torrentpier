@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -106,15 +106,14 @@ $this->store('cat_forums', $data);
 //
 // jumpbox
 //
-$data = [
-    'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
-    'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
-];
+if ($bb_cfg['show_jumpbox']) {
+    $data = [
+        'guest' => get_forum_select('guest', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
+        'user' => get_forum_select('user', 'f', null, null, null, 'id="jumpbox" onchange="window.location.href=\'' . FORUM_URL . '\'+this.value;"'),
+    ];
 
-$this->store('jumpbox', $data);
-
-file_write($data['guest'], AJAX_HTML_DIR . '/jumpbox_guest.html', false, true, true);
-file_write($data['user'], AJAX_HTML_DIR . '/jumpbox_user.html', false, true, true);
+    $this->store('jumpbox', $data);
+}
 
 //
 // viewtopic_forum_select

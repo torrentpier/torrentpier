@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -94,10 +94,10 @@ class Emailer
         if (empty($this->tpl_msg[$template_lang . $template_file])) {
             $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
 
-            if (!file_exists($tpl_file)) {
+            if (!is_file($tpl_file)) {
                 $tpl_file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/email/' . $template_file . '.html';
 
-                if (!file_exists($tpl_file)) {
+                if (!is_file($tpl_file)) {
                     bb_die('Could not find email template file: ' . $template_file);
                 }
             }

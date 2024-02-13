@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -111,7 +111,7 @@ class Template
         $this->use_cache = $bb_cfg['xs_use_cache'];
 
         // Check template exists
-        if (!file_exists($this->root) || !is_dir($this->root)) {
+        if (!is_dir($this->root)) {
             die("Theme ({$this->tpl}) directory not found");
         }
     }
@@ -310,7 +310,7 @@ class Template
      */
     public function assign_block_vars($blockname, $vararray)
     {
-        if (false !== strpos($blockname, '.')) {
+        if (str_contains($blockname, '.')) {
             // Nested block.
             $blocks = explode('.', $blockname);
             $blockcount = \count($blocks) - 1;
@@ -982,7 +982,7 @@ class Template
      */
     public function write_cache($filename, $code)
     {
-        file_write($code, $filename, false, true, true);
+        file_write($code, $filename, max_size: false, replace_content: true);
     }
 
     public function xs_startup()
@@ -994,7 +994,7 @@ class Template
         $this->vars['LANG'] ??= $bb_cfg['default_lang'];
         // adding current template
         $tpl = $this->root . '/';
-        if (0 === strpos($tpl, './')) {
+        if (str_starts_with($tpl, './')) {
             $tpl = substr($tpl, 2, \strlen($tpl));
         }
         $this->vars['TEMPLATE'] ??= $tpl;

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -72,10 +72,17 @@ if (isset($_GET['adv'])) {
     unset($adv);
 }
 
+$submit = isset($_POST['submit']);
+
+// Check for demo mode
+if (IN_DEMO_MODE && $submit) {
+    bb_die($lang['CANT_EDIT_IN_DEMO_MODE']);
+}
+
 /**
  * Start program proper
  */
-if (isset($_POST['submit'])) {
+if ($submit) {
     $sql = '';
 
     if (!empty($forum_id)) {
@@ -126,11 +133,11 @@ $forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
 
 if (empty($forum_id)) {
     // Output the selection table if no forum id was specified
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_AUTH_SELECT_FORUM' => true,
         'S_AUTH_ACTION' => 'admin_forumauth.php',
         'S_AUTH_SELECT' => get_forum_select('admin', 'f', null, 80),
-    ));
+    ]);
 } else {
     // Output the authorisation details if an id was specified
     $forum_name = reset($forum_rows)['forum_name'];
@@ -171,10 +178,10 @@ if (empty($forum_id)) {
 
         $simple_auth .= '</select>';
 
-        $template->assign_block_vars('forum_auth', array(
+        $template->assign_block_vars('forum_auth', [
             'CELL_TITLE' => $lang['SIMPLE_MODE'],
             'S_AUTH_LEVELS_SELECT' => $simple_auth,
-        ));
+        ]);
 
         $s_column_span++;
     } else {
@@ -190,10 +197,10 @@ if (empty($forum_id)) {
 
             $cell_title = $field_names[$forum_auth_fields[$j]];
 
-            $template->assign_block_vars('forum_auth', array(
+            $template->assign_block_vars('forum_auth', [
                 'CELL_TITLE' => $cell_title,
                 'S_AUTH_LEVELS_SELECT' => $custom_auth[$j],
-            ));
+            ]);
 
             $s_column_span++;
         }
@@ -206,7 +213,7 @@ if (empty($forum_id)) {
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';
 
-    $template->assign_vars(array(
+    $template->assign_vars([
         'TPL_EDIT_FORUM_AUTH' => true,
         'FORUM_NAME' => htmlCHR($forum_name),
         'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,
@@ -214,7 +221,7 @@ if (empty($forum_id)) {
         'S_FORUMAUTH_ACTION' => 'admin_forumauth.php',
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-    ));
+    ]);
 }
 
 print_page('admin_forumauth.tpl', 'admin');

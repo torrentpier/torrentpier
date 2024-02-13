@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -29,7 +29,7 @@ class IPHelper extends Ip
     public static function anonymizeIP(string $ip): string
     {
         $wrappedIPv6 = false;
-        if ('[' === substr($ip, 0, 1) && ']' === substr($ip, -1, 1)) {
+        if (str_starts_with($ip, '[') && str_ends_with($ip, ']')) {
             $wrappedIPv6 = true;
             $ip = substr($ip, 1, -1);
         }
@@ -60,7 +60,6 @@ class IPHelper extends Ip
      * @param string $ip
      * @return string
      */
-
     public static function long2ip_extended(string $ip): string
     {
         return self::long2ip($ip, $ip > 0xFFFFFFFF);

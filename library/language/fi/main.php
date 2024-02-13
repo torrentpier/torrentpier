@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -68,7 +68,7 @@ $lang['SHORT_PAGE'] = 'sivulle';
 $lang['GOTO_PAGE'] = 'Siirry sivulle';
 $lang['GOTO_SHORT'] = 'Sivu';
 $lang['JOINED'] = 'Liittynyt';
-$lang['LONGEVITY'] = 'Pitkäikäisyys';
+$lang['LONGEVITY'] = 'Rekisteröity';
 $lang['IP_ADDRESS'] = 'IP-Osoite';
 $lang['POSTED_AFTER'] = 'jälkeen';
 
@@ -127,6 +127,8 @@ $lang['RECORD_ONLINE_USERS'] = 'Eniten käyttäjiä online on ollut <b>%s</b> on
 $lang['ONLINE_ADMIN'] = 'Ylläpitäjä';
 $lang['ONLINE_MOD'] = 'Moderaattori';
 $lang['ONLINE_GROUP_MEMBER'] = 'Ryhmän jäsen';
+
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
 
 $lang['CURRENT_TIME'] = 'Nykyinen aika on: <span class="tz_time">%s</span>';
 
@@ -514,6 +516,7 @@ $lang['AVATAR_PANEL'] = 'Avatar ohjauspaneeli';
 
 $lang['WEBSITE'] = 'Sivustolla';
 $lang['LOCATION'] = 'Sijainti';
+$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Ota yhteyttä';
 $lang['EMAIL_ADDRESS'] = 'E-mail-osoite';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Lähetä yksityinen viesti';
@@ -532,7 +535,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Etsi käyttäjä aiheita'; // Find all topics by 
 $lang['NO_USER_ID_SPECIFIED'] = 'Anteeksi, mutta että käyttäjää ei ole olemassa.';
 $lang['WRONG_PROFILE'] = 'Et voi muokata profiilia, joka ei ole oma.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Vain yksi tyyppi avatar voi olla määritetty';
+$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'Tiedoston URL-osoite, jonka annoit ei sisällä tietoja';
 $lang['NO_CONNECTION_URL'] = 'Yhteys ei kuitenkaan ole voitu URL annoit';
 $lang['INCOMPLETE_URL'] = 'Antamasi verkko-osoite on epätäydellinen';
@@ -679,6 +682,19 @@ $lang['SORT_WEBSITE'] = 'Sivustolla';
 $lang['ASC'] = 'Nouseva';
 $lang['DESC'] = 'Laskeva';
 $lang['ORDER'] = 'Jotta';
+
+// Thanks
+$lang['THANK_TOPIC'] = 'Vote for this topic';
+$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['LAST_LIKES'] = 'Last votes';
+$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
+$lang['NO_LIKES'] = 'Nobody gave a vote yet';
+$lang['LIKE_ALREADY'] = 'You already voted this topic';
+
+// Invites
+$lang['INVITE_CODE'] = 'Invite code';
+$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Käyttäjän Ryhmät';
@@ -1059,8 +1075,9 @@ $lang['BT_ADDED'] = 'Lisätty';
 $lang['BT_REG_ON_TRACKER'] = 'Rekisteröityä tracker';
 $lang['BT_REG_FAIL'] = 'Ei voitu rekisteröidä torrent tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Toinen torrent kanssa samaa info_hash jo <a href="%s"><b>registered</b></a>';
+$lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_V2_FILE_LIST_ONLY'] = 'Currently, only torrents with BitTorrent version 2 support are enabled for separate file listing';
+$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Poista tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent rekisteröimätön';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1092,25 +1109,26 @@ $lang['TOR_STATUS'] = 'Tila';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Valitse tila';
 $lang['TOR_STATUS_NOT_SELECT'] = 'Et ole valinnut tilan.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'Kaikki statukset';
+$lang['TOR_STATUS_FORBIDDEN'] = 'This topic\'s status is: ';
 $lang['TOR_STATUS_NAME'] = [
     TOR_NOT_APPROVED => 'ei tarkastettu',
     TOR_CLOSED => 'suljettu',
     TOR_APPROVED => 'tarkastetaan',
     TOR_NEED_EDIT => 'ole virallistettu, kunnes',
     TOR_NO_DESC => 'ole virallistettu',
-    TOR_DUP => 'toista',
-    TOR_CLOSED_CPHOLD => 'suljettu oikein',
+    TOR_DUP => 'duplicate',
+    TOR_CLOSED_CPHOLD => 'closed (copyright)',
     TOR_CONSUMED => 'imeytyy',
     TOR_DOUBTFUL => 'kyseenalainen',
-    TOR_CHECKING => 'verified',
+    TOR_CHECKING => 'being checked',
     TOR_TMP => 'väliaikainen',
     TOR_PREMOD => 'pre-maltillisesti',
-    TOR_REPLENISH => 'täydentää',
+    TOR_REPLENISH => 'replenishing',
 ];
 $lang['TOR_STATUS_FAILED'] = 'Tällainen asema ei ole olemassa!';
 $lang['TORRENT_FAILED'] = 'Jakelu ei löytynyt!';
 $lang['TOR_STATUS_DUB'] = 'Jakelu on sama asema';
-$lang['TOR_DONT_CHANGE'] = 'Aseman muutos voi olla!';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be performed!';
 $lang['TOR_STATUS_OF'] = 'Jakelu on tilaa:';
 $lang['TOR_STATUS_CHANGED'] = 'Tila muuttunut: ';
 $lang['TOR_BACK'] = ' takaisin';
@@ -1231,7 +1249,7 @@ $lang['ALREADY_REG'] = 'Torrent jo rekisteröity';
 $lang['NOT_TORRENT'] = 'Tämä tiedosto ei ole torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'Voit rekisteröidä vain yksi torrent yhden post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Voit rekisteröidä vain yksi torrent yksi aihe';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Katselu torrent-profiili :: %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-profile';
 $lang['CUR_ACTIVE_DLS'] = 'Aktiivinen torrents';
 
 $lang['TD_TRAF'] = 'Tänään';
@@ -1262,6 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You ei ole bonuksia saatavilla.
 $lang['BONUS_RETURN'] = 'Palaa siemen bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
+$lang['RANDOM_RELEASE'] = 'Random release';
 $lang['OPEN_TOPICS'] = 'Avata aiheita';
 $lang['OPEN_IN_SAME_WINDOW'] = 'avaa saman ikkunan';
 $lang['SHOW_TIME_TOPICS'] = 'näyttää aika luoda aiheita';
@@ -1295,10 +1314,6 @@ $lang['COOKIES_REQUIRED'] = 'Evästeiden on oltava käytössä!';
 $lang['SESSION_EXPIRED'] = 'Istunto vanhentunut';
 
 // Sort memberlist per letter
-$lang['SORT_PER_LETTER'] = 'Näytä ainoastaan käyttäjätunnukset alkaen';
-$lang['OTHERS'] = 'muut';
-$lang['ALL'] = 'kaikki';
-
 $lang['POST_LINK'] = 'Post linkki';
 $lang['GOTO_QUOTED_POST'] = 'Mene lainattu viesti';
 $lang['LAST_VISITED'] = 'Viimeksi Käynyt';
@@ -1308,6 +1323,7 @@ $lang['NEVER'] = 'Koskaan';
 //mpd
 $lang['DELETE_POSTS'] = 'Poista valitut viestit';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Valitut viestit on poistettu onnistuneesti poistaa';
+$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Ilmoitukset';
@@ -1323,6 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Päivitys postitse kerran';
 $lang['TOPIC_SPLIT_NEW'] = 'Uusi aihe';
 $lang['TOPIC_SPLIT_OLD'] = 'Vanha aihe';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Lisää bot-viestin muuttoa';
+$lang['BOT_REASON_MOVED'] = 'Reason to move';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Lisää bot-viestin split <b>old topic</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Lisää bot-viestin split <b>new topic</b>';
 //qr
@@ -1348,6 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1517,6 +1535,8 @@ $lang['BOLD'] = 'Rohkea teksti: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursivoitu teksti: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Alleviivaa teksti: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Yliviivattu teksti: [s]text[/s] (Ctrl+S)';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Lainaus tekstistä: [quote]text[/quote] (Ctrl+Q)';
@@ -1570,7 +1590,7 @@ $lang['DEL_LIST_INFO'] = 'Voit poistaa tilauksen listasta, klikkaa kuvaketta vas
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Katselin aiheita';
-$lang['NO_WATCHED_TOPICS'] = 'Et ole katsomassa mitään aiheita';
+$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Takaisin kotisivulle';
@@ -1728,35 +1748,12 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikkaa %sHere%s palata Foorumin Oikeudet';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Kiellon Valvonta';
-$lang['BAN_EXPLAIN'] = 'Täällä voit hallita kieltää käyttäjiä. Voit saavuttaa tämän kieltämällä jompikumpi tai molemmat tietyn käyttäjän tai yksilön tai IP-osoitteiden alueen. Nämä menetelmät estävät käyttäjää jopa saavuttaa indeksin sivu teidän aluksella. Estää käyttäjän rekisteröinti eri käyttäjätunnuksella voit myös määrittää kielletty sähköpostiosoite. Huomaa, että kieltäminen sähköpostiosoite yksin ei estä, että käyttäjä voi kirjautua sisään tai lähettää oman hallituksen. Sinun pitäisi käyttää yksi ensimmäisistä kaksi tapaa saavuttaa tämä.';
-$lang['BAN_EXPLAIN_WARN'] = 'Huomaa, että kirjoittamalla IP-osoitteiden alueen tulokset kaikki osoitteet välillä alkuun ja loppuun lisätään bannilista. Yritetään minimoida määrä osoitteita lisätään tietokantaan ottamalla käyttöön yleismerkkejä automaattisesti tarvittaessa. Jos todella täytyy syöttää alue, yritä pitää se pieni tai parempi vielä valtion erityisiä osoitteita.';
-
-$lang['SELECT_IP'] = 'Valitse IP-osoite';
-$lang['SELECT_EMAIL'] = 'Valitse Sähköpostiosoite';
-
+$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users.';
 $lang['BAN_USERNAME'] = 'Ban yksi tai useampi tietyille käyttäjille';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Voit estää useita käyttäjiä kerralla käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
-$lang['BAN_IP'] = 'Ban yksi tai useampi IP-osoitteita';
-$lang['IP_HOSTNAME'] = 'IP-osoitteet';
-$lang['BAN_IP_EXPLAIN'] = 'Voit määrittää useita eri IP-osoitteita, erota ne pilkuilla.';
-
-$lang['BAN_EMAIL'] = 'Ban on yksi tai useampia sähköposti osoitteita';
-$lang['BAN_EMAIL_EXPLAIN'] = 'Voit määrittää useamman kuin yhden sähköpostiosoitteen, erota ne pilkuilla. Määritä jokeri käyttäjätunnus, * *@hotmail.com';
-
-$lang['UNBAN_USERNAME'] = 'Yk: n ban yksi enemmän tietyille käyttäjille';
+$lang['UNBAN_USERNAME'] = 'Unban one more specific users';
 $lang['UNBAN_USERNAME_EXPLAIN'] = 'Voit unban useille käyttäjille kerralla käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
-$lang['UNBAN_IP'] = 'Yk: n ban yksi tai useampi IP-osoitteita';
-$lang['UNBAN_IP_EXPLAIN'] = 'Voit unban useita IP-osoitteita kerralla käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
-$lang['UNBAN_EMAIL'] = 'Un-ban on yksi tai useampia sähköposti osoitteita';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'Voit unban useita sähköpostiosoitteita yhdellä kertaa käyttämällä sopivan yhdistelmän hiirtä ja näppäimistöä tietokoneen ja selaimen';
-
 $lang['NO_BANNED_USERS'] = 'Ei ole kielletty käyttäjätunnuksia';
-$lang['NO_BANNED_IP'] = 'Ei estetyt IP-osoitteet';
-$lang['NO_BANNED_EMAIL'] = 'Ei ole kielletty sähköpostiosoitteet';
-
 $lang['BAN_UPDATE_SUCESSFUL'] = 'Se bannilista on päivitetty onnistuneesti';
 $lang['CLICK_RETURN_BANADMIN'] = 'Klikkaa %sHere%s palata Kiellon Valvonta';
 
@@ -1817,6 +1814,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Foorumin Hallinto';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Tässä paneelissa voit lisätä, poistaa, muokata, järjestää uudelleen ja uudelleen synkronoi kategoriat ja foorumit';
 $lang['EDIT_FORUM'] = 'Edit forum';
 $lang['CREATE_FORUM'] = 'Luo uusi foorumi';
+$lang['CREATE_SUB_FORUM'] = 'Create subforum';
 $lang['CREATE_CATEGORY'] = 'Luo uusi luokka';
 $lang['REMOVE'] = 'Poista';
 $lang['UPDATE_ORDER'] = 'Päivitys Jotta';
@@ -2171,16 +2169,8 @@ $lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'Jos tämä on määritelty Ulottuvuus Kuva o
 $lang['ASSIGNED_GROUP'] = 'Valittu Ryhmä';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Luo Thumbnail';
-$lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'] = 'Aina luoda Pikkukuvan. Tämä ominaisuus ohittaa lähes kaikki Asetukset majoitusliike, tämä Erityinen Luokkaan, paitsi Suurin Kuvan Mitat. Tämä Ominaisuus Pienoiskuva näkyy sisällä postitse, Käyttäjä voi klikata sitä avata todellinen Kuva.<br />Please Huomaa, että tämä ominaisuus edellyttää Imagick voitu asentaa, jos sitä ei ole asennettu tai jos Safe-Tila on käytössä GD-Laajennus PHP käytetään. Jos Kuva-Tyyppi ei ole tuettu PHP, tämä Ominaisuus ei ole käytössä.';
 $lang['IMAGE_MIN_THUMB_FILESIZE'] = 'Pienin Pikkukuva Filesize';
 $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'] = 'Jos Kuva on pienempi kuin tämä on määritelty Tiedostokoko, ei Thumbnail luodaan, koska se on tarpeeksi pieni.';
-$lang['IMAGE_IMAGICK_PATH'] = 'Imagick Ohjelma (Koko Polku)';
-$lang['IMAGE_IMAGICK_PATH_EXPLAIN'] = 'Anna Polku muuntaa ohjelma imagick, yleensä /usr/bin/convert (windows: c:/imagemagick/convert.exe).';
-$lang['IMAGE_SEARCH_IMAGICK'] = 'Haku Imagick';
-
-$lang['USE_GD2'] = 'Käyttää GD2 Laajennus';
-$lang['USE_GD2_EXPLAIN'] = 'PHP voi olla koottu kanssa GD1 tai GD2 Laajennus kuvan manipulointi. Oikein luoda Esikatselukuvat ilman imagemagick Kiinnitys Mod käyttää kahta eri menetelmää, joka perustuu omaan valintaan. Jos miniatyyrit ovat huono laatu tai sekaisin, yritä muuttaa tätä asetusta.';
-$lang['ATTACHMENT_VERSION'] = 'Kiinnitys Mod Versio %s'; // %s is the version number
 
 // Extensions -> Forbidden Extensions
 $lang['MANAGE_FORBIDDEN_EXTENSIONS'] = 'Hallita Kielletty Laajennukset';
@@ -2530,7 +2520,7 @@ $lang['WRONG_INPUT'] = 'Olet antanut joitakin vääriä arvoja. Tarkista input j
 $lang['PROCESSING'] = 'Käsittely...';
 $lang['FINISHED'] = 'Valmis';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Aihe on siirretty foorumin [b]%s[/b] forum [b]%s[/b][br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Aihe on jaettu kahteen osaan. Uusi aihe - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Aihe on erotettu [b]%s[/b][br][br]%s';
 
@@ -2586,6 +2576,8 @@ $lang['RELEASE_WELCOME'] = 'Ole hyvä ja täytä vapautuslomake';
 $lang['NEW_RELEASE'] = 'Uusi julkaisu';
 $lang['NEXT'] = 'Edelleen';
 $lang['OTHER'] = 'Muut';
+$lang['OTHERS'] = 'Others';
+$lang['ALL'] = 'All';
 
 $lang['TPL_EMPTY_FIELD'] = 'Sinun täytyy täyttää kentän <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Sinun täytyy valita <b>%s</b>';
@@ -2642,8 +2634,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Etsivät käyttäjät, joilla on Sivust
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Etsimällä käyttäjille Sijainti matching %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Etsiminen käyttäjien kanssa heidän Etujaan alalla matching %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Etsiä käyttäjiä heidän Ammatti-kentän vastaavia %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Etsivät käyttäjät, jotka ovat vierailleet viime %s %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Etsivät käyttäjät, jotka ovat vierailleet viimeisen %s %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Etsivät käyttäjät, jotka ovat asettaneet %s, koska niiden kieli';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Etsivät käyttäjät, jotka on asetettu UTC %s kuin heidän aikavyöhyke';
 $lang['SEARCH_FOR_STYLE'] = 'Etsivät käyttäjät, jotka ovat asettaneet %s koska niiden tyyli';
@@ -2746,7 +2738,7 @@ $lang['FORUM_MAP'] = 'Foorumeita kartta';
 $lang['ATOM_FEED'] = 'Feed';
 $lang['ATOM_ERROR'] = 'Virhe tuottaa rehun';
 $lang['ATOM_SUBSCRIBE'] = 'Tilaa syöte';
-$lang['ATOM_NO_MODE'] = 'Älä määritä tila ruokkia';
+$lang['ATOM_NO_MODE'] = 'No mode option provided for the feed';
 $lang['ATOM_NO_FORUM'] = 'Tämä foorumi ei ole ruokkia (ei käynnissä olevia aiheita)';
 $lang['ATOM_NO_USER'] = 'Tämä käyttäjä ei ole ruokkia (ei käynnissä olevia aiheita)';
 $lang['ATOM_UPDATED'] = 'Päivitetty';
@@ -2761,7 +2753,7 @@ $lang['TERMS_EXPLAIN'] = 'Tällä sivulla, voit määrittää tekstin perussää
 $lang['TR_STATS'] = [
     0 => 'aktiivisia käyttäjiä 30 päivää',
     1 => 'aktiivisia käyttäjiä 90 päivää',
-    2 => 'keskikokoinen jakaumat tracker (useita megatavuja)',
+    2 => 'medium size distributions on the tracker',
     3 => 'kuinka monta yhteensä kädet tracker',
     4 => 'kuinka monet elävät kädet (siellä on ainakin 1 led)',
     5 => 'kuinka monta kättä missä se kylvö yli 5 siemenet',
