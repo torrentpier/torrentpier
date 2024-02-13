@@ -16,7 +16,7 @@ use function in_array;
  * Class AbstractDatastore
  * @package TorrentPier\Legacy\Datastore
  */
-class AbstractDatastore
+abstract class AbstractDatastore
 {
     /**
      * Datastore directory
