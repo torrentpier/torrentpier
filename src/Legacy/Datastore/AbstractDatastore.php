@@ -10,34 +10,39 @@
 namespace TorrentPier\Legacy\Datastore;
 
 use TorrentPier\Dev;
+use function in_array;
 
 /**
- * Class Common
+ * Class AbstractDatastore
  * @package TorrentPier\Legacy\Datastore
  */
-class Common
+class AbstractDatastore
 {
     /**
-     * Директория с builder-скриптами (внутри INC_DIR)
+     * Datastore directory
+     *
+     * @var string
      */
-    public $ds_dir = 'datastore';
-    /**
-     * Готовая к употреблению data
-     * array('title' => data)
-     */
-    public $data = [];
-    /**
-     * Список элементов, которые будут извлечены из хранилища при первом же запросе get()
-     * до этого момента они ставятся в очередь $queued_items для дальнейшего извлечения _fetch()'ем
-     * всех элементов одним запросом
-     * array('title1', 'title2'...)
-     */
-    public $queued_items = [];
+    public string $ds_dir = 'datastore';
 
     /**
-     * 'title' => 'builder script name' inside "includes/datastore" dir
+     * @var array
      */
-    public $known_items = [
+    public array $data = [];
+
+    /**
+     * Queued items
+     *
+     * @var array
+     */
+    public array $queued_items = [];
+
+    /**
+     * Known items
+     *
+     * @var array|string[]
+     */
+    public array $known_items = [
         'cat_forums' => 'build_cat_forums.php',
         'jumpbox' => 'build_cat_forums.php',
         'viewtopic_forum_select' => 'build_cat_forums.php',
@@ -53,49 +58,83 @@ class Common
     ];
 
     /**
-     * @param array (item1_title, item2_title...) or single item's title
+     * Enqueue items
+     *
+     * @param array $items
+     * @return void
      */
-    public function enqueue($items)
+    public function enqueue(array $items): void
     {
-        foreach ((array)$items as $item) {
-            // игнор уже поставленного в очередь либо уже извлеченного
-            if (!\in_array($item, $this->queued_items) && !isset($this->data[$item])) {
+        foreach ($items as $item) {
+            if (!in_array($item, $this->queued_items) && !isset($this->data[$item])) {
                 $this->queued_items[] = $item;
             }
         }
     }
 
-    public function &get($title)
+    /**
+     * Get data
+     *
+     * @param string $title
+     * @return mixed
+     */
+    public function &get(string $title): mixed
     {
         if (!isset($this->data[$title])) {
-            $this->enqueue($title);
+            $this->enqueue([$title]);
             $this->_fetch();
         }
+
         return $this->data[$title];
     }
 
-    public function store($item_name, $item_data)
+    /**
+     * Store
+     *
+     * @param string $item_name
+     * @param mixed $item_data
+     * @return void
+     */
+    public function store(string $item_name, mixed $item_data)
     {
     }
 
-    public function rm($items)
+    /**
+     * Removed item by name
+     *
+     * @param array|string $items
+     * @return void
+     */
+    public function rm(array|string $items): void
     {
         foreach ((array)$items as $item) {
             unset($this->data[$item]);
         }
     }
 
-    public function update($items)
+    /**
+     * Updated items
+     *
+     * @param array|string $items
+     * @return void
+     */
+    public function update(array|string $items): void
     {
         if ($items == 'all') {
             $items = array_keys(array_unique($this->known_items));
         }
+
         foreach ((array)$items as $item) {
             $this->_build_item($item);
         }
     }
 
-    public function _fetch()
+    /**
+     * Fetch data
+     *
+     * @return void
+     */
+    public function _fetch(): void
     {
         $this->_fetch_from_store();
 
@@ -108,11 +147,22 @@ class Common
         $this->queued_items = [];
     }
 
+    /**
+     * Fetch data from store
+     *
+     * @return void
+     */
     public function _fetch_from_store()
     {
     }
 
-    public function _build_item($title)
+    /**
+     * Build item
+     *
+     * @param string $title
+     * @return void
+     */
+    public function _build_item(string $title): void
     {
         $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
         if (isset($this->known_items[$title]) && file_exists($file)) {

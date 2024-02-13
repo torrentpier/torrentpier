@@ -60,13 +60,13 @@ switch ($mode) {
         // Обновление кеша новостей на главной
         $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
         if (isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news']) {
-            $datastore->enqueue('latest_news');
+            $datastore->enqueue(['latest_news']);
             $datastore->update('latest_news');
         }
 
         $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
         if (isset($net_forums[$t_data['forum_id']]) && $bb_cfg['show_network_news']) {
-            $datastore->enqueue('network_news');
+            $datastore->enqueue(['network_news']);
             $datastore->update('network_news');
         }
 

@@ -14,10 +14,10 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$datastore->enqueue(array(
+$datastore->enqueue([
     'moderators',
     'cat_forums',
-));
+]);
 
 $log_action->init();
 

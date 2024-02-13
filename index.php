@@ -32,10 +32,10 @@ $datastore->enqueue([
 ]);
 
 if ($bb_cfg['show_latest_news']) {
-    $datastore->enqueue('latest_news');
+    $datastore->enqueue(['latest_news']);
 }
 if ($bb_cfg['show_network_news']) {
-    $datastore->enqueue('network_news');
+    $datastore->enqueue(['network_news']);
 }
 
 // Init userdata
