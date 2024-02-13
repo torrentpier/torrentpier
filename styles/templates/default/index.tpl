@@ -162,7 +162,7 @@
 <!-- IF LOGGED_IN and SHOW_FORUMS -->
 <div id="mark_all_forums_read">
 	<a href="{U_SEARCH_NEW}" class="med">{L_SEARCH_NEW}</a> &#0183;
-	<a href="{U_INDEX}" class="med" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
+	<a href="{U_INDEX}" class="med" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); return false;">{L_MARK_ALL_FORUMS_READ}</a>
 </div>
 <!-- ENDIF -->
 
