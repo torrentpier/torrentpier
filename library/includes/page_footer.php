@@ -25,7 +25,7 @@ if (!empty($template)) {
     $template->pparse('page_footer');
 }
 
-$show_dbg_info = (APP_DEBUG && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
+$show_dbg_info = (!IS_GUEST && APP_DEBUG && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
 
 if (!$bb_cfg['gzip_compress']) {
     flush();
