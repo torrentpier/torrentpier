@@ -11,6 +11,7 @@
 	$(document).ready(function(){ $('div.sp-head').click(); });
 </script>
 <!-- ENDIF -->
+<!-- ENDIF / LOGGED_IN -->
 
 <!-- IF $bb_cfg['show_post_bbcode_button'] -->
 <script type="text/javascript">
@@ -37,7 +38,6 @@
     })();
 </script>
 <!-- ENDIF -->
-<!-- ENDIF / LOGGED_IN -->
 
 <!-- IF $bb_cfg['use_ajax_posts'] && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
 <script type="text/javascript">
