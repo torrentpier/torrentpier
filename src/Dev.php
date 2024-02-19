@@ -216,7 +216,7 @@ class Dev
             $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
             $sql = self::short_query($dbg['sql'], true);
             $time = sprintf('%.4f', $dbg['time']);
-            $perc = @sprintf('[%d%%]', round($dbg['time'] * 100 / $db_obj->sql_timetotal));
+            $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
 
             $log .= ''
