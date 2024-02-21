@@ -748,6 +748,7 @@ switch ($mode) {
             bb_die(return_msg_mcp($msg));
         }
         break;
+
     default:
         bb_die('invalid action');
         break;
