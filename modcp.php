@@ -110,7 +110,7 @@ if ($topic_id) {
 	";
 
     if (!$topic_row = DB()->fetch_row($sql)) {
-        bb_die($lang['TOPIC_POST_NOT_EXIST']);
+        bb_die('Topic post not exist');
     }
 
     $forum_id = $topic_row['forum_id'];
@@ -184,6 +184,7 @@ switch ($mode) {
     case 'unset_download':
     case 'post_pin':
     case 'post_unpin':
+
         if (empty($_POST['topic_id_list']) && empty($topic_id)) {
             bb_die($lang['NONE_SELECTED']);
         }
@@ -213,12 +214,15 @@ switch ($mode) {
 //
 switch ($mode) {
     case 'delete':
+
         if (!$is_auth['auth_delete']) {
             bb_die(sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
         }
 
         if ($confirmed) {
             $result = \TorrentPier\Legacy\Admin\Common::topic_delete($req_topics, $forum_id);
+
+            //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
             if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result) {
                 $datastore->enqueue('latest_news');
@@ -242,10 +246,14 @@ switch ($mode) {
             ]);
         }
         break;
+
     case 'move':
+
         if ($confirmed) {
             $new_forum_id = (int)$_POST['new_forum'];
             $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']), $_POST['reason_move_bot']);
+
+            //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
             if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result) {
                 $datastore->enqueue('latest_news');
@@ -269,6 +277,7 @@ switch ($mode) {
             }
 
             $forum_select = get_forum_select($forum_select_mode, 'new_forum', $forum_id);
+
             $template->assign_vars([
                 'TPL_MODCP_MOVE' => true,
                 'SHOW_LEAVESHADOW' => $is_moderator,
@@ -286,6 +295,7 @@ switch ($mode) {
             $template->set_filenames(['body' => 'modcp.tpl']);
         }
         break;
+
     case 'lock':
     case 'unlock':
         $lock = ($mode == 'lock');
@@ -330,7 +340,10 @@ switch ($mode) {
 
         $msg = ($lock) ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
         bb_die(return_msg_mcp($msg));
+
         break;
+
+    // Set or unset topics DL-type
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
@@ -350,6 +363,7 @@ switch ($mode) {
 
         // Log action
         $type = ($set_download) ? 'mod_topic_set_downloaded' : 'mod_topic_unset_downloaded';
+
         $log_action->mod($type, [
             'forum_id' => $forum_id,
             'topic_id' => $topic_id,
@@ -358,8 +372,11 @@ switch ($mode) {
 
         $msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
         bb_die(return_msg_mcp($msg));
+
         break;
+
     case 'split':
+        //mpd
         $delete_posts = isset($_POST['delete_posts']);
         $split = (isset($_POST['split_type_all']) || isset($_POST['split_type_beyond']));
         $posts = $_POST['post_id_list'] ?? [];
@@ -396,6 +413,8 @@ switch ($mode) {
         }
 
         if ($post_id_sql && $split) {
+            //mpd end
+
             $sql = "SELECT post_id, poster_id, topic_id, post_time
 				FROM " . BB_POSTS . "
 				WHERE post_id IN ($post_id_sql)
@@ -444,6 +463,7 @@ switch ($mode) {
                 }
 
                 $new_topic_id = DB()->sql_nextid();
+
                 // Update topic watch table, switch users whose posts
                 // have moved, over to watching the new topic
                 $sql = "UPDATE " . BB_TOPICS_WATCH . "
@@ -485,6 +505,7 @@ switch ($mode) {
                     'topic_id_new' => $new_topic_id,
                     'topic_title_new' => htmlCHR($_POST['subject'])
                 ]);
+
                 bb_die($message);
             }
         } elseif ($post_id_sql && $delete_posts) {
@@ -558,7 +579,10 @@ switch ($mode) {
         }
         $template->set_filenames(['body' => 'modcp_split.tpl']);
         break;
+
     case 'ip':
+        $anon = GUEST_UID;
+
         $rdns_ip_num = (isset($_GET['rdns'])) ? $_GET['rdns'] : '';
 
         if (!$post_id) {
@@ -592,7 +616,7 @@ switch ($mode) {
         //
         // Get other IP's this user has posted under
         //
-        $where_sql = ($poster_id == GUEST_UID) ? "post_username = '{$post_row['post_username']}'" : "poster_id = $poster_id";
+        $where_sql = ($poster_id == $anon) ? "post_username = '{$post_row['post_username']}'" : "poster_id = $poster_id";
 
         $sql = "SELECT poster_ip, COUNT(*) AS postings FROM " . BB_POSTS . " WHERE $where_sql GROUP BY poster_ip ORDER BY postings DESC LIMIT 100";
         if (!($result = DB()->sql_query($sql))) {
@@ -628,7 +652,7 @@ switch ($mode) {
         //
         $sql = "SELECT
 				u.user_id,
-				IF(u.user_id = " . GUEST_UID . ", p.post_username, u.username) AS username,
+				IF(u.user_id = $anon, p.post_username, u.username) AS username,
 				COUNT(*) as postings
 			FROM " . BB_USERS . " u, " . BB_POSTS . " p
 			WHERE p.poster_id = u.user_id
@@ -660,6 +684,7 @@ switch ($mode) {
 
         $template->set_filenames(['body' => 'modcp.tpl']);
         break;
+
     case 'post_pin':
     case 'post_unpin':
         $pin = ($mode == 'post_pin');
@@ -755,6 +780,9 @@ switch ($mode) {
 }
 
 $template->assign_vars(['PAGE_TITLE' => $lang['MOD_CP']]);
+
 require(PAGE_HEADER);
+
 $template->pparse('body');
+
 require(PAGE_FOOTER);
