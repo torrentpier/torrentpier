@@ -791,7 +791,7 @@ else {
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
             'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
-            'REPLIES' => $topic['topic_replies'],
+            'REPLIES' => $moved ? '' : $topic['topic_replies'],
             'ATTACH' => $topic['topic_attachment'],
             'STATUS' => $topic['topic_status'],
             'TYPE' => $topic['topic_type'],
