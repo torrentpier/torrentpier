@@ -110,7 +110,7 @@ if ($topic_id) {
 	";
 
     if (!$topic_row = DB()->fetch_row($sql)) {
-        bb_die('Topic post not exist');
+        bb_die($lang['INVALID_TOPIC_ID_DB']);
     }
 
     $forum_id = $topic_row['forum_id'];
