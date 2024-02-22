@@ -69,6 +69,9 @@ function validate_mode_condition($request_index, $mod_action = '')
     return (isset($_REQUEST[$request_index]) || (isset($_POST['mod_action']) && $_POST['mod_action'] === $mod_action));
 }
 
+// Start session management
+$user->session_start(['req_login' => true]);
+
 // Obtain initial vars
 $forum_id = $_REQUEST['f'] ?? 0;
 $topic_id = $_REQUEST['t'] ?? 0;
@@ -128,9 +131,6 @@ if ($topic_id) {
 } else {
     bb_die('Invalid request');
 }
-
-// Start session management
-$user->session_start(['req_login' => true]);
 
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
 if (isset($_POST['cancel']) || IS_GUEST) {

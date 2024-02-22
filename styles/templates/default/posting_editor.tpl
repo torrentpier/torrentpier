@@ -59,16 +59,14 @@ ajax.callback.posts = function(data) {
 	<option value="24" class="em">{L_FONT_HUGE}</option>
     <option value="26">&nbsp;size=26</option>
     <option value="28">&nbsp;size=28</option>
-</select>
-
+</select>&nbsp;
 <select name="codeAlign" class="text_size">
 	<option value="left" selected>{L_ALIGN}</option>
 	<option value="left">&nbsp;{L_LEFT}</option>
 	<option value="right">&nbsp;{L_RIGHT}</option>
 	<option value="center">&nbsp;{L_CENTER}</option>
 	<option value="justify">&nbsp;{L_JUSTIFY}</option>
-</select>
-
+</select>&nbsp;
 <span class="buttons">
     <input type="button" value="sup" name="codeSup" title="{L_SUPERSCRIPT}" />
     <input type="button" value="sub" name="codeSub" title="{L_SUBSCRIPT}" />&nbsp;
