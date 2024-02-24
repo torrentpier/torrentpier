@@ -130,9 +130,9 @@ switch ($field) {
         }
 
         $table = BB_BT_USERS;
-        $value = (float)str_replace(',', '.', $this->request['value']);
+        $value = (int)$this->request['value'];
 
-        if ($value < 0.0) {
+        if ($value < 0 || strlen($value) > 19) {
             $this->ajax_die($lang['WRONG_INPUT']);
         }
 
@@ -142,8 +142,7 @@ switch ($field) {
                 break;
             }
         }
-        $value = sprintf('%.0f', $value);
-        $this->response['new_value'] = humn_size($value, null, null, ' ');
+        $this->response['new_value'] = humn_size($value, space: ' ');
 
         $btu = get_bt_userdata($user_id);
         $btu[$field] = $value;
