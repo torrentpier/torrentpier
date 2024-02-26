@@ -2214,10 +2214,10 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
     if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && !$no_link) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
         $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+    }
 
-        if (getBanInfo($user_id)) {
-            return '<s>' . $profile . '</s>';
-        }
+    if (getBanInfo($user_id)) {
+        return '<s>' . $profile . '</s>';
     }
 
     return $profile;
