@@ -132,7 +132,7 @@ switch ($field) {
         $table = BB_BT_USERS;
         $value = (int)$this->request['value'];
 
-        if ($value < 0 || strlen($value) > 19) {
+        if ($value < 0) {
             $this->ajax_die($lang['WRONG_INPUT']);
         }
 
