@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'схаваны тэкст';
 $lang['SPOILER_CLOSE'] = 'паварот';
 $lang['PLAY_ON_CURPAGE'] = 'Пачаць гуляць на бягучую старонку';
 
-$lang['EDITED_TIME_TOTAL'] = 'Апошні раз рэдагавалася %s на %s; рэдагаваць %d раз у агульнай складанасці'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Апошні раз рэдагавалася %s на %s; рэдагаваць %d раз у агульнай складанасці'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Зачыні тэму';
 $lang['UNLOCK_TOPIC'] = 'Адкрывайце тэму';
