@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = '隠しテキスト';
 $lang['SPOILER_CLOSE'] = '番';
 $lang['PLAY_ON_CURPAGE'] = 'ちを、現在のページ';
 
-$lang['EDITED_TIME_TOTAL'] = '最終編集%sに%s編%d時計'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = '最終編集%sに%s編%d回'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'ロックの話題';
 $lang['UNLOCK_TOPIC'] = '話題の解除';
