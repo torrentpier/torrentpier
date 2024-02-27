@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'skjult tekst';
 $lang['SPOILER_CLOSE'] = 'slå';
 $lang['PLAY_ON_CURPAGE'] = 'Start spiller du på gjeldende side';
 
-$lang['EDITED_TIME_TOTAL'] = 'Sist endret av %s på %s; redigert %d tid totalt'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Sist endret av %s på %s; redigert %d ganger totalt'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Låse emnet';
 $lang['UNLOCK_TOPIC'] = 'Låse opp emnet';
