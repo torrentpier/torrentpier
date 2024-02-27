@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'hidden text';
 $lang['SPOILER_CLOSE'] = 'drehen';
 $lang['PLAY_ON_CURPAGE'] = 'Starten Sie die Wiedergabe auf aktuellen Seite';
 
-$lang['EDITED_TIME_TOTAL'] = 'Zuletzt bearbeitet von %s auf %s; bearbeitet %d, insgesamt ein mal bearbeitet'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Zuletzt bearbeitet von %s auf %s; bearbeitet %d-mal in insgesamt'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Sperre das Thema';
 $lang['UNLOCK_TOPIC'] = 'Entsperren Sie das Thema';
