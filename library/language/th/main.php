@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'ซ่อนข้อความ';
 $lang['SPOILER_CLOSE'] = 'เปิด';
 $lang['PLAY_ON_CURPAGE'] = 'เริ่มเล่นบนหน้าปัจจุบัน';
 
-$lang['EDITED_TIME_TOTAL'] = 'เมื่อแก้ไขโดย %s บ %s;แก้ไข %d เวลาทั้งหมด'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'เมื่อแก้ไขโดย %s บ %s;แก้ไข %d ครั้งในทั้งหมด'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'ล็อกเรื่อ';
 $lang['UNLOCK_TOPIC'] = 'ปลดล็อคนหัวข้อ';
