@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'прихований текст';
 $lang['SPOILER_CLOSE'] = 'згорнути';
 $lang['PLAY_ON_CURPAGE'] = 'Почати відтворення на цій сторінці';
 
-$lang['EDITED_TIME_TOTAL'] = 'Востаннє змінено %s (%s); всього редагувань: %d'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Востаннє редаговано %s (%s); всього редаговано %d разів'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Закрити тему';
 $lang['UNLOCK_TOPIC'] = 'Розблокувати тему';

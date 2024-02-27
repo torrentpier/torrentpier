@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'gizli mətn';
 $lang['SPOILER_CLOSE'] = 'twist';
 $lang['PLAY_ON_CURPAGE'] = 'Oynayan başlamaq üçün cari səhifə';
 
-$lang['EDITED_TIME_TOTAL'] = 'Sonuncu dəfə редактировалось %s azn %s; redaktə %d dəfə cəmi'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Sonuncu dəfə редактировалось %s azn %s; redaktə %d dəfə cəmi'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Yaxın mövzu';
 $lang['UNLOCK_TOPIC'] = 'Açıq mövzu';

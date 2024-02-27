@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'text ocult';
 $lang['SPOILER_CLOSE'] = 'torn';
 $lang['PLAY_ON_CURPAGE'] = 'Començar a jugar a la pàgina actual';
 
-$lang['EDITED_TIME_TOTAL'] = 'Últim editat per %s en %s; editat %d cop en total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Últim editat per %s en %s; editat %d cops en total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Bloquejar el tema';
 $lang['UNLOCK_TOPIC'] = 'Desbloquejar el tema';

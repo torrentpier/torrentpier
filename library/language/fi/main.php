@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'piilotettu teksti';
 $lang['SPOILER_CLOSE'] = 'käännä';
 $lang['PLAY_ON_CURPAGE'] = 'Aloittaa pelaamisen nykyisen sivun';
 
-$lang['EDITED_TIME_TOTAL'] = 'Viimeksi muokannut %s on %s; muokattu %d aika yhteensä'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Viimeksi muokannut %s on %s; muokattu %d kertaa yhteensä'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Lukitse aihe';
 $lang['UNLOCK_TOPIC'] = 'Avaa aihe';

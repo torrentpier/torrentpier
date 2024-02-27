@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'το κρυφό κείμενο';
 $lang['SPOILER_CLOSE'] = 'σειρά';
 $lang['PLAY_ON_CURPAGE'] = 'Ξεκινήστε να παίζετε στην τρέχουσα σελίδα';
 
-$lang['EDITED_TIME_TOTAL'] = 'Τελευταία επεξεργασία από %s για %s? άλλαξε %d φορά συνολικά'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Τελευταία επεξεργασία από %s για %s? άλλαξε %d φορές συνολικά'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Κλειδώστε το θέμα';
 $lang['UNLOCK_TOPIC'] = 'Ξεκλειδώστε το θέμα';

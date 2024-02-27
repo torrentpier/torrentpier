@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'slēpto tekstu';
 $lang['SPOILER_CLOSE'] = 'savukārt';
 $lang['PLAY_ON_CURPAGE'] = 'Sākt spēlēt uz pašreizējo lapu';
 
-$lang['EDITED_TIME_TOTAL'] = 'Pēdējais labojis %s par %s; rediģēt %d reizi kopā'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Pēdējais labojis %s par %s; rediģēt %d reizes kopā'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Bloķēšanas tēmu';
 $lang['UNLOCK_TOPIC'] = 'Atbloķētu tēmu';

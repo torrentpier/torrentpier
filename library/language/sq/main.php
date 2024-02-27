@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'tekst fshehur';
 $lang['SPOILER_CLOSE'] = 'kthehet';
 $lang['PLAY_ON_CURPAGE'] = 'Të fillojnë të luajnë në faqen e tanishme';
 
-$lang['EDITED_TIME_TOTAL'] = 'Fundit edituar nga %s në %s; redaktuar %d herë gjithsej'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Fundit edituar nga %s në %s; redaktuar %d herë gjithsej'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Bllokoni temë';
 $lang['UNLOCK_TOPIC'] = 'Hape këtë temë';

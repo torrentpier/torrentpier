@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = '隐藏文本';
 $lang['SPOILER_CLOSE'] = '转';
 $lang['PLAY_ON_CURPAGE'] = '开始播放当前页';
 
-$lang['EDITED_TIME_TOTAL'] = '最后编辑通过%s在%s;编辑%d时间在总'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = '最后编辑通过%s在%s;编辑%d次'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = '锁的主题';
 $lang['UNLOCK_TOPIC'] = '解开话题';

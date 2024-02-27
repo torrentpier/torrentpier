@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'թաքնված տեքստը';
 $lang['SPOILER_CLOSE'] = 'հերթը';
 $lang['PLAY_ON_CURPAGE'] = 'Սկսել է խաղալ ընթացիկ էջը';
 
-$lang['EDITED_TIME_TOTAL'] = 'Վերջին անգամ խմբագրել է %s է %s; խմբագրել %d անգամ: ընդհանուր առմամբ,'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Վերջին անգամ խմբագրել է %s է %s; խմբագրել %d անգամ: ընդհանուր առմամբ,'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Փակել թեման';
 $lang['UNLOCK_TOPIC'] = 'Բացեք ձեր թեման';

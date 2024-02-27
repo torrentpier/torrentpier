@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'teks tersembunyi';
 $lang['SPOILER_CLOSE'] = 'mengubah';
 $lang['PLAY_ON_CURPAGE'] = 'Mulai bermain pada halaman saat ini';
 
-$lang['EDITED_TIME_TOTAL'] = 'Terakhir diedit oleh %s pada %s; diedit %d waktu total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Terakhir diedit oleh %s pada %s; diedit %d kali total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Kunci topik';
 $lang['UNLOCK_TOPIC'] = 'Membuka topik';

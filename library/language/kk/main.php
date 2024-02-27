@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'жасырын мәтін';
 $lang['SPOILER_CLOSE'] = 'бұрылу';
 $lang['PLAY_ON_CURPAGE'] = 'Ағымдағы беттегі ойнатуды бастаңыз';
 
-$lang['EDITED_TIME_TOTAL'] = 'Өткен %s бойынша %s рет өңдеу; барлығы %d рет өңдеген'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Өткен %s бойынша %s рет өңдеу; барлығы %d есе өңдеген'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'тақырыпты Lock';
 $lang['UNLOCK_TOPIC'] = 'тақырыпты Unlock';

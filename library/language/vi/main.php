@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'văn bản ẩn';
 $lang['SPOILER_CLOSE'] = 'biến';
 $lang['PLAY_ON_CURPAGE'] = 'Bắt đầu chơi trên trang hiện tại';
 
-$lang['EDITED_TIME_TOTAL'] = 'Cuối cùng chỉnh sửa bởi %s trên %s; sửa %d thời gian trong tổng'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Cuối cùng chỉnh sửa bởi %s trên %s; sửa %d lần trong tổng'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Khóa chủ đề';
 $lang['UNLOCK_TOPIC'] = 'Mở khóa những chủ đề';

@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'Verborge teks';
 $lang['SPOILER_CLOSE'] = 'draai';
 $lang['PLAY_ON_CURPAGE'] = 'Begin speel op die huidige bladsy';
 
-$lang['EDITED_TIME_TOTAL'] = 'Laas geredigeer deur %s op %s; In totaal %d tyd geredigeer'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Laas geredigeer deur %s op %s; Geredigeer %d keer in totaal'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Sluit die onderwerp';
 $lang['UNLOCK_TOPIC'] = 'Ontgrendel die onderwerp';
