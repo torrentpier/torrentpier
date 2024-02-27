@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'rejtett szöveg';
 $lang['SPOILER_CLOSE'] = 'kapcsold';
 $lang['PLAY_ON_CURPAGE'] = 'Kezdj el játszani a jelenlegi oldal';
 
-$lang['EDITED_TIME_TOTAL'] = 'Utoljára szerkesztette %s a %s; szerkesztett %d idő összesen'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Utoljára szerkesztette %s a %s; szerkesztett %d alkalommal összesen'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Zár a téma';
 $lang['UNLOCK_TOPIC'] = 'Kinyit a téma';
