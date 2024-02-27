@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'छुपा पाठ';
 $lang['SPOILER_CLOSE'] = 'मोड़';
 $lang['PLAY_ON_CURPAGE'] = 'वर्तमान पृष्ठ पर चलाना प्रारंभ करें';
 
-$lang['EDITED_TIME_TOTAL'] = '%s पर %s पर अंतिम रूप से संपादित; कुल में %d समय संपादित किया गया'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = '%s पर %s पर अंतिम रूप से संपादित; कुल में %d बार संपादित किया गया'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'विषय को लॉक करें';
 $lang['UNLOCK_TOPIC'] = 'विषय अनलॉक करें';
