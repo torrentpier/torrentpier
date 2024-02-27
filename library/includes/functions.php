@@ -2177,9 +2177,10 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
  *
  * @param array $data
  * @param bool $target_blank
+ * @param bool $no_link
  * @return string
  */
-function profile_url(array $data, bool $target_blank = false): string
+function profile_url(array $data, bool $target_blank = false, bool $no_link = false): string
 {
     global $bb_cfg, $lang, $datastore;
 
@@ -2210,13 +2211,13 @@ function profile_url(array $data, bool $target_blank = false): string
     }
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
-    if (!in_array($user_id, explode(',', EXCLUDED_USERS))) {
+    if (!in_array($user_id, explode(',', EXCLUDED_USERS)) && !$no_link) {
         $target_blank = $target_blank ? ' target="_blank" ' : '';
         $profile = '<a ' . $target_blank . ' href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
+    }
 
-        if (getBanInfo($user_id)) {
-            return '<s>' . $profile . '</s>';
-        }
+    if (getBanInfo($user_id)) {
+        return '<s>' . $profile . '</s>';
     }
 
     return $profile;
