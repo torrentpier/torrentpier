@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'gizli metin';
 $lang['SPOILER_CLOSE'] = 'dön';
 $lang['PLAY_ON_CURPAGE'] = 'Şimdiki sayfada Başlat';
 
-$lang['EDITED_TIME_TOTAL'] = 'Toplam %s tarafından %s üzerinde düzenlenmiş Son; düzenlenmiş %d zaman'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Son %s tarafından %s üzerinde düzenlenmiş; %d kez toplamda düzenlenmiş'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Konu kilit';
 $lang['UNLOCK_TOPIC'] = 'Kilidini konu';
