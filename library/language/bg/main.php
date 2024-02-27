@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'скрит текст';
 $lang['SPOILER_CLOSE'] = 'обрат';
 $lang['PLAY_ON_CURPAGE'] = 'Започнете да играете на текущата страница';
 
-$lang['EDITED_TIME_TOTAL'] = 'За последен път промени %s на %s; редактиране на %d пъти общо'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'За последен път промени %s на %s; редактиране на %d пъти общо'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Затвори темата';
 $lang['UNLOCK_TOPIC'] = 'Отваряйте тема';
