@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = '숨겨진 텍스트';
 $lang['SPOILER_CLOSE'] = '차례';
 $lang['PLAY_ON_CURPAGE'] = '재생 시작에서는 현재 페이지';
 
-$lang['EDITED_TIME_TOTAL'] = '마지막 편집 %s 에 %s;편집 %d 시'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = '마지막 편집 %s 에 %s;편집 %d 서'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = '잠그 항목에';
 $lang['UNLOCK_TOPIC'] = '의 잠금을 해제 항목';
