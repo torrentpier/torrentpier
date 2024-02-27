@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'peidetud tekst';
 $lang['SPOILER_CLOSE'] = 'pööra';
 $lang['PLAY_ON_CURPAGE'] = 'Start mängib praegusele lehele';
 
-$lang['EDITED_TIME_TOTAL'] = 'Viimati toimetanud %s kohta %s; toimetanud %d aeg kokku'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Viimati toimetanud %s kohta %s; toimetanud %d korda kokku'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Lukku teema';
 $lang['UNLOCK_TOPIC'] = 'Avada teema';
