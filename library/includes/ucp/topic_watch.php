@@ -92,6 +92,7 @@ if ($watch_count > 0) {
                 'LAST_POST_RAW' => $watch[$i]['topic_last_post_time'],
                 'LAST_POST_ID' => $watch[$i]['topic_last_post_id'],
                 'IS_UNREAD' => $is_unread,
+                'POLL' => (bool)$watch[$i]['topic_vote'],
                 'TOPIC_ICON' => get_topic_icon($watch[$i], $is_unread),
                 'PAGINATION' => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], $bb_cfg['posts_per_page'])
             ]);

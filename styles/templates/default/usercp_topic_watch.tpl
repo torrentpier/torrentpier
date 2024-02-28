@@ -108,16 +108,15 @@
         </td>
         <td><a href="{watch.U_FORUM}" class="genmed">{watch.FORUM_TITLE}</a></td>
         <td class="tLeft nowrap">
+            <!-- IF watch.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
             <a class="topictitle" title="{watch.FULL_TOPIC_TITLE}" href="{watch.U_TOPIC}">{watch.TOPIC_TITLE}</a>
-            <!-- IF watch.PAGINATION --><br/><span
-                class="topicPG">&nbsp;[{ICON_GOTOPOST}{L_GOTO_SHORT} {watch.PAGINATION} ]</span><!-- ENDIF -->
+            <!-- IF watch.PAGINATION --><br/><span class="topicPG">&nbsp;[{ICON_GOTOPOST}{L_GOTO_SHORT} {watch.PAGINATION} ]</span><!-- ENDIF -->
         </td>
         <td>{watch.AUTHOR}</td>
         <td class="gensmall">{watch.REPLIES}</td>
         <td class="gensmall nowrap">
             <u>{watch.LAST_POST_RAW}</u>
-            {watch.LAST_POST}<!-- IF watch.IS_UNREAD --><a
-                href="{TOPIC_URL}{watch.TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ELSE -->
+            {watch.LAST_POST}<!-- IF watch.IS_UNREAD --><a href="{TOPIC_URL}{watch.TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ELSE -->
             <a href="{POST_URL}{watch.LAST_POST_ID}#{watch.LAST_POST_ID}">{ICON_LATEST_REPLY}</a><!-- ENDIF -->
         </td>
     </tr>
