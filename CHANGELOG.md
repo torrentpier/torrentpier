@@ -7,6 +7,7 @@
 
 - Release 2.4.2 🐯 ([belomaxorka](https://github.com/belomaxorka))
 - Added demo mode 📺 [\#1399](https://github.com/torrentpier/torrentpier/pull/1399) ([belomaxorka](https://github.com/belomaxorka))
+- Added showing poll status in topic_watch.php [\#1413](https://github.com/torrentpier/torrentpier/pull/1413) ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to view post_text of topic [\#1401](https://github.com/torrentpier/torrentpier/pull/1401) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for rutracker font BBCode tag [\#1397](https://github.com/torrentpier/torrentpier/pull/1397) ([belomaxorka](https://github.com/belomaxorka))
 - Added mod "Reason to move topic" [\#1388](https://github.com/torrentpier/torrentpier/pull/1388) ([belomaxorka](https://github.com/belomaxorka))
