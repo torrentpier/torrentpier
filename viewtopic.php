@@ -603,7 +603,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     if (!$poster_bot) {
-        $quote_btn = true;
+        $quote_btn = ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED));
         $edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
         $ip_btn = ($is_auth['auth_mod'] || IS_MOD);
     }

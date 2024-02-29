@@ -3,14 +3,16 @@
 <!-- ENDIF -->
 
 <div class="nav">
-	<a href="{U_INDEX}">{T_INDEX}</a>
-	<!-- IF MY_POSTS -->
-	&nbsp;&middot;&nbsp;
-	<span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>
-	<span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span>
-	<!-- ENDIF -->
-	&nbsp;&middot;&nbsp;
-	<!-- IF LOGGED_IN --><a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); window.location.reload();">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
+    <a href="{U_INDEX}">{T_INDEX}</a>
+    <!-- IF MY_POSTS -->
+    &nbsp;&middot;&nbsp;
+    <span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>
+    <span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span>
+    <!-- ENDIF -->
+    <!-- IF LOGGED_IN -->
+    &nbsp;&middot;&nbsp;
+    <a href="#" class="med normal" onclick="setCookie('{#COOKIE_MARK#}', 'all_forums'); window.location.reload();">{L_MARK_ALL_FORUMS_READ}</a>
+    <!-- ENDIF -->
 </div>
 
 <!-- IF DISPLAY_AS_POSTS -->

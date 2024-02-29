@@ -581,7 +581,7 @@ if ($post_mode) {
         // Topic posts block
         foreach ($topic_posts as $row_num => $post) {
             if ($post['poster_id'] != BOT_UID) {
-                $quote_btn = true;
+                $quote_btn = !IS_GUEST;
                 $edit_btn = $ip_btn = IS_AM;
             }
 
