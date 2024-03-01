@@ -796,7 +796,7 @@ else {
             'STATUS' => $topic['topic_status'],
             'TYPE' => $topic['topic_type'],
             'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),
-            'POLL' => !IS_GUEST && $topic['topic_vote'],
+            'POLL' => (bool)$topic['topic_vote'],
             'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
             'TOPIC_AUTHOR' => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
