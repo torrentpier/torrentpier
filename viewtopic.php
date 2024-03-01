@@ -508,7 +508,7 @@ $template->assign_vars([
     'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&t=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
-    'POLL_IS_EDITABLE' => (!$poll_time_expired),
+    'POLL_IS_EDITABLE' => !$poll_time_expired,
     'POLL_IS_FINISHED' => ($t_data['topic_vote'] == POLL_FINISHED),
     'CAN_MANAGE_POLL' => $can_manage_poll,
     'CAN_ADD_POLL' => $can_add_poll
