@@ -473,7 +473,7 @@ td.topic_id { cursor: pointer; }
     <td class="tCenter small nowrap" style="padding: 3px 4px 2px;">
         <p>
             <span title="{L_REPLIES}: {t.REPLIES}">{t.REPLIES}</span>
-            <!-- IF t.REPLIES and t.VIEWS --><span class="small"> | </span><!-- ENDIF -->
+            <span class="small"> | </span>
             <span title="{L_VIEWS}: {t.VIEWS}">{t.VIEWS}</span>
         </p>
         <!-- BEGIN tor -->
