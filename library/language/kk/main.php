@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Код дисплей: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'тізім';
 $lang['LIST_TITLE'] = 'Тізімі: [list]text[/list] (Ctrl + L)';
 $lang['LIST_ITEM'] = 'Реттелген тізім: [тізімі =] text[/list] (Ctrl + O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'дәйексөз таңдалған';
 $lang['JAVASCRIPT_ON'] = 'JavaScript қосу үшін хабарлама жіберуге қажетті басшылары';
 
