@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Koda za prikaz: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Seznam';
 $lang['LIST_TITLE'] = 'Seznam: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Urejen seznam: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Izbrano ponudbo';
 $lang['JAVASCRIPT_ON'] = 'Glave, potrebne za pošiljanje sporočil omogočite JavaScript';
 
