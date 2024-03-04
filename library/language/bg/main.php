@@ -1549,6 +1549,8 @@ $lang['CODE_TITLE'] = 'Дисплей код: [code]code[/code] (Ctrl+k)';
 $lang['LIST'] = 'Списък';
 $lang['LIST_TITLE'] = 'Списък: [list]text[/list] (клавишна комбинация Ctrl+л)';
 $lang['LIST_ITEM'] = 'Сортиран списък: [списък=]text[/list] (клавишна комбинация Ctrl+о)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Цитат на избраното';
 $lang['JAVASCRIPT_ON'] = 'Необходимо за изпращане на съобщения, трябва да включите JavaScript';
 
