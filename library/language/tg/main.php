@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Намоиши Кодекс: [code]code[/code] (Ctrl + K)
 $lang['LIST'] = 'рӯйхат';
 $lang['LIST_TITLE'] = 'Рӯйхати: [list]text[/list] (Ctrl + л)';
 $lang['LIST_ITEM'] = 'Рӯйхати фармон: [рӯйхати =] text[/list] (Ctrl + O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Quote интихобшуда';
 $lang['JAVASCRIPT_ON'] = 'Роҳбарони зарурӣ барои фиристодани паёмҳо имконият JavaScript';
 

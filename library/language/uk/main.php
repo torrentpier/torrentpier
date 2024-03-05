@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Код: [code]код[/code] (Ctrl+K)';
 $lang['LIST'] = 'Список';
 $lang['LIST_TITLE'] = 'Список: [list]текст[/list] (Ctrl+І)';
 $lang['LIST_ITEM'] = 'Нумерований список: [list=]текст[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Цитувати виділене';
 $lang['JAVASCRIPT_ON'] = 'Для надсилання повідомлень необхідно включити JavaScript';
 

@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Kods displejs: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Saraksts';
 $lang['LIST_TITLE'] = 'Saraksts: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Sakārtots saraksts: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Citēt izvēlēto';
 $lang['JAVASCRIPT_ON'] = 'Vadītāji, kas nepieciešami, lai nosūtītu ziņu iespējot JavaScript';
 

@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Kodas: ekranas: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Sąrašas';
 $lang['LIST_TITLE'] = 'Sąrašas: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Užsisakyti sąrašas: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Citata pasirinkto';
 $lang['JAVASCRIPT_ON'] = 'Vadovai prireikti siųsti pranešimus įgalinti JavaScript';
 
