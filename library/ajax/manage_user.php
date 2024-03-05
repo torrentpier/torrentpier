@@ -39,6 +39,7 @@ switch ($mode) {
             \TorrentPier\Sessions::delete_user_sessions($user_id);
             \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
+            $user_id = $userdata['user_id']; // Store self user_id for redirect after deleting
             $this->response['info'] = $lang['USER_DELETED'];
         } else {
             $this->ajax_die($lang['USER_DELETE_CSV']);
@@ -98,7 +99,6 @@ switch ($mode) {
         \TorrentPier\Sessions::delete_user_sessions($user_id);
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
         break;
-
     default:
         $this->ajax_die('Invalid mode');
 }
