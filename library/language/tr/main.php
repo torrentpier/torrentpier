@@ -1551,6 +1551,8 @@ $lang['CODE_TITLE'] = 'Kod ekran: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Liste';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = '(Ctrl+O)text[/list] [list=]sipariş listesi:';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Seçili alıntı';
 $lang['JAVASCRIPT_ON'] = 'Mesaj göndermek için gerekli başkanları JavaScript etkinleştirmek için';
 

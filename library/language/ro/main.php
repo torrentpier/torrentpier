@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Cod display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Listă ordonată: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Citat selectat';
 $lang['JAVASCRIPT_ON'] = 'Capul este necesar pentru a trimite mesaje pentru a activa JavaScript';
 

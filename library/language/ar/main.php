@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'رمز العرض: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'قائمة';
 $lang['LIST_TITLE'] = 'قائمة: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'أمر القائمة: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'اقتباس مختارة';
 $lang['JAVASCRIPT_ON'] = 'رؤساء اللازمة لإرسال رسائل إلى تمكين جافا سكريبت';
 

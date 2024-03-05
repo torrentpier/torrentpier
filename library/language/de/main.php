@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Code Anzeige: [code]code[/code] (Strg+K)';
 $lang['LIST'] = 'Liste';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Strg+l)';
 $lang['LIST_ITEM'] = 'Geordnete Liste: [list=]text[/list] (Strg+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Zitat ausgewählt';
 $lang['JAVASCRIPT_ON'] = 'Köpfe notwendig, um Nachrichten zu senden, um JavaScript zu aktivieren';
 

@@ -384,6 +384,14 @@ a.gen, a.med, a.genmed, a.small, a.gensmall {
   margin-left: 2em;
 }
 
+.post-acronym {
+  text-decoration: none;
+  border-bottom: 1px dashed green;
+  cursor: help;
+  color: darkgreen;
+  display: inline-block;
+}
+
 /* ---------------------------------- *
      Code blocks
  * ---------------------------------- */

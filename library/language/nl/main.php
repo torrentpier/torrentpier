@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Code display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lijst';
 $lang['LIST_TITLE'] = 'Lijst: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Geordende lijst: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Quote geselecteerd';
 $lang['JAVASCRIPT_ON'] = 'Hoofden nodig om berichten te verzenden om JavaScript te activeren';
 
