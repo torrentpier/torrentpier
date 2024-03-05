@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Дисплеј код: [code]code[/code] (Цтрл+у)';
 $lang['LIST'] = 'Списак';
 $lang['LIST_TITLE'] = 'Листа: [list]text[/list] (комбинација тастера Ctrl+л)';
 $lang['LIST_ITEM'] = 'Уредан списак: [листа=]text[/list] (комбинација тастера Ctrl+о)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Цитат посвећен';
 $lang['JAVASCRIPT_ON'] = 'Неопходно је за слање порука морате да омогућите Јавасцрипт';
 

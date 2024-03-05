@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Kód displej: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Seznam';
 $lang['LIST_TITLE'] = 'Seznam: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Uspořádaný seznam: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Cituji vybrané';
 $lang['JAVASCRIPT_ON'] = 'Hlavy nutné odesílat zprávy, aby povolit JavaScript';
 

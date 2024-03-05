@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Codi mostra: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Llista';
 $lang['LIST_TITLE'] = 'Llista: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Llista ordenada: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Cita seleccionada';
 $lang['JAVASCRIPT_ON'] = 'Caps necessaris per a enviar missatges per activar JavaScript';
 

@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'Kode display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Daftar';
 $lang['LIST_TITLE'] = 'Daftar: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Daftar memerintahkan: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Kutipan yang dipilih';
 $lang['JAVASCRIPT_ON'] = 'Kepala diperlukan untuk mengirim pesan untuk mengaktifkan JavaScript';
 

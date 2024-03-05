@@ -1547,6 +1547,8 @@ $lang['CODE_TITLE'] = 'קוד תצוגה: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'רשימת';
 $lang['LIST_TITLE'] = 'הרשימה: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'הזמין את הרשימה: [list=]text[/list] (Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'ציטוט נבחר';
 $lang['JAVASCRIPT_ON'] = 'ראשי צורך לשלוח הודעות כדי לאפשר JavaScript';
 

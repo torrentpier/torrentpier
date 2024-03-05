@@ -1551,6 +1551,8 @@ $lang['CODE_TITLE'] = 'コード表示[code]code[/code](Ctrl+K)';
 $lang['LIST'] = 'リスト';
 $lang['LIST_TITLE'] = 'リスト：[list]text[/list](Ctrl+l)';
 $lang['LIST_ITEM'] = '順序付きリスト:"一覧=]text[/list](Ctrl+O)';
+$lang['ACR'] = 'Acronym';
+$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = '見積もりの選択';
 $lang['JAVASCRIPT_ON'] = 'ヘッドに必要なメッセージを送るためJavaScriptを有効にする';
 
