@@ -35,11 +35,11 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['USER_DELETE_CONFIRM']);
         }
 
-        if ($user_id != BOT_UID) {
+        if (!in_array($user_id, explode(',', EXCLUDED_USERS))) {
             \TorrentPier\Sessions::delete_user_sessions($user_id);
             \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
-            $user_id = $userdata['user_id']; // Store self user_id for redirect after deleting
+            $user_id = $userdata['user_id']; // Store self user_id for redirect after successful deleting
             $this->response['info'] = $lang['USER_DELETED'];
         } else {
             $this->ajax_die($lang['USER_DELETE_CSV']);
