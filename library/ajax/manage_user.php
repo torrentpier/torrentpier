@@ -35,55 +35,46 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['USER_DELETE_CONFIRM']);
         }
 
-        if ($user_id != BOT_UID) {
+        if (!in_array($user_id, explode(',', EXCLUDED_USERS))) {
             \TorrentPier\Sessions::delete_user_sessions($user_id);
             \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
+            $user_id = $userdata['user_id']; // Store self user_id for redirect after successful deleting
             $this->response['info'] = $lang['USER_DELETED'];
         } else {
             $this->ajax_die($lang['USER_DELETE_CSV']);
         }
         break;
     case 'delete_topics':
-        if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) {
+        if ($userdata['user_id'] == $user_id) {
             $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
         }
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DELETE_USER_ALL_POSTS_CONFIRM']);
         }
 
-        if (IS_ADMIN) {
-            $user_topics = DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
-            $deleted_topics = \TorrentPier\Legacy\Admin\Common::topic_delete($user_topics);
-            $deleted_posts = \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
-
-            $this->response['info'] = $lang['USER_DELETED_POSTS'];
-        } else {
-            $this->ajax_die($lang['NOT_ADMIN']);
-        }
+        $user_topics = DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
+        $deleted_topics = \TorrentPier\Legacy\Admin\Common::topic_delete($user_topics);
+        $deleted_posts = \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
+        $this->response['info'] = $lang['USER_DELETED_POSTS'];
         break;
     case 'delete_message':
-        if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) {
+        if ($userdata['user_id'] == $user_id) {
             $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
         }
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DELETE_USER_POSTS_CONFIRM']);
         }
 
-        if (IS_ADMIN) {
-            \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
-
-            $this->response['info'] = $lang['USER_DELETED_POSTS'];
-        } else {
-            $this->ajax_die($lang['NOT_ADMIN']);
-        }
+        \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
+        $this->response['info'] = $lang['USER_DELETED_POSTS'];
         break;
     case 'user_activate':
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEACTIVATE_CONFIRM']);
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = '1' WHERE user_id = " . $user_id);
+        DB()->query("UPDATE " . BB_USERS . " SET user_active = 1 WHERE user_id = " . $user_id);
         $this->response['info'] = $lang['USER_ACTIVATE_ON'];
         break;
     case 'user_deactivate':
@@ -94,11 +85,10 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['ACTIVATE_CONFIRM']);
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = '0' WHERE user_id = " . $user_id);
+        DB()->query("UPDATE " . BB_USERS . " SET user_active = 0 WHERE user_id = " . $user_id);
         \TorrentPier\Sessions::delete_user_sessions($user_id);
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
         break;
-
     default:
         $this->ajax_die('Invalid mode');
 }
