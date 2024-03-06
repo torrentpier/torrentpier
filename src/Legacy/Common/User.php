@@ -468,13 +468,7 @@ class User
     public function set_session_cookies($user_id)
     {
         if ($user_id == GUEST_UID) {
-            $delete_cookies = [
-                COOKIE_DATA,
-                'torhelp',
-                'explain',
-                'sql_log',
-                'sql_log_full',
-            ];
+            $delete_cookies = [COOKIE_DATA, 'torhelp'];
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
