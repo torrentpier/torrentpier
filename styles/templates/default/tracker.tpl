@@ -396,7 +396,7 @@ ajax.callback.view_post = function(data) {
 	<td class="row1"><a class="gen" href="{TR_FORUM_URL}{tor.FORUM_ID}">{tor.FORUM_NAME}</a></td>
 	<!-- ENDIF -->
 	<td class="row4 med tLeft">
-		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2<!-- ENDIF --> tLink" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.POST_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
+		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2<!-- ENDIF --> tLink" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.POST_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span>&nbsp;<!-- ENDIF --><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
 	    <!-- IF SHOW_TIME_TOPICS --><div class="tr_tm">{tor.TOPIC_TIME}</div><!-- ENDIF -->
 	</td>
 	<!-- IF SHOW_AUTHOR -->
