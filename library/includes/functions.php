@@ -2228,8 +2228,17 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     global $bb_cfg;
 
     if ($bb_cfg['use_gravatar_provider']) {
-        $user_email = get_userdata($user_id)['user_email'];
-        return '<img src="' . \Gravatar\Gravatar::image($user_email)->url() . '" alt="' . $user_id . '" />';
+        $gravatar = CACHE('bb_cache')->get('gravatar_urls');
+        if (!isset($gravatar[$user_id])) {
+            $user_email = get_userdata($user_id)['user_email'];
+            // Gravatar settings
+            $gravatarImage = new \Gravatar\Image($user_email);
+            $gravatarImage->setSize($height);
+            $gravatarImage->defaultImage(make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']));
+            $gravatar = \Gravatar\Gravatar::image($user_email)->url();
+            CACHE('bb_cache')->set('gravatar_urls', [$user_id => $gravatar], 86400);
+        }
+        return '<img src="' . $gravatar[$user_id] . '" alt="Gravatar - Globally Recognized Avatars" title="Gravatar - Globally Recognized Avatars" />';
     }
 
     $height = $height ? 'height="' . $height . '"' : '';

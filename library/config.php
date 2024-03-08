@@ -601,7 +601,13 @@ $bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // TODO: For sect
 $bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: For regular sections
 
 // Avatars
-$bb_cfg['use_gravatar_provider'] = true;
+$bb_cfg['use_gravatar_provider'] = [
+    // Documentation: https://docs.gravatar.com/
+    'enabled' => true,
+    'default_avatar' => '', // Default imageset to use. Available: 404, mp, identicon, monsterid, wavatar, retro, robohash, blank
+    'max_rating' => 'g', // Maximum rating. Available: g, pg, r, x
+    'size' => 100 // Size in pixels. Default: 100
+];
 $bb_cfg['avatars'] = [
     'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // Allowed file extensions (after changing, do the same for $bb_cfg['file_id_ext'])
     'bot_avatar' => '/gallery/bot.gif', // The bot's avatar
