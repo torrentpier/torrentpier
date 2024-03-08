@@ -2229,7 +2229,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
 
     // Check for gravatar
     $user_gravatar = '';
-    if (!str_starts_with($user_id, GROUP_AVATAR_MASK) && $bb_cfg['use_gravatar_provider']['enabled']) {
+    if ($bb_cfg['use_gravatar_provider']['enabled'] && !str_starts_with($user_id, GROUP_AVATAR_MASK)) {
         $user_gravatar = get_userdata($user_id)['user_gravatar'];
     }
 
