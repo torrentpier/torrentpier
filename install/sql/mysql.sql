@@ -1347,6 +1347,7 @@ CREATE TABLE IF NOT EXISTS `bb_users`
   `user_opt`            INT(11)               NOT NULL DEFAULT '0',
   `user_rank`           INT(11)               NOT NULL DEFAULT '0',
   `avatar_ext_id`       TINYINT(4)            NOT NULL DEFAULT '0',
+  `user_gravatar`       VARCHAR(255)          NOT NULL DEFAULT '',
   `user_gender`         TINYINT(1)            NOT NULL DEFAULT '0',
   `user_birthday`       DATE                  NOT NULL DEFAULT '1900-01-01',
   `user_email`          VARCHAR(255)          NOT NULL DEFAULT '',
