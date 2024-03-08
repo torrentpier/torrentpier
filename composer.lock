@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d3ba700ad5fce7abfc08815599a39b3",
+    "content-hash": "8f7cce76a67078bfcadc8f77ba13972a",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -676,6 +676,50 @@
                 }
             ],
             "time": "2023-11-03T12:00:00+00:00"
+        },
+        {
+            "name": "forxer/gravatar",
+            "version": "4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/forxer/gravatar.git",
+                "reference": "49dfb7aee9f7778bdab6156e9e1b33b2bf5eab38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/forxer/gravatar/zipball/49dfb7aee9f7778bdab6156e9e1b33b2bf5eab38",
+                "reference": "49dfb7aee9f7778bdab6156e9e1b33b2bf5eab38",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gravatar\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Garnier",
+                    "email": "forxer@gmail.org"
+                }
+            ],
+            "description": "A library providing easy gravatar integration.",
+            "keywords": [
+                "gravatar"
+            ],
+            "support": {
+                "email": "forxer@gmail.com",
+                "issues": "https://github.com/forxer/gravatar/issues",
+                "source": "https://github.com/forxer/gravatar/tree/4.0.3"
+            },
+            "time": "2023-03-22T14:02:40+00:00"
         },
         {
             "name": "gigablah/sphinxphp",
@@ -3375,5 +3419,5 @@
         "ext-xmlwriter": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

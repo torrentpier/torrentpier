@@ -2227,6 +2227,11 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
 {
     global $bb_cfg;
 
+    if ($bb_cfg['use_gravatar_provider']) {
+        $user_email = get_userdata($user_id)['user_email'];
+        return '<img src="' . \Gravatar\Gravatar::image($user_email)->url() . '" alt="' . $user_id . '" />';
+    }
+
     $height = $height ? 'height="' . $height . '"' : '';
     $width = $width ? 'width="' . $width . '"' : '';
 

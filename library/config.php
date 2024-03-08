@@ -601,6 +601,7 @@ $bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // TODO: For sect
 $bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: For regular sections
 
 // Avatars
+$bb_cfg['use_gravatar_provider'] = true;
 $bb_cfg['avatars'] = [
     'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // Allowed file extensions (after changing, do the same for $bb_cfg['file_id_ext'])
     'bot_avatar' => '/gallery/bot.gif', // The bot's avatar
