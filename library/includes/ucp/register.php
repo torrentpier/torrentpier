@@ -376,10 +376,10 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
+                $pr_data['user_gravatar'] = $db_data['user_gravatar'] = ''; // Unset gravatar
                 if (isset($_POST['delete_avatar'])) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = $db_data['avatar_ext_id'] = 0;
-                    $pr_data['user_gravatar'] = $db_data['user_gravatar'] = '';
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
@@ -401,7 +401,8 @@ foreach ($profile_fields as $field => $can_edit) {
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
                 if (isset($_POST['set_gravatar']) && !isset($_POST['delete_avatar'])) {
                     $gravatarImage = new \Gravatar\Image($pr_data['user_email']);
-                    $gravatarImage->defaultImage($bb_cfg['use_gravatar_provider']['default_avatar'])
+                    $gravatarImage->setSize($bb_cfg['use_gravatar_provider']['size'])
+                        ->defaultImage($bb_cfg['use_gravatar_provider']['default_avatar'])
                         ->setMaxRating($bb_cfg['use_gravatar_provider']['max_rating'])
                         ->setExtension('jpg');
 

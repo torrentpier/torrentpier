@@ -606,6 +606,7 @@ $bb_cfg['use_gravatar_provider'] = [
     'enabled' => true,
     'default_avatar' => 'monsterid', // Default imageset to use. Available: 404, mp, identicon, monsterid, wavatar, retro, robohash, blank
     'max_rating' => 'g', // Maximum rating. Available: g, pg, r, x
+    'size' => 100 // Size in pixels. Default: 100
 ];
 $bb_cfg['avatars'] = [
     'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // Allowed file extensions (after changing, do the same for $bb_cfg['file_id_ext'])
