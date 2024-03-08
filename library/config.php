@@ -604,7 +604,7 @@ $bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: For regular section
 $bb_cfg['use_gravatar_provider'] = [
     // Documentation: https://docs.gravatar.com/
     'enabled' => true,
-    'default_avatar' => '', // Default imageset to use. Available: 404, mp, identicon, monsterid, wavatar, retro, robohash, blank
+    'default_avatar' => 'monsterid', // Default imageset to use. Available: 404, mp, identicon, monsterid, wavatar, retro, robohash, blank
     'max_rating' => 'g', // Maximum rating. Available: g, pg, r, x
     'size' => 100 // Size in pixels. Default: 100
 ];
