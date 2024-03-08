@@ -715,6 +715,4 @@ $template->assign_vars([
     'U_RESET_AUTOLOGIN' => LOGIN_URL . "?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",
 ]);
 
-dump($pr_data['user_gravatar']);
-
 print_page('usercp_register.tpl');
