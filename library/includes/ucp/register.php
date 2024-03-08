@@ -399,15 +399,17 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'user_gravatar':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
-                if (isset($_POST['set_gravatar'])) {
+                if (isset($_POST['delete_avatar'])) {
+                    $pr_data['user_gravatar'] = $db_data['user_gravatar'] = '';
+                } elseif (isset($_POST['set_gravatar'])) {
                     $gravatarImage = new \Gravatar\Image($pr_data['user_email']);
                     $gravatarImage->setSize($bb_cfg['use_gravatar_provider']['size'])
                         ->defaultImage($bb_cfg['use_gravatar_provider']['default_avatar'])
                         ->setMaxRating($bb_cfg['use_gravatar_provider']['max_rating'])
                         ->setExtension('jpg');
 
-                    $pr_data['avatar_ext_id'] = $gravatarImage->url();
-                    $db_data['avatar_ext_id'] = $gravatarImage->url();
+                    $pr_data['user_gravatar'] = $gravatarImage->url();
+                    $db_data['user_gravatar'] = $gravatarImage->url();
                 }
             }
             break;
