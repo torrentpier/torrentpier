@@ -2237,7 +2237,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
         $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar) {
-        if (!empty($user_gravatar)) {
+        if (!empty($user_gravatar) && $bb_cfg['use_gravatar_provider']['enabled']) {
             $user_avatar = '<img src="' . $user_gravatar . '" alt="' . $user_id . '" />';
         } elseif (!empty($ext_id)) {
             if (is_file(get_avatar_path($user_id, $ext_id))) {
