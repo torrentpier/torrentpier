@@ -2227,6 +2227,11 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
 {
     global $bb_cfg;
 
+    $user_gravatar = get_userdata($user_id)['user_gravatar'];
+    if (!empty($user_gravatar)) {
+        return '<img src="' . $user_gravatar . '" />';
+    }
+
     $height = $height ? 'height="' . $height . '"' : '';
     $width = $width ? 'width="' . $width . '"' : '';
 
