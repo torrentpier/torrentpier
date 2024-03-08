@@ -110,6 +110,7 @@ switch ($mode) {
             'user_timezone' => $bb_cfg['allow_change']['timezone'],
             'user_opt' => true,
             'avatar_ext_id' => true,
+            'user_gravatar' => $bb_cfg['use_gravatar_provider']['enabled'],
             'user_icq' => true,
             'user_skype' => true,
             'user_twitter' => true,
@@ -391,6 +392,24 @@ foreach ($profile_fields as $field => $can_edit) {
                 }
             }
             $tp_data['AVATARS_MAX_SIZE'] = humn_size($bb_cfg['avatars']['max_size']);
+            break;
+
+        /**
+         *  Gravatar (edit)
+         */
+        case 'user_gravatar':
+            if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
+                if (isset($_POST['set_gravatar'])) {
+                    $gravatarImage = new \Gravatar\Image($pr_data['user_email']);
+                    $gravatarImage->setSize($bb_cfg['use_gravatar_provider']['size'])
+                        ->defaultImage($bb_cfg['use_gravatar_provider']['default_avatar'])
+                        ->setMaxRating($bb_cfg['use_gravatar_provider']['max_rating'])
+                        ->setExtension('jpg');
+
+                    $pr_data['avatar_ext_id'] = $gravatarImage->url();
+                    $db_data['avatar_ext_id'] = $gravatarImage->url();
+                }
+            }
             break;
 
         /**
