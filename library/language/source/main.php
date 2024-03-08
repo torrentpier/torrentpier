@@ -599,6 +599,7 @@ $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in 
 $lang['AVATAR_DELETE'] = 'Delete avatar';
 $lang['AVATAR_DISABLE'] = 'Avatar control option disabled for violation <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
+$lang['AVATAR_GRAVATAR'] = 'Set avatar from Gravatar service';
 
 $lang['SELECT_AVATAR'] = 'Select avatar';
 $lang['RETURN_PROFILE'] = 'Return to profile';
