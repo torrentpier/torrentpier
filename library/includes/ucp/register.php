@@ -401,8 +401,7 @@ foreach ($profile_fields as $field => $can_edit) {
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
                 if (isset($_POST['set_gravatar']) && !isset($_POST['delete_avatar'])) {
                     $gravatarImage = new \Gravatar\Image($pr_data['user_email']);
-                    $gravatarImage->setSize($bb_cfg['use_gravatar_provider']['size'])
-                        ->defaultImage($bb_cfg['use_gravatar_provider']['default_avatar'])
+                    $gravatarImage->defaultImage($bb_cfg['use_gravatar_provider']['default_avatar'])
                         ->setMaxRating($bb_cfg['use_gravatar_provider']['max_rating'])
                         ->setExtension('jpg');
 

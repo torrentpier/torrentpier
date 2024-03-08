@@ -2242,7 +2242,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
         $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar) {
         if (!empty($user_gravatar)) {
-            $user_avatar = '<img src="' . $user_gravatar . '" alt="' . $user_id . '" />';
+            $user_avatar = '<img src="' . $user_gravatar . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         } elseif (!empty($ext_id)) {
             if (is_file(get_avatar_path($user_id, $ext_id))) {
                 $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
