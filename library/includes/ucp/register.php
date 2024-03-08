@@ -376,11 +376,12 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
-                $pr_data['user_gravatar'] = $db_data['user_gravatar'] = ''; // Unset gravatar
                 if (isset($_POST['delete_avatar'])) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = $db_data['avatar_ext_id'] = 0;
+                    $pr_data['user_gravatar'] = $db_data['user_gravatar'] = ''; // Unset gravatar
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
+                    $pr_data['user_gravatar'] = $db_data['user_gravatar'] = ''; // Unset gravatar
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
                     if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
