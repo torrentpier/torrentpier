@@ -1384,7 +1384,7 @@ VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3
         'en', '0',
         '0', '0',
         '0', '0',
-        '0', '0',
+        '0', '', '0',
         '1900-01-01',
         '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
        ('-746', '0', 'bot', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3M53.CEe.O', '0', '0',
@@ -1392,7 +1392,7 @@ VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3
         'en', '0',
         '0', '0',
         '144', '0',
-        '0', '0',
+        '0', '', '0',
         '1900-01-01',
         'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
        ('2', '1', 'admin', '$2y$10$QeekUGqdfMO0yp7AT7la8OhgbiNBoJ627BO38MdS1h5kY7oX6UUKu', '0', '0',
@@ -1400,7 +1400,7 @@ VALUES ('-1', '0', 'Guest', '$2y$10$sfZSmqPio8mxxFQLRRXaFuVMkFKZARRz/RzqddfYByN3
         '0',
         '0', '0',
         '304', '1',
-        '0', '0',
+        '0', '', '0',
         '1900-01-01',
         'admin@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 
