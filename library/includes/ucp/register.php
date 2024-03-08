@@ -706,7 +706,7 @@ $template->assign_vars([
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
     'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $bb_cfg['terms_and_conditions_url']),
     'AVATAR_IMG' => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),
-    'AVATAR_GRAVATAR' => !empty($pr_data['user_gravatar']),
+    'AVATAR_HAS_GRAVATAR' => !empty($pr_data['user_gravatar']),
 
     'SIGNATURE_EXPLAIN' => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
     'SIG_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),
