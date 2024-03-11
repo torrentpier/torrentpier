@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Código de la pantalla: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Lista ordenada: [list=]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Cita seleccionada';
 $lang['JAVASCRIPT_ON'] = 'Los jefes necesario para enviar mensajes a habilitar JavaScript';
 
