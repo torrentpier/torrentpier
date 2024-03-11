@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'კოდი ჩვენება: [code]code[/code] (Ct
 $lang['LIST'] = 'სია';
 $lang['LIST_TITLE'] = 'სია: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'უბრძანა სია: [list=]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'ციტირებით არჩეული';
 $lang['JAVASCRIPT_ON'] = 'ხელმძღვანელები საჭიროა გააგზავნოთ შეტყობინებები JavaScript-ის გამოყენება';
 

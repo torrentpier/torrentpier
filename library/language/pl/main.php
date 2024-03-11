@@ -1550,8 +1550,8 @@ $lang['CODE_TITLE'] = 'Wyświetlacz kod: [code]code[/code] (Ctrl+k)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (kombinacja klawiszy Ctrl+l)';
 $lang['LIST_ITEM'] = 'Lista uporządkowana: [list=]text[/list] (skrót Ctrl+o)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Cytuj zaznaczenie';
 $lang['JAVASCRIPT_ON'] = 'Należy do wysyłania wiadomości, należy włączyć JavaScript';
 

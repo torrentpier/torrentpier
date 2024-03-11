@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Kode display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Listen';
 $lang['LIST_TITLE'] = 'Liste: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Sortert liste: [list=]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Sitat valgt';
 $lang['JAVASCRIPT_ON'] = 'Hoder som er nødvendig for å sende meldinger for å aktivere JavaScript';
 

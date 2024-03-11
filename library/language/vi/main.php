@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Mã hiển thị: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Danh sách';
 $lang['LIST_TITLE'] = 'Danh sách: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Lệnh danh sách: [sách=]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Báo lựa chọn';
 $lang['JAVASCRIPT_ON'] = 'Đầu cần thiết để gửi tin nhắn chính xác';
 

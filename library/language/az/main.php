@@ -1550,8 +1550,8 @@ $lang['CODE_TITLE'] = 'Ekran kodu: [code]code[/code] (Ctrl+j)';
 $lang['LIST'] = 'Siyahısı';
 $lang['LIST_TITLE'] = 'Siyahısı: [list]text[/list] (əsas birləşməsi Ctrl+l)';
 $lang['LIST_ITEM'] = 'Nizamlı siyahısı: [list=]text[/list] (əsas birləşməsi Ctrl+)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Sitat ayrılan';
 $lang['JAVASCRIPT_ON'] = 'Lazımdır mesaj göndərmək üçün JavaScript lazımdır';
 

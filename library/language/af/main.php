@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Kode vertoon: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'lys';
 $lang['LIST_TITLE'] = 'Lys: [list]text[/list] (Ctrl + l)';
 $lang['LIST_ITEM'] = 'Bestelde lys: [list =] text[/list] (Ctrl + O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Kwotasie gekies';
 $lang['JAVASCRIPT_ON'] = 'Hoofde wat nodig is om boodskappe te stuur om JavaScript te aktiveer';
 

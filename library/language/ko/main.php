@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = '코드 표시:[code]code[/code](Ctrl+K)';
 $lang['LIST'] = '목록';
 $lang['LIST_TITLE'] = '목록:[list]text[/list](Ctrl+l)';
 $lang['LIST_ITEM'] = '주문 목록:[=]text[/list](Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = '견적 선택';
 $lang['JAVASCRIPT_ON'] = '머리에 필요한 메시지를 보내 자바스크립트 사용';
 

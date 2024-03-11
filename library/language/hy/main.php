@@ -1550,8 +1550,8 @@ $lang['CODE_TITLE'] = 'Էկրան կոդ: [code]code[/code] (Ctrl+)';
 $lang['LIST'] = 'Ցուցակ';
 $lang['LIST_TITLE'] = 'Ցուցակը: [list]text[/list] (դյուրանցման Ctrl+l)';
 $lang['LIST_ITEM'] = 'Պատվիրված ցուցակը: [ցուցակ=]text[/list] (դյուրանցման Ctrl+)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Մեջբերում առանձնացված';
 $lang['JAVASCRIPT_ON'] = 'Անհրաժեշտ է հաղորդագրությունների ուղարկման համար անհրաժեշտ է միացնել JavaScript';
 

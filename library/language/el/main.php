@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Κώδικα επίδειξης: [code]code[/code] (Ctrl+
 $lang['LIST'] = 'Λίστα';
 $lang['LIST_TITLE'] = 'Λίστα: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Διατεταγμένη λίστα: [list=]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Το απόσπασμα που επιλέγεται';
 $lang['JAVASCRIPT_ON'] = 'Κεφάλια απαραίτητο να στείλετε μηνύματα για να ενεργοποιήσετε τη JavaScript';
 

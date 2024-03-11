@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Kod pogled: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Popis';
 $lang['LIST_TITLE'] = 'Spiska: [list]text[/list] (Ctrl+sam)';
 $lang['LIST_ITEM'] = 'Naredio listu: [listu=]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Citiram odabrane';
 $lang['JAVASCRIPT_ON'] = 'Glave potrebno da šalju poruke jezik je, ako omogućiti';
 
