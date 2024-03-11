@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = '代码显示：[code]code[/code](Ctrl+K)';
 $lang['LIST'] = '列表';
 $lang['LIST_TITLE'] = '列表：[list]text[/list](Ctrl+l)';
 $lang['LIST_ITEM'] = '下令名单：[清单=]text[/list](Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = '报价的选择';
 $lang['JAVASCRIPT_ON'] = '头有必要发送信息，以使JavaScript';
 
