@@ -1550,8 +1550,8 @@ $lang['CODE_TITLE'] = 'Prikaz šifra: [code]code[/code] (Ctrl+s)';
 $lang['LIST'] = 'Popis';
 $lang['LIST_TITLE'] = 'Popis: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Naredio popis: [list=]text[/list] (Ctrl+o)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Citiraj izdvojeno';
 $lang['JAVASCRIPT_ON'] = 'Potrebno je za slanje poruka potrebno je omogućiti JavaScript';
 
