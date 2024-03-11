@@ -82,8 +82,7 @@ class BBCode
         $this->preg = [
             '#\[quote="(.+?)"\]#isu' => $tpl['quote_username_open'],
             '#\[spoiler="(.+?)"\]#isu' => $tpl['spoiler_title_open'],
-            '#\[acronym="([\w\- \']+)"\](.*?)\[/acronym\]#isu' => '<span class="post-acronym" title="$1">$2</span>',
-            '#\[acronym=([\w\- \']+)\](.*?)\[/acronym\]#isu' => '<span class="post-acronym" title="$1">$2</span>',
+            '#\[acronym="(.+?)"\](.*?)\[/acronym\]#isu' => '<span class="post-acronym" title="$1">$2</span>',
             '#\[list=(a|A|i|I|1)\]#isu' => '<ul type="$1">',
             '#\[\*=(\d+)\]#isu' => '<li value="$1">',
             '#\[pre\](.*?)\[/pre\]#isu' => '<pre class="post-pre">$1</pre>',

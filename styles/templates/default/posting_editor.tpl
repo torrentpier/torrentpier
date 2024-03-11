@@ -74,6 +74,7 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" />
 	<input type="button" value="&#8667;" name="codeIndent" title="{L_INDENT_TAG}" />&nbsp;
 	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" />
+    <input type="button" value="{L_ACRONYM}" name="codeAcronym" title="{L_ACRONYM_TITLE}" />
     <input type="button" value="box" name="codeBox" title="{L_BOX_TAG}" />
 </span>
 
@@ -94,7 +95,6 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" style="text-decoration: underline;" />&nbsp;
 	<input type="button" value="{L_CODE}" name="codeCode" title="{L_CODE_TITLE}" />
 	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}" />
-	<input type="button" value="{L_ACR}" name="codeAcronym" title="{L_ACR_TITLE}" />
 	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" />&nbsp;
 	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onclick="bbcode.onclickQuoteSel();" />
 </div>
@@ -195,7 +195,6 @@ function checkForm(form) {
 
     bbcode.addTag("codeCode", "code", null, "K", ctrl);
     bbcode.addTag("codeList", "list", null, "L", ctrl);
-    bbcode.addTag("codeAcronym", "acronym", null, "", ctrl);
     bbcode.addTag("codeOpt", "*", "", "0", ctrl);
 </script>
 
@@ -207,6 +206,7 @@ function checkForm(form) {
     bbcode.addTag("codeSpoiler", "spoiler", null, "", ctrl);
     bbcode.addTag("codeSup", "sup", null, "", ctrl);
     bbcode.addTag("codeSub", "sub", null, "", ctrl);
+    bbcode.addTag("codeAcronym", "acronym", null, "", ctrl);
     bbcode.addTag("codeBox", "box", null, "", ctrl);
     bbcode.addTag("codeIndent", "indent", null, "", ctrl);
 
