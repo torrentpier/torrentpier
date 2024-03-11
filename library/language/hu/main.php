@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Kód kijelző: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Rendezett lista: [list=a]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Idézet kiválasztott';
 $lang['JAVASCRIPT_ON'] = 'Fejüket, hogy üzeneteket kell küldeni, hogy engedélyezze a JavaScript használatát';
 
