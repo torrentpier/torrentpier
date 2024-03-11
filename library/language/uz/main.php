@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Kodi ko\'rsatish: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'ro\'yxat';
 $lang['LIST_TITLE'] = 'Ro\'yxati: [list]text[/list] (Ctrl + L)';
 $lang['LIST_ITEM'] = 'Buyurdi ro\'yxati: [list =] text[/list] (Ctrl + O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Iqtibos tanlangan';
 $lang['JAVASCRIPT_ON'] = 'zarur rahbarlari JavaScript faollashtirish xabarlarni yuborish uchun';
 
