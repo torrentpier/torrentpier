@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Kood ekraan: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Nimekiri';
 $lang['LIST_TITLE'] = 'Nimekiri: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Tellida loetelu: [list=]text[/list] (Ctrl+O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Tsitaat valitud';
 $lang['JAVASCRIPT_ON'] = 'Juhid vaja sõnumeid saata enable JavaScript';
 
