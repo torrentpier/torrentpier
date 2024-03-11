@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'कोड प्रदर्शन: [code]code[/code] (Ct
 $lang['LIST'] = 'सूची';
 $lang['LIST_TITLE'] = 'सूची: [list]text[/list] (Ctrl + l)';
 $lang['LIST_ITEM'] = 'आदेशित सूची: [सूची =] पाठ [/list] (Ctrl + O)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'उद्धरण चयनित';
 $lang['JAVASCRIPT_ON'] = 'JavaScript को सक्षम करने के लिए संदेश भेजने के लिए आवश्यक प्रमुख';
 
