@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Дысплей код: [code]code[/code] (Ctrl+да)';
 $lang['LIST'] = 'Спіс';
 $lang['LIST_TITLE'] = 'Спіс: [list]text[/list] (спалучэнне клавіш Ctrl+л)';
 $lang['LIST_ITEM'] = 'Спарадкаваны спіс: [спіс=]text[/list] (спалучэнне клавіш Ctrl+о)';
-$lang['ACR'] = 'Acronym';
-$lang['ACR_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Acronym';
+$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
 $lang['QUOTE_SEL'] = 'Цытаваць наадварот';
 $lang['JAVASCRIPT_ON'] = 'Неабходна для адпраўкі паведамленняў неабходна ўключыць JavaScript';
 
