@@ -182,7 +182,10 @@
             <p><img src="{SPACER}" width="120" height="10" alt=""/></p>
         </td>
         <td class="message td2">
-            <div class="post_head pad_4">{MINIPOST_IMG} {review.POST_DATE}</div>
+            <div class="post_head pad_4">
+                <!-- IF review.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
+                <a class="small" href="{POST_URL}{review.POST_ID}#{review.POST_ID}" title="{L_POST_LINK}">{review.POST_DATE}</a>
+            </div>
             <div class="post_wrap post_body">{review.MESSAGE}</div>
         </td>
     </tr>

@@ -517,7 +517,9 @@ class Post
                 'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                 'POSTER' => profile_url($post),
                 'POSTER_NAME_JS' => addslashes($post['username']),
+                'POST_ID' => $post['post_id'],
                 'POST_DATE' => bb_date($post['post_time'], $bb_cfg['post_date_format']),
+                'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $post['forum_id']),
                 'MESSAGE' => get_parsed_post($post),
             ]);
         }
