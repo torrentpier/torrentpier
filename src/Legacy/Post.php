@@ -201,7 +201,7 @@ class Post
         if ($bb_cfg['show_latest_news']) {
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
             if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic') {
-                $datastore->enqueue('latest_news');
+                $datastore->enqueue(['latest_news']);
                 $datastore->update('latest_news');
             }
         }
@@ -209,7 +209,7 @@ class Post
         if ($bb_cfg['show_network_news']) {
             $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
             if (isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $mode == 'newtopic') {
-                $datastore->enqueue('network_news');
+                $datastore->enqueue(['network_news']);
                 $datastore->update('network_news');
             }
         }
