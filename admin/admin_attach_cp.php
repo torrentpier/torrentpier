@@ -441,7 +441,7 @@ if ($view === 'attachments') {
             $hidden_field = '<input type="hidden" name="attach_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 
             $template->assign_block_vars('attachrow', [
-                'ROW_NUMBER' => $i + ($_GET['start'] + 1),
+                'ROW_NUMBER' => $i + (@$_GET['start'] + 1),
                 'ROW_CLASS' => $row_class,
 
                 'FILENAME' => htmlspecialchars($attachments[$i]['real_filename']),
