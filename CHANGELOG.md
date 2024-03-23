@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.2 🐯 ([belomaxorka](https://github.com/belomaxorka))
+- Added integration with Gravatar 🎇 [\#1423](https://github.com/torrentpier/torrentpier/pull/1423) ([belomaxorka](https://github.com/belomaxorka))
 - Added demo mode 📺 [\#1399](https://github.com/torrentpier/torrentpier/pull/1399) ([belomaxorka](https://github.com/belomaxorka))
 - Added BBCode Acronym tag [\#1419](https://github.com/torrentpier/torrentpier/pull/1419), [\#1425](https://github.com/torrentpier/torrentpier/pull/1425) ([belomaxorka](https://github.com/belomaxorka))
 - Added showing poll status in `topic_watch.php` [\#1413](https://github.com/torrentpier/torrentpier/pull/1413) ([belomaxorka](https://github.com/belomaxorka))
