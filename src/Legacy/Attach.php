@@ -29,6 +29,17 @@ class Attach
 
     public $extension = '';
     public $file_comment = '';
+
+    public $attachment_id_list;
+    public $attachment_comment_list;
+    public $attachment_filesize_list;
+    public $attachment_filetime_list;
+    public $attachment_filename_list;
+    public $attachment_extension_list;
+    public $attachment_mimetype_list;
+    public $attachment_list;
+    public $attachment_thumbnail_list;
+
     public $num_attachments = 0; // number of attachments in message
     public $filesize = 0;
     public $filetime = 0;
