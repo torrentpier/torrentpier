@@ -13,6 +13,7 @@
 - Added support for rutracker font BBCode tag [\#1397](https://github.com/torrentpier/torrentpier/pull/1397) ([belomaxorka](https://github.com/belomaxorka))
 - Added mod "Reason to move topic" [\#1388](https://github.com/torrentpier/torrentpier/pull/1388) ([belomaxorka](https://github.com/belomaxorka))
 - Created template file for AJAX quick actions [\#1381](https://github.com/torrentpier/torrentpier/pull/1381) ([belomaxorka](https://github.com/belomaxorka))
+- Don't requires fill textarea for mod comment deleting [\#1433](https://github.com/torrentpier/torrentpier/pull/1433) ([belomaxorka](https://github.com/belomaxorka))
 - Make post date clickable in `posting.php` [\#1427](https://github.com/torrentpier/torrentpier/pull/1427) ([belomaxorka](https://github.com/belomaxorka))
 - Removed `wbr()` [\#1387](https://github.com/torrentpier/torrentpier/pull/1387) ([belomaxorka](https://github.com/belomaxorka))
 - Removed converting for legacy md5 passwords [\#1386](https://github.com/torrentpier/torrentpier/pull/1386) ([belomaxorka](https://github.com/belomaxorka))
