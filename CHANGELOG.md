@@ -16,6 +16,7 @@
 - Make post date clickable in `posting.php` [\#1427](https://github.com/torrentpier/torrentpier/pull/1427) ([belomaxorka](https://github.com/belomaxorka))
 - Removed `wbr()` [\#1387](https://github.com/torrentpier/torrentpier/pull/1387) ([belomaxorka](https://github.com/belomaxorka))
 - Removed converting for legacy md5 passwords [\#1386](https://github.com/torrentpier/torrentpier/pull/1386) ([belomaxorka](https://github.com/belomaxorka))
+- PHP 8.2: Fixed creation of dynamic property [\#1432](https://github.com/torrentpier/torrentpier/pull/1432) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken searching of attachments via ACP [\#1431](https://github.com/torrentpier/torrentpier/pull/1431) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed issue with poll_users cleaning at every cron job startup [\#1390](https://github.com/torrentpier/torrentpier/pull/1390) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed Undefined variable $wordCensor [\#1400](https://github.com/torrentpier/torrentpier/pull/1400) ([belomaxorka](https://github.com/belomaxorka))
