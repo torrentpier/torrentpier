@@ -273,7 +273,7 @@ $lang['SPOILER_CLOSE'] = 'Свернуть';
 $lang['PLAY_ON_CURPAGE'] = 'Начать проигрывание на текущей странице';
 
 $lang['EDITED_TIME_TOTAL'] = 'Последний раз редактировалось: <b>%s</b> (%s), всего редактировалось %d раз'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIMES_TOTAL'] = 'Последний раз редактировалось: <b>%s</b> (%s), всего редактировалось %d раз(а)'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Закрыть тему';
 $lang['UNLOCK_TOPIC'] = 'Вновь открыть тему';
@@ -1592,7 +1592,7 @@ $lang['DEL_LIST_INFO'] = 'Для удаления тем из списка кл�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Отслеживаемые темы';
-$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
+$lang['NO_WATCHED_TOPICS'] = 'Нет отслеживаемых тем';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Вернуться на главную';
@@ -2522,7 +2522,7 @@ $lang['WRONG_INPUT'] = 'Вы ввели некоторые неправильн�
 $lang['PROCESSING'] = 'Идет обработка...';
 $lang['FINISHED'] = 'Закончить';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Топик был перенесен из форума [b]%s[/b] в форум [b]%s[/b].[br][b]Причина переноса:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Сообщения из этой темы были выделены в отдельный топик [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема была выделена из [b]%s[/b][br][br]%s';
 
@@ -2636,8 +2636,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Поиск пользователей, 
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Поиск пользователей из %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Поиск пользователей с интересами %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Поиск пользователей с родом занятий %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Поиск пользователей, посетивших трекер в последние %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Поиск пользователей, посетивших трекер после %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Поиск пользователей, у которых выбран %s язык';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Поиск пользователей с часовым поясом UTC %s';
 $lang['SEARCH_FOR_STYLE'] = 'Поиск пользователей, использующих стиль %s';
@@ -2755,7 +2755,7 @@ $lang['TERMS_EXPLAIN'] = 'На данной странице вы можете �
 $lang['TR_STATS'] = [
     0 => 'неактивные пользователи в течение 30 дней',
     1 => 'неактивные пользователи в течение 90 дней',
-    2 => 'medium size distributions on the tracker',
+    2 => 'средний размер раздачи на трекере',
     3 => 'сколько у нас всего раздач на трекере',
     4 => 'сколько живых раздач (есть хотя бы 1 сид)',
     5 => 'сколько раздач где которые сидируются больше 5 сидами',
