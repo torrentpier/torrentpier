@@ -128,7 +128,7 @@ $lang['ONLINE_ADMIN'] = 'Администратор';
 $lang['ONLINE_MOD'] = 'Модератор';
 $lang['ONLINE_GROUP_MEMBER'] = 'Участник групп';
 
-$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'Это действие не может быть выполнено в демонстрационном режиме!';
 
 $lang['CURRENT_TIME'] = 'Текущее время: <span class="tz_time">%s</span>';
 
@@ -272,8 +272,8 @@ $lang['SPOILER_HEAD'] = 'скрытый текст';
 $lang['SPOILER_CLOSE'] = 'Свернуть';
 $lang['PLAY_ON_CURPAGE'] = 'Начать проигрывание на текущей странице';
 
-$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Последний раз редактировалось: <b>%s</b> (%s), всего редактировалось %d раз'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Последний раз редактировалось: <b>%s</b> (%s), всего редактировалось %d раз(а)'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Закрыть тему';
 $lang['UNLOCK_TOPIC'] = 'Вновь открыть тему';
@@ -1077,7 +1077,7 @@ $lang['BT_REG_FAIL'] = 'Не удалось зарегистрировать т�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Другой торрент с таким же info_hash уже <a href="%s"><b>зарегистрирован</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'В данный момент администратор отключил только v1 торренты, разрешены: v2 и гибриды (hybrids)';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'В данный момент администратор отключил v2 торренты, разрешены: v1 и гибриды (hybrids)';
-$lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_LIMIT'] = 'Настройки трекера не позволяют обрабатывать списки более чем с %d файлами. Текущее число: %d';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Разрегистрировать торрент';
 $lang['BT_UNREGISTERED'] = 'Торрент разрегистрирован';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Торрент уже разрегистрирован';
@@ -1280,7 +1280,7 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">У вас недостаточ�
 $lang['BONUS_RETURN'] = 'Вернуться к обмену сидбонусов';
 
 $lang['TRACKER'] = 'Трекер';
-$lang['RANDOM_RELEASE'] = 'Random release';
+$lang['RANDOM_RELEASE'] = 'Случайная раздача';
 $lang['OPEN_TOPICS'] = 'Открывать топики';
 $lang['OPEN_IN_SAME_WINDOW'] = 'открывать в этом же окне';
 $lang['SHOW_TIME_TOPICS'] = 'показывать время создания темы';
@@ -1323,7 +1323,7 @@ $lang['NEVER'] = 'Никогда';
 //mpd
 $lang['DELETE_POSTS'] = 'Удалить сообщения';
 $lang['DELETE_POSTS_SUCCESFULLY'] = 'Выбранные сообщения были успешно удалены';
-$lang['NO_POSTS_REMOVED'] = 'No posts were removed.';
+$lang['NO_POSTS_REMOVED'] = 'Не было удалено ни одного сообщения.';
 
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Объявления';
@@ -1339,7 +1339,7 @@ $lang['UPDATE_POST_TIME'] = 'Обновить время сообщения';
 $lang['TOPIC_SPLIT_NEW'] = 'Новая тема';
 $lang['TOPIC_SPLIT_OLD'] = 'Старая тема';
 $lang['BOT_LEAVE_MSG_MOVED'] = 'Оставить сообщение о переносе';
-$lang['BOT_REASON_MOVED'] = 'Reason to move';
+$lang['BOT_REASON_MOVED'] = 'Причина переноса';
 $lang['BOT_AFTER_SPLIT_TO_OLD'] = 'Оставить сообщение о разделении <b>в старой теме</b>';
 $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Добавить сообщение о разделении <b>в новую тему</b>';
 //qr
@@ -1365,7 +1365,7 @@ $lang['READ_PROFILE_TXTB'] = '[Профиль]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Изменить]';
-$lang['CODE_TOPIC_TXTB'] = '[Code]';
+$lang['CODE_TOPIC_TXTB'] = '[Код]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Поиск]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
 $lang['DELETE_POST_TXTB'] = '[x]';
@@ -1535,8 +1535,8 @@ $lang['BOLD'] = 'Жирный текст: [b]текст[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Наклонный текст: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
-$lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['BOX_TAG'] = 'Рамка вокруг текста: [box]текст[/box]';
+$lang['INDENT_TAG'] = 'Добавить отступ: [indent]текст[/indent]';
 $lang['SUPERSCRIPT'] = 'Надстрочный текст: [sup]текст[/sup]';
 $lang['SUBSCRIPT'] = 'Подстрочный текст: [sub]текст[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
@@ -1547,8 +1547,8 @@ $lang['CODE_TITLE'] = 'Код: [code]код[/code] (Ctrl+K)';
 $lang['LIST'] = 'Список';
 $lang['LIST_TITLE'] = 'Список: [list]текст[/list] (Ctrl+L)';
 $lang['LIST_ITEM'] = 'Нумерованный список: [list=]текст[/list] (Ctrl+O)';
-$lang['ACRONYM'] = 'Acronym';
-$lang['ACRONYM_TITLE'] = 'Acronym: [acronym=Full text]Short text[/acronym]';
+$lang['ACRONYM'] = 'Акроним';
+$lang['ACRONYM_TITLE'] = 'Акроним: [acronym=Полный текст]Сокращенный текст[/acronym]';
 $lang['QUOTE_SEL'] = 'Цит.выдел';
 $lang['JAVASCRIPT_ON'] = 'Для отправки сообщений необходимо включить JavaScript';
 
@@ -1592,7 +1592,7 @@ $lang['DEL_LIST_INFO'] = 'Для удаления тем из списка кл�
 
 // Watched topics
 $lang['WATCHED_TOPICS'] = 'Отслеживаемые темы';
-$lang['NO_WATCHED_TOPICS'] = 'No watching any topics';
+$lang['NO_WATCHED_TOPICS'] = 'Нет отслеживаемых тем';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Вернуться на главную';
@@ -1816,7 +1816,7 @@ $lang['FORUM_ADMIN_MAIN'] = 'Управление форумами';
 $lang['FORUM_ADMIN_EXPLAIN'] = 'Здесь вы можете создавать, удалять и изменять порядок вывода категорий и форумов';
 $lang['EDIT_FORUM'] = 'Изменить форум';
 $lang['CREATE_FORUM'] = 'Создать новый форум';
-$lang['CREATE_SUB_FORUM'] = 'Create subforum';
+$lang['CREATE_SUB_FORUM'] = 'Создать подфорум';
 $lang['CREATE_CATEGORY'] = 'Создать новую категорию';
 $lang['REMOVE'] = 'Удалить';
 $lang['UPDATE_ORDER'] = 'Изменить порядок';
@@ -2522,7 +2522,7 @@ $lang['WRONG_INPUT'] = 'Вы ввели некоторые неправильн�
 $lang['PROCESSING'] = 'Идет обработка...';
 $lang['FINISHED'] = 'Закончить';
 
-$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to forum [b]%s[/b].[br][b]Reason to move:[/b] %s[br][br]%s';
+$lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Топик был перенесен из форума [b]%s[/b] в форум [b]%s[/b].[br][b]Причина переноса:[/b] %s[br][br]%s';
 $lang['BOT_MESS_SPLITS'] = 'Сообщения из этой темы были выделены в отдельный топик [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Тема была выделена из [b]%s[/b][br][br]%s';
 
@@ -2636,8 +2636,8 @@ $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Поиск пользователей, 
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Поиск пользователей из %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Поиск пользователей с интересами %s';
 $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Поиск пользователей с родом занятий %s';
-$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s';
-$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s';
+$lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Поиск пользователей, посетивших трекер в последние %s';
+$lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Поиск пользователей, посетивших трекер после %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Поиск пользователей, у которых выбран %s язык';
 $lang['SEARCH_FOR_TIMEZONE'] = 'Поиск пользователей с часовым поясом UTC %s';
 $lang['SEARCH_FOR_STYLE'] = 'Поиск пользователей, использующих стиль %s';
@@ -2755,7 +2755,7 @@ $lang['TERMS_EXPLAIN'] = 'На данной странице вы можете �
 $lang['TR_STATS'] = [
     0 => 'неактивные пользователи в течение 30 дней',
     1 => 'неактивные пользователи в течение 90 дней',
-    2 => 'medium size distributions on the tracker',
+    2 => 'средний размер раздачи на трекере',
     3 => 'сколько у нас всего раздач на трекере',
     4 => 'сколько живых раздач (есть хотя бы 1 сид)',
     5 => 'сколько раздач где которые сидируются больше 5 сидами',
