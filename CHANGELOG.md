@@ -1,6 +1,6 @@
 # 📖 Change Log
 
-## [v2.4.2](https://github.com/torrentpier/torrentpier/tree/v2.4.2) (2024-XX-XX)
+## [v2.4.2](https://github.com/torrentpier/torrentpier/tree/v2.4.2) (2024-03-30)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.1...v2.4.2)
 
 **Merged pull requests:**
@@ -29,7 +29,7 @@
 - Minor improvements [\#1382](https://github.com/torrentpier/torrentpier/pull/1382), [\#1383](https://github.com/torrentpier/torrentpier/pull/1383), [\#1391](https://github.com/torrentpier/torrentpier/pull/1391), [\#1398](https://github.com/torrentpier/torrentpier/pull/1398), [\#1405](https://github.com/torrentpier/torrentpier/pull/1405), [\#1406](https://github.com/torrentpier/torrentpier/pull/1406), [\#1408](https://github.com/torrentpier/torrentpier/pull/1408), [\#1409](https://github.com/torrentpier/torrentpier/pull/1409), [\#1410](https://github.com/torrentpier/torrentpier/pull/1410), [\#1411](https://github.com/torrentpier/torrentpier/pull/1411), [\#1418](https://github.com/torrentpier/torrentpier/pull/1418), [\#1422](https://github.com/torrentpier/torrentpier/pull/1422) ([belomaxorka](https://github.com/belomaxorka))
 - Some bugfixes [\#1380](https://github.com/torrentpier/torrentpier/pull/1380) ([belomaxorka](https://github.com/belomaxorka))
 - Updated deps [\#1414](https://github.com/torrentpier/torrentpier/pull/1414), [\#1415](https://github.com/torrentpier/torrentpier/pull/1415), [\#1421](https://github.com/torrentpier/torrentpier/pull/1421), [\#1424](https://github.com/torrentpier/torrentpier/pull/1424) ([belomaxorka](https://github.com/belomaxorka))
-- New Crowdin updates [\#1384](https://github.com/torrentpier/torrentpier/pull/1384), [\#1389](https://github.com/torrentpier/torrentpier/pull/1389), [\#1392](https://github.com/torrentpier/torrentpier/pull/1392), [\#1402](https://github.com/torrentpier/torrentpier/pull/1402), [\#1403](https://github.com/torrentpier/torrentpier/pull/1403), [\#1412](https://github.com/torrentpier/torrentpier/pull/1412), [\#1420](https://github.com/torrentpier/torrentpier/pull/1420), [\#1429](https://github.com/torrentpier/torrentpier/pull/1429) ([Exileum](https://github.com/Exileum))
+- New Crowdin updates [\#1384](https://github.com/torrentpier/torrentpier/pull/1384), [\#1389](https://github.com/torrentpier/torrentpier/pull/1389), [\#1392](https://github.com/torrentpier/torrentpier/pull/1392), [\#1402](https://github.com/torrentpier/torrentpier/pull/1402), [\#1403](https://github.com/torrentpier/torrentpier/pull/1403), [\#1412](https://github.com/torrentpier/torrentpier/pull/1412), [\#1420](https://github.com/torrentpier/torrentpier/pull/1420), [\#1429](https://github.com/torrentpier/torrentpier/pull/1429), [\#1434](https://github.com/torrentpier/torrentpier/pull/1434) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.1](https://github.com/torrentpier/torrentpier/tree/v2.4.1) (2024-02-04)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.0...v2.4.1)
