@@ -16,7 +16,7 @@ if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
     bb_simple_die($lang['BT_PRIVATE_TRACKER'], 403);
 }
 
-$topic_id = !empty($_GET['topic']) ? (int)$_GET['topic'] : false;
+$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 
 if (!$topic_id) {
     bb_simple_die($lang['INVALID_TOPIC_ID'], 404);
@@ -28,7 +28,6 @@ $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_fil
         ON t.attach_id = ad.attach_id
         WHERE t.topic_id = ' . $topic_id . '
         LIMIT 1';
-
 $row = DB()->fetch_row($sql);
 
 if (empty($row['physical_filename'])) {
