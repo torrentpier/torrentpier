@@ -447,7 +447,7 @@ $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 // Error reporting
 $bb_cfg['bugsnag'] = [
     'enabled' => true,
-    'api_key' => '492753017170b6c2c76a0e7ae64604ea',
+    'api_key' => '33b3ed0102946bab71341f9edc125e21',
 ];
 
 $bb_cfg['telegram_sender'] = [
