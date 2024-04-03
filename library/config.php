@@ -21,8 +21,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.2';
-$bb_cfg['tp_release_date'] = '30-03-2024';
+$bb_cfg['tp_version'] = 'v2.4.3-dev';
+$bb_cfg['tp_release_date'] = 'XX-XX-2024';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Database
@@ -447,7 +447,7 @@ $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 // Error reporting
 $bb_cfg['bugsnag'] = [
     'enabled' => true,
-    'api_key' => '492753017170b6c2c76a0e7ae64604ea',
+    'api_key' => '33b3ed0102946bab71341f9edc125e21',
 ];
 
 $bb_cfg['telegram_sender'] = [
