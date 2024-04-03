@@ -35,11 +35,9 @@ class Dev
     /**
      * Environment type
      *
-     * @var string
+     * @var string|null
      */
-    public static string $envType;
-
-    public static $whoops;
+    public static ?string $envType = null;
 
     /**
      * Base debug functionality init
@@ -48,56 +46,30 @@ class Dev
      */
     public static function initDebug(): void
     {
-        global $bb_cfg;
-
-        self::$envType = (string)env('APP_ENV', 'local');
-        self::$whoops = new Run;
+        self::$envType = env('APP_ENV', 'local');
 
         if (self::$envType === 'production') {
-            if ($bb_cfg['error_reporting']['enabled']) {
-                if ($bb_cfg['error_reporting']['method'] == 'both' || $bb_cfg['error_reporting']['method'] == 'bugsnag') {
-                    self::getBugsnag($bb_cfg['error_reporting']['bugsnag']['api_key']);
-                }
-                if ($bb_cfg['error_reporting']['method'] == 'both' || $bb_cfg['error_reporting']['method'] == 'telegram') {
-                    self::getTelegramSender($bb_cfg['error_reporting']['telegram']);
-                }
-            }
+            self::getBugsnag();
         } else {
-            if (APP_DEBUG) {
-                self::getWhoops();
-            }
+            self::getWhoops();
         }
-
-        self::$whoops->register();
     }
 
     /**
      * Bugsnag debug driver
      *
-     * @param string $apiKey
      * @return void
      */
-    private static function getBugsnag(string $apiKey): void
+    private static function getBugsnag(): void
     {
-        Handler::register(Client::make($apiKey));
-    }
+        global $bb_cfg;
 
-    /**
-     * Send debug via Telegram
-     *
-     * @param array $configTelegram
-     * @return void
-     */
-    private static function getTelegramSender(array $configTelegram): void
-    {
-        $telegramSender = new PlainTextHandler();
-        $telegramSender->loggerOnly(true);
-        $telegramSender->setLogger((new Logger(
-            APP_NAME,
-            [(new TelegramHandler($configTelegram['token'], (int)$configTelegram['chat_id'], timeout: $configTelegram['timeout']))
-                ->setFormatter(new TelegramFormatter())]
-        )));
-        self::$whoops->pushHandler($telegramSender);
+        if (!$bb_cfg['bugsnag']['enabled']) {
+            return;
+        }
+
+        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+        Handler::register($bugsnag);
     }
 
     /**
@@ -107,10 +79,18 @@ class Dev
      */
     private static function getWhoops(): void
     {
+        global $bb_cfg;
+
+        if (!APP_DEBUG) {
+            return;
+        }
+
+        $whoops = new Run;
+
         /**
          * Show errors on page
          */
-        self::$whoops->pushHandler(new PrettyPageHandler);
+        $whoops->pushHandler(new PrettyPageHandler);
 
         /**
          * Show log in browser console
@@ -122,7 +102,7 @@ class Dev
             [(new BrowserConsoleHandler())
                 ->setFormatter((new LineFormatter(null, null, true)))]
         )));
-        self::$whoops->pushHandler($loggingInConsole);
+        $whoops->pushHandler($loggingInConsole);
 
         /**
          * Log errors in file
@@ -135,10 +115,24 @@ class Dev
                 [(new StreamHandler(WHOOPS_LOG_FILE))
                     ->setFormatter((new LineFormatter(null, null, true)))]
             )));
-            self::$whoops->pushHandler($loggingInFile);
+            $whoops->pushHandler($loggingInFile);
         }
 
-        self::$whoops->register();
+        /**
+         * Send debug via Telegram
+         */
+        if ($bb_cfg['telegram_sender']['enabled']) {
+            $telegramSender = new PlainTextHandler();
+            $telegramSender->loggerOnly(true);
+            $telegramSender->setLogger((new Logger(
+                APP_NAME,
+                [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: $bb_cfg['telegram_sender']['timeout']))
+                    ->setFormatter(new TelegramFormatter())]
+            )));
+            $whoops->pushHandler($telegramSender);
+        }
+
+        $whoops->register();
     }
 
     /**

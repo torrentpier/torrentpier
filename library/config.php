@@ -445,17 +445,16 @@ $bb_cfg['abuse_email'] = "abuse@$domain_name"; // abuse email (e.g. DMCA)
 $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 
 // Error reporting
-$bb_cfg['error_reporting'] = [
+$bb_cfg['bugsnag'] = [
     'enabled' => true,
-    'method' => 'telegram', // Available: bugsnag, telegram, both
-    'bugsnag' => [
-        'api_key' => '33b3ed0102946bab71341f9edc125e21',
-    ],
-    'telegram' => [
-        'token' => '',
-        'chat_id' => '',
-        'timeout' => 10
-    ]
+    'api_key' => '33b3ed0102946bab71341f9edc125e21',
+];
+
+$bb_cfg['telegram_sender'] = [
+    'enabled' => false,
+    'token' => '',
+    'chat_id' => '',
+    'timeout' => 10
 ];
 
 // Special users
