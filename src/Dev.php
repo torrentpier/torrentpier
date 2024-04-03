@@ -56,7 +56,7 @@ class Dev
         if (self::$envType === 'production') {
             if ($bb_cfg['error_reporting']['enabled']) {
                 if ($bb_cfg['error_reporting']['method'] == 'both' || $bb_cfg['error_reporting']['method'] == 'bugsnag') {
-                    self::getBugsnag($bb_cfg['error_reporting']['bugsnag']);
+                    self::getBugsnag($bb_cfg['error_reporting']['bugsnag']['api_key']);
                 }
                 if ($bb_cfg['error_reporting']['method'] == 'both' || $bb_cfg['error_reporting']['method'] == 'telegram') {
                     self::getTelegramSender($bb_cfg['error_reporting']['telegram']);
@@ -74,27 +74,27 @@ class Dev
     /**
      * Bugsnag debug driver
      *
-     * @param array $config
+     * @param string $apiKey
      * @return void
      */
-    private static function getBugsnag(array $config): void
+    private static function getBugsnag(string $apiKey): void
     {
-        Handler::register(Client::make($config['api_key']));
+        Handler::register(Client::make($apiKey));
     }
 
     /**
      * Send debug via Telegram
      *
-     * @param array $config
+     * @param array $configTelegram
      * @return void
      */
-    private static function getTelegramSender(array $config): void
+    private static function getTelegramSender(array $configTelegram): void
     {
         $telegramSender = new PlainTextHandler();
         $telegramSender->loggerOnly(true);
         $telegramSender->setLogger((new Logger(
             APP_NAME,
-            [(new TelegramHandler($config['token'], (int)$config['chat_id'], timeout: $config['timeout']))
+            [(new TelegramHandler($configTelegram['token'], (int)$configTelegram['chat_id'], timeout: $configTelegram['timeout']))
                 ->setFormatter(new TelegramFormatter())]
         )));
         self::$whoops->pushHandler($telegramSender);
@@ -137,6 +137,8 @@ class Dev
             )));
             self::$whoops->pushHandler($loggingInFile);
         }
+
+        self::$whoops->register();
     }
 
     /**
