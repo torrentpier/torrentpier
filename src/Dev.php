@@ -82,7 +82,6 @@ class Dev
 
     private function getTelegramSender()
     {
-
     }
 
     /**
