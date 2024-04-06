@@ -170,7 +170,7 @@ class Dev
      * @return string
      * @throws Exception
      */
-    public function get_sql_log(): string
+    public static function get_sql_log(): string
     {
         global $DBS, $CACHES, $datastore;
 
