@@ -53,3 +53,8 @@ if ($posts_days = (int)$bb_cfg['posts_cache_days_keep']) {
 if (empty($bb_cfg['bt_announce_url'])) {
     bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
 }
+
+// [Demo mode] Allow registering torrents by default
+if (IN_DEMO_MODE) {
+    DB()->query("UPDATE " . BB_FORUMS . " SET allow_reg_tracker = 1 WHERE allow_reg_tracker = 0");
+}
