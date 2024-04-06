@@ -37,39 +37,41 @@ class Dev
      *
      * @var string|null
      */
-    public static ?string $envType = null;
+    public ?string $envType = 'local';
 
     /**
-     * Base debug functionality init
-     *
-     * @return void
+     * Constructor
      */
-    public static function initDebug(): void
+    public function __construct()
     {
-        self::$envType = env('APP_ENV', 'local');
+        global $bb_cfg;
 
-        if (self::$envType === 'production') {
-            self::getBugsnag();
+        $this->envType = env('APP_ENV', 'local');
+
+        if ($this->envType === 'production') {
+            ini_set('display_errors', 0);
+            ini_set('display_startup_errors', 0);
+            if ($bb_cfg['bugsnag']['enabled']) {
+                $this->getBugsnag($bb_cfg['bugsnag']);
+            }
         } else {
-            self::getWhoops();
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            if (APP_DEBUG) {
+                $this->getWhoops();
+            }
         }
     }
 
     /**
      * Bugsnag debug driver
      *
+     * @param array $config
      * @return void
      */
-    private static function getBugsnag(): void
+    private function getBugsnag(array $config): void
     {
-        global $bb_cfg;
-
-        if (!$bb_cfg['bugsnag']['enabled']) {
-            return;
-        }
-
-        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
-        Handler::register($bugsnag);
+        Handler::register(Client::make($config['api_key']));
     }
 
     /**
@@ -77,13 +79,9 @@ class Dev
      *
      * @return void
      */
-    private static function getWhoops(): void
+    private function getWhoops(): void
     {
         global $bb_cfg;
-
-        if (!APP_DEBUG) {
-            return;
-        }
 
         $whoops = new Run;
 
@@ -141,7 +139,7 @@ class Dev
      * @return string
      * @throws Exception
      */
-    public static function get_sql_log(): string
+    public function get_sql_log(): string
     {
         global $DBS, $CACHES, $datastore;
 

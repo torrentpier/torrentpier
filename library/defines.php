@@ -64,8 +64,6 @@ define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
 ini_set('error_reporting', E_ALL); // PHP error reporting mode | https://www.php.net/manual/en/errorfunc.constants.php
-ini_set('display_errors', 1); // Show general php errors
-ini_set('display_startup_errors', 1); // Show startup php errors
 define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR); // MySQL error reporting mode | https://www.php.net/manual/mysqli-driver.report-mode.php
 ini_set('log_errors', 1); // php native logging
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)
