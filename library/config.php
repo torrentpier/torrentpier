@@ -447,14 +447,15 @@ $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 // Error reporting
 $bb_cfg['bugsnag'] = [
     'enabled' => true,
-    'api_key' => '33b3ed0102946bab71341f9edc125e21',
+    'api_key' => '33b3ed0102946bab71341f9edc125e21', // Don't change this if you want to help us find bugs
 ];
 
 $bb_cfg['telegram_sender'] = [
+    // How to get chat_id? https://api.telegram.org/bot{YOUR_TOKEN}/getUpdates
     'enabled' => false,
-    'token' => '',
-    'chat_id' => '',
-    'timeout' => 10
+    'token' => '', // Bot token
+    'chat_id' => '', // Bot chat_id
+    'timeout' => 10 // Timeout for responses
 ];
 
 // Special users

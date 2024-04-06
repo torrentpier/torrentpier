@@ -35,24 +35,41 @@ class Dev
     /**
      * Environment type
      *
-     * @var string|null
+     * @var string
      */
-    public static ?string $envType = null;
+    public string $envType = 'local';
 
     /**
-     * Base debug functionality init
+     * Whoops instance
      *
-     * @return void
+     * @var Run
      */
-    public static function initDebug(): void
-    {
-        self::$envType = env('APP_ENV', 'local');
+    private Run $whoops;
 
-        if (self::$envType === 'production') {
-            self::getBugsnag();
-        } else {
-            self::getWhoops();
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->envType = env('APP_ENV', 'local');
+        $this->whoops = new Run;
+
+        switch ($this->envType) {
+            case 'production':
+                ini_set('display_errors', 0);
+                ini_set('display_startup_errors', 0);
+                $this->getWhoopsProduction();
+                break;
+            case 'local':
+                ini_set('display_errors', 1);
+                ini_set('display_startup_errors', 1);
+                $this->getWhoops();
+                break;
         }
+        $this->getBugsnag();
+        $this->getTelegramSender();
+
+        $this->whoops->register();
     }
 
     /**
@@ -60,7 +77,7 @@ class Dev
      *
      * @return void
      */
-    private static function getBugsnag(): void
+    private function getBugsnag(): void
     {
         global $bb_cfg;
 
@@ -68,8 +85,40 @@ class Dev
             return;
         }
 
-        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
-        Handler::register($bugsnag);
+        Handler::register(Client::make($bb_cfg['bugsnag']['api_key']));
+    }
+
+    /**
+     * Telegram debug driver
+     *
+     * @return void
+     */
+    private function getTelegramSender(): void
+    {
+        global $bb_cfg;
+
+        if ($bb_cfg['telegram_sender']['enabled']) {
+            $telegramSender = new PlainTextHandler();
+            $telegramSender->loggerOnly(true);
+            $telegramSender->setLogger((new Logger(
+                APP_NAME,
+                [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: (int)$bb_cfg['telegram_sender']['timeout']))
+                    ->setFormatter(new TelegramFormatter())]
+            )));
+            $this->whoops->pushHandler($telegramSender);
+        }
+    }
+
+    /**
+     * Whoops production debug driver
+     *
+     * @return void
+     */
+    private function getWhoopsProduction(): void
+    {
+        $this->whoops->pushHandler(function () {
+            echo 'Sorry, something went wrong. Drink coffee and come back after some time... ☕️';
+        });
     }
 
     /**
@@ -77,20 +126,16 @@ class Dev
      *
      * @return void
      */
-    private static function getWhoops(): void
+    private function getWhoops(): void
     {
-        global $bb_cfg;
-
         if (!APP_DEBUG) {
             return;
         }
 
-        $whoops = new Run;
-
         /**
          * Show errors on page
          */
-        $whoops->pushHandler(new PrettyPageHandler);
+        $this->whoops->pushHandler(new PrettyPageHandler);
 
         /**
          * Show log in browser console
@@ -102,12 +147,12 @@ class Dev
             [(new BrowserConsoleHandler())
                 ->setFormatter((new LineFormatter(null, null, true)))]
         )));
-        $whoops->pushHandler($loggingInConsole);
+        $this->whoops->pushHandler($loggingInConsole);
 
         /**
          * Log errors in file
          */
-        if (ini_get('log_errors') == 1) {
+        if ((int)ini_get('log_errors') === 1) {
             $loggingInFile = new PlainTextHandler();
             $loggingInFile->loggerOnly(true);
             $loggingInFile->setLogger((new Logger(
@@ -115,24 +160,8 @@ class Dev
                 [(new StreamHandler(WHOOPS_LOG_FILE))
                     ->setFormatter((new LineFormatter(null, null, true)))]
             )));
-            $whoops->pushHandler($loggingInFile);
+            $this->whoops->pushHandler($loggingInFile);
         }
-
-        /**
-         * Send debug via Telegram
-         */
-        if ($bb_cfg['telegram_sender']['enabled']) {
-            $telegramSender = new PlainTextHandler();
-            $telegramSender->loggerOnly(true);
-            $telegramSender->setLogger((new Logger(
-                APP_NAME,
-                [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: $bb_cfg['telegram_sender']['timeout']))
-                    ->setFormatter(new TelegramFormatter())]
-            )));
-            $whoops->pushHandler($telegramSender);
-        }
-
-        $whoops->register();
     }
 
     /**
