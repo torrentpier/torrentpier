@@ -35,9 +35,9 @@ class Dev
     /**
      * Environment type
      *
-     * @var string|null
+     * @var string
      */
-    public ?string $envType = 'local';
+    public string $envType = 'local';
 
     /**
      * Constructor
@@ -48,18 +48,21 @@ class Dev
 
         $this->envType = env('APP_ENV', 'local');
 
-        if ($this->envType === 'production') {
-            ini_set('display_errors', 0);
-            ini_set('display_startup_errors', 0);
-            if ($bb_cfg['bugsnag']['enabled']) {
-                $this->getBugsnag($bb_cfg['bugsnag']);
-            }
-        } else {
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            if (APP_DEBUG) {
-                $this->getWhoops();
-            }
+        switch ($this->envType) {
+            case 'production':
+                ini_set('display_errors', 0);
+                ini_set('display_startup_errors', 0);
+                if ($bb_cfg['bugsnag']['enabled']) {
+                    $this->getBugsnag($bb_cfg['bugsnag']);
+                }
+                break;
+            case 'local':
+                ini_set('display_errors', 1);
+                ini_set('display_startup_errors', 1);
+                if (APP_DEBUG) {
+                    $this->getWhoops();
+                }
+                break;
         }
     }
 
