@@ -58,7 +58,7 @@ class Dev
             case 'production':
                 ini_set('display_errors', 0);
                 ini_set('display_startup_errors', 0);
-                $this->getWhoopsSimple();
+                $this->getWhoopsProduction();
                 break;
             case 'local':
                 ini_set('display_errors', 1);
@@ -107,6 +107,18 @@ class Dev
             )));
             $this->whoops->pushHandler($telegramSender);
         }
+    }
+
+    /**
+     * Whoops production debug driver
+     *
+     * @return void
+     */
+    private function getWhoopsProduction(): void
+    {
+        $this->whoops->pushHandler(function () {
+            echo 'Sorry, something went wrong. Drink coffee and come back after some time... ☕️';
+        });
     }
 
     /**
