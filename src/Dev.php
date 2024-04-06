@@ -44,17 +44,13 @@ class Dev
      */
     public function __construct()
     {
-        global $bb_cfg;
-
         $this->envType = env('APP_ENV', 'local');
+
 
         switch ($this->envType) {
             case 'production':
                 ini_set('display_errors', 0);
                 ini_set('display_startup_errors', 0);
-                if ($bb_cfg['bugsnag']['enabled']) {
-                    $this->getBugsnag($bb_cfg['bugsnag']);
-                }
                 break;
             case 'local':
                 ini_set('display_errors', 1);
@@ -64,17 +60,29 @@ class Dev
                 }
                 break;
         }
+
+        $this->getBugsnag();
     }
 
     /**
      * Bugsnag debug driver
      *
-     * @param array $config
      * @return void
      */
-    private function getBugsnag(array $config): void
+    private function getBugsnag(): void
     {
-        Handler::register(Client::make($config['api_key']));
+        global $bb_cfg;
+
+        if (!$bb_cfg['bugsnag']['enabled']) {
+            return;
+        }
+
+        Handler::register(Client::make($bb_cfg['bugsnag']['api_key']));
+    }
+
+    private function getTelegramSender()
+    {
+
     }
 
     /**
