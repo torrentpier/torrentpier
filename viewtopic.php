@@ -255,6 +255,12 @@ if ($bb_cfg['topic_notify_enabled']) {
                 bb_die($lang['YOU_ARE_WATCHING']);
             }
         }
+    } else {
+        if (isset($_GET['unwatch'])) {
+            if ($_GET['unwatch'] == 'topic') {
+                redirect(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
+            }
+        }
     }
 }
 
