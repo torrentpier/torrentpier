@@ -231,28 +231,20 @@ if ($bb_cfg['topic_notify_enabled']) {
     if ($userdata['session_logged_in']) {
         $can_watch_topic = true;
 
-        if (!empty($t_data['notify_status']) && $t_data['notify_status']) {
+        if ($t_data['notify_status'] == TOPIC_WATCH_NOTIFIED) {
+            $is_watching_topic = true;
             if (isset($_GET['unwatch'])) {
                 if ($_GET['unwatch'] == 'topic') {
-                    $is_watching_topic = 0;
-
                     DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['NO_LONGER_WATCHING']);
-            } else {
-                $is_watching_topic = true;
-
-                if (!$t_data['notify_status']) {
-                    DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
-                }
             }
-        } else {
+        } elseif ($t_data['notify_status'] == TOPIC_WATCH_UNNOTIFIED) {
             if (isset($_GET['watch'])) {
                 if ($_GET['watch'] == 'topic') {
                     $is_watching_topic = true;
-
                     DB()->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
@@ -261,21 +253,13 @@ if ($bb_cfg['topic_notify_enabled']) {
 
                 set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['YOU_ARE_WATCHING']);
-            } else {
-                $is_watching_topic = 0;
-            }
-        }
-    } else {
-        if (isset($_GET['unwatch'])) {
-            if ($_GET['unwatch'] == 'topic') {
-                redirect(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
             }
         }
     }
 }
 
 // Generate a 'Show posts in previous x days' select box. If the postdays var is POSTed
-// then get it's value, find the number of topics with dates newer than it (to properly
+// then get its value, find the number of topics with dates newer than it (to properly
 // handle pagination) and alter the main query
 $post_days = 0;
 $limit_posts_time = '';
