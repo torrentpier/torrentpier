@@ -120,10 +120,10 @@ switch ($mode) {
         }
 
         $select_sql = 'SELECT f.*, t.*, p.*';
-        $select_sql .= (!$submit) ? ', pt.*, u.username, u.user_id' : '';
+        $select_sql .= !$submit ? ', pt.*, u.username, u.user_id' : '';
 
         $from_sql = "FROM " . BB_POSTS . " p, " . BB_TOPICS . " t, " . BB_FORUMS . " f";
-        $from_sql .= (!$submit) ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
+        $from_sql .= !$submit ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
 
         $where_sql = "
 			WHERE p.post_id = $post_id
