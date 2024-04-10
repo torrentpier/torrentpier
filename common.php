@@ -146,6 +146,10 @@ function CACHE(string $cache_name)
  * Datastore
  */
 switch ($bb_cfg['datastore_type']) {
+    case 'apcu':
+        $datastore = new TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
+        break;
+
     case 'memcache':
         $datastore = new TorrentPier\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
         break;
