@@ -264,12 +264,12 @@ if ($start > $forum_topics) {
 // Generate SORT and ORDER selects
 $sort_value = isset($_REQUEST['sort']) ? (int)$_REQUEST['sort'] : $forum_data['forum_display_sort'];
 $order_value = isset($_REQUEST['order']) ? (int)$_REQUEST['order'] : $forum_data['forum_display_order'];
-$sort_list = '<select name="sort">' . get_forum_display_sort_option($sort_value) . '</select>';
+$sort_list = '<select name="sort">' . get_forum_display_sort_option($sort_value, 'list', 'sort') . '</select>';
 $order_list = '<select name="order">' . get_forum_display_sort_option($order_value, 'list', 'order') . '</select>';
 $s_display_order = '&nbsp;' . $lang['SORT_BY'] . ':&nbsp;' . $sort_list . '&nbsp;' . $order_list . '&nbsp;';
 
 // Selected SORT and ORDER methods
-$sort_method = get_forum_display_sort_option($sort_value, 'field');
+$sort_method = get_forum_display_sort_option($sort_value, 'field', 'sort');
 $order_method = get_forum_display_sort_option($order_value, 'field', 'order');
 
 $order_sql = "ORDER BY t.topic_type DESC, $sort_method $order_method";
@@ -297,7 +297,7 @@ if ($forum_data['allow_reg_tracker']) {
 		LEFT JOIN " . BB_BT_TRACKER_SNAP . " sn  ON(tor.topic_id = sn.topic_id)
 		LEFT JOIN " . BB_ATTACHMENTS_DESC . " ad  ON(tor.attach_id = ad.attach_id)
 	";
-    $join_tor_sql .= $join_dl ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
+    $join_tor_sql .= ($join_dl) ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
 }
 
 // Title match
@@ -404,7 +404,7 @@ $template->assign_vars([
     'ONLY_NEW_TOPICS_ON' => ($only_new == ONLY_NEW_TOPICS),
 
     'TITLE_MATCH' => htmlCHR($title_match),
-    'SELECT_TPP' => $select_tpp ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
+    'SELECT_TPP' => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
     'T_POST_NEW_TOPIC' => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $post_new_topic,
     'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
