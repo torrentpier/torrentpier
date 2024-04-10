@@ -172,7 +172,8 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_active':
             $active = isset($_POST['user_active']) ? (int)$_POST['user_active'] : $pr_data['user_active'];
             if ($submit && $adm_edit) {
-                $pr_data['user_active'] = $db_data['user_active'] = $active;
+                $pr_data['user_active'] = $active;
+                $db_data['user_active'] = $active;
             }
             break;
 
@@ -188,7 +189,8 @@ foreach ($profile_fields as $field => $can_edit) {
                     $errors[] = $err;
                 }
                 if ($username != $pr_data['username'] || $mode == 'register') {
-                    $pr_data['username'] = $db_data['username'] = $username;
+                    $pr_data['username'] = $username;
+                    $db_data['username'] = $username;
                 }
             }
             $tp_data['USERNAME'] = $pr_data['username'];
@@ -267,7 +269,8 @@ foreach ($profile_fields as $field => $can_edit) {
                         $errors[] = $err;
                     }
                     if ($bb_cfg['reg_email_activation']) {
-                        $pr_data['user_active'] = $db_data['user_active'] = 0;
+                        $pr_data['user_active'] = 0;
+                        $db_data['user_active'] = 0;
                     }
                     $db_data['user_email'] = $email;
                 }
@@ -281,7 +284,8 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_lang':
             $user_lang = isset($_POST['user_lang']) ? (string)$_POST['user_lang'] : $pr_data['user_lang'];
             if ($submit && ($user_lang != $pr_data['user_lang'] || $mode == 'register')) {
-                $pr_data['user_lang'] = $db_data['user_lang'] = $user_lang;
+                $pr_data['user_lang'] = $user_lang;
+                $db_data['user_lang'] = $user_lang;
             }
             break;
 
@@ -292,7 +296,8 @@ foreach ($profile_fields as $field => $can_edit) {
             $user_timezone = isset($_POST['user_timezone']) ? (float)$_POST['user_timezone'] : (float)$pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
                 if (isset($lang['TZ'][str_replace(',', '.', $user_timezone)])) {
-                    $pr_data['user_timezone'] = $db_data['user_timezone'] = $user_timezone;
+                    $pr_data['user_timezone'] = $user_timezone;
+                    $db_data['user_timezone'] = $user_timezone;
                 }
             }
             break;
@@ -303,7 +308,8 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_gender':
             $user_gender = isset($_POST['user_gender']) ? (int)$_POST['user_gender'] : $pr_data['user_gender'];
             if ($submit && $user_gender != $pr_data['user_gender']) {
-                $pr_data['user_gender'] = $db_data['user_gender'] = $user_gender;
+                $pr_data['user_gender'] = $user_gender;
+                $db_data['user_gender'] = $user_gender;
             }
             $tp_data['USER_GENDER'] = build_select('user_gender', array_flip($lang['GENDER_SELECT']), $pr_data['user_gender']);
             break;
@@ -359,7 +365,8 @@ foreach ($profile_fields as $field => $can_edit) {
                 $tp_data[strtoupper($opt)] = bf($user_opt, 'user_opt', $opt);
             }
             if ($submit && ($user_opt != $pr_data['user_opt'] || $reg_mode)) {
-                $pr_data['user_opt'] = $db_data['user_opt'] = (int)$user_opt;
+                $pr_data['user_opt'] = $user_opt;
+                $db_data['user_opt'] = (int)$user_opt;
             }
             break;
 
@@ -370,12 +377,14 @@ foreach ($profile_fields as $field => $can_edit) {
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
                 if (isset($_POST['delete_avatar'])) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
-                    $pr_data['avatar_ext_id'] = $db_data['avatar_ext_id'] = 0;
+                    $pr_data['avatar_ext_id'] = 0;
+                    $db_data['avatar_ext_id'] = 0;
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
                     if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
-                        $pr_data['avatar_ext_id'] = $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
+                        $pr_data['avatar_ext_id'] = $upload->file_ext_id;
+                        $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
                     } else {
                         $errors = array_merge($errors, $upload->errors);
                     }
@@ -391,7 +400,8 @@ foreach ($profile_fields as $field => $can_edit) {
             $icq = isset($_POST['user_icq']) ? (string)$_POST['user_icq'] : $pr_data['user_icq'];
             if ($submit && $icq != $pr_data['user_icq']) {
                 if ($icq == '' || preg_match('#^\d{6,15}$#', $icq)) {
-                    $pr_data['user_icq'] = $db_data['user_icq'] = (string)$icq;
+                    $pr_data['user_icq'] = $icq;
+                    $db_data['user_icq'] = (string)$icq;
                 } else {
                     $pr_data['user_icq'] = '';
                     $errors[] = htmlCHR($lang['ICQ_ERROR']);
@@ -408,7 +418,8 @@ foreach ($profile_fields as $field => $can_edit) {
             $website = htmlCHR($website);
             if ($submit && $website != $pr_data['user_website']) {
                 if ($website == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+$#iu', $website)) {
-                    $pr_data['user_website'] = $db_data['user_website'] = $website;
+                    $pr_data['user_website'] = $website;
+                    $db_data['user_website'] = (string)$website;
                 } else {
                     $pr_data['user_website'] = '';
                     $errors[] = htmlCHR($lang['WEBSITE_ERROR']);
@@ -424,7 +435,8 @@ foreach ($profile_fields as $field => $can_edit) {
             $from = isset($_POST['user_from']) ? (string)$_POST['user_from'] : $pr_data['user_from'];
             $from = htmlCHR($from);
             if ($submit && $from != $pr_data['user_from']) {
-                $pr_data['user_from'] = $db_data['user_from'] = $from;
+                $pr_data['user_from'] = $from;
+                $db_data['user_from'] = (string)$from;
             }
             $tp_data['USER_FROM'] = $pr_data['user_from'];
             break;
@@ -443,7 +455,8 @@ foreach ($profile_fields as $field => $can_edit) {
                     $errors[] = $lang['SIGNATURE_ERROR_HTML'];
                 }
 
-                $pr_data['user_sig'] = $db_data['user_sig'] = $sig;
+                $pr_data['user_sig'] = $sig;
+                $db_data['user_sig'] = (string)$sig;
             }
             $tp_data['USER_SIG'] = $pr_data['user_sig'];
             break;
@@ -455,7 +468,8 @@ foreach ($profile_fields as $field => $can_edit) {
             $occ = isset($_POST['user_occ']) ? (string)$_POST['user_occ'] : $pr_data['user_occ'];
             $occ = htmlCHR($occ);
             if ($submit && $occ != $pr_data['user_occ']) {
-                $pr_data['user_occ'] = $db_data['user_occ'] = $occ;
+                $pr_data['user_occ'] = $occ;
+                $db_data['user_occ'] = (string)$occ;
             }
             $tp_data['USER_OCC'] = $pr_data['user_occ'];
             break;
@@ -467,7 +481,8 @@ foreach ($profile_fields as $field => $can_edit) {
             $interests = isset($_POST['user_interests']) ? (string)$_POST['user_interests'] : $pr_data['user_interests'];
             $interests = htmlCHR($interests);
             if ($submit && $interests != $pr_data['user_interests']) {
-                $pr_data['user_interests'] = $db_data['user_interests'] = $interests;
+                $pr_data['user_interests'] = $interests;
+                $db_data['user_interests'] = (string)$interests;
             }
             $tp_data['USER_INTERESTS'] = $pr_data['user_interests'];
             break;
@@ -481,7 +496,8 @@ foreach ($profile_fields as $field => $can_edit) {
                 if ($skype != '' && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype)) {
                     $errors[] = $lang['SKYPE_ERROR'];
                 }
-                $pr_data['user_skype'] = $db_data['user_skype'] = (string)$skype;
+                $pr_data['user_skype'] = $skype;
+                $db_data['user_skype'] = (string)$skype;
             }
             $tp_data['USER_SKYPE'] = $pr_data['user_skype'];
             break;
@@ -495,7 +511,8 @@ foreach ($profile_fields as $field => $can_edit) {
                 if ($twitter != '' && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $twitter)) {
                     $errors[] = $lang['TWITTER_ERROR'];
                 }
-                $pr_data['user_twitter'] = $db_data['user_twitter'] = (string)$twitter;
+                $pr_data['user_twitter'] = $twitter;
+                $db_data['user_twitter'] = (string)$twitter;
             }
             $tp_data['USER_TWITTER'] = $pr_data['user_twitter'];
             break;
@@ -507,10 +524,12 @@ foreach ($profile_fields as $field => $can_edit) {
             $templates = isset($_POST['tpl_name']) ? (string)$_POST['tpl_name'] : $pr_data['tpl_name'];
             $templates = htmlCHR($templates);
             if ($submit && $templates != $pr_data['tpl_name']) {
-                $pr_data['tpl_name'] = $db_data['tpl_name'] = (string)$bb_cfg['tpl_name'];
+                $pr_data['tpl_name'] = $bb_cfg['tpl_name'];
+                $db_data['tpl_name'] = (string)$bb_cfg['tpl_name'];
                 foreach ($bb_cfg['templates'] as $folder => $name) {
                     if ($templates == $folder) {
-                        $pr_data['tpl_name'] = $db_data['tpl_name'] = $templates;
+                        $pr_data['tpl_name'] = $templates;
+                        $db_data['tpl_name'] = (string)$templates;
                     }
                 }
             }
@@ -532,8 +551,9 @@ if ($submit && !$errors) {
      */
     if ($mode == 'register') {
         if ($bb_cfg['reg_email_activation']) {
+            $user_actkey = make_rand_str(ACTKEY_LENGTH);
             $db_data['user_active'] = 0;
-            $db_data['user_actkey'] = make_rand_str(ACTKEY_LENGTH);
+            $db_data['user_actkey'] = $user_actkey;
         } else {
             $db_data['user_active'] = 1;
             $db_data['user_actkey'] = '';
@@ -651,14 +671,14 @@ $template->assign_vars($tp_data);
 $template->assign_vars([
     'PAGE_TITLE' => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
     'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
-    'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
+    'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
     'MODE' => $mode,
     'EDIT_PROFILE' => ($mode == 'editprofile'),
     'ADM_EDIT' => $adm_edit,
     'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
     'PASSWORD_LONG' => sprintf($lang['PASSWORD_LONG'], PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH),
     'INVITE_CODE' => !empty($_GET['invite']) ? htmlCHR($_GET['invite']) : '',
-    'CAPTCHA_HTML' => $need_captcha ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
