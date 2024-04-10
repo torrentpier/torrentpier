@@ -244,7 +244,6 @@ if ($bb_cfg['topic_notify_enabled']) {
         } elseif ($t_data['notify_status'] == TOPIC_WATCH_UNNOTIFIED) {
             if (isset($_GET['watch'])) {
                 if ($_GET['watch'] == 'topic') {
-                    $is_watching_topic = true;
                     DB()->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
