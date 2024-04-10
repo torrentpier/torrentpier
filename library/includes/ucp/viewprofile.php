@@ -18,7 +18,7 @@ $datastore->enqueue([
     'cat_forums'
 ]);
 
-if (!$userdata['session_logged_in']) {
+if (IS_GUEST) {
     redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
 } else {
     if (empty($_GET[POST_USERS_URL])) {

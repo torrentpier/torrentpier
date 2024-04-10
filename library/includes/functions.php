@@ -1115,7 +1115,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         require_once($bb_cfg['default_lang_dir'] . 'main.php');
     }
 
-    if (empty($userdata['session_logged_in'])) {
+    if (!defined('IS_GUEST') || IS_GUEST) {
         $tz = $bb_cfg['board_timezone'];
     } else {
         $tz = $userdata['user_timezone'];

@@ -24,7 +24,7 @@ if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
     bb_die($lang['NO_USER_SPECIFIED']);
 }
 
-if (!$userdata['session_logged_in']) {
+if (IS_GUEST) {
     redirect(LOGIN_URL . "?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id");
 }
 

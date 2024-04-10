@@ -228,31 +228,22 @@ if ($post_id && !empty($t_data['prev_posts'])) {
 $can_watch_topic = $is_watching_topic = false;
 
 if ($bb_cfg['topic_notify_enabled']) {
-    if ($userdata['session_logged_in']) {
+    if (!IS_GUEST) {
         $can_watch_topic = true;
 
-        if (!empty($t_data['notify_status']) && $t_data['notify_status']) {
+        if ($t_data['notify_status'] == TOPIC_WATCH_NOTIFIED) {
+            $is_watching_topic = true;
             if (isset($_GET['unwatch'])) {
                 if ($_GET['unwatch'] == 'topic') {
-                    $is_watching_topic = 0;
-
                     DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['NO_LONGER_WATCHING']);
-            } else {
-                $is_watching_topic = true;
-
-                if (!$t_data['notify_status']) {
-                    DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
-                }
             }
-        } else {
+        } elseif ($t_data['notify_status'] == TOPIC_WATCH_UNNOTIFIED) {
             if (isset($_GET['watch'])) {
                 if ($_GET['watch'] == 'topic') {
-                    $is_watching_topic = true;
-
                     DB()->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
@@ -261,8 +252,6 @@ if ($bb_cfg['topic_notify_enabled']) {
 
                 set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['YOU_ARE_WATCHING']);
-            } else {
-                $is_watching_topic = 0;
             }
         }
     } else {
@@ -408,7 +397,7 @@ if ($is_auth['auth_mod']) {
             $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_dl'] . '" alt="' . $lang['SET_DL_STATUS'] . '" title="' . $lang['SET_DL_STATUS'] . '" border="0" /></a>';
         }
     }
-} elseif (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session_logged_in'] && $t_data['self_moderated']) {
+} elseif (!IS_GUEST && ($t_data['topic_poster'] == $userdata['user_id']) && $t_data['self_moderated']) {
     $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
 }
 

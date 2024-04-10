@@ -120,10 +120,10 @@ switch ($mode) {
         }
 
         $select_sql = 'SELECT f.*, t.*, p.*';
-        $select_sql .= (!$submit) ? ', pt.*, u.username, u.user_id' : '';
+        $select_sql .= !$submit ? ', pt.*, u.username, u.user_id' : '';
 
         $from_sql = "FROM " . BB_POSTS . " p, " . BB_TOPICS . " t, " . BB_FORUMS . " f";
-        $from_sql .= (!$submit) ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
+        $from_sql .= !$submit ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
 
         $where_sql = "
 			WHERE p.post_id = $post_id
@@ -446,10 +446,10 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 } else {
     // User default entry point
     if ($mode == 'newtopic') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = !IS_GUEST ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'reply') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = !IS_GUEST ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'quote' || $mode == 'editpost') {
         $subject = ($post_data['first_post']) ? $post_info['topic_title'] : '';
@@ -539,7 +539,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 
         $dl_ds = $dl_ch = $dl_hid = '';
         $dl_type_name = 'topic_dl_type';
-        $dl_type_val = ($topic_dl_type) ? 1 : 0;
+        $dl_type_val = $topic_dl_type ? 1 : 0;
 
         if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod']) {
             $dl_ds = ' disabled ';
@@ -612,7 +612,7 @@ $template->assign_vars([
     'SUBJECT' => $subject,
     'MESSAGE' => $message,
 
-    'POSTER_RGROUPS' => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
+    'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
     'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
