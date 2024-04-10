@@ -265,7 +265,7 @@ if ($bb_cfg['topic_notify_enabled']) {
 }
 
 // Generate a 'Show posts in previous x days' select box. If the postdays var is POSTed
-// then get its value, find the number of topics with dates newer than it (to properly
+// then get it's value, find the number of topics with dates newer than it (to properly
 // handle pagination) and alter the main query
 $post_days = 0;
 $limit_posts_time = '';
