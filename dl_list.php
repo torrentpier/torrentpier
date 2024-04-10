@@ -52,7 +52,7 @@ $user->session_start();
 set_die_append_msg();
 
 // Check if user logged in
-if (!$userdata['session_logged_in']) {
+if (IS_GUEST) {
     redirect(LOGIN_URL . "?redirect=$redirect_type&$redirect");
 }
 
