@@ -446,10 +446,10 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 } else {
     // User default entry point
     if ($mode == 'newtopic') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = !IS_GUEST ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'reply') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = !IS_GUEST ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'quote' || $mode == 'editpost') {
         $subject = ($post_data['first_post']) ? $post_info['topic_title'] : '';
