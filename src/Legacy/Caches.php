@@ -35,6 +35,12 @@ class Caches
                 $cache_cfg =& $engine_cfg[1];
 
                 switch ($cache_type) {
+                    case 'apcu':
+                        if (!isset($this->obj[$cache_name])) {
+                            $this->obj[$cache_name] = new Cache\APCu($this->cfg['prefix']);
+                        }
+                        $this->ref[$cache_name] =& $this->obj[$cache_name];
+                        break;
                     case 'memcache':
                         if (!isset($this->obj[$cache_name])) {
                             $this->obj[$cache_name] = new Cache\Memcache($this->cfg['memcache'], $this->cfg['prefix']);
