@@ -547,7 +547,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
             $dl_type_name = '';
         }
 
-        $dl_ch = ($mode == 'editpost' && $topic_dl_type) ? ' checked ' : '';
+        $dl_ch = ($mode == 'editpost' && $post_data['first_post'] && $topic_dl_type) ? ' checked ' : '';
 
         $topic_type_toggle .= '<nobr><input type="checkbox" name="' . $dl_type_name . '" id="topic_dl_type_id" ' . $dl_ds . $dl_ch . ' /><label for="topic_dl_type_id"> ' . $lang['POST_DOWNLOAD'] . '</label></nobr>';
         $topic_type_toggle .= $dl_hid;
