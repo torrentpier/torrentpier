@@ -289,7 +289,7 @@ if ($forum_data['allow_reg_tracker']) {
 		bt.auth_key, tor.info_hash, tor.info_hash_v2, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
 		sn.seeders, sn.leechers, ad.download_count
 	';
-    $select_tor_sql .= ($join_dl) ? ', dl.user_status AS dl_status' : '';
+    $select_tor_sql .= $join_dl ? ', dl.user_status AS dl_status' : '';
 
     $join_tor_sql = "
 		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
@@ -297,7 +297,7 @@ if ($forum_data['allow_reg_tracker']) {
 		LEFT JOIN " . BB_BT_TRACKER_SNAP . " sn  ON(tor.topic_id = sn.topic_id)
 		LEFT JOIN " . BB_ATTACHMENTS_DESC . " ad  ON(tor.attach_id = ad.attach_id)
 	";
-    $join_tor_sql .= ($join_dl) ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
+    $join_tor_sql .= $join_dl ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
 }
 
 // Title match
@@ -404,7 +404,7 @@ $template->assign_vars([
     'ONLY_NEW_TOPICS_ON' => ($only_new == ONLY_NEW_TOPICS),
 
     'TITLE_MATCH' => htmlCHR($title_match),
-    'SELECT_TPP' => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
+    'SELECT_TPP' => $select_tpp ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
     'T_POST_NEW_TOPIC' => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $post_new_topic,
     'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
