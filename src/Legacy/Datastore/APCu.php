@@ -77,6 +77,6 @@ class APCu extends Common
 
     public function is_installed(): bool
     {
-        return function_exists('apcu_add');
+        return extension_loaded('apcu') && apcu_enabled();
     }
 }
