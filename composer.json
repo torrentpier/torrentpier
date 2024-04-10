@@ -57,6 +57,7 @@
     "jacklul/monolog-telegram": "^3.1",
     "josantonius/cookie": "^2.0",
     "longman/ip-tools": "1.2.1",
+    "matthiasmullie/scrapbook": "^1.5",
     "monolog/monolog": "^3.4",
     "samdark/sitemap": "2.4.1",
     "symfony/mailer": "^6.3",
