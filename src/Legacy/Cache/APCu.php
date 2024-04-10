@@ -47,7 +47,7 @@ class APCu extends Common
         $this->cur_query = "cache->set('$name')";
         $this->debug('start');
 
-        if (apcu_add($name, $value, $ttl)) {
+        if (apcu_store($name, $value, $ttl)) {
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
