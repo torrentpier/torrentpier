@@ -228,7 +228,7 @@ if ($post_id && !empty($t_data['prev_posts'])) {
 $can_watch_topic = $is_watching_topic = false;
 
 if ($bb_cfg['topic_notify_enabled']) {
-    if ($userdata['session_logged_in']) {
+    if (!IS_GUEST) {
         $can_watch_topic = true;
 
         if ($t_data['notify_status'] == TOPIC_WATCH_NOTIFIED) {
