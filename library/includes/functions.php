@@ -1232,14 +1232,9 @@ function render_flag(string $code): string
     global $lang;
     static $iconExtension = '.svg';
 
-    if (isset($lang['COUNTRIES'][$code])) {
-        $countryName = $lang['COUNTRIES'][$code];
-        $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
-        if (is_file($flagIconPath)) {
-            return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $countryName . '">';
-        } else {
-            return $countryName;
-        }
+    $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
+    if (isset($lang['COUNTRIES'][$code]) && is_file($flagIconPath)) {
+        return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $lang['COUNTRIES'][$code] . '">';
     }
 
     return $code;
