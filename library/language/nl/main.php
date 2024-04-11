@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globale feed voor alle forums';
 $lang['HASH_INVALID'] = 'Hash %s is ongeldig';
 $lang['HASH_NOT_FOUND'] = 'Release met hash %s niet gevonden';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]De tekst van deze pagina is bewerkt op: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Deze regel kan alleen beheerders zien.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Op deze pagina kunt u de tekst van de fundamentele regels van de bron wordt weergegeven aan gebruikers.';
 
 $lang['TR_STATS'] = [
