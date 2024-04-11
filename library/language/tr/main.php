@@ -2755,7 +2755,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Tüm forumlar için küresel besleme';
 $lang['HASH_INVALID'] = '%s karma geçersiz';
 $lang['HASH_NOT_FOUND'] = 'Karma %s değilim serbest bulundu';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Bu sayfanın metni şurada düzenlenir: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Bu satır sadece yöneticileri görebilir.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu sayfada, kaynağın Temel Kurallar metni kullanıcılar için görüntülenir belirtebilirsiniz.';
 
 $lang['TR_STATS'] = [
