@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globaalne sööt kõikidele foorumitele';
 $lang['HASH_INVALID'] = 'Hash %s on kehtetu';
 $lang['HASH_NOT_FOUND'] = 'Pressiteade hash %s ei leitud';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Selle lehe teksti on muudetud aadressil: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Sellel real on näha ainult administraatorid.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Sellel lehel saate määrata teksti põhireeglid ressurss on kuvatud kasutajad.';
 
 $lang['TR_STATS'] = [
