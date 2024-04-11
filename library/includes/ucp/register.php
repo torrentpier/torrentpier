@@ -434,9 +434,9 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_from':
             $from = isset($_POST['user_from']) ? (string)$_POST['user_from'] : $pr_data['user_from'];
             if ($submit && $from != $pr_data['user_from']) {
-                $pr_data['user_from'] = $from;
-                $db_data['user_from'] = (string)$from;
+                $pr_data['user_from'] = $db_data['user_from'] = (string)$from;
             }
+            $tp_data['COUNTRY_SELECT'] = build_select('user_from', array_flip($lang['COUNTRIES']), $pr_data['user_from']);
             break;
 
         /**
@@ -680,7 +680,6 @@ $template->assign_vars([
 
     'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
-    'COUNTRY_SELECT' => \TorrentPier\Legacy\Select::country($pr_data['user_from'], 'user_from'),
 
     'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], humn_size($bb_cfg['avatars']['max_size'])),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),

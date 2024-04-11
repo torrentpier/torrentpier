@@ -68,28 +68,6 @@ class Select
     }
 
     /**
-     * Select country
-     *
-     * @param string $default
-     * @param string $select_name
-     *
-     * @return string
-     */
-    public static function country(string $default, string $select_name = 'country'): string
-    {
-        global $lang;
-
-        $country_select = '<select name="' . $select_name . '">';
-        foreach ($lang['COUNTRIES'] as $offset => $zone) {
-            $selected = ($offset == $default) ? ' selected' : '';
-            $country_select .= '<option value="' . $offset . '"' . $selected . '>' . $zone . '</option>';
-        }
-        $country_select .= '</select>';
-
-        return $country_select;
-    }
-
-    /**
      * Select forum template
      *
      * @param string $default_style
