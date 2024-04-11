@@ -1162,6 +1162,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
  */
 function get_user_torrent_client(string $peer_id): string
 {
+    static $iconExtension = '.png';
     static $clients = [
         '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',
         '-BE' => 'BitTorrent SDK', '-BI' => 'BiglyBT', '-BL' => 'BitLord', '-BT' => 'BitTorrent',
@@ -1201,7 +1202,6 @@ function get_user_torrent_client(string $peer_id): string
          * =======================================================================
          **/
     ];
-    static $iconExtension = '.png';
 
     $bestMatch = null;
     $bestMatchLength = 0;
