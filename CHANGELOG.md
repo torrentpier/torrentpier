@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.3 🐎 ([belomaxorka](https://github.com/belomaxorka))
+- Added preview for country flags while editing [\#1448](https://github.com/torrentpier/torrentpier/pull/1448) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for APCu caching method [\#1442](https://github.com/torrentpier/torrentpier/pull/1442) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements [\#1445](https://github.com/torrentpier/torrentpier/pull/1445) ([belomaxorka](https://github.com/belomaxorka))
 - Improved app debug [\#1438](https://github.com/torrentpier/torrentpier/pull/1438) ([belomaxorka](https://github.com/belomaxorka))
