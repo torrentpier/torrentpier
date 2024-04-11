@@ -1162,51 +1162,12 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
  */
 function get_user_torrent_client(string $peer_id): string
 {
+    global $bb_cfg;
     static $iconExtension = '.png';
-    static $clients = [
-        '-AG' => 'Ares', '-AZ' => 'Vuze', '-A~' => 'Ares', '-BC' => 'BitComet',
-        '-BE' => 'BitTorrent SDK', '-BI' => 'BiglyBT', '-BL' => 'BitLord', '-BT' => 'BitTorrent',
-        '-CT' => 'CTorrent', '-DE' => 'Deluge', '-FD' => 'Free Download Manager', 'FD6' => 'Free Download Manager',
-        '-FG' => 'FlashGet', '-FL' => 'Folx', '-HL' => 'Halite', '-KG' => 'KGet',
-        '-KT' => 'KTorrent', '-LT' => 'libTorrent', '-Lr' => 'LibreTorrent',
-        '-TR' => 'Transmission', '-tT' => 'tTorrent', '-UM' => "uTorrent Mac", '-UT' => 'uTorrent',
-        '-UW' => 'uTorrent Web', '-WW' => 'WebTorrent', '-WD' => 'WebTorrent', '-XL' => 'Xunlei',
-        '-PI' => 'PicoTorrent', '-qB' => 'qBittorrent', 'M' => 'BitTorrent', 'MG' => 'MediaGet',
-        '-MG' => 'MediaGet', 'OP' => 'Opera', 'TIX' => 'Tixati', 'aria2-' => 'Aria2', 'A2' => 'Aria2',
-        /**
-         * ================================ Other ================================
-         * '-BB' => 'BitBuddy', '-AR' => 'Arctic', '-AT' => 'Artemis', '-AV' => 'Avicora',
-         * '-AX' => 'BitPump', '-BB' => 'BitBuddy', '-AD' => 'Advanced Download Manager', '-BF' => 'BitFlu',
-         * '-BG' => 'BTGetit', '-BH' => 'BitZilla', '-BM' => 'BitMagnet', '-BN' => 'Baidu Netdisk',
-         * '-BOW' => 'Bits on Wheels', '-BP' => 'BitTorrent Pro (Azureus + Spyware)', '-BR' => 'BitRocket', '-BS' => 'BTSlave',
-         * '-BW' => 'BitTorrent Web', '-BX' => 'BittorrentX', '-CD' => 'Enhanced CTorrent', '-DP' => 'Propagate Data Client',
-         * '-EB' => 'EBit', '-ES' => 'Electric Sheep', '-FC' => 'FileCroc', '-HN' => 'Hydranode',
-         * '-FT' => 'FoxTorrent/RedSwoosh', '-FW' => 'FrostWire', '-FX' => 'Freebox', '-G3' => 'G3 Torrent',
-         * '-GR' => 'GetRight', '-GS' => 'GSTorrent', '-HK' => 'Hekate', '-LW' => 'LimeWire',
-         * '-LC' => 'LeechCraft', '-LH' => 'LH-ABC', '-LP' => 'Lphant', '-UE' => "uTorrent Embedded",
-         * '-UL' => 'uLeecher!', '-TS' => 'Torrentstorm', '-TT' => 'TuoTu', '-MK' => 'Meerkat',
-         * '-ML' => 'MLDonkey', '-MO' => 'MonoTorrent', '-MP' => 'MooPolice', '-MR' => 'Miro',
-         * '-MT' => 'Moonlight', '-NE' => 'BT Next Evolution', '-NX' => 'Net Transport', '-OS' => 'OneSwarm', '-OT' => 'OmegaTorrent',
-         * '-PD' => 'Pando', '-PI' => 'PicoTorrent', '-QD' => 'QQDownload', '-QT' => 'QT 4 Torrent example',
-         * '-RS' => 'Rufus', '-RT' => 'Retriever', '-RZ' => 'RezTorrent', '-SB' => 'Swiftbit',
-         * '-SD' => 'Thunder', '-SM' => 'SoMud', '-SP' => 'BitSpirit', '-SS' => 'SwarmScope',
-         * '-ST' => 'SymTorrent', '-SZ' => 'Shareaza', '-S~' => 'Shareaza', '-TB' => 'Torch Browser',
-         * '-TN' => 'Torrent .NET', '-WY' => 'FireTorrent', '-XC' => 'Xtorrent', '-XF' => 'Xfplay',
-         * '-VG' => 'Vagaa', '-WS' => 'HTTP Seed', '-WT' => 'BitLet', '-WT-' => 'BitLet',
-         * '-XS' => 'XSwifter', '-XT' => 'XanTorrent', '-XX' => 'Xtorrent', '-ZO' => 'Zona',
-         * '-ZT' => 'Zip Torrent', '-bk' => 'BitKitten (libtorrent)', '-lt' => 'libTorrent (Rakshasa)', '-pb' => 'pbTorrent', 'Mbrst' => 'burst!',
-         * '-st' => 'SharkTorrent', '346-' => 'TorrentTopia', 'AZ2500BT' => 'BitTyrant (Azureus Mod)', 'BLZ' => 'Blizzard Downloader',
-         * 'DNA' => 'BitTorrent DNA', 'FD6' => 'Free Download Manager 6', 'LIME' => 'Limewire', 'Pando' => 'Pando',
-         * 'Plus' => 'Plus!', 'Q' => 'Queen Bee', 'QVOD' => 'QVOD', 'S3' => 'Amazon S3',
-         * 'btpd' => 'BT Protocol Daemon', 'eX' => 'eXeem', 'martini' => 'Martini Man',
-         * =======================================================================
-         **/
-    ];
 
     $bestMatch = null;
     $bestMatchLength = 0;
-
-    foreach ($clients as $key => $clientName) {
+    foreach ($bb_cfg['tor_clients'] as $key => $clientName) {
         if (str_starts_with($peer_id, $key) !== false && strlen($key) > $bestMatchLength) {
             $bestMatch = $clientName;
             $bestMatchLength = strlen($key);
