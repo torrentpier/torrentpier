@@ -1213,9 +1213,9 @@ function get_user_torrent_client(string $peer_id): string
         }
     }
 
-    $clientIcon = BB_ROOT . 'styles/images/clients/' . $bestMatch . $iconExtension;
-    if (!empty($bestMatch) && is_file($clientIcon)) {
-        return '<img class="client_icon" src="' . $clientIcon . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
+    $clientIconPath = BB_ROOT . 'styles/images/clients/' . $bestMatch . $iconExtension;
+    if (!empty($bestMatch) && is_file($clientIconPath)) {
+        return '<img class="client_icon" src="' . $clientIconPath . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
     }
 
     return $peer_id;

@@ -502,7 +502,7 @@ a.postLink:visited {
   text-align: center
 }
 
-.poster-flag {
+img.poster-flag {
   width: 32px;
   height: 20px;
   vertical-align: middle;
