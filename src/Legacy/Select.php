@@ -80,7 +80,7 @@ class Select
         global $lang;
 
         $country_select = '<select name="' . $select_name . '">';
-        foreach ($lang['COUNTRY'] as $offset => $zone) {
+        foreach ($lang['COUNTRIES'] as $offset => $zone) {
             $selected = ($offset == $default) ? ' selected' : '';
             $country_select .= '<option value="' . $offset . '"' . $selected . '>' . $zone . '</option>';
         }
