@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'تغذية عالمية لجميع المنتديا
 $lang['HASH_INVALID'] = 'تجزئة %s غير صالح';
 $lang['HASH_NOT_FOUND'] = 'الإفراج مع تجزئة %s لم يتم العثور على';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align = center] يتم تحرير نص هذه الصفحة على: [url = https: //%s/admin/admin_terms.php]admin/admin_terms.php[/url]. يمكن لهذا الخط رؤية المسؤولين فقط.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'في هذه الصفحة يمكنك تحديد النص من القواعد الأساسية من الموارد التي يتم عرضها للمستخدمين.';
 
 $lang['TR_STATS'] = [
