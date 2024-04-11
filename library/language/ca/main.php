@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Feed global per a tots els fòrums';
 $lang['HASH_INVALID'] = 'Hash %s és invàlid';
 $lang['HASH_NOT_FOUND'] = 'Llançament de hash %s no trobat';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]El text d\'aquesta pàgina està editat a: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Aquesta línia només pot veure els administradors.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'En aquesta pàgina, es pot especificar el text de les normes bàsiques de recurs es mostra als usuaris.';
 
 $lang['TR_STATS'] = [
