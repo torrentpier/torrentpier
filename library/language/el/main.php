@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Παγκόσμια ροή δεδομένων για
 $lang['HASH_INVALID'] = 'Hash %s δεν είναι έγκυρη';
 $lang['HASH_NOT_FOUND'] = 'Απελευθέρωση με hash %s δεν βρέθηκε';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Το κείμενο αυτής της σελίδας υποβάλλεται σε επεξεργασία στη διεύθυνση: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Αυτή η γραμμή μπορεί να δει μόνο διαχειριστές.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Σε αυτή τη σελίδα, μπορείτε να καθορίσετε το κείμενο των βασικών κανόνων του πόρου εμφανίζεται στους χρήστες.';
 
 $lang['TR_STATS'] = [
