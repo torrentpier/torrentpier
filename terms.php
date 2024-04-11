@@ -20,7 +20,7 @@ if (!$bb_cfg['terms'] && !IS_ADMIN) {
 }
 
 $template->assign_vars([
-    'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], $bb_cfg['server_name'])),
+    'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], make_url('admin/admin_terms.php'))),
     'TERMS_HTML' => bbcode2html($bb_cfg['terms']),
 ]);
 
