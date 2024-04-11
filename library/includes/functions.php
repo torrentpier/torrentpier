@@ -1239,7 +1239,7 @@ function render_flag(string $code): string
         if (is_file($flagIconPath)) {
             return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $countryName . '">';
         } else {
-            return $lang['COUNTRIES'][$code];
+            return $countryName;
         }
     }
 
