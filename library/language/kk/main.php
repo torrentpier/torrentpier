@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Барлық форумдарға жаһандық 
 $lang['HASH_INVALID'] = 'Hash %s жарамсыз';
 $lang['HASH_NOT_FOUND'] = 'тор белгісі бар босатыңыз %s табылған жоқ';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Бұл беттің мәтіні мына мекенжайда өңделген: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Бұл жол тек әкімшілерді көре алады.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Бұл бетте, Сіз пайдаланушыларға көрсетіледі ресурс негізгі ережелерін мәтінді көрсетуге болады.';
 
 $lang['TR_STATS'] = [
