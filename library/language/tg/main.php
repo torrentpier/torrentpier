@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Хўроки Global барои ҳамаи фору�
 $lang['HASH_INVALID'] = 'Шудаи %s нодуруст аст';
 $lang['HASH_NOT_FOUND'] = 'Озод бо шудаи %s ёфт нашуд';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Матни ин саҳифа дар таҳрир карда шудааст: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ин сатр танҳо маъмуронро дида метавонад.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Дар ин саҳифа шумо метавонед муайян кунед, ки матни қоидаҳои асосии захираҳои аст, ба истифодабарандагон нишон дода мешавад.';
 
 $lang['TR_STATS'] = [
