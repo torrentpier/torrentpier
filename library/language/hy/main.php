@@ -2753,7 +2753,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Համաշխարհային ֆորում բոլոր 
 $lang['HASH_INVALID'] = 'Հաշ-%s է անվավեր';
 $lang['HASH_NOT_FOUND'] = 'Թողարկումը հետ հաշ-%s չի գտնվել';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Այս էջի տեքստը խմբագրված է՝ [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]: Այս տողում կարող են տեսնել միայն ադմինիստրատորները:[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Այս էջում դուք կարող եք հարցնել տեքստը, հիմնական կանոնները ռեսուրսի ցուցադրվում է օգտվողների համար:';
 
 $lang['TR_STATS'] = [
