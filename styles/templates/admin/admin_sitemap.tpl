@@ -1,76 +1,33 @@
 <style>
-.btn{
-	color: rgb(255, 255, 255);
-	text-decoration: none;
-	padding: 2px 7px;
-	font-size: 12px;
-	border-radius: 3px;
-}
-.btn-success {
-	background-image: -moz-linear-gradient(top, #62c462, #51a351);
-	background-image: -ms-linear-gradient(top, #62c462, #51a351);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
-	background-image: -webkit-linear-gradient(top, #62c462, #51a351);
-	background-image: -o-linear-gradient(top, #62c462, #51a351);
-	background-image: linear-gradient(top, #62c462, #51a351);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#51a351', GradientType=0);
-	border-color: #51a351 #51a351 #387038;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-}
-.btn-success:active,
-.btn-success:disabled,
-.btn-success:focus,
-.btn-success:hover,
-.btn-warning:active,
-.btn-warning:disabled,
-.btn-warning:focus,
-.btn-warning:hover {
-	text-decoration: none;
-	color: rgb(255, 255, 255);
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.btn-warning:active,
-.btn-warning:disabled,
-.btn-warning:focus,
-.btn-warning:hover {
-	background-color: #f89406;
-}
-.btn-success:active,
-.btn-success:disabled,
-.btn-success:focus,
-.btn-success:hover {
-	background-color: #51a351;
-}
-.btn-warning {
-	background-color: #faa732;
-	background-image: -moz-linear-gradient(top, #fbb450, #f89406);
-	background-image: -ms-linear-gradient(top, #fbb450, #f89406);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
-	background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
-	background-image: -o-linear-gradient(top, #fbb450, #f89406);
-	background-image: linear-gradient(top, #fbb450, #f89406);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbb450', endColorstr='#f89406', GradientType=0);
-	border-color: #f89406 #f89406 #ad6704;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
-}
-.td_pads { padding: 10px 15px !important; }
+    .btn {
+        cursor: pointer;
+        color: rgb(255, 255, 255);
+        background-color: #1C508C;
+        padding: 5px 9px;
+        font-size: 12px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .td_pads {
+        padding: 10px 15px !important;
+    }
 </style>
 
 <script type="text/javascript">
-ajax.sitemap = function(mode) {
-	ajax.exec({
-		action : 'sitemap',
-		mode : mode
-	});
-}
-ajax.callback.sitemap = function(data) {
-	if(data.mode == 'create') $('#mess_time').html(data.html);
-	else $('#sitemap').html(data.html);
-}
+    ajax.sitemap = function (mode) {
+        ajax.exec({
+            action: 'sitemap',
+            mode: mode
+        });
+    }
+    ajax.callback.sitemap = function (data) {
+        if (data.mode == 'create') {
+            $('#mess_time').html(data.html);
+        } else {
+            $('#sitemap').html(data.html);
+        }
+    }
 </script>
 
 <h1>{L_SITEMAP_ADMIN}</h1>
@@ -84,8 +41,8 @@ ajax.callback.sitemap = function(data) {
 	<tr class="row1">
 		<td width="25%"><span class="gen"><b>{L_SITEMAP_OPTIONS}:</b></span></td>
 		<td class="td_pads">
-			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">{L_SITEMAP_CREATE}</a>&nbsp;&nbsp;
-			<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">{L_SITEMAP_NOTIFY}</a><br />
+			<input type="button" class="btn" value="{L_SITEMAP_CREATE}" onclick="ajax.sitemap('create');">&nbsp;
+            <input type="button" class="btn" value="{L_SITEMAP_NOTIFY}" onclick="ajax.sitemap('search_update');"><br />
 			<div id="sitemap"></div>
 		</td>
 	</tr>
