@@ -2750,7 +2750,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Глабальна стрічка для форум
 $lang['HASH_INVALID'] = 'Хэш-%s з\'яўляецца несапраўдным';
 $lang['HASH_NOT_FOUND'] = 'Выпуск з хэш-%s не знойдзена';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Тэкст гэтай старонкі адрэдагаваны па адрасе: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Гэты радок бачаць толькі адміністратары.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На гэтай старонцы вы можаце задаць тэкст, асноўныя правілы рэсурсу адлюстроўваецца для карыстальнікаў.';
 
 $lang['TR_STATS'] = [
