@@ -11,8 +11,6 @@ define('BB_SCRIPT', 'memberlist');
 
 require __DIR__ . '/common.php';
 
-$page_cfg['use_tablesorter'] = true;
-
 $user->session_start(['req_login' => true]);
 
 $start = abs((int)request_var('start', 0));
@@ -79,7 +77,6 @@ if ($result = DB()->fetch_rowset($sql)) {
             'AVATAR' => $user_info['avatar'],
             'FROM' => $user_info['from'],
             'JOINED' => $user_info['joined'],
-            'JOINED_RAW' => $user_info['joined_raw'],
             'POSTS' => $user_info['posts'],
             'PM' => $user_info['pm'],
             'EMAIL' => $user_info['email'],
