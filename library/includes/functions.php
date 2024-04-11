@@ -1213,8 +1213,9 @@ function get_user_torrent_client(string $peer_id): string
         }
     }
 
-    if (!empty($bestMatch)) {
-        return '<img class="clients" src="' . FULL_URL . 'styles/images/clients/' . $bestMatch . $iconExtension . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
+    $clientIcon = BB_ROOT . 'styles/images/clients/' . $bestMatch . $iconExtension;
+    if (!empty($bestMatch) && is_file($clientIcon)) {
+        return '<img class="clients" src="' . $clientIcon . '" alt="' . $bestMatch . '" title="' . $peer_id . '">';
     }
 
     return $peer_id;
