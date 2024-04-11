@@ -105,7 +105,6 @@ switch ($field) {
         $this->response['new_value'] = $this->request['value'];
         break;
 
-    case 'user_from':
     case 'user_occ':
     case 'user_interests':
         $value = htmlCHR($value);
