@@ -516,7 +516,6 @@ $lang['AVATAR_PANEL'] = 'Avatar control panel';
 
 $lang['WEBSITE'] = 'Website';
 $lang['LOCATION'] = 'Location';
-$lang['LOCATION_FLAGS'] = 'Flag images are rendered by country codes:';
 $lang['CONTACT'] = 'Contact';
 $lang['EMAIL_ADDRESS'] = 'E-mail address';
 $lang['SEND_PRIVATE_MESSAGE'] = 'Send private message';
