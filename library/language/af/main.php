@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globale voer vir alle forums';
 $lang['HASH_INVALID'] = 'Hash %s is ongeldig';
 $lang['HASH_NOT_FOUND'] = 'Vrylating met hash %s nie gevind nie';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Die teks van hierdie bladsy is geredigeer by: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Hierdie lyn kan slegs administrateurs sien.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Op hierdie bladsy kan u die teks van die basiese reëls van die bron spesifiseer vir gebruikers.';
 
 $lang['TR_STATS'] = [
