@@ -18,14 +18,14 @@
 <table class="forumline">
     <thead>
     <tr>
-        <th><b class="tbs-text">#</b></th>
-        <th><b class="tbs-text">{L_USERNAME}</b></th>
-        <th><b class="tbs-text">{L_PM}</b></th>
-        <th><b class="tbs-text">{L_EMAIL}</b></th>
-        <th><b class="tbs-text">{L_LOCATION}</b></th>
-        <th><b class="tbs-text">{L_JOINED}</b></th>
-        <th><b class="tbs-text">{L_POSTS_SHORT}</b></th>
-        <th><b class="tbs-text">{L_WEBSITE}</b></th>
+        <th>#</th>
+        <th>{L_USERNAME}</th>
+        <th>{L_PM}</th>
+        <th>{L_EMAIL}</th>
+        <th>{L_LOCATION}</th>
+        <th>{L_JOINED}</th>
+        <th>{L_POSTS_SHORT}</th>
+        <th>{L_WEBSITE}</th>
     </tr>
     </thead>
     <!-- BEGIN memberrow -->
@@ -38,9 +38,7 @@
         <td>{memberrow.PM}</td>
         <td>{memberrow.EMAIL}</td>
         <td>{memberrow.FROM}</td>
-        <td class="small">
-            {memberrow.JOINED}
-        </td>
+        <td>{memberrow.JOINED}</td>
         <td>{memberrow.POSTS}</td>
         <td>{memberrow.WWW}</td>
     </tr>
