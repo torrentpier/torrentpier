@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Ushqim global për të gjitha forumet';
 $lang['HASH_INVALID'] = 'Hash %s është i pavlefshëm';
 $lang['HASH_NOT_FOUND'] = 'Lirimin me të hash %s nuk u gjet';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksti i kësaj faqe është redaktuar në: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Kjo linjë mund të shohë vetëm administratorët.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Në këtë faqe, ju mund të specifikoni tekstin e rregullave bazë të burimeve të shfaqet për përdoruesit.';
 
 $lang['TR_STATS'] = [
