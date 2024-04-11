@@ -155,9 +155,7 @@
         </tr>
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
-            <td>
-                <div><input type="text" name="user_from" size="50" maxlength="100" value="{USER_FROM}"/><br><h6>{L_LOCATION_FLAGS} <a href="https://github.com/torrentpier/torrentpier/blob/2d6baa50b0bf6b5f1268563686acde436e55bcdb/library/includes/functions.php#L1237" target="_blank">{L_LIST}</a></h6></div>
-            </td>
+            <td>{COUNTRY_SELECT}</td>
         </tr>
         <!-- ENDIF -->
         <!-- IF $bb_cfg['allow_change']['language'] -->
