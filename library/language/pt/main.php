@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Alimentação global para todos os fóruns';
 $lang['HASH_INVALID'] = 'Hash %s é inválida';
 $lang['HASH_NOT_FOUND'] = 'Lançamento com hash %s não encontrado';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]O texto desta página é editado em: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Esta linha pode ver apenas administradores.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Nesta página, você pode especificar o texto das regras básicas do recurso é exibido para os usuários.';
 
 $lang['TR_STATS'] = [
