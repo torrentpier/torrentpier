@@ -155,7 +155,16 @@
         </tr>
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
-            <td>{COUNTRY_SELECT}</td>
+            <td>{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</td>
+            <script type="text/javascript">
+                $('#user_from').bind('change', function () {
+                    ajax.exec({
+                        action: 'user_register',
+                        mode: 'check_country',
+                        country: $(this).val()
+                    });
+                });
+            </script>
         </tr>
         <!-- ENDIF -->
         <!-- IF $bb_cfg['allow_change']['language'] -->
