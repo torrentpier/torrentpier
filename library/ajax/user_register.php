@@ -47,6 +47,11 @@ switch ($mode) {
         }
         break;
 
+    case 'check_country':
+        $country = (string)$this->request['country'];
+        $html = render_flag($country);
+        break;
+
     default:
         $this->ajax_die('Invalid mode: ' . $mode);
 }
