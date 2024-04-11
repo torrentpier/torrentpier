@@ -10,7 +10,7 @@
 - Improved app debug [\#1438](https://github.com/torrentpier/torrentpier/pull/1438) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Allow registering torrents by default [\#1440](https://github.com/torrentpier/torrentpier/pull/1440) ([belomaxorka](https://github.com/belomaxorka))
 - Code refactoring [\#1441](https://github.com/torrentpier/torrentpier/pull/1441) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1435](https://github.com/torrentpier/torrentpier/pull/1435) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1435](https://github.com/torrentpier/torrentpier/pull/1435), [\#1443](https://github.com/torrentpier/torrentpier/pull/1443) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.2](https://github.com/torrentpier/torrentpier/tree/v2.4.2) (2024-03-30)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.1...v2.4.2)
