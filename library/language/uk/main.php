@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Глобальна стрічка для всіх �
 $lang['HASH_INVALID'] = 'Хеш %s некоректний';
 $lang['HASH_NOT_FOUND'] = 'Роздачу з хешем %s не знайдено';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Текст цієї сторінки редагується за адресою: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Цей рядок можуть бачити тільки адміністратори.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На цій сторінці Ви можете вказати текст основних правил ресурсу, які відображаються для користувачів.';
 
 $lang['TR_STATS'] = [
