@@ -615,7 +615,6 @@ input[type="checkbox"], input[type="radio"] {
   width: 13px;
   vertical-align: text-top;
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
 }
 
 input:disabled {

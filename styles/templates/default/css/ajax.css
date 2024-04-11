@@ -24,7 +24,6 @@ var.ajax-params {
   white-space: nowrap;
   border-bottom-left-radius: 10px;
   -webkit-border-bottom-left-radius: 10px;
-  -khtml-border-bottom-left-radius: 10px;
 }
 
 #ajax-loading {

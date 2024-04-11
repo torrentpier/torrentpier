@@ -1,6 +1,5 @@
 <style>
     .prof-tbl * {
-        -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
 
