@@ -433,12 +433,11 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'user_from':
             $from = isset($_POST['user_from']) ? (string)$_POST['user_from'] : $pr_data['user_from'];
-            $from = htmlCHR($from);
             if ($submit && $from != $pr_data['user_from']) {
                 $pr_data['user_from'] = $from;
                 $db_data['user_from'] = (string)$from;
             }
-            $tp_data['USER_FROM'] = $pr_data['user_from'];
+            $tp_data['COUNTRY_SELECT'] = build_select('user_from', array_flip($lang['COUNTRIES']), $pr_data['user_from']);
             break;
 
         /**

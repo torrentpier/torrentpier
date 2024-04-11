@@ -3,7 +3,7 @@
 <form method="post" action="{S_MODE_ACTION}" name="post">
     <table width="100%">
         <tr>
-            <td class="med nowrap tRight">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&middot;&nbsp;{L_ORDER}:&nbsp;{S_ORDER_SELECT}&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}"></td>
+            <td class="med nowrap tRight">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&middot;&nbsp;{L_ORDER}:&nbsp;{S_ORDER_SELECT}&nbsp;&middot;&nbsp;{L_ROLE}&nbsp;{S_ROLE_SELECT}&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}"></td>
         </tr>
         <tr>
             <td class="nowrap tRight">

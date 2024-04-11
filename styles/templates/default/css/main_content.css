@@ -502,7 +502,7 @@ a.postLink:visited {
   text-align: center
 }
 
-.poster-flag {
+img.poster-flag {
   width: 32px;
   height: 20px;
   vertical-align: middle;
@@ -610,7 +610,7 @@ table.peers td {
   border: 1px #A5AFB4 solid;
 }
 
-.clients {
+img.client_icon {
   width: auto;
   height: auto;
   display: inline !important;

@@ -17,6 +17,7 @@ $start = abs((int)request_var('start', 0));
 $mode = (string)request_var('mode', 'joined');
 $sort_order = (request_var('order', 'ASC') == 'ASC') ? 'ASC' : 'DESC';
 $username = request_var('username', '');
+$role = (string)request_var('role', 'all');
 
 // Memberlist sorting
 $mode_types_text = [$lang['SORT_JOINED'], $lang['SORT_USERNAME'], $lang['SORT_LOCATION'], $lang['SORT_POSTS'], $lang['SORT_EMAIL'], $lang['SORT_WEBSITE'], $lang['SORT_TOP_TEN']];
@@ -36,6 +37,20 @@ if ($sort_order == 'ASC') {
     $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected>' . $lang['DESC'] . '</option>';
 }
 $select_sort_order .= '</select>';
+
+// Role selector
+$role_select = [
+    'all' => $lang['ALL'],
+    'user' => $lang['USERS'],
+    'admin' => $lang['ADMINISTRATORS'],
+    'moderator' => $lang['MODERATORS']
+];
+$select_sort_role = '<select name="role">';
+foreach ($role_select as $key => $value) {
+    $selected = ($role == $key) ? ' selected' : '';
+    $select_sort_role .= '<option value="' . $key . '"' . $selected . '>' . $value . '</option>';
+}
+$select_sort_role .= '</select>';
 
 switch ($mode) {
     case 'username':
@@ -62,8 +77,21 @@ switch ($mode) {
         break;
 }
 
+$where_sql = '';
+switch ($role) {
+    case 'user':
+        $where_sql = ' AND user_level = ' . USER;
+        break;
+    case 'admin':
+        $where_sql = ' AND user_level = ' . ADMIN;
+        break;
+    case 'moderator':
+        $where_sql = ' AND user_level = ' . MOD;
+        break;
+}
+
 // Generate user information
-$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") ORDER BY $order_by";
+$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql ORDER BY $order_by";
 if ($result = DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
@@ -89,7 +117,7 @@ if ($result = DB()->fetch_rowset($sql)) {
 }
 
 // Pagination
-$paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order";
+$paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role";
 $paginationurl .= $username ? "&amp;username=$username" : '';
 
 if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
@@ -109,7 +137,8 @@ $template->assign_vars([
     'PAGE_TITLE' => $lang['MEMBERLIST'],
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
-    'S_MODE_ACTION' => "memberlist.php?mode=$mode&amp;order=$sort_order",
+    'S_ROLE_SELECT' => $select_sort_role,
+    'S_MODE_ACTION' => "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role",
     'S_USERNAME' => $username,
 ]);
 

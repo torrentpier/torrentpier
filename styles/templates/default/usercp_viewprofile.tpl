@@ -74,7 +74,6 @@
 <var class="ajax-params">{action: "edit_user_profile", id: "user_email"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_regdate"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_lastvisit"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_from"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_website"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_occ"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
@@ -416,7 +415,7 @@ ajax.callback.index_data = function(data) {
 			<!-- IF LOCATION -->
 			<tr>
 				<th class="vBottom">{L_LOCATION}:</th>
-				<td id="user_from"><b class="editable">{LOCATION}</b></td>
+				<td id="user_from">{LOCATION}</td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF WWW -->
