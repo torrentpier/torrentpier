@@ -610,7 +610,7 @@ table.peers td {
   border: 1px #A5AFB4 solid;
 }
 
-.clients {
+img.client_icon {
   width: auto;
   height: auto;
   display: inline !important;
