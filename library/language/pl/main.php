@@ -2753,7 +2753,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globalny kanał danych dla wszystkich forów';
 $lang['HASH_INVALID'] = 'Hash-%s jest nieważne';
 $lang['HASH_NOT_FOUND'] = 'Wydanie z hash-%s nie znaleziono';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Tekst tej strony jest edytowany pod adresem: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. W tej linii widzą tylko administratorzy.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na tej stronie możesz podać tekst, podstawowe zasady zasobu jest widoczna dla użytkowników.';
 
 $lang['TR_STATS'] = [

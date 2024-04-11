@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globalna hrana za sve forume';
 $lang['HASH_INVALID'] = 'Hašiš %s je neispravan';
 $lang['HASH_NOT_FOUND'] = 'Oslobodi sa hašiš %s ne našao';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Tekst ove stranice je uređen na: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ovu liniju mogu vidjeti samo administratori.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na ovoj stranici, možeš navesti poruku od osnovnih pravila resurs je prikazan korisnicima.';
 
 $lang['TR_STATS'] = [

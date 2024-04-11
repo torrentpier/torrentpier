@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'גלובל להאכיל עבור כל הפורומ�
 $lang['HASH_INVALID'] = 'חשיש %s אינו חוקי';
 $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]הטקסט של דף זה נערך בכתובת: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. שורה זו יכולה לראות רק מנהלי מערכת.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקסט של הכללים הבסיסיים של משאב זה מוצג בפני המשתמשים.';
 
 $lang['TR_STATS'] = [

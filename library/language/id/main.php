@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Umpan global untuk semua forum';
 $lang['HASH_INVALID'] = 'Hash %s adalah tidak valid';
 $lang['HASH_NOT_FOUND'] = 'Rilis dengan hash %s tidak ditemukan';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teks halaman ini diedit di: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Baris ini hanya dapat melihat administrator.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pada halaman ini, anda dapat menentukan teks aturan dasar dari sumber daya ditampilkan kepada pengguna.';
 
 $lang['TR_STATS'] = [

@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globalt feed til alle fora';
 $lang['HASH_INVALID'] = 'Hash %s er ugyldig';
 $lang['HASH_NOT_FOUND'] = 'Udgivelse med hash %s ikke fundet';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teksten på denne side er redigeret på: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Denne linje kan kun se administratorer.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På denne side, kan du angive den tekst, der i de grundlæggende regler af den ressource, der vises til brugerne.';
 
 $lang['TR_STATS'] = [

@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Maailmanlaajuinen rehu kaikille foorumeille';
 $lang['HASH_INVALID'] = 'Hash %s on virheellinen';
 $lang['HASH_NOT_FOUND'] = 'Julkaisu hash %s ei löytynyt';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]Tämän sivun tekstiä on muokattu osoitteessa [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Tämä rivi näkee vain järjestelmänvalvojat.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Tällä sivulla, voit määrittää tekstin perussäännöt resurssi näkyy käyttäjille.';
 
 $lang['TR_STATS'] = [

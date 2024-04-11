@@ -2753,7 +2753,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'すべてのフォーラムのグローバルフィ
 $lang['HASH_INVALID'] = 'ハッシュ%sが無効';
 $lang['HASH_NOT_FOUND'] = 'コーポレートコミュニケーションのハッシュ%s見つかりませんで';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]このページのテキストは [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]で編集されています。この行は管理者だけが見ることができます。[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'このページでご指定いただくことができますテキストの基本的なルールのリソースが表示されます。';
 
 $lang['TR_STATS'] = [

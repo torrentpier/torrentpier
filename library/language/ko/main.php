@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = '모든 포럼의 글로벌 피드';
 $lang['HASH_INVALID'] = '해시가 잘못되었 %s';
 $lang['HASH_NOT_FOUND'] = '릴리스와 해시 %s 발견되지 않았';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]이 페이지의 텍스트는 [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]에서 편집됩니다. 이 회선은 관리자만 볼 수 있습니다.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = '이 페이지에서 텍스트를 지정할 수 있습의 기본적인 규칙은 자원의 사용자에게 표시합니다.';
 
 $lang['TR_STATS'] = [
