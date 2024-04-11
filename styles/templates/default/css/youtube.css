@@ -11,12 +11,10 @@
   top: 50%;
   left: 50%;
   background-attachment: fixed, scroll;
-  background: url(../images/aerobg.png), -moz-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
-  background: url(../images/aerobg.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(200, 200, 200, 0.4)), color-stop(100%, rgba(255, 255, 255, 1)));
-  background: url(../images/aerobg.png), -webkit-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   background: url(../images/aerobg.png), -o-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   background: url(../images/aerobg.png), -ms-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66c8c8c8', endColorstr='#ffffff', GradientType=0);
+  background: url(../images/aerobg.png), -webkit-gradient(linear, left top, left bottom, from(rgba(200, 200, 200, 0.4)), to(rgba(255, 255, 255, 1)));
   background: url(../images/aerobg.png), linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
   background-size: cover;
   -moz-background-size: cover;
