@@ -15,17 +15,17 @@
     </table>
 </form>
 
-<table class="forumline tablesorter">
+<table class="forumline">
     <thead>
     <tr>
-        <th class="{sorter: 'digit'}"><b class="tbs-text">#</b></th>
-        <th class="{sorter: 'text'}"><b class="tbs-text">{L_USERNAME}</b></th>
-        <th class="{sorter: false}"><b class="tbs-text">{L_PM}</b></th>
-        <th class="{sorter: 'text'}"><b class="tbs-text">{L_EMAIL}</b></th>
-        <th class="{sorter: 'text'}"><b class="tbs-text">{L_LOCATION}</b></th>
-        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_JOINED}</b></th>
-        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_POSTS_SHORT}</b></th>
-        <th class="{sorter: false}"><b class="tbs-text">{L_WEBSITE}</b></th>
+        <th><b class="tbs-text">#</b></th>
+        <th><b class="tbs-text">{L_USERNAME}</b></th>
+        <th><b class="tbs-text">{L_PM}</b></th>
+        <th><b class="tbs-text">{L_EMAIL}</b></th>
+        <th><b class="tbs-text">{L_LOCATION}</b></th>
+        <th><b class="tbs-text">{L_JOINED}</b></th>
+        <th><b class="tbs-text">{L_POSTS_SHORT}</b></th>
+        <th><b class="tbs-text">{L_WEBSITE}</b></th>
     </tr>
     </thead>
     <!-- BEGIN memberrow -->
@@ -39,7 +39,6 @@
         <td>{memberrow.EMAIL}</td>
         <td>{memberrow.FROM}</td>
         <td class="small">
-            <u>{memberrow.JOINED_RAW}</u>
             {memberrow.JOINED}
         </td>
         <td>{memberrow.POSTS}</td>
