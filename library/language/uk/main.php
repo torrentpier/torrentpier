@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sПовернутися до керув�
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Інформація про версію';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Дозволених спроб входу';
