@@ -82,20 +82,20 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         if ($updater_content !== false) {
             $json_response = json_decode(utf8_encode($updater_content), true)['release'];
             CACHE('bb_cache')->set('check_for_updates', $json_response, 600);
+        } else {
+            bb_log('Could not connect to sourceforge', '');
         }
     }
     if (is_array($json_response) && !empty($json_response)) {
         $get_version = basename(dirname($json_response['filename']));
-        $get_size = humn_size($json_response['bytes']);
-        $get_dl_link = $json_response['url'];
-
         $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
         $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
+
         $template->assign_block_vars('updater', [
             'UPDATE_AVAILABLE' => $version_code < $version_code_actual,
             'NEW_VERSION_NUMBER' => $get_version,
-            'NEW_VERSION_SIZE' => $get_size,
-            'NEW_VERSION_DL_LINK' => $get_dl_link
+            'NEW_VERSION_SIZE' => humn_size($json_response['bytes']),
+            'NEW_VERSION_DL_LINK' => $json_response['url']
         ]);
     }
 
