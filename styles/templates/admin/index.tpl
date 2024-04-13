@@ -146,17 +146,25 @@
 <br/>
 
 <table class="forumline">
-  <tr>
-    <th colspan="2">{L_VERSION_INFORMATION}</th>
-  </tr>
-  <tr>
-    <td class="row1" nowrap="nowrap" width="25%">{L_TP_VERSION}:</td>
-    <td class="row2"><b>{$bb_cfg['tp_release_codename']} ({$bb_cfg['tp_version']})</b></td>
-  </tr>
-  <tr>
-    <td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
-    <td class="row2"><b>{$bb_cfg['tp_release_date']}</b></td>
-  </tr>
+    <tr>
+        <th colspan="2">{L_VERSION_INFORMATION}</th>
+    </tr>
+    <tr>
+        <td class="row1" nowrap="nowrap" width="25%">{L_TP_VERSION}:</td>
+        <td class="row2"><b>{$bb_cfg['tp_release_codename']} ({$bb_cfg['tp_version']})</b></td>
+    </tr>
+    <tr>
+        <td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
+        <td class="row2"><b>{$bb_cfg['tp_release_date']}</b></td>
+    </tr>
+    <!-- BEGIN updater -->
+    <!-- IF updater.UPDATE_AVAILABLE -->
+    <tr>
+        <td class="row1" nowrap="nowrap" width="25%"><b>{L_UPDATE_AVAILABLE}:</b></td>
+        <td class="row2"><b>{updater.NEW_VERSION_NUMBER}</b><!-- IF updater.NEW_VERSION_SIZE -->&nbsp;({L_SIZE}:&nbsp;{updater.NEW_VERSION_SIZE})<!-- ENDIF -->&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_DL_LINK}">{L_DOWNLOAD}</a></td>
+    </tr>
+    <!-- ENDIF -->
+    <!-- END updater -->
 </table>
 <br/>
 
