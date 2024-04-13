@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikkaa %sHere%s palata Estää Käyttäj
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Tiedot';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Sallittu kirjautumisyritysten';
