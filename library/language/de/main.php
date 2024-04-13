@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klicken Sie auf %sHere%s zurück zu Verbi
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versionsinformationen';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Erlaubte login-versuche';
