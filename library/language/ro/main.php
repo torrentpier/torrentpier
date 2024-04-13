@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Faceți clic pe %sHere%s să se întoarc�
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informațiile De Versiune';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Permis de încercări de autentificare';
