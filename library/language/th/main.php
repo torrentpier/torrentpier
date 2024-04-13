@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'คลิก %sHere%s จะกลับ�
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'ข้อมูลของรุ่น';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'อนุญาตให้ล็อกอินพยายาม';

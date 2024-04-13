@@ -2284,6 +2284,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'をクリックし%sHere%sを返す可に
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'バージョン情報';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = '許可ログイン試み';

@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klõpsake %sHere%s tagasi Keelata Kasutaj
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versiooni Informatsioon';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Lubatud login katseid';
