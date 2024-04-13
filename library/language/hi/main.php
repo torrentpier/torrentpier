@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'अस्वीकार उपयोग�
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'संस्करण जानकारी';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'स्वीकृत लॉगिन प्रयास';
