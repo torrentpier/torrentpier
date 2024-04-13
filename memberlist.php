@@ -120,8 +120,8 @@ if ($result = DB()->fetch_rowset($sql)) {
 $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role";
 $paginationurl .= $username ? "&amp;username=$username" : '';
 
-if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
-    $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
+if ($mode != 'topten') {
+    $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql";
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }
