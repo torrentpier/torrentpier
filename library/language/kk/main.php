@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Көрсетуді доғару аты Ә
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'нұсқа ақпарат';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Кіру талпыныстар';
