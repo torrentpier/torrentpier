@@ -79,6 +79,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     // Check for updates
     if (!$json_response = CACHE('bb_cache')->get('check_for_updates')) {
         $updater_content = file_get_contents(UPDATER_URL);
+        $json_response = false;
         if ($updater_content !== false) {
             $json_response = json_decode(utf8_encode($updater_content), true)['release'];
             CACHE('bb_cache')->set('check_for_updates', $json_response, 600);
@@ -86,7 +87,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             bb_log('Could not connect to sourceforge', '');
         }
     }
-    if (is_array($json_response) && !empty($json_response)) {
+    if (is_array($json_response)) {
         $get_version = basename(dirname($json_response['filename']));
         $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
         $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
