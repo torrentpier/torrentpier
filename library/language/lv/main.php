@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Noklikšķiniet uz %sHere%s atgriezties, 
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versijas Informācija';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Atļauts pieteikšanās mēģinājumiem';
