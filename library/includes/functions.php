@@ -2132,3 +2132,38 @@ function getBanInfo(int $userId = null): ?array
 
     return $bans[$userId] ?? [];
 }
+
+/**
+ * Check for updates
+ *
+ * @return array
+ */
+function checkUpdates(): array
+{
+    global $bb_cfg;
+
+    if (!$json_response = CACHE('bb_cache')->get('check_for_updates')) {
+        $context = stream_context_create(['http' => ['header' => 'User-Agent: TorrentPier Updater. With love!']]);
+        $updater_content = file_get_contents(UPDATER_URL, context: $context);
+        if ($updater_content !== false) {
+            $json_response = json_decode(utf8_encode($updater_content), true);
+            CACHE('bb_cache')->set('check_for_updates', $json_response, 1200);
+        } else {
+            return ['error' => 'Could not connect to: ' . UPDATER_URL];
+        }
+    }
+    if (is_array($json_response)) {
+        $get_version = $json_response['tag_name'];
+        $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
+        $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
+
+        return [
+            'has_update' => $version_code < $version_code_actual,
+            'latest_ver' => $get_version,
+            'update_size' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
+            'download_link' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url']
+        ];
+    }
+
+    return ['error' => 'Something went wrong...'];
+}
