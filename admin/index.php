@@ -94,8 +94,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $template->assign_block_vars('updater', [
             'UPDATE_AVAILABLE' => $version_code < $version_code_actual,
             'NEW_VERSION_NUMBER' => $get_version,
-            'NEW_VERSION_SIZE' => humn_size($json_response['assets'][0]['size']),
-            'NEW_VERSION_DL_LINK' => $json_response['assets'][0]['browser_download_url']
+            'NEW_VERSION_SIZE' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
+            'NEW_VERSION_DL_LINK' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url']
         ]);
     }
 
