@@ -2280,6 +2280,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'انقر فوق %sHere%s للعودة إ�
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'معلومات الإصدار';
+$lang['UPDATE_AVAILABLE'] = 'Update available';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'يسمح محاولات تسجيل الدخول';
