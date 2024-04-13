@@ -78,25 +78,23 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
     // Check for updates
     if (!$json_response = CACHE('bb_cache')->get('check_for_updates')) {
-        $updater_content = file_get_contents(UPDATER_URL);
+        $context = stream_context_create(['http' => ['header' => 'User-Agent: TorrentPier Updater. With love!']]);
+        $updater_content = file_get_contents(UPDATER_URL, context: $context);
         $json_response = false;
         if ($updater_content !== false) {
-            $json_response = json_decode(utf8_encode($updater_content), true)['release'];
-            CACHE('bb_cache')->set('check_for_updates', $json_response, 600);
-        } else {
-            bb_log('Could not connect to sourceforge', '');
+            $json_response = json_decode(utf8_encode($updater_content), true);
+            CACHE('bb_cache')->set('check_for_updates', $json_response, 1200);
         }
     }
     if (is_array($json_response)) {
-        $get_version = basename(dirname($json_response['filename']));
+        $get_version = $json_response['tag_name'];
         $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
         $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
 
         $template->assign_block_vars('updater', [
             'UPDATE_AVAILABLE' => $version_code < $version_code_actual,
             'NEW_VERSION_NUMBER' => $get_version,
-            'NEW_VERSION_SIZE' => humn_size($json_response['bytes']),
-            'NEW_VERSION_DL_LINK' => $json_response['url']
+            'NEW_VERSION_DL_LINK' => $json_response['html_url']
         ]);
     }
 
