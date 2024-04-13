@@ -78,9 +78,9 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
     // Check for updates
     if (!$json_response = CACHE('bb_cache')->get('check_for_updates')) {
+        $json_response = false;
         $context = stream_context_create(['http' => ['header' => 'User-Agent: TorrentPier Updater. With love!']]);
         $updater_content = file_get_contents(UPDATER_URL, context: $context);
-        $json_response = false;
         if ($updater_content !== false) {
             $json_response = json_decode(utf8_encode($updater_content), true);
             CACHE('bb_cache')->set('check_for_updates', $json_response, 1200);
@@ -94,7 +94,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $template->assign_block_vars('updater', [
             'UPDATE_AVAILABLE' => $version_code < $version_code_actual,
             'NEW_VERSION_NUMBER' => $get_version,
-            'NEW_VERSION_DL_LINK' => $json_response['html_url']
+            'NEW_VERSION_SIZE' => humn_size($json_response['assets'][0]['size']),
+            'NEW_VERSION_DL_LINK' => $json_response['assets'][0]['browser_download_url']
         ]);
     }
 
