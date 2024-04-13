@@ -90,9 +90,14 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $get_version = $json_response['tag_name'];
         $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
         $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
+        $has_update = $version_code < $version_code_actual;
+
+        if ($has_update) {
+            file_write($version_code . "\n" . $version_code_actual, INT_DATA_DIR . '/updater.ver', replace_content: true);
+        }
 
         $template->assign_block_vars('updater', [
-            'UPDATE_AVAILABLE' => $version_code < $version_code_actual,
+            'UPDATE_AVAILABLE' => $has_update,
             'NEW_VERSION_NUMBER' => $get_version,
             'NEW_VERSION_SIZE' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
             'NEW_VERSION_DL_LINK' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url']
