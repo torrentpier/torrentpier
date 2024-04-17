@@ -1928,6 +1928,12 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
 {
     global $bb_cfg;
 
+    // Check for gravatar
+    $user_gravatar = '';
+    if ($bb_cfg['use_gravatar_provider']['enabled'] && !str_starts_with($user_id, GROUP_AVATAR_MASK)) {
+        $user_gravatar = get_userdata($user_id)['user_gravatar'];
+    }
+
     $height = $height ? 'height="' . $height . '"' : '';
     $width = $width ? 'width="' . $width . '"' : '';
 
@@ -1935,9 +1941,13 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = '', $widt
 
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
         $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
-    } elseif ($allow_avatar && $ext_id) {
-        if (is_file(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    } elseif ($allow_avatar) {
+        if (!empty($user_gravatar)) {
+            $user_avatar = '<img src="' . $user_gravatar . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+        } elseif (!empty($ext_id)) {
+            if (is_file(get_avatar_path($user_id, $ext_id))) {
+                $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+            }
         }
     }
 

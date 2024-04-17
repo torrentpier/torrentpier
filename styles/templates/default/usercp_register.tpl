@@ -315,6 +315,9 @@
                         <td class="tCenter nowrap">
                             <p class="mrg_6">{AVATAR_IMG}</p>
                             <p><label><input type="checkbox" name="delete_avatar"/> {L_DELETE_IMAGE}</label></p>
+                            <!-- IF $bb_cfg['use_gravatar_provider']['enabled'] -->
+                            <p><label><input type="checkbox" <!-- IF AVATAR_HAS_GRAVATAR -->checked disabled<!-- ENDIF --> name="set_gravatar"/> {L_AVATAR_GRAVATAR}</label></p>
+                            <!-- ENDIF -->
                         </td>
                     </tr>
                 </table>
