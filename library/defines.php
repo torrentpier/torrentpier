@@ -32,7 +32,6 @@ define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 define('APP_NAME', 'TorrentPier');
 define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases/latest');
 define('UPDATER_FILE', INT_DATA_DIR . '/updater.ver');
-define('VERSION_CODE', (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true))));
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');

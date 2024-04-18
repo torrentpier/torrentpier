@@ -27,6 +27,9 @@ define('USER_IP', $user_ip);
 // Initialize demo mode
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
 
+// Version code
+define('VERSION_CODE', (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true))));
+
 /**
  * @param $contents
  * @return string
@@ -404,8 +407,10 @@ $wordCensor = new \TorrentPier\Censor();
 /**
  * Updater
  */
-if (readUpdaterFile()['old_version'] < VERSION_CODE) {
-    redirect('install/updater.php');
+if (!IN_UPDATER && readUpdaterFile()['old_version'] < VERSION_CODE) {
+    if (is_file(BB_ROOT . '/install/updater.php') && copy('install/updater.php', BB_ROOT . 'updater.php')) {
+        redirect('updater.php');
+    }
 }
 
 /**
