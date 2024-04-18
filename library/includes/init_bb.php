@@ -402,6 +402,13 @@ $userdata =& $user->data;
 $wordCensor = new \TorrentPier\Censor();
 
 /**
+ * Updater
+ */
+if (readUpdaterFile()['old_version'] < VERSION_CODE) {
+    redirect('install/updater.php');
+}
+
+/**
  * Cron
  */
 if (

@@ -25,13 +25,12 @@ if ($updater_content !== false) {
 
 if (is_array($json_response) && !empty($json_response)) {
     $get_version = $json_response['tag_name'];
-    $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
     $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
-    $has_update = $version_code < $version_code_actual;
+    $has_update = VERSION_CODE < $version_code_actual;
 
     // Save current version & latest available
     if ($has_update) {
-        file_write($version_code . "\n" . $version_code_actual, UPDATER_FILE, replace_content: true);
+        file_write(VERSION_CODE . "\n" . $version_code_actual, UPDATER_FILE, replace_content: true);
     }
 
     // Build data array
