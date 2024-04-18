@@ -23,7 +23,7 @@ if ($updater_content !== false) {
     $json_response = json_decode(utf8_encode($updater_content), true);
 }
 
-if (!is_array($json_response) && !empty($json_response)) {
+if (is_array($json_response) && !empty($json_response)) {
     $get_version = $json_response['tag_name'];
     $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
     $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
