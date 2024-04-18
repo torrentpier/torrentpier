@@ -58,3 +58,6 @@ if (empty($bb_cfg['bt_announce_url'])) {
 if (IN_DEMO_MODE) {
     DB()->query("UPDATE " . BB_FORUMS . " SET allow_reg_tracker = 1 WHERE allow_reg_tracker = 0");
 }
+
+// Check for updates
+$datastore->update('check_updates');
