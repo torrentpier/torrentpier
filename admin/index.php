@@ -15,6 +15,12 @@ if (!$stats = $datastore->get('stats')) {
     $stats = $datastore->get('stats');
 }
 
+// Check for updates
+if (!$update_data = $datastore->get('check_updates')) {
+    $datastore->update('check_updates');
+    $update_data = $datastore->get('check_updates');
+}
+
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $module = [];
@@ -77,14 +83,12 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ]);
 
     // Check for updates
-    if ($last_version = $datastore->get('check_updates')) {
-        $template->assign_block_vars('updater', [
-            'UPDATE_AVAILABLE' => $last_version['available_update'],
-            'NEW_VERSION_NUMBER' => $last_version['latest_version'],
-            'NEW_VERSION_SIZE' => $last_version['latest_version_size'],
-            'NEW_VERSION_DL_LINK' => $last_version['latest_version_link']
-        ]);
-    }
+    $template->assign_block_vars('updater', [
+        'UPDATE_AVAILABLE' => $update_data['available_update'],
+        'NEW_VERSION_NUMBER' => $update_data['latest_version'],
+        'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
+        'NEW_VERSION_DL_LINK' => $update_data['latest_version_link']
+    ]);
 
     // Get forum statistics
     $total_posts = $stats['postcount'];
