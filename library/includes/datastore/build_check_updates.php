@@ -29,8 +29,9 @@ if (is_array($json_response) && !empty($json_response)) {
     $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
     $has_update = $version_code < $version_code_actual;
 
+    // Save current version & latest available
     if ($has_update) {
-        file_write($version_code . "\n" . $version_code_actual, INT_DATA_DIR . '/updater.ver', replace_content: true);
+        file_write($version_code . "\n" . $version_code_actual, UPDATER_FILE, replace_content: true);
     }
 
     // Build data array

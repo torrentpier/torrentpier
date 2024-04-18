@@ -2141,7 +2141,7 @@ function getBanInfo(int $userId = null): ?array
 function readUpdaterFile(): array
 {
     $str = [];
-    if ($updaterFile = fopen(INT_DATA_DIR . '/updater.ver', 'r')) {
+    if ($updaterFile = fopen(UPDATER_FILE, 'r')) {
         while (!feof($updaterFile)) {
             $str[] = trim(fgets($updaterFile));
         }

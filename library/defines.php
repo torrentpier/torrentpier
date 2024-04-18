@@ -14,6 +14,7 @@ if (!defined('BB_ROOT')) {
 // System
 define('APP_NAME', 'TorrentPier');
 define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases/latest');
+define('UPDATER_FILE', INT_DATA_DIR . '/updater.ver');
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('ADMIN_DIR', BB_PATH . '/admin');
