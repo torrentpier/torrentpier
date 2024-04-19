@@ -36,13 +36,13 @@ $processedQueries = [];
 foreach ($versionsRange as $version) {
     switch ($version) {
         case 241: // v2.4.1
-            $processedQueries[] = '[v2.4.1]';
+            $processedQueries[] = '-- SQL queries for v2.4.1 processed! --';
             break;
         case 242: // v2.4.2
-            $processedQueries[] = '[v2.4.2]';
+            $processedQueries[] = '-- SQL queries for v2.4.2 processed! --';
             break;
         case 243: // v2.4.3
-            $processedQueries[] = '[v2.4.3]';
+            $processedQueries[] = '-- SQL queries for v2.4.3 processed! --';
             break;
     }
 }
