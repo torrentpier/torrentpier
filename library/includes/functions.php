@@ -2136,9 +2136,9 @@ function getBanInfo(int $userId = null): ?array
 /**
  * Read updater file
  *
- * @return array
+ * @return array|bool
  */
-function readUpdaterFile(): array
+function readUpdaterFile(): array|bool
 {
     $str = [];
 
@@ -2148,8 +2148,12 @@ function readUpdaterFile(): array
         }
     }
 
-    return [
-        'old_version' => (int)$str[0],
-        'new_version' => (int)$str[1],
-    ];
+    if (!empty($str)) {
+        return [
+            'previous_version' => (int)$str[0],
+            'latest_version' => (int)$str[1],
+        ];
+    }
+
+    return false;
 }
