@@ -3018,7 +3018,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Bütün forumlar üçün qlobal yem';
 $lang['HASH_INVALID'] = 'Hash %s etibarsızdır';
 $lang['HASH_NOT_FOUND'] = 'Məsələ ilə hash %s tapılmadı';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu səhifədə verə bilərsiniz mətn əsas qaydaları resurs göstərilir istifadəçilər üçün.';
 
 $lang['TR_STATS'] = [
