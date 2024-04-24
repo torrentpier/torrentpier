@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Maailmanlaajuinen rehu kaikille foorumeille';
 $lang['HASH_INVALID'] = 'Hash %s on virheellinen';
 $lang['HASH_NOT_FOUND'] = 'Julkaisu hash %s ei löytynyt';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Tällä sivulla, voit määrittää tekstin perussäännöt resurssi näkyy käyttäjille.';
 
 $lang['TR_STATS'] = [
