@@ -3018,7 +3018,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globalni feed za sve forume';
 $lang['HASH_INVALID'] = 'Hash %s je nevažeća';
 $lang['HASH_NOT_FOUND'] = 'Izdanje s hash %s nije pronađen';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na ovoj stranici možete postaviti tekst, osnovna pravila resursa prikazani za korisnike.';
 
 $lang['TR_STATS'] = [
