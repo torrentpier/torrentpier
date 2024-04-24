@@ -46,7 +46,7 @@ $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
 $search_id = (isset($_GET['search_id']) && is_string($_GET['search_id'])) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
-$status = $_POST['status'] ?? false;
+$status = is_countable($_POST['status']) ? $_POST['status'] : false;
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -824,8 +824,8 @@ if ($bb_cfg['tracker']['search_by_tor_status']) {
     foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
-            $checked = (in_array($status_id, $status) && is_countable($status)) ? 'checked' : '';
-            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
+            $checked_status = in_array($status_id, $status) ? 'checked' : '';
+            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked_status . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
         }
         $statuses .= '</tr>';
     }
