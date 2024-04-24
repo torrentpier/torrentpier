@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Flux mondiaux pour tous les forums';
 $lang['HASH_INVALID'] = 'Hachage %s est pas valide';
 $lang['HASH_NOT_FOUND'] = 'Version avec pommes de %s pas trouvé';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Sur cette page, vous pouvez spécifier le texte des règles de base de la ressource s\'affiche pour les utilisateurs.';
 
 $lang['TR_STATS'] = [
