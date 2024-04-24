@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globálne krmivo pre všetky fóra';
 $lang['HASH_INVALID'] = 'Hash %s je neplatný';
 $lang['HASH_NOT_FOUND'] = 'Prepustenie s hash %s nebol nájdený';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na tejto stránke môžete zadať text základné pravidlá zdrojov sa zobrazujú používateľom.';
 
 $lang['TR_STATS'] = [
