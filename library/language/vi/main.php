@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Thức ăn toàn cầu cho tất cả các diễn �
 $lang['HASH_INVALID'] = 'Băm %s là không hợp lệ';
 $lang['HASH_NOT_FOUND'] = 'Phát hành với băm %s không tìm thấy';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Trên trang này, anh có thể xác định danh văn bản của các quy tắc cơ bản của các nguồn tài nguyên được hiển thị sử dụng.';
 
 $lang['TR_STATS'] = [
