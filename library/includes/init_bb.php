@@ -27,6 +27,9 @@ define('USER_IP', $user_ip);
 // Initialize demo mode
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
 
+// Version code
+define('VERSION_CODE', (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true))));
+
 /**
  * @param $contents
  * @return string

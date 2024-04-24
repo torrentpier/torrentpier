@@ -2132,3 +2132,28 @@ function getBanInfo(int $userId = null): ?array
 
     return $bans[$userId] ?? [];
 }
+
+/**
+ * Read updater file
+ *
+ * @return array|bool
+ */
+function readUpdaterFile(): array|bool
+{
+    $str = [];
+
+    if ($updaterFile = fopen(UPDATER_FILE, 'r')) {
+        while (!feof($updaterFile)) {
+            $str[] = trim(fgets($updaterFile));
+        }
+    }
+
+    if (!empty($str)) {
+        return [
+            'previous_version' => (int)$str[0],
+            'latest_version' => (int)$str[1],
+        ];
+    }
+
+    return false;
+}

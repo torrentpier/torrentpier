@@ -11,6 +11,7 @@ data/uploads
 internal_data/atom
 internal_data/cache
 internal_data/log
+internal_data/updater.ver
 sitemap
 internal_data/triggers
 library/config.local.php

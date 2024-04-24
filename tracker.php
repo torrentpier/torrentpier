@@ -46,7 +46,7 @@ $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
 $search_id = (isset($_GET['search_id']) && is_string($_GET['search_id'])) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
-$status = $_POST['status'] ?? false;
+$status = is_countable($_POST['status']) ? $_POST['status'] : false;
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -605,7 +605,7 @@ if ($allowed_forums) {
         if ($tor_type) {
             $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
         }
-        if (is_countable($status)) {
+        if ($status) {
             $SQL['WHERE'][] = "tor.tor_status IN(" . implode(', ', $status) . ")";
         }
 
@@ -819,13 +819,13 @@ $search_all_opt = '<option value="' . $search_all . '" value="fs-' . $search_all
 $cat_forum_select = "\n" . '<select id="fs-main" style="width: 100%;" name="' . $forum_key . '[]" multiple size="' . $forum_select_size . "\">\n" . $search_all_opt . $opt . "</select>\n";
 
 // Status select
-if (IS_AM && $bb_cfg['tracker']['search_by_tor_status']) {
+if ($bb_cfg['tracker']['search_by_tor_status']) {
     $statuses = '<table border="0" cellpadding="0" cellspacing="0">';
     foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
-            $checked = (is_countable($status) && in_array($status_id, $status)) ? 'checked' : '';
-            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
+            $checked_status = in_array($status_id, $status) ? 'checked' : '';
+            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked_status . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
         }
         $statuses .= '</tr>';
     }

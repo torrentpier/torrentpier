@@ -15,6 +15,12 @@ if (!$stats = $datastore->get('stats')) {
     $stats = $datastore->get('stats');
 }
 
+// Check for updates
+if (!$update_data = $datastore->get('check_updates')) {
+    $datastore->update('check_updates');
+    $update_data = $datastore->get('check_updates');
+}
+
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $module = [];
@@ -77,27 +83,12 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ]);
 
     // Check for updates
-    if (!$json_response = CACHE('bb_cache')->get('check_for_updates')) {
-        $json_response = false;
-        $context = stream_context_create(['http' => ['header' => 'User-Agent: TorrentPier Updater. With love!']]);
-        $updater_content = file_get_contents(UPDATER_URL, context: $context);
-        if ($updater_content !== false) {
-            $json_response = json_decode(utf8_encode($updater_content), true);
-            CACHE('bb_cache')->set('check_for_updates', $json_response, 1200);
-        }
-    }
-    if (is_array($json_response)) {
-        $get_version = $json_response['tag_name'];
-        $version_code = (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true)));
-        $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
-
-        $template->assign_block_vars('updater', [
-            'UPDATE_AVAILABLE' => $version_code < $version_code_actual,
-            'NEW_VERSION_NUMBER' => $get_version,
-            'NEW_VERSION_SIZE' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
-            'NEW_VERSION_DL_LINK' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url']
-        ]);
-    }
+    $template->assign_block_vars('updater', [
+        'UPDATE_AVAILABLE' => $update_data['available_update'],
+        'NEW_VERSION_NUMBER' => $update_data['latest_version'],
+        'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
+        'NEW_VERSION_DL_LINK' => $update_data['latest_version_link']
+    ]);
 
     // Get forum statistics
     $total_posts = $stats['postcount'];
