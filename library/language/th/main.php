@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'ฟีดข้อมูลทั่วโลกส
 $lang['HASH_INVALID'] = 'ค่อยจัดการเรื่อง %s คือไม่ถูกต้อง';
 $lang['HASH_NOT_FOUND'] = 'ปล่อยตัวด้วค่อยจัดการเรื่อง %s ไม่พบ';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'ในหน้านี้คุณสามารถกำหนดข้อความของพื้นฐานกฏของทรัพยากรจะถูกแสดงเป็นเพื่อใช้ได้';
 
 $lang['TR_STATS'] = [
