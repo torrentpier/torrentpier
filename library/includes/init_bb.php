@@ -405,15 +405,6 @@ $userdata =& $user->data;
 $wordCensor = new \TorrentPier\Censor();
 
 /**
- * Updater
- */
-if (!defined('IN_UPDATER') && readUpdaterFile()['previous_version'] < VERSION_CODE) {
-    if (is_file(BB_ROOT . '/install/updater.php') && copy('install/updater.php', BB_ROOT . 'updater.php')) {
-        redirect('updater.php');
-    }
-}
-
-/**
  * Cron
  */
 if (
