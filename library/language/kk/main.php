@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Барлық форумдарға жаһандық 
 $lang['HASH_INVALID'] = 'Hash %s жарамсыз';
 $lang['HASH_NOT_FOUND'] = 'тор белгісі бар босатыңыз %s табылған жоқ';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Бұл бетте, Сіз пайдаланушыларға көрсетіледі ресурс негізгі ережелерін мәтінді көрсетуге болады.';
 
 $lang['TR_STATS'] = [

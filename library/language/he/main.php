@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'גלובל להאכיל עבור כל הפורומ�
 $lang['HASH_INVALID'] = 'חשיש %s אינו חוקי';
 $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקסט של הכללים הבסיסיים של משאב זה מוצג בפני המשתמשים.';
 
 $lang['TR_STATS'] = [

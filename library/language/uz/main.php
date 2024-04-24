@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Barcha forumlar uchun global ovqatlanish';
 $lang['HASH_INVALID'] = 'Hash %s haqiqiy emas';
 $lang['HASH_NOT_FOUND'] = 'hash %s topilmadi bilan ozod';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ushbu sahifada, siz resurs asosiy qoidalarini matn foydalanuvchilarga ko\'rsatish mumkin.';
 
 $lang['TR_STATS'] = [

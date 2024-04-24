@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = '全球料的所有论坛';
 $lang['HASH_INVALID'] = '哈希%s是无效的';
 $lang['HASH_NOT_FOUND'] = '释放与哈希%s找不到';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = '在这一页面，可以指定的案文的基本规则的资源显示用户使用。';
 
 $lang['TR_STATS'] = [

@@ -3018,7 +3018,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globalny kanał danych dla wszystkich forów';
 $lang['HASH_INVALID'] = 'Hash-%s jest nieważne';
 $lang['HASH_NOT_FOUND'] = 'Wydanie z hash-%s nie znaleziono';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na tej stronie możesz podać tekst, podstawowe zasady zasobu jest widoczna dla użytkowników.';
 
 $lang['TR_STATS'] = [

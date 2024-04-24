@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globālā plūsma visiem forumiem';
 $lang['HASH_INVALID'] = 'Hash %s nav derīgs';
 $lang['HASH_NOT_FOUND'] = 'Atbrīvot ar hash %s nav atrasts';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Šajā lapā jūs varat norādīt teksta pamatnoteikumu resurss ir parādīts lietotājiem.';
 
 $lang['TR_STATS'] = [

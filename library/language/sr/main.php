@@ -3015,7 +3015,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Глобална храна за све форум�
 $lang['HASH_INVALID'] = 'Хасх %s је неважећи';
 $lang['HASH_NOT_FOUND'] = 'Издање са хасх %s није пронађен';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На овој страници можете да поставите текст, основна правила ресурса се приказује корисницима.';
 
 $lang['TR_STATS'] = [

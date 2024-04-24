@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'გლობალური საკვები�
 $lang['HASH_INVALID'] = 'Hash %s არასწორია';
 $lang['HASH_NOT_FOUND'] = 'გამოშვების hash %s არ მოიძებნა';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'ამ გვერდზე, თქვენ შეგიძლიათ მიუთითოთ ტექსტი ძირითადი წესები რესურსი არის ნაჩვენები მომხმარებლებს.';
 
 $lang['TR_STATS'] = [

@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Feed global pentru toate forumurile';
 $lang['HASH_INVALID'] = 'Hash %s este invalid';
 $lang['HASH_NOT_FOUND'] = 'Lansare cu hash %s nu a fost găsit';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pe această pagină, puteți specifica textul de regulile de bază de resurse este afișat pentru utilizatori.';
 
 $lang['TR_STATS'] = [

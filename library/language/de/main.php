@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Global feed für alle Foren';
 $lang['HASH_INVALID'] = 'Hash %s ist ungültig';
 $lang['HASH_NOT_FOUND'] = 'Version mit hash %s nicht gefunden';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Auf dieser Seite können Sie den text angeben, der die grundlegenden Regeln der Ressource, die den Benutzern angezeigt wird.';
 
 $lang['TR_STATS'] = [

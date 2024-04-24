@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'सभी मंचों के लिए वै�
 $lang['HASH_INVALID'] = 'हैश %s अमान्य है';
 $lang['HASH_NOT_FOUND'] = 'हैश %s के साथ रिलीज़ नहीं मिला';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'इस पृष्ठ पर, आप संसाधनों के मूल नियमों का टेक्स्ट उपयोगकर्ताओं को प्रदर्शित किया जा सकता है।';
 
 $lang['TR_STATS'] = [
