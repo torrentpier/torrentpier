@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Visuotinis informacijos šaltinis visiems forumuose
 $lang['HASH_INVALID'] = 'Maišos %s negalioja';
 $lang['HASH_NOT_FOUND'] = 'Išleidimo su maišos %s nerasta';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Šiame puslapyje jūs galite nurodyti tekstą iš pagrindinių taisyklių, ištekliai rodomas naudotojams.';
 
 $lang['TR_STATS'] = [
