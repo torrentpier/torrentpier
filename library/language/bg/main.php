@@ -3017,7 +3017,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Глобални емисии за всички ф�
 $lang['HASH_INVALID'] = 'Хеш-%s е невалиден';
 $lang['HASH_NOT_FOUND'] = 'Проблем с хеш-%s не е намерено';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На тази страница можете да зададете текст, основните правила ресурс показва на потребителите.';
 
 $lang['TR_STATS'] = [
