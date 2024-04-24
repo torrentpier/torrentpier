@@ -3014,7 +3014,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globális hírcsatorna az összes fórum számára'
 $lang['HASH_INVALID'] = 'Hash %s érvénytelen';
 $lang['HASH_NOT_FOUND'] = 'Kiadás hash %s nem található';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: %s. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ezen az oldalon adhatja meg, hogy a szöveg az alapvető szabályokat, az erőforrás jelenik meg a felhasználók számára.';
 
 $lang['TR_STATS'] = [
