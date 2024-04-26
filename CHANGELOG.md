@@ -11,6 +11,7 @@
 - Added support for APCu caching method [\#1442](https://github.com/torrentpier/torrentpier/pull/1442) ([belomaxorka](https://github.com/belomaxorka))
 - Some enhancements [\#1445](https://github.com/torrentpier/torrentpier/pull/1445) ([belomaxorka](https://github.com/belomaxorka))
 - Improved app debug [\#1438](https://github.com/torrentpier/torrentpier/pull/1438) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed quote selection for smiles [\#1457](https://github.com/torrentpier/torrentpier/pull/1457) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Allow registering torrents by default [\#1440](https://github.com/torrentpier/torrentpier/pull/1440) ([belomaxorka](https://github.com/belomaxorka))
 - Code refactoring [\#1441](https://github.com/torrentpier/torrentpier/pull/1441) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1435](https://github.com/torrentpier/torrentpier/pull/1435), [\#1443](https://github.com/torrentpier/torrentpier/pull/1443), [\#1446](https://github.com/torrentpier/torrentpier/pull/1446), [\#1450](https://github.com/torrentpier/torrentpier/pull/1450), [\#1452](https://github.com/torrentpier/torrentpier/pull/1452) ([belomaxorka](https://github.com/belomaxorka))
