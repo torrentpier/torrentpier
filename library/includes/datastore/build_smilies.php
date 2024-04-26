@@ -20,7 +20,7 @@ sort($rowset);
 
 foreach ($rowset as $smile) {
     $smilies['orig'][] = '#(?<=^|\W)' . preg_quote($smile['code'], '#') . '(?=$|\W)#';
-    $smilies['repl'][] = ' <img class="smile" src="' . $bb_cfg['smilies_path'] . '/' . $smile['smile_url'] . '" alt="' . $smile['emoticon'] . '" align="absmiddle" border="0" />';
+    $smilies['repl'][] = ' <img class="smile" src="' . $bb_cfg['smilies_path'] . '/' . $smile['smile_url'] . '" alt="' . $smile['code'] . '" title="' . $smile['emoticon'] . '" align="absmiddle" border="0" />';
     $smilies['smile'][] = $smile;
 }
 
