@@ -11,8 +11,8 @@ define('BB_SCRIPT', 'dl_list');
 
 require __DIR__ . '/common.php';
 
-$forum_id = isset($_REQUEST[POST_FORUM_URL]) ? (int)$_REQUEST[POST_FORUM_URL] : 0;
-$topic_id = isset($_REQUEST[POST_TOPIC_URL]) ? (int)$_REQUEST[POST_TOPIC_URL] : 0;
+$forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
+$topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $confirmed = isset($_POST['confirm']);
 
