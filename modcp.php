@@ -651,7 +651,7 @@ switch ($mode) {
         // Get other users who've posted under this IP
         //
         $sql = "SELECT
-				u.user_id,
+				u.user_id, u.user_rank,
 				IF(u.user_id = $anon, p.post_username, u.username) AS username,
 				COUNT(*) as postings
 			FROM " . BB_USERS . " u, " . BB_POSTS . " p
@@ -667,15 +667,11 @@ switch ($mode) {
         if ($row = DB()->sql_fetchrow($result)) {
             $i = 0;
             do {
-                $id = $row['user_id'];
-                $username = (!$row['username']) ? $lang['GUEST'] : $row['username'];
-
                 $template->assign_block_vars('userrow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
-                    'USERNAME' => $username,
+                    'USERNAME' => profile_url($row),
                     'POSTS' => $row['postings'],
-                    'U_PROFILE' => ($id == GUEST_UID) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
-                    'U_SEARCHPOSTS' => "search.php?search_author=1&amp;uid=$id",
+                    'U_SEARCHPOSTS' => "search.php?search_author=1&amp;uid={$row['user_id']}",
                 ]);
 
                 $i++;
