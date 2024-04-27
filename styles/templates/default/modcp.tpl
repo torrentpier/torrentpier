@@ -15,7 +15,9 @@
 <tr>
 	<td class="row1 pad_6">
 		<p class="floatL"><b>{IP}</b></p>
+		<!-- IF U_LOOKUP_IP -->
 		<p class="floatR">[ <a href="{U_LOOKUP_IP}">{L_LOOKUP_IP}</a> ]&nbsp;</p>
+		<!-- ENDIF -->
 	</td>
 </tr>
 <tr>
@@ -38,7 +40,9 @@
 	<td class="{iprow.ROW_CLASS} pad_4 nowrap">
 		<p class="floatL" style="_width: 160px; min-width: 160px;">{iprow.IP}</p>
 		<p class="floatL">[ {L_POSTS}: {iprow.POSTS} ]</p>
+		<!-- IF iprow.U_LOOKUP_IP -->
 		<p class="floatR">[ <a href="{iprow.U_LOOKUP_IP}">{L_LOOKUP_IP}</a> ]&nbsp;</p>
+		<!-- ENDIF -->
 	</td>
 </tr>
 <!-- END iprow -->
