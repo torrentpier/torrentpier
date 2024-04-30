@@ -494,7 +494,7 @@ $template->assign_vars([
     'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
     'U_POST_NEW_TOPIC' => $new_topic_url,
     'U_POST_REPLY_TOPIC' => $reply_topic_url,
-    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&t=$topic_id&dm=1",
+    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&" . POST_TOPIC_URL . "=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
     'POLL_IS_EDITABLE' => !$poll_time_expired,
