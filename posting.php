@@ -202,17 +202,17 @@ if (!$is_auth[$is_auth_type]) {
 
     switch ($mode) {
         case 'newtopic':
-            $redirect = "mode=newtopic&f=$forum_id";
+            $redirect = "mode=newtopic&" . POST_FORUM_URL . "=$forum_id";
             break;
         case 'new_rel':
-            $redirect = "mode=new_rel&f=$forum_id";
+            $redirect = "mode=new_rel&" . POST_FORUM_URL . "=$forum_id";
             break;
         case 'reply':
-            $redirect = "mode=reply&t=$topic_id";
+            $redirect = "mode=reply&" . POST_TOPIC_URL . "=$topic_id";
             break;
         case 'quote':
         case 'editpost':
-            $redirect = "mode=quote&p=$post_id";
+            $redirect = "mode=quote&" . POST_POST_URL . "=$post_id";
             break;
         default:
             $redirect = '';
