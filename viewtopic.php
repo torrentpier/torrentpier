@@ -358,8 +358,8 @@ if (!$ranks = $datastore->get('ranks')) {
 $topic_title = $wordCensor->censorString($topic_title);
 
 // Post, reply and other URL generation for templating vars
-$new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=" . $forum_id;
-$reply_topic_url = POSTING_URL . "?mode=reply&amp;t=" . $topic_id;
+$new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
+$reply_topic_url = POSTING_URL . "?mode=reply&amp;" . POST_TOPIC_URL . "=$topic_id";
 $view_forum_url = FORUM_URL . $forum_id;
 $view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
 $view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
