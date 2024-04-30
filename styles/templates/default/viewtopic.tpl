@@ -593,7 +593,7 @@ function build_poll_add_form (src_el)
 <br>
 <form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 <input type="hidden" name="mode" value="reply" />
-<input type="hidden" name="t" value="{QR_TOPIC_ID}" />
+<input type="hidden" name="{POST_TOPIC_URL}" value="{QR_TOPIC_ID}" />
 
 <table id="topic_quick_reply" class="topic" cellpadding="0" cellspacing="0">
 <tr>
