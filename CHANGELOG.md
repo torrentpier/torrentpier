@@ -15,7 +15,7 @@
 - Demo mode: Allow registering torrents by default [\#1440](https://github.com/torrentpier/torrentpier/pull/1440) ([belomaxorka](https://github.com/belomaxorka))
 - Code refactoring [\#1441](https://github.com/torrentpier/torrentpier/pull/1441) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1435](https://github.com/torrentpier/torrentpier/pull/1435), [\#1443](https://github.com/torrentpier/torrentpier/pull/1443), [\#1446](https://github.com/torrentpier/torrentpier/pull/1446), [\#1450](https://github.com/torrentpier/torrentpier/pull/1450), [\#1452](https://github.com/torrentpier/torrentpier/pull/1452) ([belomaxorka](https://github.com/belomaxorka))
-- Updated deps [\#1454](https://github.com/torrentpier/torrentpier/pull/1454), [\#1455](https://github.com/torrentpier/torrentpier/pull/1455) ([belomaxorka](https://github.com/belomaxorka))
+- Updated deps [\#1454](https://github.com/torrentpier/torrentpier/pull/1454), [\#1455](https://github.com/torrentpier/torrentpier/pull/1455), [\#1459](https://github.com/torrentpier/torrentpier/pull/1459), [\#1460](https://github.com/torrentpier/torrentpier/pull/1460) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1444](https://github.com/torrentpier/torrentpier/pull/1444), [\#1447](https://github.com/torrentpier/torrentpier/pull/1447), [\#1453](https://github.com/torrentpier/torrentpier/pull/1453) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.2](https://github.com/torrentpier/torrentpier/tree/v2.4.2) (2024-03-30)
