@@ -599,8 +599,10 @@ switch ($mode) {
             bb_die($lang['NO_SUCH_POST']);
         }
 
+        $no_lookup = false;
         if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::long2ip_extended($post_row['poster_ip'])) {
             $ip_this_post = $lang['NOT_AVAILABLE'];
+            $no_lookup = true;
         }
 
         $ip_this_post = ($rdns_ip_num == $ip_this_post) ? gethostbyaddr($ip_this_post) : $ip_this_post;
@@ -610,8 +612,9 @@ switch ($mode) {
         $template->assign_vars([
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
-            'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
+            'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'] : '',
         ]);
+        unset($no_lookup);
 
         //
         // Get other IP's this user has posted under
@@ -631,8 +634,10 @@ switch ($mode) {
                     continue;
                 }
 
+                $no_lookup = false;
                 if (!$ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($row['poster_ip'])) {
                     $ip = $lang['NOT_AVAILABLE'];
+                    $no_lookup = true;
                 }
                 $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
 
@@ -640,8 +645,9 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'],
+                    'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'] : '',
                 ]);
+                unset($no_lookup);
 
                 $i++;
             } while ($row = DB()->sql_fetchrow($result));
