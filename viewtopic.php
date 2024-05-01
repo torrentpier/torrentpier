@@ -358,8 +358,8 @@ if (!$ranks = $datastore->get('ranks')) {
 $topic_title = $wordCensor->censorString($topic_title);
 
 // Post, reply and other URL generation for templating vars
-$new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=" . $forum_id;
-$reply_topic_url = POSTING_URL . "?mode=reply&amp;t=" . $topic_id;
+$new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
+$reply_topic_url = POSTING_URL . "?mode=reply&amp;" . POST_TOPIC_URL . "=$topic_id";
 $view_forum_url = FORUM_URL . $forum_id;
 $view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
 $view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
@@ -494,7 +494,7 @@ $template->assign_vars([
     'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
     'U_POST_NEW_TOPIC' => $new_topic_url,
     'U_POST_REPLY_TOPIC' => $reply_topic_url,
-    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&t=$topic_id&dm=1",
+    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&" . POST_TOPIC_URL . "=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
     'POLL_IS_EDITABLE' => !$poll_time_expired,

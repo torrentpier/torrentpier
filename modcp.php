@@ -73,9 +73,9 @@ function validate_mode_condition($request_index, $mod_action = '')
 $user->session_start(['req_login' => true]);
 
 // Obtain initial vars
-$forum_id = $_REQUEST['f'] ?? 0;
-$topic_id = $_REQUEST['t'] ?? 0;
-$post_id = $_REQUEST['p'] ?? 0;
+$forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
+$topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;
+$post_id = $_REQUEST[POST_POST_URL] ?? 0;
 
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $confirmed = isset($_POST['confirm']);
@@ -599,8 +599,10 @@ switch ($mode) {
             bb_die($lang['NO_SUCH_POST']);
         }
 
+        $no_lookup = false;
         if (!$ip_this_post = \TorrentPier\Helpers\IPHelper::long2ip_extended($post_row['poster_ip'])) {
             $ip_this_post = $lang['NOT_AVAILABLE'];
+            $no_lookup = true;
         }
 
         $ip_this_post = ($rdns_ip_num == $ip_this_post) ? gethostbyaddr($ip_this_post) : $ip_this_post;
@@ -610,8 +612,9 @@ switch ($mode) {
         $template->assign_vars([
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
-            'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
+            'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'] : '',
         ]);
+        unset($no_lookup);
 
         //
         // Get other IP's this user has posted under
@@ -631,8 +634,10 @@ switch ($mode) {
                     continue;
                 }
 
+                $no_lookup = false;
                 if (!$ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($row['poster_ip'])) {
                     $ip = $lang['NOT_AVAILABLE'];
+                    $no_lookup = true;
                 }
                 $ip = ($rdns_ip_num == $ip || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
 
@@ -640,8 +645,9 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'],
+                    'U_LOOKUP_IP' => !$no_lookup ? "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip . "&amp;sid=" . $userdata['session_id'] : '',
                 ]);
+                unset($no_lookup);
 
                 $i++;
             } while ($row = DB()->sql_fetchrow($result));
@@ -651,7 +657,7 @@ switch ($mode) {
         // Get other users who've posted under this IP
         //
         $sql = "SELECT
-				u.user_id,
+				u.user_id, u.user_rank,
 				IF(u.user_id = $anon, p.post_username, u.username) AS username,
 				COUNT(*) as postings
 			FROM " . BB_USERS . " u, " . BB_POSTS . " p
@@ -667,15 +673,11 @@ switch ($mode) {
         if ($row = DB()->sql_fetchrow($result)) {
             $i = 0;
             do {
-                $id = $row['user_id'];
-                $username = (!$row['username']) ? $lang['GUEST'] : $row['username'];
-
                 $template->assign_block_vars('userrow', [
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
-                    'USERNAME' => $username,
+                    'USERNAME' => profile_url($row),
                     'POSTS' => $row['postings'],
-                    'U_PROFILE' => ($id == GUEST_UID) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
-                    'U_SEARCHPOSTS' => "search.php?search_author=1&amp;uid=$id",
+                    'U_SEARCHPOSTS' => "search.php?search_author=1&amp;uid={$row['user_id']}",
                 ]);
 
                 $i++;
