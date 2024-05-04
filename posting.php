@@ -251,7 +251,7 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
 
 if ($submit || $refresh) {
     $notify_user = (int)!empty($_POST['notify']);
-    $anonymous_user = (int)!empty($_POST['topic_anonymous']);
+    $anonymous_user = (int)!empty($_POST['anonymous_mode']);
 } else {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
     $anonymous_user = bf($userdata['user_opt'], 'user_opt', 'user_anonymous');
