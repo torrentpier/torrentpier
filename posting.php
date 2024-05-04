@@ -249,11 +249,12 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
     }
 }
 
-// Notify
 if ($submit || $refresh) {
     $notify_user = (int)!empty($_POST['notify']);
+    $anonymous_user = (int)!empty($_POST['topic_anonymous']);
 } else {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
+    $anonymous_user = bf($userdata['user_opt'], 'user_opt', 'user_anonymous');
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
         $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
@@ -618,7 +619,7 @@ $template->assign_vars([
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
-    'S_ANON_CHECKED' => $anonymouse_user ? 'checked' : '',
+    'S_ANON_CHECKED' => $anonymous_user ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
