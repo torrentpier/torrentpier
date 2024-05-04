@@ -352,7 +352,7 @@ if ($mode) {
 
             $hidden_fields = array(
                 'mode' => 'modcat',
-                'c' => $cat_id,
+                POST_CAT_URL => $cat_id,
             );
 
             $template->assign_vars(array(
