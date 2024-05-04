@@ -617,8 +617,8 @@ $template->assign_vars([
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
 
-    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked' : '',
-    'S_ANON_CHECKED' => ($anonymouse_user) ? 'checked' : '',
+    'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
+    'S_ANON_CHECKED' => $anonymouse_user ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
