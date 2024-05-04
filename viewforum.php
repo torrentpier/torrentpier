@@ -409,7 +409,7 @@ $template->assign_vars([
     'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
-    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&f=$forum_id",
+    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&" . POST_FORUM_URL . "=$forum_id",
 ]);
 
 // Okay, lets dump out the page ...
