@@ -159,7 +159,7 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
 
     $l_auth_return = $lang['CLICK_RETURN_GROUPAUTH'];
     $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&g=' . $group_id . '">', '</a>') . '<br /><br />';
+    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_GROUPS_URL . '=' . $group_id . '">', '</a>') . '<br /><br />';
     $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
