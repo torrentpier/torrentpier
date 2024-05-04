@@ -115,8 +115,8 @@ if ($mode) {
                 if ($parent = get_forum_data($forum_parent)) {
                     $cat_id = $parent['cat_id'];
                 }
-            } elseif (isset($_REQUEST['c'])) {
-                $cat_id = (int)$_REQUEST['c'];
+            } elseif (isset($_REQUEST[POST_CAT_URL])) {
+                $cat_id = (int)$_REQUEST[POST_CAT_URL];
             }
 
             $catlist = get_list('category', $cat_id, true);
@@ -347,7 +347,7 @@ if ($mode) {
             //
             // Show form to edit a category
             //
-            $cat_id = (int)$_GET['c'];
+            $cat_id = (int)$_GET[POST_CAT_URL];
             $cat_info = get_info('category', $cat_id);
 
             $hidden_fields = array(
@@ -373,7 +373,7 @@ if ($mode) {
                 bb_die('Category name is empty');
             }
 
-            $cat_id = (int)$_POST['c'];
+            $cat_id = (int)$_POST[POST_CAT_URL];
 
             $row = get_info('category', $cat_id);
             $cur_cat_title = $row['cat_title'];
@@ -486,7 +486,7 @@ if ($mode) {
 
         case 'deletecat':
             // Show form to delete a category
-            $cat_id = (int)$_GET['c'];
+            $cat_id = (int)$_GET[POST_CAT_URL];
             $catinfo = get_info('category', $cat_id);
             $categories_count = $catinfo['number'];
 
@@ -634,7 +634,7 @@ if ($mode) {
 
         case 'cat_order':
             $move = (int)$_GET['move'];
-            $cat_id = (int)$_GET['c'];
+            $cat_id = (int)$_GET[POST_CAT_URL];
 
             DB()->query('
 				UPDATE ' . BB_CATEGORIES . " SET
@@ -681,7 +681,7 @@ if (!$mode || $show_main_page) {
 
         $where_cat_sql = $req_cat_id = '';
 
-        if ($c =& $_REQUEST['c']) {
+        if ($c =& $_REQUEST[POST_CAT_URL]) {
             if ($c !== 'all') {
                 $req_cat_id = (int)$c;
                 $where_cat_sql = "WHERE cat_id = $req_cat_id";
