@@ -709,7 +709,7 @@ if (!$mode || $show_main_page) {
         $bgr_class_over = 'prow3';
 
         $template->assign_vars(array(
-            'U_ALL_FORUMS' => 'admin_forums.php?c=all',
+            'U_ALL_FORUMS' => 'admin_forums.php?' . POST_CAT_URL . '=all',
             'FORUMS_COUNT' => $total_forums,
         ));
 
