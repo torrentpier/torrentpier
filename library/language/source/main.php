@@ -375,7 +375,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons limit of %s emoticons exceeded.';
 $lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in profile)';
 $lang['NOTIFY'] = 'Notify me when on replies';
 
-$lang['CREATE_ANONYMOUS_TOPIC'] = 'Create anonymous topic';
+$lang['ANONYMOUS_TOPIC'] = 'Anonymous topic';
 $lang['AUTH_ANONYMOUS'] = 'Anonymous';
 
 $lang['STORED'] = 'Your message has been entered successfully.';

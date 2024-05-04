@@ -134,7 +134,7 @@
                         <!-- ENDIF -->
                         <tr>
                             <td><input type="checkbox" id="topic_anonymous" name="topic_anonymous" {S_ANON_CHECKED} /></td>
-                            <td><label for="topic_anonymous">{L_CREATE_ANONYMOUS_TOPIC}</label></td>
+                            <td><label for="topic_anonymous">{L_ANONYMOUS_TOPIC}</label></td>
                         </tr>
                     </table>
                 </div>
