@@ -401,7 +401,7 @@ if ($mode) {
             //
             // Show form to delete a forum
             //
-            $forum_id = (int)$_GET['f'];
+            $forum_id = (int)$_GET[POST_FORUM_URL];
 
             $move_to_options = '<option value="-1">' . $lang['DELETE_ALL_POSTS'] . '</option>';
             $move_to_options .= sf_get_list('forum', $forum_id, 0);
@@ -650,7 +650,7 @@ if ($mode) {
             break;
 
         case 'forum_sync':
-            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET['f']);
+            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET[POST_FORUM_URL]);
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
