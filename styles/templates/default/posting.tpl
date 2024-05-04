@@ -122,7 +122,7 @@
                     <table class="borderless inline">
                         <tr>
                             <td><input type="checkbox" id="topic_anonymous" name="topic_anonymous" {S_ANON_CHECKED} /></td>
-                            <td><label for="topic_anonymous">{L_ANONYMOUS_TOPIC}</label></td>
+                            <td><label for="topic_anonymous">{ANONYMOUS_MODE}</label></td>
                         </tr>
                         <!-- IF SHOW_UPDATE_POST_TIME -->
                         <tr>

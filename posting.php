@@ -606,7 +606,7 @@ $template->assign_vars([
     'POSTING_TYPE_TITLE' => $page_title,
     'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
     'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? $post_info['topic_title'] : '',
-    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
+    'ANONYMOUS_MODE' => ($mode == 'reply') ? $lang['ANONYMOUS_REPLY'] : $lang['ANONYMOUS_TOPIC'],
 
     'USERNAME' => @$username,
     'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
@@ -617,6 +617,7 @@ $template->assign_vars([
     'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
+    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ANON_CHECKED' => $anonymous_user ? 'checked' : '',
