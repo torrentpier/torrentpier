@@ -380,8 +380,9 @@ function initSpoilers(context) {
   $('div.sp-body', context).each(function () {
     var $sp_body = $(this);
     var name = $.trim(this.title) || '' + bbl['spoiler_head'] + '';
+    var no_sp_open = ($.trim($sp_body.attr('no-sp-open')) === "true") ? ' ignore-sp-open' : '';
     this.title = '';
-    var $sp_head = $('<div class="sp-head folded clickable">' + name + '</div>');
+    var $sp_head = $('<div class="sp-head folded clickable' + no_sp_open + '">' + name + '</div>');
     $sp_head.insertBefore($sp_body).click(function (e) {
       if (!$sp_body.hasClass('inited')) {
         initPostImages($sp_body);
