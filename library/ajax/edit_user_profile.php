@@ -107,8 +107,7 @@ switch ($field) {
 
     case 'user_occ':
     case 'user_interests':
-        $value = htmlCHR($value);
-        $this->response['new_value'] = $value;
+        $this->response['new_value'] = htmlCHR($value);
         break;
 
     case 'user_regdate':
