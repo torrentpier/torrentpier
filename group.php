@@ -396,7 +396,7 @@ if (!$group_id) {
         'U_SEARCH_RELEASES' => "tracker.php?srg=$group_id",
         'U_GROUP_RELEASES' => GROUP_URL . $group_id . "&view=releases",
         'U_GROUP_MEMBERS' => GROUP_URL . $group_id . "&view=members",
-        'U_GROUP_CONFIG' => "group_edit.php?g=$group_id",
+        'U_GROUP_CONFIG' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
         'RELEASE_GROUP' => (bool)$group_info['release_group'],
         'GROUP_TYPE' => $group_type,
 
