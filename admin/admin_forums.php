@@ -723,12 +723,12 @@ if (!$mode || $show_main_page) {
                 'CAT_ID' => $cat_id,
                 'CAT_DESC' => htmlCHR($category_rows[$i]['cat_title']),
 
-                'U_CAT_EDIT' => "admin_forums.php?mode=editcat&amp;c=$cat_id",
-                'U_CAT_DELETE' => "admin_forums.php?mode=deletecat&amp;c=$cat_id",
-                'U_CAT_MOVE_UP' => "admin_forums.php?mode=cat_order&amp;move=-15&amp;c=$cat_id",
-                'U_CAT_MOVE_DOWN' => "admin_forums.php?mode=cat_order&amp;move=15&amp;c=$cat_id",
-                'U_VIEWCAT' => "admin_forums.php?c=$cat_id",
-                'U_CREATE_FORUM' => "admin_forums.php?mode=addforum&amp;c=$cat_id",
+                'U_CAT_EDIT' => "admin_forums.php?mode=editcat&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_CAT_DELETE' => "admin_forums.php?mode=deletecat&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_CAT_MOVE_UP' => "admin_forums.php?mode=cat_order&amp;move=-15&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_CAT_MOVE_DOWN' => "admin_forums.php?mode=cat_order&amp;move=15&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_VIEWCAT' => "admin_forums.php?" . POST_CAT_URL . "=$cat_id",
+                'U_CREATE_FORUM' => "admin_forums.php?mode=addforum&amp;" . POST_CAT_URL . "=$cat_id",
             ));
 
             for ($j = 0; $j < $total_forums; $j++) {
