@@ -26,7 +26,7 @@ $sql = "SELECT * FROM " . BB_TOPIC_TPL . " WHERE tpl_id = {$f_data['forum_tpl_id
 
 if (!$f_data['forum_tpl_id'] || !$tpl_data = DB()->fetch_row($sql)) {
     if (!$edit_tpl_mode) {
-        redirect(POSTING_URL . "?mode=newtopic&f=$forum_id");
+        redirect(POSTING_URL . "?mode=newtopic&" . POST_FORUM_URL . "=$forum_id");
     }
 }
 
