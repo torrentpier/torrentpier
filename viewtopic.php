@@ -475,7 +475,7 @@ $template->assign_vars([
     'HIDE_RANK_IMG_DIS' => !$bb_cfg['show_rank_image'],
 
     'PINNED_FIRST_POST' => $t_data['topic_show_first_post'],
-    'PIN_HREF' => $t_data['topic_show_first_post'] ? "modcp.php?t=$topic_id&amp;mode=post_unpin" : "modcp.php?t=$topic_id&amp;mode=post_pin",
+    'PIN_HREF' => $t_data['topic_show_first_post'] ? "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_unpin" : "modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=post_pin",
     'PIN_TITLE' => $t_data['topic_show_first_post'] ? $lang['POST_UNPIN'] : $lang['POST_PIN'],
 
     'AUTH_MOD' => $is_auth['auth_mod'],
