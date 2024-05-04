@@ -347,6 +347,7 @@ foreach ($profile_fields as $field => $can_edit) {
 
             $update_user_opt = [
                 #	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
+                'user_anonymous' => $reg_mode ? false : true,
                 'user_viewemail' => $reg_mode ? false : (IS_ADMIN || $bb_cfg['show_email_visibility_settings']),
                 'user_viewonline' => $reg_mode ? false : true,
                 'user_notify' => $reg_mode ? true : true,
