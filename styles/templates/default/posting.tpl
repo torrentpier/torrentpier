@@ -132,6 +132,10 @@
                             <td><label for="notify">{L_NOTIFY}</label></td>
                         </tr>
                         <!-- ENDIF -->
+                        <tr>
+                            <td><input type="checkbox" id="topic_anonymous" name="topic_anonymous"/></td>
+                            <td><label for="topic_anonymous">{L_CREATE_ANONYMOUS_TOPIC}</label></td>
+                        </tr>
                     </table>
                 </div>
             </td>
