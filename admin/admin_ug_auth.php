@@ -185,7 +185,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
-    $base_url = basename(__FILE__) . "?mode=user&amp;u=$user_id";
+    $base_url = basename(__FILE__) . "?mode=user&amp;" . POST_USERS_URL . "=$user_id";
 
     $ug_data = $this_userdata;
     $ug_data['session_logged_in'] = 1;
