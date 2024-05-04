@@ -773,7 +773,7 @@ foreach ($is_auth as $name => $is) {
 $template->assign_vars(['PG_ROW_CLASS' => $pg_row_class ?? 'row1']);
 
 if (IS_ADMIN) {
-    $template->assign_vars(['U_LOGS' => "admin/admin_log.php?t=$topic_id&amp;db={$bb_cfg['log_days_keep']}"]);
+    $template->assign_vars(['U_LOGS' => "admin/admin_log.php?" . POST_TOPIC_URL . "=$topic_id&amp;db={$bb_cfg['log_days_keep']}"]);
 }
 
 print_page('viewtopic.tpl');
