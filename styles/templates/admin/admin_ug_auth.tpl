@@ -170,7 +170,7 @@ thead tr {
 <!-- END f -->
 <!-- END c -->
 
-<input type="hidden" name="c" value="{SELECTED_CAT}" />
+<input type="hidden" name="{POST_CAT_URL}" value="{SELECTED_CAT}" />
 </form>
 
 <form method="post" action="{S_AUTH_ACTION}">
