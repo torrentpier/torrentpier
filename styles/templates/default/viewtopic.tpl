@@ -8,7 +8,9 @@
 </style>
 <!-- IF SPOILER_OPENED -->
 <script type="text/javascript">
-	$(document).ready(function(){ $('div.sp-head').click(); });
+    $(document).ready(function () {
+        $('div.sp-head').not('.ignore-sp-open').click();
+    });
 </script>
 <!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
