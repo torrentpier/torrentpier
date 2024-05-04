@@ -301,8 +301,8 @@ define('POST_URL', 'viewtopic.php?' . POST_POST_URL . '=');
 define('POSTING_URL', $bb_cfg['posting_url']);
 define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;u=');
 define('BONUS_URL', 'profile.php?mode=bonus');
-define('TOPIC_URL', 'viewtopic.php?t=');
-define('FILELIST_URL', 'filelist.php?t=');
+define('TOPIC_URL', 'viewtopic.php?' . POST_TOPIC_URL . '=');
+define('FILELIST_URL', 'filelist.php?' . POST_TOPIC_URL . '=');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
