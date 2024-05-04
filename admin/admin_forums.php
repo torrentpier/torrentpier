@@ -223,7 +223,7 @@ if ($mode) {
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
-            bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
             break;
 
@@ -312,7 +312,7 @@ if ($mode) {
 
             $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
             $message .= $fix ? "$fix<br /><br />" : '';
-            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
 
             break;
@@ -401,7 +401,7 @@ if ($mode) {
             //
             // Show form to delete a forum
             //
-            $forum_id = (int)$_GET['f'];
+            $forum_id = (int)$_GET[POST_FORUM_URL];
 
             $move_to_options = '<option value="-1">' . $lang['DELETE_ALL_POSTS'] . '</option>';
             $move_to_options .= sf_get_list('forum', $forum_id, 0);
@@ -650,7 +650,7 @@ if ($mode) {
             break;
 
         case 'forum_sync':
-            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET['f']);
+            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET[POST_FORUM_URL]);
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
@@ -709,7 +709,7 @@ if (!$mode || $show_main_page) {
         $bgr_class_over = 'prow3';
 
         $template->assign_vars(array(
-            'U_ALL_FORUMS' => 'admin_forums.php?c=all',
+            'U_ALL_FORUMS' => 'admin_forums.php?' . POST_CAT_URL . '=all',
             'FORUMS_COUNT' => $total_forums,
         ));
 
@@ -723,12 +723,12 @@ if (!$mode || $show_main_page) {
                 'CAT_ID' => $cat_id,
                 'CAT_DESC' => htmlCHR($category_rows[$i]['cat_title']),
 
-                'U_CAT_EDIT' => "admin_forums.php?mode=editcat&amp;c=$cat_id",
-                'U_CAT_DELETE' => "admin_forums.php?mode=deletecat&amp;c=$cat_id",
-                'U_CAT_MOVE_UP' => "admin_forums.php?mode=cat_order&amp;move=-15&amp;c=$cat_id",
-                'U_CAT_MOVE_DOWN' => "admin_forums.php?mode=cat_order&amp;move=15&amp;c=$cat_id",
-                'U_VIEWCAT' => "admin_forums.php?c=$cat_id",
-                'U_CREATE_FORUM' => "admin_forums.php?mode=addforum&amp;c=$cat_id",
+                'U_CAT_EDIT' => "admin_forums.php?mode=editcat&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_CAT_DELETE' => "admin_forums.php?mode=deletecat&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_CAT_MOVE_UP' => "admin_forums.php?mode=cat_order&amp;move=-15&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_CAT_MOVE_DOWN' => "admin_forums.php?mode=cat_order&amp;move=15&amp;" . POST_CAT_URL . "=$cat_id",
+                'U_VIEWCAT' => "admin_forums.php?" . POST_CAT_URL . "=$cat_id",
+                'U_CREATE_FORUM' => "admin_forums.php?mode=addforum&amp;" . POST_CAT_URL . "=$cat_id",
             ));
 
             for ($j = 0; $j < $total_forums; $j++) {
@@ -755,12 +755,12 @@ if (!$mode || $show_main_page) {
                         'FORUM_NAME_CLASS' => $forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen',
                         'ADD_SUB_HREF' => !$forum_rows[$j]['forum_parent'] ? "admin_forums.php?mode=addforum&amp;forum_parent={$forum_rows[$j]['forum_id']}" : '',
                         'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,
-                        'U_FORUM_EDIT' => "admin_forums.php?mode=editforum&amp;f=$forum_id",
-                        'U_FORUM_PERM' => "admin_forumauth.php?f=$forum_id",
-                        'U_FORUM_DELETE' => "admin_forums.php?mode=deleteforum&amp;f=$forum_id",
-                        'U_FORUM_MOVE_UP' => "admin_forums.php?mode=forum_order&amp;move=-15&amp;f=$forum_id&amp;c=$req_cat_id",
-                        'U_FORUM_MOVE_DOWN' => "admin_forums.php?mode=forum_order&amp;move=15&amp;f=$forum_id&amp;c=$req_cat_id",
-                        'U_FORUM_RESYNC' => "admin_forums.php?mode=forum_sync&amp;f=$forum_id",
+                        'U_FORUM_EDIT' => "admin_forums.php?mode=editforum&amp;" . POST_FORUM_URL . "=$forum_id",
+                        'U_FORUM_PERM' => "admin_forumauth.php?" . POST_FORUM_URL . "=$forum_id",
+                        'U_FORUM_DELETE' => "admin_forums.php?mode=deleteforum&amp;" . POST_FORUM_URL . "=$forum_id",
+                        'U_FORUM_MOVE_UP' => "admin_forums.php?mode=forum_order&amp;move=-15&amp;" . POST_FORUM_URL . "=$forum_id&amp;" . POST_CAT_URL . "=$req_cat_id",
+                        'U_FORUM_MOVE_DOWN' => "admin_forums.php?mode=forum_order&amp;move=15&amp;" . POST_FORUM_URL . "=$forum_id&amp;" . POST_CAT_URL . "=$req_cat_id",
+                        'U_FORUM_RESYNC' => "admin_forums.php?mode=forum_sync&amp;" . POST_FORUM_URL . "=$forum_id",
                     ));
                 }
             }

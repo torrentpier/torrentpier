@@ -207,7 +207,7 @@ if (empty($forum_id)) {
     }
 
     $adv_mode = empty($adv) ? '1' : '0';
-    $switch_mode = "admin_forumauth.php?f=$forum_id&amp;adv=$adv_mode";
+    $switch_mode = "admin_forumauth.php?" . POST_FORUM_URL . "=$forum_id&amp;adv=$adv_mode";
     $switch_mode_text = empty($adv) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 

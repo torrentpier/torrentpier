@@ -290,19 +290,19 @@ define('PASSWORD_MAX_LENGTH', 24);
 define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
-define('CAT_URL', 'index.php?c=');
+define('CAT_URL', 'index.php?' . POST_CAT_URL . '=');
 define('DL_URL', $bb_cfg['dl_url']);
-define('FORUM_URL', 'viewforum.php?f=');
-define('GROUP_URL', 'group.php?g=');
+define('FORUM_URL', 'viewforum.php?' . POST_FORUM_URL . '=');
+define('GROUP_URL', 'group.php?' . POST_GROUPS_URL . '=');
 define('LOGIN_URL', $bb_cfg['login_url']);
-define('MODCP_URL', 'modcp.php?f=');
+define('MODCP_URL', 'modcp.php?' . POST_FORUM_URL . '=');
 define('PM_URL', $bb_cfg['pm_url']);
-define('POST_URL', 'viewtopic.php?p=');
+define('POST_URL', 'viewtopic.php?' . POST_POST_URL . '=');
 define('POSTING_URL', $bb_cfg['posting_url']);
-define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;u=');
+define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;' . POST_USERS_URL . '=');
 define('BONUS_URL', 'profile.php?mode=bonus');
-define('TOPIC_URL', 'viewtopic.php?t=');
-define('FILELIST_URL', 'filelist.php?t=');
+define('TOPIC_URL', 'viewtopic.php?' . POST_TOPIC_URL . '=');
+define('FILELIST_URL', 'filelist.php?' . POST_TOPIC_URL . '=');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 

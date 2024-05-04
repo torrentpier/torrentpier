@@ -355,11 +355,11 @@ if ($topics_csv = implode(',', $topic_ids)) {
 }
 
 if ($forum_data['allow_reg_tracker']) {
-    $post_new_topic_url = POSTING_URL . "?mode=new_rel&amp;f=$forum_id";
+    $post_new_topic_url = POSTING_URL . "?mode=new_rel&amp;" . POST_FORUM_URL . "=$forum_id";
     $post_img = $images['release_new'];
     $post_new_topic = $lang['POST_NEW_RELEASE'];
 } else {
-    $post_new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=$forum_id";
+    $post_new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
     $post_img = $images['post_new'];
     $post_new_topic = $lang['POST_NEW_TOPIC'];
 }
@@ -409,7 +409,7 @@ $template->assign_vars([
     'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
-    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&f=$forum_id",
+    'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&" . POST_FORUM_URL . "=$forum_id",
 ]);
 
 // Okay, lets dump out the page ...
