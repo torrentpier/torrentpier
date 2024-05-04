@@ -614,7 +614,7 @@ $template->assign_vars([
     'MESSAGE' => $message,
 
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
-    'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
+    'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
 
