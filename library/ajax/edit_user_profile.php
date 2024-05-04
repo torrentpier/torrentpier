@@ -60,9 +60,8 @@ switch ($field) {
         }
         if (!isset($lang['GENDER_SELECT'][$value])) {
             $this->ajax_die($lang['ERROR']);
-        } else {
-            $this->response['new_value'] = $lang['GENDER_SELECT'][$value];
         }
+        $this->response['new_value'] = $lang['GENDER_SELECT'][$value];
         break;
 
     case 'user_birthday':
