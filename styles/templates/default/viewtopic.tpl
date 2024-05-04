@@ -285,7 +285,7 @@ function build_poll_add_form (src_el)
 		</td>
 
 		<td class="nowrap" style="padding: 0 4px 2px 4px;">
-			<form action="{U_SEARCH}?t={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
+			<form action="{U_SEARCH}?{POST_TOPIC_URL}={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
 				<input id="search-text" type="text" name="nm" class="hint" style="width: 150px;" placeholder="{L_SEARCH_IN_TOPIC}" required />
 				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />
 			</form>
