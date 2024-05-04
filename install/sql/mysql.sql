@@ -1252,6 +1252,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics`
   `topic_last_post_id`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `topic_moved_id`        MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `topic_attachment`      TINYINT(1)            NOT NULL DEFAULT '0',
+  `topic_anonymous`       TINYINT(1)            NOT NULL DEFAULT '0',
   `topic_dl_type`         TINYINT(1)            NOT NULL DEFAULT '0',
   `topic_last_post_time`  INT(11)               NOT NULL DEFAULT '0',
   `topic_show_first_post` TINYINT(1) UNSIGNED   NOT NULL DEFAULT '0',
