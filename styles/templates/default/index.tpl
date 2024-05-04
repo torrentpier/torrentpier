@@ -85,7 +85,7 @@
 		<!-- BEGIN f -->
 		<tr>
 			<td class="row1 f_icon">
-			<a href="{U_SEARCH}?f={c.f.FORUM_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1"><img class="forum_icon" src="{c.f.FORUM_FOLDER_IMG}" alt="{c.f.FORUM_FOLDER_ALT}" /></a>
+			<a href="{U_SEARCH}?{POST_FORUM_URL}={c.f.FORUM_ID}&amp;new=1&amp;dm=1&amp;s=0&amp;o=1"><img class="forum_icon" src="{c.f.FORUM_FOLDER_IMG}" alt="{c.f.FORUM_FOLDER_ALT}" /></a>
 			</td>
 			<td class="row1 f_titles">
 
