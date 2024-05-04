@@ -381,7 +381,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $s_hidden_fields = '
 		<input type="hidden" name="mode" value="' . $mode . '" />
-		<input type="hidden" name="g" value="' . $group_id . '" />
+		<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />
 	';
 
     $template->assign_vars(array(
