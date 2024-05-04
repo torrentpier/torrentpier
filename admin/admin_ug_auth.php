@@ -419,8 +419,8 @@ $template->assign_vars(array(
     'YES_SIGN' => $yes_sign,
     'NO_SIGN' => $no_sign,
     'S_AUTH_ACTION' => 'admin_ug_auth.php',
-    'SELECTED_CAT' => !empty($_REQUEST['c']) ? $_REQUEST['c'] : '',
-    'U_ALL_FORUMS' => !empty($base_url) ? "$base_url&amp;c=all" : '',
+    'SELECTED_CAT' => !empty($_REQUEST[POST_CAT_URL]) ? $_REQUEST[POST_CAT_URL] : '',
+    'U_ALL_FORUMS' => !empty($base_url) ? "$base_url&amp;" . POST_CAT_URL . "=all" : '',
 ));
 
 print_page('admin_ug_auth.tpl', 'admin');
