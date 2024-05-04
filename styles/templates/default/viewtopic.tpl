@@ -499,7 +499,7 @@ function build_poll_add_form (src_el)
 	<!-- ELSE -->
 		<div style="<!-- IF TEXT_BUTTONS --> padding: 2px 6px 4px;<!-- ELSE --> padding: 2px 3px;<!-- ENDIF -->" class="post_btn_2">
 			<a class="txtb" href="{PROFILE_URL}{postrow.POSTER_ID}">{PROFILE_IMG}</a>{POST_BTN_SPACER}
-			<a class="txtb" href="{PM_URL}?mode=post&amp;u={postrow.POSTER_ID}">{PM_IMG}</a>{POST_BTN_SPACER}
+			<a class="txtb" href="{PM_URL}?mode=post&amp;{POST_USERS_URL}={postrow.POSTER_ID}">{PM_IMG}</a>{POST_BTN_SPACER}
 		</div>
 	<!-- ENDIF -->
 
