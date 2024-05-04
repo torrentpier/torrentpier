@@ -140,9 +140,9 @@ class Post
 
             $sql_insert = "
 			INSERT INTO
-				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_anonymous, topic_dl_type)
+				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type)
 			VALUES
-				('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $anonymous_post, $topic_dl_type)
+				('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type)
 		";
 
             $sql_update = "
@@ -151,7 +151,6 @@ class Post
 			SET
 				topic_title = '$post_subject',
 				topic_type = $topic_type,
-				topic_anonymous = $anonymous_post,
 				topic_dl_type = $topic_dl_type
 			WHERE
 				topic_id = $topic_id
