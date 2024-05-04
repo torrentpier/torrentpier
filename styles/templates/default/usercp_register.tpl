@@ -55,7 +55,7 @@
     <input type="hidden" name="reg_agreed" value="1"/>
     <!-- IF NEW_USER --><input type="hidden" name="admin" value="1"/><!-- ENDIF -->
     <!-- IF ADM_EDIT -->
-    <input type="hidden" name="u" value="{PR_USER_ID}"/>
+    <input type="hidden" name="{POST_USERS_URL}" value="{PR_USER_ID}"/>
     <!-- ENDIF -->
 
     <table class="forumline prof-tbl">
