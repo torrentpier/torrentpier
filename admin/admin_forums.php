@@ -755,12 +755,12 @@ if (!$mode || $show_main_page) {
                         'FORUM_NAME_CLASS' => $forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen',
                         'ADD_SUB_HREF' => !$forum_rows[$j]['forum_parent'] ? "admin_forums.php?mode=addforum&amp;forum_parent={$forum_rows[$j]['forum_id']}" : '',
                         'U_VIEWFORUM' => BB_ROOT . FORUM_URL . $forum_id,
-                        'U_FORUM_EDIT' => "admin_forums.php?mode=editforum&amp;f=$forum_id",
-                        'U_FORUM_PERM' => "admin_forumauth.php?f=$forum_id",
-                        'U_FORUM_DELETE' => "admin_forums.php?mode=deleteforum&amp;f=$forum_id",
-                        'U_FORUM_MOVE_UP' => "admin_forums.php?mode=forum_order&amp;move=-15&amp;f=$forum_id&amp;c=$req_cat_id",
-                        'U_FORUM_MOVE_DOWN' => "admin_forums.php?mode=forum_order&amp;move=15&amp;f=$forum_id&amp;c=$req_cat_id",
-                        'U_FORUM_RESYNC' => "admin_forums.php?mode=forum_sync&amp;f=$forum_id",
+                        'U_FORUM_EDIT' => "admin_forums.php?mode=editforum&amp;" . POST_FORUM_URL . "=$forum_id",
+                        'U_FORUM_PERM' => "admin_forumauth.php?" . POST_FORUM_URL . "=$forum_id",
+                        'U_FORUM_DELETE' => "admin_forums.php?mode=deleteforum&amp;" . POST_FORUM_URL . "=$forum_id",
+                        'U_FORUM_MOVE_UP' => "admin_forums.php?mode=forum_order&amp;move=-15&amp;" . POST_FORUM_URL . "=$forum_id&amp;" . POST_CAT_URL . "=$req_cat_id",
+                        'U_FORUM_MOVE_DOWN' => "admin_forums.php?mode=forum_order&amp;move=15&amp;" . POST_FORUM_URL . "=$forum_id&amp;" . POST_CAT_URL . "=$req_cat_id",
+                        'U_FORUM_RESYNC' => "admin_forums.php?mode=forum_sync&amp;" . POST_FORUM_URL . "=$forum_id",
                     ));
                 }
             }
