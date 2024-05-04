@@ -46,7 +46,7 @@ $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
 $search_id = (isset($_GET['search_id']) && is_string($_GET['search_id'])) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
-$status = is_countable($_POST['status']) ? $_POST['status'] : false;
+$status = (isset($_POST['status']) && is_countable($_POST['status'])) ? (array)$_POST['status'] : [];
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
@@ -605,7 +605,7 @@ if ($allowed_forums) {
         if ($tor_type) {
             $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
         }
-        if ($status) {
+        if (!empty($status)) {
             $SQL['WHERE'][] = "tor.tor_status IN(" . implode(', ', $status) . ")";
         }
 
@@ -910,7 +910,7 @@ $template->assign_vars(array(
     'S_RG_SELECT' => build_select($s_rg_key, $s_release_group_select, $s_rg_val),
     'TOR_SEARCH_ACTION' => $tracker_url,
     'TOR_COLSPAN' => $tor_colspan,
-    'TOR_STATUS' => $statuses ?? false,
+    'TOR_STATUS' => $statuses ?? '',
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'POSTER_NAME_MAX' => $poster_name_max_len,
     'POSTER_ERROR' => $poster_error,
