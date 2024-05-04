@@ -304,7 +304,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         redirect(POST_URL . "$post_id#$post_id");
     }
     $hidden_fields = [
-        'p' => $post_id,
+        POST_POST_URL => $post_id,
         'mode' => 'delete'
     ];
     print_confirmation([

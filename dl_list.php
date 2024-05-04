@@ -79,7 +79,7 @@ if ($mode == 'dl_delete' && $topic_id) {
 
     if (!$confirmed) {
         $hidden_fields = [
-            't' => $topic_id,
+            POST_TOPIC_URL => $topic_id,
             'mode' => 'dl_delete',
         ];
 

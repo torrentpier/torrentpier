@@ -199,8 +199,8 @@ switch ($mode) {
         $hidden_fields = [
             'sid' => $userdata['session_id'],
             'mode' => $mode,
-            'f' => $forum_id,
-            't' => $topic_id
+            POST_FORUM_URL => $forum_id,
+            POST_TOPIC_URL => $topic_id
         ];
         foreach ($req_topics as $req_topic_id) {
             $hidden_fields['topic_id_list'][] = $req_topic_id;

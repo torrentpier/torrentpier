@@ -24,7 +24,7 @@ $page_cfg['load_tpl_vars'] = [
 ];
 
 // Init request vars
-$forum_id = (int)request_var('f', '');
+$forum_id = (int)request_var(POST_FORUM_URL, '');
 $start = abs((int)request_var('start', ''));
 $mark_read = (request_var('mark', '') === 'topics');
 
