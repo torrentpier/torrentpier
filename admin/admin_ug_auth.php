@@ -197,7 +197,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $template->assign_block_vars('c', array(
             'CAT_ID' => $c_id,
             'CAT_TITLE' => $forums['cat_title_html'][$c_id],
-            'CAT_HREF' => "$base_url&amp;c=$c_id",
+            'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
         ));
 
         if (!$c =& $_REQUEST['c'] or !in_array($c, array('all', $c_id)) or empty($c_data['forums'])) {
