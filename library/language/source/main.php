@@ -377,6 +377,7 @@ $lang['NOTIFY'] = 'Notify me when on replies';
 
 $lang['HIDE_AUTHORSHIP_POSTS'] = 'Hide my authorship in messages (Anonymous mode)';
 $lang['ANONYMOUS_TOPIC'] = 'Anonymous topic';
+$lang['ANONYMOUS_REPLY'] = 'Anonymous reply';
 $lang['AUTH_ANONYMOUS'] = 'Anonymous';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
