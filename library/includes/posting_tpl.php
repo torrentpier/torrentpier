@@ -26,7 +26,7 @@ $sql = "SELECT * FROM " . BB_TOPIC_TPL . " WHERE tpl_id = {$f_data['forum_tpl_id
 
 if (!$f_data['forum_tpl_id'] || !$tpl_data = DB()->fetch_row($sql)) {
     if (!$edit_tpl_mode) {
-        redirect(POSTING_URL . "?mode=newtopic&f=$forum_id");
+        redirect(POSTING_URL . "?mode=newtopic&" . POST_FORUM_URL . "=$forum_id");
     }
 }
 
@@ -34,12 +34,12 @@ $template->assign_vars([
     'PAGE_TITLE' => $lang['NEW_RELEASE'],
     'FORUM_NAME' => $f_data['forum_name'],
     'FORUM_ID' => $forum_id,
-    'TPL_FORM_ACTION' => POSTING_URL . "?mode=newtopic&amp;f=$forum_id",
-    'REGULAR_TOPIC_HREF' => POSTING_URL . "?mode=newtopic&amp;f=$forum_id",
+    'TPL_FORM_ACTION' => POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id",
+    'REGULAR_TOPIC_HREF' => POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id",
     'TOR_REQUIRED' => $f_data['allow_reg_tracker'],
     'EDIT_TPL' => $edit_tpl_mode,
     'CAN_EDIT_TPL' => $can_edit_tpl,
-    'EDIT_TPL_URL' => POSTING_URL . "?mode=new_rel&amp;f=$forum_id&amp;edit_tpl=1"
+    'EDIT_TPL_URL' => POSTING_URL . "?mode=new_rel&amp;" . POST_FORUM_URL . "=$forum_id&amp;edit_tpl=1"
 ]);
 
 if ($tpl_data) {

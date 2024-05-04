@@ -56,7 +56,7 @@ if (isset($_POST['del_my_post'])) {
 
     DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
 
-    redirect("search.php?u={$user->id}");
+    redirect("search.php?" . POST_USERS_URL . "={$user->id}");
 }
 
 $tracking_topics = get_tracks('topic');

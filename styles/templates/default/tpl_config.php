@@ -139,10 +139,10 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
             'MC_IMG' => $bb_cfg['text_buttons'] ? '[' . $lang['COMMENT'] . ']' : '<img src="' . $images['icon_mc'] . '" alt="[' . $lang['COMMENT'] . ']" title="' . $lang['COMMENT'] . '" />',
             'POLL_IMG' => $bb_cfg['text_buttons'] ? $lang['TOPIC_POLL'] : '<img src="' . $images['icon_poll'] . '" alt="' . $lang['TOPIC_POLL'] . '" title="' . $lang['ADD_POLL'] . '" />',
 
-            'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;p=',
-            'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;p=',
-            'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;p=',
-            'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;p=',
+            'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;' . POST_POST_URL . '=',
+            'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;' . POST_POST_URL . '=',
+            'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;' . POST_POST_URL . '=',
+            'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;' . POST_POST_URL . '=',
 
             'PROFILE_IMG' => $bb_cfg['text_buttons'] ? $lang['READ_PROFILE_TXTB'] : '<img src="' . $images['icon_profile'] . '" alt="' . $lang['READ_PROFILE_TXTB'] . '" title="' . $lang['READ_PROFILE'] . '" />',
             'PM_IMG' => $bb_cfg['text_buttons'] ? $lang['SEND_PM_TXTB'] : '<img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PM_TXTB'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" />',
@@ -150,7 +150,7 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
             'WWW_IMG' => $bb_cfg['text_buttons'] ? $lang['VISIT_WEBSITE_TXTB'] : '<img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE_TXTB'] . '" title="' . $lang['VISIT_WEBSITE'] . '" />',
             'ICQ_IMG' => $bb_cfg['text_buttons'] ? $lang['ICQ_TXTB'] : '<img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ_TXTB'] . '" title="' . $lang['ICQ'] . '" />',
 
-            'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;u=',
+            'EMAIL_URL' => BB_ROOT . 'profile.php?mode=email&amp;' . POST_USERS_URL . '=',
             'FORUM_URL' => BB_ROOT . FORUM_URL,
             'PM_URL' => BB_ROOT . PM_URL,
             'PROFILE_URL' => BB_ROOT . PROFILE_URL

@@ -193,8 +193,8 @@ if (IS_ADMIN) {
     $template->assign_vars([
         'EDITABLE_TPLS' => true,
         'AJAX_USER_OPT' => $ajax_user_opt,
-        'U_MANAGE' => "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}",
-        'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;u={$profiledata['user_id']}",
+        'U_MANAGE' => "profile.php?mode=editprofile&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
+        'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;" . POST_USERS_URL . "={$profiledata['user_id']}",
     ]);
 }
 

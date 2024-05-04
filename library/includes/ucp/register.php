@@ -627,7 +627,7 @@ if ($submit && !$errors) {
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
                 $emailer->assign_vars([
                     'USERNAME' => html_entity_decode($username),
-                    'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
+                    'U_ACTIVATE' => make_url("profile.php?mode=activate&" . POST_USERS_URL . "={$pr_data['user_id']}&act_key=$user_actkey"),
                 ]);
 
                 $emailer->send();

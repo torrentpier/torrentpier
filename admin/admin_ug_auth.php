@@ -87,7 +87,7 @@ if ($submit && $mode == 'user') {
             \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
             $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&u=' . $user_id . '">', '</a>') . '<br /><br />';
+            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
@@ -103,7 +103,7 @@ if ($submit && $mode == 'user') {
             \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
             $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&u=' . $user_id . '">', '</a>') . '<br /><br />';
+            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
@@ -131,7 +131,7 @@ if ($submit && $mode == 'user') {
 
     $l_auth_return = ($mode == 'user') ? $lang['CLICK_RETURN_USERAUTH'] : $lang['CLICK_RETURN_GROUPAUTH'];
     $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&u=' . $user_id . '">', '</a>') . '<br /><br />';
+    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
     $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
@@ -159,7 +159,7 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
 
     $l_auth_return = $lang['CLICK_RETURN_GROUPAUTH'];
     $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&g=' . $group_id . '">', '</a>') . '<br /><br />';
+    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_GROUPS_URL . '=' . $group_id . '">', '</a>') . '<br /><br />';
     $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
@@ -185,7 +185,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
-    $base_url = basename(__FILE__) . "?mode=user&amp;u=$user_id";
+    $base_url = basename(__FILE__) . "?mode=user&amp;" . POST_USERS_URL . "=$user_id";
 
     $ug_data = $this_userdata;
     $ug_data['session_logged_in'] = 1;
@@ -197,7 +197,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $template->assign_block_vars('c', array(
             'CAT_ID' => $c_id,
             'CAT_TITLE' => $forums['cat_title_html'][$c_id],
-            'CAT_HREF' => "$base_url&amp;c=$c_id",
+            'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
         ));
 
         if (!$c =& $_REQUEST['c'] or !in_array($c, array('all', $c_id)) or empty($c_data['forums'])) {
@@ -304,7 +304,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
-    $base_url = basename(__FILE__) . "?mode=group&amp;g=$group_id";
+    $base_url = basename(__FILE__) . "?mode=group&amp;" . POST_GROUPS_URL . "=$group_id";
 
     $ug_data = array('group_id' => $group_id);
     $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data);
@@ -313,7 +313,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $template->assign_block_vars('c', array(
             'CAT_ID' => $c_id,
             'CAT_TITLE' => $forums['cat_title_html'][$c_id],
-            'CAT_HREF' => "$base_url&amp;c=$c_id",
+            'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
         ));
 
         if (!($c =& $_REQUEST['c']) || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
@@ -381,7 +381,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $s_hidden_fields = '
 		<input type="hidden" name="mode" value="' . $mode . '" />
-		<input type="hidden" name="g" value="' . $group_id . '" />
+		<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />
 	';
 
     $template->assign_vars(array(
@@ -419,8 +419,8 @@ $template->assign_vars(array(
     'YES_SIGN' => $yes_sign,
     'NO_SIGN' => $no_sign,
     'S_AUTH_ACTION' => 'admin_ug_auth.php',
-    'SELECTED_CAT' => !empty($_REQUEST['c']) ? $_REQUEST['c'] : '',
-    'U_ALL_FORUMS' => !empty($base_url) ? "$base_url&amp;c=all" : '',
+    'SELECTED_CAT' => !empty($_REQUEST[POST_CAT_URL]) ? $_REQUEST[POST_CAT_URL] : '',
+    'U_ALL_FORUMS' => !empty($base_url) ? "$base_url&amp;" . POST_CAT_URL . "=all" : '',
 ));
 
 print_page('admin_ug_auth.tpl', 'admin');

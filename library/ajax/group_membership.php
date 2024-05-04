@@ -38,7 +38,7 @@ switch ($mode) {
             $href = GROUP_URL . $row['group_id'];
 
             if (IS_ADMIN) {
-                $href .= "&amp;u=$user_id";
+                $href .= "&amp;" . POST_USERS_URL . "=$user_id";
                 $link = '<a href="' . $href . '" class="' . $class . '" target="_blank">' . htmlCHR($row['group_name']) . '</a>';
                 $html[] = $link;
             } else {
@@ -48,7 +48,7 @@ switch ($mode) {
                 }
                 if ($row['group_moderator'] == $user->id) {
                     $class .= ' selfMod';
-                    $href .= "&amp;u=$user_id";  // сам юзер модератор этой группы
+                    $href .= "&amp;" . POST_USERS_URL . "=$user_id";  // сам юзер модератор этой группы
                 }
                 $link = '<a href="' . $href . '" class="' . $class . '" target="_blank">' . htmlCHR($row['group_name']) . '</a>';
                 $html[] = $link;
