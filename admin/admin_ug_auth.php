@@ -304,7 +304,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
-    $base_url = basename(__FILE__) . "?mode=group&amp;g=$group_id";
+    $base_url = basename(__FILE__) . "?mode=group&amp;" . POST_GROUPS_URL . "=$group_id";
 
     $ug_data = array('group_id' => $group_id);
     $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data);
