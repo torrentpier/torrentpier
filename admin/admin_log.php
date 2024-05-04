@@ -36,9 +36,9 @@ $url = basename(__FILE__);
 
 // Key names
 $type_key = 'type';
-$forum_key = 'f';
-$topic_key = 't';
-$user_key = 'u';
+$forum_key = POST_FORUM_URL;
+$topic_key = POST_TOPIC_URL;
+$user_key = POST_USERS_URL;
 $datetime_key = 'dt';   // value should be strtotime() time ("2006-06-25" etc.)
 $daysback_key = 'db';
 $sort_key = 'sort';
