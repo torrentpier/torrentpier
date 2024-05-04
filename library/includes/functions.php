@@ -1844,7 +1844,7 @@ function set_pr_die_append_msg($pr_uid)
     $template->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_RETURN'] . '</a>
 		<br /><br />
-		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;u=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_EDIT_RETURN'] . '</a>
+		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_EDIT_RETURN'] . '</a>
 		<br /><br />
 		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
 	');
