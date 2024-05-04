@@ -120,6 +120,10 @@
             <td>
                 <div class="floatL">
                     <table class="borderless inline">
+                        <tr>
+                            <td><input type="checkbox" id="topic_anonymous" name="topic_anonymous" {S_ANON_CHECKED} /></td>
+                            <td><label for="topic_anonymous">{L_ANONYMOUS_TOPIC}</label></td>
+                        </tr>
                         <!-- IF SHOW_UPDATE_POST_TIME -->
                         <tr>
                             <td><input type="checkbox" id="update_post_time" name="update_post_time" <!-- IF UPDATE_POST_TIME_CHECKED -->checked<!-- ENDIF --> /></td>
@@ -132,10 +136,6 @@
                             <td><label for="notify">{L_NOTIFY}</label></td>
                         </tr>
                         <!-- ENDIF -->
-                        <tr>
-                            <td><input type="checkbox" id="topic_anonymous" name="topic_anonymous" {S_ANON_CHECKED} /></td>
-                            <td><label for="topic_anonymous">{L_ANONYMOUS_TOPIC}</label></td>
-                        </tr>
                     </table>
                 </div>
             </td>
