@@ -1193,11 +1193,11 @@ function render_flag(string $code): string
     global $lang;
     static $iconExtension = '.svg';
 
-    $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
     if (isset($lang['COUNTRIES'][$code])) {
         if ($code === '0') {
             return ''; // No selected
         } else {
+            $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
             if (is_file($flagIconPath)) {
                 return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $lang['COUNTRIES'][$code] . '">';
             }
