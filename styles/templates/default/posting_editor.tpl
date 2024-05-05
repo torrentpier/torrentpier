@@ -169,6 +169,7 @@ function checkForm(form) {
 				message  : $('textarea#message').val(),
 				topic_id : {TOPIC_ID},
 				notify   : notify,
+				anonymous_mode: anonymous_mode,
 			});
 		}, 100);
 		return false;
