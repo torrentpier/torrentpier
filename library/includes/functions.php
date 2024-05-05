@@ -1200,7 +1200,7 @@ function render_flag(string $code, bool $showName = true): string
         } else {
             $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
             if (is_file($flagIconPath)) {
-                $countryName = $showName ? str_short($lang['COUNTRIES'][$code], 20) : '';
+                $countryName = $showName ? '&nbsp;' . str_short($lang['COUNTRIES'][$code], 20) : '';
                 return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $lang['COUNTRIES'][$code] . '">' . $countryName;
             }
         }
