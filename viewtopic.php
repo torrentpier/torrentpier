@@ -546,7 +546,7 @@ $prev_post_time = $max_post_time = 0;
 for ($i = 0; $i < $total_posts; $i++) {
     $anonymous_post = $postrow[$i]['post_anonymous'];
     $poster_id = $postrow[$i]['user_id'];
-    $poster_guest = ($poster_id == GUEST_UID);
+    $poster_guest = ($poster_id == GUEST_UID || $anonymous_post);
     $poster_bot = ($poster_id == BOT_UID);
     $poster = $poster_guest ? $lang['GUEST'] : $postrow[$i]['username'];
 
@@ -574,7 +574,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     $poster_rank = $rank_image = '';
     $user_rank = $postrow[$i]['user_rank'];
-    if (!$user->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
+    if (!$user->opt_js['h_rnk_i'] && !$poster_guest && isset($ranks[$user_rank])) {
         $rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
         $poster_rank = $bb_cfg['show_rank_text'] ? $ranks[$user_rank]['rank_title'] : '';
     }
