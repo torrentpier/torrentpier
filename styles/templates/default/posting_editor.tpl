@@ -158,20 +158,28 @@ function checkForm(form) {
 <!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
 	if(form.message.value.length < 100 && submitted)
 	{
-		setTimeout(function() {
-			if ($('input[name="notify"]').attr('checked') == 'checked') {
-				var notify = 1;
-			}
+        setTimeout(function () {
+            let notify = 0;
+            let anonymous_mode = 0;
+            $('input[name="notify"], input[name="anonymous_mode"]').each(function () {
+                if ($(this).prop('checked')) {
+                    if ($(this).attr('name') === 'notify') {
+                        notify = 1;
+                    } else if ($(this).attr('name') === 'anonymous_mode') {
+                        anonymous_mode = 1;
+                    }
+                }
+            });
 
-			ajax.exec({
-				action   : 'posts',
-				type     : 'add',
-				message  : $('textarea#message').val(),
-				topic_id : {TOPIC_ID},
-				notify   : notify,
-				anonymous_mode: anonymous_mode,
-			});
-		}, 100);
+            ajax.exec({
+                action: 'posts',
+                type: 'add',
+                message: $('textarea#message').val(),
+                topic_id: {TOPIC_ID},
+                notify: notify,
+                anonymous_mode: anonymous_mode,
+            });
+        }, 100);
 		return false;
 	}
 <!-- ENDIF -->
