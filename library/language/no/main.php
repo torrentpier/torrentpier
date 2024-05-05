@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Flytte alt innholdet';
 $lang['FORUM_DELETE'] = 'Slett Forumet';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Skjemaet nedenfor vil tillate deg å slette et forum (eller kategori) og bestemmer deg for hvor du ønsker å plassere alle emner (eller fora) den inneholdt.';
 $lang['CATEGORY_DELETE'] = 'Slette Kategori';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Låst';
 $lang['STATUS_UNLOCKED'] = 'Ulåst';
