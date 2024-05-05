@@ -254,7 +254,11 @@ if ($submit || $refresh) {
     $anonymous_user = (int)!empty($_POST['anonymous_mode']);
 } else {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
-    $anonymous_user = bf($userdata['user_opt'], 'user_opt', 'user_anonymous') ? 1 : 0;
+    if ($mode == 'editpost' && isset($post_info['post_anonymous'])) {
+        $anonymous_user = (int)$post_info['post_anonymous'];
+    } else {
+        $anonymous_user = bf($userdata['user_opt'], 'user_opt', 'user_anonymous') ? 1 : 0;
+    }
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
         $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
