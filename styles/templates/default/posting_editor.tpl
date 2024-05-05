@@ -156,19 +156,15 @@ function checkForm(form) {
 <!-- IF IN_PM -->
 <!-- ELSE -->
 <!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
-	if(form.message.value.length < 100 && submitted)
-	{
+    if (form.message.value.length < 100 && submitted) {
         setTimeout(function () {
-            let notify = 0;
-            let anonymous_mode = 0;
-            $('input[name="notify"], input[name="anonymous_mode"]').each(function () {
-                if ($(this).prop('checked')) {
-                    if ($(this).attr('name') === 'notify') {
-                        notify = 1;
-                    } else if ($(this).attr('name') === 'anonymous_mode') {
-                        anonymous_mode = 1;
-                    }
-                }
+            let actions = {
+                notify: 0,
+                anonymous_mode: 0
+            };
+            $('input[type="checkbox"]').change(function () {
+                let action = $(this).attr('name');
+                actions[action] = $(this).prop('checked') ? 1 : 0;
             });
 
             ajax.exec({
@@ -176,12 +172,12 @@ function checkForm(form) {
                 type: 'add',
                 message: $('textarea#message').val(),
                 topic_id: {TOPIC_ID},
-                notify: notify,
-                anonymous_mode: anonymous_mode,
+                notify: actions["notify"],
+                anonymous_mode: actions["anonymous_mode"],
             });
         }, 100);
-		return false;
-	}
+        return false;
+    }
 <!-- ENDIF -->
 <!-- ENDIF -->
 <!-- ENDIF -->
