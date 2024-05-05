@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'ย้ายทั้งหมดของเนื้
 $lang['FORUM_DELETE'] = 'ลบชุ';
 $lang['FORUM_DELETE_EXPLAIN'] = 'แบบฟอร์ด้านล่างนี้จะอนุญาตให้คุณไปลบชุ(หรือหมวดหมู่และตัดสินใจที่คุณต้องการที่จะเอาหัวข้อคุ(หรือ forums มันถูกควบคุม';
 $lang['CATEGORY_DELETE'] = 'ลบหมวดหมู่';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'ถูกล็อค';
 $lang['STATUS_UNLOCKED'] = 'ไม่ได้ล็อค';
