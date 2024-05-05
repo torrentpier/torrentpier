@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Perkelti visas turinys';
 $lang['FORUM_DELETE'] = 'Ištrinti Forumas';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Žemiau pateikta forma leis jums ištrinti forumą (ar kategoriją) ir nuspręsti, kur norite įdėti visas temas (ar forumuose) jame.';
 $lang['CATEGORY_DELETE'] = 'Ištrinti Kategorija';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Uždaryta';
 $lang['STATUS_UNLOCKED'] = 'Atrakinta';

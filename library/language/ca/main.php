@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Moure tots els continguts';
 $lang['FORUM_DELETE'] = 'Esborrar Fòrum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'El següent formulari us permet esborrar un fòrum (o categoria) i decidiu on voleu posar tots els temes (o fòrums) que conté.';
 $lang['CATEGORY_DELETE'] = 'Eliminar Una Categoria';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Tancat';
 $lang['STATUS_UNLOCKED'] = 'Obert';

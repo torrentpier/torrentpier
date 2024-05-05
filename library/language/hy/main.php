@@ -2098,6 +2098,7 @@ $lang['MOVE_CONTENTS'] = 'Տեղափոխել բոլոր բովանդակությ
 $lang['FORUM_DELETE'] = 'Համաժողովը Հեռացնել';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Ստորեւ բերված ձեւը թույլ է տալիս ձեզ հեռացնել համաժողովը (կամ աստիճան) եւ լուծել, որտեղ դուք ցանկանում եք տեղադրել բոլոր թեմաները (կամ համաժողովներ) այն պարունակում է.';
 $lang['CATEGORY_DELETE'] = 'Հեռացնել Կատեգորիա';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Արգելափակվել է';
 $lang['STATUS_UNLOCKED'] = 'Վերաբացված';

@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Di chuyển tất cả nội dung';
 $lang['FORUM_DELETE'] = 'Xóa Các Diễn Đàn';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Mẫu dưới đây sẽ cho phép anh để xóa một diễn đàn (loại) và quyết định nơi bạn muốn đặt tất cả các chủ đề (hay các diễn đàn) nó chứa.';
 $lang['CATEGORY_DELETE'] = 'Rõ Ràng Mục';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Bị khóa';
 $lang['STATUS_UNLOCKED'] = 'Mở khóa';

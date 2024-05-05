@@ -2099,6 +2099,7 @@ $lang['MOVE_CONTENTS'] = '移動全ての内容';
 $lang['FORUM_DELETE'] = '削除フォーラム';
 $lang['FORUM_DELETE_EXPLAIN'] = '以下のフォームに可能にする削除するフォーラム（カテゴリー）を決定したいすべてのトピックス(またはフォーラム)が含まれています。';
 $lang['CATEGORY_DELETE'] = 'カテゴリの削除';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'ロック';
 $lang['STATUS_UNLOCKED'] = '解除';

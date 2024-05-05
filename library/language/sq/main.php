@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Zhvendosja e të gjitha përmbajtja';
 $lang['FORUM_DELETE'] = 'Fshini Forumi';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Formularin më poshtë do të ju lejojnë për të fshirë një forumi (apo kategori) dhe të vendosin se ku ju doni për të vënë të gjitha temat (ose forume) ajo përmban.';
 $lang['CATEGORY_DELETE'] = 'Fshini Kategori';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Mbyllur';
 $lang['STATUS_UNLOCKED'] = 'E hapur';

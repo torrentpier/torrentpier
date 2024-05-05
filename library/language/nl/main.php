@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Verplaats alle inhoud';
 $lang['FORUM_DELETE'] = 'Verwijder Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Het onderstaande formulier zal u toelaten om te verwijderen van een forum (of categorie) en bepaal waar u het wilt zetten alle-onderwerpen (of forums) bevatte.';
 $lang['CATEGORY_DELETE'] = 'Categorie Verwijderen';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Opgesloten';
 $lang['STATUS_UNLOCKED'] = 'Ontgrendeld';

@@ -2098,6 +2098,7 @@ $lang['MOVE_CONTENTS'] = 'Premjestiti sadržaj';
 $lang['FORUM_DELETE'] = 'Forum Brisanje';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Formular ispod će vam omogućiti da ukloni forum (ili kategorije) i odlučite gdje želite staviti sve teme (ili forum) u njemu nalaze.';
 $lang['CATEGORY_DELETE'] = 'Izbriši Kategoriju';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Zaključana';
 $lang['STATUS_UNLOCKED'] = 'Otključan';

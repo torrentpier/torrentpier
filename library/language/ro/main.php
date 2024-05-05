@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Muta tot continutul';
 $lang['FORUM_DELETE'] = 'Șterge Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Formularul de mai jos vă va permite să ștergeți un forum (sau de categorie) și să decidă în cazul în care doriți pentru a pune toate subiectele (sau forumuri) conținea.';
 $lang['CATEGORY_DELETE'] = 'Ștergeți Categoria';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Blocat';
 $lang['STATUS_UNLOCKED'] = 'Deblocat';

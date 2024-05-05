@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'نقل كافة محتويات';
 $lang['FORUM_DELETE'] = 'حذف المنتدى';
 $lang['FORUM_DELETE_EXPLAIN'] = 'النموذج أدناه وسوف تسمح لك لحذف المنتدى (أو الفئة) تقرر أين تريد أن تضع كل المواضيع (أو المنتديات) الواردة فيه.';
 $lang['CATEGORY_DELETE'] = 'حذف الفئة';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'مؤمن';
 $lang['STATUS_UNLOCKED'] = 'مقفلة';

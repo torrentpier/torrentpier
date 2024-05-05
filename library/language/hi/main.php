@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'सभी सामग्री को स्थान
 $lang['FORUM_DELETE'] = 'फ़ोरम हटाएं';
 $lang['FORUM_DELETE_EXPLAIN'] = 'नीचे दिया गया फ़ॉर्म आपको एक मंच (या श्रेणी) को हटाने की अनुमति देगा और तय करेंगे कि आप सभी विषयों (या फ़ोरम) को कहां रखना चाहते हैं।';
 $lang['CATEGORY_DELETE'] = 'श्रेणी हटाएं';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'बंद';
 $lang['STATUS_UNLOCKED'] = 'खुला';

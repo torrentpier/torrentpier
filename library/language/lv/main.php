@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Pārvietot visas tiesības aizsargātas';
 $lang['FORUM_DELETE'] = 'Dzēst Forumā';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Zemāk esošo formu, ļaus jums, lai izdzēstu forumā (vai kategorijā) un izlemt, kur jūs vēlaties, lai visas tēmas (vai forumos), tajā bija.';
 $lang['CATEGORY_DELETE'] = 'Dzēst Kategorija';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Bloķēts';
 $lang['STATUS_UNLOCKED'] = 'Atslēgt';
