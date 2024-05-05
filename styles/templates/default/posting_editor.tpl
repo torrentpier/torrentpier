@@ -162,11 +162,9 @@ function checkForm(form) {
                 notify: 0,
                 anonymous_mode: 0
             };
-            $('input[name]').each(function () {
+            $('input[name="notify"], input[name="anonymous_mode"]').each(function () {
                 let action = $(this).attr('name');
-                if (actions[action] !== undefined) {
-                    actions[action] = $(this).prop('checked') ? 1 : 0;
-                }
+                actions[action] = $(this).prop('checked') ? 1 : 0;
             });
 
             ajax.exec({
