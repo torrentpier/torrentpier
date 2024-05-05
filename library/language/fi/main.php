@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Siirtää kaikki sisältö';
 $lang['FORUM_DELETE'] = 'Poista Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Alla olevan lomakkeen avulla voit poistaa foorumi (tai luokan) ja päättää, missä haluat laittaa kaikki aiheet (tai foorumit) se sisälsi.';
 $lang['CATEGORY_DELETE'] = 'Poista Luokka';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Lukittu';
 $lang['STATUS_UNLOCKED'] = 'Auki';
