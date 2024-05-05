@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Ҷойивазкунии ҳамаи мундариҷа
 $lang['FORUM_DELETE'] = 'Тозакунии Форум';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Шакли поён ба шумо имкон медиҳад, ки тоза як форуми (ё категория) ва қарор дар он шумо мехоҳед, ки ба гузошта ҳамаи мавзӯъҳои (ё форумҳо) он дармегиронад.';
 $lang['CATEGORY_DELETE'] = 'Тозакунии гурӯҳ';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'дарбаста';
 $lang['STATUS_UNLOCKED'] = 'кушода';
