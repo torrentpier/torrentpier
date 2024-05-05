@@ -13,6 +13,7 @@
 - Some enhancements [\#1445](https://github.com/torrentpier/torrentpier/pull/1445) ([belomaxorka](https://github.com/belomaxorka))
 - Guests can view polls [\#1464](https://github.com/torrentpier/torrentpier/pull/1464) ([belomaxorka](https://github.com/belomaxorka))
 - Improved app debug [\#1438](https://github.com/torrentpier/torrentpier/pull/1438) ([belomaxorka](https://github.com/belomaxorka))
+- Some enhancements for flags [\#1470](https://github.com/torrentpier/torrentpier/pull/1470) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed quote selection for smiles [\#1457](https://github.com/torrentpier/torrentpier/pull/1457) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Allow registering torrents by default [\#1440](https://github.com/torrentpier/torrentpier/pull/1440) ([belomaxorka](https://github.com/belomaxorka))
 - Temp: Removed showing forum description in `viewforum.php` [\#1465](https://github.com/torrentpier/torrentpier/pull/1465) ([belomaxorka](https://github.com/belomaxorka))
