@@ -2098,6 +2098,7 @@ $lang['MOVE_CONTENTS'] = 'Hərəkət bütün məzmunu';
 $lang['FORUM_DELETE'] = 'Forum Sil';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Forması aşağıda imkan verir sil forumu (və ya kateqoriyası) və həll hara qoymaq istədiyiniz bütün mövzularda (və ya forumlar) orada saxlanılırlar.';
 $lang['CATEGORY_DELETE'] = 'Sil Kateqoriya';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Kilidli';
 $lang['STATUS_UNLOCKED'] = 'Etmişlər';
