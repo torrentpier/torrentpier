@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = '将所有内容';
 $lang['FORUM_DELETE'] = '删除的论坛，';
 $lang['FORUM_DELETE_EXPLAIN'] = '下面的表格会让你删除的一个论坛(或类别)并且决定你要把所有主题(或论坛)。';
 $lang['CATEGORY_DELETE'] = '删除分类';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = '锁定';
 $lang['STATUS_UNLOCKED'] = '解锁';
