@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Liiguta kogu sisu';
 $lang['FORUM_DELETE'] = 'Kustutada Foorum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Allolev vorm võimaldab teil kustutada foorum (või kategooria) ja otsustada, kuhu sa tahad panna kõik teemad (või foorumites) see sisaldas.';
 $lang['CATEGORY_DELETE'] = 'Kustutada Kategooria';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Lukus';
 $lang['STATUS_UNLOCKED'] = 'Lukustamata';
