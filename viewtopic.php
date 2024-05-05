@@ -673,7 +673,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
         'POSTER_JOINED_DATE' => $poster_joined,
         'POSTER_POSTS' => ($bb_cfg['show_poster_posts'] && $poster_posts) ? '<a href="search.php?search_author=1&amp;uid=' . $poster_id . '" target="_blank">' . $poster_posts . '</a>' : '',
-        'POSTER_FROM' => $bb_cfg['show_poster_from'] ? render_flag($poster_from) : '',
+        'POSTER_FROM' => $bb_cfg['show_poster_from'] ? render_flag($poster_from, false) : '',
         'POSTER_BOT' => $poster_bot,
         'POSTER_GUEST' => $poster_guest,
         'POSTER_ID' => $poster_id,
