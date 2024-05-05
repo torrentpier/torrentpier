@@ -742,9 +742,7 @@ if (defined('SPLIT_FORM_START')) {
     $template->assign_vars([
         'SPLIT_FORM' => true,
         'START' => $start,
-        'S_SPLIT_ACTION' => 'modcp.php',
-        'POST_FORUM_URL' => POST_FORUM_URL,
-        'POST_TOPIC_URL' => POST_TOPIC_URL,
+        'S_SPLIT_ACTION' => 'modcp.php'
     ]);
 }
 
