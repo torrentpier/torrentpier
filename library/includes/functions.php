@@ -1186,9 +1186,10 @@ function get_user_torrent_client(string $peer_id): string
  * Returns country flag by country code
  *
  * @param string $code
+ * @param bool $showName
  * @return string
  */
-function render_flag(string $code): string
+function render_flag(string $code, bool $showName = true): string
 {
     global $lang;
     static $iconExtension = '.svg';
@@ -1199,7 +1200,8 @@ function render_flag(string $code): string
         } else {
             $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
             if (is_file($flagIconPath)) {
-                return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $lang['COUNTRIES'][$code] . '">';
+                $countryName = $showName ? str_short($lang['COUNTRIES'][$code], 20) : '';
+                return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $lang['COUNTRIES'][$code] . '">' . $countryName;
             }
         }
     }
