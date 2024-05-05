@@ -53,7 +53,7 @@
 				<!-- IF t.p.QUOTE --><a class="txtb" href="{QUOTE_URL}{t.p.POST_ID}">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF t.p.EDIT --><a class="txtb" href="{EDIT_POST_URL}{t.p.POST_ID}">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF t.p.DELETE --><a class="txtb" href="{DELETE_POST_URL}{t.p.POST_ID}">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF t.p.IP --><a class="txtb" href="{IP_POST_URL}{t.p.POST_ID}&amp;{POST_TOPIC_URL}={t.TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF t.p.IP --><a class="txtb" href="{IP_POST_URL}{t.p.POST_ID}&amp;{#POST_TOPIC_URL#}={t.TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 			</p>
 			<div class="clear"></div>
 		</div>
