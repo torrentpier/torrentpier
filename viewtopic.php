@@ -544,7 +544,7 @@ if ($topic_has_poll) {
 $prev_post_time = $max_post_time = 0;
 
 for ($i = 0; $i < $total_posts; $i++) {
-    $anonymous_post = $postrow[$i]['post_anonymous'];
+    $anonymous_post = (bool)$postrow[$i]['post_anonymous'];
     $poster_id = $postrow[$i]['user_id'];
     $poster_guest = ($poster_id == GUEST_UID || $anonymous_post);
     $poster_bot = ($poster_id == BOT_UID);
