@@ -979,6 +979,7 @@ $lang['DATETIME']['DEC'] = 'საოლქო საარჩევნო კ�
 
 // Country selector
 $lang['COUNTRIES'] = [
+    0 => 'არა აირჩიეთ',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
