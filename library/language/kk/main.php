@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'барлық мазмұнын жылжыту';
 $lang['FORUM_DELETE'] = 'форумы жою';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Төменде нысаны, ол қамтылған сіз форум (немесе санат) жою үшін мүмкіндік және сіз барлық тақырыптарды (немесе форумдар) қоюға келсе қайда шешеді.';
 $lang['CATEGORY_DELETE'] = 'Категория жою';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Жабық';
 $lang['STATUS_UNLOCKED'] = 'құлпы ашылған';
