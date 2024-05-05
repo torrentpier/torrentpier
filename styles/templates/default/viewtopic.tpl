@@ -287,7 +287,7 @@ function build_poll_add_form (src_el)
 		</td>
 
 		<td class="nowrap" style="padding: 0 4px 2px 4px;">
-			<form action="{U_SEARCH}?{POST_TOPIC_URL}={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
+			<form action="{U_SEARCH}?{#POST_TOPIC_URL#}={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
 				<input id="search-text" type="text" name="nm" class="hint" style="width: 150px;" placeholder="{L_SEARCH_IN_TOPIC}" required />
 				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />
 			</form>
@@ -425,7 +425,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.IS_FIRST_POST && $bb_cfg['show_post_bbcode_button'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">{CODE_IMG}</a><!-- ENDIF -->
-				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{POST_TOPIC_URL}={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{#POST_TOPIC_URL#}={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
 					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">{MOD_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
@@ -501,7 +501,7 @@ function build_poll_add_form (src_el)
 	<!-- ELSE -->
 		<div style="<!-- IF TEXT_BUTTONS --> padding: 2px 6px 4px;<!-- ELSE --> padding: 2px 3px;<!-- ENDIF -->" class="post_btn_2">
 			<a class="txtb" href="{PROFILE_URL}{postrow.POSTER_ID}">{PROFILE_IMG}</a>{POST_BTN_SPACER}
-			<a class="txtb" href="{PM_URL}?mode=post&amp;{POST_USERS_URL}={postrow.POSTER_ID}">{PM_IMG}</a>{POST_BTN_SPACER}
+			<a class="txtb" href="{PM_URL}?mode=post&amp;{#POST_USERS_URL#}={postrow.POSTER_ID}">{PM_IMG}</a>{POST_BTN_SPACER}
 		</div>
 	<!-- ENDIF -->
 
@@ -515,9 +515,9 @@ function build_poll_add_form (src_el)
 <tr id="del_split_row" class="row5" style="display: none;">
 	<td colspan="2" class="med pad_4 td2">
 	<form method="post" action="{S_SPLIT_ACTION}">
-	<input type="hidden" name="redirect" value="modcp.php?{POST_TOPIC_URL}={TOPIC_ID}&amp;mode=split" />
-	<input type="hidden" name="{POST_FORUM_URL}" value="{FORUM_ID}" />
-	<input type="hidden" name="{POST_TOPIC_URL}" value="{TOPIC_ID}" />
+	<input type="hidden" name="redirect" value="modcp.php?{#POST_TOPIC_URL#}={TOPIC_ID}&amp;mode=split" />
+	<input type="hidden" name="{#POST_FORUM_URL#}" value="{FORUM_ID}" />
+	<input type="hidden" name="{#POST_TOPIC_URL#}" value="{TOPIC_ID}" />
 	<input type="hidden" name="start" value="{START}" />
 	<input type="hidden" name="mode" value="split" />
 
@@ -595,7 +595,7 @@ function build_poll_add_form (src_el)
 <br>
 <form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 <input type="hidden" name="mode" value="reply" />
-<input type="hidden" name="{POST_TOPIC_URL}" value="{QR_TOPIC_ID}" />
+<input type="hidden" name="{#POST_TOPIC_URL#}" value="{QR_TOPIC_ID}" />
 
 <table id="topic_quick_reply" class="topic" cellpadding="0" cellspacing="0">
 <tr>

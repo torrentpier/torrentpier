@@ -42,7 +42,7 @@ $(function(){
 	$.each($('#f-map a'), function(i,a) {
 		var f_id = $(a).attr('href');
 		$(a)
-			.attr('href', '{U_FORUM}?{POST_FORUM_URL}='+ f_id)
+			.attr('href', '{U_FORUM}?{#POST_FORUM_URL#}='+ f_id)
 			.before('<img class="feed-small" src="{IMG}feed.png" alt="feed" onclick="open_feed('+ f_id +')">')
 		;
 	});
@@ -55,7 +55,7 @@ $(function(){
 
 <form id="feed-form" method="post" action="feed.php" target="_blank" style="display: none;">
 	<input type="hidden" name="mode" value="get_feed_url">
-	<input type="hidden" name="type" value="{POST_FORUM_URL}">
+	<input type="hidden" name="type" value="{#POST_FORUM_URL#}">
 	<input id="feed-id" type="hidden" name="id" value="">
 </form>
 
