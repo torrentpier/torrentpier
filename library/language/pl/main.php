@@ -979,6 +979,7 @@ $lang['DATETIME']['DEC'] = 'Grudnia';
 
 // Country selector
 $lang['COUNTRIES'] = [
+    0 => 'Nie ma wyboru',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
