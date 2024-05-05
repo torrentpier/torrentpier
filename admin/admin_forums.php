@@ -322,7 +322,7 @@ if ($mode) {
             // Create a category in the DB
             //
             if (!$new_cat_title = trim($_POST['categoryname'])) {
-                bb_die('Category name is empty');
+                bb_die($lang['CATEGORY_NAME_EMPTY']);
             }
 
             check_name_dup('cat', $new_cat_title);
@@ -370,7 +370,7 @@ if ($mode) {
             // Modify a category in the DB
             //
             if (!$new_cat_title = trim($_POST['cat_title'])) {
-                bb_die('Category name is empty');
+                bb_die($lang['CATEGORY_NAME_EMPTY']);
             }
 
             $cat_id = (int)$_POST[POST_CAT_URL];
