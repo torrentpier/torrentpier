@@ -619,6 +619,8 @@ function build_poll_add_form (src_el)
 </tr>
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
+		<label><input type="checkbox" name="anonymous_mode" <!-- IF ANONYMOUS_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
+		{L_ANONYMOUS_REPLY}&nbsp;</label>
 		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
 		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
