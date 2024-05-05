@@ -759,11 +759,10 @@ if ($bb_cfg['show_quick_reply']) {
 
         if (!IS_GUEST) {
             $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
-            $anonymous_user = bf($userdata['user_opt'], 'user_opt', 'user_anonymous');
 
             $template->assign_vars([
                 'QR_NOTIFY_CHECKED' => ($notify_user) ? ($notify_user && $is_watching_topic) : $is_watching_topic,
-                'ANONYMOUS_CHECKED' => $anonymous_user,
+                'ANONYMOUS_CHECKED' => (bool)bf($userdata['user_opt'], 'user_opt', 'user_anonymous'),
             ]);
         }
     }
