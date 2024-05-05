@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Перенести все содержимое';
 $lang['FORUM_DELETE'] = 'Удалить форум';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Здесь вы сможете удалить форум (или категорию) и решить, куда перенести все темы (или форумы), которые там содержались.';
 $lang['CATEGORY_DELETE'] = 'Удалить Категорию';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Закрыт';
 $lang['STATUS_UNLOCKED'] = 'Открыт';

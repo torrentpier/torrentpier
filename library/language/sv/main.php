@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Flytta allt innehåll';
 $lang['FORUM_DELETE'] = 'Ta Bort Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'I formuläret nedan kan du ta bort ett forum (eller kategori) och bestäm var du vill placera alla ämnen (och forum) det innehöll.';
 $lang['CATEGORY_DELETE'] = 'Ta Bort Kategori';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Låst';
 $lang['STATUS_UNLOCKED'] = 'Olåst';

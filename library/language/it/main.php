@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Spostare tutti i contenuti';
 $lang['FORUM_DELETE'] = 'Cancellare Un Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Il modulo seguente vi permetterà di eliminare un forum (o di categoria) e decidere dove si desidera inserire tutti gli argomenti (o forum) in esso contenute.';
 $lang['CATEGORY_DELETE'] = 'Eliminare Categoria';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Bloccato';
 $lang['STATUS_UNLOCKED'] = 'Sbloccato';

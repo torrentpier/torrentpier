@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'להעביר את כל התוכן';
 $lang['FORUM_DELETE'] = 'למחוק את הפורום';
 $lang['FORUM_DELETE_EXPLAIN'] = 'את הטופס הבא תאפשר לך למחוק פורום (או קטגוריה), להחליט איפה אתה רוצה לשים את כל הנושאים (או פורומים) שהוא מכיל.';
 $lang['CATEGORY_DELETE'] = 'מחיקת קטגוריה';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'נעול';
 $lang['STATUS_UNLOCKED'] = 'סמארטפון';

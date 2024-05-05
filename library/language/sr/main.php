@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Преместите сав садржај';
 $lang['FORUM_DELETE'] = 'Форум Уклонити';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Формулар испод ће вам омогућити да уклоните форум (или категорије) и одлучите где желите да поставите све теме (или блог) у њему налазе.';
 $lang['CATEGORY_DELETE'] = 'Уклонити Категорију';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Закључана';
 $lang['STATUS_UNLOCKED'] = 'Откључана';

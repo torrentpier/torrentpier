@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Mover todo o conteúdo';
 $lang['FORUM_DELETE'] = 'Excluir Do Fórum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'O formulário abaixo permite que você excluir um fórum (ou categoria) e decidir onde você deseja colocar todos os tópicos (ou fóruns) nele contido.';
 $lang['CATEGORY_DELETE'] = 'Excluir A Categoria';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Bloqueado';
 $lang['STATUS_UNLOCKED'] = 'Desbloqueado';

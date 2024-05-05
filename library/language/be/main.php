@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Перанесьці ўсе змесціва';
 $lang['FORUM_DELETE'] = 'Форум Выдаліць';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Форма ніжэй дазволіць вам выдаліць форум (або катэгорыі) і вырашыць, куды вы хочаце змясціць усе тэмы (або форумы) у ім утрымліваюцца.';
 $lang['CATEGORY_DELETE'] = 'Выдаліць Катэгорыю';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Заблакаваная';
 $lang['STATUS_UNLOCKED'] = 'Адмыкнутая';

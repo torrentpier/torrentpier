@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Barcha mazmunini ko\'chirish';
 $lang['FORUM_DELETE'] = 'Forum o\'chirish';
 $lang['FORUM_DELETE_EXPLAIN'] = 'shakl Quyidagi forum (yoki kategoriya) o\'chirish va uni mavjud barcha mavzularni (yoki forumlar) qo\'yish istayman qaerda qaror qabul qilish imkonini beradi.';
 $lang['CATEGORY_DELETE'] = 'Kategoriya o\'chirish';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Yopiq';
 $lang['STATUS_UNLOCKED'] = 'Unlocked';

@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Mozgás minden tartalom';
 $lang['FORUM_DELETE'] = 'Törlés Fórum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Az alábbi űrlapot lehetővé teszi, hogy törölje a fórumon (vagy kategóriát), majd dönt, ahol szeretné, hogy az összes téma (vagy fórumok) tartalmazott.';
 $lang['CATEGORY_DELETE'] = 'Kategória Törlése';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Zárva';
 $lang['STATUS_UNLOCKED'] = 'Nyitva';

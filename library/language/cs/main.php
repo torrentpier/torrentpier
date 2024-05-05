@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Přesunout veškerý obsah';
 $lang['FORUM_DELETE'] = 'Odstranit Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Níže uvedený formulář vám umožní odstranit fórum (nebo kategorii) a rozhodnout, kde chcete dát všechna témata (nebo fórum) obsahoval.';
 $lang['CATEGORY_DELETE'] = 'Odstranit Kategorii';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Zamkl';
 $lang['STATUS_UNLOCKED'] = 'Odemčený';

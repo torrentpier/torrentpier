@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Μετακινήστε όλα τα περιεχόμε�
 $lang['FORUM_DELETE'] = 'Διαγραφή Φόρουμ';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Η παρακάτω φόρμα θα σας επιτρέψει να διαγράψετε ένα φόρουμ (ή κατηγορία) και να αποφασίσετε όπου θέλετε να βάλετε όλα τα θέματα (ή φόρουμ) που περιείχε.';
 $lang['CATEGORY_DELETE'] = 'Διαγραφή Κατηγορίας';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Κλειδωμένο';
 $lang['STATUS_UNLOCKED'] = 'Ξεκλείδωτη';

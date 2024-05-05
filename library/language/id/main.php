@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = 'Memindahkan semua isi';
 $lang['FORUM_DELETE'] = 'Menghapus Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Formulir di bawah ini akan memungkinkan anda untuk menghapus forum (atau kategori) dan memutuskan di mana anda ingin menempatkan semua topik (atau forum) di dalamnya.';
 $lang['CATEGORY_DELETE'] = 'Menghapus Kategori';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Terkunci';
 $lang['STATUS_UNLOCKED'] = 'Dibuka';

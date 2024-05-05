@@ -2099,6 +2099,7 @@ $lang['MOVE_CONTENTS'] = 'Tüm içeriğini taşımak';
 $lang['FORUM_DELETE'] = 'Sil Forum';
 $lang['FORUM_DELETE_EXPLAIN'] = 'Aşağıdaki formu (veya kategori) bir forum silmek ve içerdiği (ya da forumlar) tüm konuları nereye koymak istediğinize karar izin verir.';
 $lang['CATEGORY_DELETE'] = 'Sil Kategori';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = 'Kilitli';
 $lang['STATUS_UNLOCKED'] = 'Kilidi';

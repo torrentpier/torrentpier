@@ -2095,6 +2095,7 @@ $lang['MOVE_CONTENTS'] = '이동 모든 내용';
 $lang['FORUM_DELETE'] = '삭제 포럼';
 $lang['FORUM_DELETE_EXPLAIN'] = '아래 양식을 삭제할 수 있는 포럼(또는 카테고리)와 결정할 모든 항목(또는 포럼)이 포함되어 있습니다.';
 $lang['CATEGORY_DELETE'] = '카테고리를 삭제합';
+$lang['CATEGORY_NAME_EMPTY'] = 'Category name not specified';
 
 $lang['STATUS_LOCKED'] = '잠금';
 $lang['STATUS_UNLOCKED'] = '잠금 해제';
