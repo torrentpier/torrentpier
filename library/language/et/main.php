@@ -979,6 +979,7 @@ $lang['DATETIME']['DEC'] = 'Kahanda';
 
 // Country selector
 $lang['COUNTRIES'] = [
+    0 => 'Ei vali',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
