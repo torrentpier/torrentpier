@@ -32,7 +32,7 @@ DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $u
 
 \TorrentPier\Sessions::cache_rm_user_sessions($user_id);
 
-$user_rank = ($rank_id) ? '<span class="' . $ranks[$rank_id]['rank_style'] . '">' . $ranks[$rank_id]['rank_title'] . '</span>' : '';
+$user_rank = $rank_id ? '<span class="' . $ranks[$rank_id]['rank_style'] . '">' . $ranks[$rank_id]['rank_title'] . '</span>' : '';
 
-$this->response['html'] = ($rank_id) ? $lang['AWARDED_RANK'] . "<b> $user_rank </b>" : $lang['SHOT_RANK'];
-$this->response['rank_name'] = ($rank_id) ? $user_rank : $lang['USER'];
+$this->response['html'] = $rank_id ? $lang['AWARDED_RANK'] . "<b> $user_rank </b>" : $lang['SHOT_RANK'];
+$this->response['rank_name'] = $rank_id ? $user_rank : $lang['USER'];
