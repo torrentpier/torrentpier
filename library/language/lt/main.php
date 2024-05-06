@@ -979,6 +979,7 @@ $lang['DATETIME']['DEC'] = 'Gruodis';
 
 // Country selector
 $lang['COUNTRIES'] = [
+    0 => 'Pasirinkite nr.',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',

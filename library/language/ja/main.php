@@ -979,6 +979,7 @@ $lang['DATETIME']['DEC'] = '年月日';
 
 // Country selector
 $lang['COUNTRIES'] = [
+    0 => 'Noを選択',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
