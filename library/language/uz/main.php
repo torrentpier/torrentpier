@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Login Boshqaruvni taqiqlash qaytish uchun
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Axborot';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Ruxsat Kirish urinishlar';
