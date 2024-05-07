@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikk %sHere%s for å gå tilbake til å 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versjon Informasjon';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Tillatt påloggingsforsøk';
