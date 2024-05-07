@@ -2176,7 +2176,7 @@ function readUpdaterFile(): array|bool
  */
 function countryByIP(string $ipAddress)
 {
-    $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoIP2-City.mmdb');
+    $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
     $record = $cityDbReader->city($ipAddress);
-    return $record->mostSpecificSubdivision->isoCode;
+    return $record->country->isoCode;
 }
