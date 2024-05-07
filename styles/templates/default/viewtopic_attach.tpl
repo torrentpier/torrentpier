@@ -465,7 +465,7 @@ $('#tor-filelist-btn').click(function () {
     </div>
     <!-- ENDIF -->
     <div class="sp-wrap">
-        <div id="thx-list" class="sp-body" no-sp-open="true" title="{L_LAST_LIKES}"></div>
+        <div id="thx-list" class="sp-body" data-no-sp-open="true" title="{L_LAST_LIKES}"></div>
     </div>
 </div>
 <!-- ENDIF -->
