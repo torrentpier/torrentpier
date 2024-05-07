@@ -979,6 +979,7 @@ $lang['DATETIME']['DEC'] = 'Decembris';
 
 // Country selector
 $lang['COUNTRIES'] = [
+    0 => 'Izvēlieties nē',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',

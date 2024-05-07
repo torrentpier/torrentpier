@@ -979,6 +979,7 @@ $lang['DATETIME']['DEC'] = 'Prosinac';
 
 // Country selector
 $lang['COUNTRIES'] = [
+    0 => 'Nema izbora',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
