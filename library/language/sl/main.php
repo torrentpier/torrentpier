@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliknite %sHere%s za vrnitev, da Zavrne u
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informacije O Različici';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Dovoljeno poskusov prijave';
