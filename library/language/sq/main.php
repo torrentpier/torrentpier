@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliko %sHere%s të kthehen për të Lejoj
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Informacion';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Lejohet të identifikoheni përpjekjet';
