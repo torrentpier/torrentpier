@@ -155,7 +155,11 @@
         </tr>
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
+            <!-- IF COUNTRY_SELECT -->
             <td>{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</td>
+            <!-- ELSE -->
+            <td><input type="text" name="user_from" size="50" maxlength="150" value="{COUNTRY_SELECTED}"/></td>
+            <!-- ENDIF -->
             <script type="text/javascript">
                 $('#user_from').bind('change', function () {
                     ajax.exec({
