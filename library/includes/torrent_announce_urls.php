@@ -25,13 +25,13 @@ $announce_urls = $additional_announce_urls = [];
 // - Add URLs without GET parameters at the end
 // - For this file to work, you need to enable the "Check announce url" option in the admin panel in "Forum Settings"
 // ==============================================================================================================================
-// Additional announcer URLs that will be added to your giveaways
+// Additional announcer URLs that will be added to your releases
 // ------------------------------------------------------------------------------------------------------------------------------
 // Examples:
 // $additional_announce_urls[] = 'http://tracker.openbittorrent.com:80/announce';
 // $additional_announce_urls[] = 'udp://tracker.openbittorrent.com:6969/announce';
 // ------------------------------------------------------------------------------------------------------------------------------
 // Note:
-// - It is better not to add advertisers with GET parameters (for example passkey or another access authenticator)
+// - It is better not to add announcers with GET parameters (for example passkey or another access authenticator)
 // - For this file to work, you need to disable the option “Delete all additional announce urls” in the admin panel in “Forum Settings”
 // ==============================================================================================================================
