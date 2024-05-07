@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s ангушт занед баро
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Маълумот Version';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'кӯшишҳои воридшавӣ Ичозат';
