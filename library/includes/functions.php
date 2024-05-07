@@ -2174,9 +2174,14 @@ function readUpdaterFile(): array|bool
  * @throws \GeoIp2\Exception\AddressNotFoundException
  * @throws \MaxMind\Db\Reader\InvalidDatabaseException
  */
-function countryByIP(string $ipAddress)
+function countryByIP(string $ipAddress): mixed
 {
     $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
-    $record = $cityDbReader->city($ipAddress);
+    try {
+        $record = $cityDbReader->city($ipAddress);
+    } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
+        return 'Unknown';
+    } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
+    }
     return $record->country->isoCode;
 }

@@ -157,6 +157,7 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">Страна</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -174,6 +175,7 @@ ajax.callback.callseed = function (data) {
 				<td>{sfull.srow.port.PORT}</td>
 				<!-- END port -->
                 <td>{sfull.srow.PEER_ID}</td>
+                <td>{sfull.srow.COUNTRY}</td>
 			</tr>
 			<!-- END srow -->
 			</table>
@@ -208,6 +210,7 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
                 <!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">Страна</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
@@ -225,6 +228,7 @@ ajax.callback.callseed = function (data) {
 				<td>{lfull.lrow.port.PORT}</td>
 				<!-- END port -->
                 <td>{lfull.lrow.PEER_ID}</td>
+                <td>{lfull.lrow.COUNTRY}</td>
 			</tr>
 			<!-- END lrow -->
 			</table>
