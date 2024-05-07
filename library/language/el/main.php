@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Κάντε κλικ %sHere%s να επι�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Πληροφορίες Για Την Έκδοση';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Επιτρέπεται προσπάθειες σύνδεσης';
