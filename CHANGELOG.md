@@ -6,7 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.3 🐎 ([belomaxorka](https://github.com/belomaxorka))
-- Added updates checker ⚙️ [\#1451](https://github.com/torrentpier/torrentpier/pull/1451) ([belomaxorka](https://github.com/belomaxorka))
+- Added updates checker ⚙️ [\#1451](https://github.com/torrentpier/torrentpier/pull/1451), [\#1475](https://github.com/torrentpier/torrentpier/pull/1475) ([belomaxorka](https://github.com/belomaxorka))
 - Added preview for country flags while editing [\#1448](https://github.com/torrentpier/torrentpier/pull/1448) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for APCu caching method [\#1442](https://github.com/torrentpier/torrentpier/pull/1442) ([belomaxorka](https://github.com/belomaxorka))
 - Added support for attribute to ignoring auto spoilers opening [\#1466](https://github.com/torrentpier/torrentpier/pull/1466) ([belomaxorka](https://github.com/belomaxorka))
