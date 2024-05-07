@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Haga clic en %sHere%s para volver a no pe
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Información De La Versión';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Permitido de intentos de inicio de sesión';
