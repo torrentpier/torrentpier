@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Fare clic su %sHere%s di ritorno per Impe
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informazioni Sulla Versione';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Permesso di tentativi di login';

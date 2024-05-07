@@ -2287,6 +2287,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s Kullanıcı adı Yönetim izin V
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Sürüm Bilgileri';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'İzin verilen oturum açma girişimleri';

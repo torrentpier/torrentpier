@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Nhấn vào %sHere%s để trở về Kh�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Phiên Bản Thông Tin';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Được đăng nhập cố gắng';

@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik på %sHere%s for at vende tilbage ti
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Information';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Tilladt login-forsøg';

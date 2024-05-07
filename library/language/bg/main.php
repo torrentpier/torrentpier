@@ -2285,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Кликнете %sHere%s върнете 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Информация За Версията';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Разрешените опити за влизане';

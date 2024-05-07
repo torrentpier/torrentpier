@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sВернуться к управлен�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Информация о версии TorrentPier';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Разрешено попыток входа';

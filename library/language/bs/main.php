@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s da se vrati u Disallow kori
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Verziju Informacije';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Dozvoljeno prijavu pokušava';

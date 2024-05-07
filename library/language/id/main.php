@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s untuk kembali ke Larang Use
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informasi Versi';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Diperbolehkan mencoba login';

@@ -2286,6 +2286,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Basın %sHere%s qaytarmaq qadağan Admini
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Məlumat Versiyası';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'İcazə cəhdləri giriş';

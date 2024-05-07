@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Feu clic %sHere%s per tornar a Rebutjar e
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informació De La Versió';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Admesos els intents d\'inici de sessió';

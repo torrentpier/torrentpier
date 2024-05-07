@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikněte %sHere%s vrátit Zakázat uživ
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informace O Verzi';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Povolených pokusů o přihlášení';

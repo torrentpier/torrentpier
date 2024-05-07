@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kattintson %sHere%s vissza, hogy ne enged
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Verzió Információ';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Bejelentkezési kísérletek megengedett';
