@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Clique %sHere%s para voltar a Proibir nom
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informações De Versão';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Permitido de tentativas de login';
