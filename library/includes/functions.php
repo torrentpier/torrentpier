@@ -2165,3 +2165,18 @@ function readUpdaterFile(): array|bool
 
     return false;
 }
+
+/**
+ * Show country ISO Code by user IP address
+ *
+ * @param string $ipAddress
+ * @return mixed|string|null
+ * @throws \GeoIp2\Exception\AddressNotFoundException
+ * @throws \MaxMind\Db\Reader\InvalidDatabaseException
+ */
+function countryByIP(string $ipAddress)
+{
+    $cityDbReader = new \GeoIp2\Database\Reader(INC_DIR . '/GeoIP2-City.mmdb');
+    $record = $cityDbReader->city($ipAddress);
+    return $record->mostSpecificSubdivision->isoCode;
+}
