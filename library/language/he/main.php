@@ -2283,6 +2283,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'לחץ על %sHere%s לחזור לאסו�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'גרסה מידע';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'הנסיונות המותרים להיכנס למערכת';
