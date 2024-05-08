@@ -151,13 +151,13 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
-				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: false}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-                <th class="{sorter: false}"><b class="tbs-text">Страна</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -204,13 +204,13 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
-				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: false}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
                 <!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-                <th class="{sorter: false}"><b class="tbs-text">Страна</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
