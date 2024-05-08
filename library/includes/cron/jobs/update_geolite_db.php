@@ -41,10 +41,9 @@ if (is_array($json_response) && !empty($json_response)) {
         $cron_runtime_log = date('Y-m-d H:i:s') . " -- Link to download is valid: " . $download_link . "\n";
         $get_file = file_get_contents($download_link);
         if ($get_file !== false) {
-            $file_md5_hash = hash_file('md5', $get_file);
             $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file obtained\n";
-            $new_file = file_put_contents($save_path, $get_file);
-            if ($file_md5_hash === hash_file('md5', $new_file)) {
+            file_put_contents($save_path, $get_file);
+            if (is_file($save_path) && is_file(INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
                 unlink(INT_DATA_DIR . '/GeoLite2-City.mmdb.old');
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved. MD5 hash is identical. MD5: $file_md5_hash\n";
             } else {
