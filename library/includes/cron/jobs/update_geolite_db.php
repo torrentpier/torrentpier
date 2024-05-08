@@ -18,10 +18,14 @@ global $cron_runtime_log;
 $save_path = INT_DATA_DIR . '/GeoLite2-City.mmdb';
 $repo_link = 'https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest';
 
-if (is_file($save_path) && rename($save_path, INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
-    $cron_runtime_log = date('Y-m-d H:i:s') . " -- Successfully renamed GeoLite file\n";
+if (is_file($save_path)) {
+    if (rename($save_path, INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
+        $cron_runtime_log = date('Y-m-d H:i:s') . " -- Successfully renamed GeoLite file\n";
+    } else {
+        $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot rename GeoLite file\n";
+    }
 } else {
-    $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot rename GeoLite file\n";
+    $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot find GeoLite file\n";
 }
 
 $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME]]);
@@ -45,12 +49,12 @@ if (is_array($json_response) && !empty($json_response)) {
             file_put_contents($save_path, $get_file);
             if (is_file($save_path) && is_file(INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
                 unlink(INT_DATA_DIR . '/GeoLite2-City.mmdb.old');
-                $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved. MD5 hash is identical. MD5: $file_md5_hash\n";
+                $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved\n";
             } else {
                 if (is_file(INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
                     rename(INT_DATA_DIR . '/GeoLite2-City.mmdb.old', $save_path);
                 }
-                $cron_runtime_log = date('Y-m-d H:i:s') . " -- Reverting all changes. MD5 hash not identical\n";
+                $cron_runtime_log = date('Y-m-d H:i:s') . " -- Reverting all changes\n";
             }
         } else {
             $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file not obtained\n";
