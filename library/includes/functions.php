@@ -2176,9 +2176,10 @@ function readUpdaterFile(): array|bool
  */
 function countryByIP(string $ipAddress): mixed
 {
-    $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
-    $record = null;
-    if (!$data = CACHE('bb_cache')->get('ip_' . $ipAddress)) {
+    $data = CACHE('bb_cache')->get('ip2countries');
+    if (!$data || !array_key_exists($ipAddress, $data)) {
+        $record = null;
+        $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
         try {
             $record = $cityDbReader->city($ipAddress);
             $show = $record->country->isoCode;
@@ -2187,7 +2188,7 @@ function countryByIP(string $ipAddress): mixed
         } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
             bb_die($e->getMessage());
         }
-        CACHE('bb_cache')->set('ip_' . $ipAddress, $show, 600);
+        CACHE('bb_cache')->set('ip2countries', [$ipAddress => $show], 600);
     }
-    return $data;
+    return $data[$ipAddress];
 }
