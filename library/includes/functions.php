@@ -2178,7 +2178,7 @@ function countryByIP(string $ipAddress): mixed
 {
     $data = CACHE('bb_cache')->get('ip2countries');
     if (!$data || !array_key_exists($ipAddress, $data)) {
-        $record = null;
+        $show = '';
         $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
         try {
             $record = $cityDbReader->city($ipAddress);
