@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Qaralar';
 $lang['ERROR'] = 'Səhv';
 $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Məlum deyil';
 
 $lang['NEXT_PAGE'] = 'Daha sonra';
 $lang['PREVIOUS_PAGE'] = 'Əvvəlki';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Noyabr';
 $lang['DATETIME']['DEC'] = 'Dekabr';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Heç bir seçim',
     'AD' => 'Andorra',
