@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Devre dışı';
 $lang['ERROR'] = 'Hata';
 $lang['SELECT_ACTION'] = 'Seçin eylem';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Bilinmeyen';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
 $lang['PREVIOUS_PAGE'] = 'Önceki';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Kas';
 $lang['DATETIME']['DEC'] = 'Ara';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Hayır seçin',
     'AD' => 'Andorra',
