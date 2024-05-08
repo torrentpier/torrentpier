@@ -2178,12 +2178,16 @@ function countryByIP(string $ipAddress): mixed
 {
     $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
     $record = null;
-    try {
-        $record = $cityDbReader->city($ipAddress);
-    } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
-        return 'Unknown';
-    } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
-        bb_die($e->getMessage());
+    if (!$data = CACHE('bb_cache')->get('ip_' . $ipAddress)) {
+        try {
+            $record = $cityDbReader->city($ipAddress);
+            $show = $record->country->isoCode;
+        } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
+            $show = 'Unknown';
+        } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
+            bb_die($e->getMessage());
+        }
+        CACHE('bb_cache')->set('ip_' . $ipAddress, $show, 600);
     }
-    return $record->country->isoCode;
+    return $data;
 }
