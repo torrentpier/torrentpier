@@ -404,9 +404,7 @@ $userdata =& $user->data;
  * Check for updates
  */
 if (readUpdaterFile()['previous_version'] < VERSION_CODE) {
-    if (is_file(BB_ROOT . 'install/updater.php') && copy(BB_ROOT . 'install/updater.php', BB_ROOT . 'updater.php')) {
-        redirect('updater.php');
-    }
+    require_once BB_ROOT . 'install/updater.php';
 }
 
 /**
