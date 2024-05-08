@@ -63,7 +63,7 @@ if (is_array($json_response) && !empty($json_response)) {
                     if (rename($old_file_path, $save_path)) {
                         $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Successfully reverted\n";
                     } else {
-                        $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Cannot revert changes\n";
+                        $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Cannot revert changes, because cannot rename old file\n";
                     }
                 } else {
                     $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Cannot revert changes, old file not found\n";
