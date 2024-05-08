@@ -2182,6 +2182,7 @@ function countryByIP(string $ipAddress): mixed
     } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
         return 'Unknown';
     } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
+        bb_die($e->getMessage());
     }
     return $record->country->isoCode;
 }
