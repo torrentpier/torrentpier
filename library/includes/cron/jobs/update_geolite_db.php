@@ -46,7 +46,7 @@ if ($repo_content !== false) {
 
 if (is_array($json_response) && !empty($json_response)) {
     $download_link = $json_response['assets'][1]['browser_download_url'];
-    $file_date = $json_response['assets'][1]['updated_at'] ?? '';
+    $file_date = $json_response['name'] ?? '';
     if (!empty($download_link)) {
         $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Link to download is valid: " . $download_link . "\n";
         $get_file = file_get_contents($download_link);
