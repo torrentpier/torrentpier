@@ -18,7 +18,7 @@ global $cron_runtime_log;
 $save_path = INT_DATA_DIR . '/GeoLite2-City.mmdb';
 $repo_link = 'https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest';
 
-if (rename($save_path, INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
+if (is_file($save_path) && rename($save_path, INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
     $cron_runtime_log = date('Y-m-d H:i:s') . " -- Successfully renamed GeoLite file\n";
 } else {
     $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot rename GeoLite file\n";
