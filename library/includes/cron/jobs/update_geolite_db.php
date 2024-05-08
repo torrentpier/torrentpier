@@ -46,6 +46,7 @@ if ($repo_content !== false) {
 
 if (is_array($json_response) && !empty($json_response)) {
     $download_link = $json_response['assets'][1]['browser_download_url'];
+    $file_date = $json_response['assets'][1]['updated_at'] ?? '';
     if (!empty($download_link)) {
         $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Link to download is valid: " . $download_link . "\n";
         $get_file = file_get_contents($download_link);
@@ -53,7 +54,7 @@ if (is_array($json_response) && !empty($json_response)) {
             $cron_runtime_log .= date('Y-m-d H:i:s') . " -- GeoLite file obtained\n";
             file_put_contents($save_path, $get_file); // Save new GeoLite file!
             if (is_file($save_path)) {
-                $cron_runtime_log .= date('Y-m-d H:i:s') . " -- GeoLite file successfully saved\n";
+                $cron_runtime_log .= date('Y-m-d H:i:s') . " -- GeoLite file successfully saved ($file_date)\n";
                 if (is_file($old_file_path) && unlink($old_file_path)) {
                     $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Old GeoLite file successfully removed (Second step)\n";
                 }
