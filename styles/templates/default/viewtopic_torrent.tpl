@@ -240,7 +240,7 @@ ajax.callback.callseed = function (data) {
 
         <div class="med tCenter mrg_4 warnColor1">{L_DL_INFO}</div>
         <hr>
-        <div class="med tCenter mrg_4">This product includes GeoLite2 data created by MaxMind, available from <a target="_blank" href="https://www.maxmind.com">https://www.maxmind.com</a>.</div>
+        <div class="med tCenter mrg_4">This DL-list includes GeoLite2 data created by MaxMind, available from <a target="_blank" href="https://www.maxmind.com">https://www.maxmind.com</a>.</div>
 
 		</div><!--/full_details-->
 		<!-- ENDIF / PEER_EXIST -->
