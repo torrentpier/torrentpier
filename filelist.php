@@ -90,7 +90,7 @@ foreach ($files as $file) {
 $data = [
     'name' => !empty($t_name = $torrent->getName()) ? htmlCHR(substr($t_name, 0, 255)) : 'undefined',
     'client' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR(substr($creator, 0, 20)) : 'unknown client',
-    'date' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : 'unknown',
+    'date' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : $lang['UNKNOWN'],
     'size' => humn_size($row['size'], 2),
     'file_count' => iterator_count($files),
     'site_url' => FULL_URL,

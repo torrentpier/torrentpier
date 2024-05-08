@@ -447,7 +447,7 @@ if ($tor_reged && $tor_info) {
                     $template->assign_block_vars("$x_full.$x_row", [
                         'ROW_BGR' => $row_bgr,
                         'NAME' => ($peer['update_time']) ? $name : "<s>$name</s>",
-                        'PEER_ID' => isset($peer['peer_id']) ? get_user_torrent_client($peer['peer_id']) : 'unknown',
+                        'PEER_ID' => isset($peer['peer_id']) ? get_user_torrent_client($peer['peer_id']) : $lang['UNKNOWN'],
                         'COUNTRY' => render_flag(countryByIP($ip, $port), false),
                         'COMPL_PRC' => $compl_perc,
                         'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>$up_tot</b>" : $up_tot,
