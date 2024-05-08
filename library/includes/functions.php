@@ -2177,6 +2177,7 @@ function readUpdaterFile(): array|bool
 function countryByIP(string $ipAddress): mixed
 {
     $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
+    $record = null;
     try {
         $record = $cityDbReader->city($ipAddress);
     } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
