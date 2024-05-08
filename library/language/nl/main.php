@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Uitgeschakeld';
 $lang['ERROR'] = 'Fout';
 $lang['SELECT_ACTION'] = 'Selecteer actie';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Onbekend';
 
 $lang['NEXT_PAGE'] = 'Volgende';
 $lang['PREVIOUS_PAGE'] = 'Vorige';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Geen selecteren',
     'AD' => 'Andorra',
