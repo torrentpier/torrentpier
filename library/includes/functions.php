@@ -2165,3 +2165,30 @@ function readUpdaterFile(): array|bool
 
     return false;
 }
+
+/**
+ * Show country ISO Code by user IP address
+ *
+ * @param string $ipAddress
+ * @param int $port
+ * @return mixed|string|null
+ */
+function countryByIP(string $ipAddress, int $port = 1111): mixed
+{
+    global $lang;
+
+    if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
+        $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
+        try {
+            $record = $cityDbReader->city($ipAddress);
+            $data = $record->country->isoCode;
+        } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
+            $data = $lang['UNKNOWN'];
+        } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
+            bb_die($e->getMessage());
+        }
+        CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
+    }
+
+    return $data;
+}

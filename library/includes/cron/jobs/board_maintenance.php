@@ -50,7 +50,7 @@ if ($posts_days = (int)$bb_cfg['posts_cache_days_keep']) {
 }
 
 // Autofill announcer url
-if (empty($bb_cfg['bt_announce_url'])) {
+if (empty($bb_cfg['bt_announce_url']) || ($bb_cfg['bt_announce_url'] === 'https://localhost/bt/announce.php')) {
     bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
 }
 
