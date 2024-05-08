@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Անջատված';
 $lang['ERROR'] = 'Սխալ է';
 $lang['SELECT_ACTION'] = 'Ընտրեք գործողությունը';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Հայտնի չէ';
 
 $lang['NEXT_PAGE'] = 'Ավելին';
 $lang['PREVIOUS_PAGE'] = 'Նախորդ';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Նոյեմբերի';
 $lang['DATETIME']['DEC'] = 'Դեկտեմբերի';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Ոչ մի ընտրություն',
     'AD' => 'Andorra',
