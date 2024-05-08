@@ -14,6 +14,7 @@ internal_data/log
 sitemap
 internal_data/triggers
 library/config.local.php
+updater.php
 vendor
 
 ### Archives ###
