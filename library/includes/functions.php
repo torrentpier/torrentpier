@@ -2170,25 +2170,22 @@ function readUpdaterFile(): array|bool
  * Show country ISO Code by user IP address
  *
  * @param string $ipAddress
+ * @param int $port
  * @return mixed|string|null
- * @throws \GeoIp2\Exception\AddressNotFoundException
- * @throws \MaxMind\Db\Reader\InvalidDatabaseException
  */
-function countryByIP(string $ipAddress): mixed
+function countryByIP(string $ipAddress, int $port = 1111): mixed
 {
-    $data = CACHE('bb_cache')->get('ip2countries');
-    if (!$data || !array_key_exists($ipAddress, $data)) {
-        $show = '';
+    if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
         $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
         try {
             $record = $cityDbReader->city($ipAddress);
-            $show = $record->country->isoCode;
+            $data = $record->country->isoCode;
         } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
-            $show = 'Unknown';
+            $data = 'Unknown';
         } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
             bb_die($e->getMessage());
         }
-        CACHE('bb_cache')->set('ip2countries', [$ipAddress => $show], 600);
+        CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
     }
-    return $data[$ipAddress];
+    return $data;
 }
