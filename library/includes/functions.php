@@ -2156,14 +2156,10 @@ function readUpdaterFile(): array|bool
         }
     }
 
-    if (!empty($str)) {
-        return [
-            'previous_version' => (int)$str[0],
-            'latest_version' => (int)$str[1],
-        ];
-    }
-
-    return false;
+    return [
+        'previous_version' => is_numeric($str[0]) ? (int)$str[0] : 0,
+        'latest_version' => is_numeric($str[1]) ? (int)$str[1] : 0
+    ];
 }
 
 /**

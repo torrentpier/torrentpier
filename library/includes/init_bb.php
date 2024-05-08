@@ -403,6 +403,10 @@ $userdata =& $user->data;
 /**
  * Check for updates
  */
+if (readUpdaterFile()['previous_version'] < VERSION_CODE) {
+    dump(VERSION_CODE);
+    // Update available
+}
 
 /**
  * Cron
