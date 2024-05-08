@@ -47,7 +47,7 @@ if (is_array($json_response) && !empty($json_response)) {
                 unlink(INT_DATA_DIR . '/GeoLite2-City.mmdb.old');
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved. MD5 hash is identical. MD5: $file_md5_hash\n";
             } else {
-                if (unlink($save_path)) {
+                if (is_file(INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
                     rename(INT_DATA_DIR . '/GeoLite2-City.mmdb.old', $save_path);
                 }
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- Reverting all changes. MD5 hash not identical\n";
