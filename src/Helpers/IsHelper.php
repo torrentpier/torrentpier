@@ -16,6 +16,17 @@ namespace TorrentPier\Helpers;
 class IsHelper
 {
     /**
+     * Determines if the current version of PHP is equal to or greater than the supplied value
+     *
+     * @param string $version
+     * @return bool TRUE if the current version is $version or higher
+     */
+    public static function isPHP(string $version): bool
+    {
+        return version_compare(PHP_VERSION, $version, '>=');
+    }
+
+    /**
      * Return true if server have SSL
      *
      * @return bool
