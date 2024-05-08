@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Invalīdiem';
 $lang['ERROR'] = 'Kļūda';
 $lang['SELECT_ACTION'] = 'Izvēlieties darbība';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Nav zināms';
 
 $lang['NEXT_PAGE'] = 'Nākamā';
 $lang['PREVIOUS_PAGE'] = 'Iepriekšējā';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Novembris';
 $lang['DATETIME']['DEC'] = 'Decembris';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Izvēlieties nē',
     'AD' => 'Andorra',
