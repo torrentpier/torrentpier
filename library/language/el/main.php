@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Με αναπηρία';
 $lang['ERROR'] = 'Σφάλμα';
 $lang['SELECT_ACTION'] = 'Επιλέξτε δράση';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Άγνωστο';
 
 $lang['NEXT_PAGE'] = 'Την επόμενη';
 $lang['PREVIOUS_PAGE'] = 'Προηγούμενο';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Όχι, επιλέξτε',
     'AD' => 'Andorra',
