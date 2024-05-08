@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Isključen';
 $lang['ERROR'] = 'Greška';
 $lang['SELECT_ACTION'] = 'Odaberite akciju';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Nepoznat';
 
 $lang['NEXT_PAGE'] = 'Dalje';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Studeni';
 $lang['DATETIME']['DEC'] = 'Prosinac';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Nema izbora',
     'AD' => 'Andorra',
