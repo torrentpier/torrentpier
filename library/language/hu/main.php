@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Fogyatékkal élő';
 $lang['ERROR'] = 'Hiba';
 $lang['SELECT_ACTION'] = 'Válassza ki a műveletet';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Ismeretlen';
 
 $lang['NEXT_PAGE'] = 'Következő';
 $lang['PREVIOUS_PAGE'] = 'Előző';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'November';
 $lang['DATETIME']['DEC'] = 'Fogyasszunk';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Válassza ki nem',
     'AD' => 'Andorra',
