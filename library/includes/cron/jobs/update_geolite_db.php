@@ -16,10 +16,14 @@ set_time_limit(600);
 global $cron_runtime_log;
 
 $save_path = INT_DATA_DIR . '/GeoLite2-City.mmdb';
+$old_file_path = INT_DATA_DIR . '/GeoLite2-City.mmdb.old';
 $repo_link = 'https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest';
 
 if (is_file($save_path)) {
-    if (rename($save_path, INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
+    if (is_file($old_file_path)) {
+        unlink($old_file_path);
+    }
+    if (rename($save_path, $old_file_path)) {
         $cron_runtime_log = date('Y-m-d H:i:s') . " -- Successfully renamed GeoLite file\n";
     } else {
         $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot rename GeoLite file\n";
@@ -47,12 +51,12 @@ if (is_array($json_response) && !empty($json_response)) {
         if ($get_file !== false) {
             $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file obtained\n";
             file_put_contents($save_path, $get_file);
-            if (is_file($save_path) && is_file(INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
-                unlink(INT_DATA_DIR . '/GeoLite2-City.mmdb.old');
+            if (is_file($save_path) && is_file($old_file_path)) {
+                unlink($old_file_path);
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved\n";
             } else {
-                if (is_file(INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
-                    rename(INT_DATA_DIR . '/GeoLite2-City.mmdb.old', $save_path);
+                if (is_file($old_file_path)) {
+                    rename($old_file_path, $save_path);
                 }
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- Reverting all changes\n";
             }
