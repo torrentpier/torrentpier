@@ -55,10 +55,16 @@ if (is_array($json_response) && !empty($json_response)) {
                 unlink($old_file_path);
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved\n";
             } else {
+                $cron_runtime_log = date('Y-m-d H:i:s') . " -- Reverting all changes...\n";
                 if (is_file($old_file_path)) {
-                    rename($old_file_path, $save_path);
+                    if (rename($old_file_path, $save_path)) {
+                        $cron_runtime_log = date('Y-m-d H:i:s') . " -- Successfully reverted\n";
+                    } else {
+                        $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot revert changes, old file not renamed\n";
+                    }
+                } else {
+                    $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot revert changes, old file not found\n";
                 }
-                $cron_runtime_log = date('Y-m-d H:i:s') . " -- Reverting all changes\n";
             }
         } else {
             $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file not obtained\n";
