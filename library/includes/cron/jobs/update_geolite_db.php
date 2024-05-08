@@ -19,7 +19,6 @@ $save_path = INT_DATA_DIR . '/GeoLite2-City.mmdb';
 $old_file_path = INT_DATA_DIR . '/GeoLite2-City.mmdb.old';
 $repo_link = 'https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest';
 
-// Remove old file if exists
 if (is_file($old_file_path)) {
     if (unlink($old_file_path)) {
         $cron_runtime_log = date('Y-m-d H:i:s') . " -- Old GeoLite file successfully removed\n";
@@ -54,7 +53,7 @@ if (is_array($json_response) && !empty($json_response)) {
         $get_file = file_get_contents($download_link);
         if ($get_file !== false) {
             $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file obtained\n";
-            file_put_contents($save_path, $get_file);
+            file_put_contents($save_path, $get_file); // Save new GeoLite file!
             if (is_file($save_path) && is_file($old_file_path)) {
                 unlink($old_file_path);
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved\n";
