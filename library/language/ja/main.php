@@ -61,6 +61,7 @@ $lang['DISABLED'] = '障害者';
 $lang['ERROR'] = 'エラー';
 $lang['SELECT_ACTION'] = '選択行動';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = '不明';
 
 $lang['NEXT_PAGE'] = '次へ';
 $lang['PREVIOUS_PAGE'] = '前';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = '月';
 $lang['DATETIME']['DEC'] = '年月日';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Noを選択',
     'AD' => 'Andorra',
