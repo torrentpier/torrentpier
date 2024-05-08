@@ -15,9 +15,14 @@ set_time_limit(600);
 
 global $cron_runtime_log;
 
-$data = [];
 $save_path = INT_DATA_DIR . '/GeoLite2-City.mmdb';
 $repo_link = 'https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest';
+
+if (rename($save_path, INT_DATA_DIR . '/GeoLite2-City.mmdb.old')) {
+    $cron_runtime_log = date('Y-m-d H:i:s') . " -- Successfully renamed GeoLite file\n";
+} else {
+    $cron_runtime_log = date('Y-m-d H:i:s') . " -- Cannot rename GeoLite file\n";
+}
 
 $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME]]);
 $repo_content = file_get_contents($repo_link, context: $context);
@@ -40,7 +45,13 @@ if (is_array($json_response) && !empty($json_response)) {
             $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file obtained\n";
             $new_file = file_put_contents($save_path, $get_file);
             if ($file_md5_hash === hash_file('md5', $new_file)) {
+                unlink(INT_DATA_DIR . '/GeoLite2-City.mmdb.old');
                 $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved. MD5 hash is identical. MD5: $file_md5_hash\n";
+            } else {
+                if (unlink($save_path)) {
+                    rename(INT_DATA_DIR . '/GeoLite2-City.mmdb.old', $save_path);
+                }
+                $cron_runtime_log = date('Y-m-d H:i:s') . " -- Reverting all changes. MD5 hash not identical\n";
             }
         } else {
             $cron_runtime_log = date('Y-m-d H:i:s') . " -- GeoLite file not obtained\n";
