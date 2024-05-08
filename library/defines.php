@@ -37,10 +37,7 @@ define('CHECK_REQIREMENTS', [
     'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
-        // 'gd', (optional)
-        // 'zlib', (optional)
         'curl',
-        // 'tidy', (optional)
         'mysqli',
         'bcmath',
         'mbstring',
