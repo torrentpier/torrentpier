@@ -19,10 +19,8 @@ $save_path = INT_DATA_DIR . '/GeoLite2-City.mmdb';
 $old_file_path = INT_DATA_DIR . '/GeoLite2-City.mmdb.old';
 $repo_link = 'https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest';
 
-if (is_file($old_file_path)) {
-    if (unlink($old_file_path)) {
-        $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Old GeoLite file successfully removed\n";
-    }
+if (is_file($old_file_path) && unlink($old_file_path)) {
+    $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Old GeoLite file successfully removed (First step)\n";
 }
 
 if (is_file($save_path)) {
@@ -32,7 +30,7 @@ if (is_file($save_path)) {
         $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Cannot create old GeoLite file\n";
     }
 } else {
-    $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Cannot find GeoLite file. Trying to download it...\n";
+    $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Cannot find GeoLite file (It's okay)\n";
 }
 
 $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME]]);
@@ -55,8 +53,10 @@ if (is_array($json_response) && !empty($json_response)) {
             $cron_runtime_log .= date('Y-m-d H:i:s') . " -- GeoLite file obtained\n";
             file_put_contents($save_path, $get_file); // Save new GeoLite file!
             if (is_file($save_path)) {
-                unlink($old_file_path);
                 $cron_runtime_log .= date('Y-m-d H:i:s') . " -- GeoLite file successfully saved\n";
+                if (is_file($old_file_path) && unlink($old_file_path)) {
+                    $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Old GeoLite file successfully removed (Second step)\n";
+                }
             } else {
                 $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Reverting all changes...\n";
                 if (is_file($old_file_path)) {
