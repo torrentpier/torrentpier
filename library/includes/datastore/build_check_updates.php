@@ -15,7 +15,7 @@ global $bb_cfg;
 
 $data = [];
 
-$context = stream_context_create(['http' => ['header' => 'User-Agent: TorrentPier Updater. With love!']]);
+$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME]]);
 $updater_content = file_get_contents(UPDATER_URL, context: $context);
 
 $json_response = false;
