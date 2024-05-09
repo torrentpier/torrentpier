@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'נכים';
 $lang['ERROR'] = 'שגיאה';
 $lang['SELECT_ACTION'] = 'בחר פעולה';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'לא ידוע';
 
 $lang['NEXT_PAGE'] = 'הבא';
 $lang['PREVIOUS_PAGE'] = 'הקודם';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'נובמבר';
 $lang['DATETIME']['DEC'] = 'דצמבר';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'לא בחר',
     'AD' => 'Andorra',

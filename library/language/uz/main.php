@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'nogironlar';
 $lang['ERROR'] = 'xato';
 $lang['SELECT_ACTION'] = 'tanlang harakat';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'noma\'lum';
 
 $lang['NEXT_PAGE'] = 'Keyingi';
 $lang['PREVIOUS_PAGE'] = 'avvalgi';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Hech tanlang',
     'AD' => 'Andorra',

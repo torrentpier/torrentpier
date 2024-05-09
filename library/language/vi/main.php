@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Vô hiệu hóa';
 $lang['ERROR'] = 'Lỗi';
 $lang['SELECT_ACTION'] = 'Chọn hành động';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Không rõ';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
 $lang['PREVIOUS_PAGE'] = 'Trước đó';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Ngày';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Không có chọn',
     'AD' => 'Andorra',
