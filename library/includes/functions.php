@@ -2148,8 +2148,11 @@ function getBanInfo(int $userId = null): ?array
  */
 function readUpdaterFile(): array|bool
 {
-    $str = [];
+    if (!is_file(UPDATER_FILE)) {
+        return false;
+    }
 
+    $str = [];
     if ($updaterFile = fopen(UPDATER_FILE, 'r')) {
         while (!feof($updaterFile)) {
             $str[] = trim(fgets($updaterFile));
