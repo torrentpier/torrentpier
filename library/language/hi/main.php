@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'विकलांग';
 $lang['ERROR'] = 'त्रुटि';
 $lang['SELECT_ACTION'] = 'कार्रवाई चुनें';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'अनजान';
 
 $lang['NEXT_PAGE'] = 'आगामी';
 $lang['PREVIOUS_PAGE'] = 'पिछला';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'नवम्बर';
 $lang['DATETIME']['DEC'] = 'दिसम्बर';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'कोई चयन नहीं',
     'AD' => 'Andorra',

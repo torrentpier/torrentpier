@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Puuetega';
 $lang['ERROR'] = 'Viga';
 $lang['SELECT_ACTION'] = 'Vali tegevus';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Teadmata';
 
 $lang['NEXT_PAGE'] = 'Järgmine';
 $lang['PREVIOUS_PAGE'] = 'Eelmine';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Kahanda';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Ei vali',
     'AD' => 'Andorra',

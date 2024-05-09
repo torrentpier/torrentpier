@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Keluarga';
 $lang['ERROR'] = 'Kesalahan';
 $lang['SELECT_ACTION'] = 'Pilih action';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Tidak diketahui';
 
 $lang['NEXT_PAGE'] = 'Berikutnya';
 $lang['PREVIOUS_PAGE'] = 'Sebelumnya';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Tidak ada pilih',
     'AD' => 'Andorra',

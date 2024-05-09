@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Zakázané';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akcie';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Neznáma';
 
 $lang['NEXT_PAGE'] = 'Ďalej';
 $lang['PREVIOUS_PAGE'] = 'Predchádzajúce';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'November';
 $lang['DATETIME']['DEC'] = 'Dec.';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Vyberte položku č.',
     'AD' => 'Andorra',

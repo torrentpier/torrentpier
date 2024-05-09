@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Искључен';
 $lang['ERROR'] = 'Грешка';
 $lang['SELECT_ACTION'] = 'Изаберите акцију';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Непознато';
 
 $lang['NEXT_PAGE'] = 'Даље';
 $lang['PREVIOUS_PAGE'] = 'Претходних';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Новембра';
 $lang['DATETIME']['DEC'] = 'Децембра';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Нема избора',
     'AD' => 'Andorra',

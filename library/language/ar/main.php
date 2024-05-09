@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'تعطيل';
 $lang['ERROR'] = 'خطأ';
 $lang['SELECT_ACTION'] = 'اختر العمل';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'غير معروف';
 
 $lang['NEXT_PAGE'] = 'القادم';
 $lang['PREVIOUS_PAGE'] = 'السابقة';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'نوفمبر';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'لا تحديد',
     'AD' => 'Andorra',

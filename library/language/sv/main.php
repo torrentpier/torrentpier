@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Funktionshindrade';
 $lang['ERROR'] = 'Fel';
 $lang['SELECT_ACTION'] = 'Välj åtgärder';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Okänd';
 
 $lang['NEXT_PAGE'] = 'Nästa';
 $lang['PREVIOUS_PAGE'] = 'Föregående';
@@ -978,6 +979,7 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
     0 => 'Välj',
     'AD' => 'Andorra',
