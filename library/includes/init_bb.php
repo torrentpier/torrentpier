@@ -403,7 +403,8 @@ $userdata =& $user->data;
 /**
  * Check for updates
  */
-if (readUpdaterFile()['previous_version'] < VERSION_CODE) {
+$updaterFile = readUpdaterFile();
+if ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE)) {
     require_once BB_ROOT . 'install/updater.php';
 }
 
