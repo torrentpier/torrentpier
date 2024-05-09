@@ -597,6 +597,11 @@ input.long {
   padding-right: 20px;
 }
 
+.buttons input {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
 .buttons input:hover {
   border: 1px solid #DEDEDE;
   background: #FFF;
