@@ -78,6 +78,7 @@ $bb_cfg['cache'] = [
         'bb_cap_sid' => ['filecache', []],
         'bb_login_err' => ['filecache', []],
         'bb_poll_data' => ['filecache', []],
+        'bb_ip2countries' => ['filecache', []],
     ],
 ];
 

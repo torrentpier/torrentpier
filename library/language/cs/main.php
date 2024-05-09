@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Zdravotně postižené';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akce';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Neznámý';
 
 $lang['NEXT_PAGE'] = 'Další';
 $lang['PREVIOUS_PAGE'] = 'Předchozí';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Prosinec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Ne, zvolte',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikněte %sHere%s vrátit Zakázat uživ
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informace O Verzi';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Povolených pokusů o přihlášení';

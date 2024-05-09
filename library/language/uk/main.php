@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Вимкнено';
 $lang['ERROR'] = 'Помилка';
 $lang['SELECT_ACTION'] = 'Виберіть дію';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Не вказана';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
 $lang['PREVIOUS_PAGE'] = 'Попер.';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Лис';
 $lang['DATETIME']['DEC'] = 'Гру';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Не вказано',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sПовернутися до керув�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Інформація про версію';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Дозволених спроб входу';

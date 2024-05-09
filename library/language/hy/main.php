@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Անջատված';
 $lang['ERROR'] = 'Սխալ է';
 $lang['SELECT_ACTION'] = 'Ընտրեք գործողությունը';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Հայտնի չէ';
 
 $lang['NEXT_PAGE'] = 'Ավելին';
 $lang['PREVIOUS_PAGE'] = 'Նախորդ';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Նոյեմբերի';
 $lang['DATETIME']['DEC'] = 'Դեկտեմբերի';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Ոչ մի ընտրություն',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2285,6 +2288,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Սեղմեք %sHere%s վերադարձն�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Տեղեկություններ Տարբերակը';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Թույլատրված մուտք փորձերը';

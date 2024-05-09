@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'تعطيل';
 $lang['ERROR'] = 'خطأ';
 $lang['SELECT_ACTION'] = 'اختر العمل';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'غير معروف';
 
 $lang['NEXT_PAGE'] = 'القادم';
 $lang['PREVIOUS_PAGE'] = 'السابقة';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'نوفمبر';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'لا تحديد',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'انقر فوق %sHere%s للعودة إ�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'معلومات الإصدار';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'يسمح محاولات تسجيل الدخول';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = '장애인';
 $lang['ERROR'] = '류';
 $lang['SELECT_ACTION'] = '선택 작업';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = '알 수 없음';
 
 $lang['NEXT_PAGE'] = '다음';
 $lang['PREVIOUS_PAGE'] = '이전';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => '아무 선택',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '클릭 %sHere%s 하는 반품을 허용�
 // Version Check
 $lang['VERSION_INFORMATION'] = '버전 정보';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = '허용하는 로그인을 시도';

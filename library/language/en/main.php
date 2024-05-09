@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Disabled';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Select action';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Unknown';
 
 $lang['NEXT_PAGE'] = 'Next';
 $lang['PREVIOUS_PAGE'] = 'Previous';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'No select',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Click %sHere%s to return to Disallow User
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Information';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Allowed login attempts';

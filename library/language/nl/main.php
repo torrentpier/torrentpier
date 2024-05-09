@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Uitgeschakeld';
 $lang['ERROR'] = 'Fout';
 $lang['SELECT_ACTION'] = 'Selecteer actie';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Onbekend';
 
 $lang['NEXT_PAGE'] = 'Volgende';
 $lang['PREVIOUS_PAGE'] = 'Vorige';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Geen selecteren',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik op %sHere%s om terug te keren naar h
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versie-Informatie';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Inlogpogingen';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Isključen';
 $lang['ERROR'] = 'Greška';
 $lang['SELECT_ACTION'] = 'Odaberite akciju';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Nepoznat';
 
 $lang['NEXT_PAGE'] = 'Dalje';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Studeni';
 $lang['DATETIME']['DEC'] = 'Prosinac';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Nema izbora',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2285,6 +2288,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliknite %sHere%s vratiti zabraniti Uprav
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informacije O Verziji';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Dozvoljenih pokušaja prijave';

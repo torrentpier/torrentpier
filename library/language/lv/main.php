@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Invalīdiem';
 $lang['ERROR'] = 'Kļūda';
 $lang['SELECT_ACTION'] = 'Izvēlieties darbība';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Nav zināms';
 
 $lang['NEXT_PAGE'] = 'Nākamā';
 $lang['PREVIOUS_PAGE'] = 'Iepriekšējā';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Novembris';
 $lang['DATETIME']['DEC'] = 'Decembris';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Izvēlieties nē',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Noklikšķiniet uz %sHere%s atgriezties, 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versijas Informācija';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Atļauts pieteikšanās mēģinājumiem';

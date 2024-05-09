@@ -151,12 +151,13 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
-				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: false}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -174,6 +175,7 @@ ajax.callback.callseed = function (data) {
 				<td>{sfull.srow.port.PORT}</td>
 				<!-- END port -->
                 <td>{sfull.srow.PEER_ID}</td>
+                <td>{sfull.srow.COUNTRY}</td>
 			</tr>
 			<!-- END srow -->
 			</table>
@@ -202,12 +204,13 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
-				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: false}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
                 <!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
@@ -225,6 +228,7 @@ ajax.callback.callseed = function (data) {
 				<td>{lfull.lrow.port.PORT}</td>
 				<!-- END port -->
                 <td>{lfull.lrow.PEER_ID}</td>
+                <td>{lfull.lrow.COUNTRY}</td>
 			</tr>
 			<!-- END lrow -->
 			</table>
@@ -234,7 +238,9 @@ ajax.callback.callseed = function (data) {
 		</table>
 		<!-- END lfull -->
 
-		<div class="med tCenter mrg_4 warnColor1">{L_DL_INFO}</div>
+        <div class="med tCenter mrg_4 warnColor1">{L_DL_INFO}</div>
+        <hr>
+        <div class="med tCenter mrg_4">This DL-list includes GeoLite2 data created by MaxMind, available from <a target="_blank" href="https://www.maxmind.com">https://www.maxmind.com</a>.</div>
 
 		</div><!--/full_details-->
 		<!-- ENDIF / PEER_EXIST -->

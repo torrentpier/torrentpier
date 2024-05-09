@@ -87,7 +87,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'UPDATE_AVAILABLE' => $update_data['available_update'],
         'NEW_VERSION_NUMBER' => $update_data['latest_version'],
         'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
-        'NEW_VERSION_DL_LINK' => $update_data['latest_version_link']
+        'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
+        'NEW_VERSION_LINK' => $update_data['latest_version_link'],
     ]);
 
     // Get forum statistics

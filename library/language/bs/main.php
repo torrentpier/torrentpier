@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Onesposobili';
 $lang['ERROR'] = 'Greška';
 $lang['SELECT_ACTION'] = 'Odaberite akciju';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Nepoznati';
 
 $lang['NEXT_PAGE'] = 'Sljedeći';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Novembar';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Ne odaberite',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s da se vrati u Disallow kori
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Verziju Informacije';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Dozvoljeno prijavu pokušava';

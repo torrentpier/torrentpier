@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'маъюб';
 $lang['ERROR'] = 'хатогӣ';
 $lang['SELECT_ACTION'] = 'Интихоб кунед амал';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'номашҳур';
 
 $lang['NEXT_PAGE'] = 'Баъдӣ';
 $lang['PREVIOUS_PAGE'] = 'гузашта';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Дек';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Не-ро интихоб кунед',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s ангушт занед баро
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Маълумот Version';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'кӯшишҳои воридшавӣ Ичозат';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'ปิดการใช้งาน';
 $lang['ERROR'] = 'เกิดข้อผิดพลาด';
 $lang['SELECT_ACTION'] = 'เลือกการกระทำ';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'ไม่ทราบ';
 
 $lang['NEXT_PAGE'] = 'ต่อไป';
 $lang['PREVIOUS_PAGE'] = 'ก่อนหน้านี้';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'พ.ย.';
 $lang['DATETIME']['DEC'] = 'ธ.ค.';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'ไม่เลือก',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'คลิก %sHere%s จะกลับ�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'ข้อมูลของรุ่น';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'อนุญาตให้ล็อกอินพยายาม';

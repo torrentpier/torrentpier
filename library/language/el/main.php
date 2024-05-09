@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Με αναπηρία';
 $lang['ERROR'] = 'Σφάλμα';
 $lang['SELECT_ACTION'] = 'Επιλέξτε δράση';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Άγνωστο';
 
 $lang['NEXT_PAGE'] = 'Την επόμενη';
 $lang['PREVIOUS_PAGE'] = 'Προηγούμενο';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Όχι, επιλέξτε',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Κάντε κλικ %sHere%s να επι�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Πληροφορίες Για Την Έκδοση';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Επιτρέπεται προσπάθειες σύνδεσης';

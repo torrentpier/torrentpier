@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Dezactivate';
 $lang['ERROR'] = 'Eroare';
 $lang['SELECT_ACTION'] = 'Selectați acțiune';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Necunoscut';
 
 $lang['NEXT_PAGE'] = 'Următoarea';
 $lang['PREVIOUS_PAGE'] = 'Anterior';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Nu selectați',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Faceți clic pe %sHere%s să se întoarc�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informațiile De Versiune';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Permis de încercări de autentificare';

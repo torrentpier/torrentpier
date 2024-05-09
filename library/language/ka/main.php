@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'შეზღუდული შესაძლებლო�
 $lang['ERROR'] = 'შეცდომა';
 $lang['SELECT_ACTION'] = 'აირჩიეთ აქცია';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'უცნობი';
 
 $lang['NEXT_PAGE'] = 'შემდეგი';
 $lang['PREVIOUS_PAGE'] = 'წინა';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'ნოე';
 $lang['DATETIME']['DEC'] = 'საოლქო საარჩევნო კომისიის';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'არა აირჩიეთ',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'დააჭირეთ %sHere%s და�
 // Version Check
 $lang['VERSION_INFORMATION'] = 'ვერსია ინფორმაცია';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'დაშვებული შესვლა მცდელობა';

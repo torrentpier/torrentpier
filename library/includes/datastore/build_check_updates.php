@@ -15,7 +15,7 @@ global $bb_cfg;
 
 $data = [];
 
-$context = stream_context_create(['http' => ['header' => 'User-Agent: TorrentPier Updater. With love!']]);
+$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME]]);
 $updater_content = file_get_contents(UPDATER_URL, context: $context);
 
 $json_response = false;
@@ -38,7 +38,8 @@ if (is_array($json_response) && !empty($json_response)) {
         'available_update' => $has_update,
         'latest_version' => $get_version,
         'latest_version_size' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
-        'latest_version_link' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url']
+        'latest_version_dl_link' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url'],
+        'latest_version_link' => $json_response['html_url']
     ];
 }
 

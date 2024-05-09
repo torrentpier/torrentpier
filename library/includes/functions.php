@@ -1187,16 +1187,24 @@ function get_user_torrent_client(string $peer_id): string
  * Returns country flag by country code
  *
  * @param string $code
+ * @param bool $showName
  * @return string
  */
-function render_flag(string $code): string
+function render_flag(string $code, bool $showName = true): string
 {
     global $lang;
     static $iconExtension = '.svg';
 
-    $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
-    if (isset($lang['COUNTRIES'][$code]) && is_file($flagIconPath)) {
-        return '<img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '" title="' . $lang['COUNTRIES'][$code] . '">';
+    if (isset($lang['COUNTRIES'][$code])) {
+        if ($code === '0') {
+            return ''; // No selected
+        } else {
+            $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
+            if (is_file($flagIconPath)) {
+                $countryName = $showName ? '&nbsp;' . str_short($lang['COUNTRIES'][$code], 20) : '';
+                return '<span title="' . $lang['COUNTRIES'][$code] . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
+            }
+        }
     }
 
     return $code;
@@ -2157,4 +2165,31 @@ function readUpdaterFile(): array|bool
     }
 
     return false;
+}
+
+/**
+ * Show country ISO Code by user IP address
+ *
+ * @param string $ipAddress
+ * @param int $port
+ * @return mixed|string|null
+ */
+function countryByIP(string $ipAddress, int $port = 1111): mixed
+{
+    global $lang;
+
+    if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
+        $cityDbReader = new \GeoIp2\Database\Reader(INT_DATA_DIR . '/GeoLite2-City.mmdb');
+        try {
+            $record = $cityDbReader->city($ipAddress);
+            $data = $record->country->isoCode;
+        } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
+            $data = $lang['UNKNOWN'];
+        } catch (\MaxMind\Db\Reader\InvalidDatabaseException $e) {
+            bb_die($e->getMessage());
+        }
+        CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
+    }
+
+    return $data;
 }

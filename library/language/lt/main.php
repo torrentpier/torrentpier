@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Neįgaliesiems';
 $lang['ERROR'] = 'Klaida';
 $lang['SELECT_ACTION'] = 'Pasirinkite veiksmą';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Nežinomas';
 
 $lang['NEXT_PAGE'] = 'Kitas';
 $lang['PREVIOUS_PAGE'] = 'Ankstesnis';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Lapkritis';
 $lang['DATETIME']['DEC'] = 'Gruodis';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Pasirinkite nr.',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Spustelėkite %sHere%s grįžti į Neleis
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versijos Informacija';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Leidžiama prisijungti kartų';

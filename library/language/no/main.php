@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Funksjonshemmede';
 $lang['ERROR'] = 'Feil';
 $lang['SELECT_ACTION'] = 'Velg handling';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Ukjent';
 
 $lang['NEXT_PAGE'] = 'Neste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Ingen velger',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikk %sHere%s for å gå tilbake til å 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versjon Informasjon';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Tillatt påloggingsforsøk';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Funktionshindrade';
 $lang['ERROR'] = 'Fel';
 $lang['SELECT_ACTION'] = 'Välj åtgärder';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Okänd';
 
 $lang['NEXT_PAGE'] = 'Nästa';
 $lang['PREVIOUS_PAGE'] = 'Föregående';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Välj',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klicka %sHere%s att återvända för att 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Information';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Tillåtna inloggningsförsök';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Discapacitats';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Seleccioneu acció';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Desconegut';
 
 $lang['NEXT_PAGE'] = 'Següent';
 $lang['PREVIOUS_PAGE'] = 'Anteriors';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Feb';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'No seleccioneu',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Feu clic %sHere%s per tornar a Rebutjar e
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informació De La Versió';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Admesos els intents d\'inici de sessió';

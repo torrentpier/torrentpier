@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Désactivé';
 $lang['ERROR'] = 'Erreur';
 $lang['SELECT_ACTION'] = 'Sélectionnez l\'action';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Inconnu';
 
 $lang['NEXT_PAGE'] = 'Prochaine';
 $lang['PREVIOUS_PAGE'] = 'Précédente';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Pas de sélectionner',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Cliquez sur %sHere%s pour revenir à Inte
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Les Informations De Version';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Permis de tentatives de connexion';

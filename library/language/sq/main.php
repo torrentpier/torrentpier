@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Me aftësi të kufizuara';
 $lang['ERROR'] = 'Gabim';
 $lang['SELECT_ACTION'] = 'Zgjidhni veprim';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'I panjohur';
 
 $lang['NEXT_PAGE'] = 'Tjetër';
 $lang['PREVIOUS_PAGE'] = 'E mëparshme';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nëntor';
 $lang['DATETIME']['DEC'] = 'Dhj';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Nuk ka zgjidhni',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliko %sHere%s të kthehen për të Lejoj
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Informacion';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Lejohet të identifikoheni përpjekjet';

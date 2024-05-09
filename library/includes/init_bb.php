@@ -28,7 +28,7 @@ define('USER_IP', $user_ip);
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
 
 // Version code
-define('VERSION_CODE', (int)trim(str_replace(['.', 'v', ','], '', strstr($bb_cfg['tp_version'], '-', true))));
+define('VERSION_CODE', (int)trim(str_replace(['.', 'v', ','], '', $bb_cfg['tp_version'])));
 
 /**
  * @param $contents
@@ -394,15 +394,15 @@ require_once INC_DIR . '/functions.php';
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
 $log_action = new TorrentPier\Legacy\LogAction();
+$wordCensor = new TorrentPier\Censor();
 $html = new TorrentPier\Legacy\Common\Html();
 $user = new TorrentPier\Legacy\Common\User();
 
 $userdata =& $user->data;
 
 /**
- * Word censor
+ * Check for updates
  */
-$wordCensor = new \TorrentPier\Censor();
 
 /**
  * Cron

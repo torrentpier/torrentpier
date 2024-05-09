@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'мүгедек';
 $lang['ERROR'] = 'қателік';
 $lang['SELECT_ACTION'] = 'әрекетті таңдаңыз';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'белгісіз';
 
 $lang['NEXT_PAGE'] = 'Келесі';
 $lang['PREVIOUS_PAGE'] = 'алдыңғы';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'жоқ таңдаңыз',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Көрсетуді доғару аты Ә
 // Version Check
 $lang['VERSION_INFORMATION'] = 'нұсқа ақпарат';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Кіру талпыныстар';

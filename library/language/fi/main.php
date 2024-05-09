@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Käytöstä';
 $lang['ERROR'] = 'Virhe';
 $lang['SELECT_ACTION'] = 'Valitse toiminta';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Tuntematon';
 
 $lang['NEXT_PAGE'] = 'Seuraava';
 $lang['PREVIOUS_PAGE'] = 'Edellinen';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Ei valitse',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikkaa %sHere%s palata Estää Käyttäj
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Tiedot';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Sallittu kirjautumisyritysten';

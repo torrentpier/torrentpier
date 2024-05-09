@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Puuetega';
 $lang['ERROR'] = 'Viga';
 $lang['SELECT_ACTION'] = 'Vali tegevus';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Teadmata';
 
 $lang['NEXT_PAGE'] = 'Järgmine';
 $lang['PREVIOUS_PAGE'] = 'Eelmine';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Kahanda';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Ei vali',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2282,6 +2285,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klõpsake %sHere%s tagasi Keelata Kasutaj
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versiooni Informatsioon';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Lubatud login katseid';

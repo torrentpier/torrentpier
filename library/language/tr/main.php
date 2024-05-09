@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Devre dışı';
 $lang['ERROR'] = 'Hata';
 $lang['SELECT_ACTION'] = 'Seçin eylem';
 $lang['CLEAR'] = 'Clear';
+$lang['UNKNOWN'] = 'Bilinmeyen';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
 $lang['PREVIOUS_PAGE'] = 'Önceki';
@@ -978,7 +979,9 @@ $lang['DATETIME']['NOV'] = 'Kas';
 $lang['DATETIME']['DEC'] = 'Ara';
 
 // Country selector
+$lang['COUNTRY'] = 'Country';
 $lang['COUNTRIES'] = [
+    0 => 'Hayır seçin',
     'AD' => 'Andorra',
     'AE' => 'United Arab Emirates',
     'AF' => 'Afghanistan',
@@ -2286,6 +2289,7 @@ $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s Kullanıcı adı Yönetim izin V
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Sürüm Bilgileri';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
+$lang['CHANGELOG'] = 'Changelog';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'İzin verilen oturum açma girişimleri';
