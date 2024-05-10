@@ -45,7 +45,7 @@ foreach ($cron_jobs as $job) {
 
     if (is_file($job_script)) {
         $cron_start_time = utime();
-        $cron_runtime_log = '';
+        $cron_runtime_log = [];
         $cron_write_log = (CRON_LOG_ENABLED && (CRON_FORCE_LOG || $job['log_enabled'] >= 1));
         $cron_sql_log_file = CRON_LOG_DIR . '/SQL-' . basename($job['cron_script']);
 
@@ -83,9 +83,10 @@ foreach ($cron_jobs as $job) {
             $msg .= LOG_LF . '------=-------=----------=------=-------=----------';
             bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
 
-            if ($cron_runtime_log) {
+            if (is_countable($cron_runtime_log)) {
                 $runtime_log_file = ($job['log_file']) ?: $job['cron_script'];
-                bb_log($cron_runtime_log . LOG_LF, CRON_LOG_DIR . '/' . basename($runtime_log_file));
+                $cron_runtime_log[] = '';
+                bb_log($cron_runtime_log, CRON_LOG_DIR . '/' . basename($runtime_log_file));
             }
         }
 

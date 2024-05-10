@@ -25,7 +25,7 @@ if ($updater_content !== false) {
 
 if (is_array($json_response) && !empty($json_response)) {
     $get_version = $json_response['tag_name'];
-    $version_code_actual = (int)trim(str_replace(['.', 'v', ','], '', $get_version));
+    $version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
     $has_update = VERSION_CODE < $version_code_actual;
 
     // Save current version & latest available
