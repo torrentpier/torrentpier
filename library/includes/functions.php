@@ -2172,7 +2172,7 @@ function readUpdaterFile(): array|bool
  * @param int $port
  * @return mixed|string|null
  */
-function countryByIP(string $ipAddress, int $port = 1111): mixed
+function getCountryByIP(string $ipAddress, int $port = 1111): mixed
 {
     global $lang;
 
