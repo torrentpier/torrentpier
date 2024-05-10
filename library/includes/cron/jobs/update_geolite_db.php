@@ -50,8 +50,9 @@ if (is_array($json_response) && !empty($json_response)) {
     if (!empty($download_link)) {
         $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- Link to download is valid: " . $download_link;
         $get_file = file_get_contents($download_link);
+        $get_file_md5 = md5_file($download_link);
         if ($get_file !== false) {
-            $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- GeoLite file obtained";
+            $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- GeoLite file obtained. MD5: $get_file_md5";
             file_put_contents($save_path, $get_file); // Save new GeoLite file!
             if (is_file($save_path)) {
                 $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved ($file_date)";
