@@ -405,8 +405,7 @@ $userdata =& $user->data;
  */
 $updaterFile = readUpdaterFile();
 if ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE)) {
-    define('IN_UPDATER', true);
-    require_once BB_ROOT . 'install/updater.php';
+    // TODO
 }
 
 /**
