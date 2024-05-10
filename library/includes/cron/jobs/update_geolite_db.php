@@ -55,7 +55,7 @@ if (is_array($json_response) && !empty($json_response)) {
             $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- GeoLite file obtained. MD5: $get_file_md5";
             file_put_contents($save_path, $get_file); // Save new GeoLite file!
             if (is_file($save_path) && ($get_file_md5 === md5_file($save_path))) {
-                $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved ($file_date)";
+                $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- GeoLite file successfully saved ($file_date). MD5 hashes are identical";
                 if (is_file($old_file_path) && unlink($old_file_path)) {
                     $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- Old GeoLite file successfully removed (Second step)";
                 }
