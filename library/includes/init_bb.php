@@ -404,7 +404,8 @@ $userdata =& $user->data;
  * Check for updates
  */
 $updaterFile = readUpdaterFile();
-if ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE)) {
+if (IS_SUPER_ADMIN && ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE))) {
+    define('IN_UPDATER', true);
     require_once BB_ROOT . 'install/updater.php';
 }
 
