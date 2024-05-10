@@ -405,7 +405,7 @@ $userdata =& $user->data;
  */
 $updaterFile = readUpdaterFile();
 if ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE)) {
-    // TODO
+    define('IN_UPDATER', true);
 }
 
 /**
