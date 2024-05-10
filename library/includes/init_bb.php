@@ -28,7 +28,7 @@ define('USER_IP', $user_ip);
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
 
 // Version code
-define('VERSION_CODE', (int)trim(str_replace(['.', 'v', ','], '', $bb_cfg['tp_version'])));
+define('VERSION_CODE', (int)trim(str_replace(['.', 'v'], '', $bb_cfg['tp_version'])));
 
 /**
  * @param $contents
@@ -404,7 +404,7 @@ $userdata =& $user->data;
  * Check for updates
  */
 $updaterFile = readUpdaterFile();
-if (IS_SUPER_ADMIN && ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE))) {
+if ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE)) {
     define('IN_UPDATER', true);
     require_once BB_ROOT . 'install/updater.php';
 }
