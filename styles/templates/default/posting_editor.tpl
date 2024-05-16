@@ -156,28 +156,23 @@ function checkForm(form) {
 <!-- IF IN_PM -->
 <!-- ELSE -->
 <!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
-    if (form.message.value.length < 100 && submitted) {
-        setTimeout(function () {
-            let actions = {
-                notify: 0,
-                anonymous_mode: 0
-            };
-            $('input[name="notify"], input[name="anonymous_mode"]').each(function () {
-                let action = $(this).attr('name');
-                actions[action] = $(this).prop('checked') ? 1 : 0;
-            });
+	if(form.message.value.length < 100 && submitted)
+	{
+		setTimeout(function() {
+			if ($('input[name="notify"]').attr('checked') == 'checked') {
+				var notify = 1;
+			}
 
-            ajax.exec({
-                action: 'posts',
-                type: 'add',
-                message: $('textarea#message').val(),
-                topic_id: {TOPIC_ID},
-                notify: actions["notify"],
-                anonymous_mode: actions["anonymous_mode"],
-            });
-        }, 100);
-        return false;
-    }
+			ajax.exec({
+				action   : 'posts',
+				type     : 'add',
+				message  : $('textarea#message').val(),
+				topic_id : {TOPIC_ID},
+				notify   : notify,
+			});
+		}, 100);
+		return false;
+	}
 <!-- ENDIF -->
 <!-- ENDIF -->
 <!-- ENDIF -->
