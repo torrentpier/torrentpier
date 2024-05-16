@@ -37,7 +37,7 @@ foreach (file($dump_path) as $line) {
     $temp_line .= $line;
     if (str_ends_with(trim($line), ';')) {
         if (!DB()->query($temp_line)) {
-            $cron_runtime_log .= date('Y-m-d H:i:s') . " -- Error performing query: " . $temp_line . " | " . DB()->sql_error()['message'] . "\n";
+            $cron_runtime_log[] = date('Y-m-d H:i:s') . " -- Error performing query: " . $temp_line . " | " . DB()->sql_error()['message'];
         }
         $temp_line = '';
     }
