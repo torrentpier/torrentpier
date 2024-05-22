@@ -33,8 +33,6 @@ $RECYCLE.BIN/
 *.lnk
 *.bat
 *.ver
-*.mmdb
-*.mmdb.old
 
 ### OSX ###
 .DS_Store
