@@ -2172,7 +2172,7 @@ function readUpdaterFile(): array|bool
  * @param int $port
  * @return mixed|string|null
  */
-function infoByIP(string $ipAddress, int $port = 1111): mixed
+function infoByIP(string $ipAddress, int $port = 0): mixed
 {
     if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
         $response = file_get_contents(API_IP_URL . $ipAddress);
