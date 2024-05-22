@@ -32,6 +32,7 @@ define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 define('APP_NAME', 'TorrentPier');
 define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases/latest');
 define('UPDATER_FILE', INT_DATA_DIR . '/updater.ver');
+define('API_IP_URL', 'https://freeipapi.com/api/json/');
 define('CHECK_REQIREMENTS', [
     'status' => true,
     'php_min_version' => '8.1.0',

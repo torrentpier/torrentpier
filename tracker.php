@@ -46,7 +46,7 @@ $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
 $search_id = (isset($_GET['search_id']) && is_string($_GET['search_id'])) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
-$status = (isset($_POST['status']) && is_countable($_POST['status'])) ? (array)$_POST['status'] : [];
+$status = (isset($_POST['status']) && is_array($_POST['status'])) ? $_POST['status'] : [];
 
 $cat_forum = $tor_to_show = $search_in_forums_ary = [];
 $title_match_sql = $title_match_q = $search_in_forums_csv = '';
