@@ -654,9 +654,6 @@ VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00
         '0',
         '0', '0'),
        ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '255', '', '', '', '1', 'demo_mode_cron', '1', '1',
-        '0'),
-       ('1', 'Update GeoLite DB', 'update_geolite_db.php', 'daily', '', '05:00:00', '255', '', '', '', '1',
-        'update_geolite_db', '1', '1',
         '0');
 
 -- ----------------------------
