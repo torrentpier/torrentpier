@@ -2175,6 +2175,7 @@ function readUpdaterFile(): array|bool
 function infoByIP(string $ipAddress, int $port = 0): array
 {
     if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
+        $data = [];
         $response = file_get_contents(API_IP_URL . $ipAddress);
         $json = json_decode($response, true);
         if (is_array($json) && !empty($json)) {
@@ -2185,8 +2186,6 @@ function infoByIP(string $ipAddress, int $port = 0): array
                 'continentCode' => $json['continentCode']
             ];
             CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
-        } else {
-            $data = [];
         }
     }
 
