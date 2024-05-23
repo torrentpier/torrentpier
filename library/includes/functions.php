@@ -2170,14 +2170,23 @@ function readUpdaterFile(): array|bool
  *
  * @param string $ipAddress
  * @param int $port
- * @return mixed|string|null
+ * @return array
  */
-function infoByIP(string $ipAddress, int $port = 0): mixed
+function infoByIP(string $ipAddress, int $port = 0): array
 {
     if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
+        $data = [];
         $response = file_get_contents(API_IP_URL . $ipAddress);
-        $data = json_decode($response, true);
-        CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
+        $json = json_decode($response, true);
+        if (is_array($json) && !empty($json)) {
+            $data = [
+                'ipVersion' => $json['ipVersion'],
+                'countryCode' => $json['countryCode'],
+                'continent' => $json['continent'],
+                'continentCode' => $json['continentCode']
+            ];
+            CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
+        }
     }
 
     return $data;
