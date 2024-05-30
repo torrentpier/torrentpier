@@ -60,9 +60,9 @@ function toggle_cbox (cb_id, tr_id)
 	<!-- //bot end -->
 	<tr>
 		<td colspan="2" class="catBottom">
-			<input type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;">
-			<input type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 215px;">
-			<input type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 280px;">
+			<input type="submit" name="delete_posts" value="{L_DELETE_POSTS}">
+			<input type="submit" name="split_type_all" value="{L_SPLIT_POSTS}">
+			<input type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}">
 		</td>
 	</tr>
 </table>
@@ -91,9 +91,9 @@ function toggle_cbox (cb_id, tr_id)
 	<tr>
 		<td class="catBottom" colspan="3">
 			<input type="hidden" name="confirm" value="1">
-			<input class="liteoption" type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;">
-			<input class="liteoption" type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 210px;">
-			<input class="liteoption" type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 270px;">
+			<input class="liteoption" type="submit" name="delete_posts" value="{L_DELETE_POSTS}">
+			<input class="liteoption" type="submit" name="split_type_all" value="{L_SPLIT_POSTS}">
+			<input class="liteoption" type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}">
 		{S_HIDDEN_FIELDS}
 		</td>
 	</tr>
