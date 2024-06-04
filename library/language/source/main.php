@@ -2524,9 +2524,6 @@ $lang['RETURN_CONFIG'] = '%sReturn to Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuration Updated Successfully';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
 
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Announce interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'peers should wait at least this many seconds between announcements';
 $lang['NUMWANT'] = 'Numwant value';
 $lang['NUMWANT_EXPL'] = 'number of peers being sent to client';
 $lang['EXPIRE_FACTOR'] = 'Peer expire factor';
