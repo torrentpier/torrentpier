@@ -172,6 +172,9 @@ switch ($bb_cfg['datastore_type']) {
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
+/**
+ * Check system requirements
+ */
 if (CHECK_REQUIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
     // [1] Check PHP Version
     if (!\TorrentPier\Helpers\IsHelper::isPHP(CHECK_REQUIREMENTS['php_min_version'])) {
