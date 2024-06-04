@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Sorry, but your password cannot be retrieved. Please
 
 $lang['ALWAYS_ADD_SIG'] = 'Always attach my signature';
 $lang['HIDE_PORN_FORUMS'] = 'Hide content 18+';
+$lang['ADD_RETRACKER'] = 'Add retracker in torrent files';
 $lang['ALWAYS_NOTIFY'] = 'Always notify me of replies';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topic you have posted in. This can be changed whenever you post.';
 
@@ -2539,7 +2540,6 @@ $lang['LIMIT_LEECH_IPS_EXPL'] = "allow leeching from no more than <i>xx</i> IP's
 
 $lang['USE_AUTH_KEY_HEAD'] = 'Authorization';
 $lang['USE_AUTH_KEY'] = 'Passkey';
-$lang['ADD_RETRACKER'] = 'Add retracker in torrent files';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
