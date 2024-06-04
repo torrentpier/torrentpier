@@ -519,7 +519,7 @@ switch ($mode) {
             $msg = $result ? $lang['DELETE_POSTS_SUCCESFULLY'] : $lang['NO_POSTS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
-            $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
+            $sql = "SELECT u.username, u.user_rank, p.*, pt.post_text, p.post_username
 				FROM " . BB_POSTS . " p, " . BB_USERS . " u, " . BB_POSTS_TEXT . " pt
 				WHERE p.topic_id = $topic_id
 					AND p.poster_id = u.user_id
@@ -562,7 +562,7 @@ switch ($mode) {
 
                     $template->assign_block_vars('postrow', [
                         'ROW_CLASS' => $row_class,
-                        'POSTER_NAME' => $poster,
+                        'POSTER_NAME' => profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $postrow[$i]['user_rank']]),
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
                         'CHECKBOX' => defined('BEGIN_CHECKBOX'),

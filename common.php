@@ -172,15 +172,18 @@ switch ($bb_cfg['datastore_type']) {
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
-if (CHECK_REQIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
+/**
+ * Check system requirements
+ */
+if (CHECK_REQUIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
     // [1] Check PHP Version
-    if (!\TorrentPier\Helpers\IsHelper::isPHP(CHECK_REQIREMENTS['php_min_version'])) {
-        die("TorrentPier requires PHP version " . CHECK_REQIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
+    if (!\TorrentPier\Helpers\IsHelper::isPHP(CHECK_REQUIREMENTS['php_min_version'])) {
+        die("TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
     }
 
     // [2] Check installed PHP Extensions on server
     $data = [];
-    foreach (CHECK_REQIREMENTS['ext_list'] as $ext) {
+    foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
         if (!extension_loaded($ext)) {
             $data[] = '<code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">' . $ext . '</code>';
         }
