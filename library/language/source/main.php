@@ -2530,8 +2530,6 @@ $lang['OFF_REASON_EXPL'] = 'this message will be sent to client when the tracker
 $lang['AUTOCLEAN_EXPL'] = 'autoclean peers table - do not disable without reason';
 $lang['COMPACT_MODE'] = 'Compact mode';
 $lang['COMPACT_MODE_EXPL'] = '"Yes" - tracker will only accept clients working in compact mode<br />"No" - compatible mode (chosen by client)';
-$lang['BROWSER_REDIRECT_URL'] = 'Browser redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'if user tries to open tracker URL in Web browser<br />leave blank to disable';
 
 $lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
 $lang['ANNOUNCE_INTERVAL'] = 'Announce interval';
