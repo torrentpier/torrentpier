@@ -2530,9 +2530,6 @@ $lang['LIMIT_SEED_IPS_EXPL'] = "allow seeding from no more than <i>xx</i> IP's<b
 $lang['LIMIT_LEECH_IPS'] = 'Leeching IP limit';
 $lang['LIMIT_LEECH_IPS_EXPL'] = "allow leeching from no more than <i>xx</i> IP's<br />0 - no limit";
 
-$lang['USE_AUTH_KEY_HEAD'] = 'Authorization';
-$lang['USE_AUTH_KEY'] = 'Passkey';
-
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
 
