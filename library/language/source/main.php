@@ -2527,8 +2527,6 @@ $lang['SET_DEFAULTS'] = 'Restore defaults';
 
 $lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limits';
 $lang['LIMIT_ACTIVE_TOR'] = 'Limit active torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Seeding limit';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
 $lang['LIMIT_SEED_IPS'] = 'Seeding IP limit';
 $lang['LIMIT_SEED_IPS_EXPL'] = "allow seeding from no more than <i>xx</i> IP's<br />0 - no limit";
 $lang['LIMIT_LEECH_IPS'] = 'Leeching IP limit';
