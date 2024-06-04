@@ -677,6 +677,7 @@ $bb_cfg['tracker'] = [
     'expire_factor' => 2.5,
     'compact_mode' => true,
     'upd_user_up_down_stat' => true,
+    'browser_redirect_url' => '',
     'scrape' => true,
     'limit_active_tor' => true,
     'limit_seed_count' => 0,
