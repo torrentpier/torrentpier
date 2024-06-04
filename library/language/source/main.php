@@ -2539,10 +2539,6 @@ $lang['LIMIT_LEECH_IPS_EXPL'] = "allow leeching from no more than <i>xx</i> IP's
 
 $lang['USE_AUTH_KEY_HEAD'] = 'Authorization';
 $lang['USE_AUTH_KEY'] = 'Passkey';
-$lang['USE_AUTH_KEY_EXPL'] = 'enable check for passkey';
-$lang['AUTH_KEY_NAME'] = 'Passkey name';
-$lang['AUTH_KEY_NAME_EXPL'] = 'passkey key name in GET request';
-$lang['ALLOW_GUEST_DL'] = 'Allow guest access to tracker';
 $lang['ADD_RETRACKER'] = 'Add retracker in torrent files';
 
 // Forum config
