@@ -2524,19 +2524,12 @@ $lang['RETURN_CONFIG'] = '%sReturn to Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuration Updated Successfully';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
 
-$lang['NUMWANT'] = 'Numwant value';
-$lang['NUMWANT_EXPL'] = 'number of peers being sent to client';
-$lang['EXPIRE_FACTOR'] = 'Peer expire factor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Consider a peer dead if it has not announced in a number of seconds equal to this many times the calculated announce interval at the time of its last announcement (must be greater than 1)';
-
 $lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limits';
 $lang['LIMIT_ACTIVE_TOR'] = 'Limit active torrents';
 $lang['LIMIT_SEED_COUNT'] = 'Seeding limit';
 $lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
 $lang['LIMIT_LEECH_COUNT'] = 'Leeching limit';
 $lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech expire factor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Treat a peer as active for this number of minutes even if it sent "stopped" event after starting dl<br />0 - take into account "stopped" event';
 $lang['LIMIT_CONCURRENT_IPS'] = "Limit concurrent IP's";
 $lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent limit';
 $lang['LIMIT_SEED_IPS'] = 'Seeding IP limit';
