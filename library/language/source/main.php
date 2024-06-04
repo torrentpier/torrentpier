@@ -2528,8 +2528,6 @@ $lang['OFF_TRACKER'] = 'Disable tracker';
 $lang['OFF_REASON'] = 'Disable reason';
 $lang['OFF_REASON_EXPL'] = 'this message will be sent to client when the tracker is disabled';
 $lang['AUTOCLEAN_EXPL'] = 'autoclean peers table - do not disable without reason';
-$lang['COMPACT_MODE'] = 'Compact mode';
-$lang['COMPACT_MODE_EXPL'] = '"Yes" - tracker will only accept clients working in compact mode<br />"No" - compatible mode (chosen by client)';
 
 $lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
 $lang['ANNOUNCE_INTERVAL'] = 'Announce interval';
