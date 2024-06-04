@@ -2525,9 +2525,6 @@ $lang['RETURN_CONFIG'] = '%sReturn to Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuration Updated Successfully';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
 
-$lang['LIMIT_SEED_IPS'] = 'Seeding IP limit';
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limit';
-
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
 
