@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Na vjen keq, por fjalëkalimi i vjetër nuk mund të
 
 $lang['ALWAYS_ADD_SIG'] = 'Gjithmonë të bashkëngjitni tim nënshkrim';
 $lang['HIDE_PORN_FORUMS'] = 'Fshehin përmbajtjen 18+';
+$lang['ADD_RETRACKER'] = 'Të shtoni retracker në fotografi torrent';
 $lang['ALWAYS_NOTIFY'] = 'Gjithmonë të njoftojë mua të përgjigjet';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Dërgon një e-mail, kur dikush përgjigjet në një temë që ju keni postuar në të. Kjo mund të ndryshohet sa herë që ju post.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Extension';
 $lang['RETURN_CONFIG'] = '%sReturn të Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurimi I Azhurnuar Me Sukses';
 $lang['SET_DEFAULTS'] = 'Rikthimi standarte';
-
-$lang['OFF_TRACKER'] = 'Çaktivizoni tracker';
-$lang['OFF_REASON'] = 'Çaktivizoni arsye';
-$lang['OFF_REASON_EXPL'] = 'ky mesazh do të dërgohet klientit kur tracker është me aftësi të kufizuara';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean kolegët tabela - mos disable pa arsye';
-$lang['COMPACT_MODE'] = 'Mode kompakt';
-$lang['COMPACT_MODE_EXPL'] = '"Po" - tracker do të pranojë vetëm klientët e punës në kompakte mode<br />"Jo" - compatible mode (zgjedhur nga klienti)';
-$lang['BROWSER_REDIRECT_URL'] = 'Shfletuesi redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'nëse përdorues përpiqet të hapë tracker URL në Web browser<br />leave bosh për të çaktivizuar';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Të njoftuar për intervalin';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'shokët duhet të presin të paktën këtë shumë sekonda në mes njoftimet';
-$lang['NUMWANT'] = 'Numwant vlera';
-$lang['NUMWANT_EXPL'] = 'numri i kolegëve duke u dërguar tek klienti';
-$lang['EXPIRE_FACTOR'] = 'Kolegëve të përfundojë faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Të konsiderojnë një kolegëve të vdekur nëse ajo nuk ka njoftuar në numrin e sekondave të barabartë për këtë shumë herë e llogaritur njoftuar intervali në kohën e tij të fundit njoftim (që duhet të jetë më i madh se 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Të injorojë IP raportuar nga klient';
-$lang['UPDATE_DLSTAT'] = 'Dyqan përdoruesit lart/poshtë statistikat';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Kufijtë';
-$lang['LIMIT_ACTIVE_TOR'] = 'Kufi aktiv torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Shorti kufi';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - nuk ka limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching kufi';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - nuk ka limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Gjaku skadon faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Të trajtuar një i kolegëve si aktiv për këtë disa minuta edhe në qoftë se ajo dërgoi "ndaluar" ngjarje pas fillimit dl<br />0 - të marrë parasysh të "ndalur" ngjarje';
-$lang['LIMIT_CONCURRENT_IPS'] = "Kufi harmoni IP e";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent kufi';
-$lang['LIMIT_SEED_IPS'] = 'Shorti IP kufi';
-$lang['LIMIT_SEED_IPS_EXPL'] = "të lejojë shorti nga jo më shumë se <i>xx</i> IP's<br />0 - pa kufi";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP kufi';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "të lejojë leeching prej jo më shumë se <i>xx</i> IP's<br />0 - pa kufi";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Autorizimi';
-$lang['USE_AUTH_KEY'] = 'Passkey';
-$lang['USE_AUTH_KEY_EXPL'] = 'të mundësojë kontroll për passkey';
-$lang['AUTH_KEY_NAME'] = 'Passkey emri';
-$lang['AUTH_KEY_NAME_EXPL'] = 'passkey kryesore emër në rkesa';
-$lang['ALLOW_GUEST_DL'] = 'Të lejojë mysafir qasje në tracker';
-$lang['ADD_RETRACKER'] = 'Të shtoni retracker në fotografi torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forumi config';

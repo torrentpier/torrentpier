@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Žao mi je, ali tvoj lozinku ne može biti pronađen
 
 $lang['ALWAYS_ADD_SIG'] = 'Uvijek zakačiti moj potpis';
 $lang['HIDE_PORN_FORUMS'] = 'Sakriti sadržaja 18+';
+$lang['ADD_RETRACKER'] = 'Dodaj retracker u bujicama datoteke';
 $lang['ALWAYS_NOTIFY'] = 'Uvijek obavesti me odgovara';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Poslao e-mail kad se netko odgovori na temu si postavio unutra. Ovo se može promijeniti kada te post.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Produženje';
 $lang['RETURN_CONFIG'] = '%sReturn da Configuration%s';
 $lang['CONFIG_UPD'] = 'Podešavanja Ažurirani Uspješno';
 $lang['SET_DEFAULTS'] = 'Obnovi uobičajno';
-
-$lang['OFF_TRACKER'] = 'Onesposobiti tragaca';
-$lang['OFF_REASON'] = 'Onesposobite razloga';
-$lang['OFF_REASON_EXPL'] = 'ova poruka će biti poslat klijent kad tragač je invalid';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean kolega stol - ne onesposobiti bez razloga';
-$lang['COMPACT_MODE'] = 'Compact mode';
-$lang['COMPACT_MODE_EXPL'] = '"Da" - tragač će jedino prihvatiti klijenata, radi u compact mode<br />"Ne" - kompatibilni modu (izabrao za klijenta)';
-$lang['BROWSER_REDIRECT_URL'] = 'Preglednik preusmjeriti URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'ako korisnik pokušava da otvori tragač URL-u u Web browser<br />leave prazan onesposobiti';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Objaviti interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'vršnjaci trebao pričekati barem toliko sekundi između najave';
-$lang['NUMWANT'] = 'Numwant vrijednosti';
-$lang['NUMWANT_EXPL'] = 'broj kolega je poslato da klijent';
-$lang['EXPIRE_FACTOR'] = 'Peer ističe faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Smatraj da je peer mrtav ako nije objavio u nekoliko sekundi jednaki da je ovo mnogo puta izračunata objaviti interval u trenutku njegovog zadnja objava (mora biti veći od 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignoriši IP prijavio za klijenta,';
-$lang['UPDATE_DLSTAT'] = 'Radnju korisnika se/dole statistike';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Granica';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limit aktivni bujica';
-$lang['LIMIT_SEED_COUNT'] = 'Zvezdane limit';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Negdje curi limit';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Pijavica ističe faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Prema peer kao aktivni za ovaj broj minuta, čak i ako je to poslao "i prestala" događaju nakon što je počeo dl<br />0 - uzmi u obzir "prestao" događaj';
-$lang['LIMIT_CONCURRENT_IPS'] = "Granica koja je IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'po bujicama limit';
-$lang['LIMIT_SEED_IPS'] = 'Zvezdane IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "dozvoliti zvezdane od nema više nego <i>xx</i> IP's<br />0 - bez granica";
-$lang['LIMIT_LEECH_IPS'] = 'Negdje curi IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "dozvoliti negdje curi iz nema više nego <i>xx</i> IP's<br />0 - bez granica";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Odobrenje';
-$lang['USE_AUTH_KEY'] = 'S ključem';
-$lang['USE_AUTH_KEY_EXPL'] = 'omogućiti ček za s ključem';
-$lang['AUTH_KEY_NAME'] = 'S ključem ime';
-$lang['AUTH_KEY_NAME_EXPL'] = 's ključem ključ ime u SE zahtjev';
-$lang['ALLOW_GUEST_DL'] = 'Dozvoliti gost pristup tragač';
-$lang['ADD_RETRACKER'] = 'Dodaj retracker u bujicama datoteke';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum podešavanja';

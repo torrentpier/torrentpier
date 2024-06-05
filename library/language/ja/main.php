@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = '申し訳ございません、あなたのパスワ�
 
 $lang['ALWAYS_ADD_SIG'] = '必ず添付に署名';
 $lang['HIDE_PORN_FORUMS'] = '非表示コンテンツ18+';
+$lang['ADD_RETRACKER'] = '追加retracker急流にもまれのファイル';
 $lang['ALWAYS_NOTIFY'] = '通知の私の回答';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = '送信メールはこの人の回答のマーまで投稿しています。 この変更ができます。';
 
@@ -2527,48 +2528,6 @@ $lang['EXTENSION'] = '延長';
 $lang['RETURN_CONFIG'] = '%sReturnにConfiguration%s';
 $lang['CONFIG_UPD'] = '構成に成功し';
 $lang['SET_DEFAULTS'] = 'デフォルトの復元';
-
-$lang['OFF_TRACKER'] = 'トラッカーを無効に';
-$lang['OFF_REASON'] = '無効理由';
-$lang['OFF_REASON_EXPL'] = 'このメッセージを送信時にクライアントのトラッカーが無効にな';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean仲間とテーブルなどを無効にな理由';
-$lang['COMPACT_MODE'] = 'コンパクトモード';
-$lang['COMPACT_MODE_EXPL'] = '"はい"-トラッカーにのみ受け入れのお客様の作業コンパクトmode<br />""互換モードを選択するクライアント)';
-$lang['BROWSER_REDIRECT_URL'] = 'ブラウザのリダイレクトURL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = '場合はユーザーのうトラッカーのURLのウェブbrowser<br />leave空白を無効にする';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'その他';
-$lang['ANNOUNCE_INTERVAL'] = '知間隔';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = '仲間を待つ少なくともこの期間を秒数で指定と発表';
-$lang['NUMWANT'] = 'Numwant値';
-$lang['NUMWANT_EXPL'] = '数人の友達に送られるお客様';
-$lang['EXPIRE_FACTOR'] = 'ピア-失効率';
-$lang['EXPIRE_FACTOR_EXPL'] = 'を考える相手がいないとして発表した数秒に等しいこの時間を算出し間隔時点の前回発表より大きくなければなりません1)';
-$lang['IGNORE_GIVEN_IP'] = '無視するIPの報告によるお客様';
-$lang['UPDATE_DLSTAT'] = '店舗利用者up/down統計';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = '限界';
-$lang['LIMIT_ACTIVE_TOR'] = '限納入';
-$lang['LIMIT_SEED_COUNT'] = '播種の制限';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0-制限なし)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching制限';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0-制限なし)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech失効率';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = '処理ピアとして活躍のためにこの数分の場合でもお送りいたしました"停止"のイベント開始後のdl<br />0-慮""イベント';
-$lang['LIMIT_CONCURRENT_IPS'] = "制限並IPの";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'た激流を制限';
-$lang['LIMIT_SEED_IPS'] = '播種IP制限';
-$lang['LIMIT_SEED_IPS_EXPL'] = "を播種からない以上<i>xx</i>IP's<br />0-制限なし";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP制限';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "きleechingから以<i>xx</i>IP's<br />0-制限なし";
-
-$lang['USE_AUTH_KEY_HEAD'] = '認可';
-$lang['USE_AUTH_KEY'] = 'パスキー';
-$lang['USE_AUTH_KEY_EXPL'] = 'をチェックのためのパスキー';
-$lang['AUTH_KEY_NAME'] = 'パスキーの名前';
-$lang['AUTH_KEY_NAME_EXPL'] = 'パスキーのキー名を取得要求';
-$lang['ALLOW_GUEST_DL'] = 'をゲストストラッカー';
-$lang['ADD_RETRACKER'] = '追加retracker急流にもまれのファイル';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Configフォーラム';

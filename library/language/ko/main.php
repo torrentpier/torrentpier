@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = '죄송하지만,귀하의 비밀번호를 검색할 
 
 $lang['ALWAYS_ADD_SIG'] = '항상 붙 내명';
 $lang['HIDE_PORN_FORUMS'] = '숨기기 컨텐츠 18+';
+$lang['ADD_RETRACKER'] = '추가 retracker 에서는 토렌트파일';
 $lang['ALWAYS_NOTIFY'] = '항상 저에게 알려의 응답';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = '전자 메일을 보냅 때 누군가가 답글을 주제를 게시합니다. 이것은 변경할 수 있습할 때마다 포스트합니다.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Extension';
 $lang['RETURN_CONFIG'] = '%sReturn 을 Configuration%s';
 $lang['CONFIG_UPD'] = '구성 성공적으로 업데이트';
 $lang['SET_DEFAULTS'] = '기본값 복원';
-
-$lang['OFF_TRACKER'] = '비활성화 추적자';
-$lang['OFF_REASON'] = '사는 이유';
-$lang['OFF_REASON_EXPL'] = '이 메시지를 보낸 클라이언트에 추가 비활성화';
-$lang['AUTOCLEAN_EXPL'] = '자동 청소 동료들은 테이블을 해제하지 않는 이유 없이';
-$lang['COMPACT_MODE'] = '컴팩트 모드';
-$lang['COMPACT_MODE_EXPL'] = '"예"추적이만 허용 클라이언트에서 일하고 콤팩트 mode<br />"No"-환 모드지(선택하여 클라이언트)';
-$lang['BROWSER_REDIRECT_URL'] = '리디렉션 URL 은 브라우저';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = '사용자가 열려고 하면 추적 URL 웹 browser<br />leave 빈 사용';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = '기타';
-$lang['ANNOUNCE_INTERVAL'] = '발표 간격';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = '동료 기다려야 한다 적어도 여기에 초 사이의 공지사항';
-$lang['NUMWANT'] = 'Numwant 값';
-$lang['NUMWANT_EXPL'] = '숫자의 동료에게 보내는 클라이언트';
-$lang['EXPIRE_FACTOR'] = '피어 만료되는 요인';
-$lang['EXPIRE_FACTOR_EXPL'] = '을 고려한 피어 죽지 않은 경우에 발표의 수를 초과 같이 여러 번의 계산을 발표 간격을 시간의 그것의 마지막 공고(보다 커야 합니다 1)';
-$lang['IGNORE_GIVEN_IP'] = '무 IP 클라이언트에 의해 보고';
-$lang['UPDATE_DLSTAT'] = '저장 사용자를 위/아래로 통계';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = '제한';
-$lang['LIMIT_ACTIVE_TOR'] = '제한 활성 급류';
-$lang['LIMIT_SEED_COUNT'] = '시드한';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0-제한 없음)';
-$lang['LIMIT_LEECH_COUNT'] = '를 찾아보세한';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0-제한 없음)';
-$lang['LEECH_EXPIRE_FACTOR'] = '거머리는 만료되는 요인';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = '치료 피어 활동에 대한 이 번호는 분의 경우에도 전송되어 이벤트를 시작한 후 dl<br />0-계정으로"중"이벤트';
-$lang['LIMIT_CONCURRENT_IPS'] = "제한 동시 IP 의";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = '토렌트당 제한';
-$lang['LIMIT_SEED_IPS'] = '시드 IP 한';
-$lang['LIMIT_SEED_IPS_EXPL'] = "용 시드에서 이상 더 이상 <i>xx</i>IP's<br />0-제한 없음";
-$lang['LIMIT_LEECH_IPS'] = '를 찾아보세 IP 한';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "허용한 에너지를 빨아서 더 이상 <i>xx</i>IP's<br />0-제한 없음";
-
-$lang['USE_AUTH_KEY_HEAD'] = '인증';
-$lang['USE_AUTH_KEY'] = '암호';
-$lang['USE_AUTH_KEY_EXPL'] = '도록 확인을 위해 암호';
-$lang['AUTH_KEY_NAME'] = '이름 암호';
-$lang['AUTH_KEY_NAME_EXPL'] = '암호를 키 이름에서 얻을 요청';
-$lang['ALLOW_GUEST_DL'] = '용자의 액세스를 추적';
-$lang['ADD_RETRACKER'] = '추가 retracker 에서는 토렌트파일';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = '포럼 config';

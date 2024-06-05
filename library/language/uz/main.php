@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Kechirasiz, lekin parolni olinadi mumkin emas. Qo\'s
 
 $lang['ALWAYS_ADD_SIG'] = 'Har doim mening imzo qo\'shishingiz';
 $lang['HIDE_PORN_FORUMS'] = 'mazmunini yashirish 18+';
+$lang['ADD_RETRACKER'] = 'torrent fayllarni ham retracker qo\'shish';
 $lang['ALWAYS_NOTIFY'] = 'Har doim, menga javob berish-';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'kimdir sizga tashlashdi bir mavzuga javob elektron pochta jo\'natadi. Agar post qachon bu o\'zgartirilishi mumkin.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'kengaytma';
 $lang['RETURN_CONFIG'] = 'Configuration%s uchun %sReturn';
 $lang['CONFIG_UPD'] = 'Konfiguratsiya muvaffaqiyatli Yangilangan';
 $lang['SET_DEFAULTS'] = 'Standart sozlamalarni tiklash';
-
-$lang['OFF_TRACKER'] = 'O\'chirish Kuzatishdan';
-$lang['OFF_REASON'] = 'O\'chirish sababi';
-$lang['OFF_REASON_EXPL'] = 'Kuzatishdan o\'chirilgan bo\'lsa, bu xabar mijozga yuboriladi';
-$lang['AUTOCLEAN_EXPL'] = 'Amerika moli Opsiyonel tengdoshlari stol - sababsiz o\'chirib emas';
-$lang['COMPACT_MODE'] = 'Compact rejimi';
-$lang['COMPACT_MODE_EXPL'] = '"Ha" - Kuzatishdan faqat "No" ixcham mode<br /> ishlaydigan mijozlariga qabul qiladi - (mijoz tomonidan tanlangan) mos rejimini';
-$lang['BROWSER_REDIRECT_URL'] = 'Brauzer yo\'riq URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'Foydalanuvchi veb browser<br />leave Bo\'sh Kuzatishdan URL ochish uchun harakat qiladi, agar o\'chirish uchun';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Xotinning';
-$lang['ANNOUNCE_INTERVAL'] = 'intervalini e\'lon';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'tengdoshlari e\'lon o\'rtasidagi kamida, bu ko\'p soniya kutish kerak';
-$lang['NUMWANT'] = 'Numwant qiymati';
-$lang['NUMWANT_EXPL'] = 'tengdoshlari soni mijozga yuborilgan';
-$lang['EXPIRE_FACTOR'] = 'omil tugaydi Peer';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Bu soniya bir qator e\'lon qilmagan bo\'lsa teng oxirgi e\'lon qilingan paytda oralig\'ini e\'lon hisoblab, bu bir necha marta bir peer o\'lik (1 dan katta bo\'lishi kerak)';
-$lang['IGNORE_GIVEN_IP'] = 'IP mijoz tomonidan xabar Ignore';
-$lang['UPDATE_DLSTAT'] = 'Store foydalanuvchilar yuqoriga / pastga statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limits';
-$lang['LIMIT_ACTIVE_TOR'] = 'Foydalanuvchining barcha e\'lonlar, torrent cheklash';
-$lang['LIMIT_SEED_COUNT'] = 'ko\'chat chegarasi';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - hech chegarasi)';
-$lang['LIMIT_LEECH_COUNT'] = 'suluk chegarasi';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - hech chegarasi)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Suluk omil tugaydi';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'voqea "to\'xtadi" hisobga olish - bu yubordi, hatto agar daqiqa, bu qator davomida faol sifatida peer davolash tadbir dl<br />0 boshlanganidan so\'ng "to\'xtadi"';
-$lang['LIMIT_CONCURRENT_IPS'] = "bir vaqtda IP ning cheklash";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'torrent limiti boshiga';
-$lang['LIMIT_SEED_IPS'] = 'Ko\'chat IP chegarasi';
-$lang['LIMIT_SEED_IPS_EXPL'] = "ko'pi <i>xx</i> IP's<br />0 dan ekish imkonini beradi - hech chegarasi";
-$lang['LIMIT_LEECH_IPS'] = 'Qurishga harakat IP chegarasi';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "hech <i>xx</i> ortiq IP's<br />0 dan qurishga harakat imkon - hech chegarasi";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'ruxsat';
-$lang['USE_AUTH_KEY'] = 'Parol';
-$lang['USE_AUTH_KEY_EXPL'] = 'parol uchun chek imkon';
-$lang['AUTH_KEY_NAME'] = 'Parol nomi';
-$lang['AUTH_KEY_NAME_EXPL'] = 'Get irodasi bilan parol asosiy nomi';
-$lang['ALLOW_GUEST_DL'] = 'reyting www.uz mehmon uchun ruxsatdan foydalanayapsiz ruxsat berish';
-$lang['ADD_RETRACKER'] = 'torrent fayllarni ham retracker qo\'shish';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';

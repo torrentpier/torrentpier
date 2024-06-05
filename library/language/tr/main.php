@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Özür dilerim ama şifre alınamıyor. Lütfen daha
 
 $lang['ALWAYS_ADD_SIG'] = 'Her zaman İmzamı ekle';
 $lang['HIDE_PORN_FORUMS'] = 'Gizlemek içerik 18+';
+$lang['ADD_RETRACKER'] = 'Torrent dosyaları retracker Ekle';
 $lang['ALWAYS_NOTIFY'] = 'Her zaman cevaplar beni haberdar et';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Posta birine yayınlanan bir konuya cevap geldiğinde e gönderir. Bu yazı ne zaman değiştirilebilir.';
 
@@ -2527,48 +2528,6 @@ $lang['EXTENSION'] = 'Uzantısı';
 $lang['RETURN_CONFIG'] = '%sReturn için Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigürasyon Başarıyla Güncellendi';
 $lang['SET_DEFAULTS'] = 'Varsayılanları geri yükle';
-
-$lang['OFF_TRACKER'] = 'Devre dışı bırakmak tracker';
-$lang['OFF_REASON'] = 'Devre dışı bırakma nedeni';
-$lang['OFF_REASON_EXPL'] = 'bu mesaj tracker devre dışı bırakıldığında, istemci gönderilecektir';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean eş tablo değil neden olmadan devre dışı bırakın';
-$lang['COMPACT_MODE'] = 'Kompakt modu';
-$lang['COMPACT_MODE_EXPL'] = '"Evet" - tracker sadece kompakt mode<br />"Hayır" uyumlu modu (istemci tarafından seçilen)çalışma istemcileri kabul eder';
-$lang['BROWSER_REDIRECT_URL'] = 'Tarayıcı yeniden yönlendirme URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'eğer kullanıcı Web browser<br />leave boş izci URL açmak için çalışırsa devre dışı bırakmak için';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Mısc';
-$lang['ANNOUNCE_INTERVAL'] = 'Aralık duyurmak';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'eş duyurular arasında en azından bu bir kaç saniye bekleyin';
-$lang['NUMWANT'] = 'Numwant değer';
-$lang['NUMWANT_EXPL'] = 'eş sayısı istemciye gönderilen';
-$lang['EXPIRE_FACTOR'] = 'Eş sona faktör';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Eğer bu birçok kez hesaplanan duyurmak aralığı eşit saniye sayısı son duyuru zaman ilan etmemiştir (1\'den büyük olmalı)bir eş öldüğünü düşünürdüm';
-$lang['IGNORE_GIVEN_IP'] = 'Görmezden IP istemci tarafından bildirilen';
-$lang['UPDATE_DLSTAT'] = 'Yukarı/Aşağı deposu kullanıcılar istatistikler';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Sınırlar';
-$lang['LIMIT_ACTIVE_TOR'] = 'Etkin sel sınırı';
-$lang['LIMIT_SEED_COUNT'] = 'Tohumlama sınırı';
-$lang['LIMIT_SEED_COUNT_EXPL'] = 'Sınırı (0)';
-$lang['LIMIT_LEECH_COUNT'] = 'Sülük sınırı';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = 'Sınırı (0)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Sülük sona faktör';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Eğer "olay durdu" dl<br />0 başladıktan sonra gönderilmiş olsa bile, birkaç dakika bu sayı için aktif olarak bir eş tedavi - durdu olay dikkate al "';
-$lang['LIMIT_CONCURRENT_IPS'] = "Sınırı eşzamanlı IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'torrent sınırı';
-$lang['LIMIT_SEED_IPS'] = 'Tohumlama IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "'s<br />0 <i>xx</i> fazla IP Ekim limitsiz izin ver - ";
-$lang['LIMIT_LEECH_IPS'] = 'Sülük IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "'s<br />0 <i>xx</i> fazla IP kurmaya çalışan sınırı izin ver - ";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Yetki';
-$lang['USE_AUTH_KEY'] = 'Geçiş anahtarı';
-$lang['USE_AUTH_KEY_EXPL'] = 'parolayı etkinleştir onay';
-$lang['AUTH_KEY_NAME'] = 'Şifre adı';
-$lang['AUTH_KEY_NAME_EXPL'] = 'içinde şifre anahtarı adı istek OLSUN';
-$lang['ALLOW_GUEST_DL'] = 'Konuk erişimi izleyici için izin';
-$lang['ADD_RETRACKER'] = 'Torrent dosyaları retracker Ekle';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';

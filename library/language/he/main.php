@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'מצטער, אבל את הסיסמה שלך, נית�
 
 $lang['ALWAYS_ADD_SIG'] = 'תמיד לצרף את החתימה שלי';
 $lang['HIDE_PORN_FORUMS'] = 'להסתיר את התוכן 18+';
+$lang['ADD_RETRACKER'] = 'להוסיף retracker בתוך קבצי torrent';
 $lang['ALWAYS_NOTIFY'] = 'תמיד הודע לי על תגובות';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'שולח דואר אלקטרוני כאשר מישהו מגיב ל נושא יש לך פורסם. זה יכול להיות שונה בכל פעם שאתה מפרסם.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'סיומת';
 $lang['RETURN_CONFIG'] = '%sReturn כדי Configuration%s';
 $lang['CONFIG_UPD'] = 'תצורה עודכן בהצלחה';
 $lang['SET_DEFAULTS'] = 'שחזור ברירות מחדל';
-
-$lang['OFF_TRACKER'] = 'השבת tracker';
-$lang['OFF_REASON'] = 'השבת סיבה';
-$lang['OFF_REASON_EXPL'] = 'הודעה זו תישלח אל הלקוח כאשר הגשש אינו זמין';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean עמיתים השולחן - לא לבטל ללא סיבה';
-$lang['COMPACT_MODE'] = 'במצב קומפקטי';
-$lang['COMPACT_MODE_EXPL'] = '"כן" - tracker רק לקבל לקוחות עובד קומפקטי mode<br />"לא" - תואם מצב (שנבחר על ידי הלקוח)';
-$lang['BROWSER_REDIRECT_URL'] = 'דפדפן ה-URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'אם המשתמש מנסה לפתוח tracker כתובת אתר אינטרנט browser<br />leave ריק כדי לבטל את';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'שונות';
-$lang['ANNOUNCE_INTERVAL'] = 'להכריז מרווח';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'עמיתים צריך לחכות לפחות זה הרבה שניות בין הודעות';
-$lang['NUMWANT'] = 'Numwant ערך';
-$lang['NUMWANT_EXPL'] = 'מספר עמיתים שנשלח לבית הלקוח';
-$lang['EXPIRE_FACTOR'] = 'עמית יפוג פקטור';
-$lang['EXPIRE_FACTOR_EXPL'] = 'לשקול עמית מת אם לא הודיע, בתוך מספר שניות שווה את זה פעמים רבות מחושב להכריז מרווח בזמן את ההודעה האחרונה (חייב להיות גדול מ-1)';
-$lang['IGNORE_GIVEN_IP'] = 'להתעלם IP שדווח על ידי הלקוח';
-$lang['UPDATE_DLSTAT'] = 'חנות משתמשים למעלה/למטה סטטיסטיקה';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'גבולות';
-$lang['LIMIT_ACTIVE_TOR'] = 'הגבלת טורנטים פעילים';
-$lang['LIMIT_SEED_COUNT'] = 'זריעה גבול';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - אין מגבלה)';
-$lang['LIMIT_LEECH_COUNT'] = 'עלוקות גבול';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - אין מגבלה)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'עלוקה יפוג פקטור';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'להתייחס עמית פעיל במשך מספר זה של דקות גם אם זה שלח "הפסיק" אירוע לאחר תחילת dl<br />0 - לקחת בחשבון "הפסיק" אירוע';
-$lang['LIMIT_CONCURRENT_IPS'] = "מגבלת ה-IP של בו-זמניות";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'לכל סיקור גבול';
-$lang['LIMIT_SEED_IPS'] = 'זריעה IP גבול';
-$lang['LIMIT_SEED_IPS_EXPL'] = "לאפשר זריעה לא יותר מ-<i>xx</i> IP's<br />0 - אין מגבלה";
-$lang['LIMIT_LEECH_IPS'] = 'עלוקות IP גבול';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "לאפשר עלוקות לא יותר מ-<i>xx</i> IP's<br />0 - אין מגבלה";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'אישור';
-$lang['USE_AUTH_KEY'] = 'המפתח';
-$lang['USE_AUTH_KEY_EXPL'] = 'לאפשר לבדוק את המפתח.';
-$lang['AUTH_KEY_NAME'] = 'המפתח שם';
-$lang['AUTH_KEY_NAME_EXPL'] = 'המפתח המפתח שם מקבל הבקשה.';
-$lang['ALLOW_GUEST_DL'] = 'לאפשר אורח גישה tracker';
-$lang['ADD_RETRACKER'] = 'להוסיף retracker בתוך קבצי torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'פורום config';

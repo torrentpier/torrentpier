@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = '对不起，但是你的密码无法被检索。 请
 
 $lang['ALWAYS_ADD_SIG'] = '总是附有我的签名';
 $lang['HIDE_PORN_FORUMS'] = '隐藏内容18+';
+$lang['ADD_RETRACKER'] = '添加retracker在洪流的文件';
 $lang['ALWAYS_NOTIFY'] = '总是通知我的答复';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = '发送电子邮件时，有人答复的一个主题，你已经发布。 这可以改变的只要你的后。';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = '扩展';
 $lang['RETURN_CONFIG'] = '%sReturn到Configuration%s';
 $lang['CONFIG_UPD'] = '配置更成功';
 $lang['SET_DEFAULTS'] = '恢复默';
-
-$lang['OFF_TRACKER'] = '禁止跟踪器';
-$lang['OFF_REASON'] = '禁止的原因';
-$lang['OFF_REASON_EXPL'] = '这个消息会被发送到客户当跟踪器已禁用';
-$lang['AUTOCLEAN_EXPL'] = '自动清洁同桌-不禁止没有原因的';
-$lang['COMPACT_MODE'] = '紧凑的模式';
-$lang['COMPACT_MODE_EXPL'] = '"是的"跟踪器将只接受客户的工作在紧凑mode<br />"没有"兼容的模式(由客户)';
-$lang['BROWSER_REDIRECT_URL'] = '重定向网址浏览器';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = '如果用户试图打开跟踪网址在网browser<br />leave空白禁用';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = '宣布间隔';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = '同龄人应至少等待这多少秒之间的公告';
-$lang['NUMWANT'] = 'Numwant值';
-$lang['NUMWANT_EXPL'] = '数量的同龄人被送到客户';
-$lang['EXPIRE_FACTOR'] = '等到期因素';
-$lang['EXPIRE_FACTOR_EXPL'] = '考虑对等死了如果它没有宣布在几秒钟等于这么多时间计算出宣布的时间间隔的时间其最后的公告(必须大于1)';
-$lang['IGNORE_GIVEN_IP'] = '忽略IP报告通过客户';
-$lang['UPDATE_DLSTAT'] = '存储用户的上/下统计数据';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = '限制';
-$lang['LIMIT_ACTIVE_TOR'] = '限制活动的种子';
-$lang['LIMIT_SEED_COUNT'] = '播种种限制';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0-没有限制)';
-$lang['LIMIT_LEECH_COUNT'] = '榨取限制';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0-没有限制)';
-$lang['LEECH_EXPIRE_FACTOR'] = '水蛭期因素';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = '让一个同行为活跃于这一分钟数，即使它发送"停止"事件之后开始dl<br />0-考虑到"停止"事件';
-$lang['LIMIT_CONCURRENT_IPS'] = "限制并发IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = '每限制的洪流';
-$lang['LIMIT_SEED_IPS'] = '播种IP限制';
-$lang['LIMIT_SEED_IPS_EXPL'] = "允许播种，从不超过<i>xx</i>IP's<br />0-没有限制";
-$lang['LIMIT_LEECH_IPS'] = '榨取IP限制';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "允许榨取从不超过<i>xx</i>IP's<br />0-没有限制";
-
-$lang['USE_AUTH_KEY_HEAD'] = '授权';
-$lang['USE_AUTH_KEY'] = '密码';
-$lang['USE_AUTH_KEY_EXPL'] = '启用检查的密码';
-$lang['AUTH_KEY_NAME'] = '密码名';
-$lang['AUTH_KEY_NAME_EXPL'] = '密码键名在得到请求';
-$lang['ALLOW_GUEST_DL'] = '让游客访问的跟踪器';
-$lang['ADD_RETRACKER'] = '添加retracker在洪流的文件';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = '论坛config';

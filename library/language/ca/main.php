@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Ho sento, però la teva contrasenya no es pot recupe
 
 $lang['ALWAYS_ADD_SIG'] = 'Sempre adjunta la meva signatura';
 $lang['HIDE_PORN_FORUMS'] = 'Amagar el contingut 18+';
+$lang['ADD_RETRACKER'] = 'Afegir retracker a fitxers torrent';
 $lang['ALWAYS_NOTIFY'] = 'Sempre notificar-me de respostes';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Envia un correu electrònic quan algú respon a un tema que han publicat. Això es pot canviar sempre que publiqueu.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Extensió';
 $lang['RETURN_CONFIG'] = '%sReturn a Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuració Actualitzat Amb Èxit';
 $lang['SET_DEFAULTS'] = 'Restablir valors predeterminats';
-
-$lang['OFF_TRACKER'] = 'Desactivar seguidor';
-$lang['OFF_REASON'] = 'Desactivar raó';
-$lang['OFF_REASON_EXPL'] = 'aquest missatge serà enviat a client quan el seguidor està deshabilitada';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean companys de taula - no desactivar sense raó';
-$lang['COMPACT_MODE'] = 'Mode compacte';
-$lang['COMPACT_MODE_EXPL'] = '"Sí" - tracker només acceptarà clients de treball en el pacte mode<br />"No" compatible amb el mode (escollit pel client)';
-$lang['BROWSER_REDIRECT_URL'] = 'Navegador URL de redirecció';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'si l\'usuari intenta obrir seguidor URL a la Web browser<br />leave en blanc per a deshabilitar';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Miscel·lània';
-$lang['ANNOUNCE_INTERVAL'] = 'Anunciar interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'companys haurà d\'esperar almenys això molts segons entre anuncis';
-$lang['NUMWANT'] = 'Numwant valor';
-$lang['NUMWANT_EXPL'] = 'nombre de parells de ser enviats al client';
-$lang['EXPIRE_FACTOR'] = 'Peer expiren factor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Considerar un peer mort si no ho ha anunciat en un nombre de segons d\'igualtat per això moltes vegades es calcula anunciar interval en el moment de la seva última convocatòria (s\'ha de ser més gran que 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorar IP informat per client';
-$lang['UPDATE_DLSTAT'] = 'Botiga usuaris amunt/avall estadístiques';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Límits';
-$lang['LIMIT_ACTIVE_TOR'] = 'Límit activa torrents';
-$lang['LIMIT_SEED_COUNT'] = 'La sembra límit';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no hi ha límit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching límit';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no hi ha límit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'A la sangonera expiren factor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Tractar un peer com a actiu per a aquest nombre de minuts, fins i tot si es enviat "aturat" esdeveniment després d\'iniciar dl<br />0 - tenir en compte "aturat" esdeveniment';
-$lang['LIMIT_CONCURRENT_IPS'] = "Límit concurrents IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent límit';
-$lang['LIMIT_SEED_IPS'] = 'La sembra IP límit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "permet la sembra de no més de <i>xx</i> IP's<br />0 - no hi ha límit";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP límit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "permet leeching de no més de <i>xx</i> IP's<br />0 - no hi ha límit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Autorització';
-$lang['USE_AUTH_KEY'] = 'Passkey';
-$lang['USE_AUTH_KEY_EXPL'] = 'permeten comprovar passkey';
-$lang['AUTH_KEY_NAME'] = 'Passkey nom';
-$lang['AUTH_KEY_NAME_EXPL'] = 'passkey nom clau en OBTENIR petició';
-$lang['ALLOW_GUEST_DL'] = 'Permet cases d\'accés a seguidor';
-$lang['ADD_RETRACKER'] = 'Afegir retracker a fitxers torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Fòrum de configuració';

@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Žao nam je, ali vaša lozinka ne može biti vraćen
 
 $lang['ALWAYS_ADD_SIG'] = 'Uvijek razvlačenjem moj potpis';
 $lang['HIDE_PORN_FORUMS'] = 'Skrivanje sadržaja 18+';
+$lang['ADD_RETRACKER'] = 'Dodaj retracker u torrent datoteke';
 $lang['ALWAYS_NOTIFY'] = 'Uvijek me obavijesti o odgovorima';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Šalje putem e-maila, kada netko odgovori na temu koju ste postavili v. To može biti promijenjen kada Ste mjestu.';
 
@@ -2526,48 +2527,6 @@ $lang['EXTENSION'] = 'Nastavak';
 $lang['RETURN_CONFIG'] = '%sReturn u Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguracija Je Uspješno Snimljen';
 $lang['SET_DEFAULTS'] = 'Vratiti na zadane postavke';
-
-$lang['OFF_TRACKER'] = 'Isključiti tracker';
-$lang['OFF_REASON'] = 'Razlog za isključenje';
-$lang['OFF_REASON_EXPL'] = 'to je poruka će biti poslana klijentu, kada tracker isključen';
-$lang['AUTOCLEAN_EXPL'] = 'автоочистка tablice peer - ne isključivati bez razloga';
-$lang['COMPACT_MODE'] = 'Kompaktni način rada';
-$lang['COMPACT_MODE_EXPL'] = '"Da" - tracker će se samo klijentima koji rade u kompaktnom mode<br />"ne" - kompatibilan način (po izboru kupca)';
-$lang['BROWSER_REDIRECT_URL'] = 'URL web-preglednik preusmjeravanje';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'ako korisnik pokuša otvoriti tracker URL-u web-browser<br />leave isključiti';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Mješoviti';
-$lang['ANNOUNCE_INTERVAL'] = 'Najavljuju interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'vršnjaci treba čekati barem je to broj sekundi između poruka';
-$lang['NUMWANT'] = 'Vrijednost Numwant';
-$lang['NUMWANT_EXPL'] = 'broj пиров slanja klijentu';
-$lang['EXPIRE_FACTOR'] = 'Peer istječe faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Uzeti u obzir peer-to-peer mrtav, ako ne i najavio broj sekundi jednak je mnogo puta platni objaviti interval tijekom svog posljednjeg oglasa (mora biti veći od 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorirati IP napisale klijenta';
-$lang['UPDATE_DLSTAT'] = 'Korisnici dućan gore/dolje za statistiku';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Granice';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limit aktivnih torrenta';
-$lang['LIMIT_SEED_COUNT'] = 'Granica высева';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - bez ograničenja)';
-$lang['LIMIT_LEECH_COUNT'] = 'Ispiranje granica';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - bez ograničenja)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Ističe faktor leach';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Liječiti vršnjaka kao aktivnih tog broja minuta čak i ako to nije tako, da "zaustavi" događaj nakon pokretanja dl<br />0 - uzeti u obzir "stop" događaj';
-$lang['LIMIT_CONCURRENT_IPS'] = "Ograničiti broj istovremenih IP adrese";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'iza granica torrent';
-$lang['LIMIT_SEED_IPS'] = 'Sjetva se IP ograničenje';
-$lang['LIMIT_SEED_IPS_EXPL'] = "neka высева ne više od <i>xx</i> ИС's<br />0 nije granica";
-$lang['LIMIT_LEECH_IPS'] = 'Tresući se IP ograničenje';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "neka ispiranje od ne više od <i>xx</i> ИС's<br />0 nije granica";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Odobrenja';
-$lang['USE_AUTH_KEY'] = 'Kalauz';
-$lang['USE_AUTH_KEY_EXPL'] = 'uključivanje provjere lozinke';
-$lang['AUTH_KEY_NAME'] = 'Ime lozinka';
-$lang['AUTH_KEY_NAME_EXPL'] = 'ključ kalauz ime u Get zahtjev';
-$lang['ALLOW_GUEST_DL'] = 'Omogućiti anonimni pristup na tracker';
-$lang['ADD_RETRACKER'] = 'Dodaj retracker u torrent datoteke';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum konfigur';

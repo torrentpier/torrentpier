@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Xin lỗi, nhưng mật khẩu không thể lấy đ
 
 $lang['ALWAYS_ADD_SIG'] = 'Luôn luôn gắn chữ ký của tôi';
 $lang['HIDE_PORN_FORUMS'] = 'Nội dung ẩn 18+';
+$lang['ADD_RETRACKER'] = 'Thêm retracker trong torrent';
 $lang['ALWAYS_NOTIFY'] = 'Luôn luôn thông báo cho tôi câu trả lời';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Gửi một e-mail khi ai đó trả lời một chủ đề mà bạn đã đăng trong. Điều này có thể thay đổi bất cứ khi nào bạn.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Mở rộng';
 $lang['RETURN_CONFIG'] = '%sReturn để Configuration%s';
 $lang['CONFIG_UPD'] = 'Cấu Hình Cập Nhật Thành Công';
 $lang['SET_DEFAULTS'] = 'Khôi phục mặc định';
-
-$lang['OFF_TRACKER'] = 'Vô hiệu hóa theo dõi';
-$lang['OFF_REASON'] = 'Vô hiệu hóa lý do';
-$lang['OFF_REASON_EXPL'] = 'tin này sẽ được gửi đến khách hàng khi theo dõi được vô hiệu hóa';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean đồng nghiệp bảng - không vô hiệu hóa mà không có lý do';
-$lang['COMPACT_MODE'] = 'Chế độ gọn';
-$lang['COMPACT_MODE_EXPL'] = '"Có" - theo dõi sẽ chỉ chấp nhận khách hàng làm việc trong gọn mode<br />"Không" tương thích chế độ (lựa chọn của khách hàng)';
-$lang['BROWSER_REDIRECT_URL'] = 'Chuyển hướng trình duyệt URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'nếu dùng cố gắng để mở theo dõi địa chỉ trong Web browser<br />leave trống vô hiệu hóa';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Linh tinh';
-$lang['ANNOUNCE_INTERVAL'] = 'Thông báo khoảng thời gian';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'đồng nghiệp nên chờ ít nhất điều này nhiều giây giữa thông báo';
-$lang['NUMWANT'] = 'Numwant giá trị';
-$lang['NUMWANT_EXPL'] = 'số các đồng nghiệp được gửi đến khách hàng';
-$lang['EXPIRE_FACTOR'] = 'Ngang hết hạn yếu tố';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Xem xét một ngang chết nếu nó chưa công bố trong một số giây bằng này nhiều lần tính thông báo khoảng thời gian tại thời điểm cuối cùng của nó thông báo (phải lớn hơn 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Bỏ qua IP báo cáo của khách hàng';
-$lang['UPDATE_DLSTAT'] = 'Cửa hàng người lên/xuống thống kê';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Giới hạn';
-$lang['LIMIT_ACTIVE_TOR'] = 'Giới hạn hoạt động torrent';
-$lang['LIMIT_SEED_COUNT'] = 'Giống giới hạn';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - không có giới hạn)';
-$lang['LIMIT_LEECH_COUNT'] = 'Chất thải ngấm giới hạn';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - không có giới hạn)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Con đỉa hết hạn yếu tố';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Đối xử với một ngang như hoạt động cho số này phút thậm chí nếu nó được gửi "dừng lại" sự kiện sau khi bắt đầu dl<br />0 - đưa vào tài khoản "dừng lại" sự kiện';
-$lang['LIMIT_CONCURRENT_IPS'] = "Giới hạn đồng thời IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'mỗi torrent giới hạn';
-$lang['LIMIT_SEED_IPS'] = 'Giống IP giới hạn';
-$lang['LIMIT_SEED_IPS_EXPL'] = "cho phép giống từ không hơn <i>xx</i> IP's<br />0 - không có giới hạn";
-$lang['LIMIT_LEECH_IPS'] = 'Chất thải ngấm IP giới hạn';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "cho phép từ chất thải ngấm không hơn <i>xx</i> IP's<br />0 - không có giới hạn";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Ủy quyền';
-$lang['USE_AUTH_KEY'] = 'Mật mã';
-$lang['USE_AUTH_KEY_EXPL'] = 'cho phép kiểm tra mật mã';
-$lang['AUTH_KEY_NAME'] = 'Mật mã tên';
-$lang['AUTH_KEY_NAME_EXPL'] = 'mật mã chìa khóa tên trong NHẬN được yêu cầu';
-$lang['ALLOW_GUEST_DL'] = 'Cho phép truy cập khách để theo dõi';
-$lang['ADD_RETRACKER'] = 'Thêm retracker trong torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Diễn đàn cấu';

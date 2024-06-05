@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Scuze, dar parola nu pot fi recuperate. Vă rugăm s
 
 $lang['ALWAYS_ADD_SIG'] = 'Întotdeauna atașați semnătura mea';
 $lang['HIDE_PORN_FORUMS'] = 'Ascunde conținutul 18+';
+$lang['ADD_RETRACKER'] = 'Adaugă retracker în fișiere torrent';
 $lang['ALWAYS_NOTIFY'] = 'Întotdeauna mă anunțe de răspunsuri';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Trimite un e-mail atunci când cineva răspunde la un subiect le-ai postat. Acest lucru poate fi schimbat ori de câte ori postezi.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Extensia';
 $lang['RETURN_CONFIG'] = '%sReturn să Configuration%s';
 $lang['CONFIG_UPD'] = 'Configurare Actualizat Cu Succes';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
-
-$lang['OFF_TRACKER'] = 'Dezactivați tracker';
-$lang['OFF_REASON'] = 'Dezactivare motiv';
-$lang['OFF_REASON_EXPL'] = 'acest mesaj va fi trimis la client atunci când dispozitivul este dezactivat';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean colegii de masă - nu dezactivați fără motiv';
-$lang['COMPACT_MODE'] = 'Modul Compact';
-$lang['COMPACT_MODE_EXPL'] = '"Da" - tracker va accepta doar clienti care activeaza in compact mode<br />"Nu" - modul compatibil (aleasă de client)';
-$lang['BROWSER_REDIRECT_URL'] = 'Browser-ul de redirecționare URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'dacă utilizatorul încearcă să deschidă tracker URL-ul în Web browser<br />leave gol pentru a dezactiva';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Anunta interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'colegii ar trebui să aștepte cel puțin asta de multe secunde între anunțuri';
-$lang['NUMWANT'] = 'Numwant valoare';
-$lang['NUMWANT_EXPL'] = 'numărul de colegii de a fi trimise la client';
-$lang['EXPIRE_FACTOR'] = 'Peer expira factor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Ia în considerare un peer mort, dacă acesta nu a anunțat într-un număr de secunde egal cu acest lucru de multe ori calculate anunța intervalul de la data ultimului anunț (trebuie să fie mai mare decât 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignora IP raportate de către client';
-$lang['UPDATE_DLSTAT'] = 'Magazin de utilizatori sus/jos statistici';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limitele';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limita de torrente active';
-$lang['LIMIT_SEED_COUNT'] = 'Însămânțarea limita';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - nici o limită)';
-$lang['LIMIT_LEECH_COUNT'] = 'Downloadez limita';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - nici o limită)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Lipitoare expira factor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Trata un egal la fel de activ pentru acest număr de minute, chiar dacă acesta a trimis "oprit", eveniment după pornirea dl<br />0 - să ia în considerare "oprit" eveniment';
-$lang['LIMIT_CONCURRENT_IPS'] = "Limita concurente IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'pe torrent limita';
-$lang['LIMIT_SEED_IPS'] = 'Însămânțarea IP limita';
-$lang['LIMIT_SEED_IPS_EXPL'] = "permite însămânțarea de nu mai mult de <i>xx</i> IP's<br />0 - nici o limită";
-$lang['LIMIT_LEECH_IPS'] = 'Downloadez IP limita';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "permite downloadez de nu mai mult de <i>xx</i> IP's<br />0 - nici o limită";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Autorizație';
-$lang['USE_AUTH_KEY'] = 'Cheia de acces';
-$lang['USE_AUTH_KEY_EXPL'] = 'permite pentru a verifica cheia de acces';
-$lang['AUTH_KEY_NAME'] = 'Cheia de acces numele';
-$lang['AUTH_KEY_NAME_EXPL'] = 'cheia de acces nume-cheie în cerere';
-$lang['ALLOW_GUEST_DL'] = 'Permite accesul clienților la tracker';
-$lang['ADD_RETRACKER'] = 'Adaugă retracker în fișiere torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';

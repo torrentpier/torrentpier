@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Desculpe, mas sua senha não pode ser recuperada. Po
 
 $lang['ALWAYS_ADD_SIG'] = 'Sempre anexar minha assinatura';
 $lang['HIDE_PORN_FORUMS'] = 'Ocultar o conteúdo de 18+';
+$lang['ADD_RETRACKER'] = 'Adicionar retracker em ficheiros de torrent';
 $lang['ALWAYS_NOTIFY'] = 'Sempre notificar-me das respostas';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Envia um e-mail quando alguém responder a um tópico que você postou. Isso pode ser alterado sempre que você postar.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Extensão';
 $lang['RETURN_CONFIG'] = '%sReturn para Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuração Actualizados Com Sucesso';
 $lang['SET_DEFAULTS'] = 'Restaurar predefinições';
-
-$lang['OFF_TRACKER'] = 'Desativar o rastreador';
-$lang['OFF_REASON'] = 'Desactivar a razão';
-$lang['OFF_REASON_EXPL'] = 'esta mensagem será enviada para o cliente quando o tracker estiver desativado';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean colegas de mesa - não desativar sem razão';
-$lang['COMPACT_MODE'] = 'Modo compacto';
-$lang['COMPACT_MODE_EXPL'] = '"Sim" - tracker só vai aceitar clientes que trabalham em compacto mode<br />"Não", de modo compatível (escolhido pelo cliente)';
-$lang['BROWSER_REDIRECT_URL'] = 'Navegador de redirecionamento de URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'se o usuário tenta abrir URL do rastreador da Web browser<br />leave em branco para desativar';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Diversos';
-$lang['ANNOUNCE_INTERVAL'] = 'Anunciar intervalo';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'pontos deve esperar pelo menos esta quantidade de segundos entre os anúncios';
-$lang['NUMWANT'] = 'Numwant valor';
-$lang['NUMWANT_EXPL'] = 'número de pares de serem enviados ao cliente';
-$lang['EXPIRE_FACTOR'] = 'Ponto expirar fator de';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Considere um ponto morto se ele não anunciou em um número de segundos igual a este, muitas vezes, o calculado anunciar intervalo de, no momento de seu último anúncio deve ser maior do que 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorar IP relatado pelo cliente';
-$lang['UPDATE_DLSTAT'] = 'Loja de usuários para cima/para baixo estatísticas';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limites';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limite de torrents ativos';
-$lang['LIMIT_SEED_COUNT'] = 'A propagação limite';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - sem limite)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching limite';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - sem limite)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Sanguessuga expirar fator de';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Tratar um ponto como ativo para que este número de minutos, mesmo que ele enviou "parado" evento após o início dl<br />0 - se levar em conta "parado" do evento';
-$lang['LIMIT_CONCURRENT_IPS'] = "Limite de IP simultâneas do";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'por torrent limite';
-$lang['LIMIT_SEED_IPS'] = 'A propagação IP limite';
-$lang['LIMIT_SEED_IPS_EXPL'] = "permitir a propagação de não mais do que <i>xx</i> IP's<br />0 - sem limite";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limite';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "permitir parasitismo de não mais do que <i>xx</i> IP's<br />0 - sem limite";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'A autorização';
-$lang['USE_AUTH_KEY'] = 'Chave de acesso';
-$lang['USE_AUTH_KEY_EXPL'] = 'seleção habilitar para a chave de acesso';
-$lang['AUTH_KEY_NAME'] = 'Nome de chave de acesso';
-$lang['AUTH_KEY_NAME_EXPL'] = 'chave de acesso a chave de nome na solicitação GET';
-$lang['ALLOW_GUEST_DL'] = 'Permitir acesso de convidado a tracker';
-$lang['ADD_RETRACKER'] = 'Adicionar retracker em ficheiros de torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Fórum de configuração';

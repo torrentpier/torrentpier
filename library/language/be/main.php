@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Прабачце, але ваш пароль не м
 
 $lang['ALWAYS_ADD_SIG'] = 'Заўсёды далучаць мой подпіс';
 $lang['HIDE_PORN_FORUMS'] = 'Схаваць кантэнт 18+';
+$lang['ADD_RETRACKER'] = 'Дадаць retracker ў торэнт-файлы';
 $lang['ALWAYS_NOTIFY'] = 'Заўсёды паведамляць мне аб адказах';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Адпраўляе па электроннай пошце, калі хто-небудзь адкажа на тэму, якую вы выклалі ст. Гэта можа быць зменена, калі Вы размяшчае.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Пашырэнне';
 $lang['RETURN_CONFIG'] = '%sReturn ў Configuration%s';
 $lang['CONFIG_UPD'] = 'Канфігурацыя Паспяхова Абноўлена';
 $lang['SET_DEFAULTS'] = 'Аднавіць значэнні па змаўчанні';
-
-$lang['OFF_TRACKER'] = 'Адключыць трэкер';
-$lang['OFF_REASON'] = 'Прычына адключэння';
-$lang['OFF_REASON_EXPL'] = 'гэта паведамленне будзе адпраўлена кліенту, калі трэкер адключаны';
-$lang['AUTOCLEAN_EXPL'] = 'автоочистка табліцы аднагодкаў - не адключаць без прычыны';
-$lang['COMPACT_MODE'] = 'Кампактны рэжым';
-$lang['COMPACT_MODE_EXPL'] = '"Так" - трэкер будзе прымаць толькі кліентаў, якія працуюць у кампактны mode<br />"няма" - сумяшчальны рэжым (па выбары кліента)';
-$lang['BROWSER_REDIRECT_URL'] = 'URL-адрас перанакіравання браўзэра';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'калі карыстальнік спрабуе адкрыць трэкер URL-адрас у вэб-browser<br />leave адключыць';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Змяшаная';
-$lang['ANNOUNCE_INTERVAL'] = 'Аб\'яўляюць інтэрвал';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'аднагодкі павінны чакаць, па меншай меры, гэта колькасць секунд паміж паведамленнямі';
-$lang['NUMWANT'] = 'Значэнне Numwant';
-$lang['NUMWANT_EXPL'] = 'колькасць баляў адпраўкай да кліента';
-$lang['EXPIRE_FACTOR'] = 'Калегіяльнага мінае фактар';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Разгледзець аднарангавыя мёртвы, калі б не абвясціў колькасць секунд роўна гэта шмат разоў разліковую абвясціць інтэрвал падчас свайго апошняга аб\'явы (павінна быць больш 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ігнараваць ІС паведамляла кліента';
-$lang['UPDATE_DLSTAT'] = 'Карыстальнікі крамы уверх/ўніз статыстыцы';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Межы';
-$lang['LIMIT_ACTIVE_TOR'] = 'Ліміт актыўных торэнтаў';
-$lang['LIMIT_SEED_COUNT'] = 'Мяжа высеву';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - без абмежаванняў)';
-$lang['LIMIT_LEECH_COUNT'] = 'Спампоўваю мяжа';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - без абмежаванняў)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Мінае фактар ліч';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Лячыць аднагодкаў ў якасці актыўных для дадзенага колькасці хвілін, нават калі гэта не так, "спыніць" падзея пасля запуску dl<br />0 - ўлічваць "спыніць" падзея';
-$lang['LIMIT_CONCURRENT_IPS'] = "Абмежаваць колькасць адначасовых IP-адрасоў";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'за мяжа торэнт';
-$lang['LIMIT_SEED_IPS'] = 'Пасеў ІС мяжа';
-$lang['LIMIT_SEED_IPS_EXPL'] = "дазвольце высеву ад не больш <i>xx</i> ИС's<br />0 - не мяжа";
-$lang['LIMIT_LEECH_IPS'] = 'Пампаваў ІС мяжа';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "дазвольце спампоўваю з не больш чым <i>xx</i> ИС's<br />0 - не мяжа";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Аўтарызацыі';
-$lang['USE_AUTH_KEY'] = 'Адмычка';
-$lang['USE_AUTH_KEY_EXPL'] = 'уключэнне праверкі пароля';
-$lang['AUTH_KEY_NAME'] = 'Імя пароль';
-$lang['AUTH_KEY_NAME_EXPL'] = 'ключ-адмычка імя ў запыт Get';
-$lang['ALLOW_GUEST_DL'] = 'Дазволіць гасцявы доступ на трэкер';
-$lang['ADD_RETRACKER'] = 'Дадаць retracker ў торэнт-файлы';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Форум конфіг';

@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Maaf, password anda tidak dapat diambil. Silahkan hu
 
 $lang['ALWAYS_ADD_SIG'] = 'Selalu melampirkan tanda tangan saya';
 $lang['HIDE_PORN_FORUMS'] = 'Menyembunyikan konten 18+';
+$lang['ADD_RETRACKER'] = 'Tambahkan retracker dalam file torrent';
 $lang['ALWAYS_NOTIFY'] = 'Selalu beritahu saya balasan';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Mengirim e-mail ketika seseorang balasan untuk topik yang anda telah diposting di. Hal ini dapat diubah setiap kali anda posting.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Ekstensi';
 $lang['RETURN_CONFIG'] = '%sReturn untuk Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurasi Berhasil Diperbarui';
 $lang['SET_DEFAULTS'] = 'Restore default';
-
-$lang['OFF_TRACKER'] = 'Menonaktifkan tracker';
-$lang['OFF_REASON'] = 'Menonaktifkan alasan';
-$lang['OFF_REASON_EXPL'] = 'pesan ini akan dikirim ke klien ketika tracker dinonaktifkan';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean rekan-rekan tabel - tidak menonaktifkan tanpa alasan';
-$lang['COMPACT_MODE'] = 'Modus kompak';
-$lang['COMPACT_MODE_EXPL'] = '"Ya" - tracker hanya akan menerima klien yang bekerja di kompak mode<br />"Tidak" kompatibel mode (dipilih oleh klien)';
-$lang['BROWSER_REDIRECT_URL'] = 'Browser redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'jika pengguna mencoba untuk membuka tracker URL di Web browser<br />leave kosong untuk menonaktifkan';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Mengumumkan interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'rekan-rekan harus menunggu setidaknya ini banyak detik antara pengumuman';
-$lang['NUMWANT'] = 'Numwant nilai';
-$lang['NUMWANT_EXPL'] = 'jumlah uang yang dikirim ke klien';
-$lang['EXPIRE_FACTOR'] = 'Peer berakhir faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Mempertimbangkan peer mati jika hal itu tidak diumumkan dalam jumlah detik yang sama berkali-kali dihitung mengumumkan interval pada saat terakhir pengumuman (harus lebih besar dari 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Mengabaikan IP yang dilaporkan oleh klien';
-$lang['UPDATE_DLSTAT'] = 'Toko pengguna up/down statistik';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Batas';
-$lang['LIMIT_ACTIVE_TOR'] = 'Batas active torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Penyemaian batas';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - tidak ada batas)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching batas';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - tidak ada batas)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Lintah berakhir faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Mengobati peer aktif untuk jumlah menit bahkan jika itu dikirim "berhenti" peristiwa setelah memulai dl<br />0 - memperhitungkan "berhenti" acara';
-$lang['LIMIT_CONCURRENT_IPS'] = "Batas serentak IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent batas';
-$lang['LIMIT_SEED_IPS'] = 'Penyemaian IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "memungkinkan penyemaian dari tidak lebih dari <i>xx</i> IP's<br />0 - tidak ada batas";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "memungkinkan leeching dari tidak lebih dari <i>xx</i> IP's<br />0 - tidak ada batas";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Otorisasi';
-$lang['USE_AUTH_KEY'] = 'Kunci sandi';
-$lang['USE_AUTH_KEY_EXPL'] = 'mengaktifkan memeriksa kunci sandi';
-$lang['AUTH_KEY_NAME'] = 'Kunci sandi nama';
-$lang['AUTH_KEY_NAME_EXPL'] = 'kata sandi kunci nama BISA request';
-$lang['ALLOW_GUEST_DL'] = 'Memungkinkan akses tamu ke tracker';
-$lang['ADD_RETRACKER'] = 'Tambahkan retracker dalam file torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';

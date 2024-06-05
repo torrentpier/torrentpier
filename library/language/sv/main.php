@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Ledsen, men ditt lösenord inte kan läsas. Vänlige
 
 $lang['ALWAYS_ADD_SIG'] = 'Bifoga alltid min signatur';
 $lang['HIDE_PORN_FORUMS'] = 'Dölj innehåll 18+';
+$lang['ADD_RETRACKER'] = 'Lägg till retracker i torrent-filer';
 $lang['ALWAYS_NOTIFY'] = 'Alltid underrätta mig om svar';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Skickar ett e-postmeddelande när någon svarar på ett ämne du har skrivit i. Detta kan ändras när du gör ett inlägg.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Förlängning';
 $lang['RETURN_CONFIG'] = '%sReturn att Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Uppdaterats';
 $lang['SET_DEFAULTS'] = 'Återställ standardvärden';
-
-$lang['OFF_TRACKER'] = 'Inaktivera tracker';
-$lang['OFF_REASON'] = 'Inaktivera anledning';
-$lang['OFF_REASON_EXPL'] = 'detta meddelande kommer att skickas till kunden när tracker är funktionshindrade';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean kamrater bord - inte inaktivera utan anledning';
-$lang['COMPACT_MODE'] = 'Kompakt läge';
-$lang['COMPACT_MODE_EXPL'] = '"Ja" - tracker kommer endast att acceptera kunder som arbetar i kompakt mode<br />"Nej" - kompatibel mod (valt av kunden)';
-$lang['BROWSER_REDIRECT_URL'] = 'Webbläsaren omdirigera URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'om användare försöker öppna tracker URL i Nätet browser<br />leave tomt för att stänga';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Övrigt';
-$lang['ANNOUNCE_INTERVAL'] = 'Meddela intervall';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'kamrater bör vänta minst så här många sekunder mellan meddelanden';
-$lang['NUMWANT'] = 'Numwant värde';
-$lang['NUMWANT_EXPL'] = 'antal kamrater som skickas till klienten';
-$lang['EXPIRE_FACTOR'] = 'Peer ut faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Överväga en peer död om det inte har meddelat i ett antal sekunder som motsvarar detta många gånger den beräknade meddela intervall vid tidpunkten för den senaste tillkännagivande (måste vara större än 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorera IP rapporterats av kunden';
-$lang['UPDATE_DLSTAT'] = 'Butik-användare upp/ner statistik';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Gränser';
-$lang['LIMIT_ACTIVE_TOR'] = 'Gräns aktiva torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Sådd gräns';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - ingen begränsning)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leechar gräns';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - ingen begränsning)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech ut faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Behandla en peer aktivt för detta antal minuter, även om det skickas till "stoppad" händelse efter start dl<br />0 - ta hänsyn till "stoppad" händelse';
-$lang['LIMIT_CONCURRENT_IPS'] = "Att begränsa samtidiga IP: s";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent gräns';
-$lang['LIMIT_SEED_IPS'] = 'Sådd IP-gräns';
-$lang['LIMIT_SEED_IPS_EXPL'] = "låt sådd från mer än <i>xx</i> IP-'s<br />0 - ingen gräns";
-$lang['LIMIT_LEECH_IPS'] = 'Leechar IP-gräns';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "låt leechar från mer än <i>xx</i> IP-'s<br />0 - ingen gräns";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Tillstånd';
-$lang['USE_AUTH_KEY'] = 'Passkey';
-$lang['USE_AUTH_KEY_EXPL'] = 'aktivera in för passkey';
-$lang['AUTH_KEY_NAME'] = 'Passkey namn';
-$lang['AUTH_KEY_NAME_EXPL'] = 'nyckel nyckel namnet på begäran FÅ';
-$lang['ALLOW_GUEST_DL'] = 'Tillåt gäståtkomst till tracker';
-$lang['ADD_RETRACKER'] = 'Lägg till retracker i torrent-filer';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';

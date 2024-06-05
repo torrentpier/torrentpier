@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Sorry, maar uw wachtwoord niet teruggehaald kunnen w
 
 $lang['ALWAYS_ADD_SIG'] = 'Altijd bevestig mijn handtekening';
 $lang['HIDE_PORN_FORUMS'] = 'Verberg de inhoud 18+';
+$lang['ADD_RETRACKER'] = 'Toevoegen retracker in torrent-bestanden';
 $lang['ALWAYS_NOTIFY'] = 'Waarschuw me als er reacties zijn.';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Stuurt een e-mail wanneer iemand reageert op een onderwerp waar je in gepost hebt. Dit kan worden gewijzigd wanneer u een bericht plaatst.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Verlenging';
 $lang['RETURN_CONFIG'] = '%sReturn te Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuratie Met Succes Bijgewerkt';
 $lang['SET_DEFAULTS'] = 'Standaardinstellingen herstellen';
-
-$lang['OFF_TRACKER'] = 'Uitschakelen tracker';
-$lang['OFF_REASON'] = 'Uitschakelen reden';
-$lang['OFF_REASON_EXPL'] = 'dit bericht zal worden verzonden aan de opdrachtgever wanneer de tracker is uitgeschakeld';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean peers tabel - niet uit te schakelen zonder reden';
-$lang['COMPACT_MODE'] = 'De compacte modus';
-$lang['COMPACT_MODE_EXPL'] = '"Ja" - tracker accepteren alleen cliënten werken in compacte mode<br />"Nee" - compatibele modus (gekozen door de klant)';
-$lang['BROWSER_REDIRECT_URL'] = 'Browser redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'als de gebruiker probeert te openen tracker-URL in Web browser<br />leave leeg uitschakelen';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Diversen';
-$lang['ANNOUNCE_INTERVAL'] = 'Kondigen interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'collega \' s mee te wachten ten minste zoveel seconden tussen aankondigingen';
-$lang['NUMWANT'] = 'Numwant waarde';
-$lang['NUMWANT_EXPL'] = 'aantal peers dat wordt verzonden naar de cliënt';
-$lang['EXPIRE_FACTOR'] = 'Peer vervallen factor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Overweeg een peer dood als het niet aangekondigd in een aantal seconden gelijk aan zoveel maal de berekende kondigen interval op het moment van de aankondiging (moet groter zijn dan 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Negeren IP gerapporteerd door client';
-$lang['UPDATE_DLSTAT'] = 'Winkel gebruikers omhoog/omlaag statistieken';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Grenzen';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limiet de actieve torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Upload limiet';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - geen limiet)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leechen limiet';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - geen limiet)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech vervallen factor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'De behandeling van een peer als actief voor dit aantal minuten, ook als het verzonden "gestopt" geval na het starten van dl<br />0 - rekening "gestopt" event';
-$lang['LIMIT_CONCURRENT_IPS'] = "Limiet gelijktijdige IP ' s";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent limiet';
-$lang['LIMIT_SEED_IPS'] = 'Zaaien IP-limiet';
-$lang['LIMIT_SEED_IPS_EXPL'] = "laat zaaien van niet meer dan <i>xx</i> IP's<br />0 - geen limiet";
-$lang['LIMIT_LEECH_IPS'] = 'Leechen IP-limiet';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "laat het leechen van niet meer dan <i>xx</i> IP's<br />0 - geen limiet";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Toestemming';
-$lang['USE_AUTH_KEY'] = 'Sleutel';
-$lang['USE_AUTH_KEY_EXPL'] = 'inschakelen: schakel het selectievakje voor de sleutel';
-$lang['AUTH_KEY_NAME'] = 'Sleutel naam';
-$lang['AUTH_KEY_NAME_EXPL'] = 'sleutel sleutel de naam in te KRIJGEN aanvraag';
-$lang['ALLOW_GUEST_DL'] = 'Gasttoegang verlenen aan tracker';
-$lang['ADD_RETRACKER'] = 'Toevoegen retracker in torrent-bestanden';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';

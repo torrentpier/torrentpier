@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Sajnáljuk, de a jelszót nem lehet utólag kiderít
 
 $lang['ALWAYS_ADD_SIG'] = 'Mindig csatolja az aláírásomat';
 $lang['HIDE_PORN_FORUMS'] = 'Elrejteni tartalom 18+';
+$lang['ADD_RETRACKER'] = 'Add retracker a torrent fájlokat';
 $lang['ALWAYS_NOTIFY'] = 'Mindig értesítsen a válaszok';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Küld egy e-mailt, ha valaki válaszol egy téma, amit írt. Ez megváltozott, amikor a poszton.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Kiterjesztés';
 $lang['RETURN_CONFIG'] = '%sReturn, hogy Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurációs Sikeresen Frissítve';
 $lang['SET_DEFAULTS'] = 'Alapértékek visszaállítása';
-
-$lang['OFF_TRACKER'] = 'Tiltsa le tracker';
-$lang['OFF_REASON'] = 'A letiltás oka';
-$lang['OFF_REASON_EXPL'] = 'ezt az üzenetet küldi, hogy az ügyfél, amikor a tracker le van tiltva';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean társaik táblázat - ne tiltsa le ok nélkül';
-$lang['COMPACT_MODE'] = 'Kompakt mód';
-$lang['COMPACT_MODE_EXPL'] = '"Igen" - tracker csak akkor fogadja el költségtérítést dolgozik a compact mode<br />"Nem" - kompatibilis módban (ügyfél által választott)';
-$lang['BROWSER_REDIRECT_URL'] = 'Böngésző redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'ha a felhasználó próbál megnyitni a tracker URL Web browser<br />leave üres letiltása';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Egyéb';
-$lang['ANNOUNCE_INTERVAL'] = 'Jelentem be, intervallum';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'társaik kell várni, legalább ennyi másodperc között közlemények';
-$lang['NUMWANT'] = 'Numwant érték';
-$lang['NUMWANT_EXPL'] = 'száma társaik küld ügyfél';
-$lang['EXPIRE_FACTOR'] = 'Peer lejár tényező';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Fontolja meg egy peer halott, ha még nem jelentette be a másodpercek száma egyenlő sokszor a kiszámított bejelenti intervallum idején az utolsó bejelentés (lehet nagyobb, mint 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Figyelmen kívül IP-jelentette ügyfél';
-$lang['UPDATE_DLSTAT'] = 'Tárolja a felhasználók fel/le statisztikák';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Korlátok';
-$lang['LIMIT_ACTIVE_TOR'] = 'Határ aktív torrentek';
-$lang['LIMIT_SEED_COUNT'] = 'Vetés határ';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - nincs határ)';
-$lang['LIMIT_LEECH_COUNT'] = 'Átszivárognak határ';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - nincs határ)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Pióca lejár tényező';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Bánni egy peer, mint az aktív az, hogy ez hány perc még ha küldött "megállt" a rendezvény megkezdése után dl<br />0 - figyelembe veszi, hogy "megállt" esemény';
-$lang['LIMIT_CONCURRENT_IPS'] = "Határ egyidejű IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = '/ torrent határ';
-$lang['LIMIT_SEED_IPS'] = 'Vetés IP korlátozása';
-$lang['LIMIT_SEED_IPS_EXPL'] = "lehetővé teszi, a vetés nem több, mint <i>xx</i> IP's<br />0 - no-limit";
-$lang['LIMIT_LEECH_IPS'] = 'Átszivárognak IP korlátozása';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "lehetővé teszi, élősködik a nem több, mint <i>xx</i> IP's<br />0 - no-limit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Engedély';
-$lang['USE_AUTH_KEY'] = 'Jelszó';
-$lang['USE_AUTH_KEY_EXPL'] = 'engedélyezze ellenőrizze a jelszót';
-$lang['AUTH_KEY_NAME'] = 'Jelszó név';
-$lang['AUTH_KEY_NAME_EXPL'] = 'kulcs kulcs nevét kért';
-$lang['ALLOW_GUEST_DL'] = 'Lehetővé vendég hozzáférés tracker';
-$lang['ADD_RETRACKER'] = 'Add retracker a torrent fájlokat';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Fórum config';
