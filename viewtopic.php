@@ -498,7 +498,7 @@ $template->assign_vars([
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
     'POLL_IS_EDITABLE' => !$poll_time_expired,
-    'POLL_IS_FINISHED' => ($t_data['topic_vote'] == POLL_FINISHED),
+    'POLL_IS_FINISHED' => ($topic_has_poll == POLL_FINISHED),
     'CAN_MANAGE_POLL' => $can_manage_poll,
     'CAN_ADD_POLL' => $can_add_poll
 ]);

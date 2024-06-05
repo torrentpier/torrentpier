@@ -83,7 +83,7 @@ foreach ($cron_jobs as $job) {
             $msg .= LOG_LF . '------=-------=----------=------=-------=----------';
             bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
 
-            if (is_countable($cron_runtime_log)) {
+            if (is_array($cron_runtime_log)) {
                 $runtime_log_file = ($job['log_file']) ?: $job['cron_script'];
                 $cron_runtime_log[] = '';
                 bb_log($cron_runtime_log, CRON_LOG_DIR . '/' . basename($runtime_log_file));
