@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Anteeksi, mutta salasanan voi palauttaa. Ota yhteytt
 
 $lang['ALWAYS_ADD_SIG'] = 'Kiinnitä aina minun allekirjoitus';
 $lang['HIDE_PORN_FORUMS'] = 'Piilottaa sisällön 18+';
+$lang['ADD_RETRACKER'] = 'Lisää retracker torrent-tiedostoja';
 $lang['ALWAYS_NOTIFY'] = 'Aina ilmoita vastauksista';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Lähettää sähköpostia kun joku vastaa aihe olet lähetetty. Tämä voidaan muuttaa aina, kun lähetät.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Laajennus';
 $lang['RETURN_CONFIG'] = '%sReturn että Configuration%s';
 $lang['CONFIG_UPD'] = 'Kokoonpano Päivitetty Onnistuneesti';
 $lang['SET_DEFAULTS'] = 'Palauta oletukset';
-
-$lang['OFF_TRACKER'] = 'Poistaa tracker';
-$lang['OFF_REASON'] = 'Poistaa syy';
-$lang['OFF_REASON_EXPL'] = 'tämä viesti lähetetään asiakkaalle, kun tracker on pois käytöstä';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean ikäisensä taulukko - älä poista käytöstä ilman syytä';
-$lang['COMPACT_MODE'] = 'Kompakti tila';
-$lang['COMPACT_MODE_EXPL'] = '"Kyllä" - tracker hyväksyy vain asiakkaita, jotka työskentelevät kompakti mode<br />"Ei" - yhteensopiva tila (valittu asiakas)';
-$lang['BROWSER_REDIRECT_URL'] = 'Selain uudelleenohjaus-URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'jos käyttäjä yrittää avata tracker URL-osoite Web-browser<br />leave tyhjäksi, jos haluat poistaa käytöstä';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Ilmoittaa aikaväli';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'ikäisensä tulisi odottaa vähintään näin monta sekuntia välillä ilmoitukset';
-$lang['NUMWANT'] = 'Numwant arvo';
-$lang['NUMWANT_EXPL'] = 'määrä ikäisensä lähetetään asiakkaalle';
-$lang['EXPIRE_FACTOR'] = 'Peer päättyy tekijä';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Harkitse peer kuollut, jos se ei ole ilmoittanut useita sekuntia yhtä monta kertaa laskettu ilmoittaa väli aikaan sen viimeinen ilmoitus (on oltava suurempi kuin 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ohita IP ilmoittamia asiakas';
-$lang['UPDATE_DLSTAT'] = 'Säilytä käyttäjät ylös/alas-tilastot';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Rajoja';
-$lang['LIMIT_ACTIVE_TOR'] = 'Raja aktiivinen torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Kylvö raja';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - ei rajaa)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching raja';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - ei rajaa)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech päättyy tekijä';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Hoitoon peer aktiivisena näin monta minuuttia, vaikka se lähetti "pysäytti" tapahtuman jälkeen alkaa dl<br />0 - ottaa huomioon "pysäyttää" tapahtuma';
-$lang['LIMIT_CONCURRENT_IPS'] = "Rajoittaa samanaikaisten IP: n";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent raja';
-$lang['LIMIT_SEED_IPS'] = 'Kylvö IP-raja';
-$lang['LIMIT_SEED_IPS_EXPL'] = "salli kylvö alkaen enintään <i>xx</i> IP's<br />0 - no limit";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP-raja';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "salli iilimadot alkaen enintään <i>xx</i> IP's<br />0 - no limit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Lupaa';
-$lang['USE_AUTH_KEY'] = 'Salasana';
-$lang['USE_AUTH_KEY_EXPL'] = 'jotta tarkistaa salasana';
-$lang['AUTH_KEY_NAME'] = 'Tunnuksen nimi';
-$lang['AUTH_KEY_NAME_EXPL'] = 'salasana-näppäintä nimi-GET-pyynnön';
-$lang['ALLOW_GUEST_DL'] = 'Salli vieraiden pääsy tracker';
-$lang['ADD_RETRACKER'] = 'Lisää retracker torrent-tiedostoja';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
