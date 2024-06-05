@@ -163,12 +163,15 @@ a {
     color: #1d9100;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 sup {
     color: #aa8000;
 }
 
 .tooltip {
-    cursor: pointer;
     position: relative;
 }
 
@@ -203,9 +206,9 @@ sup {
     <tr>
         <th>Path ({$data['file_count']} files)</th>
         <th>Size</th>
-        <th style="width: auto;">
+        <th class="tooltip" style="width: auto;">
             BTMR hash
-            <sup class="tooltip">?
+            <sup>?
                 <span class="tooltiptext">
                     BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as
                     <a href="https://github.com/kovalensky/tmrr" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader.</a>
