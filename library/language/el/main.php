@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Συγγνώμη, αλλά τον κωδικό πρ�
 
 $lang['ALWAYS_ADD_SIG'] = 'Πάντα να επισυνάψετε την υπογραφή μου';
 $lang['HIDE_PORN_FORUMS'] = 'Απόκρυψη περιεχομένου 18+';
+$lang['ADD_RETRACKER'] = 'Προσθέστε retracker σε αρχεία torrent';
 $lang['ALWAYS_NOTIFY'] = 'Πάντα να ενημερώνετε μου απαντήσεις';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Στέλνει ένα e-mail όταν κάποιος απαντήσεις σε ένα θέμα που έχετε καταχωρήσει. Αυτό μπορεί να αλλάξει κάθε φορά που θα δημοσιεύσετε.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Επέκταση';
 $lang['RETURN_CONFIG'] = '%sReturn να Configuration%s';
 $lang['CONFIG_UPD'] = 'Διαμόρφωση Ενημερώθηκε Με Επιτυχία';
 $lang['SET_DEFAULTS'] = 'Επαναφορά προεπιλογών';
-
-$lang['OFF_TRACKER'] = 'Απενεργοποίηση tracker';
-$lang['OFF_REASON'] = 'Απενεργοποίηση λόγο';
-$lang['OFF_REASON_EXPL'] = 'αυτό το μήνυμα θα σταλεί στον πελάτη, όταν ο tracker είναι απενεργοποιημένη';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean τους συμμαθητές τραπέζι - μην απενεργοποιήσετε χωρίς λόγο';
-$lang['COMPACT_MODE'] = 'Συμπαγή λειτουργία';
-$lang['COMPACT_MODE_EXPL'] = '"Ναι" - tracker θα δεχτεί μόνο τους πελάτες που εργάζονται σε συμπαγή mode<br />"Όχι" - συμβατή λειτουργία (επιλέγεται από τον πελάτη)';
-$lang['BROWSER_REDIRECT_URL'] = 'Πρόγραμμα περιήγησης ανακατεύθυνση URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'εάν ο χρήστης προσπαθεί να ανοίξει tracker URL στο Web browser<br />leave το κενό για να το απενεργοποιήσετε';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Ανακοινώσει διάστημα';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'συνομηλίκους τους, θα πρέπει να περιμένετε τουλάχιστον αυτό πολλές δευτερόλεπτα μεταξύ ανακοινώσεις';
-$lang['NUMWANT'] = 'Numwant αξία';
-$lang['NUMWANT_EXPL'] = 'αριθμός των peers αποστέλλονται στον πελάτη';
-$lang['EXPIRE_FACTOR'] = 'Peer λήξει παράγοντας';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Σκεφτείτε ένα peer νεκρός αν δεν έχει ανακοινώσει σε έναν αριθμό δευτερολέπτων ίσο με αυτό πολλές φορές η υπολογιζόμενη ανακοινώσει διάστημα κατά την τελευταία ανακοίνωση (πρέπει να είναι μεγαλύτερη από 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Αγνοούν IP αναφερθεί από τον πελάτη';
-$lang['UPDATE_DLSTAT'] = 'Χρήστες του καταστήματος πάνω/κάτω στατιστικά στοιχεία';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Όρια';
-$lang['LIMIT_ACTIVE_TOR'] = 'Όριο active torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Σπορά όριο';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - δεν υπάρχει όριο)';
-$lang['LIMIT_LEECH_COUNT'] = 'Κατεβάζετε το όριο';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - δεν υπάρχει όριο)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Βδέλλα λήξει παράγοντας';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Θεραπεία του peer ως ενεργό για αυτό το νούμερο λεπτά, ακόμη και αν έστειλε "σταμάτησε" εκδήλωση μετά την έναρξη dl<br />0 - να λαμβάνει υπόψη "σταμάτησε" την εκδήλωση';
-$lang['LIMIT_CONCURRENT_IPS'] = "Όριο ταυτόχρονων IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'ανά torrent όριο';
-$lang['LIMIT_SEED_IPS'] = 'Σπορά όριο IP';
-$lang['LIMIT_SEED_IPS_EXPL'] = "επιτρέπουν σπορά από όχι περισσότερα από <i>xx</i> IP's<br />0 - δεν υπάρχει όριο";
-$lang['LIMIT_LEECH_IPS'] = 'Κατεβάζετε όριο IP';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "επιτρέπουν κατεβάζετε από όχι περισσότερα από <i>xx</i> IP's<br />0 - δεν υπάρχει όριο";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Άδεια';
-$lang['USE_AUTH_KEY'] = 'Κωδικό';
-$lang['USE_AUTH_KEY_EXPL'] = 'ενεργοποίηση ελέγχου για τον κωδικό';
-$lang['AUTH_KEY_NAME'] = 'Κωδικό όνομα';
-$lang['AUTH_KEY_NAME_EXPL'] = 'κωδικό όνομα του κλειδιού στην αίτηση';
-$lang['ALLOW_GUEST_DL'] = 'Επιτρέπεται η πρόσβαση των επισκεπτών tracker';
-$lang['ADD_RETRACKER'] = 'Προσθέστε retracker σε αρχεία torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Φόρουμ config';
