@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Кешіріңіз, бірақ құпия сөзің
 
 $lang['ALWAYS_ADD_SIG'] = 'Әрқашан менің қолы бекітіңіз';
 $lang['HIDE_PORN_FORUMS'] = 'мазмұнды жасыру 18+';
+$lang['ADD_RETRACKER'] = 'торрент файлдарда retracker қосу';
 $lang['ALWAYS_NOTIFY'] = 'Әрқашан жауаптардың мені хабардар';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'біреу сіз жарияладыңыз тақырыпты жауап кезде электрондық пошта хабарын жіберетін. Егер сіз жариялауға кезде, Бұл өзгертуге болады.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Кеңейтім';
 $lang['RETURN_CONFIG'] = 'Configuration%s үшін %sReturn';
 $lang['CONFIG_UPD'] = 'Конфигурация сәтті жаңартылды';
 $lang['SET_DEFAULTS'] = 'Əдепкі параметрлерді қалпына келтіру';
-
-$lang['OFF_TRACKER'] = 'трекер өшіру';
-$lang['OFF_REASON'] = 'өшіру себебі';
-$lang['OFF_REASON_EXPL'] = 'Tracker өшірілген кезде осы хабарлама клиентке жіберіледі';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean құрдастары үстел - себепсіз өшіру емес,';
-$lang['COMPACT_MODE'] = 'Шағын режимі';
-$lang['COMPACT_MODE_EXPL'] = '«Иә», - (клиент таңдаған) үйлесімді режимінде - трекер ғана жинақы mode<br /> «Жоқ» жұмыс істейтін клиенттерді қабылдайды';
-$lang['BROWSER_REDIRECT_URL'] = 'Браузер айдату URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'пайдаланушы ажырату үшін Web browser<br />leave бланкісінде трекер URL ашу тырысады, егер';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Әртүрлі';
-$lang['ANNOUNCE_INTERVAL'] = 'аралығын жариялайды';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'құрдастары хабарландырулар арасында кем дегенде осы көптеген секунд күтіңіз тиіс';
-$lang['NUMWANT'] = 'Numwant мән';
-$lang['NUMWANT_EXPL'] = 'клиентке жіберілетін құрдастарының саны';
-$lang['EXPIRE_FACTOR'] = 'фактор аяқталады Peer';
-$lang['EXPIRE_FACTOR_EXPL'] = 'ол бірнеше рет есептелген осы тең секунд бірқатар жариялады жоқ, егер (1 артық болу керек), оның соңғы хабарландырудың уақытта аралығын жариялайды өлі тең қарастырайық';
-$lang['IGNORE_GIVEN_IP'] = 'IP клиент хабарлады елемеу';
-$lang['UPDATE_DLSTAT'] = 'Store пайдаланушылар жоғары / төмен статистика';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Шектеулер';
-$lang['LIMIT_ACTIVE_TOR'] = 'Актив Торрент шектеу';
-$lang['LIMIT_SEED_COUNT'] = 'шегі Егіс';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - жоқ шегі)';
-$lang['LIMIT_LEECH_COUNT'] = 'шегі Leeching';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - жоқ шегі)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Лич фактор аяқталады';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'минут осы нөмірдің белсенді ретінде тең емдеуге ол dl<br />0 бастаудан кейін іс-шара «тоқтатылған» жіберді, тіпті, егер - ескеруге оқиғаны «тоқтатты»';
-$lang['LIMIT_CONCURRENT_IPS'] = "мезгілдегі IP лимиті";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'торрент лимиті партиясына';
-$lang['LIMIT_SEED_IPS'] = 'IP шегін Егіс';
-$lang['LIMIT_SEED_IPS_EXPL'] = "артық емес <i>xx</i> IP's<br />0 бастап себу мүмкіндік - жоқ шегі";
-$lang['LIMIT_LEECH_IPS'] = 'IP шегін Leeching';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "көп емес <i>xx</i> астам IP's<br />0 бастап leeching мүмкіндік - жоқ шегі";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'рұқсат';
-$lang['USE_AUTH_KEY'] = 'Рұқсат кілті';
-$lang['USE_AUTH_KEY_EXPL'] = 'пароль чек мүмкіндік';
-$lang['AUTH_KEY_NAME'] = 'Рұқсат кілті атауы';
-$lang['AUTH_KEY_NAME_EXPL'] = 'GET сұрау салуда кілті негізгі атауы';
-$lang['ALLOW_GUEST_DL'] = 'Tracker үшін қонақтық енуді рұқсат';
-$lang['ADD_RETRACKER'] = 'торрент файлдарда retracker қосу';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Форум конфигурациясы';
