@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Promiňte, ale vaše heslo nemůže být načtena. P
 
 $lang['ALWAYS_ADD_SIG'] = 'Vždy připojit můj podpis';
 $lang['HIDE_PORN_FORUMS'] = 'Skrýt obsah 18+';
+$lang['ADD_RETRACKER'] = 'Přidat retracker v torrent soubory';
 $lang['ALWAYS_NOTIFY'] = 'Vždy mně upozornit na odpovědi';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Odešle e-mail když někdo odpoví na téma, které jste zaslali. Toto může být změněno kdykoli budete psát.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Rozšíření';
 $lang['RETURN_CONFIG'] = '%sReturn na Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurace Úspěšně Aktualizován';
 $lang['SET_DEFAULTS'] = 'Obnovit výchozí nastavení';
-
-$lang['OFF_TRACKER'] = 'Zakázat tracker';
-$lang['OFF_REASON'] = 'Zakázat důvod';
-$lang['OFF_REASON_EXPL'] = 'tato zpráva bude odeslána na klienta, když tracker je zakázáno';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean vrstevníky tabulka - nevypínejte bez důvodu';
-$lang['COMPACT_MODE'] = 'Kompaktní režim';
-$lang['COMPACT_MODE_EXPL'] = '"Ano" - tracker bude akceptovat pouze klienty, kteří pracují v kompaktní mode<br />"Ne" - kompatibilní režim (volí klient)';
-$lang['BROWSER_REDIRECT_URL'] = 'Prohlížeč přesměrování URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'pokud se uživatel pokusí otevřít tracker URL ve Webovém browser<br />leave prázdné zakázat';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Oznámit interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'vrstevníci měli počkat alespoň tento počet sekund mezi oznámení';
-$lang['NUMWANT'] = 'Numwant hodnotu';
-$lang['NUMWANT_EXPL'] = 'počet vrstevníků je zaslána klientovi';
-$lang['EXPIRE_FACTOR'] = 'Peer vyprší faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Zvážit peer mrtvý, kdyby to neoznámil v počtu sekund, které se rovná mnohokrát vypočtené oznámit interval v době jeho poslední oznámení (musí být větší než 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorovat IP uvádí klienta';
-$lang['UPDATE_DLSTAT'] = 'Store uživatele nahoru/dolů statistiky';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limity';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limit aktivní torrenty';
-$lang['LIMIT_SEED_COUNT'] = 'Setí limit';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - bez omezení)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching limit';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - bez omezení)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Pijavice vyprší faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Léčbě peer jako aktivní, pro tento počet minut, i kdyby to poslal "zastavil" událost po spuštění dl<br />0 - vzít v úvahu "zastavil" událost';
-$lang['LIMIT_CONCURRENT_IPS'] = "Omezit souběžných IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'na torrent limit';
-$lang['LIMIT_SEED_IPS'] = 'Setí IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "umožňují setí z ne více než <i>xx</i> IP's<br />0 - bez omezení";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "umožňují odvar z ne více než <i>xx</i> IP's<br />0 - bez omezení";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Povolení';
-$lang['USE_AUTH_KEY'] = 'Klíč';
-$lang['USE_AUTH_KEY_EXPL'] = 'zaškrtněte pro klíč';
-$lang['AUTH_KEY_NAME'] = 'Přístupový kód název';
-$lang['AUTH_KEY_NAME_EXPL'] = 'klíče název klíče v GET požadavek';
-$lang['ALLOW_GUEST_DL'] = 'Umožňuje hostu přístup ke tracker';
-$lang['ADD_RETRACKER'] = 'Přidat retracker v torrent soubory';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Fórum config';
