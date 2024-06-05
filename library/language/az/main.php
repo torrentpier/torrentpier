@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Bağışlayın, amma sizin parol bərpa oluna bilmə
 
 $lang['ALWAYS_ADD_SIG'] = 'Həmişə birləşdirmək mənim imza';
 $lang['HIDE_PORN_FORUMS'] = 'Gizlətmək məzmun 18+';
+$lang['ADD_RETRACKER'] = 'Əlavə retracker bu torrent faylları';
 $lang['ALWAYS_NOTIFY'] = 'Həmişə hesabat barədə mənə cavab';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Göndərir zaman e-poçt cavab verən tapılarmı mövzusunda olduğunuz sizə üçün nəzərdə v. dəyişdirilə bilər zaman göndərin.';
 
@@ -2526,48 +2527,6 @@ $lang['EXTENSION'] = 'Genişləndirilməsi';
 $lang['RETURN_CONFIG'] = '%sReturn bu Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiqurasiya Uğurla Yenilənib';
 $lang['SET_DEFAULTS'] = 'Bərpa yetirilməməsi';
-
-$lang['OFF_TRACKER'] = 'Aradan tracker';
-$lang['OFF_REASON'] = 'Səbəbi kəsilməsi';
-$lang['OFF_REASON_EXPL'] = 'bu mesajı göndəriləcək müştəriyə zaman tracker qaralar';
-$lang['AUTOCLEAN_EXPL'] = 'автоочистка masa peer - qaralar səbəb olmadan';
-$lang['COMPACT_MODE'] = 'Kompakt rejimi';
-$lang['COMPACT_MODE_EXPL'] = '"Bəli" - tracker qəbul edəcək yalnız müştərilərin çalışan kompakt mode<br />"yox" - uyğun rejimi (müştərinin arzusu ilə)';
-$lang['BROWSER_REDIRECT_URL'] = 'URL-ünvanı üçün brauzer yönlendirme';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'əgər istifadəçi açmaq üçün çalışır tracker URL-ünvanı veb-browser<br />leave aradan';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Qarışıq';
-$lang['ANNOUNCE_INTERVAL'] = 'Elan edirlər interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'yaşıdları gözləmək lazımdır ən azı bu sayı saniyə arasında mesajlaşma';
-$lang['NUMWANT'] = 'Dəyəri Numwant';
-$lang['NUMWANT_EXPL'] = 'sayı olmasına baxmayaraq onlar göndərilməsi müştəri';
-$lang['EXPIRE_FACTOR'] = 'Kollegial başa amili';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Hesab ad-hoc ölü deyil, əgər elan edib sayı saniyə, onsuz da bu dəfə çox təxmin edilən elan interval zamanı onun son elanlar (daha çox olmalıdır 1)';
-$lang['IGNORE_GIVEN_IP'] = 'İgnore IS xəbər verirdi müştəri';
-$lang['UPDATE_DLSTAT'] = 'İstifadəçilər mağazanın yuxarı/aşağı statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Məhdudiyyətlər';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limit aktiv torrent';
-$lang['LIMIT_SEED_COUNT'] = 'Həddi səpin';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - məhdudiyyət olmadan)';
-$lang['LIMIT_LEECH_COUNT'] = 'Скачиваю həddi';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - məhdudiyyət olmadan)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Sona amil the lich';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Müalicə həmyaşıdları kimi aktiv üçün bu sayının dəqiqə, hətta əgər bu, belə deyil "dayandırmaq" hadisə başlamaq sonra dl<br />0 - nəzərə "dayandırmaq" hadisə';
-$lang['LIMIT_CONCURRENT_IPS'] = "Sayını məhdudlaşdırmaq sinxron IP-ünvanlar";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'üçün limit torrent';
-$lang['LIMIT_SEED_IPS'] = 'Əkin IS həddi';
-$lang['LIMIT_SEED_IPS_EXPL'] = "icazə verin, səpin-dən çox olmayan <i>xx</i> ИС's<br />0 - son hədd deyil";
-$lang['LIMIT_LEECH_IPS'] = 'Sarsıldı edir IS həddi';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "icazə verin, скачиваю bir daha heç <i>xx</i> ИС's<br />0 - son hədd deyil";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Avtorizasiya';
-$lang['USE_AUTH_KEY'] = 'Jimmy';
-$lang['USE_AUTH_KEY_EXPL'] = 'daxil yoxlama parol';
-$lang['AUTH_KEY_NAME'] = 'Adı parol';
-$lang['AUTH_KEY_NAME_EXPL'] = 'əsas jimmy adı Get sorğu';
-$lang['ALLOW_GUEST_DL'] = 'Həll qonaq girişi tracker';
-$lang['ADD_RETRACKER'] = 'Əlavə retracker bu torrent faylları';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum, onları';
