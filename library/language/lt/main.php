@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Atsiprašome, bet jūsų slaptažodis negali būti p
 
 $lang['ALWAYS_ADD_SIG'] = 'Visada pridėti mano parašą';
 $lang['HIDE_PORN_FORUMS'] = 'Paslėpti turinio 18+';
+$lang['ADD_RETRACKER'] = 'Pridėti retracker į torrent failus';
 $lang['ALWAYS_NOTIFY'] = 'Visada pranešti man atsakymai';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Siunčia el. paštu, kai kas nors atsakė į temas jūs jau paskelbtas. Tai galima keisti, kai jūs po.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Pratęsimo';
 $lang['RETURN_CONFIG'] = '%sReturn į Configuration%s';
 $lang['CONFIG_UPD'] = 'Sąrankos Atnaujinta Sėkmingai';
 $lang['SET_DEFAULTS'] = 'Atkurti numatytuosius';
-
-$lang['OFF_TRACKER'] = 'Išjungti tracker';
-$lang['OFF_REASON'] = 'Išjungti priežastis';
-$lang['OFF_REASON_EXPL'] = 'šis pranešimas bus siunčiamas klientui, kai tracker yra išjungtas';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean bendraamžių stalo - neturi išjungti be priežasties';
-$lang['COMPACT_MODE'] = 'Kompaktiškas režimas';
-$lang['COMPACT_MODE_EXPL'] = '"Taip" - tracker bus priimti tik klientams, dirbantiems kompaktiškas mode<br />"Ne" - suderinamas režimas (pasirenka klientas)';
-$lang['BROWSER_REDIRECT_URL'] = 'Naršyklės URL peradresavimo';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'jei vartotojas bando atidaryti trackerio URL Interneto browser<br />leave tuščią išjungti';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Įvairūs';
-$lang['ANNOUNCE_INTERVAL'] = 'Pranešti, intervalas';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'bendraamžių turėtų laukti bent jau tai daug sekundžių tarp skelbimai';
-$lang['NUMWANT'] = 'Numwant vertė';
-$lang['NUMWANT_EXPL'] = 'skaičius bendraamžių siunčiami klientui';
-$lang['EXPIRE_FACTOR'] = 'Tarpusavio baigtis koeficientas';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Mano bendraamžių miręs, jei ji nėra paskelbta, kiek sekundžių lygi tai daug kartų, apskaičiuoti paskelbti intervalo metu jos paskutinis pranešimas (turi būti didesnis nei 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignoruoti IP pranešė klientas';
-$lang['UPDATE_DLSTAT'] = 'Parduotuvės vartotojais aukštyn/žemyn statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Apribojimai';
-$lang['LIMIT_ACTIVE_TOR'] = 'Apriboti aktyvių torrentų';
-$lang['LIMIT_SEED_COUNT'] = 'Sėja riba';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching riba';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Dėlės baigtis koeficientas';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Gydyti tarpusavio kaip aktyvūs šio skaičiaus minučių, net jeigu jis išsiųstas "sustojo" renginys po to, kai pradeda dl<br />0 - atsižvelgti į "sustojo" renginys';
-$lang['LIMIT_CONCURRENT_IPS'] = "Riba sutampančiais IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent riba';
-$lang['LIMIT_SEED_IPS'] = 'Sėja IP riba';
-$lang['LIMIT_SEED_IPS_EXPL'] = "leisti sėja ne daugiau kaip <i>xx</i> IP's<br />0 - ne riba";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP riba';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "leisti leeching ne daugiau kaip <i>xx</i> IP's<br />0 - ne riba";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Leidimas';
-$lang['USE_AUTH_KEY'] = 'Prieigos raktas';
-$lang['USE_AUTH_KEY_EXPL'] = 'sudaryti sąlygas patikrinti, ar prieigos raktas';
-$lang['AUTH_KEY_NAME'] = 'Prieigos raktas pavadinimas';
-$lang['AUTH_KEY_NAME_EXPL'] = 'prieigos raktas raktas pavadinimas GAUTI prašymą';
-$lang['ALLOW_GUEST_DL'] = 'Leisti svečias prieiga prie trackerio';
-$lang['ADD_RETRACKER'] = 'Pridėti retracker į torrent failus';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forumas config';
