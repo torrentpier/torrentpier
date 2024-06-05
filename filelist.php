@@ -163,6 +163,10 @@ a {
     color: #1d9100;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 sup {
     color: #aa8000;
 }
@@ -178,7 +182,7 @@ sup {
     top: 0;
     opacity: 0;
     transition: opacity 0.7s;
-    width: 400px;
+    width: 200px;
     background-color: #111;
     color: #acacac;
     text-align: left;

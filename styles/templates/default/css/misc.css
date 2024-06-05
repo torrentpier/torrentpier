@@ -104,3 +104,7 @@ pre, .pre {
   border: 2px solid #CC6600;
   padding: 8px;
 }
+
+.copyElement {
+  cursor: pointer !important;
+}
