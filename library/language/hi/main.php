@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'क्षमा करें, लेकिन आप
 
 $lang['ALWAYS_ADD_SIG'] = 'हमेशा अपने हस्ताक्षर संलग्न करें';
 $lang['HIDE_PORN_FORUMS'] = '18+ सामग्री छुपाएं';
+$lang['ADD_RETRACKER'] = 'धार फ़ाइलों में रिट्रेक जोड़ें';
 $lang['ALWAYS_NOTIFY'] = 'हमेशा मुझे उत्तर के बारे में सूचित करें';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'किसी ई-मेल को भेजता है, जब कोई आपके द्वारा पोस्ट किए गए किसी विषय का जवाब देता है। जब भी आप पोस्ट करते हैं तब यह बदला जा सकता है।';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'एक्सटेंशन';
 $lang['RETURN_CONFIG'] = '%s कॉन्फ़िगरेशन पर पुनः %s';
 $lang['CONFIG_UPD'] = 'कॉन्फ़िगरेशन सफलतापूर्वक अपडेट किया गया';
 $lang['SET_DEFAULTS'] = 'डिफॉल्ट्स का पुनःस्थापन';
-
-$lang['OFF_TRACKER'] = 'ट्रैकर अक्षम करें';
-$lang['OFF_REASON'] = 'कारण अक्षम करें';
-$lang['OFF_REASON_EXPL'] = 'ट्रैकर निष्क्रिय होने पर यह संदेश ग्राहक को भेजा जाएगा';
-$lang['AUTOCLEAN_EXPL'] = 'ऑटोकलीयन सहकर्मी तालिका - बिना किसी कारण के अक्षम करें';
-$lang['COMPACT_MODE'] = 'कॉम्पैक्ट मोड';
-$lang['COMPACT_MODE_EXPL'] = '"हां" - ट्रैकर केवल कॉम्पैक्ट मोड में काम कर रहे ग्राहकों को स्वीकार करेगा <br /> "नहीं" - संगत मोड (क्लाइंट द्वारा चुना गया)';
-$lang['BROWSER_REDIRECT_URL'] = 'ब्राउज़र रीडायरेक्ट यूआरएल';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'अगर उपयोगकर्ता वेब ब्राउज़र में ट्रैकर यूआरएल खोलने की कोशिश करता है <br /> निष्क्रिय करने के लिए रिक्त स्थान रखता है';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'विविध';
-$lang['ANNOUNCE_INTERVAL'] = 'अंतराल की घोषणा करें';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'साथियों को घोषणाओं के बीच कम से कम इस सेकेंड का इंतजार करना चाहिए';
-$lang['NUMWANT'] = 'लाभ मूल्य';
-$lang['NUMWANT_EXPL'] = 'साथियों की संख्या ग्राहक को भेजी जा रही है';
-$lang['EXPIRE_FACTOR'] = 'सहकर्मी की समय सीमा समाप्त';
-$lang['EXPIRE_FACTOR_EXPL'] = 'एक पीअर मृतक पर विचार करें यदि यह कई सेकंड में इसकी आखिरी घोषणा के समय गणना की गई अंतराल के बराबर कई बार घोषित नहीं हुई है (1 से अधिक होना चाहिए)';
-$lang['IGNORE_GIVEN_IP'] = 'क्लाइंट द्वारा रिपोर्ट आईपी अनदेखा करें';
-$lang['UPDATE_DLSTAT'] = 'स्टोर उपयोगकर्ताओं को ऊपर / नीचे आंकड़े स्टोर करें';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'सीमाएं';
-$lang['LIMIT_ACTIVE_TOR'] = 'सक्रिय टोरेंट सीमा';
-$lang['LIMIT_SEED_COUNT'] = 'सीडिंग सीमा';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - कोई सीमा नहीं)';
-$lang['LIMIT_LEECH_COUNT'] = 'लीचिंग सीमा';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - कोई सीमा नहीं)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'लीक अवधि का समय समाप्त';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'एक पीयर को इस नंबर की संख्या के लिए सक्रिय रूप से समझाएं, भले ही उसने dl<br />0 शुरू करने के बाद "रोका गया" इवेंट भेज दिया - "रोका" ईवेंट को ध्यान में रखें';
-$lang['LIMIT_CONCURRENT_IPS'] = "समवर्ती आईपी की सीमाएं";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'प्रति धार सीमा के अनुसार';
-$lang['LIMIT_SEED_IPS'] = 'सीडिंग आईपी सीमा';
-$lang['LIMIT_SEED_IPS_EXPL'] = "<i>xx</i> आईपी से <br />0 से अधिक नहीं बीजांकन की अनुमति दें - कोई सीमा नहीं";
-$lang['LIMIT_LEECH_IPS'] = 'लीकिंग आईपी सीमा';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "123+_0_321xx</i> आईपी से <br />0 से अधिक नहीं लीकिंग की अनुमति - कोई सीमा नहीं";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'प्राधिकरण';
-$lang['USE_AUTH_KEY'] = 'सर्व-कुंजी';
-$lang['USE_AUTH_KEY_EXPL'] = 'पासकी के लिए जांच सक्षम करें';
-$lang['AUTH_KEY_NAME'] = 'पासकी नाम';
-$lang['AUTH_KEY_NAME_EXPL'] = 'अनुरोध में पासकी कुंजी नाम';
-$lang['ALLOW_GUEST_DL'] = 'ट्रैकर तक अतिथि पहुंच की अनुमति दें';
-$lang['ADD_RETRACKER'] = 'धार फ़ाइलों में रिट्रेक जोड़ें';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'फोरम कॉन्फ़िग';
