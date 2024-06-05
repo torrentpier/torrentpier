@@ -21,23 +21,25 @@ class Common
      * Директория с builder-скриптами (внутри INC_DIR)
      */
     public $ds_dir = 'datastore';
+
     /**
      * Готовая к употреблению data
      * array('title' => data)
      */
-    public $data = [];
+    public array $data = [];
+
     /**
      * Список элементов, которые будут извлечены из хранилища при первом же запросе get()
      * до этого момента они ставятся в очередь $queued_items для дальнейшего извлечения _fetch()'ем
      * всех элементов одним запросом
      * array('title1', 'title2'...)
      */
-    public $queued_items = [];
+    public array $queued_items = [];
 
     /**
      * 'title' => 'builder script name' inside "includes/datastore" dir
      */
-    public $known_items = [
+    public array $known_items = [
         'cat_forums' => 'build_cat_forums.php',
         'check_updates' => 'build_check_updates.php',
         'jumpbox' => 'build_cat_forums.php',
@@ -54,13 +56,13 @@ class Common
     ];
 
     /**
-     * @param array (item1_title, item2_title...) or single item's title
+     * @param array $items
+     * @return void
      */
-    public function enqueue($items)
+    public function enqueue(array $items): void
     {
-        foreach ((array)$items as $item) {
-            // игнор уже поставленного в очередь либо уже извлеченного
-            if (!\in_array($item, $this->queued_items) && !isset($this->data[$item])) {
+        foreach ($items as $item) {
+            if (!in_array($item, $this->queued_items) && !isset($this->data[$item])) {
                 $this->queued_items[] = $item;
             }
         }
