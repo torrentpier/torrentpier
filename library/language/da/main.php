@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Undskyld, men dit password, kan ikke hentes. Bedes d
 
 $lang['ALWAYS_ADD_SIG'] = 'Altid lægger min signatur';
 $lang['HIDE_PORN_FORUMS'] = 'Skjul indhold 18+';
+$lang['ADD_RETRACKER'] = 'Tilføj retracker i torrent filer';
 $lang['ALWAYS_NOTIFY'] = 'Altid give mig svar';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sender en e-mail når nogen svarer til et emne du har postet i. Dette kan ændres når du skriver.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Udvidelse';
 $lang['RETURN_CONFIG'] = '%sReturn at Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguration Opdateret';
 $lang['SET_DEFAULTS'] = 'Gendan standarder';
-
-$lang['OFF_TRACKER'] = 'Deaktiver tracker';
-$lang['OFF_REASON'] = 'Deaktiver grund';
-$lang['OFF_REASON_EXPL'] = 'denne besked vil blive sendt til kunden, når tracker er deaktiveret';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean jævnaldrende bordet - ikke deaktivere uden grund';
-$lang['COMPACT_MODE'] = 'Kompakt tilstand';
-$lang['COMPACT_MODE_EXPL'] = '"Ja" - tracker vil accepterer kun kunder, der arbejder i kompakt mode<br />"Nej" - kompatibel tilstand (valgt af kunden)';
-$lang['BROWSER_REDIRECT_URL'] = 'Browser redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'hvis brugeren forsøger at åbne tracker URL \' en i Web browser<br />leave blank for at deaktivere';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Annoncere interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'peers bør vente mindst dette mange sekunder mellem meddelelser';
-$lang['NUMWANT'] = 'Numwant værdi';
-$lang['NUMWANT_EXPL'] = 'antal jævnaldrende, der bliver sendt til klienten';
-$lang['EXPIRE_FACTOR'] = 'Peer udløber faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Overveje en peer død, hvis den ikke har annonceret i en række af sekunder, svarende til mange gange den beregnede annoncere interval på tidspunktet for den sidste meddelelse (skal være større end 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorere IP-rapporteret af klient';
-$lang['UPDATE_DLSTAT'] = 'Butikken brugere op/ned-statistik';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Grænser';
-$lang['LIMIT_ACTIVE_TOR'] = 'Grænse aktive torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Såning grænse';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - ingen grænse)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leecher grænse';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - ingen grænse)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech udløber faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Behandling af en peer som aktiv for det antal minutter, selv hvis det sendes "stoppet" event efter start dl<br />0 - tage hensyn til "stoppet" begivenhed';
-$lang['LIMIT_CONCURRENT_IPS'] = "Begrænse samtidige IP ' s";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent grænse';
-$lang['LIMIT_SEED_IPS'] = 'Såning IP-grænse';
-$lang['LIMIT_SEED_IPS_EXPL'] = "tillader såning fra mere end <i>xx</i> IP-'s<br />0 - no limit";
-$lang['LIMIT_LEECH_IPS'] = 'Leecher IP-grænse';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "tillader leecher fra mere end <i>xx</i> IP-'s<br />0 - no limit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Tilladelse';
-$lang['USE_AUTH_KEY'] = 'Adgangsnøglen';
-$lang['USE_AUTH_KEY_EXPL'] = 'sætte ind for adgangsnøglen';
-$lang['AUTH_KEY_NAME'] = 'Adgangsnøglen navn';
-$lang['AUTH_KEY_NAME_EXPL'] = 'adgangsnøglen centrale navn i GET-anmodning';
-$lang['ALLOW_GUEST_DL'] = 'Giv gæsteadgang til tracker';
-$lang['ADD_RETRACKER'] = 'Tilføj retracker i torrent filer';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
