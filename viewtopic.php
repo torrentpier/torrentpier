@@ -577,7 +577,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     $poster_rank = $rank_image = '';
-    $user_rank = $postrow[$i]['user_rank'];
+    $user_rank = !$poster_guest ? $postrow[$i]['user_rank'] : '';
     if (!$user->opt_js['h_rnk_i'] && !$poster_guest && isset($ranks[$user_rank])) {
         $rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
         $poster_rank = $bb_cfg['show_rank_text'] ? $ranks[$user_rank]['rank_title'] : '';
