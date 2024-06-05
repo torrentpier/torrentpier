@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Vabandust, aga parooli ei saa taastada. Palun kontak
 
 $lang['ALWAYS_ADD_SIG'] = 'Ühenda alati minu allkiri';
 $lang['HIDE_PORN_FORUMS'] = 'Sisu peitmiseks 18+';
+$lang['ADD_RETRACKER'] = 'Lisada retracker aastal torrent failid';
 $lang['ALWAYS_NOTIFY'] = 'Alati teata mulle vastustest';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Saadab e-kiri, kui keegi vastab teemale teil on postitatud. Seda saab muuta, kui postituse.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Pikendamine';
 $lang['RETURN_CONFIG'] = '%sReturn, et Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguratsiooni Edukalt Uuendatud';
 $lang['SET_DEFAULTS'] = 'Restore defaults (taasta vaikesätted';
-
-$lang['OFF_TRACKER'] = 'Keelata tracker';
-$lang['OFF_REASON'] = 'Keelata põhjus';
-$lang['OFF_REASON_EXPL'] = 'see teade on saadetud kliendile, kui tracker on keelatud';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean eakaaslastega tabel - ärge keelake ilma põhjuseta';
-$lang['COMPACT_MODE'] = 'Kompaktne režiim';
-$lang['COMPACT_MODE_EXPL'] = '"Jah" - tracker võtab vastu vaid kliendid töötavad kompaktne mode<br />"Ei" - compatible režiimis (valitakse kliendi poolt)';
-$lang['BROWSER_REDIRECT_URL'] = 'Brauseri ümbersuunamise URL-i';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'kui kasutaja üritab avada tracker URL Web browser<br />leave tühi keelata';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Teatada intervall';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'eakaaslased peaksid ootama vähemalt nii palju sekundi vahel teated';
-$lang['NUMWANT'] = 'Numwant väärtus';
-$lang['NUMWANT_EXPL'] = 'arv eakaaslastega saadetakse kliendile';
-$lang['EXPIRE_FACTOR'] = 'Peer kehtivuse tegur';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Kaaluda peer surnud, kui see ei ole teada, mitu sekundit, mis on võrdne selle, mitu korda on arvutatud teatada intervalli ajal oma viimast teadet (peab olema suurem kui 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignoreerida IP teatas klient';
-$lang['UPDATE_DLSTAT'] = 'Poe kasutajad up/down statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Piirid';
-$lang['LIMIT_ACTIVE_TOR'] = 'Piir aktiivse torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Külvi piirata';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching piirata';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Kaanid kehtivuse tegur';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Raviks vastastikuse kui aktiivne see mitu minutit, isegi siis, kui see saadetakse "peatatud", kui pärast käivitamist dl<br />0 - võtta arvesse "peatatud" sündmus';
-$lang['LIMIT_CONCURRENT_IPS'] = "Piir paralleelselt IP'";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent limiit';
-$lang['LIMIT_SEED_IPS'] = 'Külvi IP piirata';
-$lang['LIMIT_SEED_IPS_EXPL'] = "võimaldab külvi alates kuni <i>xx</i> IP's<br />0 - no limit";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP piirata';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "võimaldab leeching kõige rohkem <i>xx</i> IP's<br />0 - no limit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Luba';
-$lang['USE_AUTH_KEY'] = 'Parooli';
-$lang['USE_AUTH_KEY_EXPL'] = 'võimaldab kontrollida parooli';
-$lang['AUTH_KEY_NAME'] = 'Parooli nimi';
-$lang['AUTH_KEY_NAME_EXPL'] = 'parooli võti nime SAADA päring';
-$lang['ALLOW_GUEST_DL'] = 'Võimaldab külaline juurdepääsu tracker';
-$lang['ADD_RETRACKER'] = 'Lisada retracker aastal torrent failid';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Foorumi config';
