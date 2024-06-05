@@ -119,11 +119,15 @@ if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
     if (IS_ADMIN) {
-        $datastore->enqueue(['viewtopic_forum_select']);
+        $datastore->enqueue([
+            'viewtopic_forum_select'
+        ]);
     }
 }
 if ($topic_attachment) {
-    $datastore->enqueue(['attach_extensions']);
+    $datastore->enqueue([
+        'attach_extensions'
+    ]);
 }
 
 set_die_append_msg($forum_id);

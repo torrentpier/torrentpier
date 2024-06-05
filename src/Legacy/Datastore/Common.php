@@ -71,7 +71,7 @@ class Common
     public function &get($title)
     {
         if (!isset($this->data[$title])) {
-            $this->enqueue($title);
+            $this->enqueue([$title]);
             $this->_fetch();
         }
         return $this->data[$title];
