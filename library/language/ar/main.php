@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'آسف, ولكن كلمة المرور الخاصة 
 
 $lang['ALWAYS_ADD_SIG'] = 'دائما نعلق توقيعي';
 $lang['HIDE_PORN_FORUMS'] = 'إخفاء المحتوى 18+';
+$lang['ADD_RETRACKER'] = 'إضافة retracker في ملفات التورنت';
 $lang['ALWAYS_NOTIFY'] = 'دائما يخطر لي من الردود';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'يرسل رسالة عبر البريد الإلكتروني عندما يقوم شخص بالرد على موضوع كنت قد نشرت. هذا يمكن أن يتغير كلما قمت بنشر.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'تمديد';
 $lang['RETURN_CONFIG'] = '%sReturn إلى Configuration%s';
 $lang['CONFIG_UPD'] = 'التكوين تحديث بنجاح';
 $lang['SET_DEFAULTS'] = 'استعادة الافتراضيات';
-
-$lang['OFF_TRACKER'] = 'تعطيل تعقب';
-$lang['OFF_REASON'] = 'تعطيل السبب';
-$lang['OFF_REASON_EXPL'] = 'هذه الرسالة سوف يتم إرسالها إلى العميل عند تعطيل تعقب';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean أقرانهم الجدول - لا تعطيل دون سبب';
-$lang['COMPACT_MODE'] = 'الوضع المضغوط';
-$lang['COMPACT_MODE_EXPL'] = '"نعم" - تعقب سوف نقبل فقط للعملاء الذين يعملون في الاتفاق mode<br />"لا" - وضع متوافق (المختار من قبل العميل)';
-$lang['BROWSER_REDIRECT_URL'] = 'المتصفح إعادة توجيه URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'إذا كان يحاول المستخدم فتح تعقب URL ويب browser<br />leave فارغة إلى تعطيل';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'متفرقات';
-$lang['ANNOUNCE_INTERVAL'] = 'أعلن الفاصل';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'أقرانهم يجب الانتظار على الأقل عدة ثوان بين الإعلانات';
-$lang['NUMWANT'] = 'Numwant القيمة';
-$lang['NUMWANT_EXPL'] = 'عدد من الزملاء إرسالها إلى العميل';
-$lang['EXPIRE_FACTOR'] = 'نظير تنتهي عامل';
-$lang['EXPIRE_FACTOR_EXPL'] = 'النظر في الأقران الميت إذا لم يعلن في عدد من ثانية يساوي هذا مرات عديدة محسوبة يعلن الفاصل في وقت آخر إعلان (يجب أن تكون أكبر من 1)';
-$lang['IGNORE_GIVEN_IP'] = 'تجاهل IP ذكرت من قبل العميل';
-$lang['UPDATE_DLSTAT'] = 'متجر المستخدمين أعلى/أسفل الإحصاءات';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'حدود';
-$lang['LIMIT_ACTIVE_TOR'] = 'الحد النشطة السيول';
-$lang['LIMIT_SEED_COUNT'] = 'البذر الحد';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - لا يوجد حد)';
-$lang['LIMIT_LEECH_COUNT'] = 'الإمتصاص الحد';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - لا يوجد حد)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'علقة تنتهي عامل';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'علاج الأقران نشطة على هذا العدد من الدقائق حتى لو أرسلت "توقف" الحدث بعد بدء dl<br />0 - خذ بعين الاعتبار "توقف" الحدث';
-$lang['LIMIT_CONCURRENT_IPS'] = "الحد المتزامنة IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'في سيل الحد';
-$lang['LIMIT_SEED_IPS'] = 'البذر IP الحد';
-$lang['LIMIT_SEED_IPS_EXPL'] = "تسمح البذر من لا أكثر من <i>xx</i> IP's<br />0 - لا يوجد حد";
-$lang['LIMIT_LEECH_IPS'] = 'الإمتصاص IP الحد';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "تسمح الإمتصاص من لا أكثر من <i>xx</i> IP's<br />0 - لا يوجد حد";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'إذن';
-$lang['USE_AUTH_KEY'] = 'مفتاح المرور';
-$lang['USE_AUTH_KEY_EXPL'] = 'تمكين التحقق من مفتاح المرور';
-$lang['AUTH_KEY_NAME'] = 'كلمة السر اسم';
-$lang['AUTH_KEY_NAME_EXPL'] = 'كلمة السر اسم المفتاح في الحصول على طلب';
-$lang['ALLOW_GUEST_DL'] = 'تسمح للنزلاء الوصول إلى تعقب';
-$lang['ADD_RETRACKER'] = 'إضافة retracker في ملفات التورنت';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'منتدى التكوين';
