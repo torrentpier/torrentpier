@@ -544,6 +544,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Atvainojiet, bet jūsu paroli nevar izgūt. Lūdzu, 
 
 $lang['ALWAYS_ADD_SIG'] = 'Vienmēr pievienot manu parakstu';
 $lang['HIDE_PORN_FORUMS'] = 'Paslēpt satura 18+';
+$lang['ADD_RETRACKER'] = 'Pievienot retracker, torrent failus';
 $lang['ALWAYS_NOTIFY'] = 'Vienmēr informēt mani par atbildēm';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Nosūta e-pastu, kad kāds atbild uz tēmu, jums ir norīkots. Tas var mainīt ikreiz, kad jūs post.';
 
@@ -2523,48 +2524,6 @@ $lang['EXTENSION'] = 'Pagarinājums';
 $lang['RETURN_CONFIG'] = '%sReturn, lai Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurācijas Atjaunināts Veiksmīgi';
 $lang['SET_DEFAULTS'] = 'Restore defaults (atjaunot noklusējumus';
-
-$lang['OFF_TRACKER'] = 'Atspējot tracker';
-$lang['OFF_REASON'] = 'Atspējot iemesls';
-$lang['OFF_REASON_EXPL'] = 'šis ziņojums tiks nosūtīts klientam, ja tracker ir deaktivizēta';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean vienaudžiem tabula - nav atspējot bez iemesla';
-$lang['COMPACT_MODE'] = 'Kompakts režīmā';
-$lang['COMPACT_MODE_EXPL'] = '"Jā" - tracker pieņems tikai tādus klientus, kas strādā kompakts mode<br />"Nē" - saderīgu režīmā (izvēlas klients)';
-$lang['BROWSER_REDIRECT_URL'] = 'Pārlūka novirzīšanas URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'ja lietotājs mēģina atvērt tracker URL Web browser<br />leave tukšu, lai atspējotu';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Dažādi';
-$lang['ANNOUNCE_INTERVAL'] = 'Paziņot intervāls';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'vienaudžiem vajadzētu gaidīt vismaz šo daudz sekundes starp sludinājumi';
-$lang['NUMWANT'] = 'Numwant vērtība';
-$lang['NUMWANT_EXPL'] = 'skaits vienaudžiem, kas tiek nosūtīts uz klienta';
-$lang['EXPIRE_FACTOR'] = 'Salīdzinošās beidzas faktors';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Uzskata, peer miris, ja tā nav paziņojusi, ar sekunžu skaitu, kas vienāds ar šo daudzas reizes aprēķināto paziņot intervālu laikā tā pēdējā paziņojuma (nedrīkst būt lielāks par 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorēt IP ziņoja klientu';
-$lang['UPDATE_DLSTAT'] = 'Veikala lietotājiem augšu/uz leju statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Ierobežojumi';
-$lang['LIMIT_ACTIVE_TOR'] = 'Ierobežojums aktīvu straumēm';
-$lang['LIMIT_SEED_COUNT'] = 'Sētu limitu';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - neierobežoti)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching limitu';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - neierobežoti)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Dēle beidzas faktors';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Ārstēt peer kā aktīva šo minūšu skaitu, pat tad, ja tā ir nosūtījusi "apstājās" notikumu, kad sākas dl<br />0 - ņem vērā "stop" pasākums';
-$lang['LIMIT_CONCURRENT_IPS'] = "Ierobežo vienlaicīgo IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'par torrent limitu';
-$lang['LIMIT_SEED_IPS'] = 'Sētu IP limitu';
-$lang['LIMIT_SEED_IPS_EXPL'] = "ļauj sētu no ne vairāk kā <i>xx</i> IP's<br />0 - bez limita";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limitu';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "ļauj leeching no ne vairāk kā <i>xx</i> IP's<br />0 - bez limita";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Atļaujas';
-$lang['USE_AUTH_KEY'] = 'Patentatslēga';
-$lang['USE_AUTH_KEY_EXPL'] = 'ļauj pārbaudīt, vai piekļuves atslēga';
-$lang['AUTH_KEY_NAME'] = 'Patentatslēga nosaukums';
-$lang['AUTH_KEY_NAME_EXPL'] = 'piekļuves atslēgu, atslēgu nosaukums GET pieprasījumu';
-$lang['ALLOW_GUEST_DL'] = 'Atļaut viesu piekļuvi tracker';
-$lang['ADD_RETRACKER'] = 'Pievienot retracker, torrent failus';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forums config';
