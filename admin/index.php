@@ -15,6 +15,12 @@ if (!$stats = $datastore->get('stats')) {
     $stats = $datastore->get('stats');
 }
 
+// Files integrity check
+if (!$files_integrity_data = $datastore->get('files_integrity')) {
+    $datastore->update('files_integrity');
+    $files_integrity_data = $datastore->get('files_integrity');
+}
+
 // Check for updates
 if (!$update_data = $datastore->get('check_updates')) {
     $datastore->update('check_updates');
@@ -81,6 +87,14 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'ADMIN_LOCK' => (bool)$bb_cfg['board_disable'],
         'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
     ]);
+
+    // Files integrity check results
+    if (!empty($files_integrity_data)) {
+        $template->assign_block_vars('integrity_check', [
+            'INTEGRITY_SUCCESS' => (bool)$files_integrity_data['success'],
+            'INTEGRITY_WRONG_FILES_LIST' => $files_integrity_data['files']
+        ]);
+    }
 
     // Check for updates
     if (!empty($update_data)) {
