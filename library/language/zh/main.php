@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = '输入的名称可能不被禁止。 它要么已
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '点击%sHere%s回到禁止的用户名的管理';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = '版本的信息';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
