@@ -44,7 +44,7 @@ foreach ($filesList as $file) {
 }
 
 $data = [
-    'success' => false,
+    'success' => empty($wrongFilesList),
     'wrong_files' => $wrongFilesList,
     'wrong_files_num' => count($wrongFilesList),
     'total_num' => count($filesList),
