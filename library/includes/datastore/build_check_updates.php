@@ -24,7 +24,7 @@ if ($updater_content !== false) {
     $json_response = json_decode(utf8_encode($updater_content), true);
 }
 
-if (is_array($json_response) && !empty($json_response) && !isset($json_response['message'])) {
+if ((is_array($json_response) && !empty($json_response)) && !isset($json_response['message'])) {
     $get_version = $json_response['tag_name'];
     $version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
 

@@ -98,7 +98,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     }
 
     // Check for updates
-    if (!empty($update_data) && isset($update_data['available_update'])) {
+    if (isset($update_data['available_update'])) {
         $template->assign_block_vars('updater', [
             'UPDATE_AVAILABLE' => $update_data['available_update'],
             'NEW_VERSION_NUMBER' => $update_data['latest_version'],
