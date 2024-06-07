@@ -37,7 +37,7 @@ if (is_array($json_response) && !empty($json_response)) {
         // Get MD5 checksum
         $md5_file_checksum = '';
         if (isset($latest_release_file)) {
-            $md5_file_checksum = md5_file($latest_release_file);
+            $md5_file_checksum = strtoupper(md5_file($latest_release_file));
         }
 
         // Build data array
