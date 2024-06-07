@@ -14,14 +14,24 @@ if (!defined('BB_ROOT')) {
 global $bb_cfg;
 
 $data = [];
-$filesList = [
-    0 => [
-        'path' => 'index.php',
-        'hash' => '4DC6C23A599961D6082FC853C723B8F1'
-    ]
-];
-$wrongFilesList = [];
+$filesList = [];
 
+$checksumFile = new SplFileObject(INT_DATA_DIR . '/checksums.md5', 'r');
+$checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
+
+$lines = [];
+foreach ($checksumFile as $line) {
+    $parts = explode('  ', $line);
+    if (!isset($parts[1])) {
+        break;
+    }
+    $filesList[] = [
+        'path' => trim($parts[1]),
+        'hash' => trim($parts[0])
+    ];
+}
+
+$wrongFilesList = [];
 foreach ($filesList as $file) {
     if (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
         $wrongFilesList[] = basename($file['path']);
