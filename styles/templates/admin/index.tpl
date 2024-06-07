@@ -157,7 +157,7 @@
     <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
     <hr>
     <!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->
-    <ul style="height: 120px; overflow-x: auto;">
+    <ul style="max-height: 120px; overflow-x: auto;">
         <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
     </ul>
     <!-- ENDIF -->
