@@ -14,6 +14,7 @@ if (!defined('BB_ROOT')) {
 global $bb_cfg;
 
 $data = [];
+$data[] = ['latest_check_timestamp' => TIMENOW];
 
 $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
 $updater_content = file_get_contents(UPDATER_URL, context: $context);
@@ -48,7 +49,6 @@ if (is_array($json_response) && !empty($json_response) && !isset($json_response[
             'latest_version_dl_link' => $latest_release_file ?? $json_response['html_url'],
             'latest_version_checksum' => $md5_file_checksum,
             'latest_version_link' => $json_response['html_url'],
-            'last_check_timestamp' => TIMENOW
         ];
     }
 }
