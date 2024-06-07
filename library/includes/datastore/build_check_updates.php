@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-$data = ['latest_check_timestamp' => TIMENOW];
+$data = [];
 
 $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
 $updater_content = file_get_contents(UPDATER_URL, context: $context);
@@ -52,4 +52,5 @@ if ((is_array($json_response) && !empty($json_response)) && !isset($json_respons
     }
 }
 
+$data[] = ['latest_check_timestamp' => TIMENOW];
 $this->store('check_updates', $data);
