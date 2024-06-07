@@ -84,7 +84,25 @@
   }
 </script>
 
-<br/>
+<!-- BEGIN integrity_check -->
+<!-- IF integrity_check.INTEGRITY_SUCCESS -->
+<div class="alert alert-success" style="width: 95%;">
+    <h4 class="alert-heading">{L_INTEGRITY_CHECK_SUCCESS}</h4>
+    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
+</div>
+<!-- ELSE -->
+<div class="alert alert-danger" style="width: 95%;">
+    <h4 class="alert-heading">{L_INTEGRITY_CHECK_FAIL}</h4>
+    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
+    <hr>
+    <!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->
+    <ul style="max-height: 120px; overflow-x: auto;">
+        <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
+    </ul>
+    <!-- ENDIF -->
+</div>
+<!-- ENDIF -->
+<!-- END integrity_check -->
 
 <!-- IF ADMIN_LOCK_CRON -->
 <div class="alert alert-danger" style="width: 95%;">
@@ -144,26 +162,6 @@
   </tr>
 </table>
 <br/>
-
-<!-- BEGIN integrity_check -->
-<!-- IF integrity_check.INTEGRITY_SUCCESS -->
-<div class="alert alert-success" style="width: 95%;">
-    <h4 class="alert-heading">{L_INTEGRITY_CHECK_SUCCESS}</h4>
-    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
-</div>
-<!-- ELSE -->
-<div class="alert alert-danger" style="width: 95%;">
-    <h4 class="alert-heading">{L_INTEGRITY_CHECK_FAIL}</h4>
-    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
-    <hr>
-    <!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->
-    <ul style="max-height: 120px; overflow-x: auto;">
-        <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
-    </ul>
-    <!-- ENDIF -->
-</div>
-<!-- ENDIF -->
-<!-- END integrity_check -->
 
 <table class="forumline">
     <tr>
