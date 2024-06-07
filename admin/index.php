@@ -94,7 +94,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             'INTEGRITY_SUCCESS' => (bool)$files_integrity_data['success'],
             'INTEGRITY_WRONG_FILES_LIST' => implode("\n</li>\n<li>\n", $files_integrity_data['wrong_files']),
             'INTEGRITY_LAST_CHECK_TIME' => sprintf($lang['INTEGRITY_LAST_CHECK'], bb_date($files_integrity_data['timestamp'])),
-            'INTEGRITY_CHECKED_FILES' => sprintf($lang['INTEGRITY_CHECKED'], $files_integrity_data['total_num'], $files_integrity_data['total_num'] - $files_integrity_data['wrong_files_num']),
+            'INTEGRITY_CHECKED_FILES' => sprintf($lang['INTEGRITY_CHECKED'], $files_integrity_data['total_num'], ($files_integrity_data['total_num'] - $files_integrity_data['wrong_files_num'])),
         ]);
     }
 
