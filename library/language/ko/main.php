@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = '이름을 입력할 수 없습 허용되지 않�
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '클릭 %sHere%s 하는 반품을 허용하지 않는 사용자 이름 관리';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = '버전 정보';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
