@@ -14,11 +14,23 @@ if (!defined('BB_ROOT')) {
 global $bb_cfg;
 
 $data = [];
-$filesList = ['123', '123', '123', '123','123', '123','123', '123','123', '123'];
+$filesList = [
+    0 => [
+        'path' => BB_ROOT . '/index.php',
+        'hash' => '4DC6C23A599961D6082FC853C723B8F0'
+    ]
+];
+$wrongFilesList = [];
+
+foreach ($filesList as $file) {
+    if (strtolower(md5_file($file['path'])) !== strtolower($file['hash'])) {
+        $wrongFilesList[] = basename($file['path']);
+    }
+}
 
 $data = [
     'success' => false,
-    'files' => implode("\n</li>\n<li>\n", $filesList),
+    'files' => implode("\n</li>\n<li>\n", $wrongFilesList),
     'timestamp' => TIMENOW
 ];
 
