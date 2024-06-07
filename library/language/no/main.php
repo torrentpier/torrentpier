@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Navnet du har angitt, ikke kunne bli forbudt. Det
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikk %sHere%s for å gå tilbake til å Nekte Brukernavn Administrasjon';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versjon Informasjon';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
