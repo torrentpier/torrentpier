@@ -13,8 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-$data = [];
-$data[] = ['latest_check_timestamp' => TIMENOW];
+$data = ['latest_check_timestamp' => TIMENOW];
 
 $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
 $updater_content = file_get_contents(UPDATER_URL, context: $context);
