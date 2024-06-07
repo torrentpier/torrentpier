@@ -147,9 +147,9 @@
 
 <!-- BEGIN integrity_check -->
 <!-- IF integrity_check.INTEGRITY_SUCCESS -->
-Проверка целостности файлов успешна
+Проверка целостности файлов успешна. Последняя проверка была: {integrity_check.INTEGRITY_LAST_CHECK_TIME}
 <!-- ELSE -->
-Некоторые файлы не прошли проверку
+Некоторые файлы не прошли проверку. Последняя проверка была: {integrity_check.INTEGRITY_LAST_CHECK_TIME}
 <!-- ENDIF -->
 <!-- END integrity_check -->
 
