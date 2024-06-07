@@ -16,14 +16,19 @@ global $bb_cfg;
 $data = [];
 $filesList = [];
 
-$checksumFile = new SplFileObject(INT_DATA_DIR . '/checksums.md5', 'r');
+$checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
 $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
 $lines = [];
 foreach ($checksumFile as $line) {
     $parts = explode('  ', $line);
     if (!isset($parts[1])) {
+        // Skip end line
         break;
+    }
+    if (basename($parts[1]) === basename(CHECKSUMS_FILE)) {
+        // Skip checksums.md5
+        continue;
     }
     $filesList[] = [
         'path' => trim($parts[1]),
