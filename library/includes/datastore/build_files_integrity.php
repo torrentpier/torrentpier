@@ -17,7 +17,7 @@ $data = [];
 $filesList = [
     0 => [
         'path' => BB_ROOT . '/index.php',
-        'hash' => '4DC6C23A599961D6082FC853C723B8F0'
+        'hash' => '4DC6C23A599961D6082FC853C723B8F1'
     ]
 ];
 $wrongFilesList = [];
