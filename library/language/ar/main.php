@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'الاسم الذي أدخلته لا يمكن أ
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'انقر فوق %sHere%s للعودة إلى عدم السماح اسم المستخدم الإدارة';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'معلومات الإصدار';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
