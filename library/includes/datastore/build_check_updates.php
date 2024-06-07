@@ -15,7 +15,7 @@ global $bb_cfg;
 
 $data = [];
 
-$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME]]);
+$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
 $updater_content = file_get_contents(UPDATER_URL, context: $context);
 
 $json_response = false;
@@ -23,7 +23,7 @@ if ($updater_content !== false) {
     $json_response = json_decode(utf8_encode($updater_content), true);
 }
 
-if (is_array($json_response) && !empty($json_response)) {
+if ((is_array($json_response) && !empty($json_response)) && !isset($json_response['message'])) {
     $get_version = $json_response['tag_name'];
     $version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
 
@@ -52,4 +52,5 @@ if (is_array($json_response) && !empty($json_response)) {
     }
 }
 
+$data[] = ['latest_check_timestamp' => TIMENOW];
 $this->store('check_updates', $data);

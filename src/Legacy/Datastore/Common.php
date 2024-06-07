@@ -42,6 +42,7 @@ class Common
     public array $known_items = [
         'cat_forums' => 'build_cat_forums.php',
         'check_updates' => 'build_check_updates.php',
+        'files_integrity' => 'build_files_integrity.php',
         'jumpbox' => 'build_cat_forums.php',
         'viewtopic_forum_select' => 'build_cat_forums.php',
         'latest_news' => 'build_cat_forums.php',
