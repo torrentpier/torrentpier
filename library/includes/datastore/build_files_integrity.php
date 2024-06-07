@@ -18,7 +18,8 @@ $filesList = [];
 
 $data = [
     'success' => true,
-    'files' => $filesList
+    'files' => $filesList,
+    'timestamp' => TIMENOW
 ];
 
 $this->store('files_integrity', $data);

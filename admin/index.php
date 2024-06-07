@@ -92,7 +92,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     if (!empty($files_integrity_data)) {
         $template->assign_block_vars('integrity_check', [
             'INTEGRITY_SUCCESS' => (bool)$files_integrity_data['success'],
-            'INTEGRITY_WRONG_FILES_LIST' => $files_integrity_data['files']
+            'INTEGRITY_WRONG_FILES_LIST' => $files_integrity_data['files'],
+            'INTEGRITY_LAST_CHECK_TIME' => bb_date($files_integrity_data['timestamp']),
         ]);
     }
 

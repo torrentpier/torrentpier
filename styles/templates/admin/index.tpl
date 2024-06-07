@@ -146,11 +146,10 @@
 <br/>
 
 <!-- BEGIN integrity_check -->
-<!-- IF updater.UPDATE_AVAILABLE -->
-<tr>
-    <td class="row1" nowrap="nowrap" width="25%"><b>{L_UPDATE_AVAILABLE}:</b></td>
-    <td class="row2"><b>{updater.NEW_VERSION_NUMBER}</b><!-- IF updater.NEW_VERSION_SIZE -->&nbsp;({L_SIZE}:&nbsp;{updater.NEW_VERSION_SIZE})<!-- ENDIF -->&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_DL_LINK}">{L_DOWNLOAD}</a>&nbsp;&middot;&nbsp;<a target="_blank" href="{updater.NEW_VERSION_LINK}">{L_CHANGELOG}</a><!-- IF updater.NEW_VERSION_MD5 -->&nbsp;&middot;&nbsp;MD5:&nbsp;{updater.NEW_VERSION_MD5}<!-- ENDIF --></td>
-</tr>
+<!-- IF integrity_check.INTEGRITY_SUCCESS -->
+Проверка целостности файлов успешна
+<!-- ELSE -->
+Некоторые файлы не прошли проверку
 <!-- ENDIF -->
 <!-- END integrity_check -->
 
