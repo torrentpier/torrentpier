@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Meno, ktoré ste zadali, by nemali byť povolené
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliknite na tlačidlo %sHere%s vrátiť Zakázať Meno Správy';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informácie O Verzii';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
