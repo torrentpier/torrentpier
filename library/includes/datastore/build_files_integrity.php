@@ -16,14 +16,14 @@ global $bb_cfg;
 $data = [];
 $filesList = [
     0 => [
-        'path' => BB_ROOT . '/index.php',
+        'path' => 'index.php',
         'hash' => '4DC6C23A599961D6082FC853C723B8F1'
     ]
 ];
 $wrongFilesList = [];
 
 foreach ($filesList as $file) {
-    if (strtolower(md5_file($file['path'])) !== strtolower($file['hash'])) {
+    if (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
         $wrongFilesList[] = basename($file['path']);
     }
 }
