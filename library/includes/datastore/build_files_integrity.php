@@ -14,7 +14,7 @@ if (!defined('BB_ROOT')) {
 global $bb_cfg;
 
 $data = [];
-$filesList = ['123', '123'];
+$filesList = ['123', '123', '123', '123','123', '123','123', '123','123', '123'];
 
 $data = [
     'success' => false,

@@ -150,7 +150,7 @@
 Проверка целостности файлов успешна. Последняя проверка была: {integrity_check.INTEGRITY_LAST_CHECK_TIME}
 <!-- ELSE -->
 Некоторые файлы не прошли проверку. Последняя проверка была: {integrity_check.INTEGRITY_LAST_CHECK_TIME}
-<!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->Вот их список: <ul><li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li></ul><!-- ENDIF -->
+<!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST --><br>Вот их список: <ul style="border: 1px solid black; min-width: 300px; max-width: 500px; height: 100px; padding: 10px; margin: 5px; overflow-x: auto;"><li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li></ul><!-- ENDIF -->
 <!-- ENDIF -->
 <!-- END integrity_check -->
 
