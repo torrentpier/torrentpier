@@ -47,7 +47,7 @@ if ((is_array($json_response) && !empty($json_response)) && !isset($json_respons
             'latest_version_size' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
             'latest_version_dl_link' => $latest_release_file ?? $json_response['html_url'],
             'latest_version_checksum' => $md5_file_checksum,
-            'latest_version_link' => $json_response['html_url'],
+            'latest_version_link' => $json_response['html_url']
         ];
     }
 }
