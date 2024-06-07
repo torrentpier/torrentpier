@@ -14,11 +14,11 @@ if (!defined('BB_ROOT')) {
 global $bb_cfg;
 
 $data = [];
-$filesList = [];
+$filesList = ['123', '123'];
 
 $data = [
-    'success' => true,
-    'files' => $filesList,
+    'success' => false,
+    'files' => implode("\n</li>\n<li>\n", $filesList),
     'timestamp' => TIMENOW
 ];
 
