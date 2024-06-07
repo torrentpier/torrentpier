@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Det namn du angett kan inte vara otillåten. Det 
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klicka %sHere%s att återvända för att ta bort Användarnamn Administration';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Information';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
