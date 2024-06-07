@@ -147,10 +147,21 @@
 
 <!-- BEGIN integrity_check -->
 <!-- IF integrity_check.INTEGRITY_SUCCESS -->
-Проверка целостности файлов успешна. Последняя проверка была: {integrity_check.INTEGRITY_LAST_CHECK_TIME}
+<div class="alert alert-success" style="width: 95%;">
+    <h4 class="alert-heading">{L_INTEGRITY_CHECK_SUCCESS}</h4>
+    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
+</div>
 <!-- ELSE -->
-Некоторые файлы не прошли проверку. Последняя проверка была: {integrity_check.INTEGRITY_LAST_CHECK_TIME}
-<!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST --><br>Вот их список: <ul style="border: 1px solid black; min-width: 300px; max-width: 500px; height: 100px; padding: 10px; margin: 5px; overflow-x: auto;"><li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li></ul><!-- ENDIF -->
+<div class="alert alert-danger" style="width: 95%;">
+    <h4 class="alert-heading">{L_INTEGRITY_CHECK_FAIL}</h4>
+    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
+    <hr>
+    <!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->
+    <ul style="height: 120px; overflow-x: auto;">
+        <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
+    </ul>
+    <!-- ENDIF -->
+</div>
 <!-- ENDIF -->
 <!-- END integrity_check -->
 

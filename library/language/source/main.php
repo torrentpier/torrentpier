@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'The name you entered could not be disallowed. It 
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Click %sHere%s to return to Disallow Username Administration';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'Проверка целостности файлов прошла успешно.';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Некоторые файлы не прошли проверку.';
+$lang['INTEGRITY_CHECKED'] = 'Всего было проверено: %s, из них прошли проверку: %s.';
+$lang['INTEGRITY_LAST_CHECK'] = 'Последняя проверка была: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Information';
 $lang['UPDATE_AVAILABLE'] = 'Update available';

@@ -45,8 +45,10 @@ foreach ($filesList as $file) {
 
 $data = [
     'success' => false,
-    'files' => $wrongFilesList,
-    'timestamp' => TIMENOW
+    'wrong_files' => $wrongFilesList,
+    'wrong_files_num' => count($wrongFilesList),
+    'total_num' => count($filesList),
+    'timestamp' => TIMENOW,
 ];
 
 $this->store('files_integrity', $data);
