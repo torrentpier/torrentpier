@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Název jste zadali, nemůže být zakázáno. To 
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikněte %sHere%s vrátit Zakázat uživatelské Jméno Podání';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informace O Verzi';
 $lang['UPDATE_AVAILABLE'] = 'Update available';

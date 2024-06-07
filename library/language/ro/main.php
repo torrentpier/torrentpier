@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Numele introdus nu poate fi anulat. Fie există d
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Faceți clic pe %sHere%s să se întoarcă pentru a Interzice numele de Utilizator de Administrare';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informațiile De Versiune';
 $lang['UPDATE_AVAILABLE'] = 'Update available';

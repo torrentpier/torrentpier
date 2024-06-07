@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Дозвола име не може да буде
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Кликните %sHere%s врати забрани Управе корисничко Име';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Информације О Верзији';
 $lang['UPDATE_AVAILABLE'] = 'Update available';

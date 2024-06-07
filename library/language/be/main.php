@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Уведзенае імя не можа быць 
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Націсніце %sHere%s вярнуць забараніць Адміністрацыі Імя карыстальніка';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Інфармацыя Аб Версіі';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
