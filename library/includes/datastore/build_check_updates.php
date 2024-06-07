@@ -26,21 +26,30 @@ if ($updater_content !== false) {
 if (is_array($json_response) && !empty($json_response)) {
     $get_version = $json_response['tag_name'];
     $version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
-    $has_update = VERSION_CODE < $version_code_actual;
 
-    // Save current version & latest available
-    if ($has_update) {
+    // Has update!
+    if (VERSION_CODE < $version_code_actual) {
+        $latest_release_file = $json_response['assets'][0]['browser_download_url'];
+
+        // Save current version & latest available
         file_write(VERSION_CODE . "\n" . $version_code_actual, UPDATER_FILE, replace_content: true);
-    }
 
-    // Build data array
-    $data = [
-        'available_update' => $has_update,
-        'latest_version' => $get_version,
-        'latest_version_size' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
-        'latest_version_dl_link' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url'],
-        'latest_version_link' => $json_response['html_url']
-    ];
+        // Get MD5 checksum
+        $md5_file_checksum = '';
+        if (isset($latest_release_file)) {
+            $md5_file_checksum = strtoupper(md5_file($latest_release_file));
+        }
+
+        // Build data array
+        $data = [
+            'available_update' => true,
+            'latest_version' => $get_version,
+            'latest_version_size' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
+            'latest_version_dl_link' => $latest_release_file ?? $json_response['html_url'],
+            'latest_version_checksum' => $md5_file_checksum,
+            'latest_version_link' => $json_response['html_url']
+        ];
+    }
 }
 
 $this->store('check_updates', $data);

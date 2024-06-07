@@ -2152,16 +2152,17 @@ function readUpdaterFile(): array|bool
         return false;
     }
 
-    $str = [];
-    if ($updaterFile = fopen(UPDATER_FILE, 'r')) {
-        while (!feof($updaterFile)) {
-            $str[] = trim(fgets($updaterFile));
-        }
+    $updaterFile = new SplFileObject(UPDATER_FILE, 'r');
+    $updaterFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
+
+    $lines = [];
+    foreach ($updaterFile as $line) {
+        $lines[] = is_numeric($line) ? (int)$line : 0;
     }
 
     return [
-        'previous_version' => is_numeric($str[0]) ? (int)$str[0] : 0,
-        'latest_version' => is_numeric($str[1]) ? (int)$str[1] : 0
+        'previous_version' => $lines[0],
+        'latest_version' => $lines[1]
     ];
 }
 

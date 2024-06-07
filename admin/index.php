@@ -83,13 +83,16 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ]);
 
     // Check for updates
-    $template->assign_block_vars('updater', [
-        'UPDATE_AVAILABLE' => $update_data['available_update'],
-        'NEW_VERSION_NUMBER' => $update_data['latest_version'],
-        'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
-        'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
-        'NEW_VERSION_LINK' => $update_data['latest_version_link'],
-    ]);
+    if (!empty($update_data)) {
+        $template->assign_block_vars('updater', [
+            'UPDATE_AVAILABLE' => $update_data['available_update'],
+            'NEW_VERSION_NUMBER' => $update_data['latest_version'],
+            'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
+            'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
+            'NEW_VERSION_LINK' => $update_data['latest_version_link'],
+            'NEW_VERSION_MD5' => $update_data['latest_version_checksum']
+        ]);
+    }
 
     // Get forum statistics
     $total_posts = $stats['postcount'];
