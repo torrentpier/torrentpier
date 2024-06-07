@@ -2283,6 +2283,12 @@ $lang['DISALLOWED_ALREADY'] = 'Siz kiritgan nom ruxsat etilmagan bo\'lmadi. Bu h
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Login Boshqaruvni taqiqlash qaytish uchun %sHere%s bosing';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Axborot';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
