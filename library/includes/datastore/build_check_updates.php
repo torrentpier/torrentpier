@@ -15,7 +15,7 @@ global $bb_cfg;
 
 $data = [];
 
-$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10]]);
+$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
 $updater_content = file_get_contents(UPDATER_URL, context: $context);
 
 $json_response = false;
