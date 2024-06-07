@@ -33,17 +33,14 @@ foreach ($checksumFile as $line) {
 
 $wrongFilesList = [];
 foreach ($filesList as $file) {
-    if (!file_exists(BB_ROOT . '/' . $file['path'])) {
-        continue;
-    }
     if (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
-        $wrongFilesList[] = basename($file['path']);
+        $wrongFilesList[] = $file['path'];
     }
 }
 
 $data = [
     'success' => false,
-    'files' => implode("\n</li>\n<li>\n", $wrongFilesList),
+    'files' => $wrongFilesList,
     'timestamp' => TIMENOW
 ];
 
