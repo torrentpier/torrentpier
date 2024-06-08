@@ -13,12 +13,14 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-$data = [];
-$filesList = [];
+if (!$bb_cfg['integrity_check']) {
+    return;
+}
 
 $checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
 $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
+$filesList = [];
 $lines = [];
 foreach ($checksumFile as $line) {
     $parts = explode('  ', $line);
