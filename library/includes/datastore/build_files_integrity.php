@@ -66,7 +66,8 @@ if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
         }
     }
 
-    // Delete restore confirm file
+    // Delete restore confirm file & build file
+    unlink($buildDownloader->savePath);
     unlink(RESTORE_CORRUPT_CONFIRM_FILE);
 }
 
