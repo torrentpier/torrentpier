@@ -9,6 +9,8 @@
 
 namespace TorrentPier;
 
+use Exception;
+
 /**
  * Class Updater
  * @package TorrentPier
@@ -18,9 +20,9 @@ class Updater
     /**
      * Target version of TorrentPier
      *
-     * @var int
+     * @var int|string
      */
-    public int $targetVersion;
+    public int|string $targetVersion;
 
     /**
      * Json response
@@ -30,15 +32,19 @@ class Updater
     private array $jsonResponse = [];
 
     /**
+     * Save path
+     *
+     * @var string
+     */
+    private string $savePath;
+
+    /**
      * Updater constructor
      *
-     * @param int $targetVersion
-     * @throws \Exception
+     * @throws Exception
      */
-    public function __construct(int $targetVersion)
+    public function __construct()
     {
-        $this->targetVersion = $targetVersion;
-
         $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
         $response = file_get_contents(UPDATER_URL, context: $context);
 
@@ -48,23 +54,29 @@ class Updater
 
         // Empty JSON result
         if (empty($this->jsonResponse)) {
-            throw new \Exception('Empty JSON response');
+            throw new Exception('Empty JSON response');
         }
 
         // Response message from GitHub
         if (isset($json_response['message'])) {
-            throw new \Exception($json_response['message']);
+            throw new Exception($json_response['message']);
         }
+
+        return $this->jsonResponse;
     }
 
     /**
      * Download build from GitHub
      *
      * @param string $path
+     * @param string|int $targetVersion
      * @return bool
      */
-    public function download(string $path): bool
+    public function download(string $path, string|int $targetVersion): bool
     {
+        $this->targetVersion = $targetVersion;
+        $this->savePath = $path;
+
         return false;
     }
 }
