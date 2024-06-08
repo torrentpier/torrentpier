@@ -79,4 +79,14 @@ class Updater
 
         return false;
     }
+
+    /**
+     * Returns latest TorrentPier version from GitHub
+     *
+     * @return string
+     */
+    public function getLastVersion(): string
+    {
+        return $this->jsonResponse['tag_name'];
+    }
 }
