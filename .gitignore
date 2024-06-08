@@ -2,6 +2,8 @@
 .idea
 
 ### TorrentPier ###
+*.ver
+*.integrity
 .env
 .php_cs.cache
 composer.phar
@@ -32,7 +34,6 @@ Desktop.ini
 $RECYCLE.BIN/
 *.lnk
 *.bat
-*.ver
 
 ### OSX ###
 .DS_Store
