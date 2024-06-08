@@ -80,7 +80,8 @@ class Updater
         if ($targetVersion === 'latest') {
             $versionInfo = $this->getLastVersion();
         } else {
-            $versionInfo = $this->jsonResponse[2]; // TODO!!!
+            $targetIndex = array_search($targetVersion, array_column($this->jsonResponse, 'tag_name'));
+            $versionInfo = $this->jsonResponse[$targetIndex];
         }
 
         if (empty($versionInfo)) {
