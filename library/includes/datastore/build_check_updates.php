@@ -16,8 +16,9 @@ global $bb_cfg;
 $data = [];
 
 $updaterDownloader = new \TorrentPier\Updater();
+$updaterDownloader = $updaterDownloader->getLastVersion();
 
-$get_version = $updaterDownloader->getLastVersion()['tag_name'];
+$get_version = $updaterDownloader['tag_name'];
 $version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
 
 // Has update!
@@ -25,7 +26,7 @@ if (VERSION_CODE < $version_code_actual) {
     $latest_release_file = $updaterDownloader['assets'][0]['browser_download_url'];
 
     // Save current version & latest available
-    file_write(VERSION_CODE . "\n" . $version_code_actual, UPDATER_FILE, replace_content: true);
+    file_write(json_encode(['previous_version' => VERSION_CODE, 'latest_version' => $version_code_actual]), UPDATER_FILE, replace_content: true);
 
     // Get MD5 checksum
     $md5_file_checksum = '';
