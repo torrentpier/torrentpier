@@ -57,11 +57,11 @@ if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
     if ($buildDownloader->download(INT_DATA_DIR, VERSION_CODE)) {
         // Unzip downloaded build file
         $zipArchive = new ZipArchive;
-        $extractDownloadedFile = $zipArchive->open($this->savePath);
-        if ($extractDownloadedFile !== true) {
-            throw new Exception("Can't unzip downloaded build file");
+        $extractDownloadedFile = $zipArchive->open($buildDownloader->savePath);
+        if ($extractDownloadedFile === true) {
+            $zipArchive->extractTo(BB_ROOT, $wrongFilesList);
+            $zipArchive->close();
         }
-        $zipArchive->extractTo('/my/destination/dir/', array('pear_item.gif', 'testfromfile.php'));
     }
 
     // Delete restore confirm file

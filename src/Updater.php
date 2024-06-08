@@ -22,7 +22,7 @@ class Updater
      *
      * @var int|string
      */
-    public int|string $targetVersion = 'latest';
+    public int|string $targetVersion;
 
     /**
      * Json response
@@ -73,7 +73,7 @@ class Updater
      * @return bool
      * @throws Exception
      */
-    public function download(string $path, string|int $targetVersion): bool
+    public function download(string $path, string|int $targetVersion = 'latest'): bool
     {
         $this->targetVersion = $targetVersion;
 
