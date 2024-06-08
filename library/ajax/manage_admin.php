@@ -82,6 +82,9 @@ switch ($mode) {
         \TorrentPier\Helpers\CronHelper::enableBoard();
         $this->response['unlock_cron_html'] = '<span class="seed bold">' . $lang['ADMIN_UNLOCKED'] . '</span>';
         break;
+    case 'restore_corrupt_files':
+        $this->response['restore_corrupt_files_html'] = '<span class="seed bold">' . $lang['INTEGRITY_RESTORE_CONFIRM_OK'] . '</span>';
+        break;
     default:
         $this->ajax_die('Invalid mode: ' . $mode);
 }

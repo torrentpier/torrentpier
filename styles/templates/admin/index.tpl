@@ -81,6 +81,7 @@
     $('#sync_topics').html(data.sync_topics_html);
     $('#sync_user_posts').html(data.sync_user_posts_html);
     $('#unlock_cron').html(data.unlock_cron_html);
+    $('#restore_corrupt_files').html(data.restore_corrupt_files_html);
   }
 </script>
 
@@ -100,7 +101,7 @@
         <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
     </ul>
     <hr>
-    <a href="#" id="restore_corrupt_files" onclick="ajax.manage_admin('restore_corrupt_files'); return false;">Restore corrupt files?</a>&nbsp;&middot;&nbsp;<a href="#">Disabled integrity check (Not recommended!)</a>
+    <a href="#" id="restore_corrupt_files" onclick="ajax.manage_admin('restore_corrupt_files'); return false;">{L_INTEGRITY_RESTORE_ON_NEXT_RUN}</a>
     <!-- ENDIF -->
 </div>
 <!-- ENDIF -->
