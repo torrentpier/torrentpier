@@ -59,7 +59,9 @@ if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
         $zipArchive = new ZipArchive;
         $extractDownloadedFile = $zipArchive->open($buildDownloader->savePath);
         if ($extractDownloadedFile === true) {
-            $zipArchive->extractTo(BB_ROOT, $wrongFilesList);
+            if ($zipArchive->extractTo(BB_ROOT, $wrongFilesList)) {
+                $wrongFilesList = [];
+            }
             $zipArchive->close();
         }
     }
