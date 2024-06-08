@@ -59,4 +59,9 @@ $data = [
     'timestamp' => TIMENOW,
 ];
 
+// Delete restore confirm file
+if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
+    unlink(RESTORE_CORRUPT_CONFIRM_FILE);
+}
+
 $this->store('files_integrity', $data);
