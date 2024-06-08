@@ -22,7 +22,7 @@ class Updater
      *
      * @var int|string
      */
-    public int|string $targetVersion;
+    public int|string $targetVersion = 'latest';
 
     /**
      * Json response
