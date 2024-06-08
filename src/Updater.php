@@ -77,16 +77,20 @@ class Updater
         $this->targetVersion = $targetVersion;
         $this->savePath = $path;
 
+        if ($targetVersion === 'latest') {
+            $versionInfo = $this->getLastVersion();
+        }
+
         return false;
     }
 
     /**
-     * Returns latest TorrentPier version from GitHub
+     * Returns information of latest TorrentPier version
      *
-     * @return string
+     * @return array
      */
-    public function getLastVersion(): string
+    public function getLastVersion(): array
     {
-        return $this->jsonResponse['tag_name'];
+        return $this->jsonResponse[0];
     }
 }
