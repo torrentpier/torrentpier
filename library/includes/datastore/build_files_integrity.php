@@ -36,9 +36,17 @@ foreach ($checksumFile as $line) {
     ];
 }
 
+$dynamicFiles = [
+    BB_ENABLED
+];
+
 $wrongFilesList = [];
 foreach ($filesList as $file) {
-    if (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
+    if (!empty($dynamicFiles) && in_array(hide_bb_path($file['path']), $dynamicFiles)) {
+        // Exclude dynamic files
+        continue;
+    }
+    if (!file_exists(BB_ROOT . '/' . $file['path']) || strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
         $wrongFilesList[] = $file['path'];
     }
 }
