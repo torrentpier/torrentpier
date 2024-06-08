@@ -20,9 +20,9 @@ class Updater
     /**
      * Target version of TorrentPier
      *
-     * @var int|string
+     * @var string
      */
-    public int|string $targetVersion;
+    public string $targetVersion;
 
     /**
      * Json response
@@ -69,11 +69,11 @@ class Updater
      * Download build from GitHub
      *
      * @param string $path
-     * @param string|int $targetVersion
+     * @param string $targetVersion
      * @return bool
      * @throws Exception
      */
-    public function download(string $path, string|int $targetVersion = 'latest'): bool
+    public function download(string $path, string $targetVersion = 'latest'): bool
     {
         $this->targetVersion = $targetVersion;
 
