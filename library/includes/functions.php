@@ -2154,7 +2154,7 @@ function readUpdaterFile(): array|bool
 
     $decodedFile = json_decode(file_get_contents(UPDATER_FILE), true);
     return [
-        'previous_version' => $decodedFile['current_version'],
+        'previous_version' => $decodedFile['previous_version'],
         'latest_version' => $decodedFile['latest_version']
     ];
 }
