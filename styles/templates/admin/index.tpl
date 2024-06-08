@@ -99,6 +99,8 @@
     <ul style="max-height: 120px; overflow-x: auto;">
         <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
     </ul>
+    <hr>
+    <a href="#" id="restore_corrupt_files" onclick="ajax.manage_admin('restore_corrupt_files'); return false;">Restore corrupt files?</a>&nbsp;&middot;&nbsp;<a href="#">Disabled integrity check (Not recommended!)</a>
     <!-- ENDIF -->
 </div>
 <!-- ENDIF -->
