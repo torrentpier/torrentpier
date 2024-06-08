@@ -1,9 +1,9 @@
 a587180b840ddbd809d484d6a497be3e  .editorconfig
 77b639eaef6fcc2f75a7b99f906a60f1  .env.example
-5dda34994909cd099e6848ebf283a725  .gitignore
+c58a878e5d7c292fd7d1985664eca3fe  .gitignore
 c7bd24be3c35a20f1fc7f03ee500c849  .htaccess
 ca196b40306c9829c96ba5edc5e80ee4  .styleci.yml
-16d7f6b952d2ea18fe0abd48f9bdfb92  CHANGELOG.md
+97fb9ef7c2d27f4b80c5b1006efd0b28  CHANGELOG.md
 6a2bf79bd0d8d21a3aecedd2b01ca1f0  CODE_OF_CONDUCT.md
 841804fee228e55e092e61cb3863ab5b  CONTRIBUTING.md
 687f1335db6db6ad3362d3a1879fba6e  LICENSE
@@ -83,14 +83,14 @@ d41d8cd98f00b204e9800998ecf8427e  data/uploads/thumbs/.keep
 62745e850958bfd8a1fd77f90e74184b  install/.htaccess
 284795548f4c042db7dbd37fe1ead8fd  install/sql/mysql.sql
 f22be8fd0ca8b91c1203e1d40276015b  install/sql/ocelot.sql
-9b55211a51a9fa126013c789b747c45f  internal_data/checksums.md5
+1cc27af00e1c8daf765625b53abbc5be  internal_data/checksums.md5
 d41d8cd98f00b204e9800998ecf8427e  internal_data/atom/.keep
 62745e850958bfd8a1fd77f90e74184b  internal_data/cache/.htaccess
 62745e850958bfd8a1fd77f90e74184b  internal_data/log/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  internal_data/triggers/.htaccess
-e4ef31082e02a4fb6785527facf617c5  library/config.php
-1bd64b41a1fc959c14c059c12a3915ae  library/defines.php
+96d2691b23c72abb05b990cf45c5d3d0  library/config.php
+4751081a359ed041229cde0bc416c627  library/defines.php
 14bb972e01150ce90e37a280799b0312  library/ajax/avatar.php
 f154996cc002dfa9cb253b33b3ba5915  library/ajax/callseed.php
 b80a4f5d0e2a273b35e194f6aa2b5bb8  library/ajax/change_tor_status.php
@@ -126,7 +126,7 @@ e1cc53b887c1fd92ede995b32790a230  library/attach_mod/includes/functions_delete.p
 f7ae1cfae8281a6f741906e37a051960  library/attach_mod/includes/functions_thumbs.php
 62745e850958bfd8a1fd77f90e74184b  library/includes/.htaccess
 46dc6eea41671cf09193376eb01af844  library/includes/bbcode.php
-9a5c09b562469cae1bbdcfeb89105f39  library/includes/functions.php
+1bbace2fa9434aae52ce6e51e095c563  library/includes/functions.php
 eab70c9df2b3775d848f19feacfd4277  library/includes/init_bb.php
 e4b4a034ef8466a19ad98680a11597ba  library/includes/online_userlist.php
 86d6702e96f25e22482d0b9a8639eb3c  library/includes/page_footer.php
@@ -163,8 +163,8 @@ fc508d151199c26c5aaef14374325d4c  library/includes/cron/jobs/update_forums_atom.
 0887b85beaa1abbbe92656f405af9a65  library/includes/datastore/build_attach_extensions.php
 b797a078726c99dee38109af6464c99d  library/includes/datastore/build_bans.php
 d127f7a04e28bbaec862d9f060036d67  library/includes/datastore/build_cat_forums.php
-6a7b0ac5609d3c629b580e4cf5a71f74  library/includes/datastore/build_check_updates.php
-e099da9d244d61de615f97b2f7fa4ed7  library/includes/datastore/build_files_integrity.php
+21f49dda5fb67e8aff4a0e0990cbd70d  library/includes/datastore/build_check_updates.php
+f81ea8bd4dc3ff8954b78c1fce0aab59  library/includes/datastore/build_files_integrity.php
 7643e43da69353fe2dbf46b1b22b572c  library/includes/datastore/build_moderators.php
 dd7b6ee11512214f5ff074af38f0c264  library/includes/datastore/build_ranks.php
 7e82aa5f7767f941c082ad8f8d702e00  library/includes/datastore/build_smilies.php
@@ -1097,7 +1097,7 @@ d41d8cd98f00b204e9800998ecf8427e  sitemap/.keep
 a8810dcfb889abfd133e5eb0361173c7  src/Env.php
 f98f31aa7026a1ec5e548adead3b679e  src/Sessions.php
 86b946126503ef2f2375c89fdff538db  src/Sitemap.php
-b40bbd1574345948b70d01bcaf6ef679  src/Updater.php
+e7433ce8726b80fb9474337960ae1515  src/Updater.php
 d0293f37bffb990dcfe833c76e2d72d3  src/Validate.php
 753aeddf0fdc35aeaa1f1cbc6d9447a4  src/Helpers/CronHelper.php
 ad6a0b076860bb0d8edc34840a152c61  src/Helpers/IPHelper.php
@@ -1564,7 +1564,7 @@ b3272b1907f53010aa984bed5fbe02b8  styles/templates/admin/admin_smilies.tpl
 3600ffd781808cd501b6c774ac427a11  styles/templates/admin/admin_user_ban.tpl
 63551b4021ef1074962f421489eba85e  styles/templates/admin/admin_user_search.tpl
 9f4a3d702b416ee3329b92ec68a88b00  styles/templates/admin/admin_words.tpl
-13a98a41137c6616025fcf3cd208f29b  styles/templates/admin/index.tpl
+210378fb854a5152ba98aae1b93d72b2  styles/templates/admin/index.tpl
 73a8d3c64e2478a4d6b698bd78660319  styles/templates/default/ajax_edit.tpl
 b48c2f4e08a302c4985f8b951d4818a3  styles/templates/default/common.tpl
 9b6be2ef3c9af370331855db875c7e1c  styles/templates/default/group.tpl
