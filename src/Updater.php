@@ -81,7 +81,7 @@ class Updater
             $versionInfo = $this->getLastVersion();
         } else {
             $targetIndex = array_search($targetVersion, array_column($this->jsonResponse, 'tag_name'));
-            $versionInfo = $this->jsonResponse[$targetIndex];
+            $versionInfo = is_numeric($targetIndex) ? $this->jsonResponse[$targetIndex] : false;
         }
 
         if (empty($versionInfo)) {
