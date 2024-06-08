@@ -94,7 +94,7 @@ class Updater
         }
 
         // Save build file
-        $this->savePath = $path . $versionInfo['name'];
+        $this->savePath = $path . $versionInfo['assets'][0]['name'];
         file_put_contents($this->savePath, $getFile);
         if (!is_file($this->savePath)) {
             throw new Exception("Can't save TorrentPier build file");
