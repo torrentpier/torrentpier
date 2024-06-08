@@ -2288,6 +2288,8 @@ $lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was succes
 $lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
 $lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
 $lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'معلومات الإصدار';
