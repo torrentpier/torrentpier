@@ -55,7 +55,13 @@ foreach ($filesList as $file) {
 if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
     $buildDownloader = new \TorrentPier\Updater();
     if ($buildDownloader->download(INT_DATA_DIR, VERSION_CODE)) {
-        // $wrongFilesList = [];
+        // Unzip downloaded build file
+        $zipArchive = new ZipArchive;
+        $extractDownloadedFile = $zipArchive->open($this->savePath);
+        if ($extractDownloadedFile !== true) {
+            throw new Exception("Can't unzip downloaded build file");
+        }
+        $zipArchive->extractTo('/my/destination/dir/', array('pear_item.gif', 'testfromfile.php'));
     }
 
     // Delete restore confirm file

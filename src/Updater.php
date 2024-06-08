@@ -36,7 +36,7 @@ class Updater
      *
      * @var string
      */
-    private string $savePath;
+    public string $savePath;
 
     /**
      * Updater constructor
@@ -71,17 +71,45 @@ class Updater
      * @param string $path
      * @param string|int $targetVersion
      * @return bool
+     * @throws Exception
      */
     public function download(string $path, string|int $targetVersion): bool
     {
         $this->targetVersion = $targetVersion;
-        $this->savePath = $path;
 
+        $versionInfo = [];
         if ($targetVersion === 'latest') {
             $versionInfo = $this->getLastVersion();
         }
 
-        return false;
+        if (empty($versionInfo)) {
+            throw new Exception('Empty version data');
+        }
+
+        $downloadLink = $versionInfo['assets'][0]['browser_download_url'];
+
+        $getFile = file_get_contents($downloadLink);
+        if ($getFile === false) {
+            throw new Exception("Can't retrieve TorrentPier build file");
+        }
+
+        // Save build file
+        $this->savePath = $path . $versionInfo['name'];
+        file_put_contents($this->savePath, $getFile);
+        if (!is_file($this->savePath)) {
+            throw new Exception("Can't save TorrentPier build file");
+        }
+
+        // Get MD5 checksums
+        $getMD5OfRemoteFile = strtoupper(md5_file($downloadLink));
+        $getMD5OfSavedFile = strtoupper(md5_file($this->savePath));
+
+        // Compare MD5 hashes
+        if ($getMD5OfRemoteFile !== $getMD5OfSavedFile) {
+            throw new Exception("MD5 hashes don't match");
+        }
+
+        return true;
     }
 
     /**
