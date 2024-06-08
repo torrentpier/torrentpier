@@ -77,9 +77,10 @@ class Updater
     {
         $this->targetVersion = $targetVersion;
 
-        $versionInfo = [];
         if ($targetVersion === 'latest') {
             $versionInfo = $this->getLastVersion();
+        } else {
+            $versionInfo = $this->jsonResponse[2]; // TODO!!!
         }
 
         if (empty($versionInfo)) {
