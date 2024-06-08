@@ -30,10 +30,11 @@ define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 
 // System
 define('APP_NAME', 'TorrentPier');
-define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases/latest');
-define('UPDATER_FILE', INT_DATA_DIR . '/updater.ver');
+define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases');
+define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
 define('API_IP_URL', 'https://freeipapi.com/api/json/');
 define('CHECKSUMS_FILE', INT_DATA_DIR . '/checksums.md5');
+define('RESTORE_CORRUPT_CONFIRM_FILE', INT_DATA_DIR . '/rescorrupt.integrity');
 define('CHECK_REQUIREMENTS', [
     'status' => true,
     'php_min_version' => '8.1.0',

@@ -15,41 +15,34 @@ global $bb_cfg;
 
 $data = [];
 
-$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
-$updater_content = file_get_contents(UPDATER_URL, context: $context);
+$updaterDownloader = new \TorrentPier\Updater();
+$updaterDownloader = $updaterDownloader->getLastVersion();
 
-$json_response = false;
-if ($updater_content !== false) {
-    $json_response = json_decode(utf8_encode($updater_content), true);
-}
+$get_version = $updaterDownloader['tag_name'];
+$version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
 
-if ((is_array($json_response) && !empty($json_response)) && !isset($json_response['message'])) {
-    $get_version = $json_response['tag_name'];
-    $version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
+// Has update!
+if (VERSION_CODE < $version_code_actual) {
+    $latest_release_file = $updaterDownloader['assets'][0]['browser_download_url'];
 
-    // Has update!
-    if (VERSION_CODE < $version_code_actual) {
-        $latest_release_file = $json_response['assets'][0]['browser_download_url'];
+    // Save current version & latest available
+    file_write(json_encode(['previous_version' => VERSION_CODE, 'latest_version' => $version_code_actual]), UPDATER_FILE, replace_content: true);
 
-        // Save current version & latest available
-        file_write(VERSION_CODE . "\n" . $version_code_actual, UPDATER_FILE, replace_content: true);
-
-        // Get MD5 checksum
-        $md5_file_checksum = '';
-        if (isset($latest_release_file)) {
-            $md5_file_checksum = strtoupper(md5_file($latest_release_file));
-        }
-
-        // Build data array
-        $data = [
-            'available_update' => true,
-            'latest_version' => $get_version,
-            'latest_version_size' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
-            'latest_version_dl_link' => $latest_release_file ?? $json_response['html_url'],
-            'latest_version_checksum' => $md5_file_checksum,
-            'latest_version_link' => $json_response['html_url']
-        ];
+    // Get MD5 checksum
+    $md5_file_checksum = '';
+    if (isset($latest_release_file)) {
+        $md5_file_checksum = strtoupper(md5_file($latest_release_file));
     }
+
+    // Build data array
+    $data = [
+        'available_update' => true,
+        'latest_version' => $get_version,
+        'latest_version_size' => isset($updaterDownloader['assets'][0]['size']) ? humn_size($updaterDownloader['assets'][0]['size']) : false,
+        'latest_version_dl_link' => $latest_release_file ?? $updaterDownloader['html_url'],
+        'latest_version_checksum' => $md5_file_checksum,
+        'latest_version_link' => $updaterDownloader['html_url']
+    ];
 }
 
 $data[] = ['latest_check_timestamp' => TIMENOW];

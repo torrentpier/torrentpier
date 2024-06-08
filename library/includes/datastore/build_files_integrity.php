@@ -13,12 +13,14 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-$data = [];
-$filesList = [];
+if (!$bb_cfg['integrity_check']) {
+    return;
+}
 
 $checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
 $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
+$filesList = [];
 $lines = [];
 foreach ($checksumFile as $line) {
     $parts = explode('  ', $line);
@@ -36,11 +38,39 @@ foreach ($checksumFile as $line) {
     ];
 }
 
+$dynamicFiles = [
+    BB_ENABLED
+];
+
 $wrongFilesList = [];
 foreach ($filesList as $file) {
-    if (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
+    if (!empty($dynamicFiles) && in_array(hide_bb_path($file['path']), $dynamicFiles)) {
+        // Exclude dynamic files
+        continue;
+    }
+    if (!file_exists(BB_ROOT . '/' . $file['path']) || strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
         $wrongFilesList[] = $file['path'];
     }
+}
+
+// Restore corrupt files
+if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
+    $buildDownloader = new \TorrentPier\Updater();
+    if ($buildDownloader->download(INT_DATA_DIR . '/', $bb_cfg['tp_version'])) {
+        // Unzip downloaded build file
+        $zipArchive = new ZipArchive;
+        $extractDownloadedFile = $zipArchive->open($buildDownloader->savePath);
+        if ($extractDownloadedFile === true) {
+            if ($zipArchive->extractTo(BB_ROOT, $wrongFilesList)) {
+                $wrongFilesList = [];
+            }
+            $zipArchive->close();
+        }
+    }
+
+    // Delete restore confirm file & build file
+    unlink($buildDownloader->savePath);
+    unlink(RESTORE_CORRUPT_CONFIRM_FILE);
 }
 
 $data = [

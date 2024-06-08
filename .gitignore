@@ -2,6 +2,7 @@
 .idea
 
 ### TorrentPier ###
+*.integrity
 .env
 .php_cs.cache
 composer.phar
@@ -11,6 +12,7 @@ data/uploads
 internal_data/atom
 internal_data/cache
 internal_data/log
+internal_data/updater.json
 sitemap
 internal_data/triggers
 library/config.local.php
@@ -32,7 +34,6 @@ Desktop.ini
 $RECYCLE.BIN/
 *.lnk
 *.bat
-*.ver
 
 ### OSX ###
 .DS_Store
