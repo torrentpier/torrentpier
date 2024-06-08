@@ -53,7 +53,10 @@ foreach ($filesList as $file) {
 
 // Restore corrupt files
 if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
-    $wrongFilesList = [];
+    $buildDownloader = new \TorrentPier\Updater(VERSION_CODE);
+    if ($buildDownloader->download(INT_DATA_DIR)) {
+        $wrongFilesList = [];
+    }
 
     // Delete restore confirm file
     unlink(RESTORE_CORRUPT_CONFIRM_FILE);
