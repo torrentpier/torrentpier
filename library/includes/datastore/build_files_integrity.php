@@ -59,8 +59,11 @@ $data = [
     'timestamp' => TIMENOW,
 ];
 
-// Delete restore confirm file
+// Restore corrupt files
 if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
+    // ----- //
+
+    // Delete restore confirm file
     unlink(RESTORE_CORRUPT_CONFIRM_FILE);
 }
 
