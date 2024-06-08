@@ -54,7 +54,7 @@ class Updater
 
         // Empty JSON result
         if (empty($this->jsonResponse)) {
-            throw new Exception('Empty JSON response');
+            return false;
         }
 
         // Response message from GitHub
@@ -85,14 +85,14 @@ class Updater
         }
 
         if (empty($versionInfo)) {
-            throw new Exception('Empty version data');
+            return false;
         }
 
         $downloadLink = $versionInfo['assets'][0]['browser_download_url'];
 
         $getFile = file_get_contents($downloadLink);
         if ($getFile === false) {
-            throw new Exception("Can't retrieve TorrentPier build file");
+            return false;
         }
 
         // Save build file
