@@ -54,13 +54,13 @@ foreach ($filesList as $file) {
 // Restore corrupt files
 if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
     $buildDownloader = new \TorrentPier\Updater();
-    if ($buildDownloader->download(INT_DATA_DIR . '/')) {
+    if ($buildDownloader->download(INT_DATA_DIR . '/', VERSION_CODE)) {
         // Unzip downloaded build file
         $zipArchive = new ZipArchive;
         $extractDownloadedFile = $zipArchive->open($buildDownloader->savePath);
         if ($extractDownloadedFile === true) {
-            //$zipArchive->extractTo(BB_ROOT, $wrongFilesList);
-            //$zipArchive->close();
+            $zipArchive->extractTo(BB_ROOT, $wrongFilesList);
+            $zipArchive->close();
         }
     }
 
