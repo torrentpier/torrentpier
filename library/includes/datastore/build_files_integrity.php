@@ -51,6 +51,14 @@ foreach ($filesList as $file) {
     }
 }
 
+// Restore corrupt files
+if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
+    $wrongFilesList = [];
+
+    // Delete restore confirm file
+    unlink(RESTORE_CORRUPT_CONFIRM_FILE);
+}
+
 $data = [
     'success' => empty($wrongFilesList),
     'wrong_files' => $wrongFilesList,
@@ -58,13 +66,5 @@ $data = [
     'total_num' => count($filesList),
     'timestamp' => TIMENOW,
 ];
-
-// Restore corrupt files
-if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
-    // ----- //
-
-    // Delete restore confirm file
-    unlink(RESTORE_CORRUPT_CONFIRM_FILE);
-}
 
 $this->store('files_integrity', $data);
