@@ -85,6 +85,7 @@
   }
 </script>
 
+<br>
 <!-- BEGIN integrity_check -->
 <!-- IF integrity_check.INTEGRITY_SUCCESS -->
 <div class="alert alert-success" style="width: 95%;">
