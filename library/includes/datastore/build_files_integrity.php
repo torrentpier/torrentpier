@@ -39,7 +39,16 @@ foreach ($checksumFile as $line) {
 }
 
 $dynamicFiles = [
-    hide_bb_path(BB_ENABLED)
+    hide_bb_path(BB_ENABLED),
+    '.htaccess',
+    'robots.txt',
+    'opensearch_desc.xml',
+    'opensearch_desc_bt.xml',
+    'favicon.png',
+    'composer.json',
+    'composer.lock',
+    'library/config.php',
+    'library/defines.php'
 ];
 
 $wrongFilesList = [];
