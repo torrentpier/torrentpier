@@ -39,12 +39,12 @@ foreach ($checksumFile as $line) {
 }
 
 $dynamicFiles = [
-    BB_ENABLED
+    hide_bb_path(BB_ENABLED)
 ];
 
 $wrongFilesList = [];
 foreach ($filesList as $file) {
-    if (!empty($dynamicFiles) && in_array(hide_bb_path($file['path']), $dynamicFiles)) {
+    if (!empty($dynamicFiles) && in_array($file['path'], $dynamicFiles)) {
         // Exclude dynamic files
         continue;
     }
