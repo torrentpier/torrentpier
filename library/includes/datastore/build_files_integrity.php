@@ -48,7 +48,8 @@ $dynamicFiles = [
     'composer.json',
     'composer.lock',
     'library/config.php',
-    'library/defines.php'
+    'library/defines.php',
+    'styles/images/logo/logo.png'
 ];
 
 $wrongFilesList = [];
