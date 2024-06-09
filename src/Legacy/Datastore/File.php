@@ -84,7 +84,7 @@ class File extends Common
             $this->cur_query = null;
             $this->num_queries++;
 
-            if (file_exists($filename)) {
+            if (is_file($filename) && is_readable($filename)) {
                 require($filename);
 
                 $this->data[$item] = $filecache;
