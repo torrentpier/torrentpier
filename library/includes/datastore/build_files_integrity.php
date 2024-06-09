@@ -39,7 +39,7 @@ foreach ($checksumFile as $line) {
 }
 
 $dynamicFiles = [
-    hide_bb_path(BB_ENABLED),
+    '.env.example',
     '.htaccess',
     'robots.txt',
     'opensearch_desc.xml',
@@ -47,6 +47,7 @@ $dynamicFiles = [
     'favicon.png',
     'composer.json',
     'composer.lock',
+    hide_bb_path(BB_ENABLED),
     'library/config.php',
     'library/defines.php',
     'styles/images/logo/logo.png'
