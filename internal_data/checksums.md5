@@ -3,7 +3,7 @@ a587180b840ddbd809d484d6a497be3e  .editorconfig
 c58a878e5d7c292fd7d1985664eca3fe  .gitignore
 c7bd24be3c35a20f1fc7f03ee500c849  .htaccess
 ca196b40306c9829c96ba5edc5e80ee4  .styleci.yml
-b3d9a37f8681a4669c36e36425db8d0e  CHANGELOG.md
+129cdff0102c73dce407c88415d1c9c6  CHANGELOG.md
 6a2bf79bd0d8d21a3aecedd2b01ca1f0  CODE_OF_CONDUCT.md
 841804fee228e55e092e61cb3863ab5b  CONTRIBUTING.md
 687f1335db6db6ad3362d3a1879fba6e  LICENSE
@@ -83,7 +83,7 @@ d41d8cd98f00b204e9800998ecf8427e  data/uploads/thumbs/.keep
 62745e850958bfd8a1fd77f90e74184b  install/.htaccess
 284795548f4c042db7dbd37fe1ead8fd  install/sql/mysql.sql
 f22be8fd0ca8b91c1203e1d40276015b  install/sql/ocelot.sql
-6b99f4964ff98d982a4a87cbd18729fa  internal_data/checksums.md5
+a1163a886c8b2c6e7f857bfd47b7e4f6  internal_data/checksums.md5
 d41d8cd98f00b204e9800998ecf8427e  internal_data/atom/.keep
 62745e850958bfd8a1fd77f90e74184b  internal_data/cache/.htaccess
 62745e850958bfd8a1fd77f90e74184b  internal_data/log/.htaccess
@@ -164,7 +164,7 @@ fc508d151199c26c5aaef14374325d4c  library/includes/cron/jobs/update_forums_atom.
 b797a078726c99dee38109af6464c99d  library/includes/datastore/build_bans.php
 d127f7a04e28bbaec862d9f060036d67  library/includes/datastore/build_cat_forums.php
 21f49dda5fb67e8aff4a0e0990cbd70d  library/includes/datastore/build_check_updates.php
-cf11683143d9f8e881db157316842a5a  library/includes/datastore/build_files_integrity.php
+b5c42ae56668219b3bee8e83f53d6545  library/includes/datastore/build_files_integrity.php
 7643e43da69353fe2dbf46b1b22b572c  library/includes/datastore/build_moderators.php
 dd7b6ee11512214f5ff074af38f0c264  library/includes/datastore/build_ranks.php
 7e82aa5f7767f941c082ad8f8d702e00  library/includes/datastore/build_smilies.php
