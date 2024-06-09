@@ -676,7 +676,8 @@ INSERT INTO `bb_disallow` (`disallow_id`, `disallow_username`)
 VALUES ('1', 'torrentpier*'),
        ('2', 'tracker*'),
        ('3', 'forum*'),
-       ('4', 'torrent*');
+       ('4', 'torrent*'),
+       ('5', 'admin*');
 
 -- ----------------------------
 -- Table structure for `bb_extensions`
