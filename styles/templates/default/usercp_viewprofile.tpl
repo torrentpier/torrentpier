@@ -324,7 +324,7 @@ ajax.callback.index_data = function(data) {
 				<td id="user_regdate">
 					<span class="editable bold">{USER_REGDATE}</span>
 					<!-- IF IS_ADMIN -->
-					[ <a href="#admin" class="menu-root menu-alt1"><span class="adm">{L_MANAGE_USER}</span></a> ]
+					[ <a href="#admin" class="adm menu-root menu-alt1">{L_MANAGE_USER}</a> ]
 					<div class="menu-sub row1 border bw_TRBL" id="admin">
 						<fieldset class="mrg_6">
 							<div class="tLeft" style="padding: 5px 6px 6px; display: block; font-size: 13px;">
