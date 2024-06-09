@@ -20,25 +20,7 @@ if (!$bb_cfg['integrity_check']) {
 $checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
 $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
-$filesList = [];
-$lines = [];
-foreach ($checksumFile as $line) {
-    $parts = explode('  ', $line);
-    if (!isset($parts[1])) {
-        // Skip end line
-        break;
-    }
-    if (basename($parts[1]) === basename(CHECKSUMS_FILE)) {
-        // Skip checksums.md5
-        continue;
-    }
-    $filesList[] = [
-        'path' => trim($parts[1]),
-        'hash' => trim($parts[0])
-    ];
-}
-
-$dynamicFiles = [
+$ignoreFiles = [
     '.env.example',
     '.htaccess',
     'robots.txt',
@@ -47,19 +29,34 @@ $dynamicFiles = [
     'favicon.png',
     'composer.json',
     'composer.lock',
+    hide_bb_path(CHECKSUMS_FILE),
     hide_bb_path(BB_ENABLED),
     'library/config.php',
     'library/defines.php',
     'styles/images/logo/logo.png'
 ];
 
-$wrongFilesList = [];
-foreach ($filesList as $file) {
-    if (!empty($dynamicFiles) && in_array($file['path'], $dynamicFiles)) {
-        // Exclude dynamic files
+$filesList = [];
+$lines = [];
+foreach ($checksumFile as $line) {
+    $parts = explode('  ', $line);
+    if (!isset($parts[0]) || !isset($parts[1])) {
+        // Skip end line
+        break;
+    }
+    if (!empty($ignoreFiles) && in_array($parts[1], $ignoreFiles)) {
+        // Skip files from "Ignoring list"
         continue;
     }
-    if (!file_exists(BB_ROOT . '/' . $file['path']) || strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash'])) {
+    $filesList[] = [
+        'path' => trim($parts[1]),
+        'hash' => trim($parts[0])
+    ];
+}
+
+$wrongFilesList = [];
+foreach ($filesList as $file) {
+    if (!file_exists(BB_ROOT . '/' . $file['path']) || (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash']))) {
         $wrongFilesList[] = $file['path'];
     }
 }
@@ -80,10 +77,12 @@ if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
     }
 
     // Delete restore confirm file & build file
-    if (isset($buildDownloader->savePath)) {
+    if (isset($buildDownloader->savePath) && is_file($buildDownloader->savePath)) {
         unlink($buildDownloader->savePath);
     }
-    unlink(RESTORE_CORRUPT_CONFIRM_FILE);
+    if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
+        unlink(RESTORE_CORRUPT_CONFIRM_FILE);
+    }
 }
 
 $data = [
