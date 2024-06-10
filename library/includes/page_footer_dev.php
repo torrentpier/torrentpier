@@ -71,7 +71,7 @@ if (!empty($_COOKIE['explain'])) {
     }
 }
 
-$sql_log = !empty($_COOKIE['sql_log']) ? \TorrentPier\Dev::get_sql_log() : false;
+$sql_log = !empty($_COOKIE['sql_log']) ? $debug->getSqlLog() : false;
 
 if ($sql_log) {
     echo '<div class="sqlLog" id="sqlLog">' . $sql_log . '</div><!-- / sqlLog --><br clear="all" />';

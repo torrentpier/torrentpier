@@ -173,13 +173,13 @@ class Ajax
      * @return void
      * @throws Exception
      */
-    public function send()
+    public function send(): void
     {
         global $debug;
         $this->response['action'] = $this->action;
 
         if ($debug->sqlDebugAllowed()) {
-            $this->response['sql_log'] = Dev::get_sql_log();
+            $this->response['sql_log'] = $debug->getSqlLog();
         }
 
         // sending output will be handled by $this->ob_handler()
