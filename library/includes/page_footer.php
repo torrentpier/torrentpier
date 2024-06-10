@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $userdata, $template, $DBS, $lang;
+global $bb_cfg, $debug, $userdata, $template, $DBS, $lang;
 
 if (!empty($template)) {
     $template->assign_vars([
@@ -25,7 +25,7 @@ if (!empty($template)) {
     $template->pparse('page_footer');
 }
 
-$show_dbg_info = (APP_DEBUG && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
+$show_dbg_info = (!$debug->isProduction && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
 
 if (!$bb_cfg['gzip_compress']) {
     flush();

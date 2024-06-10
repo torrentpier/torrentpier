@@ -170,14 +170,16 @@ class Ajax
     /**
      * Send data
      *
+     * @return void
      * @throws Exception
      */
-    public function send()
+    public function send(): void
     {
+        global $debug;
         $this->response['action'] = $this->action;
 
-        if (Dev::sql_dbg_enabled()) {
-            $this->response['sql_log'] = Dev::get_sql_log();
+        if ($debug->sqlDebugAllowed()) {
+            $this->response['sql_log'] = $debug->getSqlLog();
         }
 
         // sending output will be handled by $this->ob_handler()
@@ -193,7 +195,9 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        if (APP_DEBUG) {
+        global $debug;
+
+        if (!$debug->isProduction) {
             if ($contents) {
                 $this->response['raw_output'] = $contents;
             }

@@ -26,6 +26,8 @@ class Redis extends Common
 
     public function __construct($cfg, $prefix = null)
     {
+        global $debug;
+
         if (!$this->is_installed()) {
             die("Error: $this->engine extension not installed");
         }
@@ -33,7 +35,7 @@ class Redis extends Common
         $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->redis = new \Redis();
-        $this->dbg_enabled = Dev::sql_dbg_enabled();
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
     public function connect()

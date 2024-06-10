@@ -37,8 +37,10 @@ class SqliteCommon extends Common
 
     public function __construct($cfg)
     {
+        global $debug;
+
         $this->cfg = array_merge($this->cfg, $cfg);
-        $this->dbg_enabled = Dev::sql_dbg_enabled();
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
     public function connect()

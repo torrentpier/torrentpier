@@ -24,9 +24,11 @@ class File extends Common
 
     public function __construct($dir, $prefix = null)
     {
+        global $debug;
+
         $this->dir = $dir;
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sql_dbg_enabled();
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
     public function get($name, $get_miss_key_callback = '', $ttl = 0)

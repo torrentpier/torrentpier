@@ -139,6 +139,8 @@ class Common
 
     public function debug($mode, $cur_query = null)
     {
+        global $debug;
+
         if (!$this->dbg_enabled) {
             return;
         }
@@ -149,7 +151,7 @@ class Common
         switch ($mode) {
             case 'start':
                 $this->sql_starttime = utime();
-                $dbg['sql'] = Dev::short_query($cur_query ?? $this->cur_query);
+                $dbg['sql'] = $debug->shortQuery($cur_query ?? $this->cur_query);
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');
