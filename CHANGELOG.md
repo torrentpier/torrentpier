@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.4 🦩 ([belomaxorka](https://github.com/belomaxorka))
+- Some security improvements 🔑 [\#1503](https://github.com/torrentpier/torrentpier/pull/1503) ([belomaxorka](https://github.com/belomaxorka))
 - Some improvements for integrity checker [\#1501](https://github.com/torrentpier/torrentpier/pull/1501) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1502](https://github.com/torrentpier/torrentpier/pull/1502) ([belomaxorka](https://github.com/belomaxorka))
 
