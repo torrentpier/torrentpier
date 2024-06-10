@@ -1239,7 +1239,7 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe',
+    'ZW' => 'Zimbabwe'
 ];
 
 $lang['ADDITIONAL_FLAGS'] = [
