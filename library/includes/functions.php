@@ -1191,7 +1191,7 @@ function get_user_torrent_client(string $peer_id): string
  */
 function render_flag(string $code, bool $showName = true): string
 {
-    global $bb_cfg, $lang;
+    global $lang;
     static $iconExtension = '.svg';
 
     if (isset($lang['COUNTRIES'][$code])) {
