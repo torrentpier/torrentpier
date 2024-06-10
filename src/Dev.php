@@ -58,7 +58,7 @@ class Dev
      */
     public function __construct()
     {
-        $this->envType = env('APP_ENV', 'local');
+        $this->envType = env('APP_ENV', 'production');
         $this->whoops = new Run;
 
         switch ($this->envType) {
