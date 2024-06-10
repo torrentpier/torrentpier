@@ -26,6 +26,8 @@ class Memcache extends Common
 
     public function __construct($cfg, $prefix = null)
     {
+        global $debug;
+
         if (!$this->is_installed()) {
             die("Error: $this->engine extension not installed");
         }
@@ -33,7 +35,7 @@ class Memcache extends Common
         $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->memcache = new \Memcache();
-        $this->dbg_enabled = Dev::sql_dbg_enabled();
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
     public function connect()

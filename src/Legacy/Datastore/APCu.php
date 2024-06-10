@@ -17,17 +17,19 @@ use TorrentPier\Dev;
  */
 class APCu extends Common
 {
-    public $prefix;
-    public $engine = 'APCu';
+    public string $prefix;
+    public string $engine = 'APCu';
 
     public function __construct($prefix = null)
     {
+        global $debug;
+
         if (!$this->is_installed()) {
             die("Error: $this->engine extension not installed");
         }
 
-        $this->dbg_enabled = Dev::sql_dbg_enabled();
         $this->prefix = $prefix;
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
     public function store($title, $var)
