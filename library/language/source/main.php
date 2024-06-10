@@ -1076,7 +1076,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1116,7 +1115,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1163,7 +1161,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1234,7 +1231,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1243,7 +1239,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Other (Additional flags)
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag',
 ];
 
 // Errors
