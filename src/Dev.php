@@ -229,7 +229,7 @@ class Dev
 
         foreach ($db_obj->dbg as $i => $dbg) {
             $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
-            $sql = self::short_query($dbg['sql'], true);
+            $sql = $this->shortQuery($dbg['sql'], true);
             $time = sprintf('%.4f', $dbg['time']);
             $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
@@ -252,7 +252,7 @@ class Dev
      * @param bool $esc_html
      * @return string
      */
-    public static function short_query(string $sql, bool $esc_html = false): string
+    public function shortQuery(string $sql, bool $esc_html = false): string
     {
         $max_len = 100;
         $sql = str_compact($sql);

@@ -886,6 +886,8 @@ class SqlDb
      */
     public function log_query($log_file = 'sql_queries')
     {
+        global $debug;
+
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.4f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
@@ -893,7 +895,7 @@ class SqlDb
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
-        $msg[] = Dev::short_query($this->cur_query);
+        $msg[] = $debug->shortQuery($this->cur_query);
         $msg = implode(LOG_SEPR, $msg);
         $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
@@ -951,12 +953,14 @@ class SqlDb
      *
      * @param $mode
      * @param string $html_table
-     * @param string $row
+     * @param array $row
      *
      * @return bool|string
      */
-    public function explain($mode, $html_table = '', $row = '')
+    public function explain($mode, $html_table = '', array $row = [])
     {
+        global $debug;
+
         $query = str_compact($this->cur_query);
         // remove comments
         $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
@@ -975,7 +979,7 @@ class SqlDb
                     $html_table = false;
 
                     if ($result = mysqli_query($this->link, "EXPLAIN $query")) {
-                        while ($row = mysqli_fetch_assoc($result)) {
+                        while ($row = $this->sql_fetchrow($result)) {
                             $html_table = $this->explain('add_explain_row', $html_table, $row);
                         }
                     }
@@ -1002,7 +1006,7 @@ class SqlDb
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
-				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . Dev::short_query($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
+				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . $debug->shortQuery($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
 				<br />';
                 break;
 
@@ -1023,8 +1027,6 @@ class SqlDb
                 $this->explain_hold .= '</tr>';
 
                 return $html_table;
-
-                break;
 
             case 'display':
                 echo '<a name="explain"></a><div class="med">' . $this->explain_out . '</div>';
