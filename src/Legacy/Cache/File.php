@@ -37,7 +37,7 @@ class File extends Common
         $this->cur_query = "cache->get('$name')";
         $this->debug('start');
 
-        if (file_exists($filename)) {
+        if (is_file($filename) && is_readable($filename)) {
             require($filename);
         }
 
@@ -80,7 +80,7 @@ class File extends Common
             $this->debug('start');
 
             $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
-            if (file_exists($filename)) {
+            if (is_file($filename)) {
                 $clear = (bool)unlink($filename);
             }
 

@@ -227,6 +227,11 @@ class User
             }
         }
 
+        // Merge additional flags with country flags
+        if ($bb_cfg['enable_additional_flags']) {
+            $lang['COUNTRIES'] = array_merge($lang['COUNTRIES'], $lang['ADDITIONAL_FLAGS']);
+        }
+
         return $this->data;
     }
 

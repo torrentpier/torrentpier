@@ -17,6 +17,9 @@ if (!$bb_cfg['integrity_check']) {
     return;
 }
 
+$filesList = [];
+$wrongFilesList = [];
+
 $checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
 $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
@@ -36,7 +39,6 @@ $ignoreFiles = [
     'styles/images/logo/logo.png'
 ];
 
-$filesList = [];
 $lines = [];
 foreach ($checksumFile as $line) {
     $parts = explode('  ', $line);
@@ -54,7 +56,6 @@ foreach ($checksumFile as $line) {
     ];
 }
 
-$wrongFilesList = [];
 foreach ($filesList as $file) {
     if (!file_exists(BB_ROOT . '/' . $file['path']) || (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash']))) {
         $wrongFilesList[] = $file['path'];
