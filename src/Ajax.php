@@ -193,7 +193,9 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        if (APP_DEBUG) {
+        global $debug;
+
+        if (!$debug->isProduction) {
             if ($contents) {
                 $this->response['raw_output'] = $contents;
             }

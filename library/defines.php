@@ -65,7 +65,6 @@ define('XS_TAG_ENDIF', 8);
 define('XS_TAG_BEGINELSE', 11);
 
 // Debug
-define('APP_DEBUG', true); // enable application debug
 define('SQL_DEBUG', true); // enable forum sql & cache debug
 define('SQL_LOG_ERRORS', true); // all SQL_xxx options enabled only if SQL_DEBUG == TRUE
 define('SQL_BB_LOG_NAME', 'sql_error_bb'); // mysql log filename (Board)

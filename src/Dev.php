@@ -37,7 +37,14 @@ class Dev
      *
      * @var string
      */
-    public string $envType = 'local';
+    private string $envType;
+
+    /**
+     * In production mode
+     *
+     * @var bool
+     */
+    public bool $isProduction = false;
 
     /**
      * Whoops instance
@@ -59,6 +66,7 @@ class Dev
                 ini_set('display_errors', 0);
                 ini_set('display_startup_errors', 0);
                 $this->getWhoopsProduction();
+                $this->isProduction = true;
                 break;
             case 'local':
                 ini_set('display_errors', 1);
@@ -128,10 +136,6 @@ class Dev
      */
     private function getWhoops(): void
     {
-        if (!APP_DEBUG) {
-            return;
-        }
-
         /**
          * Show errors on page
          */
@@ -204,7 +208,8 @@ class Dev
      */
     public static function sql_dbg_enabled(): bool
     {
-        return (SQL_DEBUG && APP_DEBUG && !empty($_COOKIE['sql_log']));
+        global $debug;
+        return (SQL_DEBUG && !$debug->isProduction && !empty($_COOKIE['sql_log']));
     }
 
     /**
