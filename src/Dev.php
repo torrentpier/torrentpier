@@ -209,10 +209,9 @@ class Dev
      *
      * @return bool
      */
-    public static function sql_dbg_enabled(): bool
+    public function sqlDebugAllowed(): bool
     {
-        global $debug;
-        return (SQL_DEBUG && !$debug->isProduction && !empty($_COOKIE['sql_log']));
+        return (SQL_DEBUG && !$this->isProduction && !empty($_COOKIE['sql_log']));
     }
 
     /**
