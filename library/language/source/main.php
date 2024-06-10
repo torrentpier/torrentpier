@@ -1240,10 +1240,12 @@ $lang['COUNTRIES'] = [
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
     'ZW' => 'Zimbabwe',
-    // Other (Additional flags)
+];
+
+$lang['ADDITIONAL_FLAGS'] = [
     'WBW' => 'Wonderful Russia of the Future',
     'PACE' => 'Peace flag',
-    'LGBT' => 'Pride flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors

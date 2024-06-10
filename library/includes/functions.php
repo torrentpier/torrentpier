@@ -1191,8 +1191,12 @@ function get_user_torrent_client(string $peer_id): string
  */
 function render_flag(string $code, bool $showName = true): string
 {
-    global $lang;
+    global $bb_cfg, $lang;
     static $iconExtension = '.svg';
+
+    if ($bb_cfg['enable_additional_flags']) {
+        $lang['COUNTRIES'] = array_merge($lang['COUNTRIES'], $lang['ADDITIONAL_FLAGS']);
+    }
 
     if (isset($lang['COUNTRIES'][$code])) {
         if ($code === '0') {
