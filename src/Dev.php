@@ -62,13 +62,16 @@ class Dev
         $this->whoops = new Run;
 
         switch ($this->envType) {
+            case 'prod':
             case 'production':
                 ini_set('display_errors', 0);
                 ini_set('display_startup_errors', 0);
                 $this->getWhoopsProduction();
                 $this->isProduction = true;
                 break;
+            case 'dev':
             case 'local':
+            case 'development':
                 ini_set('display_errors', 1);
                 ini_set('display_startup_errors', 1);
                 $this->getWhoops();
