@@ -57,10 +57,10 @@ class SqlDb
      */
     public function __construct($cfg_values)
     {
-        global $DBS;
+        global $DBS, $debug;
 
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
-        $this->dbg_enabled = (Dev::sql_dbg_enabled() || !empty($_COOKIE['explain']));
+        $this->dbg_enabled = ($debug->sqlDebugAllowed() || !empty($_COOKIE['explain']));
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
