@@ -23,12 +23,14 @@ class APCu extends Common
 
     public function __construct($prefix = null)
     {
+        global $debug;
+
         if (!$this->is_installed()) {
             die("Error: $this->engine extension not installed");
         }
 
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sql_dbg_enabled();
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
     public function get($name, $get_miss_key_callback = '', $ttl = 0)
