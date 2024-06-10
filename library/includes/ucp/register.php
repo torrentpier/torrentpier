@@ -438,9 +438,6 @@ foreach ($profile_fields as $field => $can_edit) {
                 $db_data['user_from'] = (string)$from;
             }
             $tp_data['COUNTRY_SELECTED'] = render_flag($pr_data['user_from']);
-            if ($bb_cfg['enable_additional_flags']) {
-                $lang['COUNTRIES'] = array_merge($lang['COUNTRIES'], $lang['ADDITIONAL_FLAGS']);
-            }
             $tp_data['COUNTRY_SELECT'] = build_select('user_from', array_flip($lang['COUNTRIES']), $pr_data['user_from']);
             break;
 
