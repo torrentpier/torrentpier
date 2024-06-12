@@ -76,9 +76,10 @@ switch ($this->request['type']) {
         $message = "[quote=\"" . $quote_username . "\"][qpost=" . $post['post_id'] . "]" . $post['post_text'] . "[/quote]\r";
 
         // hide user passkey
-        $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
+        $message = preg_replace('#(?<=[\?&;]' . $bb_cfg['passkey_key'] . '=)[a-zA-Z0-9]#', 'passkey', $message);
         // hide sid
         $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
+
         $message = $wordCensor->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
