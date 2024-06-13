@@ -459,14 +459,16 @@ $('#tor-filelist-btn').click(function () {
     }
 </script>
 <div id="thx-block">
-    <!-- IF not postrow.attach.tor_reged.TOR_AUTHOR -->
+    <!-- IF not postrow.attach.tor_reged.TOR_AUTHOR and not IS_GUEST -->
     <div id="thx-btn-div">
         <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{L_THANK_TOPIC}">
     </div>
     <!-- ENDIF -->
+    <!-- IF not IS_GUEST or $bb_cfg['tor_thanks_list_guests'] -->
     <div class="sp-wrap">
         <div id="thx-list" class="sp-body" data-no-sp-open="true" title="{L_LAST_LIKES}"></div>
     </div>
+    <!-- ENDIF -->
 </div>
 <!-- ENDIF -->
 
