@@ -9,6 +9,7 @@
 - Some security improvements 🔑 [\#1503](https://github.com/torrentpier/torrentpier/pull/1503) ([belomaxorka](https://github.com/belomaxorka))
 - Some security enhancements (Part 2) [\#1505](https://github.com/torrentpier/torrentpier/pull/1505) ([belomaxorka](https://github.com/belomaxorka))
 - Some improvements for integrity checker [\#1501](https://github.com/torrentpier/torrentpier/pull/1501) ([belomaxorka](https://github.com/belomaxorka))
+- Hide vote button in topic if guest [\#1507](https://github.com/torrentpier/torrentpier/pull/1507) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1502](https://github.com/torrentpier/torrentpier/pull/1502), [\#1506](https://github.com/torrentpier/torrentpier/pull/1506) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1504](https://github.com/torrentpier/torrentpier/pull/1504) ([Exileum](https://github.com/Exileum))
 
