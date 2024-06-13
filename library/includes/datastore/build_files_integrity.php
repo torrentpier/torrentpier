@@ -39,7 +39,6 @@ $ignoreFiles = [
     'styles/images/logo/logo.png'
 ];
 
-$lines = [];
 foreach ($checksumFile as $line) {
     $parts = explode('  ', $line);
     if (!isset($parts[0]) || !isset($parts[1])) {

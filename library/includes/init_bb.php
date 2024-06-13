@@ -74,7 +74,6 @@ define('COOKIE_PM', $c . 'pm');
 unset($c);
 
 define('COOKIE_SESSION', 0);
-define('COOKIE_EXPIRED', TIMENOW - 31536000);
 define('COOKIE_PERSIST', TIMENOW + 31536000);
 
 define('COOKIE_MAX_TRACKS', 90);
