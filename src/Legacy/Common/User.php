@@ -305,8 +305,8 @@ class User
 					LIMIT 1
 				");
 
-                bb_setcookie(COOKIE_TOPIC, null);
-                bb_setcookie(COOKIE_FORUM, null);
+                bb_setcookie(COOKIE_TOPIC, '');
+                bb_setcookie(COOKIE_FORUM, '');
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
@@ -477,7 +477,7 @@ class User
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
-                    bb_setcookie($cookie, null);
+                    bb_setcookie($cookie, '', COOKIE_EXPIRED);
                 }
             }
         } else {
@@ -646,9 +646,9 @@ class User
             ]);
 
             // Delete cookies
-            bb_setcookie(COOKIE_TOPIC, null);
-            bb_setcookie(COOKIE_FORUM, null);
-            bb_setcookie(COOKIE_MARK, null);
+            bb_setcookie(COOKIE_TOPIC, '');
+            bb_setcookie(COOKIE_FORUM, '');
+            bb_setcookie(COOKIE_MARK, '');
         }
     }
 

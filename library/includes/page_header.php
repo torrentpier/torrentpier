@@ -211,7 +211,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 
     if (TIMENOW > $ignore_time) {
         if ($ignore_time) {
-            bb_setcookie('torhelp', null);
+            bb_setcookie('torhelp', '', COOKIE_EXPIRED);
         }
 
         $sql = "
