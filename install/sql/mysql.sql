@@ -568,7 +568,7 @@ VALUES ('allow_autologin', '1'),
        ('max_net_title', '50'),
        ('network_news_count', '5'),
        ('network_news_forum_id', '2'),
-       ('whois_info', 'http://whatismyipaddress.com/ip/'),
+       ('whois_info', 'https://whatismyipaddress.com/ip/'),
        ('show_mod_index', '0'),
        ('premod', '0'),
        ('tor_comment', '1'),
@@ -756,7 +756,7 @@ VALUES ('Images', '1', '1', '1', '', '262144', ''),
        ('Plain text', '0', '1', '1', '', '262144', ''),
        ('Documents', '0', '1', '1', '', '262144', ''),
        ('Real media', '0', '0', '2', '', '262144', ''),
-       ('Torrent', '0', '1', '1', '', '122880', '');
+       ('Torrent', '0', '1', '1', '', '262144', '');
 
 -- ----------------------------
 -- Table structure for `bb_forums`
