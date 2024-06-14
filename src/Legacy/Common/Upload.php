@@ -161,8 +161,22 @@ class Upload
 
                 // width & height
                 if (($this->cfg['max_width'] && $width > $this->cfg['max_width']) || ($this->cfg['max_height'] && $height > $this->cfg['max_height'])) {
-                    $this->errors[] = sprintf($lang['UPLOAD_ERROR_DIMENSIONS'], $this->cfg['max_width'], $this->cfg['max_height']);
-                    return false;
+                    for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+                        try {
+                            $image = new \claviska\SimpleImage();
+                            $image
+                                ->fromFile($this->file['tmp_name'])
+                                ->autoOrient()
+                                ->resize($this->cfg['max_width'], $this->cfg['max_height'])
+                                ->toFile($this->file['tmp_name']);
+                            break;
+                        } catch (\Exception $e) {
+                            if ($i == $max_try) {
+                                $this->errors[] = sprintf($lang['UPLOAD_ERROR_DIMENSIONS'], $this->cfg['max_width'], $this->cfg['max_height']);
+                                return false;
+                            }
+                        }
+                    }
                 }
             } else {
                 $this->errors[] = $lang['UPLOAD_ERROR_NOT_IMAGE'];
