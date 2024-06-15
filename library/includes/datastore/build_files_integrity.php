@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-if (!$bb_cfg['integrity_check']) {
+if (!$bb_cfg['integrity_check'] || is_dir(BB_ROOT . '.git')) {
     return;
 }
 
@@ -56,7 +56,7 @@ foreach ($checksumFile as $line) {
 }
 
 foreach ($filesList as $file) {
-    if (!file_exists(BB_ROOT . '/' . $file['path']) || (strtolower(md5_file(BB_ROOT . '/' . $file['path'])) !== strtolower($file['hash']))) {
+    if (!file_exists(BB_ROOT . $file['path']) || (strtolower(md5_file(BB_ROOT . $file['path'])) !== strtolower($file['hash']))) {
         $wrongFilesList[] = $file['path'];
     }
 }
