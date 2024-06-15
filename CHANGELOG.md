@@ -14,7 +14,7 @@
 - Some improvements for integrity checker [\#1501](https://github.com/torrentpier/torrentpier/pull/1501) ([belomaxorka](https://github.com/belomaxorka))
 - Hide vote button in topic if guest [\#1507](https://github.com/torrentpier/torrentpier/pull/1507) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1502](https://github.com/torrentpier/torrentpier/pull/1502), [\#1506](https://github.com/torrentpier/torrentpier/pull/1506), [\#1509](https://github.com/torrentpier/torrentpier/pull/1509), [\#1511](https://github.com/torrentpier/torrentpier/pull/1511), [\#1515](https://github.com/torrentpier/torrentpier/pull/1515) ([belomaxorka](https://github.com/belomaxorka))
-- New Crowdin updates [\#1504](https://github.com/torrentpier/torrentpier/pull/1504) ([Exileum](https://github.com/Exileum))
+- New Crowdin updates [\#1504](https://github.com/torrentpier/torrentpier/pull/1504), [\#1513](https://github.com/torrentpier/torrentpier/pull/1513) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.3](https://github.com/torrentpier/torrentpier/tree/v2.4.3) (2024-06-09)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.2...v2.4.3)
