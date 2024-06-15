@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `bb_attachments`
 DROP TABLE IF EXISTS `bb_attachments_config`;
 CREATE TABLE IF NOT EXISTS `bb_attachments_config`
 (
-  `config_name`  VARCHAR(255) NOT NULL DEFAULT '',
+  `config_name`  VARCHAR(155) NOT NULL DEFAULT '',
   `config_value` VARCHAR(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`config_name`)
 )
@@ -479,7 +479,7 @@ VALUES ('1', 'Your first category', '10');
 DROP TABLE IF EXISTS `bb_config`;
 CREATE TABLE IF NOT EXISTS `bb_config`
 (
-  `config_name`  VARCHAR(255) NOT NULL DEFAULT '',
+  `config_name`  VARCHAR(155) NOT NULL DEFAULT '',
   `config_value` TEXT         NOT NULL,
   PRIMARY KEY (`config_name`)
 )
