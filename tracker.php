@@ -43,7 +43,7 @@ $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $set_default = isset($_GET['def']);
 $user_id = $userdata['user_id'];
 $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
-$search_id = (isset($_GET['search_id']) && is_string($_GET['search_id'])) ? $_GET['search_id'] : '';
+$search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
 $status = (isset($_POST['status']) && is_array($_POST['status'])) ? $_POST['status'] : [];

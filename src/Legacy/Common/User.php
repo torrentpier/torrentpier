@@ -188,7 +188,7 @@ class User
 
             if ($userdata = get_userdata((int)$user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
-                    if (is_string($this->sessiondata['uk']) && $this->verify_autologin_id($userdata, true, false)) {
+                    if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
                     }
                 }
@@ -452,7 +452,7 @@ class User
         $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? unserialize($_COOKIE[COOKIE_DATA], ['allowed_classes' => false]) : [];
 
         // autologin_id
-        if (!empty($sd_resv['uk']) && is_string($sd_resv['uk'])) {
+        if (!empty($sd_resv['uk']) && verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH)) {
             $this->sessiondata['uk'] = $sd_resv['uk'];
         }
         // user_id
@@ -460,7 +460,7 @@ class User
             $this->sessiondata['uid'] = (int)$sd_resv['uid'];
         }
         // sid
-        if (!empty($sd_resv['sid']) && is_string($sd_resv['sid'])) {
+        if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
             $this->sessiondata['sid'] = $sd_resv['sid'];
         }
     }
@@ -517,7 +517,7 @@ class User
             }
         }
 
-        return is_string($autologin_id);
+        return verify_id($autologin_id, LOGIN_KEY_LENGTH);
     }
 
     /**
@@ -527,6 +527,7 @@ class User
      * @param bool $create_new
      *
      * @return string
+     * @throws \Exception
      */
     public function create_autologin_id(array $userdata, bool $create_new = true): string
     {

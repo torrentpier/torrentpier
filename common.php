@@ -245,6 +245,11 @@ function mkdir_rec($path, $mode): bool
     return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
 }
 
+function verify_id($id, $length): bool
+{
+    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
+}
+
 function clean_filename($fname)
 {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
