@@ -6,7 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.4 🦩 ([belomaxorka](https://github.com/belomaxorka))
-- Fixed seed bonus accrual [\#1514](https://github.com/torrentpier/torrentpier/pull/1514) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed seed bonus accrual [\#1518](https://github.com/torrentpier/torrentpier/pull/1518) ([belomaxorka](https://github.com/belomaxorka))
 - [BETA] Added emoji support 😄😁 [\#1514](https://github.com/torrentpier/torrentpier/pull/1514) ([belomaxorka](https://github.com/belomaxorka))
 - Resize avatar image if too large 🌆 [\#1512](https://github.com/torrentpier/torrentpier/pull/1512) ([belomaxorka](https://github.com/belomaxorka))
 - Increased PASSWORD_MAX_LENGTH [\#1510](https://github.com/torrentpier/torrentpier/pull/1510) ([belomaxorka](https://github.com/belomaxorka))
