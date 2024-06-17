@@ -637,7 +637,7 @@ VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00
         '0', '0', '0'),
        ('1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', '', '', '20', '', '', '00:15:00',
         '0', '', '0', '0', '0'),
-       ('1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:15:00', '0', '', '0', '0',
+       ('1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:10:00', '0', '', '0', '0',
         '0'),
        ('1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', '', '', '10', '', '', '00:10:00', '0', '',
         '0',

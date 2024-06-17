@@ -555,6 +555,7 @@ switch ($mode) {
                     $post_id = $postrow[$i]['post_id'];
                     $poster_id = $postrow[$i]['poster_id'];
                     $poster = $postrow[$i]['username'];
+                    $poster_rank = $postrow[$i]['user_rank'];
 
                     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
 
@@ -567,10 +568,9 @@ switch ($mode) {
                     $message = bbcode2html($message);
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
-
                     $template->assign_block_vars('postrow', [
                         'ROW_CLASS' => $row_class,
-                        'POSTER_NAME' => profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $postrow[$i]['user_rank']]),
+                        'POSTER_NAME' => profile_url(['username' => $poster, 'user_id' => $poster_id, 'user_rank' => $poster_rank]),
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
                         'CHECKBOX' => defined('BEGIN_CHECKBOX'),
