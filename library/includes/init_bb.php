@@ -306,13 +306,12 @@ define('FILELIST_URL', 'filelist.php?' . POST_TOPIC_URL . '=');
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
 define('HTML_SELECT_MAX_LENGTH', 60);
+define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');
 
 define('HTML_CHECKED', ' checked ');
 define('HTML_DISABLED', ' disabled ');
 define('HTML_READONLY', ' readonly ');
 define('HTML_SELECTED', ' selected ');
-
-define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');
 
 // $GPC
 define('KEY_NAME', 0);   // position in $GPC['xxx']
