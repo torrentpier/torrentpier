@@ -307,7 +307,6 @@
 <tr class="row3 med">
 	<td class="bold tCenter warnColor1" colspan="2">{L_SEED_BONUS_WARNING}</td>
 </tr>
-<tbody class="seed_bonus"></tbody>
 <!-- BEGIN seed_bonus -->
 <tr id="seed_bonus_{seed_bonus.RELEASE}">
 	<td>{L_SEED_BONUS_ADD}</td>
@@ -328,7 +327,7 @@
 		<input onclick="$('#seed_bonus').remove();" class="post" type="button" size="2" value="-" />
 	</td>
 </tr>
-<tr class="row3 med"><td colspan="2"></td></tr>
+<tbody class="seed_bonus"></tbody>
 <tr class="row3 med"><td colspan="2"></td></tr>
 <tr>
 	<td>{L_SEED_BONUS_TOR_SIZE}</td>
@@ -341,7 +340,6 @@
 <tr class="row3 med">
 	<td class="bold tCenter" colspan="2">{L_SEED_BONUS_EXCHANGE}</td>
 </tr>
-<tbody class="bonus_upload"></tbody>
 <!-- BEGIN bonus_upload -->
 <tr id="bonus_upload_{bonus_upload.UP}">
 	<td><h4>{L_SEED_BONUS_ROPORTION}</h4><h6></h6></td>
@@ -362,6 +360,7 @@
 		<input onclick="$('#bonus_upload').remove();" class="post" type="button" size="2" value="-" />
 	</td>
 </tr>
+<tbody class="bonus_upload"></tbody>
 <tr class="row3 med"><td colspan="2"></td></tr>
 <!-- ENDIF / CONFIG_MODS -->
 <tr>
