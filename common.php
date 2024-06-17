@@ -100,25 +100,14 @@ define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
 
-// Board / tracker shared constants and functions
+/**
+ * Shared constants
+ */
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
-
 define('BT_AUTH_KEY_LENGTH', 20);
-
-define('DL_STATUS_RELEASER', -1);
-define('DL_STATUS_DOWN', 0);
-define('DL_STATUS_COMPLETE', 1);
-define('DL_STATUS_CANCEL', 3);
-define('DL_STATUS_WILL', 4);
-
-define('TOR_TYPE_GOLD', 1);
-define('TOR_TYPE_SILVER', 2);
-
-define('GUEST_UID', -1);
-define('BOT_UID', -746);
 
 /**
  * Database

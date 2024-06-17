@@ -112,6 +112,17 @@ define('TOR_TMP', 10); // временная
 define('TOR_PREMOD', 11); // премодерация
 define('TOR_REPLENISH', 12); // пополняемая
 
+// Torrent types
+define('TOR_TYPE_GOLD', 1);
+define('TOR_TYPE_SILVER', 2);
+
+// DL-statuses
+define('DL_STATUS_RELEASER', -1);
+define('DL_STATUS_DOWN', 0);
+define('DL_STATUS_COMPLETE', 1);
+define('DL_STATUS_CANCEL', 3);
+define('DL_STATUS_WILL', 4);
+
 // Cron
 define('CRON_LOG_ENABLED', true); // global ON/OFF
 define('CRON_FORCE_LOG', false); // always log regardless of job settings
@@ -123,6 +134,10 @@ define('CRON_LOG_FILE', 'cron'); // without ext
 // Session variables
 define('ONLY_NEW_POSTS', 1);
 define('ONLY_NEW_TOPICS', 2);
+
+// User UIDs
+define('GUEST_UID', -1);
+define('BOT_UID', -746);
 
 // Ratio limits
 define('TR_RATING_LIMITS', true);        // ON/OFF
