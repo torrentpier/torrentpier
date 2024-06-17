@@ -101,15 +101,6 @@ define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $b
 unset($server_protocol, $server_port);
 
 /**
- * Shared constants
- */
-define('BB_BT_TORRENTS', 'bb_bt_torrents');
-define('BB_BT_TRACKER', 'bb_bt_tracker');
-define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
-define('BB_BT_USERS', 'bb_bt_users');
-define('BT_AUTH_KEY_LENGTH', 20);
-
-/**
  * Database
  */
 $DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
