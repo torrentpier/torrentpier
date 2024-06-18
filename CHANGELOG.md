@@ -6,7 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.4 🦩 ([belomaxorka](https://github.com/belomaxorka))
-- Create tech stack docs (techstack.yml and techstack.md) [\#1521](https://github.com/torrentpier/torrentpier/pull/1521) ([belomaxorka](https://github.com/belomaxorka))
+- Create tech stack docs (techstack.yml and techstack.md) [\#1521](https://github.com/torrentpier/torrentpier/pull/1521), [\#1522](https://github.com/torrentpier/torrentpier/pull/1522) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed seed bonus accrual [\#1518](https://github.com/torrentpier/torrentpier/pull/1518) ([belomaxorka](https://github.com/belomaxorka))
 - [BETA] Added emoji support 😄😁 [\#1514](https://github.com/torrentpier/torrentpier/pull/1514) ([belomaxorka](https://github.com/belomaxorka))
 - Resize avatar image if too large 🌆 [\#1512](https://github.com/torrentpier/torrentpier/pull/1512) ([belomaxorka](https://github.com/belomaxorka))
