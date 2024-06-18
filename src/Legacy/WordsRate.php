@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use function strlen;
+
 /**
  * Class WordsRate
  * @package TorrentPier\Legacy
@@ -46,7 +48,7 @@ class WordsRate
         $this->del_text_hl = $text;
 
         // Long text
-        if (\strlen($text) > 600) {
+        if (strlen($text) > 600) {
             return $this->words_rate;
         }
         // Crop quotes if contains +1
