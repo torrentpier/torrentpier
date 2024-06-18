@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy\Cache;
 
 use SQLite3;
-use TorrentPier\Dev;
 
 /**
  * Class SqliteCommon

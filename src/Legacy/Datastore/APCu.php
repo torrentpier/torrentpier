@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use TorrentPier\Dev;
-
 /**
  * Class APCu
  * @package TorrentPier\Legacy\Datastore

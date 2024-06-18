@@ -11,8 +11,6 @@ namespace TorrentPier\Legacy;
 
 use mysqli_result;
 
-use TorrentPier\Dev;
-
 /**
  * Class SqlDb
  * @package TorrentPier\Legacy
