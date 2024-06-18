@@ -20,13 +20,13 @@ class Select
      *
      * @param string $default_lang
      * @param string $select_name
-     * @return string
+     *
+     * @return mixed
      */
-    public static function language(string $default_lang, string $select_name = 'language')
+    public static function language(string $default_lang, string $select_name = 'language'): mixed
     {
         global $bb_cfg;
 
-        $lang_default = reset($bb_cfg['lang']);
         $lang_select = '<select name="' . $select_name . '">';
         $x = 0;
         foreach ($bb_cfg['lang'] as $key => $data) {
@@ -38,7 +38,7 @@ class Select
             $x++;
         }
         $lang_select .= '</select>';
-        return ($x > 1) ? $lang_select : $lang_default['name'];
+        return ($x > 1) ? $lang_select : reset($bb_cfg['lang']);
     }
 
     /**
@@ -73,9 +73,9 @@ class Select
      * @param string $default_style
      * @param string $select_name
      *
-     * @return string
+     * @return mixed
      */
-    public static function template(string $default_style, string $select_name = 'tpl_name')
+    public static function template(string $default_style, string $select_name = 'tpl_name'): mixed
     {
         global $bb_cfg;
 
