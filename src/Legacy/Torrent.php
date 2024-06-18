@@ -9,6 +9,14 @@
 
 namespace TorrentPier\Legacy;
 
+use function in_array;
+use function is_array;
+use function strlen;
+
+use Arokettu\Bencode\Bencode;
+use Arokettu\Bencode\Bencode\Collection;
+use Exception;
+
 /**
  * Class Torrent
  * @package TorrentPier\Legacy
@@ -318,15 +326,15 @@ class Torrent
         $file_contents = file_get_contents($filename);
 
         try {
-            $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
-        } catch (\Exception $e) {
+            $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
+        } catch (Exception $e) {
             self::torrent_error_exit(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
         if ($bb_cfg['bt_disable_dht']) {
             $tor['info']['private'] = (int)1;
             $fp = fopen($filename, 'wb+');
-            fwrite($fp, \Arokettu\Bencode\Bencode::encode($tor));
+            fwrite($fp, Bencode::encode($tor));
             fclose($fp);
         }
 
@@ -337,7 +345,7 @@ class Torrent
             $ann = $tor['announce'] ?? '';
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
-            if (!$ann || !\in_array($ann, $announce_urls)) {
+            if (!$ann || !in_array($ann, $announce_urls)) {
                 $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
                 self::torrent_error_exit($msg);
             }
@@ -371,14 +379,14 @@ class Torrent
 
         // Getting info_hash v1
         if (isset($bt_v1)) {
-            $info_hash = hash('sha1', \Arokettu\Bencode\Bencode::encode($info), true);
+            $info_hash = hash('sha1', Bencode::encode($info), true);
             $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
             $info_hash_where = "WHERE info_hash = '$info_hash_sql'";
         }
 
         // Getting info_hash v2
         if (isset($bt_v2)) {
-            $info_hash_v2 = hash('sha256', \Arokettu\Bencode\Bencode::encode($info), true);
+            $info_hash_v2 = hash('sha256', Bencode::encode($info), true);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
             $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
         }
@@ -398,7 +406,7 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && \is_array($info['files'])) {
+        } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 // Exclude padding files
                 if (!isset($f['attr']) || $f['attr'] !== 'p') {
@@ -561,8 +569,8 @@ class Torrent
         // Torrent decoding
         $file_contents = file_get_contents($filename);
         try {
-            $tor = \Arokettu\Bencode\Bencode::decode($file_contents, dictType: \Arokettu\Bencode\Bencode\Collection::ARRAY);
-        } catch (\Exception $e) {
+            $tor = Bencode::decode($file_contents, dictType: Collection::ARRAY);
+        } catch (Exception $e) {
             bb_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
@@ -639,13 +647,13 @@ class Torrent
         unset($tor['comment.utf-8']);
 
         // Send torrent
-        $output = \Arokettu\Bencode\Bencode::encode($tor);
+        $output = Bencode::encode($tor);
 
         $dl_fname = html_entity_decode($topic_title, ENT_QUOTES, 'UTF-8') . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
-            $tor['info']['pieces'] = '[...] ' . \strlen($tor['info']['pieces']) . ' bytes';
+            $tor['info']['pieces'] = '[...] ' . strlen($tor['info']['pieces']) . ' bytes';
             $out .= print_r($tor, true);
             bb_die("<pre>$out</pre>");
         }
