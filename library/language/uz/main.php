@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'nogironlar';
 $lang['ERROR'] = 'xato';
 $lang['SELECT_ACTION'] = 'tanlang harakat';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'noma\'lum';
 
 $lang['NEXT_PAGE'] = 'Keyingi';
