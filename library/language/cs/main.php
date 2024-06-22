@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Zdravotně postižené';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akce';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Neznámý';
 
 $lang['NEXT_PAGE'] = 'Další';
