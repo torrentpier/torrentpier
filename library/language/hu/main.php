@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Fogyatékkal élő';
 $lang['ERROR'] = 'Hiba';
 $lang['SELECT_ACTION'] = 'Válassza ki a műveletet';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Ismeretlen';
 
 $lang['NEXT_PAGE'] = 'Következő';
