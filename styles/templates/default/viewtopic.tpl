@@ -577,7 +577,7 @@ function build_poll_add_form (src_el)
                 <input type="submit" value="{L_GO}" class="lite" name="submit" />
             </form>
             <div style="margin-top: 5px;">
-                <a href="#" onclick="$(document).scrollTop();">{L_MOVE_TO_TOP}</a>
+                <a href="#" onclick="$.scrollTo('#topic_main', {duration: 200, axis: 'y'}); return false;">{L_MOVE_TO_TOP}</a>
             </div>
         </td>
     </tr>
