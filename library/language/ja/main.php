@@ -61,6 +61,7 @@ $lang['DISABLED'] = '障害者';
 $lang['ERROR'] = 'エラー';
 $lang['SELECT_ACTION'] = '選択行動';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = '不明';
 
 $lang['NEXT_PAGE'] = '次へ';
