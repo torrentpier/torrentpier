@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use TorrentPier\Dev;
-
 /**
  * Class Redis
  * @package TorrentPier\Legacy\Datastore

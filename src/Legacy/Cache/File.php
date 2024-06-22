@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use TorrentPier\Dev;
-
 /**
  * Class File
  * @package TorrentPier\Legacy\Cache

@@ -11,8 +11,6 @@ namespace TorrentPier\Helpers;
 
 use Longman\IPTools\Ip;
 
-use function strlen;
-
 /**
  * Class IPHelper
  * @package TorrentPier\Helpers

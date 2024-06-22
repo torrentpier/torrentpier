@@ -271,7 +271,7 @@ class Template
             die("Template->loadfile(): No files found for handle $handle");
         }
         $this->xs_startup();
-        $force_recompile = empty($this->uncompiled_code[$handle]) ? false : true;
+        $force_recompile = !empty($this->uncompiled_code[$handle]);
         // checking if php file exists.
         if (!empty($this->files_cache[$handle]) && !$force_recompile) {
             // php file exists - running it instead of tpl
@@ -313,12 +313,12 @@ class Template
         if (str_contains($blockname, '.')) {
             // Nested block.
             $blocks = explode('.', $blockname);
-            $blockcount = \count($blocks) - 1;
+            $blockcount = count($blocks) - 1;
 
             $str = &$this->_tpldata;
             for ($i = 0; $i < $blockcount; $i++) {
                 $str = &$str[$blocks[$i] . '.'];
-                $str = &$str[(is_countable($str) ? \count($str) : 0) - 1];
+                $str = &$str[(is_countable($str) ? count($str) : 0) - 1];
             }
             // Now we add the block that we're actually assigning to.
             // We're adding a new iteration to this block with the given
@@ -441,7 +441,7 @@ class Template
     {
         // Get an array of the blocks involved.
         $blocks = explode('.', $blockname);
-        $blockcount = \count($blocks) - 1;
+        $blockcount = count($blocks) - 1;
         if ($include_last_iterator) {
             return '$' . $blocks[$blockcount] . '_item';
         }
@@ -467,7 +467,7 @@ class Template
 
         // Break it up into lines and put " -->" back.
         $code_lines = explode(' -->', $code);
-        $count = \count($code_lines);
+        $count = count($code_lines);
         for ($i = 0; $i < ($count - 1); $i++) {
             $code_lines[$i] .= ' -->';
         }
@@ -486,7 +486,7 @@ class Template
 
         // replace all short php tags
         $new_code = [];
-        $line_count = \count($code_lines);
+        $line_count = count($code_lines);
         for ($i = 0; $i < $line_count; $i++) {
             $line = $code_lines[$i];
             $pos = strpos($line, '<?');
@@ -509,7 +509,7 @@ class Template
         $code_lines = $new_code;
 
         // main loop
-        $line_count = \count($code_lines);
+        $line_count = count($code_lines);
         for ($i = 0; $i < $line_count; $i++) {
             $line = $code_lines[$i];
             // reset keyword type
@@ -571,7 +571,7 @@ class Template
             */
             if ($keyword_type == XS_TAG_BEGIN) {
                 $params = explode(' ', $params_str);
-                $num_params = \count($params);
+                $num_params = count($params);
                 // get variable name
                 if ($num_params == 1) {
                     $var = $params[0];
@@ -635,7 +635,7 @@ class Template
             */
             if ($keyword_type == XS_TAG_END) {
                 $params = explode(' ', $params_str);
-                $num_params = \count($params);
+                $num_params = count($params);
                 if ($num_params == 1) {
                     $var = $params[0];
                 } elseif ($num_params == 2 && $params[0] === '') {
@@ -678,7 +678,7 @@ class Template
             */
             if ($keyword_type == XS_TAG_INCLUDE) {
                 $params = explode(' ', $params_str);
-                $num_params = \count($params);
+                $num_params = count($params);
                 if ($num_params != 1) {
                     $compiled[] = $keyword_str;
                     continue;
@@ -743,14 +743,14 @@ class Template
      */
     public function _compile_text($code)
     {
-        if (\strlen($code) < 3) {
+        if (strlen($code) < 3) {
             return $code;
         }
         // change template varrefs into PHP varrefs
         // This one will handle varrefs WITH namespaces
         $varrefs = [];
         preg_match_all('#\{(([a-z0-9\-_]+?\.)+)([a-z0-9\-_]+?)\}#is', $code, $varrefs);
-        $varcount = is_countable($varrefs[1]) ? \count($varrefs[1]) : 0;
+        $varcount = is_countable($varrefs[1]) ? count($varrefs[1]) : 0;
         $search = [];
         $replace = [];
         for ($i = 0; $i < $varcount; $i++) {
@@ -760,7 +760,7 @@ class Template
             $search[] = $varrefs[0][$i];
             $replace[] = $new;
         }
-        if (\count($search) > 0) {
+        if (count($search) > 0) {
             $code = str_replace($search, $replace, $code);
         }
         // This will handle the remaining root-level varrefs
@@ -788,7 +788,7 @@ class Template
 										 [^\s(),]+)/x', $tag_args, $match);
 
         $tokens = $match[0];
-        $tokens_cnt = is_countable($tokens) ? \count($tokens) : 0;
+        $tokens_cnt = is_countable($tokens) ? count($tokens) : 0;
         $is_arg_stack = [];
 
         for ($i = 0; $i < $tokens_cnt; $i++) {
@@ -845,11 +845,11 @@ class Template
 
                 case 'is':
                     $is_arg_start = ($tokens[$i - 1] == ')') ? array_pop($is_arg_stack) : $i - 1;
-                    $is_arg = implode('	', \array_slice($tokens, $is_arg_start, $i - $is_arg_start));
+                    $is_arg = implode('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
 
-                    $new_tokens = $this->_parse_is_expr($is_arg, \array_slice($tokens, $i + 1));
+                    $new_tokens = $this->_parse_is_expr($is_arg, array_slice($tokens, $i + 1));
 
-                    array_splice($tokens, $is_arg_start, is_countable($tokens) ? \count($tokens) : 0, $new_tokens);
+                    array_splice($tokens, $is_arg_start, is_countable($tokens) ? count($tokens) : 0, $new_tokens);
 
                     $i = $is_arg_start;
                     break;
@@ -995,7 +995,7 @@ class Template
         // adding current template
         $tpl = $this->root . '/';
         if (str_starts_with($tpl, './')) {
-            $tpl = substr($tpl, 2, \strlen($tpl));
+            $tpl = substr($tpl, 2, strlen($tpl));
         }
         $this->vars['TEMPLATE'] ??= $tpl;
         $this->vars['TEMPLATE_NAME'] ??= $this->tpl;

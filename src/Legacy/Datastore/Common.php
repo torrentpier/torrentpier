@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use TorrentPier\Dev;
-
 /**
  * Class Common
  * @package TorrentPier\Legacy\Datastore

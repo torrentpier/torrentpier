@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use TorrentPier\Dev;
-
 /**
  * Class Redis
  * @package TorrentPier\Legacy\Cache

@@ -693,6 +693,7 @@ $bb_cfg['tracker'] = [
     'retracker_host' => 'http://retracker.local/announce',
     'guest_tracker' => true,
     'search_by_tor_status' => true,
+    'random_release_button' => true,
     'freeleech' => false, // freeleech mode (If enabled, then disable "gold_silver_enabled")
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated

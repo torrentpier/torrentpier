@@ -52,7 +52,7 @@ $stat += DB()->fetch_row('SELECT COUNT(DISTINCT user_id) AS u_bt_active FROM ' .
 // All bt-users
 $stat += DB()->fetch_row('SELECT COUNT(*) AS u_bt_all FROM ' . BB_BT_USERS);
 // All bb-users
-$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bb_all FROM ' . BB_USERS);
+$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bb_all FROM ' . BB_USERS . ' WHERE user_id != ' . BOT_UID);
 // Active torrents
 $stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_active FROM ' . TMP_TRACKER_TABLE);
 // With seeder
@@ -70,7 +70,7 @@ foreach ($peers_in_last_minutes as $t) {
 }
 // Last xx seconds
 $peers_in_last_sec = [];
-$rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' GROUP BY update_time ORDER BY update_time DESC LIMIT ' . $peers_in_last_sec_limit);
+$rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' ORDER BY update_time DESC LIMIT ' . $peers_in_last_sec_limit);
 foreach ($rowset as $cnt => $row) {
     $peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt % 15)) ? "  \n" : '');
 }

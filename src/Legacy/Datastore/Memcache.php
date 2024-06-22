@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use TorrentPier\Dev;
-
 /**
  * Class Memcache
  * @package TorrentPier\Legacy\Datastore
