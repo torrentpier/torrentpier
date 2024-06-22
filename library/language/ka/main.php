@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'შეზღუდული შესაძლებლო�
 $lang['ERROR'] = 'შეცდომა';
 $lang['SELECT_ACTION'] = 'აირჩიეთ აქცია';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'უცნობი';
 
 $lang['NEXT_PAGE'] = 'შემდეგი';
