@@ -61,6 +61,7 @@ $lang['DISABLED'] = '장애인';
 $lang['ERROR'] = '류';
 $lang['SELECT_ACTION'] = '선택 작업';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = '알 수 없음';
 
 $lang['NEXT_PAGE'] = '다음';
