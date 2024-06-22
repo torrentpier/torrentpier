@@ -62,11 +62,11 @@ ajax.callback.view_post = function(data) {
 <!-- ENDIF / AJAX_TOPICS -->
 
 <a name="start"></a>
-<h1 class="pagetitle">{PAGE_TITLE}&nbsp;&middot;&nbsp;<a href="{U_TRACKER}?random_release=1">{L_RANDOM_RELEASE}</a></h1>
+<h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <div class="nav">
 	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
-	<!-- IF MATCHES --><p class="floatR">{MATCHES} {SERACH_MAX}</p><!-- ENDIF -->
+	<p class="floatR"><!-- IF $bb_cfg['tracker']['random_release_button'] --><a href="{U_TRACKER}?random_release=1">{L_RANDOM_RELEASE}</a><!-- ENDIF --><!-- IF MATCHES -->&nbsp;&middot;&nbsp;{MATCHES}{SERACH_MAX}<!-- ENDIF --></p>
 	<div class="clear"></div>
 </div>
 
