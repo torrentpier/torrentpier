@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Onesposobili';
 $lang['ERROR'] = 'Greška';
 $lang['SELECT_ACTION'] = 'Odaberite akciju';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Nepoznati';
 
 $lang['NEXT_PAGE'] = 'Sljedeći';
