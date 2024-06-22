@@ -50,7 +50,7 @@
     "longman/ip-tools": "1.2.1",
     "monolog/monolog": "^3.4",
     "samdark/sitemap": "2.4.1",
-    "symfony/mailer": "^6.3",
+    "symfony/mailer": "^7.1",
     "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {
