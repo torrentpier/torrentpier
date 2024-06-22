@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Vô hiệu hóa';
 $lang['ERROR'] = 'Lỗi';
 $lang['SELECT_ACTION'] = 'Chọn hành động';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Không rõ';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
