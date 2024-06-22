@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Вимкнено';
 $lang['ERROR'] = 'Помилка';
 $lang['SELECT_ACTION'] = 'Виберіть дію';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Не вказана';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
