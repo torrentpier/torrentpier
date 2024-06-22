@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'ปิดการใช้งาน';
 $lang['ERROR'] = 'เกิดข้อผิดพลาด';
 $lang['SELECT_ACTION'] = 'เลือกการกระทำ';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'ไม่ทราบ';
 
 $lang['NEXT_PAGE'] = 'ต่อไป';
