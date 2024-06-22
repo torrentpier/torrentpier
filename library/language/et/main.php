@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Puuetega';
 $lang['ERROR'] = 'Viga';
 $lang['SELECT_ACTION'] = 'Vali tegevus';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Teadmata';
 
 $lang['NEXT_PAGE'] = 'Järgmine';

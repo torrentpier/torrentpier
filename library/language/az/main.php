@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Qaralar';
 $lang['ERROR'] = 'Səhv';
 $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Məlum deyil';
 
 $lang['NEXT_PAGE'] = 'Daha sonra';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'мүгедек';
 $lang['ERROR'] = 'қателік';
 $lang['SELECT_ACTION'] = 'әрекетті таңдаңыз';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'белгісіз';
 
 $lang['NEXT_PAGE'] = 'Келесі';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Dezactivate';
 $lang['ERROR'] = 'Eroare';
 $lang['SELECT_ACTION'] = 'Selectați acțiune';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Necunoscut';
 
 $lang['NEXT_PAGE'] = 'Următoarea';

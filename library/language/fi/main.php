@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Käytöstä';
 $lang['ERROR'] = 'Virhe';
 $lang['SELECT_ACTION'] = 'Valitse toiminta';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Tuntematon';
 
 $lang['NEXT_PAGE'] = 'Seuraava';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'נכים';
 $lang['ERROR'] = 'שגיאה';
 $lang['SELECT_ACTION'] = 'בחר פעולה';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'לא ידוע';
 
 $lang['NEXT_PAGE'] = 'הבא';

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Deficientes';
 $lang['ERROR'] = 'Erro';
 $lang['SELECT_ACTION'] = 'Selecione ação';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Desconhecido';
 
 $lang['NEXT_PAGE'] = 'Seguinte';

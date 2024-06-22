@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Անջատված';
 $lang['ERROR'] = 'Սխալ է';
 $lang['SELECT_ACTION'] = 'Ընտրեք գործողությունը';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Հայտնի չէ';
 
 $lang['NEXT_PAGE'] = 'Ավելին';

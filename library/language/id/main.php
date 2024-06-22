@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Keluarga';
 $lang['ERROR'] = 'Kesalahan';
 $lang['SELECT_ACTION'] = 'Pilih action';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Tidak diketahui';
 
 $lang['NEXT_PAGE'] = 'Berikutnya';

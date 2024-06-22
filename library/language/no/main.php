@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Funksjonshemmede';
 $lang['ERROR'] = 'Feil';
 $lang['SELECT_ACTION'] = 'Velg handling';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Ukjent';
 
 $lang['NEXT_PAGE'] = 'Neste';

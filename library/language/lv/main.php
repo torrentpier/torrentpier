@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Invalīdiem';
 $lang['ERROR'] = 'Kļūda';
 $lang['SELECT_ACTION'] = 'Izvēlieties darbība';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Nav zināms';
 
 $lang['NEXT_PAGE'] = 'Nākamā';

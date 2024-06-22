@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Изключен';
 $lang['ERROR'] = 'Грешка';
 $lang['SELECT_ACTION'] = 'Изберете действие';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Неизвестно';
 
 $lang['NEXT_PAGE'] = 'Напред';

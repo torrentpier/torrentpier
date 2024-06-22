@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'маъюб';
 $lang['ERROR'] = 'хатогӣ';
 $lang['SELECT_ACTION'] = 'Интихоб кунед амал';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'номашҳур';
 
 $lang['NEXT_PAGE'] = 'Баъдӣ';
