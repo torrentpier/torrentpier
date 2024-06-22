@@ -220,6 +220,13 @@
             <!-- ENDIF -->
         </tr>
 
+        <tr>
+            <td class="prof-title">{L_HIDE_AUTHORSHIP_POSTS}:</td>
+            <td>
+                <label><input type="radio" name="user_anonymous" value="1" <!-- IF USER_ANONYMOUS -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_anonymous" value="0" <!-- IF not USER_ANONYMOUS -->checked<!-- ENDIF --> />{L_NO}</label>
+            </td>
+        </tr>
         <!-- IF IS_ADMIN || $bb_cfg['show_email_visibility_settings'] -->
         <tr>
             <td class="prof-title">{L_PUBLIC_VIEW_EMAIL}:</td>

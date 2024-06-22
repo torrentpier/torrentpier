@@ -514,6 +514,7 @@ $bb_cfg['search_max_word_len'] = 35; // Maximum letters to perform a search
 $bb_cfg['limit_max_search_results'] = false; // Limit for number of search results (false - unlimited)
 
 // Posting
+$bb_cfg['force_anonymous_mode'] = false; // Force anonymous mode on whole forum
 $bb_cfg['prevent_multiposting'] = true; // TODO: replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
 $bb_cfg['max_smilies'] = 25; //Max number of smilies in a post (0 - unlimited)
 $bb_cfg['max_symbols_post'] = 5000; // TODO: Max number of symbols in a post (0 - unlimited)
