@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'gestremde';
 $lang['ERROR'] = 'fout';
 $lang['SELECT_ACTION'] = 'Kies aksie';
 $lang['CLEAR'] = 'Verwyder';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'onbekend';
 
 $lang['NEXT_PAGE'] = 'volgende';
