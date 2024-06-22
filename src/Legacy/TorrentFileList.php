@@ -9,10 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use function count;
-use function is_array;
-use function is_string;
-
 /**
  * Class TorrentFileList
  * @package TorrentPier\Legacy

@@ -9,10 +9,6 @@
 
 namespace TorrentPier\Legacy\Common;
 
-use function define;
-use function defined;
-use function is_array;
-
 use TorrentPier\Legacy\DateDelta;
 use TorrentPier\Legacy\Torrent;
 use TorrentPier\Sessions;

@@ -9,14 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use function define;
-use function defined;
-use function is_array;
-use function is_bool;
-use function is_float;
-use function is_int;
-use function is_string;
-
 use mysqli_result;
 
 /**

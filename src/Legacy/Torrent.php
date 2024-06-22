@@ -9,10 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use function in_array;
-use function is_array;
-use function strlen;
-
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
 use Exception;

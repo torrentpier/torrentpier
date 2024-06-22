@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use function strlen;
-
 /**
  * Class WordsRate
  * @package TorrentPier\Legacy

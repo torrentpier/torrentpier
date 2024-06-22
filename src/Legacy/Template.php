@@ -9,10 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use function array_slice;
-use function count;
-use function strlen;
-
 /**
  * Class Template
  * @package TorrentPier\Legacy
