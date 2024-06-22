@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Με αναπηρία';
 $lang['ERROR'] = 'Σφάλμα';
 $lang['SELECT_ACTION'] = 'Επιλέξτε δράση';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Άγνωστο';
 
 $lang['NEXT_PAGE'] = 'Την επόμενη';
