@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'विकलांग';
 $lang['ERROR'] = 'त्रुटि';
 $lang['SELECT_ACTION'] = 'कार्रवाई चुनें';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'अनजान';
 
 $lang['NEXT_PAGE'] = 'आगामी';
