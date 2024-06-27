@@ -471,6 +471,11 @@ if (!$output) {
 
 $output['external ip'] = inet_pton($ip);
 
+// Return last sql error to client
+if (!empty(DB()->sql_error()['code'])) {
+    sql_die(DB()->sql_error()['code']);
+}
+
 // Return data to client
 echo \Arokettu\Bencode\Bencode::encode($output);
 
