@@ -72,8 +72,6 @@
 
 <var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_email"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_regdate"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_lastvisit"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_website"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_occ"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
@@ -321,8 +319,8 @@ ajax.callback.index_data = function(data) {
 			<!-- ENDIF -->
 			<tr>
 				<th>{L_JOINED}:</th>
-				<td id="user_regdate">
-					<span class="editable bold">{USER_REGDATE}</span>
+				<td>
+					<b>{USER_REGDATE}</b>
 					<!-- IF IS_ADMIN -->
 					[ <a href="#admin" class="adm menu-root menu-alt1">{L_MANAGE_USER}</a> ]
 					<div class="menu-sub row1 border bw_TRBL" id="admin">
@@ -357,8 +355,8 @@ ajax.callback.index_data = function(data) {
 			</tr>
 			<tr>
 				<th>{L_LAST_VISITED}:</th>
-				<td id="user_lastvisit">
-					<span class="editable bold">{LAST_VISIT_TIME}</span>
+				<td>
+					<b>{LAST_VISIT_TIME}</b>
 				</td>
 			</tr>
 
