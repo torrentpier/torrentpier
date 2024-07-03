@@ -459,15 +459,11 @@ if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_ADMIN') &
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();
-        if (\TorrentPier\Helpers\CronHelper::isEnabled()) {
-            bb_die('BOARD_DISABLE', 503);
-        }
+        bb_die('BOARD_DISABLE', 503);
     } elseif (is_file(BB_DISABLED)) {
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
-        if (\TorrentPier\Helpers\CronHelper::isEnabled()) {
-            bb_die('BOARD_DISABLE_CRON', 503);
-        }
+        bb_die('BOARD_DISABLE_CRON', (\TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null));
     }
 }
