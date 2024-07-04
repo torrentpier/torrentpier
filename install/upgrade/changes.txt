@@ -79,7 +79,7 @@ ALTER TABLE `bb_bt_tracker` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NU
 ALTER TABLE `bb_bt_tracker` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';
-ALTER TABLE `bb_bt_torrents` ADD COLUMN `seeder_last_seen` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_torrents` ADD COLUMN `last_seeder_id` MEDIUMINT(8) NOT NULL DEFAULT '0';
 ALTER TABLE `buf_last_seeder` ADD COLUMN `user_id` MEDIUMINT(8) NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker` CHANGE `ip` `ip` VARCHAR(42) DEFAULT NULL;
 ALTER TABLE `bb_bt_tracker` CHANGE `ipv6` `ipv6` VARCHAR(42) DEFAULT NULL;
