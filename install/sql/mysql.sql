@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `tor_type`         TINYINT(1)            NOT NULL DEFAULT '0',
   `speed_up`         INT(11)               NOT NULL DEFAULT '0',
   `speed_down`       INT(11)               NOT NULL DEFAULT '0',
-  `last_seeder_id`   INT(11)               NOT NULL DEFAULT '0',
+  `last_seeder_id`   MEDIUMINT(8)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
@@ -875,7 +875,7 @@ DROP TABLE IF EXISTS `bb_poll_users`;
 CREATE TABLE IF NOT EXISTS `bb_poll_users`
 (
   `topic_id` INT(10) UNSIGNED NOT NULL,
-  `user_id`  INT(11)          NOT NULL,
+  `user_id`  MEDIUMINT(8)     NOT NULL,
   `vote_ip`  VARCHAR(42)      NOT NULL DEFAULT '0',
   `vote_dt`  INT(11)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`, `user_id`)
