@@ -16,7 +16,7 @@ define('IN_CRON', true);
 // Set SESSION vars
 DB()->query("
 	SET SESSION
-	  myisam_sort_buffer_size = 16*1024*1024
+	  innodb_sort_buffer_size = 16*1024*1024
 	, bulk_insert_buffer_size =  8*1024*1024
 	, join_buffer_size        =  4*1024*1024
 	, read_buffer_size        =  4*1024*1024
@@ -24,12 +24,13 @@ DB()->query("
 	, sort_buffer_size        =  4*1024*1024
 	, tmp_table_size          = 80*1024*1024
 	, group_concat_max_len    =  1*1024*1024
+	, wait_timeout            =  6*100
 ");
 
 // Restore vars at shutdown
 DB()->add_shutdown_query("
 	SET SESSION
-	  myisam_sort_buffer_size = DEFAULT
+	  innodb_sort_buffer_size = DEFAULT
 	, bulk_insert_buffer_size = DEFAULT
 	, join_buffer_size        = DEFAULT
 	, read_buffer_size        = DEFAULT
@@ -37,6 +38,7 @@ DB()->add_shutdown_query("
 	, sort_buffer_size        = DEFAULT
 	, tmp_table_size          = DEFAULT
 	, group_concat_max_len    = DEFAULT
+	, wait_timeout            = DEFAULT
 ");
 
 // $cron_jobs obtained in cron_check.php
