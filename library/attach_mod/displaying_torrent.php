@@ -27,7 +27,7 @@ $peers_div_style_overflow = "padding: 6px; height: $peers_overflow_div_height; o
 $s_last_seed_date_format = 'Y-m-d';
 $upload_image = '<img src="' . $images['icon_dn'] . '" alt="' . $lang['DL_TORRENT'] . '" border="0" />';
 
-$peers_cnt = $seed_count = $leech_count = 0;
+$peers_cnt = $seed_count = 0;
 $seeders = $leechers = '';
 $tor_info = [];
 
