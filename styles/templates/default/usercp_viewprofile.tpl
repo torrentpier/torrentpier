@@ -176,7 +176,7 @@ ajax.callback.index_data = function(data) {
 		<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;
 		<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>
 	</p>
-    <!-- ELSE -->
+    <!-- ELSEIF PROFILE_USER -->
     <p class="floatR">
         <a href="{U_OPTIONS}">{L_PROFILE}</a>
     </p>
