@@ -459,7 +459,7 @@ $('#tor-filelist-btn').click(function () {
     }
 </script>
 <div id="thx-block">
-    <!-- IF not postrow.attach.tor_reged.TOR_AUTHOR and not IS_GUEST -->
+    <!-- IF not IS_GUEST -->
     <div id="thx-btn-div">
         <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{L_THANK_TOPIC}">
     </div>

@@ -27,7 +27,7 @@ $peers_div_style_overflow = "padding: 6px; height: $peers_overflow_div_height; o
 $s_last_seed_date_format = 'Y-m-d';
 $upload_image = '<img src="' . $images['icon_dn'] . '" alt="' . $lang['DL_TORRENT'] . '" border="0" />';
 
-$peers_cnt = $seed_count = 0;
+$peers_cnt = $seed_count = $leech_count = 0;
 $seeders = $leechers = '';
 $tor_info = [];
 
@@ -196,7 +196,6 @@ if ($tor_reged && $tor_info) {
             'ATTACH_ID' => $attach_id,
             'TOR_SILVER_GOLD' => $tor_type,
             'TOR_TYPE' => is_gold($tor_type),
-            'TOR_AUTHOR' => $bt_user_id == $poster_id && $bt_user_id != GUEST_UID,
 
             // torrent status mod
             'TOR_FROZEN' => !IS_AM ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
