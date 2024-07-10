@@ -468,6 +468,7 @@ $template->assign_vars([
     'SHOW_BOT_NICK' => $bb_cfg['show_bot_nick'],
     'T_POST_REPLY' => $reply_alt,
 
+    'HIDE_FROM' => $user->opt_js['h_from'],
     'HIDE_AVATAR' => $user->opt_js['h_av'],
     'HIDE_RANK_IMG' => ($user->opt_js['h_rnk_i'] && $bb_cfg['show_rank_image']),
     'HIDE_POST_IMG' => $user->opt_js['h_post_i'],

@@ -38,6 +38,7 @@ class User
      */
     public $opt_js = [
         'only_new' => 0,     // show ony new posts or topics
+        'h_from' => 0,     // hide from
         'h_av' => 0,     // hide avatar
         'h_rnk_i' => 0,     // hide rank images
         'h_post_i' => 0,     // hide post images

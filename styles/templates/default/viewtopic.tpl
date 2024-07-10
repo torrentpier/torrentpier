@@ -1,5 +1,6 @@
 <!-- IF LOGGED_IN -->
 <style>
+<!-- IF HIDE_FROM -->.from { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_AVATAR -->.avatar { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_RANK_IMG -->.rank_img { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_POST_IMG -->img.postImg, div.postImg-wrap { display: none; }<!-- ENDIF -->
@@ -310,6 +311,11 @@ function build_poll_add_form (src_el)
 			<fieldset id="show-only">
 			<legend>{L_HIDE_IN_TOPIC}</legend>
 			<div class="med pad_4">
+				<label>
+					<input type="checkbox" <!-- IF HIDE_FROM -->{CHECKED}<!-- ENDIF -->
+						onclick="user.set('h_from', this.checked ? 1 : 0);"
+					/>{L_LOCATION}
+				</label>
 				<label>
 					<input type="checkbox" <!-- IF HIDE_AVATAR -->{CHECKED}<!-- ENDIF -->
 						onclick="user.set('h_av', this.checked ? 1 : 0);"
