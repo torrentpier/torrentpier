@@ -650,6 +650,7 @@ function build_poll_add_form (src_el)
 
 <!--bottom_info-->
 <div class="bottom_info">
+	<a href="#" onclick="$.scrollTo('#topic_main', {duration: 200, axis: 'y'}); return false;">{L_MOVE_TO_TOP}</a>
 
 	<div class="jumpbox"></div>
 
