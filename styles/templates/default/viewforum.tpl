@@ -512,9 +512,6 @@ td.topic_id { cursor: pointer; }
 	<!-- ELSE -->
 	&nbsp;
 	<!-- ENDIF -->
-	<div style="margin-top: 5px;">
-		<a href="#" onclick="$.scrollTo('#forum-table', {duration: 200, axis: 'y'}); return false;">{L_MOVE_TO_TOP}</a>
-	</div>
 	</td>
 </tr>
 </table>
