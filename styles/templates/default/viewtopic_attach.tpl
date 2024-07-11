@@ -430,7 +430,7 @@ $('#tor-filelist-btn').click(function () {
             action: 'thx',
             mode: mode,
             topic_id: {TOPIC_ID},
-            to_user_id: {postrow.POSTER_ID},
+            to_user_id: {postrow.POSTER_ID}
         });
     }
     ajax.callback.thx = function (data) {
