@@ -429,7 +429,8 @@ $('#tor-filelist-btn').click(function () {
         ajax.exec({
             action: 'thx',
             mode: mode,
-            topic_id: {TOPIC_ID}
+            topic_id: {TOPIC_ID},
+            poster_id: {postrow.POSTER_ID}
         });
     }
     ajax.callback.thx = function (data) {
