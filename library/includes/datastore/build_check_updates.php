@@ -18,29 +18,32 @@ $data = [];
 $updaterDownloader = new \TorrentPier\Updater();
 $updaterDownloader = $updaterDownloader->getLastVersion();
 
-$get_version = $updaterDownloader['tag_name'];
-$version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
+$getVersion = $updaterDownloader['tag_name'];
+$versionCodeActual = (int)trim(str_replace(['.', 'v'], '', $getVersion));
 
 // Has update!
-if (VERSION_CODE < $version_code_actual) {
-    $latest_release_file = $updaterDownloader['assets'][0]['browser_download_url'];
+if (VERSION_CODE < $versionCodeActual) {
+    $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
     // Save current version & latest available
-    file_write(json_encode(['previous_version' => VERSION_CODE, 'latest_version' => $version_code_actual]), UPDATER_FILE, replace_content: true);
+    file_write(json_encode([
+        'previous_version' => VERSION_CODE,
+        'latest_version' => $versionCodeActual
+    ]), UPDATER_FILE, replace_content: true);
 
     // Get MD5 checksum
-    $md5_file_checksum = '';
-    if (isset($latest_release_file)) {
-        $md5_file_checksum = strtoupper(md5_file($latest_release_file));
+    $buildFileChecksum = '';
+    if (isset($latestBuildFileLink)) {
+        $buildFileChecksum = strtoupper(md5_file($latestBuildFileLink));
     }
 
     // Build data array
     $data = [
         'available_update' => true,
-        'latest_version' => $get_version,
+        'latest_version' => $getVersion,
         'latest_version_size' => isset($updaterDownloader['assets'][0]['size']) ? humn_size($updaterDownloader['assets'][0]['size']) : false,
-        'latest_version_dl_link' => $latest_release_file ?? $updaterDownloader['html_url'],
-        'latest_version_checksum' => $md5_file_checksum,
+        'latest_version_dl_link' => $latestBuildFileLink ?? $updaterDownloader['html_url'],
+        'latest_version_checksum' => $buildFileChecksum,
         'latest_version_link' => $updaterDownloader['html_url']
     ];
 }

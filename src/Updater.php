@@ -77,10 +77,10 @@ class Updater
     {
         $this->targetVersion = $targetVersion;
 
-        if ($targetVersion === 'latest') {
+        if ($this->targetVersion === 'latest') {
             $versionInfo = $this->getLastVersion();
         } else {
-            $targetIndex = array_search($targetVersion, array_column($this->jsonResponse, 'tag_name'));
+            $targetIndex = array_search($this->targetVersion, array_column($this->jsonResponse, 'tag_name'));
             $versionInfo = is_numeric($targetIndex) ? $this->jsonResponse[$targetIndex] : false;
         }
 
