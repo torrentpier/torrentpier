@@ -40,12 +40,17 @@ class Censor
             return;
         }
 
-        if (!$words = CACHE('bb_cache')->get('censored')) {
-            $words = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
-            CACHE('bb_cache')->set('censored', $words, 7200);
+        if (!$censoredWords = CACHE('bb_cache')->get('censored')) {
+            $censoredWords = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
+            $censoredWords = empty($censoredWords) ? ['no_words' => true] : $censoredWords;
+            CACHE('bb_cache')->set('censored', $censoredWords, 7200);
         }
 
-        foreach ($words as $word) {
+        if (isset($censoredWords['no_words'])) {
+            return;
+        }
+
+        foreach ($censoredWords as $word) {
             $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
             $this->replacements[] = $word['replacement'];
         }
