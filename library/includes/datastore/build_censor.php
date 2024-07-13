@@ -18,8 +18,4 @@ foreach (DB()->fetch_rowset($sql) as $row) {
     $words[$row['word_id']] = $row;
 }
 
-if (empty($words)) {
-    $words = ['no_words' => true];
-}
-
 $this->store('censor', $words);
