@@ -34,18 +34,23 @@ class Censor
      */
     public function __construct()
     {
-        global $bb_cfg;
+        global $bb_cfg, $datastore;
 
         if (!$bb_cfg['use_word_censor']) {
             return;
         }
 
-        if (!$words = CACHE('bb_cache')->get('censored')) {
-            $words = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
-            CACHE('bb_cache')->set('censored', $words, 7200);
+        // Get censored words
+        if (!$censoredWords = $datastore->get('censor')) {
+            $datastore->update('censor');
+            $censoredWords = $datastore->get('censor');
         }
 
-        foreach ($words as $word) {
+        if (isset($censoredWords['no_words'])) {
+            return;
+        }
+
+        foreach ($censoredWords as $word) {
             $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
             $this->replacements[] = $word['replacement'];
         }
