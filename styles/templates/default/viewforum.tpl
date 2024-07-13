@@ -261,7 +261,8 @@ td.topic_id { cursor: pointer; }
 <table width="100%">
 	<tr>
 		<td valign="bottom">
-			<h1 class="maintitle"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h1>
+			<h1 class="maintitle" style="margin-bottom: 0 !important;"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h1>
+			<p class="maintitle" style="font-size: 17px !important;">{FORUM_DESC}</p>
 
 			<p class="small" id="moderators"><a style="text-decoration: none;" href="#">{L_MODERATORS}</a></p>
 			<script type="text/javascript">
