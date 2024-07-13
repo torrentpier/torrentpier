@@ -195,7 +195,7 @@ if ($is_auth['auth_mod']) {
 
 if ($moderation) {
     if (IS_ADMIN) {
-        if (!$forum_select = $datastore->get('viewtopic_forum_select')) {
+        if (!$forum_select = $datastore->get('viewtopic_forum_select') and !$datastore->has('viewtopic_forum_select')) {
             $datastore->update('viewtopic_forum_select');
             $forum_select = $datastore->get('viewtopic_forum_select');
         }
