@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'buzish katalog';
 $lang['EXPAND'] = 'kengaytirish';
 $lang['SWITCH'] = 'Switch';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Yo\'qolgan fayl identifikatori!';
 $lang['TOR_NOT_FOUND'] = 'Fayl serverda etishmayotgan!';
 $lang['ERROR_BUILD'] = 'Ushbu torrent fayl tarkibi saytida kuzatilishi mumkin emas (bu fayllar ro\'yxatini qurish mumkin emas edi)';
