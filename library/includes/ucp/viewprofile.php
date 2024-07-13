@@ -30,7 +30,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
     bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
-if (!$ranks = $datastore->get('ranks')) {
+if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }

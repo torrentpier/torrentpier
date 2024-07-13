@@ -688,7 +688,7 @@ class User
             return '';
         }
 
-        if (!$forums = $datastore->get('cat_forums')) {
+        if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
             $datastore->update('cat_forums');
             $forums = $datastore->get('cat_forums');
         }
@@ -751,7 +751,7 @@ class User
         if (bf($this->opt, 'user_opt', 'user_porn_forums')) {
             global $datastore;
 
-            if (!$forums = $datastore->get('cat_forums')) {
+            if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
                 $datastore->update('cat_forums');
                 $forums = $datastore->get('cat_forums');
             }

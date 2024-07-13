@@ -10,6 +10,7 @@
 - Fixed broken "Disable Board" function [\#1529](https://github.com/torrentpier/torrentpier/pull/1529) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed seed bonus accrual [\#1518](https://github.com/torrentpier/torrentpier/pull/1518) ([belomaxorka](https://github.com/belomaxorka))
 - [BETA] Added emojis support 😄😁 [\#1514](https://github.com/torrentpier/torrentpier/pull/1514) ([belomaxorka](https://github.com/belomaxorka))
+- Datastore improvements [\#1538](https://github.com/torrentpier/torrentpier/pull/1538) ([belomaxorka](https://github.com/belomaxorka))
 - Resize user/group avatar image if too large 🌆 [\#1512](https://github.com/torrentpier/torrentpier/pull/1512) ([belomaxorka](https://github.com/belomaxorka))
 - Increased PASSWORD_MAX_LENGTH [\#1510](https://github.com/torrentpier/torrentpier/pull/1510) ([belomaxorka](https://github.com/belomaxorka))
 - Some security improvements 🔑 [\#1503](https://github.com/torrentpier/torrentpier/pull/1503), [\#1505](https://github.com/torrentpier/torrentpier/pull/1505) ([belomaxorka](https://github.com/belomaxorka))
