@@ -446,6 +446,15 @@ $bb_cfg['abuse_email'] = "abuse@$domain_name"; // abuse email (e.g. DMCA)
 $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 
 // Error reporting
+$bb_cfg['whoops'] = [
+    'error_message' => 'Sorry, something went wrong. Drink coffee and come back after some time... ☕️',
+    'blacklist' => [
+        '_COOKIE' => array_keys($_COOKIE),
+        '_SERVER' => array_keys($_SERVER),
+        '_ENV' => array_keys($_ENV),
+    ]
+];
+
 $bb_cfg['bugsnag'] = [
     'enabled' => true,
     'api_key' => '33b3ed0102946bab71341f9edc125e21', // Don't change this if you want to help us find bugs

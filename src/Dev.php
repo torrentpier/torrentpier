@@ -58,7 +58,7 @@ class Dev
      */
     public function __construct()
     {
-        $this->envType = env('APP_ENV', 'production');
+        $this->envType = strtolower(env('APP_ENV', 'production'));
         $this->whoops = new Run;
 
         switch ($this->envType) {
@@ -128,7 +128,8 @@ class Dev
     private function getWhoopsProduction(): void
     {
         $this->whoops->pushHandler(function () {
-            echo 'Sorry, something went wrong. Drink coffee and come back after some time... ☕️';
+            global $bb_cfg;
+            echo $bb_cfg['whoops']['error_message'];
         });
     }
 
@@ -139,10 +140,18 @@ class Dev
      */
     private function getWhoops(): void
     {
+        global $bb_cfg;
+
         /**
          * Show errors on page
          */
-        $this->whoops->pushHandler(new PrettyPageHandler);
+        $prettyPageHandler = new PrettyPageHandler();
+        foreach ($bb_cfg['whoops']['blacklist'] as $key => $secrets) {
+            foreach ($secrets as $secret) {
+                $prettyPageHandler->blacklist($key, $secret);
+            }
+        }
+        $this->whoops->pushHandler($prettyPageHandler);
 
         /**
          * Show log in browser console
