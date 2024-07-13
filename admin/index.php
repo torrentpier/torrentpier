@@ -10,7 +10,7 @@
 require __DIR__ . '/pagestart.php';
 
 // Statistics
-if (!$stats = $datastore->get('stats')) {
+if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
     $datastore->update('stats');
     $stats = $datastore->get('stats');
 }

@@ -65,7 +65,7 @@ $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
 // Statistics
-if (!$stats = $datastore->get('stats')) {
+if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
     $datastore->update('stats');
     $stats = $datastore->get('stats');
 }
