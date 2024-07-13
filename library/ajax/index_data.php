@@ -58,7 +58,10 @@ switch ($mode) {
     case 'get_forum_mods':
         $forum_id = (int)$this->request['forum_id'];
 
-        $mod = $datastore->get('moderators');
+        if (!$mod = $datastore->get('moderators') and !$datastore->has('moderators')) {
+            $datastore->update('moderators');
+            $mod = $datastore->get('moderators');
+        }
 
         $moderators = [];
 
