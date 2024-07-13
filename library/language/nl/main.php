@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Ineenstorting directory';
 $lang['EXPAND'] = 'Uitbreiden';
 $lang['SWITCH'] = 'Switch';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Ontbrekende bestand naam!';
 $lang['TOR_NOT_FOUND'] = 'Bestand ontbreekt op de server!';
 $lang['ERROR_BUILD'] = 'De inhoud van dit torrent bestand kan niet worden weergegeven op de site (het was niet mogelijk om een lijst te maken van bestanden)';
