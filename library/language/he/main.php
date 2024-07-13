@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'התמוטטות directory';
 $lang['EXPAND'] = 'הרחב';
 $lang['SWITCH'] = 'מתג';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'חסר קובץ מזהה!';
 $lang['TOR_NOT_FOUND'] = 'הקובץ חסר בשרת!';
 $lang['ERROR_BUILD'] = 'התוכן של קובץ הטורנט לא ניתן לצפות באתר (לא ניתן היה לבנות רשימה של קבצים)';
