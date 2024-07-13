@@ -59,7 +59,7 @@ $def_forums = $all_forums;
 $def_sort = $sort_desc;
 
 // Moderators data
-if (!$mod = $datastore->get('moderators')) {
+if (!$mod = $datastore->get('moderators') and !$datastore->has('moderators')) {
     $datastore->update('moderators');
     $mod = $datastore->get('moderators');
 }

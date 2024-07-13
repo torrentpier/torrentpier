@@ -173,7 +173,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
 
 // Obtain list of moderators
 $moderators = [];
-if (!$mod = $datastore->get('moderators')) {
+if (!$mod = $datastore->get('moderators') and !$datastore->has('moderators')) {
     $datastore->update('moderators');
     $mod = $datastore->get('moderators');
 }
