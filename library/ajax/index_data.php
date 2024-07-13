@@ -17,13 +17,16 @@ if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
 }
 
+$datastore->enqueue([
+    'stats',
+    'moderators',
+    'cat_forums'
+]);
+
 $html = '';
 switch ($mode) {
     case 'birthday_week':
         $stats = $datastore->get('stats');
-        $datastore->enqueue([
-            'stats'
-        ]);
 
         $users = [];
 
@@ -39,9 +42,6 @@ switch ($mode) {
 
     case 'birthday_today':
         $stats = $datastore->get('stats');
-        $datastore->enqueue([
-            'stats'
-        ]);
 
         $users = [];
 
@@ -58,13 +58,9 @@ switch ($mode) {
     case 'get_forum_mods':
         $forum_id = (int)$this->request['forum_id'];
 
-        $datastore->enqueue([
-            'moderators',
-            'cat_forums'
-        ]);
+        $mod = $datastore->get('moderators');
 
         $moderators = [];
-        $mod = $datastore->get('moderators');
 
         if (isset($mod['mod_users'][$forum_id])) {
             foreach ($mod['mod_users'][$forum_id] as $user_id) {
