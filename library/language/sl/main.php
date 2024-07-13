@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Propad imenik';
 $lang['EXPAND'] = 'Razširite';
 $lang['SWITCH'] = 'Stikalo';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Manjkajoče datoteke identifikator!';
 $lang['TOR_NOT_FOUND'] = 'Datoteka manjka na strežniku!';
 $lang['ERROR_BUILD'] = 'Vsebine, ki so torrent datoteke ni mogoče ogledati na spletnem mestu (ni bilo mogoče zgraditi seznam datotek)';
