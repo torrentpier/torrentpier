@@ -1893,7 +1893,7 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
 {
     global $bb_cfg, $lang, $datastore;
 
-    if (!$ranks = $datastore->get('ranks')) {
+    if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
         $datastore->update('ranks');
         $ranks = $datastore->get('ranks');
     }

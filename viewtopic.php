@@ -353,7 +353,7 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     bb_die($lang['NO_POSTS_TOPIC']);
 }
 
-if (!$ranks = $datastore->get('ranks')) {
+if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }
