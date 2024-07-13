@@ -40,8 +40,6 @@ function delete_avatar($user_id, $avatar_ext_id)
 
 function get_tracks($type)
 {
-    static $pattern = '#^a:\d+:{[i:;\d]+}$#';
-
     switch ($type) {
         case 'topic':
             $c_name = COOKIE_TOPIC;
@@ -55,7 +53,7 @@ function get_tracks($type)
         default:
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
-    $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
+    $tracks = !empty($_COOKIE[$c_name]) ? json_decode($_COOKIE[$c_name], true) : false;
     return $tracks ?: [];
 }
 
@@ -113,7 +111,7 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
     }
 
     if (array_diff($tracking_ary, $prev_tracking_ary)) {
-        bb_setcookie($cookie_name, serialize($tracking_ary));
+        bb_setcookie($cookie_name, json_encode($tracking_ary));
     }
 }
 
