@@ -77,6 +77,15 @@ class Common
         return $this->data[$title];
     }
 
+    /**
+     * @param $title
+     * @return bool
+     */
+    public function has($title): bool
+    {
+        return isset($this->data[$title]);
+    }
+
     public function store($item_name, $item_data)
     {
     }

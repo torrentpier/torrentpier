@@ -41,13 +41,9 @@ class Censor
         }
 
         // Get censored words
-        if (!$censoredWords = $datastore->get('censor')) {
+        if (!$censoredWords = $datastore->get('censor') and !$datastore->has('censor')) {
             $datastore->update('censor');
             $censoredWords = $datastore->get('censor');
-        }
-
-        if (isset($censoredWords['no_words'])) {
-            return;
         }
 
         foreach ($censoredWords as $word) {
