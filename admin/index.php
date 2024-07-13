@@ -22,7 +22,7 @@ if (!$files_integrity_data = $datastore->get('files_integrity') and !$datastore-
 }
 
 // Check for updates
-if (!$update_data = $datastore->get('check_updates')) {
+if (!$update_data = $datastore->get('check_updates') and !$datastore->has('check_updates')) {
     $datastore->update('check_updates');
     $update_data = $datastore->get('check_updates');
 }
