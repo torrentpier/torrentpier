@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Κατάρρευση directory';
 $lang['EXPAND'] = 'Αναπτύξτε το στοιχείο';
 $lang['SWITCH'] = 'Διακόπτης';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Αρχείο που λείπει αναγνωριστικό!';
 $lang['TOR_NOT_FOUND'] = 'Το αρχείο που λείπει στον server!';
 $lang['ERROR_BUILD'] = 'Το περιεχόμενο αυτού του torrent αρχείο δεν μπορεί να θεωρηθεί σχετικά με το site (δεν ήταν δυνατό να οικοδομήσουμε μια λίστα με τα αρχεία)';
