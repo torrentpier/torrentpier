@@ -997,7 +997,7 @@ function make_jumpbox(): void
         return;
     }
 
-    if (!$jumpbox = $datastore->get('jumpbox')) {
+    if (!$jumpbox = $datastore->get('jumpbox') and !$datastore->has('jumpbox')) {
         $datastore->update('jumpbox');
         $jumpbox = $datastore->get('jumpbox');
     }
