@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Sabrukums katalogs';
 $lang['EXPAND'] = 'Izvērsiet';
 $lang['SWITCH'] = 'Slēdzis';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Trūkst faila identifikators!';
 $lang['TOR_NOT_FOUND'] = 'Fails ir pazudis uz servera!';
 $lang['ERROR_BUILD'] = 'Saturu šajā torrent failu nevar apskatīt uz vietas (tas nav iespējams veidot failu sarakstu)';
