@@ -16,7 +16,7 @@ if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
 }
 
 // Files integrity check
-if (!$files_integrity_data = $datastore->get('files_integrity')) {
+if (!$files_integrity_data = $datastore->get('files_integrity') and !$datastore->has('files_integrity')) {
     $datastore->update('files_integrity');
     $files_integrity_data = $datastore->get('files_integrity');
 }
