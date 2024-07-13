@@ -26,7 +26,10 @@ $datastore->enqueue([
 $html = '';
 switch ($mode) {
     case 'birthday_week':
-        $stats = $datastore->get('stats');
+        if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+            $datastore->update('stats');
+            $stats = $datastore->get('stats');
+        }
 
         $users = [];
 
@@ -41,7 +44,10 @@ switch ($mode) {
         break;
 
     case 'birthday_today':
-        $stats = $datastore->get('stats');
+        if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+            $datastore->update('stats');
+            $stats = $datastore->get('stats');
+        }
 
         $users = [];
 
