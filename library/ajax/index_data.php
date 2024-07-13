@@ -85,7 +85,6 @@ switch ($mode) {
 
         $html = ':&nbsp;';
         $html .= ($moderators) ? implode(', ', $moderators) : $lang['NONE'];
-        $datastore->update('moderators');
         break;
 
     case 'get_traf_stats':

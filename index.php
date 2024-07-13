@@ -192,7 +192,6 @@ if (!empty($mod)) {
 }
 
 unset($mod);
-$datastore->update('moderators');
 
 // Build index page
 $forums_count = 0;
