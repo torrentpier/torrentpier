@@ -1695,6 +1695,7 @@ $lang['FILELIST'] = 'Списък';
 $lang['COLLAPSE'] = 'Каталог раздялата';
 $lang['EXPAND'] = 'Разположи';
 $lang['SWITCH'] = 'Ключ';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Липсва файл идентификатор!';
 $lang['TOR_NOT_FOUND'] = 'Файл липсва на сървъра!';
 $lang['ERROR_BUILD'] = 'Съдържанието на този торент-файл не може да се види на сайта (не може да се изгради на списъка с файлове)';
