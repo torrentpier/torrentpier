@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'انهيار الدليل';
 $lang['EXPAND'] = 'توسيع';
 $lang['SWITCH'] = 'التبديل';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'الملف المفقود معرف!';
 $lang['TOR_NOT_FOUND'] = 'الملف غير موجود على الملقم!';
 $lang['ERROR_BUILD'] = 'محتوى هذا ملف التورنت لا يمكن أن ينظر إليها على الموقع (لم يكن من الممكن بناء قائمة من الملفات)';

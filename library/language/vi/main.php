@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Danh sách';
 $lang['COLLAPSE'] = 'Sụp đổ mục';
 $lang['EXPAND'] = 'Mở rộng';
 $lang['SWITCH'] = 'Chuyển';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Tập tin bị mất nhận dạng!';
 $lang['TOR_NOT_FOUND'] = 'Tập tin là mất tích vào máy chủ!';
 $lang['ERROR_BUILD'] = 'Các nội dung của torrent này file không thể được xem trên trang (nó đã không thể để xây dựng một danh sách của các tập tin)';

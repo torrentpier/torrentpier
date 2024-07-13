@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Списак';
 $lang['COLLAPSE'] = 'Каталог распада';
 $lang['EXPAND'] = 'Распореди';
 $lang['SWITCH'] = 'Прекидач';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Недостаје идентификатор датотеке!';
 $lang['TOR_NOT_FOUND'] = 'Фајл недостаје на серверу!';
 $lang['ERROR_BUILD'] = 'Садржај ове торент датотеке, не можете да видите на сајту (не могу да се изгради листу фајлова)';

@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'L\'effondrement de répertoire';
 $lang['EXPAND'] = 'Développez';
 $lang['SWITCH'] = 'Commutateur';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Fichier manquant identificateur de!';
 $lang['TOR_NOT_FOUND'] = 'Fichier est manquant sur le serveur!';
 $lang['ERROR_BUILD'] = 'Le contenu de ce fichier torrent ne peut pas être consulté sur le site (il n\'était pas possible de créer une liste de fichiers)';

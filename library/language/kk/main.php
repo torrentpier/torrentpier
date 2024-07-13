@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'файлдар тізімі';
 $lang['COLLAPSE'] = 'Collapse каталогы';
 $lang['EXPAND'] = 'кеңейту';
 $lang['SWITCH'] = 'қосқыш';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'файл идентификаторы жоқ!';
 $lang['TOR_NOT_FOUND'] = 'Файлдық серверде жоқ!';
 $lang['ERROR_BUILD'] = 'Бұл торрент файл мазмұны сайтында көру мүмкін емес (ол файлдар тізімін салу мүмкін емес еді)';

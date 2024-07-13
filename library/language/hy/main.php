@@ -1696,6 +1696,7 @@ $lang['FILELIST'] = 'Ցուցակ';
 $lang['COLLAPSE'] = 'Կատալոգ փլուզումից';
 $lang['EXPAND'] = 'Ծավալել';
 $lang['SWITCH'] = 'Switch';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Բացակայում է նույնականացուցիչ ֆայլը!';
 $lang['TOR_NOT_FOUND'] = 'Ֆայլը բացակայում է սերվերի!';
 $lang['ERROR_BUILD'] = 'Բովանդակությունը այս torrent-ֆայլի չի կարելի է տեսնել կայքում (չի հաջողվել կառուցել ֆայլերի ցանկը)';

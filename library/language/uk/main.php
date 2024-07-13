@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Список файлів';
 $lang['COLLAPSE'] = 'Згорнути теку';
 $lang['EXPAND'] = 'Розгорнути';
 $lang['SWITCH'] = 'Перейти';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Відсутній ідентифікатор файла!';
 $lang['TOR_NOT_FOUND'] = 'Файл відсутній на сервері!';
 $lang['ERROR_BUILD'] = 'Вміст даного торрент-файлу не може бути переглянуто на сайті (не вдалося вибудувати список файлів)';

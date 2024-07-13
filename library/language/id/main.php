@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Daftar';
 $lang['COLLAPSE'] = 'Runtuhnya direktori';
 $lang['EXPAND'] = 'Memperluas';
 $lang['SWITCH'] = 'Beralih';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Hilang file identifier!';
 $lang['TOR_NOT_FOUND'] = 'File hilang di server!';
 $lang['ERROR_BUILD'] = 'Isi dari file torrent ini tidak dapat dilihat di situs (itu tidak mungkin untuk membangun sebuah daftar file)';

@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'FileList';
 $lang['COLLAPSE'] = 'феҳристи фурӯпошии';
 $lang['EXPAND'] = 'васеъ';
 $lang['SWITCH'] = 'калид';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'муайянкунандаи файли гумшуда!';
 $lang['TOR_NOT_FOUND'] = 'Акс аст гумшуда дар сервер!';
 $lang['ERROR_BUILD'] = 'Аз мазмуни ин парванда ҷӯйе метавонад дар сомона карда намешавад дорем (аз он ғайриимкон буд, барои сохтани рӯйхати файлҳо)';

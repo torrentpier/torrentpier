@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = '붕괴 디렉토리';
 $lang['EXPAND'] = '확장';
 $lang['SWITCH'] = '스위치';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = '지 않는 파일을 식별자!';
 $lang['TOR_NOT_FOUND'] = '파일이 없는 서버에!';
 $lang['ERROR_BUILD'] = '콘텐츠의 이 torrent 파일을 수 있는지에 표시되는 사이트(이하지 않게 가능한 파일 목록을 작성)';

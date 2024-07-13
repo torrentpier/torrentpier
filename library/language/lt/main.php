@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Failų';
 $lang['COLLAPSE'] = 'Sutraukti katalogą';
 $lang['EXPAND'] = 'Išplėskite';
 $lang['SWITCH'] = 'Jungiklis';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Trūksta failo vardas!';
 $lang['TOR_NOT_FOUND'] = 'Failo nėra serveryje!';
 $lang['ERROR_BUILD'] = 'Turinio šį torrent failas negali būti vertinama svetainėje (nebuvo galima statyti failų sąrašą)';

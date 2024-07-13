@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Collapse დირექტორია';
 $lang['EXPAND'] = 'გაფართოების';
 $lang['SWITCH'] = 'Switch';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'დაკარგული ფაილის იდენტიფიკატორი!';
 $lang['TOR_NOT_FOUND'] = 'ფაილი აკლია სერვერზე!';
 $lang['ERROR_BUILD'] = 'შინაარსი ამ ტორენტის ფაილი არ შეიძლება ჩაითვალოს საიტზე (ეს არ იყო გამორიცხული, რომ ავაშენოთ სია ფაილი)';

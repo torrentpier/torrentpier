@@ -1696,6 +1696,7 @@ $lang['FILELIST'] = 'Siyahısı';
 $lang['COLLAPSE'] = 'Kataloq dağılmasından';
 $lang['EXPAND'] = 'Yerləşdirmək';
 $lang['SWITCH'] = 'Keçid';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'İtkin ıd fayl!';
 $lang['TOR_NOT_FOUND'] = 'Fayl yoxdursa, server!';
 $lang['ERROR_BUILD'] = 'Məzmun bu torrent-fayl deyil bilərsiniz saytda (uğursuz qurmaq faylların siyahısını)';

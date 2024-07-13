@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Prăbușirea director';
 $lang['EXPAND'] = 'Extinde';
 $lang['SWITCH'] = 'Comutator';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Lipsă identificator de fișier!';
 $lang['TOR_NOT_FOUND'] = 'Fișier lipsește de pe server!';
 $lang['ERROR_BUILD'] = 'Conținutul acestui fișier torrent nu pot fi vizualizate pe site-ul (nu a fost posibil de a construi o listă de fișiere)';

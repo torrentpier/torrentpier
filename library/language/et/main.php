@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Kollaps kataloog';
 $lang['EXPAND'] = 'Laiendage';
 $lang['SWITCH'] = 'Lüliti';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Puuduva faili identifikaator!';
 $lang['TOR_NOT_FOUND'] = 'Fail on puudu serveris!';
 $lang['ERROR_BUILD'] = 'Sisu see torrent faili ei saa vaadelda saidil (ei ole võimalik luua failide loendit)';

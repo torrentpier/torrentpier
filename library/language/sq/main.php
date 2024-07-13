@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Kolapsi directory';
 $lang['EXPAND'] = 'Zgjerohet';
 $lang['SWITCH'] = 'Kaloni';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Mungon file identifikues!';
 $lang['TOR_NOT_FOUND'] = 'File është zhdukur në server!';
 $lang['ERROR_BUILD'] = 'Përmbajtja e këtij torrent file nuk mund të shihet në faqen e internetit (kjo nuk ishte e mundur për të ndërtuar një listë e dosjeve)';

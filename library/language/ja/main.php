@@ -1697,6 +1697,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = '崩壊ディレクトリ';
 $lang['EXPAND'] = '拡大';
 $lang['SWITCH'] = 'スイッチ';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = '足ファイルの識別子です！';
 $lang['TOR_NOT_FOUND'] = 'ファイルをサーバーです！';
 $lang['ERROR_BUILD'] = 'このtorrentファイルすることができませんのサイトできませんでしたが、自分のファイル)';

@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'ย่อเก็บไดเรกทอรี';
 $lang['EXPAND'] = 'ขยายรายการ';
 $lang['SWITCH'] = 'เปลี่ยน';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'หายตัวไปแสดงตัวแฟ้ม!';
 $lang['TOR_NOT_FOUND'] = 'แฟ้มหายไปตัวบนเซิร์ฟเวอร์!';
 $lang['ERROR_BUILD'] = 'เนื้อหาของแฟ้มทอร์เรนต์ไม่สามารถดูบนเว็บไซต์(เป็นไปไม่ได้ที่จะทำการสร้างรายการของแฟ้ม)';

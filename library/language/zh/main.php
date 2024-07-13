@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = '崩溃的目录';
 $lang['EXPAND'] = '扩大';
 $lang['SWITCH'] = '开关';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = '缺少的文件标识的！';
 $lang['TOR_NOT_FOUND'] = '文件缺失的服务器上!';
 $lang['ERROR_BUILD'] = '内容的这种子文件的不可观察的网站上(这是不可能建立一个列表的文件)';

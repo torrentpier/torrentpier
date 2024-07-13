@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filliste';
 $lang['COLLAPSE'] = 'Sammenbrud bibliotek';
 $lang['EXPAND'] = 'Udvid';
 $lang['SWITCH'] = 'Skift';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Manglende fil identifikator!';
 $lang['TOR_NOT_FOUND'] = 'Filen mangler på serveren!';
 $lang['ERROR_BUILD'] = 'Indholdet af denne torrent-fil kan ikke ses på hjemmesiden (det var ikke muligt at opbygge en liste af filer)';
