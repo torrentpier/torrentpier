@@ -1693,6 +1693,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Zbaliť adresár';
 $lang['EXPAND'] = 'Rozbaliť';
 $lang['SWITCH'] = 'Prepínač';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/smart window';
 $lang['EMPTY_ATTACH_ID'] = 'Chýbajúci súbor identifikátor!';
 $lang['TOR_NOT_FOUND'] = 'Chýba súbor na server!';
 $lang['ERROR_BUILD'] = 'Obsah tejto torrent súbor nebude možné pozrieť na tejto stránke (nebolo možné vytvoriť zoznam súborov)';
