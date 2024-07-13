@@ -340,7 +340,7 @@ if ($bb_cfg['show_latest_news']) {
 
 // Network news
 if ($bb_cfg['show_network_news']) {
-    if (!$network_news = $datastore->get('network_news')) {
+    if (!$network_news = $datastore->get('network_news') and !$datastore->has('network_news')) {
         $datastore->update('network_news');
         $network_news = $datastore->get('network_news');
     }
