@@ -296,7 +296,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     // If f_access has been passed, or auth is needed to return an array of forums
     // then we need to pull the auth information on the given forum (or all forums)
     if (empty($f_access)) {
-        if (!$forums = $datastore->get('cat_forums')) {
+        if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
             $datastore->update('cat_forums');
             $forums = $datastore->get('cat_forums');
         }
@@ -1018,7 +1018,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
     $select = null === $all_forums_option ? [] : [$lang['ALL_AVAILABLE'] => $all_forums_option];
-    if (!$forums = $datastore->get('cat_forums')) {
+    if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
