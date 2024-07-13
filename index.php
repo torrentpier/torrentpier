@@ -321,7 +321,7 @@ if ($bb_cfg['bt_show_dl_stat_on_index'] && !IS_GUEST) {
 
 // Latest news
 if ($bb_cfg['show_latest_news']) {
-    if (!$latest_news = $datastore->get('latest_news')) {
+    if (!$latest_news = $datastore->get('latest_news') and !$datastore->has('latest_news')) {
         $datastore->update('latest_news');
         $latest_news = $datastore->get('latest_news');
     }
