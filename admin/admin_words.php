@@ -80,9 +80,8 @@ if ($mode != '') {
             bb_die('Could not insert data into words table');
         }
 
-        CACHE('bb_cache')->rm('censored');
+        $datastore->update('censor');
         $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-
         bb_die($message);
     } elseif ($mode == 'delete') {
         $word_id = (int)request_var('id', 0);
@@ -94,8 +93,7 @@ if ($mode != '') {
                 bb_die('Could not remove data from words table');
             }
 
-            CACHE('bb_cache')->rm('censored');
-
+            $datastore->update('censor');
             bb_die($lang['WORD_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         } else {
             bb_die($lang['NO_WORD_SELECTED']);
