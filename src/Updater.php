@@ -81,10 +81,11 @@ class Updater
      *
      * @param string $path
      * @param string $targetVersion
+     * @param bool $force
      * @return bool
      * @throws Exception
      */
-    public function download(string $path, string $targetVersion = 'latest'): bool
+    public function download(string $path, string $targetVersion = 'latest', bool $force = false): bool
     {
         $this->targetVersion = $targetVersion;
 
@@ -100,17 +101,19 @@ class Updater
         }
 
         $downloadLink = $versionInfo['assets'][0]['browser_download_url'];
-
-        $getFile = file_get_contents($downloadLink);
-        if ($getFile === false) {
-            return false;
-        }
-
-        // Save build file
         $this->savePath = $path . $versionInfo['assets'][0]['name'];
-        file_put_contents($this->savePath, $getFile);
-        if (!is_file($this->savePath)) {
-            throw new Exception("Can't save TorrentPier build file");
+
+        if (!is_file($this->savePath) || !$force) {
+            $getFile = file_get_contents($downloadLink);
+            if ($getFile === false) {
+                return false;
+            }
+
+            // Save build file
+            file_put_contents($this->savePath, $getFile);
+            if (!is_file($this->savePath)) {
+                throw new Exception("Can't save TorrentPier build file");
+            }
         }
 
         // Get MD5 checksums
