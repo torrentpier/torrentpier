@@ -103,7 +103,7 @@ class Updater
         $downloadLink = $versionInfo['assets'][0]['browser_download_url'];
         $this->savePath = $path . $versionInfo['assets'][0]['name'];
 
-        if (!is_file($this->savePath) || !$force) {
+        if (!is_file($this->savePath) || $force) {
             $getFile = file_get_contents($downloadLink);
             if ($getFile === false) {
                 return false;
