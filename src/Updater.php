@@ -39,13 +39,26 @@ class Updater
     public string $savePath;
 
     /**
+     * Stream context
+     *
+     * @var array
+     */
+    private const STREAM_CONTEXT = [
+        'http' => [
+            'header' => 'User-Agent: ' . APP_NAME,
+            'timeout' => 10,
+            'ignore_errors' => true
+        ]
+    ];
+
+    /**
      * Updater constructor
      *
      * @throws Exception
      */
     public function __construct()
     {
-        $context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME, 'timeout' => 10, 'ignore_errors' => true]]);
+        $context = stream_context_create(self::STREAM_CONTEXT);
         $response = file_get_contents(UPDATER_URL, context: $context);
 
         if ($response !== false) {
@@ -54,15 +67,13 @@ class Updater
 
         // Empty JSON result
         if (empty($this->jsonResponse)) {
-            return false;
+            throw new Exception('Empty JSON response');
         }
 
         // Response message from GitHub
-        if (isset($json_response['message'])) {
-            throw new Exception($json_response['message']);
+        if (isset($this->jsonResponse['message'])) {
+            throw new Exception($this->jsonResponse['message']);
         }
-
-        return $this->jsonResponse;
     }
 
     /**
@@ -85,7 +96,7 @@ class Updater
         }
 
         if (empty($versionInfo)) {
-            return false;
+            throw new Exception('No version info');
         }
 
         $downloadLink = $versionInfo['assets'][0]['browser_download_url'];
