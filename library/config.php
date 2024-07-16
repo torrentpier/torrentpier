@@ -548,6 +548,7 @@ $bb_cfg['user_not_active_days_keep'] = 180; // After how many days should I dele
 // Vote for torrents
 $bb_cfg['tor_thank'] = true;
 $bb_cfg['tor_thanks_list_guests'] = true; // Show voters to guests
+$bb_cfg['tor_thank_limit_per_topic'] = 50;
 
 // Groups
 $bb_cfg['group_members_per_page'] = 50; // How many groups will be displayed in a page
