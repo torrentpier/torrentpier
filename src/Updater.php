@@ -104,7 +104,8 @@ class Updater
         $this->savePath = $path . $versionInfo['assets'][0]['name'];
 
         if (!is_file($this->savePath) || $force) {
-            $getFile = file_get_contents($downloadLink);
+            $context = stream_context_create(self::STREAM_CONTEXT);
+            $getFile = file_get_contents($downloadLink, context: $context);
             if ($getFile === false) {
                 return false;
             }
