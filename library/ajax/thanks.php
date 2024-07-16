@@ -46,18 +46,12 @@ switch ($mode) {
         $columns = 'topic_id, user_id, time';
         $values = "$topic_id, {$userdata['user_id']}, " . TIMENOW;
         DB()->query('INSERT IGNORE INTO ' . BB_THX . " ($columns) VALUES ($values)");
-        DB()->query("
-            DELETE FROM " . BB_THX . "
-            WHERE user_id IN (
-                SELECT user_id FROM (
-                    SELECT user_id
-                    FROM " . BB_THX . "
-                    WHERE topic_id = $topic_id
-                    ORDER BY time ASC
-                    LIMIT 1
-                ) AS subquery
-            ) AND (SELECT COUNT(*) FROM " . BB_THX . " WHERE topic_id = $topic_id) > 50;
-        ");
+
+        // Limit voters per topic
+        $thanks_count = DB()->fetch_row('SELECT COUNT(*) FROM ' . BB_THX . " WHERE topic_id = $topic_id");
+        if ($thanks_count > (int)$bb_cfg['tor_thank_limit_per_topic']) {
+            DB()->query('DELETE FROM ' . BB_THX . " WHERE topic_id = $topic_id ORDER BY time ASC LIMIT 1");
+        }
         break;
     case 'get':
         if (IS_GUEST && !$bb_cfg['tor_thanks_list_guests']) {

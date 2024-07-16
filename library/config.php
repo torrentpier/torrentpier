@@ -548,6 +548,7 @@ $bb_cfg['user_not_active_days_keep'] = 180; // After how many days should I dele
 // Vote for torrents
 $bb_cfg['tor_thank'] = true;
 $bb_cfg['tor_thanks_list_guests'] = true; // Show voters to guests
+$bb_cfg['tor_thank_limit_per_topic'] = 50;
 
 // Groups
 $bb_cfg['group_members_per_page'] = 50; // How many groups will be displayed in a page
@@ -566,7 +567,6 @@ $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
 $bb_cfg['integrity_check'] = true; // TorrentPier files integrity check (Not recommended to disable!)
-$bb_cfg['enable_additional_flags'] = true; // Enables ability to select additional flags in "Country select"
 
 $bb_cfg['allow_change'] = [
     'language' => true, // Allow user to change language
