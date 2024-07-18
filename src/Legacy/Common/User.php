@@ -627,24 +627,6 @@ class User
     public function mark_read($type)
     {
         if ($type === 'all_forums') {
-            // Update session time
-            DB()->query("
-				UPDATE " . BB_SESSIONS . " SET
-					session_time = " . TIMENOW . "
-				WHERE session_id = '{$this->data['session_id']}'
-				LIMIT 1
-			");
-
-            // Update userdata
-            $this->data['session_time'] = TIMENOW;
-            $this->data['user_lastvisit'] = TIMENOW;
-
-            // Update lastvisit
-            Sessions::db_update_userdata($this->data, [
-                'user_session_time' => $this->data['session_time'],
-                'user_lastvisit' => $this->data['user_lastvisit'],
-            ]);
-
             // Delete cookies
             bb_setcookie(COOKIE_TOPIC, null);
             bb_setcookie(COOKIE_FORUM, null);
@@ -787,6 +769,13 @@ class User
             }
 
             return true;
+        } else {
+            if (md5(md5($enteredPassword)) === $userdata['user_password']) {
+                // Update old md5 password
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+
+                return true;
+            }
         }
 
         return false;
