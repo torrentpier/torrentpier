@@ -174,7 +174,7 @@ class User
                 if ($update_sessions_table) {
                     DB()->query("
 						UPDATE " . BB_SESSIONS . " SET
-							session_time = " . TIMENOW . "
+							session_time = " . $this->data['session_time'] . "
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
@@ -787,6 +787,13 @@ class User
             }
 
             return true;
+        } else {
+            if (md5(md5($enteredPassword)) === $userdata['user_password']) {
+                // Update old md5 password
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+
+                return true;
+            }
         }
 
         return false;
