@@ -174,7 +174,7 @@ class User
                 if ($update_sessions_table) {
                     DB()->query("
 						UPDATE " . BB_SESSIONS . " SET
-							session_time = " . TIMENOW . "
+							session_time = " . $this->data['session_time'] . "
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
