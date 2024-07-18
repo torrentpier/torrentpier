@@ -178,7 +178,6 @@ class User
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
-                    // Update user_session_time
                 }
                 $this->set_session_cookies($this->data['user_id']);
             } else {
@@ -341,10 +340,10 @@ class User
     /**
      * Initialize sessiondata stored in cookies
      *
+     * @param bool $update_lastvisit
      * @param bool $set_cookie
-     * @throws Exception
      */
-    public function session_end(bool $set_cookie = true): void
+    public function session_end(bool $update_lastvisit = false, bool $set_cookie = true)
     {
         Sessions::cache_rm_userdata($this->data);
         DB()->query("
@@ -353,6 +352,18 @@ class User
 		");
 
         if (!IS_GUEST) {
+            if ($update_lastvisit) {
+                DB()->query("
+					UPDATE " . BB_USERS . " SET
+						user_session_time = " . TIMENOW . ",
+						user_lastvisit = " . TIMENOW . ",
+						user_last_ip = '" . USER_IP . "',
+						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
+					WHERE user_id = {$this->data['user_id']}
+					LIMIT 1
+				");
+            }
+
             if (isset($_REQUEST['reset_autologin'])) {
                 $this->create_autologin_id($this->data, false);
 
