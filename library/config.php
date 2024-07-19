@@ -138,6 +138,10 @@ $bb_cfg['show_dl_status_in_forum'] = true;
 $bb_cfg['show_tor_info_in_dl_list'] = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
 
+// Null ratio
+$bb_cfg['ratio_null_enabled'] = true;
+$bb_cfg['ratio_to_null'] = $bb_cfg['bt_min_ratio_allow_dl_tor']; // 0.3
+
 // Days to keep torrent registered
 $bb_cfg['seeder_last_seen_days_keep'] = 0; // Max time storing for the last seen peer status
 $bb_cfg['seeder_never_seen_days_keep'] = 0; // Max time for storing status - Never seen

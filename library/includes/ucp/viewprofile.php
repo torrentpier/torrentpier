@@ -74,6 +74,12 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     $signature = bbcode2html($signature);
 }
 
+// Null ratio
+if ($bb_cfg['ratio_null_enabled']) {
+    $btu = get_bt_userdata($profiledata['user_id']);
+    $template->assign_vars(array('NULLED_RATIO' => (bool)$btu['ratio_nulled']));
+}
+
 // Ban information
 if ($banInfo = getBanInfo((int)$profiledata['user_id'])) {
     $template->assign_block_vars('ban', [
