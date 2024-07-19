@@ -38,6 +38,7 @@
   "require": {
     "php": "^8.1",
     "arokettu/bencode": "^4.1.0",
+    "arokettu/monsterid": "^4.0",
     "arokettu/torrent-file": "^5.2.1",
     "bugsnag/bugsnag": "^v3.29.1",
     "claviska/simpleimage": "^4.0",
@@ -63,7 +64,10 @@
   },
   "config": {
     "sort-packages": true,
-    "optimize-autoloader": true
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
   },
   "minimum-stability": "stable",
   "prefer-stable": true
