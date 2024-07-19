@@ -404,9 +404,7 @@ ajax.callback.index_data = function(data) {
 					<!-- ENDIF -->
 					<!-- IF PROFILE_USER || IS_ADMIN --><!-- IF $bb_cfg['ratio_null_enabled'] --><!-- IF not NULLED_RATIO or IS_ADMIN -->
 					[ <a class="med" href="#" onclick="ajax.index_data('null_ratio'); return false;">{L_BT_NULL_RATIO}</a> ]
-					<!-- ENDIF -->
-					<!-- ENDIF -->
-					<!-- ENDIF -->
+					<!-- ENDIF --><!-- ENDIF --><!-- ENDIF -->
 				</td>
 			</tr>
 
