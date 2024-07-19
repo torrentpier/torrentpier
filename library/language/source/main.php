@@ -3062,9 +3062,9 @@ $lang['EMAILER_SUBJECT'] = [
 ];
 
 // Null ratio
-$lang['BT_NULL_RATIO'] = 'Reset rating';
-$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a rating';
-$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your rating?";
-$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your rating!';
-$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good rating. Reset is possible only with a rating less than %s';
-$lang['BT_NULL_RATIO_SUCCESS'] = 'The rating has been reset successfully!';
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
