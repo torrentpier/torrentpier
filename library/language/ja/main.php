@@ -607,6 +607,7 @@ $lang['RETURN_PROFILE'] = '返却のプロフィール';
 $lang['SELECT_CATEGORY'] = 'カテゴリを選択';
 
 $lang['DELETE_IMAGE'] = '画像の削除';
+$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
 $lang['CURRENT_IMAGE'] = '現在の画像';
 
 $lang['NOTIFY_ON_PRIVMSG'] = '知の新しいプライベートメッセージ';
@@ -3064,3 +3065,11 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'サイトへようこそ %s',
     'USER_WELCOME_INACTIVE' => 'サイトへようこそ %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
