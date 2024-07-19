@@ -36,7 +36,6 @@ class Upload
      */
     public array $file = [
         'name' => '',
-        'full_path' => '',
         'type' => '',
         'size' => 0,
         'tmp_name' => '',
