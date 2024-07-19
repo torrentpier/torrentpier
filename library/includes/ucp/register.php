@@ -382,7 +382,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $tempAvatarMeta = stream_get_meta_data($tempAvatar);
                     $monsterAvatar->writeToStream($tempAvatar);
 
-                    // Manual fill $_FILES['avatar']
+                    // Manual filling $_FILES['avatar']
                     $_FILES['avatar'] = array();
                     if (!empty($tempAvatarMeta['uri']) && is_file($tempAvatarMeta['uri'])) {
                         $_FILES['avatar'] = [
