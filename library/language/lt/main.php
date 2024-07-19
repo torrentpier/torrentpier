@@ -607,6 +607,7 @@ $lang['RETURN_PROFILE'] = 'Grįžti į profilį';
 $lang['SELECT_CATEGORY'] = 'Pasirinkite kategorija';
 
 $lang['DELETE_IMAGE'] = 'Ištrinti nuotrauką';
+$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
 $lang['CURRENT_IMAGE'] = 'Dabartinis vaizdas';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Pranešti apie naują asmeninį pranešimą';
@@ -3060,3 +3061,11 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Sveiki atvykę į svetainę %s',
     'USER_WELCOME_INACTIVE' => 'Sveiki atvykę į svetainę %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
