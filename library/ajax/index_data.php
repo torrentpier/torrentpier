@@ -89,6 +89,38 @@ switch ($mode) {
         $datastore->rm('moderators');
         break;
 
+    case 'null_ratio':
+        if (!$bb_cfg['ratio_null_enabled']) {
+            $this->ajax_die($lang['MODULE_OFF']);
+        }
+        if (empty($this->request['confirmed'])) {
+            $this->prompt_for_confirm($lang['BT_NULL_RATIO_ALERT']);
+        }
+
+        $user_id = (int)$this->request['user_id'];
+        if (!IS_ADMIN && $user_id != $userdata['user_id']) {
+            $this->ajax_die($lang['NOT_AUTHORISED']);
+        }
+
+        $btu = get_bt_userdata($user_id);
+        $ratio_nulled = (bool)$btu['ratio_nulled'];
+        $user_ratio = get_bt_ratio($btu);
+
+        if (($user_ratio === null) && !IS_ADMIN) {
+            $this->ajax_die($lang['BT_NULL_RATIO_NONE']);
+        }
+        if ($ratio_nulled && !IS_ADMIN) {
+            $this->ajax_die($lang['BT_NULL_RATIO_AGAIN']);
+        }
+        if (($user_ratio >= $bb_cfg['ratio_to_null']) && !IS_ADMIN) {
+            $this->ajax_die(sprintf($lang['BT_NULL_RATIO_NOT_NEEDED'], $bb_cfg['ratio_to_null']));
+        }
+
+        DB()->query("UPDATE " . BB_BT_USERS . " SET u_up_total = 0, u_down_total = 0, u_up_release = 0, u_up_bonus = 0, ratio_nulled = 1 WHERE user_id = " . $user_id);
+        CACHE('bb_cache')->rm('btu_' . $user_id);
+        $this->ajax_die($lang['BT_NULL_RATIO_SUCCESS']);
+        break;
+
     case 'get_traf_stats':
         $user_id = (int)$this->request['user_id'];
         $btu = get_bt_userdata($user_id);
