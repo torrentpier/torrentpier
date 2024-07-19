@@ -383,7 +383,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $monsterAvatar->writeToStream($tempAvatar);
 
                     // Manual fill $_FILES['avatar']
-                    $_FILES['avatar'] = null;
+                    $_FILES['avatar'] = array();
                     if (!empty($tempAvatarMeta['uri']) && is_file($tempAvatarMeta['uri'])) {
                         $_FILES['avatar'] = [
                             'name' => 'MonsterID.png',
