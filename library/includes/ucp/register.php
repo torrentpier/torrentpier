@@ -375,12 +375,22 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
+                // MonsterID integration
+                if (isset($_POST['use_monster_avatar'])) {
+                    $monsterAvatar = new \Arokettu\MonsterID\Monster($pr_data['user_email']);
+                    unset($_FILES['avatar']);
+                    $_FILES['avatar'] = [
+
+                    ];
+                }
+
                 if (isset($_POST['delete_avatar'])) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = 0;
                     $db_data['avatar_ext_id'] = 0;
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
+                    dd($_FILES['avatar']);
 
                     if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;
