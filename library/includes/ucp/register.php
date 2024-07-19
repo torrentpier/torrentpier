@@ -387,9 +387,9 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (is_file($tempAvatarPath)) {
                         $_FILES['avatar'] = [
                             'name' => "MonsterID_{$pr_data['user_id']}.png",
-                            'type' => 'image/png',
+                            'type' => mime_content_type($tempAvatarPath),
                             'tmp_name' => $tempAvatarPath,
-                            'error' => 0,
+                            'error' => UPLOAD_ERR_OK,
                             'size' => filesize($tempAvatarPath)
                         ];
                     }
