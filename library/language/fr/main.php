@@ -607,6 +607,7 @@ $lang['RETURN_PROFILE'] = 'Retour au profil de';
 $lang['SELECT_CATEGORY'] = 'Sélectionnez une catégorie';
 
 $lang['DELETE_IMAGE'] = 'Supprimer l\'image';
+$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
 $lang['CURRENT_IMAGE'] = 'L\'image actuelle';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Informer sur les nouveaux message privé';
@@ -3060,3 +3061,11 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Bienvenue sur le site %s',
     'USER_WELCOME_INACTIVE' => 'Bienvenue sur le site %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
