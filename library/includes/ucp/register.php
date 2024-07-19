@@ -376,7 +376,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
                 // Integration with MonsterID
-                if (!isset($_POST['delete_avatar']) && isset($_POST['use_monster_avatar'])) {
+                if (empty($_FILES['avatar']['name']) && !isset($_POST['delete_avatar']) && isset($_POST['use_monster_avatar'])) {
                     $monsterAvatar = new Arokettu\MonsterID\Monster($pr_data['user_email'], $bb_cfg['avatars']['max_height']);
                     $tempAvatar = tmpfile();
                     $tempAvatarPath = stream_get_meta_data($tempAvatar)['uri'];
