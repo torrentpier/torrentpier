@@ -8,6 +8,7 @@
 - Release 2.4.4 🦩 ([belomaxorka](https://github.com/belomaxorka))
 - CWE-502 Fixed: Deserialization of untrusted data ([belomaxorka](https://github.com/belomaxorka))
 - Create tech stack docs (techstack.yml and techstack.md) [\#1521](https://github.com/torrentpier/torrentpier/pull/1521), [\#1522](https://github.com/torrentpier/torrentpier/pull/1522) ([belomaxorka](https://github.com/belomaxorka))
+- Added ability to reset ratio [\#1545](https://github.com/torrentpier/torrentpier/pull/1545) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken "Disable Board" function [\#1529](https://github.com/torrentpier/torrentpier/pull/1529) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed seed bonus accrual [\#1518](https://github.com/torrentpier/torrentpier/pull/1518) ([belomaxorka](https://github.com/belomaxorka))
 - [BETA] Added emojis support 😄😁 [\#1514](https://github.com/torrentpier/torrentpier/pull/1514) ([belomaxorka](https://github.com/belomaxorka))
