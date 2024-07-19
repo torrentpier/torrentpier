@@ -315,6 +315,7 @@
                         <td class="tCenter nowrap">
                             <p class="mrg_6">{AVATAR_IMG}</p>
                             <p><label><input type="checkbox" name="delete_avatar"/> {L_DELETE_IMAGE}</label></p>
+                            <p><label><input type="checkbox" name="use_monster_avatar"/> {L_SET_MONSTERID_AVATAR}</label></p>
                         </td>
                     </tr>
                 </table>

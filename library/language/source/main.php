@@ -607,6 +607,7 @@ $lang['RETURN_PROFILE'] = 'Return to profile';
 $lang['SELECT_CATEGORY'] = 'Select category';
 
 $lang['DELETE_IMAGE'] = 'Delete image';
+$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
 $lang['CURRENT_IMAGE'] = 'Current image';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Notify on new private message';
