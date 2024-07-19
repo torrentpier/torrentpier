@@ -375,6 +375,27 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
+                // Integration with MonsterID
+                if (!isset($_POST['delete_avatar']) && isset($_POST['use_monster_avatar'])) {
+                    $monsterAvatar = new Arokettu\MonsterID\Monster($pr_data['user_email'], $bb_cfg['avatars']['max_height']);
+                    $tempAvatar = tmpfile();
+                    $tempAvatarMeta = stream_get_meta_data($tempAvatar);
+                    $monsterAvatar->writeToStream($tempAvatar);
+
+                    // Manual fill $_FILES['avatar']
+                    $_FILES['avatar'] = null;
+                    if (!empty($tempAvatarMeta['uri']) && is_file($tempAvatarMeta['uri'])) {
+                        $_FILES['avatar'] = [
+                            'name' => 'MonsterID.png',
+                            'full_path' => 'MonsterID.png',
+                            'type' => 'image/png',
+                            'tmp_name' => $tempAvatarMeta['uri'],
+                            'error' => 0,
+                            'size' => filesize($tempAvatarMeta['uri'])
+                        ];
+                    }
+                }
+
                 if (isset($_POST['delete_avatar'])) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = 0;
@@ -382,7 +403,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
-                    if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
+                    if ($upload->init($bb_cfg['avatars'], $_FILES['avatar'], !isset($_POST['use_monster_avatar'])) and $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;
                         $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
                     } else {
