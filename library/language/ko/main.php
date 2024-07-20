@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = '환 프로필';
 $lang['SELECT_CATEGORY'] = '카테고리 선택';
 
 $lang['DELETE_IMAGE'] = '이미지의 이미지 삭제';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = '현재 이미지';
 
 $lang['NOTIFY_ON_PRIVMSG'] = '통지에서 새로운 비공개 메시지';
