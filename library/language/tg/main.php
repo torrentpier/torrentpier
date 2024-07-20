@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Бозгашт ба профили';
 $lang['SELECT_CATEGORY'] = 'Интихоб кунед категорияи';
 
 $lang['DELETE_IMAGE'] = 'Тозакунии тасвир';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Садо ҷорӣ';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Огоҳ оид ба паёми нави';
