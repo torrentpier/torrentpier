@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Tillbaka till profil';
 $lang['SELECT_CATEGORY'] = 'Välj kategori';
 
 $lang['DELETE_IMAGE'] = 'Radera bild';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Aktuella bilden';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Anmäla på nytt privat meddelande';
