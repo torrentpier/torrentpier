@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Zpět na profil';
 $lang['SELECT_CATEGORY'] = 'Vyberte kategorii';
 
 $lang['DELETE_IMAGE'] = 'Smazat obrázek';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Aktuální snímek';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Upozornit na novou soukromou zprávu';
