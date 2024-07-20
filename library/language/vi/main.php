@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Trở về để hồ sơ';
 $lang['SELECT_CATEGORY'] = 'Chọn loại';
 
 $lang['DELETE_IMAGE'] = 'Xóa hình ảnh';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Hình ảnh hiện tại';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Thông báo tin nhắn mới';
