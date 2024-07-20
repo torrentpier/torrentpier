@@ -254,10 +254,12 @@ class Ajax
      * @param string $confirm_msg
      * @throws Exception
      */
-    public function prompt_for_confirm(string $confirm_msg): void
+    public function prompt_for_confirm(string $confirm_msg = ''): void
     {
+        global $lang;
+
         if (empty($confirm_msg)) {
-            $this->ajax_die('false');
+            $confirm_msg = $lang['QUESTION'];
         }
 
         $this->response['prompt_confirm'] = 1;
