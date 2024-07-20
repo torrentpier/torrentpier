@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Paluu profiili';
 $lang['SELECT_CATEGORY'] = 'Valitse luokka';
 
 $lang['DELETE_IMAGE'] = 'Poista kuva';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Nykyisen kuvan';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Ilmoita uusi yksityinen viesti';
