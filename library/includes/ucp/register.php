@@ -273,6 +273,7 @@ foreach ($profile_fields as $field => $can_edit) {
                         $db_data['user_active'] = 0;
                     }
                     $db_data['user_email'] = $email;
+                    $pr_data['user_email'] = $email;
                 }
             }
             $tp_data['USER_EMAIL'] = htmlCHR($email);
