@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = '返却のプロフィール';
 $lang['SELECT_CATEGORY'] = 'カテゴリを選択';
 
 $lang['DELETE_IMAGE'] = '画像の削除';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = '現在の画像';
 
 $lang['NOTIFY_ON_PRIVMSG'] = '知の新しいプライベートメッセージ';
