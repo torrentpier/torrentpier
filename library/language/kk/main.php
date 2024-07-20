@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'бейіні оралу';
 $lang['SELECT_CATEGORY'] = 'санатын таңдаңыз';
 
 $lang['DELETE_IMAGE'] = 'суретті жойыңыз';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Ағымдағы сурет';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'жаңа жеке жолдауын хабардар етуге';
