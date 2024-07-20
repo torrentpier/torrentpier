@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'profile qaytish';
 $lang['SELECT_CATEGORY'] = 'Turkum tanlang';
 
 $lang['DELETE_IMAGE'] = 'tasvirni o\'chirish';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'amaldagi tasvir';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Yangi Xususiy e\'lonlar bildiring';

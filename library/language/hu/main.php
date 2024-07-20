@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Vissza profil';
 $lang['SELECT_CATEGORY'] = 'Kategória kiválasztása';
 
 $lang['DELETE_IMAGE'] = 'Kép törlése';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Aktuális kép';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Értesíti új privát üzenet';

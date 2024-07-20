@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Վերադառնալ անձնագիրը';
 $lang['SELECT_CATEGORY'] = 'Ընտրել կատեգորիա';
 
 $lang['DELETE_IMAGE'] = 'Հեռացում նկարներ';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Ներկայիս իմիջը';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Տեղեկացնել նոր անձնական հաղորդագրությունների';

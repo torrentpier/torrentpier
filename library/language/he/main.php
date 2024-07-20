@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'לחזור פרופיל';
 $lang['SELECT_CATEGORY'] = 'בחר קטגוריה';
 
 $lang['DELETE_IMAGE'] = 'מחיקת תמונה. מחיקת תמונה';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'התמונה הנוכחית';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'להודיע על הודעה פרטית חדשה.';

@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'დაბრუნება ნახვა';
 $lang['SELECT_CATEGORY'] = 'აირჩიეთ კატეგორია';
 
 $lang['DELETE_IMAGE'] = 'გამოსახულების წაშლა';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'მიმდინარე გამოსახულება';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'აცნობოს ახალი შეტყობინების გაგზავნა';
