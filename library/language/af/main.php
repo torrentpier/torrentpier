@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Terug na profiel';
 $lang['SELECT_CATEGORY'] = 'Kies kategorie';
 
 $lang['DELETE_IMAGE'] = 'Verwyder prent';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Huidige beeld';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Stel in kennis van nuwe private boodskap';
