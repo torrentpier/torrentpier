@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'प्रोफ़ाइल पर लौटें';
 $lang['SELECT_CATEGORY'] = 'श्रेणी का चयन करें';
 
 $lang['DELETE_IMAGE'] = 'छवि हटाएं';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'वर्तमान छवि';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'नए निजी संदेश पर सूचित करें';
