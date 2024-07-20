@@ -66,7 +66,7 @@ if ($watch_count > 0) {
 		AND p.poster_id = u2.user_id
 		AND t.topic_poster = u.user_id
 		AND w.user_id = $user_id
-	GROUP BY t.topic_last_post_time DESC
+	ORDER BY t.topic_last_post_time DESC
 	LIMIT $start, $per_page";
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not obtain watch topic information #3');
