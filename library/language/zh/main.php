@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = '回到档案';
 $lang['SELECT_CATEGORY'] = '选择类别';
 
 $lang['DELETE_IMAGE'] = '删除的图像';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = '目前的图像';
 
 $lang['NOTIFY_ON_PRIVMSG'] = '通知在新的私人消息';
