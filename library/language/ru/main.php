@@ -607,7 +607,7 @@ $lang['RETURN_PROFILE'] = 'Вернуться к профилю';
 $lang['SELECT_CATEGORY'] = 'Выберите категорию';
 
 $lang['DELETE_IMAGE'] = 'Удалить изображение';
-$lang['SET_MONSTERID_AVATAR'] = 'Set avatar from MonsterID';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Текущее изображение';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Уведомлять о новых личных сообщениях';
