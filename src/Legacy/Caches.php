@@ -32,7 +32,6 @@ class Caches
                 $this->ref[$cache_name] =& $this->obj['__stub'];
             } else {
                 $cache_type =& $engine_cfg[0];
-                $cache_cfg =& $engine_cfg[1];
 
                 switch ($cache_type) {
                     case 'apcu':
@@ -49,10 +48,7 @@ class Caches
                         break;
                     case 'sqlite':
                         if (!isset($this->obj[$cache_name])) {
-                            $cache_cfg['pconnect'] = $this->cfg['pconnect'];
-                            $cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '.sqlite.db');
-
-                            $this->obj[$cache_name] = new Cache\Sqlite($cache_cfg, $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\Sqlite($this->cfg['db_dir'] . $cache_name, $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
@@ -74,14 +70,5 @@ class Caches
         }
 
         return $this->ref[$cache_name];
-    }
-
-    public function get_db_path($name, $cfg, $ext)
-    {
-        if (!empty($cfg['shard_type']) && $cfg['shard_type'] != 'none') {
-            return $this->cfg['db_dir'] . $name . '_*' . $ext;
-        }
-
-        return $this->cfg['db_dir'] . $name . $ext;
     }
 }
