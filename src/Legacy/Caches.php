@@ -40,9 +40,9 @@ class Caches
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
-                    case 'memcache':
+                    case 'memcached':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\Memcache($this->cfg['memcache'], $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\Memcached($this->cfg['memcached'], $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
