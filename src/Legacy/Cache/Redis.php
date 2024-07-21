@@ -83,11 +83,16 @@ class Redis extends Common
         $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
+    /**
+     * Connect to cache
+     *
+     * @return void
+     */
     private function connect(): void
     {
         $connectType = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
 
-        $this->cur_query = $connectType . '&nbsp;' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->cur_query = $connectType . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
         if ($this->client->$connectType($this->cfg['host'], $this->cfg['port'])) {
