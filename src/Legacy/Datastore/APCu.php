@@ -9,54 +9,99 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use MatthiasMullie\Scrapbook\Adapters\Apc;
+
 /**
  * Class APCu
  * @package TorrentPier\Legacy\Datastore
  */
 class APCu extends Common
 {
-    public string $prefix;
+    /**
+     * Cache driver name
+     *
+     * @var string
+     */
     public string $engine = 'APCu';
 
-    public function __construct($prefix = null)
+    /**
+     * Cache prefix
+     *
+     * @var string
+     */
+    private string $prefix;
+
+    /**
+     * Adapters\Apc class
+     *
+     * @var Apc
+     */
+    private Apc $apcu;
+
+    /**
+     * APCu constructor
+     *
+     * @param string $prefix
+     */
+    public function __construct(string $prefix)
     {
         global $debug;
 
-        if (!$this->is_installed()) {
-            die("Error: $this->engine extension not installed");
-        }
-
+        $this->apcu = new Apc();
         $this->prefix = $prefix;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
-    public function store($title, $var)
+    /**
+     * Store data into cache
+     *
+     * @param string $item_name
+     * @param mixed $item_data
+     * @return bool
+     */
+    public function store(string $item_name, mixed $item_data): bool
     {
-        $this->data[$title] = $var;
+        $this->data[$item_name] = $item_data;
+        $item_name = $this->prefix . $item_name;
 
-        $this->cur_query = "cache->set('$title')";
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
+
+        $result = $this->apcu->set($item_name, $item_data);
+
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)apcu_store($this->prefix . $title, $var);
+        return $result;
     }
 
-    public function clean()
+    /**
+     * Removes data from cache
+     *
+     * @return void
+     */
+    public function clean(): void
     {
         foreach ($this->known_items as $title => $script_name) {
+            $title = $this->prefix . $title;
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
+
+            $this->apcu->delete($title);
+
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
-
-            apcu_delete($this->prefix . $title);
         }
     }
 
-    public function _fetch_from_store()
+    /**
+     * Fetch cache from store
+     *
+     * @return void
+     */
+    public function _fetch_from_store(): void
     {
         $item = null;
         if (!$items = $this->queued_items) {
@@ -65,18 +110,15 @@ class APCu extends Common
         }
 
         foreach ($items as $item) {
-            $this->cur_query = "cache->get('$item')";
+            $item_title = $this->prefix . $item;
+            $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
+
+            $this->data[$item] = $this->apcu->get($item_title);
+
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
-
-            $this->data[$item] = apcu_fetch($this->prefix . $item);
         }
-    }
-
-    public function is_installed(): bool
-    {
-        return extension_loaded('apcu') && apcu_enabled();
     }
 }
