@@ -386,7 +386,7 @@ ajax.callback.index_data = function(data) {
 				</td>
 			</tr>
 
-			<!-- IF RATIO_ENABLED -->
+			<!-- IF #RATIO_ENABLED -->
 			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
 				<th>{L_USER_RATIO}:</th>
 				<td>
