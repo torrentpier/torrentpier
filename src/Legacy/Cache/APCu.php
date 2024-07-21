@@ -36,7 +36,7 @@ class APCu extends Common
      *
      * @var string
      */
-    public string $prefix;
+    private string $prefix;
 
     /**
      * Adapters\Apc class
