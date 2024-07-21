@@ -59,13 +59,11 @@ $bb_cfg['cache'] = [
     'memcached' => [
         'host' => '127.0.0.1',
         'port' => 11211,
-        'con_required' => true,
     ],
     'redis' => [
         'host' => '127.0.0.1',
         'port' => 6379,
         'pconnect' => !PHP_ZTS, // Redis pconnect supported only for non-thread safe compilations of PHP
-        'con_required' => true,
     ],
     // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
     'engines' => [

@@ -63,8 +63,9 @@ class Memcached extends Common
     /**
      * Adapters\Memcached class
      *
+     * @var MemcachedCache
      */
-    private $memcached;
+    private MemcachedCache $memcached;
 
     /**
      * Memcached constructor
@@ -96,7 +97,7 @@ class Memcached extends Common
             $this->connected = true;
         }
 
-        if (!$this->connected && $this->cfg['con_required']) {
+        if (!$this->connected) {
             die("Could not connect to $this->engine server");
         }
 

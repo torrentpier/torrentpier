@@ -99,7 +99,7 @@ class Redis extends Common
             $this->connected = true;
         }
 
-        if (!$this->connected && $this->cfg['con_required']) {
+        if (!$this->connected) {
             die("Could not connect to $this->engine server");
         }
 
