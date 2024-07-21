@@ -54,10 +54,6 @@ class APCu extends Common
     {
         global $debug;
 
-        if (!$this->is_installed()) {
-            die("Error: $this->engine extension not installed");
-        }
-
         $this->apcu = new Apc();
         $this->prefix = $prefix;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
@@ -133,15 +129,5 @@ class APCu extends Common
         }
 
         return $this->apcu->flush();
-    }
-
-    /**
-     * Checks if the extension is installed
-     *
-     * @return bool
-     */
-    public function is_installed(): bool
-    {
-        return extension_loaded('apcu') && apcu_enabled();
     }
 }
