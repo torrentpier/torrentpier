@@ -77,7 +77,7 @@
 <table cellpadding="2" cellspacing="0" width="100%">
     <tr>
         <td width="100%">
-            <h1 class="maintitle">{PAGE_TITLE}</h1>
+            <h1 class="pagetitle">{PAGE_TITLE}</h1>
             <div id="forums_top_links" class="nav">
                 <a href="{U_INDEX}">{T_INDEX}</a>&nbsp;<em>&middot;</em>
                 <span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>
