@@ -844,14 +844,6 @@ function get_bt_userdata($user_id)
     return $btu;
 }
 
-function get_bt_ratio($btu): ?float
-{
-    return
-        (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
-            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
-            : null;
-}
-
 function show_bt_userdata($user_id): void
 {
     global $template;

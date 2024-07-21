@@ -90,7 +90,7 @@ switch ($mode) {
         break;
 
     case 'null_ratio':
-        if (!$bb_cfg['ratio_null_enabled']) {
+        if (!$bb_cfg['ratio_null_enabled'] || !RATIO_ENABLED) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
         if (empty($this->request['confirmed'])) {
@@ -123,6 +123,10 @@ switch ($mode) {
         break;
 
     case 'get_traf_stats':
+        if (!RATIO_ENABLED) {
+            $this->ajax_die($lang['MODULE_OFF']);
+        }
+
         $user_id = (int)$this->request['user_id'];
         $btu = get_bt_userdata($user_id);
         $profiledata = get_userdata($user_id);
