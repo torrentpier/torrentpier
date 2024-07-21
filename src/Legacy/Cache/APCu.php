@@ -72,11 +72,11 @@ class APCu extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
-        if ($result = $this->apcu->get($name)) {
-            $this->debug('stop');
-            $this->cur_query = null;
-            $this->num_queries++;
-        }
+        $result = $this->apcu->get($name);
+
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
 
         return $result;
     }
@@ -96,11 +96,11 @@ class APCu extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
-        if ($result = $this->apcu->set($name, $value, $ttl)) {
-            $this->debug('stop');
-            $this->cur_query = null;
-            $this->num_queries++;
-        }
+        $result = $this->apcu->set($name, $value, $ttl);
+
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
 
         return $result;
     }
@@ -113,21 +113,18 @@ class APCu extends Common
      */
     public function rm(string $name = null): bool
     {
-        if (is_string($name)) {
-            $name = $this->prefix . $name;
+        $targetMethod = is_string($name) ? 'delete' : 'flush';
+        $name = is_string($name) ? $this->prefix . $name : null;
 
-            $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
-            $this->debug('start');
+        $this->cur_query = "cache->$targetMethod('$name')";
+        $this->debug('start');
 
-            if ($result = $this->apcu->delete($name)) {
-                $this->debug('stop');
-                $this->cur_query = null;
-                $this->num_queries++;
-            }
+        $result = $this->apcu->$targetMethod($name);
 
-            return $result;
-        }
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
 
-        return $this->apcu->flush();
+        return $result;
     }
 }
