@@ -69,7 +69,7 @@ class APCu extends Common
     {
         $name = $this->prefix . $name;
 
-        $this->cur_query = "cache->get('$name')";
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
         if ($result = $this->apcu->get($name)) {
@@ -93,7 +93,7 @@ class APCu extends Common
     {
         $name = $this->prefix . $name;
 
-        $this->cur_query = "cache->set('$name')";
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
         if ($result = $this->apcu->set($name, $value, $ttl)) {
@@ -116,7 +116,7 @@ class APCu extends Common
         if (is_string($name)) {
             $name = $this->prefix . $name;
 
-            $this->cur_query = "cache->rm('$name')";
+            $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
             $this->debug('start');
 
             if ($result = $this->apcu->delete($name)) {
