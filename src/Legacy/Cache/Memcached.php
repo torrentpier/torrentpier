@@ -56,19 +56,17 @@ class Memcached extends Common
     /**
      * Redis class
      *
-     * @var RedisClient
      */
-    private RedisClient $client;
+    private $client;
 
     /**
-     * Adapters\Redis class
+     * Adapters\Memcached class
      *
-     * @var RedisCache
      */
-    private RedisCache $redis;
+    private $redis;
 
     /**
-     * Redis constructor
+     * Memcached constructor
      *
      * @param array $cfg
      * @param string $prefix

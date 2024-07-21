@@ -47,7 +47,7 @@ class Sqlite extends Common
     private SQLiteCache $sqlite;
 
     /**
-     * File constructor
+     * Sqlite constructor
      *
      * @param string $dir
      * @param string $prefix
