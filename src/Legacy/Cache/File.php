@@ -47,7 +47,7 @@ class File extends Common
         return (!empty($filecache['value'])) ? $filecache['value'] : false;
     }
 
-    public function set($name, $value, $ttl = 86400)
+    public function set($name, $value, int $ttl = 86400)
     {
         if (!\function_exists('var_export')) {
             return false;

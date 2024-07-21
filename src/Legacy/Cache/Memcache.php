@@ -70,7 +70,7 @@ class Memcache extends Common
         return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
     }
 
-    public function set($name, $value, $ttl = 0)
+    public function set($name, $value, int $ttl = 0)
     {
         if (!$this->connected) {
             $this->connect();

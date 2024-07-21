@@ -9,17 +9,48 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use MatthiasMullie\Scrapbook\Adapters\Apc;
+
 /**
  * Class APCu
  * @package TorrentPier\Legacy\Cache
  */
 class APCu extends Common
 {
-    public $used = true;
-    public $engine = 'APCu';
-    public $prefix;
+    /**
+     * Currently in usage
+     *
+     * @var bool
+     */
+    public bool $used = true;
 
-    public function __construct($prefix = null)
+    /**
+     * Cache driver name
+     *
+     * @var string
+     */
+    public string $engine = 'APCu';
+
+    /**
+     * Cache prefix
+     *
+     * @var string
+     */
+    public string $prefix;
+
+    /**
+     * Adapters\Apc class
+     *
+     * @var Apc
+     */
+    private Apc $apcu;
+
+    /**
+     * APCu constructor
+     *
+     * @param string $prefix
+     */
+    public function __construct(string $prefix)
     {
         global $debug;
 
@@ -27,52 +58,88 @@ class APCu extends Common
             die("Error: $this->engine extension not installed");
         }
 
+        $this->apcu = new Apc();
         $this->prefix = $prefix;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
-    public function get($name, $get_miss_key_callback = '', $ttl = 0)
+    /**
+     * Fetch data from cache
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function get(string $name): mixed
     {
+        $name = $this->prefix . $name;
+
         $this->cur_query = "cache->get('$name')";
         $this->debug('start');
-        $this->debug('stop');
-        $this->cur_query = null;
-        $this->num_queries++;
 
-        return apcu_fetch($this->prefix . $name);
+        if ($result = $this->apcu->get($name)) {
+            $this->debug('stop');
+            $this->cur_query = null;
+            $this->num_queries++;
+        }
+
+        return $result;
     }
 
-    public function set($name, $value, $ttl = 0)
+    /**
+     * Store data into cache
+     *
+     * @param string $name
+     * @param mixed $value
+     * @param int $ttl
+     * @return bool
+     */
+    public function set(string $name, mixed $value, int $ttl = 0): bool
     {
+        $name = $this->prefix . $name;
+
         $this->cur_query = "cache->set('$name')";
         $this->debug('start');
 
-        if (apcu_store($this->prefix . $name, $value, $ttl)) {
+        if ($result = $this->apcu->set($name, $value, $ttl)) {
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
-
-            return true;
         }
 
-        return false;
+        return $result;
     }
 
-    public function rm($name = '')
+    /**
+     * Removes data from cache
+     *
+     * @param string|null $name
+     * @return bool
+     */
+    public function rm(string $name = null): bool
     {
-        if ($name) {
+        if (is_string($name)) {
+            $name = $this->prefix . $name;
+
             $this->cur_query = "cache->rm('$name')";
             $this->debug('start');
-            $this->debug('stop');
-            $this->cur_query = null;
-            $this->num_queries++;
 
-            return apcu_delete($this->prefix . $name);
+            if ($result = $this->apcu->delete($name)) {
+                $this->debug('stop');
+                $this->cur_query = null;
+                $this->num_queries++;
+            }
+
+            return $result;
         }
 
-        return apcu_clear_cache();
+        return $this->apcu->flush();
     }
 
+    /**
+     * Checks if the extension is installed
+     *
+     * @return bool
+     */
     public function is_installed(): bool
     {
         return extension_loaded('apcu') && apcu_enabled();

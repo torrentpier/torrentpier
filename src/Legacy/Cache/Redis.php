@@ -70,7 +70,7 @@ class Redis extends Common
         return ($this->connected) ? unserialize($this->redis->get($this->prefix . $name)) : false;
     }
 
-    public function set($name, $value, $ttl = 0)
+    public function set($name, $value, int $ttl = 0)
     {
         if (!$this->connected) {
             $this->connect();

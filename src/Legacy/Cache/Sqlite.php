@@ -88,7 +88,7 @@ class Sqlite extends Common
         return $cached_items[$name] ?? false;
     }
 
-    public function set($name, $value, $ttl = 604800)
+    public function set($name, $value, int $ttl = 604800)
     {
         $this->db->shard($this->prefix . $name);
         $name_sql = SQLite3::escapeString($this->prefix . $name);
