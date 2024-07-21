@@ -65,7 +65,7 @@ $bb_cfg['cache'] = [
         'port' => 6379,
         'pconnect' => !PHP_ZTS, // Redis pconnect supported only for non-thread safe compilations of PHP
     ],
-    // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+    // Available cache types: filecache, memcached, sqlite, redis, apcu (filecache by default)
     'engines' => [
         'bb_cache' => ['filecache'],
         'bb_config' => ['filecache'],
@@ -79,7 +79,7 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+// Available datastore types: filecache, memcached, sqlite, redis, apcu (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
