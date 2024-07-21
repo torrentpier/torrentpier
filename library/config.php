@@ -54,7 +54,6 @@ $bb_cfg['db_alias'] = [
 
 // Cache
 $bb_cfg['cache'] = [
-    'pconnect' => true,
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
     'prefix' => 'tp_',
     'memcache' => [
@@ -71,14 +70,14 @@ $bb_cfg['cache'] = [
     ],
     // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
     'engines' => [
-        'bb_cache' => ['filecache', []],
-        'bb_config' => ['filecache', []],
-        'tr_cache' => ['filecache', []],
-        'session_cache' => ['filecache', []],
-        'bb_cap_sid' => ['filecache', []],
-        'bb_login_err' => ['filecache', []],
-        'bb_poll_data' => ['filecache', []],
-        'bb_ip2countries' => ['filecache', []],
+        'bb_cache' => ['filecache'],
+        'bb_config' => ['filecache'],
+        'tr_cache' => ['filecache'],
+        'session_cache' => ['filecache'],
+        'bb_cap_sid' => ['filecache'],
+        'bb_login_err' => ['filecache'],
+        'bb_poll_data' => ['filecache'],
+        'bb_ip2countries' => ['filecache'],
     ],
 ];
 
