@@ -57,7 +57,6 @@ class Sqlite extends Common
         global $debug;
 
         $client = new PDO("sqlite:$dir.db");
-
         $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
