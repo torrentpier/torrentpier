@@ -59,7 +59,6 @@ $bb_cfg['cache'] = [
     'memcached' => [
         'host' => '127.0.0.1',
         'port' => 11211,
-        'pconnect' => true,
         'con_required' => true,
     ],
     'redis' => [

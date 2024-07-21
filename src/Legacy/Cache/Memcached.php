@@ -54,16 +54,17 @@ class Memcached extends Common
     private string $prefix;
 
     /**
-     * Redis class
+     * Memcached class
      *
+     * @var MemcachedClient
      */
-    private $client;
+    private MemcachedClient $client;
 
     /**
      * Adapters\Memcached class
      *
      */
-    private $redis;
+    private $memcached;
 
     /**
      * Memcached constructor
@@ -75,7 +76,7 @@ class Memcached extends Common
     {
         global $debug;
 
-        $this->client = new RedisClient();
+        $this->client = new MemcachedClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
@@ -88,12 +89,10 @@ class Memcached extends Common
      */
     private function connect(): void
     {
-        $connectType = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
-
-        $this->cur_query = $connectType . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if ($this->client->$connectType($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->client->addServer($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
@@ -101,7 +100,7 @@ class Memcached extends Common
             die("Could not connect to $this->engine server");
         }
 
-        $this->redis = new RedisCache($this->client);
+        $this->memcached = new MemcachedCache($this->client);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -124,7 +123,7 @@ class Memcached extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
-        $result = $this->redis->get($name);
+        $result = $this->memcached->get($name);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -152,7 +151,7 @@ class Memcached extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
-        $result = $this->redis->set($name, $value, $ttl);
+        $result = $this->memcached->set($name, $value, $ttl);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -179,7 +178,7 @@ class Memcached extends Common
         $this->cur_query = "cache->$targetMethod($name)";
         $this->debug('start');
 
-        $result = $this->redis->$targetMethod($name);
+        $result = $this->memcached->$targetMethod($name);
 
         $this->debug('stop');
         $this->cur_query = null;
