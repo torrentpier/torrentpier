@@ -9,81 +9,119 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use SQLite3;
+use MatthiasMullie\Scrapbook\Adapters\SQLite as SQLiteCache;
+use PDO;
 
 /**
  * Class Sqlite
  * @package TorrentPier\Legacy\Datastore
  */
-class Sqlite extends Common
+class File extends Common
 {
-    public $engine = 'SQLite';
-    public $db;
-    public $prefix;
-    public $cfg = [
-        'db_file_path' => '/path/to/datastore.db.sqlite',
-        'table_name' => 'datastore',
-        'table_schema' => 'CREATE TABLE datastore (
-	            ds_title       VARCHAR(255),
-	            ds_data        TEXT,
-	            PRIMARY KEY (ds_title)
-	        )',
-        'pconnect' => true,
-        'con_required' => true,
-        'log_name' => 'DATASTORE',
-    ];
+    /**
+     * Cache driver name
+     *
+     * @var string
+     */
+    public string $engine = 'SQLite';
 
-    public function __construct($cfg, $prefix = null)
+    /**
+     * Cache prefix
+     *
+     * @var string
+     */
+    private string $prefix;
+
+    /**
+     * Adapters\SQLite class
+     *
+     * @var SQLiteCache
+     */
+    private SQLiteCache $sqlite;
+
+    /**
+     * Sqlite constructor
+     *
+     * @param string $dir
+     * @param string $prefix
+     */
+    public function __construct(string $dir, string $prefix)
     {
-        if (!$this->is_installed()) {
-            die('Error: SQLite3 extension not installed');
-        }
+        global $debug;
 
-        $this->cfg = array_merge($this->cfg, $cfg);
-        $this->db = new SqliteCommon($this->cfg);
+        $client = new PDO("sqlite:$dir.db");
+        $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
-    public function store($item_name, $item_data)
+    /**
+     * Store data into cache
+     *
+     * @param string $item_name
+     * @param mixed $item_data
+     * @return bool
+     */
+    public function store(string $item_name, mixed $item_data): bool
     {
         $this->data[$item_name] = $item_data;
+        $item_name = $this->prefix . $item_name;
 
-        $ds_title = SQLite3::escapeString($this->prefix . $item_name);
-        $ds_data = SQLite3::escapeString(serialize($item_data));
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
+        $this->debug('start');
 
-        $result = $this->db->query("REPLACE INTO " . $this->cfg['table_name'] . " (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
+        $result = $this->sqlite->set($item_name, $item_data);
 
-        return (bool)$result;
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
+
+        return $result;
     }
 
-    public function clean()
+    /**
+     * Removes data from cache
+     *
+     * @return void
+     */
+    public function clean(): void
     {
-        $this->db->query("DELETE FROM " . $this->cfg['table_name']);
+        foreach ($this->known_items as $title => $script_name) {
+            $title = $this->prefix . $title;
+            $this->cur_query = "cache->rm('$title')";
+            $this->debug('start');
+
+            $this->sqlite->delete($title);
+
+            $this->debug('stop');
+            $this->cur_query = null;
+            $this->num_queries++;
+        }
     }
 
-    public function _fetch_from_store()
+    /**
+     * Fetch cache from store
+     *
+     * @return void
+     */
+    public function _fetch_from_store(): void
     {
+        $item = null;
         if (!$items = $this->queued_items) {
-            return;
+            $src = $this->_debug_find_caller('enqueue');
+            trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
         }
 
-        $prefix_len = \strlen($this->prefix);
-        $prefix_sql = SQLite3::escapeString($this->prefix);
+        foreach ($items as $item) {
+            $item_title = $this->prefix . $item;
+            $this->cur_query = "cache->get('$item_title')";
+            $this->debug('start');
 
-        array_deep($items, 'SQLite3::escapeString');
-        $items_list = $prefix_sql . implode("','$prefix_sql", $items);
+            $this->data[$item] = $this->sqlite->get($item_title);
 
-        $rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM " . $this->cfg['table_name'] . " WHERE ds_title IN ('$items_list')");
-
-        $this->db->debug('start', "unserialize()");
-        foreach ($rowset as $row) {
-            $this->data[substr($row['ds_title'], $prefix_len)] = unserialize($row['ds_data']);
+            $this->debug('stop');
+            $this->cur_query = null;
+            $this->num_queries++;
         }
-        $this->db->debug('stop');
-    }
-
-    public function is_installed()
-    {
-        return class_exists('SQLite3');
     }
 }
