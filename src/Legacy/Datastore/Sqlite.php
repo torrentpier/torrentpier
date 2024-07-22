@@ -16,7 +16,7 @@ use PDO;
  * Class Sqlite
  * @package TorrentPier\Legacy\Datastore
  */
-class File extends Common
+class Sqlite extends Common
 {
     /**
      * Cache driver name
