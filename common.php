@@ -291,6 +291,20 @@ function make_rand_str(int $length = 10): string
     return $randomString;
 }
 
+/**
+ * Calculates user ratio
+ *
+ * @param array $btu
+ * @return float|null
+ */
+function get_bt_ratio(array $btu): ?float
+{
+    return
+        (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
+            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
+            : null;
+}
+
 function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $timeout = false)
 {
     if ($timeout) {
@@ -344,6 +358,11 @@ function sys(string $param)
             trigger_error("invalid param: $param", E_USER_ERROR);
     }
 }
+
+/**
+ * Some shared defines
+ */
+define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 
 // Initialization
 if (!defined('IN_TRACKER')) {

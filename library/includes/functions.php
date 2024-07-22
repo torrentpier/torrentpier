@@ -844,14 +844,6 @@ function get_bt_userdata($user_id)
     return $btu;
 }
 
-function get_bt_ratio($btu): ?float
-{
-    return
-        (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
-            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
-            : null;
-}
-
 function show_bt_userdata($user_id): void
 {
     global $template;
@@ -868,8 +860,8 @@ function show_bt_userdata($user_id): void
         'DOWN_TOTAL' => humn_size($btu['u_down_total']),
         'DOWN_TOTAL_BYTES' => $btu['u_down_total'],
         'USER_RATIO' => get_bt_ratio($btu),
-        'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
-        'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
+        'MIN_DL_FOR_RATIO' => humn_size((int)MIN_DL_FOR_RATIO),
+        'MIN_DL_BYTES' => (int)MIN_DL_FOR_RATIO,
         'AUTH_KEY' => $btu['auth_key'],
 
         'TD_DL' => humn_size($btu['down_today']),
