@@ -374,20 +374,6 @@ function html_ent_decode(string $string, int $flags = ENT_QUOTES, ?string $encod
 }
 
 /**
- * Reads entire file into a string (With UTF-8 support)
- *
- * @param string $filename
- * @param mixed $context
- * @return mixed
- */
-function file_get_contents_utf8(string $filename, mixed $context): mixed
-{
-    $content = file_get_contents($filename, context: $context);
-    return mb_convert_encoding($content, 'UTF-8',
-        mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
-}
-
-/**
  * Makes URL from path
  *
  * @param string $path
