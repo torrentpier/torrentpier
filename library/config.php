@@ -54,36 +54,32 @@ $bb_cfg['db_alias'] = [
 
 // Cache
 $bb_cfg['cache'] = [
-    'pconnect' => true,
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
     'prefix' => 'tp_',
-    'memcache' => [
+    'memcached' => [
         'host' => '127.0.0.1',
         'port' => 11211,
-        'pconnect' => true,
-        'con_required' => true,
     ],
     'redis' => [
         'host' => '127.0.0.1',
         'port' => 6379,
         'pconnect' => !PHP_ZTS, // Redis pconnect supported only for non-thread safe compilations of PHP
-        'con_required' => true,
     ],
-    // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+    // Available cache types: filecache, memcached, sqlite, redis, apcu (filecache by default)
     'engines' => [
-        'bb_cache' => ['filecache', []],
-        'bb_config' => ['filecache', []],
-        'tr_cache' => ['filecache', []],
-        'session_cache' => ['filecache', []],
-        'bb_cap_sid' => ['filecache', []],
-        'bb_login_err' => ['filecache', []],
-        'bb_poll_data' => ['filecache', []],
-        'bb_ip2countries' => ['filecache', []],
+        'bb_cache' => ['filecache'],
+        'bb_config' => ['filecache'],
+        'tr_cache' => ['filecache'],
+        'session_cache' => ['filecache'],
+        'bb_cap_sid' => ['filecache'],
+        'bb_login_err' => ['filecache'],
+        'bb_poll_data' => ['filecache'],
+        'bb_ip2countries' => ['filecache'],
     ],
 ];
 
 // Datastore
-// Available datastore types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+// Available datastore types: filecache, memcached, sqlite, redis, apcu (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server

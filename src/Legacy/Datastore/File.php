@@ -9,65 +9,104 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use MatthiasMullie\Scrapbook\Adapters\Flysystem;
+
 /**
  * Class File
  * @package TorrentPier\Legacy\Datastore
  */
 class File extends Common
 {
-    public $dir;
-    public $prefix;
-    public $engine = 'Filecache';
+    /**
+     * Cache driver name
+     *
+     * @var string
+     */
+    public string $engine = 'File';
 
-    public function __construct($dir, $prefix = null)
+    /**
+     * Cache prefix
+     *
+     * @var string
+     */
+    private string $prefix;
+
+    /**
+     * Adapters\File class
+     *
+     * @var Flysystem
+     */
+    private Flysystem $file;
+
+    /**
+     * File constructor
+     *
+     * @param string $dir
+     * @param string $prefix
+     */
+    public function __construct(string $dir, string $prefix)
     {
         global $debug;
 
+        $adapter = new LocalFilesystemAdapter($dir, null, LOCK_EX);
+        $filesystem = new Filesystem($adapter);
+        $this->file = new Flysystem($filesystem);
         $this->prefix = $prefix;
-        $this->dir = $dir;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
-    public function store($title, $var)
+    /**
+     * Store data into cache
+     *
+     * @param string $item_name
+     * @param mixed $item_data
+     * @return bool
+     */
+    public function store(string $item_name, mixed $item_data): bool
     {
-        $this->cur_query = "cache->set('$title')";
+        $this->data[$item_name] = $item_data;
+        $item_name = $this->prefix . $item_name;
+
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
 
-        $this->data[$title] = $var;
-
-        $filename = $this->dir . clean_filename($this->prefix . $title) . '.php';
-
-        $filecache = "<?php\n";
-        $filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
-        $filecache .= '$filecache = ' . var_export($var, true) . ";\n";
-        $filecache .= '?>';
+        $result = $this->file->set($item_name, $item_data);
 
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)file_write($filecache, $filename, max_size: false, replace_content: true);
+        return $result;
     }
 
-    public function clean()
+    /**
+     * Removes data from cache
+     *
+     * @return void
+     */
+    public function clean(): void
     {
-        $dir = $this->dir;
+        foreach ($this->known_items as $title => $script_name) {
+            $title = $this->prefix . $title;
+            $this->cur_query = "cache->rm('$title')";
+            $this->debug('start');
 
-        if (is_dir($dir)) {
-            if ($dh = opendir($dir)) {
-                while (($file = readdir($dh)) !== false) {
-                    if ($file != "." && $file != "..") {
-                        $filename = $dir . $file;
+            $this->file->delete($title);
 
-                        unlink($filename);
-                    }
-                }
-                closedir($dh);
-            }
+            $this->debug('stop');
+            $this->cur_query = null;
+            $this->num_queries++;
         }
     }
 
-    public function _fetch_from_store()
+    /**
+     * Fetch cache from store
+     *
+     * @return void
+     */
+    public function _fetch_from_store(): void
     {
         $item = null;
         if (!$items = $this->queued_items) {
@@ -76,19 +115,15 @@ class File extends Common
         }
 
         foreach ($items as $item) {
-            $filename = $this->dir . $this->prefix . $item . '.php';
-
-            $this->cur_query = "cache->get('$item')";
+            $item_title = $this->prefix . $item;
+            $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
+
+            $this->data[$item] = $this->file->get($item_title);
+
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
-
-            if (is_file($filename) && is_readable($filename)) {
-                require($filename);
-
-                $this->data[$item] = $filecache;
-            }
         }
     }
 }

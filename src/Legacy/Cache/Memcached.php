@@ -9,14 +9,14 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use MatthiasMullie\Scrapbook\Adapters\SQLite as SQLiteCache;
-use PDO;
+use Memcached as MemcachedClient;
+use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
 
 /**
- * Class Sqlite
+ * Class Memcached
  * @package TorrentPier\Legacy\Cache
  */
-class Sqlite extends Common
+class Memcached extends Common
 {
     /**
      * Currently in usage
@@ -26,11 +26,25 @@ class Sqlite extends Common
     public bool $used = true;
 
     /**
+     * Connection status
+     *
+     * @var bool
+     */
+    public bool $connected = false;
+
+    /**
      * Cache driver name
      *
      * @var string
      */
-    public string $engine = 'SQLite';
+    public string $engine = 'Memcached';
+
+    /**
+     * Cache config
+     *
+     * @var array
+     */
+    private array $cfg;
 
     /**
      * Cache prefix
@@ -40,26 +54,57 @@ class Sqlite extends Common
     private string $prefix;
 
     /**
-     * Adapters\SQLite class
+     * Memcached class
      *
-     * @var SQLiteCache
+     * @var MemcachedClient
      */
-    private SQLiteCache $sqlite;
+    private MemcachedClient $client;
 
     /**
-     * Sqlite constructor
+     * Adapters\Memcached class
      *
-     * @param string $dir
+     * @var MemcachedCache
+     */
+    private MemcachedCache $memcached;
+
+    /**
+     * Memcached constructor
+     *
+     * @param array $cfg
      * @param string $prefix
      */
-    public function __construct(string $dir, string $prefix)
+    public function __construct(array $cfg, string $prefix)
     {
         global $debug;
 
-        $client = new PDO("sqlite:$dir.db");
-        $this->sqlite = new SQLiteCache($client);
+        $this->client = new MemcachedClient();
+        $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
+    }
+
+    /**
+     * Connect to cache
+     *
+     * @return void
+     */
+    private function connect(): void
+    {
+        $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->debug('start');
+
+        if ($this->client->addServer($this->cfg['host'], $this->cfg['port'])) {
+            $this->connected = true;
+        }
+
+        if (!$this->connected) {
+            die("Could not connect to $this->engine server");
+        }
+
+        $this->memcached = new MemcachedCache($this->client);
+
+        $this->debug('stop');
+        $this->cur_query = null;
     }
 
     /**
@@ -70,12 +115,16 @@ class Sqlite extends Common
      */
     public function get(string $name): mixed
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
+
         $name = $this->prefix . $name;
 
         $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
-        $result = $this->sqlite->get($name);
+        $result = $this->memcached->get($name);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -94,12 +143,16 @@ class Sqlite extends Common
      */
     public function set(string $name, mixed $value, int $ttl = 0): bool
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
+
         $name = $this->prefix . $name;
 
         $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
-        $result = $this->sqlite->set($name, $value, $ttl);
+        $result = $this->memcached->set($name, $value, $ttl);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -116,13 +169,17 @@ class Sqlite extends Common
      */
     public function rm(string $name = null): bool
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
+
         $targetMethod = is_string($name) ? 'delete' : 'flush';
         $name = is_string($name) ? ("'" . $this->prefix . $name . "'") : null;
 
         $this->cur_query = "cache->$targetMethod($name)";
         $this->debug('start');
 
-        $result = $this->sqlite->$targetMethod($name);
+        $result = $this->memcached->$targetMethod($name);
 
         $this->debug('stop');
         $this->cur_query = null;

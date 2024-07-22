@@ -18,7 +18,7 @@ class Common
     /**
      * Директория с builder-скриптами (внутри INC_DIR)
      */
-    public $ds_dir = 'datastore';
+    public string $ds_dir = 'datastore';
 
     /**
      * Готовая к употреблению data
@@ -86,8 +86,16 @@ class Common
         return isset($this->data[$title]);
     }
 
-    public function store($item_name, $item_data)
+    /**
+     * Store data into cache
+     *
+     * @param string $item_name
+     * @param mixed $item_data
+     * @return bool
+     */
+    public function store(string $item_name, mixed $item_data): bool
     {
+        return false;
     }
 
     public function rm($items)

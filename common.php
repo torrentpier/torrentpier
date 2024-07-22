@@ -129,24 +129,15 @@ switch ($bb_cfg['datastore_type']) {
     case 'apcu':
         $datastore = new TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
         break;
-
-    case 'memcache':
-        $datastore = new TorrentPier\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
+    case 'memcached':
+        $datastore = new TorrentPier\Legacy\Datastore\Memcached($bb_cfg['cache']['memcached'], $bb_cfg['cache']['prefix']);
         break;
-
     case 'sqlite':
-        $default_cfg = [
-            'db_file_path' => $bb_cfg['cache']['db_dir'] . 'datastore.sqlite.db',
-            'pconnect' => true,
-            'con_required' => true,
-        ];
-        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($default_cfg, $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['db_dir'] . 'datastore', $bb_cfg['cache']['prefix']);
         break;
-
     case 'redis':
         $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
         break;
-
     case 'filecache':
     default:
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
