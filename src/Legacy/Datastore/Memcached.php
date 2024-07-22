@@ -9,21 +9,21 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use Redis as RedisClient;
-use MatthiasMullie\Scrapbook\Adapters\Redis as RedisCache;
+use Memcached as MemcachedClient;
+use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
 
 /**
- * Class Redis
+ * Class Memcached
  * @package TorrentPier\Legacy\Datastore
  */
-class Redis extends Common
+class Memcached extends Common
 {
     /**
      * Cache driver name
      *
      * @var string
      */
-    public string $engine = 'Redis';
+    public string $engine = 'Memcached';
 
     /**
      * Connection status
@@ -47,21 +47,21 @@ class Redis extends Common
     private string $prefix;
 
     /**
-     * Redis class
+     * Memcached class
      *
-     * @var RedisClient
+     * @var MemcachedClient
      */
-    private RedisClient $client;
+    private MemcachedClient $client;
 
     /**
-     * Adapters\Redis class
+     * Adapters\Memcached class
      *
-     * @var RedisCache
+     * @var MemcachedCache
      */
-    private RedisCache $redis;
+    private MemcachedCache $memcached;
 
     /**
-     * Redis constructor
+     * Memcached constructor
      *
      * @param array $cfg
      * @param string $prefix
@@ -70,7 +70,7 @@ class Redis extends Common
     {
         global $debug;
 
-        $this->client = new RedisClient();
+        $this->client = new MemcachedClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->dbg_enabled = $debug->sqlDebugAllowed();
@@ -83,12 +83,10 @@ class Redis extends Common
      */
     private function connect(): void
     {
-        $connectType = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
-
-        $this->cur_query = $connectType . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if ($this->client->$connectType($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->client->addServer($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
@@ -96,7 +94,7 @@ class Redis extends Common
             die("Could not connect to $this->engine server");
         }
 
-        $this->redis = new RedisCache($this->client);
+        $this->memcached = new MemcachedCache($this->client);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -121,7 +119,7 @@ class Redis extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
 
-        $result = $this->redis->set($item_name, $item_data);
+        $result = $this->memcached->set($item_name, $item_data);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -146,7 +144,7 @@ class Redis extends Common
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
 
-            $this->redis->delete($title);
+            $this->memcached->delete($title);
 
             $this->debug('stop');
             $this->cur_query = null;
@@ -176,7 +174,7 @@ class Redis extends Common
             $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
 
-            $this->data[$item] = $this->redis->get($item_title);
+            $this->data[$item] = $this->memcached->get($item_title);
 
             $this->debug('stop');
             $this->cur_query = null;
