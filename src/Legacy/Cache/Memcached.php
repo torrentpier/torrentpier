@@ -174,9 +174,9 @@ class Memcached extends Common
         }
 
         $targetMethod = is_string($name) ? 'delete' : 'flush';
-        $name = is_string($name) ? ("'" . $this->prefix . $name . "'") : null;
+        $name = is_string($name) ? $this->prefix . $name : null;
 
-        $this->cur_query = "cache->$targetMethod($name)";
+        $this->cur_query = "cache->$targetMethod('$name')";
         $this->debug('start');
 
         $result = $this->memcached->$targetMethod($name);

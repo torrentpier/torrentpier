@@ -119,9 +119,9 @@ class File extends Common
     public function rm(string $name = null): bool
     {
         $targetMethod = is_string($name) ? 'delete' : 'flush';
-        $name = is_string($name) ? ("'" . $this->prefix . $name . "'") : null;
+        $name = is_string($name) ? $this->prefix . $name : null;
 
-        $this->cur_query = "cache->$targetMethod($name)";
+        $this->cur_query = "cache->$targetMethod('$name')";
         $this->debug('start');
 
         $result = $this->file->$targetMethod($name);
