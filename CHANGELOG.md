@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.4 🦩 ([belomaxorka](https://github.com/belomaxorka))
+- Supports PHP 8.2 / PHP 8.3 ([belomaxorka](https://github.com/belomaxorka))
 - CWE-502 Fixed: Deserialization of untrusted data ([belomaxorka](https://github.com/belomaxorka))
 - Refactored cache drivers 🗃 [\#1553](https://github.com/torrentpier/torrentpier/pull/1553) ([belomaxorka](https://github.com/belomaxorka))
 - Create tech stack docs (techstack.yml and techstack.md) [\#1521](https://github.com/torrentpier/torrentpier/pull/1521), [\#1522](https://github.com/torrentpier/torrentpier/pull/1522) ([belomaxorka](https://github.com/belomaxorka))
