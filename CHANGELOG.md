@@ -21,6 +21,7 @@
 - Bring back forum description in `viewforum.php` [\#1540](https://github.com/torrentpier/torrentpier/pull/1540) ([belomaxorka](https://github.com/belomaxorka))
 - Some security improvements 🔑 [\#1503](https://github.com/torrentpier/torrentpier/pull/1503), [\#1505](https://github.com/torrentpier/torrentpier/pull/1505) ([belomaxorka](https://github.com/belomaxorka))
 - Some improvements for integrity checker [\#1501](https://github.com/torrentpier/torrentpier/pull/1501) ([belomaxorka](https://github.com/belomaxorka))
+- Some improvements for ratio functionality [\#1552](https://github.com/torrentpier/torrentpier/pull/1552) ([belomaxorka](https://github.com/belomaxorka))
 - Hide in topic: Added country hiding [\#1535](https://github.com/torrentpier/torrentpier/pull/1535) ([belomaxorka](https://github.com/belomaxorka))
 - Hide vote button in topic for guests [\#1507](https://github.com/torrentpier/torrentpier/pull/1507) ([belomaxorka](https://github.com/belomaxorka))
 - Word censor code optimization [\#1537](https://github.com/torrentpier/torrentpier/pull/1537) ([belomaxorka](https://github.com/belomaxorka))
