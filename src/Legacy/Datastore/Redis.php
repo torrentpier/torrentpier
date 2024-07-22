@@ -9,84 +9,157 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use Redis as RedisClient;
+use MatthiasMullie\Scrapbook\Adapters\Redis as RedisCache;
+
 /**
  * Class Redis
  * @package TorrentPier\Legacy\Datastore
  */
 class Redis extends Common
 {
-    public $cfg;
-    public $redis;
-    public $prefix;
-    public $connected = false;
-    public $engine = 'Redis';
+    /**
+     * Cache driver name
+     *
+     * @var string
+     */
+    public string $engine = 'Redis';
 
-    public function __construct($cfg, $prefix = null)
+    /**
+     * Connection status
+     *
+     * @var bool
+     */
+    public bool $connected = false;
+
+    /**
+     * Cache config
+     *
+     * @var array
+     */
+    private array $cfg;
+
+    /**
+     * Cache prefix
+     *
+     * @var string
+     */
+    private string $prefix;
+
+    /**
+     * Redis class
+     *
+     * @var RedisClient
+     */
+    private RedisClient $client;
+
+    /**
+     * Adapters\Redis class
+     *
+     * @var RedisCache
+     */
+    private RedisCache $redis;
+
+    /**
+     * Redis constructor
+     *
+     * @param array $cfg
+     * @param string $prefix
+     */
+    public function __construct(array $cfg, string $prefix)
     {
         global $debug;
 
-        if (!$this->is_installed()) {
-            die("Error: $this->engine extension not installed");
-        }
-
+        $this->client = new RedisClient();
         $this->cfg = $cfg;
-        $this->redis = new \Redis();
-        $this->dbg_enabled = $debug->sqlDebugAllowed();
         $this->prefix = $prefix;
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
-    public function connect()
+    /**
+     * Connect to cache
+     *
+     * @return void
+     */
+    private function connect(): void
     {
-        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+        $connectType = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
 
-        $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->cur_query = $connectType . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->redis->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->client->$connectType($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
-        if (!$this->connected && $this->cfg['con_required']) {
+        if (!$this->connected) {
             die("Could not connect to $this->engine server");
         }
+
+        $this->redis = new RedisCache($this->client);
 
         $this->debug('stop');
         $this->cur_query = null;
     }
 
-    public function store($title, $var)
+    /**
+     * Store data into cache
+     *
+     * @param string $item_name
+     * @param mixed $item_data
+     * @return bool
+     */
+    public function store(string $item_name, mixed $item_data): bool
     {
         if (!$this->connected) {
             $this->connect();
         }
-        $this->data[$title] = $var;
 
-        $this->cur_query = "cache->set('$title')";
+        $this->data[$item_name] = $item_data;
+        $item_name = $this->prefix . $item_name;
+
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
+
+        $result = $this->redis->set($item_name, $item_data);
+
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)$this->redis->set($this->prefix . $title, serialize($var));
+        return $result;
     }
 
-    public function clean()
+    /**
+     * Removes data from cache
+     *
+     * @return void
+     */
+    public function clean(): void
     {
         if (!$this->connected) {
             $this->connect();
         }
+
         foreach ($this->known_items as $title => $script_name) {
+            $title = $this->prefix . $title;
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
+
+            $this->redis->delete($title);
+
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
-
-            $this->redis->del($this->prefix . $title);
         }
     }
 
-    public function _fetch_from_store()
+    /**
+     * Fetch cache from store
+     *
+     * @return void
+     */
+    public function _fetch_from_store(): void
     {
         $item = null;
         if (!$items = $this->queued_items) {
@@ -97,19 +170,17 @@ class Redis extends Common
         if (!$this->connected) {
             $this->connect();
         }
+
         foreach ($items as $item) {
-            $this->cur_query = "cache->get('$item')";
+            $item_title = $this->prefix . $item;
+            $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
+
+            $this->data[$item] = $this->redis->get($item_title);
+
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
-
-            $this->data[$item] = unserialize($this->redis->get($this->prefix . $item));
         }
-    }
-
-    public function is_installed()
-    {
-        return class_exists('Redis');
     }
 }
