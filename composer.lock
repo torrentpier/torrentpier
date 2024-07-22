@@ -275,100 +275,35 @@
             "time": "2023-09-07T13:01:52+00:00"
         },
         {
-            "name": "arokettu/system-clock",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/arokettu/php-system-clock.git",
-                "reference": "e083272437c573b8b84d38aef3b89a1d07daca6f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/php-system-clock/zipball/e083272437c573b8b84d38aef3b89a1d07daca6f",
-                "reference": "e083272437c573b8b84d38aef3b89a1d07daca6f",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0 | ^8.0",
-                "psr/clock": "^1.0"
-            },
-            "conflict": {
-                "arokettu/clock": "< 1.2 | >=2.0 <2.2"
-            },
-            "provide": {
-                "psr/clock-implementation": "1.0"
-            },
-            "require-dev": {
-                "sandfox.dev/code-standard": "^1.2022.06.29",
-                "squizlabs/php_codesniffer": "*",
-                "vimeo/psalm": "^4 | ^5"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "SystemClock.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT-0"
-            ],
-            "authors": [
-                {
-                    "name": "Anton Smirnov",
-                    "email": "sandfox@sandfox.me",
-                    "homepage": "https://sandfox.me/",
-                    "role": "developer"
-                }
-            ],
-            "description": "The smallest PSR-20 implementation",
-            "homepage": "https://sandfox.dev/php/clock/system-clock.html",
-            "keywords": [
-                "clock",
-                "psr-20",
-                "smallest"
-            ],
-            "support": {
-                "chat": "https://gitter.im/arokettu/community",
-                "docs": "https://arokettu-clock.readthedocs.io/en/latest/system-clock.html",
-                "issues": "https://gitlab.com/sandfox/php-system-clock/-/issues",
-                "source": "https://gitlab.com/sandfox/php-system-clock"
-            },
-            "time": "2023-06-02T16:38:36+00:00"
-        },
-        {
             "name": "arokettu/torrent-file",
-            "version": "5.2.2",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/torrent-file.git",
-                "reference": "7cbcc941638df545de8f4b21cc369110b10f92bb"
+                "reference": "96f53d56137efe5828c3eddf492709ebdaf93afd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/torrent-file/zipball/7cbcc941638df545de8f4b21cc369110b10f92bb",
-                "reference": "7cbcc941638df545de8f4b21cc369110b10f92bb",
+                "url": "https://api.github.com/repos/arokettu/torrent-file/zipball/96f53d56137efe5828c3eddf492709ebdaf93afd",
+                "reference": "96f53d56137efe5828c3eddf492709ebdaf93afd",
                 "shasum": ""
             },
             "require": {
                 "arokettu/bencode": "^2.8 | ^3.1 | ^4.0",
-                "arokettu/system-clock": "^2.0",
                 "ext-hash": "*",
                 "nikic/iter": "^2.2",
                 "php": "^8.1",
-                "psr/clock": "^1.0",
                 "psr/event-dispatcher": "^1.0",
                 "symfony/filesystem": "^5.4 | ^6.0 | ^7.0",
                 "symfony/finder": "^5.4 | ^6.0 | ^7.0"
             },
             "require-dev": {
-                "arokettu/clock": "^2.4",
                 "ext-openssl": "*",
                 "jetbrains/phpstorm-attributes": "^1.0",
                 "league/event": "^3.0",
                 "phpunit/phpunit": "^10.5.3",
                 "psy/psysh": "*",
-                "sandfox.dev/code-standard": "^1.2023.12.09",
+                "sandfox.dev/code-standard": "^1.2024.07.05",
                 "squizlabs/php_codesniffer": "*",
                 "vimeo/psalm": "^5.2"
             },
@@ -406,7 +341,7 @@
                 "issues": "https://gitlab.com/sandfox/torrent-file/-/issues",
                 "source": "https://gitlab.com/sandfox/torrent-file"
             },
-            "time": "2024-01-31T20:45:07+00:00"
+            "time": "2024-07-20T04:59:21+00:00"
         },
         {
             "name": "arokettu/unsigned",
@@ -1916,54 +1851,6 @@
                 }
             ],
             "time": "2023-11-12T21:59:55+00:00"
-        },
-        {
-            "name": "psr/clock",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/clock.git",
-                "reference": "e41a24703d4560fd0acb709162f73b8adfc3aa0d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/clock/zipball/e41a24703d4560fd0acb709162f73b8adfc3aa0d",
-                "reference": "e41a24703d4560fd0acb709162f73b8adfc3aa0d",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0 || ^8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Clock\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for reading the clock.",
-            "homepage": "https://github.com/php-fig/clock",
-            "keywords": [
-                "clock",
-                "now",
-                "psr",
-                "psr-20",
-                "time"
-            ],
-            "support": {
-                "issues": "https://github.com/php-fig/clock/issues",
-                "source": "https://github.com/php-fig/clock/tree/1.0.0"
-            },
-            "time": "2022-11-25T14:36:26+00:00"
         },
         {
             "name": "psr/container",
@@ -3792,5 +3679,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
