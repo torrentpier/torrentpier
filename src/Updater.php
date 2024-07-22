@@ -59,7 +59,7 @@ class Updater
     public function __construct()
     {
         $context = stream_context_create(self::STREAM_CONTEXT);
-        $response = file_get_contents(UPDATER_URL, $context);
+        $response = file_get_contents(UPDATER_URL, context: $context);
 
         if ($response !== false) {
             $this->jsonResponse = json_decode(mb_convert_encoding($response, 'UTF-8', mb_detect_encoding($response)), true);
@@ -105,7 +105,7 @@ class Updater
 
         if (!is_file($this->savePath) || $force) {
             $context = stream_context_create(self::STREAM_CONTEXT);
-            $getFile = file_get_contents($downloadLink, $context);
+            $getFile = file_get_contents($downloadLink, context: $context);
             if ($getFile === false) {
                 return false;
             }
