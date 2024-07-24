@@ -1,5 +1,13 @@
 # 📖 Change Log
 
+## [v2.4.5](https://github.com/torrentpier/torrentpier/tree/v2.4.5) (2024-XX-XX)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.4...v2.4.5)
+
+**Merged pull requests:**
+
+- Release 2.4.5 🦕 ([belomaxorka](https://github.com/belomaxorka))
+- Fixed md5() deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.4.4](https://github.com/torrentpier/torrentpier/tree/v2.4.4) (2024-07-22)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.3...v2.4.4)
 
