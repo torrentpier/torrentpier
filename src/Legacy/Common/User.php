@@ -788,7 +788,7 @@ class User
 
             return true;
         } else {
-            if (md5(md5($enteredPassword)) === $userdata['user_password']) {
+            if (hash('md5', hash('md5', $enteredPassword)) === $userdata['user_password']) {
                 // Update old md5 password
                 DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
 
