@@ -172,7 +172,7 @@ function utime()
     return array_sum(explode(' ', microtime()));
 }
 
-function bb_log($msg, $file_name, $return_path = false)
+function bb_log($msg, $file_name = 'logs.log', $return_path = false)
 {
     if (is_array($msg)) {
         $msg = implode(LOG_LF, $msg);
