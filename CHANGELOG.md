@@ -9,6 +9,7 @@
 - Added some new HTML meta-tags [\#1562](https://github.com/torrentpier/torrentpier/pull/1562) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `md5()` deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
 - Increased `USEREMAIL_MAX_LENGTH` [\#1566](https://github.com/torrentpier/torrentpier/pull/1566) ([belomaxorka](https://github.com/belomaxorka))
+- Some improvements for `Updater.php` class [\#1567](https://github.com/torrentpier/torrentpier/pull/1567) ([belomaxorka](https://github.com/belomaxorka))
 
 ## [v2.4.4](https://github.com/torrentpier/torrentpier/tree/v2.4.4) (2024-07-22)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.3...v2.4.4)
