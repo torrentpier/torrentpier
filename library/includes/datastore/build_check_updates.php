@@ -15,7 +15,9 @@ global $bb_cfg;
 
 $data = [];
 
-$updaterDownloader = new \TorrentPier\Updater();
+if (!$updaterDownloader = new \TorrentPier\Updater()) {
+    return;
+}
 $updaterDownloader = $updaterDownloader->getLastVersion();
 
 $getVersion = $updaterDownloader['tag_name'];

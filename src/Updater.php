@@ -67,13 +67,17 @@ class Updater
 
         // Empty JSON result
         if (empty($this->jsonResponse)) {
-            throw new Exception('Empty JSON response');
+            bb_log('Updater | Error | Empty JSON response');
+            return false;
         }
 
         // Response message from GitHub
         if (isset($this->jsonResponse['message'])) {
-            throw new Exception($this->jsonResponse['message']);
+            bb_log('Updater | Error | ' . $this->jsonResponse['message']);
+            return false;
         }
+
+        return true;
     }
 
     /**

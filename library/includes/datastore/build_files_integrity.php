@@ -63,7 +63,9 @@ foreach ($filesList as $file) {
 
 // Restore corrupt files
 if (is_file(RESTORE_CORRUPT_CONFIRM_FILE)) {
-    $buildDownloader = new \TorrentPier\Updater();
+    if (!$buildDownloader = new \TorrentPier\Updater()) {
+        return;
+    }
     if ($buildDownloader->download(INT_DATA_DIR . '/', $bb_cfg['tp_version'])) {
         // Unzip downloaded build file
         $zipArchive = new ZipArchive;
