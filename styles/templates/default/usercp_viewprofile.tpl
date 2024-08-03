@@ -407,9 +407,9 @@ ajax.callback.group_membership = function(data) {
 						<b id="passkey" class="med bold"><!-- IF AUTH_KEY -->{AUTH_KEY}<!-- ELSE -->{L_NOSELECT}<!-- ENDIF --></b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
-					<!-- IF PROFILE_USER || IS_ADMIN --><!-- IF $bb_cfg['ratio_null_enabled'] --><!-- IF not NULLED_RATIO or IS_ADMIN -->
+					<!-- IF SHOW_BT_USERDATA --><!-- IF PROFILE_USER || IS_ADMIN --><!-- IF $bb_cfg['ratio_null_enabled'] --><!-- IF not NULLED_RATIO or IS_ADMIN -->
 					[ <a class="med" href="#" onclick="ajax.index_data('null_ratio'); return false;">{L_BT_NULL_RATIO}</a> ]
-					<!-- ENDIF --><!-- ENDIF --><!-- ENDIF -->
+					<!-- ENDIF --><!-- ENDIF --><!-- ENDIF --><!-- ENDIF -->
 				</td>
 			</tr>
 
@@ -462,12 +462,12 @@ ajax.callback.group_membership = function(data) {
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			<!-- IF PROFILE_USER || IS_ADMIN -->
+			<!-- IF SHOW_BT_USERDATA --><!-- IF PROFILE_USER || IS_ADMIN -->
 			<tr>
 				<th>{L_RELEASER_STAT}</th>
 				<td id="releases_profile">[ <a href="#" class="med" onclick="ajax.index_data('releaser_stats'); return false;">{L_RELEASER_STAT_SHOW}</a> ]</td>
 			</tr>
-			<!-- ENDIF -->
+			<!-- ENDIF --><!-- ENDIF -->
             <!-- IF SHOW_BT_USERDATA -->
 			<tr>
 				<td colspan="2" class="pad_4">
