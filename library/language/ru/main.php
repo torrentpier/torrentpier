@@ -3069,3 +3069,8 @@ $lang['BT_NULL_RATIO_ALERT'] = "Внимание!\n\nВы уверены, что
 $lang['BT_NULL_RATIO_AGAIN'] = 'Вы уже сбросили свой рейтинг!';
 $lang['BT_NULL_RATIO_NOT_NEEDED'] = 'У вас хороший рейтинг. Сброс возможен только при соотношении меньше %s';
 $lang['BT_NULL_RATIO_SUCCESS'] = 'Рейтинг успешно сброшен!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';
