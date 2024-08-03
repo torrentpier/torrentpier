@@ -3073,3 +3073,8 @@ $lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset you
 $lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
 $lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
 $lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';
