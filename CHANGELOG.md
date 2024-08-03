@@ -7,6 +7,7 @@
 
 - Release 2.4.5 🦕 ([belomaxorka](https://github.com/belomaxorka))
 - Added some new HTML meta-tags [\#1562](https://github.com/torrentpier/torrentpier/pull/1562) ([belomaxorka](https://github.com/belomaxorka))
+- Added showing releaser stats in profile [\#1568](https://github.com/torrentpier/torrentpier/pull/1568) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `md5()` deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
 - Increased `USEREMAIL_MAX_LENGTH` [\#1566](https://github.com/torrentpier/torrentpier/pull/1566) ([belomaxorka](https://github.com/belomaxorka))
 
