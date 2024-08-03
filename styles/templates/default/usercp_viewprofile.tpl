@@ -130,29 +130,31 @@ ajax.callback.group_membership = function(data) {
 </script>
 <!-- ENDIF / IS_AM -->
 
-<!-- IF #RATIO_ENABLED -->
-<!-- IF TRAF_STATS || $bb_cfg['ratio_null_enabled'] -->
 <script type="text/javascript">
-ajax.index_data = function(mode) {
-	ajax.exec({
-		action  : 'index_data',
-		mode    : mode,
-		user_id : {PROFILE_USER_ID}
-	});
-};
-ajax.callback.index_data = function(data) {
-	if (data.mode === 'null_ratio') {
-		return;
-	}
-	$('#traf-stats-tbl').html(data.html);
-	$('#bt_user_ratio').html(data.user_ratio);
-	$('#traf-stats-span').hide();
-	$('#traf-stats-tbl').show();
-	$('#bt_user_ratio').show();
-};
+    ajax.index_data = function(mode) {
+        ajax.exec({
+            action: 'index_data',
+            mode: mode,
+            user_id: {PROFILE_USER_ID}
+        });
+    };
+    ajax.callback.index_data = function(data) {
+        switch (data.mode) {
+            case 'null_ratio':
+                break;
+            case 'releaser_stats':
+                $('#releases_profile').html(data.html);
+                break;
+            case 'get_traf_stats':
+                $('#traf-stats-tbl').html(data.html);
+                $('#bt_user_ratio').html(data.user_ratio);
+                $('#traf-stats-span').hide();
+                $('#traf-stats-tbl').show();
+                $('#bt_user_ratio').show();
+                break;
+        }
+    };
 </script>
-<!-- ENDIF -->
-<!-- ENDIF -->
 
 <!-- IF SHOW_PASSKEY -->
 <script type="text/javascript">
@@ -458,6 +460,12 @@ ajax.callback.index_data = function(data) {
 			<tr>
 				<th>{L_AGE}:</th>
 				<td><b>{AGE}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			<!-- IF PROFILE_USER || IS_ADMIN -->
+			<tr>
+				<th>{L_RELEASER_STAT}</th>
+				<td id="releases_profile">[ <a href="#" class="med" onclick="ajax.index_data('releaser_stats'); return false;">{L_RELEASER_STAT_SHOW}</a> ]</td>
 			</tr>
 			<!-- ENDIF -->
             <!-- IF SHOW_BT_USERDATA -->
