@@ -18,6 +18,3 @@ if ($bb_cfg['prune_enable']) {
         \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], (TIMENOW - 86400 * $row['prune_days']));
     }
 }
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

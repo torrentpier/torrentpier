@@ -21,6 +21,3 @@ if (is_file(SITEMAP_DIR . '/sitemap.xml')) {
         $map->sendSitemap($source_link, $map_link);
     }
 }
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

@@ -23,6 +23,3 @@ DB()->query("
 ");
 
 DB()->query("TRUNCATE TABLE " . BUF_LAST_SEEDER);
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

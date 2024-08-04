@@ -83,6 +83,3 @@ DB()->query("
 		up_bonus_today       = 0,
 		points_today         = 0
 ");
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

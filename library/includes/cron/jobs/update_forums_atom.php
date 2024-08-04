@@ -33,6 +33,3 @@ foreach ($forums_data as $forum_data) {
         \TorrentPier\Legacy\Atom::update_forum_feed($forum_data['forum_id'], $forum_data);
     }
 }
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

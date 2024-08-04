@@ -38,6 +38,3 @@ if ($pm_days_keep !== 0) {
         $start_id += $per_cycle;
     }
 }
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

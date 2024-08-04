@@ -17,6 +17,3 @@ DB()->query("
 	DELETE FROM " . BB_SEARCH . "
 	WHERE search_time < $search_results_expire
 ");
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

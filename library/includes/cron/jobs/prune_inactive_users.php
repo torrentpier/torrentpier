@@ -53,6 +53,3 @@ while (true) {
         break;
     }
 }
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);

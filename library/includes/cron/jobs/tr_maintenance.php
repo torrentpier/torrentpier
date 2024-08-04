@@ -60,6 +60,3 @@ if ($dead_tor_sql && $attach_sql) {
 		WHERE topic_id IN($dead_tor_sql)
 	");
 }
-
-// Cron completed
-define('CRONJOB_COMPLETED', true);
