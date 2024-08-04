@@ -462,12 +462,12 @@ ajax.callback.group_membership = function(data) {
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			<!-- IF SHOW_BT_USERDATA --><!-- IF PROFILE_USER || IS_ADMIN -->
+			<!-- IF SHOW_BT_USERDATA -->
 			<tr>
 				<th>{L_RELEASER_STAT}</th>
 				<td id="releases_profile">[ <a href="#" class="med" onclick="ajax.index_data('releaser_stats'); return false;">{L_RELEASER_STAT_SHOW}</a> ]</td>
 			</tr>
-			<!-- ENDIF --><!-- ENDIF -->
+			<!-- ENDIF -->
             <!-- IF SHOW_BT_USERDATA -->
 			<tr>
 				<td colspan="2" class="pad_4">
