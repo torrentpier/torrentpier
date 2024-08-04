@@ -126,13 +126,14 @@ switch ($mode) {
         $user_id = (int)$this->request['user_id'];
 
         $sql = "
-				SELECT COUNT(tor.poster_id) as total_releases, SUM(tor.size) as total_size, tor.poster_id, SUM(tor.complete_count) as total_complete, SUM(ad.download_count) as total_dl_count
-				FROM            " . BB_BT_TORRENTS . " tor
-					LEFT JOIN    " . BB_USERS . " u ON(u.user_id = tor.poster_id)
-					LEFT JOIN    " . BB_ATTACHMENTS_DESC . " ad ON(ad.attach_id = tor.attach_id)
-					LEFT JOIN    " . BB_BT_USERS . " ut ON(ut.user_id = tor.poster_id)
+				SELECT COUNT(tor.poster_id) as total_releases, SUM(tor.size) as total_size, SUM(tor.complete_count) as total_complete, SUM(ad.download_count) as total_dl_count
+				FROM " . BB_BT_TORRENTS . " tor
+					LEFT JOIN " . BB_USERS . " u ON(u.user_id = tor.poster_id)
+					LEFT JOIN " . BB_ATTACHMENTS_DESC . " ad ON(ad.attach_id = tor.attach_id)
+					LEFT JOIN " . BB_BT_USERS . " ut ON(ut.user_id = tor.poster_id)
 				WHERE u.user_id = $user_id
 				GROUP BY tor.poster_id
+				LIMIT 1
 			";
 
         $total_releases_size = $total_releases = $total_releases_completed = $total_releases_downloaded = 0;
