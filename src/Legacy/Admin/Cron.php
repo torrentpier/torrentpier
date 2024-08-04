@@ -37,6 +37,11 @@ class Cron
             $job_script = INC_DIR . '/cron/jobs/' . $job;
             require($job_script);
         }
+
+        if (!defined('CRONJOB_COMPLETED') || !CRONJOB_COMPLETED) {
+            return;
+        }
+
         DB()->query("
 			UPDATE " . BB_CRON . " SET
 				last_run = NOW(),

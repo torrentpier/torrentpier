@@ -90,6 +90,10 @@ foreach ($cron_jobs as $job) {
             }
         }
 
+        if (!defined('CRONJOB_COMPLETED') || !CRONJOB_COMPLETED) {
+            return;
+        }
+
         DB()->query("
 			UPDATE " . BB_CRON . " SET
 				last_run = NOW(),
