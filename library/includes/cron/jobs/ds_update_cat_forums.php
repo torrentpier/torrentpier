@@ -12,3 +12,6 @@ if (!defined('BB_ROOT')) {
 }
 
 $datastore->update('cat_forums');
+
+// Cron completed
+define('CRONJOB_COMPLETED', true);

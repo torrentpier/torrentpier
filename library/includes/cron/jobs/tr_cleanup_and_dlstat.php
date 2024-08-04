@@ -158,3 +158,6 @@ DB()->query("
 	" . NEW_BB_BT_LAST_USERSTAT . " TO " . BB_BT_LAST_USERSTAT . "
 ");
 DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_USERSTAT . ", " . OLD_BB_BT_LAST_USERSTAT);
+
+// Cron completed
+define('CRONJOB_COMPLETED', true);

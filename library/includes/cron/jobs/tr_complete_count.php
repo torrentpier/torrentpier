@@ -64,3 +64,6 @@ if ($bb_cfg['ocelot']['enabled']) {
     // Drop tmp table
     DB()->query("DROP TEMPORARY TABLE tmp_complete_count");
 }*/
+
+// Cron completed
+define('CRONJOB_COMPLETED', true);

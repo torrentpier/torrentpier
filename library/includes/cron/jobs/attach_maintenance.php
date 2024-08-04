@@ -211,3 +211,6 @@ if ($debug_mode) {
 DB()->query("DROP TEMPORARY TABLE $tmp_attach_tbl");
 
 unset($fix_errors, $debug_mode);
+
+// Cron completed
+define('CRONJOB_COMPLETED', true);

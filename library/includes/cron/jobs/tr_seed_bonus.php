@@ -69,3 +69,6 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 
     DB()->query("DROP TEMPORARY TABLE IF EXISTS tmp_bonus");
 }
+
+// Cron completed
+define('CRONJOB_COMPLETED', true);
