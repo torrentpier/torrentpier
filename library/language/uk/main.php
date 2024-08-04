@@ -25,7 +25,7 @@ $lang['POSTS_SHORT'] = 'Повідомлення';
 $lang['POSTED'] = 'Опубліковано';
 $lang['USERNAME'] = 'Ім\'я користувача';
 $lang['PASSWORD'] = 'Пароль';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
+$lang['PASSWORD_SHOW_BTN'] = 'Показати пароль';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'ПП';
 $lang['AUTHOR'] = 'Автор';
@@ -60,8 +60,8 @@ $lang['ENABLED'] = 'Увімкнено';
 $lang['DISABLED'] = 'Вимкнено';
 $lang['ERROR'] = 'Помилка';
 $lang['SELECT_ACTION'] = 'Виберіть дію';
-$lang['CLEAR'] = 'Clear';
-$lang['MOVE_TO_TOP'] = 'Move to top';
+$lang['CLEAR'] = 'Очистити';
+$lang['MOVE_TO_TOP'] = 'На початок';
 $lang['UNKNOWN'] = 'Не вказана';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
@@ -130,7 +130,7 @@ $lang['ONLINE_ADMIN'] = 'Адміністратор';
 $lang['ONLINE_MOD'] = 'Модератор';
 $lang['ONLINE_GROUP_MEMBER'] = 'Учасник груп';
 
-$lang['CANT_EDIT_IN_DEMO_MODE'] = 'This action can not be performed in demo mode!';
+$lang['CANT_EDIT_IN_DEMO_MODE'] = 'Цю дію не можна виконати в демо-режимі!';
 
 $lang['CURRENT_TIME'] = 'Поточний час: <span class="tz_time">%s</span>';
 
@@ -238,8 +238,8 @@ $lang['RULES_VOTE_CAN'] = 'Ви <b>можете</b> голосувати в оп
 $lang['RULES_VOTE_CANNOT'] = 'Ви <b>не можете</b> голосувати в опитуваннях на форумі';
 $lang['RULES_MODERATE'] = 'Ви <b>можете</b> модерувати цей форум';
 
-$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
-$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
+$lang['NO_TOPICS_POST_ONE'] = 'На форумі поки немає повідомлень.<br />Натисніть на <b>Нову тему</b>, і Ваше повідомлення буде першим.';
+$lang['NO_RELEASES_POST_ONE'] = 'У цьому форумі ще немає випусків<br />Натисніть на значок <b>Новий Випуск</b>, і ваш випуск буде першим.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'Перегляд теми';
@@ -689,7 +689,7 @@ $lang['ORDER'] = 'Сортувати';
 // Thanks
 $lang['THANK_TOPIC'] = 'Vote for this topic';
 $lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
-$lang['LAST_LIKES'] = 'Last votes';
+$lang['LAST_LIKES'] = 'Останній голос';
 $lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
 $lang['NO_LIKES'] = 'Nobody gave a vote yet';
 $lang['LIKE_ALREADY'] = 'You already voted this topic';
@@ -1423,7 +1423,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Останній сід';
 $lang['BT_SORT_FORUM'] = 'Форум';
 $lang['SIZE'] = 'Розмір';
 $lang['PIECE_LENGTH'] = 'Розмір блоку';
-$lang['COMPLETED'] = 'Завантажено';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Додано';
 $lang['DELETE_TORRENT'] = 'Видалити торрент';
 $lang['DELETE_MOVE_TORRENT'] = 'Видалити та перемістити тему';
