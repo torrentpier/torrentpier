@@ -32,13 +32,14 @@ class Cron
             bb_die('Could not obtain cron script');
         }
 
+        $cronjob_completed = false;
         while ($row = DB()->sql_fetchrow($result)) {
             $job = $row['cron_script'];
             $job_script = INC_DIR . '/cron/jobs/' . $job;
             require($job_script);
         }
 
-        if (!defined('CRONJOB_COMPLETED') || !CRONJOB_COMPLETED) {
+        if (!$cronjob_completed) {
             return;
         }
 

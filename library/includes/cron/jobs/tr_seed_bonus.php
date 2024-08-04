@@ -71,4 +71,4 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 }
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

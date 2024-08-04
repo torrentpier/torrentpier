@@ -14,4 +14,4 @@ if (!defined('BB_ROOT')) {
 $datastore->update('stats');
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

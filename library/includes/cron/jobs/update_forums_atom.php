@@ -35,4 +35,4 @@ foreach ($forums_data as $forum_data) {
 }
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

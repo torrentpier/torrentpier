@@ -46,6 +46,7 @@ foreach ($cron_jobs as $job) {
     if (is_file($job_script)) {
         $cron_start_time = utime();
         $cron_runtime_log = [];
+        $cronjob_completed = false;
         $cron_write_log = (CRON_LOG_ENABLED && (CRON_FORCE_LOG || $job['log_enabled'] >= 1));
         $cron_sql_log_file = CRON_LOG_DIR . '/SQL-' . basename($job['cron_script']);
 
@@ -90,7 +91,7 @@ foreach ($cron_jobs as $job) {
             }
         }
 
-        if (!defined('CRONJOB_COMPLETED') || !CRONJOB_COMPLETED) {
+        if (!$cronjob_completed) {
             return;
         }
 

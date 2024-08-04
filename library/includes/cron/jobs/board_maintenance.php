@@ -66,4 +66,4 @@ $datastore->update('check_updates');
 $datastore->update('files_integrity');
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

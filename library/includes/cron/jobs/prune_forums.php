@@ -20,4 +20,4 @@ if ($bb_cfg['prune_enable']) {
 }
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

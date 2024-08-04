@@ -35,4 +35,4 @@ DB()->query("DELETE buf FROM " . BUF_TOPIC_VIEW . " buf");
 DB()->unlock();
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

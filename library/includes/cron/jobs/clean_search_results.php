@@ -19,4 +19,4 @@ DB()->query("
 ");
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

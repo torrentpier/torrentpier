@@ -160,4 +160,4 @@ DB()->query("
 DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_USERSTAT . ", " . OLD_BB_BT_LAST_USERSTAT);
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

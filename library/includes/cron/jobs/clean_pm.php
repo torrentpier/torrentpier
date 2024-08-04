@@ -40,4 +40,4 @@ if ($pm_days_keep !== 0) {
 }
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

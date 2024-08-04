@@ -23,4 +23,4 @@ if (is_file(SITEMAP_DIR . '/sitemap.xml')) {
 }
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

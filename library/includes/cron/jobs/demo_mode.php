@@ -44,4 +44,4 @@ foreach (file($dump_path) as $line) {
 }
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;

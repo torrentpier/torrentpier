@@ -22,4 +22,4 @@ if ($bb_cfg['topic_moved_days_keep']) {
 }
 
 // Cron completed
-define('CRONJOB_COMPLETED', true);
+$cronjob_completed = true;
