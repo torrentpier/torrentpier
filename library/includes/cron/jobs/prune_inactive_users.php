@@ -55,4 +55,4 @@ while (true) {
 }
 
 // Cron completed
-$cronjob_completed = true;
+define('CRONJOB_COMPLETED', true);

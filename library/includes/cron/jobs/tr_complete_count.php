@@ -66,4 +66,4 @@ if ($bb_cfg['ocelot']['enabled']) {
 }*/
 
 // Cron completed
-$cronjob_completed = true;
+define('CRONJOB_COMPLETED', true);

@@ -62,4 +62,4 @@ if ($dead_tor_sql && $attach_sql) {
 }
 
 // Cron completed
-$cronjob_completed = true;
+define('CRONJOB_COMPLETED', true);

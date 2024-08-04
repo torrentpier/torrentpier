@@ -193,4 +193,4 @@ if ($bb_cfg['torhelp_enabled']) {
 DB()->expect_slow_query(10);
 
 // Cron completed
-$cronjob_completed = true;
+define('CRONJOB_COMPLETED', true);

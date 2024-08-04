@@ -25,4 +25,4 @@ DB()->query("
 DB()->query("TRUNCATE TABLE " . BUF_LAST_SEEDER);
 
 // Cron completed
-$cronjob_completed = true;
+define('CRONJOB_COMPLETED', true);

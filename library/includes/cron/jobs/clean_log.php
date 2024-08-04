@@ -18,4 +18,4 @@ if ($log_days_keep !== 0) {
 }
 
 // Cron completed
-$cronjob_completed = true;
+define('CRONJOB_COMPLETED', true);
