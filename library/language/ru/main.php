@@ -1642,16 +1642,16 @@ $lang['DELETE_POST_TXTB'] = '[x]';
 $lang['MODERATE_POST_TXTB'] = '[m]';
 $lang['SEND_PM_TXTB'] = '[ЛС]';
 
-$lang['DECLENSION']['REPLIES'] = ['ответ', 'ответа'];
-$lang['DECLENSION']['TIMES'] = ['раз', 'раза'];
+$lang['DECLENSION']['REPLIES'] = ['ответ', 'ответа', 'ответов'];
+$lang['DECLENSION']['TIMES'] = ['раз', 'раза', 'раз'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
-    'seconds' => ['секунда', 'секунды'],
-    'minutes' => ['минута', 'минуты'],
-    'hours' => ['час', 'часа'],
-    'mday' => ['день', 'дня'],
-    'mon' => ['месяц', 'месяца'],
-    'year' => ['год', 'года'],
+    'seconds' => ['секунда', 'секунды', 'секунд'],
+    'minutes' => ['минута', 'минуты', 'минут'],
+    'hours' => ['час', 'часа', 'часов'],
+    'mday' => ['день', 'дня', 'дней'],
+    'mon' => ['месяц', 'месяца', 'месяцев'],
+    'year' => ['год', 'года', 'лет'],
 ];
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
