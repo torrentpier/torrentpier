@@ -1423,7 +1423,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Последний сид';
 $lang['BT_SORT_FORUM'] = 'Форум';
 $lang['SIZE'] = 'Размер';
 $lang['PIECE_LENGTH'] = 'Размер блока';
-$lang['COMPLETED'] = 'Скачан';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Добавлен';
 $lang['DELETE_TORRENT'] = 'Удалить торрент';
 $lang['DELETE_MOVE_TORRENT'] = 'Удалить и перенести топик';
@@ -3071,6 +3071,6 @@ $lang['BT_NULL_RATIO_NOT_NEEDED'] = 'У вас хороший рейтинг. С
 $lang['BT_NULL_RATIO_SUCCESS'] = 'Рейтинг успешно сброшен!';
 
 // Releaser stats
-$lang['RELEASER_STAT_SIZE'] = 'Total size:';
-$lang['RELEASER_STAT'] = 'Releaser stats:';
-$lang['RELEASER_STAT_SHOW'] = 'Show stats';
+$lang['RELEASER_STAT_SIZE'] = 'Общий размер:';
+$lang['RELEASER_STAT'] = 'Статистика релизера:';
+$lang['RELEASER_STAT_SHOW'] = 'Показать статистику';
