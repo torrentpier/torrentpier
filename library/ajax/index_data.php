@@ -139,14 +139,14 @@ switch ($mode) {
         $total_releases_size = $total_releases = $total_releases_completed = $total_releases_downloaded = 0;
         if ($row = DB()->fetch_row($sql)) {
             $total_releases = $row['total_releases'];
-            $total_releases_size = humn_size($row['total_size']);
+            $total_releases_size = $row['total_size'];
             $total_releases_downloaded = $row['total_dl_count'];
             $total_releases_completed = $row['total_complete'];
         }
 
         $html = '[
             ' . $lang['RELEASES'] . ': <span class="seed bold">' . $total_releases . '</span> |
-            ' . $lang['RELEASER_STAT_SIZE'] . ' <span class="seed bold">' . $total_releases_size . '</span> |
+            ' . $lang['RELEASER_STAT_SIZE'] . ' <span class="seed bold">' . humn_size($total_releases_size) . '</span> |
             ' . $lang['DOWNLOADED'] . ': <span title="' . $lang['COMPLETED'] . ':&nbsp;' . declension((int)$total_releases_completed, 'times') . '" class="seed bold">' . declension((int)$total_releases_downloaded, 'times') . '</span> ]';
         break;
 
