@@ -1,0 +1,88 @@
+<?php
+/**
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+define('ROOT', __DIR__ . '/');
+
+/**
+ * Colored console output
+ *
+ * @param string $str
+ * @param string $type
+ * @return void
+ */
+function out(string $str, string $type = 'info'): void
+{
+    echo match ($type) {
+        'error' => "\033[31m$str \033[0m\n",
+        'success' => "\033[32m$str \033[0m\n",
+        'warning' => "\033[33m$str \033[0m\n",
+        'info' => "\033[36m$str \033[0m\n",
+        default => $str,
+    };
+}
+
+/**
+ * @param string $cmd
+ * @param $input
+ * @return false|string
+ */
+function runProcess(string $cmd, $input = null): bool|string
+{
+    $descriptorSpec = [
+        0 => ['pipe', 'r'],
+        1 => ['pipe', 'w'],
+        2 => ['pipe', 'w'],
+    ];
+    $process = proc_open(
+        $cmd,
+        $descriptorSpec,
+        $pipes
+    );
+    if (!is_resource($process)) {
+        return 'ERROR - Could not start subprocess.';
+    }
+    $output = $error = '';
+    fwrite($pipes[0], $input);
+    fclose($pipes[0]);
+
+    $output = stream_get_contents($pipes[1]);
+    fclose($pipes[1]);
+
+    $error = stream_get_contents($pipes[2]);
+    fclose($pipes[2]);
+    proc_close($process);
+    if (strlen($error)) {
+        return 'ERROR - ' . $error;
+    }
+
+    return $output;
+}
+
+// Check composer installation
+if (!is_file(ROOT . 'vendor/autoload.php')) {
+    out('- Hmm, it seems there are no Composer dependencies');
+    // Downloading composer
+    if (!is_file(ROOT . 'composer.phar')) {
+        out('- Downloading Composer');
+        copy('https://getcomposer.org/installer', ROOT . 'composer-setup.php');
+        $output = runProcess('php composer-setup.php');
+        unlink('composer-setup.php');
+        out($output);
+    }
+    // Installing dependencies
+    if (is_file(ROOT . 'composer.phar')) {
+        out('- Installing dependencies...');
+        $output = runProcess('php ' . ROOT . 'composer.phar install');
+        out($output);
+    } else {
+        out('ERROR - Composer not found');
+    }
+}
+
+exit;
