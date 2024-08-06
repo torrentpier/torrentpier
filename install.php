@@ -50,7 +50,7 @@ function runProcess(string $cmd, string $input = null): void
     $process = proc_open($cmd, $descriptorSpec, $pipes);
 
     if (!is_resource($process)) {
-        echo "ERROR - Could not start subprocess.\n";
+        out('- Could not start subprocess', 'error');
         return;
     }
 
@@ -93,13 +93,13 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
         }
     }
     // Installing dependencies
-    if (is_file(ROOT . 'composer.phar')) {
-        out('- Installing dependencies...');
-        runProcess('php ' . ROOT . 'composer.phar install --no-interaction --no-ansi');
-        out('- Completed!');
-    } else {
+    if (!is_file(ROOT . 'composer.phar')) {
         out('- composer.phar not found', 'error');
+        exit;
     }
+    out('- Installing dependencies...');
+    runProcess('php ' . ROOT . 'composer.phar install --no-interaction --no-ansi');
+    out('- Completed!');
 }
 
 // Preparing ENV
@@ -107,3 +107,6 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
     copy(ROOT . '.env.example', ROOT . '.env');
     out('- Environment file created!', 'success');
 }
+
+// Editing ENV file
+
