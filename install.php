@@ -102,5 +102,5 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
 
 // Preparing ENV
 if (is_file(ROOT . '.env.example')) {
-    rename(ROOT . '.env.example', ROOT . '.env');
+    copy(ROOT . '.env.example', ROOT . '.env');
 }
