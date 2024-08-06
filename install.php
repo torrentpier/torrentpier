@@ -101,6 +101,7 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
 }
 
 // Preparing ENV
-if (is_file(ROOT . '.env.example')) {
+if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
     copy(ROOT . '.env.example', ROOT . '.env');
+    out('- Environment file created...');
 }
