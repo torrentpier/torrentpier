@@ -78,6 +78,9 @@ function runProcess(string $cmd, string $input = null): void
     proc_close($process);
 }
 
+// Welcoming message
+out("- TorrentPier Installer\n");
+
 // Check composer installation
 if (!is_file(ROOT . 'vendor/autoload.php')) {
     out('- Hmm, it seems there are no Composer dependencies');
@@ -105,8 +108,9 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
 // Preparing ENV
 if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
     copy(ROOT . '.env.example', ROOT . '.env');
-    out('- Environment file created!', 'success');
+    out("- Environment file created!\n", 'success');
 }
 
 // Editing ENV file
-
+out('--- Configuring TorrentPier ---');
+$text = readline('Question: ');
