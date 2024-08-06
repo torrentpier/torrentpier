@@ -85,9 +85,11 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
     if (!is_file(ROOT . 'composer.phar')) {
         out('- Downloading Composer');
         copy('https://getcomposer.org/installer', ROOT . 'composer-setup.php');
+        out('- Composer success downloaded!', 'success');
         runProcess('php ' . ROOT . 'composer-setup.php');
         if (is_file(ROOT . 'composer-setup.php')) {
             unlink(ROOT . 'composer-setup.php');
+            out('- Composer installation file successfully removed!', 'success');
         }
     }
     // Installing dependencies
@@ -103,5 +105,5 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
 // Preparing ENV
 if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
     copy(ROOT . '.env.example', ROOT . '.env');
-    out('- Environment file created...');
+    out('- Environment file created!', 'success');
 }
