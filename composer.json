@@ -37,7 +37,7 @@
   },
   "require": {
     "php": "^8.1 | ^8.2 | ^8.3 | ^8.4",
-    "arokettu/random-polyfill": "dev-master",
+    "arokettu/random-polyfill": "1.0.2",
     "arokettu/bencode": "^4.1.0",
     "arokettu/monsterid": "dev-master",
     "arokettu/torrent-file": "^5.2.1",
