@@ -111,6 +111,43 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
     out("- Environment file created!\n", 'success');
 }
 
+function editEnvFile()
+{
+    $envFile = ROOT . '.env';
+
+    if (!file_exists($envFile)) {
+        out('- .env file not found', 'error');
+        exit;
+    }
+
+    $envContent = file_get_contents($envFile);
+    $envLines = explode("\n", $envContent);
+
+    $editedLines = [];
+    foreach ($envLines as $line) {
+        if (trim($line) !== '' && !str_starts_with($line, '#')) {
+            $parts = explode('=', $line, 2);
+            $key = trim($parts[0]);
+            $value = isset($parts[1]) ? trim($parts[1]) : '';
+
+            out("Current value of $key: $value", 'success');
+            out("Enter a new value for $key (or leave empty to not change): ");
+            $newValue = readline();
+
+            if (!empty($newValue)) {
+                $line = "$key=$newValue";
+            }
+
+            $editedLines[] = $line;
+        }
+    }
+
+    $newEnvContent = implode("\n", $editedLines);
+    if (file_put_contents($envFile, $newEnvContent)) {
+        out('- File .env successfully updated!', 'success');
+    }
+}
+
 // Editing ENV file
 out('--- Configuring TorrentPier ---');
-$text = readline('Question: ');
+editEnvFile();
