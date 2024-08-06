@@ -99,3 +99,8 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
         out('- composer.phar not found', 'error');
     }
 }
+
+// Preparing ENV
+if (is_file(ROOT . '.env.example')) {
+    rename(ROOT . '.env.example', ROOT . '.env');
+}
