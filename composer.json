@@ -36,9 +36,10 @@
     "forum": "https://torrentpier.com"
   },
   "require": {
-    "php": "^8.1",
+    "php": "^8.1 | ^8.2 | ^8.3 | ^8.4",
+    "arokettu/random-polyfill": "1.0.2",
     "arokettu/bencode": "^4.1.0",
-    "arokettu/monsterid": "^4.0",
+    "arokettu/monsterid": "dev-master",
     "arokettu/torrent-file": "^5.2.1",
     "bugsnag/bugsnag": "^v3.29.1",
     "claviska/simpleimage": "^4.0",
@@ -53,7 +54,11 @@
     "matthiasmullie/scrapbook": "^1.5",
     "monolog/monolog": "^3.4",
     "samdark/sitemap": "2.4.1",
-    "symfony/mailer": "^6.3",
+    "symfony/finder": "^6.4",
+    "symfony/filesystem": "^6.4",
+    "symfony/event-dispatcher": "^6.4",
+    "symfony/mime": "^6.4",
+    "symfony/mailer": "^6.4",
     "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {
@@ -71,6 +76,6 @@
       "php-http/discovery": true
     }
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true
 }
