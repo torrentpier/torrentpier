@@ -171,5 +171,43 @@ if (is_file(ROOT . '.env')) {
 }
 
 if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
-    out("--- Connection to MySQL server ---\n", 'info');
+    out("--- Checking environment settings ---\n", 'info');
+    // Connecting to database
+    out("- Trying connecting to MySQL", 'info');
+
+    $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, port: $DB_PORT);
+    if ($conn->connect_error) {
+        out("- Connection failed: $conn->connect_error", 'error');
+        exit;
+    }
+
+    // Creating database if not exist
+    if (!$conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE")) {
+        out("- Cannot create database: $DB_DATABASE", 'error');
+        exit;
+    }
+    $conn->select_db($DB_DATABASE);
+
+    // Checking SQL dump
+    $dumpPath = ROOT . 'install/sql/mysql.sql';
+    if (!is_file($dumpPath) || !is_readable($dumpPath)) {
+        out('- SQL dump file not found / not readable', 'error');
+        exit;
+    }
+
+    // Inserting SQL dump
+    $tempLine = '';
+    foreach (file($dumpPath) as $line) {
+        if (str_starts_with($line, '--') || $line == '') {
+            continue;
+        }
+
+        $tempLine .= $line;
+        if (str_ends_with(trim($line), ';')) {
+            if (!$conn->query($tempLine)) {
+                out("- Error performing query: $tempLine", 'warning');
+            }
+            $tempLine = '';
+        }
+    }
 }
