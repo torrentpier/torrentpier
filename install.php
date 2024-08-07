@@ -85,6 +85,7 @@ out("- TorrentPier Installer\n", 'info');
 // Check composer installation
 if (!is_file(ROOT . 'vendor/autoload.php')) {
     out('- Hmm, it seems there are no Composer dependencies', 'info');
+
     // Downloading composer
     if (!is_file(ROOT . 'composer.phar')) {
         out('- Downloading Composer...', 'info');
@@ -96,14 +97,16 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
             out("- Composer installation file successfully removed!\n", 'success');
         }
     }
+
     // Installing dependencies
-    if (!is_file(ROOT . 'composer.phar')) {
+    if (is_file(ROOT . 'composer.phar')) {
+        out('- Installing dependencies...', 'info');
+        runProcess('php ' . ROOT . 'composer.phar install --no-interaction --no-ansi');
+        out("- Completed!\n", 'success');
+    } else {
         out('- composer.phar not found', 'error');
         exit;
     }
-    out('- Installing dependencies...', 'info');
-    runProcess('php ' . ROOT . 'composer.phar install --no-interaction --no-ansi');
-    out("- Completed!\n", 'success');
 }
 
 // Preparing ENV
