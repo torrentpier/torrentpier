@@ -121,7 +121,7 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
 
 // Editing ENV file
 $DB_HOST = '';
-$DB_PORT = '';
+$DB_PORT = 3306;
 $DB_DATABASE = '';
 $DB_USERNAME = '';
 $DB_PASSWORD = '';
@@ -163,11 +163,13 @@ if (is_file(ROOT . '.env')) {
 
     $newEnvContent = implode("\n", $editedLines);
     if (file_put_contents($envFile, $newEnvContent)) {
-        out('- TorrentPier successfully configured!', 'success');
+        out("- TorrentPier successfully configured!\n", 'success');
     }
 } else {
     out('- Environment file not found', 'error');
     exit;
 }
 
-if ()
+if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
+    out("--- Connection to MySQL server ---\n", 'info');
+}
