@@ -19,6 +19,12 @@ if (isset($argv[1])) {
     parse_str($argv[1], $arg);
 }
 
+// Check readline extension
+if (!extension_loaded('readline')) {
+    out('- ext-readline not found. Check out PHP instance', 'error');
+    exit;
+}
+
 /**
  * Colored console output
  *
@@ -180,12 +186,21 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     // Connecting to database
     out("- Trying connect to MySQL...", 'info');
 
-    $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, port: $DB_PORT);
+    // Checking mysqli extension installed
+    if (!extension_loaded('mysqli')) {
+        out('- ext-mysqli not found. Check out php.ini file', 'error');
+        exit;
+    }
+
+    // Connect to MySQL server
+    try {
+        $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, port: $DB_PORT);
+    } catch (mysqli_sql_exception $exception) {
+        out("- Connection failed: {$exception->getMessage()}", 'error');
+        exit;
+    }
     if (!$conn->connect_error) {
         out('- Connected successfully!', 'success');
-    } else {
-        out("- Connection failed: $conn->connect_error", 'error');
-        exit;
     }
 
     // Creating database if not exist
