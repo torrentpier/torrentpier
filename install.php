@@ -40,7 +40,7 @@ function out(string $str, string $type = ''): void
         'warning' => "\033[33m$str \033[0m\n",
         'info' => "\033[36m$str \033[0m\n",
         'debug' => "\033[90m$str \033[0m\n",
-        default => $str,
+        default => "$str\n",
     };
 }
 
@@ -90,8 +90,48 @@ function runProcess(string $cmd, string $input = null): void
     proc_close($process);
 }
 
+/**
+ * Setting permissions recursively
+ *
+ * @param string $dir
+ * @param int $dirPermissions
+ * @param int $filePermissions
+ * @return void
+ */
+function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
+{
+    $dp = opendir($dir);
+    while ($file = readdir($dp)) {
+        if (($file == '.') || ($file == '..')) {
+            continue;
+        }
+
+        $fullPath = realpath($dir . '/' . $file);
+        if (is_dir($fullPath)) {
+            out("- Directory: $fullPath");
+            chmod($fullPath, $dirPermissions);
+            chmod_r($fullPath, $dirPermissions, $filePermissions);
+        } elseif (is_file($fullPath)) {
+            out("- File: $fullPath");
+            chmod($fullPath, $filePermissions);
+        } else {
+            out("- Cannot find target path: $fullPath", 'error');
+            return;
+        }
+    }
+
+    closedir($dp);
+}
+
 // Welcoming message
-out("- TorrentPier Installer\n", 'info');
+out("--- TorrentPier Installer ---\n", 'info');
+
+// Setting permissions
+out('- Setting permissions for folders...', 'info');
+chmod_r(ROOT . 'data', 0755, 0644);
+chmod_r(ROOT . 'internal_data', 0755, 0644);
+chmod_r(ROOT . 'sitemap', 0755, 0644);
+out("- Permissions successfully applied!\n", 'success');
 
 // Check composer installation
 if (!is_file(ROOT . 'vendor/autoload.php')) {
@@ -145,7 +185,7 @@ $DB_USERNAME = '';
 $DB_PASSWORD = '';
 
 if (is_file(ROOT . '.env')) {
-    out("--- Configuring TorrentPier ---\n", 'info');
+    out("--- Configuring TorrentPier ---", 'info');
 
     $envContent = file_get_contents(ROOT . '.env');
     if ($envContent === false) {
@@ -166,8 +206,8 @@ if (is_file(ROOT . '.env')) {
                 $$key = $value;
             }
 
-            out("Current value of $key: $value", 'debug');
-            out("Enter a new value for $key (or leave empty to not change): ");
+            out("\nCurrent value of $key: $value", 'debug');
+            echo "Enter a new value for $key (or leave empty to not change): ";
             $newValue = readline();
 
             if (!empty($newValue)) {
