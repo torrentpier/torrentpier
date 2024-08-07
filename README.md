@@ -63,22 +63,34 @@ and go from there. The documentation will be translated into english in the near
 
 For installation, you need to follow a few simple steps.
 
-### Quick ☕️
+### ☕️ Quick
 
 1. [Download latest](https://github.com/torrentpier/torrentpier/archive/refs/heads/master.zip) version of TorrentPier
 2. Open directory with TorrentPier and run in CLI mode `php install.php`
 3. Voila! ✨
 
-### Manual 🔩
+### 🔩 Manual
 
 1. Install [Composer](https://getcomposer.org/)
 2. Run `composer create-project torrentpier/torrentpier`
 3. After run `composer install` on the project directory
 4. Create database and import dump located at `install/sql/mysql.sql`
 5. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
-6. Voila! ✨
+6. Provide write permissions to the specified folders:
+   * `data/avatars`
+   * `data/uploads`
+   * `data/uploads/thumbs`
+   * `internal_data/atom`
+   * `internal_data/cache`
+   * `internal_data/log`
+   * `internal_data/triggers`
+   * `sitemap`
+7. Voila! ✨
 
-### Additional steps 👣
+> [!IMPORTANT]
+> The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, and chmod **0644** for files in them.
+
+### 👣 Additional steps
 
 1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 2. Edit this files:
@@ -87,21 +99,6 @@ For installation, you need to follow a few simple steps.
    3. `opensearch_desc.xml` (change the description and address on your own)
    4. `opensearch_desc_bt.xml` (change the description and address on your own)
 3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
-
-### 🔑 Access rights on folders and files (For manual installation only!)
-
-You must provide write permissions to the specified folders:
-* `data/avatars`
-* `data/uploads`
-* `data/uploads/thumbs`
-* `internal_data/atom`
-* `internal_data/cache`
-* `internal_data/log`
-* `internal_data/triggers`
-* `sitemap`
-
-The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, 
-and chmod **0644** for files in them. If you are not sure, leave it as is.
 
 ## 🔐 Security vulnerabilities
 
@@ -122,7 +119,8 @@ these requirements. Just send it!
   <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" alt="Contributors"/>
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
+> [!NOTE]
+> Made with [contrib.rocks](https://contrib.rocks).
 
 ## 💞 Sponsoring
 
