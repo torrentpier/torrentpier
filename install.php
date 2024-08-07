@@ -68,7 +68,7 @@ function runProcess(string $cmd, string $input = null): void
 
     // Read and print error output
     while (!feof($pipes[2])) {
-        out(stream_get_contents($pipes[2], 1), 'error');
+        echo stream_get_contents($pipes[2], 1);
         flush();
     }
 
