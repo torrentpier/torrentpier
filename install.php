@@ -29,7 +29,7 @@ function out(string $str, string $type = 'info'): void
         'warning' => "\033[33m$str \033[0m\n",
         'info' => "\033[36m$str \033[0m\n",
         'debug' => "\033[90m$str \033[0m\n",
-        default => $str,
+        'default' => $str,
     };
 }
 
@@ -114,7 +114,7 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
 
 // Editing ENV file
 if (is_file(ROOT . '.env')) {
-    out('--- Configuring TorrentPier ---');
+    out("--- Configuring TorrentPier ---\n");
 
     $envFile = ROOT . '.env';
     $envContent = file_get_contents($envFile);
@@ -127,8 +127,8 @@ if (is_file(ROOT . '.env')) {
             $key = trim($parts[0]);
             $value = isset($parts[1]) ? trim($parts[1]) : '';
 
-            out("Current value of $key: $value");
-            out("Enter a new value for $key (or leave empty to not change): ", 'debug');
+            out("Current value of $key: $value", 'debug');
+            out("Enter a new value for $key (or leave empty to not change): ", 'default');
             $newValue = readline();
 
             if (!empty($newValue)) {
