@@ -21,7 +21,7 @@ if (isset($argv[1])) {
  * @param string $type
  * @return void
  */
-function out(string $str, string $type = 'info'): void
+function out(string $str, string $type): void
 {
     echo match ($type) {
         'error' => "\033[31m$str \033[0m\n",
@@ -29,7 +29,7 @@ function out(string $str, string $type = 'info'): void
         'warning' => "\033[33m$str \033[0m\n",
         'info' => "\033[36m$str \033[0m\n",
         'debug' => "\033[90m$str \033[0m\n",
-        'default' => $str,
+        default => $str,
     };
 }
 
@@ -80,20 +80,20 @@ function runProcess(string $cmd, string $input = null): void
 }
 
 // Welcoming message
-out("- TorrentPier Installer\n");
+out("- TorrentPier Installer\n", 'info');
 
 // Check composer installation
 if (!is_file(ROOT . 'vendor/autoload.php')) {
-    out('- Hmm, it seems there are no Composer dependencies');
+    out('- Hmm, it seems there are no Composer dependencies', 'info');
     // Downloading composer
     if (!is_file(ROOT . 'composer.phar')) {
-        out('- Downloading Composer...');
+        out('- Downloading Composer...', 'info');
         copy('https://getcomposer.org/installer', ROOT . 'composer-setup.php');
-        out('- Composer successfully downloaded!', 'success');
+        out("- Composer successfully downloaded!\n", 'success');
         runProcess('php ' . ROOT . 'composer-setup.php');
         if (is_file(ROOT . 'composer-setup.php')) {
             unlink(ROOT . 'composer-setup.php');
-            out('- Composer installation file successfully removed!', 'success');
+            out("- Composer installation file successfully removed!\n", 'success');
         }
     }
     // Installing dependencies
@@ -101,20 +101,24 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
         out('- composer.phar not found', 'error');
         exit;
     }
-    out('- Installing dependencies...');
+    out('- Installing dependencies...', 'info');
     runProcess('php ' . ROOT . 'composer.phar install --no-interaction --no-ansi');
-    out('- Completed!');
+    out("- Completed!\n", 'success');
 }
 
 // Preparing ENV
 if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
-    copy(ROOT . '.env.example', ROOT . '.env');
-    out("- Environment file created!\n", 'success');
+    if (copy(ROOT . '.env.example', ROOT . '.env')) {
+        out("- Environment file created!\n", 'success');
+    } else {
+        out('- Cannot copy environment file', 'error');
+        exit;
+    }
 }
 
 // Editing ENV file
 if (is_file(ROOT . '.env')) {
-    out("--- Configuring TorrentPier ---\n");
+    out("--- Configuring TorrentPier ---\n", 'info');
 
     $envFile = ROOT . '.env';
     $envContent = file_get_contents($envFile);
@@ -144,6 +148,6 @@ if (is_file(ROOT . '.env')) {
         out('- TorrentPier successfully configured!', 'success');
     }
 } else {
-    out('- .env file not found', 'error');
+    out('- Environment file not found', 'error');
     exit;
 }
