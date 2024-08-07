@@ -207,7 +207,7 @@ if (is_file(ROOT . '.env')) {
             }
 
             out("Current value of $key: $value", 'debug');
-            out("Enter a new value for $key (or leave empty to not change): ");
+            echo "Enter a new value for $key (or leave empty to not change): ";
             $newValue = readline();
 
             if (!empty($newValue)) {
