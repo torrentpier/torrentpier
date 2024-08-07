@@ -73,7 +73,7 @@ For installation, you need to follow a few simple steps.
 1. Install [Composer](https://getcomposer.org/)
 2. Run `composer create-project torrentpier/torrentpier`
 3. After run `composer install` on the project directory
-4. Create database and import dump located at **install/sql/mysql.sql**
+4. Create database and import dump located at `install/sql/mysql.sql`
 5. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
 6. Voila! ✨
 
@@ -81,10 +81,10 @@ For installation, you need to follow a few simple steps.
 
 1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 2. Edit this files:
-   1. **favicon.png** (change on your own)
-   2. **robots.txt** (change the addresses in lines `Host` and `Sitemap` on your own)
-   3. **opensearch_desc.xml** (change the description and address on your own)
-   4. **opensearch_desc_bt.xml** (change the description and address on your own)
+   1. `favicon.png` (change on your own)
+   2. `robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
+   3. `opensearch_desc.xml` (change the description and address on your own)
+   4. `opensearch_desc_bt.xml` (change the description and address on your own)
 3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
 ## 🔑 Access rights on folders and files
@@ -108,8 +108,8 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 📌 Our recommendations
 
-* *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
-* *Local configuration copy.* - You can override the settings using local configuration file **library/config.local.php**.
+* *The recommended way to run `cron.php`.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
+* *Local configuration copy.* - You can override the settings using local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors
 
