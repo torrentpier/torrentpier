@@ -124,9 +124,7 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 }
 
 // Welcoming message
-out("---------- TorrentPier Installer ----------", 'info');
-out("Made with love for Humans!", 'info');
-out("-------------------------------------------\n", 'info');
+out("--- TorrentPier Installer ---\n", 'info');
 sleep(1);
 
 // Setting permissions
