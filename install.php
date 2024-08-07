@@ -173,7 +173,7 @@ if (is_file(ROOT . '.env')) {
 if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     out("--- Checking environment settings ---\n", 'info');
     // Connecting to database
-    out("- Trying connecting to MySQL", 'info');
+    out("- Trying connect to MySQL...", 'info');
 
     $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, port: $DB_PORT);
     if (!$conn->connect_error) {
@@ -211,9 +211,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
         $tempLine .= $line;
         if (str_ends_with(trim($line), ';')) {
-            if ($conn->query($tempLine)) {
-                out("- Performing query: $tempLine", 'default');
-            } else {
+            if (!$conn->query($tempLine)) {
                 out("- Error performing query: $tempLine", 'error');
                 exit;
             }
@@ -224,8 +222,4 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
     out("- Voila! Good luck & have fun!\n", 'success');
-
-    // Starting PHP local server
-    runProcess('php -S 127.0.0.1:8000');
-    out('- Open now: 127.0.0.1:8000', 'info');
 }
