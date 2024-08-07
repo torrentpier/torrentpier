@@ -124,7 +124,10 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 }
 
 // Welcoming message
-out("- TorrentPier Installer\n", 'info');
+out("---------- TorrentPier Installer ----------", 'info');
+out("Made with love for Humans!", 'info');
+out("-------------------------------------------\n", 'info');
+sleep(1);
 
 // Setting permissions
 out('- Setting permissions for folders...', 'info');
@@ -132,6 +135,7 @@ chmod_r(ROOT . 'data', 0755, 0644);
 chmod_r(ROOT . 'internal_data', 0755, 0644);
 chmod_r(ROOT . 'sitemap', 0755, 0644);
 out("- Permissions successfully applied!\n", 'success');
+sleep(1);
 
 // Check composer installation
 if (!is_file(ROOT . 'vendor/autoload.php')) {
@@ -165,6 +169,8 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
         out('- composer.phar not found', 'error');
         exit;
     }
+
+    sleep(1);
 }
 
 // Preparing ENV
@@ -175,6 +181,8 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
         out('- Cannot create environment file', 'error');
         exit;
     }
+
+    sleep(1);
 }
 
 // Editing ENV file
@@ -229,6 +237,8 @@ if (is_file(ROOT . '.env')) {
         out('- Cannot save environment file', 'error');
         exit;
     }
+
+    sleep(1);
 } else {
     out('- Environment file not found', 'error');
     exit;
