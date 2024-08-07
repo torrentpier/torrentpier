@@ -60,7 +60,7 @@ Demo is reset every 24 hours!
 
 ## 💾 Installation
 
-For installation, you need to follow a few simple steps:
+For installation, you need to follow a few simple steps.
 
 ### Quick ☕️
 
@@ -77,7 +77,7 @@ For installation, you need to follow a few simple steps:
 5. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
 6. Voila! ✨
 
-### Other steps 👣
+### Additional steps 👣
 
 1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 2. Edit this files:
