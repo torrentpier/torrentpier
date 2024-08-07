@@ -119,8 +119,7 @@ these requirements. Just send it!
   <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" alt="Contributors"/>
 </a>
 
-> [!NOTE]
-> Made with [contrib.rocks](https://contrib.rocks).
+Made with [contrib.rocks](https://contrib.rocks).
 
 ## 💞 Sponsoring
 
