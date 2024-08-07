@@ -32,7 +32,7 @@ if (!extension_loaded('readline')) {
  * @param string $type
  * @return void
  */
-function out(string $str, string $type): void
+function out(string $str, string $type = ''): void
 {
     echo match ($type) {
         'error' => "\033[31m$str \033[0m\n",
@@ -149,6 +149,10 @@ if (is_file(ROOT . '.env')) {
 
     $envFile = ROOT . '.env';
     $envContent = file_get_contents($envFile);
+    if ($envContent === false) {
+        out('- Cannot open environment file', 'error');
+        exit;
+    }
     $envLines = explode("\n", $envContent);
 
     $editedLines = [];
@@ -164,7 +168,7 @@ if (is_file(ROOT . '.env')) {
             }
 
             out("Current value of $key: $value", 'debug');
-            out("Enter a new value for $key (or leave empty to not change): ", 'default');
+            out("Enter a new value for $key (or leave empty to not change): ");
             $newValue = readline();
 
             if (!empty($newValue)) {
