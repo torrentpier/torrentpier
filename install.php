@@ -86,9 +86,9 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
     out('- Hmm, it seems there are no Composer dependencies');
     // Downloading composer
     if (!is_file(ROOT . 'composer.phar')) {
-        out('- Downloading Composer');
+        out('- Downloading Composer...');
         copy('https://getcomposer.org/installer', ROOT . 'composer-setup.php');
-        out('- Composer success downloaded!', 'success');
+        out('- Composer successfully downloaded!', 'success');
         runProcess('php ' . ROOT . 'composer-setup.php');
         if (is_file(ROOT . 'composer-setup.php')) {
             unlink(ROOT . 'composer-setup.php');
