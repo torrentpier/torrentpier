@@ -87,7 +87,7 @@ For installation, you need to follow a few simple steps.
    4. `opensearch_desc_bt.xml` (change the description and address on your own)
 3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
-## 🔑 Access rights on folders and files
+### 🔑 Access rights on folders and files (For manual installation only!)
 
 You must provide write permissions to the specified folders:
 * `data/avatars`
