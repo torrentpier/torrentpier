@@ -113,9 +113,9 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 💚 Contributing / Contributors
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details, and the process for 
+Please read our [Contributing policy](CONTRIBUTING.md) and [Code of conduct](CODE_OF_CONDUCT.md) for details, and the process for 
 submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
-these requirements. Just send it.
+these requirements. Just send it!
 
 <a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" alt="Contributors"/>
