@@ -19,11 +19,6 @@ if (is_file(ROOT . '.env')) {
     exit;
 }
 
-// Get arguments
-if (isset($argv[1])) {
-    parse_str($argv[1], $arg);
-}
-
 // Check readline extension
 if (!extension_loaded('readline')) {
     out('- ext-readline not found. Check out PHP instance', 'error');
