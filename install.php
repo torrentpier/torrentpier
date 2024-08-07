@@ -74,14 +74,12 @@ function runProcess(string $cmd, string $input = null): void
 
     // Read and print output in real-time
     while (!feof($pipes[1])) {
-        usleep(10000);
         echo stream_get_contents($pipes[1], 1);
         flush(); // Flush output buffer for immediate display
     }
 
     // Read and print error output
     while (!feof($pipes[2])) {
-        usleep(3000);
         echo stream_get_contents($pipes[2], 1);
         flush();
     }
@@ -110,12 +108,10 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 
         $fullPath = realpath($dir . '/' . $file);
         if (is_dir($fullPath)) {
-            usleep(100000);
             out("- Directory: $fullPath");
             chmod($fullPath, $dirPermissions);
             chmod_r($fullPath, $dirPermissions, $filePermissions);
         } elseif (is_file($fullPath)) {
-            usleep(100000);
             out("- File: $fullPath");
             chmod($fullPath, $filePermissions);
         } else {
