@@ -85,7 +85,7 @@ For installation, you need to follow a few simple steps.
    7. `internal_data/triggers`
    8. `sitemap`
    <br>The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders,
-   and chmod **0644** for files in them. If you are not sure, leave it as is.
+   and chmod **0644** for files in them.
 7. Voila! ✨
 
 ### Additional steps 👣
