@@ -113,7 +113,7 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 💚 Contributing / Contributors
 
-Please read our [Contributing policy](CONTRIBUTING.md) and [Code of conduct](CODE_OF_CONDUCT.md) for details, and the process for 
+Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for 
 submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
 these requirements. Just send it!
 
