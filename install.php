@@ -210,4 +210,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             $tempLine = '';
         }
     }
+
+    $conn->close();
+    out("- Importing SQL dump completed!\n", 'success');
 }
