@@ -185,7 +185,7 @@ $DB_USERNAME = '';
 $DB_PASSWORD = '';
 
 if (is_file(ROOT . '.env')) {
-    out("--- Configuring TorrentPier ---\n", 'info');
+    out("--- Configuring TorrentPier ---", 'info');
 
     $envContent = file_get_contents(ROOT . '.env');
     if ($envContent === false) {
@@ -206,7 +206,7 @@ if (is_file(ROOT . '.env')) {
                 $$key = $value;
             }
 
-            out("Current value of $key: $value", 'debug');
+            out("\nCurrent value of $key: $value", 'debug');
             echo "Enter a new value for $key (or leave empty to not change): ";
             $newValue = readline();
 
