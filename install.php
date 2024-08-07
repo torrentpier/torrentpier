@@ -100,12 +100,19 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
     // Downloading composer
     if (!is_file(ROOT . 'composer.phar')) {
         out('- Downloading Composer...', 'info');
-        copy('https://getcomposer.org/installer', ROOT . 'composer-setup.php');
-        out("- Composer successfully downloaded!\n", 'success');
-        runProcess('php ' . ROOT . 'composer-setup.php');
+        if (copy('https://getcomposer.org/installer', ROOT . 'composer-setup.php')) {
+            out("- Composer successfully downloaded!\n", 'success');
+            runProcess('php ' . ROOT . 'composer-setup.php');
+        } else {
+            out('- Cannot download Composer', 'error');
+            exit;
+        }
         if (is_file(ROOT . 'composer-setup.php')) {
-            unlink(ROOT . 'composer-setup.php');
-            out("- Composer installation file successfully removed!\n", 'success');
+            if (unlink(ROOT . 'composer-setup.php')) {
+                out("- Composer installation file successfully removed!\n", 'success');
+            } else {
+                out('- Cannot remove Composer installation file. Delete it manually', 'warning');
+            }
         }
     }
 
@@ -125,7 +132,7 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
     if (copy(ROOT . '.env.example', ROOT . '.env')) {
         out("- Environment file created!\n", 'success');
     } else {
-        out('- Cannot copy environment file', 'error');
+        out('- Cannot create environment file', 'error');
         exit;
     }
 }
