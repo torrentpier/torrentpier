@@ -94,10 +94,10 @@ For installation, you need to follow a few simple steps.
 
 1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 2. Edit this files:
-   1. `favicon.png` (change on your own)
-   2. `robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
-   3. `opensearch_desc.xml` (change the description and address on your own)
-   4. `opensearch_desc_bt.xml` (change the description and address on your own)
+   * `favicon.png` (change on your own)
+   * `robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
+   * `opensearch_desc.xml` (change the description and address on your own)
+   * `opensearch_desc_bt.xml` (change the description and address on your own)
 3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
 ## 🔐 Security vulnerabilities
