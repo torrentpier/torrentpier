@@ -213,6 +213,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         if (str_ends_with(trim($line), ';')) {
             if (!$conn->query($tempLine)) {
                 out("- Error performing query: $tempLine", 'error');
+                exit;
             }
             $tempLine = '';
         }
