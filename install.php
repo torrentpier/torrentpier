@@ -14,6 +14,11 @@ if (php_sapi_name() !== 'cli') {
     die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
 }
 
+// Check if already installed
+if (is_file(ROOT . '.env')) {
+    exit;
+}
+
 // Get arguments
 if (isset($argv[1])) {
     parse_str($argv[1], $arg);
