@@ -124,7 +124,7 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 }
 
 // Welcoming message
-out("- TorrentPier Installer\n", 'info');
+out("--- TorrentPier Installer ---\n", 'info');
 
 // Setting permissions
 out('- Setting permissions for folders...', 'info');
