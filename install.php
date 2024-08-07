@@ -136,6 +136,16 @@ if (is_file(ROOT . '.env')) {
             $key = trim($parts[0]);
             $value = isset($parts[1]) ? trim($parts[1]) : '';
 
+            if ($key === 'DB_HOST') {
+                $dbHost = $value;
+            } elseif ($key === 'DB_USER') {
+                $dbUser = $value;
+            } elseif ($key === 'DB_PASSWORD') {
+                $dbPassword = $value;
+            } elseif ($key === 'DB_NAME') {
+                $dbName = $value;
+            }
+
             out("Current value of $key: $value", 'debug');
             out("Enter a new value for $key (or leave empty to not change): ", 'default');
             $newValue = readline();
@@ -165,3 +175,5 @@ if (is_file(ROOT . '.env')) {
     out('- Environment file not found', 'error');
     exit;
 }
+
+if ()
