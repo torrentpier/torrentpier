@@ -28,7 +28,7 @@ function out(string $str, string $type = 'info'): void
         'success' => "\033[32m$str \033[0m\n",
         'warning' => "\033[33m$str \033[0m\n",
         'info' => "\033[36m$str \033[0m\n",
-        'debug' => "\033[90m$str \033[0m\n"
+        'debug' => "\033[90m$str \033[0m\n",
         default => $str,
     };
 }
