@@ -45,8 +45,8 @@ and go from there. The documentation will be translated into english in the near
 ## 🖥️ Demo
 
 * URL: https://torrentpier.duckdns.org
-* Username: admin
-* Password: admin
+* Username: `admin`
+* Password: `admin`
 
 Demo is reset every 24 hours!
 
