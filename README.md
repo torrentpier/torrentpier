@@ -63,13 +63,13 @@ and go from there. The documentation will be translated into english in the near
 
 For installation, you need to follow a few simple steps.
 
-### ☕️ Quick
+### Quick ☕️
 
 1. [Download latest](https://github.com/torrentpier/torrentpier/archive/refs/heads/master.zip) version of TorrentPier
 2. Open directory with TorrentPier and run in CLI mode `php install.php`
 3. Voila! ✨
 
-### 🔩 Manual
+### Manual 🔩
 
 1. Install [Composer](https://getcomposer.org/)
 2. Run `composer create-project torrentpier/torrentpier`
@@ -90,7 +90,7 @@ For installation, you need to follow a few simple steps.
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, and chmod **0644** for files in them.
 
-### 👣 Additional steps
+### Additional steps 👣
 
 1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 2. Edit this files:
