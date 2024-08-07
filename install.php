@@ -117,6 +117,11 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
 }
 
 // Editing ENV file
+$dbHost = '';
+$dbUser = '';
+$dbPassword = '';
+$dbName = '';
+
 if (is_file(ROOT . '.env')) {
     out("--- Configuring TorrentPier ---\n", 'info');
 
@@ -137,6 +142,15 @@ if (is_file(ROOT . '.env')) {
 
             if (!empty($newValue)) {
                 $line = "$key=$newValue";
+                if ($key === 'DB_HOST') {
+                    $dbHost = $newValue;
+                } elseif ($key === 'DB_USER') {
+                    $dbUser = $newValue;
+                } elseif ($key === 'DB_PASSWORD') {
+                    $dbPassword = $newValue;
+                } elseif ($key === 'DB_NAME') {
+                    $dbName = $newValue;
+                }
             }
 
             $editedLines[] = $line;
