@@ -147,8 +147,7 @@ $DB_PASSWORD = '';
 if (is_file(ROOT . '.env')) {
     out("--- Configuring TorrentPier ---\n", 'info');
 
-    $envFile = ROOT . '.env';
-    $envContent = file_get_contents($envFile);
+    $envContent = file_get_contents(ROOT . '.env');
     if ($envContent === false) {
         out('- Cannot open environment file', 'error');
         exit;
@@ -184,7 +183,7 @@ if (is_file(ROOT . '.env')) {
     }
 
     $newEnvContent = implode("\n", $editedLines);
-    if (file_put_contents($envFile, $newEnvContent)) {
+    if (file_put_contents(ROOT . '.env', $newEnvContent)) {
         out("- TorrentPier successfully configured!\n", 'success');
     } else {
         out('- Cannot save environment file', 'error');
