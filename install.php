@@ -90,8 +90,48 @@ function runProcess(string $cmd, string $input = null): void
     proc_close($process);
 }
 
+/**
+ * Setting permissions recursively
+ *
+ * @param string $dir
+ * @param int $dirPermissions
+ * @param int $filePermissions
+ * @return void
+ */
+function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
+{
+    $dp = opendir($dir);
+    while ($file = readdir($dp)) {
+        if (($file == '.') || ($file == '..')) {
+            continue;
+        }
+
+        $fullPath = $dir . '/' . $file;
+        if (is_dir($fullPath)) {
+            out('- Directory:' . $fullPath);
+            chmod($fullPath, $dirPermissions);
+            chmod_r($fullPath, $dirPermissions, $filePermissions);
+        } elseif (is_file($fullPath)) {
+            out('- File:' . $fullPath);
+            chmod($fullPath, $filePermissions);
+        } else {
+            out("- Cannot find target path: $fullPath", 'error');
+            return;
+        }
+    }
+
+    closedir($dp);
+}
+
 // Welcoming message
 out("- TorrentPier Installer\n", 'info');
+
+// Setting permissions
+out('- Setting permissions for folders...', 'info');
+chmod_r(ROOT . 'data', 0755, 0644);
+chmod_r(ROOT . 'internal_data', 0755, 0644);
+chmod_r(ROOT . 'sitemap', 0755, 0644);
+out("- Permissions successfully applied!\n", 'success');
 
 // Check composer installation
 if (!is_file(ROOT . 'vendor/autoload.php')) {
