@@ -182,6 +182,9 @@ if (is_file(ROOT . '.env')) {
     $newEnvContent = implode("\n", $editedLines);
     if (file_put_contents($envFile, $newEnvContent)) {
         out("- TorrentPier successfully configured!\n", 'success');
+    } else {
+        out('- Cannot save environment file', 'error');
+        exit;
     }
 } else {
     out('- Environment file not found', 'error');
