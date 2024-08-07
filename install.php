@@ -120,10 +120,11 @@ if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
 }
 
 // Editing ENV file
-$dbHost = '';
-$dbUser = '';
-$dbPassword = '';
-$dbName = '';
+$DB_HOST = '';
+$DB_PORT = '';
+$DB_DATABASE = '';
+$DB_USERNAME = '';
+$DB_PASSWORD = '';
 
 if (is_file(ROOT . '.env')) {
     out("--- Configuring TorrentPier ---\n", 'info');
@@ -139,14 +140,9 @@ if (is_file(ROOT . '.env')) {
             $key = trim($parts[0]);
             $value = isset($parts[1]) ? trim($parts[1]) : '';
 
-            if ($key === 'DB_HOST') {
-                $dbHost = $value;
-            } elseif ($key === 'DB_USER') {
-                $dbUser = $value;
-            } elseif ($key === 'DB_PASSWORD') {
-                $dbPassword = $value;
-            } elseif ($key === 'DB_NAME') {
-                $dbName = $value;
+            // Database default values
+            if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
+                $$key = $value;
             }
 
             out("Current value of $key: $value", 'debug');
@@ -155,14 +151,9 @@ if (is_file(ROOT . '.env')) {
 
             if (!empty($newValue)) {
                 $line = "$key=$newValue";
-                if ($key === 'DB_HOST') {
-                    $dbHost = $newValue;
-                } elseif ($key === 'DB_USER') {
-                    $dbUser = $newValue;
-                } elseif ($key === 'DB_PASSWORD') {
-                    $dbPassword = $newValue;
-                } elseif ($key === 'DB_NAME') {
-                    $dbName = $newValue;
+                // Configuring database connection
+                if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
+                    $$key = $newValue;
                 }
             }
 
