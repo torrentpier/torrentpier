@@ -6,7 +6,7 @@ Due to the nature of our project - being open source - we have decided to patch 
 
 ## How to disclose
 
-...
+Please disclose security issues by mailing [admin@torrentpier.com](mailto:admin@torrentpier.com).
 
 ## What we do
 
