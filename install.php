@@ -212,7 +212,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         $tempLine .= $line;
         if (str_ends_with(trim($line), ';')) {
             if (!$conn->query($tempLine)) {
-                out("- Error performing query: $tempLine", 'warning');
+                out("- Error performing query: $tempLine", 'error');
             }
             $tempLine = '';
         }
@@ -220,4 +220,5 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
+    out('- Voila! Good luck & have fun!', 'success');
 }
