@@ -176,13 +176,17 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     out("- Trying connecting to MySQL", 'info');
 
     $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, port: $DB_PORT);
-    if ($conn->connect_error) {
+    if (!$conn->connect_error) {
+        out('- Connected successfully!', 'success');
+    } else {
         out("- Connection failed: $conn->connect_error", 'error');
         exit;
     }
 
     // Creating database if not exist
-    if (!$conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE")) {
+    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE")) {
+        out('- Database created successfully!', 'success');
+    } else {
         out("- Cannot create database: $DB_DATABASE", 'error');
         exit;
     }
@@ -190,12 +194,15 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     // Checking SQL dump
     $dumpPath = ROOT . 'install/sql/mysql.sql';
-    if (!is_file($dumpPath) || !is_readable($dumpPath)) {
+    if (is_file($dumpPath) && is_readable($dumpPath)) {
+        out('- SQL dump file found and readable!', 'success');
+    } else {
         out('- SQL dump file not found / not readable', 'error');
         exit;
     }
 
     // Inserting SQL dump
+    out('- Start importing SQL dump...', 'info');
     $tempLine = '';
     foreach (file($dumpPath) as $line) {
         if (str_starts_with($line, '--') || $line == '') {
