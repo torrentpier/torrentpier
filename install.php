@@ -223,5 +223,9 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
-    out('- Voila! Good luck & have fun!', 'success');
+    out("- Voila! Good luck & have fun!\n", 'success');
+
+    // Starting PHP local server
+    runProcess('php -S 127.0.0.1:8000');
+    out('- Open now: 127.0.0.1:8000', 'info');
 }
