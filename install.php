@@ -9,6 +9,11 @@
 
 define('ROOT', __DIR__ . '/');
 
+// Check CLI mode
+if (php_sapi_name() !== 'cli') {
+    die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
+}
+
 // Get arguments
 if (isset($argv[1])) {
     parse_str($argv[1], $arg);
