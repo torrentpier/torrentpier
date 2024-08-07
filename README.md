@@ -75,19 +75,7 @@ For installation, you need to follow a few simple steps.
 3. After run `composer install` on the project directory
 4. Create database and import dump located at **install/sql/mysql.sql**
 5. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
-6. You must provide write permissions to the specified folders:
-   1. `data/avatars`
-   2. `data/uploads`
-   3. `data/uploads/thumbs`
-   4. `internal_data/atom`
-   5. `internal_data/cache`
-   6. `internal_data/log`
-   7. `internal_data/triggers`
-   8. `sitemap`
-   ***
-   The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders,
-   and chmod **0644** for files in them. If you are not sure, leave it as is.
-7. Voila! ✨
+6. Voila! ✨
 
 ### Additional steps 👣
 
@@ -98,6 +86,21 @@ For installation, you need to follow a few simple steps.
    3. **opensearch_desc.xml** (change the description and address on your own)
    4. **opensearch_desc_bt.xml** (change the description and address on your own)
 3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
+
+## 🔑 Access rights on folders and files
+
+You must provide write permissions to the specified folders:
+* `data/avatars`
+* `data/uploads`
+* `data/uploads/thumbs`
+* `internal_data/atom`
+* `internal_data/cache`
+* `internal_data/log`
+* `internal_data/triggers`
+* `sitemap`
+
+The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, 
+and chmod **0644** for files in them. If you are not sure, leave it as is.
 
 ## 🔐 Security vulnerabilities
 
