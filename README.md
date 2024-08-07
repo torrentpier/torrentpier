@@ -102,6 +102,10 @@ You must provide write permissions to the specified folders:
 The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, 
 and chmod **0644** for files in them. If you are not sure, leave it as is.
 
+## 🔐 Security vulnerabilities
+
+If you discover a security vulnerability within TorrentPier, please follow our [security policy](https://github.com/torrentpier/torrentpier/security/policy), so we can address it promptly.
+
 ## 📌 Our recommendations
 
 * *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
