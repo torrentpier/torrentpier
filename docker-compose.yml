@@ -8,10 +8,10 @@ services:
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_NAME=your_database_name
-      - DB_USER=your_database_user
-      - DB_PASSWORD=your_database_password
+      - DB_HOST=127.0.0.1
+      - DB_NAME=torrentpier
+      - DB_USER=torrentpier
+      - DB_PASSWORD=torrentpier
   db:
     image: mariadb:latest
     restart: always
