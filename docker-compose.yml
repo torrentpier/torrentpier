@@ -2,14 +2,11 @@ version: '3.8'
 
 services:
   torrentpier:
-    build:
-      context: .
+    build: .
     container_name: torrentpier
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - .:/var/www/html/
     depends_on:
       - db
   db:
