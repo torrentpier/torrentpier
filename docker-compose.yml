@@ -14,11 +14,12 @@ services:
       - db
   db:
     image: mariadb:latest
+    container_name: mariadb
     restart: always
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: super_password
-      MYSQL_DATABASE: torrentpier
-      MYSQL_USER: torrentpier
+      MYSQL_DATABASE: database
+      MYSQL_USER: username
       MYSQL_PASSWORD: password
