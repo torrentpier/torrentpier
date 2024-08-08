@@ -1,26 +1,24 @@
 version: '3.8'
+
 services:
   torrentpier:
-    build: .
+    build:
+      context: .
+    container_name: torrentpier
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - .:/var/www/html/
     depends_on:
       - db
-    environment:
-      - DB_CONNECTION=mysql
-      - DB_HOST=127.0.0.1
-      - DB_PORT=3306
-      - DB_DATABASE=torrentpier
-      - DB_USERNAME=torrentpier
-      - DB_PASSWORD=torrentpier
   db:
     image: mariadb:latest
     restart: always
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: torrentpier
+      MYSQL_ROOT_PASSWORD: super_password
       MYSQL_DATABASE: torrentpier
       MYSQL_USER: torrentpier
-      MYSQL_PASSWORD: torrentpier
+      MYSQL_PASSWORD: password
