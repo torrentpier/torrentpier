@@ -8,9 +8,11 @@ services:
     depends_on:
       - db
     environment:
+      - DB_CONNECTION=mysql
       - DB_HOST=127.0.0.1
-      - DB_NAME=torrentpier
-      - DB_USER=torrentpier
+      - DB_PORT=3306
+      - DB_DATABASE=torrentpier
+      - DB_USERNAME=torrentpier
       - DB_PASSWORD=torrentpier
   db:
     image: mariadb:latest
