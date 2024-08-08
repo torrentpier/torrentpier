@@ -6,12 +6,41 @@
 .idea
 
 ### TorrentPier ###
+*.log
 *.integrity
 .env
 .php_cs.cache
-docker-compose.override.yml
-docker-compose.yml
 composer.phar
 internal_data/updater.json
 library/config.local.php
 vendor
+
+### Archives ###
+*.rar
+*.tar
+*.gz
+*.zip
+*.7z
+*.torrent
+*.pak
+
+### Windows ###
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.bat
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+*.orig
+*.rej
+
+### Docker ###
+docker-compose.override.yml
+docker-compose.yml

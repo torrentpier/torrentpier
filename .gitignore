@@ -2,6 +2,7 @@
 .idea
 
 ### TorrentPier ###
+*.log
 *.integrity
 .env
 .php_cs.cache
@@ -18,7 +19,6 @@ library/config.local.php
 vendor
 
 ### Archives ###
-*.log
 *.rar
 *.tar
 *.gz
