@@ -1,3 +1,7 @@
+### GitHub ###
+.git
+.github
+
 ### IDE ###
 .idea
 
@@ -5,6 +9,8 @@
 *.integrity
 .env
 .php_cs.cache
+docker-compose.override.yml
+docker-compose.yml
 composer.phar
 internal_data/updater.json
 library/config.local.php
