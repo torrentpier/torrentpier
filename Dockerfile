@@ -22,6 +22,9 @@ RUN docker-php-ext-install mysqli
 # Install mbstring
 RUN docker-php-ext-install mbstring
 
+# Install bcmath
+RUN docker-php-ext-install bcmath
+
 # Install zip & unzip
 RUN apt-get update && apt-get install -y \
     libzip-dev \
