@@ -10,12 +10,12 @@
 *.integrity
 .env
 .php_cs.cache
-composer.phar
 internal_data/updater.json
 library/config.local.php
 vendor
 
 ### Archives ###
+*.phar
 *.rar
 *.tar
 *.gz

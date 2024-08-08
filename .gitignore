@@ -6,7 +6,6 @@
 *.integrity
 .env
 .php_cs.cache
-composer.phar
 data/avatars
 data/uploads
 internal_data/atom
@@ -19,6 +18,7 @@ library/config.local.php
 vendor
 
 ### Archives ###
+*.phar
 *.rar
 *.tar
 *.gz
