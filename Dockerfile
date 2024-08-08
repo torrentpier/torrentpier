@@ -1,5 +1,5 @@
-FROM php:7.4-apache
-LABEL maintainer="Fork CMS <info@fork-cms.com>"
+FROM php:8.1-apache
+LABEL maintainer="TorrentPier <admin@torrentpier.com>"
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -16,8 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends --allow-downgra
     docker-php-ext-install -j$(nproc) gd && \
     rm -rf /var/lib/apt/lists/*
 
-# Install pdo_mysql
-RUN docker-php-ext-install pdo_mysql
+# Install mysqli
+RUN docker-php-ext-install mysqli
 
 # Install mbstring
 RUN docker-php-ext-install mbstring
@@ -39,12 +39,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Custom php.ini settings
-COPY var/docker/php/php.ini ${PHP_INI_DIR}/php.ini
-
-# Install and configure XDebug
-RUN pecl install xdebug-2.9.8 && \
-    docker-php-ext-enable xdebug && \
-    rm -rf /tmp/pear
+COPY docker/php/php.ini ${PHP_INI_DIR}/php.ini
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | \
