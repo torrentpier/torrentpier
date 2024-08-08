@@ -6,8 +6,6 @@
 .env
 .php_cs.cache
 composer.phar
-docker-compose.override.yml
-docker-compose.yml
 configs/local.php
 data/avatars
 data/uploads
@@ -46,3 +44,6 @@ $RECYCLE.BIN/
 .Trashes
 *.orig
 *.rej
+
+### Docker ###
+docker-compose.override.yml
