@@ -1,3 +1,7 @@
+### GitHub ###
+.git
+.github
+
 ### IDE ###
 .idea
 
@@ -6,14 +10,7 @@
 *.integrity
 .env
 .php_cs.cache
-data/avatars
-data/uploads
-internal_data/atom
-internal_data/cache
-internal_data/log
 internal_data/updater.json
-sitemap
-internal_data/triggers
 library/config.local.php
 vendor
 
@@ -46,3 +43,4 @@ $RECYCLE.BIN/
 
 ### Docker ###
 docker-compose.override.yml
+docker-compose.yml
