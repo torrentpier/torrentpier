@@ -578,10 +578,10 @@ class User
         define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
         define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
-        if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
-            $this->data['user_lang'] = $_COOKIE['user_lang'];
-        }
         if ($this->data['user_id'] != GUEST_UID) {
+            if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
+                $this->data['user_lang'] = $_COOKIE['user_lang'];
+            }
             if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
                 $bb_cfg['default_lang'] = basename($this->data['user_lang']);
                 define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
