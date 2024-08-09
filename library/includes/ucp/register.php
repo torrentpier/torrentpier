@@ -142,6 +142,9 @@ switch ($mode) {
         if (!$pr_data = DB()->fetch_row($sql)) {
             bb_die($lang['PROFILE_NOT_FOUND']);
         }
+        if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
+            $pr_data['user_lang'] = $_COOKIE['user_lang'];
+        }
         break;
 
     default:
