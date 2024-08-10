@@ -11,7 +11,7 @@
     </thead>
     <!-- BEGIN filelist -->
     <tbody>
-    <tr class="row1 tCenter">
+    <tr class="{filelist.ROW_CLASS} tCenter">
         <td>{filelist.ROW_NUMBER}</td>
         <td>{filelist.FILE_PATH}</td>
         <td>{filelist.FILE_LENGTH}</td>
@@ -21,7 +21,7 @@
     <!-- END filelist -->
     <tfoot>
     <tr>
-        <td class="catBottom" colspan="9">&nbsp;</td>
+        <td class="catBottom" colspan="4">&nbsp;</td>
     </tr>
     </tfoot>
 </table>
