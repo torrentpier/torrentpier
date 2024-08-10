@@ -16,6 +16,7 @@ if (php_sapi_name() !== 'cli') {
 
 // Check if already installed
 if (is_file(ROOT . '.env')) {
+    out('- TorrentPier already installed!', 'error');
     exit;
 }
 
