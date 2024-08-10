@@ -94,8 +94,10 @@ foreach ($files as $file) {
 }
 
 $torrent_name = !empty($t_name = $torrent->getName()) ? htmlCHR(str_short($t_name, 200)) : $lang['UNKNOWN'];
+$torrent_size = humn_size($row['size'], 2);
+
 $template->assign_vars([
-    'PAGE_TITLE' => "$torrent_name (" . humn_size($row['size'], 2) . ")",
+    'PAGE_TITLE' => "$torrent_name (" . $torrent_size . ")",
     'FILES_COUNT' => iterator_count($files),
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : $lang['UNKNOWN'],
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR(str_short($creator, 20)) : $lang['UNKNOWN'],
