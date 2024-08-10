@@ -20,12 +20,6 @@ if (is_file(BB_ROOT . '.env')) {
     exit;
 }
 
-// Check readline extension
-if (!extension_loaded('readline')) {
-    out('- ext-readline not found. Check out PHP instance', 'error');
-    exit;
-}
-
 /**
  * Colored console output
  *
@@ -126,6 +120,44 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 
 // Welcoming message
 out("--- TorrentPier Installer ---\n", 'info');
+
+// Checking extensions
+define('CHECK_REQUIREMENTS', [
+    'status' => true,
+    'php_min_version' => '8.1.0',
+    'ext_list' => [
+        'json',
+        'curl',
+        'readline',
+        'mysqli',
+        'bcmath',
+        'mbstring',
+        'intl',
+        'xml',
+        'xmlwriter',
+        'zip'
+    ],
+]);
+
+if (CHECK_REQUIREMENTS['status']) {
+    out("- Checking installed extensions\n", 'info');
+
+    // [1] Check PHP Version
+    if (!\TorrentPier\Helpers\IsHelper::isPHP(CHECK_REQUIREMENTS['php_min_version'])) {
+        out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'error');
+    }
+
+    // [2] Check installed PHP Extensions on server
+    $data = [];
+    foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
+        if (!extension_loaded($ext)) {
+            out("- ext-$ext not installed!", 'error');
+            exit;
+        } else {
+            out("- ext-$ext installed!", 'success');
+        }
+    }
+}
 
 // Setting permissions
 out('- Setting permissions for folders...', 'info');
