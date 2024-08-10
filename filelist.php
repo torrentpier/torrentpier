@@ -94,8 +94,7 @@ foreach ($files as $file) {
         'ROW_CLASS' => $row_class,
         'FILE_PATH' => clean_tor_dirname(implode('/', $file->path)),
         'FILE_LENGTH' => humn_size($file->length, 2),
-        'FILE_HASH' => $file->$t_hash_field,
-        'U_TOPIC' => TOPIC_URL . $topic_id
+        'FILE_HASH' => $file->$t_hash_field
     ]);
 }
 
@@ -107,22 +106,14 @@ $template->assign_vars([
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : $lang['UNKNOWN'],
     'TORRENT_NAME' => $torrent_name,
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR(str_short($creator, 20)) : $lang['UNKNOWN'],
+
+    'U_TOPIC' => TOPIC_URL . $topic_id,
 ]);
 
 print_page('filelist.tpl');
 
 echo <<<EOF
 <a href="{$data['site_url']}{$data['topic_url']}" style="font-family: monospace; color: #569904;">&larr; Back to the topic</a>
-<center>
-    <h2 style="color: #b3b3b3; font-family: monospace;">Name: {$data['name']} | Date: {$data['date']} | Size: {$data['size']}</h2>
-<p>
-    <p style="font-family: Calibri, sans-serif;">Created by: <i title="Torrent client's name">{$data['client']}</i></p>
-</p>
-<hr>
-<table>
-    <tr>
-        <th>Path ({$data['file_count']} files)</th>
-        <th>Size</th>
         <th class="tooltip" style="width: auto;">
             BTMR hash
             <sup>?

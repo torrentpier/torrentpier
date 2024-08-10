@@ -1,10 +1,18 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
+<ul class="med">
+    <li>Название: {TORRENT_NAME}</li>
+    <li>Размер: {TORRENT_FILESIZE}</li>
+    <li>Дата создания: {TORRENT_CREATION_DATE}</li>
+    <li>Торрент-клиент: {TORRENT_CLIENT}</li>
+    <li>style/templates/default/page_footer.tpl</li>
+</ul>
+<br>
 
 <table class="forumline">
     <thead>
     <tr>
         <th>#</th>
-        <th>Path</th>
+        <th>Path ({FILES_COUNT} files)</th>
         <th>{L_SIZE}</th>
         <th>BTMR Hash</th>
     </tr>
