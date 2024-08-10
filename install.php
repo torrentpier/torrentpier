@@ -161,7 +161,7 @@ foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
 out("- All extensions are installed!\n", 'success');
 
 // Setting permissions
-out("\n- Setting permissions for folders...", 'info');
+out("- Setting permissions for folders...", 'info');
 chmod_r(BB_ROOT . 'data', 0755, 0644);
 chmod_r(BB_ROOT . 'internal_data', 0755, 0644);
 chmod_r(BB_ROOT . 'sitemap', 0755, 0644);
