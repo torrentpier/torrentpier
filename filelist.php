@@ -94,7 +94,7 @@ foreach ($files as $file) {
         'ROW_CLASS' => $row_class,
         'FILE_PATH' => clean_tor_dirname(implode('/', $file->path)),
         'FILE_LENGTH' => humn_size($file->length, 2),
-        'FILE_HASH' => $file->$t_hash_field
+        'FILE_HASH' => $file->$t_hash_field ?? '-'
     ]);
 }
 

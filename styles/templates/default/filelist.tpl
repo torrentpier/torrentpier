@@ -1,7 +1,5 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
-<ul class="med">
-    <li>Название: {TORRENT_NAME}</li>
-    <li>Размер: {TORRENT_FILESIZE}</li>
+<ul>
     <li>Дата создания: {TORRENT_CREATION_DATE}</li>
     <li>Торрент-клиент: {TORRENT_CLIENT}</li>
 </ul>
@@ -36,6 +34,7 @@
 <!--bottom_info-->
 <div class="bottom_info">
     <div class="spacer_8"></div>
+    <a href="{U_TOPIC}">Вернутся назад в тему</a>
     <div id="timezone">
         <p>{CURRENT_TIME}</p>
         <p>{S_TIMEZONE}</p>
