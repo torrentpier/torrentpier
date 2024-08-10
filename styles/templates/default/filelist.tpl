@@ -30,7 +30,7 @@
             BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users
             can extract, calculate them, also download deduplicated torrents using desktop tools such as
             <a href="https://github.com/kovalensky/tmrr" target="_blank" referrerpolicy="origin">Torrent Merkle Root
-                Reader.</a>
+                Reader</a>
         </td>
     </tr>
     </tfoot>
