@@ -10,7 +10,32 @@
 *.integrity
 .env
 .php_cs.cache
+#-- data folder
+##-> avatats
+data/avatars/gallery
+##-> uploads
+data/uploads
+!data/uploads/.htaccess
+!data/uploads/thumbs/.keep
+#-- internal_data folder
+##-> atom
+internal_data/atom
+!internal_data/atom/.keep
+##-> cache
+internal_data/cache
+!internal_data/cache/.htaccess
+##-> log
+internal_data/log
+!internal_data/log/.htaccess
+##-> triggers
+internal_data/triggers
+!internal_data/triggers/.htaccess
+##-> other
 internal_data/updater.json
+#-- sitemap
+sitemap
+!sitemap/.keep
+# other
 library/config.local.php
 vendor
 
