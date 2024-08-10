@@ -12,8 +12,6 @@ require __DIR__ . '/common.php';
 // Start session management
 $user->session_start();
 
-header('Cache-Control: public, max-age=3600');
-
 if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
     bb_simple_die($lang['BT_PRIVATE_TRACKER'], 403);
 }
