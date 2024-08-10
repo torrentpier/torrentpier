@@ -43,6 +43,3 @@ $RECYCLE.BIN/
 .Trashes
 *.orig
 *.rej
-
-### Docker ###
-docker-compose.override.yml
