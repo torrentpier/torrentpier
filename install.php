@@ -16,9 +16,29 @@ if (php_sapi_name() !== 'cli') {
 
 // Check if already installed
 if (is_file(BB_ROOT . '.env')) {
-    out('- TorrentPier already installed!', 'error');
+    out('- TorrentPier already installed', 'error');
     exit;
 }
+
+/**
+ * System requirements
+ */
+define('CHECK_REQUIREMENTS', [
+    'status' => true,
+    'php_min_version' => '8.1.0',
+    'ext_list' => [
+        'json',
+        'curl',
+        'readline',
+        'mysqli',
+        'bcmath',
+        'mbstring',
+        'intl',
+        'xml',
+        'xmlwriter',
+        'zip'
+    ],
+]);
 
 /**
  * Colored console output
@@ -122,45 +142,26 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 out("--- TorrentPier Installer ---\n", 'info');
 
 // Checking extensions
-define('CHECK_REQUIREMENTS', [
-    'status' => true,
-    'php_min_version' => '8.1.0',
-    'ext_list' => [
-        'json',
-        'curl',
-        'readline',
-        'mysqli',
-        'bcmath',
-        'mbstring',
-        'intl',
-        'xml',
-        'xmlwriter',
-        'zip'
-    ],
-]);
+out("- Checking installed extensions...", 'info');
 
-if (CHECK_REQUIREMENTS['status']) {
-    out("- Checking installed extensions\n", 'info');
-
-    // [1] Check PHP Version
-    if (!\TorrentPier\Helpers\IsHelper::isPHP(CHECK_REQUIREMENTS['php_min_version'])) {
-        out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'error');
-    }
-
-    // [2] Check installed PHP Extensions on server
-    $data = [];
-    foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
-        if (!extension_loaded($ext)) {
-            out("- ext-$ext not installed!", 'error');
-            exit;
-        } else {
-            out("- ext-$ext installed!", 'success');
-        }
-    }
+// [1] Check PHP Version
+if (!version_compare(PHP_VERSION, CHECK_REQUIREMENTS['php_min_version'], '>=')) {
+    out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'error');
 }
 
+// [2] Check installed PHP Extensions on server
+foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
+    if (!extension_loaded($ext)) {
+        out("- ext-$ext not installed", 'error');
+        exit;
+    } else {
+        out("- ext-$ext installed!");
+    }
+}
+out("- All extensions are installed!\n", 'success');
+
 // Setting permissions
-out('- Setting permissions for folders...', 'info');
+out("\n- Setting permissions for folders...", 'info');
 chmod_r(BB_ROOT . 'data', 0755, 0644);
 chmod_r(BB_ROOT . 'internal_data', 0755, 0644);
 chmod_r(BB_ROOT . 'sitemap', 0755, 0644);
