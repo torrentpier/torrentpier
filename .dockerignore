@@ -12,7 +12,9 @@
 .php_cs.cache
 #-- data folder
 ##-> avatats
-data/avatars/gallery
+data/avatars
+!data/avatars/gallery/bot.gif
+!data/avatars/gallery/noavatar.png
 ##-> uploads
 data/uploads
 !data/uploads/.htaccess
