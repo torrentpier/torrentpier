@@ -88,7 +88,7 @@ if ($meta_v1 && $meta_v2) {
 $files_count = 0;
 foreach ($files as $file) {
     $files_count++;
-    $row_class = !($files_count % 2) ? 'row1' : 'row2';
+    $row_class = ($files_count % 2) ? 'row1' : 'row2';
     $template->assign_block_vars('filelist', [
         'ROW_NUMBER' => $files_count,
         'ROW_CLASS' => $row_class,
