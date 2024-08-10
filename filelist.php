@@ -45,13 +45,11 @@ $t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
 $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
-
 if (!is_file($file_path)) {
     bb_simple_die($lang['TOR_NOT_FOUND'], 410);
 }
 
 $file_contents = file_get_contents($file_path);
-
 if ($bb_cfg['flist_max_files']) {
     $filetree_pos = $meta_v2 ? strpos($file_contents, '9:file tree') : false;
     $files_pos = $meta_v1 ? strpos($file_contents, '5:files', $filetree_pos) : false;
@@ -78,7 +76,6 @@ if (IS_GUEST && $torrent->isPrivate()) {
 }
 
 $files = $torrent->$t_version_field()->$t_files_field();
-
 if ($meta_v1 && $meta_v2) {
     $files = new \RecursiveIteratorIterator($files); // Flatten the list
 }
