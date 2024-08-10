@@ -218,9 +218,9 @@ if (is_file(ROOT . '.env')) {
                     $$key = $newValue;
                 }
             }
-
-            $editedLines[] = $line;
         }
+
+        $editedLines[] = $line;
     }
 
     $newEnvContent = implode("\n", $editedLines);
