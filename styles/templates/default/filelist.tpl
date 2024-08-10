@@ -4,7 +4,6 @@
     <li>Размер: {TORRENT_FILESIZE}</li>
     <li>Дата создания: {TORRENT_CREATION_DATE}</li>
     <li>Торрент-клиент: {TORRENT_CLIENT}</li>
-    <li>style/templates/default/page_footer.tpl</li>
 </ul>
 <br>
 
@@ -36,13 +35,10 @@
 
 <!--bottom_info-->
 <div class="bottom_info">
-
     <div class="spacer_8"></div>
-
     <div id="timezone">
         <p>{CURRENT_TIME}</p>
         <p>{S_TIMEZONE}</p>
     </div>
     <div class="clear"></div>
-
 </div><!--/bottom_info-->
