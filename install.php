@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('ROOT', __DIR__ . '/');
+define('BB_ROOT', __DIR__ . '/');
 
 // Check CLI mode
 if (php_sapi_name() !== 'cli') {
@@ -15,15 +15,30 @@ if (php_sapi_name() !== 'cli') {
 }
 
 // Check if already installed
-if (is_file(ROOT . '.env')) {
+if (is_file(BB_ROOT . '.env')) {
+    out('- TorrentPier already installed', 'error');
     exit;
 }
 
-// Check readline extension
-if (!extension_loaded('readline')) {
-    out('- ext-readline not found. Check out PHP instance', 'error');
-    exit;
-}
+/**
+ * System requirements
+ */
+define('CHECK_REQUIREMENTS', [
+    'status' => true,
+    'php_min_version' => '8.1.0',
+    'ext_list' => [
+        'json',
+        'curl',
+        'readline',
+        'mysqli',
+        'bcmath',
+        'mbstring',
+        'intl',
+        'xml',
+        'xmlwriter',
+        'zip'
+    ],
+]);
 
 /**
  * Colored console output
@@ -126,29 +141,48 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 // Welcoming message
 out("--- TorrentPier Installer ---\n", 'info');
 
+// Checking extensions
+out("- Checking installed extensions...", 'info');
+
+// [1] Check PHP Version
+if (!version_compare(PHP_VERSION, CHECK_REQUIREMENTS['php_min_version'], '>=')) {
+    out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'error');
+}
+
+// [2] Check installed PHP Extensions on server
+foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
+    if (!extension_loaded($ext)) {
+        out("- ext-$ext not installed", 'error');
+        exit;
+    } else {
+        out("- ext-$ext installed!");
+    }
+}
+out("- All extensions are installed!\n", 'success');
+
 // Setting permissions
-out('- Setting permissions for folders...', 'info');
-chmod_r(ROOT . 'data', 0755, 0644);
-chmod_r(ROOT . 'internal_data', 0755, 0644);
-chmod_r(ROOT . 'sitemap', 0755, 0644);
+out("- Setting permissions for folders...", 'info');
+chmod_r(BB_ROOT . 'data', 0755, 0644);
+chmod_r(BB_ROOT . 'internal_data', 0755, 0644);
+chmod_r(BB_ROOT . 'sitemap', 0755, 0644);
 out("- Permissions successfully applied!\n", 'success');
 
 // Check composer installation
-if (!is_file(ROOT . 'vendor/autoload.php')) {
+if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     out('- Hmm, it seems there are no Composer dependencies', 'info');
 
     // Downloading composer
-    if (!is_file(ROOT . 'composer.phar')) {
+    if (!is_file(BB_ROOT . 'composer.phar')) {
         out('- Downloading Composer...', 'info');
-        if (copy('https://getcomposer.org/installer', ROOT . 'composer-setup.php')) {
+        if (copy('https://getcomposer.org/installer', BB_ROOT . 'composer-setup.php')) {
             out("- Composer successfully downloaded!\n", 'success');
-            runProcess('php ' . ROOT . 'composer-setup.php');
+            runProcess('php ' . BB_ROOT . 'composer-setup.php');
         } else {
             out('- Cannot download Composer', 'error');
             exit;
         }
-        if (is_file(ROOT . 'composer-setup.php')) {
-            if (unlink(ROOT . 'composer-setup.php')) {
+        if (is_file(BB_ROOT . 'composer-setup.php')) {
+            if (unlink(BB_ROOT . 'composer-setup.php')) {
                 out("- Composer installation file successfully removed!\n", 'success');
             } else {
                 out('- Cannot remove Composer installation file. Delete it manually', 'warning');
@@ -157,9 +191,9 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
     }
 
     // Installing dependencies
-    if (is_file(ROOT . 'composer.phar')) {
+    if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
-        runProcess('php ' . ROOT . 'composer.phar install --no-interaction --no-ansi');
+        runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         out("- Completed!\n", 'success');
     } else {
         out('- composer.phar not found', 'error');
@@ -168,8 +202,8 @@ if (!is_file(ROOT . 'vendor/autoload.php')) {
 }
 
 // Preparing ENV
-if (is_file(ROOT . '.env.example') && !is_file(ROOT . '.env')) {
-    if (copy(ROOT . '.env.example', ROOT . '.env')) {
+if (is_file(BB_ROOT . '.env.example') && !is_file(BB_ROOT . '.env')) {
+    if (copy(BB_ROOT . '.env.example', BB_ROOT . '.env')) {
         out("- Environment file created!\n", 'success');
     } else {
         out('- Cannot create environment file', 'error');
@@ -184,10 +218,10 @@ $DB_DATABASE = '';
 $DB_USERNAME = '';
 $DB_PASSWORD = '';
 
-if (is_file(ROOT . '.env')) {
+if (is_file(BB_ROOT . '.env')) {
     out("--- Configuring TorrentPier ---", 'info');
 
-    $envContent = file_get_contents(ROOT . '.env');
+    $envContent = file_get_contents(BB_ROOT . '.env');
     if ($envContent === false) {
         out('- Cannot open environment file', 'error');
         exit;
@@ -217,13 +251,13 @@ if (is_file(ROOT . '.env')) {
                     $$key = $newValue;
                 }
             }
-
-            $editedLines[] = $line;
         }
+
+        $editedLines[] = $line;
     }
 
     $newEnvContent = implode("\n", $editedLines);
-    if (file_put_contents(ROOT . '.env', $newEnvContent)) {
+    if (file_put_contents(BB_ROOT . '.env', $newEnvContent)) {
         out("- TorrentPier successfully configured!\n", 'success');
     } else {
         out('- Cannot save environment file', 'error');
@@ -266,7 +300,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     $conn->select_db($DB_DATABASE);
 
     // Checking SQL dump
-    $dumpPath = ROOT . 'install/sql/mysql.sql';
+    $dumpPath = BB_ROOT . 'install/sql/mysql.sql';
     if (is_file($dumpPath) && is_readable($dumpPath)) {
         out('- SQL dump file found and readable!', 'success');
     } else {

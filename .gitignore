@@ -2,11 +2,10 @@
 .idea
 
 ### TorrentPier ###
+*.log
 *.integrity
 .env
 .php_cs.cache
-composer.phar
-configs/local.php
 data/avatars
 data/uploads
 internal_data/atom
@@ -19,7 +18,7 @@ library/config.local.php
 vendor
 
 ### Archives ###
-*.log
+*.phar
 *.rar
 *.tar
 *.gz
