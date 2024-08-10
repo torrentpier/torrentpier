@@ -44,7 +44,9 @@ $t_version_field = $meta_v2 ? 'v2' : 'v1';
 $t_files_field = $meta_v2 ? 'getFileTree' : 'getFiles';
 $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
+// Torrent information
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
+$file_size = humn_size($row['size'], 2);
 
 if (!is_file($file_path)) {
     bb_simple_die($lang['TOR_NOT_FOUND'], 410);
