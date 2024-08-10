@@ -30,12 +30,13 @@ internal_data/log
 ##-> triggers
 internal_data/triggers
 !internal_data/triggers/.htaccess
-##-> other
+!internal_data/triggers/$on
+##-> updater.json
 internal_data/updater.json
 #-- sitemap
 sitemap
 !sitemap/.keep
-# other
+#-- other
 library/config.local.php
 vendor
 
