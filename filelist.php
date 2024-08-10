@@ -108,7 +108,6 @@ $template->assign_vars([
 print_page('filelist.tpl');
 
 echo <<<EOF
-<a href="{$data['site_url']}{$data['topic_url']}" style="font-family: monospace; color: #569904;">&larr; Back to the topic</a>
         <th class="tooltip" style="width: auto;">
             BTMR hash
             <sup>?
