@@ -14,17 +14,10 @@ if (php_sapi_name() !== 'cli') {
     die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
 }
 
-// Check if already installed
-if (is_file(BB_ROOT . '.env')) {
-    out('- TorrentPier already installed', 'error');
-    exit;
-}
-
 /**
  * System requirements
  */
 define('CHECK_REQUIREMENTS', [
-    'status' => true,
     'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
@@ -106,6 +99,27 @@ function runProcess(string $cmd, string $input = null): void
 }
 
 /**
+ * Remove directory recursively
+ *
+ * @param string $dir
+ * @return void
+ */
+function rmdir_rec(string $dir): void
+{
+    $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+    $files = new RecursiveIteratorIterator($it,
+        RecursiveIteratorIterator::CHILD_FIRST);
+    foreach ($files as $file) {
+        if ($file->isDir()) {
+            rmdir($file->getPathname());
+        } else {
+            unlink($file->getPathname());
+        }
+    }
+    rmdir($dir);
+}
+
+/**
  * Setting permissions recursively
  *
  * @param string $dir
@@ -123,11 +137,11 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 
         $fullPath = realpath($dir . '/' . $file);
         if (is_dir($fullPath)) {
-            out("- Directory: $fullPath");
+            // out("- Directory: $fullPath");
             chmod($fullPath, $dirPermissions);
             chmod_r($fullPath, $dirPermissions, $filePermissions);
         } elseif (is_file($fullPath)) {
-            out("- File: $fullPath");
+            // out("- File: $fullPath");
             chmod($fullPath, $filePermissions);
         } else {
             out("- Cannot find target path: $fullPath", 'error');
@@ -160,8 +174,48 @@ foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
 }
 out("- All extensions are installed!\n", 'success');
 
-// Setting permissions
-out("- Setting permissions for folders...", 'info');
+// Check if already installed
+if (is_file(BB_ROOT . '.env')) {
+    out('- TorrentPier already installed', 'warning');
+    echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
+    if (readline() === 'y') {
+        out("\n- Re-install process started...", 'info');
+        // environment
+        if (is_file(BB_ROOT . '.env')) {
+            if (unlink(BB_ROOT . '.env')) {
+                out('- Environment file successfully removed!');
+            } else {
+                out('- Cannot remove environment (.env) file. Delete it manually', 'error');
+                exit;
+            }
+        }
+        // composer.phar
+        if (is_file(BB_ROOT . 'composer.phar')) {
+            if (unlink(BB_ROOT . 'composer.phar')) {
+                out("- composer.phar file successfully removed!");
+            } else {
+                out('- Cannot remove composer.phar file. Delete it manually', 'error');
+                exit;
+            }
+        }
+        // composer dir
+        if (is_dir(BB_ROOT . 'vendor')) {
+            rmdir_rec(BB_ROOT . 'vendor');
+            if (!is_dir(BB_ROOT . 'vendor')) {
+                out("- Composer directory successfully removed!");
+            } else {
+                out('- Cannot remove Composer directory. Delete it manually', 'error');
+                exit;
+            }
+        }
+        out("- Re-install process completed!\n", 'success');
+    } else {
+        exit;
+    }
+}
+
+// Applying permissions
+out("- Applying permissions for folders...", 'info');
 chmod_r(BB_ROOT . 'data', 0755, 0644);
 chmod_r(BB_ROOT . 'internal_data', 0755, 0644);
 chmod_r(BB_ROOT . 'sitemap', 0755, 0644);
@@ -194,7 +248,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
-        out("- Completed!\n", 'success');
+        out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
         out('- composer.phar not found', 'error');
         exit;
