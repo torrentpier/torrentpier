@@ -18,7 +18,6 @@ if (php_sapi_name() !== 'cli') {
  * System requirements
  */
 define('CHECK_REQUIREMENTS', [
-    'status' => true,
     'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
@@ -189,7 +188,7 @@ if (is_file(BB_ROOT . '.env')) {
                 out('- Cannot remove Composer directory. Delete it manually', 'warning');
             }
         }
-        out("- All extensions are installed!\n", 'success');
+        out("- Re-install process started!\n", 'success');
     } else {
         exit;
     }
