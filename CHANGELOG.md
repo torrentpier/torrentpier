@@ -6,14 +6,16 @@
 **Merged pull requests:**
 
 - Release 2.4.5 🦕 ([belomaxorka](https://github.com/belomaxorka))
-- [CLI] TorrentPier installer ☕️ [\#1576](https://github.com/torrentpier/torrentpier/pull/1576), [\#1582](https://github.com/torrentpier/torrentpier/pull/1582) ([belomaxorka](https://github.com/belomaxorka))
+- [CLI] TorrentPier installer ☕️ [\#1576](https://github.com/torrentpier/torrentpier/pull/1576), [\#1582](https://github.com/torrentpier/torrentpier/pull/1582), [\#1585](https://github.com/torrentpier/torrentpier/pull/1585) ([belomaxorka](https://github.com/belomaxorka))
 - Added some new HTML meta-tags [\#1562](https://github.com/torrentpier/torrentpier/pull/1562) ([belomaxorka](https://github.com/belomaxorka))
+- Added robots meta-tag support 🤖 [\#1587](https://github.com/torrentpier/torrentpier/pull/1587) ([belomaxorka](https://github.com/belomaxorka))
 - Added showing releaser stats in profile [\#1568](https://github.com/torrentpier/torrentpier/pull/1568) ([belomaxorka](https://github.com/belomaxorka))
+- Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `md5()` deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
 - Increased `USEREMAIL_MAX_LENGTH` [\#1566](https://github.com/torrentpier/torrentpier/pull/1566) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1570](https://github.com/torrentpier/torrentpier/pull/1570), [\#1571](https://github.com/torrentpier/torrentpier/pull/1571), [\#1575](https://github.com/torrentpier/torrentpier/pull/1575) ([belomaxorka](https://github.com/belomaxorka))
-- New Crowdin updates [\#1569](https://github.com/torrentpier/torrentpier/pull/1569), [\#1572](https://github.com/torrentpier/torrentpier/pull/1572), [\#1573](https://github.com/torrentpier/torrentpier/pull/1573), [\#1574](https://github.com/torrentpier/torrentpier/pull/1574) ([Exileum](https://github.com/Exileum))
+- Minor improvements [\#1570](https://github.com/torrentpier/torrentpier/pull/1570), [\#1571](https://github.com/torrentpier/torrentpier/pull/1571), [\#1575](https://github.com/torrentpier/torrentpier/pull/1575), [\#1589](https://github.com/torrentpier/torrentpier/pull/1589) ([belomaxorka](https://github.com/belomaxorka))
+- New Crowdin updates [\#1569](https://github.com/torrentpier/torrentpier/pull/1569), [\#1572](https://github.com/torrentpier/torrentpier/pull/1572), [\#1573](https://github.com/torrentpier/torrentpier/pull/1573), [\#1574](https://github.com/torrentpier/torrentpier/pull/1574), [\#1588](https://github.com/torrentpier/torrentpier/pull/1588) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.4](https://github.com/torrentpier/torrentpier/tree/v2.4.4) (2024-07-22)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.3...v2.4.4)
@@ -22,7 +24,7 @@
 
 - Release 2.4.4 🦩 ([belomaxorka](https://github.com/belomaxorka))
 - Supports PHP 8.2 / PHP 8.3 ([belomaxorka](https://github.com/belomaxorka))
-- CWE-502 Fixed: Deserialization of untrusted data ([belomaxorka](https://github.com/belomaxorka))
+- CVE-2024-40624: Deserialization of untrusted data ([belomaxorka](https://github.com/belomaxorka))
 - Refactored cache drivers 🗃 [\#1553](https://github.com/torrentpier/torrentpier/pull/1553), [\#1557](https://github.com/torrentpier/torrentpier/pull/1557) ([belomaxorka](https://github.com/belomaxorka))
 - Create tech stack docs (`techstack.yml` and `techstack.md`) [\#1521](https://github.com/torrentpier/torrentpier/pull/1521), [\#1522](https://github.com/torrentpier/torrentpier/pull/1522) ([belomaxorka](https://github.com/belomaxorka))
 - Added MonsterID avatars support 🎇 [\#1546](https://github.com/torrentpier/torrentpier/pull/1546) ([belomaxorka](https://github.com/belomaxorka))

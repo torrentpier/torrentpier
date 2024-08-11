@@ -1348,6 +1348,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Іншы торэнт з такім жа info_
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Выдаліць з трэкера';
 $lang['BT_UNREGISTERED'] = 'Торэнт незарэгістраваных';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1644,6 +1648,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['адказ', 'адказы'];
 $lang['DECLENSION']['TIMES'] = ['час', 'раз'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['другі', 'секунд'],
@@ -1837,7 +1842,7 @@ $lang['DL_DL'] = 'Дл';
 $lang['DL_UL_SPEED'] = 'Хуткасць вул';
 $lang['DL_DL_SPEED'] = 'Хуткасць дл';
 $lang['DL_PORT'] = 'Порт';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Формула: Загружаны/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'спыніўся';

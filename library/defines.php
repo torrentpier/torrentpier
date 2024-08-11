@@ -35,21 +35,6 @@ define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
 define('API_IP_URL', 'https://freeipapi.com/api/json/');
 define('CHECKSUMS_FILE', INT_DATA_DIR . '/checksums.md5');
 define('RESTORE_CORRUPT_CONFIRM_FILE', INT_DATA_DIR . '/rescorrupt.integrity');
-define('CHECK_REQUIREMENTS', [
-    'status' => true,
-    'php_min_version' => '8.1.0',
-    'ext_list' => [
-        'json',
-        'curl',
-        'mysqli',
-        'bcmath',
-        'mbstring',
-        'intl',
-        'xml',
-        'xmlwriter',
-        'zip'
-    ],
-]);
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
