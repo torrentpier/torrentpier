@@ -1,7 +1,7 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 <ul>
     <li>{L_BT_FLIST_CREATION_DATE}: {TORRENT_CREATION_DATE}</li>
-    <li>Торрент-клиент: {TORRENT_CLIENT}</li>
+    <li>{L_DL_CLIENT}: {TORRENT_CLIENT}</li>
 </ul>
 <br>
 
