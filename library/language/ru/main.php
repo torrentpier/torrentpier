@@ -1348,10 +1348,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Другой торрент с таким же
 $lang['BT_V1_ONLY_DISALLOWED'] = 'В данный момент администратор отключил только v1 торренты, разрешены: v2 и гибриды (hybrids)';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'В данный момент администратор отключил v2 торренты, разрешены: v1 и гибриды (hybrids)';
 $lang['BT_FLIST_LIMIT'] = 'Настройки трекера не позволяют обрабатывать списки более чем с %d файлами. Текущее число: %d';
-$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
-$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
-$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
-$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_BTMR_HASH'] = 'Хэш BTMR';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root — хэш файлов, встроенных в торренты с поддержкой BitTorrent v2, пользователи трекеров могут извлечь, вычислить их, также скачать deduplicated торренты с помощью настольных инструментов, таких как <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Дата создания';
+$lang['BT_FLIST_FILE_PATH'] = 'Путь (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Разрегистрировать торрент';
 $lang['BT_UNREGISTERED'] = 'Торрент разрегистрирован';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Торрент уже разрегистрирован';
@@ -1648,7 +1648,7 @@ $lang['SEND_PM_TXTB'] = '[ЛС]';
 
 $lang['DECLENSION']['REPLIES'] = ['ответ', 'ответа'];
 $lang['DECLENSION']['TIMES'] = ['раз', 'раза'];
-$lang['DECLENSION']['FILES'] = ['file', 'files'];
+$lang['DECLENSION']['FILES'] = ['файл', 'файлов'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['секунда', 'секунды'],
@@ -1842,7 +1842,7 @@ $lang['DL_DL'] = 'Скачано';
 $lang['DL_UL_SPEED'] = 'Отдача';
 $lang['DL_DL_SPEED'] = 'Загрузка';
 $lang['DL_PORT'] = 'Порт';
-$lang['DL_CLIENT'] = 'BitTorrent client';
+$lang['DL_CLIENT'] = 'BitTorrent-клиент';
 $lang['DL_FORMULA'] = 'Формула: Отдано/Размер раздачи';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'Остановил Скачивание/Раздачу';
