@@ -208,7 +208,7 @@ if (is_file(BB_ROOT . '.env')) {
                 exit;
             }
         }
-        out('- Re-install process completed!', 'success');
+        out("- Re-install process completed!\n", 'success');
     } else {
         exit;
     }
