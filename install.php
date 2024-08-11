@@ -230,7 +230,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
         out('- Downloading Composer...', 'info');
         if (copy('https://getcomposer.org/installer', BB_ROOT . 'composer-setup.php')) {
             out("- Composer successfully downloaded!\n", 'success');
-            runProcess('php ' . BB_ROOT . 'composer-setup.php');
+            runProcess('php ' . BB_ROOT . 'composer-setup.php --install-dir=' . BB_ROOT);
         } else {
             out('- Cannot download Composer', 'error');
             exit;
