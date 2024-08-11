@@ -230,7 +230,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
         out('- Downloading Composer...', 'info');
         if (copy('https://getcomposer.org/installer', BB_ROOT . 'composer-setup.php')) {
             out("- Composer successfully downloaded!\n", 'success');
-            runProcess('php ' . BB_ROOT . 'composer-setup.php');
+            runProcess('php ' . BB_ROOT . 'composer-setup.php --install-dir=' . BB_ROOT);
         } else {
             out('- Cannot download Composer', 'error');
             exit;
@@ -247,6 +247,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     // Installing dependencies
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
+        runProcess('cd ' . BB_ROOT);
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
