@@ -248,7 +248,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
-        out("- Completed!\n", 'success');
+        out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
         out('- composer.phar not found', 'error');
         exit;
