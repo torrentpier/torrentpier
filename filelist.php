@@ -7,6 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+define('BB_SCRIPT', 'filelist');
+
 require __DIR__ . '/common.php';
 
 // Start session management

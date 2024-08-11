@@ -1,6 +1,6 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 <ul>
-    <li>Дата создания: {TORRENT_CREATION_DATE}</li>
+    <li>{L_BT_FLIST_CREATION_DATE}: {TORRENT_CREATION_DATE}</li>
     <li>Торрент-клиент: {TORRENT_CLIENT}</li>
 </ul>
 <br>
@@ -11,7 +11,7 @@
         <th>#</th>
         <th>Path ({FILES_COUNT} files)</th>
         <th>{L_SIZE}</th>
-        <th>BTMR Hash</th>
+        <th>{L_BT_FLIST_BTMR_HASH}</th>
     </tr>
     </thead>
     <!-- BEGIN filelist -->
