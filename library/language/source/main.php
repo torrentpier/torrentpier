@@ -1647,6 +1647,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['reply', 'replies'];
 $lang['DECLENSION']['TIMES'] = ['time', 'times'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['second', 'seconds'],

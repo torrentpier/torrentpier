@@ -98,7 +98,7 @@ $torrent_size = humn_size($row['size'], 2);
 
 $template->assign_vars([
     'PAGE_TITLE' => "$torrent_name (" . $torrent_size . ")",
-    'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension(iterator_count($files), 'file')),
+    'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension(iterator_count($files), 'files')),
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : $lang['UNKNOWN'],
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR(str_short($creator, 20)) : $lang['UNKNOWN'],
 
