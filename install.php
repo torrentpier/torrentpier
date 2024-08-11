@@ -179,6 +179,7 @@ if (is_file(BB_ROOT . '.env')) {
     out('- TorrentPier already installed', 'warning');
     echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
     if (readline() === 'y') {
+        out('- Re-install process started...', 'info');
         // environment
         if (is_file(BB_ROOT . '.env')) {
             if (unlink(BB_ROOT . '.env')) {
@@ -207,7 +208,7 @@ if (is_file(BB_ROOT . '.env')) {
                 exit;
             }
         }
-        out("- Re-install process started!\n", 'success');
+        out('- Re-install process completed!', 'success');
     } else {
         exit;
     }
