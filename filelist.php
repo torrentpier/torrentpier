@@ -19,7 +19,6 @@ if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
 }
 
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
-
 if (!$topic_id) {
     bb_simple_die($lang['INVALID_TOPIC_ID'], 404);
 }
