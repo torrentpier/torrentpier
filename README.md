@@ -73,14 +73,15 @@ For installation, you need to follow a few simple steps.
 
 1. Install [Composer](https://getcomposer.org/)
 2. Run `composer create-project torrentpier/torrentpier`
-3. After run `composer install` on the project directory
-4. Create database and import dump located at `install/sql/mysql.sql`
-5. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
-6. Provide write permissions to the specified folders:
+3. [Check our system requirements](#-requirements)
+4. After run `composer install` on the project directory
+5. Create database and import dump located at `install/sql/mysql.sql`
+6. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
+7. Provide write permissions to the specified folders:
    * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
    * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
    * `sitemap`
-7. Voila! ✨
+8. Voila! ✨
 
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, and chmod **0644** for files in them.
