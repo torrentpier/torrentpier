@@ -1,7 +1,7 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 <ul>
-    <li>{L_BT_FLIST_CREATION_DATE}: {TORRENT_CREATION_DATE}</li>
-    <li>{L_DL_CLIENT}: {TORRENT_CLIENT}</li>
+    <li>{L_BT_FLIST_CREATION_DATE}: <b>{TORRENT_CREATION_DATE}</b></li>
+    <li>{L_DL_CLIENT}: <b>{TORRENT_CLIENT}</b></li>
 </ul>
 <br>
 
@@ -9,7 +9,7 @@
     <thead>
     <tr>
         <th>#</th>
-        <th>Path ({FILES_COUNT} files)</th>
+        <th>{FILES_COUNT}</th>
         <th>{L_SIZE}</th>
         <th>{L_BT_FLIST_BTMR_HASH}</th>
     </tr>

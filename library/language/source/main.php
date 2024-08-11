@@ -1350,6 +1350,7 @@ $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the adm
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Remove from tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
