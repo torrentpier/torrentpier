@@ -99,6 +99,27 @@ function runProcess(string $cmd, string $input = null): void
 }
 
 /**
+ * Remove directory recursively
+ *
+ * @param string $dir
+ * @return void
+ */
+function rmdir_rec(string $dir): void
+{
+    $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+    $files = new RecursiveIteratorIterator($it,
+        RecursiveIteratorIterator::CHILD_FIRST);
+    foreach ($files as $file) {
+        if ($file->isDir()) {
+            rmdir($file->getPathname());
+        } else {
+            unlink($file->getPathname());
+        }
+    }
+    rmdir($dir);
+}
+
+/**
  * Setting permissions recursively
  *
  * @param string $dir
@@ -161,7 +182,7 @@ if (is_file(BB_ROOT . '.env')) {
         // environment
         if (is_file(BB_ROOT . '.env')) {
             if (unlink(BB_ROOT . '.env')) {
-                out("- Environment file successfully removed!", 'success');
+                out('- Environment file successfully removed!');
             } else {
                 out('- Cannot remove environment (.env) file. Delete it manually', 'error');
                 exit;
@@ -170,22 +191,20 @@ if (is_file(BB_ROOT . '.env')) {
         // composer.phar
         if (is_file(BB_ROOT . 'composer.phar')) {
             if (unlink(BB_ROOT . 'composer.phar')) {
-                out("- composer.phar file successfully removed!", 'success');
+                out("- composer.phar file successfully removed!");
             } else {
-                out('- Cannot remove composer.phar file. Delete it manually', 'warning');
+                out('- Cannot remove composer.phar file. Delete it manually', 'error');
+                exit;
             }
         }
         // composer dir
         if (is_dir(BB_ROOT . 'vendor')) {
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                runProcess(sprintf("rd /s /q %s", escapeshellarg(BB_ROOT . 'vendor')));
-            } else {
-                runProcess(sprintf("rm -rf %s", escapeshellarg(BB_ROOT . 'vendor')));
-            }
+            rmdir_rec(BB_ROOT . 'vendor');
             if (!is_dir(BB_ROOT . 'vendor')) {
-                out("- Composer directory successfully removed!", 'success');
+                out("- Composer directory successfully removed!");
             } else {
-                out('- Cannot remove Composer directory. Delete it manually', 'warning');
+                out('- Cannot remove Composer directory. Delete it manually', 'error');
+                exit;
             }
         }
         out("- Re-install process started!\n", 'success');
