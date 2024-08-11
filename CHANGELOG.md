@@ -8,6 +8,7 @@
 - Release 2.4.5 🦕 ([belomaxorka](https://github.com/belomaxorka))
 - [CLI] TorrentPier installer ☕️ [\#1576](https://github.com/torrentpier/torrentpier/pull/1576), [\#1582](https://github.com/torrentpier/torrentpier/pull/1582), [\#1585](https://github.com/torrentpier/torrentpier/pull/1585) ([belomaxorka](https://github.com/belomaxorka))
 - Added some new HTML meta-tags [\#1562](https://github.com/torrentpier/torrentpier/pull/1562) ([belomaxorka](https://github.com/belomaxorka))
+- Added robots meta-tag support 🤖 [\#1587](https://github.com/torrentpier/torrentpier/pull/1587) ([belomaxorka](https://github.com/belomaxorka))
 - Added showing releaser stats in profile [\#1568](https://github.com/torrentpier/torrentpier/pull/1568) ([belomaxorka](https://github.com/belomaxorka))
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
