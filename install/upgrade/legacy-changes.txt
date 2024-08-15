@@ -125,3 +125,7 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
 )
   ENGINE = MyISAM
   DEFAULT CHARSET = utf8mb4;
+
+// 2.4.1
+INSERT INTO `bb_config`
+VALUES ('bt_announce_url', '');
