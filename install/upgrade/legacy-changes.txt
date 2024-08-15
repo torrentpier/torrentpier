@@ -112,6 +112,9 @@ DELETE FROM `bb_attachments_config` WHERE config_name = 'img_imagick';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'use_gd2';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'wma_autoplay';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'flash_autoplay';
+DELETE FROM `bb_extensions` WHERE extension = 'tif';
+DELETE FROM `bb_extensions` WHERE extension = 'tiff';
+DELETE FROM `bb_extensions` WHERE extension = 'tga';
 DROP TABLE IF EXISTS `bb_banlist`;
 CREATE TABLE IF NOT EXISTS `bb_banlist`
 (
