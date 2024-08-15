@@ -129,3 +129,8 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
 // 2.4.1
 INSERT INTO `bb_config`
 VALUES ('bt_announce_url', '');
+
+// 2.4.2
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`) VALUES ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '255', '', '', '', '1', 'demo_mode_cron', '1', '1', '0');
