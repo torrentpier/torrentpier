@@ -1,3 +1,5 @@
+// Changes from v2.2.0 to 2.4.4
+
 // 2.2.0
 UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
 DELETE FROM `bb_smilies` WHERE `code` = ':ad:';
