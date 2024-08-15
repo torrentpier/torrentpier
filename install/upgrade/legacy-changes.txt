@@ -90,3 +90,35 @@ INSERT INTO `bb_extensions` VALUES ('999', '4', 'tga', '');
 
 // 2.4.0-rc1
 ALTER TABLE `bb_bt_tracker` DROP COLUMN `client`;
+DROP TABLE IF EXISTS `bb_thx`;
+CREATE TABLE IF NOT EXISTS `bb_thx`
+(
+  `topic_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `time`     INT(11)               NOT NULL DEFAULT '0',
+  PRIMARY KEY (`topic_id`, `user_id`)
+)
+  ENGINE = MyISAM
+  DEFAULT CHARSET = utf8mb4;
+
+// 2.4.0
+INSERT INTO `bb_attachments_config`
+VALUES ('upload_dir', 'data/uploads');
+INSERT INTO `bb_attachments_config`
+VALUES ('img_min_thumb_filesize', '12000');
+DELETE FROM `bb_attachments_config` WHERE config_name = 'attach_version';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'img_min_thumb_filesize';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'img_imagick';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'use_gd2';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'wma_autoplay';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'flash_autoplay';
+DROP TABLE IF EXISTS `bb_banlist`;
+CREATE TABLE IF NOT EXISTS `bb_banlist`
+(
+  `ban_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ban_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `ban_reason` VARCHAR(255)          NOT NULL DEFAULT '',
+  PRIMARY KEY (`ban_id`, `ban_userid`)
+)
+  ENGINE = MyISAM
+  DEFAULT CHARSET = utf8mb4;
