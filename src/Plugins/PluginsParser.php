@@ -7,5 +7,4 @@ class PluginsParser
     public function __construct()
     {
     }
-
 }
