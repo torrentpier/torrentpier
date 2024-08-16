@@ -46,7 +46,9 @@ class PluginsParser
                     break;
                 case 'action':
                     if ($line === '~~~~~~~') {
-                        $this->data['actions'][] = $currentAction;
+                        if (!empty($currentAction)) {
+                            $this->data['actions'][] = $currentAction;
+                        }
                         $currentAction = [];
                     } else {
                         if (str_starts_with($line, 'open:')) {
@@ -66,6 +68,8 @@ class PluginsParser
                     break;
             }
         }
+
+        dd($this->data);
 
         fclose($fp);
     }
