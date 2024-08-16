@@ -25,7 +25,7 @@
         </find>
         <!--
         tag: position
-        attributes: after, before, inline, replace, remove
+        attribute (type): after, before, inline, replace, remove
         -->
         <position type="after">
           <code><![CDATA[
