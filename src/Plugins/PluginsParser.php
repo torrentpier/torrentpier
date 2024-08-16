@@ -13,10 +13,37 @@ class PluginsParser
         // Get meta information
         $metaData = $this->getMeta();
 
+        // Get installation steps
+        $installSteps = $this->getSteps();
+
+        // TODO REMOVE
+        dump($metaData);
+        dump($installSteps);
+
         return [
             'meta' => $metaData
         ];
 
+    }
+
+    private function getSteps(): array
+    {
+        $data = [];
+
+        foreach ($this->plguinFile as $line) {
+            if (trim($line) === '~~~~~~~') {
+                // Steps block end
+                break;
+            }
+
+            if (str_starts_with($line, 'open:')) {
+                $targetFile = explode(':', trim($line), 2)[1];
+            } elseif (str_starts_with($line, 'action:')) {
+
+            }
+        }
+
+        return $data;
     }
 
     /**
@@ -35,6 +62,9 @@ class PluginsParser
             }
             if (str_contains($line, ':')) {
                 [$key, $value] = explode(':', trim($line), 2);
+                if (!in_array($key, ['name', 'author', 'version', 'homepage', 'compatibility'])) {
+                    continue;
+                }
                 $data[trim($key)] = trim($value);
             }
         }
