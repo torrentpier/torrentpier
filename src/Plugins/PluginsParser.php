@@ -2,73 +2,106 @@
 
 namespace TorrentPier\Plugins;
 
+use Exception;
+
 class PluginsParser
 {
-    private array $plguinFile;
+    private $data = [];
 
-    public function __construct($file_path)
+    public function __construct($file_content)
     {
-        $this->plguinFile = file($file_path, FILE_IGNORE_NEW_LINES);
-
-        // Get meta information
-        $metaData = $this->getMeta();
-
-        // Get installation steps
-        $installSteps = $this->getSteps();
-
-        // TODO REMOVE
-        dump($metaData);
-        dump($installSteps);
-
-        return [
-            'meta' => $metaData
-        ];
-
+        $this->parseContent($file_content);
     }
 
-    private function getSteps(): array
+    private function parseContent($file_content)
     {
-        $data = [];
+        $lines = explode("\n", trim(file_get_contents($file_content)));
 
-        foreach ($this->plguinFile as $line) {
-            if (trim($line) === '~~~~~~~') {
-                // Steps block end
-                break;
-            }
-
-            if (str_starts_with($line, 'open:')) {
-                $targetFile = explode(':', trim($line), 2)[1];
-            } elseif (str_starts_with($line, 'action:')) {
-
-            }
+        // Извлечение информации о модуле
+        $metaStart = array_search('~~~~~~~~~~~~~~', $lines);
+        $metaEnd = array_search('~~~~~~~~~~~~~~', $lines, $metaStart + 1);
+        if ($metaStart === false || $metaEnd === false) {
+            throw new Exception("Не найден мета-блок.");
         }
-
-        return $data;
-    }
-
-    /**
-     * Getting metadata of plugin
-     *
-     * @return array
-     */
-    private function getMeta(): array
-    {
-        $data = [];
-
-        foreach ($this->plguinFile as $line) {
-            if (trim($line) === '~~~~~~~~~~~~~~') {
-                // Meta block end
-                break;
-            }
+        $metaLines = array_slice($lines, $metaStart + 1, $metaEnd - $metaStart - 1);
+        foreach ($metaLines as $line) {
             if (str_contains($line, ':')) {
-                [$key, $value] = explode(':', trim($line), 2);
-                if (!in_array($key, ['name', 'author', 'version', 'homepage', 'compatibility'])) {
-                    continue;
-                }
-                $data[trim($key)] = trim($value);
+                list($key, $value) = explode(':', trim($line), 2);
+                $this->data[trim($key)] = trim($value);
             }
         }
 
-        return $data;
+        // Извлечение информации о действиях
+        $actionStart = array_search('~~~~~~~', $lines);
+        while (($actionStart = array_search('~~~~~~~', $lines, $actionStart + 1)) !== false) {
+            $actionEnd = array_search('~~~~~~~', $lines, $actionStart + 1);
+            if ($actionEnd === false) {
+                throw new Exception("Не закрыт блок действий.");
+            }
+            $actionLines = array_slice($lines, $actionStart + 1, $actionEnd - $actionStart - 1);
+
+            $openFile = null;
+            $actionType = null;
+            $findCode = null;
+            $pluginCode = null;
+
+            foreach ($actionLines as $line) {
+                if (str_starts_with($line, 'open:')) {
+                    $openFile = trim(str_replace('open:', '', $line));
+                } elseif (str_starts_with($line, 'action:')) {
+                    $actionType = trim(str_replace('action:', '', $line));
+                } elseif (str_starts_with($line, '---- FIND ----')) {
+                    $findCode = trim(implode("\n", array_slice($actionLines, array_search($line, $actionLines) + 1, array_search('---- PLUGIN ----', $actionLines) - array_search($line, $actionLines) - 1)));
+                } elseif (str_starts_with($line, '---- PLUGIN ----')) {
+                    $pluginCode = trim(implode("\n", array_slice($actionLines, array_search($line, $actionLines) + 1)));
+                }
+            }
+
+            if ($openFile && $actionType && $findCode && $pluginCode) {
+                $this->data['actions'][] = [
+                    'open' => $openFile,
+                    'action' => $actionType,
+                    'find' => $findCode,
+                    'code' => $pluginCode,
+                ];
+            }
+        }
+    }
+
+    public function install()
+    {
+        foreach ($this->data['actions'] as $action) {
+            $this->applyAction($action);
+        }
+    }
+
+    private function applyAction($action)
+    {
+        echo "Применяю действие для файла: {$action['open']}n";
+        echo "  Тип действия: {$action['action']}n";
+
+        $fileContent = file_get_contents($action['open']);
+
+        switch ($action['action']) {
+            case 'after_add':
+                $fileContent = str_replace(
+                    $action['find'],
+                    $action['find'] . "\n" . $action['code'],
+                    $fileContent
+                );
+                break;
+            case 'before_add':
+                $fileContent = str_replace(
+                    $action['find'],
+                    $action['code'] . "\n" . $action['find'],
+                    $fileContent
+                );
+                break;
+            default:
+                echo "Неизвестный тип действия: {$action['action']}n";
+                break;
+        }
+
+        file_put_contents($action['open'], $fileContent);
     }
 }
