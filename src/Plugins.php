@@ -15,4 +15,21 @@ namespace TorrentPier;
  */
 class Plugins
 {
+    private object $pluginXml;
+
+    public function __construct(string $path)
+    {
+    }
+
+    public function removePlugin()
+    {
+    }
+
+    private function makeBackup()
+    {
+    }
+
+    private function getMetaInfo()
+    {
+    }
 }
