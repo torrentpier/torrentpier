@@ -10,16 +10,20 @@
 namespace TorrentPier\Plugins;
 
 /**
- * Class PluginsParser
+ * Class Plugins
  * @package TorrentPier\Plugins
  */
-class PluginsParser
+class Plugins
 {
-    public function __construct($path)
+    public static function getList()
     {
     }
 
-    private function getMetadata()
+    public static function installPlugin()
+    {
+    }
+
+    public static function removePlugin()
     {
     }
 }
