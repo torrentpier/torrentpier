@@ -23,7 +23,6 @@ class PluginsParser
         return [
             'meta' => $metaData
         ];
-
     }
 
     private function getSteps(): array
@@ -39,7 +38,6 @@ class PluginsParser
             if (str_starts_with($line, 'open:')) {
                 $targetFile = explode(':', trim($line), 2)[1];
             } elseif (str_starts_with($line, 'action:')) {
-
             }
         }
 
