@@ -19,6 +19,7 @@ class Plugins
 
     public function __construct(string $path)
     {
+        $this->pluginXml = simplexml_load_file($path);
     }
 
     public function removePlugin()

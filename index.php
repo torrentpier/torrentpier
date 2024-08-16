@@ -11,6 +11,9 @@ define('BB_SCRIPT', 'index');
 
 require __DIR__ . '/common.php';
 
+$plugin = new \TorrentPier\Plugins('plugin.txt');
+
+
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
 ];
