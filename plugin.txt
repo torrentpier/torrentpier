@@ -1,14 +1,12 @@
-~~~~
 name: Test Plugin
 author: belomaxorka
 version: v1.0.0
 homepage: https://example.com
-compatibility: v2.4.5 # v2.4.5, v2.4.*, (v2.4.5, v2.4.6)
-~~~~
+compatibility: v2.4.5
+~~~~~~~~~~~~~~
 
-~~~~~~~
 open: library/includes/page_header.php
-action: after # Other: before, after, replace, inline, remove
+action: after
 ---- FIND START ----
 'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 ----- FIND END -----
