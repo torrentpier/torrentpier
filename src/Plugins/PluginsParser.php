@@ -10,62 +10,64 @@ class PluginsParser
 
     public function __construct($file_content)
     {
-        $this->parseContent($file_content);
+        $this->parseFile($file_content);
     }
 
-    private function parseContent($file_content)
+    private function parseFile($file_path)
     {
-        $lines = explode("\n", trim(file_get_contents($file_content)));
-
-        // Извлечение информации о модуле
-        $metaStart = array_search('~~~~~~~~~~~~~~', $lines);
-        $metaEnd = array_search('~~~~~~~~~~~~~~', $lines, $metaStart + 1);
-        if ($metaStart === false || $metaEnd === false) {
-            throw new Exception("Не найден мета-блок.");
-        }
-        $metaLines = array_slice($lines, $metaStart + 1, $metaEnd - $metaStart - 1);
-        foreach ($metaLines as $line) {
-            if (str_contains($line, ':')) {
-                list($key, $value) = explode(':', trim($line), 2);
-                $this->data[trim($key)] = trim($value);
-            }
+        $fp = fopen($file_path, 'r');
+        if (!$fp) {
+            throw new Exception("Не удалось открыть файл: $file_path");
         }
 
-        // Извлечение информации о действиях
-        $actionStart = array_search('~~~~~~~', $lines);
-        while (($actionStart = array_search('~~~~~~~', $lines, $actionStart + 1)) !== false) {
-            $actionEnd = array_search('~~~~~~~', $lines, $actionStart + 1);
-            if ($actionEnd === false) {
-                throw new Exception("Не закрыт блок действий.");
-            }
-            $actionLines = array_slice($lines, $actionStart + 1, $actionEnd - $actionStart - 1);
+        $state = 'initial'; // Состояние парсинга: initial, meta, action
+        $currentAction = []; // Текущий блок действия
+        $meta = []; // Данные мета-блока
 
-            $openFile = null;
-            $actionType = null;
-            $findCode = null;
-            $pluginCode = null;
-
-            foreach ($actionLines as $line) {
-                if (str_starts_with($line, 'open:')) {
-                    $openFile = trim(str_replace('open:', '', $line));
-                } elseif (str_starts_with($line, 'action:')) {
-                    $actionType = trim(str_replace('action:', '', $line));
-                } elseif (str_starts_with($line, '---- FIND ----')) {
-                    $findCode = trim(implode("\n", array_slice($actionLines, array_search($line, $actionLines) + 1, array_search('---- PLUGIN ----', $actionLines) - array_search($line, $actionLines) - 1)));
-                } elseif (str_starts_with($line, '---- PLUGIN ----')) {
-                    $pluginCode = trim(implode("\n", array_slice($actionLines, array_search($line, $actionLines) + 1)));
-                }
-            }
-
-            if ($openFile && $actionType && $findCode && $pluginCode) {
-                $this->data['actions'][] = [
-                    'open' => $openFile,
-                    'action' => $actionType,
-                    'find' => $findCode,
-                    'code' => $pluginCode,
-                ];
+        while (($line = fgets($fp)) !== false) {
+            $line = trim($line);
+            switch ($state) {
+                case 'initial':
+                    if ($line === '~~~~~~~~~~~~~~') {
+                        $state = 'meta';
+                    }
+                    break;
+                case 'meta':
+                    if ($line === '~~~~~~~~~~~~~~') {
+                        $state = 'action';
+                        $this->data['meta'] = $meta;
+                        $meta = [];
+                    } else {
+                        if (str_contains($line, ':')) {
+                            list($key, $value) = explode(':', $line, 2);
+                            $meta[trim($key)] = trim($value);
+                        }
+                    }
+                    break;
+                case 'action':
+                    if ($line === '~~~~~~~') {
+                        $this->data['actions'][] = $currentAction;
+                        $currentAction = [];
+                    } else {
+                        if (str_starts_with($line, 'open:')) {
+                            $currentAction['open'] = trim(str_replace('open:', '', $line));
+                        } elseif (str_starts_with($line, 'action:')) {
+                            $currentAction['action'] = trim(str_replace('action:', '', $line));
+                        } elseif (str_starts_with($line, '---- FIND ----')) {
+                            $currentAction['find'] = trim(implode("\n", array_slice(
+                                explode("\n", $line),
+                                array_search('---- FIND ----', explode("\n", $line)) + 1,
+                                array_search('---- PLUGIN ----', explode("\n", $line)) - array_search('---- FIND ----', explode("\n", $line)) - 1
+                            )));
+                        } elseif (str_starts_with($line, '---- PLUGIN ----')) {
+                            $currentAction['code'] = trim(implode("\n", array_slice(explode("\n", $line), array_search('---- PLUGIN ----', explode("\n", $line)) + 1)));
+                        }
+                    }
+                    break;
             }
         }
+
+        fclose($fp);
     }
 
     public function install()
