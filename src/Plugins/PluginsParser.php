@@ -16,7 +16,6 @@ class PluginsParser
         return [
             'meta' => $metaData
         ];
-
     }
 
     /**
