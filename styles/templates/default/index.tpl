@@ -1,3 +1,5 @@
+{TEST}
+
 <!-- IF #IN_DEMO_MODE -->
 <div class="tCenter">
     <span class="leech">{L_TP_VERSION}: {$bb_cfg['tp_version']}</span><br>

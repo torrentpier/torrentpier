@@ -49,6 +49,10 @@ foreach ($allowedCDNs as $allowedCDN) {
     }
 }
 
+// vQmod
+require_once BB_PATH . '/vqmod/vqmod.php';
+VQMod::bootup();
+
 // Get all constants
 require_once BB_PATH . '/library/defines.php';
 

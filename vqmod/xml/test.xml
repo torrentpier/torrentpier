@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+  <file name="library/includes/page_header.php">
+    <operation error="ignore">
+      <search position="after"><![CDATA[
+        'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
+      ]]></search>
+      <add><![CDATA[
+        'TEST' => 'test',
+      ]]></add>
+    </operation>
+  </file>
+</modification>

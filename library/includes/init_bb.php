@@ -286,8 +286,8 @@ define('USEREMAIL_MAX_LENGTH', 230);
 define('PASSWORD_MIN_LENGTH', 8);
 define('PASSWORD_MAX_LENGTH', 128);
 
-define('PAGE_HEADER', INC_DIR . '/page_header.php');
-define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
+define('PAGE_HEADER', VQMod::modCheck(INC_DIR . '/page_header.php'));
+define('PAGE_FOOTER', VQMod::modCheck(INC_DIR . '/page_footer.php'));
 
 define('CAT_URL', 'index.php?' . POST_CAT_URL . '=');
 define('DL_URL', $bb_cfg['dl_url']);

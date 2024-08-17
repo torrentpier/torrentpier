@@ -17,6 +17,12 @@ internal_data/triggers
 library/config.local.php
 vendor
 
+### vqmod (TEMP) ###
+vqmod/logs
+vqmod/vqcache
+vqmod/mods.cache
+vqmod/checked.cache
+
 ### Archives ###
 *.phar
 *.rar
