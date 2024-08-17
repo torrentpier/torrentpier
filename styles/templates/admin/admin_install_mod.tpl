@@ -1,1 +1,0 @@
-<h1>{L_MODS_MANAGER}</h1>

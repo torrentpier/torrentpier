@@ -17,4 +17,4 @@ require __DIR__ . '/pagestart.php';
 $template->assign_vars([
 ]);
 
-print_page('admin_install_mod.tpl', 'admin');
+print_page('admin_mods_manager.tpl', 'admin');
