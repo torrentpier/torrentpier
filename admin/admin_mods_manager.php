@@ -16,19 +16,46 @@ require __DIR__ . '/pagestart.php';
 
 // Install modification
 if (isset($_POST['submit'])) {
+    $errors = [];
+
     if (!isset($_FILES['xml_file']) || $_FILES['xml_file']['error'] != 0) {
-        bb_die('Ошибка...');
+        $errors[] = 'Что-то пошло не так во время загрузки...';
     }
 
     $file_name = $_FILES['xml_file']['name'];
     $temp_path = $_FILES['xml_file']['tmp_name'];
 
     if (pathinfo($file_name, PATHINFO_EXTENSION) !== 'xml') {
-        bb_die('Ошибка...');
+        $errors[] = 'Неверное расширение файла!';
     }
 
-    if (move_uploaded_file($temp_path, VQMOD_DIR . '/xml/' . $file_name)) {
-        bb_die('Модификация успешно установлена!');
+    if (!move_uploaded_file($temp_path, VQMOD_DIR . '/xml/' . $file_name)) {
+        $errors[] = 'Не удалось загрузить модификацию!';
+    }
+
+    // Perform SQL queries
+    $xml = simplexml_load_file(VQMOD_DIR . '/xml/' . $file_name);
+    $tempLine = '';
+    foreach (explode("\n", trim($xml->sql)) as $line) {
+        if (str_starts_with($line, '--') || $line == '') {
+            continue;
+        }
+
+        $tempLine .= $line;
+        if (str_ends_with(trim($line), ';')) {
+            if (!DB()->query($tempLine)) {
+                $errors[] = "Не удалось выполнить SQL-запрос: $tempLine";
+            } else {
+                dump($tempLine);
+            }
+            $tempLine = '';
+        }
+    }
+
+    if (!empty($errors)) {
+        bb_die($errors[0]);
+    } else {
+        bb_die('Установка модификации прошла успешно!');
     }
 }
 
@@ -39,24 +66,6 @@ foreach (VQMod::$_modFileList as $file) {
     $row_class = ($files_count % 2) ? 'row1' : 'row2';
 
     $xml = simplexml_load_file($file);
-
-    // Perform SQL queries
-    $sql_queries = explode("\n", trim($xml->sql));
-    $tempLine = '';
-    foreach ($sql_queries as $line) {
-        if (str_starts_with($line, '--') || $line == '') {
-            continue;
-        }
-
-        $tempLine .= $line;
-        if (str_ends_with(trim($line), ';')) {
-            if (!DB()->query($tempLine)) {
-                bb_die('Что то пошло не так');
-            }
-            $tempLine = '';
-        }
-    }
-
     $template->assign_block_vars('modifications_list', [
         'ROW_NUMBER' => $files_count,
         'ROW_CLASS' => $row_class,
