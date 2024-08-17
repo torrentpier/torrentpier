@@ -17,6 +17,7 @@ internal_data/triggers
 library/config.local.php
 vendor
 !vqmod/example-modification.xml
+vqmod
 
 ### Archives ###
 *.phar

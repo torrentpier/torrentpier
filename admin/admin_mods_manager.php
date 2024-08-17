@@ -42,11 +42,11 @@ foreach (VQMod::$_modFileList as $file) {
     $template->assign_block_vars('modifications_list', [
         'ROW_NUMBER' => $files_count,
         'ROW_CLASS' => $row_class,
-        'MOD_NAME' => $xml->meta->name,
-        'MOD_AUTHOR' => $xml->meta->author,
-        'MOD_VERSION' => $xml->meta->version,
-        'MOD_LICENSE' => $xml->meta->license,
-        'MOD_COMPATIBILITY' => $xml->meta->compacibility
+        'MOD_NAME' => htmlCHR($xml->meta->name),
+        'MOD_AUTHOR' => htmlCHR($xml->meta->author),
+        'MOD_VERSION' => htmlCHR($xml->meta->version),
+        'MOD_LICENSE' => htmlCHR($xml->meta->license),
+        'MOD_COMPATIBILITY' => htmlCHR($xml->meta->compacibility)
     ]);
 }
 

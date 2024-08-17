@@ -228,7 +228,7 @@ class Template
      */
     public function execute($filename, $code, $handle)
     {
-        $this->cur_tpl = $filename;
+        $this->cur_tpl = VQMod::modCheck($filename);
 
         global $lang, $source_lang, $bb_cfg, $user;
 
@@ -237,7 +237,7 @@ class Template
         $SL =& $source_lang;
 
         if ($filename) {
-            include VQMod::modCheck($filename);
+            include $filename;
         } else {
             eval($code);
         }
