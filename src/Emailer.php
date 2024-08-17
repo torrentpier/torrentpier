@@ -15,6 +15,7 @@ use Symfony\Component\Mailer\Transport\SendmailTransport;
 use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use VQMod;
 
 /**
  * Class Emailer
@@ -102,6 +103,7 @@ class Emailer
                 }
             }
 
+            $tpl_file = VQMod::modCheck($tpl_file);
             if (!$fd = fopen($tpl_file, 'rb')) {
                 bb_die('Failed opening email template file: ' . $tpl_file);
             }
