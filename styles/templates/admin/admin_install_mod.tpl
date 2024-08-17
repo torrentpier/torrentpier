@@ -1,0 +1,1 @@
+<h1>{L_INSTALL_MODS_XML}</h1>

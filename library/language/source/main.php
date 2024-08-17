@@ -1897,6 +1897,7 @@ $lang['MANAGE'] = 'Management';
 $lang['DISALLOW'] = 'Disallow names';
 $lang['PRUNE'] = 'Pruning';
 $lang['MASS_EMAIL'] = 'Mass Email';
+$lang['INSTALL_MODS_XML'] = 'Install modifications (.xml)';
 $lang['RANKS'] = 'Ranks';
 $lang['SMILIES'] = 'Smilies';
 $lang['BAN_MANAGEMENT'] = 'Ban Control';
