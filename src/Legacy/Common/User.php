@@ -14,6 +14,7 @@ use TorrentPier\Legacy\Torrent;
 use TorrentPier\Sessions;
 
 use Exception;
+use VQMod;
 
 /**
  * Class User
@@ -601,13 +602,13 @@ class User
 
         /** Temporary place source language to the global */
         $lang = [];
-        require(SOURCE_LANG_DIR . 'main.php');
+        require VQMod::modCheck(SOURCE_LANG_DIR . 'main.php');
         $source_lang = $lang;
         unset($lang);
 
         /** Place user language to the global */
         global $lang;
-        require(LANG_DIR . 'main.php');
+        require VQMod::modCheck(LANG_DIR . 'main.php');
         setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
         $lang += $source_lang;
 

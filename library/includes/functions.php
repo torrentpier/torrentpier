@@ -1331,7 +1331,7 @@ function bb_die($msg_text, $status_code = null)
 
     // If empty lang
     if (empty($lang)) {
-        require($bb_cfg['default_lang_dir'] . 'main.php');
+        require VQMod::modCheck($bb_cfg['default_lang_dir'] . 'main.php');
     }
 
     // If empty session
