@@ -1,0 +1,204 @@
+// Changes from v2.2.0 to 2.4.4
+
+// 2.2.0
+UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
+DELETE FROM `bb_smilies` WHERE `code` = ':ad:';
+INSERT INTO `bb_smilies` (`code`, `smile_url`, `emoticon`) VALUES (':сd:', 'сd.gif', 'сd');
+DROP TABLE IF EXISTS `bb_ads`;
+DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
+ALTER TABLE `bb_log` DROP COLUMN `log_username`;
+DELETE FROM `bb_config` WHERE `config_name` = 'new_tpls';
+UPDATE `bb_posts` SET `poster_ip` = '0';
+ALTER TABLE `bb_posts` CHANGE `poster_ip` `poster_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_bt_tracker` SET `ip` = '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `ip` `ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_users` SET `user_last_ip` = '0';
+ALTER TABLE `bb_users` CHANGE `user_last_ip` `user_last_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_users` SET `user_reg_ip` = '0';
+ALTER TABLE `bb_users` CHANGE `user_reg_ip` `user_reg_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_log` SET `log_user_ip` = '0';
+ALTER TABLE `bb_log` CHANGE `log_user_ip` `log_user_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_poll_users` SET `vote_ip` = '0';
+ALTER TABLE `bb_poll_users` CHANGE `vote_ip` `vote_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_privmsgs` SET `privmsgs_ip` = '0';
+ALTER TABLE `bb_privmsgs` CHANGE `privmsgs_ip` `privmsgs_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_sessions` SET `session_ip` = '0';
+ALTER TABLE `bb_sessions` CHANGE `session_ip` `session_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_banlist` SET `ban_ip` = '0';
+ALTER TABLE `bb_banlist` CHANGE `ban_ip` `ban_ip` varchar(42) NOT NULL DEFAULT '0';
+
+// 2.2.2
+ALTER TABLE `bb_ranks` DROP `rank_min`;
+ALTER TABLE `bb_ranks` DROP `rank_special`;
+
+// 2.3.0
+ALTER TABLE `bb_cron` CHANGE `last_run` `last_run` DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00';
+ALTER TABLE `bb_cron` CHANGE `next_run` `next_run` DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00';
+ALTER TABLE `bb_users` CHANGE `user_birthday` `user_birthday` DATE NOT NULL DEFAULT '1900-01-01';
+ALTER TABLE `bb_posts` CHANGE `mc_comment` `mc_comment` TEXT NOT NULL DEFAULT '';
+
+// 2.3.0.2
+ALTER TABLE `bb_users` CHANGE `user_sig` `user_sig` TEXT NOT NULL DEFAULT '';
+ALTER TABLE `bb_groups` CHANGE `group_signature` `group_signature` TEXT NOT NULL DEFAULT '';
+ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` TEXT NOT NULL DEFAULT '';
+UPDATE `bb_smilies` SET `code` = ':cd:', `smile_url` = 'cd.gif', `emoticon` = 'cd' WHERE `code` = ':сd:' AND `smile_url` = 'сd.gif' AND `emoticon` = 'сd';
+
+// 2.3.1
+ALTER TABLE `bb_search_results` CHANGE `search_id` `search_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `autologin_id` `autologin_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+DELETE FROM `bb_config` WHERE `config_name` = 'cron_enabled';
+
+// 2.4.0-alpha1
+ALTER TABLE `bb_search_results` CHANGE `session_id` `session_id` CHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+ALTER TABLE `bb_sessions` CHANGE `session_id` `session_id` CHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `username` `username` VARCHAR(255) NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `user_password` `user_password` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `user_actkey` `user_actkey` VARCHAR(255) NOT NULL DEFAULT '';
+ALTER TABLE `bb_users` CHANGE `user_newpasswd` `user_newpasswd` VARCHAR(255) NOT NULL DEFAULT '';
+
+// 2.4.0-alpha3
+INSERT INTO bb_config VALUES ('show_board_start_index', '1');
+
+// 2.4.0-beta2
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`) VALUES ('1', 'PM cleanup', 'clean_pm.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
+ALTER TABLE `bb_posts_text` CHANGE `post_text` `post_text` MEDIUMTEXT NOT NULL;
+ALTER TABLE `bb_privmsgs_text` CHANGE `privmsgs_text` `privmsgs_text` MEDIUMTEXT NOT NULL;
+ALTER TABLE `bb_bt_torrents` ADD COLUMN `info_hash_v2` VARBINARY(32) NOT NULL DEFAULT '';
+ALTER TABLE `bb_bt_tracker_snap` ADD COLUMN `completed` INT(10) NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEFAULT '0';
+
+// 2.4.0-beta3
+INSERT INTO `bb_extensions` VALUES ('994', '1', 'webp', '');
+INSERT INTO `bb_extensions` VALUES ('995', '2', '7z', '');
+INSERT INTO `bb_extensions` VALUES ('996', '1', 'bmp', '');
+ALTER TABLE `bb_bt_tracker` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_torrents` ADD COLUMN `last_seeder_id` MEDIUMINT(8) NOT NULL DEFAULT '0';
+ALTER TABLE `buf_last_seeder` ADD COLUMN `user_id` MEDIUMINT(8) NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `ip` `ip` VARCHAR(42) DEFAULT NULL;
+ALTER TABLE `bb_bt_tracker` CHANGE `ipv6` `ipv6` VARCHAR(42) DEFAULT NULL;
+ALTER TABLE `bb_bt_users` CHANGE `auth_key` `auth_key` CHAR(20) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+
+// 2.4.0-beta4
+DELETE FROM `bb_extensions` WHERE `extension` = 'tif';
+INSERT INTO `bb_extensions` VALUES ('997', '4', 'tif', '');
+INSERT INTO `bb_extensions` VALUES ('998', '4', 'tiff', '');
+DELETE FROM `bb_extensions` WHERE `extension` = 'tga';
+INSERT INTO `bb_extensions` VALUES ('999', '4', 'tga', '');
+
+// 2.4.0-rc1
+ALTER TABLE `bb_bt_tracker` DROP COLUMN `client`;
+DROP TABLE IF EXISTS `bb_thx`;
+CREATE TABLE IF NOT EXISTS `bb_thx`
+(
+  `topic_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id`  MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `time`     INT(11)               NOT NULL DEFAULT '0',
+  PRIMARY KEY (`topic_id`, `user_id`)
+)
+  ENGINE = MyISAM
+  DEFAULT CHARSET = utf8mb4;
+
+// 2.4.0
+INSERT INTO `bb_attachments_config`
+VALUES ('upload_dir', 'data/uploads');
+INSERT INTO `bb_attachments_config`
+VALUES ('img_min_thumb_filesize', '12000');
+DELETE FROM `bb_attachments_config` WHERE config_name = 'attach_version';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'img_min_thumb_filesize';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'img_imagick';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'use_gd2';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'wma_autoplay';
+DELETE FROM `bb_attachments_config` WHERE config_name = 'flash_autoplay';
+DELETE FROM `bb_extensions` WHERE extension = 'tif';
+DELETE FROM `bb_extensions` WHERE extension = 'tiff';
+DELETE FROM `bb_extensions` WHERE extension = 'tga';
+DROP TABLE IF EXISTS `bb_banlist`;
+CREATE TABLE IF NOT EXISTS `bb_banlist`
+(
+  `ban_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ban_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `ban_reason` VARCHAR(255)          NOT NULL DEFAULT '',
+  PRIMARY KEY (`ban_id`, `ban_userid`)
+)
+  ENGINE = MyISAM
+  DEFAULT CHARSET = utf8mb4;
+
+// 2.4.1
+INSERT INTO `bb_config`
+VALUES ('bt_announce_url', '');
+
+// 2.4.2
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`) VALUES ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '255', '', '', '', '1', 'demo_mode_cron', '1', '1', '0');
+
+// 2.4.3
+INSERT INTO `bb_config`
+VALUES ('bt_announce_url', 'https://localhost/bt/announce.php');
+
+// 2.4.4
+ALTER TABLE `bb_attachments` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_attachments_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_attachments_desc` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_attach_quota` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_auth_access` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_auth_access_snap` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_banlist` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_dlstatus` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_dlstatus_snap` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_last_torstat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_last_userstat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_torhelp` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_torrents` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_torstat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_tor_dl_stat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_tracker` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_tracker_snap` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_bt_user_settings` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_categories` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_cron` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_disallow` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_extensions` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_extension_groups` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_forums` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_groups` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_log` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_poll_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_poll_votes` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_posts` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_posts_html` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_posts_search` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_posts_text` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_privmsgs` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_privmsgs_text` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_quota_limits` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_ranks` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_search_rebuild` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_search_results` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_sessions` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_smilies` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_topics` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_topics_watch` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_topic_tpl` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_user_group` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_words` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `buf_last_seeder` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_thx` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `buf_topic_view` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
+ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
+DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
+DELETE FROM `bb_cron` WHERE `cron_script` = 'tr_seed_bonus.php';
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`) VALUES ('1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:10:00', '0', '', '0', '0', '0');

@@ -14,7 +14,7 @@
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `md5()` deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
 - Increased `USEREMAIL_MAX_LENGTH` [\#1566](https://github.com/torrentpier/torrentpier/pull/1566) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1570](https://github.com/torrentpier/torrentpier/pull/1570), [\#1571](https://github.com/torrentpier/torrentpier/pull/1571), [\#1575](https://github.com/torrentpier/torrentpier/pull/1575), [\#1589](https://github.com/torrentpier/torrentpier/pull/1589) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1570](https://github.com/torrentpier/torrentpier/pull/1570), [\#1571](https://github.com/torrentpier/torrentpier/pull/1571), [\#1575](https://github.com/torrentpier/torrentpier/pull/1575), [\#1589](https://github.com/torrentpier/torrentpier/pull/1589), [\#1592](https://github.com/torrentpier/torrentpier/pull/1592) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1569](https://github.com/torrentpier/torrentpier/pull/1569), [\#1572](https://github.com/torrentpier/torrentpier/pull/1572), [\#1573](https://github.com/torrentpier/torrentpier/pull/1573), [\#1574](https://github.com/torrentpier/torrentpier/pull/1574), [\#1588](https://github.com/torrentpier/torrentpier/pull/1588), [\#1590](https://github.com/torrentpier/torrentpier/pull/1590) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.4](https://github.com/torrentpier/torrentpier/tree/v2.4.4) (2024-07-22)
