@@ -18,7 +18,7 @@ abstract class VQMod
      *
      * @var array
      */
-    private static array $_modFileList = [];
+    public static array $_modFileList = [];
 
     /**
      * Array of modifications to apply
@@ -163,12 +163,12 @@ abstract class VQMod
     /**
      * VQMod::bootup()
      *
-     * @param bool $path File path to use
+     * @param bool|string $path File path to use
      * @param bool $logging Enable/disabled logging
-     * @return null
+     * @return void
      * @description Startup of VQMod
      */
-    public static function bootup($path = false, $logging = true)
+    public static function bootup(bool|string $path = false, bool $logging = true): void
     {
         if (!class_exists('DOMDocument')) {
             die('VQMod::bootup - ERROR - YOU NEED THE PHP "DOMDocument" EXTENSION INSTALLED TO USE VQMod');
@@ -181,7 +181,7 @@ abstract class VQMod
         self::$directorySeparator = defined('DIRECTORY_SEPARATOR') ? DIRECTORY_SEPARATOR : '/';
 
         if (!$path) {
-            $path = dirname(dirname(__FILE__));
+            $path = dirname(__FILE__, 2);
         }
         self::_setCwd($path);
 
@@ -205,15 +205,13 @@ abstract class VQMod
      * VQMod::modCheck()
      *
      * @param string $sourceFile path for file to be modified
-     * @param string $modificationFile path for mods to be applied to file
-     * @return string
+     * @param bool|string $modificationFile path for mods to be applied to file
+     * @return bool|string
      * @description Checks if a file has modifications and applies them, returning cache files or the file name
      */
-    public static function modCheck($sourceFile, $modificationFile = false)
+    public static function modCheck(string $sourceFile, bool|string $modificationFile = false): bool|string
     {
-
         if (!self::$_folderChecks) {
-
             if (self::$logging) {
                 // Create log folder if it doesn't exist
                 $log_folder = self::path(self::$logFolder, true);
@@ -274,6 +272,7 @@ abstract class VQMod
             }
         }
 
+        $writePath = null;
         if (sha1($fileData) != $fileHash) {
             $writePath = $cacheFile;
             if (!file_exists($writePath) || is_writable($writePath)) {
@@ -303,7 +302,7 @@ abstract class VQMod
      * @return bool, string
      * @description Returns the full true path of a file if it exists, otherwise false
      */
-    public static function path($path, $skip_real = false)
+    public static function path(string $path, bool $skip_real = false)
     {
         $tmp = self::$_cwd . $path;
         $realpath = $skip_real ? $tmp : self::_realpath($tmp);
@@ -319,7 +318,7 @@ abstract class VQMod
      * @return string
      * @description Returns current working directory
      */
-    public static function getCwd()
+    public static function getCwd(): string
     {
         return self::$_cwd;
     }
@@ -328,10 +327,10 @@ abstract class VQMod
      * VQMod::dirCheck()
      *
      * @param string $path
-     * @return null
+     * @return void
      * @description Creates $path folder if it doesn't exist
      */
-    public static function dirCheck($path)
+    public static function dirCheck(string $path): void
     {
         if (!is_dir($path)) {
             if (!mkdir($path)) {
@@ -344,8 +343,9 @@ abstract class VQMod
      * VQMod::handleXMLError()
      *
      * @description Error handler for bad XML files
+     * @throws DOMException
      */
-    public static function handleXMLError($errno, $errstr, $errfile, $errline)
+    public static function handleXMLError($errno, $errstr): bool
     {
         if ($errno == E_WARNING && (substr_count($errstr, 'DOMDocument::load()') > 0)) {
             throw new DOMException(str_replace('DOMDocument::load()', '', $errstr));
@@ -357,16 +357,15 @@ abstract class VQMod
     /**
      * VQMod::_getMods()
      *
-     * @return null
+     * @return void
      * @description Gets list of XML files in vqmod xml folder for processing
      */
-    private static function _getMods()
+    private static function _getMods(): void
     {
-
         self::$_modFileList = glob(self::path('vqmod/xml/', true) . '*.xml');
 
         foreach (self::$_modFileList as $file) {
-            if (file_exists($file)) {
+            if (is_file($file)) {
                 $lastMod = filemtime($file);
                 if ($lastMod > self::$_lastModifiedTime) {
                     self::$_lastModifiedTime = $lastMod;
@@ -409,7 +408,6 @@ abstract class VQMod
      */
     private static function _parseMods()
     {
-
         set_error_handler(array('VQMod', 'handleXMLError'));
 
         $dom = new DOMDocument('1.0', 'UTF-8');
