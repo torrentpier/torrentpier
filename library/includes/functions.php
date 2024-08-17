@@ -1086,7 +1086,7 @@ function setup_style()
         'SITE_URL' => make_url('/')
     ]);
 
-    require_once TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
+    require_once VQMod::modCheck(TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php');
 
     return ['template_name' => $tpl_dir_name];
 }
@@ -1102,7 +1102,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         $format = $bb_cfg['default_dateformat'];
     }
     if (empty($lang)) {
-        require_once($bb_cfg['default_lang_dir'] . 'main.php');
+        require_once VQMod::modCheck($bb_cfg['default_lang_dir'] . 'main.php');
     }
 
     if (!defined('IS_GUEST') || IS_GUEST) {

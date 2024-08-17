@@ -387,7 +387,7 @@ function make_url(string $path = ''): string
 /**
  * Functions
  */
-require_once INC_DIR . '/functions.php';
+require_once VQMod::modCheck(INC_DIR . '/functions.php');
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
