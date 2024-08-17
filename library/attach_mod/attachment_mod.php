@@ -11,10 +11,10 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-require ATTACH_DIR . '/includes/functions_includes.php';
-require ATTACH_DIR . '/includes/functions_attach.php';
-require ATTACH_DIR . '/includes/functions_delete.php';
-require ATTACH_DIR . '/includes/functions_thumbs.php';
+require VQMod::modCheck(ATTACH_DIR . '/includes/functions_includes.php');
+require VQMod::modCheck(ATTACH_DIR . '/includes/functions_attach.php');
+require VQMod::modCheck(ATTACH_DIR . '/includes/functions_delete.php');
+require VQMod::modCheck(ATTACH_DIR . '/includes/functions_thumbs.php');
 
 if (defined('ATTACH_INSTALL')) {
     return;
@@ -73,7 +73,7 @@ if (!$attach_config = CACHE('bb_cache')->get('attach_config')) {
     CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
 }
 
-include ATTACH_DIR . '/displaying.php';
-include ATTACH_DIR . '/posting_attachments.php';
+include VQMod::modCheck(ATTACH_DIR . '/displaying.php');
+include VQMod::modCheck(ATTACH_DIR . '/posting_attachments.php');
 
 $upload_dir = $attach_config['upload_dir'];

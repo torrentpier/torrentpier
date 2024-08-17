@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use VQMod;
+
 /**
  * Class Template
  * @package TorrentPier\Legacy
@@ -235,7 +237,7 @@ class Template
         $SL =& $source_lang;
 
         if ($filename) {
-            include $filename;
+            include VQMod::modCheck($filename);
         } else {
             eval($code);
         }

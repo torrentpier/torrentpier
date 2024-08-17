@@ -21,9 +21,9 @@ function attachment_quota_settings($admin_mode, $mode, $submit = false)
         $upload_dir = BB_ROOT . $attach_config['upload_dir'];
     }
 
-    include ATTACH_DIR . '/includes/functions_selects.php';
+    include VQMod::modCheck(ATTACH_DIR . '/includes/functions_selects.php');
     if (!function_exists("process_quota_settings")) {
-        include ATTACH_DIR . '/includes/functions_admin.php';
+        include VQMod::modCheck(ATTACH_DIR . '/includes/functions_admin.php');
     }
 
     $user_id = 0;
