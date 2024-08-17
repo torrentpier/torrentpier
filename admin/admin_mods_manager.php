@@ -39,6 +39,24 @@ foreach (VQMod::$_modFileList as $file) {
     $row_class = ($files_count % 2) ? 'row1' : 'row2';
 
     $xml = simplexml_load_file($file);
+
+    // Perform SQL queries
+    $sql_queries = explode("\n", trim($xml->sql));
+    $tempLine = '';
+    foreach ($sql_queries as $line) {
+        if (str_starts_with($line, '--') || $line == '') {
+            continue;
+        }
+
+        $tempLine .= $line;
+        if (str_ends_with(trim($line), ';')) {
+            if (!DB()->query($tempLine)) {
+                bb_die('Что то пошло не так');
+            }
+            $tempLine = '';
+        }
+    }
+
     $template->assign_block_vars('modifications_list', [
         'ROW_NUMBER' => $files_count,
         'ROW_CLASS' => $row_class,
