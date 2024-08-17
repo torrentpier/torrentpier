@@ -11,7 +11,7 @@ define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
 
 require __DIR__ . '/common.php';
-require ATTACH_DIR . '/attachment_mod.php';
+require VQMod::modCheck(ATTACH_DIR . '/attachment_mod.php');
 
 $datastore->enqueue([
     'attach_extensions',

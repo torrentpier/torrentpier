@@ -54,7 +54,7 @@ require_once BB_PATH . '/vqmod/vqmod.php';
 VQMod::bootup();
 
 // Get all constants
-require_once BB_PATH . '/library/defines.php';
+require_once VQMod::modCheck(BB_PATH . '/library/defines.php');
 
 // Composer
 if (!is_file(BB_PATH . '/vendor/autoload.php')) {
@@ -83,11 +83,11 @@ try {
 }
 
 // Load config
-require_once BB_PATH . '/library/config.php';
+require_once VQMod::modCheck(BB_PATH . '/library/config.php');
 
 // Local config
 if (is_file(BB_PATH . '/library/config.local.php')) {
-    require_once BB_PATH . '/library/config.local.php';
+    require_once VQMod::modCheck(BB_PATH . '/library/config.local.php');
 }
 
 /**
@@ -348,7 +348,7 @@ define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 // Initialization
 if (!defined('IN_TRACKER')) {
     // Init board
-    require_once INC_DIR . '/init_bb.php';
+    require_once VQMod::modCheck(INC_DIR . '/init_bb.php');
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
@@ -361,7 +361,7 @@ if (!defined('IN_TRACKER')) {
     define('SCRAPE_LIST_PREFIX', 'scrape_list_');
 
     // Init tracker
-    require_once BB_PATH . '/bt/includes/init_tr.php';
+    require_once VQMod::modCheck(BB_PATH . '/bt/includes/init_tr.php');
 
     header('Content-Type: text/plain');
     header('Pragma: no-cache');

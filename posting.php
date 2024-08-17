@@ -10,8 +10,8 @@
 define('BB_SCRIPT', 'posting');
 
 require __DIR__ . '/common.php';
-require INC_DIR . '/bbcode.php';
-require ATTACH_DIR . '/attachment_mod.php';
+require VQMod::modCheck(INC_DIR . '/bbcode.php');
+require VQMod::modCheck(ATTACH_DIR . '/attachment_mod.php');
 
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
