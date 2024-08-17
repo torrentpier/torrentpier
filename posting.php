@@ -238,7 +238,7 @@ if ($mode == 'new_rel') {
             bb_die($topics . $lang['UNEXECUTED_RELEASE']);
         }
     }
-    require INC_DIR . '/posting_tpl.php';
+    require VQMod::modCheck(INC_DIR . '/posting_tpl.php');
     exit;
 }
 

@@ -514,7 +514,7 @@ $template->assign_vars([
     'PEERS_FULL_LINK' => false,
     'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
 ]);
-require INC_DIR . '/torrent_show_dl_list.php';
+require VQMod::modCheck(INC_DIR . '/torrent_show_dl_list.php');
 
 if ($topic_attachment) {
     require ATTACH_DIR . '/attachment_mod.php';
