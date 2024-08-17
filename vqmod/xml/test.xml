@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modification>
+  <file name="styles/templates/default/index.tpl">
+    <operation error="ignore">
+      <search position="before"><![CDATA[
+        <!-- IF #IN_DEMO_MODE -->
+      ]]></search>
+      <add><![CDATA[
+        {TEST}
+      ]]></add>
+    </operation>
+  </file>
   <file name="library/includes/page_header.php">
     <operation error="ignore">
       <search position="after"><![CDATA[
