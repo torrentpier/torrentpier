@@ -34,16 +34,12 @@ switch ($mode) {
         break;
     case 'clear_template_cache':
         global $template;
+        clearDir($template->cachedir, XS_TPL_PREFIX);
 
-        $match = XS_TPL_PREFIX;
-        $dir = $template->cachedir;
-        $res = @opendir($dir);
-        while (($file = readdir($res)) !== false) {
-            if (str_starts_with($file, $match)) {
-                @unlink($dir . $file);
-            }
-        }
-        closedir($res);
+        $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
+        break;
+    case 'clear_mods_cache':
+        clearDir(VQMOD_DIR . '/vqcache');
 
         $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
         break;

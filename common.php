@@ -217,6 +217,37 @@ function mkdir_rec($path, $mode): bool
     return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
 }
 
+/**
+ * Removes recursively files from folder
+ *
+ * @param string $path
+ * @param string|null $prefix
+ * @param array $exceptedFiles
+ * @return void
+ */
+function clearDir(string $path, string $prefix = null, array $exceptedFiles = []): void
+{
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::CHILD_FIRST
+    );
+
+    foreach ($iterator as $file) {
+        if (isset($prefix) && !str_starts_with($file->getFilename(), $prefix)) {
+            continue;
+        }
+        if (in_array($file->getFilename(), $exceptedFiles)) {
+            continue;
+        }
+
+        if ($file->isFile()) {
+            unlink($file->getPathname());
+        } else {
+            rmdir($file->getPathname());
+        }
+    }
+}
+
 function verify_id($id, $length): bool
 {
     return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
