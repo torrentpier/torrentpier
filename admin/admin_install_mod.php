@@ -8,7 +8,7 @@
  */
 
 if (!empty($setmodules)) {
-    $module['MODS']['INSTALL_MODS_XML'] = basename(__FILE__);
+    $module['MODS']['MODS_MANAGER'] = basename(__FILE__);
     return;
 }
 

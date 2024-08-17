@@ -1,1 +1,1 @@
-<h1>{L_INSTALL_MODS_XML}</h1>
+<h1>{L_MODS_MANAGER}</h1>
