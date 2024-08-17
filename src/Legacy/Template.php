@@ -386,7 +386,7 @@ class Template
             die("Template->loadfile(): No file specified for handle $handle");
         }
 
-        $filename = $this->files[$handle];
+        $filename = VQMod::modCheck($this->files[$handle]);
 
         if (($str = @file_get_contents($filename)) === false) {
             die("Template->loadfile(): File $filename for handle $handle is empty");
@@ -459,7 +459,7 @@ class Template
 
         // load code from file
         if (!$code && !empty($filename)) {
-            $code = file_get_contents($filename);
+            $code = file_get_contents(VQMod::modCheck($filename));
         }
 
         // Replace <!-- (END)PHP --> tags

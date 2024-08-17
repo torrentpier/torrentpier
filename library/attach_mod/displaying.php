@@ -59,7 +59,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
             die("Template->loadfile(): No file specified for handle $template_var");
         }
 
-        $filename_2 = $template->files[$template_var];
+        $filename_2 = VQMod::modCheck($template->files[$template_var]);
 
         $str = file_get_contents($filename_2);
         if (empty($str)) {
@@ -69,7 +69,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
         $template->uncompiled_code[$template_var] = $str;
     }
 
-    $complete_filename = $filename;
+    $complete_filename = VQMod::modCheck($filename);
     if ($complete_filename[0] != '/') {
         $complete_filename = $template->root . '/' . $complete_filename;
     }
