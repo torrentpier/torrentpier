@@ -1080,7 +1080,7 @@ function setup_style()
 
     $template->assign_vars([
         'SPACER' => make_url('styles/images/spacer.gif'),
-        'STYLESHEET' => make_url($css_dir . $stylesheet),
+        'STYLESHEET' => make_url(hide_bb_path(VQMod::modCheck($css_dir . $stylesheet))),
         'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
         'TPL_DIR' => make_url($css_dir),
         'SITE_URL' => make_url('/')
