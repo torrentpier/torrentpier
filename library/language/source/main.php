@@ -1938,6 +1938,7 @@ $lang['NOT_AVAILABLE'] = 'Not available';
 $lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
+$lang['CLEAR_MODS_CACHE'] = 'Modifications cache';
 
 // Update
 $lang['USER_LEVELS'] = 'User levels';

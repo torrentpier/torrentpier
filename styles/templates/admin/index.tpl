@@ -133,7 +133,8 @@
     <td>
       <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>&nbsp;&middot;
       <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_CLEAR_CACHE}</a>&nbsp;&middot;
-      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>
+      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>&nbsp;&middot;
+      <a href="#" id="mods_cache" onclick="ajax.manage_admin('clear_mods_cache'); return false;">{L_CLEAR_MODS_CACHE}</a>
     </td>
   </tr>
   <tr>
