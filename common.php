@@ -233,6 +233,9 @@ function clearDir(string $path, string $prefix = null, array $exceptedFiles = []
     );
 
     foreach ($iterator as $file) {
+        if (!$file->isFile()) {
+            continue;
+        }
         if (isset($prefix) && !str_starts_with($file->getFilename(), $prefix)) {
             continue;
         }
@@ -240,11 +243,7 @@ function clearDir(string $path, string $prefix = null, array $exceptedFiles = []
             continue;
         }
 
-        if ($file->isFile()) {
-            unlink($file->getPathname());
-        } else {
-            rmdir($file->getPathname());
-        }
+        unlink($file->getPathname());
     }
 }
 

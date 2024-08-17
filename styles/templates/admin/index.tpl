@@ -75,6 +75,7 @@
   ajax.callback.manage_admin = function (data) {
     $('#cache').html(data.cache_html);
     $('#datastore').html(data.datastore_html);
+    $('#mods_cache').html(data.mods_cache_html);
     $('#indexer').html(data.indexer_html);
     $('#template_cache').html(data.template_cache_html);
     $('#update_user_level').html(data.update_user_level_html);

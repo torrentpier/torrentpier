@@ -34,14 +34,24 @@ switch ($mode) {
         break;
     case 'clear_template_cache':
         global $template;
-        clearDir($template->cachedir, XS_TPL_PREFIX);
+        if (is_dir($template->cachedir)) {
+            clearDir($template->cachedir, XS_TPL_PREFIX);
+        }
 
         $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
         break;
     case 'clear_mods_cache':
-        clearDir(VQMOD_DIR . '/vqcache');
+        if (is_file(VQMod::$modCache)) {
+            unlink(VQMod::$modCache);
+        }
+        if (is_file(VQMod::$checkedCache)) {
+            unlink(VQMod::$checkedCache);
+        }
+        if (is_dir(VQMod::$vqCachePath)) {
+            clearDir(VQMod::$vqCachePath, exceptedFiles: ['.keep']);
+        }
 
-        $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
+        $this->response['mods_cache_html'] = '<span class="seed bold">' . $lang['ALL_MODS_CACHE_CLEARED'] . '</span>';
         break;
     case 'indexer':
         exec("indexer --config {$bb_cfg['sphinx_config_path']} --all --rotate", $result);
