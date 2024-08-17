@@ -14,6 +14,38 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
+// Install modification
+if (isset($_POST['submit'])) {
+    if (!isset($_FILES['xml_file']) || $_FILES['xml_file']['error'] != 0) {
+        bb_die('Ошибка...');
+    }
+
+    $file_name = $_FILES['xml_file']['name'];
+    $temp_path = $_FILES['xml_file']['tmp_name'];
+
+    if (pathinfo($file_name, PATHINFO_EXTENSION) !== 'xml') {
+        bb_die('Ошибка...');
+    }
+
+    if (move_uploaded_file($temp_path, VQMOD_DIR . '/xml/' . $file_name)) {
+        bb_die('Модификация успешно установлена!');
+    }
+}
+
+// Modification list
+$files_count = 0;
+foreach ($files as $file) {
+    $files_count++;
+    $row_class = ($files_count % 2) ? 'row1' : 'row2';
+    $template->assign_block_vars('modifications_list', [
+        'ROW_NUMBER' => $files_count,
+        'ROW_CLASS' => $row_class,
+        'MOD_NAME' => '',
+        'MOD_AUTHOR' => '',
+        'MOD_VERSION' => ''
+    ]);
+}
+
 $template->assign_vars([
 ]);
 

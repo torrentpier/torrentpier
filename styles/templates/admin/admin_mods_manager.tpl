@@ -28,7 +28,7 @@
 </table>
 
 <br/>
-<form action="admin_mods_manager.php" method="post">
+<form action="admin_mods_manager.php" enctype="multipart/form-data" method="post">
     <table class="forumline">
         <tr>
             <th colspan="4">Установка модификаций</th>
@@ -38,7 +38,7 @@
                 <span class="gen"><b>Выберите файл (.xml):</b></span>
             </td>
             <td>
-                <input type="file" name="avatar"/>
+                <input type="file" accept=".xml" name="xml_file"/>
             </td>
         </tr>
         <tr>
