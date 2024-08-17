@@ -49,7 +49,7 @@ foreach ($allowedCDNs as $allowedCDN) {
     }
 }
 
-// vQmod
+// vQmod loading
 require_once BB_PATH . '/vqmod/vqmod.php';
 VQMod::bootup();
 

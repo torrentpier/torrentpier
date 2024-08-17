@@ -27,6 +27,7 @@ define('LANG_ROOT_DIR', BB_PATH . '/library/language');
 define('SITEMAP_DIR', BB_PATH . '/sitemap');
 define('IMAGES_DIR', BB_PATH . '/styles/images');
 define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
+define('VQMOD_DIR', BB_PATH . '/vqmod');
 
 // System
 define('APP_NAME', 'TorrentPier');
