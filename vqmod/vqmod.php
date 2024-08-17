@@ -933,7 +933,7 @@ class VQModObject
      * VQModObject::_parseMods()
      *
      * @param DOMNode $node <modification> node to be parsed
-     * @return null
+     * @return void
      * @description Parses modifications in preparation for the applyMod method to work
      */
     private function _parseMods(DOMNode $node)
@@ -1025,10 +1025,10 @@ class VQModObject
      * VQModObject::_explodeData()
      *
      * @param string $data file contents
-     * @return string
+     * @return string[]
      * @description Splits a file into an array of individual lines
      */
-    private function _explodeData($data)
+    private function _explodeData(string $data): array
     {
         return explode("\n", $data);
     }

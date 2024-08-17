@@ -33,9 +33,8 @@ if (isset($_POST['submit'])) {
 }
 
 // Modification list
-$xmlFiles = glob(VQMOD_DIR . '/xml/*.xml');
 $files_count = 0;
-foreach ($xmlFiles as $file) {
+foreach (VQMod::$_modFileList as $file) {
     $files_count++;
     $row_class = ($files_count % 2) ? 'row1' : 'row2';
 
