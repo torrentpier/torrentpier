@@ -140,3 +140,14 @@ INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `
 // 2.4.3
 INSERT INTO `bb_config`
 VALUES ('bt_announce_url', 'https://localhost/bt/announce.php');
+
+// 2.4.4
+ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
+ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
+DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
+DELETE FROM `bb_cron` WHERE `cron_script` = 'tr_seed_bonus.php';
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`) VALUES ('1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:10:00', '0', '', '0', '0', '0');
