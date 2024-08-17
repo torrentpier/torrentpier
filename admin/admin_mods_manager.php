@@ -33,20 +33,24 @@ if (isset($_POST['submit'])) {
 }
 
 // Modification list
+$xmlFiles = glob(VQMOD_DIR . '/xml/*.xml');
 $files_count = 0;
-foreach ($files as $file) {
+foreach ($xmlFiles as $file) {
     $files_count++;
     $row_class = ($files_count % 2) ? 'row1' : 'row2';
+
+    $xml = simplexml_load_file($file);
     $template->assign_block_vars('modifications_list', [
         'ROW_NUMBER' => $files_count,
         'ROW_CLASS' => $row_class,
-        'MOD_NAME' => '',
-        'MOD_AUTHOR' => '',
-        'MOD_VERSION' => ''
+        'MOD_NAME' => $xml->meta->name,
+        'MOD_AUTHOR' => $xml->meta->author,
+        'MOD_VERSION' => $xml->meta->version,
+        'MOD_LICENSE' => $xml->meta->license,
+        'MOD_COMPATIBILITY' => $xml->meta->compacibility
     ]);
 }
 
-$template->assign_vars([
-]);
+$template->assign_vars([]);
 
 print_page('admin_mods_manager.tpl', 'admin');
