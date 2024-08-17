@@ -29,7 +29,7 @@ if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0
     $upload_dir = BB_ROOT . $attach_config['upload_dir'];
 }
 
-include ATTACH_DIR . '/includes/functions_selects.php';
+include VQMod::modCheck(ATTACH_DIR . '/includes/functions_selects.php');
 
 // Init Vars
 $types_download = array(INLINE_LINK, PHYSICAL_LINK);

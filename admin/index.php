@@ -37,7 +37,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $setmodules = true;
         while ($file = readdir($dir)) {
             if (preg_match('/^admin_.*?\.php$/', $file)) {
-                include './' . $file;
+                include VQMod::modCheck('./' . $file);
             }
         }
         unset($setmodules);

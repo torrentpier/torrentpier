@@ -12,6 +12,7 @@ namespace TorrentPier\Legacy;
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
 use Exception;
+use VQMod;
 
 /**
  * Class Torrent
@@ -336,7 +337,7 @@ class Torrent
 
         if ($bb_cfg['bt_check_announce_url']) {
             $announce_urls = [];
-            include INC_DIR . '/torrent_announce_urls.php';
+            include VQMod::modCheck(INC_DIR . '/torrent_announce_urls.php');
 
             $ann = $tor['announce'] ?? '';
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
@@ -585,7 +586,7 @@ class Torrent
 
         // Get additional announce urls
         $additional_announce_urls = $announce_urls_add = [];
-        include INC_DIR . '/torrent_announce_urls.php';
+        include VQMod::modCheck(INC_DIR . '/torrent_announce_urls.php');
 
         foreach ($additional_announce_urls as $additional_announce_url) {
             $announce_urls_add[] = [$additional_announce_url];
