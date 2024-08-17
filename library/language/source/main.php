@@ -106,6 +106,7 @@ $lang['ADMIN_PANEL'] = 'Go to Administration Panel';
 $lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
+$lang['ALL_MODS_CACHE_CLEARED'] = 'Modifications cache has been cleared';
 $lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is down for maintenance. Try to come back later';
 $lang['ADMIN_DISABLE'] = 'the forum is disabled by administrator, you can enable it at any time';
