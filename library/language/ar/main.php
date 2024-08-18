@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'الرموز الحد من %s الرموز تج
 
 $lang['ATTACH_SIGNATURE'] = 'إرفاق التوقيع (التوقيعات يمكن تغيير في الملف الشخصي)';
 $lang['NOTIFY'] = 'يخطر لي عندما على الردود';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'رسالتك قد دخلت بنجاح.';
 $lang['EDITED'] = 'الرسالة تم تغيير';
