@@ -1271,7 +1271,7 @@ INSERT INTO `bb_topics`
 VALUES ('1', '1', 'Welcome to TorrentPier Cattle', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1',
         '0',
         '0',
-        '0', UNIX_TIMESTAMP(), '0');
+        '0', UNIX_TIMESTAMP(), '0', '1');
 
 -- ----------------------------
 -- Table structure for `bb_topics_watch`
