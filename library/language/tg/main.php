@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'маҳдудияти Emoticons аз %s emoticon
 
 $lang['ATTACH_SIGNATURE'] = 'Замима имзо (имзо мумкин аст дар намуди тағйир)';
 $lang['NOTIFY'] = 'Вақте ки дар бораи ҷавобҳо маро огоҳ';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'паёми шумо бо муваффақият дохил шуд.';
 $lang['EDITED'] = 'Дар паёми иваз карда шуд';
