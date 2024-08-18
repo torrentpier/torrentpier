@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons limiet van %s emoticons oorskry.';
 
 $lang['ATTACH_SIGNATURE'] = 'Heg handtekening aan (handtekeninge kan in profiel verander word)';
 $lang['NOTIFY'] = 'Stel my in kennis wanneer op antwoorde';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Jou boodskap is suksesvol ingevoer.';
 $lang['EDITED'] = 'Die boodskap is verander';
