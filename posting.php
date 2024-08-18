@@ -627,6 +627,7 @@ $template->assign_vars([
 
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
     'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
+    'ANONYMOUS_MODE' => ($mode == 'reply') ? $lang['ANONYMOUS_REPLY'] : $lang['ANONYMOUS_TOPIC'],
 
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',

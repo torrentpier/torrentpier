@@ -378,6 +378,11 @@ $lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in prof
 $lang['NOTIFY'] = 'Notify me when on replies';
 $lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
+$lang['HIDE_AUTHORSHIP_POSTS'] = 'Hide my authorship in messages (Anonymous mode)';
+$lang['ANONYMOUS_TOPIC'] = 'Anonymous topic';
+$lang['ANONYMOUS_REPLY'] = 'Anonymous reply';
+$lang['AUTH_ANONYMOUS'] = 'Anonymous';
+
 $lang['STORED'] = 'Your message has been entered successfully.';
 $lang['EDITED'] = 'The message has been changed';
 $lang['DELETED'] = 'Your message has been deleted successfully.';
