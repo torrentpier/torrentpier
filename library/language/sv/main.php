@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons gränsen för %s emoticons överskrid
 
 $lang['ATTACH_SIGNATURE'] = 'Bifoga signatur (signaturer kan ändras i profil)';
 $lang['NOTIFY'] = 'Meddela mig när på svar';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ditt meddelande har införts med framgång.';
 $lang['EDITED'] = 'Meddelandet har ändrats';
