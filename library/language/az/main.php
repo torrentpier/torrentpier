@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Limit ifadeler olan ifadeler %s keçib.';
 
 $lang['ATTACH_SIGNATURE'] = 'Birləşdirmək imza (dəyişmək mümkündürsə, profili)';
 $lang['NOTIFY'] = 'Məlumat zaman mənə cavab azn';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Mesaj idi uğurla tətbiq edir.';
 $lang['EDITED'] = 'Mesaj dəyişdirildi';
