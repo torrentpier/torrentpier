@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emotikony limit %s emotikony prekročené.';
 
 $lang['ATTACH_SIGNATURE'] = 'Pripojiť podpis (podpisy môžu byť zmenené v profile)';
 $lang['NOTIFY'] = 'Oznámiť mi, keď sa na odpovede';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Vaša správa bola úspešne vstúpil.';
 $lang['EDITED'] = 'Správa bola zmenená';
