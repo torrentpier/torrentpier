@@ -250,7 +250,7 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
 }
 
 // Notify, allow robots indexing and anonymous mode
-$anonymous_mode = $post_info['post_anonymous_mode'] ?? false; // TODO: bf() & force mode
+$anonymous_mode = $post_info['post_anonymous_mode'] ?? (bool)bf($userdata['user_opt'], 'user_opt', 'user_anonymous');
 $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
     $anonymous_mode = !empty($_POST['anonymous']);
