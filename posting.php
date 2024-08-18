@@ -250,7 +250,7 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
 }
 
 // Notify & Robots indexing
-$robots_indexing = true;
+$robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
     if (IS_AM) {
         $robots_indexing = !empty($_POST['robots']);
