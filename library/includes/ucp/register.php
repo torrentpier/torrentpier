@@ -363,6 +363,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 'user_dls' => $reg_mode ? false : true,
                 'user_callseed' => $reg_mode ? true : true,
                 'user_retracker' => $reg_mode ? true : true,
+                'user_anonymous' => $reg_mode ? $bb_cfg['force_anonymous_mode'] : !$bb_cfg['force_anonymous_mode'],
             ];
 
             foreach ($update_user_opt as $opt => $can_change_opt) {
