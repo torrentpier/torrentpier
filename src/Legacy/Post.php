@@ -90,11 +90,11 @@ class Post
      * @param bool $update_post_time
      * @param int $poster_rg_id
      * @param int $attach_rg_sig
-     * @param bool $robots_indexing
+     * @param int $robots_indexing
      *
      * @return string
      */
-    public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, bool $robots_indexing)
+    public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing)
     {
         global $userdata, $post_info, $is_auth, $bb_cfg, $lang, $datastore;
 
