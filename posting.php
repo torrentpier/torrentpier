@@ -502,6 +502,9 @@ if (!IS_GUEST) {
     }
 }
 
+// Anonymous mode
+$template->assign_var('SHOW_ANONYMOUS_CHECKBOX');
+
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     // Allow robots indexing
