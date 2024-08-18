@@ -249,9 +249,11 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
     }
 }
 
-// Notify & Allow robots indexing
+// Notify, allow robots indexing and anonymous mode
+$anonymous_mode = $post_info['post_anonymous_mode'] ?? false; // TODO: bf() & force mode
 $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
+    $anonymous_mode = !empty($_POST['anonymous']);
     if (IS_AM) {
         $robots_indexing = !empty($_POST['robots']);
     }
@@ -614,7 +616,6 @@ $template->assign_vars([
     'POSTING_TYPE_TITLE' => $page_title,
     'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
     'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? $post_info['topic_title'] : '',
-    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'USERNAME' => @$username,
     'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
@@ -624,10 +625,12 @@ $template->assign_vars([
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
     'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
+    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
+    'S_ANONYMOUS_CHECKED' => $anonymous_mode ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
