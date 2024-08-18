@@ -249,7 +249,7 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
     }
 }
 
-// Notify & Robots indexing
+// Notify & Allow robots indexing
 $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
     if (IS_AM) {
