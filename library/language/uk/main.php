@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Перевищено ліміт (%s) смайл
 
 $lang['ATTACH_SIGNATURE'] = 'Приєднати підпис (можна змінити в профілі)';
 $lang['NOTIFY'] = 'Сповіщати мене про відповіді';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ваше повідомлення було додано успішно.';
 $lang['EDITED'] = 'Повідомлення було змінено';
