@@ -132,6 +132,12 @@
                             <td><label for="notify">{L_NOTIFY}</label></td>
                         </tr>
                         <!-- ENDIF -->
+                        <!-- IF SHOW_ROBOTS_CHECKBOX -->
+                        <tr>
+                            <td><input type="checkbox" id="robots" name="robots" {S_ROBOTS_CHECKED} /></td>
+                            <td><label for="robots">{L_ALLOW_ROBOTS_INDEXING}</label></td>
+                        </tr>
+                        <!-- ENDIF -->
                     </table>
                 </div>
             </td>
