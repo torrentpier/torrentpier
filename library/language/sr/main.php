@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Лимит смајлија од смајлиј
 
 $lang['ATTACH_SIGNATURE'] = 'Додај потпис (потпис можете да промените у профилу)';
 $lang['NOTIFY'] = 'Обавести ме када се на одговоре';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ваша порука је успешно уведен.';
 $lang['EDITED'] = 'Пост је промењено';
