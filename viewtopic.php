@@ -553,8 +553,8 @@ $prev_post_time = $max_post_time = 0;
 
 for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
-    $poster_guest = ($poster_id == GUEST_UID);
     $poster_anonymous = $postrow[$i]['post_anonymous'];
+    $poster_guest = ($poster_id == GUEST_UID || $poster_anonymous);
     $poster_bot = ($poster_id == BOT_UID);
     $poster = $poster_guest ? $lang['GUEST'] : $postrow[$i]['username'];
 
