@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emocijas robeža %s emocijas pārsniegts.';
 
 $lang['ATTACH_SIGNATURE'] = 'Pievienot parakstu (paraksti var tikt mainīts profils)';
 $lang['NOTIFY'] = 'Paziņot man, kad atbildes';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Jūsu ziņojums ir ievadīts veiksmīgi.';
 $lang['EDITED'] = 'Ziņojums ir mainīts';
