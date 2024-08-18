@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Šypsenėlių limitas %s šypsenėlių viršyta
 
 $lang['ATTACH_SIGNATURE'] = 'Pridėti parašą (parašai gali būti pakeista profilio)';
 $lang['NOTIFY'] = 'Pranešti, kai dėl atsakymai';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Jūsų pranešimas buvo įrašyta sėkmingai.';
 $lang['EDITED'] = 'Pranešimas buvo pakeistas';
