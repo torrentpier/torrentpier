@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Hangulatjelek határ %s hangulatjelek meghaladt
 
 $lang['ATTACH_SIGNATURE'] = 'Csatolja aláírás (aláírás lehet módosítani a profil)';
 $lang['NOTIFY'] = 'Értesítést kérek, ha a válaszok';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Az üzenet jelentettek be sikeresen.';
 $lang['EDITED'] = 'Az üzenet megváltozott';

@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Humørikoner grænse for %s humørikoner oversk
 
 $lang['ATTACH_SIGNATURE'] = 'Vedhæft signatur (underskrifter kan ændres i profil)';
 $lang['NOTIFY'] = 'Giv mig besked, når du er på svar';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Din besked er blevet indtastet korrekt.';
 $lang['EDITED'] = 'Meddelelsen er blevet ændret';

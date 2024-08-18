@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons omejitev %s emoticons presežena.';
 
 $lang['ATTACH_SIGNATURE'] = 'Priložite podpis (podpis lahko spremenite v profil)';
 $lang['NOTIFY'] = 'Obvesti me, ko je na odgovori';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Vaše sporočilo je bilo dano uspešno.';
 $lang['EDITED'] = 'Sporočilo je spremenil';

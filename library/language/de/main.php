@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons Grenze von %s emoticons überschritte
 
 $lang['ATTACH_SIGNATURE'] = 'Befestigen Unterschrift (Unterschriften kann geändert werden im Profil)';
 $lang['NOTIFY'] = 'Benachrichtigen Sie mich, wenn auf Antworten';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ihre Nachricht wurde erfolgreich eingegeben.';
 $lang['EDITED'] = 'Die Nachricht geändert wurde';

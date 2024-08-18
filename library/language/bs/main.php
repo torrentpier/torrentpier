@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Praktički limit od %s smajlica premašio.';
 
 $lang['ATTACH_SIGNATURE'] = 'Zakači potpis (potpisi se može promijeniti u profil)';
 $lang['NOTIFY'] = 'Obavesti me kad na odgovara';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Tvoja poruka je uspješno ušao.';
 $lang['EDITED'] = 'Poruka je promenjena';

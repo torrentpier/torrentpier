@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '絵文字制限の%s絵文字を超えます。
 
 $lang['ATTACH_SIGNATURE'] = '添付signature(署名を変更できるプロファイル）';
 $lang['NOTIFY'] = 'あだに回答';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'メッセージを入力します。';
 $lang['EDITED'] = 'メッセージが変更され';

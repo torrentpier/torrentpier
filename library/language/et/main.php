@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emotikonide limiidi %s emotikone ületatud.';
 
 $lang['ATTACH_SIGNATURE'] = 'Lisada signatuur (signatuure saab muuta profiili)';
 $lang['NOTIFY'] = 'Teavita mind, kui vastused';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Teie sõnum on edukalt sisestatud.';
 $lang['EDITED'] = 'Teade on muudetud';

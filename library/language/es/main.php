@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticonos límite de %s emoticonos superado.';
 
 $lang['ATTACH_SIGNATURE'] = 'Adjuntar firma (firmas puede ser cambiada en el perfil)';
 $lang['NOTIFY'] = 'Notificarme cuando en las respuestas';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Su mensaje ha sido introducido correctamente.';
 $lang['EDITED'] = 'El mensaje ha sido cambiado';

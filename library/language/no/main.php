@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Uttrykksikoner grense på %s uttrykksikoner ove
 
 $lang['ATTACH_SIGNATURE'] = 'Legg ved signatur (signaturer kan endres i profilen)';
 $lang['NOTIFY'] = 'Gi meg beskjed når den er på svar';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Din melding har blitt skrevet inn riktig.';
 $lang['EDITED'] = 'Meldingen har blitt endret';

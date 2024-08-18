@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons όριο %s emoticons υπέρβασ�
 
 $lang['ATTACH_SIGNATURE'] = 'Συνδέστε υπογραφή (υπογραφές μπορεί να αλλάξει το προφίλ)';
 $lang['NOTIFY'] = 'Ειδοποιήστε με όταν στις απαντήσεις';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Το μήνυμά σας έχει καταχωρηθεί με επιτυχία.';
 $lang['EDITED'] = 'Το μήνυμα έχει αλλάξει';

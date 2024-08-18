@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticoane limita de %s emoticoane depășit.';
 
 $lang['ATTACH_SIGNATURE'] = 'Atașați semnătura (semnături poate fi schimbata din profil)';
 $lang['NOTIFY'] = 'Anunță-mă când pe răspunsurile';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Mesajul tau a fost introdus cu succes.';
 $lang['EDITED'] = 'Mesajul a fost schimbat';

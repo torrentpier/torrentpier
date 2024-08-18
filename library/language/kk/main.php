@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '%s Смайликтер Смайликтер ш
 
 $lang['ATTACH_SIGNATURE'] = 'қолы бекітіңіз (қол қою профиліне өзгертуге болады)';
 $lang['NOTIFY'] = 'кезде жауаптарды маған хабарлаңыз';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Сіздің хабарлама сәтті енгізілді.';
 $lang['EDITED'] = 'Хабарлама өзгертілді';

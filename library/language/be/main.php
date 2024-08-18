@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Ліміт смайлікаў з смайлік
 
 $lang['ATTACH_SIGNATURE'] = 'Далучыць подпіс (подпісы можна змяняць у профілі)';
 $lang['NOTIFY'] = 'Апавясціць мяне, калі на адказы';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ваша паведамленне было паспяхова ўведзена.';
 $lang['EDITED'] = 'Паведамленне было зменена';

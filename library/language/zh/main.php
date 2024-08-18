@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '表情限制的%s表情，超过。';
 
 $lang['ATTACH_SIGNATURE'] = '附上签名(签名可以改变在个人资料)';
 $lang['NOTIFY'] = '时通知我在答复';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = '您的信息已经进入了成功。';
 $lang['EDITED'] = '该消息已经被改变了';

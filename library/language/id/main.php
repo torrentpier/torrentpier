@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticon batas %s emoticon terlampaui.';
 
 $lang['ATTACH_SIGNATURE'] = 'Pasang signature (tanda tangan dapat diubah di profil)';
 $lang['NOTIFY'] = 'Beritahu saya ketika pada balasan';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Pesan anda telah berhasil masuk.';
 $lang['EDITED'] = 'Pesan telah berubah';

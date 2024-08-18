@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Les emoticones límit de %s emoticones superat.
 
 $lang['ATTACH_SIGNATURE'] = 'Adjuntar signatura (signatures es poden canviar de perfil)';
 $lang['NOTIFY'] = 'Notificar-me quan en les respostes';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'El seu missatge ha estat introduït amb èxit.';
 $lang['EDITED'] = 'El missatge ha canviat';

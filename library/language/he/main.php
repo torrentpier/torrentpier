@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'הבעה גבול של %s הבעה חריגה.'
 
 $lang['ATTACH_SIGNATURE'] = 'לצרף חתימה (חתימות ניתן לשנות פרופיל)';
 $lang['NOTIFY'] = 'הודע לי כאשר תגובות';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'ההודעה שלך יוזנו בהצלחה.';
 $lang['EDITED'] = 'את ההודעה השתנה';

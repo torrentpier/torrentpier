@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'इमोटिकॉन की सीमा %s
 
 $lang['ATTACH_SIGNATURE'] = 'हस्ताक्षर संलग्न करें (प्रोफ़ाइल में हस्ताक्षर परिवर्तित किए जा सकते हैं)';
 $lang['NOTIFY'] = 'उत्तर पर मुझे सूचित करें';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'आपका संदेश सफलतापूर्वक दर्ज किया गया है';
 $lang['EDITED'] = 'संदेश बदल दिया गया है';

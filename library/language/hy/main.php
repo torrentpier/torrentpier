@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Սահմանաչափը սմայլներ են ս
 
 $lang['ATTACH_SIGNATURE'] = 'Հավելված ստորագրությունը (ստորագրությունները կարելի է փոփոխել պրոֆիլի)';
 $lang['NOTIFY'] = 'Տեղեկացնել ինձ, երբ պատասխանները';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ձեր հաղորդագրությունը հաջողությամբ է մտցվել ։ ';
 $lang['EDITED'] = 'Հաղորդագրություն փոխվել է';

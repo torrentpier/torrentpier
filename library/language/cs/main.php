@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emotikony limit %s emotikony překročena.';
 
 $lang['ATTACH_SIGNATURE'] = 'Připojit podpis (podpis můžete změnit v profilu)';
 $lang['NOTIFY'] = 'Upozorněte mě, když se na odpovědi';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Vaše zpráva byla vstoupil úspěšně.';
 $lang['EDITED'] = 'Zpráva byla změněna';
