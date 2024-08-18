@@ -376,7 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Лимит в %s смайликов в сооб
 
 $lang['ATTACH_SIGNATURE'] = 'Присоединить подпись (можно изменять в профиле)';
 $lang['NOTIFY'] = 'Сообщать мне о получении ответа';
-$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Разрешить индексацию роботами этой темы';
 
 $lang['STORED'] = 'Сообщение было успешно добавлено';
 $lang['EDITED'] = 'Сообщение было успешно изменено';
