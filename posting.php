@@ -500,14 +500,14 @@ if (!IS_GUEST) {
     }
 }
 
-// Allow robots indexing
-if (IS_AM && $mode == 'newtopic') {
-    $template->assign_var('SHOW_ROBOTS_CHECKBOX');
-}
-
-// Topic type selection
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
+    // Allow robots indexing
+    if (IS_AM) {
+        $template->assign_var('SHOW_ROBOTS_CHECKBOX');
+    }
+
+    // Topic type selection
     $template->assign_block_vars('switch_type_toggle', []);
 
     if ($is_auth['auth_sticky']) {
