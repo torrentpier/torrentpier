@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '%s So\'zlari jumlalari chegarasi oshdi.';
 
 $lang['ATTACH_SIGNATURE'] = 'imzo biriktiring (imzo profili o\'zgarishi mumkin)';
 $lang['NOTIFY'] = 'qachon javoblar haqida meni xabardor qiling';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Xabaringiz muvaffaqiyatli kirib kelmoqda.';
 $lang['EDITED'] = 'Xabar o\'zgartirildi';
