@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Hymiöitä raja %s hymiöitä ylitetty.';
 
 $lang['ATTACH_SIGNATURE'] = 'Liitä allekirjoitus (allekirjoitusta voidaan vaihtaa profiilin)';
 $lang['NOTIFY'] = 'Ilmoita minulle, kun vastaukset';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Viestisi on kirjattu onnistuneesti.';
 $lang['EDITED'] = 'Viesti on muutettu';
