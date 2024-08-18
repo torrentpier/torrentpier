@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '이모티콘 제한 %s 이모티콘을 초과�
 
 $lang['ATTACH_SIGNATURE'] = '첨부 서명(서명을 변경할 수 있습 프로필)';
 $lang['NOTIFY'] = '나에게 통보할 때에 응답';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = '귀하의 메시지가 입력되었습니다.';
 $lang['EDITED'] = '메시지가 변경된';
