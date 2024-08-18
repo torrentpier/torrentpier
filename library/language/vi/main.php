@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Biểu tượng giới hạn của %s cảm vư
 
 $lang['ATTACH_SIGNATURE'] = 'Gắn chữ ký (chữ ký có thể được thay đổi trong hồ sơ)';
 $lang['NOTIFY'] = 'Thông báo cho tôi khi trả lời';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Tin nhắn của bạn đã được nhập vào thành công.';
 $lang['EDITED'] = 'Các tin nhắn đã được thay đổi';
