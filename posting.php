@@ -249,8 +249,12 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
     }
 }
 
-// Notify
+// Notify & Robots indexing
+$robots_indexing = true;
 if ($submit || $refresh) {
+    if (IS_AM) {
+        $robots_indexing = (int)!empty($_POST['robots']);
+    }
     $notify_user = (int)!empty($_POST['notify']);
 } else {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
@@ -334,7 +338,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
+                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -496,6 +500,11 @@ if (!IS_GUEST) {
     }
 }
 
+// Allow robots indexing
+if (IS_AM && $mode == 'newtopic') {
+    $template->assign_var('SHOW_ROBOTS_CHECKBOX');
+}
+
 // Topic type selection
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
@@ -613,11 +622,12 @@ $template->assign_vars([
     'MESSAGE' => $message,
 
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
-    'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
+    'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
 
-    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked' : '',
+    'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
+    'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,

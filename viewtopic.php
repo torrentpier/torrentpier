@@ -113,6 +113,9 @@ $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 $topic_attachment = isset($t_data['topic_attachment']) ? (int)$t_data['topic_attachment'] : null;
 
+// Allow robots
+$page_cfg['allow_robots'] = (bool)$t_data['topic_allow_robots'];
+
 if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
     bb_die($lang['ERROR_PORNO_FORUM']);
 }
