@@ -152,7 +152,8 @@ class Post
 			SET
 				topic_title = '$post_subject',
 				topic_type = $topic_type,
-				topic_dl_type = $topic_dl_type
+				topic_dl_type = $topic_dl_type,
+				topic_allow_robots = $robots_indexing
 			WHERE
 				topic_id = $topic_id
 		";
