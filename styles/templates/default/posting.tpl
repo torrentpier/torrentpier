@@ -134,7 +134,7 @@
                         <!-- ENDIF -->
                         <!-- IF SHOW_ROBOTS_CHECKBOX -->
                         <tr>
-                            <td><input type="checkbox" id="robots" name="robots" {S_NOTIFY_CHECKED} /></td>
+                            <td><input type="checkbox" id="robots" name="robots" {S_ROBOTS_CHECKED} /></td>
                             <td><label for="robots">{L_ALLOW_ROBOTS_INDEXING}</label></td>
                         </tr>
                         <!-- ENDIF -->
