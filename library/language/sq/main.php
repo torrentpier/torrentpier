@@ -376,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons kufirin e %s emoticons tejkaluar.';
 
 $lang['ATTACH_SIGNATURE'] = 'Bashkëngjitni nënshkrimit (firmave mund të ndryshohet në profile)';
 $lang['NOTIFY'] = 'Të njoftojë mua kur në përgjigjet e';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Mesazhi juaj ka hyrë me sukses.';
 $lang['EDITED'] = 'Mesazhi ka qenë i ndryshuar';
