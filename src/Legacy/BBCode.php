@@ -123,10 +123,10 @@ class BBCode
             '[/i]' => '</span>',
             '[s]' => '<span class="post-s">',
             '[/s]' => '</span>',
-            '[sup]' => '<sup>',
-            '[/sup]' => '</sup>',
-            '[sub]' => '<sub>',
-            '[/sub]' => '</sub>',
+            '[sup]' => '<sup><small>',
+            '[/sup]' => '</small></sup>',
+            '[sub]' => '<sub><small>',
+            '[/sub]' => '</small></sub>',
             '[box]' => '<div class="post-box-default"><div class="post-box">',
             '[/box]' => '</div></div>',
             '[indent]' => '<div class="post-indent">',
@@ -350,7 +350,10 @@ class BBCode
         global $datastore;
 
         if (null === $this->smilies) {
-            $this->smilies = $datastore->get('smile_replacements');
+            if (!$this->smilies = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
+                $datastore->update('smile_replacements');
+                $this->smilies = $datastore->get('smile_replacements');
+            }
         }
 
         if ($this->smilies) {

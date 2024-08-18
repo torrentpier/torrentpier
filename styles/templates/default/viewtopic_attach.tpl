@@ -347,6 +347,7 @@ $('#tor-filelist-btn').click(function () {
 	margin: 0 2px; padding: 8px 6px;
 	max-height: 284px; overflow: auto;
 }
+.tor-filelist-fullsize { max-height: unset !important; }
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
 #tor-filelist .b > s { color: #800000; }
@@ -363,8 +364,11 @@ $('#tor-filelist-btn').click(function () {
 	<table class="w100 borderless" cellspacing="0" cellpadding="0">
 	<tr>
 		<td>
-			<div id="tor-fl-treecontrol">
+			<div style="float: left;" id="tor-fl-treecontrol">
 				<a href="#">{L_COLLAPSE}</a>&middot;<a href="#">{L_EXPAND}</a>&middot;<a href="#">{L_SWITCH}</a>
+			</div>
+			<div style="float: right; padding: 2px 0 4px;">
+				<a style="padding: 0 8px; font-size: 11px; text-decoration: none;" href="#" onclick="$('#tor-filelist').toggleClass('tor-filelist-fullsize'); return false;">{L_TOGGLE_WINDOW_FULL_SIZE}</a>
 			</div>
 		</td>
 	</tr>
@@ -429,7 +433,8 @@ $('#tor-filelist-btn').click(function () {
         ajax.exec({
             action: 'thx',
             mode: mode,
-            topic_id: {TOPIC_ID}
+            topic_id: {TOPIC_ID},
+            poster_id: {postrow.POSTER_ID}
         });
     }
     ajax.callback.thx = function (data) {
@@ -459,14 +464,16 @@ $('#tor-filelist-btn').click(function () {
     }
 </script>
 <div id="thx-block">
-    <!-- IF not postrow.attach.tor_reged.TOR_AUTHOR -->
+    <!-- IF not IS_GUEST -->
     <div id="thx-btn-div">
         <input id="thx-btn" type="button" class="bold" style="width: 200px;" value="{L_THANK_TOPIC}">
     </div>
     <!-- ENDIF -->
+    <!-- IF not IS_GUEST or $bb_cfg['tor_thanks_list_guests'] -->
     <div class="sp-wrap">
         <div id="thx-list" class="sp-body" data-no-sp-open="true" title="{L_LAST_LIKES}"></div>
     </div>
+    <!-- ENDIF -->
 </div>
 <!-- ENDIF -->
 

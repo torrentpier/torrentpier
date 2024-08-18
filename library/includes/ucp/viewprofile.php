@@ -30,7 +30,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL], profile_view: true)) {
     bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
-if (!$ranks = $datastore->get('ranks')) {
+if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }
@@ -72,6 +72,11 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     }
 } elseif ($signature) {
     $signature = bbcode2html($signature);
+}
+
+// Null ratio
+if ($bb_cfg['ratio_null_enabled'] && $btu = get_bt_userdata($profiledata['user_id'])) {
+    $template->assign_vars(array('NULLED_RATIO' => $btu['ratio_nulled']));
 }
 
 // Ban information

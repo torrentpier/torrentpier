@@ -61,6 +61,7 @@ $lang['DISABLED'] = '장애인';
 $lang['ERROR'] = '류';
 $lang['SELECT_ACTION'] = '선택 작업';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = '알 수 없음';
 
 $lang['NEXT_PAGE'] = '다음';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '이모티콘 제한 %s 이모티콘을 초과�
 
 $lang['ATTACH_SIGNATURE'] = '첨부 서명(서명을 변경할 수 있습 프로필)';
 $lang['NOTIFY'] = '나에게 통보할 때에 응답';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = '귀하의 메시지가 입력되었습니다.';
 $lang['EDITED'] = '메시지가 변경된';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = '죄송하지만,귀하의 비밀번호를 검색할 
 
 $lang['ALWAYS_ADD_SIG'] = '항상 붙 내명';
 $lang['HIDE_PORN_FORUMS'] = '숨기기 컨텐츠 18+';
+$lang['ADD_RETRACKER'] = '추가 retracker 에서는 토렌트파일';
 $lang['ALWAYS_NOTIFY'] = '항상 저에게 알려의 응답';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = '전자 메일을 보냅 때 누군가가 답글을 주제를 게시합니다. 이것은 변경할 수 있습할 때마다 포스트합니다.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = '환 프로필';
 $lang['SELECT_CATEGORY'] = '카테고리 선택';
 
 $lang['DELETE_IMAGE'] = '이미지의 이미지 삭제';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = '현재 이미지';
 
 $lang['NOTIFY_ON_PRIVMSG'] = '통지에서 새로운 비공개 메시지';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = '다른 토렌트 같은 info_hash 이미 <a hr
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = '제거에서 추적';
 $lang['BT_UNREGISTERED'] = 'Torrent 등록';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = '종자 마지막으로 본';
 $lang['BT_SORT_FORUM'] = '포럼';
 $lang['SIZE'] = '크기';
 $lang['PIECE_LENGTH'] = '조각 길이';
-$lang['COMPLETED'] = '완료';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = '추가';
 $lang['DELETE_TORRENT'] = '토렌트 삭제';
 $lang['DELETE_MOVE_TORRENT'] = '삭제하고 이동을 주제';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['답변', '답글'];
 $lang['DECLENSION']['TIMES'] = ['시간', '시간'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['두 번째', '초'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = '붕괴 디렉토리';
 $lang['EXPAND'] = '확장';
 $lang['SWITCH'] = '스위치';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = '지 않는 파일을 식별자!';
 $lang['TOR_NOT_FOUND'] = '파일이 없는 서버에!';
 $lang['ERROR_BUILD'] = '콘텐츠의 이 torrent 파일을 수 있는지에 표시되는 사이트(이하지 않게 가능한 파일 목록을 작성)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL 속도';
 $lang['DL_DL_SPEED'] = 'DL 속도';
 $lang['DL_PORT'] = '트';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = '공식:에 업로드/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = '을 중지';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = '이름을 입력할 수 없습 허용되지 않�
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '클릭 %sHere%s 하는 반품을 허용하지 않는 사용자 이름 관리';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = '버전 정보';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Extension';
 $lang['RETURN_CONFIG'] = '%sReturn 을 Configuration%s';
 $lang['CONFIG_UPD'] = '구성 성공적으로 업데이트';
 $lang['SET_DEFAULTS'] = '기본값 복원';
-
-$lang['OFF_TRACKER'] = '비활성화 추적자';
-$lang['OFF_REASON'] = '사는 이유';
-$lang['OFF_REASON_EXPL'] = '이 메시지를 보낸 클라이언트에 추가 비활성화';
-$lang['AUTOCLEAN_EXPL'] = '자동 청소 동료들은 테이블을 해제하지 않는 이유 없이';
-$lang['COMPACT_MODE'] = '컴팩트 모드';
-$lang['COMPACT_MODE_EXPL'] = '"예"추적이만 허용 클라이언트에서 일하고 콤팩트 mode<br />"No"-환 모드지(선택하여 클라이언트)';
-$lang['BROWSER_REDIRECT_URL'] = '리디렉션 URL 은 브라우저';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = '사용자가 열려고 하면 추적 URL 웹 browser<br />leave 빈 사용';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = '기타';
-$lang['ANNOUNCE_INTERVAL'] = '발표 간격';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = '동료 기다려야 한다 적어도 여기에 초 사이의 공지사항';
-$lang['NUMWANT'] = 'Numwant 값';
-$lang['NUMWANT_EXPL'] = '숫자의 동료에게 보내는 클라이언트';
-$lang['EXPIRE_FACTOR'] = '피어 만료되는 요인';
-$lang['EXPIRE_FACTOR_EXPL'] = '을 고려한 피어 죽지 않은 경우에 발표의 수를 초과 같이 여러 번의 계산을 발표 간격을 시간의 그것의 마지막 공고(보다 커야 합니다 1)';
-$lang['IGNORE_GIVEN_IP'] = '무 IP 클라이언트에 의해 보고';
-$lang['UPDATE_DLSTAT'] = '저장 사용자를 위/아래로 통계';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = '제한';
-$lang['LIMIT_ACTIVE_TOR'] = '제한 활성 급류';
-$lang['LIMIT_SEED_COUNT'] = '시드한';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0-제한 없음)';
-$lang['LIMIT_LEECH_COUNT'] = '를 찾아보세한';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0-제한 없음)';
-$lang['LEECH_EXPIRE_FACTOR'] = '거머리는 만료되는 요인';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = '치료 피어 활동에 대한 이 번호는 분의 경우에도 전송되어 이벤트를 시작한 후 dl<br />0-계정으로"중"이벤트';
-$lang['LIMIT_CONCURRENT_IPS'] = "제한 동시 IP 의";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = '토렌트당 제한';
-$lang['LIMIT_SEED_IPS'] = '시드 IP 한';
-$lang['LIMIT_SEED_IPS_EXPL'] = "용 시드에서 이상 더 이상 <i>xx</i>IP's<br />0-제한 없음";
-$lang['LIMIT_LEECH_IPS'] = '를 찾아보세 IP 한';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "허용한 에너지를 빨아서 더 이상 <i>xx</i>IP's<br />0-제한 없음";
-
-$lang['USE_AUTH_KEY_HEAD'] = '인증';
-$lang['USE_AUTH_KEY'] = '암호';
-$lang['USE_AUTH_KEY_EXPL'] = '도록 확인을 위해 암호';
-$lang['AUTH_KEY_NAME'] = '이름 암호';
-$lang['AUTH_KEY_NAME_EXPL'] = '암호를 키 이름에서 얻을 요청';
-$lang['ALLOW_GUEST_DL'] = '용자의 액세스를 추적';
-$lang['ADD_RETRACKER'] = '추가 retracker 에서는 토렌트파일';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = '포럼 config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => '사이트에 오신 것을 환영합니다 %s',
     'USER_WELCOME_INACTIVE' => '사이트에 오신 것을 환영합니다 %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

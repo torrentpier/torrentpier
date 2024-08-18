@@ -17,13 +17,19 @@ if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');
 }
 
+$datastore->enqueue([
+    'stats',
+    'moderators',
+    'cat_forums'
+]);
+
 $html = '';
 switch ($mode) {
     case 'birthday_week':
-        $stats = $datastore->get('stats');
-        $datastore->enqueue([
-            'stats'
-        ]);
+        if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+            $datastore->update('stats');
+            $stats = $datastore->get('stats');
+        }
 
         $users = [];
 
@@ -38,10 +44,10 @@ switch ($mode) {
         break;
 
     case 'birthday_today':
-        $stats = $datastore->get('stats');
-        $datastore->enqueue([
-            'stats'
-        ]);
+        if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+            $datastore->update('stats');
+            $stats = $datastore->get('stats');
+        }
 
         $users = [];
 
@@ -58,13 +64,12 @@ switch ($mode) {
     case 'get_forum_mods':
         $forum_id = (int)$this->request['forum_id'];
 
-        $datastore->enqueue([
-            'moderators',
-            'cat_forums'
-        ]);
+        if (!$mod = $datastore->get('moderators') and !$datastore->has('moderators')) {
+            $datastore->update('moderators');
+            $mod = $datastore->get('moderators');
+        }
 
         $moderators = [];
-        $mod = $datastore->get('moderators');
 
         if (isset($mod['mod_users'][$forum_id])) {
             foreach ($mod['mod_users'][$forum_id] as $user_id) {
@@ -84,7 +89,72 @@ switch ($mode) {
         $datastore->rm('moderators');
         break;
 
+    case 'null_ratio':
+        if (!$bb_cfg['ratio_null_enabled'] || !RATIO_ENABLED) {
+            $this->ajax_die($lang['MODULE_OFF']);
+        }
+        if (empty($this->request['confirmed'])) {
+            $this->prompt_for_confirm($lang['BT_NULL_RATIO_ALERT']);
+        }
+
+        $user_id = (int)$this->request['user_id'];
+        if (!IS_ADMIN && $user_id != $userdata['user_id']) {
+            $this->ajax_die($lang['NOT_AUTHORISED']);
+        }
+
+        $btu = get_bt_userdata($user_id);
+        $ratio_nulled = (bool)$btu['ratio_nulled'];
+        $user_ratio = get_bt_ratio($btu);
+
+        if (($user_ratio === null) && !IS_ADMIN) {
+            $this->ajax_die($lang['BT_NULL_RATIO_NONE']);
+        }
+        if ($ratio_nulled && !IS_ADMIN) {
+            $this->ajax_die($lang['BT_NULL_RATIO_AGAIN']);
+        }
+        if (($user_ratio >= $bb_cfg['ratio_to_null']) && !IS_ADMIN) {
+            $this->ajax_die(sprintf($lang['BT_NULL_RATIO_NOT_NEEDED'], $bb_cfg['ratio_to_null']));
+        }
+
+        $ratio_nulled_sql = !IS_ADMIN ? ', ratio_nulled = 1' : '';
+        DB()->query("UPDATE " . BB_BT_USERS . " SET u_up_total = 0, u_down_total = 0, u_up_release = 0, u_up_bonus = 0 $ratio_nulled_sql WHERE user_id = " . $user_id);
+        CACHE('bb_cache')->rm('btu_' . $user_id);
+        $this->ajax_die($lang['BT_NULL_RATIO_SUCCESS']);
+        break;
+
+    case 'releaser_stats':
+        $user_id = (int)$this->request['user_id'];
+
+        $sql = "
+				SELECT COUNT(tor.poster_id) as total_releases, SUM(tor.size) as total_size, SUM(tor.complete_count) as total_complete, SUM(ad.download_count) as total_dl_count
+				FROM " . BB_BT_TORRENTS . " tor
+					LEFT JOIN " . BB_USERS . " u ON(u.user_id = tor.poster_id)
+					LEFT JOIN " . BB_ATTACHMENTS_DESC . " ad ON(ad.attach_id = tor.attach_id)
+					LEFT JOIN " . BB_BT_USERS . " ut ON(ut.user_id = tor.poster_id)
+				WHERE u.user_id = $user_id
+				GROUP BY tor.poster_id
+				LIMIT 1
+			";
+
+        $total_releases_size = $total_releases = $total_releases_completed = $total_releases_downloaded = 0;
+        if ($row = DB()->fetch_row($sql)) {
+            $total_releases = $row['total_releases'];
+            $total_releases_size = $row['total_size'];
+            $total_releases_downloaded = $row['total_dl_count'];
+            $total_releases_completed = $row['total_complete'];
+        }
+
+        $html = '[
+            ' . $lang['RELEASES'] . ': <span class="seed bold">' . $total_releases . '</span> |
+            ' . $lang['RELEASER_STAT_SIZE'] . ' <span class="seed bold">' . humn_size($total_releases_size) . '</span> |
+            ' . $lang['DOWNLOADED'] . ': <span title="' . $lang['COMPLETED'] . ':&nbsp;' . declension((int)$total_releases_completed, 'times') . '" class="seed bold">' . declension((int)$total_releases_downloaded, 'times') . '</span> ]';
+        break;
+
     case 'get_traf_stats':
+        if (!RATIO_ENABLED) {
+            $this->ajax_die($lang['MODULE_OFF']);
+        }
+
         $user_id = (int)$this->request['user_id'];
         $btu = get_bt_userdata($user_id);
         $profiledata = get_userdata($user_id);

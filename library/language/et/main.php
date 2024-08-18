@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Puuetega';
 $lang['ERROR'] = 'Viga';
 $lang['SELECT_ACTION'] = 'Vali tegevus';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Teadmata';
 
 $lang['NEXT_PAGE'] = 'Järgmine';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emotikonide limiidi %s emotikone ületatud.';
 
 $lang['ATTACH_SIGNATURE'] = 'Lisada signatuur (signatuure saab muuta profiili)';
 $lang['NOTIFY'] = 'Teavita mind, kui vastused';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Teie sõnum on edukalt sisestatud.';
 $lang['EDITED'] = 'Teade on muudetud';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Vabandust, aga parooli ei saa taastada. Palun kontak
 
 $lang['ALWAYS_ADD_SIG'] = 'Ühenda alati minu allkiri';
 $lang['HIDE_PORN_FORUMS'] = 'Sisu peitmiseks 18+';
+$lang['ADD_RETRACKER'] = 'Lisada retracker aastal torrent failid';
 $lang['ALWAYS_NOTIFY'] = 'Alati teata mulle vastustest';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Saadab e-kiri, kui keegi vastab teemale teil on postitatud. Seda saab muuta, kui postituse.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Tagasi profiili';
 $lang['SELECT_CATEGORY'] = 'Valige kategooria';
 
 $lang['DELETE_IMAGE'] = 'Kustuta pilt';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Praegune pilt';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Teavita uue privaatsõnum';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Teine torrent sama info_hash juba <a href="%s"
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Eemalda tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent registreerimata';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Seemne viimati näinud';
 $lang['BT_SORT_FORUM'] = 'Foorum';
 $lang['SIZE'] = 'Suurus';
 $lang['PIECE_LENGTH'] = 'Seljaosa pikkus';
-$lang['COMPLETED'] = 'Lõpetanud';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Lisatud';
 $lang['DELETE_TORRENT'] = 'Kustutada torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Kustuta ja teisalda teema';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['vastus', 'vastused'];
 $lang['DECLENSION']['TIMES'] = ['aeg', 'korda'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['teine', 'sekundit'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Kollaps kataloog';
 $lang['EXPAND'] = 'Laiendage';
 $lang['SWITCH'] = 'Lüliti';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Puuduva faili identifikaator!';
 $lang['TOR_NOT_FOUND'] = 'Fail on puudu serveris!';
 $lang['ERROR_BUILD'] = 'Sisu see torrent faili ei saa vaadelda saidil (ei ole võimalik luua failide loendit)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL kiirus';
 $lang['DL_DL_SPEED'] = 'DL speed';
 $lang['DL_PORT'] = 'Sadam';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Valem: Uploaded/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'lõpetanud';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Teie poolt sisestatud nimele ei saa välistada. S
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klõpsake %sHere%s tagasi Keelata Kasutajanime Haldus';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versiooni Informatsioon';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Pikendamine';
 $lang['RETURN_CONFIG'] = '%sReturn, et Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiguratsiooni Edukalt Uuendatud';
 $lang['SET_DEFAULTS'] = 'Restore defaults (taasta vaikesätted';
-
-$lang['OFF_TRACKER'] = 'Keelata tracker';
-$lang['OFF_REASON'] = 'Keelata põhjus';
-$lang['OFF_REASON_EXPL'] = 'see teade on saadetud kliendile, kui tracker on keelatud';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean eakaaslastega tabel - ärge keelake ilma põhjuseta';
-$lang['COMPACT_MODE'] = 'Kompaktne režiim';
-$lang['COMPACT_MODE_EXPL'] = '"Jah" - tracker võtab vastu vaid kliendid töötavad kompaktne mode<br />"Ei" - compatible režiimis (valitakse kliendi poolt)';
-$lang['BROWSER_REDIRECT_URL'] = 'Brauseri ümbersuunamise URL-i';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'kui kasutaja üritab avada tracker URL Web browser<br />leave tühi keelata';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Teatada intervall';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'eakaaslased peaksid ootama vähemalt nii palju sekundi vahel teated';
-$lang['NUMWANT'] = 'Numwant väärtus';
-$lang['NUMWANT_EXPL'] = 'arv eakaaslastega saadetakse kliendile';
-$lang['EXPIRE_FACTOR'] = 'Peer kehtivuse tegur';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Kaaluda peer surnud, kui see ei ole teada, mitu sekundit, mis on võrdne selle, mitu korda on arvutatud teatada intervalli ajal oma viimast teadet (peab olema suurem kui 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignoreerida IP teatas klient';
-$lang['UPDATE_DLSTAT'] = 'Poe kasutajad up/down statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Piirid';
-$lang['LIMIT_ACTIVE_TOR'] = 'Piir aktiivse torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Külvi piirata';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching piirata';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Kaanid kehtivuse tegur';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Raviks vastastikuse kui aktiivne see mitu minutit, isegi siis, kui see saadetakse "peatatud", kui pärast käivitamist dl<br />0 - võtta arvesse "peatatud" sündmus';
-$lang['LIMIT_CONCURRENT_IPS'] = "Piir paralleelselt IP'";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent limiit';
-$lang['LIMIT_SEED_IPS'] = 'Külvi IP piirata';
-$lang['LIMIT_SEED_IPS_EXPL'] = "võimaldab külvi alates kuni <i>xx</i> IP's<br />0 - no limit";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP piirata';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "võimaldab leeching kõige rohkem <i>xx</i> IP's<br />0 - no limit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Luba';
-$lang['USE_AUTH_KEY'] = 'Parooli';
-$lang['USE_AUTH_KEY_EXPL'] = 'võimaldab kontrollida parooli';
-$lang['AUTH_KEY_NAME'] = 'Parooli nimi';
-$lang['AUTH_KEY_NAME_EXPL'] = 'parooli võti nime SAADA päring';
-$lang['ALLOW_GUEST_DL'] = 'Võimaldab külaline juurdepääsu tracker';
-$lang['ADD_RETRACKER'] = 'Lisada retracker aastal torrent failid';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Foorumi config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Tere tulemast saidile %s',
     'USER_WELCOME_INACTIVE' => 'Tere tulemast saidile %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

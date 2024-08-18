@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Vô hiệu hóa';
 $lang['ERROR'] = 'Lỗi';
 $lang['SELECT_ACTION'] = 'Chọn hành động';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Không rõ';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Biểu tượng giới hạn của %s cảm vư
 
 $lang['ATTACH_SIGNATURE'] = 'Gắn chữ ký (chữ ký có thể được thay đổi trong hồ sơ)';
 $lang['NOTIFY'] = 'Thông báo cho tôi khi trả lời';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Tin nhắn của bạn đã được nhập vào thành công.';
 $lang['EDITED'] = 'Các tin nhắn đã được thay đổi';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Xin lỗi, nhưng mật khẩu không thể lấy đ
 
 $lang['ALWAYS_ADD_SIG'] = 'Luôn luôn gắn chữ ký của tôi';
 $lang['HIDE_PORN_FORUMS'] = 'Nội dung ẩn 18+';
+$lang['ADD_RETRACKER'] = 'Thêm retracker trong torrent';
 $lang['ALWAYS_NOTIFY'] = 'Luôn luôn thông báo cho tôi câu trả lời';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Gửi một e-mail khi ai đó trả lời một chủ đề mà bạn đã đăng trong. Điều này có thể thay đổi bất cứ khi nào bạn.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Trở về để hồ sơ';
 $lang['SELECT_CATEGORY'] = 'Chọn loại';
 
 $lang['DELETE_IMAGE'] = 'Xóa hình ảnh';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Hình ảnh hiện tại';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Thông báo tin nhắn mới';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Một torrent với cùng một info_hash đã
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Bỏ từ theo dõi';
 $lang['BT_UNREGISTERED'] = 'Torrent không đăng ký';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Giống nhìn thấy lần cuối';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Kích thước';
 $lang['PIECE_LENGTH'] = 'Mảnh chiều dài';
-$lang['COMPLETED'] = 'Hoàn thành';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Thêm';
 $lang['DELETE_TORRENT'] = 'Rõ ràng torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Rõ ràng và di chuyển chủ đề';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['trả lời', 'câu trả lời'];
 $lang['DECLENSION']['TIMES'] = ['thời gian', 'lần'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['thứ hai', 'giây'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Danh sách';
 $lang['COLLAPSE'] = 'Sụp đổ mục';
 $lang['EXPAND'] = 'Mở rộng';
 $lang['SWITCH'] = 'Chuyển';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Tập tin bị mất nhận dạng!';
 $lang['TOR_NOT_FOUND'] = 'Tập tin là mất tích vào máy chủ!';
 $lang['ERROR_BUILD'] = 'Các nội dung của torrent này file không thể được xem trên trang (nó đã không thể để xây dựng một danh sách của các tập tin)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL tốc độ';
 $lang['DL_DL_SPEED'] = 'DL tốc độ';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Công Thức:/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'dừng lại';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Tên bạn bước vào có thể không được
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Nhấn vào %sHere%s để trở về Không cho phép Tên Quản trị';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Phiên Bản Thông Tin';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Mở rộng';
 $lang['RETURN_CONFIG'] = '%sReturn để Configuration%s';
 $lang['CONFIG_UPD'] = 'Cấu Hình Cập Nhật Thành Công';
 $lang['SET_DEFAULTS'] = 'Khôi phục mặc định';
-
-$lang['OFF_TRACKER'] = 'Vô hiệu hóa theo dõi';
-$lang['OFF_REASON'] = 'Vô hiệu hóa lý do';
-$lang['OFF_REASON_EXPL'] = 'tin này sẽ được gửi đến khách hàng khi theo dõi được vô hiệu hóa';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean đồng nghiệp bảng - không vô hiệu hóa mà không có lý do';
-$lang['COMPACT_MODE'] = 'Chế độ gọn';
-$lang['COMPACT_MODE_EXPL'] = '"Có" - theo dõi sẽ chỉ chấp nhận khách hàng làm việc trong gọn mode<br />"Không" tương thích chế độ (lựa chọn của khách hàng)';
-$lang['BROWSER_REDIRECT_URL'] = 'Chuyển hướng trình duyệt URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'nếu dùng cố gắng để mở theo dõi địa chỉ trong Web browser<br />leave trống vô hiệu hóa';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Linh tinh';
-$lang['ANNOUNCE_INTERVAL'] = 'Thông báo khoảng thời gian';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'đồng nghiệp nên chờ ít nhất điều này nhiều giây giữa thông báo';
-$lang['NUMWANT'] = 'Numwant giá trị';
-$lang['NUMWANT_EXPL'] = 'số các đồng nghiệp được gửi đến khách hàng';
-$lang['EXPIRE_FACTOR'] = 'Ngang hết hạn yếu tố';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Xem xét một ngang chết nếu nó chưa công bố trong một số giây bằng này nhiều lần tính thông báo khoảng thời gian tại thời điểm cuối cùng của nó thông báo (phải lớn hơn 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Bỏ qua IP báo cáo của khách hàng';
-$lang['UPDATE_DLSTAT'] = 'Cửa hàng người lên/xuống thống kê';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Giới hạn';
-$lang['LIMIT_ACTIVE_TOR'] = 'Giới hạn hoạt động torrent';
-$lang['LIMIT_SEED_COUNT'] = 'Giống giới hạn';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - không có giới hạn)';
-$lang['LIMIT_LEECH_COUNT'] = 'Chất thải ngấm giới hạn';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - không có giới hạn)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Con đỉa hết hạn yếu tố';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Đối xử với một ngang như hoạt động cho số này phút thậm chí nếu nó được gửi "dừng lại" sự kiện sau khi bắt đầu dl<br />0 - đưa vào tài khoản "dừng lại" sự kiện';
-$lang['LIMIT_CONCURRENT_IPS'] = "Giới hạn đồng thời IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'mỗi torrent giới hạn';
-$lang['LIMIT_SEED_IPS'] = 'Giống IP giới hạn';
-$lang['LIMIT_SEED_IPS_EXPL'] = "cho phép giống từ không hơn <i>xx</i> IP's<br />0 - không có giới hạn";
-$lang['LIMIT_LEECH_IPS'] = 'Chất thải ngấm IP giới hạn';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "cho phép từ chất thải ngấm không hơn <i>xx</i> IP's<br />0 - không có giới hạn";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Ủy quyền';
-$lang['USE_AUTH_KEY'] = 'Mật mã';
-$lang['USE_AUTH_KEY_EXPL'] = 'cho phép kiểm tra mật mã';
-$lang['AUTH_KEY_NAME'] = 'Mật mã tên';
-$lang['AUTH_KEY_NAME_EXPL'] = 'mật mã chìa khóa tên trong NHẬN được yêu cầu';
-$lang['ALLOW_GUEST_DL'] = 'Cho phép truy cập khách để theo dõi';
-$lang['ADD_RETRACKER'] = 'Thêm retracker trong torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Diễn đàn cấu';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Chào mừng đến với trang web %s',
     'USER_WELCOME_INACTIVE' => 'Chào mừng đến với trang web %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

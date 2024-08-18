@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Keluarga';
 $lang['ERROR'] = 'Kesalahan';
 $lang['SELECT_ACTION'] = 'Pilih action';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Tidak diketahui';
 
 $lang['NEXT_PAGE'] = 'Berikutnya';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticon batas %s emoticon terlampaui.';
 
 $lang['ATTACH_SIGNATURE'] = 'Pasang signature (tanda tangan dapat diubah di profil)';
 $lang['NOTIFY'] = 'Beritahu saya ketika pada balasan';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Pesan anda telah berhasil masuk.';
 $lang['EDITED'] = 'Pesan telah berubah';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Maaf, password anda tidak dapat diambil. Silahkan hu
 
 $lang['ALWAYS_ADD_SIG'] = 'Selalu melampirkan tanda tangan saya';
 $lang['HIDE_PORN_FORUMS'] = 'Menyembunyikan konten 18+';
+$lang['ADD_RETRACKER'] = 'Tambahkan retracker dalam file torrent';
 $lang['ALWAYS_NOTIFY'] = 'Selalu beritahu saya balasan';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Mengirim e-mail ketika seseorang balasan untuk topik yang anda telah diposting di. Hal ini dapat diubah setiap kali anda posting.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Kembali ke profil';
 $lang['SELECT_CATEGORY'] = 'Pilih kategori';
 
 $lang['DELETE_IMAGE'] = 'Menghapus gambar';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Saat ini gambar';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Memberitahukan pada pesan pribadi baru';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Torrent lain yang sama info_hash sudah <a href
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hapus dari tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent terdaftar';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Benih yang terakhir terlihat';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Ukuran';
 $lang['PIECE_LENGTH'] = 'Panjang potongan';
-$lang['COMPLETED'] = 'Selesai';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Ditambahkan';
 $lang['DELETE_TORRENT'] = 'Menghapus torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Menghapus dan memindahkan topik';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['balas', 'balasan'];
 $lang['DECLENSION']['TIMES'] = ['waktu', 'kali'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['kedua', 'detik'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Daftar';
 $lang['COLLAPSE'] = 'Runtuhnya direktori';
 $lang['EXPAND'] = 'Memperluas';
 $lang['SWITCH'] = 'Beralih';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Hilang file identifier!';
 $lang['TOR_NOT_FOUND'] = 'File hilang di server!';
 $lang['ERROR_BUILD'] = 'Isi dari file torrent ini tidak dapat dilihat di situs (itu tidak mungkin untuk membangun sebuah daftar file)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL kecepatan';
 $lang['DL_DL_SPEED'] = 'DL kecepatan';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Rumus: Upload/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'berhenti';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Nama yang anda masukkan tidak bisa dianulir. Itu 
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s untuk kembali ke Larang Username Administrasi';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informasi Versi';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Ekstensi';
 $lang['RETURN_CONFIG'] = '%sReturn untuk Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurasi Berhasil Diperbarui';
 $lang['SET_DEFAULTS'] = 'Restore default';
-
-$lang['OFF_TRACKER'] = 'Menonaktifkan tracker';
-$lang['OFF_REASON'] = 'Menonaktifkan alasan';
-$lang['OFF_REASON_EXPL'] = 'pesan ini akan dikirim ke klien ketika tracker dinonaktifkan';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean rekan-rekan tabel - tidak menonaktifkan tanpa alasan';
-$lang['COMPACT_MODE'] = 'Modus kompak';
-$lang['COMPACT_MODE_EXPL'] = '"Ya" - tracker hanya akan menerima klien yang bekerja di kompak mode<br />"Tidak" kompatibel mode (dipilih oleh klien)';
-$lang['BROWSER_REDIRECT_URL'] = 'Browser redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'jika pengguna mencoba untuk membuka tracker URL di Web browser<br />leave kosong untuk menonaktifkan';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Mengumumkan interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'rekan-rekan harus menunggu setidaknya ini banyak detik antara pengumuman';
-$lang['NUMWANT'] = 'Numwant nilai';
-$lang['NUMWANT_EXPL'] = 'jumlah uang yang dikirim ke klien';
-$lang['EXPIRE_FACTOR'] = 'Peer berakhir faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Mempertimbangkan peer mati jika hal itu tidak diumumkan dalam jumlah detik yang sama berkali-kali dihitung mengumumkan interval pada saat terakhir pengumuman (harus lebih besar dari 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Mengabaikan IP yang dilaporkan oleh klien';
-$lang['UPDATE_DLSTAT'] = 'Toko pengguna up/down statistik';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Batas';
-$lang['LIMIT_ACTIVE_TOR'] = 'Batas active torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Penyemaian batas';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - tidak ada batas)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching batas';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - tidak ada batas)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Lintah berakhir faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Mengobati peer aktif untuk jumlah menit bahkan jika itu dikirim "berhenti" peristiwa setelah memulai dl<br />0 - memperhitungkan "berhenti" acara';
-$lang['LIMIT_CONCURRENT_IPS'] = "Batas serentak IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent batas';
-$lang['LIMIT_SEED_IPS'] = 'Penyemaian IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "memungkinkan penyemaian dari tidak lebih dari <i>xx</i> IP's<br />0 - tidak ada batas";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "memungkinkan leeching dari tidak lebih dari <i>xx</i> IP's<br />0 - tidak ada batas";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Otorisasi';
-$lang['USE_AUTH_KEY'] = 'Kunci sandi';
-$lang['USE_AUTH_KEY_EXPL'] = 'mengaktifkan memeriksa kunci sandi';
-$lang['AUTH_KEY_NAME'] = 'Kunci sandi nama';
-$lang['AUTH_KEY_NAME_EXPL'] = 'kata sandi kunci nama BISA request';
-$lang['ALLOW_GUEST_DL'] = 'Memungkinkan akses tamu ke tracker';
-$lang['ADD_RETRACKER'] = 'Tambahkan retracker dalam file torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Selamat datang di situs %s',
     'USER_WELCOME_INACTIVE' => 'Selamat datang di situs %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

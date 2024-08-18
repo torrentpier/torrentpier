@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Onesposobili';
 $lang['ERROR'] = 'Greška';
 $lang['SELECT_ACTION'] = 'Odaberite akciju';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Nepoznati';
 
 $lang['NEXT_PAGE'] = 'Sljedeći';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Praktički limit od %s smajlica premašio.';
 
 $lang['ATTACH_SIGNATURE'] = 'Zakači potpis (potpisi se može promijeniti u profil)';
 $lang['NOTIFY'] = 'Obavesti me kad na odgovara';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Tvoja poruka je uspješno ušao.';
 $lang['EDITED'] = 'Poruka je promenjena';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Žao mi je, ali tvoj lozinku ne može biti pronađen
 
 $lang['ALWAYS_ADD_SIG'] = 'Uvijek zakačiti moj potpis';
 $lang['HIDE_PORN_FORUMS'] = 'Sakriti sadržaja 18+';
+$lang['ADD_RETRACKER'] = 'Dodaj retracker u bujicama datoteke';
 $lang['ALWAYS_NOTIFY'] = 'Uvijek obavesti me odgovara';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Poslao e-mail kad se netko odgovori na temu si postavio unutra. Ovo se može promijeniti kada te post.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Povratak u profil';
 $lang['SELECT_CATEGORY'] = 'Izaberite kategoriju';
 
 $lang['DELETE_IMAGE'] = 'Obriši imidž';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Trenutna imidž';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Obavesti na novu poruku privatni';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Još bujicama sa isti info_hash već <a href="
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Ukloni od tragač';
 $lang['BT_UNREGISTERED'] = 'Bujicama neprijavljeni';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Seme zadnji put viđen';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Veličine';
 $lang['PIECE_LENGTH'] = 'Komadu dužinu';
-$lang['COMPLETED'] = 'Završio';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Dodao';
 $lang['DELETE_TORRENT'] = 'Obriši bujicama';
 $lang['DELETE_MOVE_TORRENT'] = 'Obriši i potez temu';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['odgovor', 'odgovara'];
 $lang['DECLENSION']['TIMES'] = ['vrijeme', 'puta'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['drugi', 'sekundi'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Kolaps direktorij';
 $lang['EXPAND'] = 'Proširiti';
 $lang['SWITCH'] = 'Prekidač';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Nestale datoteke identifikator!';
 $lang['TOR_NOT_FOUND'] = 'Dosije je nestao na serveru!';
 $lang['ERROR_BUILD'] = 'Sadržaj ovog potoka dosije ne mogu biti vidjen na sajtu (nije bilo moguće napraviti listu datoteke)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL brzinom';
 $lang['DL_DL_SPEED'] = 'DL brzinom';
 $lang['DL_PORT'] = 'Luke';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formulu: Postavio/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'prestao';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Ime ti je ušao nije mogao biti dozvoljeno. Ni ve
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s da se vrati u Disallow korisničko ime Uprave';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Verziju Informacije';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Produženje';
 $lang['RETURN_CONFIG'] = '%sReturn da Configuration%s';
 $lang['CONFIG_UPD'] = 'Podešavanja Ažurirani Uspješno';
 $lang['SET_DEFAULTS'] = 'Obnovi uobičajno';
-
-$lang['OFF_TRACKER'] = 'Onesposobiti tragaca';
-$lang['OFF_REASON'] = 'Onesposobite razloga';
-$lang['OFF_REASON_EXPL'] = 'ova poruka će biti poslat klijent kad tragač je invalid';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean kolega stol - ne onesposobiti bez razloga';
-$lang['COMPACT_MODE'] = 'Compact mode';
-$lang['COMPACT_MODE_EXPL'] = '"Da" - tragač će jedino prihvatiti klijenata, radi u compact mode<br />"Ne" - kompatibilni modu (izabrao za klijenta)';
-$lang['BROWSER_REDIRECT_URL'] = 'Preglednik preusmjeriti URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'ako korisnik pokušava da otvori tragač URL-u u Web browser<br />leave prazan onesposobiti';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Objaviti interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'vršnjaci trebao pričekati barem toliko sekundi između najave';
-$lang['NUMWANT'] = 'Numwant vrijednosti';
-$lang['NUMWANT_EXPL'] = 'broj kolega je poslato da klijent';
-$lang['EXPIRE_FACTOR'] = 'Peer ističe faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Smatraj da je peer mrtav ako nije objavio u nekoliko sekundi jednaki da je ovo mnogo puta izračunata objaviti interval u trenutku njegovog zadnja objava (mora biti veći od 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignoriši IP prijavio za klijenta,';
-$lang['UPDATE_DLSTAT'] = 'Radnju korisnika se/dole statistike';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Granica';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limit aktivni bujica';
-$lang['LIMIT_SEED_COUNT'] = 'Zvezdane limit';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Negdje curi limit';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Pijavica ističe faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Prema peer kao aktivni za ovaj broj minuta, čak i ako je to poslao "i prestala" događaju nakon što je počeo dl<br />0 - uzmi u obzir "prestao" događaj';
-$lang['LIMIT_CONCURRENT_IPS'] = "Granica koja je IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'po bujicama limit';
-$lang['LIMIT_SEED_IPS'] = 'Zvezdane IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "dozvoliti zvezdane od nema više nego <i>xx</i> IP's<br />0 - bez granica";
-$lang['LIMIT_LEECH_IPS'] = 'Negdje curi IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "dozvoliti negdje curi iz nema više nego <i>xx</i> IP's<br />0 - bez granica";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Odobrenje';
-$lang['USE_AUTH_KEY'] = 'S ključem';
-$lang['USE_AUTH_KEY_EXPL'] = 'omogućiti ček za s ključem';
-$lang['AUTH_KEY_NAME'] = 'S ključem ime';
-$lang['AUTH_KEY_NAME_EXPL'] = 's ključem ključ ime u SE zahtjev';
-$lang['ALLOW_GUEST_DL'] = 'Dozvoliti gost pristup tragač';
-$lang['ADD_RETRACKER'] = 'Dodaj retracker u bujicama datoteke';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum podešavanja';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Dobrodošli na stranicu %s',
     'USER_WELCOME_INACTIVE' => 'Dobrodošli na stranicu %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

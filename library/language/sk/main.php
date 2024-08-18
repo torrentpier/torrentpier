@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Zakázané';
 $lang['ERROR'] = 'Chyba';
 $lang['SELECT_ACTION'] = 'Vyberte akcie';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Neznáma';
 
 $lang['NEXT_PAGE'] = 'Ďalej';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emotikony limit %s emotikony prekročené.';
 
 $lang['ATTACH_SIGNATURE'] = 'Pripojiť podpis (podpisy môžu byť zmenené v profile)';
 $lang['NOTIFY'] = 'Oznámiť mi, keď sa na odpovede';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Vaša správa bola úspešne vstúpil.';
 $lang['EDITED'] = 'Správa bola zmenená';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Ospravedlňujeme sa, ale vaše heslo nemôže byť o
 
 $lang['ALWAYS_ADD_SIG'] = 'Vždy pripojiť môj podpis';
 $lang['HIDE_PORN_FORUMS'] = 'Skryť obsah 18+';
+$lang['ADD_RETRACKER'] = 'Pridať retracker v torrent súbory';
 $lang['ALWAYS_NOTIFY'] = 'Vždy upozorniť ma odpovedí';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sa odošle e-mailom, keď niekto odpovede k téme, ktorú uverejnili. Toto môže byť zmenené kedykoľvek, keď budete písať.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Návrat do profilu';
 $lang['SELECT_CATEGORY'] = 'Vyberte kategóriu';
 
 $lang['DELETE_IMAGE'] = 'Vymazať snímku';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Aktuálny obrázok';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Upozorniť na nové súkromné správy';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Ďalší torrent s rovnakým info_hash už <a 
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Odstrániť z tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistrovaný';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Semeno naposledy videný';
 $lang['BT_SORT_FORUM'] = 'Fórum';
 $lang['SIZE'] = 'Veľkosť';
 $lang['PIECE_LENGTH'] = 'Kus dĺžka';
-$lang['COMPLETED'] = 'Ukončené';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Pridané';
 $lang['DELETE_TORRENT'] = 'Vymazať torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Zrušiť a presunúť tému';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['odpovedať', 'odpovede'];
 $lang['DECLENSION']['TIMES'] = ['čas', 'časy'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['druhý', 'sekúnd'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Zbaliť adresár';
 $lang['EXPAND'] = 'Rozbaliť';
 $lang['SWITCH'] = 'Prepínač';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Chýbajúci súbor identifikátor!';
 $lang['TOR_NOT_FOUND'] = 'Chýba súbor na server!';
 $lang['ERROR_BUILD'] = 'Obsah tejto torrent súbor nebude možné pozrieť na tejto stránke (nebolo možné vytvoriť zoznam súborov)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL rýchlosť';
 $lang['DL_DL_SPEED'] = 'DL rýchlosť';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Vzorec: Nahrané/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'zastavil';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Meno, ktoré ste zadali, by nemali byť povolené
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliknite na tlačidlo %sHere%s vrátiť Zakázať Meno Správy';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informácie O Verzii';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Rozšírenie';
 $lang['RETURN_CONFIG'] = '%sReturn na Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurácia Úspešne Aktualizovaný';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
-
-$lang['OFF_TRACKER'] = 'Vypnúť tracker';
-$lang['OFF_REASON'] = 'Vypnúť dôvod';
-$lang['OFF_REASON_EXPL'] = 'táto správa bude odoslaná klientovi pri tracker je zakázané';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean rovesníkmi tabuľka - nevypínajte bez dôvodu';
-$lang['COMPACT_MODE'] = 'Kompaktný režim';
-$lang['COMPACT_MODE_EXPL'] = '"Áno" - tracker bude akceptovať len klienti pracujú v kompaktné mode<br />"Nie" - kompatibilný režim (vybrané zo strany klienta)';
-$lang['BROWSER_REDIRECT_URL'] = 'Prehliadač presmerovanie URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'ak sa používateľ pokúša otvoriť tracker URL na Web browser<br />leave prázdne pre vypnutie';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Oznamuje, interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'rovesníci by mali počkať aspoň tento počet sekúnd medzi oznamy';
-$lang['NUMWANT'] = 'Numwant hodnota';
-$lang['NUMWANT_EXPL'] = 'počet rovesníkmi zasielané klientovi';
-$lang['EXPIRE_FACTOR'] = 'Peer skončí faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Zvážte peer mŕtvy, ak to neoznámil v niekoľkých sekundách sa rovná to mnoho krát vypočítaná oznámiť interval v čase jej posledného oznámenia (musí byť väčší ako 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorovať IP uviedlo klienta';
-$lang['UPDATE_DLSTAT'] = 'Obchod užívateľov hore/dole štatistiky';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limity';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limit aktívny torrenty';
-$lang['LIMIT_SEED_COUNT'] = 'Hodnotenie limit';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - bez obmedzenia)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching limit';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - bez obmedzenia)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Pijavice skončí faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Liečbu peer ako aktívne pre tento počet minút, aj keď je poslaná "zastavil" udalosti po spustení dl<br />0 vziať do úvahy, "zastavil" udalosť';
-$lang['LIMIT_CONCURRENT_IPS'] = "Obmedziť súbežné IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'na torrent limit';
-$lang['LIMIT_SEED_IPS'] = 'Sejba IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "nechajte hodnotenie od viac ako <i>xx</i> IP's<br />0 - no limit";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "povoliť leeching z viac než <i>xx</i> IP's<br />0 - no limit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Povolenie';
-$lang['USE_AUTH_KEY'] = 'Univerzálny kľúč';
-$lang['USE_AUTH_KEY_EXPL'] = 'zapnúť kontrolu na kľúče';
-$lang['AUTH_KEY_NAME'] = 'Univerzálny kľúč názov';
-$lang['AUTH_KEY_NAME_EXPL'] = 'univerzálny kľúč zadajte názov DOSTAŤ vyžiadanie';
-$lang['ALLOW_GUEST_DL'] = 'Povoliť hosťovské prístup na tracker';
-$lang['ADD_RETRACKER'] = 'Pridať retracker v torrent súbory';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Fórum config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Vitajte na stránke %s',
     'USER_WELCOME_INACTIVE' => 'Vitajte na stránke %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

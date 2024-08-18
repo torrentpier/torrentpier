@@ -21,7 +21,7 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.3-dev';
+$bb_cfg['tp_version'] = 'v2.4.5-dev';
 $bb_cfg['tp_release_date'] = 'XX-XX-2024';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
@@ -35,7 +35,7 @@ $bb_cfg['db'] = [
         env('DB_DATABASE', 'torrentpier'),
         env('DB_USERNAME', 'root'),
         env('DB_PASSWORD'),
-        'utf8',
+        'utf8mb4',
         false
     ],
 ];
@@ -54,36 +54,32 @@ $bb_cfg['db_alias'] = [
 
 // Cache
 $bb_cfg['cache'] = [
-    'pconnect' => true,
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
     'prefix' => 'tp_',
-    'memcache' => [
+    'memcached' => [
         'host' => '127.0.0.1',
         'port' => 11211,
-        'pconnect' => true,
-        'con_required' => true,
     ],
     'redis' => [
         'host' => '127.0.0.1',
         'port' => 6379,
         'pconnect' => !PHP_ZTS, // Redis pconnect supported only for non-thread safe compilations of PHP
-        'con_required' => true,
     ],
-    // Available cache types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+    // Available cache types: filecache, memcached, sqlite, redis, apcu (filecache by default)
     'engines' => [
-        'bb_cache' => ['filecache', []],
-        'bb_config' => ['filecache', []],
-        'tr_cache' => ['filecache', []],
-        'session_cache' => ['filecache', []],
-        'bb_cap_sid' => ['filecache', []],
-        'bb_login_err' => ['filecache', []],
-        'bb_poll_data' => ['filecache', []],
-        'bb_ip2countries' => ['filecache', []],
+        'bb_cache' => ['filecache'],
+        'bb_config' => ['filecache'],
+        'tr_cache' => ['filecache'],
+        'session_cache' => ['filecache'],
+        'bb_cap_sid' => ['filecache'],
+        'bb_login_err' => ['filecache'],
+        'bb_poll_data' => ['filecache'],
+        'bb_ip2countries' => ['filecache'],
     ],
 ];
 
 // Datastore
-// Available datastore types: filecache, memcache, sqlite, redis, apcu (filecache by default)
+// Available datastore types: filecache, memcached, sqlite, redis, apcu (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
@@ -108,8 +104,8 @@ $bb_cfg['client_ban'] = [
     // The second argument is being shown in the torrent client as a failure message
     // Handy client list: https://github.com/transmission/transmission/blob/f85c3b6f8db95d5363f6ec38eee603f146c6adb6/libtransmission/clients.cc#L504
     'clients' => [
-        '-UT' => "uTorrent — NOT ad-free and open-source",
-        '-MG' => 'Mostly leeching client'
+        '-UT' => 'uTorrent — NOT ad-free and open-source',
+        '-MG' => 'Mostly leeching client',
     ]
 ];
 
@@ -137,6 +133,10 @@ $bb_cfg['show_dl_status_in_search'] = true;
 $bb_cfg['show_dl_status_in_forum'] = true;
 $bb_cfg['show_tor_info_in_dl_list'] = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
+
+// Null ratio
+$bb_cfg['ratio_null_enabled'] = true;
+$bb_cfg['ratio_to_null'] = $bb_cfg['bt_min_ratio_allow_dl_tor']; // 0.3
 
 // Days to keep torrent registered
 $bb_cfg['seeder_last_seen_days_keep'] = 0; // Max time storing for the last seen peer status
@@ -446,6 +446,15 @@ $bb_cfg['abuse_email'] = "abuse@$domain_name"; // abuse email (e.g. DMCA)
 $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 
 // Error reporting
+$bb_cfg['whoops'] = [
+    'error_message' => 'Sorry, something went wrong. Drink coffee and come back after some time... ☕️',
+    'blacklist' => [
+        '_COOKIE' => array_keys($_COOKIE),
+        '_SERVER' => array_keys($_SERVER),
+        '_ENV' => array_keys($_ENV),
+    ]
+];
+
 $bb_cfg['bugsnag'] = [
     'enabled' => true,
     'api_key' => '33b3ed0102946bab71341f9edc125e21', // Don't change this if you want to help us find bugs
@@ -540,6 +549,7 @@ $bb_cfg['user_not_active_days_keep'] = 180; // After how many days should I dele
 // Vote for torrents
 $bb_cfg['tor_thank'] = true;
 $bb_cfg['tor_thanks_list_guests'] = true; // Show voters to guests
+$bb_cfg['tor_thank_limit_per_topic'] = 50;
 
 // Groups
 $bb_cfg['group_members_per_page'] = 50; // How many groups will be displayed in a page
@@ -557,6 +567,7 @@ $bb_cfg['flist_max_files'] = 0; // Max allowed number of files to process for gi
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
+$bb_cfg['integrity_check'] = true; // TorrentPier files integrity check (Not recommended to disable!)
 
 $bb_cfg['allow_change'] = [
     'language' => true, // Allow user to change language
@@ -692,6 +703,7 @@ $bb_cfg['tracker'] = [
     'retracker_host' => 'http://retracker.local/announce',
     'guest_tracker' => true,
     'search_by_tor_status' => true,
+    'random_release_button' => true,
     'freeleech' => false, // freeleech mode (If enabled, then disable "gold_silver_enabled")
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated

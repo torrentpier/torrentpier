@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Funksjonshemmede';
 $lang['ERROR'] = 'Feil';
 $lang['SELECT_ACTION'] = 'Velg handling';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Ukjent';
 
 $lang['NEXT_PAGE'] = 'Neste';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Uttrykksikoner grense på %s uttrykksikoner ove
 
 $lang['ATTACH_SIGNATURE'] = 'Legg ved signatur (signaturer kan endres i profilen)';
 $lang['NOTIFY'] = 'Gi meg beskjed når den er på svar';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Din melding har blitt skrevet inn riktig.';
 $lang['EDITED'] = 'Meldingen har blitt endret';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Beklager, men ditt passord kan ikke hentes. Vennligs
 
 $lang['ALWAYS_ADD_SIG'] = 'Alltid koble min signatur';
 $lang['HIDE_PORN_FORUMS'] = 'Skjul innholdet 18+';
+$lang['ADD_RETRACKER'] = 'Legg til retracker i torrent-filer';
 $lang['ALWAYS_NOTIFY'] = 'Alltid varsle meg med svar';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sender en e-post når noen svarer til et emne du har postet i. Dette kan være endret når du legger ut.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Tilbake til profil';
 $lang['SELECT_CATEGORY'] = 'Velg kategori';
 
 $lang['DELETE_IMAGE'] = 'Slette bildet';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Gjeldende bilde';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Varsle på ny privat melding';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'En annen torrent med samme info_hash allerede 
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Fjern fra tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent uregistrerte';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Frø siste sett';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Størrelse';
 $lang['PIECE_LENGTH'] = 'Stykket lengde';
-$lang['COMPLETED'] = 'Fullført';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Lagt';
 $lang['DELETE_TORRENT'] = 'Slett torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Slette og flytte emnet';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['svar', 'svar'];
 $lang['DECLENSION']['TIMES'] = ['tid', 'ganger'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['andre', 'sekunder'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Kollaps katalog';
 $lang['EXPAND'] = 'Utvid';
 $lang['SWITCH'] = 'Bryter';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Manglende filen identifikator!';
 $lang['TOR_NOT_FOUND'] = 'Fil mangler på serveren!';
 $lang['ERROR_BUILD'] = 'Innholdet i denne torrent-filen kan ikke vises på nettstedet (det var ikke mulig å bygge en liste av filer)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL hastighet';
 $lang['DL_DL_SPEED'] = 'DL hastighet';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formel: Lastet Opp/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'stoppet';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Navnet du har angitt, ikke kunne bli forbudt. Det
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikk %sHere%s for å gå tilbake til å Nekte Brukernavn Administrasjon';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versjon Informasjon';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Extension';
 $lang['RETURN_CONFIG'] = '%sReturn å Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurasjon Fullført';
 $lang['SET_DEFAULTS'] = 'Gjenopprette standardinnstillinger';
-
-$lang['OFF_TRACKER'] = 'Deaktiver tracker';
-$lang['OFF_REASON'] = 'Deaktiver grunn';
-$lang['OFF_REASON_EXPL'] = 'denne meldingen vil bli sendt til kunden når tracker er deaktivert';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean jevnaldrende bord - du må ikke deaktivere uten grunn';
-$lang['COMPACT_MODE'] = 'Kompakt modus';
-$lang['COMPACT_MODE_EXPL'] = '"Ja" - tracker godtar bare kunder som jobber i kompakt mode<br />"Nei" - kompatibel modus (som er valgt av kunden)';
-$lang['BROWSER_REDIRECT_URL'] = 'Nettleser omdirigere URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'hvis brukeren prøver å åpne tracker-URL i Web browser<br />leave tomt for å deaktivere';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Diverse';
-$lang['ANNOUNCE_INTERVAL'] = 'Annonsere intervall';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'medelever bør vente minst dette mange sekunder mellom kunngjøringer';
-$lang['NUMWANT'] = 'Numwant verdi';
-$lang['NUMWANT_EXPL'] = 'antall jevnaldrende blir sendt til klienten';
-$lang['EXPIRE_FACTOR'] = 'Peer utløper faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Vurdere en node døde hvis det ikke er annonsert i en rekke sekunder lik dette mange ganger beregnet kunngjøre intervall på den tiden av sitt siste kunngjøring (må være større enn 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorere IP rapportert av klienten';
-$lang['UPDATE_DLSTAT'] = 'Store brukere opp/ned-statistikk';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Grenser';
-$lang['LIMIT_ACTIVE_TOR'] = 'Grense aktive torrenter';
-$lang['LIMIT_SEED_COUNT'] = 'Seeding grense';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - ingen grense)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching grense';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - ingen grense)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Igle utløper faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Behandle en node som aktivt for at dette nummeret av minutter, selv om det sendes "stoppet" event etter å ha startet dl<br />0 - ta hensyn til "stoppet" event';
-$lang['LIMIT_CONCURRENT_IPS'] = "Grense samtidige IP-adresser";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent grense';
-$lang['LIMIT_SEED_IPS'] = 'Seeding IP-grense';
-$lang['LIMIT_SEED_IPS_EXPL'] = "la seeding fra ikke mer enn <i>xx</i> IP's<br />0 - ingen begrensning";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP-grense';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "la leeching fra ikke mer enn <i>xx</i> IP's<br />0 - ingen begrensning";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Autorisasjon';
-$lang['USE_AUTH_KEY'] = 'Tilgangsnøkkel';
-$lang['USE_AUTH_KEY_EXPL'] = 'aktiver sjekk for tilgangsnøkkel';
-$lang['AUTH_KEY_NAME'] = 'Tilgangsnøkkel navn';
-$lang['AUTH_KEY_NAME_EXPL'] = 'nøkkelen nøkkel navn i GET-forespørsel';
-$lang['ALLOW_GUEST_DL'] = 'Gi gjest tilgang til tracker';
-$lang['ADD_RETRACKER'] = 'Legg til retracker i torrent-filer';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Velkommen til siden %s',
     'USER_WELCOME_INACTIVE' => 'Velkommen til siden %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

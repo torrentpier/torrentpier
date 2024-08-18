@@ -20,6 +20,8 @@ $page_cfg['use_tablesorter'] = true;
 $page_cfg['include_bbcode_js'] = true;
 
 $tracking_topics = get_tracks('topic');
+$tracking_forums = get_tracks('forum');
+
 $user_id = $userdata['user_id'];
 if (isset($_GET[POST_USERS_URL])) {
     if (get_username($_GET[POST_USERS_URL])) {
@@ -66,7 +68,7 @@ if ($watch_count > 0) {
 		AND p.poster_id = u2.user_id
 		AND t.topic_poster = u.user_id
 		AND w.user_id = $user_id
-	GROUP BY t.topic_last_post_time DESC
+	ORDER BY t.topic_last_post_time DESC
 	LIMIT $start, $per_page";
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not obtain watch topic information #3');

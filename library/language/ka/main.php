@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'შეზღუდული შესაძლებლო�
 $lang['ERROR'] = 'შეცდომა';
 $lang['SELECT_ACTION'] = 'აირჩიეთ აქცია';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'უცნობი';
 
 $lang['NEXT_PAGE'] = 'შემდეგი';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'სმაილიკების ზღვა�
 
 $lang['ATTACH_SIGNATURE'] = 'წერილზე ხელმოწერის (ხელმოწერების შეიძლება შეიცვალოს პროფილი)';
 $lang['NOTIFY'] = 'შემატყობინე, როდესაც გამოხმაურება';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'თქვენი წერილი წარმატებით ჩააბარა წარმატებით.';
 $lang['EDITED'] = 'წერილი შეიცვალა';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'უკაცრავად, მაგრამ თ�
 
 $lang['ALWAYS_ADD_SIG'] = 'ყოველთვის ანიჭებენ ჩემი ხელმოწერა';
 $lang['HIDE_PORN_FORUMS'] = 'დამალვა შინაარსი 18+';
+$lang['ADD_RETRACKER'] = 'რჩეულებში retracker torrent ფაილები';
 $lang['ALWAYS_NOTIFY'] = 'ყოველთვის შემატყობინე გამოხმაურება';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'აგზავნის e-mail, როდესაც ვინმე გამოხმაურება თემა თქვენ არ გამოქვეყნდება. ეს შეიძლება შეიცვალოს მაშინ, როდესაც თქვენ პოსტი.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'დაბრუნება ნახვა';
 $lang['SELECT_CATEGORY'] = 'აირჩიეთ კატეგორია';
 
 $lang['DELETE_IMAGE'] = 'გამოსახულების წაშლა';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'მიმდინარე გამოსახულება';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'აცნობოს ახალი შეტყობინების გაგზავნა';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'კიდევ ერთი torrent იგი
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ამოღება tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent არარეგისტრირებული';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'სათესლე ბოლო ნახვ�
 $lang['BT_SORT_FORUM'] = 'ფორუმი';
 $lang['SIZE'] = 'ზომა';
 $lang['PIECE_LENGTH'] = 'ცალი სიგრძე';
-$lang['COMPLETED'] = 'დასრულდა';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'დასძინა';
 $lang['DELETE_TORRENT'] = 'წაშლა torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'წაშლა და გადატანა თემა';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['პასუხი', 'გამოხმაურება'];
 $lang['DECLENSION']['TIMES'] = ['დრო', '- ჯერ'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['მეორე', 'წამი'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Collapse დირექტორია';
 $lang['EXPAND'] = 'გაფართოების';
 $lang['SWITCH'] = 'Switch';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'დაკარგული ფაილის იდენტიფიკატორი!';
 $lang['TOR_NOT_FOUND'] = 'ფაილი აკლია სერვერზე!';
 $lang['ERROR_BUILD'] = 'შინაარსი ამ ტორენტის ფაილი არ შეიძლება ჩაითვალოს საიტზე (ეს არ იყო გამორიცხული, რომ ავაშენოთ სია ფაილი)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL სიჩქარე';
 $lang['DL_DL_SPEED'] = 'DL სიჩქარე';
 $lang['DL_PORT'] = 'პორტი';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'ფორმულა: აიტვირთა/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'შეწყვიტა';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'სახელი თქვენ შემო�
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'დააჭირეთ %sHere%s დაბრუნებას აუკრძალეთ სახელი ადმინისტრაციის';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'ვერსია ინფორმაცია';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'გაფართოება';
 $lang['RETURN_CONFIG'] = '%sReturn, რომ Configuration%s';
 $lang['CONFIG_UPD'] = 'კონფიგურაციის განახლება წარმატებით';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
-
-$lang['OFF_TRACKER'] = 'გამორთე tracker';
-$lang['OFF_REASON'] = 'გამორთე მიზეზი';
-$lang['OFF_REASON_EXPL'] = 'ეს შეტყობინება იგზავნება კლიენტთან, როდესაც tracker გამორთულია';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean თანატოლებს მაგიდა - არ გამორთოთ რეგისტრაციის მიზეზი';
-$lang['COMPACT_MODE'] = 'კომპაქტური რეჟიმი';
-$lang['COMPACT_MODE_EXPL'] = '"დიახ" - tracker იქნება მხოლოდ იმ კლიენტებს სამუშაო კომპაქტური mode<br />"არა" - თავსებადი რეჟიმი (კლიენტის მიერ არჩეული)';
-$lang['BROWSER_REDIRECT_URL'] = 'ბრაუზერის URL გადამისამართება';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'თუ მომხმარებელი ცდილობს, გახსნას tracker URL ვებ browser<br />leave ცარიელი გამორთვა';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'ანონსი ინტერვალი';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'თანატოლებთან უნდა დაველოდოთ მინიმუმ ეს ბევრი წამი შორის განცხადებები';
-$lang['NUMWANT'] = 'Numwant ღირებულება';
-$lang['NUMWANT_EXPL'] = 'რაოდენობის თანატოლებს გაგზავნილი კლიენტი';
-$lang['EXPIRE_FACTOR'] = 'თანხმობა იწურება ფაქტორი';
-$lang['EXPIRE_FACTOR_EXPL'] = 'განვიხილოთ peer მკვდარი თუ იგი არ გამოცხადდა რამდენიმე წამში ტოლი ეს ბევრჯერ გათვლილი აცხადებს ინტერვალის დროს მისი ბოლო განცხადება (უნდა იყოს უფრო დიდი, ვიდრე 1)';
-$lang['IGNORE_GIVEN_IP'] = 'იგნორირება IP აცნობეს კლიენტი';
-$lang['UPDATE_DLSTAT'] = 'მაღაზია მომხმარებლებს up/down სტატისტიკა';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'ლიმიტები';
-$lang['LIMIT_ACTIVE_TOR'] = 'ლიმიტი აქტიური ტორენტები';
-$lang['LIMIT_SEED_COUNT'] = 'დათესვა ლიმიტი';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - ულიმიტო)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching ლიმიტი';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - ულიმიტო)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech იწურება ფაქტორი';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'მკურნალობა თანხმობა, როგორც აქტიური ამ წუთებში კი, თუ იგი გაიგზავნა "შეწყვიტა" ღონისძიების შემდეგ დაწყებული dl<br />0 - გაითვალისწინოს "შეწყვიტა" ღონისძიება';
-$lang['LIMIT_CONCURRENT_IPS'] = "ლიმიტი კონკურენტმა IP-ს";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'თითო torrent ლიმიტი';
-$lang['LIMIT_SEED_IPS'] = 'დათესვა IP ლიმიტი';
-$lang['LIMIT_SEED_IPS_EXPL'] = "საშუალებას სათესლე მხრიდან, არც მეტი, ვიდრე <i>xx</i> IP's<br />0 - ულიმიტო";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP ლიმიტი';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "საშუალებას leeching საწყისი არც მეტი, ვიდრე <i>xx</i> IP's<br />0 - ულიმიტო";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'ავტორიზაციის';
-$lang['USE_AUTH_KEY'] = 'გასაღები არასწორია';
-$lang['USE_AUTH_KEY_EXPL'] = 'საშუალებას შემოწმება გასაღები არასწორია';
-$lang['AUTH_KEY_NAME'] = 'გასაღები არასწორია დასახელება';
-$lang['AUTH_KEY_NAME_EXPL'] = 'გასაღები არასწორია გასაღები სახელი მისაღებად მოთხოვნა';
-$lang['ALLOW_GUEST_DL'] = 'საშუალებას სასტუმრო ხელმისაწვდომობის tracker';
-$lang['ADD_RETRACKER'] = 'რჩეულებში retracker torrent ფაილები';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'ფორუმის config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'კეთილი იყოს თქვენი მობრძანება საიტზე %s',
     'USER_WELCOME_INACTIVE' => 'კეთილი იყოს თქვენი მობრძანება საიტზე %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

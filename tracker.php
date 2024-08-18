@@ -43,7 +43,7 @@ $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $set_default = isset($_GET['def']);
 $user_id = $userdata['user_id'];
 $lastvisit = (!IS_GUEST) ? $userdata['user_lastvisit'] : '';
-$search_id = (isset($_GET['search_id']) && is_string($_GET['search_id'])) ? $_GET['search_id'] : '';
+$search_id = (isset($_GET['search_id']) && verify_id($_GET['search_id'], SEARCH_ID_LENGTH)) ? $_GET['search_id'] : '';
 $session_id = $userdata['session_id'];
 
 $status = (isset($_POST['status']) && is_array($_POST['status'])) ? $_POST['status'] : [];
@@ -299,7 +299,7 @@ if (isset($_GET[$user_releases_key])) {
 }
 
 // Random release
-if (isset($_GET['random_release'])) {
+if ($bb_cfg['tracker']['random_release_button'] && isset($_GET['random_release'])) {
     if ($random_release = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE tor_status NOT IN(" . implode(', ', array_keys($bb_cfg['tor_frozen'])) . ") ORDER BY RAND() LIMIT 1")) {
         redirect(TOPIC_URL . $random_release['topic_id']);
     } else {
@@ -333,7 +333,7 @@ if ($search_id) {
 }
 
 // Get allowed for searching forums list
-if (!$forums = $datastore->get('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
@@ -825,7 +825,7 @@ if ($bb_cfg['tracker']['search_by_tor_status']) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
             $checked_status = in_array($status_id, $status) ? 'checked' : '';
-            $statuses .= '<td><p class="chbox"><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked_status . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</p></td>';
+            $statuses .= '<td><p class="chbox"><label><input type="checkbox" name="status[]" value="' . $status_id . '"' . $checked_status . '>' . $status_styles . '&nbsp;' . $lang['TOR_STATUS_NAME'][$status_id] . '</label></p></td>';
         }
         $statuses .= '</tr>';
     }

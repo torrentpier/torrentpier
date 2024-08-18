@@ -113,6 +113,9 @@ $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 $topic_attachment = isset($t_data['topic_attachment']) ? (int)$t_data['topic_attachment'] : null;
 
+// Allow robots indexing
+$page_cfg['allow_robots'] = (bool)$t_data['topic_allow_robots'];
+
 if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
     bb_die($lang['ERROR_PORNO_FORUM']);
 }
@@ -195,7 +198,7 @@ if ($is_auth['auth_mod']) {
 
 if ($moderation) {
     if (IS_ADMIN) {
-        if (!$forum_select = $datastore->get('viewtopic_forum_select')) {
+        if (!$forum_select = $datastore->get('viewtopic_forum_select') and !$datastore->has('viewtopic_forum_select')) {
             $datastore->update('viewtopic_forum_select');
             $forum_select = $datastore->get('viewtopic_forum_select');
         }
@@ -207,7 +210,7 @@ if ($moderation) {
     $template->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
-if (!$forums = $datastore->get('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
@@ -353,7 +356,7 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     bb_die($lang['NO_POSTS_TOPIC']);
 }
 
-if (!$ranks = $datastore->get('ranks')) {
+if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }
@@ -468,6 +471,7 @@ $template->assign_vars([
     'SHOW_BOT_NICK' => $bb_cfg['show_bot_nick'],
     'T_POST_REPLY' => $reply_alt,
 
+    'HIDE_FROM' => $user->opt_js['h_from'],
     'HIDE_AVATAR' => $user->opt_js['h_av'],
     'HIDE_RANK_IMG' => ($user->opt_js['h_rnk_i'] && $bb_cfg['show_rank_image']),
     'HIDE_POST_IMG' => $user->opt_js['h_post_i'],

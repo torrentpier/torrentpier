@@ -3,13 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="initial-scale=1.0">
 <title><!-- IF HAVE_NEW_PM -->({HAVE_NEW_PM}) <!-- ENDIF --><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
+<meta name="apple-mobile-web-app-title" content="{SITENAME}">
 <meta name="application-name" content="{SITENAME}"/>
 <meta property="og:site_name" content="{SITENAME}">
 <meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
+<meta property="og:type" content="website">
 <meta property="twitter:image" content="{SITE_URL}styles/images/logo/logo.png">
 <meta property="og:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
 <meta property="twitter:title" content="<!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF -->">
+<meta property="twitter:card" content="summary">
+<!-- IF ALLOW_ROBOTS -->
+<meta name="robots" content="all">
+<!-- ELSE -->
+<meta name="robots" content="none">
+<!-- ENDIF -->
+<!-- IF META_PREV_PAGE -->
+<link rel="prev" href="{META_PREV_PAGE}">
+<!-- ENDIF / META_PREV_PAGE -->
+<!-- IF META_NEXT_PAGE -->
+<link rel="next" href="{META_NEXT_PAGE}">
+<!-- ENDIF / META_NEXT_PAGE -->
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Käytöstä';
 $lang['ERROR'] = 'Virhe';
 $lang['SELECT_ACTION'] = 'Valitse toiminta';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Tuntematon';
 
 $lang['NEXT_PAGE'] = 'Seuraava';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Hymiöitä raja %s hymiöitä ylitetty.';
 
 $lang['ATTACH_SIGNATURE'] = 'Liitä allekirjoitus (allekirjoitusta voidaan vaihtaa profiilin)';
 $lang['NOTIFY'] = 'Ilmoita minulle, kun vastaukset';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Viestisi on kirjattu onnistuneesti.';
 $lang['EDITED'] = 'Viesti on muutettu';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Anteeksi, mutta salasanan voi palauttaa. Ota yhteytt
 
 $lang['ALWAYS_ADD_SIG'] = 'Kiinnitä aina minun allekirjoitus';
 $lang['HIDE_PORN_FORUMS'] = 'Piilottaa sisällön 18+';
+$lang['ADD_RETRACKER'] = 'Lisää retracker torrent-tiedostoja';
 $lang['ALWAYS_NOTIFY'] = 'Aina ilmoita vastauksista';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Lähettää sähköpostia kun joku vastaa aihe olet lähetetty. Tämä voidaan muuttaa aina, kun lähetät.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Paluu profiili';
 $lang['SELECT_CATEGORY'] = 'Valitse luokka';
 
 $lang['DELETE_IMAGE'] = 'Poista kuva';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Nykyisen kuvan';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Ilmoita uusi yksityinen viesti';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Toinen torrent kanssa samaa info_hash jo <a hr
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Poista tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent rekisteröimätön';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Seed viimeksi nähty';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Koko';
 $lang['PIECE_LENGTH'] = 'Pala pituus';
-$lang['COMPLETED'] = 'Valmistunut';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Lisätty';
 $lang['DELETE_TORRENT'] = 'Poista torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Poistaa ja siirtää aihe';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['vastaus', 'vastaukset'];
 $lang['DECLENSION']['TIMES'] = ['aika', 'kertaa'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['toinen', 'sekuntia'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Tiedostoluettelo';
 $lang['COLLAPSE'] = 'Romahdus hakemistoon';
 $lang['EXPAND'] = 'Laajentaa';
 $lang['SWITCH'] = 'Kytkin';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Puuttuva file identifier!';
 $lang['TOR_NOT_FOUND'] = 'Tiedosto on puuttuu palvelimelle!';
 $lang['ERROR_BUILD'] = 'Sisältö tämä torrent-tiedosto ei voida tarkastella sivuston (se ei ollut mahdollista rakentaa luettelo tiedostot)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL-nopeus';
 $lang['DL_DL_SPEED'] = 'DL-nopeus';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Kaava: Ladataan/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'pysähtyi';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Antamasi nimi voisi olla kielletty. Se joko on jo
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikkaa %sHere%s palata Estää Käyttäjätunnus Hallinto';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Tiedot';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Laajennus';
 $lang['RETURN_CONFIG'] = '%sReturn että Configuration%s';
 $lang['CONFIG_UPD'] = 'Kokoonpano Päivitetty Onnistuneesti';
 $lang['SET_DEFAULTS'] = 'Palauta oletukset';
-
-$lang['OFF_TRACKER'] = 'Poistaa tracker';
-$lang['OFF_REASON'] = 'Poistaa syy';
-$lang['OFF_REASON_EXPL'] = 'tämä viesti lähetetään asiakkaalle, kun tracker on pois käytöstä';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean ikäisensä taulukko - älä poista käytöstä ilman syytä';
-$lang['COMPACT_MODE'] = 'Kompakti tila';
-$lang['COMPACT_MODE_EXPL'] = '"Kyllä" - tracker hyväksyy vain asiakkaita, jotka työskentelevät kompakti mode<br />"Ei" - yhteensopiva tila (valittu asiakas)';
-$lang['BROWSER_REDIRECT_URL'] = 'Selain uudelleenohjaus-URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'jos käyttäjä yrittää avata tracker URL-osoite Web-browser<br />leave tyhjäksi, jos haluat poistaa käytöstä';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Ilmoittaa aikaväli';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'ikäisensä tulisi odottaa vähintään näin monta sekuntia välillä ilmoitukset';
-$lang['NUMWANT'] = 'Numwant arvo';
-$lang['NUMWANT_EXPL'] = 'määrä ikäisensä lähetetään asiakkaalle';
-$lang['EXPIRE_FACTOR'] = 'Peer päättyy tekijä';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Harkitse peer kuollut, jos se ei ole ilmoittanut useita sekuntia yhtä monta kertaa laskettu ilmoittaa väli aikaan sen viimeinen ilmoitus (on oltava suurempi kuin 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ohita IP ilmoittamia asiakas';
-$lang['UPDATE_DLSTAT'] = 'Säilytä käyttäjät ylös/alas-tilastot';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Rajoja';
-$lang['LIMIT_ACTIVE_TOR'] = 'Raja aktiivinen torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Kylvö raja';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - ei rajaa)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching raja';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - ei rajaa)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech päättyy tekijä';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Hoitoon peer aktiivisena näin monta minuuttia, vaikka se lähetti "pysäytti" tapahtuman jälkeen alkaa dl<br />0 - ottaa huomioon "pysäyttää" tapahtuma';
-$lang['LIMIT_CONCURRENT_IPS'] = "Rajoittaa samanaikaisten IP: n";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent raja';
-$lang['LIMIT_SEED_IPS'] = 'Kylvö IP-raja';
-$lang['LIMIT_SEED_IPS_EXPL'] = "salli kylvö alkaen enintään <i>xx</i> IP's<br />0 - no limit";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP-raja';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "salli iilimadot alkaen enintään <i>xx</i> IP's<br />0 - no limit";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Lupaa';
-$lang['USE_AUTH_KEY'] = 'Salasana';
-$lang['USE_AUTH_KEY_EXPL'] = 'jotta tarkistaa salasana';
-$lang['AUTH_KEY_NAME'] = 'Tunnuksen nimi';
-$lang['AUTH_KEY_NAME_EXPL'] = 'salasana-näppäintä nimi-GET-pyynnön';
-$lang['ALLOW_GUEST_DL'] = 'Salli vieraiden pääsy tracker';
-$lang['ADD_RETRACKER'] = 'Lisää retracker torrent-tiedostoja';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Tervetuloa sivustolle %s',
     'USER_WELCOME_INACTIVE' => 'Tervetuloa sivustolle %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

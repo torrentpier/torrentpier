@@ -60,4 +60,7 @@ if (IN_DEMO_MODE) {
 }
 
 // Check for updates
-$datastore->rm('check_updates');
+$datastore->update('check_updates');
+
+// Integrity check
+$datastore->update('files_integrity');

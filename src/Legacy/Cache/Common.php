@@ -9,39 +9,50 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use TorrentPier\Dev;
-
 /**
  * Class Common
  * @package TorrentPier\Legacy\Cache
  */
 class Common
 {
-    public $used = false;
+    /**
+     * Currently in usage
+     *
+     * @var bool
+     */
+    public bool $used = true;
 
     /**
-     * Returns value of variable
+     * Fetch data from cache
+     *
+     * @param string $name
+     * @return mixed
      */
-    public function get($name, $get_miss_key_callback = '', $ttl = 604800)
-    {
-        if ($get_miss_key_callback) {
-            return $get_miss_key_callback($name);
-        }
-        return \is_array($name) ? [] : false;
-    }
-
-    /**
-     * Store value of variable
-     */
-    public function set($name, $value, $ttl = 604800)
+    public function get(string $name): mixed
     {
         return false;
     }
 
     /**
-     * Remove variable
+     * Store data into cache
+     *
+     * @param string $name
+     * @param mixed $value
+     * @param int $ttl
+     * @return bool
      */
-    public function rm($name = '')
+    public function set(string $name, mixed $value, int $ttl = 604800): bool
+    {
+        return false;
+    }
+
+    /**
+     * Removes data from cache
+     *
+     * @param string|null $name
+     * @return bool
+     */
+    public function rm(string $name = null): bool
     {
         return false;
     }
@@ -59,6 +70,8 @@ class Common
 
     public function debug($mode, $cur_query = null)
     {
+        global $debug;
+
         if (!$this->dbg_enabled) {
             return;
         }
@@ -69,7 +82,7 @@ class Common
         switch ($mode) {
             case 'start':
                 $this->sql_starttime = utime();
-                $dbg['sql'] = Dev::short_query($cur_query ?? $this->cur_query);
+                $dbg['sql'] = $debug->shortQuery($cur_query ?? $this->cur_query);
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');

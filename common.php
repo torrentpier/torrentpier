@@ -54,7 +54,7 @@ require_once BB_PATH . '/library/defines.php';
 
 // Composer
 if (!is_file(BB_PATH . '/vendor/autoload.php')) {
-    die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
+    die('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
 }
 require_once BB_PATH . '/vendor/autoload.php';
 
@@ -75,7 +75,7 @@ try {
     $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
     $dotenv->load();
 } catch (\Dotenv\Exception\InvalidPathException $pathException) {
-    die('Please rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it');
+    die('🔩 Manual install: Rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it.<br>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
 }
 
 // Load config
@@ -99,26 +99,6 @@ $server_port = in_array((int)$bb_cfg['server_port'], [80, 443], true) ? '' : ':'
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
-
-// Board / tracker shared constants and functions
-define('BB_BT_TORRENTS', 'bb_bt_torrents');
-define('BB_BT_TRACKER', 'bb_bt_tracker');
-define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
-define('BB_BT_USERS', 'bb_bt_users');
-
-define('BT_AUTH_KEY_LENGTH', 20);
-
-define('DL_STATUS_RELEASER', -1);
-define('DL_STATUS_DOWN', 0);
-define('DL_STATUS_COMPLETE', 1);
-define('DL_STATUS_CANCEL', 3);
-define('DL_STATUS_WILL', 4);
-
-define('TOR_TYPE_GOLD', 1);
-define('TOR_TYPE_SILVER', 2);
-
-define('GUEST_UID', -1);
-define('BOT_UID', -746);
 
 /**
  * Database
@@ -149,50 +129,18 @@ switch ($bb_cfg['datastore_type']) {
     case 'apcu':
         $datastore = new TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
         break;
-
-    case 'memcache':
-        $datastore = new TorrentPier\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
+    case 'memcached':
+        $datastore = new TorrentPier\Legacy\Datastore\Memcached($bb_cfg['cache']['memcached'], $bb_cfg['cache']['prefix']);
         break;
-
     case 'sqlite':
-        $default_cfg = [
-            'db_file_path' => $bb_cfg['cache']['db_dir'] . 'datastore.sqlite.db',
-            'pconnect' => true,
-            'con_required' => true,
-        ];
-        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($default_cfg, $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['db_dir'] . 'datastore', $bb_cfg['cache']['prefix']);
         break;
-
     case 'redis':
         $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
         break;
-
     case 'filecache':
     default:
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
-}
-
-/**
- * Check system requirements
- */
-if (CHECK_REQUIREMENTS['status'] && !CACHE('bb_cache')->get('system_req')) {
-    // [1] Check PHP Version
-    if (!\TorrentPier\Helpers\IsHelper::isPHP(CHECK_REQUIREMENTS['php_min_version'])) {
-        die("TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION);
-    }
-
-    // [2] Check installed PHP Extensions on server
-    $data = [];
-    foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
-        if (!extension_loaded($ext)) {
-            $data[] = '<code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">' . $ext . '</code>';
-        }
-    }
-    if (!empty($data)) {
-        die(sprintf("TorrentPier requires %s extension(s) installed on server", implode(', ', $data)));
-    }
-
-    CACHE('bb_cache')->set('system_req', true);
 }
 
 // Functions
@@ -201,7 +149,7 @@ function utime()
     return array_sum(explode(' ', microtime()));
 }
 
-function bb_log($msg, $file_name, $return_path = false)
+function bb_log($msg, $file_name = 'logs', $return_path = false)
 {
     if (is_array($msg)) {
         $msg = implode(LOG_LF, $msg);
@@ -265,6 +213,11 @@ function mkdir_rec($path, $mode): bool
     return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
 }
 
+function verify_id($id, $length): bool
+{
+    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
+}
+
 function clean_filename($fname)
 {
     static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
@@ -313,6 +266,20 @@ function make_rand_str(int $length = 10): string
     }
 
     return $randomString;
+}
+
+/**
+ * Calculates user ratio
+ *
+ * @param array $btu
+ * @return float|null
+ */
+function get_bt_ratio(array $btu): ?float
+{
+    return
+        (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
+            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
+            : null;
 }
 
 function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false, $timeout = false)
@@ -368,6 +335,11 @@ function sys(string $param)
             trigger_error("invalid param: $param", E_USER_ERROR);
     }
 }
+
+/**
+ * Some shared defines
+ */
+define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 
 // Initialization
 if (!defined('IN_TRACKER')) {

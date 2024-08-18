@@ -10,16 +10,16 @@
 require __DIR__ . '/pagestart.php';
 
 // Statistics
-if (!$stats = $datastore->get('stats')) {
+if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
     $datastore->update('stats');
     $stats = $datastore->get('stats');
 }
 
+// Files integrity check
+$files_integrity_data = $datastore->has('files_integrity') ? $datastore->get('files_integrity') : [];
+
 // Check for updates
-if (!$update_data = $datastore->get('check_updates')) {
-    $datastore->update('check_updates');
-    $update_data = $datastore->get('check_updates');
-}
+$update_data = $datastore->has('check_updates') ? $datastore->get('check_updates') : [];
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
@@ -82,14 +82,27 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
     ]);
 
+    // Files integrity check results
+    if (!empty($files_integrity_data)) {
+        $template->assign_block_vars('integrity_check', [
+            'INTEGRITY_SUCCESS' => (bool)$files_integrity_data['success'],
+            'INTEGRITY_WRONG_FILES_LIST' => implode("\n</li>\n<li>\n", $files_integrity_data['wrong_files']),
+            'INTEGRITY_LAST_CHECK_TIME' => sprintf($lang['INTEGRITY_LAST_CHECK'], bb_date($files_integrity_data['timestamp'])),
+            'INTEGRITY_CHECKED_FILES' => sprintf($lang['INTEGRITY_CHECKED'], $files_integrity_data['total_num'], ($files_integrity_data['total_num'] - $files_integrity_data['wrong_files_num'])),
+        ]);
+    }
+
     // Check for updates
-    $template->assign_block_vars('updater', [
-        'UPDATE_AVAILABLE' => $update_data['available_update'],
-        'NEW_VERSION_NUMBER' => $update_data['latest_version'],
-        'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
-        'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
-        'NEW_VERSION_LINK' => $update_data['latest_version_link'],
-    ]);
+    if (isset($update_data['available_update'])) {
+        $template->assign_block_vars('updater', [
+            'UPDATE_AVAILABLE' => $update_data['available_update'],
+            'NEW_VERSION_NUMBER' => $update_data['latest_version'],
+            'NEW_VERSION_SIZE' => $update_data['latest_version_size'],
+            'NEW_VERSION_DL_LINK' => $update_data['latest_version_dl_link'],
+            'NEW_VERSION_LINK' => $update_data['latest_version_link'],
+            'NEW_VERSION_MD5' => $update_data['latest_version_checksum']
+        ]);
+    }
 
     // Get forum statistics
     $total_posts = $stats['postcount'];

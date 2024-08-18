@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Invalīdiem';
 $lang['ERROR'] = 'Kļūda';
 $lang['SELECT_ACTION'] = 'Izvēlieties darbība';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Nav zināms';
 
 $lang['NEXT_PAGE'] = 'Nākamā';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emocijas robeža %s emocijas pārsniegts.';
 
 $lang['ATTACH_SIGNATURE'] = 'Pievienot parakstu (paraksti var tikt mainīts profils)';
 $lang['NOTIFY'] = 'Paziņot man, kad atbildes';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Jūsu ziņojums ir ievadīts veiksmīgi.';
 $lang['EDITED'] = 'Ziņojums ir mainīts';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Atvainojiet, bet jūsu paroli nevar izgūt. Lūdzu, 
 
 $lang['ALWAYS_ADD_SIG'] = 'Vienmēr pievienot manu parakstu';
 $lang['HIDE_PORN_FORUMS'] = 'Paslēpt satura 18+';
+$lang['ADD_RETRACKER'] = 'Pievienot retracker, torrent failus';
 $lang['ALWAYS_NOTIFY'] = 'Vienmēr informēt mani par atbildēm';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Nosūta e-pastu, kad kāds atbild uz tēmu, jums ir norīkots. Tas var mainīt ikreiz, kad jūs post.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Atgriezties profilu';
 $lang['SELECT_CATEGORY'] = 'Izvēlieties kategoriju';
 
 $lang['DELETE_IMAGE'] = 'Dzēst attēlu';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Pašreizējo attēlu';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Informēt par jaunu privātu ziņojumu';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Citu torrent ar pašu info_hash jau <a href="%
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Noņemt no tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent nereģistrētiem';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Sēklas pēdējo reizi redzējām';
 $lang['BT_SORT_FORUM'] = 'Forums';
 $lang['SIZE'] = 'Izmērs';
 $lang['PIECE_LENGTH'] = 'Gabals garums';
-$lang['COMPLETED'] = 'Pabeigts';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Pievienot';
 $lang['DELETE_TORRENT'] = 'Dzēst torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Dzēst un pārvietot tēmu';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['atbildēt', 'atbildes'];
 $lang['DECLENSION']['TIMES'] = ['laiks', 'reizes'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['otrais', 'sekundes'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Sabrukums katalogs';
 $lang['EXPAND'] = 'Izvērsiet';
 $lang['SWITCH'] = 'Slēdzis';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Trūkst faila identifikators!';
 $lang['TOR_NOT_FOUND'] = 'Fails ir pazudis uz servera!';
 $lang['ERROR_BUILD'] = 'Saturu šajā torrent failu nevar apskatīt uz vietas (tas nav iespējams veidot failu sarakstu)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL ātrums';
 $lang['DL_DL_SPEED'] = 'DL ātrums';
 $lang['DL_PORT'] = 'Ostas';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formula: Augšupielādēto/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'apturēts';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Ievadīto nosaukumu varētu nebūt neattaisno. T�
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Noklikšķiniet uz %sHere%s atgriezties, lai Aizliegtu Lietotājvārdu Administrācija';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versijas Informācija';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Pagarinājums';
 $lang['RETURN_CONFIG'] = '%sReturn, lai Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurācijas Atjaunināts Veiksmīgi';
 $lang['SET_DEFAULTS'] = 'Restore defaults (atjaunot noklusējumus';
-
-$lang['OFF_TRACKER'] = 'Atspējot tracker';
-$lang['OFF_REASON'] = 'Atspējot iemesls';
-$lang['OFF_REASON_EXPL'] = 'šis ziņojums tiks nosūtīts klientam, ja tracker ir deaktivizēta';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean vienaudžiem tabula - nav atspējot bez iemesla';
-$lang['COMPACT_MODE'] = 'Kompakts režīmā';
-$lang['COMPACT_MODE_EXPL'] = '"Jā" - tracker pieņems tikai tādus klientus, kas strādā kompakts mode<br />"Nē" - saderīgu režīmā (izvēlas klients)';
-$lang['BROWSER_REDIRECT_URL'] = 'Pārlūka novirzīšanas URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'ja lietotājs mēģina atvērt tracker URL Web browser<br />leave tukšu, lai atspējotu';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Dažādi';
-$lang['ANNOUNCE_INTERVAL'] = 'Paziņot intervāls';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'vienaudžiem vajadzētu gaidīt vismaz šo daudz sekundes starp sludinājumi';
-$lang['NUMWANT'] = 'Numwant vērtība';
-$lang['NUMWANT_EXPL'] = 'skaits vienaudžiem, kas tiek nosūtīts uz klienta';
-$lang['EXPIRE_FACTOR'] = 'Salīdzinošās beidzas faktors';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Uzskata, peer miris, ja tā nav paziņojusi, ar sekunžu skaitu, kas vienāds ar šo daudzas reizes aprēķināto paziņot intervālu laikā tā pēdējā paziņojuma (nedrīkst būt lielāks par 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignorēt IP ziņoja klientu';
-$lang['UPDATE_DLSTAT'] = 'Veikala lietotājiem augšu/uz leju statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Ierobežojumi';
-$lang['LIMIT_ACTIVE_TOR'] = 'Ierobežojums aktīvu straumēm';
-$lang['LIMIT_SEED_COUNT'] = 'Sētu limitu';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - neierobežoti)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching limitu';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - neierobežoti)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Dēle beidzas faktors';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Ārstēt peer kā aktīva šo minūšu skaitu, pat tad, ja tā ir nosūtījusi "apstājās" notikumu, kad sākas dl<br />0 - ņem vērā "stop" pasākums';
-$lang['LIMIT_CONCURRENT_IPS'] = "Ierobežo vienlaicīgo IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'par torrent limitu';
-$lang['LIMIT_SEED_IPS'] = 'Sētu IP limitu';
-$lang['LIMIT_SEED_IPS_EXPL'] = "ļauj sētu no ne vairāk kā <i>xx</i> IP's<br />0 - bez limita";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limitu';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "ļauj leeching no ne vairāk kā <i>xx</i> IP's<br />0 - bez limita";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Atļaujas';
-$lang['USE_AUTH_KEY'] = 'Patentatslēga';
-$lang['USE_AUTH_KEY_EXPL'] = 'ļauj pārbaudīt, vai piekļuves atslēga';
-$lang['AUTH_KEY_NAME'] = 'Patentatslēga nosaukums';
-$lang['AUTH_KEY_NAME_EXPL'] = 'piekļuves atslēgu, atslēgu nosaukums GET pieprasījumu';
-$lang['ALLOW_GUEST_DL'] = 'Atļaut viesu piekļuvi tracker';
-$lang['ADD_RETRACKER'] = 'Pievienot retracker, torrent failus';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forums config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Laipni lūdzam vietnē %s',
     'USER_WELCOME_INACTIVE' => 'Laipni lūdzam vietnē %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

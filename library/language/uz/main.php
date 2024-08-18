@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'nogironlar';
 $lang['ERROR'] = 'xato';
 $lang['SELECT_ACTION'] = 'tanlang harakat';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'noma\'lum';
 
 $lang['NEXT_PAGE'] = 'Keyingi';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '%s So\'zlari jumlalari chegarasi oshdi.';
 
 $lang['ATTACH_SIGNATURE'] = 'imzo biriktiring (imzo profili o\'zgarishi mumkin)';
 $lang['NOTIFY'] = 'qachon javoblar haqida meni xabardor qiling';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Xabaringiz muvaffaqiyatli kirib kelmoqda.';
 $lang['EDITED'] = 'Xabar o\'zgartirildi';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Kechirasiz, lekin parolni olinadi mumkin emas. Qo\'s
 
 $lang['ALWAYS_ADD_SIG'] = 'Har doim mening imzo qo\'shishingiz';
 $lang['HIDE_PORN_FORUMS'] = 'mazmunini yashirish 18+';
+$lang['ADD_RETRACKER'] = 'torrent fayllarni ham retracker qo\'shish';
 $lang['ALWAYS_NOTIFY'] = 'Har doim, menga javob berish-';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'kimdir sizga tashlashdi bir mavzuga javob elektron pochta jo\'natadi. Agar post qachon bu o\'zgartirilishi mumkin.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'profile qaytish';
 $lang['SELECT_CATEGORY'] = 'Turkum tanlang';
 
 $lang['DELETE_IMAGE'] = 'tasvirni o\'chirish';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'amaldagi tasvir';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Yangi Xususiy e\'lonlar bildiring';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Shu info_hash allaqachon <a href="%s"><b>regis
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'izdoshlari o\'chirish';
 $lang['BT_UNREGISTERED'] = 'Ro\'yxatdan o\'tmagan torrent';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Urug \'so\'nggi ko\'rgan';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'hajmi';
 $lang['PIECE_LENGTH'] = 'parcha uzunligi';
-$lang['COMPLETED'] = 'Bajarilgan';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Yükladi';
 $lang['DELETE_TORRENT'] = 'torrent o\'chirish';
 $lang['DELETE_MOVE_TORRENT'] = 'O\'chirish va mavzuni ko\'chirish';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['javob', 'javoblar'];
 $lang['DECLENSION']['TIMES'] = ['vaqt', 'marta'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['ikkinchi', 'soniya'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'buzish katalog';
 $lang['EXPAND'] = 'kengaytirish';
 $lang['SWITCH'] = 'Switch';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Yo\'qolgan fayl identifikatori!';
 $lang['TOR_NOT_FOUND'] = 'Fayl serverda etishmayotgan!';
 $lang['ERROR_BUILD'] = 'Ushbu torrent fayl tarkibi saytida kuzatilishi mumkin emas (bu fayllar ro\'yxatini qurish mumkin emas edi)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL tezligi';
 $lang['DL_DL_SPEED'] = 'DL tezligi';
 $lang['DL_PORT'] = 'port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formula: Uploaded / TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'to\'xtadi';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Siz kiritgan nom ruxsat etilmagan bo\'lmadi. Bu h
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Login Boshqaruvni taqiqlash qaytish uchun %sHere%s bosing';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Axborot';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'kengaytma';
 $lang['RETURN_CONFIG'] = 'Configuration%s uchun %sReturn';
 $lang['CONFIG_UPD'] = 'Konfiguratsiya muvaffaqiyatli Yangilangan';
 $lang['SET_DEFAULTS'] = 'Standart sozlamalarni tiklash';
-
-$lang['OFF_TRACKER'] = 'O\'chirish Kuzatishdan';
-$lang['OFF_REASON'] = 'O\'chirish sababi';
-$lang['OFF_REASON_EXPL'] = 'Kuzatishdan o\'chirilgan bo\'lsa, bu xabar mijozga yuboriladi';
-$lang['AUTOCLEAN_EXPL'] = 'Amerika moli Opsiyonel tengdoshlari stol - sababsiz o\'chirib emas';
-$lang['COMPACT_MODE'] = 'Compact rejimi';
-$lang['COMPACT_MODE_EXPL'] = '"Ha" - Kuzatishdan faqat "No" ixcham mode<br /> ishlaydigan mijozlariga qabul qiladi - (mijoz tomonidan tanlangan) mos rejimini';
-$lang['BROWSER_REDIRECT_URL'] = 'Brauzer yo\'riq URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'Foydalanuvchi veb browser<br />leave Bo\'sh Kuzatishdan URL ochish uchun harakat qiladi, agar o\'chirish uchun';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Xotinning';
-$lang['ANNOUNCE_INTERVAL'] = 'intervalini e\'lon';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'tengdoshlari e\'lon o\'rtasidagi kamida, bu ko\'p soniya kutish kerak';
-$lang['NUMWANT'] = 'Numwant qiymati';
-$lang['NUMWANT_EXPL'] = 'tengdoshlari soni mijozga yuborilgan';
-$lang['EXPIRE_FACTOR'] = 'omil tugaydi Peer';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Bu soniya bir qator e\'lon qilmagan bo\'lsa teng oxirgi e\'lon qilingan paytda oralig\'ini e\'lon hisoblab, bu bir necha marta bir peer o\'lik (1 dan katta bo\'lishi kerak)';
-$lang['IGNORE_GIVEN_IP'] = 'IP mijoz tomonidan xabar Ignore';
-$lang['UPDATE_DLSTAT'] = 'Store foydalanuvchilar yuqoriga / pastga statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Limits';
-$lang['LIMIT_ACTIVE_TOR'] = 'Foydalanuvchining barcha e\'lonlar, torrent cheklash';
-$lang['LIMIT_SEED_COUNT'] = 'ko\'chat chegarasi';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - hech chegarasi)';
-$lang['LIMIT_LEECH_COUNT'] = 'suluk chegarasi';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - hech chegarasi)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Suluk omil tugaydi';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'voqea "to\'xtadi" hisobga olish - bu yubordi, hatto agar daqiqa, bu qator davomida faol sifatida peer davolash tadbir dl<br />0 boshlanganidan so\'ng "to\'xtadi"';
-$lang['LIMIT_CONCURRENT_IPS'] = "bir vaqtda IP ning cheklash";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'torrent limiti boshiga';
-$lang['LIMIT_SEED_IPS'] = 'Ko\'chat IP chegarasi';
-$lang['LIMIT_SEED_IPS_EXPL'] = "ko'pi <i>xx</i> IP's<br />0 dan ekish imkonini beradi - hech chegarasi";
-$lang['LIMIT_LEECH_IPS'] = 'Qurishga harakat IP chegarasi';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "hech <i>xx</i> ortiq IP's<br />0 dan qurishga harakat imkon - hech chegarasi";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'ruxsat';
-$lang['USE_AUTH_KEY'] = 'Parol';
-$lang['USE_AUTH_KEY_EXPL'] = 'parol uchun chek imkon';
-$lang['AUTH_KEY_NAME'] = 'Parol nomi';
-$lang['AUTH_KEY_NAME_EXPL'] = 'Get irodasi bilan parol asosiy nomi';
-$lang['ALLOW_GUEST_DL'] = 'reyting www.uz mehmon uchun ruxsatdan foydalanayapsiz ruxsat berish';
-$lang['ADD_RETRACKER'] = 'torrent fayllarni ham retracker qo\'shish';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Saytga xush kelibsiz %s',
     'USER_WELCOME_INACTIVE' => 'Saytga xush kelibsiz %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

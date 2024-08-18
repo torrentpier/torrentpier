@@ -61,6 +61,7 @@ $lang['DISABLED'] = '障害者';
 $lang['ERROR'] = 'エラー';
 $lang['SELECT_ACTION'] = '選択行動';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = '不明';
 
 $lang['NEXT_PAGE'] = '次へ';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '絵文字制限の%s絵文字を超えます。
 
 $lang['ATTACH_SIGNATURE'] = '添付signature(署名を変更できるプロファイル）';
 $lang['NOTIFY'] = 'あだに回答';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'メッセージを入力します。';
 $lang['EDITED'] = 'メッセージが変更され';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = '申し訳ございません、あなたのパスワ�
 
 $lang['ALWAYS_ADD_SIG'] = '必ず添付に署名';
 $lang['HIDE_PORN_FORUMS'] = '非表示コンテンツ18+';
+$lang['ADD_RETRACKER'] = '追加retracker急流にもまれのファイル';
 $lang['ALWAYS_NOTIFY'] = '通知の私の回答';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = '送信メールはこの人の回答のマーまで投稿しています。 この変更ができます。';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = '返却のプロフィール';
 $lang['SELECT_CATEGORY'] = 'カテゴリを選択';
 
 $lang['DELETE_IMAGE'] = '画像の削除';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = '現在の画像';
 
 $lang['NOTIFY_ON_PRIVMSG'] = '知の新しいプライベートメッセージ';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1424,7 +1432,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = '種子の最終見る';
 $lang['BT_SORT_FORUM'] = 'フォーラム';
 $lang['SIZE'] = 'サイズ';
 $lang['PIECE_LENGTH'] = '片の長さ';
-$lang['COMPLETED'] = '完成';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = '追加';
 $lang['DELETE_TORRENT'] = '削除急流';
 $lang['DELETE_MOVE_TORRENT'] = '削除や移動の話題';
@@ -1645,6 +1653,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['返信', '回答'];
 $lang['DECLENSION']['TIMES'] = ['時間', '倍'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['第', '秒'],
@@ -1693,6 +1702,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = '崩壊ディレクトリ';
 $lang['EXPAND'] = '拡大';
 $lang['SWITCH'] = 'スイッチ';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = '足ファイルの識別子です！';
 $lang['TOR_NOT_FOUND'] = 'ファイルをサーバーです！';
 $lang['ERROR_BUILD'] = 'このtorrentファイルすることができませんのサイトできませんでしたが、自分のファイル)';
@@ -1837,7 +1847,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL速度';
 $lang['DL_DL_SPEED'] = 'DL速度';
 $lang['DL_PORT'] = '港';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = '式：掲載/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = '停止';
@@ -2286,6 +2296,14 @@ $lang['DISALLOWED_ALREADY'] = '名前の入力できな許可します。 そし
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'をクリックし%sHere%sを返す可にユーザー名の管理';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'バージョン情報';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2527,48 +2545,6 @@ $lang['EXTENSION'] = '延長';
 $lang['RETURN_CONFIG'] = '%sReturnにConfiguration%s';
 $lang['CONFIG_UPD'] = '構成に成功し';
 $lang['SET_DEFAULTS'] = 'デフォルトの復元';
-
-$lang['OFF_TRACKER'] = 'トラッカーを無効に';
-$lang['OFF_REASON'] = '無効理由';
-$lang['OFF_REASON_EXPL'] = 'このメッセージを送信時にクライアントのトラッカーが無効にな';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean仲間とテーブルなどを無効にな理由';
-$lang['COMPACT_MODE'] = 'コンパクトモード';
-$lang['COMPACT_MODE_EXPL'] = '"はい"-トラッカーにのみ受け入れのお客様の作業コンパクトmode<br />""互換モードを選択するクライアント)';
-$lang['BROWSER_REDIRECT_URL'] = 'ブラウザのリダイレクトURL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = '場合はユーザーのうトラッカーのURLのウェブbrowser<br />leave空白を無効にする';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'その他';
-$lang['ANNOUNCE_INTERVAL'] = '知間隔';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = '仲間を待つ少なくともこの期間を秒数で指定と発表';
-$lang['NUMWANT'] = 'Numwant値';
-$lang['NUMWANT_EXPL'] = '数人の友達に送られるお客様';
-$lang['EXPIRE_FACTOR'] = 'ピア-失効率';
-$lang['EXPIRE_FACTOR_EXPL'] = 'を考える相手がいないとして発表した数秒に等しいこの時間を算出し間隔時点の前回発表より大きくなければなりません1)';
-$lang['IGNORE_GIVEN_IP'] = '無視するIPの報告によるお客様';
-$lang['UPDATE_DLSTAT'] = '店舗利用者up/down統計';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = '限界';
-$lang['LIMIT_ACTIVE_TOR'] = '限納入';
-$lang['LIMIT_SEED_COUNT'] = '播種の制限';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0-制限なし)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching制限';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0-制限なし)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech失効率';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = '処理ピアとして活躍のためにこの数分の場合でもお送りいたしました"停止"のイベント開始後のdl<br />0-慮""イベント';
-$lang['LIMIT_CONCURRENT_IPS'] = "制限並IPの";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'た激流を制限';
-$lang['LIMIT_SEED_IPS'] = '播種IP制限';
-$lang['LIMIT_SEED_IPS_EXPL'] = "を播種からない以上<i>xx</i>IP's<br />0-制限なし";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP制限';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "きleechingから以<i>xx</i>IP's<br />0-制限なし";
-
-$lang['USE_AUTH_KEY_HEAD'] = '認可';
-$lang['USE_AUTH_KEY'] = 'パスキー';
-$lang['USE_AUTH_KEY_EXPL'] = 'をチェックのためのパスキー';
-$lang['AUTH_KEY_NAME'] = 'パスキーの名前';
-$lang['AUTH_KEY_NAME_EXPL'] = 'パスキーのキー名を取得要求';
-$lang['ALLOW_GUEST_DL'] = 'をゲストストラッカー';
-$lang['ADD_RETRACKER'] = '追加retracker急流にもまれのファイル';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Configフォーラム';
@@ -3095,3 +3071,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'サイトへようこそ %s',
     'USER_WELCOME_INACTIVE' => 'サイトへようこそ %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

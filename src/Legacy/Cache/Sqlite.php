@@ -9,7 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use SQLite3;
+use MatthiasMullie\Scrapbook\Adapters\SQLite as SQLiteCache;
+use PDO;
 
 /**
  * Class Sqlite
@@ -17,107 +18,116 @@ use SQLite3;
  */
 class Sqlite extends Common
 {
-    public $used = true;
-    public $db;
-    public $prefix;
-    public $engine = 'SQLite';
-    public $cfg = [
-        'db_file_path' => '/path/to/cache.db.sqlite',
-        'table_name' => 'cache',
-        'table_schema' => 'CREATE TABLE cache (
-	                cache_name        VARCHAR(255),
-	                cache_expire_time INT,
-	                cache_value       TEXT,
-	                PRIMARY KEY (cache_name)
-	        )',
-        'pconnect' => true,
-        'con_required' => true,
-        'log_name' => 'CACHE',
-    ];
+    /**
+     * Currently in usage
+     *
+     * @var bool
+     */
+    public bool $used = true;
 
-    public function __construct($cfg, $prefix = null)
+    /**
+     * Cache driver name
+     *
+     * @var string
+     */
+    public string $engine = 'SQLite';
+
+    /**
+     * Cache prefix
+     *
+     * @var string
+     */
+    private string $prefix;
+
+    /**
+     * Adapters\SQLite class
+     *
+     * @var SQLiteCache
+     */
+    private SQLiteCache $sqlite;
+
+    /**
+     * Sqlite constructor
+     *
+     * @param string $dir
+     * @param string $prefix
+     */
+    public function __construct(string $dir, string $prefix)
     {
-        if (!$this->is_installed()) {
-            die('Error: SQLite3 extension not installed');
-        }
+        global $debug;
 
-        $this->cfg = array_merge($this->cfg, $cfg);
-        $this->db = new SqliteCommon($this->cfg);
+        $client = new PDO("sqlite:$dir.db");
+        $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
-    public function get($name, $get_miss_key_callback = '', $ttl = 604800)
+    /**
+     * Fetch data from cache
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function get(string $name): mixed
     {
-        if (empty($name)) {
-            return \is_array($name) ? [] : false;
-        }
-        $this->db->shard($name);
-        $cached_items = [];
-        $prefix_len = \strlen($this->prefix);
-        $prefix_sql = SQLite3::escapeString($this->prefix);
+        $name = $this->prefix . $name;
 
-        $name_ary = $name_sql = (array)$name;
-        array_deep($name_sql, 'SQLite3::escapeString');
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
+        $this->debug('start');
 
-        // get available items
-        $rowset = $this->db->fetch_rowset("
-			SELECT cache_name, cache_value
-			FROM " . $this->cfg['table_name'] . "
-			WHERE cache_name IN('$prefix_sql" . implode("','$prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
-			LIMIT " . \count($name_sql) . "
-		");
+        $result = $this->sqlite->get($name);
 
-        $this->db->debug('start', 'unserialize()');
-        foreach ($rowset as $row) {
-            $cached_items[substr($row['cache_name'], $prefix_len)] = unserialize($row['cache_value']);
-        }
-        $this->db->debug('stop');
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
 
-        // get miss items
-        if ($get_miss_key_callback and $miss_key = array_diff($name_ary, array_keys($cached_items))) {
-            foreach ($get_miss_key_callback($miss_key) as $k => $v) {
-                $this->set($this->prefix . $k, $v, $ttl);
-                $cached_items[$k] = $v;
-            }
-        }
-        // return
-        if (\is_array($this->prefix . $name)) {
-            return $cached_items;
-        }
-
-        return $cached_items[$name] ?? false;
+        return $result;
     }
 
-    public function set($name, $value, $ttl = 604800)
+    /**
+     * Store data into cache
+     *
+     * @param string $name
+     * @param mixed $value
+     * @param int $ttl
+     * @return bool
+     */
+    public function set(string $name, mixed $value, int $ttl = 0): bool
     {
-        $this->db->shard($this->prefix . $name);
-        $name_sql = SQLite3::escapeString($this->prefix . $name);
-        $expire = TIMENOW + $ttl;
-        $value_sql = SQLite3::escapeString(serialize($value));
+        $name = $this->prefix . $name;
 
-        $result = $this->db->query("REPLACE INTO " . $this->cfg['table_name'] . " (cache_name, cache_expire_time, cache_value) VALUES ('$name_sql', $expire, '$value_sql')");
-        return (bool)$result;
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
+        $this->debug('start');
+
+        $result = $this->sqlite->set($name, $value, $ttl);
+
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
+
+        return $result;
     }
 
-    public function rm($name = '')
+    /**
+     * Removes data from cache
+     *
+     * @param string|null $name
+     * @return bool
+     */
+    public function rm(string $name = null): bool
     {
-        if ($name) {
-            $this->db->shard($this->prefix . $name);
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_name = '" . SQLite3::escapeString($this->prefix . $name) . "'");
-        } else {
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name']);
-        }
-        return (bool)$result;
-    }
+        $targetMethod = is_string($name) ? 'delete' : 'flush';
+        $name = is_string($name) ? $this->prefix . $name : null;
 
-    public function gc($expire_time = TIMENOW)
-    {
-        $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-        return $result ? $this->db->changes() : 0;
-    }
+        $this->cur_query = "cache->$targetMethod('$name')";
+        $this->debug('start');
 
-    public function is_installed()
-    {
-        return class_exists('SQLite3');
+        $result = $this->sqlite->$targetMethod($name);
+
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
+
+        return $result;
     }
 }

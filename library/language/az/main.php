@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Qaralar';
 $lang['ERROR'] = 'Səhv';
 $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Məlum deyil';
 
 $lang['NEXT_PAGE'] = 'Daha sonra';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Limit ifadeler olan ifadeler %s keçib.';
 
 $lang['ATTACH_SIGNATURE'] = 'Birləşdirmək imza (dəyişmək mümkündürsə, profili)';
 $lang['NOTIFY'] = 'Məlumat zaman mənə cavab azn';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Mesaj idi uğurla tətbiq edir.';
 $lang['EDITED'] = 'Mesaj dəyişdirildi';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Bağışlayın, amma sizin parol bərpa oluna bilmə
 
 $lang['ALWAYS_ADD_SIG'] = 'Həmişə birləşdirmək mənim imza';
 $lang['HIDE_PORN_FORUMS'] = 'Gizlətmək məzmun 18+';
+$lang['ADD_RETRACKER'] = 'Əlavə retracker bu torrent faylları';
 $lang['ALWAYS_NOTIFY'] = 'Həmişə hesabat barədə mənə cavab';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Göndərir zaman e-poçt cavab verən tapılarmı mövzusunda olduğunuz sizə üçün nəzərdə v. dəyişdirilə bilər zaman göndərin.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Geri profil';
 $lang['SELECT_CATEGORY'] = 'Bir kateqoriya seçin';
 
 $lang['DELETE_IMAGE'] = 'Aradan qaldırılması şəkillər';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Cari şəkil';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Agah haqqında yeni şəxsi ismarıc';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Digər torrent ilə eyni info_hash artıq <a h
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Aradan qaldırılması tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent qeydiyyata alınmamış';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1423,7 +1431,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Toxum son dəfə gördüm';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Boy';
 $lang['PIECE_LENGTH'] = 'Uzunluğu ədəd';
-$lang['COMPLETED'] = 'Başa çatmışdır';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Əlavə';
 $lang['DELETE_TORRENT'] = 'Sil torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Silin və hərəkət mövzular';
@@ -1644,6 +1652,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['cavab', 'cavablar'];
 $lang['DECLENSION']['TIMES'] = ['vaxt', 'dəfə'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['ikinci', 'saniyə'],
@@ -1692,6 +1701,7 @@ $lang['FILELIST'] = 'Siyahısı';
 $lang['COLLAPSE'] = 'Kataloq dağılmasından';
 $lang['EXPAND'] = 'Yerləşdirmək';
 $lang['SWITCH'] = 'Keçid';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'İtkin ıd fayl!';
 $lang['TOR_NOT_FOUND'] = 'Fayl yoxdursa, server!';
 $lang['ERROR_BUILD'] = 'Məzmun bu torrent-fayl deyil bilərsiniz saytda (uğursuz qurmaq faylların siyahısını)';
@@ -1836,7 +1846,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Sürət küç';
 $lang['DL_DL_SPEED'] = 'Sürət dl';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Tərkibi: Dolu/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'dayandırdı';
@@ -2285,6 +2295,14 @@ $lang['DISALLOWED_ALREADY'] = 'Təqdim adı olunmasından imtina edilə bilməz.
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Basın %sHere%s qaytarmaq qadağan Administrasiyası istifadəçi Adı';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Məlumat Versiyası';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2526,48 +2544,6 @@ $lang['EXTENSION'] = 'Genişləndirilməsi';
 $lang['RETURN_CONFIG'] = '%sReturn bu Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfiqurasiya Uğurla Yenilənib';
 $lang['SET_DEFAULTS'] = 'Bərpa yetirilməməsi';
-
-$lang['OFF_TRACKER'] = 'Aradan tracker';
-$lang['OFF_REASON'] = 'Səbəbi kəsilməsi';
-$lang['OFF_REASON_EXPL'] = 'bu mesajı göndəriləcək müştəriyə zaman tracker qaralar';
-$lang['AUTOCLEAN_EXPL'] = 'автоочистка masa peer - qaralar səbəb olmadan';
-$lang['COMPACT_MODE'] = 'Kompakt rejimi';
-$lang['COMPACT_MODE_EXPL'] = '"Bəli" - tracker qəbul edəcək yalnız müştərilərin çalışan kompakt mode<br />"yox" - uyğun rejimi (müştərinin arzusu ilə)';
-$lang['BROWSER_REDIRECT_URL'] = 'URL-ünvanı üçün brauzer yönlendirme';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'əgər istifadəçi açmaq üçün çalışır tracker URL-ünvanı veb-browser<br />leave aradan';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Qarışıq';
-$lang['ANNOUNCE_INTERVAL'] = 'Elan edirlər interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'yaşıdları gözləmək lazımdır ən azı bu sayı saniyə arasında mesajlaşma';
-$lang['NUMWANT'] = 'Dəyəri Numwant';
-$lang['NUMWANT_EXPL'] = 'sayı olmasına baxmayaraq onlar göndərilməsi müştəri';
-$lang['EXPIRE_FACTOR'] = 'Kollegial başa amili';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Hesab ad-hoc ölü deyil, əgər elan edib sayı saniyə, onsuz da bu dəfə çox təxmin edilən elan interval zamanı onun son elanlar (daha çox olmalıdır 1)';
-$lang['IGNORE_GIVEN_IP'] = 'İgnore IS xəbər verirdi müştəri';
-$lang['UPDATE_DLSTAT'] = 'İstifadəçilər mağazanın yuxarı/aşağı statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Məhdudiyyətlər';
-$lang['LIMIT_ACTIVE_TOR'] = 'Limit aktiv torrent';
-$lang['LIMIT_SEED_COUNT'] = 'Həddi səpin';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - məhdudiyyət olmadan)';
-$lang['LIMIT_LEECH_COUNT'] = 'Скачиваю həddi';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - məhdudiyyət olmadan)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Sona amil the lich';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Müalicə həmyaşıdları kimi aktiv üçün bu sayının dəqiqə, hətta əgər bu, belə deyil "dayandırmaq" hadisə başlamaq sonra dl<br />0 - nəzərə "dayandırmaq" hadisə';
-$lang['LIMIT_CONCURRENT_IPS'] = "Sayını məhdudlaşdırmaq sinxron IP-ünvanlar";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'üçün limit torrent';
-$lang['LIMIT_SEED_IPS'] = 'Əkin IS həddi';
-$lang['LIMIT_SEED_IPS_EXPL'] = "icazə verin, səpin-dən çox olmayan <i>xx</i> ИС's<br />0 - son hədd deyil";
-$lang['LIMIT_LEECH_IPS'] = 'Sarsıldı edir IS həddi';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "icazə verin, скачиваю bir daha heç <i>xx</i> ИС's<br />0 - son hədd deyil";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Avtorizasiya';
-$lang['USE_AUTH_KEY'] = 'Jimmy';
-$lang['USE_AUTH_KEY_EXPL'] = 'daxil yoxlama parol';
-$lang['AUTH_KEY_NAME'] = 'Adı parol';
-$lang['AUTH_KEY_NAME_EXPL'] = 'əsas jimmy adı Get sorğu';
-$lang['ALLOW_GUEST_DL'] = 'Həll qonaq girişi tracker';
-$lang['ADD_RETRACKER'] = 'Əlavə retracker bu torrent faylları';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum, onları';
@@ -3095,3 +3071,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Sayta xoş gəlmisiniz %s',
     'USER_WELCOME_INACTIVE' => 'Sayta xoş gəlmisiniz %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

@@ -74,7 +74,6 @@ define('COOKIE_PM', $c . 'pm');
 unset($c);
 
 define('COOKIE_SESSION', 0);
-define('COOKIE_EXPIRED', TIMENOW - 31536000);
 define('COOKIE_PERSIST', TIMENOW + 31536000);
 
 define('COOKIE_MAX_TRACKS', 90);
@@ -282,10 +281,10 @@ define('ACTKEY_LENGTH', 32);
 define('SID_LENGTH', 20);
 define('LOGIN_KEY_LENGTH', 32);
 define('USERNAME_MIN_LENGTH', 3);
-define('USERNAME_MAX_LENGTH', 25);
-define('USEREMAIL_MAX_LENGTH', 40);
+define('USERNAME_MAX_LENGTH', 30);
+define('USEREMAIL_MAX_LENGTH', 230);
 define('PASSWORD_MIN_LENGTH', 8);
-define('PASSWORD_MAX_LENGTH', 24);
+define('PASSWORD_MAX_LENGTH', 128);
 
 define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
@@ -307,13 +306,12 @@ define('FILELIST_URL', 'filelist.php?' . POST_TOPIC_URL . '=');
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
 define('HTML_SELECT_MAX_LENGTH', 60);
+define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');
 
 define('HTML_CHECKED', ' checked ');
 define('HTML_DISABLED', ' disabled ');
 define('HTML_READONLY', ' readonly ');
 define('HTML_SELECTED', ' selected ');
-
-define('HTML_SF_SPACER', '&nbsp;|-&nbsp;');
 
 // $GPC
 define('KEY_NAME', 0);   // position in $GPC['xxx']
@@ -461,15 +459,11 @@ if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_ADMIN') &
     if ($bb_cfg['board_disable']) {
         // admin lock
         send_no_cache_headers();
-        if (\TorrentPier\Helpers\CronHelper::isEnabled()) {
-            bb_die('BOARD_DISABLE', 503);
-        }
+        bb_die('BOARD_DISABLE', 503);
     } elseif (is_file(BB_DISABLED)) {
         // trigger lock
         TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
-        if (\TorrentPier\Helpers\CronHelper::isEnabled()) {
-            bb_die('BOARD_DISABLE_CRON', 503);
-        }
+        bb_die('BOARD_DISABLE_CRON', (\TorrentPier\Helpers\CronHelper::isEnabled() ? 503 : null));
     }
 }

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'विकलांग';
 $lang['ERROR'] = 'त्रुटि';
 $lang['SELECT_ACTION'] = 'कार्रवाई चुनें';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'अनजान';
 
 $lang['NEXT_PAGE'] = 'आगामी';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'इमोटिकॉन की सीमा %s
 
 $lang['ATTACH_SIGNATURE'] = 'हस्ताक्षर संलग्न करें (प्रोफ़ाइल में हस्ताक्षर परिवर्तित किए जा सकते हैं)';
 $lang['NOTIFY'] = 'उत्तर पर मुझे सूचित करें';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'आपका संदेश सफलतापूर्वक दर्ज किया गया है';
 $lang['EDITED'] = 'संदेश बदल दिया गया है';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'क्षमा करें, लेकिन आप
 
 $lang['ALWAYS_ADD_SIG'] = 'हमेशा अपने हस्ताक्षर संलग्न करें';
 $lang['HIDE_PORN_FORUMS'] = '18+ सामग्री छुपाएं';
+$lang['ADD_RETRACKER'] = 'धार फ़ाइलों में रिट्रेक जोड़ें';
 $lang['ALWAYS_NOTIFY'] = 'हमेशा मुझे उत्तर के बारे में सूचित करें';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'किसी ई-मेल को भेजता है, जब कोई आपके द्वारा पोस्ट किए गए किसी विषय का जवाब देता है। जब भी आप पोस्ट करते हैं तब यह बदला जा सकता है।';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'प्रोफ़ाइल पर लौटें';
 $lang['SELECT_CATEGORY'] = 'श्रेणी का चयन करें';
 
 $lang['DELETE_IMAGE'] = 'छवि हटाएं';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'वर्तमान छवि';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'नए निजी संदेश पर सूचित करें';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'उसी जानकारी के सा�
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ट्रैकर से निकालें';
 $lang['BT_UNREGISTERED'] = 'टॉरेंट अपंजीकृत';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'अंतिम देखा जाने वा
 $lang['BT_SORT_FORUM'] = 'मंच';
 $lang['SIZE'] = 'आकार';
 $lang['PIECE_LENGTH'] = 'टुकड़ा लंबाई';
-$lang['COMPLETED'] = 'पूरा कर लिया है';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'जोड़ा गया';
 $lang['DELETE_TORRENT'] = 'धार को हटा दें';
 $lang['DELETE_MOVE_TORRENT'] = 'विषय हटाएं और हटाएं';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['जवाब दें', 'उत्तर'];
 $lang['DECLENSION']['TIMES'] = ['पहर', 'टाइम्स'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['दूसरा', 'सेकंड'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'filelist';
 $lang['COLLAPSE'] = 'निर्देशिका को संकुचित करें';
 $lang['EXPAND'] = 'विस्तार';
 $lang['SWITCH'] = 'स्विच';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'गायब फ़ाइल पहचानकर्ता!';
 $lang['TOR_NOT_FOUND'] = 'सर्वर पर फ़ाइल गायब है!';
 $lang['ERROR_BUILD'] = 'इस धार फ़ाइल की सामग्री को साइट पर नहीं देखा जा सकता (यह फ़ाइलों की सूची बनाना संभव नहीं था)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'डीएल';
 $lang['DL_UL_SPEED'] = 'उल गति';
 $lang['DL_DL_SPEED'] = 'डीएल की गति';
 $lang['DL_PORT'] = 'बंदरगाह';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'फॉर्मूला: अपलोड किया गया / टोरेंटिसिज़';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'रोका हुआ';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'आपके द्वारा दर्ज न�
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'अस्वीकार उपयोगकर्ता नाम प्रशासन पर वापस जाने के लिए %s हायर %s पर क्लिक करें';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'संस्करण जानकारी';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'एक्सटेंशन';
 $lang['RETURN_CONFIG'] = '%s कॉन्फ़िगरेशन पर पुनः %s';
 $lang['CONFIG_UPD'] = 'कॉन्फ़िगरेशन सफलतापूर्वक अपडेट किया गया';
 $lang['SET_DEFAULTS'] = 'डिफॉल्ट्स का पुनःस्थापन';
-
-$lang['OFF_TRACKER'] = 'ट्रैकर अक्षम करें';
-$lang['OFF_REASON'] = 'कारण अक्षम करें';
-$lang['OFF_REASON_EXPL'] = 'ट्रैकर निष्क्रिय होने पर यह संदेश ग्राहक को भेजा जाएगा';
-$lang['AUTOCLEAN_EXPL'] = 'ऑटोकलीयन सहकर्मी तालिका - बिना किसी कारण के अक्षम करें';
-$lang['COMPACT_MODE'] = 'कॉम्पैक्ट मोड';
-$lang['COMPACT_MODE_EXPL'] = '"हां" - ट्रैकर केवल कॉम्पैक्ट मोड में काम कर रहे ग्राहकों को स्वीकार करेगा <br /> "नहीं" - संगत मोड (क्लाइंट द्वारा चुना गया)';
-$lang['BROWSER_REDIRECT_URL'] = 'ब्राउज़र रीडायरेक्ट यूआरएल';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'अगर उपयोगकर्ता वेब ब्राउज़र में ट्रैकर यूआरएल खोलने की कोशिश करता है <br /> निष्क्रिय करने के लिए रिक्त स्थान रखता है';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'विविध';
-$lang['ANNOUNCE_INTERVAL'] = 'अंतराल की घोषणा करें';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'साथियों को घोषणाओं के बीच कम से कम इस सेकेंड का इंतजार करना चाहिए';
-$lang['NUMWANT'] = 'लाभ मूल्य';
-$lang['NUMWANT_EXPL'] = 'साथियों की संख्या ग्राहक को भेजी जा रही है';
-$lang['EXPIRE_FACTOR'] = 'सहकर्मी की समय सीमा समाप्त';
-$lang['EXPIRE_FACTOR_EXPL'] = 'एक पीअर मृतक पर विचार करें यदि यह कई सेकंड में इसकी आखिरी घोषणा के समय गणना की गई अंतराल के बराबर कई बार घोषित नहीं हुई है (1 से अधिक होना चाहिए)';
-$lang['IGNORE_GIVEN_IP'] = 'क्लाइंट द्वारा रिपोर्ट आईपी अनदेखा करें';
-$lang['UPDATE_DLSTAT'] = 'स्टोर उपयोगकर्ताओं को ऊपर / नीचे आंकड़े स्टोर करें';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'सीमाएं';
-$lang['LIMIT_ACTIVE_TOR'] = 'सक्रिय टोरेंट सीमा';
-$lang['LIMIT_SEED_COUNT'] = 'सीडिंग सीमा';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - कोई सीमा नहीं)';
-$lang['LIMIT_LEECH_COUNT'] = 'लीचिंग सीमा';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - कोई सीमा नहीं)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'लीक अवधि का समय समाप्त';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'एक पीयर को इस नंबर की संख्या के लिए सक्रिय रूप से समझाएं, भले ही उसने dl<br />0 शुरू करने के बाद "रोका गया" इवेंट भेज दिया - "रोका" ईवेंट को ध्यान में रखें';
-$lang['LIMIT_CONCURRENT_IPS'] = "समवर्ती आईपी की सीमाएं";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'प्रति धार सीमा के अनुसार';
-$lang['LIMIT_SEED_IPS'] = 'सीडिंग आईपी सीमा';
-$lang['LIMIT_SEED_IPS_EXPL'] = "<i>xx</i> आईपी से <br />0 से अधिक नहीं बीजांकन की अनुमति दें - कोई सीमा नहीं";
-$lang['LIMIT_LEECH_IPS'] = 'लीकिंग आईपी सीमा';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "123+_0_321xx</i> आईपी से <br />0 से अधिक नहीं लीकिंग की अनुमति - कोई सीमा नहीं";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'प्राधिकरण';
-$lang['USE_AUTH_KEY'] = 'सर्व-कुंजी';
-$lang['USE_AUTH_KEY_EXPL'] = 'पासकी के लिए जांच सक्षम करें';
-$lang['AUTH_KEY_NAME'] = 'पासकी नाम';
-$lang['AUTH_KEY_NAME_EXPL'] = 'अनुरोध में पासकी कुंजी नाम';
-$lang['ALLOW_GUEST_DL'] = 'ट्रैकर तक अतिथि पहुंच की अनुमति दें';
-$lang['ADD_RETRACKER'] = 'धार फ़ाइलों में रिट्रेक जोड़ें';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'फोरम कॉन्फ़िग';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'साइट %sमें आपका स्वागत है',
     'USER_WELCOME_INACTIVE' => 'साइट %sमें आपका स्वागत है',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

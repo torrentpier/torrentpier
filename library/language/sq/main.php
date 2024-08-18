@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Me aftësi të kufizuara';
 $lang['ERROR'] = 'Gabim';
 $lang['SELECT_ACTION'] = 'Zgjidhni veprim';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'I panjohur';
 
 $lang['NEXT_PAGE'] = 'Tjetër';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons kufirin e %s emoticons tejkaluar.';
 
 $lang['ATTACH_SIGNATURE'] = 'Bashkëngjitni nënshkrimit (firmave mund të ndryshohet në profile)';
 $lang['NOTIFY'] = 'Të njoftojë mua kur në përgjigjet e';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Mesazhi juaj ka hyrë me sukses.';
 $lang['EDITED'] = 'Mesazhi ka qenë i ndryshuar';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Na vjen keq, por fjalëkalimi i vjetër nuk mund të
 
 $lang['ALWAYS_ADD_SIG'] = 'Gjithmonë të bashkëngjitni tim nënshkrim';
 $lang['HIDE_PORN_FORUMS'] = 'Fshehin përmbajtjen 18+';
+$lang['ADD_RETRACKER'] = 'Të shtoni retracker në fotografi torrent';
 $lang['ALWAYS_NOTIFY'] = 'Gjithmonë të njoftojë mua të përgjigjet';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Dërgon një e-mail, kur dikush përgjigjet në një temë që ju keni postuar në të. Kjo mund të ndryshohet sa herë që ju post.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Të kthehen në profilin';
 $lang['SELECT_CATEGORY'] = 'Zgjidhni kategorinë';
 
 $lang['DELETE_IMAGE'] = 'Të fshirë imazhin e';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Aktuale imazhi';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Të njoftojë më i ri privat mesazh';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Një tjetër torrent me të njëjtën info_has
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Hiqni nga tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent paregjistruara';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Pasardhësit e parë për herë të fundit';
 $lang['BT_SORT_FORUM'] = 'Forumi';
 $lang['SIZE'] = 'Madhësia';
 $lang['PIECE_LENGTH'] = 'Copë gjatësi';
-$lang['COMPLETED'] = 'Përfunduar';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Shtuar';
 $lang['DELETE_TORRENT'] = 'Fshini torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Fshini dhe për të shkuar temë';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['përgjigje', 'përgjigje'];
 $lang['DECLENSION']['TIMES'] = ['kohë', 'kohët'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['i dytë', 'sekonda'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Kolapsi directory';
 $lang['EXPAND'] = 'Zgjerohet';
 $lang['SWITCH'] = 'Kaloni';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Mungon file identifikues!';
 $lang['TOR_NOT_FOUND'] = 'File është zhdukur në server!';
 $lang['ERROR_BUILD'] = 'Përmbajtja e këtij torrent file nuk mund të shihet në faqen e internetit (kjo nuk ishte e mundur për të ndërtuar një listë e dosjeve)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL shpejtësinë';
 $lang['DL_DL_SPEED'] = 'DL shpejtësi';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formula: Uploaded/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'u ndal';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Emri që keni futur nuk mund të jenë të paleju
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliko %sHere%s të kthehen për të Lejoj Emrin e Administratës';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Informacion';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Extension';
 $lang['RETURN_CONFIG'] = '%sReturn të Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurimi I Azhurnuar Me Sukses';
 $lang['SET_DEFAULTS'] = 'Rikthimi standarte';
-
-$lang['OFF_TRACKER'] = 'Çaktivizoni tracker';
-$lang['OFF_REASON'] = 'Çaktivizoni arsye';
-$lang['OFF_REASON_EXPL'] = 'ky mesazh do të dërgohet klientit kur tracker është me aftësi të kufizuara';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean kolegët tabela - mos disable pa arsye';
-$lang['COMPACT_MODE'] = 'Mode kompakt';
-$lang['COMPACT_MODE_EXPL'] = '"Po" - tracker do të pranojë vetëm klientët e punës në kompakte mode<br />"Jo" - compatible mode (zgjedhur nga klienti)';
-$lang['BROWSER_REDIRECT_URL'] = 'Shfletuesi redirect URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'nëse përdorues përpiqet të hapë tracker URL në Web browser<br />leave bosh për të çaktivizuar';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Të njoftuar për intervalin';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'shokët duhet të presin të paktën këtë shumë sekonda në mes njoftimet';
-$lang['NUMWANT'] = 'Numwant vlera';
-$lang['NUMWANT_EXPL'] = 'numri i kolegëve duke u dërguar tek klienti';
-$lang['EXPIRE_FACTOR'] = 'Kolegëve të përfundojë faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Të konsiderojnë një kolegëve të vdekur nëse ajo nuk ka njoftuar në numrin e sekondave të barabartë për këtë shumë herë e llogaritur njoftuar intervali në kohën e tij të fundit njoftim (që duhet të jetë më i madh se 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Të injorojë IP raportuar nga klient';
-$lang['UPDATE_DLSTAT'] = 'Dyqan përdoruesit lart/poshtë statistikat';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Kufijtë';
-$lang['LIMIT_ACTIVE_TOR'] = 'Kufi aktiv torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Shorti kufi';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - nuk ka limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching kufi';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - nuk ka limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Gjaku skadon faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Të trajtuar një i kolegëve si aktiv për këtë disa minuta edhe në qoftë se ajo dërgoi "ndaluar" ngjarje pas fillimit dl<br />0 - të marrë parasysh të "ndalur" ngjarje';
-$lang['LIMIT_CONCURRENT_IPS'] = "Kufi harmoni IP e";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent kufi';
-$lang['LIMIT_SEED_IPS'] = 'Shorti IP kufi';
-$lang['LIMIT_SEED_IPS_EXPL'] = "të lejojë shorti nga jo më shumë se <i>xx</i> IP's<br />0 - pa kufi";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP kufi';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "të lejojë leeching prej jo më shumë se <i>xx</i> IP's<br />0 - pa kufi";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Autorizimi';
-$lang['USE_AUTH_KEY'] = 'Passkey';
-$lang['USE_AUTH_KEY_EXPL'] = 'të mundësojë kontroll për passkey';
-$lang['AUTH_KEY_NAME'] = 'Passkey emri';
-$lang['AUTH_KEY_NAME_EXPL'] = 'passkey kryesore emër në rkesa';
-$lang['ALLOW_GUEST_DL'] = 'Të lejojë mysafir qasje në tracker';
-$lang['ADD_RETRACKER'] = 'Të shtoni retracker në fotografi torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forumi config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Mirë se vini në faqen %s',
     'USER_WELCOME_INACTIVE' => 'Mirë se vini në faqen %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

@@ -142,6 +142,9 @@ switch ($mode) {
         if (!$pr_data = DB()->fetch_row($sql)) {
             bb_die($lang['PROFILE_NOT_FOUND']);
         }
+        if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
+            $pr_data['user_lang'] = $_COOKIE['user_lang'];
+        }
         break;
 
     default:
@@ -273,6 +276,7 @@ foreach ($profile_fields as $field => $can_edit) {
                         $db_data['user_active'] = 0;
                     }
                     $db_data['user_email'] = $email;
+                    $pr_data['user_email'] = $email;
                 }
             }
             $tp_data['USER_EMAIL'] = htmlCHR($email);
@@ -285,7 +289,11 @@ foreach ($profile_fields as $field => $can_edit) {
             $user_lang = isset($_POST['user_lang']) ? (string)$_POST['user_lang'] : $pr_data['user_lang'];
             if ($submit && ($user_lang != $pr_data['user_lang'] || $mode == 'register')) {
                 $pr_data['user_lang'] = $user_lang;
-                $db_data['user_lang'] = $user_lang;
+                if (IN_DEMO_MODE) {
+                    bb_setcookie('user_lang', $user_lang);
+                } else {
+                    $db_data['user_lang'] = $user_lang;
+                }
             }
             break;
 
@@ -376,6 +384,26 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'avatar_ext_id':
             if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')) {
+                // Integration with MonsterID
+                if (empty($_FILES['avatar']['name']) && !isset($_POST['delete_avatar']) && isset($_POST['use_monster_avatar'])) {
+                    $monsterAvatar = new Arokettu\MonsterID\Monster($pr_data['user_email'], $bb_cfg['avatars']['max_height']);
+                    $tempAvatar = tmpfile();
+                    $tempAvatarPath = stream_get_meta_data($tempAvatar)['uri'];
+                    $monsterAvatar->writeToStream($tempAvatar);
+
+                    // Manual filling $_FILES['avatar']
+                    $_FILES['avatar'] = array();
+                    if (is_file($tempAvatarPath)) {
+                        $_FILES['avatar'] = [
+                            'name' => "MonsterID_{$pr_data['user_id']}.png",
+                            'type' => mime_content_type($tempAvatarPath),
+                            'tmp_name' => $tempAvatarPath,
+                            'error' => UPLOAD_ERR_OK,
+                            'size' => filesize($tempAvatarPath)
+                        ];
+                    }
+                }
+
                 if (isset($_POST['delete_avatar'])) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = 0;
@@ -383,7 +411,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
-                    if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
+                    if ($upload->init($bb_cfg['avatars'], $_FILES['avatar'], !isset($_POST['use_monster_avatar'])) and $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;
                         $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
                     } else {

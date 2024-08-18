@@ -21,13 +21,13 @@ class Ajax
     public array $response = [];
 
     public array $valid_actions = [
-        // ACTION NAME => [AJAX_AUTH, IN_ADMIN_CP (optional)]
+        // ACTION NAME => [AJAX_AUTH]
         'edit_user_profile' => ['admin'],
         'change_user_rank' => ['admin'],
         'change_user_opt' => ['admin'],
         'manage_user' => ['admin'],
-        'manage_admin' => ['admin', true],
-        'sitemap' => ['admin', true],
+        'manage_admin' => ['admin'],
+        'sitemap' => ['admin'],
 
         'mod_action' => ['mod'],
         'topic_tpl' => ['mod'],
@@ -89,12 +89,10 @@ class Ajax
 
         // Exit if board is disabled via ON/OFF trigger or by admin
         if ($bb_cfg['board_disable'] || is_file(BB_DISABLED)) {
-            if (!isset($action_params[1]) || $action_params[1] !== true) {
-                if ($bb_cfg['board_disable']) {
-                    $this->ajax_die($lang['BOARD_DISABLE']);
-                } elseif (is_file(BB_DISABLED)) {
-                    $this->ajax_die($lang['BOARD_DISABLE_CRON']);
-                }
+            if ($bb_cfg['board_disable']) {
+                $this->ajax_die($lang['BOARD_DISABLE']);
+            } elseif (is_file(BB_DISABLED) && $this->action !== 'manage_admin') {
+                $this->ajax_die($lang['BOARD_DISABLE_CRON']);
             }
         }
 
@@ -170,14 +168,16 @@ class Ajax
     /**
      * Send data
      *
+     * @return void
      * @throws Exception
      */
-    public function send()
+    public function send(): void
     {
+        global $debug;
         $this->response['action'] = $this->action;
 
-        if (Dev::sql_dbg_enabled()) {
-            $this->response['sql_log'] = Dev::get_sql_log();
+        if ($debug->sqlDebugAllowed()) {
+            $this->response['sql_log'] = $debug->getSqlLog();
         }
 
         // sending output will be handled by $this->ob_handler()
@@ -193,7 +193,9 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        if (APP_DEBUG) {
+        global $debug;
+
+        if (!$debug->isProduction) {
             if ($contents) {
                 $this->response['raw_output'] = $contents;
             }
@@ -252,10 +254,12 @@ class Ajax
      * @param string $confirm_msg
      * @throws Exception
      */
-    public function prompt_for_confirm(string $confirm_msg): void
+    public function prompt_for_confirm(string $confirm_msg = ''): void
     {
+        global $lang;
+
         if (empty($confirm_msg)) {
-            $this->ajax_die('false');
+            $confirm_msg = $lang['QUESTION'];
         }
 
         $this->response['prompt_confirm'] = 1;

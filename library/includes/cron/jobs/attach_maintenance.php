@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $attach_config;
-
 DB()->expect_slow_query(600);
 
 $fix_errors = true;

@@ -1401,6 +1401,7 @@ if ($mode == 'read') {
                 'FROM' => $msg_user,
                 'SUBJECT' => htmlCHR($msg_subject),
                 'DATE' => $msg_date,
+                'DATE_RAW' => $row['privmsgs_date'],
 
                 'PRIVMSG_FOLDER_IMG' => $icon_flag,
                 'L_PRIVMSG_FOLDER_ALT' => $icon_flag_alt,

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Με αναπηρία';
 $lang['ERROR'] = 'Σφάλμα';
 $lang['SELECT_ACTION'] = 'Επιλέξτε δράση';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Άγνωστο';
 
 $lang['NEXT_PAGE'] = 'Την επόμενη';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons όριο %s emoticons υπέρβασ�
 
 $lang['ATTACH_SIGNATURE'] = 'Συνδέστε υπογραφή (υπογραφές μπορεί να αλλάξει το προφίλ)';
 $lang['NOTIFY'] = 'Ειδοποιήστε με όταν στις απαντήσεις';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Το μήνυμά σας έχει καταχωρηθεί με επιτυχία.';
 $lang['EDITED'] = 'Το μήνυμα έχει αλλάξει';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Συγγνώμη, αλλά τον κωδικό πρ�
 
 $lang['ALWAYS_ADD_SIG'] = 'Πάντα να επισυνάψετε την υπογραφή μου';
 $lang['HIDE_PORN_FORUMS'] = 'Απόκρυψη περιεχομένου 18+';
+$lang['ADD_RETRACKER'] = 'Προσθέστε retracker σε αρχεία torrent';
 $lang['ALWAYS_NOTIFY'] = 'Πάντα να ενημερώνετε μου απαντήσεις';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Στέλνει ένα e-mail όταν κάποιος απαντήσεις σε ένα θέμα που έχετε καταχωρήσει. Αυτό μπορεί να αλλάξει κάθε φορά που θα δημοσιεύσετε.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Επιστροφή στο προφίλ';
 $lang['SELECT_CATEGORY'] = 'Επιλέξτε κατηγορία';
 
 $lang['DELETE_IMAGE'] = 'Διαγραφή εικόνας';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Τρέχουσα εικόνα';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Ενημερώνει για νέο προσωπικό μήνυμα';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Άλλο ένα torrent με το ίδιο inf
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Αφαιρέστε από τον ιχνηλάτη';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Σπόρος δει για τελευταία φ
 $lang['BT_SORT_FORUM'] = 'Φόρουμ';
 $lang['SIZE'] = 'Μέγεθος';
 $lang['PIECE_LENGTH'] = 'Μήκος κομματιού';
-$lang['COMPLETED'] = 'Ολοκληρώθηκε';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Πρόσθεσε';
 $lang['DELETE_TORRENT'] = 'Διαγραφή του torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Να διαγράψετε και να μετακινήσετε το θέμα';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['απάντηση', 'απαντήσεις'];
 $lang['DECLENSION']['TIMES'] = ['ώρα', 'φορές'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['δεύτερο', 'δευτερόλεπτα'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Κατάρρευση directory';
 $lang['EXPAND'] = 'Αναπτύξτε το στοιχείο';
 $lang['SWITCH'] = 'Διακόπτης';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Αρχείο που λείπει αναγνωριστικό!';
 $lang['TOR_NOT_FOUND'] = 'Το αρχείο που λείπει στον server!';
 $lang['ERROR_BUILD'] = 'Το περιεχόμενο αυτού του torrent αρχείο δεν μπορεί να θεωρηθεί σχετικά με το site (δεν ήταν δυνατό να οικοδομήσουμε μια λίστα με τα αρχεία)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL ταχύτητα';
 $lang['DL_DL_SPEED'] = 'DL ταχύτητα';
 $lang['DL_PORT'] = 'Λιμάνι';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Τύπος: Αποστέλλονται/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'σταμάτησε';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Το όνομα που έχετε εισάγει 
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Κάντε κλικ %sHere%s να επιστρέψει για να Απαγορεύσει το όνομα Χρήστη Διοίκησης';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Πληροφορίες Για Την Έκδοση';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Επέκταση';
 $lang['RETURN_CONFIG'] = '%sReturn να Configuration%s';
 $lang['CONFIG_UPD'] = 'Διαμόρφωση Ενημερώθηκε Με Επιτυχία';
 $lang['SET_DEFAULTS'] = 'Επαναφορά προεπιλογών';
-
-$lang['OFF_TRACKER'] = 'Απενεργοποίηση tracker';
-$lang['OFF_REASON'] = 'Απενεργοποίηση λόγο';
-$lang['OFF_REASON_EXPL'] = 'αυτό το μήνυμα θα σταλεί στον πελάτη, όταν ο tracker είναι απενεργοποιημένη';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean τους συμμαθητές τραπέζι - μην απενεργοποιήσετε χωρίς λόγο';
-$lang['COMPACT_MODE'] = 'Συμπαγή λειτουργία';
-$lang['COMPACT_MODE_EXPL'] = '"Ναι" - tracker θα δεχτεί μόνο τους πελάτες που εργάζονται σε συμπαγή mode<br />"Όχι" - συμβατή λειτουργία (επιλέγεται από τον πελάτη)';
-$lang['BROWSER_REDIRECT_URL'] = 'Πρόγραμμα περιήγησης ανακατεύθυνση URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'εάν ο χρήστης προσπαθεί να ανοίξει tracker URL στο Web browser<br />leave το κενό για να το απενεργοποιήσετε';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Ανακοινώσει διάστημα';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'συνομηλίκους τους, θα πρέπει να περιμένετε τουλάχιστον αυτό πολλές δευτερόλεπτα μεταξύ ανακοινώσεις';
-$lang['NUMWANT'] = 'Numwant αξία';
-$lang['NUMWANT_EXPL'] = 'αριθμός των peers αποστέλλονται στον πελάτη';
-$lang['EXPIRE_FACTOR'] = 'Peer λήξει παράγοντας';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Σκεφτείτε ένα peer νεκρός αν δεν έχει ανακοινώσει σε έναν αριθμό δευτερολέπτων ίσο με αυτό πολλές φορές η υπολογιζόμενη ανακοινώσει διάστημα κατά την τελευταία ανακοίνωση (πρέπει να είναι μεγαλύτερη από 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Αγνοούν IP αναφερθεί από τον πελάτη';
-$lang['UPDATE_DLSTAT'] = 'Χρήστες του καταστήματος πάνω/κάτω στατιστικά στοιχεία';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Όρια';
-$lang['LIMIT_ACTIVE_TOR'] = 'Όριο active torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Σπορά όριο';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - δεν υπάρχει όριο)';
-$lang['LIMIT_LEECH_COUNT'] = 'Κατεβάζετε το όριο';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - δεν υπάρχει όριο)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Βδέλλα λήξει παράγοντας';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Θεραπεία του peer ως ενεργό για αυτό το νούμερο λεπτά, ακόμη και αν έστειλε "σταμάτησε" εκδήλωση μετά την έναρξη dl<br />0 - να λαμβάνει υπόψη "σταμάτησε" την εκδήλωση';
-$lang['LIMIT_CONCURRENT_IPS'] = "Όριο ταυτόχρονων IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'ανά torrent όριο';
-$lang['LIMIT_SEED_IPS'] = 'Σπορά όριο IP';
-$lang['LIMIT_SEED_IPS_EXPL'] = "επιτρέπουν σπορά από όχι περισσότερα από <i>xx</i> IP's<br />0 - δεν υπάρχει όριο";
-$lang['LIMIT_LEECH_IPS'] = 'Κατεβάζετε όριο IP';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "επιτρέπουν κατεβάζετε από όχι περισσότερα από <i>xx</i> IP's<br />0 - δεν υπάρχει όριο";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Άδεια';
-$lang['USE_AUTH_KEY'] = 'Κωδικό';
-$lang['USE_AUTH_KEY_EXPL'] = 'ενεργοποίηση ελέγχου για τον κωδικό';
-$lang['AUTH_KEY_NAME'] = 'Κωδικό όνομα';
-$lang['AUTH_KEY_NAME_EXPL'] = 'κωδικό όνομα του κλειδιού στην αίτηση';
-$lang['ALLOW_GUEST_DL'] = 'Επιτρέπεται η πρόσβαση των επισκεπτών tracker';
-$lang['ADD_RETRACKER'] = 'Προσθέστε retracker σε αρχεία torrent';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Φόρουμ config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Καλώς ορίσατε στον ιστότοπο %s',
     'USER_WELCOME_INACTIVE' => 'Καλώς ορίσατε στον ιστότοπο %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

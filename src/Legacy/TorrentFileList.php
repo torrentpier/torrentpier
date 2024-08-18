@@ -79,7 +79,7 @@ class TorrentFileList
             $info['name'] =& $info['name.utf-8'];
         }
 
-        if (isset($info['files']) && \is_array($info['files'])) {
+        if (isset($info['files']) && is_array($info['files'])) {
             $this->root_dir = isset($info['name']) ? clean_tor_dirname($info['name']) : '...';
             $this->multiple = true;
 
@@ -87,7 +87,7 @@ class TorrentFileList
                 if (isset($f['path.utf-8'])) {
                     $f['path'] =& $f['path.utf-8'];
                 }
-                if (!isset($f['path']) || !\is_array($f['path'])) {
+                if (!isset($f['path']) || !is_array($f['path'])) {
                     continue;
                 }
                 // Exclude padding files
@@ -101,7 +101,7 @@ class TorrentFileList
                 }
 
                 $length = isset($f['length']) ? (float)$f['length'] : 0;
-                $subdir_count = \count($f['path']) - 1;
+                $subdir_count = count($f['path']) - 1;
 
                 if ($subdir_count > 0) {
                     $name = array_pop($f['path']);
@@ -116,7 +116,7 @@ class TorrentFileList
                         $cur_files_ary =& $cur_files_ary[$subdir];
 
                         if ($j === $subdir_count) {
-                            if (\is_string($cur_files_ary)) {
+                            if (is_string($cur_files_ary)) {
                                 $GLOBALS['bnc_error'] = 1;
                                 break;
                             }

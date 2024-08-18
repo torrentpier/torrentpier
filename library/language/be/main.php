@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Адключаны';
 $lang['ERROR'] = 'Памылка';
 $lang['SELECT_ACTION'] = 'Выберыце дзеянне';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Невядома';
 
 $lang['NEXT_PAGE'] = 'Далей';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Ліміт смайлікаў з смайлік
 
 $lang['ATTACH_SIGNATURE'] = 'Далучыць подпіс (подпісы можна змяняць у профілі)';
 $lang['NOTIFY'] = 'Апавясціць мяне, калі на адказы';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ваша паведамленне было паспяхова ўведзена.';
 $lang['EDITED'] = 'Паведамленне было зменена';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Прабачце, але ваш пароль не м
 
 $lang['ALWAYS_ADD_SIG'] = 'Заўсёды далучаць мой подпіс';
 $lang['HIDE_PORN_FORUMS'] = 'Схаваць кантэнт 18+';
+$lang['ADD_RETRACKER'] = 'Дадаць retracker ў торэнт-файлы';
 $lang['ALWAYS_NOTIFY'] = 'Заўсёды паведамляць мне аб адказах';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Адпраўляе па электроннай пошце, калі хто-небудзь адкажа на тэму, якую вы выклалі ст. Гэта можа быць зменена, калі Вы размяшчае.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Вярнуцца да профілі';
 $lang['SELECT_CATEGORY'] = 'Выберыце катэгорыю';
 
 $lang['DELETE_IMAGE'] = 'Выдаленне малюнка';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Бягучы малюнак';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Апавяшчаць аб новых асабістых паведамленнях';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Іншы торэнт з такім жа info_
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Выдаліць з трэкера';
 $lang['BT_UNREGISTERED'] = 'Торэнт незарэгістраваных';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Насеньне ў апошні раз бачы
 $lang['BT_SORT_FORUM'] = 'Форум';
 $lang['SIZE'] = 'Памер';
 $lang['PIECE_LENGTH'] = 'Даўжыня кавалка';
-$lang['COMPLETED'] = 'Завершаны';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Дададзена';
 $lang['DELETE_TORRENT'] = 'Выдаліць торэнт';
 $lang['DELETE_MOVE_TORRENT'] = 'Выдаляць і перамяшчаць тэмы';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['адказ', 'адказы'];
 $lang['DECLENSION']['TIMES'] = ['час', 'раз'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['другі', 'секунд'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Спіс';
 $lang['COLLAPSE'] = 'Каталог распаду';
 $lang['EXPAND'] = 'Разгарнуць';
 $lang['SWITCH'] = 'Перамыкач';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Адсутнічае ідэнтыфікатар файла!';
 $lang['TOR_NOT_FOUND'] = 'Файл адсутнічае на серверы!';
 $lang['ERROR_BUILD'] = 'Змест гэтага torrent-файл не можна паглядзець на сайце (не ўдалося пабудаваць спіс файлаў)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'Дл';
 $lang['DL_UL_SPEED'] = 'Хуткасць вул';
 $lang['DL_DL_SPEED'] = 'Хуткасць дл';
 $lang['DL_PORT'] = 'Порт';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Формула: Загружаны/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'спыніўся';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Уведзенае імя не можа быць 
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Націсніце %sHere%s вярнуць забараніць Адміністрацыі Імя карыстальніка';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Інфармацыя Аб Версіі';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Пашырэнне';
 $lang['RETURN_CONFIG'] = '%sReturn ў Configuration%s';
 $lang['CONFIG_UPD'] = 'Канфігурацыя Паспяхова Абноўлена';
 $lang['SET_DEFAULTS'] = 'Аднавіць значэнні па змаўчанні';
-
-$lang['OFF_TRACKER'] = 'Адключыць трэкер';
-$lang['OFF_REASON'] = 'Прычына адключэння';
-$lang['OFF_REASON_EXPL'] = 'гэта паведамленне будзе адпраўлена кліенту, калі трэкер адключаны';
-$lang['AUTOCLEAN_EXPL'] = 'автоочистка табліцы аднагодкаў - не адключаць без прычыны';
-$lang['COMPACT_MODE'] = 'Кампактны рэжым';
-$lang['COMPACT_MODE_EXPL'] = '"Так" - трэкер будзе прымаць толькі кліентаў, якія працуюць у кампактны mode<br />"няма" - сумяшчальны рэжым (па выбары кліента)';
-$lang['BROWSER_REDIRECT_URL'] = 'URL-адрас перанакіравання браўзэра';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'калі карыстальнік спрабуе адкрыць трэкер URL-адрас у вэб-browser<br />leave адключыць';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Змяшаная';
-$lang['ANNOUNCE_INTERVAL'] = 'Аб\'яўляюць інтэрвал';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'аднагодкі павінны чакаць, па меншай меры, гэта колькасць секунд паміж паведамленнямі';
-$lang['NUMWANT'] = 'Значэнне Numwant';
-$lang['NUMWANT_EXPL'] = 'колькасць баляў адпраўкай да кліента';
-$lang['EXPIRE_FACTOR'] = 'Калегіяльнага мінае фактар';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Разгледзець аднарангавыя мёртвы, калі б не абвясціў колькасць секунд роўна гэта шмат разоў разліковую абвясціць інтэрвал падчас свайго апошняга аб\'явы (павінна быць больш 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ігнараваць ІС паведамляла кліента';
-$lang['UPDATE_DLSTAT'] = 'Карыстальнікі крамы уверх/ўніз статыстыцы';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Межы';
-$lang['LIMIT_ACTIVE_TOR'] = 'Ліміт актыўных торэнтаў';
-$lang['LIMIT_SEED_COUNT'] = 'Мяжа высеву';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - без абмежаванняў)';
-$lang['LIMIT_LEECH_COUNT'] = 'Спампоўваю мяжа';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - без абмежаванняў)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Мінае фактар ліч';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Лячыць аднагодкаў ў якасці актыўных для дадзенага колькасці хвілін, нават калі гэта не так, "спыніць" падзея пасля запуску dl<br />0 - ўлічваць "спыніць" падзея';
-$lang['LIMIT_CONCURRENT_IPS'] = "Абмежаваць колькасць адначасовых IP-адрасоў";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'за мяжа торэнт';
-$lang['LIMIT_SEED_IPS'] = 'Пасеў ІС мяжа';
-$lang['LIMIT_SEED_IPS_EXPL'] = "дазвольце высеву ад не больш <i>xx</i> ИС's<br />0 - не мяжа";
-$lang['LIMIT_LEECH_IPS'] = 'Пампаваў ІС мяжа';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "дазвольце спампоўваю з не больш чым <i>xx</i> ИС's<br />0 - не мяжа";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Аўтарызацыі';
-$lang['USE_AUTH_KEY'] = 'Адмычка';
-$lang['USE_AUTH_KEY_EXPL'] = 'уключэнне праверкі пароля';
-$lang['AUTH_KEY_NAME'] = 'Імя пароль';
-$lang['AUTH_KEY_NAME_EXPL'] = 'ключ-адмычка імя ў запыт Get';
-$lang['ALLOW_GUEST_DL'] = 'Дазволіць гасцявы доступ на трэкер';
-$lang['ADD_RETRACKER'] = 'Дадаць retracker ў торэнт-файлы';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Форум конфіг';
@@ -3092,3 +3068,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Сардэчна запрашаем на сайт %s',
     'USER_WELCOME_INACTIVE' => 'Сардэчна запрашаем на сайт %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

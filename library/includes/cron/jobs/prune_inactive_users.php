@@ -14,8 +14,7 @@ if (!defined('BB_ROOT')) {
 $users_per_cycle = 1000;
 
 while (true) {
-    @set_time_limit(600);
-
+    set_time_limit(600);
     $prune_users = $not_activated_users = $not_active_users = [];
 
     if ($not_activated_days = (int)$bb_cfg['user_not_activated_days_keep']) {

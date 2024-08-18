@@ -261,7 +261,8 @@ td.topic_id { cursor: pointer; }
 <table width="100%">
 	<tr>
 		<td valign="bottom">
-			<h1 class="maintitle"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h1>
+			<h1 class="maintitle" style="margin-bottom: 0 !important;"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h1>
+			<p class="pagetitle" style="font-size: 17px;">{FORUM_DESC}</p>
 
 			<p class="small" id="moderators"><a style="text-decoration: none;" href="#">{L_MODERATORS}</a></p>
 			<script type="text/javascript">
@@ -463,9 +464,9 @@ td.topic_id { cursor: pointer; }
 
 	<td class="tCenter nowrap" style="padding: 2px 4px;">
 	<!-- BEGIN tor -->
-		<div title="{L_DL_TORRENT}">
+		<div>
 			<div><span class="seedmed" title="{L_SEEDERS}"><b>{t.tor.SEEDERS}</b></span><span class="med"> | </span><span class="leechmed" title="{L_LEECHERS}"><b>{t.tor.LEECHERS}</b></span></div>
-			<div style="padding-top: 2px" class="small"><!-- IF t.TOR_FROZEN -->{t.tor.TOR_SIZE}<!-- ELSE --><a href="{DOWNLOAD_URL}{t.tor.ATTACH_ID}" class="small" style="text-decoration: none">{t.tor.TOR_SIZE}</a> <!-- IF MAGNET_LINKS -->{t.tor.MAGNET}<!-- ENDIF --><!-- ENDIF --></div>
+			<div style="padding-top: 2px" class="small"><!-- IF t.TOR_FROZEN -->{t.tor.TOR_SIZE}<!-- ELSE --><a href="{DOWNLOAD_URL}{t.tor.ATTACH_ID}" title="{L_DL_TORRENT}" class="small" style="text-decoration: none">{t.tor.TOR_SIZE}</a> <!-- IF MAGNET_LINKS -->{t.tor.MAGNET}<!-- ENDIF --><!-- ENDIF --></div>
 		</div>
 	<!-- END tor -->
 	</td>
@@ -605,6 +606,7 @@ td.topic_id { cursor: pointer; }
 
 <!--bottom_info-->
 <div class="bottom_info">
+<a href="#" onclick="$.scrollTo('#forum-table', {duration: 200, axis: 'y'}); return false;">{L_MOVE_TO_TOP}</a>
 
 <!-- IF PAGINATION -->
 <div class="nav">

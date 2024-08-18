@@ -40,8 +40,6 @@ function delete_avatar($user_id, $avatar_ext_id)
 
 function get_tracks($type)
 {
-    static $pattern = '#^a:\d+:{[i:;\d]+}$#';
-
     switch ($type) {
         case 'topic':
             $c_name = COOKIE_TOPIC;
@@ -55,7 +53,7 @@ function get_tracks($type)
         default:
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
-    $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
+    $tracks = !empty($_COOKIE[$c_name]) ? json_decode($_COOKIE[$c_name], true) : false;
     return $tracks ?: [];
 }
 
@@ -113,7 +111,7 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
     }
 
     if (array_diff($tracking_ary, $prev_tracking_ary)) {
-        bb_setcookie($cookie_name, serialize($tracking_ary));
+        bb_setcookie($cookie_name, json_encode($tracking_ary));
     }
 }
 
@@ -297,7 +295,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = [], $group_perm = UG
     // If f_access has been passed, or auth is needed to return an array of forums
     // then we need to pull the auth information on the given forum (or all forums)
     if (empty($f_access)) {
-        if (!$forums = $datastore->get('cat_forums')) {
+        if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
             $datastore->update('cat_forums');
             $forums = $datastore->get('cat_forums');
         }
@@ -847,14 +845,6 @@ function get_bt_userdata($user_id)
     return $btu;
 }
 
-function get_bt_ratio($btu): ?float
-{
-    return
-        (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
-            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
-            : null;
-}
-
 function show_bt_userdata($user_id): void
 {
     global $template;
@@ -871,8 +861,8 @@ function show_bt_userdata($user_id): void
         'DOWN_TOTAL' => humn_size($btu['u_down_total']),
         'DOWN_TOTAL_BYTES' => $btu['u_down_total'],
         'USER_RATIO' => get_bt_ratio($btu),
-        'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
-        'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
+        'MIN_DL_FOR_RATIO' => humn_size((int)MIN_DL_FOR_RATIO),
+        'MIN_DL_BYTES' => (int)MIN_DL_FOR_RATIO,
         'AUTH_KEY' => $btu['auth_key'],
 
         'TD_DL' => humn_size($btu['down_today']),
@@ -998,7 +988,7 @@ function make_jumpbox(): void
         return;
     }
 
-    if (!$jumpbox = $datastore->get('jumpbox')) {
+    if (!$jumpbox = $datastore->get('jumpbox') and !$datastore->has('jumpbox')) {
         $datastore->update('jumpbox');
         $jumpbox = $datastore->get('jumpbox');
     }
@@ -1019,7 +1009,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
     $select = null === $all_forums_option ? [] : [$lang['ALL_AVAILABLE'] => $all_forums_option];
-    if (!$forums = $datastore->get('cat_forums')) {
+    if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
     }
@@ -1281,10 +1271,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
     if ($add_prevnext_text) {
         if ($on_page > 1) {
             $page_string = ' <a href="' . $base_url . "&amp;start=" . (($on_page - 2) * $per_page) . '">' . $lang['PREVIOUS_PAGE'] . '</a>&nbsp;&nbsp;' . $page_string;
+            $meta_prev_link = FULL_URL . $base_url . "&amp;start=" . (($on_page - 2) * $per_page);
         }
 
         if ($on_page < $total_pages) {
             $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "&amp;start=" . ($on_page * $per_page) . '">' . $lang['NEXT_PAGE'] . '</a>';
+            $meta_next_link = FULL_URL . $base_url . "&amp;start=" . ($on_page * $per_page);
         }
     }
 
@@ -1298,7 +1290,10 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         'PAGINATION' => $pagination,
         'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
-        'PG_PER_PAGE' => $per_page
+        'PG_PER_PAGE' => $per_page,
+        // Assign meta
+        'META_PREV_PAGE' => $meta_prev_link ?? '',
+        'META_NEXT_PAGE' => $meta_next_link ?? '',
     ]);
 
     return $pagination;
@@ -1894,7 +1889,7 @@ function profile_url(array $data, bool $target_blank = false, bool $no_link = fa
 {
     global $bb_cfg, $lang, $datastore;
 
-    if (!$ranks = $datastore->get('ranks')) {
+    if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
         $datastore->update('ranks');
         $ranks = $datastore->get('ranks');
     }
@@ -2130,7 +2125,7 @@ function getBanInfo(int $userId = null): ?array
     global $datastore;
 
     // Get bans info from datastore
-    if (!$bans = $datastore->get('ban_list')) {
+    if (!$bans = $datastore->get('ban_list') and !$datastore->has('ban_list')) {
         $datastore->update('ban_list');
         $bans = $datastore->get('ban_list');
     }
@@ -2153,16 +2148,10 @@ function readUpdaterFile(): array|bool
         return false;
     }
 
-    $str = [];
-    if ($updaterFile = fopen(UPDATER_FILE, 'r')) {
-        while (!feof($updaterFile)) {
-            $str[] = trim(fgets($updaterFile));
-        }
-    }
-
+    $decodedFile = json_decode(file_get_contents(UPDATER_FILE), true);
     return [
-        'previous_version' => is_numeric($str[0]) ? (int)$str[0] : 0,
-        'latest_version' => is_numeric($str[1]) ? (int)$str[1] : 0
+        'previous_version' => $decodedFile['previous_version'],
+        'latest_version' => $decodedFile['latest_version']
     ];
 }
 

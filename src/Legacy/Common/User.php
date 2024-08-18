@@ -10,7 +10,10 @@
 namespace TorrentPier\Legacy\Common;
 
 use TorrentPier\Legacy\DateDelta;
+use TorrentPier\Legacy\Torrent;
 use TorrentPier\Sessions;
+
+use Exception;
 
 /**
  * Class User
@@ -35,6 +38,7 @@ class User
      */
     public $opt_js = [
         'only_new' => 0,     // show ony new posts or topics
+        'h_from' => 0,     // hide from
         'h_av' => 0,     // hide avatar
         'h_rnk_i' => 0,     // hide rank images
         'h_post_i' => 0,     // hide post images
@@ -161,8 +165,8 @@ class User
             $ip_check_u = substr(USER_IP, 0, 6);
 
             if ($ip_check_s == $ip_check_u) {
-                if ($this->data['user_id'] != GUEST_UID && \defined('IN_ADMIN')) {
-                    \define('SID_GET', "sid={$this->data['session_id']}");
+                if ($this->data['user_id'] != GUEST_UID && defined('IN_ADMIN')) {
+                    define('SID_GET', "sid={$this->data['session_id']}");
                 }
                 $session_id = $this->sessiondata['sid'] = $this->data['session_id'];
 
@@ -170,7 +174,7 @@ class User
                 if ($update_sessions_table) {
                     DB()->query("
 						UPDATE " . BB_SESSIONS . " SET
-							session_time = " . TIMENOW . "
+							session_time = " . $this->data['session_time'] . "
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
@@ -188,7 +192,7 @@ class User
 
             if ($userdata = get_userdata((int)$user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
-                    if (is_string($this->sessiondata['uk']) && $this->verify_autologin_id($userdata, true, false)) {
+                    if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
                     }
                 }
@@ -200,13 +204,13 @@ class User
             $this->session_create($userdata, true);
         }
 
-        \define('IS_GUEST', !$this->data['session_logged_in']);
-        \define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
-        \define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
-        \define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
-        \define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
-        \define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
-        \define('IS_AM', IS_ADMIN || IS_MOD);
+        define('IS_GUEST', !$this->data['session_logged_in']);
+        define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
+        define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
+        define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
+        define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+        define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+        define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
 
@@ -250,8 +254,8 @@ class User
         $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
 
         // Generate passkey
-        if (!\TorrentPier\Legacy\Torrent::getPasskey($this->data['user_id'])) {
-            if (!\TorrentPier\Legacy\Torrent::generate_passkey($this->data['user_id'], true)) {
+        if (!Torrent::getPasskey($this->data['user_id'])) {
+            if (!Torrent::generate_passkey($this->data['user_id'], true)) {
                 bb_simple_die('Could not generate passkey');
             }
         }
@@ -284,7 +288,7 @@ class User
 
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
-                \define('FIRST_LOGON', true);
+                define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
                 $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
             }
@@ -324,8 +328,8 @@ class User
 
         $this->set_session_cookies($user_id);
 
-        if ($login && (\defined('IN_ADMIN') || $mod_admin_session)) {
-            \define('SID_GET', "sid=$session_id");
+        if ($login && (defined('IN_ADMIN') || $mod_admin_session)) {
+            define('SID_GET', "sid=$session_id");
         }
 
         Sessions::cache_set_userdata($this->data);
@@ -444,10 +448,10 @@ class User
      */
     public function get_sessiondata()
     {
-        $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? unserialize($_COOKIE[COOKIE_DATA], ['allowed_classes' => false]) : [];
+        $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? json_decode($_COOKIE[COOKIE_DATA], true) : [];
 
         // autologin_id
-        if (!empty($sd_resv['uk']) && is_string($sd_resv['uk'])) {
+        if (!empty($sd_resv['uk']) && verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH)) {
             $this->sessiondata['uk'] = $sd_resv['uk'];
         }
         // user_id
@@ -455,7 +459,7 @@ class User
             $this->sessiondata['uid'] = (int)$sd_resv['uid'];
         }
         // sid
-        if (!empty($sd_resv['sid']) && is_string($sd_resv['sid'])) {
+        if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
             $this->sessiondata['sid'] = $sd_resv['sid'];
         }
     }
@@ -468,7 +472,7 @@ class User
     public function set_session_cookies($user_id)
     {
         if ($user_id == GUEST_UID) {
-            $delete_cookies = [COOKIE_DATA, 'torhelp'];
+            $delete_cookies = [COOKIE_DATA, 'torhelp', 'user_lang'];
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
@@ -477,7 +481,7 @@ class User
             }
         } else {
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
-            $c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
+            $c_sdata_curr = ($this->sessiondata) ? json_encode($this->sessiondata) : '';
 
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, httponly: true);
@@ -512,7 +516,7 @@ class User
             }
         }
 
-        return is_string($autologin_id);
+        return verify_id($autologin_id, LOGIN_KEY_LENGTH);
     }
 
     /**
@@ -522,6 +526,7 @@ class User
      * @param bool $create_new
      *
      * @return string
+     * @throws Exception
      */
     public function create_autologin_id(array $userdata, bool $create_new = true): string
     {
@@ -559,7 +564,7 @@ class User
     {
         global $bb_cfg, $theme, $source_lang, $DeltaTime;
 
-        if (\defined('LANG_DIR')) {
+        if (defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
 
@@ -570,13 +575,16 @@ class User
             }
         }
 
-        \define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
-        \define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
+        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
         if ($this->data['user_id'] != GUEST_UID) {
+            if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
+                $this->data['user_lang'] = $_COOKIE['user_lang'];
+            }
             if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
                 $bb_cfg['default_lang'] = basename($this->data['user_lang']);
-                \define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+                define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
             }
 
             if (isset($this->data['user_timezone'])) {
@@ -587,8 +595,8 @@ class User
         $this->data['user_lang'] = $bb_cfg['default_lang'];
         $this->data['user_timezone'] = $bb_cfg['board_timezone'];
 
-        if (!\defined('LANG_DIR')) {
-            \define('LANG_DIR', DEFAULT_LANG_DIR);
+        if (!defined('LANG_DIR')) {
+            define('LANG_DIR', DEFAULT_LANG_DIR);
         }
 
         /** Temporary place source language to the global */
@@ -657,7 +665,7 @@ class User
         } elseif (!empty($_COOKIE['opt_js'])) {
             $opt_js = json_decode($_COOKIE['opt_js'], true, 512, JSON_THROW_ON_ERROR);
 
-            if (\is_array($opt_js)) {
+            if (is_array($opt_js)) {
                 $this->opt_js = array_merge($this->opt_js, $opt_js);
             }
         }
@@ -678,7 +686,7 @@ class User
             return '';
         }
 
-        if (!$forums = $datastore->get('cat_forums')) {
+        if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
             $datastore->update('cat_forums');
             $forums = $datastore->get('cat_forums');
         }
@@ -741,7 +749,7 @@ class User
         if (bf($this->opt, 'user_opt', 'user_porn_forums')) {
             global $datastore;
 
-            if (!$forums = $datastore->get('cat_forums')) {
+            if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
                 $datastore->update('cat_forums');
                 $forums = $datastore->get('cat_forums');
             }
@@ -782,6 +790,13 @@ class User
             }
 
             return true;
+        } else {
+            if (hash('md5', hash('md5', $enteredPassword)) === $userdata['user_password']) {
+                // Update old md5 password
+                DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
+
+                return true;
+            }
         }
 
         return false;

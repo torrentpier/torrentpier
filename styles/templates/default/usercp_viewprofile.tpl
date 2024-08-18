@@ -72,8 +72,6 @@
 
 <var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_email"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_regdate"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_lastvisit"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_website"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_occ"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
@@ -132,24 +130,31 @@ ajax.callback.group_membership = function(data) {
 </script>
 <!-- ENDIF / IS_AM -->
 
-<!-- IF TRAF_STATS -->
 <script type="text/javascript">
-ajax.index_data = function(mode) {
-	ajax.exec({
-		action  : 'index_data',
-		mode    : mode,
-		user_id : {PROFILE_USER_ID}
-	});
-};
-ajax.callback.index_data = function(data) {
-	$('#traf-stats-tbl').html(data.html);
-	$('#bt_user_ratio').html(data.user_ratio);
-	$('#traf-stats-span').hide();
-	$('#traf-stats-tbl').show();
-	$('#bt_user_ratio').show();
-};
+    ajax.index_data = function(mode) {
+        ajax.exec({
+            action: 'index_data',
+            mode: mode,
+            user_id: {PROFILE_USER_ID}
+        });
+    };
+    ajax.callback.index_data = function(data) {
+        switch (data.mode) {
+            case 'null_ratio':
+                break;
+            case 'releaser_stats':
+                $('#releases_profile').html(data.html);
+                break;
+            case 'get_traf_stats':
+                $('#traf-stats-tbl').html(data.html);
+                $('#bt_user_ratio').html(data.user_ratio);
+                $('#traf-stats-span').hide();
+                $('#traf-stats-tbl').show();
+                $('#bt_user_ratio').show();
+                break;
+        }
+    };
 </script>
-<!-- ENDIF -->
 
 <!-- IF SHOW_PASSKEY -->
 <script type="text/javascript">
@@ -178,7 +183,7 @@ ajax.callback.index_data = function(data) {
 		<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;
 		<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>
 	</p>
-    <!-- ELSE -->
+    <!-- ELSEIF PROFILE_USER -->
     <p class="floatR">
         <a href="{U_OPTIONS}">{L_PROFILE}</a>
     </p>
@@ -321,10 +326,10 @@ ajax.callback.index_data = function(data) {
 			<!-- ENDIF -->
 			<tr>
 				<th>{L_JOINED}:</th>
-				<td id="user_regdate">
-					<span class="editable bold">{USER_REGDATE}</span>
+				<td>
+					<b>{USER_REGDATE}</b>
 					<!-- IF IS_ADMIN -->
-					[ <a href="#admin" class="menu-root menu-alt1"><span class="adm">{L_MANAGE_USER}</span></a> ]
+					[ <a href="#admin" class="adm menu-root menu-alt1">{L_MANAGE_USER}</a> ]
 					<div class="menu-sub row1 border bw_TRBL" id="admin">
 						<fieldset class="mrg_6">
 							<div class="tLeft" style="padding: 5px 6px 6px; display: block; font-size: 13px;">
@@ -357,8 +362,8 @@ ajax.callback.index_data = function(data) {
 			</tr>
 			<tr>
 				<th>{L_LAST_VISITED}:</th>
-				<td id="user_lastvisit">
-					<span class="editable bold">{LAST_VISIT_TIME}</span>
+				<td>
+					<b>{LAST_VISIT_TIME}</b>
 				</td>
 			</tr>
 
@@ -383,6 +388,7 @@ ajax.callback.index_data = function(data) {
 				</td>
 			</tr>
 
+			<!-- IF #RATIO_ENABLED -->
 			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
 				<th>{L_USER_RATIO}:</th>
 				<td>
@@ -401,16 +407,20 @@ ajax.callback.index_data = function(data) {
 						<b id="passkey" class="med bold"><!-- IF AUTH_KEY -->{AUTH_KEY}<!-- ELSE -->{L_NOSELECT}<!-- ENDIF --></b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
+					<!-- IF SHOW_BT_USERDATA --><!-- IF PROFILE_USER || IS_ADMIN --><!-- IF $bb_cfg['ratio_null_enabled'] --><!-- IF not NULLED_RATIO or IS_ADMIN -->
+					[ <a class="med" href="#" onclick="ajax.index_data('null_ratio'); return false;">{L_BT_NULL_RATIO}</a> ]
+					<!-- ENDIF --><!-- ENDIF --><!-- ENDIF --><!-- ENDIF -->
 				</td>
 			</tr>
 
-            <!-- IF SHOW_BT_USERDATA -->
+			<!-- IF SHOW_BT_USERDATA -->
 			<tr id="ratio-expl" style="display: none;">
 				<td colspan="2" class="med tCenter">
 				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 				</td>
 			</tr>
-            <!-- ENDIF -->
+			<!-- ENDIF -->
+			<!-- ENDIF -->
 
 			<!-- IF LOCATION -->
 			<tr>
@@ -450,6 +460,12 @@ ajax.callback.index_data = function(data) {
 			<tr>
 				<th>{L_AGE}:</th>
 				<td><b>{AGE}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			<!-- IF SHOW_BT_USERDATA -->
+			<tr>
+				<th>{L_RELEASER_STAT}</th>
+				<td id="releases_profile">[ <a href="#" class="med" onclick="ajax.index_data('releaser_stats'); return false;">{L_RELEASER_STAT_SHOW}</a> ]</td>
 			</tr>
 			<!-- ENDIF -->
             <!-- IF SHOW_BT_USERDATA -->

@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Devre dışı';
 $lang['ERROR'] = 'Hata';
 $lang['SELECT_ACTION'] = 'Seçin eylem';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Bilinmeyen';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = '%s ifadeler ifadeler sınırı aşıldı.';
 
 $lang['ATTACH_SIGNATURE'] = '(İmzalar profilden değiştirilebilir)imza ekle';
 $lang['NOTIFY'] = 'Cevaplar geldiğinde beni haberdar et';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Mesajınız başarıyla girildi.';
 $lang['EDITED'] = 'Mesajı değiştirildi';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Özür dilerim ama şifre alınamıyor. Lütfen daha
 
 $lang['ALWAYS_ADD_SIG'] = 'Her zaman İmzamı ekle';
 $lang['HIDE_PORN_FORUMS'] = 'Gizlemek içerik 18+';
+$lang['ADD_RETRACKER'] = 'Torrent dosyaları retracker Ekle';
 $lang['ALWAYS_NOTIFY'] = 'Her zaman cevaplar beni haberdar et';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Posta birine yayınlanan bir konuya cevap geldiğinde e gönderir. Bu yazı ne zaman değiştirilebilir.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Profile geri';
 $lang['SELECT_CATEGORY'] = 'Kategori seçin';
 
 $lang['DELETE_IMAGE'] = 'Görüntüyü sil';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Geçerli görüntü';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Yeni özel mesaj bildir';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Aynı info_hash ile başka bir torrent zaten <
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'İzleyiciden Kaldır';
 $lang['BT_UNREGISTERED'] = 'Torrent kayıtsız';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1424,7 +1432,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Son tohum görüldü';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Boyutu';
 $lang['PIECE_LENGTH'] = 'Parça uzunluğu';
-$lang['COMPLETED'] = 'Tamamlandı';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Eklendi';
 $lang['DELETE_TORRENT'] = 'Sil torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Silmek ve hareket konu';
@@ -1645,6 +1653,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['cevap', 'cevaplar'];
 $lang['DECLENSION']['TIMES'] = ['zaman', 'kere'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['ikinci', 'saniye'],
@@ -1693,6 +1702,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Çöküş dizini';
 $lang['EXPAND'] = 'Genişletin';
 $lang['SWITCH'] = 'Anahtarı';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Eksik dosya tanımlayıcıyı!';
 $lang['TOR_NOT_FOUND'] = 'Dosya sunucusu üzerindeki kayıp!';
 $lang['ERROR_BUILD'] = 'Bu torrent dosyasının içeriğini (dosya listesi oluşturmak mümkün değildi)sitesinde izlenemez';
@@ -1837,7 +1847,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL hızı';
 $lang['DL_DL_SPEED'] = 'DL hızı';
 $lang['DL_PORT'] = 'Bağlantı noktası';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formül: Yükledi/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'durdu';
@@ -2286,6 +2296,14 @@ $lang['DISALLOWED_ALREADY'] = 'Girdiğiniz adı izin verilmeyen olabilir. Ya zat
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s Kullanıcı adı Yönetim izin Vermemek için geri dönmek için tıklayın';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Sürüm Bilgileri';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2527,48 +2545,6 @@ $lang['EXTENSION'] = 'Uzantısı';
 $lang['RETURN_CONFIG'] = '%sReturn için Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigürasyon Başarıyla Güncellendi';
 $lang['SET_DEFAULTS'] = 'Varsayılanları geri yükle';
-
-$lang['OFF_TRACKER'] = 'Devre dışı bırakmak tracker';
-$lang['OFF_REASON'] = 'Devre dışı bırakma nedeni';
-$lang['OFF_REASON_EXPL'] = 'bu mesaj tracker devre dışı bırakıldığında, istemci gönderilecektir';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean eş tablo değil neden olmadan devre dışı bırakın';
-$lang['COMPACT_MODE'] = 'Kompakt modu';
-$lang['COMPACT_MODE_EXPL'] = '"Evet" - tracker sadece kompakt mode<br />"Hayır" uyumlu modu (istemci tarafından seçilen)çalışma istemcileri kabul eder';
-$lang['BROWSER_REDIRECT_URL'] = 'Tarayıcı yeniden yönlendirme URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'eğer kullanıcı Web browser<br />leave boş izci URL açmak için çalışırsa devre dışı bırakmak için';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Mısc';
-$lang['ANNOUNCE_INTERVAL'] = 'Aralık duyurmak';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'eş duyurular arasında en azından bu bir kaç saniye bekleyin';
-$lang['NUMWANT'] = 'Numwant değer';
-$lang['NUMWANT_EXPL'] = 'eş sayısı istemciye gönderilen';
-$lang['EXPIRE_FACTOR'] = 'Eş sona faktör';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Eğer bu birçok kez hesaplanan duyurmak aralığı eşit saniye sayısı son duyuru zaman ilan etmemiştir (1\'den büyük olmalı)bir eş öldüğünü düşünürdüm';
-$lang['IGNORE_GIVEN_IP'] = 'Görmezden IP istemci tarafından bildirilen';
-$lang['UPDATE_DLSTAT'] = 'Yukarı/Aşağı deposu kullanıcılar istatistikler';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Sınırlar';
-$lang['LIMIT_ACTIVE_TOR'] = 'Etkin sel sınırı';
-$lang['LIMIT_SEED_COUNT'] = 'Tohumlama sınırı';
-$lang['LIMIT_SEED_COUNT_EXPL'] = 'Sınırı (0)';
-$lang['LIMIT_LEECH_COUNT'] = 'Sülük sınırı';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = 'Sınırı (0)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Sülük sona faktör';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Eğer "olay durdu" dl<br />0 başladıktan sonra gönderilmiş olsa bile, birkaç dakika bu sayı için aktif olarak bir eş tedavi - durdu olay dikkate al "';
-$lang['LIMIT_CONCURRENT_IPS'] = "Sınırı eşzamanlı IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'torrent sınırı';
-$lang['LIMIT_SEED_IPS'] = 'Tohumlama IP limit';
-$lang['LIMIT_SEED_IPS_EXPL'] = "'s<br />0 <i>xx</i> fazla IP Ekim limitsiz izin ver - ";
-$lang['LIMIT_LEECH_IPS'] = 'Sülük IP limit';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "'s<br />0 <i>xx</i> fazla IP kurmaya çalışan sınırı izin ver - ";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Yetki';
-$lang['USE_AUTH_KEY'] = 'Geçiş anahtarı';
-$lang['USE_AUTH_KEY_EXPL'] = 'parolayı etkinleştir onay';
-$lang['AUTH_KEY_NAME'] = 'Şifre adı';
-$lang['AUTH_KEY_NAME_EXPL'] = 'içinde şifre anahtarı adı istek OLSUN';
-$lang['ALLOW_GUEST_DL'] = 'Konuk erişimi izleyici için izin';
-$lang['ADD_RETRACKER'] = 'Torrent dosyaları retracker Ekle';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
@@ -3097,3 +3073,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'siteye hoşgeldiniz %s',
     'USER_WELCOME_INACTIVE' => 'siteye hoşgeldiniz %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

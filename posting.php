@@ -249,7 +249,12 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
     }
 }
 
+// Notify & Allow robots indexing
+$robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
+    if (IS_AM) {
+        $robots_indexing = !empty($_POST['robots']);
+    }
     $notify_user = (int)!empty($_POST['notify']);
     $anonymous_user = (int)!empty($_POST['anonymous_mode']);
 } else {
@@ -339,7 +344,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, $anonymous_user);
+                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing, $anonymous_user);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -468,7 +473,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 
             // hide user passkey
-            $message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9](?=&)#', 'passkey', $message);
+            $message = preg_replace('#(?<=[\?&;]' . $bb_cfg['passkey_key'] . '=)[a-zA-Z0-9]#', 'passkey', $message);
             // hide sid
             $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
@@ -501,9 +506,14 @@ if (!IS_GUEST) {
     }
 }
 
-// Topic type selection
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
+    // Allow robots indexing
+    if (IS_AM) {
+        $template->assign_var('SHOW_ROBOTS_CHECKBOX');
+    }
+
+    // Topic type selection
     $template->assign_block_vars('switch_type_toggle', []);
 
     if ($is_auth['auth_sticky']) {
@@ -625,6 +635,7 @@ $template->assign_vars([
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ANON_CHECKED' => $anonymous_user ? 'checked' : '',
+    'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,

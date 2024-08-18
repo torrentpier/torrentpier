@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'gestremde';
 $lang['ERROR'] = 'fout';
 $lang['SELECT_ACTION'] = 'Kies aksie';
 $lang['CLEAR'] = 'Verwyder';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'onbekend';
 
 $lang['NEXT_PAGE'] = 'volgende';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Emoticons limiet van %s emoticons oorskry.';
 
 $lang['ATTACH_SIGNATURE'] = 'Heg handtekening aan (handtekeninge kan in profiel verander word)';
 $lang['NOTIFY'] = 'Stel my in kennis wanneer op antwoorde';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Jou boodskap is suksesvol ingevoer.';
 $lang['EDITED'] = 'Die boodskap is verander';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Jammer, maar jou wagwoord kan nie opgespoor word nie
 
 $lang['ALWAYS_ADD_SIG'] = 'Heg altyd my handtekening aan';
 $lang['HIDE_PORN_FORUMS'] = 'Versteek inhoud 18+';
+$lang['ADD_RETRACKER'] = 'Voeg retracker in torrent lêers';
 $lang['ALWAYS_NOTIFY'] = 'Stel my altyd in kennis van antwoorde';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Stuur \'n e-pos wanneer iemand antwoord op \'n onderwerp waarin jy gepos het. Dit kan verander word wanneer jy post.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Terug na profiel';
 $lang['SELECT_CATEGORY'] = 'Kies kategorie';
 
 $lang['DELETE_IMAGE'] = 'Verwyder prent';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Huidige beeld';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Stel in kennis van nuwe private boodskap';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a h
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Saad laas gesien';
 $lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'grootte';
 $lang['PIECE_LENGTH'] = 'Stuklengte';
-$lang['COMPLETED'] = 'voltooi';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'bygevoeg';
 $lang['DELETE_TORRENT'] = 'Verwyder torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Verwyder en skuif onderwerp';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['antwoord', 'antwoorde'];
 $lang['DECLENSION']['TIMES'] = ['tyd', 'keer'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['tweede', 'sekondes'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'File List';
 $lang['COLLAPSE'] = 'Vou gids in';
 $lang['EXPAND'] = 'uit te brei';
 $lang['SWITCH'] = 'skakelaar';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Ontbrekende lêer identifiseerder!';
 $lang['TOR_NOT_FOUND'] = 'Lêer ontbreek op die bediener!';
 $lang['ERROR_BUILD'] = 'Die inhoud van hierdie torrent lêer kan nie op die webwerf besigtig word nie (dit was nie moontlik om \'n lys lêers op te bou nie)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL spoed';
 $lang['DL_DL_SPEED'] = 'DL spoed';
 $lang['DL_PORT'] = 'Port';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formule: Opgelaai / TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'gestop';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Die naam wat u ingevoer het, kan nie toegelaat wo
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s om terug te keer na Administrasie van gebruikersnaam';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Weergawe-inligting';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Uitbreiding';
 $lang['RETURN_CONFIG'] = '%sTerug na Configuration%s';
 $lang['CONFIG_UPD'] = 'Konfigurasie suksesvol opgedateer';
 $lang['SET_DEFAULTS'] = 'Herstel standaard';
-
-$lang['OFF_TRACKER'] = 'Deaktiveer spoorsnyer';
-$lang['OFF_REASON'] = 'Deaktiveer rede';
-$lang['OFF_REASON_EXPL'] = 'Hierdie boodskap sal na kliënt gestuur word wanneer die tracker afgeskakel is';
-$lang['AUTOCLEAN_EXPL'] = 'Autoclean eweknie tafel - moenie sonder rede kanselleer nie';
-$lang['COMPACT_MODE'] = 'Kompakte af';
-$lang['COMPACT_MODE_EXPL'] = '"Ja" - Tracker aanvaar slegs kliënte wat in kompakte modus werk<br /> "Nee" - versoenbare modus (gekies deur kliënt)';
-$lang['BROWSER_REDIRECT_URL'] = 'Webleser-aanstuur-URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'As gebruiker probeer om tracker-URL oop te maak in die webblaaier<br />lee leeg om uit te skakel';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'misc';
-$lang['ANNOUNCE_INTERVAL'] = 'Verkondig interval';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'Eweknieë moet ten minste hierdie baie sekondes tussen aankondigings wag';
-$lang['NUMWANT'] = 'Nummerwaarde';
-$lang['NUMWANT_EXPL'] = 'Aantal eweknieë word aan kliënt gestuur';
-$lang['EXPIRE_FACTOR'] = 'Peer verval faktor';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Oorweeg \'n eweknie-dood as dit nie in \'n aantal sekondes gelykgestel aan hierdie baie keer die berekende aankondigingsinterval ten tye van sy laaste aankondiging (moet groter as 1 wees nie)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignoreer IP wat deur kliënt gerapporteer word';
-$lang['UPDATE_DLSTAT'] = 'Stoor gebruikers op / af statistieke';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'perke';
-$lang['LIMIT_ACTIVE_TOR'] = 'Beperk aktiewe torrents';
-$lang['LIMIT_SEED_COUNT'] = 'Saadgrens';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - geen limiet)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching limiet';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - geen limiet)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Leech verval faktor';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Behandel \'n eweknie as aktief vir hierdie aantal minute, selfs al het dit \'gestop\' gebeurtenis na die aanvang van dl<br />0 - in ag geneem';
-$lang['LIMIT_CONCURRENT_IPS'] = "Beperk tersaaklike IP's";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'Per torrent limiet';
-$lang['LIMIT_SEED_IPS'] = 'Saai IP-limiet';
-$lang['LIMIT_SEED_IPS_EXPL'] = "Laat saai toe van nie meer as <i>xx</i> IP's<br />0 - geen limiet";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP limiet';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "Laat leeching van nie meer as <i>xx</i> IP's<br />0 - geen limiet";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Magtiging';
-$lang['USE_AUTH_KEY'] = 'sleutel';
-$lang['USE_AUTH_KEY_EXPL'] = 'Aktiveer tjek vir wagwoord';
-$lang['AUTH_KEY_NAME'] = 'Passkey naam';
-$lang['AUTH_KEY_NAME_EXPL'] = 'Wagwoordnaam in GET-versoek';
-$lang['ALLOW_GUEST_DL'] = 'Laat gaste toegang tot spoorsnyer toe';
-$lang['ADD_RETRACKER'] = 'Voeg retracker in torrent lêers';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forum config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Welkom by die webwerf %s',
     'USER_WELCOME_INACTIVE' => 'Welkom by die webwerf %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

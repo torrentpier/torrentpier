@@ -17,7 +17,7 @@ $announce_urls = $additional_announce_urls = [];
 // Allowed Announcer URLs
 // ------------------------------------------------------------------------------------------------------------------------------
 // Examples:
-// $announce_urls[] = 'http://demo.torrentpier.com/bt/announce.php';
+// $announce_urls[] = 'https://torrentpier.duckdns.org/bt/announce.php';
 // $announce_urls[] = 'http://tracker.openbittorrent.com:80/announce';
 // $announce_urls[] = 'udp://tracker.openbittorrent.com:6969/announce';
 // ------------------------------------------------------------------------------------------------------------------------------

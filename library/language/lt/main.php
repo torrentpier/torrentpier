@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Neįgaliesiems';
 $lang['ERROR'] = 'Klaida';
 $lang['SELECT_ACTION'] = 'Pasirinkite veiksmą';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Nežinomas';
 
 $lang['NEXT_PAGE'] = 'Kitas';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Šypsenėlių limitas %s šypsenėlių viršyta
 
 $lang['ATTACH_SIGNATURE'] = 'Pridėti parašą (parašai gali būti pakeista profilio)';
 $lang['NOTIFY'] = 'Pranešti, kai dėl atsakymai';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Jūsų pranešimas buvo įrašyta sėkmingai.';
 $lang['EDITED'] = 'Pranešimas buvo pakeistas';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Atsiprašome, bet jūsų slaptažodis negali būti p
 
 $lang['ALWAYS_ADD_SIG'] = 'Visada pridėti mano parašą';
 $lang['HIDE_PORN_FORUMS'] = 'Paslėpti turinio 18+';
+$lang['ADD_RETRACKER'] = 'Pridėti retracker į torrent failus';
 $lang['ALWAYS_NOTIFY'] = 'Visada pranešti man atsakymai';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Siunčia el. paštu, kai kas nors atsakė į temas jūs jau paskelbtas. Tai galima keisti, kai jūs po.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Grįžti į profilį';
 $lang['SELECT_CATEGORY'] = 'Pasirinkite kategorija';
 
 $lang['DELETE_IMAGE'] = 'Ištrinti nuotrauką';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Dabartinis vaizdas';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Pranešti apie naują asmeninį pranešimą';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Kita torrent su pačiu info_hash jau <a href="
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Pašalinti iš tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent neregistruotas';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Sėklos paskutinį kartą matytas';
 $lang['BT_SORT_FORUM'] = 'Forumas';
 $lang['SIZE'] = 'Dydis';
 $lang['PIECE_LENGTH'] = 'Gabalas ilgis';
-$lang['COMPLETED'] = 'Baigta';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Pridėta';
 $lang['DELETE_TORRENT'] = 'Ištrinti torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Ištrinti ir perkelti temą';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['atsakyti', 'atsakymai'];
 $lang['DECLENSION']['TIMES'] = ['laikas', 'laikas'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['antras', 'sekundžių'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Failų';
 $lang['COLLAPSE'] = 'Sutraukti katalogą';
 $lang['EXPAND'] = 'Išplėskite';
 $lang['SWITCH'] = 'Jungiklis';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Trūksta failo vardas!';
 $lang['TOR_NOT_FOUND'] = 'Failo nėra serveryje!';
 $lang['ERROR_BUILD'] = 'Turinio šį torrent failas negali būti vertinama svetainėje (nebuvo galima statyti failų sąrašą)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL greitis';
 $lang['DL_DL_SPEED'] = 'DL greitis';
 $lang['DL_PORT'] = 'Uostas';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Formulė: Upload/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'sustojo';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'Pavadinimas įvedėte negalėjo būti atmestas. T
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Spustelėkite %sHere%s grįžti į Neleisti vartotojo Vardą Administracija';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versijos Informacija';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'Pratęsimo';
 $lang['RETURN_CONFIG'] = '%sReturn į Configuration%s';
 $lang['CONFIG_UPD'] = 'Sąrankos Atnaujinta Sėkmingai';
 $lang['SET_DEFAULTS'] = 'Atkurti numatytuosius';
-
-$lang['OFF_TRACKER'] = 'Išjungti tracker';
-$lang['OFF_REASON'] = 'Išjungti priežastis';
-$lang['OFF_REASON_EXPL'] = 'šis pranešimas bus siunčiamas klientui, kai tracker yra išjungtas';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean bendraamžių stalo - neturi išjungti be priežasties';
-$lang['COMPACT_MODE'] = 'Kompaktiškas režimas';
-$lang['COMPACT_MODE_EXPL'] = '"Taip" - tracker bus priimti tik klientams, dirbantiems kompaktiškas mode<br />"Ne" - suderinamas režimas (pasirenka klientas)';
-$lang['BROWSER_REDIRECT_URL'] = 'Naršyklės URL peradresavimo';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'jei vartotojas bando atidaryti trackerio URL Interneto browser<br />leave tuščią išjungti';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Įvairūs';
-$lang['ANNOUNCE_INTERVAL'] = 'Pranešti, intervalas';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'bendraamžių turėtų laukti bent jau tai daug sekundžių tarp skelbimai';
-$lang['NUMWANT'] = 'Numwant vertė';
-$lang['NUMWANT_EXPL'] = 'skaičius bendraamžių siunčiami klientui';
-$lang['EXPIRE_FACTOR'] = 'Tarpusavio baigtis koeficientas';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Mano bendraamžių miręs, jei ji nėra paskelbta, kiek sekundžių lygi tai daug kartų, apskaičiuoti paskelbti intervalo metu jos paskutinis pranešimas (turi būti didesnis nei 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Ignoruoti IP pranešė klientas';
-$lang['UPDATE_DLSTAT'] = 'Parduotuvės vartotojais aukštyn/žemyn statistika';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Apribojimai';
-$lang['LIMIT_ACTIVE_TOR'] = 'Apriboti aktyvių torrentų';
-$lang['LIMIT_SEED_COUNT'] = 'Sėja riba';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LIMIT_LEECH_COUNT'] = 'Leeching riba';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - no limit)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Dėlės baigtis koeficientas';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Gydyti tarpusavio kaip aktyvūs šio skaičiaus minučių, net jeigu jis išsiųstas "sustojo" renginys po to, kai pradeda dl<br />0 - atsižvelgti į "sustojo" renginys';
-$lang['LIMIT_CONCURRENT_IPS'] = "Riba sutampančiais IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'per torrent riba';
-$lang['LIMIT_SEED_IPS'] = 'Sėja IP riba';
-$lang['LIMIT_SEED_IPS_EXPL'] = "leisti sėja ne daugiau kaip <i>xx</i> IP's<br />0 - ne riba";
-$lang['LIMIT_LEECH_IPS'] = 'Leeching IP riba';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "leisti leeching ne daugiau kaip <i>xx</i> IP's<br />0 - ne riba";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Leidimas';
-$lang['USE_AUTH_KEY'] = 'Prieigos raktas';
-$lang['USE_AUTH_KEY_EXPL'] = 'sudaryti sąlygas patikrinti, ar prieigos raktas';
-$lang['AUTH_KEY_NAME'] = 'Prieigos raktas pavadinimas';
-$lang['AUTH_KEY_NAME_EXPL'] = 'prieigos raktas raktas pavadinimas GAUTI prašymą';
-$lang['ALLOW_GUEST_DL'] = 'Leisti svečias prieiga prie trackerio';
-$lang['ADD_RETRACKER'] = 'Pridėti retracker į torrent failus';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Forumas config';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Sveiki atvykę į svetainę %s',
     'USER_WELCOME_INACTIVE' => 'Sveiki atvykę į svetainę %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

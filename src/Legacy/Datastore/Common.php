@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
-use TorrentPier\Dev;
-
 /**
  * Class Common
  * @package TorrentPier\Legacy\Datastore
@@ -20,7 +18,7 @@ class Common
     /**
      * Директория с builder-скриптами (внутри INC_DIR)
      */
-    public $ds_dir = 'datastore';
+    public string $ds_dir = 'datastore';
 
     /**
      * Готовая к употреблению data
@@ -41,7 +39,9 @@ class Common
      */
     public array $known_items = [
         'cat_forums' => 'build_cat_forums.php',
+        'censor' => 'build_censor.php',
         'check_updates' => 'build_check_updates.php',
+        'files_integrity' => 'build_files_integrity.php',
         'jumpbox' => 'build_cat_forums.php',
         'viewtopic_forum_select' => 'build_cat_forums.php',
         'latest_news' => 'build_cat_forums.php',
@@ -77,8 +77,25 @@ class Common
         return $this->data[$title];
     }
 
-    public function store($item_name, $item_data)
+    /**
+     * @param $title
+     * @return bool
+     */
+    public function has($title): bool
     {
+        return isset($this->data[$title]);
+    }
+
+    /**
+     * Store data into cache
+     *
+     * @param string $item_name
+     * @param mixed $item_data
+     * @return bool
+     */
+    public function store(string $item_name, mixed $item_data): bool
+    {
+        return false;
     }
 
     public function rm($items)
@@ -138,6 +155,8 @@ class Common
 
     public function debug($mode, $cur_query = null)
     {
+        global $debug;
+
         if (!$this->dbg_enabled) {
             return;
         }
@@ -148,7 +167,7 @@ class Common
         switch ($mode) {
             case 'start':
                 $this->sql_starttime = utime();
-                $dbg['sql'] = Dev::short_query($cur_query ?? $this->cur_query);
+                $dbg['sql'] = $debug->shortQuery($cur_query ?? $this->cur_query);
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');

@@ -15,32 +15,38 @@ global $bb_cfg;
 
 $data = [];
 
-$context = stream_context_create(['http' => ['header' => 'User-Agent: ' . APP_NAME]]);
-$updater_content = file_get_contents(UPDATER_URL, context: $context);
+$updaterDownloader = new \TorrentPier\Updater();
+$updaterDownloader = $updaterDownloader->getLastVersion();
 
-$json_response = false;
-if ($updater_content !== false) {
-    $json_response = json_decode(utf8_encode($updater_content), true);
-}
+$getVersion = $updaterDownloader['tag_name'];
+$versionCodeActual = (int)trim(str_replace(['.', 'v'], '', $getVersion));
 
-if (is_array($json_response) && !empty($json_response)) {
-    $get_version = $json_response['tag_name'];
-    $version_code_actual = (int)trim(str_replace(['.', 'v'], '', $get_version));
-    $has_update = VERSION_CODE < $version_code_actual;
+// Has update!
+if (VERSION_CODE < $versionCodeActual) {
+    $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
     // Save current version & latest available
-    if ($has_update) {
-        file_write(VERSION_CODE . "\n" . $version_code_actual, UPDATER_FILE, replace_content: true);
+    file_write(json_encode([
+        'previous_version' => VERSION_CODE,
+        'latest_version' => $versionCodeActual
+    ]), UPDATER_FILE, replace_content: true);
+
+    // Get MD5 checksum
+    $buildFileChecksum = '';
+    if (isset($latestBuildFileLink)) {
+        $buildFileChecksum = strtoupper(md5_file($latestBuildFileLink));
     }
 
     // Build data array
     $data = [
-        'available_update' => $has_update,
-        'latest_version' => $get_version,
-        'latest_version_size' => isset($json_response['assets'][0]['size']) ? humn_size($json_response['assets'][0]['size']) : false,
-        'latest_version_dl_link' => $json_response['assets'][0]['browser_download_url'] ?? $json_response['html_url'],
-        'latest_version_link' => $json_response['html_url']
+        'available_update' => true,
+        'latest_version' => $getVersion,
+        'latest_version_size' => isset($updaterDownloader['assets'][0]['size']) ? humn_size($updaterDownloader['assets'][0]['size']) : false,
+        'latest_version_dl_link' => $latestBuildFileLink ?? $updaterDownloader['html_url'],
+        'latest_version_checksum' => $buildFileChecksum,
+        'latest_version_link' => $updaterDownloader['html_url']
     ];
 }
 
+$data[] = ['latest_check_timestamp' => TIMENOW];
 $this->store('check_updates', $data);

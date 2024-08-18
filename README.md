@@ -45,65 +45,72 @@ and go from there. The documentation will be translated into english in the near
 ## 🖥️ Demo
 
 * URL: https://torrentpier.duckdns.org
-* Username: admin
-* Password: admin
+* Username: `admin`
+* Password: `admin`
 
-Demo is reset every 24 hours!
+> [!NOTE]
+> Demo is resetting every 24 hours!
 
 ## 🔧 Requirements
 
 * Apache / nginx
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
-* PHP: 8.1 / 8.2
+* PHP: 8.1 / 8.2 / 8.3
 * PHP Extensions: mbstring, bcmath, intl, tidy (optional), xml, xmlwriter
 * Crontab (Recommended)
 
 ## 💾 Installation
 
-For installation, you need to follow a few simple steps:
+For installation, you need to follow a few simple steps.
+
+### Quick ☕️
+
+1. [Download latest](https://github.com/torrentpier/torrentpier/archive/refs/heads/master.zip) version of TorrentPier
+2. Open a folder with extracted TorrentPier (`cd /path/to/public_html`)
+3. After run `php install.php`
+4. Voila! ✨
+
+### Manual 🔩
 
 1. Install [Composer](https://getcomposer.org/)
 2. Run `composer create-project torrentpier/torrentpier`
-3. After run `composer install` on the project directory
-4. Create database and import dump located at **install/sql/mysql.sql**
-5. Edit database configuration settings in the environment (`.env.example`, after rename to `.env`)
-6. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
-7. Edit this files:
-   1. **favicon.png** (change on your own)
-   2. **robots.txt** (change the addresses in lines `Host` and `Sitemap` on your own)
-   3. **opensearch_desc.xml** (change the description and address on your own)
-   4. **opensearch_desc_bt.xml** (change the description and address on your own)
-8. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
+3. [Check our system requirements](#-requirements)
+4. After run `composer install` on the project directory
+5. Create database and import dump located at `install/sql/mysql.sql`
+6. Edit database configuration settings in the environment (`.env.example`), after rename to `.env`
+7. Provide write permissions to the specified folders:
+   * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
+   * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
+   * `sitemap`
+8. Voila! ✨
 
-## 🔑 Access rights on folders and files
+> [!IMPORTANT]
+> The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, and chmod **0644** for files in them.
 
-You must provide write permissions to the specified folders:
-* `data/avatars`
-* `data/uploads`
-* `data/uploads/thumbs`
-* `internal_data/atom`
-* `internal_data/cache`
-* `internal_data/log`
-* `internal_data/triggers`
-* `sitemap`
+### Additional steps 👣
 
-The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, 
-and chmod **0644** for files in them. If you are not sure, leave it as is.
+1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
+2. Edit this files:
+   * `favicon.png` (change on your own)
+   * `robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
+   * `opensearch_desc.xml` (change the description and address on your own)
+   * `opensearch_desc_bt.xml` (change the description and address on your own)
+3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
-## 🔐 Security
+## 🔐 Security vulnerabilities
 
-If you discover any security related issues, please email [admin@torrentpier.com](mailto:admin@torrentpier.com) or [roman25052006.kelesh@gmail.com](mailto:roman25052006.kelesh@gmail.com) instead of using the issue tracker.
+If you discover a security vulnerability within TorrentPier, please follow our [security policy](https://github.com/torrentpier/torrentpier/security/policy), so we can address it promptly.
 
 ## 📌 Our recommendations
 
-* *The recommended way to run cron.php.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
-* *Local configuration copy.* - You can override the settings using local configuration file **library/config.local.php**.
+* *The recommended way to run `cron.php`.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
+* *Local configuration copy.* - You can override the settings using local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details, and the process for 
+Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for 
 submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
-these requirements. Just send it.
+these requirements. Just send it!
 
 <a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=torrentpier/torrentpier" alt="Contributors"/>

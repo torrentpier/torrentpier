@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'Անջատված';
 $lang['ERROR'] = 'Սխալ է';
 $lang['SELECT_ACTION'] = 'Ընտրեք գործողությունը';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Հայտնի չէ';
 
 $lang['NEXT_PAGE'] = 'Ավելին';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Սահմանաչափը սմայլներ են ս
 
 $lang['ATTACH_SIGNATURE'] = 'Հավելված ստորագրությունը (ստորագրությունները կարելի է փոփոխել պրոֆիլի)';
 $lang['NOTIFY'] = 'Տեղեկացնել ինձ, երբ պատասխանները';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'Ձեր հաղորդագրությունը հաջողությամբ է մտցվել ։ ';
 $lang['EDITED'] = 'Հաղորդագրություն փոխվել է';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'Կներեք, բայց ձեր գաղտնաբառը �
 
 $lang['ALWAYS_ADD_SIG'] = 'Միշտ ամրացնել իմ ստորագրությունը';
 $lang['HIDE_PORN_FORUMS'] = 'Թաքցնել բովանդակության 18+';
+$lang['ADD_RETRACKER'] = 'Ավելացնել retracker են torrent ֆայլեր';
 $lang['ALWAYS_NOTIFY'] = 'Միշտ տեղեկացնել ինձ պատասխանների մասին';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Ուղարկում էլեկտրոնային փոստով, երբ ինչ-որ բան կպատասխանի թեմայով, որը դուք տեղադրել վ Դա կարող է փոխվել, երբ Դուք տեղադրել.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'Վերադառնալ անձնագիրը';
 $lang['SELECT_CATEGORY'] = 'Ընտրել կատեգորիա';
 
 $lang['DELETE_IMAGE'] = 'Հեռացում նկարներ';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'Ներկայիս իմիջը';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Տեղեկացնել նոր անձնական հաղորդագրությունների';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'Այլ հեղեղ նույն info_hash արդ�
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Հեռացնել ճանապարհները';
 $lang['BT_UNREGISTERED'] = 'Հեղեղ չգրանցված';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1423,7 +1431,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'Զաւակ վերջին անգամ տեսել';
 $lang['BT_SORT_FORUM'] = 'Համաժողովը';
 $lang['SIZE'] = 'Չափ';
 $lang['PIECE_LENGTH'] = 'Երկարությունը կտոր';
-$lang['COMPLETED'] = 'Ավարտված է';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'Ավելացված է';
 $lang['DELETE_TORRENT'] = 'Հեռացնել տարափ';
 $lang['DELETE_MOVE_TORRENT'] = 'Ջնջել և տեղափոխել թեմաները';
@@ -1644,6 +1652,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['պատասխան', 'պատասխաններ'];
 $lang['DECLENSION']['TIMES'] = ['ժամանակ', 'անգամ'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['երկրորդ', 'վայրկյան'],
@@ -1692,6 +1701,7 @@ $lang['FILELIST'] = 'Ցուցակ';
 $lang['COLLAPSE'] = 'Կատալոգ փլուզումից';
 $lang['EXPAND'] = 'Ծավալել';
 $lang['SWITCH'] = 'Switch';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'Բացակայում է նույնականացուցիչ ֆայլը!';
 $lang['TOR_NOT_FOUND'] = 'Ֆայլը բացակայում է սերվերի!';
 $lang['ERROR_BUILD'] = 'Բովանդակությունը այս torrent-ֆայլի չի կարելի է տեսնել կայքում (չի հաջողվել կառուցել ֆայլերի ցանկը)';
@@ -1836,7 +1846,7 @@ $lang['DL_DL'] = 'Dl';
 $lang['DL_UL_SPEED'] = 'Արագությունը փող';
 $lang['DL_DL_SPEED'] = 'Արագությունը dl';
 $lang['DL_PORT'] = 'Նավահանգիստ';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'Բանաձեւը: Բեռնված/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'կանգ է առել';
@@ -2285,6 +2295,14 @@ $lang['DISALLOWED_ALREADY'] = 'Մուտքագրված անունը չի կարո
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Սեղմեք %sHere%s վերադարձնել արգելել Վարչակազմի Անունը';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Տեղեկություններ Տարբերակը';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2526,48 +2544,6 @@ $lang['EXTENSION'] = 'Ընդլայնումը';
 $lang['RETURN_CONFIG'] = '%sReturn է Configuration%s';
 $lang['CONFIG_UPD'] = 'Կոնֆիգուրացիա Հաջողությամբ Թարմացվել';
 $lang['SET_DEFAULTS'] = 'Նախնականը վերականգնել';
-
-$lang['OFF_TRACKER'] = 'Անջատել tracker';
-$lang['OFF_REASON'] = 'Պատճառը պարապուրդ';
-$lang['OFF_REASON_EXPL'] = 'այս հաղորդագրությունը կարող է ուղարկվել հաճախորդին, երբ լսել անջատված է';
-$lang['AUTOCLEAN_EXPL'] = 'автоочистка աղյուսակի հասակակիցների չի անջատել ՝ առանց պատճառները';
-$lang['COMPACT_MODE'] = 'Կոմպակտ ռեժիմը';
-$lang['COMPACT_MODE_EXPL'] = '"Այո" - խուզարկու է ընդունել միայն այն հաճախորդների համար, որոնք աշխատում են կոմպակտ mode<br />"ոչ" - համատեղելի ռեժիմը (հաճախորդի ընտրությամբ)';
-$lang['BROWSER_REDIRECT_URL'] = 'URL-հասցե վերահղման բրաուզերի';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'եթե օգտագործողը փորձում է բացել ճանապարհները URL-հասցե վեբ browser<br />leave անջատել';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Խառը';
-$lang['ANNOUNCE_INTERVAL'] = 'Հայտարարվում է ընդմիջում';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'հասակակիցները պետք է սպասել առնվազն այն քանակությամբ վայրկյան միջև հաղորդագրությունների';
-$lang['NUMWANT'] = 'Նշանակություն Numwant';
-$lang['NUMWANT_EXPL'] = 'միավորների քան-пиров առաքումը հաճախորդի';
-$lang['EXPIRE_FACTOR'] = 'Կոլեգիալ լրանում գործոնը';
-$lang['EXPIRE_FACTOR_EXPL'] = 'Համարում одноранговой մեռած է, եթե չի հայտարարել միավորների քան վայրկյան միևնույն է, դա շատ անգամ հաշվարկված հայտարարել ընդմիջումից իր վերջին հայտարարություններ (պետք է լինի ոչ ավելի 1)';
-$lang['IGNORE_GIVEN_IP'] = 'Անտեսել IS հաղորդել հաճախորդի';
-$lang['UPDATE_DLSTAT'] = 'Օգտվողները խանութի մինչեւ/ներքեւ վիճակագրության';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'Սահմանները';
-$lang['LIMIT_ACTIVE_TOR'] = 'Սահմանաչափը ակտիվ торрентов';
-$lang['LIMIT_SEED_COUNT'] = 'Սահմանը высева';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - առանց սահմանափակումների)';
-$lang['LIMIT_LEECH_COUNT'] = 'Скачиваю սահմանը';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - առանց սահմանափակումների)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'Լրանում գործոնը լիչին';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'Բուժել հասակակիցների որպես ակտիվ տվյալ քանակի րոպե: նույնիսկ եթե դա այդպես չէ, "դադարեցնել" միջոցառումը գործարկումից հետո dl<br />0 - հաշվի առնել "կանգնեցնել" միջոցառումը';
-$lang['LIMIT_CONCURRENT_IPS'] = "Սահմանափակել թիվը միաժամանակյա IP հասցեներ";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'համար սահմանը տարափ';
-$lang['LIMIT_SEED_IPS'] = 'Ցանքս IS սահմանը';
-$lang['LIMIT_SEED_IPS_EXPL'] = "թույլ տվեք высева-ից ոչ ավելի <i>xx</i> ИС's<br />0 - ի սահմանը";
-$lang['LIMIT_LEECH_IPS'] = 'Որոտացել IS սահմանը';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "թույլ տվեք скачиваю են ոչ ավելի, քան <i>xx</i> ИС's<br />0 - ի սահմանը";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'Թույլտվության';
-$lang['USE_AUTH_KEY'] = 'Отмычка';
-$lang['USE_AUTH_KEY_EXPL'] = 'ներառում է ստուգման գաղտնաբառը';
-$lang['AUTH_KEY_NAME'] = 'Անուն գաղտնաբառ';
-$lang['AUTH_KEY_NAME_EXPL'] = 'բանալին отмычка անունը հարցում Ստանալ';
-$lang['ALLOW_GUEST_DL'] = 'Լուծել հյուրի մուտք գործել tracker';
-$lang['ADD_RETRACKER'] = 'Ավելացնել retracker են torrent ֆայլեր';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'Համաժողովը конфиг';
@@ -3095,3 +3071,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'Բարի գալուստ կայք %s',
     'USER_WELCOME_INACTIVE' => 'Բարի գալուստ կայք %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

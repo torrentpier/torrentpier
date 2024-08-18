@@ -9,7 +9,9 @@
 
 namespace TorrentPier\Legacy\Cache;
 
-use TorrentPier\Dev;
+use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use MatthiasMullie\Scrapbook\Adapters\Flysystem;
 
 /**
  * Class File
@@ -17,117 +19,117 @@ use TorrentPier\Dev;
  */
 class File extends Common
 {
-    public $used = true;
-    public $engine = 'Filecache';
-    public $dir;
-    public $prefix;
+    /**
+     * Currently in usage
+     *
+     * @var bool
+     */
+    public bool $used = true;
 
-    public function __construct($dir, $prefix = null)
+    /**
+     * Cache driver name
+     *
+     * @var string
+     */
+    public string $engine = 'File';
+
+    /**
+     * Cache prefix
+     *
+     * @var string
+     */
+    private string $prefix;
+
+    /**
+     * Adapters\File class
+     *
+     * @var Flysystem
+     */
+    private Flysystem $file;
+
+    /**
+     * File constructor
+     *
+     * @param string $dir
+     * @param string $prefix
+     */
+    public function __construct(string $dir, string $prefix)
     {
-        $this->dir = $dir;
+        global $debug;
+
+        $adapter = new LocalFilesystemAdapter($dir, null, LOCK_EX);
+        $filesystem = new Filesystem($adapter);
+        $this->file = new Flysystem($filesystem);
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sql_dbg_enabled();
+        $this->dbg_enabled = $debug->sqlDebugAllowed();
     }
 
-    public function get($name, $get_miss_key_callback = '', $ttl = 0)
+    /**
+     * Fetch data from cache
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function get(string $name): mixed
     {
-        $filecache = [];
-        $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
+        $name = $this->prefix . $name;
 
-        $this->cur_query = "cache->get('$name')";
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
         $this->debug('start');
 
-        if (file_exists($filename)) {
-            require($filename);
-        }
-
-        $this->debug('stop');
-        $this->cur_query = null;
-
-        return (!empty($filecache['value'])) ? $filecache['value'] : false;
-    }
-
-    public function set($name, $value, $ttl = 86400)
-    {
-        if (!\function_exists('var_export')) {
-            return false;
-        }
-
-        $this->cur_query = "cache->set('$name')";
-        $this->debug('start');
-
-        $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
-        $expire = TIMENOW + $ttl;
-        $cache_data = ['expire' => $expire, 'value' => $value];
-
-        $filecache = "<?php\n";
-        $filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
-        $filecache .= '$filecache = ' . var_export($cache_data, true) . ";\n";
-        $filecache .= '?>';
+        $result = $this->file->get($name);
 
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)file_write($filecache, $filename, max_size: false, replace_content: true);
+        return $result;
     }
 
-    public function rm($name = '')
+    /**
+     * Store data into cache
+     *
+     * @param string $name
+     * @param mixed $value
+     * @param int $ttl
+     * @return bool
+     */
+    public function set(string $name, mixed $value, int $ttl = 0): bool
     {
-        $clear = false;
-        if ($name) {
-            $this->cur_query = "cache->rm('$name')";
-            $this->debug('start');
+        $name = $this->prefix . $name;
 
-            $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
-            if (file_exists($filename)) {
-                $clear = (bool)unlink($filename);
-            }
+        $this->cur_query = "cache->" . __FUNCTION__ . "('$name')";
+        $this->debug('start');
 
-            $this->debug('stop');
-            $this->cur_query = null;
-            $this->num_queries++;
-        } else {
-            if (is_dir($this->dir)) {
-                if ($dh = opendir($this->dir)) {
-                    while (($file = readdir($dh)) !== false) {
-                        if ($file != "." && $file != "..") {
-                            $filename = $this->dir . $file;
+        $result = $this->file->set($name, $value, $ttl);
 
-                            unlink($filename);
-                            $clear = true;
-                        }
-                    }
-                    closedir($dh);
-                }
-            }
-        }
-        return $clear;
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
+
+        return $result;
     }
 
-    public function gc($expire_time = TIMENOW)
+    /**
+     * Removes data from cache
+     *
+     * @param string|null $name
+     * @return bool
+     */
+    public function rm(string $name = null): bool
     {
-        $filecache = [];
-        $clear = false;
+        $targetMethod = is_string($name) ? 'delete' : 'flush';
+        $name = is_string($name) ? $this->prefix . $name : null;
 
-        if (is_dir($this->dir)) {
-            if ($dh = opendir($this->dir)) {
-                while (($file = readdir($dh)) !== false) {
-                    if ($file != "." && $file != "..") {
-                        $filename = $this->dir . $file;
+        $this->cur_query = "cache->$targetMethod('$name')";
+        $this->debug('start');
 
-                        require($filename);
+        $result = $this->file->$targetMethod($name);
 
-                        if (!empty($filecache['expire']) && ($filecache['expire'] < $expire_time)) {
-                            unlink($filename);
-                            $clear = true;
-                        }
-                    }
-                }
-                closedir($dh);
-            }
-        }
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
 
-        return $clear;
+        return $result;
     }
 }

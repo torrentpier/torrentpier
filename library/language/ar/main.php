@@ -61,6 +61,7 @@ $lang['DISABLED'] = 'تعطيل';
 $lang['ERROR'] = 'خطأ';
 $lang['SELECT_ACTION'] = 'اختر العمل';
 $lang['CLEAR'] = 'Clear';
+$lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'غير معروف';
 
 $lang['NEXT_PAGE'] = 'القادم';
@@ -375,6 +376,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'الرموز الحد من %s الرموز تج
 
 $lang['ATTACH_SIGNATURE'] = 'إرفاق التوقيع (التوقيعات يمكن تغيير في الملف الشخصي)';
 $lang['NOTIFY'] = 'يخطر لي عندما على الردود';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
 
 $lang['STORED'] = 'رسالتك قد دخلت بنجاح.';
 $lang['EDITED'] = 'الرسالة تم تغيير';
@@ -544,6 +546,7 @@ $lang['NO_SEND_ACCOUNT'] = 'آسف, ولكن كلمة المرور الخاصة 
 
 $lang['ALWAYS_ADD_SIG'] = 'دائما نعلق توقيعي';
 $lang['HIDE_PORN_FORUMS'] = 'إخفاء المحتوى 18+';
+$lang['ADD_RETRACKER'] = 'إضافة retracker في ملفات التورنت';
 $lang['ALWAYS_NOTIFY'] = 'دائما يخطر لي من الردود';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'يرسل رسالة عبر البريد الإلكتروني عندما يقوم شخص بالرد على موضوع كنت قد نشرت. هذا يمكن أن يتغير كلما قمت بنشر.';
 
@@ -605,6 +608,7 @@ $lang['RETURN_PROFILE'] = 'العودة إلى الملف الشخصي';
 $lang['SELECT_CATEGORY'] = 'اختر الفئة';
 
 $lang['DELETE_IMAGE'] = 'حذف صورة';
+$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
 $lang['CURRENT_IMAGE'] = 'الصورة الحالية';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'يخطر على رسالة خاصة';
@@ -1075,7 +1079,6 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR3' => 'German Reich (3rd)',
     'GR' => 'Greece',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
@@ -1115,7 +1118,6 @@ $lang['COUNTRIES'] = [
     'KZ' => 'Kazakhstan',
     'LA' => 'Laos (Lao People\'s Democratic Republic)',
     'LB' => 'Lebanon',
-    'LGBT' => 'Pride flag', // __ //
     'LC' => 'Saint Lucia',
     'LI' => 'Liechtenstein',
     'LK' => 'Sri Lanka',
@@ -1162,7 +1164,6 @@ $lang['COUNTRIES'] = [
     'NZ' => 'New Zealand',
     'OM' => 'Oman',
     'PA' => 'Panama',
-    'PACE' => 'Peace flag', // __ //
     'PE' => 'Peru',
     'PF' => 'French Polynesia',
     'PG' => 'Papua New Guinea',
@@ -1233,7 +1234,6 @@ $lang['COUNTRIES'] = [
     'VI' => 'Virgin Islands, U.S.',
     'VN' => 'Vietnam',
     'VU' => 'Vanuatu',
-    'WBW' => 'Wonderful Russia of the Future 🕊',
     'WF' => 'Wallis and Futuna Islands',
     'WS' => 'Samoa',
     'XK' => 'Kosovo',
@@ -1242,7 +1242,11 @@ $lang['COUNTRIES'] = [
     'YT' => 'Mayotte',
     'ZA' => 'South Africa',
     'ZM' => 'Zambia',
-    'ZW' => 'Zimbabwe'
+    'ZW' => 'Zimbabwe',
+    // Additional flags
+    'WBW' => 'Wonderful Russia of the Future',
+    'PACE' => 'Peace flag',
+    'LGBT' => 'Pride flag'
 ];
 
 // Errors
@@ -1345,6 +1349,10 @@ $lang['BT_REG_FAIL_SAME_HASH'] = 'آخر سيل مع نفسه info_hash بالف
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
+$lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
+$lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
+$lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_UNREG_FROM_TRACKER'] = 'إزالة من تعقب';
 $lang['BT_UNREGISTERED'] = 'سيل غير المسجلين';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1420,7 +1428,7 @@ $lang['BT_SEEDER_LAST_SEEN'] = 'البذور شوهد آخر مرة';
 $lang['BT_SORT_FORUM'] = 'المنتدى';
 $lang['SIZE'] = 'حجم';
 $lang['PIECE_LENGTH'] = 'قطعة طول';
-$lang['COMPLETED'] = 'الانتهاء';
+$lang['COMPLETED'] = 'Completed downloads';
 $lang['ADDED'] = 'وأضاف';
 $lang['DELETE_TORRENT'] = 'حذف التورنت';
 $lang['DELETE_MOVE_TORRENT'] = 'حذف ونقل الموضوع';
@@ -1641,6 +1649,7 @@ $lang['SEND_PM_TXTB'] = '[PM]';
 
 $lang['DECLENSION']['REPLIES'] = ['رد', 'الردود'];
 $lang['DECLENSION']['TIMES'] = ['الوقت', 'مرات'];
+$lang['DECLENSION']['FILES'] = ['file', 'files'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['الثاني', 'ثانية'],
@@ -1689,6 +1698,7 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'انهيار الدليل';
 $lang['EXPAND'] = 'توسيع';
 $lang['SWITCH'] = 'التبديل';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
 $lang['EMPTY_ATTACH_ID'] = 'الملف المفقود معرف!';
 $lang['TOR_NOT_FOUND'] = 'الملف غير موجود على الملقم!';
 $lang['ERROR_BUILD'] = 'محتوى هذا ملف التورنت لا يمكن أن ينظر إليها على الموقع (لم يكن من الممكن بناء قائمة من الملفات)';
@@ -1833,7 +1843,7 @@ $lang['DL_DL'] = 'DL';
 $lang['DL_UL_SPEED'] = 'UL السرعة';
 $lang['DL_DL_SPEED'] = 'دل السرعة';
 $lang['DL_PORT'] = 'ميناء';
-$lang['DL_CLIENT'] = 'Client';
+$lang['DL_CLIENT'] = 'BitTorrent client';
 $lang['DL_FORMULA'] = 'الصيغة: تحميل/TorrentSize';
 $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'توقفت';
@@ -2282,6 +2292,14 @@ $lang['DISALLOWED_ALREADY'] = 'الاسم الذي أدخلته لا يمكن أ
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'انقر فوق %sHere%s للعودة إلى عدم السماح اسم المستخدم الإدارة';
 
+// Integrity check
+$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
+$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
+$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
+$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
+$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
+$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
+
 // Version Check
 $lang['VERSION_INFORMATION'] = 'معلومات الإصدار';
 $lang['UPDATE_AVAILABLE'] = 'Update available';
@@ -2523,48 +2541,6 @@ $lang['EXTENSION'] = 'تمديد';
 $lang['RETURN_CONFIG'] = '%sReturn إلى Configuration%s';
 $lang['CONFIG_UPD'] = 'التكوين تحديث بنجاح';
 $lang['SET_DEFAULTS'] = 'استعادة الافتراضيات';
-
-$lang['OFF_TRACKER'] = 'تعطيل تعقب';
-$lang['OFF_REASON'] = 'تعطيل السبب';
-$lang['OFF_REASON_EXPL'] = 'هذه الرسالة سوف يتم إرسالها إلى العميل عند تعطيل تعقب';
-$lang['AUTOCLEAN_EXPL'] = 'autoclean أقرانهم الجدول - لا تعطيل دون سبب';
-$lang['COMPACT_MODE'] = 'الوضع المضغوط';
-$lang['COMPACT_MODE_EXPL'] = '"نعم" - تعقب سوف نقبل فقط للعملاء الذين يعملون في الاتفاق mode<br />"لا" - وضع متوافق (المختار من قبل العميل)';
-$lang['BROWSER_REDIRECT_URL'] = 'المتصفح إعادة توجيه URL';
-$lang['BROWSER_REDIRECT_URL_EXPL'] = 'إذا كان يحاول المستخدم فتح تعقب URL ويب browser<br />leave فارغة إلى تعطيل';
-
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'متفرقات';
-$lang['ANNOUNCE_INTERVAL'] = 'أعلن الفاصل';
-$lang['ANNOUNCE_INTERVAL_EXPL'] = 'أقرانهم يجب الانتظار على الأقل عدة ثوان بين الإعلانات';
-$lang['NUMWANT'] = 'Numwant القيمة';
-$lang['NUMWANT_EXPL'] = 'عدد من الزملاء إرسالها إلى العميل';
-$lang['EXPIRE_FACTOR'] = 'نظير تنتهي عامل';
-$lang['EXPIRE_FACTOR_EXPL'] = 'النظر في الأقران الميت إذا لم يعلن في عدد من ثانية يساوي هذا مرات عديدة محسوبة يعلن الفاصل في وقت آخر إعلان (يجب أن تكون أكبر من 1)';
-$lang['IGNORE_GIVEN_IP'] = 'تجاهل IP ذكرت من قبل العميل';
-$lang['UPDATE_DLSTAT'] = 'متجر المستخدمين أعلى/أسفل الإحصاءات';
-
-$lang['LIMIT_ACTIVE_TOR_HEAD'] = 'حدود';
-$lang['LIMIT_ACTIVE_TOR'] = 'الحد النشطة السيول';
-$lang['LIMIT_SEED_COUNT'] = 'البذر الحد';
-$lang['LIMIT_SEED_COUNT_EXPL'] = '(0 - لا يوجد حد)';
-$lang['LIMIT_LEECH_COUNT'] = 'الإمتصاص الحد';
-$lang['LIMIT_LEECH_COUNT_EXPL'] = '(0 - لا يوجد حد)';
-$lang['LEECH_EXPIRE_FACTOR'] = 'علقة تنتهي عامل';
-$lang['LEECH_EXPIRE_FACTOR_EXPL'] = 'علاج الأقران نشطة على هذا العدد من الدقائق حتى لو أرسلت "توقف" الحدث بعد بدء dl<br />0 - خذ بعين الاعتبار "توقف" الحدث';
-$lang['LIMIT_CONCURRENT_IPS'] = "الحد المتزامنة IP";
-$lang['LIMIT_CONCURRENT_IPS_EXPL'] = 'في سيل الحد';
-$lang['LIMIT_SEED_IPS'] = 'البذر IP الحد';
-$lang['LIMIT_SEED_IPS_EXPL'] = "تسمح البذر من لا أكثر من <i>xx</i> IP's<br />0 - لا يوجد حد";
-$lang['LIMIT_LEECH_IPS'] = 'الإمتصاص IP الحد';
-$lang['LIMIT_LEECH_IPS_EXPL'] = "تسمح الإمتصاص من لا أكثر من <i>xx</i> IP's<br />0 - لا يوجد حد";
-
-$lang['USE_AUTH_KEY_HEAD'] = 'إذن';
-$lang['USE_AUTH_KEY'] = 'مفتاح المرور';
-$lang['USE_AUTH_KEY_EXPL'] = 'تمكين التحقق من مفتاح المرور';
-$lang['AUTH_KEY_NAME'] = 'كلمة السر اسم';
-$lang['AUTH_KEY_NAME_EXPL'] = 'كلمة السر اسم المفتاح في الحصول على طلب';
-$lang['ALLOW_GUEST_DL'] = 'تسمح للنزلاء الوصول إلى تعقب';
-$lang['ADD_RETRACKER'] = 'إضافة retracker في ملفات التورنت';
 
 // Forum config
 $lang['FORUM_CFG_EXPL'] = 'منتدى التكوين';
@@ -3091,3 +3067,16 @@ $lang['EMAILER_SUBJECT'] = [
     'USER_WELCOME' => 'مرحبا بكم في الموقع %s',
     'USER_WELCOME_INACTIVE' => 'مرحبا بكم في الموقع %s',
 ];
+
+// Null ratio
+$lang['BT_NULL_RATIO'] = 'Reset ratio';
+$lang['BT_NULL_RATIO_NONE'] = 'You don\'t have a ratio';
+$lang['BT_NULL_RATIO_ALERT'] = "Attention!\n\nAre you sure you want to reset your ratio?";
+$lang['BT_NULL_RATIO_AGAIN'] = 'You have already reset your ratio!';
+$lang['BT_NULL_RATIO_NOT_NEEDED'] = 'You have a good ratio. Reset is possible only with a ratio less than %s';
+$lang['BT_NULL_RATIO_SUCCESS'] = 'The ratio has been reset successfully!';
+
+// Releaser stats
+$lang['RELEASER_STAT_SIZE'] = 'Total size:';
+$lang['RELEASER_STAT'] = 'Releaser stats:';
+$lang['RELEASER_STAT_SHOW'] = 'Show stats';

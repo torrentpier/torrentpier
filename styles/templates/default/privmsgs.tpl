@@ -69,7 +69,7 @@
 	<td><img src="{listrow.PRIVMSG_FOLDER_IMG}" alt="{listrow.L_PRIVMSG_FOLDER_ALT}" title="{listrow.L_PRIVMSG_FOLDER_ALT}" /></td>
 	<td class="tLeft pad_0"><a href="{listrow.U_READ}" class="med bold block pad_4">{listrow.SUBJECT}</a></td>
 	<td>{listrow.FROM}</td>
-	<td>{listrow.DATE}</td>
+	<td><u>{listrow.DATE_RAW}</u>{listrow.DATE}</td>
 	<td><input type="checkbox" name="mark[]2" value="{listrow.S_MARK_ID}" /></td>
 </tr>
 <!-- END listrow -->

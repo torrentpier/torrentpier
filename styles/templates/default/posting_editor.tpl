@@ -210,7 +210,7 @@ function checkForm(form) {
     bbcode.addTag("codeSpoiler", "spoiler", null, "", ctrl);
     bbcode.addTag("codeSup", "sup", null, "", ctrl);
     bbcode.addTag("codeSub", "sub", null, "", ctrl);
-    bbcode.addTag("codeAcronym", "acronym", null, "", ctrl);
+    bbcode.addTag("codeAcronym", 'acronym="text"', "/acronym", "", ctrl);
     bbcode.addTag("codeBox", "box", null, "", ctrl);
     bbcode.addTag("codeIndent", "indent", null, "", ctrl);
 
