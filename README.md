@@ -32,6 +32,7 @@ and go from there. The documentation will be translated into english in the near
 * Rich forum browsing/moderation tools
 * High-load capable, heavily configurable announcer
 * Scrape support
+* [TorrServe support](https://github.com/YouROK/TorrServe)
 * FreeLeech
 * BitTorrent v2 support
 * Event-based invite system
