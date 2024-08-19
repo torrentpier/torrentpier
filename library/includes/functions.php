@@ -2180,3 +2180,27 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     return $data;
 }
+
+function torr_server(array $file, string $endpoint)
+{
+    global $bb_cfg;
+
+    $curl = new Curl\Curl();
+
+    if ($endpoint == 'upload') {
+        $curl->patch($bb_cfg['torr_server']['host'] . ':' . $bb_cfg['torr_server']['port'] . '/torrent/' . $endpoint, [
+            // TODO
+        ]);
+    } else {
+        bb_die('Wrong endpoint type: ' . $endpoint);
+    }
+
+    if ($curl->error) {
+        bb_die('...'); // TODO
+    }
+
+    $isSuccess = $curl->response == 200;
+    $curl->close();
+
+    return $isSuccess;
+}
