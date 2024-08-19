@@ -2195,7 +2195,7 @@ function torr_server(array|string $data, string $endpoint): bool
     } elseif ($endpoint == 'playlist' && is_string($data)) {
         $curl->setHeader('Accept', 'audio/x-mpegurl');
         $curl->get($url . $endpoint, ['hash' => $data]);
-        file_put_contents(get_attachments_dir() . '/' . $data . '.m3u', $curl->response);
+        file_put_contents(get_attachments_dir() . '/m3u/' . $data . '.m3u', $curl->response);
     } else {
         bb_die('Wrong endpoint type: ' . $endpoint);
     }
