@@ -109,6 +109,14 @@ $bb_cfg['client_ban'] = [
     ]
 ];
 
+// TorrServer integration
+$bb_cfg['torr_server'] = [
+    // Read more: https://github.com/YouROK/TorrServer
+    'enabled' => true,
+    'host' => $domain_name,
+    'port' => 8090
+];
+
 // Ocelot
 $bb_cfg['ocelot'] = [
     'enabled' => false,
