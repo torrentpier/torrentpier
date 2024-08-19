@@ -2181,15 +2181,20 @@ function infoByIP(string $ipAddress, int $port = 0): array
     return $data;
 }
 
-function torr_server(array $file, string $endpoint)
+function torr_server($data, string $endpoint)
 {
     global $bb_cfg;
 
     $curl = new Curl\Curl();
+    $url = $bb_cfg['torr_server']['host'] . ':' . $bb_cfg['torr_server']['port'] . '/';
 
     if ($endpoint == 'upload') {
-        $curl->patch($bb_cfg['torr_server']['host'] . ':' . $bb_cfg['torr_server']['port'] . '/torrent/' . $endpoint, [
+        $curl->patch($url . 'torrent/' . $endpoint, [
             // TODO
+        ]);
+    } elseif ($endpoint == 'playlist') {
+        $curl->get($url . $endpoint, [
+            'hash' => is_string($data) ? $data : ''
         ]);
     } else {
         bb_die('Wrong endpoint type: ' . $endpoint);
