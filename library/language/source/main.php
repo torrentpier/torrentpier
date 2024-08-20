@@ -1267,6 +1267,7 @@ $lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.ph
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Viewed';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivated by an board admin, therefore this Attachment is not displayed.'; // used in Posts and PM's, replace %s with mime type
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 
 $lang['ATTACHMENT'] = 'Attachments';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Attachment Thumbnail';

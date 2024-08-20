@@ -176,7 +176,7 @@
 			<!-- BEGIN tor_server -->
 			<!-- IF postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK -->
 			<hr>
-			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>Download .m3u</a>
+			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>{L_DOWNLOAD_M3U_FILE}</a>
 			<!-- ENDIF -->
 			<!-- END tor_server -->
 		</td>
