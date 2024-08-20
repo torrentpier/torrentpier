@@ -12,6 +12,7 @@ namespace TorrentPier\Legacy;
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
 use Exception;
+use TorrentPier\TorrServerAPI;
 
 /**
  * Class Torrent
@@ -34,7 +35,7 @@ class Torrent
 
         $sql = "
 		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status,
+			a.post_id, d.physical_filename, d.extension, d.tracker_status, d.mimetype
 			t.topic_first_post_id,
 			p.poster_id, p.topic_id, p.forum_id,
 			f.allow_reg_tracker
@@ -386,6 +387,10 @@ class Torrent
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
             $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
         }
+
+        // TorrServer integration
+        $torrServer = new TorrServerAPI();
+        $torrServer->uploadTorrent($filename, $torrent['mimetype']);
 
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {

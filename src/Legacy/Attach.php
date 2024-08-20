@@ -1007,12 +1007,6 @@ class Attach
                 unlink_attach($this->attach_filename);
                 unlink_attach($this->attach_filename, MODE_THUMBNAIL);
                 $this->post_attach = false;
-            } else {
-                // TorrServer integration
-                if ($this->extension === TORRENT_EXT) {
-                    $torrServer = new TorrServerAPI();
-                    $torrServer->uploadTorrent($file, $this->type);
-                }
             }
         }
     }
