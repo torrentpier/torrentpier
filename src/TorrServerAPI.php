@@ -80,6 +80,7 @@ class TorrServerAPI
     public function uploadTorrent(string $path, string $mimetype): bool
     {
         // Check mimetype
+        $mimetype = trim($mimetype);
         if ($mimetype !== 'application/x-bittorrent') {
             return false;
         }
