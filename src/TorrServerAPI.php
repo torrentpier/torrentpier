@@ -65,10 +65,7 @@ class TorrServerAPI
 
         $this->curl = new Curl();
         $this->curl->setTimeout($bb_cfg['torr_server']['timeout']);
-
-        $protocol = $bb_cfg['torr_server']['use_https'] ? 'https://' : 'http://';
-        $server_name = ($bb_cfg['torr_server']['host'] === $bb_cfg['server_name']) ? $bb_cfg['server_name'] : $bb_cfg['torr_server']['host'];
-        $this->url = $protocol . $server_name . ':' . $bb_cfg['torr_server']['port'] . '/';
+        $this->url = $bb_cfg['torr_server']['url'] . '/';
     }
 
     /**
