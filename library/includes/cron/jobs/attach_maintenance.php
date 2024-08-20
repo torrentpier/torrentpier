@@ -48,7 +48,7 @@ if ($dir = @opendir($attach_dir)) {
     $f_len = 0;
 
     while (false !== ($f = readdir($dir))) {
-        if ($f == 'index.php' || $f == '.htaccess' || is_dir("$attach_dir/$f") || is_link("$attach_dir/$f")) {
+        if (str_starts_with($f, 'm3u_') || $f == 'index.php' || $f == '.htaccess' || is_dir("$attach_dir/$f") || is_link("$attach_dir/$f")) {
             continue;
         }
         $f = DB()->escape($f);
