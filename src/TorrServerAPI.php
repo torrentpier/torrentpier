@@ -39,7 +39,8 @@ class TorrServerAPI
     private array $endpoints = [
         'playlist' => 'playlist',
         'upload' => 'torrent/upload',
-        'stream' => 'stream'
+        'stream' => 'stream',
+        'isUp' => 'echo'
     ];
 
     /**
@@ -51,6 +52,13 @@ class TorrServerAPI
      * M3U file extension
      */
     const M3U_EXTENSION = '.m3u';
+
+    /**
+     * Log filename
+     *
+     * @var string
+     */
+    private string $logFile = 'torr_server';
 
     /**
      * TorrServer constructor
@@ -69,6 +77,21 @@ class TorrServerAPI
     }
 
     /**
+     * Test server connection
+     *
+     * @return bool
+     */
+    public function serverIsUp(): bool
+    {
+        $this->curl->setHeader('Accept', 'text/plain');
+        $this->curl->get($this->url . $this->endpoints['isUp']);
+        $isSuccess = $this->curl->httpStatusCode === 200;
+        $this->curl->close();
+
+        return $isSuccess;
+    }
+
+    /**
      * Upload torrent-file to TorrServer instance
      *
      * @param string $path
@@ -77,8 +100,13 @@ class TorrServerAPI
      */
     public function uploadTorrent(string $path, string $mimetype): bool
     {
+        // Check connection
+        if (!$this->serverIsUp()) {
+            bb_log("TorrServer [$this->url]: Server is down!", $this->logFile);
+            return false;
+        }
+
         // Check mimetype
-        $mimetype = trim($mimetype);
         if ($mimetype !== 'application/x-bittorrent') {
             return false;
         }
@@ -88,8 +116,9 @@ class TorrServerAPI
         $this->curl->setHeader('Content-Type', 'multipart/form-data');
 
         // Make request
-        $cFile = curl_file_create($path, $mimetype);
-        $this->curl->post($this->url . $this->endpoints['upload'], ['file' => $cFile]);
+        $this->curl->post($this->url . $this->endpoints['upload'], [
+            'file' => curl_file_create($path, $mimetype)
+        ]);
 
         // Check response & close connect
         $isSuccess = $this->curl->httpStatusCode === 200;
@@ -106,15 +135,23 @@ class TorrServerAPI
      */
     public function saveM3U(null|string $infoHashV1, null|string $infoHashV2): string
     {
+        // Check connection
+        if (!$this->serverIsUp()) {
+            bb_log("TorrServer [$this->url]: Server is down!", $this->logFile);
+            return false;
+        }
+
         $hash = $infoHashV1 ?? $infoHashV2;
+
+        // Check if file is already exist
         $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash . self::M3U_EXTENSION;
         if (is_file($m3uFile)) {
             return true;
         }
 
         // Make stream call to store torrent in memory
-        $this->curl->get($this->url . $this->endpoints['stream'], ['link' => strtoupper($hash)]);
         $this->curl->setHeader('Accept', 'application/octet-stream');
+        $this->curl->get($this->url . $this->endpoints['stream'], ['link' => strtoupper($hash)]);
         if ($this->curl->httpStatusCode !== 200) {
             return false;
         }
