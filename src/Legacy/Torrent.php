@@ -9,10 +9,12 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\TorrServerAPI;
+
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
+
 use Exception;
-use TorrentPier\TorrServerAPI;
 
 /**
  * Class Torrent
