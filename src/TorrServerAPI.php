@@ -44,14 +44,12 @@ class TorrServerAPI
     ];
 
     /**
-     * M3U file prefix
+     * M3U file params
      */
-    const M3U_FILE_PREFIX = 'm3u_';
-
-    /**
-     * M3U file extension
-     */
-    const M3U_EXTENSION = '.m3u';
+    const M3U = [
+        'prefix' => 'm3u_',
+        'extension' => '.m3u'
+    ];
 
     /**
      * Log filename
@@ -144,7 +142,7 @@ class TorrServerAPI
         $hash = $infoHashV1 ?? $infoHashV2;
 
         // Check if file is already exist
-        $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash . self::M3U_EXTENSION;
+        $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $hash . self::M3U['extension'];
         if (is_file($m3uFile)) {
             return true;
         }
@@ -178,8 +176,8 @@ class TorrServerAPI
     public function getM3UPath(null|string $infoHashV1, null|string $infoHashV2): string
     {
         $hash = $infoHashV1 ?? $infoHashV2;
-        $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash . self::M3U_EXTENSION;
 
+        $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $hash . self::M3U['extension'];
         if (is_file($m3uFile)) {
             return $m3uFile;
         }
