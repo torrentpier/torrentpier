@@ -12,8 +12,6 @@ namespace TorrentPier;
 use Curl\Curl;
 use CURLFile;
 
-use ErrorException;
-
 /**
  * Class TorrServerAPI
  * @package TorrentPier

@@ -392,7 +392,9 @@ class Torrent
 
         // TorrServer integration
         $torrServer = new TorrServerAPI();
-        $torrServer->uploadTorrent($filename, $torrent['mimetype']);
+        if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
+            $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
+        }
 
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {

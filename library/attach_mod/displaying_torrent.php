@@ -190,9 +190,6 @@ if ($tor_reged && $tor_info) {
             'TOR_BLOCKED_MSG' => sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
         ]);
     } else {
-        $torrServer = new \TorrentPier\TorrServerAPI();
-        $torrServer->saveM3U(bin2hex($tor_info['info_hash']), bin2hex($tor_info['info_hash_v2']));
-
         $template->assign_block_vars('postrow.attach.tor_reged', [
             'DOWNLOAD_NAME' => $display_name,
             'TRACKER_LINK' => $tracker_link,
@@ -221,7 +218,7 @@ if ($tor_reged && $tor_info) {
             'FILELIST_LINK' => FILELIST_URL . $tor_info['topic_id'],
 
             // TorrServer integration
-            'TORR_SERVER_M3U_LINK' => $torrServer->getM3UPath(bin2hex($tor_info['info_hash']), bin2hex($tor_info['info_hash_v2'])),
+            'TORR_SERVER_M3U_LINK' => (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id),
             'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
 
             'REGED_TIME' => bb_date($tor_info['reg_time']),
