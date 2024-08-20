@@ -175,7 +175,7 @@
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
 			<!-- IF postrow.attach.tor_reged.TORR_SERVER_M3U_LINK -->
 			<hr>
-			<a href="{postrow.attach.tor_reged.TORR_SERVER_M3U_LINK}" target="_blank"><p><img src="{postrow.attach.tor_reged.TORR_SERVER_M3U_ICON}" width="18" height="18" border="0"></p>Download .m3u</a>
+			<a href="{postrow.attach.tor_reged.TORR_SERVER_M3U_LINK}" target="_blank"><p><img src="{postrow.attach.tor_reged.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>Download .m3u</a>
 			<!-- ENDIF -->
 		</td>
 	</tr>
