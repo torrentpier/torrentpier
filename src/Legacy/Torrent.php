@@ -146,6 +146,10 @@ class Torrent
             bb_die('Could not delete peers');
         }
 
+        // TorrServer integration
+        $torrServer = new TorrServerAPI();
+        $torrServer->removeM3U($attach_id);
+
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {
             if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id LIMIT 1")) {
