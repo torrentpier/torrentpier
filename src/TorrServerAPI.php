@@ -94,7 +94,6 @@ class TorrServerAPI
      * @param string $path
      * @param string $mimetype
      * @return bool
-     * @throws ErrorException
      */
     public function uploadTorrent(string $path, string $mimetype): bool
     {
