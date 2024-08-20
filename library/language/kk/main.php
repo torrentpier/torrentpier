@@ -1267,6 +1267,7 @@ $lang['DOWNLOAD'] = 'жүктеу'; // this Language Variable is defined in admi
 $lang['FILESIZE'] = 'файл мөлшері';
 $lang['VIEWED'] = 'белгілілері';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Кеңейтім «%s Сондықтан осы Толықтырудың көрсетілмейді, бір басқарма әкімші арқылы ажыратылған болатын.'; // used in Posts and PM's, replace %s with mime type
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 
 $lang['ATTACHMENT'] = 'Тіркемелер';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Тіркеме Нобай';
@@ -1353,6 +1354,7 @@ $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
 $lang['BT_UNREG_FROM_TRACKER'] = 'трекер алып тастау';
 $lang['BT_UNREGISTERED'] = 'Torrent тіркелмеген';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';

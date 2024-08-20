@@ -1267,6 +1267,7 @@ $lang['DOWNLOAD'] = 'Скачать'; // this Language Variable is defined in ad
 $lang['FILESIZE'] = 'Размер';
 $lang['VIEWED'] = 'Просмотров';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Расширение \'%s\' было деактивировано администратором, поэтому это приложение не отображается.'; // used in Posts and PM's, replace %s with mime type
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 
 $lang['ATTACHMENT'] = 'Вложение';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Вложение (миниатюра)';
@@ -1353,6 +1354,7 @@ $lang['BT_FLIST_BTMR_HASH'] = 'Хэш BTMR';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root — хэш файлов, встроенных в торренты с поддержкой BitTorrent v2, пользователи трекеров могут извлечь, вычислить их, также скачать deduplicated торренты с помощью настольных инструментов, таких как <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Дата создания';
 $lang['BT_FLIST_FILE_PATH'] = 'Путь (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Разрегистрировать торрент';
 $lang['BT_UNREGISTERED'] = 'Торрент разрегистрирован';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Торрент уже разрегистрирован';
