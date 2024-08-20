@@ -151,9 +151,7 @@ class TorrServerAPI
         }
 
         // Make stream call to store torrent in memory
-        $this->curl->setHeader('Accept', 'application/octet-stream');
-        $this->curl->get($this->url . $this->endpoints['stream'], ['link' => strtoupper($hash)]);
-        if ($this->curl->httpStatusCode !== 200) {
+        if (!$this->getStream($hash)) {
             return false;
         }
 
@@ -206,5 +204,26 @@ class TorrServerAPI
         }
 
         return false;
+    }
+
+    /**
+     * Up stream
+     *
+     * @param string $hash
+     * @return bool
+     */
+    private function getStream(string $hash): bool
+    {
+        global $bb_cfg;
+
+        $curl = new Curl();
+        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+
+        $curl->setHeader('Accept', 'application/octet-stream');
+        $curl->get($this->url . $this->endpoints['stream'], ['link' => strtoupper($hash)]);
+        $isSuccess = $curl->httpStatusCode === 200;
+        $curl->close();
+
+        return $isSuccess;
     }
 }
