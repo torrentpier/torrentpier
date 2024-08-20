@@ -186,7 +186,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
             if ($num_rows == 0) {
                 // TorrServer integration
-                $torrServer = new TorrentPier\TorrServerAPI();
+                $torrServer = new \TorrentPier\TorrServerAPI();
                 $torrServer->removeM3U($attach_id_array[$i]);
 
                 $sql = 'SELECT attach_id, physical_filename, thumbnail
