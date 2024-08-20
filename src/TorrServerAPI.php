@@ -42,9 +42,14 @@ class TorrServerAPI
     ];
 
     /**
-     * m3u file prefix
+     * M3U file prefix
      */
-    const M3U_FILE_PREFIX =  'm3u_';
+    const M3U_FILE_PREFIX = 'm3u_';
+
+    /**
+     * M3U file extension
+     */
+    const M3U_EXTENSION = '.m3u';
 
     /**
      * TorrServer constructor
@@ -103,7 +108,16 @@ class TorrServerAPI
     public function saveM3U(null|string $infoHashV1, null|string $infoHashV2): string
     {
         $hash = $infoHashV1 ?? $infoHashV2;
-        return $this->url . $this->endpoints['playlist'] . '?hash=' . strtoupper($hash);
+        $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash . self::M3U_EXTENSION;
+
+        $this->curl->setHeader('Accept', 'audio/x-mpegurl');
+        $this->curl->get($this->url . $this->endpoints['playlist'], ['hash' => strtoupper($hash)]);
+        if ($this->curl->httpStatusCode == 200 && !empty($this->curl->response)) {
+            file_put_contents($m3uFile, $this->curl->response);
+        }
+        $this->curl->close();
+
+        return is_file($m3uFile) && (int)filesize($m3uFile) > 0;
     }
 
     /**
@@ -116,7 +130,7 @@ class TorrServerAPI
     public function getM3UPath(null|string $infoHashV1, null|string $infoHashV2): string
     {
         $hash = $infoHashV1 ?? $infoHashV2;
-        $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash;
+        $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash . self::M3U_EXTENSION;
 
         if (is_file($m3uFile)) {
             return $m3uFile;
