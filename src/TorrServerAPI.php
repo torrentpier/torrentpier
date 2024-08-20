@@ -108,11 +108,7 @@ class TorrServerAPI
     {
         global $bb_cfg;
 
-        // Check if file is already exist
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
-        if (is_file($m3uFile)) {
-            return true;
-        }
 
         // Make stream call to store torrent in memory
         if (!$this->getStream($hash)) {
@@ -125,7 +121,20 @@ class TorrServerAPI
         $curl->setHeader('Accept', 'audio/x-mpegurl');
         $curl->get($this->url . $this->endpoints['playlist'], ['hash' => $hash]);
         if ($curl->httpStatusCode === 200 && !empty($curl->response)) {
-            file_put_contents($m3uFile, $curl->response);
+            // Validate response
+            $validResponse = false;
+            $responseLines = explode("\n", $curl->response);
+            foreach ($responseLines as $line) {
+                if (str_contains($line, '#EXTINF')) {
+                    $validResponse = true;
+                    break;
+                }
+            }
+
+            // Store M3U file
+            if ($validResponse && !is_file($m3uFile)) {
+                file_put_contents($m3uFile, $curl->response);
+            }
         } else {
             bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
         }
