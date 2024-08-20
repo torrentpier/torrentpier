@@ -43,7 +43,6 @@ class TorrServerAPI
 
     public function uploadTorrent(array $_FILES)
     {
-
     }
 
     /**
