@@ -144,10 +144,12 @@ if ($check_attachments) {
         $orphan_db_attach[] = $row['attach_id'];
     }
     // Delete all orphan attachments
-    foreach ($orphan_db_attach as $attach_id) {
-        // TorrServer integration
-        $torrServer = new \TorrentPier\TorrServerAPI();
-        $torrServer->removeM3U($attach_id);
+    if ($bb_cfg['torr_server']['enabled']) {
+        foreach ($orphan_db_attach as $attach_id) {
+            // TorrServer integration
+            $torrServer = new \TorrentPier\TorrServerAPI();
+            $torrServer->removeM3U($attach_id);
+        }
     }
     if ($orphans_sql = implode(',', $orphan_db_attach)) {
         if ($fix_errors) {
