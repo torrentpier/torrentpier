@@ -63,26 +63,6 @@ class TorrServerAPI
     }
 
     /**
-     * Test server connection
-     *
-     * @return bool
-     */
-    public function serverIsUp(): bool
-    {
-        global $bb_cfg;
-
-        $curl = new Curl();
-        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
-
-        $curl->setHeader('Accept', 'text/plain');
-        $curl->get($this->url . $this->endpoints['isUp']);
-        $isSuccess = $curl->httpStatusCode === 200;
-        $curl->close();
-
-        return $isSuccess;
-    }
-
-    /**
      * Upload torrent-file to TorrServer instance
      *
      * @param string $path
@@ -92,12 +72,6 @@ class TorrServerAPI
     public function uploadTorrent(string $path, string $mimetype): bool
     {
         global $bb_cfg;
-
-        // Check connection
-        if (!$this->serverIsUp()) {
-            bb_log("TorrServer [$this->url]: Server is down!\n", $this->logFile);
-            return false;
-        }
 
         // Check mimetype
         if ($mimetype !== 'application/x-bittorrent') {
@@ -115,6 +89,9 @@ class TorrServerAPI
             'file' => new CURLFile($path, $mimetype)
         ]);
         $isSuccess = $curl->httpStatusCode === 200;
+        if (!$isSuccess) {
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
+        }
         $curl->close();
 
         return $isSuccess;
@@ -130,12 +107,6 @@ class TorrServerAPI
     public function saveM3U(string|int $attach_id, string $hash): string
     {
         global $bb_cfg;
-
-        // Check connection
-        if (!$this->serverIsUp()) {
-            bb_log("TorrServer [$this->url]: Server is down!\n", $this->logFile);
-            return false;
-        }
 
         // Check if file is already exist
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
@@ -155,6 +126,8 @@ class TorrServerAPI
         $curl->get($this->url . $this->endpoints['playlist'], ['hash' => $hash]);
         if ($curl->httpStatusCode === 200 && !empty($curl->response)) {
             file_put_contents($m3uFile, $curl->response);
+        } else {
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
         }
         $curl->close();
 
@@ -209,6 +182,9 @@ class TorrServerAPI
         $curl->setHeader('Accept', 'application/octet-stream');
         $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);
         $isSuccess = $curl->httpStatusCode === 200;
+        if (!$isSuccess) {
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
+        }
         $curl->close();
 
         return $isSuccess;
