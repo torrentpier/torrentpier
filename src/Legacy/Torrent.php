@@ -37,7 +37,7 @@ class Torrent
 
         $sql = "
 		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status, d.mimetype
+			a.post_id, d.physical_filename, d.extension, d.tracker_status, d.mimetype,
 			t.topic_first_post_id,
 			p.poster_id, p.topic_id, p.forum_id,
 			f.allow_reg_tracker
