@@ -42,6 +42,11 @@ class TorrServerAPI
     ];
 
     /**
+     * m3u file prefix
+     */
+    const M3U_FILE_PREFIX =  'm3u_';
+
+    /**
      * TorrServer constructor
      */
     public function __construct()
@@ -54,9 +59,19 @@ class TorrServerAPI
 
         $this->curl = new Curl();
         $this->curl->setTimeout($bb_cfg['torr_server']['timeout']);
-        $this->url = $bb_cfg['torr_server']['host'] . ':' . $bb_cfg['torr_server']['port'] . '/';
+
+        $protocol = $bb_cfg['torr_server']['use_https'] ? 'https://' : 'http://';
+        $server_name = ($bb_cfg['torr_server']['host'] === $bb_cfg['server_name']) ? $bb_cfg['server_name'] : $bb_cfg['torr_server']['host'];
+        $this->url = $protocol . $server_name . ':' . $bb_cfg['torr_server']['port'] . '/';
     }
 
+    /**
+     * Upload torrent-file to TorrServer instance
+     *
+     * @param string $path
+     * @param string $mimetype
+     * @return bool
+     */
     public function uploadTorrent(string $path, string $mimetype): bool
     {
         // Check mimetype
@@ -80,16 +95,33 @@ class TorrServerAPI
     }
 
     /**
-     * Returns link to M3U file
-     *
      * @param null|string $infoHashV1
      * @param null|string $infoHashV2
      *
      * @return string
      */
-    public function getM3U(null|string $infoHashV1, null|string $infoHashV2): string
+    public function saveM3U(null|string $infoHashV1, null|string $infoHashV2): string
     {
         $hash = $infoHashV1 ?? $infoHashV2;
-        return $this->url . $this->endpoints['playlist'] . '?hash=' . $hash;
+        return $this->url . $this->endpoints['playlist'] . '?hash=' . strtoupper($hash);
+    }
+
+    /**
+     * Returns full path to M3U file
+     *
+     * @param string|null $infoHashV1
+     * @param string|null $infoHashV2
+     * @return string
+     */
+    public function getM3UPath(null|string $infoHashV1, null|string $infoHashV2): string
+    {
+        $hash = $infoHashV1 ?? $infoHashV2;
+        $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash;
+
+        if (is_file($m3uFile)) {
+            return $m3uFile;
+        }
+
+        return false;
     }
 }

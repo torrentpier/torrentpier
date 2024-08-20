@@ -216,7 +216,7 @@ if ($tor_reged && $tor_info) {
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
             'FILELIST_LINK' => FILELIST_URL . $tor_info['topic_id'],
-            'TORR_SERVER_M3U_LINK' => $torrServer->getM3U($tor_info['info_hash'], $tor_info['info_hash_v2']),
+            'TORR_SERVER_M3U_LINK' => $torrServer->getM3U(bin2hex($tor_info['info_hash']), bin2hex($tor_info['info_hash_v2'])),
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size, 2),

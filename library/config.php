@@ -113,9 +113,10 @@ $bb_cfg['client_ban'] = [
 $bb_cfg['torr_server'] = [
     // Read more: https://github.com/YouROK/TorrServer
     'enabled' => true,
-    'host' => $domain_name,
-    'port' => 8090,
-    'timeout' => 5
+    'use_https' => false,
+    'host' => $domain_name, // Hostname (Without protocol). Example: m3u-torrentpier.duckdns.org
+    'port' => 8090, // TorrServer port
+    'timeout' => 5 // Connection timeout
 ];
 
 // Ocelot
