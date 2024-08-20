@@ -69,8 +69,6 @@ class TorrServerAPI
             return;
         }
 
-        $this->curl = new Curl();
-        $this->curl->setTimeout($bb_cfg['torr_server']['timeout']);
         $this->url = $bb_cfg['torr_server']['url'] . '/';
     }
 
@@ -81,6 +79,11 @@ class TorrServerAPI
      */
     public function serverIsUp(): bool
     {
+        global $bb_cfg;
+
+        $this->curl = new Curl();
+        $this->curl->setTimeout($bb_cfg['torr_server']['timeout']);
+
         $this->curl->setHeader('Accept', 'text/plain');
         $this->curl->get($this->url . $this->endpoints['isUp']);
         $isSuccess = $this->curl->httpStatusCode === 200;
@@ -153,7 +156,6 @@ class TorrServerAPI
         if ($this->curl->httpStatusCode !== 200) {
             return false;
         }
-        $this->curl->close();
 
         // Save m3u file
         $this->curl->setHeader('Accept', 'audio/x-mpegurl');
@@ -180,6 +182,25 @@ class TorrServerAPI
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $hash . self::M3U['extension'];
         if (is_file($m3uFile)) {
             return $m3uFile;
+        }
+
+        return false;
+    }
+
+    /**
+     * Removed M3U file (local)
+     *
+     * @param string|null $infoHashV1
+     * @param string|null $infoHashV2
+     * @return bool
+     */
+    public function removeM3U(null|string $infoHashV1, null|string $infoHashV2): bool
+    {
+        $hash = $infoHashV1 ?? $infoHashV2;
+
+        $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $hash . self::M3U['extension'];
+        if (is_file($m3uFile)) {
+            return unlink($m3uFile);
         }
 
         return false;
