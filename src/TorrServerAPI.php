@@ -59,10 +59,6 @@ class TorrServerAPI
     {
         global $bb_cfg;
 
-        if (!$bb_cfg['torr_server']['enabled']) {
-            return;
-        }
-
         $this->url = $bb_cfg['torr_server']['url'] . '/';
     }
 
