@@ -174,12 +174,6 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         //bt end
 
         foreach ($attach_id_array as $i => $iValue) {
-            // TorrServer integration
-            if ($bb_cfg['torr_server']['enabled']) {
-                $torrServer = new \TorrentPier\TorrServerAPI();
-                $torrServer->removeM3U($attach_id_array[$i]);
-            }
-
             $sql = 'SELECT attach_id
 				FROM ' . BB_ATTACHMENTS . '
 						WHERE attach_id = ' . (int)$attach_id_array[$i];
@@ -208,6 +202,13 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
                     // delete attachments
                     for ($j = 0; $j < $num_attach; $j++) {
+                        // TorrServer integration
+                        if ($bb_cfg['torr_server']['enabled']) {
+                            dump($attachments[$j]['attach_id']);
+                            $torrServer = new \TorrentPier\TorrServerAPI();
+                            $torrServer->removeM3U($attachments[$j]['attach_id']);
+                        }
+
                         unlink_attach($attachments[$j]['physical_filename']);
 
                         if ((int)$attachments[$j]['thumbnail'] == 1) {

@@ -217,7 +217,7 @@ class Common
      */
     public static function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
     {
-        global $lang, $log_action;
+        global $bb_cfg, $lang, $log_action;
 
         $topic_csv = [];
         $prune = ($mode_or_topic_id === 'prune');
@@ -330,7 +330,7 @@ class Common
 
         $result = DB()->query("
 		SELECT
-			d.physical_filename
+			d.physical_filename, a.attach_id
 		FROM
 			" . $tmp_delete_topics . " del,
 			" . BB_POSTS . " p,
@@ -346,6 +346,11 @@ class Common
             if ($filename = basename($row['physical_filename'])) {
                 @unlink("$attach_dir/" . $filename);
                 @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
+            }
+            // TorrServer integration
+            if ($bb_cfg['torr_server']['enabled']) {
+                $torrServer = new \TorrentPier\TorrServerAPI();
+                $torrServer->removeM3U($row['attach_id']);
             }
         }
         unset($row, $result);
