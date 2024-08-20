@@ -25,13 +25,6 @@ class TorrServerAPI
     private string $url;
 
     /**
-     * Curl object
-     *
-     * @var Curl
-     */
-    private Curl $curl;
-
-    /**
      * Endpoints list
      *
      * @var array|string[]
@@ -81,13 +74,13 @@ class TorrServerAPI
     {
         global $bb_cfg;
 
-        $this->curl = new Curl();
-        $this->curl->setTimeout($bb_cfg['torr_server']['timeout']);
+        $curl = new Curl();
+        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
 
-        $this->curl->setHeader('Accept', 'text/plain');
-        $this->curl->get($this->url . $this->endpoints['isUp']);
-        $isSuccess = $this->curl->httpStatusCode === 200;
-        $this->curl->close();
+        $curl->setHeader('Accept', 'text/plain');
+        $curl->get($this->url . $this->endpoints['isUp']);
+        $isSuccess = $curl->httpStatusCode === 200;
+        $curl->close();
 
         return $isSuccess;
     }
@@ -112,18 +105,16 @@ class TorrServerAPI
             return false;
         }
 
-        // Set headers
-        $this->curl->setHeader('Accept', 'application/json');
-        $this->curl->setHeader('Content-Type', 'multipart/form-data');
+        $curl = new Curl();
+        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
 
-        // Make request
-        $this->curl->post($this->url . $this->endpoints['upload'], [
+        $curl->setHeader('Accept', 'application/json');
+        $curl->setHeader('Content-Type', 'multipart/form-data');
+        $curl->post($this->url . $this->endpoints['upload'], [
             'file' => curl_file_create($path, $mimetype)
         ]);
-
-        // Check response & close connect
-        $isSuccess = $this->curl->httpStatusCode === 200;
-        $this->curl->close();
+        $isSuccess = $curl->httpStatusCode === 200;
+        $curl->close();
 
         return $isSuccess;
     }
