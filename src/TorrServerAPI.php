@@ -11,6 +11,8 @@ namespace TorrentPier;
 
 use Curl\Curl;
 
+use ErrorException;
+
 /**
  * Class TorrServerAPI
  * @package TorrentPier
@@ -91,9 +93,12 @@ class TorrServerAPI
      * @param string $path
      * @param string $mimetype
      * @return bool
+     * @throws ErrorException
      */
     public function uploadTorrent(string $path, string $mimetype): bool
     {
+        global $bb_cfg;
+
         // Check connection
         if (!$this->serverIsUp()) {
             bb_log("TorrServer [$this->url]: Server is down!", $this->logFile);
@@ -108,12 +113,14 @@ class TorrServerAPI
         $curl = new Curl();
         $curl->setTimeout($bb_cfg['torr_server']['timeout']);
 
-        $curl->setHeader('Accept', 'application/json');
-        $curl->setHeader('Content-Type', 'multipart/form-data');
-        $curl->post($this->url . $this->endpoints['upload'], [
-            'file' => curl_file_create($path, $mimetype)
+        $curl->setHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'multipart/form-data'
         ]);
+        $curl->post($this->url . $this->endpoints['upload']);
+        // $curl->buildPostData(['file' => "@$path;type=$mimetype"]);
         $isSuccess = $curl->httpStatusCode === 200;
+        dump($curl->response);
         $curl->close();
 
         return $isSuccess;
@@ -127,6 +134,8 @@ class TorrServerAPI
      */
     public function saveM3U(null|string $infoHashV1, null|string $infoHashV2): string
     {
+        global $bb_cfg;
+
         // Check connection
         if (!$this->serverIsUp()) {
             bb_log("TorrServer [$this->url]: Server is down!", $this->logFile);
@@ -148,13 +157,15 @@ class TorrServerAPI
             return false;
         }
 
-        // Save m3u file
-        $this->curl->setHeader('Accept', 'audio/x-mpegurl');
-        $this->curl->get($this->url . $this->endpoints['playlist'], ['hash' => strtoupper($hash)]);
-        if ($this->curl->httpStatusCode === 200 && !empty($this->curl->response)) {
-            file_put_contents($m3uFile, $this->curl->response);
+        $curl = new Curl();
+        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+
+        $curl->setHeader('Accept', 'audio/x-mpegurl');
+        $curl->get($this->url . $this->endpoints['playlist'], ['hash' => strtoupper($hash)]);
+        if ($curl->httpStatusCode === 200 && !empty($curl->response)) {
+            file_put_contents($m3uFile, $curl->response);
         }
-        $this->curl->close();
+        $curl->close();
 
         return is_file($m3uFile) && (int)filesize($m3uFile) > 0;
     }
