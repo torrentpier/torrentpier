@@ -1267,6 +1267,7 @@ $lang['DOWNLOAD'] = 'Yuklash'; // this Language Variable is defined in admin.php
 $lang['FILESIZE'] = 'Fayl hajmi';
 $lang['VIEWED'] = 'Ko\'rib chiqildi';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Extension "%s" Shuning uchun, bu ilova ko\'rsatilmasa, bir taxta admin o\'chirilgan edi.'; // used in Posts and PM's, replace %s with mime type
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 
 $lang['ATTACHMENT'] = 'Qo\'shilgan';
 $lang['ATTACHMENT_THUMBNAIL'] = 'ilova Thumbnail';
@@ -1353,6 +1354,7 @@ $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
 $lang['BT_UNREG_FROM_TRACKER'] = 'izdoshlari o\'chirish';
 $lang['BT_UNREGISTERED'] = 'Ro\'yxatdan o\'tmagan torrent';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
