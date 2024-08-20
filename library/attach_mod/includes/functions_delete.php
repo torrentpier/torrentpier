@@ -202,13 +202,6 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
                     // delete attachments
                     for ($j = 0; $j < $num_attach; $j++) {
-                        // TorrServer integration
-                        if ($bb_cfg['torr_server']['enabled']) {
-                            dump($attachments[$j]['attach_id']);
-                            $torrServer = new \TorrentPier\TorrServerAPI();
-                            $torrServer->removeM3U($attachments[$j]['attach_id']);
-                        }
-
                         unlink_attach($attachments[$j]['physical_filename']);
 
                         if ((int)$attachments[$j]['thumbnail'] == 1) {
@@ -219,6 +212,12 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
                         if (!(DB()->sql_query($sql))) {
                             bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
+                        }
+
+                        // TorrServer integration
+                        if ($bb_cfg['torr_server']['enabled']) {
+                            $torrServer = new \TorrentPier\TorrServerAPI();
+                            $torrServer->removeM3U($attachments[$j]['attach_id']);
                         }
                     }
                 } else {
