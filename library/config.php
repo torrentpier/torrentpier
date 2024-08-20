@@ -114,7 +114,7 @@ $bb_cfg['torr_server'] = [
     // Read more: https://github.com/YouROK/TorrServer
     'enabled' => true,
     'url' => "http://$domain_name:8090",
-    'timeout' => 5 // Connection timeout
+    'timeout' => 5
 ];
 
 // Ocelot
