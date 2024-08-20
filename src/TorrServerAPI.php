@@ -38,7 +38,8 @@ class TorrServerAPI
      */
     private array $endpoints = [
         'playlist' => 'playlist',
-        'upload' => 'torrent/upload'
+        'upload' => 'torrent/upload',
+        'stream' => 'stream'
     ];
 
     /**
@@ -110,7 +111,19 @@ class TorrServerAPI
     {
         $hash = $infoHashV1 ?? $infoHashV2;
         $m3uFile = get_attachments_dir() . '/' . self::M3U_FILE_PREFIX . $hash . self::M3U_EXTENSION;
+        if (is_file($m3uFile)) {
+            return true;
+        }
 
+        // Make stream call to store torrent in memory
+        $this->curl->get($this->url . $this->endpoints['stream'], ['link' => strtoupper($hash)]);
+        $this->curl->setHeader('Accept', 'application/octet-stream');
+        if ($this->curl->httpStatusCode !== 200) {
+            return false;
+        }
+        $this->curl->close();
+
+        // Save m3u file
         $this->curl->setHeader('Accept', 'audio/x-mpegurl');
         $this->curl->get($this->url . $this->endpoints['playlist'], ['hash' => strtoupper($hash)]);
         if ($this->curl->httpStatusCode === 200 && !empty($this->curl->response)) {
