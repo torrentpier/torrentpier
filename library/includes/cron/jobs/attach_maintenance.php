@@ -48,7 +48,7 @@ if ($dir = @opendir($attach_dir)) {
     $f_len = 0;
 
     while (false !== ($f = readdir($dir))) {
-        if ($f == 'index.php' || $f == '.htaccess' || is_dir("$attach_dir/$f") || is_link("$attach_dir/$f")) {
+        if (str_starts_with($f, \TorrentPier\TorrServerAPI::M3U['prefix']) || $f == 'index.php' || $f == '.htaccess' || is_dir("$attach_dir/$f") || is_link("$attach_dir/$f")) {
             continue;
         }
         $f = DB()->escape($f);
@@ -144,7 +144,7 @@ if ($check_attachments) {
         $orphan_db_attach[] = $row['attach_id'];
     }
     // Delete all orphan attachments
-    if ($bb_cfg['torr_server']['enabled']) {
+    if ($bb_cfg['torr_server']['enabled'] && $fix_errors) {
         foreach ($orphan_db_attach as $attach_id) {
             // TorrServer integration
             $torrServer = new \TorrentPier\TorrServerAPI();

@@ -137,7 +137,7 @@ function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
 
         $fullPath = realpath($dir . '/' . $file);
         if (is_dir($fullPath)) {
-            // out("- Directory: $fullPath");
+            out("- Directory: $fullPath");
             chmod($fullPath, $dirPermissions);
             chmod_r($fullPath, $dirPermissions, $filePermissions);
         } elseif (is_file($fullPath)) {
