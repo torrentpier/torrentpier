@@ -38,6 +38,8 @@ $images['icon_male'] = $_main . 'icon_male.gif';
 $images['icon_female'] = $_main . 'icon_female.gif';
 $images['icon_nogender'] = $_main . 'icon_nogender.gif';
 
+$images['icon_tor_m3u_icon'] = ''; // TODO
+$images['icon_tor_filelist'] = $_img . 't_info.png';
 $images['icon_tor_gold'] = $_img . 'tor_gold.gif';
 $images['icon_tor_silver'] = $_img . 'tor_silver.gif';
 
