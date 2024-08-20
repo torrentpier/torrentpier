@@ -9,8 +9,11 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\TorrServerAPI;
+
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
+
 use Exception;
 
 /**
@@ -34,7 +37,7 @@ class Torrent
 
         $sql = "
 		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status,
+			a.post_id, d.physical_filename, d.extension, d.tracker_status, d.mimetype,
 			t.topic_first_post_id,
 			p.poster_id, p.topic_id, p.forum_id,
 			f.allow_reg_tracker
@@ -141,6 +144,12 @@ class Torrent
 
         if (!DB()->sql_query($sql)) {
             bb_die('Could not delete peers');
+        }
+
+        // TorrServer integration
+        if ($bb_cfg['torr_server']['enabled']) {
+            $torrServer = new TorrServerAPI();
+            $torrServer->removeM3U($attach_id);
         }
 
         // Ocelot
@@ -385,6 +394,14 @@ class Torrent
             $info_hash_v2 = hash('sha256', Bencode::encode($info), true);
             $info_hash_v2_sql = rtrim(DB()->escape($info_hash_v2), ' ');
             $info_hash_where = "WHERE info_hash_v2 = '$info_hash_v2_sql'";
+        }
+
+        // TorrServer integration
+        if ($bb_cfg['torr_server']['enabled']) {
+            $torrServer = new TorrServerAPI();
+            if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
+                $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
+            }
         }
 
         // Ocelot

@@ -214,6 +214,7 @@ if ($tor_reged && $tor_info) {
             'MAGNET' => $tor_magnet,
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
+            'FILELIST_ICON' => $images['icon_tor_filelist'],
             'FILELIST_LINK' => FILELIST_URL . $tor_info['topic_id'],
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
@@ -221,6 +222,14 @@ if ($tor_reged && $tor_info) {
             'DOWNLOAD_COUNT' => $download_count,
             'COMPLETED' => $tor_completed_count,
         ]);
+
+        // TorrServer integration
+        if ($bb_cfg['torr_server']['enabled']) {
+            $template->assign_block_vars('postrow.attach.tor_reged.tor_server', [
+                'TORR_SERVER_M3U_LINK' => (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id),
+                'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
+            ]);
+        }
 
         if ($comment) {
             $template->assign_block_vars('postrow.attach.tor_reged.comment', ['COMMENT' => $comment]);

@@ -146,8 +146,8 @@
 <table class="attach bordered med">
 	<tr class="row3">
 		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}
-        <a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="File hashes | .torrent meta-info" target="_blank"><img src="./styles/images/t_info.png" width="12" height="12" border="0"></a>
-        <!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
+		<a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="File hashes | .torrent meta-info" target="_blank"><img src="{postrow.attach.tor_reged.FILELIST_ICON}" width="12" height="12" border="0"></a>
+		<!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
     <tr class="row4">
@@ -173,6 +173,12 @@
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
+			<!-- BEGIN tor_server -->
+			<!-- IF postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK -->
+			<hr>
+			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>Download .m3u</a>
+			<!-- ENDIF -->
+			<!-- END tor_server -->
 		</td>
 	</tr>
 	<tr class="row1">
