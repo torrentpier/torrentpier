@@ -112,7 +112,7 @@ class TorrServerAPI
 
         $this->curl->setHeader('Accept', 'audio/x-mpegurl');
         $this->curl->get($this->url . $this->endpoints['playlist'], ['hash' => strtoupper($hash)]);
-        if ($this->curl->httpStatusCode == 200 && !empty($this->curl->response)) {
+        if ($this->curl->httpStatusCode === 200 && !empty($this->curl->response)) {
             file_put_contents($m3uFile, $this->curl->response);
         }
         $this->curl->close();
