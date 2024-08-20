@@ -99,7 +99,7 @@ class TorrServerAPI
 
         // Check connection
         if (!$this->serverIsUp()) {
-            bb_log("TorrServer [$this->url]: Server is down!", $this->logFile);
+            bb_log("TorrServer [$this->url]: Server is down!\n", $this->logFile);
             return false;
         }
 
@@ -137,7 +137,7 @@ class TorrServerAPI
 
         // Check connection
         if (!$this->serverIsUp()) {
-            bb_log("TorrServer [$this->url]: Server is down!", $this->logFile);
+            bb_log("TorrServer [$this->url]: Server is down!\n", $this->logFile);
             return false;
         }
 
