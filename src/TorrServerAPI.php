@@ -10,6 +10,7 @@
 namespace TorrentPier;
 
 use Curl\Curl;
+use CURLFile;
 
 use ErrorException;
 
@@ -117,10 +118,10 @@ class TorrServerAPI
             'Accept' => 'application/json',
             'Content-Type' => 'multipart/form-data'
         ]);
-        $curl->post($this->url . $this->endpoints['upload']);
-        // $curl->buildPostData(['file' => "@$path;type=$mimetype"]);
+        $curl->post($this->url . $this->endpoints['upload'], [
+            'file' => new CURLFile($path, $mimetype)
+        ]);
         $isSuccess = $curl->httpStatusCode === 200;
-        dump($curl->response);
         $curl->close();
 
         return $isSuccess;
