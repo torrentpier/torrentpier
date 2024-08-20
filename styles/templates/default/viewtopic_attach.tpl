@@ -146,9 +146,11 @@
 <table class="attach bordered med">
 	<tr class="row3">
 		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}
-        <a href="{postrow.attach.tor_reged.TORR_SERVER_M3U_LINK}" title="Download M3U file" target="_blank"><img src="{postrow.attach.tor_reged.TORR_SERVER_M3U_ICON}" width="12" height="12" border="0"></a>
-        <a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="File hashes | .torrent meta-info" target="_blank"><img src="{postrow.attach.tor_reged.FILELIST_ICON}" width="12" height="12" border="0"></a>
-        <!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
+		<!-- IF postrow.attach.tor_reged.TORR_SERVER_M3U_LINK -->
+		<a href="{postrow.attach.tor_reged.TORR_SERVER_M3U_LINK}" title="Download M3U file" target="_blank"><img src="{postrow.attach.tor_reged.TORR_SERVER_M3U_ICON}" width="12" height="12" border="0"></a>
+		<!-- ENDIF -->
+		<a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="File hashes | .torrent meta-info" target="_blank"><img src="{postrow.attach.tor_reged.FILELIST_ICON}" width="12" height="12" border="0"></a>
+		<!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
     <tr class="row4">
