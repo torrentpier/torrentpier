@@ -1267,6 +1267,7 @@ $lang['DOWNLOAD'] = '다운로드'; // this Language Variable is defined in admi
 $lang['FILESIZE'] = '파일 크기';
 $lang['VIEWED'] = '조회';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = '장\'%s\'비활성화되었으로 보는 관리,따라서 이것은 첨부 파일을 표시하지 않습니다.'; // used in Posts and PM's, replace %s with mime type
+$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 
 $lang['ATTACHMENT'] = '첨부 파일';
 $lang['ATTACHMENT_THUMBNAIL'] = '첨부 파일 Thumbnail';
@@ -1353,6 +1354,7 @@ $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
+$lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
 $lang['BT_UNREG_FROM_TRACKER'] = '제거에서 추적';
 $lang['BT_UNREGISTERED'] = 'Torrent 등록';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
