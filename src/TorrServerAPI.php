@@ -33,8 +33,7 @@ class TorrServerAPI
     private array $endpoints = [
         'playlist' => 'playlist',
         'upload' => 'torrent/upload',
-        'stream' => 'stream',
-        'isUp' => 'echo'
+        'stream' => 'stream'
     ];
 
     /**
