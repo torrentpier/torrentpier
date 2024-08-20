@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\TorrServerAPI;
+
 /**
  * Class Attach
  * @package TorrentPier\Legacy
@@ -852,6 +854,11 @@ class Attach
                     $error_msg .= '<br />';
                 }
                 $error_msg .= $lang['ALLOWED_ONLY_1ST_POST_ATTACH'];
+            }
+            // TorrServer integration
+            if ($this->extension === TORRENT_EXT) {
+                $torrServer = new TorrServerAPI();
+                $torrServer->uploadTorrent($file);
             }
             //bt end
 

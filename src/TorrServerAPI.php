@@ -37,7 +37,8 @@ class TorrServerAPI
      * @var array|string[]
      */
     private array $endpoints = [
-        'playlist' => 'playlist'
+        'playlist' => 'playlist',
+        'upload' => 'torrent/upload'
     ];
 
     /**
@@ -52,12 +53,28 @@ class TorrServerAPI
         }
 
         $this->curl = new Curl();
+        $this->curl->setTimeout($bb_cfg['torr_server']['timeout']);
         $this->url = $bb_cfg['torr_server']['host'] . ':' . $bb_cfg['torr_server']['port'] . '/';
     }
 
-    public function uploadTorrent(array $_FILES)
+    public function uploadTorrent(string $path): bool
     {
-        $this->curl->get();
+        // Set headers
+        $this->curl->setHeader('Accept', 'application/json');
+        $this->curl->setHeader('Content-Type', 'multipart/form-data');
+
+        // Make request
+        $this->curl->post($this->url . $this->endpoints['upload'], [
+            'file' => [
+                'name' => $path,
+                'type' => mime_content_type($path)
+            ]
+        ]);
+
+        $isSuccess = $this->curl->response == 200;
+        $this->curl->close();
+
+        return $isSuccess;
     }
 
     /**

@@ -114,7 +114,8 @@ $bb_cfg['torr_server'] = [
     // Read more: https://github.com/YouROK/TorrServer
     'enabled' => true,
     'host' => $domain_name,
-    'port' => 8090
+    'port' => 8090,
+    'timeout' => 5
 ];
 
 // Ocelot
