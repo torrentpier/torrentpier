@@ -147,8 +147,10 @@ class Torrent
         }
 
         // TorrServer integration
-        $torrServer = new TorrServerAPI();
-        $torrServer->removeM3U($attach_id);
+        if ($bb_cfg['torr_server']['enabled']) {
+            $torrServer = new TorrServerAPI();
+            $torrServer->removeM3U($attach_id);
+        }
 
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {
@@ -395,9 +397,11 @@ class Torrent
         }
 
         // TorrServer integration
-        $torrServer = new TorrServerAPI();
-        if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
-            $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
+        if ($bb_cfg['torr_server']['enabled']) {
+            $torrServer = new TorrServerAPI();
+            if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
+                $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
+            }
         }
 
         // Ocelot
