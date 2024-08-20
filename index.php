@@ -11,8 +11,6 @@ define('BB_SCRIPT', 'index');
 
 require __DIR__ . '/common.php';
 
-torr_server('B0A51484D14C2936BB6556DD543ACE0795DF77B0', 'playlist');
-
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
 ];

@@ -2180,32 +2180,3 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     return $data;
 }
-
-function torr_server(array|string $data, string $endpoint): bool
-{
-    global $bb_cfg;
-
-    $curl = new Curl\Curl();
-    $url = $bb_cfg['torr_server']['host'] . ':' . $bb_cfg['torr_server']['port'] . '/';
-
-    if ($endpoint == 'upload' && is_array($data)) {
-        $curl->patch($url . 'torrent/' . $endpoint, [
-            // TODO
-        ]);
-    } elseif ($endpoint == 'playlist' && is_string($data)) {
-        $curl->setHeader('Accept', 'audio/x-mpegurl');
-        $curl->get($url . $endpoint, ['hash' => $data]);
-        file_put_contents(get_attachments_dir() . '/m3u/' . $data . '.m3u', $curl->response);
-    } else {
-        bb_die('Wrong endpoint type: ' . $endpoint);
-    }
-
-    if ($curl->error) {
-        bb_die('...'); // TODO
-    }
-
-    $isSuccess = $curl->response == 200;
-    $curl->close();
-
-    return $isSuccess;
-}
