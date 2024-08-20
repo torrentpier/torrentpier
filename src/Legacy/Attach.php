@@ -855,11 +855,6 @@ class Attach
                 }
                 $error_msg .= $lang['ALLOWED_ONLY_1ST_POST_ATTACH'];
             }
-            // TorrServer integration
-            if ($this->extension === TORRENT_EXT) {
-                $torrServer = new TorrServerAPI();
-                $torrServer->uploadTorrent($file);
-            }
             //bt end
 
             // Upload File
@@ -1012,6 +1007,12 @@ class Attach
                 unlink_attach($this->attach_filename);
                 unlink_attach($this->attach_filename, MODE_THUMBNAIL);
                 $this->post_attach = false;
+            } else {
+                // TorrServer integration
+                if ($this->extension === TORRENT_EXT) {
+                    $torrServer = new TorrServerAPI();
+                    $torrServer->uploadTorrent($file);
+                }
             }
         }
     }

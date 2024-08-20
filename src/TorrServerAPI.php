@@ -71,6 +71,7 @@ class TorrServerAPI
             ]
         ]);
 
+        $this->curl->diagnose();
         $isSuccess = $this->curl->response == 200;
         $this->curl->close();
 
