@@ -82,11 +82,14 @@ class TorrServerAPI
     /**
      * Returns link to M3U file
      *
-     * @param string $infoHash
+     * @param null|string $infoHashV1
+     * @param null|string $infoHashV2
+     *
      * @return string
      */
-    public function getM3U(string $infoHash): string
+    public function getM3U(null|string $infoHashV1, null|string $infoHashV2): string
     {
-        return $this->url . $this->endpoints['playlist'] . '?hash=' . $infoHash;
+        $hash = $infoHashV1 ?? $infoHashV2;
+        return $this->url . $this->endpoints['playlist'] . '?hash=' . $hash;
     }
 }
