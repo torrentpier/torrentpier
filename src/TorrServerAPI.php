@@ -57,22 +57,23 @@ class TorrServerAPI
         $this->url = $bb_cfg['torr_server']['host'] . ':' . $bb_cfg['torr_server']['port'] . '/';
     }
 
-    public function uploadTorrent(string $path): bool
+    public function uploadTorrent(string $path, string $mimetype): bool
     {
+        // Check mimetype
+        if ($mimetype !== 'application/x-bittorrent') {
+            return false;
+        }
+
         // Set headers
         $this->curl->setHeader('Accept', 'application/json');
         $this->curl->setHeader('Content-Type', 'multipart/form-data');
 
         // Make request
-        $this->curl->post($this->url . $this->endpoints['upload'], [
-            'file' => [
-                'name' => $path,
-                'type' => mime_content_type($path)
-            ]
-        ]);
+        $cFile = curl_file_create($path, $mimetype);
+        $this->curl->post($this->url . $this->endpoints['upload'], ['file' => $cFile]);
 
-        $this->curl->diagnose();
-        $isSuccess = $this->curl->response == 200;
+        // Check response & close connect
+        $isSuccess = $this->curl->httpStatusCode === 200;
         $this->curl->close();
 
         return $isSuccess;

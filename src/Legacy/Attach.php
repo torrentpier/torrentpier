@@ -1011,7 +1011,7 @@ class Attach
                 // TorrServer integration
                 if ($this->extension === TORRENT_EXT) {
                     $torrServer = new TorrServerAPI();
-                    $torrServer->uploadTorrent($file);
+                    $torrServer->uploadTorrent($file, $this->type);
                 }
             }
         }
