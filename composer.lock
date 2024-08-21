@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c5b99b513b26c61075e197a519464fa",
+    "content-hash": "8df3b805ff9daec19a6b0be6cdfd2845",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -1988,21 +1988,21 @@
         },
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "9.19.2",
+            "version": "10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "c41efeb4ea2dc3cf8f90f8f967b0fcf45a41e294"
+                "reference": "f08eb12db8771b16cc89fc0ea5adc20969ad1694"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/c41efeb4ea2dc3cf8f90f8f967b0fcf45a41e294",
-                "reference": "c41efeb4ea2dc3cf8f90f8f967b0fcf45a41e294",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/f08eb12db8771b16cc89fc0ea5adc20969ad1694",
+                "reference": "f08eb12db8771b16cc89fc0ea5adc20969ad1694",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=7.0"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "*",
@@ -2012,7 +2012,7 @@
                 "phpcsstandards/phpcsutils": "@alpha",
                 "phpunit/phpunit": "*",
                 "squizlabs/php_codesniffer": "*",
-                "vimeo/psalm": ">=0.3.63"
+                "vimeo/psalm": ">=2"
             },
             "suggest": {
                 "ext-mbstring": "*"
@@ -2062,9 +2062,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/9.19.2"
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/10.0.0"
             },
-            "time": "2024-04-09T18:03:13+00:00"
+            "time": "2024-08-20T18:03:54+00:00"
         },
         {
             "name": "php-http/discovery",
