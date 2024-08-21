@@ -225,7 +225,6 @@ if ($tor_reged && $tor_info) {
 
         // TorrServer integration
         if ($bb_cfg['torr_server']['enabled'] && $m3u_file = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
-            dump('EE');
             $template->assign_block_vars('postrow.attach.tor_reged.tor_server', [
                 'TORR_SERVER_M3U_LINK' => $m3u_file,
                 'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
