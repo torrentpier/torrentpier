@@ -255,7 +255,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     }
 } else {
     out('- Composer dependencies are present!', 'success');
-    out("- Note: Remove 'vendor' folder if you want to re-install dependencies\n", 'info');
+    out("- Note: Remove 'vendor' folder if you want to re-install dependencies\n");
 }
 
 // Preparing ENV
