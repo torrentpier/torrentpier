@@ -39,9 +39,9 @@ and go from there. The documentation will be translated into english in the near
 * Bonus points
 * Polls system
 * PM system
-* Multilingual support
+* Multilingual support (Fully supported for now only Russia and English languages)
 * Atom feeds
-* and MUCH MORE!
+* ... and MUCH MORE!
 
 ## 🖥️ Demo
 
