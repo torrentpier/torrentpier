@@ -585,7 +585,7 @@ $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
 $bb_cfg['first_logon_redirect_url'] = 'index.php'; // Which page should the user be redirected to after registration is completed?
 $bb_cfg['terms_and_conditions_url'] = 'terms.php'; // Link to forum rules page
-$bb_cfg['tor_help_links'] = '<div class="mrg_2"><a target="_blank" class="genmed" href="https://torrentpier.com/forums/osnovnye-voprosy-po-torrentpier.10/">Полезная информация</a></div>';
+$bb_cfg['tor_help_links'] = '<div class="mrg_2"><a target="_blank" class="genmed" href="https://yoursite.com/">See $bb_cfg[\'tor_help_links\'] in config.php</a></div>';
 
 $bb_cfg['user_agreement_url'] = 'info.php?show=user_agreement';
 $bb_cfg['copyright_holders_url'] = 'info.php?show=copyright_holders';
