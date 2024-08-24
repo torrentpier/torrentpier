@@ -168,7 +168,11 @@ class TorrServerAPI
     {
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
         if (is_file($m3uFile)) {
-            return unlink($m3uFile);
+            if (unlink($m3uFile)) {
+                return true;
+            } else {
+                bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '$m3uFile'\n", $this->logFile);
+            }
         }
 
         return false;
