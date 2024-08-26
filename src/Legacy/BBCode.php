@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use function in_array;
+
 /**
  * Class BBCode
  * @package TorrentPier\Legacy
@@ -19,7 +21,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public $smilies;
+    public array $smilies;
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
@@ -251,11 +253,11 @@ class BBCode
         $url = trim($m[1]);
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
 
-        if (!preg_match('#^https?://#iu', $url) && !preg_match('/^#/', $url)) {
+        if (!preg_match('#^https?://#iu', $url) && !str_starts_with($url, '#')) {
             $url = 'http://' . $url;
         }
 
-        if (\in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
         } else {
             $link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
@@ -329,7 +331,7 @@ class BBCode
         $href = $m[1];
         $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
-        if (\in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
@@ -349,11 +351,9 @@ class BBCode
     {
         global $datastore;
 
-        if (null === $this->smilies) {
-            if (!$this->smilies = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
-                $datastore->update('smile_replacements');
-                $this->smilies = $datastore->get('smile_replacements');
-            }
+        if (!$this->smilies = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
+            $datastore->update('smile_replacements');
+            $this->smilies = $datastore->get('smile_replacements');
         }
 
         if ($this->smilies) {
