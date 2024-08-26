@@ -253,6 +253,9 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
         out('- composer.phar not found', 'error');
         exit;
     }
+} else {
+    out('- Composer dependencies are present!', 'success');
+    out("- Note: Remove 'vendor' folder if you want to re-install dependencies\n");
 }
 
 // Preparing ENV
