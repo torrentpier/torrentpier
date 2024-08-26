@@ -248,27 +248,10 @@ class BBCode
      */
     private function url_callback(array $m): string
     {
-        global $bb_cfg;
-
         $url = trim($m[1]);
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
-        $url_parse = parse_url($url);
 
-        if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
-            if (preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
-                $url = FULL_URL . $url;
-            } else {
-                $url = 'http://' . $url;
-            }
-        }
-
-        if (in_array($url_parse['host'] ?? null, $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
-            $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
-        } else {
-            $link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
-        }
-
-        return $link;
+        return $this->nofollow_url($url, $url_name);
     }
 
     /**
@@ -330,19 +313,11 @@ class BBCode
      */
     private function make_url_clickable_callback(array $m): string
     {
-        global $bb_cfg;
-
         $max_len = 70;
         $href = $m[1];
         $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
-        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
-            $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
-        } else {
-            $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
-        }
-
-        return $link;
+        return $this->nofollow_url($href, $name);
     }
 
     /**
@@ -394,5 +369,25 @@ class BBCode
     private function tidy(string $text): string
     {
         return tidy_repair_string($text, $this->tidy_cfg, 'utf8');
+    }
+
+    /**
+     * Nofollow links handling
+     *
+     * @param string $href
+     * @param string $name
+     * @return string
+     */
+    private function nofollow_url(string $href, string $name): string
+    {
+        global $bb_cfg;
+
+        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+            $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
+        } else {
+            $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
+        }
+
+        return $link;
     }
 }
