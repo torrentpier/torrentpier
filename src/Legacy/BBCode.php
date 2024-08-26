@@ -254,14 +254,13 @@ class BBCode
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
         $url_parse = parse_url($url);
 
-        if (!isset($url_parse['scheme'])) {
-            if (!isset($url_parse['path']) || !preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
-                $url = 'http://' . $url;
-            } else {
+        if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
+            if (preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
                 $url = FULL_URL . $url;
+            } else {
+                $url = 'http://' . $url;
             }
         }
-        dump($url);
 
         if (in_array($url_parse['host'] ?? null, $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
