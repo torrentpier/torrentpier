@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Dev;
 
+use TorrentPier\Dev\Handlers\Whoops;
+
 use TorrentPier\Dev\Traits\EnvironmentTrait;
 use TorrentPier\Dev\Traits\ShowingErrorsTrait;
 
@@ -30,6 +32,16 @@ final class Dev
         } else {
             self::enableShowingErrors();
         }
+
+        $whoops = new Whoops();
+
+        if (!self::$isProduction) {
+            $whoops->showOnPage();
+            $whoops->showInBrowserConsole();
+            $whoops->showInLogs();
+        }
+
+        $whoops->register();
     }
 
     public static function log(string $message, string $file, $level)
