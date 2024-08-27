@@ -78,20 +78,20 @@
         },
         {
             "name": "arokettu/is-resource",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/is-resource.git",
-                "reference": "1143639fb55e1430b518acda273c84c9fa98ff7b"
+                "reference": "6a4966bf4608c69d20b7bf01670b49901a51eb9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/is-resource/zipball/1143639fb55e1430b518acda273c84c9fa98ff7b",
-                "reference": "1143639fb55e1430b518acda273c84c9fa98ff7b",
+                "url": "https://api.github.com/repos/arokettu/is-resource/zipball/6a4966bf4608c69d20b7bf01670b49901a51eb9d",
+                "reference": "6a4966bf4608c69d20b7bf01670b49901a51eb9d",
                 "shasum": ""
             },
             "require": {
-                "php": ">= 5.3 < 8.4"
+                "php": ">= 5.3 < 8.5"
             },
             "type": "library",
             "autoload": {
@@ -114,7 +114,7 @@
                     "role": "developer"
                 }
             ],
-            "description": "Future compatible is_resource() and get_resource_type() that can understand opaque objects",
+            "description": "Future compatible is_resource() and get_resource_type() that can understand objects that replaced earlier resources",
             "homepage": "https://sandfox.dev/php/is-resource.html",
             "keywords": [
                 "compatibility",
@@ -130,11 +130,12 @@
                 "sockets"
             ],
             "support": {
+                "chat": "https://gitter.im/arokettu/community",
                 "docs": "https://is-resource.readthedocs.io/",
                 "issues": "https://gitlab.com/sandfox/is-resource/-/issues",
                 "source": "https://gitlab.com/sandfox/is-resource"
             },
-            "time": "2023-08-28T12:32:54+00:00"
+            "time": "2024-08-27T04:34:45+00:00"
         },
         {
             "name": "arokettu/monsterid",
@@ -2534,16 +2535,16 @@
         },
         {
             "name": "psr/log",
-            "version": "3.0.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
+                "reference": "79dff0b268932c640297f5208d6298f71855c03e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001",
-                "reference": "fe5ea303b0887d5caefd3d431c3e61ad47037001",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/79dff0b268932c640297f5208d6298f71855c03e",
+                "reference": "79dff0b268932c640297f5208d6298f71855c03e",
                 "shasum": ""
             },
             "require": {
@@ -2578,9 +2579,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/3.0.0"
+                "source": "https://github.com/php-fig/log/tree/3.0.1"
             },
-            "time": "2021-07-14T16:46:02+00:00"
+            "time": "2024-08-21T13:31:24+00:00"
         },
         {
             "name": "psr/simple-cache",
