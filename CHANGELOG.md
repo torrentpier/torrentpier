@@ -14,6 +14,7 @@
 - Added showing releaser stats in profile [\#1568](https://github.com/torrentpier/torrentpier/pull/1568) ([belomaxorka](https://github.com/belomaxorka))
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
+- BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `md5()` deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
 - Increased `USEREMAIL_MAX_LENGTH` [\#1566](https://github.com/torrentpier/torrentpier/pull/1566) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1570](https://github.com/torrentpier/torrentpier/pull/1570), [\#1571](https://github.com/torrentpier/torrentpier/pull/1571), [\#1575](https://github.com/torrentpier/torrentpier/pull/1575), [\#1589](https://github.com/torrentpier/torrentpier/pull/1589), [\#1592](https://github.com/torrentpier/torrentpier/pull/1592), [\#1605](https://github.com/torrentpier/torrentpier/pull/1605), [\#1611](https://github.com/torrentpier/torrentpier/pull/1611), [\#1612](https://github.com/torrentpier/torrentpier/pull/1612) ([belomaxorka](https://github.com/belomaxorka))

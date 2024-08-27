@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use function in_array;
+
 /**
  * Class BBCode
  * @package TorrentPier\Legacy
@@ -19,7 +21,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public $smilies;
+    public array $smilies;
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
@@ -246,22 +248,17 @@ class BBCode
      */
     private function url_callback(array $m): string
     {
-        global $bb_cfg;
-
         $url = trim($m[1]);
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
+        $url_parse = parse_url($url);
 
-        if (!preg_match('#^https?://#iu', $url) && !preg_match('/^#/', $url)) {
-            $url = 'http://' . $url;
+        if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
+            if (!preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
+                $url = 'http://' . $url;
+            }
         }
 
-        if (\in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
-            $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
-        } else {
-            $link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
-        }
-
-        return $link;
+        return $this->nofollow_url($url, $url_name);
     }
 
     /**
@@ -323,19 +320,11 @@ class BBCode
      */
     private function make_url_clickable_callback(array $m): string
     {
-        global $bb_cfg;
-
         $max_len = 70;
         $href = $m[1];
         $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
-        if (\in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
-            $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
-        } else {
-            $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
-        }
-
-        return $link;
+        return $this->nofollow_url($href, $name);
     }
 
     /**
@@ -349,11 +338,9 @@ class BBCode
     {
         global $datastore;
 
-        if (null === $this->smilies) {
-            if (!$this->smilies = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
-                $datastore->update('smile_replacements');
-                $this->smilies = $datastore->get('smile_replacements');
-            }
+        if (!$this->smilies = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
+            $datastore->update('smile_replacements');
+            $this->smilies = $datastore->get('smile_replacements');
         }
 
         if ($this->smilies) {
@@ -389,5 +376,25 @@ class BBCode
     private function tidy(string $text): string
     {
         return tidy_repair_string($text, $this->tidy_cfg, 'utf8');
+    }
+
+    /**
+     * Nofollow links handling
+     *
+     * @param string $href
+     * @param string $name
+     * @return string
+     */
+    private function nofollow_url(string $href, string $name): string
+    {
+        global $bb_cfg;
+
+        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+            $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
+        } else {
+            $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
+        }
+
+        return $link;
     }
 }
