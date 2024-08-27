@@ -250,6 +250,13 @@ class BBCode
     {
         $url = trim($m[1]);
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
+        $url_parse = parse_url($url);
+
+        if (!isset($url_parse['scheme']) && isset($url_parse['path'])) {
+            if (!preg_match('/^([a-zA-Z0-9_\-\.]+\.php)(\?[^#]*)?$/', $url_parse['path'])) {
+                $url = 'http://' . $url;
+            }
+        }
 
         return $this->nofollow_url($url, $url_name);
     }
