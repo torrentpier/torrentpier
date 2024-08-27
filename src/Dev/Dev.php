@@ -9,11 +9,11 @@
 
 namespace TorrentPier\Dev;
 
-use Monolog\Level;
 use Whoops\Run;
 
-use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Monolog\Level;
+use Monolog\Handler\StreamHandler;
 
 use TorrentPier\Dev\Traits\EnvironmentTrait;
 use TorrentPier\Dev\Traits\ShowingErrorsTrait;
