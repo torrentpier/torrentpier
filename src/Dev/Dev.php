@@ -34,6 +34,5 @@ final class Dev
 
     public static function log(string $message, string $file, $level)
     {
-
     }
 }

@@ -15,5 +15,4 @@ namespace TorrentPier\Dev\Handlers;
  */
 class Whoops
 {
-
 }
