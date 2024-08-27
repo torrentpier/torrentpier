@@ -31,4 +31,9 @@ final class Dev
             self::enableShowingErrors();
         }
     }
+
+    public static function log(string $message, string $file, $level)
+    {
+
+    }
 }
