@@ -9,7 +9,10 @@
 
 namespace TorrentPier\Dev;
 
-use TorrentPier\Dev\Handlers\Whoops;
+use Whoops\Run;
+
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 use TorrentPier\Dev\Traits\EnvironmentTrait;
 use TorrentPier\Dev\Traits\ShowingErrorsTrait;
@@ -23,6 +26,13 @@ final class Dev
     use EnvironmentTrait, ShowingErrorsTrait;
 
     /**
+     * Whoops instance
+     *
+     * @var Run
+     */
+    private static Run $whoops;
+
+    /**
      * Dev constructor
      */
     public static function startup(): void
@@ -33,19 +43,22 @@ final class Dev
             self::enableShowingErrors();
         }
 
-        $whoops = new Whoops();
-
-        if (!self::$isProduction) {
-            $whoops->showOnPage();
-            $whoops->showInBrowserConsole();
-            $whoops->showInLogs();
-        }
-
-        $whoops->register();
+        self::$whoops = new Run();
+        // TODO ...
+        self::$whoops->register();
     }
 
-    public static function log(string $message, string $file, $level)
+    /**
+     * Log something... >..<
+     *
+     * @param string $message
+     * @param string $file
+     * @return void
+     */
+    public static function log(string $message, string $file): void
     {
-
+        $log = new Logger(APP_NAME);
+        $log->pushHandler(new StreamHandler(LOG_DIR . '/' . $file . '.' . LOG_EXT));
+        $log->error($message);
     }
 }
