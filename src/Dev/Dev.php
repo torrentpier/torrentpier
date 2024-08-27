@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Dev;
 
+use Monolog\Level;
 use Whoops\Run;
 
 use Monolog\Handler\StreamHandler;
@@ -49,16 +50,17 @@ final class Dev
     }
 
     /**
-     * Log something... >..<
+     * Log something into target file
      *
      * @param string $message
      * @param string $file
+     * @param Level $level
      * @return void
      */
-    public static function log(string $message, string $file): void
+    public static function log(string $message, string $file, Level $level = Level::Debug): void
     {
         $log = new Logger(APP_NAME);
         $log->pushHandler(new StreamHandler(LOG_DIR . '/' . $file . '.' . LOG_EXT));
-        $log->error($message);
+        $log->log($level, $message);
     }
 }
