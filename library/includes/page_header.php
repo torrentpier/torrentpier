@@ -162,7 +162,7 @@ $template->assign_vars([
     'U_OPTIONS' => 'profile.php?mode=editprofile',
     'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
     'U_PROFILE' => PROFILE_URL . $userdata['user_id'],
-    'U_READ_PM' => PM_URL . "?folder=inbox" . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&p={$userdata['user_newest_pm_id']}" : ''),
+    'U_READ_PM' => PM_URL . "?folder=inbox" . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&" . POST_POST_URL . "={$userdata['user_newest_pm_id']}" : ''),
     'U_REGISTER' => 'profile.php?mode=register',
     'U_SEARCH' => 'search.php',
     'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
