@@ -66,7 +66,7 @@ For installation, you need to follow a few simple steps.
 
 ### Quick ☕️
 
-1. [Download latest](https://github.com/torrentpier/torrentpier/archive/refs/heads/master.zip) version of TorrentPier
+1. [Download latest](https://github.com/torrentpier/torrentpier/archive/refs/heads/master.zip) version of TorrentPier (or use `sudo git clone https://github.com/torrentpier/torrentpier.git`)
 2. Open a folder with extracted TorrentPier (`cd /path/to/public_html`)
 3. After run `php install.php`
 4. Voila! ✨
