@@ -110,8 +110,12 @@ class TorrServerAPI
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
 
         // Make stream call to store torrent in memory
-        if (!$this->getStream($hash)) {
-            return false;
+        for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+            if ($this->getStream($hash)) {
+                break;
+            } elseif ($i == $max_try) {
+                return false;
+            }
         }
 
         $curl = new Curl();
@@ -124,7 +128,12 @@ class TorrServerAPI
             $validResponse = false;
             $responseLines = explode("\n", $curl->response);
             foreach ($responseLines as $line) {
-                if (str_contains($line, '#EXTINF')) {
+                $line = trim($line);
+                if ($line === '') {
+                    continue;
+                }
+
+                if (str_starts_with($line, '#EXTINF')) {
                     $validResponse = true;
                     break;
                 }
