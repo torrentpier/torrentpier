@@ -793,7 +793,7 @@ class Template
 
         for ($i = 0; $i < $tokens_cnt; $i++) {
             $token = &$tokens[$i];
-            $token = $token ?? '';
+            $token ??= '';
 
             switch ($token) {
                 case 'eq':
