@@ -799,47 +799,61 @@ class Template
                 case 'eq':
                     $token = '==';
                     break;
+
                 case 'ne':
                 case 'neq':
                     $token = '!=';
                     break;
+
                 case 'lt':
                     $token = '<';
                     break;
+
                 case 'le':
                 case 'lte':
                     $token = '<=';
                     break;
+
                 case 'gt':
                     $token = '>';
                     break;
+
                 case 'ge':
                 case 'gte':
                     $token = '>=';
                     break;
+
                 case 'and':
                     $token = '&&';
                     break;
+
                 case 'or':
                     $token = '||';
                     break;
+
                 case 'not':
                     $token = '!';
                     break;
+
                 case 'mod':
                     $token = '%';
                     break;
+
                 case '(':
                     $is_arg_stack[] = $i;
                     break;
+
                 case 'is':
                     $is_arg_start = ($tokens[$i - 1] == ')') ? array_pop($is_arg_stack) : $i - 1;
                     $is_arg = implode('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
 
                     $new_tokens = $this->_parse_is_expr($is_arg, array_slice($tokens, $i + 1));
+
                     array_splice($tokens, $is_arg_start, is_countable($tokens) ? count($tokens) : 0, $new_tokens);
+
                     $i = $is_arg_start;
                     break;
+
                 default:
                     $pattern = '@^
 					  (                                      #  1
@@ -965,11 +979,10 @@ class Template
      *
      * @param $filename
      * @param $code
-     * @return false|int
      */
     public function write_cache($filename, $code)
     {
-        return file_write($code, $filename, max_size: false, replace_content: true);
+        file_write($code, $filename, max_size: false, replace_content: true);
     }
 
     public function xs_startup()
