@@ -982,7 +982,7 @@ class Template
      */
     public function write_cache($filename, $code)
     {
-        file_write($code, $filename, max_size: false, replace_content: true);
+        return file_write($code, $filename, max_size: false, replace_content: true);
     }
 
     public function xs_startup()
