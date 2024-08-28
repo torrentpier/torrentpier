@@ -66,9 +66,9 @@ For installation, you need to follow a few simple steps.
 
 ### Quick ☕️
 
-1. [Download latest](https://github.com/torrentpier/torrentpier/archive/refs/heads/master.zip) version of TorrentPier (or use `sudo git clone https://github.com/torrentpier/torrentpier.git`)
-2. Open a folder with extracted TorrentPier (`cd /path/to/public_html`)
-3. After run `php install.php`
+1. Open a root folder of your web-server (`cd /path/to/public_html`)
+2. [Download latest](https://github.com/torrentpier/torrentpier/archive/refs/heads/master.zip) version of TorrentPier (or use `sudo git clone https://github.com/torrentpier/torrentpier.git`)
+3. After, run `php install.php` and follow the given steps
 4. Voila! ✨
 
 ### Manual 🔩
@@ -76,9 +76,9 @@ For installation, you need to follow a few simple steps.
 1. Install [Composer](https://getcomposer.org/)
 2. Run `composer create-project torrentpier/torrentpier`
 3. [Check our system requirements](#-requirements)
-4. After run `composer install` on the project directory
+4. After, run `composer install` on the project directory
 5. Create database and import dump located at `install/sql/mysql.sql`
-6. Edit database configuration settings in the environment (`.env.example`), after rename to `.env`
+6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
 7. Provide write permissions to the specified folders:
    * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
    * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
