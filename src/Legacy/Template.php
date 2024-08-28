@@ -963,11 +963,11 @@ class Template
     /**
      * Write cache to disk
      *
-     * @param $filename
+     * @param string $filename
      * @param $code
      * @return false|int
      */
-    public function write_cache($filename, $code)
+    public function write_cache(string $filename, $code)
     {
         return file_write($code, $filename, max_size: false, replace_content: true);
     }
