@@ -12,7 +12,7 @@ define('BB_SCRIPT', 'show_m3u');
 require __DIR__ . '/common.php';
 
 if (!$bb_cfg['torr_server']['enabled']) {
-    bb_die($lang['MODULE_OFF']);
+    redirect('index.php');
 }
 
 // Valid file formats
