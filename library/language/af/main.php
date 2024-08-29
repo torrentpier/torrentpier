@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Kies aksie';
 $lang['CLEAR'] = 'Verwyder';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'onbekend';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'volgende';
 $lang['PREVIOUS_PAGE'] = 'vorige';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'filesize';
 $lang['VIEWED'] = 'beskou';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Die uitbreiding \'%s\' is gedeaktiveer deur \'n direksie admin, daarom word hierdie aanhangsel nie vertoon nie.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'aanhegsels';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Bylae Miniatuur';
