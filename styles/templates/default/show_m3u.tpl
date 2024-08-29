@@ -1,3 +1,5 @@
+<h1 class="pagetitle">{PAGE_TITLE}</h1>
+
 <table class="forumline">
     <thead>
     <tr>

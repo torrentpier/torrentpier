@@ -24,6 +24,7 @@ $validFormats = [
 // Start session management
 $user->session_start(['req_login' => $bb_cfg['torr_server']['disable_for_guest']]);
 
+// Disable robots indexing
 $page_cfg['allow_robots'] = false;
 
 // Check attach_id
@@ -36,6 +37,7 @@ if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
+// Parse M3U file
 $m3uParser = new M3uParser\M3uParser();
 $m3uParser->addDefaultTags();
 $m3uData = $m3uParser->parseFile($m3uFile);
@@ -45,19 +47,23 @@ foreach ($m3uData as $entry) {
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
-    $streamLink = $entry->getPath();
-    $title = $lang['UNKNOWN'];
-
     // Validate URL
+    $streamLink = $entry->getPath();
     if (!filter_var($streamLink, FILTER_VALIDATE_URL)) {
         continue;
     }
 
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
+        // #EXTINF tag
         if ($extTag == $extTag instanceof \M3uParser\Tag\ExtInf) {
             $title = $extTag->getTitle();
         }
+    }
+
+    // Validate title
+    if (!isset($title)) {
+        continue;
     }
 
     // Validate file extension
@@ -75,6 +81,7 @@ foreach ($m3uData as $entry) {
 }
 
 $template->assign_vars([
+    'PAGE_TITLE' => '123',
     'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
 ]);
 
