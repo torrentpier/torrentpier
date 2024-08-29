@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Zgjidhni veprim';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'I panjohur';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'Tjetër';
 $lang['PREVIOUS_PAGE'] = 'E mëparshme';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Si kartela';
 $lang['VIEWED'] = 'Shihet';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Zgjerimi \'%s\' ishte çaktivizuar nga një bord admin, prandaj kjo Shtojcë nuk është shfaqur.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Të bashkëngjitni skedarë';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Shtojcë Thumbnail';
