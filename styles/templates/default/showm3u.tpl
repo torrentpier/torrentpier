@@ -1,7 +1,8 @@
 <!-- BEGIN m3ulist -->
-<!-- IF IS_AUDIO -->
-<audio id="player" src="{m3ulist.STREAM_LINK}" controls></audio>
+{m3ulist.TITLE}
+<!-- IF m3ulist.IS_AUDIO -->
+<audio class="player" src="{m3ulist.STREAM_LINK}" controls></audio><br>
 <!-- ELSE -->
-<video id="player" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
+<video class="player" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
 <!-- ENDIF -->
 <!-- END m3ulist -->

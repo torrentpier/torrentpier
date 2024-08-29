@@ -14,7 +14,7 @@ require __DIR__ . '/common.php';
 // Valid file formats
 $validFormats = [
     'audio' => ['mp3', 'flac', 'wav'],
-    'video' => ['mp4', 'mkv']
+    'video' => ['mp4', 'mkv', 'avi']
 ];
 
 // Start session management
