@@ -1269,6 +1269,7 @@ $lang['VIEWED'] = 'Viewed';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivated by an board admin, therefore this Attachment is not displayed.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 $lang['SHOW_M3U_FILE'] = 'Show .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
 $lang['STREAM'] = 'Stream';
 $lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
