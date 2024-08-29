@@ -19,7 +19,7 @@
             <!-- IF m3ulist.IS_VALID --><hr><!-- IF m3ulist.IS_AUDIO -->
             <audio preload="none" src="{m3ulist.STREAM_LINK}" controls></audio>
             <!-- ELSE -->
-            <video width="500" height="auto" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
+            <video preload="none" width="500" height="auto" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
             <!-- ENDIF --><!-- ENDIF -->
         </td>
     </tr>
