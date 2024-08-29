@@ -22,7 +22,7 @@ $validFormats = [
 ];
 
 // Start session management
-$user->session_start();
+$user->session_start(['req_login' => true]);
 
 $page_cfg['allow_robots'] = false;
 
