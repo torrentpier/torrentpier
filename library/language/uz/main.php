@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'tanlang harakat';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'noma\'lum';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'Keyingi';
 $lang['PREVIOUS_PAGE'] = 'avvalgi';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Fayl hajmi';
 $lang['VIEWED'] = 'Ko\'rib chiqildi';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Extension "%s" Shuning uchun, bu ilova ko\'rsatilmasa, bir taxta admin o\'chirilgan edi.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Qo\'shilgan';
 $lang['ATTACHMENT_THUMBNAIL'] = 'ilova Thumbnail';
