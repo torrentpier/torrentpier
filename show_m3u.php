@@ -32,13 +32,13 @@ if (!$attach_id = request_var('attach_id', 0)) {
 }
 
 // Check m3u file exist
-if (!$m3u_file = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
+if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
 $m3uParser = new M3uParser\M3uParser();
 $m3uParser->addDefaultTags();
-$m3uData = $m3uParser->parseFile($m3u_file);
+$m3uData = $m3uParser->parseFile($m3uFile);
 
 $filesCount = 0;
 foreach ($m3uData as $entry) {
@@ -69,7 +69,7 @@ foreach ($m3uData as $entry) {
         'ROW_CLASS' => $rowClass,
         'IS_VALID' => $isValidFormat,
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
-        'STREAM_LINK' => $isValidFormat ? $streamLink : $m3u_file,
+        'STREAM_LINK' => $isValidFormat ? $streamLink : $m3uFile,
         'TITLE' => $title,
     ]);
 }
