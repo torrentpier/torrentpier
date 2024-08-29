@@ -74,7 +74,8 @@ foreach ($m3uData as $entry) {
         'ROW_CLASS' => $rowClass,
         'IS_VALID' => $isValidFormat,
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
-        'STREAM_LINK' => $isValidFormat ? $streamLink : $m3uFile,
+        'STREAM_LINK' => $streamLink,
+        'M3U_DL_LINK' => $m3uFile,
         'TITLE' => $title,
     ]);
 }
