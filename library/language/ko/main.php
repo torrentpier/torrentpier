@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = '선택 작업';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = '알 수 없음';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = '다음';
 $lang['PREVIOUS_PAGE'] = '이전';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = '파일 크기';
 $lang['VIEWED'] = '조회';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = '장\'%s\'비활성화되었으로 보는 관리,따라서 이것은 첨부 파일을 표시하지 않습니다.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = '첨부 파일';
 $lang['ATTACHMENT_THUMBNAIL'] = '첨부 파일 Thumbnail';
