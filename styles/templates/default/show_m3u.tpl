@@ -14,6 +14,7 @@
         <td>{m3ulist.ROW_NUMBER}</td>
         <td>{m3ulist.TITLE}</td>
         <td>
+            <a href="#" onclick="return false;" class="copyElement" title="Copy to clipboard" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>
             <!-- IF m3ulist.IS_VALID -->
             <!-- IF m3ulist.IS_AUDIO -->
             <audio preload="none" src="{m3ulist.STREAM_LINK}" controls></audio>
