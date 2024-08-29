@@ -14,7 +14,11 @@
         <td>{m3ulist.ROW_NUMBER}</td>
         <td>{m3ulist.TITLE}</td>
         <td>
-            <a href="#" onclick="return false;" class="copyElement" title="Copy to clipboard" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>
+            <a href="#" onclick="return false;" class="copyElement" title="Copy to clipboard"
+               data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>
+            <hr>
+            <a class="button" target="_blank" href="{m3ulist.M3U_DL_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
+            <hr>
             <!-- IF m3ulist.IS_VALID -->
             <!-- IF m3ulist.IS_AUDIO -->
             <audio preload="none" src="{m3ulist.STREAM_LINK}" controls></audio>
@@ -22,7 +26,7 @@
             <video width="500" height="auto" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
             <!-- ENDIF -->
             <!-- ELSE -->
-            <a target="_blank" href="{m3ulist.STREAM_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
+            <a target="_blank" href="{m3ulist.M3U_DL_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
             <!-- ENDIF -->
         </td>
     </tr>

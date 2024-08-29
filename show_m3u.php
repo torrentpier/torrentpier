@@ -41,9 +41,10 @@ if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
 $m3uParser = new M3uParser\M3uParser();
 $m3uParser->addDefaultTags();
 $m3uData = $m3uParser->parseFile($m3uFile);
-$filesCount = $m3uData->count();
 
+$filesCount = 0;
 foreach ($m3uData as $entry) {
+    $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
     // Validate URL
