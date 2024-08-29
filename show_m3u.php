@@ -41,9 +41,9 @@ if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
 $m3uParser = new M3uParser\M3uParser();
 $m3uParser->addDefaultTags();
 $m3uData = $m3uParser->parseFile($m3uFile);
+$filesCount = $m3uData->count();
 
 foreach ($m3uData as $entry) {
-    $filesCount = $m3uData->count();
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
     // Validate URL
@@ -67,12 +67,11 @@ foreach ($m3uData as $entry) {
 
     // Validate file extension
     $getExtension = pathinfo($title, PATHINFO_EXTENSION);
-    $isValidFormat = in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video']));
 
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
         'ROW_CLASS' => $rowClass,
-        'IS_VALID' => $isValidFormat,
+        'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => $m3uFile,
