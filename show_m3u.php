@@ -22,7 +22,7 @@ $validFormats = [
 ];
 
 // Start session management
-$user->session_start(['req_login' => true]);
+$user->session_start(['req_login' => $bb_cfg['torr_server']['disable_for_guest']]);
 
 $page_cfg['allow_robots'] = false;
 
