@@ -5,7 +5,7 @@
     <tr>
         <th>#</th>
         <th>{FILES_COUNT}</th>
-        <th></th>
+        <th>{L_STREAM}</th>
     </tr>
     </thead>
     <!-- BEGIN m3ulist -->
