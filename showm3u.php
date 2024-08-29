@@ -11,11 +11,10 @@ define('BB_SCRIPT', 'show_m3u');
 
 require __DIR__ . '/common.php';
 
-$valid_formats = [
-    // Audio
-    'mp3', 'flac', 'wav',
-    // Video
-    'mp4', 'mkv'
+// Valid file formats
+$validFormats = [
+    'audio' => ['mp3', 'flac', 'wav'],
+    'video' => ['mp4', 'mkv']
 ];
 
 // Start session management
@@ -46,7 +45,7 @@ foreach ($m3uData as $entry) {
 
     // Validate file extension
     $getExtension = pathinfo(parse_url($streamLink, PHP_URL_PATH), PATHINFO_EXTENSION);
-    $isValidFormat = in_array($getExtension, $valid_formats);
+    $isValidFormat = in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video']));
 
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
@@ -56,6 +55,7 @@ foreach ($m3uData as $entry) {
     }
 
     $template->assign_block_vars('m3ulist', [
+        'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $isValidFormat ? $streamLink : '', // TODO: Download M3U file
         'TITLE' => $title,
     ]);
