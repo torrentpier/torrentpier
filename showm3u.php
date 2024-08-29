@@ -24,6 +24,8 @@ $validFormats = [
 // Start session management
 $user->session_start();
 
+$page_cfg['allow_robots'] = false;
+
 // Check attach_id
 if (!$attach_id = request_var('attach_id', 0)) {
     bb_die($lang['INVALID_ATTACH_ID']);
@@ -38,10 +40,10 @@ $m3uParser = new M3uParser\M3uParser();
 $m3uParser->addDefaultTags();
 $m3uData = $m3uParser->parseFile($m3u_file);
 
-$files_count = 0;
+$filesCount = 0;
 foreach ($m3uData as $entry) {
-    $files_count++;
-    $row_class = ($files_count % 2) ? 'row1' : 'row2';
+    $filesCount++;
+    $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
     $streamLink = $entry->getPath();
     $title = $lang['UNKNOWN'];
@@ -63,8 +65,8 @@ foreach ($m3uData as $entry) {
     $isValidFormat = in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video']));
 
     $template->assign_block_vars('m3ulist', [
-        'ROW_NUMBER' => $files_count,
-        'ROW_CLASS' => $row_class,
+        'ROW_NUMBER' => $filesCount,
+        'ROW_CLASS' => $rowClass,
         'IS_VALID' => $isValidFormat,
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $isValidFormat ? $streamLink : $m3u_file,
@@ -73,7 +75,7 @@ foreach ($m3uData as $entry) {
 }
 
 $template->assign_vars([
-    'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($files_count, 'files')),
+    'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
 ]);
 
 print_page('showm3u.tpl');
