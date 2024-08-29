@@ -14,9 +14,9 @@
         <td>
             <!-- IF m3ulist.IS_VALID -->
             <!-- IF m3ulist.IS_AUDIO -->
-            <audio preload="none" class="player" src="{m3ulist.STREAM_LINK}" controls></audio>
+            <audio preload="none" src="{m3ulist.STREAM_LINK}" controls></audio>
             <!-- ELSE -->
-            <video width="500" height="auto" class="player" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
+            <video width="500" height="auto" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
             <!-- ENDIF -->
             <!-- ELSE -->
             <a href="{m3ulist.STREAM_LINK}">DL</a>
