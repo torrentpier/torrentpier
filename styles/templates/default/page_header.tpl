@@ -34,7 +34,6 @@
 <meta name="generator" content="TorrentPier">
 <meta name="version" content="{$bb_cfg['tp_version']}">
 
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/oldbrowserdetector.min.js"></script>
