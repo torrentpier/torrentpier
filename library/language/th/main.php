@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'เลือกการกระทำ';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'ไม่ทราบ';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'ต่อไป';
 $lang['PREVIOUS_PAGE'] = 'ก่อนหน้านี้';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'ขนาดแฟ้มได้';
 $lang['VIEWED'] = 'ดู';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'ส่วนขยายแฟ้ม\'%s\'ถูกปิดการใช้งานโดยการแอดมิน,ดังนั้นนี่คือสิ่งที่แนบมาด้วยไม่ถูกแสดงให้เห็น'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'สิ่งที่แนบมาด้วย';
 $lang['ATTACHMENT_THUMBNAIL'] = 'สิ่งที่แนบมาด้วยภาพตัวอย่าง';
