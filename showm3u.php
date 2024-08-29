@@ -43,16 +43,16 @@ foreach ($m3uData as $entry) {
         continue;
     }
 
-    // Validate file extension
-    $getExtension = pathinfo(parse_url($streamLink, PHP_URL_PATH), PATHINFO_EXTENSION);
-    $isValidFormat = in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video']));
-
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
         if ($extTag == $extTag instanceof \M3uParser\Tag\ExtInf) {
             $title = $extTag->getTitle();
         }
     }
+
+    // Validate file extension
+    $getExtension = pathinfo($title, PATHINFO_EXTENSION);
+    $isValidFormat = in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video']));
 
     $template->assign_block_vars('m3ulist', [
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
