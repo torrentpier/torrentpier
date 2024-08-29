@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Vyberte akcie';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Neznáma';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'Ďalej';
 $lang['PREVIOUS_PAGE'] = 'Predchádzajúce';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Pozrieť';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Rozšírenie \'%s" bol deaktivovaný on board admin, preto túto Prílohu nie je zobrazený.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Prílohy';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Príloha Miniatúry';
