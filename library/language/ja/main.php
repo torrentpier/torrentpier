@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = '選択行動';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = '不明';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = '次へ';
 $lang['PREVIOUS_PAGE'] = '前';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = '閲覧';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = '拡張子によ%s"が無効化される板の管理者は、そのためこの添付が表示されません。'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = '添付';
 $lang['ATTACHMENT_THUMBNAIL'] = 'サムネイルの添付';
