@@ -29,7 +29,7 @@
     <!-- END m3ulist -->
     <tfoot>
     <tr>
-        <td class="catBottom warnColor1" colspan="4">TODO</td>
+        <td class="catBottom warnColor1" colspan="4">{L_M3U_NOTICE}</td>
     </tr>
     </tfoot>
 </table>

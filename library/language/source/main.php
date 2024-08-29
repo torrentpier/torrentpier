@@ -1270,6 +1270,7 @@ $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivate
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 $lang['SHOW_M3U_FILE'] = 'Show .m3u file';
 $lang['STREAM'] = 'Stream';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Attachments';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Attachment Thumbnail';
