@@ -66,6 +66,9 @@
 
 <script type="text/javascript">new ClipboardJS('.copyElement');</script>
 
+<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+<script>const player = new Plyr('#player');</script>
+
 <!-- IF ONLOAD_FOCUS_ID -->
 <script type="text/javascript">
 $p('{ONLOAD_FOCUS_ID}').focus();
