@@ -33,3 +33,13 @@
     </tr>
     </tfoot>
 </table>
+
+<!--bottom_info-->
+<div class="bottom_info">
+    <div class="spacer_8"></div>
+    <div id="timezone">
+        <p>{CURRENT_TIME}</p>
+        <p>{S_TIMEZONE}</p>
+    </div>
+    <div class="clear"></div>
+</div><!--/bottom_info-->
