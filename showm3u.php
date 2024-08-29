@@ -38,7 +38,11 @@ $m3uParser = new M3uParser\M3uParser();
 $m3uParser->addDefaultTags();
 $m3uData = $m3uParser->parseFile($m3u_file);
 
+$files_count = 0;
 foreach ($m3uData as $entry) {
+    $files_count++;
+    $row_class = ($files_count % 2) ? 'row1' : 'row2';
+
     $streamLink = $entry->getPath();
     $title = $lang['UNKNOWN'];
 
@@ -59,11 +63,17 @@ foreach ($m3uData as $entry) {
     $isValidFormat = in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video']));
 
     $template->assign_block_vars('m3ulist', [
+        'ROW_NUMBER' => $files_count,
+        'ROW_CLASS' => $row_class,
         'IS_VALID' => $isValidFormat,
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $isValidFormat ? $streamLink : $m3u_file,
         'TITLE' => $title,
     ]);
 }
+
+$template->assign_vars([
+    'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($files_count, 'files')),
+]);
 
 print_page('showm3u.tpl');
