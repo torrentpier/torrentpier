@@ -3,7 +3,7 @@
     <tr>
         <th>#</th>
         <th>{FILES_COUNT}</th>
-        <th>{L_SIZE}</th>
+        <th></th>
     </tr>
     </thead>
     <!-- BEGIN m3ulist -->
