@@ -42,9 +42,8 @@ $m3uParser = new M3uParser\M3uParser();
 $m3uParser->addDefaultTags();
 $m3uData = $m3uParser->parseFile($m3uFile);
 
-$filesCount = 0;
 foreach ($m3uData as $entry) {
-    $filesCount++;
+    $filesCount = $m3uData->count();
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
     // Validate URL
