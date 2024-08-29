@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'აირჩიეთ აქცია';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'უცნობი';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'შემდეგი';
 $lang['PREVIOUS_PAGE'] = 'წინა';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'ზომა';
 $lang['VIEWED'] = 'გახსნილია';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'გაფართოება \'%s" იყო გაუქმდება მიერ საბჭოს admin, ამიტომ, აღნიშნული დანართი არ არის ნაჩვენები.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Attachments';
 $lang['ATTACHMENT_THUMBNAIL'] = 'დანართი მინიატურა';

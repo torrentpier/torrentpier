@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Интихоб кунед амал';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'номашҳур';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'Баъдӣ';
 $lang['PREVIOUS_PAGE'] = 'гузашта';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Пурбинандатаринҳо';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Дар Тамдиди \'%s\' аз тарафи администратор Шӯрои хомуш шуд, бинобар ин дар ин Замимаи аст, нишон дода нашавад.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'замимаҳо';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Замимаи бандангуштӣ';

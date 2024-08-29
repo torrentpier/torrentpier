@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Выберите действие';
 $lang['CLEAR'] = 'Очистить';
 $lang['MOVE_TO_TOP'] = 'В начало';
 $lang['UNKNOWN'] = 'Не указан';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'След.';
 $lang['PREVIOUS_PAGE'] = 'Пред.';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Размер';
 $lang['VIEWED'] = 'Просмотров';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Расширение \'%s\' было деактивировано администратором, поэтому это приложение не отображается.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Скачать .m3u файл';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Вложение';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Вложение (миниатюра)';

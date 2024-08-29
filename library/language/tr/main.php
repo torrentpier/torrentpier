@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Seçin eylem';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Bilinmeyen';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
 $lang['PREVIOUS_PAGE'] = 'Önceki';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Görüntülenen';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Uzantısı \'%s yönetim Kurulundan bir yönetici tarafından iptal edilmiştir, bu nedenle bu Ek görüntülenmez.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Ekleri';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Ek Küçük Resim';

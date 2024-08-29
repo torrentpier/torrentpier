@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Chọn hành động';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Không rõ';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
 $lang['PREVIOUS_PAGE'] = 'Trước đó';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Kích cỡ';
 $lang['VIEWED'] = 'Xem';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Mở Rộng \'%s\' đã được kích hoạt bởi một hội đồng quản trị, vì thế này đính Kèm không hiển thị.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Đính kèm';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Đính Kèm Hình Thu Nhỏ';

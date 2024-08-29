@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'कार्रवाई चुनें';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'अनजान';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'आगामी';
 $lang['PREVIOUS_PAGE'] = 'पिछला';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'फाइल का आकार';
 $lang['VIEWED'] = 'देखा गया';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'बोर्ड के व्यवस्थापक द्वारा एक्सटेंशन \'%s\' को निष्क्रिय कर दिया गया था, इसलिए यह अनुलग्नक प्रदर्शित नहीं किया गया है।'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'संलग्नक';
 $lang['ATTACHMENT_THUMBNAIL'] = 'अनुलग्नक थंबनेल';
