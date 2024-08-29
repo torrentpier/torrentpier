@@ -224,7 +224,7 @@ if ($tor_reged && $tor_info) {
         ]);
 
         // TorrServer integration
-        if ($bb_cfg['torr_server']['enabled'] && (IS_GUEST && !$bb_cfg['torr_server']['disable_for_guest']) && (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
+        if ($bb_cfg['torr_server']['enabled'] && (!IS_GUEST || !$bb_cfg['torr_server']['disable_for_guest']) && (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
             $template->assign_block_vars('postrow.attach.tor_reged.tor_server', [
                 'TORR_SERVER_M3U_LINK' => SHOW_M3U_URL . $attach_id,
                 'TORR_SERVER_M3U_ICON' => $images['icon_tor_m3u_icon'],
