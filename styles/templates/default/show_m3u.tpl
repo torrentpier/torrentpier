@@ -19,7 +19,7 @@
             <video width="500" height="auto" src="{m3ulist.STREAM_LINK}" playsinline controls></video>
             <!-- ENDIF -->
             <!-- ELSE -->
-            <a href="{m3ulist.STREAM_LINK}">DL</a>
+            <a target="_blank" href="{m3ulist.STREAM_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
             <!-- ENDIF -->
         </td>
     </tr>
