@@ -80,6 +80,7 @@ foreach ($m3uData as $entry) {
     ]);
 }
 
+// Generate output
 $template->assign_vars([
     'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
     'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
