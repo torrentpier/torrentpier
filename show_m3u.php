@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_SCRIPT', 'show_m3u');
+define('BB_SCRIPT', 'playback_m3u');
 
 require __DIR__ . '/common.php';
 
@@ -85,4 +85,4 @@ $template->assign_vars([
     'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
 ]);
 
-print_page('show_m3u.tpl');
+print_page('playback_m3u.tpl');
