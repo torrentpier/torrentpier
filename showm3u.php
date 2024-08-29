@@ -11,6 +11,10 @@ define('BB_SCRIPT', 'show_m3u');
 
 require __DIR__ . '/common.php';
 
+if (!$bb_cfg['torr_server']['enabled']) {
+    bb_die($lang['MODULE_OFF']);
+}
+
 // Valid file formats
 $validFormats = [
     'audio' => ['mp3', 'flac', 'wav'],
@@ -55,8 +59,9 @@ foreach ($m3uData as $entry) {
     $isValidFormat = in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video']));
 
     $template->assign_block_vars('m3ulist', [
+        'IS_VALID' => $isValidFormat,
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
-        'STREAM_LINK' => $isValidFormat ? $streamLink : '', // TODO: Download M3U file
+        'STREAM_LINK' => $isValidFormat ? $streamLink : $m3u_file,
         'TITLE' => $title,
     ]);
 }
