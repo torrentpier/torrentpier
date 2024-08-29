@@ -78,4 +78,4 @@ $template->assign_vars([
     'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
 ]);
 
-print_page('showm3u.tpl');
+print_page('show_m3u.tpl');
