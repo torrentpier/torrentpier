@@ -160,8 +160,8 @@
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
             <!-- IF not postrow.attach.tor_reged.TOR_FROZEN -->
-            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH}" title="Copy to clipboard">{postrow.attach.tor_reged.HASH}</span><!-- ENDIF -->
-            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH_V2}" title="Copy to clipboard">{postrow.attach.tor_reged.HASH_V2}</span><!-- ENDIF -->
+            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH}</span><!-- ENDIF -->
+            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH_V2}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH_V2}</span><!-- ENDIF -->
             <!-- ENDIF -->
         </td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
@@ -176,7 +176,7 @@
 			<!-- BEGIN tor_server -->
 			<!-- IF postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK -->
 			<hr>
-			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img alt="{L_DOWNLOAD_M3U_FILE}" src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>{L_DOWNLOAD_M3U_FILE}</a>
+			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img alt="{L_PLAYBACK_M3U}" src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>{L_PLAYBACK_M3U}</a>
 			<!-- ENDIF -->
 			<!-- END tor_server -->
 		</td>
