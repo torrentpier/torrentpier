@@ -63,6 +63,7 @@ $lang['SELECT_ACTION'] = 'Izberite dejanje';
 $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Neznan';
+$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
 
 $lang['NEXT_PAGE'] = 'Naprej';
 $lang['PREVIOUS_PAGE'] = 'Prejšnji';
@@ -1268,6 +1269,10 @@ $lang['FILESIZE'] = 'Velikost datoteke';
 $lang['VIEWED'] = 'Ogledov';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Razširitev \'%s" je bil izključen s odbora skrbnik, zato to Prilogo, se ne prikaže.'; // used in Posts and PM's, replace %s with mime type
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
+$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['STREAM'] = 'Stream';
+$lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
+$lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
 
 $lang['ATTACHMENT'] = 'Priloge';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Prilogo Sličico';
