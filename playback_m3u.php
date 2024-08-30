@@ -30,7 +30,7 @@ $page_cfg['allow_robots'] = false;
 // Check topic_id
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 if (!$topic_id) {
-    bb_simple_die($lang['INVALID_TOPIC_ID'], 404);
+    bb_die($lang['INVALID_TOPIC_ID'], 404);
 }
 
 // Getting torrent info from database
@@ -40,7 +40,7 @@ $sql = 'SELECT attach_id, info_hash, info_hash_v2
         LIMIT 1';
 
 if (!$row = DB()->fetch_row($sql)) {
-    //bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
+    bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
 // Check m3u file exist
