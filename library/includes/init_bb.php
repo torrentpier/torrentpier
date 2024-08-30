@@ -302,7 +302,7 @@ define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;' . POST_USERS_URL . '='
 define('BONUS_URL', 'profile.php?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?' . POST_TOPIC_URL . '=');
 define('FILELIST_URL', 'filelist.php?' . POST_TOPIC_URL . '=');
-define('PLAYBACK_M3U_URL', 'playback_m3u.php?attach_id=');
+define('PLAYBACK_M3U_URL', 'playback_m3u.php?' . POST_TOPIC_URL . '=');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
 
