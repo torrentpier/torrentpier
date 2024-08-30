@@ -204,13 +204,13 @@ class TorrServerAPI
 
         $curl->setHeader('Accept', 'application/json');
         $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index);
-        $isSuccess = $curl->httpStatusCode === 200;
-        if (!$isSuccess) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
+        $response = $curl->response;
+        if ($curl->httpStatusCode !== 200 || empty($response)) {
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: $response\n", $this->logFile);
         }
         $curl->close();
 
-        return $isSuccess;
+        return $response;
     }
 
     /**
@@ -228,7 +228,8 @@ class TorrServerAPI
 
         $curl->setHeader('Accept', 'application/octet-stream');
         $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);
-        $isSuccess = $curl->httpStatusCode === 200;
+        if) $curl->httpStatusCode === 200;
+
         if (!$isSuccess) {
             bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
         }
