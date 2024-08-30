@@ -228,8 +228,7 @@ class TorrServerAPI
 
         $curl->setHeader('Accept', 'application/octet-stream');
         $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);
-        if) $curl->httpStatusCode === 200;
-
+        $isSuccess = $curl->httpStatusCode === 200;
         if (!$isSuccess) {
             bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
         }
