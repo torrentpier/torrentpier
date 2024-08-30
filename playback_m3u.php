@@ -71,6 +71,7 @@ foreach ($m3uData as $entry) {
 
     // Get info from ffprobe
     $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo('g', $filesCount);
+    dump($ffpInfo);
 
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
