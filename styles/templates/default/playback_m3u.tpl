@@ -21,7 +21,7 @@
             <audio preload="none" src="{m3ulist.STREAM_LINK}" controls></audio>
             <!-- ELSE -->
             <video preload="none" width="500" height="auto" src="{m3ulist.STREAM_LINK}" controls></video>
-            <!-- ENDIF --><!-- ELSE -->{L_M3U_NOT_SUPPORTED}<!-- ENDIF -->
+            <!-- ENDIF --><!-- ELSE --><span class="warnColor2">{L_M3U_NOT_SUPPORTED}</span><!-- ENDIF -->
         </td>
     </tr>
     </tbody>
