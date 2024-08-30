@@ -68,6 +68,10 @@ foreach ($m3uData as $entry) {
 
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
+
+    // Get info from ffprobe
+    $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo('g', $filesCount);
+
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
         'ROW_CLASS' => $rowClass,

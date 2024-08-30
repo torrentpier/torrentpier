@@ -33,7 +33,8 @@ class TorrServerAPI
     private array $endpoints = [
         'playlist' => 'playlist',
         'upload' => 'torrent/upload',
-        'stream' => 'stream'
+        'stream' => 'stream',
+        'ffprobe' => 'ffp'
     ];
 
     /**
@@ -185,6 +186,31 @@ class TorrServerAPI
         }
 
         return false;
+    }
+
+    /**
+     * Returns info from TorrServer in-build ffprobe
+     *
+     * @param string $hash
+     * @param int $index
+     * @return bool
+     */
+    public function getFfpInfo(string $hash, int $index): bool
+    {
+        global $bb_cfg;
+
+        $curl = new Curl();
+        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+
+        $curl->setHeader('Accept', 'application/json');
+        $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index);
+        $isSuccess = $curl->httpStatusCode === 200;
+        if (!$isSuccess) {
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
+        }
+        $curl->close();
+
+        return $isSuccess;
     }
 
     /**
