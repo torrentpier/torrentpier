@@ -400,7 +400,7 @@ class Torrent
         if ($bb_cfg['torr_server']['enabled']) {
             $torrServer = new TorrServerAPI();
             if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
-                $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
+                $torrServer->saveM3U($attach_id, $info_hash ?? $info_hash_v2);
             }
         }
 
