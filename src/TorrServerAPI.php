@@ -199,6 +199,15 @@ class TorrServerAPI
     {
         global $bb_cfg;
 
+        // Make stream call to store torrent in memory
+        for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+            if ($this->getStream($hash)) {
+                break;
+            } elseif ($i == $max_try) {
+                return false;
+            }
+        }
+
         $curl = new Curl();
         $curl->setTimeout($bb_cfg['torr_server']['timeout']);
 
