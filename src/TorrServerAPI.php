@@ -176,6 +176,10 @@ class TorrServerAPI
      */
     public function removeM3U(string|int $attach_id): bool
     {
+        // Remove ffprobe data from cache
+        CACHE('tr_cache')->rm("ffprobe_m3u_$attach_id");
+
+        // Unlink .m3u file
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
         if (is_file($m3uFile)) {
             if (unlink($m3uFile)) {
