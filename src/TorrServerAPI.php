@@ -193,9 +193,9 @@ class TorrServerAPI
      *
      * @param string $hash
      * @param int $index
-     * @return array
+     * @return mixed
      */
-    public function getFfpInfo(string $hash, int $index): array
+    public function getFfpInfo(string $hash, int $index): mixed
     {
         global $bb_cfg;
 
@@ -204,7 +204,7 @@ class TorrServerAPI
 
         $curl->setHeader('Accept', 'application/json');
         $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index);
-        $response = $curl->response ?? [];
+        $response = $curl->response;
         if ($curl->httpStatusCode !== 200 || empty($response)) {
             bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: $response\n", $this->logFile);
         }

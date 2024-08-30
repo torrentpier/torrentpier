@@ -71,9 +71,6 @@ foreach ($m3uData as $entry) {
 
     // Get info from ffprobe
     $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo('g', $filesCount);
-    if (!empty($ffpInfo)) {
-
-    }
 
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
@@ -83,6 +80,7 @@ foreach ($m3uData as $entry) {
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => $m3uFile,
         'TITLE' => $title,
+        'FFP_DATA' => (is_array($ffpInfo) && !empty($ffpInfo)) ? '4' : ''
     ]);
 }
 
