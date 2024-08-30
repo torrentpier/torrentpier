@@ -34,12 +34,13 @@ if (!$topic_id) {
 }
 
 // Getting torrent info from database
-$sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2
+$sql = 'SELECT attach_id, info_hash, info_hash_v2
             FROM ' . BB_BT_TORRENTS . '
-        WHERE t.topic_id = ' . $topic_id . ' LIMIT 1';
+            WHERE topic_id = ' . $topic_id . '
+        LIMIT 1';
 
 if (!$row = DB()->fetch_row($sql)) {
-    bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
+    //bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
 // Check m3u file exist
