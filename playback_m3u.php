@@ -27,13 +27,23 @@ $user->session_start(['req_login' => $bb_cfg['torr_server']['disable_for_guest']
 // Disable robots indexing
 $page_cfg['allow_robots'] = false;
 
-// Check attach_id
-if (!$attach_id = request_var('attach_id', 0)) {
-    bb_die($lang['INVALID_ATTACH_ID']);
+// Check topic_id
+$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
+if (!$topic_id) {
+    bb_simple_die($lang['INVALID_TOPIC_ID'], 404);
+}
+
+// Getting torrent info from database
+$sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2
+            FROM ' . BB_BT_TORRENTS . '
+        WHERE t.topic_id = ' . $topic_id . ' LIMIT 1';
+
+if (!$row = DB()->fetch_row($sql)) {
+    bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
 // Check m3u file exist
-if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
+if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($row['attach_id'])) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
@@ -70,7 +80,7 @@ foreach ($m3uData as $entry) {
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
     // Get info from ffprobe
-    $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo('g', $filesCount);
+    $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($row['info_hash'] ?? $row['info_hash_v2'], $filesCount);
     dump($ffpInfo);
 
     $template->assign_block_vars('m3ulist', [
