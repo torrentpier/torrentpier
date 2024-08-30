@@ -8,6 +8,7 @@
         <th>{L_STREAM}</th>
     </tr>
     </thead>
+    <!-- IF HAS_ITEMS -->
     <!-- BEGIN m3ulist -->
     <tbody>
     <tr class="{m3ulist.ROW_CLASS} tCenter">
@@ -26,6 +27,13 @@
     </tr>
     </tbody>
     <!-- END m3ulist -->
+    <!-- ELSE -->
+    <tbody>
+    <tr>
+        <td class="row1 tCenter pad_8" colspan="3">No items</td>
+    </tr>
+    </tbody>
+    <!-- ENDIF -->
     <tfoot>
     <tr>
         <td class="catBottom warnColor1" colspan="4">{L_M3U_NOTICE}</td>
