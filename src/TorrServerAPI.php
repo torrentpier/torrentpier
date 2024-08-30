@@ -197,31 +197,36 @@ class TorrServerAPI
      *
      * @param string $hash
      * @param int $index
+     * @param int|string $attach_id
      * @return mixed
      */
-    public function getFfpInfo(string $hash, int $index): mixed
+    public function getFfpInfo(string $hash, int $index, int|string $attach_id): mixed
     {
         global $bb_cfg;
 
-        // Make stream call to store torrent in memory
-        for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
-            if ($this->getStream($hash)) {
-                break;
-            } elseif ($i == $max_try) {
-                return false;
+        if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_$attach_id")) {
+            // Make stream call to store torrent in memory
+            for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+                if ($this->getStream($hash)) {
+                    break;
+                } elseif ($i == $max_try) {
+                    return false;
+                }
             }
-        }
 
-        $curl = new Curl();
-        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+            $curl = new Curl();
+            $curl->setTimeout($bb_cfg['torr_server']['timeout']);
 
-        $curl->setHeader('Accept', 'application/json');
-        $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . bin2hex($hash) . '/' . $index);
-        $response = $curl->response;
-        if ($curl->httpStatusCode !== 200 || empty($response)) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: $response\n", $this->logFile);
+            $curl->setHeader('Accept', 'application/json');
+            $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . bin2hex($hash) . '/' . $index);
+            $response = $curl->response;
+            if ($curl->httpStatusCode === 200 && !empty($response)) {
+                CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
+            } else {
+                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: $response\n", $this->logFile);
+            }
+            $curl->close();
         }
-        $curl->close();
 
         return $response;
     }
