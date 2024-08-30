@@ -16,11 +16,12 @@
         <td>
             <a href="#" onclick="return false;" class="copyElement" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;
             <a target="_blank" href="{m3ulist.M3U_DL_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
-            <!-- IF m3ulist.IS_VALID --><hr><!-- IF m3ulist.IS_AUDIO -->
+            <hr>
+            <!-- IF m3ulist.IS_VALID --><!-- IF m3ulist.IS_AUDIO -->
             <audio preload="none" src="{m3ulist.STREAM_LINK}" controls></audio>
             <!-- ELSE -->
             <video preload="none" width="500" height="auto" src="{m3ulist.STREAM_LINK}" controls></video>
-            <!-- ENDIF --><!-- ENDIF -->
+            <!-- ENDIF --><!-- ELSE --><span class="warnColor2">{L_M3U_NOT_SUPPORTED}</span><!-- ENDIF -->
         </td>
     </tr>
     </tbody>

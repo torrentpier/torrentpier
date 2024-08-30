@@ -44,9 +44,6 @@ $m3uData = $m3uParser->parseFile($m3uFile);
 
 $filesCount = 0;
 foreach ($m3uData as $entry) {
-    $filesCount++;
-    $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
-
     // Validate URL
     $streamLink = $entry->getPath();
     if (!filter_var($streamLink, FILTER_VALIDATE_URL)) {
@@ -69,6 +66,8 @@ foreach ($m3uData as $entry) {
     // Validate file extension
     $getExtension = pathinfo($title, PATHINFO_EXTENSION);
 
+    $filesCount++;
+    $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
         'ROW_CLASS' => $rowClass,
