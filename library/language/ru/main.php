@@ -64,8 +64,8 @@ $lang['CLEAR'] = 'Очистить';
 $lang['MOVE_TO_TOP'] = 'В начало';
 $lang['UNKNOWN'] = 'Не указан';
 $lang['COPY_TO_CLIPBOARD'] = 'Скопировать в буфер обмена';
-$lang['NO_ITEMS'] = 'There seems to be no data here...';
-$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
+$lang['NO_ITEMS'] = 'Похоже, здесь нет данных...';
+$lang['PLEASE_TRY_AGAIN'] = 'Пожалуйста, попробуйте еще раз через несколько секунд...';
 
 $lang['NEXT_PAGE'] = 'След.';
 $lang['PREVIOUS_PAGE'] = 'Пред.';
@@ -1273,15 +1273,15 @@ $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Расширение \'%s\' был�
 
 // Viewtopic -> Display of Attachments -> TorrServer integration
 $lang['STREAM'] = 'Трансляция';
-$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
-$lang['CHANNELS'] = 'Channels: <b>%s</b>';
-$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
-$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
-$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
-$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
-$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
-$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
-$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
+$lang['RESOLUTION'] = 'Разрешение: <b>%s</b>';
+$lang['CHANNELS'] = 'Каналов: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Компоновка звука: <b>%s</b>';
+$lang['BITRATE'] = 'Битрейт: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Частота дискретизации: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Информация о звуковой дорожке (%d):';
+$lang['AUDIO_CODEC'] = 'Аудио кодек: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Видео кодек: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Показать дополнительную информацию о файле';
 $lang['DOWNLOAD_M3U_FILE'] = 'Скачать .m3u файл';
 $lang['PLAYBACK_M3U'] = 'Воспроизвести .m3u файл';
 $lang['COPY_STREAM_LINK'] = 'Скопировать ссылку на поток в буфер обмена';
