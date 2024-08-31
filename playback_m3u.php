@@ -76,15 +76,20 @@ foreach ($m3uData as $entry) {
 
     // Validate file extension
     $getExtension = pathinfo($title, PATHINFO_EXTENSION);
+    if ($getExtension === 'm3u') {
+        // Skip m3u files
+        continue;
+    }
 
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
+    $isAudio = in_array($getExtension, $validFormats['audio']);
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
         'ROW_CLASS' => $rowClass,
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
-        'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
+        'IS_AUDIO' => $isAudio,
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => $m3uFile,
         'TITLE' => $title,
@@ -118,7 +123,7 @@ foreach ($m3uData as $entry) {
         if (isset($videoCodecInfo)) {
             $template->assign_block_vars('m3ulist.ffprobe', [
                 'FILESIZE' => sprintf($lang['FILESIZE'] . ': %s', humn_size($ffpInfo->format->size)),
-                'RESOLUTION' => sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height),
+                'RESOLUTION' => !$isAudio ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
                 'VIDEO_CODEC' => sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')),
                 'AUDIO_DUB' => implode('<br>', $audioDub)
             ]);

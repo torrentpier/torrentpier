@@ -15,7 +15,7 @@
         <td>{m3ulist.ROW_NUMBER}</td>
         <td width="40%">{m3ulist.TITLE}
             <!-- BEGIN ffprobe -->
-            <hr>{m3ulist.ffprobe.RESOLUTION}<br>
+            <hr><!-- IF m3ulist.ffprobe.RESOLUTION -->{m3ulist.ffprobe.RESOLUTION}<br><!-- ENDIF -->
             {m3ulist.ffprobe.FILESIZE}<br>
             {m3ulist.ffprobe.VIDEO_CODEC}
             <hr>
