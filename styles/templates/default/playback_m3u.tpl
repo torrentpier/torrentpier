@@ -9,9 +9,6 @@
             file_index: file_index
         });
     };
-    ajax.callback.ffprobe_info = function (data) {
-        $('#cache').html(data.cache_html);
-    }
 </script>
 
 <table class="forumline">
@@ -26,6 +23,11 @@
     <!-- BEGIN m3ulist -->
     <tbody>
     <tr class="{m3ulist.ROW_CLASS} tCenter">
+        <script type="text/javascript">
+            ajax.callback.ffprobe_info = function (data) {
+                $('#ffprobe_{m3ulist.ROW_NUMBER}').html(data.ffprobe_data);
+            }
+        </script>
         <td>{m3ulist.ROW_NUMBER}</td>
         <td width="40%"><b>{m3ulist.TITLE}</b>
             <hr>
