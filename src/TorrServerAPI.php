@@ -125,7 +125,7 @@ class TorrServerAPI
         $curl->setTimeout($bb_cfg['torr_server']['timeout']);
 
         $curl->setHeader('Accept', 'audio/x-mpegurl');
-        $curl->get($this->url . $this->endpoints['playlist'], ['hash' => bin2hex($hash)]);
+        $curl->get($this->url . $this->endpoints['playlist'], ['hash' => $hash]);
         if ($curl->httpStatusCode === 200 && !empty($curl->response)) {
             // Validate response
             $validResponse = false;
