@@ -25,7 +25,7 @@ if (!$file_index = (int)$this->request['file_index'] or !is_numeric($file_index)
     $this->ajax_die("Invalid file index: $file_index");
 }
 
-if (!$info_hash = (string)$this->request['info_hash'] or strlen($info_hash) !== 20) {
+if (!$info_hash = (string)$this->request['info_hash'] or !ctype_xdigit($info_hash)) {
     $this->ajax_die("Invalid info_hash: $info_hash");
 }
 
