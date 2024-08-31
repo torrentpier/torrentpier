@@ -121,6 +121,7 @@ foreach ($m3uData as $entry) {
                 $result = $stream->tags->language;
             }
             $result .= '<br>';
+            $result .= sprintf($lang['AUDIO_CODEC'], mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
             $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
             $result .= sprintf($lang['SAMPLE_RATE'], $stream->sample_rate) . '<br>';
             $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
