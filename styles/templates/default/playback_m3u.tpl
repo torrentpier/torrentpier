@@ -29,14 +29,14 @@
                 if (data.ffprobe_data) {
                     $('#ffprobe_{m3ulist.ROW_NUMBER}').html(data.ffprobe_data);
                 } else {
-                    $('#ffprobe_{m3ulist.ROW_NUMBER}').html('TODO: ...');
+                    $('#ffprobe_{m3ulist.ROW_NUMBER}').html('{L_PLEASE_TRY_AGAIN}');
                 }
             }
         </script>
         <td>{m3ulist.ROW_NUMBER}</td>
         <td width="40%"><b>{m3ulist.TITLE}</b>
-            <hr>
             <div id="ffprobe_{m3ulist.ROW_NUMBER}">
+                <hr>
                 <a href="#" onclick="ajax.ffprobe_info({m3ulist.ROW_NUMBER}, '{m3ulist.IS_AUDIO}'); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
             </div>
         </td>
