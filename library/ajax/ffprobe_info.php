@@ -58,7 +58,7 @@ if (isset($ffpInfo->streams)) {
         }
 
         if (!empty($stream->codec_name)) {
-            $result .= sprintf($lang['AUDIO_CODEC'], mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
+            $result .= sprintf($lang['AUDIO_CODEC'], $stream->codec_long_name, mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
         }
         if (!empty($stream->bit_rate)) {
             $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
@@ -79,7 +79,7 @@ if (isset($ffpInfo->streams)) {
     $data = [
         'filesize' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
         'resolution' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
-        'video_codec' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
+        'video_codec' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], $videoCodecInfo->codec_long_name, mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
         'audio_dub' => implode('<hr>', $audioDub)
     ];
 
