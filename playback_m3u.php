@@ -109,9 +109,8 @@ foreach ($m3uData as $entry) {
             return $e->codec_type === 'audio';
         });
         $audioDub = array_map(function ($stream) {
-            global $lang;
             if (!isset($stream->tags)) {
-                $result = $lang['UNKNOWN'];
+                $result = null;
             } else {
                 if (isset($stream->tags->title)) {
                     $result = $stream->tags->language . ' (' . $stream->tags->title . ') [Каналов: ' . $stream->channels . ' | Битрейт: ' . $stream->bit_rate . ' ]';
@@ -127,7 +126,7 @@ foreach ($m3uData as $entry) {
             'FILESIZE' => sprintf($lang['FILESIZE'] . ': %s', humn_size($ffpInfo->format->size)),
             'RESOLUTION' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
             'VIDEO_CODEC' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
-            'AUDIO_DUB' => implode('<br>', $audioDub)
+            'AUDIO_DUB' => !is_null($audioDub) ? implode('<br>', $audioDub) : ''
         ]);
     }
 }
