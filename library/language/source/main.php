@@ -1276,6 +1276,7 @@ $lang['CHANNELS'] = 'Channels: %s';
 $lang['CHANNELS_LAYOUT'] = 'Channels layout: %s';
 $lang['BITRATE'] = 'Bitrate: %s';
 $lang['SAMPLE_RATE'] = 'Sample rate: %s';
+$lang['AUDIO_TRACKS'] = 'Audio tracks:';
 $lang['AUDIO_CODEC'] = 'Audio codec: %s';
 $lang['VIDEO_CODEC'] = 'Video codec: %s';
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';

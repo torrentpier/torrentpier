@@ -17,7 +17,9 @@
             <!-- BEGIN ffprobe -->
             <hr>{m3ulist.ffprobe.RESOLUTION}<br>
             {m3ulist.ffprobe.FILESIZE}<br>
-            {m3ulist.ffprobe.VIDEO_CODEC}<br>
+            {m3ulist.ffprobe.VIDEO_CODEC}
+            <hr>
+            <span class="warnColor2">{L_AUDIO_TRACKS}</span><br>
             {m3ulist.ffprobe.AUDIO_DUB}
             <!-- END ffprobe -->
         </td>
