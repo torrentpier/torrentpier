@@ -76,14 +76,12 @@ if (isset($ffpInfo->streams)) {
         return $result;
     }, $audioTracks);
 
-    $template->assign_block_vars('m3ulist.ffprobe', [
-        'FILESIZE' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
-        'RESOLUTION' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
-        'VIDEO_CODEC' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
-        'AUDIO_DUB' => implode('<hr>', $audioDub)
-    ]);
+    $data = [
+        'filesize' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
+        'resolution' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
+        'video_codec' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
+        'audio_dub' => implode('<hr>', $audioDub)
+    ];
+
+    $this->response['ffprobe_data'] = '';
 }
-
-$this->response['ffprobe_data'] = '
-
-';

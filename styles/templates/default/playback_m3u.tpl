@@ -26,7 +26,9 @@
     <tr class="{m3ulist.ROW_CLASS} tCenter">
         <script type="text/javascript">
             ajax.callback.ffprobe_info = function (data) {
-                $('#ffprobe_{m3ulist.ROW_NUMBER}').html(data.ffprobe_data);
+                if (data.ffprobe_data) {
+                    $('#ffprobe_{m3ulist.ROW_NUMBER}').html(data.ffprobe_data);
+                }
             }
         </script>
         <td>{m3ulist.ROW_NUMBER}</td>
