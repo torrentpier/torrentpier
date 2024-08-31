@@ -15,12 +15,12 @@ require __DIR__ . '/common.php';
 $user->session_start();
 
 if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
-    bb_simple_die($lang['BT_PRIVATE_TRACKER'], 403);
+    bb_die($lang['BT_PRIVATE_TRACKER'], 403);
 }
 
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 if (!$topic_id) {
-    bb_simple_die($lang['INVALID_TOPIC_ID'], 404);
+    bb_die($lang['INVALID_TOPIC_ID'], 404);
 }
 
 $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_filename
@@ -31,7 +31,7 @@ $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_fil
         LIMIT 1';
 
 if (!$row = DB()->fetch_row($sql)) {
-    bb_simple_die($lang['INVALID_TOPIC_ID_DB'], 404);
+    bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
 // Protocol meta
@@ -45,7 +45,7 @@ $t_hash_field = $meta_v2 ? 'piecesRoot' : 'sha1';
 
 $file_path = get_attachments_dir() . '/' . $row['physical_filename'];
 if (!is_file($file_path)) {
-    bb_simple_die($lang['TOR_NOT_FOUND'], 410);
+    bb_die($lang['TOR_NOT_FOUND'], 410);
 }
 
 $file_contents = file_get_contents($file_path);
@@ -60,18 +60,18 @@ if ($bb_cfg['flist_max_files']) {
     }
 
     if ($file_count > $bb_cfg['flist_max_files']) {
-        bb_simple_die(sprintf($lang['BT_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count), 410);
+        bb_die(sprintf($lang['BT_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count), 410);
     }
 }
 
 try {
     $torrent = \Arokettu\Torrent\TorrentFile::loadFromString($file_contents);
 } catch (\Exception $e) {
-    bb_simple_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"), 410);
+    bb_die(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"), 410);
 }
 
 if (IS_GUEST && $torrent->isPrivate()) {
-    bb_simple_die($lang['BT_PRIVATE_TORRENT'], 403);
+    bb_die($lang['BT_PRIVATE_TORRENT'], 403);
 }
 
 $files = $torrent->$t_version_field()->$t_files_field();

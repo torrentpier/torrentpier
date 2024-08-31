@@ -41,6 +41,7 @@ class Ajax
         'manage_group' => ['user'],
         'callseed' => ['user'],
 
+        'ffprobe_info' => ['guest'],
         'thx' => ['guest'],
         'view_post' => ['guest'],
         'view_torrent' => ['guest'],
@@ -526,9 +527,18 @@ class Ajax
      *
      * @return void
      */
-
     public function thx()
     {
         require AJAX_DIR . '/thanks.php';
+    }
+
+    /**
+     * Get info from ffprobe (TorrServer API)
+     *
+     * @return void
+     */
+    public function ffprobe_info()
+    {
+        require AJAX_DIR . '/ffprobe_info.php';
     }
 }

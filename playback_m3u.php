@@ -18,7 +18,7 @@ if (!$bb_cfg['torr_server']['enabled']) {
 // Valid file formats
 $validFormats = [
     'audio' => ['mp3', 'flac', 'wav'],
-    'video' => ['mp4', 'mkv', 'avi']
+    'video' => ['mp4', 'mkv', 'avi', 'm4v']
 ];
 
 // Start session management
@@ -27,13 +27,24 @@ $user->session_start(['req_login' => $bb_cfg['torr_server']['disable_for_guest']
 // Disable robots indexing
 $page_cfg['allow_robots'] = false;
 
-// Check attach_id
-if (!$attach_id = request_var('attach_id', 0)) {
-    bb_die($lang['INVALID_ATTACH_ID']);
+// Check topic_id
+$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
+if (!$topic_id) {
+    bb_die($lang['INVALID_TOPIC_ID'], 404);
+}
+
+// Getting torrent info from database
+$sql = 'SELECT attach_id, info_hash, info_hash_v2
+            FROM ' . BB_BT_TORRENTS . '
+            WHERE topic_id = ' . $topic_id . '
+        LIMIT 1';
+
+if (!$row = DB()->fetch_row($sql)) {
+    bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
 // Check m3u file exist
-if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($attach_id)) {
+if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($row['attach_id'])) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
@@ -49,6 +60,7 @@ foreach ($m3uData as $entry) {
     if (!filter_var($streamLink, FILTER_VALIDATE_URL)) {
         continue;
     }
+    parse_str(parse_url($streamLink, PHP_URL_QUERY), $urlParams);
 
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
@@ -65,11 +77,16 @@ foreach ($m3uData as $entry) {
 
     // Validate file extension
     $getExtension = pathinfo($title, PATHINFO_EXTENSION);
+    if ($getExtension === 'm3u') {
+        // Skip m3u files
+        continue;
+    }
 
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
+        'FILE_INDEX' => $urlParams['index'],
         'ROW_CLASS' => $rowClass,
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
@@ -81,8 +98,12 @@ foreach ($m3uData as $entry) {
 
 // Generate output
 $template->assign_vars([
+    'HAS_ITEMS' => $filesCount > 0,
     'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
-    'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
+    'ATTACH_ID' => $row['attach_id'],
+    'INFO_HASH' => bin2hex($row['info_hash'] ?? $row['info_hash_v2']),
+    'FILES_COUNT_TITLE' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
+    'U_TOPIC' => TOPIC_URL . $topic_id,
 ]);
 
 print_page('playback_m3u.tpl');

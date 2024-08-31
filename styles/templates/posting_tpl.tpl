@@ -4722,7 +4722,7 @@ $(function(){
 			<input type="button" value="Включить в этом форуме" class="bold" onclick="ajax.topic_tpl('assign', {tpl_id: $('#forum_tpl_select').val()})" /> &nbsp;
 			<input type="button" value="Загрузить" onclick="ajax.topic_tpl('load')" /> &nbsp;
             <input type="button" value="{L_REMOVE}" onclick="ajax.topic_tpl('remove')" /> &nbsp;
-			<!-- ELSE -->Нет щаблонов для релизов<!-- ENDIF -->
+			<!-- ELSE -->Нет шаблонов для релизов<!-- ENDIF -->
 			<br /><br />
 			<span class="gen">
 			<!-- IF NO_TPL_ASSIGNED -->

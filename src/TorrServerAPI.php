@@ -12,6 +12,8 @@ namespace TorrentPier;
 use Curl\Curl;
 use CURLFile;
 
+use stdClass;
+
 /**
  * Class TorrServerAPI
  * @package TorrentPier
@@ -33,7 +35,8 @@ class TorrServerAPI
     private array $endpoints = [
         'playlist' => 'playlist',
         'upload' => 'torrent/upload',
-        'stream' => 'stream'
+        'stream' => 'stream',
+        'ffprobe' => 'ffp'
     ];
 
     /**
@@ -175,6 +178,10 @@ class TorrServerAPI
      */
     public function removeM3U(string|int $attach_id): bool
     {
+        // Remove ffprobe data from cache
+        CACHE('tr_cache')->rm("ffprobe_m3u_$attach_id");
+
+        // Unlink .m3u file
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
         if (is_file($m3uFile)) {
             if (unlink($m3uFile)) {
@@ -185,6 +192,49 @@ class TorrServerAPI
         }
 
         return false;
+    }
+
+    /**
+     * Returns info from TorrServer in-build ffprobe
+     *
+     * @param string $hash
+     * @param int $index
+     * @param int|string $attach_id
+     * @return mixed
+     */
+    public function getFfpInfo(string $hash, int $index, int|string $attach_id): mixed
+    {
+        global $bb_cfg;
+
+        if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_$attach_id")) {
+            $response = new stdClass();
+        }
+
+        if (!isset($response->{$index})) {
+            // Make stream call to store torrent in memory
+            for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+                if ($this->getStream($hash)) {
+                    break;
+                } elseif ($i == $max_try) {
+                    return false;
+                }
+            }
+
+            $curl = new Curl();
+            $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+
+            $curl->setHeader('Accept', 'application/json');
+            $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index);
+            $response->{$index} = $curl->response;
+            if ($curl->httpStatusCode === 200 && !empty($response->{$index})) {
+                CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
+            } else {
+                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode}\n", $this->logFile);
+            }
+            $curl->close();
+        }
+
+        return $response;
     }
 
     /**
