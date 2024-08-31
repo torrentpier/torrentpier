@@ -317,7 +317,7 @@ class Ajax
      *
      * @return void
      */
-    public function edit_user_profile(): void
+    public function edit_user_profile()
     {
         require AJAX_DIR . '/edit_user_profile.php';
     }
@@ -327,7 +327,7 @@ class Ajax
      *
      * @return void
      */
-    public function change_user_rank(): void
+    public function change_user_rank()
     {
         require AJAX_DIR . '/change_user_rank.php';
     }
@@ -337,7 +337,7 @@ class Ajax
      *
      * @return void
      */
-    public function change_user_opt(): void
+    public function change_user_opt()
     {
         require AJAX_DIR . '/change_user_opt.php';
     }
@@ -347,7 +347,7 @@ class Ajax
      *
      * @return void
      */
-    public function passkey(): void
+    public function passkey()
     {
         require AJAX_DIR . '/passkey.php';
     }
@@ -357,7 +357,7 @@ class Ajax
      *
      * @return void
      */
-    public function group_membership(): void
+    public function group_membership()
     {
         require AJAX_DIR . '/group_membership.php';
     }
@@ -367,7 +367,7 @@ class Ajax
      *
      * @return void
      */
-    public function manage_group(): void
+    public function manage_group()
     {
         require AJAX_DIR . '/edit_group_profile.php';
     }
@@ -377,7 +377,7 @@ class Ajax
      *
      * @return void
      */
-    public function post_mod_comment(): void
+    public function post_mod_comment()
     {
         require AJAX_DIR . '/post_mod_comment.php';
     }
@@ -387,7 +387,7 @@ class Ajax
      *
      * @return void
      */
-    public function view_post(): void
+    public function view_post()
     {
         require AJAX_DIR . '/view_post.php';
     }
@@ -397,7 +397,7 @@ class Ajax
      *
      * @return void
      */
-    public function change_tor_status(): void
+    public function change_tor_status()
     {
         require AJAX_DIR . '/change_tor_status.php';
     }
@@ -407,7 +407,7 @@ class Ajax
      *
      * @return void
      */
-    public function change_torrent(): void
+    public function change_torrent()
     {
         require AJAX_DIR . '/change_torrent.php';
     }
@@ -417,7 +417,7 @@ class Ajax
      *
      * @return void
      */
-    public function view_torrent(): void
+    public function view_torrent()
     {
         require AJAX_DIR . '/view_torrent.php';
     }
@@ -427,7 +427,7 @@ class Ajax
      *
      * @return void
      */
-    public function user_register(): void
+    public function user_register()
     {
         require AJAX_DIR . '/user_register.php';
     }
@@ -437,7 +437,7 @@ class Ajax
      *
      * @return void
      */
-    public function mod_action(): void
+    public function mod_action()
     {
         require AJAX_DIR . '/mod_action.php';
     }
@@ -447,7 +447,7 @@ class Ajax
      *
      * @return void
      */
-    public function posts(): void
+    public function posts()
     {
         require AJAX_DIR . '/posts.php';
     }
@@ -457,7 +457,7 @@ class Ajax
      *
      * @return void
      */
-    public function manage_user(): void
+    public function manage_user()
     {
         require AJAX_DIR . '/manage_user.php';
     }
@@ -467,7 +467,7 @@ class Ajax
      *
      * @return void
      */
-    public function manage_admin(): void
+    public function manage_admin()
     {
         require AJAX_DIR . '/manage_admin.php';
     }
@@ -477,7 +477,7 @@ class Ajax
      *
      * @return void
      */
-    public function topic_tpl(): void
+    public function topic_tpl()
     {
         require AJAX_DIR . '/topic_tpl.php';
     }
@@ -487,7 +487,7 @@ class Ajax
      *
      * @return void
      */
-    public function index_data(): void
+    public function index_data()
     {
         require AJAX_DIR . '/index_data.php';
     }
@@ -497,7 +497,7 @@ class Ajax
      *
      * @return void
      */
-    public function avatar(): void
+    public function avatar()
     {
         require AJAX_DIR . '/avatar.php';
     }
@@ -507,7 +507,7 @@ class Ajax
      *
      * @return void
      */
-    public function sitemap(): void
+    public function sitemap()
     {
         require AJAX_DIR . '/sitemap.php';
     }
@@ -517,7 +517,7 @@ class Ajax
      *
      * @return void
      */
-    public function callseed(): void
+    public function callseed()
     {
         require AJAX_DIR . '/callseed.php';
     }
@@ -527,7 +527,7 @@ class Ajax
      *
      * @return void
      */
-    public function thx(): void
+    public function thx()
     {
         require AJAX_DIR . '/thanks.php';
     }
@@ -537,7 +537,7 @@ class Ajax
      *
      * @return void
      */
-    public function ffprobe_info(): void
+    public function ffprobe_info()
     {
         require AJAX_DIR . '/ffprobe_info.php';
     }
