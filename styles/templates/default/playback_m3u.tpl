@@ -5,7 +5,7 @@
         ajax.exec({
             action: 'ffprobe_info',
             attach_id: {ATTACH_ID},
-            info_hash: {INFO_HASH},
+            info_hash: '{INFO_HASH}',
             file_index: file_index
         });
     };
