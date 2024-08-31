@@ -60,6 +60,7 @@ foreach ($m3uData as $entry) {
     if (!filter_var($streamLink, FILTER_VALIDATE_URL)) {
         continue;
     }
+    parse_str(parse_url($streamLink, PHP_URL_QUERY), $urlParams);
 
     // Parse tags
     foreach ($entry->getExtTags() as $extTag) {
@@ -83,13 +84,12 @@ foreach ($m3uData as $entry) {
 
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
-
-    $isAudio = in_array($getExtension, $validFormats['audio']);
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
+        'FILE_INDEX' => $urlParams['index'],
         'ROW_CLASS' => $rowClass,
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
-        'IS_AUDIO' => $isAudio,
+        'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => $m3uFile,
         'TITLE' => $title,
