@@ -97,19 +97,27 @@ foreach ($m3uData as $entry) {
         $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));
         $videoCodecInfo = $ffpInfo->streams[$videoCodecIndex];
         // Audio codec information
-        $audio = array_filter($ffpInfo->streams, function ($e) {
+        $audioDub = array_map(function ($stream) {
+            global $lang;
+            if ($stream->tags === null) {
+                return $lang['UNKNOWN'];
+            } else {
+                if (isset($stream->tags->title)) {
+                    return $stream->tags->language . ' (' . $stream->tags->title . ')';
+                } else {
+                    return $stream->tags->language;
+                }
+            }
+        }, array_filter($ffpInfo->streams, function ($e) {
             return $e->codec_type === 'audio';
-        });
-        dd($audio);
-        
-        //$audioCodecIndex = array_search('audio', array_column($ffpInfo->streams, 'codec_type'));
-        //$audioCodecInfo = $ffpInfo->streams[$audioCodecIndex];
+        }));
 
-        if (isset($videoCodecInfo) && isset($audioCodecInfo)) {
+        if (isset($videoCodecInfo)) {
             $template->assign_block_vars('m3ulist.ffprobe', [
                 'FILESIZE' => humn_size($ffpInfo->format->size),
                 'RESOLUTION' => $videoCodecInfo->width . 'x' . $videoCodecInfo->height,
-                'VIDEO_CODEC' => mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')
+                'VIDEO_CODEC' => mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8'),
+                'AUDIO_DUB' => implode('&nbsp;&middot;&nbsp;', $audioDub)
             ]);
         }
     }

@@ -13,7 +13,14 @@
     <tbody>
     <tr class="{m3ulist.ROW_CLASS} tCenter">
         <td>{m3ulist.ROW_NUMBER}</td>
-        <td width="40%">{m3ulist.TITLE}<!-- IF m3ulist.FFP_DATA --><hr>{m3ulist.FFP_DATA}<!-- ENDIF --></td>
+        <td width="40%">{m3ulist.TITLE}
+            <!-- BEGIN ffprobe -->
+            <hr>{m3ulist.ffprobe.RESOLUTION}<br>
+            {m3ulist.ffprobe.FILESIZE}<br>
+            {m3ulist.ffprobe.VIDEO_CODEC}<br>
+            {m3ulist.ffprobe.AUDIO_DUB}
+            <!-- END ffprobe -->
+        </td>
         <td>
             <a href="#" onclick="return false;" class="copyElement" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;
             <a target="_blank" href="{m3ulist.M3U_DL_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
