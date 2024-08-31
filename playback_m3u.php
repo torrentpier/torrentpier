@@ -115,13 +115,14 @@ foreach ($m3uData as $entry) {
                 return null;
             }
 
-            $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], 1) . '</span><br>';
+            $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], $audioTracks) . '</span><br>';
 
             if (isset($stream->tags->title)) {
                 $result .= $stream->tags->language . ' (' . $stream->tags->title . ')';
             } else {
                 $result .= $stream->tags->language;
             }
+
             $result .= '<br>';
             $result .= sprintf($lang['AUDIO_CODEC'], mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
             $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
