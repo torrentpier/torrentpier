@@ -229,7 +229,6 @@ class TorrServerAPI
             if ($curl->httpStatusCode === 200 && !empty($response)) {
                 CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
             } else {
-                $response->{$index} = $curl->httpStatusCode;
                 bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode}\n", $this->logFile);
             }
             $curl->close();
