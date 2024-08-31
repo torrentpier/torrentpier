@@ -144,7 +144,7 @@ foreach ($m3uData as $entry) {
             'FILESIZE' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
             'RESOLUTION' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
             'VIDEO_CODEC' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
-            'AUDIO_DUB' => !is_null($audioDub) ? implode('<hr>', $audioDub) : ''
+            'AUDIO_DUB' => implode('<hr>', $audioDub)
         ]);
     }
 }
