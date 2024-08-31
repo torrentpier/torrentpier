@@ -28,6 +28,8 @@
             ajax.callback.ffprobe_info = function (data) {
                 if (data.ffprobe_data) {
                     $('#ffprobe_{m3ulist.ROW_NUMBER}').html(data.ffprobe_data);
+                } else {
+                    $('#ffprobe_{m3ulist.ROW_NUMBER}').html('TODO: ...');
                 }
             }
         </script>
