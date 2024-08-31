@@ -97,6 +97,7 @@ foreach ($m3uData as $entry) {
 
     // Get ffprobe info from TorrServer
     $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($row['info_hash'] ?? $row['info_hash_v2'], $filesCount, $row['attach_id']);
+    $ffpInfo = $ffpInfo->{$filesCount};
     if (isset($ffpInfo->streams)) {
         // Video codec information
         $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));

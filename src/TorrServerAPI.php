@@ -12,6 +12,8 @@ namespace TorrentPier;
 use Curl\Curl;
 use CURLFile;
 
+use stdClass;
+
 /**
  * Class TorrServerAPI
  * @package TorrentPier
@@ -205,6 +207,10 @@ class TorrServerAPI
         global $bb_cfg;
 
         if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_$attach_id")) {
+            $response = new stdClass();
+        }
+
+        if (!isset($response->{$index})) {
             // Make stream call to store torrent in memory
             for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
                 if ($this->getStream($hash)) {
@@ -219,7 +225,7 @@ class TorrServerAPI
 
             $curl->setHeader('Accept', 'application/json');
             $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . bin2hex($hash) . '/' . $index);
-            $response = $curl->response;
+            $response->{$index} = $curl->response;
             if ($curl->httpStatusCode === 200 && !empty($response)) {
                 CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
             } else {
