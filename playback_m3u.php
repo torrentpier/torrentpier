@@ -93,21 +93,24 @@ foreach ($m3uData as $entry) {
     // Get ffprobe info from TorrServer
     $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($row['info_hash'] ?? $row['info_hash_v2'], $filesCount, $row['attach_id']);
     if (isset($ffpInfo->streams)) {
+        dump($ffpInfo);
         // Video codec information
         $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));
         $videoCodecInfo = $ffpInfo->streams[$videoCodecIndex];
         // Audio codec information
         $audioDub = array_map(function ($stream) {
             global $lang;
-            if ($stream->tags === null) {
-                return $lang['UNKNOWN'];
+            if (!isset($stream->tags)) {
+                $result = $lang['UNKNOWN'];
             } else {
                 if (isset($stream->tags->title)) {
-                    return $stream->tags->language . ' (' . $stream->tags->title . ')';
+                    $result = $stream->tags->language . ' (' . $stream->tags->title . ') [Каналов: ' . $stream->channels . ' | Битрейт: ' . $stream->bit_rate . ' ]';
                 } else {
-                    return $stream->tags->language;
+                    $result = $stream->tags->language;
                 }
             }
+
+            return $result;
         }, array_filter($ffpInfo->streams, function ($e) {
             return $e->codec_type === 'audio';
         }));
@@ -117,7 +120,7 @@ foreach ($m3uData as $entry) {
                 'FILESIZE' => humn_size($ffpInfo->format->size),
                 'RESOLUTION' => $videoCodecInfo->width . 'x' . $videoCodecInfo->height,
                 'VIDEO_CODEC' => mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8'),
-                'AUDIO_DUB' => implode('&nbsp;&middot;&nbsp;', $audioDub)
+                'AUDIO_DUB' => implode('<br>', $audioDub)
             ]);
         }
     }

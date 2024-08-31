@@ -1268,9 +1268,15 @@ $lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.ph
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Viewed';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivated by an board admin, therefore this Attachment is not displayed.'; // used in Posts and PM's, replace %s with mime type
+
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution:';
+$lang['CHANNELS'] = 'Channels:';
+$lang['BITRATE'] = 'Bitrate:';
+$lang['VIDEO_CODEC'] = 'Video codec:';
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 $lang['PLAYBACK_M3U'] = 'Playback .m3u file';
-$lang['STREAM'] = 'Stream';
 $lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
 $lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
 $lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
