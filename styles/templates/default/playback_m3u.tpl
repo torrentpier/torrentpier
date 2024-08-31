@@ -4,7 +4,7 @@
     <thead>
     <tr>
         <th>#</th>
-        <th>{FILES_COUNT}</th>
+        <th>{FILES_COUNT_TITLE}</th>
         <th>{L_STREAM}</th>
     </tr>
     </thead>
