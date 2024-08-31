@@ -111,24 +111,31 @@ foreach ($m3uData as $entry) {
         $audioDub = array_map(function ($stream) {
             global $lang;
 
-            if (!isset($stream->tags)) {
-                return null;
+            $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], ($stream->index === 0) ? 1 : $stream->index) . '</span><br>';
+            if (isset($stream->tags->language)) {
+                if (isset($stream->tags->title)) {
+                    $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . ' (' . $stream->tags->title . ')' . '</b>';
+                } else {
+                    $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . '</b>';
+                }
+                $result .= '<br>';
             }
 
-            $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], $stream->index) . '</span><br>';
-
-            if (isset($stream->tags->title)) {
-                $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . ' (' . $stream->tags->title . ')' . '</b>';
-            } else {
-                $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . '</b>';
+            if (!empty($stream->codec_name)) {
+                $result .= sprintf($lang['AUDIO_CODEC'], mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
             }
-
-            $result .= '<br>';
-            $result .= sprintf($lang['AUDIO_CODEC'], mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
-            $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
-            $result .= sprintf($lang['SAMPLE_RATE'], $stream->sample_rate) . '<br>';
-            $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
-            $result .= sprintf($lang['CHANNELS_LAYOUT'], $stream->channel_layout);
+            if (!empty($stream->bit_rate)) {
+                $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
+            }
+            if (!empty($stream->sample_rate)) {
+                $result .= sprintf($lang['SAMPLE_RATE'], $stream->sample_rate) . '<br>';
+            }
+            if (!empty($stream->channels)) {
+                $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
+            }
+            if (!empty($stream->channel_layout)) {
+                $result .= sprintf($lang['CHANNELS_LAYOUT'], $stream->channel_layout);
+            }
 
             return $result;
         }, $audioTracks);
