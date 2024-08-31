@@ -29,7 +29,9 @@
         <td>{m3ulist.ROW_NUMBER}</td>
         <td width="40%"><b>{m3ulist.TITLE}</b>
             <hr>
-            <a href="#" onclick="return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
+            <div id="ffprobe_{m3ulist.ROW_NUMBER}">
+                <a href="#" onclick="ajax.ffprobe_info({m3ulist.ROW_NUMBER}); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
+            </div>
             <!-- BEGIN ffprobe -->
             <hr><!-- IF m3ulist.ffprobe.RESOLUTION -->{m3ulist.ffprobe.RESOLUTION}<br><!-- ENDIF -->
             {m3ulist.ffprobe.FILESIZE}<br>
