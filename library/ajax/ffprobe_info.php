@@ -44,6 +44,7 @@ if (isset($ffpInfo->streams)) {
     $audioTracks = array_filter($ffpInfo->streams, function ($e) {
         return $e->codec_type === 'audio';
     });
+    // Audio tracks information
     $audioDub = array_map(function ($stream) {
         global $lang;
 
@@ -76,6 +77,7 @@ if (isset($ffpInfo->streams)) {
         return $result;
     }, $audioTracks);
 
+    // Generate output data
     $data = [
         'filesize' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
         'resolution' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
@@ -83,6 +85,7 @@ if (isset($ffpInfo->streams)) {
         'audio_dub' => implode('<hr>', $audioDub)
     ];
 
+    // Validate output data
     $result = '<hr>';
     if (!empty($data['resolution'])) {
         $result .= $data['resolution'] . '<br>';
