@@ -1273,6 +1273,7 @@ $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivate
 $lang['STREAM'] = 'Stream';
 $lang['RESOLUTION'] = 'Resolution:';
 $lang['CHANNELS'] = 'Channels:';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout:';
 $lang['BITRATE'] = 'Bitrate:';
 $lang['VIDEO_CODEC'] = 'Video codec:';
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
