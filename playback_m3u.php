@@ -109,6 +109,8 @@ foreach ($m3uData as $entry) {
             return $e->codec_type === 'audio';
         });
         $audioDub = array_map(function ($stream) {
+            global $lang;
+
             if (!isset($stream->tags)) {
                 return null;
             }
@@ -118,16 +120,20 @@ foreach ($m3uData as $entry) {
             } else {
                 $result = $stream->tags->language;
             }
-            $result .= '1';
+            $result .= '<br>';
+            $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
+            $result .= sprintf($lang['SAMPLE_RATE'], $stream->sample_rate) . '<br>';
+            $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
+            $result .= sprintf($lang['CHANNELS_LAYOUT'], $stream->channel_layout);
 
             return $result;
         }, $audioTracks);
 
         $template->assign_block_vars('m3ulist.ffprobe', [
-            'FILESIZE' => sprintf($lang['FILESIZE'] . ': %s', humn_size($ffpInfo->format->size)),
+            'FILESIZE' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
             'RESOLUTION' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
             'VIDEO_CODEC' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
-            'AUDIO_DUB' => !is_null($audioDub) ? implode('<br>', $audioDub) : ''
+            'AUDIO_DUB' => !is_null($audioDub) ? implode('<hr>', $audioDub) : ''
         ]);
     }
 }

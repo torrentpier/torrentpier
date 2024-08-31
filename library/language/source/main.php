@@ -1271,14 +1271,14 @@ $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivate
 
 // Viewtopic -> Display of Attachments -> TorrServer integration
 $lang['STREAM'] = 'Stream';
-$lang['RESOLUTION'] = 'Resolution: %s';
-$lang['CHANNELS'] = 'Channels: %s';
-$lang['CHANNELS_LAYOUT'] = 'Channels layout: %s';
-$lang['BITRATE'] = 'Bitrate: %s';
-$lang['SAMPLE_RATE'] = 'Sample rate: %s';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
 $lang['AUDIO_TRACKS'] = 'Audio tracks:';
-$lang['AUDIO_CODEC'] = 'Audio codec: %s';
-$lang['VIDEO_CODEC'] = 'Video codec: %s';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b>%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b>%s</b>';
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 $lang['PLAYBACK_M3U'] = 'Playback .m3u file';
 $lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
