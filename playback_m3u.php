@@ -108,7 +108,6 @@ foreach ($m3uData as $entry) {
         $audioTracks = array_filter($ffpInfo->streams, function ($e) {
             return $e->codec_type === 'audio';
         });
-        dump($audioTracks);
         $audioDub = array_map(function ($stream) {
             if (!isset($stream->tags)) {
                 return null;
