@@ -17,16 +17,16 @@ if (!$bb_cfg['torr_server']['enabled']) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
-if (!$attach_id = (int)$this->request['attach_id']) {
+if (!$attach_id = (int)$this->request['attach_id'] or !is_numeric($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
 }
 
-if (!$file_index = (int)$this->request['file_index']) {
-    $this->ajax_die('Invalid file index');
+if (!$file_index = (int)$this->request['file_index'] or !is_numeric($file_index)) {
+    $this->ajax_die("Invalid file index: $file_index");
 }
 
-if (!$info_hash = (string)$this->request['info_hash']) {
-    $this->ajax_die('Invalid info_hash');
+if (!$info_hash = (string)$this->request['info_hash'] or strlen($info_hash) !== 20) {
+    $this->ajax_die("Invalid info_hash: $info_hash");
 }
 
 $isAudio = !empty($this->request['is_audio']);
