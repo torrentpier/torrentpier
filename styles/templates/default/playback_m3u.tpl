@@ -1,5 +1,19 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
+<script type="text/javascript">
+    ajax.ffprobe_info = function (file_index) {
+        ajax.exec({
+            action: 'ffprobe_info',
+            attach_id: {ATTACH_ID},
+            info_hash: {INFO_HASH},
+            file_index: file_index
+        });
+    };
+    ajax.callback.ffprobe_info = function (data) {
+        $('#cache').html(data.cache_html);
+    }
+</script>
+
 <table class="forumline">
     <thead>
     <tr>
@@ -27,7 +41,8 @@
             <!-- END ffprobe -->
         </td>
         <td>
-            <a href="#" onclick="return false;" class="copyElement" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;
+            <a href="#" onclick="return false;" class="copyElement"
+               data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;
             <a target="_blank" href="{m3ulist.M3U_DL_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
             <hr>
             <!-- IF m3ulist.IS_VALID --><!-- IF m3ulist.IS_AUDIO -->
