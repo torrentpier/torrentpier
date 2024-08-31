@@ -33,10 +33,10 @@
     <tr class="{m3ulist.ROW_CLASS} tCenter">
         <td>{m3ulist.ROW_NUMBER}</td>
         <td width="40%"><b>{m3ulist.TITLE}</b>
-            <div id="ffprobe_{m3ulist.ROW_NUMBER}">
+            <div id="ffprobe_{m3ulist.FILE_INDEX}">
                 <hr>
                 <a href="#"
-                   onclick="ajax.ffprobe_info({m3ulist.ROW_NUMBER}, '{m3ulist.IS_AUDIO}'); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
+                   onclick="ajax.ffprobe_info({m3ulist.FILE_INDEX}, '{m3ulist.IS_AUDIO}'); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
             </div>
         </td>
         <td>
