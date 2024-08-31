@@ -98,7 +98,7 @@ foreach ($m3uData as $entry) {
 
 // Generate output
 $template->assign_vars([
-    'HAS_ITEMS' => (bool)$filesCount,
+    'HAS_ITEMS' => $filesCount > 0,
     'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
     'ATTACH_ID' => $row['attach_id'],
     'INFO_HASH' => bin2hex($row['info_hash'] ?? $row['info_hash_v2']),
