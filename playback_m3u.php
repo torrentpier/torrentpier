@@ -111,7 +111,7 @@ foreach ($m3uData as $entry) {
         $audioDub = array_map(function ($stream) {
             global $lang;
 
-            $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], ($stream->index === 0) ? 1 : $stream->index) . '</span><br>';
+            $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], (!isset($stream->index) || $stream->index === 0) ? 1 : $stream->index) . '</span><br>';
             if (isset($stream->tags->language)) {
                 if (isset($stream->tags->title)) {
                     $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . ' (' . $stream->tags->title . ')' . '</b>';
