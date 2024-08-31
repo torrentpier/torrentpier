@@ -37,17 +37,8 @@
         <td width="40%"><b>{m3ulist.TITLE}</b>
             <hr>
             <div id="ffprobe_{m3ulist.ROW_NUMBER}">
-                <a href="#" onclick="ajax.ffprobe_info({m3ulist.ROW_NUMBER}, {m3ulist.IS_AUDIO}); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
+                <a href="#" onclick="ajax.ffprobe_info({m3ulist.ROW_NUMBER}, '{m3ulist.IS_AUDIO}'); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
             </div>
-            <!-- BEGIN ffprobe -->
-            <hr><!-- IF m3ulist.ffprobe.RESOLUTION -->{m3ulist.ffprobe.RESOLUTION}<br><!-- ENDIF -->
-            {m3ulist.ffprobe.FILESIZE}<br>
-            <!-- IF m3ulist.ffprobe.VIDEO_CODEC -->{m3ulist.ffprobe.VIDEO_CODEC}<!-- ENDIF -->
-            <!-- IF m3ulist.ffprobe.AUDIO_DUB -->
-            <hr>
-            {m3ulist.ffprobe.AUDIO_DUB}
-            <!-- ENDIF -->
-            <!-- END ffprobe -->
         </td>
         <td>
             <a href="#" onclick="return false;" class="copyElement" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;

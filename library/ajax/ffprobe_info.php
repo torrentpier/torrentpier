@@ -33,7 +33,7 @@ $isAudio = (bool)$this->request['is_audio'];
 
 // Get ffprobe info from TorrServer
 $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $attach_id);
-$ffpInfo = $ffpInfo->{$filesCount};
+$ffpInfo = $ffpInfo->{$file_index};
 if (isset($ffpInfo->streams)) {
     // Video codec information
     $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));
@@ -83,5 +83,19 @@ if (isset($ffpInfo->streams)) {
         'audio_dub' => implode('<hr>', $audioDub)
     ];
 
-    $this->response['ffprobe_data'] = '';
+    $result = '<hr>';
+    if (!empty($data['resolution'])) {
+        $result .= $data['resolution'] . '<br>';
+    }
+    if (!empty($data['filesize'])) {
+        $result .= $data['filesize'] . '<br>';
+    }
+    if (!empty($data['video_codec'])) {
+        $result .= $data['video_codec'];
+    }
+    if (!empty($data['audio_dub'])) {
+        $result .= '<hr>' . $data['audio_dub'];
+    }
+
+    $this->response['ffprobe_data'] = $result;
 }
