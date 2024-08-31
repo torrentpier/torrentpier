@@ -98,11 +98,15 @@ foreach ($m3uData as $entry) {
     // Get ffprobe info from TorrServer
     $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($row['info_hash'] ?? $row['info_hash_v2'], $filesCount, $row['attach_id']);
     if (isset($ffpInfo->streams)) {
-        dump($ffpInfo);
         // Video codec information
         $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));
-        $videoCodecInfo = $ffpInfo->streams[$videoCodecIndex];
+        if (is_int($videoCodecIndex)) {
+            $videoCodecInfo = $ffpInfo->streams[$videoCodecIndex];
+        }
         // Audio codec information
+        $audioTracks = array_filter($ffpInfo->streams, function ($e) {
+            return $e->codec_type === 'audio';
+        });
         $audioDub = array_map(function ($stream) {
             global $lang;
             if (!isset($stream->tags)) {
@@ -116,18 +120,14 @@ foreach ($m3uData as $entry) {
             }
 
             return $result;
-        }, array_filter($ffpInfo->streams, function ($e) {
-            return $e->codec_type === 'audio';
-        }));
+        }, $audioTracks);
 
-        if (isset($videoCodecInfo)) {
-            $template->assign_block_vars('m3ulist.ffprobe', [
-                'FILESIZE' => sprintf($lang['FILESIZE'] . ': %s', humn_size($ffpInfo->format->size)),
-                'RESOLUTION' => !$isAudio ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
-                'VIDEO_CODEC' => !$isAudio ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
-                'AUDIO_DUB' => implode('<br>', $audioDub)
-            ]);
-        }
+        $template->assign_block_vars('m3ulist.ffprobe', [
+            'FILESIZE' => sprintf($lang['FILESIZE'] . ': %s', humn_size($ffpInfo->format->size)),
+            'RESOLUTION' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
+            'VIDEO_CODEC' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
+            'AUDIO_DUB' => implode('<br>', $audioDub)
+        ]);
     }
 }
 
