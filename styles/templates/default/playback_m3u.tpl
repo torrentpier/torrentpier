@@ -29,6 +29,7 @@
                 if (data.ffprobe_data) {
                     $('#ffprobe_{m3ulist.ROW_NUMBER}').html(data.ffprobe_data);
                 } else {
+                    $('#ffprobe_{m3ulist.ROW_NUMBER}').append('<hr><span class="warnColor2">{L_PLEASE_TRY_AGAIN}</span>');
                 }
             }
         </script>
