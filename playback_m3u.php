@@ -118,9 +118,9 @@ foreach ($m3uData as $entry) {
             $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], $stream->index) . '</span><br>';
 
             if (isset($stream->tags->title)) {
-                $result .= $stream->tags->language . ' (' . $stream->tags->title . ')';
+                $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . ' (' . $stream->tags->title . ')' . '</b>';
             } else {
-                $result .= $stream->tags->language;
+                $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . '</b>';
             }
 
             $result .= '<br>';
