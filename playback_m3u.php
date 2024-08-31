@@ -80,11 +80,6 @@ foreach ($m3uData as $entry) {
     $filesCount++;
     $rowClass = ($filesCount % 2) ? 'row1' : 'row2';
 
-    // Get info from ffprobe
-    $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($row['info_hash'] ?? $row['info_hash_v2'], $filesCount, $row['attach_id']);
-    dump($ffpInfo);
-    dump($ffpInfo->streams);
-
     $template->assign_block_vars('m3ulist', [
         'ROW_NUMBER' => $filesCount,
         'ROW_CLASS' => $rowClass,
@@ -93,8 +88,26 @@ foreach ($m3uData as $entry) {
         'STREAM_LINK' => $streamLink,
         'M3U_DL_LINK' => $m3uFile,
         'TITLE' => $title,
-        'FFP_DATA' => (is_array($ffpInfo) && !empty($ffpInfo)) ? '4' : ''
     ]);
+
+    // Get ffprobe info from TorrServer
+    $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($row['info_hash'] ?? $row['info_hash_v2'], $filesCount, $row['attach_id']);
+    if (isset($ffpInfo->streams)) {
+        // Video codec information
+        $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));
+        $videoCodecInfo = $ffpInfo->streams[$videoCodecIndex];
+        // Audio codec information
+        $audioCodecIndex = array_search('audio', array_column($ffpInfo->streams, 'codec_type'));
+        $audioCodecInfo = $ffpInfo->streams[$audioCodecIndex];
+
+        if (isset($videoCodecInfo) && isset($audioCodecInfo)) {
+            $template->assign_block_vars('m3ulist.ffprobe', [
+                'FILESIZE' => humn_size($ffpInfo->format['size']),
+                'RESOLUTION' => $videoCodecInfo->width . 'x' . $videoCodecInfo->height,
+                'VIDEO_CODEC' => mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')
+            ]);
+        }
+    }
 }
 
 // Generate output
