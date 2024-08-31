@@ -54,7 +54,7 @@
     <!-- ELSE -->
     <tbody>
     <tr>
-        <td class="row1 tCenter pad_8" colspan="3">No items</td>
+        <td class="row1 tCenter pad_8" colspan="3">{L_NO_ITEMS}</td>
     </tr>
     </tbody>
     <!-- ENDIF -->
