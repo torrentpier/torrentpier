@@ -97,12 +97,17 @@ foreach ($m3uData as $entry) {
         $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));
         $videoCodecInfo = $ffpInfo->streams[$videoCodecIndex];
         // Audio codec information
-        $audioCodecIndex = array_search('audio', array_column($ffpInfo->streams, 'codec_type'));
-        $audioCodecInfo = $ffpInfo->streams[$audioCodecIndex];
+        $audio = array_filter($ffpInfo->streams, function ($e) {
+            return $e->codec_type === 'audio';
+        });
+        dd($audio);
+        
+        //$audioCodecIndex = array_search('audio', array_column($ffpInfo->streams, 'codec_type'));
+        //$audioCodecInfo = $ffpInfo->streams[$audioCodecIndex];
 
         if (isset($videoCodecInfo) && isset($audioCodecInfo)) {
             $template->assign_block_vars('m3ulist.ffprobe', [
-                'FILESIZE' => humn_size($ffpInfo->format['size']),
+                'FILESIZE' => humn_size($ffpInfo->format->size),
                 'RESOLUTION' => $videoCodecInfo->width . 'x' . $videoCodecInfo->height,
                 'VIDEO_CODEC' => mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')
             ]);
