@@ -155,7 +155,6 @@ $template->assign_vars([
     'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
     'ATTACH_ID' => $row['attach_id'],
     'INFO_HASH' => $row['info_hash'] ?? $row['info_hash_v2'],
-    'FILES_COUNT' => $filesCount,
     'FILES_COUNT_TITLE' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
     'U_TOPIC' => TOPIC_URL . $topic_id,
 ]);
