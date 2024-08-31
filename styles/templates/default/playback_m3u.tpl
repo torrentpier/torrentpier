@@ -20,7 +20,6 @@
             <!-- IF m3ulist.ffprobe.VIDEO_CODEC -->{m3ulist.ffprobe.VIDEO_CODEC}<!-- ENDIF -->
             <!-- IF m3ulist.ffprobe.AUDIO_DUB -->
             <hr>
-            <span class="warnColor2">{L_AUDIO_TRACKS}</span><br>
             {m3ulist.ffprobe.AUDIO_DUB}
             <!-- ENDIF -->
             <!-- END ffprobe -->
