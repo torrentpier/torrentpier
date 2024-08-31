@@ -124,7 +124,7 @@ foreach ($m3uData as $entry) {
             $template->assign_block_vars('m3ulist.ffprobe', [
                 'FILESIZE' => sprintf($lang['FILESIZE'] . ': %s', humn_size($ffpInfo->format->size)),
                 'RESOLUTION' => !$isAudio ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
-                'VIDEO_CODEC' => sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')),
+                'VIDEO_CODEC' => !$isAudio ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
                 'AUDIO_DUB' => implode('<br>', $audioDub)
             ]);
         }
