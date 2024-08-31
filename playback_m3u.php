@@ -115,7 +115,7 @@ foreach ($m3uData as $entry) {
                 return null;
             }
 
-            $result = '<span class="warnColor2">'.$lang['AUDIO_TRACK'].'</span><br>';
+            $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], 1) . '</span><br>';
 
             if (isset($stream->tags->title)) {
                 $result .= $stream->tags->language . ' (' . $stream->tags->title . ')';
