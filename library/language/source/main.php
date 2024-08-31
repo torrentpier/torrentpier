@@ -1279,6 +1279,7 @@ $lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
 $lang['AUDIO_TRACK'] = 'Audio track (%d):';
 $lang['AUDIO_CODEC'] = 'Audio codec: <b>%s</b>';
 $lang['VIDEO_CODEC'] = 'Video codec: <b>%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 $lang['PLAYBACK_M3U'] = 'Playback .m3u file';
 $lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
