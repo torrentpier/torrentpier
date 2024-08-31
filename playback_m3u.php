@@ -154,6 +154,7 @@ $template->assign_vars([
     'HAS_ITEMS' => (bool)$filesCount,
     'PAGE_TITLE' => $lang['PLAYBACK_M3U'],
     'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension($filesCount, 'files')),
+    'U_TOPIC' => TOPIC_URL . $topic_id,
 ]);
 
 print_page('playback_m3u.tpl');

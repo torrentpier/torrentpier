@@ -54,6 +54,7 @@
 <!--bottom_info-->
 <div class="bottom_info">
     <div class="spacer_8"></div>
+    <a href="{U_TOPIC}">{L_TOPIC_RETURN}</a>
     <div id="timezone">
         <p>{CURRENT_TIME}</p>
         <p>{S_TIMEZONE}</p>
