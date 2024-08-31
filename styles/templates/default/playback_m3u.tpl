@@ -43,8 +43,7 @@
             <!-- END ffprobe -->
         </td>
         <td>
-            <a href="#" onclick="return false;" class="copyElement"
-               data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;
+            <a href="#" onclick="return false;" class="copyElement" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;
             <a target="_blank" href="{m3ulist.M3U_DL_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
             <hr>
             <!-- IF m3ulist.IS_VALID --><!-- IF m3ulist.IS_AUDIO -->
