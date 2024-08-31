@@ -64,6 +64,8 @@ $lang['CLEAR'] = 'Очистить';
 $lang['MOVE_TO_TOP'] = 'В начало';
 $lang['UNKNOWN'] = 'Не указан';
 $lang['COPY_TO_CLIPBOARD'] = 'Скопировать в буфер обмена';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'След.';
 $lang['PREVIOUS_PAGE'] = 'Пред.';
@@ -1268,9 +1270,20 @@ $lang['DOWNLOAD'] = 'Скачать'; // this Language Variable is defined in ad
 $lang['FILESIZE'] = 'Размер';
 $lang['VIEWED'] = 'Просмотров';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Расширение \'%s\' было деактивировано администратором, поэтому это приложение не отображается.'; // used in Posts and PM's, replace %s with mime type
+
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Трансляция';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
 $lang['DOWNLOAD_M3U_FILE'] = 'Скачать .m3u файл';
 $lang['PLAYBACK_M3U'] = 'Воспроизвести .m3u файл';
-$lang['STREAM'] = 'Трансляция';
 $lang['COPY_STREAM_LINK'] = 'Скопировать ссылку на поток в буфер обмена';
 $lang['M3U_NOT_SUPPORTED'] = 'Этот файл невозможно воспроизвести в браузере...';
 $lang['M3U_NOTICE'] = 'Некоторые браузеры не поддерживают воспроизведение определенных форматов видео. В таком случае вы можете скачать файл .m3u и воспроизвести его с помощью стороннего плеера';

@@ -64,6 +64,8 @@ $lang['CLEAR'] = 'Clear';
 $lang['MOVE_TO_TOP'] = 'Move to top';
 $lang['UNKNOWN'] = 'Ismeretlen';
 $lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['NO_ITEMS'] = 'There seems to be no data here...';
+$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
 $lang['NEXT_PAGE'] = 'Következő';
 $lang['PREVIOUS_PAGE'] = 'Előző';
@@ -1268,9 +1270,20 @@ $lang['DOWNLOAD'] = 'Letöltés'; // this Language Variable is defined in admin.
 $lang['FILESIZE'] = 'Fájlméretet';
 $lang['VIEWED'] = 'Megtekinthető';
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'A Kiterjesztés \'%s\' volt kapcsolva egy fórumon admin, ezért ezt a Mellékletet nem jelenik meg.'; // used in Posts and PM's, replace %s with mime type
+
+// Viewtopic -> Display of Attachments -> TorrServer integration
+$lang['STREAM'] = 'Stream';
+$lang['RESOLUTION'] = 'Resolution: <b>%s</b>';
+$lang['CHANNELS'] = 'Channels: <b>%s</b>';
+$lang['CHANNELS_LAYOUT'] = 'Channels layout: <b>%s</b>';
+$lang['BITRATE'] = 'Bitrate: <b>%s</b>';
+$lang['SAMPLE_RATE'] = 'Sample rate: <b>%s</b>';
+$lang['AUDIO_TRACK'] = 'Audio track information (%d):';
+$lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
+$lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
+$lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
 $lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
 $lang['PLAYBACK_M3U'] = 'Playback .m3u file';
-$lang['STREAM'] = 'Stream';
 $lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
 $lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
 $lang['M3U_NOTICE'] = 'Some browsers do not support playback of certain video formats. In such a case, you can download the .m3u file and play it using a third-party player';
