@@ -29,7 +29,7 @@ if (!$info_hash = (string)$this->request['info_hash']) {
     $this->ajax_die('Invalid info_hash');
 }
 
-$isAudio = (bool)$this->request['is_audio'];
+$isAudio = !empty($this->request['is_audio']);
 
 // Get ffprobe info from TorrServer
 $ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $attach_id);
@@ -99,3 +99,5 @@ if (isset($ffpInfo->streams)) {
 
     $this->response['ffprobe_data'] = $result;
 }
+
+$this->response['file_index'] = $file_index;
