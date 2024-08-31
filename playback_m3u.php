@@ -108,16 +108,18 @@ foreach ($m3uData as $entry) {
         $audioTracks = array_filter($ffpInfo->streams, function ($e) {
             return $e->codec_type === 'audio';
         });
+        dump($audioTracks);
         $audioDub = array_map(function ($stream) {
             if (!isset($stream->tags)) {
-                $result = null;
-            } else {
-                if (isset($stream->tags->title)) {
-                    $result = $stream->tags->language . ' (' . $stream->tags->title . ') [Каналов: ' . $stream->channels . ' | Битрейт: ' . $stream->bit_rate . ' ]';
-                } else {
-                    $result = $stream->tags->language;
-                }
+                return null;
             }
+
+            if (isset($stream->tags->title)) {
+                $result = $stream->tags->language . ' (' . $stream->tags->title . ')';
+            } else {
+                $result = $stream->tags->language;
+            }
+            $result .= '1';
 
             return $result;
         }, $audioTracks);
