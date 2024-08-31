@@ -13,7 +13,7 @@
     <tbody>
     <tr class="{m3ulist.ROW_CLASS} tCenter">
         <td>{m3ulist.ROW_NUMBER}</td>
-        <td width="40%">{m3ulist.TITLE}
+        <td width="40%"><b>{m3ulist.TITLE}</b>
             <!-- BEGIN ffprobe -->
             <hr><!-- IF m3ulist.ffprobe.RESOLUTION -->{m3ulist.ffprobe.RESOLUTION}<br><!-- ENDIF -->
             {m3ulist.ffprobe.FILESIZE}<br>
