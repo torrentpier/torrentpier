@@ -29,8 +29,61 @@ if (!$info_hash = (string)$this->request['info_hash']) {
     $this->ajax_die('Invalid info_hash');
 }
 
-dump($attach_id);
-dump($file_index);
-dump($info_hash);
+$isAudio = (bool)$this->request['is_audio'];
 
-$this->response['ffprobe_data'] = '123';
+// Get ffprobe info from TorrServer
+$ffpInfo = (new \TorrentPier\TorrServerAPI())->getFfpInfo($info_hash, $file_index, $attach_id);
+$ffpInfo = $ffpInfo->{$filesCount};
+if (isset($ffpInfo->streams)) {
+    // Video codec information
+    $videoCodecIndex = array_search('video', array_column($ffpInfo->streams, 'codec_type'));
+    if (is_int($videoCodecIndex)) {
+        $videoCodecInfo = $ffpInfo->streams[$videoCodecIndex];
+    }
+    // Audio codec information
+    $audioTracks = array_filter($ffpInfo->streams, function ($e) {
+        return $e->codec_type === 'audio';
+    });
+    $audioDub = array_map(function ($stream) {
+        global $lang;
+
+        $result = '<span class="warnColor2">' . sprintf($lang['AUDIO_TRACK'], (!isset($stream->index) || $stream->index === 0) ? 1 : $stream->index) . '</span><br>';
+        if (isset($stream->tags->language)) {
+            if (isset($stream->tags->title)) {
+                $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . ' (' . $stream->tags->title . ')' . '</b>';
+            } else {
+                $result .= '<b>' . mb_strtoupper($stream->tags->language, 'UTF-8') . '</b>';
+            }
+            $result .= '<br>';
+        }
+
+        if (!empty($stream->codec_name)) {
+            $result .= sprintf($lang['AUDIO_CODEC'], mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
+        }
+        if (!empty($stream->bit_rate)) {
+            $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
+        }
+        if (!empty($stream->sample_rate)) {
+            $result .= sprintf($lang['SAMPLE_RATE'], $stream->sample_rate) . '<br>';
+        }
+        if (!empty($stream->channels)) {
+            $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
+        }
+        if (!empty($stream->channel_layout)) {
+            $result .= sprintf($lang['CHANNELS_LAYOUT'], $stream->channel_layout);
+        }
+
+        return $result;
+    }, $audioTracks);
+
+    $template->assign_block_vars('m3ulist.ffprobe', [
+        'FILESIZE' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
+        'RESOLUTION' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
+        'VIDEO_CODEC' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
+        'AUDIO_DUB' => implode('<hr>', $audioDub)
+    ]);
+}
+
+$this->response['ffprobe_data'] = '
+
+';

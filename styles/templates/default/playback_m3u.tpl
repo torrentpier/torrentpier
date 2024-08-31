@@ -1,12 +1,13 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <script type="text/javascript">
-    ajax.ffprobe_info = function (file_index) {
+    ajax.ffprobe_info = function (file_index, is_audio) {
         ajax.exec({
             action: 'ffprobe_info',
             attach_id: {ATTACH_ID},
             info_hash: '{INFO_HASH}',
-            file_index: file_index
+            file_index: file_index,
+            is_audio: is_audio
         });
     };
 </script>
@@ -32,7 +33,7 @@
         <td width="40%"><b>{m3ulist.TITLE}</b>
             <hr>
             <div id="ffprobe_{m3ulist.ROW_NUMBER}">
-                <a href="#" onclick="ajax.ffprobe_info({m3ulist.ROW_NUMBER}); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
+                <a href="#" onclick="ajax.ffprobe_info({m3ulist.ROW_NUMBER}, {m3ulist.IS_AUDIO}); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
             </div>
             <!-- BEGIN ffprobe -->
             <hr><!-- IF m3ulist.ffprobe.RESOLUTION -->{m3ulist.ffprobe.RESOLUTION}<br><!-- ENDIF -->
