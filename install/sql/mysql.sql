@@ -922,6 +922,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts`
   `post_edit_time`  INT(11)               NOT NULL DEFAULT '0',
   `post_edit_count` SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `post_attachment` TINYINT(1)            NOT NULL DEFAULT '0',
+  `post_anonymous`  TINYINT(1)            NOT NULL DEFAULT '0',
   `user_post`       TINYINT(1)            NOT NULL DEFAULT '1',
   `mc_comment`      TEXT                  NOT NULL DEFAULT '',
   `mc_type`         TINYINT(1)            NOT NULL DEFAULT '0',
@@ -939,7 +940,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts`
 -- Records of bb_posts
 -- ----------------------------
 INSERT INTO `bb_posts`
-VALUES ('1', '1', '1', '2', UNIX_TIMESTAMP(), '0', '0', '0', '', '0', '0', '0', '1', '', '0', '0');
+VALUES ('1', '1', '1', '2', UNIX_TIMESTAMP(), '0', '0', '0', '', '0', '0', '0', '0', '1', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `bb_posts_html`

@@ -126,6 +126,12 @@
                             <td><label for="update_post_time">{L_UPDATE_POST_TIME}</label></td>
                         </tr>
                         <!-- ENDIF -->
+                        <!-- IF SHOW_ANONYMOUS_CHECKBOX -->
+                        <tr>
+                            <td><input type="checkbox" id="anonymous" name="anonymous" {S_ANONYMOUS_CHECKED} /></td>
+                            <td><label for="anonymous">{ANONYMOUS_MODE}</label></td>
+                        </tr>
+                        <!-- ENDIF -->
                         <!-- IF SHOW_NOTIFY_CHECKBOX -->
                         <tr>
                             <td><input type="checkbox" id="notify" name="notify" {S_NOTIFY_CHECKED} /></td>

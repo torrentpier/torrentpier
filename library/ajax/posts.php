@@ -258,7 +258,7 @@ switch ($this->request['type']) {
             }
         }
 
-        DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, " . $post['forum_id'] . ", " . $userdata['user_id'] . ", '" . TIMENOW . "', '" . USER_IP . "')");
+        DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip, post_anonymous) VALUES ($topic_id, " . $post['forum_id'] . ", " . $userdata['user_id'] . ", '" . TIMENOW . "', '" . USER_IP . "', " . (int)$this->request['anonymous_mode'] . ")");
         $post_id = DB()->sql_nextid();
         DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . DB()->escape($message) . "')");
 
