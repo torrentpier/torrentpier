@@ -17,11 +17,13 @@ if (!$bb_cfg['torr_server']['enabled']) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
-if (!$attach_id = (int)$this->request['attach_id'] or !is_numeric($attach_id)) {
+$attach_id = $this->request['attach_id'];
+if (empty($attach_id) || !is_numeric($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
 }
 
-if (!$file_index = (int)$this->request['file_index'] or !is_numeric($file_index)) {
+$file_index = $this->request['file_index'];
+if (empty($file_index) || !is_numeric($file_index)) {
     $this->ajax_die("Invalid file index: $file_index");
 }
 
