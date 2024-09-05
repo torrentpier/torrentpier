@@ -33,6 +33,9 @@ if (!$topic_id) {
     bb_die($lang['INVALID_TOPIC_ID'], 404);
 }
 
+// Download mode
+$dl_m3u = request_var('dl_m3u', 0);
+
 // Getting torrent info from database
 $sql = 'SELECT attach_id, info_hash, info_hash_v2
             FROM ' . BB_BT_TORRENTS . '
@@ -46,6 +49,11 @@ if (!$row = DB()->fetch_row($sql)) {
 // Check m3u file exist
 if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($row['attach_id'])) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
+}
+
+// Start downloading
+if ($dl_m3u) {
+    dump($m3uFile);
 }
 
 // Parse M3U file
@@ -91,7 +99,7 @@ foreach ($m3uData as $entry) {
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
-        'M3U_DL_LINK' => $m3uFile,
+        'M3U_DL_LINK' => PLAYBACK_M3U_URL . $topic_id . '&dl_m3u=1',
         'TITLE' => $title,
     ]);
 }
