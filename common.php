@@ -239,13 +239,12 @@ function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTE
 }
 
 /**
- * @param string|null $str
- * @return string|null
+ * @param string $str
+ * @return string
  */
-function str_compact(string|null $str): ?string
+function str_compact($str)
 {
-    $str ??= '';
-    return preg_replace('#\s+#u', ' ', trim($str));
+    return preg_replace('#\s+#u', ' ', trim($str ?? ''));
 }
 
 /**
