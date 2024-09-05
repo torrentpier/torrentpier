@@ -124,7 +124,7 @@ function humn_bitrate(int $bitrate, string $space = '&nbsp;'): string
         $unit = 'bps';
     }
 
-    return commify($bitrate, 2) . $space . $unit;
+    return sprintf('%d', commify($bitrate)) . $space . $unit;
 }
 
 /**
@@ -137,7 +137,7 @@ function humn_bitrate(int $bitrate, string $space = '&nbsp;'): string
 function humn_sample_rate(int $sample_rate, string $space = '&nbsp;'): string
 {
     $unit = '';
-    return commify($sample_rate, thousands_separator: '.') . $space . $unit;
+    return sprintf('%.1f', commify($sample_rate)) . $space . $unit;
 }
 
 $this->response['file_index'] = $file_index;
