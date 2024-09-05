@@ -70,7 +70,7 @@ class Html
             if (\is_array($opt_val)) {
                 $this->cur_attr =& $this->cur_attr[$opt_name];
 
-                $label = htmlCHR(str_short($opt_name, $this->max_length));
+                $label = str_short(htmlCHR($opt_name), $this->max_length);
 
                 $this->options .= "\t<optgroup label=\"&nbsp;" . $label . "\">\n";
                 $this->_build_select_rec($opt_val);
@@ -78,7 +78,7 @@ class Html
 
                 $this->cur_attr =& $this->attr;
             } else {
-                $text = htmlCHR(str_short($opt_name, $this->max_length));
+                $text = str_short(htmlCHR($opt_name), $this->max_length);
                 $value = ' value="' . htmlCHR($opt_val) . '"';
 
                 $class = isset($this->cur_attr[$opt_name]['class']) ? ' class="' . $this->cur_attr[$opt_name]['class'] . '"' : '';
