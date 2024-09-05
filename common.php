@@ -245,7 +245,7 @@ function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTE
 function str_compact(string|null $str): ?string
 {
     $str ??= '';
-    return preg_replace('/\s\s+/', ' ', trim($str));
+    return preg_replace('#\s+#u', ' ', trim($str));
 }
 
 /**
