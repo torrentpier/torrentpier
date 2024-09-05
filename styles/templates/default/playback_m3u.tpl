@@ -14,8 +14,8 @@
         if (data.ffprobe_data) {
             $('#ffprobe_' + data.file_index).html(data.ffprobe_data);
         } else {
-            if ($('#ffprobe_' + data.file_index).find('span.warnColor2').length > 3) {
-                $('#ffprobe_' + data.file_index).append('<hr><span class="warnColor2">{L_M3U_FFPROBE_NO_DATA}</span>');
+            if ($('#ffprobe_' + data.file_index).find('span.warnColor2').length >= 3) {
+                $('#ffprobe_' + data.file_index).html('<hr><span class="warnColor2">{L_M3U_FFPROBE_NO_DATA}</span>');
             } else {
                 $('#ffprobe_' + data.file_index).append('<hr><span class="warnColor2">{L_PLEASE_TRY_AGAIN}</span>');
             }
