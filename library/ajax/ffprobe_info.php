@@ -67,7 +67,7 @@ if (isset($ffpInfo->streams)) {
             $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
         }
         if (!empty($stream->sample_rate)) {
-            $result .= sprintf($lang['SAMPLE_RATE'], $stream->sample_rate) . '<br>';
+            $result .= sprintf($lang['SAMPLE_RATE'], humn_sample_rate($stream->sample_rate)) . '<br>';
         }
         if (!empty($stream->channels)) {
             $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
@@ -103,6 +103,41 @@ if (isset($ffpInfo->streams)) {
     }
 
     $this->response['ffprobe_data'] = $result;
+}
+
+/**
+ * Bitrate to human-readable format
+ *
+ * @param int $bitrate
+ * @param string $space
+ * @return string
+ */
+function humn_bitrate(int $bitrate, string $space = '&nbsp;'): string
+{
+    if ($bitrate >= 1000000) {
+        $unit = 'Mbps';
+        $bitrate /= 1000000;
+    } elseif ($bitrate >= 1000) {
+        $unit = 'kbps';
+        $bitrate /= 1000;
+    } else {
+        $unit = 'bps';
+    }
+
+    return commify($bitrate, 2) . $space . $unit;
+}
+
+/**
+ * Sample rate to human-readable format
+ *
+ * @param int $sample_rate
+ * @param string $space
+ * @return string
+ */
+function humn_sample_rate(int $sample_rate, string $space = '&nbsp;'): string
+{
+    $unit = '';
+    return commify($sample_rate, 2) . $space . $unit;
 }
 
 $this->response['file_index'] = $file_index;
