@@ -1413,16 +1413,16 @@
         },
         {
             "name": "josantonius/cookie",
-            "version": "v2.0.6",
+            "version": "v2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/josantonius/php-cookie.git",
-                "reference": "278c002e4b55c21c988e8c4e7e63eb6b7a3c3c56"
+                "reference": "f6751dcfdd47a8ed54a77c77760eded24676b8cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/josantonius/php-cookie/zipball/278c002e4b55c21c988e8c4e7e63eb6b7a3c3c56",
-                "reference": "278c002e4b55c21c988e8c4e7e63eb6b7a3c3c56",
+                "url": "https://api.github.com/repos/josantonius/php-cookie/zipball/f6751dcfdd47a8ed54a77c77760eded24676b8cf",
+                "reference": "f6751dcfdd47a8ed54a77c77760eded24676b8cf",
                 "shasum": ""
             },
             "require": {
@@ -1473,7 +1473,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-10T22:19:41+00:00"
+            "time": "2024-09-11T14:15:04+00:00"
         },
         {
             "name": "league/color-extractor",
