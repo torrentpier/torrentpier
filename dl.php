@@ -18,9 +18,14 @@ $datastore->enqueue([
     'cat_forums'
 ]);
 
-$download_id = request_var('id', 0);
+$download_id = request_var('id', '');
 $thumbnail = request_var('thumb', 0);
-$m3u = request_var('m3u', 0);
+
+// Check M3U download mode
+$is_m3u = false;
+if (str_starts_with($download_id, \TorrentPier\TorrServerAPI::M3U['prefix'])) {
+    $is_m3u = true;
+}
 
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
@@ -89,124 +94,132 @@ if ($attach_config['disable_mod'] && !IS_ADMIN) {
     bb_die($lang['ATTACHMENT_FEATURE_DISABLED']);
 }
 
-$sql = 'SELECT * FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$download_id;
+if (!$is_m3u) {
+    $sql = 'SELECT * FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$download_id;
 
-if (!($result = DB()->sql_query($sql))) {
-    bb_die('Could not query attachment information #1');
-}
+    if (!($result = DB()->sql_query($sql))) {
+        bb_die('Could not query attachment information #1');
+    }
 
-if (!($attachment = DB()->sql_fetchrow($result))) {
-    bb_die($lang['ERROR_NO_ATTACHMENT']);
-}
-
-$attachment['physical_filename'] = basename($attachment['physical_filename']);
-
-if ($thumbnail) {
-    // Re-define $attachment['physical_filename'] for thumbnails
-    $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
-} elseif ($m3u) {
-    // Check m3u file exist
-    if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($m3u)) {
+    if (!($attachment = DB()->sql_fetchrow($result))) {
         bb_die($lang['ERROR_NO_ATTACHMENT']);
     }
-    $attachment['physical_filename'] = basename($m3uFile);
-}
 
-DB()->sql_freeresult($result);
+    $attachment['physical_filename'] = basename($attachment['physical_filename']);
 
-// get forum_id for attachment authorization or private message authorization
-$authorised = false;
+    // Re-define $attachment['physical_filename'] for thumbnails
+    if ($thumbnail) {
+        $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
+    }
 
-$sql = 'SELECT * FROM ' . BB_ATTACHMENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
+    DB()->sql_freeresult($result);
 
-if (!($result = DB()->sql_query($sql))) {
-    bb_die('Could not query attachment information #2');
-}
+    // get forum_id for attachment authorization or private message authorization
+    $authorised = false;
 
-$auth_pages = DB()->sql_fetchrowset($result);
-$num_auth_pages = DB()->num_rows($result);
+    $sql = 'SELECT * FROM ' . BB_ATTACHMENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
 
-for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
-    $auth_pages[$i]['post_id'] = (int)$auth_pages[$i]['post_id'];
+    if (!($result = DB()->sql_query($sql))) {
+        bb_die('Could not query attachment information #2');
+    }
 
-    if ($auth_pages[$i]['post_id'] != 0) {
-        $sql = 'SELECT forum_id, topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$auth_pages[$i]['post_id'];
+    $auth_pages = DB()->sql_fetchrowset($result);
+    $num_auth_pages = DB()->num_rows($result);
+
+    for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
+        $auth_pages[$i]['post_id'] = (int)$auth_pages[$i]['post_id'];
+
+        if ($auth_pages[$i]['post_id'] != 0) {
+            $sql = 'SELECT forum_id, topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$auth_pages[$i]['post_id'];
+
+            if (!($result = DB()->sql_query($sql))) {
+                bb_die('Could not query post information');
+            }
+
+            $row = DB()->sql_fetchrow($result);
+
+            $topic_id = $row['topic_id'];
+            $forum_id = $row['forum_id'];
+
+            $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+            set_die_append_msg($forum_id, $topic_id);
+
+            if ($is_auth['auth_download']) {
+                $authorised = true;
+            }
+        }
+    }
+
+    // Check the auth rights
+    if (!$authorised) {
+        bb_die($lang['SORRY_AUTH_VIEW_ATTACH'], 403);
+    }
+
+    $datastore->rm('cat_forums');
+
+    // Check tor status
+    if (!IS_AM && str_contains($attachment['mimetype'], 'bittorrent')) {
+        $sql = 'SELECT tor_status, poster_id FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
 
         if (!($result = DB()->sql_query($sql))) {
-            bb_die('Could not query post information');
+            bb_die('Could not query tor_status information');
         }
 
         $row = DB()->sql_fetchrow($result);
 
-        $topic_id = $row['topic_id'];
-        $forum_id = $row['forum_id'];
+        if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
+            bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$row['tor_status']]);
+        }
 
-        $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
-        set_die_append_msg($forum_id, $topic_id);
+        DB()->sql_freeresult($result);
+    }
 
-        if ($is_auth['auth_download']) {
-            $authorised = true;
+    // Get Information on currently allowed Extensions
+    $rows = get_extension_informations();
+    $num_rows = count($rows);
+
+    $allowed_extensions = $download_mode = [];
+    for ($i = 0; $i < $num_rows; $i++) {
+        $extension = strtolower(trim($rows[$i]['extension']));
+        // Get allowed extensions
+        if ((int)$rows[$i]['allow_group'] === 1) {
+            $allowed_extensions[] = $extension;
+        }
+        $download_mode[$extension] = $rows[$i]['download_mode'];
+    }
+
+    // Disallowed
+    if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
+        bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
+    }
+
+    // Getting download mode by extension
+    if (isset($download_mode[$attachment['extension']])) {
+        $download_mode = (int)$download_mode[$attachment['extension']];
+    } else {
+        bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
+    }
+
+    // Update download count
+    if (!$thumbnail && is_file(realpath($upload_dir . '/' . $attachment['physical_filename']))) {
+        $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int)$attachment['attach_id'];
+
+        if (!DB()->sql_query($sql)) {
+            bb_die('Could not update attachment download count');
         }
     }
-}
-
-// Check the auth rights
-if (!$authorised) {
-    bb_die($lang['SORRY_AUTH_VIEW_ATTACH'], 403);
-}
-
-$datastore->rm('cat_forums');
-
-// Check tor status
-if (!IS_AM && str_contains($attachment['mimetype'], 'bittorrent')) {
-    $sql = 'SELECT tor_status, poster_id FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
-
-    if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not query tor_status information');
-    }
-
-    $row = DB()->sql_fetchrow($result);
-
-    if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
-        bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$row['tor_status']]);
-    }
-
-    DB()->sql_freeresult($result);
-}
-
-// Get Information on currently allowed Extensions
-$rows = get_extension_informations();
-$num_rows = count($rows);
-
-$allowed_extensions = $download_mode = [];
-for ($i = 0; $i < $num_rows; $i++) {
-    $extension = strtolower(trim($rows[$i]['extension']));
-    // Get allowed extensions
-    if ((int)$rows[$i]['allow_group'] === 1) {
-        $allowed_extensions[] = $extension;
-    }
-    $download_mode[$extension] = $rows[$i]['download_mode'];
-}
-
-// Disallowed
-if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
-    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
-}
-
-// Getting download mode by extension
-if (isset($download_mode[$attachment['extension']])) {
-    $download_mode = (int)$download_mode[$attachment['extension']];
 } else {
-    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
-}
+    $download_mode = INLINE_LINK;
+    $attachment = [];
 
-// Update download count
-if ((!$m3u && !$thumbnail) && is_file(realpath($upload_dir . '/' . $attachment['physical_filename']))) {
-    $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int)$attachment['attach_id'];
-
-    if (!DB()->sql_query($sql)) {
-        bb_die('Could not update attachment download count');
+    // Check m3u file exist
+    if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath((int)str_replace(\TorrentPier\TorrServerAPI::M3U['prefix'], '', $download_id))) {
+        bb_die($lang['ERROR_NO_ATTACHMENT']);
     }
+
+    $attachment['physical_filename'] = $attachment['real_filename'] = basename($m3uFile);
+    $attachment['mimetype'] = mime_content_type($m3uFile);
+    $attachment['extension'] = str_replace('.', '', \TorrentPier\TorrServerAPI::M3U['extension']);
 }
 
 // Determine the 'presenting'-method
