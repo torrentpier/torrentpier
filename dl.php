@@ -105,7 +105,11 @@ if ($thumbnail) {
     // Re-define $attachment['physical_filename'] for thumbnails
     $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
 } elseif ($m3u) {
-    $attachment['physical_filename'] = ''; // TODO: m3u file path
+    // Check m3u file exist
+    if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($m3u)) {
+        bb_die($lang['ERROR_NO_ATTACHMENT']);
+    }
+    $attachment['physical_filename'] = basename($m3uFile);
 }
 
 DB()->sql_freeresult($result);
