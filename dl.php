@@ -20,6 +20,7 @@ $datastore->enqueue([
 
 $download_id = request_var('id', 0);
 $thumbnail = request_var('thumb', 0);
+$m3u = request_var('m3u', 0);
 
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
@@ -100,9 +101,11 @@ if (!($attachment = DB()->sql_fetchrow($result))) {
 
 $attachment['physical_filename'] = basename($attachment['physical_filename']);
 
-// Re-define $attachment['physical_filename'] for thumbnails
 if ($thumbnail) {
+    // Re-define $attachment['physical_filename'] for thumbnails
     $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
+} elseif ($m3u) {
+    $attachment['physical_filename'] = ''; // TODO: m3u file path
 }
 
 DB()->sql_freeresult($result);
@@ -194,7 +197,7 @@ if (isset($download_mode[$attachment['extension']])) {
 }
 
 // Update download count
-if (!$thumbnail && is_file(realpath($upload_dir . '/' . $attachment['physical_filename']))) {
+if ((!$m3u && !$thumbnail) && is_file(realpath($upload_dir . '/' . $attachment['physical_filename']))) {
     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int)$attachment['attach_id'];
 
     if (!DB()->sql_query($sql)) {
