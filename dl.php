@@ -20,6 +20,7 @@ $datastore->enqueue([
 
 $download_id = request_var('id', 0);
 $thumbnail = request_var('thumb', 0);
+$m3u = (bool)$_GET['m3u'] ?? false;
 
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
@@ -103,6 +104,15 @@ $attachment['physical_filename'] = basename($attachment['physical_filename']);
 // Re-define $attachment['physical_filename'] for thumbnails
 if ($thumbnail) {
     $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
+} elseif ($m3u) {
+    // Check m3u file exist
+    if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($download_id)) {
+        bb_die($lang['ERROR_NO_ATTACHMENT']);
+    }
+
+    $attachment['physical_filename'] = $attachment['real_filename'] = basename($m3uFile);
+    $attachment['mimetype'] = mime_content_type($m3uFile);
+    $attachment['extension'] = str_replace('.', '', \TorrentPier\TorrServerAPI::M3U['extension']);
 }
 
 DB()->sql_freeresult($result);
@@ -194,7 +204,7 @@ if (isset($download_mode[$attachment['extension']])) {
 }
 
 // Update download count
-if (!$thumbnail && is_file(realpath($upload_dir . '/' . $attachment['physical_filename']))) {
+if (!$m3u && !$thumbnail && is_file(realpath($upload_dir . '/' . $attachment['physical_filename']))) {
     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int)$attachment['attach_id'];
 
     if (!DB()->sql_query($sql)) {
