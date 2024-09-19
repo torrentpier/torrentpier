@@ -101,8 +101,8 @@ if (!($attachment = DB()->sql_fetchrow($result))) {
 
 $attachment['physical_filename'] = basename($attachment['physical_filename']);
 
-// Re-define $attachment['physical_filename'] for thumbnails
 if ($thumbnail) {
+    // Re-define $attachment['physical_filename'] for thumbnails
     $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
 } elseif ($m3u) {
     // Check m3u file exist
