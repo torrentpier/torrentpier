@@ -99,7 +99,7 @@ foreach ($m3uData as $entry) {
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
-        'M3U_DL_LINK' => DL_URL . \TorrentPier\TorrServerAPI::M3U['prefix'] . $topic_id,
+        'M3U_DL_LINK' => PLAYBACK_M3U_URL . $topic_id . '&dl_m3u=1',
         'TITLE' => $title,
     ]);
 }
