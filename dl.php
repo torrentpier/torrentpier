@@ -20,7 +20,7 @@ $datastore->enqueue([
 
 $download_id = request_var('id', 0);
 $thumbnail = request_var('thumb', 0);
-$m3u = (bool)$_GET['m3u'] ?? false;
+$m3u = isset($_GET['m3u']) && $_GET['m3u'];
 
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
