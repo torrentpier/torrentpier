@@ -25,8 +25,6 @@ $thumbnail = request_var('thumb', 0);
 $is_m3u = false;
 if (str_starts_with($download_id, \TorrentPier\TorrServerAPI::M3U['prefix'])) {
     $is_m3u = true;
-} else {
-    $download_id = (int)$download_id;
 }
 
 // Send file to browser
