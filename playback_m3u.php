@@ -91,7 +91,7 @@ foreach ($m3uData as $entry) {
         'IS_VALID' => in_array($getExtension, array_merge($validFormats['audio'], $validFormats['video'])),
         'IS_AUDIO' => in_array($getExtension, $validFormats['audio']),
         'STREAM_LINK' => $streamLink,
-        'M3U_DL_LINK' => $m3uFile,
+        'M3U_DL_LINK' => DL_URL . $row['attach_id'] . '&m3u=1',
         'TITLE' => $title,
     ]);
 }

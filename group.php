@@ -103,7 +103,7 @@ if (!$group_id) {
 
         $options = '';
         foreach ($params as $name => $data) {
-            $text = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
+            $text = str_short(rtrim(htmlCHR($name)), HTML_SELECT_MAX_LENGTH);
 
             $members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] . ': ' . $data['m'] : $lang['NO_GROUP_MEMBERS'];
             $candidates = ($data['c']) ? $lang['PENDING_MEMBERS'] . ': ' . $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];

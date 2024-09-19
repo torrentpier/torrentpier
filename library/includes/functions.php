@@ -595,29 +595,6 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
     return round($size, $rounder) . $space . $ext;
 }
 
-/**
- * Bitrate to human-readable format
- *
- * @param int $bitrate
- * @param string $space
- * @return string
- */
-function humn_bitrate(int $bitrate, string $space = '&nbsp;'): string
-{
-    if ($bitrate >= 1000000) {
-        $unit = 'Mbps';
-        $bitrate /= 1000000;
-    } elseif ($bitrate >= 1000) {
-        $unit = 'kbps';
-        $bitrate /= 1000;
-    } else {
-        $unit = 'bps';
-    }
-
-    $formattedBitrate = number_format($bitrate, 2);
-    return $formattedBitrate . $space . $unit;
-}
-
 function bt_show_ip($ip, $port = '')
 {
     global $bb_cfg;

@@ -42,6 +42,10 @@ if (!defined('BB_ROOT')) {
         cursor: pointer;
     }
 
+    .sqlLogRow:hover {
+        border-color: #8B0000;
+    }
+
     .sqlLogWrapped {
         white-space: normal;
         overflow: visible;
@@ -51,10 +55,6 @@ if (!defined('BB_ROOT')) {
         color: #B50000;
         font-size: 13px;
         cursor: inherit !important;
-    }
-
-    .sqlHover {
-        border-color: #8B0000;
     }
 
     .sqlHighlight {

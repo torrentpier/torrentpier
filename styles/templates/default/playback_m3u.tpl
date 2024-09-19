@@ -14,7 +14,11 @@
         if (data.ffprobe_data) {
             $('#ffprobe_' + data.file_index).html(data.ffprobe_data);
         } else {
-            $('#ffprobe_' + data.file_index).append('<hr><span class="warnColor2">{L_PLEASE_TRY_AGAIN}</span>');
+            if ($('#ffprobe_' + data.file_index).find('span.warnColor2').length >= 3) {
+                $('#ffprobe_' + data.file_index).html('<hr><span class="warnColor2">{L_M3U_FFPROBE_NO_DATA}</span>');
+            } else {
+                $('#ffprobe_' + data.file_index).append('<hr><span class="warnColor2">{L_PLEASE_TRY_AGAIN}</span>');
+            }
         }
     }
 </script>
@@ -35,7 +39,7 @@
         <td width="40%"><b>{m3ulist.TITLE}</b>
             <div id="ffprobe_{m3ulist.FILE_INDEX}">
                 <hr>
-                <a href="#" onclick="ajax.ffprobe_info({m3ulist.FILE_INDEX}, '{m3ulist.IS_AUDIO}'); return false;">{L_SHOW_MORE_INFORMATION_FILE}</a>
+                <input onclick="ajax.ffprobe_info({m3ulist.FILE_INDEX}, '{m3ulist.IS_AUDIO}');" type="button" value="{L_SHOW_MORE_INFORMATION_FILE}">
             </div>
         </td>
         <td>

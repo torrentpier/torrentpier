@@ -17,11 +17,13 @@ if (!$bb_cfg['torr_server']['enabled']) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
-if (!$attach_id = (int)$this->request['attach_id'] or !is_numeric($attach_id)) {
+$attach_id = $this->request['attach_id'] ?? '';
+if (empty($attach_id) || !is_numeric($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
 }
 
-if (!$file_index = (int)$this->request['file_index'] or !is_numeric($file_index)) {
+$file_index = $this->request['file_index'] ?? '';
+if (empty($file_index) || !is_numeric($file_index)) {
     $this->ajax_die("Invalid file index: $file_index");
 }
 
@@ -61,11 +63,11 @@ if (isset($ffpInfo->streams)) {
         if (!empty($stream->codec_name)) {
             $result .= sprintf($lang['AUDIO_CODEC'], $stream->codec_long_name, mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
         }
-        if (!empty($stream->bit_rate)) {
+        if (!empty($stream->bit_rate) && is_int($stream->bit_rate)) {
             $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
         }
-        if (!empty($stream->sample_rate)) {
-            $result .= sprintf($lang['SAMPLE_RATE'], $stream->sample_rate) . '<br>';
+        if (!empty($stream->sample_rate) && is_int($stream->sample_rate)) {
+            $result .= sprintf($lang['SAMPLE_RATE'], humn_sample_rate($stream->sample_rate)) . '<br>';
         }
         if (!empty($stream->channels)) {
             $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
@@ -101,6 +103,41 @@ if (isset($ffpInfo->streams)) {
     }
 
     $this->response['ffprobe_data'] = $result;
+}
+
+/**
+ * Bitrate to human-readable format
+ *
+ * @param int $bitrate
+ * @param string $space
+ * @return string
+ */
+function humn_bitrate(int $bitrate, string $space = '&nbsp;'): string
+{
+    if ($bitrate >= 1000000) {
+        $unit = 'Mbps';
+        $bitrate /= 1000000;
+    } elseif ($bitrate >= 1000) {
+        $unit = 'kbps';
+        $bitrate /= 1000;
+    } else {
+        $unit = 'bps';
+    }
+
+    return sprintf('%d', commify($bitrate)) . $space . $unit;
+}
+
+/**
+ * Sample rate to human-readable format
+ *
+ * @param int $sample_rate
+ * @param string $space
+ * @return string
+ */
+function humn_sample_rate(int $sample_rate, string $space = '&nbsp;'): string
+{
+    $unit = '';
+    return sprintf('%.1f', commify($sample_rate)) . $space . $unit;
 }
 
 $this->response['file_index'] = $file_index;
