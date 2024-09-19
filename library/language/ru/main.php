@@ -1286,6 +1286,7 @@ $lang['DOWNLOAD_M3U_FILE'] = 'Скачать .m3u файл';
 $lang['PLAYBACK_M3U'] = 'Воспроизвести .m3u файл';
 $lang['COPY_STREAM_LINK'] = 'Скопировать ссылку на поток в буфер обмена';
 $lang['M3U_NOT_SUPPORTED'] = 'Этот файл невозможно воспроизвести в браузере...';
+$lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
 $lang['M3U_NOTICE'] = 'Некоторые браузеры не поддерживают воспроизведение определенных форматов видео. В таком случае вы можете скачать файл .m3u и воспроизвести его с помощью стороннего плеера';
 
 $lang['ATTACHMENT'] = 'Вложение';
