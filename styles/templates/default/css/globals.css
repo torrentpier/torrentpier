@@ -570,6 +570,7 @@ select, input {
 }
 
 textarea {
+  resize: none;
   font-size: 12px;
 }
 
