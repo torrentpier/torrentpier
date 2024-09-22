@@ -350,13 +350,12 @@ class Post
         if ($mode != 'delete') {
             if ($mode == 'reply') {
                 $update_watched_sql = [];
-
-                $get_banned_users = get_banned_users() ? (', ' . implode(', ', get_banned_users())) : '';
+                $banned_users = ($get_banned_users = get_banned_users()) ? (', ' . implode(', ', $get_banned_users)) : '';
 
                 $watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
 				WHERE tw.topic_id = $topic_id
-					AND tw.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $get_banned_users . ")
+					AND tw.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $banned_users . ")
 					AND tw.notify_status = " . TOPIC_WATCH_NOTIFIED . "
 					AND u.user_id = tw.user_id
 					AND u.user_active = 1
