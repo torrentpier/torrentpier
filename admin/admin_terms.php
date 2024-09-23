@@ -13,7 +13,7 @@ if (!empty($setmodules)) {
 }
 
 require __DIR__ . '/pagestart.php';
-require INC_DIR . '/bbcode.php';
+require VQMod::modCheck(INC_DIR . '/bbcode.php');
 
 $preview = isset($_POST['preview']);
 

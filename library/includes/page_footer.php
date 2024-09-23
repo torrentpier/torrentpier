@@ -71,7 +71,7 @@ echo '
 ';
 
 if ($show_dbg_info && SQL_DEBUG) {
-    require INC_DIR . '/page_footer_dev.php';
+    require VQMod::modCheck(INC_DIR . '/page_footer_dev.php');
 }
 
 echo '

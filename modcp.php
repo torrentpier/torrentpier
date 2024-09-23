@@ -10,7 +10,7 @@
 define('BB_SCRIPT', 'modcp');
 
 require __DIR__ . '/common.php';
-require INC_DIR . '/bbcode.php';
+require VQMod::modCheck(INC_DIR . '/bbcode.php');
 
 //
 // Functions

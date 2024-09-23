@@ -10,7 +10,7 @@
 define('BB_SCRIPT', 'topic');
 
 require __DIR__ . '/common.php';
-require INC_DIR . '/bbcode.php';
+require VQMod::modCheck(INC_DIR . '/bbcode.php');
 
 $datastore->enqueue([
     'ranks',
@@ -517,10 +517,10 @@ $template->assign_vars([
     'PEERS_FULL_LINK' => false,
     'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
 ]);
-require INC_DIR . '/torrent_show_dl_list.php';
+require VQMod::modCheck(INC_DIR . '/torrent_show_dl_list.php');
 
 if ($topic_attachment) {
-    require ATTACH_DIR . '/attachment_mod.php';
+    require VQMod::modCheck(ATTACH_DIR . '/attachment_mod.php');
     init_display_post_attachments($t_data['topic_attachment']);
 }
 

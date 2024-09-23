@@ -1080,13 +1080,13 @@ function setup_style()
 
     $template->assign_vars([
         'SPACER' => make_url('styles/images/spacer.gif'),
-        'STYLESHEET' => make_url($css_dir . $stylesheet),
+        'STYLESHEET' => make_url(hide_bb_path(VQMod::modCheck($css_dir . $stylesheet))),
         'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
         'TPL_DIR' => make_url($css_dir),
         'SITE_URL' => make_url('/')
     ]);
 
-    require_once TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
+    require_once VQMod::modCheck(TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php');
 
     return ['template_name' => $tpl_dir_name];
 }
@@ -1102,7 +1102,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         $format = $bb_cfg['default_dateformat'];
     }
     if (empty($lang)) {
-        require_once($bb_cfg['default_lang_dir'] . 'main.php');
+        require_once VQMod::modCheck($bb_cfg['default_lang_dir'] . 'main.php');
     }
 
     if (!defined('IS_GUEST') || IS_GUEST) {
@@ -1331,7 +1331,7 @@ function bb_die($msg_text, $status_code = null)
 
     // If empty lang
     if (empty($lang)) {
-        require($bb_cfg['default_lang_dir'] . 'main.php');
+        require VQMod::modCheck($bb_cfg['default_lang_dir'] . 'main.php');
     }
 
     // If empty session

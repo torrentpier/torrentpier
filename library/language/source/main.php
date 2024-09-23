@@ -109,6 +109,7 @@ $lang['ADMIN_PANEL'] = 'Go to Administration Panel';
 $lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
+$lang['ALL_MODS_CACHE_CLEARED'] = 'Modifications cache has been cleared';
 $lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is down for maintenance. Try to come back later';
 $lang['ADMIN_DISABLE'] = 'the forum is disabled by administrator, you can enable it at any time';
@@ -1919,6 +1920,7 @@ $lang['MANAGE'] = 'Management';
 $lang['DISALLOW'] = 'Disallow names';
 $lang['PRUNE'] = 'Pruning';
 $lang['MASS_EMAIL'] = 'Mass Email';
+$lang['MODS_MANAGER'] = 'Modifications manager (.xml)';
 $lang['RANKS'] = 'Ranks';
 $lang['SMILIES'] = 'Smilies';
 $lang['BAN_MANAGEMENT'] = 'Ban Control';
@@ -1961,6 +1963,7 @@ $lang['NOT_AVAILABLE'] = 'Not available';
 $lang['DATASTORE'] = 'Datastore';
 $lang['CLEAR_CACHE'] = 'Cache';
 $lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
+$lang['CLEAR_MODS_CACHE'] = 'Modifications cache';
 
 // Update
 $lang['USER_LEVELS'] = 'User levels';

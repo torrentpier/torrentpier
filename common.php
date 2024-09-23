@@ -49,8 +49,12 @@ foreach ($allowedCDNs as $allowedCDN) {
     }
 }
 
+// vQmod loading
+require_once BB_PATH . '/vqmod/vqmod.php';
+VQMod::bootup();
+
 // Get all constants
-require_once BB_PATH . '/library/defines.php';
+require_once VQMod::modCheck(BB_PATH . '/library/defines.php');
 
 // Composer
 if (!is_file(BB_PATH . '/vendor/autoload.php')) {
@@ -79,11 +83,11 @@ try {
 }
 
 // Load config
-require_once BB_PATH . '/library/config.php';
+require_once VQMod::modCheck(BB_PATH . '/library/config.php');
 
 // Local config
 if (is_file(BB_PATH . '/library/config.local.php')) {
-    require_once BB_PATH . '/library/config.local.php';
+    require_once VQMod::modCheck(BB_PATH . '/library/config.local.php');
 }
 
 /**
@@ -211,6 +215,36 @@ function mkdir_rec($path, $mode): bool
     }
 
     return mkdir_rec(dirname($path), $mode) && mkdir($path, $mode);
+}
+
+/**
+ * Removes recursively files from folder
+ *
+ * @param string $path
+ * @param string|null $prefix
+ * @param array $exceptedFiles
+ * @return void
+ */
+function clearDir(string $path, string $prefix = null, array $exceptedFiles = []): void
+{
+    $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::CHILD_FIRST
+    );
+
+    foreach ($iterator as $file) {
+        if (!$file->isFile()) {
+            continue;
+        }
+        if (isset($prefix) && !str_starts_with($file->getFilename(), $prefix)) {
+            continue;
+        }
+        if (in_array($file->getFilename(), $exceptedFiles)) {
+            continue;
+        }
+
+        unlink($file->getPathname());
+    }
 }
 
 function verify_id($id, $length): bool
@@ -344,7 +378,7 @@ define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 // Initialization
 if (!defined('IN_TRACKER')) {
     // Init board
-    require_once INC_DIR . '/init_bb.php';
+    require_once VQMod::modCheck(INC_DIR . '/init_bb.php');
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
@@ -357,7 +391,7 @@ if (!defined('IN_TRACKER')) {
     define('SCRAPE_LIST_PREFIX', 'scrape_list_');
 
     // Init tracker
-    require_once BB_PATH . '/bt/includes/init_tr.php';
+    require_once VQMod::modCheck(BB_PATH . '/bt/includes/init_tr.php');
 
     header('Content-Type: text/plain');
     header('Pragma: no-cache');

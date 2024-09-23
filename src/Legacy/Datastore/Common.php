@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use VQMod;
+
 /**
  * Class Common
  * @package TorrentPier\Legacy\Datastore
@@ -136,7 +138,7 @@ class Common
     {
         $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
         if (isset($this->known_items[$title]) && file_exists($file)) {
-            require $file;
+            require VQMod::modCheck($file);
         } else {
             trigger_error("Unknown datastore item: $title", E_USER_ERROR);
         }

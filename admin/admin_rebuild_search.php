@@ -20,7 +20,7 @@ if (!IS_SUPER_ADMIN) {
     bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 }
 
-require INC_DIR . '/bbcode.php';
+require VQMod::modCheck(INC_DIR . '/bbcode.php');
 
 define('REBUILD_SEARCH_ABORTED', 0);  // when the user aborted the processing
 define('REBUILD_SEARCH_PROCESSED', 1);  // when a batch of posts has been processed

@@ -65,7 +65,7 @@ foreach ($cron_jobs as $job) {
         }
 
         set_time_limit(600);
-        require($job_script);
+        require VQMod::modCheck($job_script);
 
         if ($job['log_sql_queries']) {
             DB()->log_next_query(0);

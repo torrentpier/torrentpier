@@ -42,7 +42,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
         $template->assign_var('SHOW_ONLINE_LIST');
 
         if (!${$online_list} = CACHE('bb_cache')->get($online_list)) {
-            require INC_DIR . '/online_userlist.php';
+            require VQMod::modCheck(INC_DIR . '/online_userlist.php');
 
             ${$online_list} = CACHE('bb_cache')->get($online_list);
         }
