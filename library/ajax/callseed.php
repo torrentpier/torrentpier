@@ -34,7 +34,7 @@ if ($t_data['seeders'] > 2) {
     $this->ajax_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
 }
 
-$get_banned_users = get_banned_users() ? (', ' . implode(', ', get_banned_users())) : '';
+$banned_users = ($get_banned_users = get_banned_users()) ? (', ' . implode(', ', $get_banned_users)) : '';
 
 $user_list = DB()->fetch_rowset("
 	SELECT DISTINCT dl.user_id, u.user_opt, tr.user_id as active_dl
@@ -43,7 +43,7 @@ $user_list = DB()->fetch_rowset("
 	LEFT JOIN " . BB_BT_TRACKER . " tr ON(tr.user_id = dl.user_id)
 	WHERE dl.topic_id = $topic_id
 		AND dl.user_status IN (" . DL_STATUS_COMPLETE . ", " . DL_STATUS_DOWN . ")
-		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $get_banned_users . ")
+		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $banned_users . ")
 		AND u.user_active = 1
 	GROUP BY dl.user_id
 ");

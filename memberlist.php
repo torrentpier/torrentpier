@@ -41,9 +41,9 @@ $select_sort_order .= '</select>';
 // Role selector
 $role_select = [
     'all' => $lang['ALL'],
-    'user' => $lang['USERS'],
-    'admin' => $lang['ADMINISTRATORS'],
-    'moderator' => $lang['MODERATORS']
+    'user' => $lang['AUTH_USER'],
+    'admin' => $lang['AUTH_ADMIN'],
+    'moderator' => $lang['MODERATOR']
 ];
 $select_sort_role = '<select name="role">';
 foreach ($role_select as $key => $value) {
