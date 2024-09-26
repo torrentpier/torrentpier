@@ -510,7 +510,7 @@ class User
             }
 
             if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
-                if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time'] * 86400) {
+                if ((TIMENOW - $userdata['user_session_time']) > ($bb_cfg['max_autologin_time'] * DAY_IN_SECS)) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
             }
