@@ -49,7 +49,7 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 
         $user_points = ($cron_job_last_run < 3600) ? round((float)$points * ($cron_job_last_run / 3600), 2) : 0;
         $release = (int)$seed_release[$i];
-        $user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
+        $user_regdate = (TIME_DAY * $bb_cfg['seed_bonus_user_regdate']);
 
         DB()->query("
 			UPDATE " . BB_USERS . " u, " . BB_BT_USERS . " bu, tmp_bonus b
