@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "arokettu/bencode",
-            "version": "4.2.1",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/bencode.git",
-                "reference": "c7072219da97db955f5b95ba6833bd0286ff9be0"
+                "reference": "be43c5c2d54fb2c8a358f6d38130fc7e57928913"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/bencode/zipball/c7072219da97db955f5b95ba6833bd0286ff9be0",
-                "reference": "c7072219da97db955f5b95ba6833bd0286ff9be0",
+                "url": "https://api.github.com/repos/arokettu/bencode/zipball/be43c5c2d54fb2c8a358f6d38130fc7e57928913",
+                "reference": "be43c5c2d54fb2c8a358f6d38130fc7e57928913",
                 "shasum": ""
             },
             "require": {
@@ -26,6 +26,7 @@
             },
             "require-dev": {
                 "brick/math": "*",
+                "ext-bcmath": "*",
                 "ext-gmp": "*",
                 "ext-json": "*",
                 "mikey179/vfsstream": "^1.6.11",
@@ -74,7 +75,7 @@
                 "issues": "https://gitlab.com/sandfox/bencode/-/issues",
                 "source": "https://gitlab.com/sandfox/bencode"
             },
-            "time": "2024-07-28T12:54:52+00:00"
+            "time": "2024-09-25T14:43:35+00:00"
         },
         {
             "name": "arokettu/is-resource",
