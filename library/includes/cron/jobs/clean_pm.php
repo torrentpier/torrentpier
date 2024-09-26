@@ -28,7 +28,7 @@ if ($pm_days_keep !== 0) {
 			FROM " . BB_PRIVMSGS . " pm
 			LEFT JOIN " . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
 			WHERE pm.privmsgs_id BETWEEN $start_id AND $end_id
-				AND pm.privmsgs_date < " . (TIMENOW - 86400 * $pm_days_keep) . "
+				AND pm.privmsgs_date < " . (TIME_DAY * $pm_days_keep) . "
 		");
 
         if ($end_id > $finish_id) {

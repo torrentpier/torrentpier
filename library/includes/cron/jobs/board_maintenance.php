@@ -30,7 +30,7 @@ if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {
         DB()->query("
 			DELETE FROM " . BB_POLL_USERS . "
 			WHERE topic_id BETWEEN $start_id AND $end_id
-				AND vote_dt < " . (TIMENOW - 86400 * $poll_max_days) . "
+				AND vote_dt < " . (TIME_DAY * $poll_max_days) . "
 		");
 
         if ($end_id > $finish_id) {

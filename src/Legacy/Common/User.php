@@ -290,7 +290,7 @@ class User
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
+                $last_visit = max($session_time, (TIME_DAY * $bb_cfg['max_last_visit_days']));
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {

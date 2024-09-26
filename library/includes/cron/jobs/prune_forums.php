@@ -15,6 +15,6 @@ if ($bb_cfg['prune_enable']) {
     $sql = "SELECT forum_id, prune_days FROM " . BB_FORUMS . " WHERE prune_days != 0";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
-        \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], (TIMENOW - 86400 * $row['prune_days']));
+        \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], (TIME_DAY * $row['prune_days']));
     }
 }

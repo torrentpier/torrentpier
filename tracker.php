@@ -163,23 +163,23 @@ $time_opt = array(
     ),
     1 => array(
         'lang' => $lang['BT_1_DAY_FOR'],
-        'sql' => TIMENOW - 86400,
+        'sql' => TIME_DAY,
     ),
     3 => array(
         'lang' => $lang['BT_3_DAY_FOR'],
-        'sql' => TIMENOW - 86400 * 3,
+        'sql' => TIME_DAY * 3,
     ),
     7 => array(
         'lang' => $lang['BT_7_DAYS_FOR'],
-        'sql' => TIMENOW - 86400 * 7,
+        'sql' => TIME_DAY * 7,
     ),
     14 => array(
         'lang' => $lang['BT_2_WEEKS_FOR'],
-        'sql' => TIMENOW - 86400 * 14,
+        'sql' => TIME_DAY * 14,
     ),
     30 => array(
         'lang' => $lang['BT_1_MONTH_FOR'],
-        'sql' => TIMENOW - 86400 * 30,
+        'sql' => TIME_DAY * 30,
     ),
 );
 $time_select = [];
@@ -195,23 +195,23 @@ $s_not_seen_opt = array(
     ),
     1 => array(
         'lang' => $lang['BT_1_DAY'],
-        'sql' => TIMENOW - 86400,
+        'sql' => TIME_DAY,
     ),
     3 => array(
         'lang' => $lang['BT_3_DAYS'],
-        'sql' => TIMENOW - 86400 * 3,
+        'sql' => TIME_DAY * 3,
     ),
     7 => array(
         'lang' => $lang['BT_7_DAYS'],
-        'sql' => TIMENOW - 86400 * 7,
+        'sql' => TIME_DAY * 7,
     ),
     14 => array(
         'lang' => $lang['BT_2_WEEKS'],
-        'sql' => TIMENOW - 86400 * 14,
+        'sql' => TIME_DAY * 14,
     ),
     30 => array(
         'lang' => $lang['BT_1_MONTH'],
-        'sql' => TIMENOW - 86400 * 30,
+        'sql' => TIME_DAY * 30,
     ),
     $never => array(
         'lang' => $lang['BT_NEVER'],
