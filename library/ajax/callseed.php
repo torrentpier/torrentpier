@@ -29,8 +29,8 @@ $forum_id = $t_data['forum_id'];
 
 if ($t_data['seeders'] > 2) {
     $this->ajax_die(sprintf($lang['CALLSEED_HAVE_SEED'], $t_data['seeders']));
-} elseif ($t_data['call_seed_time'] > (TIME_DAY)) {
-    $time_left = delta_time($t_data['call_seed_time'] + 86400, TIMENOW, 'days');
+} elseif ($t_data['call_seed_time'] > TIME_DAY) {
+    $time_left = delta_time($t_data['call_seed_time'] + DAY_IN_SECS, TIMENOW, 'days');
     $this->ajax_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
 }
 
