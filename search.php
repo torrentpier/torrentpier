@@ -192,11 +192,11 @@ $time_opt = array(
     ),
     7 => array(
         'lang' => $lang['BT_7_DAYS_FOR'],
-        'sql' => TIME_DAY * 7,
+        'sql' => TIME_WEEK,
     ),
     14 => array(
         'lang' => $lang['BT_2_WEEKS_FOR'],
-        'sql' => TIME_DAY * 14,
+        'sql' => TIME_WEEK * 2,
     ),
     30 => array(
         'lang' => $lang['BT_1_MONTH_FOR'],

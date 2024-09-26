@@ -136,7 +136,6 @@ define('BOT_UID', -746);
 define('DAY_IN_SECS', 86400);
 define('TIME_DAY', TIMENOW - DAY_IN_SECS);
 define('TIME_WEEK', TIME_DAY * 7);
-define('TIME_2WEEK', TIME_WEEK * 2);
 
 // Ratio limits
 define('TR_RATING_LIMITS', true);        // ON/OFF
