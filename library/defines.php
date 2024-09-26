@@ -132,6 +132,12 @@ define('ONLY_NEW_TOPICS', 2);
 define('GUEST_UID', -1);
 define('BOT_UID', -746);
 
+// Datetime
+define('DAY_IN_SECS', 86400);
+define('TIME_DAY', TIMENOW - DAY_IN_SECS);
+define('TIME_WEEK', TIME_DAY * 7);
+define('TIME_2WEEK', TIME_WEEK * 2);
+
 // Ratio limits
 define('TR_RATING_LIMITS', true);        // ON/OFF
 define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
