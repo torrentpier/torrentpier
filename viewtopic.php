@@ -282,7 +282,7 @@ if (!empty($_REQUEST['postdays'])) {
         if (!empty($_POST['postdays'])) {
             $start = 0;
         }
-        $min_post_time = TIMENOW - ($post_days * 86400);
+        $min_post_time = TIME_DAY * $post_days;
 
         $sql = "SELECT COUNT(p.post_id) AS num_posts
 			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
