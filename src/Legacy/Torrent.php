@@ -490,7 +490,7 @@ class Torrent
         }
 
         if ($bb_cfg['tracker']['tor_topic_up']) {
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIME_DAY * 3) . ") WHERE topic_id = $topic_id");
+            DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
         }
 
         if ($reg_mode == 'request' || $reg_mode == 'newtopic') {

@@ -70,7 +70,7 @@ $attach_config = [];
 
 if (!$attach_config = CACHE('bb_cache')->get('attach_config')) {
     $attach_config = get_config();
-    CACHE('bb_cache')->set('attach_config', $attach_config, DAY_IN_SECS);
+    CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
 }
 
 include ATTACH_DIR . '/displaying.php';

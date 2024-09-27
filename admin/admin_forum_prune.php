@@ -26,7 +26,7 @@ if (isset($_REQUEST['submit'])) {
         bb_die($lang['NOT_DAYS']);
     }
 
-    $prunetime = TIME_DAY * $prunedays;
+    $prunetime = TIMENOW - 86400 * $prunedays;
     $forum_csv = in_array($all_forums, $f_selected) ? $all_forums : implode(',', $f_selected);
 
     $where_sql = ($forum_csv != $all_forums) ? "WHERE forum_id IN($forum_csv)" : '';

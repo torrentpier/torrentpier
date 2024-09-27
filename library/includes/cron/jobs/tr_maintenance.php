@@ -15,8 +15,8 @@ if (empty($bb_cfg['seeder_last_seen_days_keep']) || empty($bb_cfg['seeder_never_
     return;
 }
 
-$last_seen_time = TIME_DAY * $bb_cfg['seeder_last_seen_days_keep'];
-$never_seen_time = TIME_DAY * $bb_cfg['seeder_never_seen_days_keep'];
+$last_seen_time = TIMENOW - 86400 * $bb_cfg['seeder_last_seen_days_keep'];
+$never_seen_time = TIMENOW - 86400 * $bb_cfg['seeder_never_seen_days_keep'];
 $limit_sql = 3000;
 
 $topics_sql = $attach_sql = [];

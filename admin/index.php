@@ -109,7 +109,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $total_topics = $stats['topiccount'];
     $total_users = $stats['usercount'];
     $start_date = bb_date($bb_cfg['board_startdate']);
-    $boarddays = (TIMENOW - $bb_cfg['board_startdate']) / DAY_IN_SECS;
+    $boarddays = (TIMENOW - $bb_cfg['board_startdate']) / 86400;
 
     $posts_per_day = sprintf('%.2f', $total_posts / $boarddays);
     $topics_per_day = sprintf('%.2f', $total_topics / $boarddays);

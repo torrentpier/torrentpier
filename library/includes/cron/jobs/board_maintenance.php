@@ -30,7 +30,7 @@ if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {
         DB()->query("
 			DELETE FROM " . BB_POLL_USERS . "
 			WHERE topic_id BETWEEN $start_id AND $end_id
-				AND vote_dt < " . (TIME_DAY * $poll_max_days) . "
+				AND vote_dt < " . (TIMENOW - 86400 * $poll_max_days) . "
 		");
 
         if ($end_id > $finish_id) {
@@ -42,7 +42,7 @@ if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {
 }
 
 // Cleaning user_newpasswd
-DB()->query("UPDATE " . BB_USERS . " SET user_newpasswd = '' WHERE user_lastvisit < " . TIME_WEEK);
+DB()->query("UPDATE " . BB_USERS . " SET user_newpasswd = '' WHERE user_lastvisit < " . (TIMENOW - 7 * 86400));
 
 // Cleaning post cache
 if ($posts_days = (int)$bb_cfg['posts_cache_days_keep']) {

@@ -158,8 +158,8 @@ if ($var =& $_REQUEST[$datetime_key] && $var != $def_datetime) {
     }
 }
 
-$time_end_val = DAY_IN_SECS + mktime(0, 0, 0, date('m', $datetime_val), date('d', $datetime_val), date('Y', $datetime_val));
-$time_start_val = $time_end_val - DAY_IN_SECS * $daysback_val;
+$time_end_val = 86400 + mktime(0, 0, 0, date('m', $datetime_val), date('d', $datetime_val), date('Y', $datetime_val));
+$time_start_val = $time_end_val - 86400 * $daysback_val;
 
 // First log time
 $row = DB()->fetch_row('SELECT MIN(log_time) AS first_log_time FROM ' . BB_LOG);

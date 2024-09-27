@@ -66,7 +66,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
 	");
 
     $date_today = bb_date(TIMENOW, 'md', false);
-    $date_forward = bb_date(TIMENOW + ($bb_cfg['birthday_check_day'] * DAY_IN_SECS), 'md', false);
+    $date_forward = bb_date(TIMENOW + ($bb_cfg['birthday_check_day'] * 86400), 'md', false);
 
     $birthday_today_list = $birthday_week_list = [];
 
