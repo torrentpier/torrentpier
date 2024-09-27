@@ -282,7 +282,7 @@ if (!empty($_REQUEST['postdays'])) {
         if (!empty($_POST['postdays'])) {
             $start = 0;
         }
-        $min_post_time = TIMENOW - ($post_days * 86400);
+        $min_post_time = TIME_DAY * $post_days;
 
         $sql = "SELECT COUNT(p.post_id) AS num_posts
 			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
@@ -446,7 +446,7 @@ $sel_post_order_ary = [
 ];
 
 $topic_has_poll = $t_data['topic_vote'];
-$poll_time_expired = ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+$poll_time_expired = ($t_data['topic_time'] < (TIME_DAY * $bb_cfg['poll_max_days']));
 $can_manage_poll = ($t_data['topic_poster'] == $userdata['user_id'] || $is_auth['auth_mod']);
 $can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
 

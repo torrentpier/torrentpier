@@ -549,5 +549,5 @@ $template->assign_vars([
     'SEED_EXIST' => ($seeders || defined('SEEDER_EXIST')),
     'LEECH_EXIST' => ($leechers || defined('LEECHER_EXIST')),
     'TOR_HELP_LINKS' => $bb_cfg['tor_help_links'],
-    'CALL_SEED' => (!IS_GUEST && $bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
+    'CALL_SEED' => (!IS_GUEST && $bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) && ($seed_count < 3) && ($tor_info['call_seed_time'] < TIME_DAY)),
 ]);

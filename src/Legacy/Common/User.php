@@ -290,7 +290,7 @@ class User
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
+                $last_visit = max($session_time, (TIME_DAY * $bb_cfg['max_last_visit_days']));
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
@@ -510,7 +510,7 @@ class User
             }
 
             if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
-                if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time'] * 86400) {
+                if ((TIMENOW - $userdata['user_session_time']) > ($bb_cfg['max_autologin_time'] * DAY_IN_SECS)) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
             }

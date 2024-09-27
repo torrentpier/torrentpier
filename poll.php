@@ -47,7 +47,7 @@ if ($mode != 'poll_vote') {
 
 // Checking the ability to make changes
 if ($mode == 'poll_delete') {
-    if ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days'] * 86400) {
+    if ($t_data['topic_time'] < (TIME_DAY * $bb_cfg['poll_max_days'])) {
         bb_die(sprintf($lang['NEW_POLL_DAYS'], $bb_cfg['poll_max_days']));
     }
     if (!IS_ADMIN && ($t_data['topic_vote'] != POLL_FINISHED)) {

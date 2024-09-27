@@ -172,7 +172,7 @@ if ($bb_cfg['torhelp_enabled']) {
 			  AND trsn.leechers         >=  $tor_min_leechers
 			  AND tor.forum_id          !=  " . (int)$bb_cfg['trash_forum_id'] . "
 			  AND tor.complete_count    >=  $tor_min_completed
-			  AND tor.seeder_last_seen  <=  (UNIX_TIMESTAMP() - $tor_seed_last_seen_days*86400)
+			  AND tor.seeder_last_seen  <=  (UNIX_TIMESTAMP() - " . $tor_seed_last_seen_days * DAY_IN_SECS . ")
 			  AND dl.user_id            IN($online_users_csv)
 			  AND dl.user_status        IN(" . get_id_csv($dl_status_ary) . ")
 			  AND dl.last_modified_dlstatus > DATE_SUB(NOW(), INTERVAL $tor_downloaded_days_ago DAY)

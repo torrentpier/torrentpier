@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 if ($bb_cfg['topic_moved_days_keep']) {
-    $prune_time = TIMENOW - 86400 * $bb_cfg['topic_moved_days_keep'];
+    $prune_time = TIME_DAY * $bb_cfg['topic_moved_days_keep'];
 
     DB()->query("
 		DELETE FROM " . BB_TOPICS . "

@@ -22,7 +22,7 @@ while (true) {
 			WHERE user_level      = 0
 			AND user_lastvisit    = 0
 			AND user_session_time = 0
-			AND user_regdate      <= " . (TIMENOW - 86400 * $not_activated_days) . "
+			AND user_regdate      <= " . (TIME_DAY * $not_activated_days) . "
 			AND user_id           NOT IN(" . EXCLUDED_USERS . ")
 			LIMIT $users_per_cycle");
 
@@ -35,7 +35,7 @@ while (true) {
         $sql = DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "
 			WHERE user_level   = 0
 			AND user_posts     = 0
-			AND user_lastvisit <= " . (TIMENOW - 86400 * $not_active_days) . "
+			AND user_lastvisit <= " . (TIME_DAY * $not_active_days) . "
 			AND user_id        NOT IN(" . EXCLUDED_USERS . ")
 			LIMIT $users_per_cycle");
 

@@ -1239,7 +1239,7 @@ if ($mode == 'read') {
     //
     if ($submit_msgdays && (!empty($_POST['msgdays']) || !empty($_GET['msgdays']))) {
         $msg_days = (!empty($_POST['msgdays'])) ? (int)$_POST['msgdays'] : (int)$_GET['msgdays'];
-        $min_msg_time = TIMENOW - ($msg_days * 86400);
+        $min_msg_time = (TIME_DAY * $msg_days);
 
         $limit_msg_time_total = " AND privmsgs_date > $min_msg_time";
         $limit_msg_time = " AND pm.privmsgs_date > $min_msg_time ";

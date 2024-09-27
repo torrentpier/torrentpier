@@ -247,7 +247,7 @@ if (!empty($_REQUEST['topicdays'])) {
 			SELECT COUNT(*) AS forum_topics
 			FROM " . BB_TOPICS . "
 			WHERE forum_id = $forum_id
-				AND topic_last_post_time > " . (TIMENOW - 86400 * $req_topic_days) . "
+				AND topic_last_post_time > " . (TIME_DAY * $req_topic_days) . "
 		";
 
         if ($row = DB()->fetch_row($sql)) {
@@ -274,7 +274,7 @@ $order_method = get_forum_display_sort_option($order_value, 'field', 'order');
 
 $order_sql = "ORDER BY t.topic_type DESC, $sort_method $order_method";
 
-$limit_topics_time_sql = ($topic_days) ? "AND t.topic_last_post_time > " . (TIMENOW - 86400 * $topic_days) : '';
+$limit_topics_time_sql = ($topic_days) ? "AND t.topic_last_post_time > " . (TIME_DAY * $topic_days) : '';
 
 $select_tor_sql = $join_tor_sql = '';
 $join_dl = ($bb_cfg['show_dl_status_in_forum'] && !IS_GUEST);
@@ -517,7 +517,7 @@ $template->assign_vars([
     'SESSION_ADMIN' => $userdata['session_admin'],
     'MOD_REDIRECT_URL' => $mod_redirect_url,
     'MODERATION_ON' => $moderation,
-    'PRUNE_DAYS' => !empty($forum_data['prune_days']) ? delta_time((TIMENOW - 86400 * $forum_data['prune_days']), TIMENOW, 'days') : false,
+    'PRUNE_DAYS' => !empty($forum_data['prune_days']) ? delta_time((TIME_DAY * $forum_data['prune_days']), TIMENOW, 'days') : false,
 
     'CAT_ID' => $forum_data['cat_id'],
     'CAT_TITLE' => $forums['cat_title_html'][$forum_data['cat_id']],
