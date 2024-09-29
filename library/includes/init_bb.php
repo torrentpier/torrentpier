@@ -89,7 +89,7 @@ define('COOKIE_MAX_TRACKS', 90);
  * @return void
  * @throws \Josantonius\Cookie\Exceptions\CookieException
  */
-function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false, bool $isRaw = false): void
+function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = true, bool $isRaw = false): void
 {
     global $bb_cfg;
 
