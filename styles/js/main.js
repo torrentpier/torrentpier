@@ -439,9 +439,9 @@ $(document).ready(function () {
     var text = xml.statusText;
     if (status === 200) {
       status = '';
-      text = 'неверный формат данных';
+      text = 'invalid data format';
     }
-    $(this).html("Ошибка в: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
+    $(this).html("Error in: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
     ajax.setStatusBoxPosition($(this));
   });
 
