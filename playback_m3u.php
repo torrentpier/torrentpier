@@ -44,7 +44,8 @@ if (!$row = DB()->fetch_row($sql)) {
 }
 
 // Check m3u file exist
-if (!$m3uFile = (new \TorrentPier\TorrServerAPI())->getM3UPath($row['attach_id'])) {
+$torrServer = new \TorrentPier\TorrServerAPI();
+if (!$m3uFile = $torrServer->getM3UPath($row['attach_id'])) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
@@ -77,7 +78,7 @@ foreach ($m3uData as $entry) {
 
     // Validate file extension
     $getExtension = pathinfo($title, PATHINFO_EXTENSION);
-    if ($getExtension === 'm3u') {
+    if ($getExtension === str_replace('.', '', $torrServer::M3U['extension'])) {
         // Skip m3u files
         continue;
     }
