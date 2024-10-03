@@ -62,7 +62,7 @@ if (document.all) {
 }
 
 function imgFit(img, maxW) {
-  img.title = 'Размеры изображения: ' + img.width + ' x ' + img.height;
+  img.title = 'Image Dimensions: ' + img.width + ' x ' + img.height;
   if (typeof (img.naturalHeight) === 'undefined') {
     img.naturalHeight = img.height;
     img.naturalWidth = img.width;
@@ -70,13 +70,13 @@ function imgFit(img, maxW) {
   if (img.width > maxW) {
     img.height = Math.round((maxW / img.width) * img.height);
     img.width = maxW;
-    img.title = 'Нажмите на изображение, чтобы посмотреть его в полный размер';
+    img.title = 'Click on the image to view it full size';
     img.style.cursor = 'move';
     return false;
   } else if (img.width === maxW && img.width < img.naturalWidth) {
     img.height = img.naturalHeight;
     img.width = img.naturalWidth;
-    img.title = 'Размеры изображения: ' + img.naturalWidth + ' x ' + img.naturalHeight;
+    img.title = 'Image Dimensions: ' + img.naturalWidth + ' x ' + img.naturalHeight;
     return false;
   } else {
     return true;
@@ -324,14 +324,14 @@ Ajax.prototype = {
       }
     }
     if (response.prompt_password) {
-      var user_password = prompt('Для доступа к данной функции, пожалуйста, введите свой пароль', '');
+      var user_password = prompt('To access this feature, please enter your password', '');
       if (user_password) {
         var req = ajax.request[action];
         req.user_password = user_password;
         ajax.exec(req);
       } else {
         ajax.clearActionState(action);
-        ajax.showErrorMsg('Введен неверный пароль');
+        ajax.showErrorMsg('Incorrect password entered');
       }
     } else if (response.prompt_confirm) {
       if (window.confirm(response.confirm_msg)) {
