@@ -536,6 +536,9 @@ $bb_cfg['prevent_multiposting'] = true; // TODO: replace "reply" with "edit last
 $bb_cfg['max_smilies'] = 25; //Max number of smilies in a post (0 - unlimited)
 $bb_cfg['max_symbols_post'] = 5000; // TODO: Max number of symbols in a post (0 - unlimited)
 
+// Announcements
+$bb_cfg['show_announcements_on_every_page'] = false;
+
 // PM
 $bb_cfg['privmsg_disable'] = false; // Disable private messages
 $bb_cfg['max_outgoing_pm_cnt'] = 10; // TODO: Max number of messages in a short period of time to fight spam
@@ -682,6 +685,10 @@ $bb_cfg['page'] = [
         'index' => true,
     ],
     'show_sidebar2' => [
+        #BB_SCRIPT => true
+        'index' => true,
+    ],
+    'show_announcements' => [
         #BB_SCRIPT => true
         'index' => true,
     ]

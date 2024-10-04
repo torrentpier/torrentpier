@@ -414,6 +414,8 @@ function go_to_page ()
 <!--main_content-->
 <td id="main_content">
 	<div id="main_content_wrap">
+		<!-- IF SHOW_ANNOUNCEMENTS -->
+		<!-- ENDIF -->
 		<div id="latest_news">
 			<table cellspacing="0" cellpadding="0" width="100%">
 				<tr>
