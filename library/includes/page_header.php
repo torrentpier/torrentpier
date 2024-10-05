@@ -169,7 +169,6 @@ $template->assign_vars([
     'U_TERMS' => $bb_cfg['terms_and_conditions_url'],
     'U_TRACKER' => 'tracker.php',
 
-    'SHOW_ANNOUNCEMENTS' => !empty($bb_cfg['page']['show_announcements'][BB_SCRIPT]) || $bb_cfg['show_announcements_on_every_page'],
     'SHOW_SIDEBAR1' => !empty($bb_cfg['page']['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page'],
     'SHOW_SIDEBAR2' => !empty($bb_cfg['page']['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page'],
 
