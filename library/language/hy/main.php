@@ -987,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'Դեկտեմբերի';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'Ոչ մի ընտրություն',
     'AD' => 'Andorra',
