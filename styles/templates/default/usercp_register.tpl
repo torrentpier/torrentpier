@@ -157,7 +157,7 @@
             <td class="prof-title">{L_LOCATION}:</td>
             <td>
                 <label>Manual select
-                    <input name="user_from_set_manual" type="checkbox">
+                    <input {CHECKED_MANUAL_COUNTRY} name="user_from_set_manual" type="checkbox">
                 </label>
                 <hr>
                 <div id="country_select_hide">{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</span></div>
