@@ -52,6 +52,7 @@ class Html
         $this->_build_select_rec($params);
 
         $select_params = $js ? " $js" : '';
+        $select_params .= ' autocomplete="off"';
         $select_params .= $multiple_size ? ' multiple size="' . $multiple_size . '"' : '';
         $select_params .= ' name="' . htmlCHR($name) . '"';
         $select_params .= ' id="' . htmlCHR($name) . '"';
