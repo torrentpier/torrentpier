@@ -12,6 +12,7 @@
 - Added [TorrServer](https://github.com/YouROK/TorrServer) instance support! 🎞 [\#1603](https://github.com/torrentpier/torrentpier/pull/1603), [\#1623](https://github.com/torrentpier/torrentpier/pull/1623), [\#1624](https://github.com/torrentpier/torrentpier/pull/1624), [\#1628](https://github.com/torrentpier/torrentpier/pull/1628) ([belomaxorka](https://github.com/belomaxorka))
 - Newtopic: Added configuring robots indexing [\#1599](https://github.com/torrentpier/torrentpier/pull/1599) ([belomaxorka](https://github.com/belomaxorka))
 - Added showing releaser stats in profile [\#1568](https://github.com/torrentpier/torrentpier/pull/1568) ([belomaxorka](https://github.com/belomaxorka))
+- Added ability to set country name manually [\#1652](https://github.com/torrentpier/torrentpier/pull/1652) ([belomaxorka](https://github.com/belomaxorka))
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
