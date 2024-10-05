@@ -184,6 +184,7 @@
                     }
                     toggleCountrySelectors();
                     $manualCheckbox.change(toggleCountrySelectors);
+
                     // Handle flag icon changing
                     $('#user_from').bind('change', function () {
                         ajax.exec({
