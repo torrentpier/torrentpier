@@ -172,10 +172,14 @@
 
                     function toggleCountrySelectors() {
                         if ($manualCheckbox.is(':checked')) {
+                            $countrySelectHide.find('select').prop('disabled', true);
                             $countrySelectHide.hide();
+                            $countryManualSelect.find('input').prop('disabled', false);
                             $countryManualSelect.show();
                         } else {
+                            $countryManualSelect.find('input').prop('disabled', true);
                             $countryManualSelect.hide();
+                            $countrySelectHide.find('select').prop('disabled', false);
                             $countrySelectHide.show();
                         }
                     }
