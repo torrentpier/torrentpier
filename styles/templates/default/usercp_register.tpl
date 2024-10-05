@@ -165,15 +165,23 @@
             </td>
             <script type="text/javascript">
                 $(document).ready(function () {
-                    $('input[name="user_from_set_manual"]').change(function () {
-                        if (this.checked) {
-                            $('div#country_select_hide').hide();
-                            $('div#country_manual_select').show();
+                    // Handle manual country select
+                    const $manualCheckbox = $('input[name="user_from_set_manual"]');
+                    const $countrySelectHide = $('div#country_select_hide');
+                    const $countryManualSelect = $('div#country_manual_select');
+
+                    function toggleCountrySelectors() {
+                        if ($manualCheckbox.is(':checked')) {
+                            $countrySelectHide.hide();
+                            $countryManualSelect.show();
                         } else {
-                            $('div#country_manual_select').hide();
-                            $('div#country_select_hide').show();
+                            $countryManualSelect.hide();
+                            $countrySelectHide.show();
                         }
-                    });
+                    }
+
+                    toggleCountrySelectors();
+                    $manualCheckbox.change(toggleCountrySelectors);
                     // Handle flag icon changing
                     $('#user_from').bind('change', function () {
                         ajax.exec({
