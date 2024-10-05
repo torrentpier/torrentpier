@@ -155,7 +155,7 @@
         </tr>
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
-            <td>{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</td>
+            <td>{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</span></td>
             <script type="text/javascript">
                 $('#user_from').bind('change', function () {
                     ajax.exec({
