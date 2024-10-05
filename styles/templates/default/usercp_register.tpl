@@ -156,7 +156,7 @@
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
             <td>
-                <label>Manual select
+                <label>{L_SET_OWN_COUNTRY}
                     <input {CHECKED_MANUAL_COUNTRY} name="user_from_set_manual" type="checkbox">
                 </label>
                 <hr>
