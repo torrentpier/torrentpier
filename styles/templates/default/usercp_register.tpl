@@ -155,13 +155,32 @@
         </tr>
         <tr>
             <td class="prof-title">{L_LOCATION}:</td>
-            <td>{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</span></td>
+            <td>
+                <label>Manual select
+                    <input name="user_from_set_manual" type="checkbox">
+                </label>
+                <hr>
+                <div id="country_select_hide">{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</span></div>
+                <div style="display: none;" id="country_manual_select"><input type="text" name="user_from" size="50" maxlength="150" value="{USER_FROM}"/></div>
+            </td>
             <script type="text/javascript">
-                $('#user_from').bind('change', function () {
-                    ajax.exec({
-                        action: 'user_register',
-                        mode: 'check_country',
-                        country: $(this).val()
+                $(document).ready(function () {
+                    $('input[name="user_from_set_manual"]').change(function () {
+                        if (this.checked) {
+                            $('div#country_select_hide').hide();
+                            $('div#country_manual_select').show();
+                        } else {
+                            $('div#country_manual_select').hide();
+                            $('div#country_select_hide').show();
+                        }
+                    });
+                    // Handle flag icon changing
+                    $('#user_from').bind('change', function () {
+                        ajax.exec({
+                            action: 'user_register',
+                            mode: 'check_country',
+                            country: $(this).val()
+                        });
                     });
                 });
             </script>
