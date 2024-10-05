@@ -169,7 +169,6 @@
                     const $manualCheckbox = $('input[name="user_from_set_manual"]');
                     const $countrySelectHide = $('div#country_select_hide');
                     const $countryManualSelect = $('div#country_manual_select');
-
                     function toggleCountrySelectors() {
                         if ($manualCheckbox.is(':checked')) {
                             $countrySelectHide.find('select').prop('disabled', true);
@@ -183,7 +182,6 @@
                             $countrySelectHide.show();
                         }
                     }
-
                     toggleCountrySelectors();
                     $manualCheckbox.change(toggleCountrySelectors);
                     // Handle flag icon changing
