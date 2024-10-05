@@ -987,6 +987,7 @@ $lang['DATETIME']['DEC'] = 'Gruodis';
 
 // Country selector
 $lang['COUNTRY'] = 'Country';
+$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
 $lang['COUNTRIES'] = [
     0 => 'Pasirinkite nr.',
     'AD' => 'Andorra',
