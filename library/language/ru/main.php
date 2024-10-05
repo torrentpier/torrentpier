@@ -987,7 +987,7 @@ $lang['DATETIME']['DEC'] = 'Дек';
 
 // Country selector
 $lang['COUNTRY'] = 'Страна';
-$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
+$lang['SET_OWN_COUNTRY'] = 'Установить свою страну (вручную)';
 $lang['COUNTRIES'] = [
     0 => 'Не указан',
     'AD' => 'Андорра',
