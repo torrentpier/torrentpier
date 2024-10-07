@@ -63,9 +63,9 @@ $lang['SELECT_ACTION'] = 'Виберіть дію';
 $lang['CLEAR'] = 'Очистити';
 $lang['MOVE_TO_TOP'] = 'На початок';
 $lang['UNKNOWN'] = 'Не вказана';
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-$lang['NO_ITEMS'] = 'There seems to be no data here...';
-$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
+$lang['COPY_TO_CLIPBOARD'] = 'Копіювати до буферу обміну';
+$lang['NO_ITEMS'] = 'Здається, даних тут немає...';
+$lang['PLEASE_TRY_AGAIN'] = 'Спробуйте ще раз через декілька секунд...';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
 $lang['PREVIOUS_PAGE'] = 'Попер.';
@@ -699,8 +699,8 @@ $lang['NO_LIKES'] = 'Nobody gave a vote yet';
 $lang['LIKE_ALREADY'] = 'You already voted this topic';
 
 // Invites
-$lang['INVITE_CODE'] = 'Invite code';
-$lang['INCORRECT_INVITE'] = 'Invite not found';
+$lang['INVITE_CODE'] = 'Код запрошення';
+$lang['INCORRECT_INVITE'] = 'Запрошення не знайдено';
 $lang['INVITE_EXPIRED'] = 'Invite expired';
 
 // Group control panel
