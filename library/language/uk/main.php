@@ -63,9 +63,9 @@ $lang['SELECT_ACTION'] = 'Виберіть дію';
 $lang['CLEAR'] = 'Очистити';
 $lang['MOVE_TO_TOP'] = 'На початок';
 $lang['UNKNOWN'] = 'Не вказана';
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
-$lang['NO_ITEMS'] = 'There seems to be no data here...';
-$lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
+$lang['COPY_TO_CLIPBOARD'] = 'Копіювати до буферу обміну';
+$lang['NO_ITEMS'] = 'Здається, даних тут немає...';
+$lang['PLEASE_TRY_AGAIN'] = 'Спробуйте ще раз через декілька секунд...';
 
 $lang['NEXT_PAGE'] = 'Наступ.';
 $lang['PREVIOUS_PAGE'] = 'Попер.';
@@ -379,7 +379,7 @@ $lang['MAX_SMILIES_PER_POST'] = 'Перевищено ліміт (%s) смайл
 
 $lang['ATTACH_SIGNATURE'] = 'Приєднати підпис (можна змінити в профілі)';
 $lang['NOTIFY'] = 'Сповіщати мене про відповіді';
-$lang['ALLOW_ROBOTS_INDEXING'] = 'Allow robots indexing this topic';
+$lang['ALLOW_ROBOTS_INDEXING'] = 'Дозволити роботам індексування цієї теми';
 
 $lang['STORED'] = 'Ваше повідомлення було додано успішно.';
 $lang['EDITED'] = 'Повідомлення було змінено';
@@ -540,7 +540,7 @@ $lang['SEARCH_USER_TOPICS'] = 'Знайти теми користувача'; //
 $lang['NO_USER_ID_SPECIFIED'] = 'Вибачте, але такого користувача не існує.';
 $lang['WRONG_PROFILE'] = 'Ви не можете редагувати чужий профіль.';
 
-$lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
+$lang['ONLY_ONE_AVATAR'] = 'Можна вказати тільки один тип аватара';
 $lang['FILE_NO_DATA'] = 'Файл з вказаною Вами URL-адресою не містить даних';
 $lang['NO_CONNECTION_URL'] = 'Неможливо встановити з\'єднання з URL-адресою, що Ви вказали';
 $lang['INCOMPLETE_URL'] = 'Ви вказали неповний URL';
@@ -601,7 +601,7 @@ $lang['RESET_AUTOLOGIN'] = 'Видалити ключ автоматичного
 $lang['RESET_AUTOLOGIN_EXPL'] = 'включаючи всі місця, де Ви заходили на форум з увімкненим авто-входом';
 
 $lang['AVATAR'] = 'Аватар';
-$lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %s.';
+$lang['AVATAR_EXPLAIN'] = 'Показує невелике зображення під інформацією про вас в повідомленнях. Може бути показано тільки одне зображення, шириною не більше %d пікселів, висотою не більше %d пікселів і розміром не більше %s.';
 $lang['AVATAR_DELETE'] = 'Видалити аватар';
 $lang['AVATAR_DISABLE'] = 'Опція управління аватаром відключена за порушення <a href="%s"><b>правил форуму</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Завантажити аватар';
@@ -611,7 +611,7 @@ $lang['RETURN_PROFILE'] = 'Повернутися до профілю';
 $lang['SELECT_CATEGORY'] = 'Виберіть категорію';
 
 $lang['DELETE_IMAGE'] = 'Видалити зображення';
-$lang['SET_MONSTERID_AVATAR'] = 'Set MonsterID avatar';
+$lang['SET_MONSTERID_AVATAR'] = 'Встановити аватар MonsterID';
 $lang['CURRENT_IMAGE'] = 'Поточне зображення';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Сповіщати про нові ПП';
@@ -691,17 +691,17 @@ $lang['DESC'] = 'за спаданням';
 $lang['ORDER'] = 'Сортувати';
 
 // Thanks
-$lang['THANK_TOPIC'] = 'Vote for this topic';
-$lang['THANKS_GRATITUDE'] = 'We appreciate your gratitude';
+$lang['THANK_TOPIC'] = 'Проголосувати за цю тему';
+$lang['THANKS_GRATITUDE'] = 'Ми цінуємо вашу вдячність';
 $lang['LAST_LIKES'] = 'Останній голос';
-$lang['LIKE_OWN_POST'] = 'You can\'t vote for your own topic';
-$lang['NO_LIKES'] = 'Nobody gave a vote yet';
-$lang['LIKE_ALREADY'] = 'You already voted this topic';
+$lang['LIKE_OWN_POST'] = 'Ви не можете голосувати за свою тему';
+$lang['NO_LIKES'] = 'Ще ніхто не проголосував';
+$lang['LIKE_ALREADY'] = 'Ви вже проголосували за цю тему';
 
 // Invites
-$lang['INVITE_CODE'] = 'Invite code';
-$lang['INCORRECT_INVITE'] = 'Invite not found';
-$lang['INVITE_EXPIRED'] = 'Invite expired';
+$lang['INVITE_CODE'] = 'Код запрошення';
+$lang['INCORRECT_INVITE'] = 'Запрошення не знайдено';
+$lang['INVITE_EXPIRED'] = 'Термін дії запрошення закінчився';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Групи користувачів';
@@ -747,8 +747,8 @@ $lang['GROUP_REQUEST'] = 'Було подано запит про вступ д�
 $lang['GROUP_APPROVED'] = 'Ваш запит був схвалений.';
 $lang['GROUP_ADDED'] = 'Ви були додані до групи.';
 $lang['ALREADY_MEMBER_GROUP'] = 'Ви вже є членом групи';
-$lang['USER_IS_MEMBER_GROUP'] = '%s is already a member of this group';
-$lang['USER_IS_MOD_GROUP'] = '%s is a moderator of this group';
+$lang['USER_IS_MEMBER_GROUP'] = '%s вже є членом цієї групи';
+$lang['USER_IS_MOD_GROUP'] = '%s є модератором групи';
 $lang['GROUP_TYPE_UPDATED'] = 'Тип групи успішно оновлено.';
 $lang['EFFECTIVE_DATE'] = 'Дата набуття чинності';
 
@@ -986,8 +986,8 @@ $lang['DATETIME']['NOV'] = 'Лис';
 $lang['DATETIME']['DEC'] = 'Гру';
 
 // Country selector
-$lang['COUNTRY'] = 'Country';
-$lang['SET_OWN_COUNTRY'] = 'Set own country (Manually)';
+$lang['COUNTRY'] = 'Країна';
+$lang['SET_OWN_COUNTRY'] = 'Вказати свою країну (вручну)';
 $lang['COUNTRIES'] = [
     0 => 'Не вказано',
     'AD' => 'Andorra',
@@ -995,14 +995,14 @@ $lang['COUNTRIES'] = [
     'AF' => 'Afghanistan',
     'AG' => 'Antigua and Barbuda',
     'AI' => 'Anguilla',
-    'AL' => 'Albania',
-    'AM' => 'Armenia',
-    'AO' => 'Angola',
+    'AL' => 'Албанія',
+    'AM' => 'Вірменія',
+    'AO' => 'Ангола',
     'AQ' => 'Antarctica',
     'AR' => 'Argentina',
     'AS' => 'American Samoa',
-    'AT' => 'Austria',
-    'AU' => 'Australia',
+    'AT' => 'Австрія',
+    'AU' => 'Австралія',
     'AW' => 'Aruba',
     'AX' => 'Aland Islands',
     'AZ' => 'Azerbaijan',
@@ -1020,7 +1020,7 @@ $lang['COUNTRIES'] = [
     'BN' => 'Brunei Darussalam',
     'BO' => 'Bolivia, Plurinational State of',
     'BQ' => 'Caribbean Netherlands',
-    'BR' => 'Brazil',
+    'BR' => 'Бразилія',
     'BS' => 'Bahamas',
     'BT' => 'Bhutan',
     'BV' => 'Bouvet Island',
@@ -1044,15 +1044,15 @@ $lang['COUNTRIES'] = [
     'CV' => 'Cape Verde',
     'CW' => 'Country of Curaçao',
     'CX' => 'Christmas Island',
-    'CY' => 'Cyprus',
-    'CZ' => 'Czech Republic',
-    'DE' => 'Germany',
+    'CY' => 'Кіпр',
+    'CZ' => 'Чехія',
+    'DE' => 'Німеччина',
     'DJ' => 'Djibouti',
     'DK' => 'Denmark',
     'DM' => 'Dominica',
     'DO' => 'Dominican Republic',
     'DZ' => 'Algeria',
-    'EC' => 'Ecuador',
+    'EC' => 'Еквадор',
     'EE' => 'Estonia',
     'EG' => 'Egypt',
     'EH' => 'Western Sahara',
@@ -1065,9 +1065,9 @@ $lang['COUNTRIES'] = [
     'FK' => 'Falkland Islands (Malvinas)',
     'FM' => 'Micronesia, Federated States of',
     'FO' => 'Faroe Islands',
-    'FR' => 'France',
+    'FR' => 'Франція',
     'GA' => 'Gabon',
-    'GB-ENG' => 'England',
+    'GB-ENG' => 'Англія',
     'GB-NIR' => 'Northern Ireland',
     'GB-SCT' => 'Scotland',
     'GB-WLS' => 'Wales',
@@ -1083,7 +1083,7 @@ $lang['COUNTRIES'] = [
     'GN' => 'Guinea',
     'GP' => 'Guadeloupe',
     'GQ' => 'Equatorial Guinea',
-    'GR' => 'Greece',
+    'GR' => 'Греція',
     'GS' => 'South Georgia and the South Sandwich Islands',
     'GT' => 'Guatemala',
     'GU' => 'Guam',
@@ -1092,7 +1092,7 @@ $lang['COUNTRIES'] = [
     'HK' => 'Hong Kong',
     'HM' => 'Heard Island and McDonald Islands',
     'HN' => 'Honduras',
-    'HR' => 'Croatia',
+    'HR' => 'Хорватія',
     'HT' => 'Haiti',
     'HU' => 'Hungary',
     'ID' => 'Indonesia',
@@ -1225,7 +1225,7 @@ $lang['COUNTRIES'] = [
     'TV' => 'Tuvalu',
     'TW' => 'Taiwan (Republic of China)',
     'TZ' => 'Tanzania, United Republic of',
-    'UA' => 'Ukraine',
+    'UA' => 'Україна',
     'UG' => 'Uganda',
     'UM' => 'US Minor Outlying Islands',
     'US' => 'United States',
@@ -1283,8 +1283,8 @@ $lang['AUDIO_TRACK'] = 'Audio track information (%d):';
 $lang['AUDIO_CODEC'] = 'Audio codec: <b title="%s">%s</b>';
 $lang['VIDEO_CODEC'] = 'Video codec: <b title="%s">%s</b>';
 $lang['SHOW_MORE_INFORMATION_FILE'] = 'Show more information about file';
-$lang['DOWNLOAD_M3U_FILE'] = 'Download .m3u file';
-$lang['PLAYBACK_M3U'] = 'Playback .m3u file';
+$lang['DOWNLOAD_M3U_FILE'] = 'Завантажити .m3u файл';
+$lang['PLAYBACK_M3U'] = 'Відтворити .m3u файл';
 $lang['COPY_STREAM_LINK'] = 'Copy stream link to clipboard';
 $lang['M3U_NOT_SUPPORTED'] = 'This file cannot be played in the browser...';
 $lang['M3U_FFPROBE_NO_DATA'] = 'It seems ffprobe will not be able to return data about this codec...';
