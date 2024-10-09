@@ -107,7 +107,7 @@ $bb_cfg['client_ban'] = [
         // 'client_id' => 'Ban reason (can be empty)'
         '-UT' => 'uTorrent — NOT ad-free and open-source',
         '-MG' => 'Mostly leeching client',
-        '-ZO' => ''
+        '-ZO' => '',
     ]
 ];
 
