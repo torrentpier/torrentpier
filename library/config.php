@@ -104,6 +104,7 @@ $bb_cfg['client_ban'] = [
     // The second argument is being shown in the torrent client as a failure message
     // Handy client list: https://github.com/transmission/transmission/blob/f85c3b6f8db95d5363f6ec38eee603f146c6adb6/libtransmission/clients.cc#L504
     'clients' => [
+        // 'client_id' => 'Reason (can be empty)'
         '-UT' => 'uTorrent — NOT ad-free and open-source',
         '-MG' => 'Mostly leeching client',
     ]
