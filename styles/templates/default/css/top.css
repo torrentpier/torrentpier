@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  min-width: 760px;
+  min-width: fit-content;
   color: #000000;
   background: #E3E3E3;
 }
