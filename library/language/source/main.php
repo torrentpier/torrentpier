@@ -1387,6 +1387,7 @@ $lang['BT_GEN_PASSKEY'] = 'create a new';
 $lang['BT_PASSKEY_VIEW'] = 'show';
 $lang['BT_GEN_PASSKEY_NEW'] = "Attention! After changing the new passkey, you will need to re-download all the active torrents! \n Are you sure you want to create a new passkey?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'No searchable forums found';
+$lang['BT_TOR_CLIENT_BLOCKED'] = 'Your BitTorrent client has been banned!';
 
 $lang['SEEDS'] = 'Seed';
 $lang['LEECHS'] = 'Leech';

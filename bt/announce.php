@@ -68,7 +68,7 @@ if (strlen($peer_id) !== 20) {
 if ($bb_cfg['client_ban']['enabled']) {
     foreach ($bb_cfg['client_ban']['clients'] as $clientId => $reason) {
         if (str_starts_with($peer_id, $clientId)) {
-            msg_die($reason);
+            msg_die(empty($reason) ? $lang['BT_TOR_CLIENT_BLOCKED'] : $reason);
         }
     }
 }
