@@ -100,7 +100,8 @@ $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_
 $bb_cfg['allow_internal_ip'] = false; // Allow internal IP (10.xx.. etc.)
 $bb_cfg['client_ban'] = [
     'enabled' => false,
-    // Clients to be blocked, for example, peer id '-UT' will block all uTorrent clients, '-UT2' will block builds starting with 2 (default: false)
+    'only_allow_mode' => false,
+    // Clients to be blocked / allowed (in "only allow mode"), for example, peer id '-UT' will block all uTorrent clients, '-UT2' will block builds starting with 2 (default: false)
     // The second argument is being shown in the torrent client as a failure message
     // Handy client list: https://github.com/transmission/transmission/blob/f85c3b6f8db95d5363f6ec38eee603f146c6adb6/libtransmission/clients.cc#L504
     'clients' => [
