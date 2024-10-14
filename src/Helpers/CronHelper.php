@@ -132,7 +132,7 @@ class CronHelper
                 }
                 break;
             default:
-                bb_simple_die("Invalid mode: $mode");
+                bb_simple_die("Invalid cron track mode: $mode");
         }
     }
 }
