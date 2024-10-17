@@ -239,7 +239,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
             if (unlink(BB_ROOT . 'composer-setup.php')) {
                 out("- Composer installation file successfully removed!\n", 'success');
             } else {
-                out('- Cannot remove Composer installation file. Please, delete it manually', 'warning');
+                out('- Cannot remove Composer installation file (composer-setup.php). Please, delete it manually', 'warning');
             }
         }
     }
