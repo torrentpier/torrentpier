@@ -249,9 +249,13 @@ if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $po
     }
 }
 
-// Notify & Allow robots indexing
+// Notify, allow robots indexing and anonymous mode
+$anonymous_mode = $post_info['post_anonymous'] ?? (bool)bf($userdata['user_opt'], 'user_opt', 'user_anonymous');
 $robots_indexing = $post_info['topic_allow_robots'] ?? true;
 if ($submit || $refresh) {
+    if (!IS_GUEST) {
+        $anonymous_mode = !empty($_POST['anonymous']);
+    }
     if (IS_AM) {
         $robots_indexing = !empty($_POST['robots']);
     }
@@ -338,7 +342,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing);
+                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing, (int)$anonymous_mode);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -500,6 +504,11 @@ if (!IS_GUEST) {
     }
 }
 
+// Anonymous mode
+if (!IS_GUEST) {
+    $template->assign_var('SHOW_ANONYMOUS_CHECKBOX');
+}
+
 $topic_type_toggle = '';
 if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     // Allow robots indexing
@@ -614,7 +623,6 @@ $template->assign_vars([
     'POSTING_TYPE_TITLE' => $page_title,
     'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
     'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? $post_info['topic_title'] : '',
-    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'USERNAME' => @$username,
     'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
@@ -623,11 +631,14 @@ $template->assign_vars([
 
     'POSTER_RGROUPS' => !empty($poster_rgroups) ? $poster_rgroups : '',
     'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
+    'ANONYMOUS_MODE' => ($mode == 'reply') ? $lang['ANONYMOUS_REPLY'] : $lang['ANONYMOUS_TOPIC'],
 
+    'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_VIEWTOPIC' => ($mode == 'reply') ? TOPIC_URL . "$topic_id&amp;postorder=desc" : '',
 
     'S_NOTIFY_CHECKED' => $notify_user ? 'checked' : '',
     'S_ROBOTS_CHECKED' => $robots_indexing ? 'checked' : '',
+    'S_ANONYMOUS_CHECKED' => $anonymous_mode ? 'checked' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
