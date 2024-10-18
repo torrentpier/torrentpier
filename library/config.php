@@ -613,7 +613,8 @@ $bb_cfg['file_id_ext'] = [
     9 => 'zip',
     10 => '7z',
     11 => 'bmp',
-    12 => 'webp'
+    12 => 'webp',
+    13 => 'avif'
 ];
 
 // Attachments
@@ -627,7 +628,7 @@ $bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // TODO: For regular section
 
 // Avatars
 $bb_cfg['avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // Allowed file extensions (after changing, do the same for $bb_cfg['file_id_ext'])
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp', 'avif'], // Allowed file extensions (after changing, do the same for $bb_cfg['file_id_ext'])
     'bot_avatar' => '/gallery/bot.gif', // The bot's avatar
     'max_size' => 100 * 1024, // Avatar's allowed dimensions
     'max_height' => 100, // Avatar height in px
@@ -640,7 +641,7 @@ $bb_cfg['avatars'] = [
 
 // Group avatars
 $bb_cfg['group_avatars'] = [
-    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp'], // Allowed file extensions (add the same for $bb_cfg['file_id_ext'])
+    'allowed_ext' => ['gif', 'jpg', 'png', 'bmp', 'webp', 'avif'], // Allowed file extensions (add the same for $bb_cfg['file_id_ext'])
     'max_size' => 300 * 1024, // max avatar size in bytes
     'max_height' => 300, // Avatar height in px
     'max_width' => 300, // Avatar weight in px

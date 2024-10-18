@@ -7,6 +7,7 @@
 
 - Release 2.4.5 🦕 ([belomaxorka](https://github.com/belomaxorka))
 - [CLI] TorrentPier installer ☕️ [\#1576](https://github.com/torrentpier/torrentpier/pull/1576), [\#1582](https://github.com/torrentpier/torrentpier/pull/1582), [\#1585](https://github.com/torrentpier/torrentpier/pull/1585), [\#1591](https://github.com/torrentpier/torrentpier/pull/1591) ([belomaxorka](https://github.com/belomaxorka))
+- Added avif images support 🌄 [\#1660](https://github.com/torrentpier/torrentpier/pull/1660) ([belomaxorka](https://github.com/belomaxorka))
 - Added some new HTML meta-tags [\#1562](https://github.com/torrentpier/torrentpier/pull/1562) ([belomaxorka](https://github.com/belomaxorka))
 - Added robots meta-tag support 🤖 [\#1587](https://github.com/torrentpier/torrentpier/pull/1587) ([belomaxorka](https://github.com/belomaxorka))
 - Added [TorrServer](https://github.com/YouROK/TorrServer) instance support! 🎞 [\#1603](https://github.com/torrentpier/torrentpier/pull/1603), [\#1623](https://github.com/torrentpier/torrentpier/pull/1623), [\#1624](https://github.com/torrentpier/torrentpier/pull/1624), [\#1628](https://github.com/torrentpier/torrentpier/pull/1628) ([belomaxorka](https://github.com/belomaxorka))
