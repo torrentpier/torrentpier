@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+  <!-- Meta information -->
+  <meta>
+    <name>Modification title</name>
+    <author>Modification author</author>
+    <homepage>https://example.com</homepage>
+    <version>v0.0.1</version>
+    <license>MIT License</license>
+    <!--
+    compatibility
+    values:
+    - v2.4.4
+    - v2.4.*
+    - v2.4.4, v2.4.5, ...
+    -->
+    <compatibility>v2.4.4</compatibility>
+  </meta>
+  <!-- Installation process -->
+  <sql><![CDATA[
+  SELECT column1, column2, ...
+  FROM table_name;
+]]></sql>
+  <file error="skip" name="path/to/file">
+    <operation error="skip">
+      <search><![CDATA[
+      Some code here...
+]]></search>
+      <!--
+      add
+      position:
+      - after
+      - before
+      - replace
+      -->
+      <add position="after"><![CDATA[
+      Some code here...
+]]></add>
+    </operation>
+  </file>
+</modification>

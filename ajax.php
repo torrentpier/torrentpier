@@ -24,7 +24,7 @@ switch ($ajax->action) {
     case 'view_post':
     case 'posts':
     case 'post_mod_comment':
-        require INC_DIR . '/bbcode.php';
+        require VQMod::modCheck(INC_DIR . '/bbcode.php');
         break;
 
     case 'view_torrent':
@@ -32,7 +32,7 @@ switch ($ajax->action) {
     case 'change_tor_status':
     case 'change_torrent':
     case 'passkey':
-        require ATTACH_DIR . '/attachment_mod.php';
+        require VQMod::modCheck(ATTACH_DIR . '/attachment_mod.php');
         break;
 }
 

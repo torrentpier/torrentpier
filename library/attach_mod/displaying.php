@@ -59,7 +59,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
             die("Template->loadfile(): No file specified for handle $template_var");
         }
 
-        $filename_2 = $template->files[$template_var];
+        $filename_2 = VQMod::modCheck($template->files[$template_var]);
 
         $str = file_get_contents($filename_2);
         if (empty($str)) {
@@ -69,7 +69,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
         $template->uncompiled_code[$template_var] = $str;
     }
 
-    $complete_filename = $filename;
+    $complete_filename = VQMod::modCheck($filename);
     if ($complete_filename[0] != '/') {
         $complete_filename = $template->root . '/' . $complete_filename;
     }
@@ -298,7 +298,7 @@ function display_attachments($post_id)
 
             // bt
             if ($link && ($attachments['_' . $post_id][$i]['extension'] === TORRENT_EXT)) {
-                include ATTACH_DIR . '/displaying_torrent.php';
+                include VQMod::modCheck(ATTACH_DIR . '/displaying_torrent.php');
             } elseif ($link) {
                 $target_blank = ((@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT)) ? 'target="_blank"' : '';
 

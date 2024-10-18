@@ -10,6 +10,7 @@
 namespace TorrentPier;
 
 use Exception;
+use VQMod;
 
 /**
  * Class Ajax
@@ -319,7 +320,7 @@ class Ajax
      */
     public function edit_user_profile()
     {
-        require AJAX_DIR . '/edit_user_profile.php';
+        require VQMod::modCheck(AJAX_DIR . '/edit_user_profile.php');
     }
 
     /**
@@ -329,7 +330,7 @@ class Ajax
      */
     public function change_user_rank()
     {
-        require AJAX_DIR . '/change_user_rank.php';
+        require VQMod::modCheck(AJAX_DIR . '/change_user_rank.php');
     }
 
     /**
@@ -339,7 +340,7 @@ class Ajax
      */
     public function change_user_opt()
     {
-        require AJAX_DIR . '/change_user_opt.php';
+        require VQMod::modCheck(AJAX_DIR . '/change_user_opt.php');
     }
 
     /**
@@ -349,7 +350,7 @@ class Ajax
      */
     public function passkey()
     {
-        require AJAX_DIR . '/passkey.php';
+        require VQMod::modCheck(AJAX_DIR . '/passkey.php');
     }
 
     /**
@@ -359,7 +360,7 @@ class Ajax
      */
     public function group_membership()
     {
-        require AJAX_DIR . '/group_membership.php';
+        require VQMod::modCheck(AJAX_DIR . '/group_membership.php');
     }
 
     /**
@@ -369,7 +370,7 @@ class Ajax
      */
     public function manage_group()
     {
-        require AJAX_DIR . '/edit_group_profile.php';
+        require VQMod::modCheck(AJAX_DIR . '/edit_group_profile.php');
     }
 
     /**
@@ -379,7 +380,7 @@ class Ajax
      */
     public function post_mod_comment()
     {
-        require AJAX_DIR . '/post_mod_comment.php';
+        require VQMod::modCheck(AJAX_DIR . '/post_mod_comment.php');
     }
 
     /**
@@ -389,7 +390,7 @@ class Ajax
      */
     public function view_post()
     {
-        require AJAX_DIR . '/view_post.php';
+        require VQMod::modCheck(AJAX_DIR . '/view_post.php');
     }
 
     /**
@@ -399,7 +400,7 @@ class Ajax
      */
     public function change_tor_status()
     {
-        require AJAX_DIR . '/change_tor_status.php';
+        require VQMod::modCheck(AJAX_DIR . '/change_tor_status.php');
     }
 
     /**
@@ -409,7 +410,7 @@ class Ajax
      */
     public function change_torrent()
     {
-        require AJAX_DIR . '/change_torrent.php';
+        require VQMod::modCheck(AJAX_DIR . '/change_torrent.php');
     }
 
     /**
@@ -419,7 +420,7 @@ class Ajax
      */
     public function view_torrent()
     {
-        require AJAX_DIR . '/view_torrent.php';
+        require VQMod::modCheck(AJAX_DIR . '/view_torrent.php');
     }
 
     /**
@@ -429,7 +430,7 @@ class Ajax
      */
     public function user_register()
     {
-        require AJAX_DIR . '/user_register.php';
+        require VQMod::modCheck(AJAX_DIR . '/user_register.php');
     }
 
     /**
@@ -439,7 +440,7 @@ class Ajax
      */
     public function mod_action()
     {
-        require AJAX_DIR . '/mod_action.php';
+        require VQMod::modCheck(AJAX_DIR . '/mod_action.php');
     }
 
     /**
@@ -449,7 +450,7 @@ class Ajax
      */
     public function posts()
     {
-        require AJAX_DIR . '/posts.php';
+        require VQMod::modCheck(AJAX_DIR . '/posts.php');
     }
 
     /**
@@ -459,7 +460,7 @@ class Ajax
      */
     public function manage_user()
     {
-        require AJAX_DIR . '/manage_user.php';
+        require VQMod::modCheck(AJAX_DIR . '/manage_user.php');
     }
 
     /**
@@ -469,7 +470,7 @@ class Ajax
      */
     public function manage_admin()
     {
-        require AJAX_DIR . '/manage_admin.php';
+        require VQMod::modCheck(AJAX_DIR . '/manage_admin.php');
     }
 
     /**
@@ -479,7 +480,7 @@ class Ajax
      */
     public function topic_tpl()
     {
-        require AJAX_DIR . '/topic_tpl.php';
+        require VQMod::modCheck(AJAX_DIR . '/topic_tpl.php');
     }
 
     /**
@@ -489,7 +490,7 @@ class Ajax
      */
     public function index_data()
     {
-        require AJAX_DIR . '/index_data.php';
+        require VQMod::modCheck(AJAX_DIR . '/index_data.php');
     }
 
     /**
@@ -499,7 +500,7 @@ class Ajax
      */
     public function avatar()
     {
-        require AJAX_DIR . '/avatar.php';
+        require VQMod::modCheck(AJAX_DIR . '/avatar.php');
     }
 
     /**
@@ -509,7 +510,7 @@ class Ajax
      */
     public function sitemap()
     {
-        require AJAX_DIR . '/sitemap.php';
+        require VQMod::modCheck(AJAX_DIR . '/sitemap.php');
     }
 
     /**
@@ -519,7 +520,7 @@ class Ajax
      */
     public function callseed()
     {
-        require AJAX_DIR . '/callseed.php';
+        require VQMod::modCheck(AJAX_DIR . '/callseed.php');
     }
 
     /**
@@ -529,7 +530,7 @@ class Ajax
      */
     public function thx()
     {
-        require AJAX_DIR . '/thanks.php';
+        require VQMod::modCheck(AJAX_DIR . '/thanks.php');
     }
 
     /**

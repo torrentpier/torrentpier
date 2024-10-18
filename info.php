@@ -40,7 +40,7 @@ switch ((string)$_REQUEST['show'] ?? 'not_found') {
         break;
 }
 
-$require = is_file($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
+$require = is_file($htmlDir . $info['src']) ? VQMod::modCheck($htmlDir . $info['src']) : false;
 
 $template->assign_vars([
     'PAGE_TITLE' => mb_strtoupper($info['title'], 'UTF-8'),

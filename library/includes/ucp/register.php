@@ -32,7 +32,7 @@ $submit = !empty($_POST['submit']);
 $errors = [];
 $adm_edit = false; // редактирование админом чужого профиля
 
-require INC_DIR . '/bbcode.php';
+require VQMod::modCheck(INC_DIR . '/bbcode.php');
 
 $pr_data = []; // данные редактируемого либо регистрационного профиля
 $db_data = []; // данные для базы: регистрационные либо измененные данные юзера

@@ -75,6 +75,7 @@
   ajax.callback.manage_admin = function (data) {
     $('#cache').html(data.cache_html);
     $('#datastore').html(data.datastore_html);
+    $('#mods_cache').html(data.mods_cache_html);
     $('#indexer').html(data.indexer_html);
     $('#template_cache').html(data.template_cache_html);
     $('#update_user_level').html(data.update_user_level_html);
@@ -132,7 +133,8 @@
     <td>
       <a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>&nbsp;&middot;
       <a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_CLEAR_CACHE}</a>&nbsp;&middot;
-      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>
+      <a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_CLEAR_TEMPLATES_CACHE}</a>&nbsp;&middot;
+      <a href="#" id="mods_cache" onclick="ajax.manage_admin('clear_mods_cache'); return false;">{L_CLEAR_MODS_CACHE}</a>
     </td>
   </tr>
   <tr>

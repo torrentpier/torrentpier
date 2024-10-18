@@ -25,7 +25,7 @@ if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0
     $upload_dir = '../' . $attach_config['upload_dir'];
 }
 
-include ATTACH_DIR . '/includes/functions_selects.php';
+include VQMod::modCheck(ATTACH_DIR . '/includes/functions_selects.php');
 
 // Init Vars
 $mode = request_var('mode', '');

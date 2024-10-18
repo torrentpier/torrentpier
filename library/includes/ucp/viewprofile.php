@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-require INC_DIR . '/bbcode.php';
+require VQMod::modCheck(INC_DIR . '/bbcode.php');
 
 $datastore->enqueue([
     'ranks',
@@ -171,7 +171,7 @@ if (IS_AM) {
 
 // Show users torrent-profile
 if (IS_AM || $profile_user_id || !bf($profiledata['user_opt'], 'user_opt', 'user_dls')) {
-    require UCP_DIR . '/viewtorrent.php';
+    require VQMod::modCheck(UCP_DIR . '/viewtorrent.php');
 }
 
 // Ajax bt_userdata
