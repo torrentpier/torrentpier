@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-if (!defined('IN_UPDATED')) {
+if (!defined('IN_UPDATER')) {
     die(basename(__FILE__));
 }
 
