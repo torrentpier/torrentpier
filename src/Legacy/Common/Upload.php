@@ -86,7 +86,8 @@ class Upload
         IMAGETYPE_JPEG => 'jpg',
         IMAGETYPE_PNG => 'png',
         IMAGETYPE_BMP => 'bmp',
-        IMAGETYPE_WEBP => 'webp'
+        IMAGETYPE_WEBP => 'webp',
+        IMAGETYPE_AVIF => 'avif'
     ];
 
     /**
