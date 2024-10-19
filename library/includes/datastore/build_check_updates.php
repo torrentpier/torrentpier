@@ -26,18 +26,21 @@ if (VERSION_CODE < $versionCodeActual) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
     // Remove outdated updater file
+    $updater_need_replaced = false;
     $updater_file = readUpdaterFile();
     if (is_array($updater_file) && !empty($updater_file)) {
-        if ($updater_file['previous_version'] < VERSION_CODE) {
-            unlink(UPDATER_FILE);
+        if ($updater_file['latest_version'] < $versionCodeActual) {
+            $updater_need_replaced = true;
         }
     }
 
     // Save current version & latest available
-    file_write(json_encode([
-        'previous_version' => VERSION_CODE,
-        'latest_version' => $versionCodeActual
-    ]), UPDATER_FILE, replace_content: true);
+    if (!is_file(UPDATER_FILE) || $updater_need_replaced) {
+        file_write(json_encode([
+            'previous_version' => VERSION_CODE,
+            'latest_version' => $versionCodeActual
+        ]), UPDATER_FILE, replace_content: true);
+    }
 
     // Get MD5 checksum
     $buildFileChecksum = '';
