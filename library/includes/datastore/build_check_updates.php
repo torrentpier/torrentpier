@@ -27,7 +27,7 @@ if (VERSION_CODE < $versionCodeActual) {
 
     // Check updater file
     $updater_file = readUpdaterFile();
-    $updater_need_replaced = is_array($updater_file) && ($updater_file['latest_version'] < $versionCodeActual);
+    $updater_need_replaced = !empty($updater_file) && ($updater_file['latest_version'] < $versionCodeActual);
 
     // Save current version & latest available
     if (!is_file(UPDATER_FILE) || $updater_need_replaced) {

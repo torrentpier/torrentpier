@@ -403,7 +403,7 @@ $userdata =& $user->data;
  * Check for updates
  */
 $updaterFile = readUpdaterFile();
-if (is_array($updaterFile) && ($updaterFile['previous_version'] < VERSION_CODE)) {
+if (!empty($updaterFile) && ($updaterFile['previous_version'] < VERSION_CODE)) {
     define('IN_UPDATER', true);
 }
 
