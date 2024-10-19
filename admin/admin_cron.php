@@ -188,7 +188,8 @@ switch ($mode) {
 }
 
 if ($submit) {
-    if ($_POST['mode'] == 'list') {
+    $mode2 = $_POST['mode'] ?? '';
+    if ($mode2 == 'list') {
         if ($cron_action == 'run' && $jobs) {
             \TorrentPier\Legacy\Admin\Cron::run_jobs($jobs);
         } elseif ($cron_action == 'delete' && $jobs) {
@@ -198,12 +199,12 @@ if ($submit) {
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
     } elseif (\TorrentPier\Legacy\Admin\Cron::validate_cron_post($_POST) == 1) {
-        if ($_POST['mode'] == 'edit') {
+        if ($mode2 == 'edit') {
             \TorrentPier\Legacy\Admin\Cron::update_cron_job($_POST);
-        } elseif ($_POST['mode'] == 'add') {
+        } elseif ($mode2 == 'add') {
             \TorrentPier\Legacy\Admin\Cron::insert_cron_job($_POST);
         } else {
-            bb_die('Mode error');
+            bb_die("Invalid mode: $mode2");
         }
 
         redirect('admin/' . basename(__FILE__) . '?mode=list');
