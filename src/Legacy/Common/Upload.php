@@ -203,20 +203,21 @@ class Upload
      * @param array $params
      * @return bool
      */
-    public function store(string $mode = '', array $params = [])
+    public function store(string $mode, array $params = []): bool
     {
-        if ($mode == 'avatar') {
-            delete_avatar($params['user_id'], $params['avatar_ext_id']);
-            $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
-            return $this->_move($file_path);
+        switch ($mode) {
+            case 'avatar':
+                delete_avatar($params['user_id'], $params['avatar_ext_id']);
+                $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
+                break;
+            case 'attach':
+                $file_path = get_attach_path($params['topic_id']);
+                break;
+            default:
+                trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
         }
 
-        if ($mode == 'attach') {
-            $file_path = get_attach_path($params['topic_id']);
-            return $this->_move($file_path);
-        }
-
-        trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
+        return $this->_move($file_path);
     }
 
     /**

@@ -160,13 +160,13 @@ out("- Checking installed extensions...", 'info');
 
 // [1] Check PHP Version
 if (!version_compare(PHP_VERSION, CHECK_REQUIREMENTS['php_min_version'], '>=')) {
-    out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'error');
+    out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'warning');
 }
 
 // [2] Check installed PHP Extensions on server
 foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
     if (!extension_loaded($ext)) {
-        out("- ext-$ext not installed", 'error');
+        out("- ext-$ext not installed. Check out php.ini file", 'error');
         exit;
     } else {
         out("- ext-$ext installed!");
@@ -232,14 +232,14 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
             out("- Composer successfully downloaded!\n", 'success');
             runProcess('php ' . BB_ROOT . 'composer-setup.php --install-dir=' . BB_ROOT);
         } else {
-            out('- Cannot download Composer', 'error');
+            out('- Cannot download Composer. Please, download it (composer.phar) manually', 'error');
             exit;
         }
         if (is_file(BB_ROOT . 'composer-setup.php')) {
             if (unlink(BB_ROOT . 'composer-setup.php')) {
                 out("- Composer installation file successfully removed!\n", 'success');
             } else {
-                out('- Cannot remove Composer installation file. Delete it manually', 'warning');
+                out('- Cannot remove Composer installation file (composer-setup.php). Please, delete it manually', 'warning');
             }
         }
     }
@@ -250,7 +250,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
-        out('- composer.phar not found', 'error');
+        out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');
         exit;
     }
 } else {
@@ -386,5 +386,5 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
     out("- Voila! Good luck & have fun!", 'success');
-    rename(__FILE__, hash('md5', time()));
+    rename(__FILE__, __FILE__ . '_' . hash('md5', time()));
 }
