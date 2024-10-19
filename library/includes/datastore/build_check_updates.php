@@ -25,6 +25,14 @@ $versionCodeActual = (int)trim(str_replace(['.', 'v'], '', $getVersion));
 if (VERSION_CODE < $versionCodeActual) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
+    // Remove outdated updater file
+    $updater_file = readUpdaterFile();
+    if (is_array($updater_file) && !empty($updater_file)) {
+        if ($updater_file['previous_version'] < VERSION_CODE) {
+            unlink(UPDATER_FILE);
+        }
+    }
+
     // Save current version & latest available
     file_write(json_encode([
         'previous_version' => VERSION_CODE,
