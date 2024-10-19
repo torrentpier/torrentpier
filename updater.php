@@ -23,4 +23,4 @@ require_once INC_DIR . '/functions.php';
 require_once INC_DIR . '/functions_cli.php';
 
 // Welcoming message
-cli_out("--- TorrentPier Updated ---\n", 'info');
+cli_out("--- TorrentPier Updater ---\n", 'info');
