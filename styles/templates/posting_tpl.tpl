@@ -374,8 +374,8 @@ var TPL = {
 	reg: {
 		num     : /^\d+$/,
 		URL     : /^https?:\/\/[\w\#$%&~/.\-;:=?@\[\]+]+$/i,
-		img     : /^https?:\/\/[^\s\?&;:=\#\"<>]+\.(jpg|jpeg|gif|png|bmp|webp)$/i,
-		img_tag : /(https?:\/\/[^\s\?&;:=\#\"<>]+\.(jpg|jpeg|gif|png|bmp|webp)(?!\[|\]|\.))/ig
+		img     : /^https?:\/\/[^\s\?&;:=\#\"<>]+\.(jpg|jpeg|gif|png|bmp|webp|avif)$/i,
+		img_tag : /(https?:\/\/[^\s\?&;:=\#\"<>]+\.(jpg|jpeg|gif|png|bmp|webp|avif)(?!\[|\]|\.))/ig
 	},
 
 	// построение сообщения на основе данных из формы
