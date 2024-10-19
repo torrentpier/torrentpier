@@ -25,14 +25,9 @@ $versionCodeActual = (int)trim(str_replace(['.', 'v'], '', $getVersion));
 if (VERSION_CODE < $versionCodeActual) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
-    // Remove outdated updater file
-    $updater_need_replaced = false;
+    // Check updater file
     $updater_file = readUpdaterFile();
-    if (is_array($updater_file) && !empty($updater_file)) {
-        if ($updater_file['latest_version'] < $versionCodeActual) {
-            $updater_need_replaced = true;
-        }
-    }
+    $updater_need_replaced = is_array($updater_file) && ($updater_file['latest_version'] < $versionCodeActual);
 
     // Save current version & latest available
     if (!is_file(UPDATER_FILE) || $updater_need_replaced) {
