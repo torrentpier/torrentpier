@@ -28,5 +28,4 @@ cli_out("--- TorrentPier Updater ---\n", 'info');
 // Got changes
 $updaterFile = require_once BB_ROOT . 'install/upgrade/changes.php';
 foreach ($updaterFile as $version) {
-
 }
