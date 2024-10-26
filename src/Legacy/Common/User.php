@@ -586,8 +586,13 @@ class User
                 $bb_cfg['default_lang'] = basename($this->data['user_lang']);
                 define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
             }
+        }
 
-            if (isset($this->data['user_timezone'])) {
+        // Set default timezone (guests & auth users)
+        if (isset($this->data['user_timezone'])) {
+            if (IS_GUEST && isset($_COOKIE['user_timezone'])) {
+                $bb_cfg['board_timezone'] = $_COOKIE['user_timezone'];
+            } else {
                 $bb_cfg['board_timezone'] = $this->data['user_timezone'];
             }
         }
