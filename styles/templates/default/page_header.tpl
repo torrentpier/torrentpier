@@ -83,6 +83,18 @@ var user = {
 	}
 };
 
+// Set timezone for guests
+if (!LOGGED_IN) {
+    function getCurrentTimezoneOffset() {
+        const offsetMinutes = new Date().getTimezoneOffset();
+        const offsetHours = Math.floor(offsetMinutes / 60);
+        const offsetMinutesRest = offsetMinutes % 60;
+        return offsetHours + offsetMinutesRest / 60;
+    }
+
+    setCookie('user_timezone', getCurrentTimezoneOffset(), 30);
+}
+
 <!-- IF JUMPBOX -->
 $(document).ready(function () {
     $("div.jumpbox").html('\
