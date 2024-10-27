@@ -92,7 +92,7 @@ if (!LOGGED_IN) {
         return offsetHours + offsetMinutesRest / 60;
     }
 
-    setCookie('user_timezone', getCurrentTimezoneOffset(), 30);
+    setCookie('user_timezone', getCurrentTimezoneOffset());
 }
 
 <!-- IF JUMPBOX -->
