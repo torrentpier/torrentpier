@@ -585,7 +585,7 @@ class User
 
         if (!IS_GUEST) {
             if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
-                $this->data['user_lang'] = $_COOKIE['user_lang'];
+                $this->data['user_lang'] = htmlCHR($_COOKIE['user_lang']);
             }
             if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
                 $bb_cfg['default_lang'] = basename($this->data['user_lang']);
@@ -596,7 +596,7 @@ class User
         // Set default timezone (guests & auth users)
         if (isset($this->data['user_timezone'])) {
             if (IS_GUEST && isset($_COOKIE['user_timezone'])) {
-                $bb_cfg['board_timezone'] = $_COOKIE['user_timezone'];
+                $bb_cfg['board_timezone'] = htmlCHR($_COOKIE['user_timezone']);
             } else {
                 $bb_cfg['board_timezone'] = $this->data['user_timezone'];
             }
