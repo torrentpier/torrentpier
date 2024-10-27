@@ -13,6 +13,8 @@ use TorrentPier\Legacy\DateDelta;
 use TorrentPier\Legacy\Torrent;
 use TorrentPier\Sessions;
 
+use TorrentPier\Helpers\TimezoneHelper;
+
 use Exception;
 
 /**
@@ -599,10 +601,11 @@ class User
         // Set timezone (guests & auth users)
         if (isset($this->data['user_timezone'])) {
             if (IS_GUEST && isset($_COOKIE['user_timezone'])) {
-                $bb_cfg['board_timezone'] = htmlCHR($_COOKIE['user_timezone']);
+                $timezone = TimezoneHelper::validate($_COOKIE['user_timezone']);
             } else {
-                $bb_cfg['board_timezone'] = $this->data['user_timezone'];
+                $timezone = TimezoneHelper::validate($this->data['user_timezone']);
             }
+            $bb_cfg['board_timezone'] = $timezone;
         }
 
         $this->data['user_lang'] = $bb_cfg['default_lang'];
