@@ -569,10 +569,12 @@ class User
     {
         global $bb_cfg, $theme, $source_lang, $DeltaTime;
 
+        // Prevent multiple calling
         if (defined('LANG_DIR')) {
             return;
-        }  // prevent multiple calling
+        }
 
+        // Auto-detect browser language for guests
         if (IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) { // Apply browser language
             $http_accept_language = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
             if (isset($bb_cfg['lang'][$http_accept_language])) {
@@ -583,6 +585,7 @@ class User
         define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
         define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
+        // Set user lang for authorized users
         if (!IS_GUEST) {
             if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
                 $this->data['user_lang'] = htmlCHR($_COOKIE['user_lang']);
@@ -593,7 +596,7 @@ class User
             }
         }
 
-        // Set default timezone (guests & auth users)
+        // Set timezone (guests & auth users)
         if (isset($this->data['user_timezone'])) {
             if (IS_GUEST && isset($_COOKIE['user_timezone'])) {
                 $bb_cfg['board_timezone'] = htmlCHR($_COOKIE['user_timezone']);
