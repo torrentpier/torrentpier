@@ -86,9 +86,14 @@ var user = {
 // Set timezone for guests
 $(document).ready(function () {
     if (!LOGGED_IN) {
-        function getTimeZone() {
-            const offset = new Date().getTimezoneOffset(), o = Math.abs(offset);
-            return (offset < 0 ? '' : '-') + Math.floor(o / 60) + '.' + o % 60;
+        const getTimeZone = () => {
+            const timezoneOffset = new Date().getTimezoneOffset()
+            const offset = Math.abs(timezoneOffset)
+            const offsetOperator = timezoneOffset < 0 ? '' : '-'
+            const offsetHours = Math.floor(offset / 60).toString().padStart(2, '0')
+            const offsetMinutes = Math.floor(offset % 60).toString().padStart(2, '0')
+
+            return offsetOperator + offsetHours + '.' + offsetMinutes;
         }
 
         setCookie('user_timezone', getTimeZone());
