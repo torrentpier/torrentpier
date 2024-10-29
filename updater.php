@@ -26,8 +26,7 @@ require_once INC_DIR . '/functions_cli.php';
 cli_out("--- TorrentPier Updater ---\n", 'info');
 
 // Backup note
-cli_out("- Please make a backup before upgrading your TorrentPier!!!", 'error');
-cli_out("- Note: This CLI script can itself make a backup of all current files (include DB), this will take some time... In any case, it is recommended to create a backup copy using the server!", 'info');
+cli_out('- Please make a backup before upgrading your TorrentPier!!!', 'error');
 
 // Backup confirmation
 if (!cli_confirm("\nHave you already backed up your project files? [y/N]: ")) {
@@ -37,7 +36,13 @@ if (!cli_confirm('Are you sure you have created a backed up of your project file
     exit;
 }
 
+// Got information from updater file
+cli_out(sprintf("\n- Trying to get information from %s file...", basename(UPDATER_FILE)), 'info');
+$updaterFile = readUpdaterFile();
+if (!empty($updaterFileFile['previous_version'])) {
+    cli_out('', 'info');
+}
+
 // Got changes
-$updaterFile = '';
 foreach ($updaterFile as $version) {
 }
