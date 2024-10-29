@@ -32,8 +32,14 @@ if (VERSION_CODE < $versionCodeActual) {
     // Save current version & latest available
     if (!is_file(UPDATER_FILE) || $updater_need_replaced) {
         file_write(json_encode([
-            'previous_version' => VERSION_CODE,
-            'latest_version' => $versionCodeActual
+            'previous_version' => [
+                'short_code' => VERSION_CODE,
+                'version' => $bb_cfg['tp_version']
+            ],
+            'latest_version' => [
+                'short_code' => $versionCodeActual,
+                'version' => $getVersion
+            ]
         ]), UPDATER_FILE, replace_content: true);
     }
 

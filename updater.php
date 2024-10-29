@@ -40,7 +40,7 @@ if (!cli_confirm('Are you sure you have created a backed up of your project file
 cli_out(sprintf("\n- Trying to get information from %s file...", basename(UPDATER_FILE)), 'info');
 $updaterFile = readUpdaterFile();
 if (!empty($updaterFileFile['previous_version'])) {
-    cli_out('', 'info');
+    cli_out('', 'success');
 }
 
 // Got changes
