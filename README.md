@@ -98,6 +98,8 @@ For installation, you need to follow a few simple steps.
    * `opensearch_desc_bt.xml` (change the description and address on your own)
 3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
+## ⚙️ How to update TorrentPier?
+
 ## 🔐 Security vulnerabilities
 
 If you discover a security vulnerability within TorrentPier, please follow our [security policy](https://github.com/torrentpier/torrentpier/security/policy), so we can address it promptly.
