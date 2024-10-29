@@ -2147,11 +2147,7 @@ function readUpdaterFile(): array|bool
         return false;
     }
 
-    $decodedFile = json_decode(file_get_contents(UPDATER_FILE), true);
-    return [
-        'previous_version' => $decodedFile['previous_version'],
-        'latest_version' => $decodedFile['latest_version']
-    ];
+    return json_decode(file_get_contents(UPDATER_FILE), true);
 }
 
 /**
