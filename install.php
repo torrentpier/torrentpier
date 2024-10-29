@@ -119,41 +119,40 @@ cli_out("- All extensions are installed!\n", 'success');
 // Check if already installed
 if (is_file(BB_ROOT . '.env')) {
     cli_out('- TorrentPier already installed', 'warning');
-    echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
-    if (str_starts_with(mb_strtolower(readline()), 'y')) {
-        cli_out("\n- Re-install process started...", 'info');
-        // environment
-        if (is_file(BB_ROOT . '.env')) {
-            if (unlink(BB_ROOT . '.env')) {
-                cli_out('- Environment file successfully removed!');
-            } else {
-                cli_out('- Cannot remove environment (.env) file. Delete it manually', 'error');
-                exit;
-            }
-        }
-        // composer.phar
-        if (is_file(BB_ROOT . 'composer.phar')) {
-            if (unlink(BB_ROOT . 'composer.phar')) {
-                cli_out("- composer.phar file successfully removed!");
-            } else {
-                cli_out('- Cannot remove composer.phar file. Delete it manually', 'error');
-                exit;
-            }
-        }
-        // composer dir
-        if (is_dir(BB_ROOT . 'vendor')) {
-            rmdir_rec(BB_ROOT . 'vendor');
-            if (!is_dir(BB_ROOT . 'vendor')) {
-                cli_out("- Composer directory successfully removed!");
-            } else {
-                cli_out('- Cannot remove Composer directory. Delete it manually', 'error');
-                exit;
-            }
-        }
-        cli_out("- Re-install process completed!\n", 'success');
-    } else {
+    // Re-install confirmation
+    if (!cli_confirm('Are you sure want to re-install TorrentPier? [y/N]: ')) {
         exit;
     }
+    cli_out("\n- Re-install process started...", 'info');
+    // environment
+    if (is_file(BB_ROOT . '.env')) {
+        if (unlink(BB_ROOT . '.env')) {
+            cli_out('- Environment file successfully removed!');
+        } else {
+            cli_out('- Cannot remove environment (.env) file. Delete it manually', 'error');
+            exit;
+        }
+    }
+    // composer.phar
+    if (is_file(BB_ROOT . 'composer.phar')) {
+        if (unlink(BB_ROOT . 'composer.phar')) {
+            cli_out("- composer.phar file successfully removed!");
+        } else {
+            cli_out('- Cannot remove composer.phar file. Delete it manually', 'error');
+            exit;
+        }
+    }
+    // composer dir
+    if (is_dir(BB_ROOT . 'vendor')) {
+        rmdir_rec(BB_ROOT . 'vendor');
+        if (!is_dir(BB_ROOT . 'vendor')) {
+            cli_out("- Composer directory successfully removed!");
+        } else {
+            cli_out('- Cannot remove Composer directory. Delete it manually', 'error');
+            exit;
+        }
+    }
+    cli_out("- Re-install process completed!\n", 'success');
 }
 
 // Applying permissions

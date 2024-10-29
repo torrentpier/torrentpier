@@ -75,3 +75,16 @@ function cli_runProcess(string $cmd, string $input = null): void
 
     proc_close($process);
 }
+
+/**
+ * Confirmation [y\N]
+ *
+ * @param string $text
+ * @param string $letter
+ * @return bool
+ */
+function cli_confirm(string $text, string $letter = 'y'): bool
+{
+    echo $text;
+    return str_starts_with(mb_strtolower(readline()), $letter);
+}
