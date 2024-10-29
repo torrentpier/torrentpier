@@ -43,6 +43,11 @@ if (!empty($updaterFile)) {
     cli_out('', 'success');
 }
 
+// ---
+// $updaterFile['previous_version']['short_code'] < VERSION_CODE
+// define('IN_UPDATER', true);
+// ---
+
 // Got changes
 foreach ($updaterFile as $version) {
 }

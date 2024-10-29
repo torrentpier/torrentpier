@@ -400,14 +400,6 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
- * Check for updates
- */
-$updaterFile = readUpdaterFile();
-if (!empty($updaterFile) && ($updaterFile['previous_version']['short_code'] < VERSION_CODE)) {
-    define('IN_UPDATER', true);
-}
-
-/**
  * Cron
  */
 if (
