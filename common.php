@@ -324,6 +324,12 @@ function hide_bb_path(string $path): string
     return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
 
+/**
+ * Returns memory usage statistic
+ *
+ * @param string $param
+ * @return int|void
+ */
 function sys(string $param)
 {
     switch ($param) {
@@ -334,6 +340,17 @@ function sys(string $param)
         default:
             trigger_error("invalid param: $param", E_USER_ERROR);
     }
+}
+
+/**
+ * Returns version code
+ *
+ * @param string $version
+ * @return int
+ */
+function version_code(string $version): int
+{
+    return (int)trim(str_replace(['.', 'v'], '', $version));
 }
 
 /**

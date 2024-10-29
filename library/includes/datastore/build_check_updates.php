@@ -19,7 +19,7 @@ $updaterDownloader = new \TorrentPier\Updater();
 $updaterDownloader = $updaterDownloader->getLastVersion();
 
 $getVersion = $updaterDownloader['tag_name'];
-$versionCodeActual = (int)trim(str_replace(['.', 'v'], '', $getVersion));
+$versionCodeActual = version_code($getVersion);
 
 // Has update!
 if (VERSION_CODE < $versionCodeActual) {
