@@ -142,6 +142,9 @@ UPDATE `bb_config` SET `config_value` = 'https://localhost/bt/announce.php' WHER
 
 // 2.4.4
 SET SESSION sql_mode = '';
+ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_attachments` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_attachments_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_attachments_desc` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -193,9 +196,6 @@ ALTER TABLE `bb_words` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_
 ALTER TABLE `buf_last_seeder` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_thx` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `buf_topic_view` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
-ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
-ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'tr_seed_bonus.php';
