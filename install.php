@@ -102,7 +102,8 @@ cli_out("- Checking installed extensions...", 'info');
 
 // [1] Check PHP Version
 if (!version_compare(PHP_VERSION, CHECK_REQUIREMENTS['php_min_version'], '>=')) {
-    cli_out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'warning');
+    cli_out("- TorrentPier requires PHP version " . CHECK_REQUIREMENTS['php_min_version'] . "+ Your PHP version " . PHP_VERSION, 'error');
+    exit;
 }
 
 // [2] Check installed PHP Extensions on server
