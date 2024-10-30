@@ -48,7 +48,7 @@ function cli_runProcess(string $cmd, string $input = null): void
     $process = proc_open($cmd, $descriptorSpec, $pipes);
 
     if (!is_resource($process)) {
-        out('- Could not start subprocess', 'error');
+        cli_out('- Could not start subprocess', 'error');
         return;
     }
 
