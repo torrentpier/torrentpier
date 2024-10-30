@@ -6,7 +6,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-@import "modern-normalize.min.css";
+@import "modern-normalize.css";
 @import "initial.css";
 @import "ajax.css";
 @import "alert.css";
