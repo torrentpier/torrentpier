@@ -143,6 +143,7 @@ UPDATE `bb_config` SET `config_value` = 'https://localhost/bt/announce.php' WHER
 // 2.4.4
 SET SESSION sql_mode = '';
 ALTER TABLE `bb_attachments` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
 ALTER TABLE `bb_attachments_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_attachments_desc` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_attach_quota` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -162,6 +163,7 @@ ALTER TABLE `bb_bt_tracker_snap` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb
 ALTER TABLE `bb_bt_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_bt_user_settings` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_categories` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
 ALTER TABLE `bb_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_cron` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_disallow` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
