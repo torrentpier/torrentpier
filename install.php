@@ -185,7 +185,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
             }
         }
     } else {
-        cli_out('- Composer.phar found, trying to install dependencies...', 'info');
+        cli_out('- Composer.phar found, trying to install dependencies!', 'success');
         cli_out("- Note: If installing dependencies fails, remove composer.phar and try again\n");
     }
 
