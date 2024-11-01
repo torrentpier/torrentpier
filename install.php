@@ -185,7 +185,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
             }
         }
     } else {
-        cli_out('- Composer.phar found, trying to install dependencies...', 'info');
+        cli_out('- Composer.phar found, trying to install dependencies!', 'info');
         cli_out("- Note: If installing dependencies fails, remove composer.phar and try again\n");
     }
 
@@ -194,11 +194,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
         cli_out('- Installing dependencies...', 'info');
         cli_runProcess('php ' . BB_ROOT . 'composer.phar clearcache');
         cli_runProcess('php ' . BB_ROOT . 'composer.phar selfupdate');
-        if (!is_dir(BB_ROOT . 'vendor')) {
-            cli_runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
-        } else {
-            cli_runProcess('php ' . BB_ROOT . 'composer.phar dump-autoload --no-interaction --no-ansi');
-        }
+        cli_runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         cli_out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
         cli_out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');
