@@ -184,12 +184,19 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
                 cli_out('- Cannot remove Composer installation file (composer-setup.php). Please, delete it manually', 'warning');
             }
         }
+    } else {
+        cli_out('- Composer.phar found, trying to install dependencies...', 'info');
+        cli_out("- Note: If installing dependencies fails, remove composer.phar and try again\n");
     }
 
     // Installing dependencies
     if (is_file(BB_ROOT . 'composer.phar')) {
         cli_out('- Installing dependencies...', 'info');
-        cli_runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
+        if (!is_dir(BB_ROOT . 'vendor')) {
+            cli_runProcess('php ' . BB_ROOT . 'composer.phar install');
+        } else {
+            cli_runProcess('php ' . BB_ROOT . 'composer.phar dump-autoload');
+        }
         cli_out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
         cli_out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');
