@@ -193,9 +193,9 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     if (is_file(BB_ROOT . 'composer.phar')) {
         cli_out('- Installing dependencies...', 'info');
         if (!is_dir(BB_ROOT . 'vendor')) {
-            cli_runProcess('php ' . BB_ROOT . 'composer.phar install');
+            cli_runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         } else {
-            cli_runProcess('php ' . BB_ROOT . 'composer.phar dump-autoload');
+            cli_runProcess('php ' . BB_ROOT . 'composer.phar dump-autoload --no-interaction --no-ansi');
         }
         cli_out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
