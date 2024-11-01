@@ -248,7 +248,7 @@ if (is_file(BB_ROOT . '.env')) {
 
             cli_out("\nCurrent value of $key: $value", 'debug');
             echo "Enter a new value for $key (or leave empty to not change): ";
-            $newValue = readline();
+            $newValue = trim(readline());
 
             if (!empty($newValue)) {
                 $line = "$key=$newValue";
