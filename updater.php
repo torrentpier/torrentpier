@@ -36,21 +36,23 @@ if (!cli_confirm('Are you sure you have created a backed up of your project file
     exit;
 }
 
-// Got information from updater file
+// Get information from updater file
 cli_out(sprintf("\n- Trying to get information from %s file...", basename(UPDATER_FILE)), 'info');
 $updaterFile = readUpdaterFile();
-if (!empty($updaterFile)) {
-    cli_out('Success! ', 'success');
-} else {
-    cli_out('Hmm, it seems you have the latest available version of TorrentPier', 'info');
+if (empty($updaterFile)) {
+    cli_out('- Hmm, it seems you have the latest available version of TorrentPier', 'info');
     exit;
 }
+cli_out(sprintf('- Success! %s file found!', basename(UPDATER_FILE)), 'success');
 
-// ---
-// $updaterFile['previous_version']['short_code'] < VERSION_CODE
-// define('IN_UPDATER', true);
-// ---
+// Check versions
+if (VERSION_CODE === $updaterFile['previous_version']['short_code']) {
+    cli_out('- Hmm, it seems you have the latest available version of TorrentPier', 'info');
+    exit;
+} elseif ($updaterFile['previous_version']['short_code'] < VERSION_CODE) {
+    define('IN_UPDATER', true);
+}
 
-// Got changes
+// Get changes
 foreach ($updaterFile as $version) {
 }
