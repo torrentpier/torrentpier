@@ -210,7 +210,7 @@ if ($moderation) {
     $template->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
-if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }

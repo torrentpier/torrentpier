@@ -65,13 +65,13 @@ $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
 // Statistics
-if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+if (!$stats = $datastore->get('stats')) {
     $datastore->update('stats');
     $stats = $datastore->get('stats');
 }
 
 // Forums data
-if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
@@ -173,7 +173,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
 
 // Obtain list of moderators
 $moderators = [];
-if (!$mod = $datastore->get('moderators') and !$datastore->has('moderators')) {
+if (!$mod = $datastore->get('moderators')) {
     $datastore->update('moderators');
     $mod = $datastore->get('moderators');
 }
@@ -321,7 +321,7 @@ if ($bb_cfg['bt_show_dl_stat_on_index'] && !IS_GUEST) {
 
 // Latest news
 if ($bb_cfg['show_latest_news']) {
-    if (!$latest_news = $datastore->get('latest_news') and !$datastore->has('latest_news')) {
+    if (!$latest_news = $datastore->get('latest_news')) {
         $datastore->update('latest_news');
         $latest_news = $datastore->get('latest_news');
     }
@@ -340,7 +340,7 @@ if ($bb_cfg['show_latest_news']) {
 
 // Network news
 if ($bb_cfg['show_network_news']) {
-    if (!$network_news = $datastore->get('network_news') and !$datastore->has('network_news')) {
+    if (!$network_news = $datastore->get('network_news')) {
         $datastore->update('network_news');
         $network_news = $datastore->get('network_news');
     }

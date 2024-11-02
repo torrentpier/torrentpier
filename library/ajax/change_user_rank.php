@@ -13,7 +13,7 @@ if (!defined('IN_AJAX')) {
 
 global $datastore, $lang;
 
-if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
+if (!$ranks = $datastore->get('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }
