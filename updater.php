@@ -65,6 +65,7 @@ $versionsRange = range($fromVersion, $targetVersion);
 // Define some updater constants
 define('UPDATES_DIR', BB_ROOT . 'install/upgrade/');
 define('UPDATE_SCRIPT_NAME', 'update.php');
+define('UPDATE_SQL_NAME', 'changes.sql');
 
 // Get changes
 foreach ($versionsRange as $version) {
@@ -89,6 +90,34 @@ foreach ($versionsRange as $version) {
                     unlink($fileToRemove);
                     cli_out("\n- $fileToRemove successfully removed!\n", 'success');
                 }
+            }
+        }
+    }
+
+    // Checking SQL dump
+    $dumpPath = $targetUpdate . '/' . UPDATE_SQL_NAME;
+    if (is_file($dumpPath)) {
+        if (!is_readable($dumpPath)) {
+            cli_out('- SQL file not readable', 'error');
+            exit;
+        }
+        cli_out('- SQL file found and readable!', 'success');
+
+        // Inserting SQL dump
+        cli_out('- Start applying SQL changes...', 'info');
+        $tempLine = '';
+        foreach (file($dumpPath) as $line) {
+            if (str_starts_with($line, '--') || $line == '') {
+                continue;
+            }
+
+            $tempLine .= $line;
+            if (str_ends_with(trim($line), ';')) {
+                if (!$conn->query($tempLine)) {
+                    cli_out("- Error performing query: $tempLine", 'error');
+                    exit;
+                }
+                $tempLine = '';
             }
         }
     }
