@@ -46,8 +46,8 @@ if (empty($updaterFile)) {
 cli_out(sprintf('- Success! %s file found!', basename(UPDATER_FILE)), 'success');
 
 // Check versions
-if (VERSION_CODE === $updaterFile['previous_version']['short_code']) {
-    cli_out('- Hmm, it seems you have the latest available version of TorrentPier', 'info');
+if (VERSION_CODE == $updaterFile['previous_version']['short_code']) {
+    cli_out('- It seems you have not unpacked the archive with the latest version of TorrentPier', 'warning');
     exit;
 } elseif ($updaterFile['previous_version']['short_code'] > VERSION_CODE) {
     exit;
