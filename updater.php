@@ -49,9 +49,12 @@ cli_out(sprintf('- Success! %s file found!', basename(UPDATER_FILE)), 'success')
 if (VERSION_CODE === $updaterFile['previous_version']['short_code']) {
     cli_out('- Hmm, it seems you have the latest available version of TorrentPier', 'info');
     exit;
-} elseif ($updaterFile['previous_version']['short_code'] < VERSION_CODE) {
-    define('IN_UPDATER', true);
+} elseif ($updaterFile['previous_version']['short_code'] > VERSION_CODE) {
+    exit;
 }
+
+// Set 'in updater' status
+define('IN_UPDATER', true);
 
 // Get changes
 foreach ($updaterFile as $version) {
