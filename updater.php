@@ -58,7 +58,7 @@ if (VERSION_CODE == $updaterFile['previous_version']['short_code']) {
 define('IN_UPDATER', true);
 
 // Define version codes
-$fromVersion = $updaterFile['previous_version']['short_code'];
+$fromVersion = $updaterFile['previous_version']['short_code'] + 1;
 $targetVersion = $updaterFile['latest_version']['short_code'];
 $versionsRange = range($fromVersion, $targetVersion);
 
