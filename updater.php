@@ -84,9 +84,10 @@ foreach ($versionsRange as $version) {
         if (!empty($updaterScript['removed_files'])) {
             cli_out("- Removing old files from previous version...", 'info');
             foreach ($updaterScript['removed_files'] as $file) {
-                if (is_file($file)) {
-                    unlink(BB_ROOT . $file);
-                    cli_out("- $file successfully removed!\n", 'success');
+                $fileToRemove = BB_ROOT . $file;
+                if (is_file($fileToRemove)) {
+                    unlink($fileToRemove);
+                    cli_out("\n- $fileToRemove successfully removed!\n", 'success');
                 }
             }
         }
