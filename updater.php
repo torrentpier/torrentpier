@@ -27,12 +27,13 @@ cli_out("--- TorrentPier Updater ---\n", 'info');
 
 // Backup note
 cli_out('- Please make a backup before upgrading your TorrentPier!!!', 'warning');
+cli_out('- Then extract (with replace) the files of the archive (new build) you downloaded to the root directory with TorrentPier installed', 'warning');
 
 // Backup confirmation
 if (!cli_confirm("\nHave you already backed up your project files? [y/N]: ")) {
     exit;
 }
-if (!cli_confirm('Are you sure you have created a backed up of your project files?! [y/N]: ')) {
+if (!cli_confirm('You have extracted the files of the new version of TorrentPier you downloaded? [y/N]: ')) {
     exit;
 }
 
@@ -47,7 +48,7 @@ cli_out(sprintf('- Success! %s file found!', basename(UPDATER_FILE)), 'success')
 
 // Check versions
 if (VERSION_CODE == $updaterFile['previous_version']['short_code']) {
-    cli_out('- It seems you have not unpacked the archive with the latest version of TorrentPier', 'warning');
+    cli_out("\n- It seems you have not unpacked the archive with the latest version of TorrentPier", 'warning');
     exit;
 } elseif ($updaterFile['previous_version']['short_code'] > VERSION_CODE) {
     exit;
