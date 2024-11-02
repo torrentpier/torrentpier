@@ -11,6 +11,21 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+/**
+ * Returns version code
+ *
+ * @param string $version
+ * @return int
+ */
+function version_code(string $version = ''): int
+{
+    global $bb_cfg;
+    if (empty($version)) {
+        $version = $bb_cfg['tp_version'];
+    }
+    return (int)trim(str_replace(['.', 'v'], '', $version));
+}
+
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     global $bb_cfg;
