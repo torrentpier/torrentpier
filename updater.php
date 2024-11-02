@@ -26,7 +26,7 @@ require_once INC_DIR . '/functions_cli.php';
 cli_out("--- TorrentPier Updater ---\n", 'info');
 
 // Backup note
-cli_out('- Please make a backup before upgrading your TorrentPier!!!', 'warning');
+cli_out('- Please make a backup before upgrading your TorrentPier!!!', 'error');
 cli_out('- Then extract (with replace) the files of the archive (new build) you downloaded to the root directory with TorrentPier installed', 'warning');
 
 // Backup confirmation
@@ -57,6 +57,35 @@ if (VERSION_CODE == $updaterFile['previous_version']['short_code']) {
 // Set 'in updater' status
 define('IN_UPDATER', true);
 
+// Define version codes
+$fromVersion = $updaterFile['previous_version']['short_code'];
+$targetVersion = $updaterFile['latest_version']['short_code'];
+$versionsRange = range($fromVersion, $targetVersion);
+
+// Define some updater constants
+define('UPDATES_DIR', BB_ROOT . 'install/upgrade/');
+define('UPDATE_SCRIPT_NAME', 'update.php');
+
 // Get changes
-foreach ($updaterFile as $version) {
+foreach ($versionsRange as $version) {
+    $targetUpdate = UPDATES_DIR . $version;
+
+    // Check update directory exists
+    if (!is_dir($targetUpdate)) {
+        continue;
+    }
+
+    // Check updater script exists
+    if (is_file($targetUpdate . '/' . UPDATE_SCRIPT_NAME)) {
+        $updaterScript = require_once $targetUpdate . '/' . UPDATE_SCRIPT_NAME;
+
+        // Deleting old files
+        if (!empty($updaterScript['removed_files'])) {
+            foreach ($updaterScript['removed_files'] as $file) {
+                if (is_file($file)) {
+                    unlink($file);
+                }
+            }
+        }
+    }
 }
