@@ -192,8 +192,6 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     // Installing dependencies
     if (is_file(BB_ROOT . 'composer.phar')) {
         cli_out('- Installing dependencies...', 'info');
-        cli_runProcess('php ' . BB_ROOT . 'composer.phar clearcache');
-        cli_runProcess('php ' . BB_ROOT . 'composer.phar selfupdate');
         cli_runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         cli_out("- Completed! Composer dependencies are installed!\n", 'success');
     } else {
