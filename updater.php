@@ -84,6 +84,7 @@ foreach ($versionsRange as $version) {
             foreach ($updaterScript['removed_files'] as $file) {
                 if (is_file($file)) {
                     unlink($file);
+                    cli_out("- $file successfully removed!\n", 'success');
                 }
             }
         }
