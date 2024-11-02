@@ -13,7 +13,8 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-if (!$bb_cfg['integrity_check'] || is_dir(BB_ROOT . '.git')) {
+// TODO: if (!local environment) { ... }
+if (!$bb_cfg['integrity_check']) {
     return;
 }
 
