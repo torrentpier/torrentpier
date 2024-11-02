@@ -10,16 +10,16 @@
 require __DIR__ . '/pagestart.php';
 
 // Statistics
-if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+if (!$stats = $datastore->get('stats')) {
     $datastore->update('stats');
     $stats = $datastore->get('stats');
 }
 
 // Files integrity check
-$files_integrity_data = $datastore->has('files_integrity') ? $datastore->get('files_integrity') : [];
+$files_integrity_data = $datastore->get('files_integrity') ?? [];
 
 // Check for updates
-$update_data = $datastore->has('check_updates') ? $datastore->get('check_updates') : [];
+$update_data = $datastore->get('check_updates') ?? [];
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
