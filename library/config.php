@@ -406,6 +406,7 @@ $bb_cfg['invites_system'] = [
     'codes' => [
         // Syntax: 'invite_code' => 'validity_period'
         // The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
+        // You can also create a permanent invite, set 'permanent' value for 'validity_period'
         // Invite link example: site_url/profile.php?mode=register&invite=new_year
         'new_year' => '2022-12-31 00:00:01',
         'ein_volk' => '29 July 1936',
