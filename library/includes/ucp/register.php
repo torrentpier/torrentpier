@@ -207,8 +207,10 @@ foreach ($profile_fields as $field => $can_edit) {
                 $invite_code = $_POST['invite_code'] ?? '';
                 if ($submit) {
                     if (isset($bb_cfg['invites_system']['codes'][$invite_code])) {
-                        if (TIMENOW > strtotime($bb_cfg['invites_system']['codes'][$invite_code])) {
-                            $errors[] = $lang['INVITE_EXPIRED'];
+                        if ($bb_cfg['invites_system']['codes'][$invite_code] !== 'permanent') {
+                            if (TIMENOW > strtotime($bb_cfg['invites_system']['codes'][$invite_code])) {
+                                $errors[] = $lang['INVITE_EXPIRED'];
+                            }
                         }
                     } else {
                         $errors[] = $lang['INCORRECT_INVITE'];

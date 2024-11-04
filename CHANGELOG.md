@@ -16,6 +16,7 @@
 - Added ability to set country name manually [\#1652](https://github.com/torrentpier/torrentpier/pull/1652) ([belomaxorka](https://github.com/belomaxorka))
 - Improved BitTorrent clients ban functionality [\#1657](https://github.com/torrentpier/torrentpier/pull/1657) ([belomaxorka](https://github.com/belomaxorka))
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
+- Invites: Permanent invites feature [\#1670](https://github.com/torrentpier/torrentpier/pull/1670) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed incorrect page width on mobile devices [\#1653](https://github.com/torrentpier/torrentpier/pull/1653) ([belomaxorka](https://github.com/belomaxorka))
