@@ -409,8 +409,9 @@ $bb_cfg['invites_system'] = [
         // You can also create a permanent invite, set 'permanent' value for 'validity_period'
         // Invite link example: site_url/profile.php?mode=register&invite=new_year
         'new_year' => '2022-12-31 00:00:01',
-        'ein_volk' => '29 July 1936',
-        'catch_up_overtake' => '1917-10-09'
+        '340c4bb6ea2d284c13e085b60b990a8a' => '12 April 1961',
+        'tp_birthday' => '2005-03-04',
+        'some_day' => 'next Thursday'
     ]
 ];
 $bb_cfg['password_symbols'] = [
