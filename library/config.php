@@ -410,7 +410,7 @@ $bb_cfg['invites_system'] = [
         // Invite link example: site_url/profile.php?mode=register&invite=new_year
         'new_year2023' => '2022-12-31 00:00:01',
         '340c4bb6ea2d284c13e085b60b990a8a' => '12 April 1961',
-        'tp_birthday' => '2005-03-04',
+        'tp_birthday' => '2005-04-04',
         'endless' => 'permanent'
     ]
 ];
