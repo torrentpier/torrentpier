@@ -19,6 +19,7 @@
 - Invites: Permanent invites feature [\#1670](https://github.com/torrentpier/torrentpier/pull/1670) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken torrent stats displaying [\#1672](https://github.com/torrentpier/torrentpier/pull/1672) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed incorrect page width on mobile devices [\#1653](https://github.com/torrentpier/torrentpier/pull/1653) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed template caching issue [\#1622](https://github.com/torrentpier/torrentpier/pull/1622) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `md5()` deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
