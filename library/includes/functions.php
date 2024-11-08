@@ -849,14 +849,7 @@ function show_bt_userdata($user_id): void
     global $template;
 
     if (!$btu = get_bt_userdata($user_id)) {
-        // Generate passkey
-        if (!\TorrentPier\Legacy\Torrent::getPasskey($user_id)) {
-            if (!\TorrentPier\Legacy\Torrent::generate_passkey($user_id, true)) {
-                bb_simple_die('Could not generate passkey');
-            } else {
-                show_bt_userdata($user_id);
-            }
-        }
+        return;
     }
 
     $template->assign_vars([
