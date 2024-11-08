@@ -391,7 +391,7 @@ function go_to_page ()
 	<!--sidebar1-->
 	<td id="sidebar1">
 		<div id="sidebar1-wrap">
-			<div id="user_ratio">
+			<!-- IF SHOW_BT_USERDATA --><div id="user_ratio">
 				<h3>{L_USER_RATIO}</h3>
 				<table cellpadding="0">
 					<div align="center">{THIS_AVATAR}</div>
@@ -402,7 +402,7 @@ function go_to_page ()
 					<tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
 					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="{BONUS_URL}"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
-			</div>
+			</div><!-- ENDIF -->
 			<!-- IF HTML_SIDEBAR_1 -->
 				<?php include($V['HTML_SIDEBAR_1']); ?>
 			<!-- ENDIF -->
