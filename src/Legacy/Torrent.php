@@ -866,10 +866,6 @@ class Torrent
      */
     public static function getPasskey(int|string $user_id): bool|string
     {
-        if ($passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1")) {
-            return $passkey['auth_key'];
-        }
-
-        return false;
+        return get_bt_userdata($user_id)['auth_key'];
     }
 }
