@@ -179,8 +179,8 @@ $bf['forum_perm'] = [
 ];
 
 $bf['user_opt'] = [
-#   'dis_opt_name'       =>     ЗАПРЕТЫ используемые администраторами для пользователей
-#   'user_opt_name'      =>     НАСТРОЙКИ используемые пользователями
+#   'dis_opt_name'       =>     PROHIBITIONS used by administrators for users
+#   'user_opt_name'      =>     SETTINGS used by users
     'user_viewemail' => 0,  // Показывать e-mail
     'dis_sig' => 1,  // Запрет на подпись
     'dis_avatar' => 2,  // Запрет на аватар
