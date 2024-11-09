@@ -1775,7 +1775,14 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
     return $where_ids;
 }
 
-// для более корректного поиска по словам содержащим одиночную кавычку
+/**
+ * Encodes text match
+ *
+ * Desc: for a more correct search for words containing a single quote
+ *
+ * @param $txt
+ * @return array|string|string[]
+ */
 function encode_text_match($txt)
 {
     return str_replace("'", '&#039;', $txt);
