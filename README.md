@@ -32,8 +32,8 @@ and go from there. The documentation will be translated into english in the near
 * Rich forum browsing/moderation tools
 * High-load capable, heavily configurable announcer
 * Scrape support
-* [TorrServer integration](https://github.com/YouROK/TorrServer)
 * FreeLeech
+* [TorrServer integration](https://github.com/YouROK/TorrServer) support
 * BitTorrent v2 support
 * Event-based invite system
 * Bonus points
@@ -137,7 +137,7 @@ Support this project by becoming a sponsor or a backer.
 </details>
 
 <details>
-  <summary>ЮMoney</summary>
+  <summary>YooMoney</summary>
   4100118022415720
 </details>
 
