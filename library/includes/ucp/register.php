@@ -606,8 +606,13 @@ if ($submit && !$errors) {
         $new_user_id = DB()->sql_nextid();
 
         // Generate passkey
-        if (!\TorrentPier\Legacy\Torrent::generate_passkey($new_user_id, true)) {
-            bb_simple_die('Could not generate passkey');
+        for ($i = 0, $max_try = 3; $i <= $max_try; $i++) {
+            if (\TorrentPier\Legacy\Torrent::generate_passkey($new_user_id, true)) {
+                break;
+            }
+            if ($i == $max_try) {
+                bb_simple_die('Could not generate passkey');
+            }
         }
 
         if (IS_ADMIN) {
