@@ -195,8 +195,8 @@ $bf['user_opt'] = [
     'dis_topic' => 11, // [PROHIBITIONS] Block to create new topics
     'dis_post' => 12, // [PROHIBITIONS] Block to send replies in topics
     'dis_post_edit' => 13, // [PROHIBITIONS] Block editing own posts / topics
-    'user_dls' => 14, // Скрывать список текущих закачек в профиле
-    'user_retracker' => 15, // Добавлять ретрекер к скачиваемым торрентам
+    'user_dls' => 14, // [SETTINGS] Hide list of "Current downloads" in my profile
+    'user_retracker' => 15, // [SETTINGS] Add my retracker into downloaded torrent files
 ];
 
 function bit2dec($bit_num)
