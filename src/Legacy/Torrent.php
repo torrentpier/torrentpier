@@ -866,6 +866,11 @@ class Torrent
      */
     public static function getPasskey(int|string $user_id): bool|string
     {
-        return get_bt_userdata($user_id)['auth_key'];
+        $bt_userdata = get_bt_userdata($user_id);
+        if (isset($bt_userdata['auth_key'])) {
+            return $bt_userdata['auth_key'];
+        }
+
+        return false;
     }
 }
