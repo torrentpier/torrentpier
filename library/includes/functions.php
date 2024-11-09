@@ -194,7 +194,7 @@ $bf['user_opt'] = [
     'user_empty' => 10, // [SETTINGS] Block showing advertisements to me (Not used)
     'dis_topic' => 11, // [PROHIBITIONS] Block to create new topics
     'dis_post' => 12, // [PROHIBITIONS] Block to send replies in topics
-    'dis_post_edit' => 13, // Запрет на редактирование сообщений
+    'dis_post_edit' => 13, // [PROHIBITIONS] Block editing own posts / topics
     'user_dls' => 14, // Скрывать список текущих закачек в профиле
     'user_retracker' => 15, // Добавлять ретрекер к скачиваемым торрентам
 ];
