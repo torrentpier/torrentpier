@@ -44,7 +44,7 @@ switch ($mode) {
     case 'status':
         $new_status = (int)$this->request['status'];
 
-        // Валидность статуса
+        // Check status validity
         if (!isset($lang['TOR_STATUS_NAME'][$new_status])) {
             $this->ajax_die($lang['TOR_STATUS_FAILED']);
         }
@@ -55,17 +55,17 @@ switch ($mode) {
             $this->ajax_die($lang['NOT_MODERATOR']);
         }
 
-        // Тот же статус
+        // Error if same status
         if ($tor['tor_status'] == $new_status) {
             $this->ajax_die($lang['TOR_STATUS_DUB']);
         }
 
-        // Запрет на изменение/присвоение CH-статуса модератором
+        // Prohibition on changing/assigning CH-status by moderator
         if ($new_status == TOR_CLOSED_CPHOLD && !IS_ADMIN) {
             $this->ajax_die($lang['TOR_DONT_CHANGE']);
         }
 
-        // Права на изменение статуса
+        // Check rights to change status
         if ($tor['tor_status'] == TOR_CLOSED_CPHOLD) {
             if (!IS_ADMIN) {
                 $this->verify_mod_rights($tor['forum_id']);
@@ -75,7 +75,7 @@ switch ($mode) {
             $this->verify_mod_rights($tor['forum_id']);
         }
 
-        // Подтверждение изменения статуса, выставленного другим модератором
+        // Confirmation of status change set by another moderator
         if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userdata['user_id'] && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
             if (empty($this->request['confirmed'])) {
                 $msg = $lang['TOR_STATUS_OF'] . " {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";

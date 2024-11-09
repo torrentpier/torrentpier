@@ -30,18 +30,18 @@ $can_register = (IS_GUEST || IS_ADMIN);
 
 $submit = !empty($_POST['submit']);
 $errors = [];
-$adm_edit = false; // редактирование админом чужого профиля
+$adm_edit = false; // editing someone else's profile by an admin
 
 require INC_DIR . '/bbcode.php';
 
-$pr_data = []; // данные редактируемого либо регистрационного профиля
-$db_data = []; // данные для базы: регистрационные либо измененные данные юзера
-$tp_data = []; // данные для tpl
+$pr_data = []; // data of the edited or registration profile
+$db_data = []; // data for the database: registration or changed user data
+$tp_data = []; // data for tpl
 
-// Данные профиля
+// Profile data
 switch ($mode) {
     /**
-     *  Регистрация
+     *  Registration
      */
     case 'register':
         if (!$can_register) {
@@ -49,16 +49,16 @@ switch ($mode) {
         }
 
         if (!IS_ADMIN) {
-            // Ограничение по ip
+            // IP limit
             if ($bb_cfg['unique_ip']) {
                 if ($users = DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
                     bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', $bb_cfg['tech_admin_email']));
                 }
             }
-            // Отключение регистрации
+            // Disabling registration
             if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && !$bb_cfg['emailer']['enabled'])) {
                 bb_die($lang['NEW_USER_REG_DISABLED']);
-            } // Ограничение по времени
+            } // Time limit
             elseif ($bb_cfg['new_user_reg_restricted']) {
                 if (in_array(date('G'), $bb_cfg['new_user_reg_interval'], true)) {
                     bb_die($lang['REGISTERED_IN_TIME']);
@@ -91,7 +91,7 @@ switch ($mode) {
         break;
 
     /**
-     *  Редактирование профиля
+     *  Profile editing
      */
     case 'editprofile':
         if (IS_GUEST) {
@@ -103,7 +103,7 @@ switch ($mode) {
             'user_active' => IS_ADMIN,
             'username' => (IS_ADMIN || $bb_cfg['allow_namechange']) && !IN_DEMO_MODE,
             'user_password' => !IN_DEMO_MODE,
-            'user_email' => !IN_DEMO_MODE, // должен быть после user_password
+            'user_email' => !IN_DEMO_MODE, // should be after user_password
             'user_lang' => $bb_cfg['allow_change']['language'],
             'user_gender' => $bb_cfg['gender'],
             'user_birthday' => $bb_cfg['birthday_enabled'],
@@ -121,7 +121,7 @@ switch ($mode) {
             'tpl_name' => true
         ];
 
-        // Выбор профиля: для юзера свой, для админа любой
+        // Select a profile: your own for the user, any for the admin
         if (IS_ADMIN && !empty($_REQUEST['u'])) {
             $pr_user_id = (int)$_REQUEST['u'];
             $adm_edit = ($pr_user_id != $userdata['user_id']);
@@ -160,7 +160,7 @@ if ($submit) {
     }
 }
 
-// Валидация данных
+// Data validation
 $cur_pass_valid = $adm_edit;
 $can_edit_tpl = [];
 
@@ -228,7 +228,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 $new_pass = (string)@$_POST['new_pass'];
                 $cfm_pass = (string)@$_POST['cfm_pass'];
 
-                // пароль для гостя и при смене пароля юзером
+                // password for the guest (while registering) and when the user changes the password
                 if (!empty($new_pass)) {
                     if ($err = \TorrentPier\Validate::password($new_pass, $cfm_pass)) {
                         $errors[] = $err;
@@ -653,7 +653,7 @@ if ($submit && !$errors) {
     else {
         set_pr_die_append_msg($pr_data['user_id']);
 
-        // если что-то было изменено
+        // if anything has been changed
         if ($db_data) {
             if (!$pr_data['user_active']) {
                 $user_actkey = make_rand_str(ACTKEY_LENGTH);

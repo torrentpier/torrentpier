@@ -22,7 +22,7 @@ switch ($mode) {
         $topics = (string)$this->request['topic_ids'];
         $status = (int)$this->request['status'];
 
-        // Валидность статуса
+        // Check status validity
         if (!isset($lang['TOR_STATUS_NAME'][$status])) {
             $this->ajax_die($lang['TOR_STATUS_FAILED']);
         }
@@ -57,7 +57,7 @@ switch ($mode) {
 
         DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
 
-        // Обновление кеша новостей на главной
+        // Update the news cache on the index page
         $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
         if (isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news']) {
             $datastore->enqueue([
@@ -151,5 +151,5 @@ switch ($mode) {
         break;
 
     default:
-        $this->ajax_die('Invalid mode');
+        $this->ajax_die('Invalid mode: ' . $mode);
 }

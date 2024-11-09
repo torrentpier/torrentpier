@@ -87,7 +87,7 @@ if (isset($_POST['login'])) {
     if (!$login_errors) {
         if ($user->login($_POST, $mod_admin_login)) {
             $redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
-            // Обнуление при введении правильно комбинации логин/пароль
+            // Reset when entering the correct login/password combination
             CACHE('bb_login_err')->rm('l_err_' . USER_IP);
 
             if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) {

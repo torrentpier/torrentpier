@@ -179,24 +179,24 @@ $bf['forum_perm'] = [
 ];
 
 $bf['user_opt'] = [
-#   'dis_opt_name'       =>     ЗАПРЕТЫ используемые администраторами для пользователей
-#   'user_opt_name'      =>     НАСТРОЙКИ используемые пользователями
-    'user_viewemail' => 0,  // Показывать e-mail
-    'dis_sig' => 1,  // Запрет на подпись
-    'dis_avatar' => 2,  // Запрет на аватар
-    'dis_pm' => 3,  // Запрет на отправку ЛС
-    'user_viewonline' => 4,  // Скрывать пребывание пользователя
-    'user_notify' => 5,  // Сообщать об ответах в отслеживаемых темах
-    'user_notify_pm' => 6,  // Сообщать о новых ЛС
-    'dis_passkey' => 7,  // Запрет на добавление passkey, он же запрет на скачивание торрентов
-    'user_porn_forums' => 8,  // Скрывать контент 18+
-    'user_callseed' => 9,  // Позвать скачавших
-    'user_empty' => 10, // Запрет на показ рекламы (не используется)
-    'dis_topic' => 11, // Запрет на создание новых тем
-    'dis_post' => 12, // Запрет на отправку сообщений
-    'dis_post_edit' => 13, // Запрет на редактирование сообщений
-    'user_dls' => 14, // Скрывать список текущих закачек в профиле
-    'user_retracker' => 15, // Добавлять ретрекер к скачиваемым торрентам
+#   'dis_opt_name'       =>     PROHIBITIONS used by administrators for users
+#   'user_opt_name'      =>     SETTINGS used by users
+    'user_viewemail' => 0, // [SETTINGS] Show my email for other users
+    'dis_sig' => 1, // [PROHIBITIONS] Block set signature
+    'dis_avatar' => 2, // [PROHIBITIONS] Block set avatar
+    'dis_pm' => 3, // [PROHIBITIONS] Block sending PMs
+    'user_viewonline' => 4, // [SETTINGS] Hide my online status (time of last activity)
+    'user_notify' => 5, // [SETTINGS] Report of replies in my "Watching topics" (Via email)
+    'user_notify_pm' => 6, // [SETTINGS] Report of new PMs in forum (Via email)
+    'dis_passkey' => 7, // [PROHIBITIONS] Block changing and adding passkey into torrents, also block downloading torrents
+    'user_porn_forums' => 8, // [SETTINGS] Hide 18+ content (Porn forums)
+    'user_callseed' => 9, // [SETTINGS] Allow to send "Callseed" PMs
+    'user_empty' => 10, // [SETTINGS] Block showing advertisements to me (Not used)
+    'dis_topic' => 11, // [PROHIBITIONS] Block to create new topics
+    'dis_post' => 12, // [PROHIBITIONS] Block to send replies in topics
+    'dis_post_edit' => 13, // [PROHIBITIONS] Block editing own posts / topics
+    'user_dls' => 14, // [SETTINGS] Hide list of "Current downloads" in my profile
+    'user_retracker' => 15, // [SETTINGS] Add my retracker into downloaded torrent files
 ];
 
 function bit2dec($bit_num)
@@ -546,18 +546,18 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 {
     $arg = preg_quote($arg, '/');
 
-    // разделяем URL и ANCHOR
+    // separate URL and ANCHOR
     $anchor = '';
     if (preg_match('/(.*)(#.*)/s', $url, $m)) {
         $url = $m[1];
         $anchor = $m[2];
     }
-    // заменяем параметр, если он существует
+    // replace the parameter if it exists
     if (preg_match("/((\?|&|&amp;)$arg=)[^&]*/s", $url, $m)) {
         $cur = $m[0];
         $new = null === $value ? '' : $m[1] . urlencode($value);
         $url = str_replace($cur, $new, $url);
-    } // добавляем параметр
+    } // add a parameter
     elseif (null !== $value) {
         $div = str_contains($url, '?') ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
@@ -1667,11 +1667,11 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
-        $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
-        $text = str_replace(['-', '*'], [' -', '* '], $text);                                // только в начале / конце слова
+        $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // valid characters (except '"' which are separate)
+        $text = str_replace(['-', '*'], [' -', '* '], $text);                                // only at the beginning/end of a word
         $text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
         $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
-        $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // одиночные " - ", " * "
+        $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // single " - ", " * "
         $text = trim($text, ' -|');
         $text = str_compact($text);
         $text_match_sql = ($wrap_with_quotes && $text != '') ? '"' . $text . '"' : $text;
@@ -1775,7 +1775,14 @@ function get_title_match_topics($title_match_sql, array $forum_ids = [])
     return $where_ids;
 }
 
-// для более корректного поиска по словам содержащим одиночную кавычку
+/**
+ * Encodes text match
+ *
+ * Desc: for a more correct search for words containing a single quote
+ *
+ * @param $txt
+ * @return array|string|string[]
+ */
 function encode_text_match($txt)
 {
     return str_replace("'", '&#039;', $txt);

@@ -212,7 +212,7 @@ class Atom
             $date = bb_date($last_time, 'Y-m-d', 0);
             $time = bb_date($last_time, 'H:i:s', 0);
             $updated = '';
-            $checktime = TIMENOW - 604800; // неделя (week)
+            $checktime = TIMENOW - 604800; // 1 week
             if ($topic['topic_first_post_edit_time'] && $topic['topic_first_post_edit_time'] > $checktime) {
                 $updated = '[' . $lang['ATOM_UPDATED'] . '] ';
             }

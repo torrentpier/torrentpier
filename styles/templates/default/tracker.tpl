@@ -468,7 +468,7 @@ ajax.callback.view_post = function(data) {
 </div><!--/bottom_info-->
 
 <script type="text/javascript">
-// Скрыть содержимое {...}
+// Hide content
 if (user.opt_js.h_tsp) {
 	$('a.tLink').each(function(){
 		$(this).html( $(this).html().replace(/\{.+?\}/g, '{...}') );
@@ -485,7 +485,7 @@ $(function(){
 	<!-- IF POSTER_MATCH_URL -->
 	$('a.f, a.pg').each(function(){ this.href += '&{POSTER_MATCH_URL}'; });
 	<!-- ENDIF -->
-	// лимит на количество выбранных разделов
+	// limit on the number of selected sections
 	fs_last_val = $('#fs-main').val();
 
 	$('#fs-main').bind('change', function(){

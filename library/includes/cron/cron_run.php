@@ -116,7 +116,8 @@ foreach ($cron_jobs as $job) {
 		");
 
         if (utime() - TIMESTART > 600) {
-            return;  // чтобы daily скрипты не блокировали надолго interval'ные
+            // so that daily scripts do not block interval scripts for a long time
+            return;
         }
     } else {
         $cron_err_msg = "Can not run \"{$job['cron_title']}\" : file \"$job_script\" not found" . LOG_LF;
