@@ -1668,7 +1668,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
         $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // valid characters (except '"' which are separate)
-        $text = str_replace(['-', '*'], [' -', '* '], $text);                                // только в начале / конце слова
+        $text = str_replace(['-', '*'], [' -', '* '], $text);                                // only at the beginning/end of a word
         $text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
         $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
         $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // single " - ", " * "
