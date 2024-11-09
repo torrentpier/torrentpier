@@ -91,19 +91,19 @@ define('BB_BT_USERS', 'bb_bt_users');
 define('BT_AUTH_KEY_LENGTH', 20); // Passkey length
 
 // Torrents (reserved: -1)
-define('TOR_NOT_APPROVED', 0); // не проверено
-define('TOR_CLOSED', 1); // закрыто
-define('TOR_APPROVED', 2); // проверено
-define('TOR_NEED_EDIT', 3); // недооформлено
-define('TOR_NO_DESC', 4); // неоформлено
-define('TOR_DUP', 5); // повтор
-define('TOR_CLOSED_CPHOLD', 6); // закрыто правообладателем
-define('TOR_CONSUMED', 7); // поглощено
-define('TOR_DOUBTFUL', 8); // сомнительно
-define('TOR_CHECKING', 9); // проверяется
-define('TOR_TMP', 10); // временная
-define('TOR_PREMOD', 11); // премодерация
-define('TOR_REPLENISH', 12); // пополняемая
+define('TOR_NOT_APPROVED', 0);
+define('TOR_CLOSED', 1);
+define('TOR_APPROVED', 2);
+define('TOR_NEED_EDIT', 3);
+define('TOR_NO_DESC', 4);
+define('TOR_DUP', 5);
+define('TOR_CLOSED_CPHOLD', 6);
+define('TOR_CONSUMED', 7);
+define('TOR_DOUBTFUL', 8);
+define('TOR_CHECKING', 9);
+define('TOR_TMP', 10);
+define('TOR_PREMOD', 11);
+define('TOR_REPLENISH', 12);
 
 // Torrent types (Gold / Silver)
 define('TOR_TYPE_GOLD', 1);

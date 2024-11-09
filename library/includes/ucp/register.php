@@ -103,7 +103,7 @@ switch ($mode) {
             'user_active' => IS_ADMIN,
             'username' => (IS_ADMIN || $bb_cfg['allow_namechange']) && !IN_DEMO_MODE,
             'user_password' => !IN_DEMO_MODE,
-            'user_email' => !IN_DEMO_MODE, // должен быть после user_password
+            'user_email' => !IN_DEMO_MODE, // should be after user_password
             'user_lang' => $bb_cfg['allow_change']['language'],
             'user_gender' => $bb_cfg['gender'],
             'user_birthday' => $bb_cfg['birthday_enabled'],
@@ -160,7 +160,7 @@ if ($submit) {
     }
 }
 
-// Валидация данных
+// Data validation
 $cur_pass_valid = $adm_edit;
 $can_edit_tpl = [];
 
@@ -228,7 +228,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 $new_pass = (string)@$_POST['new_pass'];
                 $cfm_pass = (string)@$_POST['cfm_pass'];
 
-                // пароль для гостя и при смене пароля юзером
+                // password for the guest (while registering) and when the user changes the password
                 if (!empty($new_pass)) {
                     if ($err = \TorrentPier\Validate::password($new_pass, $cfm_pass)) {
                         $errors[] = $err;
@@ -653,7 +653,7 @@ if ($submit && !$errors) {
     else {
         set_pr_die_append_msg($pr_data['user_id']);
 
-        // если что-то было изменено
+        // if anything has been changed
         if ($db_data) {
             if (!$pr_data['user_active']) {
                 $user_actkey = make_rand_str(ACTKEY_LENGTH);
