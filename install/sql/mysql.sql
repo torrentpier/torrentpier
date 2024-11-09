@@ -434,6 +434,10 @@ CREATE TABLE IF NOT EXISTS `bb_bt_users`
 -- ----------------------------
 -- Records of bb_bt_users
 -- ----------------------------
+INSERT INTO `bb_bt_users` (user_id, auth_key)
+VALUES ('-1', SUBSTRING(MD5(RAND()), 1, 20)),
+       ('-746', SUBSTRING(MD5(RAND()), 1, 20)),
+       ('2', SUBSTRING(MD5(RAND()), 1, 20));
 
 -- ----------------------------
 -- Table structure for `bb_bt_user_settings`

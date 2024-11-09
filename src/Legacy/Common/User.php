@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy\Common;
 
 use TorrentPier\Legacy\DateDelta;
-use TorrentPier\Legacy\Torrent;
 use TorrentPier\Sessions;
 
 use Exception;
@@ -252,13 +251,6 @@ class User
         $login = ((int)$this->data['user_id'] !== GUEST_UID);
         $user_id = (int)$this->data['user_id'];
         $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
-
-        // Generate passkey
-        if (!Torrent::getPasskey($this->data['user_id'])) {
-            if (!Torrent::generate_passkey($this->data['user_id'], true)) {
-                bb_simple_die('Could not generate passkey');
-            }
-        }
 
         // Create new session
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {

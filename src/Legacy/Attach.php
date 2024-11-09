@@ -569,7 +569,7 @@ class Attach
                     }
                 } else {
                     if (empty($this->attachment_mimetype_list[$i]) && $this->attachment_extension_list[$i] === TORRENT_EXT) {
-                        $this->attachment_mimetype_list[$i] = 'application/x-bittorrent';
+                        $this->attachment_mimetype_list[$i] = TORRENT_MIMETYPE;
                     }
 
                     // insert attachment into db
