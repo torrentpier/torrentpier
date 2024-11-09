@@ -268,7 +268,8 @@ $update_post_time = !empty($_POST['update_post_time']);
 
 execute_posting_attachment_handling();
 
-// если за время пока вы писали ответ, в топике появились новые сообщения, перед тем как ваше сообщение будет отправлено, выводится предупреждение с обзором этих сообщений
+// If while you were writing a response, new messages appeared in the topic,
+// before your message is sent, a warning is displayed with an overview of these messages
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
@@ -376,7 +377,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
             if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
                 if ($bb_cfg['premod']) {
-                    // Получение списка id форумов начиная с parent
+                    // Getting a list of forum ids starting with "parent"
                     $forum_parent = $forum_id;
                     if ($post_info['forum_parent']) {
                         $forum_parent = $post_info['forum_parent'];
@@ -390,7 +391,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
                     }
                     $sub_forums[] = $forum_id;
                     $sub_forums = implode(',', $sub_forums);
-                    // Подсчет проверенных релизов в форумах раздела
+                    // Counting verified releases in section forums
                     $count_checked_releases = DB()->fetch_row("
 						SELECT COUNT(*) AS checked_releases
 						FROM " . BB_BT_TORRENTS . "
