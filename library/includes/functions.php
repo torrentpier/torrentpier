@@ -546,18 +546,18 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 {
     $arg = preg_quote($arg, '/');
 
-    // разделяем URL и ANCHOR
+    // separate URL and ANCHOR
     $anchor = '';
     if (preg_match('/(.*)(#.*)/s', $url, $m)) {
         $url = $m[1];
         $anchor = $m[2];
     }
-    // заменяем параметр, если он существует
+    // replace the parameter if it exists
     if (preg_match("/((\?|&|&amp;)$arg=)[^&]*/s", $url, $m)) {
         $cur = $m[0];
         $new = null === $value ? '' : $m[1] . urlencode($value);
         $url = str_replace($cur, $new, $url);
-    } // добавляем параметр
+    } // add a parameter
     elseif (null !== $value) {
         $div = str_contains($url, '?') ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
@@ -1667,11 +1667,11 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
-        $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
+        $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // valid characters (except '"' which are separate)
         $text = str_replace(['-', '*'], [' -', '* '], $text);                                // только в начале / конце слова
         $text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
         $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
-        $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // одиночные " - ", " * "
+        $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // single " - ", " * "
         $text = trim($text, ' -|');
         $text = str_compact($text);
         $text_match_sql = ($wrap_with_quotes && $text != '') ? '"' . $text . '"' : $text;
