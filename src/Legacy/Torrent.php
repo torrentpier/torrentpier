@@ -671,7 +671,7 @@ class Torrent
             bb_die("<pre>$out</pre>");
         }
 
-        header("Content-Type: application/x-bittorrent; name=\"$dl_fname\"");
+        header("Content-Type: " . TORRENT_MIMETYPE . "; name=\"$dl_fname\"");
         header("Content-Disposition: attachment; filename=\"$dl_fname\"");
 
         exit($output);
