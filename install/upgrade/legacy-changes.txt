@@ -104,10 +104,8 @@ CREATE TABLE IF NOT EXISTS `bb_thx`
   DEFAULT CHARSET = utf8mb4;
 
 // 2.4.0
-INSERT INTO `bb_attachments_config`
-VALUES ('upload_dir', 'data/uploads');
-INSERT INTO `bb_attachments_config`
-VALUES ('img_min_thumb_filesize', '12000');
+UPDATE `bb_attachments_config` SET `config_value` = 'data/uploads' WHERE `config_name` = 'upload_dir';
+UPDATE `bb_attachments_config` SET `config_value` = '12000' WHERE `config_name` = 'img_min_thumb_filesize';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'attach_version';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'img_min_thumb_filesize';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'img_imagick';
@@ -129,8 +127,7 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
   DEFAULT CHARSET = utf8mb4;
 
 // 2.4.1
-INSERT INTO `bb_config`
-VALUES ('bt_announce_url', '');
+UPDATE `bb_config` SET `config_value` = '' WHERE `config_name` = 'bt_announce_url';
 
 // 2.4.2
 INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
@@ -138,10 +135,12 @@ INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `
                        `disable_board`, `run_counter`) VALUES ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '255', '', '', '', '1', 'demo_mode_cron', '1', '1', '0');
 
 // 2.4.3
-INSERT INTO `bb_config`
-VALUES ('bt_announce_url', 'https://localhost/bt/announce.php');
+UPDATE `bb_config` SET `config_value` = 'https://localhost/bt/announce.php' WHERE `config_name` = 'bt_announce_url';
 
 // 2.4.4
+ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
+ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_attachments` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_attachments_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_attachments_desc` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -193,9 +192,6 @@ ALTER TABLE `bb_words` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_
 ALTER TABLE `buf_last_seeder` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `bb_thx` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `buf_topic_view` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
-ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
-ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'tr_seed_bonus.php';
