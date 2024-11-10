@@ -5,6 +5,7 @@
 *.log
 *.integrity
 install.php_*
+composer-setup.php
 .env
 .php_cs.cache
 data/avatars

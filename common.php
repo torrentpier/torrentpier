@@ -324,6 +324,12 @@ function hide_bb_path(string $path): string
     return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
 
+/**
+ * Returns memory usage statistic
+ *
+ * @param string $param
+ * @return int|void
+ */
 function sys(string $param)
 {
     switch ($param) {
@@ -337,8 +343,26 @@ function sys(string $param)
 }
 
 /**
+ * Returns version code
+ *
+ * @param string $version
+ * @return int
+ */
+function version_code(string $version): int
+{
+    return (int)trim(str_replace(['.', 'v'], '', $version));
+}
+
+/**
  * Some shared defines
  */
+// Initialize demo mode
+define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
+
+// Version code
+define('VERSION_CODE', version_code($bb_cfg['tp_version']));
+
+// Ratio status
 define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 
 // Initialization

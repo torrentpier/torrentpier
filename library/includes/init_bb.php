@@ -24,12 +24,6 @@ $user_ip = \TorrentPier\Helpers\IPHelper::ip2long($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
-// Initialize demo mode
-define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
-
-// Version code
-define('VERSION_CODE', (int)trim(str_replace(['.', 'v'], '', $bb_cfg['tp_version'])));
-
 /**
  * @param $contents
  * @return string
@@ -399,14 +393,6 @@ $html = new TorrentPier\Legacy\Common\Html();
 $user = new TorrentPier\Legacy\Common\User();
 
 $userdata =& $user->data;
-
-/**
- * Check for updates
- */
-$updaterFile = readUpdaterFile();
-if ($updaterFile && ($updaterFile['previous_version'] < VERSION_CODE)) {
-    define('IN_UPDATER', true);
-}
 
 /**
  * Cron

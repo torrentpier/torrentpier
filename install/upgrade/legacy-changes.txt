@@ -104,10 +104,8 @@ CREATE TABLE IF NOT EXISTS `bb_thx`
   DEFAULT CHARSET = utf8mb4;
 
 // 2.4.0
-INSERT INTO `bb_attachments_config`
-VALUES ('upload_dir', 'data/uploads');
-INSERT INTO `bb_attachments_config`
-VALUES ('img_min_thumb_filesize', '12000');
+UPDATE `bb_attachments_config` SET `config_value` = 'data/uploads' WHERE `config_name` = 'upload_dir';
+UPDATE `bb_attachments_config` SET `config_value` = '12000' WHERE `config_name` = 'img_min_thumb_filesize';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'attach_version';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'img_min_thumb_filesize';
 DELETE FROM `bb_attachments_config` WHERE config_name = 'img_imagick';
@@ -129,8 +127,7 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
   DEFAULT CHARSET = utf8mb4;
 
 // 2.4.1
-INSERT INTO `bb_config`
-VALUES ('bt_announce_url', '');
+UPDATE `bb_config` SET `config_value` = '' WHERE `config_name` = 'bt_announce_url';
 
 // 2.4.2
 INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
@@ -138,67 +135,10 @@ INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `
                        `disable_board`, `run_counter`) VALUES ('1', 'Demo mode', 'demo_mode.php', 'daily', '', '05:00:00', '255', '', '', '', '1', 'demo_mode_cron', '1', '1', '0');
 
 // 2.4.3
-INSERT INTO `bb_config`
-VALUES ('bt_announce_url', 'https://localhost/bt/announce.php');
+UPDATE `bb_config` SET `config_value` = 'https://localhost/bt/announce.php' WHERE `config_name` = 'bt_announce_url';
 
 // 2.4.4
-ALTER TABLE `bb_attachments` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_attachments_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_attachments_desc` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_attach_quota` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_auth_access` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_auth_access_snap` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_banlist` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_dlstatus` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_dlstatus_snap` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_last_torstat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_last_userstat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_torhelp` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_torrents` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_torstat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_tor_dl_stat` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_tracker` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_tracker_snap` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_bt_user_settings` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_categories` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_config` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_cron` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_disallow` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_extensions` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_extension_groups` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_forums` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_groups` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_log` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_poll_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_poll_votes` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_posts` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_posts_html` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_posts_search` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_posts_text` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_privmsgs` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_privmsgs_text` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_quota_limits` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_ranks` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_search_rebuild` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_search_results` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_sessions` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_smilies` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_topics` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_topics_watch` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_topic_tpl` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_user_group` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_words` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `buf_last_seeder` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_thx` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `buf_topic_view` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
-ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
 ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
-DELETE FROM `bb_cron` WHERE `cron_script` = 'tr_seed_bonus.php';
-INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
-                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
-                       `disable_board`, `run_counter`) VALUES ('1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:10:00', '0', '', '0', '0', '0');
+UPDATE `bb_cron` SET `run_interval` = '00:10:00' WHERE `cron_script` = 'tr_seed_bonus.php';
