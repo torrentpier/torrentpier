@@ -324,6 +324,12 @@ function hide_bb_path(string $path): string
     return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
 
+/**
+ * Returns memory usage statistic
+ *
+ * @param string $param
+ * @return int|void
+ */
 function sys(string $param)
 {
     switch ($param) {
