@@ -49,42 +49,8 @@ foreach ($allowedCDNs as $allowedCDN) {
     }
 }
 
-// Get all constants
-require_once BB_PATH . '/library/defines.php';
-
-// Composer
-if (!is_file(BB_PATH . '/vendor/autoload.php')) {
-    die('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
-}
-require_once BB_PATH . '/vendor/autoload.php';
-
-/**
- * Gets the value of an environment variable.
- *
- * @param string $key
- * @param mixed|null $default
- * @return mixed
- */
-function env(string $key, mixed $default = null): mixed
-{
-    return \TorrentPier\Env::get($key, $default);
-}
-
-// Load ENV
-try {
-    $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
-    $dotenv->load();
-} catch (\Dotenv\Exception\InvalidPathException $pathException) {
-    die('🔩 Manual install: Rename from <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env.example</code> to <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">.env</code>, and configure it.<br>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
-}
-
-// Load config
-require_once BB_PATH . '/library/config.php';
-
-// Local config
-if (is_file(BB_PATH . '/library/config.local.php')) {
-    require_once BB_PATH . '/library/config.local.php';
-}
+// Load bootstrap file
+require_once BB_PATH . '/bootstrap.php';
 
 /**
  * Error reporting
@@ -340,17 +306,6 @@ function sys(string $param)
         default:
             trigger_error("invalid param: $param", E_USER_ERROR);
     }
-}
-
-/**
- * Returns version code
- *
- * @param string $version
- * @return int
- */
-function version_code(string $version): int
-{
-    return (int)trim(str_replace(['.', 'v'], '', $version));
 }
 
 /**

@@ -2183,3 +2183,14 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     return $data;
 }
+
+/**
+ * Returns version code
+ *
+ * @param string $version
+ * @return int
+ */
+function version_code(string $version): int
+{
+    return (int)trim(str_replace(['.', 'v'], '', $version));
+}
