@@ -19,17 +19,29 @@ $updaterDownloader = new \TorrentPier\Updater();
 $updaterDownloader = $updaterDownloader->getLastVersion();
 
 $getVersion = $updaterDownloader['tag_name'];
-$versionCodeActual = (int)trim(str_replace(['.', 'v'], '', $getVersion));
+$versionCodeActual = version_code($getVersion);
 
 // Has update!
 if (VERSION_CODE < $versionCodeActual) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
+    // Check updater file
+    $updater_file = readUpdaterFile();
+    $updater_need_replaced = !empty($updater_file) && ($updater_file['latest_version']['short_code'] < $versionCodeActual);
+
     // Save current version & latest available
-    file_write(json_encode([
-        'previous_version' => VERSION_CODE,
-        'latest_version' => $versionCodeActual
-    ]), UPDATER_FILE, replace_content: true);
+    if (!is_file(UPDATER_FILE) || $updater_need_replaced) {
+        file_write(json_encode([
+            'previous_version' => [
+                'short_code' => VERSION_CODE,
+                'version' => $bb_cfg['tp_version']
+            ],
+            'latest_version' => [
+                'short_code' => $versionCodeActual,
+                'version' => $getVersion
+            ]
+        ]), UPDATER_FILE, replace_content: true);
+    }
 
     // Get MD5 checksum
     $buildFileChecksum = '';
