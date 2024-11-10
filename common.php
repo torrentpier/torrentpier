@@ -337,6 +337,17 @@ function sys(string $param)
 }
 
 /**
+ * Returns version code
+ *
+ * @param string $version
+ * @return int
+ */
+function version_code(string $version): int
+{
+    return (int)trim(str_replace(['.', 'v'], '', $version));
+}
+
+/**
  * Some shared defines
  */
 define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
