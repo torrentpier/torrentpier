@@ -138,8 +138,6 @@ INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `
 UPDATE `bb_config` SET `config_value` = 'https://localhost/bt/announce.php' WHERE `config_name` = 'bt_announce_url';
 
 // 2.4.4
-ALTER TABLE `bb_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
-ALTER TABLE `bb_attachments_config` CHANGE `config_name` `config_name` VARCHAR(155) NOT NULL DEFAULT '';
 ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
