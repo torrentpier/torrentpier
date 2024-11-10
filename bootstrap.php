@@ -32,6 +32,16 @@ function env(string $key, mixed $default = null): mixed
     return \TorrentPier\Env::get($key, $default);
 }
 
+/**
+ * Checking if PHP script is running in CLI mode
+ *
+ * @return bool
+ */
+function isCommandLineInterface(): bool
+{
+    return (php_sapi_name() === 'cli');
+}
+
 // Load ENV
 try {
     $dotenv = Dotenv\Dotenv::createMutable(BB_PATH);
@@ -50,7 +60,5 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
     require_once BB_PATH . '/library/config.local.php';
 }
 
-function isCommandLineInterface(): bool
-{
-    return (php_sapi_name() === 'cli');
-}
+// Version code
+define('VERSION_CODE', version_code($bb_cfg['tp_version']));
