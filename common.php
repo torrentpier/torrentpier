@@ -350,6 +350,13 @@ function version_code(string $version): int
 /**
  * Some shared defines
  */
+// Initialize demo mode
+define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
+
+// Version code
+define('VERSION_CODE', version_code($bb_cfg['tp_version']));
+
+// Ratio status
 define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);
 
 // Initialization
