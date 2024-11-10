@@ -76,7 +76,7 @@ class TorrServerAPI
         global $bb_cfg;
 
         // Check mimetype
-        if ($mimetype !== 'application/x-bittorrent') {
+        if ($mimetype !== TORRENT_MIMETYPE) {
             return false;
         }
 

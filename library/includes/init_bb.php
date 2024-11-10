@@ -268,6 +268,7 @@ define('BB_WORDS', 'bb_words');
 define('BB_THX', 'bb_thx');
 
 define('TORRENT_EXT', 'torrent');
+define('TORRENT_MIMETYPE', 'application/x-bittorrent');
 
 define('TOPIC_DL_TYPE_NORMAL', 0);
 define('TOPIC_DL_TYPE_DL', 1);

@@ -494,7 +494,6 @@ $(document).ready(function () {
     autocomplete();
   });
 
-  // перемещение окна
   var _X, _Y;
   var _bMoveble = false;
 

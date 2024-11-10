@@ -41,7 +41,7 @@ class WordsRate
      */
     public function get_words_rate($text)
     {
-        $this->words_rate = 127;     // максимальное значение по умолчанию
+        $this->words_rate = 127;     // maximum value by default
         $this->deleted_words = [];
         $this->del_text_hl = $text;
 

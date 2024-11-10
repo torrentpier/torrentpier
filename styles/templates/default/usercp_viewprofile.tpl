@@ -392,14 +392,12 @@ ajax.callback.group_membership = function(data) {
 			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
 				<th>{L_USER_RATIO}:</th>
 				<td>
-                    <!-- IF SHOW_BT_USERDATA -->
 					<!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
 					<b id="u_ratio" class="gen">{USER_RATIO}</b>
 					[<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
 					<!-- ELSE -->
 					<span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
 					<!-- ENDIF -->
-                    <!-- ENDIF -->
 
 					<!-- IF SHOW_PASSKEY -->
 					[ {L_BT_PASSKEY}: <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
@@ -407,19 +405,17 @@ ajax.callback.group_membership = function(data) {
 						<b id="passkey" class="med bold"><!-- IF AUTH_KEY -->{AUTH_KEY}<!-- ELSE -->{L_NOSELECT}<!-- ENDIF --></b>&nbsp;|&nbsp;<a href="#" onclick="ajax.exec({ action: 'passkey', mode: 'generate', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
-					<!-- IF SHOW_BT_USERDATA --><!-- IF PROFILE_USER || IS_ADMIN --><!-- IF $bb_cfg['ratio_null_enabled'] --><!-- IF not NULLED_RATIO or IS_ADMIN -->
+					<!-- IF PROFILE_USER || IS_ADMIN --><!-- IF $bb_cfg['ratio_null_enabled'] --><!-- IF not NULLED_RATIO or IS_ADMIN -->
 					[ <a class="med" href="#" onclick="ajax.index_data('null_ratio'); return false;">{L_BT_NULL_RATIO}</a> ]
-					<!-- ENDIF --><!-- ENDIF --><!-- ENDIF --><!-- ENDIF -->
+					<!-- ENDIF --><!-- ENDIF --><!-- ENDIF -->
 				</td>
 			</tr>
 
-			<!-- IF SHOW_BT_USERDATA -->
 			<tr id="ratio-expl" style="display: none;">
 				<td colspan="2" class="med tCenter">
 				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 				</td>
 			</tr>
-			<!-- ENDIF -->
 			<!-- ENDIF -->
 
 			<!-- IF LOCATION -->
@@ -462,13 +458,10 @@ ajax.callback.group_membership = function(data) {
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			<!-- IF SHOW_BT_USERDATA -->
 			<tr>
 				<th>{L_RELEASER_STAT}</th>
 				<td id="releases_profile">[ <a href="#" class="med" onclick="ajax.index_data('releaser_stats'); return false;">{L_RELEASER_STAT_SHOW}</a> ]</td>
 			</tr>
-			<!-- ENDIF -->
-            <!-- IF SHOW_BT_USERDATA -->
 			<tr>
 				<td colspan="2" class="pad_4">
 					<table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="bCenter borderless" cellspacing="1">
@@ -513,7 +506,6 @@ ajax.callback.group_membership = function(data) {
 					</table>
 				</td>
 			</tr>
-            <!-- ENDIF -->
 		</table>
 		<!--/user_details-->
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->

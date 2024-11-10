@@ -213,7 +213,7 @@ ajax.callback.post_mod_comment = function(data) {
 <!-- ENDIF -->
 <!-- IF CAN_MANAGE_POLL -->
 <script type="text/javascript">
-// заполняет #poll-form и отправляет запрос
+// fills out the #poll-form and sends the request
 function poll_manage (mode, confirm_msg)
 {
 	if (confirm_msg != null && !window.confirm( confirm_msg )) {
