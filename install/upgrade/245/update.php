@@ -13,6 +13,7 @@ if (!defined('IN_UPDATER')) {
 
 // Changes schema
 return [
+    'version' => 'v2.4.5',
     'removed_files' => [
         'install/upgrade/changes.txt',
     ]

@@ -78,8 +78,13 @@ foreach ($versionsRange as $version) {
 
     // Check updater script exists
     if (is_file($targetUpdate . '/' . UPDATE_SCRIPT_NAME)) {
-        cli_out("\n- Updater script for ... found!", 'success');
         $updaterScript = require_once $targetUpdate . '/' . UPDATE_SCRIPT_NAME;
+        if (!is_array($updaterScript) || empty($updaterScript)) {
+            cli_out("\n- Can't get information from updater script...", 'error');
+            exit;
+        }
+
+        cli_out("\n- Updater script for {$updaterScript['version']} found!", 'success');
 
         // Deleting old files
         if (!empty($updaterScript['removed_files'])) {
