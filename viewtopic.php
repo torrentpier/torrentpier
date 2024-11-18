@@ -177,9 +177,11 @@ if (!$is_auth['auth_read']) {
 }
 
 $forum_name = $t_data['forum_name'];
+$parent_id = (is_numeric($t_data['forum_parent']) && $t_data['forum_parent'] > 0) ? $t_data['forum_parent'] : false;
 $topic_title = $t_data['topic_title'];
 $topic_id = $t_data['topic_id'];
 $topic_time = $t_data['topic_time'];
+$locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
 $moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
 
@@ -218,8 +220,8 @@ if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums'))
 $template->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
     'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
-    'PARENT_FORUM_HREF' => ($parent_id = $t_data['forum_parent']) ? FORUM_URL . $parent_id : '',
-    'PARENT_FORUM_NAME' => ($parent_id = $t_data['forum_parent']) ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
+    'PARENT_FORUM_HREF' => $parent_id ? FORUM_URL . $parent_id : '',
+    'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
 unset($forums);
 $datastore->rm('cat_forums');
@@ -371,8 +373,8 @@ $view_forum_url = FORUM_URL . $forum_id;
 $view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
 $view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
 
-$reply_img = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $images['reply_locked'] : $images['reply_new'];
-$reply_alt = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
+$reply_img = $locked ? $images['reply_locked'] : $images['reply_new'];
+$reply_alt = $locked ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
 
 // Set 'body' template for attach_mod
 $template->set_filenames(['body' => 'viewtopic.tpl']);
@@ -600,7 +602,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     if (!$poster_bot) {
-        $quote_btn = ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED));
+        $quote_btn = ($is_auth['auth_reply'] && !$locked);
         $edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
         $ip_btn = ($is_auth['auth_mod'] || IS_MOD);
     }
@@ -756,7 +758,7 @@ if (defined('SPLIT_FORM_START')) {
 
 // Quick Reply
 if ($bb_cfg['show_quick_reply']) {
-    if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED)) {
+    if ($is_auth['auth_reply'] && !$locked) {
         $template->assign_vars([
             'QUICK_REPLY' => true,
             'QR_POST_ACTION' => POSTING_URL,
