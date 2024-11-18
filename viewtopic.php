@@ -177,6 +177,7 @@ if (!$is_auth['auth_read']) {
 }
 
 $forum_name = $t_data['forum_name'];
+$parent_id = (is_numeric($t_data['forum_parent']) && $t_data['forum_parent'] > 0) ? $t_data['forum_parent'] : false;
 $topic_title = $t_data['topic_title'];
 $topic_id = $t_data['topic_id'];
 $topic_time = $t_data['topic_time'];
@@ -219,8 +220,8 @@ if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums'))
 $template->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
     'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
-    'PARENT_FORUM_HREF' => ($parent_id = $t_data['forum_parent']) ? FORUM_URL . $parent_id : '',
-    'PARENT_FORUM_NAME' => ($parent_id = $t_data['forum_parent']) ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
+    'PARENT_FORUM_HREF' => $parent_id ? FORUM_URL . $parent_id : '',
+    'PARENT_FORUM_NAME' => $parent_id ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
 unset($forums);
 $datastore->rm('cat_forums');
