@@ -111,6 +111,7 @@ if (!$t_data = DB()->fetch_row($sql)) {
 $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
+$parent_id = $t_data['forum_parent'] ?? null;
 $topic_attachment = isset($t_data['topic_attachment']) ? (int)$t_data['topic_attachment'] : null;
 
 // Allow robots indexing
@@ -178,7 +179,6 @@ if (!$is_auth['auth_read']) {
 
 $forum_name = $t_data['forum_name'];
 $topic_title = $t_data['topic_title'];
-$topic_id = $t_data['topic_id'];
 $topic_time = $t_data['topic_time'];
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 
@@ -219,8 +219,8 @@ if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums'))
 $template->assign_vars([
     'CAT_TITLE' => $forums['cat_title_html'][$t_data['cat_id']],
     'U_VIEWCAT' => CAT_URL . $t_data['cat_id'],
-    'PARENT_FORUM_HREF' => ($parent_id = $t_data['forum_parent']) ? FORUM_URL . $parent_id : '',
-    'PARENT_FORUM_NAME' => ($parent_id = $t_data['forum_parent']) ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
+    'PARENT_FORUM_HREF' => is_numeric($parent_id) ? FORUM_URL . $parent_id : '',
+    'PARENT_FORUM_NAME' => is_numeric($parent_id) ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
 ]);
 unset($forums);
 $datastore->rm('cat_forums');
