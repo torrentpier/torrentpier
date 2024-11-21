@@ -345,7 +345,7 @@ $sql = "
 	WHERE p.topic_id = $topic_id
 		$limit_posts_time
 	GROUP BY p.post_id
-	ORDER BY p.post_time $post_order
+	ORDER BY p.post_pinned DESC, p.post_time $post_order
 	LIMIT $start, $posts_per_page
 ";
 
