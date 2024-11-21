@@ -1663,6 +1663,7 @@ $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';
 $lang['VISIT_WEBSITE_TXTB'] = '[www]';
 $lang['EDIT_DELETE_POST_TXTB'] = '[Edit]';
+$lang['PIN_POST_TXTB'] = '[Pin]';
 $lang['CODE_TOPIC_TXTB'] = '[Code]';
 $lang['SEARCH_USER_POSTS_TXTB'] = '[Search]';
 $lang['VIEW_IP_TXTB'] = '[ip]';
@@ -1878,6 +1879,7 @@ $lang['POST_PIN'] = 'Pin first post';
 $lang['POST_UNPIN'] = 'Unpin first post';
 $lang['POST_PINNED'] = 'First post pinned';
 $lang['POST_UNPINNED'] = 'First post unpinned';
+$lang['PIN_MESSAGE'] = 'Pin post';
 
 // Management of my messages
 $lang['GOTO_MY_MESSAGE'] = 'Close and return to the list "My Messages"';

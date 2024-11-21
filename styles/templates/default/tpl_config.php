@@ -20,6 +20,7 @@ $_lang = $_main . 'lang/' . basename($bb_cfg['default_lang']) . '/';
 $images['icon_code'] = $_lang . 'icon_code.gif';
 $images['icon_quote'] = $_lang . 'icon_quote.gif';
 $images['icon_edit'] = $_lang . 'icon_edit.gif';
+$images['icon_pin_post'] = $_lang . 'icon_edit.gif'; // TODO: icon_pin_post.gif
 $images['icon_search'] = $_lang . 'icon_search.gif';
 $images['icon_profile'] = $_lang . 'icon_profile.gif';
 $images['icon_pm'] = $_lang . 'icon_pm.gif';
@@ -134,6 +135,7 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
         $template->assign_vars([
             'CODE_IMG' => $bb_cfg['text_buttons'] ? $lang['CODE_TOPIC_TXTB'] : '<img src="' . $images['icon_code'] . '" alt="' . $lang['CODE_TOPIC_TXTB'] . '" title="' . $lang['CODE'] . '" />',
             'QUOTE_IMG' => $bb_cfg['text_buttons'] ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="' . $images['icon_quote'] . '" alt="' . $lang['REPLY_WITH_QUOTE_TXTB'] . '" title="' . $lang['REPLY_WITH_QUOTE'] . '" />',
+            'PIN_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['PIN_POST_TXTB'] : '<img src="' . $images['icon_pin_post'] . '" alt="' . $lang['PIN_POST_TXTB'] . '" title="' . $lang['PIN_MESSAGE'] . '" />',
             'EDIT_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="' . $images['icon_edit'] . '" alt="' . $lang['EDIT_DELETE_POST_TXTB'] . '" title="' . $lang['EDIT_POST'] . '" />',
             'DELETE_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['DELETE_POST_TXTB'] : '<img src="' . $images['icon_delpost'] . '" alt="' . $lang['DELETE_POST_TXTB'] . '" title="' . $lang['DELETE_POST'] . '" />',
             'IP_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['VIEW_IP_TXTB'] : '<img src="' . $images['icon_ip'] . '" alt="' . $lang['VIEW_IP_TXTB'] . '" title="' . $lang['VIEW_IP'] . '" />',
@@ -142,6 +144,7 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
             'POLL_IMG' => $bb_cfg['text_buttons'] ? $lang['TOPIC_POLL'] : '<img src="' . $images['icon_poll'] . '" alt="' . $lang['TOPIC_POLL'] . '" title="' . $lang['ADD_POLL'] . '" />',
 
             'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;' . POST_POST_URL . '=',
+            'PIN_POST_URL' => BB_ROOT . POSTING_URL . '?mode=pinpost&amp;' . POST_POST_URL . '=',
             'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;' . POST_POST_URL . '=',
             'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;' . POST_POST_URL . '=',
             'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;' . POST_POST_URL . '=',

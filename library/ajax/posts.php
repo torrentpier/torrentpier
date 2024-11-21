@@ -65,6 +65,16 @@ switch ($this->request['type']) {
         }
         break;
 
+    case 'unpin':
+    case 'pin':
+        if ($post['post_id'] != $post['topic_first_post_id'] && (($userdata['user_id'] == $post['poster_id']) || $is_auth['auth_mod'])) {
+            $action = $this->request['type'] == 'unpin' ? 0 : 1;
+            DB()->query("UPDATE " . BB_POSTS . " SET post_pinned = $action WHERE post_id = $post_id LIMIT 1");
+        } else {
+            // TODO
+        }
+        break;
+
     case 'reply':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
             $this->ajax_die($lang['RULES_REPLY_CANNOT']);
