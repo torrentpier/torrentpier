@@ -1879,6 +1879,7 @@ $lang['POST_PIN'] = 'Pin first post';
 $lang['POST_UNPIN'] = 'Unpin first post';
 $lang['POST_PINNED'] = 'First post pinned';
 $lang['POST_UNPINNED'] = 'First post unpinned';
+$lang['PIN_MESSAGE'] = 'Pin post';
 
 // Management of my messages
 $lang['GOTO_MY_MESSAGE'] = 'Close and return to the list "My Messages"';
