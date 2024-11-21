@@ -65,6 +65,14 @@ switch ($this->request['type']) {
         }
         break;
 
+    case 'pin':
+        if ($post['post_id'] != $post['topic_first_post_id'] && (($userdata['user_id'] == $post['poster_id']) || $is_auth['auth_mod'])) {
+
+        } else {
+            // TODO
+        }
+        break;
+
     case 'reply':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
             $this->ajax_die($lang['RULES_REPLY_CANNOT']);
