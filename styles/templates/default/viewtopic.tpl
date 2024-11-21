@@ -421,7 +421,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.POSTED_AFTER -->
 					<span class="posted_since">({L_POSTED_AFTER} {postrow.POSTED_AFTER})</span>
 				<!-- ENDIF -->
-				<!-- IF postrow.IS_PINNED -->&middot;&nbsp;<span>[ Post pinned ]</span><!-- ENDIF -->
+				<!-- IF postrow.IS_PINNED -->&middot;&nbsp;<span class="warnColor1">[ Post pinned ]</span><!-- ENDIF -->
 			</p>
 
 			<!-- IF postrow.MOD_CHECKBOX --><input type="checkbox" class="select_post" onclick="set_hid_chbox('{postrow.POST_ID}');"><!-- ENDIF -->
