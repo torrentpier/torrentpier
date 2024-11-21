@@ -706,7 +706,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
         'QUOTE' => $quote_btn,
         'EDIT' => $edit_btn,
-        'PIN_POST' => $pin_btn,
+        'PIN' => $pin_btn,
         'DELETE' => $delpost_btn,
         'IP' => $ip_btn,
 
