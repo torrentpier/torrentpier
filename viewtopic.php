@@ -594,7 +594,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     // Buttons
-    $pm_btn = $profile_btn = $delpost_btn = $edit_btn = $ip_btn = $quote_btn = '';
+    $pm_btn = $profile_btn = $delpost_btn = $edit_btn = $ip_btn = $quote_btn = $pin_btn = '';
 
     if (!$poster_guest) {
         $profile_btn = true;
@@ -706,6 +706,7 @@ for ($i = 0; $i < $total_posts; $i++) {
 
         'QUOTE' => $quote_btn,
         'EDIT' => $edit_btn,
+        'PIN_POST' => $pin_btn,
         'DELETE' => $delpost_btn,
         'IP' => $ip_btn,
 
