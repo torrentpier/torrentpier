@@ -142,6 +142,7 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
             'POLL_IMG' => $bb_cfg['text_buttons'] ? $lang['TOPIC_POLL'] : '<img src="' . $images['icon_poll'] . '" alt="' . $lang['TOPIC_POLL'] . '" title="' . $lang['ADD_POLL'] . '" />',
 
             'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;' . POST_POST_URL . '=',
+            'PIN_POST_URL' => BB_ROOT . POSTING_URL . '?mode=pinpost&amp;' . POST_POST_URL . '=',
             'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;' . POST_POST_URL . '=',
             'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;' . POST_POST_URL . '=',
             'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;' . POST_POST_URL . '=',
