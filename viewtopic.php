@@ -691,6 +691,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_AUTHOR' => ($poster_id == $t_data['topic_poster']),
         'POSTER_GENDER' => !$poster_guest ? genderImage((int)$postrow[$i]['user_gender']) : '',
         'POSTED_AFTER' => $prev_post_time ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
+        'IS_PINNED' => $postrow[$i]['post_pinned'],
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
         'IS_FIRST_POST' => (!$start && $is_first_post),
         'MOD_CHECKBOX' => ($moderation && ($start || defined('SPLIT_FORM_START'))),
