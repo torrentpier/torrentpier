@@ -66,7 +66,7 @@ For installation, select one of installation variants below.
 
 ### Quick 🚀
 
-Check out our [AutoInstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
+Check out our [autoinstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
 
 > [!IMPORTANT]
 > Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) for installation script ❤️
