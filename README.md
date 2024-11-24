@@ -66,9 +66,10 @@ For installation, select one of installation variants below.
 
 ### Quick 🚀
 
-Check out our [AutoInstall](https://github.com/torrentpier/autoinstall) repository for detailed instructions
+Check out our [AutoInstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
 
-Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) ❤️
+> [!IMPORTANT]
+> Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) for installation script ❤️
 
 ### Quick (For web-panels) ☕️
 
