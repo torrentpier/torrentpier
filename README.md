@@ -64,7 +64,7 @@ and go from there. The documentation will be translated into english in the near
 
 For installation, select one of installation variants below.
 
-### Quick 🚀
+### Quick (Clean install) 🚀
 
 Check out our [autoinstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
 
