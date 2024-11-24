@@ -62,9 +62,15 @@ and go from there. The documentation will be translated into english in the near
 
 ## 💾 Installation
 
-For installation, you need to follow a few simple steps.
+For installation, select one of installation variants below.
 
-### Quick ☕️
+### Quick 🚀
+
+Check out our [AutoInstall](https://github.com/torrentpier/autoinstall) repository for detailed instructions
+
+Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) ❤️
+
+### Quick (For web-panels) ☕️
 
 1. Select the folder where you want to install TorrentPier (`cd /path/to/public_html`)
 2. Download latest version of TorrentPier (`sudo git clone https://github.com/torrentpier/torrentpier.git .`)
