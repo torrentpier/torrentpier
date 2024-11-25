@@ -95,7 +95,7 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, and chmod **0644** for files in them.
 
-### Additional steps (Only if Manual or Quick (For web-panels) variant) 👣
+### Additional steps 👣
 
 1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 2. Edit this files:
