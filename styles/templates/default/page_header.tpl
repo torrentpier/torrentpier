@@ -30,7 +30,6 @@
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
 
 <meta name="generator" content="TorrentPier">
-<meta name="version" content="{$bb_cfg['tp_version']}">
 
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="{SITE_URL}styles/js/libs/jquery-migrate.min.js"></script>
