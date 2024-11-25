@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$reserved_name = 'torrentpier.com';
+$reserved_name = 'yourdomain.com';
 $reserved_port = 80;
 
 $bb_cfg = [];
