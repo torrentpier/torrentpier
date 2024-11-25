@@ -97,10 +97,10 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 
 ### Additional steps 👣
 
-1. [*] Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
+1. *Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
 2. Edit this files:
    * `favicon.png` (change on your own)
-   * [*] `robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
+   * *`robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
 3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
 ## 🔐 Security vulnerabilities
