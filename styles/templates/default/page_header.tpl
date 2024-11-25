@@ -28,8 +28,6 @@
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
-<link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
-<link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
 <meta name="generator" content="TorrentPier">
 <meta name="version" content="{$bb_cfg['tp_version']}">

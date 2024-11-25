@@ -28,8 +28,6 @@ $ignoreFiles = [
     '.env.example',
     '.htaccess',
     'robots.txt',
-    'opensearch_desc.xml',
-    'opensearch_desc_bt.xml',
     'favicon.png',
     'composer.json',
     'composer.lock',
