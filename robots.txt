@@ -10,5 +10,5 @@ Disallow: /posting.php
 Disallow: /privmsg.php
 Disallow: /profile.php
 
-Host: torrentpier.com
-Sitemap: http://torrentpier.com/sitemap.xml
+Host: example.com
+Sitemap: http://example.com/sitemap.xml
