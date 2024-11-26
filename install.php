@@ -354,9 +354,6 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
         out("- Cannot create database: $DB_DATABASE", 'error');
         exit;
     }
-    $conn->query("GRANT ALL PRIVILEGES ON $DB_DATABASE.* TO '$DB_USERNAME'@'$DB_HOST'");
-    $conn->query("FLUSH PRIVILEGES");
-
     $conn->select_db($DB_DATABASE);
 
     // Checking SQL dump
