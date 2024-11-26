@@ -301,7 +301,7 @@ if (is_file(BB_ROOT . '.env')) {
             echo "Enter a new value for $key (or leave empty to not change): ";
             $newValue = readline();
 
-            if (!empty($newValue)) {
+            if (!empty($newValue) || $key === 'DB_PASSWORD') {
                 $line = "$key=$newValue";
                 // Configuring database connection
                 if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
