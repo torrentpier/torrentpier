@@ -290,7 +290,7 @@ if (is_file(BB_ROOT . '.env')) {
         if (trim($line) !== '' && !str_starts_with($line, '#')) {
             $parts = explode('=', $line, 2);
             $key = trim($parts[0]);
-            $value = isset($parts[1]) ? trim($parts[1]) : '';
+            $value = (isset($parts[1]) && $key !== 'DB_PASSWORD') ? trim($parts[1]) : '';
 
             // Database default values
             if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
@@ -348,12 +348,15 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
 
     // Creating database if not exist
-    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE")) {
+    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci")) {
         out('- Database created successfully!', 'success');
     } else {
         out("- Cannot create database: $DB_DATABASE", 'error');
         exit;
     }
+    //$conn->query("GRANT ALL PRIVILEGES ON $DB_DATABASE.* TO '$DB_USERNAME'@'$DB_HOST'");
+    $conn->query("FLUSH PRIVILEGES");
+
     $conn->select_db($DB_DATABASE);
 
     // Checking SQL dump
