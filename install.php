@@ -350,7 +350,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
 
     // Creating database if not exist
-    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci")) {
+    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")) {
         out('- Database created successfully!', 'success');
     } else {
         out("- Cannot create database: $DB_DATABASE", 'error');
