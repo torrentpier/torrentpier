@@ -136,7 +136,14 @@ function humn_bitrate(int $bitrate, string $space = '&nbsp;'): string
  */
 function humn_sample_rate(int $sample_rate, string $space = '&nbsp;'): string
 {
-    $unit = '';
+    if ($sample_rate >= 1000000) {
+        $unit = 'Mhz';
+    } elseif ($sample_rate >= 1000) {
+        $unit = 'kHz';
+    } else {
+        $unit = 'Hz';
+    }
+
     return sprintf('%.1f', commify($sample_rate)) . $space . $unit;
 }
 
