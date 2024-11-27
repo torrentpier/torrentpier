@@ -64,10 +64,10 @@ if (isset($ffpInfo->streams)) {
             $result .= sprintf($lang['AUDIO_CODEC'], $stream->codec_long_name, mb_strtoupper($stream->codec_name, 'UTF-8')) . '<br>';
         }
         if (!empty($stream->bit_rate)) {
-            $result .= sprintf($lang['BITRATE'], humn_bitrate($stream->bit_rate)) . '<br>';
+            $result .= sprintf($lang['BITRATE'], humn_bitrate((int)$stream->bit_rate)) . '<br>';
         }
         if (!empty($stream->sample_rate)) {
-            $result .= sprintf($lang['SAMPLE_RATE'], humn_sample_rate($stream->sample_rate)) . '<br>';
+            $result .= sprintf($lang['SAMPLE_RATE'], humn_sample_rate((int)$stream->sample_rate)) . '<br>';
         }
         if (!empty($stream->channels)) {
             $result .= sprintf($lang['CHANNELS'], $stream->channels) . '<br>';
