@@ -101,7 +101,8 @@ CREATE TABLE IF NOT EXISTS `bb_thx`
   PRIMARY KEY (`topic_id`, `user_id`)
 )
   ENGINE = MyISAM
-  DEFAULT CHARSET = utf8mb4;
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
 
 // 2.4.0
 UPDATE `bb_attachments_config` SET `config_value` = 'data/uploads' WHERE `config_name` = 'upload_dir';
@@ -124,7 +125,8 @@ CREATE TABLE IF NOT EXISTS `bb_banlist`
   PRIMARY KEY (`ban_id`, `ban_userid`)
 )
   ENGINE = MyISAM
-  DEFAULT CHARSET = utf8mb4;
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
 
 // 2.4.1
 UPDATE `bb_config` SET `config_value` = '' WHERE `config_name` = 'bt_announce_url';

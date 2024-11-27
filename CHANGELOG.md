@@ -17,6 +17,7 @@
 - Improved BitTorrent clients ban functionality [\#1657](https://github.com/torrentpier/torrentpier/pull/1657) ([belomaxorka](https://github.com/belomaxorka))
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Invites: Permanent invites feature [\#1670](https://github.com/torrentpier/torrentpier/pull/1670) ([belomaxorka](https://github.com/belomaxorka))
+- Changed database encoding to `utf8mb4_unicode_ci` [\#1684](https://github.com/torrentpier/torrentpier/pull/1684) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken torrent stats displaying [\#1672](https://github.com/torrentpier/torrentpier/pull/1672), [\#1673](https://github.com/torrentpier/torrentpier/pull/1673) ([belomaxorka](https://github.com/belomaxorka))

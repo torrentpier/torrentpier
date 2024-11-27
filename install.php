@@ -242,6 +242,8 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
                 out('- Cannot remove Composer installation file (composer-setup.php). Please, delete it manually', 'warning');
             }
         }
+    } else {
+        out("- composer.phar file found!\n", 'success');
     }
 
     // Installing dependencies
@@ -290,7 +292,7 @@ if (is_file(BB_ROOT . '.env')) {
         if (trim($line) !== '' && !str_starts_with($line, '#')) {
             $parts = explode('=', $line, 2);
             $key = trim($parts[0]);
-            $value = isset($parts[1]) ? trim($parts[1]) : '';
+            $value = (isset($parts[1]) && $key !== 'DB_PASSWORD') ? trim($parts[1]) : '';
 
             // Database default values
             if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
@@ -301,7 +303,7 @@ if (is_file(BB_ROOT . '.env')) {
             echo "Enter a new value for $key (or leave empty to not change): ";
             $newValue = readline();
 
-            if (!empty($newValue)) {
+            if (!empty($newValue) || $key === 'DB_PASSWORD') {
                 $line = "$key=$newValue";
                 // Configuring database connection
                 if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
@@ -348,7 +350,7 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
 
     // Creating database if not exist
-    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE")) {
+    if ($conn->query("CREATE DATABASE IF NOT EXISTS $DB_DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")) {
         out('- Database created successfully!', 'success');
     } else {
         out("- Cannot create database: $DB_DATABASE", 'error');
