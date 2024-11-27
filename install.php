@@ -242,6 +242,8 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
                 out('- Cannot remove Composer installation file (composer-setup.php). Please, delete it manually', 'warning');
             }
         }
+    } else {
+        out("- composer.phar file found!\n", 'success');
     }
 
     // Installing dependencies
