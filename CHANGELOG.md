@@ -1,11 +1,11 @@
 # 📖 Change Log
 
-## [v2.4.5](https://github.com/torrentpier/torrentpier/tree/v2.4.5) (2024-XX-XX)
-[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.4...v2.4.5)
+## [v2.4.5-rc.1](https://github.com/torrentpier/torrentpier/tree/v2.4.5-rc.1) (2024-11-28)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.4...v2.4.5-rc.1)
 
 **Merged pull requests:**
 
-- Release 2.4.5 🦕 ([belomaxorka](https://github.com/belomaxorka))
+- Release 2.4.5-rc.1 🦕 ([belomaxorka](https://github.com/belomaxorka))
 - [CLI] TorrentPier installer ☕️ [\#1576](https://github.com/torrentpier/torrentpier/pull/1576), [\#1582](https://github.com/torrentpier/torrentpier/pull/1582), [\#1585](https://github.com/torrentpier/torrentpier/pull/1585), [\#1591](https://github.com/torrentpier/torrentpier/pull/1591) ([belomaxorka](https://github.com/belomaxorka))
 - Added avif images support 🌄 [\#1660](https://github.com/torrentpier/torrentpier/pull/1660) ([belomaxorka](https://github.com/belomaxorka))
 - Added some new HTML meta-tags [\#1562](https://github.com/torrentpier/torrentpier/pull/1562) ([belomaxorka](https://github.com/belomaxorka))
