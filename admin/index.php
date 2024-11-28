@@ -16,10 +16,18 @@ if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
 }
 
 // Files integrity check
-$files_integrity_data = $datastore->has('files_integrity') ? $datastore->get('files_integrity') : [];
+// TODO: Replace with cron update
+if (!$files_integrity_data = $datastore->get('files_integrity') and !$datastore->has('files_integrity')) {
+    $datastore->update('files_integrity');
+    $files_integrity_data = $datastore->get('files_integrity');
+}
 
 // Check for updates
-$update_data = $datastore->has('check_updates') ? $datastore->get('check_updates') : [];
+// TODO: Replace with cron update
+if (!$update_data = $datastore->get('check_updates') and !$datastore->has('check_updates')) {
+    $datastore->update('check_updates');
+    $update_data = $datastore->get('check_updates');
+}
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
