@@ -69,7 +69,7 @@ switch ($type) {
             $tor_type_lang = $lang['GOLD'];
         } else {
             $tor_type = 0;
-            $tor_type_lang = '';
+            $tor_type_lang = "{$lang['UNSET_GOLD_TORRENT']} / {$lang['UNSET_SILVER_TORRENT']}";
         }
 
         \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
