@@ -63,20 +63,23 @@ switch ($type) {
     case 'unset_silver_gold':
         if ($type == 'set_silver') {
             $tor_type = TOR_TYPE_SILVER;
+            $tor_type_lang = $lang['SILVER'];
         } elseif ($type == 'set_gold') {
             $tor_type = TOR_TYPE_GOLD;
+            $tor_type_lang = $lang['GOLD'];
         } else {
             $tor_type = 0;
+            $tor_type_lang = '';
         }
 
         \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
 
         // Log action
-        $log_action->mod($type, [
+        $log_action->mod('mod_change_tor_type', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $torrent['topic_id'],
             'topic_title' => $torrent['topic_title'],
-            'log_type' => '',
+            'log_type' => sprintf($lang['TOR_TYPE_LOG_ACTION'], $tor_type_lang),
         ]);
 
         $title = $lang['CHANGE_TOR_TYPE'];
