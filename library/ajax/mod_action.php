@@ -31,11 +31,11 @@ switch ($mode) {
 
         foreach ($topic_ids as $attach_id) {
             $tor = DB()->fetch_row("
-	            SELECT
-		            tor.forum_id, tor.topic_id, t.topic_title, tor.tor_status
+                SELECT
+                    tor.forum_id, tor.topic_id, t.topic_title, tor.tor_status
                 FROM       " . BB_BT_TORRENTS . " tor
-	            INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
-	            WHERE tor.attach_id = $attach_id LIMIT 1");
+                INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
+                WHERE tor.attach_id = $attach_id LIMIT 1");
 
             if (!$tor) {
                 $this->ajax_die($lang['TORRENT_FAILED']);
@@ -45,13 +45,12 @@ switch ($mode) {
 
             // Log action
             $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], $bb_cfg['tor_icons'][$status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$status] . '</b>', $bb_cfg['tor_icons'][$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
-            $log_action->mod('mod_topic_change_tor_status', array(
+            $log_action->mod('mod_topic_change_tor_status', [
                 'forum_id' => $tor['forum_id'],
                 'topic_id' => $tor['topic_id'],
                 'topic_title' => $tor['topic_title'],
-                'user_id' => $userdata['user_id'],
                 'log_msg' => $log_msg . '<br>-------------',
-            ));
+            ]);
         }
         $this->response['status'] = $bb_cfg['tor_icons'][$status];
         $this->response['topics'] = explode(',', $topics);

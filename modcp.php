@@ -698,7 +698,7 @@ switch ($mode) {
     case 'post_pin':
     case 'post_unpin':
         $pin = ($mode == 'post_pin');
-        $new_topic_status = ($pin) ? 1 : 0;
+        $new_topic_status = $pin ? 1 : 0;
 
         if (count((array)$topic_csv)) {
             $sql = "
@@ -728,7 +728,7 @@ switch ($mode) {
 			");
 
             // Log action
-            $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
+            $type = $pin ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
                 $log_action->mod($type, [
@@ -738,7 +738,7 @@ switch ($mode) {
                 ]);
             }
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
             $sql = "
@@ -769,7 +769,7 @@ switch ($mode) {
 			");
 
             // Log action
-            $type = ($pin) ? 'mod_post_pin' : 'mod_post_unpin';
+            $type = $pin ? 'mod_post_pin' : 'mod_post_unpin';
 
             foreach ($log_topics as $topic_id => $topic_title) {
                 $log_action->mod($type, [
@@ -779,7 +779,7 @@ switch ($mode) {
                 ]);
             }
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         }
         break;
