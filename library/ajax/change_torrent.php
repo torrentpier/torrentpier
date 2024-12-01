@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $bb_cfg, $lang, $log_action;
 
 if (!isset($this->request['attach_id'])) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
@@ -25,7 +25,7 @@ $type = (string)$this->request['type'];
 $torrent = DB()->fetch_row("
 		SELECT
 			a.post_id, d.physical_filename, d.extension, d.tracker_status,
-			t.topic_first_post_id,
+			t.topic_first_post_id, t.topic_title,
 			p.poster_id, p.topic_id, p.forum_id,
 			f.allow_reg_tracker
 		FROM
@@ -70,6 +70,14 @@ switch ($type) {
         }
 
         \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
+
+        // Log action
+        $log_action->mod($type, [
+            'forum_id' => $torrent['forum_id'],
+            'topic_id' => $torrent['topic_id'],
+            'topic_title' => $torrent['topic_title'],
+            'log_type' => '',
+        ]);
 
         $title = $lang['CHANGE_TOR_TYPE'];
         $url = make_url(TOPIC_URL . $torrent['topic_id']);

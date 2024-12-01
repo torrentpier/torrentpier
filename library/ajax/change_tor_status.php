@@ -96,7 +96,6 @@ switch ($mode) {
             'forum_id' => $tor['forum_id'],
             'topic_id' => $tor['topic_id'],
             'topic_title' => $tor['topic_title'],
-            'user_id' => $userdata['user_id'],
             'log_msg' => $log_msg . '<br>-------------',
         ));
 
