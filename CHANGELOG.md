@@ -20,6 +20,7 @@
 - Changed database encoding to `utf8mb4_unicode_ci` [\#1684](https://github.com/torrentpier/torrentpier/pull/1684) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed empty `topic_id` in log actions after topic rename [\#1687](https://github.com/torrentpier/torrentpier/pull/1687) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken torrent stats displaying [\#1672](https://github.com/torrentpier/torrentpier/pull/1672), [\#1673](https://github.com/torrentpier/torrentpier/pull/1673) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed template caching issue [\#1622](https://github.com/torrentpier/torrentpier/pull/1622) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed `md5()` deprecated in PHP 8.4 [\#1561](https://github.com/torrentpier/torrentpier/pull/1561) ([belomaxorka](https://github.com/belomaxorka))
