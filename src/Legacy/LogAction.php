@@ -28,9 +28,10 @@ class LogAction
         'mod_post_unpin' => 10,
         'mod_topic_split' => 11,
         'mod_topic_change_tor_status' => 12,
-        'adm_user_delete' => 13,
-        'adm_user_ban' => 14,
-        'adm_user_unban' => 15,
+        'mod_topic_change_tor_type' => 13,
+        'adm_user_delete' => 14,
+        'adm_user_ban' => 15,
+        'adm_user_unban' => 16,
     ];
     public $log_type_select = [];
     public $log_disabled = false;
