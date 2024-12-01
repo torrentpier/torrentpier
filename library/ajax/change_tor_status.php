@@ -92,12 +92,12 @@ switch ($mode) {
         if ($comment && $comment != $lang['COMMENT']) {
             $log_msg .= "<br>{$lang['COMMENT']}: <b>$comment</b>.";
         }
-        $log_action->mod('mod_topic_change_tor_status', array(
+        $log_action->mod('mod_topic_change_tor_status', [
             'forum_id' => $tor['forum_id'],
             'topic_id' => $tor['topic_id'],
             'topic_title' => $tor['topic_title'],
             'log_msg' => $log_msg . '<br>-------------',
-        ));
+        ]);
 
         $this->response['status'] = $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
 

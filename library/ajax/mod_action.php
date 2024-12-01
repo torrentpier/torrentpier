@@ -45,12 +45,12 @@ switch ($mode) {
 
             // Log action
             $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], $bb_cfg['tor_icons'][$status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$status] . '</b>', $bb_cfg['tor_icons'][$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
-            $log_action->mod('mod_topic_change_tor_status', array(
+            $log_action->mod('mod_topic_change_tor_status', [
                 'forum_id' => $tor['forum_id'],
                 'topic_id' => $tor['topic_id'],
                 'topic_title' => $tor['topic_title'],
                 'log_msg' => $log_msg . '<br>-------------',
-            ));
+            ]);
         }
         $this->response['status'] = $bb_cfg['tor_icons'][$status];
         $this->response['topics'] = explode(',', $topics);
