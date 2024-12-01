@@ -75,7 +75,7 @@ switch ($type) {
         \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
 
         // Log action
-        $log_action->mod('mod_change_tor_type', [
+        $log_action->mod('mod_topic_change_tor_type', [
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $torrent['topic_id'],
             'topic_title' => $torrent['topic_title'],
