@@ -90,7 +90,7 @@ switch ($mode) {
         // Log action
         $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b>', $bb_cfg['tor_icons'][$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
         if ($comment) {
-            $log_msg .= "{$lang['COMMENT']}: <b>$comment</b>";
+            $log_msg .= "<br>{$lang['COMMENT']}: <b>$comment</b>.";
         }
         $log_action->mod('mod_topic_change_tor_status', array(
             'forum_id' => $tor['forum_id'],

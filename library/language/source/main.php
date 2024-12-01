@@ -1436,7 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Type the torrent successfully changed';
 $lang['DEL_TORRENT'] = 'Are you sure you want to delete the torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you want to delete and move the topic?';
 $lang['UNEXECUTED_RELEASE'] = 'Do you have a shapeless release before creating a new fix his unformed!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.<br>';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Changing the status of distribution - %s';
