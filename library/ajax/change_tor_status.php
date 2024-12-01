@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $bb_cfg, $lang, $log_action;
 
 if (!$attach_id = (int)$this->request['attach_id']) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
@@ -86,6 +86,19 @@ switch ($mode) {
         }
 
         \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $new_status);
+
+        // Log action
+        $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b>', $bb_cfg['tor_icons'][$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
+        if ($comment) {
+            $log_msg .= "<br>{$lang['COMMENT']}: <b>$comment</b>.";
+        }
+        $log_action->mod('mod_topic_change_tor_status', array(
+            'forum_id' => $tor['forum_id'],
+            'topic_id' => $tor['topic_id'],
+            'topic_title' => $tor['topic_title'],
+            'user_id' => $userdata['user_id'],
+            'log_msg' => $log_msg . '<br>-------------',
+        ));
 
         $this->response['status'] = $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
 
