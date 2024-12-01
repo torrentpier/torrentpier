@@ -18,6 +18,7 @@
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Invites: Permanent invites feature [\#1670](https://github.com/torrentpier/torrentpier/pull/1670) ([belomaxorka](https://github.com/belomaxorka))
 - Show torrent status changes in actions log [\#1688](https://github.com/torrentpier/torrentpier/pull/1688) ([belomaxorka](https://github.com/belomaxorka))
+- Show torrent type (gold / silver) changes in actions log [\#1689](https://github.com/torrentpier/torrentpier/pull/1689) ([belomaxorka](https://github.com/belomaxorka))
 - Changed database encoding to `utf8mb4_unicode_ci` [\#1684](https://github.com/torrentpier/torrentpier/pull/1684) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
 - BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
