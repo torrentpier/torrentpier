@@ -31,11 +31,11 @@ switch ($mode) {
 
         foreach ($topic_ids as $attach_id) {
             $tor = DB()->fetch_row("
-	            SELECT
-		            tor.forum_id, tor.topic_id, t.topic_title, tor.tor_status
+                SELECT
+                    tor.forum_id, tor.topic_id, t.topic_title, tor.tor_status
                 FROM       " . BB_BT_TORRENTS . " tor
-	            INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
-	            WHERE tor.attach_id = $attach_id LIMIT 1");
+                INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
+                WHERE tor.attach_id = $attach_id LIMIT 1");
 
             if (!$tor) {
                 $this->ajax_die($lang['TORRENT_FAILED']);
