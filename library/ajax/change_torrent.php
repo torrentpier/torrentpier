@@ -68,7 +68,9 @@ switch ($type) {
         } else {
             $tor_type = 0;
         }
+
         \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
+
         $title = $lang['CHANGE_TOR_TYPE'];
         $url = make_url(TOPIC_URL . $torrent['topic_id']);
         break;
