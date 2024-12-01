@@ -79,7 +79,7 @@ switch ($type) {
             'forum_id' => $torrent['forum_id'],
             'topic_id' => $torrent['topic_id'],
             'topic_title' => $torrent['topic_title'],
-            'log_type' => sprintf($lang['TOR_TYPE_LOG_ACTION'], $tor_type_lang),
+            'log_type' => sprintf($lang['TOR_TYPE_LOG_ACTION'], is_gold($tor_type) . $tor_type_lang),
         ]);
 
         $title = $lang['CHANGE_TOR_TYPE'];
