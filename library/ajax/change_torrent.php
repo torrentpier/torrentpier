@@ -48,7 +48,7 @@ switch ($type) {
             $tor_type = TOR_TYPE_GOLD;
             $tor_type_lang = $lang['GOLD'];
         } else {
-            $tor_type = 0;
+            $tor_type = TOR_TYPE_DEFAULT;
             $tor_type_lang = "{$lang['UNSET_GOLD_TORRENT']} / {$lang['UNSET_SILVER_TORRENT']}";
         }
 
