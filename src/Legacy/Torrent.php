@@ -29,7 +29,7 @@ class Torrent
      *
      * @return array
      */
-    private static function get_torrent_info($attach_id)
+    public static function get_torrent_info($attach_id)
     {
         global $lang;
 

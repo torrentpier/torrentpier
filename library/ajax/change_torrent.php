@@ -19,31 +19,11 @@ if (!isset($this->request['attach_id'])) {
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
 }
+
 $attach_id = (int)$this->request['attach_id'];
 $type = (string)$this->request['type'];
 
-$torrent = DB()->fetch_row("
-		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status,
-			t.topic_first_post_id, t.topic_title,
-			p.poster_id, p.topic_id, p.forum_id,
-			f.allow_reg_tracker
-		FROM
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d,
-			" . BB_POSTS . " p,
-			" . BB_TOPICS . " t,
-			" . BB_FORUMS . " f
-		WHERE
-			    a.attach_id = $attach_id
-			AND d.attach_id = $attach_id
-			AND p.post_id = a.post_id
-			AND t.topic_id = p.topic_id
-			AND f.forum_id = p.forum_id
-		LIMIT 1
-	");
-
-if (!$torrent) {
+if (!$torrent = \TorrentPier\Legacy\Torrent::get_torrent_info($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
 }
 
