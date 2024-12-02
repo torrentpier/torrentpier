@@ -17,6 +17,7 @@
 - Improved BitTorrent clients ban functionality [\#1657](https://github.com/torrentpier/torrentpier/pull/1657) ([belomaxorka](https://github.com/belomaxorka))
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Invites: Permanent invites feature [\#1670](https://github.com/torrentpier/torrentpier/pull/1670) ([belomaxorka](https://github.com/belomaxorka))
+- Show torrent unregister action in log actions [\#1696](https://github.com/torrentpier/torrentpier/pull/1696) ([belomaxorka](https://github.com/belomaxorka))
 - Show torrent status changes in actions log [\#1688](https://github.com/torrentpier/torrentpier/pull/1688) ([belomaxorka](https://github.com/belomaxorka))
 - Show torrent type (gold / silver) changes in actions log [\#1689](https://github.com/torrentpier/torrentpier/pull/1689) ([belomaxorka](https://github.com/belomaxorka))
 - Changed database encoding to `utf8mb4_unicode_ci` [\#1684](https://github.com/torrentpier/torrentpier/pull/1684) ([belomaxorka](https://github.com/belomaxorka))
