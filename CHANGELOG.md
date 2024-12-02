@@ -14,6 +14,7 @@
 - Newtopic: Added configuring robots indexing [\#1599](https://github.com/torrentpier/torrentpier/pull/1599) ([belomaxorka](https://github.com/belomaxorka))
 - Added showing releaser stats in profile [\#1568](https://github.com/torrentpier/torrentpier/pull/1568) ([belomaxorka](https://github.com/belomaxorka))
 - Added ability to set country name manually [\#1652](https://github.com/torrentpier/torrentpier/pull/1652) ([belomaxorka](https://github.com/belomaxorka))
+- Added new constant `TOR_TYPE_DEFAULT` [\#1698](https://github.com/torrentpier/torrentpier/pull/1698) ([belomaxorka](https://github.com/belomaxorka))
 - Improved BitTorrent clients ban functionality [\#1657](https://github.com/torrentpier/torrentpier/pull/1657) ([belomaxorka](https://github.com/belomaxorka))
 - Improved `filelist.php` [\#1586](https://github.com/torrentpier/torrentpier/pull/1586) ([belomaxorka](https://github.com/belomaxorka))
 - Invites: Permanent invites feature [\#1670](https://github.com/torrentpier/torrentpier/pull/1670) ([belomaxorka](https://github.com/belomaxorka))

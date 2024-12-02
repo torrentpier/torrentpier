@@ -106,6 +106,7 @@ define('TOR_PREMOD', 11);
 define('TOR_REPLENISH', 12);
 
 // Torrent types (Gold / Silver)
+define('TOR_TYPE_DEFAULT', 0);
 define('TOR_TYPE_GOLD', 1);
 define('TOR_TYPE_SILVER', 2);
 
