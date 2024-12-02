@@ -22,6 +22,7 @@
 - Show torrent type (gold / silver) changes in actions log [\#1689](https://github.com/torrentpier/torrentpier/pull/1689) ([belomaxorka](https://github.com/belomaxorka))
 - Changed database encoding to `utf8mb4_unicode_ci` [\#1684](https://github.com/torrentpier/torrentpier/pull/1684) ([belomaxorka](https://github.com/belomaxorka))
 - Demo mode: Save user language in cookies [\#1584](https://github.com/torrentpier/torrentpier/pull/1584) ([belomaxorka](https://github.com/belomaxorka))
+- Make `get_torrent_info()` as public method for re-use [\#1697](https://github.com/torrentpier/torrentpier/pull/1697) ([belomaxorka](https://github.com/belomaxorka))
 - BBCode: Fixed relative links working [\#1613](https://github.com/torrentpier/torrentpier/pull/1613) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed empty `topic_id` in log actions after topic rename [\#1687](https://github.com/torrentpier/torrentpier/pull/1687) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed broken torrent stats displaying [\#1672](https://github.com/torrentpier/torrentpier/pull/1672), [\#1673](https://github.com/torrentpier/torrentpier/pull/1673) ([belomaxorka](https://github.com/belomaxorka))
