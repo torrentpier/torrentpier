@@ -355,7 +355,7 @@ switch ($mode) {
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
-        $new_dl_type = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+        $new_dl_type = $set_download ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
         DB()->query("
 			UPDATE " . BB_TOPICS . " SET
