@@ -254,7 +254,7 @@ function setbit(&$int, $bit_num, $on)
     All results are returned as associative arrays, even when a single auth type is
     specified.
 
-    If available you can send an array (either one or two dimensional) containing the
+    If available you can send an array (either one or two-dimensional) containing the
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
