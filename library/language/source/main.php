@@ -7,6 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+$lang['TEST_CROW'] = 'Test test test...';
+
 // Common, these terms are used extensively on several pages
 $lang['ADMIN'] = 'Administrating';
 $lang['FORUM'] = 'Forum';
