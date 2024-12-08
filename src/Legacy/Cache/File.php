@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use TorrentPier\Dev;
+
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use MatthiasMullie\Scrapbook\Adapters\Flysystem;
@@ -55,13 +57,11 @@ class File extends Common
      */
     public function __construct(string $dir, string $prefix)
     {
-        global $debug;
-
         $adapter = new LocalFilesystemAdapter($dir, null, LOCK_EX);
         $filesystem = new Filesystem($adapter);
         $this->file = new Flysystem($filesystem);
         $this->prefix = $prefix;
-        $this->dbg_enabled = $debug->sqlDebugAllowed();
+        $this->dbg_enabled = Dev::sqlDebugAllowed();
     }
 
     /**

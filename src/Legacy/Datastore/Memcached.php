@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use TorrentPier\Dev;
+
 use Memcached as MemcachedClient;
 use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
 
@@ -68,12 +70,10 @@ class Memcached extends Common
      */
     public function __construct(array $cfg, string $prefix)
     {
-        global $debug;
-
         $this->client = new MemcachedClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
-        $this->dbg_enabled = $debug->sqlDebugAllowed();
+        $this->dbg_enabled = Dev::sqlDebugAllowed();
     }
 
     /**

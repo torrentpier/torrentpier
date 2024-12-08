@@ -463,8 +463,22 @@ class User
      */
     public function set_session_cookies($user_id)
     {
+        global $bb_cfg;
+
+        $debug_cookies = [
+            COOKIE_DBG,
+            'explain',
+            'sql_log',
+            'sql_log_full'
+        ];
+
         if ($user_id == GUEST_UID) {
-            $delete_cookies = [COOKIE_DATA, 'torhelp', 'user_lang'];
+            $delete_cookies = [
+                COOKIE_DATA,
+                'torhelp',
+                'user_lang'
+            ];
+            $delete_cookies = array_merge($delete_cookies, $debug_cookies);
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
@@ -472,6 +486,22 @@ class User
                 }
             }
         } else {
+            if (!isset($bb_cfg['dbg_users'][$this->data['user_id']]) && DBG_USER) {
+                bb_setcookie(COOKIE_DBG, null);
+            } elseif (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
+                bb_setcookie(COOKIE_DBG, hash('xxh128', $bb_cfg['dbg_users'][$this->data['user_id']]), COOKIE_SESSION);
+            }
+
+            // Unset sql debug cookies if SQL_DEBUG is disabled or DBG_USER cookie not present
+            if (!SQL_DEBUG || !DBG_USER) {
+                foreach ($debug_cookies as $cookie) {
+                    if (isset($_COOKIE[$cookie])) {
+                        bb_setcookie($cookie, null);
+                    }
+                }
+            }
+
+            // Set bb_data (session) cookie
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
             $c_sdata_curr = ($this->sessiondata) ? json_encode($this->sessiondata) : '';
 

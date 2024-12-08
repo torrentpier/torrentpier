@@ -10,7 +10,6 @@
 namespace TorrentPier;
 
 use Bugsnag\Client;
-use Bugsnag\Handler;
 
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
@@ -33,20 +32,6 @@ use Exception;
 class Dev
 {
     /**
-     * Environment type
-     *
-     * @var string
-     */
-    private string $envType;
-
-    /**
-     * In production mode
-     *
-     * @var bool
-     */
-    public bool $isProduction = false;
-
-    /**
      * Whoops instance
      *
      * @var Run
@@ -58,33 +43,22 @@ class Dev
      */
     public function __construct()
     {
-        $this->envType = strtolower(env('APP_ENV', 'production'));
         $this->whoops = new Run;
 
-        switch ($this->envType) {
-            case 'prod':
-            case 'production':
-                ini_set('display_errors', 0);
-                ini_set('display_startup_errors', 0);
-                $this->getWhoopsProduction();
-                $this->isProduction = true;
-                break;
-            case 'dev':
-            case 'local':
-            case 'development':
-                ini_set('display_errors', 1);
-                ini_set('display_startup_errors', 1);
-                $this->getWhoops();
-                break;
+        if (DBG_USER) {
+            $this->getWhoopsOnPage();
+        } else {
+            $this->getWhoopsPlaceholder();
         }
-        $this->getBugsnag();
+        $this->getWhoopsLogger();
         $this->getTelegramSender();
+        $this->getBugsnag();
 
         $this->whoops->register();
     }
 
     /**
-     * Bugsnag debug driver
+     * [Whoops] Bugsnag handler
      *
      * @return void
      */
@@ -96,11 +70,14 @@ class Dev
             return;
         }
 
-        Handler::register(Client::make($bb_cfg['bugsnag']['api_key']));
+        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+        $this->whoops->pushHandler(function ($e) use ($bugsnag) {
+            $bugsnag->notifyException($e);
+        });
     }
 
     /**
-     * Telegram debug driver
+     * [Whoops] Telegram handler
      *
      * @return void
      */
@@ -108,37 +85,26 @@ class Dev
     {
         global $bb_cfg;
 
-        if ($bb_cfg['telegram_sender']['enabled']) {
-            $telegramSender = new PlainTextHandler();
-            $telegramSender->loggerOnly(true);
-            $telegramSender->setLogger((new Logger(
-                APP_NAME,
-                [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: (int)$bb_cfg['telegram_sender']['timeout']))
-                    ->setFormatter(new TelegramFormatter())]
-            )));
-            $this->whoops->pushHandler($telegramSender);
+        if (!$bb_cfg['telegram_sender']['enabled']) {
+            return;
         }
+
+        $telegramSender = new PlainTextHandler();
+        $telegramSender->loggerOnly(true);
+        $telegramSender->setLogger((new Logger(
+            APP_NAME,
+            [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: (int)$bb_cfg['telegram_sender']['timeout']))
+                ->setFormatter(new TelegramFormatter())]
+        )));
+        $this->whoops->pushHandler($telegramSender);
     }
 
     /**
-     * Whoops production debug driver
+     * [Whoops] On page handler (in debug)
      *
      * @return void
      */
-    private function getWhoopsProduction(): void
-    {
-        $this->whoops->pushHandler(function () {
-            global $bb_cfg;
-            echo $bb_cfg['whoops']['error_message'];
-        });
-    }
-
-    /**
-     * Whoops debug driver
-     *
-     * @return void
-     */
-    private function getWhoops(): void
+    private function getWhoopsOnPage(): void
     {
         global $bb_cfg;
 
@@ -164,20 +130,42 @@ class Dev
                 ->setFormatter((new LineFormatter(null, null, true)))]
         )));
         $this->whoops->pushHandler($loggingInConsole);
+    }
 
-        /**
-         * Log errors in file
-         */
-        if ((int)ini_get('log_errors') === 1) {
-            $loggingInFile = new PlainTextHandler();
-            $loggingInFile->loggerOnly(true);
-            $loggingInFile->setLogger((new Logger(
-                APP_NAME,
-                [(new StreamHandler(WHOOPS_LOG_FILE))
-                    ->setFormatter((new LineFormatter(null, null, true)))]
-            )));
-            $this->whoops->pushHandler($loggingInFile);
+    /**
+     * [Whoops] Logger handler
+     *
+     * @return void
+     */
+    private function getWhoopsLogger(): void
+    {
+        if ((int)ini_get('log_errors') !== 1) {
+            return;
         }
+
+        $loggingInFile = new PlainTextHandler();
+        $loggingInFile->loggerOnly(true);
+        $loggingInFile->setLogger((new Logger(
+            APP_NAME,
+            [(new StreamHandler(WHOOPS_LOG_FILE))
+                ->setFormatter((new LineFormatter(null, null, true)))]
+        )));
+        $this->whoops->pushHandler($loggingInFile);
+    }
+
+    /**
+     * [Whoops] Placeholder handler (non debug)
+     *
+     * @return void
+     */
+    private function getWhoopsPlaceholder(): void
+    {
+        global $bb_cfg;
+
+        $this->whoops->pushHandler(function ($e) use ($bb_cfg) {
+            echo $bb_cfg['whoops']['error_message'];
+            echo "<hr>Error: {$e->getMessage()}.";
+        });
     }
 
     /**
@@ -186,28 +174,28 @@ class Dev
      * @return string
      * @throws Exception
      */
-    public function getSqlLog(): string
+    public static function getSqlLog(): string
     {
         global $DBS, $CACHES, $datastore;
 
         $log = '';
 
         foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj->dbg) ? $this->getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+            $log .= !empty($db_obj->dbg) ? self::getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {
             if (!empty($cache_obj->db->dbg)) {
-                $log .= $this->getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
+                $log .= self::getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
             } elseif (!empty($cache_obj->dbg)) {
-                $log .= $this->getSqlLogHtml($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
+                $log .= self::getSqlLogHtml($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
             }
         }
 
         if (!empty($datastore->db->dbg)) {
-            $log .= $this->getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
+            $log .= self::getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
         } elseif (!empty($datastore->dbg)) {
-            $log .= $this->getSqlLogHtml($datastore, "cache: datastore [{$datastore->engine}]");
+            $log .= self::getSqlLogHtml($datastore, "cache: datastore [{$datastore->engine}]");
         }
 
         return $log;
@@ -218,9 +206,9 @@ class Dev
      *
      * @return bool
      */
-    public function sqlDebugAllowed(): bool
+    public static function sqlDebugAllowed(): bool
     {
-        return (SQL_DEBUG && !$this->isProduction && !empty($_COOKIE['sql_log']));
+        return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
     }
 
     /**
@@ -232,13 +220,13 @@ class Dev
      * @return string
      * @throws Exception
      */
-    private function getSqlLogHtml(object $db_obj, string $log_name): string
+    private static function getSqlLogHtml(object $db_obj, string $log_name): string
     {
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
             $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
-            $sql = $this->shortQuery($dbg['sql'], true);
+            $sql = self::shortQuery($dbg['sql'], true);
             $time = sprintf('%.4f', $dbg['time']);
             $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
@@ -261,7 +249,7 @@ class Dev
      * @param bool $esc_html
      * @return string
      */
-    public function shortQuery(string $sql, bool $esc_html = false): string
+    public static function shortQuery(string $sql, bool $esc_html = false): string
     {
         $max_len = 100;
         $sql = str_compact($sql);

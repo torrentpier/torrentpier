@@ -89,7 +89,8 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 /**
  * Error reporting
  */
-$debug = new \TorrentPier\Dev();
+define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
+(new \TorrentPier\Dev());
 
 /**
  * Server variables initialize

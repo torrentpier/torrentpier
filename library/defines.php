@@ -35,6 +35,7 @@ define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
 define('API_IP_URL', 'https://freeipapi.com/api/json/');
 define('CHECKSUMS_FILE', INT_DATA_DIR . '/checksums.md5');
 define('RESTORE_CORRUPT_CONFIRM_FILE', INT_DATA_DIR . '/rescorrupt.integrity');
+define('COOKIE_DBG', 'bb_dbg');
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
@@ -68,6 +69,8 @@ define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
 ini_set('error_reporting', E_ALL); // PHP error reporting mode | https://www.php.net/manual/en/errorfunc.constants.php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 define('MYSQLI_ERROR_REPORTING', MYSQLI_REPORT_ERROR); // MySQL error reporting mode | https://www.php.net/manual/mysqli-driver.report-mode.php
 ini_set('log_errors', 1); // Enable logging (For native & Whoops)
 ini_set('error_log', LOG_DIR . '/php_errors.log'); // path to log file enabled only if log_errors == 1 (native)

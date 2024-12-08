@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use TorrentPier\Dev;
+
 use MatthiasMullie\Scrapbook\Adapters\SQLite as SQLiteCache;
 use PDO;
 
@@ -47,12 +49,10 @@ class Sqlite extends Common
      */
     public function __construct(string $dir, string $prefix)
     {
-        global $debug;
-
         $client = new PDO("sqlite:$dir.db");
         $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
-        $this->dbg_enabled = $debug->sqlDebugAllowed();
+        $this->dbg_enabled = Dev::sqlDebugAllowed();
     }
 
     /**

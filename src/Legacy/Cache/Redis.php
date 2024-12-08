@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Cache;
 
+use TorrentPier\Dev;
+
 use Redis as RedisClient;
 use MatthiasMullie\Scrapbook\Adapters\Redis as RedisCache;
 
@@ -75,12 +77,10 @@ class Redis extends Common
      */
     public function __construct(array $cfg, string $prefix)
     {
-        global $debug;
-
         $this->client = new RedisClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
-        $this->dbg_enabled = $debug->sqlDebugAllowed();
+        $this->dbg_enabled = Dev::sqlDebugAllowed();
     }
 
     /**

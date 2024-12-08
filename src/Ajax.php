@@ -174,11 +174,10 @@ class Ajax
      */
     public function send(): void
     {
-        global $debug;
         $this->response['action'] = $this->action;
 
-        if ($debug->sqlDebugAllowed()) {
-            $this->response['sql_log'] = $debug->getSqlLog();
+        if (Dev::sqlDebugAllowed()) {
+            $this->response['sql_log'] = Dev::getSqlLog();
         }
 
         // sending output will be handled by $this->ob_handler()
@@ -194,12 +193,8 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        global $debug;
-
-        if (!$debug->isProduction) {
-            if ($contents) {
-                $this->response['raw_output'] = $contents;
-            }
+        if (DBG_USER && $contents) {
+            $this->response['raw_output'] = $contents;
         }
 
         $response_js = json_encode($this->response, JSON_THROW_ON_ERROR);
