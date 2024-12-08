@@ -46,7 +46,9 @@ class Dev
     {
         $this->whoops = new Run;
 
-        $this->getWhoops();
+        if (DBG_USER) {
+            $this->getWhoops();
+        }
         $this->getBugsnag();
         $this->getTelegramSender();
 
