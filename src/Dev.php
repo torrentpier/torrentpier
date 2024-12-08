@@ -52,9 +52,8 @@ class Dev
             $this->getWhoopsPlaceholder();
         }
         $this->getWhoopsLogger();
-
-        $this->getBugsnag();
         $this->getTelegramSender();
+        $this->getBugsnag();
 
         $this->whoops->register();
     }
@@ -129,6 +128,11 @@ class Dev
         $this->whoops->pushHandler($loggingInConsole);
     }
 
+    /**
+     * Whoops logger
+     *
+     * @return void
+     */
     private function getWhoopsLogger(): void
     {
         /**
@@ -147,7 +151,7 @@ class Dev
     }
 
     /**
-     * Whoops production debug driver
+     * Whoops placeholder (non debug)
      *
      * @return void
      */
