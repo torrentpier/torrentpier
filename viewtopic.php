@@ -200,7 +200,7 @@ if ($is_auth['auth_mod']) {
 
 if ($moderation) {
     if (IS_ADMIN) {
-        if (!$forum_select = $datastore->get('viewtopic_forum_select') and !$datastore->has('viewtopic_forum_select')) {
+        if (!$forum_select = $datastore->get('viewtopic_forum_select')) {
             $datastore->update('viewtopic_forum_select');
             $forum_select = $datastore->get('viewtopic_forum_select');
         }
@@ -212,7 +212,7 @@ if ($moderation) {
     $template->assign_vars(['S_FORUM_SELECT' => $forum_select_html]);
 }
 
-if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
@@ -358,7 +358,7 @@ if ($postrow = DB()->fetch_rowset($sql)) {
     bb_die($lang['NO_POSTS_TOPIC']);
 }
 
-if (!$ranks = $datastore->get('ranks') and !$datastore->has('ranks')) {
+if (!$ranks = $datastore->get('ranks')) {
     $datastore->update('ranks');
     $ranks = $datastore->get('ranks');
 }

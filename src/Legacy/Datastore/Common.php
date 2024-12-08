@@ -80,15 +80,6 @@ class Common
     }
 
     /**
-     * @param $title
-     * @return bool
-     */
-    public function has($title): bool
-    {
-        return isset($this->data[$title]);
-    }
-
-    /**
      * Store data into cache
      *
      * @param string $item_name

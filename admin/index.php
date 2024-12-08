@@ -10,21 +10,19 @@
 require __DIR__ . '/pagestart.php';
 
 // Statistics
-if (!$stats = $datastore->get('stats') and !$datastore->has('stats')) {
+if (!$stats = $datastore->get('stats')) {
     $datastore->update('stats');
     $stats = $datastore->get('stats');
 }
 
 // Files integrity check
-// TODO: Replace with cron update
-if (!$files_integrity_data = $datastore->get('files_integrity') and !$datastore->has('files_integrity')) {
+if (!$files_integrity_data = $datastore->get('files_integrity')) {
     $datastore->update('files_integrity');
     $files_integrity_data = $datastore->get('files_integrity');
 }
 
 // Check for updates
-// TODO: Replace with cron update
-if (!$update_data = $datastore->get('check_updates') and !$datastore->has('check_updates')) {
+if (!$update_data = $datastore->get('check_updates')) {
     $datastore->update('check_updates');
     $update_data = $datastore->get('check_updates');
 }

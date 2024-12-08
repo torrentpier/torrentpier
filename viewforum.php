@@ -43,7 +43,7 @@ define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest');
 
 set_die_append_msg();
-if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
@@ -118,7 +118,7 @@ if ($mark_read && !IS_GUEST) {
 // Subforums
 $show_subforums = $bb_cfg['sf_on_first_page_only'] ? !$start : true;
 
-if (!$forums = $datastore->get('cat_forums') and !$datastore->has('cat_forums')) {
+if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }

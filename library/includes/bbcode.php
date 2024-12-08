@@ -116,10 +116,7 @@ function generate_smilies($mode)
         $user->session_start();
     }
 
-    if (!$data = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
-        $datastore->update('smile_replacements');
-        $data = $datastore->get('smile_replacements');
-    }
+    $data = $datastore->get('smile_replacements');
 
     if ($sql = $data['smile']) {
         $num_smilies = 0;

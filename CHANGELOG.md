@@ -55,7 +55,6 @@
 - Fixed seed bonus accrual [\#1518](https://github.com/torrentpier/torrentpier/pull/1518) ([belomaxorka](https://github.com/belomaxorka))
 - [BETA] Added emojis support 😄😁 [\#1514](https://github.com/torrentpier/torrentpier/pull/1514) ([belomaxorka](https://github.com/belomaxorka))
 - Pagination with `rel="next"` and `rel="prev"` support [\#1551](https://github.com/torrentpier/torrentpier/pull/1551) ([belomaxorka](https://github.com/belomaxorka))
-- Datastore improvements [\#1538](https://github.com/torrentpier/torrentpier/pull/1538) ([belomaxorka](https://github.com/belomaxorka))
 - Resize user/group avatar image if too large 🌆 [\#1512](https://github.com/torrentpier/torrentpier/pull/1512) ([belomaxorka](https://github.com/belomaxorka))
 - Increased `PASSWORD_MAX_LENGTH` [\#1510](https://github.com/torrentpier/torrentpier/pull/1510) ([belomaxorka](https://github.com/belomaxorka))
 - Bring back forum description in `viewforum.php` [\#1540](https://github.com/torrentpier/torrentpier/pull/1540) ([belomaxorka](https://github.com/belomaxorka))

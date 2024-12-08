@@ -338,8 +338,7 @@ class BBCode
     {
         global $datastore;
 
-        if (!$this->smilies = $datastore->get('smile_replacements') and !$datastore->has('smile_replacements')) {
-            $datastore->update('smile_replacements');
+        if (null === $this->smilies) {
             $this->smilies = $datastore->get('smile_replacements');
         }
 
