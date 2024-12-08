@@ -472,6 +472,24 @@ class User
                 }
             }
         } else {
+            if (!isset($bb_cfg['dbg_users'][$this->data['user_id']]) && DBG_USER) {
+                // Unset debug cookie if user not in dbg_users array
+                bb_setcookie(COOKIE_DBG, null); // Making DBG_USER as false
+            } elseif (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
+                // Set debug cookie if user in dbg_users array
+                bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION); // Making DBG_USER as true
+            }
+
+            // Unset sql debug cookies if SQL_DEBUG is disabled or DBG_USER cookie not present
+            if (!SQL_DEBUG || !DBG_USER) {
+                foreach (array('explain', 'sql_log', 'sql_log_full') as $cookie) {
+                    if (isset($_COOKIE[$cookie])) {
+                        bb_setcookie($cookie, null);
+                    }
+                }
+            }
+
+            // Set bb_data (session) cookie
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
             $c_sdata_curr = ($this->sessiondata) ? json_encode($this->sessiondata) : '';
 
