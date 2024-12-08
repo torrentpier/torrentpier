@@ -33,20 +33,6 @@ use Exception;
 class Dev
 {
     /**
-     * Environment type
-     *
-     * @var string
-     */
-    private string $envType;
-
-    /**
-     * In production mode
-     *
-     * @var bool
-     */
-    public bool $isProduction = false;
-
-    /**
      * Whoops instance
      *
      * @var Run
@@ -58,25 +44,9 @@ class Dev
      */
     public function __construct()
     {
-        $this->envType = strtolower(env('APP_ENV', 'production'));
         $this->whoops = new Run;
 
-        switch ($this->envType) {
-            case 'prod':
-            case 'production':
-                ini_set('display_errors', 0);
-                ini_set('display_startup_errors', 0);
-                $this->getWhoopsProduction();
-                $this->isProduction = true;
-                break;
-            case 'dev':
-            case 'local':
-            case 'development':
-                ini_set('display_errors', 1);
-                ini_set('display_startup_errors', 1);
-                $this->getWhoops();
-                break;
-        }
+        $this->getWhoops();
         $this->getBugsnag();
         $this->getTelegramSender();
 
@@ -118,19 +88,6 @@ class Dev
             )));
             $this->whoops->pushHandler($telegramSender);
         }
-    }
-
-    /**
-     * Whoops production debug driver
-     *
-     * @return void
-     */
-    private function getWhoopsProduction(): void
-    {
-        $this->whoops->pushHandler(function () {
-            global $bb_cfg;
-            echo $bb_cfg['whoops']['error_message'];
-        });
     }
 
     /**
@@ -186,28 +143,28 @@ class Dev
      * @return string
      * @throws Exception
      */
-    public function getSqlLog(): string
+    public static function getSqlLog(): string
     {
         global $DBS, $CACHES, $datastore;
 
         $log = '';
 
         foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj->dbg) ? $this->getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+            $log .= !empty($db_obj->dbg) ? self::getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {
             if (!empty($cache_obj->db->dbg)) {
-                $log .= $this->getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
+                $log .= self::getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
             } elseif (!empty($cache_obj->dbg)) {
-                $log .= $this->getSqlLogHtml($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
+                $log .= self::getSqlLogHtml($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
             }
         }
 
         if (!empty($datastore->db->dbg)) {
-            $log .= $this->getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
+            $log .= self::getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
         } elseif (!empty($datastore->dbg)) {
-            $log .= $this->getSqlLogHtml($datastore, "cache: datastore [{$datastore->engine}]");
+            $log .= self::getSqlLogHtml($datastore, "cache: datastore [{$datastore->engine}]");
         }
 
         return $log;
@@ -218,9 +175,9 @@ class Dev
      *
      * @return bool
      */
-    public function sqlDebugAllowed(): bool
+    public static function sqlDebugAllowed(): bool
     {
-        return (SQL_DEBUG && !$this->isProduction && !empty($_COOKIE['sql_log']));
+        return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
     }
 
     /**
@@ -232,13 +189,13 @@ class Dev
      * @return string
      * @throws Exception
      */
-    private function getSqlLogHtml(object $db_obj, string $log_name): string
+    private static function getSqlLogHtml(object $db_obj, string $log_name): string
     {
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
             $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
-            $sql = $this->shortQuery($dbg['sql'], true);
+            $sql = self::shortQuery($dbg['sql'], true);
             $time = sprintf('%.4f', $dbg['time']);
             $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
@@ -261,7 +218,7 @@ class Dev
      * @param bool $esc_html
      * @return string
      */
-    public function shortQuery(string $sql, bool $esc_html = false): string
+    public static function shortQuery(string $sql, bool $esc_html = false): string
     {
         $max_len = 100;
         $sql = str_compact($sql);
