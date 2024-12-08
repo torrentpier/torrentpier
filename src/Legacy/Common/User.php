@@ -487,10 +487,8 @@ class User
             }
         } else {
             if (!isset($bb_cfg['dbg_users'][$this->data['user_id']]) && DBG_USER) {
-                // Unset debug cookie if user not in dbg_users array
                 bb_setcookie(COOKIE_DBG, null);
             } elseif (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
-                // Set debug cookie if user in dbg_users array
                 bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION);
             }
 
