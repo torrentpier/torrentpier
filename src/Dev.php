@@ -58,7 +58,7 @@ class Dev
     }
 
     /**
-     * Bugsnag handler
+     * [Whoops] Bugsnag handler
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class Dev
     }
 
     /**
-     * Telegram debug driver
+     * [Whoops] Telegram handler
      *
      * @return void
      */
@@ -100,7 +100,7 @@ class Dev
     }
 
     /**
-     * Whoops on page (in debug)
+     * [Whoops] On page handler (in debug)
      *
      * @return void
      */
@@ -133,7 +133,7 @@ class Dev
     }
 
     /**
-     * Whoops logger
+     * [Whoops] Logger handler
      *
      * @return void
      */
@@ -154,7 +154,7 @@ class Dev
     }
 
     /**
-     * Whoops placeholder (non debug)
+     * [Whoops] Placeholder handler (non debug)
      *
      * @return void
      */
