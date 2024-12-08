@@ -11,6 +11,8 @@ namespace TorrentPier\Legacy;
 
 use mysqli_result;
 
+use TorrentPier\Dev;
+
 /**
  * Class SqlDb
  * @package TorrentPier\Legacy
@@ -55,10 +57,10 @@ class SqlDb
      */
     public function __construct($cfg_values)
     {
-        global $DBS, $debug;
+        global $DBS;
 
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
-        $this->dbg_enabled = ($debug->sqlDebugAllowed() || !empty($_COOKIE['explain']));
+        $this->dbg_enabled = (Dev::sqlDebugAllowed() || !empty($_COOKIE['explain']));
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
@@ -830,8 +832,6 @@ class SqlDb
      */
     public function log_query($log_file = 'sql_queries')
     {
-        global $debug;
-
         $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.4f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
@@ -839,7 +839,7 @@ class SqlDb
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
-        $msg[] = $debug->shortQuery($this->cur_query);
+        $msg[] = Dev::shortQuery($this->cur_query);
         $msg = implode(LOG_SEPR, $msg);
         $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
@@ -903,8 +903,6 @@ class SqlDb
      */
     public function explain($mode, $html_table = '', array $row = [])
     {
-        global $debug;
-
         $query = str_compact($this->cur_query);
         // remove comments
         $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
