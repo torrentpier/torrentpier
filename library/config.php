@@ -484,6 +484,10 @@ $bb_cfg['telegram_sender'] = [
 ];
 
 // Special users
+$bb_cfg['dbg_users'] = [
+    // Syntax: 'user_id' => 'username'
+    2 => 'admin',
+];
 $bb_cfg['unlimited_users'] = [
     // Syntax: 'user_id' => 'username'
     2 => 'admin',
