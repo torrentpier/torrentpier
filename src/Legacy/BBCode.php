@@ -21,7 +21,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public array $smilies;
+    public $smilies;
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
