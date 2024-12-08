@@ -81,16 +81,18 @@ class Dev
     {
         global $bb_cfg;
 
-        if ($bb_cfg['telegram_sender']['enabled']) {
-            $telegramSender = new PlainTextHandler();
-            $telegramSender->loggerOnly(true);
-            $telegramSender->setLogger((new Logger(
-                APP_NAME,
-                [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: (int)$bb_cfg['telegram_sender']['timeout']))
-                    ->setFormatter(new TelegramFormatter())]
-            )));
-            $this->whoops->pushHandler($telegramSender);
+        if (!$bb_cfg['telegram_sender']['enabled']) {
+            return;
         }
+
+        $telegramSender = new PlainTextHandler();
+        $telegramSender->loggerOnly(true);
+        $telegramSender->setLogger((new Logger(
+            APP_NAME,
+            [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: (int)$bb_cfg['telegram_sender']['timeout']))
+                ->setFormatter(new TelegramFormatter())]
+        )));
+        $this->whoops->pushHandler($telegramSender);
     }
 
     /**
@@ -133,19 +135,18 @@ class Dev
      */
     private function getWhoopsLogger(): void
     {
-        /**
-         * Log errors in file
-         */
-        if ((int)ini_get('log_errors') === 1) {
-            $loggingInFile = new PlainTextHandler();
-            $loggingInFile->loggerOnly(true);
-            $loggingInFile->setLogger((new Logger(
-                APP_NAME,
-                [(new StreamHandler(WHOOPS_LOG_FILE))
-                    ->setFormatter((new LineFormatter(null, null, true)))]
-            )));
-            $this->whoops->pushHandler($loggingInFile);
+        if ((int)ini_get('log_errors') !== 1) {
+            return;
         }
+
+        $loggingInFile = new PlainTextHandler();
+        $loggingInFile->loggerOnly(true);
+        $loggingInFile->setLogger((new Logger(
+            APP_NAME,
+            [(new StreamHandler(WHOOPS_LOG_FILE))
+                ->setFormatter((new LineFormatter(null, null, true)))]
+        )));
+        $this->whoops->pushHandler($loggingInFile);
     }
 
     /**
