@@ -96,7 +96,7 @@ class Dev
     }
 
     /**
-     * Whoops debug driver
+     * Whoops on page (in debug)
      *
      * @return void
      */
