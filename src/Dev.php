@@ -10,7 +10,6 @@
 namespace TorrentPier;
 
 use Bugsnag\Client;
-use Bugsnag\Handler;
 
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\BrowserConsoleHandler;
@@ -53,25 +52,24 @@ class Dev
         }
         $this->getWhoopsLogger();
         $this->getTelegramSender();
-        $this->getBugsnag();
 
         $this->whoops->register();
     }
 
     /**
-     * Bugsnag debug driver
+     * Bugsnag
      *
-     * @return void
+     * @return bool|Client
      */
-    private function getBugsnag(): void
+    private function getBugsnag(): bool|Client
     {
         global $bb_cfg;
 
         if (!$bb_cfg['bugsnag']['enabled']) {
-            return;
+            return false;
         }
 
-        Handler::register(Client::make($bb_cfg['bugsnag']['api_key']));
+        return Client::make($bb_cfg['bugsnag']['api_key']);
     }
 
     /**
@@ -157,8 +155,13 @@ class Dev
      */
     private function getWhoopsPlaceholder(): void
     {
-        $this->whoops->pushHandler(function ($e) {
-            global $bb_cfg;
+        global $bb_cfg;
+
+        $bugsnag = $this->getBugsnag();
+        $this->whoops->pushHandler(function ($e) use ($bb_cfg, $bugsnag) {
+            if ($bugsnag) {
+                $bugsnag->notifyException($e);
+            }
             echo $bb_cfg['whoops']['error_message'];
             echo "<hr>Error: {$e->getMessage()}.";
         });
