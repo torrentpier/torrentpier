@@ -89,7 +89,7 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 /**
  * Error reporting
  */
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
+define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 (new \TorrentPier\Dev());
 
 /**
