@@ -137,11 +137,6 @@ Support this project by becoming a sponsor or a backer.
 </details>
 
 <details>
-  <summary>Bitcoin</summary>
-  bc1qselchy0nnh7xl99glfffedqp7p9gpvatdr9dz9
-</details>
-
-<details>
   <summary>YooMoney</summary>
   4100118022415720
 </details>
