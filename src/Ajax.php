@@ -193,10 +193,8 @@ class Ajax
      */
     public function ob_handler($contents): string
     {
-        if (!$debug->isProduction) {
-            if ($contents) {
-                $this->response['raw_output'] = $contents;
-            }
+        if (DBG_USER && $contents) {
+            $this->response['raw_output'] = $contents;
         }
 
         $response_js = json_encode($this->response, JSON_THROW_ON_ERROR);
