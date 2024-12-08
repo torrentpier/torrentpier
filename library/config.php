@@ -462,7 +462,7 @@ $bb_cfg['adv_email'] = "adv@$domain_name"; // advertisement email
 
 // Error reporting
 $bb_cfg['whoops'] = [
-    'enabled' => true,
+    'error_message' => 'Sorry, something went wrong. Drink coffee and come back after some time... ☕️',
     'blacklist' => [
         '_COOKIE' => array_keys($_COOKIE),
         '_SERVER' => array_keys($_SERVER),

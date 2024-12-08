@@ -47,8 +47,12 @@ class Dev
         $this->whoops = new Run;
 
         if (DBG_USER) {
-            $this->getWhoops();
+            $this->getWhoopsOnPage();
+        } else {
+            $this->getWhoopsPlaceholder();
         }
+        $this->getWhoopsLogger();
+
         $this->getBugsnag();
         $this->getTelegramSender();
 
@@ -97,13 +101,9 @@ class Dev
      *
      * @return void
      */
-    private function getWhoops(): void
+    private function getWhoopsOnPage(): void
     {
         global $bb_cfg;
-
-        if (!$bb_cfg['whoops']['enabled']) {
-            return;
-        }
 
         /**
          * Show errors on page
@@ -127,7 +127,10 @@ class Dev
                 ->setFormatter((new LineFormatter(null, null, true)))]
         )));
         $this->whoops->pushHandler($loggingInConsole);
+    }
 
+    private function getWhoopsLogger(): void
+    {
         /**
          * Log errors in file
          */
@@ -141,6 +144,20 @@ class Dev
             )));
             $this->whoops->pushHandler($loggingInFile);
         }
+    }
+
+    /**
+     * Whoops production debug driver
+     *
+     * @return void
+     */
+    private function getWhoopsPlaceholder(): void
+    {
+        $this->whoops->pushHandler(function ($e) {
+            global $bb_cfg;
+            echo $bb_cfg['whoops']['error_message'];
+            echo "<hr>Error: {$e->getMessage()}.";
+        });
     }
 
     /**
