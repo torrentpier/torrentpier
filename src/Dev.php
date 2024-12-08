@@ -101,6 +101,10 @@ class Dev
     {
         global $bb_cfg;
 
+        if (!$bb_cfg['whoops']['enabled']) {
+            return;
+        }
+
         /**
          * Show errors on page
          */
