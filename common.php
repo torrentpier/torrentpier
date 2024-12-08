@@ -89,7 +89,7 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 /**
  * Error reporting
  */
-$debug = new \TorrentPier\Dev();
+(new \TorrentPier\Dev());
 
 /**
  * Server variables initialize
