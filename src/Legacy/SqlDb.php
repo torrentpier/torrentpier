@@ -948,7 +948,7 @@ class SqlDb
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
-				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . $debug->shortQuery($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
+				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . Dev::shortQuery($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
 				<br />';
                 break;
 
