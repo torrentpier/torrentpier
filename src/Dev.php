@@ -52,24 +52,28 @@ class Dev
         }
         $this->getWhoopsLogger();
         $this->getTelegramSender();
+        $this->getBugsnag();
 
         $this->whoops->register();
     }
 
     /**
-     * Bugsnag
+     * Bugsnag handler
      *
-     * @return bool|Client
+     * @return void
      */
-    private function getBugsnag(): bool|Client
+    private function getBugsnag(): void
     {
         global $bb_cfg;
 
         if (!$bb_cfg['bugsnag']['enabled']) {
-            return false;
+            return;
         }
 
-        return Client::make($bb_cfg['bugsnag']['api_key']);
+        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+        $this->whoops->pushHandler(function ($e) use ($bugsnag) {
+            $bugsnag->notifyException($e);
+        });
     }
 
     /**
@@ -158,11 +162,7 @@ class Dev
     {
         global $bb_cfg;
 
-        $bugsnag = $this->getBugsnag();
-        $this->whoops->pushHandler(function ($e) use ($bb_cfg, $bugsnag) {
-            if ($bugsnag) {
-                $bugsnag->notifyException($e);
-            }
+        $this->whoops->pushHandler(function ($e) use ($bb_cfg) {
             echo $bb_cfg['whoops']['error_message'];
             echo "<hr>Error: {$e->getMessage()}.";
         });
