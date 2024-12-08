@@ -19,7 +19,7 @@ $bb_cfg = [];
 
 // Version info
 $bb_cfg['tp_version'] = 'v2.4.5-rc.1';
-$bb_cfg['tp_release_date'] = 'XX-XX-2024';
+$bb_cfg['tp_release_date'] = '08-12-2024';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Increase version number after changing JS or CSS
