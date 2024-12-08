@@ -465,16 +465,20 @@ class User
     {
         global $bb_cfg;
 
+        $debug_cookies = [
+            COOKIE_DBG,
+            'explain',
+            'sql_log',
+            'sql_log_full'
+        ];
+
         if ($user_id == GUEST_UID) {
             $delete_cookies = [
                 COOKIE_DATA,
                 'torhelp',
-                'user_lang',
-                COOKIE_DBG,
-                'explain',
-                'sql_log',
-                'sql_log_full'
+                'user_lang'
             ];
+            $delete_cookies = array_merge($delete_cookies, $debug_cookies);
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
@@ -484,15 +488,15 @@ class User
         } else {
             if (!isset($bb_cfg['dbg_users'][$this->data['user_id']]) && DBG_USER) {
                 // Unset debug cookie if user not in dbg_users array
-                bb_setcookie(COOKIE_DBG, null); // Making DBG_USER as false
+                bb_setcookie(COOKIE_DBG, null);
             } elseif (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
                 // Set debug cookie if user in dbg_users array
-                bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION); // Making DBG_USER as true
+                bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION);
             }
 
             // Unset sql debug cookies if SQL_DEBUG is disabled or DBG_USER cookie not present
             if (!SQL_DEBUG || !DBG_USER) {
-                foreach (array('explain', 'sql_log', 'sql_log_full') as $cookie) {
+                foreach ($debug_cookies as $cookie) {
                     if (isset($_COOKIE[$cookie])) {
                         bb_setcookie($cookie, null);
                     }
