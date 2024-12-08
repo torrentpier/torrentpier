@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy\Datastore;
 
+use TorrentPier\Dev;
+
 use MatthiasMullie\Scrapbook\Adapters\Apc;
 
 /**
@@ -45,11 +47,9 @@ class APCu extends Common
      */
     public function __construct(string $prefix)
     {
-        global $debug;
-
         $this->apcu = new Apc();
         $this->prefix = $prefix;
-        $this->dbg_enabled = $debug->sqlDebugAllowed();
+        $this->dbg_enabled = Dev::sqlDebugAllowed();
     }
 
     /**
