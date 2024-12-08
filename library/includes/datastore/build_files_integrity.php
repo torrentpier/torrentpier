@@ -13,7 +13,6 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-// TODO: if (!local environment) { ... }
 if (!$bb_cfg['integrity_check']) {
     return;
 }
@@ -28,6 +27,7 @@ $ignoreFiles = [
     '.env.example',
     '.htaccess',
     'robots.txt',
+    'install.php',
     'favicon.png',
     'composer.json',
     'composer.lock',

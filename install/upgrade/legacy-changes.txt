@@ -1,4 +1,4 @@
-// Changes from v2.2.0 to 2.4.4
+// Changes from v2.2.0 to 2.4.5
 
 // 2.2.0
 UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
@@ -70,9 +70,9 @@ ALTER TABLE `bb_bt_tracker_snap` ADD COLUMN `completed` INT(10) NOT NULL DEFAULT
 ALTER TABLE `bb_bt_tracker` CHANGE `complete` `complete` TINYINT(1) NOT NULL DEFAULT '0';
 
 // 2.4.0-beta3
-INSERT INTO `bb_extensions` VALUES ('994', '1', 'webp', '');
-INSERT INTO `bb_extensions` VALUES ('995', '2', '7z', '');
-INSERT INTO `bb_extensions` VALUES ('996', '1', 'bmp', '');
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('1', 'webp', '');
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('2', '7z', '');
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('1', 'bmp', '');
 ALTER TABLE `bb_bt_tracker` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker` CHANGE `speed_down` `speed_down` INT(11) UNSIGNED NOT NULL DEFAULT '0';
 ALTER TABLE `bb_bt_tracker_snap` CHANGE `speed_up` `speed_up` INT(11) UNSIGNED NOT NULL DEFAULT '0';
@@ -85,10 +85,10 @@ ALTER TABLE `bb_bt_users` CHANGE `auth_key` `auth_key` CHAR(20) CHARACTER SET ut
 
 // 2.4.0-beta4
 DELETE FROM `bb_extensions` WHERE `extension` = 'tif';
-INSERT INTO `bb_extensions` VALUES ('997', '4', 'tif', '');
-INSERT INTO `bb_extensions` VALUES ('998', '4', 'tiff', '');
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('4', 'tif', '');
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('4', 'tiff', '');
 DELETE FROM `bb_extensions` WHERE `extension` = 'tga';
-INSERT INTO `bb_extensions` VALUES ('999', '4', 'tga', '');
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('4', 'tga', '');
 
 // 2.4.0-rc1
 ALTER TABLE `bb_bt_tracker` DROP COLUMN `client`;
@@ -144,3 +144,7 @@ ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
 UPDATE `bb_cron` SET `run_interval` = '00:10:00' WHERE `cron_script` = 'tr_seed_bonus.php';
+
+// 2.4.5-rc.1
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('1', 'avif', ''), ('3', 'm3u', '');
+ALTER TABLE `bb_topics` ADD COLUMN `topic_allow_robots` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0';
