@@ -1,4 +1,4 @@
-// Changes from v2.2.0 to 2.4.4
+// Changes from v2.2.0 to 2.4.5
 
 // 2.2.0
 UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
@@ -144,3 +144,7 @@ ALTER TABLE `bb_poll_users` CHANGE `user_id` `user_id` MEDIUMINT(8) NOT NULL;
 ALTER TABLE `bb_bt_users` ADD COLUMN `ratio_nulled` TINYINT(1) NOT NULL DEFAULT '0';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'cache_gc.php';
 UPDATE `bb_cron` SET `run_interval` = '00:10:00' WHERE `cron_script` = 'tr_seed_bonus.php';
+
+// 2.4.5-rc.1
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('1', 'avif', ''), ('3', 'm3u', '');
+ALTER TABLE `bb_topics` ADD COLUMN `topic_allow_robots` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0';
