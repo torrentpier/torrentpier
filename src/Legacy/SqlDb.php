@@ -60,7 +60,7 @@ class SqlDb
         global $DBS;
 
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
-        $this->dbg_enabled = (Dev::sqlDebugAllowed() || !empty($_COOKIE['explain']));
+        $this->dbg_enabled = Dev::sqlDebugAllowed();
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
