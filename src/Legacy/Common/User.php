@@ -489,7 +489,7 @@ class User
             if (!isset($bb_cfg['dbg_users'][$this->data['user_id']]) && DBG_USER) {
                 bb_setcookie(COOKIE_DBG, null);
             } elseif (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
-                bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION);
+                bb_setcookie(COOKIE_DBG, hash('xxh128', $bb_cfg['dbg_users'][$this->data['user_id']]), COOKIE_SESSION);
             }
 
             // Unset sql debug cookies if SQL_DEBUG is disabled or DBG_USER cookie not present
