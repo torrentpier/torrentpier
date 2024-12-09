@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Loại torrent thay đổi thành công';
 $lang['DEL_TORRENT'] = 'Bạn có chắc chắn muốn xóa torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Bạn có chắc chắn muốn xóa và di chuyển chủ đề?';
 $lang['UNEXECUTED_RELEASE'] = 'Bạn đã có một hình thù hành trước khi tạo ra một mới sửa chữa mình vẫn!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Thay đổi tình trạng của phân phối - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Làm bạc';
 $lang['UNSET_SILVER_TORRENT'] = 'Thay đổi bạc';
 $lang['GOLD_STATUS'] = 'VÀNG TORRENT! TẢI VỀ GIAO THÔNG KHÔNG XEM XÉT!';
 $lang['SILVER_STATUS'] = 'BẠC TORRENT! TẢI VỀ GIAO THÔNG MỘT PHẦN COI!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Tìm kiếm trong các diễn Đàn';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Chủ đề:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Bài:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
