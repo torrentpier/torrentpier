@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = '类型的种子成功地改变了';
 $lang['DEL_TORRENT'] = '你确定要删除的洪流？';
 $lang['DEL_MOVE_TORRENT'] = '你确定要删除和移动电话题？';
 $lang['UNEXECUTED_RELEASE'] = '你有一个无形的释放之前建立一个新的解决他的未成形的！';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '改变现状的分配%s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = '让银';
 $lang['UNSET_SILVER_TORRENT'] = '废除银';
 $lang['GOLD_STATUS'] = '金TORRENT! 下载业务，不会考虑的！';
 $lang['SILVER_STATUS'] = '银TORRENT! 下载业务部分审议了！';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = '搜索在论坛';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => '主题：<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => '员额：<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
