@@ -21,7 +21,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public $smilies;
+    public array $smilies;
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
@@ -338,7 +338,8 @@ class BBCode
     {
         global $datastore;
 
-        if (null === $this->smilies) {
+        if (!$this->smilies = $datastore->get('smile_replacements')) {
+            $datastore->update('smile_replacements');
             $this->smilies = $datastore->get('smile_replacements');
         }
 
