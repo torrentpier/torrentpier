@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip bujica je uspješno promijenjen';
 $lang['DEL_TORRENT'] = 'Jeste li sigurni da želite ukloniti torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeste li sigurni da želite ukloniti i premjesti temu?';
 $lang['UNEXECUTED_RELEASE'] = 'Imate bezobličan izdanju, prije nego što stvorite novi Fix неоформленном!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Promjena statusa iz ruke - %s';
@@ -1473,6 +1474,7 @@ $lang['SET_SILVER_TORRENT'] = 'Srebro';
 $lang['UNSET_SILVER_TORRENT'] = 'Afektirati srebro';
 $lang['GOLD_STATUS'] = 'ZLATNI TORRENT! PREUZIMANJE PROMET NE VJERUJE!';
 $lang['SILVER_STATUS'] = 'SILVER TORRENT! PREUZIMANJE PROMETA DJELOMIČNO OBUHVAĆENO!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Pretraživanje foruma';
@@ -2814,6 +2816,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Tema:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Položaj:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
