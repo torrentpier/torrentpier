@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Տեսակը торрента հաջողությամ
 $lang['DEL_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել հեղեղ?';
 $lang['DEL_MOVE_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել և տեղափոխել թեման?';
 $lang['UNEXECUTED_RELEASE'] = 'Դուք ունեք бесформенные հաղորդագրություն է տարածել, նախքան ստեղծել նոր Fix неоформленном!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Կարգավիճակի փոփոխությունը բաժանելու - %s';
@@ -1473,6 +1474,7 @@ $lang['SET_SILVER_TORRENT'] = 'Արծաթ';
 $lang['UNSET_SILVER_TORRENT'] = 'Համասեռամոլների արծաթ';
 $lang['GOLD_STATUS'] = 'ՈՍԿԵ ՀԵՂԵՂ! ԲԵՌՆԵԼ ԵՐԹԵՒԵԿՈՒԹՅՈՒՆԸ ՉԻ ՀԱՄԱՐՈՒՄ!';
 $lang['SILVER_STATUS'] = 'ԱՐԾԱԹԵ ՀԵՂԵՂ! ԲԵՌՆԵԼ ԵՐԹԵՒԵԿՈՒԹՅՈՒՆԸ ՄԱՍԱՄԲ ՔՆՆԱՐԿՎՈՒՄ ԵՆ!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Փնտրում ֆորումներում';
@@ -2814,6 +2816,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Թեմա:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Պաշտոնը:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
