@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.5 🍧️ ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1705](https://github.com/torrentpier/torrentpier/pull/1705) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1704](https://github.com/torrentpier/torrentpier/pull/1704) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.5-rc.1](https://github.com/torrentpier/torrentpier/tree/v2.4.5-rc.1) (2024-12-08)
