@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tür torrent başarıyla değiştirildi';
 $lang['DEL_TORRENT'] = 'Torrent silmek istediğinizden emin misiniz?';
 $lang['DEL_MOVE_TORRENT'] = 'Silmek ve konuyu taşımak istediğinizden emin misiniz?';
 $lang['UNEXECUTED_RELEASE'] = 'Şekilsiz bir sürüm var yeni bir düzeltme oluşmamış onun oluşturmadan önce!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Dağıtım statüsünün değiştirilmesi - %s';
@@ -1474,6 +1475,7 @@ $lang['SET_SILVER_TORRENT'] = 'Gümüş olun';
 $lang['UNSET_SILVER_TORRENT'] = 'Yapamazsınız Gümüş';
 $lang['GOLD_STATUS'] = 'ALTIN TORRENT! İNDİR TRAFİK DİKKATE ALMAZ.';
 $lang['SILVER_STATUS'] = 'GÜMÜŞ TORRENT! İNDİR TRAFİK KISMEN KABUL!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Forumlarda arama';
@@ -2815,6 +2817,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Konu:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Gönderen:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
