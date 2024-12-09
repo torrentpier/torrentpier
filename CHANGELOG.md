@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.5 🍧️ ([belomaxorka](https://github.com/belomaxorka))
+- Fixed datastore issues [\#1707](https://github.com/torrentpier/torrentpier/pull/1707) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1705](https://github.com/torrentpier/torrentpier/pull/1705) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1704](https://github.com/torrentpier/torrentpier/pull/1704), [\#1706](https://github.com/torrentpier/torrentpier/pull/1706) ([Exileum](https://github.com/Exileum))
 

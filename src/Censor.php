@@ -46,10 +46,6 @@ class Censor
             $censoredWords = $datastore->get('censor');
         }
 
-        if (isset($censoredWords['no_words'])) {
-            return;
-        }
-
         foreach ($censoredWords as $word) {
             $this->words[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($word['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
             $this->replacements[] = $word['replacement'];
