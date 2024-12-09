@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tapez le torrent modifié avec succès';
 $lang['DEL_TORRENT'] = 'Êtes-vous sûr de vouloir supprimer le torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Êtes-vous sûr que vous voulez supprimer et de déplacer le sujet?';
 $lang['UNEXECUTED_RELEASE'] = 'Avez-vous un informe libération avant de créer un nouveau correctif son informes!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'La modification de l\'état de la distribution - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Faire de l\'argent';
 $lang['UNSET_SILVER_TORRENT'] = 'Abolir l\'argent';
 $lang['GOLD_STATUS'] = 'OR TORRENT! TÉLÉCHARGER LE TRAFIC NE CONSIDÈRE PAS!';
 $lang['SILVER_STATUS'] = 'DE L\'ARGENT EN TORRENT! TÉLÉCHARGER LE TRAFIC PARTIELLEMENT CONSIDÉRÉS!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Recherche dans les Forums';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Sujet:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
