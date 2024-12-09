@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Lloji përrua me sukses ndryshuar';
 $lang['DEL_TORRENT'] = 'A jeni të sigurt që ju doni të fshini përrua?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeni i sigurt që dëshironi të fshini dhe për të shkuar temë?';
 $lang['UNEXECUTED_RELEASE'] = 'A keni një shapeless lirimin e para duke krijuar një re të rregulluar tij paformuar!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ndryshimin e statusit të shpërndarjes - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Bëni argjendi';
 $lang['UNSET_SILVER_TORRENT'] = 'UnMake argjendi';
 $lang['GOLD_STATUS'] = 'ARI TORRENT! SHKARKO TRAFIKUT NUK E KONSIDEROJNË!';
 $lang['SILVER_STATUS'] = 'SILVER PËRRUA! SHKARKO TRAFIKUT PJESËRISHT KONSIDEROHET!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Kërkimi në Forume';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Temë:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

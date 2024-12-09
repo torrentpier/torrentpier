@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tik die torrent suksesvol verander';
 $lang['DEL_TORRENT'] = 'Is jy seker jy wil die torrent uitvee?';
 $lang['DEL_MOVE_TORRENT'] = 'Is jy seker jy wil die onderwerp uitvee en skuif?';
 $lang['UNEXECUTED_RELEASE'] = 'Het jy \'n vormlose vrylating voordat jy \'n nuwe oplossing sy ongevormde!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Die status van verspreiding verander - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Maak silwer';
 $lang['UNSET_SILVER_TORRENT'] = 'Maak silwer';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! DOWNLOAD VERKEER NIE OORWEEG NIE!';
 $lang['SILVER_STATUS'] = 'SILVER TORRENT! DOWNLOAD TRAFFIC PARTIALLY CONSIDERED!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Soek in forums';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Onderwerp: <br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Pos: <br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

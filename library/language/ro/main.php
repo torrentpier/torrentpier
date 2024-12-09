@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip torrent schimbat cu succes';
 $lang['DEL_TORRENT'] = 'Ești sigur că doriți să ștergeți de pe torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ești sigur că doriți să ștergeți și pentru a muta acest subiect?';
 $lang['UNEXECUTED_RELEASE'] = 'Ai o informă de presă înainte de a crea un nou remediu lui neformate!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Schimbarea statutului de distribuție - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Silver';
 $lang['UNSET_SILVER_TORRENT'] = 'Desface argint';
 $lang['GOLD_STATUS'] = 'AUR TORRENT! DESCĂRCAȚI TRAFIC NU IA ÎN CONSIDERARE!';
 $lang['SILVER_STATUS'] = 'ARGINT TORRENT! DESCĂRCAȚI TRAFIC PARȚIAL LUATE ÎN CONSIDERARE!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Căutare în Forumuri';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Subiect:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

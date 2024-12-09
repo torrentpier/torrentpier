@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'टरेंट सफलतापूर्वक �
 $lang['DEL_TORRENT'] = 'क्या आप निश्चित रूप से धार को हटाना चाहते हैं?';
 $lang['DEL_MOVE_TORRENT'] = 'क्या आप वाकई विषय को हटाना चाहते हैं?';
 $lang['UNEXECUTED_RELEASE'] = 'क्या आपके पास एक नया निर्बाध बनाने से पहले एक निर्बाध रिलीज है?';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'वितरण की स्थिति बदलने - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'चांदी बनाओ';
 $lang['UNSET_SILVER_TORRENT'] = 'चांदी को अनमॅक करें';
 $lang['GOLD_STATUS'] = 'स्वर्ण टॉरेंट! डाउनलोड ट्रैफिक नहीं मानता है!';
 $lang['SILVER_STATUS'] = 'चांदी टॉरेंट! डाउनलोड किए जाने वाले ट्रैफिक पार्टिशन';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'फ़ोरम में खोजें';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'विषय: <br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'पोस्ट: <br /> <b> हटाए गए 1233_2_2_321',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

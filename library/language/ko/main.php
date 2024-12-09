@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = '입력 토런트를 성공적으로 변경된';
 $lang['DEL_TORRENT'] = '당신은 당신을 삭제하려면 토렌트니까?';
 $lang['DEL_MOVE_TORRENT'] = '당신은 당신을 삭제 이동합니다.';
 $lang['UNEXECUTED_RELEASE'] = '당신이 볼는 출시하기 전에 새로 만드는 수정의 형상이 없는!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '의 상태를 변경 분포-%s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = '을 실버';
 $lang['UNSET_SILVER_TORRENT'] = '부술 실버';
 $lang['GOLD_STATUS'] = '금 토렌트! 다운로드 소통량을 고려하지 않습니다!';
 $lang['SILVER_STATUS'] = '실버트 토런트! 다운로드 트래픽 부분적으로 간주됩니다!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = '포럼에서 검색';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => '주제:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => '게시물:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

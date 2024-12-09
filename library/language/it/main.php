@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Digitare il torrent cambiato con successo';
 $lang['DEL_TORRENT'] = 'Sei sicuro di voler cancellare il torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Sei sicuro di voler eliminare e spostare l\'argomento?';
 $lang['UNEXECUTED_RELEASE'] = 'Hai un informe di rilascio prima di creare un nuovo fix sua informe!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Cambiare lo stato di distribuzione - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Argento';
 $lang['UNSET_SILVER_TORRENT'] = 'Disfare argento';
 $lang['GOLD_STATUS'] = 'ORO TORRENT! SCARICA IL TRAFFICO NON PRENDERE IN CONSIDERAZIONE!';
 $lang['SILVER_STATUS'] = 'ARGENTO TORRENT! SCARICA IL TRAFFICO IN PARTE CONSIDERATO!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Cerca nel Forum';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Argomento:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post di:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

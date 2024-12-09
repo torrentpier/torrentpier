@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Typ torrent úspešne zmenený';
 $lang['DEL_TORRENT'] = 'Ste si istý, že chcete vymazať torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ste si istý, že chcete zrušiť a presunúť tému?';
 $lang['UNEXECUTED_RELEASE'] = 'Máte beztvaré uvoľnenie pred vytvorením nové opraviť jeho nedokončený!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Zmena stavu distribúcie - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Aby sa striebro';
 $lang['UNSET_SILVER_TORRENT'] = 'UnMake striebro';
 $lang['GOLD_STATUS'] = 'ZLATO TORRENT! DOWNLOAD PREVÁDZKY NEPOVAŽUJE!';
 $lang['SILVER_STATUS'] = 'STRIEBRO TORRENT! DOWNLOAD PREVÁDZKY ČIASTOČNE POVAŽOVAŤ!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Vyhľadávanie vo Fóre';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Téma:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Príspevok:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',

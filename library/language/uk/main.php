@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Тип торрента успішно змінен�
 $lang['DEL_TORRENT'] = 'Ви впевнені, що хочете видалити торрент?';
 $lang['DEL_MOVE_TORRENT'] = 'Ви впевнені, що хочете видалити та перемістити тему?';
 $lang['UNEXECUTED_RELEASE'] = 'У Вас є недооформлений реліз, перш ніж створювати новий - виправте свій недооформлений!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Зміна статусу роздачі - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Зробити срібним';
 $lang['UNSET_SILVER_TORRENT'] = 'Зняти срібло';
 $lang['GOLD_STATUS'] = 'ЗОЛОТА РОЗДАЧА! ЗАВАНТАЖЕНЕ НЕ ЗАРАХОВУЄТЬСЯ!';
 $lang['SILVER_STATUS'] = 'СРІБНА РОЗДАЧА! ЗАВАНТАЖЕНЕ ЗАРАХОВУЄТЬСЯ ЛИШЕ НАПОЛОВИНУ!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Шукати на форумах';
@@ -1672,7 +1674,7 @@ $lang['SEND_PM_TXTB'] = '[ПП]';
 
 $lang['DECLENSION']['REPLIES'] = ['відповідь', 'відповіді'];
 $lang['DECLENSION']['TIMES'] = ['раз', 'разів'];
-$lang['DECLENSION']['FILES'] = ['file', 'files'];
+$lang['DECLENSION']['FILES'] = ['файл', 'файли'];
 
 $lang['DELTA_TIME']['INTERVALS'] = [
     'seconds' => ['секунда', 'секунд'],
@@ -1721,7 +1723,7 @@ $lang['FILELIST'] = 'Список файлів';
 $lang['COLLAPSE'] = 'Згорнути теку';
 $lang['EXPAND'] = 'Розгорнути';
 $lang['SWITCH'] = 'Перейти';
-$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Increase/decrease the window';
+$lang['TOGGLE_WINDOW_FULL_SIZE'] = 'Збільшення/зменшення вікна';
 $lang['EMPTY_ATTACH_ID'] = 'Відсутній ідентифікатор файла!';
 $lang['TOR_NOT_FOUND'] = 'Файл відсутній на сервері!';
 $lang['ERROR_BUILD'] = 'Вміст даного торрент-файлу не може бути переглянуто на сайті (не вдалося вибудувати список файлів)';
@@ -1805,8 +1807,8 @@ $lang['OFF'] = 'вимк';
 $lang['MEMORY'] = 'Пам\'ять: ';
 $lang['QUERIES'] = 'запити';
 $lang['LIMIT'] = 'Ліміт:';
-$lang['SHOW_LOG'] = 'Show log';
-$lang['EXPLAINED_LOG'] = 'Explained log';
+$lang['SHOW_LOG'] = 'Показати журнал';
+$lang['EXPLAINED_LOG'] = 'Пояснений журнал';
 $lang['CUT_LOG'] = 'Cut long queries';
 
 // Attach Guest
@@ -1960,8 +1962,8 @@ $lang['NOT_AVAILABLE'] = 'Недоступне';
 
 // Clear Cache
 $lang['DATASTORE'] = 'Datastore';
-$lang['CLEAR_CACHE'] = 'Cache';
-$lang['CLEAR_TEMPLATES_CACHE'] = 'Templates cache';
+$lang['CLEAR_CACHE'] = 'Кеш';
+$lang['CLEAR_TEMPLATES_CACHE'] = 'Кеш шаблонів';
 
 // Update
 $lang['USER_LEVELS'] = 'Рівні користувачів';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Тема:<br /> <b>розділена</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Пост:<br /> <b>видалено</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
