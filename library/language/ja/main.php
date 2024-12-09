@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'タイプは、激流の変更に成功';
 $lang['DEL_TORRENT'] = 'Are you sure you want to deleteの激流すか？';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you wantへの削除に移動する！';
 $lang['UNEXECUTED_RELEASE'] = 'い型レスリリース前を修正彼unformedす！';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '変化する状況の分布-%s';
@@ -1474,6 +1475,7 @@ $lang['SET_SILVER_TORRENT'] = '作銀';
 $lang['UNSET_SILVER_TORRENT'] = 'UnMake銀';
 $lang['GOLD_STATUS'] = '金激流です！ ダウンロードの交通とは考えておりません!';
 $lang['SILVER_STATUS'] = '銀激流です！ ダウンロードは交通部分的に考慮す！';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = '検索フォーラム';
@@ -2815,6 +2817,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'トピック：<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
