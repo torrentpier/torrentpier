@@ -1436,6 +1436,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tipas torrent pakeistas sėkmingai';
 $lang['DEL_TORRENT'] = 'Ar jūs tikrai norite ištrinti torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ar jūs tikrai norite ištrinti ir perkelti tema?';
 $lang['UNEXECUTED_RELEASE'] = 'Ar turite beformė spaudai prieš kurdami naują išspręsti savo nesuformuluota!';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Statuso keitimo platinimo - %s';
@@ -1470,6 +1471,7 @@ $lang['SET_SILVER_TORRENT'] = 'Padaryti sidabrinė';
 $lang['UNSET_SILVER_TORRENT'] = 'UnMake sidabrinė';
 $lang['GOLD_STATUS'] = 'AUKSO TORRENT! ATSISIŲSTI EISMO NEMANO!';
 $lang['SILVER_STATUS'] = 'SIDABRO TORRENT! ATSISIŲSTI SKRYDŽIŲ IŠ DALIES LAIKYTI!';
+$lang['TOR_TYPE_LOG_ACTION'] = 'Torrent type changed to: %s';
 
 $lang['TORRENT_STATUS'] = 'Search by status of release';
 $lang['SEARCH_IN_FORUMS'] = 'Paieška forume';
@@ -2811,6 +2813,9 @@ $lang['LOG_ACTION']['LOG_TYPE'] = [
     'mod_topic_split' => 'Tema:<br /> <b>split</b>',
     'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
     'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
     'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
     'mod_post_delete' => 'Paštu:<br /> <b>deleted</b>',
     'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
