@@ -3,8 +3,33 @@
     <li>{L_BT_FLIST_CREATION_DATE}: <b>{TORRENT_CREATION_DATE}</b></li>
     <li>{L_DL_CLIENT}: <b>{TORRENT_CLIENT}</b></li>
 </ul>
-<br>
+<br />
 
+<h1 class="pagetitle">Announcers list</h1>
+<table class="forumline">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Announcers</th>
+    </tr>
+    </thead>
+    <!-- BEGIN announcers -->
+    <tbody>
+    <tr class="{announcers.ROW_CLASS} tCenter">
+        <td>{announcers.ROW_NUMBER}</td>
+        <td>{announcers.ANNOUNCER}</td>
+    </tr>
+    </tbody>
+    <!-- END announcers -->
+    <tfoot>
+    <tr>
+        <td class="catBottom warnColor1" colspan="2"></td>
+    </tr>
+    </tfoot>
+</table>
+<br />
+
+<h1 class="pagetitle">File list</h1>
 <table class="forumline">
     <thead>
     <tr>
