@@ -29,7 +29,7 @@
 </table>
 <br />
 
-<h1 class="pagetitle">File list</h1>
+<h1 class="pagetitle">{L_BT_FLIST}</h1>
 <table class="forumline">
     <thead>
     <tr>
