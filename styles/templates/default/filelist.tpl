@@ -5,12 +5,12 @@
 </ul>
 <br />
 
-<h1 class="pagetitle">Announcers list</h1>
+<h1 class="pagetitle">{L_BT_FLIST_ANNOUNCERS_LIST}</h1>
 <table class="forumline">
     <thead>
     <tr>
         <th>#</th>
-        <th>Announcers</th>
+        <th>{L_BT_FLIST_ANNOUNCERS}</th>
     </tr>
     </thead>
     <!-- BEGIN announcers -->
