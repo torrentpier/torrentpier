@@ -98,7 +98,6 @@ $torrent_size = humn_size($row['size'], 2);
 
 // Get announcers list
 $announcers_list = $torrent->getAnnounceList()->toArray();
-
 $announcers_count = 0;
 foreach ($announcers_list as $announcer) {
     $announcers_count++;
