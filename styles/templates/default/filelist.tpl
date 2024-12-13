@@ -23,7 +23,7 @@
     <!-- END announcers -->
     <tfoot>
     <tr>
-        <td class="catBottom warnColor1" colspan="2"></td>
+        <td class="catBottom warnColor1" colspan="2">{L_BT_FLIST_ANNOUNCERS_NOTICE}</td>
     </tr>
     </tfoot>
 </table>
