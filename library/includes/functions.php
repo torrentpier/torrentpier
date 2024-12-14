@@ -1812,7 +1812,7 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key, 
     }
 
     // Only for registered users
-    if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
+    if (!$bb_cfg['magnet_links_for_guests'] && IS_GUEST) {
         return false;
     }
 

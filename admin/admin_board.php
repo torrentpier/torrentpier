@@ -61,6 +61,7 @@ switch ($mode) {
             'CONFIG_MODS' => true,
 
             'MAGNET_LINKS_ENABLED' => $new['magnet_links_enabled'],
+            'MAGNET_LINKS_FOR_GUESTS' => $new['magnet_links_for_guests'],
             'GENDER' => $new['gender'],
             'CALLSEED' => $new['callseed'],
             'TOR_STATS' => $new['tor_stats'],
