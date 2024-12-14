@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Növü torrent uğurla dəyişdi';
 $lang['DEL_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Siz əmin deyilsinizsə aradan qaldırılması və hərəkət mövzu?';
 $lang['UNEXECUTED_RELEASE'] = 'Var бесформенные azad yaradılması əvvəl yeni Fix неоформленном!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Status paylanması - %s';
