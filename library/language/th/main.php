@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'ไม่สามารถลงทะเบียน�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'อีกทอร์เรนต์กับเดียวกัน info_hash แล้ว <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ลบออกจากแทร็กเกอร์';
 $lang['BT_UNREGISTERED'] = 'ทอร์เรนต์ไม่จดทะเบี';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'เมล็ดพันธ์';
 $lang['LEECHING'] = 'ดูดเลือ';
 $lang['IS_REGISTERED'] = 'จดทะเบียน';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!ความสนใจ!';
 $lang['COPY'] = 'เว็บไซต์ไม่ได้ให้อิเล็กทรอนิกส์รุ่นของผลิตภัณฑ์และเป็นคู่หมั้นของเดียวที่อยู่ในนรวบรวมและ cataloguing ที่จะอ้างอิงไปยังส่งและตีพิมพ์ที่อภิปรายของเราอ่าน ถ้าคุณเป็นเจ้าของร้านถูกกฏหมายของส่งวัสดุและไม่ต้องนั่งที่อ้างอิงไปมันเป็นของเราแคตตาล็อติดต่อเราและพวกเราจะไปทันทีเลยอมลบเธอออก แฟ้มสำหรับการแลกเปลี่ยนบนแทร็กเกอร์ได้รับโดยผู้ใช้ของเว็บไซต์และคณะกรรมการไม่มีความรับผิดชอบสำหรับพวกเขาต้องดูแลรักษาเรือเนี่ย สิ่งที่ร้องขอมาต้องการให้ไม่ได้งั้นเติมคำลงในแฟ้มได้รับการปกป้องจาก copyrights และยังแฟ้มของผิดกฏหมายงเชียว!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'ย่อเก็บไดเรกทอรี';
 $lang['EXPAND'] = 'ขยายรายการ';
 $lang['SWITCH'] = 'เปลี่ยน';
