@@ -172,7 +172,7 @@
 			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
-			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
+			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_BT_FLIST}" /></p>
 			<!-- BEGIN tor_server -->
 			<!-- IF postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK -->
 			<hr>

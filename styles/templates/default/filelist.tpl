@@ -2,9 +2,35 @@
 <ul>
     <li>{L_BT_FLIST_CREATION_DATE}: <b>{TORRENT_CREATION_DATE}</b></li>
     <li>{L_DL_CLIENT}: <b>{TORRENT_CLIENT}</b></li>
+    <li>{L_BT_IS_PRIVATE}: <b>{TORRENT_PRIVATE}</b></li>
 </ul>
-<br>
+<br/>
 
+<h1 class="pagetitle">{L_BT_FLIST_ANNOUNCERS_LIST}</h1>
+<table class="forumline">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>{L_BT_FLIST_ANNOUNCERS}</th>
+    </tr>
+    </thead>
+    <!-- BEGIN announcers -->
+    <tbody>
+    <tr class="{announcers.ROW_CLASS} tCenter">
+        <td>{announcers.ROW_NUMBER}</td>
+        <td>{announcers.ANNOUNCER}</td>
+    </tr>
+    </tbody>
+    <!-- END announcers -->
+    <tfoot>
+    <tr>
+        <td class="catBottom warnColor1" colspan="2">{L_BT_FLIST_ANNOUNCERS_NOTICE}</td>
+    </tr>
+    </tfoot>
+</table>
+<br/>
+
+<h1 class="pagetitle">{L_BT_FLIST}</h1>
 <table class="forumline">
     <thead>
     <tr>
