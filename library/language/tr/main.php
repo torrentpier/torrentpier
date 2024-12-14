@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'İzci torrent kaydedilemedi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Aynı info_hash ile başka bir torrent zaten <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'İzleyiciden Kaldır';
 $lang['BT_UNREGISTERED'] = 'Torrent kayıtsız';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Tohum';
 $lang['LEECHING'] = 'Sülük';
 $lang['IS_REGISTERED'] = 'Kayıtlı';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1723,7 +1729,6 @@ $lang['NOTICE'] = '!DİKKAT!';
 $lang['COPY'] = 'Site ürünlerin elektronik sürümleri vermez, ve sadece gönderilen ve bir forumda okuyucularımız tarafından yayınlanan başvuruları toplama ve kataloglama yapmaktadır. Eğer herhangi bir materyalin yasal sahibi olup olmadığını ve başvuruyu kataloğumuzda olduğunu istemiyorsanız, bize ulaşın ve hemen onu ortadan kaldıralım. İzleyici üzerinde bir değişim için dosyaları sitesinin kullanıcıları tarafından verilen ve yönetimi bakımı için sorumluluk taşımaz. İstek telif hakkı ile korunan dosyaları doldurmak için değil, aynı zamanda yasadışı bakım dosyaları.';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Çöküş dizini';
 $lang['EXPAND'] = 'Genişletin';
 $lang['SWITCH'] = 'Anahtarı';
