@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = '类型的种子成功地改变了';
 $lang['DEL_TORRENT'] = '你确定要删除的洪流？';
 $lang['DEL_MOVE_TORRENT'] = '你确定要删除和移动电话题？';
 $lang['UNEXECUTED_RELEASE'] = '你有一个无形的释放之前建立一个新的解决他的未成形的！';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '改变现状的分配%s';
