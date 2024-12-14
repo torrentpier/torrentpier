@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Πληκτρολογήστε το torrent με επ�
 $lang['DEL_TORRENT'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε το torrent;';
 $lang['DEL_MOVE_TORRENT'] = 'Είστε σίγουρος ότι θέλετε να διαγράψετε και να μετακινήσετε το θέμα;';
 $lang['UNEXECUTED_RELEASE'] = 'Έχετε μια άμορφη απελευθέρωση πριν από τη δημιουργία ένα νέο φτιάξει το αδιαμόρφωτο!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Η αλλαγή του καθεστώτος διανομής - %s';
