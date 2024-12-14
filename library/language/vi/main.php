@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Loại torrent thay đổi thành công';
 $lang['DEL_TORRENT'] = 'Bạn có chắc chắn muốn xóa torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Bạn có chắc chắn muốn xóa và di chuyển chủ đề?';
 $lang['UNEXECUTED_RELEASE'] = 'Bạn đã có một hình thù hành trước khi tạo ra một mới sửa chữa mình vẫn!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Thay đổi tình trạng của phân phối - %s';
