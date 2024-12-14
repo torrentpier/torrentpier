@@ -436,7 +436,7 @@ if ($view === 'attachments') {
                 }
             }
 
-            $post_titles = implode('<br />', $post_titles);
+            $post_titles = implode('<br/>', $post_titles);
 
             $hidden_field = '<input type="hidden" name="attach_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 

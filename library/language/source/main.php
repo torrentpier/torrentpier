@@ -241,8 +241,8 @@ $lang['RULES_VOTE_CAN'] = 'You <b>can</b> vote in polls in this forum';
 $lang['RULES_VOTE_CANNOT'] = 'You <b>cannot</b> vote in polls in this forum';
 $lang['RULES_MODERATE'] = 'You <b>can</b> moderate this forum';
 
-$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br />Click on the <b>New Topic</b> icon, and your post will be the first.';
-$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br />Click on the <b>New Release</b> icon, and your release will be the first.';
+$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum yet<br/>Click on the <b>New Topic</b> icon, and your post will be the first.';
+$lang['NO_RELEASES_POST_ONE'] = 'There are no releases in this forum yet<br/>Click on the <b>New Release</b> icon, and your release will be the first.';
 
 // Viewtopic
 $lang['VIEW_TOPIC'] = 'View topic';
@@ -471,7 +471,7 @@ $lang['DISABLE_SMILIES_PM'] = 'Disable Smilies in this message';
 
 $lang['MESSAGE_SENT'] = '<b>Your message has been sent.</b>';
 
-$lang['CLICK_RETURN_INBOX'] = 'Return to your:<br /><br /> %s<b>Inbox</b>%s';
+$lang['CLICK_RETURN_INBOX'] = 'Return to your:<br/><br/> %s<b>Inbox</b>%s';
 $lang['CLICK_RETURN_SENTBOX'] = '&nbsp;&nbsp; %s<b>Sentbox</b>%s';
 $lang['CLICK_RETURN_OUTBOX'] = '&nbsp;&nbsp; %s<b>Outbox</b>%s';
 $lang['CLICK_RETURN_SAVEBOX'] = '&nbsp;&nbsp; %s<b>Savebox</b>%s';
@@ -498,9 +498,9 @@ $lang['UNMARK_ALL'] = 'Unmark all';
 $lang['CONFIRM_DELETE_PM'] = 'Are you sure you want to delete this message?';
 $lang['CONFIRM_DELETE_PMS'] = 'Are you sure you want to delete these messages?';
 
-$lang['INBOX_SIZE'] = 'Your Inbox is<br /><b>%d%%</b> full'; // e.g. Your Inbox is 50% full
-$lang['SENTBOX_SIZE'] = 'Your Sentbox is<br /><b>%d%%</b> full';
-$lang['SAVEBOX_SIZE'] = 'Your Savebox is<br /><b>%d%%</b> full';
+$lang['INBOX_SIZE'] = 'Your Inbox is<br/><b>%d%%</b> full'; // e.g. Your Inbox is 50% full
+$lang['SENTBOX_SIZE'] = 'Your Sentbox is<br/><b>%d%%</b> full';
+$lang['SAVEBOX_SIZE'] = 'Your Savebox is<br/><b>%d%%</b> full';
 
 $lang['CLICK_VIEW_PRIVMSG'] = 'Click %sHere%s to visit your Inbox';
 
@@ -742,7 +742,7 @@ $lang['NO_GROUP_ID_SPECIFIED'] = 'Group ID is not specified';
 $lang['NO_GROUP_MEMBERS'] = 'This group has no members';
 $lang['HIDDEN_GROUP_MEMBERS'] = 'This group is hidden; you cannot view its membership';
 $lang['NO_PENDING_GROUP_MEMBERS'] = 'This group has no pending members';
-$lang['GROUP_JOINED'] = 'You have successfully subscribed to this group.<br />You will be notified when your subscription is approved by the group moderator.';
+$lang['GROUP_JOINED'] = 'You have successfully subscribed to this group.<br/>You will be notified when your subscription is approved by the group moderator.';
 $lang['GROUP_REQUEST'] = 'A request to join your group has been made.';
 $lang['GROUP_APPROVED'] = 'Your request has been approved.';
 $lang['GROUP_ADDED'] = 'You have been added to this usergroup.';
@@ -792,7 +792,7 @@ $lang['NOT_A_RELEASE_GROUP'] = 'This group is not a release group';
 
 // Search
 $lang['SEARCH_OFF'] = 'Search is temporarily disabled';
-$lang['SEARCH_ERROR'] = 'At the moment, the search engine is not available<br /><br />Try to repeat the request after several seconds';
+$lang['SEARCH_ERROR'] = 'At the moment, the search engine is not available<br/><br/>Try to repeat the request after several seconds';
 $lang['SEARCH_HELP_URL'] = 'Search Help';
 $lang['SEARCH_QUERY'] = 'Search Query';
 $lang['SEARCH_OPTIONS'] = 'Search Options';
@@ -1310,11 +1310,11 @@ $lang['UPLOAD_NEW_VERSION'] = 'Upload New Version';
 
 // Errors -> Posting Attachments
 $lang['INVALID_FILENAME'] = '%s is an invalid filename'; // replace %s with given filename
-$lang['ATTACHMENT_PHP_SIZE_NA'] = 'The Attachment is too big.<br />Could not get the maximum Size defined in PHP.<br />The Attachment Mod is unable to determine the maximum Upload Size defined in the php.ini.';
-$lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'The Attachment is too big.<br />Maximum Upload Size: %d MB.<br />Please note that this Size is defined in php.ini, this means it\'s set by PHP and the Attachment Mod can not override this value.'; // replace %d with ini_get('upload_max_filesize')
+$lang['ATTACHMENT_PHP_SIZE_NA'] = 'The Attachment is too big.<br/>Could not get the maximum Size defined in PHP.<br/>The Attachment Mod is unable to determine the maximum Upload Size defined in the php.ini.';
+$lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'The Attachment is too big.<br/>Maximum Upload Size: %d MB.<br/>Please note that this Size is defined in php.ini, this means it\'s set by PHP and the Attachment Mod can not override this value.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'The Extension %s is not allowed'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'You are not allowed to post Files with the Extension %s within this Forum'; // replace %s with the Extension
-$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br />Max Size: %s'; // replace %d with maximum file size, %s with size var
+$lang['ATTACHMENT_TOO_BIG'] = 'The Attachment is too big.<br/>Max Size: %s'; // replace %d with maximum file size, %s with size var
 $lang['ATTACH_QUOTA_REACHED'] = 'Sorry, but the maximum filesize for all Attachments is reached. Please contact the Board Administrator if you have questions.';
 $lang['TOO_MANY_ATTACHMENTS'] = 'Attachment cannot be added, since the max. number of %d Attachments in this post was achieved'; // replace %d with maximum number of attachments
 $lang['ERROR_IMAGESIZE'] = 'The Attachment/Image must be less than %d pixels wide and %d pixels high';
@@ -1342,7 +1342,7 @@ $lang['ATTACHMENT_FEATURE_DISABLED'] = 'The Attachment Feature is disabled.';
 
 $lang['DIRECTORY_DOES_NOT_EXIST'] = 'The Directory \'%s\' does not exist or Could not be found.'; // replace %s with directory
 $lang['DIRECTORY_IS_NOT_A_DIR'] = 'Please check if \'%s\' is a directory.'; // replace %s with directory
-$lang['DIRECTORY_NOT_WRITEABLE'] = 'Directory \'%s\' is not writeable. You\'ll have to create the upload path and chmod it to 777 (or change the owner to you httpd-servers owner) to upload files.<br />If you have only plain FTP-access change the \'Attribute\' of the directory to rwxrwxrwx.'; // replace %s with directory
+$lang['DIRECTORY_NOT_WRITEABLE'] = 'Directory \'%s\' is not writeable. You\'ll have to create the upload path and chmod it to 777 (or change the owner to you httpd-servers owner) to upload files.<br/>If you have only plain FTP-access change the \'Attribute\' of the directory to rwxrwxrwx.'; // replace %s with directory
 
 // Quota Variables
 $lang['UPLOAD_QUOTA'] = 'Upload Quota';
@@ -1357,7 +1357,7 @@ $lang['ATTACH_SEARCH_QUERY'] = 'Search Attachments';
 $lang['TEST_SETTINGS'] = 'Test Settings';
 $lang['NOT_ASSIGNED'] = 'Not Assigned';
 $lang['NO_FILE_COMMENT_AVAILABLE'] = 'No File Comment available';
-$lang['ATTACHBOX_LIMIT'] = 'Your Attachbox is<br /><b>%d%%</b> full';
+$lang['ATTACHBOX_LIMIT'] = 'Your Attachbox is<br/><b>%d%%</b> full';
 $lang['NO_QUOTA_LIMIT'] = 'No Quota Limit';
 $lang['UNLIMITED'] = 'Unlimited';
 
@@ -1384,9 +1384,9 @@ $lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent 
 $lang['BT_UNREG_FROM_TRACKER'] = 'Remove from tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
-$lang['BT_REGISTERED'] = 'Torrent registered on tracker<br /><br />Now you need to <a href="%s"><b>download your torrent</b></a> and run it using your BitTorrent client choosing the folder with the original files you\'re sharing as the download path';
-$lang['INVALID_ANN_URL'] = 'Invalid Announce URL [%s]<br /><br />must be <b>%s</b>';
-$lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Could not add passkey<br /><br />Torrent not registered on tracker';
+$lang['BT_REGISTERED'] = 'Torrent registered on tracker<br/><br/>Now you need to <a href="%s"><b>download your torrent</b></a> and run it using your BitTorrent client choosing the folder with the original files you\'re sharing as the download path';
+$lang['INVALID_ANN_URL'] = 'Invalid Announce URL [%s]<br/><br/>must be <b>%s</b>';
+$lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Could not add passkey<br/><br/>Torrent not registered on tracker';
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'create a new';
 $lang['BT_PASSKEY_VIEW'] = 'show';
@@ -1577,7 +1577,7 @@ $lang['BONUS_SELECT'] = 'Select';
 $lang['SEED_BONUS'] = 'Seed bonus';
 $lang['EXCHANGE'] = 'Exchange';
 $lang['EXCHANGE_BONUS'] = 'Exchange of seed bonuses';
-$lang['BONUS_UPLOAD_DESC'] = '<b>%s to distribution</b> <br /> To exchange bonus points on %1$s traffic which will be added on to the sum of your distribution.';
+$lang['BONUS_UPLOAD_DESC'] = '<b>%s to distribution</b> <br/> To exchange bonus points on %1$s traffic which will be added on to the sum of your distribution.';
 $lang['BONUS_UPLOAD_PRICE'] = '<b class="%s">%s</b>';
 $lang['PRICE'] = 'Price';
 $lang['EXCHANGE_NOT'] = 'The exchange not available';
@@ -1799,7 +1799,7 @@ $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
 $lang['TERMS_ON'] = 'I agree with these terms and conditions';
 $lang['TERMS_OFF'] = 'I do not agree to these terms';
 $lang['JAVASCRIPT_ON_REGISTER'] = 'To register, heads necessary to enable JavaScript';
-$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (now " . date('H:i') . " MSK)<br /><br />We apologize for this inconvenience";
+$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br/><br/>You can register from 01:00 to 17:00 MSK (now " . date('H:i') . " MSK)<br/><br/>We apologize for this inconvenience";
 $lang['AUTOCOMPLETE'] = 'Password generate';
 $lang['YOUR_NEW_PASSWORD'] = 'Your are new password:';
 $lang['REGENERATE'] = 'Regenerate';
@@ -2374,7 +2374,7 @@ $lang['SYNC'] = 'Sync';
 // Mods
 $lang['MAX_NEWS_TITLE'] = 'Max. length of the news';
 $lang['NEWS_COUNT'] = 'How many news show';
-$lang['NEWS_FORUM_ID'] = 'From what forums to display <br /> <h6>Of the several forums raises, separated by commas. Example 1,2,3</h6>';
+$lang['NEWS_FORUM_ID'] = 'From what forums to display <br/> <h6>Of the several forums raises, separated by commas. Example 1,2,3</h6>';
 $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Statistics on the tracker';
 $lang['WHOIS_INFO'] = 'Information about IP address';
@@ -2483,9 +2483,9 @@ $lang['SETTINGS_CAT_FLASH'] = 'Settings for Special Category: Flash Files';
 $lang['DISPLAY_INLINED'] = 'Display Images Inlined';
 $lang['DISPLAY_INLINED_EXPLAIN'] = 'Choose whether to display images directly within the post (yes) or to display images as a link ?';
 $lang['MAX_IMAGE_SIZE'] = 'Maximum Image Dimensions';
-$lang['MAX_IMAGE_SIZE_EXPLAIN'] = 'Here you can define the maximum allowed Image Dimension to be attached (Width x Height in pixels).<br />If it is set to 0x0, this feature is disabled. With some Images this Feature will not work due to limitations in PHP.';
+$lang['MAX_IMAGE_SIZE_EXPLAIN'] = 'Here you can define the maximum allowed Image Dimension to be attached (Width x Height in pixels).<br/>If it is set to 0x0, this feature is disabled. With some Images this Feature will not work due to limitations in PHP.';
 $lang['IMAGE_LINK_SIZE'] = 'Image Link Dimensions';
-$lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'If this defined Dimension of an Image is reached, the Image will be displayed as a Link, rather than displaying it inlined,<br />if Inline View is enabled (Width x Height in pixels).<br />If it is set to 0x0, this feature is disabled. With some Images this Feature will not work due to limitations in PHP.';
+$lang['IMAGE_LINK_SIZE_EXPLAIN'] = 'If this defined Dimension of an Image is reached, the Image will be displayed as a Link, rather than displaying it inlined,<br/>if Inline View is enabled (Width x Height in pixels).<br/>If it is set to 0x0, this feature is disabled. With some Images this Feature will not work due to limitations in PHP.';
 $lang['ASSIGNED_GROUP'] = 'Assigned Group';
 
 $lang['IMAGE_CREATE_THUMBNAIL'] = 'Create Thumbnail';
@@ -2501,7 +2501,7 @@ $lang['EXTENSION_EXIST_FORBIDDEN'] = 'The Extension %s is defined in your allowe
 // Extensions -> Extension Groups Control -> Group Permissions
 $lang['GROUP_PERMISSIONS_TITLE_ADMIN'] = 'Extension Group Permissions -> \'%s\''; // Replace %s with the Groups Name
 $lang['GROUP_PERMISSIONS_EXPLAIN'] = 'Here you are able to restrict the selected Extension Group to Forums of your choice (defined in the Allowed Forums Box). The Default is to allow Extension Groups to all Forums the User is able to Attach Files into (the normal way the Attachment Mod did it since the beginning). Just add those Forums you want the Extension Group (the Extensions within this Group) to be allowed there, the default ALL FORUMS will disappear when you add Forums to the List. You are able to re-add ALL FORUMS at any given Time. If you add a Forum to your Board and the Permission is set to ALL FORUMS nothing will change. But if you have changed and restricted the access to certain Forums, you have to check back here to add your newly created Forum. It is easy to do this automatically, but this will force you to edit a bunch of Files, therefore i have chosen the way it is now. Please keep in mind, that all of your Forums will be listed here.';
-$lang['NOTE_ADMIN_EMPTY_GROUP_PERMISSIONS'] = 'NOTE:<br />Within the below listed Forums your Users are normally allowed to attach files, but since no Extension Group is allowed to be attached there, your Users are unable to attach anything. If they try, they will receive Error Messages. Maybe you want to set the Permission \'Post Files\' to ADMIN at these Forums.<br /><br />';
+$lang['NOTE_ADMIN_EMPTY_GROUP_PERMISSIONS'] = 'NOTE:<br/>Within the below listed Forums your Users are normally allowed to attach files, but since no Extension Group is allowed to be attached there, your Users are unable to attach anything. If they try, they will receive Error Messages. Maybe you want to set the Permission \'Post Files\' to ADMIN at these Forums.<br/><br/>';
 $lang['ADD_FORUMS'] = 'Add Forums';
 $lang['ADD_SELECTED'] = 'Add Selected';
 $lang['PERM_ALL_FORUMS'] = 'ALL FORUMS';
@@ -2709,11 +2709,11 @@ $lang['CLICK_RETURN_JOBS_ADDED'] = '%sReturn to the addition problem%s';
 $lang['CLICK_RETURN_JOBS'] = '%sBack to the Task Scheduler%s';
 
 $lang['REBUILD_SEARCH'] = 'Rebuild Search Index';
-$lang['REBUILD_SEARCH_DESC'] = 'This mod will index every post in your forum, rebuilding the search tables. You can stop whenever you like and the next time you run it again you\'ll have the option of continuing from where you left off.<br /><br />It may take a long time to show its progress (depending on "Posts per cycle" and "Time limit"), so please do not move from its progress page until it is complete, unless of course you want to interrupt it.';
+$lang['REBUILD_SEARCH_DESC'] = 'This mod will index every post in your forum, rebuilding the search tables. You can stop whenever you like and the next time you run it again you\'ll have the option of continuing from where you left off.<br/><br/>It may take a long time to show its progress (depending on "Posts per cycle" and "Time limit"), so please do not move from its progress page until it is complete, unless of course you want to interrupt it.';
 
 // Input screen
 $lang['STARTING_POST_ID'] = 'Starting post_id';
-$lang['STARTING_POST_ID_EXPLAIN'] = 'First post where processing will begin from<br />You can choose to start from the beginning or from the post you last stopped';
+$lang['STARTING_POST_ID_EXPLAIN'] = 'First post where processing will begin from<br/>You can choose to start from the beginning or from the post you last stopped';
 
 $lang['START_OPTION_BEGINNING'] = 'start from beginning';
 $lang['START_OPTION_CONTINUE'] = 'continue from last stopped';
@@ -2725,13 +2725,13 @@ $lang['CLEAR_SEARCH_DELETE'] = 'DELETE';
 $lang['CLEAR_SEARCH_TRUNCATE'] = 'TRUNCATE';
 
 $lang['NUM_OF_POSTS'] = 'Number of posts';
-$lang['NUM_OF_POSTS_EXPLAIN'] = 'Number of total posts to process<br />It\'s automatically filled with the number of total/remaining posts found in the db';
+$lang['NUM_OF_POSTS_EXPLAIN'] = 'Number of total posts to process<br/>It\'s automatically filled with the number of total/remaining posts found in the db';
 
 $lang['POSTS_PER_CYCLE'] = 'Posts per cycle';
-$lang['POSTS_PER_CYCLE_EXPLAIN'] = 'Number of posts to process per cycle<br />Keep it low to avoid php/webserver timeouts';
+$lang['POSTS_PER_CYCLE_EXPLAIN'] = 'Number of posts to process per cycle<br/>Keep it low to avoid php/webserver timeouts';
 
 $lang['REFRESH_RATE'] = 'Refresh rate';
-$lang['REFRESH_RATE_EXPLAIN'] = 'How much time (secs) to stay idle before moving to next processing cycle<br />Usually you don\'t have to change this';
+$lang['REFRESH_RATE_EXPLAIN'] = 'How much time (secs) to stay idle before moving to next processing cycle<br/>Usually you don\'t have to change this';
 
 $lang['TIME_LIMIT'] = 'Time limit';
 $lang['TIME_LIMIT_EXPLAIN'] = 'How much time (secs) post processing can last before moving to next cycle';
@@ -2748,7 +2748,7 @@ $lang['INFO_PROCESSING_STOPPED'] = 'You last stopped the processing at post_id %
 $lang['INFO_PROCESSING_ABORTED'] = 'You last aborted the processing at post_id %s (%s processed posts) on %s';
 $lang['INFO_PROCESSING_ABORTED_SOON'] = 'Please wait some mins before you continue...';
 $lang['INFO_PROCESSING_FINISHED'] = 'You successfully finished the processing (%s processed posts) on %s';
-$lang['INFO_PROCESSING_FINISHED_NEW'] = 'You successfully finished the processing at post_id %s (%s processed posts) on %s,<br />but there have been %s new post(s) after that date';
+$lang['INFO_PROCESSING_FINISHED_NEW'] = 'You successfully finished the processing at post_id %s (%s processed posts) on %s,<br/>but there have been %s new post(s) after that date';
 
 // Progress screen
 $lang['REBUILD_SEARCH_PROGRESS'] = 'Rebuild Search Progress';
@@ -2788,10 +2788,10 @@ $lang['ACTIVE_PARAMETERS'] = 'Active parameters';
 $lang['POSTS_LAST_CYCLE'] = 'Processed post(s) on last cycle';
 $lang['BOARD_STATUS'] = 'Board status';
 
-$lang['INFO_ESTIMATED_VALUES'] = '(*) All the estimated values are calculated approximately<br />based on the current completed percent and may not represent the actual final values.<br />As the completed percent increases the estimated values will come closer to the actual ones.';
+$lang['INFO_ESTIMATED_VALUES'] = '(*) All the estimated values are calculated approximately<br/>based on the current completed percent and may not represent the actual final values.<br/>As the completed percent increases the estimated values will come closer to the actual ones.';
 
 $lang['CLICK_RETURN_REBUILD_SEARCH'] = 'Click %shere%s to return to Rebuild Search';
-$lang['REBUILD_SEARCH_ABORTED'] = 'Rebuild search aborted at post_id %s.<br /><br />If you aborted while processing was on, you have to wait for some mins until you run Rebuild Search again, so the last cycle can finish.';
+$lang['REBUILD_SEARCH_ABORTED'] = 'Rebuild search aborted at post_id %s.<br/><br/>If you aborted while processing was on, you have to wait for some mins until you run Rebuild Search again, so the last cycle can finish.';
 $lang['WRONG_INPUT'] = 'You have entered some wrong values. Please check your input and try again.';
 
 // Buttons
@@ -2807,27 +2807,27 @@ $lang['CALLSEED_EXPLAIN'] = 'Take notice with a request to return to the distrib
 $lang['CALLSEED_SUBJECT'] = 'Download help %s';
 $lang['CALLSEED_TEXT'] = 'Hello![br]Your help is needed in the release [url=%s]%s[/url][br]If you decide to help, but already deleted the torrent file, you can download it [url=%s]this[/url][br][br]I hope for your help!';
 $lang['CALLSEED_MSG_OK'] = 'Message has been sent to all those who downloaded this release';
-$lang['CALLSEED_MSG_SPAM'] = 'Request has already been once successfully sent (Probably not you)<br /><br />The next opportunity to send a request to be <b>%s</b>.';
+$lang['CALLSEED_MSG_SPAM'] = 'Request has already been once successfully sent (Probably not you)<br/><br/>The next opportunity to send a request to be <b>%s</b>.';
 $lang['CALLSEED_HAVE_SEED'] = 'Topic does not require help (<b>Seeders:</b> %d)';
 
 $lang['LOG_ACTION']['LOG_TYPE'] = [
-    'mod_topic_delete' => 'Topic:<br /> <b>deleted</b>',
-    'mod_topic_move' => 'Topic:<br /> <b>moved</b>',
-    'mod_topic_lock' => 'Topic:<br /> <b>closed</b>',
-    'mod_topic_unlock' => 'Topic:<br /> <b>opened</b>',
-    'mod_topic_split' => 'Topic:<br /> <b>split</b>',
-    'mod_topic_set_downloaded' => 'Topic:<br /> <b>set downloaded</b>',
-    'mod_topic_unset_downloaded' => 'Topic:<br /> <b>unset downloaded</b>',
-    'mod_topic_change_tor_status' => 'Topic:<br /> <b>changed torrent status</b>',
-    'mod_topic_change_tor_type' => 'Topic:<br /> <b>changed torrent type</b>',
-    'mod_topic_tor_unregister' => 'Topic:<br /> <b>torrent unregistered</b>',
-    'mod_topic_renamed' => 'Topic:<br /> <b>renamed</b>',
-    'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
-    'mod_post_pin' => 'Post:<br /> <b>pinned</b>',
-    'mod_post_unpin' => 'Post:<br /> <b>unpinned</b>',
-    'adm_user_delete' => 'User:<br /> <b>deleted</b>',
-    'adm_user_ban' => 'User:<br /> <b>ban</b>',
-    'adm_user_unban' => 'User:<br /> <b>unban</b>',
+    'mod_topic_delete' => 'Topic:<br/> <b>deleted</b>',
+    'mod_topic_move' => 'Topic:<br/> <b>moved</b>',
+    'mod_topic_lock' => 'Topic:<br/> <b>closed</b>',
+    'mod_topic_unlock' => 'Topic:<br/> <b>opened</b>',
+    'mod_topic_split' => 'Topic:<br/> <b>split</b>',
+    'mod_topic_set_downloaded' => 'Topic:<br/> <b>set downloaded</b>',
+    'mod_topic_unset_downloaded' => 'Topic:<br/> <b>unset downloaded</b>',
+    'mod_topic_change_tor_status' => 'Topic:<br/> <b>changed torrent status</b>',
+    'mod_topic_change_tor_type' => 'Topic:<br/> <b>changed torrent type</b>',
+    'mod_topic_tor_unregister' => 'Topic:<br/> <b>torrent unregistered</b>',
+    'mod_topic_renamed' => 'Topic:<br/> <b>renamed</b>',
+    'mod_post_delete' => 'Post:<br/> <b>deleted</b>',
+    'mod_post_pin' => 'Post:<br/> <b>pinned</b>',
+    'mod_post_unpin' => 'Post:<br/> <b>unpinned</b>',
+    'adm_user_delete' => 'User:<br/> <b>deleted</b>',
+    'adm_user_ban' => 'User:<br/> <b>ban</b>',
+    'adm_user_unban' => 'User:<br/> <b>unban</b>',
 ];
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'All actions';
@@ -3084,7 +3084,7 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Check that you are not a robot';
 $lang['CAPTCHA_WRONG'] = 'You could not confirm that you are not a robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha not being fully configured</h2><p>If you haven\'t already generated the keys, you can do it on <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After you generate the keys, you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha not being fully configured</h2><p>If you haven\'t already generated the keys, you can do it on <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br/>After you generate the keys, you need to put them at the file library/config.php.</p>';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

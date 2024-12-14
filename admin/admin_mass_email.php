@@ -101,7 +101,7 @@ $template->assign_vars([
     'SUBJECT' => $subject,
     'REPLY_TO' => $reply_to,
 
-    'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
+    'ERROR_MESSAGE' => $errors ? implode('<br/>', array_unique($errors)) : '',
 
     'S_USER_ACTION' => 'admin_mass_email.php',
     'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups)

@@ -78,8 +78,8 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         // Delete Group
         \TorrentPier\Legacy\Group::delete_group($group_id);
 
-        $message = $lang['DELETED_GROUP'] . '<br /><br />';
-        $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
+        $message = $lang['DELETED_GROUP'] . '<br/><br/>';
+        $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br/><br/>';
         $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
         bb_die($message);
@@ -131,8 +131,8 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             // Update group's data
             DB()->query('UPDATE ' . BB_GROUPS . " SET $sql_args WHERE group_id = $group_id");
 
-            $message = $lang['UPDATED_GROUP'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
+            $message = $lang['UPDATED_GROUP'] . '<br/><br/>';
+            $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br/><br/>';
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
@@ -147,8 +147,8 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             // Create user_group for group's moderator
             \TorrentPier\Legacy\Group::add_user_into_group($new_group_id, $group_moderator);
 
-            $message = $lang['ADDED_NEW_GROUP'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
+            $message = $lang['ADDED_NEW_GROUP'] . '<br/><br/>';
+            $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br/><br/>';
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);

@@ -86,8 +86,8 @@ if ($submit && $mode == 'user') {
             // Delete any entries in auth_access, they are not required if user is becoming an admin
             \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
-            $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
+            $message = $lang['AUTH_UPDATED'] . '<br/><br/>';
+            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br/><br/>';
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
@@ -102,8 +102,8 @@ if ($submit && $mode == 'user') {
 
             \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
-            $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
+            $message = $lang['AUTH_UPDATED'] . '<br/><br/>';
+            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br/><br/>';
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
@@ -130,8 +130,8 @@ if ($submit && $mode == 'user') {
     \TorrentPier\Legacy\Group::update_user_level($user_id);
 
     $l_auth_return = ($mode == 'user') ? $lang['CLICK_RETURN_USERAUTH'] : $lang['CLICK_RETURN_GROUPAUTH'];
-    $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br /><br />';
+    $message = $lang['AUTH_UPDATED'] . '<br/><br/>';
+    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_USERS_URL . '=' . $user_id . '">', '</a>') . '<br/><br/>';
     $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
@@ -158,8 +158,8 @@ elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POS
     \TorrentPier\Legacy\Group::update_user_level('all');
 
     $l_auth_return = $lang['CLICK_RETURN_GROUPAUTH'];
-    $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_GROUPS_URL . '=' . $group_id . '">', '</a>') . '<br /><br />';
+    $message = $lang['AUTH_UPDATED'] . '<br/><br/>';
+    $message .= sprintf($l_auth_return, '<a href="admin_ug_auth.php?mode=' . $mode . '&' . POST_GROUPS_URL . '=' . $group_id . '">', '</a>') . '<br/><br/>';
     $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
@@ -255,7 +255,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     foreach ($forum_auth_fields as $auth_type) {
         $template->assign_block_vars('acltype', array(
-            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", $lang[strtoupper($auth_type)]),
+            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br/>", $lang[strtoupper($auth_type)]),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
         $s_column_span++;
@@ -370,7 +370,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     foreach ($forum_auth_fields as $auth_type) {
         $template->assign_block_vars('acltype', array(
-            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", $lang[strtoupper($auth_type)]),
+            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br/>", $lang[strtoupper($auth_type)]),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
         $s_column_span++;

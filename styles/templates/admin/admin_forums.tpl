@@ -19,7 +19,7 @@ function toggle_cat_list (val)
 <h1>{L_FORUM_TITLE}</h1>
 
 <p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_FORUM_ACTION}" name="frm">
 {S_HIDDEN_FIELDS}
@@ -93,7 +93,7 @@ function toggle_cat_list (val)
 <h1>{L_EDIT_CATEGORY}</h1>
 
 <p>{L_EDIT_CATEGORY_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_FORUM_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -123,7 +123,7 @@ function toggle_cat_list (val)
 <h1>{DELETE_TITLE}</h1>
 
 <p>{L_FORUM_DELETE_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_FORUM_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -179,7 +179,7 @@ function hl (id, on)
 <h1>{L_FORUM_TITLE} <!-- IF FORUMS_COUNT --><b class="gen">[{L_FORUMS_IN_CAT}: {FORUMS_COUNT}]</b><!-- ENDIF --></h1>
 
 <p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_FORUM_ACTION}">
 
@@ -234,9 +234,9 @@ function hl (id, on)
 
 </form>
 
-<br />
+<br/>
 <p><a href="{U_ALL_FORUMS}"><b>{L_SHOW_ALL_FORUMS_ON_ONE_PAGE}</b></a></p>
-<br />
+<br/>
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_FORUMS_LIST -->

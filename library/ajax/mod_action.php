@@ -156,7 +156,7 @@ switch ($mode) {
         }
 
         $this->response['ip_list_html'] = '
-			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
+			<br/><table class="mod_ip bCenter borderless" cellspacing="1">
 				<tr class="row5" >
 					<td>' . $lang['REG_IP'] . '</td>
 					<td class="tCenter">' . $reg_ip . '</td>
@@ -167,7 +167,7 @@ switch ($mode) {
 					<td class="tCenter">' . $last_ip . '</td>
 					<td><div>' . $link_last_ip . '</div></td>
 				</tr>
-			</table><br />
+			</table><br/>
 		';
         break;
 

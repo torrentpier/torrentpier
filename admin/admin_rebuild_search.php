@@ -51,7 +51,7 @@ if (isset($_REQUEST['cancel_button'])) {
 		");
     }
 
-    bb_die(sprintf($lang['REBUILD_SEARCH_ABORTED'], $last_session_data['end_post_id']) . '<br /><br />' . sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
+    bb_die(sprintf($lang['REBUILD_SEARCH_ABORTED'], $last_session_data['end_post_id']) . '<br/><br/>' . sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
 }
 
 // from which post to start processing
@@ -105,7 +105,7 @@ if (isset($_REQUEST['time_limit'])) {
     if (isset($_SERVER['HTTP_KEEP_ALIVE'])) {
         // get webserver timeout
         $webserver_timeout = (int)$_SERVER['HTTP_KEEP_ALIVE'];
-        $time_limit_explain .= '<br />' . sprintf($lang['TIME_LIMIT_EXPLAIN_WEBSERVER'], $webserver_timeout);
+        $time_limit_explain .= '<br/>' . sprintf($lang['TIME_LIMIT_EXPLAIN_WEBSERVER'], $webserver_timeout);
 
         if ($time_limit > $webserver_timeout) {
             $time_limit = $webserver_timeout;
@@ -119,7 +119,7 @@ $refresh_rate = isset($_REQUEST['refresh_rate']) ? (int)$_REQUEST['refresh_rate'
 // check if the user gave wrong input
 if ($mode == 'submit') {
     if (($session_posts_processing || $post_limit || $refresh_rate || $time_limit) <= 0) {
-        bb_die($lang['WRONG_INPUT'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
+        bb_die($lang['WRONG_INPUT'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
     }
 }
 
@@ -275,7 +275,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             DB()->query("OPTIMIZE TABLE $table");
         }
 
-        $processing_messages .= '<br />' . $lang['ALL_TABLES_OPTIMIZED'];
+        $processing_messages .= '<br/>' . $lang['ALL_TABLES_OPTIMIZED'];
     }
 
     // calculate the percent
@@ -372,7 +372,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_ABORTED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
             // check if the interrupted cycle has finished
             if (TIMENOW - $last_session_data['end_time'] < $last_session_data['last_cycle_time']) {
-                $last_saved_processing .= '<br />' . $lang['INFO_PROCESSING_ABORTED_SOON'];
+                $last_saved_processing .= '<br/>' . $lang['INFO_PROCESSING_ABORTED_SOON'];
             }
             $clear_search_disabled = 'disabled';
 

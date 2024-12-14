@@ -159,7 +159,7 @@
 			<input type="submit" class="main" onclick="refresh_username(this.form.username_list.options[this.form.username_list.selectedIndex].value);return false;" name="use" value="{L_SELECT}" />
 		</p>
 		<!-- ENDIF -->
-		<br />
+		<br/>
 		<a href="javascript:window.close();" class="med">{L_CLOSE_WINDOW}</a>
 	</td>
 </tr>

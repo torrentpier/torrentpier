@@ -949,7 +949,7 @@ class SqlDb
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
 				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . Dev::shortQuery($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
-				<br />';
+				<br/>';
                 break;
 
             case 'add_explain_row':
@@ -964,7 +964,7 @@ class SqlDb
                 $this->explain_hold .= '<tr>';
                 foreach (array_values($row) as $i => $val) {
                     $class = !($i % 2) ? 'row1' : 'row2';
-                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->selected_db}.", ',', ';'], ['', ', ', ';<br />'], $val ?? '') . '</td>';
+                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->selected_db}.", ',', ';'], ['', ', ', ';<br/>'], $val ?? '') . '</td>';
                 }
                 $this->explain_hold .= '</tr>';
 

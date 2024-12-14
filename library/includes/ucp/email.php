@@ -75,7 +75,7 @@ if ($row = DB()->fetch_row($sql)) {
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
         'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
-        'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : ''
+        'ERROR_MESSAGE' => ($errors) ? implode('<br/>', array_unique($errors)) : ''
     ]);
 
     print_page('usercp_email.tpl');

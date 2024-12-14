@@ -4,7 +4,7 @@
 <h1>{L_MANAGE_EXTENSIONS}</h1>
 
 <p>{L_MANAGE_EXTENSIONS_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_ATTACH_ACTION}">
     <table class="forumline">
@@ -62,7 +62,7 @@
 <h1>{L_MANAGE_EXTENSION_GROUPS}</h1>
 
 <p>{L_MANAGE_EXTENSION_GROUPS_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_ATTACH_ACTION}">
     <table class="forumline">
@@ -160,7 +160,7 @@
 <h1>{L_GROUP_PERMISSIONS_TITLE}</h1>
 
 <p>{L_GROUP_PERMISSIONS_EXPLAIN}</p>
-<br />
+<br/>
 
 <table width="100%">
 	<tr>

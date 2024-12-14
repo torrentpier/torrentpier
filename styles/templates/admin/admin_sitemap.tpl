@@ -85,7 +85,7 @@ ajax.callback.sitemap = function(data) {
 		<td width="25%"><span class="gen"><b>{L_SITEMAP_OPTIONS}:</b></span></td>
 		<td class="td_pads">
 			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">{L_SITEMAP_CREATE}</a>&nbsp;&nbsp;
-			<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">{L_SITEMAP_NOTIFY}</a><br />
+			<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">{L_SITEMAP_NOTIFY}</a><br/>
 			<div id="sitemap"></div>
 		</td>
 	</tr>
@@ -110,7 +110,7 @@ ajax.callback.sitemap = function(data) {
 			<span class="gen"><b>{L_SITEMAP_ADD_PAGE}:</b></span>
 		</td>
 		<td>
-			<textarea name="static_sitemap" rows="5" cols="70">{STATIC_SITEMAP}</textarea><br />
+			<textarea name="static_sitemap" rows="5" cols="70">{STATIC_SITEMAP}</textarea><br/>
 			<br/><p>{L_SITEMAP_ADD_EXP_1} <br/><br/><b style="color: #993300;">{L_SITEMAP_ADD_EXP_2}</b></p>
 		</td>
 	</tr>

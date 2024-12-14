@@ -43,7 +43,7 @@ function swap_values()
 
 <p>{L_REBUILD_SEARCH_DESC}</p>
 
-<br />
+<br/>
 
 <form name="rebuild" method="post" action="{S_REBUILD_SEARCH_ACTION}" onsubmit="update_button(rebuild.submit);">
 {S_HIDDEN_FIELDS}

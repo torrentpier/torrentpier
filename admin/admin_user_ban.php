@@ -25,7 +25,7 @@ if ($submit) {
     // Ban action
     if (!empty($_POST['username'])) {
         if (!$this_userdata = get_userdata($_POST['username'], true)) {
-            bb_die($lang['NO_USER_ID_SPECIFIED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die($lang['NO_USER_ID_SPECIFIED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         }
 
         if (!getBanInfo((int)$this_userdata['user_id'])) {
@@ -57,7 +57,7 @@ if ($submit) {
     }
 
     $datastore->update('ban_list');
-    bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 } else {
     $template->assign_vars(['S_BANLIST_ACTION' => 'admin_user_ban.php']);
 

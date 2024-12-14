@@ -4,7 +4,7 @@
 <h1>{L_RANKS_TITLE}</h1>
 
 <p>{L_RANKS_EXPLAIN}</p>
-<br />
+<br/>
 
 <form action="{S_RANK_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
@@ -22,7 +22,7 @@
 	</td>
 </tr>
 <tr>
-	<td width="40%"><h4>{L_STYLE_COLOR}</h4><br />
+	<td width="40%"><h4>{L_STYLE_COLOR}</h4><br/>
 		<h6>{L_STYLE_COLOR_FAQ}</h6>
 	</td>
 	<td>
@@ -30,11 +30,11 @@
 	</td>
 </tr>
 <tr>
-	<td valign="top"><h4>{L_RANK_IMAGE}:</h4><br />
+	<td valign="top"><h4>{L_RANK_IMAGE}:</h4><br/>
 		<h6>{L_RANK_IMAGE_EXPLAIN}</h6></td>
 	<td>
 		<input class="post" type="text" name="rank_image" size="60" maxlength="255" value="{IMAGE}" />
-		<br /><br />
+		<br/><br/>
 		{IMAGE_DISPLAY}
 	</td>
 </tr>
@@ -57,7 +57,7 @@
 <h1>{L_RANKS_TITLE}</h1>
 
 <p>{L_RANKS_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_RANKS_ACTION}">
 

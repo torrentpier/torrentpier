@@ -80,7 +80,7 @@
 
 <p>{L_GROUP_ADMIN_EXPLAIN}</p>
 
-<br /><br />
+<br/><br/>
 
 <form method="post" action="{S_GROUP_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -102,7 +102,7 @@
 </table>
 </form>
 
-<br /><br /><br /><br />
+<br/><br/><br/><br/>
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_GROUP_SELECT -->

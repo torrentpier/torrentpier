@@ -24,14 +24,14 @@ function return_msg_mcp($status_msg)
     }
 
     $message = $status_msg;
-    $message .= '<br /><br />';
+    $message .= '<br/><br/>';
 
     if ($topic_id && $mode != 'delete') {
         $message .= sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="' . TOPIC_URL . $topic_id . '">', '</a>');
-        $message .= '<br /><br />';
+        $message .= '<br/><br/>';
     } elseif (count($req_topics) != 1) {
         $message .= sprintf($lang['CLICK_RETURN_MODCP'], '<a href="' . FORUM_URL . "$forum_id&amp;mod=1" . '">', '</a>');
-        $message .= '<br /><br />';
+        $message .= '<br/><br/>';
     }
 
     $message .= sprintf($lang['CLICK_RETURN_FORUM'], '<a href="' . FORUM_URL . $forum_id . '">', '</a>');
@@ -501,7 +501,7 @@ switch ($mode) {
                 \TorrentPier\Legacy\Admin\Common::sync('forum', [$forum_id, $new_forum_id]);
 
                 //bot
-                $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
+                $message = $lang['TOPIC_SPLIT'] . '<br/><br/><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
                 $message .= ' &nbsp;::&nbsp; <a href="' . TOPIC_URL . "$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_NEW'] . '</a>';
 
                 // Log action

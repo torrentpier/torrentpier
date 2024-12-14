@@ -55,7 +55,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 		</td>
 	</tr>
 </table>
-<br />
+<br/>
 
 <table class="forumline">
 <!-- IF not CRON_ENABLED -->
@@ -117,7 +117,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 	</tr>
 </table>
 </form>
-<br />
+<br/>
 <!--========================================================================-->
 <!-- ENDIF / TPL_CRON_LIST -->
 
@@ -125,7 +125,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <h1>{L_CRON_EDIT_HEAD_EDIT}</h1>
 
 <a href="admin_cron.php?mode=list">{L_CRON_LIST}</a>
-<br /><br />
+<br/><br/>
 
 <form action="{S_CRON_ACTION}" method="post">
 <input class="text" type="hidden" name="mode" value="{S_MODE}" />

@@ -27,7 +27,7 @@ set_die_append_msg();
 if (isset($_POST['del_my_post'])) {
     $template->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . $lang['GOTO_MY_MESSAGE'] . '</a>
-		<br /><br />
+		<br/><br/>
 		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
 	');
 
@@ -46,7 +46,7 @@ if (isset($_POST['del_my_post'])) {
 } elseif (isset($_POST['add_my_post'])) {
     $template->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . $lang['GOTO_MY_MESSAGE'] . '</a>
-		<br /><br />
+		<br/><br/>
 		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
 	');
 
@@ -683,7 +683,7 @@ else {
 					<form id="mod-action" method="POST" action="search.php">
 						<input type="submit" name="add_my_post" value="' . $lang['RESTORE_ALL_POSTS'] . '" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
 					</form>
-					<br /><br />
+					<br/><br/>
 					<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
 				');
             }

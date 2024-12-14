@@ -6,7 +6,7 @@
 <h2>{L_FORUM}: {FORUM_NAME}</h2>
 <!-- ENDIF -->
 
-<br />
+<br/>
 
 <form action="{S_PRUNE_ACTION}" method="post">
 

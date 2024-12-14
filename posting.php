@@ -344,7 +344,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
                 $onclick = ($mode == 'editpost') ? 'onclick="return post2url(this.href);"' : '';
-                $return_message .= $post_msg . '<br /><br />
+                $return_message .= $post_msg . '<br/><br/>
 					<a ' . $onclick . ' href="' . $post_url . '" >' . $lang['POST_RETURN'] . '</a>
 				';
             }
@@ -419,7 +419,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
 				<div class="warnColor1">
 					<b>' . $lang['LOCKED_WARN'] . '</b>
 				</div>
-				<br /><hr /><br />
+				<br/><hr /><br/>
 			';
             $return_message = $locked_warn . $return_message;
         }

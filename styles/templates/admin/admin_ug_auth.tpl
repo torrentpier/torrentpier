@@ -88,7 +88,7 @@ thead tr {
 <h1>{L_PERMISSIONS} ({T_AUTH_TITLE})</h1>
 
 <p>{T_AUTH_EXPLAIN}</p>
-<br />
+<br/>
 
 <form method="post" action="{S_AUTH_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -157,9 +157,9 @@ thead tr {
 
 </div><!--/tScrollCont-->
 
-<br />
+<br/>
 <p><a href="{U_ALL_FORUMS}"><b>{L_SHOW_ALL_FORUMS_ON_ONE_PAGE}</b></a></p>
-<br />
+<br/>
 
 <!-- BEGIN c -->
 <!-- BEGIN f -->
@@ -258,7 +258,7 @@ function mark_changed (f_id, acl_id)
 <h1>{L_USER_ADMIN}</h1>
 
 <p>{L_USER_AUTH_EXPLAIN}</p>
-<br /><br />
+<br/><br/>
 
 <form method="post" name="post" action="{S_AUTH_ACTION}">
 <input type="hidden" name="mode" value="edit" />
@@ -283,7 +283,7 @@ function mark_changed (f_id, acl_id)
 
 </form>
 
-<br /><br /><br /><br />
+<br/><br/><br/><br/>
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_SELECT_USER -->
@@ -294,7 +294,7 @@ function mark_changed (f_id, acl_id)
 <h1>{L_GROUP_ADMINISTRATION}</h1>
 
 <p>{L_GROUP_AUTH_EXPLAIN}</p>
-<br /><br />
+<br/><br/>
 
 <form method="post" action="{S_AUTH_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -313,7 +313,7 @@ function mark_changed (f_id, acl_id)
 
 </form>
 
-<br /><br /><br /><br />
+<br/><br/><br/><br/>
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_SELECT_GROUP -->

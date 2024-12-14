@@ -518,7 +518,7 @@ $bb_cfg['ext_link_new_win'] = true; // open external links in new window
 
 $bb_cfg['topic_moved_days_keep'] = 7; // remove topic moved links after xx days (or FALSE to disable)
 $bb_cfg['allowed_posts_per_page'] = [15, 30, 50, 100];
-$bb_cfg['user_signature_start'] = '<div class="signature"><br />_________________<br />';
+$bb_cfg['user_signature_start'] = '<div class="signature"><br/>_________________<br/>';
 $bb_cfg['user_signature_end'] = '</div>'; // It allows user signatures to have closings "<>"
 
 // Posts

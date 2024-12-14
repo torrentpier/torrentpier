@@ -664,7 +664,7 @@ class Common
 
         // Log action
         if ($del_user_posts) {
-            $log_action->admin('mod_post_delete', ['log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count"]);
+            $log_action->admin('mod_post_delete', ['log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br/>posts: $deleted_posts_count"]);
         } elseif (!\defined('IN_CRON')) {
             foreach ($log_topics as $row) {
                 $log_action->mod('mod_post_delete', ['forum_id' => $row['forum_id'], 'topic_id' => $row['topic_id'], 'topic_title' => $row['topic_title']]);

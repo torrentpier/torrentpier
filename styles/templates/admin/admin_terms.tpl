@@ -1,7 +1,7 @@
 <h1>{L_TERMS}</h1>
 
 <p>{L_TERMS_EXPLAIN}</p>
-<br />
+<br/>
 
 <form action="{S_ACTION}" method="post">
 	<table class="forumline">

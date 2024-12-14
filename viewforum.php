@@ -175,7 +175,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 
         if ($sf_data['forum_last_post_id']) {
             $last_post = bb_date($sf_data['topic_last_post_time'], $bb_cfg['last_post_date_format']);
-            $last_post .= "<br />$last_post_user";
+            $last_post .= "<br/>$last_post_user";
             $last_post .= '<a href="' . POST_URL . $sf_data['forum_last_post_id'] . '#' . $sf_data['forum_last_post_id'] . '"><img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="latest" title="' . $lang['VIEW_LATEST_POST'] . '" /></a>';
         }
 
@@ -382,7 +382,7 @@ $u_auth[] = ($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOT
 $u_auth[] = ($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'];
 $u_auth[] = ($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT'];
 $u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
-$u_auth = implode("<br />\n", $u_auth);
+$u_auth = implode("<br/>\n", $u_auth);
 
 $template->assign_vars([
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),

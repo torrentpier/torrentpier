@@ -123,7 +123,7 @@ if ($submit) {
     }
 
     $datastore->update('cat_forums');
-    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
+    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
 }
 
 /**
