@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Намуди ҷӯйе бо муваффақият т
 $lang['DEL_TORRENT'] = 'Оё мутмаинед, ки мехоҳед тоза ҷӯйе?';
 $lang['DEL_MOVE_TORRENT'] = 'Оё мутмаинед, ки мехоҳед тоза ва ҳаракат ба ин мавзӯъ?';
 $lang['UNEXECUTED_RELEASE'] = 'Оё шумо озод бешакл пеш аз таъсиси як ислоҳи нав нотамом Ӯ!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Таѓйир додани вазъи тақсимоти - %s';
