@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Не могу да се региструју на тор
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Други торент са истим info_hash већ <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Уклоните из трацкер';
 $lang['BT_UNREGISTERED'] = 'Торрент нерегистрованих';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Семена';
 $lang['LEECHING'] = 'Пијавице';
 $lang['IS_REGISTERED'] = 'Регистрован';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!Пажња!';
 $lang['COPY'] = 'Сајт не даје електронске верзије производа, и бави се само прикупљању и каталогизацией везе, шаљу и објављују на форуму нашим читаоцима. Ако сте власник ауторских права сваког поднетог материјала и не желите да позивање на њега је у нашем директоријуму, контактирајте нас и ми одмах ћемо га уклонити. Датотеке за размену на хттп трацкер пружати корисницима сајта, администрација није одговорна за њихов садржај. Молимо вас да не сипајте датотеке заштићене ауторским правима, као и датотеке нелегалног садржаја!';
 
 // FILELIST
-$lang['FILELIST'] = 'Списак';
 $lang['COLLAPSE'] = 'Каталог распада';
 $lang['EXPAND'] = 'Распореди';
 $lang['SWITCH'] = 'Прекидач';
