@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Չի հաջողվել գրանցել տարափ է խո�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Այլ հեղեղ նույն info_hash արդեն <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Հեռացնել ճանապարհները';
 $lang['BT_UNREGISTERED'] = 'Հեղեղ չգրանցված';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Սերմերի';
 $lang['LEECHING'] = 'Մի տզրուկ';
 $lang['IS_REGISTERED'] = 'Գրանցված է';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1722,7 +1728,6 @@ $lang['NOTICE'] = '!Ուշադրություն!';
 $lang['COPY'] = 'Կայքը հնարավորություն է տալիս էլեկտրոնային տարբերակները ապրանքների, զբաղվում է միայն коллекционированием եւ каталогизацией հղումներ ուղարկել և հրապարակվող համաժողովի ընթացքում մեր ընթերցողների հետ: Եթե դուք հանդիսանում իրավատիրոջ կողմից որևէ ներկայացված նյութական եւ չեք ցանկանում, որ հղում է նա գտնվում էր մեր գրացուցակում, կապվել մեզ հետ, եւ մենք անհապաղ հանել այն: Ֆայլերի փոխանակման համար խուզարկու տրամադրվել կայքից օգտվողների կողմից, և վարչակազմը պատասխանատվություն չի կրում դրանց բովանդակության համար: Խնդրանքը չի խմեցնել ֆայլերը, որոնք պաշտպանված են հեղինակային իրավունքներով, ինչպես նաև ֆայլերը անօրինական բովանդակության!';
 
 // FILELIST
-$lang['FILELIST'] = 'Ցուցակ';
 $lang['COLLAPSE'] = 'Կատալոգ փլուզումից';
 $lang['EXPAND'] = 'Ծավալել';
 $lang['SWITCH'] = 'Switch';
