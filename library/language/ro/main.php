@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip torrent schimbat cu succes';
 $lang['DEL_TORRENT'] = 'Ești sigur că doriți să ștergeți de pe torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ești sigur că doriți să ștergeți și pentru a muta acest subiect?';
 $lang['UNEXECUTED_RELEASE'] = 'Ai o informă de presă înainte de a crea un nou remediu lui neformate!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Schimbarea statutului de distribuție - %s';
