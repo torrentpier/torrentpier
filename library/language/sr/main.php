@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Тип бујице успешно промењен'
 $lang['DEL_TORRENT'] = 'Да ли сте сигурни да желите да уклоните торент?';
 $lang['DEL_MOVE_TORRENT'] = 'Да ли сте сигурни да желите да уклоните и преместите тему?';
 $lang['UNEXECUTED_RELEASE'] = 'Имате бесформенные издање, пре него што креирате нови Фик неоформленном!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Промена статуса карте - %s';
