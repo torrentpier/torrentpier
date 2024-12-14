@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Zadejte torrent úspěšně změněno';
 $lang['DEL_TORRENT'] = 'Jsou si jisti, že chcete smazat torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Jsou si jisti, že chcete smazat a přesunout téma?';
 $lang['UNEXECUTED_RELEASE'] = 'Máte beztvaré uvolnění před vytvořením nových opravit jeho nedokončený!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Změna stavu distribuce - %s';
