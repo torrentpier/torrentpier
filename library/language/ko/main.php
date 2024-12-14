@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = '등록 할 수 있 토렌트에 추적';
 $lang['BT_REG_FAIL_SAME_HASH'] = '다른 토렌트 같은 info_hash 이미 <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = '제거에서 추적';
 $lang['BT_UNREGISTERED'] = 'Torrent 등록';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = '씨';
 $lang['LEECHING'] = '니';
 $lang['IS_REGISTERED'] = '등록';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '다!주의!';
 $lang['COPY'] = '사이트을 제공하지 않습의 전자 버전 제품,종사하에서만 수집의 목록은 참조를 보내고 출판 포럼에서 독자니다. 는 경우 법적 소유자의 제출된 모든 재료과하지 않는 것이 그것을 참조하던 우리 카탈로그,우리는 즉시 제거하는 그녀의합니다. 파일 교환을 위한 추적에 주어진 사용자에 의해,사이트의하고 관리하지 않는 책임을 부담을 위한 그들의 유지 관리합니다. 요청을 채우지 않는 파일에 저작권에 의해 보호됩고,또한 파일의 불법 유지보수!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = '붕괴 디렉토리';
 $lang['EXPAND'] = '확장';
 $lang['SWITCH'] = '스위치';

@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'отслежывателе торрент тіркеу �
 $lang['BT_REG_FAIL_SAME_HASH'] = 'қазірдің өзінде сол info_hash <a href="%s"><b>registered</b></a> бар басқа торрент';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'трекер алып тастау';
 $lang['BT_UNREGISTERED'] = 'Torrent тіркелмеген';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'тұқым';
 $lang['LEECHING'] = 'сүлік';
 $lang['IS_REGISTERED'] = 'тіркелген';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!НАЗАР!';
 $lang['COPY'] = 'сайт өнімдерін электронды нұсқаларын бере емес, және тек біздің оқырмандарымызбен форумда жіберіледі және жарияланған әдебиеттер жинау және каталогтау айналысады. Егер сіз қандай да бір ұсынылған материалдың құқықтық иесі болып табылады және оған анықтамалық Біздің каталогта екенін тілеймін келмесе, бізбен хабарласыңыз және біз дереу оны алып тастаңыз. отслежывателе алмасу үшін Файлдар Сайттың пайдаланушылар берілген, әкімшілігі және олардың мазмұны үшін жауап бермейді. файлдарды авторлық құқықтармен қорғалған толтырып, сондай-ақ заңсыз қызмет көрсету файлдар емес, сұрау!';
 
 // FILELIST
-$lang['FILELIST'] = 'файлдар тізімі';
 $lang['COLLAPSE'] = 'Collapse каталогы';
 $lang['EXPAND'] = 'кеңейту';
 $lang['SWITCH'] = 'қосқыш';

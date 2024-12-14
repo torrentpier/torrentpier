@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Không thể đăng ký torrent trên theo dõi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Một torrent với cùng một info_hash đã <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Bỏ từ theo dõi';
 $lang['BT_UNREGISTERED'] = 'Torrent không đăng ký';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Giống';
 $lang['LEECHING'] = 'Con đỉa';
 $lang['IS_REGISTERED'] = 'Đăng ký';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!Chú Ý!';
 $lang['COPY'] = 'Các trang web không cung cấp phiên bản điện tử của các sản phẩm và tham gia chỉ trong một cách thu thập và, ghi danh mục các tài liệu tham khảo gửi và công bố vào một diễn đàn của độc giả của chúng tôi. Nếu bạn là người chủ sở hữu hợp pháp của bất kỳ nộp tài liệu và không muốn có sự tham khảo để nó đã ở trong danh mục của chúng tôi liên hệ với chúng tôi và chúng tôi sẽ loại bỏ ngay lập tức. Các tập tin để trao đổi một ngày theo dõi được đưa ra bởi người của một trang web, và các chính quyền không chịu trách nhiệm cho việc bảo trì. Yêu cầu để phải điền vào trong các tập tin được bảo vệ bởi bản quyền, và cũng các tập tin của bất hợp pháp bảo trì!';
 
 // FILELIST
-$lang['FILELIST'] = 'Danh sách';
 $lang['COLLAPSE'] = 'Sụp đổ mục';
 $lang['EXPAND'] = 'Mở rộng';
 $lang['SWITCH'] = 'Chuyển';

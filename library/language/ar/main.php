@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'لا يمكن تسجيل سيل على تعقب';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'آخر سيل مع نفسه info_hash بالفعل <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'إزالة من تعقب';
 $lang['BT_UNREGISTERED'] = 'سيل غير المسجلين';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'البذور';
 $lang['LEECHING'] = 'علقة';
 $lang['IS_REGISTERED'] = 'مسجلة';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!الاهتمام!';
 $lang['COPY'] = 'الموقع لا يعطي نسخ إلكترونية من المنتجات و تعمل فقط في جمع وتصنيف الإشارات المرسلة نشره في المنتدى من قبل القراء. إذا كنت المالك القانوني من أي مواد مقدمة ولا ترغب في أن الإشارة إلى أنه في موقعنا أو الاتصال بنا ونحن يجب إزالة فورا. ملفات تبادل على تعقب تعطى من قبل مستخدمي الموقع ، و الإدارة لا تتحمل المسؤولية عن الصيانة. طلب عدم ملء الملفات المحمية بموجب حقوق الطبع و أيضا ملفات غير قانونية الصيانة!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'انهيار الدليل';
 $lang['EXPAND'] = 'توسيع';
 $lang['SWITCH'] = 'التبديل';

@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Kon nie torrent op spoorsnoer registreer nie';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Nog \'n stroom met dieselfde info_hash al <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Verwyder van spoorsnyer';
 $lang['BT_UNREGISTERED'] = 'Torrent ongeregistreerde';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'saad';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'geregistreer';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '! AANDAG!';
 $lang['COPY'] = 'Die webwerf gee nie elektroniese weergawes van produkte nie, en is slegs betrokke by die versameling en katalogisering van die verwysings wat deur ons lesers op \'n forum gepubliseer en gepubliseer word. As u die wettige eienaar van enige ingediende materiaal is en nie wil hê dat die verwysing daarin in ons katalogus is nie, kontak ons ​​en ons sal haar dadelik verwyder. Lêers vir \'n uitruil op spoorsnyer word gegee deur gebruikers van \'n webwerf, en die administrasie dra nie die verantwoordelikheid vir hul onderhoud nie. Die versoek om nie die lêers wat deur kopiereg beskerm word nie, en ook lêers van die onwettige onderhoud!';
 
 // FILELIST
-$lang['FILELIST'] = 'File List';
 $lang['COLLAPSE'] = 'Vou gids in';
 $lang['EXPAND'] = 'uit te brei';
 $lang['SWITCH'] = 'skakelaar';

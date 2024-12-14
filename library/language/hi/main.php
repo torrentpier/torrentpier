@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'ट्रैकर पर धार डाउनलो�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'उसी जानकारी के साथ एक और धार पहले ही <a href="%s"><b> रजिस्ट्रीकृत 1233_2_2_321</a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'ट्रैकर से निकालें';
 $lang['BT_UNREGISTERED'] = 'टॉरेंट अपंजीकृत';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'बीज';
 $lang['LEECHING'] = 'जोंक';
 $lang['IS_REGISTERED'] = 'दर्ज कराई';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!ध्यान!';
 $lang['COPY'] = 'यह साइट उत्पादों के इलेक्ट्रॉनिक संस्करणों को नहीं देती है, और हमारे पाठकों द्वारा फोरम में भेजे गए और प्रकाशित किए गए संदर्भों के संग्रह और सूचीकरण में केवल व्यस्त है। यदि आप किसी भी जमा सामग्री के कानूनी मालिक हैं और चाहते हैं कि यह करने के लिए संदर्भ हमारी सूची में था, हमसे संपर्क करें और हम तुरंत उसे निकाल देंगे ट्रैकर पर एक एक्सचेंज के लिए फ़ाइलें एक साइट के उपयोगकर्ताओं द्वारा दी गई हैं, और प्रशासन उनके रखरखाव की ज़िम्मेदारी को सहन नहीं करता है। कॉपीराइट के द्वारा संरक्षित फ़ाइलों को भरने के अनुरोध, और अवैध रखरखाव की भी फ़ाइलें!';
 
 // FILELIST
-$lang['FILELIST'] = 'filelist';
 $lang['COLLAPSE'] = 'निर्देशिका को संकुचित करें';
 $lang['EXPAND'] = 'विस्तार';
 $lang['SWITCH'] = 'स्विच';

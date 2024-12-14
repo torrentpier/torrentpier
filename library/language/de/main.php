@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Konnten Sie nicht registrieren, torrent-tracker auf';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Anderen torrent mit der gleichen info_hash bereits <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Entfernen von tracker';
 $lang['BT_UNREGISTERED'] = 'Unregistered Torrent';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Samen';
 $lang['LEECHING'] = 'Blutegel';
 $lang['IS_REGISTERED'] = 'Registriert';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!ACHTUNG!';
 $lang['COPY'] = 'Die Website nicht geben, die elektronischen Versionen der Produkte, und wird engagiert, nur in der Sammlung und Katalogisierung der Referenzen geschickt und veröffentlicht in einem forum von unseren Lesern. Wenn Sie der rechtmäßige Besitzer der eingereichten Materials sind und nicht wünschen, dass der Verweis auf die es in unserem Katalog, Kontaktieren Sie uns bitte und wir werden umgehend entfernen Sie. Dateien für den Austausch über die tracker sind durch die Nutzer einer Website und die administration trägt nicht die Verantwortung für deren Instandhaltung. Der Wunsch, nicht füllen in die Dateien geschützt durch Urheberrechte, und auch Dateien, die bei der illegalen Pflege!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Zusammenbruch Verzeichnis';
 $lang['EXPAND'] = 'Erweitern';
 $lang['SWITCH'] = 'Schalter';

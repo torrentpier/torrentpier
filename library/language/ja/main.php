@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'な登録激流にトラッカー';
 $lang['BT_REG_FAIL_SAME_HASH'] = '他の激流を同じくinfo_hashて<a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'トラッカーから削除';
 $lang['BT_UNREGISTERED'] = '激流が未登録';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = '種子';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = '登録';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1723,7 +1729,6 @@ $lang['NOTICE'] = 'す！注意！';
 $lang['COPY'] = '当サイトにおいては、今後い電子バージョンの製品を組みの収集-整理を参考に送られ、公開される予定のためのフォーラムによる読者の皆さんです。 の場合の法的な所有者の届出のあった材質となることを願の参照がなくなってしばらくするとした当社のカタログ、お問い合わせとしては、直ちに削除します。 ファイルを交換するトラッカーはユーザーのサイトの管理は一切の責任を負うものと維持します。 の要求は、ファイルの著作権により保護されており、またファイルに不正な維持に！';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = '崩壊ディレクトリ';
 $lang['EXPAND'] = '拡大';
 $lang['SWITCH'] = 'スイッチ';

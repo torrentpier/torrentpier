@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'reyting www.uz torrent ro\'yxatdan bo\'lmadi';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Shu info_hash allaqachon <a href="%s"><b>registered</b></a> bilan yana bir torrent';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'izdoshlari o\'chirish';
 $lang['BT_UNREGISTERED'] = 'Ro\'yxatdan o\'tmagan torrent';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'urug \'';
 $lang['LEECHING'] = 'zuluk';
 $lang['IS_REGISTERED'] = 'ro\'yxatga olingan';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '! DIQQAT!';
 $lang['COPY'] = 'sayt mahsulotlari elektron versiyalarini bermaydi, va bizning kitobxonlar tomonidan bir forumda yubordi va chop yozuvlarning bir yig\'ish va Kataloglashtirish yagona shug\'ullanadi. Agar biron-bir taqdim etilgan materiallar qonuniy egasi va unga mos yozuvlar bizning katalogdagi deb istamasangiz, bizga murojaat va biz darhol uni olib tashlash kerak. reyting www.uz almashish uchun Files bir sayt foydalanuvchilari tomonidan berilgan, va hukumat o\'z xizmat uchun javobgar emas. so\'rov mualliflik bilan himoyalangan fayllar to\'ldiring, va, shuningdek, noqonuniy parvarishlash fayllar emas, balki!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'buzish katalog';
 $lang['EXPAND'] = 'kengaytirish';
 $lang['SWITCH'] = 'Switch';

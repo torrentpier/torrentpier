@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Δεν θα μπορούσε να εγγραφείτε t
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Άλλο ένα torrent με το ίδιο info_hash ήδη <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Αφαιρέστε από τον ιχνηλάτη';
 $lang['BT_UNREGISTERED'] = 'Torrent unregistered';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Σπόρων προς σπορά';
 $lang['LEECHING'] = 'Βδέλλα';
 $lang['IS_REGISTERED'] = 'Εγγεγραμμένοι';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!ΠΡΟΣΟΧΉ!';
 $lang['COPY'] = 'Η ιστοσελίδα δεν παρέχει ηλεκτρονικές εκδόσεις των προϊόντων, και ασχολείται μόνο με τη συλλογή και ταξινόμηση των στοιχείων που αποστέλλονται και δημοσιεύονται στο φόρουμ από τους αναγνώστες μας. Αν είστε ο νόμιμος ιδιοκτήτης του οποιοδήποτε υλικό που έχει υποβληθεί και δεν επιθυμούν η αναφορά ήταν στον κατάλογό μας, επικοινωνήστε μαζί μας και εμείς θα αφαιρέσει αμέσως. Αρχεία για την ανταλλαγή απόψεων σχετικά με tracker δίνονται από τους χρήστες του site, και η διοίκηση δεν φέρει την ευθύνη για τη συντήρηση τους. Το αίτημα να συμπληρώσετε τα αρχεία που προστατεύονται από πνευματικά δικαιώματα, καθώς και τα αρχεία των παράνομων συντήρηση!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Κατάρρευση directory';
 $lang['EXPAND'] = 'Αναπτύξτε το στοιχείο';
 $lang['SWITCH'] = 'Διακόπτης';
