@@ -332,7 +332,7 @@ function send_no_cache_headers()
 }
 
 /**
- * Converts "<br>" tags to "\n" line breaks
+ * Converts "<br/>" / "<br>" tags to "\n" line breaks
  *
  * @param string $string
  * @return string

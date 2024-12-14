@@ -224,7 +224,7 @@ class User
         if ($banInfo = getBanInfo((int)$this->id)) {
             $this->session_end();
             if (!empty($banInfo['ban_reason'])) {
-                bb_die($lang['YOU_BEEN_BANNED'] . '<br><br>' . $lang['REASON'] . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
+                bb_die($lang['YOU_BEEN_BANNED'] . '<br/><br/>' . $lang['REASON'] . ':&nbsp;' . '<b>' . $banInfo['ban_reason'] . '</b>');
             } else {
                 bb_die($lang['YOU_BEEN_BANNED']);
             }

@@ -114,7 +114,7 @@ class Upload
         // Handling errors while uploading
         if (isset($this->file['error']) && ($this->file['error'] !== UPLOAD_ERR_OK)) {
             if (isset($lang['UPLOAD_ERRORS'][$this->file['error']])) {
-                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->file['error']];
+                $this->errors[] = $lang['UPLOAD_ERROR_COMMON'] . '<br/><br/>' . $lang['UPLOAD_ERRORS'][$this->file['error']];
             } else {
                 $this->errors[] = $lang['UPLOAD_ERROR_COMMON'];
             }
