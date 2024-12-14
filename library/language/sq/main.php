@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Lloji përrua me sukses ndryshuar';
 $lang['DEL_TORRENT'] = 'A jeni të sigurt që ju doni të fshini përrua?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeni i sigurt që dëshironi të fshini dhe për të shkuar temë?';
 $lang['UNEXECUTED_RELEASE'] = 'A keni një shapeless lirimin e para duke krijuar një re të rregulluar tij paformuar!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Ndryshimin e statusit të shpërndarjes - %s';

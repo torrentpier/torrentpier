@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip potoka uspješno promijenio';
 $lang['DEL_TORRENT'] = 'Jesi li sigurna da želiš da izbrišete potoka?';
 $lang['DEL_MOVE_TORRENT'] = 'Jesi li sigurna da želiš da izbrišete i potez temu?';
 $lang['UNEXECUTED_RELEASE'] = 'Imaš bezobličan. oslobodi pre nego što stvarajući novu popraviti svoje unformed!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Mijenja položaj distribucije - %s';

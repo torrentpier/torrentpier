@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Տեսակը торрента հաջողությամ
 $lang['DEL_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել հեղեղ?';
 $lang['DEL_MOVE_TORRENT'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել և տեղափոխել թեման?';
 $lang['UNEXECUTED_RELEASE'] = 'Դուք ունեք бесформенные հաղորդագրություն է տարածել, նախքան ստեղծել նոր Fix неоформленном!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Կարգավիճակի փոփոխությունը բաժանելու - %s';

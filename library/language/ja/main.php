@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'タイプは、激流の変更に成功';
 $lang['DEL_TORRENT'] = 'Are you sure you want to deleteの激流すか？';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you wantへの削除に移動する！';
 $lang['UNEXECUTED_RELEASE'] = 'い型レスリリース前を修正彼unformedす！';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = '変化する状況の分布-%s';

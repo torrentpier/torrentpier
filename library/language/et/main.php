@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tüüp torrent edukalt muutunud';
 $lang['DEL_TORRENT'] = 'Olete kindel, et soovite kustutada torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Olete kindel, et soovite kustutada ja liigutada teema?';
 $lang['UNEXECUTED_RELEASE'] = 'Kas teil on vormitu vabastada enne luua uusi määrata oma konarliku!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Oleku muutmine jaotus - %s';

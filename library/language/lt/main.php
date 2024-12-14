@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tipas torrent pakeistas sėkmingai';
 $lang['DEL_TORRENT'] = 'Ar jūs tikrai norite ištrinti torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ar jūs tikrai norite ištrinti ir perkelti tema?';
 $lang['UNEXECUTED_RELEASE'] = 'Ar turite beformė spaudai prieš kurdami naują išspręsti savo nesuformuluota!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Statuso keitimo platinimo - %s';
