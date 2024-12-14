@@ -4,7 +4,7 @@
     <li>{L_DL_CLIENT}: <b>{TORRENT_CLIENT}</b></li>
     <li>{L_BT_IS_PRIVATE}: <b>{TORRENT_PRIVATE}</b></li>
 </ul>
-<br />
+<br/>
 
 <h1 class="pagetitle">{L_BT_FLIST_ANNOUNCERS_LIST}</h1>
 <table class="forumline">
@@ -28,7 +28,7 @@
     </tr>
     </tfoot>
 </table>
-<br />
+<br/>
 
 <h1 class="pagetitle">{L_BT_FLIST}</h1>
 <table class="forumline">
