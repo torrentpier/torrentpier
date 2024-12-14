@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Ievadiet torrent veiksmīgi mainīta';
 $lang['DEL_TORRENT'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst un pārvietot tēmu?';
 $lang['UNEXECUTED_RELEASE'] = 'Vai jums ir bezveidīgs atbrīvot pirms veidot jaunu noteikt savu neizveidotā!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Statusa maiņai izplatīšana - %s';
