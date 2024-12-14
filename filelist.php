@@ -115,6 +115,7 @@ $template->assign_vars([
     'FILES_COUNT' => sprintf($lang['BT_FLIST_FILE_PATH'], declension(iterator_count($files), 'files')),
     'TORRENT_CREATION_DATE' => (!empty($dt = $torrent->getCreationDate()) && is_numeric($creation_date = $dt->getTimestamp())) ? date('d-M-Y H:i (e)', $creation_date) : $lang['UNKNOWN'],
     'TORRENT_CLIENT' => !empty($creator = $torrent->getCreatedBy()) ? htmlCHR($creator) : $lang['UNKNOWN'],
+    'TORRENT_PRIVATE' => $torrent->isPrivate() ? $lang['YES'] : $lang['NO'],
 
     'BTMR_NOTICE' => sprintf($lang['BT_FLIST_BTMR_NOTICE'], 'https://github.com/kovalensky/tmrr'),
     'U_TOPIC' => TOPIC_URL . $topic_id,

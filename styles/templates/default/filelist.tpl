@@ -2,6 +2,7 @@
 <ul>
     <li>{L_BT_FLIST_CREATION_DATE}: <b>{TORRENT_CREATION_DATE}</b></li>
     <li>{L_DL_CLIENT}: <b>{TORRENT_CLIENT}</b></li>
+    <li>{L_BT_IS_PRIVATE}: <b>{TORRENT_PRIVATE}</b></li>
 </ul>
 <br />
 
