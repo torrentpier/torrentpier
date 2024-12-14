@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Não foi possível registrar torrent no tracker';
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Outro torrent com o mesmo info_hash já <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Retire do tracker';
 $lang['BT_UNREGISTERED'] = 'Torrent não registrado';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Semente';
 $lang['LEECHING'] = 'Sanguessuga';
 $lang['IS_REGISTERED'] = 'Registrado';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!ATENÇÃO!';
 $lang['COPY'] = 'O site não dá versões eletrônicas de produtos, e está envolvida apenas na coleta e catalogação das referências enviadas e publicadas em um fórum por nossos leitores. Se você é o proprietário legal de qualquer material enviado e não deseja que a referência era em nosso catálogo, entre em contato conosco e vamos remover imediatamente a ela. Arquivos para um intercâmbio no tracker são dadas pelos usuários de um site, e a administração não assumem a responsabilidade pela sua manutenção. O pedido não preencher os ficheiros protegidos por direitos de autor, e também arquivos do ilegal de manutenção!';
 
 // FILELIST
-$lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Colapso de diretório';
 $lang['EXPAND'] = 'Expanda';
 $lang['SWITCH'] = 'Mudar';
