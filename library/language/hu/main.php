@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Írja be a torrent sikeresen megváltozott';
 $lang['DEL_TORRENT'] = 'Biztos, hogy törölni akarja a torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Biztos, hogy törölni szeretné, majd mozgassa a téma?';
 $lang['UNEXECUTED_RELEASE'] = 'Van egy alaktalan kiadás előtt létrehozni egy új javítás a formátlan!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'A változó állapota engedély - %s';
