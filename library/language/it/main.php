@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Digitare il torrent cambiato con successo';
 $lang['DEL_TORRENT'] = 'Sei sicuro di voler cancellare il torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Sei sicuro di voler eliminare e spostare l\'argomento?';
 $lang['UNEXECUTED_RELEASE'] = 'Hai un informe di rilascio prima di creare un nuovo fix sua informe!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Cambiare lo stato di distribuzione - %s';
