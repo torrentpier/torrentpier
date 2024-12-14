@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Не вдалося зареєструвати торе�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Інший торрент з таким же info_hash вже <a href="%s"><b>зареєстрований</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Дата створення';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Вилучити з трекера';
 $lang['BT_UNREGISTERED'] = 'Торент незареєстрований';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Сідер';
 $lang['LEECHING'] = 'Лічер';
 $lang['IS_REGISTERED'] = 'Зареєстрований';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1719,7 +1725,6 @@ $lang['NOTICE'] = '!УВАГА!';
 $lang['COPY'] = 'Сайт не надає електронні версії творів, а займається лише колекціонуванням та каталогізацією посилань, що надсилають та публікують на форумі наші читачі. Якщо ви є правовласником будь-якого представленого матеріалу і не бажаєте, щоб посилання на нього були в нашому каталозі, зв\'яжіться з нами і ми негайно приберемо його. Файли для обміну на трекері надані користувачами сайту, і адміністрація не несе відповідальності за їх зміст. Прохання не завантажувати файли, захищені авторськими правами, а також файли нелегального змісту!';
 
 // FILELIST
-$lang['FILELIST'] = 'Список файлів';
 $lang['COLLAPSE'] = 'Згорнути теку';
 $lang['EXPAND'] = 'Розгорнути';
 $lang['SWITCH'] = 'Перейти';
