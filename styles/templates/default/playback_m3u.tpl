@@ -15,9 +15,9 @@
             $('#ffprobe_' + data.file_index).html(data.ffprobe_data);
         } else {
             if ($('#ffprobe_' + data.file_index).find('span.warnColor2').length >= 3) {
-                $('#ffprobe_' + data.file_index).html('<hr><span class="warnColor2">{L_M3U_FFPROBE_NO_DATA}</span>');
+                $('#ffprobe_' + data.file_index).html('<hr/><span class="warnColor2">{L_M3U_FFPROBE_NO_DATA}</span>');
             } else {
-                $('#ffprobe_' + data.file_index).append('<hr><span class="warnColor2">{L_PLEASE_TRY_AGAIN}</span>');
+                $('#ffprobe_' + data.file_index).append('<hr/><span class="warnColor2">{L_PLEASE_TRY_AGAIN}</span>');
             }
         }
     }
@@ -38,14 +38,14 @@
         <td>{m3ulist.ROW_NUMBER}</td>
         <td width="40%"><b>{m3ulist.TITLE}</b>
             <div id="ffprobe_{m3ulist.FILE_INDEX}">
-                <hr>
+                <hr/>
                 <input onclick="ajax.ffprobe_info({m3ulist.FILE_INDEX}, '{m3ulist.IS_AUDIO}');" type="button" value="{L_SHOW_MORE_INFORMATION_FILE}">
             </div>
         </td>
         <td>
             <a href="#" onclick="return false;" class="copyElement" data-clipboard-text="{m3ulist.STREAM_LINK}">{L_COPY_STREAM_LINK}</a>&nbsp;&middot;
             <a target="_blank" href="{m3ulist.M3U_DL_LINK}">{L_DOWNLOAD_M3U_FILE}</a>
-            <hr>
+            <hr/>
             <!-- IF m3ulist.IS_VALID --><!-- IF m3ulist.IS_AUDIO -->
             <audio preload="none" src="{m3ulist.STREAM_LINK}" controls></audio>
             <!-- ELSE -->

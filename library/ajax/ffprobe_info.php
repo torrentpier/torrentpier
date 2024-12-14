@@ -84,11 +84,11 @@ if (isset($ffpInfo->streams)) {
         'filesize' => sprintf($lang['FILESIZE'] . ': <b>%s</b>', humn_size($ffpInfo->format->size)),
         'resolution' => (!$isAudio && isset($videoCodecInfo)) ? sprintf($lang['RESOLUTION'], $videoCodecInfo->width . 'x' . $videoCodecInfo->height) : '',
         'video_codec' => (!$isAudio && isset($videoCodecInfo->codec_name)) ? sprintf($lang['VIDEO_CODEC'], $videoCodecInfo->codec_long_name, mb_strtoupper($videoCodecInfo->codec_name, 'UTF-8')) : '',
-        'audio_dub' => implode('<hr>', $audioDub)
+        'audio_dub' => implode('<hr/>', $audioDub)
     ];
 
     // Validate output data
-    $result = '<hr>';
+    $result = '<hr/>';
     if (!empty($data['resolution'])) {
         $result .= $data['resolution'] . '<br/>';
     }
@@ -99,7 +99,7 @@ if (isset($ffpInfo->streams)) {
         $result .= $data['video_codec'];
     }
     if (!empty($data['audio_dub'])) {
-        $result .= '<hr>' . $data['audio_dub'];
+        $result .= '<hr/>' . $data['audio_dub'];
     }
 
     $this->response['ffprobe_data'] = $result;

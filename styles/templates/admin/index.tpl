@@ -96,12 +96,12 @@
 <div class="alert alert-danger" style="width: 95%;">
     <h4 class="alert-heading">{L_INTEGRITY_CHECK_FAIL}</h4>
     <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
-    <hr>
+    <hr/>
     <!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->
     <ul style="max-height: 120px; overflow-x: auto;">
         <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
     </ul>
-    <hr>
+    <hr/>
     <a href="#" id="restore_corrupt_files" onclick="ajax.manage_admin('restore_corrupt_files'); return false;">{L_INTEGRITY_RESTORE_ON_NEXT_RUN}</a>
     <!-- ENDIF -->
 </div>
@@ -111,7 +111,7 @@
 <!-- IF ADMIN_LOCK_CRON -->
 <div class="alert alert-danger" style="width: 95%;">
   <h4 class="alert-heading">{L_ADMIN_DISABLE_CRON_TITLE}</h4>
-  <hr>
+  <hr/>
   <a href="#" id="unlock_cron" onclick="ajax.manage_admin('unlock_cron'); return false;">{L_ADMIN_UNLOCK_CRON}</a>
   ({L_ADMIN_DISABLE_CRON})
 </div>
@@ -120,7 +120,7 @@
 <!-- IF ADMIN_LOCK -->
 <div class="alert alert-danger" style="width: 95%;">
   <h4 class="alert-heading">{L_ADMIN_DISABLE_TITLE}</h4>
-  <hr>
+  <hr/>
   <a href="admin_board.php?mode=config">{L_ADMIN_UNLOCK}</a>
   ({L_ADMIN_DISABLE})
 </div>

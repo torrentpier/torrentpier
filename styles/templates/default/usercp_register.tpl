@@ -159,7 +159,7 @@
                 <label>{L_SET_OWN_COUNTRY}
                     <input {CHECKED_MANUAL_COUNTRY} name="user_from_set_manual" type="checkbox">
                 </label>
-                <hr>
+                <hr/>
                 <div id="country_select_hide">{COUNTRY_SELECT}&nbsp;<span id="check_country">{COUNTRY_SELECTED}</span></div>
                 <div style="display: none;" id="country_manual_select"><input type="text" name="user_from" size="50" maxlength="150" value="{USER_FROM}"/></div>
             </td>

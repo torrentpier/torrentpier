@@ -34,7 +34,7 @@
     ajax.callback.view_post = function (data) {
         loadedText[data.post_id] = true;
         $('#post_' + data.post_id + ' div.post_body').prepend(
-            '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px; line-height: 1.2;" readonly>' + data['post_text'] + '</textarea><hr></div>'
+            '<div class="tCenter" id="ptx-' + data.post_id + '"><textarea style="width: 99%; height: 200px; line-height: 1.2;" readonly>' + data['post_text'] + '</textarea><hr/></div>'
         );
     };
 </script>
