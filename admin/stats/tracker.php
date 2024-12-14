@@ -133,7 +133,7 @@ function commify_ob($contents)
 ob_start('commify_ob');
 
 echo '<html><body><head></head>';
-echo '<br/><br/><table border="1" cellspacing="0" cellpadding="6" align="center"><col width="40%"><col width="60%">';
+echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center"><col width="40%"><col width="60%">';
 echo "\n<tr><td align=center> users: bb-all / bt-all / bt-active </td><td align=center> $stat[u_bb_all] / $stat[u_bt_all] / <b>$stat[u_bt_active]</b> </td></tr>\n";
 
 echo "\n
@@ -157,7 +157,7 @@ echo "\n
 
 echo "\n<tr><td align=center> peers: in last " . implode(' / ', $peers_in_last_minutes) . " min</td>\n";
 echo "\n<td align=center>" . implode(' / ', $peers_in_last_min) . "</td></tr>\n";
-echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br/> [ per second, DESC order --> ] <br/> last peer: $stat[last_peer_time] seconds ago <br/> " . date('j M H:i:s [T O]') . " </td>\n";
+echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br /> [ per second, DESC order --> ] <br /> last peer: $stat[last_peer_time] seconds ago <br /> " . date('j M H:i:s [T O]') . " </td>\n";
 echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . implode(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
 echo "\n
 	<tr><td align=center> clients: </td>

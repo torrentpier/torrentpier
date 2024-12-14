@@ -713,7 +713,7 @@ $template->assign_vars($tp_data);
 $template->assign_vars([
     'PAGE_TITLE' => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
     'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
-    'ERROR_MESSAGE' => ($errors) ? implode('<br/>', array_unique($errors)) : '',
+    'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
     'MODE' => $mode,
     'EDIT_PROFILE' => ($mode == 'editprofile'),
     'ADM_EDIT' => $adm_edit,

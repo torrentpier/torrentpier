@@ -4,7 +4,7 @@
 <h1>{L_AUTH_CONTROL_CATEGORY}</h1>
 
 <p>{L_FORUM_AUTH_LIST_EXPLAIN}</p>
-<br/>
+<br />
 
 <table class="forumline med">
 	<tr>
@@ -27,7 +27,7 @@
 	<!-- END forum_row -->
 	<!-- END cat_row -->
 </table>
-<br/>
+<br />
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_AUTH_FORUM_LIST -->
@@ -62,7 +62,7 @@
 	<!-- END forum_row -->
 	<!-- END cat_row -->
 </table>
-<br/>
+<br />
 
 <form method="post" action="{S_FORUMAUTH_ACTION}">
 <table class="forumline med">

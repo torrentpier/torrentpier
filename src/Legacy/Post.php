@@ -50,13 +50,13 @@ class Post
         if (!empty($subject)) {
             $subject = str_replace('&amp;', '&', $subject);
         } elseif ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
-            $error_msg .= (!empty($error_msg)) ? '<br/>' . $lang['EMPTY_SUBJECT'] : $lang['EMPTY_SUBJECT'];
+            $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_SUBJECT'] : $lang['EMPTY_SUBJECT'];
         }
 
         // Check message
         if (!empty($message)) {
         } elseif ($mode != 'delete') {
-            $error_msg .= (!empty($error_msg)) ? '<br/>' . $lang['EMPTY_MESSAGE'] : $lang['EMPTY_MESSAGE'];
+            $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_MESSAGE'] : $lang['EMPTY_MESSAGE'];
         }
 
         // Check smilies limit
@@ -64,12 +64,12 @@ class Post
             $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
             if ($count_smilies > $bb_cfg['max_smilies']) {
                 $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']);
-                $error_msg .= (!empty($error_msg)) ? '<br/>' . $to_many_smilies : $to_many_smilies;
+                $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
             }
         }
 
         if (IS_GUEST && !$bb_cfg['captcha']['disabled'] && !bb_captcha('check')) {
-            $error_msg .= (!empty($error_msg)) ? '<br/>' . $lang['CAPTCHA_WRONG'] : $lang['CAPTCHA_WRONG'];
+            $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['CAPTCHA_WRONG'] : $lang['CAPTCHA_WRONG'];
         }
     }
 

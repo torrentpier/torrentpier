@@ -361,8 +361,8 @@ class BBCode
      */
     private function new_line2html(string $text): string
     {
-        $text = preg_replace('#\n{2,}#', '<span class="post-br"><br/></span>', $text);
-        return str_replace("\n", '<br/>', $text);
+        $text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
+        return str_replace("\n", '<br />', $text);
     }
 
     /**

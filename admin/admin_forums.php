@@ -223,7 +223,7 @@ if ($mode) {
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
-            bb_die($lang['FORUMS_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
             break;
 
@@ -310,9 +310,9 @@ if ($mode) {
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
-            $message = $lang['FORUMS_UPDATED'] . '<br/><br/>';
-            $message .= $fix ? "$fix<br/><br/>" : '';
-            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+            $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
+            $message .= $fix ? "$fix<br /><br />" : '';
+            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?' . POST_CAT_URL . '=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
 
             break;
@@ -339,7 +339,7 @@ if ($mode) {
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
-            bb_die($lang['FORUMS_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
             break;
 
@@ -393,7 +393,7 @@ if ($mode) {
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
-            bb_die($lang['FORUMS_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
             break;
 
@@ -480,7 +480,7 @@ if ($mode) {
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
-            bb_die($lang['FORUMS_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
             break;
 
@@ -550,9 +550,9 @@ if ($mode) {
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
-            $message = $lang['FORUMS_UPDATED'] . '<br/><br/>';
-            $message .= $fix ? "$fix<br/><br/>" : '';
-            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+            $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
+            $message .= $fix ? "$fix<br /><br />" : '';
+            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
 
             break;
@@ -1072,8 +1072,8 @@ function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
         }
 
         if ($show_mess) {
-            $message = $done_mess . '<br/><br/>';
-            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br/><br/>';
+            $message = $done_mess . '<br /><br />';
+            $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
         }

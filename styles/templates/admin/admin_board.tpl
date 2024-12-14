@@ -2,11 +2,11 @@
 <h1>{L_GENERAL_CONFIG}</h1>
 
 <p>{L_CONFIG_EXPLAIN}</p>
-<br/>
+<br />
 
 <a href="admin_board.php?mode=config" class="bold">{L_GENERAL_CONFIG}</a> &#0183;
 <a href="admin_board.php?mode=config_mods">{L_CONFIG_MODS}</a>
-<br/><br/>
+<br /><br />
 
 <form action="{S_CONFIG_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
@@ -149,11 +149,11 @@
 <h1>{L_CONFIG_MODS}</h1>
 
 <p>{L_MODS_EXPLAIN}</p>
-<br/>
+<br />
 
 <a href="admin_board.php?mode=config">{L_GENERAL_CONFIG}</a> &#0183;
 <a href="admin_board.php?mode=config_mods" class="bold">{L_CONFIG_MODS}</a>
-<br/><br/>
+<br /><br />
 
 <form action="{S_CONFIG_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
@@ -318,7 +318,7 @@
 <tr id="seed_bonus_{seed_bonus.RELEASE}">
 	<td>{L_SEED_BONUS_ADD}</td>
 	<td>
-		<input class="post" type="text" size="5" name="seed_bonus_release[]" value="{seed_bonus.RELEASE}" />&nbsp;{L_SEED_BONUS_RELEASE} <br/>
+		<input class="post" type="text" size="5" name="seed_bonus_release[]" value="{seed_bonus.RELEASE}" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
 		<input class="post" type="text" size="5" name="seed_bonus_points[]" value="{seed_bonus.POINTS}" />&nbsp;{L_SEED_BONUS_POINTS} &nbsp;
 		<input onclick="$('#seed_bonus_{seed_bonus.RELEASE}').remove();" class="post" type="button" size="2" value="{L_DELETE}" />
 	</td>
@@ -328,7 +328,7 @@
 <tr id="seed_bonus">
 	<td>{L_SEED_BONUS_ADD}</td>
 	<td>
-		<input class="post" type="text" size="5" name="seed_bonus_release[]" value="" />&nbsp;{L_SEED_BONUS_RELEASE} <br/>
+		<input class="post" type="text" size="5" name="seed_bonus_release[]" value="" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
 		<input class="post" type="text" size="5" name="seed_bonus_points[]" value="" />&nbsp;{L_SEED_BONUS_POINTS}
 		<input onclick="$('#seed_bonus').clone().appendTo('.seed_bonus');" class="post" type="button" size="2" value="+" />
 		<input onclick="$('#seed_bonus').remove();" class="post" type="button" size="2" value="-" />
@@ -351,7 +351,7 @@
 <tr id="bonus_upload_{bonus_upload.UP}">
 	<td><h4>{L_SEED_BONUS_ROPORTION}</h4><h6></h6></td>
 	<td>
-		<input class="post" type="text" size="5" name="bonus_upload[]" value="{bonus_upload.UP}" />&nbsp;{L_GB} <br/>
+		<input class="post" type="text" size="5" name="bonus_upload[]" value="{bonus_upload.UP}" />&nbsp;{L_GB} <br />
 		<input class="post" type="text" size="5" name="bonus_upload_price[]" value="{bonus_upload.PRICE}" />&nbsp;{L_PRICE}
 		<input onclick="$('#bonus_upload_{bonus_upload.UP}').remove();" class="post" type="button" size="2" value="{L_DELETE}" />
 	</td>
@@ -361,7 +361,7 @@
 <tr id="bonus_upload">
 	<td><h4>{L_SEED_BONUS_ROPORTION}</h4><h6></h6></td>
 	<td>
-		<input class="post" type="text" size="5" name="bonus_upload[]" value="" />&nbsp;{L_GB} <br/>
+		<input class="post" type="text" size="5" name="bonus_upload[]" value="" />&nbsp;{L_GB} <br />
 		<input class="post" type="text" size="5" name="bonus_upload_price[]" value="" />&nbsp;{L_PRICE}
 		<input onclick="$('#bonus_upload').clone().appendTo('.bonus_upload');" class="post" type="button" size="2" value="+" />
 		<input onclick="$('#bonus_upload').remove();" class="post" type="button" size="2" value="-" />

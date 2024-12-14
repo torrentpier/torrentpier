@@ -1,7 +1,7 @@
 <h1>{L_BAN_CONTROL}</h1>
 
 <p>{L_BAN_EXPLAIN}</p>
-<br/>
+<br />
 
 <form method="post" name="post" action="{S_BANLIST_ACTION}">
 
@@ -17,7 +17,7 @@
 		<th colspan="2">{L_UNBAN_USERNAME}</th>
 	</tr>
 	<tr>
-		<td class="row1">{L_USERNAME}: <br/><span class="small">{L_UNBAN_USERNAME_EXPLAIN}</span></td>
+		<td class="row1">{L_USERNAME}: <br /><span class="small">{L_UNBAN_USERNAME_EXPLAIN}</span></td>
 		<td class="row2">{S_UNBAN_USERLIST_SELECT}</td>
 	</tr>
 	<tr>

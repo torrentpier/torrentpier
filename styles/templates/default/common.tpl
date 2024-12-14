@@ -1,7 +1,7 @@
 <!-- IF TPL_BB_DIE -->
 <!--========================================================================-->
 
-<!-- IF IN_ADMIN --><br/><br/><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
+<!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
 
 <table class="forumline message">
 	<tr><th>{L_INFORMATION}</th></tr>
@@ -11,7 +11,7 @@
 	</td></tr>
 </table>
 
-<!-- IF IN_ADMIN --><br/><br/><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
+<!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_BB_DIE -->

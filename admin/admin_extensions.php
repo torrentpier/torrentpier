@@ -150,7 +150,7 @@ if ($submit && $mode == 'extensions') {
                     if (strtolower(trim($row[$i]['extension'])) == strtolower(trim($extension))) {
                         $error = true;
                         if (isset($error_msg)) {
-                            $error_msg .= '<br/>';
+                            $error_msg .= '<br />';
                         }
                         $error_msg .= sprintf($lang['EXTENSION_EXIST'], strtolower(trim($extension)));
                     }
@@ -174,7 +174,7 @@ if ($submit && $mode == 'extensions') {
     }
 
     if (!$error) {
-        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
@@ -325,7 +325,7 @@ if ($submit && $mode == 'groups') {
                 if ($row[$i]['group_name'] == $extension_group) {
                     $error = true;
                     if (isset($error_msg)) {
-                        $error_msg .= '<br/>';
+                        $error_msg .= '<br />';
                     }
                     $error_msg .= sprintf($lang['EXTENSION_GROUP_EXIST'], $extension_group);
                 }
@@ -354,7 +354,7 @@ if ($submit && $mode == 'groups') {
     }
 
     if (!$error) {
-        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
@@ -662,7 +662,7 @@ if ($e_mode == 'perm' && $group) {
     $message = '';
 
     foreach ($empty_perm_forums as $forum_id => $forum_name) {
-        $message .= ($message == '') ? $forum_name : '<br/>' . $forum_name;
+        $message .= ($message == '') ? $forum_name : '<br />' . $forum_name;
     }
 
     if (count($empty_perm_forums) > 0) {

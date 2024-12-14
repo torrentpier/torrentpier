@@ -183,7 +183,7 @@ switch ($mode) {
 
     case 'delete':
         \TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
-        bb_die($lang['JOB_REMOVED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         break;
 }
 

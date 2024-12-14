@@ -86,7 +86,7 @@ if ($submit && $confirm) {
 
     $datastore->update('cat_forums');
 
-    bb_die($lang['CONFIG_UPD'] . '<br/><br/>' . sprintf($lang['RETURN_CONFIG'], '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die($lang['CONFIG_UPD'] . '<br /><br />' . sprintf($lang['RETURN_CONFIG'], '<a href="admin_bt_forum_cfg.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 }
 
 // Set template vars

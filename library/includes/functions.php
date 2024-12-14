@@ -1379,7 +1379,7 @@ function bb_simple_die($txt, $status_code = null)
     }
 
     if (!empty($_COOKIE['explain'])) {
-        bb_die("bb_simple_die:<br/><br/>$txt");
+        bb_die("bb_simple_die:<br /><br />$txt");
     }
 
     die($txt);
@@ -1853,9 +1853,9 @@ function set_pr_die_append_msg($pr_uid)
 
     $template->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="' . PROFILE_URL . $pr_uid . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_RETURN'] . '</a>
-		<br/><br/>
+		<br /><br />
 		<a href="profile.php?mode=editprofile' . (IS_ADMIN ? "&amp;" . POST_USERS_URL . "=$pr_uid" : '') . '" onclick="return post2url(this.href, {after_edit: 1});">' . $lang['PROFILE_EDIT_RETURN'] . '</a>
-		<br/><br/>
+		<br /><br />
 		<a href="index.php">' . $lang['INDEX_RETURN'] . '</a>
 	');
 }

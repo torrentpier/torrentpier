@@ -159,18 +159,18 @@ if ($check_upload) {
     // Does the target directory exist, is it a directory and writeable
     if (!@file_exists(realpath($upload_dir))) {
         $error = true;
-        $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br/>';
+        $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
     }
 
     if (!$error && !is_dir($upload_dir)) {
         $error = true;
-        $error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $attach_config['upload_dir']) . '<br/>';
+        $error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $attach_config['upload_dir']) . '<br />';
     }
 
     if (!$error) {
         if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb+'))) {
             $error = true;
-            $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br/>';
+            $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
         } else {
             @fclose($fp);
             unlink_attach($upload_dir . '/0_000000.000');
@@ -178,14 +178,14 @@ if ($check_upload) {
     }
 
     if (!$error) {
-        bb_die($lang['TEST_SETTINGS_SUCCESSFUL'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['TEST_SETTINGS_SUCCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
 // Management
 if ($submit && $mode == 'manage') {
     if (!$error) {
-        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
@@ -218,7 +218,7 @@ if ($mode == 'manage') {
 
 if ($submit && $mode == 'cats') {
     if (!$error) {
-        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
@@ -308,19 +308,19 @@ if ($check_image_cat) {
 
         if (!@file_exists(realpath($upload_dir))) {
             $error = true;
-            $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br/>';
+            $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
         }
     }
 
     if (!$error && !is_dir($upload_dir)) {
         $error = true;
-        $error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $upload_dir) . '<br/>';
+        $error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $upload_dir) . '<br />';
     }
 
     if (!$error) {
         if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb+'))) {
             $error = true;
-            $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br/>';
+            $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
         } else {
             @fclose($fp);
             @unlink($upload_dir . '/0_000000.000');
@@ -328,7 +328,7 @@ if ($check_image_cat) {
     }
 
     if (!$error) {
-        bb_die($lang['TEST_SETTINGS_SUCCESSFUL'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['TEST_SETTINGS_SUCCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
@@ -397,7 +397,7 @@ if ($submit && $mode == 'quota') {
                 if ($row[$i]['quota_desc'] == $quota_desc) {
                     $error = true;
                     if (isset($error_msg)) {
-                        $error_msg .= '<br/>';
+                        $error_msg .= '<br />';
                     }
                     $error_msg .= sprintf($lang['QUOTA_LIMIT_EXIST'], $extension_group);
                 }
@@ -417,7 +417,7 @@ if ($submit && $mode == 'quota') {
     }
 
     if (!$error) {
-        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=quota">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=quota">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
 

@@ -664,7 +664,7 @@ function build_poll_add_form (src_el)
 
 <table width="100%">
 <tr>
-	<td width="40%" valign="top" nowrap="nowrap"><span class="small">{S_WATCH_TOPIC}</span><br/>
+	<td width="40%" valign="top" nowrap="nowrap"><span class="small">{S_WATCH_TOPIC}</span><br />
 	<div class="small">
 <!-- IF S_TOPIC_ADMIN -->
 		<br clear="all" />

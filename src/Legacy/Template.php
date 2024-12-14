@@ -204,7 +204,7 @@ class Template
             if ($quiet) {
                 return false;
             }
-            die('Template->make_filename(): Error - template file not found: <br/><br/>' . hide_bb_path($this->files[$handle]));
+            die('Template->make_filename(): Error - template file not found: <br /><br />' . hide_bb_path($this->files[$handle]));
         }
         // checking if we should recompile cache
         if (!empty($this->files_cache[$handle])) {

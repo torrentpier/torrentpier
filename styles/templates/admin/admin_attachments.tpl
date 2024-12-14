@@ -4,33 +4,33 @@
 <h1>{L_MANAGE_CATEGORIES}</h1>
 
 <p>{L_MANAGE_CATEGORIES_EXPLAIN}</p>
-<br/>
+<br />
 
 <form action="{S_ATTACH_ACTION}" method="post">
 <table class="forumline">
 	<tr>
-	  <th colspan="2">{L_SETTINGS_CAT_IMAGES}<br/>{L_ASSIGNED_GROUP}: {S_ASSIGNED_GROUP_IMAGES}</th>
+	  <th colspan="2">{L_SETTINGS_CAT_IMAGES}<br />{L_ASSIGNED_GROUP}: {S_ASSIGNED_GROUP_IMAGES}</th>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_DISPLAY_INLINED}<br/><span class="small">{L_DISPLAY_INLINED_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_DISPLAY_INLINED}<br /><span class="small">{L_DISPLAY_INLINED_EXPLAIN}</span></td>
 		<td class="row2"><input type="radio" name="img_display_inlined" value="1" {DISPLAY_INLINED_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="img_display_inlined" value="0" {DISPLAY_INLINED_NO} /> {L_NO}</td>
 	</tr>
 <!-- BEGIN switch_thumbnail_support -->
 	<tr>
-		<td class="row1" width="80%">{L_IMAGE_CREATE_THUMBNAIL}<br/></td>
+		<td class="row1" width="80%">{L_IMAGE_CREATE_THUMBNAIL}<br /></td>
 		<td class="row2"><input type="radio" name="img_create_thumbnail" value="1" {CREATE_THUMBNAIL_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="img_create_thumbnail" value="0" {CREATE_THUMBNAIL_NO} /> {L_NO}</td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_IMAGE_MIN_THUMB_FILESIZE}<br/><span class="small">{L_IMAGE_MIN_THUMB_FILESIZE_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_IMAGE_MIN_THUMB_FILESIZE}<br /><span class="small">{L_IMAGE_MIN_THUMB_FILESIZE_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="7" maxlength="15" name="img_min_thumb_filesize" value="{IMAGE_MIN_THUMB_FILESIZE}" class="post" /> {L_BYTES}</td>
 	</tr>
 <!-- END switch_thumbnail_support -->
 	<tr>
-		<td class="row1" width="80%">{L_MAX_IMAGE_SIZE} <br/><span class="small">{L_MAX_IMAGE_SIZE_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_MAX_IMAGE_SIZE} <br /><span class="small">{L_MAX_IMAGE_SIZE_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="3" maxlength="4" name="img_max_width" value="{IMAGE_MAX_WIDTH}" class="post" /> x <input type="text" size="3" maxlength="4" name="img_max_height" value="{IMAGE_MAX_HEIGHT}" class="post" /></td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_IMAGE_LINK_SIZE} <br/><span class="small">{L_IMAGE_LINK_SIZE_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_IMAGE_LINK_SIZE} <br /><span class="small">{L_IMAGE_LINK_SIZE_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="3" maxlength="4" name="img_link_width" value="{IMAGE_LINK_WIDTH}" class="post" /> x <input type="text" size="3" maxlength="4" name="img_link_height" value="{IMAGE_LINK_HEIGHT}" class="post" /></td>
 	</tr>
 	<tr>
@@ -48,7 +48,7 @@
 <h1>{L_ATTACH_SETTINGS}</h1>
 
 <p>{L_MANAGE_ATTACHMENTS_EXPLAIN}</p>
-<br/>
+<br />
 
 <form action="{S_ATTACH_ACTION}" method="post">
     <table class="forumline">
@@ -147,7 +147,7 @@
 <h1>{L_MANAGE_QUOTAS}</h1>
 
 <p>{L_MANAGE_QUOTAS_EXPLAIN}</p>
-<br/>
+<br />
 
 <form method="post" action="{S_ATTACH_ACTION}">
 <table class="forumline">

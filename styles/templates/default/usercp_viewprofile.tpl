@@ -333,10 +333,10 @@ ajax.callback.group_membership = function(data) {
 					<div class="menu-sub row1 border bw_TRBL" id="admin">
 						<fieldset class="mrg_6">
 							<div class="tLeft" style="padding: 5px 6px 6px; display: block; font-size: 13px;">
-								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: '<!-- IF USER_ACTIVE -->user_deactivate<!-- ELSE -->user_activate<!-- ENDIF -->', user_id : {PROFILE_USER_ID}}); return false;" class="<!-- IF USER_ACTIVE -->adm<!-- ELSE -->seed bold<!-- ENDIF -->"><!-- IF USER_ACTIVE -->{L_USER_DEACTIVATE}<!-- ELSE -->{L_USER_ACTIVATE}<!-- ENDIF --></a> <br/>
-								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> <br/>
-								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_ALL_POSTS}</a> <br/>
-								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> <br/>
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: '<!-- IF USER_ACTIVE -->user_deactivate<!-- ELSE -->user_activate<!-- ENDIF -->', user_id : {PROFILE_USER_ID}}); return false;" class="<!-- IF USER_ACTIVE -->adm<!-- ELSE -->seed bold<!-- ENDIF -->"><!-- IF USER_ACTIVE -->{L_USER_DEACTIVATE}<!-- ELSE -->{L_USER_ACTIVATE}<!-- ENDIF --></a> <br />
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> <br />
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_ALL_POSTS}</a> <br />
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> <br />
 							</div>
 						</fieldset>
 						<fieldset class="mrg_6">
@@ -590,7 +590,7 @@ $(function(){
 </tfoot>
 </table>
 </div>
-<br/>
+<br />
 <!-- ELSE -->
 	<h1 class="pagetitle tCenter">{L_CUR_ACTIVE_DLS}: <span class="normal">{L_NO}</span></h1>
 <!-- ENDIF -->

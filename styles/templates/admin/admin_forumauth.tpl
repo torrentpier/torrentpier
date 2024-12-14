@@ -1,12 +1,12 @@
 <h1>{L_AUTH_CONTROL_FORUM}</h1>
 
 <p>{L_FORUM_AUTH_EXPLAIN}</p>
-<br/>
+<br />
 
 <!-- IF TPL_AUTH_SELECT_FORUM -->
 <!--========================================================================-->
 
-<br/>
+<br />
 
 <form method="post" action="{S_AUTH_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -25,7 +25,7 @@
 
 </form>
 
-<br/><br/><br/><br/>
+<br /><br /><br /><br />
 <!--========================================================================-->
 <!-- ENDIF / TPL_AUTH_SELECT_FORUM -->
 

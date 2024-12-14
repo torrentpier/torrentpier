@@ -783,13 +783,13 @@ if ($mode == 'read') {
             }
         } else {
             $error = true;
-            $error_msg .= ((!empty($error_msg)) ? '<br/>' : '') . $lang['NO_TO_USER'];
+            $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['NO_TO_USER'];
         }
 
         $privmsg_subject = htmlCHR($_POST['subject']);
         if (empty($privmsg_subject)) {
             $error = true;
-            $error_msg .= ((!empty($error_msg)) ? '<br/>' : '') . $lang['EMPTY_SUBJECT'];
+            $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['EMPTY_SUBJECT'];
         }
 
         if (!empty($_POST['message'])) {
@@ -798,7 +798,7 @@ if ($mode == 'read') {
             }
         } else {
             $error = true;
-            $error_msg .= ((!empty($error_msg)) ? '<br/>' : '') . $lang['EMPTY_MESSAGE'];
+            $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['EMPTY_MESSAGE'];
         }
 
         // Check smilies limit
@@ -806,7 +806,7 @@ if ($mode == 'read') {
             $count_smilies = substr_count(bbcode2html($privmsg_message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
             if ($count_smilies > $bb_cfg['max_smilies_pm']) {
                 $error = true;
-                $error_msg .= ((!empty($error_msg)) ? '<br/>' : '') . sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies_pm']);
+                $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies_pm']);
             }
         }
     }
@@ -1431,12 +1431,12 @@ function pm_die($msg)
 {
     global $lang;
 
-    $msg .= '<br/><br/>';
+    $msg .= '<br /><br />';
     $msg .= sprintf($lang['CLICK_RETURN_INBOX'], '<a href="' . PM_URL . "?folder=inbox" . '">', '</a> ');
     $msg .= sprintf($lang['CLICK_RETURN_SENTBOX'], '<a href="' . PM_URL . "?folder=sentbox" . '">', '</a> ');
     $msg .= sprintf($lang['CLICK_RETURN_OUTBOX'], '<a href="' . PM_URL . "?folder=outbox" . '">', '</a> ');
     $msg .= sprintf($lang['CLICK_RETURN_SAVEBOX'], '<a href="' . PM_URL . "?folder=savebox" . '">', '</a> ');
-    $msg .= '<br/><br/>';
+    $msg .= '<br /><br />';
     $msg .= sprintf($lang['CLICK_RETURN_INDEX'], '<a href="' . "index.php" . '">', '</a>');
 
     bb_die($msg);

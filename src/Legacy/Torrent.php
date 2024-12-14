@@ -333,7 +333,7 @@ class Torrent
         $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
 
         if (!is_file($filename)) {
-            self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT'] . '<br/><br/>' . htmlCHR($filename));
+            self::torrent_error_exit($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
         }
 
         $file_contents = file_get_contents($filename);
@@ -673,7 +673,7 @@ class Torrent
         $dl_fname = html_entity_decode($topic_title, ENT_QUOTES, 'UTF-8') . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
 
         if (!empty($_COOKIE['explain'])) {
-            $out = "attach path: $filename<br/><br/>";
+            $out = "attach path: $filename<br /><br />";
             $tor['info']['pieces'] = '[...] ' . strlen($tor['info']['pieces']) . ' bytes';
             $out .= print_r($tor, true);
             bb_die("<pre>$out</pre>");
@@ -789,9 +789,9 @@ class Torrent
 
         if (isset($reg_mode) && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
             if (isset($return_message)) {
-                $msg .= $return_message . '<br/><br/><hr /><br/>';
+                $msg .= $return_message . '<br /><br /><hr /><br />';
             }
-            $msg .= '<b>' . $lang['BT_REG_FAIL'] . '</b><br/><br/>';
+            $msg .= '<b>' . $lang['BT_REG_FAIL'] . '</b><br /><br />';
         }
 
         bb_die($msg . $message);

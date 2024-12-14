@@ -218,7 +218,7 @@ var TPL = {
 				// вставка нешаблонного элемента
 				else {
 					if (el == 'BR') {
-						el_html = '<br/>';
+						el_html = '<br />';
 					}
 					else {
 						el_html = '<span class="rel-el rel-free-el">'+ escHTML(el) +'</span>';
@@ -4672,7 +4672,7 @@ $(function(){
 	</tr>
 	<tr>
 		<td>
-			<input type="text" id="tpl-row-src" value="" style="width: 100%;" /><br/>
+			<input type="text" id="tpl-row-src" value="" style="width: 100%;" /><br />
 			<a class="med" href="#" onclick="$('#tpl-row-src').val(''); return false;">очистить</a> &nbsp;&middot;&nbsp;
 			<a class="med" href="#" onclick="$('#tpl-src-form').val( $('#tpl-src-form').val() +'\n<-'+ $('#tpl-row-src').val() +' ->' ).focus(); return false;">добавить в форму</a> &nbsp;&middot;&nbsp;
 			<a class="med" href="#" onclick="$('#tpl-row-src').trigger('keypress', [13]).focus(); return false;" title="Нажать Enter">обновить результат (enter)</a>
@@ -4713,7 +4713,7 @@ $(function(){
 		<div class="clear"></div>
 
 		<div id="tpl-info-block" style="display: none;" class="tpl-adm-block med row3">
-			<br/>
+			<br />
 			<fieldset>
 			<legend>Включить/Загрузить</legend>
 			<div style="padding: 2px 12px 6px;">
@@ -4723,56 +4723,56 @@ $(function(){
 			<input type="button" value="Загрузить" onclick="ajax.topic_tpl('load')" /> &nbsp;
             <input type="button" value="{L_REMOVE}" onclick="ajax.topic_tpl('remove')" /> &nbsp;
 			<!-- ELSE -->Нет шаблонов для релизов<!-- ENDIF -->
-			<br/><br/>
+			<br /><br />
 			<span class="gen">
 			<!-- IF NO_TPL_ASSIGNED -->
-			В этом форуме шаблоны <b>не включены</b><br/>
+			В этом форуме шаблоны <b>не включены</b><br />
 			<!-- ELSE -->
-			Сейчас в этом форуме включен шаблон: <b>{TPL_NAME}</b><br/>
+			Сейчас в этом форуме включен шаблон: <b>{TPL_NAME}</b><br />
 			<!-- ENDIF -->
 			</span>
 			</div>
 			</fieldset>
-			<br/>
+			<br />
 
 			<div <!-- IF NO_TPL_ASSIGNED -->style="display: none;"<!-- ENDIF --> id="tpl-save-block">
 			<fieldset>
 			<legend>Сохранить изменения для шаблона <b id="tpl-name-old-save">{TPL_NAME}</b></legend>
 			<div style="padding: 2px 12px 6px;">
 			<div class="label">Новое название шаблона:</div>
-			<input type="text" id="tpl-name-save" size="60" value="{TPL_NAME}" maxlength="60" class="bold" style="width: 75%" /><br/>
+			<input type="text" id="tpl-name-save" size="60" value="{TPL_NAME}" maxlength="60" class="bold" style="width: 75%" /><br />
 
 			<div class="label"><a href="{POST_URL}{TPL_RULES_POST_ID}#{TPL_RULES_POST_ID}" id="tpl-rules-link" target="_blank">Правила</a> (ссылка на сообщение с правилами или номер сообщения):</div>
-			<input type="text" id="tpl-rules-save" size="60" value="{TPL_RULES_POST_ID}" style="width: 75%" /><br/>
+			<input type="text" id="tpl-rules-save" size="60" value="{TPL_RULES_POST_ID}" style="width: 75%" /><br />
 
 			<div class="label">{L_COMMENT}:</div>
 			<textarea id="tpl-comment-save" rows="2" cols="80" class="editor" style="width: 90%">{TPL_COMMENT}</textarea>
 
 			<div class="label">Последний раз редактировалось: <i id="tpl-last-edit-time">{TPL_LAST_EDIT_TIME}</i> by <b id="tpl-last-edit-by">{TPL_LAST_EDIT_USER}</b></div>
-			<br/>
+			<br />
 
 			<input type="hidden" id="tpl-id-save" value="{TPL_ID}">
 			<input type="hidden" id="tpl-last-edit-tst" value="{TPL_LAST_EDIT_TIMESTAMP}">
 			<input type="button" class="bold" value="Сохранить изменения" onclick="ajax.topic_tpl('save')" />
-			<br/>
+			<br />
 			</div>
 			</fieldset>
-			<br/>
+			<br />
 			</div>
 			<div id="tpl-load-resp"></div>
 		</div>
 
 		<div id="tpl-new-block" style="display: none;" class="tpl-adm-block med row3">
 			<div class="label">Название шаблона: *</div>
-			<input type="text" id="tpl-name-new" size="60" value="" maxlength="60" class="bold" style="width: 75%" /><br/>
+			<input type="text" id="tpl-name-new" size="60" value="" maxlength="60" class="bold" style="width: 75%" /><br />
 
 			<div class="label">Правила (ссылка на сообщение с правилами или номер сообщения):</div>
-			<input type="text" id="tpl-rules-new" size="60" value="" style="width: 75%" /><br/>
+			<input type="text" id="tpl-rules-new" size="60" value="" style="width: 75%" /><br />
 
 			<div class="label">{L_COMMENT}:</div>
-			<textarea id="tpl-comment-new" rows="2" cols="10" class="editor" style="width: 100%"></textarea><br/>
+			<textarea id="tpl-comment-new" rows="2" cols="10" class="editor" style="width: 100%"></textarea><br />
 
-			<input type="button" class="bold" value="Создать новый шаблон" onclick="ajax.topic_tpl('new');" /><br/><br/>
+			<input type="button" class="bold" value="Создать новый шаблон" onclick="ajax.topic_tpl('new');" /><br /><br />
 			<div id="tpl-new-resp"></div>
 		</div>
 	</div>
@@ -4815,12 +4815,12 @@ $(function(){
 	<td colspan="2">
 	<div class="tRight med">[ <u class="clickable" onclick="$('#tpl-howto').toggle();">Инструкция</u> ]</div>
 	<div id="tpl-howto" class="med pad_12" style="display: none;">
-	После заполнения поля <b>форма</b> нажмите кнопку <b>Создать форму</b><br/><br/>
-	В поле <b>сообщение</b> добавьте элементам необходимые атрибуты (req, spoiler и т.д.)<br/><br/>
-	Заполните созданную форму (вручную либо автозаполнителем)<br/><br/>
-    Кнопки <b>Продолжить</b> и <b>Создать сообщение</b> - создают BBCode сообщения<br/><br/>
-    Далее заполните поле <b>название</b><br/><br/>
-    Кнопка <b>{L_AJAX_PREVIEW}</b> - показывает итоговый результат<br/><br/>
+	После заполнения поля <b>форма</b> нажмите кнопку <b>Создать форму</b><br /><br />
+	В поле <b>сообщение</b> добавьте элементам необходимые атрибуты (req, spoiler и т.д.)<br /><br />
+	Заполните созданную форму (вручную либо автозаполнителем)<br /><br />
+    Кнопки <b>Продолжить</b> и <b>Создать сообщение</b> - создают BBCode сообщения<br /><br />
+    Далее заполните поле <b>название</b><br /><br />
+    Кнопка <b>{L_AJAX_PREVIEW}</b> - показывает итоговый результат<br /><br />
     Далее нажмите на кнопку <b>Продолжить (Создать релиз)</b> - откроется страница где вы сможете прикрепить файл и опубликовать релиз
 	</div>
 	</td>
@@ -4871,42 +4871,42 @@ $(function(){
 <!-- IF EDIT_TPL -->
 <div id="tpl-help-form" class="menu-sub tpl-help-msg" style="width: 800px;">
 	<h4>Скрипт для построения формы</h4>
-	<br/>
+	<br />
 	Формат: <b class="hlp-1">&lt;-</b><b>название_строки_формы</b> &nbsp; <b>элементы</b><b class="hlp-1">-&gt;</b>
-	<br/><br/>
+	<br /><br />
 	Каждый элемент задается в виде: <b class="hlp-1">ТИП</b>[<b>имя_элемента</b>,<b class="hlp-2">опциональные_атрибуты</b>]
-	<br/><br/>
-	<b>INP</b> - однострочное поле для ввода текста, опционально можно указать количество вводимых символов и ширину поля<br/>
+	<br /><br />
+	<b>INP</b> - однострочное поле для ввода текста, опционально можно указать количество вводимых символов и ширину поля<br />
 	<b>INP[genre,200,70]</b> - можно ввести максимум 200 символов, ширина поля 70 символов (ширину больше 80-ти делать не нужно)
-	<br/><br/>
-	<b>TXT</b> - многострочное поле для ввода текста, опционально можно указать высоту<br/>
+	<br /><br />
+	<b>TXT</b> - многострочное поле для ввода текста, опционально можно указать высоту<br />
 	<b>TXT[casting,10]</b> - высота поля будет 10 строк
-	<br/><br/>
-	<b>SEL</b> - раскрывающийся список с выбором<br/>
+	<br /><br />
+	<b>SEL</b> - раскрывающийся список с выбором<br />
 	<b>SEL[video_quality]</b>
-	<br/><br/>
-	<b>E</b> - статичный либо скрытый элемент (обычно не имеющий названия и не являющийся полем ввода текста)<br/>
+	<br /><br />
+	<b>E</b> - статичный либо скрытый элемент (обычно не имеющий названия и не являющийся полем ввода текста)<br />
 	<b>E[load_pic_btn]</b> - кнопка загрузки картинки
-	<br/><br/>
-	<b>T</b> - вставляет только название элемента<br/>
+	<br /><br />
+	<b>T</b> - вставляет только название элемента<br />
 	<b>T[rus_sub]</b> - добавляет в форму название элемента <b>Русские субтитры</b>
-	<br/><br/>
-	<b class="hlp-2">`</b><b class="hlp-1">текст...</b><b class="hlp-2">`</b> - любой текст и спец. элементы типа `BR` (добавить перевод строки)<br/>
+	<br /><br />
+	<b class="hlp-2">`</b><b class="hlp-1">текст...</b><b class="hlp-2">`</b> - любой текст и спец. элементы типа `BR` (добавить перевод строки)<br />
 	<b class="hlp-2">`</b>на русском<b class="hlp-2">`</b> - добавляет в форму текст <i>на русском</i>
 </div>
 
 <div id="tpl-help-title" class="menu-sub tpl-help-msg" style="width: 800px;">
 	<h4>Скрипт для построения названия топика</h4>
-	<br/>
+	<br />
 	Формат: <b class="hlp-1">&lt;-</b><b>группа элементов</b><b class="hlp-1">-&gt;</b><b class="hlp-2">объединитель для этой группы</b>
-	<br/><br/>
-	пример:<br/>
+	<br /><br />
+	пример:<br />
 	<p class="gen bold pad_8">
 		<b class="hlp-1">&lt;-</b>title_rus title_eng<b class="hlp-1">-&gt;</b><b class="hlp-2">/</b>
 		<b class="hlp-1">&lt;-</b>director year<b class="hlp-1">-&gt;</b><b class="hlp-2">(,)</b>
 		<b class="hlp-1">&lt;-</b>genre video_quality<b class="hlp-1">-&gt;</b><b class="hlp-2">[,]</b>
 	</p>
-	создаст:<br/>
+	создаст:<br />
 	<p class="gen bold pad_8">
 		Название <b class="hlp-2">/</b> Оригинальное название
 		<b class="hlp-2">(</b>Режиссер<b class="hlp-2">,</b> 2000 г.<b class="hlp-2">)</b>
@@ -4916,26 +4916,26 @@ $(function(){
 
 <div id="tpl-help-msg" class="menu-sub tpl-help-msg" style="width: 600px;">
 	<h4>Скрипт для построения сообщения</h4>
-	<br/>
+	<br />
 	Формат: <b>имя_элемента</b>[<i>атрибут1,атрибут2</i>]
-	<br/><br/>
+	<br /><br />
 	При создании формы (кнопка <i>Создать форму</i> и при построении того что видит юзер)
 	этот скрипт каждый раз проверяется на соответстие элементам формы. При этом отсутствующие в форме элементы из него удаляются,
 	а прописанные в форме, но в нем не найденные, добавляются.
-	<br/><br/>
+	<br /><br />
 	Порядок элементов зависит от того как они прописаны в форме
-	<br/><br/>
+	<br /><br />
 	Описание атрибутов - во всплывающей подсказке (наведите мышку на любой атрибут в списке снизу)
 </div>
 
 <div id="tpl-help-preview" class="menu-sub tpl-help-msg" style="width: 400px;">
 	<h4>Конструктор и предпросмотр элементов</h4>
-	<br/>
+	<br />
 	В IE часть функций не работает!
-	<br/><br/>
-	Подставляет в строку конструктора текущую строку из формы<br/>
-	В конструкторе для обновления предпросмотра нужно нажать enter<br/>
-	Скрытые элементы выделены красным цветом<br/>
+	<br /><br />
+	Подставляет в строку конструктора текущую строку из формы<br />
+	В конструкторе для обновления предпросмотра нужно нажать enter<br />
+	Скрытые элементы выделены красным цветом<br />
 </div>
 
 <div id="tpl-help-ctl" class="menu-sub tpl-help-msg" style="width: 400px;">

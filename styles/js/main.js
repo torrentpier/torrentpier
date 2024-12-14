@@ -441,7 +441,7 @@ $(document).ready(function () {
       status = '';
       text = 'invalid data format';
     }
-    $(this).html("Error in: <i>" + ajax.url + "</i><br/><b>" + status + " " + text + "</b>").show();
+    $(this).html("Error in: <i>" + ajax.url + "</i><br /><b>" + status + " " + text + "</b>").show();
     ajax.setStatusBoxPosition($(this));
   });
 

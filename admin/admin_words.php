@@ -15,7 +15,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (!$bb_cfg['use_word_censor']) {
-    bb_die('Word censor disabled <br/><br/> ($bb_cfg[\'use_word_censor\'] in config.php)');
+    bb_die('Word censor disabled <br /><br /> ($bb_cfg[\'use_word_censor\'] in config.php)');
 }
 
 $mode = request_var('mode', '');
@@ -81,7 +81,7 @@ if ($mode != '') {
         }
 
         $datastore->update('censor');
-        $message .= '<br/><br/>' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
         bb_die($message);
     } elseif ($mode == 'delete') {
@@ -96,7 +96,7 @@ if ($mode != '') {
 
             $datastore->update('censor');
 
-            bb_die($lang['WORD_REMOVED'] . '<br/><br/>' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br/><br/>' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die($lang['WORD_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         } else {
             bb_die($lang['NO_WORD_SELECTED']);
         }

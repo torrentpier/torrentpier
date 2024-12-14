@@ -33,7 +33,7 @@ function send_file_to_browser($attachment, $upload_dir)
     if (is_file(realpath($filename))) {
         $gotit = true;
     } else {
-        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br/><br/>' . htmlCHR($filename));
+        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
     }
 
     // Correct the mime type - we force application/octet-stream for all files, except images
@@ -68,7 +68,7 @@ function send_file_to_browser($attachment, $upload_dir)
         }
         readfile($filename);
     } else {
-        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br/><br/>' . htmlCHR($filename));
+        bb_die($lang['ERROR_NO_ATTACHMENT'] . '<br /><br />' . htmlCHR($filename));
     }
 
     exit;
@@ -193,14 +193,14 @@ for ($i = 0; $i < $num_rows; $i++) {
 
 // Disallowed
 if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
-    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br/><br/>' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
+    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
 }
 
 // Getting download mode by extension
 if (isset($download_mode[$attachment['extension']])) {
     $download_mode = (int)$download_mode[$attachment['extension']];
 } else {
-    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br/><br/>' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
+    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']) . '<br /><br />' . $lang['FILENAME'] . ":&nbsp;" . $attachment['physical_filename']);
 }
 
 // Update download count

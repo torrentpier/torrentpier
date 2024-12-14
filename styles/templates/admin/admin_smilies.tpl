@@ -4,7 +4,7 @@
 <h1>{L_SMILEY_TITLE}</h1>
 
 <p>{L_SMILE_DESC}</p>
-<br/>
+<br />
 
 <form method="post" action="{S_SMILEY_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -41,7 +41,7 @@
 <h1>{L_SMILEY_TITLE}</h1>
 
 <p>{L_SMILEY_IMPORT_INST}</p>
-<br/>
+<br />
 
 <script type="text/javascript">
 function update_smiley(newimage)
@@ -85,7 +85,7 @@ function update_smiley(newimage)
 <h1>{L_SMILEY_TITLE}</h1>
 
 <p>{L_SMILEY_IMPORT_INST}</p>
-<br/>
+<br />
 
 <form method="post" action="{S_SMILEY_ACTION}">
 {S_HIDDEN_FIELDS}
@@ -103,7 +103,7 @@ function update_smiley(newimage)
 		<td class="row1"><input type="checkbox" name="clear_current" value="1" /></td>
 	</tr>
 	<tr>
-		<td class="row2 tCenter" colspan="2">{L_SMILE_CONFLICTS}<br/><input type="radio" name="replace" value="1" checked/> {L_REPLACE_EXISTING} &nbsp; <input type="radio" name="replace" value="0" /> {L_KEEP_EXISTING}</td>
+		<td class="row2 tCenter" colspan="2">{L_SMILE_CONFLICTS}<br /><input type="radio" name="replace" value="1" checked/> {L_REPLACE_EXISTING} &nbsp; <input type="radio" name="replace" value="0" /> {L_KEEP_EXISTING}</td>
 	</tr>
 	<tr>
 		<td class="catBottom" colspan="2"><input class="mainoption" name="import_pack" type="submit" value="{L_IMPORT}" /></td>

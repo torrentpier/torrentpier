@@ -145,7 +145,7 @@ function init_display_post_attachments($switch_attachment)
         //bt
         if ($rows[$i]['tracker_status']) {
             if (defined('TORRENT_POST')) {
-                bb_die('Multiple registered torrents in one topic<br/><br/>first torrent found in post_id = ' . TORRENT_POST . '<br/>current post_id = ' . $rows[$i]['post_id'] . '<br/><br/>attachments info:<br/><pre style="text-align: left;">' . print_r($rows, true) . '</pre>');
+                bb_die('Multiple registered torrents in one topic<br /><br />first torrent found in post_id = ' . TORRENT_POST . '<br />current post_id = ' . $rows[$i]['post_id'] . '<br /><br />attachments info:<br /><pre style="text-align: left;">' . print_r($rows, true) . '</pre>');
             }
             define('TORRENT_POST', $rows[$i]['post_id']);
         }
@@ -192,7 +192,7 @@ function display_attachments($post_id)
 
         $display_name = htmlspecialchars($attachments['_' . $post_id][$i]['real_filename']);
         $comment = htmlspecialchars($attachments['_' . $post_id][$i]['comment']);
-        $comment = str_replace("\n", '<br/>', $comment);
+        $comment = str_replace("\n", '<br />', $comment);
 
         $denied = false;
 

@@ -24,7 +24,7 @@
 
 		<div class="clear"></div>
 
-		<br/><br/>
+		<br /><br />
 
 		<div class="med bold tCenter">
 			<!-- IF HTML_AGREEMENT -->
@@ -39,23 +39,23 @@
 			<a href="{$bb_cfg['advert_url']}" onclick="window.open(this.href, '', IWP); return false;">{L_ADVERT}</a>
 			<!-- ENDIF -->
 		</div>
-		<br/>
+		<br />
 
 		<!-- IF SHOW_ADMIN_LINK -->
 		<div class="tiny tCenter"><a href="{ADMIN_LINK_HREF}">{L_ADMIN_PANEL}</a></div>
-		<br/>
+		<br />
 		<!-- ENDIF -->
 
 		<div class="copyright tCenter">
-			{POWERED}<br/>
+			{POWERED}<br />
 		</div>
 
 	</div>
 
 	<div class="copyright tCenter">
-		<b style="color:rgb(204,0,0);">{L_NOTICE}</b><br/>
+		<b style="color:rgb(204,0,0);">{L_NOTICE}</b><br />
 		{L_COPY}
-	</div><br/>
+	</div><br />
 
 	<!--/page_footer -->
 
