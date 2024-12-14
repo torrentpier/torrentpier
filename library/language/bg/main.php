@@ -1370,12 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Не успели да регистрират торен
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Друг торент със същото info_hash вече <a href="%s"><b>registered</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
+$lang['BT_FLIST'] = 'Files list';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Creation date';
+$lang['BT_IS_PRIVATE'] = 'Private torrent';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Изтрий от тракера';
 $lang['BT_UNREGISTERED'] = 'Торент нерегистрирани';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Torrent already unregistered';
@@ -1400,6 +1405,7 @@ $lang['SEEDING'] = 'Семена';
 $lang['LEECHING'] = 'Пиявица';
 $lang['IS_REGISTERED'] = 'Регистриран';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod
@@ -1721,7 +1727,6 @@ $lang['NOTICE'] = '!Внимание!';
 $lang['COPY'] = 'Сайта не предоставя електронни версии на продуктите, и се занимава само с колекциониране и каталогизацией линкове, изпратени и публикувани във форума от нашите читатели. Ако сте носителят на всякакъв представен материал и не желаете да се свърже към него и се озова в нашия каталог, моля свържете се с нас и ние ще я изтрием. Файлове за обмен на трекере предоставени от потребителите на сайта, и администрацията не носи отговорност за съдържанието им. Моля, не се излее на файлове, защитени с авторски права, както и файлове с незаконно съдържание!';
 
 // FILELIST
-$lang['FILELIST'] = 'Списък';
 $lang['COLLAPSE'] = 'Каталог раздялата';
 $lang['EXPAND'] = 'Разположи';
 $lang['SWITCH'] = 'Ключ';
