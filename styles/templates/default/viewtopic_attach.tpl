@@ -147,7 +147,7 @@
 	<tr class="row3">
 		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}
 		<a href="{postrow.attach.tor_reged.FILELIST_LINK}" title="{L_BT_FLIST_LINK_TITLE}" target="_blank"><img alt="{L_BT_FLIST_LINK_TITLE}" src="{postrow.attach.tor_reged.FILELIST_ICON}" width="12" height="12" border="0"></a>
-		<!-- IF MAGNET_LINKS and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
+		<!-- IF postrow.attach.tor_reged.MAGNET and not postrow.attach.tor_reged.TOR_FROZEN -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --></th>
 	</tr>
     <!-- IF postrow.attach.tor_reged.TOR_TYPE -->
     <tr class="row4">

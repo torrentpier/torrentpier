@@ -1405,6 +1405,7 @@ $lang['SEEDING'] = 'Seed';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registered';
 $lang['MAGNET'] = 'Magnet-link';
+$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
 $lang['MAGNET_v2'] = 'Magnet-link (BitTorrent v2 supported)';
 
 //torrent status mod

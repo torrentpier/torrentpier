@@ -558,6 +558,14 @@ a.postLink-name, a.postLink-name:visited {
 /* ---------------------------------- *
      Inputs, buttons, forms
  * ---------------------------------- */
+input[type=button],
+input[type=submit],
+input[type=reset],
+input[type=file],
+button {
+  cursor: pointer;
+}
+
 input, textarea, select {
   font-family: Verdana, sans-serif;
 }

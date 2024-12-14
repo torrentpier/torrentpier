@@ -124,7 +124,6 @@ $template->assign_vars([
     'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8, // 8px padding
     'POST_IMG_WIDTH_DECR_JS' => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['post_img_width_decr'],
     'ATTACH_IMG_WIDTH_DECR_JS' => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['attach_img_width_decr'],
-    'MAGNET_LINKS' => $bb_cfg['magnet_links_enabled'],
     'FEED_IMG' => '<img src="' . $_main . 'feed.png" class="feed-small" alt="' . $lang['ATOM_FEED'] . '" />',
 ]);
 
