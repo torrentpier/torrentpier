@@ -172,6 +172,13 @@
 	</td>
 </tr>
 <tr>
+    <td><h4>{L_MAGNET_FOR_GUESTS}</h4></td>
+    <td>
+        <label><input type="radio" name="magnet_links_for_guests" value="1" <!-- IF MAGNET_LINKS_FOR_GUESTS -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+        <label><input type="radio" name="magnet_links_for_guests" value="0" <!-- IF not MAGNET_LINKS_FOR_GUESTS -->checked<!-- ENDIF --> />{L_DISABLED}</label>
+    </td>
+</tr>
+<tr>
 	<td><h4>{L_GENDER}</h4></td>
 	<td>
 		<label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
