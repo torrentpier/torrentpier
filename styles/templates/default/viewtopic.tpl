@@ -448,16 +448,16 @@ function build_poll_add_form (src_el)
 				<div id="pg_{postrow.POST_ID}" class="alert alert-gray" style="width: 92%;">
 					<h4 class="alert-heading">{L_RELEASE_FROM_RG} — <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
 					<div id="pg_info_{postrow.POST_ID}">
-						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
+						<!-- IF postrow.RG_AVATAR --><hr/><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
                         <!-- IF postrow.RG_DESC --><div class="post-wrap">{L_DESCRIPTION}: {postrow.RG_DESC}</div><!-- ENDIF -->
-						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr /><div id="rg_sig">{L_SIGNATURE}: {postrow.RG_SIG}</div><!-- ENDIF -->
-						<hr /><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
+						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr/><div id="rg_sig">{L_SIGNATURE}: {postrow.RG_SIG}</div><!-- ENDIF -->
+						<hr/><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
 					</div>
 				</div>
 				<!-- ENDIF -->
 				<div id="pc_{postrow.POST_ID}" <!-- IF not postrow.MC_COMMENT -->style="display: none;"<!-- ENDIF -->>
 					<div id="mc_class_{postrow.POST_ID}" class="alert alert-{postrow.MC_CLASS}" style="width: 92%;">
-						<h4 class="alert-heading">{postrow.MC_TITLE}</h4><hr />
+						<h4 class="alert-heading">{postrow.MC_TITLE}</h4><hr/>
 						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
 					</div>
 				</div>

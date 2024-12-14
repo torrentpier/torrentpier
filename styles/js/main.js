@@ -315,7 +315,7 @@ Ajax.prototype = {
       $('body').prepend(response.raw_output);
     }
     if (response.sql_log) {
-      $('#sqlLog').prepend(response.sql_log + '<hr />');
+      $('#sqlLog').prepend(response.sql_log + '<hr/>');
       fixSqlLog();
     }
     if (response.update_ids) {

@@ -419,7 +419,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
 				<div class="warnColor1">
 					<b>' . $lang['LOCKED_WARN'] . '</b>
 				</div>
-				<br /><hr /><br />
+				<br /><hr/><br />
 			';
             $return_message = $locked_warn . $return_message;
         }
