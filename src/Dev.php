@@ -164,7 +164,7 @@ class Dev
 
         $this->whoops->pushHandler(function ($e) use ($bb_cfg) {
             echo $bb_cfg['whoops']['error_message'];
-            echo "<hr>Error: {$e->getMessage()}.";
+            echo "<hr/>Error: {$e->getMessage()}.";
         });
     }
 

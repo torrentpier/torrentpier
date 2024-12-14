@@ -789,7 +789,7 @@ class Torrent
 
         if (isset($reg_mode) && ($reg_mode == 'request' || $reg_mode == 'newtopic')) {
             if (isset($return_message)) {
-                $msg .= $return_message . '<br /><br /><hr /><br />';
+                $msg .= $return_message . '<br /><br /><hr/><br />';
             }
             $msg .= '<b>' . $lang['BT_REG_FAIL'] . '</b><br /><br />';
         }

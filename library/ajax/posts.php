@@ -179,7 +179,7 @@ switch ($this->request['type']) {
 						<input title="Alt+Enter" name="preview" type="submit" value="' . $lang['PREVIEW'] . '">
 						<input type="button" onclick="edit_post(' . $post_id . ');" value="' . $lang['CANCEL'] . '">
 						<input type="button" onclick="edit_post(' . $post_id . ', \'editor\', $(\'#message-' . $post_id . '\').val()); return false;" class="bold" value="' . $lang['SUBMIT'] . '">
-					</div><hr>
+					</div><hr/>
 					<script type="text/javascript">
 					var bbcode = new BBCode("message-' . $post_id . '");
 					var ctrl = "ctrl";

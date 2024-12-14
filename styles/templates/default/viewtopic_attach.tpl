@@ -175,7 +175,7 @@
 			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_BT_FLIST}" /></p>
 			<!-- BEGIN tor_server -->
 			<!-- IF postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK -->
-			<hr>
+			<hr/>
 			<a href="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_LINK}" target="_blank"><p><img alt="{L_PLAYBACK_M3U}" src="{postrow.attach.tor_reged.tor_server.TORR_SERVER_M3U_ICON}" width="21" height="21" border="0"></p>{L_PLAYBACK_M3U}</a>
 			<!-- ENDIF -->
 			<!-- END tor_server -->
