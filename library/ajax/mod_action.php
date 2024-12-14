@@ -49,7 +49,7 @@ switch ($mode) {
                 'forum_id' => $tor['forum_id'],
                 'topic_id' => $tor['topic_id'],
                 'topic_title' => $tor['topic_title'],
-                'log_msg' => $log_msg . '<br>-------------',
+                'log_msg' => $log_msg . '<br/>-------------',
             ]);
         }
         $this->response['status'] = $bb_cfg['tor_icons'][$status];

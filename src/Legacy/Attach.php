@@ -757,7 +757,7 @@ class Attach
             // Handling errors while uploading
             if (isset($this->error) && ($this->error !== UPLOAD_ERR_OK)) {
                 if (isset($lang['UPLOAD_ERRORS'][$this->error])) {
-                    bb_die($lang['UPLOAD_ERROR_COMMON'] . '<br><br>' . $lang['UPLOAD_ERRORS'][$this->error]);
+                    bb_die($lang['UPLOAD_ERROR_COMMON'] . '<br/><br/>' . $lang['UPLOAD_ERRORS'][$this->error]);
                 } else {
                     bb_die($lang['UPLOAD_ERROR_COMMON']);
                 }

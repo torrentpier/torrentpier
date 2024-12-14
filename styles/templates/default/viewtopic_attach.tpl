@@ -160,8 +160,8 @@
 			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
             <!-- IF not postrow.attach.tor_reged.TOR_FROZEN -->
-            <br><!-- IF postrow.attach.tor_reged.HASH --><br>info_hash: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH}</span><!-- ENDIF -->
-            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br>info_hash v2: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH_V2}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH_V2}</span><!-- ENDIF -->
+            <br/><!-- IF postrow.attach.tor_reged.HASH --><br/>info_hash: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH}</span><!-- ENDIF -->
+            <!-- IF postrow.attach.tor_reged.HASH_V2 --><br/>info_hash v2: <span class="copyElement" data-clipboard-text="{postrow.attach.tor_reged.HASH_V2}" title="{L_COPY_TO_CLIPBOARD}">{postrow.attach.tor_reged.HASH_V2}</span><!-- ENDIF -->
             <!-- ENDIF -->
         </td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">

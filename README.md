@@ -2,7 +2,7 @@
 
 <p align="center">
   Bull-powered BitTorrent tracker engine
-  <br>
+  <br/>
 </p>
 
 <p align="center">
