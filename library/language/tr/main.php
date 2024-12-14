@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tür torrent başarıyla değiştirildi';
 $lang['DEL_TORRENT'] = 'Torrent silmek istediğinizden emin misiniz?';
 $lang['DEL_MOVE_TORRENT'] = 'Silmek ve konuyu taşımak istediğinizden emin misiniz?';
 $lang['UNEXECUTED_RELEASE'] = 'Şekilsiz bir sürüm var yeni bir düzeltme oluşmamış onun oluşturmadan önce!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Dağıtım statüsünün değiştirilmesi - %s';

@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'muvaffaqiyatli o\'zgartirildi torrent kiriting';
 $lang['DEL_TORRENT'] = 'Agar torrent o\'chirishni istaysizmi?';
 $lang['DEL_MOVE_TORRENT'] = 'Agar o\'chirish va mavzuni ko\'chirish istasangiz ishonchingiz komilmi?';
 $lang['UNEXECUTED_RELEASE'] = 'Agar yangi tahrir uning shaklsiz yaratish oldin shaklsiz ozod bormi!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'tarqatish maqomini o\'zgartirish - %s';

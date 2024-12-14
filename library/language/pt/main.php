@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Digite o torrent alterada com êxito';
 $lang['DEL_TORRENT'] = 'Tem certeza de que deseja excluir o torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Tem certeza de que deseja excluir e mover o tópico?';
 $lang['UNEXECUTED_RELEASE'] = 'Você tem um disforme de lançamento antes de criar uma nova correção de sua nebulosas!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'A alteração do status de distribuição - %s';

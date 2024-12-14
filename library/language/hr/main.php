@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Tip bujica je uspješno promijenjen';
 $lang['DEL_TORRENT'] = 'Jeste li sigurni da želite ukloniti torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Jeste li sigurni da želite ukloniti i premjesti temu?';
 $lang['UNEXECUTED_RELEASE'] = 'Imate bezobličan izdanju, prije nego što stvorite novi Fix неоформленном!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Promjena statusa iz ruke - %s';

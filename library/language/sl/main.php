@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Vnesite torrent uspešno spremenjena';
 $lang['DEL_TORRENT'] = 'Ali ste prepričani, da želite izbrisati torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Ali ste prepričani, da želite izbrisati, in premakni temo?';
 $lang['UNEXECUTED_RELEASE'] = 'Imate brezoblično sprostitev, preden ustvarite novo določi njegovo blato!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Spreminjanje stanja distribucije - %s';
