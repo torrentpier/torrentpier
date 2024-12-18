@@ -17,6 +17,10 @@ if (!$bb_cfg['torr_server']['enabled']) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
+if ($bb_cfg['torr_server']['disable_for_guest'] && IS_GUEST) {
+    $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+}
+
 $attach_id = $this->request['attach_id'] ?? '';
 if (empty($attach_id) || !is_numeric($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
