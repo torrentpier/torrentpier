@@ -2126,7 +2126,7 @@ function user_birthday_icon($user_birthday, $user_id): string
  * @param int|null $userId
  * @return array|null
  */
-function getBanInfo(int $userId = null): ?array
+function getBanInfo(?int $userId = null): ?array
 {
     global $datastore;
 

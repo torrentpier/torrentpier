@@ -432,7 +432,7 @@ class Common
      * @param string $reason_move
      * @return bool
      */
-    public static function topic_move(int|array|string $topic_id, int|string $to_forum_id, int|string $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
+    public static function topic_move(int|array|string $topic_id, int|string $to_forum_id, $from_forum_id = null, bool $leave_shadow = false, bool $insert_bot_msg = false, string $reason_move = ''): bool
     {
         global $log_action;
 
