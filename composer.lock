@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9be48b77d4fc1b6ab965574cf6a92dcb",
+    "content-hash": "5cd54867fb93869122d1d00ee6f2764b",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -1787,16 +1787,16 @@
         },
         {
             "name": "matthiasmullie/scrapbook",
-            "version": "1.5.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matthiasmullie/scrapbook.git",
-                "reference": "c339d56e136713aab532718eff453663b4b38efe"
+                "reference": "510129d83dd21b29d0fde6886a7a08d435d1ae65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/matthiasmullie/scrapbook/zipball/c339d56e136713aab532718eff453663b4b38efe",
-                "reference": "c339d56e136713aab532718eff453663b4b38efe",
+                "url": "https://api.github.com/repos/matthiasmullie/scrapbook/zipball/510129d83dd21b29d0fde6886a7a08d435d1ae65",
+                "reference": "510129d83dd21b29d0fde6886a7a08d435d1ae65",
                 "shasum": ""
             },
             "require": {
@@ -1810,9 +1810,8 @@
             },
             "require-dev": {
                 "ext-pcntl": "*",
-                "friendsofphp/php-cs-fixer": ">=2.0",
-                "phpunit/phpunit": ">=10.0",
-                "squizlabs/php_codesniffer": ">=3.0"
+                "friendsofphp/php-cs-fixer": ">=3.0",
+                "phpunit/phpunit": ">=10.0"
             },
             "suggest": {
                 "couchbase/couchbase": ">=3.0",
@@ -1823,6 +1822,7 @@
                 "ext-redis": ">=2.2.0||0.0.0.0",
                 "league/flysystem": ">=1.0"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1875,7 +1875,7 @@
             ],
             "support": {
                 "issues": "https://github.com/matthiasmullie/scrapbook/issues",
-                "source": "https://github.com/matthiasmullie/scrapbook/tree/1.5.3"
+                "source": "https://github.com/matthiasmullie/scrapbook/tree/master"
             },
             "funding": [
                 {
@@ -1883,7 +1883,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-02T13:33:01+00:00"
+            "time": "2024-05-30T09:05:39+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3682,7 +3682,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "arokettu/monsterid": 20,
-        "gemorroj/m3u-parser": 20
+        "gemorroj/m3u-parser": 20,
+        "matthiasmullie/scrapbook": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
