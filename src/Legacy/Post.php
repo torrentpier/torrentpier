@@ -422,10 +422,10 @@ class Post
      * @param int|string|null $old_forum_id
      * @param int|string|null $new_topic_id
      * @param string $new_topic_title
-     * @param int|null $old_topic_id
+     * @param int|string|null $old_topic_id
      * @param string $reason_move
      */
-    public static function insert_post(string $mode, int|string $topic_id, int|string $forum_id = null, int|string $old_forum_id = null, int|string $new_topic_id = null, string $new_topic_title = '', int $old_topic_id = null, string $reason_move = ''): void
+    public static function insert_post(string $mode, int|string $topic_id, null|int|string $forum_id = null, null|int|string $old_forum_id = null, null|int|string $new_topic_id = null, string $new_topic_title = '', null|int|string $old_topic_id = null, string $reason_move = ''): void
     {
         global $userdata, $lang;
 
