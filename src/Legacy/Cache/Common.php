@@ -54,7 +54,7 @@ class Common
      * @param string|null $name
      * @return bool
      */
-    public function rm(string $name = null): bool
+    public function rm(?string $name = null): bool
     {
         return false;
     }

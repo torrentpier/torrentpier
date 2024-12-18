@@ -7,6 +7,7 @@
 
 - Release 2.4.5 🍧️ ([belomaxorka](https://github.com/belomaxorka))
 - Show torrent's announcers list in `filelist.php` page [\#1708](https://github.com/torrentpier/torrentpier/pull/1708) ([belomaxorka](https://github.com/belomaxorka))
+- [PHP 8.4] Fixed some deprecations [\#1718](https://github.com/torrentpier/torrentpier/pull/1718) ([belomaxorka](https://github.com/belomaxorka))
 - [Configurable] Show magnet-links for guests [\#1712](https://github.com/torrentpier/torrentpier/pull/1712) ([belomaxorka](https://github.com/belomaxorka))
 - Set `cursor: pointer;` for buttons, inputs (buttons) [\#1710](https://github.com/torrentpier/torrentpier/pull/1710), [\#1711](https://github.com/torrentpier/torrentpier/pull/1711) ([belomaxorka](https://github.com/belomaxorka))
 - Minor improvements [\#1705](https://github.com/torrentpier/torrentpier/pull/1705), [\#1713](https://github.com/torrentpier/torrentpier/pull/1713), [\#1715](https://github.com/torrentpier/torrentpier/pull/1715), [\#1717](https://github.com/torrentpier/torrentpier/pull/1717) ([belomaxorka](https://github.com/belomaxorka))
