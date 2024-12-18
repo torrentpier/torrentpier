@@ -118,6 +118,10 @@ switch ($mode) {
         break;
 
     case 'releaser_stats':
+        if (IS_GUEST) {
+            $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+        }
+
         $user_id = (int)$this->request['user_id'];
 
         $sql = "
@@ -148,6 +152,10 @@ switch ($mode) {
     case 'get_traf_stats':
         if (!RATIO_ENABLED) {
             $this->ajax_die($lang['MODULE_OFF']);
+        }
+
+        if (IS_GUEST) {
+            $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
         }
 
         $user_id = (int)$this->request['user_id'];
