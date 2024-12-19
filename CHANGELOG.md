@@ -10,7 +10,7 @@
 - [PHP 8.4] Fixed some deprecations [\#1718](https://github.com/torrentpier/torrentpier/pull/1718) ([belomaxorka](https://github.com/belomaxorka))
 - [Configurable] Show magnet-links for guests [\#1712](https://github.com/torrentpier/torrentpier/pull/1712) ([belomaxorka](https://github.com/belomaxorka))
 - Set `cursor: pointer;` for buttons, inputs (buttons) [\#1710](https://github.com/torrentpier/torrentpier/pull/1710), [\#1711](https://github.com/torrentpier/torrentpier/pull/1711) ([belomaxorka](https://github.com/belomaxorka))
-- Minor improvements [\#1705](https://github.com/torrentpier/torrentpier/pull/1705), [\#1713](https://github.com/torrentpier/torrentpier/pull/1713), [\#1715](https://github.com/torrentpier/torrentpier/pull/1715), [\#1717](https://github.com/torrentpier/torrentpier/pull/1717) ([belomaxorka](https://github.com/belomaxorka))
+- Minor improvements [\#1705](https://github.com/torrentpier/torrentpier/pull/1705), [\#1713](https://github.com/torrentpier/torrentpier/pull/1713), [\#1715](https://github.com/torrentpier/torrentpier/pull/1715), [\#1717](https://github.com/torrentpier/torrentpier/pull/1717), [\#1719](https://github.com/torrentpier/torrentpier/pull/1719) ([belomaxorka](https://github.com/belomaxorka))
 - New Crowdin updates [\#1704](https://github.com/torrentpier/torrentpier/pull/1704), [\#1706](https://github.com/torrentpier/torrentpier/pull/1706), [\#1714](https://github.com/torrentpier/torrentpier/pull/1714), [\#1716](https://github.com/torrentpier/torrentpier/pull/1716) ([Exileum](https://github.com/Exileum))
 
 ## [v2.4.5-rc.1](https://github.com/torrentpier/torrentpier/tree/v2.4.5-rc.1) (2024-12-08)
