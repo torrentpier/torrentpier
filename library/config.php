@@ -23,8 +23,7 @@ $bb_cfg['tp_release_date'] = 'XX-XX-2025';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Increase version number after changing JS or CSS
-// Note: by default used same as TorrentPier version
-$bb_cfg['js_ver'] = $bb_cfg['css_ver'] = $bb_cfg['tp_version'];
+$bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Database
 // Settings for database ['db']['srv_name'] => (array) srv_cfg;
