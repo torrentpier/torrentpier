@@ -89,7 +89,11 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 /**
  * Error reporting
  */
-define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
+if (env('APP_ENV') === 'local') {
+    define('DBG_USER', true); // forced debug
+} else {
+    define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
+}
 (new \TorrentPier\Dev());
 
 /**
