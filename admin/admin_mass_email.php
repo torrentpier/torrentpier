@@ -40,12 +40,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (!$errors) {
-        $sql = DB()->fetch_rowset('SELECT ban_userid FROM ' . BB_BANLIST . ' WHERE ban_userid != 0');
-
-        foreach ($sql as $row) {
-            $user_id_sql[] = ',' . $row['ban_userid'];
-        }
-        $user_id_sql = implode('', $user_id_sql);
+        $banned_users = ($get_banned_users = get_banned_users()) ? (', ' . implode(', ', $get_banned_users)) : '';
 
         if ($group_id != -1) {
             $user_list = DB()->fetch_rowset('
@@ -55,14 +50,14 @@ if (isset($_POST['submit'])) {
 					AND ug.user_pending = 0
 					AND u.user_id = ug.user_id
 					AND u.user_active = 1
-					AND u.user_id NOT IN(" . EXCLUDED_USERS . $user_id_sql . ')
+					AND u.user_id NOT IN(" . EXCLUDED_USERS . $banned_users . ')
 			');
         } else {
             $user_list = DB()->fetch_rowset('
 				SELECT username, user_email, user_lang
 				FROM ' . BB_USERS . '
 				WHERE user_active = 1
-					AND user_id NOT IN(' . EXCLUDED_USERS . $user_id_sql . ')
+					AND user_id NOT IN(' . EXCLUDED_USERS . $banned_users . ')
 			');
         }
 
