@@ -16,7 +16,7 @@ $user->session_start(['req_login' => true]);
 $start = abs((int)request_var('start', 0));
 $mode = (string)request_var('mode', 'joined');
 $sort_order = (request_var('order', 'ASC') == 'ASC') ? 'ASC' : 'DESC';
-$username = request_var('username', '');
+$username = trim(request_var('username', ''));
 $role = (string)request_var('role', 'all');
 
 // Memberlist sorting
@@ -78,16 +78,23 @@ switch ($mode) {
 }
 
 $where_sql = '';
+
+// Search by role
 switch ($role) {
     case 'user':
-        $where_sql = ' AND user_level = ' . USER;
+        $where_sql .= ' AND user_level = ' . USER;
         break;
     case 'admin':
-        $where_sql = ' AND user_level = ' . ADMIN;
+        $where_sql .= ' AND user_level = ' . ADMIN;
         break;
     case 'moderator':
-        $where_sql = ' AND user_level = ' . MOD;
+        $where_sql .= ' AND user_level = ' . MOD;
         break;
+}
+
+// Search by username
+if (!empty($username)) {
+    $where_sql .= ' AND username LIKE "' . DB()->escape(str_replace('*', '%', clean_username($username))) . '"';
 }
 
 // Generate user information
@@ -118,7 +125,7 @@ if ($result = DB()->fetch_rowset($sql)) {
 
 // Pagination
 $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;role=$role";
-$paginationurl .= $username ? "&amp;username=$username" : '';
+$paginationurl .= !empty($username) ? "&amp;username=$username" : '';
 
 if ($mode != 'topten') {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ") $where_sql";
