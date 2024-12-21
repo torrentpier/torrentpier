@@ -911,7 +911,7 @@ function username_search($search_match)
     $username_list = '';
 
     if (!empty($search_match)) {
-        $username_search = str_replace("\*", '%', clean_username($search_match));
+        $username_search = str_replace('*', '%', clean_username($search_match));
 
         $sql = "
 			SELECT username
