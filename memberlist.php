@@ -94,8 +94,7 @@ switch ($role) {
 
 // Search by username
 if ($username) {
-    $username = str_replace("\*", '%', clean_username($username));
-    $where_sql .= ' AND username LIKE "' . DB()->escape($username) . '"';
+    $where_sql .= ' AND username LIKE "' . DB()->escape(str_replace('*', '%', clean_username($username))) . '"';
 }
 
 // Generate user information
