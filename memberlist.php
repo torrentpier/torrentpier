@@ -82,13 +82,13 @@ $where_sql = '';
 // Search by role
 switch ($role) {
     case 'user':
-        $where_sql = ' AND user_level = ' . USER;
+        $where_sql .= ' AND user_level = ' . USER;
         break;
     case 'admin':
-        $where_sql = ' AND user_level = ' . ADMIN;
+        $where_sql .= ' AND user_level = ' . ADMIN;
         break;
     case 'moderator':
-        $where_sql = ' AND user_level = ' . MOD;
+        $where_sql .= ' AND user_level = ' . MOD;
         break;
 }
 
