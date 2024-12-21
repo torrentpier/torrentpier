@@ -78,6 +78,8 @@ switch ($mode) {
 }
 
 $where_sql = '';
+
+// Search by role
 switch ($role) {
     case 'user':
         $where_sql = ' AND user_level = ' . USER;
@@ -88,6 +90,12 @@ switch ($role) {
     case 'moderator':
         $where_sql = ' AND user_level = ' . MOD;
         break;
+}
+
+// Search by username
+if ($username) {
+    $username = str_replace("\*", '%', clean_username($username));
+    $where_sql .= ' AND username LIKE "' . DB()->escape($username) . '"';
 }
 
 // Generate user information
