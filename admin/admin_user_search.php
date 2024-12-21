@@ -252,8 +252,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_USERNAME'], strip_tags(htmlspecialchars(stripslashes($username))));
 
-            $username = str_replace("\*", '%', trim(strip_tags(strtolower($username))));
-
+            $username = str_replace('*', '%', trim(strip_tags(strtolower($username))));
             if (str_contains($username, '%')) {
                 $op = 'LIKE';
             } else {
@@ -273,8 +272,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_EMAIL'], strip_tags(htmlspecialchars(stripslashes($email))));
 
-            $email = str_replace("\*", '%', trim(strip_tags(strtolower($email))));
-
+            $email = str_replace('*', '%', trim(strip_tags(strtolower($email))));
             if (str_contains($email, '%')) {
                 $op = 'LIKE';
             } else {
@@ -568,8 +566,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = strip_tags(htmlspecialchars(stripslashes($userfield_value)));
 
-            $userfield_value = str_replace("\*", '%', trim(strip_tags(strtolower($userfield_value))));
-
+            $userfield_value = str_replace('*', '%', trim(strip_tags(strtolower($userfield_value))));
             if (str_contains($userfield_value, '%')) {
                 $op = 'LIKE';
             } else {
