@@ -17,7 +17,7 @@ if (!$bb_cfg['torr_server']['enabled']) {
 
 // Valid file formats
 $validFormats = [
-    'audio' => ['mp3', 'flac', 'wav'],
+    'audio' => ['mp3', 'flac', 'wav', 'm4a'],
     'video' => ['mp4', 'mkv', 'avi', 'm4v']
 ];
 
