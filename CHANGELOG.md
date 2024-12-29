@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.5 🍧️ ([belomaxorka](https://github.com/belomaxorka))
+- 
 - Show torrent's announcers list in `filelist.php` page [\#1708](https://github.com/torrentpier/torrentpier/pull/1708) ([belomaxorka](https://github.com/belomaxorka))
 - [PHP 8.4] Fixed some deprecations [\#1718](https://github.com/torrentpier/torrentpier/pull/1718) ([belomaxorka](https://github.com/belomaxorka))
 - [Configurable] Show magnet-links for guests [\#1712](https://github.com/torrentpier/torrentpier/pull/1712) ([belomaxorka](https://github.com/belomaxorka))
