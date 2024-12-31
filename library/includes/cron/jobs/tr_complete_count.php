@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
 // Update TORRENT "completed" counters
 DB()->query("
 	UPDATE
