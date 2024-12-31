@@ -669,7 +669,7 @@ class Torrent
      */
     public static function generate_passkey($user_id, bool $force_generate = false)
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         $user_id = (int)$user_id;
 
@@ -693,19 +693,13 @@ class Torrent
         if (!$old_passkey) {
             // Create first passkey
             DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
-            if (DB()->affected_rows() == 1) {
-                return $passkey_val;
-            }
         } else {
             // Update exists passkey
             DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
-            if (DB()->affected_rows() == 1) {
-                // Ocelot
-                if ($bb_cfg['ocelot']['enabled']) {
-                    self::ocelot_update_tracker('change_passkey', ['oldpasskey' => $old_passkey, 'newpasskey' => $passkey_val]);
-                }
-                return $passkey_val;
-            }
+        }
+
+        if (DB()->affected_rows() == 1) {
+            return $passkey_val;
         }
 
         return false;
