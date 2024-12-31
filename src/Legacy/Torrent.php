@@ -395,11 +395,6 @@ class Torrent
             }
         }
 
-        // Ocelot
-        if ($bb_cfg['ocelot']['enabled']) {
-            self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash ?? hex2bin(substr($v2_hash, 0, 40))), 'id' => $topic_id, 'freetorrent' => 0]);
-        }
-
         if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
             $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
             bb_die($msg);
