@@ -63,15 +63,13 @@ while (true) {
     $start_id += $per_cycle;
 }
 
-if (!$bb_cfg['ocelot']['enabled']) {
-    DB()->query("
-		RENAME TABLE
+DB()->query("
+	RENAME TABLE
 		" . BB_BT_TRACKER_SNAP . " TO " . OLD_BB_BT_TRACKER_SNAP . ",
 		" . NEW_BB_BT_TRACKER_SNAP . " TO " . BB_BT_TRACKER_SNAP . "
-	");
+");
 
-    DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-}
+DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
 
 //
 // Make dl-list snapshot
