@@ -395,6 +395,11 @@ $user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 /**
+ * Some shared defines
+ */
+define('TP_INSTANCE_HASH', $bb_cfg['tp_instance_hash']);
+
+/**
  * Cron
  */
 if (

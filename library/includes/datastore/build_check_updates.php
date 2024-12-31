@@ -13,10 +13,14 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
+if (!$bb_cfg['tp_updater_settings']['enabled']) {
+    return;
+}
+
 $data = [];
 
 $updaterDownloader = new \TorrentPier\Updater();
-$updaterDownloader = $updaterDownloader->getLastVersion();
+$updaterDownloader = $updaterDownloader->getLastVersion($bb_cfg['tp_updater_settings']['allow_pre_releases']);
 
 $getVersion = $updaterDownloader['tag_name'];
 $versionCodeActual = version_code($getVersion);

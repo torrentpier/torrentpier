@@ -112,6 +112,12 @@ $bb_cfg['client_ban'] = [
     ]
 ];
 
+// TorrentPier updater settings
+$bb_cfg['tp_updater_settings'] = [
+    'enabled' => true,
+    'allow_pre_releases' => false
+];
+
 // TorrServer integration
 $bb_cfg['torr_server'] = [
     // Read more: https://github.com/YouROK/TorrServer
@@ -584,7 +590,7 @@ $bb_cfg['flist_max_files'] = 0; // Max allowed number of files to process for gi
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
-$bb_cfg['integrity_check'] = true; // TorrentPier files integrity check (Not recommended to disable!)
+$bb_cfg['integrity_check'] = true; // TorrentPier files integrity check
 
 $bb_cfg['allow_change'] = [
     'language' => true, // Allow user to change language
@@ -604,7 +610,7 @@ $bb_cfg['advert_url'] = 'info.php?show=advert';
 $bb_cfg['sitemap_sending'] = [
     // A list of URLs to which to send a sitemap for indexing by a search robot.
     // Syntax: 'Resource name' => 'link to endpoint'
-    'Google' => 'https://google.com/webmasters/sitemaps/ping?sitemap=',
+    // Sitemap sending is deprecated. See: https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping
 ];
 
 // Extensions
