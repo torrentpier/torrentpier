@@ -49,20 +49,11 @@ while (true) {
     }
 
     if ($val) {
-        if (!$bb_cfg['ocelot']['enabled']) {
-            DB()->query("
-				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
+        DB()->query("
+			REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
 				(topic_id, seeders, leechers, speed_up, speed_down, completed)
-				VALUES(" . implode('),(', $val) . ")
-			");
-        } else {
-            DB()->query("
-				INSERT INTO " . BB_BT_TRACKER_SNAP . "
-				(topic_id, speed_up, speed_down)
-				VALUES(" . implode('),(', $val) . ")
-				ON DUPLICATE KEY UPDATE speed_up = VALUES(speed_up), speed_down = VALUES(speed_down)
-			");
-        }
+			VALUES(" . implode('),(', $val) . ")
+		");
     }
 
     if ($end_id > $finish_id) {
