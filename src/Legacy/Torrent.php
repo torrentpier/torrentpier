@@ -100,7 +100,7 @@ class Torrent
         global $lang, $bb_cfg, $log_action;
 
         $attach_id = (int)$attach_id;
-        $post_id = $topic_id = $topic_title = $forum_id = $info_hash = null;
+        $post_id = $topic_id = $topic_title = $forum_id = null;
 
         // Get torrent info
         if ($torrent = self::get_torrent_info($attach_id)) {
@@ -135,7 +135,7 @@ class Torrent
         if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id) {
             $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!DB()->sql_query($sql)) {
                 bb_die('Could not update topics table #1');
             }
         }
