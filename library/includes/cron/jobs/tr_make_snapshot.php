@@ -18,13 +18,11 @@ DB()->expect_slow_query(600);
 //
 // Make tracker snapshot
 //
-if (!$bb_cfg['ocelot']['enabled']) {
-    define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
-    define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
+define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
+define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
 
-    DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-    DB()->query("CREATE TABLE " . NEW_BB_BT_TRACKER_SNAP . " LIKE " . BB_BT_TRACKER_SNAP);
-}
+DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
+DB()->query("CREATE TABLE " . NEW_BB_BT_TRACKER_SNAP . " LIKE " . BB_BT_TRACKER_SNAP);
 
 $per_cycle = 50000;
 $row = DB()->fetch_row("SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM " . BB_BT_TRACKER);
@@ -37,44 +35,25 @@ while (true) {
 
     $val = [];
 
-    if (!$bb_cfg['ocelot']['enabled']) {
-        $sql = "
-			SELECT
-				topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
-				SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down, SUM(complete) AS completed
-			FROM " . BB_BT_TRACKER . "
-			WHERE topic_id BETWEEN $start_id AND $end_id
-			GROUP BY topic_id
-		";
-    } else {
-        $sql = "
-			SELECT
-				topic_id, SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down
-			FROM " . BB_BT_TRACKER . "
-			WHERE topic_id BETWEEN $start_id AND $end_id
-			GROUP BY topic_id
-		";
-    }
+    $sql = "
+		SELECT
+			topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
+			SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down, SUM(complete) AS completed
+		FROM " . BB_BT_TRACKER . "
+		WHERE topic_id BETWEEN $start_id AND $end_id
+		GROUP BY topic_id
+	";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $val[] = implode(',', $row);
     }
 
     if ($val) {
-        if (!$bb_cfg['ocelot']['enabled']) {
-            DB()->query("
-				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
+        DB()->query("
+			REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
 				(topic_id, seeders, leechers, speed_up, speed_down, completed)
-				VALUES(" . implode('),(', $val) . ")
-			");
-        } else {
-            DB()->query("
-				INSERT INTO " . BB_BT_TRACKER_SNAP . "
-				(topic_id, speed_up, speed_down)
-				VALUES(" . implode('),(', $val) . ")
-				ON DUPLICATE KEY UPDATE speed_up = VALUES(speed_up), speed_down = VALUES(speed_down)
-			");
-        }
+			VALUES(" . implode('),(', $val) . ")
+		");
     }
 
     if ($end_id > $finish_id) {
@@ -84,15 +63,13 @@ while (true) {
     $start_id += $per_cycle;
 }
 
-if (!$bb_cfg['ocelot']['enabled']) {
-    DB()->query("
-		RENAME TABLE
+DB()->query("
+	RENAME TABLE
 		" . BB_BT_TRACKER_SNAP . " TO " . OLD_BB_BT_TRACKER_SNAP . ",
 		" . NEW_BB_BT_TRACKER_SNAP . " TO " . BB_BT_TRACKER_SNAP . "
-	");
+");
 
-    DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-}
+DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
 
 //
 // Make dl-list snapshot
