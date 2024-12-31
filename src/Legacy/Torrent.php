@@ -540,10 +540,6 @@ class Torrent
 
         if ($bt_userdata = get_bt_userdata($user_id)) {
             $passkey_val = $bt_userdata['auth_key'];
-
-            if ($bb_cfg['ocelot']['enabled']) {
-                self::ocelot_update_tracker('add_user', ['id' => $user_id, 'passkey' => $passkey_val]);
-            }
         }
 
         // Ratio limits
@@ -574,7 +570,7 @@ class Torrent
         }
 
         // Get tracker announcer
-        $announce_url = $bb_cfg['ocelot']['enabled'] ? $bb_cfg['ocelot']['url'] . "$passkey_val/announce" : $bb_cfg['bt_announce_url'] . "?$passkey_key=$passkey_val";
+        $announce_url = $bb_cfg['bt_announce_url'] . "?$passkey_key=$passkey_val";
 
         // Replace original announce url with tracker default
         if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
