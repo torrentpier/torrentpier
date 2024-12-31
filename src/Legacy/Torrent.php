@@ -135,7 +135,7 @@ class Torrent
         if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id) {
             $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id";
 
-            if (!DB()->sql_query($sql)) {
+            if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not update topics table #1');
             }
         }
