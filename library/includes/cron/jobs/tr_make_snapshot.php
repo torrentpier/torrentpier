@@ -35,24 +35,14 @@ while (true) {
 
     $val = [];
 
-    if (!$bb_cfg['ocelot']['enabled']) {
-        $sql = "
-			SELECT
-				topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
-				SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down, SUM(complete) AS completed
-			FROM " . BB_BT_TRACKER . "
-			WHERE topic_id BETWEEN $start_id AND $end_id
-			GROUP BY topic_id
-		";
-    } else {
-        $sql = "
-			SELECT
-				topic_id, SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down
-			FROM " . BB_BT_TRACKER . "
-			WHERE topic_id BETWEEN $start_id AND $end_id
-			GROUP BY topic_id
-		";
-    }
+    $sql = "
+		SELECT
+			topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
+			SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down, SUM(complete) AS completed
+		FROM " . BB_BT_TRACKER . "
+		WHERE topic_id BETWEEN $start_id AND $end_id
+		GROUP BY topic_id
+	";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $val[] = implode(',', $row);
