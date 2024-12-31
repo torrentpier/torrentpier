@@ -132,10 +132,21 @@ class Updater
     /**
      * Returns information of latest TorrentPier version
      *
+     * @param bool $allowRC
      * @return array
      */
-    public function getLastVersion(): array
+    public function getLastVersion(bool $allowRC = true): array
     {
+        if (!$allowRC) {
+            foreach ($this->jsonResponse as $index) {
+                if (isset($index['prerelease']) && $index['prerelease']) {
+                    continue;
+                }
+
+                return $index;
+            }
+        }
+
         return $this->jsonResponse[0];
     }
 }
