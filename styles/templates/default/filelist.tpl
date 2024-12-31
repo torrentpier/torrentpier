@@ -46,7 +46,7 @@
         <td>{filelist.ROW_NUMBER}</td>
         <td>{filelist.FILE_PATH}</td>
         <td>{filelist.FILE_LENGTH}</td>
-        <td>{filelist.FILE_HASH}</td>
+        <td><span class="copyElement" data-clipboard-text="{filelist.FILE_HASH}" title="{L_COPY_TO_CLIPBOARD}">{filelist.FILE_HASH}</span></td>
     </tr>
     </tbody>
     <!-- END filelist -->

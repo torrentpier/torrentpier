@@ -100,7 +100,7 @@ class Torrent
         global $lang, $bb_cfg, $log_action;
 
         $attach_id = (int)$attach_id;
-        $post_id = $topic_id = $topic_title = $forum_id = $info_hash = null;
+        $post_id = $topic_id = $topic_title = $forum_id = null;
 
         // Get torrent info
         if ($torrent = self::get_torrent_info($attach_id)) {
