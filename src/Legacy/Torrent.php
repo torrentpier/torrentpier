@@ -160,14 +160,6 @@ class Torrent
             'topic_title' => $topic_title,
         ]);
 
-        // Ocelot
-        if ($bb_cfg['ocelot']['enabled']) {
-            if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id LIMIT 1")) {
-                $info_hash = $row['info_hash'];
-            }
-            self::ocelot_update_tracker('delete_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id]);
-        }
-
         // Delete torrent
         $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
 
@@ -257,7 +249,7 @@ class Torrent
      */
     public static function change_tor_type($attach_id, $tor_status_gold)
     {
-        global $topic_id, $lang, $bb_cfg;
+        global $topic_id, $lang;
 
         if (!$torrent = self::get_torrent_info($attach_id)) {
             bb_die($lang['TOR_NOT_FOUND']);
@@ -269,17 +261,8 @@ class Torrent
 
         $topic_id = $torrent['topic_id'];
         $tor_status_gold = (int)$tor_status_gold;
-        $info_hash = null;
 
         DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id");
-
-        // Ocelot
-        if ($bb_cfg['ocelot']['enabled']) {
-            if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
-                $info_hash = $row['info_hash'];
-            }
-            self::ocelot_update_tracker('update_torrent', ['info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold]);
-        }
     }
 
     /**
@@ -795,75 +778,6 @@ class Torrent
         }
 
         bb_die($msg . $message);
-    }
-
-    /**
-     * Update torrent on Ocelot tracker
-     *
-     * @param string $action
-     * @param array $updates
-     *
-     * @return bool
-     */
-    private static function ocelot_update_tracker($action, $updates)
-    {
-        global $bb_cfg;
-
-        $get = $bb_cfg['ocelot']['secret'] . "/update?action=$action";
-
-        foreach ($updates as $key => $value) {
-            $get .= "&$key=$value";
-        }
-
-        $max_attempts = 3;
-        $err = false;
-
-        return !(self::ocelot_send_request($get, $max_attempts, $err) === false);
-    }
-
-    /**
-     * Send request to the Ocelot traker
-     *
-     * @param string $get
-     * @param int $max_attempts
-     * @param bool $err
-     *
-     * @return bool|int
-     */
-    private static function ocelot_send_request($get, $max_attempts = 1, &$err = false)
-    {
-        global $bb_cfg;
-
-        $header = "GET /$get HTTP/1.1\r\nConnection: Close\r\n\r\n";
-        $attempts = $success = $response = 0;
-
-        while (!$success && $attempts++ < $max_attempts) {
-            // Send request
-            $file = fsockopen($bb_cfg['ocelot']['host'], $bb_cfg['ocelot']['port'], $error_num, $error_string);
-            if ($file) {
-                if (fwrite($file, $header) === false) {
-                    $err = "Failed to fwrite()";
-                    continue;
-                }
-            } else {
-                $err = "Failed to fsockopen() - $error_num - $error_string";
-                continue;
-            }
-
-            // Check for response
-            while (!feof($file)) {
-                $response .= fread($file, 1024);
-            }
-
-            $data_end = strrpos($response, "\n");
-            $status = substr($response, $data_end + 1);
-
-            if ($status == "success") {
-                $success = true;
-            }
-        }
-
-        return $success;
     }
 
     /**
