@@ -89,7 +89,8 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 /**
  * Error reporting
  */
-if (env('APP_ENV') === 'local') {
+define('APP_ENV', env('APP_ENV', 'production'));
+if (APP_ENV === 'local') {
     define('DBG_USER', true); // forced debug
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
@@ -362,7 +363,7 @@ function version_code(string $version): int
  * Some shared defines
  */
 // Initialize demo mode
-define('IN_DEMO_MODE', env('APP_DEMO_MODE'));
+define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
 
 // Version code
 define('VERSION_CODE', version_code($bb_cfg['tp_version']));
