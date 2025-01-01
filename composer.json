@@ -72,7 +72,8 @@
     "symfony/mime": "^6.4",
     "symfony/mailer": "^6.4",
     "symfony/polyfill": "v1.31.0",
-    "vlucas/phpdotenv": "^5.5"
+    "vlucas/phpdotenv": "^5.5",
+    "phlak/semver": "^6.1.0"
   },
   "require-dev": {
     "symfony/var-dumper": "^6.4"

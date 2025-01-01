@@ -23,27 +23,23 @@ $updaterDownloader = new \TorrentPier\Updater();
 $updaterDownloader = $updaterDownloader->getLastVersion($bb_cfg['tp_updater_settings']['allow_pre_releases']);
 
 $getVersion = $updaterDownloader['tag_name'];
-$versionCodeActual = version_code($getVersion);
+$versionActual = new PHLAK\SemVer\Version($getVersion);
+$currentVersion = new PHLAK\SemVer\Version($bb_cfg['tp_version']);
 
 // Has update!
-if (VERSION_CODE < $versionCodeActual) {
+if ($versionActual->gt($currentVersion)) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
     // Check updater file
-    $updater_file = readUpdaterFile();
-    $updater_need_replaced = !empty($updater_file) && ($updater_file['latest_version']['short_code'] < $versionCodeActual);
+    $updaterFile = readUpdaterFile();
+    $versionFromUpdaterFile = new PHLAK\SemVer\Version($updaterFile['latest_version']);
+    $updaterNeedReplaced = !empty($updaterFile) && ($versionActual->gt($versionFromUpdaterFile));
 
     // Save current version & latest available
-    if (!is_file(UPDATER_FILE) || $updater_need_replaced) {
+    if (!is_file(UPDATER_FILE) || $updaterNeedReplaced) {
         file_write(json_encode([
-            'previous_version' => [
-                'short_code' => VERSION_CODE,
-                'version' => $bb_cfg['tp_version']
-            ],
-            'latest_version' => [
-                'short_code' => $versionCodeActual,
-                'version' => $getVersion
-            ]
+            'previous_version' => $bb_cfg['tp_version'],
+            'latest_version' => $getVersion
         ]), UPDATER_FILE, replace_content: true);
     }
 
