@@ -22,7 +22,7 @@ class CronHelper
      */
     public static function isEnabled(): bool
     {
-        return env('APP_CRON_ENABLED', true);
+        return env('APP_CRON_ENABLED');
     }
 
     /**

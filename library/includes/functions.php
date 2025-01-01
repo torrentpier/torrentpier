@@ -792,7 +792,7 @@ function generate_user_info($row, bool $have_auth = IS_ADMIN): array
 {
     global $userdata, $lang, $images, $bb_cfg;
 
-    $from = !empty($row['user_from']) ? render_flag($row['user_from']) : $lang['NOSELECT'];
+    $from = !empty($row['user_from']) ? render_flag($row['user_from'], false) : $lang['NOSELECT'];
     $joined = bb_date($row['user_regdate'], 'Y-m-d H:i', false);
     $user_time = !empty($row['user_time']) ? sprintf('%s <span class="signature">(%s)</span>', bb_date($row['user_time']), delta_time($row['user_time'])) : $lang['NOSELECT'];
     $posts = '<a href="search.php?search_author=1&amp;uid=' . $row['user_id'] . '" target="_blank">' . $row['user_posts'] ?: 0 . '</a>';
