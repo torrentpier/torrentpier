@@ -23,10 +23,9 @@ $updaterDownloader = new \TorrentPier\Updater();
 $updaterDownloader = $updaterDownloader->getLastVersion($bb_cfg['tp_updater_settings']['allow_pre_releases']);
 
 $getVersion = $updaterDownloader['tag_name'];
-$versionCodeActual = version_code($getVersion);
 
 // Has update!
-if (VERSION_CODE < $versionCodeActual) {
+if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $bb_cfg['tp_version'])) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
     // Check updater file
@@ -36,14 +35,8 @@ if (VERSION_CODE < $versionCodeActual) {
     // Save current version & latest available
     if (!is_file(UPDATER_FILE) || $updater_need_replaced) {
         file_write(json_encode([
-            'previous_version' => [
-                'short_code' => VERSION_CODE,
-                'version' => $bb_cfg['tp_version']
-            ],
-            'latest_version' => [
-                'short_code' => $versionCodeActual,
-                'version' => $getVersion
-            ]
+            'previous_version' => $bb_cfg['tp_version'],
+            'latest_version' => $getVersion
         ]), UPDATER_FILE, replace_content: true);
     }
 
