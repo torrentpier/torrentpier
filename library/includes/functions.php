@@ -2158,6 +2158,20 @@ function readUpdaterFile(): array|bool
 }
 
 /**
+ * Version formatter
+ *
+ * @param string $version
+ * @return string
+ */
+function versionFormatter(string $version): string
+{
+    $version = trim($version);
+    $version = mb_strtolower($version, 'UTF-8');
+
+    return str_replace('v', '', $version);
+}
+
+/**
  * IP Geolocation API
  *
  * @param string $ipAddress
