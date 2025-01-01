@@ -351,82 +351,12 @@ function sys(string $param)
 /**
  * Returns version code
  *
- * Notice: Compatible only with SemVer versioning!
- *
  * @param string $version
  * @return int
  */
 function version_code(string $version): int
 {
-    $finalVersionCode = [];
-    $finalVersionCode['releaseType'] = 0;
-    $finalVersionCode['releaseTypeIndex'] = 0;
-
-    $version = trim($version);
-    $version = ltrim($version, 'v');
-
-    /**
-     * Get version parts
-     *
-     * - Example: 2.0.0-rc.1
-     * -- versionCode: 2.0.0
-     * -- releaseType: rc.1
-     */
-    if (str_contains($version, '-')) {
-        $versionParts = explode('-', $version);
-        [$versionCode, $releaseType] = $versionParts;
-    } else {
-        $versionCode = $version;
-    }
-
-    /**
-     * Get version code parts (major, minor, path)
-     *
-     * - Example: 2.0.0
-     * -- majorVerIndex: 2
-     * -- minorVerIndex: 0
-     * -- pathVerIndex: 0
-     */
-    $versionCodeParts = explode('.', $versionCode);
-    [$majorVerIndex, $minorVerIndex, $pathVerIndex] = $versionCodeParts;
-
-    /**
-     * Get release type
-     *
-     * - Example:
-     * -- releaseTypeName: alpha, beta, rc
-     * -- releaseTypeIndex: 1, 2, 3...
-     */
-    if (!empty($releaseType)) {
-        $releaseTypeParts = explode('.', $releaseType);
-        [$releaseTypeName, $releaseTypeIndex] = $releaseTypeParts;
-
-        switch ($releaseTypeName) {
-            case 'alpha':
-                $finalVersionCode['releaseType'] = 1;
-                break;
-            case 'beta':
-                $finalVersionCode['releaseType'] = 2;
-                break;
-            case 'rc':
-                $finalVersionCode['releaseType'] = 3;
-                break;
-        }
-
-        $minorVerIndex -= 1;
-        $finalVersionCode['releaseTypeIndex'] = (int)$releaseTypeIndex;
-    }
-
-    $finalVersionCode['major'] = (int)$majorVerIndex;
-    $finalVersionCode['minor'] = (int)$minorVerIndex;
-    $finalVersionCode['path'] = (int)$pathVerIndex;
-
-    return
-        $finalVersionCode['major'] .
-        $finalVersionCode['minor'] .
-        $finalVersionCode['path'] .
-        $finalVersionCode['releaseType'] .
-        $finalVersionCode['releaseTypeIndex'];
+    return (int)trim(str_replace(['.', 'v'], '', $version));
 }
 
 /**
