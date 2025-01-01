@@ -87,7 +87,7 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 }
 
 /**
- * Error reporting
+ * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));
 if (APP_ENV === 'local') {
