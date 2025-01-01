@@ -87,9 +87,10 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
 }
 
 /**
- * Error reporting
+ * Initialize debug
  */
-if (env('APP_ENV') === 'local') {
+define('APP_ENV', env('APP_ENV', 'production'));
+if (APP_ENV === 'local') {
     define('DBG_USER', true); // forced debug
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
@@ -348,24 +349,10 @@ function sys(string $param)
 }
 
 /**
- * Returns version code
- *
- * @param string $version
- * @return int
- */
-function version_code(string $version): int
-{
-    return (int)trim(str_replace(['.', 'v'], '', $version));
-}
-
-/**
  * Some shared defines
  */
 // Initialize demo mode
 define('IN_DEMO_MODE', env('APP_DEMO_MODE', false));
-
-// Version code
-define('VERSION_CODE', version_code($bb_cfg['tp_version']));
 
 // Ratio status
 define('RATIO_ENABLED', TR_RATING_LIMITS && MIN_DL_FOR_RATIO > 0);

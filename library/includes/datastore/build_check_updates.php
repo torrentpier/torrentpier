@@ -22,28 +22,22 @@ $data = [];
 $updaterDownloader = new \TorrentPier\Updater();
 $updaterDownloader = $updaterDownloader->getLastVersion($bb_cfg['tp_updater_settings']['allow_pre_releases']);
 
-$getVersion = $updaterDownloader['tag_name'];
-$versionCodeActual = version_code($getVersion);
+$getVersion = versionFormatter($updaterDownloader['tag_name']);
+$currentVersion = versionFormatter($bb_cfg['tp_version']);
 
 // Has update!
-if (VERSION_CODE < $versionCodeActual) {
+if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
     $latestBuildFileLink = $updaterDownloader['assets'][0]['browser_download_url'];
 
     // Check updater file
-    $updater_file = readUpdaterFile();
-    $updater_need_replaced = !empty($updater_file) && ($updater_file['latest_version']['short_code'] < $versionCodeActual);
+    $updaterFile = readUpdaterFile();
+    $updaterFileNeedReplaced = !empty($updaterFile) && \z4kn4fein\SemVer\Version::greaterThan($getVersion, $updaterFile['latest_version']);
 
     // Save current version & latest available
-    if (!is_file(UPDATER_FILE) || $updater_need_replaced) {
+    if (!is_file(UPDATER_FILE) || $updaterFileNeedReplaced) {
         file_write(json_encode([
-            'previous_version' => [
-                'short_code' => VERSION_CODE,
-                'version' => $bb_cfg['tp_version']
-            ],
-            'latest_version' => [
-                'short_code' => $versionCodeActual,
-                'version' => $getVersion
-            ]
+            'previous_version' => $currentVersion,
+            'latest_version' => $getVersion
         ]), UPDATER_FILE, replace_content: true);
     }
 

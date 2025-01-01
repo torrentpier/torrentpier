@@ -39,7 +39,7 @@
         <td width="40%"><b>{m3ulist.TITLE}</b>
             <div id="ffprobe_{m3ulist.FILE_INDEX}">
                 <hr/>
-                <input onclick="ajax.ffprobe_info({m3ulist.FILE_INDEX}, '{m3ulist.IS_AUDIO}');" type="button" value="{L_SHOW_MORE_INFORMATION_FILE}">
+                <input onclick="ajax.ffprobe_info({m3ulist.FILE_INDEX}, {m3ulist.IS_AUDIO});" type="button" value="{L_SHOW_MORE_INFORMATION_FILE}">
             </div>
         </td>
         <td>
