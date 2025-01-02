@@ -16,6 +16,13 @@ namespace TorrentPier\Helpers;
 class VersionHelper
 {
     /**
+     * Version prefix
+     *
+     * @var string
+     */
+    private const VERSION_PREFIX = 'v';
+
+    /**
      * Returns version without prefix (v)
      *
      * @param string $version
@@ -25,7 +32,7 @@ class VersionHelper
     {
         $version = trim($version);
         $version = mb_strtolower($version, 'UTF-8');
-        return str_replace('v', '', $version);
+        return str_replace(self::VERSION_PREFIX, '', $version);
     }
 
     /**
@@ -36,7 +43,6 @@ class VersionHelper
      */
     public static function addPrefix(string $version): string
     {
-        $version = trim($version);
-        return "v$version";
+        return self::VERSION_PREFIX . trim($version);
     }
 }
