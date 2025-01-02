@@ -22,8 +22,8 @@ $data = [];
 $updaterDownloader = new \TorrentPier\Updater();
 $updaterDownloader = $updaterDownloader->getLastVersion($bb_cfg['tp_updater_settings']['allow_pre_releases']);
 
-$getVersion = versionFormatter($updaterDownloader['tag_name']);
-$currentVersion = versionFormatter($bb_cfg['tp_version']);
+$getVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($updaterDownloader['tag_name']);
+$currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($bb_cfg['tp_version']);
 
 // Has update!
 if (\z4kn4fein\SemVer\Version::greaterThan($getVersion, $currentVersion)) {
