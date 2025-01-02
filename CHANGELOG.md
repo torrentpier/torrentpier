@@ -8,6 +8,7 @@
 - Release 2.4.5 🍧️ ([belomaxorka](https://github.com/belomaxorka))
 - Added `TorrentPier instance hash` generation [\#1726](https://github.com/torrentpier/torrentpier/pull/1726) ([belomaxorka](https://github.com/belomaxorka))
 - Added `m4a` extension support in M3U playback [\#1724](https://github.com/torrentpier/torrentpier/pull/1724) ([belomaxorka](https://github.com/belomaxorka))
+- Created `VersionHelper.php` [\#1731](https://github.com/torrentpier/torrentpier/pull/1731) ([belomaxorka](https://github.com/belomaxorka))
 - Drop Ocelot announcer support 🫡 [\#1727](https://github.com/torrentpier/torrentpier/pull/1727) ([belomaxorka](https://github.com/belomaxorka))
 - Show torrent's announcers list in `filelist.php` page [\#1708](https://github.com/torrentpier/torrentpier/pull/1708) ([belomaxorka](https://github.com/belomaxorka))
 - [PHP 8.4] Fixed some deprecations [\#1718](https://github.com/torrentpier/torrentpier/pull/1718) ([belomaxorka](https://github.com/belomaxorka))
