@@ -644,7 +644,7 @@ class Torrent
         // Send torrent
         $output = Bencode::encode($tor);
 
-        $dl_fname = html_entity_decode($topic_title, ENT_QUOTES, 'UTF-8') . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+        $dl_fname = html_ent_decode($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
