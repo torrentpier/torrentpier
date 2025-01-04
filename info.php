@@ -43,7 +43,7 @@ switch ((string)$_REQUEST['show'] ?? 'not_found') {
 $require = is_file($htmlDir . $info['src']) ? ($htmlDir . $info['src']) : false;
 
 $template->assign_vars([
-    'PAGE_TITLE' => mb_strtoupper($info['title'], 'UTF-8'),
+    'PAGE_TITLE' => mb_strtoupper($info['title'], DEFAULT_CHARSET),
     'REQUIRE' => $require ? file_get_contents($require) : $lang['NOT_FOUND'],
 ]);
 
