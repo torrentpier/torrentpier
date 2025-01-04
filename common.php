@@ -239,7 +239,7 @@ function clean_filename($fname)
  * @param ?string $charset
  * @return string
  */
-function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = 'UTF-8'): string
+function htmlCHR($txt, bool $double_encode = false, int $quote_style = ENT_QUOTES, ?string $charset = DEFAULT_CHARSET): string
 {
     return (string)htmlspecialchars($txt ?? '', $quote_style, $charset, $double_encode);
 }

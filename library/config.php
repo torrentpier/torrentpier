@@ -170,7 +170,6 @@ $bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 
 // Language
-$bb_cfg['charset'] = 'UTF-8';
 $bb_cfg['lang'] = [
     // Languages available for selecting
     'af' => [

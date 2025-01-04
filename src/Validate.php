@@ -45,10 +45,10 @@ class Validate
         $username = clean_username($username);
 
         // Length
-        if (mb_strlen($username, 'UTF-8') > USERNAME_MAX_LENGTH) {
+        if (mb_strlen($username, DEFAULT_CHARSET) > USERNAME_MAX_LENGTH) {
             return $lang['USERNAME_TOO_LONG'];
         }
-        if (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH) {
+        if (mb_strlen($username, DEFAULT_CHARSET) < USERNAME_MIN_LENGTH) {
             return $lang['USERNAME_TOO_SMALL'];
         }
 
@@ -170,10 +170,10 @@ class Validate
         }
 
         // Length
-        if (mb_strlen($password, 'UTF-8') > PASSWORD_MAX_LENGTH) {
+        if (mb_strlen($password, DEFAULT_CHARSET) > PASSWORD_MAX_LENGTH) {
             return sprintf($lang['CHOOSE_PASS_ERR_MAX'], PASSWORD_MAX_LENGTH);
         }
-        if (mb_strlen($password, 'UTF-8') < PASSWORD_MIN_LENGTH) {
+        if (mb_strlen($password, DEFAULT_CHARSET) < PASSWORD_MIN_LENGTH) {
             return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
         }
 
