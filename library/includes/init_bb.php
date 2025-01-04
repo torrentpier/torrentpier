@@ -364,7 +364,7 @@ function commify(?float $num, int $decimals = 0, ?string $decimal_separator = '.
  * @param string $encoding
  * @return string
  */
-function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encoding = 'UTF-8'): string
+function html_ent_decode(string $string, int $flags = ENT_QUOTES, string $encoding = DEFAULT_CHARSET): string
 {
     return html_entity_decode($string, $flags, $encoding);
 }

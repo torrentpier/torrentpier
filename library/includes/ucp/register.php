@@ -481,7 +481,7 @@ foreach ($profile_fields as $field => $can_edit) {
             if ($submit && $sig != $pr_data['user_sig']) {
                 $sig = prepare_message($sig);
 
-                if (mb_strlen($sig, 'UTF-8') > $bb_cfg['max_sig_chars']) {
+                if (mb_strlen($sig, DEFAULT_CHARSET) > $bb_cfg['max_sig_chars']) {
                     $errors[] = $lang['SIGNATURE_TOO_LONG'];
                 } elseif (preg_match('#<(a|b|i|u|table|tr|td|img) #i', $sig) || preg_match('#(href|src|target|title)=#i', $sig)) {
                     $errors[] = $lang['SIGNATURE_ERROR_HTML'];

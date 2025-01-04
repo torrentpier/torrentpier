@@ -85,7 +85,7 @@ switch ($this->request['type']) {
         if ($post['post_id'] == $post['topic_first_post_id']) {
             $message = "[quote]" . $post['topic_title'] . "[/quote]\r";
         }
-        if (mb_strlen($message, 'UTF-8') > 1000) {
+        if (mb_strlen($message, DEFAULT_CHARSET) > 1000) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=quote&' . POST_POST_URL . '=' . $post_id);
         }
 
@@ -112,7 +112,7 @@ switch ($this->request['type']) {
         if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
             $this->ajax_die($lang['EDIT_OWN_POSTS']);
         }
-        if ((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
+        if ((mb_strlen($post['post_text'], DEFAULT_CHARSET) > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=editpost&' . POST_POST_URL . '=' . $post_id);
         } elseif ($this->request['type'] == 'editor') {
             $text = (string)$this->request['text'];

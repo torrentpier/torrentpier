@@ -255,7 +255,7 @@ class Dev
         $sql = str_compact($sql);
 
         if (!empty($_COOKIE['sql_log_full'])) {
-            if (mb_strlen($sql, 'UTF-8') > $max_len) {
+            if (mb_strlen($sql, DEFAULT_CHARSET) > $max_len) {
                 $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
             }
         }

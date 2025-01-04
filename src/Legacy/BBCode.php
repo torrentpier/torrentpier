@@ -322,7 +322,7 @@ class BBCode
     {
         $max_len = 70;
         $href = $m[1];
-        $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
+        $name = (mb_strlen($href, DEFAULT_CHARSET) > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
         return $this->nofollow_url($href, $name);
     }

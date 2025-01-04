@@ -772,13 +772,13 @@ function get_user_id($username)
 
 function str_short($text, $max_length, $space = ' ')
 {
-    if (!empty($max_length) && !empty($text) && (mb_strlen($text, 'UTF-8') > $max_length)) {
-        $text = mb_substr($text, 0, $max_length, 'UTF-8');
+    if (!empty($max_length) && !empty($text) && (mb_strlen($text, DEFAULT_CHARSET) > $max_length)) {
+        $text = mb_substr($text, 0, $max_length, DEFAULT_CHARSET);
 
         if ($last_space_pos = $max_length - (int)strpos(strrev($text), (string)$space)) {
             if ($last_space_pos > round($max_length * 3 / 4)) {
                 $last_space_pos--;
-                $text = mb_substr($text, 0, $last_space_pos, 'UTF-8');
+                $text = mb_substr($text, 0, $last_space_pos, DEFAULT_CHARSET);
             }
         }
         $text .= '...';
@@ -927,7 +927,7 @@ function bb_update_config($params, $table = BB_CONFIG)
 
 function clean_username($username)
 {
-    $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
+    $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, DEFAULT_CHARSET);
     $username = rtrim($username, "\\");
     $username = str_replace("'", "\'", $username);
 
@@ -1372,7 +1372,7 @@ function bb_simple_die($txt, $status_code = null)
 {
     global $bb_cfg;
 
-    header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
+    header('Content-Type: text/plain; charset=' . DEFAULT_CHARSET);
 
     if (isset($status_code)) {
         http_response_code($status_code);
@@ -2028,9 +2028,9 @@ function hash_search($hash)
     $info_hash = DB()->escape(pack('H*', $hash));
 
     // Check info_hash version
-    if (mb_strlen($hash, 'UTF-8') == 40) {
+    if (mb_strlen($hash, DEFAULT_CHARSET) == 40) {
         $info_hash_where = "WHERE info_hash = '$info_hash'";
-    } elseif (mb_strlen($hash, 'UTF-8') == 64) {
+    } elseif (mb_strlen($hash, DEFAULT_CHARSET) == 64) {
         $info_hash_where = "WHERE info_hash_v2 = '$info_hash'";
     } else {
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
