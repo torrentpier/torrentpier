@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="{$bb_cfg['default_lang']}">
 <head>
-  <meta charset="{CONTENT_ENCODING}"/>
-  <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon"/>
+  <meta charset="{CONTENT_ENCODING}">
+  <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
   <title>{L_ADMIN}</title>
 </head>
 
