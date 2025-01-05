@@ -62,7 +62,7 @@ class Updater
         $response = file_get_contents(UPDATER_URL, context: $context);
 
         if ($response !== false) {
-            $this->jsonResponse = json_decode(mb_convert_encoding($response, 'UTF-8', mb_detect_encoding($response)), true);
+            $this->jsonResponse = json_decode(mb_convert_encoding($response, DEFAULT_CHARSET, mb_detect_encoding($response)), true);
         }
 
         // Empty JSON result

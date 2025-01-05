@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{$bb_cfg['default_lang']}">
 <head>
-<meta charset="utf-8">
+<meta charset="{CONTENT_ENCODING}">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="initial-scale=1.0">
 <meta name="generator" content="{#APP_NAME#}">

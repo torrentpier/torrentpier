@@ -111,7 +111,7 @@ $template->assign_vars([
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars([
     'SIMPLE_HEADER' => !empty($gen_simple_header),
-    'CONTENT_ENCODING' => $bb_cfg['charset'],
+    'CONTENT_ENCODING' => DEFAULT_CHARSET,
 
     'IN_ADMIN' => defined('IN_ADMIN'),
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),

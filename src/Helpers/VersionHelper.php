@@ -31,7 +31,7 @@ class VersionHelper
     public static function removerPrefix(string $version): string
     {
         $version = trim($version);
-        $version = mb_strtolower($version, 'UTF-8');
+        $version = mb_strtolower($version, DEFAULT_CHARSET);
         return str_replace(self::VERSION_PREFIX, '', $version);
     }
 
