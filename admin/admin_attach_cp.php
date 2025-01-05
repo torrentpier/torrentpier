@@ -422,11 +422,7 @@ if ($view === 'attachments') {
 
                     $row = DB()->sql_fetchrow($result);
                     DB()->sql_freeresult($result);
-                    $post_title = $row['topic_title'];
-
-                    if (mb_strlen($post_title, DEFAULT_CHARSET) > 32) {
-                        $post_title = str_short($post_title, 30);
-                    }
+                    $post_title = str_short($row['topic_title'], 30);
 
                     $view_topic = BB_ROOT . POST_URL . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
 
