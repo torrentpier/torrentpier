@@ -424,7 +424,7 @@ if ($view === 'attachments') {
                     DB()->sql_freeresult($result);
                     $post_title = $row['topic_title'];
 
-                    if (strlen($post_title) > 32) {
+                    if (mb_strlen($post_title, DEFAULT_CHARSET) > 32) {
                         $post_title = str_short($post_title, 30);
                     }
 

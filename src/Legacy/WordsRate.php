@@ -46,7 +46,7 @@ class WordsRate
         $this->del_text_hl = $text;
 
         // Long text
-        if (strlen($text) > 600) {
+        if (mb_strlen($text, DEFAULT_CHARSET) > 600) {
             return $this->words_rate;
         }
         // Crop quotes if contains +1
