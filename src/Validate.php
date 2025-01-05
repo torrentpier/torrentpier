@@ -112,7 +112,7 @@ class Validate
         }
 
         // Check max length
-        if (\strlen($email) > USEREMAIL_MAX_LENGTH) {
+        if (mb_strlen($email, DEFAULT_CHARSET) > USEREMAIL_MAX_LENGTH) {
             return $lang['EMAIL_TOO_LONG'];
         }
 
