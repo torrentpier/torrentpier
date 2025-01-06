@@ -286,7 +286,7 @@ if ($forum_data['allow_reg_tracker']) {
     }
 
     $select_tor_sql = ',
-		bt.auth_key, tor.info_hash, tor.info_hash_v2, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
+		bt.auth_key, tor.info_hash, tor.info_hash_v2, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type, tor.ext_seeders, tor.ext_leechers,
 		sn.seeders, sn.leechers, ad.download_count
 	';
     $select_tor_sql .= $join_dl ? ', dl.user_status AS dl_status' : '';
@@ -471,8 +471,8 @@ foreach ($topic_rowset as $topic) {
         $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']));
 
         $template->assign_block_vars('t.tor', [
-            'SEEDERS' => (int)$topic['seeders'],
-            'LEECHERS' => (int)$topic['leechers'],
+            'SEEDERS' => (int)$topic['seeders'] + (int)$topic['ext_seeders'],
+            'LEECHERS' => (int)$topic['leechers'] + (int)$topic['ext_leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size'], 1),
             'COMPL_CNT' => declension((int)$topic['complete_count'], 'times'),
             'DOWNLOADED' => (int)$topic['download_count'],
