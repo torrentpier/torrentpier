@@ -90,7 +90,7 @@ $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the
 // GZip
 $bb_cfg['gzip_compress'] = false; // Compress output
 
-// Tracker
+// Tracker (announcer)
 $bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
 $bb_cfg['scrape_interval'] = 300; // Scrape interval (default: 300)
 $bb_cfg['max_scrapes'] = 150; // Allowed number of info-hashes for simultaneous scraping, only not cached info-hashes will abide by these limits (default: 150)
