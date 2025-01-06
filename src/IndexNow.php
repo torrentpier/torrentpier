@@ -32,6 +32,13 @@ class IndexNow
     public static string $keyFileExtension = '.txt';
 
     /**
+     * Log filename
+     *
+     * @var string
+     */
+    private static string $logFile = 'index_now';
+
+    /**
      * Available hosts
      *
      * @var array|string[]
@@ -47,9 +54,11 @@ class IndexNow
 
         $this->indexNow = new \Nemorize\Indexnow\Indexnow();
         $this->indexNow->setKey($bb_cfg['indexnow_key']);
-
         if (in_array($bb_cfg['indexnow_settings']['host'], array_keys($this->hosts))) {
-            $this->indexNow->setHost($bb_cfg['indexnow_settings']['host']);
+            $this->indexNow->setHost($this->hosts[$bb_cfg['indexnow_settings']['host']]);
+        } else {
+            bb_log("IndexNow (ERROR): Invalid host: {$bb_cfg['indexnow_settings']['host']}\n", self::$logFile);
+            bb_die('Invalid host: ' . $bb_cfg['indexnow_settings']['host']);
         }
         $this->indexNow->setKeyLocation(FULL_URL . $bb_cfg['indexnow_key'] . self::$keyFileExtension);
     }
@@ -65,6 +74,7 @@ class IndexNow
         try {
             $this->indexNow->submit($url);
         } catch (IndexnowException $e) {
+            bb_log("IndexNow (ERROR) [$url]: Message: {$e->getMessage()}\n", self::$logFile);
             bb_die($e->getMessage());
         }
     }
