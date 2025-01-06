@@ -19,12 +19,21 @@ class IndexNow
 {
     private \Nemorize\Indexnow\Indexnow $indexNow;
 
+    /**
+     * IndexNow Key-file extension
+     *
+     * @var string
+     */
+    public static string $keyFileExtension = '.txt';
+
     public function __construct()
     {
         global $bb_cfg;
 
         $this->indexNow = new \Nemorize\Indexnow\Indexnow();
         $this->indexNow->setKey($bb_cfg['indexnow_key']);
+        $this->indexNow->setHost();
+        $this->indexNow->setKeyLocation(FULL_URL . $bb_cfg['indexnow_key'] . self::$keyFileExtension);
     }
 
     /**
