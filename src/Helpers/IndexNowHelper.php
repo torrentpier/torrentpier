@@ -45,16 +45,4 @@ class IndexNowHelper
 
         return BB_ROOT . $bb_cfg['indexnow_key'] . self::$keyFileExtension;
     }
-
-    /**
-     * Returns IndexNow unique key
-     *
-     * @return string
-     */
-    public static function getKey(): string
-    {
-        global $bb_cfg;
-
-        return $bb_cfg['indexnow_key'];
-    }
 }
