@@ -152,3 +152,5 @@ ALTER TABLE `bb_topics` ADD COLUMN `topic_allow_robots` TINYINT(1) UNSIGNED NOT 
 // 2.4.5
 INSERT INTO `bb_config` VALUES ('magnet_links_for_guests', '0');
 INSERT INTO `bb_config` VALUES ('tp_instance_hash', '');
+ALTER TABLE `bb_bt_torrents` ADD COLUMN `ext_seeders` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `bb_bt_torrents` ADD COLUMN `ext_leechers` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0';
