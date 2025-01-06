@@ -294,7 +294,7 @@ $template->assign_vars([
     'MULTI_PEERS_STAT' => ($bb_cfg['tor_stats'] &&
         $bb_cfg['tracker']['multitracker']['enabled']) ?
         sprintf(
-            $lang['MULTI_PEERS_STAT'],
+            $lang['PEERS_STAT'],
             $stats['multi_peers'],
             $stats['multi_seeders'],
             $stats['multi_leechers']

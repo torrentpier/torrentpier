@@ -190,6 +190,8 @@
 				<p>{TORRENTS_STAT}</p>
 				<p>{PEERS_STAT}</p>
 				<p>{SPEED_STAT}</p>
+                <hr/>
+                <p>{MULTI_PEERS_STAT}</p>
 				<!-- ENDIF -->
 
 				<!-- IF $bb_cfg['birthday_enabled'] -->
