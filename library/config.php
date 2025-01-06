@@ -129,7 +129,7 @@ $bb_cfg['torr_server'] = [
 
 // IndexNow settings
 $bb_cfg['indexnow_settings'] = [
-    'enabled' => true,
+    'enabled' => false,
     'host' => 'bing', // Available: yandex, bing, seznam, naver
 ];
 
