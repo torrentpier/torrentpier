@@ -64,6 +64,13 @@ if (empty($bb_cfg['tp_instance_hash']) || ($bb_cfg['tp_instance_hash'] !== hash(
     bb_update_config(['tp_instance_hash' => hash('xxh128', FULL_URL)]);
 }
 
+// Generate IndexNow key
+if (empty($bb_cfg['indexnow_key']) || !is_file(BB_ROOT . $bb_cfg['indexnow_key'] . '.txt')) {
+    $randomIndexNowKey = make_rand_str(rand(64, 128));
+    file_write($randomIndexNowKey, BB_ROOT . $randomIndexNowKey . '.txt');
+    bb_update_config(['indexnow_key' => $randomIndexNowKey]);
+}
+
 // Check for updates
 $datastore->update('check_updates');
 
