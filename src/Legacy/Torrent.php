@@ -396,7 +396,7 @@ class Torrent
             }
         }
 
-        // Getting multi-peers
+        // Getting external peers
         $external_seeders = $external_leechers = 0;
         if ($bb_cfg['tracker']['multitracker']['enabled']) {
             $tor['announce-list'] = array_merge(array_column($tor['announce-list'], 0), [$tor['announce']]);
