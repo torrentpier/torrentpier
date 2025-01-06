@@ -398,8 +398,12 @@ class Torrent
 
         // Getting external peers
         if ($bb_cfg['tracker']['multitracker']['enabled']) {
-            $tor['announce-list'] = array_merge(array_column($tor['announce-list'], 0), [$tor['announce']]);
+            // Getting / preparing announcers list
+            array_unshift($tor['announce-list'], [$tor['announce']]);
+            $tor['announce-list'] = array_column($tor['announce-list'], 0);
             $announcers = array_unique($tor['announce-list'], SORT_REGULAR);
+
+            // Getting external seeders / leechers
             $multiTracker = new MultiTracker([
                 bin2hex($info_hash ?? $info_hash_v2)
             ], $announcers);
