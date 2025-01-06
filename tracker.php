@@ -710,6 +710,11 @@ if ($allowed_forums) {
 
             $seeds = $tor['seeders'];
             $leechs = $tor['leechers'];
+            if ($bb_cfg['tracker']['multitracker']['enabled']) {
+                $seeds += $tor['ext_seeders'];
+                $leechs += $tor['ext_leechers'];
+            }
+
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];

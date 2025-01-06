@@ -470,9 +470,13 @@ foreach ($topic_rowset as $topic) {
     if (isset($topic['tor_size'])) {
         $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']));
 
+        if ($bb_cfg['tracker']['multitracker']['enabled']) {
+            $topic['seeders'] += (int)$topic['ext_seeders'];
+            $topic['leechers'] += (int)$topic['ext_leechers'];
+        }
         $template->assign_block_vars('t.tor', [
-            'SEEDERS' => (int)$topic['seeders'] + (int)$topic['ext_seeders'],
-            'LEECHERS' => (int)$topic['leechers'] + (int)$topic['ext_leechers'],
+            'SEEDERS' => (int)$topic['seeders'],
+            'LEECHERS' => (int)$topic['leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size'], 1),
             'COMPL_CNT' => declension((int)$topic['complete_count'], 'times'),
             'DOWNLOADED' => (int)$topic['download_count'],
