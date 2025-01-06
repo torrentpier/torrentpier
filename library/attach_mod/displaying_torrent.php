@@ -518,6 +518,14 @@ if ($tor_reged && $tor_info) {
             $template->assign_vars(['SEEDER_LAST_SEEN' => sprintf($lang['SEEDER_LAST_SEEN'], $last_seen_time)]);
             $template->assign_vars(['SEEDER_USERNAME' => $last_seeder_username]);
         }
+
+        // Show external peers
+        if ($bb_cfg['tracker']['multitracker']['enabled']) {
+            $template->assign_vars([
+                'MULTI_SEED_COUNT' => (int)$tor_info['ext_seeders'],
+                'MULTI_LEECH_COUNT' => (int)$tor_info['ext_leechers'],
+            ]);
+        }
     }
 
     $template->assign_block_vars('tor_title', ['U_DOWNLOAD_LINK' => $download_link]);
