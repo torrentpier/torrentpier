@@ -46,6 +46,7 @@ class IndexNow
     public array $hosts = [
         'yandex' => 'yandex.com',
         'bing' => 'bing.com',
+        'seznam' => 'search.seznam.cz'
     ];
 
     public function __construct()

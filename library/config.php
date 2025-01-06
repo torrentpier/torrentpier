@@ -130,7 +130,7 @@ $bb_cfg['torr_server'] = [
 // IndexNow settings
 $bb_cfg['indexnow_settings'] = [
     'enabled' => true,
-    'host' => 'yandex', // Available: yandex, bing
+    'host' => 'yandex', // Available: yandex, bing, seznam
 ];
 
 // FAQ url help link
