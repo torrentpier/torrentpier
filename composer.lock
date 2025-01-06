@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3dd6c29793f928936aec555bba8ca5c",
+    "content-hash": "07e69fe785694afdac14bf6e47ae9f05",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -3504,6 +3504,65 @@
                 }
             ],
             "time": "2024-09-25T14:20:29+00:00"
+        },
+        {
+            "name": "torrentpier/scrapeer",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/torrentpier/scrapeer.git",
+                "reference": "c28e254cb81e0fa11688ded920fd4e2e17c05c16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/torrentpier/scrapeer/zipball/c28e254cb81e0fa11688ded920fd4e2e17c05c16",
+                "reference": "c28e254cb81e0fa11688ded920fd4e2e17c05c16",
+                "shasum": ""
+            },
+            "require": {
+                "ext-sockets": "*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "symfony/var-dumper": "^6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TorrentPier\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "medariox",
+                    "role": "Developer"
+                },
+                {
+                    "name": "belomaxorka",
+                    "email": "roman25052006.kelesh@gmail.com",
+                    "homepage": "https://github.com/belomaxorka",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Essential PHP library that scrapes HTTP(S) and UDP trackers for torrent information.",
+            "homepage": "https://torrentpier.com",
+            "keywords": [
+                "scraper",
+                "torrent",
+                "torrent-scrap",
+                "torrent-scraper",
+                "torrent-scraping",
+                "torrents"
+            ],
+            "support": {
+                "issues": "https://github.com/torrentpier/scrapeer/issues",
+                "source": "https://github.com/torrentpier/scrapeer/tree/v1.0.0"
+            },
+            "time": "2024-02-03T06:57:49+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
