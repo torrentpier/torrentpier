@@ -17,6 +17,11 @@ use Nemorize\Indexnow\Exceptions\IndexnowException;
  */
 class IndexNow
 {
+    /**
+     * IndexNow instance
+     *
+     * @var \Nemorize\Indexnow\Indexnow
+     */
     private \Nemorize\Indexnow\Indexnow $indexNow;
 
     /**
@@ -26,13 +31,26 @@ class IndexNow
      */
     public static string $keyFileExtension = '.txt';
 
+    /**
+     * Available hosts
+     *
+     * @var array|string[]
+     */
+    public array $hosts = [
+        'yandex' => 'yandex.com',
+        'bing' => 'bing.com',
+    ];
+
     public function __construct()
     {
         global $bb_cfg;
 
         $this->indexNow = new \Nemorize\Indexnow\Indexnow();
         $this->indexNow->setKey($bb_cfg['indexnow_key']);
-        $this->indexNow->setHost();
+
+        if (in_array($bb_cfg['indexnow_settings']['host'], array_keys($this->hosts))) {
+            $this->indexNow->setHost($bb_cfg['indexnow_settings']['host']);
+        }
         $this->indexNow->setKeyLocation(FULL_URL . $bb_cfg['indexnow_key'] . self::$keyFileExtension);
     }
 
