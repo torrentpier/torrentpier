@@ -222,7 +222,7 @@ class Post
         }
 
         // Send IndexNow
-        if ($mode === 'newtopic' || $mode === 'editpost') {
+        if ($bb_cfg['indexnow_settings']['enabled'] && ($mode === 'newtopic' || $mode === 'editpost')) {
             $indexNow = new IndexNow();
             $indexNow->submit(FULL_URL . POST_URL . "$post_id#$post_id");
         }
