@@ -397,12 +397,15 @@ class Torrent
         }
 
         // Getting multi-peers
+        $external_seeders = $external_leechers = 0;
         if ($bb_cfg['tracker']['multitracker']['enabled']) {
-            $torrent = \Arokettu\Torrent\TorrentFile::loadFromString($file_contents);
-            $announcers = $torrent->getAnnounceList()->toArray();
+            $tor['announce-list'] = array_merge(array_column($tor['announce-list'], 0), [$tor['announce']]);
+            $announcers = array_unique($tor['announce-list'], SORT_REGULAR);
             $multiTracker = new MultiTracker([
                 bin2hex($info_hash ?? $info_hash_v2)
-            ], $announcers[0]);
+            ], $announcers);
+            $external_seeders = $multiTracker->seeders;
+            $external_leechers = $multiTracker->leechers;
         }
 
         if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
@@ -454,8 +457,8 @@ class Torrent
 
         $size = sprintf('%.0f', (float)$totallen);
 
-        $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status';
-        $values = "'$info_hash_sql', '$info_hash_v2_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
+        $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status, ext_seeders, ext_leechers';
+        $values = "'$info_hash_sql', '$info_hash_v2_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status, $external_seeders, $external_leechers";
 
         $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 

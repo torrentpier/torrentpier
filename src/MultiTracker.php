@@ -15,9 +15,28 @@ namespace TorrentPier;
  */
 class MultiTracker
 {
+    public int $leechers;
+    public int $seeders;
+
     public function __construct(array $infoHashes, array $trackers)
     {
         $scraper = new Scraper();
-        $info = $scraper->scrape($infoHashes, $trackers);
+        $announcerInfo = $scraper->scrape($infoHashes, $trackers);
+
+        $seeders = $leechers = 0;
+        if (!$scraper->hasErrors()) {
+            foreach ($infoHashes as $infoHash) {
+                $announcerInfo = $announcerInfo[$infoHash];
+                $seeders = $announcerInfo['seeders'];
+                $leechers = $announcerInfo['leechers'];
+            }
+        } else {
+            dump($scraper->getErrors());
+        }
+
+        //dd([$seeders, $leechers]);
+
+        $this->leechers = $leechers;
+        $this->seeders = $seeders;
     }
 }
