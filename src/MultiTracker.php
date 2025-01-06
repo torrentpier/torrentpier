@@ -15,5 +15,9 @@ namespace TorrentPier;
  */
 class MultiTracker
 {
-
+    public function __construct(array $infoHashes, array $trackers)
+    {
+        $scraper = new Scraper();
+        $info = $scraper->scrape($infoHashes, $trackers);
+    }
 }
