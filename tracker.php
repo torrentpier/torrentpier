@@ -654,7 +654,7 @@ if ($allowed_forums) {
         // SELECT
         $select = "
 			SELECT
-				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
+				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type, tor.ext_seeders, tor.ext_leechers,
 				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, t.topic_vote, sn.seeders, sn.leechers, tor.info_hash, tor.info_hash_v2, ad.download_count
 		";
         $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
