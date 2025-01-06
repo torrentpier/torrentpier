@@ -420,7 +420,6 @@ class Torrent
         }
 
         $totallen = 0;
-
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
         } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && is_array($info['files'])) {
@@ -459,7 +458,6 @@ class Torrent
         } else {
             self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
-
         $size = sprintf('%.0f', (float)$totallen);
 
         $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status, ext_seeders, ext_leechers';
