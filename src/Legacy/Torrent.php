@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\MultiTracker;
 use TorrentPier\TorrServerAPI;
 
 use Arokettu\Bencode\Bencode;
@@ -393,6 +394,15 @@ class Torrent
             if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
                 $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
             }
+        }
+
+        // Getting multi-peers
+        if ($bb_cfg['tracker']['multitracker']['enabled']) {
+            $torrent = \Arokettu\Torrent\TorrentFile::loadFromString($file_contents);
+            $announcers = $torrent->getAnnounceList()->toArray();
+            $multiTracker = new MultiTracker([
+                bin2hex($info_hash ?? $info_hash_v2)
+            ], $announcers[0]);
         }
 
         if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
