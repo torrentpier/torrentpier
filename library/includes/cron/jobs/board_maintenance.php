@@ -65,8 +65,8 @@ if (empty($bb_cfg['tp_instance_hash']) || ($bb_cfg['tp_instance_hash'] !== hash(
 }
 
 // Generate IndexNow key
-if (empty($bb_cfg['indexnow_key']) || !is_file(\TorrentPier\Helpers\IndexNowHelper::getKeyPath())) {
-    $randomIndexNowKey = make_rand_str(rand(64, 128));
+if (!is_file(\TorrentPier\Helpers\IndexNowHelper::getKeyPath())) {
+    $randomIndexNowKey = empty($bb_cfg['indexnow_key']) ? make_rand_str(rand(64, 128)) : $bb_cfg['indexnow_key'];
     file_write($randomIndexNowKey, \TorrentPier\Helpers\IndexNowHelper::getKeyPath());
     bb_update_config(['indexnow_key' => $randomIndexNowKey]);
 }
