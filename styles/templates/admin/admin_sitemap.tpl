@@ -52,8 +52,6 @@
     ajax.callback.sitemap = function (data) {
         if (data.mode == 'create') {
             $('#mess_time').html(data.html);
-        } else {
-            $('#sitemap').html(data.html);
         }
     }
 </script>
@@ -71,9 +69,7 @@
         <tr class="row1">
             <td width="25%"><span class="gen"><b>{L_SITEMAP_OPTIONS}:</b></span></td>
             <td class="td_pads">
-                <a href="#" class="btn btn-success"
-                   onclick="ajax.sitemap('create'); return false;">{L_SITEMAP_CREATE}</a><br/>
-                <div id="sitemap"></div>
+                <a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">{L_SITEMAP_CREATE}</a>
             </td>
         </tr>
         <tr>
