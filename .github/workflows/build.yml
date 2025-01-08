@@ -21,10 +21,14 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
+      - name: Get commit hash
+        id: get_commit_hash
+        run: echo "::set-output name=commit_hash::$(git rev-parse --short HEAD)"
+
       - name: Create archive
         run: |
-          timestamp=$(date +%Y%m%d%H%M%S)
-          zip_name="torrentpier-$timestamp.zip"
+          commit=${{ steps.get_commit_hash.outputs.commit_hash }}
+          zip_name="torrentpier-$commit.zip"
           zip -r "$zip_name" . -x ".git/*" ".github/*"
           echo "::set-output name=zip_name::$zip_name"
         id: create_zip
