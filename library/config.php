@@ -602,12 +602,6 @@ $bb_cfg['user_agreement_url'] = 'info.php?show=user_agreement';
 $bb_cfg['copyright_holders_url'] = 'info.php?show=copyright_holders';
 $bb_cfg['advert_url'] = 'info.php?show=advert';
 
-$bb_cfg['sitemap_sending'] = [
-    // A list of URLs to which to send a sitemap for indexing by a search robot.
-    // Syntax: 'Resource name' => 'link to endpoint'
-    // Sitemap sending is deprecated. See: https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping
-];
-
 // Extensions
 $bb_cfg['file_id_ext'] = [
     1 => 'gif',
