@@ -2999,7 +2999,6 @@ $lang['SITEMAP_AVAILABLE'] = 'and is available at';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap is not yet created';
 $lang['SITEMAP_OPTIONS'] = 'Options';
 $lang['SITEMAP_CREATE'] = 'Create / update the sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Notify search engines about new version of sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'What to do next?';
 $lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> of site you registered.';
