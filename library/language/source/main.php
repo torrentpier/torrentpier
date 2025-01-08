@@ -1400,6 +1400,7 @@ $lang['SPEED_DOWN'] = 'Speed Down';
 
 $lang['SEEDERS'] = 'Seeders';
 $lang['LEECHERS'] = 'Leechers';
+$lang['MULTI_TRACKER_PREFIX'] = 'Multitracker peers';
 $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'Seed';
 $lang['LEECHING'] = 'Leech';

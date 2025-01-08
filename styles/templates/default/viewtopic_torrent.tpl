@@ -75,6 +75,7 @@ ajax.callback.callseed = function (data) {
     <!-- IF MULTI_SEED_COUNT || MULTI_LEECH_COUNT -->
     <tr>
         <td colspan="2" class="row1 pad_2">
+            <h3 class="mrg_4">{L_MULTI_TRACKER_PREFIX}</h3>
             <div class="mrg_4 pad_4">
                 <span class="seed">{L_SEEDERS}:&nbsp; <b>{MULTI_SEED_COUNT}</b></span> &nbsp;
                 <span class="leech">{L_LEECHERS}:&nbsp;	<b>{MULTI_LEECH_COUNT}</b></span> &nbsp;
