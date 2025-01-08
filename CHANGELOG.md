@@ -10,7 +10,7 @@
 - Added `TorrentPier instance hash` generation [\#1726](https://github.com/torrentpier/torrentpier/pull/1726) ([belomaxorka](https://github.com/belomaxorka))
 - Added `m4a` extension support in M3U playback [\#1724](https://github.com/torrentpier/torrentpier/pull/1724) ([belomaxorka](https://github.com/belomaxorka))
 - Created `VersionHelper.php` [\#1731](https://github.com/torrentpier/torrentpier/pull/1731) ([belomaxorka](https://github.com/belomaxorka))
-- Removed sitemap ping because is deprecated
+- Removed sitemap ping because is deprecated [\#1738](https://github.com/torrentpier/torrentpier/pull/1738) ([belomaxorka](https://github.com/belomaxorka))
 - Drop Ocelot announcer support 🫡 [\#1727](https://github.com/torrentpier/torrentpier/pull/1727) ([belomaxorka](https://github.com/belomaxorka))
 - Use `DEFAULT_CHARSET` constant instead of hardcoded string [\#1734](https://github.com/torrentpier/torrentpier/pull/1734) ([belomaxorka](https://github.com/belomaxorka))
 - Replaced some string functions to `mbstring` alternatives [\#1735](https://github.com/torrentpier/torrentpier/pull/1735) ([belomaxorka](https://github.com/belomaxorka))
