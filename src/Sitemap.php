@@ -44,6 +44,7 @@ class Sitemap
         while ($row = DB()->sql_fetchrow($sql)) {
             $forumUrls[] = [
                 'url' => FORUM_URL . $row['forum_id'],
+                'time' => ''
             ];
         }
 
@@ -120,7 +121,7 @@ class Sitemap
         $sitemap = new STM(SITEMAP_DIR . '/sitemap_dynamic.xml');
 
         foreach ($this->getForumUrls() as $forum) {
-            $sitemap->addItem(make_url($forum['url']), time(), STM::HOURLY, 0.7);
+            $sitemap->addItem(make_url($forum['url']), $forum['time'], STM::HOURLY, 0.7);
         }
 
         foreach ($this->getTopicUrls() as $topic) {
