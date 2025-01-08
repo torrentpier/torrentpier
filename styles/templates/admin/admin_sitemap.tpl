@@ -84,8 +84,7 @@ ajax.callback.sitemap = function(data) {
 	<tr class="row1">
 		<td width="25%"><span class="gen"><b>{L_SITEMAP_OPTIONS}:</b></span></td>
 		<td class="td_pads">
-			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">{L_SITEMAP_CREATE}</a>&nbsp;&nbsp;
-			<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">{L_SITEMAP_NOTIFY}</a><br />
+			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">{L_SITEMAP_CREATE}</a><br />
 			<div id="sitemap"></div>
 		</td>
 	</tr>
