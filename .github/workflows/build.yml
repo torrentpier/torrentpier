@@ -1,4 +1,4 @@
-name: PHP Build and Archive
+name: TorrentPier nightly builder
 
 on:
   push:
@@ -32,5 +32,5 @@ jobs:
       - name: Upload Archive
         uses: actions/upload-artifact@v3
         with:
-          name: build-archive
+          name: TorrentPier
           path: ${{ steps.create_zip.outputs.zip_name }}
