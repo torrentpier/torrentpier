@@ -145,7 +145,7 @@ class Ajax
     public function ajax_die(string $error_msg, int $error_code = E_AJAX_GENERAL_ERROR): void
     {
         $this->response['error_code'] = $error_code;
-        $this->response['error_msg'] = strip_tags(br2nl(htmlCHR($error_msg)));
+        $this->response['error_msg'] = strip_tags(br2nl($error_msg));
 
         // Get caller info
         if (!empty($_COOKIE['explain'])) {
