@@ -41,6 +41,14 @@ if ($bb_cfg['tor_stats']) {
     $data['leechers'] = commify($row['leechers']);
     $data['peers'] = commify($row['seeders'] + $row['leechers']);
     $data['speed'] = $row['speed'];
+
+    // multitracker stat
+    if ($bb_cfg['tracker']['multitracker']['enabled']) {
+        $row = DB()->fetch_row("SELECT SUM(ext_seeders) AS multi_seeders, SUM(ext_leechers) AS multi_leechers FROM " . BB_BT_TORRENTS);
+        $data['multi_seeders'] = commify($row['multi_seeders']);
+        $data['multi_leechers'] = commify($row['multi_leechers']);
+        $data['multi_peers'] = commify($row['multi_seeders'] + $row['multi_leechers']);
+    }
 }
 
 // gender stat

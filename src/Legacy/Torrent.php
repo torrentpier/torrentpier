@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\MultiTracker;
 use TorrentPier\TorrServerAPI;
 
 use Arokettu\Bencode\Bencode;
@@ -395,6 +396,23 @@ class Torrent
             }
         }
 
+        // Getting external peers
+        if ($bb_cfg['tracker']['multitracker']['enabled']) {
+            // Getting / preparing announcers list
+            array_unshift($tor['announce-list'], [$tor['announce']]);
+            $tor['announce-list'] = array_column($tor['announce-list'], 0);
+            $announcers = array_unique($tor['announce-list'], SORT_REGULAR);
+
+            // Getting external seeders / leechers
+            $multiTracker = new MultiTracker([
+                bin2hex($info_hash ?? $info_hash_v2)
+            ], $announcers);
+            $external_seeders = $multiTracker->seeders;
+            $external_leechers = $multiTracker->leechers;
+        } else {
+            $external_seeders = $external_leechers = 0;
+        }
+
         if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " $info_hash_where LIMIT 1")) {
             $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
             bb_die($msg);
@@ -402,7 +420,6 @@ class Torrent
         }
 
         $totallen = 0;
-
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
         } elseif (isset($bt_v1, $info['files']) && !isset($bt_v2) && is_array($info['files'])) {
@@ -441,11 +458,10 @@ class Torrent
         } else {
             self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
-
         $size = sprintf('%.0f', (float)$totallen);
 
-        $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status';
-        $values = "'$info_hash_sql', '$info_hash_v2_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
+        $columns = 'info_hash, info_hash_v2, post_id, poster_id, topic_id, forum_id, attach_id, size, reg_time, tor_status, ext_seeders, ext_leechers';
+        $values = "'$info_hash_sql', '$info_hash_v2_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status, $external_seeders, $external_leechers";
 
         $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 

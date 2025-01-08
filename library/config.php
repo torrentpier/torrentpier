@@ -90,7 +90,7 @@ $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the
 // GZip
 $bb_cfg['gzip_compress'] = false; // Compress output
 
-// Tracker
+// Tracker (announcer) settings
 $bb_cfg['announce_interval'] = 1800; // Announce interval (default: 1800)
 $bb_cfg['scrape_interval'] = 300; // Scrape interval (default: 300)
 $bb_cfg['max_scrapes'] = 150; // Allowed number of info-hashes for simultaneous scraping, only not cached info-hashes will abide by these limits (default: 150)
@@ -727,7 +727,14 @@ $bb_cfg['tracker'] = [
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
     'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
-    'disabled_v2_torrents' => false // disallow registration of v2-only torrents
+    'disabled_v2_torrents' => false, // disallow registration of v2-only torrents
+    'multitracker' => [ // multi-tracker settings
+        'enabled' => true,
+        'update_interval' => 0,
+        'max_trackers' => 3,
+        'timeout' => 5, // per announcer (in secs)
+        'torrents_per_cycle' => 20,
+    ],
 ];
 
 // Ratio settings

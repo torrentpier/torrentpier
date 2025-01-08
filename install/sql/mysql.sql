@@ -297,6 +297,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
   `speed_up`         INT(11)               NOT NULL DEFAULT '0',
   `speed_down`       INT(11)               NOT NULL DEFAULT '0',
   `last_seeder_id`   MEDIUMINT(8)          NOT NULL DEFAULT '0',
+  `ext_seeders`      MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `ext_leechers`     MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),

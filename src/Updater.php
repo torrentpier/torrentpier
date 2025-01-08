@@ -130,14 +130,14 @@ class Updater
     }
 
     /**
-     * Returns information of latest TorrentPier version
+     * Returns information of latest TorrentPier version available
      *
-     * @param bool $allowRC
+     * @param bool $allowPreReleases
      * @return array
      */
-    public function getLastVersion(bool $allowRC = true): array
+    public function getLastVersion(bool $allowPreReleases = true): array
     {
-        if (!$allowRC) {
+        if (!$allowPreReleases) {
             foreach ($this->jsonResponse as $index) {
                 if (isset($index['prerelease']) && $index['prerelease']) {
                     continue;

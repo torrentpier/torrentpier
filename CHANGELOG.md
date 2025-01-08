@@ -6,6 +6,7 @@
 **Merged pull requests:**
 
 - Release 2.4.5 🍧️ ([belomaxorka](https://github.com/belomaxorka))
+- Added in-build multitracker 🌐 [\#1732](https://github.com/torrentpier/torrentpier/pull/1732) ([belomaxorka](https://github.com/belomaxorka))
 - Added `IndexNow` protocol support 🤖 [\#1736](https://github.com/torrentpier/torrentpier/pull/1736) ([belomaxorka](https://github.com/belomaxorka))
 - Added `TorrentPier instance hash` generation [\#1726](https://github.com/torrentpier/torrentpier/pull/1726) ([belomaxorka](https://github.com/belomaxorka))
 - Added `m4a` extension support in M3U playback [\#1724](https://github.com/torrentpier/torrentpier/pull/1724) ([belomaxorka](https://github.com/belomaxorka))

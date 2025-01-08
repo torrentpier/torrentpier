@@ -291,6 +291,14 @@ $template->assign_vars([
         $stats['seeders'],
         $stats['leechers']
     ) : '',
+    'MULTI_PEERS_STAT' => ($bb_cfg['tor_stats'] &&
+        $bb_cfg['tracker']['multitracker']['enabled']) ?
+        sprintf(
+            $lang['PEERS_STAT'],
+            $stats['multi_peers'],
+            $stats['multi_seeders'],
+            $stats['multi_leechers']
+        ) : '',
     'SPEED_STAT' => $bb_cfg['tor_stats'] ? sprintf(
         $lang['SPEED_STAT'],
         humn_size($stats['speed']) . '/s'
