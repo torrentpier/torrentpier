@@ -23,15 +23,16 @@ jobs:
 
       - name: Get commit hash
         id: get_commit_hash
-        run: echo "::set-output name=commit_hash::$(git rev-parse --short HEAD)"
+        run: |
+          COMMIT_HASH=$(git rev-parse --short HEAD)
+          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
 
       - name: Create archive
-        run: |
-          commit=${{ steps.get_commit_hash.outputs.commit_hash }}
-          zip_name="torrentpier-$commit.zip"
-          zip -r "$zip_name" . -x ".git/*" ".github/*"
-          echo "::set-output name=zip_name::$zip_name"
         id: create_zip
+        run: |
+          ZIP_NAME="torrentpier-${{ steps.get_commit_hash.outputs.COMMIT_HASH }}.zip"
+          zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
+          echo "zip_name=$ZIP_NAME" >> $GITHUB_OUTPUT
 
       - name: Upload Archive
         uses: actions/upload-artifact@v3
