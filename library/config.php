@@ -731,6 +731,7 @@ $bb_cfg['tracker'] = [
     'multitracker' => [ // multi-tracker settings
         'enabled' => true,
         'update_interval' => 0,
+        'max_trackers' => 3,
         'timeout' => 5, // per announcer (in secs)
         'torrents_per_cycle' => 20,
     ],
