@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy;
 
 use TorrentPier\Emailer;
+use TorrentPier\IndexNow;
 use TorrentPier\Legacy\Admin\Common;
 use TorrentPier\Validate;
 
@@ -218,6 +219,12 @@ class Post
                 ]);
                 $datastore->update('network_news');
             }
+        }
+
+        // Send IndexNow
+        if ($bb_cfg['indexnow_settings']['enabled'] && ($mode === 'newtopic' || $mode === 'editpost')) {
+            $indexNow = new IndexNow();
+            $indexNow->submit(FULL_URL . POST_URL . "$post_id#$post_id");
         }
 
         meta_refresh(POST_URL . "$post_id#$post_id");

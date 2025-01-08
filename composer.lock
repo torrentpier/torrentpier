@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07e69fe785694afdac14bf6e47ae9f05",
+    "content-hash": "9024100c87e72c5ee811638607aa15f5",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -1986,6 +1986,47 @@
                 }
             ],
             "time": "2024-12-05T17:15:07+00:00"
+        },
+        {
+            "name": "nemorize/indexnow",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nemorize/php-indexnow.git",
+                "reference": "7602a8ae1de0cf1dd11692a7627f10111c55731a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nemorize/php-indexnow/zipball/7602a8ae1de0cf1dd11692a7627f10111c55731a",
+                "reference": "7602a8ae1de0cf1dd11692a7627f10111c55731a",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.7",
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nemorize\\Indexnow\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ji Yong, Kim",
+                    "email": "nemo@qroffle.com"
+                }
+            ],
+            "description": "PHP library for submitting website URLs using IndexNow to search engines.",
+            "support": {
+                "issues": "https://github.com/nemorize/php-indexnow/issues",
+                "source": "https://github.com/nemorize/php-indexnow/tree/0.0.1"
+            },
+            "time": "2023-07-31T17:08:12+00:00"
         },
         {
             "name": "nikic/iter",
