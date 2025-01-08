@@ -32,10 +32,10 @@ jobs:
         run: |
           ZIP_NAME="torrentpier-${{ steps.get_commit_hash.outputs.COMMIT_HASH }}.zip"
           zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
-          echo "zip_name=$ZIP_NAME" >> $GITHUB_OUTPUT
+          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
       - name: Upload Archive
         uses: actions/upload-artifact@v3
         with:
           name: TorrentPier
-          path: ${{ steps.create_zip.outputs.zip_name }}
+          path: ${{ steps.create_zip.outputs.ZIP_NAME }}
