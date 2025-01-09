@@ -6,13 +6,13 @@
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
-
+111
 if (!empty($setmodules)) {
     $module['ATTACHMENTS']['CONTROL_PANEL'] = basename(__FILE__);
     return;
 }
 
-require __DIR__ . '/pagestart.php';
+1require __DIR__ . '/pagestart.php';
 
 if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':'))) {
     $upload_dir = $attach_config['upload_dir'];
