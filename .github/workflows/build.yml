@@ -35,7 +35,7 @@ jobs:
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
       - name: Upload Archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: TorrentPier
           path: ${{ steps.create_zip.outputs.ZIP_NAME }}
