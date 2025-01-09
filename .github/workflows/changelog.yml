@@ -27,16 +27,9 @@ jobs:
       - name: Print the changelog
         run: cat "${{ steps.git-cliff.outputs.changelog }}"
 
-      - name: Generate random string
-        id: random-string
-        run: |
-          RANDOM_BRANCH_HASH=$(openssl rand -hex 3)
-          echo "RANDOM_BRANCH_HASH=$RANDOM_BRANCH_HASH" >> $GITHUB_OUTPUT
-
       - name: Create branch for changelog
         run: |
-          BRANCH_NAME="changelog-update-${{ steps.random-string.outputs.RANDOM_BRANCH_HASH }}"
-          git checkout -b "#${{ env.BRANCH_NAME }}"
+          git checkout -b changelog-update
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
@@ -48,15 +41,14 @@ jobs:
 
       - name: Push changelog branch
         run: |
-          git config --global push.autoSetupRemote true
-          git push origin ${{ env.BRANCH_NAME }}
+          git push origin changelog-update
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 'Update CHANGELOG.md 📖'
-          branch: ${{ env.BRANCH_NAME }}
+          branch: changelog-update
           assignees: belomaxorka
           base: master
           body: "This PR updates the changelog file based on the last merged PR. [br]`${{ steps.git-cliff.outputs.changelog }}`"
