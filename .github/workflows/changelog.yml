@@ -1,4 +1,4 @@
-name: Generating / updating changelog
+name: Changelog generation
 
 on:
   push:
@@ -27,28 +27,12 @@ jobs:
       - name: Print the changelog
         run: cat "${{ steps.git-cliff.outputs.changelog }}"
 
-      - name: Create branch for changelog
+      - name: Commit changelog
         run: |
-          git checkout -b changelog-update
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Commit Changelog
-        run: |
+          git checkout master
+          git config user.name 'belomaxorka'
+          git config user.email 'roman25052006.kelesh@gmail.com'
           set +e
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
-
-      - name: Push changelog branch
-        run: |
-          git push origin changelog-update
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: 'Update CHANGELOG.md 📖'
-          branch: changelog-update
-          assignees: belomaxorka
-          base: master
-          body: "This PR updates the changelog file based on the last merged PR. [br]`${{ steps.git-cliff.outputs.changelog }}`"
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
