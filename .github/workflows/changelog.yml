@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: master
-          # token: ${{ secrets.REPO_TOKEN }}
+          token: ${{ secrets.REPO_TOKEN }}
 
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
@@ -31,10 +31,10 @@ jobs:
 
       - name: Commit changelog
         run: |
-          git checkout -b changelog
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout master
+          git config user.name 'belomaxorka'
+          git config user.email 'roman25052006.kelesh@gmail.com'
           set +e
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git changelog
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
