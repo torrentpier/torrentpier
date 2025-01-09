@@ -44,5 +44,4 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           title: 'Update CHANGELOG.md 📖'
-          author: belomaxorka
           branch: changelog
