@@ -38,3 +38,10 @@ jobs:
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git changelog
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: 'Update CHANGELOG.md 📖'
+          branch: changelog
