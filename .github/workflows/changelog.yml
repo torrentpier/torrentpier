@@ -37,8 +37,8 @@ jobs:
         run: |
           BRANCH_NAME="changelog-update-${{ steps.random-string.outputs.RANDOM_BRANCH_HASH }}"
           git checkout -b "$BRANCH_NAME"
-          git config user.name 'belomaxorka'
-          git config user.email 'roman25052006.kelesh@gmail.com'
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: Commit Changelog
         run: |
@@ -51,10 +51,11 @@ jobs:
           git push origin "$BRANCH_NAME"
 
       - name: Create Pull Request
-        uses: peter-evans/create-or-update-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 'Update CHANGELOG.md 📖'
           branch: ${{ env.BRANCH_NAME }}
+          assignees: belomaxorka
           base: master
           body: "This PR updates the changelog file based on the last merged PR. [br]`${{ steps.git-cliff.outputs.changelog }}`"
