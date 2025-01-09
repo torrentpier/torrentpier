@@ -31,9 +31,9 @@ jobs:
       - name: Commit Changelog
         run: |
           git checkout master
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git config user.name 'belomaxorka'
+          git config user.email 'roman25052006.kelesh@gmail.com'
           set +e
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
-          git push https://github.com/${{ github.repository }}.git HEAD:master
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git <branch>
