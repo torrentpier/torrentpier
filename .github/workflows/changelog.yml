@@ -36,7 +36,7 @@ jobs:
       - name: Create branch for changelog
         run: |
           BRANCH_NAME="changelog-update-${{ steps.random-string.outputs.RANDOM_BRANCH_HASH }}"
-          git checkout -b ${{ env.BRANCH_NAME }}
+          git checkout -b "#${{ env.BRANCH_NAME }}"
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
