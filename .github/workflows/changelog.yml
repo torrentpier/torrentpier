@@ -1,14 +1,13 @@
 name: Generating / updating changelog
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [ closed ]
 
 jobs:
   changelog:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,12 +27,34 @@ jobs:
       - name: Print the changelog
         run: cat "${{ steps.git-cliff.outputs.changelog }}"
 
-      - name: Commit Changelog
+      - name: Generate random string
+        id: random-string
         run: |
-          git checkout master
+          RANDOM_BRANCH_HASH=$(openssl rand -hex 3)
+          echo "RANDOM_BRANCH_HASH=$RANDOM_BRANCH_HASH" >> $GITHUB_OUTPUT
+
+      - name: Create branch for changelog
+        run: |
+          BRANCH_NAME="changelog-update-${{ steps.random-string.outputs.RANDOM_BRANCH_HASH }}"
+          git checkout -b "$BRANCH_NAME"
           git config user.name 'belomaxorka'
           git config user.email 'roman25052006.kelesh@gmail.com'
+
+      - name: Commit Changelog
+        run: |
           set +e
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
+
+      - name: Push changelog branch
+        run: |
+          git push origin "$BRANCH_NAME"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-or-update-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'Update CHANGELOG.md 📖'
+          branch: ${{ env.BRANCH_NAME }}
+          base: master
+          body: "This PR updates the changelog file based on the last merged PR. [br]`${{ steps.git-cliff.outputs.changelog }}`"
