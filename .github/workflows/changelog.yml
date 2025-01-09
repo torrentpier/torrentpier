@@ -1,8 +1,9 @@
 name: Generating / updating changelog
 
 on:
-  pull_request:
-    types: [ closed ]
+  push:
+    branches:
+      - master
 
 jobs:
   changelog:
