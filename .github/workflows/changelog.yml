@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: master
-          token: ${{ secrets.REPO_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v4
