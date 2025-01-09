@@ -6,25 +6,34 @@ on:
       - master
 
 jobs:
-  build:
+  changelog:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Generate a changelog
-        uses: orhun/git-cliff-action@v3
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
         with:
           config: cliff.toml
           args: --verbose
         env:
           OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Print the changelog
+        run: cat "${{ steps.git-cliff.outputs.changelog }}"
 
       - name: Commit Changelog
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
+          git checkout master
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          set +e
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
-          git push https://github.com/${{ github.repository }}.git HEAD:main
+          git push https://github.com/${{ github.repository }}.git HEAD:master
