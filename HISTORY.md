@@ -2,12 +2,12 @@
 
 ### *From v2.0.0 to v2.4.5-rc.2*
 
-## [v2.4.5-rc.2](https://github.com/torrentpier/torrentpier/tree/v2.4.5) (2025-XX-XX)
-[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.1...v2.4.5)
+## [v2.4.5-rc.2](https://github.com/torrentpier/torrentpier/tree/v2.4.5-rc.2) (2025-01-10)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.1...v2.4.5-rc.2)
 
 **Merged pull requests:**
 
-- Release 2.4.5 🍧️ ([belomaxorka](https://github.com/belomaxorka))
+- Release 2.4.5-rc.2 🍧️ ([belomaxorka](https://github.com/belomaxorka))
 - Added `IndexNow` protocol support 🤖 [\#1736](https://github.com/torrentpier/torrentpier/pull/1736) ([belomaxorka](https://github.com/belomaxorka))
 - Added `TorrentPier instance hash` generation [\#1726](https://github.com/torrentpier/torrentpier/pull/1726) ([belomaxorka](https://github.com/belomaxorka))
 - Added `m4a` extension support in M3U playback [\#1724](https://github.com/torrentpier/torrentpier/pull/1724) ([belomaxorka](https://github.com/belomaxorka))
