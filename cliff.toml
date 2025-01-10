@@ -119,6 +119,8 @@ commit_parsers = [
 protect_breaking_commits = false
 # filter out the commits that are not matched by commit parsers
 filter_commits = false
+# regex for matching git tags
+tag_pattern = "v[0-9].*"
 # sort the tags topologically
 topo_order = false
 # sort the commits inside sections by oldest/newest order
