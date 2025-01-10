@@ -112,7 +112,8 @@ commit_parsers = [
   { message = "^revert", group = "<!-- 9 -->◀️ Revert" },
   { message = "^crowdin", group = "<!-- 10 -->🈳 New translations" },
   { message = "^Composer", group = "<!-- 11 -->📚 Updated dependencies" },
-  { message = ".*", group = "<!-- 12 -->💼 Other" },
+  { message = "^rem|^drop|^removed", group = "<!-- 12 -->🗑️ Removed" },
+  { message = ".*", group = "<!-- 13 -->💼 Other" },
 ]
 # protect breaking changes from being skipped due to matching a skipping commit_parser
 protect_breaking_commits = false
