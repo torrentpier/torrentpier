@@ -16,6 +16,7 @@
 
 ### 📚 Documentation
 
+- Renamed `CHANGELOG_OLD.md` to `HISTORY.md` - ([44007d8](https://github.com/torrentpier/torrentpier/commit/44007d8d772f49c8da09fca1a58add921b3276ec))
 - Update changelog - ([4006d5a](https://github.com/torrentpier/torrentpier/commit/4006d5a9f9223c1696b7dbd157ce9f623f05a271))
 
 ### ⚙️ Miscellaneous
