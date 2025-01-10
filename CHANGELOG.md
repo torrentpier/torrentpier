@@ -17,6 +17,7 @@
 ### ⚙️ Miscellaneous
 
 - *(night builder)* Update upload-artifact to `@v4` - ([e53d3b3](https://github.com/torrentpier/torrentpier/commit/e53d3b3b9b8f060d6535d4e366cc0a42dd915a9a))
+- Updated cliff.toml - ([efcdb0d](https://github.com/torrentpier/torrentpier/commit/efcdb0deedda7cb3caa7217b4a7d86f8f693d8ee))
 ## [v2.4.5-rc.1](https://github.com/torrentpier/torrentpier/compare/v2.4.4..v2.4.5-rc.1) (2024-12-08)
 
 ### 📚 Updated dependencies
