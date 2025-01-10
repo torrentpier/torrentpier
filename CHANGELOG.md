@@ -20,6 +20,7 @@
 
 ### ⚙️ Miscellaneous
 
+- *(cliff)* Added `tag_pattern` param - ([4403f4b](https://github.com/torrentpier/torrentpier/commit/4403f4bc3d96f261d66caf6fa84d39b24bd5ddf9))
 - *(night builder)* Update upload-artifact to `@v4` - ([e53d3b3](https://github.com/torrentpier/torrentpier/commit/e53d3b3b9b8f060d6535d4e366cc0a42dd915a9a))
 - Updated cliff.toml - ([efcdb0d](https://github.com/torrentpier/torrentpier/commit/efcdb0deedda7cb3caa7217b4a7d86f8f693d8ee))
 ## [v2.4.5-rc.1](https://github.com/torrentpier/torrentpier/compare/v2.4.4..v2.4.5-rc.1) (2024-12-08)
@@ -215,20 +216,19 @@
 
 ## New Contributors ❤️
 
-* [@StyleCIBot](https://github.com/StyleCIBot) made their first contribution in [#598](https://github.com/torrentpier/torrentpier/pull/598)## [v2.3.1-rc1](https://github.com/torrentpier/torrentpier/compare/2.3.0.4-beta2..v2.3.1-rc1) (2023-03-10)
+* [@StyleCIBot](https://github.com/StyleCIBot) made their first contribution in [#598](https://github.com/torrentpier/torrentpier/pull/598)## [v2.3.1-rc1](https://github.com/torrentpier/torrentpier/compare/v2.3.0.3..v2.3.1-rc1) (2023-03-10)
 
 ### 📚 Updated dependencies
 
 - *(deps)* Bump filp/whoops from 2.14.6 to 2.15.1 - ([1bf85de](https://github.com/torrentpier/torrentpier/commit/1bf85de2f3675ce8b581cd548b32ddc303efe5f6))
 
-## New Contributors ❤️
-
-* [@dependabot[bot]](https://github.com/dependabot[bot]) made their first contribution in [#588](https://github.com/torrentpier/torrentpier/pull/588)## [2.3.0.4-beta](https://github.com/torrentpier/torrentpier/compare/v2.3.0.3..2.3.0.4-beta) (2023-02-22)
-
 ### 📚 Documentation
 
 - Change official forum path - ([908b44f](https://github.com/torrentpier/torrentpier/commit/908b44f076b318f62e4f3c48cad6d8a64aa298af))
-## [v2.1.0](https://github.com/torrentpier/torrentpier/compare/v2.0.599b..v2.1.0) (2014-09-07)
+
+## New Contributors ❤️
+
+* [@dependabot[bot]](https://github.com/dependabot[bot]) made their first contribution in [#588](https://github.com/torrentpier/torrentpier/pull/588)## [v2.1.0](https://github.com/torrentpier/torrentpier/compare/v2.0.599b..v2.1.0) (2014-09-07)
 
 ### 💼 Other
 
