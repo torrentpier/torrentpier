@@ -211,7 +211,7 @@
 
 ## New Contributors ❤️
 
-* [@StyleCIBot](https://github.com/StyleCIBot) made their first contribution## [v2.3.1-rc1](https://github.com/torrentpier/torrentpier/compare/2.3.0.4-beta2..v2.3.1-rc1) (2023-03-10)
+* [@StyleCIBot](https://github.com/StyleCIBot) made their first contribution in [#598](https://github.com/torrentpier/torrentpier/pull/598)## [v2.3.1-rc1](https://github.com/torrentpier/torrentpier/compare/2.3.0.4-beta2..v2.3.1-rc1) (2023-03-10)
 
 ### 📚 Updated dependencies
 
@@ -219,7 +219,7 @@
 
 ## New Contributors ❤️
 
-* [@dependabot[bot]](https://github.com/dependabot[bot]) made their first contribution## [2.3.0.4-beta](https://github.com/torrentpier/torrentpier/compare/v2.3.0.3..2.3.0.4-beta) (2023-02-22)
+* [@dependabot[bot]](https://github.com/dependabot[bot]) made their first contribution in [#588](https://github.com/torrentpier/torrentpier/pull/588)## [2.3.0.4-beta](https://github.com/torrentpier/torrentpier/compare/v2.3.0.3..2.3.0.4-beta) (2023-02-22)
 
 ### 📚 Documentation
 
