@@ -13,7 +13,8 @@ repo = "torrentpier"
 # template for the changelog header
 header = """
 # 📖 Change Log\n
-### *To view changelog from v2.0.0 to v2.4.5-rc.2 navigate to [HISTORY.md](HISTORY.md)*
+> [!NOTE]
+> To view changelog from v2.0.0 to v2.4.5-rc.2 navigate to [HISTORY.md](HISTORY.md).
 """
 # template for the changelog body
 # https://keats.github.io/tera/docs/#introduction
