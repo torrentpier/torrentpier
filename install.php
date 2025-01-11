@@ -305,10 +305,7 @@ if (is_file(BB_ROOT . '.env')) {
 
             if (!empty($newValue) || $key === 'DB_PASSWORD') {
                 $line = "$key=$newValue";
-                // Configuring database connection
-                if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
-                    $$key = $newValue;
-                }
+                $$key = $newValue;
             }
         }
 
@@ -388,5 +385,9 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
     out("- Voila! Good luck & have fun!", 'success');
-    rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()));
+    if ($APP_ENV === 'local') {
+        copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php');
+    } else {
+        rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()));
+    }
 }
