@@ -179,35 +179,4 @@ class Sitemap
 
         return true;
     }
-
-
-    /**
-     * Отправка карты сайта на указанный URL
-     *
-     * @param $url
-     * @param $map
-     *
-     * @return string
-     */
-    public function sendSitemap($url, $map): string
-    {
-        $file = $url . urlencode($map);
-
-        if (\function_exists('curl_init')) {
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, $file);
-            curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
-
-            $data = curl_exec($ch);
-            curl_close($ch);
-
-            return $data;
-        }
-
-        return file_get_contents($file);
-    }
 }

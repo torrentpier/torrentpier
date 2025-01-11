@@ -149,6 +149,8 @@ UPDATE `bb_cron` SET `run_interval` = '00:10:00' WHERE `cron_script` = 'tr_seed_
 INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`) VALUES ('1', 'avif', ''), ('3', 'm3u', '');
 ALTER TABLE `bb_topics` ADD COLUMN `topic_allow_robots` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0';
 
-// 2.4.5
+// 2.4.5-rc.2
 INSERT INTO `bb_config` VALUES ('magnet_links_for_guests', '0');
 INSERT INTO `bb_config` VALUES ('tp_instance_hash', '');
+
+// 2.4.5
