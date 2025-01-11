@@ -386,7 +386,9 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     out("- Importing SQL dump completed!\n", 'success');
     out("- Voila! Good luck & have fun!", 'success');
     if ($APP_ENV === 'local') {
-        copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php');
+        if (!is_file(BB_ROOT . 'library/config.local.php')) {
+            copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php');
+        }
     } else {
         rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()));
     }
