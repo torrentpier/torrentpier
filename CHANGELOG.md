@@ -1,6 +1,6 @@
 # 📖 Change Log
 
-### *To view changelog from v2.0.0 to v2.4.5-rc.2 nagivate to [HISTORY](HISTORY.md)*
+### *To view changelog from v2.0.0 to v2.4.5-rc.2 navigate to [HISTORY.md](HISTORY.md)*
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
 ### 🚀 Features
@@ -13,6 +13,7 @@
 
 ### ⚙️ Miscellaneous
 
+- *(cliff)* Fixed typo ([#1747](https://github.com/torrentpier/torrentpier/pull/1747)) - ([4936af7](https://github.com/torrentpier/torrentpier/commit/4936af7d3d10f553d8586a14de249c32e50f3494))
 - *(cliff)* Notice about previous changelog file ([#1746](https://github.com/torrentpier/torrentpier/pull/1746)) - ([85395be](https://github.com/torrentpier/torrentpier/commit/85395be5e7c6a891c79ec72cf215894af097f819))
 - Update `cliff.toml` - ([254dca2](https://github.com/torrentpier/torrentpier/commit/254dca2b27c2d92421d3e639c80b0adf1172202f))
 - Minor improvements ([#1743](https://github.com/torrentpier/torrentpier/pull/1743)) - ([e73d650](https://github.com/torrentpier/torrentpier/commit/e73d65011fff0a8b8e1368eef61bbfb67e87eab8))
