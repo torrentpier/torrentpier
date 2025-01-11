@@ -1,4 +1,4 @@
-# 📖 Change Log
+# 📖 Change Log (History)
 
 ### *From v2.0.0 to v2.4.5-rc.2*
 
