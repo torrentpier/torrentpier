@@ -2,6 +2,10 @@
 
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
+### 🐛 Bug Fixes
+
+- *(bb_die)* HTML characters converting ([#1744](https://github.com/torrentpier/torrentpier/pull/1744)) - ([4f1c7e4](https://github.com/torrentpier/torrentpier/commit/4f1c7e40d82e52f81eba44ead501e1f01058cc4f))
+
 ### ⚙️ Miscellaneous
 
 - Update `cliff.toml` - ([254dca2](https://github.com/torrentpier/torrentpier/commit/254dca2b27c2d92421d3e639c80b0adf1172202f))
