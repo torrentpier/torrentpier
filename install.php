@@ -29,7 +29,8 @@ define('CHECK_REQUIREMENTS', [
         'intl',
         'xml',
         'xmlwriter',
-        'zip'
+        'zip',
+        'gd'
     ],
 ]);
 
