@@ -51,8 +51,11 @@ class Dev
             $this->getWhoopsPlaceholder();
         }
         $this->getWhoopsLogger();
-        $this->getTelegramSender();
-        $this->getBugsnag();
+
+        if (APP_ENV !== 'local') {
+            $this->getTelegramSender();
+            $this->getBugsnag();
+        }
 
         $this->whoops->register();
     }
