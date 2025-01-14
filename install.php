@@ -251,7 +251,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
-        out("- Completed! Composer dependencies are installed!\n", 'success');
+        define('COMPOSER_COMPLETED', true);
     } else {
         out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');
         exit;
@@ -259,6 +259,15 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
 } else {
     out('- Composer dependencies are present!', 'success');
     out("- Note: Remove 'vendor' folder if you want to re-install dependencies\n");
+}
+
+// Check composer dependencies
+if (defined('COMPOSER_COMPLETED')) {
+    if (is_file(BB_ROOT . 'vendor/autoload.php')) {
+        out("- Completed! Composer dependencies are installed!\n", 'success');
+    } else {
+        exit;
+    }
 }
 
 // Preparing ENV
