@@ -6,6 +6,7 @@
 
 ### 🚀 Features
 
+- *(installer)* More explanations ([#1754](https://github.com/torrentpier/torrentpier/pull/1754)) - ([fd6f1f8](https://github.com/torrentpier/torrentpier/commit/fd6f1f86a5e9216469cd648601ecb9ba875f9eb6))
 - *(installer)* Create `config.local.php` on local environment ([#1745](https://github.com/torrentpier/torrentpier/pull/1745)) - ([0d93b2c](https://github.com/torrentpier/torrentpier/commit/0d93b2c768c2965c12ac62e2f3b2886dc1ef31c2))
 
 ### 🐛 Bug Fixes
@@ -13,6 +14,10 @@
 - *(bb_die)* HTML characters converting ([#1744](https://github.com/torrentpier/torrentpier/pull/1744)) - ([4f1c7e4](https://github.com/torrentpier/torrentpier/commit/4f1c7e40d82e52f81eba44ead501e1f01058cc4f))
 - *(debug)* Disabled `Bugsnag` reporting on local environment ([#1751](https://github.com/torrentpier/torrentpier/pull/1751)) - ([1f3b629](https://github.com/torrentpier/torrentpier/commit/1f3b629e9cea4d11fbf3cf29f575ba730bad898d))
 - *(installer)* Missing `gd` extension ([#1749](https://github.com/torrentpier/torrentpier/pull/1749)) - ([a1c519d](https://github.com/torrentpier/torrentpier/commit/a1c519d938b848edffcbf7fbbe6a3fdb9a5394f1))
+
+### 📚 Updated dependencies
+
+- *(deps)* Bump bugsnag/bugsnag from 3.29.1 to 3.29.2 ([#1752](https://github.com/torrentpier/torrentpier/pull/1752)) - ([f63d15c](https://github.com/torrentpier/torrentpier/commit/f63d15c49e3992837413b2c7a0160d599b44f2ef))
 
 ### 📚 Documentation
 

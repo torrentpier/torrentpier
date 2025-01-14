@@ -385,12 +385,22 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
-    out("- Voila! Good luck & have fun!", 'success');
-    if ($APP_ENV === 'local') {
+
+    if (isset($APP_ENV) && $APP_ENV === 'local') {
         if (!is_file(BB_ROOT . 'library/config.local.php')) {
-            copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php');
+            if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
+                out('- Local configuration file created!', 'success');
+            } else {
+                out('- Cannot create library/config.local.php file. You can create it manually, just copy config.php and rename it to config.local.php', 'warning');
+            }
         }
     } else {
-        rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()));
+        if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
+            out("- Installation file renamed!", 'success');
+        } else {
+            out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
+        }
     }
+
+    out("\n- Voila! Good luck & have fun!", 'success');
 }
