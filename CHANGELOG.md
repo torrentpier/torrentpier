@@ -17,6 +17,7 @@
 
 ### 📚 Updated dependencies
 
+- *(deps)* Bump php-curl-class/php-curl-class from 11.0.0 to 11.0.1 ([#1753](https://github.com/torrentpier/torrentpier/pull/1753)) - ([ce32031](https://github.com/torrentpier/torrentpier/commit/ce32031a0fb14cdf6c3f4ba379b530cbb52b0fea))
 - *(deps)* Bump bugsnag/bugsnag from 3.29.1 to 3.29.2 ([#1752](https://github.com/torrentpier/torrentpier/pull/1752)) - ([f63d15c](https://github.com/torrentpier/torrentpier/commit/f63d15c49e3992837413b2c7a0160d599b44f2ef))
 
 ### 📚 Documentation
