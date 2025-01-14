@@ -1,7 +1,7 @@
 # 📖 Change Log
 
 > [!NOTE]
-> To view changelog from v2.0.0 to v2.4.5-rc.2 navigate to [HISTORY.md](HISTORY.md).
+> To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
 ### 🚀 Features
@@ -12,6 +12,10 @@
 
 - *(bb_die)* HTML characters converting ([#1744](https://github.com/torrentpier/torrentpier/pull/1744)) - ([4f1c7e4](https://github.com/torrentpier/torrentpier/commit/4f1c7e40d82e52f81eba44ead501e1f01058cc4f))
 - *(installer)* Missing `gd` extension ([#1749](https://github.com/torrentpier/torrentpier/pull/1749)) - ([a1c519d](https://github.com/torrentpier/torrentpier/commit/a1c519d938b848edffcbf7fbbe6a3fdb9a5394f1))
+
+### 📚 Documentation
+
+- Minor improvements ([#1750](https://github.com/torrentpier/torrentpier/pull/1750)) - ([3e850ac](https://github.com/torrentpier/torrentpier/commit/3e850ac724c43e813aa077b272b498e2b0477260))
 
 ### ⚙️ Miscellaneous
 
