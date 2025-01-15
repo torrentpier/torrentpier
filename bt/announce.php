@@ -100,12 +100,18 @@ $info_hash_hex = bin2hex($info_hash);
 // Store peer id
 $peer_id_sql = preg_replace('/[^a-zA-Z0-9\-\_]/', '', $peer_id);
 
+// Stopped event
+$stopped = ($event === 'stopped');
+
 // Check info_hash length
 if (strlen($info_hash) !== 20) {
     msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
 
 if (
+    // https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L284
+    // Block system-reserved ports since 99.9% of the time they're fake and thus not connectable
+    // Some clients will send port of 0 on 'stopped' events. Let them through as they won't receive peers anyway.
     !isset($port)
     || ($port < 1024 && !$stopped)
     || $port > 0xFFFF) {
@@ -160,9 +166,6 @@ if ($ip_version === 'ipv6') {
 
 // Peer unique id
 $peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
-
-// Events
-$stopped = ($event === 'stopped');
 
 // Set seeder & complete
 $complete = $seeder = ($left == 0) ? 1 : 0;
