@@ -54,6 +54,9 @@ class APCu extends Common
      */
     public function __construct(string $prefix)
     {
+        if (!$this->isInstalled()) {
+            throw new Exception('ext-apcu not installed. Check out php.ini file');
+        }
         $this->apcu = new Apc();
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
@@ -126,5 +129,15 @@ class APCu extends Common
         $this->num_queries++;
 
         return $result;
+    }
+
+    /**
+     * Checking if Memcached is installed
+     *
+     * @return bool
+     */
+    private function isInstalled(): bool
+    {
+        return extension_loaded('memcached') && class_exists('Memcached');
     }
 }
