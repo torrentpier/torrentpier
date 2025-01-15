@@ -210,6 +210,7 @@ if (is_file(BB_ROOT . '.env')) {
             }
         }
         out("- Re-install process completed!\n", 'success');
+        out('- Starting installation...', 'info');
     } else {
         exit;
     }
