@@ -6,6 +6,7 @@
 
 ### 🚀 Features
 
+- *(installer)* More explanations ([#1758](https://github.com/torrentpier/torrentpier/pull/1758)) - ([48ab52a](https://github.com/torrentpier/torrentpier/commit/48ab52ac8674afcb607c8e49134316a3e117236a))
 - *(installer)* Check `Composer` dependencies after installing ([#1756](https://github.com/torrentpier/torrentpier/pull/1756)) - ([262b887](https://github.com/torrentpier/torrentpier/commit/262b8872a5b14068eb73d745adea6203c557e192))
 - *(installer)* More explanations ([#1754](https://github.com/torrentpier/torrentpier/pull/1754)) - ([fd6f1f8](https://github.com/torrentpier/torrentpier/commit/fd6f1f86a5e9216469cd648601ecb9ba875f9eb6))
 - *(installer)* Create `config.local.php` on local environment ([#1745](https://github.com/torrentpier/torrentpier/pull/1745)) - ([0d93b2c](https://github.com/torrentpier/torrentpier/commit/0d93b2c768c2965c12ac62e2f3b2886dc1ef31c2))
