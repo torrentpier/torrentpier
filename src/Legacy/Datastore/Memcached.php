@@ -14,6 +14,8 @@ use TorrentPier\Dev;
 use Memcached as MemcachedClient;
 use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
 
+use Exception;
+
 /**
  * Class Memcached
  * @package TorrentPier\Legacy\Datastore
@@ -70,6 +72,9 @@ class Memcached extends Common
      */
     public function __construct(array $cfg, string $prefix)
     {
+        if (!$this->isInstalled()) {
+            throw new Exception('ext-memcached not installed. Check out php.ini file');
+        }
         $this->client = new MemcachedClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
@@ -91,7 +96,7 @@ class Memcached extends Common
         }
 
         if (!$this->connected) {
-            die("Could not connect to $this->engine server");
+            throw new Exception("Could not connect to $this->engine server");
         }
 
         $this->memcached = new MemcachedCache($this->client);
@@ -180,5 +185,15 @@ class Memcached extends Common
             $this->cur_query = null;
             $this->num_queries++;
         }
+    }
+
+    /**
+     * Checking if Memcached is installed
+     *
+     * @return bool
+     */
+    private function isInstalled(): bool
+    {
+        return extension_loaded('memcached') && class_exists('Memcached');
     }
 }

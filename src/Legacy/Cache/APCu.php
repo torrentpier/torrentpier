@@ -134,12 +134,12 @@ class APCu extends Common
     }
 
     /**
-     * Checking if Memcached is installed
+     * Checking if APCu is installed
      *
      * @return bool
      */
     private function isInstalled(): bool
     {
-        return extension_loaded('memcached') && class_exists('Memcached');
+        return extension_loaded('apcu') && function_exists('apcu_fetch');
     }
 }
