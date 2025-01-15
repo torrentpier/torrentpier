@@ -13,6 +13,8 @@ use TorrentPier\Dev;
 
 use MatthiasMullie\Scrapbook\Adapters\Apc;
 
+use Exception;
+
 /**
  * Class APCu
  * @package TorrentPier\Legacy\Cache
