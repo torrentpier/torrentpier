@@ -13,6 +13,8 @@ use TorrentPier\Dev;
 
 use MatthiasMullie\Scrapbook\Adapters\Apc;
 
+use Exception;
+
 /**
  * Class APCu
  * @package TorrentPier\Legacy\Datastore
@@ -47,6 +49,9 @@ class APCu extends Common
      */
     public function __construct(string $prefix)
     {
+        if (!$this->isInstalled()) {
+            throw new Exception('ext-apcu not installed. Check out php.ini file');
+        }
         $this->apcu = new Apc();
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
