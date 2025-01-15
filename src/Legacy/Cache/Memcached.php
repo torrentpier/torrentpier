@@ -80,7 +80,7 @@ class Memcached extends Common
     public function __construct(array $cfg, string $prefix)
     {
         if (!$this->isInstalled()) {
-            throw new Exception('- ext-memcached not installed. Check out php.ini file');
+            throw new Exception('ext-memcached not installed. Check out php.ini file');
         }
         $this->client = new MemcachedClient();
         $this->cfg = $cfg;
