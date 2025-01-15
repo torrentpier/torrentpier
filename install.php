@@ -168,12 +168,18 @@ if (!version_compare(PHP_VERSION, CHECK_REQUIREMENTS['php_min_version'], '>=')) 
 foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
     if (!extension_loaded($ext)) {
         out("- ext-$ext not installed. Check out php.ini file", 'error');
-        exit;
+        if (!defined('EXTENSIONS_NOT_INSTALLED')) {
+            define('EXTENSIONS_NOT_INSTALLED', true);
+        }
     } else {
         out("- ext-$ext installed!");
     }
 }
-out("- All extensions are installed!\n", 'success');
+if (!defined('EXTENSIONS_NOT_INSTALLED')) {
+    out("- All extensions are installed!\n", 'success');
+} else {
+    exit;
+}
 
 // Check if already installed
 if (is_file(BB_ROOT . '.env')) {
