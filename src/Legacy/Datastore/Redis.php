@@ -14,6 +14,8 @@ use TorrentPier\Dev;
 use Redis as RedisClient;
 use MatthiasMullie\Scrapbook\Adapters\Redis as RedisCache;
 
+use Exception;
+
 /**
  * Class Redis
  * @package TorrentPier\Legacy\Datastore
@@ -70,6 +72,9 @@ class Redis extends Common
      */
     public function __construct(array $cfg, string $prefix)
     {
+        if (!$this->isInstalled()) {
+            throw new Exception('ext-redis not installed. Check out php.ini file');
+        }
         $this->client = new RedisClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
@@ -93,7 +98,7 @@ class Redis extends Common
         }
 
         if (!$this->connected) {
-            die("Could not connect to $this->engine server");
+            throw new Exception("Could not connect to $this->engine server");
         }
 
         $this->redis = new RedisCache($this->client);
@@ -182,5 +187,15 @@ class Redis extends Common
             $this->cur_query = null;
             $this->num_queries++;
         }
+    }
+
+    /**
+     * Checking if Redis is installed
+     *
+     * @return bool
+     */
+    private function isInstalled(): bool
+    {
+        return extension_loaded('redis') && class_exists('Redis');
     }
 }
