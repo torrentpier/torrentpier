@@ -105,7 +105,10 @@ if (strlen($info_hash) !== 20) {
     msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
 
-if (!isset($port) || $port < 0 || $port > 0xFFFF) {
+if (
+    !isset($port)
+    || ($port < 1024 && !$stopped)
+    || $port > 0xFFFF) {
     msg_die('Invalid port: ' . $port);
 }
 
