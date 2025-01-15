@@ -126,4 +126,14 @@ class APCu extends Common
             $this->num_queries++;
         }
     }
+
+    /**
+     * Checking if APCu is installed
+     *
+     * @return bool
+     */
+    private function isInstalled(): bool
+    {
+        return extension_loaded('apcu') && function_exists('apcu_fetch');
+    }
 }
