@@ -35,6 +35,13 @@ class Sqlite extends Common
     public string $engine = 'SQLite';
 
     /**
+     * SQLite DB file extension
+     *
+     * @var string
+     */
+    public string $dbExtension = '.db';
+
+    /**
      * Cache prefix
      *
      * @var string
@@ -56,7 +63,7 @@ class Sqlite extends Common
      */
     public function __construct(string $dir, string $prefix)
     {
-        $client = new PDO("sqlite:$dir.db");
+        $client = new PDO('sqlite:' . $dir . $this->dbExtension);
         $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
