@@ -14,6 +14,8 @@ use TorrentPier\Dev;
 use MatthiasMullie\Scrapbook\Adapters\SQLite as SQLiteCache;
 use PDO;
 
+use Exception;
+
 /**
  * Class Sqlite
  * @package TorrentPier\Legacy\Datastore
@@ -26,6 +28,13 @@ class Sqlite extends Common
      * @var string
      */
     public string $engine = 'SQLite';
+
+    /**
+     * SQLite DB file extension
+     *
+     * @var string
+     */
+    public string $dbExtension = '.db';
 
     /**
      * Cache prefix
@@ -49,7 +58,10 @@ class Sqlite extends Common
      */
     public function __construct(string $dir, string $prefix)
     {
-        $client = new PDO("sqlite:$dir.db");
+        if (!$this->isInstalled()) {
+            throw new Exception('ext-pdo_sqlite not installed. Check out php.ini file');
+        }
+        $client = new PDO('sqlite:' . $dir . $this->dbExtension);
         $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
@@ -123,5 +135,15 @@ class Sqlite extends Common
             $this->cur_query = null;
             $this->num_queries++;
         }
+    }
+
+    /**
+     * Checking if PDO SQLite is installed
+     *
+     * @return bool
+     */
+    private function isInstalled(): bool
+    {
+        return extension_loaded('pdo_sqlite') && class_exists('PDO');
     }
 }
