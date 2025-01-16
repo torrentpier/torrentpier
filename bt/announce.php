@@ -128,7 +128,8 @@ if (
     !isset($port)
     || !is_numeric($port)
     || ($port < 1024 && !$stopped)
-    || $port > 0xFFFF) {
+    || $port > 0xFFFF
+    || in_array($port, $bb_cfg['disallowed_ports'])) {
     msg_die('Invalid port: ' . $port);
 }
 
