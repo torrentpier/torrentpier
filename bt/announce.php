@@ -138,8 +138,18 @@ if (!isset($left) || $left < 0) {
  *
  * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L177
  */
-if (strlen((string)$_SERVER['HTTP_USER_AGENT']) > 64) {
+$userAgent = (string)$_SERVER['HTTP_USER_AGENT'];
+if (strlen($userAgent) > 64) {
     msg_die('User-Agent must be less than 64 characters long');
+}
+
+/**
+ * Block Browser by checking the User-Agent
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L182
+ */
+if (preg_match('/(Mozilla|Browser|Chrome|Safari|AppleWebKit|Opera|Links|Lynx|Bot|Unknown)/i', $userAgent)) {
+    msg_die('Browser disallowed');
 }
 
 // IP
