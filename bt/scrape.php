@@ -68,7 +68,7 @@ if (!empty($info_hash_count)) {
 
     /**
      * Currently torrent clients send truncated v2 hashes (the design raises questions).
-     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+     * @see https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
     $info_hash_where = "tor.info_hash IN ('$info_hashes_sql') OR SUBSTRING(tor.info_hash_v2, 1, 20) IN ('$info_hashes_sql')";
 
