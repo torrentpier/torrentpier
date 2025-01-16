@@ -6,6 +6,7 @@
 
 ### 🚀 Features
 
+- *(announcer)* Added `event` verifying ([#1765](https://github.com/torrentpier/torrentpier/pull/1765)) - ([6a19323](https://github.com/torrentpier/torrentpier/commit/6a1932313801e55fbcfb047fdcef87266f472c33))
 - *(announcer)* Block browser by checking the `User-Agent` ([#1764](https://github.com/torrentpier/torrentpier/pull/1764)) - ([7b64b50](https://github.com/torrentpier/torrentpier/commit/7b64b508199af568472fe6ac2edf333a3e274a00))
 - *(announcer)* Block `User-Agent` strings that are too long ([#1763](https://github.com/torrentpier/torrentpier/pull/1763)) - ([a98f8f1](https://github.com/torrentpier/torrentpier/commit/a98f8f102a8253b0b22c80ef444fed1ec29177f3))
 - *(announcer)* Blocking all ports lower then `1024` ([#1762](https://github.com/torrentpier/torrentpier/pull/1762)) - ([1bc7e09](https://github.com/torrentpier/torrentpier/commit/1bc7e09ddbeaf680b86095eed9a80b8ebf6169b3))
