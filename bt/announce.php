@@ -94,6 +94,16 @@ if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
 }
 
+/**
+ * Verify event
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L275
+ */
+$event = strtolower($event);
+if (!in_array($event, ['started', 'completed', 'stopped', 'paused', ''])) {
+    msg_die('Invalid event: ' . $event);
+}
+
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
 
