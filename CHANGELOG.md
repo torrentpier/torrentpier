@@ -6,6 +6,7 @@
 
 ### 🚀 Features
 
+- *(announcer)* Added some disallowed ports by default ([#1767](https://github.com/torrentpier/torrentpier/pull/1767)) - ([46288ec](https://github.com/torrentpier/torrentpier/commit/46288ec19830c84aedb156e1f30d7ec8a0803e0d))
 - *(announcer)* Added `is_numeric()` checking for some fields ([#1766](https://github.com/torrentpier/torrentpier/pull/1766)) - ([096bb51](https://github.com/torrentpier/torrentpier/commit/096bb5124fa27d27c3e60031edc432d877f1c507))
 - *(announcer)* Added `event` verifying ([#1765](https://github.com/torrentpier/torrentpier/pull/1765)) - ([6a19323](https://github.com/torrentpier/torrentpier/commit/6a1932313801e55fbcfb047fdcef87266f472c33))
 - *(announcer)* Block browser by checking the `User-Agent` ([#1764](https://github.com/torrentpier/torrentpier/pull/1764)) - ([7b64b50](https://github.com/torrentpier/torrentpier/commit/7b64b508199af568472fe6ac2edf333a3e274a00))
