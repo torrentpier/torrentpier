@@ -130,6 +130,11 @@ if (!isset($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
 }
 
+// Check User-Agent length
+if (strlen((string)$_SERVER['HTTP_USER_AGENT']) > 64) {
+    msg_die('User-Agent must be less than 64 characters long');
+}
+
 // IP
 $ip = $_SERVER['REMOTE_ADDR'];
 
