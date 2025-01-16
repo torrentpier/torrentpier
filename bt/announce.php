@@ -126,20 +126,21 @@ if (strlen($info_hash) !== 20) {
  */
 if (
     !isset($port)
+    || !is_numeric($port)
     || ($port < 1024 && !$stopped)
     || $port > 0xFFFF) {
     msg_die('Invalid port: ' . $port);
 }
 
-if (!isset($uploaded) || $uploaded < 0) {
+if (!isset($uploaded) || !is_numeric($uploaded) || $uploaded < 0) {
     msg_die('Invalid uploaded value: ' . $uploaded);
 }
 
-if (!isset($downloaded) || $downloaded < 0) {
+if (!isset($downloaded) || !is_numeric($downloaded) || $downloaded < 0) {
     msg_die('Invalid downloaded value: ' . $downloaded);
 }
 
-if (!isset($left) || $left < 0) {
+if (!isset($left) || !is_numeric($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
 }
 
@@ -237,7 +238,7 @@ if ($lp_info) {
 
     /**
      * Currently torrent clients send truncated v2 hashes (the design raises questions).
-     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+     * @see https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
     $info_hash_where = "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
 
