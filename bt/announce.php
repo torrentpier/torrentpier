@@ -108,10 +108,13 @@ if (strlen($info_hash) !== 20) {
     msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
 
+/**
+ * Block system-reserved ports since 99.9% of the time they're fake and thus not connectable
+ * Some clients will send port of 0 on 'stopped' events. Let them through as they won't receive peers anyway.
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L284
+ */
 if (
-    // https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L284
-    // Block system-reserved ports since 99.9% of the time they're fake and thus not connectable
-    // Some clients will send port of 0 on 'stopped' events. Let them through as they won't receive peers anyway.
     !isset($port)
     || ($port < 1024 && !$stopped)
     || $port > 0xFFFF) {
@@ -130,7 +133,11 @@ if (!isset($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
 }
 
-// Check User-Agent length
+/**
+ * Check User-Agent length
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L177
+ */
 if (strlen((string)$_SERVER['HTTP_USER_AGENT']) > 64) {
     msg_die('User-Agent must be less than 64 characters long');
 }
