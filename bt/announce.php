@@ -247,7 +247,7 @@ if ($lp_info) {
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
-		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.info_hash, tor.info_hash_v2, u.*
+		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.tor_status, tor.info_hash, tor.info_hash_v2, u.*
 		FROM " . BB_BT_TORRENTS . " tor
 		LEFT JOIN " . BB_BT_USERS . " u ON u.auth_key = '$passkey_sql'
 		$info_hash_where
@@ -268,6 +268,11 @@ if ($lp_info) {
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
+
+    // Check tor status
+    if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $releaser)) {
+        msg_die('...');
+    }
 
     // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
