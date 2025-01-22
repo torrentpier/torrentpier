@@ -272,7 +272,7 @@ if ($lp_info) {
 
     // Check tor status
     if (isset($bb_cfg['tor_frozen'][$tor_status]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_status]) && $releaser)) {
-        msg_die('...');
+        msg_die('Torrent frozen and cannot be downloaded');
     }
 
     // Check hybrid status
