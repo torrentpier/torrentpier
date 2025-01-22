@@ -268,9 +268,10 @@ if ($lp_info) {
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
+    $tor_status = $row['tor_status'];
 
     // Check tor status
-    if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $releaser)) {
+    if (isset($bb_cfg['tor_frozen'][$tor_status]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_status]) && $releaser)) {
         msg_die('...');
     }
 
