@@ -278,7 +278,7 @@ if ($lp_info) {
     $tor_status = $row['tor_status'];
 
     // Check tor status
-    if (isset($bb_cfg['tor_frozen'][$tor_status]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_status]) && $releaser)) {
+    if (!IS_AM && isset($bb_cfg['tor_frozen'][$tor_status]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_status]) && $releaser)) {
         msg_die('Torrent frozen and cannot be downloaded');
     }
 
