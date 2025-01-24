@@ -247,9 +247,10 @@ if ($lp_info) {
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
-		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.tor_status, tor.info_hash, tor.info_hash_v2, u.*
+		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.tor_status, tor.info_hash, tor.info_hash_v2, bt.*, u.user_role
 		FROM " . BB_BT_TORRENTS . " tor
-		LEFT JOIN " . BB_BT_USERS . " u ON u.auth_key = '$passkey_sql'
+		LEFT JOIN " . BB_BT_USERS . " bt ON bt.auth_key = '$passkey_sql'
+		LEFT JOIN " . BB_USERS . " u ON u.user_id = bt.user_id
 		$info_hash_where
 		LIMIT 1
 	";
