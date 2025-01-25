@@ -32,6 +32,12 @@ class GoogleCaptchaV2 implements CaptchaAbstract
 
     public function check(array $settings): bool
     {
+        $reCaptcha = new \ReCaptcha\ReCaptcha($settings['secret_key']);
+        $resp = $reCaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        if ($resp->isSuccess()) {
+            return true;
+        }
+
         return false;
     }
 }
