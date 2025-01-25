@@ -21,8 +21,8 @@ class GoogleCaptchaV2 implements CaptchaInterface
         <script type='text/javascript'>
             let onloadCallback = function() {
                 grecaptcha.render('tp-captcha', {
-                    'sitekey'  : '{$settings['public_key']}',
-                    'theme'    : '" . ($settings['theme'] ?? 'light') . "'
+                    'sitekey': '{$settings['public_key']}',
+                    'theme': '" . ($settings['theme'] ?? 'light') . "'
                 });
             };
 		</script>
