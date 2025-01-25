@@ -13,7 +13,13 @@ namespace TorrentPier\Captcha;
  * Class GoogleCaptchaV2
  * @package TorrentPier\Captcha
  */
-class GoogleCaptchaV2
+class GoogleCaptchaV2 implements CaptchaAbstract
 {
+    public function get()
+    {
+    }
 
+    public function check()
+    {
+    }
 }

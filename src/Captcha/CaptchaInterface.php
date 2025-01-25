@@ -10,10 +10,12 @@
 namespace TorrentPier\Captcha;
 
 /**
- * Class CaptchaAbstract
+ * Interface CaptchaInterface
  * @package TorrentPier\Captcha
  */
-abstract class CaptchaAbstract
+interface CaptchaInterface
 {
+    public function get(): string;
 
+    public function check(): bool;
 }
