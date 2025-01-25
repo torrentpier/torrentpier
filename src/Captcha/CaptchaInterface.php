@@ -15,7 +15,7 @@ namespace TorrentPier\Captcha;
  */
 interface CaptchaInterface
 {
-    public function get(): string;
+    public function get(array $settings): string;
 
-    public function check(): bool;
+    public function check(array $settings): bool;
 }

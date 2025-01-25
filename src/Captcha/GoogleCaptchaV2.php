@@ -15,11 +15,23 @@ namespace TorrentPier\Captcha;
  */
 class GoogleCaptchaV2 implements CaptchaAbstract
 {
-    public function get()
+    public function get($settings): string
     {
+        return "
+        <script type='text/javascript'>
+            let onloadCallback = function() {
+                grecaptcha.render('tp-captcha', {
+                    'sitekey'  : '{$settings['public_key']}',
+                    'theme'    : '" . ($settings['theme'] ?? 'light') . "'
+                });
+            };
+		</script>
+        <div id='tp-captcha'></div>
+        <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>";
     }
 
-    public function check()
+    public function check(array $settings): bool
     {
+        return false;
     }
 }
