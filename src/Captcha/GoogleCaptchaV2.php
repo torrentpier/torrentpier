@@ -13,9 +13,9 @@ namespace TorrentPier\Captcha;
  * Class GoogleCaptchaV2
  * @package TorrentPier\Captcha
  */
-class GoogleCaptchaV2 implements CaptchaAbstract
+class GoogleCaptchaV2 implements CaptchaInterface
 {
-    public function get($settings): string
+    public function get(array $settings): string
     {
         return "
         <script type='text/javascript'>
