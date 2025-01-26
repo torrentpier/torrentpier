@@ -2044,7 +2044,7 @@ function hash_search($hash)
 }
 
 /**
- * Функция для получения и проверки правильности ответа от Google ReCaptcha.
+ * Function for checking captcha answer
  *
  * @param string $mode
  * @return bool|string
