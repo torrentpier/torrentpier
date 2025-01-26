@@ -47,7 +47,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
     public function get(): string
     {
         return "
-        <script src='https://www.google.com/recaptcha/api.js?render={$this->settings['public_key']}'></script>
+        <script src='https://www.google.com/recaptcha/api.js?render={$this->settings['public_key']}&lang={$this->settings['language']}'></script>
         <script>
         grecaptcha.ready(function() {
             grecaptcha.execute('{$this->settings['public_key']}', { action:'validate_captcha' }).then(function(token) {
