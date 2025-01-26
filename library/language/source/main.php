@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'This option only for super admins';
 
 $lang['LOGS'] = 'Topic history';
 $lang['FORUM_LOGS'] = 'History Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Designer';
 
 $lang['LAST_IP'] = 'Last IP:';
