@@ -15,20 +15,27 @@ namespace TorrentPier\Captcha;
  */
 class CloudflareTurnstileCaptcha implements CaptchaInterface
 {
+    public array $settings;
+
     private string $verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
-    public function get(array $settings): string
+    public function __construct(array $settings)
+    {
+        $this->settings = $settings;
+    }
+
+    public function get(): string
     {
         return "
         <script src='https://challenges.cloudflare.com/turnstile/v0/api.js' async defer></script>
-        <div class='cf-turnstile' data-sitekey='{$settings['public_key']}' data-theme='" . ($settings['theme'] ?? 'light') . "'></div>
+        <div class='cf-turnstile' data-sitekey='{$this->settings['public_key']}' data-theme='" . ($this->settings['theme'] ?? 'light') . "'></div>
         ";
     }
 
-    public function check(array $settings): bool
+    public function check(): bool
     {
         $turnstileResponse = $_POST['cf-turnstile-response'] ?? '';
-        $postFields = "secret={$settings['secret_key']}&response=$turnstileResponse";
+        $postFields = "secret={$this->settings['secret_key']}&response=$turnstileResponse";
 
         $ch = curl_init($this->verifyEndpoint);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
