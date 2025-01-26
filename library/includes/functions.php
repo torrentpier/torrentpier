@@ -2046,54 +2046,53 @@ function hash_search($hash)
 /**
  * Функция для получения и проверки правильности ответа от Google ReCaptcha.
  *
- * @param $mode
- * @param string $callback
- *
+ * @param string $mode
  * @return bool|string
  */
-function bb_captcha($mode, $callback = '')
+function bb_captcha(string $mode): bool|string
 {
     global $bb_cfg, $lang;
 
-    $secret = $bb_cfg['captcha']['secret_key'];
-    $public = $bb_cfg['captcha']['public_key'];
-    $cp_theme = $bb_cfg['captcha']['theme'] ?? 'light';
+    $settings = $bb_cfg['captcha'];
 
-    if (!$bb_cfg['captcha']['disabled'] && (!$public || !$secret)) {
-        bb_die($lang['CAPTCHA_SETTINGS']);
+    if (!$settings['disabled']) {
+        if (empty($settings['public_key']) || empty($settings['secret_key'])) {
+            bb_die($lang['CAPTCHA_SETTINGS']);
+        }
     }
 
-    $reCaptcha = new \ReCaptcha\ReCaptcha($secret);
-
-    switch ($mode) {
-        case 'get':
-            return "
-				<script type=\"text/javascript\">
-					var onloadCallback = function() {
-						grecaptcha.render('tp-captcha', {
-							'sitekey'  : '" . $public . "',
-							'theme'    : '" . $cp_theme . "',
-							'callback' : '" . $callback . "'
-						});
-					};
-				</script>
-				<div id=\"tp-captcha\"></div>
-				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit\" async defer></script>";
+    // Selecting captcha service
+    switch ($settings['service']) {
+        case 'googleV2':
+            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV2();
             break;
-
-        case 'check':
-            $resp = $reCaptcha->verify(
-                request_var('g-recaptcha-response', ''),
-                $_SERVER["REMOTE_ADDR"]
-            );
-            if ($resp->isSuccess()) {
-                return true;
-            }
+        case 'googleV3':
+            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV3();
             break;
-
+        case 'hCaptcha':
+            $captcha = new \TorrentPier\Captcha\HCaptcha();
+            break;
+        case 'yandex':
+            $captcha = new \TorrentPier\Captcha\YandexSmartCaptcha();
+            break;
+        case 'cloudflare':
+            $captcha = new \TorrentPier\Captcha\CloudflareTurnstileCaptcha();
+            break;
         default:
-            bb_simple_die(__FUNCTION__ . ": invalid mode '$mode'");
+            bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));
     }
+
+    // Selection mode
+    if (isset($captcha)) {
+        switch ($mode) {
+            case 'get':
+            case 'check':
+                return $captcha->$mode($settings);
+            default:
+                bb_die(sprintf('Invalid mode: %s', $mode));
+        }
+    }
+
     return false;
 }
 
