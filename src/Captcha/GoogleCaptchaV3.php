@@ -23,13 +23,6 @@ class GoogleCaptchaV3 implements CaptchaInterface
     private array $settings;
 
     /**
-     * Service verification endpoint
-     *
-     * @var string
-     */
-    private string $verifyEndpoint = 'https://www.google.com/recaptcha/api/siteverify';
-
-    /**
      * Constructor
      *
      * @param array $settings
@@ -65,34 +58,12 @@ class GoogleCaptchaV3 implements CaptchaInterface
      */
     public function check(): bool
     {
-        $captcha = $_POST['g-recaptcha-response'] ?? false;
-        if (!$captcha) {
-            return false;
+        $reCaptcha = new \ReCaptcha\ReCaptcha($this->settings['secret_key']);
+        $resp = $reCaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        if ($resp->isSuccess()) {
+            return true;
         }
 
-        $postdata = http_build_query(
-            array(
-                'secret' => $this->settings['secret_key'],
-                'response' => $captcha,
-                'remoteip' => $_SERVER["REMOTE_ADDR"]
-            )
-        );
-        $opts = array(
-            'http' =>
-                array(
-                    'method' => 'POST',
-                    'header' => 'Content-Type: application/x-www-form-urlencoded',
-                    'content' => $postdata
-                )
-        );
-        $context = stream_context_create($opts);
-
-        $googleApiResponse = file_get_contents($this->verifyEndpoint, false, $context);
-        if ($googleApiResponse === false) {
-            return false;
-        }
-
-        $googleApiResponseObject = json_decode($googleApiResponse);
-        return $googleApiResponseObject->success;
+        return false;
     }
 }
