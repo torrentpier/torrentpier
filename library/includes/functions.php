@@ -2063,25 +2063,18 @@ function bb_captcha(string $mode): bool|string
     }
 
     // Selecting captcha service
-    switch ($settings['service']) {
-        case 'googleV2':
-            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV2($settings);
-            break;
-        case 'googleV3':
-            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV3($settings);
-            break;
-        case 'hCaptcha':
-            $captcha = new \TorrentPier\Captcha\HCaptcha($settings);
-            break;
-        case 'yandex':
-            $captcha = new \TorrentPier\Captcha\YandexSmartCaptcha($settings);
-            break;
-        case 'cloudflare':
-            $captcha = new \TorrentPier\Captcha\CloudflareTurnstileCaptcha($settings);
-            break;
-        default:
-            bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));
+    $captchaClasses = [
+        'googleV2' => \TorrentPier\Captcha\GoogleCaptchaV2::class,
+        'googleV3' => \TorrentPier\Captcha\GoogleCaptchaV3::class,
+        'hCaptcha' => \TorrentPier\Captcha\HCaptcha::class,
+        'yandex' => \TorrentPier\Captcha\YandexSmartCaptcha::class,
+        'cloudflare' => \TorrentPier\Captcha\CloudflareTurnstileCaptcha::class,
+    ];
+    if (!isset($captchaClasses[$settings['service']])) {
+        bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));
     }
+    $captchaClass = $captchaClasses[$settings['service']];
+    $captcha = new $captchaClass($settings);
 
     // Selection mode
     if (isset($captcha)) {
