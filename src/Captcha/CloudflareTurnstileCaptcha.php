@@ -21,7 +21,7 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
     {
         return "
         <script src='https://challenges.cloudflare.com/turnstile/v0/api.js' async defer></script>
-        <div class='cf-turnstile' data-sitekey='{$settings['site_key']}' data-theme='" . ($settings['theme'] ?? 'light') . "'></div>
+        <div class='cf-turnstile' data-sitekey='{$settings['public_key']}' data-theme='" . ($settings['theme'] ?? 'light') . "'></div>
         ";
     }
 
