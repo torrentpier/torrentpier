@@ -15,14 +15,21 @@ namespace TorrentPier\Captcha;
  */
 class GoogleCaptchaV2 implements CaptchaInterface
 {
-    public function get(array $settings): string
+    private array $settings;
+
+    public function __construct(array $settings)
+    {
+        $this->settings = $settings;
+    }
+
+    public function get(): string
     {
         return "
         <script type='text/javascript'>
             let onloadCallback = function() {
                 grecaptcha.render('tp-captcha', {
-                    'sitekey': '{$settings['public_key']}',
-                    'theme': '" . ($settings['theme'] ?? 'light') . "'
+                    'sitekey': '{$this->settings['public_key']}',
+                    'theme': '" . ($this->settings['theme'] ?? 'light') . "'
                 });
             };
 		</script>
@@ -30,9 +37,9 @@ class GoogleCaptchaV2 implements CaptchaInterface
         <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>";
     }
 
-    public function check(array $settings): bool
+    public function check(): bool
     {
-        $reCaptcha = new \ReCaptcha\ReCaptcha($settings['secret_key']);
+        $reCaptcha = new \ReCaptcha\ReCaptcha($this->settings['secret_key']);
         $resp = $reCaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
         if ($resp->isSuccess()) {
             return true;
