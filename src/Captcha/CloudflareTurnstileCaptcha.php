@@ -19,6 +19,11 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
 
     private string $verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
+    /**
+     * Constructor
+     *
+     * @param array $settings
+     */
     public function __construct(array $settings)
     {
         $this->settings = $settings;

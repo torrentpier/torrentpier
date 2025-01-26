@@ -15,9 +15,21 @@ namespace TorrentPier\Captcha;
  */
 class GoogleCaptchaV3 implements CaptchaInterface
 {
+    private array $settings;
+
     private string $verifyEndpoint = 'https://www.google.com/recaptcha/api/siteverify';
 
-    public function get(array $settings): string
+    /**
+     * Constructor
+     *
+     * @param array $settings
+     */
+    public function __construct(array $settings)
+    {
+        $this->settings = $settings;
+    }
+
+    public function get(): string
     {
         return "
         <script src='https://www.google.com/recaptcha/api.js?render={$settings['public_key']}'></script>
@@ -31,7 +43,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
 	    <input type='hidden' id='g-recaptcha-response' name='g-recaptcha-response'>";
     }
 
-    public function check(array $settings): bool
+    public function check(): bool
     {
         $captcha = $_POST['g-recaptcha-response'] ?? false;
         if (!$captcha) {

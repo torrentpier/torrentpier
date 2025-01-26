@@ -17,6 +17,11 @@ class GoogleCaptchaV2 implements CaptchaInterface
 {
     private array $settings;
 
+    /**
+     * Constructor
+     *
+     * @param array $settings
+     */
     public function __construct(array $settings)
     {
         $this->settings = $settings;
