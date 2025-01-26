@@ -19,7 +19,9 @@ class YandexSmartCaptcha implements CaptchaInterface
 
     public function get(array $settings): string
     {
-        return "";
+        return "
+        <script src='https://smartcaptcha.yandexcloud.net/captcha.js' defer></script>
+        <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$settings['client_key']}' data-hl='ru'></div>";
     }
 
     public function check(array $settings): bool
