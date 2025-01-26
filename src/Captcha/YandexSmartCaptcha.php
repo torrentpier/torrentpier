@@ -15,20 +15,42 @@ namespace TorrentPier\Captcha;
  */
 class YandexSmartCaptcha implements CaptchaInterface
 {
+    /**
+     * Captcha service settings
+     *
+     * @var array
+     */
+    private array $settings;
+
+    /**
+     * Service verification endpoint
+     *
+     * @var string
+     */
     private string $verifyEndpoint = 'https://smartcaptcha.yandexcloud.net/validate';
 
-    public function get(array $settings): string
+    /**
+     * Constructor
+     *
+     * @param array $settings
+     */
+    public function __construct(array $settings)
+    {
+        $this->settings = $settings;
+    }
+
+    public function get(): string
     {
         return "
         <script src='https://smartcaptcha.yandexcloud.net/captcha.js' defer></script>
-        <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$settings['public_key']}' data-hl='ru'></div>";
+        <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$this->settings['public_key']}' data-hl='ru'></div>";
     }
 
-    public function check(array $settings): bool
+    public function check(): bool
     {
         $ch = curl_init($this->verifyEndpoint);
         $args = [
-            'secret' => $settings['secret_key'],
+            'secret' => $this->settings['secret_key'],
             'token' => $_POST['smart-token'] ?? null,
             'ip' => $_SERVER['REMOTE_ADDR'],
         ];

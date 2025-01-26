@@ -22,6 +22,11 @@ class GoogleCaptchaV3 implements CaptchaInterface
      */
     private array $settings;
 
+    /**
+     * Service verification endpoint
+     *
+     * @var string
+     */
     private string $verifyEndpoint = 'https://www.google.com/recaptcha/api/siteverify';
 
     /**

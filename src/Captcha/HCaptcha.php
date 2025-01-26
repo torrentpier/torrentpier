@@ -22,6 +22,11 @@ class HCaptcha implements CaptchaInterface
      */
     private array $settings;
 
+    /**
+     * Service verification endpoint
+     *
+     * @var string
+     */
     private string $verifyEndpoint = 'https://hcaptcha.com/siteverify';
 
     /**
