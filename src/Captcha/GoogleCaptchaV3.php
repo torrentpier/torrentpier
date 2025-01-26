@@ -15,6 +15,11 @@ namespace TorrentPier\Captcha;
  */
 class GoogleCaptchaV3 implements CaptchaInterface
 {
+    /**
+     * Captcha service settings
+     *
+     * @var array
+     */
     private array $settings;
 
     private string $verifyEndpoint = 'https://www.google.com/recaptcha/api/siteverify';
@@ -32,10 +37,10 @@ class GoogleCaptchaV3 implements CaptchaInterface
     public function get(): string
     {
         return "
-        <script src='https://www.google.com/recaptcha/api.js?render={$settings['public_key']}'></script>
+        <script src='https://www.google.com/recaptcha/api.js?render={$this->settings['public_key']}'></script>
         <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('{$settings['public_key']}', { action:'validate_captcha' }).then(function(token) {
+            grecaptcha.execute('{$this->settings['public_key']}', { action:'validate_captcha' }).then(function(token) {
                 document.getElementById('g-recaptcha-response').value = token;
             });
         });
@@ -52,7 +57,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
 
         $postdata = http_build_query(
             array(
-                'secret' => $settings['secret_key'],
+                'secret' => $this->settings['secret_key'],
                 'response' => $captcha,
                 'remoteip' => $_SERVER["REMOTE_ADDR"]
             )

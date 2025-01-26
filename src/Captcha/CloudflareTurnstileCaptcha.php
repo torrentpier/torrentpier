@@ -15,6 +15,11 @@ namespace TorrentPier\Captcha;
  */
 class CloudflareTurnstileCaptcha implements CaptchaInterface
 {
+    /**
+     * Captcha service settings
+     *
+     * @var array
+     */
     private array $settings;
 
     private string $verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';

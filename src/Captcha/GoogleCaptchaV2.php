@@ -15,6 +15,11 @@ namespace TorrentPier\Captcha;
  */
 class GoogleCaptchaV2 implements CaptchaInterface
 {
+    /**
+     * Captcha service settings
+     *
+     * @var array
+     */
     private array $settings;
 
     /**
