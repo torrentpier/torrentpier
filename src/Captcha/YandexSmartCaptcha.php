@@ -48,7 +48,7 @@ class YandexSmartCaptcha implements CaptchaInterface
     {
         return "
         <script src='https://smartcaptcha.yandexcloud.net/captcha.js' defer></script>
-        <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$this->settings['public_key']}' data-hl='ru'></div>";
+        <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$this->settings['public_key']}' data-hl='{$this->settings['language']}'></div>";
     }
 
     /**

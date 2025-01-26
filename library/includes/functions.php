@@ -2054,6 +2054,7 @@ function bb_captcha(string $mode): bool|string
     global $bb_cfg, $lang;
 
     $settings = $bb_cfg['captcha'];
+    $settings['language'] = $bb_cfg['default_lang'];
 
     // Checking captcha settings
     if (!$settings['disabled']) {
