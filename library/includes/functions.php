@@ -2065,19 +2065,19 @@ function bb_captcha(string $mode): bool|string
     // Selecting captcha service
     switch ($settings['service']) {
         case 'googleV2':
-            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV2();
+            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV2($settings);
             break;
         case 'googleV3':
-            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV3();
+            $captcha = new \TorrentPier\Captcha\GoogleCaptchaV3($settings);
             break;
         case 'hCaptcha':
-            $captcha = new \TorrentPier\Captcha\HCaptcha();
+            $captcha = new \TorrentPier\Captcha\HCaptcha($settings);
             break;
         case 'yandex':
-            $captcha = new \TorrentPier\Captcha\YandexSmartCaptcha();
+            $captcha = new \TorrentPier\Captcha\YandexSmartCaptcha($settings);
             break;
         case 'cloudflare':
-            $captcha = new \TorrentPier\Captcha\CloudflareTurnstileCaptcha();
+            $captcha = new \TorrentPier\Captcha\CloudflareTurnstileCaptcha($settings);
             break;
         default:
             bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));
@@ -2088,7 +2088,7 @@ function bb_captcha(string $mode): bool|string
         switch ($mode) {
             case 'get':
             case 'check':
-                return $captcha->$mode($settings);
+                return $captcha->$mode();
             default:
                 bb_die(sprintf('Invalid mode: %s', $mode));
         }
