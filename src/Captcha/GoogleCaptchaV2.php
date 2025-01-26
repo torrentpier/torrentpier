@@ -51,7 +51,7 @@ class GoogleCaptchaV2 implements CaptchaInterface
             };
 		</script>
         <div id='tp-captcha'></div>
-        <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>";
+        <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl={$this->settings['language']}' async defer></script>";
     }
 
     /**
