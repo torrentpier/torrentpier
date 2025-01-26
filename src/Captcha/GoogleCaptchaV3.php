@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Captcha;
 
+use ReCaptcha\ReCaptcha;
+
 /**
  * Class GoogleCaptchaV3
  * @package TorrentPier\Captcha
@@ -58,7 +60,7 @@ class GoogleCaptchaV3 implements CaptchaInterface
      */
     public function check(): bool
     {
-        $reCaptcha = new \ReCaptcha\ReCaptcha($this->settings['secret_key']);
+        $reCaptcha = new ReCaptcha($this->settings['secret_key']);
         $resp = $reCaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
         if ($resp->isSuccess()) {
             return true;
