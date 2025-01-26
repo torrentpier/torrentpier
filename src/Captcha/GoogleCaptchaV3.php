@@ -20,10 +20,10 @@ class GoogleCaptchaV3 implements CaptchaInterface
     public function get(array $settings): string
     {
         return "
-        <script src='https://www.google.com/recaptcha/api.js?render={$settings['site_key']}'></script>
+        <script src='https://www.google.com/recaptcha/api.js?render={$settings['public_key']}'></script>
         <script>
         grecaptcha.ready(function() {
-            grecaptcha.execute('{$settings['site_key']}', { action:'validate_captcha' }).then(function(token) {
+            grecaptcha.execute('{$settings['public_key']}', { action:'validate_captcha' }).then(function(token) {
                 document.getElementById('g-recaptcha-response').value = token;
             });
         });
