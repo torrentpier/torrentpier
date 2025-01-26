@@ -19,7 +19,16 @@ class GoogleCaptchaV3 implements CaptchaInterface
 
     public function get(array $settings): string
     {
-        return "";
+        return "
+        <script src='https://www.google.com/recaptcha/api.js?render={$settings['site_key']}'></script>
+        <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('{$settings['site_key']}', { action:'validate_captcha' }).then(function(token) {
+                document.getElementById('g-recaptcha-response').value = token;
+            });
+        });
+	    </script>
+	    <input type='hidden' id='g-recaptcha-response' name='g-recaptcha-response'>";
     }
 
     public function check(array $settings): bool
