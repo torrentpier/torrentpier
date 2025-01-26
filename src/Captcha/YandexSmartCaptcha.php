@@ -21,14 +21,14 @@ class YandexSmartCaptcha implements CaptchaInterface
     {
         return "
         <script src='https://smartcaptcha.yandexcloud.net/captcha.js' defer></script>
-        <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$settings['client_key']}' data-hl='ru'></div>";
+        <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$settings['public_key']}' data-hl='ru'></div>";
     }
 
     public function check(array $settings): bool
     {
         $ch = curl_init($this->verifyEndpoint);
         $args = [
-            'secret' => $settings['server_key'],
+            'secret' => $settings['secret_key'],
             'token' => $_POST['smart-token'] ?? null,
             'ip' => $_SERVER['REMOTE_ADDR'],
         ];
