@@ -61,11 +61,10 @@ class GoogleCaptchaV3 implements CaptchaInterface
     public function check(): bool
     {
         $reCaptcha = new ReCaptcha($this->settings['secret_key']);
-        $resp = $reCaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
-        if ($resp->isSuccess()) {
-            return true;
-        }
+        $resp = $reCaptcha
+            ->setScoreThreshold(0.5)
+            ->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-        return false;
+        return $resp->isSuccess();
     }
 }

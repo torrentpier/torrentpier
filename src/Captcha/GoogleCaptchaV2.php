@@ -63,10 +63,7 @@ class GoogleCaptchaV2 implements CaptchaInterface
     {
         $reCaptcha = new ReCaptcha($this->settings['secret_key']);
         $resp = $reCaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
-        if ($resp->isSuccess()) {
-            return true;
-        }
 
-        return false;
+        return $resp->isSuccess();
     }
 }
