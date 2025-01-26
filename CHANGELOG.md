@@ -35,6 +35,7 @@
 
 ### 🗑️ Removed
 
+- *(environment)* Extra `DB_CONNECTION` variable ([#1775](https://github.com/torrentpier/torrentpier/pull/1775)) - ([cd2786b](https://github.com/torrentpier/torrentpier/commit/cd2786bb69c74cec88a447f66750d014fc4d3612))
 - Some unused tracker config variables ([#1769](https://github.com/torrentpier/torrentpier/pull/1769)) - ([7f9df35](https://github.com/torrentpier/torrentpier/commit/7f9df35d3bd0e9d23284b8bd9c36a0f52158f5d7))
 
 ### 📚 Documentation
