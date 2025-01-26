@@ -670,12 +670,12 @@ $bb_cfg['group_avatars'] = [
 ];
 
 // Captcha
-// Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = [
     'disabled' => true,
+    'service' => 'googleV3', // Available services: googleV2, googleV3, hCaptcha, yandex, cloudflare
     'public_key' => '',
     'secret_key' => '',
-    'theme' => 'light', // theming (available: light, dark)
+    'theme' => 'light', // theming (available: light, dark) (working only if supported by captcha service)
 ];
 
 // Atom feed
