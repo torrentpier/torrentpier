@@ -48,7 +48,7 @@ class HCaptcha implements CaptchaInterface
     {
         return "
         <div class='h-captcha' data-sitekey='{$this->settings['public_key']}' data-theme='" . ($this->settings['theme'] ?? 'light') . "'></div>
-        <script src='https://www.hCaptcha.com/1/api.js' async defer></script>";
+        <script src='https://www.hCaptcha.com/1/api.js?hl={$this->settings['language']}' async defer></script>";
     }
 
     /**
