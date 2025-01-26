@@ -19,7 +19,9 @@ class HCaptcha implements CaptchaInterface
 
     public function get(array $settings): string
     {
-        return "";
+        return "
+        <div class='h-captcha' data-sitekey='{$settings['site_key']}'></div>
+        <script src='https://www.hCaptcha.com/1/api.js' async defer></script>";
     }
 
     public function check(array $settings): bool
