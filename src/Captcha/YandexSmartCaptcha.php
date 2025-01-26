@@ -39,6 +39,11 @@ class YandexSmartCaptcha implements CaptchaInterface
         $this->settings = $settings;
     }
 
+    /**
+     * Returns captcha widget
+     *
+     * @return string
+     */
     public function get(): string
     {
         return "
