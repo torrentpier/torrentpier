@@ -58,6 +58,11 @@ class GoogleCaptchaV3 implements CaptchaInterface
 	    <input type='hidden' id='g-recaptcha-response' name='g-recaptcha-response'>";
     }
 
+    /**
+     * Checking captcha answer
+     *
+     * @return bool
+     */
     public function check(): bool
     {
         $captcha = $_POST['g-recaptcha-response'] ?? false;

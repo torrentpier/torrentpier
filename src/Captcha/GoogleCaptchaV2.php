@@ -52,6 +52,11 @@ class GoogleCaptchaV2 implements CaptchaInterface
         <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>";
     }
 
+    /**
+     * Checking captcha answer
+     *
+     * @return bool
+     */
     public function check(): bool
     {
         $reCaptcha = new \ReCaptcha\ReCaptcha($this->settings['secret_key']);

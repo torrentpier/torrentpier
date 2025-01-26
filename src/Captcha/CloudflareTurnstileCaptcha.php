@@ -52,6 +52,11 @@ class CloudflareTurnstileCaptcha implements CaptchaInterface
         ";
     }
 
+    /**
+     * Checking captcha answer
+     *
+     * @return bool
+     */
     public function check(): bool
     {
         $turnstileResponse = $_POST['cf-turnstile-response'] ?? '';

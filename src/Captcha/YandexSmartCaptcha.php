@@ -51,6 +51,11 @@ class YandexSmartCaptcha implements CaptchaInterface
         <div id='captcha-container' style='width: 402px;' class='smart-captcha' data-sitekey='{$this->settings['public_key']}' data-hl='ru'></div>";
     }
 
+    /**
+     * Checking captcha answer
+     *
+     * @return bool
+     */
     public function check(): bool
     {
         $ch = curl_init($this->verifyEndpoint);

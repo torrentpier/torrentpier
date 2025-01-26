@@ -29,6 +29,10 @@ interface CaptchaInterface
      */
     public function get(): string;
 
-
+    /**
+     * Checking captcha answer
+     *
+     * @return bool
+     */
     public function check(): bool;
 }

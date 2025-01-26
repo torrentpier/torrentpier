@@ -51,6 +51,11 @@ class HCaptcha implements CaptchaInterface
         <script src='https://www.hCaptcha.com/1/api.js' async defer></script>";
     }
 
+    /**
+     * Checking captcha answer
+     *
+     * @return bool
+     */
     public function check(): bool
     {
         $data = [
