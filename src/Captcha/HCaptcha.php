@@ -15,19 +15,36 @@ namespace TorrentPier\Captcha;
  */
 class HCaptcha implements CaptchaInterface
 {
+    /**
+     * Captcha service settings
+     *
+     * @var array
+     */
+    private array $settings;
+
     private string $verifyEndpoint = 'https://hcaptcha.com/siteverify';
 
-    public function get(array $settings): string
+    /**
+     * Constructor
+     *
+     * @param array $settings
+     */
+    public function __construct(array $settings)
+    {
+        $this->settings = $settings;
+    }
+
+    public function get(): string
     {
         return "
-        <div class='h-captcha' data-sitekey='{$settings['public_key']}'></div>
+        <div class='h-captcha' data-sitekey='{$this->settings['public_key']}'></div>
         <script src='https://www.hCaptcha.com/1/api.js' async defer></script>";
     }
 
-    public function check(array $settings): bool
+    public function check(): bool
     {
         $data = [
-            'secret' => $settings['secret_key'],
+            'secret' => $this->settings['secret_key'],
             'response' => $_POST['h-captcha-response'] ?? null,
         ];
 
