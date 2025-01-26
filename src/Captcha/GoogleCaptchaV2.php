@@ -43,7 +43,7 @@ class GoogleCaptchaV2 implements CaptchaInterface
     {
         return "
         <script type='text/javascript'>
-            let onloadCallback = function() {
+            var onloadCallback = function() {
                 grecaptcha.render('tp-captcha', {
                     'sitekey': '{$this->settings['public_key']}',
                     'theme': '" . ($this->settings['theme'] ?? 'light') . "'
