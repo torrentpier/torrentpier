@@ -74,17 +74,32 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 
 ### Quick (For web-panels) ☕️
 
-1. Select the folder where you want to install TorrentPier (`cd /path/to/public_html`)
-2. Download latest version of TorrentPier (`sudo git clone https://github.com/torrentpier/torrentpier.git .`)
-3. After, run `php install.php` and follow the given steps
+1. Select the folder where you want to install TorrentPier
+   ```shell
+   cd /path/to/public_html
+   ```
+2. Download latest version of TorrentPier
+   ```shell
+   sudo git clone https://github.com/torrentpier/torrentpier.git .
+   ```
+3. After, run command below and follow the given steps
+   ```shell
+   php install.php
+   ```
 4. Voila! ✨
 
 ### Manual 🔩
 
 1. Install [Composer](https://getcomposer.org/)
-2. Run `composer create-project torrentpier/torrentpier`
+2. Run command below to create TorrentPier project
+   ```shell
+   composer create-project torrentpier/torrentpier
+   ```
 3. [Check our system requirements](#-requirements)
-4. After, run `composer install` on the project directory
+4. After, run command below on the project directory, to install Composer dependencies
+   ```shell
+   composer install
+   ```
 5. Create database and import dump located at `install/sql/mysql.sql`
 6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
 7. Provide write permissions to the specified folders:
@@ -98,11 +113,10 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 
 ### Additional steps 👣
 
-1. Edit domain name and domain port in the configuration file or a local copy (`$reserved_name` and `$reserved_port`)
-2. Edit this files:
+1. Edit this files:
    * `favicon.png` (change on your own)
    * `robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
-3. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
+2. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
 
 ## 🔐 Security vulnerabilities
 
@@ -134,12 +148,18 @@ Support this project by becoming a sponsor or a backer.
 
 <details>
   <summary>Monero</summary>
-  42zJE3FDvN8foP9QYgDrBjgtd7h2FipGCGmAcmG5VFQuRkJBGMbCvoLSmivepmAMEgik2E8MPWUzKaoYsGCtmhvL7ZN73jh
+
+```
+42zJE3FDvN8foP9QYgDrBjgtd7h2FipGCGmAcmG5VFQuRkJBGMbCvoLSmivepmAMEgik2E8MPWUzKaoYsGCtmhvL7ZN73jh
+```
 </details>
 
 <details>
   <summary>YooMoney</summary>
-  4100118022415720
+
+```
+4100118022415720
+```
 </details>
 
 ## 📦 Versioning
