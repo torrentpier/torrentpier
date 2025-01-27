@@ -14,6 +14,7 @@
 - *(announcer)* Blocking all ports lower then `1024` ([#1762](https://github.com/torrentpier/torrentpier/pull/1762)) - ([1bc7e09](https://github.com/torrentpier/torrentpier/commit/1bc7e09ddbeaf680b86095eed9a80b8ebf6169b3))
 - *(cache)* Checking if extensions are installed ([#1759](https://github.com/torrentpier/torrentpier/pull/1759)) - ([7f31022](https://github.com/torrentpier/torrentpier/commit/7f31022cfca2acb28a5cba06961eeaf8d2c9de51))
 - *(captcha)* Added some new services 🤖 ([#1771](https://github.com/torrentpier/torrentpier/pull/1771)) - ([d413c71](https://github.com/torrentpier/torrentpier/commit/d413c717188c9bd906f715e7137955dc9a42a003))
+- *(environment)* Make configurable `TP_HOST` and `TP_PORT` ([#1780](https://github.com/torrentpier/torrentpier/pull/1780)) - ([e51e091](https://github.com/torrentpier/torrentpier/commit/e51e09159333382a77b809b5f1da5e152a713143))
 - *(installer)* Fully show non-installed extensions ([#1761](https://github.com/torrentpier/torrentpier/pull/1761)) - ([8fcc62d](https://github.com/torrentpier/torrentpier/commit/8fcc62d2a2fd41927b2f5dae215fe5bbf95f2c96))
 - *(installer)* More explanations ([#1758](https://github.com/torrentpier/torrentpier/pull/1758)) - ([48ab52a](https://github.com/torrentpier/torrentpier/commit/48ab52ac8674afcb607c8e49134316a3e117236a))
 - *(installer)* Check `Composer` dependencies after installing ([#1756](https://github.com/torrentpier/torrentpier/pull/1756)) - ([262b887](https://github.com/torrentpier/torrentpier/commit/262b8872a5b14068eb73d745adea6203c557e192))
