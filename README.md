@@ -91,12 +91,12 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 ### Manual 🔩
 
 1. Install [Composer](https://getcomposer.org/)
-2. Run
+2. Run command below to create TorrentPier project
    ```shell
    composer create-project torrentpier/torrentpier
    ```
 3. [Check our system requirements](#-requirements)
-4. After, run command below on the project directory
+4. After, run command below on the project directory, to install Composer dependencies
    ```shell
    composer install
    ```
