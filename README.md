@@ -91,9 +91,15 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 ### Manual 🔩
 
 1. Install [Composer](https://getcomposer.org/)
-2. Run `composer create-project torrentpier/torrentpier`
+2. Run
+   ```shell
+   composer create-project torrentpier/torrentpier
+   ```
 3. [Check our system requirements](#-requirements)
-4. After, run `composer install` on the project directory
+4. After, run command below on the project directory
+   ```shell
+   composer install
+   ```
 5. Create database and import dump located at `install/sql/mysql.sql`
 6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
 7. Provide write permissions to the specified folders:
