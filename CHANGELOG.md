@@ -30,6 +30,8 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump jacklul/monolog-telegram from 3.1.0 to 3.2.0 ([#1776](https://github.com/torrentpier/torrentpier/pull/1776)) - ([420c92c](https://github.com/torrentpier/torrentpier/commit/420c92c0addf4dee91f3ae872517cb3224827a1f))
+- *(deps)* Bump filp/whoops from 2.16.0 to 2.17.0 ([#1777](https://github.com/torrentpier/torrentpier/pull/1777)) - ([a71609b](https://github.com/torrentpier/torrentpier/commit/a71609ba67a89480fabb7b62de450d9be09373fa))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.0 to 11.0.1 ([#1753](https://github.com/torrentpier/torrentpier/pull/1753)) - ([ce32031](https://github.com/torrentpier/torrentpier/commit/ce32031a0fb14cdf6c3f4ba379b530cbb52b0fea))
 - *(deps)* Bump bugsnag/bugsnag from 3.29.1 to 3.29.2 ([#1752](https://github.com/torrentpier/torrentpier/pull/1752)) - ([f63d15c](https://github.com/torrentpier/torrentpier/commit/f63d15c49e3992837413b2c7a0160d599b44f2ef))
 
