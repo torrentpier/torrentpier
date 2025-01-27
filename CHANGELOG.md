@@ -54,6 +54,7 @@
 - *(copyright)* Updated copyright year ([#1760](https://github.com/torrentpier/torrentpier/pull/1760)) - ([6697410](https://github.com/torrentpier/torrentpier/commit/6697410c1df6c8d9d7f511b1e984ae90d888ae0e))
 - *(issue template)* Improved `Feature request` template ([#1774](https://github.com/torrentpier/torrentpier/pull/1774)) - ([268f79d](https://github.com/torrentpier/torrentpier/commit/268f79d7259de67aa8877fcf7130ff0069469ab2))
 - *(issue template)* Improved `Bug report` template ([#1773](https://github.com/torrentpier/torrentpier/pull/1773)) - ([53ebfef](https://github.com/torrentpier/torrentpier/commit/53ebfef32c0e9016257e03b96ef96349e22d3e9b))
+- *(readme)* Improved installation guide ([#1781](https://github.com/torrentpier/torrentpier/pull/1781)) - ([e579b81](https://github.com/torrentpier/torrentpier/commit/e579b816b4dc346b3242cb3d9db292ad05596c1f))
 - *(readme)* Minor improvements ([#1779](https://github.com/torrentpier/torrentpier/pull/1779)) - ([5b0ed02](https://github.com/torrentpier/torrentpier/commit/5b0ed020890a8f938df912f9215cccbda42b0317))
 - *(readme)* Added Caddy webserver ([#1778](https://github.com/torrentpier/torrentpier/pull/1778)) - ([970a028](https://github.com/torrentpier/torrentpier/commit/970a0282e3631c403029c959ffd46b21c5cad0cd))
 - Update `cliff.toml` - ([254dca2](https://github.com/torrentpier/torrentpier/commit/254dca2b27c2d92421d3e639c80b0adf1172202f))
