@@ -1353,16 +1353,16 @@
         },
         {
             "name": "jacklul/monolog-telegram",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jacklul/monolog-telegram.git",
-                "reference": "ec8674fbd280bbb369b5f48447259e44a92f39c8"
+                "reference": "1f2069f5556b1c8d6eb2d8b8ac29ff376675cf46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jacklul/monolog-telegram/zipball/ec8674fbd280bbb369b5f48447259e44a92f39c8",
-                "reference": "ec8674fbd280bbb369b5f48447259e44a92f39c8",
+                "url": "https://api.github.com/repos/jacklul/monolog-telegram/zipball/1f2069f5556b1c8d6eb2d8b8ac29ff376675cf46",
+                "reference": "1f2069f5556b1c8d6eb2d8b8ac29ff376675cf46",
                 "shasum": ""
             },
             "require": {
@@ -1410,7 +1410,7 @@
                 "issues": "https://github.com/jacklul/monolog-telegram/issues",
                 "source": "https://github.com/jacklul/monolog-telegram"
             },
-            "time": "2023-11-21T18:26:36+00:00"
+            "time": "2025-01-24T18:07:58+00:00"
         },
         {
             "name": "josantonius/cookie",
