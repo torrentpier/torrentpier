@@ -75,17 +75,17 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 ### Quick (For web-panels) ☕️
 
 1. Select the folder where you want to install TorrentPier
-    ```shell
-    cd /path/to/public_html
-    ```
+   ```shell
+   cd /path/to/public_html
+   ```
 2. Download latest version of TorrentPier
-    ```shell
-    sudo git clone https://github.com/torrentpier/torrentpier.git .
-    ```
+   ```shell
+   sudo git clone https://github.com/torrentpier/torrentpier.git .
+   ```
 3. After, run command below and follow the given steps
-    ```shell
-    php install.php
-    ```
+   ```shell
+   php install.php
+   ```
 4. Voila! ✨
 
 ### Manual 🔩
