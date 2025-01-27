@@ -55,7 +55,7 @@ and go from there. The documentation will be translated into english in the near
 
 ## 🔧 Requirements
 
-* Apache / nginx
+* Apache, nginx, caddy
 * MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
 * PHP: 8.1 / 8.2 / 8.3
 * PHP Extensions: mbstring, gd, bcmath, intl, tidy (optional), xml, xmlwriter
