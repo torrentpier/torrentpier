@@ -25,6 +25,7 @@
 
 ### 🐛 Bug Fixes
 
+- *(announcer)* Null `event` exception ([#1784](https://github.com/torrentpier/torrentpier/pull/1784)) - ([b06e327](https://github.com/torrentpier/torrentpier/commit/b06e327cbb285a676814699eb5fb1fbc0e1f22e8))
 - *(bb_die)* HTML characters converting ([#1744](https://github.com/torrentpier/torrentpier/pull/1744)) - ([4f1c7e4](https://github.com/torrentpier/torrentpier/commit/4f1c7e40d82e52f81eba44ead501e1f01058cc4f))
 - *(debug)* Disabled `Bugsnag` reporting on local environment ([#1751](https://github.com/torrentpier/torrentpier/pull/1751)) - ([1f3b629](https://github.com/torrentpier/torrentpier/commit/1f3b629e9cea4d11fbf3cf29f575ba730bad898d))
 - *(installer)* Missing `gd` extension ([#1749](https://github.com/torrentpier/torrentpier/pull/1749)) - ([a1c519d](https://github.com/torrentpier/torrentpier/commit/a1c519d938b848edffcbf7fbbe6a3fdb9a5394f1))
