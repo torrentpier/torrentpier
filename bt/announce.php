@@ -99,7 +99,7 @@ if (!isset($info_hash)) {
  *
  * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L275
  */
-$event = strtolower($event);
+$event = strtolower((string)$event);
 if (!in_array($event, ['started', 'completed', 'stopped', 'paused', ''])) {
     msg_die('Invalid event: ' . $event);
 }
