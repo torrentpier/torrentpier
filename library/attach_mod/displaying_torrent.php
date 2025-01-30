@@ -79,7 +79,7 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 $tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
 $download_link = DL_URL . $attach_id;
-$description = ($comment) ?: preg_replace("#.torrent$#i", '', $display_name);
+$description = ($comment) ?: preg_replace("#" . "." . TORRENT_EXT . "$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
     $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
@@ -88,7 +88,11 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-$display_name = $t_data['topic_title'] . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
+if ($bb_cfg['tracker']['use_old_torrent_name_format']) {
+    $display_name = '[' . $bb_cfg['server_name'] . '].t' . $bt_topic_id . '.' . TORRENT_EXT;
+} else {
+    $display_name = $t_data['topic_title'] . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
+}
 
 if (!$tor_reged) {
     $template->assign_block_vars('postrow.attach.tor_not_reged', [

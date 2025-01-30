@@ -736,7 +736,8 @@ $bb_cfg['tracker'] = [
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
     'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
-    'disabled_v2_torrents' => false // disallow registration of v2-only torrents
+    'disabled_v2_torrents' => false, // disallow registration of v2-only torrents
+    'use_old_torrent_name_format' => false, // when enabled, the names of torrent files will have the classic format: [yoursite.com].txxx.torrent
 ];
 
 // Ratio settings
