@@ -20,6 +20,7 @@
 - *(installer)* Check `Composer` dependencies after installing ([#1756](https://github.com/torrentpier/torrentpier/pull/1756)) - ([262b887](https://github.com/torrentpier/torrentpier/commit/262b8872a5b14068eb73d745adea6203c557e192))
 - *(installer)* More explanations ([#1754](https://github.com/torrentpier/torrentpier/pull/1754)) - ([fd6f1f8](https://github.com/torrentpier/torrentpier/commit/fd6f1f86a5e9216469cd648601ecb9ba875f9eb6))
 - *(installer)* Create `config.local.php` on local environment ([#1745](https://github.com/torrentpier/torrentpier/pull/1745)) - ([0d93b2c](https://github.com/torrentpier/torrentpier/commit/0d93b2c768c2965c12ac62e2f3b2886dc1ef31c2))
+- *(torrent)* Bring back old torrent file naming ([#1783](https://github.com/torrentpier/torrentpier/pull/1783)) - ([314c592](https://github.com/torrentpier/torrentpier/commit/314c592affbef4b8db48d562b9633aad27059a76))
 - Used `TORRENT_MIMETYPE` constant instead of hardcoded string ([#1757](https://github.com/torrentpier/torrentpier/pull/1757)) - ([4b0d270](https://github.com/torrentpier/torrentpier/commit/4b0d270c89ec06abed590504f6a0cb70076a9e59))
 
 ### 🐛 Bug Fixes
