@@ -6,8 +6,6 @@
 </p>
 
 <p align="center">
-
-[<img alt="Website Deployed for Free with FTP Deploy Action" src="https://img.shields.io/badge/Website deployed for free with-FTP DEPLOY ACTION-%3CCOLOR%3E?style=for-the-badge&color=2b9348">](https://github.com/SamKirkland/FTP-Deploy-Action)
   <a href="https://github.com/torrentpier/torrentpier/blob/master/LICENSE"><img src="https://img.shields.io/github/license/torrentpier/torrentpier" alt="License"></a>
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/stars/torrentpier/torrentpier" alt="Stars Packagist"></a>
   <a href="https://github.com/torrentpier/torrentpier/actions"><img src="https://img.shields.io/github/actions/workflow/status/torrentpier/torrentpier/phpmd.yml" alt="Build status"></a>
@@ -17,6 +15,7 @@
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/v/torrentpier/torrentpier" alt="Version"></a>
   <a href="https://github.com/torrentpier/torrentpier/releases"><img src="https://img.shields.io/github/release-date/torrentpier/torrentpier" alt="Last release"></a>
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
+  <a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img src="https://img.shields.io/badge/TorrentPier Demo deployed with-FTP DEPLOY ACTION-%3CCOLOR%3E?color=2b9348" alt="TorrentPier Demo deployed with FTP Deploy Action"></a>
 </p>
 
 ## 🐂 About TorrentPier
