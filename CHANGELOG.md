@@ -56,6 +56,7 @@
 - *(cliff)* Notice about previous changelog file ([#1746](https://github.com/torrentpier/torrentpier/pull/1746)) - ([85395be](https://github.com/torrentpier/torrentpier/commit/85395be5e7c6a891c79ec72cf215894af097f819))
 - *(copyright)* Updated copyright year ([#1760](https://github.com/torrentpier/torrentpier/pull/1760)) - ([6697410](https://github.com/torrentpier/torrentpier/commit/6697410c1df6c8d9d7f511b1e984ae90d888ae0e))
 - *(database)* Use `DEFAULT ''` for `privmsgs_subject` ([#1786](https://github.com/torrentpier/torrentpier/pull/1786)) - ([387a258](https://github.com/torrentpier/torrentpier/commit/387a25870abd37b641b55ffd98e13f4aaecb73b1))
+- *(deploy action)* Specify some missing params ([#1789](https://github.com/torrentpier/torrentpier/pull/1789)) - ([6115900](https://github.com/torrentpier/torrentpier/commit/6115900b765752209a6ed1dfb83e4f0cbee2ae77))
 - *(issue template)* Improved `Feature request` template ([#1774](https://github.com/torrentpier/torrentpier/pull/1774)) - ([268f79d](https://github.com/torrentpier/torrentpier/commit/268f79d7259de67aa8877fcf7130ff0069469ab2))
 - *(issue template)* Improved `Bug report` template ([#1773](https://github.com/torrentpier/torrentpier/pull/1773)) - ([53ebfef](https://github.com/torrentpier/torrentpier/commit/53ebfef32c0e9016257e03b96ef96349e22d3e9b))
 - *(readme)* Improved installation guide ([#1781](https://github.com/torrentpier/torrentpier/pull/1781)) - ([e579b81](https://github.com/torrentpier/torrentpier/commit/e579b816b4dc346b3242cb3d9db292ad05596c1f))
