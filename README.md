@@ -15,7 +15,7 @@
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/v/torrentpier/torrentpier" alt="Version"></a>
   <a href="https://github.com/torrentpier/torrentpier/releases"><img src="https://img.shields.io/github/release-date/torrentpier/torrentpier" alt="Last release"></a>
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
-  <a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img src="https://img.shields.io/badge/TorrentPier Demo deployed with-FTP DEPLOY ACTION-%3CCOLOR%3E?color=2b9348" alt="TorrentPier Demo deployed with FTP Deploy Action"></a>
+  <a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img src="https://img.shields.io/badge/Deployed to TorrentPier Demo with-FTP DEPLOY ACTION-%3CCOLOR%3E?color=2b9348" alt="Deployed to TorrentPier Demo with FTP Deploy Action"></a>
 </p>
 
 ## 🐂 About TorrentPier
