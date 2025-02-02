@@ -66,8 +66,6 @@ class IntegrityChecker
             return false;
         }
 
-        $ignoreFiles = $this->ignoreList();
-
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($rootDir));
         foreach ($iterator as $fileInfo) {
             if ($fileInfo->isFile()) {
