@@ -397,7 +397,7 @@ $userdata =& $user->data;
 /**
  * Some shared defines
  */
-define('TP_INSTANCE_HASH', !empty($bb_cfg['tp_instance_hash']) ? $bb_cfg['tp_instance_hash'] : '');
+define('TP_INSTANCE_HASH', $bb_cfg['tp_instance_hash']);
 
 /**
  * Cron
