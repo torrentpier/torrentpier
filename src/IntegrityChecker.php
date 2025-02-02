@@ -35,6 +35,8 @@ class IntegrityChecker
      */
     private array $ignoreList;
 
+    public const HASH_ALGO = 'md5';
+
     /**
      * Constructor
      */
@@ -71,7 +73,7 @@ class IntegrityChecker
             if ($fileInfo->isFile()) {
                 $filePath = $fileInfo->getPathname();
 
-                $hash = hash_file('md5', $filePath);
+                $hash = hash_file(self::HASH_ALGO, $filePath);
                 if ($hash === false) {
                     throw new Exception('Failed to get file checksum: ' . $filePath);
                 }

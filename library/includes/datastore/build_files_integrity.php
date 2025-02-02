@@ -24,7 +24,10 @@ $wrongFilesList = [];
 $integrityChecker = new IntegrityChecker();
 $filesList = $integrityChecker->readChecksumFile();
 foreach ($filesList as $file) {
-    if (!file_exists(BB_ROOT . $file['path']) || (strtolower(md5_file(BB_ROOT . $file['path'])) !== strtolower($file['hash']))) {
+    if (
+        !file_exists(BB_ROOT . $file['path'])
+        || (hash_file($integrityChecker::HASH_ALGO, BB_ROOT . $file['path']) !== $file['hash'])
+    ) {
         $wrongFilesList[] = $file['path'];
     }
 }
