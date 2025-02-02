@@ -10,6 +10,7 @@
 namespace TorrentPier;
 
 use Exception;
+
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileObject;
@@ -62,10 +63,8 @@ class IntegrityChecker
      */
     public function generateChecksumFile($rootDir = BB_ROOT, $savePath = CHECKSUMS_FILE): bool
     {
-        $checksumFile = fopen($savePath, 'w+');
-        if (!$checksumFile) {
-            return false;
-        }
+        $checksumFile = new SplFileObject($savePath, 'w+');
+        $checksumFile->setFlags(SplFileObject::DROP_NEW_LINE);
 
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($rootDir));
         foreach ($iterator as $fileInfo) {
@@ -77,11 +76,11 @@ class IntegrityChecker
                     throw new Exception('Failed to get file checksum: ' . $filePath);
                 }
 
-                fwrite($checksumFile, $hash . $this->checksumSeparator . $filePath . PHP_EOL);
+                $checksumFile->fwrite($hash . $this->checksumSeparator . $filePath . PHP_EOL);
             }
         }
 
-        fclose($checksumFile);
+        $checksumFile = null;
         return true;
     }
 
