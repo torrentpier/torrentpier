@@ -54,9 +54,9 @@ if (empty($bb_cfg['bt_announce_url']) || ($bb_cfg['bt_announce_url'] === 'https:
     bb_update_config(['bt_announce_url' => FULL_URL . 'bt/announce.php']);
 }
 
-// [Demo mode] Allow registering torrents by default
+// [Demo mode] Allow registering torrents by default for "Your first forum"
 if (IN_DEMO_MODE) {
-    DB()->query("UPDATE " . BB_FORUMS . " SET allow_reg_tracker = 1 WHERE allow_reg_tracker = 0");
+    DB()->query("UPDATE " . BB_FORUMS . " SET allow_reg_tracker = 1 WHERE allow_reg_tracker = 0 AND forum_id = 1 LIMIT 1");
 }
 
 // Create unique TorrentPier instance hash
