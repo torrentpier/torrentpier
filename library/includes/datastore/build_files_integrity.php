@@ -7,6 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use TorrentPier\IntegrityChecker;
+
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
@@ -17,43 +19,10 @@ if (!$bb_cfg['integrity_check']) {
     return;
 }
 
-$filesList = [];
 $wrongFilesList = [];
 
-$checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
-$checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
-
-$ignoreFiles = [
-    '.env.example',
-    '.htaccess',
-    'robots.txt',
-    'install.php',
-    'favicon.png',
-    'composer.json',
-    'composer.lock',
-    hide_bb_path(CHECKSUMS_FILE),
-    hide_bb_path(BB_ENABLED),
-    'library/config.php',
-    'library/defines.php',
-    'styles/images/logo/logo.png'
-];
-
-foreach ($checksumFile as $line) {
-    $parts = explode('  ', $line);
-    if (!isset($parts[0]) || !isset($parts[1])) {
-        // Skip end line
-        break;
-    }
-    if (!empty($ignoreFiles) && in_array($parts[1], $ignoreFiles)) {
-        // Skip files from "Ignoring list"
-        continue;
-    }
-    $filesList[] = [
-        'path' => trim($parts[1]),
-        'hash' => trim($parts[0])
-    ];
-}
-
+$integrityChecker = new IntegrityChecker();
+$filesList = $integrityChecker->readChecksumFile();
 foreach ($filesList as $file) {
     if (!file_exists(BB_ROOT . $file['path']) || (strtolower(md5_file(BB_ROOT . $file['path'])) !== strtolower($file['hash']))) {
         $wrongFilesList[] = $file['path'];
