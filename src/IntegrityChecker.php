@@ -30,12 +30,16 @@ class IntegrityChecker
     /**
      * List of files that will be ignored
      *
-     * @return array
+     * @var array
      */
-    private function ignoreList(): array
+    private array $ignoreList;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        // Relative to the root directory
-        return [
+        $ignoreList = [
             '.env.example',
             '.htaccess',
             'robots.txt',
@@ -49,11 +53,8 @@ class IntegrityChecker
             'library/defines.php',
             'styles/images/logo/logo.png'
         ];
-    }
 
-    public function __construct()
-    {
-        $ignoreFiles = $this->ignoreList();
+        $this->ignoreList = $ignoreList;
     }
 
     /**
@@ -100,7 +101,7 @@ class IntegrityChecker
         $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
         $filesList = [];
-        $ignoreFiles = $this->ignoreList();
+        $ignoreFiles = $this->ignoreList;
 
         foreach ($checksumFile as $line) {
             $parts = explode($this->checksumSeparator, $line);
