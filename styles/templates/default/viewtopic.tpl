@@ -623,12 +623,14 @@ function build_poll_add_form (src_el)
 
 	</td>
 </tr>
+<!-- IF S_WATCH_TOPIC -->
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
 		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
 		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
 </tr>
+<!-- ENDIF -->
 </table><!--/topic_quick_reply-->
 
 </form>
