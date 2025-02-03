@@ -60,6 +60,7 @@
 - *(deploy action)* Specify some missing params ([#1789](https://github.com/torrentpier/torrentpier/pull/1789)) - ([6115900](https://github.com/torrentpier/torrentpier/commit/6115900b765752209a6ed1dfb83e4f0cbee2ae77))
 - *(issue template)* Improved `Feature request` template ([#1774](https://github.com/torrentpier/torrentpier/pull/1774)) - ([268f79d](https://github.com/torrentpier/torrentpier/commit/268f79d7259de67aa8877fcf7130ff0069469ab2))
 - *(issue template)* Improved `Bug report` template ([#1773](https://github.com/torrentpier/torrentpier/pull/1773)) - ([53ebfef](https://github.com/torrentpier/torrentpier/commit/53ebfef32c0e9016257e03b96ef96349e22d3e9b))
+- *(notify)* Hide notify checkbox in topic for guests ([#1793](https://github.com/torrentpier/torrentpier/pull/1793)) - ([8e4cd97](https://github.com/torrentpier/torrentpier/commit/8e4cd97734fc46f33459c4b00a0fe38b0597f92b))
 - *(readme)* Improved installation guide ([#1781](https://github.com/torrentpier/torrentpier/pull/1781)) - ([e579b81](https://github.com/torrentpier/torrentpier/commit/e579b816b4dc346b3242cb3d9db292ad05596c1f))
 - *(readme)* Minor improvements ([#1779](https://github.com/torrentpier/torrentpier/pull/1779)) - ([5b0ed02](https://github.com/torrentpier/torrentpier/commit/5b0ed020890a8f938df912f9215cccbda42b0317))
 - *(readme)* Added Caddy webserver ([#1778](https://github.com/torrentpier/torrentpier/pull/1778)) - ([970a028](https://github.com/torrentpier/torrentpier/commit/970a0282e3631c403029c959ffd46b21c5cad0cd))
