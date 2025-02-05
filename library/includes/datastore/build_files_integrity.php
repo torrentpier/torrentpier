@@ -26,6 +26,7 @@ $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE
 $ignoreFiles = [
     '.env.example',
     '.htaccess',
+    'CHANGELOG.md',
     'robots.txt',
     'install.php',
     'favicon.png',
@@ -40,17 +41,21 @@ $ignoreFiles = [
 
 foreach ($checksumFile as $line) {
     $parts = explode('  ', $line);
-    if (!isset($parts[0]) || !isset($parts[1])) {
+    [$hash, $path] = $parts;
+
+    if (!isset($hash) || !isset($path)) {
         // Skip end line
         break;
     }
-    if (!empty($ignoreFiles) && in_array($parts[1], $ignoreFiles)) {
+
+    if (!empty($ignoreFiles) && in_array($path, $ignoreFiles)) {
         // Skip files from "Ignoring list"
         continue;
     }
+
     $filesList[] = [
-        'path' => trim($parts[1]),
-        'hash' => trim($parts[0])
+        'path' => trim($path),
+        'hash' => trim($hash)
     ];
 }
 
