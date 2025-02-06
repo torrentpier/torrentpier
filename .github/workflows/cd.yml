@@ -51,6 +51,7 @@ jobs:
           ZIP_NAME="torrentpier-v${{ env.RELEASE_VERSION }}.zip"
           zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
+
       - name: Publish to GitHub
         if: ${{ !contains(github.ref, '-') }}
         uses: svenstaro/upload-release-action@v2
@@ -61,7 +62,7 @@ jobs:
           overwrite: true
           tag: ${{ github.ref }}
           release_name: "TorrentPier v${{ env.RELEASE_VERSION }}"
-          body: "${{ needs.changelog.outputs.release_body }}"
+          body: "${{ needs.generate-changelog.outputs.release_body }}"
 
       - name: Publish to GitHub (pre-release)
         if: ${{ contains(github.ref, '-') }}
@@ -73,5 +74,5 @@ jobs:
           overwrite: true
           tag: ${{ github.ref }}
           release_name: "TorrentPier v${{ env.RELEASE_VERSION }}"
-          body: "${{ needs.changelog.outputs.release_body }}"
+          body: "${{ needs.generate-changelog.outputs.release_body }}"
           prerelease: true
