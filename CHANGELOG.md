@@ -54,6 +54,7 @@
 
 ### ⚙️ Miscellaneous
 
+- *(cd workflow)* Fixed release body creation ([#1809](https://github.com/torrentpier/torrentpier/pull/1809)) - ([7378cb3](https://github.com/torrentpier/torrentpier/commit/7378cb3af5cc56343c667a9d920038b05327e97b))
 - *(cd workflow)* Fixed release body creation ([#1807](https://github.com/torrentpier/torrentpier/pull/1807)) - ([cc679a8](https://github.com/torrentpier/torrentpier/commit/cc679a80246f3ff65136653025d826bf1458db3a))
 - *(changelog workflow)* Minor improvements ([#1802](https://github.com/torrentpier/torrentpier/pull/1802)) - ([15ca21f](https://github.com/torrentpier/torrentpier/commit/15ca21f03840281f7d4402959aa8bfb7d407b45b))
 - *(changelog workflow)* Some minor improvements ([#1801](https://github.com/torrentpier/torrentpier/pull/1801)) - ([2d53efc](https://github.com/torrentpier/torrentpier/commit/2d53efc945c7747be1755d0b66557a86bdc12cbd))
