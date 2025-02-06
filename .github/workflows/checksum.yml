@@ -25,7 +25,7 @@ jobs:
           if git diff --quiet internal_data/checksums.md5; then
             echo "No changes in checksums.md5"
           else
-            git add checksums.md5
+            git add internal_data/checksums.md5
             git commit -m "Update checksums.md5 📄"
             git push
           fi
