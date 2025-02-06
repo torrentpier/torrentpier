@@ -54,3 +54,16 @@ jobs:
       - name: Generate checksums.md5 file
         run: |
           find . -type f -not -path "./.git/*" -exec md5sum {} \; > internal_data/checksums.md5
+
+      - name: Commit and push checksums.md5 if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          if git diff --quiet internal_data/checksums.md5; then
+            echo "No changes in internal_data/checksums.md5"
+          else
+            git add internal_data/checksums.md5
+            git commit -m "Update checksums.md5"
+            git push
+          fi
