@@ -1,3 +1,5 @@
+[![TorrentPier](https://raw.githubusercontent.com/torrentpier/.github/refs/heads/main/versions/Cattle.png)](https://github.com/torrentpier)
+
 # 📖 Change Log
 
 > [!NOTE]
@@ -74,6 +76,7 @@
 - *(readme)* Added Caddy webserver ([#1778](https://github.com/torrentpier/torrentpier/pull/1778)) - ([970a028](https://github.com/torrentpier/torrentpier/commit/970a0282e3631c403029c959ffd46b21c5cad0cd))
 - *(workflow)* Refactored all workflows ([#1803](https://github.com/torrentpier/torrentpier/pull/1803)) - ([a29d57b](https://github.com/torrentpier/torrentpier/commit/a29d57b2f8673733bbfbea3fb96eebe841078d49))
 - *(workflow)* Trying combine `changelog workflow` with `checksums workflow` ([#1800](https://github.com/torrentpier/torrentpier/pull/1800)) - ([60c6057](https://github.com/torrentpier/torrentpier/commit/60c605778412335ce97d41489c3b6ee9c051454b))
+- Automated releases generation ([#1808](https://github.com/torrentpier/torrentpier/pull/1808)) - ([6c9372c](https://github.com/torrentpier/torrentpier/commit/6c9372c407327c9bb443b2ecf16eff64c0245c4b))
 - Automated releases generation ([#1806](https://github.com/torrentpier/torrentpier/pull/1806)) - ([bc74550](https://github.com/torrentpier/torrentpier/commit/bc745502940207f3f24c83057cd680fe69355961))
 - Automated releases generation ([#1805](https://github.com/torrentpier/torrentpier/pull/1805)) - ([425e2e8](https://github.com/torrentpier/torrentpier/commit/425e2e87d5a7f097b961b1a14fbafcdabb9d1666))
 - Minor improvements ([#1796](https://github.com/torrentpier/torrentpier/pull/1796)) - ([8650ad3](https://github.com/torrentpier/torrentpier/commit/8650ad30f429ab14a03f44b26d7be7701f1985f1))
