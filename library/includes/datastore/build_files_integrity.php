@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-if (!$bb_cfg['integrity_check'] || APP_ENV === 'local') {
+if (!$bb_cfg['integrity_check'] || APP_ENV === 'local' || IN_DEMO_MODE) {
     return;
 }
 
@@ -39,10 +39,10 @@ $ignoreFiles = [
     '*/.htaccess',
     'robots.txt',
     // TorrentPier specific
+    '*.md5',
     'install.php',
     'favicon.png',
-    hide_bb_path(CHECKSUMS_FILE),
-    hide_bb_path(BB_ENABLED),
+    'internal_data/triggers/*',
     'library/config.php',
     'library/defines.php',
     'styles/images/logo/logo.png'
