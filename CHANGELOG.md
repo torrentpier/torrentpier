@@ -52,6 +52,7 @@
 
 ### ⚙️ Miscellaneous
 
+- *(changelog workflow)* Some minor improvements ([#1801](https://github.com/torrentpier/torrentpier/pull/1801)) - ([2d53efc](https://github.com/torrentpier/torrentpier/commit/2d53efc945c7747be1755d0b66557a86bdc12cbd))
 - *(checksum workflow)* Fixed incorrect file path ([#1799](https://github.com/torrentpier/torrentpier/pull/1799)) - ([4eb5a9a](https://github.com/torrentpier/torrentpier/commit/4eb5a9adc61c4e116feb09208091efb914275da2))
 - *(cliff)* Changed emoji for dependencies ([#1755](https://github.com/torrentpier/torrentpier/pull/1755)) - ([55d4670](https://github.com/torrentpier/torrentpier/commit/55d467048370b51cd592982c8026702dca8813d5))
 - *(cliff)* Use blockquote for notice ([#1748](https://github.com/torrentpier/torrentpier/pull/1748)) - ([61e5592](https://github.com/torrentpier/torrentpier/commit/61e55925f312417bdb63c88a7c8939c3b2eb2ac5))
