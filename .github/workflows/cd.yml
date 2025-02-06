@@ -1,8 +1,9 @@
 name: Continuous Deployment
 
 on:
-  pull_request:
-    branches: [ "master" ]
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   changelog:
