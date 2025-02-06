@@ -115,7 +115,7 @@ c44fa3877e3b6e0cfe8f55bb0239a848  ./data/uploads/.htaccess
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 ca196b40306c9829c96ba5edc5e80ee4  ./.styleci.yml
-d7fc553d683a0d0feac46784ef829837  ./CHANGELOG.md
+1584ffe9e6b41a27546f622711a2c136  ./CHANGELOG.md
 4ce9df112f1bbc8fe38c78e4daa79d04  ./filelist.php
 7120173a432b0c1be6c75c78b92c2a79  ./search.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
@@ -1126,7 +1126,7 @@ d2493349b99c7bdf2d767514081d4a9f  ./library/ajax/manage_admin.php
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/triggers/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
-fa6ac8bf1b31ea9e5367544c25fee3db  ./internal_data/checksums.md5
+41efc9e6f1ab34383b1fdada70b91474  ./internal_data/checksums.md5
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./sitemap/.keep
