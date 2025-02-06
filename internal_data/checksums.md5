@@ -115,7 +115,7 @@ c44fa3877e3b6e0cfe8f55bb0239a848  ./data/uploads/.htaccess
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 ca196b40306c9829c96ba5edc5e80ee4  ./.styleci.yml
-a4a9d10bc1e4e7074a4e5b3ed408eb99  ./CHANGELOG.md
+380957da3e587383e685cebf65c337ad  ./CHANGELOG.md
 4ce9df112f1bbc8fe38c78e4daa79d04  ./filelist.php
 7120173a432b0c1be6c75c78b92c2a79  ./search.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
@@ -1081,7 +1081,7 @@ edf831b739fcc83f389a52879709ab20  ./library/includes/datastore/build_check_updat
 cd1ff9b5976bc7b911984c09fbd1d0d4  ./library/includes/datastore/build_attach_extensions.php
 a6c2ea4f1483ab02e12fa4b12862dedf  ./library/includes/datastore/build_smilies.php
 09afcda7e40a666d7da47454eb52e958  ./library/includes/datastore/build_censor.php
-f5f9188baf92b7b78842ae4c355fe548  ./library/includes/datastore/build_files_integrity.php
+177bc903e623cc628a9fd5e5be98be81  ./library/includes/datastore/build_files_integrity.php
 4ac9ad40e2a62d7b604e1e02b633f5b9  ./library/includes/bbcode.php
 d82e5177e0191334d34ceb661e476b28  ./library/includes/page_footer.php
 27ba9a916f1dcb22d9ea44cee1ec6ce8  ./library/includes/page_header.php
@@ -1126,7 +1126,7 @@ d2493349b99c7bdf2d767514081d4a9f  ./library/ajax/manage_admin.php
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/triggers/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
-5345b08c9e63ad80b561d1d28c804ac0  ./internal_data/checksums.md5
+b05e0fd1cbea91c399472245464445ea  ./internal_data/checksums.md5
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./sitemap/.keep
