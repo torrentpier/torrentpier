@@ -121,4 +121,4 @@ jobs:
           overwrite: true
           tag: ${{ github.ref }}
           release_name: "TorrentPier v${{ env.RELEASE_VERSION }}"
-          body: "${{ needs.generate-changelog.outputs.release_body }}"
+          body: "${{ needs.changelog.outputs.release_body }}"
