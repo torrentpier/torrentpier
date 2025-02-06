@@ -39,10 +39,10 @@ $ignoreFiles = [
     '*/.htaccess',
     'robots.txt',
     // TorrentPier specific
+    '*.md5',
     'install.php',
     'favicon.png',
-    hide_bb_path(CHECKSUMS_FILE),
-    hide_bb_path(BB_ENABLED),
+    'internal_data/triggers/*',
     'library/config.php',
     'library/defines.php',
     'styles/images/logo/logo.png'
