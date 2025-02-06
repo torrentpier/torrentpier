@@ -7,34 +7,35 @@ on:
 
 jobs:
   nightly:
+    name: Nightly builds 📦
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code 🗳
         uses: actions/checkout@v4
 
-      - name: Setup PHP
+      - name: Setup PHP 🔩
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
 
-      - name: Install Composer dependencies
+      - name: Install Composer dependencies 🪚
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Get commit hash
+      - name: Get commit hash 🔗
         id: get_commit_hash
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
 
-      - name: Create archive
+      - name: Create archive 🗞
         id: create_zip
         run: |
           ZIP_NAME="torrentpier-${{ steps.get_commit_hash.outputs.COMMIT_HASH }}.zip"
           zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
-      - name: Upload Archive
+      - name: Upload Archive 📤
         uses: actions/upload-artifact@v4
         with:
           name: TorrentPier
