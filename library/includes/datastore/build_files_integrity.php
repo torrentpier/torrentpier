@@ -36,6 +36,7 @@ $ignoreFiles = [
     '.gitignore',
     '.editorconfig',
     '.htaccess',
+    '*/.htaccess',
     'robots.txt',
     // TorrentPier specific
     'install.php',
