@@ -36,7 +36,7 @@ jobs:
           git config --local user.email 'roman25052006.kelesh@gmail.com'
           set +e
           git add CHANGELOG.md
-          git commit -m "Update CHANGELOG.md 📖"
+          git commit -m "release(preparing): Update CHANGELOG.md 📖"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
 
   checksums:
@@ -66,6 +66,6 @@ jobs:
           else
             set +e
             git add internal_data/checksums.md5
-            git commit -m "Update checksums.md5 📄"
+            git commit -m "release(preparing): Update checksums.md5 📄"
             git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
           fi
