@@ -20,18 +20,27 @@ if (!$bb_cfg['integrity_check']) {
 $filesList = [];
 $wrongFilesList = [];
 
-$checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
+$checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r+');
 $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
 $ignoreFiles = [
-    '.env.example',
+    '.git/*',
+    '.github/*',
+    '*.md',
+    '*.yml',
+    '*.toml',
+    '*.json',
+    '*.lock',
+    '.env*',
+    'vendor',
+    '.gitignore',
+    '.editorconfig',
     '.htaccess',
-    'CHANGELOG.md',
+    '*/.htaccess',
     'robots.txt',
+    // TorrentPier specific
     'install.php',
     'favicon.png',
-    'composer.json',
-    'composer.lock',
     hide_bb_path(CHECKSUMS_FILE),
     hide_bb_path(BB_ENABLED),
     'library/config.php',
@@ -41,21 +50,29 @@ $ignoreFiles = [
 
 foreach ($checksumFile as $line) {
     $parts = explode('  ', $line);
-    [$hash, $path] = $parts;
-
-    if (!isset($hash) || !isset($path)) {
+    if (!isset($parts[0]) || !isset($parts[1])) {
         // Skip end line
         break;
     }
 
-    if (!empty($ignoreFiles) && in_array($path, $ignoreFiles)) {
-        // Skip files from "Ignoring list"
-        continue;
+    // Skip files from "Ignoring list"
+    if (!empty($ignoreFiles)) {
+        $skip = false;
+        foreach ($ignoreFiles as $pattern) {
+            $pattern = trim($pattern);
+            if (fnmatch($pattern, $parts[1])) {
+                $skip = true;
+                break;
+            }
+        }
+        if ($skip) {
+            continue;
+        }
     }
 
     $filesList[] = [
-        'path' => trim($path),
-        'hash' => trim($hash)
+        'path' => trim($parts[1]),
+        'hash' => trim($parts[0])
     ];
 }
 
