@@ -75,6 +75,7 @@ jobs:
     name: Create release
     needs:
       - checksums
+      - changelog
     runs-on: ubuntu-latest
 
     steps:
@@ -95,7 +96,7 @@ jobs:
       - name: Create archive
         id: create_zip
         run: |
-          ZIP_NAME="torrentpier-${{ env.RELEASE_VERSION }}.zip"
+          ZIP_NAME="torrentpier-v${{ env.RELEASE_VERSION }}.zip"
           zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
