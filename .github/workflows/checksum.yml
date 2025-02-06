@@ -22,7 +22,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          if git diff --quiet checksums.md5; then
+          if git diff --quiet internal_data/checksums.md5; then
             echo "No changes in checksums.md5"
           else
             git add checksums.md5
