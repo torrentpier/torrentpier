@@ -84,13 +84,27 @@ jobs:
         shell: bash
         run: echo "RELEASE_VERSION=${GITHUB_REF:11}" >> $GITHUB_ENV
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Create archive
+        id: create_zip
+        run: |
+          ZIP_NAME="torrentpier-${{ env.RELEASE_VERSION }}.zip"
+          zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
+          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
+
       - name: Publish to GitHub
         if: ${{ !contains(github.ref, '-') }}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: torrentpier-${{ env.RELEASE_VERSION }}*
-          asset_name: mything
+          file: ${{ steps.create_zip.outputs.ZIP_NAME }}
           file_glob: true
           overwrite: true
           tag: ${{ github.ref }}
@@ -102,8 +116,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: torrentpier-${{ env.RELEASE_VERSION }}*
-          asset_name: mything
+          file: ${{ steps.create_zip.outputs.ZIP_NAME }}
           file_glob: true
           overwrite: true
           tag: ${{ github.ref }}
