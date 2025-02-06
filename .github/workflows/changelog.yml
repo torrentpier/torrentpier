@@ -43,8 +43,7 @@ jobs:
             echo "No changes in checksums.md5"
           else
             git add internal_data/checksums.md5
-            git commit -m "Update checksums.md5 📄"
           fi
           git add CHANGELOG.md
-          git commit -m "Update CHANGELOG.md 📖"
+          git commit -m "Update CHANGELOG.md & checksums.md5"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
