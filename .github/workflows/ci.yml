@@ -32,8 +32,8 @@ jobs:
       - name: Commit changelog
         run: |
           git checkout master
-          git config user.name 'belomaxorka'
-          git config user.email 'roman25052006.kelesh@gmail.com'
+          git config --local user.name 'belomaxorka'
+          git config --local user.email 'roman25052006.kelesh@gmail.com'
           set +e
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
@@ -57,13 +57,15 @@ jobs:
 
       - name: Commit and push checksums.md5 if changed
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git checkout master
+          git config --local user.name 'belomaxorka'
+          git config --local user.email 'roman25052006.kelesh@gmail.com'
 
           if git diff --quiet internal_data/checksums.md5; then
             echo "No changes in internal_data/checksums.md5"
           else
+            set +e
             git add internal_data/checksums.md5
-            git commit -m "Update checksums.md5"
-            git push
+            git commit -m "Update checksums.md5 📄"
+            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
           fi
