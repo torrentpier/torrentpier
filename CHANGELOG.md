@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
+## [v2.4.5-rc.3](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.2..v2.4.5-rc.3) (2025-02-06)
 
 ### 🚀 Features
 
@@ -63,6 +63,7 @@
 - *(database)* Use `DEFAULT ''` for `privmsgs_subject` ([#1786](https://github.com/torrentpier/torrentpier/pull/1786)) - ([387a258](https://github.com/torrentpier/torrentpier/commit/387a25870abd37b641b55ffd98e13f4aaecb73b1))
 - *(deploy action)* Specify some missing params ([#1789](https://github.com/torrentpier/torrentpier/pull/1789)) - ([6115900](https://github.com/torrentpier/torrentpier/commit/6115900b765752209a6ed1dfb83e4f0cbee2ae77))
 - *(emailer)* Use constants for email types ([#1794](https://github.com/torrentpier/torrentpier/pull/1794)) - ([c95d414](https://github.com/torrentpier/torrentpier/commit/c95d414ef63ca37118f1f660880cd58b4480c414))
+- *(integrity checker)* Disabled by default in `Demo mode` ([#1804](https://github.com/torrentpier/torrentpier/pull/1804)) - ([44be40c](https://github.com/torrentpier/torrentpier/commit/44be40c2e849c60eb4f10ca7e0bae0463791355e))
 - *(integrity checker)* Some enhancements ([#1797](https://github.com/torrentpier/torrentpier/pull/1797)) - ([09cafc2](https://github.com/torrentpier/torrentpier/commit/09cafc2285dd171cb2213ece9549993a3321527c))
 - *(issue template)* Improved `Feature request` template ([#1774](https://github.com/torrentpier/torrentpier/pull/1774)) - ([268f79d](https://github.com/torrentpier/torrentpier/commit/268f79d7259de67aa8877fcf7130ff0069469ab2))
 - *(issue template)* Improved `Bug report` template ([#1773](https://github.com/torrentpier/torrentpier/pull/1773)) - ([53ebfef](https://github.com/torrentpier/torrentpier/commit/53ebfef32c0e9016257e03b96ef96349e22d3e9b))
