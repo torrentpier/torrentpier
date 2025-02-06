@@ -6,7 +6,7 @@ d3174ed5489a93b31b6a3453722b13fb  ./SECURITY.md
 62745e850958bfd8a1fd77f90e74184b  ./install/.htaccess
 b25156919f61a6e0757690630fc12dc0  ./crowdin.yml
 6a2bf79bd0d8d21a3aecedd2b01ca1f0  ./CODE_OF_CONDUCT.md
-3e9b059b9d0f01f505e43922dd0283c2  ./cliff.toml
+ecc7982840de2a9101bf0e51dbe1d6fa  ./cliff.toml
 df160c3a0376d314c17d1e9884dcf613  ./ajax.php
 3faa4cbf0ccddbdf472926dfa5264aaf  ./admin/pagestart.php
 fc5cb9e4be0f2ab7fbd469426b695da3  ./admin/admin_sitemap.php
@@ -115,7 +115,7 @@ c44fa3877e3b6e0cfe8f55bb0239a848  ./data/uploads/.htaccess
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 ca196b40306c9829c96ba5edc5e80ee4  ./.styleci.yml
-186109dcd3abcacd5ac9a5bde1a75094  ./CHANGELOG.md
+f8bb453f7dea062aa66f07b761d47443  ./CHANGELOG.md
 4ce9df112f1bbc8fe38c78e4daa79d04  ./filelist.php
 7120173a432b0c1be6c75c78b92c2a79  ./search.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
@@ -1126,14 +1126,14 @@ d2493349b99c7bdf2d767514081d4a9f  ./library/ajax/manage_admin.php
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/triggers/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
-8dca75b7f691e3f80734cfc50f064155  ./internal_data/checksums.md5
+630c7d773aa6d3a62d597938fbdddb97  ./internal_data/checksums.md5
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./sitemap/.keep
 f6d33493f4feb8ea3de0d3e486640619  ./profile.php
 ae077429f1e67ab6789bee88dd62ed6a  ./.github/FUNDING.yml
 91e17d063458537c21a84a0cf51c7e5d  ./.github/workflows/ci.yml
-e706ed2c419224d2e0bb085c7faf8842  ./.github/workflows/cd.yml
+f34e7d803ba1209777747bca608864b4  ./.github/workflows/cd.yml
 9400c868cb922e93048fe1fc31565b10  ./.github/workflows/phpmd.yml
 1fabb95a8a4be13d081e60bde06e06e6  ./.github/dependabot.yml
 a5f508e6baa0ca5e63583964352a3366  ./.github/ISSUE_TEMPLATE/feature---enhancement-request.md
