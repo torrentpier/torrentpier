@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-if (!$bb_cfg['integrity_check'] || APP_ENV === 'local') {
+if (!$bb_cfg['integrity_check'] || APP_ENV === 'local' || IN_DEMO_MODE) {
     return;
 }
 
