@@ -1,4 +1,4 @@
-name: Changelog generation
+name: Changelog & checksums.md5 generation
 
 on:
   push:
