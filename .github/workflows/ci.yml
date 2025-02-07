@@ -8,7 +8,7 @@ on:
 jobs:
   nightly:
     name: Nightly builds 📦
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout code 🗳
@@ -29,7 +29,7 @@ jobs:
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
 
       - name: Create archive 🗞
-        id: create_zip
+        id: create-zip
         run: |
           ZIP_NAME="torrentpier-${{ steps.get_commit_hash.outputs.COMMIT_HASH }}.zip"
           zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
@@ -39,11 +39,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: TorrentPier
-          path: ${{ steps.create_zip.outputs.ZIP_NAME }}
+          path: ${{ steps.create-zip.outputs.ZIP_NAME }}
 
   deploy:
     name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
