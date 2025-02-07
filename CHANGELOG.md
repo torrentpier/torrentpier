@@ -4,6 +4,11 @@
 
 > [!NOTE]
 > To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
+## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
+
+### ⚙️ Miscellaneous
+
+- *(workflow)* Some improvements ([#1810](https://github.com/torrentpier/torrentpier/pull/1810)) - ([c168c39](https://github.com/torrentpier/torrentpier/commit/c168c3956cf77886c14133ac10ec33aa0ae5bc4e))
 ## [v2.4.5-rc.3](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.2..v2.4.5-rc.3) (2025-02-06)
 
 ### 🚀 Features
