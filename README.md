@@ -20,18 +20,18 @@
 
 ## 🐂 About TorrentPier
 
-TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in php. High speed, simple modification, high load 
-architecture. In addition, we have very helpful 
-[official support forum](https://torrentpier.com), where it's possible to get any support and download modifications for engine.
+TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced 
+architecture. In addition, we have a very helpful 
+[official support forum](https://torrentpier.com), where it's possible to get support and download modifications for the engine.
 
 ## 🌈 Current status
 
-TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite existing to 
-modern standards. If you want to go deep on the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) 
-and go from there. The documentation will be translated into english in the near future, currently russian is the main language of it.
+TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to 
+modern specifications. If you want delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) 
+and go from there. The documentation will be translated to english in the near future, currently russian is the main language of it.
 
 ## ✨ Features
-* Rich forum browsing/moderation tools
+* Rich forum with browsing/moderation tools
 * High-load capable, heavily configurable announcer
 * Scrape support
 * FreeLeech
@@ -39,11 +39,11 @@ and go from there. The documentation will be translated into english in the near
 * BitTorrent v2 support
 * Event-based invite system
 * Bonus points
-* Polls system
-* PM system
-* Multilingual support (Fully supported for now only Russia and English languages)
-* Atom feeds
-* ... and MUCH MORE!
+* Polling system
+* PM/DM system
+* Multilingual support (Russian and English is currently fully supported, with others in the future)
+* Atom/RSS feeds
+* ... and so MUCH MORE!
 
 ## 🖥️ Demo
 
@@ -52,7 +52,7 @@ and go from there. The documentation will be translated into english in the near
 * Password: `admin`
 
 > [!NOTE]
-> Demo is resetting every 24 hours!
+> Demo resets every 24 hours!
 
 ## 🔧 Requirements
 
@@ -64,26 +64,26 @@ and go from there. The documentation will be translated into english in the near
 
 ## 💾 Installation
 
-For installation, select one of installation variants below.
+For the installation, select one of the installation variants below:
 
 ### Quick (Clean install) 🚀
 
 Check out our [autoinstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
 
 > [!IMPORTANT]
-> Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) for installation script ❤️
+> Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) for this installation script ❤️
 
 ### Quick (For web-panels) ☕️
 
-1. Select the folder where you want to install TorrentPier
+1. Select the folder where you want TorrentPier installed
    ```shell
    cd /path/to/public_html
    ```
-2. Download latest version of TorrentPier
+2. Download the latest version of TorrentPier
    ```shell
    sudo git clone https://github.com/torrentpier/torrentpier.git .
    ```
-3. After, run command below and follow the given steps
+3. After completing, execute the command below and follow the instructions
    ```shell
    php install.php
    ```
@@ -92,16 +92,16 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 ### Manual 🔩
 
 1. Install [Composer](https://getcomposer.org/)
-2. Run command below to create TorrentPier project
+2. Run the following command to create the TorrentPier project
    ```shell
    composer create-project torrentpier/torrentpier
    ```
 3. [Check our system requirements](#-requirements)
-4. After, run command below on the project directory, to install Composer dependencies
+4. After, run this command in the project directory to install Composer dependencies
    ```shell
    composer install
    ```
-5. Create database and import dump located at `install/sql/mysql.sql`
+5. Create a database and import the dump located at `install/sql/mysql.sql`
 6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
 7. Provide write permissions to the specified folders:
    * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
@@ -110,14 +110,14 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 8. Voila! ✨
 
 > [!IMPORTANT]
-> The specific settings depend on the server you are using, but in general case we recommend chmod **0755** for folders, and chmod **0644** for files in them.
+> The specific settings depend on the server you are using, but in general we recommend chmod **0755** for folders, and chmod **0644** for the files in them.
 
 ### Additional steps 👣
 
-1. Edit this files:
-   * `favicon.png` (change on your own)
-   * `robots.txt` (change the addresses in lines `Host` and `Sitemap` on your own)
-2. Log in to the forum with **admin/admin** login/password and finish setting up via admin panel
+1. Edit these files:
+   * `favicon.png` (change to your own)
+   * `robots.txt` (change the addresses in lines `Host` and `Sitemap` to your own)
+2. Log in to the forum using the **admin/admin** login/password, and finish setting up via admin panel. Don't forget to change your password!
 
 ## 🔐 Security vulnerabilities
 
@@ -125,8 +125,8 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 📌 Our recommendations
 
-* *The recommended way to run `cron.php`.* - For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon.
-* *Local configuration copy.* - You can override the settings using local configuration file `library/config.local.php`.
+* *It's recommended to run `cron.php`.* - For significant tracker speed increase it ay be required to replace the built-in cron.php in operating system daemon.
+* *Local configuration copy.* - You can override the settings using the local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors
 
