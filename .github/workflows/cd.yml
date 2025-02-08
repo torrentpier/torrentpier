@@ -61,7 +61,7 @@ jobs:
           file: ${{ steps.create-zip.outputs.ZIP_NAME }}
           overwrite: true
           tag: ${{ github.ref }}
-          release_name: "TorrentPier v${{ env.RELEASE_VERSION }}"
+          release_name: "v${{ env.RELEASE_VERSION }}"
           body: "${{ needs.generate-changelog.outputs.release_body }}"
 
       - name: Publish to GitHub (pre-release)
@@ -72,6 +72,6 @@ jobs:
           file: ${{ steps.create-zip.outputs.ZIP_NAME }}
           overwrite: true
           tag: ${{ github.ref }}
-          release_name: "TorrentPier v${{ env.RELEASE_VERSION }}"
+          release_name: "v${{ env.RELEASE_VERSION }}"
           body: "${{ needs.generate-changelog.outputs.release_body }}"
           prerelease: true
