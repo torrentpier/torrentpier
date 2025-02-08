@@ -8,8 +8,13 @@
 
 ### ⚙️ Miscellaneous
 
+- *(README)* Fixed all grammatical errors, sentence structure and readibility ([#1812](https://github.com/torrentpier/torrentpier/pull/1812)) - ([bea3b0b](https://github.com/torrentpier/torrentpier/commit/bea3b0bccf335970ea5826543d8fa223329ef077))
+- *(workflow)* Some improvements ([#1811](https://github.com/torrentpier/torrentpier/pull/1811)) - ([3a9dd6a](https://github.com/torrentpier/torrentpier/commit/3a9dd6a3c931cfbd682257c283a3296c4914548f))
 - *(workflow)* Some improvements ([#1810](https://github.com/torrentpier/torrentpier/pull/1810)) - ([c168c39](https://github.com/torrentpier/torrentpier/commit/c168c3956cf77886c14133ac10ec33aa0ae5bc4e))
-## [v2.4.5-rc.3](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.2..v2.4.5-rc.3) (2025-02-06)
+
+## New Contributors ❤️
+
+* [@xeddmc](https://github.com/xeddmc) made their first contribution in [#1812](https://github.com/torrentpier/torrentpier/pull/1812)## [v2.4.5-rc.3](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.2..v2.4.5-rc.3) (2025-02-06)
 
 ### 🚀 Features
 
