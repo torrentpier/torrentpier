@@ -62,7 +62,7 @@ b94ffbf36d0196a01a67e19a852507f3  ./src/Helpers/CronHelper.php
 d78428df116c848031737d84eb75f13a  ./install.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
 1dc6b791081771341e5e3bcaf8145c7a  ./group.php
-b3e24b7b44fbfa55aa1b92f279f0ab03  ./CHANGELOG.md
+dbf675b9b63d0bf2280aa889493bb4e6  ./CHANGELOG.md
 8b671316118d2a9bf7d7856185859cdd  ./modcp.php
 b83005fe9810f51701a9ee6a0daaf9de  ./.env.example
 3458b3a2d940cba1259927a29c6b29f0  ./memberlist.php
@@ -1449,7 +1449,7 @@ d41d8cd98f00b204e9800998ecf8427e  ./sitemap/.keep
 5e67fcd0f5ec162c08de32ad5b5deff1  ./posting.php
 ca196b40306c9829c96ba5edc5e80ee4  ./.styleci.yml
 d3174ed5489a93b31b6a3453722b13fb  ./SECURITY.md
-ecc7982840de2a9101bf0e51dbe1d6fa  ./cliff.toml
+c900fefe4d2d894be0a1125edda461d6  ./cliff.toml
 5b6cbcdfa2dc473634fc6c0b3329f4f8  ./HISTORY.md
 841804fee228e55e092e61cb3863ab5b  ./CONTRIBUTING.md
 67300141dd503e372a98c117c36acbad  ./poll.php
@@ -2455,7 +2455,7 @@ f7b962d701cc22442b9fffb872da379a  ./library/ajax/callseed.php
 e2a53458f0178aab33baa7544941942d  ./library/ajax/view_torrent.php
 57c667255e8254fefc8e6d894a648976  ./library/ajax/user_register.php
 b1db56a0374d273d8f2dfe753bc82453  ./library/ajax/change_user_rank.php
-4a45b805ae657789d160a4710a24baa0  ./.github/workflows/schedule.yml
+9d3cb0de7fbfcc23f85c7f203f6a7297  ./.github/workflows/schedule.yml
 fec8507f296ccd5171543737ad9c5e6a  ./.github/workflows/cd.yml
 3b5524ca1c454800fc59ff9138fb850c  ./.github/workflows/ci.yml
 9400c868cb922e93048fe1fc31565b10  ./.github/workflows/phpmd.yml
@@ -2513,7 +2513,7 @@ d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
-b16cb226e9e70288b3b8c7554f6edaa8  ./internal_data/checksums.md5
+a0ed359f5829a21529c5153f898c4d47  ./internal_data/checksums.md5
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 d41d8cd98f00b204e9800998ecf8427e  ./data/uploads/thumbs/.keep
