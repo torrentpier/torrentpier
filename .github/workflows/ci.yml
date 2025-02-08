@@ -23,7 +23,7 @@ jobs:
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Get commit hash 🔗
-        id: get_commit_hash
+        id: get-commit-hash
         run: |
           COMMIT_HASH=$(git rev-parse --short HEAD)
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
@@ -31,7 +31,7 @@ jobs:
       - name: Create archive 🗞
         id: create-zip
         run: |
-          ZIP_NAME="torrentpier-${{ steps.get_commit_hash.outputs.COMMIT_HASH }}.zip"
+          ZIP_NAME="torrentpier-${{ steps.get-commit-hash.outputs.COMMIT_HASH }}.zip"
           zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
