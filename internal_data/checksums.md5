@@ -62,7 +62,7 @@ b94ffbf36d0196a01a67e19a852507f3  ./src/Helpers/CronHelper.php
 d78428df116c848031737d84eb75f13a  ./install.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
 1dc6b791081771341e5e3bcaf8145c7a  ./group.php
-880f8c0215e1bf2a12464f5b677b8782  ./CHANGELOG.md
+c86df5983479c8b5305a49f38bfb4116  ./CHANGELOG.md
 8b671316118d2a9bf7d7856185859cdd  ./modcp.php
 b83005fe9810f51701a9ee6a0daaf9de  ./.env.example
 3458b3a2d940cba1259927a29c6b29f0  ./memberlist.php
@@ -2456,8 +2456,8 @@ e2a53458f0178aab33baa7544941942d  ./library/ajax/view_torrent.php
 57c667255e8254fefc8e6d894a648976  ./library/ajax/user_register.php
 b1db56a0374d273d8f2dfe753bc82453  ./library/ajax/change_user_rank.php
 9d3cb0de7fbfcc23f85c7f203f6a7297  ./.github/workflows/schedule.yml
-fec8507f296ccd5171543737ad9c5e6a  ./.github/workflows/cd.yml
-3b5524ca1c454800fc59ff9138fb850c  ./.github/workflows/ci.yml
+7e7cdb3a31ac6f8f5f1c4f1005f1d8ff  ./.github/workflows/cd.yml
+332457d0218110dbe8b1b5a65a18aa73  ./.github/workflows/ci.yml
 9400c868cb922e93048fe1fc31565b10  ./.github/workflows/phpmd.yml
 23fad280bfae9bb5a374313580f8ba0e  ./.github/ISSUE_TEMPLATE/bug_report.yml
 a5f508e6baa0ca5e63583964352a3366  ./.github/ISSUE_TEMPLATE/feature---enhancement-request.md
@@ -2513,12 +2513,12 @@ d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
-5359eef9c920e74017d16f483ac544bf  ./internal_data/checksums.md5
+70cdc9468def4accb41ca5efb5b4b040  ./internal_data/checksums.md5
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 d41d8cd98f00b204e9800998ecf8427e  ./data/uploads/thumbs/.keep
 c44fa3877e3b6e0cfe8f55bb0239a848  ./data/uploads/.htaccess
-b4b3cc38c0916cbf5891784b4d018a7b  ./cliff-releases.toml
+9a7567ee7e1d181fde1fbbfcc60a20c1  ./cliff-releases.toml
 4ce9df112f1bbc8fe38c78e4daa79d04  ./filelist.php
 7120173a432b0c1be6c75c78b92c2a79  ./search.php
 59f2827e23315dd0de638631a7c64f15  ./viewforum.php
