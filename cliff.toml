@@ -12,7 +12,6 @@ repo = "torrentpier"
 [changelog]
 # template for the changelog header
 header = """
-[![TorrentPier](https://raw.githubusercontent.com/torrentpier/.github/refs/heads/main/versions/Cattle.png)](https://github.com/torrentpier)\n
 # 📖 Change Log\n
 > [!NOTE]
 > To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
