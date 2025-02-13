@@ -62,7 +62,7 @@ b94ffbf36d0196a01a67e19a852507f3  ./src/Helpers/CronHelper.php
 d78428df116c848031737d84eb75f13a  ./install.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
 1dc6b791081771341e5e3bcaf8145c7a  ./group.php
-2fdc1e20c8c60c0f3a9c1c7c8f2c7c3f  ./CHANGELOG.md
+67508e5d5132120d0de669cce2e14a6f  ./CHANGELOG.md
 8b671316118d2a9bf7d7856185859cdd  ./modcp.php
 b83005fe9810f51701a9ee6a0daaf9de  ./.env.example
 3458b3a2d940cba1259927a29c6b29f0  ./memberlist.php
@@ -1446,7 +1446,7 @@ df160c3a0376d314c17d1e9884dcf613  ./ajax.php
 b25156919f61a6e0757690630fc12dc0  ./crowdin.yml
 d41d8cd98f00b204e9800998ecf8427e  ./sitemap/.keep
 96eb4df3fd2f10ae9211a7a541e5e180  ./privmsg.php
-5e67fcd0f5ec162c08de32ad5b5deff1  ./posting.php
+0f809d6461ed42c745403020584c1c63  ./posting.php
 ca196b40306c9829c96ba5edc5e80ee4  ./.styleci.yml
 d3174ed5489a93b31b6a3453722b13fb  ./SECURITY.md
 4086e4ceb5345232f35fad83e3df1c9e  ./cliff.toml
@@ -2513,7 +2513,7 @@ d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
-aef77f133f1876150aabcf817a3158c8  ./internal_data/checksums.md5
+e1cbb8b5f490ab112457ec988910484c  ./internal_data/checksums.md5
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 d41d8cd98f00b204e9800998ecf8427e  ./data/uploads/thumbs/.keep
