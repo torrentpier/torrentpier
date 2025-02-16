@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -2044,56 +2044,50 @@ function hash_search($hash)
 }
 
 /**
- * Функция для получения и проверки правильности ответа от Google ReCaptcha.
+ * Function for checking captcha answer
  *
- * @param $mode
- * @param string $callback
- *
+ * @param string $mode
  * @return bool|string
  */
-function bb_captcha($mode, $callback = '')
+function bb_captcha(string $mode): bool|string
 {
     global $bb_cfg, $lang;
 
-    $secret = $bb_cfg['captcha']['secret_key'];
-    $public = $bb_cfg['captcha']['public_key'];
-    $cp_theme = $bb_cfg['captcha']['theme'] ?? 'light';
+    $settings = $bb_cfg['captcha'];
+    $settings['language'] = $bb_cfg['default_lang'];
 
-    if (!$bb_cfg['captcha']['disabled'] && (!$public || !$secret)) {
-        bb_die($lang['CAPTCHA_SETTINGS']);
+    // Checking captcha settings
+    if (!$settings['disabled']) {
+        if (empty($settings['public_key']) || empty($settings['secret_key'])) {
+            bb_die($lang['CAPTCHA_SETTINGS']);
+        }
     }
 
-    $reCaptcha = new \ReCaptcha\ReCaptcha($secret);
-
-    switch ($mode) {
-        case 'get':
-            return "
-				<script type=\"text/javascript\">
-					var onloadCallback = function() {
-						grecaptcha.render('tp-captcha', {
-							'sitekey'  : '" . $public . "',
-							'theme'    : '" . $cp_theme . "',
-							'callback' : '" . $callback . "'
-						});
-					};
-				</script>
-				<div id=\"tp-captcha\"></div>
-				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit\" async defer></script>";
-            break;
-
-        case 'check':
-            $resp = $reCaptcha->verify(
-                request_var('g-recaptcha-response', ''),
-                $_SERVER["REMOTE_ADDR"]
-            );
-            if ($resp->isSuccess()) {
-                return true;
-            }
-            break;
-
-        default:
-            bb_simple_die(__FUNCTION__ . ": invalid mode '$mode'");
+    // Selecting captcha service
+    $captchaClasses = [
+        'googleV2' => \TorrentPier\Captcha\GoogleCaptchaV2::class,
+        'googleV3' => \TorrentPier\Captcha\GoogleCaptchaV3::class,
+        'hCaptcha' => \TorrentPier\Captcha\HCaptcha::class,
+        'yandex' => \TorrentPier\Captcha\YandexSmartCaptcha::class,
+        'cloudflare' => \TorrentPier\Captcha\CloudflareTurnstileCaptcha::class,
+    ];
+    if (!isset($captchaClasses[$settings['service']])) {
+        bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));
     }
+    $captchaClass = $captchaClasses[$settings['service']];
+    $captcha = new $captchaClass($settings);
+
+    // Selection mode
+    if (isset($captcha)) {
+        switch ($mode) {
+            case 'get':
+            case 'check':
+                return $captcha->$mode();
+            default:
+                bb_die(sprintf('Invalid mode: %s', $mode));
+        }
+    }
+
     return false;
 }
 

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,26 +13,36 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-if (!$bb_cfg['integrity_check']) {
+if (!$bb_cfg['integrity_check'] || APP_ENV === 'local' || IN_DEMO_MODE) {
     return;
 }
 
 $filesList = [];
 $wrongFilesList = [];
 
-$checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r');
+$checksumFile = new SplFileObject(CHECKSUMS_FILE, 'r+');
 $checksumFile->setFlags(SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
 
 $ignoreFiles = [
-    '.env.example',
+    '.git/*',
+    '.github/*',
+    '*.md',
+    '*.yml',
+    '*.toml',
+    '*.json',
+    '*.lock',
+    '.env*',
+    'vendor',
+    '.gitignore',
+    '.editorconfig',
     '.htaccess',
+    '*/.htaccess',
     'robots.txt',
+    // TorrentPier specific
+    '*.md5',
     'install.php',
     'favicon.png',
-    'composer.json',
-    'composer.lock',
-    hide_bb_path(CHECKSUMS_FILE),
-    hide_bb_path(BB_ENABLED),
+    'internal_data/triggers/*',
     'library/config.php',
     'library/defines.php',
     'styles/images/logo/logo.png'
@@ -44,10 +54,22 @@ foreach ($checksumFile as $line) {
         // Skip end line
         break;
     }
-    if (!empty($ignoreFiles) && in_array($parts[1], $ignoreFiles)) {
-        // Skip files from "Ignoring list"
-        continue;
+
+    // Skip files from "Ignoring list"
+    if (!empty($ignoreFiles)) {
+        $skip = false;
+        foreach ($ignoreFiles as $pattern) {
+            $pattern = trim($pattern);
+            if (fnmatch($pattern, $parts[1])) {
+                $skip = true;
+                break;
+            }
+        }
+        if ($skip) {
+            continue;
+        }
     }
+
     $filesList[] = [
         'path' => trim($parts[1]),
         'hash' => trim($parts[0])

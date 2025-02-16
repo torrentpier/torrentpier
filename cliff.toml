@@ -14,7 +14,7 @@ repo = "torrentpier"
 header = """
 # 📖 Change Log\n
 > [!NOTE]
-> To view changelog from v2.0.0 to v2.4.5-rc.2 navigate to [HISTORY.md](HISTORY.md).
+> To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
 """
 # template for the changelog body
 # https://keats.github.io/tera/docs/#introduction
@@ -63,12 +63,14 @@ body = """
   ## New Contributors ❤️
 {% endif %}\
 {% for contributor in github.contributors | filter(attribute="is_first_time", value=true) %}
-  * [@{{ contributor.username }}](https://github.com/{{ contributor.username }}) made their first contribution
+  * @{{ contributor.username }} made their first contribution
     {%- if contributor.pr_number %} in \
       [#{{ contributor.pr_number }}]({{ self::remote_url() }}/pull/{{ contributor.pr_number }}) \
     {%- endif %}
 {%- endfor -%}
 {%- endif %}
+
+
 """
 # template for the changelog footer
 footer = """
@@ -110,7 +112,7 @@ commit_parsers = [
   { body = ".*security", group = "<!-- 8 -->🛡️ Security" },
   { message = "^revert", group = "<!-- 9 -->◀️ Revert" },
   { message = "^crowdin", group = "<!-- 10 -->🈳 New translations" }, # crowdin pulls supporting
-  { message = "^Composer", group = "<!-- 11 -->📚 Updated dependencies" }, # dependabot pulls supporting
+  { message = "^Composer", group = "<!-- 11 -->📦 Dependencies" }, # dependabot pulls supporting
   { message = "^rem|^drop|^removed", group = "<!-- 12 -->🗑️ Removed" },
   { message = ".*", group = "<!-- 13 -->💼 Other" },
 ]

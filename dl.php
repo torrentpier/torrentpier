@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -161,7 +161,7 @@ if (!$authorised) {
 $datastore->rm('cat_forums');
 
 // Check tor status
-if (!IS_AM && str_contains($attachment['mimetype'], 'bittorrent')) {
+if (!IS_AM && ($attachment['mimetype'] === TORRENT_MIMETYPE)) {
     $sql = 'SELECT tor_status, poster_id FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
 
     if (!($result = DB()->sql_query($sql))) {

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -79,7 +79,7 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 $tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
 $download_link = DL_URL . $attach_id;
-$description = ($comment) ?: preg_replace("#.torrent$#i", '', $display_name);
+$description = ($comment) ?: preg_replace("#" . "." . TORRENT_EXT . "$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
     $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
@@ -88,7 +88,11 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-$display_name = $t_data['topic_title'] . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
+if ($bb_cfg['tracker']['use_old_torrent_name_format']) {
+    $display_name = '[' . $bb_cfg['server_name'] . '].t' . $bt_topic_id . '.' . TORRENT_EXT;
+} else {
+    $display_name = $t_data['topic_title'] . ' [' . $bb_cfg['server_name'] . '-' . $bt_topic_id . ']' . '.' . TORRENT_EXT;
+}
 
 if (!$tor_reged) {
     $template->assign_block_vars('postrow.attach.tor_not_reged', [
@@ -456,7 +460,7 @@ if ($tor_reged && $tor_info) {
                         'ROW_BGR' => $row_bgr,
                         'NAME' => ($peer['update_time']) ? $name : "<s>$name</s>",
                         'PEER_ID' => isset($peer['peer_id']) ? get_user_torrent_client($peer['peer_id']) : $lang['UNKNOWN'],
-                        'COUNTRY' => render_flag(infoByIP($ip, $port)['countryCode'], false),
+                        'COUNTRY' => render_flag(infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])['countryCode'], false),
                         'COMPL_PRC' => $compl_perc,
                         'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>$up_tot</b>" : $up_tot,
                         'DOWN_TOTAL' => ($max_down_id[$x] == $pid) ? "<b>$down_tot</b>" : $down_tot,

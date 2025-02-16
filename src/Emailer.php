@@ -2,12 +2,14 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier;
+
+use Exception;
 
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
@@ -119,6 +121,7 @@ class Emailer
      * @param string $email_format
      *
      * @return bool
+     * @throws Exception
      */
     public function send(string $email_format = 'text/plain'): bool
     {
@@ -176,10 +179,15 @@ class Emailer
         $message->getHeaders()
             ->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
 
-        if ($email_format == 'text/html') {
-            $message->html($this->message);
-        } else {
-            $message->text($this->message);
+        switch ($email_format) {
+            case EMAIL_TYPE_HTML:
+                $message->html($this->message);
+                break;
+            case EMAIL_TYPE_TEXT:
+                $message->text($this->message);
+                break;
+            default:
+                throw new Exception('Unknown email format: ' . $email_format);
         }
 
         /** Send message */

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -644,7 +644,11 @@ class Torrent
         // Send torrent
         $output = Bencode::encode($tor);
 
-        $dl_fname = html_ent_decode($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+        if ($bb_cfg['tracker']['use_old_torrent_name_format']) {
+            $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.' . TORRENT_EXT;
+        } else {
+            $dl_fname = html_ent_decode($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+        }
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -29,7 +29,8 @@ define('CHECK_REQUIREMENTS', [
         'intl',
         'xml',
         'xmlwriter',
-        'zip'
+        'zip',
+        'gd'
     ],
 ]);
 
@@ -167,12 +168,18 @@ if (!version_compare(PHP_VERSION, CHECK_REQUIREMENTS['php_min_version'], '>=')) 
 foreach (CHECK_REQUIREMENTS['ext_list'] as $ext) {
     if (!extension_loaded($ext)) {
         out("- ext-$ext not installed. Check out php.ini file", 'error');
-        exit;
+        if (!defined('EXTENSIONS_NOT_INSTALLED')) {
+            define('EXTENSIONS_NOT_INSTALLED', true);
+        }
     } else {
         out("- ext-$ext installed!");
     }
 }
-out("- All extensions are installed!\n", 'success');
+if (!defined('EXTENSIONS_NOT_INSTALLED')) {
+    out("- All extensions are installed!\n", 'success');
+} else {
+    exit;
+}
 
 // Check if already installed
 if (is_file(BB_ROOT . '.env')) {
@@ -209,6 +216,7 @@ if (is_file(BB_ROOT . '.env')) {
             }
         }
         out("- Re-install process completed!\n", 'success');
+        out('- Starting installation...', 'info');
     } else {
         exit;
     }
@@ -250,7 +258,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
-        out("- Completed! Composer dependencies are installed!\n", 'success');
+        define('COMPOSER_COMPLETED', true);
     } else {
         out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');
         exit;
@@ -258,6 +266,15 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
 } else {
     out('- Composer dependencies are present!', 'success');
     out("- Note: Remove 'vendor' folder if you want to re-install dependencies\n");
+}
+
+// Check composer dependencies
+if (defined('COMPOSER_COMPLETED')) {
+    if (is_file(BB_ROOT . 'vendor/autoload.php')) {
+        out("- Completed! Composer dependencies are installed!\n", 'success');
+    } else {
+        exit;
+    }
 }
 
 // Preparing ENV
@@ -384,12 +401,22 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
-    out("- Voila! Good luck & have fun!", 'success');
-    if ($APP_ENV === 'local') {
+
+    if (isset($APP_ENV) && $APP_ENV === 'local') {
         if (!is_file(BB_ROOT . 'library/config.local.php')) {
-            copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php');
+            if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
+                out('- Local configuration file created!', 'success');
+            } else {
+                out('- Cannot create library/config.local.php file. You can create it manually, just copy config.php and rename it to config.local.php', 'warning');
+            }
         }
     } else {
-        rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()));
+        if (rename(__FILE__, __FILE__ . '_' . hash('xxh128', time()))) {
+            out("- Installation file renamed!", 'success');
+        } else {
+            out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
+        }
     }
+
+    out("\n- Voila! Good luck & have fun!", 'success');
 }

@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -94,31 +94,75 @@ if (!isset($info_hash)) {
     msg_die('info_hash was not provided');
 }
 
+/**
+ * Verify event
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L275
+ */
+$event = strtolower((string)$event);
+if (!in_array($event, ['started', 'completed', 'stopped', 'paused', ''])) {
+    msg_die('Invalid event: ' . $event);
+}
+
 // Store info hash in hex format
 $info_hash_hex = bin2hex($info_hash);
 
 // Store peer id
 $peer_id_sql = preg_replace('/[^a-zA-Z0-9\-\_]/', '', $peer_id);
 
+// Stopped event
+$stopped = ($event === 'stopped');
+
 // Check info_hash length
 if (strlen($info_hash) !== 20) {
     msg_die('Invalid info_hash: ' . (mb_check_encoding($info_hash, 'UTF8') ? $info_hash : $info_hash_hex));
 }
 
-if (!isset($port) || $port < 0 || $port > 0xFFFF) {
+/**
+ * Block system-reserved ports since 99.9% of the time they're fake and thus not connectable
+ * Some clients will send port of 0 on 'stopped' events. Let them through as they won't receive peers anyway.
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L284
+ */
+if (
+    !isset($port)
+    || !is_numeric($port)
+    || ($port < 1024 && !$stopped)
+    || $port > 0xFFFF
+    || (!empty($bb_cfg['disallowed_ports']) && in_array($port, $bb_cfg['disallowed_ports']))
+) {
     msg_die('Invalid port: ' . $port);
 }
 
-if (!isset($uploaded) || $uploaded < 0) {
+if (!isset($uploaded) || !is_numeric($uploaded) || $uploaded < 0) {
     msg_die('Invalid uploaded value: ' . $uploaded);
 }
 
-if (!isset($downloaded) || $downloaded < 0) {
+if (!isset($downloaded) || !is_numeric($downloaded) || $downloaded < 0) {
     msg_die('Invalid downloaded value: ' . $downloaded);
 }
 
-if (!isset($left) || $left < 0) {
+if (!isset($left) || !is_numeric($left) || $left < 0) {
     msg_die('Invalid left value: ' . $left);
+}
+
+/**
+ * Check User-Agent length
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L177
+ */
+$userAgent = (string)$_SERVER['HTTP_USER_AGENT'];
+if (strlen($userAgent) > 64) {
+    msg_die('User-Agent must be less than 64 characters long');
+}
+
+/**
+ * Block Browser by checking the User-Agent
+ *
+ * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L182
+ */
+if (preg_match('/(Mozilla|Browser|Chrome|Safari|AppleWebKit|Opera|Links|Lynx|Bot|Unknown)/i', $userAgent)) {
+    msg_die('Browser disallowed');
 }
 
 // IP
@@ -158,9 +202,6 @@ if ($ip_version === 'ipv6') {
 // Peer unique id
 $peer_hash = hash('xxh128', $passkey . $info_hash_hex . $port);
 
-// Events
-$stopped = ($event === 'stopped');
-
 // Set seeder & complete
 $complete = $seeder = ($left == 0) ? 1 : 0;
 
@@ -199,7 +240,7 @@ if ($lp_info) {
 
     /**
      * Currently torrent clients send truncated v2 hashes (the design raises questions).
-     * https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
+     * @see https://github.com/bittorrent/bittorrent.org/issues/145#issuecomment-1720040343
      */
     $info_hash_where = "WHERE tor.info_hash = '$info_hash_sql' OR SUBSTRING(tor.info_hash_v2, 1, 20) = '$info_hash_sql'";
 

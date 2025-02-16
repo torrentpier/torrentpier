@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -13,6 +13,8 @@ use TorrentPier\Dev;
 
 use Memcached as MemcachedClient;
 use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
+
+use Exception;
 
 /**
  * Class Memcached
@@ -77,6 +79,9 @@ class Memcached extends Common
      */
     public function __construct(array $cfg, string $prefix)
     {
+        if (!$this->isInstalled()) {
+            throw new Exception('ext-memcached not installed. Check out php.ini file');
+        }
         $this->client = new MemcachedClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
@@ -98,7 +103,7 @@ class Memcached extends Common
         }
 
         if (!$this->connected) {
-            die("Could not connect to $this->engine server");
+            throw new Exception("Could not connect to $this->engine server");
         }
 
         $this->memcached = new MemcachedCache($this->client);
@@ -186,5 +191,15 @@ class Memcached extends Common
         $this->num_queries++;
 
         return $result;
+    }
+
+    /**
+     * Checking if Memcached is installed
+     *
+     * @return bool
+     */
+    private function isInstalled(): bool
+    {
+        return extension_loaded('memcached') && class_exists('Memcached');
     }
 }

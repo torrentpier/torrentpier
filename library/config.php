@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -12,14 +12,14 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$reserved_name = 'example.com';
-$reserved_port = 80;
+$reserved_name = env('TP_HOST', 'example.com');
+$reserved_port = env('TP_PORT', 80);
 
 $bb_cfg = [];
 
 // Version info
 $bb_cfg['tp_version'] = 'v2.4.5';
-$bb_cfg['tp_release_date'] = 'XX-XX-2025';
+$bb_cfg['tp_release_date'] = '06-02-2025';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Increase version number after changing JS or CSS
@@ -98,6 +98,23 @@ $bb_cfg['passkey_key'] = 'uk'; // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false; // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true; // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
 $bb_cfg['allow_internal_ip'] = false; // Allow internal IP (10.xx.. etc.)
+$bb_cfg['disallowed_ports'] = [
+    // https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L53
+    // Hyper Text Transfer Protocol (HTTP) - port used for web traffic
+    8080,
+    8081,
+    // Kazaa - peer-to-peer file sharing, some known vulnerabilities, and at least one worm (Benjamin) targeting it.
+    1214,
+    // IANA registered for Microsoft WBT Server, used for Windows Remote Desktop and Remote Assistance connections
+    3389,
+    // eDonkey 2000 P2P file sharing service. http://www.edonkey2000.com/
+    4662,
+    // Gnutella (FrostWire, Limewire, Shareaza, etc.), BearShare file sharing app
+    6346,
+    6347,
+    // Port used by p2p software, such as WinMX, Napster.
+    6699,
+];
 $bb_cfg['client_ban'] = [
     'enabled' => false,
     'only_allow_mode' => false,
@@ -653,12 +670,12 @@ $bb_cfg['group_avatars'] = [
 ];
 
 // Captcha
-// Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = [
     'disabled' => true,
+    'service' => 'googleV3', // Available services: googleV2, googleV3, hCaptcha, yandex, cloudflare
     'public_key' => '',
     'secret_key' => '',
-    'theme' => 'light', // theming (available: light, dark)
+    'theme' => 'light', // theming (available: light, dark) (working only if supported by captcha service)
 ];
 
 // Atom feed
@@ -701,8 +718,6 @@ $bb_cfg['tracker'] = [
     'update_dlstat' => true,
     'expire_factor' => 2.5,
     'compact_mode' => true,
-    'upd_user_up_down_stat' => true,
-    'browser_redirect_url' => '',
     'scrape' => true,
     'limit_active_tor' => true,
     'limit_seed_count' => 0,
@@ -721,7 +736,8 @@ $bb_cfg['tracker'] = [
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
     'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
-    'disabled_v2_torrents' => false // disallow registration of v2-only torrents
+    'disabled_v2_torrents' => false, // disallow registration of v2-only torrents
+    'use_old_torrent_name_format' => false, // when enabled, the names of torrent files will have the classic format: [yoursite.com].txxx.torrent
 ];
 
 // Ratio settings
