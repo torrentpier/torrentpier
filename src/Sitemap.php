@@ -73,19 +73,19 @@ class Sitemap
         $sql = DB()->sql_query("
             SELECT
                 t.topic_id,
-                t.topic_title,
-                COALESCE(MAX(p.post_edit_time), t.topic_time) as last_update_time
+                t.topic_time,
+                COALESCE(MAX(p.post_edit_time), 0) as last_edit_time
             FROM " . BB_TOPICS . " t
             LEFT JOIN " . BB_POSTS . " p ON (t.topic_id = p.topic_id)
-            " . $ignore_forum_sql . "
-            GROUP BY t.topic_id, t.topic_title, t.topic_time
-            ORDER BY last_update_time ASC"
-        );
+             " . $ignore_forum_sql . "
+            GROUP BY t.topic_id, t.topic_time
+            ORDER BY t.topic_time ASC
+        ");
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $topicUrls[] = [
                 'url' => TOPIC_URL . $row['topic_id'],
-                'time' => $row['last_update_time'],
+                'time' => max($row['topic_time'], $row['last_edit_time']),
             ];
         }
 
