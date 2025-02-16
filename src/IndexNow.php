@@ -50,6 +50,9 @@ class IndexNow
         'naver' => 'searchadvisor.naver.com'
     ];
 
+    /**
+     * IndexNow constructor
+     */
     public function __construct()
     {
         global $bb_cfg;
