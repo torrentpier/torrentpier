@@ -13,6 +13,7 @@ require dirname(__DIR__) . '/common.php';
 
 global $bb_cfg;
 
+// Check User-Agent for existence
 $userAgent = (string)$_SERVER['HTTP_USER_AGENT'];
 if (empty($userAgent)) {
     header('Location: http://127.0.0.1', true, 301);
