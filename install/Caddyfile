@@ -1,12 +1,17 @@
-# Example Caddy configuration for TorrentPier
+example.com {
+    root * /path/to/root
+    encode utf8
+    php_fastcgi unix//run/php/php-fpm.sock
+    try_files {path} {path}/ /index.php?{query}
+    file_server
 
-:80 {
-	# Set this path to your site's directory.
-	root * /path/to/root
+    @blocked {
+        path /install/* /internal_data/* /library/*
+        path /.ht* /.en*
+        path /.git/*
+        path *.sql *.tpl *.db *.inc *.log *.md
+    }
+    respond @blocked 404
 
-	# Enable the static file server.
-	file_server
+    redir /sitemap.xml /sitemap/sitemap.xml
 }
-
-# Refer to the Caddy docs for more information:
-# https://caddyserver.com/docs/caddyfile
