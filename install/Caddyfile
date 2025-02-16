@@ -1,3 +1,5 @@
+# Example Caddy configuration for TorrentPier
+
 example.com {
     root * /path/to/root
     encode utf8
@@ -15,3 +17,6 @@ example.com {
 
     redir /sitemap.xml /sitemap/sitemap.xml
 }
+
+# Refer to the Caddy docs for more information:
+# https://caddyserver.com/docs/caddyfile
