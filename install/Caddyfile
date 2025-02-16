@@ -1,1 +1,12 @@
 # Example Caddy configuration for TorrentPier
+
+:80 {
+	# Set this path to your site's directory.
+	root * /path/to/root
+
+	# Enable the static file server.
+	file_server
+}
+
+# Refer to the Caddy docs for more information:
+# https://caddyserver.com/docs/caddyfile
