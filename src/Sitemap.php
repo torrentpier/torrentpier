@@ -44,7 +44,7 @@ class Sitemap
         while ($row = DB()->sql_fetchrow($sql)) {
             $forumUrls[] = [
                 'url' => FORUM_URL . $row['forum_id'],
-                'time' => ''
+                'time' => time()
             ];
         }
 
