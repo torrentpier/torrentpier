@@ -71,21 +71,21 @@ class Sitemap
         $ignore_forum_sql = $not_forums_id ? "WHERE t.forum_id NOT IN($not_forums_id)" : '';
 
         $sql = DB()->sql_query("
-            SELECT 
+            SELECT
                 t.topic_id,
-                t.topic_time,
-                COALESCE(MAX(p.post_edit_time), 0) as last_edit_time
+                t.topic_title,
+                COALESCE(MAX(p.post_edit_time), t.topic_time) as last_update_time
             FROM " . BB_TOPICS . " t
-            LEFT JOIN " . BB_POSTS . " p ON p.topic_id = t.topic_id
-            " . ($ignore_forum_sql ? $ignore_forum_sql : 'WHERE 1=1') . "
-            GROUP BY t.topic_id, t.topic_time
-            ORDER BY t.topic_time ASC
-        ");
+            LEFT JOIN " . BB_POSTS . " p ON (t.topic_id = p.topic_id)
+            " . $ignore_forum_sql . "
+            GROUP BY t.topic_id, t.topic_title, t.topic_time
+            ORDER BY last_update_time ASC"
+        );
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $topicUrls[] = [
                 'url' => TOPIC_URL . $row['topic_id'],
-                'time' => max($row['topic_time'], $row['last_edit_time']),
+                'time' => $row['last_update_time'],
             ];
         }
 
