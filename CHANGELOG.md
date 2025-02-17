@@ -4,6 +4,10 @@
 > To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
+### 🚀 Features
+
+- Added configuration files for `nginx` & `caddy` ([#1787](https://github.com/torrentpier/torrentpier/pull/1787)) - ([f7d3946](https://github.com/torrentpier/torrentpier/commit/f7d394607e4ea5bb9b7f2b33692204a226a4d78b))
+
 ### 🗑️ Removed
 
 - *(posting.php)* Unused `'U_VIEWTOPIC` variable ([#1818](https://github.com/torrentpier/torrentpier/pull/1818)) - ([03ebbda](https://github.com/torrentpier/torrentpier/commit/03ebbda6be567d82d2a49fefe02356544fbd07cb))
