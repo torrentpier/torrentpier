@@ -29,7 +29,7 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 			WHERE tor.topic_id = bt.topic_id
 				AND tor.size   > $tor_size
 				AND bt.seeder  > 0
-			GROUP BY user_id
+			GROUP BY bt.user_id
 	");
 
     $seed_bonus = unserialize($bb_cfg['seed_bonus_points']);
