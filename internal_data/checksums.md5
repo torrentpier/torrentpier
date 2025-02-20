@@ -9,7 +9,7 @@ a986c8eb4b6227ccdc8a25f6da6cbc34  ./src/Legacy/Cache/File.php
 14ec58cba44f8c43cf8130ab1e4ac3b2  ./src/Legacy/Atom.php
 4fbe7796c4bf8831b24102bbfdf1578b  ./src/Legacy/AttachPosting.php
 9f15786801a4bf4dce8742b00b73a0ab  ./src/Legacy/Template.php
-7c4c44f6b02e9c516fdcfbc0c81f3da2  ./src/Legacy/Post.php
+a1151f5ee509c2ebd33b1633980e782f  ./src/Legacy/Post.php
 e75006383aa3a8bd5456afb15ba4c04c  ./src/Legacy/Select.php
 5f7c2da87b3b8acf833dbbd591036591  ./src/Legacy/Poll.php
 c6ac0ce2192b4591f17486d3e7b77cd4  ./src/Legacy/BBCode.php
@@ -58,11 +58,11 @@ b94ffbf36d0196a01a67e19a852507f3  ./src/Helpers/CronHelper.php
 18fe5c4645fbabe8427a69f6f9ea9afb  ./src/Helpers/IPHelper.php
 87fc2ae19bc65eb3df0af08c144a03d1  ./src/Helpers/StringHelper.php
 9ddd56c8356303b38ac57a9060c88a41  ./robots.txt
-a54af0ba77d0042e01a0a1eb1c8d88a9  ./README.md
+17f97148368f9c4b2d71283317a59a6e  ./README.md
 d78428df116c848031737d84eb75f13a  ./install.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
 1dc6b791081771341e5e3bcaf8145c7a  ./group.php
-1a2e6bd3c37119a4770b48220dbad996  ./CHANGELOG.md
+0181939c31752efed8e61e9a2f271156  ./CHANGELOG.md
 8b671316118d2a9bf7d7856185859cdd  ./modcp.php
 b83005fe9810f51701a9ee6a0daaf9de  ./.env.example
 3458b3a2d940cba1259927a29c6b29f0  ./memberlist.php
@@ -1473,7 +1473,7 @@ bd3f2d1959769acf1160d0baaec9dd56  ./library/includes/cron/jobs/flash_topic_view.
 7781aaef6ba04b4c3631a25ea0b4eb6b  ./library/includes/cron/jobs/prune_topic_moved.php
 052b451858da71d50d22803e027c5c0e  ./library/includes/cron/jobs/board_maintenance.php
 146bdaedd22cfcf0f305c250380cb212  ./library/includes/cron/jobs/tr_update_seeder_last_seen.php
-1b795c9bf754943a2c4543b36489261f  ./library/includes/cron/jobs/tr_seed_bonus.php
+ae9804cee3f9bbc54c23168050a96334  ./library/includes/cron/jobs/tr_seed_bonus.php
 a38c10c358f56b75fd54631b685ff610  ./library/includes/cron/jobs/prune_inactive_users.php
 945da090dd1848d15afcca24855f69f4  ./library/includes/cron/jobs/ds_update_stats.php
 d0b2e14ba9f83ad7765255052e91071b  ./library/includes/cron/jobs/update_forums_atom.php
@@ -2467,7 +2467,7 @@ c0a6386d4c33ad2e14fc75560c8ec2b3  ./cron.php
 4aa3ab90cc59079f31846b6125bcd30f  ./common.php
 9cc8a4f8b46c0ebbcfb8049b74da6631  ./bt/includes/init_tr.php
 62745e850958bfd8a1fd77f90e74184b  ./bt/includes/.htaccess
-62c0953da67dd051c271cdde319541ef  ./bt/announce.php
+fcda716454bc4ed75f53ec6db9b8d5a9  ./bt/announce.php
 4cc0e3db2228d9b547fe44ecc386c7eb  ./bt/index.php
 acd66a6f5e4ffc4efe3b40c1dbb673ea  ./bt/scrape.php
 e4ec0169431e7a6c92506ef7e286fb71  ./tracker.php
@@ -2515,7 +2515,7 @@ d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
-09b9663846f60d6b77a76657c5101c77  ./internal_data/checksums.md5
+e0381a608893800d0d5c2643e20106dc  ./internal_data/checksums.md5
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 d41d8cd98f00b204e9800998ecf8427e  ./data/uploads/thumbs/.keep
