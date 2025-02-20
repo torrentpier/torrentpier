@@ -8,6 +8,10 @@
 
 - Added configuration files for `nginx` & `caddy` ([#1787](https://github.com/torrentpier/torrentpier/pull/1787)) - ([f7d3946](https://github.com/torrentpier/torrentpier/commit/f7d394607e4ea5bb9b7f2b33692204a226a4d78b))
 
+### 🐛 Bug Fixes
+
+- *(tr_seed_bonus.php)* Incorrect `GROUP BY` ([#1820](https://github.com/torrentpier/torrentpier/pull/1820)) - ([dfd4e5e](https://github.com/torrentpier/torrentpier/commit/dfd4e5ebc9df916868210a7844f2a6f35e7b8aca))
+
 ### 🗑️ Removed
 
 - *(posting.php)* Unused `'U_VIEWTOPIC` variable ([#1818](https://github.com/torrentpier/torrentpier/pull/1818)) - ([03ebbda](https://github.com/torrentpier/torrentpier/commit/03ebbda6be567d82d2a49fefe02356544fbd07cb))
@@ -15,6 +19,7 @@
 ### ⚙️ Miscellaneous
 
 - *(README)* Fixed all grammatical errors, sentence structure and readibility ([#1812](https://github.com/torrentpier/torrentpier/pull/1812)) - ([bea3b0b](https://github.com/torrentpier/torrentpier/commit/bea3b0bccf335970ea5826543d8fa223329ef077))
+- *(announcer)* Some minor improvements ([#1819](https://github.com/torrentpier/torrentpier/pull/1819)) - ([bdefed4](https://github.com/torrentpier/torrentpier/commit/bdefed4dab3cc65330fcb9cb9750cc8e84beda1d))
 - *(cliff)* Removed TorrentPier logo ([#1817](https://github.com/torrentpier/torrentpier/pull/1817)) - ([7794242](https://github.com/torrentpier/torrentpier/commit/7794242750b44183312a2a45c9f54c6afde12f0e))
 - *(cliff)* Synced `cliff-releases.toml` with `cliff.toml` changes ([#1815](https://github.com/torrentpier/torrentpier/pull/1815)) - ([f2aea92](https://github.com/torrentpier/torrentpier/commit/f2aea92b3d79d72254e696fde31ad9b4bec5dcd0))
 - *(cliff)* Added missing line breaks after `body` ([#1814](https://github.com/torrentpier/torrentpier/pull/1814)) - ([2593f09](https://github.com/torrentpier/torrentpier/commit/2593f093a389a9c450725290862b99d911fbef5d))
