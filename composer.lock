@@ -2082,16 +2082,16 @@
         },
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "11.0.3",
+            "version": "11.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "4d126ef1d1f4162af012ddeba5fed97d2d131426"
+                "reference": "6162edf0ebe6c9c25733834c357b94a34c67ec3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/4d126ef1d1f4162af012ddeba5fed97d2d131426",
-                "reference": "4d126ef1d1f4162af012ddeba5fed97d2d131426",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/6162edf0ebe6c9c25733834c357b94a34c67ec3e",
+                "reference": "6162edf0ebe6c9c25733834c357b94a34c67ec3e",
                 "shasum": ""
             },
             "require": {
@@ -2157,9 +2157,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/11.0.3"
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/11.0.4"
             },
-            "time": "2025-02-19T18:04:26+00:00"
+            "time": "2025-02-20T20:42:49+00:00"
         },
         {
             "name": "php-http/discovery",
