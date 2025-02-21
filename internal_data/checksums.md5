@@ -62,7 +62,7 @@ b94ffbf36d0196a01a67e19a852507f3  ./src/Helpers/CronHelper.php
 d78428df116c848031737d84eb75f13a  ./install.php
 92d8b22818f79dd01e137c9567b668de  ./.gitignore
 1dc6b791081771341e5e3bcaf8145c7a  ./group.php
-0181939c31752efed8e61e9a2f271156  ./CHANGELOG.md
+2e2dc9c54d804c13730ea3157df8a518  ./CHANGELOG.md
 8b671316118d2a9bf7d7856185859cdd  ./modcp.php
 b83005fe9810f51701a9ee6a0daaf9de  ./.env.example
 3458b3a2d940cba1259927a29c6b29f0  ./memberlist.php
@@ -1442,7 +1442,7 @@ b443695c6baf26f4fcca4f584bcde885  ./styles/templates/admin/admin_forums.tpl
 35a34251072494629b5811bbde74199e  ./styles/templates/posting_tpl.tpl
 df160c3a0376d314c17d1e9884dcf613  ./ajax.php
 112e8bb4124da6a2ee59c71f8ded9681  ./composer.json
-44807d75559a690abf46a6830297bfe9  ./composer.lock
+bf3c5f0bd8aa65bdecac554780d8b236  ./composer.lock
 b25156919f61a6e0757690630fc12dc0  ./crowdin.yml
 d41d8cd98f00b204e9800998ecf8427e  ./sitemap/.keep
 96eb4df3fd2f10ae9211a7a541e5e180  ./privmsg.php
@@ -2503,7 +2503,7 @@ a587180b840ddbd809d484d6a497be3e  ./.editorconfig
 88cf67ed9d712e9c9e00ed3ba9a62196  ./dl.php
 f22f18d9c7eee4831764aef25dd24a06  ./install/nginx.conf
 26b39a6e806b48dabcdfef0777ec36d8  ./install/sql/mysql.sql
-c858660c326bd5dab007fb475acd5744  ./install/Caddyfile
+a1f7ae4c61eb9f410aa03cc66ea45f1c  ./install/Caddyfile
 5a6f02ce50777858cba38fd747ef01a6  ./install/upgrade/legacy-changes.txt
 62745e850958bfd8a1fd77f90e74184b  ./install/.htaccess
 6a2bf79bd0d8d21a3aecedd2b01ca1f0  ./CODE_OF_CONDUCT.md
@@ -2515,7 +2515,7 @@ d41d8cd98f00b204e9800998ecf8427e  ./internal_data/triggers/$on
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/log/.htaccess
 62745e850958bfd8a1fd77f90e74184b  ./internal_data/cache/.htaccess
 d41d8cd98f00b204e9800998ecf8427e  ./internal_data/atom/.keep
-e0381a608893800d0d5c2643e20106dc  ./internal_data/checksums.md5
+fc82c45f5c53d39186561263db9b3549  ./internal_data/checksums.md5
 aec061772e52bcee8706cafa04efa575  ./data/avatars/gallery/noavatar.png
 9dc59527cb60c1ec76c53bd26337c4db  ./data/avatars/gallery/bot.gif
 d41d8cd98f00b204e9800998ecf8427e  ./data/uploads/thumbs/.keep
