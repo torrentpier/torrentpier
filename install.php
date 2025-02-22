@@ -315,7 +315,7 @@ if (is_file(BB_ROOT . '.env')) {
             echo "Enter a new value for $key (or leave empty to not change): ";
             $newValue = trim(readline());
 
-            if (!empty($newValue)) {
+            if (!empty($newValue) || $key === 'DB_PASSWORD') {
                 $line = "$key=$newValue";
                 $$key = $newValue;
             } else {
