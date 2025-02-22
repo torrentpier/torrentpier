@@ -14,6 +14,7 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump php-curl-class/php-curl-class from 11.0.3 to 11.0.4 ([#1823](https://github.com/torrentpier/torrentpier/pull/1823)) - ([1c323a4](https://github.com/torrentpier/torrentpier/commit/1c323a45d777b033155da9a2becec506215bd94c))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.1 to 11.0.3 ([#1821](https://github.com/torrentpier/torrentpier/pull/1821)) - ([dedf35b](https://github.com/torrentpier/torrentpier/commit/dedf35b794196034eb27d4125dff0798aed5f315))
 
 ### 🗑️ Removed
