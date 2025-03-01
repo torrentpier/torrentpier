@@ -33,8 +33,6 @@ define('APP_NAME', 'TorrentPier');
 define('DEFAULT_CHARSET', 'UTF-8');
 define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/releases');
 define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
-define('CHECKSUMS_FILE', INT_DATA_DIR . '/checksums.md5');
-define('RESTORE_CORRUPT_CONFIRM_FILE', INT_DATA_DIR . '/rescorrupt.integrity');
 define('COOKIE_DBG', 'bb_dbg');
 
 // TODO: Move in another section
