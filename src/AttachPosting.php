@@ -11,7 +11,7 @@ namespace TorrentPier;
 
 /**
  * Class AttachPosting
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class AttachPosting extends Attach
 {

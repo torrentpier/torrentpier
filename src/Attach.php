@@ -11,7 +11,7 @@ namespace TorrentPier;
 
 /**
  * Class Attach
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Attach
 {
