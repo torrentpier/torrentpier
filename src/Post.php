@@ -53,6 +53,7 @@ class Post
 
         // Check message
         if (!empty($message)) {
+            // todo
         } elseif ($mode != 'delete') {
             $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_MESSAGE'] : $lang['EMPTY_MESSAGE'];
         }
