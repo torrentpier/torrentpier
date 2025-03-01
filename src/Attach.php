@@ -7,9 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
-
-use TorrentPier\Torrent;
+namespace TorrentPier;
 
 /**
  * Class Attach
