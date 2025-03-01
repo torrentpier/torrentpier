@@ -7,17 +7,15 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Cache;
-
-use TorrentPier\Dev;
-
-use MatthiasMullie\Scrapbook\Adapters\Apc;
+namespace TorrentPier\Cache;
 
 use Exception;
+use MatthiasMullie\Scrapbook\Adapters\Apc;
+use TorrentPier\Dev;
 
 /**
  * Class APCu
- * @package TorrentPier\Legacy\Cache
+ * @package TorrentPier\Cache
  */
 class APCu extends Common
 {

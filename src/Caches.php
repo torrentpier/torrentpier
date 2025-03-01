@@ -24,7 +24,7 @@ class Caches
     public function __construct($cfg)
     {
         $this->cfg = $cfg['cache'];
-        $this->obj['__stub'] = new Cache\Common();
+        $this->obj['__stub'] = new \TorrentPier\Cache\Common();
     }
 
     public function get_cache_obj($cache_name)
@@ -38,32 +38,32 @@ class Caches
                 switch ($cache_type) {
                     case 'apcu':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\APCu($this->cfg['prefix']);
+                            $this->obj[$cache_name] = new \TorrentPier\Cache\APCu($this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
                     case 'memcached':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\Memcached($this->cfg['memcached'], $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new \TorrentPier\Cache\Memcached($this->cfg['memcached'], $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
                     case 'sqlite':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\Sqlite($this->cfg['db_dir'] . $cache_name, $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new \TorrentPier\Cache\Sqlite($this->cfg['db_dir'] . $cache_name, $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
                     case 'redis':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\Redis($this->cfg['redis'], $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new \TorrentPier\Cache\Redis($this->cfg['redis'], $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
                     case 'filecache':
                     default:
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\File($this->cfg['db_dir'] . $cache_name . '/', $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new \TorrentPier\Cache\File($this->cfg['db_dir'] . $cache_name . '/', $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;

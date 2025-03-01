@@ -7,18 +7,16 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Cache;
-
-use TorrentPier\Dev;
-
-use Memcached as MemcachedClient;
-use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
+namespace TorrentPier\Cache;
 
 use Exception;
+use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
+use Memcached as MemcachedClient;
+use TorrentPier\Dev;
 
 /**
  * Class Memcached
- * @package TorrentPier\Legacy\Cache
+ * @package TorrentPier\Cache
  */
 class Memcached extends Common
 {

@@ -7,13 +7,13 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Cache;
+namespace TorrentPier\Cache;
 
 use TorrentPier\Dev;
 
 /**
  * Class Common
- * @package TorrentPier\Legacy\Cache
+ * @package TorrentPier\Cache
  */
 class Common
 {

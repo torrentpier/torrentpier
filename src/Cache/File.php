@@ -7,17 +7,16 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Cache;
-
-use TorrentPier\Dev;
+namespace TorrentPier\Cache;
 
 use League\Flysystem\Filesystem;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use MatthiasMullie\Scrapbook\Adapters\Flysystem;
+use TorrentPier\Dev;
 
 /**
  * Class File
- * @package TorrentPier\Legacy\Cache
+ * @package TorrentPier\Cache
  */
 class File extends Common
 {
