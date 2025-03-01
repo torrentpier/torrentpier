@@ -1,4 +1,4 @@
-name: Changelog & checksums generation
+name: Changelog generation
 
 on:
   schedule:
@@ -39,34 +39,3 @@ jobs:
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
-
-  checksums:
-    name: Generate checksums.md5 file
-    runs-on: ubuntu-22.04
-    needs: [ changelog ]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: master
-          token: ${{ secrets.REPO_TOKEN }}
-
-      - name: Generate checksums.md5 file
-        run: |
-          find . -type f -not -path "./.git/*" -exec md5sum {} \; > internal_data/checksums.md5
-
-      - name: Commit and push checksums.md5 if changed
-        run: |
-          git checkout master
-          git config --local user.name 'belomaxorka'
-          git config --local user.email 'roman25052006.kelesh@gmail.com'
-
-          if git diff --quiet internal_data/checksums.md5; then
-            echo "No changes... "
-          else
-            set +e
-            git add internal_data/checksums.md5
-            git commit -m "Update checksums.md5 📄"
-            git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git master
-          fi

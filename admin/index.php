@@ -15,12 +15,6 @@ if (!$stats = $datastore->get('stats')) {
     $stats = $datastore->get('stats');
 }
 
-// Files integrity check
-if (!$files_integrity_data = $datastore->get('files_integrity')) {
-    $datastore->update('files_integrity');
-    $files_integrity_data = $datastore->get('files_integrity');
-}
-
 // Check for updates
 if (!$update_data = $datastore->get('check_updates')) {
     $datastore->update('check_updates');
@@ -87,16 +81,6 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'ADMIN_LOCK' => (bool)$bb_cfg['board_disable'],
         'ADMIN_LOCK_CRON' => is_file(BB_DISABLED),
     ]);
-
-    // Files integrity check results
-    if (!empty($files_integrity_data)) {
-        $template->assign_block_vars('integrity_check', [
-            'INTEGRITY_SUCCESS' => (bool)$files_integrity_data['success'],
-            'INTEGRITY_WRONG_FILES_LIST' => implode("\n</li>\n<li>\n", $files_integrity_data['wrong_files']),
-            'INTEGRITY_LAST_CHECK_TIME' => sprintf($lang['INTEGRITY_LAST_CHECK'], bb_date($files_integrity_data['timestamp'])),
-            'INTEGRITY_CHECKED_FILES' => sprintf($lang['INTEGRITY_CHECKED'], $files_integrity_data['total_num'], ($files_integrity_data['total_num'] - $files_integrity_data['wrong_files_num'])),
-        ]);
-    }
 
     // Check for updates
     if (isset($update_data['available_update'])) {

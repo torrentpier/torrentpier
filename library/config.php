@@ -602,7 +602,6 @@ $bb_cfg['flist_max_files'] = 0; // Max allowed number of files to process for gi
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
-$bb_cfg['integrity_check'] = true; // TorrentPier files integrity check
 
 $bb_cfg['allow_change'] = [
     'language' => true, // Allow user to change language
