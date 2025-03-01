@@ -401,7 +401,7 @@ function get_words_rate($text)
 {
     static $wr = null;
     if (!isset($wr)) {
-        $wr = new TorrentPier\Legacy\WordsRate();
+        $wr = new TorrentPier\WordsRate();
     }
     return $wr->get_words_rate($text);
 }
