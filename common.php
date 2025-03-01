@@ -109,7 +109,7 @@ unset($server_protocol, $server_port);
 /**
  * Database
  */
-$DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
+$DBS = new TorrentPier\Dbs($bb_cfg);
 
 function DB(string $db_alias = 'db')
 {
