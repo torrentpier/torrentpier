@@ -334,12 +334,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $attach_rg_sig = (isset($_POST['attach_rg_sig'], $_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? 1 : 0;
             $poster_rg_id = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int)$_POST['poster_rg'] : 0;
 
-            \TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
+            TorrentPier\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing);
+                TorrentPier\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -352,7 +352,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
 
         case 'delete':
             if (!$post_data['first_post']) {
-                \TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
+                TorrentPier\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             } else {
                 redirect('modcp.php?' . POST_TOPIC_URL . "=$topic_id&mode=delete&sid=" . $userdata['session_id']);
             }
@@ -362,12 +362,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
     if (!$error_msg) {
         if (!in_array($mode, ['editpost', 'delete'])) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
-            \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
+            TorrentPier\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
         $attachment_mod['posting']->insert_attachment($post_id);
 
         if (!$error_msg) {
-            \TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
+            TorrentPier\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
         }
 
         if ($mode == 'newtopic' || $mode == 'reply') {
@@ -647,7 +647,7 @@ if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
 
 // Topic review
 if ($mode == 'reply' && $is_auth['auth_read']) {
-    \TorrentPier\Legacy\Post::topic_review($topic_id);
+    TorrentPier\Post::topic_review($topic_id);
 }
 
 require(PAGE_HEADER);

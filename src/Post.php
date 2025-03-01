@@ -7,16 +7,13 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
 
-use TorrentPier\Emailer;
-use TorrentPier\IndexNow;
 use TorrentPier\Legacy\Admin\Common;
-use TorrentPier\Validate;
 
 /**
  * Class Post
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Post
 {

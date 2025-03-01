@@ -9,7 +9,7 @@
 
 namespace TorrentPier\Legacy\Admin;
 
-use TorrentPier\Legacy\Post;
+use TorrentPier\Post;
 
 /**
  * Class Common

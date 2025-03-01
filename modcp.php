@@ -491,10 +491,10 @@ switch ($mode) {
 
                 //bot
                 if (isset($_POST['after_split_to_old'])) {
-                    \TorrentPier\Legacy\Post::insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim($_POST['subject']));
+                    TorrentPier\Post::insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim($_POST['subject']));
                 }
                 if (isset($_POST['after_split_to_new'])) {
-                    \TorrentPier\Legacy\Post::insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
+                    TorrentPier\Post::insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
                 }
 
                 \TorrentPier\Legacy\Admin\Common::sync('topic', [$topic_id, $new_topic_id]);

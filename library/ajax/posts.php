@@ -262,7 +262,7 @@ switch ($this->request['type']) {
         $post_id = DB()->sql_nextid();
         DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . DB()->escape($message) . "')");
 
-        \TorrentPier\Legacy\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
+        TorrentPier\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 
         $s_message = str_replace('\n', "\n", $message);
         $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
@@ -274,7 +274,7 @@ switch ($this->request['type']) {
 
         if ($bb_cfg['topic_notify_enabled']) {
             $notify = !empty($this->request['notify']);
-            \TorrentPier\Legacy\Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
+            TorrentPier\Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
         }
 
         // Update atom feed
