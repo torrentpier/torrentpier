@@ -36,7 +36,7 @@ if ($is_moderator) {
     // Avatar
     if ($submit) {
         if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed']) {
-            $upload = new TorrentPier\Legacy\Common\Upload();
+            $upload = new \TorrentPier\Common\Upload();
 
             if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', ['user_id' => GROUP_AVATAR_MASK . $group_id, 'avatar_ext_id' => $group_info['avatar_ext_id']])) {
                 $avatar_ext_id = (int)$upload->file_ext_id;

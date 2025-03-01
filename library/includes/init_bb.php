@@ -392,8 +392,8 @@ $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
 $log_action = new TorrentPier\LogAction();
 $wordCensor = new TorrentPier\Censor();
-$html = new TorrentPier\Legacy\Common\Html();
-$user = new TorrentPier\Legacy\Common\User();
+$html = new \TorrentPier\Common\Html();
+$user = new \TorrentPier\Common\User();
 
 $userdata =& $user->data;
 

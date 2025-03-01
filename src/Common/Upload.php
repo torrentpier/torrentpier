@@ -7,11 +7,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Common;
+namespace TorrentPier\Common;
 
 /**
  * Class Upload
- * @package TorrentPier\Legacy\Common
+ * @package TorrentPier\Common
  */
 class Upload
 {

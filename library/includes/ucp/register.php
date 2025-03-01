@@ -410,7 +410,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $pr_data['avatar_ext_id'] = 0;
                     $db_data['avatar_ext_id'] = 0;
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
-                    $upload = new TorrentPier\Legacy\Common\Upload();
+                    $upload = new \TorrentPier\Common\Upload();
 
                     if ($upload->init($bb_cfg['avatars'], $_FILES['avatar'], !isset($_POST['use_monster_avatar'])) and $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;

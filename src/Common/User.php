@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Common;
+namespace TorrentPier\Common;
 
 use Exception;
 use TorrentPier\DateDelta;
@@ -15,7 +15,7 @@ use TorrentPier\Sessions;
 
 /**
  * Class User
- * @package TorrentPier\Legacy\Common
+ * @package TorrentPier\Common
  */
 class User
 {
