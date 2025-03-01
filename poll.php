@@ -24,7 +24,7 @@ $return_topic_url .= !empty($_POST['start']) ? "&amp;start=" . (int)$_POST['star
 
 set_die_append_msg($forum_id, $topic_id);
 
-$poll = new TorrentPier\Legacy\Poll();
+$poll = new TorrentPier\Poll();
 
 // Checking $topic_id
 if (!$topic_id) {
@@ -68,7 +68,7 @@ switch ($mode) {
         }
 
         // Checking that poll has not been finished
-        if (!\TorrentPier\Legacy\Poll::pollIsActive($t_data)) {
+        if (!TorrentPier\Poll::pollIsActive($t_data)) {
             bb_die($lang['NEW_POLL_ENDED']);
         }
 
@@ -76,7 +76,7 @@ switch ($mode) {
             bb_die($lang['NO_VOTE_OPTION']);
         }
 
-        if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id'])) {
+        if (TorrentPier\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id'])) {
             bb_die($lang['ALREADY_VOTED']);
         }
 
