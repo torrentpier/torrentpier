@@ -7,26 +7,32 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Datastore;
+namespace TorrentPier\Datastore;
 
+use Exception;
+use MatthiasMullie\Scrapbook\Adapters\SQLite as SQLiteCache;
+use PDO;
 use TorrentPier\Dev;
 
-use League\Flysystem\Filesystem;
-use League\Flysystem\Local\LocalFilesystemAdapter;
-use MatthiasMullie\Scrapbook\Adapters\Flysystem;
-
 /**
- * Class File
- * @package TorrentPier\Legacy\Datastore
+ * Class Sqlite
+ * @package TorrentPier\Datastore
  */
-class File extends Common
+class Sqlite extends Common
 {
     /**
      * Cache driver name
      *
      * @var string
      */
-    public string $engine = 'File';
+    public string $engine = 'SQLite';
+
+    /**
+     * SQLite DB file extension
+     *
+     * @var string
+     */
+    public string $dbExtension = '.db';
 
     /**
      * Cache prefix
@@ -36,23 +42,25 @@ class File extends Common
     private string $prefix;
 
     /**
-     * Adapters\File class
+     * Adapters\SQLite class
      *
-     * @var Flysystem
+     * @var SQLiteCache
      */
-    private Flysystem $file;
+    private SQLiteCache $sqlite;
 
     /**
-     * File constructor
+     * Sqlite constructor
      *
      * @param string $dir
      * @param string $prefix
      */
     public function __construct(string $dir, string $prefix)
     {
-        $adapter = new LocalFilesystemAdapter($dir, null, LOCK_EX);
-        $filesystem = new Filesystem($adapter);
-        $this->file = new Flysystem($filesystem);
+        if (!$this->isInstalled()) {
+            throw new Exception('ext-pdo_sqlite not installed. Check out php.ini file');
+        }
+        $client = new PDO('sqlite:' . $dir . $this->dbExtension);
+        $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
     }
@@ -72,7 +80,7 @@ class File extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
 
-        $result = $this->file->set($item_name, $item_data);
+        $result = $this->sqlite->set($item_name, $item_data);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -93,7 +101,7 @@ class File extends Common
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
 
-            $this->file->delete($title);
+            $this->sqlite->delete($title);
 
             $this->debug('stop');
             $this->cur_query = null;
@@ -119,11 +127,21 @@ class File extends Common
             $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
 
-            $this->data[$item] = $this->file->get($item_title);
+            $this->data[$item] = $this->sqlite->get($item_title);
 
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
         }
+    }
+
+    /**
+     * Checking if PDO SQLite is installed
+     *
+     * @return bool
+     */
+    private function isInstalled(): bool
+    {
+        return extension_loaded('pdo_sqlite') && class_exists('PDO');
     }
 }

@@ -7,34 +7,24 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Datastore;
-
-use TorrentPier\Dev;
-
-use MatthiasMullie\Scrapbook\Adapters\SQLite as SQLiteCache;
-use PDO;
+namespace TorrentPier\Datastore;
 
 use Exception;
+use MatthiasMullie\Scrapbook\Adapters\Apc;
+use TorrentPier\Dev;
 
 /**
- * Class Sqlite
- * @package TorrentPier\Legacy\Datastore
+ * Class APCu
+ * @package TorrentPier\Datastore
  */
-class Sqlite extends Common
+class APCu extends Common
 {
     /**
      * Cache driver name
      *
      * @var string
      */
-    public string $engine = 'SQLite';
-
-    /**
-     * SQLite DB file extension
-     *
-     * @var string
-     */
-    public string $dbExtension = '.db';
+    public string $engine = 'APCu';
 
     /**
      * Cache prefix
@@ -44,25 +34,23 @@ class Sqlite extends Common
     private string $prefix;
 
     /**
-     * Adapters\SQLite class
+     * Adapters\Apc class
      *
-     * @var SQLiteCache
+     * @var Apc
      */
-    private SQLiteCache $sqlite;
+    private Apc $apcu;
 
     /**
-     * Sqlite constructor
+     * APCu constructor
      *
-     * @param string $dir
      * @param string $prefix
      */
-    public function __construct(string $dir, string $prefix)
+    public function __construct(string $prefix)
     {
         if (!$this->isInstalled()) {
-            throw new Exception('ext-pdo_sqlite not installed. Check out php.ini file');
+            throw new Exception('ext-apcu not installed. Check out php.ini file');
         }
-        $client = new PDO('sqlite:' . $dir . $this->dbExtension);
-        $this->sqlite = new SQLiteCache($client);
+        $this->apcu = new Apc();
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
     }
@@ -82,7 +70,7 @@ class Sqlite extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
 
-        $result = $this->sqlite->set($item_name, $item_data);
+        $result = $this->apcu->set($item_name, $item_data);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -103,7 +91,7 @@ class Sqlite extends Common
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
 
-            $this->sqlite->delete($title);
+            $this->apcu->delete($title);
 
             $this->debug('stop');
             $this->cur_query = null;
@@ -129,7 +117,7 @@ class Sqlite extends Common
             $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
 
-            $this->data[$item] = $this->sqlite->get($item_title);
+            $this->data[$item] = $this->apcu->get($item_title);
 
             $this->debug('stop');
             $this->cur_query = null;
@@ -138,12 +126,12 @@ class Sqlite extends Common
     }
 
     /**
-     * Checking if PDO SQLite is installed
+     * Checking if APCu is installed
      *
      * @return bool
      */
     private function isInstalled(): bool
     {
-        return extension_loaded('pdo_sqlite') && class_exists('PDO');
+        return extension_loaded('apcu') && function_exists('apcu_fetch');
     }
 }

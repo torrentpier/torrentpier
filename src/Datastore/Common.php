@@ -7,13 +7,13 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Datastore;
+namespace TorrentPier\Datastore;
 
 use TorrentPier\Dev;
 
 /**
  * Class Common
- * @package TorrentPier\Legacy\Datastore
+ * @package TorrentPier\Datastore
  */
 class Common
 {

@@ -7,41 +7,25 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Datastore;
+namespace TorrentPier\Datastore;
 
+use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use MatthiasMullie\Scrapbook\Adapters\Flysystem;
 use TorrentPier\Dev;
 
-use Redis as RedisClient;
-use MatthiasMullie\Scrapbook\Adapters\Redis as RedisCache;
-
-use Exception;
-
 /**
- * Class Redis
- * @package TorrentPier\Legacy\Datastore
+ * Class File
+ * @package TorrentPier\Datastore
  */
-class Redis extends Common
+class File extends Common
 {
     /**
      * Cache driver name
      *
      * @var string
      */
-    public string $engine = 'Redis';
-
-    /**
-     * Connection status
-     *
-     * @var bool
-     */
-    public bool $connected = false;
-
-    /**
-     * Cache config
-     *
-     * @var array
-     */
-    private array $cfg;
+    public string $engine = 'File';
 
     /**
      * Cache prefix
@@ -51,60 +35,25 @@ class Redis extends Common
     private string $prefix;
 
     /**
-     * Redis class
+     * Adapters\File class
      *
-     * @var RedisClient
+     * @var Flysystem
      */
-    private RedisClient $client;
+    private Flysystem $file;
 
     /**
-     * Adapters\Redis class
+     * File constructor
      *
-     * @var RedisCache
-     */
-    private RedisCache $redis;
-
-    /**
-     * Redis constructor
-     *
-     * @param array $cfg
+     * @param string $dir
      * @param string $prefix
      */
-    public function __construct(array $cfg, string $prefix)
+    public function __construct(string $dir, string $prefix)
     {
-        if (!$this->isInstalled()) {
-            throw new Exception('ext-redis not installed. Check out php.ini file');
-        }
-        $this->client = new RedisClient();
-        $this->cfg = $cfg;
+        $adapter = new LocalFilesystemAdapter($dir, null, LOCK_EX);
+        $filesystem = new Filesystem($adapter);
+        $this->file = new Flysystem($filesystem);
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
-    }
-
-    /**
-     * Connect to cache
-     *
-     * @return void
-     */
-    private function connect(): void
-    {
-        $connectType = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
-
-        $this->cur_query = $connectType . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
-        $this->debug('start');
-
-        if ($this->client->$connectType($this->cfg['host'], $this->cfg['port'])) {
-            $this->connected = true;
-        }
-
-        if (!$this->connected) {
-            throw new Exception("Could not connect to $this->engine server");
-        }
-
-        $this->redis = new RedisCache($this->client);
-
-        $this->debug('stop');
-        $this->cur_query = null;
     }
 
     /**
@@ -116,17 +65,13 @@ class Redis extends Common
      */
     public function store(string $item_name, mixed $item_data): bool
     {
-        if (!$this->connected) {
-            $this->connect();
-        }
-
         $this->data[$item_name] = $item_data;
         $item_name = $this->prefix . $item_name;
 
         $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
 
-        $result = $this->redis->set($item_name, $item_data);
+        $result = $this->file->set($item_name, $item_data);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -142,16 +87,12 @@ class Redis extends Common
      */
     public function clean(): void
     {
-        if (!$this->connected) {
-            $this->connect();
-        }
-
         foreach ($this->known_items as $title => $script_name) {
             $title = $this->prefix . $title;
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
 
-            $this->redis->delete($title);
+            $this->file->delete($title);
 
             $this->debug('stop');
             $this->cur_query = null;
@@ -172,30 +113,16 @@ class Redis extends Common
             trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
         }
 
-        if (!$this->connected) {
-            $this->connect();
-        }
-
         foreach ($items as $item) {
             $item_title = $this->prefix . $item;
             $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
 
-            $this->data[$item] = $this->redis->get($item_title);
+            $this->data[$item] = $this->file->get($item_title);
 
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
         }
-    }
-
-    /**
-     * Checking if Redis is installed
-     *
-     * @return bool
-     */
-    private function isInstalled(): bool
-    {
-        return extension_loaded('redis') && class_exists('Redis');
     }
 }

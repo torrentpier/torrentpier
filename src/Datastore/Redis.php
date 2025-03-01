@@ -7,27 +7,25 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Datastore;
-
-use TorrentPier\Dev;
-
-use Memcached as MemcachedClient;
-use MatthiasMullie\Scrapbook\Adapters\Memcached as MemcachedCache;
+namespace TorrentPier\Datastore;
 
 use Exception;
+use MatthiasMullie\Scrapbook\Adapters\Redis as RedisCache;
+use Redis as RedisClient;
+use TorrentPier\Dev;
 
 /**
- * Class Memcached
- * @package TorrentPier\Legacy\Datastore
+ * Class Redis
+ * @package TorrentPier\Datastore
  */
-class Memcached extends Common
+class Redis extends Common
 {
     /**
      * Cache driver name
      *
      * @var string
      */
-    public string $engine = 'Memcached';
+    public string $engine = 'Redis';
 
     /**
      * Connection status
@@ -51,21 +49,21 @@ class Memcached extends Common
     private string $prefix;
 
     /**
-     * Memcached class
+     * Redis class
      *
-     * @var MemcachedClient
+     * @var RedisClient
      */
-    private MemcachedClient $client;
+    private RedisClient $client;
 
     /**
-     * Adapters\Memcached class
+     * Adapters\Redis class
      *
-     * @var MemcachedCache
+     * @var RedisCache
      */
-    private MemcachedCache $memcached;
+    private RedisCache $redis;
 
     /**
-     * Memcached constructor
+     * Redis constructor
      *
      * @param array $cfg
      * @param string $prefix
@@ -73,9 +71,9 @@ class Memcached extends Common
     public function __construct(array $cfg, string $prefix)
     {
         if (!$this->isInstalled()) {
-            throw new Exception('ext-memcached not installed. Check out php.ini file');
+            throw new Exception('ext-redis not installed. Check out php.ini file');
         }
-        $this->client = new MemcachedClient();
+        $this->client = new RedisClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
         $this->dbg_enabled = Dev::sqlDebugAllowed();
@@ -88,10 +86,12 @@ class Memcached extends Common
      */
     private function connect(): void
     {
-        $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $connectType = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
+
+        $this->cur_query = $connectType . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if ($this->client->addServer($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->client->$connectType($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
@@ -99,7 +99,7 @@ class Memcached extends Common
             throw new Exception("Could not connect to $this->engine server");
         }
 
-        $this->memcached = new MemcachedCache($this->client);
+        $this->redis = new RedisCache($this->client);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -124,7 +124,7 @@ class Memcached extends Common
         $this->cur_query = "cache->" . __FUNCTION__ . "('$item_name')";
         $this->debug('start');
 
-        $result = $this->memcached->set($item_name, $item_data);
+        $result = $this->redis->set($item_name, $item_data);
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -149,7 +149,7 @@ class Memcached extends Common
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
 
-            $this->memcached->delete($title);
+            $this->redis->delete($title);
 
             $this->debug('stop');
             $this->cur_query = null;
@@ -179,7 +179,7 @@ class Memcached extends Common
             $this->cur_query = "cache->get('$item_title')";
             $this->debug('start');
 
-            $this->data[$item] = $this->memcached->get($item_title);
+            $this->data[$item] = $this->redis->get($item_title);
 
             $this->debug('stop');
             $this->cur_query = null;
@@ -188,12 +188,12 @@ class Memcached extends Common
     }
 
     /**
-     * Checking if Memcached is installed
+     * Checking if Redis is installed
      *
      * @return bool
      */
     private function isInstalled(): bool
     {
-        return extension_loaded('memcached') && class_exists('Memcached');
+        return extension_loaded('redis') && class_exists('Redis');
     }
 }
