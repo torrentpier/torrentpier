@@ -89,7 +89,7 @@ class Atom
             }
             $topics[] = $topic;
         }
-        if (!count($topics)) {
+        if (!\count($topics)) {
             @unlink($file_path);
             return false;
         }
@@ -145,7 +145,7 @@ class Atom
             }
             $topics[] = $topic;
         }
-        if (!count($topics)) {
+        if (!\count($topics)) {
             @unlink($file_path);
             return false;
         }

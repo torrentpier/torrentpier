@@ -51,7 +51,7 @@ class Poll
         }
 
         // check for "< 3" -- 2 answer variants + header
-        if (count($this->poll_votes) < 3 || count($this->poll_votes) > $this->max_votes + 1) {
+        if (\count($this->poll_votes) < 3 || \count($this->poll_votes) > $this->max_votes + 1) {
             global $lang;
             return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
         }
