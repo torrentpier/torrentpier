@@ -68,7 +68,7 @@ class Html
         foreach ($params as $opt_name => $opt_val) {
             $opt_name = rtrim($opt_name);
 
-            if (\is_array($opt_val)) {
+            if (is_array($opt_val)) {
                 $this->cur_attr =& $this->cur_attr[$opt_name];
 
                 $label = str_short(htmlCHR($opt_name), $this->max_length);
@@ -114,7 +114,7 @@ class Html
     public function _array2html_rec($array, $ul, $li)
     {
         foreach ($array as $k => $v) {
-            if (\is_array($v)) {
+            if (is_array($v)) {
                 $this->out .= "<$li><span class=\"b\">$k</span><$ul>";
                 $this->_array2html_rec($v, $ul, $li);
                 $this->out .= "</$ul></$li>";
