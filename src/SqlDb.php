@@ -657,7 +657,7 @@ class SqlDb
             $this->init();
         }
 
-        return "{$this->selected_db}_{$name}";
+        return "{$this->selected_db}_$name";
     }
 
     /**
