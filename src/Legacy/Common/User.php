@@ -9,10 +9,9 @@
 
 namespace TorrentPier\Legacy\Common;
 
-use TorrentPier\Legacy\DateDelta;
-use TorrentPier\Sessions;
-
 use Exception;
+use TorrentPier\DateDelta;
+use TorrentPier\Sessions;
 
 /**
  * Class User
