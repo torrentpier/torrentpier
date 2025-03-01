@@ -66,7 +66,7 @@ switch ($mode) {
         $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
         break;
     case 'update_user_level':
-        \TorrentPier\Legacy\Group::update_user_level('all');
+        TorrentPier\Group::update_user_level('all');
         $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';
         break;
     case 'sync_topics':

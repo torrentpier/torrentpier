@@ -476,7 +476,7 @@ if ($mode) {
 
             $cat_forums = get_cat_forums();
             fix_orphan_sf();
-            \TorrentPier\Legacy\Group::update_user_level('all');
+            TorrentPier\Group::update_user_level('all');
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 

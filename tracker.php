@@ -223,7 +223,7 @@ foreach ($s_not_seen_opt as $val => $opt) {
     $s_not_seen_select[$opt['lang']] = $val;
 }
 
-if ($release_groups = \TorrentPier\Legacy\Group::get_group_data('all')) {
+if ($release_groups = TorrentPier\Group::get_group_data('all')) {
     $s_rg_opt = array(
         $search_all => array(
             'lang' => $lang['CHOOSE_RELEASE_GROUP'],
