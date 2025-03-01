@@ -7,13 +7,13 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Admin;
+namespace TorrentPier\Admin;
 
 use TorrentPier\Post;
 
 /**
  * Class Common
- * @package TorrentPier\Legacy\Admin
+ * @package TorrentPier\Admin
  */
 class Common
 {

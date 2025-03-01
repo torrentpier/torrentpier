@@ -53,7 +53,7 @@ switch ($this->request['type']) {
             if (empty($this->request['confirmed'])) {
                 $this->prompt_for_confirm($lang['CONFIRM_DELETE']);
             }
-            \TorrentPier\Legacy\Admin\Common::post_delete($post_id);
+            \TorrentPier\Admin\Common::post_delete($post_id);
 
             // Update atom feed
             update_atom('topic', (int)$this->request['topic_id']);

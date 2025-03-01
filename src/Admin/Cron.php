@@ -7,11 +7,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy\Admin;
+namespace TorrentPier\Admin;
 
 /**
  * Class Cron
- * @package TorrentPier\Legacy\Admin
+ * @package TorrentPier\Admin
  */
 class Cron
 {
