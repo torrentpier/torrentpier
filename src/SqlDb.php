@@ -7,15 +7,13 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
 
 use mysqli_result;
 
-use TorrentPier\Dev;
-
 /**
  * Class SqlDb
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class SqlDb
 {

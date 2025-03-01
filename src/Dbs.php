@@ -9,8 +9,6 @@
 
 namespace TorrentPier;
 
-use TorrentPier\Legacy\SqlDb;
-
 /**
  * Class Dbs
  * @package TorrentPier
