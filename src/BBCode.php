@@ -9,8 +9,6 @@
 
 namespace TorrentPier;
 
-use function in_array;
-
 /**
  * Class BBCode
  * @package TorrentPier
