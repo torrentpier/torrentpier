@@ -97,7 +97,7 @@ function bbcode_tpl_compact($text)
 // prepare a posted message for entry into the database
 function prepare_message($message)
 {
-    $message = \TorrentPier\Legacy\BBCode::clean_up($message);
+    $message = TorrentPier\BBCode::clean_up($message);
     $message = htmlCHR($message, false, ENT_NOQUOTES);
     return $message;
 }
@@ -383,7 +383,7 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
 /**
  * Dirty class removed from here since 2.2.0
- * To add new bbcodes see at src/Legacy/BBCode.php
+ * To add new bbcodes see at src/BBCode.php
  */
 
 function bbcode2html($text)
@@ -391,7 +391,7 @@ function bbcode2html($text)
     global $bbcode, $wordCensor;
 
     if (!isset($bbcode)) {
-        $bbcode = new TorrentPier\Legacy\BBCode();
+        $bbcode = new TorrentPier\BBCode();
     }
     $text = $wordCensor->censorString($text);
     return $bbcode->bbcode2html($text);
@@ -401,7 +401,7 @@ function get_words_rate($text)
 {
     static $wr = null;
     if (!isset($wr)) {
-        $wr = new TorrentPier\Legacy\WordsRate();
+        $wr = new TorrentPier\WordsRate();
     }
     return $wr->get_words_rate($text);
 }

@@ -437,7 +437,7 @@ if ($mode) {
 
             if ($to_id == -1) {
                 // Delete everything from forum
-                \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $from_id, 0, true);
+                \TorrentPier\Admin\Common::topic_delete('prune', $from_id, 0, true);
                 $datastore->update('stats');
             } else {
                 // Move all posts
@@ -467,7 +467,7 @@ if ($mode) {
                     $start_id += $per_cycle;
                 }
 
-                \TorrentPier\Legacy\Admin\Common::sync('forum', $to_id);
+                \TorrentPier\Admin\Common::sync('forum', $to_id);
             }
 
             DB()->query('DELETE FROM ' . BB_FORUMS . " WHERE forum_id = $from_id");
@@ -476,7 +476,7 @@ if ($mode) {
 
             $cat_forums = get_cat_forums();
             fix_orphan_sf();
-            \TorrentPier\Legacy\Group::update_user_level('all');
+            TorrentPier\Group::update_user_level('all');
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
@@ -650,7 +650,7 @@ if ($mode) {
             break;
 
         case 'forum_sync':
-            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET[POST_FORUM_URL]);
+            \TorrentPier\Admin\Common::sync('forum', (int)$_GET[POST_FORUM_URL]);
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 

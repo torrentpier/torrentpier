@@ -99,7 +99,7 @@ switch ($mode) {
         break;
 
     case 'run':
-        \TorrentPier\Legacy\Admin\Cron::run_jobs($job_id);
+        \TorrentPier\Admin\Cron::run_jobs($job_id);
         redirect('admin/' . basename(__FILE__) . '?mode=list');
         break;
 
@@ -182,7 +182,7 @@ switch ($mode) {
         break;
 
     case 'delete':
-        \TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
+        \TorrentPier\Admin\Cron::delete_jobs($job_id);
         bb_die($lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         break;
 }
@@ -191,25 +191,25 @@ if ($submit) {
     $mode2 = $_POST['mode'] ?? '';
     if ($mode2 == 'list') {
         if ($cron_action == 'run' && $jobs) {
-            \TorrentPier\Legacy\Admin\Cron::run_jobs($jobs);
+            \TorrentPier\Admin\Cron::run_jobs($jobs);
         } elseif ($cron_action == 'delete' && $jobs) {
-            \TorrentPier\Legacy\Admin\Cron::delete_jobs($jobs);
+            \TorrentPier\Admin\Cron::delete_jobs($jobs);
         } elseif (($cron_action == 'disable' || $cron_action == 'enable') && $jobs) {
-            \TorrentPier\Legacy\Admin\Cron::toggle_active($jobs, $cron_action);
+            \TorrentPier\Admin\Cron::toggle_active($jobs, $cron_action);
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
-    } elseif (\TorrentPier\Legacy\Admin\Cron::validate_cron_post($_POST) == 1) {
+    } elseif (\TorrentPier\Admin\Cron::validate_cron_post($_POST) == 1) {
         if ($mode2 == 'edit') {
-            \TorrentPier\Legacy\Admin\Cron::update_cron_job($_POST);
+            \TorrentPier\Admin\Cron::update_cron_job($_POST);
         } elseif ($mode2 == 'add') {
-            \TorrentPier\Legacy\Admin\Cron::insert_cron_job($_POST);
+            \TorrentPier\Admin\Cron::insert_cron_job($_POST);
         } else {
             bb_die("Invalid mode: $mode2");
         }
 
         redirect('admin/' . basename(__FILE__) . '?mode=list');
     } else {
-        bb_die(\TorrentPier\Legacy\Admin\Cron::validate_cron_post($_POST));
+        bb_die(\TorrentPier\Admin\Cron::validate_cron_post($_POST));
     }
 }
 

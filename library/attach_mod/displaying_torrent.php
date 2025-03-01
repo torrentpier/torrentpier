@@ -148,7 +148,7 @@ if ($tor_reged && $tor_info) {
     $tor_type = $tor_info['tor_type'];
 
     // Magnet link
-    $user_passkey = \TorrentPier\Legacy\Torrent::getPasskey($bt_user_id);
+    $user_passkey = TorrentPier\Torrent::getPasskey($bt_user_id);
     $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, html_ent_decode($t_data['topic_title']));
 
     // ratio limits

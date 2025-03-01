@@ -220,7 +220,7 @@ switch ($mode) {
         }
 
         if ($confirmed) {
-            $result = \TorrentPier\Legacy\Admin\Common::topic_delete($req_topics, $forum_id);
+            $result = \TorrentPier\Admin\Common::topic_delete($req_topics, $forum_id);
 
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
@@ -255,7 +255,7 @@ switch ($mode) {
 
         if ($confirmed) {
             $new_forum_id = (int)$_POST['new_forum'];
-            $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']), $_POST['reason_move_bot']);
+            $result = \TorrentPier\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']), $_POST['reason_move_bot']);
 
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
@@ -491,14 +491,14 @@ switch ($mode) {
 
                 //bot
                 if (isset($_POST['after_split_to_old'])) {
-                    \TorrentPier\Legacy\Post::insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim($_POST['subject']));
+                    TorrentPier\Post::insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim($_POST['subject']));
                 }
                 if (isset($_POST['after_split_to_new'])) {
-                    \TorrentPier\Legacy\Post::insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
+                    TorrentPier\Post::insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
                 }
 
-                \TorrentPier\Legacy\Admin\Common::sync('topic', [$topic_id, $new_topic_id]);
-                \TorrentPier\Legacy\Admin\Common::sync('forum', [$forum_id, $new_forum_id]);
+                \TorrentPier\Admin\Common::sync('topic', [$topic_id, $new_topic_id]);
+                \TorrentPier\Admin\Common::sync('forum', [$forum_id, $new_forum_id]);
 
                 //bot
                 $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . TOPIC_URL . "$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
@@ -522,7 +522,7 @@ switch ($mode) {
             }
 
             // Delete posts
-            $result = \TorrentPier\Legacy\Admin\Common::post_delete(explode(',', $post_id_sql));
+            $result = \TorrentPier\Admin\Common::post_delete(explode(',', $post_id_sql));
 
             $msg = $result ? $lang['DELETE_POSTS_SUCCESFULLY'] : $lang['NO_POSTS_REMOVED'];
             bb_die(return_msg_mcp($msg));

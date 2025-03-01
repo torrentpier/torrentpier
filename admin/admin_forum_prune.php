@@ -34,7 +34,7 @@ if (isset($_REQUEST['submit'])) {
     $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . " $where_sql";
 
     foreach (DB()->fetch_rowset($sql) as $i => $row) {
-        $pruned_topics = \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $row['forum_id'], $prunetime, !empty($_POST['prune_all_topic_types']));
+        $pruned_topics = \TorrentPier\Admin\Common::topic_delete('prune', $row['forum_id'], $prunetime, !empty($_POST['prune_all_topic_types']));
         $pruned_total += $pruned_topics;
         $prune_performed = true;
 
