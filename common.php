@@ -120,7 +120,7 @@ function DB(string $db_alias = 'db')
 /**
  * Cache
  */
-$CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
+$CACHES = new TorrentPier\Caches($bb_cfg);
 
 function CACHE(string $cache_name)
 {
