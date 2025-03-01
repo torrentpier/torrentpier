@@ -97,7 +97,7 @@ function bbcode_tpl_compact($text)
 // prepare a posted message for entry into the database
 function prepare_message($message)
 {
-    $message = \TorrentPier\Legacy\BBCode::clean_up($message);
+    $message = TorrentPier\BBCode::clean_up($message);
     $message = htmlCHR($message, false, ENT_NOQUOTES);
     return $message;
 }
@@ -391,7 +391,7 @@ function bbcode2html($text)
     global $bbcode, $wordCensor;
 
     if (!isset($bbcode)) {
-        $bbcode = new TorrentPier\Legacy\BBCode();
+        $bbcode = new TorrentPier\BBCode();
     }
     $text = $wordCensor->censorString($text);
     return $bbcode->bbcode2html($text);

@@ -7,13 +7,13 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
 
 use function in_array;
 
 /**
  * Class BBCode
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class BBCode
 {
