@@ -401,12 +401,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
 						LIMIT 1
 					", 'checked_releases');
                     if ($count_checked_releases || IS_AM) {
-                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+                        TorrentPier\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
                     } else {
-                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
+                        TorrentPier\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
                     }
                 } else {
-                    \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+                    TorrentPier\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
                 }
             }
         }

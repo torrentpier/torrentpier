@@ -23,7 +23,7 @@ if (!isset($this->request['type'])) {
 $attach_id = (int)$this->request['attach_id'];
 $type = (string)$this->request['type'];
 
-if (!$torrent = \TorrentPier\Legacy\Torrent::get_torrent_info($attach_id)) {
+if (!$torrent = TorrentPier\Torrent::get_torrent_info($attach_id)) {
     $this->ajax_die($lang['INVALID_ATTACH_ID']);
 }
 
@@ -52,7 +52,7 @@ switch ($type) {
             $tor_type_lang = "{$lang['UNSET_GOLD_TORRENT']} / {$lang['UNSET_SILVER_TORRENT']}";
         }
 
-        \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
+        TorrentPier\Torrent::change_tor_type($attach_id, $tor_type);
 
         // Log action
         $log_action->mod('mod_topic_change_tor_type', [
@@ -67,12 +67,12 @@ switch ($type) {
         break;
 
     case 'reg':
-        \TorrentPier\Legacy\Torrent::tracker_register($attach_id);
+        TorrentPier\Torrent::tracker_register($attach_id);
         $url = (TOPIC_URL . $torrent['topic_id']);
         break;
 
     case 'unreg':
-        \TorrentPier\Legacy\Torrent::tracker_unregister($attach_id);
+        TorrentPier\Torrent::tracker_unregister($attach_id);
         $url = (TOPIC_URL . $torrent['topic_id']);
         break;
 
@@ -80,7 +80,7 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEL_TORRENT']);
         }
-        \TorrentPier\Legacy\Torrent::delete_torrent($attach_id);
+        TorrentPier\Torrent::delete_torrent($attach_id);
         $url = make_url(TOPIC_URL . $torrent['topic_id']);
         break;
 
@@ -88,7 +88,7 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEL_MOVE_TORRENT']);
         }
-        \TorrentPier\Legacy\Torrent::delete_torrent($attach_id);
+        TorrentPier\Torrent::delete_torrent($attach_id);
         $url = make_url("modcp.php?" . POST_TOPIC_URL . "={$torrent['topic_id']}&mode=move&sid={$userdata['session_id']}");
         break;
 }

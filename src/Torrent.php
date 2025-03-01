@@ -7,18 +7,15 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
-
-use TorrentPier\TorrServerAPI;
+namespace TorrentPier;
 
 use Arokettu\Bencode\Bencode;
 use Arokettu\Bencode\Bencode\Collection;
-
 use Exception;
 
 /**
  * Class Torrent
- * @package TorrentPier\Legacy
+ * @package TorrentPier
  */
 class Torrent
 {

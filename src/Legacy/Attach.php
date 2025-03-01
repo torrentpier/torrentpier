@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\Torrent;
+
 /**
  * Class Attach
  * @package TorrentPier\Legacy
