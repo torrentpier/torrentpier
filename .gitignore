@@ -12,8 +12,8 @@ composer-setup.php
 data/avatars
 data/uploads
 internal_data/atom
-#internal_data/cache
-#internal_data/log
+internal_data/cache
+internal_data/log
 internal_data/updater.json
 sitemap
 internal_data/triggers
