@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_ROOT', __DIR__ . '/');
+define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 
 $items = [
     '.github',
