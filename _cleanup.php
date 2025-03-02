@@ -9,7 +9,7 @@
 
 define('BB_ROOT', __DIR__ . '/');
 
-$list = [
+$items = [
     '.github',
     '.editorconfig',
     '.gitignore',
@@ -25,52 +25,53 @@ $list = [
     'SECURITY.md'
 ];
 
-foreach ($list as $file) {
-    if (is_file(BB_ROOT . $file)) {
-        if (unlink(BB_ROOT . $file)) {
-            echo '[INFO] File removed: ' . $file . PHP_EOL;
-        } else {
-            echo '[ERROR] File cannot be removed: ' . $file . PHP_EOL;
-            exit;
-        }
-    } elseif (is_dir(BB_ROOT . $file)) {
-        rmdir_rec(BB_ROOT . $file);
+foreach ($items as $item) {
+    $path = BB_ROOT . $item;
+
+    if (is_file($path)) {
+        removeFile($path);
+    } elseif (is_dir($path)) {
+        removeDir($path);
     }
 }
 
 /**
- * Remove directory recursively
+ * Remove target file
  *
- * @param string $dir
- * @return void
+ * @param string $file Path to file
  */
-function rmdir_rec(string $dir): void
+function removeFile(string $file): void
+{
+    if (unlink($file)) {
+        echo "[INFO] File removed: $file" . PHP_EOL;
+    } else {
+        echo "[ERROR] File cannot be removed: $file" . PHP_EOL;
+        exit;
+    }
+}
+
+/**
+ * Remove folder (recursively)
+ *
+ * @param string $dir Path to folder
+ */
+function removeDir(string $dir): void
 {
     $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-    $files = new RecursiveIteratorIterator($it,
-        RecursiveIteratorIterator::CHILD_FIRST);
+    $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+
     foreach ($files as $file) {
         if ($file->isDir()) {
-            if (rmdir($file->getPathname())) {
-                echo '[INFO] Folder removed: ' . $file->getPathname() . PHP_EOL;
-            } else {
-                echo '[ERROR] Folder cannot be removed: ' . $file->getPathname() . PHP_EOL;
-                exit;
-            }
+            removeDir($file->getPathname());
         } else {
-            if (unlink($file->getPathname())) {
-                echo '[INFO] File (in folder) removed: ' . $file->getPathname() . PHP_EOL;
-            } else {
-                echo '[ERROR] File (in folder) cannot be removed: ' . $file->getPathname() . PHP_EOL;
-                exit;
-            }
+            removeFile($file->getPathname());
         }
     }
 
     if (rmdir($dir)) {
-        echo '[INFO] Folder removed: ' . $dir . PHP_EOL;
+        echo "[INFO] Folder removed: $dir" . PHP_EOL;
     } else {
-        echo '[ERROR] Folder cannot be removed: ' . $dir . PHP_EOL;
+        echo "[ERROR] Folder cannot be removed: $dir" . PHP_EOL;
         exit;
     }
 }
