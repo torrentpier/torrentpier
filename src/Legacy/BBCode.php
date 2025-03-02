@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use function in_array;
-
 /**
  * Class BBCode
  * @package TorrentPier\Legacy
@@ -388,7 +386,7 @@ class BBCode
     {
         global $bb_cfg;
 
-        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (\in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
