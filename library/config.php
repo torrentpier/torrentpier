@@ -521,7 +521,10 @@ $bb_cfg['sf_on_first_page_only'] = true; // Show subforums only on the first pag
 $bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300]; // Allowed number of topics per page
 
 // Topics
-$bb_cfg['show_post_bbcode_button'] = true; // Show "Code" button in topic to display BBCode of topic
+$bb_cfg['show_post_bbcode_button'] = [ // Show "Code" button in topic to display BBCode of topic
+    'enabled' => true,
+    'only_for_first_post' => true,
+];
 $bb_cfg['show_quick_reply'] = true; // Show quick reply forim
 $bb_cfg['show_rank_text'] = false; // Show user rank name in topics
 $bb_cfg['show_rank_image'] = true; // Show user rank image in topics
