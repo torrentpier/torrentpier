@@ -20,6 +20,12 @@
 ### 🗑️ Removed
 
 - *(posting.php)* Unused `'U_VIEWTOPIC` variable ([#1818](https://github.com/torrentpier/torrentpier/pull/1818)) - ([03ebbda](https://github.com/torrentpier/torrentpier/commit/03ebbda6be567d82d2a49fefe02356544fbd07cb))
+- Integrity checker 🥺🪦 ([#1827](https://github.com/torrentpier/torrentpier/pull/1827)) - ([ba3ce88](https://github.com/torrentpier/torrentpier/commit/ba3ce885c8d84ae939a0ce9c79b97877d3aaab41))
+- Redundant `.htaccess` files ([#1826](https://github.com/torrentpier/torrentpier/pull/1826)) - ([912b080](https://github.com/torrentpier/torrentpier/commit/912b080b16438b09f82fbc72a363589cc2f6209e))
+
+### 🚜 Refactor
+
+- Moved classes from `Legacy` folder to `src` root ([#1828](https://github.com/torrentpier/torrentpier/pull/1828)) - ([92ce77e](https://github.com/torrentpier/torrentpier/commit/92ce77ec0ec703c08a659419087a373f76e711f7))
 
 ### ⚙️ Miscellaneous
 
