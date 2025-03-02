@@ -37,13 +37,24 @@ class Sitemap
         }
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
-        $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
+        $ignore_forum_sql = $not_forums_id ? "WHERE f.forum_id NOT IN($not_forums_id)" : '';
 
-        $sql = DB()->sql_query("SELECT forum_id, forum_name FROM " . BB_FORUMS . " " . $ignore_forum_sql . " ORDER BY forum_id ASC");
+        $sql = DB()->sql_query("
+            SELECT
+                f.forum_id,
+                f.forum_name,
+                MAX(t.topic_time) AS last_topic_time
+            FROM " . BB_FORUMS . " f
+            LEFT JOIN " . BB_TOPICS . " t ON f.forum_id = t.forum_id
+            " . $ignore_forum_sql . "
+            GROUP BY f.forum_id, f.forum_name
+            ORDER BY f.forum_id ASC
+        ");
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $forumUrls[] = [
                 'url' => FORUM_URL . $row['forum_id'],
+                'time' => $row['last_topic_time']
             ];
         }
 
@@ -69,12 +80,12 @@ class Sitemap
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
         $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
 
-        $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_time ASC");
+        $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_last_post_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_last_post_time ASC");
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $topicUrls[] = [
                 'url' => TOPIC_URL . $row['topic_id'],
-                'time' => $row['topic_time'],
+                'time' => $row['topic_last_post_time'],
             ];
         }
 
@@ -120,7 +131,7 @@ class Sitemap
         $sitemap = new STM(SITEMAP_DIR . '/sitemap_dynamic.xml');
 
         foreach ($this->getForumUrls() as $forum) {
-            $sitemap->addItem(make_url($forum['url']), time(), STM::HOURLY, 0.7);
+            $sitemap->addItem(make_url($forum['url']), $forum['time'], STM::HOURLY, 0.7);
         }
 
         foreach ($this->getTopicUrls() as $topic) {
