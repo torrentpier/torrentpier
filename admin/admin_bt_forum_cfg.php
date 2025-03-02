@@ -77,12 +77,12 @@ $cfg = bb_get_config(BB_CONFIG, true, false);
  */
 if ($submit && $confirm) {
     foreach ($db_fields_bool as $field_name => $field_def_val) {
-        \TorrentPier\Admin\Torrent::update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
+        \TorrentPier\Legacy\Admin\Torrent::update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
     }
 
-    \TorrentPier\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
-    \TorrentPier\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
-    \TorrentPier\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
 
     $datastore->update('cat_forums');
 
@@ -90,16 +90,16 @@ if ($submit && $confirm) {
 }
 
 // Set template vars
-\TorrentPier\Admin\Torrent::set_tpl_vars($default_cfg_str, $cfg);
-\TorrentPier\Admin\Torrent::set_tpl_vars_lang($default_cfg_str);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_str, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_str);
 
-\TorrentPier\Admin\Torrent::set_tpl_vars_bool($default_cfg_bool, $cfg);
-\TorrentPier\Admin\Torrent::set_tpl_vars_lang($default_cfg_bool);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_bool($default_cfg_bool, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_bool);
 
-\TorrentPier\Admin\Torrent::set_tpl_vars($default_cfg_num, $cfg);
-\TorrentPier\Admin\Torrent::set_tpl_vars_lang($default_cfg_num);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_num, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_num);
 
-\TorrentPier\Admin\Torrent::set_tpl_vars_lang($db_fields_bool);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($db_fields_bool);
 
 // Get Forums list
 $sql = 'SELECT f.*

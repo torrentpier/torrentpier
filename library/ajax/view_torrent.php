@@ -36,7 +36,7 @@ try {
     return;
 }
 
-$torrent = new TorrentPier\TorrentFileList($tor);
+$torrent = new TorrentPier\Legacy\TorrentFileList($tor);
 
 $tor_filelist = $torrent->get_filelist();
 

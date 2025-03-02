@@ -538,14 +538,14 @@ if (!DB()->sql_query($sql)) {
 // Does this topic contain a poll?
 //
 if ($topic_has_poll) {
-    $poll_votes_js = TorrentPier\Poll::get_poll_data_items_js($topic_id);
+    $poll_votes_js = \TorrentPier\Legacy\Poll::get_poll_data_items_js($topic_id);
 
     if (!$poll_votes_js) {
         $template->assign_vars(['TOPIC_HAS_POLL' => false]);
     } else {
         $template->assign_vars([
-            'SHOW_VOTE_BTN' => TorrentPier\Poll::pollIsActive($t_data),
-            'POLL_ALREADY_VOTED' => TorrentPier\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id']),
+            'SHOW_VOTE_BTN' => \TorrentPier\Legacy\Poll::pollIsActive($t_data),
+            'POLL_ALREADY_VOTED' => \TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id']),
             'POLL_VOTES_JS' => $poll_votes_js
         ]);
     }

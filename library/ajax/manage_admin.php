@@ -66,16 +66,16 @@ switch ($mode) {
         $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
         break;
     case 'update_user_level':
-        TorrentPier\Group::update_user_level('all');
+        \TorrentPier\Legacy\Group::update_user_level('all');
         $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';
         break;
     case 'sync_topics':
-        \TorrentPier\Admin\Common::sync('topic', 'all');
-        \TorrentPier\Admin\Common::sync_all_forums();
+        \TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
+        \TorrentPier\Legacy\Admin\Common::sync_all_forums();
         $this->response['sync_topics_html'] = '<span class="seed bold">' . $lang['TOPICS_DATA_SYNCHRONIZED'] . '</span>';
         break;
     case 'sync_user_posts':
-        \TorrentPier\Admin\Common::sync('user_posts', 'all');
+        \TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');
         $this->response['sync_user_posts_html'] = '<span class="seed bold">' . $lang['USER_POSTS_COUNT_SYNCHRONIZED'] . '</span>';
         break;
     case 'unlock_cron':

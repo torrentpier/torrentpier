@@ -12,9 +12,9 @@ if (!defined('BB_ROOT')) {
 }
 
 // Synchronization
-\TorrentPier\Admin\Common::sync('topic', 'all');
-\TorrentPier\Admin\Common::sync('user_posts', 'all');
-\TorrentPier\Admin\Common::sync_all_forums();
+\TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
+\TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');
+\TorrentPier\Legacy\Admin\Common::sync_all_forums();
 
 // Cleaning bb_poll_users
 if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {

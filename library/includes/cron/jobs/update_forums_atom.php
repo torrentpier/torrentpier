@@ -18,18 +18,18 @@ $forums_data = DB()->fetch_rowset("SELECT forum_id, allow_reg_tracker, forum_nam
 
 if (is_file($bb_cfg['atom']['path'] . '/f/0.atom')) {
     if (filemtime($bb_cfg['atom']['path'] . '/f/0.atom') <= $timecheck) {
-        \TorrentPier\Atom::update_forum_feed(0, $forums_data);
+        \TorrentPier\Legacy\Atom::update_forum_feed(0, $forums_data);
     }
 } else {
-    \TorrentPier\Atom::update_forum_feed(0, $forums_data);
+    \TorrentPier\Legacy\Atom::update_forum_feed(0, $forums_data);
 }
 
 foreach ($forums_data as $forum_data) {
     if (is_file($bb_cfg['atom']['path'] . '/f/' . $forum_data['forum_id'] . '.atom')) {
         if (filemtime($bb_cfg['atom']['path'] . '/f/' . $forum_data['forum_id'] . '.atom') <= $timecheck) {
-            \TorrentPier\Atom::update_forum_feed($forum_data['forum_id'], $forum_data);
+            \TorrentPier\Legacy\Atom::update_forum_feed($forum_data['forum_id'], $forum_data);
         }
     } else {
-        \TorrentPier\Atom::update_forum_feed($forum_data['forum_id'], $forum_data);
+        \TorrentPier\Legacy\Atom::update_forum_feed($forum_data['forum_id'], $forum_data);
     }
 }

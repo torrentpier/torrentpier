@@ -1075,7 +1075,7 @@ function setup_style()
         }
     }
 
-    $template = new TorrentPier\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
+    $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     $template->assign_vars([
@@ -1342,7 +1342,7 @@ function bb_die($msg_text, $status_code = null)
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
         if (empty($template)) {
-            $template = new TorrentPier\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
+            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
         }
         if (empty($theme)) {
             $theme = setup_style();
@@ -2004,12 +2004,12 @@ function update_atom($type, $id)
 {
     switch ($type) {
         case 'user':
-            \TorrentPier\Atom::update_user_feed($id, get_username($id));
+            \TorrentPier\Legacy\Atom::update_user_feed($id, get_username($id));
             break;
 
         case 'topic':
             $topic_poster = (int)DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
-            \TorrentPier\Atom::update_user_feed($topic_poster, get_username($topic_poster));
+            \TorrentPier\Legacy\Atom::update_user_feed($topic_poster, get_username($topic_poster));
             break;
     }
 }

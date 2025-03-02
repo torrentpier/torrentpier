@@ -45,7 +45,7 @@ while (true) {
     }
 
     if ($prune_users = $not_activated_users + $not_active_users) {
-        \TorrentPier\Admin\Common::user_delete($prune_users);
+        \TorrentPier\Legacy\Admin\Common::user_delete($prune_users);
     }
 
     if (count($prune_users) < $users_per_cycle) {

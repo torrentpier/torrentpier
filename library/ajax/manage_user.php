@@ -37,7 +37,7 @@ switch ($mode) {
 
         if (!in_array($user_id, explode(',', EXCLUDED_USERS))) {
             \TorrentPier\Sessions::delete_user_sessions($user_id);
-            \TorrentPier\Admin\Common::user_delete($user_id);
+            \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
             $user_id = $userdata['user_id']; // Store self user_id for redirect after successful deleting
             $this->response['info'] = $lang['USER_DELETED'];
@@ -54,8 +54,8 @@ switch ($mode) {
         }
 
         $user_topics = DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
-        $deleted_topics = \TorrentPier\Admin\Common::topic_delete($user_topics);
-        $deleted_posts = \TorrentPier\Admin\Common::post_delete('user', $user_id);
+        $deleted_topics = \TorrentPier\Legacy\Admin\Common::topic_delete($user_topics);
+        $deleted_posts = \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
         $this->response['info'] = $lang['USER_DELETED_POSTS'];
         break;
     case 'delete_message':
@@ -66,7 +66,7 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['DELETE_USER_POSTS_CONFIRM']);
         }
 
-        \TorrentPier\Admin\Common::post_delete('user', $user_id);
+        \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
         $this->response['info'] = $lang['USER_DELETED_POSTS'];
         break;
     case 'user_activate':

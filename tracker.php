@@ -223,7 +223,7 @@ foreach ($s_not_seen_opt as $val => $opt) {
     $s_not_seen_select[$opt['lang']] = $val;
 }
 
-if ($release_groups = TorrentPier\Group::get_group_data('all')) {
+if ($release_groups = \TorrentPier\Legacy\Group::get_group_data('all')) {
     $s_rg_opt = array(
         $search_all => array(
             'lang' => $lang['CHOOSE_RELEASE_GROUP'],
@@ -713,7 +713,7 @@ if ($allowed_forums) {
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], TorrentPier\Torrent::getPasskey($user_id), html_ent_decode($tor['topic_title']));
+            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), html_ent_decode($tor['topic_title']));
             $compl = $tor['complete_count'];
             $dl_sp = $dl ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
             $ul_sp = $ul ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
