@@ -37,14 +37,24 @@ class Sitemap
         }
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
-        $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
+        $ignore_forum_sql = $not_forums_id ? "WHERE f.forum_id NOT IN($not_forums_id)" : '';
 
-        $sql = DB()->sql_query("SELECT forum_id, forum_name FROM " . BB_FORUMS . " " . $ignore_forum_sql . " ORDER BY forum_id ASC");
+        $sql = DB()->sql_query("
+            SELECT
+                f.forum_id,
+                f.forum_name,
+                MAX(t.topic_time) AS last_topic_time
+            FROM " . BB_FORUMS . " f
+            LEFT JOIN " . BB_TOPICS . " t ON f.forum_id = t.forum_id
+            " . $ignore_forum_sql . "
+            GROUP BY f.forum_id, f.forum_name
+            ORDER BY f.forum_id ASC
+        ");
 
         while ($row = DB()->sql_fetchrow($sql)) {
             $forumUrls[] = [
                 'url' => FORUM_URL . $row['forum_id'],
-                'time' => time()
+                'time' => $row['last_topic_time']
             ];
         }
 
