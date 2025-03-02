@@ -28,17 +28,49 @@ $list = [
 foreach ($list as $file) {
     if (is_file(BB_ROOT . $file)) {
         if (unlink(BB_ROOT . $file)) {
-            echo '[INFO] File removed:' . $file . PHP_EOL;
+            echo '[INFO] File removed: ' . $file . PHP_EOL;
         } else {
-            echo '[ERROR] File cannot be removed:' . $file . PHP_EOL;
+            echo '[ERROR] File cannot be removed: ' . $file . PHP_EOL;
             exit;
         }
     } elseif (is_dir(BB_ROOT . $file)) {
-        if (rmdir(BB_ROOT . $file)) {
-            echo '[INFO] Folder removed:' . $file . PHP_EOL;
+        rmdir_rec(BB_ROOT . $file);
+    }
+}
+
+/**
+ * Remove directory recursively
+ *
+ * @param string $dir
+ * @return void
+ */
+function rmdir_rec(string $dir): void
+{
+    $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+    $files = new RecursiveIteratorIterator($it,
+        RecursiveIteratorIterator::CHILD_FIRST);
+    foreach ($files as $file) {
+        if ($file->isDir()) {
+            if (rmdir($file->getPathname())) {
+                echo '[INFO] Folder removed: ' . $file->getPathname() . PHP_EOL;
+            } else {
+                echo '[ERROR] Folder cannot be removed: ' . $file->getPathname() . PHP_EOL;
+                exit;
+            }
         } else {
-            echo '[ERROR] Folder cannot be removed:' . $file . PHP_EOL;
-            exit;
+            if (unlink($file->getPathname())) {
+                echo '[INFO] File (in folder) removed: ' . $file->getPathname() . PHP_EOL;
+            } else {
+                echo '[ERROR] File (in folder) cannot be removed: ' . $file->getPathname() . PHP_EOL;
+                exit;
+            }
         }
+    }
+
+    if (rmdir($dir)) {
+        echo '[INFO] Folder removed: ' . $dir . PHP_EOL;
+    } else {
+        echo '[ERROR] Folder cannot be removed: ' . $dir . PHP_EOL;
+        exit;
     }
 }
