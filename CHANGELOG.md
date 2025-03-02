@@ -4,16 +4,39 @@
 > To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
+### 🚀 Features
+
+- Added configuration files for `nginx` & `caddy` ([#1787](https://github.com/torrentpier/torrentpier/pull/1787)) - ([f7d3946](https://github.com/torrentpier/torrentpier/commit/f7d394607e4ea5bb9b7f2b33692204a226a4d78b))
+
+### 🐛 Bug Fixes
+
+- *(tr_seed_bonus.php)* Incorrect `GROUP BY` ([#1820](https://github.com/torrentpier/torrentpier/pull/1820)) - ([dfd4e5e](https://github.com/torrentpier/torrentpier/commit/dfd4e5ebc9df916868210a7844f2a6f35e7b8aca))
+
+### 📦 Dependencies
+
+- *(deps)* Bump php-curl-class/php-curl-class from 11.0.3 to 11.0.4 ([#1823](https://github.com/torrentpier/torrentpier/pull/1823)) - ([1c323a4](https://github.com/torrentpier/torrentpier/commit/1c323a45d777b033155da9a2becec506215bd94c))
+- *(deps)* Bump php-curl-class/php-curl-class from 11.0.1 to 11.0.3 ([#1821](https://github.com/torrentpier/torrentpier/pull/1821)) - ([dedf35b](https://github.com/torrentpier/torrentpier/commit/dedf35b794196034eb27d4125dff0798aed5f315))
+
 ### 🗑️ Removed
 
 - *(posting.php)* Unused `'U_VIEWTOPIC` variable ([#1818](https://github.com/torrentpier/torrentpier/pull/1818)) - ([03ebbda](https://github.com/torrentpier/torrentpier/commit/03ebbda6be567d82d2a49fefe02356544fbd07cb))
+- Integrity checker 🥺🪦 ([#1827](https://github.com/torrentpier/torrentpier/pull/1827)) - ([ba3ce88](https://github.com/torrentpier/torrentpier/commit/ba3ce885c8d84ae939a0ce9c79b97877d3aaab41))
+- Redundant `.htaccess` files ([#1826](https://github.com/torrentpier/torrentpier/pull/1826)) - ([912b080](https://github.com/torrentpier/torrentpier/commit/912b080b16438b09f82fbc72a363589cc2f6209e))
+
+### 🚜 Refactor
+
+- Moved classes from `Legacy` folder to `src` root ([#1828](https://github.com/torrentpier/torrentpier/pull/1828)) - ([92ce77e](https://github.com/torrentpier/torrentpier/commit/92ce77ec0ec703c08a659419087a373f76e711f7))
 
 ### ⚙️ Miscellaneous
 
+- *(Caddyfile)* Some minor fixes ([#1822](https://github.com/torrentpier/torrentpier/pull/1822)) - ([6f641aa](https://github.com/torrentpier/torrentpier/commit/6f641aa9d8d7afb30920c054a43347393ea05cc4))
 - *(README)* Fixed all grammatical errors, sentence structure and readibility ([#1812](https://github.com/torrentpier/torrentpier/pull/1812)) - ([bea3b0b](https://github.com/torrentpier/torrentpier/commit/bea3b0bccf335970ea5826543d8fa223329ef077))
+- *(announcer)* Some minor improvements ([#1819](https://github.com/torrentpier/torrentpier/pull/1819)) - ([bdefed4](https://github.com/torrentpier/torrentpier/commit/bdefed4dab3cc65330fcb9cb9750cc8e84beda1d))
 - *(cliff)* Removed TorrentPier logo ([#1817](https://github.com/torrentpier/torrentpier/pull/1817)) - ([7794242](https://github.com/torrentpier/torrentpier/commit/7794242750b44183312a2a45c9f54c6afde12f0e))
 - *(cliff)* Synced `cliff-releases.toml` with `cliff.toml` changes ([#1815](https://github.com/torrentpier/torrentpier/pull/1815)) - ([f2aea92](https://github.com/torrentpier/torrentpier/commit/f2aea92b3d79d72254e696fde31ad9b4bec5dcd0))
 - *(cliff)* Added missing line breaks after `body` ([#1814](https://github.com/torrentpier/torrentpier/pull/1814)) - ([2593f09](https://github.com/torrentpier/torrentpier/commit/2593f093a389a9c450725290862b99d911fbef5d))
+- *(installer)* Some minor improvements ([#1825](https://github.com/torrentpier/torrentpier/pull/1825)) - ([4f89685](https://github.com/torrentpier/torrentpier/commit/4f896854d3bb67300027f7542704f41c4869837f))
+- *(installer)* Some minor improvements ([#1824](https://github.com/torrentpier/torrentpier/pull/1824)) - ([f3714f0](https://github.com/torrentpier/torrentpier/commit/f3714f02f2c8fbfaccfdafb8f25a269664c48950))
 - *(workflow)* Short `release_name` ([#1816](https://github.com/torrentpier/torrentpier/pull/1816)) - ([c57db21](https://github.com/torrentpier/torrentpier/commit/c57db2104d7b8363d0b8ce8872ce90fc7410c724))
 - *(workflow)* Added `workflow_dispatch` for  `schedule.yml` ([#1813](https://github.com/torrentpier/torrentpier/pull/1813)) - ([d54c07b](https://github.com/torrentpier/torrentpier/commit/d54c07b3da00fc8bcba5413cd4ae3f3c9f6007bb))
 - *(workflow)* Some improvements ([#1811](https://github.com/torrentpier/torrentpier/pull/1811)) - ([3a9dd6a](https://github.com/torrentpier/torrentpier/commit/3a9dd6a3c931cfbd682257c283a3296c4914548f))

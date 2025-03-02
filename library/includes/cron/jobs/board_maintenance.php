@@ -75,6 +75,3 @@ if ($bb_cfg['indexnow_settings']['enabled'] && !is_file(BB_ROOT . $bb_cfg['index
 
 // Check for updates
 $datastore->update('check_updates');
-
-// Integrity check
-$datastore->update('files_integrity');

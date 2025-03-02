@@ -288,7 +288,7 @@ if (is_file(BB_ROOT . '.env.example') && !is_file(BB_ROOT . '.env')) {
 }
 
 // Editing ENV file
-$DB_HOST = '';
+$DB_HOST = 'localhost';
 $DB_PORT = 3306;
 $DB_DATABASE = '';
 $DB_USERNAME = '';
@@ -309,20 +309,17 @@ if (is_file(BB_ROOT . '.env')) {
         if (trim($line) !== '' && !str_starts_with($line, '#')) {
             $parts = explode('=', $line, 2);
             $key = trim($parts[0]);
-            $value = (isset($parts[1]) && $key !== 'DB_PASSWORD') ? trim($parts[1]) : '';
-
-            // Database default values
-            if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
-                $$key = $value;
-            }
+            $value = (!empty($parts[1]) && $key !== 'DB_PASSWORD') ? trim($parts[1]) : '';
 
             out("\nCurrent value of $key: $value", 'debug');
             echo "Enter a new value for $key (or leave empty to not change): ";
-            $newValue = readline();
+            $newValue = trim(readline());
 
             if (!empty($newValue) || $key === 'DB_PASSWORD') {
                 $line = "$key=$newValue";
                 $$key = $newValue;
+            } else {
+                $$key = $value;
             }
         }
 
