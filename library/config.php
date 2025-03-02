@@ -523,7 +523,7 @@ $bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300]; // Allowed n
 // Topics
 $bb_cfg['show_post_bbcode_button'] = [ // Show "Code" button in topic to display BBCode of topic
     'enabled' => true,
-    'only_for_first_post' => false
+    'only_for_first_post' => true,
 ];
 $bb_cfg['show_quick_reply'] = true; // Show quick reply forim
 $bb_cfg['show_rank_text'] = false; // Show user rank name in topics
