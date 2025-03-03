@@ -6,6 +6,9 @@
 
 ### 🚀 Features
 
+- *(show post bbcode)* Added `'only_for_first_post'` param ([#1830](https://github.com/torrentpier/torrentpier/pull/1830)) - ([4dcd1fb](https://github.com/torrentpier/torrentpier/commit/4dcd1fb16e4e84acd1231ad821a2f05658b849ad))
+- *(sitemap)* Update `lastmod` when a new reply in topic ([#1737](https://github.com/torrentpier/torrentpier/pull/1737)) - ([bc95e14](https://github.com/torrentpier/torrentpier/commit/bc95e14be328303bb37e31299661b03045e37d07))
+- Easter egg for the 20th anniversary of the TorrentPier! ([#1831](https://github.com/torrentpier/torrentpier/pull/1831)) - ([f2e513d](https://github.com/torrentpier/torrentpier/commit/f2e513dd8b0f82f4f02474db4b83d83904a93f29))
 - Added configuration files for `nginx` & `caddy` ([#1787](https://github.com/torrentpier/torrentpier/pull/1787)) - ([f7d3946](https://github.com/torrentpier/torrentpier/commit/f7d394607e4ea5bb9b7f2b33692204a226a4d78b))
 
 ### 🐛 Bug Fixes
@@ -31,6 +34,7 @@
 
 - *(Caddyfile)* Some minor fixes ([#1822](https://github.com/torrentpier/torrentpier/pull/1822)) - ([6f641aa](https://github.com/torrentpier/torrentpier/commit/6f641aa9d8d7afb30920c054a43347393ea05cc4))
 - *(README)* Fixed all grammatical errors, sentence structure and readibility ([#1812](https://github.com/torrentpier/torrentpier/pull/1812)) - ([bea3b0b](https://github.com/torrentpier/torrentpier/commit/bea3b0bccf335970ea5826543d8fa223329ef077))
+- *(_cleanup.php)* Added CLI mode check ([#1834](https://github.com/torrentpier/torrentpier/pull/1834)) - ([5dc9a54](https://github.com/torrentpier/torrentpier/commit/5dc9a5475c051911c579ea732ef52d7feb78e8ac))
 - *(announcer)* Some minor improvements ([#1819](https://github.com/torrentpier/torrentpier/pull/1819)) - ([bdefed4](https://github.com/torrentpier/torrentpier/commit/bdefed4dab3cc65330fcb9cb9750cc8e84beda1d))
 - *(cliff)* Removed TorrentPier logo ([#1817](https://github.com/torrentpier/torrentpier/pull/1817)) - ([7794242](https://github.com/torrentpier/torrentpier/commit/7794242750b44183312a2a45c9f54c6afde12f0e))
 - *(cliff)* Synced `cliff-releases.toml` with `cliff.toml` changes ([#1815](https://github.com/torrentpier/torrentpier/pull/1815)) - ([f2aea92](https://github.com/torrentpier/torrentpier/commit/f2aea92b3d79d72254e696fde31ad9b4bec5dcd0))
@@ -41,6 +45,9 @@
 - *(workflow)* Added `workflow_dispatch` for  `schedule.yml` ([#1813](https://github.com/torrentpier/torrentpier/pull/1813)) - ([d54c07b](https://github.com/torrentpier/torrentpier/commit/d54c07b3da00fc8bcba5413cd4ae3f3c9f6007bb))
 - *(workflow)* Some improvements ([#1811](https://github.com/torrentpier/torrentpier/pull/1811)) - ([3a9dd6a](https://github.com/torrentpier/torrentpier/commit/3a9dd6a3c931cfbd682257c283a3296c4914548f))
 - *(workflow)* Some improvements ([#1810](https://github.com/torrentpier/torrentpier/pull/1810)) - ([c168c39](https://github.com/torrentpier/torrentpier/commit/c168c3956cf77886c14133ac10ec33aa0ae5bc4e))
+- Created cleanup script (for releases preparation) ([#1833](https://github.com/torrentpier/torrentpier/pull/1833)) - ([68bf26d](https://github.com/torrentpier/torrentpier/commit/68bf26d0f4ab33f5394d26f425e53817f3464ac8))
+- Bring back missing `cache` & `log` directories ([#1832](https://github.com/torrentpier/torrentpier/pull/1832)) - ([249c988](https://github.com/torrentpier/torrentpier/commit/249c9889890291d56317dd703414bdb57ecaa41f))
+- Some minor improvements ([#1829](https://github.com/torrentpier/torrentpier/pull/1829)) - ([3b8ee4c](https://github.com/torrentpier/torrentpier/commit/3b8ee4c4d3ab4631425fbe44f197b6a9bd7d158c))
 
 ## New Contributors ❤️
 
