@@ -193,6 +193,7 @@ $bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 
 // Language
+$bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as default language for guests
 $bb_cfg['lang'] = [
     // Languages available for selecting
     'af' => [
