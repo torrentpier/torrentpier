@@ -7,11 +7,14 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+if (!defined('BB_ROOT')) {
+    define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+}
+
+// Check CLI mode
 if (php_sapi_name() !== 'cli') {
     exit;
 }
-
-define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 
 $items = [
     '.github',
@@ -47,9 +50,9 @@ foreach ($items as $item) {
 function removeFile(string $file): void
 {
     if (unlink($file)) {
-        echo "[INFO] File removed: $file" . PHP_EOL;
+        echo "- File removed: $file" . PHP_EOL;
     } else {
-        echo "[ERROR] File cannot be removed: $file" . PHP_EOL;
+        echo "- File cannot be removed: $file" . PHP_EOL;
         exit;
     }
 }
@@ -73,9 +76,9 @@ function removeDir(string $dir): void
     }
 
     if (rmdir($dir)) {
-        echo "[INFO] Folder removed: $dir" . PHP_EOL;
+        echo "- Folder removed: $dir" . PHP_EOL;
     } else {
-        echo "[ERROR] Folder cannot be removed: $dir" . PHP_EOL;
+        echo "- Folder cannot be removed: $dir" . PHP_EOL;
         exit;
     }
 }
