@@ -14,6 +14,7 @@
 
 ### 🐛 Bug Fixes
 
+- *(info.php)* Undefined array key "show" ([#1836](https://github.com/torrentpier/torrentpier/pull/1836)) - ([f8c4e8f](https://github.com/torrentpier/torrentpier/commit/f8c4e8fb14090bc7403f24e363603bad9e231351))
 - *(tr_seed_bonus.php)* Incorrect `GROUP BY` ([#1820](https://github.com/torrentpier/torrentpier/pull/1820)) - ([dfd4e5e](https://github.com/torrentpier/torrentpier/commit/dfd4e5ebc9df916868210a7844f2a6f35e7b8aca))
 
 ### 📦 Dependencies
