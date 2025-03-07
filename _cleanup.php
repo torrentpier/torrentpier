@@ -7,11 +7,14 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+if (!defined('BB_ROOT')) {
+    define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+}
+
+// Check CLI mode
 if (php_sapi_name() !== 'cli') {
     exit;
 }
-
-define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 
 $items = [
     '.github',

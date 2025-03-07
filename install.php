@@ -185,7 +185,7 @@ if (!defined('EXTENSIONS_NOT_INSTALLED')) {
 if (is_file(BB_ROOT . '.env')) {
     out('- TorrentPier already installed', 'warning');
     echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
-    if (str_starts_with(mb_strtolower(readline()), 'y')) {
+    if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
         out("\n- Re-install process started...", 'info');
         // environment
         if (is_file(BB_ROOT . '.env')) {
@@ -412,6 +412,18 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             out("- Installation file renamed!", 'success');
         } else {
             out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
+        }
+    }
+
+    // Cleanup...
+    if (is_file(BB_ROOT . '_cleanup.php')) {
+        out("\n--- Finishing... ---\n", 'info');
+        echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
+        if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
+            require_once BB_ROOT . '_cleanup.php';
+            unlink(BB_ROOT . '_cleanup.php');
+        } else {
+            out('- Skipping...', 'info');
         }
     }
 
