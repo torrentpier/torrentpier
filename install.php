@@ -417,9 +417,15 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     // Cleanup...
     if (is_file(BB_ROOT . '_cleanup.php')) {
-        out("\n--- Finishing... ---\n", 'info');
-        echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
+        out("\n--- Finishing installation ---\n", 'info');
+        out("The cleanup process will remove:");
+        out(" - Development documentation (README, CHANGELOG)");
+        out(" - Git configuration files");
+        out(" - CI/CD pipelines and code analysis tools");
+        out(" - Translation and contribution guidelines");
+        echo 'Do you want to delete these files permanently? [y/N]: ';
         if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
+            out("\n- Cleanup...", 'info');
             require_once BB_ROOT . '_cleanup.php';
             unlink(BB_ROOT . '_cleanup.php');
         } else {
