@@ -417,12 +417,12 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     // Cleanup...
     if (is_file(BB_ROOT . '_cleanup.php')) {
-        out("\n--- Finishing installation ---\n", 'info');
-        out("The cleanup process will remove:", 'debug');
-        out("- Development documentation (README, CHANGELOG)");
-        out("- Git configuration files");
-        out("- CI/CD pipelines and code analysis tools");
-        out("- Translation and contribution guidelines");
+        out("\n--- Finishing installation (Cleanup) ---\n", 'info');
+        out('The cleanup process will remove:');
+        out('- Development documentation (README, CHANGELOG)', 'debug');
+        out('- Git configuration files', 'debug');
+        out('- CI/CD pipelines and code analysis tools', 'debug');
+        out('- Translation and contribution guidelines', 'debug');
         echo 'Do you want to delete these files permanently? [y/N]: ';
         if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
             out("\n- Cleanup...", 'info');
