@@ -2057,7 +2057,7 @@ function bb_captcha(string $mode): bool|string
     $settings['language'] = $bb_cfg['default_lang'];
 
     // Checking captcha settings
-    if (!$settings['disabled']) {
+    if (!$settings['disabled'] && $settings['service'] !== 'text') {
         if (empty($settings['public_key']) || empty($settings['secret_key'])) {
             bb_die($lang['CAPTCHA_SETTINGS']);
         }
