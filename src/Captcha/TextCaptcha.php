@@ -19,13 +19,11 @@ use Gregwar\Captcha\PhraseBuilder;
 class TextCaptcha implements CaptchaInterface
 {
     /**
-     * Captcha service settings
+     * CaptchaBuilder object
      *
-     * @var array
+     * @var CaptchaBuilder
      */
-    private array $settings;
-
-    private $captcha;
+    private CaptchaBuilder $captcha;
 
     /**
      * Constructor
@@ -38,7 +36,6 @@ class TextCaptcha implements CaptchaInterface
             session_start();
         }
 
-        $this->settings = $settings;
         $this->captcha = new CaptchaBuilder;
     }
 
@@ -65,6 +62,10 @@ class TextCaptcha implements CaptchaInterface
      */
     public function check(): bool
     {
-        return (isset($_SESSION['phrase']) && PhraseBuilder::comparePhrases($_SESSION['phrase'], $_POST['captcha_phrase']));
+        if (!isset($_POST['captcha_phrase']) || !isset($_SESSION['phrase'])) {
+            return false;
+        }
+
+        return PhraseBuilder::comparePhrases($_SESSION['phrase'], $_POST['captcha_phrase']);
     }
 }
