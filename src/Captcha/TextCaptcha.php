@@ -34,6 +34,7 @@ class TextCaptcha implements CaptchaInterface
      */
     public function __construct(array $settings)
     {
+        session_unset();
         session_start();
 
         $this->settings = $settings;
