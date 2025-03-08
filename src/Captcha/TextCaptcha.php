@@ -49,13 +49,11 @@ class TextCaptcha implements CaptchaInterface
      */
     public function get(): string
     {
-        global $lang;
-
         $_SESSION['phrase'] = $this->captcha->getPhrase();
         $this->captcha->build();
 
         return "
-            <img alt='{$lang['CAPTCHA']}' src=" . $this->captcha->inline() . " /><br />
+            <img src=" . $this->captcha->inline() . " /><br />
             <input type='text' name='captcha_phrase' />
         ";
     }
