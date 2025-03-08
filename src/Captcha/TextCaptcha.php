@@ -49,7 +49,7 @@ class TextCaptcha implements CaptchaInterface
     {
         $this->captcha->build();
         return "
-            <img src=" . $this->captcha->inline() . " />
+            <img src=" . $this->captcha->inline() . " /><br />
             <input type='text' name='captcha_phrase' />
         ";
     }
