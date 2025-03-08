@@ -2070,6 +2070,7 @@ function bb_captcha(string $mode): bool|string
         'hCaptcha' => \TorrentPier\Captcha\HCaptcha::class,
         'yandex' => \TorrentPier\Captcha\YandexSmartCaptcha::class,
         'cloudflare' => \TorrentPier\Captcha\CloudflareTurnstileCaptcha::class,
+        'text' => \TorrentPier\Captcha\TextCaptcha::class
     ];
     if (!isset($captchaClasses[$settings['service']])) {
         bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));

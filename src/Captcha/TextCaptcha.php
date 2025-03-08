@@ -10,6 +10,7 @@
 namespace TorrentPier\Captcha;
 
 use Gregwar\Captcha\CaptchaBuilder;
+use Gregwar\Captcha\PhraseBuilder;
 
 /**
  * Class TextCaptcha
@@ -33,6 +34,8 @@ class TextCaptcha implements CaptchaInterface
      */
     public function __construct(array $settings)
     {
+        session_start();
+
         $this->settings = $settings;
         $this->captcha = new CaptchaBuilder;
     }
@@ -44,8 +47,10 @@ class TextCaptcha implements CaptchaInterface
      */
     public function get(): string
     {
+        $this->captcha->build();
         return "
-            <img src=" . $builder->inline() . " />
+            <img src=" . $this->captcha->inline() . " />
+            <input type='text' name='captcha_phrase' />
         ";
     }
 
@@ -56,5 +61,6 @@ class TextCaptcha implements CaptchaInterface
      */
     public function check(): bool
     {
+        return (isset($_SESSION['phrase']) && PhraseBuilder::comparePhrases($_SESSION['phrase'], $_POST['captcha_phrase']));
     }
 }
