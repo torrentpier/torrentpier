@@ -19,6 +19,7 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump bugsnag/bugsnag from 3.29.2 to 3.29.3 ([#1837](https://github.com/torrentpier/torrentpier/pull/1837)) - ([b954815](https://github.com/torrentpier/torrentpier/commit/b954815f5d0dce9520f65679e834d8bd49e571e0))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.3 to 11.0.4 ([#1823](https://github.com/torrentpier/torrentpier/pull/1823)) - ([1c323a4](https://github.com/torrentpier/torrentpier/commit/1c323a45d777b033155da9a2becec506215bd94c))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.1 to 11.0.3 ([#1821](https://github.com/torrentpier/torrentpier/pull/1821)) - ([dedf35b](https://github.com/torrentpier/torrentpier/commit/dedf35b794196034eb27d4125dff0798aed5f315))
 
@@ -41,6 +42,7 @@
 - *(cliff)* Removed TorrentPier logo ([#1817](https://github.com/torrentpier/torrentpier/pull/1817)) - ([7794242](https://github.com/torrentpier/torrentpier/commit/7794242750b44183312a2a45c9f54c6afde12f0e))
 - *(cliff)* Synced `cliff-releases.toml` with `cliff.toml` changes ([#1815](https://github.com/torrentpier/torrentpier/pull/1815)) - ([f2aea92](https://github.com/torrentpier/torrentpier/commit/f2aea92b3d79d72254e696fde31ad9b4bec5dcd0))
 - *(cliff)* Added missing line breaks after `body` ([#1814](https://github.com/torrentpier/torrentpier/pull/1814)) - ([2593f09](https://github.com/torrentpier/torrentpier/commit/2593f093a389a9c450725290862b99d911fbef5d))
+- *(installer)* Added cleanup step (for master builds) ([#1838](https://github.com/torrentpier/torrentpier/pull/1838)) - ([dd72136](https://github.com/torrentpier/torrentpier/commit/dd721367c7dc9956861fcd33af7f9f822cf80011))
 - *(installer)* Some minor improvements ([#1825](https://github.com/torrentpier/torrentpier/pull/1825)) - ([4f89685](https://github.com/torrentpier/torrentpier/commit/4f896854d3bb67300027f7542704f41c4869837f))
 - *(installer)* Some minor improvements ([#1824](https://github.com/torrentpier/torrentpier/pull/1824)) - ([f3714f0](https://github.com/torrentpier/torrentpier/commit/f3714f02f2c8fbfaccfdafb8f25a269664c48950))
 - *(workflow)* Short `release_name` ([#1816](https://github.com/torrentpier/torrentpier/pull/1816)) - ([c57db21](https://github.com/torrentpier/torrentpier/commit/c57db2104d7b8363d0b8ce8872ce90fc7410c724))
