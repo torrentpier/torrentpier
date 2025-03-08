@@ -9,6 +9,8 @@
 
 namespace TorrentPier\Captcha;
 
+use Gregwar\Captcha\CaptchaBuilder;
+
 /**
  * Class TextCaptcha
  * @package TorrentPier\Captcha
@@ -22,6 +24,8 @@ class TextCaptcha implements CaptchaInterface
      */
     private array $settings;
 
+    private $captcha;
+
     /**
      * Constructor
      *
@@ -30,6 +34,7 @@ class TextCaptcha implements CaptchaInterface
     public function __construct(array $settings)
     {
         $this->settings = $settings;
+        $this->captcha = new CaptchaBuilder;
     }
 
     /**
@@ -39,6 +44,9 @@ class TextCaptcha implements CaptchaInterface
      */
     public function get(): string
     {
+        return "
+            <img src=" . $builder->inline() . " />
+        ";
     }
 
     /**
