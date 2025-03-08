@@ -34,7 +34,6 @@ class TextCaptcha implements CaptchaInterface
      */
     public function __construct(array $settings)
     {
-        session_unset();
         session_start();
 
         $this->settings = $settings;
@@ -48,6 +47,7 @@ class TextCaptcha implements CaptchaInterface
      */
     public function get(): string
     {
+        $_SESSION['phrase'] = $this->captcha->getPhrase();
         $this->captcha->build();
         return "
             <img src=" . $this->captcha->inline() . " /><br />
