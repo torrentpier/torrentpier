@@ -6,6 +6,7 @@
 
 ### 🚀 Features
 
+- *(captcha)* Added `Text Captcha` provider ([#1839](https://github.com/torrentpier/torrentpier/pull/1839)) - ([74ea157](https://github.com/torrentpier/torrentpier/commit/74ea1573b298be5a935caaca0b3cc57cb1e9264a))
 - *(show post bbcode)* Added `'only_for_first_post'` param ([#1830](https://github.com/torrentpier/torrentpier/pull/1830)) - ([4dcd1fb](https://github.com/torrentpier/torrentpier/commit/4dcd1fb16e4e84acd1231ad821a2f05658b849ad))
 - *(sitemap)* Update `lastmod` when a new reply in topic ([#1737](https://github.com/torrentpier/torrentpier/pull/1737)) - ([bc95e14](https://github.com/torrentpier/torrentpier/commit/bc95e14be328303bb37e31299661b03045e37d07))
 - Added `$bb_cfg['auto_language_detection']` parametr ([#1835](https://github.com/torrentpier/torrentpier/pull/1835)) - ([b550fa5](https://github.com/torrentpier/torrentpier/commit/b550fa59f9ee96ca89e5b6db880147bc72841e93))
