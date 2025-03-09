@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cdb46350e69ff19cc07455ac9791423",
+    "content-hash": "c1e345a7abe58feb13d951acfd499e95",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -399,6 +399,76 @@
                 "source": "https://gitlab.com/sandfox/unsigned"
             },
             "time": "2024-02-01T20:40:11+00:00"
+        },
+        {
+            "name": "belomaxorka/captcha",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/belomaxorka/Captcha.git",
+                "reference": "1cb13fe53a6ca42423016e683d6255a68108d79d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/belomaxorka/Captcha/zipball/1cb13fe53a6ca42423016e683d6255a68108d79d",
+                "reference": "1cb13fe53a6ca42423016e683d6255a68108d79d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0",
+                "symfony/finder": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6.4 || ^7.0 || ^8.0 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gregwar\\": "src/Gregwar"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Passault",
+                    "email": "g.passault@gmail.com",
+                    "homepage": "https://www.gregwar.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jeremy Livingston",
+                    "email": "jeremy.j.livingston@gmail.com"
+                },
+                {
+                    "name": "belomaxorka",
+                    "email": "roman25052006.kelesh@gmail.com",
+                    "homepage": "https://belomaxorka.github.io/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Captcha generator",
+            "homepage": "https://github.com/belomaxorka/Captcha",
+            "keywords": [
+                "anti-bot",
+                "anti-spam",
+                "bot-protection",
+                "captcha",
+                "no-bot",
+                "obfuscation",
+                "security",
+                "spam",
+                "spam-protection"
+            ],
+            "support": {
+                "source": "https://github.com/belomaxorka/Captcha/tree/v1.2.2"
+            },
+            "time": "2025-03-09T06:12:50+00:00"
         },
         {
             "name": "bugsnag/bugsnag",
@@ -1025,63 +1095,6 @@
                 }
             ],
             "time": "2024-07-20T21:45:45+00:00"
-        },
-        {
-            "name": "gregwar/captcha",
-            "version": "v1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Gregwar/Captcha.git",
-                "reference": "229d3cdfe33d6f1349e0aec94a26e9205a6db08e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/229d3cdfe33d6f1349e0aec94a26e9205a6db08e",
-                "reference": "229d3cdfe33d6f1349e0aec94a26e9205a6db08e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.3.0",
-                "symfony/finder": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Gregwar\\": "src/Gregwar"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Grégoire Passault",
-                    "email": "g.passault@gmail.com",
-                    "homepage": "http://www.gregwar.com/"
-                },
-                {
-                    "name": "Jeremy Livingston",
-                    "email": "jeremy.j.livingston@gmail.com"
-                }
-            ],
-            "description": "Captcha generator",
-            "homepage": "https://github.com/Gregwar/Captcha",
-            "keywords": [
-                "bot",
-                "captcha",
-                "spam"
-            ],
-            "support": {
-                "issues": "https://github.com/Gregwar/Captcha/issues",
-                "source": "https://github.com/Gregwar/Captcha/tree/v1.2.1"
-            },
-            "time": "2023-09-26T13:45:37+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
