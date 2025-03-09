@@ -50,6 +50,7 @@
 - *(workflow)* Added `workflow_dispatch` for  `schedule.yml` ([#1813](https://github.com/torrentpier/torrentpier/pull/1813)) - ([d54c07b](https://github.com/torrentpier/torrentpier/commit/d54c07b3da00fc8bcba5413cd4ae3f3c9f6007bb))
 - *(workflow)* Some improvements ([#1811](https://github.com/torrentpier/torrentpier/pull/1811)) - ([3a9dd6a](https://github.com/torrentpier/torrentpier/commit/3a9dd6a3c931cfbd682257c283a3296c4914548f))
 - *(workflow)* Some improvements ([#1810](https://github.com/torrentpier/torrentpier/pull/1810)) - ([c168c39](https://github.com/torrentpier/torrentpier/commit/c168c3956cf77886c14133ac10ec33aa0ae5bc4e))
+- Replaced `gregwar/captcha` with my own fork ([#1840](https://github.com/torrentpier/torrentpier/pull/1840)) - ([8585560](https://github.com/torrentpier/torrentpier/commit/858556043d3e45218ea8e803786d6b6de6d485d0))
 - Created cleanup script (for releases preparation) ([#1833](https://github.com/torrentpier/torrentpier/pull/1833)) - ([68bf26d](https://github.com/torrentpier/torrentpier/commit/68bf26d0f4ab33f5394d26f425e53817f3464ac8))
 - Bring back missing `cache` & `log` directories ([#1832](https://github.com/torrentpier/torrentpier/pull/1832)) - ([249c988](https://github.com/torrentpier/torrentpier/commit/249c9889890291d56317dd703414bdb57ecaa41f))
 - Some minor improvements ([#1829](https://github.com/torrentpier/torrentpier/pull/1829)) - ([3b8ee4c](https://github.com/torrentpier/torrentpier/commit/3b8ee4c4d3ab4631425fbe44f197b6a9bd7d158c))
