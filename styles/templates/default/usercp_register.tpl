@@ -339,7 +339,7 @@
                             <div class="spacer_4"></div>
                             {L_UPLOAD_AVATAR_FILE}:
                             <input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}"/>
-                            <input type="file" name="avatar"/>
+                            <input type="file" name="avatar" accept="image/*"/>
                             <!-- ENDIF -->
                         </td>
                         <td class="tCenter nowrap">
