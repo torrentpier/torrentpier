@@ -402,16 +402,16 @@
         },
         {
             "name": "belomaxorka/captcha",
-            "version": "v1.2.2",
+            "version": "v1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/belomaxorka/Captcha.git",
-                "reference": "1cb13fe53a6ca42423016e683d6255a68108d79d"
+                "reference": "85f3fb5a5ef5bcaaa9ad78171c54a525413d348b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/belomaxorka/Captcha/zipball/1cb13fe53a6ca42423016e683d6255a68108d79d",
-                "reference": "1cb13fe53a6ca42423016e683d6255a68108d79d",
+                "url": "https://api.github.com/repos/belomaxorka/Captcha/zipball/85f3fb5a5ef5bcaaa9ad78171c54a525413d348b",
+                "reference": "85f3fb5a5ef5bcaaa9ad78171c54a525413d348b",
                 "shasum": ""
             },
             "require": {
@@ -466,9 +466,9 @@
                 "spam-protection"
             ],
             "support": {
-                "source": "https://github.com/belomaxorka/Captcha/tree/v1.2.2"
+                "source": "https://github.com/belomaxorka/Captcha/tree/v1.2.3"
             },
-            "time": "2025-03-09T06:12:50+00:00"
+            "time": "2025-03-09T11:06:05+00:00"
         },
         {
             "name": "bugsnag/bugsnag",
@@ -3855,6 +3855,6 @@
     "platform": {
         "php": "^8.1 | ^8.2 | ^8.3 | ^8.4"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
