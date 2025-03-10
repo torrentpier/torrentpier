@@ -6,6 +6,13 @@
 
 ### 🚀 Features
 
+- *(avatar upload)* Added `accept="image/*"` attribute ([#1841](https://github.com/torrentpier/torrentpier/pull/1841)) - ([56d531a](https://github.com/torrentpier/torrentpier/commit/56d531aa5ddb778d08a2796fa9fb865e5b3040ce))
+
+
+## [v2.4.5-rc.4](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.3..v2.4.5-rc.4) (2025-03-09)
+
+### 🚀 Features
+
 - *(captcha)* Added `Text Captcha` provider ([#1839](https://github.com/torrentpier/torrentpier/pull/1839)) - ([74ea157](https://github.com/torrentpier/torrentpier/commit/74ea1573b298be5a935caaca0b3cc57cb1e9264a))
 - *(show post bbcode)* Added `'only_for_first_post'` param ([#1830](https://github.com/torrentpier/torrentpier/pull/1830)) - ([4dcd1fb](https://github.com/torrentpier/torrentpier/commit/4dcd1fb16e4e84acd1231ad821a2f05658b849ad))
 - *(sitemap)* Update `lastmod` when a new reply in topic ([#1737](https://github.com/torrentpier/torrentpier/pull/1737)) - ([bc95e14](https://github.com/torrentpier/torrentpier/commit/bc95e14be328303bb37e31299661b03045e37d07))
