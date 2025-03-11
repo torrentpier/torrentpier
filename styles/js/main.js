@@ -485,7 +485,7 @@ function getRandomChar(charSet) {
   return charSet[Math.floor(Math.random() * charSet.length)];
 }
 
-var autocomplete = function (noCenter, passwordLength = 10) {
+var autocomplete = function (noCenter = false, passwordLength = 10) {
   let string_result = generatePassword(passwordLength);
   var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
   var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
