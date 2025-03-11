@@ -8,6 +8,10 @@
 
 - *(avatar upload)* Added `accept="image/*"` attribute ([#1841](https://github.com/torrentpier/torrentpier/pull/1841)) - ([56d531a](https://github.com/torrentpier/torrentpier/commit/56d531aa5ddb778d08a2796fa9fb865e5b3040ce))
 
+### 📦 Dependencies
+
+- *(deps)* Bump belomaxorka/captcha from 1.2.2 to 1.2.3 ([#1842](https://github.com/torrentpier/torrentpier/pull/1842)) - ([be65f7c](https://github.com/torrentpier/torrentpier/commit/be65f7c55cbf81d889d5083c9344ccef400e8e19))
+
 
 ## [v2.4.5-rc.4](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.3..v2.4.5-rc.4) (2025-03-09)
 
