@@ -460,19 +460,33 @@ $(document).ready(function () {
 /**
  * Autocomplete password
  **/
-var array_for_rand_pass = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var array_rand = function (array) {
-  var array_length = array.length;
-  var result = Math.random() * array_length;
-  return Math.floor(result);
-};
+function generatePassword(length) {
+  const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const numberChars = "0123456789";
+  const specialChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
 
-var autocomplete = function (noCenter) {
-  var string_result = ""; // Empty string
-  for (var i = 1; i <= 8; i++) {
-    string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
+  let password = [
+    getRandomChar(lowercaseChars),
+    getRandomChar(uppercaseChars),
+    getRandomChar(numberChars),
+    getRandomChar(specialChars)
+  ];
+
+  for (let i = 4; i < length; i++) {
+    password.push(getRandomChar(lowercaseChars));
   }
 
+  password = password.sort(() => Math.random() - 0.5);
+  return password.slice(0, length).join("");
+}
+
+function getRandomChar(charSet) {
+  return charSet[Math.floor(Math.random() * charSet.length)];
+}
+
+var autocomplete = function (noCenter = false, passwordLength = 10) {
+  let string_result = generatePassword(passwordLength);
   var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
   var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
 
@@ -491,7 +505,7 @@ var autocomplete = function (noCenter) {
 
 $(document).ready(function () {
   $("span#autocomplete").click(function () {
-    autocomplete();
+    autocomplete(false, $(this).data('password-length'));
   });
 
   var _X, _Y;

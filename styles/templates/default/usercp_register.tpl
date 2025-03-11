@@ -41,7 +41,7 @@
         <div class="title">{L_YOUR_NEW_PASSWORD}</div>
         <div>
             <input value="" autocomplete="off" type="text"/>
-            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true);"></span>
+            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true, {#PASSWORD_MIN_LENGTH#});"></span>
         </div>
     </div>
 </div>
@@ -85,7 +85,7 @@
         <tr>
             <td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <br/><h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
             <td>
-                <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" title="{L_AUTOCOMPLETE}">&#9668;</span>&nbsp;<i class="med">{PASSWORD_LONG}</i>
+                <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" data-password-length="{#PASSWORD_MIN_LENGTH#}" title="{L_AUTOCOMPLETE}">&#9668;</span>&nbsp;<i class="med">{PASSWORD_LONG}</i>
             </td>
         </tr>
         <tr>
