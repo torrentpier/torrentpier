@@ -52,8 +52,8 @@ if (!isset($_REQUEST['dosearch'])) {
         }
     }
 
-    $language_list = \TorrentPier\Legacy\Select::language('', 'language_type');
-    $timezone_list = \TorrentPier\Legacy\Select::timezone('', 'timezone_type');
+    $language_list = \TorrentPier\Legacy\Common\Select::language('', 'language_type');
+    $timezone_list = \TorrentPier\Legacy\Common\Select::timezone('', 'timezone_type');
 
     $sql = 'SELECT f.forum_id, f.forum_name, f.forum_parent, c.cat_id, c.cat_title
 				FROM ( ' . BB_FORUMS . ' AS f INNER JOIN ' . BB_CATEGORIES . ' AS c ON c.cat_id = f.cat_id )
