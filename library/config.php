@@ -435,11 +435,11 @@ $bb_cfg['invites_system'] = [
 ];
 $bb_cfg['password_symbols'] = [
     // What symbols should be required in the password
-    'nums' => true, // Numeric
-    'spec_symbols' => false, // Special symbols
-    'letters' => [ // Letters
-        'uppercase' => true, // Uppercase letters
-        'lowercase' => true // Lowercase letters
+    'nums' => true,
+    'spec_symbols' => false,
+    'letters' => [
+        'uppercase' => false,
+        'lowercase' => true
     ]
 ];
 $bb_cfg['password_hash_options'] = [
@@ -451,6 +451,7 @@ $bb_cfg['password_hash_options'] = [
 // Email
 $bb_cfg['emailer'] = [
     'enabled' => true,
+    'sendmail_command' => '/usr/sbin/sendmail -bs',
     'smtp' => [
         'enabled' => false, // send email via external SMTP server
         'host' => 'localhost', // SMTP server host
