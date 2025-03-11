@@ -402,16 +402,16 @@
         },
         {
             "name": "belomaxorka/captcha",
-            "version": "v1.2.3",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/belomaxorka/Captcha.git",
-                "reference": "85f3fb5a5ef5bcaaa9ad78171c54a525413d348b"
+                "reference": "db51723a9539b57ac3faff0211c117b4c55dbe23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/belomaxorka/Captcha/zipball/85f3fb5a5ef5bcaaa9ad78171c54a525413d348b",
-                "reference": "85f3fb5a5ef5bcaaa9ad78171c54a525413d348b",
+                "url": "https://api.github.com/repos/belomaxorka/Captcha/zipball/db51723a9539b57ac3faff0211c117b4c55dbe23",
+                "reference": "db51723a9539b57ac3faff0211c117b4c55dbe23",
                 "shasum": ""
             },
             "require": {
@@ -466,9 +466,9 @@
                 "spam-protection"
             ],
             "support": {
-                "source": "https://github.com/belomaxorka/Captcha/tree/v1.2.3"
+                "source": "https://github.com/belomaxorka/Captcha/tree/v1.2.4"
             },
-            "time": "2025-03-09T11:06:05+00:00"
+            "time": "2025-03-10T13:15:53+00:00"
         },
         {
             "name": "bugsnag/bugsnag",
