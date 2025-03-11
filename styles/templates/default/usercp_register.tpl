@@ -41,7 +41,7 @@
         <div class="title">{L_YOUR_NEW_PASSWORD}</div>
         <div>
             <input value="" autocomplete="off" type="text"/>
-            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true);"></span>
+            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true, {#PASSWORD_MIN_LENGTH#});"></span>
         </div>
     </div>
 </div>
