@@ -505,7 +505,7 @@ var autocomplete = function (noCenter = false, passwordLength = 10) {
 
 $(document).ready(function () {
   $("span#autocomplete").click(function () {
-    autocomplete($(this).data('password-length'));
+    autocomplete(false, $(this).data('password-length'));
   });
 
   var _X, _Y;
