@@ -37,6 +37,7 @@ class TextCaptcha implements CaptchaInterface
         }
 
         $this->captcha = new CaptchaBuilder;
+        $this->captcha->setScatterEffect(false);
     }
 
     /**
