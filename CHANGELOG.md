@@ -7,11 +7,22 @@
 ### 🚀 Features
 
 - *(avatar upload)* Added `accept="image/*"` attribute ([#1841](https://github.com/torrentpier/torrentpier/pull/1841)) - ([56d531a](https://github.com/torrentpier/torrentpier/commit/56d531aa5ddb778d08a2796fa9fb865e5b3040ce))
+- *(emailer)* Added ability to configure `sendmail` - ([5ad4a70](https://github.com/torrentpier/torrentpier/commit/5ad4a7019d996d468650ab608ab53d6cf3ebb4f5))
+- *(playback_m3u.php)* Added checking auth to download ([#1848](https://github.com/torrentpier/torrentpier/pull/1848)) - ([0b8d8a5](https://github.com/torrentpier/torrentpier/commit/0b8d8a5210ee761dddaa57fc48bb48b0ede1ec3c))
 
 ### 📦 Dependencies
 
 - *(deps)* Bump belomaxorka/captcha from 1.2.3 to 1.2.4 - ([4641b0a](https://github.com/torrentpier/torrentpier/commit/4641b0a0d0e055d684ec36d41bfaf22b4d4b2ee1))
 - *(deps)* Bump belomaxorka/captcha from 1.2.2 to 1.2.3 ([#1842](https://github.com/torrentpier/torrentpier/pull/1842)) - ([be65f7c](https://github.com/torrentpier/torrentpier/commit/be65f7c55cbf81d889d5083c9344ccef400e8e19))
+
+### 🚜 Refactor
+
+- Password generation ([#1847](https://github.com/torrentpier/torrentpier/pull/1847)) - ([af2403f](https://github.com/torrentpier/torrentpier/commit/af2403f1918845e8af3d9fa7708623eef6aa427e))
+- Moved `Select` class into `Legacy\Common` ([#1846](https://github.com/torrentpier/torrentpier/pull/1846)) - ([bd0ef06](https://github.com/torrentpier/torrentpier/commit/bd0ef063fac328ed16537aacbc12e287a8d8206b))
+
+### ⚙️ Miscellaneous
+
+- *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
 
 
 ## [v2.4.5-rc.4](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.3..v2.4.5-rc.4) (2025-03-09)
