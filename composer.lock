@@ -2153,16 +2153,16 @@
         },
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "11.0.4",
+            "version": "11.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "6162edf0ebe6c9c25733834c357b94a34c67ec3e"
+                "reference": "01a0e43fb66094c8764a84680b67179e08cce9c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/6162edf0ebe6c9c25733834c357b94a34c67ec3e",
-                "reference": "6162edf0ebe6c9c25733834c357b94a34c67ec3e",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/01a0e43fb66094c8764a84680b67179e08cce9c2",
+                "reference": "01a0e43fb66094c8764a84680b67179e08cce9c2",
                 "shasum": ""
             },
             "require": {
@@ -2177,8 +2177,7 @@
                 "phpcsstandards/phpcsutils": "@alpha",
                 "phpstan/phpstan": "*",
                 "phpunit/phpunit": "*",
-                "squizlabs/php_codesniffer": "*",
-                "vimeo/psalm": ">=5.26.1"
+                "squizlabs/php_codesniffer": "*"
             },
             "suggest": {
                 "ext-mbstring": "*"
@@ -2228,9 +2227,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/11.0.4"
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/11.0.5"
             },
-            "time": "2025-02-20T20:42:49+00:00"
+            "time": "2025-03-11T18:04:20+00:00"
         },
         {
             "name": "php-http/discovery",
