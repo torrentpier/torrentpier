@@ -77,6 +77,9 @@ switch ($mode) {
                         bb_die($lang['REGISTERED_IN_TIME']);
                     }
                 }
+
+                unset($currentTimestamp, $startTimestamp, $endTimestamp, $currentTime);
+                unset($startHour, $startMinute, $endHour, $endMinute);
             }
         }
 
