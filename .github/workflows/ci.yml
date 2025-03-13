@@ -28,11 +28,14 @@ jobs:
           COMMIT_HASH=$(git rev-parse --short HEAD)
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
 
+      - name: Cleanup
+        run: php _cleanup.php && rm _cleanup.php
+
       - name: Create archive 🗞
         id: create-zip
         run: |
           ZIP_NAME="torrentpier-${{ steps.get-commit-hash.outputs.COMMIT_HASH }}.zip"
-          zip -r "$ZIP_NAME" . -x ".git/*" ".github/*"
+          zip -r "$ZIP_NAME" . -x ".git/*"
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_OUTPUT
 
       - name: Upload Archive 📤
