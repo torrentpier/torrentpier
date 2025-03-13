@@ -59,9 +59,23 @@ switch ($mode) {
             if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && !$bb_cfg['emailer']['enabled'])) {
                 bb_die($lang['NEW_USER_REG_DISABLED']);
             } // Time limit
-            elseif ($bb_cfg['new_user_reg_restricted']) {
-                if (in_array(date('G'), $bb_cfg['new_user_reg_interval'], true)) {
-                    bb_die($lang['REGISTERED_IN_TIME']);
+            elseif ($bb_cfg['new_user_reg_restricted']['enabled']) {
+                $currentTime = bb_date('H:i', friendly_date: false);
+                [$startHour, $startMinute] = explode(':', $bb_cfg['new_user_reg_restricted']['start_time']);
+                [$endHour, $endMinute] = explode(':', $bb_cfg['new_user_reg_restricted']['end_time']);
+
+                $startTimestamp = ((int)$startHour * 3600) + ((int)$startMinute * 60);
+                $endTimestamp = ((int)$endHour * 3600) + ((int)$endMinute * 60);
+                $currentTimestamp = (int)bb_date('H', friendly_date: false) * 3600 + (int)bb_date('i', friendly_date: false) * 60;
+
+                if ($startTimestamp <= $endTimestamp) {
+                    if ($currentTimestamp >= $startTimestamp && $currentTimestamp <= $endTimestamp) {
+                        bb_die($lang['REGISTERED_IN_TIME']);
+                    }
+                } else {
+                    if ($currentTimestamp >= $startTimestamp || $currentTimestamp <= $endTimestamp) {
+                        bb_die($lang['REGISTERED_IN_TIME']);
+                    }
                 }
             }
         }

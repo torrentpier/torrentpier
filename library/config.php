@@ -417,8 +417,12 @@ $bb_cfg['last_visit_update_intrv'] = 3600; // sec
 $bb_cfg['invalid_logins'] = 5; // Max incorrect password submits before showing captcha
 $bb_cfg['new_user_reg_disabled'] = false; // Disable registration of new users
 $bb_cfg['unique_ip'] = false; // Disallow registration from multiple IP addresses
-$bb_cfg['new_user_reg_restricted'] = false; // Disallow registration in below hours
-$bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Available hours
+$bb_cfg['new_user_reg_restricted'] = [ // Allow registration at the time specified below
+    'enabled' => false,
+    'start_time' => '21:55',
+    'end_time' => '07:00',
+    // Note: Uses board timezone
+];
 $bb_cfg['reg_email_activation'] = true; // Demand to activate profile by email confirmation
 $bb_cfg['invites_system'] = [
     'enabled' => false,
