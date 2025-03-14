@@ -12,6 +12,7 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump php-curl-class/php-curl-class from 11.0.4 to 11.0.5 ([#1849](https://github.com/torrentpier/torrentpier/pull/1849)) - ([37ad07a](https://github.com/torrentpier/torrentpier/commit/37ad07a40c1adf29f712f469d2850753d32a5eb9))
 - *(deps)* Bump belomaxorka/captcha from 1.2.3 to 1.2.4 - ([4641b0a](https://github.com/torrentpier/torrentpier/commit/4641b0a0d0e055d684ec36d41bfaf22b4d4b2ee1))
 - *(deps)* Bump belomaxorka/captcha from 1.2.2 to 1.2.3 ([#1842](https://github.com/torrentpier/torrentpier/pull/1842)) - ([be65f7c](https://github.com/torrentpier/torrentpier/commit/be65f7c55cbf81d889d5083c9344ccef400e8e19))
 
@@ -22,6 +23,7 @@
 
 ### ⚙️ Miscellaneous
 
+- *(nightly builds)* Added cleanup step ([#1851](https://github.com/torrentpier/torrentpier/pull/1851)) - ([299d9a1](https://github.com/torrentpier/torrentpier/commit/299d9a1f6c4f244e435803212e763c252e5bd396))
 - *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
 
 
