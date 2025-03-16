@@ -58,6 +58,7 @@ body, th, td, font {
 }
 
 #sidebar2-wrap {
+  margin-top: -8px;
 }
 
 #main_content {
