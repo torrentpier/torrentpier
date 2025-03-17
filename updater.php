@@ -39,7 +39,6 @@ if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
     }
 
     $sortedVersionsList = \z4kn4fein\SemVer\Version::sort($updatesVersions);
-
     foreach ($sortedVersionsList as $version) {
         if (\z4kn4fein\SemVer\Version::greaterThan($version, $currentVersion) &&
             \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
