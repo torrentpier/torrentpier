@@ -21,7 +21,8 @@ if (!IS_SUPER_ADMIN) {
 // Read updater file
 $updaterFile = readUpdaterFile();
 if (empty($updaterFile) || !is_array($updaterFile)) {
-    bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
+    redirect('index.php');
+    exit;
 }
 
 $latestVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($updaterFile['latest_version']);
@@ -29,7 +30,7 @@ $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($bb_cfg['tp_
 
 // Checking version
 if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
-    // todo: have installed actual version (ok!)
+
 } elseif (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $currentVersion)) {
     // todo: need to update first
 }
