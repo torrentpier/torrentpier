@@ -53,7 +53,21 @@ if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
         foreach ($sortedVersionsList as $version) {
             if (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $previousVersion) &&
                 \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
-                dump($version);
+                $dump_path = ''; // todo...
+                $temp_line = '';
+                foreach (file($dump_path) as $line) {
+                    if (str_starts_with($line, '--') || $line == '') {
+                        continue;
+                    }
+
+                    $temp_line .= $line;
+                    if (str_ends_with(trim($line), ';')) {
+                        if (!DB()->query($temp_line)) {
+                            bb_die(DB()->sql_error()['message']);
+                        }
+                        $temp_line = '';
+                    }
+                }
             }
         }
 
