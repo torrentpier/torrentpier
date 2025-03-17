@@ -28,13 +28,17 @@ if (empty($updaterFile) || !is_array($updaterFile)) {
 $latestVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($updaterFile['latest_version']);
 $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($bb_cfg['tp_version']);
 
+define('UPGRADE_DIR', BB_PATH . '/install/upgrade');
+define('UPDATE_FILE_PREFIX', 'update-v');
+define('UPDATE_FILE_EXTENSION', '.sql');
+
 // Checking version
 if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
-    $files = glob(BB_PATH . '/install/upgrade/update-*.sql');
+    $files = glob(UPGRADE_DIR . '/' . UPDATE_FILE_PREFIX . '*' . UPDATE_FILE_EXTENSION);
     $updatesVersions = [];
     foreach ($files as $file) {
         $file = pathinfo(basename($file), PATHINFO_FILENAME);
-        $version = str_replace('update-v', '', $file);
+        $version = str_replace(UPDATE_FILE_PREFIX, '', $file);
         $updatesVersions[] = \z4kn4fein\SemVer\Version::parse($version);
     }
 
