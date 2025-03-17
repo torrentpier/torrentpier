@@ -35,21 +35,41 @@ define('UPDATE_FILE_EXTENSION', '.sql');
 
 // Checking version
 if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
-    $files = glob(UPGRADE_DIR . '/' . UPDATE_FILE_PREFIX . '*' . UPDATE_FILE_EXTENSION);
-    $updatesVersions = [];
-    foreach ($files as $file) {
-        $file = pathinfo(basename($file), PATHINFO_FILENAME);
-        $version = str_replace(UPDATE_FILE_PREFIX, '', $file);
-        $updatesVersions[] = \z4kn4fein\SemVer\Version::parse($version);
+    $template->assign_vars([
+        'PAGE_TITLE' => $lang['MEMBERLIST'],
+    ]);
+
+    $confirm = request_var('confirm', '');
+    if ($confirm) {
+        $files = glob(UPGRADE_DIR . '/' . UPDATE_FILE_PREFIX . '*' . UPDATE_FILE_EXTENSION);
+        $updatesVersions = [];
+        foreach ($files as $file) {
+            $file = pathinfo(basename($file), PATHINFO_FILENAME);
+            $version = str_replace(UPDATE_FILE_PREFIX, '', $file);
+            $updatesVersions[] = \z4kn4fein\SemVer\Version::parse($version);
+        }
+
+        $sortedVersionsList = \z4kn4fein\SemVer\Version::sort($updatesVersions);
+        foreach ($sortedVersionsList as $version) {
+            if (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $previousVersion) &&
+                \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
+                dump($version);
+            }
+        }
+
+        // Successful!
+        $template->assign_vars([
+            'RESULT' => '', // todo...
+        ]);
+    } else {
+        // Welcoming
+        $template->assign_vars([
+            'FROM_VERSION' => $previousVersion,
+            'TO_VERSION' => $currentVersion,
+        ]);
     }
 
-    $sortedVersionsList = \z4kn4fein\SemVer\Version::sort($updatesVersions);
-    foreach ($sortedVersionsList as $version) {
-        if (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $previousVersion) &&
-            \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
-            dump($version);
-        }
-    }
+    print_page('updater.tpl');
 } elseif (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $currentVersion)) {
     // todo: need to update first
 }
