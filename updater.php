@@ -54,6 +54,10 @@ if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
             if (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $previousVersion) &&
                 \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
                 $dump_path = ''; // todo...
+                if (!is_file($dump_path) || !is_readable($dump_path)) {
+                    bb_die(''); // todo...
+                }
+
                 $temp_line = '';
                 foreach (file($dump_path) as $line) {
                     if (str_starts_with($line, '--') || $line == '') {
