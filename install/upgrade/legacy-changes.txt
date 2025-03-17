@@ -152,5 +152,3 @@ ALTER TABLE `bb_topics` ADD COLUMN `topic_allow_robots` TINYINT(1) UNSIGNED NOT 
 // 2.4.5-rc.2
 INSERT INTO `bb_config` VALUES ('magnet_links_for_guests', '0');
 INSERT INTO `bb_config` VALUES ('tp_instance_hash', '');
-
-// 2.4.5
