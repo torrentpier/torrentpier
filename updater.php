@@ -33,13 +33,14 @@ if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
     $files = glob(BB_PATH . '/install/upgrade/update-*.sql');
     $updatesVersions = [];
     foreach ($files as $file) {
-        $file = pathinfo(basename($file), PATHINFO_FILENAME);
-        $version = str_replace('update-v', '', $file);
-        $updatesVersions[] = \z4kn4fein\SemVer\Version::parse($version);
+        $version = str_replace('update-v', '', pathinfo(basename($file), PATHINFO_FILENAME));
+        $updatesVersions[] = [
+            'path' => hide_bb_path($file),
+            'version' => \z4kn4fein\SemVer\Version::parse($version)
+        ];
     }
 
-    $sortedVersionsList = \z4kn4fein\SemVer\Version::sort($updatesVersions);
-
+    $sortedVersionsList = \z4kn4fein\SemVer\Version::sort(array_column($updatesVersions, 'version'));
     foreach ($sortedVersionsList as $version) {
         if (\z4kn4fein\SemVer\Version::greaterThan($version, $currentVersion) &&
             \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
