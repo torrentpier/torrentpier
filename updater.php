@@ -36,7 +36,7 @@ define('UPDATE_FILE_EXTENSION', '.sql');
 // Checking version
 if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
     $template->assign_vars([
-        'PAGE_TITLE' => $lang['MEMBERLIST'],
+        'PAGE_TITLE' => $lang['UPDATER_TITLE'],
     ]);
 
     $confirm = request_var('confirm', '');
