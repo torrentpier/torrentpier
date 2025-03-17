@@ -27,6 +27,7 @@ if (empty($updaterFile) || !is_array($updaterFile)) {
 
 $latestVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($updaterFile['latest_version']);
 $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($bb_cfg['tp_version']);
+$previousVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($updaterFile['previous_version']);
 
 define('UPGRADE_DIR', BB_PATH . '/install/upgrade');
 define('UPDATE_FILE_PREFIX', 'update-v');
@@ -44,7 +45,7 @@ if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
 
     $sortedVersionsList = \z4kn4fein\SemVer\Version::sort($updatesVersions);
     foreach ($sortedVersionsList as $version) {
-        if (\z4kn4fein\SemVer\Version::greaterThan($version, $currentVersion) &&
+        if (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $previousVersion) &&
             \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
             dump($version);
         }
