@@ -30,7 +30,22 @@ $currentVersion = \TorrentPier\Helpers\VersionHelper::removerPrefix($bb_cfg['tp_
 
 // Checking version
 if (\z4kn4fein\SemVer\Version::equal($latestVersion, $currentVersion)) {
+    $files = glob(BB_PATH . '/install/upgrade/update-*.sql');
+    $updatesVersions = [];
+    foreach ($files as $file) {
+        $file = pathinfo(basename($file), PATHINFO_FILENAME);
+        $version = str_replace('update-v', '', $file);
+        $updatesVersions[] = \z4kn4fein\SemVer\Version::parse($version);
+    }
 
+    $sortedVersionsList = \z4kn4fein\SemVer\Version::sort($updatesVersions);
+
+    foreach ($sortedVersionsList as $version) {
+        if (\z4kn4fein\SemVer\Version::greaterThan($version, $currentVersion) &&
+            \z4kn4fein\SemVer\Version::lessThanOrEqual($version, $latestVersion)) {
+            // todo: тут запросы
+        }
+    }
 } elseif (\z4kn4fein\SemVer\Version::greaterThan($latestVersion, $currentVersion)) {
     // todo: need to update first
 }
