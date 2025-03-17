@@ -21,6 +21,10 @@
 - Password generation ([#1847](https://github.com/torrentpier/torrentpier/pull/1847)) - ([af2403f](https://github.com/torrentpier/torrentpier/commit/af2403f1918845e8af3d9fa7708623eef6aa427e))
 - Moved `Select` class into `Legacy\Common` ([#1846](https://github.com/torrentpier/torrentpier/pull/1846)) - ([bd0ef06](https://github.com/torrentpier/torrentpier/commit/bd0ef063fac328ed16537aacbc12e287a8d8206b))
 
+### 🎨 Styling
+
+- Correct `sidebar2` displaying ([#1852](https://github.com/torrentpier/torrentpier/pull/1852)) - ([9e0a641](https://github.com/torrentpier/torrentpier/commit/9e0a64108d62236ab07b3f8d10e8c78269b8e1d1))
+
 ### ⚙️ Miscellaneous
 
 - *(nightly builds)* Added cleanup step ([#1851](https://github.com/torrentpier/torrentpier/pull/1851)) - ([299d9a1](https://github.com/torrentpier/torrentpier/commit/299d9a1f6c4f244e435803212e763c252e5bd396))
