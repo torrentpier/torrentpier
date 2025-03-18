@@ -35,19 +35,12 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
     $seed_bonus = unserialize($bb_cfg['seed_bonus_points']);
     $seed_release = unserialize($bb_cfg['seed_bonus_release']);
 
-    $sql = "SELECT last_run
-		FROM " . BB_CRON . "
-		WHERE cron_script = '" . basename(__FILE__) . "'
-		LIMIT 1";
-    $cron_runs = DB()->fetch_row($sql);
-    $cron_job_last_run = (TIMENOW - strtotime($cron_runs['last_run']));
-
     foreach ($seed_bonus as $i => $points) {
         if (!$points || !$seed_release[$i]) {
             continue;
         }
 
-        $user_points = ($cron_job_last_run < 3600) ? round((float)$points * ($cron_job_last_run / 3600), 2) : 0;
+        $user_points = ((float)$points / 4);
         $release = (int)$seed_release[$i];
         $user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
 
