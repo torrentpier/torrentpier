@@ -35,7 +35,7 @@ class Env
      *
      * @var RepositoryInterface|null
      */
-    protected static $repository;
+    protected static ?RepositoryInterface $repository;
 
     /**
      * Enable the putenv adapter.
@@ -86,7 +86,7 @@ class Env
      * @param mixed|null $default
      * @return mixed
      */
-    public static function get(string $key, mixed $default = null)
+    public static function get(string $key, mixed $default = null): mixed
     {
         return Option::fromValue(static::getRepository()->get($key))
             ->map(function ($value) {
