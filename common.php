@@ -38,7 +38,6 @@ if (!defined('BB_SCRIPT')) {
     define('BB_SCRIPT', null);
 }
 
-header('X-Frame-Options: SAMEORIGIN');
 date_default_timezone_set('UTC');
 
 // Set remote address
@@ -105,6 +104,10 @@ $server_port = in_array((int)$bb_cfg['server_port'], [80, 443], true) ? '' : ':'
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
+
+// Secure headers
+$secureHeaders = \Bepsvpt\SecureHeaders\SecureHeaders::fromFile(BB_PATH . '/library/config.secure-headers.php');
+$secureHeaders->send();
 
 /**
  * Database
