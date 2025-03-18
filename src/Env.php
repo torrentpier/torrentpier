@@ -35,7 +35,7 @@ class Env
      *
      * @var RepositoryInterface|null
      */
-    protected static ?RepositoryInterface $repository;
+    protected static $repository;
 
     /**
      * Enable the putenv adapter.
