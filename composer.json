@@ -56,7 +56,6 @@
     "belomaxorka/captcha": "1.*",
     "egulias/email-validator": "^4.0.1",
     "filp/whoops": "^2.15",
-    "bepsvpt/secure-headers": "9.*",
     "z4kn4fein/php-semver": "^v3.0.0",
     "nemorize/indexnow": "^0.0.1",
     "gigablah/sphinxphp": "2.0.8",

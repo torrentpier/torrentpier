@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "098530029429a81a4a25a5d7276584c4",
+    "content-hash": "c1e345a7abe58feb13d951acfd499e95",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -469,85 +469,6 @@
                 "source": "https://github.com/belomaxorka/Captcha/tree/v1.2.4"
             },
             "time": "2025-03-10T13:15:53+00:00"
-        },
-        {
-            "name": "bepsvpt/secure-headers",
-            "version": "9.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bepsvpt/secure-headers.git",
-                "reference": "7efbc3d8b988051b5ff81c4cacd1d12e875528ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bepsvpt/secure-headers/zipball/7efbc3d8b988051b5ff81c4cacd1d12e875528ed",
-                "reference": "7efbc3d8b988051b5ff81c4cacd1d12e875528ed",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "ergebnis/composer-normalize": "^2.42",
-                "ext-xdebug": "*",
-                "laravel/pint": "^1.14",
-                "orchestra/testbench": "^3.1 || ^4.18 || ^5.20 || ^6.43 || ^7.41 || ^8.22 || ^9.0",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.5 || ^9.6 || ^10.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Bepsvpt\\SecureHeaders\\SecureHeadersServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Bepsvpt\\SecureHeaders\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "bepsvpt",
-                    "email": "6ibrl@cpp.tw"
-                }
-            ],
-            "description": "Add security related headers to HTTP response. The package includes Service Providers for easy Laravel integration.",
-            "homepage": "https://github.com/bepsvpt/secure-headers",
-            "keywords": [
-                "clear-site-data",
-                "content-security-policy",
-                "csp",
-                "except-ct",
-                "feature-policy",
-                "header",
-                "hsts",
-                "https",
-                "laravel",
-                "permissions-policy",
-                "referrer-policy"
-            ],
-            "support": {
-                "issues": "https://github.com/bepsvpt/secure-headers/issues",
-                "source": "https://github.com/bepsvpt/secure-headers/tree/9.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/secure-headers",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2025-01-18T07:18:04+00:00"
         },
         {
             "name": "bugsnag/bugsnag",
@@ -3933,6 +3854,6 @@
     "platform": {
         "php": "^8.1 | ^8.2 | ^8.3 | ^8.4"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
