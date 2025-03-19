@@ -20,6 +20,9 @@
 <!-- ELSE -->
 <meta name="robots" content="none">
 <!-- ENDIF -->
+<!-- IF META_CANONICAL -->
+<link rel="canonical" href="{META_CANONICAL}"/>
+<!-- ENDIF -->
 <!-- IF META_PREV_PAGE -->
 <link rel="prev" href="{META_PREV_PAGE}">
 <!-- ENDIF / META_PREV_PAGE -->
