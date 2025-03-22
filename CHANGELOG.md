@@ -13,6 +13,7 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump egulias/email-validator from 4.0.3 to 4.0.4 ([#1858](https://github.com/torrentpier/torrentpier/pull/1858)) - ([3ced460](https://github.com/torrentpier/torrentpier/commit/3ced460640e4bfe27a91acd0408e73c3c49e1534))
 - *(deps)* Bump filp/whoops from 2.17.0 to 2.18.0 ([#1853](https://github.com/torrentpier/torrentpier/pull/1853)) - ([7ca0582](https://github.com/torrentpier/torrentpier/commit/7ca058256186b7b690003308d660a3a6271e84d2))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.4 to 11.0.5 ([#1849](https://github.com/torrentpier/torrentpier/pull/1849)) - ([37ad07a](https://github.com/torrentpier/torrentpier/commit/37ad07a40c1adf29f712f469d2850753d32a5eb9))
 - *(deps)* Bump belomaxorka/captcha from 1.2.3 to 1.2.4 - ([4641b0a](https://github.com/torrentpier/torrentpier/commit/4641b0a0d0e055d684ec36d41bfaf22b4d4b2ee1))
