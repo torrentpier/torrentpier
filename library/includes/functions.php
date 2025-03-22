@@ -1184,14 +1184,21 @@ function render_flag(string $code, bool $showName = true): string
     global $lang;
     static $iconExtension = '.svg';
 
+    $nameIgnoreList = [
+        'WBW',
+        'PACE',
+        'LGBT'
+    ];
+
     if (isset($lang['COUNTRIES'][$code])) {
         if ($code === '0') {
             return ''; // No selected
         } else {
             $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
             if (is_file($flagIconPath)) {
-                $countryName = $showName ? '&nbsp;' . str_short($lang['COUNTRIES'][$code], 20) : '';
-                return '<span title="' . $lang['COUNTRIES'][$code] . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
+                $langName = $lang['COUNTRIES'][$code];
+                $countryName = ($showName && !in_array($code, $nameIgnoreList)) ? '&nbsp;' . str_short($langName, 20) : '';
+                return '<span title="' . $langName . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
             }
         }
     }
