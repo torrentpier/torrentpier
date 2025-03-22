@@ -9,7 +9,6 @@
 - *(avatar upload)* Added `accept="image/*"` attribute ([#1841](https://github.com/torrentpier/torrentpier/pull/1841)) - ([56d531a](https://github.com/torrentpier/torrentpier/commit/56d531aa5ddb778d08a2796fa9fb865e5b3040ce))
 - *(emailer)* Added ability to configure `sendmail` - ([5ad4a70](https://github.com/torrentpier/torrentpier/commit/5ad4a7019d996d468650ab608ab53d6cf3ebb4f5))
 - *(playback_m3u.php)* Added checking auth to download ([#1848](https://github.com/torrentpier/torrentpier/pull/1848)) - ([0b8d8a5](https://github.com/torrentpier/torrentpier/commit/0b8d8a5210ee761dddaa57fc48bb48b0ede1ec3c))
-- Added secure headers configuring ([#1856](https://github.com/torrentpier/torrentpier/pull/1856)) - ([9766c53](https://github.com/torrentpier/torrentpier/commit/9766c534bddad8e82e6d19f9bad5cf70b9887f9a))
 
 ### 📦 Dependencies
 
@@ -30,6 +29,7 @@
 
 ### ⚙️ Miscellaneous
 
+- *(cliff)* Added `.cliffignore` file to ignore reverted commits ([#1859](https://github.com/torrentpier/torrentpier/pull/1859)) - ([2eab551](https://github.com/torrentpier/torrentpier/commit/2eab551bd75e7acfd6f4dabe13b2a30ac09db880))
 - *(nightly builds)* Added cleanup step ([#1851](https://github.com/torrentpier/torrentpier/pull/1851)) - ([299d9a1](https://github.com/torrentpier/torrentpier/commit/299d9a1f6c4f244e435803212e763c252e5bd396))
 - *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
 - Some minor improvements ([#1855](https://github.com/torrentpier/torrentpier/pull/1855)) - ([3cc880e](https://github.com/torrentpier/torrentpier/commit/3cc880eeb8be41596d5e8eaf19297046500afcf7))
@@ -62,10 +62,6 @@
 - *(posting.php)* Unused `'U_VIEWTOPIC` variable ([#1818](https://github.com/torrentpier/torrentpier/pull/1818)) - ([03ebbda](https://github.com/torrentpier/torrentpier/commit/03ebbda6be567d82d2a49fefe02356544fbd07cb))
 - Integrity checker 🥺🪦 ([#1827](https://github.com/torrentpier/torrentpier/pull/1827)) - ([ba3ce88](https://github.com/torrentpier/torrentpier/commit/ba3ce885c8d84ae939a0ce9c79b97877d3aaab41))
 - Redundant `.htaccess` files ([#1826](https://github.com/torrentpier/torrentpier/pull/1826)) - ([912b080](https://github.com/torrentpier/torrentpier/commit/912b080b16438b09f82fbc72a363589cc2f6209e))
-
-### 🚜 Refactor
-
-- Moved classes from `Legacy` folder to `src` root ([#1828](https://github.com/torrentpier/torrentpier/pull/1828)) - ([92ce77e](https://github.com/torrentpier/torrentpier/commit/92ce77ec0ec703c08a659419087a373f76e711f7))
 
 ### ⚙️ Miscellaneous
 
@@ -121,7 +117,6 @@
 - *(debug)* Disabled `Bugsnag` reporting on local environment ([#1751](https://github.com/torrentpier/torrentpier/pull/1751)) - ([1f3b629](https://github.com/torrentpier/torrentpier/commit/1f3b629e9cea4d11fbf3cf29f575ba730bad898d))
 - *(installer)* Missing `gd` extension ([#1749](https://github.com/torrentpier/torrentpier/pull/1749)) - ([a1c519d](https://github.com/torrentpier/torrentpier/commit/a1c519d938b848edffcbf7fbbe6a3fdb9a5394f1))
 - *(youtube player)* Mixed content issue ([#1795](https://github.com/torrentpier/torrentpier/pull/1795)) - ([3c0a1d5](https://github.com/torrentpier/torrentpier/commit/3c0a1d5d0018daa87ad3914ea04078a9a6d05fc2))
-- Null `$bb_cfg['tp_instance_hash']` ([#1790](https://github.com/torrentpier/torrentpier/pull/1790)) - ([602137b](https://github.com/torrentpier/torrentpier/commit/602137b65129b817811b80975a369ebde3270c6d))
 - Incorrect peer country flag ([#1768](https://github.com/torrentpier/torrentpier/pull/1768)) - ([0f091eb](https://github.com/torrentpier/torrentpier/commit/0f091eb546e34923d9d1ab34be5faf92080ec198))
 
 ### 📦 Dependencies
@@ -145,7 +140,6 @@
 - *(cd workflow)* Fixed release body creation ([#1809](https://github.com/torrentpier/torrentpier/pull/1809)) - ([7378cb3](https://github.com/torrentpier/torrentpier/commit/7378cb3af5cc56343c667a9d920038b05327e97b))
 - *(cd workflow)* Fixed release body creation ([#1807](https://github.com/torrentpier/torrentpier/pull/1807)) - ([cc679a8](https://github.com/torrentpier/torrentpier/commit/cc679a80246f3ff65136653025d826bf1458db3a))
 - *(changelog workflow)* Minor improvements ([#1802](https://github.com/torrentpier/torrentpier/pull/1802)) - ([15ca21f](https://github.com/torrentpier/torrentpier/commit/15ca21f03840281f7d4402959aa8bfb7d407b45b))
-- *(changelog workflow)* Some minor improvements ([#1801](https://github.com/torrentpier/torrentpier/pull/1801)) - ([2d53efc](https://github.com/torrentpier/torrentpier/commit/2d53efc945c7747be1755d0b66557a86bdc12cbd))
 - *(checksum workflow)* Fixed incorrect file path ([#1799](https://github.com/torrentpier/torrentpier/pull/1799)) - ([4eb5a9a](https://github.com/torrentpier/torrentpier/commit/4eb5a9adc61c4e116feb09208091efb914275da2))
 - *(cliff)* Changed emoji for dependencies ([#1755](https://github.com/torrentpier/torrentpier/pull/1755)) - ([55d4670](https://github.com/torrentpier/torrentpier/commit/55d467048370b51cd592982c8026702dca8813d5))
 - *(cliff)* Use blockquote for notice ([#1748](https://github.com/torrentpier/torrentpier/pull/1748)) - ([61e5592](https://github.com/torrentpier/torrentpier/commit/61e55925f312417bdb63c88a7c8939c3b2eb2ac5))
