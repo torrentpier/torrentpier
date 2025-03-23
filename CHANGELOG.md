@@ -29,8 +29,11 @@
 
 ### ⚙️ Miscellaneous
 
+- *(.cliffignore)* Added one more commit ([#1860](https://github.com/torrentpier/torrentpier/pull/1860)) - ([974d359](https://github.com/torrentpier/torrentpier/commit/974d3590c1fb11c6314da4a4b8115a2229e32bbd))
+- *(README)* Removed `Build actions` badge ([#1861](https://github.com/torrentpier/torrentpier/pull/1861)) - ([e9920ab](https://github.com/torrentpier/torrentpier/commit/e9920ab59803552e3a1a00b603962208a62efe4e))
 - *(cliff)* Added `.cliffignore` file to ignore reverted commits ([#1859](https://github.com/torrentpier/torrentpier/pull/1859)) - ([2eab551](https://github.com/torrentpier/torrentpier/commit/2eab551bd75e7acfd6f4dabe13b2a30ac09db880))
 - *(nightly builds)* Added cleanup step ([#1851](https://github.com/torrentpier/torrentpier/pull/1851)) - ([299d9a1](https://github.com/torrentpier/torrentpier/commit/299d9a1f6c4f244e435803212e763c252e5bd396))
+- *(render_flag)* Hide names for specified (`$nameIgnoreList`) flags ([#1862](https://github.com/torrentpier/torrentpier/pull/1862)) - ([83e42bc](https://github.com/torrentpier/torrentpier/commit/83e42bc5db086f60a6038b3fffca5982ceeced51))
 - *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
 - Some minor improvements ([#1855](https://github.com/torrentpier/torrentpier/pull/1855)) - ([3cc880e](https://github.com/torrentpier/torrentpier/commit/3cc880eeb8be41596d5e8eaf19297046500afcf7))
 
@@ -166,10 +169,6 @@
 - Update `cliff.toml` - ([254dca2](https://github.com/torrentpier/torrentpier/commit/254dca2b27c2d92421d3e639c80b0adf1172202f))
 - Minor improvements ([#1743](https://github.com/torrentpier/torrentpier/pull/1743)) - ([e73d650](https://github.com/torrentpier/torrentpier/commit/e73d65011fff0a8b8e1368eef61bbfb67e87eab8))
 - Enabled `$bb_cfg['integrity_check']` by defaul ([#1742](https://github.com/torrentpier/torrentpier/pull/1742)) - ([7e3601e](https://github.com/torrentpier/torrentpier/commit/7e3601e63aff73be1428969ca37dda3da2537d9b))
-
-### ◀️ Revert
-
-- Fix: Null `$bb_cfg['tp_instance_hash']` ([#1792](https://github.com/torrentpier/torrentpier/pull/1792)) - ([4eb26ae](https://github.com/torrentpier/torrentpier/commit/4eb26ae37e1f4c82a45961517ffeb54c20200408))
 
 ## New Contributors ❤️
 
