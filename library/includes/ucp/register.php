@@ -599,7 +599,7 @@ if ($submit && !$errors) {
 
             try {
                 if ($analyzer->isSpammerDetected($response)) {
-                    bb_die('');
+                    bb_die($lang['STOP_FORUM_SPAM_REGISTRATION_NOTE']);
                     $spamUserDetected = true;
                 }
             } catch (\Resolventa\StopForumSpamApi\Exception\StopForumSpamApiException $e) {
