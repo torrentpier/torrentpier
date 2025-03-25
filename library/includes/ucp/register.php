@@ -582,19 +582,46 @@ if ($submit && !$errors) {
      *  Создание нового профиля
      */
     if ($mode == 'register') {
-        if ($bb_cfg['reg_email_activation']) {
-            $user_actkey = make_rand_str(ACTKEY_LENGTH);
-            $db_data['user_active'] = 0;
-            $db_data['user_actkey'] = $user_actkey;
-        } else {
-            $db_data['user_active'] = 1;
-            $db_data['user_actkey'] = '';
-        }
-        $db_data['user_regdate'] = TIMENOW;
-
         if (!IS_ADMIN) {
             $db_data['user_reg_ip'] = USER_IP;
         }
+
+        // Check StopForumSpam
+        $spamUserDetected = false;
+        if ($bb_cfg['use_stop_forum_spam_service'] && !IS_ADMIN) {
+            $stopForumSpamApi = new \Resolventa\StopForumSpamApi\StopForumSpamApi();
+            $stopForumSpamApi
+                ->checkEmail($db_data['user_email'])
+                ->checkIp($db_data['user_reg_ip'])
+                ->checkUsername($db_data['username']);
+            $response = $stopForumSpamApi->getCheckResponse();
+            $analyzer = new \Resolventa\StopForumSpamApi\ResponseAnalyzer(new \Resolventa\StopForumSpamApi\ResponseAnalyzerSettings());
+
+            try {
+                if ($analyzer->isSpammerDetected($response)) {
+                    bb_die('');
+                    $spamUserDetected = true;
+                }
+            } catch (\Resolventa\StopForumSpamApi\Exception\StopForumSpamApiException $e) {
+                bb_die('[StopForumSpamApi] Bad response: ' . $e->getMessage());
+            }
+        }
+
+        if ($spamUserDetected) {
+            $db_data['user_active'] = 0;
+            $db_data['user_actkey'] = '';
+        } else {
+            if ($bb_cfg['reg_email_activation']) {
+                $user_actkey = make_rand_str(ACTKEY_LENGTH);
+                $db_data['user_active'] = 0;
+                $db_data['user_actkey'] = $user_actkey;
+            } else {
+                $db_data['user_active'] = 1;
+                $db_data['user_actkey'] = '';
+            }
+        }
+
+        $db_data['user_regdate'] = TIMENOW;
 
         if (!isset($db_data['tpl_name'])) {
             $db_data['tpl_name'] = (string)$bb_cfg['tpl_name'];
@@ -618,7 +645,7 @@ if ($submit && !$errors) {
         if (IS_ADMIN) {
             set_pr_die_append_msg($new_user_id);
             $message = $lang['ACCOUNT_ADDED'];
-        } else {
+        } elseif (!$spamUserDetected) {
             if ($bb_cfg['reg_email_activation']) {
                 $message = $lang['ACCOUNT_INACTIVE'];
                 $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME_INACTIVE'], $bb_cfg['sitename']);
