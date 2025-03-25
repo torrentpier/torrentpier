@@ -408,6 +408,7 @@ $bb_cfg['max_last_visit_days'] = 14; // days
 $bb_cfg['last_visit_update_intrv'] = 3600; // sec
 
 // Registration
+$bb_cfg['use_stop_forum_spam_service'] = true; // Use StopForumSpam service to prevent registering for spam users
 $bb_cfg['invalid_logins'] = 5; // Max incorrect password submits before showing captcha
 $bb_cfg['new_user_reg_disabled'] = false; // Disable registration of new users
 $bb_cfg['unique_ip'] = false; // Disallow registration from multiple IP addresses

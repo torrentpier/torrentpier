@@ -55,6 +55,7 @@
     "claviska/simpleimage": "^4.0",
     "belomaxorka/captcha": "1.*",
     "egulias/email-validator": "^4.0.1",
+    "resolventa/stopforumspam-php-api": "2.0.0",
     "filp/whoops": "^2.15",
     "z4kn4fein/php-semver": "^v3.0.0",
     "gigablah/sphinxphp": "2.0.8",

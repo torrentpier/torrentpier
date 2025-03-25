@@ -637,6 +637,7 @@ $lang['EMAIL_TOO_LONG'] = 'Your email is too long.';
 $lang['SIGNATURE_TOO_LONG'] = 'Your signature is too long.';
 $lang['SIGNATURE_ERROR_HTML'] = 'The signature can contain only BBCode';
 $lang['FIELDS_EMPTY'] = 'You must fill in the required fields.';
+$lang['STOP_FORUM_SPAM_REGISTRATION_NOTE'] = 'You were detected in the StopForumSpam database. Your account will be activated manually by the administrator after review.';
 
 $lang['WELCOME_SUBJECT'] = 'Welcome to %s Forums'; // Welcome to my.com forums
 $lang['NEW_ACCOUNT_SUBJECT'] = 'New user account';
