@@ -600,8 +600,7 @@ VALUES ('allow_autologin', '1'),
        ('premod', '0'),
        ('tor_comment', '1'),
        ('terms', ''),
-       ('show_board_start_index', '1'),
-       ('tp_instance_hash', '');
+       ('show_board_start_index', '1');
 
 -- ----------------------------
 -- Table structure for `bb_cron`

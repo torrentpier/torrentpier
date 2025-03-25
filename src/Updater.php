@@ -45,7 +45,7 @@ class Updater
      */
     private const STREAM_CONTEXT = [
         'http' => [
-            'header' => 'User-Agent: ' . APP_NAME . '-' . TP_INSTANCE_HASH,
+            'header' => 'User-Agent: ' . APP_NAME . '-' . TIMENOW,
             'timeout' => 10,
             'ignore_errors' => true
         ]

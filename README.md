@@ -34,7 +34,6 @@ and go from there. The documentation will be translated to english in the near f
 * High-load capable, heavily configurable announcer
 * Scrape support
 * FreeLeech
-* [IndexNow](https://www.indexnow.org) support
 * [TorrServer integration](https://github.com/YouROK/TorrServer) support
 * BitTorrent v2 support
 * Event-based invite system
