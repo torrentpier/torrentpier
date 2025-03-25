@@ -64,14 +64,5 @@ if (empty($bb_cfg['tp_instance_hash']) || ($bb_cfg['tp_instance_hash'] !== hash(
     bb_update_config(['tp_instance_hash' => hash('xxh128', FULL_URL)]);
 }
 
-// Generate IndexNow key
-if ($bb_cfg['indexnow_settings']['enabled'] && !is_file(BB_ROOT . $bb_cfg['indexnow_key'] . \TorrentPier\IndexNow::$keyFileExtension)) {
-    $randomIndexNowKey = empty($bb_cfg['indexnow_key']) ? make_rand_str(rand(64, 128)) : $bb_cfg['indexnow_key'];
-    if ($bb_cfg['indexnow_key'] !== $randomIndexNowKey) {
-        bb_update_config(['indexnow_key' => $randomIndexNowKey]);
-    }
-    file_write($randomIndexNowKey, (BB_ROOT . $randomIndexNowKey . \TorrentPier\IndexNow::$keyFileExtension));
-}
-
 // Check for updates
 $datastore->update('check_updates');

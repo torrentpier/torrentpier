@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1e345a7abe58feb13d951acfd499e95",
+    "content-hash": "ed0c6f72e121f5b35712c0855bc64a82",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -2058,48 +2058,6 @@
             "time": "2025-03-24T10:02:05+00:00"
         },
         {
-            "name": "nemorize/indexnow",
-            "version": "0.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nemorize/php-indexnow.git",
-                "reference": "7602a8ae1de0cf1dd11692a7627f10111c55731a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nemorize/php-indexnow/zipball/7602a8ae1de0cf1dd11692a7627f10111c55731a",
-                "reference": "7602a8ae1de0cf1dd11692a7627f10111c55731a",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.7",
-                "php": ">=8.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Nemorize\\Indexnow\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ji Yong, Kim",
-                    "email": "nemo@qroffle.com"
-                }
-            ],
-            "description": "PHP library for submitting website URLs using IndexNow to search engines.",
-            "support": {
-                "issues": "https://github.com/nemorize/php-indexnow/issues",
-                "source": "https://github.com/nemorize/php-indexnow/tree/0.0.1"
-            },
-            "abandoned": true,
-            "time": "2023-07-31T17:08:12+00:00"
-        },
-        {
             "name": "nikic/iter",
             "version": "v2.4.1",
             "source": {
@@ -3854,6 +3812,6 @@
     "platform": {
         "php": "^8.1 | ^8.2 | ^8.3 | ^8.4"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

@@ -144,12 +144,6 @@ $bb_cfg['torr_server'] = [
     'disable_for_guest' => true
 ];
 
-// IndexNow settings
-$bb_cfg['indexnow_settings'] = [
-    'enabled' => false,
-    'host' => 'bing', // Available: yandex, bing, seznam, naver
-];
-
 // FAQ url help link
 $bb_cfg['how_to_download_url_help'] = 'viewtopic.php?t=1'; // How to download?
 $bb_cfg['what_is_torrent_url_help'] = 'viewtopic.php?t=2'; // What is a torrent?
