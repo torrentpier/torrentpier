@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed0c6f72e121f5b35712c0855bc64a82",
+    "content-hash": "a906f822bca0d03bee43a9efe8529350",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -2111,21 +2111,21 @@
         },
         {
             "name": "php-curl-class/php-curl-class",
-            "version": "11.1.0",
+            "version": "12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "062f58613524947451efdb3dd7d7217719670a9f"
+                "reference": "7a8f05efb18bb865dbce864b8fd34d4f5d920c74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/062f58613524947451efdb3dd7d7217719670a9f",
-                "reference": "062f58613524947451efdb3dd7d7217719670a9f",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/7a8f05efb18bb865dbce864b8fd34d4f5d920c74",
+                "reference": "7a8f05efb18bb865dbce864b8fd34d4f5d920c74",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=7.4"
+                "php": ">=8.0"
             },
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "*",
@@ -2185,9 +2185,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-curl-class/php-curl-class/issues",
-                "source": "https://github.com/php-curl-class/php-curl-class/tree/11.1.0"
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/12.0.0"
             },
-            "time": "2025-03-24T18:04:25+00:00"
+            "time": "2025-03-25T18:04:16+00:00"
         },
         {
             "name": "php-http/discovery",
@@ -3812,6 +3812,6 @@
     "platform": {
         "php": "^8.1 | ^8.2 | ^8.3 | ^8.4"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
