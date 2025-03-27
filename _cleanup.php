@@ -18,6 +18,7 @@ if (php_sapi_name() !== 'cli') {
 
 $items = [
     '.github',
+    '.cliffignore',
     '.editorconfig',
     '.gitignore',
     '.styleci.yml',
