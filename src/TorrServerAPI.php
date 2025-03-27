@@ -85,7 +85,7 @@ class TorrServerAPI
         ]);
         $isSuccess = $curl->httpStatusCode === 200;
         if (!$isSuccess) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n");
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
         }
         $curl->close();
 
@@ -140,7 +140,7 @@ class TorrServerAPI
                 file_put_contents($m3uFile, $curl->response);
             }
         } else {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n");
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
         }
         $curl->close();
 
@@ -222,7 +222,7 @@ class TorrServerAPI
             if ($curl->httpStatusCode === 200 && !empty($response->{$index})) {
                 CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
             } else {
-                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode}\n");
+                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode}" . LOG_LF);
             }
             $curl->close();
         }
@@ -247,7 +247,7 @@ class TorrServerAPI
         $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);
         $isSuccess = $curl->httpStatusCode === 200;
         if (!$isSuccess) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n");
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
         }
         $curl->close();
 
