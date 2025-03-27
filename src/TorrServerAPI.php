@@ -180,7 +180,7 @@ class TorrServerAPI
             if (unlink($m3uFile)) {
                 return true;
             } else {
-                bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '$m3uFile'\n");
+                bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '$m3uFile'" . LOG_LF);
             }
         }
 
