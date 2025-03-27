@@ -12,6 +12,9 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump php-curl-class/php-curl-class from 11.1.0 to 12.0.0 ([#1868](https://github.com/torrentpier/torrentpier/pull/1868)) - ([bd5aa2a](https://github.com/torrentpier/torrentpier/commit/bd5aa2a5e71560409bc630ea2334e33c77458ab3))
+- *(deps)* Bump monolog/monolog from 3.8.1 to 3.9.0 ([#1865](https://github.com/torrentpier/torrentpier/pull/1865)) - ([6440162](https://github.com/torrentpier/torrentpier/commit/64401621879af0cc445c38687c571d2fec184410))
+- *(deps)* Bump php-curl-class/php-curl-class from 11.0.5 to 11.1.0 ([#1864](https://github.com/torrentpier/torrentpier/pull/1864)) - ([de2fcea](https://github.com/torrentpier/torrentpier/commit/de2fceabedefd07441ba6801417157a9828e0e2a))
 - *(deps)* Bump egulias/email-validator from 4.0.3 to 4.0.4 ([#1858](https://github.com/torrentpier/torrentpier/pull/1858)) - ([3ced460](https://github.com/torrentpier/torrentpier/commit/3ced460640e4bfe27a91acd0408e73c3c49e1534))
 - *(deps)* Bump filp/whoops from 2.17.0 to 2.18.0 ([#1853](https://github.com/torrentpier/torrentpier/pull/1853)) - ([7ca0582](https://github.com/torrentpier/torrentpier/commit/7ca058256186b7b690003308d660a3a6271e84d2))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.4 to 11.0.5 ([#1849](https://github.com/torrentpier/torrentpier/pull/1849)) - ([37ad07a](https://github.com/torrentpier/torrentpier/commit/37ad07a40c1adf29f712f469d2850753d32a5eb9))
@@ -36,6 +39,11 @@
 - *(render_flag)* Hide names for specified (`$nameIgnoreList`) flags ([#1862](https://github.com/torrentpier/torrentpier/pull/1862)) - ([83e42bc](https://github.com/torrentpier/torrentpier/commit/83e42bc5db086f60a6038b3fffca5982ceeced51))
 - *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
 - Some minor improvements ([#1855](https://github.com/torrentpier/torrentpier/pull/1855)) - ([3cc880e](https://github.com/torrentpier/torrentpier/commit/3cc880eeb8be41596d5e8eaf19297046500afcf7))
+
+### ◀️ Revert
+
+- Added `TorrentPier instance hash` generation - ([eabf851](https://github.com/torrentpier/torrentpier/commit/eabf851ee60d29835d1979f46dcf2b9d82576c1b))
+- Added `IndexNow` protocol support 🤖 - ([1b288a9](https://github.com/torrentpier/torrentpier/commit/1b288a96e443e06c4f4e9ea374037d3b0af8a639))
 
 
 ## [v2.4.5-rc.4](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.3..v2.4.5-rc.4) (2025-03-09)
