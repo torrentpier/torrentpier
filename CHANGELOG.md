@@ -12,6 +12,7 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump php-curl-class/php-curl-class from 11.1.0 to 12.0.0 ([#1868](https://github.com/torrentpier/torrentpier/pull/1868)) - ([bd5aa2a](https://github.com/torrentpier/torrentpier/commit/bd5aa2a5e71560409bc630ea2334e33c77458ab3))
 - *(deps)* Bump monolog/monolog from 3.8.1 to 3.9.0 ([#1865](https://github.com/torrentpier/torrentpier/pull/1865)) - ([6440162](https://github.com/torrentpier/torrentpier/commit/64401621879af0cc445c38687c571d2fec184410))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.5 to 11.1.0 ([#1864](https://github.com/torrentpier/torrentpier/pull/1864)) - ([de2fcea](https://github.com/torrentpier/torrentpier/commit/de2fceabedefd07441ba6801417157a9828e0e2a))
 - *(deps)* Bump egulias/email-validator from 4.0.3 to 4.0.4 ([#1858](https://github.com/torrentpier/torrentpier/pull/1858)) - ([3ced460](https://github.com/torrentpier/torrentpier/commit/3ced460640e4bfe27a91acd0408e73c3c49e1534))
