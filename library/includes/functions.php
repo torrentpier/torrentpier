@@ -1875,7 +1875,7 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     $message = DB()->escape($message);
 
     if ($poster_id == BOT_UID) {
-        $poster_ip = '7f000001';
+        $poster_ip = '0';
     } elseif ($row = DB()->fetch_row("SELECT user_reg_ip FROM " . BB_USERS . " WHERE user_id = $poster_id")) {
         $poster_ip = $row['user_reg_ip'];
     } else {

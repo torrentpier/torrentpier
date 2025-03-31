@@ -437,7 +437,7 @@ class Post
         $post_time = TIMENOW;
 
         $poster_id = BOT_UID;
-        $poster_ip = '7f000001';
+        $poster_ip = '0';
 
         if ($mode == 'after_move') {
             if (!$forum_id || !$old_forum_id) {
