@@ -573,7 +573,7 @@ if (!$group_id) {
                     $template->assign_block_vars('pending', [
                         'ROW_CLASS' => $row_class,
                         'AVATAR_IMG' => $pending_info['avatar'],
-                        'USER' => profile_url($pending_info),
+                        'USER' => profile_url($member),
                         'FROM' => $pending_info['from'],
                         'JOINED' => $pending_info['joined'],
                         'JOINED_RAW' => $pending_info['joined_raw'],
