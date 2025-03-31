@@ -341,6 +341,12 @@ class BBCode
             $this->smilies = $datastore->get('smile_replacements');
         }
 
+        if (defined('IN_ADMIN')) {
+            foreach ($this->smilies['repl'] as &$smile) {
+                $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
+            }
+        }
+
         if ($this->smilies) {
             /** @noinspection NestedPositiveIfStatementsInspection */
             if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text)) {
