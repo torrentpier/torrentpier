@@ -10,6 +10,11 @@
 - *(emailer)* Added ability to configure `sendmail` - ([5ad4a70](https://github.com/torrentpier/torrentpier/commit/5ad4a7019d996d468650ab608ab53d6cf3ebb4f5))
 - *(playback_m3u.php)* Added checking auth to download ([#1848](https://github.com/torrentpier/torrentpier/pull/1848)) - ([0b8d8a5](https://github.com/torrentpier/torrentpier/commit/0b8d8a5210ee761dddaa57fc48bb48b0ede1ec3c))
 
+### 🐛 Bug Fixes
+
+- `tablesorting` issues & incorrect `user_role` for pending users ([#1871](https://github.com/torrentpier/torrentpier/pull/1871)) - ([595adbe](https://github.com/torrentpier/torrentpier/commit/595adbe4da5296b0f3ebde6628e58e878c0fb7d5))
+- Fixed TorrentPier build-in emojis showing in ACP ([#1870](https://github.com/torrentpier/torrentpier/pull/1870)) - ([12792e7](https://github.com/torrentpier/torrentpier/commit/12792e74f71a57448277dda46471563a7fea71db))
+
 ### 📦 Dependencies
 
 - *(deps)* Bump php-curl-class/php-curl-class from 11.1.0 to 12.0.0 ([#1868](https://github.com/torrentpier/torrentpier/pull/1868)) - ([bd5aa2a](https://github.com/torrentpier/torrentpier/commit/bd5aa2a5e71560409bc630ea2334e33c77458ab3))
@@ -38,6 +43,7 @@
 - *(nightly builds)* Added cleanup step ([#1851](https://github.com/torrentpier/torrentpier/pull/1851)) - ([299d9a1](https://github.com/torrentpier/torrentpier/commit/299d9a1f6c4f244e435803212e763c252e5bd396))
 - *(render_flag)* Hide names for specified (`$nameIgnoreList`) flags ([#1862](https://github.com/torrentpier/torrentpier/pull/1862)) - ([83e42bc](https://github.com/torrentpier/torrentpier/commit/83e42bc5db086f60a6038b3fffca5982ceeced51))
 - *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
+- Changed placeholder IP address from `7f000001` to `0` ([#1869](https://github.com/torrentpier/torrentpier/pull/1869)) - ([84e2392](https://github.com/torrentpier/torrentpier/commit/84e23928968f943826bdc4390c52365357d56f32))
 - Minor improvements ([#1866](https://github.com/torrentpier/torrentpier/pull/1866)) - ([7237653](https://github.com/torrentpier/torrentpier/commit/72376532b32395eda04dc032c07ca08b27346c6b))
 - Some minor improvements ([#1855](https://github.com/torrentpier/torrentpier/pull/1855)) - ([3cc880e](https://github.com/torrentpier/torrentpier/commit/3cc880eeb8be41596d5e8eaf19297046500afcf7))
 
