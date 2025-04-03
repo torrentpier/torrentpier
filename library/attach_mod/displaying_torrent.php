@@ -245,7 +245,7 @@ if ($tor_reged && $tor_info) {
             'SHOW_DL_LIST' => true,
             'SHOW_DL_LIST_TOR_INFO' => true,
 
-            'TOR_SIZE' => humn_size($tor_size, 1),
+            'TOR_SIZE' => humn_size($tor_size, 2),
             'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
             'TOR_DOWNLOAD_COUNT' => $download_count,
             'TOR_COMPLETED' => $tor_completed_count,
@@ -373,8 +373,8 @@ if ($tor_reged && $tor_info) {
                 $peers = $tmp;
 
                 $template->assign_vars([
-                    'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, 0, 'KB') . '/s' : '0 KB/s',
-                    'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, 0, 'KB') . '/s' : '0 KB/s'
+                    'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, min: 'KB') . '/s' : '0 KB/s',
+                    'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, min: 'KB') . '/s' : '0 KB/s'
                 ]);
             }
 
@@ -407,7 +407,7 @@ if ($tor_reged && $tor_info) {
 
                             $template->assign_block_vars((string)$x_full, [
                                 'SEED_ORD_ACT' => $seed_order_action,
-                                'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s'
+                                'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s'
                             ]);
 
                             if ($ip) {
@@ -429,8 +429,8 @@ if ($tor_reged && $tor_info) {
 
                             $template->assign_block_vars((string)$x_full, [
                                 'LEECH_ORD_ACT' => $leech_order_action,
-                                'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s',
-                                'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], 0, 'KB') . '/s'
+                                'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
+                                'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], min: 'KB') . '/s'
                             ]);
 
                             if ($ip) {
@@ -449,8 +449,8 @@ if ($tor_reged && $tor_info) {
                     $up_tot = ($p_max_up) ? humn_size($p_max_up) : '-';
                     $down_tot = ($p_max_down) ? humn_size($p_max_down) : '-';
                     $up_ratio = ($p_max_down) ? round(($p_max_up / $p_max_down), 2) : '';
-                    $sp_up = ($peer['speed_up']) ? humn_size($peer['speed_up'], 0, 'KB') . '/s' : '-';
-                    $sp_down = ($peer['speed_down']) ? humn_size($peer['speed_down'], 0, 'KB') . '/s' : '-';
+                    $sp_up = ($peer['speed_up']) ? humn_size($peer['speed_up'], min: 'KB') . '/s' : '-';
+                    $sp_down = ($peer['speed_down']) ? humn_size($peer['speed_down'], min: 'KB') . '/s' : '-';
 
                     $bgr_class = (!($tr[$x] % 2)) ? $bgr_class_1 : $bgr_class_2;
                     $row_bgr = ($change_peers_bgr_over) ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';

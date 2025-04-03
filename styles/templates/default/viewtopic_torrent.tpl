@@ -23,9 +23,7 @@ ajax.callback.callseed = function (data) {
 </script>
 
 <tr>
-	<td colspan="2" class="catTitle"><a href="{DL_LIST_HREF}">
-		{L_DL_LIST_AND_TORRENT_ACTIVITY}
-	</a></td>
+	<td colspan="2" class="catTitle"><a href="{DL_LIST_HREF}">{L_DL_LIST_AND_TORRENT_ACTIVITY}</a></td>
 </tr>
 
 <!-- BEGIN dl_users -->

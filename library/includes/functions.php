@@ -876,8 +876,8 @@ function show_bt_userdata($user_id): void
         'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
         'YS_POINTS' => $btu['auth_key'] ? $btu['points_yesterday'] : '0.00',
 
-        'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
-        'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
+        'SPEED_UP' => humn_size($btu['speed_up'], min: 'KB') . '/s',
+        'SPEED_DOWN' => humn_size($btu['speed_down'], min: 'KB') . '/s',
     ]);
 }
 
