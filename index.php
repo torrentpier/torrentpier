@@ -46,7 +46,7 @@ if ($bb_cfg['show_network_news']) {
 $user->session_start();
 
 // Init main vars
-$viewcat = isset($_GET['c']) ? (int)$_GET['c'] : 0;
+$viewcat = isset($_GET[POST_CAT_URL]) ? (int)$_GET[POST_CAT_URL] : 0;
 $lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output

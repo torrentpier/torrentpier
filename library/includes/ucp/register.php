@@ -122,8 +122,8 @@ switch ($mode) {
         ];
 
         // Select a profile: your own for the user, any for the admin
-        if (IS_ADMIN && !empty($_REQUEST['u'])) {
-            $pr_user_id = (int)$_REQUEST['u'];
+        if (IS_ADMIN && !empty($_REQUEST[POST_USERS_URL])) {
+            $pr_user_id = (int)$_REQUEST[POST_USERS_URL];
             $adm_edit = ($pr_user_id != $userdata['user_id']);
         } else {
             $pr_user_id = $userdata['user_id'];
