@@ -76,7 +76,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 
 // Null ratio
 if ($bb_cfg['ratio_null_enabled'] && $btu = get_bt_userdata($profiledata['user_id'])) {
-    $template->assign_vars(array('NULLED_RATIO' => $btu['ratio_nulled']));
+    $template->assign_vars(['NULLED_RATIO' => $btu['ratio_nulled']]);
 }
 
 // Ban information
@@ -93,7 +93,7 @@ $template->assign_vars([
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'POSTER_RANK' => ($poster_rank) ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : $lang['USER'],
+    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : $lang['USER'],
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,
     'POSTS' => $profiledata['user_posts'],
@@ -101,8 +101,8 @@ $template->assign_vars([
     'EMAIL' => $email,
     'WWW' => $profiledata['user_website'],
     'ICQ' => $profiledata['user_icq'],
-    'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
-    'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
+    'LAST_VISIT_TIME' => $profiledata['user_lastvisit'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
+    'LAST_ACTIVITY_TIME' => $profiledata['user_session_time'] ? (!$profile_user_id && bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
     'USER_ACTIVE' => $profiledata['user_active'],
     'LOCATION' => render_flag($profiledata['user_from']),
     'OCCUPATION' => $profiledata['user_occ'],
