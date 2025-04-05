@@ -20,9 +20,9 @@ $max_forum_name_length = 50;
 $yes_sign = '&radic;';
 $no_sign = 'x';
 
-$group_id = isset($_REQUEST['g']) ? (int)$_REQUEST['g'] : 0;
-$user_id = isset($_REQUEST['u']) ? (int)$_REQUEST['u'] : 0;
-$cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : 0;
+$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
+$user_id = isset($_REQUEST[POST_USERS_URL]) ? (int)$_REQUEST[POST_USERS_URL] : 0;
+$cat_id = isset($_REQUEST[POST_CAT_URL]) ? (int)$_REQUEST[POST_CAT_URL] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $submit = isset($_REQUEST['submit']);
 
