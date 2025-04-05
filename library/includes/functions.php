@@ -898,13 +898,16 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = CACHE('bb_config')->get("config_{$table}")) {
         $cfg = [];
+
         foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row) {
             $cfg[$row['config_name']] = $row['config_value'];
         }
+
         if ($update_cache) {
             CACHE('bb_config')->set("config_{$table}", $cfg);
         }
     }
+
     return $cfg;
 }
 
