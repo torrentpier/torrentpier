@@ -225,7 +225,7 @@ ajax.callback.group_membership = function(data) {
 			$('#rank-sel').bind('change', function(){ ajax.change_user_rank( {PROFILE_USER_ID}, $(this).val() ); });
 			</script>
 			<div id="rank-msg" class="mrg_6"></div>
-		<!-- ELSE IF POSTER_RANK -->
+		<!-- ELSE IF RANK_IMAGE -->
 			{RANK_IMAGE}
 		<!-- ENDIF -->
 		</p>
