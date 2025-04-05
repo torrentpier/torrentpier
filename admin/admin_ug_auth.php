@@ -316,7 +316,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             'CAT_HREF' => "$base_url&amp;" . POST_CAT_URL . "=$c_id",
         ));
 
-        if (!($c =& $_REQUEST['c']) || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
+        if (!($c =& $_REQUEST[POST_CAT_URL]) || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
             continue;
         }
 
