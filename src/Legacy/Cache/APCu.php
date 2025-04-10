@@ -116,7 +116,7 @@ class APCu extends Common
      * @param string|null $name
      * @return bool
      */
-    public function rm(string $name = null): bool
+    public function rm(?string $name = null): bool
     {
         $targetMethod = is_string($name) ? 'delete' : 'flush';
         $name = is_string($name) ? $this->prefix . $name : null;
