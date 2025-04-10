@@ -174,7 +174,7 @@ class Redis extends Common
      * @param string|null $name
      * @return bool
      */
-    public function rm(string $name = null): bool
+    public function rm(?string $name = null): bool
     {
         if (!$this->connected) {
             $this->connect();
