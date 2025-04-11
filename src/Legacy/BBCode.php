@@ -345,6 +345,7 @@ class BBCode
             foreach ($this->smilies['repl'] as &$smile) {
                 $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
             }
+            unset($smile);
         }
 
         if ($this->smilies) {
