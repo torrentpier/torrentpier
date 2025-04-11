@@ -12,6 +12,7 @@
 
 ### 🐛 Bug Fixes
 
+- *(cache)* Implicitly marking parameter `$name` as nullable is deprecated ([#1877](https://github.com/torrentpier/torrentpier/pull/1877)) - ([c3b4000](https://github.com/torrentpier/torrentpier/commit/c3b40003b778a725e958cebee6446bcfd6a68b10))
 - Pagination issue in `Report on action` page ([#1872](https://github.com/torrentpier/torrentpier/pull/1872)) - ([8358aa0](https://github.com/torrentpier/torrentpier/commit/8358aa00de2ec9efd4c51b8bef11bd700a56c19c))
 - `tablesorting` issues & incorrect `user_role` for pending users ([#1871](https://github.com/torrentpier/torrentpier/pull/1871)) - ([595adbe](https://github.com/torrentpier/torrentpier/commit/595adbe4da5296b0f3ebde6628e58e878c0fb7d5))
 - Fixed TorrentPier build-in emojis showing in ACP ([#1870](https://github.com/torrentpier/torrentpier/pull/1870)) - ([12792e7](https://github.com/torrentpier/torrentpier/commit/12792e74f71a57448277dda46471563a7fea71db))
