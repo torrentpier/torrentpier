@@ -146,7 +146,7 @@ $template->assign_vars([
     'TORRENT_PRIVATE' => $torrent->isPrivate() ? $lang['YES'] : $lang['NO'],
 
     'BTMR_NOTICE' => sprintf($lang['BT_FLIST_BTMR_NOTICE'], 'https://github.com/kovalensky/tmrr'),
-    'U_TOPIC' => TOPIC_URL . $topic_id
+    'U_TOPIC' => TOPIC_URL . $topic_id,
 ]);
 
 print_page('filelist.tpl');
