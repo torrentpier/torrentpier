@@ -39,14 +39,13 @@ $next_topic = isset($_GET['next']);
 $prev_topic = isset($_GET['prev']);
 
 if ($next_topic || $prev_topic) {
-    $limit = 5;
     $topics_sql = '
-        (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id < ' . $topic_id . ' ORDER BY topic_id DESC LIMIT ' . $limit . ')
+        (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id < ' . $topic_id . ' ORDER BY topic_id DESC LIMIT 2)
         UNION
-        (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id >= ' . $topic_id . ' ORDER BY topic_id ASC LIMIT ' . $limit . ')
+        (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id >= ' . $topic_id . ' ORDER BY topic_id ASC LIMIT 2)
         ORDER BY topic_id ASC';
 
-    $topics = DB()->fetch_all($topics_sql);
+    $topics = DB()->fetch_rowset($topics_sql);
     $topic_ids = array_column($topics, 'topic_id');
     $current_index = array_search($topic_id, $topic_ids);
 
