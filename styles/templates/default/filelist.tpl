@@ -7,7 +7,7 @@
 <br/>
 
 <div class="nav">
-    <p class="floatR"><a href="#">← {L_PREVIOUS_PAGE}</a>&nbsp;|&nbsp;<a href="#">{L_NEXT_PAGE} →</a></p>
+    <p class="floatR"><a href="{U_FILE_LIST}&prev">← {L_PREVIOUS_PAGE}</a>&nbsp;|&nbsp;<a href="{U_FILE_LIST}&next">{L_NEXT_PAGE} →</a></p>
     <div class="clear"></div>
 </div>
 

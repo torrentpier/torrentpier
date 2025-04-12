@@ -34,6 +34,37 @@ if (!$row = DB()->fetch_row($sql)) {
     bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
+// ...
+$next_topic = isset($_GET['next']);
+$prev_topic = isset($_GET['prev']);
+
+if ($next_topic || $prev_topic) {
+    $limit = 5;
+    $topics_sql = '
+        (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id < ' . $topic_id . ' ORDER BY topic_id DESC LIMIT ' . $limit . ')
+        UNION
+        (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id >= ' . $topic_id . ' ORDER BY topic_id ASC LIMIT ' . $limit . ')
+        ORDER BY topic_id ASC';
+
+    $topics = DB()->fetch_all($topics_sql);
+    $topic_ids = array_column($topics, 'topic_id');
+    $current_index = array_search($topic_id, $topic_ids);
+
+    if ($current_index === false) {
+        bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
+    }
+
+    if ($next_topic && isset($topic_ids[$current_index + 1])) {
+        $target_topic_id = $topic_ids[$current_index + 1];
+    } elseif ($prev_topic && isset($topic_ids[$current_index - 1])) {
+        $target_topic_id = $topic_ids[$current_index - 1];
+    } else {
+        $target_topic_id = $topic_id;
+    }
+
+    redirect('filelist.php?t=' . $target_topic_id);
+}
+
 // Protocol meta
 $meta_v1 = !empty($row['info_hash']);
 $meta_v2 = !empty($row['info_hash_v2']);
@@ -119,6 +150,7 @@ $template->assign_vars([
 
     'BTMR_NOTICE' => sprintf($lang['BT_FLIST_BTMR_NOTICE'], 'https://github.com/kovalensky/tmrr'),
     'U_TOPIC' => TOPIC_URL . $topic_id,
+    'U_FILE_LIST' => "filelist.php?t=$topic_id",
     'U_NEXT_TOPIC' => '',
     'U_PREV_TOPIC' => '',
 ]);
