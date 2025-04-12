@@ -54,13 +54,12 @@ if (isset($topic_ids[$current_index + 1])) {
     $next_topic_id = $topic_ids[$current_index + 1];
 }
 if (isset($topic_ids[$current_index - 1])) {
-    $prev_topic_id = $topic_ids[$current_index + 1];
-    $target_topic_id = $topic_ids[$current_index - 1];
+    $prev_topic_id = $topic_ids[$current_index - 1];
 }
 
 $template->assign_vars([
-    'U_NEXT_TOPIC' => $next_topic_id,
-    'U_PREV_TOPIC' => $prev_topic_id,
+    'U_NEXT_TOPIC' => "filelist.php?t=$next_topic_id",
+    'U_PREV_TOPIC' => "filelist.php?t=$prev_topic_id",
 ]);
 
 // Protocol meta
@@ -147,8 +146,7 @@ $template->assign_vars([
     'TORRENT_PRIVATE' => $torrent->isPrivate() ? $lang['YES'] : $lang['NO'],
 
     'BTMR_NOTICE' => sprintf($lang['BT_FLIST_BTMR_NOTICE'], 'https://github.com/kovalensky/tmrr'),
-    'U_TOPIC' => TOPIC_URL . $topic_id,
-    'U_FILE_LIST' => "filelist.php?t=$topic_id"
+    'U_TOPIC' => TOPIC_URL . $topic_id
 ]);
 
 print_page('filelist.tpl');
