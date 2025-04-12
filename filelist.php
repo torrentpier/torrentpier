@@ -119,6 +119,8 @@ $template->assign_vars([
 
     'BTMR_NOTICE' => sprintf($lang['BT_FLIST_BTMR_NOTICE'], 'https://github.com/kovalensky/tmrr'),
     'U_TOPIC' => TOPIC_URL . $topic_id,
+    'U_NEXT_TOPIC' => '',
+    'U_PREV_TOPIC' => '',
 ]);
 
 print_page('filelist.tpl');
