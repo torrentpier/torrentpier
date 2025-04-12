@@ -47,8 +47,8 @@ if ($next_topic || $prev_topic) {
 
     $topics = DB()->fetch_rowset($topics_sql);
     $topic_ids = array_column($topics, 'topic_id');
-    $current_index = array_search($topic_id, $topic_ids);
 
+    $current_index = array_search($topic_id, $topic_ids);
     if ($current_index === false) {
         bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
     }
