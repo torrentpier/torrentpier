@@ -34,6 +34,32 @@ if (!$row = DB()->fetch_row($sql)) {
     bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
+// Previous/next topic links
+$sql = '
+    (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id < ' . $topic_id . ' ORDER BY topic_id DESC LIMIT 1)
+    UNION
+    (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id >= ' . $topic_id . ' ORDER BY topic_id ASC LIMIT 2)
+    ORDER BY topic_id ASC';
+
+if (!$topics = DB()->fetch_rowset($sql)) {
+    bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
+}
+$topic_ids = array_column($topics, 'topic_id');
+
+$current_index = array_search($topic_id, $topic_ids);
+if ($current_index === false) {
+    bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
+}
+
+$prev_topic_id = $topic_ids[$current_index - 1] ?? $topic_id;
+$next_topic_id = $topic_ids[$current_index + 1] ?? $topic_id;
+
+$template->assign_vars([
+    'U_NEXT_TOPIC' => "filelist.php?t=$next_topic_id",
+    'U_PREV_TOPIC' => "filelist.php?t=$prev_topic_id",
+]);
+unset($prev_topic_id, $next_topic_id, $current_index, $topic_ids, $topics);
+
 // Protocol meta
 $meta_v1 = !empty($row['info_hash']);
 $meta_v2 = !empty($row['info_hash_v2']);

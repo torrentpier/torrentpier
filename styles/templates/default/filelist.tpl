@@ -6,6 +6,11 @@
 </ul>
 <br/>
 
+<div class="nav">
+    <p class="floatR"><a href="{U_PREV_TOPIC}">← {L_PREV_RELEASE}</a>&nbsp;|&nbsp;<a href="{U_NEXT_TOPIC}">{L_NEXT_RELEASE} →</a></p>
+    <div class="clear"></div>
+</div>
+
 <h1 class="pagetitle">{L_BT_FLIST_ANNOUNCERS_LIST}</h1>
 <table class="forumline">
     <thead>
