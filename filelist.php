@@ -36,7 +36,7 @@ if (!$row = DB()->fetch_row($sql)) {
 
 // ...
 $topics_sql = '
-    (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id < ' . $topic_id . ' ORDER BY topic_id DESC LIMIT 2)
+    (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id < ' . $topic_id . ' ORDER BY topic_id DESC LIMIT 1)
     UNION
     (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id >= ' . $topic_id . ' ORDER BY topic_id ASC LIMIT 2)
     ORDER BY topic_id ASC';
