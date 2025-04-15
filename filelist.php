@@ -34,7 +34,7 @@ if (!$row = DB()->fetch_row($sql)) {
     bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
 }
 
-// ...
+// Previous/next topic links
 $topics_sql = '
     (SELECT topic_id FROM ' . BB_BT_TORRENTS . ' WHERE topic_id < ' . $topic_id . ' ORDER BY topic_id DESC LIMIT 1)
     UNION
