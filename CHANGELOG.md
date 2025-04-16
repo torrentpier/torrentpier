@@ -9,6 +9,7 @@
 - *(avatar upload)* Added `accept="image/*"` attribute ([#1841](https://github.com/torrentpier/torrentpier/pull/1841)) - ([56d531a](https://github.com/torrentpier/torrentpier/commit/56d531aa5ddb778d08a2796fa9fb865e5b3040ce))
 - *(emailer)* Added ability to configure `sendmail` - ([5ad4a70](https://github.com/torrentpier/torrentpier/commit/5ad4a7019d996d468650ab608ab53d6cf3ebb4f5))
 - *(playback_m3u.php)* Added checking auth to download ([#1848](https://github.com/torrentpier/torrentpier/pull/1848)) - ([0b8d8a5](https://github.com/torrentpier/torrentpier/commit/0b8d8a5210ee761dddaa57fc48bb48b0ede1ec3c))
+- Improvements for `Torrent Files List` functionality ([#1878](https://github.com/torrentpier/torrentpier/pull/1878)) - ([e59adce](https://github.com/torrentpier/torrentpier/commit/e59adce848a9e10ee5775254045cbbd915236b8b))
 
 ### 🐛 Bug Fixes
 
