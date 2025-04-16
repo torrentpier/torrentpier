@@ -123,6 +123,7 @@ if ($submit) {
     }
 
     $datastore->update('cat_forums');
+    CACHE('bb_cache')->rm();
     bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
 }
 
