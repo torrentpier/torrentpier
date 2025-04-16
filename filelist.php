@@ -55,8 +55,8 @@ $prev_topic_id = $topic_ids[$current_index - 1] ?? $topic_id;
 $next_topic_id = $topic_ids[$current_index + 1] ?? $topic_id;
 
 $template->assign_vars([
-    'U_NEXT_TOPIC' => FILELIST_URL . $next_topic_id,
-    'U_PREV_TOPIC' => FILELIST_URL . $prev_topic_id,
+    'U_NEXT_TOPIC' => "filelist.php?t=$next_topic_id",
+    'U_PREV_TOPIC' => "filelist.php?t=$prev_topic_id",
 ]);
 unset($prev_topic_id, $next_topic_id, $current_index, $topic_ids, $topics);
 
