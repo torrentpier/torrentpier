@@ -329,6 +329,10 @@ if ($bb_cfg['show_latest_news']) {
     $template->assign_vars(['SHOW_LATEST_NEWS' => true]);
 
     foreach ($latest_news as $news) {
+        if (in_array($news['forum_id'], $user->get_excluded_forums(AUTH_VIEW, 'array'))) {
+            continue;
+        }
+
         $template->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
             'NEWS_TITLE' => str_short($wordCensor->censorString($news['topic_title']), $bb_cfg['max_news_title']),
@@ -348,6 +352,10 @@ if ($bb_cfg['show_network_news']) {
     $template->assign_vars(['SHOW_NETWORK_NEWS' => true]);
 
     foreach ($network_news as $net) {
+        if (in_array($net['forum_id'], $user->get_excluded_forums(AUTH_VIEW, 'array'))) {
+            continue;
+        }
+
         $template->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
             'NEWS_TITLE' => str_short($wordCensor->censorString($net['topic_title']), $bb_cfg['max_net_title']),
