@@ -14,6 +14,7 @@
 ### 🐛 Bug Fixes
 
 - *(cache)* Implicitly marking parameter `$name` as nullable is deprecated ([#1877](https://github.com/torrentpier/torrentpier/pull/1877)) - ([c3b4000](https://github.com/torrentpier/torrentpier/commit/c3b40003b778a725e958cebee6446bcfd6a68b10))
+- Displaying `Network news` and `Latest news` for guests when foums are private ([#1879](https://github.com/torrentpier/torrentpier/pull/1879)) - ([9f96090](https://github.com/torrentpier/torrentpier/commit/9f96090cc419f828e54e69a91a906a3f3d92c255))
 - Pagination issue in `Report on action` page ([#1872](https://github.com/torrentpier/torrentpier/pull/1872)) - ([8358aa0](https://github.com/torrentpier/torrentpier/commit/8358aa00de2ec9efd4c51b8bef11bd700a56c19c))
 - `tablesorting` issues & incorrect `user_role` for pending users ([#1871](https://github.com/torrentpier/torrentpier/pull/1871)) - ([595adbe](https://github.com/torrentpier/torrentpier/commit/595adbe4da5296b0f3ebde6628e58e878c0fb7d5))
 - Fixed TorrentPier build-in emojis showing in ACP ([#1870](https://github.com/torrentpier/torrentpier/pull/1870)) - ([12792e7](https://github.com/torrentpier/torrentpier/commit/12792e74f71a57448277dda46471563a7fea71db))
@@ -46,6 +47,7 @@
 - *(nightly builds)* Added cleanup step ([#1851](https://github.com/torrentpier/torrentpier/pull/1851)) - ([299d9a1](https://github.com/torrentpier/torrentpier/commit/299d9a1f6c4f244e435803212e763c252e5bd396))
 - *(render_flag)* Hide names for specified (`$nameIgnoreList`) flags ([#1862](https://github.com/torrentpier/torrentpier/pull/1862)) - ([83e42bc](https://github.com/torrentpier/torrentpier/commit/83e42bc5db086f60a6038b3fffca5982ceeced51))
 - *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
+- Minor improvements ([#1876](https://github.com/torrentpier/torrentpier/pull/1876)) - ([eeb391d](https://github.com/torrentpier/torrentpier/commit/eeb391da6a16440492a3b803f63be301ba3d02d3))
 - Minor improvements ([#1875](https://github.com/torrentpier/torrentpier/pull/1875)) - ([41a78dd](https://github.com/torrentpier/torrentpier/commit/41a78ddbcbc628f0592c59879df0170bf48664aa))
 - Minor improvements ([#1874](https://github.com/torrentpier/torrentpier/pull/1874)) - ([0f1a69e](https://github.com/torrentpier/torrentpier/commit/0f1a69e32d8d5eb5053b021844845911c619d8cd))
 - Fetch only necessary sitemap parameters in `admin_sitemap.php` ([#1873](https://github.com/torrentpier/torrentpier/pull/1873)) - ([f9c8160](https://github.com/torrentpier/torrentpier/commit/f9c8160f8e897950a038a74ad7ee30b116f7b2b8))
