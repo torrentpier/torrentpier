@@ -80,7 +80,7 @@ $forum_name_html = $forums['forum_name_html'];
 
 $anon = GUEST_UID;
 $excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
-$excluded_forums_array = explode(',', $excluded_forums_csv);
+$excluded_forums_array = $excluded_forums_csv ? explode(',', $excluded_forums_csv) : [];
 $only_new = $user->opt_js['only_new'];
 
 // Validate requested category id
