@@ -108,6 +108,11 @@ $template->assign_vars([
     'HAVE_UNREAD_PM' => $have_unread_pm
 ]);
 
+// Canonical links
+if (!isset($page_cfg['canonical_link'])) {
+    $page_cfg['canonical_link'] = FULL_URL . basename($_SERVER['REQUEST_URI']);
+}
+
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars([
     'SIMPLE_HEADER' => !empty($gen_simple_header),
@@ -123,6 +128,7 @@ $template->assign_vars([
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
     'ALLOW_ROBOTS' => !$bb_cfg['board_disable'] && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
+    'META_CANONICAL' => $page_cfg['canonical_link'],
 
     'SITENAME' => $bb_cfg['sitename'],
     'U_INDEX' => BB_ROOT . 'index.php',
