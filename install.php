@@ -257,6 +257,8 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     // Installing dependencies
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
+        runProcess('php ' . BB_ROOT . 'composer.phar update --no-install');
+        sleep(3);
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         define('COMPOSER_COMPLETED', true);
     } else {
