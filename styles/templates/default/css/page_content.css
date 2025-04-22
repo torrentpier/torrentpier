@@ -58,7 +58,7 @@
 
 #sidebar2 h3 {
   padding: 0 0 4px 0;
-  margin: 8px 0 2px 0;
+  margin: 0 0 2px 0;
   color: #333333;
   text-indent: 0.5em;
   background: transparent url(../images/hr200_ltr_gradient.jpg) no-repeat left bottom;
@@ -88,6 +88,7 @@
 
 /* User ratio */
 #user_ratio {
+  padding: 1px 6px 0 0;
   font-size: 11px;
 }
 
