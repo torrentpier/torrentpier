@@ -34,10 +34,6 @@
 - Password generation ([#1847](https://github.com/torrentpier/torrentpier/pull/1847)) - ([af2403f](https://github.com/torrentpier/torrentpier/commit/af2403f1918845e8af3d9fa7708623eef6aa427e))
 - Moved `Select` class into `Legacy\Common` ([#1846](https://github.com/torrentpier/torrentpier/pull/1846)) - ([bd0ef06](https://github.com/torrentpier/torrentpier/commit/bd0ef063fac328ed16537aacbc12e287a8d8206b))
 
-### 🎨 Styling
-
-- Correct `sidebar2` displaying ([#1852](https://github.com/torrentpier/torrentpier/pull/1852)) - ([9e0a641](https://github.com/torrentpier/torrentpier/commit/9e0a64108d62236ab07b3f8d10e8c78269b8e1d1))
-
 ### ⚙️ Miscellaneous
 
 - *(.cliffignore)* Added one more commit ([#1860](https://github.com/torrentpier/torrentpier/pull/1860)) - ([974d359](https://github.com/torrentpier/torrentpier/commit/974d3590c1fb11c6314da4a4b8115a2229e32bbd))
@@ -46,6 +42,8 @@
 - *(nightly builds)* Added cleanup step ([#1851](https://github.com/torrentpier/torrentpier/pull/1851)) - ([299d9a1](https://github.com/torrentpier/torrentpier/commit/299d9a1f6c4f244e435803212e763c252e5bd396))
 - *(render_flag)* Hide names for specified (`$nameIgnoreList`) flags ([#1862](https://github.com/torrentpier/torrentpier/pull/1862)) - ([83e42bc](https://github.com/torrentpier/torrentpier/commit/83e42bc5db086f60a6038b3fffca5982ceeced51))
 - *(text captcha)* Disabled scatter effect by default - ([3af5202](https://github.com/torrentpier/torrentpier/commit/3af5202f7b2a4ea5d14bbc4808b7a380de2e0dc0))
+- Corrected `php` version in `composer.json` ([#1882](https://github.com/torrentpier/torrentpier/pull/1882)) - ([bc1713a](https://github.com/torrentpier/torrentpier/commit/bc1713abdd28d04e8e1da3c3eabeb5170a35a460))
+- Composer dependencies are installed according to the minimum supported PHP version ([#1881](https://github.com/torrentpier/torrentpier/pull/1881)) - ([5c4972e](https://github.com/torrentpier/torrentpier/commit/5c4972ec12340cbffb8ac941d390ee6c2c89b635))
 - Minor improvements ([#1880](https://github.com/torrentpier/torrentpier/pull/1880)) - ([de8f192](https://github.com/torrentpier/torrentpier/commit/de8f1925bae3b38db18b86eb4a10337853638ad7))
 - Minor improvements ([#1876](https://github.com/torrentpier/torrentpier/pull/1876)) - ([eeb391d](https://github.com/torrentpier/torrentpier/commit/eeb391da6a16440492a3b803f63be301ba3d02d3))
 - Minor improvements ([#1875](https://github.com/torrentpier/torrentpier/pull/1875)) - ([41a78dd](https://github.com/torrentpier/torrentpier/commit/41a78ddbcbc628f0592c59879df0170bf48664aa))
