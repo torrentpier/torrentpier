@@ -468,7 +468,7 @@ foreach ($topic_rowset as $topic) {
     ]);
 
     if (isset($topic['tor_size'])) {
-        $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']));
+        $tor_magnet = create_magnet($topic['info_hash'], $topic['info_hash_v2'], $topic['auth_key'], html_ent_decode($topic['topic_title']), $topic['tor_size']);
 
         $template->assign_block_vars('t.tor', [
             'SEEDERS' => (int)$topic['seeders'],

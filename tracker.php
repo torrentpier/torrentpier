@@ -713,7 +713,7 @@ if ($allowed_forums) {
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), html_ent_decode($tor['topic_title']));
+            $tor_magnet = create_magnet($tor['info_hash'], $tor['info_hash_v2'], \TorrentPier\Legacy\Torrent::getPasskey($user_id), html_ent_decode($tor['topic_title']), $size);
             $compl = $tor['complete_count'];
             $dl_sp = $dl ? humn_size($dl, min: 'KB') . '/s' : '0 KB/s';
             $ul_sp = $ul ? humn_size($ul, min: 'KB') . '/s' : '0 KB/s';

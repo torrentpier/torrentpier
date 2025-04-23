@@ -1811,14 +1811,14 @@ function decode_text_match($txt)
 /**
  * Create magnet link
  *
- * @param string $infohash
- * @param string $infohash_v2
- * @param string $auth_key
- * @param string $name
- *
+ * @param string $infohash (xt=urn:btih)
+ * @param string $infohash_v2 (xt=urn:btmh:1220)
+ * @param string $auth_key (tr)
+ * @param string $name (dn)
+ * @param int|string $length (xl)
  * @return string
  */
-function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name): string
+function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name, int|string $length = 0): string
 {
     global $bb_cfg, $images, $lang;
 
@@ -1845,6 +1845,11 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key, 
             $magnet .= '&';
         }
         $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
+    }
+
+    $length = (int)$length;
+    if ($length > 0) {
+        $magnet .= '&xl=' . $length;
     }
 
     return '<a title="' . ($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']) . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . ($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']) . '" width="12" height="12" border="0" /></a>';
