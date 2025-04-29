@@ -439,7 +439,7 @@ $bb_cfg['password_symbols'] = [
 $bb_cfg['password_hash_options'] = [
     // https://www.php.net/manual/ru/password.constants.php
     'algo' => PASSWORD_BCRYPT,
-    'options' => []
+    'options' => ['cost' => 12]
 ];
 
 // Email
