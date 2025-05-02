@@ -1592,7 +1592,7 @@ function build_topic_pagination($url, $replies, $per_page)
     return $pg;
 }
 
-function print_confirmation($tpl_vars)
+function print_confirmation($tpl_vars): void
 {
     global $template, $lang;
 
