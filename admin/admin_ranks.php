@@ -29,6 +29,10 @@ if (isset($_GET['mode']) || isset($_POST['mode'])) {
     }
 }
 
+if ($mode == 'delete' && isset($_POST['cancel'])) {
+    $mode = '';
+}
+
 if ($mode != '') {
     if ($mode == 'edit' || $mode == 'add') {
         //
@@ -123,29 +127,40 @@ if ($mode != '') {
         // Ok, they want to delete their rank
         //
 
+        $confirmed = isset($_POST['confirm']);
         if (isset($_POST['id']) || isset($_GET['id'])) {
             $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : (int)$_GET['id'];
         } else {
             $rank_id = 0;
         }
 
-        if ($rank_id) {
-            $sql = 'DELETE FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
+        if ($confirmed) {
+            if ($rank_id) {
+                $sql = 'DELETE FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
 
-            if (!$result = DB()->sql_query($sql)) {
-                bb_die('Could not delete rank data');
+                if (!$result = DB()->sql_query($sql)) {
+                    bb_die('Could not delete rank data');
+                }
+
+                $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
+                if (!$result = DB()->sql_query($sql)) {
+                    bb_die($lang['NO_UPDATE_RANKS']);
+                }
+
+                $datastore->update('ranks');
+
+                bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            } else {
+                bb_die($lang['MUST_SELECT_RANK']);
             }
-
-            $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
-            if (!$result = DB()->sql_query($sql)) {
-                bb_die($lang['NO_UPDATE_RANKS']);
-            }
-
-            $datastore->update('ranks');
-
-            bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         } else {
-            bb_die($lang['MUST_SELECT_RANK']);
+            $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
+            $hidden_fields .= '<input type="hidden" name="id" value="' . $rank_id . '" />';
+
+            print_confirmation([
+                'FORM_ACTION' => 'admin_ranks.php',
+                'HIDDEN_FIELDS' => $hidden_fields,
+            ]);
         }
     } else {
         bb_die('Invalid mode');
