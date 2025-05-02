@@ -21,6 +21,7 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump vlucas/phpdotenv from 5.6.1 to 5.6.2 ([#1887](https://github.com/torrentpier/torrentpier/pull/1887)) - ([7a14464](https://github.com/torrentpier/torrentpier/commit/7a14464d20fe8d2f8b980a82647c6b9ec081f621))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.1.0 to 12.0.0 ([#1868](https://github.com/torrentpier/torrentpier/pull/1868)) - ([bd5aa2a](https://github.com/torrentpier/torrentpier/commit/bd5aa2a5e71560409bc630ea2334e33c77458ab3))
 - *(deps)* Bump monolog/monolog from 3.8.1 to 3.9.0 ([#1865](https://github.com/torrentpier/torrentpier/pull/1865)) - ([6440162](https://github.com/torrentpier/torrentpier/commit/64401621879af0cc445c38687c571d2fec184410))
 - *(deps)* Bump php-curl-class/php-curl-class from 11.0.5 to 11.1.0 ([#1864](https://github.com/torrentpier/torrentpier/pull/1864)) - ([de2fcea](https://github.com/torrentpier/torrentpier/commit/de2fceabedefd07441ba6801417157a9828e0e2a))
