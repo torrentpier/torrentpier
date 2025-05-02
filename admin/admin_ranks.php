@@ -29,6 +29,10 @@ if (isset($_GET['mode']) || isset($_POST['mode'])) {
     }
 }
 
+if ($mode == 'delete' && isset($_POST['cancel'])) {
+    $mode = '';
+}
+
 if ($mode != '') {
     if ($mode == 'edit' || $mode == 'add') {
         //
