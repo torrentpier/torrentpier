@@ -25,10 +25,17 @@ class Atom
      */
     public static function update_forum_feed($forum_id, $forum_data)
     {
-        global $bb_cfg, $lang;
+        global $bb_cfg, $lang, $datastore;
         $sql = null;
         $file_path = $bb_cfg['atom']['path'] . '/f/' . $forum_id . '.atom';
         $select_tor_sql = $join_tor_sql = '';
+
+        if (!$forums = $datastore->get('cat_forums')) {
+            $datastore->update('cat_forums');
+            $forums = $datastore->get('cat_forums');
+        }
+        $not_forums_id = $forums['not_auth_forums']['guest_view'];
+
         if ($forum_id == 0) {
             $forum_data['forum_name'] = $lang['ATOM_GLOBAL_FEED'] ?? $bb_cfg['server_name'];
         }
@@ -77,6 +84,9 @@ class Atom
         $topics_tmp = DB()->fetch_rowset($sql);
         $topics = [];
         foreach ($topics_tmp as $topic) {
+            if (in_array($topic['topic_id'], explode(',', $not_forums_id))) {
+                continue;
+            }
             if (isset($topic['topic_status'])) {
                 if ($topic['topic_status'] == TOPIC_MOVED) {
                     continue;
