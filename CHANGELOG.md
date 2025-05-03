@@ -7,6 +7,7 @@
 ### 🚀 Features
 
 - *(admin_ranks)* Added confirmation on rank deleting ([#1888](https://github.com/torrentpier/torrentpier/pull/1888)) - ([e510ebc](https://github.com/torrentpier/torrentpier/commit/e510ebc3ba30be7bf99769b1e5540353bd53c333))
+- *(atom)* Hide topics from private forums ([#1889](https://github.com/torrentpier/torrentpier/pull/1889)) - ([75e9d5e](https://github.com/torrentpier/torrentpier/commit/75e9d5e4a8c5ec20f438e7b24a5469d219959a8c))
 - *(avatar upload)* Added `accept="image/*"` attribute ([#1841](https://github.com/torrentpier/torrentpier/pull/1841)) - ([56d531a](https://github.com/torrentpier/torrentpier/commit/56d531aa5ddb778d08a2796fa9fb865e5b3040ce))
 - *(emailer)* Added ability to configure `sendmail` - ([5ad4a70](https://github.com/torrentpier/torrentpier/commit/5ad4a7019d996d468650ab608ab53d6cf3ebb4f5))
 - *(magnet)* Added `xl` (eXact Length) parametr ([#1883](https://github.com/torrentpier/torrentpier/pull/1883)) - ([c0cdcff](https://github.com/torrentpier/torrentpier/commit/c0cdcff48825ce5fb0c89c0ec44eb95686aee74c))
