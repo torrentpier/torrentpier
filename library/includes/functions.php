@@ -2190,7 +2190,8 @@ function readUpdaterFile(): array|bool
 function infoByIP(string $ipAddress, int $port = 0): array
 {
     $ipAddress = \TorrentPier\Helpers\IPHelper::long2ip_extended($ipAddress);
-    if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
+    $cacheName = hash('xxh128', ($ipAddress . '_' . $port));
+    if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
         $response = file_get_contents(API_IP_URL . $ipAddress);
         $json = json_decode($response, true);
@@ -2201,7 +2202,7 @@ function infoByIP(string $ipAddress, int $port = 0): array
                 'continent' => $json['continent'],
                 'continentCode' => $json['continentCode']
             ];
-            CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
+            CACHE('bb_ip2countries')->set($cacheName, $data, 1200);
         }
     }
 
