@@ -197,7 +197,8 @@ $bf['user_opt'] = [
     'dis_post_edit' => 13, // [PROHIBITIONS] Block editing own posts / topics
     'user_dls' => 14, // [SETTINGS] Hide list of "Current downloads" in my profile
     'user_retracker' => 15, // [SETTINGS] Add my retracker into downloaded torrent files
-    'user_hide_torrent_client' => 16 // [SETTINGS] Option to hide user's torrent client in peer list
+    'user_hide_torrent_client' => 16, // [SETTINGS] Option to hide user's torrent client in peer list
+    'user_hide_peer_country' => 17 // [SETTINGS] Option to hide user's country name in peer list
 ];
 
 function bit2dec($bit_num)
