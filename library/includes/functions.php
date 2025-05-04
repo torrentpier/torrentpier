@@ -603,7 +603,13 @@ function bt_show_ip($ip, $port = '')
 
     if (IS_AM) {
         $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($ip);
-        $ip .= ($port) ? ":$port" : '';
+
+        // Wrap IPv6 address in square brackets
+        if ($port && str_contains($ip, ':')) {
+            $ip = "[$ip]";
+        }
+        $ip .= $port ? ":$port" : '';
+
         return $ip;
     }
 
