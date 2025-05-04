@@ -173,7 +173,7 @@ echo '</table>';
 echo !$client_full ? '<p style = "text-align:right;">Simple stats for clients are being cached for one hour.</p>' : '';
 echo '<div align="center"><pre>';
 
-echo 'gen time: <b>' . sprintf('%.4f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
+echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
 echo '</pre></div>';
 echo '</body></html>';
 

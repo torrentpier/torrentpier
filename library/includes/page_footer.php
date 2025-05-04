@@ -35,7 +35,7 @@ if (!$bb_cfg['gzip_compress']) {
 
 if ($show_dbg_info) {
     $gen_time = utime() - TIMESTART;
-    $gen_time_txt = sprintf('%.4f', $gen_time);
+    $gen_time_txt = sprintf('%.3f', $gen_time);
     $gzip_text = UA_GZIP_SUPPORTED ? "{$lang['GZIP_COMPRESSION']}: " : "<s>{$lang['GZIP_COMPRESSION']}:</s> ";
     $gzip_text .= $bb_cfg['gzip_compress'] ? $lang['ON'] : $lang['OFF'];
 
