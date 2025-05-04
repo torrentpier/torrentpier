@@ -2189,6 +2189,7 @@ function readUpdaterFile(): array|bool
  */
 function infoByIP(string $ipAddress, int $port = 0): array
 {
+    $ipAddress = \TorrentPier\Helpers\IPHelper::long2ip_extended($ipAddress);
     if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
         $data = [];
         $response = file_get_contents(API_IP_URL . $ipAddress);

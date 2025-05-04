@@ -466,7 +466,7 @@ if ($tor_reged && $tor_info) {
                     if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
                         if ($infoByIP = infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])) {
                             if (!empty($infoByIP['countryCode'])) {
-                                $peerCountry = render_flag($infoByIP['countryCode']);
+                                $peerCountry = render_flag($infoByIP['countryCode'], false);
                             }
                         }
                     }
