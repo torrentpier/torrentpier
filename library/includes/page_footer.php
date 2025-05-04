@@ -43,7 +43,7 @@ if ($show_dbg_info) {
 
     if (!empty($DBS)) {
         $sql_t = $DBS->sql_timetotal;
-        $sql_time_txt = ($sql_t) ? sprintf('%.4f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
+        $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
         $num_q = $DBS->num_queries;
         $stat .= " &nbsp;|&nbsp; {$DBS->get_db_obj()->engine}: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
     }
