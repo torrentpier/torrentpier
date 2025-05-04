@@ -2154,10 +2154,7 @@ function getBanInfo(?int $userId = null): ?array
     global $datastore;
 
     // Get bans info from datastore
-    if (!$bans = $datastore->get('ban_list')) {
-        $datastore->update('ban_list');
-        $bans = $datastore->get('ban_list');
-    }
+    $bans = $datastore->get('ban_list');
 
     if (!isset($userId)) {
         return $bans;

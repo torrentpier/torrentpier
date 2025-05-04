@@ -19,7 +19,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public array $smilies;
+    public array $smilies = [];
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
@@ -336,19 +336,16 @@ class BBCode
     {
         global $datastore;
 
-        if (!$this->smilies = $datastore->get('smile_replacements')) {
-            $datastore->update('smile_replacements');
-            $this->smilies = $datastore->get('smile_replacements');
-        }
+        $this->smilies = $datastore->get('smile_replacements');
 
-        if (defined('IN_ADMIN')) {
-            foreach ($this->smilies['repl'] as &$smile) {
-                $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
+        if (!empty($this->smilies)) {
+            if (defined('IN_ADMIN')) {
+                foreach ($this->smilies['repl'] as &$smile) {
+                    $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
+                }
+                unset($smile);
             }
-            unset($smile);
-        }
 
-        if ($this->smilies) {
             /** @noinspection NestedPositiveIfStatementsInspection */
             if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text)) {
                 return $parsed_text;
