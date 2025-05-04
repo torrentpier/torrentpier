@@ -188,8 +188,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                 if (!$result) {
                     bb_die('Could not delete smiley');
                 }
-                $datastore->update('smile_replacements');
 
+                $datastore->update('smile_replacements');
                 bb_die($lang['SMILEY_DEL_SUCCESS'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
             } else {
                 $hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
