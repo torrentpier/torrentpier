@@ -462,11 +462,22 @@ if ($tor_reged && $tor_info) {
                         }
                     }
 
+                    $peerCountry = $lang['UNKNOWN'];
+                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
+                        if ($port !== false && $ip !== false) {
+                            if ($infoByIP = infoByIP($ip, $port)) {
+                                if (isset($infoByIP['countryCode'])) {
+                                    $peerCountry = render_flag($infoByIP['countryCode']);
+                                }
+                            }
+                        }
+                    }
+
                     $template->assign_block_vars("$x_full.$x_row", [
                         'ROW_BGR' => $row_bgr,
                         'NAME' => ($peer['update_time']) ? $name : "<s>$name</s>",
                         'PEER_ID' => $peerTorrentClient,
-                        'COUNTRY' => render_flag(infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])['countryCode'], false),
+                        'COUNTRY' => $peerCountry,
                         'COMPL_PRC' => $compl_perc,
                         'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>$up_tot</b>" : $up_tot,
                         'DOWN_TOTAL' => ($max_down_id[$x] == $pid) ? "<b>$down_tot</b>" : $down_tot,

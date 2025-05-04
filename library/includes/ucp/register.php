@@ -366,6 +366,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 'user_callseed' => $reg_mode ? true : true,
                 'user_retracker' => $reg_mode ? true : true,
                 'user_hide_torrent_client' => $reg_mode ? true : true,
+                'user_hide_peer_country' => $reg_mode ? true : true,
             ];
 
             foreach ($update_user_opt as $opt => $can_change_opt) {

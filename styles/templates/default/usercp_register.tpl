@@ -327,6 +327,13 @@
             </td>
         </tr>
         <tr>
+            <td class="prof-title">{L_HIDE_PEER_COUNTRY_NAME}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_peer_country" value="1" <!-- IF USER_HIDE_PEER_COUNTRY -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_peer_country" value="0" <!-- IF not USER_HIDE_PEER_COUNTRY -->checked<!-- ENDIF --> />{L_NO}</label>
+            </td>
+        </tr>
+        <tr>
             <th colspan="2">{L_AVATAR_PANEL}</th>
         </tr>
         <!-- IF AVATAR_DISALLOWED -->
