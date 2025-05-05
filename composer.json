@@ -73,7 +73,7 @@
     "symfony/event-dispatcher": "^6.4",
     "symfony/mime": "^6.4",
     "symfony/mailer": "^6.4",
-    "symfony/polyfill": "v1.31.0",
+    "symfony/polyfill": "v1.32.0",
     "vlucas/phpdotenv": "^5.5"
   },
   "require-dev": {
