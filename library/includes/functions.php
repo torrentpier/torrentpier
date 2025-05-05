@@ -2218,9 +2218,16 @@ function infoByIP(string $ipAddress, int $port = 0): array
                     'continent' => $json['continent'],
                     'continentCode' => $json['continentCode']
                 ];
-                CACHE('bb_ip2countries')->set($cacheName, $data, 1200);
             }
         }
+
+        if (empty($data)) {
+            $data = [
+                'response' => false,
+                'timestamp' => TIMENOW
+            ];
+        }
+        CACHE('bb_ip2countries')->set($cacheName, $data, 1200);
     }
 
     return $data;
