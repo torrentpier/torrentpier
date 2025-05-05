@@ -173,7 +173,7 @@ ajax.callback.callseed = function (data) {
 				<td>{sfull.srow.port.PORT}</td>
 				<!-- END port -->
                 <td>{sfull.srow.PEER_ID}</td>
-                <!-- IF sfull.srow.COUNTRY --><td>{sfull.srow.COUNTRY}</td><!-- ENDIF -->
+                <!-- IF $bb_cfg['ip2country_settings']['enabled'] --><td>{sfull.srow.COUNTRY}</td><!-- ENDIF -->
 			</tr>
 			<!-- END srow -->
 			</table>
@@ -226,7 +226,7 @@ ajax.callback.callseed = function (data) {
 				<td>{lfull.lrow.port.PORT}</td>
 				<!-- END port -->
                 <td>{lfull.lrow.PEER_ID}</td>
-                <!-- IF lfull.lrow.COUNTRY --><td>{lfull.lrow.COUNTRY}</td><!-- ENDIF -->
+                <!-- IF $bb_cfg['ip2country_settings']['enabled'] --><td>{lfull.lrow.COUNTRY}</td><!-- ENDIF -->
 			</tr>
 			<!-- END lrow -->
 			</table>
