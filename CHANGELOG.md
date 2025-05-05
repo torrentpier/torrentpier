@@ -7,6 +7,7 @@
 ### 🚀 Features
 
 - *(admin_smilies)* Added confirmation on smilie deleting ([#1895](https://github.com/torrentpier/torrentpier/pull/1895)) - ([b51820e](https://github.com/torrentpier/torrentpier/commit/b51820e1861044143321fcde5239c22abc3de984))
+- *(freeipapi)* Added ability to use own API token ([#1901](https://github.com/torrentpier/torrentpier/pull/1901)) - ([513e306](https://github.com/torrentpier/torrentpier/commit/513e3065d34409931c4198c03b080f232f1d809b))
 - Added ability to hide peer country in peer list ([#1891](https://github.com/torrentpier/torrentpier/pull/1891)) - ([2555ebc](https://github.com/torrentpier/torrentpier/commit/2555ebce4717f871922495e48cbca9e22da78bd5))
 - Added ability to hide BitTorrent client in peers list ([#1890](https://github.com/torrentpier/torrentpier/pull/1890)) - ([f5d65b8](https://github.com/torrentpier/torrentpier/commit/f5d65b8911c5e864f000348a6d1aefbb4c09c2b4))
 
@@ -16,8 +17,13 @@
 - `Undefined array key "smile"` when are no smilies ([#1896](https://github.com/torrentpier/torrentpier/pull/1896)) - ([36d3992](https://github.com/torrentpier/torrentpier/commit/36d399220e2c16a582e1e400df0002c164f5ec3b))
 - Peer country flag not shown in peers list ([#1894](https://github.com/torrentpier/torrentpier/pull/1894)) - ([8edba72](https://github.com/torrentpier/torrentpier/commit/8edba72f09f037225ede058cf09c830b1a01e78f))
 
+### 📦 Dependencies
+
+- *(deps)* Bump symfony/polyfill from 1.31.0 to 1.32.0 ([#1900](https://github.com/torrentpier/torrentpier/pull/1900)) - ([a4793f6](https://github.com/torrentpier/torrentpier/commit/a4793f6ce103f22941d72793e2bf8cdf9f78d494))
+
 ### ⚙️ Miscellaneous
 
+- Minor improvements ([#1898](https://github.com/torrentpier/torrentpier/pull/1898)) - ([2f02692](https://github.com/torrentpier/torrentpier/commit/2f026921ee331226900b3cd4f1bb238f6562b48d))
 - Minor improvements ([#1897](https://github.com/torrentpier/torrentpier/pull/1897)) - ([14086a0](https://github.com/torrentpier/torrentpier/commit/14086a0ed6181a0ff4496ee2e56f4fb70bfe18d5))
 - Minor improvements ([#1893](https://github.com/torrentpier/torrentpier/pull/1893)) - ([90ece5c](https://github.com/torrentpier/torrentpier/commit/90ece5c7621789f170246b2898841b347e264674))
 - Minor improvements ([#1892](https://github.com/torrentpier/torrentpier/pull/1892)) - ([1e5b93d](https://github.com/torrentpier/torrentpier/commit/1e5b93d2c072c5c35feef7567b3fcdb4b3597935))
