@@ -2222,7 +2222,10 @@ function infoByIP(string $ipAddress, int $port = 0): array
         }
 
         if (empty($data)) {
-            $data = ['timestamp' => TIMENOW];
+            $data = [
+                'response' => false,
+                'timestamp' => TIMENOW
+            ];
         }
         CACHE('bb_ip2countries')->set($cacheName, $data, 1200);
     }
