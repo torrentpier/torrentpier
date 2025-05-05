@@ -326,6 +326,7 @@
                 <label><input type="radio" name="user_hide_torrent_client" value="0" <!-- IF not USER_HIDE_TORRENT_CLIENT -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
+        <!-- IF $bb_cfg['ip2country_settings']['enabled'] -->
         <tr>
             <td class="prof-title">{L_HIDE_PEER_COUNTRY_NAME}:</td>
             <td>
@@ -333,6 +334,7 @@
                 <label><input type="radio" name="user_hide_peer_country" value="0" <!-- IF not USER_HIDE_PEER_COUNTRY -->checked<!-- ENDIF --> />{L_NO}</label>
             </td>
         </tr>
+        <!-- ENDIF -->
         <tr>
             <th colspan="2">{L_AVATAR_PANEL}</th>
         </tr>

@@ -6,15 +6,19 @@
 
 ### 🚀 Features
 
+- *(admin_smilies)* Added confirmation on smilie deleting ([#1895](https://github.com/torrentpier/torrentpier/pull/1895)) - ([b51820e](https://github.com/torrentpier/torrentpier/commit/b51820e1861044143321fcde5239c22abc3de984))
 - Added ability to hide peer country in peer list ([#1891](https://github.com/torrentpier/torrentpier/pull/1891)) - ([2555ebc](https://github.com/torrentpier/torrentpier/commit/2555ebce4717f871922495e48cbca9e22da78bd5))
 - Added ability to hide BitTorrent client in peers list ([#1890](https://github.com/torrentpier/torrentpier/pull/1890)) - ([f5d65b8](https://github.com/torrentpier/torrentpier/commit/f5d65b8911c5e864f000348a6d1aefbb4c09c2b4))
 
 ### 🐛 Bug Fixes
 
+- Incorrect rounding in execution time counter ([#1899](https://github.com/torrentpier/torrentpier/pull/1899)) - ([781b724](https://github.com/torrentpier/torrentpier/commit/781b7240c41ddd141cfb057480c10d9cee30e6d7))
+- `Undefined array key "smile"` when are no smilies ([#1896](https://github.com/torrentpier/torrentpier/pull/1896)) - ([36d3992](https://github.com/torrentpier/torrentpier/commit/36d399220e2c16a582e1e400df0002c164f5ec3b))
 - Peer country flag not shown in peers list ([#1894](https://github.com/torrentpier/torrentpier/pull/1894)) - ([8edba72](https://github.com/torrentpier/torrentpier/commit/8edba72f09f037225ede058cf09c830b1a01e78f))
 
 ### ⚙️ Miscellaneous
 
+- Minor improvements ([#1897](https://github.com/torrentpier/torrentpier/pull/1897)) - ([14086a0](https://github.com/torrentpier/torrentpier/commit/14086a0ed6181a0ff4496ee2e56f4fb70bfe18d5))
 - Minor improvements ([#1893](https://github.com/torrentpier/torrentpier/pull/1893)) - ([90ece5c](https://github.com/torrentpier/torrentpier/commit/90ece5c7621789f170246b2898841b347e264674))
 - Minor improvements ([#1892](https://github.com/torrentpier/torrentpier/pull/1892)) - ([1e5b93d](https://github.com/torrentpier/torrentpier/commit/1e5b93d2c072c5c35feef7567b3fcdb4b3597935))
 
