@@ -2186,20 +2186,40 @@ function readUpdaterFile(): array|bool
  */
 function infoByIP(string $ipAddress, int $port = 0): array
 {
+    global $bb_cfg;
+
+    if (!$bb_cfg['ip2country_settings']['enabled']) {
+        return [];
+    }
+
     $ipAddress = \TorrentPier\Helpers\IPHelper::long2ip_extended($ipAddress);
     $cacheName = hash('xxh128', ($ipAddress . '_' . $port));
+
     if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
-        $response = file_get_contents(API_IP_URL . $ipAddress);
-        $json = json_decode($response, true);
-        if (is_array($json) && !empty($json)) {
-            $data = [
-                'ipVersion' => $json['ipVersion'],
-                'countryCode' => $json['countryCode'],
-                'continent' => $json['continent'],
-                'continentCode' => $json['continentCode']
+
+        $contextOptions = [];
+        if (!empty($bb_cfg['ip2country_settings']['api_token'])) {
+            $contextOptions['http'] = [
+                'header' => "Authorization: Bearer " . $bb_cfg['ip2country_settings']['api_token'] . "\r\n"
             ];
-            CACHE('bb_ip2countries')->set($cacheName, $data, 1200);
+        }
+
+        $context = stream_context_create($contextOptions);
+        $response = file_get_contents($bb_cfg['ip2country_settings']['endpoint'] . $ipAddress, context: $context);
+
+        if ($response !== false) {
+            $json = json_decode($response, true);
+
+            if (is_array($json) && !empty($json)) {
+                $data = [
+                    'ipVersion' => $json['ipVersion'],
+                    'countryCode' => $json['countryCode'],
+                    'continent' => $json['continent'],
+                    'continentCode' => $json['continentCode']
+                ];
+                CACHE('bb_ip2countries')->set($cacheName, $data, 1200);
+            }
         }
     }
 

@@ -35,9 +35,6 @@ define('UPDATER_URL', 'https://api.github.com/repos/torrentpier/torrentpier/rele
 define('UPDATER_FILE', INT_DATA_DIR . '/updater.json');
 define('COOKIE_DBG', 'bb_dbg');
 
-// TODO: Move in another section
-define('API_IP_URL', 'https://freeipapi.com/api/json/');
-
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
 define('XS_USE_ISSET', '1');

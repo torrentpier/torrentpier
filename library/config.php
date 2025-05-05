@@ -144,6 +144,14 @@ $bb_cfg['torr_server'] = [
     'disable_for_guest' => true
 ];
 
+// FreeIPAPI settings
+$bb_cfg['ip2country_settings'] = [
+    // Documentation: https://docs.freeipapi.com/
+    'enabled' => true,
+    'endpoint' => 'https://freeipapi.com/api/json/',
+    'api_token' => '', // not required for basic usage
+];
+
 // FAQ url help link
 $bb_cfg['how_to_download_url_help'] = 'viewtopic.php?t=1'; // How to download?
 $bb_cfg['what_is_torrent_url_help'] = 'viewtopic.php?t=2'; // What is a torrent?
