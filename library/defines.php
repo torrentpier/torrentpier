@@ -89,6 +89,7 @@ define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
+define('BB_USERS', 'bb_users');
 define('BT_AUTH_KEY_LENGTH', 20); // Passkey length
 
 // Torrents (reserved: -1)
@@ -133,6 +134,15 @@ define('ONLY_NEW_TOPICS', 2);
 // User UIDs
 define('GUEST_UID', -1);
 define('BOT_UID', -746);
+
+// User Levels
+define('DELETED', -1);
+define('USER', 0);
+define('ADMIN', 1);
+define('MOD', 2);
+define('GROUP_MEMBER', 20);
+define('CP_HOLDER', 25);
+define('EXCLUDED_USERS', implode(',', [GUEST_UID, BOT_UID]));
 
 // Ratio limits
 define('TR_RATING_LIMITS', true);        // ON/OFF
