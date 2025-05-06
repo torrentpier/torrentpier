@@ -601,30 +601,30 @@ function bt_show_ip($ip, $port = '')
 {
     global $bb_cfg;
 
-    $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($ip);
+    if (IS_AM) {
+        $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($ip);
 
-    // Wrap IPv6 address in square brackets
-    $port = bt_show_port($port);
-    if (!empty($port) && str_contains($ip, ':')) {
-        $ip = "[$ip]:$port";
-    }
+        // Wrap IPv6 address in square brackets
+        if ($port && str_contains($ip, ':')) {
+            $ip = "[$ip]";
+        }
+        $ip .= $port ? ":$port" : '';
 
-    if (!$bb_cfg['bt_show_ip_only_moder'] || IS_AM) {
         return $ip;
-    } else {
-        return \TorrentPier\Helpers\IPHelper::anonymizeIP($ip);
     }
+
+    return $bb_cfg['bt_show_ip_only_moder'] ? false : \TorrentPier\Helpers\IPHelper::anonymizeIP($ip);
 }
 
-function bt_show_port($port): string
+function bt_show_port($port)
 {
     global $bb_cfg;
 
-    if (!$bb_cfg['bt_show_port_only_moder'] || IS_AM) {
+    if (IS_AM) {
         return $port;
     }
 
-    return '';
+    return $bb_cfg['bt_show_port_only_moder'] ? false : $port;
 }
 
 function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
