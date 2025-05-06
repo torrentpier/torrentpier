@@ -267,7 +267,7 @@ if ($lp_info) {
 
     // Assign variables
     $user_id = $row['user_id'];
-    define('IS_GUEST', $user_id == GUEST_UID);
+    define('IS_GUEST', (int)$user_id === GUEST_UID);
     define('IS_ADMIN', !IS_GUEST && (int)$row['user_level'] === ADMIN);
     define('IS_MOD', !IS_GUEST && (int)$row['user_level'] === MOD);
     define('IS_GROUP_MEMBER', !IS_GUEST && (int)$row['user_level'] === GROUP_MEMBER);
