@@ -7,12 +7,15 @@
 ### 🚀 Features
 
 - *(admin_smilies)* Added confirmation on smilie deleting ([#1895](https://github.com/torrentpier/torrentpier/pull/1895)) - ([b51820e](https://github.com/torrentpier/torrentpier/commit/b51820e1861044143321fcde5239c22abc3de984))
+- *(announcer)* Check for frozen torrents ([#1770](https://github.com/torrentpier/torrentpier/pull/1770)) - ([6e0786b](https://github.com/torrentpier/torrentpier/commit/6e0786bdee8f1a2557f9ac1dc628983bcafe3f5f))
 - *(freeipapi)* Added ability to use own API token ([#1901](https://github.com/torrentpier/torrentpier/pull/1901)) - ([513e306](https://github.com/torrentpier/torrentpier/commit/513e3065d34409931c4198c03b080f232f1d809b))
+- Added ability to hide peer username in peer list ([#1903](https://github.com/torrentpier/torrentpier/pull/1903)) - ([3a64f85](https://github.com/torrentpier/torrentpier/commit/3a64f8595cafd99b9cb821d52ec5d3b3e8e467c0))
 - Added ability to hide peer country in peer list ([#1891](https://github.com/torrentpier/torrentpier/pull/1891)) - ([2555ebc](https://github.com/torrentpier/torrentpier/commit/2555ebce4717f871922495e48cbca9e22da78bd5))
 - Added ability to hide BitTorrent client in peers list ([#1890](https://github.com/torrentpier/torrentpier/pull/1890)) - ([f5d65b8](https://github.com/torrentpier/torrentpier/commit/f5d65b8911c5e864f000348a6d1aefbb4c09c2b4))
 
 ### 🐛 Bug Fixes
 
+- *(peers list)* `IPv6` showing ([#1902](https://github.com/torrentpier/torrentpier/pull/1902)) - ([4b7203f](https://github.com/torrentpier/torrentpier/commit/4b7203f8aeeeffc1b163bd3db1dd6b2cac33c923))
 - Incorrect rounding in execution time counter ([#1899](https://github.com/torrentpier/torrentpier/pull/1899)) - ([781b724](https://github.com/torrentpier/torrentpier/commit/781b7240c41ddd141cfb057480c10d9cee30e6d7))
 - `Undefined array key "smile"` when are no smilies ([#1896](https://github.com/torrentpier/torrentpier/pull/1896)) - ([36d3992](https://github.com/torrentpier/torrentpier/commit/36d399220e2c16a582e1e400df0002c164f5ec3b))
 - Peer country flag not shown in peers list ([#1894](https://github.com/torrentpier/torrentpier/pull/1894)) - ([8edba72](https://github.com/torrentpier/torrentpier/commit/8edba72f09f037225ede058cf09c830b1a01e78f))
