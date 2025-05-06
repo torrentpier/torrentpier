@@ -456,7 +456,7 @@ if ($tor_reged && $tor_info) {
                     $tr[$x]++;
 
                     $peerUsername = $lang['HIDDEN_USER'];
-                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_torrent_client')) {
+                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_username')) {
                         $releaserSign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
                         $peerUsername = profile_url($peer) . $releaserSign;
                         $peerUsername = $peer['update_time'] ? $peerUsername : "<s>$peerUsername</s>";
