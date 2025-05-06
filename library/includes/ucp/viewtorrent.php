@@ -60,7 +60,7 @@ if ($releasing) {
             'TOR_TYPE' => is_gold($row['tor_type']),
             'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
             'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
-            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
+            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], min: 'KB') . '/s' : '-',
         ]);
 
         $releasing_count++;
@@ -80,7 +80,7 @@ if ($seeding) {
             'TOR_TYPE' => is_gold($row['tor_type']),
             'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
             'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
-            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
+            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], min: 'KB') . '/s' : '-',
         ]);
 
         $seeding_count++;
@@ -103,7 +103,7 @@ if ($leeching) {
             'TOR_TYPE' => is_gold($row['tor_type']),
             'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
             'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
-            'SPEED_DOWN' => ($row['speed_down']) ? humn_size($row['speed_down'], 0, 'KB') . '/s' : '-',
+            'SPEED_DOWN' => ($row['speed_down']) ? humn_size($row['speed_down'], min: 'KB') . '/s' : '-',
         ]);
 
         $leeching_count++;

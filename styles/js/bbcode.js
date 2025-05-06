@@ -437,7 +437,7 @@ function initMedia(context) {
       a.className = 'YTLink';
       a.innerHTML = '<span title="' + bbl['play_on'] + '" class="YTLinkButton">&#9658;</span>';
       window.addEvent(a, 'click', function (e) {
-        var vhref = e.target.nextSibling.href.replace(/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\//ig, "http://www.youtube.com/embed/$3");
+        var vhref = e.target.nextSibling.href.replace(/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\//ig, "https://www.youtube.com/embed/$3");
         var text = e.target.nextSibling.innerText !== "" ? e.target.nextSibling.innerText : e.target.nextSibling.href;
         $('#Panel_youtube').remove();
         ypanel('youtube', {

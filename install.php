@@ -7,7 +7,7 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-define('BB_ROOT', __DIR__ . '/');
+define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 
 // Check CLI mode
 if (php_sapi_name() !== 'cli') {
@@ -185,7 +185,7 @@ if (!defined('EXTENSIONS_NOT_INSTALLED')) {
 if (is_file(BB_ROOT . '.env')) {
     out('- TorrentPier already installed', 'warning');
     echo 'Are you sure want to re-install TorrentPier? [y/N]: ';
-    if (str_starts_with(mb_strtolower(readline()), 'y')) {
+    if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
         out("\n- Re-install process started...", 'info');
         // environment
         if (is_file(BB_ROOT . '.env')) {
@@ -257,6 +257,8 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     // Installing dependencies
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
+        runProcess('php ' . BB_ROOT . 'composer.phar update --no-install');
+        sleep(3);
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         define('COMPOSER_COMPLETED', true);
     } else {
@@ -288,7 +290,7 @@ if (is_file(BB_ROOT . '.env.example') && !is_file(BB_ROOT . '.env')) {
 }
 
 // Editing ENV file
-$DB_HOST = '';
+$DB_HOST = 'localhost';
 $DB_PORT = 3306;
 $DB_DATABASE = '';
 $DB_USERNAME = '';
@@ -309,20 +311,17 @@ if (is_file(BB_ROOT . '.env')) {
         if (trim($line) !== '' && !str_starts_with($line, '#')) {
             $parts = explode('=', $line, 2);
             $key = trim($parts[0]);
-            $value = (isset($parts[1]) && $key !== 'DB_PASSWORD') ? trim($parts[1]) : '';
-
-            // Database default values
-            if (in_array($key, ['DB_HOST', 'DB_PORT', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'])) {
-                $$key = $value;
-            }
+            $value = (!empty($parts[1]) && $key !== 'DB_PASSWORD') ? trim($parts[1]) : '';
 
             out("\nCurrent value of $key: $value", 'debug');
             echo "Enter a new value for $key (or leave empty to not change): ";
-            $newValue = readline();
+            $newValue = trim(readline());
 
             if (!empty($newValue) || $key === 'DB_PASSWORD') {
                 $line = "$key=$newValue";
                 $$key = $newValue;
+            } else {
+                $$key = $value;
             }
         }
 
@@ -415,6 +414,24 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
             out("- Installation file renamed!", 'success');
         } else {
             out('- Cannot rename installation file (' . __FILE__ . '). Please, rename it manually for security reasons', 'warning');
+        }
+    }
+
+    // Cleanup...
+    if (is_file(BB_ROOT . '_cleanup.php')) {
+        out("\n--- Finishing installation (Cleanup) ---\n", 'info');
+        out('The cleanup process will remove:');
+        out('- Development documentation (README, CHANGELOG)', 'debug');
+        out('- Git configuration files', 'debug');
+        out('- CI/CD pipelines and code analysis tools', 'debug');
+        out('- Translation and contribution guidelines', 'debug');
+        echo 'Do you want to delete these files permanently? [y/N]: ';
+        if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
+            out("\n- Cleanup...", 'info');
+            require_once BB_ROOT . '_cleanup.php';
+            unlink(BB_ROOT . '_cleanup.php');
+        } else {
+            out('- Skipping...', 'info');
         }
     }
 

@@ -45,7 +45,7 @@ class Updater
      */
     private const STREAM_CONTEXT = [
         'http' => [
-            'header' => 'User-Agent: ' . APP_NAME . '-' . TP_INSTANCE_HASH,
+            'header' => 'User-Agent: ' . APP_NAME . '-' . TIMENOW,
             'timeout' => 10,
             'ignore_errors' => true
         ]
@@ -130,14 +130,14 @@ class Updater
     }
 
     /**
-     * Returns information of latest TorrentPier version
+     * Returns information of latest TorrentPier version available
      *
-     * @param bool $allowRC
+     * @param bool $allowPreReleases
      * @return array
      */
-    public function getLastVersion(bool $allowRC = true): array
+    public function getLastVersion(bool $allowPreReleases = true): array
     {
-        if (!$allowRC) {
+        if (!$allowPreReleases) {
             foreach ($this->jsonResponse as $index) {
                 if (isset($index['prerelease']) && $index['prerelease']) {
                     continue;

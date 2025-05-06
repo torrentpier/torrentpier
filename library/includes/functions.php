@@ -197,6 +197,8 @@ $bf['user_opt'] = [
     'dis_post_edit' => 13, // [PROHIBITIONS] Block editing own posts / topics
     'user_dls' => 14, // [SETTINGS] Hide list of "Current downloads" in my profile
     'user_retracker' => 15, // [SETTINGS] Add my retracker into downloaded torrent files
+    'user_hide_torrent_client' => 16, // [SETTINGS] Option to hide user's torrent client in peer list
+    'user_hide_peer_country' => 17 // [SETTINGS] Option to hide user's country name in peer list
 ];
 
 function bit2dec($bit_num)
@@ -601,7 +603,13 @@ function bt_show_ip($ip, $port = '')
 
     if (IS_AM) {
         $ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($ip);
-        $ip .= ($port) ? ":$port" : '';
+
+        // Wrap IPv6 address in square brackets
+        if ($port && str_contains($ip, ':')) {
+            $ip = "[$ip]";
+        }
+        $ip .= $port ? ":$port" : '';
+
         return $ip;
     }
 
@@ -876,8 +884,8 @@ function show_bt_userdata($user_id): void
         'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
         'YS_POINTS' => $btu['auth_key'] ? $btu['points_yesterday'] : '0.00',
 
-        'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
-        'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
+        'SPEED_UP' => humn_size($btu['speed_up'], min: 'KB') . '/s',
+        'SPEED_DOWN' => humn_size($btu['speed_down'], min: 'KB') . '/s',
     ]);
 }
 
@@ -898,13 +906,16 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = CACHE('bb_config')->get("config_{$table}")) {
         $cfg = [];
+
         foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row) {
             $cfg[$row['config_name']] = $row['config_value'];
         }
+
         if ($update_cache) {
             CACHE('bb_config')->set("config_{$table}", $cfg);
         }
     }
+
     return $cfg;
 }
 
@@ -1184,14 +1195,21 @@ function render_flag(string $code, bool $showName = true): string
     global $lang;
     static $iconExtension = '.svg';
 
+    $nameIgnoreList = [
+        'WBW',
+        'PACE',
+        'LGBT'
+    ];
+
     if (isset($lang['COUNTRIES'][$code])) {
         if ($code === '0') {
             return ''; // No selected
         } else {
             $flagIconPath = BB_ROOT . 'styles/images/flags/' . $code . $iconExtension;
             if (is_file($flagIconPath)) {
-                $countryName = $showName ? '&nbsp;' . str_short($lang['COUNTRIES'][$code], 20) : '';
-                return '<span title="' . $lang['COUNTRIES'][$code] . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
+                $langName = $lang['COUNTRIES'][$code];
+                $countryName = ($showName && !in_array($code, $nameIgnoreList)) ? '&nbsp;' . str_short($langName, 20) : '';
+                return '<span title="' . $langName . '"><img src="' . $flagIconPath . '" class="poster-flag" alt="' . $code . '">' . $countryName . '</span>';
             }
         }
     }
@@ -1224,11 +1242,16 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
     $total_pages = ceil($num_items / $per_page);
     $on_page = floor($start_item / $per_page) + 1;
 
+    $query_separator = '&amp;';
+    if (!str_contains($base_url, '?')) {
+        $query_separator = '?';
+    }
+
     $page_string = '';
     if ($total_pages > ((2 * ($begin_end + $from_middle)) + 2)) {
         $init_page_max = ($total_pages > $begin_end) ? $begin_end : $total_pages;
         for ($i = 1; $i < $init_page_max + 1; $i++) {
-            $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "&amp;start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+            $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
             if ($i < $init_page_max) {
                 $page_string .= ", ";
             }
@@ -1242,7 +1265,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
                 $init_page_max = ($on_page < $total_pages - ($begin_end + $from_middle)) ? $on_page : $total_pages - ($begin_end + $from_middle);
 
                 for ($i = $init_page_min - $from_middle; $i < $init_page_max + ($from_middle + 1); $i++) {
-                    $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "&amp;start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+                    $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
                     if ($i < $init_page_max + $from_middle) {
                         $page_string .= ', ';
                     }
@@ -1252,7 +1275,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
                 $page_string .= '&nbsp;...&nbsp;';
             }
             for ($i = $total_pages - ($begin_end - 1); $i < $total_pages + 1; $i++) {
-                $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "&amp;start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+                $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
                 if ($i < $total_pages) {
                     $page_string .= ", ";
                 }
@@ -1260,7 +1283,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         }
     } else {
         for ($i = 1; $i < $total_pages + 1; $i++) {
-            $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "&amp;start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
+            $page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "{$query_separator}start=" . (($i - 1) * $per_page) . '">' . $i . '</a>';
             if ($i < $total_pages) {
                 $page_string .= ', ';
             }
@@ -1269,20 +1292,20 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 
     if ($add_prevnext_text) {
         if ($on_page > 1) {
-            $page_string = ' <a href="' . $base_url . "&amp;start=" . (($on_page - 2) * $per_page) . '">' . $lang['PREVIOUS_PAGE'] . '</a>&nbsp;&nbsp;' . $page_string;
-            $meta_prev_link = FULL_URL . $base_url . "&amp;start=" . (($on_page - 2) * $per_page);
+            $page_string = ' <a href="' . $base_url . "{$query_separator}start=" . (($on_page - 2) * $per_page) . '">' . $lang['PREVIOUS_PAGE'] . '</a>&nbsp;&nbsp;' . $page_string;
+            $meta_prev_link = FULL_URL . $base_url . "{$query_separator}start=" . (($on_page - 2) * $per_page);
         }
 
         if ($on_page < $total_pages) {
-            $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "&amp;start=" . ($on_page * $per_page) . '">' . $lang['NEXT_PAGE'] . '</a>';
-            $meta_next_link = FULL_URL . $base_url . "&amp;start=" . ($on_page * $per_page);
+            $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "{$query_separator}start=" . ($on_page * $per_page) . '">' . $lang['NEXT_PAGE'] . '</a>';
+            $meta_next_link = FULL_URL . $base_url . "{$query_separator}start=" . ($on_page * $per_page);
         }
     }
 
     $pagination = false;
     if ($page_string && $total_pages > 1) {
         $pagination = '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string;
-        $pagination = str_replace('&amp;start=0', '', $pagination);
+        $pagination = str_replace("{$query_separator}start=0", '', $pagination);
     }
 
     $template->assign_vars([
@@ -1577,7 +1600,7 @@ function build_topic_pagination($url, $replies, $per_page)
     return $pg;
 }
 
-function print_confirmation($tpl_vars)
+function print_confirmation($tpl_vars): void
 {
     global $template, $lang;
 
@@ -1796,14 +1819,14 @@ function decode_text_match($txt)
 /**
  * Create magnet link
  *
- * @param string $infohash
- * @param string $infohash_v2
- * @param string $auth_key
- * @param string $name
- *
+ * @param string $infohash (xt=urn:btih)
+ * @param string $infohash_v2 (xt=urn:btmh:1220)
+ * @param string $auth_key (tr)
+ * @param string $name (dn)
+ * @param int|string $length (xl)
  * @return string
  */
-function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name): string
+function create_magnet(string $infohash, string $infohash_v2, string $auth_key, string $name, int|string $length = 0): string
 {
     global $bb_cfg, $images, $lang;
 
@@ -1830,6 +1853,11 @@ function create_magnet(string $infohash, string $infohash_v2, string $auth_key, 
             $magnet .= '&';
         }
         $magnet .= 'xt=urn:btmh:1220' . bin2hex($infohash_v2);
+    }
+
+    $length = (int)$length;
+    if ($length > 0) {
+        $magnet .= '&xl=' . $length;
     }
 
     return '<a title="' . ($v2_support ? $lang['MAGNET_v2'] : $lang['MAGNET']) . '" href="' . $magnet . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$auth_key") . '&dn=' . urlencode($name) . '"><img src="' . ($v2_support ? $images['icon_magnet_v2'] : $images['icon_magnet']) . '" width="12" height="12" border="0" /></a>';
@@ -1868,7 +1896,7 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     $message = DB()->escape($message);
 
     if ($poster_id == BOT_UID) {
-        $poster_ip = '7f000001';
+        $poster_ip = '0';
     } elseif ($row = DB()->fetch_row("SELECT user_reg_ip FROM " . BB_USERS . " WHERE user_id = $poster_id")) {
         $poster_ip = $row['user_reg_ip'];
     } else {
@@ -2044,56 +2072,51 @@ function hash_search($hash)
 }
 
 /**
- * Функция для получения и проверки правильности ответа от Google ReCaptcha.
+ * Function for checking captcha answer
  *
- * @param $mode
- * @param string $callback
- *
+ * @param string $mode
  * @return bool|string
  */
-function bb_captcha($mode, $callback = '')
+function bb_captcha(string $mode): bool|string
 {
     global $bb_cfg, $lang;
 
-    $secret = $bb_cfg['captcha']['secret_key'];
-    $public = $bb_cfg['captcha']['public_key'];
-    $cp_theme = $bb_cfg['captcha']['theme'] ?? 'light';
+    $settings = $bb_cfg['captcha'];
+    $settings['language'] = $bb_cfg['default_lang'];
 
-    if (!$bb_cfg['captcha']['disabled'] && (!$public || !$secret)) {
-        bb_die($lang['CAPTCHA_SETTINGS']);
+    // Checking captcha settings
+    if (!$settings['disabled'] && $settings['service'] !== 'text') {
+        if (empty($settings['public_key']) || empty($settings['secret_key'])) {
+            bb_die($lang['CAPTCHA_SETTINGS']);
+        }
     }
 
-    $reCaptcha = new \ReCaptcha\ReCaptcha($secret);
-
-    switch ($mode) {
-        case 'get':
-            return "
-				<script type=\"text/javascript\">
-					var onloadCallback = function() {
-						grecaptcha.render('tp-captcha', {
-							'sitekey'  : '" . $public . "',
-							'theme'    : '" . $cp_theme . "',
-							'callback' : '" . $callback . "'
-						});
-					};
-				</script>
-				<div id=\"tp-captcha\"></div>
-				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit\" async defer></script>";
-            break;
-
-        case 'check':
-            $resp = $reCaptcha->verify(
-                request_var('g-recaptcha-response', ''),
-                $_SERVER["REMOTE_ADDR"]
-            );
-            if ($resp->isSuccess()) {
-                return true;
-            }
-            break;
-
-        default:
-            bb_simple_die(__FUNCTION__ . ": invalid mode '$mode'");
+    // Selecting captcha service
+    $captchaClasses = [
+        'googleV2' => \TorrentPier\Captcha\GoogleCaptchaV2::class,
+        'googleV3' => \TorrentPier\Captcha\GoogleCaptchaV3::class,
+        'hCaptcha' => \TorrentPier\Captcha\HCaptcha::class,
+        'yandex' => \TorrentPier\Captcha\YandexSmartCaptcha::class,
+        'cloudflare' => \TorrentPier\Captcha\CloudflareTurnstileCaptcha::class,
+        'text' => \TorrentPier\Captcha\TextCaptcha::class
+    ];
+    if (!isset($captchaClasses[$settings['service']])) {
+        bb_die(sprintf('Captcha service (%s) not supported', $settings['service']));
     }
+    $captchaClass = $captchaClasses[$settings['service']];
+    $captcha = new $captchaClass($settings);
+
+    // Selection mode
+    if (isset($captcha)) {
+        switch ($mode) {
+            case 'get':
+            case 'check':
+                return $captcha->$mode();
+            default:
+                bb_die(sprintf('Invalid mode: %s', $mode));
+        }
+    }
+
     return false;
 }
 
@@ -2131,10 +2154,7 @@ function getBanInfo(?int $userId = null): ?array
     global $datastore;
 
     // Get bans info from datastore
-    if (!$bans = $datastore->get('ban_list')) {
-        $datastore->update('ban_list');
-        $bans = $datastore->get('ban_list');
-    }
+    $bans = $datastore->get('ban_list');
 
     if (!isset($userId)) {
         return $bans;
@@ -2166,19 +2186,48 @@ function readUpdaterFile(): array|bool
  */
 function infoByIP(string $ipAddress, int $port = 0): array
 {
-    if (!$data = CACHE('bb_ip2countries')->get($ipAddress . '_' . $port)) {
+    global $bb_cfg;
+
+    if (!$bb_cfg['ip2country_settings']['enabled']) {
+        return [];
+    }
+
+    $ipAddress = \TorrentPier\Helpers\IPHelper::long2ip_extended($ipAddress);
+    $cacheName = hash('xxh128', ($ipAddress . '_' . $port));
+
+    if (!$data = CACHE('bb_ip2countries')->get($cacheName)) {
         $data = [];
-        $response = file_get_contents(API_IP_URL . $ipAddress);
-        $json = json_decode($response, true);
-        if (is_array($json) && !empty($json)) {
-            $data = [
-                'ipVersion' => $json['ipVersion'],
-                'countryCode' => $json['countryCode'],
-                'continent' => $json['continent'],
-                'continentCode' => $json['continentCode']
+
+        $contextOptions = [];
+        if (!empty($bb_cfg['ip2country_settings']['api_token'])) {
+            $contextOptions['http'] = [
+                'header' => "Authorization: Bearer " . $bb_cfg['ip2country_settings']['api_token'] . "\r\n"
             ];
-            CACHE('bb_ip2countries')->set($ipAddress . '_' . $port, $data, 1200);
         }
+
+        $context = stream_context_create($contextOptions);
+        $response = file_get_contents($bb_cfg['ip2country_settings']['endpoint'] . $ipAddress, context: $context);
+
+        if ($response !== false) {
+            $json = json_decode($response, true);
+
+            if (is_array($json) && !empty($json)) {
+                $data = [
+                    'ipVersion' => $json['ipVersion'],
+                    'countryCode' => $json['countryCode'],
+                    'continent' => $json['continent'],
+                    'continentCode' => $json['continentCode']
+                ];
+            }
+        }
+
+        if (empty($data)) {
+            $data = [
+                'response' => false,
+                'timestamp' => TIMENOW
+            ];
+        }
+        CACHE('bb_ip2countries')->set($cacheName, $data, 1200);
     }
 
     return $data;

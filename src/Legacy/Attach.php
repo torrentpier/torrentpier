@@ -67,7 +67,7 @@ class Attach
         $this->attachment_extension_list = get_var('extension_list', ['']);
         $this->attachment_mimetype_list = get_var('mimetype_list', ['']);
 
-        $this->filename = (isset($_FILES['fileupload'], $_FILES['fileupload']['name']) && $_FILES['fileupload']['name'] !== 'none') ? trim(stripslashes($_FILES['fileupload']['name'])) : '';
+        $this->filename = (isset($_FILES['fileupload']['name']) && $_FILES['fileupload']['name'] !== 'none') ? trim(stripslashes($_FILES['fileupload']['name'])) : '';
 
         $this->attachment_list = get_var('attachment_list', ['']);
         $this->attachment_thumbnail_list = get_var('attach_thumbnail_list', [0]);
@@ -431,7 +431,7 @@ class Attach
                             }
                         }
 
-                        // Get current informations to delete the Old Attachment
+                        // Get current information to delete the Old Attachment
                         $sql = 'SELECT physical_filename, comment, thumbnail
 							FROM ' . BB_ATTACHMENTS_DESC . '
 							WHERE attach_id = ' . (int)$attachment_id;

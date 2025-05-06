@@ -16,7 +16,7 @@
 <!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
 
-<!-- IF $bb_cfg['show_post_bbcode_button'] -->
+<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] -->
 <script type="text/javascript">
     let loadedText = [];
 
@@ -430,7 +430,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.IS_FIRST_POST && $bb_cfg['show_post_bbcode_button'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">{CODE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF $bb_cfg['show_post_bbcode_button']['enabled'] --><!-- IF postrow.IS_FIRST_POST || !$bb_cfg['show_post_bbcode_button']['only_for_first_post'] --><a href="#" class="txtb" onclick="ajax.view_post('{postrow.POST_ID}'); return false;">{CODE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF --><!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;{#POST_TOPIC_URL#}={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
@@ -623,12 +623,14 @@ function build_poll_add_form (src_el)
 
 	</td>
 </tr>
+<!-- IF S_WATCH_TOPIC -->
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
-		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled<!-- ENDIF --> />
+		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked<!-- ENDIF -->/>
 		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
 </tr>
+<!-- ENDIF -->
 </table><!--/topic_quick_reply-->
 
 </form>

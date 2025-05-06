@@ -46,7 +46,7 @@ if ($bb_cfg['show_network_news']) {
 $user->session_start();
 
 // Init main vars
-$viewcat = isset($_GET['c']) ? (int)$_GET['c'] : 0;
+$viewcat = isset($_GET[POST_CAT_URL]) ? (int)$_GET[POST_CAT_URL] : 0;
 $lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output
@@ -80,6 +80,7 @@ $forum_name_html = $forums['forum_name_html'];
 
 $anon = GUEST_UID;
 $excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
+$excluded_forums_array = $excluded_forums_csv ? explode(',', $excluded_forums_csv) : [];
 $only_new = $user->opt_js['only_new'];
 
 // Validate requested category id
@@ -329,6 +330,10 @@ if ($bb_cfg['show_latest_news']) {
     $template->assign_vars(['SHOW_LATEST_NEWS' => true]);
 
     foreach ($latest_news as $news) {
+        if (in_array($news['forum_id'], $excluded_forums_array)) {
+            continue;
+        }
+
         $template->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
             'NEWS_TITLE' => str_short($wordCensor->censorString($news['topic_title']), $bb_cfg['max_news_title']),
@@ -348,6 +353,10 @@ if ($bb_cfg['show_network_news']) {
     $template->assign_vars(['SHOW_NETWORK_NEWS' => true]);
 
     foreach ($network_news as $net) {
+        if (in_array($net['forum_id'], $excluded_forums_array)) {
+            continue;
+        }
+
         $template->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
             'NEWS_TITLE' => str_short($wordCensor->censorString($net['topic_title']), $bb_cfg['max_net_title']),

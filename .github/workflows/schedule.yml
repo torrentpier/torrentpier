@@ -1,13 +1,14 @@
 name: Changelog generation
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   changelog:
-    runs-on: ubuntu-latest
+    name: Changelog generation
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,8 +33,8 @@ jobs:
       - name: Commit changelog
         run: |
           git checkout master
-          git config user.name 'belomaxorka'
-          git config user.email 'roman25052006.kelesh@gmail.com'
+          git config --local user.name 'belomaxorka'
+          git config --local user.email 'roman25052006.kelesh@gmail.com'
           set +e
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md 📖"

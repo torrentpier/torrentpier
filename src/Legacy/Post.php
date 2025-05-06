@@ -10,7 +10,6 @@
 namespace TorrentPier\Legacy;
 
 use TorrentPier\Emailer;
-use TorrentPier\IndexNow;
 use TorrentPier\Legacy\Admin\Common;
 use TorrentPier\Validate;
 
@@ -159,7 +158,7 @@ class Post
 				topic_id = $topic_id
 		";
 
-            $sql = ($mode != "editpost") ? $sql_insert : $sql_update;
+            $sql = ($mode != 'editpost') ? $sql_insert : $sql_update;
 
             if (!DB()->sql_query($sql)) {
                 bb_die('Error in posting #1');
@@ -178,7 +177,7 @@ class Post
             DB()->sql_query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id LIMIT 1");
         }
 
-        $sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
+        $sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
         if (!DB()->sql_query($sql)) {
             bb_die('Error in posting #2');
         }
@@ -219,12 +218,6 @@ class Post
                 ]);
                 $datastore->update('network_news');
             }
-        }
-
-        // Send IndexNow
-        if ($bb_cfg['indexnow_settings']['enabled'] && ($mode === 'newtopic' || $mode === 'editpost')) {
-            $indexNow = new IndexNow();
-            $indexNow->submit(FULL_URL . POST_URL . "$post_id#$post_id");
         }
 
         meta_refresh(POST_URL . "$post_id#$post_id");
@@ -444,7 +437,7 @@ class Post
         $post_time = TIMENOW;
 
         $poster_id = BOT_UID;
-        $poster_ip = '7f000001';
+        $poster_ip = '0';
 
         if ($mode == 'after_move') {
             if (!$forum_id || !$old_forum_id) {

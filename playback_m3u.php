@@ -34,7 +34,7 @@ if (!$topic_id) {
 }
 
 // Getting torrent info from database
-$sql = 'SELECT attach_id, info_hash, info_hash_v2
+$sql = 'SELECT attach_id, forum_id, info_hash, info_hash_v2
             FROM ' . BB_BT_TORRENTS . '
             WHERE topic_id = ' . $topic_id . '
         LIMIT 1';
@@ -47,6 +47,15 @@ if (!$row = DB()->fetch_row($sql)) {
 $torrServer = new \TorrentPier\TorrServerAPI();
 if (!$m3uFile = $torrServer->getM3UPath($row['attach_id'])) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
+}
+
+$forum_id = $row['forum_id'];
+set_die_append_msg($forum_id, $topic_id);
+
+// Check rights
+$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+if (!$is_auth['auth_download']) {
+    bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);
 }
 
 // Parse M3U file

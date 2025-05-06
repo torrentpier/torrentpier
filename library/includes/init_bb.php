@@ -299,6 +299,9 @@ define('HTML_DISABLED', ' disabled ');
 define('HTML_READONLY', ' readonly ');
 define('HTML_SELECTED', ' selected ');
 
+define('EMAIL_TYPE_HTML', 'text/html');
+define('EMAIL_TYPE_TEXT', 'text/plain');
+
 // $GPC
 define('KEY_NAME', 0);   // position in $GPC['xxx']
 define('DEF_VAL', 1);
@@ -383,11 +386,6 @@ $html = new TorrentPier\Legacy\Common\Html();
 $user = new TorrentPier\Legacy\Common\User();
 
 $userdata =& $user->data;
-
-/**
- * Some shared defines
- */
-define('TP_INSTANCE_HASH', $bb_cfg['tp_instance_hash']);
 
 /**
  * Cron

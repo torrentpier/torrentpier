@@ -48,13 +48,6 @@ class TorrServerAPI
     ];
 
     /**
-     * Log filename
-     *
-     * @var string
-     */
-    private string $logFile = 'torr_server';
-
-    /**
      * TorrServer constructor
      */
     public function __construct()
@@ -92,7 +85,7 @@ class TorrServerAPI
         ]);
         $isSuccess = $curl->httpStatusCode === 200;
         if (!$isSuccess) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
         }
         $curl->close();
 
@@ -147,7 +140,7 @@ class TorrServerAPI
                 file_put_contents($m3uFile, $curl->response);
             }
         } else {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
         }
         $curl->close();
 
@@ -187,7 +180,7 @@ class TorrServerAPI
             if (unlink($m3uFile)) {
                 return true;
             } else {
-                bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '$m3uFile'\n", $this->logFile);
+                bb_log("TorrServer (ERROR) [removeM3U()]: Can't unlink file '$m3uFile'" . LOG_LF);
             }
         }
 
@@ -229,7 +222,7 @@ class TorrServerAPI
             if ($curl->httpStatusCode === 200 && !empty($response->{$index})) {
                 CACHE('tr_cache')->set("ffprobe_m3u_$attach_id", $response, 3600);
             } else {
-                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode}\n", $this->logFile);
+                bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode}" . LOG_LF);
             }
             $curl->close();
         }
@@ -254,7 +247,7 @@ class TorrServerAPI
         $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);
         $isSuccess = $curl->httpStatusCode === 200;
         if (!$isSuccess) {
-            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}\n", $this->logFile);
+            bb_log("TorrServer (ERROR) [$this->url]: Response code: {$curl->httpStatusCode} | Content: {$curl->response}" . LOG_LF);
         }
         $curl->close();
 

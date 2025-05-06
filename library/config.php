@@ -12,14 +12,14 @@ if (!defined('BB_ROOT')) {
 }
 
 // Server settings
-$reserved_name = 'example.com';
-$reserved_port = 80;
+$reserved_name = env('TP_HOST', 'example.com');
+$reserved_port = env('TP_PORT', 80);
 
 $bb_cfg = [];
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.5';
-$bb_cfg['tp_release_date'] = 'XX-XX-2025';
+$bb_cfg['tp_version'] = 'v2.4.5-rc.5';
+$bb_cfg['tp_release_date'] = '03-05-2025';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Increase version number after changing JS or CSS
@@ -144,10 +144,12 @@ $bb_cfg['torr_server'] = [
     'disable_for_guest' => true
 ];
 
-// IndexNow settings
-$bb_cfg['indexnow_settings'] = [
-    'enabled' => false,
-    'host' => 'bing', // Available: yandex, bing, seznam, naver
+// FreeIPAPI settings
+$bb_cfg['ip2country_settings'] = [
+    // Documentation: https://docs.freeipapi.com/
+    'enabled' => true,
+    'endpoint' => 'https://freeipapi.com/api/json/',
+    'api_token' => '', // not required for basic usage
 ];
 
 // FAQ url help link
@@ -193,6 +195,7 @@ $bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 
 // Language
+$bb_cfg['auto_language_detection'] = true; // Use browser language (auto-detect) as default language for guests
 $bb_cfg['lang'] = [
     // Languages available for selecting
     'af' => [
@@ -425,7 +428,7 @@ $bb_cfg['invites_system'] = [
         // Syntax: 'invite_code' => 'validity_period'
         // The 'validity_period' value is based on strtotime() function: https://www.php.net/manual/en/function.strtotime.php
         // You can also create a permanent invite, set 'permanent' value for 'validity_period'
-        // Invite link example: site_url/profile.php?mode=register&invite=new_year
+        // Invite link example: site_url/profile.php?mode=register&invite=new_year2023
         'new_year2023' => '2022-12-31 00:00:01',
         '340c4bb6ea2d284c13e085b60b990a8a' => '12 April 1961',
         'tp_birthday' => '2005-04-04',
@@ -434,22 +437,23 @@ $bb_cfg['invites_system'] = [
 ];
 $bb_cfg['password_symbols'] = [
     // What symbols should be required in the password
-    'nums' => true, // Numeric
-    'spec_symbols' => false, // Special symbols
-    'letters' => [ // Letters
-        'uppercase' => true, // Uppercase letters
-        'lowercase' => true // Lowercase letters
+    'nums' => true,
+    'spec_symbols' => false,
+    'letters' => [
+        'uppercase' => false,
+        'lowercase' => true
     ]
 ];
 $bb_cfg['password_hash_options'] = [
     // https://www.php.net/manual/ru/password.constants.php
     'algo' => PASSWORD_BCRYPT,
-    'options' => []
+    'options' => ['cost' => 12]
 ];
 
 // Email
 $bb_cfg['emailer'] = [
     'enabled' => true,
+    'sendmail_command' => '/usr/sbin/sendmail -bs',
     'smtp' => [
         'enabled' => false, // send email via external SMTP server
         'host' => 'localhost', // SMTP server host
@@ -521,7 +525,10 @@ $bb_cfg['sf_on_first_page_only'] = true; // Show subforums only on the first pag
 $bb_cfg['allowed_topics_per_page'] = [50, 100, 150, 200, 250, 300]; // Allowed number of topics per page
 
 // Topics
-$bb_cfg['show_post_bbcode_button'] = true; // Show "Code" button in topic to display BBCode of topic
+$bb_cfg['show_post_bbcode_button'] = [ // Show "Code" button in topic to display BBCode of topic
+    'enabled' => true,
+    'only_for_first_post' => true,
+];
 $bb_cfg['show_quick_reply'] = true; // Show quick reply forim
 $bb_cfg['show_rank_text'] = false; // Show user rank name in topics
 $bb_cfg['show_rank_image'] = true; // Show user rank image in topics
@@ -602,7 +609,6 @@ $bb_cfg['flist_max_files'] = 0; // Max allowed number of files to process for gi
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format'] = 'd-M-y H:i';
 $bb_cfg['poll_max_days'] = 180; // How many days will the poll be active
-$bb_cfg['integrity_check'] = true; // TorrentPier files integrity check
 
 $bb_cfg['allow_change'] = [
     'language' => true, // Allow user to change language
@@ -670,12 +676,12 @@ $bb_cfg['group_avatars'] = [
 ];
 
 // Captcha
-// Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = [
     'disabled' => true,
+    'service' => 'googleV3', // Available services: text, googleV2, googleV3, hCaptcha, yandex, cloudflare
     'public_key' => '',
     'secret_key' => '',
-    'theme' => 'light', // theming (available: light, dark)
+    'theme' => 'light', // theming (available: light, dark) (working only if supported by captcha service)
 ];
 
 // Atom feed
@@ -736,7 +742,8 @@ $bb_cfg['tracker'] = [
     'gold_silver_enabled' => true, // golden / silver days mode (If enabled, then disable "freeleech")
     'hybrid_stat_protocol' => 1, // For hybrid torrents there are two identical requests sent by clients, for counting stats we gotta choose one, you can change this to '2' in future, when v1 protocol is outdated
     'disabled_v1_torrents' => false, // disallow registration of v1-only torrents, for future implementations where client will use v2 only and there won't be need for v1, thus relieving tracker
-    'disabled_v2_torrents' => false // disallow registration of v2-only torrents
+    'disabled_v2_torrents' => false, // disallow registration of v2-only torrents
+    'use_old_torrent_name_format' => false, // when enabled, the names of torrent files will have the classic format: [yoursite.com].txxx.torrent
 ];
 
 // Ratio settings

@@ -4,8 +4,6 @@
 
 ### TorrentPier ###
 *.log
-/*.txt
-*.integrity
 install.php_*
 composer-setup.php
 .env

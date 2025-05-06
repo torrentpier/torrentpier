@@ -9,8 +9,6 @@
 
 namespace TorrentPier\Legacy;
 
-use function in_array;
-
 /**
  * Class BBCode
  * @package TorrentPier\Legacy
@@ -21,7 +19,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public $smilies;
+    public array $smilies = [];
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
@@ -338,11 +336,16 @@ class BBCode
     {
         global $datastore;
 
-        if (null === $this->smilies) {
-            $this->smilies = $datastore->get('smile_replacements');
-        }
+        $this->smilies = $datastore->get('smile_replacements');
 
-        if ($this->smilies) {
+        if (!empty($this->smilies)) {
+            if (defined('IN_ADMIN')) {
+                foreach ($this->smilies['repl'] as &$smile) {
+                    $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
+                }
+                unset($smile);
+            }
+
             /** @noinspection NestedPositiveIfStatementsInspection */
             if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text)) {
                 return $parsed_text;
@@ -388,7 +391,7 @@ class BBCode
     {
         global $bb_cfg;
 
-        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (\in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";

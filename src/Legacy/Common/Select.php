@@ -7,11 +7,11 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier\Legacy\Common;
 
 /**
  * Class Select
- * @package TorrentPier\Legacy
+ * @package TorrentPier\Legacy\Common
  */
 class Select
 {

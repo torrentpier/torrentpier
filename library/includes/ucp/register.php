@@ -122,8 +122,8 @@ switch ($mode) {
         ];
 
         // Select a profile: your own for the user, any for the admin
-        if (IS_ADMIN && !empty($_REQUEST['u'])) {
-            $pr_user_id = (int)$_REQUEST['u'];
+        if (IS_ADMIN && !empty($_REQUEST[POST_USERS_URL])) {
+            $pr_user_id = (int)$_REQUEST[POST_USERS_URL];
             $adm_edit = ($pr_user_id != $userdata['user_id']);
         } else {
             $pr_user_id = $userdata['user_id'];
@@ -365,6 +365,8 @@ foreach ($profile_fields as $field => $can_edit) {
                 'user_dls' => $reg_mode ? false : true,
                 'user_callseed' => $reg_mode ? true : true,
                 'user_retracker' => $reg_mode ? true : true,
+                'user_hide_torrent_client' => $reg_mode ? true : true,
+                'user_hide_peer_country' => $reg_mode ? true : $bb_cfg['ip2country_settings']['enabled'],
             ];
 
             foreach ($update_user_opt as $opt => $can_change_opt) {
@@ -565,7 +567,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 }
             }
-            $tp_data['TEMPLATES_SELECT'] = \TorrentPier\Legacy\Select::template($pr_data['tpl_name'], 'tpl_name');
+            $tp_data['TEMPLATES_SELECT'] = \TorrentPier\Legacy\Common\Select::template($pr_data['tpl_name'], 'tpl_name');
             break;
 
         /**
@@ -722,8 +724,8 @@ $template->assign_vars([
     'INVITE_CODE' => !empty($_GET['invite']) ? htmlCHR($_GET['invite']) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
-    'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
-    'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
+    'LANGUAGE_SELECT' => \TorrentPier\Legacy\Common\Select::language($pr_data['user_lang'], 'user_lang'),
+    'TIMEZONE_SELECT' => \TorrentPier\Legacy\Common\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
 
     'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], humn_size($bb_cfg['avatars']['max_size'])),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),

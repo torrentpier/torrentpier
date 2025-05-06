@@ -41,7 +41,7 @@
         <div class="title">{L_YOUR_NEW_PASSWORD}</div>
         <div>
             <input value="" autocomplete="off" type="text"/>
-            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true);"></span>
+            <span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true, {#PASSWORD_MIN_LENGTH#});"></span>
         </div>
     </div>
 </div>
@@ -85,7 +85,7 @@
         <tr>
             <td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <br/><h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
             <td>
-                <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" title="{L_AUTOCOMPLETE}">&#9668;</span>&nbsp;<i class="med">{PASSWORD_LONG}</i>
+                <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value=""/>&nbsp;<span id="autocomplete" data-password-length="{#PASSWORD_MIN_LENGTH#}" title="{L_AUTOCOMPLETE}">&#9668;</span>&nbsp;<i class="med">{PASSWORD_LONG}</i>
             </td>
         </tr>
         <tr>
@@ -320,6 +320,22 @@
             </td>
         </tr>
         <tr>
+            <td class="prof-title">{L_HIDE_PEER_TORRENT_CLIENT}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_torrent_client" value="1" <!-- IF USER_HIDE_TORRENT_CLIENT -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_torrent_client" value="0" <!-- IF not USER_HIDE_TORRENT_CLIENT -->checked<!-- ENDIF --> />{L_NO}</label>
+            </td>
+        </tr>
+        <!-- IF $bb_cfg['ip2country_settings']['enabled'] -->
+        <tr>
+            <td class="prof-title">{L_HIDE_PEER_COUNTRY_NAME}:</td>
+            <td>
+                <label><input type="radio" name="user_hide_peer_country" value="1" <!-- IF USER_HIDE_PEER_COUNTRY -->checked<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+                <label><input type="radio" name="user_hide_peer_country" value="0" <!-- IF not USER_HIDE_PEER_COUNTRY -->checked<!-- ENDIF --> />{L_NO}</label>
+            </td>
+        </tr>
+        <!-- ENDIF -->
+        <tr>
             <th colspan="2">{L_AVATAR_PANEL}</th>
         </tr>
         <!-- IF AVATAR_DISALLOWED -->
@@ -339,7 +355,7 @@
                             <div class="spacer_4"></div>
                             {L_UPLOAD_AVATAR_FILE}:
                             <input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}"/>
-                            <input type="file" name="avatar"/>
+                            <input type="file" name="avatar" accept="image/*"/>
                             <!-- ENDIF -->
                         </td>
                         <td class="tCenter nowrap">

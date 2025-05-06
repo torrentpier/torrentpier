@@ -9,6 +9,8 @@
 
 namespace TorrentPier;
 
+use Exception;
+
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport\SendmailTransport;
@@ -98,12 +100,12 @@ class Emailer
                 $tpl_file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/email/' . $template_file . '.html';
 
                 if (!is_file($tpl_file)) {
-                    bb_die('Could not find email template file: ' . $template_file);
+                    throw new Exception('Could not find email template file: ' . $template_file);
                 }
             }
 
             if (!$fd = fopen($tpl_file, 'rb')) {
-                bb_die('Failed opening email template file: ' . $tpl_file);
+                throw new Exception('Failed opening email template file: ' . $tpl_file);
             }
 
             $this->tpl_msg[$template_lang . $template_file] = fread($fd, filesize($tpl_file));
@@ -119,6 +121,7 @@ class Emailer
      * @param string $email_format
      *
      * @return bool
+     * @throws Exception
      */
     public function send(string $email_format = 'text/plain'): bool
     {
@@ -156,7 +159,7 @@ class Emailer
                 $transport = new EsmtpTransport('localhost', 25);
             }
         } else {
-            $transport = new SendmailTransport('/usr/sbin/sendmail -bs');
+            $transport = new SendmailTransport($bb_cfg['emailer']['sendmail_command']);
         }
 
         $mailer = new Mailer($transport);
@@ -176,10 +179,15 @@ class Emailer
         $message->getHeaders()
             ->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
 
-        if ($email_format == 'text/html') {
-            $message->html($this->message);
-        } else {
-            $message->text($this->message);
+        switch ($email_format) {
+            case EMAIL_TYPE_HTML:
+                $message->html($this->message);
+                break;
+            case EMAIL_TYPE_TEXT:
+                $message->text($this->message);
+                break;
+            default:
+                throw new Exception('Unknown email format: ' . $email_format);
         }
 
         /** Send message */

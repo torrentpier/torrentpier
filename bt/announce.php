@@ -13,7 +13,9 @@ require dirname(__DIR__) . '/common.php';
 
 global $bb_cfg;
 
-if (empty($_SERVER['HTTP_USER_AGENT'])) {
+// Check User-Agent for existence
+$userAgent = (string)$_SERVER['HTTP_USER_AGENT'];
+if (empty($userAgent)) {
     header('Location: http://127.0.0.1', true, 301);
     die;
 }
@@ -99,7 +101,7 @@ if (!isset($info_hash)) {
  *
  * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L275
  */
-$event = strtolower($event);
+$event = strtolower((string)$event);
 if (!in_array($event, ['started', 'completed', 'stopped', 'paused', ''])) {
     msg_die('Invalid event: ' . $event);
 }
@@ -151,7 +153,6 @@ if (!isset($left) || !is_numeric($left) || $left < 0) {
  *
  * @see https://github.com/HDInnovations/UNIT3D-Community-Edition/blob/c64275f0b5dcb3c4c845d5204871adfe24f359d6/app/Http/Controllers/AnnounceController.php#L177
  */
-$userAgent = (string)$_SERVER['HTTP_USER_AGENT'];
 if (strlen($userAgent) > 64) {
     msg_die('User-Agent must be less than 64 characters long');
 }

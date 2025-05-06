@@ -600,8 +600,7 @@ VALUES ('allow_autologin', '1'),
        ('premod', '0'),
        ('tor_comment', '1'),
        ('terms', ''),
-       ('show_board_start_index', '1'),
-       ('tp_instance_hash', '');
+       ('show_board_start_index', '1');
 
 -- ----------------------------
 -- Table structure for `bb_cron`
@@ -1047,7 +1046,7 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs`
 (
   `privmsgs_id`          MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `privmsgs_type`        TINYINT(4)            NOT NULL DEFAULT '0',
-  `privmsgs_subject`     VARCHAR(255)          NOT NULL DEFAULT '0',
+  `privmsgs_subject`     VARCHAR(255)          NOT NULL DEFAULT '',
   `privmsgs_from_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `privmsgs_to_userid`   MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `privmsgs_date`        INT(11)               NOT NULL DEFAULT '0',

@@ -832,7 +832,7 @@ class SqlDb
      */
     public function log_query($log_file = 'sql_queries')
     {
-        $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.4f', $this->cur_query_time);
+        $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.3f', $this->cur_query_time);
         $msg = [];
         $msg[] = round($this->sql_starttime);
         $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
@@ -943,7 +943,7 @@ class SqlDb
                 $this->explain_out .= '
 				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
 				<tr>
-					<th style="height: 22px;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.4f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
+					<th style="height: 22px;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.3f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
 					<th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px;" align="right" title="Copy to clipboard">' . "[$this->engine] $this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>

@@ -80,32 +80,10 @@
     $('#sync_topics').html(data.sync_topics_html);
     $('#sync_user_posts').html(data.sync_user_posts_html);
     $('#unlock_cron').html(data.unlock_cron_html);
-    $('#restore_corrupt_files').html(data.restore_corrupt_files_html);
   }
 </script>
 
 <br/>
-<!-- BEGIN integrity_check -->
-<!-- IF integrity_check.INTEGRITY_SUCCESS -->
-<div class="alert alert-success" style="width: 95%;">
-    <h4 class="alert-heading">{L_INTEGRITY_CHECK_SUCCESS}</h4>
-    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
-</div>
-<!-- ELSE -->
-<div class="alert alert-danger" style="width: 95%;">
-    <h4 class="alert-heading">{L_INTEGRITY_CHECK_FAIL}</h4>
-    <h6>{integrity_check.INTEGRITY_CHECKED_FILES} {integrity_check.INTEGRITY_LAST_CHECK_TIME}</h6>
-    <hr/>
-    <!-- IF integrity_check.INTEGRITY_WRONG_FILES_LIST -->
-    <ul style="max-height: 120px; overflow-x: auto;">
-        <li>{integrity_check.INTEGRITY_WRONG_FILES_LIST}</li>
-    </ul>
-    <hr/>
-    <a href="#" id="restore_corrupt_files" onclick="ajax.manage_admin('restore_corrupt_files'); return false;">{L_INTEGRITY_RESTORE_ON_NEXT_RUN}</a>
-    <!-- ENDIF -->
-</div>
-<!-- ENDIF -->
-<!-- END integrity_check -->
 
 <!-- IF ADMIN_LOCK_CRON -->
 <div class="alert alert-danger" style="width: 95%;">

@@ -225,7 +225,7 @@ ajax.callback.group_membership = function(data) {
 			$('#rank-sel').bind('change', function(){ ajax.change_user_rank( {PROFILE_USER_ID}, $(this).val() ); });
 			</script>
 			<div id="rank-msg" class="mrg_6"></div>
-		<!-- ELSE IF POSTER_RANK -->
+		<!-- ELSE IF RANK_IMAGE -->
 			{RANK_IMAGE}
 		<!-- ENDIF -->
 		</p>
@@ -382,7 +382,7 @@ ajax.callback.group_membership = function(data) {
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a href="{U_SEARCH_RELEASES}" class="med">{L_SEARCH_RELEASES}</a> ]
-						<!-- IF PROFILE_USER || IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}&{#POST_USERS_URL#}={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF -->
+						<!-- IF $bb_cfg['topic_notify_enabled'] --><!-- IF PROFILE_USER || IS_ADMIN -->[ <a href="{U_WATCHED_TOPICS}&{#POST_USERS_URL#}={PROFILE_USER_ID}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF --><!-- ENDIF -->
 						[ <a title="{L_ATOM_SUBSCRIBE}" href="#" onclick="return post2url('feed.php', {mode: 'get_feed_url', type: 'u', id: {PROFILE_USER_ID}})">{FEED_IMG}</a> ]
 					</p>
 				</td>
