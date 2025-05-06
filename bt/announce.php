@@ -268,12 +268,12 @@ if ($lp_info) {
     // Assign variables
     $user_id = $row['user_id'];
     define('IS_GUEST', $user_id == GUEST_UID);
-    define('IS_USER', $row['user_level'] == USER);
-    define('IS_GROUP_MEMBER', $row['user_level'] == GROUP_MEMBER);
-    define('IS_ADMIN', $row['user_level'] == ADMIN);
-    define('IS_MOD', $row['user_level'] == MOD);
-    define('IS_AM', IS_ADMIN || IS_MOD);
+    define('IS_ADMIN', !IS_GUEST && (int)$row['user_level'] === ADMIN);
+    define('IS_MOD', !IS_GUEST && (int)$row['user_level'] === MOD);
+    define('IS_GROUP_MEMBER', !IS_GUEST && (int)$row['user_level'] === GROUP_MEMBER);
+    define('IS_USER', !IS_GUEST && (int)$row['user_level'] === USER);
     define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$user_id]));
+    define('IS_AM', IS_ADMIN || IS_MOD);
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
