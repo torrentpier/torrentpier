@@ -445,8 +445,6 @@ if ($tor_reged && $tor_info) {
                         $compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
                     }
 
-                    $rel_sign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
-                    $name = profile_url($peer) . $rel_sign;
                     $up_tot = ($p_max_up) ? humn_size($p_max_up) : '-';
                     $down_tot = ($p_max_down) ? humn_size($p_max_down) : '-';
                     $up_ratio = ($p_max_down) ? round(($p_max_up / $p_max_down), 2) : '';
@@ -457,14 +455,21 @@ if ($tor_reged && $tor_info) {
                     $row_bgr = ($change_peers_bgr_over) ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';
                     $tr[$x]++;
 
-                    $peerTorrentClient = $lang['UNKNOWN'];
+                    $peerUsername = $lang['HIDDEN_USER'];
+                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_torrent_client')) {
+                        $releaserSign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
+                        $peerUsername = profile_url($peer) . $releaserSign;
+                        $peerUsername = $peer['update_time'] ? $peerUsername : "<s>$peerUsername</s>";
+                    }
+
+                    $peerTorrentClient = $lang['HIDDEN_USER'];
                     if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_torrent_client')) {
                         if (isset($peer['peer_id'])) {
                             $peerTorrentClient = get_user_torrent_client($peer['peer_id']);
                         }
                     }
 
-                    $peerCountry = $lang['UNKNOWN'];
+                    $peerCountry = $lang['HIDDEN_USER'];
                     if ($bb_cfg['ip2country_settings']['enabled']) {
                         if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
                             if ($infoByIP = infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])) {
@@ -477,7 +482,7 @@ if ($tor_reged && $tor_info) {
 
                     $template->assign_block_vars("$x_full.$x_row", [
                         'ROW_BGR' => $row_bgr,
-                        'NAME' => ($peer['update_time']) ? $name : "<s>$name</s>",
+                        'NAME' => $peerUsername,
                         'PEER_ID' => $peerTorrentClient,
                         'COUNTRY' => $peerCountry,
                         'COMPL_PRC' => $compl_perc,
@@ -489,8 +494,8 @@ if ($tor_reged && $tor_info) {
                         'DOWN_TOTAL_RAW' => $peer['downloaded'],
                         'SPEED_UP_RAW' => $peer['speed_up'],
                         'SPEED_DOWN_RAW' => $peer['speed_down'],
-                        'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
-                        'TOR_RATIO' => ($up_ratio) ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : ''
+                        'UPD_EXP_TIME' => $peer['update_time'] ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
+                        'TOR_RATIO' => $up_ratio ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : ''
                     ]);
 
                     if ($ip) {
