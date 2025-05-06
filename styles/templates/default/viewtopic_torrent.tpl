@@ -167,7 +167,7 @@ ajax.callback.callseed = function (data) {
 				<td class="seedmed"><u>{sfull.srow.SPEED_UP_RAW}</u>{sfull.srow.SPEED_UP}</td>
 				<td class="leechmed"><u>{sfull.srow.SPEED_DOWN_RAW}</u>{sfull.srow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
-				<td>{sfull.srow.ip.IP}</td>
+                <td><a href="{sfull.srow.ip.U_WHOIS_IP}" target="_blank">{sfull.srow.ip.IP}</a></td>
 				<!-- END ip -->
 				<!-- BEGIN port -->
 				<td>{sfull.srow.port.PORT}</td>
@@ -220,7 +220,7 @@ ajax.callback.callseed = function (data) {
 				<td class="seedmed"><u>{lfull.lrow.SPEED_UP_RAW}</u>{lfull.lrow.SPEED_UP}</td>
 				<td class="leechmed"><u>{lfull.lrow.SPEED_DOWN_RAW}</u>{lfull.lrow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
-				<td>{lfull.lrow.ip.IP}</td>
+                <td><a href="{lfull.lrow.ip.U_WHOIS_IP}" target="_blank">{lfull.lrow.ip.IP}</a></td>
 				<!-- END ip -->
 				<!-- BEGIN port -->
 				<td>{lfull.lrow.port.PORT}</td>
