@@ -383,7 +383,9 @@ if ($tor_reged && $tor_info) {
                 // Full details mode
                 if ($s_mode == 'full') {
                     if (!empty($peer['ip']) && !empty($peer['ipv6'])) {
-                        $ip = bt_show_ip($peer['ipv6']) . ' (' . bt_show_ip($peer['ip']) . ')';
+                        if ($ip = bt_show_ip($peer['ipv6'])) {
+                            $ip .= ' (' . bt_show_ip($peer['ip']) . ')';
+                        }
                     } else {
                         $ip = bt_show_ip(!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']);
                     }
@@ -492,7 +494,10 @@ if ($tor_reged && $tor_info) {
                     ]);
 
                     if ($ip) {
-                        $template->assign_block_vars("$x_full.$x_row.ip", ['IP' => $ip]);
+                        $template->assign_block_vars("$x_full.$x_row.ip", [
+                            'U_WHOIS_IP' => $bb_cfg['whois_info'] . $ip,
+                            'IP' => $ip
+                        ]);
                     }
                     if ($port !== false) {
                         $template->assign_block_vars("$x_full.$x_row.port", ['PORT' => $port]);
