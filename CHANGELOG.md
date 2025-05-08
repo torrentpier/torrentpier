@@ -26,6 +26,7 @@
 
 ### ⚙️ Miscellaneous
 
+- Minor improvements ([#1904](https://github.com/torrentpier/torrentpier/pull/1904)) - ([3cdf843](https://github.com/torrentpier/torrentpier/commit/3cdf843a0442d4cdf9b70702c6092d05df86c7e0))
 - Minor improvements ([#1898](https://github.com/torrentpier/torrentpier/pull/1898)) - ([2f02692](https://github.com/torrentpier/torrentpier/commit/2f026921ee331226900b3cd4f1bb238f6562b48d))
 - Minor improvements ([#1897](https://github.com/torrentpier/torrentpier/pull/1897)) - ([14086a0](https://github.com/torrentpier/torrentpier/commit/14086a0ed6181a0ff4496ee2e56f4fb70bfe18d5))
 - Minor improvements ([#1893](https://github.com/torrentpier/torrentpier/pull/1893)) - ([90ece5c](https://github.com/torrentpier/torrentpier/commit/90ece5c7621789f170246b2898841b347e264674))
