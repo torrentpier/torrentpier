@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Эта опция доступна только
 
 $lang['LOGS'] = 'История темы';
 $lang['FORUM_LOGS'] = 'История форума';
-$lang['AUTOCLEAN'] = 'Autoclean';
+$lang['AUTOCLEAN'] = 'Автоочистка';
 $lang['DESIGNER'] = 'Конструктор';
 
 $lang['LAST_IP'] = 'Последний IP:';
@@ -1879,9 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'Остановил Скачивание/Раздачу';
 $lang['DL_UPD'] = 'Подключен: ';
 $lang['DL_INFO'] = 'показаны данные <i><b>только за текущую сессию</b></i>';
-$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
-$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
-$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Скрыть название моего BitTorrent клиента в списке пиров';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Скрыть название моей страны в списке пиров';
+$lang['HIDE_PEER_USERNAME'] = 'Скрыть мое имя пользователя в списке пиров';
 
 // Post PIN
 $lang['POST_PIN'] = 'Закрепить первый пост';
@@ -3076,7 +3076,7 @@ $lang['UPLOAD_ERRORS'] = [
 $lang['CAPTCHA'] = 'Проверка, что вы не робот';
 $lang['CAPTCHA_WRONG'] = 'Вы не смогли подтвердить, что вы не робот';
 $lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
-$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'Проверка CAPTCHA происходит в фоновом режиме';
 
 // Sending email
 $lang['REPLY_TO'] = 'Адрес для ответных писем';
