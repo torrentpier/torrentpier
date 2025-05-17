@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = '이 옵션만을 위한 최고 관리자';
 
 $lang['LOGS'] = '항목에서 역사';
 $lang['FORUM_LOGS'] = '역사 포럼';
-$lang['AUTOCLEAN'] = '자동 청소:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = '디자이너';
 
 $lang['LAST_IP'] = '마지막으로 IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = '을 중지';
 $lang['DL_UPD'] = '이트: ';
 $lang['DL_INFO'] = '데이터 <i><b>only 현재 session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = '핀 첫 번째 게시물';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = '허용되지 않은 사용자명이 추가 되�
 $lang['DISALLOWED_ALREADY'] = '이름을 입력할 수 없습 허용되지 않습니다. 그것은 하나 이미 존재하는 목록에서,존재하는 단어에서 검열하거나,목록에 일치하는 사용자 이름이 현재합니다.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '클릭 %sHere%s 하는 반품을 허용하지 않는 사용자 이름 관리';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = '버전 정보';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = '사이트맵 관리';
 $lang['SITEMAP_CREATED'] = '사이트맵 작성';
 $lang['SITEMAP_AVAILABLE'] = '여기에서 다운로드 가능합니다';
 $lang['SITEMAP_NOT_CREATED'] = '사이트맵은 아직 생성';
-$lang['SITEMAP_NOTIFY_SEARCH'] = '알림이 검색 엔진';
-$lang['SITEMAP_SENT'] = '보내기를 완료';
-$lang['SITEMAP_ERROR'] = '보내는 오류';
 $lang['SITEMAP_OPTIONS'] = '옵션';
 $lang['SITEMAP_CREATE'] = 'Create 업데이트/사이트 맵';
-$lang['SITEMAP_NOTIFY'] = '검색 엔진을 통지에 대해 새로운 버전의 사이트맵';
 $lang['SITEMAP_WHAT_NEXT'] = '그 다음에 할 것은 무엇일까요?';
 $lang['SITEMAP_GOOGLE_1'] = '귀하의 사이트에 등록에서 <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a>Google 계정을 사용하여합니다.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> 의 사이트에 등록합니다.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = '체크인되지 않는 로봇';
 $lang['CAPTCHA_WRONG'] = '을 확인할 수없는 당신이하지 않는 로봇';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha 되지 않는 완전히 configured</h2><p>if 하지 않은 이미 생성된 열쇠를 당신에 그것을 할 수 있습니다 <a href="https://www.google.com/recaptcha/admin">https://www.google 니다.com/recaptcha/admin</a> 니다.<br />After 를 생성하는 키를,당신은 그들을 넣어서 파일의 라이브러리/config 니다.php 니다.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
