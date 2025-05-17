@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -1607,7 +1607,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Bu variant üçün yalnız super admins';
 
 $lang['LOGS'] = 'Tarixi mövzular';
 $lang['FORUM_LOGS'] = 'Forum Tarixi';
-$lang['AUTOCLEAN'] = 'Автоочистка:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Dizayner';
 
 $lang['LAST_IP'] = 'Son İP:';
@@ -1882,6 +1882,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'dayandırdı';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'məlumatları göstərir <i><b>only üçün cari session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Çapa ilk post';
@@ -2324,14 +2327,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Неодобренные istifadəçi adı idi u
 $lang['DISALLOWED_ALREADY'] = 'Təqdim adı olunmasından imtina edilə bilməz. Bu və ya artıq mövcud siyahıda siyahısında iştirak edir sözü цензор və ya müvafiq adına istifadəçi mövcuddur.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Basın %sHere%s qaytarmaq qadağan Administrasiyası istifadəçi Adı';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Məlumat Versiyası';
@@ -3001,12 +2996,8 @@ $lang['SITEMAP_ADMIN'] = 'İdarə saytın Xəritəsi';
 $lang['SITEMAP_CREATED'] = 'Saytın xəritəsi yaradılmışdır';
 $lang['SITEMAP_AVAILABLE'] = 'və mövcud';
 $lang['SITEMAP_NOT_CREATED'] = 'Saytın xəritəsi hələ yaradılıb';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Xəbərdarlıq axtarış motorları';
-$lang['SITEMAP_SENT'] = 'göndər dolu';
-$lang['SITEMAP_ERROR'] = 'səhv göndərilməsi';
 $lang['SITEMAP_OPTIONS'] = 'Variantlar';
 $lang['SITEMAP_CREATE'] = 'Yaradılması və / və saytın yenilənməsi';
-$lang['SITEMAP_NOTIFY'] = 'Məlumat axtarış sisteminin yeni versiyası haqqında sayt';
 $lang['SITEMAP_WHAT_NEXT'] = 'Nə etməli?';
 $lang['SITEMAP_GOOGLE_1'] = 'Qeydiyyatdan sizin sayta <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> köməyi ilə haqq-hesab Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> siz sayta qeydiyyatdan keçmişdir.';
@@ -3088,7 +3079,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Əmin olun ki, Siz robot deyil';
 $lang['CAPTCHA_WRONG'] = 'Ola bilər ki, təsdiq Siz robot deyil';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha olmadan tam configured</h2><p>if siz hələ сгенерировал düymələri, bunu edə bilərsiniz azn <a href="https://www.google.com/recaptcha/admin">https://ВСП.google.com/рекапчу/admin</a>.<br />After siz генерируете düymələri, lazımdır onları qoymaq fayl Library/onları.PHP.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
