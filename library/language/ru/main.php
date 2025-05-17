@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -1370,17 +1370,17 @@ $lang['BT_REG_FAIL'] = 'Не удалось зарегистрировать т�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Другой торрент с таким же info_hash уже <a href="%s"><b>зарегистрирован</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'В данный момент администратор отключил только v1 торренты, разрешены: v2 и гибриды (hybrids)';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'В данный момент администратор отключил v2 торренты, разрешены: v1 и гибриды (hybrids)';
-$lang['BT_FLIST'] = 'Files list';
+$lang['BT_FLIST'] = 'Список файлов';
 $lang['BT_FLIST_LIMIT'] = 'Настройки трекера не позволяют обрабатывать списки более чем с %d файлами. Текущее число: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'Хэш BTMR';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root — хэш файлов, встроенных в торренты с поддержкой BitTorrent v2, пользователи трекеров могут извлечь, вычислить их, также скачать deduplicated торренты с помощью настольных инструментов, таких как <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Дата создания';
-$lang['BT_IS_PRIVATE'] = 'Private torrent';
+$lang['BT_IS_PRIVATE'] = 'Приватный торрент';
 $lang['BT_FLIST_FILE_PATH'] = 'Путь (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'Хеши файлов | .torrent мета-информация';
-$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
-$lang['BT_FLIST_ANNOUNCERS'] = 'Announcers';
-$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'This list contains announcers of torrent file';
+$lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Список анонсеров';
+$lang['BT_FLIST_ANNOUNCERS'] = 'Анонсеры';
+$lang['BT_FLIST_ANNOUNCERS_NOTICE'] = 'Этот список содержит анонсы торрент-файла';
 $lang['BT_UNREG_FROM_TRACKER'] = 'Разрегистрировать торрент';
 $lang['BT_UNREGISTERED'] = 'Торрент разрегистрирован';
 $lang['BT_UNREGISTERED_ALREADY'] = 'Торрент уже разрегистрирован';
@@ -1405,7 +1405,7 @@ $lang['SEEDING'] = 'Сидер';
 $lang['LEECHING'] = 'Личер';
 $lang['IS_REGISTERED'] = 'Зарегистрирован';
 $lang['MAGNET'] = 'Magnet-ссылка';
-$lang['MAGNET_FOR_GUESTS'] = 'Show magnet-link for guests';
+$lang['MAGNET_FOR_GUESTS'] = 'Показывать magnet-ссылку для гостей';
 $lang['MAGNET_v2'] = 'Magnet-ссылка (поддерживается BitTorrent v2)';
 
 //torrent status mod
@@ -1442,7 +1442,7 @@ $lang['CHANGE_TOR_TYPE'] = 'Тип торрента успешно измене�
 $lang['DEL_TORRENT'] = 'Вы уверены, что хотите удалить торрент?';
 $lang['DEL_MOVE_TORRENT'] = 'Вы уверены, что хотите удалить и перенести топик?';
 $lang['UNEXECUTED_RELEASE'] = 'У вас есть неоформленный релиз, прежде чем создавать новый - исправьте свой неоформленный!';
-$lang['TOR_STATUS_LOG_ACTION'] = 'New status: %s.<br/>Previous status: %s.';
+$lang['TOR_STATUS_LOG_ACTION'] = 'Новый статус: %s.<br/>Предыдущий статус: %s.';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Изменение статуса раздачи - %s';

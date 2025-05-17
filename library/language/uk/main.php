@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -277,8 +277,8 @@ $lang['SPOILER_HEAD'] = 'прихований текст';
 $lang['SPOILER_CLOSE'] = 'згорнути';
 $lang['PLAY_ON_CURPAGE'] = 'Почати відтворення на цій сторінці';
 
-$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Востаннє змінено %s (%s); всього редагувань: %d'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Востаннє змінено %s (%s); всього редагувань: %d'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Закрити тему';
 $lang['UNLOCK_TOPIC'] = 'Розблокувати тему';
@@ -694,7 +694,7 @@ $lang['ORDER'] = 'Сортувати';
 $lang['THANK_TOPIC'] = 'Проголосувати за цю тему';
 $lang['THANKS_GRATITUDE'] = 'Ми цінуємо вашу вдячність';
 $lang['LAST_LIKES'] = 'Останній голос';
-$lang['LIKE_OWN_POST'] = 'Ви не можете голосувати за свою тему';
+$lang['LIKE_OWN_POST'] = 'Ви не можете проголосувати за власну публікацію.';
 $lang['NO_LIKES'] = 'Ще ніхто не проголосував';
 $lang['LIKE_ALREADY'] = 'Ви вже проголосували за цю тему';
 
@@ -990,10 +990,10 @@ $lang['COUNTRY'] = 'Країна';
 $lang['SET_OWN_COUNTRY'] = 'Вказати свою країну (вручну)';
 $lang['COUNTRIES'] = [
     0 => 'Не вказано',
-    'AD' => 'Andorra',
-    'AE' => 'United Arab Emirates',
-    'AF' => 'Afghanistan',
-    'AG' => 'Antigua and Barbuda',
+    'AD' => 'Андора',
+    'AE' => 'Об\'єднані Арабські Емірати',
+    'AF' => 'Афганістан',
+    'AG' => 'Антиґуа і Барбуда',
     'AI' => 'Anguilla',
     'AL' => 'Албанія',
     'AM' => 'Вірменія',
@@ -1370,12 +1370,12 @@ $lang['BT_REG_FAIL'] = 'Не вдалося зареєструвати торе�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Інший торрент з таким же info_hash вже <a href="%s"><b>зареєстрований</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_FLIST'] = 'Files list';
+$lang['BT_FLIST'] = 'Список файлів';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Дата створення';
-$lang['BT_IS_PRIVATE'] = 'Private torrent';
+$lang['BT_IS_PRIVATE'] = 'Приватний торрент';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
 $lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
