@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Šis variantas yra tik super administratoriams'
 
 $lang['LOGS'] = 'Temos istorija';
 $lang['FORUM_LOGS'] = 'Istorijos Forumas';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Dizaineris';
 
 $lang['LAST_IP'] = 'Paskutinis IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'sustojo';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'rodo duomenų <i><b>only einamųjų session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin pirmą postą';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Į neleidžiamus username buvo pridėta sėkming
 $lang['DISALLOWED_ALREADY'] = 'Pavadinimas įvedėte negalėjo būti atmestas. Tai arba jau yra sąraše, egzistuoja žodį cenzūruoti sąrašą, arba atitinkamą vardą yra.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Spustelėkite %sHere%s grįžti į Neleisti vartotojo Vardą Administracija';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versijos Informacija';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Tvarkyti sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap sukurta';
 $lang['SITEMAP_AVAILABLE'] = 'ir yra';
 $lang['SITEMAP_NOT_CREATED'] = 'Svetainės dar nėra sukurtas';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Pranešimo paieškos';
-$lang['SITEMAP_SENT'] = 'siųsti baigtas';
-$lang['SITEMAP_ERROR'] = 'siunčiant klaida';
 $lang['SITEMAP_OPTIONS'] = 'Funkcijos';
 $lang['SITEMAP_CREATE'] = 'Sukurti / atnaujinti sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Pranešti apie paieškos nauja versija, sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Ką daryti toliau?';
 $lang['SITEMAP_GOOGLE_1'] = 'Užregistruokite savo svetainę <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> naudodami savo "Google" paskyros.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> svetainės užsiregistravote.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Patikrinkite, kad jūs esate ne robotas';
 $lang['CAPTCHA_WRONG'] = 'Jūs negalėjo patvirtinti, kad jūs esate ne robotas';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne visiškai configured</h2><p>if jūs neturite jau sukurtas klavišus, galite tai padaryti dėl <a href="https://www.google.com/recaptcha/admin">https://www."google".com/recaptcha/admin</a>.<br />After galite generuoti klavišus, jums reikia įdėti juos į failą, biblioteka/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
