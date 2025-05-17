@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'केवल सुपर व्यवस्थ
 
 $lang['LOGS'] = 'विषय इतिहास';
 $lang['FORUM_LOGS'] = 'इतिहास फ़ोरम';
-$lang['AUTOCLEAN'] = 'स्वतः स्वच्छ:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'डिजाइनर';
 
 $lang['LAST_IP'] = 'अंतिम आईपी:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'रोका हुआ';
 $lang['DL_UPD'] = 'upd:';
 $lang['DL_INFO'] = 'वर्तमान सत्र के लिए केवल <i><b> डेटा दिखाता है 1233_2_2_321</i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'पहली पोस्ट पिन करें';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'अस्वीकृत उपयोगकर�
 $lang['DISALLOWED_ALREADY'] = 'आपके द्वारा दर्ज नाम अस्वीकृत नहीं किया जा सकता है यह या तो पहले से ही सूची में मौजूद है, शब्द सेंसर सूची में मौजूद है, या एक मेल उपयोगकर्ता नाम मौजूद है।';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'अस्वीकार उपयोगकर्ता नाम प्रशासन पर वापस जाने के लिए %s हायर %s पर क्लिक करें';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'संस्करण जानकारी';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'साइटमैप प्रबंधित कर�
 $lang['SITEMAP_CREATED'] = 'साइटमैप बनाया गया';
 $lang['SITEMAP_AVAILABLE'] = 'और यहां पर उपलब्ध है';
 $lang['SITEMAP_NOT_CREATED'] = 'साइटमैप अभी तक बनाया नहीं गया है';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'खोज इंजन की अधिसूचना';
-$lang['SITEMAP_SENT'] = 'भेजें पूर्ण';
-$lang['SITEMAP_ERROR'] = 'त्रुटि भेजना';
 $lang['SITEMAP_OPTIONS'] = 'विकल्प';
 $lang['SITEMAP_CREATE'] = 'साइटमैप बनाएं / अपडेट करें';
-$lang['SITEMAP_NOTIFY'] = 'साइटमैप के नए संस्करण के बारे में खोज इंजन को सूचित करें';
 $lang['SITEMAP_WHAT_NEXT'] = 'आगे क्या करना है?';
 $lang['SITEMAP_GOOGLE_1'] = 'अपने Google खाते का उपयोग करके <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> पर अपनी साइट को पंजीकृत करें';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank"> साइट की साइटमैप </a> जोड़ें जो आपने पंजीकृत की है।';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'जांचें कि आप रोबोट नहीं हैं';
 $lang['CAPTCHA_WRONG'] = 'आप यह पुष्टि नहीं कर सके कि आप रोबोट नहीं हैं';
-$lang['CAPTCHA_SETTINGS'] = '<h2> रीकैप्चाचा पूरी तरह से कॉन्फ़िगर नहीं किया जा रहा है </h2><p> यदि आपने पहले से कुंजी उत्पन्न नहीं की है, तो आप इसे <a href="https://www.google.com/recaptcha/admin">https: //www.google.com/recaptcha/admin</a>.<br /> पर कर सकते हैं, आप कुंजी उत्पन्न करने के बाद, आपको उन्हें फ़ाइल लाइब्रेरी / कॉन्फ़िग पर डालनी होगी .php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
