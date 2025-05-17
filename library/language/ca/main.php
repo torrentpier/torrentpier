@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Aquesta opció només per a administradors de s
 
 $lang['LOGS'] = 'Tema de la història';
 $lang['FORUM_LOGS'] = 'Història Del Fòrum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Dissenyador';
 
 $lang['LAST_IP'] = 'Última IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'aturar';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'mostra dades <i><b>only per l\'actual session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin primer post';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'El nom d\'usuari no permès, s\'ha afegit amb è
 $lang['DISALLOWED_ALREADY'] = 'El nom que heu introduït no podia ser rebutjat. Que ja existeix a la llista, hi ha en la paraula de censurar la llista, o una coincidència de nom d\'usuari és present.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Feu clic %sHere%s per tornar a Rebutjar el nom d\'Usuari d\'Administració';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informació De La Versió';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Gestionar mapa';
 $lang['SITEMAP_CREATED'] = 'Mapa del web creat';
 $lang['SITEMAP_AVAILABLE'] = 'i està disponible en';
 $lang['SITEMAP_NOT_CREATED'] = 'Mapa del web encara no està creat';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Notificació del motor de cerca';
-$lang['SITEMAP_SENT'] = 'enviar emplenat';
-$lang['SITEMAP_ERROR'] = 'l\'enviament d\'error';
 $lang['SITEMAP_OPTIONS'] = 'Opcions';
 $lang['SITEMAP_CREATE'] = 'Crear / actualitzar el mapa del web';
-$lang['SITEMAP_NOTIFY'] = 'Notificar els motors de cerca sobre la nova versió del mapa del web';
 $lang['SITEMAP_WHAT_NEXT'] = 'Què fer a continuació?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registrar el seu lloc a <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> utilitzant el teu compte de Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> de lloc que heu registrat.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Comprovar que no ets un robot';
 $lang['CAPTCHA_WRONG'] = 'No es podia confirmar que no ets un robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha no ser totalment configured</h2><p>if no ho heu fet ja generar les claus, podeu fer-ho en <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After a generar les claus, que cal posar-los a l\'arxiu de la biblioteca/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
