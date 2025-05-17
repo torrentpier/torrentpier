@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,7 +25,7 @@ $lang['POSTS_SHORT'] = 'Сообщ.';
 $lang['POSTED'] = 'Добавлено';
 $lang['USERNAME'] = 'Имя';
 $lang['PASSWORD'] = 'Пароль';
-$lang['PASSWORD_SHOW_BTN'] = 'Показывать пароли';
+$lang['PASSWORD_SHOW_BTN'] = 'Показать пароль';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'ЛС';
 $lang['AUTHOR'] = 'Автор';
