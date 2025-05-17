@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'тек супер әкімшілері үшін
 
 $lang['LOGS'] = 'Тақырып тарихы';
 $lang['FORUM_LOGS'] = 'Тарих Форум';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'дизайнер';
 
 $lang['LAST_IP'] = 'Өткен IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'тоқтатты';
 $lang['DL_UPD'] = 'UPD:';
 $lang['DL_INFO'] = 'ағымдағы session</b></i> үшін деректер <i><b>only көрсетеді';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin кейінгі алғашқы';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'тыйым пайдаланушы аты сәт�
 $lang['DISALLOWED_ALREADY'] = 'Сіз енгізген аты тыйым мүмкін емес. Ол, не өзінде сөз цензор тізімінде бар, немесе сәйкес пайдаланушы аты бар, тізімде бар.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Көрсетуді доғару аты Әкімшілігінің оралу үшін %sHere%s басыңыз';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'нұсқа ақпарат';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'сайт картасы басқару';
 $lang['SITEMAP_CREATED'] = 'Сайт картасы құрылды';
 $lang['SITEMAP_AVAILABLE'] = 'және қол жетімді болып табылады';
 $lang['SITEMAP_NOT_CREATED'] = 'Сайт картасы әлі құрылды';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'іздеу жүйесі туралы хабарлама';
-$lang['SITEMAP_SENT'] = 'аяқталды жіберу';
-$lang['SITEMAP_ERROR'] = 'қате жіберу';
 $lang['SITEMAP_OPTIONS'] = 'Опциялар';
 $lang['SITEMAP_CREATE'] = 'Жасау / Сайт картасы жаңарту';
-$lang['SITEMAP_NOTIFY'] = 'Сайт картасы жаңа нұсқасы туралы хабарлау іздеу жүйелері';
 $lang['SITEMAP_WHAT_NEXT'] = 'Әрі қарай не істеу керек?';
 $lang['SITEMAP_GOOGLE_1'] = 'Сіздің Google тіркелгісін пайдаланып <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> сіздің сайты тіркеңіз.';
 $lang['SITEMAP_GOOGLE_2'] = 'Сіз тіркелген сайттың <a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a>.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Егер сіз робот емес екенін тексеріңіз';
 $lang['CAPTCHA_WRONG'] = 'Сіз робот емес екенін растай алмады,';
-$lang['CAPTCHA_SETTINGS'] = 'Егер сіз әлдеқашан кілттер жоқ, толық configured</h2><p>If <h2>ReCaptcha, сіз <a href="https://www.google.com/recaptcha/admin">https оны істеуге болады жатқан жоқ: сіз кілттерді генерациялау //www.google.com/recaptcha/admin</a>.<br />After, сіз файл кітапхана / конфигурациялық оларды қою қажет .php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
