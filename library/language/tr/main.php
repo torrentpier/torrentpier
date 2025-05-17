@@ -1608,7 +1608,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Sadece Süper yöneticiler için bu seçeneği'
 
 $lang['LOGS'] = 'Konu tarih';
 $lang['FORUM_LOGS'] = 'Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Tasarımcı';
 
 $lang['LAST_IP'] = 'Son IP:';
@@ -1883,6 +1883,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'durdu';
 $lang['DL_UPD'] = 'UDP: ';
 $lang['DL_INFO'] = 'veri <i><b>only geçerli session</b></i> için gösterir';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin ilk yazı';
@@ -2325,14 +2328,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'İzin verilmeyen kullanıcı adı başarıyla ek
 $lang['DISALLOWED_ALREADY'] = 'Girdiğiniz adı izin verilmeyen olabilir. Ya zaten listede var, kelime sansür listesinde var, ya da eşleşen bir kullanıcı adı mevcut.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s Kullanıcı adı Yönetim izin Vermemek için geri dönmek için tıklayın';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Sürüm Bilgileri';
@@ -3003,12 +2998,8 @@ $lang['SITEMAP_ADMIN'] = 'Site yönetmek';
 $lang['SITEMAP_CREATED'] = 'Site haritası oluşturdu';
 $lang['SITEMAP_AVAILABLE'] = 'mevcut ve de';
 $lang['SITEMAP_NOT_CREATED'] = 'Site henüz oluşturulmadı';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Arama motoru bildirim';
-$lang['SITEMAP_SENT'] = 'gönderim tamamlandı';
-$lang['SITEMAP_ERROR'] = 'gönderme hatası';
 $lang['SITEMAP_OPTIONS'] = 'Seçenekleri';
 $lang['SITEMAP_CREATE'] = 'Oluştur / site haritası güncelleme';
-$lang['SITEMAP_NOTIFY'] = 'Site yeni versiyonu hakkında arama motorlarına bildirmek';
 $lang['SITEMAP_WHAT_NEXT'] = 'Şimdi ne yapalım?';
 $lang['SITEMAP_GOOGLE_1'] = '<a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> Google hesabınızı kullanarak siteye kayıt.';
 $lang['SITEMAP_GOOGLE_2'] = 'Sitenin <a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> kayıtlı.';
@@ -3090,7 +3081,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Bir robot olmadığını kontrol edin';
 $lang['CAPTCHA_WRONG'] = 'Bir robot olmadığını onaylamak değil mi';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha zaten anahtarları oluşturulur mi tam configured</h2><p>if olmak değil, <a href="https://www.google.com/recaptcha/admin">https://www yapabilirsin.google.com/tuttum/admin</a>.Anahtarları oluşturmak <br />After, dosya Kütüphanesi/config onları koymak gerekir.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
