@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2024 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -25,7 +25,7 @@ $lang['POSTS_SHORT'] = 'Vəzifə';
 $lang['POSTED'] = 'Göndərilib';
 $lang['USERNAME'] = 'İstifadəçi adı';
 $lang['PASSWORD'] = 'Parol';
-$lang['PASSWORD_SHOW_BTN'] = 'Show password';
+$lang['PASSWORD_SHOW_BTN'] = 'Şifrəni göstər';
 $lang['EMAIL'] = 'E-poçt';
 $lang['PM'] = 'ТЧ';
 $lang['AUTHOR'] = 'Müəllif';
@@ -60,10 +60,10 @@ $lang['ENABLED'] = 'Aktiv';
 $lang['DISABLED'] = 'Qaralar';
 $lang['ERROR'] = 'Səhv';
 $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
-$lang['CLEAR'] = 'Clear';
-$lang['MOVE_TO_TOP'] = 'Move to top';
+$lang['CLEAR'] = 'Təmizlə';
+$lang['MOVE_TO_TOP'] = 'Ən yuxarı daşı';
 $lang['UNKNOWN'] = 'Məlum deyil';
-$lang['COPY_TO_CLIPBOARD'] = 'Copy to clipboard';
+$lang['COPY_TO_CLIPBOARD'] = 'Panoya surəti';
 $lang['NO_ITEMS'] = 'There seems to be no data here...';
 $lang['PLEASE_TRY_AGAIN'] = 'Please try again after few seconds...';
 
