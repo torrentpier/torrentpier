@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Pilihan ini hanya untuk super admin';
 
 $lang['LOGS'] = 'Topik sejarah';
 $lang['FORUM_LOGS'] = 'Sejarah Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Desainer';
 
 $lang['LAST_IP'] = 'Lalu IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'berhenti';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'menunjukkan data <i><b>only untuk saat ini session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin post pertama';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Yang dianulir username berhasil ditambahkan';
 $lang['DISALLOWED_ALREADY'] = 'Nama yang anda masukkan tidak bisa dianulir. Itu sudah ada dalam daftar, ada di kata menyensor daftar, atau pencocokan username hadir.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s untuk kembali ke Larang Username Administrasi';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informasi Versi';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Mengelola sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap dibuat';
 $lang['SITEMAP_AVAILABLE'] = 'dan tersedia di';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap adalah belum dibuat';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Pemberitahuan dari mesin pencari';
-$lang['SITEMAP_SENT'] = 'mengirim selesai';
-$lang['SITEMAP_ERROR'] = 'kesalahan pengiriman';
 $lang['SITEMAP_OPTIONS'] = 'Pilihan';
 $lang['SITEMAP_CREATE'] = 'Membuat / update sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Memberitahu mesin pencari tentang versi baru dari sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Apa yang harus dilakukan selanjutnya?';
 $lang['SITEMAP_GOOGLE_1'] = 'Daftarkan situs anda di <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> menggunakan akun Google anda.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> dari situs anda terdaftar.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Periksa bahwa anda bukan robot';
 $lang['CAPTCHA_WRONG'] = 'Anda tidak bisa mengkonfirmasi bahwa anda bukan robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha tidak sepenuhnya configured</h2><p>if anda belum dihasilkan tombol, anda dapat melakukannya pada <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After anda menghasilkan kunci, anda perlu untuk menempatkan mereka di file library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

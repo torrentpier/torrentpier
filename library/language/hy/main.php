@@ -1607,7 +1607,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Այս տարբերակը միայն գերծա
 
 $lang['LOGS'] = 'Պատմությունը թեմաներ';
 $lang['FORUM_LOGS'] = 'Համաժողովը Պատմության';
-$lang['AUTOCLEAN'] = 'Автоочистка:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Դիզայներ';
 
 $lang['LAST_IP'] = 'Վերջին IP-ն:';
@@ -1882,6 +1882,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'կանգ է առել';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'ցույց է տալիս տվյալներ <i><b>only ընթացիկ session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Ամրապնդել է առաջին գրառումը';
@@ -2324,14 +2327,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Неодобренные անուն էր հաջ�
 $lang['DISALLOWED_ALREADY'] = 'Մուտքագրված անունը չի կարող մերժվել է: Դա էլ արդեն կա ցուցակի, ցուցակում առկա է խոսքը գրաքննության, կամ համապատասխան օգտագործողի անունը առկա է.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Սեղմեք %sHere%s վերադարձնել արգելել Վարչակազմի Անունը';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Տեղեկություններ Տարբերակը';
@@ -3001,12 +2996,8 @@ $lang['SITEMAP_ADMIN'] = 'Վարչությունը կայքի Քարտեզ';
 $lang['SITEMAP_CREATED'] = 'Կայքի քարտեզ է ստեղծվել';
 $lang['SITEMAP_AVAILABLE'] = 'եւ հասանելի է';
 $lang['SITEMAP_NOT_CREATED'] = 'Կայքի քարտեզ դեռ չի ստեղծվել';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Ծանուցում որոնման համակարգերի';
-$lang['SITEMAP_SENT'] = 'ուղարկեք լրացված';
-$lang['SITEMAP_ERROR'] = 'սխալ է ուղարկել';
 $lang['SITEMAP_OPTIONS'] = 'Ընտրանքներ';
 $lang['SITEMAP_CREATE'] = 'Ստեղծել / թարմացնել կայքը';
-$lang['SITEMAP_NOTIFY'] = 'Տեղեկացնել որոնողական համակարգի նոր տարբերակը: կայքի';
 $lang['SITEMAP_WHAT_NEXT'] = 'Թե ինչ պետք է անել?';
 $lang['SITEMAP_GOOGLE_1'] = 'Գրանցել ձեր կայքը <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> հետ հաշվի է Google-ի.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> կայքում դուք գրանցված են ։ ';
@@ -3088,7 +3079,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Համոզվեք, որ Դուք չեք ռոբոտը';
 $lang['CAPTCHA_WRONG'] = 'Դուք չեք կարող հաստատել, որ Դուք ռոբոտը';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha լինելով configured</h2><p>if դուք չեք сгенерировал բանալիները, դուք կարող եք անել դա <a href="https://www.google.com/recaptcha/admin">https://ԳՀՀ.google-ի.սեն/рекапчу/admin</a>.<br />After դուք генерируете ստեղները, դուք պետք է տեղադրել իրենց ֆայլը Library/конфиг.PHP-ում.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

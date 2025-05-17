@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ky opsion vetëm për administratorët super';
 
 $lang['LOGS'] = 'Temë e historisë';
 $lang['FORUM_LOGS'] = 'Historia E Forumit';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Projektuesi';
 
 $lang['LAST_IP'] = 'Të fundit IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'u ndal';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'tregon të dhënat <i><b>only për aktual session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin parë pas';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'E palejueshme emrin e përdoruesit është shtua
 $lang['DISALLOWED_ALREADY'] = 'Emri që keni futur nuk mund të jenë të palejueshme. Ajo ose ekziston tashmë në listë, ekziston në fjalën censuruar listë, ose që përputhen emrin e përdoruesit është i pranishëm.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliko %sHere%s të kthehen për të Lejoj Emrin e Administratës';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Informacion';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Menaxhuar sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap krijuar';
 $lang['SITEMAP_AVAILABLE'] = 'dhe është në dispozicion në';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap nuk është krijuar ende';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Njoftimi i search engine';
-$lang['SITEMAP_SENT'] = 'dërgoni përfunduar';
-$lang['SITEMAP_ERROR'] = 'dërgimi gabim';
 $lang['SITEMAP_OPTIONS'] = 'Opsionet';
 $lang['SITEMAP_CREATE'] = 'Krijo / update sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Të njoftojë motorët e kërkimit në lidhje me version të ri të sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Çfarë duhet të bëjmë?';
 $lang['SITEMAP_GOOGLE_1'] = 'Regjistrohuni në faqen tuaj në <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> tuaj duke përdorur llogarinë Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> të faqes që ju të regjistruar.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Kontrolloni se ju nuk jeni një robot';
 $lang['CAPTCHA_WRONG'] = 'Ju nuk mund të konfirmoni se ju nuk jeni një robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nuk janë plotësisht të configured</h2><p>if ju nuk e keni tashmë të krijuara çelësat, ju mund të bëni atë në <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After ju të gjenerojë butonat, ju keni nevojë për të vënë ato në dosjen library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

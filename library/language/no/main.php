@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Dette alternativet bare for super admins';
 
 $lang['LOGS'] = 'Emnet historie';
 $lang['FORUM_LOGS'] = 'Historie Forumet';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Designer';
 
 $lang['LAST_IP'] = 'Siste IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'stoppet';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'viser data <i><b>only for gjeldende session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin første innlegg';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Den forbudt brukernavn har blitt lagt til';
 $lang['DISALLOWED_ALREADY'] = 'Navnet du har angitt, ikke kunne bli forbudt. Det enten allerede finnes i listen, finnes i word-sensurere liste, eller en tilsvarende brukernavn er til stede.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikk %sHere%s for å gå tilbake til å Nekte Brukernavn Administrasjon';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versjon Informasjon';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Administrere sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap opprettet';
 $lang['SITEMAP_AVAILABLE'] = 'og er tilgjengelig på';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap er ennå ikke opprettet';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Varsling av søkemotoren';
-$lang['SITEMAP_SENT'] = 'send fullført';
-$lang['SITEMAP_ERROR'] = 'sender feil';
 $lang['SITEMAP_OPTIONS'] = 'Valg';
 $lang['SITEMAP_CREATE'] = 'Opprette / oppdatere sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Informere søkemotorene om nye versjonen av sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Hva du skal gjøre neste?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registrer nettstedet ditt på <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> ved hjelp av Google-kontoen din.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> av nettstedet du registrerte.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Sjekk at du ikke er en robot';
 $lang['CAPTCHA_WRONG'] = 'Du kunne ikke bekrefte at du ikke er en robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ikke er fullt ut configured</h2><p>if du ikke allerede har generert tastene, kan du gjøre det på <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After du generere nøkler, må du sette dem på fil-bibliotek/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

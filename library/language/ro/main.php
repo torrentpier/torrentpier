@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Această opțiune doar pentru super-administrat
 
 $lang['LOGS'] = 'Subiect istorie';
 $lang['FORUM_LOGS'] = 'Istoria Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Designer';
 
 $lang['LAST_IP'] = 'Ultimul IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'oprit';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'prezinta date <i><b>only pentru curent session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin primul post';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'La nepermis de utilizator a fost adăugat cu suc
 $lang['DISALLOWED_ALREADY'] = 'Numele introdus nu poate fi anulat. Fie există deja în listă, există în cuvântul cenzura lista, sau o potrivire de nume de utilizator este prezent.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Faceți clic pe %sHere%s să se întoarcă pentru a Interzice numele de Utilizator de Administrare';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informațiile De Versiune';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Gestiona sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap l-a creat';
 $lang['SITEMAP_AVAILABLE'] = 'și este disponibil în';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap-ul nu este creat încă';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Notificare de motorul de căutare';
-$lang['SITEMAP_SENT'] = 'trimite completat';
-$lang['SITEMAP_ERROR'] = 'trimiterea de eroare';
 $lang['SITEMAP_OPTIONS'] = 'Opțiuni';
 $lang['SITEMAP_CREATE'] = 'Creare / actualizare sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Anunta motoarele de căutare despre noua versiune de sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Ce să faci în continuare?';
 $lang['SITEMAP_GOOGLE_1'] = 'Iti inscrii site-ul la <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> folosind contul Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> de site-ați înregistrat.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Verificați că nu sunt un robot';
 $lang['CAPTCHA_WRONG'] = 'Tu nu a putut confirma că nu sunt un robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha a nu fi pe deplin configured</h2><p>if nu te-ai generat deja cheile, o poti face pe <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After genera cheile, trebuie să le pună la fișierul bibliotecă/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

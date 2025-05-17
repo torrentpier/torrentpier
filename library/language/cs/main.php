@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Tato možnost pouze pro super admini';
 
 $lang['LOGS'] = 'Téma historie';
 $lang['FORUM_LOGS'] = 'Historie Fóra';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Návrhář';
 
 $lang['LAST_IP'] = 'Poslední IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'zastavil';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'zobrazuje údaje <i><b>only pro aktuální session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin první příspěvek';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Nepovolené uživatelské jméno byly úspěšn�
 $lang['DISALLOWED_ALREADY'] = 'Název jste zadali, nemůže být zakázáno. To buď již v seznamu existuje, existuje v slovo cenzor seznam, nebo odpovídající uživatelské jméno je k dispozici.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikněte %sHere%s vrátit Zakázat uživatelské Jméno Podání';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informace O Verzi';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Správa sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap vytvořené';
 $lang['SITEMAP_AVAILABLE'] = 'a je k dispozici na';
 $lang['SITEMAP_NOT_CREATED'] = 'Mapa ještě není vytvořen';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Oznámení vyhledávače';
-$lang['SITEMAP_SENT'] = 'poslat dokončena';
-$lang['SITEMAP_ERROR'] = 'chyba při odesílání';
 $lang['SITEMAP_OPTIONS'] = 'Možnosti';
 $lang['SITEMAP_CREATE'] = 'Vytvořit / aktualizovat sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Informovat vyhledávače o nové verzi sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Co dělat dál?';
 $lang['SITEMAP_GOOGLE_1'] = 'Zaregistrujte svůj web na <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> pomocí svého účtu Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> webu jste se zaregistrovali.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Zkontrolujte, že nejste robot';
 $lang['CAPTCHA_WRONG'] = 'Můžete potvrdit, že nejste robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha není plně configured</h2><p>if jste již vygenerované klíče, můžete to udělat na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After generování klíče, musíte dát je v souboru knihovny/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

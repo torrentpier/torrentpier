@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'เลือกตัวเลือกนี�
 
 $lang['LOGS'] = 'เรื่องประวัติศาสตร์';
 $lang['FORUM_LOGS'] = 'ประวัติศาสตร์ชุ';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'ดีไซเนอร์';
 
 $lang['LAST_IP'] = 'สุดท้ายเลขไอพี:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'หยุด';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'แสดงข้อมูล <i><b>only สำหรับปัจจุบัน session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'เข็มรโพสครั้งแรก';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'ที่ไม่อนุญาตให้ค
 $lang['DISALLOWED_ALREADY'] = 'ชื่อที่คุณป้อนมาอาจจะไม่ต้องไม่อนุญาตให้คุณได้ มันเหมือนกันแล้วมีอยู่ในรายชื่ออยู่ในคำ censor รายชื่อหรือตรงกับชื่อผู้ใช้อยู่ด้วย';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'คลิก %sHere%s จะกลับมาออนชื่อผู้ใช้ไม่อนุญาตผู้บริหาร';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'ข้อมูลของรุ่น';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'จัดการ sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap กสร้างขึ้น';
 $lang['SITEMAP_AVAILABLE'] = 'และตอนที่มีอยู่';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap ตอนนี้ยังไม่ได้ถูกสร้าง';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'การแจ้งให้ทราบของเครื่องมือสำหรับค้นหา name';
-$lang['SITEMAP_SENT'] = 'ส่งเสร็จสมบูรณ์';
-$lang['SITEMAP_ERROR'] = 'กำลังส่งข้อผิดพลาด';
 $lang['SITEMAP_OPTIONS'] = 'ตัวเลือก';
 $lang['SITEMAP_CREATE'] = 'หรับสร้าง/ปรับปรุงที่ sitemap';
-$lang['SITEMAP_NOTIFY'] = 'แจ้งให้ทราบการค้นหาเครื่องยนต์มันเรื่องใหม่เวอร์ชั่นของ sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'ต้องทำอะไรต่อ?';
 $lang['SITEMAP_GOOGLE_1'] = 'ลงทะเบียนของคุณเว็บไซต์ที่ <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> ใช้ของบัญชีผู้ใช้ของกูเกิ้ล.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> ของเว็บไซต์คุณจดทะเบียน';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'ตรวจสอบว่าคุณไม่ใช่หุ่นยนต์';
 $lang['CAPTCHA_WRONG'] = 'คุณไม่สามารถยืนยันว่าคุณไม่ใช่หุ่นยนต์';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha การไม่เต็ม configured</h2><p>if คุณยังไม่ได้อยู่แล้วที่ถูกสร้างกุญแจคุณสามารถทำมัน <a href="https://www.google.com/recaptcha/admin">https://qshortcut นเรียกว่า"กูเกิ้ล"com/recaptcha/admin</a> น<br />After คุณสร้างกุญแจคุณต้องการให้พวกเขาที่โรงแฟ้มสมุด/config นphp น</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

@@ -25,7 +25,7 @@ $lang['POSTS_SHORT'] = 'Сообщ.';
 $lang['POSTED'] = 'Добавлено';
 $lang['USERNAME'] = 'Имя';
 $lang['PASSWORD'] = 'Пароль';
-$lang['PASSWORD_SHOW_BTN'] = 'Показывать пароли';
+$lang['PASSWORD_SHOW_BTN'] = 'Показать пароль';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'ЛС';
 $lang['AUTHOR'] = 'Автор';
@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Эта опция доступна только
 
 $lang['LOGS'] = 'История темы';
 $lang['FORUM_LOGS'] = 'История форума';
-$lang['AUTOCLEAN'] = 'Автоочистка';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Конструктор';
 
 $lang['LAST_IP'] = 'Последний IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'Остановил Скачивание/Раздачу';
 $lang['DL_UPD'] = 'Подключен: ';
 $lang['DL_INFO'] = 'показаны данные <i><b>только за текущую сессию</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Закрепить первый пост';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Запрещенное имя пользоват
 $lang['DISALLOWED_ALREADY'] = 'Имя, которое вы пытаетесь запретить, либо уже запрещено, либо есть в списке нецензурных слов, либо существует пользователь с подходящим именем';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sВернуться к управлению запрещенными именами%s';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'Проверка целостности файлов TorrentPier завершилась успешно!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Некоторые файлы TorrentPier не прошли проверку целостности!';
-$lang['INTEGRITY_CHECKED'] = 'Общее количество проверенных файлов: %s, из которых прошли проверку целостности: %s.';
-$lang['INTEGRITY_LAST_CHECK'] = 'Последняя проверка: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Восстановить поврежденные файлы при следующей проверке целостности?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Поврежденные файлы будут восстановлены при следующей проверке целостности!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Информация о версии TorrentPier';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Управление картой сайта (sitemap)
 $lang['SITEMAP_CREATED'] = 'Файл sitemap создан';
 $lang['SITEMAP_AVAILABLE'] = 'и доступен по адресу';
 $lang['SITEMAP_NOT_CREATED'] = 'Файл sitemap еще не создан';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Уведомление поисковой системы';
-$lang['SITEMAP_SENT'] = 'отправка завершена';
-$lang['SITEMAP_ERROR'] = 'ошибка отправки';
 $lang['SITEMAP_OPTIONS'] = 'Опции';
 $lang['SITEMAP_CREATE'] = 'Создать / обновить файл sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Уведомить поисковые системы о наличии новой версии файла sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Что сделать дальше?';
 $lang['SITEMAP_GOOGLE_1'] = 'Зарегистрируйте ваш сайт в <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> с использованием вашей учетной записи Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Добавьте файл sitemap</a> зарегистрированного вами сайта.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Проверка, что вы не робот';
 $lang['CAPTCHA_WRONG'] = 'Вы не смогли подтвердить, что вы не робот';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha настроена не полностью</h2><p>Если вы еще не сгенерировали ключи, вы можете это сделать на странице <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />После того, как вы сгенерируете ключи, нужно прописать их в файл library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Адрес для ответных писем';

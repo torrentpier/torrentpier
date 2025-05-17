@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ovo jedina opcija za super colorada';
 
 $lang['LOGS'] = 'Tema istoriju';
 $lang['FORUM_LOGS'] = 'Povijest Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Dizajner';
 
 $lang['LAST_IP'] = 'Prošle IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'prestao';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'pokazuje podatke <i><b>only za trenutni session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin prvi položaj';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'U dozvoljeno korisničko ime je dodato uspješno
 $lang['DISALLOWED_ALREADY'] = 'Ime ti je ušao nije mogao biti dozvoljeno. Ni već postoji na listi, postoji u riječ cenzora spisku, ili iste korisničko ime je poklon.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s da se vrati u Disallow korisničko ime Uprave';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Verziju Informacije';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Snaći mapa sajta';
 $lang['SITEMAP_CREATED'] = 'Mapa sajta stvorio';
 $lang['SITEMAP_AVAILABLE'] = 'i dostupna je na';
 $lang['SITEMAP_NOT_CREATED'] = 'Mapa sajta nije još stvorio';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Obavijest o tražilice';
-$lang['SITEMAP_SENT'] = 'pošalji završio';
-$lang['SITEMAP_ERROR'] = 'šaljem greška';
 $lang['SITEMAP_OPTIONS'] = 'Opcija';
 $lang['SITEMAP_CREATE'] = 'Stvoriti / ažurirati mapa sajta';
-$lang['SITEMAP_NOTIFY'] = 'Obavesti pretraživača o nova verzija mapa sajta';
 $lang['SITEMAP_WHAT_NEXT'] = 'Šta sledeće da uradim?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registra tvog sajta na <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> koristeći Google je tvoj račun.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> lokacije ste registrirani.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Provjeri da vi niste robot';
 $lang['CAPTCHA_WRONG'] = 'Ti nije mogao potvrditi da vi niste robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bude u potpunosti configured</h2><p>if već nisi napravio ključeve, možeš ti to na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After si stvaraju ključeve, moraš ih staviti u dosije biblioteci/putanju.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

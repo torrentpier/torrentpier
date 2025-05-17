@@ -1606,7 +1606,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Този вариант само за супе�
 
 $lang['LOGS'] = 'История на темите';
 $lang['FORUM_LOGS'] = 'Форум История';
-$lang['AUTOCLEAN'] = 'Автоочистка:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Дизайнер';
 
 $lang['LAST_IP'] = 'Последният IP:';
@@ -1881,6 +1881,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'спря';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'показва данните <i><b>only за текущата session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Фиксирай първия пост';
@@ -2323,14 +2326,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Неодобренные потребителс�
 $lang['DISALLOWED_ALREADY'] = 'Разрешение за ползване (името не може да се отрече. Това вече съществува в списъка, в списъка присъства думата цензурата, или който да съответства на името на потребителя е налице.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Кликнете %sHere%s върнете се забрани на Администрацията потребителско Име';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Информация За Версията';
@@ -3000,12 +2995,8 @@ $lang['SITEMAP_ADMIN'] = 'Управление на Карта на сайта';
 $lang['SITEMAP_CREATED'] = 'Карта на сайта създаден';
 $lang['SITEMAP_AVAILABLE'] = 'и е на разположение на';
 $lang['SITEMAP_NOT_CREATED'] = 'Карта на сайта все още не е създаден';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Сигнал за търсачки';
-$lang['SITEMAP_SENT'] = 'изпратете склад';
-$lang['SITEMAP_ERROR'] = 'грешка при изпращане';
 $lang['SITEMAP_OPTIONS'] = 'Опции';
 $lang['SITEMAP_CREATE'] = 'Създаване / обновяване на сайта';
-$lang['SITEMAP_NOTIFY'] = 'Да уведомите търсачките за новата версия на сайта';
 $lang['SITEMAP_WHAT_NEXT'] = 'Какво да направя?';
 $lang['SITEMAP_GOOGLE_1'] = 'Регистрация на уеб сайт в <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> с профила си в Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> сайт сте регистрирани.';
@@ -3087,7 +3078,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Уверете се, че не Сте робот';
 $lang['CAPTCHA_WRONG'] = 'Вие не може да потвърди, че не Сте робот';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha тъй като не е напълно configured</h2><p>if все още не сте сгенерировал ключове, вие можете да направите това на <a href="https://www.google.com/recaptcha/admin">https://ОСП.google.com/рекапчу/admin</a>.<br />After вие генерируете ключовете, трябва да ги сложите във файл Library/конфигур.в PHP.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

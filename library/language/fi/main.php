@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Tämä vaihtoehto vain super ylläpitäjät';
 
 $lang['LOGS'] = 'Aihe historia';
 $lang['FORUM_LOGS'] = 'Historia Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Suunnittelija';
 
 $lang['LAST_IP'] = 'Viimeinen IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'pysähtyi';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'näyttää tiedot <i><b>only nykyisen session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin-koodin ensimmäinen viesti';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Sen kieltänyt käyttäjätunnus on lisätty onn
 $lang['DISALLOWED_ALREADY'] = 'Antamasi nimi voisi olla kielletty. Se joko on jo olemassa lista, on sana sensuroida lista tai vastaava käyttäjätunnus on läsnä.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klikkaa %sHere%s palata Estää Käyttäjätunnus Hallinto';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Tiedot';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Hallita sivukartta';
 $lang['SITEMAP_CREATED'] = 'Sivukartta on luotu';
 $lang['SITEMAP_AVAILABLE'] = 'ja on saatavilla osoitteessa';
 $lang['SITEMAP_NOT_CREATED'] = 'Sivukartta ei ole vielä luotu';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Ilmoituksen hakukone';
-$lang['SITEMAP_SENT'] = 'lähetä valmis';
-$lang['SITEMAP_ERROR'] = 'lähettämällä virhe';
 $lang['SITEMAP_OPTIONS'] = 'Vaihtoehtoja';
 $lang['SITEMAP_CREATE'] = 'Luo / päivittää sivukartta';
-$lang['SITEMAP_NOTIFY'] = 'Ilmoittaa hakukoneille noin uusi versio sivukartta';
 $lang['SITEMAP_WHAT_NEXT'] = 'Mitä tehdä seuraavaksi?';
 $lang['SITEMAP_GOOGLE_1'] = 'Rekisteröidy sivuston milloin <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> Google-tilisi avulla.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> sivuston olet rekisteröitynyt.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Tarkista, että et ole robotti';
 $lang['CAPTCHA_WRONG'] = 'Et voi vahvistaa, että et ole robotti';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täysin configured</h2><p>if et ole jo luonut avaimet, voit tehdä sen <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After voit luoda avaimet, sinun täytyy laittaa ne samaan tiedostoon library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

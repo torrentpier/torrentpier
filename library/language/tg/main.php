@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ин хосият танҳо барои admins 
 
 $lang['LOGS'] = 'Мавзӯъ таърих';
 $lang['FORUM_LOGS'] = 'Таърихи Форум';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'лоиҳакаш';
 
 $lang['LAST_IP'] = 'Last IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'қатъ';
 $lang['DL_UPD'] = 'Фосилаи:';
 $lang['DL_INFO'] = 'нишон <i><b>only маълумот барои session</b></i> ҷорӣ';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin аввали баъди';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Ба номи корбарӣ ва disallowed б�
 $lang['DISALLOWED_ALREADY'] = 'Номи шумо ворид карда наметавонистанд disallowed шавад. Ин ё аллакай дар рӯйхат мавҷуд аст, ки дар каломи рӯйхати сензор вуҷуд надорад, ё бояд як номи корбарӣ алоқаманде мазкур аст.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sHere%s ангушт занед барои баргаштан ба иозат Маъмурияти Логин';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Маълумот Version';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Идоракунии талаф дод';
 $lang['SITEMAP_CREATED'] = 'Харитаи офаридааст';
 $lang['SITEMAP_AVAILABLE'] = 'ва дар дастрас аст';
 $lang['SITEMAP_NOT_CREATED'] = 'Харитаи ҳанӯз офарида нашудааст';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Огоҳинома аз муҳаррики ҷустуҷӯ';
-$lang['SITEMAP_SENT'] = 'ирсол ба итмом';
-$lang['SITEMAP_ERROR'] = 'хатои фиристодани';
 $lang['SITEMAP_OPTIONS'] = 'Имконот';
 $lang['SITEMAP_CREATE'] = 'Эҷоди / навсозии талаф дод';
-$lang['SITEMAP_NOTIFY'] = 'Огоҳ системаҳои ҷустуҷӯӣ дар бораи нави талаф дод';
 $lang['SITEMAP_WHAT_NEXT'] = 'Чӣ бояд кард навбатӣ?';
 $lang['SITEMAP_GOOGLE_1'] = 'Ба Реестри сомонаи Шумо дар <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> истифодаи ҳисоби Google шумо.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> сайти шумо ба қайд гирифта.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Санҷед, ки шумо як робот не';
 $lang['CAPTCHA_WRONG'] = 'Шумо карда наметавонистанд тасдиқ мекунанд, ки шумо ҳастанд робот не';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha будан нест, пурра configured</h2><p>If шумо аллакай тавлидшуда калидҳои нашуда бошад, шумо метавонед онро дар <a href="https://www.google.com/recaptcha/admin">https кор: //www.google.com/recaptcha/admin</a>.<br />After шумо тавлид калидҳои, ба шумо лозим аст, ки онҳоро дар китобхонаи файл / Танзимоти .php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

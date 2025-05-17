@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'See võimalus vaid super administraatoritel';
 
 $lang['LOGS'] = 'Teema ajalugu';
 $lang['FORUM_LOGS'] = 'Foorumi Ajalugu';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Disainer';
 
 $lang['LAST_IP'] = 'Viimati IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'lõpetanud';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'näitab andmeid <i><b>only jooksva session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin-koodi esimene postitus';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Selle heaks kiitmata kasutajanimi on edukalt lis
 $lang['DISALLOWED_ALREADY'] = 'Teie poolt sisestatud nimele ei saa välistada. See kas on juba olemas loendis olemas, word censor nimekirja, või sobitamine kasutajanimi on olemas.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klõpsake %sHere%s tagasi Keelata Kasutajanime Haldus';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versiooni Informatsioon';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Halda sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap loodud';
 $lang['SITEMAP_AVAILABLE'] = 'ja on kättesaadav aadressil';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap pole veel loodud';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Teate otsingumootor';
-$lang['SITEMAP_SENT'] = 'saatmiseks valmis';
-$lang['SITEMAP_ERROR'] = 'saatmine viga';
 $lang['SITEMAP_OPTIONS'] = 'Valikud';
 $lang['SITEMAP_CREATE'] = 'Koostada / uuendada sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Teatama hakukoneita uus versioon sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Mida teha edasi?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registreeri oma sait kell <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> kasutades oma Google \' i konto.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> saidi te registreeritud.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Kontrollige, et te ei ole robot';
 $lang['CAPTCHA_WRONG'] = 'Sa ei suutnud kinnitada, et sa ei ole robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täielikult configured</h2><p>if te pole juba genereeritud võtmete abil saate teha seda <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After te luua võtmed, teil on vaja panna neid faili library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Deze optie is alleen voor super admins';
 
 $lang['LOGS'] = 'Onderwerp geschiedenis';
 $lang['FORUM_LOGS'] = 'Geschiedenis Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Ontwerper';
 
 $lang['LAST_IP'] = 'Laatste IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'gestopt';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'toont gegevens <i><b>only voor de huidige session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin eerste post';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'De verworpen gebruikersnaam is succesvol toegevo
 $lang['DISALLOWED_ALREADY'] = 'De naam die u hebt ingevoerd kan niet worden verworpen. Het bestaat al in de lijst, bestaat in het woord censuur lijst, of een bijpassende gebruikersnaam is aanwezig.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik op %sHere%s om terug te keren naar het Verbieden van Gebruikersnaam Administratie';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versie-Informatie';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Beheren sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap gemaakt';
 $lang['SITEMAP_AVAILABLE'] = 'en is verkrijgbaar bij';
 $lang['SITEMAP_NOT_CREATED'] = 'Een Sitemap is nog niet gemaakt';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'De kennisgeving van de zoekmachine';
-$lang['SITEMAP_SENT'] = 'verzenden voltooid';
-$lang['SITEMAP_ERROR'] = 'verzenden fout';
 $lang['SITEMAP_OPTIONS'] = 'Opties';
 $lang['SITEMAP_CREATE'] = 'Maken / actualiseren van de sitemap';
-$lang['SITEMAP_NOTIFY'] = 'De hoogte zoekmachines over de nieuwe versie van de sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Wat te doen?';
 $lang['SITEMAP_GOOGLE_1'] = 'Het registreren van uw site bij <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> met uw Google-account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> van de site die u geregistreerd.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Controleren dat u geen robot';
 $lang['CAPTCHA_WRONG'] = 'Je kon niet bevestigen dat u geen robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha niet volledig configured</h2><p>if u nog niet al zijn gegenereerd, de toetsen, je kunt het doen op <a href="https://www.google.com/recaptcha/admin">https://www.van google.com/recaptcha/admin</a>.<br />After u het genereren van de sleutels moet je ze in de file library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
