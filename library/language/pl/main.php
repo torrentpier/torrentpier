@@ -1607,7 +1607,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ta opcja jest tylko dla super adminów';
 
 $lang['LOGS'] = 'Historia tematu';
 $lang['FORUM_LOGS'] = 'Forum Historii';
-$lang['AUTOCLEAN'] = 'Automatyczne czyszczenie:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Projektant';
 
 $lang['LAST_IP'] = 'Ostatni IP:';
@@ -1882,6 +1882,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'zatrzymał się';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'pokazuje dane <i><b>only dla bieżącego session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Zamocować pierwszy post';
@@ -2324,14 +2327,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Nie dopuszczone nazwa użytkownika została pomy
 $lang['DISALLOWED_ALREADY'] = 'Wprowadzona nazwa nie może być odrzucona. To albo już istnieje na liście, w liście występuje słowo cenzor, lub odpowiednie nazwy użytkownika obecny.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliknij %sHere%s zwrócić zakazać Administracji Nazwę użytkownika';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informacje O Wersji';
@@ -3001,12 +2996,8 @@ $lang['SITEMAP_ADMIN'] = 'Zarządzanie Mapa strony';
 $lang['SITEMAP_CREATED'] = 'Mapa strony stworzony';
 $lang['SITEMAP_AVAILABLE'] = 'i jest dostępna na';
 $lang['SITEMAP_NOT_CREATED'] = 'Mapa strony jeszcze nie powstała';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Powiadamianie wyszukiwarek';
-$lang['SITEMAP_SENT'] = 'prześlij wypełniony';
-$lang['SITEMAP_ERROR'] = 'błąd wysyłania';
 $lang['SITEMAP_OPTIONS'] = 'Opcje';
 $lang['SITEMAP_CREATE'] = 'Tworzenie / aktualizacja serwisu';
-$lang['SITEMAP_NOTIFY'] = 'Poinformować wyszukiwarki o nowej wersji serwisu';
 $lang['SITEMAP_WHAT_NEXT'] = 'Co robić dalej?';
 $lang['SITEMAP_GOOGLE_1'] = 'Zarejestrować swoją stronę w <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> za pomocą konta Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> strony są zarejestrowane.';
@@ -3088,7 +3079,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Upewnij się, że nie Jesteś robotem';
 $lang['CAPTCHA_WRONG'] = 'Czy mógłbyś potwierdzić, że nie Jesteś robotem';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie będąc w pełni configured</h2><p>if jeszcze nie wygenerowało klucze, możesz zrobić to na <a href="https://www.google.com/recaptcha/admin">https://GSP.google.com/рекапчу/admin</a>.<br />After można wygeneruje klucze, musisz umieścić je w pliku Library/konfig.w PHP.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
