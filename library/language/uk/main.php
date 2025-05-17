@@ -277,8 +277,8 @@ $lang['SPOILER_HEAD'] = 'прихований текст';
 $lang['SPOILER_CLOSE'] = 'згорнути';
 $lang['PLAY_ON_CURPAGE'] = 'Почати відтворення на цій сторінці';
 
-$lang['EDITED_TIME_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
-$lang['EDITED_TIMES_TOTAL'] = 'Last edited by <b>%s</b> on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
+$lang['EDITED_TIME_TOTAL'] = 'Востаннє змінено %s (%s); всього редагувань: %d'; // Last edited by me on 12 Oct 2001; edited 1 time in total
+$lang['EDITED_TIMES_TOTAL'] = 'Востаннє змінено %s (%s); всього редагувань: %d'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
 $lang['LOCK_TOPIC'] = 'Закрити тему';
 $lang['UNLOCK_TOPIC'] = 'Розблокувати тему';
@@ -694,7 +694,7 @@ $lang['ORDER'] = 'Сортувати';
 $lang['THANK_TOPIC'] = 'Проголосувати за цю тему';
 $lang['THANKS_GRATITUDE'] = 'Ми цінуємо вашу вдячність';
 $lang['LAST_LIKES'] = 'Останній голос';
-$lang['LIKE_OWN_POST'] = 'Ви не можете голосувати за свою тему';
+$lang['LIKE_OWN_POST'] = 'Ви не можете проголосувати за власну публікацію.';
 $lang['NO_LIKES'] = 'Ще ніхто не проголосував';
 $lang['LIKE_ALREADY'] = 'Ви вже проголосували за цю тему';
 
@@ -990,10 +990,10 @@ $lang['COUNTRY'] = 'Країна';
 $lang['SET_OWN_COUNTRY'] = 'Вказати свою країну (вручну)';
 $lang['COUNTRIES'] = [
     0 => 'Не вказано',
-    'AD' => 'Andorra',
-    'AE' => 'United Arab Emirates',
-    'AF' => 'Afghanistan',
-    'AG' => 'Antigua and Barbuda',
+    'AD' => 'Андора',
+    'AE' => 'Об\'єднані Арабські Емірати',
+    'AF' => 'Афганістан',
+    'AG' => 'Антиґуа і Барбуда',
     'AI' => 'Anguilla',
     'AL' => 'Албанія',
     'AM' => 'Вірменія',
@@ -1370,12 +1370,12 @@ $lang['BT_REG_FAIL'] = 'Не вдалося зареєструвати торе�
 $lang['BT_REG_FAIL_SAME_HASH'] = 'Інший торрент з таким же info_hash вже <a href="%s"><b>зареєстрований</b></a>';
 $lang['BT_V1_ONLY_DISALLOWED'] = 'v1-only torrents have been disabled by the administrator at the moment, allowed: v2 and hybrids';
 $lang['BT_V2_ONLY_DISALLOWED'] = 'v2-only torrents have been disabled by the administrator at the moment, allowed: v1 and hybrids';
-$lang['BT_FLIST'] = 'Files list';
+$lang['BT_FLIST'] = 'Список файлів';
 $lang['BT_FLIST_LIMIT'] = 'Tracker settings do not allow to process lists with more than %d files. Current number is: %d';
 $lang['BT_FLIST_BTMR_HASH'] = 'BTMR Hash';
 $lang['BT_FLIST_BTMR_NOTICE'] = 'BitTorrent Merkle Root is a hash of a file embedded in torrents with BitTorrent v2 support, tracker users can extract, calculate them, also download deduplicated torrents using desktop tools such as <a href="%s" target="_blank" referrerpolicy="origin">Torrent Merkle Root Reader</a>';
 $lang['BT_FLIST_CREATION_DATE'] = 'Дата створення';
-$lang['BT_IS_PRIVATE'] = 'Private torrent';
+$lang['BT_IS_PRIVATE'] = 'Приватний торрент';
 $lang['BT_FLIST_FILE_PATH'] = 'Path (%s)';
 $lang['BT_FLIST_LINK_TITLE'] = 'File hashes | .torrent meta-info';
 $lang['BT_FLIST_ANNOUNCERS_LIST'] = 'Announcers list';
@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ця опція доступна тільки �
 
 $lang['LOGS'] = 'Історія теми';
 $lang['FORUM_LOGS'] = 'Історія форуму';
-$lang['AUTOCLEAN'] = 'Автоочищення';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Дизайнер';
 
 $lang['LAST_IP'] = 'Остання IP:';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'зупинено';
 $lang['DL_UPD'] = 'Підключений: ';
 $lang['DL_INFO'] = 'показані дані <i><b>тільки за поточну сесію</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Закріпити перший пост';
@@ -2321,14 +2324,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Заборонене ім\'я користува
 $lang['DISALLOWED_ALREADY'] = 'Ім\'я, яке Ви намагаєтеся заборонити вже заборонено, або є в списку нецензурних слів, або існує користувач з відповідним ім\'ям.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sПовернутися до керування забороненими іменами%s';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Інформація про версію';
@@ -2997,12 +2992,8 @@ $lang['SITEMAP_ADMIN'] = 'Керування картою сайту (sitemap)';
 $lang['SITEMAP_CREATED'] = 'Файл sitemap створений';
 $lang['SITEMAP_AVAILABLE'] = 'і доступний за адресою';
 $lang['SITEMAP_NOT_CREATED'] = 'Файл sitemap ще не створено';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Сповіщення пошукової системи';
-$lang['SITEMAP_SENT'] = 'надсилання завершено';
-$lang['SITEMAP_ERROR'] = 'помилка надсилання';
 $lang['SITEMAP_OPTIONS'] = 'Опції';
 $lang['SITEMAP_CREATE'] = 'Створити / оновити файл sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Повідомити пошукові системи про наявність нової версії файлу sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Що робити далі?';
 $lang['SITEMAP_GOOGLE_1'] = 'Зареєструйте Ваш сайт на <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> з використанням Вашого облікового запису Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Додати файл sitemap</a> зареєстрованого Вами сайту.';
@@ -3084,7 +3075,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Перевірка, що Ви не робот';
 $lang['CAPTCHA_WRONG'] = 'Ви не змогли підтвердити, що Ви не робот';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha налаштована не повністю</h2><p>Якщо Ви ще не згенерували ключі, можете це зробити на сторінці <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />Після того, як Ви згенеруєте ключі, потрібно прописати їх у файл library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Відповісти';
