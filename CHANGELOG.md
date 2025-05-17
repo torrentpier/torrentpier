@@ -2,6 +2,17 @@
 
 > [!NOTE]
 > To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
+## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
+
+### 🈳 New translations
+
+- New Crowdin updates ([#1910](https://github.com/torrentpier/torrentpier/pull/1910)) - ([c40aad2](https://github.com/torrentpier/torrentpier/commit/c40aad20ad865849d3088498f1ba95a5fb0a0621))
+- New Crowdin updates ([#1907](https://github.com/torrentpier/torrentpier/pull/1907)) - ([999ae1e](https://github.com/torrentpier/torrentpier/commit/999ae1eff9f3a4c951fc48efbf94c0cea2a5f8d2))
+- Updated translations ([#1909](https://github.com/torrentpier/torrentpier/pull/1909)) - ([897edfc](https://github.com/torrentpier/torrentpier/commit/897edfc371087427c574776472cbbf3f1f933273))
+- Updated translations ([#1908](https://github.com/torrentpier/torrentpier/pull/1908)) - ([6d0499d](https://github.com/torrentpier/torrentpier/commit/6d0499dd0229d454d3af00f10151adc26a9e96a7))
+- New translations ([#1906](https://github.com/torrentpier/torrentpier/pull/1906)) - ([8a3b12c](https://github.com/torrentpier/torrentpier/commit/8a3b12c1192678552a3186c1f58df9b4d7e5ba1b))
+
+
 ## [v2.4.5](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.5..v2.4.5) (2025-05-11)
 
 ### 🚀 Features
