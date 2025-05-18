@@ -3075,7 +3075,7 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Проверка, что вы не робот';
 $lang['CAPTCHA_WRONG'] = 'Вы не смогли подтвердить, что вы не робот';
-$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Капча не полностью настроена</h2><p>Сгенерируйте ключи, используя панель управления вашим сервисом капчи, а затем вставьте их в файл library/config.php.</p>';
 $lang['CAPTCHA_OCCURS_BACKGROUND'] = 'Проверка CAPTCHA происходит в фоновом режиме';
 
 // Sending email
