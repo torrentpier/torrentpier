@@ -6,6 +6,7 @@
 
 ### 🈳 New translations
 
+- New Crowdin updates ([#1911](https://github.com/torrentpier/torrentpier/pull/1911)) - ([174f441](https://github.com/torrentpier/torrentpier/commit/174f44160e1f33bed9422f0c4eab9d73b7025036))
 - New Crowdin updates ([#1910](https://github.com/torrentpier/torrentpier/pull/1910)) - ([c40aad2](https://github.com/torrentpier/torrentpier/commit/c40aad20ad865849d3088498f1ba95a5fb0a0621))
 - New Crowdin updates ([#1907](https://github.com/torrentpier/torrentpier/pull/1907)) - ([999ae1e](https://github.com/torrentpier/torrentpier/commit/999ae1eff9f3a4c951fc48efbf94c0cea2a5f8d2))
 - Updated translations ([#1909](https://github.com/torrentpier/torrentpier/pull/1909)) - ([897edfc](https://github.com/torrentpier/torrentpier/commit/897edfc371087427c574776472cbbf3f1f933273))
