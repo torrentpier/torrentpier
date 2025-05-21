@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "arokettu/bencode",
-            "version": "4.3.0",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arokettu/bencode.git",
-                "reference": "be43c5c2d54fb2c8a358f6d38130fc7e57928913"
+                "reference": "0955a7037670c24d5ae5fdafe5ff5894aba024e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arokettu/bencode/zipball/be43c5c2d54fb2c8a358f6d38130fc7e57928913",
-                "reference": "be43c5c2d54fb2c8a358f6d38130fc7e57928913",
+                "url": "https://api.github.com/repos/arokettu/bencode/zipball/0955a7037670c24d5ae5fdafe5ff5894aba024e7",
+                "reference": "0955a7037670c24d5ae5fdafe5ff5894aba024e7",
                 "shasum": ""
             },
             "require": {
@@ -33,12 +33,13 @@
                 "pear/math_biginteger": "^1.0",
                 "phpunit/phpunit": "^10.5.28",
                 "psy/psysh": "*",
-                "sandfox.dev/code-standard": "^1.2024.07.05",
+                "sandfox.dev/code-standard": "^1.2025.05.07",
                 "squizlabs/php_codesniffer": "*",
-                "vimeo/psalm": "^5.2"
+                "vimeo/psalm": "^6"
             },
             "suggest": {
                 "brick/math": "In case you need integers larger than your architecture supports",
+                "ext-bcmath": "In case you need integers larger than your architecture supports (PHP 8.4 or later)",
                 "ext-gmp": "In case you need integers larger than your architecture supports",
                 "pear/math_biginteger": "In case you need integers larger than your architecture supports",
                 "php-64bit": "Running 64 bit is recommended to prevent integer overflow"
@@ -75,7 +76,7 @@
                 "issues": "https://gitlab.com/sandfox/bencode/-/issues",
                 "source": "https://gitlab.com/sandfox/bencode"
             },
-            "time": "2024-09-25T14:43:35+00:00"
+            "time": "2025-05-20T19:25:23+00:00"
         },
         {
             "name": "arokettu/is-resource",
@@ -3745,6 +3746,6 @@
     "platform": {
         "php": ">=8.1"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
