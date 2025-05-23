@@ -13,6 +13,10 @@
 - Updated translations ([#1908](https://github.com/torrentpier/torrentpier/pull/1908)) - ([6d0499d](https://github.com/torrentpier/torrentpier/commit/6d0499dd0229d454d3af00f10151adc26a9e96a7))
 - New translations ([#1906](https://github.com/torrentpier/torrentpier/pull/1906)) - ([8a3b12c](https://github.com/torrentpier/torrentpier/commit/8a3b12c1192678552a3186c1f58df9b4d7e5ba1b))
 
+### 📦 Dependencies
+
+- *(deps)* Bump arokettu/bencode from 4.3.0 to 4.3.1 ([#1912](https://github.com/torrentpier/torrentpier/pull/1912)) - ([f76e351](https://github.com/torrentpier/torrentpier/commit/f76e351b32cfa2932bc1afde6c3c522cd993b8af))
+
 
 ## [v2.4.5](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.5..v2.4.5) (2025-05-11)
 
