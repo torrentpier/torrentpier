@@ -33,7 +33,7 @@ if (isset($_POST['save'])) {
 }
 
 $current_content = '';
-if (file_exists($robots_file)) {
+if (is_file($robots_file)) {
     $current_content = file_get_contents($robots_file);
 }
 
