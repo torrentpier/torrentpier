@@ -14,7 +14,7 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$robots_file = BB_ROOT . '/robots.txt';
+$robots_file = BB_ROOT . 'robots.txt';
 
 // Обработка сохранения
 if (isset($_POST['save'])) {
