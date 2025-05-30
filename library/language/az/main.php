@@ -1989,6 +1989,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Mesaj istifadəçi qraf idi sinxroniza
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Siyahı online istifadəçilər';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'Seçin istifadəçi';
 $lang['GROUP_SELECT'] = 'Seçin qrupu';
@@ -3025,6 +3030,8 @@ $lang['HASH_NOT_FOUND'] = 'Məsələ ilə hash %s tapılmadı';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Bu səhifədə verə bilərsiniz mətn əsas qaydaları resurs göstərilir istifadəçilər üçün.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'passiv istifadəçiləri 30 gün müddətində',
