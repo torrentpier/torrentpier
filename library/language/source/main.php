@@ -1989,7 +1989,7 @@ $lang['SHOW_ONLINE_USERLIST'] = 'Show the list of online users';
 // Robots.txt editor
 $lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
 $lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
-$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Select a User';
@@ -3026,6 +3026,7 @@ $lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'On this page, you can specify the text of the basic rules of the resource is displayed to users.';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'inactive users in 30 days',
