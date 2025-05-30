@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Количество сообщени�
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Показать список пользователей онлайн';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'Выберите пользователя';
 $lang['GROUP_SELECT'] = 'Выберите группу';
@@ -3021,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Раздача с хэшем %s не найдена';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]Текст этой страницы редактируется по адресу: [url]%s[/url]. Эту строку видят только администраторы.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На данной странице вы можете указать текст основных правил ресурса, выводящихся пользователям.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'неактивные пользователи в течение 30 дней',

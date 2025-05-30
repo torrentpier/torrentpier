@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = '사용자가 게시 계산 된 동기�
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = '목록을 표시합니다 온라인으로 사용자의';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = '을 선택 사용';
 $lang['GROUP_SELECT'] = '선택 그룹';
@@ -3021,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = '릴리스와 해시 %s 발견되지 않았';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = '이 페이지에서 텍스트를 지정할 수 있습의 기본적인 규칙은 자원의 사용자에게 표시합니다.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => '비활성 상태에서 사용자는 30 일',

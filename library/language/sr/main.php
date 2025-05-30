@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Поруке корисника гро
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Прикажи листу корисника на мрежи';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'Изаберите корисника';
 $lang['GROUP_SELECT'] = 'Изаберите групу';
@@ -3022,6 +3027,8 @@ $lang['HASH_NOT_FOUND'] = 'Издање са хасх %s није пронађе
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На овој страници можете да поставите текст, основна правила ресурса се приказује корисницима.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'неактивни корисници у року од 30 дана',

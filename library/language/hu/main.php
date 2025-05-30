@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Felhasználó hozzászólások gróf s
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Mutasd meg a listán az online felhasználók';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'Válasszon ki egy Felhasználót';
 $lang['GROUP_SELECT'] = 'Válassza ki a Csoport';
@@ -3021,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Kiadás hash %s nem található';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ezen az oldalon adhatja meg, hogy a szöveg az alapvető szabályokat, az erőforrás jelenik meg a felhasználók számára.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'inaktív felhasználók 30 nappal',

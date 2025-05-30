@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Kasutaja postitusi arv on sünkronisee
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Näita nimekiri online kasutajad';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'Valige Kasutaja';
 $lang['GROUP_SELECT'] = 'Vali Grupp';
@@ -3021,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Pressiteade hash %s ei leitud';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Sellel lehel saate määrata teksti põhireeglid ressurss on kuvatud kasutajad.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'mitteaktiivsete kasutajate 30 päeva',
