@@ -4,8 +4,15 @@
 > To view changelog from **v2.0.0** to **v2.4.5-rc.2** navigate to [HISTORY.md](HISTORY.md).
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
+### 🚀 Features
+
+- *(ACP)* Added `robots.txt` editor ([#1913](https://github.com/torrentpier/torrentpier/pull/1913)) - ([79bb13e](https://github.com/torrentpier/torrentpier/commit/79bb13e17d07505be4d3a3c67223b4f591b66bfb))
+- *(install)* Autofill `Host` in `robots.txt` file ([#1916](https://github.com/torrentpier/torrentpier/pull/1916)) - ([03eeb08](https://github.com/torrentpier/torrentpier/commit/03eeb08ad185b6dcc99563f567297e41f4a56117))
+
 ### 🈳 New translations
 
+- New Crowdin updates ([#1915](https://github.com/torrentpier/torrentpier/pull/1915)) - ([a3da6f5](https://github.com/torrentpier/torrentpier/commit/a3da6f538658fbfe4e57aad10046d8c459a1a498))
+- New Crowdin updates ([#1914](https://github.com/torrentpier/torrentpier/pull/1914)) - ([a15baef](https://github.com/torrentpier/torrentpier/commit/a15baef69a2955b6dc9cd6e8fdf467550d0b5d09))
 - New Crowdin updates ([#1911](https://github.com/torrentpier/torrentpier/pull/1911)) - ([174f441](https://github.com/torrentpier/torrentpier/commit/174f44160e1f33bed9422f0c4eab9d73b7025036))
 - New Crowdin updates ([#1910](https://github.com/torrentpier/torrentpier/pull/1910)) - ([c40aad2](https://github.com/torrentpier/torrentpier/commit/c40aad20ad865849d3088498f1ba95a5fb0a0621))
 - New Crowdin updates ([#1907](https://github.com/torrentpier/torrentpier/pull/1907)) - ([999ae1e](https://github.com/torrentpier/torrentpier/commit/999ae1eff9f3a4c951fc48efbf94c0cea2a5f8d2))
