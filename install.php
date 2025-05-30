@@ -401,6 +401,14 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
 
+    // Autofill host in robots.txt
+    $robots_txt_file = BB_ROOT . 'robots.txt';
+    if (isset($TP_HOST) && is_file($robots_txt_file)) {
+        $content = file_get_contents($robots_txt_file);
+        $content = str_replace('example.com', $TP_HOST, $content);
+        file_put_contents($robots_txt_file, $content);
+    }
+
     if (isset($APP_ENV) && $APP_ENV === 'local') {
         if (!is_file(BB_ROOT . 'library/config.local.php')) {
             if (copy(BB_ROOT . 'library/config.php', BB_ROOT . 'library/config.local.php')) {
