@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Mesajele utilizatorului conta a fost s
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Arată lista de utilizatori online';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'Selectați un Utilizator';
 $lang['GROUP_SELECT'] = 'Selectați un Grup';
@@ -3021,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Lansare cu hash %s nu a fost găsit';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pe această pagină, puteți specifica textul de regulile de bază de resurse este afișat pentru utilizatori.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'utilizatorii inactivi în 30 de zile',
