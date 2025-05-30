@@ -8,7 +8,7 @@
  */
 
 if (!empty($setmodules)) {
-    $module['MODS']['Настройка robots.txt'] = basename(__FILE__);
+    $module['MODS']['ROBOTS_TXT_EDITOR'] = basename(__FILE__);
     return;
 }
 
@@ -29,7 +29,7 @@ if (isset($_POST['save'])) {
         bb_die('Could not write robots.txt #2');
     }
 
-    bb_die($lang['CONFIG_UPDATED']);
+    bb_die($lang['CONFIG_ROBOTS_TXT_SAVED']);
 }
 
 $current_content = '';
