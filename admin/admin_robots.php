@@ -29,7 +29,7 @@ if (isset($_POST['save'])) {
         bb_die('Could not write robots.txt #2');
     }
 
-    bb_die($lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY']);
+    bb_die($lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'], '<a href="admin_robots.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 }
 
 $current_content = '';

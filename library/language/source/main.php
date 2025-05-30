@@ -1989,6 +1989,7 @@ $lang['SHOW_ONLINE_USERLIST'] = 'Show the list of online users';
 // Robots.txt editor
 $lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
 $lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Select a User';
