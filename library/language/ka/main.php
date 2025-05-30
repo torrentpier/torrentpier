@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'მომხმარებლის �
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'შოუ სია მომხმარებლებს';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'აირჩიეთ მომხმარებელი';
 $lang['GROUP_SELECT'] = 'აირჩიეთ ჯგუფი';
@@ -3021,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'გამოშვების hash %s არ მო�
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'ამ გვერდზე, თქვენ შეგიძლიათ მიუთითოთ ტექსტი ძირითადი წესები რესურსი არის ნაჩვენები მომხმარებლებს.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'უმოქმედო მომხმარებლებს 30 დღის',
