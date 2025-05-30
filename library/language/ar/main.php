@@ -1986,6 +1986,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'مشاركاتك العد وقد تز�
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'تظهر قائمة مستخدمي الانترنت';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
+
 // Auth pages
 $lang['USER_SELECT'] = 'حدد المستخدم';
 $lang['GROUP_SELECT'] = 'حدد مجموعة';
@@ -3021,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'الإفراج مع تجزئة %s لم يتم الع�
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'في هذه الصفحة يمكنك تحديد النص من القواعد الأساسية من الموارد التي يتم عرضها للمستخدمين.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'المستخدمين غير نشط في 30 يوما',
