@@ -1,10 +1,10 @@
-<h1>{L_ROBOTS_TXT_EDITOR}</h1>
+<h1>{L_ROBOTS_TXT_EDITOR_TITLE}</h1>
 <br />
 
 <form action="{S_ACTION}" method="post">
     <table class="forumline">
         <tr>
-            <th>{L_ROBOTS_TXT_EDITOR}</th>
+            <th>{L_ROBOTS_TXT_EDITOR_TITLE}</th>
         </tr>
         <tr>
             <td class="row1">

@@ -1986,6 +1986,10 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'User posts count has been synchronized
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Show the list of online users';
 
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+
 // Auth pages
 $lang['USER_SELECT'] = 'Select a User';
 $lang['GROUP_SELECT'] = 'Select a Group';
