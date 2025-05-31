@@ -51,6 +51,11 @@ if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
     bb_die($lang['FORUM_NOT_EXIST']);
 }
 
+// Set meta description
+if (!empty($forum_data['forum_desc'])) {
+    $page_cfg['meta_description'] = $forum_data['forum_desc'];
+}
+
 // Make jumpbox
 make_jumpbox();
 
