@@ -45,6 +45,9 @@ if ($bb_cfg['show_network_news']) {
 // Init userdata
 $user->session_start();
 
+// Set meta description
+$page_cfg['meta_description'] = $bb_cfg['site_desc'];
+
 // Init main vars
 $viewcat = isset($_GET[POST_CAT_URL]) ? (int)$_GET[POST_CAT_URL] : 0;
 $lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
