@@ -8,6 +8,7 @@
 
 - *(ACP)* Added `robots.txt` editor ([#1913](https://github.com/torrentpier/torrentpier/pull/1913)) - ([79bb13e](https://github.com/torrentpier/torrentpier/commit/79bb13e17d07505be4d3a3c67223b4f591b66bfb))
 - *(install)* Autofill `Host` in `robots.txt` file ([#1916](https://github.com/torrentpier/torrentpier/pull/1916)) - ([03eeb08](https://github.com/torrentpier/torrentpier/commit/03eeb08ad185b6dcc99563f567297e41f4a56117))
+- Added ability to set page meta description ([#1917](https://github.com/torrentpier/torrentpier/pull/1917)) - ([7b8b9a0](https://github.com/torrentpier/torrentpier/commit/7b8b9a0bbabc1dfbf56cac8c105ad158ae78c3a7))
 
 ### 🈳 New translations
 
@@ -23,6 +24,10 @@
 ### 📦 Dependencies
 
 - *(deps)* Bump arokettu/bencode from 4.3.0 to 4.3.1 ([#1912](https://github.com/torrentpier/torrentpier/pull/1912)) - ([f76e351](https://github.com/torrentpier/torrentpier/commit/f76e351b32cfa2932bc1afde6c3c522cd993b8af))
+
+### ⚙️ Miscellaneous
+
+- Minor improvements ([#1918](https://github.com/torrentpier/torrentpier/pull/1918)) - ([46f29bc](https://github.com/torrentpier/torrentpier/commit/46f29bc68a18fdefad81e26a60fe44f122407ea7))
 
 
 ## [v2.4.5](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.5..v2.4.5) (2025-05-11)
