@@ -116,9 +116,6 @@ $topic_attachment = isset($t_data['topic_attachment']) ? (int)$t_data['topic_att
 // Allow robots indexing
 $page_cfg['allow_robots'] = (bool)$t_data['topic_allow_robots'];
 
-// Set meta description
-$page_cfg['meta_description'] = '';
-
 if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
     bb_die($lang['ERROR_PORNO_FORUM']);
 }
@@ -673,6 +670,11 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     $is_first_post = ($post_id == $t_data['topic_first_post_id']);
+
+    // Set meta description
+    if ($i == 0) {
+        $page_cfg['meta_description'] = str_short(str_replace("\n", ' ', strip_tags(br2nl($message))), 220);
+    }
 
     $template->assign_block_vars('postrow', [
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
