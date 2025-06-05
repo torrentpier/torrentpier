@@ -23,6 +23,7 @@
 
 ### 📦 Dependencies
 
+- *(deps)* Bump filp/whoops from 2.18.0 to 2.18.1 ([#1919](https://github.com/torrentpier/torrentpier/pull/1919)) - ([1253661](https://github.com/torrentpier/torrentpier/commit/125366147c6257abadd489f3802e4a0dab37a89c))
 - *(deps)* Bump arokettu/bencode from 4.3.0 to 4.3.1 ([#1912](https://github.com/torrentpier/torrentpier/pull/1912)) - ([f76e351](https://github.com/torrentpier/torrentpier/commit/f76e351b32cfa2932bc1afde6c3c522cd993b8af))
 
 ### ⚙️ Miscellaneous
