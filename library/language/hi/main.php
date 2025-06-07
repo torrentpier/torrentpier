@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'बोल्ड टेक्स्ट: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'इटैलिक टेक्स्ट: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'टेक्स्ट रेखांकित करें: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'स्ट्राइकआउट पाठ: [s]text[/s] (Ctrl + S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
