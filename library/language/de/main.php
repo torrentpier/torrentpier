@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Fettdruck: [b]text[/b] (Strg+B)';
 $lang['ITALIC'] = 'Kursiver text: [i]text[/i] (Strg+I)';
 $lang['UNDERLINE'] = 'Text unterstreichen: [u]text[/u] (Strg+U)';
 $lang['STRIKEOUT'] = 'Strikeout-text: [s]text[/s] (Strg+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
