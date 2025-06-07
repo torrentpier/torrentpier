@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'ล้างข้อความ:[b]text[/b](ปุ่มพ�
 $lang['ITALIC'] = 'ตัวเอียงข้อความ:[i]text[/i](ปุ่มพิมพ์ Ctrl+ฉั)';
 $lang['UNDERLINE'] = 'ขีดเส้นใต้ข้อความ:[u]text[/u](ปุ่มพิมพ์ Ctrl+ดำน้ำ)';
 $lang['STRIKEOUT'] = 'ตัวขีดเส้นพาดกลางข้อความ:[s]text[/s](ปุ่มพิมพ์ Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
