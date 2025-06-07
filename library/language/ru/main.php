@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Жирный текст: [b]текст[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Наклонный текст: [i]текст[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
+$lang['BOX_TAG'] = 'Рамка вокруг текста: [box]текст[/box] или [box=#333,#888]текст[/box]';
 $lang['INDENT_TAG'] = 'Добавить отступ: [indent]текст[/indent]';
 $lang['SUPERSCRIPT'] = 'Надстрочный текст: [sup]текст[/sup]';
 $lang['SUBSCRIPT'] = 'Подстрочный текст: [sub]текст[/sub]';
