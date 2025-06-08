@@ -12,6 +12,7 @@ define('BB_SCRIPT', 'forum');
 require __DIR__ . '/common.php';
 
 $page_cfg['include_bbcode_js'] = true;
+$page_cfg['canonical_link'] = true;
 
 $show_last_topic = true;
 $last_topic_max_len = 40;

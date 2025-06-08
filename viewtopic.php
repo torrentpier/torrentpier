@@ -22,6 +22,7 @@ $page_cfg['load_tpl_vars'] = [
     'post_icons',
     'topic_icons'
 ];
+$page_cfg['canonical_link'] = true;
 
 $newest = $next_topic_id = 0;
 $start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
