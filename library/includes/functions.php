@@ -2254,6 +2254,9 @@ function getCanonicalUrl(): string
         POST_POST_URL,
         POST_TOPIC_URL,
         POST_USERS_URL,
+        'sort',
+        'start',
+        'order'
     ];
 
     $params = [];
