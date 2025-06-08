@@ -14,6 +14,7 @@ require __DIR__ . '/common.php';
 $page_cfg['load_tpl_vars'] = [
     'post_icons'
 ];
+$page_cfg['canonical_link'] = true;
 
 // Show last topic
 $show_last_topic = true;
