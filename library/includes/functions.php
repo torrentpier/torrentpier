@@ -2236,3 +2236,40 @@ function infoByIP(string $ipAddress, int $port = 0): array
 
     return $data;
 }
+
+/**
+ * Generates canonical url
+ *
+ * @return string
+ */
+function getCanonicalUrl(): string
+{
+    $fullUrl = rtrim(FULL_URL, '/');
+    $script = $_SERVER['SCRIPT_NAME'];
+
+    $allowedParams = [
+        POST_CAT_URL,
+        POST_FORUM_URL,
+        POST_GROUPS_URL,
+        POST_POST_URL,
+        POST_TOPIC_URL,
+        POST_USERS_URL,
+    ];
+
+    $params = [];
+    foreach ($allowedParams as $key) {
+        if (isset($_GET[$key])) {
+            $params[$key] = $_GET[$key];
+        }
+    }
+
+    if (!empty($params)) {
+        ksort($params);
+        $queryString = http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+        $url = $fullUrl . $script . "?$queryString";
+    } else {
+        $url = $fullUrl . $script;
+    }
+
+    return htmlCHR($url);
+}
