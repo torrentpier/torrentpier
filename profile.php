@@ -12,9 +12,6 @@ define('IN_PROFILE', true);
 
 require __DIR__ . '/common.php';
 
-// Disable canonical for this page
-$page_cfg['canonical_link'] = false;
-
 // Start session management
 $user->session_start();
 

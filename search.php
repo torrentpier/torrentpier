@@ -19,9 +19,6 @@ $page_cfg['load_tpl_vars'] = [
     'topic_icons'
 ];
 
-// Disable canonical for this page
-$page_cfg['canonical_link'] = false;
-
 // Start session management
 $user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
 
