@@ -7,12 +7,15 @@
 ### 🚀 Features
 
 - *(ACP)* Added `robots.txt` editor ([#1913](https://github.com/torrentpier/torrentpier/pull/1913)) - ([79bb13e](https://github.com/torrentpier/torrentpier/commit/79bb13e17d07505be4d3a3c67223b4f591b66bfb))
+- *(bbcode)* Added `[nfo]` and `[pre]` tags ([#1923](https://github.com/torrentpier/torrentpier/pull/1923)) - ([f64c340](https://github.com/torrentpier/torrentpier/commit/f64c340563378a364e1f00c64b17ac1c79531302))
 - *(bbcode)* Implement color customization for `[box]` tag ([#1920](https://github.com/torrentpier/torrentpier/pull/1920)) - ([4c24cb6](https://github.com/torrentpier/torrentpier/commit/4c24cb65bfebf307b717e985b169ea5d27df64f8))
 - *(install)* Autofill `Host` in `robots.txt` file ([#1916](https://github.com/torrentpier/torrentpier/pull/1916)) - ([03eeb08](https://github.com/torrentpier/torrentpier/commit/03eeb08ad185b6dcc99563f567297e41f4a56117))
+- *(meta)* Minor improvements to description generation ([#1926](https://github.com/torrentpier/torrentpier/pull/1926)) - ([4d0b294](https://github.com/torrentpier/torrentpier/commit/4d0b2941e3ef6703ac2cd4c03524a93e688e0c39))
 - Added ability to set page meta description ([#1917](https://github.com/torrentpier/torrentpier/pull/1917)) - ([7b8b9a0](https://github.com/torrentpier/torrentpier/commit/7b8b9a0bbabc1dfbf56cac8c105ad158ae78c3a7))
 
 ### 🈳 New translations
 
+- New Crowdin updates ([#1924](https://github.com/torrentpier/torrentpier/pull/1924)) - ([0515670](https://github.com/torrentpier/torrentpier/commit/0515670bee99faa5f0979162096114bc9d3ddf98))
 - New translations main.php (Russian) ([#1922](https://github.com/torrentpier/torrentpier/pull/1922)) - ([8e965fb](https://github.com/torrentpier/torrentpier/commit/8e965fb1ceb5e82201c43b33fcdb044256646191))
 - New Crowdin updates ([#1921](https://github.com/torrentpier/torrentpier/pull/1921)) - ([daeb7fe](https://github.com/torrentpier/torrentpier/commit/daeb7fe87e8da53745fe7aac0708cefa3392ffdc))
 - New Crowdin updates ([#1915](https://github.com/torrentpier/torrentpier/pull/1915)) - ([a3da6f5](https://github.com/torrentpier/torrentpier/commit/a3da6f538658fbfe4e57aad10046d8c459a1a498))
@@ -28,6 +31,10 @@
 
 - *(deps)* Bump filp/whoops from 2.18.0 to 2.18.1 ([#1919](https://github.com/torrentpier/torrentpier/pull/1919)) - ([1253661](https://github.com/torrentpier/torrentpier/commit/125366147c6257abadd489f3802e4a0dab37a89c))
 - *(deps)* Bump arokettu/bencode from 4.3.0 to 4.3.1 ([#1912](https://github.com/torrentpier/torrentpier/pull/1912)) - ([f76e351](https://github.com/torrentpier/torrentpier/commit/f76e351b32cfa2932bc1afde6c3c522cd993b8af))
+
+### 💼 Other
+
+- New Crowdin updates ([#1925](https://github.com/torrentpier/torrentpier/pull/1925)) - ([2487d13](https://github.com/torrentpier/torrentpier/commit/2487d130bb23bd82cedf0d114843bb48f6d2e61c))
 
 ### ⚙️ Miscellaneous
 
