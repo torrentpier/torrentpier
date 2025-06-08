@@ -149,7 +149,7 @@ if ($tor_reged && $tor_info) {
 
     // Magnet link
     $user_passkey = \TorrentPier\Legacy\Torrent::getPasskey($bt_user_id);
-    $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, html_ent_decode($t_data['topic_title']));
+    $tor_magnet = create_magnet($tor_info['info_hash'], $tor_info['info_hash_v2'], $user_passkey, html_ent_decode($t_data['topic_title']), $tor_size);
 
     // ratio limits
     $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
@@ -219,7 +219,6 @@ if ($tor_reged && $tor_info) {
             'HASH' => !empty($tor_info['info_hash']) ? strtoupper(bin2hex($tor_info['info_hash'])) : false,
             'HASH_V2' => !empty($tor_info['info_hash_v2']) ? strtoupper(bin2hex($tor_info['info_hash_v2'])) : false,
             'FILELIST_ICON' => $images['icon_tor_filelist'],
-            'FILELIST_LINK' => FILELIST_URL . $tor_info['topic_id'],
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size, 2),
@@ -245,7 +244,7 @@ if ($tor_reged && $tor_info) {
             'SHOW_DL_LIST' => true,
             'SHOW_DL_LIST_TOR_INFO' => true,
 
-            'TOR_SIZE' => humn_size($tor_size, 1),
+            'TOR_SIZE' => humn_size($tor_size, 2),
             'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
             'TOR_DOWNLOAD_COUNT' => $download_count,
             'TOR_COMPLETED' => $tor_completed_count,
@@ -302,7 +301,7 @@ if ($tor_reged && $tor_info) {
             $sql = "SELECT
 					tr.user_id, tr.ip, tr.ipv6, tr.port, tr.peer_id, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
-					tr.complete_percent, u.username, u.user_rank
+					tr.complete_percent, u.username, u.user_rank, u.user_opt
 				FROM " . BB_BT_TRACKER . " tr
 				LEFT JOIN " . BB_USERS . " u ON u.user_id = tr.user_id
 				WHERE tr.topic_id = $tor_id
@@ -373,8 +372,8 @@ if ($tor_reged && $tor_info) {
                 $peers = $tmp;
 
                 $template->assign_vars([
-                    'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, 0, 'KB') . '/s' : '0 KB/s',
-                    'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, 0, 'KB') . '/s' : '0 KB/s'
+                    'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, min: 'KB') . '/s' : '0 KB/s',
+                    'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, min: 'KB') . '/s' : '0 KB/s'
                 ]);
             }
 
@@ -384,7 +383,9 @@ if ($tor_reged && $tor_info) {
                 // Full details mode
                 if ($s_mode == 'full') {
                     if (!empty($peer['ip']) && !empty($peer['ipv6'])) {
-                        $ip = bt_show_ip($peer['ipv6']) . ' (' . bt_show_ip($peer['ip']) . ')';
+                        if ($ip = bt_show_ip($peer['ipv6'])) {
+                            $ip .= ' (' . bt_show_ip($peer['ip']) . ')';
+                        }
                     } else {
                         $ip = bt_show_ip(!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']);
                     }
@@ -407,7 +408,7 @@ if ($tor_reged && $tor_info) {
 
                             $template->assign_block_vars((string)$x_full, [
                                 'SEED_ORD_ACT' => $seed_order_action,
-                                'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s'
+                                'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s'
                             ]);
 
                             if ($ip) {
@@ -429,8 +430,8 @@ if ($tor_reged && $tor_info) {
 
                             $template->assign_block_vars((string)$x_full, [
                                 'LEECH_ORD_ACT' => $leech_order_action,
-                                'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s',
-                                'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], 0, 'KB') . '/s'
+                                'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], min: 'KB') . '/s',
+                                'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], min: 'KB') . '/s'
                             ]);
 
                             if ($ip) {
@@ -444,23 +445,46 @@ if ($tor_reged && $tor_info) {
                         $compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
                     }
 
-                    $rel_sign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
-                    $name = profile_url($peer) . $rel_sign;
                     $up_tot = ($p_max_up) ? humn_size($p_max_up) : '-';
                     $down_tot = ($p_max_down) ? humn_size($p_max_down) : '-';
                     $up_ratio = ($p_max_down) ? round(($p_max_up / $p_max_down), 2) : '';
-                    $sp_up = ($peer['speed_up']) ? humn_size($peer['speed_up'], 0, 'KB') . '/s' : '-';
-                    $sp_down = ($peer['speed_down']) ? humn_size($peer['speed_down'], 0, 'KB') . '/s' : '-';
+                    $sp_up = ($peer['speed_up']) ? humn_size($peer['speed_up'], min: 'KB') . '/s' : '-';
+                    $sp_down = ($peer['speed_down']) ? humn_size($peer['speed_down'], min: 'KB') . '/s' : '-';
 
                     $bgr_class = (!($tr[$x] % 2)) ? $bgr_class_1 : $bgr_class_2;
                     $row_bgr = ($change_peers_bgr_over) ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';
                     $tr[$x]++;
 
+                    $peerUsername = $lang['HIDDEN_USER'];
+                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_username')) {
+                        $releaserSign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
+                        $peerUsername = profile_url($peer) . $releaserSign;
+                        $peerUsername = $peer['update_time'] ? $peerUsername : "<s>$peerUsername</s>";
+                    }
+
+                    $peerTorrentClient = $lang['HIDDEN_USER'];
+                    if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_torrent_client')) {
+                        if (isset($peer['peer_id'])) {
+                            $peerTorrentClient = get_user_torrent_client($peer['peer_id']);
+                        }
+                    }
+
+                    $peerCountry = $lang['HIDDEN_USER'];
+                    if ($bb_cfg['ip2country_settings']['enabled']) {
+                        if (IS_AM || $peer['user_id'] == $userdata['user_id'] || !bf($peer['user_opt'], 'user_opt', 'user_hide_peer_country')) {
+                            if ($infoByIP = infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])) {
+                                if (!empty($infoByIP['countryCode'])) {
+                                    $peerCountry = render_flag($infoByIP['countryCode'], false);
+                                }
+                            }
+                        }
+                    }
+
                     $template->assign_block_vars("$x_full.$x_row", [
                         'ROW_BGR' => $row_bgr,
-                        'NAME' => ($peer['update_time']) ? $name : "<s>$name</s>",
-                        'PEER_ID' => isset($peer['peer_id']) ? get_user_torrent_client($peer['peer_id']) : $lang['UNKNOWN'],
-                        'COUNTRY' => render_flag(infoByIP((!empty($peer['ipv6']) ? $peer['ipv6'] : $peer['ip']), $peer['port'])['countryCode'], false),
+                        'NAME' => $peerUsername,
+                        'PEER_ID' => $peerTorrentClient,
+                        'COUNTRY' => $peerCountry,
                         'COMPL_PRC' => $compl_perc,
                         'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>$up_tot</b>" : $up_tot,
                         'DOWN_TOTAL' => ($max_down_id[$x] == $pid) ? "<b>$down_tot</b>" : $down_tot,
@@ -470,12 +494,15 @@ if ($tor_reged && $tor_info) {
                         'DOWN_TOTAL_RAW' => $peer['downloaded'],
                         'SPEED_UP_RAW' => $peer['speed_up'],
                         'SPEED_DOWN_RAW' => $peer['speed_down'],
-                        'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
-                        'TOR_RATIO' => ($up_ratio) ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : ''
+                        'UPD_EXP_TIME' => $peer['update_time'] ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
+                        'TOR_RATIO' => $up_ratio ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : ''
                     ]);
 
                     if ($ip) {
-                        $template->assign_block_vars("$x_full.$x_row.ip", ['IP' => $ip]);
+                        $template->assign_block_vars("$x_full.$x_row.ip", [
+                            'U_WHOIS_IP' => $bb_cfg['whois_info'] . $ip,
+                            'IP' => $ip
+                        ]);
                     }
                     if ($port !== false) {
                         $template->assign_block_vars("$x_full.$x_row.port", ['PORT' => $port]);

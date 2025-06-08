@@ -19,7 +19,7 @@ class BBCode
     public array $tpl = [];
 
     /** @var array $smilies Replacements for smilies */
-    public array $smilies;
+    public array $smilies = [];
 
     /** @var array $tidy_cfg Tidy preprocessor configuration */
     public array $tidy_cfg = [
@@ -97,6 +97,8 @@ class BBCode
             "#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu" => $tpl['img_aligned'],
             "#\[email\]($email_exp)\[/email\]#isu" => '<a href="mailto:$1">$1</a>',
             "#\[qpost=([0-9]*)\]#isu" => '<u class="q-post">$1</u>',
+            '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?\]#isu' => $tpl['box_open_color_single'],
+            '#\[box=(?:\s*[\'"])?([\#0-9a-zA-Z]+)(?:[\'"]\s*)?,\s*[\'"]?([\#0-9a-zA-Z]+)[\'"]?\]#isu' => $tpl['box_open_color'],
         ];
 
         $this->str = [
@@ -127,10 +129,14 @@ class BBCode
             '[/sup]' => '</small></sup>',
             '[sub]' => '<sub><small>',
             '[/sub]' => '</small></sub>',
-            '[box]' => '<div class="post-box-default"><div class="post-box">',
-            '[/box]' => '</div></div>',
+            '[box]' => $tpl['box_open'],
+            '[/box]' => $tpl['box_close'],
             '[indent]' => '<div class="post-indent">',
             '[/indent]' => '</div>',
+            '[pre]' => '<pre class="post-pre">',
+            '[/pre]' => '</pre>',
+            '[nfo]' => '<pre class="post-nfo">',
+            '[/nfo]' => '</pre>',
             '[del]' => '<span class="post-s">',
             '[/del]' => '</span>',
             '[clear]' => '<div class="clear">&nbsp;</div>',
@@ -336,12 +342,16 @@ class BBCode
     {
         global $datastore;
 
-        if (!$this->smilies = $datastore->get('smile_replacements')) {
-            $datastore->update('smile_replacements');
-            $this->smilies = $datastore->get('smile_replacements');
-        }
+        $this->smilies = $datastore->get('smile_replacements');
 
-        if ($this->smilies) {
+        if (!empty($this->smilies)) {
+            if (defined('IN_ADMIN')) {
+                foreach ($this->smilies['repl'] as &$smile) {
+                    $smile = preg_replace('/src="([^"]+)"/', 'src="./../$1"', $smile);
+                }
+                unset($smile);
+            }
+
             /** @noinspection NestedPositiveIfStatementsInspection */
             if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text)) {
                 return $parsed_text;

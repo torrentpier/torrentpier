@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'faqat super rahbarlari uchun bu variant';
 
 $lang['LOGS'] = 'Mavzu tarixi';
 $lang['FORUM_LOGS'] = 'Tarix Forum';
-$lang['AUTOCLEAN'] = 'Amerika moli Opsiyonel:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'dizayner';
 
 $lang['LAST_IP'] = 'Oxirgi IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Bold matni: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Kursiv matn: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Tagiga chizilgan matn: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Strikeout matni: [s]text[/s] (Ctrl + S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'to\'xtadi';
 $lang['DL_UPD'] = 'UPD:';
 $lang['DL_INFO'] = 'joriy session</b></i> uchun ma\'lumotlar <i><b>only ko\'rsatadi';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin birinchi post';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Foydalanuvchi bilan aloqa Foydalanuvch
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'onlayn foydalanuvchilar ro\'yxatini ko\'rsatish';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Agar foydalanuvchi tanlang';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'ruxsat etilmagan username muvaffaqiyatli qo\'shi
 $lang['DISALLOWED_ALREADY'] = 'Siz kiritgan nom ruxsat etilmagan bo\'lmadi. Bu ham allaqachon ro\'yxatda mavjud so\'z tsenzura ro\'yxatida mavjud, yoki taalukli foydalanuvchi nomi mavjud.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Login Boshqaruvni taqiqlash qaytish uchun %sHere%s bosing';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Axborot';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'sayt xaritasi boshqarish';
 $lang['SITEMAP_CREATED'] = 'Sayt xaritasi yaratildi';
 $lang['SITEMAP_AVAILABLE'] = 'va mavjud';
 $lang['SITEMAP_NOT_CREATED'] = 'Sayt xaritasi hali yaratilmagan emas';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'qidiruvi Xabarnoma';
-$lang['SITEMAP_SENT'] = 'yuborish yakunlandi';
-$lang['SITEMAP_ERROR'] = 'yuborish xato';
 $lang['SITEMAP_OPTIONS'] = 'Options';
 $lang['SITEMAP_CREATE'] = 'sayt xaritasi / yangilang yaratish';
-$lang['SITEMAP_NOTIFY'] = 'Sayt xaritasi yangi versiyasi haqida qidirish vositasiga bildiring';
 $lang['SITEMAP_WHAT_NEXT'] = 'Keyingi nima qilish kerak?';
 $lang['SITEMAP_GOOGLE_1'] = 'Google hisobi orqali <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> saytida ro\'yxatdan.';
 $lang['SITEMAP_GOOGLE_2'] = 'sayt <a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> ro\'yxatdan.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'hash %s topilmadi bilan ozod';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ushbu sahifada, siz resurs asosiy qoidalarini matn foydalanuvchilarga ko\'rsatish mumkin.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => '30 kun ichida harakatsiz foydalanuvchilar',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Agar robot emas tekshiring';
 $lang['CAPTCHA_WRONG'] = 'Siz bir robot emas, deb tasdiqlash mumkin emas';
-$lang['CAPTCHA_SETTINGS'] = 'Agar siz allaqachon kalitlari hosil yo\'q configured</h2><p>If <h2>ReCaptcha siz <a href="https://www.google.com/recaptcha/admin">https uni, albatta, mumkin, to\'liq bo\'lmasligi: Agar kalitlari ishlab //www.google.com/recaptcha/admin</a>.<br />After, siz fayl kutubxona / config da, ularni qo\'yish kerak .php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ez az opció csak a szuper adminok';
 
 $lang['LOGS'] = 'Téma történelem';
 $lang['FORUM_LOGS'] = 'A Történelem Fórum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Tervező';
 
 $lang['LAST_IP'] = 'Utolsó IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Félkövér szöveg: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Dőlt szöveg: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Aláhúzott szöveg: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout szöveg: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'megállt';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'azt mutatja, az adatok <i><b>only a jelenlegi session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin első post';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Felhasználó hozzászólások gróf s
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Mutasd meg a listán az online felhasználók';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Válasszon ki egy Felhasználót';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'A nem engedélyezett felhasználónév már ki s
 $lang['DISALLOWED_ALREADY'] = 'A beírt nevet nem lehetett nem engedélyezett. Vagy már szerepel a listában, létezik az a szó, hogy cenzúrázzák a lista, vagy egy megfelelő felhasználónév jelen van.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kattintson %sHere%s vissza, hogy ne engedélyezze a Felhasználónév Adminisztráció';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Verzió Információ';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'Kezelése oldaltérkép';
 $lang['SITEMAP_CREATED'] = 'Oldaltérkép létre';
 $lang['SITEMAP_AVAILABLE'] = 'pedig itt érhető el';
 $lang['SITEMAP_NOT_CREATED'] = 'Oldaltérkép még nem jön létre';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Értesítés a kereső';
-$lang['SITEMAP_SENT'] = 'a küldés befejezése';
-$lang['SITEMAP_ERROR'] = 'küldési hiba';
 $lang['SITEMAP_OPTIONS'] = 'Lehetőségek';
 $lang['SITEMAP_CREATE'] = 'Létrehozás / frissítés a sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Értesíti a keresőmotorok az új változat oldaltérkép';
 $lang['SITEMAP_WHAT_NEXT'] = 'Mi a következő teendő?';
 $lang['SITEMAP_GOOGLE_1'] = 'Regisztrálni a helyszínen <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> Google fiókja használatával.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> az oldalon regisztrált.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Kiadás hash %s nem található';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ezen az oldalon adhatja meg, hogy a szöveg az alapvető szabályokat, az erőforrás jelenik meg a felhasználók számára.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'inaktív felhasználók 30 nappal',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Ellenőrizze, hogy nem egy robot';
 $lang['CAPTCHA_WRONG'] = 'Azt nem tudta megerősíteni, hogy nem egy robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nem teljesen configured</h2><p>if még nem generált a kulcsokat, meg tudod csinálni <a href="https://www.google.com/recaptcha/admin">https://www.a google.com/recaptcha/admin</a>.<br />After generál a kulcsokat, meg kell tenni őket a fájl könyvtár/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

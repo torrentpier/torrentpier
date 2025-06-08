@@ -248,9 +248,10 @@ if ($lp_info) {
     $passkey_sql = DB()->escape($passkey);
 
     $sql = "
-		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.info_hash, tor.info_hash_v2, u.*
+		SELECT tor.topic_id, tor.poster_id, tor.tor_type, tor.tor_status, tor.info_hash, tor.info_hash_v2, bt.*, u.user_level
 		FROM " . BB_BT_TORRENTS . " tor
-		LEFT JOIN " . BB_BT_USERS . " u ON u.auth_key = '$passkey_sql'
+		LEFT JOIN " . BB_BT_USERS . " bt ON bt.auth_key = '$passkey_sql'
+		LEFT JOIN " . BB_USERS . " u ON u.user_id = bt.user_id
 		$info_hash_where
 		LIMIT 1
 	";
@@ -266,9 +267,22 @@ if ($lp_info) {
 
     // Assign variables
     $user_id = $row['user_id'];
+    define('IS_GUEST', (int)$user_id === GUEST_UID);
+    define('IS_ADMIN', !IS_GUEST && (int)$row['user_level'] === ADMIN);
+    define('IS_MOD', !IS_GUEST && (int)$row['user_level'] === MOD);
+    define('IS_GROUP_MEMBER', !IS_GUEST && (int)$row['user_level'] === GROUP_MEMBER);
+    define('IS_USER', !IS_GUEST && (int)$row['user_level'] === USER);
+    define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$user_id]));
+    define('IS_AM', IS_ADMIN || IS_MOD);
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
     $tor_type = $row['tor_type'];
+    $tor_status = $row['tor_status'];
+
+    // Check tor status
+    if (!IS_AM && isset($bb_cfg['tor_frozen'][$tor_status]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_status]) && $releaser)) {
+        msg_die('Torrent frozen and cannot be downloaded');
+    }
 
     // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {

@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Detta alternativ endast för superadministratö
 
 $lang['LOGS'] = 'Ämnet historia';
 $lang['FORUM_LOGS'] = 'Historia Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Designer';
 
 $lang['LAST_IP'] = 'Sista IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Fet text: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kursiv text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understruken text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Genomstruken text: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'slutat';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'visar data <i><b>only för den aktuella session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin-första inlägget';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Användaren inlägg räkna har synkron
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Visa listan över användare online';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Välj ett Användarnamn';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Det förbjudit användarnamn har lagts till fram
 $lang['DISALLOWED_ALREADY'] = 'Det namn du angett kan inte vara otillåten. Det antingen redan finns i listan, finns i ordet censurera lista, eller en kombination av användarnamn är närvarande.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klicka %sHere%s att återvända för att ta bort Användarnamn Administration';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Version Information';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'Hantera sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap skapas';
 $lang['SITEMAP_AVAILABLE'] = 'och finns tillgänglig på';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap är ännu inte skapat';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Anmälan av sökmotorn';
-$lang['SITEMAP_SENT'] = 'skicka klar';
-$lang['SITEMAP_ERROR'] = 'skicka fel';
 $lang['SITEMAP_OPTIONS'] = 'Alternativ';
 $lang['SITEMAP_CREATE'] = 'Skapa / uppdatera sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Meddela sökmotorer om nya versionen av sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Vad göra härnäst?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registrera din webbplats på <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> med ditt Google-konto.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> av webbplatsen att du registrerat dig.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Release med hash %s inte hittas';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På den här sidan kan du ange texten i de grundläggande reglerna för resursen visas för användare.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'inaktiva användare i 30 dagar',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Kontrollera att du inte är en robot';
 $lang['CAPTCHA_WRONG'] = 'Du kan inte bekräfta att du inte är en robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha inte helt configured</h2><p>if du inte redan genererade nycklar, kan du göra det på <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After du generera nycklar du behöver för att sätta dem på arkiv-bibliotek/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

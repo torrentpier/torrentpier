@@ -342,7 +342,7 @@ function _set_var(&$result, $var, $type, $multibyte = false)
  * @param $var_name
  * @param $default
  * @param bool $multibyte
- * @return array
+ * @return array|string
  */
 function get_var($var_name, $default, $multibyte = false)
 {

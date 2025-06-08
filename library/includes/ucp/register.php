@@ -122,8 +122,8 @@ switch ($mode) {
         ];
 
         // Select a profile: your own for the user, any for the admin
-        if (IS_ADMIN && !empty($_REQUEST['u'])) {
-            $pr_user_id = (int)$_REQUEST['u'];
+        if (IS_ADMIN && !empty($_REQUEST[POST_USERS_URL])) {
+            $pr_user_id = (int)$_REQUEST[POST_USERS_URL];
             $adm_edit = ($pr_user_id != $userdata['user_id']);
         } else {
             $pr_user_id = $userdata['user_id'];
@@ -365,6 +365,9 @@ foreach ($profile_fields as $field => $can_edit) {
                 'user_dls' => $reg_mode ? false : true,
                 'user_callseed' => $reg_mode ? true : true,
                 'user_retracker' => $reg_mode ? true : true,
+                'user_hide_torrent_client' => $reg_mode ? true : true,
+                'user_hide_peer_country' => $reg_mode ? true : $bb_cfg['ip2country_settings']['enabled'],
+                'user_hide_peer_username' => $reg_mode ? false : true,
             ];
 
             foreach ($update_user_opt as $opt => $can_change_opt) {

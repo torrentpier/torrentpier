@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Ta možnost je na voljo samo za super administr
 
 $lang['LOGS'] = 'Temo zgodovina';
 $lang['FORUM_LOGS'] = 'Zgodovina Foruma';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Oblikovalec';
 
 $lang['LAST_IP'] = 'Zadnji IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Krepko besedilo: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Ležeče besedilo: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Podčrtano besedilo: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Prečrtano besedilo: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'ustavi';
 $lang['DL_UPD'] = 'epd: ';
 $lang['DL_INFO'] = 'prikazani podatki <i><b>only za trenutno session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Koda Pin prva objava';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Uporabnik objavi grof je bil sinhroniz
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Prikaže seznam spletnih uporabnikov';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Izberite Uporabnika';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Na nedovoljenih uporabniško ime je bil dodan us
 $lang['DISALLOWED_ALREADY'] = 'Ime, ki ste ga vnesli, ni mogoče prepovedati. Bodisi že obstaja v seznamu, ki se nahaja v besedo cenzuro seznam, ali je sta uporabniško ime je prisotna.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliknite %sHere%s za vrnitev, da Zavrne uporabniško Ime Uprava';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informacije O Različici';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'Upravljanje kazalo';
 $lang['SITEMAP_CREATED'] = 'Kazalo ustvarili';
 $lang['SITEMAP_AVAILABLE'] = 'in je na voljo na';
 $lang['SITEMAP_NOT_CREATED'] = 'Kazalo še ni ustvarjena';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Prijava iskalnik';
-$lang['SITEMAP_SENT'] = 'pošlji končana';
-$lang['SITEMAP_ERROR'] = 'pošiljanje napaka';
 $lang['SITEMAP_OPTIONS'] = 'Možnosti';
 $lang['SITEMAP_CREATE'] = 'Ustvarite / posodobite kazalo';
-$lang['SITEMAP_NOTIFY'] = 'Obvesti iskalniki o novi različici kazalo';
 $lang['SITEMAP_WHAT_NEXT'] = 'Kaj je naslednji korak?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registrirajte svoje mesto na <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> z uporabo Google računa.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> spletnega mesta ste se registrirali.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Sprostitev s hash %s ni mogoče najti';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na tej strani lahko določite besedilo osnovna pravila virov, se prikaže uporabnikom.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'neaktivne uporabnike v 30 dneh',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Preverite, da niste robot';
 $lang['CAPTCHA_WRONG'] = 'Si ni mogel potrditi, da niste robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bi v celoti configured</h2><p>if še niste ustvarjeni tipk, lahko to storite na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After ustvarite tipke, boste morali, da jih na datoteke knjižnica/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

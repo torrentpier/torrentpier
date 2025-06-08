@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Diese option wird nur für super-admins';
 
 $lang['LOGS'] = 'Thema Geschichte';
 $lang['FORUM_LOGS'] = 'Geschichte Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Designer';
 
 $lang['LAST_IP'] = 'Letzte IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Fettdruck: [b]text[/b] (Strg+B)';
 $lang['ITALIC'] = 'Kursiver text: [i]text[/i] (Strg+I)';
 $lang['UNDERLINE'] = 'Text unterstreichen: [u]text[/u] (Strg+U)';
 $lang['STRIKEOUT'] = 'Strikeout-text: [s]text[/s] (Strg+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'gestoppt';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'zeigt Daten <i><b>only für die aktuelle session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin ersten post';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Benutzer Beiträge zählen synchronisi
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Anzeigen der Liste der online-Benutzer';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Wählen Sie einen Benutzer';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Die nicht zugelassenen Benutzername wurde erfolg
 $lang['DISALLOWED_ALREADY'] = 'Der name, den Sie eingegeben haben, konnte nicht verboten werden. Es ist entweder bereits in der Liste vorhanden ist, existiert in der Wortzensur Liste, oder ein passender username vorhanden ist.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klicken Sie auf %sHere%s zurück zu Verbieten, Benutzername Verwaltung';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Versionsinformationen';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'Verwalten von XML-sitemap';
 $lang['SITEMAP_CREATED'] = 'XML-Sitemap erstellt';
 $lang['SITEMAP_AVAILABLE'] = 'und ist erhältlich bei';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap ist noch nicht erstellt';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Benachrichtigung der Suchmaschinen';
-$lang['SITEMAP_SENT'] = 'senden abgeschlossen';
-$lang['SITEMAP_ERROR'] = 'Fehler beim senden';
 $lang['SITEMAP_OPTIONS'] = 'Optionen';
 $lang['SITEMAP_CREATE'] = 'Erstellen / aktualisieren Sie die sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Benachrichtigen Sie Suchmaschinen über die neue version der sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Was als Nächstes zu tun?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registrieren Sie Ihre Website bei <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> mit Ihrem Google-Konto.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> der Website, die Sie registriert.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Version mit hash %s nicht gefunden';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Auf dieser Seite können Sie den text angeben, der die grundlegenden Regeln der Ressource, die den Benutzern angezeigt wird.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'inaktive Benutzer in 30 Tagen',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Überprüfen Sie, dass Sie nicht ein Roboter';
 $lang['CAPTCHA_WRONG'] = 'Sie konnte nicht bestätigen, dass Sie nicht ein Roboter';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nicht vollständig configured</h2><p>if Sie nicht bereits generiert die Schlüssel, die Sie tun können, es auf <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After generieren Sie die Schlüssel, die Sie benötigen, um Sie auf die Datei library/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-if (empty($_GET['u']) || empty($_GET['act_key'])) {
+if (empty($_GET[POST_USERS_URL]) || empty($_GET['act_key'])) {
     bb_die('Bad request');
 }
 

@@ -23,9 +23,7 @@ ajax.callback.callseed = function (data) {
 </script>
 
 <tr>
-	<td colspan="2" class="catTitle"><a href="{DL_LIST_HREF}">
-		{L_DL_LIST_AND_TORRENT_ACTIVITY}
-	</a></td>
+	<td colspan="2" class="catTitle"><a href="{DL_LIST_HREF}">{L_DL_LIST_AND_TORRENT_ACTIVITY}</a></td>
 </tr>
 
 <!-- BEGIN dl_users -->
@@ -157,7 +155,7 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-                <th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <!-- IF $bb_cfg['ip2country_settings']['enabled'] --><th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th><!-- ENDIF -->
 			</tr>
 			</thead>
 			<!-- BEGIN srow -->
@@ -169,13 +167,13 @@ ajax.callback.callseed = function (data) {
 				<td class="seedmed"><u>{sfull.srow.SPEED_UP_RAW}</u>{sfull.srow.SPEED_UP}</td>
 				<td class="leechmed"><u>{sfull.srow.SPEED_DOWN_RAW}</u>{sfull.srow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
-				<td>{sfull.srow.ip.IP}</td>
+                <td><a href="{sfull.srow.ip.U_WHOIS_IP}" target="_blank">{sfull.srow.ip.IP}</a></td>
 				<!-- END ip -->
 				<!-- BEGIN port -->
 				<td>{sfull.srow.port.PORT}</td>
 				<!-- END port -->
                 <td>{sfull.srow.PEER_ID}</td>
-                <td>{sfull.srow.COUNTRY}</td>
+                <!-- IF $bb_cfg['ip2country_settings']['enabled'] --><td>{sfull.srow.COUNTRY}</td><!-- ENDIF -->
 			</tr>
 			<!-- END srow -->
 			</table>
@@ -210,7 +208,7 @@ ajax.callback.callseed = function (data) {
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
                 <!-- END porthead -->
                 <th class="{sorter: false}"><b class="tbs-text">{L_DL_CLIENT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-                <th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+                <!-- IF $bb_cfg['ip2country_settings']['enabled'] --><th class="{sorter: false}"><b class="tbs-text">{L_COUNTRY}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th><!-- ENDIF -->
 			</tr>
 			</thead>
 			<!-- BEGIN lrow -->
@@ -222,13 +220,13 @@ ajax.callback.callseed = function (data) {
 				<td class="seedmed"><u>{lfull.lrow.SPEED_UP_RAW}</u>{lfull.lrow.SPEED_UP}</td>
 				<td class="leechmed"><u>{lfull.lrow.SPEED_DOWN_RAW}</u>{lfull.lrow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
-				<td>{lfull.lrow.ip.IP}</td>
+                <td><a href="{lfull.lrow.ip.U_WHOIS_IP}" target="_blank">{lfull.lrow.ip.IP}</a></td>
 				<!-- END ip -->
 				<!-- BEGIN port -->
 				<td>{lfull.lrow.port.PORT}</td>
 				<!-- END port -->
                 <td>{lfull.lrow.PEER_ID}</td>
-                <td>{lfull.lrow.COUNTRY}</td>
+                <!-- IF $bb_cfg['ip2country_settings']['enabled'] --><td>{lfull.lrow.COUNTRY}</td><!-- ENDIF -->
 			</tr>
 			<!-- END lrow -->
 			</table>

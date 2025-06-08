@@ -671,6 +671,11 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     $is_first_post = ($post_id == $t_data['topic_first_post_id']);
 
+    // Set meta description
+    if ($is_first_post || $i == 0) {
+        $page_cfg['meta_description'] = str_short(str_replace("\n", ' ', strip_tags(br2nl($message))), 220);
+    }
+
     $template->assign_block_vars('postrow', [
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,

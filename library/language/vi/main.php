@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Này, lựa chọn duy nhất cho siêu quản 
 
 $lang['LOGS'] = 'Chủ đề lịch sử';
 $lang['FORUM_LOGS'] = 'Lịch Sử Diễn Đàn';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Thiết kế';
 
 $lang['LAST_IP'] = 'Cuối cùng IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Văn bản đậm: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Nghiêng văn bản: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Nhấn mạnh chữ: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Gạch văn bản: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'dừng lại';
 $lang['DL_UPD'] = 'g: ';
 $lang['DL_INFO'] = 'cho dữ liệu <i><b>only cho hiện tại session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin bài đầu tiên';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Dùng bài đếm đã được đồn
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Hiển thị các danh sách của người dùng trực tuyến';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Chọn một người Sử dụng';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Thế không được phép tên đã thành cô
 $lang['DISALLOWED_ALREADY'] = 'Tên bạn bước vào có thể không được phép. Hoặc là nó đã tồn tại trong danh sách tồn tại trong từ danh sách kiểm duyệt, hoặc một phù hợp với tên là hiện tại.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Nhấn vào %sHere%s để trở về Không cho phép Tên Quản trị';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Phiên Bản Thông Tin';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'Quản lý đồ';
 $lang['SITEMAP_CREATED'] = 'Đồ tạo ra';
 $lang['SITEMAP_AVAILABLE'] = 'và có sẵn ở';
 $lang['SITEMAP_NOT_CREATED'] = 'Đồ chưa tạo ra';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Thông báo của công cụ tìm kiếm';
-$lang['SITEMAP_SENT'] = 'gửi hoàn thành';
-$lang['SITEMAP_ERROR'] = 'gửi lỗi';
 $lang['SITEMAP_OPTIONS'] = 'Lựa chọn';
 $lang['SITEMAP_CREATE'] = 'Tạo bản đồ';
-$lang['SITEMAP_NOTIFY'] = 'Thông báo cho công cụ tìm kiếm về phiên bản mới của sơ đồ';
 $lang['SITEMAP_WHAT_NEXT'] = 'Phải làm gì tiếp theo?';
 $lang['SITEMAP_GOOGLE_1'] = 'Đăng ký trang web của bạn ở <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> sử dụng tài khoản Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> trang web của bạn đăng ký.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Phát hành với băm %s không tìm thấy';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Trên trang này, anh có thể xác định danh văn bản của các quy tắc cơ bản của các nguồn tài nguyên được hiển thị sử dụng.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'người dùng không hoạt động trong 30 ngày',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Kiểm tra đó bạn không phải là một robot';
 $lang['CAPTCHA_WRONG'] = 'Bạn không thể xác nhận rằng anh không phải là một robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha không được đầy đủ configured</h2><p>if bạn đã không tạo ra chìa khóa, bạn có thể làm nó trên <a href="https://www.google.com/recaptcha/admin">https://.google.com/recaptcha/admin</a>.<br />After bạn tạo ra chìa khóa, bạn cần phải đưa họ tại các tập tin thư viện/cấu hình.# .</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

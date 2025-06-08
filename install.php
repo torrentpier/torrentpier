@@ -257,6 +257,8 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     // Installing dependencies
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
+        runProcess('php ' . BB_ROOT . 'composer.phar update --no-install');
+        sleep(3);
         runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         define('COMPOSER_COMPLETED', true);
     } else {
@@ -398,6 +400,14 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
 
     $conn->close();
     out("- Importing SQL dump completed!\n", 'success');
+
+    // Autofill host in robots.txt
+    $robots_txt_file = BB_ROOT . 'robots.txt';
+    if (isset($TP_HOST) && is_file($robots_txt_file)) {
+        $content = file_get_contents($robots_txt_file);
+        $content = str_replace('example.com', $TP_HOST, $content);
+        file_put_contents($robots_txt_file, $content);
+    }
 
     if (isset($APP_ENV) && $APP_ENV === 'local') {
         if (!is_file(BB_ROOT . 'library/config.local.php')) {

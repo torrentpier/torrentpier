@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'באפשרות זו רק עבור סופר מנ
 
 $lang['LOGS'] = 'נושא ההיסטוריה.';
 $lang['FORUM_LOGS'] = 'פורום היסטוריה';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'מעצב';
 
 $lang['LAST_IP'] = 'אתמול ה-IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'טקסט מודגש: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'טקסט נטוי: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'קו תחתון טקסט: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'טקסט חוצה: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'הפסיקה';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'מראה נתונים <i><b>only הנוכחי session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'סיכת הפוסט הראשון';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'הודעות המשתמש לספור �
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'הצגת רשימת משתמשים באינטרנט';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'בחר משתמש';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'האסורות שם המשתמש נוספה בה
 $lang['DISALLOWED_ALREADY'] = 'השם שהזנת לא יכול להיות אסורות. זה גם כבר קיים ברשימה, קיימת המילה צנזור הרשימה, או התאמת שם משתמש קיים.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'לחץ על %sHere%s לחזור לאסור את שם המשתמש ניהול';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'גרסה מידע';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'לנהל את ה-sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap יצר';
 $lang['SITEMAP_AVAILABLE'] = 'והוא זמין ב';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap הוא עדיין לא נוצר';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'הודעה של מנוע החיפוש';
-$lang['SITEMAP_SENT'] = 'שלח הושלם';
-$lang['SITEMAP_ERROR'] = 'שולח שגיאה';
 $lang['SITEMAP_OPTIONS'] = 'אפשרויות';
 $lang['SITEMAP_CREATE'] = 'צור / עדכן את ה-sitemap';
-$lang['SITEMAP_NOTIFY'] = 'ליידע את מנועי החיפוש על גרסה חדשה של ה-sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'מה לעשות הלאה?';
 $lang['SITEMAP_GOOGLE_1'] = 'לרשום את האתר שלך ב <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> באמצעות חשבון Google שלך.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> של האתר נרשמת.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'בדף זה, אתה יכול לציין את הטקסט של הכללים הבסיסיים של משאב זה מוצג בפני המשתמשים.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'משתמשים לא-פעילים ב-30 ימים',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'בדוק שאתה לא רובוט';
 $lang['CAPTCHA_WRONG'] = 'אתה יכול לאשר שאתה לא רובוט';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha לא להיות לגמרי configured</h2><p>if לא כבר יצר את המפתחות, אתה יכול לעשות את זה על <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After לך ליצור את המפתחות, אתה צריך לשים אותם על הקובץ בספריה/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

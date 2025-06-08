@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Táto možnosť len pre super admins';
 
 $lang['LOGS'] = 'Tému história';
 $lang['FORUM_LOGS'] = 'História Fóra';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Dizajnér';
 
 $lang['LAST_IP'] = 'Posledná IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Tučným písmom (Bold): [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'Kurzíva text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Podčiarknutie textu: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Preškrtnuté text: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'zastavil';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'zobrazuje údaje <i><b>only pre aktuálnu session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin prvý príspevok';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Používateľ príspevky počítať bo
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Zobraziť zoznam online užívateľov';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Vyberte Používateľa';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Je zakázané užívateľské meno bolo úspešn
 $lang['DISALLOWED_ALREADY'] = 'Meno, ktoré ste zadali, by nemali byť povolené. Buď už existuje v zozname, existuje slovo cenzurovať zoznam, alebo zodpovedajúce meno je prítomné.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Kliknite na tlačidlo %sHere%s vrátiť Zakázať Meno Správy';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Informácie O Verzii';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'Spravovať sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap vytvorené';
 $lang['SITEMAP_AVAILABLE'] = 'a je k dispozícii na';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap je ešte nevytvorili';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Oznámenie pre vyhľadávače';
-$lang['SITEMAP_SENT'] = 'poslať vyplnený';
-$lang['SITEMAP_ERROR'] = 'odosielanie chyba';
 $lang['SITEMAP_OPTIONS'] = 'Možnosti';
 $lang['SITEMAP_CREATE'] = 'Vytvorenie / aktualizácia súboru sitemap';
-$lang['SITEMAP_NOTIFY'] = 'Informuje vyhľadávacie nástroje o nových verziách sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Čo robiť ďalej?';
 $lang['SITEMAP_GOOGLE_1'] = 'Zaregistrujte svoje stránky na <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> pomocou svojho účtu Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> stránok ste sa zaregistrovali.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Prepustenie s hash %s nebol nájdený';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na tejto stránke môžete zadať text základné pravidlá zdrojov sa zobrazujú používateľom.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'neaktívnych používateľov do 30 dní',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Skontrolujte, že nie ste robot';
 $lang['CAPTCHA_WRONG'] = 'Ste nemohli potvrdiť, že nie ste robot';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie je plne configured</h2><p>if ešte nemáte vytvorený tlačidlá, môžete to urobiť na <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After si vygenerovať tlačidiel, musíte ich vložiť na súbor knižnice/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

@@ -1608,7 +1608,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'このオプションのみスーパー管理�
 
 $lang['LOGS'] = '話題の歴史';
 $lang['FORUM_LOGS'] = '歴史フォーラム';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'デザイナー';
 
 $lang['LAST_IP'] = '最後のIP:';
@@ -1846,7 +1846,7 @@ $lang['BOLD'] = '大胆な文:[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = 'テキストを斜体:[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下線文:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout文:[s]text[/s](Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1883,6 +1883,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = '停止';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'を示すデータ<i><b>only現在のsession</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'ピン初の投稿';
@@ -1986,6 +1989,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'ユーザーの投稿カウント分�
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = '"次へ"をクリックしインターネットユーザー';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'ユーザーの選択';
@@ -2325,14 +2333,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'の許可ユーザ名を追加に成功';
 $lang['DISALLOWED_ALREADY'] = '名前の入力できな許可します。 そして、タブを持っているリストに存在する単語の検閲覧、またはマッチングユーザー名が存在します。';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'をクリックし%sHere%sを返す可にユーザー名の管理';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'バージョン情報';
@@ -3001,12 +3001,8 @@ $lang['SITEMAP_ADMIN'] = '管理サイトマップ';
 $lang['SITEMAP_CREATED'] = 'サイトマップの作成';
 $lang['SITEMAP_AVAILABLE'] = 'とが可能で';
 $lang['SITEMAP_NOT_CREATED'] = 'サイトマップが作成';
-$lang['SITEMAP_NOTIFY_SEARCH'] = '通知について検索エンジン';
-$lang['SITEMAP_SENT'] = '送信完了';
-$lang['SITEMAP_ERROR'] = '送信エラー';
 $lang['SITEMAP_OPTIONS'] = 'オプション';
 $lang['SITEMAP_CREATE'] = 'の作成-更新、サイトマップ';
-$lang['SITEMAP_NOTIFY'] = '通知の検索エンジンの最新版のサイトマップ';
 $lang['SITEMAP_WHAT_NEXT'] = 'いうのは次のどれですか。';
 $lang['SITEMAP_GOOGLE_1'] = '登録サイトで<a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a>利用のお客様のGoogleアカウントします。';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a>のサイトにご登録いただいたします。';
@@ -3034,6 +3030,8 @@ $lang['HASH_NOT_FOUND'] = 'コーポレートコミュニケーションのハ�
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'このページでご指定いただくことができますテキストの基本的なルールのリソースが表示されます。';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => '無効のユーザは30日間',
@@ -3088,7 +3086,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'ることを確認等の無断転載は固くお断りいロボット';
 $lang['CAPTCHA_WRONG'] = 'できないことを確認等の無断転載は固くお断りいロボット';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha十分ではconfigured</h2><p>ifていなかったとしたら既に生成したキーの取得ができないことがあり上<a href="https://www.google.com/recaptcha/admin">https://wwwします。googleです。com/recaptcha/admin</a>ます。<br />Afterを生成するキーが必要ということは、ファイルライブラリ/config.クリアしました。</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

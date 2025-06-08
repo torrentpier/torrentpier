@@ -23,7 +23,7 @@ if (!$topic_id) {
     bb_die($lang['INVALID_TOPIC_ID'], 404);
 }
 
-$sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_filename
+$sql = 'SELECT t.forum_id, t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_filename
         FROM ' . BB_BT_TORRENTS . ' t
         LEFT JOIN ' . BB_ATTACHMENTS_DESC . ' ad
         ON t.attach_id = ad.attach_id
@@ -32,6 +32,12 @@ $sql = 'SELECT t.attach_id, t.info_hash, t.info_hash_v2, t.size, ad.physical_fil
 
 if (!$row = DB()->fetch_row($sql)) {
     bb_die($lang['INVALID_TOPIC_ID_DB'], 404);
+}
+
+// Check rights
+$is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
+if (!$is_auth['auth_view']) {
+    bb_die($lang['SORRY_AUTH_VIEW_ATTACH'], 403);
 }
 
 // Protocol meta

@@ -18,8 +18,8 @@ $reserved_port = env('TP_PORT', 80);
 $bb_cfg = [];
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.5-rc.4';
-$bb_cfg['tp_release_date'] = '09-03-2025';
+$bb_cfg['tp_version'] = 'v2.4.5';
+$bb_cfg['tp_release_date'] = '11-05-2025';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 
 // Increase version number after changing JS or CSS
@@ -144,10 +144,12 @@ $bb_cfg['torr_server'] = [
     'disable_for_guest' => true
 ];
 
-// IndexNow settings
-$bb_cfg['indexnow_settings'] = [
-    'enabled' => false,
-    'host' => 'bing', // Available: yandex, bing, seznam, naver
+// FreeIPAPI settings
+$bb_cfg['ip2country_settings'] = [
+    // Documentation: https://docs.freeipapi.com/
+    'enabled' => true,
+    'endpoint' => 'https://freeipapi.com/api/json/',
+    'api_token' => '', // not required for basic usage
 ];
 
 // FAQ url help link
@@ -445,7 +447,7 @@ $bb_cfg['password_symbols'] = [
 $bb_cfg['password_hash_options'] = [
     // https://www.php.net/manual/ru/password.constants.php
     'algo' => PASSWORD_BCRYPT,
-    'options' => []
+    'options' => ['cost' => 12]
 ];
 
 // Email

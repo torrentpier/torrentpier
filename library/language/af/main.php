@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Hierdie opsie slegs vir super administrateurs';
 
 $lang['LOGS'] = 'Onderwerpgeskiedenis';
 $lang['FORUM_LOGS'] = 'Geskiedenis Forum';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'Ontwerper';
 
 $lang['LAST_IP'] = 'Laaste IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'Vet teks: [b]text[/b] (Ctrl + B)';
 $lang['ITALIC'] = 'Kursiewe teks: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Onderstreep teks: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Strikeout-teks: [s]text[/s] (Ctrl + S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'gestop';
 $lang['DL_UPD'] = 'UPD:';
 $lang['DL_INFO'] = 'Wys data <i><b>alleen vir die huidige sessie</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Plak eerste plasing';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'Die telling van gebruikersposte is ges
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Wys die lys van aanlyngebruikers';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'Kies \'n gebruiker';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'Die verbode gebruikersnaam is suksesvol bygevoeg
 $lang['DISALLOWED_ALREADY'] = 'Die naam wat u ingevoer het, kan nie toegelaat word nie. Dit bestaan ​​ook al in die lys, bestaan ​​in die woord censor lys, of \'n bypassende gebruikersnaam is teenwoordig.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Klik %sHere%s om terug te keer na Administrasie van gebruikersnaam';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'Weergawe-inligting';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'Bestuur sitemap';
 $lang['SITEMAP_CREATED'] = 'Sitemap geskep';
 $lang['SITEMAP_AVAILABLE'] = 'En is beskikbaar by';
 $lang['SITEMAP_NOT_CREATED'] = 'Sitemap is nog nie geskep nie';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'Kennisgewing van die soekenjin';
-$lang['SITEMAP_SENT'] = 'Stuur voltooi';
-$lang['SITEMAP_ERROR'] = 'Stuur fout';
 $lang['SITEMAP_OPTIONS'] = 'opsies';
 $lang['SITEMAP_CREATE'] = 'Skep / werk die sitemap op';
-$lang['SITEMAP_NOTIFY'] = 'Stel soekenjins in kennis van nuwe weergawe van sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Wat om volgende te doen?';
 $lang['SITEMAP_GOOGLE_1'] = 'Registreer jou werf by <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> met jou Google-rekening.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> van die webwerf wat jy geregistreer het.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'Vrylating met hash %s nie gevind nie';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Op hierdie bladsy kan u die teks van die basiese reëls van die bron spesifiseer vir gebruikers.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'Onaktiewe gebruikers oor 30 dae',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'Maak seker dat jy nie \'n robot is nie';
 $lang['CAPTCHA_WRONG'] = 'Jy kon nie bevestig dat jy nie \'n robot is nie';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie ten volle gekonfigureer nie</h2><p>Indien u die sleutels nie reeds opgewek het nie, kan u dit op <a href="https://www.google.com/recaptcha/admin">https: //www.google.com/recaptcha/admin</a>.<br />After u die sleutels genereer, moet u dit by die lêerbiblioteek / config .php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

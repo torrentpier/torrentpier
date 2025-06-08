@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'ეს ვარიანტი მხოლო
 
 $lang['LOGS'] = 'თემის ისტორია';
 $lang['FORUM_LOGS'] = 'ისტორია ფორუმი';
-$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = 'დიზაინერი';
 
 $lang['LAST_IP'] = 'ბოლო IP:';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = 'თამამი ტექსტი: [b]text[/b] (Ctrl+B)';
 $lang['ITALIC'] = 'დახრილი ტექსტი: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'ხაზგასმული ტექსტი: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'გადახაზული ტექსტი: [s]text[/s] (Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'შეწყვიტა';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'გვიჩვენებს მონაცემები <i><b>only მიმდინარე session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = 'Pin პირველი პოსტი';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'მომხმარებლის �
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'შოუ სია მომხმარებლებს';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = 'აირჩიეთ მომხმარებელი';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'დაიშვება სახელი დ�
 $lang['DISALLOWED_ALREADY'] = 'სახელი თქვენ შემოხვედით არ შეიძლება გააქტიურებამდე. ეს ან უკვე არსებობს სია, არსებობს სიტყვა ცენზურას სიაში, ან შესაბამისი სახელი დღემდე.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'დააჭირეთ %sHere%s დაბრუნებას აუკრძალეთ სახელი ადმინისტრაციის';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = 'ვერსია ინფორმაცია';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = 'მართვა საიტის რუკა';
 $lang['SITEMAP_CREATED'] = 'საიტის რუკა შექმნა';
 $lang['SITEMAP_AVAILABLE'] = 'და ხელმისაწვდომია';
 $lang['SITEMAP_NOT_CREATED'] = 'საიტის რუკა ჯერ არ შექმნილი';
-$lang['SITEMAP_NOTIFY_SEARCH'] = 'შეტყობინება საძიებო სისტემა';
-$lang['SITEMAP_SENT'] = 'გაგზავნას დასრულდა';
-$lang['SITEMAP_ERROR'] = 'გაგზავნის შეცდომა';
 $lang['SITEMAP_OPTIONS'] = 'პარამეტრები';
 $lang['SITEMAP_CREATE'] = 'შექმნა / განახლება საიტის რუკა';
-$lang['SITEMAP_NOTIFY'] = 'აცნობოს საძიებო შესახებ ახალი ვერსია საიტის რუკა';
 $lang['SITEMAP_WHAT_NEXT'] = 'რა უნდა გავაკეთოთ შემდეგ?';
 $lang['SITEMAP_GOOGLE_1'] = 'დაარეგისტრირეთ თქვენი საიტის <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> გამოყენებით თქვენი Google ანგარიში.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> " საიტზე თქვენ დარეგისტრირებული.';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = 'გამოშვების hash %s არ მო�
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'ამ გვერდზე, თქვენ შეგიძლიათ მიუთითოთ ტექსტი ძირითადი წესები რესურსი არის ნაჩვენები მომხმარებლებს.';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => 'უმოქმედო მომხმარებლებს 30 დღის',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = 'შეამოწმეთ, რომ თქვენ არ ხართ რობოტი';
 $lang['CAPTCHA_WRONG'] = 'თქვენ შეიძლება არ ადასტურებენ, რომ თქვენ არ ხართ რობოტი';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha არ მიმდინარეობს სრულად configured</h2><p>if თქვენ არ უკვე გამომუშავებული გასაღებები, თქვენ შეგიძლიათ ეს გააკეთოთ <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After თქვენ გენერირება გასაღებები, თქვენ უნდა დააყენოს მათ ფაილი ბიბლიოთეკა/config.php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';

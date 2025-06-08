@@ -104,15 +104,6 @@ function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, 
     }
 }
 
-// User Levels
-define('DELETED', -1);
-define('USER', 0);
-define('ADMIN', 1);
-define('MOD', 2);
-define('GROUP_MEMBER', 20);
-define('CP_HOLDER', 25);
-define('EXCLUDED_USERS', implode(',', [GUEST_UID, BOT_UID]));
-
 // User related
 define('USER_ACTIVATION_NONE', 0);
 define('USER_ACTIVATION_SELF', 1);
@@ -257,7 +248,6 @@ define('BB_TOPIC_TPL', 'bb_topic_tpl');
 define('BB_TOPICS', 'bb_topics');
 define('BB_TOPICS_WATCH', 'bb_topics_watch');
 define('BB_USER_GROUP', 'bb_user_group');
-define('BB_USERS', 'bb_users');
 define('BB_WORDS', 'bb_words');
 define('BB_THX', 'bb_thx');
 
@@ -396,11 +386,6 @@ $html = new TorrentPier\Legacy\Common\Html();
 $user = new TorrentPier\Legacy\Common\User();
 
 $userdata =& $user->data;
-
-/**
- * Some shared defines
- */
-define('TP_INSTANCE_HASH', $bb_cfg['tp_instance_hash']);
 
 /**
  * Cron

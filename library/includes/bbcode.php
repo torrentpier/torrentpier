@@ -83,6 +83,23 @@ HTML;
 	<span class="post-hr">-</span>
 HTML;
 
+// Box
+    $bbcode_tpl['box_open'] = <<<HTML
+    <div class="post-box-default"><div class="post-box">
+HTML;
+
+    $bbcode_tpl['box_open_color'] = <<<HTML
+    <div class="post-box-default"><div class="post-box" style="border-color: $1; background-color: $2;">
+HTML;
+
+    $bbcode_tpl['box_open_color_single'] = <<<HTML
+    <div class="post-box-default"><div class="post-box" style="border-color: $1;">
+HTML;
+
+    $bbcode_tpl['box_close'] = <<<HTML
+    </div></div>
+HTML;
+
     array_deep($bbcode_tpl, 'bbcode_tpl_compact');
     return $bbcode_tpl;
 }
@@ -118,7 +135,7 @@ function generate_smilies($mode)
 
     $data = $datastore->get('smile_replacements');
 
-    if ($sql = $data['smile']) {
+    if (isset($data['smile']) && $sql = $data['smile']) {
         $num_smilies = 0;
         $rowset = [];
         foreach ($sql as $row) {

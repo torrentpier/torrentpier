@@ -1604,7 +1604,7 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = '这一选项只有超级管理员';
 
 $lang['LOGS'] = '主题历史';
 $lang['FORUM_LOGS'] = '历史论坛';
-$lang['AUTOCLEAN'] = '自动清洁:';
+$lang['AUTOCLEAN'] = 'Autoclean';
 $lang['DESIGNER'] = '设计师';
 
 $lang['LAST_IP'] = '最后IP：';
@@ -1842,7 +1842,7 @@ $lang['BOLD'] = '粗体文字：[b]text[/b](Ctrl+B)';
 $lang['ITALIC'] = '斜体文字：[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下划线的案文：[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '删除线文本：[s]text[/s](Ctrl+S)';
-$lang['BOX_TAG'] = 'Frame around text: [box]text[/box]';
+$lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
@@ -1879,6 +1879,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = '停止';
 $lang['DL_UPD'] = 'upd： ';
 $lang['DL_INFO'] = '显示了数据<i><b>only当前session</b></i>';
+$lang['HIDE_PEER_TORRENT_CLIENT'] = 'Hide my BitTorrent client name in peer list';
+$lang['HIDE_PEER_COUNTRY_NAME'] = 'Hide my country name in peer list';
+$lang['HIDE_PEER_USERNAME'] = 'Hide my username in peer list';
 
 // Post PIN
 $lang['POST_PIN'] = '销后第一次';
@@ -1982,6 +1985,11 @@ $lang['USER_POSTS_COUNT_SYNCHRONIZED'] = '用户员额数已经同步';
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = '表演列表中的在线用户';
+
+// Robots.txt editor
+$lang['ROBOTS_TXT_EDITOR_TITLE'] = 'Manage robots.txt';
+$lang['ROBOTS_TXT_UPDATED_SUCCESSFULLY'] = 'File robots.txt has been updated successfully';
+$lang['CLICK_RETURN_ROBOTS_TXT_CONFIG'] = '%sClick Here to return to robots.txt manager%s';
 
 // Auth pages
 $lang['USER_SELECT'] = '选择一个用户';
@@ -2321,14 +2329,6 @@ $lang['DISALLOW_SUCCESSFUL'] = '对不允许的用户名已加入成功';
 $lang['DISALLOWED_ALREADY'] = '输入的名称可能不被禁止。 它要么已经存在，存在一词审查清单，或者匹配的用户名是存在的。';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '点击%sHere%s回到禁止的用户名的管理';
-
-// Integrity check
-$lang['INTEGRITY_CHECK_SUCCESS'] = 'TorrentPier files integrity check was successful!';
-$lang['INTEGRITY_CHECK_FAIL'] = 'Some TorrentPier files not pass integrity check!';
-$lang['INTEGRITY_CHECKED'] = 'Total checked: %s file(s), of which pass integrity check: %s file(s).';
-$lang['INTEGRITY_LAST_CHECK'] = 'Last check: %s.';
-$lang['INTEGRITY_RESTORE_ON_NEXT_RUN'] = 'Restore corrupt files on next integrity check?';
-$lang['INTEGRITY_RESTORE_CONFIRM_OK'] = 'Corrupt files will be restored on next integrity check!';
 
 // Version Check
 $lang['VERSION_INFORMATION'] = '版本的信息';
@@ -2997,12 +2997,8 @@ $lang['SITEMAP_ADMIN'] = '管理网站地图';
 $lang['SITEMAP_CREATED'] = '网站地图创建的';
 $lang['SITEMAP_AVAILABLE'] = '并且可以在';
 $lang['SITEMAP_NOT_CREATED'] = '地图还不是创建';
-$lang['SITEMAP_NOTIFY_SEARCH'] = '通知的搜索引擎';
-$lang['SITEMAP_SENT'] = '发送完毕';
-$lang['SITEMAP_ERROR'] = '发送错误';
 $lang['SITEMAP_OPTIONS'] = '选项';
 $lang['SITEMAP_CREATE'] = '创建/更新的网站地图';
-$lang['SITEMAP_NOTIFY'] = '通知搜索引擎新版本的地图';
 $lang['SITEMAP_WHAT_NEXT'] = '接下来做什么？';
 $lang['SITEMAP_GOOGLE_1'] = '注册网站在<a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a>使用谷歌的帐户。';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a>的网站，你有注册。';
@@ -3030,6 +3026,8 @@ $lang['HASH_NOT_FOUND'] = '释放与哈希%s找不到';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url]%s[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = '在这一页面，可以指定的案文的基本规则的资源显示用户使用。';
+$lang['TERMS_UPDATED_SUCCESSFULLY'] = 'Terms have been updated successfully';
+$lang['CLICK_RETURN_TERMS_CONFIG'] = '%sClick Here to return to Terms editor%s';
 
 $lang['TR_STATS'] = [
     0 => '不活动的用户在30天',
@@ -3084,7 +3082,8 @@ $lang['UPLOAD_ERRORS'] = [
 // Captcha
 $lang['CAPTCHA'] = '检查你是不是机器人';
 $lang['CAPTCHA_WRONG'] = '你不能确认你不是一个机器人';
-$lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha没有得到充分configured</h2><p>if你有没有已经产生的钥匙，你可以做<a href="https://www.google.com/recaptcha/admin">https://www.谷歌。com/验证码/admin</a>的。<br />After你产生的钥匙，你需要把它们放在该文件的图书馆/config。php.</p>';
+$lang['CAPTCHA_SETTINGS'] = '<h2>Captcha is not fully configured</h2><p>Generate the keys using the dashboard of your captcha service, after you need to put them at the file library/config.php.</p>';
+$lang['CAPTCHA_OCCURS_BACKGROUND'] = 'The CAPTCHA verification occurs in the background';
 
 // Sending email
 $lang['REPLY_TO'] = 'Reply to';
