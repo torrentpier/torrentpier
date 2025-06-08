@@ -12,11 +12,11 @@ define('IN_PROFILE', true);
 
 require __DIR__ . '/common.php';
 
-// Start session management
-$user->session_start();
-
 // Disable canonical for this page
 $page_cfg['canonical_link'] = false;
+
+// Start session management
+$user->session_start();
 
 set_die_append_msg();
 $mode = request_var('mode', 'viewprofile');
