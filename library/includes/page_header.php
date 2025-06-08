@@ -123,7 +123,7 @@ $template->assign_vars([
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
     'ALLOW_ROBOTS' => !$bb_cfg['board_disable'] && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
-    'META_DESCRIPTION' => $page_cfg['meta_description'] ?? '',
+    'META_DESCRIPTION' => !empty($page_cfg['meta_description']) ? trim(htmlCHR($page_cfg['meta_description'])) : '',
 
     'SITENAME' => $bb_cfg['sitename'],
     'U_INDEX' => BB_ROOT . 'index.php',
