@@ -673,7 +673,9 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     // Set meta description
     if ($is_first_post || $i == 0) {
-        $page_cfg['meta_description'] = str_short(str_replace("\n", ' ', strip_tags(br2nl($message))), 220);
+        $message_meta = preg_replace('#<br\s*/?>\s*#si', ' ', $message);
+        $message_meta = str_replace('&#10;', '', $message_meta);
+        $page_cfg['meta_description'] = str_short(strip_tags($message_meta), 220);
     }
 
     $template->assign_block_vars('postrow', [

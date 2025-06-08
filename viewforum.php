@@ -53,7 +53,7 @@ if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
 
 // Set meta description
 if (!empty($forum_data['forum_desc'])) {
-    $page_cfg['meta_description'] = htmlCHR($forum_data['forum_desc']);
+    $page_cfg['meta_description'] = $forum_data['forum_desc'];
 }
 
 // Make jumpbox
