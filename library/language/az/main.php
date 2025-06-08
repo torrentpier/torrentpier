@@ -1847,6 +1847,8 @@ $lang['UNDERLINE'] = 'Qeyd mətni: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачеркнутый mətn: [s]text[/s] (Ctrl+c)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Sitat mətn: [quote]text[/quote] (əsas birləşməsi Ctrl+M)';

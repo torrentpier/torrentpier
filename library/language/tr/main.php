@@ -1848,6 +1848,8 @@ $lang['UNDERLINE'] = '(Ctrl+U)altı çizili metin: [u]text[/u]';
 $lang['STRIKEOUT'] = '(Ctrl+S)üstü çizili metin: [s]text[/s]';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = '(Ctrl+Q)alıntı metin: [quote]text[/quote]';

@@ -1844,6 +1844,8 @@ $lang['UNDERLINE'] = 'टेक्स्ट रेखांकित करे�
 $lang['STRIKEOUT'] = 'स्ट्राइकआउट पाठ: [s]text[/s] (Ctrl + S)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'उद्धरण पाठ: [quote]text[/quote] (Ctrl + Q)';

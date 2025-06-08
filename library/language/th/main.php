@@ -1844,6 +1844,8 @@ $lang['UNDERLINE'] = 'ขีดเส้นใต้ข้อความ:[u]tex
 $lang['STRIKEOUT'] = 'ตัวขีดเส้นพาดกลางข้อความ:[s]text[/s](ปุ่มพิมพ์ Ctrl+S)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'อ้างอิงข้อความ:[quote]text[/quote](ปุ่มพิมพ์ Ctrl+Q)';

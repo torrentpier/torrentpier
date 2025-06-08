@@ -1847,6 +1847,8 @@ $lang['UNDERLINE'] = 'Podvlačenje teksta: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Prekriženo tekst: [s]text[/s] (Ctrl+s)';
 $lang['BOX_TAG'] = 'Frame around text: [box]text[/box] or [box=#333,#888]text[/box]';
 $lang['INDENT_TAG'] = 'Insert indent: [indent]text[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Superscript text: [sup]text[/sup]';
 $lang['SUBSCRIPT'] = 'Subscript text: [sub]text[/sub]';
 $lang['QUOTE_TITLE'] = 'Citiram tekst: [quote]text[/quote] (Ctrl+M)';

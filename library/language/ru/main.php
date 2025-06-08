@@ -1844,6 +1844,8 @@ $lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u] (Ct
 $lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl+S)';
 $lang['BOX_TAG'] = 'Рамка вокруг текста: [box]текст[/box] или [box=#333,#888]текст[/box]';
 $lang['INDENT_TAG'] = 'Добавить отступ: [indent]текст[/indent]';
+$lang['PRE_TAG'] = 'Preformatted text: [pre]text[/pre]';
+$lang['NFO_TAG'] = 'NFO: [nfo]text[/nfo]';
 $lang['SUPERSCRIPT'] = 'Надстрочный текст: [sup]текст[/sup]';
 $lang['SUBSCRIPT'] = 'Подстрочный текст: [sub]текст[/sub]';
 $lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
