@@ -392,6 +392,26 @@ a.gen, a.med, a.genmed, a.small, a.gensmall {
   display: inline-block;
 }
 
+.post_body pre {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.post-pre {
+  white-space: pre-wrap;
+  font-family: "Lucida Console", Consolas, monospace;
+}
+
+.post-nfo {
+  font-size: 13px;
+  line-height: 1em;
+  white-space: pre;
+  font-family: Consolas, monospace;
+  overflow-y: hidden;
+}
+
 /* ---------------------------------- *
      Code blocks
  * ---------------------------------- */
