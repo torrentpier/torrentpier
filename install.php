@@ -8,11 +8,18 @@
  */
 
 define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
 if (php_sapi_name() !== 'cli') {
     die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
 }
+
+// Get all constants
+require_once BB_ROOT . 'library/defines.php';
+
+// Include CLI functions
+require INC_DIR . '/functions_cli.php';
 
 /**
  * System requirements
@@ -33,125 +40,6 @@ define('CHECK_REQUIREMENTS', [
         'gd'
     ],
 ]);
-
-/**
- * Colored console output
- *
- * @param string $str
- * @param string $type
- * @return void
- */
-function out(string $str, string $type = ''): void
-{
-    echo match ($type) {
-        'error' => "\033[31m$str \033[0m\n",
-        'success' => "\033[32m$str \033[0m\n",
-        'warning' => "\033[33m$str \033[0m\n",
-        'info' => "\033[36m$str \033[0m\n",
-        'debug' => "\033[90m$str \033[0m\n",
-        default => "$str\n",
-    };
-}
-
-/**
- * Run process with realtime output
- *
- * @param string $cmd
- * @param string|null $input
- * @return void
- */
-function runProcess(string $cmd, string $input = null): void
-{
-    $descriptorSpec = [
-        0 => ['pipe', 'r'],
-        1 => ['pipe', 'w'],
-        2 => ['pipe', 'w'],
-    ];
-
-    $process = proc_open($cmd, $descriptorSpec, $pipes);
-
-    if (!is_resource($process)) {
-        out('- Could not start subprocess', 'error');
-        return;
-    }
-
-    // Write input if provided
-    if ($input !== null) {
-        fwrite($pipes[0], $input);
-        fclose($pipes[0]);
-    }
-
-    // Read and print output in real-time
-    while (!feof($pipes[1])) {
-        echo stream_get_contents($pipes[1], 1);
-        flush(); // Flush output buffer for immediate display
-    }
-
-    // Read and print error output
-    while (!feof($pipes[2])) {
-        echo stream_get_contents($pipes[2], 1);
-        flush();
-    }
-
-    fclose($pipes[1]);
-    fclose($pipes[2]);
-
-    proc_close($process);
-}
-
-/**
- * Remove directory recursively
- *
- * @param string $dir
- * @return void
- */
-function rmdir_rec(string $dir): void
-{
-    $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-    $files = new RecursiveIteratorIterator($it,
-        RecursiveIteratorIterator::CHILD_FIRST);
-    foreach ($files as $file) {
-        if ($file->isDir()) {
-            rmdir($file->getPathname());
-        } else {
-            unlink($file->getPathname());
-        }
-    }
-    rmdir($dir);
-}
-
-/**
- * Setting permissions recursively
- *
- * @param string $dir
- * @param int $dirPermissions
- * @param int $filePermissions
- * @return void
- */
-function chmod_r(string $dir, int $dirPermissions, int $filePermissions): void
-{
-    $dp = opendir($dir);
-    while ($file = readdir($dp)) {
-        if (($file == '.') || ($file == '..')) {
-            continue;
-        }
-
-        $fullPath = realpath($dir . '/' . $file);
-        if (is_dir($fullPath)) {
-            out("- Directory: $fullPath");
-            chmod($fullPath, $dirPermissions);
-            chmod_r($fullPath, $dirPermissions, $filePermissions);
-        } elseif (is_file($fullPath)) {
-            // out("- File: $fullPath");
-            chmod($fullPath, $filePermissions);
-        } else {
-            out("- Cannot find target path: $fullPath", 'error');
-            return;
-        }
-    }
-
-    closedir($dp);
-}
 
 // Welcoming message
 out("--- TorrentPier Installer ---\n", 'info');
@@ -207,7 +95,7 @@ if (is_file(BB_ROOT . '.env')) {
         }
         // composer dir
         if (is_dir(BB_ROOT . 'vendor')) {
-            rmdir_rec(BB_ROOT . 'vendor');
+            removeDir(BB_ROOT . 'vendor', true);
             if (!is_dir(BB_ROOT . 'vendor')) {
                 out("- Composer directory successfully removed!");
             } else {

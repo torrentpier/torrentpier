@@ -9,11 +9,20 @@
 
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+    define('BB_PATH', BB_ROOT);
 }
 
 // Check CLI mode
 if (php_sapi_name() !== 'cli') {
     exit;
+}
+
+if (!function_exists('removeFile')) {
+    // Get all constants
+    require_once BB_ROOT . 'library/defines.php';
+
+    // Include CLI functions
+    require INC_DIR . '/functions_cli.php';
 }
 
 $items = [
@@ -22,6 +31,7 @@ $items = [
     '.editorconfig',
     '.gitignore',
     '.styleci.yml',
+    '_release.php',
     'CHANGELOG.md',
     'cliff.toml',
     'CODE_OF_CONDUCT.md',
@@ -39,46 +49,5 @@ foreach ($items as $item) {
         removeFile($path);
     } elseif (is_dir($path)) {
         removeDir($path);
-    }
-}
-
-/**
- * Remove target file
- *
- * @param string $file Path to file
- */
-function removeFile(string $file): void
-{
-    if (unlink($file)) {
-        echo "- File removed: $file" . PHP_EOL;
-    } else {
-        echo "- File cannot be removed: $file" . PHP_EOL;
-        exit;
-    }
-}
-
-/**
- * Remove folder (recursively)
- *
- * @param string $dir Path to folder
- */
-function removeDir(string $dir): void
-{
-    $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-    $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-
-    foreach ($files as $file) {
-        if ($file->isDir()) {
-            removeDir($file->getPathname());
-        } else {
-            removeFile($file->getPathname());
-        }
-    }
-
-    if (rmdir($dir)) {
-        echo "- Folder removed: $dir" . PHP_EOL;
-    } else {
-        echo "- Folder cannot be removed: $dir" . PHP_EOL;
-        exit;
     }
 }
