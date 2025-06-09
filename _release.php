@@ -21,6 +21,9 @@ require_once BB_ROOT . 'library/defines.php';
 // Include CLI functions
 require INC_DIR . '/functions_cli.php';
 
+// Welcoming message
+out("--- Release creation tool ---\n", 'info');
+
 $configFile = BB_PATH . '/library/config.php';
 
 if (!is_file($configFile)) {
@@ -32,9 +35,6 @@ if (!is_readable($configFile)) {
 if (!is_writable($configFile)) {
     out('- Config file ' . basename($configFile) . ' is not writable', 'error');
 }
-
-// Welcoming message
-out("--- Release creation tool ---\n", 'info');
 
 // Ask for version
 fwrite(STDOUT, 'Enter version number (e.g, v2.4.0): ');
@@ -51,7 +51,7 @@ if (empty($date)) {
     // Validate date format (dd-mm-yyyy)
     $dateObj = DateTime::createFromFormat('d-m-Y', $date);
     if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
-        out('Invalid date format. Expected format: DD-MM-YYYY', 'error');
+        out("\n- Invalid date format. Expected format: DD-MM-YYYY", 'error');
     }
 
     out("- Using date: $date", 'info');
@@ -78,13 +78,13 @@ $content = preg_replace(
 $bytesWritten = file_put_contents($configFile, $content);
 
 if ($bytesWritten === false) {
-    out('Failed to write to config file', 'error');
+    out("\n- Failed to write to config file", 'error');
 }
 
 if ($bytesWritten === 0) {
-    out('Config file was not updated (0 bytes written)', 'error');
+    out("\n- Config file was not updated (0 bytes written)", 'error');
 }
 
-out('- Config file has been updated!', 'success');
+out("\n- Config file has been updated!", 'success');
 
 // Git add & commit
