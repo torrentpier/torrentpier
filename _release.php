@@ -20,3 +20,42 @@ require_once BB_ROOT . 'library/defines.php';
 
 // Include CLI functions
 require INC_DIR . '/functions_cli.php';
+
+$configFile = BB_PATH . '/library/config.php';
+
+if (!is_file($configFile)) {
+    out("- Config file " . basename($configFile) . " not found", 'error');
+}
+if (!is_readable($configFile)) {
+    out("Config file " . basename($configFile) . " is not readable", 'error');
+}
+if (!is_writable($configFile)) {
+    out("Config file " . basename($configFile) . " is not writable", 'error');
+}
+
+// Welcoming message
+out("--- Release creation tool ---\n", 'info');
+
+fwrite(STDOUT, "Enter version number (e.g, v2.4.0): ");
+$version = trim(fgets(STDIN));
+
+fwrite(STDOUT, "Enter release date (e.g, 25-05-2025): ");
+$date = trim(fgets(STDIN));
+
+if (empty($date)) {
+    $date = date('d-m-Y');
+    out("- !\n", 'success');
+}
+
+$content = file_get_contents($configFile);
+$content = preg_replace(
+    "/\\\$bb_cfg\['tp_version'\]\s*=\s*'[^']*';/",
+    "\$bb_cfg['tp_version'] = '$version';",
+    $content
+);
+$content = preg_replace(
+    "/\\\$bb_cfg\['tp_release_date'\]\s*=\s*'[^']*';/",
+    "\$bb_cfg['tp_release_date'] = '$date';",
+    $content
+);
+file_put_contents($configFile, $content);
