@@ -31,6 +31,7 @@ $items = [
     '.editorconfig',
     '.gitignore',
     '.styleci.yml',
+    '_release.php',
     'CHANGELOG.md',
     'cliff.toml',
     'CODE_OF_CONDUCT.md',
