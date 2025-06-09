@@ -55,6 +55,14 @@ if (empty($version)) {
     out("- Using version: $version", 'info');
 }
 
+// Ask for version emoji
+fwrite(STDOUT, 'Enter version emoji: ');
+$versionEmoji = trim(fgets(STDIN));
+
+if (!empty($versionEmoji)) {
+    out("- Using version emoji: $versionEmoji", 'info');
+}
+
 // Ask for release date or use today's date
 fwrite(STDOUT, "Enter release date (e.g. 25-05-2025), leave empty to use today's date: ");
 $date = trim(fgets(STDIN));
@@ -109,7 +117,7 @@ out("\n- Config file has been updated!", 'success');
 runProcess('npx git-cliff v2.4.5-rc.2.. --config cliff.toml --tag "' . $version . '" > CHANGELOG.md');
 
 // Git add & commit
-runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . '"');
+runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . ' ' . $versionEmoji . '"');
 
 $userName = 'belomaxorka';
 $userEmail = 'roman25052006.kelesh@gmail.com';
