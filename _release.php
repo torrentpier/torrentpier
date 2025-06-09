@@ -106,3 +106,18 @@ if ($bytesWritten === 0) {
 out("\n- Config file has been updated!", 'success');
 
 // Git add & commit
+runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . '"');
+
+$userName = 'belomaxorka';
+$userEmail = 'roman25052006.kelesh@gmail.com';
+
+$tagCmd = <<<CMD
+git -c user.name="{$userName}" \
+    -c user.email="{$userEmail}" \
+    tag -a "{$version}" -m "Release {$version}"
+CMD;
+
+runProcess($tagCmd);
+runProcess("git tag -v \"$version\"");
+
+out("\n- Release $version has been successfully prepared and committed!", 'success');
