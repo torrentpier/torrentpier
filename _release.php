@@ -27,24 +27,32 @@ if (!is_file($configFile)) {
     out("- Config file " . basename($configFile) . " not found", 'error');
 }
 if (!is_readable($configFile)) {
-    out("Config file " . basename($configFile) . " is not readable", 'error');
+    out("- Config file " . basename($configFile) . " is not readable", 'error');
 }
 if (!is_writable($configFile)) {
-    out("Config file " . basename($configFile) . " is not writable", 'error');
+    out("- Config file " . basename($configFile) . " is not writable", 'error');
 }
 
 // Welcoming message
 out("--- Release creation tool ---\n", 'info');
 
+// Ask for version
 fwrite(STDOUT, "Enter version number (e.g, v2.4.0): ");
 $version = trim(fgets(STDIN));
 
-fwrite(STDOUT, "Enter release date (e.g, 25-05-2025): ");
+// Ask for release date or use today's date
+fwrite(STDOUT, "Enter release date (e.g. 25-05-2025), leave empty to use today's date: ");
 $date = trim(fgets(STDIN));
 
 if (empty($date)) {
     $date = date('d-m-Y');
-    out("- !\n", 'success');
+    out("- Using current date: $date", 'success');
+} else {
+    // Validate date format (dd-mm-yyyy)
+    $dateObj = DateTime::createFromFormat('d-m-Y', $date);
+    if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
+        out("Invalid date format. Expected format: DD-MM-YYYY", 'error');
+    }
 }
 
 $content = file_get_contents($configFile);
