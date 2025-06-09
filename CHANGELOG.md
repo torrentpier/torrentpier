@@ -4,6 +4,13 @@
 
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
+### ⚙️ Miscellaneous
+
+- *(_release.php)* Added `push origin` command ([#1932](https://github.com/torrentpier/torrentpier/pull/1932)) - ([5561e00](https://github.com/torrentpier/torrentpier/commit/5561e0022ca6a0a668f2dc5aee541609bb6c4d1e))
+
+
+## [v2.4.6-alpha.1](https://github.com/torrentpier/torrentpier/compare/v2.4.5..v2.4.6-alpha.1) (2025-06-09)
+
 ### 🚀 Features
 
 - *(ACP)* Added `robots.txt` editor ([#1913](https://github.com/torrentpier/torrentpier/pull/1913)) - ([79bb13e](https://github.com/torrentpier/torrentpier/commit/79bb13e17d07505be4d3a3c67223b4f591b66bfb))
@@ -35,6 +42,7 @@
 
 ### ⚙️ Miscellaneous
 
+- *(_release.php)* Added `GPG` sign for tags ([#1931](https://github.com/torrentpier/torrentpier/pull/1931)) - ([8ecc617](https://github.com/torrentpier/torrentpier/commit/8ecc61719acb61e9a2ce115b28f1a82580c01110))
 - *(cliff)* Added automated script for releases creation ([#1930](https://github.com/torrentpier/torrentpier/pull/1930)) - ([6adde35](https://github.com/torrentpier/torrentpier/commit/6adde35849811648bcb8fa1a72c3be0a886b7919))
 - *(cliff)* Completely removed `cliff-releases.toml` ([#1929](https://github.com/torrentpier/torrentpier/pull/1929)) - ([cef041c](https://github.com/torrentpier/torrentpier/commit/cef041c0d128dca480ca40770f52385f868706b0))
 - *(cliff)* Updated config ([#1928](https://github.com/torrentpier/torrentpier/pull/1928)) - ([212e5c5](https://github.com/torrentpier/torrentpier/commit/212e5c52832f32e8864850bf520b5c73f27f1609))
