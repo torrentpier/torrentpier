@@ -116,4 +116,7 @@ $tagCmd = "git -c user.name=\"$userName\" -c user.email=\"$userEmail\" -c user.s
 runProcess($tagCmd);
 runProcess("git tag -v \"$version\"");
 
+runProcess("git push origin master");
+runProcess("git push origin $version");
+
 out("\n- Release $version has been successfully prepared and committed!", 'success');
