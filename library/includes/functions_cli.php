@@ -15,13 +15,18 @@ if (!defined('BB_ROOT')) {
  * Remove target file
  *
  * @param string $file Path to file
+ * @param bool $withoutOutput Hide output
  */
-function removeFile(string $file): void
+function removeFile(string $file, bool $withoutOutput = false): void
 {
     if (unlink($file)) {
-        echo "- File removed: $file" . PHP_EOL;
+        if ($withoutOutput === false) {
+            echo "- File removed: $file" . PHP_EOL;
+        }
     } else {
-        echo "- File cannot be removed: $file" . PHP_EOL;
+        if ($withoutOutput === false) {
+            echo "- File cannot be removed: $file" . PHP_EOL;
+        }
         exit;
     }
 }
@@ -30,8 +35,9 @@ function removeFile(string $file): void
  * Remove folder (recursively)
  *
  * @param string $dir Path to folder
+ * @param bool $withoutOutput Hide output
  */
-function removeDir(string $dir): void
+function removeDir(string $dir, bool $withoutOutput = false): void
 {
     $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
     $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
@@ -40,14 +46,18 @@ function removeDir(string $dir): void
         if ($file->isDir()) {
             removeDir($file->getPathname());
         } else {
-            removeFile($file->getPathname());
+            removeFile($file->getPathname(), $withoutOutput);
         }
     }
 
     if (rmdir($dir)) {
-        echo "- Folder removed: $dir" . PHP_EOL;
+        if ($withoutOutput === false) {
+            echo "- Folder removed: $dir" . PHP_EOL;
+        }
     } else {
-        echo "- Folder cannot be removed: $dir" . PHP_EOL;
+        if ($withoutOutput === false) {
+            echo "- Folder cannot be removed: $dir" . PHP_EOL;
+        }
         exit;
     }
 }
