@@ -84,3 +84,7 @@ if ($bytesWritten === false) {
 if ($bytesWritten === 0) {
     out('Config file was not updated (0 bytes written)', 'error');
 }
+
+out('- Config file has been updated!', 'success');
+
+// Git add & commit
