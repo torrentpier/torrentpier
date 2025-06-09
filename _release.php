@@ -28,17 +28,25 @@ $configFile = BB_PATH . '/library/config.php';
 
 if (!is_file($configFile)) {
     out('- Config file ' . basename($configFile) . ' not found', 'error');
+    exit;
 }
 if (!is_readable($configFile)) {
     out('- Config file ' . basename($configFile) . ' is not readable', 'error');
+    exit;
 }
 if (!is_writable($configFile)) {
     out('- Config file ' . basename($configFile) . ' is not writable', 'error');
+    exit;
 }
 
 // Ask for version
 fwrite(STDOUT, 'Enter version number (e.g, v2.4.0): ');
 $version = trim(fgets(STDIN));
+
+if (empty($version)) {
+    out("- Version cannot be empty. Please enter a valid version number", 'error');
+    exit;
+}
 
 // Ask for release date or use today's date
 fwrite(STDOUT, "Enter release date (e.g. 25-05-2025), leave empty to use today's date: ");
@@ -51,7 +59,8 @@ if (empty($date)) {
     // Validate date format (dd-mm-yyyy)
     $dateObj = DateTime::createFromFormat('d-m-Y', $date);
     if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
-        out("\n- Invalid date format. Expected format: DD-MM-YYYY", 'error');
+        out("- Invalid date format. Expected format: DD-MM-YYYY", 'error');
+        exit;
     }
 
     out("- Using date: $date", 'info');
@@ -78,13 +87,15 @@ $content = preg_replace(
 $bytesWritten = file_put_contents($configFile, $content);
 
 if ($bytesWritten === false) {
-    out("\n- Failed to write to config file", 'error');
+    out("- Failed to write to config file", 'error');
+    exit;
 }
 
 if ($bytesWritten === 0) {
-    out("\n- Config file was not updated (0 bytes written)", 'error');
+    out("- Config file was not updated (0 bytes written)", 'error');
+    exit;
 }
 
-out("\n- Config file has been updated!", 'success');
+out("- Config file has been updated!", 'success');
 
 // Git add & commit
