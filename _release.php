@@ -98,6 +98,6 @@ if ($bytesWritten === 0) {
     exit;
 }
 
-out("- Config file has been updated!", 'success');
+out("\n- Config file has been updated!", 'success');
 
 // Git add & commit
