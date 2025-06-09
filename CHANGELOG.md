@@ -1,3 +1,5 @@
+[![TorrentPier](https://raw.githubusercontent.com/torrentpier/.github/refs/heads/main/versions/Cattle.png)](https://github.com/torrentpier)
+
 # 📖 Change Log
 
 > [!NOTE]
@@ -15,6 +17,7 @@
 
 ### 🈳 New translations
 
+- New Crowdin updates ([#1925](https://github.com/torrentpier/torrentpier/pull/1925)) - ([2487d13](https://github.com/torrentpier/torrentpier/commit/2487d130bb23bd82cedf0d114843bb48f6d2e61c))
 - New Crowdin updates ([#1924](https://github.com/torrentpier/torrentpier/pull/1924)) - ([0515670](https://github.com/torrentpier/torrentpier/commit/0515670bee99faa5f0979162096114bc9d3ddf98))
 - New translations main.php (Russian) ([#1922](https://github.com/torrentpier/torrentpier/pull/1922)) - ([8e965fb](https://github.com/torrentpier/torrentpier/commit/8e965fb1ceb5e82201c43b33fcdb044256646191))
 - New Crowdin updates ([#1921](https://github.com/torrentpier/torrentpier/pull/1921)) - ([daeb7fe](https://github.com/torrentpier/torrentpier/commit/daeb7fe87e8da53745fe7aac0708cefa3392ffdc))
@@ -32,12 +35,10 @@
 - *(deps)* Bump filp/whoops from 2.18.0 to 2.18.1 ([#1919](https://github.com/torrentpier/torrentpier/pull/1919)) - ([1253661](https://github.com/torrentpier/torrentpier/commit/125366147c6257abadd489f3802e4a0dab37a89c))
 - *(deps)* Bump arokettu/bencode from 4.3.0 to 4.3.1 ([#1912](https://github.com/torrentpier/torrentpier/pull/1912)) - ([f76e351](https://github.com/torrentpier/torrentpier/commit/f76e351b32cfa2932bc1afde6c3c522cd993b8af))
 
-### 💼 Other
-
-- New Crowdin updates ([#1925](https://github.com/torrentpier/torrentpier/pull/1925)) - ([2487d13](https://github.com/torrentpier/torrentpier/commit/2487d130bb23bd82cedf0d114843bb48f6d2e61c))
-
 ### ⚙️ Miscellaneous
 
+- *(cliff)* Completely removed `cliff-releases.toml` ([#1929](https://github.com/torrentpier/torrentpier/pull/1929)) - ([cef041c](https://github.com/torrentpier/torrentpier/commit/cef041c0d128dca480ca40770f52385f868706b0))
+- *(cliff)* Updated config ([#1928](https://github.com/torrentpier/torrentpier/pull/1928)) - ([212e5c5](https://github.com/torrentpier/torrentpier/commit/212e5c52832f32e8864850bf520b5c73f27f1609))
 - Minor improvements ([#1918](https://github.com/torrentpier/torrentpier/pull/1918)) - ([46f29bc](https://github.com/torrentpier/torrentpier/commit/46f29bc68a18fdefad81e26a60fe44f122407ea7))
 
 
