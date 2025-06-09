@@ -16,11 +16,13 @@ if (php_sapi_name() !== 'cli') {
     exit;
 }
 
-// Get all constants
-require_once BB_PATH . '/library/defines.php';
+if (!function_exists('removeFile')) {
+    // Get all constants
+    require_once BB_PATH . '/library/defines.php';
 
-// Include CLI functions
-require INC_DIR . '/functions_cli.php';
+    // Include CLI functions
+    require INC_DIR . '/functions_cli.php';
+}
 
 $items = [
     '.github',
