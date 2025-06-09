@@ -21,7 +21,7 @@ jobs:
         uses: orhun/git-cliff-action@v4
         id: git-cliff
         with:
-          config: cliff-releases.toml
+          config: cliff.toml
           args: -vv --latest --no-exec --github-repo ${{ github.repository }}
 
       - name: Print the changelog

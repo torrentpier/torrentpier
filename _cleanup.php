@@ -24,7 +24,6 @@ $items = [
     '.styleci.yml',
     'CHANGELOG.md',
     'cliff.toml',
-    'cliff-releases.toml',
     'CODE_OF_CONDUCT.md',
     'CONTRIBUTING.md',
     'crowdin.yml',
