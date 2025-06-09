@@ -46,13 +46,15 @@ $date = trim(fgets(STDIN));
 
 if (empty($date)) {
     $date = date('d-m-Y');
-    out("- Using current date: $date", 'success');
+    out("- Using current date: $date", 'info');
 } else {
     // Validate date format (dd-mm-yyyy)
     $dateObj = DateTime::createFromFormat('d-m-Y', $date);
     if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
         out("Invalid date format. Expected format: DD-MM-YYYY", 'error');
     }
+
+    out("- Using date: $date", 'info');
 }
 
 $content = file_get_contents($configFile);
