@@ -4,8 +4,15 @@
 
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
+### 🗑️ Removed
+
+- Extra `CFG_DIR` constant ([#1936](https://github.com/torrentpier/torrentpier/pull/1936)) - ([4b16b84](https://github.com/torrentpier/torrentpier/commit/4b16b847f542e3608c8bb4d97d1f27f7fd6c97b7))
+
 ### ⚙️ Miscellaneous
 
+- *(_release.php)* Temporary removed automatic `push origin` ([#1935](https://github.com/torrentpier/torrentpier/pull/1935)) - ([dcd7002](https://github.com/torrentpier/torrentpier/commit/dcd7002c2aa09ec187f3afd91fb7e3f5e03630e0))
+- *(_release.php)* Added ability to set version emoji ([#1934](https://github.com/torrentpier/torrentpier/pull/1934)) - ([75ef574](https://github.com/torrentpier/torrentpier/commit/75ef57474c3a32e86ecc98a5ff2fab39a9a66282))
+- *(_release.php)* Added automatic `CHANGELOG.md` update ([#1933](https://github.com/torrentpier/torrentpier/pull/1933)) - ([867359a](https://github.com/torrentpier/torrentpier/commit/867359a89e480071cfd927e2cb6ef4fd761c0172))
 - *(_release.php)* Added `push origin` command ([#1932](https://github.com/torrentpier/torrentpier/pull/1932)) - ([5561e00](https://github.com/torrentpier/torrentpier/commit/5561e0022ca6a0a668f2dc5aee541609bb6c4d1e))
 
 
