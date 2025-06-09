@@ -88,7 +88,7 @@ function out(string $str, string $type = ''): void
  * @param string|null $input
  * @return void
  */
-function runProcess(string $cmd, string $input = null): void
+function runProcess(string $cmd, ?string $input = null): void
 {
     $descriptorSpec = [
         0 => ['pipe', 'r'],
