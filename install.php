@@ -94,7 +94,7 @@ if (is_file(BB_ROOT . '.env')) {
         }
         // composer dir
         if (is_dir(BB_ROOT . 'vendor')) {
-            rmdir_rec(BB_ROOT . 'vendor');
+            removeDir(BB_ROOT . 'vendor');
             if (!is_dir(BB_ROOT . 'vendor')) {
                 out("- Composer directory successfully removed!");
             } else {

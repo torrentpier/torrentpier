@@ -118,27 +118,6 @@ function runProcess(string $cmd, string $input = null): void
 }
 
 /**
- * Remove directory recursively
- *
- * @param string $dir
- * @return void
- */
-function rmdir_rec(string $dir): void
-{
-    $it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-    $files = new RecursiveIteratorIterator($it,
-        RecursiveIteratorIterator::CHILD_FIRST);
-    foreach ($files as $file) {
-        if ($file->isDir()) {
-            rmdir($file->getPathname());
-        } else {
-            unlink($file->getPathname());
-        }
-    }
-    rmdir($dir);
-}
-
-/**
  * Setting permissions recursively
  *
  * @param string $dir
