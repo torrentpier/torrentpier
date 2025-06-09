@@ -57,15 +57,22 @@ if (empty($date)) {
     out("- Using date: $date", 'info');
 }
 
+// Read config file content
 $content = file_get_contents($configFile);
+
+// Update version
 $content = preg_replace(
     "/\\\$bb_cfg\['tp_version'\]\s*=\s*'[^']*';/",
     "\$bb_cfg['tp_version'] = '$version';",
     $content
 );
+
+// Update release date
 $content = preg_replace(
     "/\\\$bb_cfg\['tp_release_date'\]\s*=\s*'[^']*';/",
     "\$bb_cfg['tp_release_date'] = '$date';",
     $content
 );
+
+// Save updated config
 file_put_contents($configFile, $content);
