@@ -47,6 +47,11 @@ if (empty($version)) {
     out("- Version cannot be empty. Please enter a valid version number", 'error');
     exit;
 } else {
+    // Add 'v' prefix if missing
+    if (!str_starts_with($version, 'v')) {
+        $version = 'v' . $version;
+    }
+
     out("- Using version: $version", 'info');
 }
 
