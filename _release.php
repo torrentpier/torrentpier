@@ -46,6 +46,8 @@ $version = trim(fgets(STDIN));
 if (empty($version)) {
     out("- Version cannot be empty. Please enter a valid version number", 'error');
     exit;
+} else {
+    out("- Using version: $version", 'info');
 }
 
 // Ask for release date or use today's date
