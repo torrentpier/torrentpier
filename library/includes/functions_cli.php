@@ -44,7 +44,7 @@ function removeDir(string $dir, bool $withoutOutput = false): void
 
     foreach ($files as $file) {
         if ($file->isDir()) {
-            removeDir($file->getPathname());
+            removeDir($file->getPathname(), $withoutOutput);
         } else {
             removeFile($file->getPathname(), $withoutOutput);
         }

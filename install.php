@@ -8,6 +8,7 @@
  */
 
 define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
 if (php_sapi_name() !== 'cli') {
@@ -15,7 +16,7 @@ if (php_sapi_name() !== 'cli') {
 }
 
 // Get all constants
-require_once BB_PATH . '/library/defines.php';
+require_once BB_ROOT . 'library/defines.php';
 
 // Include CLI functions
 require INC_DIR . '/functions_cli.php';
