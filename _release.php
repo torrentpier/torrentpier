@@ -110,8 +110,9 @@ runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) .
 
 $userName = 'belomaxorka';
 $userEmail = 'roman25052006.kelesh@gmail.com';
+$keyId = '0D496E7D57AEA4B6B017F379F34487C7A449A619';
 
-$tagCmd = "git -c user.name=\"$userName\" -c user.email=\"$userEmail\" tag -a \"$version\" -m \"Release $version\"";
+$tagCmd = "git -c user.name=\"$userName\" -c user.email=\"$userEmail\" -c user.signingkey=\"$keyId\" tag -s -a \"$version\" -m \"Release $version\"";
 runProcess($tagCmd);
 runProcess("git tag -v \"$version\"");
 
