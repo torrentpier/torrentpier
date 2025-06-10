@@ -20,10 +20,10 @@ if (!$mode = (string)$this->request['mode']) {
 $html = '';
 switch ($mode) {
     case 'birthday_week':
-        $stats = $datastore->get('stats');
         $datastore->enqueue([
             'stats'
         ]);
+        $stats = $datastore->get('stats');
 
         $users = [];
 
@@ -38,10 +38,10 @@ switch ($mode) {
         break;
 
     case 'birthday_today':
-        $stats = $datastore->get('stats');
         $datastore->enqueue([
             'stats'
         ]);
+        $stats = $datastore->get('stats');
 
         $users = [];
 
