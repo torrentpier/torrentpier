@@ -117,7 +117,7 @@ out("\n- Config file has been updated!", 'success');
 runProcess('npx git-cliff v2.4.5-rc.2.. --config cliff.toml --tag "' . $version . '" > CHANGELOG.md');
 
 // Git add & commit
-runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . ' ' . $versionEmoji . '"');
+runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . (!empty($versionEmoji) ? (' ' . $versionEmoji) : '') . '"');
 
 $userName = 'belomaxorka';
 $userEmail = 'roman25052006.kelesh@gmail.com';
@@ -127,7 +127,7 @@ $tagCmd = "git -c user.name=\"$userName\" -c user.email=\"$userEmail\" -c user.s
 runProcess($tagCmd);
 runProcess("git tag -v \"$version\"");
 
-// runProcess("git push origin master");
-// runProcess("git push origin $version");
+runProcess("git push origin master");
+runProcess("git push origin $version");
 
 out("\n- Release $version has been successfully prepared, committed and pushed!", 'success');
