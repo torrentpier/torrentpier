@@ -178,7 +178,14 @@ class Ajax
 
         // Show ajax action in console log
         if (!empty($_COOKIE['explain'])) {
-            $this->response['console_log'] = 'ajax action: ' . $this->response['action'];
+            $console_log = [];
+
+            $console_log['action_name'] = $this->response['action'];
+            if (!empty($this->request['mode'])) {
+                $console_log['mode'] = $this->request['mode'];
+            }
+
+            $this->response['console_log'] = $console_log;
         }
 
         if (Dev::sqlDebugAllowed()) {
