@@ -59,8 +59,7 @@ switch ($mode) {
         $forum_id = (int)$this->request['forum_id'];
 
         $datastore->enqueue([
-            'moderators',
-            'cat_forums'
+            'moderators'
         ]);
 
         $moderators = [];
