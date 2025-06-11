@@ -4,12 +4,17 @@
 
 ## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
 
+### 🚀 Features
+
+- Add console log for ajax actions when explain cookie is set ([#1940](https://github.com/torrentpier/torrentpier/pull/1940)) - ([345dd1b](https://github.com/torrentpier/torrentpier/commit/345dd1bc20928e25dc72befb705502156e47f1d7))
+
 ### 🐛 Bug Fixes
 
 - Set `$datastore->enqueue` before `$datastore->get` ([#1937](https://github.com/torrentpier/torrentpier/pull/1937)) - ([bf328dd](https://github.com/torrentpier/torrentpier/commit/bf328dd69ec42e417275f037dc59a15a2867d7f4))
 
 ### 🗑️ Removed
 
+- `'cat_forums'` from enqueue list in `get_forum_mods` ajax ([#1939](https://github.com/torrentpier/torrentpier/pull/1939)) - ([28e38aa](https://github.com/torrentpier/torrentpier/commit/28e38aa78103c8233e15439ecd886187a55d5e12))
 - Extra `CFG_DIR` constant ([#1936](https://github.com/torrentpier/torrentpier/pull/1936)) - ([4b16b84](https://github.com/torrentpier/torrentpier/commit/4b16b847f542e3608c8bb4d97d1f27f7fd6c97b7))
 
 ### ⚙️ Miscellaneous
