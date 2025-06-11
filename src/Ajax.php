@@ -180,9 +180,8 @@ class Ajax
         if (!empty($_COOKIE['explain'])) {
             $console_log = [];
 
-            $console_log['action_name'] = $this->response['action'];
-            if (!empty($this->request['mode'])) {
-                $console_log['mode'] = $this->request['mode'];
+            foreach ($this->request as $key => $value) {
+                $console_log[$key] = $value;
             }
 
             $this->response['console_log'] = $console_log;
