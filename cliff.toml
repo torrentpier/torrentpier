@@ -23,7 +23,7 @@ body = """
 {%- endmacro -%}
 
 {%- macro nightly_url() -%}
-  https://nightly.link/{{ remote.github.owner }}/{{ remote.github.repo }}/workflows/build/master/TorrentPier
+  https://nightly.link/{{ remote.github.owner }}/{{ remote.github.repo }}/workflows/ci/master/TorrentPier-master
 {%- endmacro -%}
 
 {% macro print_commit(commit) -%}
