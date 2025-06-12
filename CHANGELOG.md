@@ -6,6 +6,8 @@
 
 ### 🚀 Features
 
+- *(ajax)* Log full ajax request/response data to console in explain mode ([#1942](https://github.com/torrentpier/torrentpier/pull/1942)) - ([bcf4eb4](https://github.com/torrentpier/torrentpier/commit/bcf4eb4e9baacf27e23a2b7c7135918ec3356c1a))
+- Improved ajax debug ([#1941](https://github.com/torrentpier/torrentpier/pull/1941)) - ([6f03f75](https://github.com/torrentpier/torrentpier/commit/6f03f750bab400f5e8a74bd05c9ee167343959ab))
 - Add console log for ajax actions when explain cookie is set ([#1940](https://github.com/torrentpier/torrentpier/pull/1940)) - ([345dd1b](https://github.com/torrentpier/torrentpier/commit/345dd1bc20928e25dc72befb705502156e47f1d7))
 
 ### 🐛 Bug Fixes
