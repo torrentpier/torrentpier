@@ -2,7 +2,7 @@
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/build/master/TorrentPier)
+## [v2.4.6-alpha.2](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.1..v2.4.6-alpha.2) (2025-06-12)
 
 ### 🚀 Features
 
@@ -13,6 +13,10 @@
 ### 🐛 Bug Fixes
 
 - Set `$datastore->enqueue` before `$datastore->get` ([#1937](https://github.com/torrentpier/torrentpier/pull/1937)) - ([bf328dd](https://github.com/torrentpier/torrentpier/commit/bf328dd69ec42e417275f037dc59a15a2867d7f4))
+
+### 📦 Dependencies
+
+- *(deps)* Bump filp/whoops from 2.18.1 to 2.18.2 ([#1943](https://github.com/torrentpier/torrentpier/pull/1943)) - ([9a52955](https://github.com/torrentpier/torrentpier/commit/9a529558b41f620e8347cc1091f59b1f2d864ca9))
 
 ### 🗑️ Removed
 
@@ -26,6 +30,7 @@
 - *(_release.php)* Added ability to set version emoji ([#1934](https://github.com/torrentpier/torrentpier/pull/1934)) - ([75ef574](https://github.com/torrentpier/torrentpier/commit/75ef57474c3a32e86ecc98a5ff2fab39a9a66282))
 - *(_release.php)* Added automatic `CHANGELOG.md` update ([#1933](https://github.com/torrentpier/torrentpier/pull/1933)) - ([867359a](https://github.com/torrentpier/torrentpier/commit/867359a89e480071cfd927e2cb6ef4fd761c0172))
 - *(_release.php)* Added `push origin` command ([#1932](https://github.com/torrentpier/torrentpier/pull/1932)) - ([5561e00](https://github.com/torrentpier/torrentpier/commit/5561e0022ca6a0a668f2dc5aee541609bb6c4d1e))
+- *(cliff.toml)* Use correct nightly link ([#1944](https://github.com/torrentpier/torrentpier/pull/1944)) - ([5e6fb3e](https://github.com/torrentpier/torrentpier/commit/5e6fb3ef424cbc84bb5e25625dcd22fd73ec98fa))
 
 
 ## [v2.4.6-alpha.1](https://github.com/torrentpier/torrentpier/compare/v2.4.5..v2.4.6-alpha.1) (2025-06-09)
