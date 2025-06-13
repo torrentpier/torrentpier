@@ -2,6 +2,13 @@
 
 # 📖 Change Log
 
+## [v2.4.6-alpha.3](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.2..v2.4.6-alpha.3) (2025-06-13)
+
+### ⚙️ Miscellaneous
+
+- *(_release.php)* Minor improvements ([#1945](https://github.com/torrentpier/torrentpier/pull/1945)) - ([e5811f9](https://github.com/torrentpier/torrentpier/commit/e5811f9c66eef7f228b51fb82ffda3bcddeb915d))
+
+
 ## [v2.4.6-alpha.2](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.1..v2.4.6-alpha.2) (2025-06-12)
 
 ### 🚀 Features
