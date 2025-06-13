@@ -18,7 +18,7 @@ $reserved_port = env('TP_PORT', 80);
 $bb_cfg = [];
 
 // Version info
-$bb_cfg['tp_version'] = 'v2.4.6-alpha.3';
+$bb_cfg['tp_version'] = 'v2.4.6-alpha.4';
 $bb_cfg['tp_release_date'] = '13-06-2025';
 $bb_cfg['tp_release_codename'] = 'Cattle';
 

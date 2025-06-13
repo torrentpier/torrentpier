@@ -2,6 +2,13 @@
 
 # 📖 Change Log
 
+## [v2.4.6-alpha.4](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.3..v2.4.6-alpha.4) (2025-06-13)
+
+### ⚙️ Miscellaneous
+
+- *(_release.php)* Use `GPG` sign for tags by default ([#1946](https://github.com/torrentpier/torrentpier/pull/1946)) - ([0271b21](https://github.com/torrentpier/torrentpier/commit/0271b21a5e8c9dce918da9954547d81dae2a1d4b))
+
+
 ## [v2.4.6-alpha.3](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.2..v2.4.6-alpha.3) (2025-06-13)
 
 ### ⚙️ Miscellaneous
