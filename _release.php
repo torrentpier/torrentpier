@@ -119,12 +119,8 @@ runProcess('npx git-cliff v2.4.5-rc.2.. --config cliff.toml --tag "' . $version 
 // Git add & commit
 runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . (!empty($versionEmoji) ? (' ' . $versionEmoji) : '') . '"');
 
-$userName = 'Roman Kelesidis';
-$userEmail = 'roman25052006.kelesh@gmail.com';
-$keyId = '139C8E4A1A2B48233AE3EFEFD8157C4D4C4C6DB4';
-
-$tagCmd = "git -c user.name=\"$userName\" -c user.email=\"$userEmail\" -c user.signingkey=\"$keyId\" tag -s -a \"$version\" -m \"Release $version\"";
-runProcess($tagCmd);
+// Git tag
+runProcess("git tag -a \"$version\" -m \"Release $version\"");
 runProcess("git tag -v \"$version\"");
 
 // Git push
