@@ -120,6 +120,8 @@ runProcess('npx git-cliff v2.4.5-rc.2.. --config cliff.toml --tag "' . $version 
 runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . (!empty($versionEmoji) ? (' ' . $versionEmoji) : '') . '"');
 runProcess("git tag -a \"$version\" -m \"Release $version\"");
 runProcess("git tag -v \"$version\"");
+
+// Git push
 runProcess("git push origin master");
 runProcess("git push origin $version");
 
