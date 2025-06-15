@@ -238,9 +238,6 @@
 - Bring back missing `cache` & `log` directories ([#1832](https://github.com/torrentpier/torrentpier/pull/1832)) - ([249c988](https://github.com/torrentpier/torrentpier/commit/249c9889890291d56317dd703414bdb57ecaa41f))
 - Some minor improvements ([#1829](https://github.com/torrentpier/torrentpier/pull/1829)) - ([3b8ee4c](https://github.com/torrentpier/torrentpier/commit/3b8ee4c4d3ab4631425fbe44f197b6a9bd7d158c))
 
-## New Contributors ❤️
-
-* @xeddmc made their first contribution in [#1812](https://github.com/torrentpier/torrentpier/pull/1812)
 
 ## [v2.4.5-rc.3](https://github.com/torrentpier/torrentpier/compare/v2.4.5-rc.2..v2.4.5-rc.3) (2025-02-06)
 
@@ -321,8 +318,5 @@
 - Minor improvements ([#1743](https://github.com/torrentpier/torrentpier/pull/1743)) - ([e73d650](https://github.com/torrentpier/torrentpier/commit/e73d65011fff0a8b8e1368eef61bbfb67e87eab8))
 - Enabled `$bb_cfg['integrity_check']` by defaul ([#1742](https://github.com/torrentpier/torrentpier/pull/1742)) - ([7e3601e](https://github.com/torrentpier/torrentpier/commit/7e3601e63aff73be1428969ca37dda3da2537d9b))
 
-## New Contributors ❤️
-
-* @actions-user made their first contribution
 
 
