@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
 DB()->expect_slow_query(600);
 
 //
@@ -81,7 +79,7 @@ DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_BB_BT
 
 DB()->query("CREATE TABLE " . NEW_BB_BT_DLSTATUS_SNAP . " LIKE " . BB_BT_DLSTATUS_SNAP);
 
-if ($bb_cfg['bt_show_dl_list'] && $bb_cfg['bt_dl_list_only_count']) {
+if (config()->get('bt_show_dl_list') && config()->get('bt_dl_list_only_count')) {
     DB()->query("
 		INSERT INTO " . NEW_BB_BT_DLSTATUS_SNAP . "
 			(topic_id, dl_status, users_count)
@@ -104,7 +102,7 @@ DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_BB_BT
 //
 // TORHELP
 //
-if ($bb_cfg['torhelp_enabled']) {
+if (config()->get('torhelp_enabled')) {
     $tor_min_seeders = 0;   // "<="
     $tor_min_leechers = 2;   // ">="
     $tor_min_completed = 10;  // ">="
@@ -147,7 +145,7 @@ if ($bb_cfg['torhelp_enabled']) {
 			WHERE
 			      trsn.seeders          <=  $tor_min_seeders
 			  AND trsn.leechers         >=  $tor_min_leechers
-			  AND tor.forum_id          !=  " . (int)$bb_cfg['trash_forum_id'] . "
+			                          AND tor.forum_id          !=  " . (int)config()->get('trash_forum_id') . "
 			  AND tor.complete_count    >=  $tor_min_completed
 			  AND tor.seeder_last_seen  <=  (UNIX_TIMESTAMP() - $tor_seed_last_seen_days*86400)
 			  AND dl.user_id            IN($online_users_csv)

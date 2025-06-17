@@ -99,13 +99,11 @@ class Sitemap
      */
     private function getStaticUrls(): array
     {
-        global $bb_cfg;
-
         $staticUrls = [];
 
-        if (isset($bb_cfg['static_sitemap'])) {
+        if (config()->has('static_sitemap')) {
             /** @var array $urls разбиваем строку по переносам */
-            $urls = explode("\n", $bb_cfg['static_sitemap']);
+            $urls = explode("\n", config()->get('static_sitemap'));
             foreach ($urls as $url) {
                 /** @var string $url проверяем что адрес валиден и с указанными протоколом */
                 if (filter_var(trim($url), FILTER_VALIDATE_URL)) {

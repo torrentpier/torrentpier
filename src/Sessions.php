@@ -51,14 +51,12 @@ class Sessions
      */
     public static function cache_set_userdata(?array $userdata, bool $force = false): bool
     {
-        global $bb_cfg;
-
         if (!$userdata || (self::ignore_cached_userdata() && !$force)) {
             return false;
         }
 
         $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-        return CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
+        return CACHE('session_cache')->set($id, $userdata, config()->get('session_update_intrv'));
     }
 
     /**

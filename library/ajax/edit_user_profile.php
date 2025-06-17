@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang;
+global $lang;
 
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
@@ -55,7 +55,7 @@ switch ($field) {
         break;
 
     case 'user_gender':
-        if (!$bb_cfg['gender']) {
+        if (!config()->get('gender')) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
         if (!isset($lang['GENDER_SELECT'][$value])) {
@@ -65,7 +65,7 @@ switch ($field) {
         break;
 
     case 'user_birthday':
-        if (!$bb_cfg['birthday_enabled']) {
+        if (!config()->get('birthday_enabled')) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
         $birthday_date = date_parse($value);
@@ -73,10 +73,10 @@ switch ($field) {
         if (!empty($birthday_date['year'])) {
             if (strtotime($value) >= TIMENOW) {
                 $this->ajax_die($lang['WRONG_BIRTHDAY_FORMAT']);
-            } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > $bb_cfg['birthday_max_age']) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
-            } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < $bb_cfg['birthday_min_age']) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
+            } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > config()->get('birthday_max_age')) {
+                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], config()->get('birthday_max_age')));
+            } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < config()->get('birthday_min_age')) {
+                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], config()->get('birthday_min_age')));
             }
         }
 

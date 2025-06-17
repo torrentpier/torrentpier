@@ -21,12 +21,12 @@ $dl_users_div_style_overflow = "padding: 6px; height: $dl_users_overflow_div_hei
 
 $template->assign_vars(['DL_BUTTONS' => false]);
 
-$count_mode = ($bb_cfg['bt_dl_list_only_count'] && !(@$_GET['dl'] === 'names'));
+$count_mode = (config()->get('bt_dl_list_only_count') && !(@$_GET['dl'] === 'names'));
 
-$have_dl_buttons_enabled = ($bb_cfg['bt_show_dl_but_will'] || $bb_cfg['bt_show_dl_but_down'] || $bb_cfg['bt_show_dl_but_compl'] || $bb_cfg['bt_show_dl_but_cancel']);
-$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !($bb_cfg['bt_dl_list_only_1st_page'] && $start));
-$show_dl_list = ($dl_topic && ($bb_cfg['bt_show_dl_list'] || ($bb_cfg['allow_dl_list_names_mode'] && @$_GET['dl'] === 'names')));
-$show_dl_buttons = (!IS_GUEST && $dl_topic && $bb_cfg['bt_show_dl_list_buttons']);
+$have_dl_buttons_enabled = (config()->get('bt_show_dl_but_will') || config()->get('bt_show_dl_but_down') || config()->get('bt_show_dl_but_compl') || config()->get('bt_show_dl_but_cancel'));
+$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !(config()->get('bt_dl_list_only_1st_page') && $start));
+$show_dl_list = ($dl_topic && (config()->get('bt_show_dl_list') || (config()->get('allow_dl_list_names_mode') && @$_GET['dl'] === 'names')));
+$show_dl_buttons = (!IS_GUEST && $dl_topic && config()->get('bt_show_dl_list_buttons'));
 
 // link to clear DL-List
 $template->assign_vars(['S_DL_DELETE' => false]);
@@ -99,7 +99,7 @@ if ($show_dl_list) {
                 ]);
             }
         }
-    } elseif ($bb_cfg['bt_show_dl_list_buttons'] && $have_dl_buttons_enabled) {
+    } elseif (config()->get('bt_show_dl_list_buttons') && $have_dl_buttons_enabled) {
         $template->assign_block_vars('dl_list_none', []);
     }
 }
@@ -107,10 +107,10 @@ if ($show_dl_list) {
 if ($show_dl_buttons) {
     $template->assign_vars([
         'DL_BUTTONS' => true,
-        'DL_BUT_WILL' => $bb_cfg['bt_show_dl_but_will'],
-        'DL_BUT_DOWN' => $bb_cfg['bt_show_dl_but_down'],
-        'DL_BUT_COMPL' => $bb_cfg['bt_show_dl_but_compl'],
-        'DL_BUT_CANCEL' => $bb_cfg['bt_show_dl_but_cancel']
+        'DL_BUT_WILL' => config()->get('bt_show_dl_but_will'),
+        'DL_BUT_DOWN' => config()->get('bt_show_dl_but_down'),
+        'DL_BUT_COMPL' => config()->get('bt_show_dl_but_compl'),
+        'DL_BUT_CANCEL' => config()->get('bt_show_dl_but_cancel')
     ]);
 
     $dl_hidden_fields = '

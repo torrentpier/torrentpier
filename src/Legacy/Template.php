@@ -17,7 +17,7 @@ class Template
 {
     /**
      * Variable that holds all the data we'll be substituting into the compiled templates.
-     * This will end up being a multi-dimensional array like this:
+     * This will end up being a multidimensional array like this:
      * $this->_tpldata[block.][iteration#][child.][iteration#][child2.][iteration#][variablename] == value
      * if it's a root-level variable, it'll be like this:
      * $this->vars[varname] == value  or  $this->_tpldata['.'][0][varname] == value
@@ -99,7 +99,7 @@ class Template
      */
     public function __construct($root = '.')
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         // setting pointer "vars"
         $this->vars = &$this->_tpldata['.'][0];
@@ -108,7 +108,7 @@ class Template
         $this->root = $root;
         $this->tpl = basename($root);
         $this->lang =& $lang;
-        $this->use_cache = $bb_cfg['xs_use_cache'];
+        $this->use_cache = config()->get('xs_use_cache');
 
         // Check template exists
         if (!is_dir($this->root)) {
@@ -228,6 +228,8 @@ class Template
     {
         $this->cur_tpl = $filename;
 
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        // bb_cfg deprecated, but kept for compatibility with non-adapted themes
         global $lang, $source_lang, $bb_cfg, $user;
 
         $L =& $lang;
@@ -987,11 +989,9 @@ class Template
 
     public function xs_startup()
     {
-        global $bb_cfg;
-
         // adding language variable (eg: "english" or "german")
         // can be used to make truly multi-lingual templates
-        $this->vars['LANG'] ??= $bb_cfg['default_lang'];
+        $this->vars['LANG'] ??= config()->get('default_lang');
         // adding current template
         $tpl = $this->root . '/';
         if (str_starts_with($tpl, './')) {

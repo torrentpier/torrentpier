@@ -23,7 +23,7 @@ if (!IN_DEMO_MODE || !is_file($dump_path) || !is_readable($dump_path)) {
 
 // Clean cache & datastore
 $datastore->clean();
-foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
+foreach (config()->get('cache.engines') as $cache_name => $cache_val) {
     CACHE($cache_name)->rm();
 }
 

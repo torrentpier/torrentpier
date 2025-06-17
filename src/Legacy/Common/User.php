@@ -111,7 +111,7 @@ class User
      */
     public function session_start(array $cfg = [])
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         $update_sessions_table = false;
         $this->cfg = array_merge($this->cfg, $cfg);
@@ -130,7 +130,7 @@ class User
             if ($session_id) {
                 $SQL['WHERE'][] = "s.session_id = '$session_id'";
 
-                if ($bb_cfg['torhelp_enabled']) {
+                if (config()->get('torhelp_enabled')) {
                     $SQL['SELECT'][] = "th.topic_id_csv AS torhelp";
                     $SQL['LEFT JOIN'][] = BB_BT_TORHELP . " th ON(u.user_id = th.user_id)";
                 }
@@ -146,7 +146,7 @@ class User
             if (!$this->data = Sessions::cache_get_userdata($userdata_cache_id)) {
                 $this->data = DB()->fetch_row($SQL);
 
-                if ($this->data && (TIMENOW - $this->data['session_time']) > $bb_cfg['session_update_intrv']) {
+                if ($this->data && (TIMENOW - $this->data['session_time']) > config()->get('session_update_intrv')) {
                     $this->data['session_time'] = TIMENOW;
                     $update_sessions_table = true;
                 }
@@ -187,7 +187,7 @@ class User
         // using the cookie user_id if available to pull basic user prefs.
         if (!$this->data) {
             $login = false;
-            $user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
+            $user_id = (config()->get('allow_autologin') && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
             if ($userdata = get_userdata((int)$user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
@@ -208,7 +208,7 @@ class User
         define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
         define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
         define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
-        define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+        define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$this->data['user_id']]));
         define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
@@ -243,8 +243,6 @@ class User
      */
     public function session_create(array $userdata, bool $auto_created = false): array
     {
-        global $bb_cfg;
-
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
@@ -281,8 +279,8 @@ class User
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
-            } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
+            } elseif ($session_time < (TIMENOW - config()->get('last_visit_update_intrv'))) {
+                $last_visit = max($session_time, (TIMENOW - 86400 * config()->get('max_last_visit_days')));
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
@@ -301,7 +299,7 @@ class User
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
-            if (!empty($_POST['autologin']) && $bb_cfg['allow_autologin']) {
+            if (!empty($_POST['autologin']) && config()->get('allow_autologin')) {
                 if (!$auto_created) {
                     $this->verify_autologin_id($this->data, true, true);
                 }
@@ -463,7 +461,6 @@ class User
      */
     public function set_session_cookies($user_id)
     {
-        global $bb_cfg;
 
         $debug_cookies = [
             COOKIE_DBG,
@@ -486,10 +483,10 @@ class User
                 }
             }
         } else {
-            if (!isset($bb_cfg['dbg_users'][$this->data['user_id']]) && DBG_USER) {
+            if (!isset(config()->get('dbg_users')[$this->data['user_id']]) && DBG_USER) {
                 bb_setcookie(COOKIE_DBG, null);
-            } elseif (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !DBG_USER) {
-                bb_setcookie(COOKIE_DBG, hash('xxh128', $bb_cfg['dbg_users'][$this->data['user_id']]), COOKIE_SESSION);
+            } elseif (isset(config()->get('dbg_users')[$this->data['user_id']]) && !DBG_USER) {
+                bb_setcookie(COOKIE_DBG, hash('xxh128', config()->get('dbg_users')[$this->data['user_id']]), COOKIE_SESSION);
             }
 
             // Unset sql debug cookies if SQL_DEBUG is disabled or DBG_USER cookie not present
@@ -522,8 +519,6 @@ class User
      */
     public function verify_autologin_id($userdata, bool $expire_check = false, bool $create_new = true): bool|string
     {
-        global $bb_cfg;
-
         $autologin_id = $userdata['autologin_id'];
 
         if ($expire_check) {
@@ -531,8 +526,8 @@ class User
                 return $this->create_autologin_id($userdata);
             }
 
-            if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
-                if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time'] * 86400) {
+            if ($autologin_id && $userdata['user_session_time'] && config()->get('max_autologin_time')) {
+                if (TIMENOW - $userdata['user_session_time'] > config()->get('max_autologin_time') * 86400) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
             }
@@ -584,39 +579,39 @@ class User
      */
     public function init_userprefs()
     {
-        global $bb_cfg, $theme, $source_lang, $DeltaTime;
+        global $theme, $source_lang, $DeltaTime;
 
         if (defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
 
         // Apply browser language
-        if ($bb_cfg['auto_language_detection'] && IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        if (config()->get('auto_language_detection') && IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             $http_accept_language = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
-            if (isset($bb_cfg['lang'][$http_accept_language])) {
-                $bb_cfg['default_lang'] = $http_accept_language;
+            if (isset(config()->get('lang')[$http_accept_language])) {
+                config()->set('default_lang', $http_accept_language);
             }
         }
 
-        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
         define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
                 $this->data['user_lang'] = $_COOKIE['user_lang'];
             }
-            if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
-                $bb_cfg['default_lang'] = basename($this->data['user_lang']);
-                define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+            if ($this->data['user_lang'] && $this->data['user_lang'] != config()->get('default_lang')) {
+                config()->set('default_lang', basename($this->data['user_lang']));
+                define('LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
             }
 
             if (isset($this->data['user_timezone'])) {
-                $bb_cfg['board_timezone'] = $this->data['user_timezone'];
+                config()->set('board_timezone', $this->data['user_timezone']);
             }
         }
 
-        $this->data['user_lang'] = $bb_cfg['default_lang'];
-        $this->data['user_timezone'] = $bb_cfg['board_timezone'];
+        $this->data['user_lang'] = config()->get('default_lang');
+        $this->data['user_timezone'] = config()->get('board_timezone');
 
         if (!defined('LANG_DIR')) {
             define('LANG_DIR', DEFAULT_LANG_DIR);
@@ -631,7 +626,7 @@ class User
         /** Place user language to the global */
         global $lang;
         require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
+        setlocale(LC_ALL, config()->get('lang')[$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
         $lang += $source_lang;
 
         $theme = setup_style();
@@ -804,10 +799,8 @@ class User
      */
     public function checkPassword(string $enteredPassword, array $userdata): bool
     {
-        global $bb_cfg;
-
         if (password_verify($enteredPassword, $userdata['user_password'])) {
-            if (password_needs_rehash($userdata['user_password'], $bb_cfg['password_hash_options']['algo'], $bb_cfg['password_hash_options']['options'])) {
+            if (password_needs_rehash($userdata['user_password'], config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'))) {
                 // Update password_hash
                 DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
             }
@@ -833,8 +826,6 @@ class User
      */
     public function password_hash(string $enteredPassword): string
     {
-        global $bb_cfg;
-
-        return password_hash($enteredPassword, $bb_cfg['password_hash_options']['algo'], $bb_cfg['password_hash_options']['options']);
+        return password_hash($enteredPassword, config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'));
     }
 }

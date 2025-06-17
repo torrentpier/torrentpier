@@ -157,15 +157,13 @@ class BBCode
      */
     public function bbcode2html(string $text): string
     {
-        global $bb_cfg;
-
         $text = self::clean_up($text);
         $text = $this->parse($text);
         $text = $this->make_clickable($text);
         $text = $this->smilies_pass($text);
         $text = $this->new_line2html($text);
 
-        if ($bb_cfg['tidy_post']) {
+        if (config()->get('tidy_post')) {
             $text = $this->tidy($text);
         }
 
@@ -395,9 +393,7 @@ class BBCode
      */
     private function nofollow_url(string $href, string $name): string
     {
-        global $bb_cfg;
-
-        if (\in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (\in_array(parse_url($href, PHP_URL_HOST), config()->get('nofollow.allowed_url')) || config()->get('nofollow.disabled')) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";

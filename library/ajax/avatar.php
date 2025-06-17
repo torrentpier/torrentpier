@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang, $user;
+global $lang, $user;
 
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('invalid mode (empty)');

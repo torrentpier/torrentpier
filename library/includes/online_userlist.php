@@ -116,7 +116,7 @@ if (!$online['userlist']) {
 
 $total_online = $logged_online + $guests_online;
 
-if ($total_online > $bb_cfg['record_online_users']) {
+if ($total_online > config()->get('record_online_users')) {
     bb_update_config([
         'record_online_users' => $total_online,
         'record_online_date' => TIMENOW

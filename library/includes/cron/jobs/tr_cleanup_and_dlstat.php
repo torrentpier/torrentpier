@@ -27,7 +27,7 @@ DB()->query("CREATE TABLE " . NEW_BB_BT_LAST_USERSTAT . " LIKE " . BB_BT_LAST_US
 DB()->expect_slow_query(600);
 
 // Update dlstat (part 1)
-if ($bb_cfg['tracker']['update_dlstat']) {
+if (config()->get('tracker.update_dlstat')) {
     // ############################ Tables LOCKED ################################
     DB()->lock([
         BB_BT_TRACKER,
@@ -64,16 +64,16 @@ DB()->query("
 ");
 
 // Clean peers table
-if ($bb_cfg['tracker']['autoclean']) {
-    $announce_interval = max((int)$bb_cfg['announce_interval'], 60);
-    $expire_factor = max((float)$bb_cfg['tracker']['expire_factor'], 1);
+if (config()->get('tracker.autoclean')) {
+    $announce_interval = max((int)config()->get('announce_interval'), 60);
+    $expire_factor = max((float)config()->get('tracker.expire_factor'), 1);
     $peer_expire_time = TIMENOW - floor($announce_interval * $expire_factor);
 
     DB()->query("DELETE FROM " . BB_BT_TRACKER . " WHERE update_time < $peer_expire_time");
 }
 
 // Update dlstat (part 2)
-if ($bb_cfg['tracker']['update_dlstat']) {
+if (config()->get('tracker.update_dlstat')) {
     // Set "only 1 seeder" bonus
     DB()->query("
 		UPDATE

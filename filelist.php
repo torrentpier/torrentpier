@@ -14,7 +14,7 @@ require __DIR__ . '/common.php';
 // Start session management
 $user->session_start();
 
-if ($bb_cfg['bt_disable_dht'] && IS_GUEST) {
+if (config()->get('bt_disable_dht') && IS_GUEST) {
     bb_die($lang['BT_PRIVATE_TRACKER'], 403);
 }
 
@@ -55,7 +55,7 @@ if (!is_file($file_path)) {
 }
 
 $file_contents = file_get_contents($file_path);
-if ($bb_cfg['flist_max_files']) {
+if (config()->get('flist_max_files')) {
     $filetree_pos = $meta_v2 ? strpos($file_contents, '9:file tree') : false;
     $files_pos = $meta_v1 ? strpos($file_contents, '5:files', $filetree_pos) : false;
 
@@ -65,8 +65,8 @@ if ($bb_cfg['flist_max_files']) {
         $file_count = substr_count($file_contents, '6:length', $files_pos);
     }
 
-    if ($file_count > $bb_cfg['flist_max_files']) {
-        bb_die(sprintf($lang['BT_FLIST_LIMIT'], $bb_cfg['flist_max_files'], $file_count), 410);
+    if ($file_count > config()->get('flist_max_files')) {
+        bb_die(sprintf($lang['BT_FLIST_LIMIT'], config()->get('flist_max_files'), $file_count), 410);
     }
 }
 

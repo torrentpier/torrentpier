@@ -217,7 +217,7 @@ class Common
      */
     public static function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
     {
-        global $bb_cfg, $lang, $log_action;
+        global $lang, $log_action;
 
         $topic_csv = [];
         $prune = ($mode_or_topic_id === 'prune');
@@ -348,7 +348,7 @@ class Common
                 @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
             }
             // TorrServer integration
-            if ($bb_cfg['torr_server']['enabled']) {
+            if (config()->get('torr_server.enabled')) {
                 $torrServer = new \TorrentPier\TorrServerAPI();
                 $torrServer->removeM3U($row['attach_id']);
             }
@@ -699,7 +699,7 @@ class Common
      */
     public static function user_delete($user_id, $delete_posts = false)
     {
-        global $bb_cfg, $log_action;
+        global $log_action;
 
         if (!$user_csv = get_id_csv($user_id)) {
             return false;
@@ -779,7 +779,7 @@ class Common
 
         // Delete user feed
         foreach (explode(',', $user_csv) as $user_id) {
-            $file_path = $bb_cfg['atom']['path'] . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
+            $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
             @unlink($file_path);
         }
     }

@@ -11,13 +11,13 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang;
+global $lang;
 
-if (!$bb_cfg['torr_server']['enabled']) {
+if (!config()->get('torr_server.enabled')) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
-if ($bb_cfg['torr_server']['disable_for_guest'] && IS_GUEST) {
+if (config()->get('torr_server.disable_for_guest') && IS_GUEST) {
     $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
 }
 

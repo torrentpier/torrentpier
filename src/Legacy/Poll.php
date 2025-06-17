@@ -21,8 +21,7 @@ class Poll
 
     public function __construct()
     {
-        global $bb_cfg;
-        $this->max_votes = $bb_cfg['max_poll_options'];
+        $this->max_votes = config()->get('max_poll_options');
     }
 
     /**
@@ -162,7 +161,6 @@ class Poll
      */
     public static function pollIsActive(array $t_data): bool
     {
-        global $bb_cfg;
-        return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+        return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - config()->get('poll_max_days') * 86400);
     }
 }

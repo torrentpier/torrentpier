@@ -34,9 +34,9 @@ class Censor
      */
     public function __construct()
     {
-        global $bb_cfg, $datastore;
+        global $datastore;
 
-        if (!$bb_cfg['use_word_censor']) {
+        if (!config()->get('use_word_censor')) {
             return;
         }
 

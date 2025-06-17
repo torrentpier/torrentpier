@@ -16,7 +16,7 @@
  */
 function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, $user_id = 0)
 {
-    global $lang, $bb_cfg;
+    global $lang;
 
     // Generate Array, if it's not an array
     if ($post_id_array === 0 && $attach_id_array === 0 && $page === 0) {
@@ -215,7 +215,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                         }
 
                         // TorrServer integration
-                        if ($bb_cfg['torr_server']['enabled']) {
+                        if (config()->get('torr_server.enabled')) {
                             $torrServer = new \TorrentPier\TorrServerAPI();
                             $torrServer->removeM3U($attachments[$j]['attach_id']);
                         }
