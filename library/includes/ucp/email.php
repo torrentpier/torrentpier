@@ -12,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 // Is send through board enabled? No, return to index
-if (!$bb_cfg['board_email_form']) {
+if (!config()->get('board_email_form')) {
     redirect('index.php');
 }
 
