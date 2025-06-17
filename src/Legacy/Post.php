@@ -31,7 +31,7 @@ class Post
      */
     public static function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
     {
-        global $bb_cfg, $user, $userdata, $lang;
+        global $user, $userdata, $lang;
 
         // Check username
         if (!empty($username)) {
@@ -60,15 +60,15 @@ class Post
         }
 
         // Check smilies limit
-        if ($bb_cfg['max_smilies']) {
-            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
-            if ($count_smilies > $bb_cfg['max_smilies']) {
-                $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']);
+        if (config()->get('max_smilies')) {
+            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config()->get('smilies_path'));
+            if ($count_smilies > config()->get('max_smilies')) {
+                $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies'));
                 $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
             }
         }
 
-        if (IS_GUEST && !$bb_cfg['captcha']['disabled'] && !bb_captcha('check')) {
+        if (IS_GUEST && !config()->get('captcha.disabled') && !bb_captcha('check')) {
             $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['CAPTCHA_WRONG'] : $lang['CAPTCHA_WRONG'];
         }
     }
@@ -96,7 +96,7 @@ class Post
      */
     public static function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig, $robots_indexing)
     {
-        global $userdata, $post_info, $is_auth, $bb_cfg, $lang, $datastore;
+        global $userdata, $post_info, $is_auth, $lang, $datastore;
 
         $current_time = TIMENOW;
 
@@ -108,7 +108,7 @@ class Post
             $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
             if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
                 if ($userdata['user_level'] == USER) {
-                    if ((TIMENOW - $row['last_post_time']) < $bb_cfg['flood_interval']) {
+                    if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
                         bb_die($lang['FLOOD_ERROR']);
                     }
                 }
@@ -200,9 +200,9 @@ class Post
         update_post_html(['post_id' => $post_id, 'post_text' => $post_message]);
 
         // Updating news cache on index page
-        if ($bb_cfg['show_latest_news']) {
-            $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-            if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic') {
+        if (config()->get('show_latest_news')) {
+            $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
+            if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $mode == 'newtopic') {
                 $datastore->enqueue([
                     'latest_news'
                 ]);
@@ -210,9 +210,9 @@ class Post
             }
         }
 
-        if ($bb_cfg['show_network_news']) {
-            $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-            if (isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $mode == 'newtopic') {
+        if (config()->get('show_network_news')) {
+            $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
+            if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $mode == 'newtopic') {
                 $datastore->enqueue([
                     'network_news'
                 ]);
@@ -341,9 +341,9 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        global $bb_cfg, $lang, $userdata, $wordCensor;
+        global $lang, $userdata, $wordCensor;
 
-        if (!$bb_cfg['topic_notify_enabled']) {
+        if (!config()->get('topic_notify_enabled')) {
             return;
         }
 
@@ -378,7 +378,7 @@ class Post
                         $emailer->set_template('topic_notify', $row['user_lang']);
                         $emailer->assign_vars([
                             'TOPIC_TITLE' => html_entity_decode($topic_title),
-                            'SITENAME' => $bb_cfg['sitename'],
+                            'SITENAME' => config()->get('sitename'),
                             'USERNAME' => $row['username'],
                             'U_TOPIC' => $u_topic,
                             'U_STOP_WATCHING_TOPIC' => $unwatch_topic,
@@ -500,7 +500,7 @@ class Post
      */
     public static function topic_review($topic_id)
     {
-        global $bb_cfg, $template;
+        global $template;
 
         // Fetch posts data
         $review_posts = DB()->fetch_rowset("
@@ -513,7 +513,7 @@ class Post
 		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
 		WHERE p.topic_id = " . (int)$topic_id . "
 		ORDER BY p.post_time DESC
-		LIMIT " . $bb_cfg['posts_per_page'] . "
+		LIMIT " . config()->get('posts_per_page') . "
 	");
 
         // Topic posts block
@@ -523,7 +523,7 @@ class Post
                 'POSTER' => profile_url($post),
                 'POSTER_NAME_JS' => addslashes($post['username']),
                 'POST_ID' => $post['post_id'],
-                'POST_DATE' => bb_date($post['post_time'], $bb_cfg['post_date_format']),
+                'POST_DATE' => bb_date($post['post_time'], config()->get('post_date_format')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $post['forum_id']),
                 'MESSAGE' => get_parsed_post($post),
             ]);

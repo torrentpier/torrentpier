@@ -277,7 +277,7 @@ class Torrent
      */
     public static function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
     {
-        global $bb_cfg, $lang, $reg_mode;
+        global $lang, $reg_mode;
 
         $attach_id = (int)$attach_id;
         $reg_mode = $mode;
@@ -505,7 +505,7 @@ class Torrent
         $attach_id = $attachment['attach_id'];
 
         if (!$passkey_key = config()->get('passkey_key')) {
-            bb_die('Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
+            bb_die('Could not add passkey (wrong config passkey_key)');
         }
 
         // Get $post_id & $poster_id

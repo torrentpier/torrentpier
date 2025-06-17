@@ -243,8 +243,6 @@ class User
      */
     public function session_create(array $userdata, bool $auto_created = false): array
     {
-        global $bb_cfg;
-
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
@@ -281,8 +279,8 @@ class User
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
-            } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
+            } elseif ($session_time < (TIMENOW - config()->get('last_visit_update_intrv'))) {
+                $last_visit = max($session_time, (TIMENOW - 86400 * config()->get('max_last_visit_days')));
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
@@ -463,7 +461,6 @@ class User
      */
     public function set_session_cookies($user_id)
     {
-        global $bb_cfg;
 
         $debug_cookies = [
             COOKIE_DBG,

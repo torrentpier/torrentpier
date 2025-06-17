@@ -103,7 +103,7 @@ class Upload
      */
     public function init(array $cfg = [], array $post_params = [], bool $uploaded_only = true): bool
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
@@ -150,7 +150,7 @@ class Upload
         $file_name_ary = explode('.', $this->file['name']);
         $this->file_ext = strtolower(end($file_name_ary));
 
-        $this->ext_ids = array_flip($bb_cfg['file_id_ext']);
+        $this->ext_ids = array_flip(config()->get('file_id_ext'));
 
         // Actions for images [E.g. Change avatar]
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {

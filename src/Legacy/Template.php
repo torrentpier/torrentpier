@@ -228,6 +228,7 @@ class Template
     {
         $this->cur_tpl = $filename;
 
+        // bb_cfg deprecated, but kept for compatibility with non-adapted themes
         global $lang, $source_lang, $bb_cfg, $user;
 
         $L =& $lang;
