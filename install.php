@@ -206,6 +206,12 @@ if (is_file(BB_ROOT . '.env')) {
             $newValue = trim(readline());
 
             if (!empty($newValue) || $key === 'DB_PASSWORD') {
+                if ($key === 'TP_HOST') {
+                    if (!preg_match('/^https?:\/\//', $newValue)) {
+                        $newValue = 'https://' . $newValue;
+                    }
+                    $newValue = parse_url($newValue, PHP_URL_HOST);
+                }
                 $line = "$key=$newValue";
                 $$key = $newValue;
             } else {
