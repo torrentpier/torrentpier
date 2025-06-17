@@ -54,7 +54,7 @@ class APCu extends Common
         }
         $this->apcu = new Apc();
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sqlDebugAllowed();
+        $this->dbg_enabled = dev()->checkSqlDebugAllowed();
     }
 
     /**

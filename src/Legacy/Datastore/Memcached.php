@@ -78,7 +78,7 @@ class Memcached extends Common
         $this->client = new MemcachedClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sqlDebugAllowed();
+        $this->dbg_enabled = dev()->checkSqlDebugAllowed();
     }
 
     /**

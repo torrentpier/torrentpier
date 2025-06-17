@@ -111,6 +111,16 @@ function censor(): \TorrentPier\Censor
 }
 
 /**
+ * Get the Dev instance
+ *
+ * @return \TorrentPier\Dev
+ */
+function dev(): \TorrentPier\Dev
+{
+    return \TorrentPier\Dev::getInstance();
+}
+
+/**
  * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));
@@ -119,7 +129,6 @@ if (APP_ENV === 'local') {
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 }
-(new \TorrentPier\Dev());
 
 /**
  * Server variables initialize
