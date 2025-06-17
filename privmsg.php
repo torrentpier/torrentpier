@@ -376,8 +376,8 @@ if ($mode == 'read') {
     //
     $post_subject = htmlCHR($privmsg['privmsgs_subject']);
     $private_message = $privmsg['privmsgs_text'];
-    $post_subject = $wordCensor->censorString($post_subject);
-    $private_message = $wordCensor->censorString($private_message);
+    $post_subject = censor()->censorString($post_subject);
+    $private_message = censor()->censorString($private_message);
     $private_message = bbcode2html($private_message);
 
     //
@@ -1044,8 +1044,8 @@ if ($mode == 'read') {
 
     if ($preview && !$error) {
         $preview_message = bbcode2html($privmsg_message);
-        $preview_subject = $wordCensor->censorString($privmsg_subject);
-        $preview_message = $wordCensor->censorString($preview_message);
+        $preview_subject = censor()->censorString($privmsg_subject);
+        $preview_message = censor()->censorString($preview_message);
 
         $s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
         $s_hidden_fields .= '<input type="hidden" name="mode" value="' . $mode . '" />';
@@ -1381,7 +1381,7 @@ if ($mode == 'read') {
 
             $msg_userid = $row['user_id'];
             $msg_user = profile_url($row);
-            $msg_subject = $wordCensor->censorString($row['privmsgs_subject']);
+            $msg_subject = censor()->censorString($row['privmsgs_subject']);
 
             $u_subject = PM_URL . "?folder=$folder&amp;mode=read&amp;" . POST_POST_URL . "=$privmsg_id";
 

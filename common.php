@@ -86,7 +86,8 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
     require_once BB_PATH . '/library/config.local.php';
 }
 
-// Initialize Config singleton
+/** @noinspection PhpUndefinedVariableInspection */
+// Initialize Config singleton, bb_cfg from global file config
 $config = \TorrentPier\Config::init($bb_cfg);
 
 /**
@@ -97,6 +98,16 @@ $config = \TorrentPier\Config::init($bb_cfg);
 function config(): \TorrentPier\Config
 {
     return \TorrentPier\Config::getInstance();
+}
+
+/**
+ * Get the Censor instance
+ *
+ * @return \TorrentPier\Censor
+ */
+function censor(): \TorrentPier\Censor
+{
+    return \TorrentPier\Censor::getInstance();
 }
 
 /**

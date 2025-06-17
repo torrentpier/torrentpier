@@ -81,6 +81,7 @@ if ($mode != '') {
         }
 
         $datastore->update('censor');
+        censor()->reload(); // Reload the singleton instance with updated words
         $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
         bb_die($message);
@@ -95,6 +96,7 @@ if ($mode != '') {
             }
 
             $datastore->update('censor');
+            censor()->reload(); // Reload the singleton instance with updated words
 
             bb_die($lang['WORD_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         } else {

@@ -571,7 +571,7 @@ if ($post_mode) {
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'TOPIC_TITLE' => $wordCensor->censorString($first_post['topic_title']),
+            'TOPIC_TITLE' => censor()->censorString($first_post['topic_title']),
             'TOPIC_ICON' => get_topic_icon($first_post, $is_unread_t),
         ));
 
@@ -586,7 +586,7 @@ if ($post_mode) {
             }
 
             $message = get_parsed_post($post);
-            $message = $wordCensor->censorString($message);
+            $message = censor()->censorString($message);
 
             $template->assign_block_vars('t.p', array(
                 'ROW_NUM' => $row_num,
@@ -787,7 +787,7 @@ else {
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
             'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
-            'TOPIC_TITLE' => $wordCensor->censorString($topic['topic_title']),
+            'TOPIC_TITLE' => censor()->censorString($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
             'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], config()->get('posts_per_page')),

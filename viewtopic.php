@@ -364,7 +364,7 @@ if (!$ranks = $datastore->get('ranks')) {
 }
 
 // Censor topic title
-$topic_title = $wordCensor->censorString($topic_title);
+$topic_title = censor()->censorString($topic_title);
 
 // Post, reply and other URL generation for templating vars
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id";
@@ -624,8 +624,8 @@ for ($i = 0; $i < $total_posts; $i++) {
         $user_sig = str_replace(
             '\"', '"',
             substr(
-                preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($wordCensor) {
-                    return $wordCensor->censorString(reset($matches));
+                preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) {
+                    return censor()->censorString(reset($matches));
                 }, '>' . $user_sig . '<'), 1, -1
             )
         );
@@ -634,8 +634,8 @@ for ($i = 0; $i < $total_posts; $i++) {
     $message = str_replace(
         '\"', '"',
         substr(
-            preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($wordCensor) {
-                return $wordCensor->censorString(reset($matches));
+            preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) {
+                return censor()->censorString(reset($matches));
             }, '>' . $message . '<'), 1, -1
         )
     );

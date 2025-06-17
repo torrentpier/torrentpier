@@ -341,7 +341,7 @@ class Post
      */
     public static function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
     {
-        global $lang, $userdata, $wordCensor;
+        global $lang, $userdata;
 
         if (!config()->get('topic_notify_enabled')) {
             return;
@@ -363,7 +363,7 @@ class Post
 			");
 
                 if ($watch_list) {
-                    $topic_title = $wordCensor->censorString($topic_title);
+                    $topic_title = censor()->censorString($topic_title);
 
                     $u_topic = make_url(TOPIC_URL . $topic_id . '&view=newest#newest');
                     $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");

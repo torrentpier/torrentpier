@@ -68,7 +68,9 @@ class Ajax
      */
     public function exec()
     {
-        global $lang;
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        // bb_cfg deprecated, but kept for compatibility with non-adapted ajax files
+        global $bb_cfg, $lang;
 
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
