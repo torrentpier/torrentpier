@@ -39,9 +39,7 @@ function send_page($contents)
  */
 function compress_output($contents)
 {
-    global $bb_cfg;
-
-    if ($bb_cfg['gzip_compress'] && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
+    if (config()->get('gzip_compress') && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
         if (UA_GZIP_SUPPORTED && strlen($contents) > 2000) {
             header('Content-Encoding: gzip');
             $contents = gzencode($contents, 1);
@@ -59,7 +57,7 @@ if (!defined('IN_AJAX')) {
 }
 
 // Cookie params
-$c = $bb_cfg['cookie_prefix'];
+$c = config()->get('cookie_prefix');
 define('COOKIE_DATA', $c . 'data');
 define('COOKIE_FORUM', $c . 'f');
 define('COOKIE_MARK', $c . 'mark_read');
@@ -85,16 +83,14 @@ define('COOKIE_MAX_TRACKS', 90);
  */
 function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false, bool $isRaw = false): void
 {
-    global $bb_cfg;
-
     $cookie = new \Josantonius\Cookie\Cookie(
-        domain: $bb_cfg['cookie_domain'],
+        domain: config()->get('cookie_domain'),
         expires: $lifetime,
         httpOnly: $httponly,
-        path: $bb_cfg['script_path'],
+        path: config()->get('script_path'),
         raw: $isRaw,
-        sameSite: $bb_cfg['cookie_same_site'],
-        secure: $bb_cfg['cookie_secure']
+        sameSite: config()->get('cookie_same_site'),
+        secure: config()->get('cookie_secure')
     );
 
     if (!empty($val)) {
@@ -275,14 +271,14 @@ define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
 define('CAT_URL', 'index.php?' . POST_CAT_URL . '=');
-define('DL_URL', $bb_cfg['dl_url']);
+define('DL_URL', config()->get('dl_url'));
 define('FORUM_URL', 'viewforum.php?' . POST_FORUM_URL . '=');
 define('GROUP_URL', 'group.php?' . POST_GROUPS_URL . '=');
-define('LOGIN_URL', $bb_cfg['login_url']);
+define('LOGIN_URL', config()->get('login_url'));
 define('MODCP_URL', 'modcp.php?' . POST_FORUM_URL . '=');
-define('PM_URL', $bb_cfg['pm_url']);
+define('PM_URL', config()->get('pm_url'));
 define('POST_URL', 'viewtopic.php?' . POST_POST_URL . '=');
-define('POSTING_URL', $bb_cfg['posting_url']);
+define('POSTING_URL', config()->get('posting_url'));
 define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;' . POST_USERS_URL . '=');
 define('BONUS_URL', 'profile.php?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?' . POST_TOPIC_URL . '=');
@@ -398,7 +394,7 @@ if (
     !is_file(CRON_RUNNING) &&
     (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
 ) {
-    if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval']) {
+    if (TIMENOW - config()->get('cron_last_check') > config()->get('cron_check_interval')) {
 
         /** Update cron_last_check */
         bb_update_config(['cron_last_check' => TIMENOW + 10]);
@@ -438,8 +434,8 @@ if (
 /**
  * Exit if board is disabled via trigger
  */
-if (($bb_cfg['board_disable'] || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
-    if ($bb_cfg['board_disable']) {
+if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
+    if (config()->get('board_disable')) {
         // admin lock
         send_no_cache_headers();
         bb_die('BOARD_DISABLE', 503);
