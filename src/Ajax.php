@@ -68,7 +68,7 @@ class Ajax
      */
     public function exec()
     {
-        global $lang, $bb_cfg;
+        global $lang;
 
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
@@ -89,8 +89,8 @@ class Ajax
         }
 
         // Exit if board is disabled via ON/OFF trigger or by admin
-        if ($bb_cfg['board_disable'] || is_file(BB_DISABLED)) {
-            if ($bb_cfg['board_disable']) {
+        if (config()->get('board_disable') || is_file(BB_DISABLED)) {
+            if (config()->get('board_disable')) {
                 $this->ajax_die($lang['BOARD_DISABLE']);
             } elseif (is_file(BB_DISABLED) && $this->action !== 'manage_admin') {
                 $this->ajax_die($lang['BOARD_DISABLE_CRON']);
