@@ -11,7 +11,7 @@ namespace TorrentPier;
 
 /**
  * Configuration management class
- * 
+ *
  * Encapsulates the global $bb_cfg array and provides methods to access configuration values
  */
 class Config
@@ -179,4 +179,4 @@ class Config
     {
         throw new \Exception("Cannot unserialize a singleton.");
     }
-} 
+}

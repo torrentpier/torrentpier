@@ -19,7 +19,7 @@ $page_cfg['load_tpl_vars'] = [
 ];
 
 // Session start
-$user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
+$user->session_start(array('req_login' => config()->get('bt_tor_browse_only_reg')));
 
 set_die_append_msg();
 
@@ -30,7 +30,7 @@ $max_forums_selected = 50;
 $title_match_max_len = 60;
 $poster_name_max_len = 25;
 $tor_colspan = 12; // torrents table colspan with all columns
-$per_page = $bb_cfg['topics_per_page'];
+$per_page = config()->get('topics_per_page');
 $tracker_url = basename(__FILE__);
 
 $time_format = 'H:i';
@@ -299,8 +299,8 @@ if (isset($_GET[$user_releases_key])) {
 }
 
 // Random release
-if ($bb_cfg['tracker']['random_release_button'] && isset($_GET['random_release'])) {
-    if ($random_release = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE tor_status NOT IN(" . implode(', ', array_keys($bb_cfg['tor_frozen'])) . ") ORDER BY RAND() LIMIT 1")) {
+if (config()->get('tracker.random_release_button') && isset($_GET['random_release'])) {
+    if ($random_release = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE tor_status NOT IN(" . implode(', ', array_keys(config()->get('tor_frozen'))) . ") ORDER BY RAND() LIMIT 1")) {
         redirect(TOPIC_URL . $random_release['topic_id']);
     } else {
         bb_die($lang['NO_MATCH']);
@@ -749,8 +749,8 @@ if ($allowed_forums) {
                 'MAGNET' => $tor_magnet,
                 'TOR_TYPE' => is_gold($tor['tor_type']),
 
-                'TOR_FROZEN' => !IS_AM ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
-                'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],
+                'TOR_FROZEN' => !IS_AM ? isset(config()->get('tor_frozen')[$tor['tor_status']]) : '',
+                'TOR_STATUS_ICON' => config()->get('tor_icons')[$tor['tor_status']],
                 'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 
                 'TOR_SIZE_RAW' => $size,
@@ -819,9 +819,9 @@ $search_all_opt = '<option value="' . $search_all . '" value="fs-' . $search_all
 $cat_forum_select = "\n" . '<select id="fs-main" style="width: 100%;" name="' . $forum_key . '[]" multiple size="' . $forum_select_size . "\">\n" . $search_all_opt . $opt . "</select>\n";
 
 // Status select
-if ($bb_cfg['tracker']['search_by_tor_status']) {
+if (config()->get('tracker.search_by_tor_status')) {
     $statuses = '<table border="0" cellpadding="0" cellspacing="0">';
-    foreach (array_chunk($bb_cfg['tor_icons'], 2, true) as $statuses_part) {
+    foreach (array_chunk(config()->get('tor_icons'), 2, true) as $statuses_part) {
         $statuses .= '<tr>';
         foreach ($statuses_part as $status_id => $status_styles) {
             $checked_status = in_array($status_id, $status) ? 'checked' : '';

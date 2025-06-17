@@ -20,7 +20,7 @@ $page_cfg['load_tpl_vars'] = [
 ];
 
 // Start session management
-$user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
+$user->session_start(array('req_login' => config()->get('disable_search_for_guest')));
 
 set_die_append_msg();
 
@@ -289,7 +289,7 @@ if (empty($_GET) && empty($_POST)) {
 
         'MY_TOPICS_ID' => 'my_topics',
         'MY_TOPICS_CHBOX' => build_checkbox($my_topics_key, $lang['SEARCH_MY_TOPICS'], $my_topics_val, true, null, 'my_topics'),
-        'TITLE_ONLY_CHBOX' => build_checkbox($title_only_key, $lang['SEARCH_TITLES_ONLY'], true, $bb_cfg['disable_ft_search_in_posts']),
+        'TITLE_ONLY_CHBOX' => build_checkbox($title_only_key, $lang['SEARCH_TITLES_ONLY'], true, config()->get('disable_ft_search_in_posts')),
         'ALL_WORDS_CHBOX' => build_checkbox($all_words_key, $lang['SEARCH_ALL_WORDS'], true),
         'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, $lang['SEARCH_DL_CANCEL'], $dl_cancel_val, IS_GUEST, 'dlCancel'),
         'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, $lang['SEARCH_DL_COMPLETE'], $dl_compl_val, IS_GUEST, 'dlComplete'),
@@ -421,7 +421,7 @@ $prev_days = ($time_val != $search_all);
 $new_topics = (!IS_GUEST && ($new_topics_val || isset($_GET['newposts'])));
 $my_topics = ($poster_id_val && $my_topics_val);
 $my_posts = ($poster_id_val && !$my_topics_val);
-$title_match = ($text_match_sql && ($title_only_val || $bb_cfg['disable_ft_search_in_posts']));
+$title_match = ($text_match_sql && ($title_only_val || config()->get('disable_ft_search_in_posts')));
 
 // "Display as" mode (posts or topics)
 $post_mode = (!$dl_search && ($display_as_val == $as_posts || isset($_GET['search_author'])));
@@ -433,7 +433,7 @@ $SQL = DB()->get_empty_sql_array();
 if ($post_mode) {
     $order = $order_opt[$order_val]['sql'];
     $sort = $sort_opt[$sort_val]['sql'];
-    $per_page = $bb_cfg['posts_per_page'];
+    $per_page = config()->get('posts_per_page');
     $display_as_val = $as_posts;
 
     // Run initial search for post_ids
@@ -593,7 +593,7 @@ if ($post_mode) {
                 'POSTER_ID' => $post['poster_id'],
                 'POSTER' => profile_url($post),
                 'POST_ID' => $post['post_id'],
-                'POST_DATE' => bb_date($post['post_time'], $bb_cfg['post_date_format']),
+                'POST_DATE' => bb_date($post['post_time'], config()->get('post_date_format')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $forum_id),
                 'MESSAGE' => $message,
                 'POSTED_AFTER' => '',
@@ -612,7 +612,7 @@ if ($post_mode) {
 else {
     $order = $order_opt[$order_val]['sql'];
     $sort = $sort_opt[$sort_val]['sql'];
-    $per_page = $bb_cfg['topics_per_page'];
+    $per_page = config()->get('topics_per_page');
     $display_as_val = $as_topics;
 
     // Run initial search for topic_ids
@@ -733,7 +733,7 @@ else {
 
     // Build SQL for displaying topics
     $SQL = DB()->get_empty_sql_array();
-    $join_dl = ($bb_cfg['show_dl_status_in_search'] && !IS_GUEST);
+    $join_dl = (config()->get('show_dl_status_in_search') && !IS_GUEST);
 
     $SQL['SELECT'][] = "
 		t.*, t.topic_poster AS first_user_id, u1.user_rank AS first_user_rank,
@@ -790,7 +790,7 @@ else {
             'TOPIC_TITLE' => $wordCensor->censorString($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
+            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], config()->get('posts_per_page')),
             'REPLIES' => $moved ? '' : $topic['topic_replies'],
             'ATTACH' => $topic['topic_attachment'],
             'STATUS' => $topic['topic_status'],
@@ -888,15 +888,13 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
 
 function prevent_huge_searches($SQL)
 {
-    global $bb_cfg;
-
-    if ($bb_cfg['limit_max_search_results']) {
+    if (config()->get('limit_max_search_results')) {
         $SQL['select_options'][] = 'SQL_CALC_FOUND_ROWS';
         $SQL['ORDER BY'] = [];
         $SQL['LIMIT'] = array('0');
 
         if (DB()->query($SQL) and $row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count")) {
-            if ($row['rows_count'] > $bb_cfg['limit_max_search_results']) {
+            if ($row['rows_count'] > config()->get('limit_max_search_results')) {
                 #				bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
                 bb_die('Too_many_search_results');
             }

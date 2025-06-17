@@ -11,9 +11,7 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
 
-global $bb_cfg;
-
-if (!$bb_cfg['tracker']['scrape']) {
+if (!config()->get('tracker.scrape')) {
     msg_die('Please disable SCRAPE!');
 }
 
@@ -60,8 +58,8 @@ foreach ($info_hash_array[1] as $hash) {
 $info_hash_count = count($info_hashes);
 
 if (!empty($info_hash_count)) {
-    if ($info_hash_count > $bb_cfg['max_scrapes']) {
-        $info_hashes = array_slice($info_hashes, 0, $bb_cfg['max_scrapes']);
+    if ($info_hash_count > config()->get('max_scrapes')) {
+        $info_hashes = array_slice($info_hashes, 0, config()->get('max_scrapes'));
     }
 
     $info_hashes_sql = implode('\', \'', $info_hashes);
