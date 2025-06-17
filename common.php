@@ -86,6 +86,19 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
     require_once BB_PATH . '/library/config.local.php';
 }
 
+// Initialize Config singleton
+$config = \TorrentPier\Config::init($bb_cfg);
+
+/**
+ * Get the Config instance
+ *
+ * @return \TorrentPier\Config
+ */
+function config(): \TorrentPier\Config
+{
+    return \TorrentPier\Config::getInstance();
+}
+
 /**
  * Initialize debug
  */
@@ -100,16 +113,16 @@ if (APP_ENV === 'local') {
 /**
  * Server variables initialize
  */
-$server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
-$server_port = in_array((int)$bb_cfg['server_port'], [80, 443], true) ? '' : ':' . $bb_cfg['server_port'];
-define('FORUM_PATH', $bb_cfg['script_path']);
-define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
+$server_protocol = config()->get('cookie_secure') ? 'https://' : 'http://';
+$server_port = in_array((int)config()->get('server_port'), [80, 443], true) ? '' : ':' . config()->get('server_port');
+define('FORUM_PATH', config()->get('script_path'));
+define('FULL_URL', $server_protocol . config()->get('server_name') . $server_port . config()->get('script_path'));
 unset($server_protocol, $server_port);
 
 /**
  * Database
  */
-$DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
+$DBS = new TorrentPier\Legacy\Dbs(config()->all());
 
 function DB(string $db_alias = 'db')
 {
@@ -120,7 +133,7 @@ function DB(string $db_alias = 'db')
 /**
  * Cache
  */
-$CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
+$CACHES = new TorrentPier\Legacy\Caches(config()->all());
 
 function CACHE(string $cache_name)
 {
@@ -131,22 +144,22 @@ function CACHE(string $cache_name)
 /**
  * Datastore
  */
-switch ($bb_cfg['datastore_type']) {
+switch (config()->get('datastore_type')) {
     case 'apcu':
-        $datastore = new TorrentPier\Legacy\Datastore\APCu($bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\APCu(config()->get('cache.prefix'));
         break;
     case 'memcached':
-        $datastore = new TorrentPier\Legacy\Datastore\Memcached($bb_cfg['cache']['memcached'], $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Memcached(config()->get('cache.memcached'), config()->get('cache.prefix'));
         break;
     case 'sqlite':
-        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($bb_cfg['cache']['db_dir'] . 'datastore', $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Sqlite(config()->get('cache.db_dir') . 'datastore', config()->get('cache.prefix'));
         break;
     case 'redis':
-        $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Redis(config()->get('cache.redis'), config()->get('cache.prefix'));
         break;
     case 'filecache':
     default:
-        $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\File(config()->get('cache.db_dir') . 'datastore/', config()->get('cache.prefix'));
 }
 
 // Functions
