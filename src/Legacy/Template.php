@@ -17,7 +17,7 @@ class Template
 {
     /**
      * Variable that holds all the data we'll be substituting into the compiled templates.
-     * This will end up being a multi-dimensional array like this:
+     * This will end up being a multidimensional array like this:
      * $this->_tpldata[block.][iteration#][child.][iteration#][child2.][iteration#][variablename] == value
      * if it's a root-level variable, it'll be like this:
      * $this->vars[varname] == value  or  $this->_tpldata['.'][0][varname] == value
@@ -228,6 +228,7 @@ class Template
     {
         $this->cur_tpl = $filename;
 
+        /** @noinspection PhpUnusedLocalVariableInspection */
         // bb_cfg deprecated, but kept for compatibility with non-adapted themes
         global $lang, $source_lang, $bb_cfg, $user;
 

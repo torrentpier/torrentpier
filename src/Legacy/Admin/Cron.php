@@ -23,6 +23,7 @@ class Cron
     public static function run_jobs(string $jobs): void
     {
         /** @noinspection PhpUnusedLocalVariableInspection */
+        // bb_cfg deprecated, but kept for compatibility with non-adapted cron jobs
         global $bb_cfg, $datastore;
 
         \define('IN_CRON', true);

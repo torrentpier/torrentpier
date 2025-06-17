@@ -375,6 +375,7 @@ function make_url(string $path = ''): string
 require_once INC_DIR . '/functions.php';
 
 // Merge database configuration with base configuration using singleton
+// bb_cfg deprecated, but kept for compatibility with non-adapted code
 config()->merge(bb_get_config(BB_CONFIG));
 $bb_cfg = config()->all();
 
