@@ -25,7 +25,7 @@ $m3u = isset($_GET['m3u']) && $_GET['m3u'];
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
 {
-    global $bb_cfg, $lang;
+    global $lang;
 
     $filename = $upload_dir . '/' . $attachment['physical_filename'];
     $gotit = false;
@@ -170,7 +170,7 @@ if (!IS_AM && ($attachment['mimetype'] === TORRENT_MIMETYPE)) {
 
     $row = DB()->sql_fetchrow($result);
 
-    if (isset($bb_cfg['tor_frozen'][$row['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
+    if (isset(config()->get('tor_frozen')[$row['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
         bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$row['tor_status']]);
     }
 
@@ -219,7 +219,7 @@ switch ($download_mode) {
         header('Location: ' . $url);
         exit;
     case INLINE_LINK:
-        if (IS_GUEST && !$bb_cfg['captcha']['disabled'] && !bb_captcha('check')) {
+        if (IS_GUEST && !config()->get('captcha.disabled') && !bb_captcha('check')) {
             global $template;
 
             $redirect_url = $_POST['redirect_url'] ?? $_SERVER['HTTP_REFERER'] ?? '/';

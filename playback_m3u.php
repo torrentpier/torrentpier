@@ -11,7 +11,7 @@ define('BB_SCRIPT', 'playback_m3u');
 
 require __DIR__ . '/common.php';
 
-if (!$bb_cfg['torr_server']['enabled']) {
+if (!config()->get('torr_server.enabled')) {
     redirect('index.php');
 }
 
@@ -22,7 +22,7 @@ $validFormats = [
 ];
 
 // Start session management
-$user->session_start(['req_login' => $bb_cfg['torr_server']['disable_for_guest']]);
+$user->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
 
 // Disable robots indexing
 $page_cfg['allow_robots'] = false;

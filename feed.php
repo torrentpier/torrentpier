@@ -34,11 +34,11 @@ if ($mode === 'get_feed_url' && ($type === 'f' || $type === 'u') && $id >= 0) {
                 bb_simple_die($lang['ATOM_ERROR'] . ' #1');
             }
         }
-        if (is_file($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') > $timecheck) {
-            redirect($bb_cfg['atom']['url'] . '/f/' . $id . '.atom');
+        if (is_file(config()->get('atom.path') . '/f/' . $id . '.atom') && filemtime(config()->get('atom.path') . '/f/' . $id . '.atom') > $timecheck) {
+            redirect(config()->get('atom.url') . '/f/' . $id . '.atom');
         } else {
             if (\TorrentPier\Legacy\Atom::update_forum_feed($id, $forum_data)) {
-                redirect($bb_cfg['atom']['url'] . '/f/' . $id . '.atom');
+                redirect(config()->get('atom.url') . '/f/' . $id . '.atom');
             } else {
                 bb_simple_die($lang['ATOM_NO_FORUM']);
             }
@@ -52,11 +52,11 @@ if ($mode === 'get_feed_url' && ($type === 'f' || $type === 'u') && $id >= 0) {
         if (!$username = get_username($id)) {
             bb_simple_die($lang['ATOM_ERROR'] . ' #3');
         }
-        if (is_file($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > $timecheck) {
-            redirect($bb_cfg['atom']['url'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
+        if (is_file(config()->get('atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime(config()->get('atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > $timecheck) {
+            redirect(config()->get('atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
         } else {
             if (\TorrentPier\Legacy\Atom::update_user_feed($id, $username)) {
-                redirect($bb_cfg['atom']['url'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
+                redirect(config()->get('atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
             } else {
                 bb_simple_die($lang['ATOM_NO_USER']);
             }

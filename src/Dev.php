@@ -67,13 +67,11 @@ class Dev
      */
     private function getBugsnag(): void
     {
-        global $bb_cfg;
-
-        if (!$bb_cfg['bugsnag']['enabled']) {
+        if (!config()->get('bugsnag.enabled')) {
             return;
         }
 
-        $bugsnag = Client::make($bb_cfg['bugsnag']['api_key']);
+        $bugsnag = Client::make(config()->get('bugsnag.api_key'));
         $this->whoops->pushHandler(function ($e) use ($bugsnag) {
             $bugsnag->notifyException($e);
         });
@@ -86,9 +84,7 @@ class Dev
      */
     private function getTelegramSender(): void
     {
-        global $bb_cfg;
-
-        if (!$bb_cfg['telegram_sender']['enabled']) {
+        if (!config()->get('telegram_sender.enabled')) {
             return;
         }
 
@@ -96,7 +92,7 @@ class Dev
         $telegramSender->loggerOnly(true);
         $telegramSender->setLogger((new Logger(
             APP_NAME,
-            [(new TelegramHandler($bb_cfg['telegram_sender']['token'], (int)$bb_cfg['telegram_sender']['chat_id'], timeout: (int)$bb_cfg['telegram_sender']['timeout']))
+            [(new TelegramHandler(config()->get('telegram_sender.token'), (int)config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout')))
                 ->setFormatter(new TelegramFormatter())]
         )));
         $this->whoops->pushHandler($telegramSender);
@@ -109,13 +105,11 @@ class Dev
      */
     private function getWhoopsOnPage(): void
     {
-        global $bb_cfg;
-
         /**
          * Show errors on page
          */
         $prettyPageHandler = new PrettyPageHandler();
-        foreach ($bb_cfg['whoops']['blacklist'] as $key => $secrets) {
+        foreach (config()->get('whoops.blacklist', []) as $key => $secrets) {
             foreach ($secrets as $secret) {
                 $prettyPageHandler->blacklist($key, $secret);
             }
@@ -163,10 +157,8 @@ class Dev
      */
     private function getWhoopsPlaceholder(): void
     {
-        global $bb_cfg;
-
-        $this->whoops->pushHandler(function ($e) use ($bb_cfg) {
-            echo $bb_cfg['whoops']['error_message'];
+        $this->whoops->pushHandler(function ($e) {
+            echo config()->get('whoops.error_message');
             echo "<hr/>Error: {$e->getMessage()}.";
         });
     }

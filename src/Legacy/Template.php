@@ -99,7 +99,7 @@ class Template
      */
     public function __construct($root = '.')
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         // setting pointer "vars"
         $this->vars = &$this->_tpldata['.'][0];
@@ -108,7 +108,7 @@ class Template
         $this->root = $root;
         $this->tpl = basename($root);
         $this->lang =& $lang;
-        $this->use_cache = $bb_cfg['xs_use_cache'];
+        $this->use_cache = config()->get('xs_use_cache');
 
         // Check template exists
         if (!is_dir($this->root)) {
@@ -987,11 +987,9 @@ class Template
 
     public function xs_startup()
     {
-        global $bb_cfg;
-
         // adding language variable (eg: "english" or "german")
         // can be used to make truly multi-lingual templates
-        $this->vars['LANG'] ??= $bb_cfg['default_lang'];
+        $this->vars['LANG'] ??= config()->get('default_lang');
         // adding current template
         $tpl = $this->root . '/';
         if (str_starts_with($tpl, './')) {

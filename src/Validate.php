@@ -99,7 +99,7 @@ class Validate
      */
     public static function email(string $email, bool $check_taken = true)
     {
-        global $lang, $userdata, $bb_cfg;
+        global $lang, $userdata;
 
         // Check for empty
         if (empty($email)) {
@@ -117,7 +117,7 @@ class Validate
         }
 
         // Extended email validation
-        if ($bb_cfg['extended_email_validation']) {
+        if (config()->get('extended_email_validation')) {
             $validator = new EmailValidator();
 
             $multipleValidations = new MultipleValidationWithAnd([
@@ -157,7 +157,7 @@ class Validate
      */
     public static function password(string $password, string $password_confirm)
     {
-        global $lang, $bb_cfg;
+        global $lang;
 
         // Check for empty
         if (empty($password) || empty($password_confirm)) {
@@ -178,26 +178,26 @@ class Validate
         }
 
         // Symbols check
-        if ($bb_cfg['password_symbols']) {
+        if (config()->get('password_symbols')) {
             // Numbers
-            if ($bb_cfg['password_symbols']['nums']) {
+            if (config()->get('password_symbols.nums')) {
                 if (!StringHelper::isContainsNums($password)) {
                     return $lang['CHOOSE_PASS_ERR_NUM'];
                 }
             }
             // Letters
-            if ($bb_cfg['password_symbols']['letters']['lowercase']) {
+            if (config()->get('password_symbols.letters.lowercase')) {
                 if (!StringHelper::isContainsLetters($password)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER'];
                 }
             }
-            if ($bb_cfg['password_symbols']['letters']['uppercase']) {
+            if (config()->get('password_symbols.letters.uppercase')) {
                 if (!StringHelper::isContainsLetters($password, true)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
                 }
             }
             // Spec symbols
-            if ($bb_cfg['password_symbols']['spec_symbols']) {
+            if (config()->get('password_symbols.spec_symbols')) {
                 if (!StringHelper::isContainsSpecSymbols($password)) {
                     return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
                 }

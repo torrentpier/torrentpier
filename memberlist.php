@@ -54,26 +54,26 @@ $select_sort_role .= '</select>';
 
 switch ($mode) {
     case 'username':
-        $order_by = "username $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "username $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'location':
-        $order_by = "user_from $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_from $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'posts':
-        $order_by = "user_posts $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_posts $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'email':
-        $order_by = "user_email $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_email $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'website':
-        $order_by = "user_website $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_website $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
     case 'topten':
         $order_by = "user_posts $sort_order LIMIT 10";
         break;
     case 'joined':
     default:
-        $order_by = "user_regdate $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_regdate $sort_order LIMIT $start, " . config()->get('topics_per_page');
         break;
 }
 
@@ -134,7 +134,7 @@ if ($mode != 'topten') {
     }
     if ($total = DB()->sql_fetchrow($result)) {
         $total_members = $total['total'];
-        generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start);
+        generate_pagination($paginationurl, $total_members, config()->get('topics_per_page'), $start);
     }
     DB()->sql_freeresult($result);
 }

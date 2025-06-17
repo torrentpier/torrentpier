@@ -221,7 +221,7 @@ if (!$is_auth[$is_auth_type]) {
 }
 
 if ($mode == 'new_rel') {
-    if ($tor_status = implode(',', $bb_cfg['tor_cannot_new'])) {
+    if ($tor_status = implode(',', config()->get('tor_cannot_new'))) {
         $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
 			WHERE poster_id = {$userdata['user_id']}
@@ -232,7 +232,7 @@ if ($mode == 'new_rel') {
 
         $topics = '';
         foreach ($sql as $row) {
-            $topics .= $bb_cfg['tor_icons'][$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
+            $topics .= config()->get('tor_icons')[$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
         if ($topics && !(IS_SUPER_ADMIN && !empty($_REQUEST['edit_tpl']))) {
             bb_die($topics . $lang['UNEXECUTED_RELEASE']);
@@ -243,9 +243,9 @@ if ($mode == 'new_rel') {
 }
 
 // Disallowed release editing with a certain status
-if (!empty($bb_cfg['tor_cannot_edit']) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
-    if ($tor_status = DB()->fetch_row("SELECT tor_status FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id AND forum_id = $forum_id AND tor_status IN(" . implode(',', $bb_cfg['tor_cannot_edit']) . ") LIMIT 1")) {
-        bb_die($lang['NOT_EDIT_TOR_STATUS'] . ':&nbsp;<span title="' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '">' . $bb_cfg['tor_icons'][$tor_status['tor_status']] . '&nbsp;' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '</span>.');
+if (!empty(config()->get('tor_cannot_edit')) && $post_info['allow_reg_tracker'] && $post_data['first_post'] && !IS_AM) {
+    if ($tor_status = DB()->fetch_row("SELECT tor_status FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id AND forum_id = $forum_id AND tor_status IN(" . implode(',', config()->get('tor_cannot_edit')) . ") LIMIT 1")) {
+        bb_die($lang['NOT_EDIT_TOR_STATUS'] . ':&nbsp;<span title="' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '">' . config()->get('tor_icons')[$tor_status['tor_status']] . '&nbsp;' . $lang['TOR_STATUS_NAME'][$tor_status['tor_status']] . '</span>.');
     }
 }
 
@@ -281,7 +281,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 				AND pt.post_id = p.post_id
 				AND p.post_time > $topic_last_read
 			ORDER BY p.post_time
-			LIMIT " . $bb_cfg['posts_per_page'];
+			LIMIT " . config()->get('posts_per_page');
 
         if ($rowset = DB()->fetch_rowset($sql)) {
             $topic_has_new_posts = true;
@@ -291,7 +291,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
-                    'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . $lang['POST_LINK'] . '">' . bb_date($row['post_time'], $bb_cfg['post_date_format']) . '</a>',
+                    'POST_DATE' => '<a class="small" href="' . POST_URL . $row['post_id'] . '#' . $row['post_id'] . '" title="' . $lang['POST_LINK'] . '">' . bb_date($row['post_time'], config()->get('post_date_format')) . '</a>',
                     'MESSAGE' => get_parsed_post($row)
                 ]);
             }
@@ -374,9 +374,9 @@ if (($delete || $mode == 'delete') && !$confirm) {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
         }
 
-        if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
+        if (defined('TORRENT_ATTACH_ID') && config()->get('bt_newtopic_auto_reg') && !$error_msg) {
             if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
-                if ($bb_cfg['premod']) {
+                if (config()->get('premod')) {
                     // Getting a list of forum ids starting with "parent"
                     $forum_parent = $forum_id;
                     if ($post_info['forum_parent']) {
@@ -468,7 +468,7 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 
             // hide user passkey
-            $message = preg_replace('#(?<=[\?&;]' . $bb_cfg['passkey_key'] . '=)[a-zA-Z0-9]#', 'passkey', $message);
+            $message = preg_replace('#(?<=[\?&;]' . config()->get('passkey_key') . '=)[a-zA-Z0-9]#', 'passkey', $message);
             // hide sid
             $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
@@ -618,7 +618,7 @@ $template->assign_vars([
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
 
     'USERNAME' => @$username,
-    'CAPTCHA_HTML' => (IS_GUEST && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => (IS_GUEST && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
     'SUBJECT' => $subject,
     'MESSAGE' => $message,
 

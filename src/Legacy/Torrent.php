@@ -97,7 +97,7 @@ class Torrent
      */
     public static function tracker_unregister($attach_id, $mode = '')
     {
-        global $lang, $bb_cfg, $log_action;
+        global $lang, $log_action;
 
         $attach_id = (int)$attach_id;
         $post_id = $topic_id = $topic_title = $forum_id = null;
@@ -132,7 +132,7 @@ class Torrent
         }
 
         // Unset DL-Type for topic
-        if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id) {
+        if (config()->get('bt_unset_dltype_on_tor_unreg') && $topic_id) {
             $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id";
 
             if (!$result = DB()->sql_query($sql)) {
@@ -148,7 +148,7 @@ class Torrent
         }
 
         // TorrServer integration
-        if ($bb_cfg['torr_server']['enabled']) {
+        if (config()->get('torr_server.enabled')) {
             $torrServer = new TorrServerAPI();
             $torrServer->removeM3U($attach_id);
         }
@@ -327,19 +327,19 @@ class Torrent
             self::torrent_error_exit(htmlCHR("{$lang['TORFILE_INVALID']}: {$e->getMessage()}"));
         }
 
-        if ($bb_cfg['bt_disable_dht']) {
+        if (config()->get('bt_disable_dht')) {
             $tor['info']['private'] = (int)1;
             $fp = fopen($filename, 'wb+');
             fwrite($fp, Bencode::encode($tor));
             fclose($fp);
         }
 
-        if ($bb_cfg['bt_check_announce_url']) {
+        if (config()->get('bt_check_announce_url')) {
             $announce_urls = [];
             include INC_DIR . '/torrent_announce_urls.php';
 
             $ann = $tor['announce'] ?? '';
-            $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
+            $announce_urls['main_url'] = config()->get('bt_announce_url');
 
             if (!$ann || !in_array($ann, $announce_urls)) {
                 $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
@@ -365,11 +365,11 @@ class Torrent
             $bt_v1 = true;
         }
 
-        if ($bb_cfg['tracker']['disabled_v1_torrents'] && isset($bt_v1) && !isset($bt_v2)) {
+        if (config()->get('tracker.disabled_v1_torrents') && isset($bt_v1) && !isset($bt_v2)) {
             self::torrent_error_exit($lang['BT_V1_ONLY_DISALLOWED']);
         }
 
-        if ($bb_cfg['tracker']['disabled_v2_torrents'] && !isset($bt_v1) && isset($bt_v2)) {
+        if (config()->get('tracker.disabled_v2_torrents') && !isset($bt_v1) && isset($bt_v2)) {
             self::torrent_error_exit($lang['BT_V2_ONLY_DISALLOWED']);
         }
 
@@ -388,7 +388,7 @@ class Torrent
         }
 
         // TorrServer integration
-        if ($bb_cfg['torr_server']['enabled']) {
+        if (config()->get('torr_server.enabled')) {
             $torrServer = new TorrServerAPI();
             if ($torrServer->uploadTorrent($filename, $torrent['mimetype'])) {
                 $torrServer->saveM3U($attach_id, bin2hex($info_hash ?? $info_hash_v2));
@@ -467,7 +467,7 @@ class Torrent
         }
 
         // set DL-Type for topic
-        if ($bb_cfg['bt_set_dltype_on_tor_reg']) {
+        if (config()->get('bt_set_dltype_on_tor_reg')) {
             $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_dl_type = ' . TOPIC_DL_TYPE_DL . " WHERE topic_id = $topic_id";
 
             if (!$result = DB()->sql_query($sql)) {
@@ -475,7 +475,7 @@ class Torrent
             }
         }
 
-        if ($bb_cfg['tracker']['tor_topic_up']) {
+        if (config()->get('tracker.tor_topic_up')) {
             DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
         }
 
@@ -494,9 +494,9 @@ class Torrent
      */
     public static function send_torrent_with_passkey($filename)
     {
-        global $attachment, $auth_pages, $userdata, $bb_cfg, $lang;
+        global $attachment, $auth_pages, $userdata, $lang;
 
-        if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
+        if (!config()->get('bt_add_auth_key') || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
             return;
         }
 
@@ -504,7 +504,7 @@ class Torrent
         $user_id = $userdata['user_id'];
         $attach_id = $attachment['attach_id'];
 
-        if (!$passkey_key = $bb_cfg['passkey_key']) {
+        if (!$passkey_key = config()->get('passkey_key')) {
             bb_die('Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
         }
 
@@ -543,7 +543,7 @@ class Torrent
         }
 
         // Ratio limits
-        $min_ratio = $bb_cfg['bt_min_ratio_allow_dl_tor'];
+        $min_ratio = config()->get('bt_min_ratio_allow_dl_tor');
 
         if ($min_ratio && $user_id != $poster_id && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             if ($user_ratio < $min_ratio && $post_id) {
@@ -570,15 +570,15 @@ class Torrent
         }
 
         // Get tracker announcer
-        $announce_url = $bb_cfg['bt_announce_url'] . "?$passkey_key=$passkey_val";
+        $announce_url = config()->get('bt_announce_url') . "?$passkey_key=$passkey_val";
 
         // Replace original announce url with tracker default
-        if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
+        if (config()->get('bt_replace_ann_url') || !isset($tor['announce'])) {
             $tor['announce'] = $announce_url;
         }
 
         // Creating / cleaning announce-list
-        if (!isset($tor['announce-list']) || !is_array($tor['announce-list']) || $bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
+        if (!isset($tor['announce-list']) || !is_array($tor['announce-list']) || config()->get('bt_del_addit_ann_urls') || config()->get('bt_disable_dht')) {
             $tor['announce-list'] = [];
         }
 
@@ -597,15 +597,15 @@ class Torrent
         }
 
         // Add retracker
-        if (!empty($bb_cfg['tracker']['retracker_host']) && $bb_cfg['tracker']['retracker']) {
+        if (!empty(config()->get('tracker.retracker_host')) && config()->get('tracker.retracker')) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
-                $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
+                $tor['announce-list'] = array_merge($tor['announce-list'], [[config()->get('tracker.retracker_host')]]);
             }
         }
 
         // Adding tracker announcer to announce-list
         if (!empty($tor['announce-list'])) {
-            if ($bb_cfg['bt_replace_ann_url']) {
+            if (config()->get('bt_replace_ann_url')) {
                 // Adding tracker announcer as main announcer (At start)
                 array_unshift($tor['announce-list'], [$announce_url]);
             } else {
@@ -629,7 +629,7 @@ class Torrent
         }
 
         // Add publisher & topic url
-        $publisher_name = $bb_cfg['server_name'];
+        $publisher_name = config()->get('server_name');
         $publisher_url = make_url(TOPIC_URL . $topic_id);
 
         $tor['publisher'] = (string)$publisher_name;
@@ -644,10 +644,10 @@ class Torrent
         // Send torrent
         $output = Bencode::encode($tor);
 
-        if ($bb_cfg['tracker']['use_old_torrent_name_format']) {
-            $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.' . TORRENT_EXT;
+        if (config()->get('tracker.use_old_torrent_name_format')) {
+            $dl_fname = '[' . config()->get('server_name') . '].t' . $topic_id . '.' . TORRENT_EXT;
         } else {
-            $dl_fname = html_ent_decode($topic_title) . ' [' . $bb_cfg['server_name'] . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
+            $dl_fname = html_ent_decode($topic_title) . ' [' . config()->get('server_name') . '-' . $topic_id . ']' . '.' . TORRENT_EXT;
         }
 
         if (!empty($_COOKIE['explain'])) {

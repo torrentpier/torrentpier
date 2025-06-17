@@ -52,9 +52,7 @@ class TorrServerAPI
      */
     public function __construct()
     {
-        global $bb_cfg;
-
-        $this->url = $bb_cfg['torr_server']['url'] . '/';
+        $this->url = config()->get('torr_server.url') . '/';
     }
 
     /**
@@ -66,15 +64,13 @@ class TorrServerAPI
      */
     public function uploadTorrent(string $path, string $mimetype): bool
     {
-        global $bb_cfg;
-
         // Check mimetype
         if ($mimetype !== TORRENT_MIMETYPE) {
             return false;
         }
 
         $curl = new Curl();
-        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+        $curl->setTimeout(config()->get('torr_server.timeout'));
 
         $curl->setHeaders([
             'Accept' => 'application/json',
@@ -101,8 +97,6 @@ class TorrServerAPI
      */
     public function saveM3U(string|int $attach_id, string $hash): string
     {
-        global $bb_cfg;
-
         $m3uFile = get_attachments_dir() . '/' . self::M3U['prefix'] . $attach_id . self::M3U['extension'];
 
         // Make stream call to store torrent in memory
@@ -115,7 +109,7 @@ class TorrServerAPI
         }
 
         $curl = new Curl();
-        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+        $curl->setTimeout(config()->get('torr_server.timeout'));
 
         $curl->setHeader('Accept', 'audio/x-mpegurl');
         $curl->get($this->url . $this->endpoints['playlist'], ['hash' => $hash]);
@@ -197,8 +191,6 @@ class TorrServerAPI
      */
     public function getFfpInfo(string $hash, int $index, int|string $attach_id): mixed
     {
-        global $bb_cfg;
-
         if (!$response = CACHE('tr_cache')->get("ffprobe_m3u_$attach_id")) {
             $response = new stdClass();
         }
@@ -214,7 +206,7 @@ class TorrServerAPI
             }
 
             $curl = new Curl();
-            $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+            $curl->setTimeout(config()->get('torr_server.timeout'));
 
             $curl->setHeader('Accept', 'application/json');
             $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index);
@@ -238,10 +230,8 @@ class TorrServerAPI
      */
     private function getStream(string $hash): bool
     {
-        global $bb_cfg;
-
         $curl = new Curl();
-        $curl->setTimeout($bb_cfg['torr_server']['timeout']);
+        $curl->setTimeout(config()->get('torr_server.timeout'));
 
         $curl->setHeader('Accept', 'application/octet-stream');
         $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);
