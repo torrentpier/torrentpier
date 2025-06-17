@@ -378,7 +378,9 @@ function make_url(string $path = ''): string
  */
 require_once INC_DIR . '/functions.php';
 
-$bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
+// Merge database configuration with base configuration using singleton
+config()->merge(bb_get_config(BB_CONFIG));
+$bb_cfg = config()->all();
 
 $log_action = new TorrentPier\Legacy\LogAction();
 $wordCensor = new TorrentPier\Censor();
