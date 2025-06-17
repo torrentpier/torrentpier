@@ -275,7 +275,7 @@ $template->assign_vars([
     'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
     'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
     'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
-    'TOTAL_GENDER' => $bb_cfg['gender'] ? sprintf(
+    'TOTAL_GENDER' => config()->get('gender') ? sprintf(
         $lang['USERS_TOTAL_GENDER'],
         $stats['male'],
         $stats['female'],

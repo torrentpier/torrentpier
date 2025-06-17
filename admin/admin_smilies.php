@@ -26,7 +26,7 @@ if ($mode == 'delete' && isset($_POST['cancel'])) {
     $mode = '';
 }
 
-$pathToSmilesDir = BB_ROOT . $bb_cfg['smilies_path'];
+$pathToSmilesDir = BB_ROOT . config()->get('smilies_path');
 $delimeter = '=+:';
 $s_hidden_fields = '';
 $smiley_paks = $smiley_images = [];
