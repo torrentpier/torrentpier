@@ -67,7 +67,7 @@ class Censor
     {
         global $datastore;
 
-        if (!config()->get('use_word_censor')) {
+        if (!$this->isEnabled()) {
             return;
         }
 
@@ -88,6 +88,10 @@ class Censor
      */
     public function censorString(string $word): string
     {
+        if (!$this->isEnabled()) {
+            return $word;
+        }
+
         return preg_replace($this->words, $this->replacements, $word);
     }
 
