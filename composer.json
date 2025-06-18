@@ -65,6 +65,7 @@
     "longman/ip-tools": "1.2.1",
     "matthiasmullie/scrapbook": "^1.5.4",
     "monolog/monolog": "^3.4",
+    "nette/caching": "^3.3",
     "nette/database": "^3.2",
     "php-curl-class/php-curl-class": "^12.0.0",
     "samdark/sitemap": "2.4.1",

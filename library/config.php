@@ -60,27 +60,22 @@ $bb_cfg['cache'] = [
         'host' => '127.0.0.1',
         'port' => 11211,
     ],
-    'redis' => [
-        'host' => '127.0.0.1',
-        'port' => 6379,
-        'pconnect' => !PHP_ZTS, // Redis pconnect supported only for non-thread safe compilations of PHP
-    ],
-    // Available cache types: filecache, memcached, sqlite, redis, apcu (filecache by default)
+    // Available cache types: file, sqlite, memory, memcached (file by default)
     'engines' => [
-        'bb_cache' => ['filecache'],
-        'bb_config' => ['filecache'],
-        'tr_cache' => ['filecache'],
-        'session_cache' => ['filecache'],
-        'bb_cap_sid' => ['filecache'],
-        'bb_login_err' => ['filecache'],
-        'bb_poll_data' => ['filecache'],
-        'bb_ip2countries' => ['filecache'],
+        'bb_cache' => ['file'],
+        'bb_config' => ['file'],
+        'tr_cache' => ['file'],
+        'session_cache' => ['file'],
+        'bb_cap_sid' => ['file'],
+        'bb_login_err' => ['file'],
+        'bb_poll_data' => ['file'],
+        'bb_ip2countries' => ['file'],
     ],
 ];
 
 // Datastore
-// Available datastore types: filecache, memcached, sqlite, redis, apcu (filecache by default)
-$bb_cfg['datastore_type'] = 'filecache';
+// Available datastore types: file, sqlite, memory, memcache (file by default)
+$bb_cfg['datastore_type'] = 'file';
 
 // Server
 $bb_cfg['server_name'] = $domain_name = !empty($_SERVER['SERVER_NAME']) ? idn_to_utf8($_SERVER['SERVER_NAME']) : $reserved_name;
