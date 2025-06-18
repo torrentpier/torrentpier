@@ -179,7 +179,7 @@ class Atom
      */
     private static function create_atom($file_path, $mode, $id, $title, $topics)
     {
-        global $lang, $wordCensor;
+        global $lang;
         $date = null;
         $time = null;
         $dir = \dirname($file_path);
@@ -213,7 +213,7 @@ class Atom
             if (isset($topic['tor_status'])) {
                 $tor_status = " ({$lang['TOR_STATUS_NAME'][$topic['tor_status']]})";
             }
-            $topic_title = $wordCensor->censorString($topic['topic_title']);
+            $topic_title = censor()->censorString($topic['topic_title']);
             $author_name = $topic['first_username'] ?: $lang['GUEST'];
             $last_time = $topic['topic_last_post_time'];
             if ($topic['topic_last_post_edit_time']) {

@@ -68,7 +68,9 @@ class Ajax
      */
     public function exec()
     {
-        global $lang;
+        /** @noinspection PhpUnusedLocalVariableInspection */
+        // bb_cfg deprecated, but kept for compatibility with non-adapted ajax files
+        global $bb_cfg, $lang;
 
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
@@ -194,8 +196,8 @@ class Ajax
             ];
         }
 
-        if (Dev::sqlDebugAllowed()) {
-            $this->response['sql_log'] = Dev::getSqlLog();
+        if (dev()->checkSqlDebugAllowed()) {
+            $this->response['sql_log'] = dev()->getSqlDebugLog();
         }
 
         // sending output will be handled by $this->ob_handler()

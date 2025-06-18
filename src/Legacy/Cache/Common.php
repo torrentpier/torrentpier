@@ -82,7 +82,7 @@ class Common
         switch ($mode) {
             case 'start':
                 $this->sql_starttime = utime();
-                $dbg['sql'] = Dev::shortQuery($cur_query ?? $this->cur_query);
+                $dbg['sql'] = dev()->formatShortQuery($cur_query ?? $this->cur_query);
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');

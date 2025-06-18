@@ -86,7 +86,8 @@ if (is_file(BB_PATH . '/library/config.local.php')) {
     require_once BB_PATH . '/library/config.local.php';
 }
 
-// Initialize Config singleton
+/** @noinspection PhpUndefinedVariableInspection */
+// Initialize Config singleton, bb_cfg from global file config
 $config = \TorrentPier\Config::init($bb_cfg);
 
 /**
@@ -100,6 +101,26 @@ function config(): \TorrentPier\Config
 }
 
 /**
+ * Get the Censor instance
+ *
+ * @return \TorrentPier\Censor
+ */
+function censor(): \TorrentPier\Censor
+{
+    return \TorrentPier\Censor::getInstance();
+}
+
+/**
+ * Get the Dev instance
+ *
+ * @return \TorrentPier\Dev
+ */
+function dev(): \TorrentPier\Dev
+{
+    return \TorrentPier\Dev::getInstance();
+}
+
+/**
  * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));
@@ -108,7 +129,7 @@ if (APP_ENV === 'local') {
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 }
-(new \TorrentPier\Dev());
+(\TorrentPier\Dev::init());
 
 /**
  * Server variables initialize

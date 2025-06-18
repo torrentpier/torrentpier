@@ -379,8 +379,10 @@ require_once INC_DIR . '/functions.php';
 config()->merge(bb_get_config(BB_CONFIG));
 $bb_cfg = config()->all();
 
+// wordCensor deprecated, but kept for compatibility with non-adapted code
+$wordCensor = censor();
+
 $log_action = new TorrentPier\Legacy\LogAction();
-$wordCensor = new TorrentPier\Censor();
 $html = new TorrentPier\Legacy\Common\Html();
 $user = new TorrentPier\Legacy\Common\User();
 

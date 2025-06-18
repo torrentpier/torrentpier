@@ -472,8 +472,8 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
             // hide sid
             $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
-            $subject = $wordCensor->censorString($subject);
-            $message = $wordCensor->censorString($message);
+            $subject = censor()->censorString($subject);
+            $message = censor()->censorString($message);
 
             if (!preg_match('/^Re:/', $subject) && !empty($subject)) {
                 $subject = 'Re: ' . $subject;

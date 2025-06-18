@@ -83,7 +83,7 @@ if ($watch_count > 0) {
                 'ROW_CLASS' => (!($i % 2)) ? 'row1' : 'row2',
                 'POST_ID' => $watch[$i]['topic_first_post_id'],
                 'TOPIC_ID' => $watch[$i]['topic_id'],
-                'TOPIC_TITLE' => str_short($wordCensor->censorString($watch[$i]['topic_title']), 70),
+                'TOPIC_TITLE' => str_short(censor()->censorString($watch[$i]['topic_title']), 70),
                 'FULL_TOPIC_TITLE' => $watch[$i]['topic_title'],
                 'U_TOPIC' => TOPIC_URL . $watch[$i]['topic_id'],
                 'FORUM_TITLE' => $watch[$i]['forum_name'],

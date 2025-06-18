@@ -54,7 +54,7 @@ class File extends Common
         $filesystem = new Filesystem($adapter);
         $this->file = new Flysystem($filesystem);
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sqlDebugAllowed();
+        $this->dbg_enabled = dev()->checkSqlDebugAllowed();
     }
 
     /**

@@ -78,7 +78,7 @@ class Redis extends Common
         $this->client = new RedisClient();
         $this->cfg = $cfg;
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sqlDebugAllowed();
+        $this->dbg_enabled = dev()->checkSqlDebugAllowed();
     }
 
     /**

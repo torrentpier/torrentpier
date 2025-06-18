@@ -5,6 +5,8 @@ This guide helps you upgrade your TorrentPier installation to the latest version
 ## 📖 Table of Contents
 
 - [Configuration System Migration](#configuration-system-migration)
+- [Censor System Migration](#censor-system-migration)
+- [Development System Migration](#development-system-migration)
 - [Breaking Changes](#breaking-changes)
 - [Best Practices](#best-practices)
 
@@ -85,12 +87,183 @@ if (isset(config()->bt_announce_url)) {
 }
 ```
 
+## 🛡️ Censor System Migration
+
+The word censoring system has been refactored to use a singleton pattern, similar to the Configuration system, providing better performance and consistency.
+
+### Quick Migration Overview
+
+```php
+// ❌ Old way (still works, but not recommended)
+global $wordCensor;
+$censored = $wordCensor->censorString($text);
+
+// ✅ New way (recommended)
+$censored = censor()->censorString($text);
+```
+
+### Key Censor Changes
+
+#### Basic Usage
+```php
+// Censor a string
+$text = "This contains badword content";
+$censored = censor()->censorString($text);
+
+// Check if censoring is enabled
+if (censor()->isEnabled()) {
+    $censored = censor()->censorString($text);
+} else {
+    $censored = $text;
+}
+
+// Get count of loaded censored words
+$wordCount = censor()->getWordsCount();
+```
+
+#### Advanced Usage
+```php
+// Add runtime censored words (temporary, not saved to database)
+censor()->addWord('badword', '***');
+censor()->addWord('anotherbad*', 'replaced'); // Wildcards supported
+
+// Reload censored words from database (useful after admin updates)
+censor()->reload();
+
+// Check if censoring is enabled
+$isEnabled = censor()->isEnabled();
+```
+
+### Backward Compatibility
+
+The global `$wordCensor` variable is still available and works exactly as before:
+
+```php
+// This still works - backward compatibility maintained
+global $wordCensor;
+$censored = $wordCensor->censorString($text);
+
+// But this is now preferred
+$censored = censor()->censorString($text);
+```
+
+### Performance Benefits
+
+- **Single Instance**: Only one censor instance loads words from database
+- **Automatic Reloading**: Words are automatically reloaded when updated in admin panel
+- **Memory Efficient**: Shared instance across entire application
+- **Lazy Loading**: Words only loaded when censoring is enabled
+
+### Admin Panel Updates
+
+When you update censored words in the admin panel, the system now automatically:
+1. Updates the datastore cache
+2. Reloads the singleton instance with fresh words
+3. Applies changes immediately without requiring page refresh
+
+## 🛠️ Development System Migration
+
+The development and debugging system has been refactored to use a singleton pattern, providing better resource management and consistency across the application.
+
+### Quick Migration Overview
+
+```php
+// ❌ Old way (still works, but not recommended)
+$sqlLog = \TorrentPier\Dev::getSqlLog();
+$isDebugAllowed = \TorrentPier\Dev::sqlDebugAllowed();
+$shortQuery = \TorrentPier\Dev::shortQuery($sql);
+
+// ✅ New way (recommended)
+$sqlLog = dev()->getSqlDebugLog();
+$isDebugAllowed = dev()->checkSqlDebugAllowed();
+$shortQuery = dev()->formatShortQuery($sql);
+```
+
+### Key Development System Changes
+
+#### Basic Usage
+```php
+// Get SQL debug log
+$sqlLog = dev()->getSqlDebugLog();
+
+// Check if SQL debugging is allowed
+if (dev()->checkSqlDebugAllowed()) {
+    $debugInfo = dev()->getSqlDebugLog();
+}
+
+// Format SQL queries for display
+$formattedQuery = dev()->formatShortQuery($sql, true); // HTML escaped
+$plainQuery = dev()->formatShortQuery($sql, false);   // Plain text
+```
+
+#### New Instance Methods
+```php
+// Access Whoops instance directly
+$whoops = dev()->getWhoops();
+
+// Check debug mode status
+if (dev()->isDebugEnabled()) {
+    // Debug mode is active
+}
+
+// Check environment
+if (dev()->isLocalEnvironment()) {
+    // Running in local development
+}
+```
+
+### Backward Compatibility
+
+All existing static method calls continue to work exactly as before:
+
+```php
+// This still works - backward compatibility maintained
+$sqlLog = \TorrentPier\Dev::getSqlLog();
+$isDebugAllowed = \TorrentPier\Dev::sqlDebugAllowed();
+$shortQuery = \TorrentPier\Dev::shortQuery($sql);
+
+// But this is now preferred
+$sqlLog = dev()->getSqlDebugLog();
+$isDebugAllowed = dev()->checkSqlDebugAllowed();
+$shortQuery = dev()->formatShortQuery($sql);
+```
+
+### Performance Benefits
+
+- **Single Instance**: Only one debugging instance across the entire application
+- **Resource Efficiency**: Whoops handlers initialized once and reused
+- **Memory Optimization**: Shared debugging state and configuration
+- **Lazy Loading**: Debug features only activated when needed
+
+### Advanced Usage
+
+```php
+// Access the singleton directly
+$devInstance = \TorrentPier\Dev::getInstance();
+
+// Initialize the system (called automatically in common.php)
+\TorrentPier\Dev::init();
+
+// Get detailed environment information
+$environment = [
+    'debug_enabled' => dev()->isDebugEnabled(),
+    'local_environment' => dev()->isLocalEnvironment(),
+    'sql_debug_allowed' => dev()->sqlDebugAllowed(),
+];
+```
+
 ## ⚠️ Breaking Changes
 
 ### Deprecated Functions
 - `get_config()` → Use `config()->get()`
 - `set_config()` → Use `config()->set()`
 - Direct `$bb_cfg` access → Use `config()` methods
+
+### Deprecated Patterns
+- `new TorrentPier\Censor()` → Use `censor()` global function
+- Direct `$wordCensor` access → Use `censor()` methods
+- `new TorrentPier\Dev()` → Use `dev()` global function
+- Static `Dev::` methods → Use `dev()` instance methods
 
 ### File Structure Changes
 - New `/src/` directory for modern PHP classes
@@ -119,6 +292,50 @@ class TrackerService {
 
     public function __construct() {
         $this->announceUrl = config()->get('bt_announce_url');
+    }
+}
+```
+
+### Censor Management
+```php
+// ✅ Check if censoring is enabled before processing
+function processUserInput(string $text): string {
+    if (censor()->isEnabled()) {
+        return censor()->censorString($text);
+    }
+    return $text;
+}
+
+// ✅ Use the singleton consistently
+$censoredText = censor()->censorString($input);
+```
+
+### Development and Debugging
+```php
+// ✅ Use instance methods for debugging
+if (dev()->checkSqlDebugAllowed()) {
+    $debugLog = dev()->getSqlDebugLog();
+}
+
+// ✅ Access debugging utilities consistently
+function formatSqlForDisplay(string $sql): string {
+    return dev()->formatShortQuery($sql, true);
+}
+
+// ✅ Check environment properly
+if (dev()->isLocalEnvironment()) {
+    // Development-specific code
+}
+class ForumPost {
+    public function getDisplayText(): string {
+        return censor()->censorString($this->text);
+    }
+}
+
+// ✅ Add runtime words when needed
+function setupCustomCensoring(): void {
+    if (isCustomModeEnabled()) {
+        censor()->addWord('custombad*', '[censored]');
     }
 }
 ```

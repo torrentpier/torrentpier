@@ -445,7 +445,7 @@ foreach ($topic_rowset as $topic) {
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
         'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
-        'TOPIC_TITLE' => $wordCensor->censorString($topic['topic_title']),
+        'TOPIC_TITLE' => censor()->censorString($topic['topic_title']),
         'TOPICS_SEPARATOR' => $separator,
         'IS_UNREAD' => $is_unread,
         'TOPIC_ICON' => get_topic_icon($topic, $is_unread),

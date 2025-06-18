@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $userdata, $wordCensor;
+global $lang, $userdata;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
@@ -80,7 +80,7 @@ switch ($this->request['type']) {
         // hide sid
         $message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]#', 'sid', $message);
 
-        $message = $wordCensor->censorString($message);
+        $message = censor()->censorString($message);
 
         if ($post['post_id'] == $post['topic_first_post_id']) {
             $message = "[quote]" . $post['topic_title'] . "[/quote]\r";
