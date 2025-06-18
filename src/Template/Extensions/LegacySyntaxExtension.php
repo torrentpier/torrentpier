@@ -55,12 +55,11 @@ class LegacySyntaxExtension extends AbstractExtension
         // Convert legacy includes first (simplest)
         $content = $this->convertIncludes($content);
 
-        // Convert legacy IF statements first - they have the most complex structure
-        // This ensures nested structures are properly handled
-        $content = $this->convertIfStatements($content);
-
-        // Convert legacy blocks (BEGIN/END)
+        // Convert legacy blocks (BEGIN/END) - this will also handle IF statements within block context
         $content = $this->convertBlocks($content);
+
+        // Convert any remaining IF statements that are not within blocks
+        $content = $this->convertIfStatements($content);
 
         // Convert legacy variables last
         $content = $this->convertVariables($content);
@@ -285,6 +284,9 @@ class LegacySyntaxExtension extends AbstractExtension
             $currentBlockStack = array_merge($parentBlocks, [$blockName]);
             $body = $this->convertBlocksRecursive($body, $currentBlockStack);
             
+            // Convert IF statements with block context BEFORE converting variables
+            $body = $this->convertIfStatementsWithContext($body, $currentBlockStack);
+            
             // Convert variables for this block level
             $body = $this->convertBlockVariables($body, $blockName, $parentBlocks);
             
@@ -340,6 +342,65 @@ class LegacySyntaxExtension extends AbstractExtension
         $content = preg_replace('/\b' . preg_quote($currentBlock) . '\.([A-Z0-9_.]+)\b/', $currentBlock . '_item.$1', $content);
         
         return $content;
+    }
+
+    /**
+     * Convert IF statements with block context awareness
+     */
+    private function convertIfStatementsWithContext(string $content, array $blockStack): string
+    {
+        $iterations = 0;
+        $maxIterations = 50;
+        
+        do {
+            $previousContent = $content;
+            
+            // Convert complete IF...ELSE...ENDIF structures with context
+            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF|ELSE)).)*?)<!-- ELSE(?:\s*\/[^>]*)? -->((?:(?!<!-- ENDIF).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function($matches) use ($blockStack) {
+                $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
+                $ifBody = $matches[2];
+                $elseBody = $matches[3];
+                return "{% if $condition %}$ifBody{% else %}$elseBody{% endif %}";
+            }, $content);
+            
+            // Convert simple IF...ENDIF structures with context
+            $content = preg_replace_callback('/<!-- IF ([^>]+?) -->((?:(?!<!-- (?:IF|ENDIF)).)*?)<!-- ENDIF(?:\s*\/[^>]*)? -->/s', function($matches) use ($blockStack) {
+                $condition = $this->convertConditionWithContext(trim($matches[1]), $blockStack);
+                $body = $matches[2];
+                return "{% if $condition %}$body{% endif %}";
+            }, $content);
+            
+            $iterations++;
+        } while ($content !== $previousContent && $iterations < $maxIterations);
+        
+        return $content;
+    }
+
+    /**
+     * Convert condition with block context awareness
+     */
+    private function convertConditionWithContext(string $condition, array $blockStack): string
+    {
+        $condition = trim($condition);
+        
+        // If we're in a block context, convert block variables appropriately
+        if (!empty($blockStack)) {
+            $currentBlock = end($blockStack);
+            $fullBlockPath = implode('.', $blockStack);
+            
+            // Convert variables like c.f.POSTS to f_item.POSTS when in f block
+            // This handles the pattern where the full path refers to the current block item
+            $condition = preg_replace_callback('/\b' . preg_quote($fullBlockPath) . '\.([A-Z0-9_]+)\b/', function($matches) use ($currentBlock) {
+                $varName = $matches[1];
+                return "{$currentBlock}_item.$varName";
+            }, $condition);
+            
+            // Don't auto-convert standalone variables - let the main variable conversion handle them
+            // This prevents global variables like SHOW_LAST_TOPIC from being incorrectly converted to block variables
+        }
+        
+        // Apply standard condition conversions
+        return $this->convertCondition($condition);
     }
 
     /**
