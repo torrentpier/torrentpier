@@ -34,6 +34,9 @@ class DatabaseDebugger
     public string $explain_hold = '';
     public string $explain_out = '';
 
+    // Nette Explorer tracking
+    public bool $is_nette_explorer_query = false;
+
     public function __construct(Database $db)
     {
         $this->db = $db;
@@ -70,6 +73,12 @@ class DatabaseDebugger
 
             if ($this->dbg_enabled) {
                 $dbg['sql'] = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $this->db->cur_query);
+
+                // Also check SQL syntax to detect Nette Explorer queries
+                if (!$this->is_nette_explorer_query && $this->detectNetteExplorerBySqlSyntax($dbg['sql'])) {
+                    $this->markAsNetteExplorerQuery();
+                }
+
                 $dbg['src'] = $this->debug_find_source();
                 $dbg['file'] = $this->debug_find_source('file');
                 $dbg['line'] = $this->debug_find_source('line');
@@ -96,6 +105,18 @@ class DatabaseDebugger
                 $dbg['time'] = $this->cur_query_time > 0 ? $this->cur_query_time : (microtime(true) - $this->sql_starttime);
                 $dbg['info'] = $this->db->query_info();
                 $dbg['mem_after'] = function_exists('sys') ? sys('mem') : 0;
+
+                // Add Nette Explorer marker to debug info for panel display
+                if ($this->is_nette_explorer_query && !str_contains($dbg['info'], '[Nette Explorer]')) {
+                    // Store both plain text and HTML versions
+                    $dbg['info_plain'] = $dbg['info'] . ' [Nette Explorer]';
+                    $dbg['info'] .= ' <span style="color: #28a745; font-weight: bold; background: #d4edda; padding: 2px 6px; border-radius: 3px; font-size: 11px;">[Nette Explorer]</span>';
+                    $dbg['is_nette_explorer'] = true;
+                } else {
+                    $dbg['info_plain'] = $dbg['info'];
+                    $dbg['is_nette_explorer'] = false;
+                }
+
                 $id++;
             }
 
@@ -108,6 +129,9 @@ class DatabaseDebugger
                 $this->log_query($this->db->DBS['log_file']);
                 $this->db->DBS['log_counter']--;
             }
+
+            // Reset Nette Explorer flag after query completion
+            $this->resetNetteExplorerFlag();
         }
 
         // Update timing in main Database object
@@ -124,6 +148,12 @@ class DatabaseDebugger
         }
 
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+
+        // Check if this is a Nette Explorer query by examining the call stack
+        $isNetteExplorer = $this->detectNetteExplorerInTrace($trace);
+        if ($isNetteExplorer) {
+            $this->markAsNetteExplorerQuery();
+        }
 
         // Find first non-DB call (skip Database.php, DebugSelection.php, and DatabaseDebugger.php)
         foreach ($trace as $frame) {
@@ -146,6 +176,57 @@ class DatabaseDebugger
         }
 
         return 'src not found';
+    }
+
+    /**
+     * Detect if the current query comes from Nette Explorer by examining the call stack
+     */
+    public function detectNetteExplorerInTrace(array $trace): bool
+    {
+        foreach ($trace as $frame) {
+            if (isset($frame['class'])) {
+                // Check for Nette Database classes in the call stack
+                if (str_contains($frame['class'], 'Nette\\Database\\') ||
+                    str_contains($frame['class'], 'TorrentPier\\Database\\DebugSelection')) {
+                    return true;
+                }
+            }
+
+            if (isset($frame['file'])) {
+                // Check for Nette Database files or our DebugSelection
+                if (str_contains($frame['file'], 'vendor/nette/database/') ||
+                    str_contains($frame['file'], 'Database/DebugSelection.php')) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Detect if SQL query syntax suggests it came from Nette Explorer
+     */
+    public function detectNetteExplorerBySqlSyntax(string $sql): bool
+    {
+        // Nette Database typically generates SQL with these characteristics:
+        // 1. Backticks around column/table names
+        // 2. Parentheses around WHERE conditions like (column = value)
+        // 3. Specific patterns like IN (value) instead of IN (value)
+
+        $nettePatterns = [
+            '/`[a-zA-Z0-9_]+`/',                               // Backticks around identifiers
+            '/WHERE\s*\([^)]+\)/',                             // Parentheses around WHERE conditions
+            '/SELECT\s+`[^`]+`.*FROM\s+`[^`]+`/',             // SELECT with backticked columns and tables
+        ];
+
+        foreach ($nettePatterns as $pattern) {
+            if (preg_match($pattern, $sql)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -345,5 +426,21 @@ class DatabaseDebugger
         $this->dbg_id = 0;
         $this->explain_hold = '';
         $this->explain_out = '';
+    }
+
+    /**
+     * Mark next query as coming from Nette Explorer
+     */
+    public function markAsNetteExplorerQuery(): void
+    {
+        $this->is_nette_explorer_query = true;
+    }
+
+    /**
+     * Reset Nette Explorer query flag
+     */
+    public function resetNetteExplorerFlag(): void
+    {
+        $this->is_nette_explorer_query = false;
     }
 }
