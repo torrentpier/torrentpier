@@ -6,7 +6,10 @@ This guide helps you upgrade your TorrentPier installation to the latest version
 
 - [Configuration System Migration](#configuration-system-migration)
 - [Censor System Migration](#censor-system-migration)
+<<<<<<< docs-Add-Select-class-migration-guide
 - [Select System Migration](#select-system-migration)
+=======
+>>>>>>> dev/005
 - [Development System Migration](#development-system-migration)
 - [Breaking Changes](#breaking-changes)
 - [Best Practices](#best-practices)
@@ -162,6 +165,7 @@ When you update censored words in the admin panel, the system now automatically:
 2. Reloads the singleton instance with fresh words
 3. Applies changes immediately without requiring page refresh
 
+<<<<<<< docs-Add-Select-class-migration-guide
 ## 📋 Select System Migration
 
 The Select class has been moved and reorganized for better structure and consistency within the legacy system organization.
@@ -230,6 +234,8 @@ use TorrentPier\Legacy\Select;
 use TorrentPier\Legacy\Common\Select;
 ```
 
+=======
+>>>>>>> dev/005
 ## 🛠️ Development System Migration
 
 The development and debugging system has been refactored to use a singleton pattern, providing better resource management and consistency across the application.
@@ -333,7 +339,10 @@ $environment = [
 - Direct `$wordCensor` access → Use `censor()` methods
 - `new TorrentPier\Dev()` → Use `dev()` global function
 - Static `Dev::` methods → Use `dev()` instance methods
+<<<<<<< docs-Add-Select-class-migration-guide
 - `\TorrentPier\Legacy\Select::` → Use `\TorrentPier\Legacy\Common\Select::`
+=======
+>>>>>>> dev/005
 
 ### File Structure Changes
 - New `/src/` directory for modern PHP classes
@@ -380,6 +389,7 @@ function processUserInput(string $text): string {
 $censoredText = censor()->censorString($input);
 ```
 
+<<<<<<< docs-Add-Select-class-migration-guide
 ### Select Usage
 ```php
 // ✅ Use the new namespace consistently
@@ -397,6 +407,8 @@ class AdminPanel {
 }
 ```
 
+=======
+>>>>>>> dev/005
 ### Development and Debugging
 ```php
 // ✅ Use instance methods for debugging
