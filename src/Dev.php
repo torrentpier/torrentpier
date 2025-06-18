@@ -194,12 +194,19 @@ class Dev
      */
     public function getSqlLogInstance(): string
     {
-        global $DBS, $CACHES, $datastore;
+        global $CACHES, $datastore;
 
         $log = '';
 
-        foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj->dbg) ? $this->getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+        // Get debug information from new database system
+        $server_names = \TorrentPier\Database\DbFactory::getServerNames();
+        foreach ($server_names as $srv_name) {
+            try {
+                $db_obj = \TorrentPier\Database\DbFactory::getInstance($srv_name);
+                $log .= !empty($db_obj->dbg) ? $this->getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+            } catch (\Exception $e) {
+                // Skip if server not available
+            }
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {
