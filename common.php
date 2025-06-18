@@ -175,7 +175,7 @@ function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
  */
 function datastore(): \TorrentPier\Cache\DatastoreManager
 {
-    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'filecache'));
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'file'));
 }
 
 /**

@@ -142,7 +142,7 @@ function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager {
 }
 
 function datastore(): \TorrentPier\Cache\DatastoreManager {
-    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'filecache'));
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'file'));
 }
 ```
 
@@ -171,14 +171,14 @@ $bb_cfg['cache'] = [
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
     'prefix' => 'tp_',
     'engines' => [
-        'bb_cache' => ['filecache'],        // Uses Nette FileStorage
+        'bb_cache' => ['file'],        // Uses Nette FileStorage
         'session_cache' => ['sqlite'],      // Uses Nette SQLiteStorage
-        'tr_cache' => ['filecache'],        // Uses Nette FileStorage
+        'tr_cache' => ['file'],        // Uses Nette FileStorage
         // ... other caches
     ],
 ];
 
-$bb_cfg['datastore_type'] = 'filecache'; // Uses Nette FileStorage
+$bb_cfg['datastore_type'] = 'file'; // Uses Nette FileStorage
 ```
 
 ## Storage Types
@@ -187,7 +187,7 @@ $bb_cfg['datastore_type'] = 'filecache'; // Uses Nette FileStorage
 
 | Legacy Type | Nette Storage | Features |
 |------------|---------------|----------|
-| `filecache` | `FileStorage` | File-based, persistent, dependencies |
+| `file` | `FileStorage` | File-based, persistent, dependencies |
 | `sqlite` | `SQLiteStorage` | Database, supports tags and complex dependencies |
 | `memory` | `MemoryStorage` | In-memory, fastest, non-persistent |
 
