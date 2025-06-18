@@ -129,6 +129,7 @@ if (APP_ENV === 'local') {
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 }
+(\TorrentPier\Dev::init());
 
 /**
  * Server variables initialize
