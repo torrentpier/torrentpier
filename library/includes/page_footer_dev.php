@@ -64,11 +64,11 @@ if (!defined('BB_ROOT')) {
 
 <?php
 if (!empty($_COOKIE['explain'])) {
-    // Get all database server instances from the new DbFactory
-    $server_names = \TorrentPier\Database\DbFactory::getServerNames();
+    // Get all database server instances from the new DatabaseFactory
+    $server_names = \TorrentPier\Database\DatabaseFactory::getServerNames();
     foreach ($server_names as $srv_name) {
         try {
-            $db_obj = \TorrentPier\Database\DbFactory::getInstance($srv_name);
+            $db_obj = \TorrentPier\Database\DatabaseFactory::getInstance($srv_name);
             if (!empty($db_obj->do_explain)) {
                 $db_obj->explain('display');
             }

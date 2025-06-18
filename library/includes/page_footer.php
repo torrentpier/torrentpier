@@ -43,7 +43,7 @@ if ($show_dbg_info) {
 
     // Get database statistics from the new system
     try {
-        $main_db = \TorrentPier\Database\DbFactory::getInstance('db');
+        $main_db = \TorrentPier\Database\DatabaseFactory::getInstance('db');
         $sql_t = $main_db->sql_timetotal;
         $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
         $num_q = $main_db->num_queries;
