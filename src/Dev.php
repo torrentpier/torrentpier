@@ -194,8 +194,6 @@ class Dev
      */
     public function getSqlLogInstance(): string
     {
-        global $CACHES, $datastore;
-
         $log = '';
 
         // Get debug information from new database system
@@ -209,7 +207,11 @@ class Dev
             }
         }
 
-        foreach ($CACHES->obj as $cache_name => $cache_obj) {
+        // Get cache system debug information
+        $cacheSystem = \TorrentPier\Cache\UnifiedCacheSystem::getInstance();
+        $cacheObjects = $cacheSystem->obj; // Uses magic __get method for backward compatibility
+
+        foreach ($cacheObjects as $cache_name => $cache_obj) {
             if (!empty($cache_obj->db->dbg)) {
                 $log .= $this->getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
             } elseif (!empty($cache_obj->dbg)) {
@@ -217,6 +219,8 @@ class Dev
             }
         }
 
+        // Get datastore debug information
+        $datastore = datastore();
         if (!empty($datastore->db->dbg)) {
             $log .= $this->getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
         } elseif (!empty($datastore->dbg)) {

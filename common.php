@@ -154,37 +154,35 @@ function DB(string $db_alias = 'db'): \TorrentPier\Database\DB
     return TorrentPier\Database\DbFactory::getInstance($db_alias);
 }
 
-/**
- * Cache
- */
-$CACHES = new TorrentPier\Legacy\Caches(config()->all());
+// Initialize Unified Cache System
+TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
 
-function CACHE(string $cache_name)
+/**
+ * Get cache manager instance (replaces legacy cache system)
+ *
+ * @param string $cache_name
+ * @return \TorrentPier\Cache\CacheManager
+ */
+function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
 {
-    global $CACHES;
-    return $CACHES->get_cache_obj($cache_name);
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->get_cache_obj($cache_name);
 }
 
 /**
- * Datastore
+ * Get datastore manager instance (replaces legacy datastore system)
+ *
+ * @return \TorrentPier\Cache\DatastoreManager
  */
-switch (config()->get('datastore_type')) {
-    case 'apcu':
-        $datastore = new TorrentPier\Legacy\Datastore\APCu(config()->get('cache.prefix'));
-        break;
-    case 'memcached':
-        $datastore = new TorrentPier\Legacy\Datastore\Memcached(config()->get('cache.memcached'), config()->get('cache.prefix'));
-        break;
-    case 'sqlite':
-        $datastore = new TorrentPier\Legacy\Datastore\Sqlite(config()->get('cache.db_dir') . 'datastore', config()->get('cache.prefix'));
-        break;
-    case 'redis':
-        $datastore = new TorrentPier\Legacy\Datastore\Redis(config()->get('cache.redis'), config()->get('cache.prefix'));
-        break;
-    case 'filecache':
-    default:
-        $datastore = new TorrentPier\Legacy\Datastore\File(config()->get('cache.db_dir') . 'datastore/', config()->get('cache.prefix'));
+function datastore(): \TorrentPier\Cache\DatastoreManager
+{
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'filecache'));
 }
+
+/**
+ * Backward compatibility: Global datastore variable
+ * This allows existing code to continue using global $datastore
+ */
+$datastore = datastore();
 
 // Functions
 function utime()
