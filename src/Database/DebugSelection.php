@@ -78,6 +78,9 @@ class DebugSelection
         // Use the actual SQL with substituted parameters for both logging and EXPLAIN
         $sql = $this->generateSqlForLogging($method, $arguments, false);
 
+        // Mark this query as coming from Nette Explorer
+        $this->db->debugger->markAsNetteExplorerQuery();
+
         // Set the query for debug logging
         $this->db->cur_query = $sql;
         $this->db->debug('start');

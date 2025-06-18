@@ -258,9 +258,11 @@ class Dev
             $sql = $this->shortQueryInstance($dbg['sql'], true);
             $time = sprintf('%.3f', $dbg['time']);
             $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
+            // Use plain text version for title attribute to avoid HTML issues
+            $info_plain = !empty($dbg['info_plain']) ? $dbg['info_plain'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
 
-            $log .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="sqlLogRow" title="' . $info . '">'
+            $log .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="sqlLogRow" title="' . htmlspecialchars($info_plain) . '">'
                 . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
                 . '<span class="copyElement" data-clipboard-target="#' . $id . '" title="Copy to clipboard" style="color: rgb(128,128,128); letter-spacing: -1px;">' . $perc . '</span>&nbsp;'
                 . '<span style="letter-spacing: 0;" id="' . $id . '">' . $sql . '</span>'
