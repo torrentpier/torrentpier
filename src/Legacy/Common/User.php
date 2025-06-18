@@ -583,7 +583,7 @@ class User
      */
     public function init_userprefs()
     {
-        global $theme, $source_lang, $DeltaTime;
+        global $theme, $DeltaTime;
 
         if (defined('LANG_DIR')) {
             return;
@@ -621,17 +621,8 @@ class User
             define('LANG_DIR', DEFAULT_LANG_DIR);
         }
 
-        /** Temporary place source language to the global */
-        $lang = [];
-        require(SOURCE_LANG_DIR . 'main.php');
-        $source_lang = $lang;
-        unset($lang);
-
-        /** Place user language to the global */
-        global $lang;
-        require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, config()->get('lang')[$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
-        $lang += $source_lang;
+        // Initialize Language singleton with user preferences
+        lang()->initializeLanguage($this->data['user_lang']);
 
         $theme = setup_style();
         $DeltaTime = new DateDelta();

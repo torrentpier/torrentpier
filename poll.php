@@ -28,19 +28,19 @@ $poll = new TorrentPier\Legacy\Poll();
 
 // Checking $topic_id
 if (!$topic_id) {
-    bb_die($lang['INVALID_TOPIC_ID']);
+    bb_die(__('INVALID_TOPIC_ID'));
 }
 
 // Getting topic data if present
 if (!$t_data = DB()->table(BB_TOPICS)->where('topic_id', $topic_id)->fetch()?->toArray()) {
-    bb_die($lang['INVALID_TOPIC_ID_DB']);
+    bb_die(__('INVALID_TOPIC_ID_DB'));
 }
 
 // Checking the rights
 if ($mode != 'poll_vote') {
     if ($t_data['topic_poster'] != $userdata['user_id']) {
         if (!IS_AM) {
-            bb_die($lang['NOT_AUTHORISED']);
+            bb_die(__('NOT_AUTHORISED'));
         }
     }
 }
@@ -48,10 +48,10 @@ if ($mode != 'poll_vote') {
 // Checking the ability to make changes
 if ($mode == 'poll_delete') {
     if ($t_data['topic_time'] < TIMENOW - config()->get('poll_max_days') * 86400) {
-        bb_die(sprintf($lang['NEW_POLL_DAYS'], config()->get('poll_max_days')));
+        bb_die(sprintf(__('NEW_POLL_DAYS'), config()->get('poll_max_days')));
     }
     if (!IS_ADMIN && ($t_data['topic_vote'] != POLL_FINISHED)) {
-        bb_die($lang['CANNOT_DELETE_POLL']);
+        bb_die(__('CANNOT_DELETE_POLL'));
     }
 }
 
@@ -59,25 +59,25 @@ switch ($mode) {
     case 'poll_vote':
         // Checking for poll existence
         if (!$t_data['topic_vote']) {
-            bb_die($lang['POST_HAS_NO_POLL']);
+            bb_die(__('POST_HAS_NO_POLL'));
         }
 
         // Checking that the topic has not been locked
         if ($t_data['topic_status'] == TOPIC_LOCKED) {
-            bb_die($lang['TOPIC_LOCKED_SHORT']);
+            bb_die(__('TOPIC_LOCKED_SHORT'));
         }
 
         // Checking that poll has not been finished
         if (!\TorrentPier\Legacy\Poll::pollIsActive($t_data)) {
-            bb_die($lang['NEW_POLL_ENDED']);
+            bb_die(__('NEW_POLL_ENDED'));
         }
 
         if (!$vote_id) {
-            bb_die($lang['NO_VOTE_OPTION']);
+            bb_die(__('NO_VOTE_OPTION'));
         }
 
         if (\TorrentPier\Legacy\Poll::userIsAlreadyVoted($topic_id, (int)$userdata['user_id'])) {
-            bb_die($lang['ALREADY_VOTED']);
+            bb_die(__('ALREADY_VOTED'));
         }
 
         $affected_rows = DB()->table(BB_POLL_VOTES)
@@ -86,7 +86,7 @@ switch ($mode) {
             ->update(['vote_result' => new \Nette\Database\SqlLiteral('vote_result + 1')]);
 
         if ($affected_rows != 1) {
-            bb_die($lang['NO_VOTE_OPTION']);
+            bb_die(__('NO_VOTE_OPTION'));
         }
 
         // Voting process
@@ -101,46 +101,46 @@ switch ($mode) {
             // Ignore duplicate entry (equivalent to INSERT IGNORE)
         }
         CACHE('bb_poll_data')->rm("poll_$topic_id");
-        bb_die($lang['VOTE_CAST']);
+        bb_die(__('VOTE_CAST'));
         break;
     case 'poll_start':
         // Checking for poll existence
         if (!$t_data['topic_vote']) {
-            bb_die($lang['POST_HAS_NO_POLL']);
+            bb_die(__('POST_HAS_NO_POLL'));
         }
 
         // Starting the poll
         DB()->table(BB_TOPICS)
             ->where('topic_id', $topic_id)
             ->update(['topic_vote' => 1]);
-        bb_die($lang['NEW_POLL_START']);
+        bb_die(__('NEW_POLL_START'));
         break;
     case 'poll_finish':
         // Checking for poll existence
         if (!$t_data['topic_vote']) {
-            bb_die($lang['POST_HAS_NO_POLL']);
+            bb_die(__('POST_HAS_NO_POLL'));
         }
 
         // Finishing the poll
         DB()->table(BB_TOPICS)
             ->where('topic_id', $topic_id)
             ->update(['topic_vote' => POLL_FINISHED]);
-        bb_die($lang['NEW_POLL_END']);
+        bb_die(__('NEW_POLL_END'));
         break;
     case 'poll_delete':
         // Checking for poll existence
         if (!$t_data['topic_vote']) {
-            bb_die($lang['POST_HAS_NO_POLL']);
+            bb_die(__('POST_HAS_NO_POLL'));
         }
 
         // Removing poll from database
         $poll->delete_poll($topic_id);
-        bb_die($lang['NEW_POLL_DELETE']);
+        bb_die(__('NEW_POLL_DELETE'));
         break;
     case 'poll_add':
         // Checking that no other poll exists
         if ($t_data['topic_vote']) {
-            bb_die($lang['NEW_POLL_ALREADY']);
+            bb_die(__('NEW_POLL_ALREADY'));
         }
 
         // Make a poll from $_POST data
@@ -153,12 +153,12 @@ switch ($mode) {
 
         // Adding poll info to the database
         $poll->insert_votes_into_db($topic_id);
-        bb_die($lang['NEW_POLL_ADDED']);
+        bb_die(__('NEW_POLL_ADDED'));
         break;
     case 'poll_edit':
         // Checking for poll existence
         if (!$t_data['topic_vote']) {
-            bb_die($lang['POST_HAS_NO_POLL']);
+            bb_die(__('POST_HAS_NO_POLL'));
         }
 
         // Make a poll from $_POST data
@@ -172,7 +172,7 @@ switch ($mode) {
         // Updating poll info to the database
         $poll->insert_votes_into_db($topic_id);
         CACHE('bb_poll_data')->rm("poll_$topic_id");
-        bb_die($lang['NEW_POLL_RESULTS']);
+        bb_die(__('NEW_POLL_RESULTS'));
         break;
     default:
         bb_die('Invalid mode: ' . htmlCHR($mode));

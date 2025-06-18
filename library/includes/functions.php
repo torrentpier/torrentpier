@@ -1110,7 +1110,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         $format = config()->get('default_dateformat');
     }
     if (empty($lang)) {
-        require_once(config()->get('default_lang_dir') . 'main.php');
+        lang()->initializeLanguage();
     }
 
     if (!defined('IS_GUEST') || IS_GUEST) {
@@ -1347,9 +1347,9 @@ function bb_die($msg_text, $status_code = null)
     define('HAS_DIED', 1);
     define('DISABLE_CACHING_OUTPUT', true);
 
-    // If empty lang
+    // If empty lang, initialize language singleton
     if (empty($lang)) {
-        require(config()->get('default_lang_dir') . 'main.php');
+        lang()->initializeLanguage();
     }
 
     // If empty session
