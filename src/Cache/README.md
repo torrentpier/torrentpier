@@ -46,6 +46,7 @@ $datastore = datastore();
 - ✅ **Advanced Features**: Dependencies, tags, bulk operations, memoization, output buffering
 - ✅ **Better Debugging**: Unified debug interface with compatibility for Dev.php
 - ✅ **Performance**: 456,647+ operations per second with efficient memory usage
+- ✅ **Clean Architecture**: No redundant configuration logic, single storage creation path
 
 ## Usage
 
@@ -190,17 +191,19 @@ $bb_cfg['datastore_type'] = 'file'; // Uses Nette FileStorage
 | `file` | `FileStorage` | File-based, persistent, dependencies |
 | `sqlite` | `SQLiteStorage` | Database, supports tags and complex dependencies |
 | `memory` | `MemoryStorage` | In-memory, fastest, non-persistent |
+| `memcached` | `MemcachedStorage` | Distributed memory, high-performance |
 
 ### Storage Features Comparison
 
-| Feature | FileStorage | SQLiteStorage | MemoryStorage |
-|---------|-------------|---------------|---------------|
-| Persistence | ✅ | ✅ | ❌ |
-| File Dependencies | ✅ | ✅ | ✅ |
-| Tags | ❌ | ✅ | ✅ |
-| Callbacks | ✅ | ✅ | ✅ |
-| Bulk Operations | ✅ | ✅ | ✅ |
-| Performance | High | Medium | Highest |
+| Feature | FileStorage | SQLiteStorage | MemoryStorage | MemcachedStorage |
+|---------|-------------|---------------|---------------|------------------|
+| Persistence | ✅ | ✅ | ❌ | ✅ |
+| File Dependencies | ✅ | ✅ | ✅ | ✅ |
+| Tags | ❌ | ✅ | ✅ | ❌ |
+| Callbacks | ✅ | ✅ | ✅ | ✅ |
+| Bulk Operations | ✅ | ✅ | ✅ | ✅ |
+| Performance | High | Medium | Highest | Very High |
+| Distributed | ❌ | ❌ | ❌ | ✅ |
 
 ## Migration Guide
 
@@ -279,13 +282,40 @@ $rendered_page = $cache->capture("page_$page_id", function() {
 
 ## Implementation Details
 
+### Architecture Flow (Refactored)
+
+**Clean, Non-Redundant Architecture:**
+```
+UnifiedCacheSystem (singleton)
+├── _buildStorage() → Creates Nette Storage instances directly
+├── get_cache_obj() → Returns CacheManager with pre-built storage
+└── getDatastore() → Returns DatastoreManager with pre-built storage
+
+CacheManager (receives pre-built Storage)
+├── Constructor receives: Storage instance + minimal config
+├── No redundant initializeStorage() switch statement
+└── Focuses purely on cache operations
+
+DatastoreManager (uses CacheManager internally)
+├── Constructor receives: Storage instance + minimal config
+├── Uses CacheManager internally for unified functionality
+└── Maintains datastore-specific methods and compatibility
+```
+
+**Benefits of Refactored Architecture:**
+- **Single Source of Truth**: Only UnifiedCacheSystem creates storage instances
+- **No Redundancy**: Eliminated duplicate switch statements and configuration parsing
+- **Cleaner Separation**: CacheManager focuses on caching, not storage creation
+- **Impossible Path Bugs**: Storage is pre-built, no configuration mismatches possible
+- **Better Maintainability**: One place to modify storage creation logic
+
 ### Directory Structure
 
 ```
 src/Cache/
 ├── CacheManager.php         # Cache interface with Nette Caching + singleton pattern
 ├── DatastoreManager.php     # Datastore interface using CacheManager internally
-├── UnifiedCacheSystem.php   # Main singleton orchestrator
+├── UnifiedCacheSystem.php   # Main singleton orchestrator + storage factory
 └── README.md               # This documentation
 ```
 
@@ -304,6 +334,8 @@ The following development and testing files were removed after successful integr
 4. **Efficient Singletons**: Memory-efficient instance management following TorrentPier patterns
 5. **Unified Debugging**: Consistent debug interface compatible with Dev.php
 6. **Production Ready**: Comprehensive error handling, validation, and performance optimization
+7. **Clean Architecture**: Eliminated redundant configuration logic and switch statements
+8. **Single Storage Source**: All storage creation centralized in UnifiedCacheSystem
 
 ### Architectural Consistency
 

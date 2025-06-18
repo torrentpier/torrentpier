@@ -12,6 +12,7 @@ namespace TorrentPier\Cache;
 use Nette\Caching\Cache;
 use Nette\Caching\Storage;
 use Nette\Caching\Storages\FileStorage;
+use Nette\Caching\Storages\MemcachedStorage;
 use Nette\Caching\Storages\MemoryStorage;
 use Nette\Caching\Storages\SQLiteStorage;
 use TorrentPier\Dev;
@@ -41,18 +42,6 @@ class CacheManager
      * @var Storage
      */
     private Storage $storage;
-
-    /**
-     * Cache configuration
-     * @var array
-     */
-    private array $config;
-
-    /**
-     * Cache namespace/name
-     * @var string
-     */
-    private string $namespace;
 
     /**
      * Cache prefix
@@ -89,16 +78,14 @@ class CacheManager
      * Constructor
      *
      * @param string $namespace
+     * @param Storage $storage Pre-built storage instance from UnifiedCacheSystem
      * @param array $config
      */
-    private function __construct(string $namespace, array $config)
+    private function __construct(string $namespace, Storage $storage, array $config)
     {
-        $this->namespace = $namespace;
-        $this->config = $config;
+        $this->storage = $storage;
         $this->prefix = $config['prefix'] ?? 'tp_';
-
-        // Initialize storage based on configuration
-        $this->initializeStorage();
+        $this->engine = $config['engine'] ?? 'Unknown';
 
         // Create Nette Cache instance with namespace
         $this->cache = new Cache($this->storage, $namespace);
@@ -108,56 +95,24 @@ class CacheManager
     }
 
     /**
-     * Get singleton instance
+     * Get singleton instance (called by UnifiedCacheSystem)
      *
      * @param string $namespace
+     * @param Storage $storage Pre-built storage instance
      * @param array $config
      * @return self
      */
-    public static function getInstance(string $namespace, array $config): self
+    public static function getInstance(string $namespace, Storage $storage, array $config): self
     {
         $key = $namespace . '_' . md5(serialize($config));
 
         if (!isset(self::$instances[$key])) {
-            self::$instances[$key] = new self($namespace, $config);
+            self::$instances[$key] = new self($namespace, $storage, $config);
         }
 
         return self::$instances[$key];
     }
 
-    /**
-     * Initialize storage based on configuration
-     */
-    private function initializeStorage(): void
-    {
-        $storageType = $this->config['storage_type'] ?? 'file';
-
-        switch ($storageType) {
-            case 'file':
-                $this->engine = 'File';
-                $dir = $this->config['db_dir'] ?? sys_get_temp_dir() . '/cache/';
-                $this->storage = new FileStorage($dir);
-                break;
-
-            case 'sqlite':
-                $this->engine = 'SQLite';
-                $dbFile = $this->config['sqlite_path'] ?? sys_get_temp_dir() . '/cache.db';
-                $this->storage = new SQLiteStorage($dbFile);
-                break;
-
-            case 'memory':
-                $this->engine = 'Memory';
-                $this->storage = new MemoryStorage();
-                break;
-
-            default:
-                // Fallback to file storage
-                $this->engine = 'File';
-                $dir = $this->config['db_dir'] ?? sys_get_temp_dir() . '/cache/';
-                $this->storage = new FileStorage($dir);
-                break;
-        }
-    }
 
     /**
      * Cache get method (Legacy Cache API)

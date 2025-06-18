@@ -10,6 +10,7 @@
 namespace TorrentPier\Cache;
 
 use Nette\Caching\Cache;
+use Nette\Caching\Storage;
 use TorrentPier\Dev;
 
 /**
@@ -93,12 +94,13 @@ class DatastoreManager
     /**
      * Constructor
      *
+     * @param Storage $storage Pre-built storage instance from UnifiedCacheSystem
      * @param array $config
      */
-    private function __construct(array $config)
+    private function __construct(Storage $storage, array $config)
     {
-        // Create unified cache manager for datastore
-        $this->cacheManager = CacheManager::getInstance('datastore', $config);
+        // Create unified cache manager for datastore with pre-built storage
+        $this->cacheManager = CacheManager::getInstance('datastore', $storage, $config);
         $this->engine = $this->cacheManager->engine;
         $this->dbg_enabled = dev()->checkSqlDebugAllowed();
     }
@@ -106,13 +108,14 @@ class DatastoreManager
     /**
      * Get singleton instance
      *
+     * @param Storage $storage Pre-built storage instance
      * @param array $config
      * @return self
      */
-    public static function getInstance(array $config): self
+    public static function getInstance(Storage $storage, array $config): self
     {
         if (self::$instance === null) {
-            self::$instance = new self($config);
+            self::$instance = new self($storage, $config);
         }
 
         return self::$instance;

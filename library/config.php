@@ -53,11 +53,14 @@ $bb_cfg['db_alias'] = [
 ];
 
 // Cache
-// Future enhancement: implement Redis/Memcached storage for Nette
 $bb_cfg['cache'] = [
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
     'prefix' => 'tp_',
-    // Available cache types: file, sqlite, memory (file by default)
+    'memcached' => [
+        'host' => '127.0.0.1',
+        'port' => 11211,
+    ],
+    // Available cache types: file, sqlite, memory, memcached (file by default)
     'engines' => [
         'bb_cache' => ['file'],
         'bb_config' => ['file'],
@@ -71,7 +74,7 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: file, sqlite, memory (file by default)
+// Available datastore types: file, sqlite, memory, memcache (file by default)
 $bb_cfg['datastore_type'] = 'file';
 
 // Server

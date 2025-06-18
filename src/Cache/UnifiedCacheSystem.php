@@ -9,6 +9,12 @@
 
 namespace TorrentPier\Cache;
 
+use Nette\Caching\Storage;
+use Nette\Caching\Storages\FileStorage;
+use Nette\Caching\Storages\MemcachedStorage;
+use Nette\Caching\Storages\MemoryStorage;
+use Nette\Caching\Storages\SQLiteStorage;
+
 /**
  * Unified Cache System using Nette Caching
  * Replaces Legacy Caches class and provides both cache and datastore functionality
@@ -81,10 +87,12 @@ class UnifiedCacheSystem
         $this->cfg = $cfg['cache'] ?? [];
 
         // Create stub cache manager
-        $this->stub = CacheManager::getInstance('__stub', [
-            'storage_type' => 'memory',
+        $stubStorage = new MemoryStorage();
+        $stubConfig = [
+            'engine' => 'Memory',
             'prefix' => $this->cfg['prefix'] ?? 'tp_'
-        ]);
+        ];
+        $this->stub = CacheManager::getInstance('__stub', $stubStorage, $stubConfig);
     }
 
     /**
@@ -101,10 +109,16 @@ class UnifiedCacheSystem
                 $this->ref[$cache_name] = $this->stub;
             } else {
                 $cache_type = $engine_cfg[0] ?? 'file';
-                $config = $this->_buildCacheConfig($cache_type, $cache_name);
 
                 if (!isset($this->managers[$cache_name])) {
-                    $this->managers[$cache_name] = CacheManager::getInstance($cache_name, $config);
+                    // Build storage and config directly
+                    $storage = $this->_buildStorage($cache_type, $cache_name);
+                    $config = [
+                        'engine' => $this->_getEngineType($cache_type),
+                        'prefix' => $this->cfg['prefix'] ?? 'tp_'
+                    ];
+
+                    $this->managers[$cache_name] = CacheManager::getInstance($cache_name, $storage, $config);
                 }
                 $this->ref[$cache_name] = $this->managers[$cache_name];
             }
@@ -122,94 +136,108 @@ class UnifiedCacheSystem
     public function getDatastore(string $datastore_type = 'file'): DatastoreManager
     {
         if ($this->datastore === null) {
-            $config = $this->_buildDatastoreConfig($datastore_type);
-            $this->datastore = DatastoreManager::getInstance($config);
+            // Build storage and config for datastore
+            $storage = $this->_buildDatastoreStorage($datastore_type);
+            $config = [
+                'engine' => $this->_getEngineType($datastore_type),
+                'prefix' => $this->cfg['prefix'] ?? 'tp_'
+            ];
+
+            $this->datastore = DatastoreManager::getInstance($storage, $config);
         }
 
         return $this->datastore;
     }
 
     /**
-     * Build cache configuration
+     * Build storage instance directly (eliminates redundancy with CacheManager)
      *
      * @param string $cache_type
      * @param string $cache_name
-     * @return array
+     * @return Storage
      */
-    private function _buildCacheConfig(string $cache_type, string $cache_name): array
+    private function _buildStorage(string $cache_type, string $cache_name): Storage
     {
-        $config = [
-            'prefix' => $this->cfg['prefix'] ?? 'tp_',
-        ];
-
         switch ($cache_type) {
             case 'file':
             case 'filecache':
             case 'apcu':
-            case 'memcached':
             case 'redis':
                 // Some deprecated cache types will fall back to file storage
-                $config['storage_type'] = 'file';
-                $config['db_dir'] = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
-                break;
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+                return new FileStorage($dir);
 
             case 'sqlite':
-                $config['storage_type'] = 'sqlite';
-                $config['sqlite_path'] = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '.db';
-                break;
+                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '.db';
+                return new SQLiteStorage($dbFile);
 
             case 'memory':
-                $config['storage_type'] = 'memory';
-                break;
+                return new MemoryStorage();
+
+            case 'memcached':
+                $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
+                $host = $memcachedConfig['host'] ?? '127.0.0.1';
+                $port = $memcachedConfig['port'] ?? 11211;
+                return new MemcachedStorage("{$host}:{$port}");
 
             default:
-                $config['storage_type'] = 'file';
-                $config['db_dir'] = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
-                break;
+                // Fallback to file storage
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+                return new FileStorage($dir);
         }
-
-        return $config;
     }
 
     /**
-     * Build datastore configuration
+     * Get engine type name for debugging
+     *
+     * @param string $cache_type
+     * @return string
+     */
+    private function _getEngineType(string $cache_type): string
+    {
+        return match ($cache_type) {
+            'sqlite' => 'SQLite',
+            'memory' => 'Memory',
+            'memcached' => 'Memcached',
+            default => 'File',
+        };
+    }
+
+    /**
+     * Build datastore storage instance
      *
      * @param string $datastore_type
-     * @return array
+     * @return Storage
      */
-    private function _buildDatastoreConfig(string $datastore_type): array
+    private function _buildDatastoreStorage(string $datastore_type): Storage
     {
-        $config = [
-            'prefix' => $this->cfg['prefix'] ?? 'tp_',
-        ];
-
         switch ($datastore_type) {
             case 'file':
             case 'filecache':
             case 'apcu':
-            case 'memcached':
             case 'redis':
                 // Some deprecated cache types will fall back to file storage
-                $config['storage_type'] = 'file';
-                $config['db_dir'] = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
-                break;
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+                return new FileStorage($dir);
 
             case 'sqlite':
-                $config['storage_type'] = 'sqlite';
-                $config['sqlite_path'] = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore.db';
-                break;
+                $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore.db';
+                return new SQLiteStorage($dbFile);
 
             case 'memory':
-                $config['storage_type'] = 'memory';
-                break;
+                return new MemoryStorage();
+
+            case 'memcached':
+                $memcachedConfig = $this->cfg['memcached'] ?? ['host' => '127.0.0.1', 'port' => 11211];
+                $host = $memcachedConfig['host'] ?? '127.0.0.1';
+                $port = $memcachedConfig['port'] ?? 11211;
+                return new MemcachedStorage("{$host}:{$port}");
 
             default:
-                $config['storage_type'] = 'file';
-                $config['db_dir'] = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
-                break;
+                // Fallback to file storage
+                $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+                return new FileStorage($dir);
         }
-
-        return $config;
     }
 
     /**
@@ -323,7 +351,15 @@ class UnifiedCacheSystem
         $fullConfig = array_merge($this->cfg, $config);
         $fullConfig['prefix'] = $fullConfig['prefix'] ?? 'tp_';
 
-        return CacheManager::getInstance($namespace, $fullConfig);
+        // Build storage for the advanced cache
+        $storageType = $config['storage_type'] ?? 'file';
+        $storage = $this->_buildStorage($storageType, $namespace);
+        $managerConfig = [
+            'engine' => $this->_getEngineType($storageType),
+            'prefix' => $fullConfig['prefix']
+        ];
+
+        return CacheManager::getInstance($namespace, $storage, $managerConfig);
     }
 
     /**
@@ -353,10 +389,14 @@ class UnifiedCacheSystem
      */
     public function createTaggedCache(string $namespace): CacheManager
     {
-        $config = $this->cfg;
-        $config['storage_type'] = 'sqlite'; // SQLite supports tags via journal
+        // Use SQLite storage which supports tags via journal
+        $storage = $this->_buildStorage('sqlite', $namespace);
+        $config = [
+            'engine' => 'SQLite',
+            'prefix' => $this->cfg['prefix'] ?? 'tp_'
+        ];
 
-        return CacheManager::getInstance($namespace, $config);
+        return CacheManager::getInstance($namespace, $storage, $config);
     }
 
     /**
