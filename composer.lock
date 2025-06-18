@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2acad3dafd9fd57bc8c26303df22dd15",
+    "content-hash": "4f7261d308674d846b43aa8d2ff352eb",
     "packages": [
         {
             "name": "arokettu/bencode",
@@ -2067,6 +2067,241 @@
                 }
             ],
             "time": "2025-03-24T10:02:05+00:00"
+        },
+        {
+            "name": "nette/caching",
+            "version": "v3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/caching.git",
+                "reference": "b37d2c9647b41a9d04f099f10300dc5496c4eb77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/caching/zipball/b37d2c9647b41a9d04f099f10300dc5496c4eb77",
+                "reference": "b37d2c9647b41a9d04f099f10300dc5496c4eb77",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^4.0",
+                "php": "8.0 - 8.4"
+            },
+            "conflict": {
+                "latte/latte": ">=3.0.0 <3.0.12"
+            },
+            "require-dev": {
+                "latte/latte": "^2.11 || ^3.0.12",
+                "nette/di": "^3.1 || ^4.0",
+                "nette/tester": "^2.4",
+                "phpstan/phpstan": "^1.0",
+                "psr/simple-cache": "^2.0 || ^3.0",
+                "tracy/tracy": "^2.9"
+            },
+            "suggest": {
+                "ext-pdo_sqlite": "to use SQLiteStorage or SQLiteJournal"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "⏱ Nette Caching: library with easy-to-use API and many cache backends.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "cache",
+                "journal",
+                "memcached",
+                "nette",
+                "sqlite"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/caching/issues",
+                "source": "https://github.com/nette/caching/tree/v3.3.1"
+            },
+            "time": "2024-08-07T00:01:58+00:00"
+        },
+        {
+            "name": "nette/database",
+            "version": "v3.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/database.git",
+                "reference": "10a7c76e314a06bb5f92d447d82170b5dde7392f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/database/zipball/10a7c76e314a06bb5f92d447d82170b5dde7392f",
+                "reference": "10a7c76e314a06bb5f92d447d82170b5dde7392f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "nette/caching": "^3.2",
+                "nette/utils": "^4.0",
+                "php": "8.1 - 8.4"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "mockery/mockery": "^1.6",
+                "nette/di": "^3.1",
+                "nette/tester": "^2.5",
+                "phpstan/phpstan-nette": "^1.0",
+                "tracy/tracy": "^2.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "💾 Nette Database: layer with a familiar PDO-like API but much more powerful. Building queries, advanced joins, drivers for MySQL, PostgreSQL, SQLite, MS SQL Server and Oracle.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "database",
+                "mssql",
+                "mysql",
+                "nette",
+                "notorm",
+                "oracle",
+                "pdo",
+                "postgresql",
+                "queries",
+                "sqlite"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/database/issues",
+                "source": "https://github.com/nette/database/tree/v3.2.7"
+            },
+            "time": "2025-06-03T05:00:20+00:00"
+        },
+        {
+            "name": "nette/utils",
+            "version": "v4.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/utils.git",
+                "reference": "e67c4061eb40b9c113b218214e42cb5a0dda28f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/utils/zipball/e67c4061eb40b9c113b218214e42cb5a0dda28f2",
+                "reference": "e67c4061eb40b9c113b218214e42cb5a0dda28f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "8.0 - 8.4"
+            },
+            "conflict": {
+                "nette/finder": "<3",
+                "nette/schema": "<1.2.2"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "dev-master",
+                "nette/tester": "^2.5",
+                "phpstan/phpstan": "^1.0",
+                "tracy/tracy": "^2.9"
+            },
+            "suggest": {
+                "ext-gd": "to use Image",
+                "ext-iconv": "to use Strings::webalize(), toAscii(), chr() and reverse()",
+                "ext-intl": "to use Strings::webalize(), toAscii(), normalize() and compare()",
+                "ext-json": "to use Nette\\Utils\\Json",
+                "ext-mbstring": "to use Strings::lower() etc...",
+                "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🛠  Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "array",
+                "core",
+                "datetime",
+                "images",
+                "json",
+                "nette",
+                "paginator",
+                "password",
+                "slugify",
+                "string",
+                "unicode",
+                "utf-8",
+                "utility",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/utils/issues",
+                "source": "https://github.com/nette/utils/tree/v4.0.7"
+            },
+            "time": "2025-06-03T04:55:08+00:00"
         },
         {
             "name": "nikic/iter",

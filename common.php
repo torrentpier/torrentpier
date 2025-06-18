@@ -140,15 +140,18 @@ define('FORUM_PATH', config()->get('script_path'));
 define('FULL_URL', $server_protocol . config()->get('server_name') . $server_port . config()->get('script_path'));
 unset($server_protocol, $server_port);
 
-/**
- * Database
- */
-$DBS = new TorrentPier\Legacy\Dbs(config()->all());
+// Initialize the new DB factory with database configuration
+TorrentPier\Database\DbFactory::init(config()->get('db'), config()->get('db_alias', []));
 
-function DB(string $db_alias = 'db')
+/**
+ * Get the Database instance
+ *
+ * @param string $db_alias
+ * @return \TorrentPier\Database\DB
+ */
+function DB(string $db_alias = 'db'): \TorrentPier\Database\DB
 {
-    global $DBS;
-    return $DBS->get_db_obj($db_alias);
+    return TorrentPier\Database\DbFactory::getInstance($db_alias);
 }
 
 /**

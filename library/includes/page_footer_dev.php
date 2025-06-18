@@ -64,9 +64,16 @@ if (!defined('BB_ROOT')) {
 
 <?php
 if (!empty($_COOKIE['explain'])) {
-    foreach ($DBS->srv as $srv_name => $db_obj) {
-        if (!empty($db_obj->do_explain)) {
-            $db_obj->explain('display');
+    // Get all database server instances from the new DbFactory
+    $server_names = \TorrentPier\Database\DbFactory::getServerNames();
+    foreach ($server_names as $srv_name) {
+        try {
+            $db_obj = \TorrentPier\Database\DbFactory::getInstance($srv_name);
+            if (!empty($db_obj->do_explain)) {
+                $db_obj->explain('display');
+            }
+        } catch (\Exception $e) {
+            // Skip if server not available
         }
     }
 }

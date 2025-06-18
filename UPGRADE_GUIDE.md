@@ -4,12 +4,138 @@ This guide helps you upgrade your TorrentPier installation to the latest version
 
 ## 📖 Table of Contents
 
+- [Database Layer Migration](#database-layer-migration)
 - [Configuration System Migration](#configuration-system-migration)
 - [Censor System Migration](#censor-system-migration)
 - [Select System Migration](#select-system-migration)
 - [Development System Migration](#development-system-migration)
 - [Breaking Changes](#breaking-changes)
 - [Best Practices](#best-practices)
+
+## 🗄️ Database Layer Migration
+
+TorrentPier has completely replaced its legacy database layer (SqlDb/Dbs) with a modern implementation using Nette Database while maintaining 100% backward compatibility.
+
+### No Code Changes Required
+
+**Important**: All existing `DB()->method()` calls continue to work exactly as before. This is an internal modernization that requires **zero code changes** in your application.
+
+```php
+// ✅ All existing code continues to work unchanged
+$user = DB()->fetch_row("SELECT * FROM users WHERE id = ?", 123);
+$users = DB()->fetch_rowset("SELECT * FROM users");
+$affected = DB()->affected_rows();
+$result = DB()->sql_query("UPDATE users SET status = ? WHERE id = ?", 1, 123);
+$escaped = DB()->escape($userInput);
+```
+
+### Key Improvements
+
+#### Modern Foundation
+- **Nette Database v3.2**: Modern, actively maintained database layer
+- **PDO-based**: Improved security and performance
+- **Type Safety**: Better error detection and IDE support
+- **Singleton Pattern**: Efficient connection management
+
+#### Enhanced Reliability
+- **Automatic Resource Cleanup**: Better memory management
+- **Improved Error Handling**: More detailed error information
+- **Connection Stability**: Better handling of connection issues
+- **Performance Optimizations**: Reduced overhead and improved query execution
+
+#### Debugging and Development
+- **Enhanced Explain Support**: Improved query analysis
+- **Better Query Logging**: More detailed performance tracking
+- **Debug Information**: Comprehensive debugging features
+- **Memory Tracking**: Better resource usage monitoring
+
+### Multiple Database Support
+
+Multiple database servers continue to work exactly as before:
+
+```php
+// ✅ Multiple database access unchanged
+$main_db = DB('db');           // Main database
+$tracker_db = DB('tr');        // Tracker database
+$stats_db = DB('stats');       // Statistics database
+```
+
+### Error Handling
+
+All error handling patterns remain identical:
+
+```php
+// ✅ Error handling works exactly as before
+$result = DB()->sql_query("SELECT * FROM users");
+if (!$result) {
+    $error = DB()->sql_error();
+    echo "Error: " . $error['message'];
+}
+```
+
+### Debug and Explain Features
+
+All debugging functionality is preserved and enhanced:
+
+```php
+// ✅ Debug features work as before
+DB()->debug('start');
+// ... run queries ...
+DB()->debug('stop');
+
+// ✅ Explain functionality unchanged
+DB()->explain('start');
+DB()->explain('display');
+```
+
+### Performance Benefits
+
+While maintaining compatibility, you get:
+- **Faster Connection Handling**: Singleton pattern prevents connection overhead
+- **Modern Query Execution**: Nette Database optimizations
+- **Better Resource Management**: Automatic cleanup and proper connection handling
+- **Reduced Memory Usage**: More efficient object management
+
+### 📖 Detailed Documentation
+
+For comprehensive information about the database layer changes, implementation details, and technical architecture, see:
+
+**[src/Database/README.md](src/Database/README.md)**
+
+This documentation covers:
+- Complete architecture overview
+- Technical implementation details
+- Migration notes and compatibility information
+- Debugging features and usage examples
+- Performance benefits and benchmarks
+
+### Legacy Code Cleanup
+
+The following legacy files have been removed from the codebase:
+- `src/Legacy/SqlDb.php` - Original database class
+- `src/Legacy/Dbs.php` - Original database factory
+
+These were completely replaced by:
+- `src/Database/DB.php` - Modern database class with Nette Database
+- `src/Database/DbFactory.php` - Modern factory with backward compatibility
+
+### Verification
+
+To verify the migration is working correctly:
+
+```php
+// ✅ Test basic database operations
+$version = DB()->server_version();
+$testQuery = DB()->fetch_row("SELECT 1 as test");
+echo "Database version: $version, Test: " . $testQuery['test'];
+
+// ✅ Test error handling
+$result = DB()->sql_query("SELECT invalid_column FROM non_existent_table");
+if (!$result) {
+    $error = DB()->sql_error();
+    echo "Error handling works: " . $error['message'];
+}
+```
 
 ## ⚙️ Configuration System Migration
 
@@ -323,6 +449,11 @@ $environment = [
 
 ## ⚠️ Breaking Changes
 
+### Database Layer Changes
+- **✅ No Breaking Changes**: All existing `DB()->method()` calls work exactly as before
+- **Removed Files**: `src/Legacy/SqlDb.php` and `src/Legacy/Dbs.php` (replaced by modern implementation)
+- **New Implementation**: Uses Nette Database v3.2 internally with full backward compatibility
+
 ### Deprecated Functions
 - `get_config()` → Use `config()->get()`
 - `set_config()` → Use `config()->set()`
@@ -336,6 +467,7 @@ $environment = [
 - `\TorrentPier\Legacy\Select::` → Use `\TorrentPier\Legacy\Common\Select::`
 
 ### File Structure Changes
+- New `/src/Database/` directory for modern database classes
 - New `/src/` directory for modern PHP classes
 - Reorganized template structure
 

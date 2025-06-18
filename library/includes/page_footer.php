@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $template, $DBS, $lang;
+global $userdata, $template, $lang;
 
 if (!empty($template)) {
     $birthday_tp = ((string)bb_date(TIMENOW, 'd.m', false) === '04.04') ? '&nbsp;|&nbsp;&#127881;&#127856;&#128154;' : '';
@@ -41,11 +41,15 @@ if ($show_dbg_info) {
 
     $stat = '[&nbsp; ' . $lang['EXECUTION_TIME'] . " $gen_time_txt " . $lang['SEC'];
 
-    if (!empty($DBS)) {
-        $sql_t = $DBS->sql_timetotal;
+    // Get database statistics from the new system
+    try {
+        $main_db = \TorrentPier\Database\DbFactory::getInstance('db');
+        $sql_t = $main_db->sql_timetotal;
         $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
-        $num_q = $DBS->num_queries;
-        $stat .= " &nbsp;|&nbsp; {$DBS->get_db_obj()->engine}: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
+        $num_q = $main_db->num_queries;
+        $stat .= " &nbsp;|&nbsp; {$main_db->engine}: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
+    } catch (\Exception $e) {
+        // Skip database stats if not available
     }
 
     $stat .= " &nbsp;|&nbsp; $gzip_text";
