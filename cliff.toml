@@ -105,7 +105,7 @@ commit_parsers = [
   { message = "^refactor", group = "<!-- 2 -->🚜 Refactor" },
   { message = "^style", group = "<!-- 5 -->🎨 Styling" },
   { message = "^test", group = "<!-- 6 -->🧪 Testing" },
-  { message = "^ignore|^release", skip = true },
+  { message = "^ignore|^release|^changelog", skip = true },
   { message = "^chore|^ci|^misc", group = "<!-- 7 -->⚙️ Miscellaneous" },
   { body = ".*security", group = "<!-- 8 -->🛡️ Security" },
   { message = "^revert", group = "<!-- 9 -->◀️ Revert" },
