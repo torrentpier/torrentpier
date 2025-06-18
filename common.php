@@ -141,17 +141,17 @@ define('FULL_URL', $server_protocol . config()->get('server_name') . $server_por
 unset($server_protocol, $server_port);
 
 // Initialize the new DB factory with database configuration
-TorrentPier\Database\DbFactory::init(config()->get('db'), config()->get('db_alias', []));
+TorrentPier\Database\DatabaseFactory::init(config()->get('db'), config()->get('db_alias', []));
 
 /**
  * Get the Database instance
  *
  * @param string $db_alias
- * @return \TorrentPier\Database\DB
+ * @return \TorrentPier\Database\Database
  */
-function DB(string $db_alias = 'db'): \TorrentPier\Database\DB
+function DB(string $db_alias = 'db'): \TorrentPier\Database\Database
 {
-    return TorrentPier\Database\DbFactory::getInstance($db_alias);
+    return TorrentPier\Database\DatabaseFactory::getInstance($db_alias);
 }
 
 // Initialize Unified Cache System

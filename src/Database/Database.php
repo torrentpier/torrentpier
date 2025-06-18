@@ -10,23 +10,30 @@
 namespace TorrentPier\Database;
 
 use Nette\Database\Connection;
+use Nette\Database\Explorer;
 use Nette\Database\ResultSet;
 use Nette\Database\Row;
+use Nette\Database\Table\Selection;
+use Nette\Database\Structure;
+use Nette\Database\Conventions\DiscoveredConventions;
+use TorrentPier\Database\DebugSelection;
+use TorrentPier\Database\DatabaseDebugger;
 use TorrentPier\Dev;
 use TorrentPier\Legacy\SqlDb;
 
 /**
- * Modern DB class using Nette Database with backward compatibility
+ * Modern Database class using Nette Database with backward compatibility
  * Implements singleton pattern while maintaining all existing SqlDb methods
  */
-class DB
+class Database
 {
-    private static ?DB $instance = null;
+    private static ?Database $instance = null;
     private static array $instances = [];
 
-    private ?Connection $connection = null;
+    public ?Connection $connection = null;
+    private ?Explorer $explorer = null;
     private ?ResultSet $result = null;
-    private int $last_affected_rows = 0;
+    public ?DatabaseDebugger $debugger = null;
 
     // Configuration
     public array $cfg = [];
@@ -42,20 +49,12 @@ class DB
 
     // Statistics and debugging
     public int $num_queries = 0;
+    private int $last_affected_rows = 0;
     public float $sql_starttime = 0;
     public float $sql_inittime = 0;
     public float $sql_timetotal = 0;
     public float $cur_query_time = 0;
-    public float $slow_time = 0;
-
-    public array $dbg = [];
-    public int $dbg_id = 0;
-    public bool $dbg_enabled = false;
     public ?string $cur_query = null;
-
-    public bool $do_explain = false;
-    public string $explain_hold = '';
-    public string $explain_out = '';
 
     public array $shutdown = [];
     public array $DBS = [];
@@ -69,9 +68,9 @@ class DB
 
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
         $this->db_server = $server_name;
-        $this->dbg_enabled = (dev()->checkSqlDebugAllowed() || !empty($_COOKIE['explain']));
-        $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
-        $this->slow_time = defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3;
+
+        // Initialize debugger
+        $this->debugger = new DatabaseDebugger($this);
 
         // Initialize our own tracking system (replaces the old $DBS global system)
         $this->DBS = [
@@ -133,8 +132,8 @@ class DB
      */
     public function connect(): void
     {
-        $this->cur_query = $this->dbg_enabled ? "connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}" : 'connect';
-        $this->debug('start');
+        $this->cur_query = $this->debugger->dbg_enabled ? "connect to: {$this->cfg['dbhost']}:{$this->cfg['dbport']}" : 'connect';
+        $this->debugger->debug('start');
 
         // Build DSN
         $dsn = "mysql:host={$this->cfg['dbhost']};port={$this->cfg['dbport']};dbname={$this->cfg['dbname']}";
@@ -149,11 +148,20 @@ class DB
             $this->cfg['dbpasswd']
         );
 
+        // Create Nette Database Explorer with all required dependencies
+        $storage = $this->getExistingCacheStorage();
+        $this->explorer = new Explorer(
+            $this->connection,
+            new Structure($this->connection, $storage),
+            new DiscoveredConventions(new Structure($this->connection, $storage)),
+            $storage
+        );
+
         $this->selected_db = $this->cfg['dbname'];
 
         register_shutdown_function([$this, 'close']);
 
-        $this->debug('stop');
+        $this->debugger->debug('stop');
         $this->cur_query = null;
     }
 
@@ -170,22 +178,22 @@ class DB
             $query = $this->build_sql($query);
         }
 
-        $query = '/* ' . $this->debug_find_source() . ' */ ' . $query;
+        $query = '/* ' . $this->debugger->debug_find_source() . ' */ ' . $query;
         $this->cur_query = $query;
-        $this->debug('start');
+        $this->debugger->debug('start');
 
-                        try {
+        try {
             $this->result = $this->connection->query($query);
 
             // Initialize affected rows to 0 (most queries don't affect rows)
             $this->last_affected_rows = 0;
         } catch (\Exception $e) {
-            $this->log_error();
+            $this->debugger->log_error();
             $this->result = null;
             $this->last_affected_rows = 0;
         }
 
-        $this->debug('stop');
+        $this->debugger->debug('stop');
         $this->cur_query = null;
 
         if ($this->inited) {
@@ -324,6 +332,42 @@ class DB
         if ($result === false || $result === $this->result) {
             $this->result = null;
         }
+    }
+
+    /**
+     * Get Database Explorer table access with debug logging
+     */
+    public function table(string $table): DebugSelection
+    {
+        if (!$this->explorer) {
+            $this->init();
+        }
+
+        $selection = $this->explorer->table($table);
+
+        // Wrap the selection to capture queries for debug logging
+        return new DebugSelection($selection, $this);
+    }
+
+    /**
+     * Get existing cache storage from TorrentPier's unified cache system
+     *
+     * @return \Nette\Caching\Storage
+     */
+    private function getExistingCacheStorage(): \Nette\Caching\Storage
+    {
+        // Try to use the existing cache system if available
+        if (function_exists('CACHE')) {
+            try {
+                $cacheManager = CACHE('database_structure');
+                return $cacheManager->getStorage();
+            } catch (\Exception $e) {
+                // Fall back to DevNullStorage if cache system is not available yet
+            }
+        }
+
+        // Fallback to a simple DevNullStorage if cache system is not available
+        return new \Nette\Caching\Storages\DevNullStorage();
     }
 
     /**
@@ -688,90 +732,25 @@ class DB
     }
 
     /**
-     * Set slow query marker
+     * Set slow query marker (delegated to debugger)
      */
     public function expect_slow_query(int $ignoring_time = 60, int $new_priority = 10): void
     {
-        if (function_exists('CACHE')) {
-            $cache = CACHE('bb_cache');
-            if ($old_priority = $cache->get('dont_log_slow_query')) {
-                if ($old_priority > $new_priority) {
-                    return;
-                }
-            }
-
-            if (!defined('IN_FIRST_SLOW_QUERY')) {
-                define('IN_FIRST_SLOW_QUERY', true);
-            }
-
-            $cache->set('dont_log_slow_query', $new_priority, $ignoring_time);
-        }
+        $this->debugger->expect_slow_query($ignoring_time, $new_priority);
     }
 
     /**
-     * Store debug info
+     * Store debug info (delegated to debugger)
      */
     public function debug(string $mode): void
     {
-        if (!defined('SQL_DEBUG') || !SQL_DEBUG) {
-            return;
-        }
-
-        $id =& $this->dbg_id;
-        $dbg =& $this->dbg[$id];
-
-        if ($mode === 'start') {
-            if (defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
-                $this->sql_starttime = microtime(true);
-            }
-
-            if ($this->dbg_enabled) {
-                $dbg['sql'] = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $this->cur_query);
-                $dbg['src'] = $this->debug_find_source();
-                $dbg['file'] = $this->debug_find_source('file');
-                $dbg['line'] = $this->debug_find_source('line');
-                $dbg['time'] = '';
-                $dbg['info'] = '';
-                $dbg['mem_before'] = function_exists('sys') ? sys('mem') : 0;
-            }
-
-            if ($this->do_explain) {
-                $this->explain('start');
-            }
-        } elseif ($mode === 'stop') {
-            if (defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
-                $this->cur_query_time = microtime(true) - $this->sql_starttime;
-                $this->sql_timetotal += $this->cur_query_time;
-                $this->DBS['sql_timetotal'] += $this->cur_query_time;
-
-                if (defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES && $this->cur_query_time > $this->slow_time) {
-                    $this->log_slow_query();
-                }
-            }
-
-            if ($this->dbg_enabled) {
-                $dbg['time'] = microtime(true) - $this->sql_starttime;
-                $dbg['info'] = $this->query_info();
-                $dbg['mem_after'] = function_exists('sys') ? sys('mem') : 0;
-                $id++;
-            }
-
-            if ($this->do_explain) {
-                $this->explain('stop');
-            }
-
-            // Check for logging
-            if ($this->DBS['log_counter'] && $this->inited) {
-                $this->log_query($this->DBS['log_file']);
-                $this->DBS['log_counter']--;
-            }
-        }
+        $this->debugger->debug($mode);
     }
 
     /**
      * Trigger database error
      */
-    public function trigger_error(string $msg = 'DB Error'): void
+    public function trigger_error(string $msg = 'Database Error'): void
     {
         $error = $this->sql_error();
         $error_msg = "$msg: " . $error['message'];
@@ -784,188 +763,99 @@ class DB
     }
 
     /**
-     * Find source of database call
+     * Find source of database call (delegated to debugger)
      */
     public function debug_find_source(string $mode = 'all'): string
     {
-        if (!defined('SQL_PREPEND_SRC') || !SQL_PREPEND_SRC) {
-            return 'src disabled';
-        }
-
-        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-
-        // Find first non-DB call
-        foreach ($trace as $frame) {
-            if (isset($frame['file']) && !str_contains($frame['file'], 'Database/DB.php')) {
-                switch ($mode) {
-                    case 'file':
-                        return $frame['file'];
-                    case 'line':
-                        return (string)($frame['line'] ?? '?');
-                    case 'all':
-                    default:
-                        $file = function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
-                        $line = $frame['line'] ?? '?';
-                        return "$file($line)";
-                }
-            }
-        }
-
-        return 'src not found';
+        return $this->debugger->debug_find_source($mode);
     }
 
     /**
-     * Prepare for logging
+     * Prepare for logging (delegated to debugger)
      */
     public function log_next_query(int $queries_count = 1, string $log_file = 'sql_queries'): void
     {
-        $this->DBS['log_file'] = $log_file;
-        $this->DBS['log_counter'] = $queries_count;
+        $this->debugger->log_next_query($queries_count, $log_file);
     }
 
     /**
-     * Log query
+     * Log query (delegated to debugger)
      */
     public function log_query(string $log_file = 'sql_queries'): void
     {
-        if (!function_exists('bb_log') || !function_exists('dev')) {
-            return;
-        }
-
-        $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.3f', $this->cur_query_time);
-        $msg = [];
-        $msg[] = round($this->sql_starttime);
-        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
-        $msg[] = sprintf('%-6s', $q_time);
-        $msg[] = sprintf('%05d', getmypid());
-        $msg[] = $this->db_server;
-        $msg[] = dev()->formatShortQuery($this->cur_query);
-        $msg = implode(defined('LOG_SEPR') ? LOG_SEPR : ' | ', $msg);
-        $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
-        $msg .= ' # ' . $this->debug_find_source() . ' ';
-        $msg .= defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI'] ?? '');
-        bb_log($msg . (defined('LOG_LF') ? LOG_LF : "\n"), $log_file);
+        $this->debugger->log_query($log_file);
     }
 
     /**
-     * Log slow query
+     * Log slow query (delegated to debugger)
      */
     public function log_slow_query(string $log_file = 'sql_slow_bb'): void
     {
-        if (!defined('IN_FIRST_SLOW_QUERY') && function_exists('CACHE')) {
-            $cache = CACHE('bb_cache');
-            if ($cache && $cache->get('dont_log_slow_query')) {
-                return;
-            }
-        }
-        $this->log_query($log_file);
+        $this->debugger->log_slow_query($log_file);
     }
 
     /**
-     * Log error
+     * Log error (delegated to debugger)
      */
     public function log_error(): void
     {
-        $error = $this->sql_error();
-        error_log("DB Error: " . $error['message'] . " Query: " . $this->cur_query);
+        $this->debugger->log_error();
     }
 
     /**
-     * Explain queries - maintains compatibility with legacy SqlDb
+     * Explain queries (delegated to debugger)
      */
     public function explain($mode, $html_table = '', array $row = []): mixed
     {
-        if (!$this->do_explain) {
-            return false;
+        return $this->debugger->explain($mode, $html_table, $row);
+    }
+
+    /**
+     * Magic method to provide backward compatibility for debug properties
+     */
+    public function __get(string $name): mixed
+    {
+        // Delegate debug-related properties to the debugger
+        switch ($name) {
+            case 'dbg':
+                return $this->debugger->dbg ?? [];
+            case 'dbg_id':
+                return $this->debugger->dbg_id ?? 0;
+            case 'dbg_enabled':
+                return $this->debugger->dbg_enabled ?? false;
+            case 'do_explain':
+                return $this->debugger->do_explain ?? false;
+            case 'explain_hold':
+                return $this->debugger->explain_hold ?? '';
+            case 'explain_out':
+                return $this->debugger->explain_out ?? '';
+            case 'slow_time':
+                return $this->debugger->slow_time ?? 3.0;
+            case 'sql_timetotal':
+                return $this->sql_timetotal;
+            default:
+                throw new \InvalidArgumentException("Property '$name' does not exist");
         }
+    }
 
-        $query = $this->cur_query ?? '';
-        // Remove comments
-        $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
-
-        switch ($mode) {
-            case 'start':
-                $this->explain_hold = '';
-
-                if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)/#', $query, $m)) {
-                    $query = "SELECT * FROM $m[1] WHERE $m[2]";
-                } elseif (preg_match('#DELETE FROM ([a-z0-9_]+).*?WHERE(.*)#s', $query, $m)) {
-                    $query = "SELECT * FROM $m[1] WHERE $m[2]";
-                }
-
-                if (str_starts_with($query, "SELECT")) {
-                    $html_table = false;
-
-                    try {
-                        $result = $this->connection->query("EXPLAIN $query");
-                        while ($row = $result->fetch()) {
-                            $rowArray = (array)$row;
-                            $html_table = $this->explain('add_explain_row', $html_table, $rowArray);
-                        }
-                    } catch (\Exception $e) {
-                        // Skip if explain fails
-                    }
-
-                    if ($html_table) {
-                        $this->explain_hold .= '</table>';
-                    }
-                }
-                break;
-
-            case 'stop':
-                if (!$this->explain_hold) {
-                    break;
-                }
-
-                $id = $this->dbg_id - 1;
-                $htid = 'expl-' . spl_object_hash($this->connection) . '-' . $id;
-                $dbg = $this->dbg[$id] ?? [];
-
-                // Ensure required keys exist with defaults
-                $dbg = array_merge([
-                    'time' => $this->cur_query_time ?? 0,
-                    'sql' => $this->cur_query ?? '',
-                    'query' => $this->cur_query ?? '',
-                    'src' => $this->debug_find_source(),
-                    'trace' => $this->debug_find_source()  // Backup for compatibility
-                ], $dbg);
-
-                $this->explain_out .= '
-                <table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
-                <tr>
-                    <th style="height: 22px;" align="left">&nbsp;' . ($dbg['src'] ?? $dbg['trace']) . '&nbsp; [' . sprintf('%.3f', $dbg['time']) . ' s]&nbsp; <i>' . $this->query_info() . '</i></th>
-                    <th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px;" align="right" title="Copy to clipboard">' . "[$this->engine] $this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
-                </tr>
-                <tr><td colspan="2">' . $this->explain_hold . '</td></tr>
-                </table>
-                <div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . (function_exists('dev') ? dev()->formatShortQuery($dbg['sql'] ?? $dbg['query'], true) : htmlspecialchars($dbg['sql'] ?? $dbg['query'])) . '&nbsp;&nbsp;</div></div>
-                <br />';
-                break;
-
-            case 'add_explain_row':
-                if (!$html_table && $row) {
-                    $html_table = true;
-                    $this->explain_hold .= '<table width="100%" cellpadding="3" cellspacing="1" class="bodyline" style="border-width: 0;"><tr>';
-                    foreach (array_keys($row) as $val) {
-                        $this->explain_hold .= '<td class="row3 gensmall" align="center"><b>' . htmlspecialchars($val) . '</b></td>';
-                    }
-                    $this->explain_hold .= '</tr>';
-                }
-                $this->explain_hold .= '<tr>';
-                foreach (array_values($row) as $i => $val) {
-                    $class = !($i % 2) ? 'row1' : 'row2';
-                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->selected_db}.", ',', ';'], ['', ', ', ';<br />'], htmlspecialchars($val ?? '')) . '</td>';
-                }
-                $this->explain_hold .= '</tr>';
-
-                return $html_table;
-
-            case 'display':
-                echo '<a name="explain"></a><div class="med">' . $this->explain_out . '</div>';
-                break;
+    /**
+     * Magic method to check if debug properties exist
+     */
+    public function __isset(string $name): bool
+    {
+        switch ($name) {
+            case 'dbg':
+            case 'dbg_id':
+            case 'dbg_enabled':
+            case 'do_explain':
+            case 'explain_hold':
+            case 'explain_out':
+            case 'slow_time':
+            case 'sql_timetotal':
+                return true;
+            default:
+                return false;
         }
-
-        return false;
     }
 
     /**

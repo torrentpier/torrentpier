@@ -15,17 +15,21 @@ The new database system has completely replaced the legacy SqlDb/Dbs system and 
 
 ### Classes
 
-1. **`DB`** - Main singleton database class using Nette Database Connection
-2. **`DbFactory`** - Factory that has completely replaced the legacy SqlDb/Dbs system
+1. **`Database`** - Main singleton database class using Nette Database Connection
+2. **`DatabaseFactory`** - Factory that has completely replaced the legacy SqlDb/Dbs system
+3. **`DatabaseDebugger`** - Dedicated debug functionality extracted from Database class
+4. **`DebugSelection`** - Debug-enabled wrapper for Nette Database Selection
 
 ### Key Features
 
 - **Singleton Pattern**: Ensures single database connection per server configuration
-- **Multiple Database Support**: Handles multiple database servers via DbFactory
+- **Multiple Database Support**: Handles multiple database servers via DatabaseFactory
 - **Raw SQL Support**: Uses Nette Database's Connection class (SQL way) for minimal code impact
 - **Complete Error Handling**: Maintains existing error handling behavior
 - **Full Debug Support**: Preserves all debugging, logging, and explain functionality
 - **Performance Tracking**: Query timing and slow query detection
+- **Clean Architecture**: Debug functionality extracted to dedicated DatabaseDebugger class
+- **Modular Design**: Single responsibility principle with separate debug and database concerns
 
 ## Implementation Status
 
@@ -34,6 +38,8 @@ The new database system has completely replaced the legacy SqlDb/Dbs system and 
 - ✅ **Debug System**: Full explain(), logging, and performance tracking
 - ✅ **Error Handling**: Complete error handling with sql_error() support
 - ✅ **Connection Management**: Singleton pattern with proper initialization
+- ✅ **Clean Architecture**: Debug functionality extracted to dedicated classes
+- ✅ **Class Renaming**: Renamed DB → Database, DbFactory → DatabaseFactory for consistency
 
 ## Usage
 
@@ -75,7 +81,7 @@ The database configuration is handled through the existing TorrentPier config sy
 
 ```php
 // Initialized in common.php
-TorrentPier\Database\DbFactory::init(
+TorrentPier\Database\DatabaseFactory::init(
     config()->get('db'),           // Database configurations
     config()->get('db_alias', [])  // Database aliases
 );
@@ -155,8 +161,10 @@ This is a **complete replacement** that maintains 100% backward compatibility:
 
 ## Files
 
-- `DB.php` - Main database class with full backward compatibility
-- `DbFactory.php` - Factory for managing database instances
+- `Database.php` - Main database class with full backward compatibility
+- `DatabaseFactory.php` - Factory for managing database instances
+- `DatabaseDebugger.php` - Dedicated debug functionality class
+- `DebugSelection.php` - Debug-enabled Nette Selection wrapper
 - `README.md` - This documentation
 
 ## Future Enhancement: Gradual Migration to Nette Explorer

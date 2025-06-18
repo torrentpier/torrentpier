@@ -74,11 +74,14 @@ class Poll
                 'vote_result' => (int)0,
             ];
         }
-        $sql_args = DB()->build_array('MULTI_INSERT', $sql_ary);
+        // Delete existing poll data first, then insert new data
+        foreach ($sql_ary as $poll_vote) {
+            DB()->table(BB_POLL_VOTES)->insert($poll_vote);
+        }
 
-        DB()->query("REPLACE INTO " . BB_POLL_VOTES . $sql_args);
-
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
+        DB()->table(BB_TOPICS)
+            ->where('topic_id', $topic_id)
+            ->update(['topic_vote' => 1]);
     }
 
     /**
@@ -88,7 +91,9 @@ class Poll
      */
     public function delete_poll($topic_id)
     {
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id");
+        DB()->table(BB_TOPICS)
+            ->where('topic_id', $topic_id)
+            ->update(['topic_vote' => 0]);
         $this->delete_votes_data($topic_id);
     }
 
@@ -99,8 +104,12 @@ class Poll
      */
     public function delete_votes_data($topic_id)
     {
-        DB()->query("DELETE FROM " . BB_POLL_VOTES . " WHERE topic_id = $topic_id");
-        DB()->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
+        DB()->table(BB_POLL_VOTES)
+            ->where('topic_id', $topic_id)
+            ->delete();
+        DB()->table(BB_POLL_USERS)
+            ->where('topic_id', $topic_id)
+            ->delete();
         CACHE('bb_poll_data')->rm("poll_$topic_id");
     }
 
@@ -119,12 +128,11 @@ class Poll
         $items = [];
 
         if (!$poll_data = CACHE('bb_poll_data')->get("poll_$topic_id")) {
-            $poll_data = DB()->fetch_rowset("
-			SELECT topic_id, vote_id, vote_text, vote_result
-			FROM " . BB_POLL_VOTES . "
-			WHERE topic_id IN($topic_id_csv)
-			ORDER BY topic_id, vote_id
-		");
+            $poll_data = DB()->table(BB_POLL_VOTES)
+                ->select('topic_id, vote_id, vote_text, vote_result')
+                ->where('topic_id IN (?)', explode(',', $topic_id_csv))
+                ->order('topic_id, vote_id')
+                ->fetchAll();
             CACHE('bb_poll_data')->set("poll_$topic_id", $poll_data);
         }
 
@@ -150,7 +158,10 @@ class Poll
      */
     public static function userIsAlreadyVoted(int $topic_id, int $user_id): bool
     {
-        return (bool)DB()->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
+        return (bool)DB()->table(BB_POLL_USERS)
+            ->where('topic_id', $topic_id)
+            ->where('user_id', $user_id)
+            ->fetch();
     }
 
     /**

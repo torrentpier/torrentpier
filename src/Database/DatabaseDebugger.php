@@ -1,0 +1,349 @@
+<?php
+/**
+ * TorrentPier – Bull-powered BitTorrent tracker engine
+ *
+ * @copyright Copyright (c) 2005-2025 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ */
+
+namespace TorrentPier\Database;
+
+/**
+ * Database Debug functionality extracted from Database class
+ * Handles all debug logging, timing, and query explanation features
+ */
+class DatabaseDebugger
+{
+    private Database $db;
+
+    // Debug configuration
+    public bool $dbg_enabled = false;
+    public bool $do_explain = false;
+    public float $slow_time = 3.0;
+
+    // Timing and statistics
+    public float $sql_starttime = 0;
+    public float $cur_query_time = 0;
+
+    // Debug storage
+    public array $dbg = [];
+    public int $dbg_id = 0;
+
+    // Explain functionality
+    public string $explain_hold = '';
+    public string $explain_out = '';
+
+    public function __construct(Database $db)
+    {
+        $this->db = $db;
+
+        // Initialize debug settings more safely
+        $this->initializeDebugSettings();
+        $this->slow_time = defined('SQL_SLOW_QUERY_TIME') ? SQL_SLOW_QUERY_TIME : 3;
+    }
+
+    /**
+     * Initialize debug settings exactly like the original Database class
+     */
+    private function initializeDebugSettings(): void
+    {
+        // Use the EXACT same logic as the original DB class
+        $this->dbg_enabled = (dev()->checkSqlDebugAllowed() || !empty($_COOKIE['explain']));
+        $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
+    }
+
+    /**
+     * Store debug info
+     */
+    public function debug(string $mode): void
+    {
+        $id =& $this->dbg_id;
+        $dbg =& $this->dbg[$id];
+
+        if ($mode === 'start') {
+            // Always update timing if required constants are defined
+            if (defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
+                $this->sql_starttime = microtime(true);
+                $this->db->sql_starttime = $this->sql_starttime; // Update main Database object too
+            }
+
+            if ($this->dbg_enabled) {
+                $dbg['sql'] = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $this->db->cur_query);
+                $dbg['src'] = $this->debug_find_source();
+                $dbg['file'] = $this->debug_find_source('file');
+                $dbg['line'] = $this->debug_find_source('line');
+                $dbg['time'] = '';
+                $dbg['info'] = '';
+                $dbg['mem_before'] = function_exists('sys') ? sys('mem') : 0;
+            }
+
+            if ($this->do_explain) {
+                $this->explain('start');
+            }
+        } elseif ($mode === 'stop') {
+            if (defined('SQL_CALC_QUERY_TIME') && SQL_CALC_QUERY_TIME || defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES) {
+                $this->cur_query_time = microtime(true) - $this->sql_starttime;
+                $this->db->sql_timetotal += $this->cur_query_time;
+                $this->db->DBS['sql_timetotal'] += $this->cur_query_time;
+
+                if (defined('SQL_LOG_SLOW_QUERIES') && SQL_LOG_SLOW_QUERIES && $this->cur_query_time > $this->slow_time) {
+                    $this->log_slow_query();
+                }
+            }
+
+            if ($this->dbg_enabled) {
+                $dbg['time'] = $this->cur_query_time > 0 ? $this->cur_query_time : (microtime(true) - $this->sql_starttime);
+                $dbg['info'] = $this->db->query_info();
+                $dbg['mem_after'] = function_exists('sys') ? sys('mem') : 0;
+                $id++;
+            }
+
+            if ($this->do_explain) {
+                $this->explain('stop');
+            }
+
+            // Check for logging
+            if ($this->db->DBS['log_counter'] && $this->db->inited) {
+                $this->log_query($this->db->DBS['log_file']);
+                $this->db->DBS['log_counter']--;
+            }
+        }
+
+        // Update timing in main Database object
+        $this->db->cur_query_time = $this->cur_query_time;
+    }
+
+    /**
+     * Find source of database call
+     */
+    public function debug_find_source(string $mode = 'all'): string
+    {
+        if (!defined('SQL_PREPEND_SRC') || !SQL_PREPEND_SRC) {
+            return 'src disabled';
+        }
+
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+
+        // Find first non-DB call (skip Database.php, DebugSelection.php, and DatabaseDebugger.php)
+        foreach ($trace as $frame) {
+            if (isset($frame['file']) &&
+                !str_contains($frame['file'], 'Database/Database.php') &&
+                !str_contains($frame['file'], 'Database/DebugSelection.php') &&
+                !str_contains($frame['file'], 'Database/DatabaseDebugger.php')) {
+                switch ($mode) {
+                    case 'file':
+                        return $frame['file'];
+                    case 'line':
+                        return (string)($frame['line'] ?? '?');
+                    case 'all':
+                    default:
+                        $file = function_exists('hide_bb_path') ? hide_bb_path($frame['file']) : basename($frame['file']);
+                        $line = $frame['line'] ?? '?';
+                        return "$file($line)";
+                }
+            }
+        }
+
+        return 'src not found';
+    }
+
+    /**
+     * Prepare for logging
+     */
+    public function log_next_query(int $queries_count = 1, string $log_file = 'sql_queries'): void
+    {
+        $this->db->DBS['log_file'] = $log_file;
+        $this->db->DBS['log_counter'] = $queries_count;
+    }
+
+    /**
+     * Log query
+     */
+    public function log_query(string $log_file = 'sql_queries'): void
+    {
+        if (!function_exists('bb_log') || !function_exists('dev')) {
+            return;
+        }
+
+        $q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.3f', $this->cur_query_time);
+        $msg = [];
+        $msg[] = round($this->sql_starttime);
+        $msg[] = date('m-d H:i:s', (int)$this->sql_starttime);
+        $msg[] = sprintf('%-6s', $q_time);
+        $msg[] = sprintf('%05d', getmypid());
+        $msg[] = $this->db->db_server;
+        $msg[] = function_exists('dev') ? dev()->formatShortQuery($this->db->cur_query) : $this->db->cur_query;
+        $msg = implode(defined('LOG_SEPR') ? LOG_SEPR : ' | ', $msg);
+        $msg .= ($info = $this->db->query_info()) ? ' # ' . $info : '';
+        $msg .= ' # ' . $this->debug_find_source() . ' ';
+        $msg .= defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI'] ?? '');
+        bb_log($msg . (defined('LOG_LF') ? LOG_LF : "\n"), $log_file);
+    }
+
+    /**
+     * Log slow query
+     */
+    public function log_slow_query(string $log_file = 'sql_slow_bb'): void
+    {
+        if (!defined('IN_FIRST_SLOW_QUERY') && function_exists('CACHE')) {
+            $cache = CACHE('bb_cache');
+            if ($cache && $cache->get('dont_log_slow_query')) {
+                return;
+            }
+        }
+        $this->log_query($log_file);
+    }
+
+    /**
+     * Log error
+     */
+    public function log_error(): void
+    {
+        $error = $this->db->sql_error();
+        error_log("Database Error: " . $error['message'] . " Query: " . $this->db->cur_query);
+    }
+
+    /**
+     * Set slow query marker
+     */
+    public function expect_slow_query(int $ignoring_time = 60, int $new_priority = 10): void
+    {
+        if (function_exists('CACHE')) {
+            $cache = CACHE('bb_cache');
+            if ($old_priority = $cache->get('dont_log_slow_query')) {
+                if ($old_priority > $new_priority) {
+                    return;
+                }
+            }
+
+            if (!defined('IN_FIRST_SLOW_QUERY')) {
+                define('IN_FIRST_SLOW_QUERY', true);
+            }
+
+            $cache->set('dont_log_slow_query', $new_priority, $ignoring_time);
+        }
+    }
+
+    /**
+     * Explain queries - maintains compatibility with legacy SqlDb
+     */
+    public function explain($mode, $html_table = '', array $row = []): mixed
+    {
+        if (!$this->do_explain) {
+            return false;
+        }
+
+        $query = $this->db->cur_query ?? '';
+        // Remove comments
+        $query = preg_replace('#(\s*)(/\*)(.*)(\*/)(\s*)#', '', $query);
+
+        switch ($mode) {
+            case 'start':
+                $this->explain_hold = '';
+
+                if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)/#', $query, $m)) {
+                    $query = "SELECT * FROM $m[1] WHERE $m[2]";
+                } elseif (preg_match('#DELETE FROM ([a-z0-9_]+).*?WHERE(.*)#s', $query, $m)) {
+                    $query = "SELECT * FROM $m[1] WHERE $m[2]";
+                }
+
+                if (str_starts_with($query, "SELECT")) {
+                    $html_table = false;
+
+                    try {
+                        $result = $this->db->connection->query("EXPLAIN $query");
+                        while ($row = $result->fetch()) {
+                            $rowArray = (array)$row;
+                            $html_table = $this->explain('add_explain_row', $html_table, $rowArray);
+                        }
+                    } catch (\Exception $e) {
+                        // Skip if explain fails
+                    }
+
+                    if ($html_table) {
+                        $this->explain_hold .= '</table>';
+                    }
+                }
+                break;
+
+            case 'stop':
+                if (!$this->explain_hold) {
+                    break;
+                }
+
+                $id = $this->dbg_id - 1;
+                $htid = 'expl-' . spl_object_hash($this->db->connection) . '-' . $id;
+                $dbg = $this->dbg[$id] ?? [];
+
+                // Ensure required keys exist with defaults
+                $dbg = array_merge([
+                    'time' => $this->cur_query_time ?? 0,
+                    'sql' => $this->db->cur_query ?? '',
+                    'query' => $this->db->cur_query ?? '',
+                    'src' => $this->debug_find_source(),
+                    'trace' => $this->debug_find_source()  // Backup for compatibility
+                ], $dbg);
+
+                $this->explain_out .= '
+                <table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
+                <tr>
+                    <th style="height: 22px;" align="left">&nbsp;' . ($dbg['src'] ?? $dbg['trace']) . '&nbsp; [' . sprintf('%.3f', $dbg['time']) . ' s]&nbsp; <i>' . $this->db->query_info() . '</i></th>
+                    <th class="copyElement" data-clipboard-target="#' . $htid . '" style="height: 22px;" align="right" title="Copy to clipboard">' . "[{$this->db->engine}] {$this->db->db_server}.{$this->db->selected_db}" . ' :: Query #' . ($this->db->num_queries + 1) . '&nbsp;</th>
+                </tr>
+                <tr><td colspan="2">' . $this->explain_hold . '</td></tr>
+                </table>
+                <div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . (function_exists('dev') ? dev()->formatShortQuery($dbg['sql'] ?? $dbg['query'], true) : htmlspecialchars($dbg['sql'] ?? $dbg['query'])) . '&nbsp;&nbsp;</div></div>
+                <br />';
+                break;
+
+            case 'add_explain_row':
+                if (!$html_table && $row) {
+                    $html_table = true;
+                    $this->explain_hold .= '<table width="100%" cellpadding="3" cellspacing="1" class="bodyline" style="border-width: 0;"><tr>';
+                    foreach (array_keys($row) as $val) {
+                        $this->explain_hold .= '<td class="row3 gensmall" align="center"><b>' . htmlspecialchars($val) . '</b></td>';
+                    }
+                    $this->explain_hold .= '</tr>';
+                }
+                $this->explain_hold .= '<tr>';
+                foreach (array_values($row) as $i => $val) {
+                    $class = !($i % 2) ? 'row1' : 'row2';
+                    $this->explain_hold .= '<td class="' . $class . ' gen">' . str_replace(["{$this->db->selected_db}.", ',', ';'], ['', ', ', ';<br />'], htmlspecialchars($val ?? '')) . '</td>';
+                }
+                $this->explain_hold .= '</tr>';
+
+                return $html_table;
+
+            case 'display':
+                echo '<a name="explain"></a><div class="med">' . $this->explain_out . '</div>';
+                break;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get debug statistics for display
+     */
+    public function getDebugStats(): array
+    {
+        return [
+            'num_queries' => count($this->dbg),
+            'sql_timetotal' => $this->db->sql_timetotal,
+            'queries' => $this->dbg,
+            'explain_out' => $this->explain_out
+        ];
+    }
+
+    /**
+     * Clear debug data
+     */
+    public function clearDebugData(): void
+    {
+        $this->dbg = [];
+        $this->dbg_id = 0;
+        $this->explain_hold = '';
+        $this->explain_out = '';
+    }
+}

@@ -15,7 +15,7 @@ namespace TorrentPier\Database;
  * This factory completely replaces the legacy SqlDb/Dbs system with the new
  * Nette Database implementation while maintaining full backward compatibility.
  */
-class DbFactory
+class DatabaseFactory
 {
     private static array $instances = [];
     private static array $server_configs = [];
@@ -33,7 +33,7 @@ class DbFactory
     /**
      * Get database instance (maintains compatibility with existing DB() calls)
      */
-    public static function getInstance(string $srv_name_or_alias = 'db'): DB
+    public static function getInstance(string $srv_name_or_alias = 'db'): Database
     {
         $srv_name = self::resolveSrvName($srv_name_or_alias);
 
@@ -44,7 +44,7 @@ class DbFactory
                 throw new \RuntimeException("Database configuration not found for server: $srv_name");
             }
 
-            self::$instances[$srv_name] = DB::getInstance($cfg_values, $srv_name);
+            self::$instances[$srv_name] = Database::getInstance($cfg_values, $srv_name);
         }
 
         return self::$instances[$srv_name];
@@ -96,6 +96,6 @@ class DbFactory
             }
         }
         self::$instances = [];
-        DB::destroyInstances();
+        Database::destroyInstances();
     }
 }
