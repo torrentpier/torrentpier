@@ -60,7 +60,7 @@ class SqlDb
         global $DBS;
 
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
-        $this->dbg_enabled = (Dev::sqlDebugAllowed() || !empty($_COOKIE['explain']));
+        $this->dbg_enabled = (dev()->checkSqlDebugAllowed() || !empty($_COOKIE['explain']));
         $this->do_explain = ($this->dbg_enabled && !empty($_COOKIE['explain']));
         $this->slow_time = SQL_SLOW_QUERY_TIME;
 
@@ -839,7 +839,7 @@ class SqlDb
         $msg[] = sprintf('%-6s', $q_time);
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
-        $msg[] = Dev::shortQuery($this->cur_query);
+        $msg[] = dev()->formatShortQuery($this->cur_query);
         $msg = implode(LOG_SEPR, $msg);
         $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
@@ -948,7 +948,7 @@ class SqlDb
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
-				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . Dev::shortQuery($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
+				            <div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . dev()->formatShortQuery($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
 				<br />';
                 break;
 

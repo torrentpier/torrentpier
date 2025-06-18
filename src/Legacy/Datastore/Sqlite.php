@@ -64,7 +64,7 @@ class Sqlite extends Common
         $client = new PDO('sqlite:' . $dir . $this->dbExtension);
         $this->sqlite = new SQLiteCache($client);
         $this->prefix = $prefix;
-        $this->dbg_enabled = Dev::sqlDebugAllowed();
+        $this->dbg_enabled = dev()->checkSqlDebugAllowed();
     }
 
     /**

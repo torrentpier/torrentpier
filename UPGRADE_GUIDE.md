@@ -6,6 +6,7 @@ This guide helps you upgrade your TorrentPier installation to the latest version
 
 - [Configuration System Migration](#configuration-system-migration)
 - [Censor System Migration](#censor-system-migration)
+- [Development System Migration](#development-system-migration)
 - [Breaking Changes](#breaking-changes)
 - [Best Practices](#best-practices)
 
@@ -160,6 +161,97 @@ When you update censored words in the admin panel, the system now automatically:
 2. Reloads the singleton instance with fresh words
 3. Applies changes immediately without requiring page refresh
 
+## 🛠️ Development System Migration
+
+The development and debugging system has been refactored to use a singleton pattern, providing better resource management and consistency across the application.
+
+### Quick Migration Overview
+
+```php
+// ❌ Old way (still works, but not recommended)
+$sqlLog = \TorrentPier\Dev::getSqlLog();
+$isDebugAllowed = \TorrentPier\Dev::sqlDebugAllowed();
+$shortQuery = \TorrentPier\Dev::shortQuery($sql);
+
+// ✅ New way (recommended)
+$sqlLog = dev()->getSqlDebugLog();
+$isDebugAllowed = dev()->checkSqlDebugAllowed();
+$shortQuery = dev()->formatShortQuery($sql);
+```
+
+### Key Development System Changes
+
+#### Basic Usage
+```php
+// Get SQL debug log
+$sqlLog = dev()->getSqlDebugLog();
+
+// Check if SQL debugging is allowed
+if (dev()->checkSqlDebugAllowed()) {
+    $debugInfo = dev()->getSqlDebugLog();
+}
+
+// Format SQL queries for display
+$formattedQuery = dev()->formatShortQuery($sql, true); // HTML escaped
+$plainQuery = dev()->formatShortQuery($sql, false);   // Plain text
+```
+
+#### New Instance Methods
+```php
+// Access Whoops instance directly
+$whoops = dev()->getWhoops();
+
+// Check debug mode status
+if (dev()->isDebugEnabled()) {
+    // Debug mode is active
+}
+
+// Check environment
+if (dev()->isLocalEnvironment()) {
+    // Running in local development
+}
+```
+
+### Backward Compatibility
+
+All existing static method calls continue to work exactly as before:
+
+```php
+// This still works - backward compatibility maintained
+$sqlLog = \TorrentPier\Dev::getSqlLog();
+$isDebugAllowed = \TorrentPier\Dev::sqlDebugAllowed();
+$shortQuery = \TorrentPier\Dev::shortQuery($sql);
+
+// But this is now preferred
+$sqlLog = dev()->getSqlDebugLog();
+$isDebugAllowed = dev()->checkSqlDebugAllowed();
+$shortQuery = dev()->formatShortQuery($sql);
+```
+
+### Performance Benefits
+
+- **Single Instance**: Only one debugging instance across the entire application
+- **Resource Efficiency**: Whoops handlers initialized once and reused
+- **Memory Optimization**: Shared debugging state and configuration
+- **Lazy Loading**: Debug features only activated when needed
+
+### Advanced Usage
+
+```php
+// Access the singleton directly
+$devInstance = \TorrentPier\Dev::getInstance();
+
+// Initialize the system (called automatically in common.php)
+\TorrentPier\Dev::init();
+
+// Get detailed environment information
+$environment = [
+    'debug_enabled' => dev()->isDebugEnabled(),
+    'local_environment' => dev()->isLocalEnvironment(),
+    'sql_debug_allowed' => dev()->sqlDebugAllowed(),
+];
+```
+
 ## ⚠️ Breaking Changes
 
 ### Deprecated Functions
@@ -170,6 +262,8 @@ When you update censored words in the admin panel, the system now automatically:
 ### Deprecated Patterns
 - `new TorrentPier\Censor()` → Use `censor()` global function
 - Direct `$wordCensor` access → Use `censor()` methods
+- `new TorrentPier\Dev()` → Use `dev()` global function
+- Static `Dev::` methods → Use `dev()` instance methods
 
 ### File Structure Changes
 - New `/src/` directory for modern PHP classes
@@ -213,6 +307,25 @@ function processUserInput(string $text): string {
 }
 
 // ✅ Use the singleton consistently
+$censoredText = censor()->censorString($input);
+```
+
+### Development and Debugging
+```php
+// ✅ Use instance methods for debugging
+if (dev()->checkSqlDebugAllowed()) {
+    $debugLog = dev()->getSqlDebugLog();
+}
+
+// ✅ Access debugging utilities consistently
+function formatSqlForDisplay(string $sql): string {
+    return dev()->formatShortQuery($sql, true);
+}
+
+// ✅ Check environment properly
+if (dev()->isLocalEnvironment()) {
+    // Development-specific code
+}
 class ForumPost {
     public function getDisplayText(): string {
         return censor()->censorString($this->text);

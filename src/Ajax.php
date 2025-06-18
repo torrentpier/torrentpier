@@ -196,8 +196,8 @@ class Ajax
             ];
         }
 
-        if (Dev::sqlDebugAllowed()) {
-            $this->response['sql_log'] = Dev::getSqlLog();
+        if (dev()->checkSqlDebugAllowed()) {
+            $this->response['sql_log'] = dev()->getSqlDebugLog();
         }
 
         // sending output will be handled by $this->ob_handler()

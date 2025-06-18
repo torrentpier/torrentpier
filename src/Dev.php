@@ -26,11 +26,15 @@ use jacklul\MonologTelegramHandler\TelegramFormatter;
 use Exception;
 
 /**
- * Class Dev
- * @package TorrentPier
+ * Development and Debugging System
+ *
+ * Singleton class that provides development and debugging functionality
+ * including error handling, SQL logging, and debugging utilities.
  */
 class Dev
 {
+    private static ?Dev $instance = null;
+
     /**
      * Whoops instance
      *
@@ -39,9 +43,9 @@ class Dev
     private Run $whoops;
 
     /**
-     * Constructor
+     * Initialize debugging system
      */
-    public function __construct()
+    private function __construct()
     {
         $this->whoops = new Run;
 
@@ -58,6 +62,25 @@ class Dev
         }
 
         $this->whoops->register();
+    }
+
+    /**
+     * Get the singleton instance of Dev
+     */
+    public static function getInstance(): Dev
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Initialize the dev system (for compatibility)
+     */
+    public static function init(): Dev
+    {
+        return self::getInstance();
     }
 
     /**
@@ -164,44 +187,44 @@ class Dev
     }
 
     /**
-     * Get SQL debug log
+     * Get SQL debug log (instance method)
      *
      * @return string
      * @throws Exception
      */
-    public static function getSqlLog(): string
+    public function getSqlLogInstance(): string
     {
         global $DBS, $CACHES, $datastore;
 
         $log = '';
 
         foreach ($DBS->srv as $srv_name => $db_obj) {
-            $log .= !empty($db_obj->dbg) ? self::getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
+            $log .= !empty($db_obj->dbg) ? $this->getSqlLogHtml($db_obj, "database: $srv_name [{$db_obj->engine}]") : '';
         }
 
         foreach ($CACHES->obj as $cache_name => $cache_obj) {
             if (!empty($cache_obj->db->dbg)) {
-                $log .= self::getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
+                $log .= $this->getSqlLogHtml($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
             } elseif (!empty($cache_obj->dbg)) {
-                $log .= self::getSqlLogHtml($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
+                $log .= $this->getSqlLogHtml($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
             }
         }
 
         if (!empty($datastore->db->dbg)) {
-            $log .= self::getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
+            $log .= $this->getSqlLogHtml($datastore->db, "cache: datastore [{$datastore->db->engine}]");
         } elseif (!empty($datastore->dbg)) {
-            $log .= self::getSqlLogHtml($datastore, "cache: datastore [{$datastore->engine}]");
+            $log .= $this->getSqlLogHtml($datastore, "cache: datastore [{$datastore->engine}]");
         }
 
         return $log;
     }
 
     /**
-     * Sql debug status
+     * Sql debug status (instance method)
      *
      * @return bool
      */
-    public static function sqlDebugAllowed(): bool
+    public function sqlDebugAllowedInstance(): bool
     {
         return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
     }
@@ -215,13 +238,13 @@ class Dev
      * @return string
      * @throws Exception
      */
-    private static function getSqlLogHtml(object $db_obj, string $log_name): string
+    private function getSqlLogHtml(object $db_obj, string $log_name): string
     {
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
             $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
-            $sql = self::shortQuery($dbg['sql'], true);
+            $sql = $this->shortQueryInstance($dbg['sql'], true);
             $time = sprintf('%.3f', $dbg['time']);
             $perc = '[' . round($dbg['time'] * 100 / $db_obj->sql_timetotal) . '%]';
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
@@ -238,13 +261,13 @@ class Dev
     }
 
     /**
-     * Short query
+     * Short query (instance method)
      *
      * @param string $sql
      * @param bool $esc_html
      * @return string
      */
-    public static function shortQuery(string $sql, bool $esc_html = false): string
+    public function shortQueryInstance(string $sql, bool $esc_html = false): string
     {
         $max_len = 100;
         $sql = str_compact($sql);
@@ -256,5 +279,121 @@ class Dev
         }
 
         return $esc_html ? htmlCHR($sql, true) : $sql;
+    }
+
+    // Static methods for backward compatibility (proxy to instance methods)
+
+    /**
+     * Get SQL debug log (static)
+     *
+     * @return string
+     * @throws Exception
+     * @deprecated Use dev()->getSqlLog() instead
+     */
+    public static function getSqlLog(): string
+    {
+        return self::getInstance()->getSqlLogInstance();
+    }
+
+    /**
+     * Sql debug status (static)
+     *
+     * @return bool
+     * @deprecated Use dev()->sqlDebugAllowed() instead
+     */
+    public static function sqlDebugAllowed(): bool
+    {
+        return self::getInstance()->sqlDebugAllowedInstance();
+    }
+
+    /**
+     * Short query (static)
+     *
+     * @param string $sql
+     * @param bool $esc_html
+     * @return string
+     * @deprecated Use dev()->shortQuery() instead
+     */
+    public static function shortQuery(string $sql, bool $esc_html = false): string
+    {
+        return self::getInstance()->shortQueryInstance($sql, $esc_html);
+    }
+
+    /**
+     * Get SQL debug log (for dev() singleton usage)
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function getSqlDebugLog(): string
+    {
+        return $this->getSqlLogInstance();
+    }
+
+    /**
+     * Check if SQL debugging is allowed (for dev() singleton usage)
+     *
+     * @return bool
+     */
+    public function checkSqlDebugAllowed(): bool
+    {
+        return $this->sqlDebugAllowedInstance();
+    }
+
+    /**
+     * Format SQL query for display (for dev() singleton usage)
+     *
+     * @param string $sql
+     * @param bool $esc_html
+     * @return string
+     */
+    public function formatShortQuery(string $sql, bool $esc_html = false): string
+    {
+        return $this->shortQueryInstance($sql, $esc_html);
+    }
+
+    /**
+     * Get Whoops instance
+     *
+     * @return Run
+     */
+    public function getWhoops(): Run
+    {
+        return $this->whoops;
+    }
+
+    /**
+     * Check if debug mode is enabled
+     *
+     * @return bool
+     */
+    public function isDebugEnabled(): bool
+    {
+        return DBG_USER;
+    }
+
+    /**
+     * Check if application is in local environment
+     *
+     * @return bool
+     */
+    public function isLocalEnvironment(): bool
+    {
+        return APP_ENV === 'local';
+    }
+
+    /**
+     * Prevent cloning of the singleton instance
+     */
+    private function __clone()
+    {
+    }
+
+    /**
+     * Prevent unserialization of the singleton instance
+     */
+    public function __wakeup()
+    {
+        throw new \Exception("Cannot unserialize a singleton.");
     }
 }
