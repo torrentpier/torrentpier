@@ -158,3 +158,197 @@ This is a **complete replacement** that maintains 100% backward compatibility:
 - `DB.php` - Main database class with full backward compatibility
 - `DbFactory.php` - Factory for managing database instances
 - `README.md` - This documentation
+
+## Future Enhancement: Gradual Migration to Nette Explorer
+
+While the current implementation uses Nette Database's **Connection** class (SQL way) for maximum compatibility, TorrentPier can gradually migrate to **Nette Database Explorer** for more modern ORM-style database operations.
+
+### Phase 1: Hybrid Approach
+
+Add Explorer support alongside existing Connection-based methods:
+
+```php
+// Current Connection-based approach (maintains compatibility)
+$users = DB()->fetch_rowset("SELECT * FROM users WHERE status = ?", 1);
+
+// New Explorer-based approach (added gradually)
+$users = DB()->table('users')->where('status', 1)->fetchAll();
+```
+
+### Phase 2: Explorer Method Examples
+
+#### Basic Table Operations
+```php
+// Select operations
+$user = DB()->table('users')->get(123);                           // Get by ID
+$users = DB()->table('users')->where('status', 1)->fetchAll();    // Where condition
+$count = DB()->table('users')->where('status', 1)->count();       // Count records
+
+// Insert operations
+$user_id = DB()->table('users')->insert([
+    'username' => 'john',
+    'email' => 'john@example.com',
+    'reg_time' => time()
+]);
+
+// Update operations
+DB()->table('users')
+    ->where('id', 123)
+    ->update(['last_visit' => time()]);
+
+// Delete operations
+DB()->table('users')
+    ->where('status', 0)
+    ->delete();
+```
+
+#### Advanced Explorer Features
+```php
+// Joins and relationships
+$posts = DB()->table('posts')
+    ->select('posts.*, users.username')
+    ->where('posts.forum_id', 5)
+    ->order('posts.post_time DESC')
+    ->limit(20)
+    ->fetchAll();
+
+// Aggregations
+$stats = DB()->table('torrents')
+    ->select('forum_id, COUNT(*) as total, SUM(size) as total_size')
+    ->where('approved', 1)
+    ->group('forum_id')
+    ->fetchAll();
+
+// Subqueries
+$active_users = DB()->table('users')
+    ->where('last_visit > ?', time() - 86400)
+    ->where('id IN', DB()->table('posts')
+        ->select('user_id')
+        ->where('post_time > ?', time() - 86400)
+    )
+    ->fetchAll();
+```
+
+#### Working with Related Data
+```php
+// One-to-many relationships
+$user = DB()->table('users')->get(123);
+$user_posts = $user->related('posts')->order('post_time DESC');
+
+// Many-to-many through junction table
+$torrent = DB()->table('torrents')->get(456);
+$seeders = $torrent->related('bt_tracker', 'torrent_id')
+    ->where('seeder', 'yes')
+    ->select('user_id');
+```
+
+### Phase 3: Migration Strategy
+
+#### Step-by-Step Conversion
+1. **Identify Patterns**: Find common SQL patterns in the codebase
+2. **Create Helpers**: Build wrapper methods for complex queries
+3. **Test Incrementally**: Convert one module at a time
+4. **Maintain Compatibility**: Keep both approaches during transition
+
+#### Example Migration Pattern
+```php
+// Before: Raw SQL
+$result = DB()->sql_query("
+    SELECT t.*, u.username
+    FROM torrents t
+    JOIN users u ON t.poster_id = u.user_id
+    WHERE t.forum_id = ? AND t.approved = 1
+    ORDER BY t.reg_time DESC
+    LIMIT ?
+", $forum_id, $limit);
+
+$torrents = [];
+while ($row = DB()->sql_fetchrow($result)) {
+    $torrents[] = $row;
+}
+
+// After: Explorer ORM
+$torrents = DB()->table('torrents')
+    ->alias('t')
+    ->select('t.*, u.username')
+    ->where('t.forum_id', $forum_id)
+    ->where('t.approved', 1)
+    ->order('t.reg_time DESC')
+    ->limit($limit)
+    ->fetchAll();
+```
+
+### Phase 4: Advanced Explorer Features
+
+#### Custom Repository Classes
+```php
+// Create specialized repository classes
+class TorrentRepository
+{
+    private $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
+    public function getApprovedByForum($forum_id, $limit = 20)
+    {
+        return $this->db->table('torrents')
+            ->where('forum_id', $forum_id)
+            ->where('approved', 1)
+            ->order('reg_time DESC')
+            ->limit($limit)
+            ->fetchAll();
+    }
+
+    public function getTopSeeded($limit = 10)
+    {
+        return $this->db->table('torrents')
+            ->where('approved', 1)
+            ->order('seeders DESC')
+            ->limit($limit)
+            ->fetchAll();
+    }
+}
+
+// Usage
+$torrentRepo = new TorrentRepository(DB());
+$popular = $torrentRepo->getTopSeeded();
+```
+
+#### Database Events and Caching
+```php
+// Add caching layer
+$cached_result = DB()->table('users')
+    ->where('status', 1)
+    ->cache('active_users', 3600)  // Cache for 1 hour
+    ->fetchAll();
+
+// Database events for logging
+DB()->onQuery[] = function ($query, $parameters, $time) {
+    if ($time > 1.0) {  // Log slow queries
+        error_log("Slow query ({$time}s): $query");
+    }
+};
+```
+
+### Benefits of Explorer Migration
+
+#### Developer Experience
+- **Fluent Interface**: Chainable method calls
+- **IDE Support**: Better autocomplete and type hints
+- **Less SQL**: Reduced raw SQL writing
+- **Built-in Security**: Automatic parameter binding
+
+#### Code Quality
+- **Readable Code**: Self-documenting query building
+- **Reusable Patterns**: Common queries become methods
+- **Type Safety**: Better error detection
+- **Testing**: Easier to mock and test
+
+#### Performance
+- **Query Optimization**: Explorer can optimize queries
+- **Lazy Loading**: Load related data only when needed
+- **Connection Pooling**: Better resource management
+- **Caching Integration**: Built-in caching support
