@@ -151,7 +151,9 @@ class User
                     $update_sessions_table = true;
                 }
 
-                Sessions::cache_set_userdata($this->data);
+                if ($this->data) {
+                    Sessions::cache_set_userdata($this->data);
+                }
             }
         }
 
@@ -335,11 +337,13 @@ class User
      */
     public function session_end(bool $update_lastvisit = false, bool $set_cookie = true)
     {
-        Sessions::cache_rm_userdata($this->data);
-        DB()->query("
-			DELETE FROM " . BB_SESSIONS . "
-			WHERE session_id = '{$this->data['session_id']}'
-		");
+        if ($this->data && is_array($this->data)) {
+            Sessions::cache_rm_userdata($this->data);
+            DB()->query("
+                DELETE FROM " . BB_SESSIONS . "
+                WHERE session_id = '{$this->data['session_id']}'
+            ");
+        }
 
         if (!IS_GUEST) {
             if ($update_lastvisit) {
