@@ -121,6 +121,40 @@ function dev(): \TorrentPier\Dev
 }
 
 /**
+ * Get the Language instance
+ *
+ * @return \TorrentPier\Language
+ */
+function lang(): \TorrentPier\Language
+{
+    return \TorrentPier\Language::getInstance();
+}
+
+/**
+ * Get a language string (shorthand for lang()->get())
+ *
+ * @param string $key Language key, supports dot notation (e.g., 'DATETIME.TODAY')
+ * @param mixed $default Default value if key doesn't exist
+ * @return mixed Language string or default value
+ */
+function __(string $key, mixed $default = null): mixed
+{
+    return \TorrentPier\Language::getInstance()->get($key, $default);
+}
+
+/**
+ * Echo a language string (shorthand for echo __())
+ *
+ * @param string $key Language key, supports dot notation
+ * @param mixed $default Default value if key doesn't exist
+ * @return void
+ */
+function _e(string $key, mixed $default = null): void
+{
+    echo \TorrentPier\Language::getInstance()->get($key, $default);
+}
+
+/**
  * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));
