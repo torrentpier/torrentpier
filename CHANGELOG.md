@@ -2,7 +2,14 @@
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/v2.4/TorrentPier-v2.4)
+## [v2.4.6](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.4..v2.4.6) (2025-06-19)
+
+### 🐛 Bug Fixes
+
+- *(installer)* Strip protocol from TP_HOST to keep only hostname ([#1969](https://github.com/torrentpier/torrentpier/pull/1969)) - ([15f9948](https://github.com/torrentpier/torrentpier/commit/15f994840331b135cd64c0cd61de95fecfc29db8))
+- *(sql)* Resolve `only_full_group_by` compatibility issues in tracker cleanup - ([faf3d79](https://github.com/torrentpier/torrentpier/commit/faf3d7919249d869d8ca8d41617dd4356dc0ac48))
+- Duplicate column SQL query issues in `viewtopic.php` ([#1973](https://github.com/torrentpier/torrentpier/pull/1973)) - ([6a1d682](https://github.com/torrentpier/torrentpier/commit/6a1d6823856dd7c3cef45bea2681828526d1b9f8))
+- SQL queries in online_userlist.php to use MAX() for session data and adjusted GROUP BY clause for better accuracy ([#1971](https://github.com/torrentpier/torrentpier/pull/1971)) - ([2a8b6da](https://github.com/torrentpier/torrentpier/commit/2a8b6daecf63752b8a852c950e9a7fd08e17f57c))
 
 ### 📦 Dependencies
 
@@ -11,8 +18,14 @@
 ### ⚙️ Miscellaneous
 
 - *(_release.php)* Finally! Removed some useless params ([#1947](https://github.com/torrentpier/torrentpier/pull/1947)) - ([9c7d270](https://github.com/torrentpier/torrentpier/commit/9c7d270598c0153fb82f4b7ad96f5b59399b2159))
+- *(cliff)* Add conventional commit prefix to changelog message ([#1970](https://github.com/torrentpier/torrentpier/pull/1970)) - ([7d9594e](https://github.com/torrentpier/torrentpier/commit/7d9594eedab1b2c81d888dfba68ded1b8a142282))
+- Changed active branch name in `_release.php` ([#1972](https://github.com/torrentpier/torrentpier/pull/1972)) - ([7dc69ba](https://github.com/torrentpier/torrentpier/commit/7dc69ba699c75d87c709a799291c4b544b3e92aa))
 - Changed branch name from `master` to `v2.4` ([#1968](https://github.com/torrentpier/torrentpier/pull/1968)) - ([a8e252f](https://github.com/torrentpier/torrentpier/commit/a8e252f64f7205b7bb24739ab637144c6fb022d6))
 
+## New Contributors ❤️
+
+* @belomaxorka made their first contribution
+* @dependabot[bot] made their first contribution in [#1948](https://github.com/torrentpier/torrentpier/pull/1948)
 
 ## [v2.4.6-alpha.4](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.3..v2.4.6-alpha.4) (2025-06-13)
 
