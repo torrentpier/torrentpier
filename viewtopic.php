@@ -678,6 +678,40 @@ for ($i = 0; $i < $total_posts; $i++) {
         $page_cfg['meta_description'] = str_short(strip_tags($message_meta), 220);
     }
 
+    // Handle attachments
+    $attachments_html = '';
+    if (isset($postrow[$i]['post_attachment']) && $postrow[$i]['post_attachment']) {
+        $attachments_html = '<!-- Processing attachment for post_id: ' . $post_id . ' -->';
+        if ($is_auth['auth_download'] && $is_auth['auth_view']) {
+            $attachments_html .= '<!-- User has download and view auth -->';
+            if (function_exists('render_attachments')) {
+                $attachments_html .= '<!-- Calling render_attachments -->';
+                $render_result = render_attachments($post_id);
+                $attachments_html .= $render_result;
+                $attachments_html .= '<!-- render_attachments returned ' . strlen($render_result) . ' chars -->';
+            } else {
+                $attachments_html .= '<!-- render_attachments function not found -->';
+            }
+        } elseif ($is_first_post) {
+            $attachments_html .= '<!-- Showing guest notice for first post -->';
+            // Show guest attachment notice only for first post
+            $guest_template = \TorrentPier\Template\Template::getInstance($template->root);
+            $guest_template->set_filenames(['body' => 'viewtopic_attach_guest.tpl']);
+            $guest_template->assign_vars($template->vars);
+            $guest_template->lang =& $lang;
+            $guest_template->assign_block_vars('postrow', ['IS_FIRST_POST' => true]);
+            ob_start();
+            $guest_template->pparse('body');
+            $guest_result = ob_get_clean();
+            $attachments_html .= $guest_result;
+            $attachments_html .= '<!-- Guest template returned ' . strlen($guest_result) . ' chars -->';
+        } else {
+            $attachments_html .= '<!-- No auth and not first post -->';
+        }
+    } else {
+        $attachments_html = '<!-- No post_attachment flag or is 0 for post_id: ' . $post_id . ' -->';
+    }
+
     $template->assign_block_vars('postrow', [
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
@@ -729,7 +763,9 @@ for ($i = 0; $i < $total_posts; $i++) {
         'RG_URL' => GROUP_URL . $rg_id,
         'RG_FIND_URL' => 'tracker.php?srg=' . $rg_id,
         'RG_SIG' => $rg_signature,
-        'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig']
+        'RG_SIG_ATTACH' => $postrow[$i]['attach_rg_sig'],
+        
+        'ATTACHMENTS' => $attachments_html . '<!-- ATTACHMENTS var length: ' . strlen($attachments_html) . ' -->'
     ]);
 
     // Ban information
@@ -738,10 +774,6 @@ for ($i = 0; $i < $total_posts; $i++) {
             'IS_BANNED' => true,
             'BAN_REASON' => $banInfo['ban_reason']
         ]);
-    }
-
-    if (isset($postrow[$i]['post_attachment']) && $is_auth['auth_download'] && function_exists('display_post_attachments')) {
-        display_post_attachments($post_id, $postrow[$i]['post_attachment']);
     }
 
     if ($moderation && !defined('SPLIT_FORM_START') && ($start || $post_id == $t_data['topic_first_post_id'])) {

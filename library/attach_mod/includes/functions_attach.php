@@ -236,19 +236,13 @@ function get_attachments_from_post($post_id_array)
 			AND a.attach_id = d.attach_id
 		ORDER BY d.filetime $display_order";
 
-    if (!($result = DB()->sql_query($sql))) {
-        bb_die('Could not get attachment informations for post number ' . $post_id_array);
-    }
-
-    $num_rows = DB()->num_rows($result);
-    $attachments = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
-
-    if ($num_rows == 0) {
+    try {
+        $attachments = DB()->fetch_rowset($sql);
+        return $attachments ?: [];
+    } catch (Exception $e) {
+        error_log('get_attachments_from_post error: ' . $e->getMessage());
         return [];
     }
-
-    return $attachments;
 }
 
 /**
