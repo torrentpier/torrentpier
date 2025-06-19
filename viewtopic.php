@@ -85,17 +85,17 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
 
 // Get forum/topic data
 if ($topic_id) {
-    $sql = "SELECT t.*, f.*, tw.notify_status
+    $sql = "SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, tw.notify_status
 		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f USING(forum_id)
+		LEFT JOIN " . BB_FORUMS . " f ON t.forum_id = f.forum_id
 		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE t.topic_id = $topic_id
 	";
 } elseif ($post_id) {
-    $sql = "SELECT t.*, f.*, p.post_time, tw.notify_status
+    $sql = "SELECT t.*, f.cat_id, f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.forum_tpl_id, f.prune_days, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_vote, f.auth_pollcreate, f.auth_attachments, f.auth_download, f.allow_reg_tracker, f.allow_porno_topic, f.self_moderated, f.forum_parent, f.show_on_index, f.forum_display_sort, f.forum_display_order, p.post_time, tw.notify_status
 		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f  USING(forum_id)
-		LEFT JOIN " . BB_POSTS . " p  USING(topic_id)
+		LEFT JOIN " . BB_FORUMS . " f ON t.forum_id = f.forum_id
+		LEFT JOIN " . BB_POSTS . " p ON t.topic_id = p.topic_id
 		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE p.post_id = $post_id
 	";
