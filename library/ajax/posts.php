@@ -18,7 +18,11 @@ if (!isset($this->request['type'])) {
 }
 if (isset($this->request['post_id'])) {
     $post_id = (int)$this->request['post_id'];
-    $post = DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
+    $post = DB()->fetch_row("SELECT 
+			t.topic_id, t.forum_id, t.topic_title, t.topic_poster, t.topic_time, t.topic_replies, t.topic_status, t.topic_vote, t.topic_type, t.topic_first_post_id, t.topic_last_post_id, t.topic_moved_id, t.topic_attachment, t.topic_dl_type,
+			f.forum_name, f.forum_desc, f.forum_status, f.forum_order, f.forum_posts, f.forum_topics, f.forum_last_post_id, f.cat_id, f.forum_pic, f.forum_display_on_index, f.forum_display_recent, f.allow_reg_tracker, f.allow_pic_upload, f.forum_display_sort, f.forum_last_post_time,
+			p.post_id, p.poster_id, p.post_time, p.poster_ip, p.post_username, p.enable_bbcode, p.enable_html, p.enable_smilies, p.enable_sig, p.post_edit_time, p.post_edit_count,
+			pt.post_text
 		FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f, " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
 		WHERE p.post_id = $post_id
 			AND t.topic_id = p.topic_id

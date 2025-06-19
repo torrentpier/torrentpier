@@ -987,6 +987,54 @@ class Template
         return file_write($code, $filename, max_size: false, replace_content: true);
     }
 
+    /**
+     * Debug method to dump template data
+     */
+    public function debugDump(string $title = 'Template Debug', bool $die = false): void
+    {
+        echo "<h2>$title</h2>";
+        echo "<h3>_tpldata structure:</h3>";
+        echo "<pre>";
+        print_r($this->_tpldata);
+        echo "</pre>";
+        
+        echo "<h3>Root variables (vars):</h3>";
+        echo "<pre>";
+        print_r($this->vars);
+        echo "</pre>";
+        
+        echo "<h3>Language variables (first 10):</h3>";
+        echo "<pre>";
+        print_r(array_slice($this->lang, 0, 10, true));
+        echo "</pre>";
+        
+        echo "<h3>Template files:</h3>";
+        echo "<pre>";
+        print_r($this->files);
+        echo "</pre>";
+        
+        if ($die) {
+            die();
+        }
+    }
+    
+    /**
+     * Debug method to dump specific block data
+     */
+    public function debugBlock(string $blockName): void
+    {
+        echo "<h3>Block '$blockName' data:</h3>";
+        echo "<pre>";
+        $blockKey = $blockName . '.';
+        if (isset($this->_tpldata[$blockKey])) {
+            print_r($this->_tpldata[$blockKey]);
+        } else {
+            echo "Block '$blockName' not found in _tpldata\n";
+            echo "Available blocks: " . implode(', ', array_keys($this->_tpldata)) . "\n";
+        }
+        echo "</pre>";
+    }
+
     public function xs_startup()
     {
         // adding language variable (eg: "english" or "german")

@@ -525,15 +525,15 @@ if ($post_mode) {
     $sql = "
 		SELECT
 		  p.post_id AS item_id,
-		  t.*,
-		  p.*,
+		  t.topic_id AS t_topic_id, t.forum_id AS t_forum_id, t.topic_title, t.topic_poster, t.topic_time, t.topic_replies, t.topic_status, t.topic_vote, t.topic_type, t.topic_first_post_id, t.topic_last_post_id, t.topic_moved_id, t.topic_attachment, t.topic_dl_type,
+		  p.post_id, p.topic_id AS p_topic_id, p.forum_id AS p_forum_id, p.poster_id, p.post_time, p.poster_ip, p.post_username, p.enable_bbcode, p.enable_html, p.enable_smilies, p.enable_sig, p.post_edit_time, p.post_edit_count,
 		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
 		  IF(p.poster_id = $anon_id, p.post_username, u.username) AS username, u.user_id, u.user_rank
-		FROM       $posts_tbl
-		INNER JOIN $topics_tbl     ON(t.topic_id = p.topic_id)
-		INNER JOIN $posts_text_tbl ON(pt.post_id = p.post_id)
-		 LEFT JOIN $posts_html_tbl ON(h.post_id = pt.post_id)
-		INNER JOIN $users_tbl      ON(u.user_id = p.poster_id)
+		FROM       $posts_tbl p
+		INNER JOIN $topics_tbl t       ON(t.topic_id = p.topic_id)
+		INNER JOIN $posts_text_tbl pt  ON(pt.post_id = p.post_id)
+		 LEFT JOIN $posts_html_tbl h   ON(h.post_id = pt.post_id)
+		INNER JOIN $users_tbl u        ON(u.user_id = p.poster_id)
 		WHERE
 		      p.post_id IN(" . implode(',', $items_display) . ")
 		    $excluded_forums_sql
