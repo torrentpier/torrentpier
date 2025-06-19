@@ -86,9 +86,9 @@ function out(string $str, string $type = ''): void
  *
  * @param string $cmd
  * @param string|null $input
- * @return void
+ * @return int
  */
-function runProcess(string $cmd, ?string $input = null): void
+function runProcess(string $cmd, ?string $input = null): int
 {
     $descriptorSpec = [
         0 => ['pipe', 'r'],
@@ -100,7 +100,7 @@ function runProcess(string $cmd, ?string $input = null): void
 
     if (!is_resource($process)) {
         out('- Could not start subprocess', 'error');
-        return;
+        return -1;
     }
 
     // Write input if provided
@@ -124,7 +124,7 @@ function runProcess(string $cmd, ?string $input = null): void
     fclose($pipes[1]);
     fclose($pipes[2]);
 
-    proc_close($process);
+    return proc_close($process);
 }
 
 /**
