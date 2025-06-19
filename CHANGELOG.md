@@ -2,7 +2,7 @@
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/v2.4/TorrentPier-v2.4)
 
 ### 📦 Dependencies
 
@@ -11,6 +11,7 @@
 ### ⚙️ Miscellaneous
 
 - *(_release.php)* Finally! Removed some useless params ([#1947](https://github.com/torrentpier/torrentpier/pull/1947)) - ([9c7d270](https://github.com/torrentpier/torrentpier/commit/9c7d270598c0153fb82f4b7ad96f5b59399b2159))
+- Changed branch name from `master` to `v2.4` ([#1968](https://github.com/torrentpier/torrentpier/pull/1968)) - ([a8e252f](https://github.com/torrentpier/torrentpier/commit/a8e252f64f7205b7bb24739ab637144c6fb022d6))
 
 
 ## [v2.4.6-alpha.4](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.3..v2.4.6-alpha.4) (2025-06-13)
