@@ -39,7 +39,7 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 		INSERT INTO " . NEW_BB_BT_LAST_TORSTAT . "
 			(topic_id, user_id, dl_status, up_add, down_add, release_add, speed_up, speed_down)
 		SELECT
-			topic_id, user_id, IF(releaser, $releaser, seeder), SUM(up_add), SUM(down_add), IF(releaser, SUM(up_add), 0), SUM(speed_up), SUM(speed_down)
+			topic_id, user_id, IF(MAX(releaser), $releaser, MAX(seeder)), SUM(up_add), SUM(down_add), IF(MAX(releaser), SUM(up_add), 0), SUM(speed_up), SUM(speed_down)
 		FROM " . BB_BT_TRACKER . "
 		WHERE (up_add != 0 OR down_add != 0)
 		GROUP BY topic_id, user_id
@@ -61,7 +61,6 @@ DB()->query("
     FROM " . BB_BT_TRACKER . "
     WHERE seeder = 1
     GROUP BY topic_id, user_id
-    ORDER BY update_time DESC
 ");
 
 // Clean peers table
