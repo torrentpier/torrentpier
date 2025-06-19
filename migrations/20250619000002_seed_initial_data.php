@@ -217,7 +217,7 @@ class SeedInitialData extends AbstractMigration
     private function seedConfiguration()
     {
         $currentTime = time();
-        
+
         $configs = [
             ['config_name' => 'allow_autologin', 'config_value' => '1'],
             ['config_name' => 'allow_bbcode', 'config_value' => '1'],
@@ -620,17 +620,17 @@ class SeedInitialData extends AbstractMigration
 
         // Create welcome post text
         $welcomeText = "Thank you for installing the new — TorrentPier Cattle!\n\n" .
-                      "What to do next? First of all configure your site in the administration panel (link in the bottom).\n\n" .
-                      "Change main options: site description, number of messages per topic, time zone, language by default, seed-bonus options, birthdays etc... " .
-                      "Create a couple of forums, delete or change this one. Change settings of categories to allow registration of torrents, change announcer url. " .
-                      "If you will have questions or want additional modifications of the engine, [url=https://torrentpier.com/]visit our forum[/url] " .
-                      "(you can use english, we will try to help in any case).\n\n" .
-                      "If you want to help with the translations: [url=https://crowdin.com/project/torrentpier]Crowdin[/url].\n\n" .
-                      "Our GitHub organization: [url=https://github.com/torrentpier]https://github.com/torrentpier[/url].\n" .
-                      "Our SourceForge repository: [url=https://sourceforge.net/projects/torrentpier-engine]https://sourceforge.net/projects/torrentpier-engine[/url].\n" .
-                      "Our demo website: [url=https://torrentpier.duckdns.org]https://torrentpier.duckdns.org[/url].\n\n" .
-                      "We are sure that you will be able to create the best tracker available!\n" .
-                      "Good luck! 😉";
+            "What to do next? First of all configure your site in the administration panel (link in the bottom).\n\n" .
+            "Change main options: site description, number of messages per topic, time zone, language by default, seed-bonus options, birthdays etc... " .
+            "Create a couple of forums, delete or change this one. Change settings of categories to allow registration of torrents, change announcer url. " .
+            "If you will have questions or want additional modifications of the engine, [url=https://torrentpier.com/]visit our forum[/url] " .
+            "(you can use english, we will try to help in any case).\n\n" .
+            "If you want to help with the translations: [url=https://crowdin.com/project/torrentpier]Crowdin[/url].\n\n" .
+            "Our GitHub organization: [url=https://github.com/torrentpier]https://github.com/torrentpier[/url].\n" .
+            "Our SourceForge repository: [url=https://sourceforge.net/projects/torrentpier-engine]https://sourceforge.net/projects/torrentpier-engine[/url].\n" .
+            "Our demo website: [url=https://torrentpier.duckdns.org]https://torrentpier.duckdns.org[/url].\n\n" .
+            "We are sure that you will be able to create the best tracker available!\n" .
+            "Good luck! 😉";
 
         $this->table('bb_posts_text')->insert([
             [
