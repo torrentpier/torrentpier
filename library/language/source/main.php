@@ -1946,6 +1946,17 @@ $lang['TRACKER_CONFIG'] = 'Tracker settings';
 $lang['RELEASE_TEMPLATES'] = 'Release Templates';
 $lang['ACTIONS_LOG'] = 'Report on action';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'Active';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+
 // Index
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum Statistics';

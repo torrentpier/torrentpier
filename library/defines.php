@@ -83,6 +83,9 @@ define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
 define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip'));
 
+// Migrations table
+define('BB_MIGRATIONS', 'bb_migrations');
+
 // Tracker shared constants
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
