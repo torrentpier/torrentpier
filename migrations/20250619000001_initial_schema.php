@@ -16,7 +16,7 @@ class InitialSchema extends AbstractMigration
         // Core forum tables - InnoDB for data integrity
         $this->createForumTables();
 
-        // BitTorrent tracker tables - MyISAM for performance
+        // BitTorrent tracker tables - InnoDB for reliability
         $this->createTrackerTables();
 
         // Configuration and system tables - InnoDB
@@ -28,7 +28,7 @@ class InitialSchema extends AbstractMigration
         // User management - InnoDB
         $this->createUserTables();
 
-        // Cache and temporary tables - MyISAM (expendable)
+        // Cache and temporary tables - InnoDB
         $this->createCacheTables();
     }
 
@@ -166,9 +166,9 @@ class InitialSchema extends AbstractMigration
 
     private function createTrackerTables()
     {
-        // bb_bt_torrents - Core torrent registry (MyISAM for performance)
+        // bb_bt_torrents - Core torrent registry (InnoDB for reliability)
         $table = $this->table('bb_bt_torrents', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'topic_id'
@@ -200,9 +200,9 @@ class InitialSchema extends AbstractMigration
             ->addIndex('poster_id')
             ->create();
 
-        // bb_bt_tracker - Active peer tracking (MyISAM for high-write performance)
+        // bb_bt_tracker - Active peer tracking (InnoDB for reliability)
         $table = $this->table('bb_bt_tracker', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'peer_hash'
@@ -258,15 +258,15 @@ class InitialSchema extends AbstractMigration
             ->addIndex('auth_key', ['unique' => true])
             ->create();
 
-        // Snapshot tables - expendable, use MyISAM
+        // Snapshot tables
         $this->createSnapshotTables();
     }
 
     private function createSnapshotTables()
     {
-        // bb_bt_tracker_snap - Tracker snapshot (expendable)
+        // bb_bt_tracker_snap - Tracker snapshot
         $table = $this->table('bb_bt_tracker_snap', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'topic_id'
@@ -279,9 +279,9 @@ class InitialSchema extends AbstractMigration
             ->addColumn('completed', 'integer', ['limit' => 10, 'default' => 0])
             ->create();
 
-        // bb_bt_dlstatus_snap - Download status snapshot (expendable)
+        // bb_bt_dlstatus_snap - Download status snapshot
         $table = $this->table('bb_bt_dlstatus_snap', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false
         ]);
@@ -291,9 +291,9 @@ class InitialSchema extends AbstractMigration
             ->addIndex('topic_id')
             ->create();
 
-        // buf_topic_view - Topic view buffer (expendable)
+        // buf_topic_view - Topic view buffer
         $table = $this->table('buf_topic_view', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'topic_id'
@@ -302,9 +302,9 @@ class InitialSchema extends AbstractMigration
             ->addColumn('topic_views', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
             ->create();
 
-        // buf_last_seeder - Last seeder buffer (expendable)
+        // buf_last_seeder - Last seeder buffer
         $table = $this->table('buf_last_seeder', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'topic_id'
@@ -541,7 +541,7 @@ class InitialSchema extends AbstractMigration
 
     private function createCacheTables()
     {
-        // Additional tracker-related tables that are more expendable
+        // Additional tracker-related tables
         $tables = [
             'bb_bt_dlstatus',
             'bb_bt_torstat',
@@ -552,7 +552,7 @@ class InitialSchema extends AbstractMigration
             'bb_bt_user_settings'
         ];
 
-        // Create these tables with appropriate engines
+        // Create these tables with InnoDB engine
         $this->createRemainingTrackerTables();
 
         // Create remaining system tables
@@ -590,7 +590,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_tor_dl_stat - Torrent download statistics
         $table = $this->table('bb_bt_tor_dl_stat', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => ['topic_id', 'user_id']
@@ -605,7 +605,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_last_torstat - Last torrent statistics
         $table = $this->table('bb_bt_last_torstat', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => ['topic_id', 'user_id']
@@ -623,7 +623,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_last_userstat - Last user statistics
         $table = $this->table('bb_bt_last_userstat', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'user_id'
@@ -639,7 +639,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_bt_torhelp - Torrent help system
         $table = $this->table('bb_bt_torhelp', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'user_id'
@@ -717,7 +717,7 @@ class InitialSchema extends AbstractMigration
     {
         // bb_posts_search - Search index for posts
         $table = $this->table('bb_posts_search', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'post_id'
@@ -731,7 +731,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_posts_html - Cached HTML posts
         $table = $this->table('bb_posts_html', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'post_id'
@@ -743,7 +743,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_search_results - Search result cache
         $table = $this->table('bb_search_results', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => ['session_id', 'search_type']
@@ -758,7 +758,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_search_rebuild - Search rebuild status
         $table = $this->table('bb_search_rebuild', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => 'rebuild_session_id'
@@ -835,7 +835,7 @@ class InitialSchema extends AbstractMigration
     {
         // bb_log - Action logging
         $table = $this->table('bb_log', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false
         ]);
@@ -978,7 +978,7 @@ class InitialSchema extends AbstractMigration
 
         // bb_auth_access_snap
         $table = $this->table('bb_auth_access_snap', [
-            'engine' => 'MyISAM',
+            'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false,
             'primary_key' => ['user_id', 'forum_id']

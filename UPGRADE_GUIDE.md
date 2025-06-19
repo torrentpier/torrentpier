@@ -30,9 +30,9 @@ TorrentPier now includes a modern database migration system using **Phinx** (fro
 ### Migration Architecture
 
 #### Engine Strategy
-- **InnoDB**: Used for data integrity (users, posts, configuration, attachments)
-- **MyISAM**: Used for performance-critical tracker tables (`bb_bt_tracker`, snapshots)
-- **Expendable Tables**: Buffer and snapshot tables (`*_snap`, `buf_*`) can be dropped/recreated
+- **InnoDB**: Used for all tables for maximum data integrity and reliability
+- **ACID Compliance**: Full transaction support and crash recovery for all data
+- **Row-Level Locking**: Better concurrency for high-traffic operations
 
 #### Directory Structure
 ```
@@ -101,19 +101,19 @@ class AddNewFeatureTable extends AbstractMigration
             'engine' => 'InnoDB',
             'collation' => 'utf8mb4_unicode_ci'
         ]);
-        
+
         $table->addColumn('name', 'string', ['limit' => 100])
               ->addColumn('created_at', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
               ->addIndex('name')
               ->create();
     }
-    
+
     // Optional: explicit up/down methods for complex operations
     public function up()
     {
         // Complex data migration logic
     }
-    
+
     public function down()
     {
         // Rollback logic
@@ -123,22 +123,22 @@ class AddNewFeatureTable extends AbstractMigration
 
 #### Engine Guidelines
 ```php
-// Use InnoDB for data integrity
+// Use InnoDB for all tables for maximum reliability
 $table = $this->table('bb_user_posts', [
     'engine' => 'InnoDB',
     'collation' => 'utf8mb4_unicode_ci'
 ]);
 
-// Use MyISAM for high-performance tracker tables
+// All tracker tables also use InnoDB for data integrity
 $table = $this->table('bb_bt_peer_stats', [
-    'engine' => 'MyISAM',
+    'engine' => 'InnoDB',
     'collation' => 'utf8mb4_unicode_ci'
 ]);
 
-// Expendable tables can be dropped without backup
+// Buffer tables use InnoDB for consistency and reliability
 public function up() {
     $this->execute('DROP TABLE IF EXISTS buf_temp_data');
-    // Recreate with new structure
+    // Recreate with new structure using InnoDB
 }
 ```
 
@@ -160,16 +160,16 @@ For complex data transformations, create external scripts:
 
 ```php
 // migrations/YYYYMMDDHHMMSS_complex_data_migration.php
-class ComplexDataMigration extends AbstractMigration 
+class ComplexDataMigration extends AbstractMigration
 {
     public function up()
     {
         $this->output->writeln('Running complex data migration...');
-        
+
         // Call external script for complex operations
         $result = shell_exec('php ' . __DIR__ . '/../scripts/migrate_torrent_data.php');
         $this->output->writeln($result);
-        
+
         if (strpos($result, 'ERROR') !== false) {
             throw new Exception('Complex migration failed');
         }
@@ -263,7 +263,7 @@ php vendor/bin/phinx migrate
 The legacy `install/sql/mysql.sql` approach has been replaced by migrations:
 
 - ✅ **New installations**: Use migrations automatically
-- ✅ **Development workflow**: Create migrations for all schema changes  
+- ✅ **Development workflow**: Create migrations for all schema changes
 - ✅ **Version control**: All schema changes tracked in Git
 - ❌ **Direct SQL imports**: No longer used for new installations
 
@@ -303,7 +303,7 @@ php vendor/bin/phinx init
 # Mark the schema migration as applied without running it
 php vendor/bin/phinx migrate --fake --target=20250619000001
 
-# Mark the data seeding migration as applied without running it  
+# Mark the data seeding migration as applied without running it
 php vendor/bin/phinx migrate --fake --target=20250619000002
 ```
 
@@ -331,8 +331,8 @@ CREATE TABLE IF NOT EXISTS bb_migrations (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Mark initial migrations as applied
-INSERT INTO bb_migrations (version, migration_name, start_time, end_time, breakpoint) 
-VALUES 
+INSERT INTO bb_migrations (version, migration_name, start_time, end_time, breakpoint)
+VALUES
 ('20250619000001', 'InitialSchema', NOW(), NOW(), 0),
 ('20250619000002', 'SeedInitialData', NOW(), NOW(), 0);
 ```
@@ -345,7 +345,7 @@ After setup, your existing installation will work exactly like a fresh installat
 # Create new migrations
 php vendor/bin/phinx create AddNewFeature
 
-# Run new migrations  
+# Run new migrations
 php vendor/bin/phinx migrate
 
 # Check status
