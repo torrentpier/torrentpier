@@ -14,20 +14,20 @@
   <a href="https://packagist.org/packages/torrentpier/torrentpier"><img src="https://img.shields.io/packagist/v/torrentpier/torrentpier" alt="Version"></a>
   <a href="https://github.com/torrentpier/torrentpier/releases"><img src="https://img.shields.io/github/release-date/torrentpier/torrentpier" alt="Last release"></a>
   <img src="https://img.shields.io/github/repo-size/torrentpier/torrentpier" alt="Size">
-  <a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img src="https://img.shields.io/badge/Deployed to TorrentPier Demo with-FTP DEPLOY ACTION-%3CCOLOR%3E?color=2b9348" alt="Deployed to TorrentPier Demo with FTP Deploy Action"></a>
+  <a href="https://github.com/SamKirkland/FTP-Deploy-Action"><img src="https://img.shields.io/badge/Deployed%20with-FTP%20DEPLOY%20ACTION-2b9348" alt="Deployed with FTP Deploy Action"></a>
 </p>
 
 ## 🐂 About TorrentPier
 
-TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced 
-architecture. In addition, we have a very helpful 
+TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced
+architecture. In addition, we have a very helpful
 [official support forum](https://torrentpier.com), where it's possible to get support and download modifications for the engine.
 
 ## 🌈 Current status
 
-TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to 
-modern specifications. If you want delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) 
-and go from there. The documentation will be translated to english in the near future, currently russian is the main language of it.
+TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to
+modern specifications. If you want to delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
+and go from there. The documentation will be translated to English in the near future; currently Russian is the main language.
 
 ## ✨ Features
 * Rich forum with browsing/moderation tools
@@ -40,7 +40,7 @@ and go from there. The documentation will be translated to english in the near f
 * Bonus points
 * Polling system
 * PM/DM system
-* Multilingual support (Russian and English is currently fully supported, with others in the future)
+* Multilingual support (Russian and English are currently fully supported, with others in the future)
 * Atom/RSS feeds
 * ... and so MUCH MORE!
 
@@ -103,9 +103,9 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 5. Create a database and import the dump located at `install/sql/mysql.sql`
 6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
 7. Provide write permissions to the specified folders:
-   * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
-   * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
-   * `sitemap`
+  * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
+  * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
+  * `sitemap`
 8. Voila! ✨
 
 > [!IMPORTANT]
@@ -114,8 +114,8 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 ### Additional steps 👣
 
 1. Edit these files:
-   * `favicon.png` (change to your own)
-   * `robots.txt` (change the addresses in lines `Host` and `Sitemap` to your own)
+  * `favicon.png` (change to your own)
+  * `robots.txt` (change the addresses in lines `Host` and `Sitemap` to your own)
 2. Log in to the forum using the **admin/admin** login/password, and finish setting up via admin panel. Don't forget to change your password!
 
 ## 🔐 Security vulnerabilities
@@ -124,13 +124,13 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 📌 Our recommendations
 
-* *It's recommended to run `cron.php`.* - For significant tracker speed increase it ay be required to replace the built-in cron.php in operating system daemon.
+* *It's recommended to run `cron.php`.* - For significant tracker speed increase it may be required to replace the built-in cron.php with an operating system daemon.
 * *Local configuration copy.* - You can override the settings using the local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors
 
-Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for 
-submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
+Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for
+submitting pull requests to us. But we are always ready to review your pull-request for compliance with
 these requirements. Just send it!
 
 <a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
@@ -141,7 +141,7 @@ Made with [contrib.rocks](https://contrib.rocks).
 
 ## 💞 Sponsoring
 
-Support this project by becoming a sponsor or a backer. 
+Support this project by becoming a sponsor or a backer.
 
 [![OpenCollective sponsors](https://opencollective.com/torrentpier/sponsors/badge.svg)](https://opencollective.com/torrentpier)
 [![OpenCollective backers](https://opencollective.com/torrentpier/backers/badge.svg)](https://opencollective.com/torrentpier)
@@ -164,7 +164,7 @@ Support this project by becoming a sponsor or a backer.
 
 ## 📦 Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags).
 
 ## 📖 License
 
