@@ -41,9 +41,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'cat_id'
         ]);
-        $table->addColumn('cat_id', 'integer', ['limit' => 5, 'signed' => false, 'identity' => true])
+        $table->addColumn('cat_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('cat_title', 'string', ['limit' => 100, 'default' => '', 'null' => false])
-            ->addColumn('cat_order', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('cat_order', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
             ->addIndex('cat_order')
             ->create();
 
@@ -54,33 +54,33 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'forum_id'
         ]);
-        $table->addColumn('forum_id', 'integer', ['limit' => 5, 'signed' => false, 'identity' => true])
-            ->addColumn('cat_id', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
+            ->addColumn('cat_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
             ->addColumn('forum_name', 'string', ['limit' => 150, 'default' => '', 'null' => false])
             ->addColumn('forum_desc', 'text', ['null' => false])
-            ->addColumn('forum_status', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
-            ->addColumn('forum_order', 'integer', ['limit' => 5, 'signed' => false, 'default' => 1, 'null' => false])
-            ->addColumn('forum_posts', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('forum_topics', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('forum_last_post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('forum_tpl_id', 'integer', ['limit' => 6, 'default' => 0, 'null' => false])
-            ->addColumn('prune_days', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('auth_view', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_read', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_post', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_reply', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_edit', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_delete', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_sticky', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_announce', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_vote', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_pollcreate', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_attachments', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('auth_download', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
+            ->addColumn('forum_status', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT(4)
+            ->addColumn('forum_order', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 1, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('forum_posts', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('forum_topics', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('forum_last_post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('forum_tpl_id', 'integer', ['limit' => 65535, 'default' => 0, 'null' => false]) // SMALLINT(6)
+            ->addColumn('prune_days', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('auth_view', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_read', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_post', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_reply', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_edit', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_delete', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_sticky', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_announce', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_vote', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_pollcreate', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_attachments', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('auth_download', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->addColumn('allow_reg_tracker', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('allow_porno_topic', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('self_moderated', 'boolean', ['default' => false, 'null' => false])
-            ->addColumn('forum_parent', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('forum_parent', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
             ->addColumn('show_on_index', 'boolean', ['default' => true, 'null' => false])
             ->addColumn('forum_display_sort', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('forum_display_order', 'boolean', ['default' => false, 'null' => false])
@@ -97,24 +97,24 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'topic_id'
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
-            ->addColumn('forum_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
+            ->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED (forum_id in original is SMALLINT(8))
             ->addColumn('topic_title', 'string', ['limit' => 250, 'default' => '', 'null' => false])
-            ->addColumn('topic_poster', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('topic_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('topic_views', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('topic_replies', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('topic_status', 'integer', ['limit' => 3, 'default' => 0, 'null' => false])
+            ->addColumn('topic_poster', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('topic_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('topic_views', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('topic_replies', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('topic_status', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->addColumn('topic_vote', 'boolean', ['default' => false, 'null' => false])
-            ->addColumn('topic_type', 'integer', ['limit' => 3, 'default' => 0, 'null' => false])
-            ->addColumn('topic_first_post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('topic_last_post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('topic_moved_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('topic_type', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('topic_first_post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('topic_last_post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('topic_moved_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('topic_attachment', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('topic_dl_type', 'boolean', ['default' => false, 'null' => false])
-            ->addColumn('topic_last_post_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('topic_show_first_post', 'boolean', ['default' => false, 'null' => false])
-            ->addColumn('topic_allow_robots', 'boolean', ['default' => false, 'null' => false])
+            ->addColumn('topic_last_post_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('topic_show_first_post', 'integer', ['limit' => 255, 'signed' => false, 'default' => 0, 'null' => false]) // TINYINT(1) UNSIGNED
+            ->addColumn('topic_allow_robots', 'integer', ['limit' => 255, 'signed' => false, 'default' => 0, 'null' => false]) // TINYINT(1) UNSIGNED
             ->addIndex('forum_id')
             ->addIndex('topic_last_post_id')
             ->addIndex('topic_last_post_time')
@@ -130,22 +130,22 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'post_id'
         ]);
-        $table->addColumn('post_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
-            ->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('forum_id', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('poster_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('post_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+        $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
+            ->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('poster_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('post_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('poster_ip', 'string', ['limit' => 42, 'default' => '0', 'null' => false])
-            ->addColumn('poster_rg_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('attach_rg_sig', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
+            ->addColumn('poster_rg_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('attach_rg_sig', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->addColumn('post_username', 'string', ['limit' => 25, 'default' => '', 'null' => false])
-            ->addColumn('post_edit_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('post_edit_count', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('post_edit_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('post_edit_count', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
             ->addColumn('post_attachment', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('user_post', 'boolean', ['default' => true, 'null' => false])
             ->addColumn('mc_comment', 'text', ['default' => '', 'null' => false])
             ->addColumn('mc_type', 'boolean', ['default' => false, 'null' => false])
-            ->addColumn('mc_user_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+            ->addColumn('mc_user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addIndex('topic_id')
             ->addIndex('poster_id')
             ->addIndex('post_time')
@@ -159,7 +159,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'post_id'
         ]);
-        $table->addColumn('post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('post_text', 'text', ['limit' => 16777215, 'null' => false]) // MEDIUMTEXT
             ->create();
     }
@@ -175,23 +175,23 @@ class InitialSchema extends AbstractMigration
         ]);
         $table->addColumn('info_hash', 'varbinary', ['limit' => 20, 'default' => '', 'null' => false])
             ->addColumn('info_hash_v2', 'varbinary', ['limit' => 32, 'default' => '', 'null' => false])
-            ->addColumn('post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('poster_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
-            ->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('forum_id', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('attach_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('poster_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
+            ->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('attach_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('size', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('reg_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('call_seed_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('complete_count', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('seeder_last_seen', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('tor_status', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
-            ->addColumn('checked_user_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('checked_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('reg_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('call_seed_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('complete_count', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('seeder_last_seen', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('tor_status', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('checked_user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('checked_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('tor_type', 'boolean', ['default' => false, 'null' => false])
-            ->addColumn('speed_up', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('speed_down', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('last_seeder_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+            ->addColumn('speed_up', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('speed_down', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('last_seeder_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addIndex('post_id', ['unique' => true])
             ->addIndex('topic_id', ['unique' => true])
             ->addIndex('attach_id', ['unique' => true])
@@ -208,23 +208,23 @@ class InitialSchema extends AbstractMigration
             'primary_key' => 'peer_hash'
         ]);
         $table->addColumn('peer_hash', 'string', ['limit' => 32, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
-            ->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('peer_id', 'string', ['limit' => 20, 'default' => '0', 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('ip', 'string', ['limit' => 42, 'null' => true])
             ->addColumn('ipv6', 'string', ['limit' => 42, 'null' => true])
-            ->addColumn('port', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('port', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
             ->addColumn('seeder', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('releaser', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('tor_type', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('uploaded', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('downloaded', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('remain', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('speed_up', 'integer', ['limit' => 11, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('speed_down', 'integer', ['limit' => 11, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('speed_up', 'integer', ['signed' => false, 'default' => 0, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
+            ->addColumn('speed_down', 'integer', ['signed' => false, 'default' => 0, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
             ->addColumn('up_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('down_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('update_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('update_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('complete_percent', 'biginteger', ['default' => 0, 'null' => false])
             ->addColumn('complete', 'boolean', ['default' => false, 'null' => false])
             ->addIndex('topic_id')
@@ -238,7 +238,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'user_id'
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('auth_key', 'char', ['limit' => 20, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
             ->addColumn('u_up_total', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('u_down_total', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
@@ -271,12 +271,12 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'topic_id'
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('seeders', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0])
-            ->addColumn('leechers', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0])
-            ->addColumn('speed_up', 'integer', ['limit' => 11, 'signed' => false, 'default' => 0])
-            ->addColumn('speed_down', 'integer', ['limit' => 11, 'signed' => false, 'default' => 0])
-            ->addColumn('completed', 'integer', ['limit' => 10, 'default' => 0])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('seeders', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('leechers', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('speed_up', 'integer', ['signed' => false, 'default' => 0, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
+            ->addColumn('speed_down', 'integer', ['signed' => false, 'default' => 0, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
+            ->addColumn('completed', 'integer', ['default' => 0, 'null' => false]) // INT(10) - using default Phinx INT
             ->create();
 
         // bb_bt_dlstatus_snap - Download status snapshot
@@ -285,9 +285,9 @@ class InitialSchema extends AbstractMigration
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('dl_status', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
-            ->addColumn('users_count', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('dl_status', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('users_count', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
             ->addIndex('topic_id')
             ->create();
 
@@ -298,8 +298,8 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'topic_id'
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('topic_views', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('topic_views', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->create();
 
         // buf_last_seeder - Last seeder buffer
@@ -309,9 +309,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'topic_id'
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('seeder_last_seen', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('seeder_last_seen', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->create();
     }
 
@@ -335,20 +335,20 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'cron_id'
         ]);
-        $table->addColumn('cron_id', 'integer', ['limit' => 5, 'signed' => false, 'identity' => true])
-            ->addColumn('cron_active', 'integer', ['limit' => 4, 'default' => 1, 'null' => false])
+        $table->addColumn('cron_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
+            ->addColumn('cron_active', 'integer', ['limit' => 255, 'default' => 1, 'null' => false]) // TINYINT
             ->addColumn('cron_title', 'char', ['limit' => 120, 'default' => '', 'null' => false])
             ->addColumn('cron_script', 'char', ['limit' => 120, 'default' => '', 'null' => false])
             ->addColumn('schedule', 'enum', ['values' => ['hourly', 'daily', 'weekly', 'monthly', 'interval'], 'default' => 'daily', 'null' => false])
             ->addColumn('run_day', 'enum', ['values' => array_map('strval', range(1, 28)), 'null' => true])
-            ->addColumn('run_time', 'time', ['default' => '04:00:00', 'null' => false])
-            ->addColumn('run_order', 'integer', ['limit' => 4, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('run_time', 'time', ['default' => '04:00:00'])
+            ->addColumn('run_order', 'integer', ['limit' => 255, 'signed' => false, 'default' => 0, 'null' => false]) // TINYINT UNSIGNED
             ->addColumn('last_run', 'datetime', ['default' => '1900-01-01 00:00:00', 'null' => false])
             ->addColumn('next_run', 'datetime', ['default' => '1900-01-01 00:00:00', 'null' => false])
             ->addColumn('run_interval', 'time', ['null' => true, 'default' => '00:00:00'])
             ->addColumn('log_enabled', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('log_file', 'char', ['limit' => 120, 'default' => '', 'null' => false])
-            ->addColumn('log_sql_queries', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
+            ->addColumn('log_sql_queries', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->addColumn('disable_board', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('run_counter', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addIndex('cron_title', ['unique' => true, 'name' => 'title'])
@@ -363,12 +363,12 @@ class InitialSchema extends AbstractMigration
             'primary_key' => 'session_id'
         ]);
         $table->addColumn('session_id', 'char', ['limit' => 255, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
-            ->addColumn('session_user_id', 'integer', ['limit' => 8, 'default' => 0])
-            ->addColumn('session_start', 'integer', ['limit' => 11, 'default' => 0])
-            ->addColumn('session_time', 'integer', ['limit' => 11, 'default' => 0])
-            ->addColumn('session_ip', 'string', ['limit' => 42, 'default' => '0'])
-            ->addColumn('session_logged_in', 'boolean', ['default' => false])
-            ->addColumn('session_admin', 'integer', ['limit' => 2, 'default' => 0])
+            ->addColumn('session_user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('session_start', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('session_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('session_ip', 'string', ['limit' => 42, 'default' => '0', 'null' => false])
+            ->addColumn('session_logged_in', 'boolean', ['default' => false, 'null' => false])
+            ->addColumn('session_admin', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->create();
     }
 
@@ -381,9 +381,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['attach_id', 'post_id']
         ]);
-        $table->addColumn('attach_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_id_1', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+        $table->addColumn('attach_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('user_id_1', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->create();
 
         // bb_attachments_desc
@@ -393,15 +393,15 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'attach_id'
         ]);
-        $table->addColumn('attach_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
+        $table->addColumn('attach_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('physical_filename', 'string', ['limit' => 255, 'default' => '', 'null' => false])
             ->addColumn('real_filename', 'string', ['limit' => 255, 'default' => '', 'null' => false])
-            ->addColumn('download_count', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('download_count', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('comment', 'string', ['limit' => 255, 'default' => '', 'null' => false])
             ->addColumn('extension', 'string', ['limit' => 100, 'default' => '', 'null' => false])
             ->addColumn('mimetype', 'string', ['limit' => 100, 'default' => '', 'null' => false])
             ->addColumn('filesize', 'integer', ['limit' => 20, 'default' => 0, 'null' => false])
-            ->addColumn('filetime', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('filetime', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('thumbnail', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('tracker_status', 'boolean', ['default' => false, 'null' => false])
             ->addIndex('filetime')
@@ -416,10 +416,10 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'ext_id'
         ]);
-        $table->addColumn('ext_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
-            ->addColumn('group_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0])
-            ->addColumn('extension', 'string', ['limit' => 100, 'default' => ''])
-            ->addColumn('comment', 'string', ['limit' => 100, 'default' => ''])
+        $table->addColumn('ext_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
+            ->addColumn('group_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('extension', 'string', ['limit' => 100, 'default' => '', 'null' => false])
+            ->addColumn('comment', 'string', ['limit' => 100, 'default' => '', 'null' => false])
             ->create();
 
         // bb_extension_groups
@@ -429,14 +429,14 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'group_id'
         ]);
-        $table->addColumn('group_id', 'integer', ['limit' => 8, 'identity' => true])
-            ->addColumn('group_name', 'string', ['limit' => 20, 'default' => ''])
-            ->addColumn('cat_id', 'integer', ['limit' => 2, 'default' => 0])
-            ->addColumn('allow_group', 'boolean', ['default' => false])
-            ->addColumn('download_mode', 'integer', ['limit' => 1, 'signed' => false, 'default' => 1])
-            ->addColumn('upload_icon', 'string', ['limit' => 100, 'default' => ''])
-            ->addColumn('max_filesize', 'integer', ['limit' => 20, 'default' => 0])
-            ->addColumn('forum_permissions', 'text')
+        $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'identity' => true]) // MEDIUMINT
+            ->addColumn('group_name', 'string', ['limit' => 20, 'default' => '', 'null' => false])
+            ->addColumn('cat_id', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('allow_group', 'boolean', ['default' => false, 'null' => false])
+            ->addColumn('download_mode', 'integer', ['limit' => 255, 'signed' => false, 'default' => 1, 'null' => false]) // TINYINT UNSIGNED
+            ->addColumn('upload_icon', 'string', ['limit' => 100, 'default' => '', 'null' => false])
+            ->addColumn('max_filesize', 'integer', ['limit' => 20, 'default' => 0, 'null' => false])
+            ->addColumn('forum_permissions', 'text', ['null' => false])
             ->create();
     }
 
@@ -449,25 +449,25 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'user_id'
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 8, 'identity' => true])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'identity' => true]) // MEDIUMINT
             ->addColumn('user_active', 'boolean', ['default' => true, 'null' => false])
             ->addColumn('username', 'string', ['limit' => 255, 'default' => '', 'null' => false])
             ->addColumn('user_password', 'string', ['limit' => 255, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
-            ->addColumn('user_session_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('user_lastvisit', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('user_session_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('user_lastvisit', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('user_last_ip', 'string', ['limit' => 42, 'default' => '0', 'null' => false])
-            ->addColumn('user_regdate', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('user_regdate', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('user_reg_ip', 'string', ['limit' => 42, 'default' => '0', 'null' => false])
-            ->addColumn('user_level', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
-            ->addColumn('user_posts', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('user_level', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
+            ->addColumn('user_posts', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('user_timezone', 'decimal', ['precision' => 5, 'scale' => 2, 'default' => 0.00, 'null' => false])
             ->addColumn('user_lang', 'string', ['limit' => 255, 'default' => 'en', 'null' => false])
-            ->addColumn('user_new_privmsg', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_unread_privmsg', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_last_privmsg', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('user_opt', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('user_rank', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('avatar_ext_id', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
+            ->addColumn('user_new_privmsg', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('user_unread_privmsg', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('user_last_privmsg', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('user_opt', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('user_rank', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('avatar_ext_id', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT(4)
             ->addColumn('user_gender', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('user_birthday', 'date', ['default' => '1900-01-01', 'null' => false])
             ->addColumn('user_email', 'string', ['limit' => 255, 'default' => '', 'null' => false])
@@ -482,7 +482,7 @@ class InitialSchema extends AbstractMigration
             ->addColumn('user_actkey', 'string', ['limit' => 255, 'default' => '', 'null' => false])
             ->addColumn('user_newpasswd', 'string', ['limit' => 255, 'default' => '', 'null' => false])
             ->addColumn('autologin_id', 'string', ['limit' => 255, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
-            ->addColumn('user_newest_pm_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+            ->addColumn('user_newest_pm_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addColumn('user_points', 'float', ['precision' => 16, 'scale' => 2, 'default' => 0.00, 'null' => false])
             ->addColumn('tpl_name', 'string', ['limit' => 255, 'default' => 'default', 'null' => false])
             ->addIndex(['username'], ['name' => 'username', 'limit' => ['username' => 10]])
@@ -497,16 +497,16 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'group_id'
         ]);
-        $table->addColumn('group_id', 'integer', ['limit' => 8, 'identity' => true])
-            ->addColumn('avatar_ext_id', 'integer', ['limit' => 15, 'default' => 0, 'null' => false])
-            ->addColumn('group_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('mod_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('group_type', 'integer', ['limit' => 4, 'default' => 1, 'null' => false])
-            ->addColumn('release_group', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
+        $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'identity' => true]) // MEDIUMINT
+            ->addColumn('avatar_ext_id', 'integer', ['default' => 0, 'null' => false]) // INT(15) - using default Phinx INT
+            ->addColumn('group_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('mod_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('group_type', 'integer', ['limit' => 255, 'default' => 1, 'null' => false]) // TINYINT
+            ->addColumn('release_group', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->addColumn('group_name', 'string', ['limit' => 40, 'default' => '', 'null' => false])
             ->addColumn('group_description', 'text', ['default' => '', 'null' => false])
             ->addColumn('group_signature', 'text', ['default' => '', 'null' => false])
-            ->addColumn('group_moderator', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+            ->addColumn('group_moderator', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addColumn('group_single_user', 'boolean', ['default' => true, 'null' => false])
             ->addIndex('group_single_user')
             ->create();
@@ -518,10 +518,10 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['group_id', 'user_id']
         ]);
-        $table->addColumn('group_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+        $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addColumn('user_pending', 'boolean', ['default' => false, 'null' => false])
-            ->addColumn('user_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('user_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addIndex('user_id')
             ->create();
 
@@ -532,7 +532,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'rank_id'
         ]);
-        $table->addColumn('rank_id', 'integer', ['limit' => 5, 'signed' => false, 'identity' => true])
+        $table->addColumn('rank_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('rank_title', 'string', ['limit' => 50, 'default' => '', 'null' => false])
             ->addColumn('rank_image', 'string', ['limit' => 255, 'default' => '', 'null' => false])
             ->addColumn('rank_style', 'string', ['limit' => 255, 'default' => '', 'null' => false])
@@ -568,8 +568,8 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['user_id', 'topic_id']
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
-            ->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
+            ->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('user_status', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('last_modified_dlstatus', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP', 'null' => false])
             ->addIndex('topic_id')
@@ -582,8 +582,8 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['topic_id', 'user_id']
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('last_modified_torstat', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP', 'null' => false])
             ->addColumn('completed', 'boolean', ['default' => false, 'null' => false])
             ->create();
@@ -595,9 +595,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['topic_id', 'user_id']
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
-            ->addColumn('attach_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
+            ->addColumn('attach_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('t_up_total', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('t_down_total', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('t_bonus_total', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
@@ -610,8 +610,8 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['topic_id', 'user_id']
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('dl_status', 'boolean', ['default' => false, 'null' => false])
             ->addColumn('up_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('down_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
@@ -628,7 +628,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'user_id'
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('up_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('down_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->addColumn('release_add', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
@@ -644,7 +644,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'user_id'
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('topic_id_csv', 'text', ['null' => false])
             ->create();
 
@@ -655,9 +655,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'user_id'
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('tor_search_set', 'text', ['null' => false])
-            ->addColumn('last_modified', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('last_modified', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->create();
 
         // bb_thx - Thanks/voting system
@@ -667,9 +667,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['topic_id', 'user_id']
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('time', 'integer', ['limit' => 11, 'default' => 0])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->create();
     }
 
@@ -690,12 +690,12 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'privmsgs_id'
         ]);
-        $table->addColumn('privmsgs_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
-            ->addColumn('privmsgs_type', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
+        $table->addColumn('privmsgs_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
+            ->addColumn('privmsgs_type', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->addColumn('privmsgs_subject', 'string', ['limit' => 255, 'default' => '', 'null' => false])
-            ->addColumn('privmsgs_from_userid', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('privmsgs_to_userid', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('privmsgs_date', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('privmsgs_from_userid', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('privmsgs_to_userid', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('privmsgs_date', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('privmsgs_ip', 'string', ['limit' => 42, 'default' => '0', 'null' => false])
             ->addIndex('privmsgs_from_userid')
             ->addIndex('privmsgs_to_userid')
@@ -708,7 +708,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'privmsgs_text_id'
         ]);
-        $table->addColumn('privmsgs_text_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('privmsgs_text_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('privmsgs_text', 'text', ['limit' => 16777215, 'null' => false]) // MEDIUMTEXT
             ->create();
     }
@@ -722,7 +722,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'post_id'
         ]);
-        $table->addColumn('post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('search_words', 'text', ['null' => false])
             ->create();
 
@@ -736,7 +736,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'post_id'
         ]);
-        $table->addColumn('post_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('post_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('post_html_time', 'timestamp', ['default' => 'CURRENT_TIMESTAMP', 'update' => 'CURRENT_TIMESTAMP', 'null' => false])
             ->addColumn('post_html', 'text', ['limit' => 16777215, 'default' => '', 'null' => false]) // MEDIUMTEXT
             ->create();
@@ -749,9 +749,9 @@ class InitialSchema extends AbstractMigration
             'primary_key' => ['session_id', 'search_type']
         ]);
         $table->addColumn('session_id', 'char', ['limit' => 255, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
-            ->addColumn('search_type', 'integer', ['limit' => 4, 'default' => 0, 'null' => false])
+            ->addColumn('search_type', 'integer', ['limit' => 255, 'default' => 0, 'null' => false]) // TINYINT
             ->addColumn('search_id', 'string', ['limit' => 255, 'collation' => 'utf8_bin', 'default' => '', 'null' => false])
-            ->addColumn('search_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('search_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('search_settings', 'text', ['null' => false])
             ->addColumn('search_array', 'text', ['null' => false])
             ->create();
@@ -763,16 +763,16 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'rebuild_session_id'
         ]);
-        $table->addColumn('rebuild_session_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
-            ->addColumn('start_post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('end_post_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('start_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('end_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('last_cycle_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('session_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('session_posts', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('session_cycles', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('search_size', 'integer', ['limit' => 10, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('rebuild_session_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
+            ->addColumn('start_post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('end_post_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('start_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('end_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('last_cycle_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('session_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('session_posts', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('session_cycles', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('search_size', 'integer', ['signed' => false, 'default' => 0, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
             ->addColumn('rebuild_session_status', 'boolean', ['default' => false, 'null' => false])
             ->create();
     }
@@ -786,7 +786,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'smilies_id'
         ]);
-        $table->addColumn('smilies_id', 'integer', ['limit' => 5, 'signed' => false, 'identity' => true])
+        $table->addColumn('smilies_id', 'integer', ['limit' => 65535, 'signed' => false, 'identity' => true]) // SMALLINT UNSIGNED
             ->addColumn('code', 'string', ['limit' => 50, 'default' => '', 'null' => false])
             ->addColumn('smile_url', 'string', ['limit' => 100, 'default' => '', 'null' => false])
             ->addColumn('emoticon', 'string', ['limit' => 75, 'default' => '', 'null' => false])
@@ -799,7 +799,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'word_id'
         ]);
-        $table->addColumn('word_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
+        $table->addColumn('word_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('word', 'char', ['limit' => 100, 'default' => '', 'null' => false])
             ->addColumn('replacement', 'char', ['limit' => 100, 'default' => '', 'null' => false])
             ->create();
@@ -811,8 +811,8 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['ban_id', 'ban_userid']
         ]);
-        $table->addColumn('ban_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
-            ->addColumn('ban_userid', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+        $table->addColumn('ban_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
+            ->addColumn('ban_userid', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addColumn('ban_reason', 'string', ['limit' => 255, 'default' => '', 'null' => false])
             ->create();
 
@@ -823,7 +823,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'disallow_id'
         ]);
-        $table->addColumn('disallow_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
+        $table->addColumn('disallow_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('disallow_username', 'string', ['limit' => 25, 'default' => '', 'null' => false])
             ->create();
 
@@ -839,16 +839,16 @@ class InitialSchema extends AbstractMigration
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false
         ]);
-        $table->addColumn('log_type_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('log_user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
+        $table->addColumn('log_type_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('log_user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
             ->addColumn('log_user_ip', 'string', ['limit' => 42, 'default' => '0', 'null' => false])
-            ->addColumn('log_forum_id', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('log_forum_id_new', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('log_topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('log_topic_id_new', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+            ->addColumn('log_forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('log_forum_id_new', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('log_topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('log_topic_id_new', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addColumn('log_topic_title', 'string', ['limit' => 250, 'default' => '', 'null' => false])
             ->addColumn('log_topic_title_new', 'string', ['limit' => 250, 'default' => '', 'null' => false])
-            ->addColumn('log_time', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('log_time', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addColumn('log_msg', 'text', ['null' => false])
             ->addIndex('log_time')
             ->create();
@@ -863,10 +863,10 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['topic_id', 'vote_id']
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 10, 'signed' => false, 'null' => false])
-            ->addColumn('vote_id', 'integer', ['limit' => 4, 'signed' => false, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['signed' => false, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
+            ->addColumn('vote_id', 'integer', ['limit' => 255, 'signed' => false, 'null' => false]) // TINYINT UNSIGNED
             ->addColumn('vote_text', 'string', ['limit' => 255, 'null' => false])
-            ->addColumn('vote_result', 'integer', ['limit' => 8, 'signed' => false, 'null' => false])
+            ->addColumn('vote_result', 'integer', ['limit' => 16777215, 'signed' => false, 'null' => false]) // MEDIUMINT UNSIGNED
             ->create();
 
         // bb_poll_users - Poll participation
@@ -876,10 +876,10 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['topic_id', 'user_id']
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 10, 'signed' => false, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 8, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['signed' => false, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'null' => false]) // MEDIUMINT
             ->addColumn('vote_ip', 'string', ['limit' => 42, 'default' => '0', 'null' => false])
-            ->addColumn('vote_dt', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('vote_dt', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->create();
 
         // bb_topics_watch - Topic watching
@@ -888,8 +888,8 @@ class InitialSchema extends AbstractMigration
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false
         ]);
-        $table->addColumn('topic_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('user_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
+        $table->addColumn('topic_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
             ->addColumn('notify_status', 'boolean', ['default' => false, 'null' => false])
             ->addIndex('topic_id')
             ->addIndex('user_id')
@@ -903,15 +903,15 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'tpl_id'
         ]);
-        $table->addColumn('tpl_id', 'integer', ['limit' => 6, 'identity' => true])
+        $table->addColumn('tpl_id', 'integer', ['limit' => 65535, 'identity' => true]) // SMALLINT(6)
             ->addColumn('tpl_name', 'string', ['limit' => 60, 'default' => '', 'null' => false])
             ->addColumn('tpl_src_form', 'text', ['null' => false])
             ->addColumn('tpl_src_title', 'text', ['null' => false])
             ->addColumn('tpl_src_msg', 'text', ['null' => false])
             ->addColumn('tpl_comment', 'text', ['null' => false])
-            ->addColumn('tpl_rules_post_id', 'integer', ['limit' => 10, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('tpl_last_edit_tm', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
-            ->addColumn('tpl_last_edit_by', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+            ->addColumn('tpl_rules_post_id', 'integer', ['signed' => false, 'default' => 0, 'null' => false]) // INT UNSIGNED (using default Phinx INT)
+            ->addColumn('tpl_last_edit_tm', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
+            ->addColumn('tpl_last_edit_by', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addIndex('tpl_name', ['unique' => true])
             ->create();
 
@@ -941,10 +941,10 @@ class InitialSchema extends AbstractMigration
             'collation' => 'utf8mb4_unicode_ci',
             'id' => false
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('group_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('quota_type', 'integer', ['limit' => 2, 'default' => 0, 'null' => false])
-            ->addColumn('quota_limit_id', 'integer', ['limit' => 8, 'signed' => false, 'default' => 0, 'null' => false])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('group_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
+            ->addColumn('quota_type', 'integer', ['limit' => 65535, 'default' => 0, 'null' => false]) // SMALLINT
+            ->addColumn('quota_limit_id', 'integer', ['limit' => 16777215, 'signed' => false, 'default' => 0, 'null' => false]) // MEDIUMINT UNSIGNED
             ->addIndex('quota_type')
             ->create();
 
@@ -955,7 +955,7 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => 'quota_limit_id'
         ]);
-        $table->addColumn('quota_limit_id', 'integer', ['limit' => 8, 'signed' => false, 'identity' => true])
+        $table->addColumn('quota_limit_id', 'integer', ['limit' => 16777215, 'signed' => false, 'identity' => true]) // MEDIUMINT UNSIGNED
             ->addColumn('quota_desc', 'string', ['limit' => 20, 'default' => '', 'null' => false])
             ->addColumn('quota_limit', 'biginteger', ['signed' => false, 'default' => 0, 'null' => false])
             ->create();
@@ -970,9 +970,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['group_id', 'forum_id']
         ]);
-        $table->addColumn('group_id', 'integer', ['limit' => 8, 'default' => 0, 'null' => false])
-            ->addColumn('forum_id', 'integer', ['limit' => 5, 'signed' => false, 'default' => 0, 'null' => false])
-            ->addColumn('forum_perm', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+        $table->addColumn('group_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT
+            ->addColumn('forum_id', 'integer', ['limit' => 65535, 'signed' => false, 'default' => 0, 'null' => false]) // SMALLINT UNSIGNED
+            ->addColumn('forum_perm', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->addIndex('forum_id')
             ->create();
 
@@ -983,9 +983,9 @@ class InitialSchema extends AbstractMigration
             'id' => false,
             'primary_key' => ['user_id', 'forum_id']
         ]);
-        $table->addColumn('user_id', 'integer', ['limit' => 9, 'default' => 0, 'null' => false])
-            ->addColumn('forum_id', 'integer', ['limit' => 6, 'default' => 0, 'null' => false])
-            ->addColumn('forum_perm', 'integer', ['limit' => 11, 'default' => 0, 'null' => false])
+        $table->addColumn('user_id', 'integer', ['limit' => 16777215, 'default' => 0, 'null' => false]) // MEDIUMINT(9)
+            ->addColumn('forum_id', 'integer', ['limit' => 65535, 'default' => 0, 'null' => false]) // SMALLINT(6)
+            ->addColumn('forum_perm', 'integer', ['default' => 0, 'null' => false]) // INT(11) - using default Phinx INT
             ->create();
     }
 
