@@ -124,7 +124,8 @@ runProcess("git tag -a \"$version\" -m \"Release $version\"");
 runProcess("git tag -v \"$version\"");
 
 // Git push
-runProcess("git push origin master");
+runProcess("git checkout v2.4");
+runProcess("git push origin v2.4");
 runProcess("git push origin $version");
 
 out("\n- Release $version has been successfully prepared, committed and pushed!", 'success');
