@@ -17,12 +17,13 @@ TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting 
 ## Key Directory Structure
 
 - `/src/` - Modern PHP classes (PSR-4 autoloaded as `TorrentPier\`)
-- `/library/` - Core application logic and legacy code  
+- `/library/` - Core application logic and legacy code
 - `/admin/` - Administrative interface
 - `/bt/` - BitTorrent tracker functionality (announce.php, scrape.php)
 - `/styles/` - Templates, CSS, JS, images
 - `/internal_data/` - Cache, logs, compiled templates
-- `/install/` - Installation scripts and SQL schema
+- `/install/` - Installation scripts and configuration examples
+- `/migrations/` - Database migration files (Phinx)
 
 ## Entry Points & Key Files
 
@@ -86,7 +87,7 @@ The project uses **StyleCI** with PSR-2 preset for code style enforcement. Style
 
 ### CI/CD Pipeline
 - **GitHub Actions** for automated testing and deployment
-- **StyleCI** for code style enforcement  
+- **StyleCI** for code style enforcement
 - **Dependabot** for dependency updates
 - **FTP deployment** to demo environment
 
@@ -97,9 +98,23 @@ The project uses **StyleCI** with PSR-2 preset for code style enforcement. Style
 
 ## Database & Schema
 
-- MySQL schema: `/install/sql/mysql.sql`
+- **Database migrations** managed via Phinx in `/migrations/` directory
+- Initial schema: `20250619000001_initial_schema.php`
+- Initial seed data: `20250619000002_seed_initial_data.php`
 - UTF-8 (utf8mb4) character set required
 - Multiple database alias support for different components
+
+### Migration Commands
+```bash
+# Run all pending migrations
+php vendor/bin/phinx migrate --configuration=phinx.php
+
+# Check migration status
+php vendor/bin/phinx status --configuration=phinx.php
+
+# Mark migrations as applied (for existing installations)
+php vendor/bin/phinx migrate --fake --configuration=phinx.php
+```
 
 ## Legacy Compatibility Strategy
 
