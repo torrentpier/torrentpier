@@ -117,6 +117,20 @@ chmod_r(BB_ROOT . 'internal_data', 0755, 0644);
 chmod_r(BB_ROOT . 'sitemap', 0755, 0644);
 out("- Permissions successfully applied!\n", 'success');
 
+// Ask if user is a developer before installing dependencies
+$isDeveloper = false;
+echo "\nAre you a developer who needs testing tools and dev dependencies? [y/N]: ";
+if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
+    $isDeveloper = true;
+    if (!version_compare(PHP_VERSION, '8.2.0', '>=')) {
+        out("- Warning: Development dependencies require PHP 8.2+, your version is " . PHP_VERSION, 'warning');
+        out("- Some testing tools may not work properly", 'warning');
+    }
+    out("- Installing all dependencies including dev tools...", 'info');
+} else {
+    out("- Installing production dependencies only...\n", 'info');
+}
+
 // Check composer installation
 if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     out('- Hmm, it seems there are no Composer dependencies', 'info');
@@ -147,7 +161,13 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
         out('- Installing dependencies...', 'info');
         runProcess('php ' . BB_ROOT . 'composer.phar update --no-install');
         sleep(3);
-        runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
+
+        $composerFlags = '--no-interaction --no-ansi';
+        if (!$isDeveloper) {
+            $composerFlags .= ' --no-dev';
+        }
+
+        runProcess('php ' . BB_ROOT . 'composer.phar install ' . $composerFlags);
         define('COMPOSER_COMPLETED', true);
     } else {
         out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');
