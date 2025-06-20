@@ -73,7 +73,8 @@ class DatabaseDebugger
             }
 
             if ($this->dbg_enabled) {
-                $dbg['sql'] = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $this->db->cur_query);
+                $currentQuery = $this->db->cur_query ?? '';
+                $dbg['sql'] = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $currentQuery);
 
                 // Also check SQL syntax to detect Nette Explorer queries
                 if (!$this->is_nette_explorer_query && $this->detectNetteExplorerBySqlSyntax($dbg['sql'])) {
@@ -456,6 +457,7 @@ class DatabaseDebugger
                     try {
                         $result = $this->db->connection->query("EXPLAIN $query");
                         while ($row = $result->fetch()) {
+                            // Convert row to array regardless of type
                             $rowArray = (array)$row;
                             $html_table = $this->explain('add_explain_row', $html_table, $rowArray);
                         }

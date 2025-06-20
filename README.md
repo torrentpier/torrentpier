@@ -128,6 +128,20 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 
 If you discover a security vulnerability within TorrentPier, please follow our [security policy](https://github.com/torrentpier/torrentpier/security/policy), so we can address it promptly.
 
+## 🧪 Testing
+
+TorrentPier includes a comprehensive testing suite built with **Pest PHP**. Run tests to ensure code quality and system reliability:
+
+```shell
+# Run all tests
+./vendor/bin/pest
+
+# Run with coverage
+./vendor/bin/pest --coverage
+```
+
+For detailed testing documentation, see [tests/README.md](tests/README.md).
+
 ## 📌 Our recommendations
 
 * *It's recommended to run `cron.php`.* - For significant tracker speed increase it may be required to replace the built-in cron.php with an operating system daemon.

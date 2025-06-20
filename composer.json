@@ -80,6 +80,7 @@
     "z4kn4fein/php-semver": "^v3.0.0"
   },
   "require-dev": {
+    "mockery/mockery": "^1.6",
     "pestphp/pest": "^3.8",
     "symfony/var-dumper": "^6.4"
   },

@@ -1243,6 +1243,17 @@ $maxFileSize = min(
 $siteName = htmlspecialchars(config()->get('sitename', 'TorrentPier'));
 ```
 
+### Testing and Quality Assurance
+```bash
+# ✅ Run tests before deploying changes
+./vendor/bin/pest
+
+# ✅ Validate test coverage for new components
+./vendor/bin/pest --coverage
+```
+
+For comprehensive testing documentation and best practices, see [tests/README.md](tests/README.md).
+
 ---
 
 **Important**: Always test the upgrade process in a staging environment before applying it to production. Keep backups of your database and files until you're confident the upgrade was successful.
