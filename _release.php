@@ -11,7 +11,7 @@ define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
-if (php_sapi_name() !== 'cli') {
+if (PHP_SAPI != 'cli') {
     die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
 }
 
