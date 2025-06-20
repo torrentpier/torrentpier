@@ -178,8 +178,13 @@ class Database
         try {
             $this->result = $this->connection->query($query);
 
-            // Initialize affected rows to 0 (most queries don't affect rows)
-            $this->last_affected_rows = 0;
+            // Update affected rows count for operations that modify data
+            // For INSERT, UPDATE, DELETE operations, use getRowCount()
+            if ($this->result instanceof ResultSet) {
+                $this->last_affected_rows = $this->result->getRowCount();
+            } else {
+                $this->last_affected_rows = 0;
+            }
         } catch (\Exception $e) {
             $this->debugger->log_error($e);
             $this->result = null;
