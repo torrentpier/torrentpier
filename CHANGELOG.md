@@ -2,6 +2,15 @@
 
 # 📖 Change Log
 
+## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/v2.4/TorrentPier-v2.4)
+
+### 📚 Documentation
+
+- Changed nightly.link url in `README.md` ([#1977](https://github.com/torrentpier/torrentpier/pull/1977)) - ([dc64426](https://github.com/torrentpier/torrentpier/commit/dc64426574087e69bc7e056a89ff367438e37344))
+- Updated `Requirements` sections in README.md ([#1975](https://github.com/torrentpier/torrentpier/pull/1975)) - ([b7bc7f9](https://github.com/torrentpier/torrentpier/commit/b7bc7f91662b050082843d18b03376dc67efa3e0))
+- Fixed some typos in `README.md` ([#1974](https://github.com/torrentpier/torrentpier/pull/1974)) - ([403fcf2](https://github.com/torrentpier/torrentpier/commit/403fcf2aca4b2d70bfca194107f4b4f5c5ba7f03))
+
+
 ## [v2.4.6](https://github.com/torrentpier/torrentpier/compare/v2.4.6-alpha.4..v2.4.6) (2025-06-19)
 
 ### 🐛 Bug Fixes
