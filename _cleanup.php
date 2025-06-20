@@ -34,6 +34,7 @@ $items = [
     '_release.php',
     'CHANGELOG.md',
     'cliff.toml',
+    'CLAUDE.md',
     'CODE_OF_CONDUCT.md',
     'CONTRIBUTING.md',
     'crowdin.yml',

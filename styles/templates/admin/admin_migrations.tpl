@@ -44,15 +44,15 @@
     </tr>
     <!-- IF SETUP_ACTION_REQUIRED -->
     <tr>
-        <td class="row1"><b>Setup Status:</b></td>
+        <td class="row1"><b>{L_MIGRATIONS_SETUP_STATUS}:</b></td>
         <td class="row2">
             <div
                 style="background: #fff3cd; padding: 8px; border: 1px solid #ffeaa7; border-radius: 4px; margin: 4px 0;">
-                <strong>Action Required:</strong> {SETUP_MESSAGE}<br>
+                <strong>{L_MIGRATIONS_ACTION_REQUIRED}:</strong> {SETUP_MESSAGE}<br>
                 <!-- IF SETUP_INSTRUCTIONS -->
-                <small><strong>Instructions:</strong> {SETUP_INSTRUCTIONS}</small><br>
+                <small><strong>{L_MIGRATIONS_INSTRUCTIONS}:</strong> {SETUP_INSTRUCTIONS}</small><br>
                 <!-- ENDIF -->
-                <small><a href="#migration-setup-guide">See setup guide below</a></small>
+                <small><a href="#migration-setup-guide">{L_MIGRATIONS_SETUP_GUIDE}</a></small>
             </div>
         </td>
     </tr>
@@ -63,21 +63,21 @@
             <!-- IF MIGRATION_CURRENT_VERSION -->
             {MIGRATION_CURRENT_VERSION}
             <!-- ELSE -->
-            <em>No migrations applied</em>
+            <em>{L_MIGRATIONS_NOT_APPLIED}</em>
             <!-- ENDIF -->
         </td>
     </tr>
     <tr>
-        <td class="row1"><b>Applied Migrations:</b></td>
+        <td class="row1"><b>{L_MIGRATIONS_APPLIED}:</b></td>
         <td class="row2">{MIGRATION_APPLIED_COUNT}</td>
     </tr>
     <tr>
-        <td class="row1"><b>Pending Migrations:</b></td>
+        <td class="row1"><b>{L_MIGRATIONS_PENDING}:</b></td>
         <td class="row2">
             <!-- IF MIGRATION_PENDING_COUNT > 0 -->
-            <span style="color: orange; font-weight: bold;">{MIGRATION_PENDING_COUNT} pending</span>
+            <span style="color: orange; font-weight: bold;">{MIGRATION_PENDING_COUNT} {L_MIGRATIONS_PENDING_COUNT}</span>
             <!-- ELSE -->
-            <span style="color: green;">All up to date</span>
+            <span style="color: green;">{L_MIGRATIONS_UP_TO_DATE}</span>
             <!-- ENDIF -->
         </td>
     </tr>
@@ -87,13 +87,13 @@
 <br/>
 <table class="forumline" cellpadding="4" cellspacing="1" border="0" width="100%">
     <tr>
-        <th class="thHead" colspan="4">Applied Migrations</th>
+        <th class="thHead" colspan="4">{L_MIGRATIONS_APPLIED}</th>
     </tr>
     <tr>
-        <td class="catHead" width="15%"><b>Version</b></td>
-        <td class="catHead" width="35%"><b>Migration Name</b></td>
-        <td class="catHead" width="25%"><b>Applied At</b></td>
-        <td class="catHead" width="25%"><b>Completed At</b></td>
+        <td class="catHead" width="15%"><b>{L_MIGRATIONS_VERSION}</b></td>
+        <td class="catHead" width="35%"><b>{L_MIGRATIONS_NAME}</b></td>
+        <td class="catHead" width="25%"><b>{L_MIGRATIONS_APPLIED_AT}</b></td>
+        <td class="catHead" width="25%"><b>{L_MIGRATIONS_COMPLETED_AT}</b></td>
     </tr>
     <!-- BEGIN applied_migrations -->
     <tr>
@@ -110,12 +110,12 @@
 <br/>
 <table class="forumline" cellpadding="4" cellspacing="1" border="0" width="100%">
     <tr>
-        <th class="thHead" colspan="3">Pending Migrations</th>
+        <th class="thHead" colspan="3">{L_MIGRATIONS_PENDING}</th>
     </tr>
     <tr>
-        <td class="catHead" width="15%"><b>Version</b></td>
-        <td class="catHead" width="35%"><b>Migration Name</b></td>
-        <td class="catHead" width="50%"><b>File</b></td>
+        <td class="catHead" width="15%"><b>{L_MIGRATIONS_VERSION}</b></td>
+        <td class="catHead" width="35%"><b>{L_MIGRATIONS_NAME}</b></td>
+        <td class="catHead" width="50%"><b>{L_MIGRATIONS_FILE}</b></td>
     </tr>
     <!-- BEGIN pending_migrations -->
     <tr>

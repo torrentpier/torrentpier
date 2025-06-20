@@ -24,7 +24,7 @@ require INC_DIR . '/functions_cli.php';
 /**
  * System requirements
  */
-define('CHECK_REQUIREMENTS', [
+const CHECK_REQUIREMENTS = [
     'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
@@ -39,7 +39,7 @@ define('CHECK_REQUIREMENTS', [
         'zip',
         'gd'
     ],
-]);
+];
 
 // Welcoming message
 out("--- TorrentPier Installer ---\n", 'info');
