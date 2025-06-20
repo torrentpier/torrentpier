@@ -188,7 +188,7 @@ class Database
             // Initialize affected rows to 0 (most queries don't affect rows)
             $this->last_affected_rows = 0;
         } catch (\Exception $e) {
-            $this->debugger->log_error();
+            $this->debugger->log_error($e);
             $this->result = null;
             $this->last_affected_rows = 0;
         }
@@ -549,9 +549,28 @@ class Database
         if ($this->connection) {
             try {
                 $pdo = $this->connection->getPdo();
+                $errorCode = $pdo->errorCode();
+                $errorInfo = $pdo->errorInfo();
+
+                // Filter out "no error" states - PDO returns '00000' when there's no error
+                if (!$errorCode || $errorCode === '00000') {
+                    return ['code' => '', 'message' => ''];
+                }
+
+                // Build meaningful error message from errorInfo array
+                // errorInfo format: [SQLSTATE, driver-specific error code, driver-specific error message]
+                $message = '';
+                if (isset($errorInfo[2]) && $errorInfo[2]) {
+                    $message = $errorInfo[2]; // Driver-specific error message is most informative
+                } elseif (isset($errorInfo[1]) && $errorInfo[1]) {
+                    $message = "Error code: " . $errorInfo[1];
+                } else {
+                    $message = "SQLSTATE: " . $errorCode;
+                }
+
                 return [
-                    'code' => $pdo->errorCode(),
-                    'message' => implode(': ', $pdo->errorInfo())
+                    'code' => $errorCode,
+                    'message' => $message
                 ];
             } catch (\Exception $e) {
                 return ['code' => $e->getCode(), 'message' => $e->getMessage()];
@@ -753,7 +772,93 @@ class Database
     public function trigger_error(string $msg = 'Database Error'): void
     {
         $error = $this->sql_error();
-        $error_msg = "$msg: " . $error['message'];
+
+        // Build a meaningful error message
+        if (!empty($error['message'])) {
+            $error_msg = "$msg: " . $error['message'];
+            if (!empty($error['code'])) {
+                $error_msg = "$msg ({$error['code']}): " . $error['message'];
+            }
+        } else {
+            // Base error message for all users
+            $error_msg = "$msg: Database operation failed";
+
+            // Only add detailed debugging information for administrators or in development mode
+            $is_admin = defined('IS_ADMIN') && IS_ADMIN;
+            $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER) || function_exists('dev');
+
+            if ($is_admin || $is_dev_mode) {
+                // Gather detailed debugging information - ONLY for admins/developers
+                $debug_info = [];
+
+                // Connection status
+                if ($this->connection) {
+                    $debug_info[] = "Connection: Active";
+                    try {
+                        $pdo = $this->connection->getPdo();
+                        if ($pdo) {
+                            $debug_info[] = "PDO: Available";
+                            $errorInfo = $pdo->errorInfo();
+                            if ($errorInfo && count($errorInfo) >= 3) {
+                                $debug_info[] = "PDO ErrorInfo: " . json_encode($errorInfo);
+                            }
+                            $debug_info[] = "PDO ErrorCode: " . $pdo->errorCode();
+                        } else {
+                            $debug_info[] = "PDO: Null";
+                        }
+                    } catch (\Exception $e) {
+                        $debug_info[] = "PDO Check Failed: " . $e->getMessage();
+                    }
+                } else {
+                    $debug_info[] = "Connection: None";
+                }
+
+                // Query information
+                if ($this->cur_query) {
+                    $debug_info[] = "Last Query: " . substr($this->cur_query, 0, 200) . (strlen($this->cur_query) > 200 ? '...' : '');
+                } else {
+                    $debug_info[] = "Last Query: None";
+                }
+
+                // Database information
+                $debug_info[] = "Database: " . ($this->selected_db ?: 'None');
+                $debug_info[] = "Server: " . $this->db_server;
+
+                // Recent queries from debug log (if available)
+                if (isset($this->debugger->dbg) && !empty($this->debugger->dbg)) {
+                    $recent_queries = array_slice($this->debugger->dbg, -3); // Last 3 queries
+                    $debug_info[] = "Recent Queries Count: " . count($recent_queries);
+                    foreach ($recent_queries as $i => $query_info) {
+                        $debug_info[] = "Query " . ($i + 1) . ": " . substr($query_info['sql'] ?? 'Unknown', 0, 100) . (strlen($query_info['sql'] ?? '') > 100 ? '...' : '');
+                    }
+                }
+
+                if ($debug_info) {
+                    $error_msg .= " [DEBUG: " . implode("; ", $debug_info) . "]";
+                }
+
+                // Log this for investigation
+                if (function_exists('bb_log')) {
+                    bb_log("Unknown Database Error Debug:\n" . implode("\n", $debug_info), 'unknown_db_errors');
+                }
+            } else {
+                // For regular users: generic message only + contact admin hint
+                $error_msg = "$msg: A database error occurred. Please contact the administrator if this problem persists.";
+
+                // Still log basic information for debugging
+                if (function_exists('bb_log')) {
+                    bb_log("Database Error (User-facing): $error_msg\nRequest: " . ($_SERVER['REQUEST_URI'] ?? 'CLI'), 'user_db_errors');
+                }
+            }
+        }
+
+        // Add query context for debugging (but only for admins/developers)
+        $is_admin = defined('IS_ADMIN') && IS_ADMIN;
+        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER) || function_exists('dev');
+
+        if ($this->cur_query && ($is_admin || $is_dev_mode)) {
+            $error_msg .= "\nQuery: " . $this->cur_query;
+        }
 
         if (function_exists('bb_die')) {
             bb_die($error_msg);
@@ -797,9 +902,9 @@ class Database
     /**
      * Log error (delegated to debugger)
      */
-    public function log_error(): void
+    public function log_error(?\Exception $exception = null): void
     {
-        $this->debugger->log_error();
+        $this->debugger->log_error($exception);
     }
 
     /**
