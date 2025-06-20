@@ -19,14 +19,14 @@
 
 ## 🐂 About TorrentPier
 
-TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced 
-architecture. In addition, we have a very helpful 
+TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced
+architecture. In addition, we have a very helpful
 [official support forum](https://torrentpier.com), where it's possible to get support and download modifications for the engine.
 
 ## 🌈 Current status
 
-TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to 
-modern specifications. If you want delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) 
+TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to
+modern specifications. If you want delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
 and go from there. The documentation will be translated to english in the near future, currently russian is the main language of it.
 
 ## ✨ Features
@@ -100,13 +100,19 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```shell
    composer install
    ```
-5. Create a database and import the dump located at `install/sql/mysql.sql`
-6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
+5. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
+6. Create a database and run migrations to set up the schema
+   ```shell
+   php vendor/bin/phinx migrate --configuration=phinx.php
+   ```
 7. Provide write permissions to the specified folders:
    * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
    * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
    * `sitemap`
 8. Voila! ✨
+
+> [!TIP]
+> You can automate steps 4-7 by running `php install.php` instead, which will guide you through the setup process interactively.
 
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general we recommend chmod **0755** for folders, and chmod **0644** for the files in them.
@@ -129,8 +135,8 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 💚 Contributing / Contributors
 
-Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for 
-submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
+Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for
+submitting pull requests to us. But we are always ready to renew your pull-request for compliance with
 these requirements. Just send it!
 
 <a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
@@ -141,7 +147,7 @@ Made with [contrib.rocks](https://contrib.rocks).
 
 ## 💞 Sponsoring
 
-Support this project by becoming a sponsor or a backer. 
+Support this project by becoming a sponsor or a backer.
 
 [![OpenCollective sponsors](https://opencollective.com/torrentpier/sponsors/badge.svg)](https://opencollective.com/torrentpier)
 [![OpenCollective backers](https://opencollective.com/torrentpier/backers/badge.svg)](https://opencollective.com/torrentpier)
@@ -164,7 +170,7 @@ Support this project by becoming a sponsor or a backer.
 
 ## 📦 Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags).
 
 ## 📖 License
 
