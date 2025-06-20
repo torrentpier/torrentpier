@@ -29,6 +29,7 @@ class DatabaseDebugger
     // Debug storage
     public array $dbg = [];
     public int $dbg_id = 0;
+    public array $legacy_queries = []; // Track queries that needed legacy compatibility fixes
 
     // Explain functionality
     public string $explain_hold = '';
@@ -359,6 +360,50 @@ class DatabaseDebugger
 
         // Also log to PHP error log for immediate access
         error_log("DETAILED: " . $log_message);
+    }
+
+    /**
+     * Log legacy query that needed automatic compatibility fix
+     */
+    public function logLegacyQuery(string $query, string $error): void
+    {
+        $legacy_entry = [
+            'query' => $query,
+            'error' => $error,
+            'source' => $this->debug_find_source(),
+            'file' => $this->debug_find_source('file'),
+            'line' => $this->debug_find_source('line'),
+            'time' => microtime(true)
+        ];
+
+        $this->legacy_queries[] = $legacy_entry;
+
+        // Mark the CURRENT debug entry as legacy instead of creating a new one
+        if ($this->dbg_enabled && !empty($this->dbg)) {
+            // Find the most recent debug entry (the one that just executed and failed)
+            $current_id = $this->dbg_id - 1;
+
+            if (isset($this->dbg[$current_id])) {
+                // Mark the existing entry as legacy
+                $this->dbg[$current_id]['is_legacy_query'] = true;
+
+                // Update the info to show it was automatically fixed
+                $original_info = $this->dbg[$current_id]['info'] ?? '';
+                $original_info_plain = $this->dbg[$current_id]['info_plain'] ?? $original_info;
+
+                $this->dbg[$current_id]['info'] = 'LEGACY COMPATIBILITY FIX APPLIED - ' . $original_info;
+                $this->dbg[$current_id]['info_plain'] = 'LEGACY COMPATIBILITY FIX APPLIED - ' . $original_info_plain;
+            }
+        }
+
+        // Log to file for permanent record
+        $msg = 'LEGACY QUERY DETECTED - NEEDS FIXING' . LOG_LF;
+        $msg .= 'Query:  ' . $query . LOG_LF;
+        $msg .= 'Error:  ' . $error . LOG_LF;
+        $msg .= 'Source: ' . $legacy_entry['source'] . LOG_LF;
+        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int)$legacy_entry['time']) . LOG_LF;
+
+        bb_log($msg, 'legacy_queries', false);
     }
 
     /**

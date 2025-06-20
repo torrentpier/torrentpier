@@ -49,6 +49,7 @@ class Database
     public float $sql_timetotal = 0;
     public float $cur_query_time = 0;
     public ?string $cur_query = null;
+    public ?string $last_query = null; // Store last executed query for error reporting
 
     public array $shutdown = [];
     public array $DBS = [];
@@ -186,6 +187,7 @@ class Database
         }
 
         $this->debugger->debug('stop');
+        $this->last_query = $this->cur_query; // Preserve for error reporting
         $this->cur_query = null;
 
         if ($this->inited) {
@@ -239,20 +241,69 @@ class Database
             return false;
         }
 
-        $row = $result->fetch();
-        if (!$row) {
-            return false;
+        try {
+            $row = $result->fetch();
+            if (!$row) {
+                return false;
+            }
+
+            // Convert Row to array for backward compatibility
+            // Nette Database Row extends ArrayHash, so we can cast it to array
+            $rowArray = (array)$row;
+
+            if ($field_name) {
+                return $rowArray[$field_name] ?? false;
+            }
+
+            return $rowArray;
+        } catch (\Exception $e) {
+            // Check if this is a duplicate column error
+            if (str_contains($e->getMessage(), 'Found duplicate columns')) {
+                // Log this as a problematic query that needs fixing
+                $this->debugger->logLegacyQuery($this->last_query ?? $this->cur_query ?? 'Unknown query', $e->getMessage());
+
+                // Automatically retry by re-executing the query with direct PDO
+                // This bypasses Nette's duplicate column check completely
+                try {
+                    // Extract the clean SQL query
+                    $cleanQuery = $this->last_query ?? $this->cur_query ?? '';
+                    // Remove Nette's debug comment
+                    $cleanQuery = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $cleanQuery);
+
+                    if (!$cleanQuery) {
+                        throw new \RuntimeException('Could not extract clean query for PDO retry');
+                    }
+
+                    // Execute directly with PDO to bypass Nette's column checking
+                    $stmt = $this->connection->getPdo()->prepare($cleanQuery);
+                    $stmt->execute();
+                    $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+                    // PDO::FETCH_ASSOC automatically handles duplicate columns by keeping the last occurrence
+                    // which matches MySQL's behavior for SELECT t.*, f.* queries
+
+                    if (!$row) {
+                        return false;
+                    }
+
+                    if ($field_name) {
+                        return $row[$field_name] ?? false;
+                    }
+
+                    return $row;
+                } catch (\Exception $retryException) {
+                    // If PDO retry also fails, log and re-throw
+                    $this->debugger->log_error($retryException);
+                    throw $retryException;
+                }
+            }
+
+            // Log the error including the query that caused it
+            $this->debugger->log_error($e);
+
+            // Re-throw the exception so it can be handled by Whoops
+            throw $e;
         }
-
-        // Convert Row to array for backward compatibility
-        // Nette Database Row extends ArrayHash, so we can cast it to array
-        $rowArray = (array)$row;
-
-        if ($field_name) {
-            return $rowArray[$field_name] ?? false;
-        }
-
-        return $rowArray;
     }
 
     /**
@@ -272,7 +323,22 @@ class Database
             $this->trigger_error();
         }
 
-        return $this->sql_fetchrow($result, $field_name);
+        try {
+            return $this->sql_fetchrow($result, $field_name);
+        } catch (\Exception $e) {
+            // Enhance the exception with query information
+            $enhancedException = new \RuntimeException(
+                "Database error during fetch_row: " . $e->getMessage() .
+                "\nProblematic Query: " . ($this->cur_query ?: $this->last_query ?: 'Unknown'),
+                $e->getCode(),
+                $e
+            );
+
+            // Log the enhanced error
+            $this->debugger->log_error($enhancedException);
+
+            throw $enhancedException;
+        }
     }
 
     /**
@@ -285,11 +351,48 @@ class Database
         }
 
         $rowset = [];
-        while ($row = $result->fetch()) {
-            // Convert Row to array for backward compatibility
-            // Nette Database Row extends ArrayHash, so we can cast it to array
-            $rowArray = (array)$row;
-            $rowset[] = $field_name ? ($rowArray[$field_name] ?? null) : $rowArray;
+
+        try {
+            while ($row = $result->fetch()) {
+                // Convert Row to array for backward compatibility
+                // Nette Database Row extends ArrayHash, so we can cast it to array
+                $rowArray = (array)$row;
+                $rowset[] = $field_name ? ($rowArray[$field_name] ?? null) : $rowArray;
+            }
+        } catch (\Exception $e) {
+            // Check if this is a duplicate column error
+            if (str_contains($e->getMessage(), 'Found duplicate columns')) {
+                // Log this as a problematic query that needs fixing
+                $this->debugger->logLegacyQuery($this->last_query ?? $this->cur_query ?? 'Unknown query', $e->getMessage());
+
+                // Automatically retry by re-executing the query with direct PDO
+                try {
+                    // Extract the clean SQL query
+                    $cleanQuery = $this->last_query ?? $this->cur_query ?? '';
+                    // Remove Nette's debug comment
+                    $cleanQuery = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $cleanQuery);
+
+                    if (!$cleanQuery) {
+                        throw new \RuntimeException('Could not extract clean query for PDO retry');
+                    }
+
+                    // Execute directly with PDO to bypass Nette's column checking
+                    $stmt = $this->connection->getPdo()->prepare($cleanQuery);
+                    $stmt->execute();
+
+                    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                        $rowset[] = $field_name ? ($row[$field_name] ?? null) : $row;
+                    }
+                } catch (\Exception $retryException) {
+                    // If PDO retry also fails, log and re-throw
+                    $this->debugger->log_error($retryException);
+                    throw $retryException;
+                }
+            } else {
+                // For other exceptions, just re-throw
+                $this->debugger->log_error($e);
+                throw $e;
+            }
         }
 
         return $rowset;

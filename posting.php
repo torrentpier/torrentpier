@@ -105,7 +105,9 @@ switch ($mode) {
         if (!$topic_id) {
             bb_die($lang['NO_TOPIC_ID']);
         }
-        $sql = "SELECT f.*, t.*
+        $sql = "SELECT
+                f.forum_id, f.forum_name, f.forum_status, f.forum_last_post_id, f.allow_reg_tracker,
+                t.topic_id, t.topic_title, t.topic_status, t.topic_type, t.topic_first_post_id, t.topic_last_post_id, t.topic_allow_robots
 			FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
@@ -119,8 +121,12 @@ switch ($mode) {
             bb_simple_die($lang['NO_POST_ID']);
         }
 
-        $select_sql = 'SELECT f.*, t.*, p.*';
-        $select_sql .= !$submit ? ', pt.*, u.username, u.user_id' : '';
+        // Use specific column names to avoid duplicate column errors
+        $select_sql = 'SELECT
+            f.forum_id, f.forum_name, f.forum_status, f.forum_last_post_id,
+            t.topic_id, t.topic_title, t.topic_status, t.topic_type, t.topic_first_post_id, t.topic_last_post_id,
+            p.post_id, p.poster_id, p.post_time, p.poster_rg_id, p.attach_rg_sig';
+        $select_sql .= !$submit ? ', pt.post_text, u.username, u.user_id' : '';
 
         $from_sql = "FROM " . BB_POSTS . " p, " . BB_TOPICS . " t, " . BB_FORUMS . " f";
         $from_sql .= !$submit ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
@@ -150,9 +156,9 @@ if ($post_info = DB()->fetch_row($sql)) {
 
     $is_auth = auth(AUTH_ALL, $forum_id, $userdata, $post_info);
 
-    if ($post_info['forum_status'] == FORUM_LOCKED && !$is_auth['auth_mod']) {
+    if ($post_info['forum_status'] == FORUM_LOCKED && !($is_auth['auth_mod'] ?? false)) {
         bb_die($lang['FORUM_LOCKED']);
-    } elseif ($mode != 'newtopic' && $mode != 'new_rel' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
+    } elseif ($mode != 'newtopic' && $mode != 'new_rel' && $post_info['topic_status'] == TOPIC_LOCKED && !($is_auth['auth_mod'] ?? false)) {
         bb_die($lang['TOPIC_LOCKED']);
     }
 
@@ -170,9 +176,9 @@ if ($post_info = DB()->fetch_row($sql)) {
         $switch_rg_sig = (bool)$post_info['attach_rg_sig'];
 
         // Can this user edit/delete the post?
-        if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
+        if ($post_info['poster_id'] != $userdata['user_id'] && !($is_auth['auth_mod'] ?? false)) {
             $auth_err = ($delete || $mode == 'delete') ? $lang['DELETE_OWN_POSTS'] : $lang['EDIT_OWN_POSTS'];
-        } elseif (!$post_data['last_post'] && !$is_auth['auth_mod'] && ($mode == 'delete' || $delete)) {
+        } elseif (!$post_data['last_post'] && !($is_auth['auth_mod'] ?? false) && ($mode == 'delete' || $delete)) {
             $auth_err = $lang['CANNOT_DELETE_REPLIED'];
         }
 
@@ -195,9 +201,10 @@ if ($post_info = DB()->fetch_row($sql)) {
 
 // The user is not authed, if they're not logged in then redirect
 // them, else show them an error message
-if (!$is_auth[$is_auth_type]) {
+if (!isset($is_auth[$is_auth_type]) || !$is_auth[$is_auth_type]) {
     if (!IS_GUEST) {
-        bb_die(sprintf($lang['SORRY_' . strtoupper($is_auth_type)], $is_auth[$is_auth_type . '_type']));
+        $auth_type_msg = isset($is_auth[$is_auth_type . '_type']) ? $is_auth[$is_auth_type . '_type'] : 'Unknown auth type';
+        bb_die(sprintf($lang['SORRY_' . strtoupper($is_auth_type)], $auth_type_msg));
     }
 
     switch ($mode) {
@@ -274,7 +281,10 @@ $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
     if ($topic_last_read = max((int)(@$tracking_topics[$topic_id]), (int)(@$tracking_forums[$forum_id]))) {
-        $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
+        $sql = "SELECT
+                p.post_id, p.poster_id, p.post_time, p.topic_id,
+                pt.post_text,
+                u.username, u.user_rank, u.user_id
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
 			WHERE p.topic_id = " . (int)$topic_id . "
 				AND u.user_id = p.poster_id
@@ -337,7 +347,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             \TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
             if (!$error_msg) {
-                $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
+                $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !($is_auth['auth_sticky'] ?? false) && !($is_auth['auth_announce'] ?? false)) ? $post_data['topic_type'] : $topic_type;
 
                 \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig, (int)$robots_indexing);
 
@@ -511,7 +521,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
     // Topic type selection
     $template->assign_block_vars('switch_type_toggle', []);
 
-    if ($is_auth['auth_sticky']) {
+    if ($is_auth['auth_sticky'] ?? false) {
         $topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_STICKY . '"';
         if (isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_STICKY || $topic_type == POST_STICKY)) {
             $topic_type_toggle .= ' checked';
@@ -519,7 +529,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
         $topic_type_toggle .= ' /> ' . $lang['POST_STICKY'] . '</label>&nbsp;&nbsp;';
     }
 
-    if ($is_auth['auth_announce']) {
+    if ($is_auth['auth_announce'] ?? false) {
         $topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_ANNOUNCE . '"';
         if (isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_ANNOUNCE || $topic_type == POST_ANNOUNCE)) {
             $topic_type_toggle .= ' checked';
@@ -534,7 +544,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
 //bt
 $topic_dl_type = $post_info['topic_dl_type'] ?? 0;
 
-if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod'])) {
+if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || ($is_auth['auth_mod'] ?? false))) {
     $sql = "
 		SELECT tor.attach_id
 		FROM " . BB_POSTS . " p
@@ -551,7 +561,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
         $dl_type_name = 'topic_dl_type';
         $dl_type_val = $topic_dl_type ? 1 : 0;
 
-        if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod']) {
+        if (!$post_info['allow_reg_tracker'] && !($is_auth['auth_mod'] ?? false)) {
             $dl_ds = ' disabled ';
             $dl_hid = '<input type="hidden" name="topic_dl_type" value="' . $dl_type_val . '" />';
             $dl_type_name = '';
@@ -640,13 +650,13 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 // Update post time
 if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
     $template->assign_vars([
-        'SHOW_UPDATE_POST_TIME' => ($is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW)),
+        'SHOW_UPDATE_POST_TIME' => (($is_auth['auth_mod'] ?? false) || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW)),
         'UPDATE_POST_TIME_CHECKED' => ($post_data['poster_post'] && ($post_info['post_time'] + 3600 * 2 > TIMENOW)),
     ]);
 }
 
 // Topic review
-if ($mode == 'reply' && $is_auth['auth_read']) {
+if ($mode == 'reply' && ($is_auth['auth_read'] ?? false)) {
     \TorrentPier\Legacy\Post::topic_review($topic_id);
 }
 
