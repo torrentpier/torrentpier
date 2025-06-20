@@ -10,16 +10,10 @@
 namespace TorrentPier\Database;
 
 use Nette\Database\Connection;
+use Nette\Database\Conventions\DiscoveredConventions;
 use Nette\Database\Explorer;
 use Nette\Database\ResultSet;
-use Nette\Database\Row;
-use Nette\Database\Table\Selection;
 use Nette\Database\Structure;
-use Nette\Database\Conventions\DiscoveredConventions;
-use TorrentPier\Database\DebugSelection;
-use TorrentPier\Database\DatabaseDebugger;
-use TorrentPier\Dev;
-use TorrentPier\Legacy\SqlDb;
 
 /**
  * Modern Database class using Nette Database with backward compatibility
@@ -64,8 +58,6 @@ class Database
      */
     private function __construct(array $cfg_values, string $server_name = 'db')
     {
-        global $DBS;
-
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
         $this->db_server = $server_name;
 
@@ -423,8 +415,8 @@ class Database
         $dont_escape = $data_already_escaped;
         $check_type = $check_data_type_in_escape;
 
-        if (empty($input_ary) || !is_array($input_ary)) {
-            $this->trigger_error(__FUNCTION__ . ' - wrong params: $input_ary');
+        if (empty($input_ary)) {
+            $this->trigger_error(__FUNCTION__ . ' - wrong params: $input_ary is empty');
         }
 
         if ($query_type == 'INSERT') {
@@ -773,6 +765,10 @@ class Database
     {
         $error = $this->sql_error();
 
+        // Define these variables early so they're available throughout the method
+        $is_admin = defined('IS_ADMIN') && IS_ADMIN;
+        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER) || function_exists('dev');
+
         // Build a meaningful error message
         if (!empty($error['message'])) {
             $error_msg = "$msg: " . $error['message'];
@@ -784,9 +780,6 @@ class Database
             $error_msg = "$msg: Database operation failed";
 
             // Only add detailed debugging information for administrators or in development mode
-            $is_admin = defined('IS_ADMIN') && IS_ADMIN;
-            $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER) || function_exists('dev');
-
             if ($is_admin || $is_dev_mode) {
                 // Gather detailed debugging information - ONLY for admins/developers
                 $debug_info = [];
@@ -853,9 +846,6 @@ class Database
         }
 
         // Add query context for debugging (but only for admins/developers)
-        $is_admin = defined('IS_ADMIN') && IS_ADMIN;
-        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER) || function_exists('dev');
-
         if ($this->cur_query && ($is_admin || $is_dev_mode)) {
             $error_msg .= "\nQuery: " . $this->cur_query;
         }
