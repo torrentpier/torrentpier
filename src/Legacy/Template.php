@@ -421,7 +421,7 @@ class Template
         // Append the variable reference.
         $varref .= "['$varname']";
 
-        $varref = "<?php echo isset($varref) ? $varref : ''; ?>";
+        $varref = "<?php echo isset($varref) ? $varref : '" . $namespace . ".$varname'; ?>";
 
         return $varref;
     }
@@ -766,7 +766,7 @@ class Template
             $code = str_replace($search, $replace, $code);
         }
         // This will handle the remaining root-level varrefs
-        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : $V[\'$1\']; ?>', $code);
+        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($V[\'$1\']) ? $V[\'$1\'] : \'$1\'); ?>', $code);
         $code = preg_replace('#\{(\$[a-z_][a-z0-9_$\->\'\"\.\[\]]*?)\}#i', '<?php echo isset($1) ? $1 : \'\'; ?>', $code);
         $code = preg_replace('#\{(\#([a-z_][a-z0-9_]*?)\#)\}#i', '<?php echo defined(\'$2\') ? $2 : \'\'; ?>', $code);
         $code = preg_replace('#\{([a-z0-9\-_]+?)\}#i', '<?php echo isset($V[\'$1\']) ? $V[\'$1\'] : \'\'; ?>', $code);
