@@ -767,7 +767,7 @@ class Database
 
         // Define these variables early so they're available throughout the method
         $is_admin = defined('IS_ADMIN') && IS_ADMIN;
-        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER) || function_exists('dev');
+        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER);
 
         // Build a meaningful error message
         if (!empty($error['message'])) {
