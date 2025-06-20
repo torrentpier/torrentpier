@@ -80,6 +80,7 @@
     "z4kn4fein/php-semver": "^v3.0.0"
   },
   "require-dev": {
+    "pestphp/pest": "^3.8",
     "symfony/var-dumper": "^6.4"
   },
   "autoload": {
@@ -87,10 +88,16 @@
       "TorrentPier\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
   "config": {
     "sort-packages": true,
     "optimize-autoloader": true,
     "allow-plugins": {
+      "pestphp/pest-plugin": true,
       "php-http/discovery": true
     }
   },
