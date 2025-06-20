@@ -19,6 +19,10 @@ class MigrationStatus
 {
     private string $migrationTable;
     private string $migrationPath;
+    private array $initialMigrations = [
+        '20250619000001',
+        '20250619000002'
+    ];
 
     public function __construct()
     {
@@ -37,7 +41,7 @@ class MigrationStatus
             // Check if migration table exists using Nette Database Explorer
             $tableExists = $this->checkMigrationTableExists();
             $setupStatus = $this->getSetupStatus();
-            
+
             if (!$tableExists) {
                 return [
                     'table_exists' => false,
@@ -105,7 +109,7 @@ class MigrationStatus
             // Check if core TorrentPier tables exist (indicates existing installation)
             $coreTablesExist = $this->checkCoreTablesExist();
             $migrationTableExists = $this->checkMigrationTableExists();
-            
+
             if (!$coreTablesExist) {
                 // Fresh installation
                 return [
@@ -115,7 +119,7 @@ class MigrationStatus
                     'action_required' => false
                 ];
             }
-            
+
             if (!$migrationTableExists) {
                 // Existing installation without migration system
                 return [
@@ -126,10 +130,10 @@ class MigrationStatus
                     'instructions' => 'Mark initial migrations as applied using --fake flag'
                 ];
             }
-            
+
             // Check if initial migrations are marked as applied
             $initialMigrationsApplied = $this->checkInitialMigrationsApplied();
-            
+
             if (!$initialMigrationsApplied) {
                 return [
                     'type' => 'existing_partial_setup',
@@ -139,7 +143,7 @@ class MigrationStatus
                     'instructions' => 'Run: php vendor/bin/phinx migrate --fake --target=20250619000002'
                 ];
             }
-            
+
             // Fully set up
             return [
                 'type' => 'fully_setup',
@@ -147,7 +151,7 @@ class MigrationStatus
                 'message' => 'Migration system fully configured',
                 'action_required' => false
             ];
-            
+
         } catch (\Exception $e) {
             return [
                 'type' => 'error',
@@ -189,10 +193,11 @@ class MigrationStatus
     private function checkInitialMigrationsApplied(): bool
     {
         try {
+            $initialMigrationsCSV = implode(',', $this->initialMigrations);
             $result = DB()->query("
                 SELECT COUNT(*) as migration_count
                 FROM {$this->migrationTable}
-                WHERE version IN ('20250619000001', '20250619000002')
+                WHERE version IN ($initialMigrationsCSV)
             ")->fetch();
 
             return $result && $result->migration_count >= 2;
