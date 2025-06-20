@@ -1946,6 +1946,31 @@ $lang['TRACKER_CONFIG'] = 'Налады трэкера';
 $lang['RELEASE_TEMPLATES'] = 'Шаблоны Выпуску';
 $lang['ACTIONS_LOG'] = 'Справаздачу аб дзеяннях';
 
+// Migrations
+$lang['MIGRATIONS_STATUS']  = 'Database Migration Status';
+$lang['MIGRATIONS_DATABASE_NAME']  = 'Database Name';
+$lang['MIGRATIONS_DATABASE_TOTAL']  = 'Total Tables';
+$lang['MIGRATIONS_DATABASE_SIZE']  = 'Database Size';
+$lang['MIGRATIONS_DATABASE_INFO']  = 'Database Information';
+$lang['MIGRATIONS_SYSTEM']  = 'Migration System';
+$lang['MIGRATIONS_NEEDS_SETUP']  = 'Needs Setup';
+$lang['MIGRATIONS_ACTIVE']  = 'Актыўны';
+$lang['MIGRATIONS_NOT_INITIALIZED']  = 'Not Initialized';
+$lang['MIGRATIONS_UP_TO_DATE']  = 'All up to date';
+$lang['MIGRATIONS_PENDING_COUNT']  = 'pending';
+$lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
+$lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
+$lang['MIGRATIONS_VERSION']  = 'Version';
+$lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
+$lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
+$lang['MIGRATIONS_CURRENT_VERSION']  = 'Current Version';
+$lang['MIGRATIONS_NOT_APPLIED']  = 'No migrations applied';
+$lang['MIGRATIONS_INSTRUCTIONS']  = 'Instructions';
+$lang['MIGRATIONS_SETUP_STATUS']  = 'Setup Status';
+$lang['MIGRATIONS_SETUP_GUIDE']  = 'See setup guide below';
+$lang['MIGRATIONS_ACTION_REQUIRED']  = 'Action Required';
+
 // Index
 $lang['MAIN_INDEX'] = 'Індэкс Форуму';
 $lang['FORUM_STATS'] = 'Статыстыка Форуму';
