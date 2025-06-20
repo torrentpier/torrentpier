@@ -13,11 +13,10 @@ if (!defined('BB_ROOT')) {
 
 define('IN_CRON', true);
 
-// Set SESSION vars
+// Set SESSION vars (optimized for InnoDB)
 DB()->query("
 	SET SESSION
-	  myisam_sort_buffer_size = 16*1024*1024
-	, bulk_insert_buffer_size =  8*1024*1024
+	  bulk_insert_buffer_size =  8*1024*1024
 	, join_buffer_size        =  4*1024*1024
 	, read_buffer_size        =  4*1024*1024
 	, read_rnd_buffer_size    =  8*1024*1024
@@ -29,8 +28,7 @@ DB()->query("
 // Restore vars at shutdown
 DB()->add_shutdown_query("
 	SET SESSION
-	  myisam_sort_buffer_size = DEFAULT
-	, bulk_insert_buffer_size = DEFAULT
+	  bulk_insert_buffer_size = DEFAULT
 	, join_buffer_size        = DEFAULT
 	, read_buffer_size        = DEFAULT
 	, read_rnd_buffer_size    = DEFAULT

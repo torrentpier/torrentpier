@@ -28,7 +28,7 @@ DB()->query("
 	CREATE TEMPORARY TABLE $tmp_attach_tbl (
 		physical_filename VARCHAR(255) NOT NULL default '',
 		KEY physical_filename (physical_filename(20))
-	) ENGINE = MyISAM DEFAULT CHARSET = utf8
+	) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4
 ");
 DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_attach_tbl");
 

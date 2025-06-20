@@ -68,6 +68,7 @@
     "nette/caching": "^3.3",
     "nette/database": "^3.2",
     "php-curl-class/php-curl-class": "^12.0.0",
+    "robmorgan/phinx": "^0.16.9",
     "samdark/sitemap": "2.4.1",
     "symfony/event-dispatcher": "^6.4",
     "symfony/filesystem": "^6.4",

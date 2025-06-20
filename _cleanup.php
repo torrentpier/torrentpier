@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 }
 
 // Check CLI mode
-if (php_sapi_name() !== 'cli') {
+if (PHP_SAPI != 'cli') {
     exit;
 }
 
@@ -34,12 +34,14 @@ $items = [
     '_release.php',
     'CHANGELOG.md',
     'cliff.toml',
+    'CLAUDE.md',
     'CODE_OF_CONDUCT.md',
     'CONTRIBUTING.md',
     'crowdin.yml',
     'HISTORY.md',
     'README.md',
-    'SECURITY.md'
+    'SECURITY.md',
+    'UPGRADE_GUIDE.md'
 ];
 
 foreach ($items as $item) {

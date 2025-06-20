@@ -19,15 +19,15 @@
 
 ## 🐂 About TorrentPier
 
-TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced 
-architecture. In addition, we have a very helpful 
+TorrentPier — bull-powered BitTorrent Public/Private tracker engine, written in PHP. High speed, simple modifications, load-balanced
+architecture. In addition, we have a very helpful
 [official support forum](https://torrentpier.com), where it's possible to get support and download modifications for the engine.
 
 ## 🌈 Current status
 
-TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to 
-modern specifications. If you want delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) 
-and go from there. The documentation will be translated to english in the near future, currently russian is the main language of it.
+TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to
+modern specifications. If you want to delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
+and go from there. The documentation will be translated to English in the near future, currently Russian is the main language.
 
 ## ✨ Features
 * Rich forum with browsing/moderation tools
@@ -40,7 +40,7 @@ and go from there. The documentation will be translated to english in the near f
 * Bonus points
 * Polling system
 * PM/DM system
-* Multilingual support (Russian and English is currently fully supported, with others in the future)
+* Multilingual support (Russian and English are currently fully supported, with others in the future)
 * Atom/RSS feeds
 * ... and so MUCH MORE!
 
@@ -56,7 +56,7 @@ and go from there. The documentation will be translated to english in the near f
 ## 🔧 Requirements
 
 * Apache / nginx ([example config](install/nginx.conf)) / caddy ([example config](install/Caddyfile))
-* MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
+* MySQL 5.5.3 or above (including MySQL 8.0+) / MariaDB 10.0 or above / Percona
 * PHP: 8.1 / 8.2 / 8.3 / 8.4
 * PHP Extensions: mbstring, gd, bcmath, intl, tidy (optional), xml, xmlwriter
 * Crontab (Recommended)
@@ -100,13 +100,19 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
    ```shell
    composer install
    ```
-5. Create a database and import the dump located at `install/sql/mysql.sql`
-6. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
+5. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
+6. Create a database and run migrations to set up the schema
+   ```shell
+   php vendor/bin/phinx migrate --configuration=phinx.php
+   ```
 7. Provide write permissions to the specified folders:
    * `data/avatars`, `data/uploads`, `data/uploads/thumbs`
    * `internal_data/atom`, `internal_data/cache`, `internal_data/log`, `internal_data/triggers`
    * `sitemap`
 8. Voila! ✨
+
+> [!TIP]
+> You can automate steps 4-7 by running `php install.php` instead, which will guide you through the setup process interactively.
 
 > [!IMPORTANT]
 > The specific settings depend on the server you are using, but in general we recommend chmod **0755** for folders, and chmod **0644** for the files in them.
@@ -124,13 +130,13 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 📌 Our recommendations
 
-* *It's recommended to run `cron.php`.* - For significant tracker speed increase it ay be required to replace the built-in cron.php in operating system daemon.
+* *It's recommended to run `cron.php`.* - For significant tracker speed increase it may be required to replace the built-in cron.php with an operating system daemon.
 * *Local configuration copy.* - You can override the settings using the local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors
 
-Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for 
-submitting pull requests to us. But we are always ready to renew your pull-request for compliance with 
+Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for
+submitting pull requests to us. But we are always ready to review your pull-request for compliance with
 these requirements. Just send it!
 
 <a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
@@ -141,7 +147,7 @@ Made with [contrib.rocks](https://contrib.rocks).
 
 ## 💞 Sponsoring
 
-Support this project by becoming a sponsor or a backer. 
+Support this project by becoming a sponsor or a backer.
 
 [![OpenCollective sponsors](https://opencollective.com/torrentpier/sponsors/badge.svg)](https://opencollective.com/torrentpier)
 [![OpenCollective backers](https://opencollective.com/torrentpier/backers/badge.svg)](https://opencollective.com/torrentpier)
@@ -164,7 +170,7 @@ Support this project by becoming a sponsor or a backer.
 
 ## 📦 Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags).
 
 ## 📖 License
 

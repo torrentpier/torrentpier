@@ -11,7 +11,7 @@ define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
-if (php_sapi_name() !== 'cli') {
+if (PHP_SAPI != 'cli') {
     die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
 }
 
@@ -24,7 +24,7 @@ require INC_DIR . '/functions_cli.php';
 /**
  * System requirements
  */
-define('CHECK_REQUIREMENTS', [
+const CHECK_REQUIREMENTS = [
     'php_min_version' => '8.1.0',
     'ext_list' => [
         'json',
@@ -39,7 +39,7 @@ define('CHECK_REQUIREMENTS', [
         'zip',
         'gd'
     ],
-]);
+];
 
 // Welcoming message
 out("--- TorrentPier Installer ---\n", 'info');
@@ -265,35 +265,26 @@ if (!empty($DB_HOST) && !empty($DB_DATABASE) && !empty($DB_USERNAME)) {
     }
     $conn->select_db($DB_DATABASE);
 
-    // Checking SQL dump
-    $dumpPath = BB_ROOT . 'install/sql/mysql.sql';
-    if (is_file($dumpPath) && is_readable($dumpPath)) {
-        out('- SQL dump file found and readable!', 'success');
-    } else {
-        out('- SQL dump file not found / not readable', 'error');
+    // Close database connection - migrations will handle their own connections
+    $conn->close();
+
+    // Run database migrations
+    out('- Setting up database using migrations...', 'info');
+
+    // Check if phinx.php exists
+    if (!is_file(BB_ROOT . 'phinx.php')) {
+        out('- Migration configuration (phinx.php) not found', 'error');
         exit;
     }
 
-    // Inserting SQL dump
-    out('- Start importing SQL dump...', 'info');
-    $tempLine = '';
-    foreach (file($dumpPath) as $line) {
-        if (str_starts_with($line, '--') || $line == '') {
-            continue;
-        }
-
-        $tempLine .= $line;
-        if (str_ends_with(trim($line), ';')) {
-            if (!$conn->query($tempLine)) {
-                out("- Error performing query: $tempLine", 'error');
-                exit;
-            }
-            $tempLine = '';
-        }
+    // Run migrations
+    $migrationResult = runProcess('php vendor/bin/phinx migrate --configuration=' . BB_ROOT . 'phinx.php');
+    if ($migrationResult !== 0) {
+        out('- Database migration failed', 'error');
+        exit;
     }
 
-    $conn->close();
-    out("- Importing SQL dump completed!\n", 'success');
+    out("- Database setup completed!\n", 'success');
 
     // Autofill host in robots.txt
     $robots_txt_file = BB_ROOT . 'robots.txt';

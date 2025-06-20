@@ -22,7 +22,7 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
-          args: v2.4.5-rc.2.. --verbose
+          args: v2.4.6-alpha.4.. --verbose
         env:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}

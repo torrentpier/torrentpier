@@ -165,10 +165,23 @@ class UnifiedCacheSystem
             case 'redis':
                 // Some deprecated cache types will fall back to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+
+                // Create directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new \RuntimeException("Failed to create cache directory: $dir");
+                }
+
                 return new FileStorage($dir);
 
             case 'sqlite':
                 $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '.db';
+
+                // Create parent directory for SQLite file
+                $dbDir = dirname($dbFile);
+                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
+                    throw new \RuntimeException("Failed to create cache directory for SQLite: $dbDir");
+                }
+
                 return new SQLiteStorage($dbFile);
 
             case 'memory':
@@ -183,6 +196,12 @@ class UnifiedCacheSystem
             default:
                 // Fallback to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/' . $cache_name . '/';
+
+                // Create directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new \RuntimeException("Failed to create cache directory: $dir");
+                }
+
                 return new FileStorage($dir);
         }
     }
@@ -218,10 +237,23 @@ class UnifiedCacheSystem
             case 'redis':
                 // Some deprecated cache types will fall back to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+
+                // Create directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new \RuntimeException("Failed to create datastore directory: $dir");
+                }
+
                 return new FileStorage($dir);
 
             case 'sqlite':
                 $dbFile = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore.db';
+
+                // Create parent directory for SQLite file
+                $dbDir = dirname($dbFile);
+                if (!is_dir($dbDir) && !bb_mkdir($dbDir)) {
+                    throw new \RuntimeException("Failed to create datastore directory for SQLite: $dbDir");
+                }
+
                 return new SQLiteStorage($dbFile);
 
             case 'memory':
@@ -236,6 +268,12 @@ class UnifiedCacheSystem
             default:
                 // Fallback to file storage
                 $dir = rtrim($this->cfg['db_dir'] ?? sys_get_temp_dir() . '/cache/', '/') . '/datastore/';
+
+                // Create directory automatically using TorrentPier's bb_mkdir function
+                if (!is_dir($dir) && !bb_mkdir($dir)) {
+                    throw new \RuntimeException("Failed to create datastore directory: $dir");
+                }
+
                 return new FileStorage($dir);
         }
     }

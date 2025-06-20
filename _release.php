@@ -11,7 +11,7 @@ define('BB_ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define('BB_PATH', BB_ROOT);
 
 // Check CLI mode
-if (php_sapi_name() !== 'cli') {
+if (PHP_SAPI != 'cli') {
     die('Please run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php ' . basename(__FILE__) . '</code> in CLI mode');
 }
 
@@ -114,7 +114,7 @@ if ($bytesWritten === 0) {
 out("\n- Config file has been updated!", 'success');
 
 // Update CHANGELOG.md
-runProcess('npx git-cliff v2.4.5-rc.2.. --config cliff.toml --tag "' . $version . '" > CHANGELOG.md');
+runProcess('npx git-cliff v2.4.6-alpha.4.. --config cliff.toml --tag "' . $version . '" > CHANGELOG.md');
 
 // Git add & commit
 runProcess('git add -A && git commit -m "release: ' . escapeshellarg($version) . (!empty($versionEmoji) ? (' ' . $versionEmoji) : '') . '"');
