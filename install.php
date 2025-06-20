@@ -160,13 +160,13 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
             out("- Installing production dependencies only...\n", 'info');
         }
 
-        runProcess('php ' . BB_ROOT . 'composer.phar update --no-install');
-        sleep(3);
-
         $composerFlags = '--no-interaction --no-ansi';
         if (!$isDeveloper) {
             $composerFlags .= ' --no-dev';
         }
+
+        runProcess('php ' . BB_ROOT . 'composer.phar update --no-install ' . $composerFlags);
+        sleep(3);
 
         runProcess('php ' . BB_ROOT . 'composer.phar install ' . $composerFlags);
         define('COMPOSER_COMPLETED', true);
