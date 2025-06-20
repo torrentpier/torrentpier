@@ -1962,6 +1962,7 @@ $lang['MIGRATIONS_APPLIED']  = 'Applied Migrations';
 $lang['MIGRATIONS_PENDING']  = 'Pending Migrations';
 $lang['MIGRATIONS_VERSION']  = 'Версія';
 $lang['MIGRATIONS_NAME']  = 'Migration Name';
+$lang['MIGRATIONS_FILE']  = 'Migration File';
 $lang['MIGRATIONS_APPLIED_AT']  = 'Applied At';
 $lang['MIGRATIONS_COMPLETED_AT']  = 'Completed At';
 $lang['MIGRATIONS_CURRENT_VERSION']  = 'Поточна версія';
