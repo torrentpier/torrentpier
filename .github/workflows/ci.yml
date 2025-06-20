@@ -23,7 +23,7 @@ jobs:
         run: composer update --no-install
 
       - name: Install Composer dependencies 🪚
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
 
       - name: Get commit hash 🔗
         id: get-commit-hash
@@ -63,7 +63,7 @@ jobs:
         run: composer update --no-install
 
       - name: 🖇 Install Composer dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
