@@ -511,7 +511,8 @@ if ($post_mode) {
         }
 
         $SQL['GROUP BY'][] = "item_id";
-        $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, p.post_time ASC" : "$order $sort";
+        // Fix for MySQL only_full_group_by mode: use MAX() when ordering by post_time with GROUP BY
+        $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, MAX(p.post_time) ASC" : "$order $sort";
         $SQL['LIMIT'][] = (string)$search_limit;
 
         $items_display = fetch_search_ids($SQL);
@@ -723,7 +724,12 @@ else {
         if ($egosearch) {
             $SQL['ORDER BY'][] = 'max_post_time DESC';
         } else {
-            $SQL['ORDER BY'][] = ($order_val == $ord_posted) ? "$tbl.$time_field $sort" : "$order $sort";
+            // Fix for MySQL only_full_group_by mode: use MAX() when ordering by post_time with GROUP BY
+            if ($order_val == $ord_posted) {
+                $SQL['ORDER BY'][] = "MAX($tbl.$time_field) $sort";
+            } else {
+                $SQL['ORDER BY'][] = "$order $sort";
+            }
         }
 
         $items_display = fetch_search_ids($SQL);

@@ -33,14 +33,16 @@ $items = [
     '.styleci.yml',
     '_release.php',
     'CHANGELOG.md',
-    'cliff.toml',
     'CLAUDE.md',
+    'cliff.toml',
     'CODE_OF_CONDUCT.md',
     'CONTRIBUTING.md',
     'crowdin.yml',
     'HISTORY.md',
+    'phpunit.xml',
     'README.md',
     'SECURITY.md',
+    'tests',
     'UPGRADE_GUIDE.md'
 ];
 

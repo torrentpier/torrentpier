@@ -229,7 +229,8 @@ class DatastoreManager
         $this->_fetch_from_store();
 
         foreach ($this->queued_items as $title) {
-            if (!isset($this->data[$title]) || $this->data[$title] === false) {
+            // Only rebuild items that had true cache misses, not cached false/null values
+            if (!isset($this->data[$title]) || $this->data[$title] === '__CACHE_MISS__') {
                 $this->_build_item($title);
             }
         }
@@ -241,13 +242,13 @@ class DatastoreManager
      * Fetch items from cache store
      *
      * @return void
+     * @throws \Exception
      */
     public function _fetch_from_store(): void
     {
-        $item = null;
         if (!$items = $this->queued_items) {
             $src = $this->_debug_find_caller('enqueue');
-            trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+            throw new \Exception("Datastore: no items queued for fetching [$src]");
         }
 
         // Use bulk loading for efficiency
@@ -255,7 +256,17 @@ class DatastoreManager
         $results = $this->cacheManager->bulkLoad($keys);
 
         foreach ($items as $item) {
-            $this->data[$item] = $results[$this->cacheManager->prefix . $item] ?? false;
+            $fullKey = $this->cacheManager->prefix . $item;
+
+            // Distinguish between cache miss (null) and cached false value
+            if (array_key_exists($fullKey, $results)) {
+                // Item exists in cache (even if the value is null/false)
+                $this->data[$item] = $results[$fullKey];
+            } else {
+                // True cache miss - item not found in cache at all
+                // Use a special sentinel value to mark as "needs building"
+                $this->data[$item] = '__CACHE_MISS__';
+            }
         }
 
         $this->_updateDebugCounters();
@@ -266,15 +277,20 @@ class DatastoreManager
      *
      * @param string $title
      * @return void
+     * @throws \Exception
      */
     public function _build_item(string $title): void
     {
-        $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
-        if (isset($this->known_items[$title]) && file_exists($file)) {
-            require $file;
-        } else {
-            trigger_error("Unknown datastore item: $title", E_USER_ERROR);
+        if (!isset($this->known_items[$title])) {
+            throw new \Exception("Unknown datastore item: $title");
         }
+
+        $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
+        if (!file_exists($file)) {
+            throw new \Exception("Datastore builder script not found: $file");
+        }
+
+        require $file;
     }
 
     /**
