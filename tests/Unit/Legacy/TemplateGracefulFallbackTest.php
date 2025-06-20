@@ -103,17 +103,6 @@ afterEach(function () {
 
 describe('Template Text Compilation - Graceful Fallback', function () {
 
-    it('debugs compiled output for troubleshooting', function () {
-        $template = '{L_MISSING_KEY}';
-        $compiled = $this->template->_compile_text($template);
-
-        // Show the actual compiled output for debugging
-        expect($compiled)->toBeString();
-
-        // Print the compiled code to understand the issue
-        error_log("Compiled template: " . $compiled);
-    });
-
     it('shows missing language variables as original syntax', function () {
         $template = '{L_MISSING_KEY}';
         $compiled = $this->template->_compile_text($template);
