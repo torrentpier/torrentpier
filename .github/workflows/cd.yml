@@ -47,7 +47,7 @@ jobs:
         run: composer update --no-install
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
 
       - name: Cleanup
         run: php _cleanup.php && rm _cleanup.php
