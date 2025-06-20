@@ -101,21 +101,44 @@ afterEach(function () {
     resetGlobalState();
 });
 
+/**
+ * Execute a compiled template and return its output
+ *
+ * @param string $compiled The compiled template code
+ * @param array $variables Optional variables to set in scope (V array)
+ * @param array $additionalVars Optional additional variables to set in scope
+ * @return string The template output
+ */
+function executeTemplate(string $compiled, array $variables = [], array $additionalVars = []): string
+{
+    ob_start();
+    global $lang;
+    $L = &$lang;
+    $V = $variables;
+
+    // Set any additional variables in scope
+    foreach ($additionalVars as $name => $value) {
+        $$name = $value;
+    }
+
+    // SECURITY NOTE: eval() is used intentionally here to execute compiled template code
+    // within a controlled test environment. While eval() poses security risks in production,
+    // its use is justified in this specific unit test scenario because:
+    // 1. We're testing the legacy template compilation system that generates PHP code
+    // 2. The input is controlled and comes from our own template compiler
+    // 3. This runs in an isolated test environment, not production
+    // 4. Testing the actual execution is necessary to verify template output correctness
+    // Future maintainers: Use extreme caution with eval() and avoid it in production code
+    eval('?>' . $compiled);
+    return ob_get_clean();
+}
+
 describe('Template Text Compilation - Graceful Fallback', function () {
 
     it('shows missing language variables as original syntax', function () {
         $template = '{L_MISSING_KEY}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-
-        // Execute the compiled template properly
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled);
 
         expect($output)->toBe('L_MISSING_KEY');
     });
@@ -123,16 +146,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
     it('shows existing language variables correctly', function () {
         $template = '{L_EXISTING_KEY}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-
-        // Execute the compiled template properly
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled);
 
         expect($output)->toBe('This key exists');
     });
@@ -140,14 +154,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
     it('shows missing regular variables as original syntax', function () {
         $template = '{MISSING_VAR}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled);
 
         expect($output)->toBe('');
     });
@@ -155,14 +162,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
     it('shows existing regular variables correctly', function () {
         $template = '{EXISTING_VAR}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = ['EXISTING_VAR' => 'This variable exists'];
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled, ['EXISTING_VAR' => 'This variable exists']);
 
         expect($output)->toBe('This variable exists');
     });
@@ -170,14 +170,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
     it('shows missing constants as original syntax', function () {
         $template = '{#MISSING_CONSTANT#}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled);
 
         expect($output)->toBe('');
     });
@@ -190,14 +183,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
 
         $template = '{#TEST_CONSTANT#}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled);
 
         expect($output)->toBe('This constant exists');
     });
@@ -205,16 +191,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
     it('handles mixed existing and missing variables correctly', function () {
         $template = '{L_EXISTING_KEY} - {L_MISSING_KEY} - {EXISTING_VAR} - {MISSING_VAR}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = ['EXISTING_VAR' => 'Variable exists'];
-
-        // Execute the compiled template properly
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled, ['EXISTING_VAR' => 'Variable exists']);
 
         expect($output)->toBe('This key exists - L_MISSING_KEY - Variable exists - ');
     });
@@ -222,15 +199,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
     it('handles PHP variables correctly without fallback', function () {
         $template = '{$test_var}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-        $test_var = 'PHP variable value';
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled, [], ['test_var' => 'PHP variable value']);
 
         expect($output)->toBe('PHP variable value');
     });
@@ -238,15 +207,7 @@ describe('Template Text Compilation - Graceful Fallback', function () {
     it('handles undefined PHP variables gracefully', function () {
         $template = '{$undefined_var}';
         $compiled = $this->template->_compile_text($template);
-
-        // Extract and execute the PHP code
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-        // Note: $undefined_var is not defined
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled);
 
         // PHP variables that don't exist should show empty string (original behavior)
         expect($output)->toBe('');
@@ -262,8 +223,9 @@ describe('Template Block Variable Fallback', function () {
 
         $result = $this->template->generate_block_varref($namespace . '.', $varname);
 
-        // The result should be PHP code that shows the missing variable syntax without braces
-        expect($result)->toContain('testblock.MISSING_VAR');
+        // Verify the exact expected fallback output format string
+        $expectedFormat = "<?php echo isset(\$testblock_item['MISSING_VAR']) ? \$testblock_item['MISSING_VAR'] : 'testblock.MISSING_VAR'; ?>";
+        expect($result)->toBe($expectedFormat);
     });
 
     it('generates correct PHP code for block variable fallback', function () {
@@ -272,9 +234,9 @@ describe('Template Block Variable Fallback', function () {
 
         $result = $this->template->generate_block_varref($namespace . '.', $varname);
 
-        // Should contain the fallback syntax without braces
-        expect($result)->toContain('news.TITLE');
-        expect($result)->toContain('<?php echo isset(');
+        // Verify the exact expected fallback output format string
+        $expectedFormat = "<?php echo isset(\$news_item['TITLE']) ? \$news_item['TITLE'] : 'news.TITLE'; ?>";
+        expect($result)->toBe($expectedFormat);
     });
 
 });
@@ -316,20 +278,224 @@ describe('Real-world Example - Admin Migrations', function () {
         // The exact template that was causing the error
         $template = '<td class="catHead" width="50%"><b>{L_MIGRATIONS_FILE}</b></td>';
         $compiled = $this->template->_compile_text($template);
-
-        // Execute the compiled template
-        ob_start();
-        global $lang;
-        $L = &$lang;
-        $V = [];
-
-        // Execute the compiled template properly
-        eval('?>' . $compiled);
-        $output = ob_get_clean();
+        $output = executeTemplate($compiled);
 
         // Should show the fallback without braces instead of throwing an error
         expect($output)->toContain('L_MIGRATIONS_FILE');
         expect($output)->toContain('<td class="catHead"');
+    });
+
+});
+
+describe('Edge Cases and Robustness', function () {
+
+    it('handles empty variable names gracefully', function () {
+        $template = '{}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled);
+
+        // Empty braces should remain as literal text
+        expect($output)->toBe('{}');
+    });
+
+    it('handles variables with special characters in names', function () {
+        $template = '{VAR_WITH_UNDERSCORES} {VAR-WITH-DASHES} {VAR123NUMBERS}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'VAR_WITH_UNDERSCORES' => 'underscore value',
+            'VAR123NUMBERS' => 'number value'
+        ]);
+
+        // Verify the compiled code contains proper fallback logic for special chars
+        expect($compiled)->toContain("isset(\$V['VAR_WITH_UNDERSCORES'])");
+        expect($compiled)->toContain("isset(\$V['VAR123NUMBERS'])");
+
+        // Underscores and numbers should work, dashes might not be valid variable names
+        expect($output)->toContain('underscore value');
+        expect($output)->toContain('number value');
+    });
+
+    it('handles HTML entities and special characters in template content', function () {
+        $template = '<div>&amp; {TEST_VAR} &lt;script&gt;</div>';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, ['TEST_VAR' => 'safe content']);
+
+        // HTML entities should be preserved, variable should be substituted
+        expect($output)->toBe('<div>&amp; safe content &lt;script&gt;</div>');
+
+        // Verify fallback logic is present
+        expect($compiled)->toContain("isset(\$V['TEST_VAR'])");
+    });
+
+    it('handles quotes and escaping in variable values', function () {
+        $template = 'Value: {QUOTED_VAR}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'QUOTED_VAR' => 'Contains "quotes" and \'apostrophes\''
+        ]);
+
+        expect($output)->toBe('Value: Contains "quotes" and \'apostrophes\'');
+        expect($compiled)->toContain("isset(\$V['QUOTED_VAR'])");
+    });
+
+    it('handles very long variable names', function () {
+        $longVarName = 'VERY_LONG_VARIABLE_NAME_THAT_TESTS_BUFFER_LIMITS_AND_PARSING_' . str_repeat('X', 100);
+        $template = '{' . $longVarName . '}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [$longVarName => 'long var value']);
+
+        expect($output)->toBe('long var value');
+        expect($compiled)->toContain("isset(\$V['$longVarName'])");
+    });
+
+    it('handles nested braces and malformed syntax', function () {
+        $template = '{{NESTED}} {UNCLOSED {NORMAL_VAR} }EXTRA}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, ['NORMAL_VAR' => 'works']);
+
+        // Should handle the valid variable and leave malformed parts as literals
+        expect($output)->toContain('works');
+        expect($compiled)->toContain("isset(\$V['NORMAL_VAR'])");
+    });
+
+    it('handles empty string values with proper fallback', function () {
+        $template = 'Before:{EMPTY_VAR}:After';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, ['EMPTY_VAR' => '']);
+
+        expect($output)->toBe('Before::After');
+        expect($compiled)->toContain("isset(\$V['EMPTY_VAR'])");
+    });
+
+    it('handles null and false values correctly', function () {
+        $template = 'Null:{NULL_VAR} False:{FALSE_VAR} Zero:{ZERO_VAR}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'NULL_VAR' => null,
+            'FALSE_VAR' => false,
+            'ZERO_VAR' => 0
+        ]);
+
+        // PHP's string conversion: null='', false='', 0='0'
+        expect($output)->toBe('Null: False: Zero:0');
+        expect($compiled)->toContain("isset(\$V['NULL_VAR'])");
+        expect($compiled)->toContain("isset(\$V['FALSE_VAR'])");
+        expect($compiled)->toContain("isset(\$V['ZERO_VAR'])");
+    });
+
+    it('handles whitespace around variable names', function () {
+        $template = '{ SPACED_VAR } {NORMAL_VAR}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'SPACED_VAR' => 'should not work',
+            'NORMAL_VAR' => 'should work'
+        ]);
+
+        // Spaces inside braces should make it not match as a variable pattern
+        expect($output)->toContain('should work');
+        expect($compiled)->toContain("isset(\$V['NORMAL_VAR'])");
+    });
+
+    it('handles multiple consecutive variables', function () {
+        $template = '{VAR1}{VAR2}{VAR3}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'VAR1' => 'A',
+            'VAR2' => 'B',
+            'VAR3' => 'C'
+        ]);
+
+        expect($output)->toBe('ABC');
+        expect($compiled)->toContain("isset(\$V['VAR1'])");
+        expect($compiled)->toContain("isset(\$V['VAR2'])");
+        expect($compiled)->toContain("isset(\$V['VAR3'])");
+    });
+
+    it('handles variables with numeric suffixes', function () {
+        $template = '{VAR1} {VAR2} {VAR10} {VAR100}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'VAR1' => 'one',
+            'VAR2' => 'two',
+            'VAR10' => 'ten',
+            'VAR100' => 'hundred'
+        ]);
+
+        expect($output)->toBe('one two ten hundred');
+        expect($compiled)->toContain("isset(\$V['VAR1'])");
+        expect($compiled)->toContain("isset(\$V['VAR2'])");
+        expect($compiled)->toContain("isset(\$V['VAR10'])");
+        expect($compiled)->toContain("isset(\$V['VAR100'])");
+    });
+
+    it('handles mixed case sensitivity correctly', function () {
+        $template = '{lowercase} {UPPERCASE} {MixedCase}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'lowercase' => 'lower',
+            'UPPERCASE' => 'upper',
+            'MixedCase' => 'mixed'
+        ]);
+
+        expect($output)->toBe('lower upper mixed');
+        expect($compiled)->toContain("isset(\$V['lowercase'])");
+        expect($compiled)->toContain("isset(\$V['UPPERCASE'])");
+        expect($compiled)->toContain("isset(\$V['MixedCase'])");
+    });
+
+    it('handles language variables with special prefixes', function () {
+        global $lang;
+        $originalLang = $lang;
+
+        // Add some special test language variables
+        $lang['TEST_SPECIAL_CHARS'] = 'Special: &<>"\'';
+        $lang['TEST_UNICODE'] = 'Unicode: ñáéíóú';
+
+        $template = '{L_TEST_SPECIAL_CHARS} | {L_TEST_UNICODE} | {L_MISSING_SPECIAL}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled);
+
+        expect($output)->toBe('Special: &<>"\' | Unicode: ñáéíóú | L_MISSING_SPECIAL');
+        expect($compiled)->toContain("isset(\$L['TEST_SPECIAL_CHARS'])");
+        expect($compiled)->toContain("isset(\$L['TEST_UNICODE'])");
+        expect($compiled)->toContain("'L_MISSING_SPECIAL'");
+
+        // Restore original language array
+        $lang = $originalLang;
+    });
+
+    it('handles constants with edge case names', function () {
+        // Define some test constants with edge case names
+        if (!defined('TEST_CONST_123')) {
+            define('TEST_CONST_123', 'numeric suffix');
+        }
+        if (!defined('TEST_CONST_UNDERSCORE_')) {
+            define('TEST_CONST_UNDERSCORE_', 'trailing underscore');
+        }
+
+        $template = '{#TEST_CONST_123#} {#TEST_CONST_UNDERSCORE_#} {#UNDEFINED_CONST_EDGE#}';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled);
+
+        expect($output)->toBe('numeric suffix trailing underscore ');
+        expect($compiled)->toContain("defined('TEST_CONST_123')");
+        expect($compiled)->toContain("defined('TEST_CONST_UNDERSCORE_')");
+        expect($compiled)->toContain("defined('UNDEFINED_CONST_EDGE')");
+    });
+
+    it('handles complex nested HTML with variables', function () {
+        $template = '<table><tr><td>{CELL1}</td><td class="{CSS_CLASS}">{CELL2}</td></tr></table>';
+        $compiled = $this->template->_compile_text($template);
+        $output = executeTemplate($compiled, [
+            'CELL1' => 'First Cell',
+            'CSS_CLASS' => 'highlight',
+            'CELL2' => 'Second Cell'
+        ]);
+
+        expect($output)->toBe('<table><tr><td>First Cell</td><td class="highlight">Second Cell</td></tr></table>');
+        expect($compiled)->toContain("isset(\$V['CELL1'])");
+        expect($compiled)->toContain("isset(\$V['CSS_CLASS'])");
+        expect($compiled)->toContain("isset(\$V['CELL2'])");
     });
 
 });
