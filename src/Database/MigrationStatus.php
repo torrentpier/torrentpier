@@ -200,7 +200,7 @@ class MigrationStatus
                 WHERE version IN ($initialMigrationsCSV)
             ")->fetch();
 
-            return $result && $result->migration_count >= 2;
+            return $result && $result->migration_count >= count($this->initialMigrations);
         } catch (\Exception $e) {
             return false;
         }
