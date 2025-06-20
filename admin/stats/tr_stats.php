@@ -31,7 +31,8 @@ echo '<html><body><head></head>';
 echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center">';
 
 foreach ($sql as $i => $query) {
-    $row = mysqli_fetch_row(DB()->query($query))[0];
+    $result = DB()->fetch_row($query);
+    $row = array_values($result)[0]; // Get first column value
     $row = ($i == 2) ? humn_size($row) : $row;
     echo "<tr><td>{$lang['TR_STATS'][$i]}</td><td><b>$row</b></td>";
 }
