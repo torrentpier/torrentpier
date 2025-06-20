@@ -1,7 +1,7 @@
 <?php
 /**
  * TorrentPier Initial Schema Migration
- * Converts install/sql/mysql.sql to Phinx migration
+ * Creates essential database schema for fresh installations
  */
 
 use Phinx\Migration\AbstractMigration;
