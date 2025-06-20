@@ -39,7 +39,8 @@ $items = [
     'crowdin.yml',
     'HISTORY.md',
     'README.md',
-    'SECURITY.md'
+    'SECURITY.md',
+    'UPGRADE_GUIDE.md'
 ];
 
 foreach ($items as $item) {
