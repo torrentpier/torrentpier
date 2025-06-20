@@ -129,9 +129,9 @@ class Dev
     private function getWhoopsOnPage(): void
     {
         /**
-         * Show errors on page
+         * Show errors on page with enhanced database information
          */
-        $prettyPageHandler = new PrettyPageHandler();
+        $prettyPageHandler = new \TorrentPier\Whoops\EnhancedPrettyPageHandler();
         foreach (config()->get('whoops.blacklist', []) as $key => $secrets) {
             foreach ($secrets as $secret) {
                 $prettyPageHandler->blacklist($key, $secret);
@@ -195,9 +195,32 @@ class Dev
     public function getSqlLogInstance(): string
     {
         $log = '';
+        $totalLegacyQueries = 0;
+
+        // Check for legacy queries across all database instances
+        $server_names = \TorrentPier\Database\DatabaseFactory::getServerNames();
+        foreach ($server_names as $srv_name) {
+            try {
+                $db_obj = \TorrentPier\Database\DatabaseFactory::getInstance($srv_name);
+                if (!empty($db_obj->debugger->legacy_queries)) {
+                    $totalLegacyQueries += count($db_obj->debugger->legacy_queries);
+                }
+            } catch (\Exception $e) {
+                // Skip if server not available
+            }
+        }
+
+        // Add warning banner if legacy queries were detected
+        if ($totalLegacyQueries > 0) {
+            $log .= '<div style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 4px;">'
+                . '<strong>⚠️ Legacy Query Warning:</strong> '
+                . $totalLegacyQueries . ' quer' . ($totalLegacyQueries > 1 ? 'ies' : 'y') . ' with duplicate columns detected and automatically fixed. '
+                . 'These queries should be updated to explicitly select columns. '
+                . 'Check the legacy_queries.log file for details.'
+                . '</div>';
+        }
 
         // Get debug information from new database system
-        $server_names = \TorrentPier\Database\DatabaseFactory::getServerNames();
         foreach ($server_names as $srv_name) {
             try {
                 $db_obj = \TorrentPier\Database\DatabaseFactory::getInstance($srv_name);
@@ -262,7 +285,14 @@ class Dev
             $info_plain = !empty($dbg['info_plain']) ? $dbg['info_plain'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
             $info = !empty($dbg['info']) ? $dbg['info'] . ' [' . $dbg['src'] . ']' : $dbg['src'];
 
-            $log .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="sqlLogRow" title="' . htmlspecialchars($info_plain) . '">'
+            // Check if this is a legacy query that needed compatibility fix
+            $isLegacyQuery = !empty($dbg['is_legacy_query']);
+            $rowClass = $isLegacyQuery ? 'sqlLogRow sqlLegacyRow' : 'sqlLogRow';
+            $rowStyle = $isLegacyQuery ? ' style="background-color: #ffe6e6; border-left: 4px solid #dc3545; color: #721c24;"' : '';
+            $legacyWarning = $isLegacyQuery ? '<span style="color: #dc3545; font-weight: bold; margin-right: 8px;">[LEGACY]</span>' : '';
+
+            $log .= '<div onclick="$(this).toggleClass(\'sqlHighlight\');" class="' . $rowClass . '" title="' . htmlspecialchars($info_plain) . '"' . $rowStyle . '>'
+                . $legacyWarning
                 . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
                 . '<span class="copyElement" data-clipboard-target="#' . $id . '" title="Copy to clipboard" style="color: rgb(128,128,128); letter-spacing: -1px;">' . $perc . '</span>&nbsp;'
                 . '<span style="letter-spacing: 0;" id="' . $id . '">' . $sql . '</span>'

@@ -29,6 +29,7 @@ class DatabaseDebugger
     // Debug storage
     public array $dbg = [];
     public int $dbg_id = 0;
+    public array $legacy_queries = []; // Track queries that needed legacy compatibility fixes
 
     // Explain functionality
     public string $explain_hold = '';
@@ -278,11 +279,131 @@ class DatabaseDebugger
 
     /**
      * Log error
+     *
+     * NOTE: This method logs detailed information to FILES only (error_log, bb_log).
+     * Log files are not accessible to regular users, so detailed information is safe here.
+     * User-facing error display is handled separately with proper security checks.
      */
-    public function log_error(): void
+    public function log_error(?\Exception $exception = null): void
     {
-        $error = $this->db->sql_error();
-        error_log("Database Error: " . $error['message'] . " Query: " . $this->db->cur_query);
+        $error_details = [];
+        $error_msg = '';
+
+        if ($exception) {
+            // Use the actual exception information which is more reliable
+            $error_msg = "Database Error: " . $exception->getMessage();
+            $error_code = $exception->getCode();
+            if ($error_code) {
+                $error_msg = "Database Error ({$error_code}): " . $exception->getMessage();
+            }
+
+            // Collect detailed error information
+            $error_details[] = "Exception: " . get_class($exception);
+            $error_details[] = "Message: " . $exception->getMessage();
+            $error_details[] = "Code: " . $exception->getCode();
+            $error_details[] = "File: " . $exception->getFile() . ":" . $exception->getLine();
+
+            // Add PDO-specific details if it's a PDO exception
+            if ($exception instanceof \PDOException) {
+                $error_details[] = "PDO Error Info: " . json_encode($exception->errorInfo ?? []);
+            }
+        } else {
+            // Fallback to PDO error state (legacy behavior)
+            $error = $this->db->sql_error();
+
+            // Only log if there's an actual error (not 00000 which means "no error")
+            if (!$error['code'] || $error['code'] === '00000' || !$error['message']) {
+                return; // Don't log empty or "no error" states
+            }
+
+            $error_msg = "Database Error ({$error['code']}): " . $error['message'];
+            $error_details[] = "PDO Error Code: " . $error['code'];
+            $error_details[] = "PDO Error Message: " . $error['message'];
+        }
+
+        // Add comprehensive context for debugging
+        $error_details[] = "Query: " . ($this->db->cur_query ?: 'None');
+        $error_details[] = "Source: " . $this->debug_find_source();
+        $error_details[] = "Database: " . ($this->db->selected_db ?: 'None');
+        $error_details[] = "Server: " . $this->db->db_server;
+        $error_details[] = "Timestamp: " . date('Y-m-d H:i:s');
+        $error_details[] = "Request URI: " . ($_SERVER['REQUEST_URI'] ?? 'CLI');
+        $error_details[] = "User IP: " . ($_SERVER['REMOTE_ADDR'] ?? 'Unknown');
+
+        // Check connection status
+        try {
+            if ($this->db->connection) {
+                $error_details[] = "Connection Status: Active";
+                $pdo = $this->db->connection->getPdo();
+                $error_details[] = "PDO Connection: " . ($pdo ? 'Available' : 'Null');
+                if ($pdo) {
+                    $errorInfo = $pdo->errorInfo();
+                    $error_details[] = "Current PDO Error Info: " . json_encode($errorInfo);
+                }
+            } else {
+                $error_details[] = "Connection Status: No connection";
+            }
+        } catch (\Exception $e) {
+            $error_details[] = "Connection Check Failed: " . $e->getMessage();
+        }
+
+        // Build comprehensive log message
+        $log_message = $error_msg . "\n" . implode("\n", $error_details);
+
+        // Log to both error_log and TorrentPier's logging system
+        error_log($error_msg);
+
+        // Use TorrentPier's bb_log for better file management and organization
+        if (function_exists('bb_log')) {
+            bb_log($log_message, 'database_errors');
+        }
+
+        // Also log to PHP error log for immediate access
+        error_log("DETAILED: " . $log_message);
+    }
+
+    /**
+     * Log legacy query that needed automatic compatibility fix
+     */
+    public function logLegacyQuery(string $query, string $error): void
+    {
+        $legacy_entry = [
+            'query' => $query,
+            'error' => $error,
+            'source' => $this->debug_find_source(),
+            'file' => $this->debug_find_source('file'),
+            'line' => $this->debug_find_source('line'),
+            'time' => microtime(true)
+        ];
+
+        $this->legacy_queries[] = $legacy_entry;
+
+        // Mark the CURRENT debug entry as legacy instead of creating a new one
+        if ($this->dbg_enabled && !empty($this->dbg)) {
+            // Find the most recent debug entry (the one that just executed and failed)
+            $current_id = $this->dbg_id - 1;
+
+            if (isset($this->dbg[$current_id])) {
+                // Mark the existing entry as legacy
+                $this->dbg[$current_id]['is_legacy_query'] = true;
+
+                // Update the info to show it was automatically fixed
+                $original_info = $this->dbg[$current_id]['info'] ?? '';
+                $original_info_plain = $this->dbg[$current_id]['info_plain'] ?? $original_info;
+
+                $this->dbg[$current_id]['info'] = 'LEGACY COMPATIBILITY FIX APPLIED - ' . $original_info;
+                $this->dbg[$current_id]['info_plain'] = 'LEGACY COMPATIBILITY FIX APPLIED - ' . $original_info_plain;
+            }
+        }
+
+        // Log to file for permanent record
+        $msg = 'LEGACY QUERY DETECTED - NEEDS FIXING' . LOG_LF;
+        $msg .= 'Query:  ' . $query . LOG_LF;
+        $msg .= 'Error:  ' . $error . LOG_LF;
+        $msg .= 'Source: ' . $legacy_entry['source'] . LOG_LF;
+        $msg .= 'Time:   ' . date('Y-m-d H:i:s', (int)$legacy_entry['time']) . LOG_LF;
+
+        bb_log($msg, 'legacy_queries', false);
     }
 
     /**

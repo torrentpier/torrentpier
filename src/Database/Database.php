@@ -10,16 +10,10 @@
 namespace TorrentPier\Database;
 
 use Nette\Database\Connection;
+use Nette\Database\Conventions\DiscoveredConventions;
 use Nette\Database\Explorer;
 use Nette\Database\ResultSet;
-use Nette\Database\Row;
-use Nette\Database\Table\Selection;
 use Nette\Database\Structure;
-use Nette\Database\Conventions\DiscoveredConventions;
-use TorrentPier\Database\DebugSelection;
-use TorrentPier\Database\DatabaseDebugger;
-use TorrentPier\Dev;
-use TorrentPier\Legacy\SqlDb;
 
 /**
  * Modern Database class using Nette Database with backward compatibility
@@ -55,6 +49,7 @@ class Database
     public float $sql_timetotal = 0;
     public float $cur_query_time = 0;
     public ?string $cur_query = null;
+    public ?string $last_query = null; // Store last executed query for error reporting
 
     public array $shutdown = [];
     public array $DBS = [];
@@ -64,8 +59,6 @@ class Database
      */
     private function __construct(array $cfg_values, string $server_name = 'db')
     {
-        global $DBS;
-
         $this->cfg = array_combine($this->cfg_keys, $cfg_values);
         $this->db_server = $server_name;
 
@@ -188,12 +181,13 @@ class Database
             // Initialize affected rows to 0 (most queries don't affect rows)
             $this->last_affected_rows = 0;
         } catch (\Exception $e) {
-            $this->debugger->log_error();
+            $this->debugger->log_error($e);
             $this->result = null;
             $this->last_affected_rows = 0;
         }
 
         $this->debugger->debug('stop');
+        $this->last_query = $this->cur_query; // Preserve for error reporting
         $this->cur_query = null;
 
         if ($this->inited) {
@@ -247,20 +241,69 @@ class Database
             return false;
         }
 
-        $row = $result->fetch();
-        if (!$row) {
-            return false;
+        try {
+            $row = $result->fetch();
+            if (!$row) {
+                return false;
+            }
+
+            // Convert Row to array for backward compatibility
+            // Nette Database Row extends ArrayHash, so we can cast it to array
+            $rowArray = (array)$row;
+
+            if ($field_name) {
+                return $rowArray[$field_name] ?? false;
+            }
+
+            return $rowArray;
+        } catch (\Exception $e) {
+            // Check if this is a duplicate column error
+            if (str_contains($e->getMessage(), 'Found duplicate columns')) {
+                // Log this as a problematic query that needs fixing
+                $this->debugger->logLegacyQuery($this->last_query ?? $this->cur_query ?? 'Unknown query', $e->getMessage());
+
+                // Automatically retry by re-executing the query with direct PDO
+                // This bypasses Nette's duplicate column check completely
+                try {
+                    // Extract the clean SQL query
+                    $cleanQuery = $this->last_query ?? $this->cur_query ?? '';
+                    // Remove Nette's debug comment
+                    $cleanQuery = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $cleanQuery);
+
+                    if (!$cleanQuery) {
+                        throw new \RuntimeException('Could not extract clean query for PDO retry');
+                    }
+
+                    // Execute directly with PDO to bypass Nette's column checking
+                    $stmt = $this->connection->getPdo()->prepare($cleanQuery);
+                    $stmt->execute();
+                    $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+                    // PDO::FETCH_ASSOC automatically handles duplicate columns by keeping the last occurrence
+                    // which matches MySQL's behavior for SELECT t.*, f.* queries
+
+                    if (!$row) {
+                        return false;
+                    }
+
+                    if ($field_name) {
+                        return $row[$field_name] ?? false;
+                    }
+
+                    return $row;
+                } catch (\Exception $retryException) {
+                    // If PDO retry also fails, log and re-throw
+                    $this->debugger->log_error($retryException);
+                    throw $retryException;
+                }
+            }
+
+            // Log the error including the query that caused it
+            $this->debugger->log_error($e);
+
+            // Re-throw the exception so it can be handled by Whoops
+            throw $e;
         }
-
-        // Convert Row to array for backward compatibility
-        // Nette Database Row extends ArrayHash, so we can cast it to array
-        $rowArray = (array)$row;
-
-        if ($field_name) {
-            return $rowArray[$field_name] ?? false;
-        }
-
-        return $rowArray;
     }
 
     /**
@@ -280,7 +323,22 @@ class Database
             $this->trigger_error();
         }
 
-        return $this->sql_fetchrow($result, $field_name);
+        try {
+            return $this->sql_fetchrow($result, $field_name);
+        } catch (\Exception $e) {
+            // Enhance the exception with query information
+            $enhancedException = new \RuntimeException(
+                "Database error during fetch_row: " . $e->getMessage() .
+                "\nProblematic Query: " . ($this->cur_query ?: $this->last_query ?: 'Unknown'),
+                $e->getCode(),
+                $e
+            );
+
+            // Log the enhanced error
+            $this->debugger->log_error($enhancedException);
+
+            throw $enhancedException;
+        }
     }
 
     /**
@@ -293,11 +351,48 @@ class Database
         }
 
         $rowset = [];
-        while ($row = $result->fetch()) {
-            // Convert Row to array for backward compatibility
-            // Nette Database Row extends ArrayHash, so we can cast it to array
-            $rowArray = (array)$row;
-            $rowset[] = $field_name ? ($rowArray[$field_name] ?? null) : $rowArray;
+
+        try {
+            while ($row = $result->fetch()) {
+                // Convert Row to array for backward compatibility
+                // Nette Database Row extends ArrayHash, so we can cast it to array
+                $rowArray = (array)$row;
+                $rowset[] = $field_name ? ($rowArray[$field_name] ?? null) : $rowArray;
+            }
+        } catch (\Exception $e) {
+            // Check if this is a duplicate column error
+            if (str_contains($e->getMessage(), 'Found duplicate columns')) {
+                // Log this as a problematic query that needs fixing
+                $this->debugger->logLegacyQuery($this->last_query ?? $this->cur_query ?? 'Unknown query', $e->getMessage());
+
+                // Automatically retry by re-executing the query with direct PDO
+                try {
+                    // Extract the clean SQL query
+                    $cleanQuery = $this->last_query ?? $this->cur_query ?? '';
+                    // Remove Nette's debug comment
+                    $cleanQuery = preg_replace('#^(\s*)(/\*)(.*)(\*/)(\s*)#', '', $cleanQuery);
+
+                    if (!$cleanQuery) {
+                        throw new \RuntimeException('Could not extract clean query for PDO retry');
+                    }
+
+                    // Execute directly with PDO to bypass Nette's column checking
+                    $stmt = $this->connection->getPdo()->prepare($cleanQuery);
+                    $stmt->execute();
+
+                    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                        $rowset[] = $field_name ? ($row[$field_name] ?? null) : $row;
+                    }
+                } catch (\Exception $retryException) {
+                    // If PDO retry also fails, log and re-throw
+                    $this->debugger->log_error($retryException);
+                    throw $retryException;
+                }
+            } else {
+                // For other exceptions, just re-throw
+                $this->debugger->log_error($e);
+                throw $e;
+            }
         }
 
         return $rowset;
@@ -423,8 +518,8 @@ class Database
         $dont_escape = $data_already_escaped;
         $check_type = $check_data_type_in_escape;
 
-        if (empty($input_ary) || !is_array($input_ary)) {
-            $this->trigger_error(__FUNCTION__ . ' - wrong params: $input_ary');
+        if (empty($input_ary)) {
+            $this->trigger_error(__FUNCTION__ . ' - wrong params: $input_ary is empty');
         }
 
         if ($query_type == 'INSERT') {
@@ -549,9 +644,28 @@ class Database
         if ($this->connection) {
             try {
                 $pdo = $this->connection->getPdo();
+                $errorCode = $pdo->errorCode();
+                $errorInfo = $pdo->errorInfo();
+
+                // Filter out "no error" states - PDO returns '00000' when there's no error
+                if (!$errorCode || $errorCode === '00000') {
+                    return ['code' => '', 'message' => ''];
+                }
+
+                // Build meaningful error message from errorInfo array
+                // errorInfo format: [SQLSTATE, driver-specific error code, driver-specific error message]
+                $message = '';
+                if (isset($errorInfo[2]) && $errorInfo[2]) {
+                    $message = $errorInfo[2]; // Driver-specific error message is most informative
+                } elseif (isset($errorInfo[1]) && $errorInfo[1]) {
+                    $message = "Error code: " . $errorInfo[1];
+                } else {
+                    $message = "SQLSTATE: " . $errorCode;
+                }
+
                 return [
-                    'code' => $pdo->errorCode(),
-                    'message' => implode(': ', $pdo->errorInfo())
+                    'code' => $errorCode,
+                    'message' => $message
                 ];
             } catch (\Exception $e) {
                 return ['code' => $e->getCode(), 'message' => $e->getMessage()];
@@ -753,7 +867,91 @@ class Database
     public function trigger_error(string $msg = 'Database Error'): void
     {
         $error = $this->sql_error();
-        $error_msg = "$msg: " . $error['message'];
+
+        // Define these variables early so they're available throughout the method
+        $is_admin = defined('IS_ADMIN') && IS_ADMIN;
+        $is_dev_mode = (defined('APP_ENV') && APP_ENV === 'local') || (defined('DBG_USER') && DBG_USER);
+
+        // Build a meaningful error message
+        if (!empty($error['message'])) {
+            $error_msg = "$msg: " . $error['message'];
+            if (!empty($error['code'])) {
+                $error_msg = "$msg ({$error['code']}): " . $error['message'];
+            }
+        } else {
+            // Base error message for all users
+            $error_msg = "$msg: Database operation failed";
+
+            // Only add detailed debugging information for administrators or in development mode
+            if ($is_admin || $is_dev_mode) {
+                // Gather detailed debugging information - ONLY for admins/developers
+                $debug_info = [];
+
+                // Connection status
+                if ($this->connection) {
+                    $debug_info[] = "Connection: Active";
+                    try {
+                        $pdo = $this->connection->getPdo();
+                        if ($pdo) {
+                            $debug_info[] = "PDO: Available";
+                            $errorInfo = $pdo->errorInfo();
+                            if ($errorInfo && count($errorInfo) >= 3) {
+                                $debug_info[] = "PDO ErrorInfo: " . json_encode($errorInfo);
+                            }
+                            $debug_info[] = "PDO ErrorCode: " . $pdo->errorCode();
+                        } else {
+                            $debug_info[] = "PDO: Null";
+                        }
+                    } catch (\Exception $e) {
+                        $debug_info[] = "PDO Check Failed: " . $e->getMessage();
+                    }
+                } else {
+                    $debug_info[] = "Connection: None";
+                }
+
+                // Query information
+                if ($this->cur_query) {
+                    $debug_info[] = "Last Query: " . substr($this->cur_query, 0, 200) . (strlen($this->cur_query) > 200 ? '...' : '');
+                } else {
+                    $debug_info[] = "Last Query: None";
+                }
+
+                // Database information
+                $debug_info[] = "Database: " . ($this->selected_db ?: 'None');
+                $debug_info[] = "Server: " . $this->db_server;
+
+                // Recent queries from debug log (if available)
+                if (isset($this->debugger->dbg) && !empty($this->debugger->dbg)) {
+                    $recent_queries = array_slice($this->debugger->dbg, -3); // Last 3 queries
+                    $debug_info[] = "Recent Queries Count: " . count($recent_queries);
+                    foreach ($recent_queries as $i => $query_info) {
+                        $debug_info[] = "Query " . ($i + 1) . ": " . substr($query_info['sql'] ?? 'Unknown', 0, 100) . (strlen($query_info['sql'] ?? '') > 100 ? '...' : '');
+                    }
+                }
+
+                if ($debug_info) {
+                    $error_msg .= " [DEBUG: " . implode("; ", $debug_info) . "]";
+                }
+
+                // Log this for investigation
+                if (function_exists('bb_log')) {
+                    bb_log("Unknown Database Error Debug:\n" . implode("\n", $debug_info), 'unknown_db_errors');
+                }
+            } else {
+                // For regular users: generic message only + contact admin hint
+                $error_msg = "$msg: A database error occurred. Please contact the administrator if this problem persists.";
+
+                // Still log basic information for debugging
+                if (function_exists('bb_log')) {
+                    bb_log("Database Error (User-facing): $error_msg\nRequest: " . ($_SERVER['REQUEST_URI'] ?? 'CLI'), 'user_db_errors');
+                }
+            }
+        }
+
+        // Add query context for debugging (but only for admins/developers)
+        if ($this->cur_query && ($is_admin || $is_dev_mode)) {
+            $error_msg .= "\nQuery: " . $this->cur_query;
+        }
 
         if (function_exists('bb_die')) {
             bb_die($error_msg);
@@ -797,9 +995,9 @@ class Database
     /**
      * Log error (delegated to debugger)
      */
-    public function log_error(): void
+    public function log_error(?\Exception $exception = null): void
     {
-        $this->debugger->log_error();
+        $this->debugger->log_error($exception);
     }
 
     /**
