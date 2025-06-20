@@ -26,8 +26,8 @@ architecture. In addition, we have a very helpful
 ## 🌈 Current status
 
 TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to
-modern specifications. If you want delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
-and go from there. The documentation will be translated to english in the near future, currently russian is the main language of it.
+modern specifications. If you want to delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
+and go from there. The documentation will be translated to English in the near future, currently Russian is the main language.
 
 ## ✨ Features
 * Rich forum with browsing/moderation tools
@@ -40,7 +40,7 @@ and go from there. The documentation will be translated to english in the near f
 * Bonus points
 * Polling system
 * PM/DM system
-* Multilingual support (Russian and English is currently fully supported, with others in the future)
+* Multilingual support (Russian and English are currently fully supported, with others in the future)
 * Atom/RSS feeds
 * ... and so MUCH MORE!
 
@@ -56,7 +56,7 @@ and go from there. The documentation will be translated to english in the near f
 ## 🔧 Requirements
 
 * Apache / nginx ([example config](install/nginx.conf)) / caddy ([example config](install/Caddyfile))
-* MySQL 5.5.3 or above / MariaDB 10.0 or above / Percona
+* MySQL 5.5.3 or above (including MySQL 8.0+) / MariaDB 10.0 or above / Percona
 * PHP: 8.1 / 8.2 / 8.3 / 8.4
 * PHP Extensions: mbstring, gd, bcmath, intl, tidy (optional), xml, xmlwriter
 * Crontab (Recommended)
@@ -130,13 +130,13 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 
 ## 📌 Our recommendations
 
-* *It's recommended to run `cron.php`.* - For significant tracker speed increase it ay be required to replace the built-in cron.php in operating system daemon.
+* *It's recommended to run `cron.php`.* - For significant tracker speed increase it may be required to replace the built-in cron.php with an operating system daemon.
 * *Local configuration copy.* - You can override the settings using the local configuration file `library/config.local.php`.
 
 ## 💚 Contributing / Contributors
 
 Please read our [contributing policy](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md) for details, and the process for
-submitting pull requests to us. But we are always ready to renew your pull-request for compliance with
+submitting pull requests to us. But we are always ready to review your pull-request for compliance with
 these requirements. Just send it!
 
 <a href="https://github.com/torrentpier/torrentpier/graphs/contributors">
