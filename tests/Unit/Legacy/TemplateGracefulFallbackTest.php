@@ -217,14 +217,14 @@ describe('Template Text Compilation - Graceful Fallback', function () {
 
 describe('Template Block Variable Fallback', function () {
 
-    it('shows missing block variables as original syntax', function () {
+    it('shows missing block variables as empty string', function () {
         $namespace = 'testblock';
         $varname = 'MISSING_VAR';
 
         $result = $this->template->generate_block_varref($namespace . '.', $varname);
 
-        // Verify the exact expected fallback output format string
-        $expectedFormat = "<?php echo isset(\$testblock_item['MISSING_VAR']) ? \$testblock_item['MISSING_VAR'] : 'testblock.MISSING_VAR'; ?>";
+        // Block variables should show empty string when missing, not the variable name
+        $expectedFormat = "<?php echo isset(\$testblock_item['MISSING_VAR']) ? \$testblock_item['MISSING_VAR'] : ''; ?>";
         expect($result)->toBe($expectedFormat);
     });
 
@@ -234,8 +234,8 @@ describe('Template Block Variable Fallback', function () {
 
         $result = $this->template->generate_block_varref($namespace . '.', $varname);
 
-        // Verify the exact expected fallback output format string
-        $expectedFormat = "<?php echo isset(\$news_item['TITLE']) ? \$news_item['TITLE'] : 'news.TITLE'; ?>";
+        // Block variables should show empty string when missing, not the variable name
+        $expectedFormat = "<?php echo isset(\$news_item['TITLE']) ? \$news_item['TITLE'] : ''; ?>";
         expect($result)->toBe($expectedFormat);
     });
 
