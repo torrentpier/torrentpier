@@ -598,7 +598,7 @@ class User
         }
 
         define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
-        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
+        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/en/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {

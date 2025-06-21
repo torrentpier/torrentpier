@@ -26,18 +26,15 @@ class Select
     public static function language(string $default_lang, string $select_name = 'language'): mixed
     {
         $lang_select = '<select name="' . $select_name . '">';
-        $x = 0;
         foreach (config()->get('lang') as $key => $data) {
             $selected = '';
             if ($key == $default_lang) {
                 $selected = ' selected';
             }
             $lang_select .= '<option value="' . $key . '"' . $selected . '>' . $data['name'] . '</option>';
-            $x++;
         }
         $lang_select .= '</select>';
-        $languages = config()->get('lang');
-        return ($x > 1) ? $lang_select : reset($languages);
+        return $lang_select;
     }
 
     /**
@@ -77,17 +74,14 @@ class Select
     public static function template(string $default_style, string $select_name = 'tpl_name'): mixed
     {
         $templates_select = '<select name="' . $select_name . '">';
-        $x = 0;
         foreach (config()->get('templates') as $folder => $name) {
             $selected = '';
             if ($folder == $default_style) {
                 $selected = ' selected';
             }
             $templates_select .= '<option value="' . $folder . '"' . $selected . '>' . $name . '</option>';
-            $x++;
         }
         $templates_select .= '</select>';
-        $templates = config()->get('templates');
-        return ($x > 1) ? $templates_select : reset($templates);
+        return $templates_select;
     }
 }
