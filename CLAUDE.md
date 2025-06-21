@@ -10,7 +10,7 @@ TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting 
 
 - **PHP 8.3+** with modern features
 - **MySQL/MariaDB/Percona** database
-- **Nette Database** with backward-compatible wrapper
+- **Nette Database** with temporary backward-compatible wrapper
 - **Composer** for dependency management
 - **Custom BitTorrent tracker** implementation
 

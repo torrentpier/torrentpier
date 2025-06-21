@@ -474,7 +474,7 @@ The following legacy files have been removed from the codebase:
 
 These were completely replaced by:
 - `src/Database/Database.php` - Modern database class with Nette Database (renamed from `DB.php`)
-- `src/Database/DatabaseFactory.php` - Modern factory with backward compatibility (renamed from `DbFactory.php`)
+- `src/Database/DatabaseFactory.php` - Modern factory with temporary backward compatibility (renamed from `DbFactory.php`)
 - `src/Database/DatabaseDebugger.php` - Dedicated debug functionality extracted from Database class
 - `src/Database/DebugSelection.php` - Debug-enabled wrapper for Nette Database Selection
 
