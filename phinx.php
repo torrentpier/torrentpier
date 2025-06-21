@@ -23,13 +23,15 @@ if (file_exists(__DIR__ . '/.env')) {
 }
 
 // Helper function for environment variables
-function env(string $key, mixed $default = null): mixed
-{
-    $value = $_ENV[$key] ?? getenv($key);
-    if ($value === false) {
-        return $default;
+if (!function_exists('env')) {
+    function env(string $key, mixed $default = null): mixed
+    {
+        $value = $_ENV[$key] ?? getenv($key);
+        if ($value === false) {
+            return $default;
+        }
+        return $value;
     }
-    return $value;
 }
 
 return [

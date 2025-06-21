@@ -34,9 +34,6 @@ if (empty($_SERVER['SERVER_ADDR'])) {
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
-if (!defined('BB_SCRIPT')) {
-    define('BB_SCRIPT', null);
-}
 
 header('X-Frame-Options: SAMEORIGIN');
 date_default_timezone_set('UTC');

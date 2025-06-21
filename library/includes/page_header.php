@@ -108,13 +108,16 @@ $template->assign_vars([
     'HAVE_UNREAD_PM' => $have_unread_pm
 ]);
 
+// Defines the current displayed controller to hide frontend blocks
+$bb_script = defined('BB_SCRIPT') ? BB_SCRIPT : null;
+
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars([
     'SIMPLE_HEADER' => !empty($gen_simple_header),
     'CONTENT_ENCODING' => DEFAULT_CHARSET,
 
     'IN_ADMIN' => defined('IN_ADMIN'),
-    'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
+    'USER_HIDE_CAT' => ($bb_script == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
 
@@ -170,8 +173,8 @@ $template->assign_vars([
     'U_TERMS' => config()->get('terms_and_conditions_url'),
     'U_TRACKER' => 'tracker.php',
 
-    'SHOW_SIDEBAR1' => !empty(config()->get('page.show_sidebar1')[BB_SCRIPT]) || config()->get('show_sidebar1_on_every_page'),
-    'SHOW_SIDEBAR2' => !empty(config()->get('page.show_sidebar2')[BB_SCRIPT]) || config()->get('show_sidebar2_on_every_page'),
+    'SHOW_SIDEBAR1' => !empty(config()->get('page.show_sidebar1')[$bb_script]) || config()->get('show_sidebar1_on_every_page'),
+    'SHOW_SIDEBAR2' => !empty(config()->get('page.show_sidebar2')[$bb_script]) || config()->get('show_sidebar2_on_every_page'),
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -208,7 +211,7 @@ $template->assign_vars([
     'U_WATCHED_TOPICS' => 'profile.php?mode=watch'
 ]);
 
-if (!empty(config()->get('page.show_torhelp')[BB_SCRIPT]) && !empty($userdata['torhelp'])) {
+if (!empty(config()->get('page.show_torhelp')[$bb_script]) && !empty($userdata['torhelp'])) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {

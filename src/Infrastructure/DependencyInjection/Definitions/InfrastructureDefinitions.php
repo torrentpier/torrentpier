@@ -11,12 +11,27 @@ use Nette\Caching\Storages\MemcachedStorage;
 use Nette\Caching\Storages\SQLiteStorage;
 use Nette\Database\Connection;
 use Psr\Container\ContainerInterface;
+use TorrentPier\Config;
 
 class InfrastructureDefinitions
 {
     public static function getDefinitions(array $config = []): array
     {
         return [
+            // Configuration
+            Config::class => DI\factory(function () {
+                // Use the config singleton that's already initialized in common.php
+                return config();
+            }),
+
+            // HTTP Infrastructure
+            'TorrentPier\Infrastructure\Http\Router' => DI\autowire(),
+            'TorrentPier\Infrastructure\Http\RequestFactory' => DI\autowire(),
+            'TorrentPier\Infrastructure\Http\ResponseFactory' => DI\autowire(),
+
+            // Middleware
+            'TorrentPier\Infrastructure\Http\Middleware\CorsMiddleware' => DI\autowire(),
+
             // TODO: Add infrastructure service definitions as they are implemented
 
             // Example: Database Connection (implement when Nette Database integration is ready)

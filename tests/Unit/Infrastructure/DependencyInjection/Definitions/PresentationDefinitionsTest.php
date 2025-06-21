@@ -9,12 +9,14 @@ describe('PresentationDefinitions', function () {
             expect($definitions)->toBeArray();
         });
 
-        it('returns empty array when no presentation services are implemented yet', function () {
+        it('returns presentation service definitions', function () {
             $definitions = PresentationDefinitions::getDefinitions();
 
-            // Since we're in Phase 1 and presentation services aren't implemented yet,
-            // the definitions should be empty (all examples are commented out)
-            expect($definitions)->toBe([]);
+            // Should contain HTTP presentation services that have been implemented
+            expect($definitions)->toBeArray();
+            expect($definitions)->toHaveKey('TorrentPier\Presentation\Http\Kernel');
+            expect($definitions)->toHaveKey('TorrentPier\Presentation\Http\Controllers\Web\HelloWorldController');
+            expect($definitions)->toHaveKey('TorrentPier\Presentation\Http\Controllers\Web\LegacyController');
         });
 
         it('follows presentation layer principles', function () {
@@ -37,7 +39,9 @@ describe('PresentationDefinitions', function () {
             $definitions1 = PresentationDefinitions::getDefinitions();
             $definitions2 = PresentationDefinitions::getDefinitions();
 
-            expect($definitions1)->toBe($definitions2);
+            // Should return same structure (though objects may be different instances)
+            expect(array_keys($definitions1))->toBe(array_keys($definitions2));
+            expect(count($definitions1))->toBe(count($definitions2));
         });
 
         it('is prepared for future HTTP controllers', function () {

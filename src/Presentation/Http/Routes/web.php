@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+use TorrentPier\Infrastructure\Http\Router;
+use TorrentPier\Presentation\Http\Controllers\Web\HelloWorldController;
+use TorrentPier\Presentation\Http\Controllers\Web\LegacyController;
+
+return function (Router $router): void {
+    // Hello World test routes
+    $router->get('/hello', [HelloWorldController::class, 'index']);
+    $router->get('/hello/json', [HelloWorldController::class, 'json']);
+
+    // Legacy controller routes (hacky but organized approach)
+    $legacyRoutes = [
+        'index.php',
+        'terms.php',
+        // Add more legacy controllers here as needed:
+        // 'login.php',
+        // 'search.php',
+        // 'tracker.php',
+    ];
+
+    foreach ($legacyRoutes as $route) {
+        // Route with .php extension
+        $router->get('/' . $route, [LegacyController::class, 'handle']);
+
+        // Route without .php extension (e.g., /terms for /terms.php)
+        $routeWithoutExtension = str_replace('.php', '', $route);
+        $router->get('/' . $routeWithoutExtension, [LegacyController::class, 'handle']);
+    }
+
+    // Root route should serve the legacy index.php controller
+    $router->get('/', [LegacyController::class, 'handle']);
+
+    // Future modern routes will be added here
+};

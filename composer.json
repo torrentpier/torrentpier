@@ -62,6 +62,7 @@
     "jacklul/monolog-telegram": "^3.1",
     "josantonius/cookie": "^2.0",
     "league/flysystem": "^3.28",
+    "league/route": "^6.2",
     "longman/ip-tools": "1.2.1",
     "monolog/monolog": "^3.4",
     "nette/caching": "^3.3",

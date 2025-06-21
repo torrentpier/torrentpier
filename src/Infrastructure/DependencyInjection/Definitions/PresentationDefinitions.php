@@ -12,8 +12,13 @@ class PresentationDefinitions
     public static function getDefinitions(): array
     {
         return [
+            // HTTP Kernel
+            'TorrentPier\Presentation\Http\Kernel' => DI\autowire(),
+
             // HTTP Controllers
             // Controllers are typically autowired with their dependencies
+            'TorrentPier\Presentation\Http\Controllers\Web\HelloWorldController' => DI\autowire(),
+            'TorrentPier\Presentation\Http\Controllers\Web\LegacyController' => DI\autowire(),
 
             // Web Controllers
             // 'TorrentPier\Presentation\Http\Controllers\Web\HomeController' => DI\autowire(),

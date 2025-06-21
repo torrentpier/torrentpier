@@ -15,12 +15,16 @@ describe('InfrastructureDefinitions', function () {
             expect($definitions)->toBeArray();
         });
 
-        it('returns empty array when no infrastructure services are implemented yet', function () {
+        it('returns infrastructure service definitions', function () {
             $definitions = InfrastructureDefinitions::getDefinitions();
 
-            // Since we're in Phase 1 and infrastructure services aren't implemented yet,
-            // the definitions should be empty (all examples are commented out)
-            expect($definitions)->toBe([]);
+            // Should contain HTTP infrastructure services that have been implemented
+            expect($definitions)->toBeArray();
+            expect($definitions)->toHaveKey('TorrentPier\Config');
+            expect($definitions)->toHaveKey('TorrentPier\Infrastructure\Http\Router');
+            expect($definitions)->toHaveKey('TorrentPier\Infrastructure\Http\RequestFactory');
+            expect($definitions)->toHaveKey('TorrentPier\Infrastructure\Http\ResponseFactory');
+            expect($definitions)->toHaveKey('TorrentPier\Infrastructure\Http\Middleware\CorsMiddleware');
         });
 
         it('follows infrastructure layer principles', function () {
@@ -43,7 +47,9 @@ describe('InfrastructureDefinitions', function () {
             $definitions1 = InfrastructureDefinitions::getDefinitions();
             $definitions2 = InfrastructureDefinitions::getDefinitions();
 
-            expect($definitions1)->toBe($definitions2);
+            // Should return same structure (though objects may be different instances)
+            expect(array_keys($definitions1))->toBe(array_keys($definitions2));
+            expect(count($definitions1))->toBe(count($definitions2));
         });
 
         it('can handle different configurations', function () {
@@ -79,7 +85,8 @@ describe('InfrastructureDefinitions', function () {
             // Connection::class => DI\get('database.connection.default'),
 
             // For now, verify the method works without breaking
-            expect(count($definitions))->toBeGreaterThanOrEqual(0);
+            // Should at least contain the HTTP infrastructure services
+            expect(count($definitions))->toBeGreaterThanOrEqual(5);
         });
 
         it('is prepared for future cache services', function () {
