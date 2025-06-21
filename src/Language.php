@@ -85,7 +85,7 @@ class Language
      */
     private function loadSourceLanguage(): void
     {
-        $sourceFile = LANG_ROOT_DIR . '/source/main.php';
+        $sourceFile = LANG_ROOT_DIR . '/en/main.php';
         if (is_file($sourceFile)) {
             $lang = [];
             require $sourceFile;
@@ -207,7 +207,7 @@ class Language
         $filepath = LANG_ROOT_DIR . '/' . $language . '/' . $filename . '.php';
         if (!is_file($filepath)) {
             // Try source language as fallback
-            $filepath = LANG_ROOT_DIR . '/source/' . $filename . '.php';
+            $filepath = LANG_ROOT_DIR . '/en/' . $filename . '.php';
             if (!is_file($filepath)) {
                 return false;
             }
