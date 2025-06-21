@@ -767,7 +767,7 @@ class Template
         }
         // This will handle the remaining root-level varrefs
         // Handle L_ language variables specifically - show plain text when not found
-        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : \'$1\'; ?>', $code);
+        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($V[\'$1\']) ? $V[\'$1\'] : \'$1\'); ?>', $code);
         // Handle PHP variables
         $code = preg_replace('#\{(\$[a-z_][a-z0-9_$\->\'\"\.\[\]]*?)\}#i', '<?php echo isset($1) ? $1 : \'\'; ?>', $code);
         // Handle constants
