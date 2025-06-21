@@ -265,7 +265,6 @@ define('USERNAME_MIN_LENGTH', 3);
 define('USERNAME_MAX_LENGTH', 30);
 define('USEREMAIL_MAX_LENGTH', 230);
 define('PASSWORD_MIN_LENGTH', 8);
-define('PASSWORD_MAX_LENGTH', 128);
 
 define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');

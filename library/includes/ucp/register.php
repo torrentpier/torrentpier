@@ -723,7 +723,7 @@ $template->assign_vars([
     'EDIT_PROFILE' => ($mode == 'editprofile'),
     'ADM_EDIT' => $adm_edit,
     'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
-    'PASSWORD_LONG' => sprintf($lang['PASSWORD_LONG'], PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH),
+    'PASSWORD_LONG' => sprintf($lang['PASSWORD_LONG'], PASSWORD_MIN_LENGTH),
     'INVITE_CODE' => !empty($_GET['invite']) ? htmlCHR($_GET['invite']) : '',
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 

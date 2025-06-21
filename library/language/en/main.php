@@ -623,7 +623,7 @@ $lang['PROFILE_UPDATED_INACTIVE'] = 'Your profile has been updated. However, you
 
 $lang['PASSWORD_MISMATCH'] = 'The passwords you entered did not match.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'The current password you supplied does not match that stored in the database.';
-$lang['PASSWORD_LONG'] = 'Your password must be no longer than %d characters and no shorter than %d characters.';
+$lang['PASSWORD_LONG'] = 'Your password must be no shorter than %d characters.';
 $lang['TOO_MANY_REGISTERS'] = 'You have made too many registration attempts. Please try again later.';
 $lang['USERNAME_TAKEN'] = 'Sorry, but this username has already been taken.';
 $lang['USERNAME_INVALID'] = 'Sorry, but this username contains an invalid character';
@@ -1787,7 +1787,6 @@ $lang['CHOOSE_E_MAIL'] = 'You must specify the e-mail';
 $lang['CHOOSE_PASS'] = 'Field for the password must not be empty!';
 $lang['CHOOSE_PASS_ERR'] = 'Entered passwords do not match';
 $lang['CHOOSE_PASS_ERR_MIN'] = 'Your password must be at least %d characters';
-$lang['CHOOSE_PASS_ERR_MAX'] = 'Your password must be no longer than $d characters';
 $lang['CHOOSE_PASS_ERR_NUM'] = 'The password must contain at least one digit';
 $lang['CHOOSE_PASS_ERR_LETTER'] = 'The password must contain at least one letter of the Latin alphabet';
 $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'] = 'The password must contain at least one uppercase letter of the Latin alphabet';

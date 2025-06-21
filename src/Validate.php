@@ -170,9 +170,6 @@ class Validate
         }
 
         // Length
-        if (mb_strlen($password, DEFAULT_CHARSET) > PASSWORD_MAX_LENGTH) {
-            return sprintf($lang['CHOOSE_PASS_ERR_MAX'], PASSWORD_MAX_LENGTH);
-        }
         if (mb_strlen($password, DEFAULT_CHARSET) < PASSWORD_MIN_LENGTH) {
             return sprintf($lang['CHOOSE_PASS_ERR_MIN'], PASSWORD_MIN_LENGTH);
         }
