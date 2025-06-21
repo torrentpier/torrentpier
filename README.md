@@ -57,7 +57,7 @@ and go from there. The documentation will be translated to English in the near f
 
 * Apache / nginx ([example config](install/nginx.conf)) / caddy ([example config](install/Caddyfile))
 * MySQL 5.5.3 or above (including MySQL 8.0+) / MariaDB 10.0 or above / Percona
-* PHP: 8.1 / 8.2 / 8.3 / 8.4 (8.2+ required for development dependencies)
+* PHP: 8.2 / 8.3 / 8.4
 * PHP Extensions: mbstring, gd, bcmath, intl, tidy (optional), xml, xmlwriter
 * Crontab (Recommended)
 
