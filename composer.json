@@ -63,7 +63,6 @@
     "josantonius/cookie": "^2.0",
     "league/flysystem": "^3.28",
     "longman/ip-tools": "1.2.1",
-    "matthiasmullie/scrapbook": "^1.5.4",
     "monolog/monolog": "^3.4",
     "nette/caching": "^3.3",
     "nette/database": "^3.2",
