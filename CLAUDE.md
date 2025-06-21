@@ -157,3 +157,14 @@ More text here.
 
 ### MD047 - Files should end with a single newline
 Ensure every markdown file ends with exactly one newline character at the end of the file.
+
+## Tests
+
+- Need comprehensive test coverage for new components
+- Utilize Pest PHP for unit and integration / feature testing
+- Tests should focus on validating modern architecture components
+- Create test suites for critical systems like database, cache, and configuration
+
+## Development Guidelines
+
+- Always ensure that there is one empty line at the end of the file
