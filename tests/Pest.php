@@ -86,7 +86,7 @@ function expectException(callable $callback, string $exceptionClass, ?string $me
     try {
         $callback();
         fail("Expected exception $exceptionClass was not thrown");
-    } catch (Exception $e) {
+    } catch (Throwable $e) {
         expect($e)->toBeInstanceOf($exceptionClass);
         if ($message) {
             expect($e->getMessage())->toContain($message);

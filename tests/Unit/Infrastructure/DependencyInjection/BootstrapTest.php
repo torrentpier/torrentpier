@@ -184,7 +184,7 @@ describe('Bootstrap', function () {
             // Should not throw fatal error for non-existent path
             expect(function () {
                 Bootstrap::init('/non/existent/path');
-            })->not->toThrow(Error::class);
+            })->not->toThrow(Throwable::class);
         });
     });
 });

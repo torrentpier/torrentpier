@@ -36,13 +36,11 @@ describe('Container', function () {
         });
 
         it('throws NotFoundExceptionInterface for non-existent services', function () {
-            try {
-                $this->container->get('non.existent.service');
-                fail('Expected exception to be thrown');
-            } catch (Exception $e) {
-                expect($e)->toBeInstanceOf(NotFoundExceptionInterface::class);
-                expect($e->getMessage())->toContain('non.existent.service');
-            }
+            expectException(
+                fn() => $this->container->get('non.existent.service'),
+                NotFoundExceptionInterface::class,
+                'non.existent.service'
+            );
         });
 
         it('returns same instance for singleton services', function () {
@@ -140,12 +138,11 @@ describe('Container', function () {
 
     describe('error handling', function () {
         it('provides meaningful error messages for missing services', function () {
-            try {
-                $this->container->get('missing.service');
-                fail('Expected NotFoundExceptionInterface to be thrown');
-            } catch (NotFoundExceptionInterface $e) {
-                expect($e->getMessage())->toContain('missing.service');
-            }
+            expectException(
+                fn() => $this->container->get('missing.service'),
+                NotFoundExceptionInterface::class,
+                'missing.service'
+            );
         });
 
         it('handles circular dependencies gracefully', function () {
@@ -158,13 +155,11 @@ describe('Container', function () {
                 }),
             ]);
 
-            try {
-                $container->get('service.a');
-                fail('Expected circular dependency exception');
-            } catch (Exception $e) {
-                expect($e)->toBeInstanceOf(ContainerExceptionInterface::class);
-                expect($e->getMessage())->toContain('Circular dependency');
-            }
+            expectException(
+                fn() => $container->get('service.a'),
+                ContainerExceptionInterface::class,
+                'Circular dependency'
+            );
         });
     });
 });
