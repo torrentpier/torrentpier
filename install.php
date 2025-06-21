@@ -25,7 +25,7 @@ require INC_DIR . '/functions_cli.php';
  * System requirements
  */
 const CHECK_REQUIREMENTS = [
-    'php_min_version' => '8.2.0',
+    'php_min_version' => '8.3.0',
     'ext_list' => [
         'json',
         'curl',

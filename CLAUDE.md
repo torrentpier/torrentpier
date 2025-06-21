@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting BitTorrent communities with forum functionality. The project is in active modernization, transitioning from legacy code to modern PHP practices while maintaining backward compatibility.
+TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting BitTorrent communities with forum functionality. The project is undergoing a major 3.0 rewrite, transitioning from legacy code to modern PHP practices. **Backward compatibility is not supported in 3.0** - legacy APIs will break and are not maintained as the focus is on moving forward with clean, modern architecture.
 
 ## Technology Stack & Architecture
 
-- **PHP 8.2+** with modern features
+- **PHP 8.3+** with modern features
 - **MySQL/MariaDB/Percona** database
-- **Nette Database** with backward-compatible wrapper
+- **Nette Database** with temporary backward-compatible wrapper
 - **Composer** for dependency management
 - **Custom BitTorrent tracker** implementation
 
@@ -61,21 +61,21 @@ The project uses **StyleCI** with PSR-2 preset for code style enforcement. Style
 ## Modern Architecture Components
 
 ### Database Layer (`/src/Database/`)
-- **Nette Database** with full old SqlDb backward compatibility
-- Singleton pattern accessible via `DB()` function
+- **Nette Database** replacing legacy SqlDb system
+- Modern singleton pattern accessible via `DB()` function
 - Support for multiple database connections and debug functionality
-- Migration path to ORM-style Explorer queries
+- **Breaking changes expected** during 3.0 migration to ORM-style queries
 
 ### Cache System (`/src/Cache/`)
 - **Unified caching** using Nette Caching internally
-- 100% backward compatibility with existing `CACHE()` and $datastore calls
+- Replaces existing `CACHE()` and $datastore systems
 - Supports file, SQLite, memory, and Memcached storage
-- Advanced features: memoization, cache dependencies
+- **API changes planned** for improved developer experience
 
 ### Configuration Management
 - Environment-based config with `.env` files
-- Singleton `Config` class accessible via `config()` function
-- Local overrides supported via `library/config.local.php`
+- Modern singleton `Config` class accessible via `config()` function
+- **Legacy config access will be removed** in favor of new patterns
 
 ## Configuration Files
 - `.env` - Environment variables (copy from `.env.example`)
@@ -116,29 +116,24 @@ php vendor/bin/phinx status --configuration=phinx.php
 php vendor/bin/phinx migrate --fake --configuration=phinx.php
 ```
 
-## Legacy Compatibility Strategy
+## TorrentPier 3.0 Modernization Strategy
 
-The codebase maintains 100% backward compatibility while introducing modern alternatives:
+The TorrentPier 3.0 release represents a major architectural shift focused on:
 
-- **Database layer**: Existing old SqlDb calls work while new code can use Nette Database
-- **Cache system**: All existing `CACHE()` and $datastore calls preserved while adding modern features
-- **Configuration**: Legacy config access maintained alongside new singleton pattern
+- **Modern PHP practices**: PSR standards, namespaces, autoloading
+- **Clean architecture**: Separation of concerns, dependency injection
+- **Performance improvements**: Optimized database queries, efficient caching
+- **Developer experience**: Better debugging, testing, and maintenance
+- **Breaking changes**: Legacy code removal and API modernization
 
-This approach allows gradual modernization without breaking existing functionality - critical for a mature application with existing deployments.
+**Important**: TorrentPier 3.0 will introduce breaking changes to achieve these modernization goals. Existing deployments should remain on 2.x versions until they're ready to migrate to the new architecture.
 
-## Security & Performance
+## Migration Path for 3.0
 
-- **Environment-based secrets** management via `.env`
-- **CDN/proxy support** (Cloudflare, Fastly)
-- **Input sanitization** and CSRF protection
-- **Advanced caching** with multiple storage backends
-- **Rate limiting** and IP-based restrictions
+- **Database layer**: Legacy SqlDb calls will be removed, migrate to new Database class
+- **Cache system**: Replace existing CACHE() and $datastore calls with new unified API
+- **Configuration**: Update legacy global $bb_cfg access to use config() singleton
+- **Templates**: Legacy template syntax may be deprecated in favor of modern Twig features
+- **Language system**: Update global $lang usage to new Language singleton methods
 
-## BitTorrent Tracker Features
-
-- **BitTorrent v1 & v2** support
-- **TorrServer integration** capability
-- **Client ban system** for problematic torrent clients
-- **Scrape support** for tracker statistics
-
-When working with this codebase, prioritize understanding the legacy compatibility approach and modern architecture patterns. Always test both legacy and modern code paths when making changes to core systems.
+When working with this codebase, prioritize modern architecture patterns and clean code practices. Focus on the new systems in `/src/` directory rather than maintaining legacy compatibility.

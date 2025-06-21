@@ -34,6 +34,11 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
         }
 
         $inspector = $this->getInspector();
+
+        if (!$inspector) {
+            return Handler::DONE;
+        }
+
         $exception = $inspector->getException();
 
         // Add database information to the exception frames
@@ -77,7 +82,15 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
      */
     private function addDatabaseContextToFrames($inspector): void
     {
+        if (!$inspector) {
+            return;
+        }
+
         $frames = $inspector->getFrames();
+
+        if (!$frames || empty($frames)) {
+            return;
+        }
 
         foreach ($frames as $frame) {
             $frameData = [];
@@ -115,20 +128,47 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
         try {
             $databaseInfo = $this->collectDatabaseInformation();
 
-            // Use reflection to add custom data to the exception
-            // This will appear in the Whoops error page
+            // Use Whoops' built-in method if available - this is the proper way
             if (method_exists($exception, 'setAdditionalInfo')) {
                 $exception->setAdditionalInfo('Database Information', $databaseInfo);
-            } else {
-                // Fallback: store in a property that Whoops can access
-                if (!isset($exception->databaseInfo)) {
-                    $exception->databaseInfo = $databaseInfo;
-                }
+            }
+            // For PHP 8.2+ compatibility: Avoid dynamic properties completely
+            // Instead, we'll add the info as frame comments on the first database-related frame
+            else {
+                $this->addDatabaseInfoAsFrameComments($databaseInfo);
             }
         } catch (\Exception $e) {
             // Don't let database info collection break error handling
             if (method_exists($exception, 'setAdditionalInfo')) {
                 $exception->setAdditionalInfo('Database Info Error', $e->getMessage());
+            }
+        }
+    }
+
+    /**
+     * Add database info as frame comments when setAdditionalInfo is not available
+     */
+    private function addDatabaseInfoAsFrameComments(array $databaseInfo): void
+    {
+        $inspector = $this->getInspector();
+
+        if (!$inspector) {
+            return;
+        }
+
+        $frames = $inspector->getFrames();
+
+        // Find the first frame and add database info as comments
+        if (!empty($frames) && is_array($frames) && isset($frames[0])) {
+            $firstFrame = $frames[0];
+            $firstFrame->addComment('=== Database Information ===', '');
+
+            foreach ($databaseInfo as $key => $value) {
+                if (is_string($value) || is_numeric($value)) {
+                    $firstFrame->addComment("DB Info - $key", $value);
+                } elseif (is_array($value) && !empty($value)) {
+                    $firstFrame->addComment("DB Info - $key", json_encode($value, JSON_PRETTY_PRINT));
+                }
             }
         }
     }
