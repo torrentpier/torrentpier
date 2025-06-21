@@ -1,6 +1,7 @@
 # Email Transport
 
 Email delivery mechanisms:
+
 - `SmtpTransport`: Traditional SMTP delivery
 - `SendgridTransport`: SendGrid API integration
 - `MailgunTransport`: Mailgun API integration

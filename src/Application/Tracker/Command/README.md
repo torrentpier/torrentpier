@@ -1,11 +1,13 @@
 # Tracker Commands
 
 Commands representing write operations:
+
 - `RegisterTorrentCommand`: Register new torrent
 - `UpdateTorrentCommand`: Modify torrent details
 - `DeleteTorrentCommand`: Remove torrent from tracker
 
 Example:
+
 ```php
 final class RegisterTorrentCommand
 {

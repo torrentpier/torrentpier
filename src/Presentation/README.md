@@ -1,6 +1,7 @@
 # Presentation Layer
 
 User interface implementations:
+
 - HTTP controllers for web and API
 - CLI commands for console operations
 - Request/response handling

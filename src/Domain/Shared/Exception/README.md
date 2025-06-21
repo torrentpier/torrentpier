@@ -1,6 +1,7 @@
 # Shared Domain Exceptions
 
 Base exception classes used across all bounded contexts:
+
 - `DomainException`: Base domain exception
 - `InvalidArgumentException`: Invalid input validation
 - `EntityNotFoundException`: Generic entity not found

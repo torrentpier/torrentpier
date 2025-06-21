@@ -1,6 +1,7 @@
 # Infrastructure Layer
 
 Technical implementations and external service adapters:
+
 - Database persistence
 - Caching mechanisms
 - Email services

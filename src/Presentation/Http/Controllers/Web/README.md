@@ -1,6 +1,7 @@
 # Web Controllers
 
 Traditional web interface controllers:
+
 - HTML response generation
 - Template rendering
 - Form handling
@@ -8,6 +9,7 @@ Traditional web interface controllers:
 - CSRF protection
 
 Controllers for:
+
 - Forum browsing and posting
 - Torrent browsing and downloading
 - User profiles and settings

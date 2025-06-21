@@ -1,12 +1,14 @@
 # Repository Implementations
 
 Concrete implementations of domain repository interfaces:
+
 - Uses database adapter for persistence
 - Implements caching strategies
 - Handles query optimization
 - Supports multiple database backends
 
 Example:
+
 ```php
 class TorrentRepository implements TorrentRepositoryInterface
 {

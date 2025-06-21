@@ -1,12 +1,14 @@
 # Admin Panel Controllers
 
 Administrative interface controllers with enhanced security:
+
 - Role-based access control (RBAC)
 - Audit logging for all actions
 - Additional authentication checks
 - Administrative dashboards and reports
 
 Example:
+
 ```php
 class AdminUserController
 {

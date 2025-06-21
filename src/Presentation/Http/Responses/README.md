@@ -1,6 +1,7 @@
 # HTTP Responses
 
 Response transformation and formatting:
+
 - Response factories
 - JSON transformers
 - View presenters

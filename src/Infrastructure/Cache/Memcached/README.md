@@ -1,6 +1,7 @@
 # Memcached Cache Adapter
 
 Memcached-based caching implementation:
+
 - Simple key-value caching
 - Distributed cache support
 - Automatic key expiration

@@ -1,6 +1,7 @@
 # Forum Commands
 
 Commands representing write operations:
+
 - `CreateThreadCommand`: Start new discussion
 - `CreatePostCommand`: Reply to thread
 - `EditPostCommand`: Modify existing post

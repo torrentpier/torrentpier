@@ -1,12 +1,14 @@
 # API Controllers
 
 RESTful API endpoints following OpenAPI specification:
+
 - JSON request/response format
 - Proper HTTP status codes
 - HATEOAS where applicable
 - Rate limiting aware
 
 Example:
+
 ```php
 class UserController
 {

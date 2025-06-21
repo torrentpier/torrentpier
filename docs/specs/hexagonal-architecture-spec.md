@@ -375,26 +375,31 @@ return [
 ## Implementation Order
 
 1. **Phase 1: Foundation**
+
    - Create directory structure
    - Set up base classes in Domain/Shared
    - Configure dependency injection
 
 2. **Phase 2: Domain Modeling**
+
    - Implement core aggregates
    - Create value objects
    - Define repository interfaces
 
 3. **Phase 3: Application Services**
+
    - Create commands and queries
    - Implement handlers
    - Set up event dispatching
 
 4. **Phase 4: Infrastructure**
+
    - Implement repositories
    - Configure database adapter
    - Set up caching
 
 5. **Phase 5: Presentation**
+
    - Create controllers
    - Implement middleware
    - Build CLI commands

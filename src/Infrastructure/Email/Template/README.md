@@ -1,6 +1,7 @@
 # Email Templates
 
 Email template management:
+
 - HTML and plain text templates
 - Template variables and placeholders
 - Multi-language support
@@ -8,6 +9,7 @@ Email template management:
 - Preview functionality
 
 Common templates:
+
 - User registration confirmation
 - Password reset
 - Torrent notifications

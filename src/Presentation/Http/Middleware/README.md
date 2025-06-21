@@ -1,6 +1,7 @@
 # HTTP Middleware
 
 Request/response pipeline middleware:
+
 - `AuthenticationMiddleware`: User authentication
 - `AuthorizationMiddleware`: Permission checks
 - `CsrfProtectionMiddleware`: CSRF token validation

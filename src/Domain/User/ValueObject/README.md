@@ -1,6 +1,7 @@
 # User Value Objects
 
 Immutable objects for user domain:
+
 - `UserId`: Unique user identifier
 - `Username`: Username with validation
 - `Email`: Email address with format validation

@@ -1,6 +1,7 @@
 # Forum Value Objects
 
 Immutable objects representing forum concepts:
+
 - `PostId`: Unique post identifier
 - `ThreadTitle`: Thread title with validation
 - `PostContent`: Formatted post content

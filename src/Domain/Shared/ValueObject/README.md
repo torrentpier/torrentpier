@@ -1,6 +1,7 @@
 # Shared Value Objects
 
 Common value objects used across contexts:
+
 - `Id`: Generic identifier base class
 - `DateTime`: Immutable datetime wrapper
 - `Money`: Monetary value representation

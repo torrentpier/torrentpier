@@ -1,6 +1,7 @@
 # HTTP Requests
 
 Request objects and validation:
+
 - Request DTOs with validation rules
 - Type-safe access to request data
 - File upload handling
@@ -8,6 +9,7 @@ Request objects and validation:
 - Custom validation rules
 
 Example:
+
 ```php
 class RegisterRequest extends FormRequest
 {

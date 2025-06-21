@@ -1,6 +1,7 @@
 # User Commands
 
 Commands for user management operations:
+
 - `RegisterUserCommand`: New user registration
 - `ChangePasswordCommand`: Password update
 - `UpdateProfileCommand`: Profile modifications
