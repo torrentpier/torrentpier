@@ -158,7 +158,7 @@ function _e(string $key, mixed $default = null): void
  * Initialize debug
  */
 define('APP_ENV', env('APP_ENV', 'production'));
-if (APP_ENV === 'local') {
+if (APP_ENV === 'development') {
     define('DBG_USER', true); // forced debug
 } else {
     define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));

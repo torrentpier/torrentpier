@@ -25,7 +25,7 @@ require INC_DIR . '/functions_cli.php';
  * System requirements
  */
 const CHECK_REQUIREMENTS = [
-    'php_min_version' => '8.1.0',
+    'php_min_version' => '8.2.0',
     'ext_list' => [
         'json',
         'curl',
@@ -146,26 +146,7 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
     if (is_file(BB_ROOT . 'composer.phar')) {
         out('- Installing dependencies...', 'info');
 
-        // Ask if user is a developer before installing dependencies
-        $isDeveloper = false;
-        echo "\nAre you a developer who needs testing tools and dev dependencies? [y/N]: ";
-        if (str_starts_with(mb_strtolower(trim(readline())), 'y')) {
-            $isDeveloper = true;
-            if (!version_compare(PHP_VERSION, '8.2.0', '>=')) {
-                out("- Warning: Development dependencies require PHP 8.2+, your version is " . PHP_VERSION, 'warning');
-                out("- Some testing tools may not work properly", 'warning');
-            }
-            out("- Installing all dependencies including dev tools...\n", 'info');
-        } else {
-            out("- Installing production dependencies only...\n", 'info');
-        }
-
-        $composerFlags = '--no-interaction --no-ansi';
-        if (!$isDeveloper) {
-            $composerFlags .= ' --no-dev';
-        }
-
-        runProcess('php ' . BB_ROOT . 'composer.phar install ' . $composerFlags);
+        runProcess('php ' . BB_ROOT . 'composer.phar install --no-interaction --no-ansi');
         define('COMPOSER_COMPLETED', true);
     } else {
         out('- composer.phar not found. Please, download it (composer.phar) manually', 'error');

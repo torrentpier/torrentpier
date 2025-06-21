@@ -46,9 +46,9 @@
     "forum": "https://torrentpier.com"
   },
   "require": {
-    "php": ">=8.1",
+    "php": ">=8.2",
     "arokettu/bencode": "^4.1.0",
-    "arokettu/monsterid": "dev-master",
+    "arokettu/monsterid": "^4.1.0",
     "arokettu/random-polyfill": "1.0.2",
     "arokettu/torrent-file": "^5.2.1",
     "belomaxorka/captcha": "1.*",
@@ -56,25 +56,20 @@
     "claviska/simpleimage": "^4.0",
     "egulias/email-validator": "^4.0.1",
     "filp/whoops": "^2.15",
-    "gemorroj/m3u-parser": "dev-master",
+    "gemorroj/m3u-parser": "^6.0.1",
     "gigablah/sphinxphp": "2.0.8",
     "google/recaptcha": "^1.3",
     "jacklul/monolog-telegram": "^3.1",
     "josantonius/cookie": "^2.0",
     "league/flysystem": "^3.28",
     "longman/ip-tools": "1.2.1",
-    "matthiasmullie/scrapbook": "^1.5.4",
     "monolog/monolog": "^3.4",
     "nette/caching": "^3.3",
     "nette/database": "^3.2",
     "php-curl-class/php-curl-class": "^12.0.0",
     "robmorgan/phinx": "^0.16.9",
     "samdark/sitemap": "2.4.1",
-    "symfony/event-dispatcher": "^6.4",
-    "symfony/filesystem": "^6.4",
-    "symfony/finder": "^6.4",
-    "symfony/mailer": "^6.4",
-    "symfony/mime": "^6.4",
+    "symfony/mailer": "^7.3",
     "symfony/polyfill": "v1.32.0",
     "vlucas/phpdotenv": "^5.5",
     "z4kn4fein/php-semver": "^v3.0.0"
@@ -82,7 +77,7 @@
   "require-dev": {
     "mockery/mockery": "^1.6",
     "pestphp/pest": "^3.8",
-    "symfony/var-dumper": "^6.4"
+    "symfony/var-dumper": "^7.3"
   },
   "autoload": {
     "psr-4": {
@@ -102,6 +97,6 @@
       "php-http/discovery": true
     }
   },
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true
 }

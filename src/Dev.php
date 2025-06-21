@@ -49,14 +49,14 @@ class Dev
     {
         $this->whoops = new Run;
 
-        if (DBG_USER) {
+        if ($this->isDebugEnabled()) {
             $this->getWhoopsOnPage();
         } else {
             $this->getWhoopsPlaceholder();
         }
         $this->getWhoopsLogger();
 
-        if (APP_ENV !== 'local') {
+        if (!$this->isDevelopmentEnvironment()) {
             $this->getTelegramSender();
             $this->getBugsnag();
         }
@@ -416,13 +416,13 @@ class Dev
     }
 
     /**
-     * Check if application is in local environment
+     * Check if application is in development environment
      *
      * @return bool
      */
-    public function isLocalEnvironment(): bool
+    public function isDevelopmentEnvironment(): bool
     {
-        return APP_ENV === 'local';
+        return APP_ENV === 'development';
     }
 
     /**

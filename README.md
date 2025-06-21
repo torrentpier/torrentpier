@@ -57,7 +57,7 @@ and go from there. The documentation will be translated to English in the near f
 
 * Apache / nginx ([example config](install/nginx.conf)) / caddy ([example config](install/Caddyfile))
 * MySQL 5.5.3 or above (including MySQL 8.0+) / MariaDB 10.0 or above / Percona
-* PHP: 8.1 / 8.2 / 8.3 / 8.4 (8.2+ required for development dependencies)
+* PHP: 8.2 / 8.3 / 8.4
 * PHP Extensions: mbstring, gd, bcmath, intl, tidy (optional), xml, xmlwriter
 * Crontab (Recommended)
 
@@ -69,7 +69,7 @@ For the installation, select one of the installation variants below:
 
 Check out our [autoinstall](https://github.com/torrentpier/autoinstall) repository with detailed instructions.
 
-> [!IMPORTANT]
+> [!NOTE]
 > Thanks to [Sergei Solovev](https://github.com/SeAnSolovev) for this installation script ❤️
 
 ### Quick (For web-panels) ☕️
@@ -98,10 +98,6 @@ Check out our [autoinstall](https://github.com/torrentpier/autoinstall) reposito
 3. [Check our system requirements](#-requirements)
 4. After, run this command in the project directory to install Composer dependencies
    ```shell
-   # For production (PHP 8.1+)
-   composer install --no-dev
-
-   # For development (PHP 8.2+ required)
    composer install
    ```
 5. Edit database configuration settings in the environment (`.env.example`), after, rename to `.env`
@@ -135,9 +131,6 @@ If you discover a security vulnerability within TorrentPier, please follow our [
 ## 🧪 Testing
 
 TorrentPier includes a comprehensive testing suite built with **Pest PHP**. Run tests to ensure code quality and system reliability:
-
-> [!NOTE]
-> Testing requires **PHP 8.2+** and development dependencies. Install with `composer install` (without `--no-dev` flag).
 
 ```shell
 # Run all tests
