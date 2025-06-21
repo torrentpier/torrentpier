@@ -19,9 +19,6 @@ jobs:
         with:
           php-version: '8.1'
 
-      - name: Update composer.lock file
-        run: composer update --no-dev --no-install
-
       - name: Install Composer dependencies 🪚
         run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader
 
@@ -58,9 +55,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-
-      - name: Update composer.lock file
-        run: composer update --no-dev --no-install
 
       - name: 🖇 Install Composer dependencies
         run: composer install --no-dev --no-progress --prefer-dist --optimize-autoloader

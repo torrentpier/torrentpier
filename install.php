@@ -165,9 +165,6 @@ if (!is_file(BB_ROOT . 'vendor/autoload.php')) {
             $composerFlags .= ' --no-dev';
         }
 
-        runProcess('php ' . BB_ROOT . 'composer.phar update --no-install ' . $composerFlags);
-        sleep(3);
-
         runProcess('php ' . BB_ROOT . 'composer.phar install ' . $composerFlags);
         define('COMPOSER_COMPLETED', true);
     } else {
