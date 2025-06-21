@@ -137,3 +137,23 @@ The TorrentPier 3.0 release represents a major architectural shift focused on:
 - **Language system**: Update global $lang usage to new Language singleton methods
 
 When working with this codebase, prioritize modern architecture patterns and clean code practices. Focus on the new systems in `/src/` directory rather than maintaining legacy compatibility.
+
+## Markdown File Guidelines
+
+When creating or editing `.md` files in this project, follow these linting rules:
+
+### MD032 - Lists surrounded by blank lines
+Always add blank lines before and after lists:
+
+```markdown
+Some text here.
+
+- First item
+- Second item
+- Third item
+
+More text here.
+```
+
+### MD047 - Files should end with a single newline
+Ensure every markdown file ends with exactly one newline character at the end of the file.
