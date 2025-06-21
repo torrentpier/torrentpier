@@ -13,6 +13,7 @@ return function (Router $router): void {
 
     // Legacy controller routes (hacky but organized approach)
     $legacyRoutes = [
+        'ajax.php',
         'index.php',
         'terms.php',
         // Add more legacy controllers here as needed:
@@ -23,15 +24,15 @@ return function (Router $router): void {
 
     foreach ($legacyRoutes as $route) {
         // Route with .php extension
-        $router->get('/' . $route, [LegacyController::class, 'handle']);
+        $router->any('/' . $route, [LegacyController::class, 'handle']);
 
         // Route without .php extension (e.g., /terms for /terms.php)
         $routeWithoutExtension = str_replace('.php', '', $route);
-        $router->get('/' . $routeWithoutExtension, [LegacyController::class, 'handle']);
+        $router->any('/' . $routeWithoutExtension, [LegacyController::class, 'handle']);
     }
 
     // Root route should serve the legacy index.php controller
-    $router->get('/', [LegacyController::class, 'handle']);
+    $router->any('/', [LegacyController::class, 'handle']);
 
     // Future modern routes will be added here
 };
