@@ -2,7 +2,7 @@
 
 # 📖 Change Log
 
-## [nightly](https://nightly.link/torrentpier/torrentpier/workflows/ci/master/TorrentPier-master)
+## [v2.7.0](https://github.com/torrentpier/torrentpier/compare/v2.6.0..v2.7.0) (2025-06-21)
 
 ### 🚀 Features
 
@@ -24,6 +24,8 @@
 
 ### ⚙️ Miscellaneous
 
+- Update minimum `PHP` requirement to `8.2` ([#1987](https://github.com/torrentpier/torrentpier/pull/1987)) - ([9b322c7](https://github.com/torrentpier/torrentpier/commit/9b322c7093a634669e9f17a32ac42500f44f2496))
+- Removed useless `composer update` from workflows & installer ([#1986](https://github.com/torrentpier/torrentpier/pull/1986)) - ([423424e](https://github.com/torrentpier/torrentpier/commit/423424e9478e0772957014fb30f5e84158067af7))
 - Added --no-dev composer flag for some workflows ([#1982](https://github.com/torrentpier/torrentpier/pull/1982)) - ([e9a9e09](https://github.com/torrentpier/torrentpier/commit/e9a9e095768ba68aa5d5058a3e152ffaec916117))
 - Added `--no-dev` composer flag for some workflows ([#1981](https://github.com/torrentpier/torrentpier/pull/1981)) - ([e8cba5d](https://github.com/torrentpier/torrentpier/commit/e8cba5dd3fc83b616f83c24991f79dc7258c5df3))
 
