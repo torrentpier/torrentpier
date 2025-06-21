@@ -1,12 +1,12 @@
 # TorrentPier Database Layer
 
-This directory contains the new database layer for TorrentPier that uses Nette Database internally while maintaining full backward compatibility with the original SqlDb interface.
+This directory contains the new database layer for TorrentPier 3.0 that uses Nette Database internally. **Breaking Change**: This replaces the legacy SqlDb interface and requires code migration.
 
 ## Overview
 
 The new database system has completely replaced the legacy SqlDb/Dbs system and provides:
 
-- **Full backward compatibility** - All existing `DB()->method()` calls work unchanged
+- **Modern API** - New `DB()->method()` calls with improved functionality
 - **Nette Database integration** - Modern, efficient database layer under the hood
 - **Singleton pattern** - Efficient connection management
 - **Complete feature parity** - All original functionality preserved

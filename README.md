@@ -25,9 +25,10 @@ architecture. In addition, we have a very helpful
 
 ## 🌈 Current status
 
-TorrentPier is currently in active development. The goal is to remove all legacy code and rewrite the existing code to
-modern specifications. If you want to delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues)
-and go from there. The documentation will be translated to English in the near future, currently Russian is the main language.
+TorrentPier is currently undergoing a **major 3.0 rewrite** to remove all legacy code and modernize the codebase to current PHP standards. **Backward compatibility is not a priority** - this release focuses on moving forward with clean, modern architecture. If you want to delve deep into the code, check our [issues](https://github.com/torrentpier/torrentpier/issues) and go from there.
+
+> [!NOTE]
+> TorrentPier 3.0 will introduce breaking changes. Existing installations should remain on 2.x versions until ready to migrate to the new architecture.
 
 ## ✨ Features
 * Rich forum with browsing/moderation tools
@@ -57,7 +58,7 @@ and go from there. The documentation will be translated to English in the near f
 
 * Apache / nginx ([example config](install/nginx.conf)) / caddy ([example config](install/Caddyfile))
 * MySQL 5.5.3 or above (including MySQL 8.0+) / MariaDB 10.0 or above / Percona
-* PHP: 8.2 / 8.3 / 8.4
+* PHP: 8.3 / 8.4
 * PHP Extensions: mbstring, gd, bcmath, intl, tidy (optional), xml, xmlwriter
 * Crontab (Recommended)
 

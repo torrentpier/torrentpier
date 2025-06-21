@@ -1,6 +1,6 @@
-# 🚀 TorrentPier Upgrade Guide
+# 🚀 TorrentPier 3.0 Migration Guide
 
-This guide helps you upgrade your TorrentPier installation to the latest version, covering breaking changes, new features, and migration strategies.
+This guide helps you migrate from TorrentPier 2.x to the new 3.0 architecture. **Important**: TorrentPier 3.0 introduces breaking changes and does not maintain backward compatibility. This is a major rewrite focused on modern PHP practices and clean architecture.
 
 ## 📖 Table of Contents
 
@@ -368,19 +368,22 @@ php vendor/bin/phinx status
 
 ## 🗄️ Database Layer Migration
 
-TorrentPier has completely replaced its legacy database layer (SqlDb/Dbs) with a modern implementation using Nette Database while maintaining 100% backward compatibility.
+TorrentPier 3.0 has completely replaced its legacy database layer (SqlDb/Dbs) with a modern implementation using Nette Database. **Breaking Change**: This migration requires code updates for the new API.
 
-### No Code Changes Required
+### Code Changes Required
 
-**Important**: All existing `DB()->method()` calls continue to work exactly as before. This is an internal modernization that requires **zero code changes** in your application.
+**Important**: Legacy `DB()->method()` calls from 2.x are deprecated and will be removed. You must update your code to use the new Database class methods.
 
 ```php
-// ✅ All existing code continues to work unchanged
+// ❌ Legacy code (2.x) - will be removed
 $user = DB()->fetch_row("SELECT * FROM users WHERE id = ?", 123);
 $users = DB()->fetch_rowset("SELECT * FROM users");
-$affected = DB()->affected_rows();
-$result = DB()->sql_query("UPDATE users SET status = ? WHERE id = ?", 1, 123);
-$escaped = DB()->escape($userInput);
+
+// ✅ New 3.0 API (required migration)
+$user = DB()->fetchRow("SELECT * FROM users WHERE id = ?", 123);
+$users = DB()->fetchAll("SELECT * FROM users");
+$affected = DB()->getRowCount();
+$result = DB()->query("UPDATE users SET status = ? WHERE id = ?", 1, 123);
 ```
 
 ### Key Improvements
@@ -444,7 +447,7 @@ DB()->explain('display');
 
 ### Performance Benefits
 
-While maintaining compatibility, you get:
+The 3.0 migration provides:
 - **Faster Connection Handling**: Singleton pattern prevents connection overhead
 - **Modern Query Execution**: Nette Database optimizations
 - **Better Resource Management**: Automatic cleanup and proper connection handling
@@ -495,21 +498,27 @@ if (!$result) {
 
 ## 💾 Unified Cache System Migration
 
-TorrentPier has replaced its legacy Cache and Datastore systems with a modern unified implementation using Nette Caching while maintaining 100% backward compatibility.
+TorrentPier 3.0 has replaced its legacy Cache and Datastore systems with a modern unified implementation using Nette Caching. **Breaking Change**: This migration requires updating your cache-related code.
 
-### No Code Changes Required
+### Code Changes Required
 
-**Important**: All existing `CACHE()` and `$datastore` calls continue to work exactly as before. This is an internal modernization that requires **zero code changes** in your application.
+**Important**: Legacy `CACHE()` and `$datastore` calls from 2.x are deprecated and will be removed. You must update your code to use the new unified cache API.
 
 ```php
-// ✅ All existing code continues to work unchanged
+// ❌ Legacy code (2.x) - will be removed
 $cache = CACHE('bb_cache');
 $value = $cache->get('key');
 $cache->set('key', $value, 3600);
 
 $datastore = datastore();
 $forums = $datastore->get('cat_forums');
-$datastore->store('custom_data', $data);
+
+// ✅ New 3.0 API (required migration)
+$cache = cache('bb_cache');
+$value = $cache->load('key');
+$cache->save('key', $value, ['expire' => '1 hour']);
+
+$forums = cache('datastore')->load('cat_forums');
 ```
 
 ### Key Improvements
@@ -831,7 +840,7 @@ if (isset(lang()->ADVANCED_FEATURE)) {
 
 ### Performance Benefits
 
-While maintaining compatibility, you get:
+The 3.0 migration provides:
 - **Single Language Loading**: Languages loaded once and cached in singleton
 - **Memory Efficiency**: No duplicate language arrays across application
 - **Automatic Locale Setting**: Proper locale configuration for date/time formatting
@@ -910,16 +919,16 @@ censor()->reload();
 $isEnabled = censor()->isEnabled();
 ```
 
-### Backward Compatibility
+### Migration Required
 
-The global `$wordCensor` variable is still available and works exactly as before:
+The global `$wordCensor` variable has been deprecated in TorrentPier 3.0:
 
 ```php
-// This still works - backward compatibility maintained
+// ❌ Legacy code (2.x) - will be removed
 global $wordCensor;
 $censored = $wordCensor->censorString($text);
 
-// But this is now preferred
+// ✅ New 3.0 API (required migration)
 $censored = censor()->censorString($text);
 ```
 
@@ -978,15 +987,15 @@ $templateSelect = \TorrentPier\Legacy\Common\Select::template($currentTemplate, 
 \TorrentPier\Legacy\Common\Select::template($selected, $name);
 ```
 
-### Backward Compatibility
+### Migration Required
 
-The old class path is deprecated but still works through class aliasing:
+The old class path has been removed in TorrentPier 3.0:
 
 ```php
-// This still works but is deprecated
+// ❌ Legacy code (2.x) - will be removed
 \TorrentPier\Legacy\Select::language($lang, 'default_lang');
 
-// This is the new recommended way
+// ✅ New 3.0 API (required migration)
 \TorrentPier\Legacy\Common\Select::language($lang, 'default_lang');
 ```
 
@@ -1056,17 +1065,17 @@ if (dev()->isLocalEnvironment()) {
 }
 ```
 
-### Backward Compatibility
+### Migration Required
 
-All existing static method calls continue to work exactly as before:
+Legacy static method calls have been deprecated in TorrentPier 3.0:
 
 ```php
-// This still works - backward compatibility maintained
+// ❌ Legacy code (2.x) - will be removed
 $sqlLog = \TorrentPier\Dev::getSqlLog();
 $isDebugAllowed = \TorrentPier\Dev::sqlDebugAllowed();
 $shortQuery = \TorrentPier\Dev::shortQuery($sql);
 
-// But this is now preferred
+// ✅ New 3.0 API (required migration)
 $sqlLog = dev()->getSqlDebugLog();
 $isDebugAllowed = dev()->checkSqlDebugAllowed();
 $shortQuery = dev()->formatShortQuery($sql);
@@ -1099,9 +1108,9 @@ $environment = [
 ## ⚠️ Breaking Changes
 
 ### Database Layer Changes
-- **✅ No Breaking Changes**: All existing `DB()->method()` calls work exactly as before
+- **⚠️ Breaking Changes**: Legacy `DB()->method()` calls require migration to new API
 - **Removed Files**: `src/Legacy/SqlDb.php` and `src/Legacy/Dbs.php` (replaced by modern implementation)
-- **New Implementation**: Uses Nette Database v3.2 internally with full backward compatibility
+- **New Implementation**: Uses Nette Database v3.2 with improved API requiring code updates
 
 ### Deprecated Functions
 - `get_config()` → Use `config()->get()`

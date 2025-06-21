@@ -21,7 +21,7 @@ body:
     attributes:
       label: PHP & Platform
       description: Exact PHP and Platform (OS) versions your using.
-      placeholder: 8.2.2 - Ubuntu 22.04 x64
+      placeholder: 8.3 - Ubuntu 24.04 x64
     validations:
       required: true
   - type: checkboxes

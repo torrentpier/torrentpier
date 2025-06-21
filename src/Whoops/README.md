@@ -122,10 +122,10 @@ The enhanced handlers maintain security by:
 - Logging detailed information to files (not user-accessible)
 - Providing generic error messages to non-debug users
 
-## Backward Compatibility
+## Integration with TorrentPier 3.0
 
 All enhancements are:
-- **100% backward compatible** with existing TorrentPier code
-- **Non-breaking** - existing error handling continues to work
+- **Integrated** with the new TorrentPier 3.0 architecture
+- **Modern** - designed for the rewritten codebase
 - **Optional** - only activated in debug mode
 - **Safe** - no security implications for production use
