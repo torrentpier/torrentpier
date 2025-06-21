@@ -2,6 +2,13 @@
 
 # 📖 Change Log
 
+## [v2.8.0](https://github.com/torrentpier/torrentpier/compare/v2.7.0..v2.8.0) (2025-06-21)
+
+### 🐛 Bug Fixes
+
+- *(template)* Handle L_ variables in template vars when not found in lang vars ([#1998](https://github.com/torrentpier/torrentpier/pull/1998)) - ([c6076c2](https://github.com/torrentpier/torrentpier/commit/c6076c2c278e9a423f3862670236b75bddeadd87))
+
+
 ## [v2.7.0](https://github.com/torrentpier/torrentpier/compare/v2.6.0..v2.7.0) (2025-06-21)
 
 ### 🚀 Features
