@@ -7,12 +7,25 @@
 ### 🚀 Features
 
 - *(database)* Add visual markers for Nette Explorer queries in debug panel ([#1965](https://github.com/torrentpier/torrentpier/pull/1965)) - ([2fd3067](https://github.com/torrentpier/torrentpier/commit/2fd306704f21febee7d53f4b4531601ce0cb81ce))
+- *(language)* Add new language variable for migration file and enhance template fallback logic ([#1984](https://github.com/torrentpier/torrentpier/pull/1984)) - ([a33574c](https://github.com/torrentpier/torrentpier/commit/a33574c28f2eb6267a74fa6c9d97fea86527157a))
 - *(migrations)* Implement Phinx database migration system ([#1976](https://github.com/torrentpier/torrentpier/pull/1976)) - ([fbde8cd](https://github.com/torrentpier/torrentpier/commit/fbde8cd421c9048afe70ddb41d0a9ed26d3fbef5))
+- *(test)* [**breaking**] Add comprehensive testing infrastructure with Pest PHP  ([#1979](https://github.com/torrentpier/torrentpier/pull/1979)) - ([cc9d412](https://github.com/torrentpier/torrentpier/commit/cc9d412522938a023bd2b8eb880c4d2dd307c82a))
 - [**breaking**] Implement Language singleton with shorthand functions ([#1966](https://github.com/torrentpier/torrentpier/pull/1966)) - ([49717d3](https://github.com/torrentpier/torrentpier/commit/49717d3a687b95885fe9773f2597354aed4b2b60))
+
+### 🐛 Bug Fixes
+
+- *(database)* Update affected rows tracking in Database class ([#1980](https://github.com/torrentpier/torrentpier/pull/1980)) - ([4f9cc9f](https://github.com/torrentpier/torrentpier/commit/4f9cc9fe0f7f4a85c90001a3f5514efdf04836da))
 
 ### 🚜 Refactor
 
+- *(database)* Enhance error logging and various fixes ([#1978](https://github.com/torrentpier/torrentpier/pull/1978)) - ([7aed6bc](https://github.com/torrentpier/torrentpier/commit/7aed6bc7d89f4ed31e7ed6c6eeecc6e08d348c24))
 - *(database)* Rename DB to Database and extract debug functionality ([#1964](https://github.com/torrentpier/torrentpier/pull/1964)) - ([6c0219d](https://github.com/torrentpier/torrentpier/commit/6c0219d53c7544b7d8a6374c0d0848945d32ae17))
+- *(stats)* Improve database row fetching in tr_stats.php ([#1985](https://github.com/torrentpier/torrentpier/pull/1985)) - ([728116d](https://github.com/torrentpier/torrentpier/commit/728116d6dc9cf4476cce572ced5e8a7ef529ead8))
+
+### ⚙️ Miscellaneous
+
+- Added --no-dev composer flag for some workflows ([#1982](https://github.com/torrentpier/torrentpier/pull/1982)) - ([e9a9e09](https://github.com/torrentpier/torrentpier/commit/e9a9e095768ba68aa5d5058a3e152ffaec916117))
+- Added `--no-dev` composer flag for some workflows ([#1981](https://github.com/torrentpier/torrentpier/pull/1981)) - ([e8cba5d](https://github.com/torrentpier/torrentpier/commit/e8cba5dd3fc83b616f83c24991f79dc7258c5df3))
 
 
 ## [v2.6.0](https://github.com/torrentpier/torrentpier/compare/v2.5.0..v2.6.0) (2025-06-18)
