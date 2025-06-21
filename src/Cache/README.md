@@ -1,14 +1,13 @@
 # Unified Cache System
 
-A modern, unified caching solution for TorrentPier 3.0 that uses **Nette Caching** internally. **Breaking Change**: This replaces the legacy Cache and Datastore APIs and requires code migration.
+A modern, unified caching solution for TorrentPier 3.0 that uses **Nette Caching** internally. **Breaking changes**: This replaces the legacy Cache and Datastore APIs and requires code migration.
 
 ## Overview
 
 The Unified Cache System addresses the complexity and duplication in TorrentPier's caching architecture by:
 
 - **Unifying** Cache and Datastore systems into a single, coherent solution
-- **Modernizing** the codebase with Nette's advanced caching features
-- **Modernizing** the caching layer with breaking changes for better architecture
+- **Modernizing** the caching layer with Nette's advanced features and breaking changes for better architecture
 - **Reducing** complexity and maintenance overhead
 - **Improving** performance with efficient singleton pattern and advanced features
 

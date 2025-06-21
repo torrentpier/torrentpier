@@ -34,6 +34,11 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
         }
 
         $inspector = $this->getInspector();
+
+        if (!$inspector) {
+            return Handler::DONE;
+        }
+
         $exception = $inspector->getException();
 
         // Add database information to the exception frames
@@ -77,7 +82,15 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
      */
     private function addDatabaseContextToFrames($inspector): void
     {
+        if (!$inspector) {
+            return;
+        }
+
         $frames = $inspector->getFrames();
+
+        if (!$frames || empty($frames)) {
+            return;
+        }
 
         foreach ($frames as $frame) {
             $frameData = [];
@@ -138,10 +151,15 @@ class DatabaseErrorHandler extends Handler implements HandlerInterface
     private function addDatabaseInfoAsFrameComments(array $databaseInfo): void
     {
         $inspector = $this->getInspector();
+
+        if (!$inspector) {
+            return;
+        }
+
         $frames = $inspector->getFrames();
 
         // Find the first frame and add database info as comments
-        if (!empty($frames)) {
+        if (!empty($frames) && is_array($frames) && isset($frames[0])) {
             $firstFrame = $frames[0];
             $firstFrame->addComment('=== Database Information ===', '');
 

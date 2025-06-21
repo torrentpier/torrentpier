@@ -125,6 +125,7 @@ The enhanced handlers maintain security by:
 ## Integration with TorrentPier 3.0
 
 All enhancements are:
+
 - **Integrated** with the new TorrentPier 3.0 architecture
 - **Modern** - designed for the rewritten codebase
 - **Optional** - only activated in debug mode

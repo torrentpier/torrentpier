@@ -368,7 +368,7 @@ php vendor/bin/phinx status
 
 ## 🗄️ Database Layer Migration
 
-TorrentPier 3.0 has completely replaced its legacy database layer (SqlDb/Dbs) with a modern implementation using Nette Database. **Breaking Change**: This migration requires code updates for the new API.
+TorrentPier 3.0 has completely replaced its legacy database layer (SqlDb/Dbs) with a modern implementation using Nette Database. **Breaking changes**: This migration requires code updates for the new API.
 
 ### Code Changes Required
 
@@ -498,7 +498,7 @@ if (!$result) {
 
 ## 💾 Unified Cache System Migration
 
-TorrentPier 3.0 has replaced its legacy Cache and Datastore systems with a modern unified implementation using Nette Caching. **Breaking Change**: This migration requires updating your cache-related code.
+TorrentPier 3.0 has replaced its legacy Cache and Datastore systems with a modern unified implementation using Nette Caching. **Breaking changes**: This migration requires updating your cache-related code.
 
 ### Code Changes Required
 

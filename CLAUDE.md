@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting BitTorrent communities with forum functionality. The project is undergoing a major 3.0 rewrite, transitioning from legacy code to modern PHP practices. **Backward compatibility is not a priority** - the focus is on moving forward with clean, modern architecture.
+TorrentPier is a BitTorrent tracker engine written in PHP, designed for hosting BitTorrent communities with forum functionality. The project is undergoing a major 3.0 rewrite, transitioning from legacy code to modern PHP practices. **Backward compatibility is not supported in 3.0** - legacy APIs will break and are not maintained as the focus is on moving forward with clean, modern architecture.
 
 ## Technology Stack & Architecture
 
