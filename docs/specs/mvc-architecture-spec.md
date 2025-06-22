@@ -10,7 +10,7 @@ This document specifies the MVC (Model-View-Controller) architecture directory s
 # Laravel-style root structure
 /app/                      # Application code (PSR-4: App\)
 ├── Console/               # Console commands
-│   └── Commands/          # Artisan-style commands
+│   └── Commands/          # Artisan-style commands for Dexter
 ├── Http/                  # HTTP layer
 │   ├── Controllers/       # Controllers
 │   │   ├── Admin/         # Admin panel controllers
@@ -109,7 +109,7 @@ This document specifies the MVC (Model-View-Controller) architecture directory s
 .env                       # Environment variables
 .env.example               # Environment example
 composer.json              # Dependencies (App\ and TorrentPier\ namespaces)
-artisan                    # CLI interface
+dexter                    # CLI interface
 index.php                  # Legacy entry point (redirects to public/)
 ```
 

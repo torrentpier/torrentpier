@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Dexter - TorrentPier Command Line Interface
+ *
+ * Laravel-style CLI for running commands
+ */
+
+// Load the bootstrap and get the application
+$app = require __DIR__ . '/bootstrap/console.php';
+
+// Run the console application with proper error handling
+try {
+    exit($app->run());
+} catch (\Exception $e) {
+    fwrite(STDERR, "Error: " . $e->getMessage() . "\n");
+    exit(1);
+}

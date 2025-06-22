@@ -79,6 +79,7 @@
     "php-curl-class/php-curl-class": "^12.0.0",
     "robmorgan/phinx": "^0.16.9",
     "samdark/sitemap": "2.4.1",
+    "symfony/console": "^7.3",
     "symfony/mailer": "^7.3",
     "symfony/polyfill": "v1.32.0",
     "vlucas/phpdotenv": "^5.5",
