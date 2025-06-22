@@ -59,16 +59,17 @@
     "gemorroj/m3u-parser": "^6.0.1",
     "gigablah/sphinxphp": "2.0.8",
     "google/recaptcha": "^1.3",
+    "illuminate/container": "^12.19",
+    "illuminate/http": "^12.19",
+    "illuminate/support": "^12.19",
     "jacklul/monolog-telegram": "^3.1",
     "josantonius/cookie": "^2.0",
     "league/flysystem": "^3.28",
-    "league/route": "^6.2",
     "longman/ip-tools": "1.2.1",
     "monolog/monolog": "^3.4",
     "nette/caching": "^3.3",
     "nette/database": "^3.2",
     "php-curl-class/php-curl-class": "^12.0.0",
-    "php-di/php-di": "^7.0",
     "robmorgan/phinx": "^0.16.9",
     "samdark/sitemap": "2.4.1",
     "symfony/mailer": "^7.3",
@@ -83,10 +84,12 @@
   },
   "autoload": {
     "psr-4": {
-      "TorrentPier\\": "src/"
+      "TorrentPier\\": "src/",
+      "App\\": "app/"
     },
     "files": [
-      "src/helpers.php"
+      "src/helpers.php",
+      "app/helpers.php"
     ]
   },
   "autoload-dev": {
