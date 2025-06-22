@@ -91,8 +91,8 @@ class Ajax
         }
 
         // Exit if board is disabled via ON/OFF trigger or by admin
-        if (config()->get('board_disable') || is_file(BB_DISABLED)) {
-            if (config()->get('board_disable')) {
+        if (tp_config()->get('board_disable') || is_file(BB_DISABLED)) {
+            if (tp_config()->get('board_disable')) {
                 $this->ajax_die($lang['BOARD_DISABLE']);
             } elseif (is_file(BB_DISABLED) && $this->action !== 'manage_admin') {
                 $this->ajax_die($lang['BOARD_DISABLE_CRON']);

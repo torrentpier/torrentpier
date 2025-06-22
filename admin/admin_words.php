@@ -14,7 +14,7 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-if (!config()->get('use_word_censor')) {
+if (!tp_config()->get('use_word_censor')) {
     bb_die('Word censor disabled <br /><br /> (use_word_censor in config.php)');
 }
 

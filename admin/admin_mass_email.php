@@ -14,7 +14,7 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-if (!config()->get('emailer.enabled')) {
+if (!tp_config()->get('emailer.enabled')) {
     bb_die($lang['EMAILER_DISABLED']);
 }
 
@@ -23,7 +23,7 @@ set_time_limit(1200);
 $subject = trim(request_var('subject', ''));
 $message = (string)request_var('message', '');
 $group_id = (int)request_var(POST_GROUPS_URL, 0);
-$reply_to = (string)request_var('reply_to', config()->get('board_email'));
+$reply_to = (string)request_var('reply_to', tp_config()->get('board_email'));
 $message_type = (string)request_var('message_type', '');
 
 $errors = $user_id_sql = [];

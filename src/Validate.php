@@ -183,18 +183,18 @@ class Validate
                 }
             }
             // Letters
-            if (config()->get('password_symbols.letters.lowercase')) {
+            if (tp_config()->get('password_symbols.letters.lowercase')) {
                 if (!StringHelper::isContainsLetters($password)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER'];
                 }
             }
-            if (config()->get('password_symbols.letters.uppercase')) {
+            if (tp_config()->get('password_symbols.letters.uppercase')) {
                 if (!StringHelper::isContainsLetters($password, true)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
                 }
             }
             // Spec symbols
-            if (config()->get('password_symbols.spec_symbols')) {
+            if (tp_config()->get('password_symbols.spec_symbols')) {
                 if (!StringHelper::isContainsSpecSymbols($password)) {
                     return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
                 }

@@ -12,8 +12,8 @@ if (!defined('IN_TRACKER')) {
 }
 
 // Exit if tracker is disabled
-if (config()->get('tracker.bt_off')) {
-    msg_die(config()->get('tracker.bt_off_reason'));
+if (tp_config()->get('tracker.bt_off')) {
+    msg_die(tp_config()->get('tracker.bt_off_reason'));
 }
 
 //

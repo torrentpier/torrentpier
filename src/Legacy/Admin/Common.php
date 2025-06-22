@@ -348,7 +348,7 @@ class Common
                 @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
             }
             // TorrServer integration
-            if (config()->get('torr_server.enabled')) {
+            if (tp_config()->get('torr_server.enabled')) {
                 $torrServer = new \TorrentPier\TorrServerAPI();
                 $torrServer->removeM3U($row['attach_id']);
             }
@@ -779,7 +779,7 @@ class Common
 
         // Delete user feed
         foreach (explode(',', $user_csv) as $user_id) {
-            $file_path = config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
+            $file_path = tp_config()->get('atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
             @unlink($file_path);
         }
     }

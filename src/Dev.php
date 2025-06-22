@@ -90,11 +90,11 @@ class Dev
      */
     private function getBugsnag(): void
     {
-        if (!config()->get('bugsnag.enabled')) {
+        if (!tp_config()->get('bugsnag.enabled')) {
             return;
         }
 
-        $bugsnag = Client::make(config()->get('bugsnag.api_key'));
+        $bugsnag = Client::make(tp_config()->get('bugsnag.api_key'));
         $this->whoops->pushHandler(function ($e) use ($bugsnag) {
             $bugsnag->notifyException($e);
         });
@@ -107,7 +107,7 @@ class Dev
      */
     private function getTelegramSender(): void
     {
-        if (!config()->get('telegram_sender.enabled')) {
+        if (!tp_config()->get('telegram_sender.enabled')) {
             return;
         }
 
@@ -115,7 +115,7 @@ class Dev
         $telegramSender->loggerOnly(true);
         $telegramSender->setLogger((new Logger(
             APP_NAME,
-            [(new TelegramHandler(config()->get('telegram_sender.token'), (int)config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout')))
+            [(new TelegramHandler(tp_config()->get('telegram_sender.token'), (int)tp_config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout')))
                 ->setFormatter(new TelegramFormatter())]
         )));
         $this->whoops->pushHandler($telegramSender);
@@ -132,7 +132,7 @@ class Dev
          * Show errors on page with enhanced database information
          */
         $prettyPageHandler = new \TorrentPier\Whoops\EnhancedPrettyPageHandler();
-        foreach (config()->get('whoops.blacklist', []) as $key => $secrets) {
+        foreach (tp_config()->get('whoops.blacklist', []) as $key => $secrets) {
             foreach ($secrets as $secret) {
                 $prettyPageHandler->blacklist($key, $secret);
             }
@@ -181,7 +181,7 @@ class Dev
     private function getWhoopsPlaceholder(): void
     {
         $this->whoops->pushHandler(function ($e) {
-            echo config()->get('whoops.error_message');
+            echo tp_config()->get('whoops.error_message');
             echo "<hr/>Error: {$e->getMessage()}.";
         });
     }

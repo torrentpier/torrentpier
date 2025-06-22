@@ -111,7 +111,7 @@ class Censor
      */
     public function isEnabled(): bool
     {
-        return config()->get('use_word_censor', false);
+        return tp_config()->get('use_word_censor', false);
     }
 
     /**

@@ -60,15 +60,15 @@ class Post
         }
 
         // Check smilies limit
-        if (config()->get('max_smilies')) {
-            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config()->get('smilies_path'));
-            if ($count_smilies > config()->get('max_smilies')) {
-                $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], config()->get('max_smilies'));
+        if (tp_config()->get('max_smilies')) {
+            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . tp_config()->get('smilies_path'));
+            if ($count_smilies > tp_config()->get('max_smilies')) {
+                $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], tp_config()->get('max_smilies'));
                 $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
             }
         }
 
-        if (IS_GUEST && !config()->get('captcha.disabled') && !bb_captcha('check')) {
+        if (IS_GUEST && !tp_config()->get('captcha.disabled') && !bb_captcha('check')) {
             $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['CAPTCHA_WRONG'] : $lang['CAPTCHA_WRONG'];
         }
     }
@@ -108,7 +108,7 @@ class Post
             $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
             if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
                 if ($userdata['user_level'] == USER) {
-                    if ((TIMENOW - $row['last_post_time']) < config()->get('flood_interval')) {
+                    if ((TIMENOW - $row['last_post_time']) < tp_config()->get('flood_interval')) {
                         bb_die($lang['FLOOD_ERROR']);
                     }
                 }
@@ -200,9 +200,9 @@ class Post
         update_post_html(['post_id' => $post_id, 'post_text' => $post_message]);
 
         // Updating news cache on index page
-        if (config()->get('show_latest_news')) {
-            $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
-            if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $mode == 'newtopic') {
+        if (tp_config()->get('show_latest_news')) {
+            $news_forums = array_flip(explode(',', tp_config()->get('latest_news_forum_id')));
+            if (isset($news_forums[$forum_id]) && tp_config()->get('show_latest_news') && $mode == 'newtopic') {
                 $datastore->enqueue([
                     'latest_news'
                 ]);
@@ -210,9 +210,9 @@ class Post
             }
         }
 
-        if (config()->get('show_network_news')) {
-            $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
-            if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $mode == 'newtopic') {
+        if (tp_config()->get('show_network_news')) {
+            $net_forums = array_flip(explode(',', tp_config()->get('network_news_forum_id')));
+            if (isset($net_forums[$forum_id]) && tp_config()->get('show_network_news') && $mode == 'newtopic') {
                 $datastore->enqueue([
                     'network_news'
                 ]);

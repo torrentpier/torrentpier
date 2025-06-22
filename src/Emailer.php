@@ -88,14 +88,14 @@ class Emailer
     public function set_template(string $template_file, string $template_lang = ''): void
     {
         if (!$template_lang) {
-            $template_lang = config()->get('default_lang');
+            $template_lang = tp_config()->get('default_lang');
         }
 
         if (empty($this->tpl_msg[$template_lang . $template_file])) {
             $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
 
             if (!is_file($tpl_file)) {
-                $tpl_file = LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/email/' . $template_file . '.html';
+                $tpl_file = LANG_ROOT_DIR . '/' . tp_config()->get('default_lang') . '/email/' . $template_file . '.html';
 
                 if (!is_file($tpl_file)) {
                     throw new Exception('Could not find email template file: ' . $template_file);
@@ -125,7 +125,7 @@ class Emailer
     {
         global $lang;
 
-        if (!config()->get('emailer.enabled')) {
+        if (!tp_config()->get('emailer.enabled')) {
             return false;
         }
 
@@ -140,25 +140,25 @@ class Emailer
         $this->subject = !empty($this->subject) ? $this->subject : $lang['EMAILER_SUBJECT']['EMPTY'];
 
         /** Prepare message */
-        if (config()->get('emailer.smtp.enabled')) {
-            if (!empty(config()->get('emailer.smtp.host'))) {
-                $sslType = config()->get('emailer.smtp.ssl_type');
+        if (tp_config()->get('emailer.smtp.enabled')) {
+            if (!empty(tp_config()->get('emailer.smtp.host'))) {
+                $sslType = tp_config()->get('emailer.smtp.ssl_type');
                 if (empty($sslType)) {
                     $sslType = null;
                 }
                 /** @var EsmtpTransport $transport external SMTP with SSL */
                 $transport = (new EsmtpTransport(
-                    config()->get('emailer.smtp.host'),
-                    config()->get('emailer.smtp.port'),
+                    tp_config()->get('emailer.smtp.host'),
+                    tp_config()->get('emailer.smtp.port'),
                     $sslType
                 ))
-                    ->setUsername(config()->get('emailer.smtp.username'))
-                    ->setPassword(config()->get('emailer.smtp.password'));
+                    ->setUsername(tp_config()->get('emailer.smtp.username'))
+                    ->setPassword(tp_config()->get('emailer.smtp.password'));
             } else {
                 $transport = new EsmtpTransport('localhost', 25);
             }
         } else {
-            $transport = new SendmailTransport(config()->get('emailer.sendmail_command'));
+            $transport = new SendmailTransport(tp_config()->get('emailer.sendmail_command'));
         }
 
         $mailer = new Mailer($transport);
@@ -167,9 +167,9 @@ class Emailer
         $message = (new Email())
             ->subject($this->subject)
             ->to($this->to)
-            ->from(new Address(config()->get('board_email'), config()->get('board_email_sitename')))
-            ->returnPath(new Address(config()->get('bounce_email')))
-            ->replyTo($this->reply ?? new Address(config()->get('board_email')));
+            ->from(new Address(tp_config()->get('board_email'), tp_config()->get('board_email_sitename')))
+            ->returnPath(new Address(tp_config()->get('bounce_email')))
+            ->replyTo($this->reply ?? new Address(tp_config()->get('board_email')));
 
         /**
          * This non-standard header tells compliant autoresponders ("email holiday mode") to not
@@ -209,9 +209,9 @@ class Emailer
     public function assign_vars($vars): void
     {
         $this->vars = array_merge([
-            'BOARD_EMAIL' => config()->get('board_email'),
-            'SITENAME' => config()->get('board_email_sitename'),
-            'EMAIL_SIG' => !empty(config()->get('board_email_sig')) ? "-- \n" . config()->get('board_email_sig') : '',
+            'BOARD_EMAIL' => tp_config()->get('board_email'),
+            'SITENAME' => tp_config()->get('board_email_sitename'),
+            'EMAIL_SIG' => !empty(tp_config()->get('board_email_sig')) ? "-- \n" . tp_config()->get('board_email_sig') : '',
         ], $vars);
     }
 }

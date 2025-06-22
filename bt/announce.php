@@ -18,8 +18,8 @@ if (empty($userAgent)) {
     die;
 }
 
-$announce_interval = config()->get('announce_interval');
-$passkey_key = config()->get('passkey_key');
+$announce_interval = tp_config()->get('announce_interval');
+$passkey_key = tp_config()->get('passkey_key');
 
 // Recover info_hash
 if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
@@ -65,10 +65,10 @@ if (strlen($peer_id) !== 20) {
 }
 
 // Check for client ban
-if (config()->get('client_ban.enabled')) {
+if (tp_config()->get('client_ban.enabled')) {
     $targetClient = [];
 
-    foreach (config()->get('client_ban.clients') as $clientId => $banReason) {
+    foreach (tp_config()->get('client_ban.clients') as $clientId => $banReason) {
         if (str_starts_with($peer_id, $clientId)) {
             $targetClient = [
                 'peer_id' => $clientId,
@@ -78,7 +78,7 @@ if (config()->get('client_ban.enabled')) {
         }
     }
 
-    if (config()->get('client_ban.only_allow_mode')) {
+    if (tp_config()->get('client_ban.only_allow_mode')) {
         if (empty($targetClient['peer_id'])) {
             msg_die('Your BitTorrent client has been banned!');
         }
@@ -129,7 +129,7 @@ if (
     || !is_numeric($port)
     || ($port < 1024 && !$stopped)
     || $port > 0xFFFF
-    || (!empty(config()->get('disallowed_ports')) && in_array($port, config()->get('disallowed_ports')))
+    || (!empty(tp_config()->get('disallowed_ports')) && in_array($port, tp_config()->get('disallowed_ports')))
 ) {
     msg_die('Invalid port: ' . $port);
 }
@@ -168,13 +168,13 @@ if (preg_match('/(Mozilla|Browser|Chrome|Safari|AppleWebKit|Opera|Links|Lynx|Bot
 $ip = $_SERVER['REMOTE_ADDR'];
 
 // 'ip' query handling
-if (!config()->get('ignore_reported_ip') && isset($_GET['ip']) && $ip !== $_GET['ip']) {
-    if (!config()->get('verify_reported_ip') && isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+if (!tp_config()->get('ignore_reported_ip') && isset($_GET['ip']) && $ip !== $_GET['ip']) {
+    if (!tp_config()->get('verify_reported_ip') && isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $x_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 
         if ($x_ip === $_GET['ip']) {
             $filteredIp = filter_var($x_ip, FILTER_VALIDATE_IP);
-            if ($filteredIp !== false && (config()->get('allow_internal_ip') || !filter_var($filteredIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
+            if ($filteredIp !== false && (tp_config()->get('allow_internal_ip') || !filter_var($filteredIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE))) {
                 $ip = $filteredIp;
             }
         }
@@ -270,7 +270,7 @@ if ($lp_info) {
     define('IS_MOD', !IS_GUEST && (int)$row['user_level'] === MOD);
     define('IS_GROUP_MEMBER', !IS_GUEST && (int)$row['user_level'] === GROUP_MEMBER);
     define('IS_USER', !IS_GUEST && (int)$row['user_level'] === USER);
-    define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$user_id]));
+    define('IS_SUPER_ADMIN', IS_ADMIN && isset(tp_config()->get('super_admins')[$user_id]));
     define('IS_AM', IS_ADMIN || IS_MOD);
     $topic_id = $row['topic_id'];
     $releaser = (int)($user_id == $row['poster_id']);
@@ -278,13 +278,13 @@ if ($lp_info) {
     $tor_status = $row['tor_status'];
 
     // Check tor status
-    if (!IS_AM && isset(config()->get('tor_frozen')[$tor_status]) && !(isset(config()->get('tor_frozen_author_download')[$tor_status]) && $releaser)) {
+    if (!IS_AM && isset(tp_config()->get('tor_frozen')[$tor_status]) && !(isset(tp_config()->get('tor_frozen_author_download')[$tor_status]) && $releaser)) {
         msg_die('Torrent frozen and cannot be downloaded');
     }
 
     // Check hybrid status
     if (!empty($row['info_hash']) && !empty($row['info_hash_v2'])) {
-        $stat_protocol = match ((int)config()->get('tracker.hybrid_stat_protocol')) {
+        $stat_protocol = match ((int)tp_config()->get('tracker.hybrid_stat_protocol')) {
             2 => substr($row['info_hash_v2'], 0, 20),
             default => $row['info_hash'] // 1
         };
@@ -294,7 +294,7 @@ if ($lp_info) {
     }
 
     // Ratio limits
-    if ((RATIO_ENABLED || config()->get('tracker.limit_concurrent_ips')) && !$stopped) {
+    if ((RATIO_ENABLED || tp_config()->get('tracker.limit_concurrent_ips')) && !$stopped) {
         $user_ratio = get_bt_ratio($row);
         if ($user_ratio === null) {
             $user_ratio = 1;
@@ -302,10 +302,10 @@ if ($lp_info) {
         $rating_msg = '';
 
         if (!$seeder) {
-            foreach (config()->get('rating') as $ratio => $limit) {
+            foreach (tp_config()->get('rating') as $ratio => $limit) {
                 if ($user_ratio < $ratio) {
-                    config()->set('tracker.limit_active_tor', 1);
-                    config()->set('tracker.limit_leech_count', $limit);
+                    tp_config()->set('tracker.limit_active_tor', 1);
+                    tp_config()->set('tracker.limit_leech_count', $limit);
                     $rating_msg = " (ratio < $ratio)";
                     break;
                 }
@@ -313,23 +313,23 @@ if ($lp_info) {
         }
 
         // Limit active torrents
-        if (!isset(config()->get('unlimited_users')[$user_id]) && config()->get('tracker.limit_active_tor') && ((config()->get('tracker.limit_seed_count') && $seeder) || (config()->get('tracker.limit_leech_count') && !$seeder))) {
+        if (!isset(tp_config()->get('unlimited_users')[$user_id]) && tp_config()->get('tracker.limit_active_tor') && ((config()->get('tracker.limit_seed_count') && $seeder) || (config()->get('tracker.limit_leech_count') && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT topic_id) AS active_torrents
 				FROM " . BB_BT_TRACKER . "
 				WHERE user_id = $user_id
 					AND seeder = $seeder
 					AND topic_id != $topic_id";
 
-            if (!$seeder && config()->get('tracker.leech_expire_factor') && $user_ratio < 0.5) {
+            if (!$seeder && tp_config()->get('tracker.leech_expire_factor') && $user_ratio < 0.5) {
                 $sql .= " AND update_time > " . (TIMENOW - 60 * config()->get('tracker.leech_expire_factor'));
             }
             $sql .= " GROUP BY user_id";
 
             if ($row = DB()->fetch_row($sql)) {
-                if ($seeder && config()->get('tracker.limit_seed_count') && $row['active_torrents'] >= config()->get('tracker.limit_seed_count')) {
-                    msg_die('Only ' . config()->get('tracker.limit_seed_count') . ' torrent(s) allowed for seeding');
-                } elseif (!$seeder && config()->get('tracker.limit_leech_count') && $row['active_torrents'] >= config()->get('tracker.limit_leech_count')) {
-                    msg_die('Only ' . config()->get('tracker.limit_leech_count') . ' torrent(s) allowed for leeching' . $rating_msg);
+                if ($seeder && tp_config()->get('tracker.limit_seed_count') && $row['active_torrents'] >= tp_config()->get('tracker.limit_seed_count')) {
+                    msg_die('Only ' . tp_config()->get('tracker.limit_seed_count') . ' torrent(s) allowed for seeding');
+                } elseif (!$seeder && tp_config()->get('tracker.limit_leech_count') && $row['active_torrents'] >= tp_config()->get('tracker.limit_leech_count')) {
+                    msg_die('Only ' . tp_config()->get('tracker.limit_leech_count') . ' torrent(s) allowed for leeching' . $rating_msg);
                 }
             }
         }

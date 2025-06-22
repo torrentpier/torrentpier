@@ -150,7 +150,7 @@ class Upload
         $file_name_ary = explode('.', $this->file['name']);
         $this->file_ext = strtolower(end($file_name_ary));
 
-        $this->ext_ids = array_flip(config()->get('file_id_ext'));
+        $this->ext_ids = array_flip(tp_config()->get('file_id_ext'));
 
         // Actions for images [E.g. Change avatar]
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
