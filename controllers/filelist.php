@@ -9,7 +9,10 @@
 
 define('BB_SCRIPT', 'filelist');
 
-require __DIR__ . '/common.php';
+// Skip loading common.php if already loaded (when run through routing system)
+if (!defined('IN_TORRENTPIER')) {
+    require __DIR__ . '/../common.php';
+}
 
 // Start session management
 $user->session_start();

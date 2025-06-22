@@ -14,12 +14,27 @@ return function (Router $router): void {
     // Legacy controller routes (hacky but organized approach)
     $legacyRoutes = [
         'ajax.php',
+        'dl.php',
+        'dl_list.php',
+        'feed.php',
+        'filelist.php',
+        'group.php',
+        'group_edit.php',
         'index.php',
+        'info.php',
+        'login.php',
+        'memberlist.php',
+        'modcp.php',
+        'playback_m3u.php',
+        'poll.php',
+        'posting.php',
+        'privmsg.php',
+        'profile.php',
+        'search.php',
         'terms.php',
-        // Add more legacy controllers here as needed:
-        // 'login.php',
-        // 'search.php',
-        // 'tracker.php',
+        'tracker.php',
+        'viewforum.php',
+        'viewtopic.php',
     ];
 
     foreach ($legacyRoutes as $route) {

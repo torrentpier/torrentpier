@@ -1332,7 +1332,7 @@ function bb_die($msg_text, $status_code = null)
 {
     global $ajax, $lang, $template, $theme, $userdata, $user;
 
-    if (isset($status_code)) {
+    if (isset($status_code) && !defined('MODERN_ROUTING')) {
         http_response_code($status_code);
     }
 
@@ -1388,9 +1388,11 @@ function bb_die($msg_text, $status_code = null)
 
 function bb_simple_die($txt, $status_code = null)
 {
-    header('Content-Type: text/plain; charset=' . DEFAULT_CHARSET);
+    if (!defined('MODERN_ROUTING')) {
+        header('Content-Type: text/plain; charset=' . DEFAULT_CHARSET);
+    }
 
-    if (isset($status_code)) {
+    if (isset($status_code) && !defined('MODERN_ROUTING')) {
         http_response_code($status_code);
     }
 

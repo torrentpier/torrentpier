@@ -10,7 +10,11 @@
 define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
 
-require __DIR__ . '/common.php';
+// Skip loading common.php if already loaded (when run through routing system)
+if (!defined('IN_TORRENTPIER')) {
+    require __DIR__ . '/../common.php';
+}
+
 require ATTACH_DIR . '/attachment_mod.php';
 
 $datastore->enqueue([

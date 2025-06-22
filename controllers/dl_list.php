@@ -9,7 +9,10 @@
 
 define('BB_SCRIPT', 'dl_list');
 
-require __DIR__ . '/common.php';
+// Skip loading common.php if already loaded (when run through routing system)
+if (!defined('IN_TORRENTPIER')) {
+    require __DIR__ . '/../common.php';
+}
 
 $forum_id = $_REQUEST[POST_FORUM_URL] ?? 0;
 $topic_id = $_REQUEST[POST_TOPIC_URL] ?? 0;

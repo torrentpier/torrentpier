@@ -136,13 +136,17 @@ class Kernel
 
     private function sendResponse(ResponseInterface $response): void
     {
-        // Send status line
-        http_response_code($response->getStatusCode());
+        // Send status line (only if headers haven't been sent already)
+        if (!headers_sent()) {
+            http_response_code($response->getStatusCode());
+        }
 
-        // Send headers
-        foreach ($response->getHeaders() as $name => $values) {
-            foreach ($values as $value) {
-                header("{$name}: {$value}", false);
+        // Send headers (only if headers haven't been sent already)
+        if (!headers_sent()) {
+            foreach ($response->getHeaders() as $name => $values) {
+                foreach ($values as $value) {
+                    header("{$name}: {$value}", false);
+                }
             }
         }
 

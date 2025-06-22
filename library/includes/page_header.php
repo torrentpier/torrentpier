@@ -241,7 +241,7 @@ if (!empty(config()->get('page.show_torhelp')[$bb_script]) && !empty($userdata['
 $in_out = ($logged_in) ? 'in' : 'out';
 $template->assign_block_vars("switch_user_logged_{$in_out}", []);
 
-if (!IS_GUEST) {
+if (!IS_GUEST && !defined('MODERN_ROUTING')) {
     header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
     header('Expires: 0');
     header('Pragma: no-cache');
