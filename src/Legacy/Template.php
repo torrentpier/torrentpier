@@ -109,7 +109,7 @@ class Template
         $this->tpl = basename($root);
         // Use Language singleton but maintain backward compatibility with global $lang
         $this->lang =& $lang;
-        $this->use_cache = config()->get('xs_use_cache');
+        $this->use_cache = tp_config()->get('xs_use_cache');
 
         // Check template exists
         if (!is_dir($this->root)) {
@@ -996,7 +996,7 @@ class Template
     {
         // adding language variable (eg: "english" or "german")
         // can be used to make truly multi-lingual templates
-        $this->vars['LANG'] ??= config()->get('default_lang');
+        $this->vars['LANG'] ??= tp_config()->get('default_lang');
         // adding current template
         $tpl = $this->root . '/';
         if (str_starts_with($tpl, './')) {

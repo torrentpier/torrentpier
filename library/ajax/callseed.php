@@ -13,7 +13,7 @@ if (!defined('IN_AJAX')) {
 
 global $userdata, $lang;
 
-if (!config()->get('callseed')) {
+if (!tp_config()->get('callseed')) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
@@ -32,7 +32,7 @@ if ($t_data['seeders'] >= 3) {
 } elseif ($t_data['call_seed_time'] >= (TIMENOW - 86400)) {
     $time_left = delta_time($t_data['call_seed_time'] + 86400, TIMENOW, 'days');
     $this->ajax_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
-} elseif (isset(config()->get('tor_no_tor_act')[$t_data['tor_status']])) {
+} elseif (isset(tp_config()->get('tor_no_tor_act')[$t_data['tor_status']])) {
     $this->ajax_die($lang['NOT_AVAILABLE']);
 }
 

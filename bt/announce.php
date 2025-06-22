@@ -313,7 +313,7 @@ if ($lp_info) {
         }
 
         // Limit active torrents
-        if (!isset(tp_config()->get('unlimited_users')[$user_id]) && tp_config()->get('tracker.limit_active_tor') && ((config()->get('tracker.limit_seed_count') && $seeder) || (config()->get('tracker.limit_leech_count') && !$seeder))) {
+        if (!isset(tp_config()->get('unlimited_users')[$user_id]) && tp_config()->get('tracker.limit_active_tor') && ((tp_config()->get('tracker.limit_seed_count') && $seeder) || (tp_config()->get('tracker.limit_leech_count') && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT topic_id) AS active_torrents
 				FROM " . BB_BT_TRACKER . "
 				WHERE user_id = $user_id
@@ -321,7 +321,7 @@ if ($lp_info) {
 					AND topic_id != $topic_id";
 
             if (!$seeder && tp_config()->get('tracker.leech_expire_factor') && $user_ratio < 0.5) {
-                $sql .= " AND update_time > " . (TIMENOW - 60 * config()->get('tracker.leech_expire_factor'));
+                $sql .= " AND update_time > " . (TIMENOW - 60 * tp_config()->get('tracker.leech_expire_factor'));
             }
             $sql .= " GROUP BY user_id";
 
@@ -335,7 +335,7 @@ if ($lp_info) {
         }
 
         // Limit concurrent IPs
-        if (config()->get('tracker.limit_concurrent_ips') && ((config()->get('tracker.limit_seed_ips') && $seeder) || (config()->get('tracker.limit_leech_ips') && !$seeder))) {
+        if (tp_config()->get('tracker.limit_concurrent_ips') && ((tp_config()->get('tracker.limit_seed_ips') && $seeder) || (tp_config()->get('tracker.limit_leech_ips') && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT ip) AS ips
 				FROM " . BB_BT_TRACKER . "
 				WHERE topic_id = $topic_id
@@ -343,16 +343,16 @@ if ($lp_info) {
 					AND seeder = $seeder
 					AND $ip_version != '$ip_sql'";
 
-            if (!$seeder && config()->get('tracker.leech_expire_factor')) {
-                $sql .= " AND update_time > " . (TIMENOW - 60 * config()->get('tracker.leech_expire_factor'));
+            if (!$seeder && tp_config()->get('tracker.leech_expire_factor')) {
+                $sql .= " AND update_time > " . (TIMENOW - 60 * tp_config()->get('tracker.leech_expire_factor'));
             }
             $sql .= " GROUP BY topic_id";
 
             if ($row = DB()->fetch_row($sql)) {
-                if ($seeder && config()->get('tracker.limit_seed_ips') && $row['ips'] >= config()->get('tracker.limit_seed_ips')) {
-                    msg_die('You can seed only from ' . config()->get('tracker.limit_seed_ips') . " IP's");
-                } elseif (!$seeder && config()->get('tracker.limit_leech_ips') && $row['ips'] >= config()->get('tracker.limit_leech_ips')) {
-                    msg_die('You can leech only from ' . config()->get('tracker.limit_leech_ips') . " IP's");
+                if ($seeder && tp_config()->get('tracker.limit_seed_ips') && $row['ips'] >= tp_config()->get('tracker.limit_seed_ips')) {
+                    msg_die('You can seed only from ' . tp_config()->get('tracker.limit_seed_ips') . " IP's");
+                } elseif (!$seeder && tp_config()->get('tracker.limit_leech_ips') && $row['ips'] >= tp_config()->get('tracker.limit_leech_ips')) {
+                    msg_die('You can leech only from ' . tp_config()->get('tracker.limit_leech_ips') . " IP's");
                 }
             }
         }
@@ -376,7 +376,7 @@ $up_add = ($lp_info && $uploaded > $lp_info['uploaded']) ? $uploaded - $lp_info[
 $down_add = ($lp_info && $downloaded > $lp_info['downloaded']) ? $downloaded - $lp_info['downloaded'] : 0;
 
 // Gold/Silver releases
-if (config()->get('tracker.gold_silver_enabled') && $down_add) {
+if (tp_config()->get('tracker.gold_silver_enabled') && $down_add) {
     if ($tor_type == TOR_TYPE_GOLD) {
         $down_add = 0;
     } // Silver releases
@@ -386,7 +386,7 @@ if (config()->get('tracker.gold_silver_enabled') && $down_add) {
 }
 
 // Freeleech
-if (config()->get('tracker.freeleech') && $down_add) {
+if (tp_config()->get('tracker.freeleech') && $down_add) {
     $down_add = 0;
 }
 
@@ -464,8 +464,8 @@ $output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
 
 if (!$output) {
     // Retrieve peers
-    $numwant = (int)config()->get('tracker.numwant');
-    $compact_mode = (config()->get('tracker.compact_mode') || !empty($compact));
+    $numwant = (int)tp_config()->get('tracker.numwant');
+    $compact_mode = (tp_config()->get('tracker.compact_mode') || !empty($compact));
 
     $rowset = DB()->fetch_rowset("
         SELECT ip, ipv6, port
@@ -510,7 +510,7 @@ if (!$output) {
 
     $seeders = $leechers = $client_completed = 0;
 
-    if (config()->get('tracker.scrape')) {
+    if (tp_config()->get('tracker.scrape')) {
         $row = DB()->fetch_row("
 			SELECT seeders, leechers, completed
 			FROM " . BB_BT_TRACKER_SNAP . "

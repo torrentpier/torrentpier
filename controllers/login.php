@@ -66,7 +66,7 @@ $login_password = $_POST['login_password'] ?? '';
 $need_captcha = false;
 if (!$mod_admin_login) {
     $need_captcha = CACHE('bb_login_err')->get('l_err_' . USER_IP);
-    if ($need_captcha < config()->get('invalid_logins')) {
+    if ($need_captcha < tp_config()->get('invalid_logins')) {
         $need_captcha = false;
     }
 }
@@ -83,13 +83,13 @@ if (isset($_POST['login'])) {
     }
 
     // Captcha
-    if ($need_captcha && !config()->get('captcha.disabled') && !bb_captcha('check')) {
+    if ($need_captcha && !tp_config()->get('captcha.disabled') && !bb_captcha('check')) {
         $login_errors[] = $lang['CAPTCHA_WRONG'];
     }
 
     if (!$login_errors) {
         if ($user->login($_POST, $mod_admin_login)) {
-            $redirect_url = (defined('FIRST_LOGON')) ? config()->get('first_logon_redirect_url') : $redirect_url;
+            $redirect_url = (defined('FIRST_LOGON')) ? tp_config()->get('first_logon_redirect_url') : $redirect_url;
             // Reset when entering the correct login/password combination
             CACHE('bb_login_err')->rm('l_err_' . USER_IP);
 
@@ -104,7 +104,7 @@ if (isset($_POST['login'])) {
 
     if (!$mod_admin_login) {
         $login_err = CACHE('bb_login_err')->get('l_err_' . USER_IP);
-        if ($login_err > config()->get('invalid_logins')) {
+        if ($login_err > tp_config()->get('invalid_logins')) {
             $need_captcha = true;
         }
         CACHE('bb_login_err')->set('l_err_' . USER_IP, ($login_err + 1), 3600);
@@ -121,7 +121,7 @@ if (IS_GUEST || $mod_admin_login) {
         'ERROR_MESSAGE' => implode('<br />', $login_errors),
         'ADMIN_LOGIN' => $mod_admin_login,
         'REDIRECT_URL' => htmlCHR($redirect_url),
-        'CAPTCHA_HTML' => ($need_captcha && !config()->get('captcha.disabled')) ? bb_captcha('get') : '',
+        'CAPTCHA_HTML' => ($need_captcha && !tp_config()->get('captcha.disabled')) ? bb_captcha('get') : '',
         'PAGE_TITLE' => $lang['LOGIN'],
         'S_LOGIN_ACTION' => LOGIN_URL
     ]);

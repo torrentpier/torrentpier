@@ -13,11 +13,11 @@ if (!defined('IN_AJAX')) {
 
 global $lang;
 
-if (!config()->get('torr_server.enabled')) {
+if (!tp_config()->get('torr_server.enabled')) {
     $this->ajax_die($lang['MODULE_OFF']);
 }
 
-if (config()->get('torr_server.disable_for_guest') && IS_GUEST) {
+if (tp_config()->get('torr_server.disable_for_guest') && IS_GUEST) {
     $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
 }
 

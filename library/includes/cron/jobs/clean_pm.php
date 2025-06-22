@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$pm_days_keep = (int)config()->get('pm_days_keep');
+$pm_days_keep = (int)tp_config()->get('pm_days_keep');
 
 if ($pm_days_keep !== 0) {
     $per_cycle = 20000;

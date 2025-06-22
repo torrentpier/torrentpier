@@ -841,10 +841,10 @@ if (!isset($_REQUEST['dosearch'])) {
     if ($page == 1) {
         $offset = 0;
     } else {
-        $offset = (($page - 1) * config()->get('topics_per_page'));
+        $offset = (($page - 1) * tp_config()->get('topics_per_page'));
     }
 
-    $limit = "LIMIT $offset, " . config()->get('topics_per_page');
+    $limit = "LIMIT $offset, " . tp_config()->get('topics_per_page');
 
     $select_sql .= " $limit";
 
@@ -859,7 +859,7 @@ if (!isset($_REQUEST['dosearch'])) {
             bb_die($lang['SEARCH_NO_RESULTS']);
         }
     }
-    $num_pages = ceil($total_pages['total'] / config()->get('topics_per_page'));
+    $num_pages = ceil($total_pages['total'] / tp_config()->get('topics_per_page'));
 
     $pagination = '';
 

@@ -227,16 +227,16 @@ switch ($mode) {
             $result = \TorrentPier\Legacy\Admin\Common::topic_delete($req_topics, $forum_id);
 
             //Обновление кеша новостей на главной
-            $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
-            if (isset($news_forums[$forum_id]) && config()->get('show_latest_news') && $result) {
+            $news_forums = array_flip(explode(',', tp_config()->get('latest_news_forum_id')));
+            if (isset($news_forums[$forum_id]) && tp_config()->get('show_latest_news') && $result) {
                 $datastore->enqueue([
                     'latest_news'
                 ]);
                 $datastore->update('latest_news');
             }
 
-            $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
-            if (isset($net_forums[$forum_id]) && config()->get('show_network_news') && $result) {
+            $net_forums = array_flip(explode(',', tp_config()->get('network_news_forum_id')));
+            if (isset($net_forums[$forum_id]) && tp_config()->get('show_network_news') && $result) {
                 $datastore->enqueue([
                     'network_news'
                 ]);
@@ -262,16 +262,16 @@ switch ($mode) {
             $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']), $_POST['reason_move_bot']);
 
             //Обновление кеша новостей на главной
-            $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
-            if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && config()->get('show_latest_news') && $result) {
+            $news_forums = array_flip(explode(',', tp_config()->get('latest_news_forum_id')));
+            if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && tp_config()->get('show_latest_news') && $result) {
                 $datastore->enqueue([
                     'latest_news'
                 ]);
                 $datastore->update('latest_news');
             }
 
-            $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
-            if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && config()->get('show_network_news') && $result) {
+            $net_forums = array_flip(explode(',', tp_config()->get('network_news_forum_id')));
+            if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && tp_config()->get('show_network_news') && $result) {
                 $datastore->enqueue([
                     'network_news'
                 ]);
@@ -561,7 +561,7 @@ switch ($mode) {
                     $poster = $postrow[$i]['username'];
                     $poster_rank = $postrow[$i]['user_rank'];
 
-                    $post_date = bb_date($postrow[$i]['post_time'], config()->get('post_date_format'));
+                    $post_date = bb_date($postrow[$i]['post_time'], tp_config()->get('post_date_format'));
 
                     $message = $postrow[$i]['post_text'];
 

@@ -69,44 +69,44 @@ $order_by = '';
 if ($view === 'username') {
     switch ($mode) {
         case 'username':
-            $order_by = 'ORDER BY u.username ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY u.username ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         case 'attachments':
-            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         case 'filesize':
-            $order_by = 'ORDER BY total_size ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY total_size ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         default:
             $mode = 'attachments';
             $sort_order = 'DESC';
-            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
     }
 } elseif ($view === 'attachments') {
     switch ($mode) {
         case 'real_filename':
-            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         case 'comment':
-            $order_by = 'ORDER BY a.comment ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY a.comment ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         case 'extension':
-            $order_by = 'ORDER BY a.extension ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY a.extension ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         case 'filesize':
-            $order_by = 'ORDER BY a.filesize ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY a.filesize ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         case 'downloads':
-            $order_by = 'ORDER BY a.download_count ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY a.download_count ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         case 'post_time':
-            $order_by = 'ORDER BY a.filetime ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY a.filetime ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
         default:
             $mode = 'a.real_filename';
             $sort_order = 'ASC';
-            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . config()->get('topics_per_page');
+            $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . tp_config()->get('topics_per_page');
             break;
     }
 }
@@ -470,8 +470,8 @@ if ($view === 'attachments') {
 }
 
 // Generate Pagination
-if ($do_pagination && $total_rows > config()->get('topics_per_page')) {
-    generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, config()->get('topics_per_page'), $start);
+if ($do_pagination && $total_rows > tp_config()->get('topics_per_page')) {
+    generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, tp_config()->get('topics_per_page'), $start);
 }
 
 print_page('admin_attach_cp.tpl', 'admin');

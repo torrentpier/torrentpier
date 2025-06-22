@@ -59,7 +59,7 @@ class Language
 
         // Determine language to use
         if (empty($userLang)) {
-            $userLang = config()->get('default_lang', 'en');
+            $userLang = tp_config()->get('default_lang', 'en');
         }
 
         $this->currentLanguage = $userLang;
@@ -71,7 +71,7 @@ class Language
         $this->loadUserLanguage($userLang);
 
         // Set locale
-        $locale = config()->get("lang.{$userLang}.locale", 'en_US.UTF-8');
+        $locale = tp_config()->get("lang.{$userLang}.locale", 'en_US.UTF-8');
         setlocale(LC_ALL, $locale);
 
         $this->initialized = true;
@@ -105,7 +105,7 @@ class Language
             $this->userLanguage = $lang;
         } else {
             // Fall back to default language if user language doesn't exist
-            $defaultFile = LANG_ROOT_DIR . '/' . config()->get('default_lang', 'source') . '/main.php';
+            $defaultFile = LANG_ROOT_DIR . '/' . tp_config()->get('default_lang', 'source') . '/main.php';
             if (is_file($defaultFile)) {
                 $lang = [];
                 require $defaultFile;
@@ -192,7 +192,7 @@ class Language
      */
     public function getAvailableLanguages(): array
     {
-        return config()->get('lang', []);
+        return tp_config()->get('lang', []);
     }
 
     /**
@@ -287,7 +287,7 @@ class Language
             $code = $this->currentLanguage;
         }
 
-        return config()->get("lang.{$code}.name", $code);
+        return tp_config()->get("lang.{$code}.name", $code);
     }
 
     /**
@@ -299,7 +299,7 @@ class Language
             $code = $this->currentLanguage;
         }
 
-        return config()->get("lang.{$code}.locale", 'en_US.UTF-8');
+        return tp_config()->get("lang.{$code}.locale", 'en_US.UTF-8');
     }
 
     /**

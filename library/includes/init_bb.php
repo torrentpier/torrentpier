@@ -39,7 +39,7 @@ function send_page($contents)
  */
 function compress_output($contents)
 {
-    if (config()->get('gzip_compress') && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
+    if (tp_config()->get('gzip_compress') && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
         if (UA_GZIP_SUPPORTED && strlen($contents) > 2000) {
             if (!defined('MODERN_ROUTING')) {
                 header('Content-Encoding: gzip');
@@ -59,7 +59,7 @@ if (!defined('IN_AJAX')) {
 }
 
 // Cookie params
-$c = config()->get('cookie_prefix');
+$c = tp_config()->get('cookie_prefix');
 define('COOKIE_DATA', $c . 'data');
 define('COOKIE_FORUM', $c . 'f');
 define('COOKIE_MARK', $c . 'mark_read');
@@ -86,13 +86,13 @@ define('COOKIE_MAX_TRACKS', 90);
 function bb_setcookie(string $name, mixed $val, int $lifetime = COOKIE_PERSIST, bool $httponly = false, bool $isRaw = false): void
 {
     $cookie = new \Josantonius\Cookie\Cookie(
-        domain: config()->get('cookie_domain'),
+        domain: tp_config()->get('cookie_domain'),
         expires: $lifetime,
         httpOnly: $httponly,
-        path: config()->get('script_path'),
+        path: tp_config()->get('script_path'),
         raw: $isRaw,
-        sameSite: config()->get('cookie_same_site'),
-        secure: config()->get('cookie_secure')
+        sameSite: tp_config()->get('cookie_same_site'),
+        secure: tp_config()->get('cookie_secure')
     );
 
     if (!empty($val)) {
@@ -272,14 +272,14 @@ define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
 define('CAT_URL', 'index.php?' . POST_CAT_URL . '=');
-define('DL_URL', config()->get('dl_url'));
+define('DL_URL', tp_config()->get('dl_url'));
 define('FORUM_URL', 'viewforum.php?' . POST_FORUM_URL . '=');
 define('GROUP_URL', 'group.php?' . POST_GROUPS_URL . '=');
-define('LOGIN_URL', config()->get('login_url'));
+define('LOGIN_URL', tp_config()->get('login_url'));
 define('MODCP_URL', 'modcp.php?' . POST_FORUM_URL . '=');
-define('PM_URL', config()->get('pm_url'));
+define('PM_URL', tp_config()->get('pm_url'));
 define('POST_URL', 'viewtopic.php?' . POST_POST_URL . '=');
-define('POSTING_URL', config()->get('posting_url'));
+define('POSTING_URL', tp_config()->get('posting_url'));
 define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;' . POST_USERS_URL . '=');
 define('BONUS_URL', 'profile.php?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?' . POST_TOPIC_URL . '=');
@@ -379,8 +379,8 @@ require_once INC_DIR . '/functions.php';
 
 // Merge database configuration with base configuration using singleton
 // bb_cfg deprecated, but kept for compatibility with non-adapted code
-config()->merge(bb_get_config(BB_CONFIG));
-$bb_cfg = config()->all();
+tp_config()->merge(bb_get_config(BB_CONFIG));
+$bb_cfg = tp_config()->all();
 
 // wordCensor deprecated, but kept for compatibility with non-adapted code
 $wordCensor = censor();
@@ -400,7 +400,7 @@ if (
     !is_file(CRON_RUNNING) &&
     (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
 ) {
-    if (TIMENOW - config()->get('cron_last_check') > config()->get('cron_check_interval')) {
+    if (TIMENOW - tp_config()->get('cron_last_check') > tp_config()->get('cron_check_interval')) {
 
         /** Update cron_last_check */
         bb_update_config(['cron_last_check' => TIMENOW + 10]);
@@ -440,8 +440,8 @@ if (
 /**
  * Exit if board is disabled via trigger
  */
-if ((config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
-    if (config()->get('board_disable')) {
+if ((tp_config()->get('board_disable') || is_file(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
+    if (tp_config()->get('board_disable')) {
         // admin lock
         send_no_cache_headers();
         bb_die('BOARD_DISABLE', 503);

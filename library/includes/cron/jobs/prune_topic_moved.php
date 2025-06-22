@@ -11,8 +11,8 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-if (config()->get('topic_moved_days_keep')) {
-    $prune_time = TIMENOW - 86400 * config()->get('topic_moved_days_keep');
+if (tp_config()->get('topic_moved_days_keep')) {
+    $prune_time = TIMENOW - 86400 * tp_config()->get('topic_moved_days_keep');
 
     DB()->query("
 		DELETE FROM " . BB_TOPICS . "

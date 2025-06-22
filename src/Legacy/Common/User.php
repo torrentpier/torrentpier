@@ -530,8 +530,8 @@ class User
                 return $this->create_autologin_id($userdata);
             }
 
-            if ($autologin_id && $userdata['user_session_time'] && config()->get('max_autologin_time')) {
-                if (TIMENOW - $userdata['user_session_time'] > config()->get('max_autologin_time') * 86400) {
+            if ($autologin_id && $userdata['user_session_time'] && tp_config()->get('max_autologin_time')) {
+                if (TIMENOW - $userdata['user_session_time'] > tp_config()->get('max_autologin_time') * 86400) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
             }
@@ -590,32 +590,32 @@ class User
         }  // prevent multiple calling
 
         // Apply browser language
-        if (config()->get('auto_language_detection') && IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        if (tp_config()->get('auto_language_detection') && IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             $http_accept_language = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
-            if (isset(config()->get('lang')[$http_accept_language])) {
-                config()->set('default_lang', $http_accept_language);
+            if (isset(tp_config()->get('lang')[$http_accept_language])) {
+                tp_config()->set('default_lang', $http_accept_language);
             }
         }
 
-        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
+        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . tp_config()->get('default_lang') . '/');
         define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/en/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
                 $this->data['user_lang'] = $_COOKIE['user_lang'];
             }
-            if ($this->data['user_lang'] && $this->data['user_lang'] != config()->get('default_lang')) {
-                config()->set('default_lang', basename($this->data['user_lang']));
-                define('LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
+            if ($this->data['user_lang'] && $this->data['user_lang'] != tp_config()->get('default_lang')) {
+                tp_config()->set('default_lang', basename($this->data['user_lang']));
+                define('LANG_DIR', LANG_ROOT_DIR . '/' . tp_config()->get('default_lang') . '/');
             }
 
             if (isset($this->data['user_timezone'])) {
-                config()->set('board_timezone', $this->data['user_timezone']);
+                tp_config()->set('board_timezone', $this->data['user_timezone']);
             }
         }
 
-        $this->data['user_lang'] = config()->get('default_lang');
-        $this->data['user_timezone'] = config()->get('board_timezone');
+        $this->data['user_lang'] = tp_config()->get('default_lang');
+        $this->data['user_timezone'] = tp_config()->get('board_timezone');
 
         if (!defined('LANG_DIR')) {
             define('LANG_DIR', DEFAULT_LANG_DIR);
@@ -795,7 +795,7 @@ class User
     public function checkPassword(string $enteredPassword, array $userdata): bool
     {
         if (password_verify($enteredPassword, $userdata['user_password'])) {
-            if (password_needs_rehash($userdata['user_password'], config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'))) {
+            if (password_needs_rehash($userdata['user_password'], tp_config()->get('password_hash_options.algo'), tp_config()->get('password_hash_options.options'))) {
                 // Update password_hash
                 DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
             }
@@ -821,6 +821,6 @@ class User
      */
     public function password_hash(string $enteredPassword): string
     {
-        return password_hash($enteredPassword, config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'));
+        return password_hash($enteredPassword, tp_config()->get('password_hash_options.algo'), tp_config()->get('password_hash_options.options'));
     }
 }

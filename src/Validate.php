@@ -117,7 +117,7 @@ class Validate
         }
 
         // Extended email validation
-        if (config()->get('extended_email_validation')) {
+        if (tp_config()->get('extended_email_validation')) {
             $validator = new EmailValidator();
 
             $multipleValidations = new MultipleValidationWithAnd([
@@ -175,9 +175,9 @@ class Validate
         }
 
         // Symbols check
-        if (config()->get('password_symbols')) {
+        if (tp_config()->get('password_symbols')) {
             // Numbers
-            if (config()->get('password_symbols.nums')) {
+            if (tp_config()->get('password_symbols.nums')) {
                 if (!StringHelper::isContainsNums($password)) {
                     return $lang['CHOOSE_PASS_ERR_NUM'];
                 }

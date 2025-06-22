@@ -18,13 +18,13 @@ require INC_DIR . '/bbcode.php';
 // Start session management
 $user->session_start();
 
-if (!config()->get('terms') && !IS_ADMIN) {
+if (!tp_config()->get('terms') && !IS_ADMIN) {
     redirect('index.php');
 }
 
 $template->assign_vars([
     'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], make_url('admin/admin_terms.php'))),
-    'TERMS_HTML' => bbcode2html(config()->get('terms')),
+    'TERMS_HTML' => bbcode2html(tp_config()->get('terms')),
 ]);
 
 print_page('terms.tpl');

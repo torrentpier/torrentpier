@@ -17,7 +17,7 @@ if (!defined('IN_TORRENTPIER')) {
 // Start session management
 $user->session_start();
 
-if (config()->get('bt_disable_dht') && IS_GUEST) {
+if (tp_config()->get('bt_disable_dht') && IS_GUEST) {
     bb_die($lang['BT_PRIVATE_TRACKER'], 403);
 }
 
@@ -58,7 +58,7 @@ if (!is_file($file_path)) {
 }
 
 $file_contents = file_get_contents($file_path);
-if (config()->get('flist_max_files')) {
+if (tp_config()->get('flist_max_files')) {
     $filetree_pos = $meta_v2 ? strpos($file_contents, '9:file tree') : false;
     $files_pos = $meta_v1 ? strpos($file_contents, '5:files', $filetree_pos) : false;
 
@@ -68,8 +68,8 @@ if (config()->get('flist_max_files')) {
         $file_count = substr_count($file_contents, '6:length', $files_pos);
     }
 
-    if ($file_count > config()->get('flist_max_files')) {
-        bb_die(sprintf($lang['BT_FLIST_LIMIT'], config()->get('flist_max_files'), $file_count), 410);
+    if ($file_count > tp_config()->get('flist_max_files')) {
+        bb_die(sprintf($lang['BT_FLIST_LIMIT'], tp_config()->get('flist_max_files'), $file_count), 410);
     }
 }
 

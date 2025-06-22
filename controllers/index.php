@@ -34,12 +34,12 @@ $datastore->enqueue([
     'cat_forums'
 ]);
 
-if (config()->get('show_latest_news')) {
+if (tp_config()->get('show_latest_news')) {
     $datastore->enqueue([
         'latest_news'
     ]);
 }
-if (config()->get('show_network_news')) {
+if (tp_config()->get('show_network_news')) {
     $datastore->enqueue([
         'network_news'
     ]);
@@ -49,7 +49,7 @@ if (config()->get('show_network_news')) {
 $user->session_start();
 
 // Set meta description
-$page_cfg['meta_description'] = config()->get('site_desc');
+$page_cfg['meta_description'] = tp_config()->get('site_desc');
 
 // Init main vars
 $viewcat = isset($_GET[POST_CAT_URL]) ? (int)$_GET[POST_CAT_URL] : 0;
@@ -60,7 +60,7 @@ $req_page = 'index_page';
 $req_page .= $viewcat ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
-caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config()->get('default_lang'));
+caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . tp_config()->get('default_lang'));
 
 $hide_cat_opt = isset($user->opt_js['h_cat']) ? (string)$user->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
@@ -265,7 +265,7 @@ foreach ($cat_forums as $cid => $c) {
                 'LAST_TOPIC_ID' => $f['last_topic_id'],
                 'LAST_TOPIC_TIP' => $f['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($f['last_topic_title'], $last_topic_max_len),
-                'LAST_POST_TIME' => bb_date($f['last_post_time'], config()->get('last_post_date_format')),
+                'LAST_POST_TIME' => bb_date($f['last_post_time'], tp_config()->get('last_post_date_format')),
                 'LAST_POST_USER' => profile_url(['username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank']]),
             ]);
         }
@@ -281,7 +281,7 @@ $template->assign_vars([
     'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
     'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
     'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
-    'TOTAL_GENDER' => config()->get('gender') ? sprintf(
+    'TOTAL_GENDER' => tp_config()->get('gender') ? sprintf(
         $lang['USERS_TOTAL_GENDER'],
         $stats['male'],
         $stats['female'],
@@ -290,22 +290,22 @@ $template->assign_vars([
     'NEWEST_USER' => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
 
     // Tracker stats
-    'TORRENTS_STAT' => config()->get('tor_stats') ? sprintf(
+    'TORRENTS_STAT' => tp_config()->get('tor_stats') ? sprintf(
         $lang['TORRENTS_STAT'],
         $stats['torrentcount'],
         humn_size($stats['size'])
     ) : '',
-    'PEERS_STAT' => config()->get('tor_stats') ? sprintf(
+    'PEERS_STAT' => tp_config()->get('tor_stats') ? sprintf(
         $lang['PEERS_STAT'],
         $stats['peers'],
         $stats['seeders'],
         $stats['leechers']
     ) : '',
-    'SPEED_STAT' => config()->get('tor_stats') ? sprintf(
+    'SPEED_STAT' => tp_config()->get('tor_stats') ? sprintf(
         $lang['SPEED_STAT'],
         humn_size($stats['speed']) . '/s'
     ) : '',
-    'SHOW_MOD_INDEX' => config()->get('show_mod_index'),
+    'SHOW_MOD_INDEX' => tp_config()->get('show_mod_index'),
     'FORUM_IMG' => $images['forum'],
     'FORUM_NEW_IMG' => $images['forum_new'],
     'FORUM_LOCKED_IMG' => $images['forum_locked'],
@@ -318,19 +318,19 @@ $template->assign_vars([
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
     'U_SEARCH_LATEST' => 'search.php?search_id=latest',
     'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
-    'U_ATOM_FEED' => is_file(config()->get('atom.path') . '/f/0.atom') ? make_url(config()->get('atom.url') . '/f/0.atom') : false,
+    'U_ATOM_FEED' => is_file(tp_config()->get('atom.path') . '/f/0.atom') ? make_url(tp_config()->get('atom.url') . '/f/0.atom') : false,
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
-    'BOARD_START' => config()->get('show_board_start_index') ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date(config()->get('board_startdate')) . '</b>') : false,
+    'BOARD_START' => tp_config()->get('show_board_start_index') ? ($lang['BOARD_STARTED'] . ':&nbsp;' . '<b>' . bb_date(tp_config()->get('board_startdate')) . '</b>') : false,
 ]);
 
 // Set tpl vars for bt_userdata
-if (config()->get('bt_show_dl_stat_on_index') && !IS_GUEST) {
+if (tp_config()->get('bt_show_dl_stat_on_index') && !IS_GUEST) {
     show_bt_userdata($userdata['user_id']);
 }
 
 // Latest news
-if (config()->get('show_latest_news')) {
+if (tp_config()->get('show_latest_news')) {
     $latest_news = $datastore->get('latest_news');
     if ($latest_news === false) {
         $datastore->update('latest_news');
@@ -346,7 +346,7 @@ if (config()->get('show_latest_news')) {
 
         $template->assign_block_vars('news', [
             'NEWS_TOPIC_ID' => $news['topic_id'],
-            'NEWS_TITLE' => str_short(censor()->censorString($news['topic_title']), config()->get('max_news_title')),
+            'NEWS_TITLE' => str_short(censor()->censorString($news['topic_title']), tp_config()->get('max_news_title')),
             'NEWS_TIME' => bb_date($news['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
         ]);
@@ -354,7 +354,7 @@ if (config()->get('show_latest_news')) {
 }
 
 // Network news
-if (config()->get('show_network_news')) {
+if (tp_config()->get('show_network_news')) {
     $network_news = $datastore->get('network_news');
     if ($network_news === false) {
         $datastore->update('network_news');
@@ -370,14 +370,14 @@ if (config()->get('show_network_news')) {
 
         $template->assign_block_vars('net', [
             'NEWS_TOPIC_ID' => $net['topic_id'],
-            'NEWS_TITLE' => str_short(censor()->censorString($net['topic_title']), config()->get('max_net_title')),
+            'NEWS_TITLE' => str_short(censor()->censorString($net['topic_title']), tp_config()->get('max_net_title')),
             'NEWS_TIME' => bb_date($net['topic_time'], 'd-M', false),
             'NEWS_IS_NEW' => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
         ]);
     }
 }
 
-if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
+if (tp_config()->get('birthday_check_day') && tp_config()->get('birthday_enabled')) {
     $week_list = $today_list = [];
     $week_all = $today_all = false;
 
@@ -391,9 +391,9 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
             $week_list[] = profile_url($week) . ' <span class="small">(' . birthday_age(date('Y-m-d', strtotime('-1 year', strtotime($week['user_birthday'])))) . ')</span>';
         }
         $week_all = $week_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
-        $week_list = sprintf($lang['BIRTHDAY_WEEK'], config()->get('birthday_check_day'), implode(', ', $week_list)) . $week_all;
+        $week_list = sprintf($lang['BIRTHDAY_WEEK'], tp_config()->get('birthday_check_day'), implode(', ', $week_list)) . $week_all;
     } else {
-        $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], config()->get('birthday_check_day'));
+        $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], tp_config()->get('birthday_check_day'));
     }
 
     if (!empty($stats['birthday_today_list'])) {

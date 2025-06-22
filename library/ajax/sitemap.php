@@ -24,7 +24,7 @@ switch ($mode) {
     case 'create':
         $map->createSitemap();
         if (is_file(SITEMAP_DIR . '/sitemap.xml')) {
-            $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, config()->get('post_date_format')) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
+            $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, tp_config()->get('post_date_format')) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
         } else {
             $html .= $lang['SITEMAP_NOT_CREATED'];
         }

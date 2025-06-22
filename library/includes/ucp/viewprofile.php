@@ -50,7 +50,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_ADMIN) {
-    $email_uri = (config()->get('board_email_form')) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
+    $email_uri = (tp_config()->get('board_email_form')) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';
@@ -62,7 +62,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['
 
 $profile_user_id = ($profiledata['user_id'] == $userdata['user_id']);
 
-$signature = (config()->get('allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
+$signature = (tp_config()->get('allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     if ($profile_user_id) {
@@ -75,7 +75,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
 }
 
 // Null ratio
-if (config()->get('ratio_null_enabled') && $btu = get_bt_userdata($profiledata['user_id'])) {
+if (tp_config()->get('ratio_null_enabled') && $btu = get_bt_userdata($profiledata['user_id'])) {
     $template->assign_vars(['NULLED_RATIO' => $btu['ratio_nulled']]);
 }
 
@@ -110,10 +110,10 @@ $template->assign_vars([
     'SKYPE' => $profiledata['user_skype'],
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
-    'GENDER' => config()->get('gender') ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
-    'BIRTHDAY' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? $profiledata['user_birthday'] : '',
+    'GENDER' => tp_config()->get('gender') ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+    'BIRTHDAY' => (tp_config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? $profiledata['user_birthday'] : '',
     'BIRTHDAY_ICON' => user_birthday_icon($profiledata['user_birthday'], $profiledata['user_id']),
-    'AGE' => (config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
+    'AGE' => (tp_config()->get('birthday_enabled') && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '1900-01-01') ? birthday_age($profiledata['user_birthday']) : '',
 
     'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
     'L_MY_PROFILE' => sprintf($lang['VIEWING_MY_PROFILE'], 'profile.php?mode=editprofile'),

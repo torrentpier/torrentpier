@@ -115,7 +115,7 @@ class Dev
         $telegramSender->loggerOnly(true);
         $telegramSender->setLogger((new Logger(
             APP_NAME,
-            [(new TelegramHandler(tp_config()->get('telegram_sender.token'), (int)tp_config()->get('telegram_sender.chat_id'), timeout: (int)config()->get('telegram_sender.timeout')))
+            [(new TelegramHandler(tp_config()->get('telegram_sender.token'), (int)tp_config()->get('telegram_sender.chat_id'), timeout: (int)tp_config()->get('telegram_sender.timeout')))
                 ->setFormatter(new TelegramFormatter())]
         )));
         $this->whoops->pushHandler($telegramSender);

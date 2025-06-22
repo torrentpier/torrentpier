@@ -28,7 +28,7 @@ set_die_append_msg();
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
-$per_page = config()->get('group_members_per_page');
+$per_page = tp_config()->get('group_members_per_page');
 $view_mode = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : null;
 $rel_limit = 50;
 
@@ -172,7 +172,7 @@ if (!$group_id) {
 
     \TorrentPier\Legacy\Group::add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
-    if (config()->get('group_send_email')) {
+    if (tp_config()->get('group_send_email')) {
         // Sending email
         $emailer = new TorrentPier\Emailer();
 
@@ -228,7 +228,7 @@ if (!$group_id) {
 
             \TorrentPier\Legacy\Group::add_user_into_group($group_id, $row['user_id']);
 
-            if (config()->get('group_send_email')) {
+            if (tp_config()->get('group_send_email')) {
                 // Sending email
                 $emailer = new TorrentPier\Emailer();
 
@@ -277,7 +277,7 @@ if (!$group_id) {
                     }
                 }
                 // Email users when they are approved
-                if (!empty($_POST['approve']) && config()->get('group_send_email')) {
+                if (!empty($_POST['approve']) && tp_config()->get('group_send_email')) {
                     $sql_select = "SELECT username, user_email, user_lang
                         FROM " . BB_USERS . "
                         WHERE user_id IN($sql_in)";

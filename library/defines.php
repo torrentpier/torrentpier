@@ -15,8 +15,8 @@ if (!defined('BB_ROOT')) {
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
-define('CACHE_DIR', BB_PATH . '/internal_data/cache');
-define('LOG_DIR', BB_PATH . '/internal_data/log');
+define('CACHE_DIR', BB_PATH . '/storage/framework/cache');
+define('LOG_DIR', BB_PATH . '/storage/logs');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
 define('AJAX_DIR', BB_PATH . '/library/ajax');
 define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
@@ -24,7 +24,7 @@ define('INC_DIR', BB_PATH . '/library/includes');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
 define('LANG_ROOT_DIR', BB_PATH . '/library/language');
 define('SITEMAP_DIR', BB_PATH . '/sitemap');
-define('IMAGES_DIR', BB_PATH . '/styles/images');
+define('IMAGES_DIR', BB_PATH . '/public/styles/images');
 define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 
 // System

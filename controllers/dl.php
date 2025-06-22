@@ -174,7 +174,7 @@ if (!IS_AM && ($attachment['mimetype'] === TORRENT_MIMETYPE)) {
 
     $row = DB()->sql_fetchrow($result);
 
-    if (isset(config()->get('tor_frozen')[$row['tor_status']]) && !(isset(config()->get('tor_frozen_author_download')[$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
+    if (isset(tp_config()->get('tor_frozen')[$row['tor_status']]) && !(isset(tp_config()->get('tor_frozen_author_download')[$row['tor_status']]) && $userdata['user_id'] === $row['poster_id'])) {
         bb_die($lang['TOR_STATUS_FORBIDDEN'] . $lang['TOR_STATUS_NAME'][$row['tor_status']]);
     }
 
@@ -223,7 +223,7 @@ switch ($download_mode) {
         header('Location: ' . $url);
         exit;
     case INLINE_LINK:
-        if (IS_GUEST && !config()->get('captcha.disabled') && !bb_captcha('check')) {
+        if (IS_GUEST && !tp_config()->get('captcha.disabled') && !bb_captcha('check')) {
             global $template;
 
             $redirect_url = $_POST['redirect_url'] ?? $_SERVER['HTTP_REFERER'] ?? '/';

@@ -50,8 +50,8 @@ if ($mode != 'poll_vote') {
 
 // Checking the ability to make changes
 if ($mode == 'poll_delete') {
-    if ($t_data['topic_time'] < TIMENOW - config()->get('poll_max_days') * 86400) {
-        bb_die(sprintf(__('NEW_POLL_DAYS'), config()->get('poll_max_days')));
+    if ($t_data['topic_time'] < TIMENOW - tp_config()->get('poll_max_days') * 86400) {
+        bb_die(sprintf(__('NEW_POLL_DAYS'), tp_config()->get('poll_max_days')));
     }
     if (!IS_ADMIN && ($t_data['topic_vote'] != POLL_FINISHED)) {
         bb_die(__('CANNOT_DELETE_POLL'));

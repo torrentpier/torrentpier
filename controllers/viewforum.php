@@ -124,7 +124,7 @@ if ($mark_read && !IS_GUEST) {
 }
 
 // Subforums
-$show_subforums = config()->get('sf_on_first_page_only') ? !$start : true;
+$show_subforums = tp_config()->get('sf_on_first_page_only') ? !$start : true;
 
 if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
@@ -182,7 +182,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
         $last_post_user = profile_url(['username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']]);
 
         if ($sf_data['forum_last_post_id']) {
-            $last_post = bb_date($sf_data['topic_last_post_time'], config()->get('last_post_date_format'));
+            $last_post = bb_date($sf_data['topic_last_post_time'], tp_config()->get('last_post_date_format'));
             $last_post .= "<br />$last_post_user";
             $last_post .= '<a href="' . POST_URL . $sf_data['forum_last_post_id'] . '#' . $sf_data['forum_last_post_id'] . '"><img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="latest" title="' . $lang['VIEW_LATEST_POST'] . '" /></a>';
         }
@@ -206,7 +206,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
                 'LAST_TOPIC_ID' => $sf_data['last_topic_id'],
                 'LAST_TOPIC_TIP' => $sf_data['last_topic_title'],
                 'LAST_TOPIC_TITLE' => str_short($sf_data['last_topic_title'], $last_topic_max_len),
-                'LAST_POST_TIME' => bb_date($sf_data['topic_last_post_time'], config()->get('last_post_date_format')),
+                'LAST_POST_TIME' => bb_date($sf_data['topic_last_post_time'], tp_config()->get('last_post_date_format')),
                 'LAST_POST_ID' => $sf_data['forum_last_post_id'],
                 'LAST_POST_USER' => $last_post_user,
                 'ICON_LATEST_REPLY' => $images['icon_latest_reply']
@@ -220,16 +220,16 @@ unset($rowset);
 $datastore->rm('cat_forums');
 
 // Topics per page
-$topics_per_page = config()->get('topics_per_page');
+$topics_per_page = tp_config()->get('topics_per_page');
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-    if ($req_tpp = abs((int)(@$_REQUEST['tpp'])) and in_array($req_tpp, config()->get('allowed_topics_per_page'))) {
+    if ($req_tpp = abs((int)(@$_REQUEST['tpp'])) and in_array($req_tpp, tp_config()->get('allowed_topics_per_page'))) {
         $topics_per_page = $req_tpp;
     }
 
     $select_tpp = [];
-    foreach (config()->get('allowed_topics_per_page') as $tpp) {
+    foreach (tp_config()->get('allowed_topics_per_page') as $tpp) {
         $select_tpp[$tpp] = $tpp;
     }
 }
@@ -285,7 +285,7 @@ $order_sql = "ORDER BY t.topic_type DESC, $sort_method $order_method";
 $limit_topics_time_sql = ($topic_days) ? "AND t.topic_last_post_time > " . (TIMENOW - 86400 * $topic_days) : '';
 
 $select_tor_sql = $join_tor_sql = '';
-$join_dl = (config()->get('show_dl_status_in_forum') && !IS_GUEST);
+$join_dl = (tp_config()->get('show_dl_status_in_forum') && !IS_GUEST);
 
 $where_tor_sql = '';
 if ($forum_data['allow_reg_tracker']) {
@@ -426,7 +426,7 @@ foreach ($topic_rowset as $topic) {
     $topic_id = $topic['topic_id'];
     $moved = ($topic['topic_status'] == TOPIC_MOVED);
     $replies = $topic['topic_replies'];
-    $t_hot = ($replies >= config()->get('hot_threshold'));
+    $t_hot = ($replies >= tp_config()->get('hot_threshold'));
     $t_type = $topic['topic_type'];
     $separator = '';
     $is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
@@ -452,14 +452,14 @@ foreach ($topic_rowset as $topic) {
         'TOPICS_SEPARATOR' => $separator,
         'IS_UNREAD' => $is_unread,
         'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-        'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, config()->get('posts_per_page')),
+        'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, tp_config()->get('posts_per_page')),
         'REPLIES' => $moved ? '' : $replies,
         'VIEWS' => $moved ? '' : $topic['topic_views'],
         'TOR_STALED' => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
-        'TOR_FROZEN' => isset($topic['tor_status']) ? ((!IS_AM) ? isset(config()->get('tor_frozen')[$topic['tor_status']]) : '') : '',
+        'TOR_FROZEN' => isset($topic['tor_status']) ? ((!IS_AM) ? isset(tp_config()->get('tor_frozen')[$topic['tor_status']]) : '') : '',
         'TOR_TYPE' => isset($topic['tor_type']) ? is_gold($topic['tor_type']) : '',
 
-        'TOR_STATUS_ICON' => isset($topic['tor_status']) ? config()->get('tor_icons')[$topic['tor_status']] : '',
+        'TOR_STATUS_ICON' => isset($topic['tor_status']) ? tp_config()->get('tor_icons')[$topic['tor_status']] : '',
         'TOR_STATUS_TEXT' => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
 
         'ATTACH' => $topic['topic_attachment'] ?? false,
@@ -471,7 +471,7 @@ foreach ($topic_rowset as $topic) {
 
         'TOPIC_AUTHOR' => profile_url(['username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
         'LAST_POSTER' => profile_url(['username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
-        'LAST_POST_TIME' => bb_date($topic['topic_last_post_time'], config()->get('last_post_date_format')),
+        'LAST_POST_TIME' => bb_date($topic['topic_last_post_time'], tp_config()->get('last_post_date_format')),
         'LAST_POST_ID' => $topic['topic_last_post_id'],
     ]);
 
@@ -501,7 +501,7 @@ $pg_url .= $topic_days ? "&amp;topicdays=$topic_days" : '';
 $pg_url .= $sort_value ? "&amp;sort=$sort_value" : '';
 $pg_url .= $order_value ? "&amp;order=$order_value" : '';
 $pg_url .= $moderation ? "&amp;mod=1" : '';
-$pg_url .= ($topics_per_page != config()->get('topics_per_page')) ? "&amp;tpp=$topics_per_page" : '';
+$pg_url .= ($topics_per_page != tp_config()->get('topics_per_page')) ? "&amp;tpp=$topics_per_page" : '';
 
 if ($found_topics) {
     generate_pagination($pg_url, $forum_topics, $topics_per_page, $start);

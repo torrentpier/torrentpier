@@ -82,8 +82,8 @@ The database configuration is handled through the existing TorrentPier config sy
 ```php
 // Initialized in common.php
 TorrentPier\Database\DatabaseFactory::init(
-    config()->get('db'),           // Database configurations
-    config()->get('db_alias', [])  // Database aliases
+    tp_config()->get('db'),           // Database configurations
+    tp_config()->get('db_alias', [])  // Database aliases
 );
 ```
 

@@ -52,7 +52,7 @@ class TorrServerAPI
      */
     public function __construct()
     {
-        $this->url = config()->get('torr_server.url') . '/';
+        $this->url = tp_config()->get('torr_server.url') . '/';
     }
 
     /**
@@ -70,7 +70,7 @@ class TorrServerAPI
         }
 
         $curl = new Curl();
-        $curl->setTimeout(config()->get('torr_server.timeout'));
+        $curl->setTimeout(tp_config()->get('torr_server.timeout'));
 
         $curl->setHeaders([
             'Accept' => 'application/json',
@@ -109,7 +109,7 @@ class TorrServerAPI
         }
 
         $curl = new Curl();
-        $curl->setTimeout(config()->get('torr_server.timeout'));
+        $curl->setTimeout(tp_config()->get('torr_server.timeout'));
 
         $curl->setHeader('Accept', 'audio/x-mpegurl');
         $curl->get($this->url . $this->endpoints['playlist'], ['hash' => $hash]);
@@ -206,7 +206,7 @@ class TorrServerAPI
             }
 
             $curl = new Curl();
-            $curl->setTimeout(config()->get('torr_server.timeout'));
+            $curl->setTimeout(tp_config()->get('torr_server.timeout'));
 
             $curl->setHeader('Accept', 'application/json');
             $curl->get($this->url . $this->endpoints['ffprobe'] . '/' . $hash . '/' . $index);
@@ -231,7 +231,7 @@ class TorrServerAPI
     private function getStream(string $hash): bool
     {
         $curl = new Curl();
-        $curl->setTimeout(config()->get('torr_server.timeout'));
+        $curl->setTimeout(tp_config()->get('torr_server.timeout'));
 
         $curl->setHeader('Accept', 'application/octet-stream');
         $curl->get($this->url . $this->endpoints['stream'], ['link' => $hash]);

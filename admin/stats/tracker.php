@@ -21,7 +21,7 @@ if (!IS_ADMIN) {
 $peers_in_last_minutes = [30, 15, 5, 1];
 $peers_in_last_sec_limit = 300;
 
-$announce_interval = (int)config()->get('announce_interval');
+$announce_interval = (int)tp_config()->get('announce_interval');
 $stat = [];
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');

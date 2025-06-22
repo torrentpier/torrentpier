@@ -343,7 +343,7 @@ class Post
     {
         global $lang, $userdata;
 
-        if (!config()->get('topic_notify_enabled')) {
+        if (!tp_config()->get('topic_notify_enabled')) {
             return;
         }
 
@@ -378,7 +378,7 @@ class Post
                         $emailer->set_template('topic_notify', $row['user_lang']);
                         $emailer->assign_vars([
                             'TOPIC_TITLE' => html_entity_decode($topic_title),
-                            'SITENAME' => config()->get('sitename'),
+                            'SITENAME' => tp_config()->get('sitename'),
                             'USERNAME' => $row['username'],
                             'U_TOPIC' => $u_topic,
                             'U_STOP_WATCHING_TOPIC' => $unwatch_topic,
@@ -513,7 +513,7 @@ class Post
 		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
 		WHERE p.topic_id = " . (int)$topic_id . "
 		ORDER BY p.post_time DESC
-		LIMIT " . config()->get('posts_per_page') . "
+		LIMIT " . tp_config()->get('posts_per_page') . "
 	");
 
         // Topic posts block
@@ -523,7 +523,7 @@ class Post
                 'POSTER' => profile_url($post),
                 'POSTER_NAME_JS' => addslashes($post['username']),
                 'POST_ID' => $post['post_id'],
-                'POST_DATE' => bb_date($post['post_time'], config()->get('post_date_format')),
+                'POST_DATE' => bb_date($post['post_time'], tp_config()->get('post_date_format')),
                 'IS_UNREAD' => is_unread($post['post_time'], $topic_id, $post['forum_id']),
                 'MESSAGE' => get_parsed_post($post),
             ]);

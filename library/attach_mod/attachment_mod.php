@@ -27,9 +27,9 @@ function attach_mod_get_lang($language_file)
 {
     global $attach_config;
 
-    $file = LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/' . $language_file . '.php';
+    $file = LANG_ROOT_DIR . '/' . tp_config()->get('default_lang') . '/' . $language_file . '.php';
     if (file_exists($file)) {
-        return config()->get('default_lang');
+        return tp_config()->get('default_lang');
     }
 
     $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
@@ -58,7 +58,7 @@ function get_config()
     }
 
     // We assign the original default board language here, because it gets overwritten later with the users default language
-    $attach_config['board_lang'] = trim(config()->get('default_lang'));
+    $attach_config['board_lang'] = trim(tp_config()->get('default_lang'));
 
     return $attach_config;
 }

@@ -393,7 +393,7 @@ class BBCode
      */
     private function nofollow_url(string $href, string $name): string
     {
-        if (\in_array(parse_url($href, PHP_URL_HOST), tp_config()->get('nofollow.allowed_url')) || config()->get('nofollow.disabled')) {
+        if (\in_array(parse_url($href, PHP_URL_HOST), tp_config()->get('nofollow.allowed_url')) || tp_config()->get('nofollow.disabled')) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";

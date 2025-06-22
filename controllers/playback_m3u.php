@@ -14,7 +14,7 @@ if (!defined('IN_TORRENTPIER')) {
     require __DIR__ . '/../common.php';
 }
 
-if (!config()->get('torr_server.enabled')) {
+if (!tp_config()->get('torr_server.enabled')) {
     redirect('index.php');
 }
 
@@ -25,7 +25,7 @@ $validFormats = [
 ];
 
 // Start session management
-$user->session_start(['req_login' => config()->get('torr_server.disable_for_guest')]);
+$user->session_start(['req_login' => tp_config()->get('torr_server.disable_for_guest')]);
 
 // Disable robots indexing
 $page_cfg['allow_robots'] = false;
