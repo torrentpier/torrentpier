@@ -1,10 +1,5 @@
 <p align="center"><a href="https://torrentpier.com"><img src="https://torrentpier.com/styles/default/xenforo/bull-logo.svg" width="400px" alt="TorrentPier" /></a></p>
 
-<p align="center">
-  Bull-powered BitTorrent tracker engine
-  <br/>
-</p>
-
 ## 🐂 About TorrentPier
 
 TorrentPier — bull-powered BitTorrent public/private tracker engine, written in PHP. High speed, simple modifications, load-balanced
