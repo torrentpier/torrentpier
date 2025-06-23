@@ -171,3 +171,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Claude Code
+CLAUDE.local.md
