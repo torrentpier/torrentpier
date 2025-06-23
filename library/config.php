@@ -54,7 +54,7 @@ $bb_cfg['db_alias'] = [
 
 // Cache
 $bb_cfg['cache'] = [
-    'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
+    'db_dir' => BB_PATH . '/storage/framework/cache/',
     'prefix' => 'tp_',
     'memcached' => [
         'host' => '127.0.0.1',

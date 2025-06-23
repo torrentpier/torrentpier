@@ -52,7 +52,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
         'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
-        'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], config()->get('record_online_users'), bb_date(config()->get('record_online_date'))),
+        'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], tp_config()->get('record_online_users'), bb_date(tp_config()->get('record_online_date'))),
     ]);
 }
 
@@ -108,13 +108,16 @@ $template->assign_vars([
     'HAVE_UNREAD_PM' => $have_unread_pm
 ]);
 
+// Defines the current displayed controller to hide frontend blocks
+$bb_script = defined('BB_SCRIPT') ? BB_SCRIPT : null;
+
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars([
     'SIMPLE_HEADER' => !empty($gen_simple_header),
     'CONTENT_ENCODING' => DEFAULT_CHARSET,
 
     'IN_ADMIN' => defined('IN_ADMIN'),
-    'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
+    'USER_HIDE_CAT' => ($bb_script == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
 
@@ -122,12 +125,12 @@ $template->assign_vars([
     'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js, JSON_THROW_ON_ERROR),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
-    'ALLOW_ROBOTS' => !config()->get('board_disable') && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
+    'ALLOW_ROBOTS' => !tp_config()->get('board_disable') && (!isset($page_cfg['allow_robots']) || $page_cfg['allow_robots'] === true),
     'META_DESCRIPTION' => !empty($page_cfg['meta_description']) ? trim(htmlCHR($page_cfg['meta_description'])) : '',
 
-    'SITENAME' => config()->get('sitename'),
+    'SITENAME' => tp_config()->get('sitename'),
     'U_INDEX' => BB_ROOT . 'index.php',
-    'T_INDEX' => sprintf($lang['FORUM_INDEX'], config()->get('sitename')),
+    'T_INDEX' => sprintf($lang['FORUM_INDEX'], tp_config()->get('sitename')),
 
     'IS_GUEST' => IS_GUEST,
     'IS_USER' => IS_USER,
@@ -138,9 +141,9 @@ $template->assign_vars([
     'FORUM_PATH' => FORUM_PATH,
     'FULL_URL' => FULL_URL,
 
-    'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, config()->get('last_visit_date_format'), false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)config()->get('board_timezone'))])),
-    'BOARD_TIMEZONE' => config()->get('board_timezone'),
+    'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, tp_config()->get('last_visit_date_format'), false)),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)tp_config()->get('board_timezone'))])),
+    'BOARD_TIMEZONE' => tp_config()->get('board_timezone'),
 
     'PM_INFO' => $pm_info,
     'PRIVMSG_IMG' => $icon_pm,
@@ -151,7 +154,7 @@ $template->assign_vars([
     'THIS_USER' => profile_url($userdata),
     'THIS_AVATAR' => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'dis_avatar')),
     'SHOW_LOGIN_LINK' => !defined('IN_LOGIN'),
-    'AUTOLOGIN_DISABLED' => !config()->get('allow_autologin'),
+    'AUTOLOGIN_DISABLED' => !tp_config()->get('allow_autologin'),
     'S_LOGIN_ACTION' => LOGIN_URL,
 
     'U_CUR_DOWNLOADS' => PROFILE_URL . $userdata['user_id'],
@@ -167,11 +170,11 @@ $template->assign_vars([
     'U_REGISTER' => 'profile.php?mode=register',
     'U_SEARCH' => 'search.php',
     'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
-    'U_TERMS' => config()->get('terms_and_conditions_url'),
+    'U_TERMS' => tp_config()->get('terms_and_conditions_url'),
     'U_TRACKER' => 'tracker.php',
 
-    'SHOW_SIDEBAR1' => !empty(config()->get('page.show_sidebar1')[BB_SCRIPT]) || config()->get('show_sidebar1_on_every_page'),
-    'SHOW_SIDEBAR2' => !empty(config()->get('page.show_sidebar2')[BB_SCRIPT]) || config()->get('show_sidebar2_on_every_page'),
+    'SHOW_SIDEBAR1' => !empty(tp_config()->get('page.show_sidebar1')[$bb_script]) || tp_config()->get('show_sidebar1_on_every_page'),
+    'SHOW_SIDEBAR2' => !empty(tp_config()->get('page.show_sidebar2')[$bb_script]) || tp_config()->get('show_sidebar2_on_every_page'),
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -185,11 +188,11 @@ $template->assign_vars([
     'DOWNLOAD_URL' => BB_ROOT . DL_URL,
     'FORUM_URL' => BB_ROOT . FORUM_URL,
     'GROUP_URL' => BB_ROOT . GROUP_URL,
-    'LOGIN_URL' => config()->get('login_url'),
+    'LOGIN_URL' => tp_config()->get('login_url'),
     'NEWEST_URL' => '&amp;view=newest#newest',
-    'PM_URL' => config()->get('pm_url'),
+    'PM_URL' => tp_config()->get('pm_url'),
     'POST_URL' => BB_ROOT . POST_URL,
-    'POSTING_URL' => config()->get('posting_url'),
+    'POSTING_URL' => tp_config()->get('posting_url'),
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
     'BONUS_URL' => BB_ROOT . BONUS_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
@@ -208,7 +211,7 @@ $template->assign_vars([
     'U_WATCHED_TOPICS' => 'profile.php?mode=watch'
 ]);
 
-if (!empty(config()->get('page.show_torhelp')[BB_SCRIPT]) && !empty($userdata['torhelp'])) {
+if (!empty(tp_config()->get('page.show_torhelp')[$bb_script]) && !empty($userdata['torhelp'])) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {
@@ -238,7 +241,7 @@ if (!empty(config()->get('page.show_torhelp')[BB_SCRIPT]) && !empty($userdata['t
 $in_out = ($logged_in) ? 'in' : 'out';
 $template->assign_block_vars("switch_user_logged_{$in_out}", []);
 
-if (!IS_GUEST) {
+if (!IS_GUEST && !defined('MODERN_ROUTING')) {
     header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
     header('Expires: 0');
     header('Pragma: no-cache');
@@ -249,6 +252,6 @@ $template->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
 
-if (!config()->get('gzip_compress')) {
+if (!tp_config()->get('gzip_compress')) {
     flush();
 }

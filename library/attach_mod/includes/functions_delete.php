@@ -215,7 +215,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                         }
 
                         // TorrServer integration
-                        if (config()->get('torr_server.enabled')) {
+                        if (tp_config()->get('torr_server.enabled')) {
                             $torrServer = new \TorrentPier\TorrServerAPI();
                             $torrServer->removeM3U($attachments[$j]['attach_id']);
                         }

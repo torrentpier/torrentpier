@@ -18,7 +18,7 @@ sort($rowset);
 
 foreach ($rowset as $smile) {
     $smilies['orig'][] = '#(?<=^|\W)' . preg_quote($smile['code'], '#') . '(?=$|\W)#';
-    $smilies['repl'][] = ' <img class="smile" src="' . config()->get('smilies_path') . '/' . $smile['smile_url'] . '" alt="' . $smile['code'] . '" title="' . $smile['emoticon'] . '" align="absmiddle" border="0" />';
+    $smilies['repl'][] = ' <img class="smile" src="' . tp_config()->get('smilies_path') . '/' . $smile['smile_url'] . '" alt="' . $smile['code'] . '" title="' . $smile['emoticon'] . '" align="absmiddle" border="0" />';
     $smilies['smile'][] = $smile;
 }
 

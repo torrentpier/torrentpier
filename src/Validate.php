@@ -117,7 +117,7 @@ class Validate
         }
 
         // Extended email validation
-        if (config()->get('extended_email_validation')) {
+        if (tp_config()->get('extended_email_validation')) {
             $validator = new EmailValidator();
 
             $multipleValidations = new MultipleValidationWithAnd([
@@ -175,26 +175,26 @@ class Validate
         }
 
         // Symbols check
-        if (config()->get('password_symbols')) {
+        if (tp_config()->get('password_symbols')) {
             // Numbers
-            if (config()->get('password_symbols.nums')) {
+            if (tp_config()->get('password_symbols.nums')) {
                 if (!StringHelper::isContainsNums($password)) {
                     return $lang['CHOOSE_PASS_ERR_NUM'];
                 }
             }
             // Letters
-            if (config()->get('password_symbols.letters.lowercase')) {
+            if (tp_config()->get('password_symbols.letters.lowercase')) {
                 if (!StringHelper::isContainsLetters($password)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER'];
                 }
             }
-            if (config()->get('password_symbols.letters.uppercase')) {
+            if (tp_config()->get('password_symbols.letters.uppercase')) {
                 if (!StringHelper::isContainsLetters($password, true)) {
                     return $lang['CHOOSE_PASS_ERR_LETTER_UPPERCASE'];
                 }
             }
             // Spec symbols
-            if (config()->get('password_symbols.spec_symbols')) {
+            if (tp_config()->get('password_symbols.spec_symbols')) {
                 if (!StringHelper::isContainsSpecSymbols($password)) {
                     return $lang['CHOOSE_PASS_ERR_SPEC_SYMBOL'];
                 }

@@ -27,7 +27,7 @@ $data['postcount'] = commify($row['postcount']);
 $data['topiccount'] = commify($row['topiccount']);
 
 // Tracker stats
-if (config()->get('tor_stats')) {
+if (tp_config()->get('tor_stats')) {
     // torrents stat
     $row = DB()->fetch_row("SELECT COUNT(topic_id) AS torrentcount, SUM(size) AS size FROM " . BB_BT_TORRENTS);
     $data['torrentcount'] = commify($row['torrentcount']);
@@ -42,7 +42,7 @@ if (config()->get('tor_stats')) {
 }
 
 // gender stat
-if (config()->get('gender')) {
+if (tp_config()->get('gender')) {
     $male = DB()->fetch_row("SELECT COUNT(user_id) AS male FROM " . BB_USERS . " WHERE user_gender = " . MALE . " AND user_id NOT IN(" . EXCLUDED_USERS . ")");
     $female = DB()->fetch_row("SELECT COUNT(user_id) AS female FROM " . BB_USERS . " WHERE user_gender = " . FEMALE . " AND user_id NOT IN(" . EXCLUDED_USERS . ")");
     $unselect = DB()->fetch_row("SELECT COUNT(user_id) AS unselect FROM " . BB_USERS . " WHERE user_gender = 0 AND user_id NOT IN(" . EXCLUDED_USERS . ")");
@@ -53,7 +53,7 @@ if (config()->get('gender')) {
 }
 
 // birthday stat
-if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
+if (tp_config()->get('birthday_check_day') && tp_config()->get('birthday_enabled')) {
     $sql = DB()->fetch_rowset("SELECT user_id, username, user_rank , user_birthday
 		FROM " . BB_USERS . "
 		WHERE user_id NOT IN(" . EXCLUDED_USERS . ")
@@ -64,7 +64,7 @@ if (config()->get('birthday_check_day') && config()->get('birthday_enabled')) {
 	");
 
     $date_today = bb_date(TIMENOW, 'md', false);
-    $date_forward = bb_date(TIMENOW + (config()->get('birthday_check_day') * 86400), 'md', false);
+    $date_forward = bb_date(TIMENOW + (tp_config()->get('birthday_check_day') * 86400), 'md', false);
 
     $birthday_today_list = $birthday_week_list = [];
 

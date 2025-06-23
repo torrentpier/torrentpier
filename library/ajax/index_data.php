@@ -31,9 +31,9 @@ switch ($mode) {
             foreach ($stats['birthday_week_list'] as $week) {
                 $users[] = profile_url($week) . ' <span class="small">(' . birthday_age(date('Y-m-d', strtotime('-1 year', strtotime($week['user_birthday'])))) . ')</span>';
             }
-            $html = sprintf($lang['BIRTHDAY_WEEK'], config()->get('birthday_check_day'), implode(', ', $users));
+            $html = sprintf($lang['BIRTHDAY_WEEK'], tp_config()->get('birthday_check_day'), implode(', ', $users));
         } else {
-            $html = sprintf($lang['NOBIRTHDAY_WEEK'], config()->get('birthday_check_day'));
+            $html = sprintf($lang['NOBIRTHDAY_WEEK'], tp_config()->get('birthday_check_day'));
         }
         break;
 
@@ -84,7 +84,7 @@ switch ($mode) {
         break;
 
     case 'null_ratio':
-        if (!config()->get('ratio_null_enabled') || !RATIO_ENABLED) {
+        if (!tp_config()->get('ratio_null_enabled') || !RATIO_ENABLED) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
         if (empty($this->request['confirmed'])) {
@@ -106,8 +106,8 @@ switch ($mode) {
         if ($ratio_nulled && !IS_ADMIN) {
             $this->ajax_die($lang['BT_NULL_RATIO_AGAIN']);
         }
-        if (($user_ratio >= config()->get('ratio_to_null')) && !IS_ADMIN) {
-            $this->ajax_die(sprintf($lang['BT_NULL_RATIO_NOT_NEEDED'], config()->get('ratio_to_null')));
+        if (($user_ratio >= tp_config()->get('ratio_to_null')) && !IS_ADMIN) {
+            $this->ajax_die(sprintf($lang['BT_NULL_RATIO_NOT_NEEDED'], tp_config()->get('ratio_to_null')));
         }
 
         $ratio_nulled_sql = !IS_ADMIN ? ', ratio_nulled = 1' : '';
@@ -172,7 +172,7 @@ switch ($mode) {
 				<th>' . $lang['UPLOADED'] . '</th>
 				<th>' . $lang['RELEASED'] . '</th>
 				<th>' . $lang['BONUS'] . '</th>';
-        $html .= config()->get('seed_bonus_enabled') ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
+        $html .= tp_config()->get('seed_bonus_enabled') ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
         $html .= '</tr>
 			<tr class="row1">
 				<td>' . $lang['TOTAL_TRAF'] . '</td>
@@ -180,17 +180,17 @@ switch ($mode) {
 				<td id="u_up_total"><span class="editable bold seedmed">' . humn_size($btu['u_up_total']) . '</span></td>
 				<td id="u_up_release"><span class="editable bold seedmed">' . humn_size($btu['u_up_release']) . '</span></td>
 				<td id="u_up_bonus"><span class="editable bold seedmed">' . humn_size($btu['u_up_bonus']) . '</span></td>';
-        $html .= config()->get('seed_bonus_enabled') ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
+        $html .= tp_config()->get('seed_bonus_enabled') ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
         $html .= '</tr>
 			<tr class="row5">
 				<td colspan="1">' . $lang['MAX_SPEED'] . '</td>
 				<td colspan="2">' . $lang['DL_DL_SPEED'] . ': ' . $speed_down . '</span></td>
 				<td colspan="2">' . $lang['DL_UL_SPEED'] . ': ' . $speed_up . '</span></td>';
-        $html .= config()->get('seed_bonus_enabled') ? '<td colspan="1"></td>' : '';
+        $html .= tp_config()->get('seed_bonus_enabled') ? '<td colspan="1"></td>' : '';
         $html .= '</tr>';
 
         $this->response['user_ratio'] = '
-			<th><a href="' . config()->get('ratio_url_help') . '" class="bold">' . $lang['USER_RATIO'] . '</a>:</th>
+			<th><a href="' . tp_config()->get('ratio_url_help') . '" class="bold">' . $lang['USER_RATIO'] . '</a>:</th>
 			<td>' . $user_ratio . '</td>
 		';
         break;

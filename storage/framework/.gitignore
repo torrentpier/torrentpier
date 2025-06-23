@@ -1,0 +1,6 @@
+cache/*
+sessions/*
+views/*
+!cache/.gitignore
+!sessions/.gitignore
+!views/.gitignore

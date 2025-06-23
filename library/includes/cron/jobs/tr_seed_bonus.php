@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 DB()->expect_slow_query(600);
 
-if (config()->get('seed_bonus_enabled') && config()->get('seed_bonus_points') && config()->get('seed_bonus_release')) {
+if (tp_config()->get('seed_bonus_enabled') && tp_config()->get('seed_bonus_points') && tp_config()->get('seed_bonus_release')) {
     DB()->query("
 		CREATE TEMPORARY TABLE tmp_bonus (
 			user_id       INT UNSIGNED NOT NULL DEFAULT '0',
@@ -21,7 +21,7 @@ if (config()->get('seed_bonus_enabled') && config()->get('seed_bonus_points') &&
 		) ENGINE = MEMORY
 	");
 
-    $tor_size = (config()->get('seed_bonus_tor_size') * 1073741824);
+    $tor_size = (tp_config()->get('seed_bonus_tor_size') * 1073741824);
 
     DB()->query("INSERT INTO tmp_bonus
 		SELECT bt.user_id, count(bt.seeder) AS release_count
@@ -32,8 +32,8 @@ if (config()->get('seed_bonus_enabled') && config()->get('seed_bonus_points') &&
 			GROUP BY bt.user_id
 	");
 
-    $seed_bonus = unserialize(config()->get('seed_bonus_points'));
-    $seed_release = unserialize(config()->get('seed_bonus_release'));
+    $seed_bonus = unserialize(tp_config()->get('seed_bonus_points'));
+    $seed_release = unserialize(tp_config()->get('seed_bonus_release'));
 
     foreach ($seed_bonus as $i => $points) {
         if (!$points || !$seed_release[$i]) {
@@ -42,7 +42,7 @@ if (config()->get('seed_bonus_enabled') && config()->get('seed_bonus_points') &&
 
         $user_points = ((float)$points / 4);
         $release = (int)$seed_release[$i];
-        $user_regdate = (TIMENOW - config()->get('seed_bonus_user_regdate') * 86400);
+        $user_regdate = (TIMENOW - tp_config()->get('seed_bonus_user_regdate') * 86400);
 
         DB()->query("
 			UPDATE " . BB_USERS . " u, " . BB_BT_USERS . " bu, tmp_bonus b

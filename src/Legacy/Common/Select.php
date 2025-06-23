@@ -26,7 +26,7 @@ class Select
     public static function language(string $default_lang, string $select_name = 'language'): mixed
     {
         $lang_select = '<select name="' . $select_name . '">';
-        foreach (config()->get('lang') as $key => $data) {
+        foreach (tp_config()->get('lang') as $key => $data) {
             $selected = '';
             if ($key == $default_lang) {
                 $selected = ' selected';
@@ -74,7 +74,7 @@ class Select
     public static function template(string $default_style, string $select_name = 'tpl_name'): mixed
     {
         $templates_select = '<select name="' . $select_name . '">';
-        foreach (config()->get('templates') as $folder => $name) {
+        foreach (tp_config()->get('templates') as $folder => $name) {
             $selected = '';
             if ($folder == $default_style) {
                 $selected = ' selected';

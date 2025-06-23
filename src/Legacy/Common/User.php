@@ -130,7 +130,7 @@ class User
             if ($session_id) {
                 $SQL['WHERE'][] = "s.session_id = '$session_id'";
 
-                if (config()->get('torhelp_enabled')) {
+                if (tp_config()->get('torhelp_enabled')) {
                     $SQL['SELECT'][] = "th.topic_id_csv AS torhelp";
                     $SQL['LEFT JOIN'][] = BB_BT_TORHELP . " th ON(u.user_id = th.user_id)";
                 }
@@ -146,7 +146,7 @@ class User
             if (!$this->data = Sessions::cache_get_userdata($userdata_cache_id)) {
                 $this->data = DB()->fetch_row($SQL);
 
-                if ($this->data && (TIMENOW - $this->data['session_time']) > config()->get('session_update_intrv')) {
+                if ($this->data && (TIMENOW - $this->data['session_time']) > tp_config()->get('session_update_intrv')) {
                     $this->data['session_time'] = TIMENOW;
                     $update_sessions_table = true;
                 }
@@ -189,7 +189,7 @@ class User
         // using the cookie user_id if available to pull basic user prefs.
         if (!$this->data) {
             $login = false;
-            $user_id = (config()->get('allow_autologin') && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
+            $user_id = (tp_config()->get('allow_autologin') && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
             if ($userdata = get_userdata((int)$user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
@@ -210,7 +210,7 @@ class User
         define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
         define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
         define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
-        define('IS_SUPER_ADMIN', IS_ADMIN && isset(config()->get('super_admins')[$this->data['user_id']]));
+        define('IS_SUPER_ADMIN', IS_ADMIN && isset(tp_config()->get('super_admins')[$this->data['user_id']]));
         define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
@@ -281,8 +281,8 @@ class User
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
-            } elseif ($session_time < (TIMENOW - config()->get('last_visit_update_intrv'))) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * config()->get('max_last_visit_days')));
+            } elseif ($session_time < (TIMENOW - tp_config()->get('last_visit_update_intrv'))) {
+                $last_visit = max($session_time, (TIMENOW - 86400 * tp_config()->get('max_last_visit_days')));
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
@@ -301,7 +301,7 @@ class User
 
                 $this->data['user_lastvisit'] = $last_visit;
             }
-            if (!empty($_POST['autologin']) && config()->get('allow_autologin')) {
+            if (!empty($_POST['autologin']) && tp_config()->get('allow_autologin')) {
                 if (!$auto_created) {
                     $this->verify_autologin_id($this->data, true, true);
                 }
@@ -487,10 +487,10 @@ class User
                 }
             }
         } else {
-            if (!isset(config()->get('dbg_users')[$this->data['user_id']]) && DBG_USER) {
+            if (!isset(tp_config()->get('dbg_users')[$this->data['user_id']]) && DBG_USER) {
                 bb_setcookie(COOKIE_DBG, null);
-            } elseif (isset(config()->get('dbg_users')[$this->data['user_id']]) && !DBG_USER) {
-                bb_setcookie(COOKIE_DBG, hash('xxh128', config()->get('dbg_users')[$this->data['user_id']]), COOKIE_SESSION);
+            } elseif (isset(tp_config()->get('dbg_users')[$this->data['user_id']]) && !DBG_USER) {
+                bb_setcookie(COOKIE_DBG, hash('xxh128', tp_config()->get('dbg_users')[$this->data['user_id']]), COOKIE_SESSION);
             }
 
             // Unset sql debug cookies if SQL_DEBUG is disabled or DBG_USER cookie not present
@@ -530,8 +530,8 @@ class User
                 return $this->create_autologin_id($userdata);
             }
 
-            if ($autologin_id && $userdata['user_session_time'] && config()->get('max_autologin_time')) {
-                if (TIMENOW - $userdata['user_session_time'] > config()->get('max_autologin_time') * 86400) {
+            if ($autologin_id && $userdata['user_session_time'] && tp_config()->get('max_autologin_time')) {
+                if (TIMENOW - $userdata['user_session_time'] > tp_config()->get('max_autologin_time') * 86400) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
             }
@@ -590,32 +590,32 @@ class User
         }  // prevent multiple calling
 
         // Apply browser language
-        if (config()->get('auto_language_detection') && IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        if (tp_config()->get('auto_language_detection') && IS_GUEST && isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             $http_accept_language = locale_get_primary_language(locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']));
-            if (isset(config()->get('lang')[$http_accept_language])) {
-                config()->set('default_lang', $http_accept_language);
+            if (isset(tp_config()->get('lang')[$http_accept_language])) {
+                tp_config()->set('default_lang', $http_accept_language);
             }
         }
 
-        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
+        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . tp_config()->get('default_lang') . '/');
         define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/en/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if (IN_DEMO_MODE && isset($_COOKIE['user_lang'])) {
                 $this->data['user_lang'] = $_COOKIE['user_lang'];
             }
-            if ($this->data['user_lang'] && $this->data['user_lang'] != config()->get('default_lang')) {
-                config()->set('default_lang', basename($this->data['user_lang']));
-                define('LANG_DIR', LANG_ROOT_DIR . '/' . config()->get('default_lang') . '/');
+            if ($this->data['user_lang'] && $this->data['user_lang'] != tp_config()->get('default_lang')) {
+                tp_config()->set('default_lang', basename($this->data['user_lang']));
+                define('LANG_DIR', LANG_ROOT_DIR . '/' . tp_config()->get('default_lang') . '/');
             }
 
             if (isset($this->data['user_timezone'])) {
-                config()->set('board_timezone', $this->data['user_timezone']);
+                tp_config()->set('board_timezone', $this->data['user_timezone']);
             }
         }
 
-        $this->data['user_lang'] = config()->get('default_lang');
-        $this->data['user_timezone'] = config()->get('board_timezone');
+        $this->data['user_lang'] = tp_config()->get('default_lang');
+        $this->data['user_timezone'] = tp_config()->get('board_timezone');
 
         if (!defined('LANG_DIR')) {
             define('LANG_DIR', DEFAULT_LANG_DIR);
@@ -795,7 +795,7 @@ class User
     public function checkPassword(string $enteredPassword, array $userdata): bool
     {
         if (password_verify($enteredPassword, $userdata['user_password'])) {
-            if (password_needs_rehash($userdata['user_password'], config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'))) {
+            if (password_needs_rehash($userdata['user_password'], tp_config()->get('password_hash_options.algo'), tp_config()->get('password_hash_options.options'))) {
                 // Update password_hash
                 DB()->query("UPDATE " . BB_USERS . " SET user_password = '" . $this->password_hash($enteredPassword) . "' WHERE user_id = '" . $userdata['user_id'] . "' AND user_password = '" . $userdata['user_password'] . "' LIMIT 1");
             }
@@ -821,6 +821,6 @@ class User
      */
     public function password_hash(string $enteredPassword): string
     {
-        return password_hash($enteredPassword, config()->get('password_hash_options.algo'), config()->get('password_hash_options.options'));
+        return password_hash($enteredPassword, tp_config()->get('password_hash_options.algo'), tp_config()->get('password_hash_options.options'));
     }
 }

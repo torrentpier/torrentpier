@@ -34,9 +34,6 @@ if (empty($_SERVER['SERVER_ADDR'])) {
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
-if (!defined('BB_SCRIPT')) {
-    define('BB_SCRIPT', null);
-}
 
 header('X-Frame-Options: SAMEORIGIN');
 date_default_timezone_set('UTC');
@@ -57,18 +54,6 @@ if (!is_file(BB_PATH . '/vendor/autoload.php')) {
     die('🔩 Manual install: <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">Install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>.<br/>☕️ Quick install: Run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">php install.php</code> in CLI mode.');
 }
 require_once BB_PATH . '/vendor/autoload.php';
-
-/**
- * Gets the value of an environment variable.
- *
- * @param string $key
- * @param mixed|null $default
- * @return mixed
- */
-function env(string $key, mixed $default = null): mixed
-{
-    return \TorrentPier\Env::get($key, $default);
-}
 
 // Load ENV
 try {
@@ -95,7 +80,7 @@ $config = \TorrentPier\Config::init($bb_cfg);
  *
  * @return \TorrentPier\Config
  */
-function config(): \TorrentPier\Config
+function tp_config(): \TorrentPier\Config
 {
     return \TorrentPier\Config::getInstance();
 }
@@ -168,14 +153,14 @@ if (APP_ENV === 'development') {
 /**
  * Server variables initialize
  */
-$server_protocol = config()->get('cookie_secure') ? 'https://' : 'http://';
-$server_port = in_array((int)config()->get('server_port'), [80, 443], true) ? '' : ':' . config()->get('server_port');
-define('FORUM_PATH', config()->get('script_path'));
-define('FULL_URL', $server_protocol . config()->get('server_name') . $server_port . config()->get('script_path'));
+$server_protocol = tp_config()->get('cookie_secure') ? 'https://' : 'http://';
+$server_port = in_array((int)tp_config()->get('server_port'), [80, 443], true) ? '' : ':' . tp_config()->get('server_port');
+define('FORUM_PATH', tp_config()->get('script_path'));
+define('FULL_URL', $server_protocol . tp_config()->get('server_name') . $server_port . tp_config()->get('script_path'));
 unset($server_protocol, $server_port);
 
 // Initialize the new DB factory with database configuration
-TorrentPier\Database\DatabaseFactory::init(config()->get('db'), config()->get('db_alias', []));
+TorrentPier\Database\DatabaseFactory::init(tp_config()->get('db'), tp_config()->get('db_alias', []));
 
 /**
  * Get the Database instance
@@ -189,7 +174,7 @@ function DB(string $db_alias = 'db'): \TorrentPier\Database\Database
 }
 
 // Initialize Unified Cache System
-TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
+TorrentPier\Cache\UnifiedCacheSystem::getInstance(tp_config()->all());
 
 /**
  * Get cache manager instance (replaces legacy cache system)
@@ -209,7 +194,7 @@ function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
  */
 function datastore(): \TorrentPier\Cache\DatastoreManager
 {
-    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'file'));
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(tp_config()->get('datastore_type', 'file'));
 }
 
 /**
@@ -433,9 +418,9 @@ if (!defined('IN_TRACKER')) {
 } else {
     define('DUMMY_PEER', pack('Nn', \TorrentPier\Helpers\IPHelper::ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
-    define('PEER_HASH_EXPIRE', round(config()->get('announce_interval') * (0.85 * config()->get('tracker.expire_factor'))));
-    define('PEERS_LIST_EXPIRE', round(config()->get('announce_interval') * 0.7));
-    define('SCRAPE_LIST_EXPIRE', round(config()->get('scrape_interval') * 0.7));
+    define('PEER_HASH_EXPIRE', round(tp_config()->get('announce_interval') * (0.85 * tp_config()->get('tracker.expire_factor'))));
+    define('PEERS_LIST_EXPIRE', round(tp_config()->get('announce_interval') * 0.7));
+    define('SCRAPE_LIST_EXPIRE', round(tp_config()->get('scrape_interval') * 0.7));
 
     define('PEER_HASH_PREFIX', 'peer_');
     define('PEERS_LIST_PREFIX', 'peers_list_');

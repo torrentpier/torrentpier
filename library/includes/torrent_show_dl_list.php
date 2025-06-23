@@ -21,12 +21,12 @@ $dl_users_div_style_overflow = "padding: 6px; height: $dl_users_overflow_div_hei
 
 $template->assign_vars(['DL_BUTTONS' => false]);
 
-$count_mode = (config()->get('bt_dl_list_only_count') && !(@$_GET['dl'] === 'names'));
+$count_mode = (tp_config()->get('bt_dl_list_only_count') && !(@$_GET['dl'] === 'names'));
 
-$have_dl_buttons_enabled = (config()->get('bt_show_dl_but_will') || config()->get('bt_show_dl_but_down') || config()->get('bt_show_dl_but_compl') || config()->get('bt_show_dl_but_cancel'));
-$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !(config()->get('bt_dl_list_only_1st_page') && $start));
-$show_dl_list = ($dl_topic && (config()->get('bt_show_dl_list') || (config()->get('allow_dl_list_names_mode') && @$_GET['dl'] === 'names')));
-$show_dl_buttons = (!IS_GUEST && $dl_topic && config()->get('bt_show_dl_list_buttons'));
+$have_dl_buttons_enabled = (tp_config()->get('bt_show_dl_but_will') || tp_config()->get('bt_show_dl_but_down') || tp_config()->get('bt_show_dl_but_compl') || tp_config()->get('bt_show_dl_but_cancel'));
+$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !(tp_config()->get('bt_dl_list_only_1st_page') && $start));
+$show_dl_list = ($dl_topic && (tp_config()->get('bt_show_dl_list') || (tp_config()->get('allow_dl_list_names_mode') && @$_GET['dl'] === 'names')));
+$show_dl_buttons = (!IS_GUEST && $dl_topic && tp_config()->get('bt_show_dl_list_buttons'));
 
 // link to clear DL-List
 $template->assign_vars(['S_DL_DELETE' => false]);
@@ -99,7 +99,7 @@ if ($show_dl_list) {
                 ]);
             }
         }
-    } elseif (config()->get('bt_show_dl_list_buttons') && $have_dl_buttons_enabled) {
+    } elseif (tp_config()->get('bt_show_dl_list_buttons') && $have_dl_buttons_enabled) {
         $template->assign_block_vars('dl_list_none', []);
     }
 }
@@ -107,10 +107,10 @@ if ($show_dl_list) {
 if ($show_dl_buttons) {
     $template->assign_vars([
         'DL_BUTTONS' => true,
-        'DL_BUT_WILL' => config()->get('bt_show_dl_but_will'),
-        'DL_BUT_DOWN' => config()->get('bt_show_dl_but_down'),
-        'DL_BUT_COMPL' => config()->get('bt_show_dl_but_compl'),
-        'DL_BUT_CANCEL' => config()->get('bt_show_dl_but_cancel')
+        'DL_BUT_WILL' => tp_config()->get('bt_show_dl_but_will'),
+        'DL_BUT_DOWN' => tp_config()->get('bt_show_dl_but_down'),
+        'DL_BUT_COMPL' => tp_config()->get('bt_show_dl_but_compl'),
+        'DL_BUT_CANCEL' => tp_config()->get('bt_show_dl_but_cancel')
     ]);
 
     $dl_hidden_fields = '

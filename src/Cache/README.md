@@ -25,7 +25,7 @@ The system follows TorrentPier's consistent singleton pattern, similar to `confi
 
 ```php
 // Main singleton instance
-TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
+TorrentPier\Cache\UnifiedCacheSystem::getInstance(tp_config()->all());
 
 // Clean global functions with proper return types
 function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager
@@ -134,7 +134,7 @@ The system integrates seamlessly in `library/includes/functions.php`:
 
 ```php
 // Singleton initialization (done once)
-TorrentPier\Cache\UnifiedCacheSystem::getInstance(config()->all());
+TorrentPier\Cache\UnifiedCacheSystem::getInstance(tp_config()->all());
 
 // Global functions provide backward compatibility
 function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager {
@@ -142,7 +142,7 @@ function CACHE(string $cache_name): \TorrentPier\Cache\CacheManager {
 }
 
 function datastore(): \TorrentPier\Cache\DatastoreManager {
-    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(config()->get('datastore_type', 'file'));
+    return TorrentPier\Cache\UnifiedCacheSystem::getInstance()->getDatastore(tp_config()->get('datastore_type', 'file'));
 }
 ```
 

@@ -144,7 +144,7 @@ if ($check_attachments) {
         $orphan_db_attach[] = $row['attach_id'];
     }
     // Delete all orphan attachments
-    if (config()->get('torr_server.enabled') && $fix_errors) {
+    if (tp_config()->get('torr_server.enabled') && $fix_errors) {
         foreach ($orphan_db_attach as $attach_id) {
             // TorrServer integration
             $torrServer = new \TorrentPier\TorrServerAPI();

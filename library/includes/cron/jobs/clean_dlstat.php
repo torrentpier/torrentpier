@@ -13,10 +13,10 @@ if (!defined('BB_ROOT')) {
 
 // Delete staled dl-status records
 $keeping_dlstat = [
-    DL_STATUS_WILL => (int)config()->get('dl_will_days_keep'),
-    DL_STATUS_DOWN => (int)config()->get('dl_down_days_keep'),
-    DL_STATUS_COMPLETE => (int)config()->get('dl_complete_days_keep'),
-    DL_STATUS_CANCEL => (int)config()->get('dl_cancel_days_keep')
+    DL_STATUS_WILL => (int)tp_config()->get('dl_will_days_keep'),
+    DL_STATUS_DOWN => (int)tp_config()->get('dl_down_days_keep'),
+    DL_STATUS_COMPLETE => (int)tp_config()->get('dl_complete_days_keep'),
+    DL_STATUS_CANCEL => (int)tp_config()->get('dl_cancel_days_keep')
 ];
 
 $delete_dlstat_sql = [];
@@ -51,7 +51,7 @@ DB()->query("
 ");
 
 // Tor-Stats cleanup
-if ($torstat_days_keep = (int)config()->get('torstat_days_keep')) {
+if ($torstat_days_keep = (int)tp_config()->get('torstat_days_keep')) {
     DB()->query("DELETE QUICK FROM " . BB_BT_TORSTAT . " WHERE last_modified_torstat < DATE_SUB(NOW(), INTERVAL $torstat_days_keep DAY)");
 }
 

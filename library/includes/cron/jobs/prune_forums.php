@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-if (config()->get('prune_enable')) {
+if (tp_config()->get('prune_enable')) {
     $sql = "SELECT forum_id, prune_days FROM " . BB_FORUMS . " WHERE prune_days != 0";
 
     foreach (DB()->fetch_rowset($sql) as $row) {

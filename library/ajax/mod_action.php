@@ -44,7 +44,7 @@ switch ($mode) {
             \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $status);
 
             // Log action
-            $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], config()->get('tor_icons')[$status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$status] . '</b>', config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
+            $log_msg = sprintf($lang['TOR_STATUS_LOG_ACTION'], tp_config()->get('tor_icons')[$status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$status] . '</b>', tp_config()->get('tor_icons')[$tor['tor_status']] . ' <b> ' . $lang['TOR_STATUS_NAME'][$tor['tor_status']] . '</b>');
             $log_action->mod('mod_topic_change_tor_status', [
                 'forum_id' => $tor['forum_id'],
                 'topic_id' => $tor['topic_id'],
@@ -52,7 +52,7 @@ switch ($mode) {
                 'log_msg' => $log_msg . '<br/>-------------',
             ]);
         }
-        $this->response['status'] = config()->get('tor_icons')[$status];
+        $this->response['status'] = tp_config()->get('tor_icons')[$status];
         $this->response['topics'] = explode(',', $topics);
         break;
 
@@ -78,16 +78,16 @@ switch ($mode) {
         DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
 
         // Update the news cache on the index page
-        $news_forums = array_flip(explode(',', config()->get('latest_news_forum_id')));
-        if (isset($news_forums[$t_data['forum_id']]) && config()->get('show_latest_news')) {
+        $news_forums = array_flip(explode(',', tp_config()->get('latest_news_forum_id')));
+        if (isset($news_forums[$t_data['forum_id']]) && tp_config()->get('show_latest_news')) {
             $datastore->enqueue([
                 'latest_news'
             ]);
             $datastore->update('latest_news');
         }
 
-        $net_forums = array_flip(explode(',', config()->get('network_news_forum_id')));
-        if (isset($net_forums[$t_data['forum_id']]) && config()->get('show_network_news')) {
+        $net_forums = array_flip(explode(',', tp_config()->get('network_news_forum_id')));
+        if (isset($net_forums[$t_data['forum_id']]) && tp_config()->get('show_network_news')) {
             $datastore->enqueue([
                 'network_news'
             ]);
@@ -151,8 +151,8 @@ switch ($mode) {
         } else {
             $user_reg_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_reg_ip']);
             $user_last_ip = \TorrentPier\Helpers\IPHelper::long2ip_extended($profiledata['user_last_ip']);
-            $reg_ip = '<a href="' . config()->get('whois_info') . $user_reg_ip . '" class="gen" target="_blank">' . $user_reg_ip . '</a>';
-            $last_ip = '<a href="' . config()->get('whois_info') . $user_last_ip . '" class="gen" target="_blank">' . $user_last_ip . '</a>';
+            $reg_ip = '<a href="' . tp_config()->get('whois_info') . $user_reg_ip . '" class="gen" target="_blank">' . $user_reg_ip . '</a>';
+            $last_ip = '<a href="' . tp_config()->get('whois_info') . $user_last_ip . '" class="gen" target="_blank">' . $user_last_ip . '</a>';
         }
 
         $this->response['ip_list_html'] = '

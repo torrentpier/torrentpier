@@ -1,30 +1,35 @@
 <?php
 
-use function DI\factory;
-use function DI\get;
-use function DI\autowire;
+declare(strict_types=1);
+
+/**
+ * Service Container Bindings
+ * 
+ * Define service bindings for the Illuminate Container
+ */
 
 return [
-    // Add custom service definitions here as they are implemented
+    // Config service binding
+    \TorrentPier\Config::class => function () {
+        return \TorrentPier\Config::getInstance();
+    },
 
-    // Examples (uncomment and modify when implementing):
-
+    // Future service bindings can be added here:
+    
     // Logger service example
-    // 'logger' => factory(function () {
+    // 'logger' => function () {
     //     $logger = new \Monolog\Logger('torrentpier');
     //     $logger->pushHandler(new \Monolog\Handler\StreamHandler(__DIR__ . '/../internal_data/logs/app.log'));
     //     return $logger;
-    // }),
+    // },
 
-    // Configuration service example
-    // 'config' => factory(function () {
-    //     return [
-    //         'app' => require __DIR__ . '/app.php',
-    //         'database' => require __DIR__ . '/database.php',
-    //         'cache' => require __DIR__ . '/cache.php',
-    //     ];
-    // }),
+    // Database service example
+    // 'database' => function () {
+    //     return \TorrentPier\Database\DB::getInstance();
+    // },
 
-    // Interface to implementation binding example
-    // 'ServiceInterface' => autowire('ConcreteService'),
+    // Cache service example  
+    // 'cache' => function () {
+    //     return \TorrentPier\Cache\Cache::getInstance();
+    // },
 ];

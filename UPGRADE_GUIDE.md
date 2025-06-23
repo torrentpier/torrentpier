@@ -595,8 +595,8 @@ $announceUrl = $bb_cfg['bt_announce_url'];
 $dbHost = $bb_cfg['database']['host'];
 
 // ✅ New way (recommended)
-$announceUrl = config()->get('bt_announce_url');
-$dbHost = config()->get('database.host');
+$announceUrl = tp_config()->get('bt_announce_url');
+$dbHost = tp_config()->get('database.host');
 ```
 
 ### Key Configuration Changes
@@ -604,57 +604,57 @@ $dbHost = config()->get('database.host');
 #### Basic Usage
 ```php
 // Get configuration values using dot notation
-$siteName = config()->get('sitename');
-$dbHost = config()->get('database.host');
-$cacheTimeout = config()->get('cache.timeout');
+$siteName = tp_config()->get('sitename');
+$dbHost = tp_config()->get('database.host');
+$cacheTimeout = tp_config()->get('cache.timeout');
 
 // Get with default value if key doesn't exist
-$maxUsers = config()->get('max_users_online', 100);
-$debugMode = config()->get('debug.enabled', false);
+$maxUsers = tp_config()->get('max_users_online', 100);
+$debugMode = tp_config()->get('debug.enabled', false);
 ```
 
 #### Setting Values
 ```php
 // Set configuration values
-config()->set('sitename', 'My Awesome Tracker');
-config()->set('database.port', 3306);
-config()->set('cache.enabled', true);
+tp_config()->set('sitename', 'My Awesome Tracker');
+tp_config()->set('database.port', 3306);
+tp_config()->set('cache.enabled', true);
 ```
 
 #### Working with Sections
 ```php
 // Get entire configuration section
-$dbConfig = config()->getSection('database');
-$trackerConfig = config()->getSection('tracker');
+$dbConfig = tp_config()->getSection('database');
+$trackerConfig = tp_config()->getSection('tracker');
 
 // Check if configuration exists
-if (config()->has('bt_announce_url')) {
-    $announceUrl = config()->get('bt_announce_url');
+if (tp_config()->has('bt_announce_url')) {
+    $announceUrl = tp_config()->get('bt_announce_url');
 }
 ```
 
 ### Common Configuration Mappings
 
-| Old Syntax | New Syntax |
-|------------|------------|
-| `$bb_cfg['sitename']` | `config()->get('sitename')` |
-| `$bb_cfg['database']['host']` | `config()->get('database.host')` |
-| `$bb_cfg['tracker']['enabled']` | `config()->get('tracker.enabled')` |
-| `$bb_cfg['cache']['timeout']` | `config()->get('cache.timeout')` |
-| `$bb_cfg['torr_server']['url']` | `config()->get('torr_server.url')` |
+| Old Syntax | New Syntax                            |
+|------------|---------------------------------------|
+| `$bb_cfg['sitename']` | `tp_config()->get('sitename')`        |
+| `$bb_cfg['database']['host']` | `tp_config()->get('database.host')`   |
+| `$bb_cfg['tracker']['enabled']` | `tp_config()->get('tracker.enabled')` |
+| `$bb_cfg['cache']['timeout']` | `tp_config()->get('cache.timeout')`   |
+| `$bb_cfg['torr_server']['url']` | `tp_config()->get('torr_server.url')` |
 
 ### Magic Methods Support
 ```php
 // Magic getter
-$siteName = config()->sitename;
-$dbHost = config()->{'database.host'};
+$siteName = tp_config()->sitename;
+$dbHost = tp_config()->{'database.host'};
 
 // Magic setter
-config()->sitename = 'New Site Name';
-config()->{'database.port'} = 3306;
+tp_config()->sitename = 'New Site Name';
+tp_config()->{'database.port'} = 3306;
 
 // Magic isset
-if (isset(config()->bt_announce_url)) {
+if (isset(tp_config()->bt_announce_url)) {
     // Configuration exists
 }
 ```
@@ -804,7 +804,7 @@ _e('WELCOME_MESSAGE');               // Same as: echo __('WELCOME_MESSAGE')
 _e('USER_ONLINE', 'Online');         // With default value
 
 // ✅ Common usage patterns
-$title = __('PAGE_TITLE', config()->get('sitename'));
+$title = __('PAGE_TITLE', tp_config()->get('sitename'));
 $error = __('ERROR.INVALID_INPUT', 'Invalid input');
 ```
 
@@ -1113,8 +1113,8 @@ $environment = [
 - **New Implementation**: Uses Nette Database v3.2 with improved API requiring code updates
 
 ### Deprecated Functions
-- `get_config()` → Use `config()->get()`
-- `set_config()` → Use `config()->set()`
+- `get_config()` → Use `tp_config()->get()`
+- `set_config()` → Use `tp_config()->set()`
 - Direct `$bb_cfg` access → Use `config()` methods
 
 ### Deprecated Patterns
@@ -1139,11 +1139,11 @@ $environment = [
 ### Configuration Management
 ```php
 // ✅ Always provide defaults
-$timeout = config()->get('api.timeout', 30);
+$timeout = tp_config()->get('api.timeout', 30);
 
 // ✅ Use type hints
 function getMaxUploadSize(): int {
-    return (int) config()->get('upload.max_size', 10485760);
+    return (int) tp_config()->get('upload.max_size', 10485760);
 }
 
 // ✅ Cache frequently used values
@@ -1151,7 +1151,7 @@ class TrackerService {
     private string $announceUrl;
 
     public function __construct() {
-        $this->announceUrl = config()->get('bt_announce_url');
+        $this->announceUrl = tp_config()->get('bt_announce_url');
     }
 }
 ```
@@ -1221,7 +1221,7 @@ function setupCustomCensoring(): void {
 ```php
 // ✅ Graceful error handling
 try {
-    $dbConfig = config()->getSection('database');
+    $dbConfig = tp_config()->getSection('database');
     // Database operations
 } catch (Exception $e) {
     error_log("Database configuration error: " . $e->getMessage());
@@ -1232,7 +1232,7 @@ try {
 ### Performance Optimization
 ```php
 // ✅ Minimize configuration calls in loops
-$cacheEnabled = config()->get('cache.enabled', false);
+$cacheEnabled = tp_config()->get('cache.enabled', false);
 for ($i = 0; $i < 1000; $i++) {
     if ($cacheEnabled) {
         // Use cached value
@@ -1244,12 +1244,12 @@ for ($i = 0; $i < 1000; $i++) {
 ```php
 // ✅ Validate configuration values
 $maxFileSize = min(
-    config()->get('upload.max_size', 1048576),
+    tp_config()->get('upload.max_size', 1048576),
     1048576 * 100 // Hard limit: 100MB
 );
 
 // ✅ Sanitize user-configurable values
-$siteName = htmlspecialchars(config()->get('sitename', 'TorrentPier'));
+$siteName = htmlspecialchars(tp_config()->get('sitename', 'TorrentPier'));
 ```
 
 ### Testing and Quality Assurance

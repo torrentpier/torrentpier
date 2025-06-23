@@ -143,6 +143,143 @@ TorrentPier includes a comprehensive testing suite built with **Pest PHP**. Run 
 
 For detailed testing documentation, see [tests/README.md](tests/README.md).
 
+## 🖥️ CLI Usage
+
+TorrentPier 3.0 includes a Laravel-style CLI tool called **Dexter** for managing your application:
+
+```shell
+# Basic usage
+php dexter                    # Shows available commands
+php dexter info              # System information
+php dexter cache:clear       # Clear caches
+php dexter migrate          # Run database migrations
+php dexter help <command>   # Command help
+```
+
+## 🦌 Laravel Herd Configuration
+
+If you're using [Laravel Herd](https://herd.laravel.com) for local development, you'll need special configuration to properly serve the legacy `/admin/` and `/bt/` directories. By default, Herd routes all requests through the modern front controller, but these directories need to be served directly.
+
+### The Problem
+
+TorrentPier has legacy directories (`/admin/` and `/bt/`) that contain their own `index.php` files and should be processed directly by the web server, not through the Laravel-style routing system. Laravel Herd's default nginx configuration sends all requests to `public/index.php`, which causes these legacy endpoints to fail.
+
+### Solution: Site-Specific Nginx Configuration
+
+#### Step 1: Generate Custom Nginx Config
+
+Run one of these commands to create a site-specific nginx configuration:
+
+```shell
+# Option A: Isolate PHP version
+herd isolate php@8.4
+
+# Option B: Secure the site with SSL
+herd secure
+```
+
+This generates a custom nginx configuration file at:
+`~/Library/Application\ Support/Herd/config/valet/Nginx/[your-site-name]`
+
+#### Step 2: Edit the Generated Config
+
+Open the generated nginx configuration file and add these location blocks **before** the main Laravel location block:
+
+```nginx
+# Serve /admin/ directory directly
+location /admin/ {
+    alias /path/to/your/torrentpier/admin/;
+    index index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/opt/homebrew/var/run/php/php8.4-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $request_filename;
+        include fastcgi_params;
+    }
+}
+
+# Serve /bt/ directory directly
+location /bt/ {
+    alias /path/to/your/torrentpier/bt/;
+    index index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/opt/homebrew/var/run/php/php8.4-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $request_filename;
+        include fastcgi_params;
+    }
+}
+```
+
+> **Note**: Replace `/path/to/your/torrentpier/` with the actual path to your TorrentPier installation.
+
+#### Step 3: Restart Herd
+
+```shell
+herd restart
+```
+
+### Alternative Solutions
+
+#### Option 1: Root .htaccess (May work with some Herd configurations)
+
+Create a `.htaccess` file in your project root:
+
+```apache
+RewriteEngine On
+
+# Exclude admin and bt directories from Laravel routing
+RewriteRule ^admin/ - [L]
+RewriteRule ^bt/ - [L]
+
+# Handle everything else through Laravel
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [L]
+```
+
+#### Option 2: Move to Public Directory
+
+Move the directories to the public folder:
+
+```shell
+mv admin/ public/admin/
+mv bt/ public/bt/
+```
+
+> **Warning**: This requires updating any hardcoded paths in the legacy code.
+
+### Testing Your Configuration
+
+After applying the configuration, test these URLs:
+
+```shell
+# Admin panel should load
+curl -I http://your-site.test/admin/
+
+# BitTorrent tracker should respond
+curl -I http://your-site.test/bt/
+
+# Announce endpoint should work
+curl -I http://your-site.test/bt/announce.php
+
+# Modern routes should still work
+curl -I http://your-site.test/hello
+```
+
+All should return HTTP 200 status codes.
+
+### Troubleshooting
+
+- **502 Bad Gateway**: Check PHP-FPM socket path in nginx config
+- **404 Not Found**: Verify directory paths in nginx location blocks
+- **403 Forbidden**: Check file permissions on admin/bt directories
+- **Still routing through Laravel**: Ensure location blocks are placed before the main Laravel location block
+
+For more details about Herd nginx configuration, see the [official Herd documentation](https://herd.laravel.com/docs/macos/sites/nginx-configuration).
+
 ## 📌 Our recommendations
 
 * *It's recommended to run `cron.php`.* - For significant tracker speed increase it may be required to replace the built-in cron.php with an operating system daemon.

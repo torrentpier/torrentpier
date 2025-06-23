@@ -160,7 +160,7 @@ function generate_smilies($mode)
 
                 $template->assign_block_vars('smilies_row.smilies_col', [
                     'SMILEY_CODE' => $data['code'],
-                    'SMILEY_IMG' => config()->get('smilies_path') . '/' . $smile_url,
+                    'SMILEY_IMG' => tp_config()->get('smilies_path') . '/' . $smile_url,
                     'SMILEY_DESC' => $data['emoticon'],
                 ]);
 
@@ -341,9 +341,9 @@ function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $s
 
 function extract_search_words($text)
 {
-    $max_words_count = config()->get('max_search_words_per_post');
-    $min_word_len = max(2, config()->get('search_min_word_len') - 1);
-    $max_word_len = config()->get('search_max_word_len');
+    $max_words_count = tp_config()->get('max_search_words_per_post');
+    $min_word_len = max(2, tp_config()->get('search_min_word_len') - 1);
+    $max_word_len = tp_config()->get('search_max_word_len');
 
     $text = ' ' . str_compact(strip_tags(mb_strtolower($text))) . ' ';
     $text = str_replace(['&#91;', '&#93;'], ['[', ']'], $text);
@@ -383,7 +383,7 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
     $text = $topic_title . ' ' . $post_message;
     $words = ($text) ? extract_search_words($text) : [];
 
-    if ($only_return_words || config()->get('search_engine_type') == 'sphinx') {
+    if ($only_return_words || tp_config()->get('search_engine_type') == 'sphinx') {
         return implode("\n", $words);
     }
 
@@ -421,19 +421,19 @@ function get_words_rate($text)
 
 function hide_passkey($str)
 {
-    return preg_replace("#\?{config()->get('passkey_key')}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{config()->get('passkey_key')}=passkey", $str);
+    return preg_replace("#\?{tp_config()->get('passkey_key')}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{tp_config()->get('passkey_key')}=passkey", $str);
 }
 
 function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 {
-    if (config()->get('use_posts_cache') && !empty($postrow['post_html'])) {
+    if (tp_config()->get('use_posts_cache') && !empty($postrow['post_html'])) {
         return $postrow['post_html'];
     }
 
     $message = bbcode2html($postrow['post_text']);
 
     // Posts cache
-    if (config()->get('use_posts_cache')) {
+    if (tp_config()->get('use_posts_cache')) {
         DB()->shutdown['post_html'][] = [
             'post_id' => (int)$postrow['post_id'],
             'post_html' => (string)$message
