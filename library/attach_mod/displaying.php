@@ -92,7 +92,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
  */
 function display_post_attachments($post_id, $switch_attachment)
 {
-    global $attach_config, $is_auth;
+    global $attach_config, $is_auth, $attachments;
 
     if ((int)$switch_attachment == 0 || (int)$attach_config['disable_mod']) {
         return;
@@ -170,7 +170,7 @@ function display_attachments($post_id)
 {
     global $template, $upload_dir, $userdata, $allowed_extensions, $display_categories, $download_modes, $lang, $attachments, $upload_icons, $attach_config;
 
-    $num_attachments = @count($attachments['_' . $post_id]);
+    $num_attachments = isset($attachments['_' . $post_id]) ? count($attachments['_' . $post_id]) : 0;
 
     if ($num_attachments == 0) {
         return;
