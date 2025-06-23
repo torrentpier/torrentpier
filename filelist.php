@@ -82,7 +82,7 @@ if (IS_GUEST && $torrent->isPrivate()) {
 
 // Get torrent files
 $files = $torrent->$t_version_field()->$t_files_field();
-if ($meta_v1 && $meta_v2) {
+if ($meta_v2) {
     $files = new \RecursiveIteratorIterator($files); // Flatten the list
 }
 
@@ -101,19 +101,6 @@ foreach ($files as $file) {
 
 $torrent_name = !empty($t_name = $torrent->getName()) ? str_short(htmlCHR($t_name), 200) : $lang['UNKNOWN'];
 $torrent_size = humn_size($row['size'], 2);
-
-// Get announcers list
-$announcers_list = $torrent->getAnnounceList()->toArray();
-$announcers_count = 0;
-foreach ($announcers_list as $announcer) {
-    $announcers_count++;
-    $row_class = ($announcers_count % 2) ? 'row1' : 'row2';
-    $template->assign_block_vars('announcers', [
-        'ROW_NUMBER' => $announcers_count,
-        'ROW_CLASS' => $row_class,
-        'ANNOUNCER' => $announcer[0]
-    ]);
-}
 
 // Output page
 $template->assign_vars([
