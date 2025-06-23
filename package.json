@@ -1,4 +1,5 @@
 {
+    "name": "torrentpier",
     "private": true,
     "type": "module",
     "scripts": {

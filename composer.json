@@ -1,18 +1,29 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/react-starter-kit",
+    "name": "torrentpier/torrentpier",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "TorrentPier. Bull-powered BitTorrent tracker engine.",
     "keywords": [
         "laravel",
-        "framework"
+        "bittorrent",
+        "forum",
+        "torrent",
+        "tracker"
     ],
+    "homepage": "https://github.com/torrentpier",
     "license": "MIT",
+    "support": {
+        "email": "support@torrentpier.com",
+        "issues": "https://github.com/torrentpier/torrentpier/issues",
+        "forum": "https://torrentpier.com"
+    },
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
+        "predis/predis": "^3.0",
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {
