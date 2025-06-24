@@ -2,6 +2,14 @@
 
 # 📖 Change Log
 
+## [v2.8.1](https://github.com/torrentpier/torrentpier/compare/v2.8.0..v2.8.1) (2025-06-24)
+
+### 🐛 Bug Fixes
+
+- *(filelist)* `Undefined property: FileTree::$length` when v2 torrent only ([#2004](https://github.com/torrentpier/torrentpier/pull/2004)) - ([7f4cc9d](https://github.com/torrentpier/torrentpier/commit/7f4cc9d3b9a5b87100f710cc60f636d6e7d5a34e))
+- *(ip-api)* Add error handling and logging for freeipapi.com requests ([#2006](https://github.com/torrentpier/torrentpier/pull/2006)) - ([f1d6e74](https://github.com/torrentpier/torrentpier/commit/f1d6e74e5d4c74b6e12e9e742f60f62e71783d11))
+
+
 ## [v2.8.0](https://github.com/torrentpier/torrentpier/compare/v2.7.0..v2.8.0) (2025-06-21)
 
 ### 🐛 Bug Fixes
