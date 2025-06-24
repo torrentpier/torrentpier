@@ -2210,19 +2210,26 @@ function infoByIP(string $ipAddress, int $port = 0): array
         }
 
         $context = stream_context_create($contextOptions);
-        $response = file_get_contents($bb_cfg['ip2country_settings']['endpoint'] . $ipAddress, context: $context);
 
-        if ($response !== false) {
-            $json = json_decode($response, true);
+        try {
+            $response = file_get_contents($bb_cfg['ip2country_settings']['endpoint'] . $ipAddress, context: $context);
 
-            if (is_array($json) && !empty($json)) {
-                $data = [
-                    'ipVersion' => $json['ipVersion'],
-                    'countryCode' => $json['countryCode'],
-                    'continent' => $json['continent'],
-                    'continentCode' => $json['continentCode']
-                ];
+            if ($response !== false) {
+                $json = json_decode($response, true);
+
+                if (is_array($json) && !empty($json)) {
+                    $data = [
+                        'ipVersion' => $json['ipVersion'],
+                        'countryCode' => $json['countryCode'],
+                        'continent' => $json['continent'],
+                        'continentCode' => $json['continentCode']
+                    ];
+                }
+            } else {
+                bb_log("[FreeIPAPI] Failed to get IP info for: $ipAddress");
             }
+        } catch (Exception $e) {
+            bb_log("[FreeIPAPI] " . $e->getMessage());
         }
 
         if (empty($data)) {
