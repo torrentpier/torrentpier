@@ -35,6 +35,10 @@ TorrentPier is currently being **completely rewritten from scratch on Laravel**.
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags).
 
+## 🤝 Sponsors
+
+This project is tested with BrowserStack.
+
 ## 📖 License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/torrentpier/torrentpier/blob/master/LICENSE) file for details.
